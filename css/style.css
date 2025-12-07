@@ -1,0 +1,65 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Background */
+body {
+    font-family: "Inter", Arial, sans-serif;
+    background: linear-gradient(135deg, #1e1e2f, #3a3a5a);
+    height: 100vh;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card container */
+.container {
+    background: rgba(255, 255, 255, 0.07);
+    padding: 40px 50px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Fade-in animation */
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Button styling */
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    background: #00d4ff;
+    color: #000;
+    transition: 0.25s;
+}
+
+button:hover {
+    background: #0ff;
+    transform: scale(1.05);
+}
+
+/* Message text */
+#message {
+    margin-top: 15px;
+    font-size: 18px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
