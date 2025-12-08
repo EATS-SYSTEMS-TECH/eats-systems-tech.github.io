@@ -140,15 +140,8 @@ ul {
 }
 
 .nav__logo {
-  width: 34px;
+  width: 80px;
   height: auto;
-}
-
-.nav__brand-name {
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 0.9rem;
 }
 
 .nav__links-wrapper {
