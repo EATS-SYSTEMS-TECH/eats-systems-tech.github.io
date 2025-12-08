@@ -1,18 +1,297 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello World</title>
-    <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8" />
+  <title>WIFIGATE – Smart. Secure. Private.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="WIFIGATE – A smart access system for opening electric gates in private homes, residential buildings, and secured complexes. Smart. Secure. Private and no subscriptions — ever."
+  />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="js/main.js" defer></script>
 </head>
 <body>
+  <!-- ================= HEADER / NAV ================= -->
+  <header class="site-header" id="top">
+    <nav class="nav" aria-label="Main navigation">
+      <div class="nav__brand">
+        <a href="#home" class="nav__logo-link">
+          <!-- WIFIGATE logo -->
+          <img
+            src="assets/img/logo.png"
+            alt="WIFIGATE logo"
+            class="nav__logo"
+          />
+        </a>
+      </div>
 
-    <h1>Hello World!</h1>
-    <p>This is a test website to verify GitHub Pages deployment.</p>
+      <button
+        class="nav__toggle"
+        aria-label="Toggle navigation menu"
+        aria-controls="primary-navigation"
+        aria-expanded="false"
+      >
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
 
-    <button onclick="sayHello()">Click Me</button>
+      <div class="nav__links-wrapper" id="primary-navigation">
+        <ul class="nav__links">
+          <li><a href="#home" class="nav__link">Home</a></li>
+          <li><a href="#features" class="nav__link">Features</a></li>
+          <li><a href="#about" class="nav__link">About</a></li>
+          <li><a href="#contact" class="nav__link">Contact us</a></li>
+        </ul>
+        <a href="#contact" class="btn btn--small btn--primary nav__cta">
+          Get a demo
+        </a>
+      </div>
+    </nav>
+  </header>
 
-    <script src="js/script.js"></script>
+  <main>
+    <!-- ================= HERO ================= -->
+    <section
+      class="hero"
+      id="home"
+      aria-labelledby="hero-title"
+      aria-describedby="hero-subtitle"
+    >
+      <div class="hero__overlay"></div>
+      <!-- Background image defined in CSS; this img is for accessibility / preload -->
+      <img
+        src="assets/img/hero-background.jpeg"
+        alt=""
+        class="hero__bg"
+        aria-hidden="true"
+      />
+
+      <div class="hero__content container js-reveal">
+        <div class="hero__text">
+          <h1 class="hero__title" id="hero-title">
+            Smart. Secure. Private and No subscriptions — ever.
+          </h1>
+          <p class="hero__subtitle" id="hero-subtitle">
+            A smart access system for opening electric gates in private homes,
+            residential buildings, and secured complexes. One compact device
+            that gives you seamless control and total peace of mind.
+          </p>
+
+          <div class="hero__actions">
+            <a href="#contact" class="btn btn--primary hero__btn-primary">
+              Get a quote
+            </a>
+            <a href="#features" class="btn btn--ghost hero__btn-secondary">
+              Explore features
+            </a>
+          </div>
+
+          <ul class="hero__bullets" aria-label="Key benefits">
+            <li>Zero subscription fees – ever.</li>
+            <li>Offline by design, no internet exposure.</li>
+            <li>Wi-Fi 6, BLE 5.3 &amp; RF remote support.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURES ================= -->
+    <section class="section" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <header class="section__header js-reveal">
+          <p class="section__eyebrow">Key capabilities</p>
+          <h2 class="section__title" id="features-title">
+            Built for modern gates and demanding environments
+          </h2>
+          <p class="section__subtitle">
+            WIFIGATE combines hardware-level security, offline privacy, and
+            effortless management for homeowners, SMBs, security installers,
+            and property managers.
+          </p>
+        </header>
+
+        <div class="features-grid">
+          <!-- Feature 1 -->
+          <article class="feature-card js-reveal">
+            <div class="feature-card__icon" aria-hidden="true">💳</div>
+            <h3 class="feature-card__title">No subscription fee</h3>
+            <p class="feature-card__text">
+              Pay once for the device and installation. No monthly plans, no
+              renewals, no hidden fees – now or ever.
+            </p>
+          </article>
+
+          <!-- Feature 2 -->
+          <article class="feature-card js-reveal">
+            <div class="feature-card__icon" aria-hidden="true">🛡️</div>
+            <h3 class="feature-card__title">Advanced Security Architecture</h3>
+            <p class="feature-card__text">
+              Engineered for uncompromising protection with Secure Boot
+              (RSA-3072), encrypted flash storage (AES-128/256-XTS), and a
+              Trusted Execution Environment (TEE).
+            </p>
+          </article>
+
+          <!-- Feature 3 -->
+          <article class="feature-card js-reveal">
+            <div class="feature-card__icon" aria-hidden="true">📵</div>
+            <h3 class="feature-card__title">No internet exposure</h3>
+            <p class="feature-card__text">
+              Your data never leaves your premises. User databases stay
+              on-device, fully encrypted and isolated from the internet.
+            </p>
+          </article>
+
+          <!-- Feature 4 -->
+          <article class="feature-card js-reveal">
+            <div class="feature-card__icon" aria-hidden="true">🎟️</div>
+            <h3 class="feature-card__title">Guest pass feature</h3>
+            <p class="feature-card__text">
+              Stop fielding calls to open the gate. Send one-time, temporary
+              digital passes that grant controlled entry to visitors.
+            </p>
+          </article>
+
+          <!-- Feature 5 -->
+          <article class="feature-card js-reveal">
+            <div class="feature-card__icon" aria-hidden="true">📡</div>
+            <h3 class="feature-card__title">Unlimited RF remotes</h3>
+            <p class="feature-card__text">
+              Not just the app. WIFIGATE supports an unlimited number of RF
+              remotes, giving every user the access method they prefer.
+            </p>
+          </article>
+
+          <!-- Feature 6 -->
+          <article class="feature-card js-reveal">
+            <div class="feature-card__icon" aria-hidden="true">📱</div>
+            <h3 class="feature-card__title">No database management</h3>
+            <p class="feature-card__text">
+              Forget CSV files and manual syncs. Administrators manage users
+              directly from the app with secure, role-based controls.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="section section--alt" id="about" aria-labelledby="about-title">
+      <div class="container about-layout">
+        <div class="about-layout__col js-reveal">
+          <p class="section__eyebrow">About WIFIGATE</p>
+          <h2 class="section__title" id="about-title">
+            Smarter access control for every property
+          </h2>
+          <p class="section__subtitle">
+            WIFIGATE is a new startup focused on developing affordable,
+            security-first solutions for smart access control systems.
+          </p>
+        </div>
+        <div class="about-layout__col js-reveal">
+          <p class="about__text">
+            We believe that secure gate access should be simple, private, and
+            cost-effective. That is why WIFIGATE is built around three
+            principles: strong hardware-level security, complete offline
+            privacy, and a frictionless experience for installers and end
+            users.
+          </p>
+          <p class="about__text">
+            Whether you manage a residential building, a gated community, a
+            small business, or a secured complex, WIFIGATE gives you the tools
+            to control who comes in – without sacrificing privacy or locking
+            you into recurring subscription plans.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section
+      class="section"
+      id="contact"
+      aria-labelledby="contact-title"
+      aria-describedby="contact-description"
+    >
+      <div class="container contact-layout">
+        <div class="contact-layout__intro js-reveal">
+          <p class="section__eyebrow">Contact us</p>
+          <h2 class="section__title" id="contact-title">
+            Let’s talk about your access control needs
+          </h2>
+          <p class="section__subtitle" id="contact-description">
+            We will be happy to demonstrate our capabilities and advise you on
+            solutions in the field of smart access control systems. Please do
+            not hesitate to contact us.
+          </p>
+          <ul class="contact__bullets">
+            <li>Ideal for homeowners, SMBs &amp; property managers.</li>
+            <li>Technical consultations for security installers.</li>
+            <li>Tailored recommendations for your site.</li>
+          </ul>
+        </div>
+
+        <div class="contact-layout__form js-reveal">
+          <form class="contact-form" aria-label="Contact WIFIGATE">
+            <div class="contact-form__field">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                autocomplete="name"
+                required
+              />
+            </div>
+
+            <div class="contact-form__field">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <div class="contact-form__field">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary contact-form__submit">
+              Send message
+            </button>
+            <p
+              class="contact-form__status"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p class="site-footer__copy">
+        &copy; <span id="js-year"></span> WIFIGATE. All rights reserved.
+      </p>
+      <p class="site-footer__tagline">
+        Smart. Secure. Private &mdash; with no subscriptions, ever.
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
