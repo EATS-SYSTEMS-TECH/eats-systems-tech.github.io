@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupScrollSpy();
   setupRevealOnScroll();
   setupContactForm();
+  setupHeroRotator();
   setYear();
 });
 
@@ -138,4 +139,60 @@ function setYear() {
   const yearEl = $("#js-year");
   if (!yearEl) return;
   yearEl.textContent = new Date().getFullYear();
+}
+
+/**
+ * Hero title rotator: cycles between phrases every 2 seconds
+ */
+function setupHeroRotator() {
+  const el = document.getElementById("hero-rotator");
+  if (!el) return;
+
+  const phrases = ["User Intuitive", "Secure Architecture", "No Subscriptions"];
+  let idx = 0;
+
+  // Ensure initial phrase is set
+  el.textContent = phrases[0];
+
+  const interval = 3000; // change every 3s
+  const fadeClass = 'is-fading';
+
+  // helper to perform a single fade swap
+  function swapNext() {
+    const nextIdx = (idx + 1) % phrases.length;
+
+    // Prefer Web Animations API for reliable fades; fall back to CSS class if unavailable
+    const animMs = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--rotator-duration')) || 420;
+
+    if (el.animate) {
+      // fade out
+      const out = el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: animMs, easing: 'ease', fill: 'forwards' });
+      out.onfinish = () => {
+        el.textContent = phrases[nextIdx];
+        // fade in
+        const _in = el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: animMs, easing: 'ease', fill: 'forwards' });
+        _in.onfinish = () => {
+          idx = nextIdx;
+        };
+      };
+    } else {
+      // fallback: use CSS class toggle + timeout (existing approach)
+      const onTransitionEnd = (ev) => {
+        if (ev && ev.propertyName && ev.propertyName !== 'opacity') return;
+        el.removeEventListener('transitionend', onTransitionEnd);
+        el.textContent = phrases[nextIdx];
+        requestAnimationFrame(() => requestAnimationFrame(() => el.classList.remove(fadeClass)));
+        idx = nextIdx;
+        if (fallbackTimer) {
+          clearTimeout(fallbackTimer);
+        }
+      };
+      el.addEventListener('transitionend', onTransitionEnd);
+      el.classList.add(fadeClass);
+      const fallbackTimer = setTimeout(() => onTransitionEnd({ propertyName: 'opacity' }), animMs + 80);
+    }
+  }
+
+  // Kick off the interval
+  setInterval(swapNext, interval);
 }

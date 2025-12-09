@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="WIFIGATE – A smart access system for opening electric gates in private homes, residential buildings, and secured complexes. Smart. Secure. Private and no subscriptions — ever."
+    content="WIFIGATE – A smart access system for opening electric gates in private homes, residential buildings, and secured complexes. Smart. Secure and no subscriptions — ever."
   />
   <link rel="stylesheet" href="css/styles.css" />
   <script src="js/main.js" defer></script>
@@ -16,17 +16,7 @@
   <!-- ================= HEADER / NAV ================= -->
   <header class="site-header" id="top">
     <nav class="nav" aria-label="Main navigation">
-      <div class="nav__brand">
-        <a href="#home" class="nav__logo-link">
-          <!-- WIFIGATE logo -->
-          <img
-            src="assets/img/logo.png"
-            alt="WIFIGATE logo"
-            class="nav__logo"
-            style="margin-left: 370px;"
-          />
-        </a>
-      </div>
+      <!-- brand moved into the centered topbar-nav below -->
 
       <button
         class="nav__toggle"
@@ -40,16 +30,20 @@
       </button>
 
       <div class="nav__links-wrapper" id="primary-navigation">
-        <ul class="nav__links">
-          <li><a href="#home" class="nav__link">Home</a></li>
-          <li><a href="#features" class="nav__link">Features</a></li>
-          <li><a href="#about" class="nav__link">About</a></li>
-          <li><a href="#contact" class="nav__link">Contact us</a></li>
-        </ul>
-        <a href="#contact" class="btn btn--small btn--primary nav__cta">
-          Get a demo
-        </a>
+  
+  <!-- CENTER NAV MENU -->
+  <nav class="topbar-nav">
+    <a href="#home" class="nav__logo-link nav__brand">
+      <img src="assets/img/logo.png" alt="WIFIGATE logo" class="nav__logo" />
+    </a>
+    <a href="#home" class="nav-link">Home</a>
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#about" class="nav-link">About</a>
+    <!-- lock icon removed per request -->
+  </nav>
+
       </div>
+
     </nav>
   </header>
 
@@ -73,7 +67,8 @@
       <div class="hero__content container js-reveal">
         <div class="hero__text">
           <h1 class="hero__title" id="hero-title">
-            Smart. Secure. Private and No subscriptions — ever.
+            <span class="hero-brand" aria-hidden="true">Wifigate</span>
+            <span id="hero-rotator" class="hero-rotator" aria-live="polite" aria-atomic="true">Smart.</span>
           </h1>
           <p class="hero__subtitle" id="hero-subtitle">
             A smart access system for opening electric gates in private homes,
