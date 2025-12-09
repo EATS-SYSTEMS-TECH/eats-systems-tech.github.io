@@ -24,7 +24,7 @@
   --transition-fast: 160ms ease-out;
   --transition-med: 220ms ease-out;
 
-  --nav-height: 4rem;
+  --nav-height: 3.4rem; /* compact header for normal screens */
 }
 
 /* ================= RESET & BASE ================= */
@@ -128,7 +128,8 @@ ul {
   height: var(--nav-height);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  position: relative;
+  justify-content: center;
   gap: 1.25rem;
   padding-inline: 1.25rem;
 }
@@ -140,49 +141,80 @@ ul {
 }
 
 .nav__logo {
-  width: 80px;
+  width: 52px; /* smaller logo for a leaner header */
   height: auto;
+  margin-right: 0.5rem;
 }
 
 .nav__links-wrapper {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.5rem; /* tighter spacing for compact header */
+  flex: 1;
+  justify-content: center;
+  transform: none; /* centered again */
 }
 
-.nav__links {
+/* ===== NEW HORIZONTAL NAV MENU ===== */
+.topbar-nav {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 1.5rem;
-  font-size: 0.95rem;
+  gap: 1.5rem; /* tighter spacing between nav items */
 }
 
-.nav__link {
+.nav-link {
   position: relative;
-  padding-block: 0.15rem;
-  color: var(--color-text-muted);
+  font-size: 1rem; /* compact but readable */
+  font-weight: 600;
+  color: var(--color-text);
+  padding: 8px 0; /* reduced vertical padding */
+  padding-inline: 6px; /* maintain horizontal click area */
+  text-decoration: none;
+  transition: color 0.18s ease, transform 0.12s ease;
 }
 
-.nav__link::after {
+.nav-link:hover {
+  color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+/* Underline highlight */
+.nav-link::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -0.25rem;
-  width: 0;
+  right: 0;
+  bottom: -4px;
   height: 2px;
   border-radius: 999px;
-  background-color: var(--color-primary);
-  transition: width var(--transition-fast);
+  background: linear-gradient(90deg, #0b63ff, #2563eb);
+  opacity: 0;
+  transform: scaleX(0.4);
+  transform-origin: center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.nav__link:hover,
-.nav__link.nav__link--active {
-  color: var(--color-text);
+.nav-link:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
-.nav__link:hover::after,
-.nav__link.nav__link--active::after {
-  width: 100%;
+/* Right-side flags */
+.topbar-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.flag-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ffffff20;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .nav__cta {
@@ -192,6 +224,8 @@ ul {
 /* Hamburger */
 .nav__toggle {
   display: none;
+  position: absolute;
+  right: 1.25rem;
   background: none;
   border: none;
   padding: 0.4rem;
@@ -312,6 +346,33 @@ ul {
   font-size: clamp(2.4rem, 4vw, 3.1rem);
   line-height: 1.1;
   margin-bottom: 1rem;
+}
+
+/* rotator fade animation */
+:root {
+  --rotator-duration: 420ms;
+}
+
+.hero-rotator,
+#hero-rotator {
+  display: inline-block;
+  transition: opacity var(--rotator-duration) ease;
+  opacity: 1;
+  will-change: opacity;
+  white-space: nowrap; /* keep phrases on one line */
+  min-width: 20ch; /* reserve width for the longest phrase to avoid layout jump */
+}
+
+.hero-rotator.is-fading {
+  opacity: 0;
+}
+
+/* company name left of rotator - inherit same h1 styles */
+.hero-brand {
+  display: inline-block;
+  margin-right: 0.6rem;
+  font-weight: inherit;
+  color: inherit;
 }
 
 .hero__subtitle {
@@ -567,15 +628,15 @@ ul {
     pointer-events: auto;
   }
 
-  .nav__links {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0.75rem 1.4rem 0.35rem;
-  }
+.topbar-nav {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0.75rem 1.4rem 0.35rem;
+}
 
-  .nav__link {
-    padding-block: 0.35rem;
-  }
+.nav-link {
+  padding-block: 0.35rem;
+}
 
   .nav__cta {
     margin: 0.4rem 1.4rem 0.9rem;
@@ -608,5 +669,84 @@ ul {
   .site-footer__inner {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+/* ================= RESPONSIVE SCALING ================= */
+/* Desktop: larger logo, more spacing */
+@media (min-width: 1200px) {
+  :root {
+    --nav-height: 4.2rem; /* modest increase on very large screens */
+  }
+
+  .nav {
+    height: var(--nav-height);
+  }
+
+  .nav__logo {
+    width: 72px; /* slightly larger on wide screens */
+  }
+
+  .nav__links-wrapper {
+    gap: 2rem;
+  }
+
+  .topbar-nav {
+    gap: 2.5rem;
+  }
+
+  .nav-link {
+    font-size: 1.04rem;
+    padding: 10px 6px;
+  }
+}
+
+/* Tablet: moderate scaling */
+@media (max-width: 1024px) and (min-width: 769px) {
+  :root {
+    --nav-height: 4.8rem;
+  }
+
+  .nav {
+    height: var(--nav-height);
+  }
+
+  .nav__logo {
+    width: 72px;
+  }
+
+  .topbar-nav {
+    gap: 2.25rem;
+  }
+
+  .nav__links-wrapper {
+    gap: 2rem;
+  }
+
+  .nav-link {
+    font-size: 1.02rem;
+    padding: 12px 6px;
+  }
+}
+
+/* Mobile: compact sizes, stacked layout preserved */
+@media (max-width: 768px) {
+  .nav__logo {
+    width: 48px;
+  }
+
+  .topbar-nav {
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .nav__links-wrapper {
+    gap: 0.5rem;
+    justify-content: flex-start;
+  }
+
+  .nav-link {
+    font-size: 0.95rem;
+    padding: 8px 0;
   }
 }
