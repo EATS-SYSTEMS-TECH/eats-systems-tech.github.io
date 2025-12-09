@@ -269,6 +269,23 @@ ul {
   white-space: nowrap;
 }
 
+/* Normalize browser blue focus and provide a consistent focus ring for buttons */
+.btn:focus {
+  outline: none;
+}
+
+/* Remove the blue click-focus (mouse/touch) ring but keep keyboard-visible focus */
+.btn:focus:not(:focus-visible) {
+  box-shadow: none;
+}
+
+/* Provide an accessible, consistent focus ring for keyboard users */
+.btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
 .btn--small {
   padding-block: 0.55rem;
   padding-inline: 1.1rem;

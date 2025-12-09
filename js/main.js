@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupNav();
   setupScrollSpy();
   setupRevealOnScroll();
+  setupCenteredScroll();
   setupContactForm();
   setupHeroRotator();
   setYear();
@@ -139,6 +140,97 @@ function setYear() {
   const yearEl = $("#js-year");
   if (!yearEl) return;
   yearEl.textContent = new Date().getFullYear();
+}
+
+/**
+ * Centered scroll behavior for in-page anchors
+ * - Intercepts clicks on `a[href^="#"]` and smoothly centers the target element
+ * - Handles initial page load with a hash and focuses the target for accessibility
+ */
+function centerScrollToElement(el, smooth = true) {
+  if (!el) return;
+  // Prefer scrollIntoView with block:center when available
+  try {
+    if ('scrollBehavior' in document.documentElement.style) {
+      el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center', inline: 'nearest' });
+      return;
+    }
+  } catch (e) {
+    // fall through to manual calculation
+  }
+
+  const rect = el.getBoundingClientRect();
+  const elTop = rect.top + window.scrollY;
+  const targetScroll = Math.round(elTop - (window.innerHeight / 2) + (rect.height / 2));
+  try {
+    window.scrollTo({ top: targetScroll, behavior: smooth ? 'smooth' : 'auto' });
+  } catch (err) {
+    window.scrollTo(0, targetScroll);
+  }
+}
+
+function setupCenteredScroll() {
+  // Delegate clicks on same-page anchors
+  document.addEventListener('click', (ev) => {
+    const a = ev.target.closest && ev.target.closest('a[href^="#"]');
+    if (!a) return;
+    const href = a.getAttribute('href');
+    if (!href || href.charAt(0) !== '#') return;
+    // ignore lone '#' anchors
+    if (href === '#') return;
+
+    const id = href.slice(1);
+    const target = document.getElementById(id);
+    if (!target) return; // allow normal behavior if target not found
+
+    ev.preventDefault();
+
+    // Close mobile nav if open to avoid layout shift
+    const navWrapper = document.querySelector('.nav__links-wrapper');
+    const toggle = document.querySelector('.nav__toggle');
+    if (navWrapper && navWrapper.classList.contains('is-open')) {
+      navWrapper.classList.remove('is-open');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    centerScrollToElement(target, true);
+
+    // Update history without triggering another jump
+    try {
+      if (history.pushState) {
+        history.pushState(null, '', '#' + id);
+      } else {
+        location.hash = '#' + id;
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    // Move focus to the target for keyboard users without scrolling again
+    try {
+      target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+      target.removeAttribute('tabindex');
+    } catch (err) {
+      // ignore focus errors
+    }
+  });
+
+  // If page loaded with a hash, center it (defer slightly to allow default jump)
+  if (location.hash) {
+    const id = location.hash.slice(1);
+    const target = document.getElementById(id);
+    if (target) {
+      setTimeout(() => {
+        centerScrollToElement(target, false);
+        try {
+          target.setAttribute('tabindex', '-1');
+          target.focus({ preventScroll: true });
+          target.removeAttribute('tabindex');
+        } catch (err) {}
+      }, 60);
+    }
+  }
 }
 
 /**
