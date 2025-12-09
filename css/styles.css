@@ -111,6 +111,41 @@ ul {
   max-width: 40rem;
 }
 
+
+/* Features section header: compact, centered horizontally but not vertically */
+#features .section__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* keep title near the top so cards sit directly below */
+  text-align: center;
+  min-height: auto; /* remove large viewport height so header doesn't create empty space */
+  padding-block: 1.25rem; /* modest vertical breathing room */
+}
+
+#features .section__subtitle {
+  margin-top: 0.75rem;
+  white-space: nowrap; /* keep subtitle on a single line */
+  /* allow the subtitle to expand fully; do not truncate */
+  overflow: visible;
+  text-overflow: unset;
+  max-width: none;
+}
+
+/* Make the features subtitle larger and more prominent while keeping it one line */
+#features .section__subtitle {
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: 0.01em;
+}
+
+/* Increase the main title size for the Features section */
+#features .section__title {
+  font-size: clamp(2.4rem, 3.8vw, 3.2rem);
+  font-weight: 700;
+}
+
 /* ================= NAVIGATION ================= */
 .site-header {
   position: sticky;
