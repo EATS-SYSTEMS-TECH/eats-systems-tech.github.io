@@ -123,6 +123,17 @@ ul {
   padding-block: 1.25rem; /* modest vertical breathing room */
 }
 
+/* See it in action section header: same styling as features */
+#see-it-in-action .section__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  min-height: auto;
+  padding-block: 1.25rem;
+}
+
 #features .section__subtitle {
   margin-top: 0.75rem;
   white-space: nowrap; /* keep subtitle on a single line */
@@ -142,6 +153,11 @@ ul {
 
 /* Increase the main title size for the Features section */
 #features .section__title {
+  font-size: clamp(2.4rem, 3.8vw, 3.2rem);
+  font-weight: 700;
+}
+
+#see-it-in-action .section__title {
   font-size: clamp(2.4rem, 3.8vw, 3.2rem);
   font-weight: 700;
 }
