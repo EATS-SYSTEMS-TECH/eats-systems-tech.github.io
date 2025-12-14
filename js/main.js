@@ -149,6 +149,29 @@ function setYear() {
  */
 function centerScrollToElement(el, smooth = true) {
   if (!el) return;
+  
+  // Special handling for features section - scroll to start
+  if (el.id === 'features') {
+    try {
+      if ('scrollBehavior' in document.documentElement.style) {
+        el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start', inline: 'nearest' });
+        return;
+      }
+    } catch (e) {
+      // fall through to manual calculation
+    }
+    
+    const rect = el.getBoundingClientRect();
+    const elTop = rect.top + window.scrollY;
+    try {
+      window.scrollTo({ top: elTop, behavior: smooth ? 'smooth' : 'auto' });
+    } catch (err) {
+      window.scrollTo(0, elTop);
+    }
+    return;
+  }
+  
+  // Default center behavior for other sections
   // Prefer scrollIntoView with block:center when available
   try {
     if ('scrollBehavior' in document.documentElement.style) {
