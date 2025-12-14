@@ -1,47 +1,64 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>WIFIGATE - Smart. Secure. Private.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="WIFIGATE - A smart access system for opening electric gates in private homes, residential buildings, and secured complexes. Smart. Secure and no subscriptions — ever."
-  />
+  <meta name="description"
+    content="WIFIGATE - A smart access system for opening electric gates in private homes, residential buildings, and secured complexes. Smart. Secure and no subscriptions — ever." />
+
+  <!-- Day One font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Day+One&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="css/styles.css" />
   <script src="js/main.js" defer></script>
+
+  <!-- Hero: Day One + black text (scoped) -->
+  <style>
+    .hero .hero__text,
+    .hero .hero__text * {
+      font-family: "Day One", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #000;
+    }
+
+    /* Ensure buttons text stays black even if .btn overrides it */
+    .hero .btn,
+    .hero .btn:visited {
+      color: #000;
+    }
+  </style>
 </head>
+
 <body>
   <!-- ================= HEADER / NAV ================= -->
   <header class="site-header" id="top">
     <nav class="nav" aria-label="Main navigation">
       <!-- brand moved into the centered topbar-nav below -->
 
-      <button
-        class="nav__toggle"
-        aria-label="Toggle navigation menu"
-        aria-controls="primary-navigation"
-        aria-expanded="false"
-      >
+      <button class="nav__toggle" aria-label="Toggle navigation menu" aria-controls="primary-navigation"
+        aria-expanded="false">
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
       </button>
 
       <div class="nav__links-wrapper" id="primary-navigation">
-  
-  <!-- CENTER NAV MENU -->
-  <nav class="topbar-nav">
-    <a href="#home" class="nav__logo-link nav__brand">
-      <img src="assets/img/Logo.png" alt="WIFIGATE logo" class="nav__logo" />
-    </a>
-    <a href="#home" class="nav-link">Home</a>
-    <a href="#features" class="nav-link">Features</a>
-    <a href="#about" class="nav-link">About</a>
-    <a href="#contact" class="nav-link nav__contact-link">Contact Us</a>
-    <!-- lock icon removed per request -->
-  </nav>
+
+        <!-- CENTER NAV MENU -->
+        <nav class="topbar-nav">
+          <a href="#home" class="nav__logo-link nav__brand">
+            <img src="assets/img/Logo.png" alt="WIFIGATE logo" class="nav__logo" />
+          </a>
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#contact" class="nav-link nav__contact-link">Contact Us</a>
+          <!-- lock icon removed per request -->
+        </nav>
 
       </div>
 
@@ -50,25 +67,15 @@
 
   <main>
     <!-- ================= HERO ================= -->
-    <section
-      class="hero"
-      id="home"
-      aria-labelledby="hero-title"
-      aria-describedby="hero-subtitle"
-    >
+    <section class="hero" id="home" aria-labelledby="hero-title" aria-describedby="hero-subtitle">
       <div class="hero__overlay"></div>
       <!-- Background image defined in CSS; this img is for accessibility / preload -->
-      <img
-        src="assets/img/hero-background.jpeg"
-        alt=""
-        class="hero__bg"
-        aria-hidden="true"
-      />
+      <img src="assets/hero_images/WIFIGATE_wide_hero.png" alt="" class="hero__bg" aria-hidden="true" />
 
       <div class="hero__content container js-reveal">
         <div class="hero__text">
           <h1 class="hero__title" id="hero-title">
-            <span class="hero-brand" aria-hidden="true">Wifigate</span>
+            <span class="hero-brand" aria-hidden="true">WIFIGATE</span>
             <span id="hero-rotator" class="hero-rotator" aria-live="polite" aria-atomic="true">Smart.</span>
           </h1>
           <p class="hero__subtitle" id="hero-subtitle">
@@ -183,12 +190,7 @@
     </section>
 
     <!-- ================= CONTACT ================= -->
-    <section
-      class="section"
-      id="contact"
-      aria-labelledby="contact-title"
-      aria-describedby="contact-description"
-    >
+    <section class="section" id="contact" aria-labelledby="contact-title" aria-describedby="contact-description">
       <div class="container contact-layout">
         <div class="contact-layout__intro js-reveal">
           <h2 class="section__title" id="contact-title">
@@ -210,44 +212,23 @@
           <form class="contact-form" aria-label="Contact WIFIGATE">
             <div class="contact-form__field">
               <label for="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                autocomplete="name"
-                required
-              />
+              <input type="text" id="name" name="name" autocomplete="name" required />
             </div>
 
             <div class="contact-form__field">
               <label for="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                autocomplete="email"
-                required
-              />
+              <input type="email" id="email" name="email" autocomplete="email" required />
             </div>
 
             <div class="contact-form__field">
               <label for="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                required
-              ></textarea>
+              <textarea id="message" name="message" rows="5" required></textarea>
             </div>
 
             <button type="submit" class="btn btn--primary contact-form__submit">
               Send message
             </button>
-            <p
-              class="contact-form__status"
-              role="status"
-              aria-live="polite"
-            ></p>
+            <p class="contact-form__status" role="status" aria-live="polite"></p>
           </form>
         </div>
       </div>
@@ -266,4 +247,5 @@
     </div>
   </footer>
 </body>
+
 </html>
