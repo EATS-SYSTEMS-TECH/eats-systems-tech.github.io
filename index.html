@@ -16,7 +16,11 @@
   <!-- ================= HEADER / NAV ================= -->
   <header class="site-header" id="top">
     <nav class="nav" aria-label="Main navigation">
-      <!-- brand moved into the centered topbar-nav below -->
+      <!-- brand placed left outside the centered topbar-nav -->
+
+      <a href="#home" class="nav__logo-link nav__brand">
+        <img src="assets/img/logo.png" alt="WIFIGATE logo" class="nav__logo" />
+      </a>
 
       <button
         class="nav__toggle"
@@ -33,9 +37,6 @@
   
   <!-- CENTER NAV MENU -->
   <nav class="topbar-nav">
-    <a href="#home" class="nav__logo-link nav__brand">
-      <img src="assets/img/Logo.png" alt="WIFIGATE logo" class="nav__logo" />
-    </a>
     <a href="#home" class="nav-link">Home</a>
     <a href="#features" class="nav-link">Features</a>
     <a href="#about" class="nav-link">About</a>
@@ -105,7 +106,7 @@
         <div class="features-grid">
           <!-- Feature 1 -->
           <article class="feature-card js-reveal">
-            <h3 class="feature-card__title">No subscription fee</h3>
+            <h3 class="feature-card__title">No Subscription Fees</h3>
             <p class="feature-card__text">
               Pay once for the device and installation. No monthly plans, no
               renewals, no hidden fees - now or ever.
@@ -117,14 +118,14 @@
             <h3 class="feature-card__title">Advanced Security Architecture</h3>
             <p class="feature-card__text">
               Engineered for uncompromising protection with Secure Boot
-              (RSA-3072), encrypted flash storage (AES-128/256-XTS), and a
-              Trusted Execution Environment (TEE).
+              (RSA-3072), encrypted flash storage (AES-128/256-XTS), a
+              Trusted Execution Environment, HMAC encryption, and anti replay attack.
             </p>
           </article>
 
           <!-- Feature 3 -->
           <article class="feature-card js-reveal">
-            <h3 class="feature-card__title">No internet exposure</h3>
+            <h3 class="feature-card__title">No Internet Exposure</h3>
             <p class="feature-card__text">
               Your data never leaves your premises. User databases stay
               on-device, fully encrypted and isolated from the internet.
@@ -133,28 +134,26 @@
 
           <!-- Feature 4 -->
           <article class="feature-card js-reveal">
-            <h3 class="feature-card__title">Guest pass feature</h3>
+            <h3 class="feature-card__title">Guest Access Pass</h3>
             <p class="feature-card__text">
-              Stop fielding calls to open the gate. Send one-time, temporary
-              digital passes that grant controlled entry to visitors.
+              Let guests in without the interruptions.
+              Share a temporary access pass from the app so visitors can open the gate on their own, no more calls asking you to open the gate.
             </p>
           </article>
 
           <!-- Feature 5 -->
           <article class="feature-card js-reveal">
-            <h3 class="feature-card__title">Unlimited RF remotes</h3>
+            <h3 class="feature-card__title">Any-Way Access</h3>
             <p class="feature-card__text">
-              Not just the app. WIFIGATE supports an unlimited number of RF
-              remotes, giving every user the access method they prefer.
+              Open your gate using the mobile app or traditional RF remotes, whichever suits you best.
             </p>
           </article>
 
           <!-- Feature 6 -->
           <article class="feature-card js-reveal">
-            <h3 class="feature-card__title">User-Friendly database management</h3>
+            <h3 class="feature-card__title">Simple User Management</h3>
             <p class="feature-card__text">
-              Forget CSV files and manual syncs. Administrators manage users
-              directly from the app with secure, role-based controls.
+              Easily manage users and permissions through the mobile app or by importing a CSV file.
             </p>
           </article>
         </div>

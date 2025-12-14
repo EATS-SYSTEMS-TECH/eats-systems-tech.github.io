@@ -240,7 +240,7 @@ function setupHeroRotator() {
   const el = document.getElementById("hero-rotator");
   if (!el) return;
 
-  const phrases = ["User Intuitive", "Secure Architecture", "No Subscriptions"];
+  const phrases = ["User Intuitive", "Full Privacy", "No Subscriptions"];
   let idx = 0;
 
   // Ensure initial phrase is set
