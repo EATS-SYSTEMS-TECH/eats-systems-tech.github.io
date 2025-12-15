@@ -25,7 +25,7 @@ const translations = {
     },
     features: {
       title: "Our features",
-      subtitle: "These are only part of the capabilities we offer to our clients as part of the product we developed.",
+      subtitle: "These are only part of the capabilities we offer to our clients as part of the product we developed",
       items: {
         noSubscription: {
           title: "No Subscription Fees",
@@ -72,66 +72,66 @@ const translations = {
   },
   he: {
     nav: {
-      home: "[HOME_HE]",
-      features: "[FEATURES_HE]",
-      about: "[ABOUT_HE]",
-      contact: "[CONTACT_US_HE]"
+      home: "בית",
+      features: "יכולות",
+      about: "מי אנחנו",
+      contact: "צור קשר"
     },
     hero: {
       rotator: {
-        phrases: ["[USER_INTUITIVE_HE]", "[FULL_PRIVACY_HE]", "[NO_SUBSCRIPTIONS_HE]"]
+        phrases: ["ידידותי למשתמש", "פרטיות מלאה", "ללא דמי מנוי"]
       },
-      subtitle: "[A smart access system for opening electric gates in private homes, residential buildings, and secured complexes._HE]",
+      subtitle: "מערכת גישה חכמה לשערים ללא דמי מנוי וללא תשלום חודשי",
       cta: {
-        contact: "[CONTACT_US_HE]",
-        about: "[ABOUT_HE]"
+        contact: "צור קשר",
+        about: "אודות"
       }
     },
     features: {
-      title: "[OUR_FEATURES_HE]",
-      subtitle: "[These are only part of the capabilities we offer to our clients as part of the product we developed._HE]",
+      title: "יכולות",
+      subtitle: "אלה הם חלק מהיכולות שאנו מציעים ללקוחות שלנו כחלק מהמוצר שאנו פיתחנו",
       items: {
         noSubscription: {
-          title: "[NO_SUBSCRIPTION_FEES_HE]",
-          text: "[Pay once for the device and installation. No monthly plans, no renewals, no hidden fees - now or ever._HE]"
+          title: "ללא דמי מנוי",
+          text: "משלמים פעם אחת על המכשיר וההתקנה. בלי תשלום חודשי, בלי חידושים ובלי עלויות נסתרות, עכשיו ולתמיד"
         },
         security: {
-          title: "[ADVANCED_SECURITY_ARCHITECTURE_HE]",
-          text: "[Engineered for uncompromising protection with Secure Boot (RSA-3072), encrypted flash storage (AES-128/256-XTS), a Trusted Execution Environment, HMAC encryption, and anti replay attack._HE]"
+          title: "ארכיטקטורת אבטחה מתקדמת",
+          text: "הונדס להגנה מחמירה באמצעות Secure Boot (RSA-3072), אחסון מוצפן (AES-128/256-XTS), סביבת הרצה מאובטחת (TEE), הצפנת HMAC והגנה מפני מתקפות Replay."
         },
         noInternet: {
-          title: "[NO_INTERNET_EXPOSURE_HE]",
-          text: "[Your data never leaves your premises. User databases stay on-device, fully encrypted and isolated from the internet._HE]"
+          title: "ללא חשיפה לאינטרנט",
+          text: "המידע שלכם נשאר אצלך ללא חשיפה לענן, שרתים חיצוניים או לאינטרנט."
         },
         guestAccess: {
-          title: "[GUEST_ACCESS_PASS_HE]",
-          text: "[Let guests in without the interruptions. Share a temporary access pass from the app so visitors can open the gate on their own, no more calls asking you to open the gate._HE]"
+          title: "קישור אורח",
+          text: "מכניסים אורחים בלי הפרעות. שולחים קישור גישה זמני מהאפליקציה והאורחים פותחים את השער בעצמם בלי טלפונים ובלי בקשות לפתוח שער"
         },
         smartAccess: {
-          title: "[SMART_ACCESS_CONTROL_HE]",
-          text: "[Open your gate your way — with the app or an RF remote. See a clear access history so you always know who came in and when, without any extra effort._HE]"
+          title: "בקרת גישה חכמה",
+          text: "פותחים את השער בדרך שנוחה לכם דרך האפליקציה או עם שלט ויכולים לצפות בהיסטוריית כניסה ברורה, כך שתמיד יודעים מי נכנס ומתי, בלי שום מאמץ."
         },
         userManagement: {
-          title: "[SIMPLE_USER_MANAGEMENT_HE]",
-          text: "[Easily manage users and permissions through the mobile app or by importing a CSV file. Support up to 4,000 users per gate and assign up to 100 administrators._HE]"
+          title: "ניהול משתמשים פשוט",
+          text: "ניהול קל של משתמשים והרשאות דרך האפליקציה, או באמצעות ייבוא קובץ CSV, יכולת תמיכה עד 4000 משתמשים ו100 מנהלים לכל שער"
         }
       }
     },
     action: {
-      title: "[SEE_IT_IN_ACTION_HE]"
+      title: "ראו אותנו בפעולה"
     },
     about: {
-      title: "[ABOUT_US_HE]",
-      text1: "[WIFIGATE was established with the aim of developing an affordable and secure solution for access control systems._HE]",
-      text2: "[Our company develops both hardware and software components in-house, that complement each other perfectly to provide a seamless user experience while ensuring the highest level of security._HE]"
+      title: "עלינו",
+      text1: "WIFIGATE נוצרה במטרה לפתח פתרון בקרת גישה מאובטח, איכותי ונגיש לכל אחד.",
+      text2: "אנחנו מפתחים את רכיבי החומרה והתוכנה באופן עצמאי, כך שהם משלימים זה את זה ליצירת חוויית שימוש חלקה, תוך שמירה על רמת האבטחה הגבוהה ביותר."
     },
     contact: {
-      title: "[CONTACT_US_HE]",
-      subtitle: "[We will be happy to demonstrate our capabilities and advise you on solutions in the field of smart access control systems._HE]"
+      title: "יצירת קשר",
+      subtitle: "נשמח להדגים את יכולותינו ולייעץ לכם בנוגע למערכת שלנו."
     },
     footer: {
-      copyright: "[WIFIGATE. All rights reserved._HE]",
-      tagline: "[Smart. Secure. Private — with no subscriptions, ever._HE]"
+      copyright: "WIFIGATE. כל הזכויות שמורות.",
+      tagline: "חכם. מאובטח. פרטי וללא דמי מנוי לעולם."
     }
   }
 };
