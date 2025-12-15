@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupCenteredScroll();
   setupContactForm();
   setupHeroRotator();
+  setupVideoAutoplay();
   setYear();
 });
 
@@ -310,4 +311,24 @@ function setupHeroRotator() {
 
   // Kick off the interval
   setInterval(swapNext, interval);
+}
+
+/**
+ * Video autoplay on scroll into view
+ */
+function setupVideoAutoplay() {
+  const video = document.getElementById('action-video');
+  if (!video) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        video.play().catch(err => console.log('Video autoplay failed:', err));
+      } else {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  observer.observe(video);
 }
