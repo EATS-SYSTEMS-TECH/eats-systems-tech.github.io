@@ -63,7 +63,10 @@ const translations = {
     },
     contact: {
       title: "Contact us",
-      subtitle: "We will be happy to demonstrate our capabilities and advise you on solutions in the field of smart access control systems."
+      subtitle: "We will be happy to demonstrate our capabilities and advise you on solutions in the field of smart access control systems.",
+      name: "Itay Nave",
+      whatsapp: "WhatsApp",
+      linkedin: "LinkedIn"
     },
     footer: {
       copyright: "WIFIGATE. All rights reserved.",
@@ -127,7 +130,10 @@ const translations = {
     },
     contact: {
       title: "יצירת קשר",
-      subtitle: "נשמח להדגים את יכולותינו ולייעץ לכם בנוגע למערכת שלנו."
+      subtitle: "נשמח להדגים את יכולותינו ולייעץ לכם בנוגע למערכת שלנו.",
+      name: "איתי נוה",
+      whatsapp: "וואטסאפ",
+      linkedin: "לינקדאין"
     },
     footer: {
       copyright: "WIFIGATE. כל הזכויות שמורות.",
@@ -494,6 +500,7 @@ function setupLanguageSelector() {
   const dropdown = document.getElementById('language-dropdown');
   const options = document.querySelectorAll('.language-selector__option');
   const selectedText = button.querySelector('.language-selector__selected');
+  const selectedFlag = document.getElementById('selected-flag');
   
   if (!selector || !button || !dropdown) return;
 
@@ -516,10 +523,14 @@ function setupLanguageSelector() {
     option.addEventListener('click', (e) => {
       e.stopPropagation();
       const lang = option.dataset.lang;
-      const text = option.textContent;
+      const flagHTML = option.querySelector('.language-selector__flag').innerHTML;
+      const text = option.querySelector('span:not(.language-selector__flag)').textContent;
       
-      // Update selected text
+      // Update selected text and flag
       selectedText.textContent = text;
+      if (selectedFlag) {
+        selectedFlag.innerHTML = flagHTML;
+      }
       
       // Update selected state
       options.forEach(opt => opt.classList.remove('is-selected'));
@@ -552,7 +563,12 @@ function setupLanguageSelector() {
   const selectedOption = dropdown.querySelector(`[data-lang="${savedLang}"]`);
   if (selectedOption) {
     selectedOption.classList.add('is-selected');
-    selectedText.textContent = selectedOption.textContent;
+    const text = selectedOption.querySelector('span:not(.language-selector__flag)').textContent;
+    const flagHTML = selectedOption.querySelector('.language-selector__flag').innerHTML;
+    selectedText.textContent = text;
+    if (selectedFlag) {
+      selectedFlag.innerHTML = flagHTML;
+    }
   }
 }
 
