@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupContactForm();
   setupHeroRotator();
   setupVideoAutoplay();
+  setupLanguageSelector();
   setYear();
 });
 
@@ -331,4 +332,73 @@ function setupVideoAutoplay() {
   }, { threshold: 0.5 });
 
   observer.observe(video);
+}
+
+/**
+ * Custom language selector dropdown
+ */
+function setupLanguageSelector() {
+  const selector = document.querySelector('.language-selector');
+  const button = document.getElementById('language-button');
+  const dropdown = document.getElementById('language-dropdown');
+  const options = document.querySelectorAll('.language-selector__option');
+  const selectedText = button.querySelector('.language-selector__selected');
+  
+  if (!selector || !button || !dropdown) return;
+
+  // Toggle dropdown
+  button.addEventListener('click', (e) => {
+    e.stopPropagation();
+    selector.classList.toggle('is-open');
+  });
+
+  // Handle keyboard
+  button.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      selector.classList.toggle('is-open');
+    }
+  });
+
+  // Select option
+  options.forEach(option => {
+    option.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const lang = option.dataset.lang;
+      const text = option.textContent;
+      
+      // Update selected text
+      selectedText.textContent = text;
+      
+      // Update selected state
+      options.forEach(opt => opt.classList.remove('is-selected'));
+      option.classList.add('is-selected');
+      
+      // Close dropdown
+      selector.classList.remove('is-open');
+      
+      // TODO: Trigger language change
+      console.log('Selected language:', lang);
+    });
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!selector.contains(e.target)) {
+      selector.classList.remove('is-open');
+    }
+  });
+
+  // Close on escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      selector.classList.remove('is-open');
+    }
+  });
+
+  // Set initial selected state
+  const selectedOption = dropdown.querySelector('[data-lang="en"]');
+  if (selectedOption) {
+    selectedOption.classList.add('is-selected');
+  }
 }
