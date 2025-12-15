@@ -4,6 +4,141 @@
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
+// ================= TRANSLATIONS =================
+const translations = {
+  en: {
+    nav: {
+      home: "Home",
+      features: "Features",
+      about: "About",
+      contact: "Contact Us"
+    },
+    hero: {
+      rotator: {
+        phrases: ["User Intuitive", "Full Privacy", "No Subscriptions"]
+      },
+      subtitle: "A smart access system for opening electric gates in private homes, residential buildings, and secured complexes.",
+      cta: {
+        contact: "Contact Us",
+        about: "About"
+      }
+    },
+    features: {
+      title: "Our features",
+      subtitle: "These are only part of the capabilities we offer to our clients as part of the product we developed.",
+      items: {
+        noSubscription: {
+          title: "No Subscription Fees",
+          text: "Pay once for the device and installation. No monthly plans, no renewals, no hidden fees - now or ever."
+        },
+        security: {
+          title: "Advanced Security Architecture",
+          text: "Engineered for uncompromising protection with Secure Boot (RSA-3072), encrypted flash storage (AES-128/256-XTS), a Trusted Execution Environment, HMAC encryption, and anti replay attack."
+        },
+        noInternet: {
+          title: "No Internet Exposure",
+          text: "Your data never leaves your premises. User databases stay on-device, fully encrypted and isolated from the internet."
+        },
+        guestAccess: {
+          title: "Guest Access Pass",
+          text: "Let guests in without the interruptions. Share a temporary access pass from the app so visitors can open the gate on their own, no more calls asking you to open the gate."
+        },
+        smartAccess: {
+          title: "Smart Access Control",
+          text: "Open your gate your way — with the app or an RF remote. See a clear access history so you always know who came in and when, without any extra effort."
+        },
+        userManagement: {
+          title: "Simple User Management",
+          text: "Easily manage users and permissions through the mobile app or by importing a CSV file. Support up to 4,000 users per gate and assign up to 100 administrators."
+        }
+      }
+    },
+    action: {
+      title: "See it in action"
+    },
+    about: {
+      title: "About us",
+      text1: "WIFIGATE was established with the aim of developing an affordable and secure solution for access control systems.",
+      text2: "Our company develops both hardware and software components in-house, that complement each other perfectly to provide a seamless user experience while ensuring the highest level of security."
+    },
+    contact: {
+      title: "Contact us",
+      subtitle: "We will be happy to demonstrate our capabilities and advise you on solutions in the field of smart access control systems."
+    },
+    footer: {
+      copyright: "WIFIGATE. All rights reserved.",
+      tagline: "Smart. Secure. Private — with no subscriptions, ever."
+    }
+  },
+  he: {
+    nav: {
+      home: "[HOME_HE]",
+      features: "[FEATURES_HE]",
+      about: "[ABOUT_HE]",
+      contact: "[CONTACT_US_HE]"
+    },
+    hero: {
+      rotator: {
+        phrases: ["[USER_INTUITIVE_HE]", "[FULL_PRIVACY_HE]", "[NO_SUBSCRIPTIONS_HE]"]
+      },
+      subtitle: "[A smart access system for opening electric gates in private homes, residential buildings, and secured complexes._HE]",
+      cta: {
+        contact: "[CONTACT_US_HE]",
+        about: "[ABOUT_HE]"
+      }
+    },
+    features: {
+      title: "[OUR_FEATURES_HE]",
+      subtitle: "[These are only part of the capabilities we offer to our clients as part of the product we developed._HE]",
+      items: {
+        noSubscription: {
+          title: "[NO_SUBSCRIPTION_FEES_HE]",
+          text: "[Pay once for the device and installation. No monthly plans, no renewals, no hidden fees - now or ever._HE]"
+        },
+        security: {
+          title: "[ADVANCED_SECURITY_ARCHITECTURE_HE]",
+          text: "[Engineered for uncompromising protection with Secure Boot (RSA-3072), encrypted flash storage (AES-128/256-XTS), a Trusted Execution Environment, HMAC encryption, and anti replay attack._HE]"
+        },
+        noInternet: {
+          title: "[NO_INTERNET_EXPOSURE_HE]",
+          text: "[Your data never leaves your premises. User databases stay on-device, fully encrypted and isolated from the internet._HE]"
+        },
+        guestAccess: {
+          title: "[GUEST_ACCESS_PASS_HE]",
+          text: "[Let guests in without the interruptions. Share a temporary access pass from the app so visitors can open the gate on their own, no more calls asking you to open the gate._HE]"
+        },
+        smartAccess: {
+          title: "[SMART_ACCESS_CONTROL_HE]",
+          text: "[Open your gate your way — with the app or an RF remote. See a clear access history so you always know who came in and when, without any extra effort._HE]"
+        },
+        userManagement: {
+          title: "[SIMPLE_USER_MANAGEMENT_HE]",
+          text: "[Easily manage users and permissions through the mobile app or by importing a CSV file. Support up to 4,000 users per gate and assign up to 100 administrators._HE]"
+        }
+      }
+    },
+    action: {
+      title: "[SEE_IT_IN_ACTION_HE]"
+    },
+    about: {
+      title: "[ABOUT_US_HE]",
+      text1: "[WIFIGATE was established with the aim of developing an affordable and secure solution for access control systems._HE]",
+      text2: "[Our company develops both hardware and software components in-house, that complement each other perfectly to provide a seamless user experience while ensuring the highest level of security._HE]"
+    },
+    contact: {
+      title: "[CONTACT_US_HE]",
+      subtitle: "[We will be happy to demonstrate our capabilities and advise you on solutions in the field of smart access control systems._HE]"
+    },
+    footer: {
+      copyright: "[WIFIGATE. All rights reserved._HE]",
+      tagline: "[Smart. Secure. Private — with no subscriptions, ever._HE]"
+    }
+  }
+};
+
+// Current language state
+let currentLang = 'en';
+
 document.addEventListener("DOMContentLoaded", () => {
   setupNav();
   setupScrollSpy();
@@ -14,6 +149,12 @@ document.addEventListener("DOMContentLoaded", () => {
   setupVideoAutoplay();
   setupLanguageSelector();
   setYear();
+  
+  // Initialize language from localStorage or default to English
+  const savedLang = localStorage.getItem('language') || 'en';
+  if (savedLang !== 'en') {
+    changeLanguage(savedLang);
+  }
 });
 
 /**
@@ -265,17 +406,17 @@ function setupHeroRotator() {
   const el = document.getElementById("hero-rotator");
   if (!el) return;
 
-  const phrases = ["User Intuitive", "Full Privacy", "No Subscriptions"];
   let idx = 0;
 
   // Ensure initial phrase is set
-  el.textContent = phrases[0];
+  updateHeroRotatorPhrase();
 
   const interval = 3000; // change every 3s
   const fadeClass = 'is-fading';
 
   // helper to perform a single fade swap
   function swapNext() {
+    const phrases = translations[currentLang].hero.rotator.phrases;
     const nextIdx = (idx + 1) % phrases.length;
 
     // Prefer Web Animations API for reliable fades; fall back to CSS class if unavailable
@@ -312,6 +453,16 @@ function setupHeroRotator() {
 
   // Kick off the interval
   setInterval(swapNext, interval);
+}
+
+/**
+ * Update hero rotator with current language phrase
+ */
+function updateHeroRotatorPhrase() {
+  const el = document.getElementById("hero-rotator");
+  if (!el) return;
+  const phrases = translations[currentLang].hero.rotator.phrases;
+  el.textContent = phrases[0];
 }
 
 /**
@@ -377,8 +528,8 @@ function setupLanguageSelector() {
       // Close dropdown
       selector.classList.remove('is-open');
       
-      // TODO: Trigger language change
-      console.log('Selected language:', lang);
+      // Change language
+      changeLanguage(lang);
     });
   });
 
@@ -397,8 +548,65 @@ function setupLanguageSelector() {
   });
 
   // Set initial selected state
-  const selectedOption = dropdown.querySelector('[data-lang="en"]');
+  const savedLang = localStorage.getItem('language') || 'en';
+  const selectedOption = dropdown.querySelector(`[data-lang="${savedLang}"]`);
   if (selectedOption) {
     selectedOption.classList.add('is-selected');
+    selectedText.textContent = selectedOption.textContent;
   }
+}
+
+/**
+ * Change website language
+ */
+function changeLanguage(lang) {
+  if (!translations[lang]) {
+    console.error('Language not found:', lang);
+    return;
+  }
+  
+  currentLang = lang;
+  localStorage.setItem('language', lang);
+  
+  // Update HTML lang attribute
+  document.documentElement.setAttribute('lang', lang);
+  
+  // Update dir attribute for RTL languages
+  if (lang === 'he') {
+    document.documentElement.setAttribute('dir', 'rtl');
+    document.body.classList.add('rtl');
+  } else {
+    document.documentElement.setAttribute('dir', 'ltr');
+    document.body.classList.remove('rtl');
+  }
+  
+  // Update all elements with data-i18n attributes
+  updateTranslations();
+  
+  // Update hero rotator
+  updateHeroRotatorPhrase();
+}
+
+/**
+ * Update all translatable elements
+ */
+function updateTranslations() {
+  const elements = document.querySelectorAll('[data-i18n]');
+  
+  elements.forEach(element => {
+    const key = element.getAttribute('data-i18n');
+    const translation = getNestedTranslation(translations[currentLang], key);
+    
+    if (translation) {
+      element.textContent = translation;
+    }
+  });
+}
+
+/**
+ * Get nested translation by dot notation key
+ * e.g., 'nav.home' => translations[lang].nav.home
+ */
+function getNestedTranslation(obj, path) {
+  return path.split('.').reduce((current, key) => current?.[key], obj);
 }
