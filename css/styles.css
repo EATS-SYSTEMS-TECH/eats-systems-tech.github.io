@@ -868,6 +868,20 @@ ul {
   padding-block: 0.35rem;
 }
 
+  /* Mobile: language selector inside nav menu */
+  .language-selector {
+    position: static !important;
+    margin: 0.75rem 1.4rem;
+    width: calc(100% - 2.8rem);
+  }
+
+  body.rtl .language-selector,
+  body:not(.rtl) .language-selector {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+  }
+
   .nav__cta {
     margin: 0.4rem 1.4rem 0.9rem;
     justify-self: flex-start;
@@ -922,6 +936,23 @@ ul {
   .nav__brand {
     position: absolute;
     left: 1.25rem;
+  }
+
+  /* RTL layout: swap logo and language selector positions */
+  body.rtl .nav__brand {
+    left: auto;
+    right: 1.25rem;
+  }
+
+  body.rtl .language-selector {
+    position: absolute;
+    left: 1.25rem;
+  }
+
+  /* English layout: language selector on the right */
+  body:not(.rtl) .language-selector {
+    position: absolute;
+    right: 1.25rem;
   }
 }
 
