@@ -180,7 +180,7 @@ ul {
   display: flex;
   align-items: center;
   position: relative;
-  justify-content: center;
+  justify-content: space-between;
   gap: 1.25rem;
   padding-inline: 1.25rem;
 }
@@ -189,6 +189,7 @@ ul {
   display: flex;
   align-items: center;
   gap: 0.55rem;
+  flex-shrink: 0;
 }
 
 .nav__logo {
@@ -200,10 +201,9 @@ ul {
 .nav__links-wrapper {
   display: flex;
   align-items: center;
-  gap: 1.5rem; /* tighter spacing for compact header */
+  gap: 1.5rem;
   flex: 1;
-  justify-content: center;
-  transform: none; /* centered again */
+  justify-content: flex-end;
 }
 
 /* ===== NEW HORIZONTAL NAV MENU ===== */
@@ -414,18 +414,6 @@ ul {
   padding: 0.75rem 1.4rem;
   border-radius: var(--radius-pill);
   border: 1px solid transparent;
-  /* Pin the brand/logo to the left and vertically center within header */
-}
-
-.nav__brand {
-  position: absolute;
-  left: 100px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  z-index: 10;
 }
 
 .nav__logo {
@@ -833,8 +821,13 @@ ul {
     padding-inline: 1rem;
   }
 
+  .nav__brand {
+    order: -1;
+  }
+
   .nav__toggle {
     display: inline-flex;
+    order: 1;
   }
 
   .nav__links-wrapper {
