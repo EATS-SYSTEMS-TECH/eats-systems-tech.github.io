@@ -191,7 +191,7 @@ ul {
 }
 
 .nav__logo {
-  width: 52px; /* smaller logo for a leaner header */
+  width: 70px; /* smaller logo for a leaner header */
   height: auto;
   margin-right: 0.5rem;
 }
@@ -903,6 +903,21 @@ ul {
 
 /* ================= RESPONSIVE SCALING ================= */
 /* Desktop: larger logo, more spacing */
+@media (min-width: 769px) {
+  .nav {
+    justify-content: center;
+  }
+
+  .nav__links-wrapper {
+    justify-content: center;
+  }
+
+  .nav__brand {
+    position: absolute;
+    left: 1.25rem;
+  }
+}
+
 @media (min-width: 1200px) {
   :root {
     --nav-height: 4.2rem; /* modest increase on very large screens */
@@ -910,14 +925,16 @@ ul {
 
   .nav {
     height: var(--nav-height);
+    justify-content: center;
   }
 
   .nav__logo {
-    width: 72px; /* slightly larger on wide screens */
+    width: 95px; /* slightly larger on wide screens */
   }
 
   .nav__links-wrapper {
     gap: 2rem;
+    justify-content: center;
   }
 
   .topbar-nav {
@@ -938,10 +955,11 @@ ul {
 
   .nav {
     height: var(--nav-height);
+    justify-content: center;
   }
 
   .nav__logo {
-    width: 72px;
+    width: 95px;
   }
 
   .topbar-nav {
@@ -950,6 +968,7 @@ ul {
 
   .nav__links-wrapper {
     gap: 2rem;
+    justify-content: center;
   }
 
   .nav-link {
@@ -961,7 +980,7 @@ ul {
 /* Mobile: compact sizes, stacked layout preserved */
 @media (max-width: 768px) {
   .nav__logo {
-    width: 48px;
+    width: 65px;
   }
 
   .topbar-nav {
