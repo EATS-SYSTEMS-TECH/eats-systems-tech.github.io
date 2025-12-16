@@ -136,8 +136,6 @@ ul {
 
 #features .section__subtitle {
   margin-top: 0.75rem;
-  white-space: nowrap; /* keep subtitle on a single line */
-  /* allow the subtitle to expand fully; do not truncate */
   overflow: visible;
   text-overflow: unset;
   max-width: none;
@@ -381,11 +379,11 @@ ul {
 /* Hamburger */
 .nav__toggle {
   display: none;
-  position: absolute;
-  right: 1.25rem;
+  flex-direction: column;
+  gap: 4px;
   background: none;
   border: none;
-  padding: 0.4rem;
+  padding: 0.5rem;
   border-radius: 0.5rem;
   cursor: pointer;
 }
@@ -395,14 +393,11 @@ ul {
 }
 
 .nav__toggle-bar {
-  width: 20px;
-  height: 2px;
+  width: 22px;
+  height: 2.5px;
   border-radius: 999px;
   background-color: #111827;
   display: block;
-  + .nav__toggle-bar {
-    margin-top: 4px;
-  }
 }
 
 /* ================= BUTTONS ================= */
@@ -889,6 +884,12 @@ ul {
 }
 
 @media (max-width: 480px) {
+  #features .section__subtitle {
+    font-size: 0.95rem;
+    max-width: 100%;
+    padding-inline: 0.5rem;
+  }
+
   .hero__actions {
     flex-direction: column;
     align-items: stretch;
