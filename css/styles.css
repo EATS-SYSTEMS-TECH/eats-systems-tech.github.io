@@ -564,6 +564,13 @@ ul {
   white-space: nowrap;
 }
 
+@media (max-width: 768px) {
+  .hero__subtitle {
+    white-space: normal;
+    max-width: 100%;
+  }
+}
+
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
