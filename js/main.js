@@ -1,4 +1,5 @@
 // /js/main.js
+// Version: 1.1.0
 
 // Utility: select helpers
 const $ = (selector, scope = document) => scope.querySelector(selector);
@@ -17,7 +18,7 @@ const translations = {
       rotator: {
         phrases: ["User Intuitive", "Full Privacy", "No Subscriptions"]
       },
-      subtitle: "A smart access system for opening electric gates in private homes, residential buildings, and secured complexes.",
+      subtitle: "Smart gate access with no subscriptions, no monthly fees, and full control.",
       cta: {
         contact: "Contact Us",
         about: "About"
@@ -44,8 +45,8 @@ const translations = {
           text: "Let guests in without the interruptions. Share a temporary access pass from the app so visitors can open the gate on their own, no more calls asking you to open the gate."
         },
         smartAccess: {
-          title: "Smart Access Control",
-          text: "Open your gate your way — with the app or an RF remote. See a clear access history so you always know who came in and when, without any extra effort."
+          title: "Smart Access",
+          text: "Secure gate access from the iOS/Android app or an RF remote. Admins can access entry history for clear visibility of gate activity."
         },
         userManagement: {
           title: "Simple User Management",
@@ -59,11 +60,11 @@ const translations = {
     about: {
       title: "About us",
       text1: "WIFIGATE was established with the aim of developing an affordable and secure solution for access control systems.",
-      text2: "Our company develops both hardware and software components in-house, that complement each other perfectly to provide a seamless user experience while ensuring the highest level of security."
+      text2: "We develop both hardware and software components in-house, that complement each other perfectly to provide a seamless user experience while ensuring the highest level of security."
     },
     contact: {
       title: "Contact us",
-      subtitle: "We will be happy to demonstrate our capabilities and advise you on solutions in the field of smart access control systems.",
+      subtitle: "We will be happy to demonstrate our capabilities and advise you about our system.",
       name: "Itay Nave",
       whatsapp: "WhatsApp",
       linkedin: "LinkedIn"
