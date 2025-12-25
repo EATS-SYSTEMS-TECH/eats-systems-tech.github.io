@@ -835,11 +835,12 @@ ul {
 
   /* Hebrew: logo on left, hamburger on right */
   body.rtl .nav__brand {
-    order: -1;
+    order: -1 !important;
   }
 
   body.rtl .nav__toggle {
-    order: 1;
+    display: inline-flex !important;
+    order: 1 !important;
   }
 
   .nav__links-wrapper {
