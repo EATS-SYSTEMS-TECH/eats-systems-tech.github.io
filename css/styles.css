@@ -821,6 +821,7 @@ ul {
 @media (max-width: 768px) {
   .nav {
     padding-inline: 1rem;
+    direction: ltr;
   }
 
   /* Default and English: logo on right, hamburger on left */
