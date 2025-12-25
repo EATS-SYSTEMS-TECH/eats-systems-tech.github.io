@@ -207,7 +207,7 @@ ul {
 /* ===== NEW HORIZONTAL NAV MENU ===== */
 .topbar-nav {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 1.5rem; /* tighter spacing between nav items */
 }
@@ -823,11 +823,22 @@ ul {
     padding-inline: 1rem;
   }
 
-  .nav__brand {
+  /* English: logo on right, hamburger on left */
+  body:not(.rtl) .nav__brand {
+    order: 1;
+  }
+
+  body:not(.rtl) .nav__toggle {
+    display: inline-flex;
     order: -1;
   }
 
-  .nav__toggle {
+  /* Hebrew: logo on left, hamburger on right */
+  body.rtl .nav__brand {
+    order: -1;
+  }
+
+  body.rtl .nav__toggle {
     display: inline-flex;
     order: 1;
   }
@@ -926,33 +937,45 @@ ul {
 /* Desktop: larger logo, more spacing */
 @media (min-width: 769px) {
   .nav {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .nav__links-wrapper {
-    justify-content: center;
+    justify-content: flex-start;
+    flex: 1;
+    margin-left: 2rem;
   }
 
   .nav__brand {
-    position: absolute;
-    left: 1.25rem;
+    position: static;
+  }
+  
+  body.rtl .nav__links-wrapper {
+    margin-left: 0;
+    margin-right: 2rem;
   }
 
-  /* RTL layout: swap logo and language selector positions */
-  body.rtl .nav__brand {
-    left: auto;
-    right: 1.25rem;
+  /* English layout: logo on left, nav after it (to the right) */
+  body:not(.rtl) .language-selector {
+    margin-left: auto;
+  }
+
+  /* RTL layout (Hebrew): logo on far right, nav after it (to the left) */
+  body.rtl .nav {
+    direction: rtl;
+  }
+
+  body.rtl .nav__links-wrapper {
+    justify-content: flex-start;
+  }
+  
+  body.rtl .topbar-nav {
+    direction: rtl;
   }
 
   body.rtl .language-selector {
-    position: absolute;
-    left: 1.25rem;
-  }
-
-  /* English layout: language selector on the right */
-  body:not(.rtl) .language-selector {
-    position: absolute;
-    right: 1.25rem;
+    margin-right: auto;
+    margin-left: 0;
   }
 }
 
@@ -963,7 +986,6 @@ ul {
 
   .nav {
     height: var(--nav-height);
-    justify-content: center;
   }
 
   .nav__logo {
@@ -972,7 +994,6 @@ ul {
 
   .nav__links-wrapper {
     gap: 2rem;
-    justify-content: center;
   }
 
   .topbar-nav {
