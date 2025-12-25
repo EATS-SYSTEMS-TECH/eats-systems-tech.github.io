@@ -823,12 +823,12 @@ ul {
     padding-inline: 1rem;
   }
 
-  /* English: logo on right, hamburger on left */
-  body:not(.rtl) .nav__brand {
+  /* Default and English: logo on right, hamburger on left */
+  .nav__brand {
     order: 1;
   }
 
-  body:not(.rtl) .nav__toggle {
+  .nav__toggle {
     display: inline-flex;
     order: -1;
   }
@@ -839,7 +839,6 @@ ul {
   }
 
   body.rtl .nav__toggle {
-    display: inline-flex;
     order: 1;
   }
 
