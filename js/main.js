@@ -4,6 +4,7 @@
 // Utility: select helpers
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
+const RTL_LANGS = new Set(["he", "ar"]);
 
 // ================= TRANSLATIONS =================
 const translations = {
@@ -22,6 +23,16 @@ const translations = {
       cta: {
         contact: "Contact Us",
         about: "About"
+      },
+      systems: {
+        barrier: { kicker: "Output", label: "Barrier Gate" },
+        shutter: { kicker: "Output", label: "Roller Shutter" },
+        floodlight: { kicker: "Output", label: "Floodlight" },
+        door: { kicker: "Access", label: "Door" },
+        field: { kicker: "Access", label: "Sports Field" },
+        maglock: { kicker: "Lock", label: "Magnetic Lock" },
+        power: { kicker: "Power In" },
+        input: { kicker: "Input" }
       }
     },
     features: {
@@ -89,6 +100,16 @@ const translations = {
       cta: {
         contact: "צור קשר",
         about: "אודות"
+      },
+      systems: {
+        barrier: { kicker: "יציאה", label: "שער מחסום" },
+        shutter: { kicker: "יציאה", label: "תריס גלילה" },
+        floodlight: { kicker: "יציאה", label: "זרקור" },
+        door: { kicker: "גישה", label: "דלת" },
+        field: { kicker: "גישה", label: "מגרש ספורט" },
+        maglock: { kicker: "נעילה", label: "מנעול מגנטי" },
+        power: { kicker: "כניסת מתח" },
+        input: { kicker: "קלט" }
       }
     },
     features: {
@@ -139,6 +160,160 @@ const translations = {
     footer: {
       copyright: "WIFIGATE. כל הזכויות שמורות.",
       tagline: "חכם. מאובטח. פרטי וללא דמי מנוי לעולם."
+    }
+  },
+  es: {
+    nav: {
+      home: "Inicio",
+      features: "Funciones",
+      about: "Acerca de",
+      contact: "Contáctanos"
+    },
+    hero: {
+      rotator: {
+        phrases: ["Fácil de usar", "Privacidad total", "Sin suscripciones"]
+      },
+      subtitle: "Acceso inteligente para portones sin suscripciones, sin pagos mensuales y con control total.",
+      cta: {
+        contact: "Contáctanos",
+        about: "Acerca de"
+      },
+      systems: {
+        barrier: { kicker: "Salida", label: "Barrera" },
+        shutter: { kicker: "Salida", label: "Persiana enrollable" },
+        floodlight: { kicker: "Salida", label: "Reflector" },
+        door: { kicker: "Acceso", label: "Puerta" },
+        field: { kicker: "Acceso", label: "Cancha deportiva" },
+        maglock: { kicker: "Cierre", label: "Cerradura magnética" },
+        power: { kicker: "Entrada de energía" },
+        input: { kicker: "Entrada" }
+      }
+    },
+    features: {
+      title: "Nuestras funciones",
+      subtitle: "Estas son solo algunas de las capacidades que ofrecemos a nuestros clientes como parte del producto que desarrollamos",
+      items: {
+        noSubscription: {
+          title: "Sin cuotas de suscripción",
+          text: "Paga una sola vez por el dispositivo y la instalación. Sin planes mensuales, sin renovaciones y sin cargos ocultos, ahora ni nunca."
+        },
+        security: {
+          title: "Arquitectura de seguridad avanzada",
+          text: "Diseñado para una protección rigurosa con Secure Boot (RSA-3072), almacenamiento cifrado (AES-128/256-XTS), un entorno de ejecución confiable, cifrado HMAC y protección contra ataques de repetición."
+        },
+        noInternet: {
+          title: "Sin exposición a internet",
+          text: "Tus datos nunca salen de tus instalaciones. Las bases de datos de usuarios permanecen en el dispositivo, cifradas y aisladas de internet."
+        },
+        guestAccess: {
+          title: "Acceso temporal para invitados",
+          text: "Deja entrar a tus invitados sin interrupciones. Comparte un acceso temporal desde la app para que puedan abrir el portón por su cuenta, sin llamadas para pedirte que lo abras."
+        },
+        smartAccess: {
+          title: "Acceso inteligente",
+          text: "Accede al portón de forma segura desde la app de iOS/Android o con un control RF. Los administradores pueden revisar el historial de accesos para tener visibilidad clara de la actividad."
+        },
+        userManagement: {
+          title: "Gestión simple de usuarios",
+          text: "Administra fácilmente usuarios y permisos desde la app móvil o importando un archivo CSV. Admite hasta 4.000 usuarios por portón y hasta 100 administradores."
+        }
+      }
+    },
+    action: {
+      title: "Míralo en acción"
+    },
+    about: {
+      title: "Sobre nosotros",
+      text1: "WIFIGATE fue creada con el objetivo de desarrollar una solución accesible y segura para sistemas de control de acceso.",
+      text2: "Desarrollamos internamente tanto el hardware como el software para ofrecer una experiencia fluida mientras mantenemos el nivel más alto de seguridad."
+    },
+    contact: {
+      title: "Contáctanos",
+      subtitle: "Estaremos encantados de mostrarte nuestras capacidades y asesorarte sobre nuestro sistema.",
+      name: "Itay Nave",
+      whatsapp: "WhatsApp",
+      linkedin: "LinkedIn"
+    },
+    footer: {
+      copyright: "WIFIGATE. Todos los derechos reservados.",
+      tagline: "Inteligente. Seguro. Privado y sin suscripciones, nunca."
+    }
+  },
+  ar: {
+    nav: {
+      home: "الرئيسية",
+      features: "المزايا",
+      about: "من نحن",
+      contact: "تواصل معنا"
+    },
+    hero: {
+      rotator: {
+        phrases: ["سهل الاستخدام", "خصوصية كاملة", "من دون اشتراكات"]
+      },
+      subtitle: "نظام ذكي للتحكم بالبوابات من دون اشتراكات أو رسوم شهرية ومع تحكم كامل.",
+      cta: {
+        contact: "تواصل معنا",
+        about: "من نحن"
+      },
+      systems: {
+        barrier: { kicker: "مخرج", label: "بوابة حاجز" },
+        shutter: { kicker: "مخرج", label: "مصراع دوار" },
+        floodlight: { kicker: "مخرج", label: "كشاف" },
+        door: { kicker: "وصول", label: "باب" },
+        field: { kicker: "وصول", label: "ملعب رياضي" },
+        maglock: { kicker: "قفل", label: "قفل مغناطيسي" },
+        power: { kicker: "دخل الطاقة" },
+        input: { kicker: "إدخال" }
+      }
+    },
+    features: {
+      title: "مزاياتنا",
+      subtitle: "هذه بعض القدرات التي نقدمها لعملائنا كجزء من المنتج الذي قمنا بتطويره",
+      items: {
+        noSubscription: {
+          title: "من دون رسوم اشتراك",
+          text: "ادفع مرة واحدة فقط مقابل الجهاز والتركيب. لا خطط شهرية ولا تجديدات ولا رسوم مخفية، الآن أو لاحقًا."
+        },
+        security: {
+          title: "بنية أمنية متقدمة",
+          text: "مصمم لحماية صارمة مع Secure Boot ‏(RSA-3072)، وتخزين مشفر ‏(AES-128/256-XTS)، وبيئة تنفيذ موثوقة، وتشفير HMAC، وحماية من هجمات إعادة الإرسال."
+        },
+        noInternet: {
+          title: "من دون تعرض للإنترنت",
+          text: "بياناتك لا تغادر موقعك أبدًا. تبقى قواعد بيانات المستخدمين داخل الجهاز، مشفرة بالكامل ومعزولة عن الإنترنت."
+        },
+        guestAccess: {
+          title: "وصول مؤقت للضيوف",
+          text: "اسمح للضيوف بالدخول من دون مقاطعات. شارك رابط وصول مؤقت من التطبيق ليتمكن الزوار من فتح البوابة بأنفسهم، من دون اتصالات لطلب الفتح."
+        },
+        smartAccess: {
+          title: "وصول ذكي",
+          text: "وصول آمن إلى البوابة من تطبيق iOS/Android أو من خلال جهاز تحكم RF. ويمكن للمشرفين الاطلاع على سجل الدخول للحصول على رؤية واضحة لنشاط البوابة."
+        },
+        userManagement: {
+          title: "إدارة مستخدمين بسيطة",
+          text: "أدر المستخدمين والصلاحيات بسهولة من خلال التطبيق أو عبر استيراد ملف CSV. يدعم حتى 4000 مستخدم لكل بوابة وحتى 100 مسؤول."
+        }
+      }
+    },
+    action: {
+      title: "شاهده أثناء العمل"
+    },
+    about: {
+      title: "من نحن",
+      text1: "تأسست WIFIGATE بهدف تطوير حل آمن وميسور لأنظمة التحكم في الوصول.",
+      text2: "نطوّر مكونات العتاد والبرمجيات داخليًا لتتكامل معًا بشكل مثالي وتقدم تجربة استخدام سلسة مع الحفاظ على أعلى مستوى من الأمان."
+    },
+    contact: {
+      title: "تواصل معنا",
+      subtitle: "يسعدنا أن نستعرض إمكانياتنا وأن نقدم لك المشورة حول نظامنا.",
+      name: "إيتاي نافيه",
+      whatsapp: "واتساب",
+      linkedin: "لينكدإن"
+    },
+    footer: {
+      copyright: "WIFIGATE. جميع الحقوق محفوظة.",
+      tagline: "ذكي. آمن. خاص ومن دون اشتراكات، إلى الأبد."
     }
   }
 };
@@ -795,7 +970,7 @@ function changeLanguage(lang) {
   document.documentElement.setAttribute('lang', lang);
   
   // Update dir attribute for RTL languages
-  if (lang === 'he') {
+  if (RTL_LANGS.has(lang)) {
     document.documentElement.setAttribute('dir', 'rtl');
     document.body.classList.add('rtl');
   } else {
