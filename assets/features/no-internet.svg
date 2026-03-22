@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">No internet exposure illustration</title>
+  <desc id="desc">A local device and data panel disconnected from the cloud.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eef4ff"/>
+      <stop offset="100%" stop-color="#dae7ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" rx="36" fill="url(#bg)"/>
+  <circle cx="122" cy="118" r="70" fill="#ffffff" opacity=".55"/>
+  <rect x="95" y="160" width="310" height="250" rx="28" fill="#f8fbff" stroke="#c9d9ff" stroke-width="4"/>
+  <rect x="125" y="196" width="250" height="42" rx="16" fill="#dfeaff"/>
+  <rect x="125" y="256" width="170" height="22" rx="11" fill="#a8bbe0"/>
+  <rect x="125" y="292" width="210" height="22" rx="11" fill="#a8bbe0"/>
+  <rect x="125" y="328" width="190" height="22" rx="11" fill="#a8bbe0"/>
+  <rect x="450" y="195" width="210" height="170" rx="26" fill="#1f2e52"/>
+  <path d="M505 312c0-31 25-56 56-56 22 0 41 13 50 31 7-4 14-6 22-6 24 0 43 19 43 43s-19 43-43 43H520c-26 0-47-21-47-47 0-23 16-41 32-45z" fill="#eff5ff"/>
+  <path d="M431 188l247 194" stroke="#ff5a5f" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="250" cy="472" r="62" fill="#2f6df6"/>
+  <path d="M220 472h60" stroke="#fff" stroke-width="14" stroke-linecap="round"/>
+</svg>

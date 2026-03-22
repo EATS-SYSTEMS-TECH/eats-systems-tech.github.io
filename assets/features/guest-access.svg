@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Guest access pass illustration</title>
+  <desc id="desc">A smartphone sending a temporary access pass to a guest user.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eef4ff"/>
+      <stop offset="100%" stop-color="#d6e5ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" rx="36" fill="url(#bg)"/>
+  <rect x="116" y="116" width="250" height="370" rx="34" fill="#1c2433"/>
+  <rect x="135" y="138" width="212" height="326" rx="26" fill="#ffffff"/>
+  <rect x="208" y="155" width="66" height="10" rx="5" fill="#dbe5f8"/>
+  <rect x="164" y="203" width="154" height="110" rx="18" fill="#ebf2ff"/>
+  <rect x="185" y="333" width="112" height="16" rx="8" fill="#4b5f88"/>
+  <rect x="185" y="361" width="88" height="16" rx="8" fill="#9caed1"/>
+  <circle cx="527" cy="220" r="82" fill="#2f6df6"/>
+  <path d="M498 220h58" stroke="#fff" stroke-width="14" stroke-linecap="round"/>
+  <path d="M527 191v58" stroke="#fff" stroke-width="14" stroke-linecap="round"/>
+  <path d="M371 280c55-2 102-15 132-38" fill="none" stroke="#7b93c7" stroke-width="8" stroke-linecap="round" stroke-dasharray="10 16"/>
+  <path d="M587 382c0-43-35-78-78-78s-78 35-78 78v28h156z" fill="#f8fbff"/>
+  <circle cx="509" cy="352" r="34" fill="#d9e6ff"/>
+  <rect x="472" y="430" width="74" height="22" rx="11" fill="#2f6df6"/>
+</svg>
