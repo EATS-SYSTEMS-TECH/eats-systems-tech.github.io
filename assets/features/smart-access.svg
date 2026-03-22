@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Smart access illustration</title>
+  <desc id="desc">A mobile phone, remote control, and smart signal waves controlling a gate.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#edf4ff"/>
+      <stop offset="100%" stop-color="#dbe6ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" rx="36" fill="url(#bg)"/>
+  <rect x="148" y="120" width="220" height="360" rx="32" fill="#19284c"/>
+  <rect x="166" y="140" width="184" height="320" rx="24" fill="#ffffff"/>
+  <rect x="222" y="158" width="72" height="10" rx="5" fill="#d7e4ff"/>
+  <rect x="192" y="204" width="132" height="84" rx="20" fill="#ebf2ff"/>
+  <rect x="192" y="314" width="132" height="18" rx="9" fill="#4b5f88"/>
+  <rect x="192" y="344" width="102" height="18" rx="9" fill="#9caed1"/>
+  <rect x="492" y="200" width="126" height="200" rx="28" fill="#f8fbff" stroke="#c9d9ff" stroke-width="4"/>
+  <circle cx="555" cy="254" r="15" fill="#2f6df6"/>
+  <circle cx="555" cy="303" r="15" fill="#2f6df6"/>
+  <circle cx="555" cy="352" r="15" fill="#2f6df6"/>
+  <path d="M402 285c48-12 83-40 102-79" fill="none" stroke="#7b93c7" stroke-width="9" stroke-linecap="round"/>
+  <path d="M624 150c34 18 62 48 78 84" fill="none" stroke="#2f6df6" stroke-width="10" stroke-linecap="round" opacity=".8"/>
+  <path d="M640 195c21 12 38 30 49 53" fill="none" stroke="#2f6df6" stroke-width="10" stroke-linecap="round" opacity=".5"/>
+  <path d="M652 241c11 7 19 16 25 27" fill="none" stroke="#2f6df6" stroke-width="10" stroke-linecap="round" opacity=".3"/>
+</svg>
