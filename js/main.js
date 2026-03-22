@@ -153,6 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupCenteredScroll();
   setupContactForm();
   setupHeroRotator();
+  setupHeroDeviceRotation();
   setupVideoAutoplay();
   setupLanguageSelector();
   setYear();
@@ -290,6 +291,211 @@ function setYear() {
   const yearEl = $("#js-year");
   if (!yearEl) return;
   yearEl.textContent = new Date().getFullYear();
+}
+
+/**
+ * Interactive 3D rotation for the hero device
+ */
+function setupHeroDeviceRotation() {
+  const device = $(".hero-device");
+  if (!device || window.matchMedia("(max-width: 768px)").matches) return;
+  const visual = $(".hero__visual");
+  if (!visual) return;
+  const systems = $$(".hero-system");
+  if (!systems.length) return;
+
+  let pointerId = null;
+  let isDragging = false;
+  let startX = 0;
+  let startY = 0;
+  const initialRotateY = -24;
+  let baseRotateX = 10;
+  let baseRotateY = initialRotateY;
+  let rotateX = baseRotateX;
+  let rotateY = baseRotateY;
+  let activeIndex = 0;
+  let lastSlotIndex = -1;
+
+  const slots = [
+    { x: 20, y: 24 },
+    { x: 77, y: 24 },
+    { x: 18, y: 72 },
+    { x: 79, y: 68 }
+  ];
+
+  const intersectsWithMargin = (rectA, rectB, margin = 28) => {
+    return !(
+      rectA.right + margin < rectB.left ||
+      rectA.left - margin > rectB.right ||
+      rectA.bottom + margin < rectB.top ||
+      rectA.top - margin > rectB.bottom
+    );
+  };
+
+  const placeActiveSystem = () => {
+    const activeSystem = systems[activeIndex];
+    if (!activeSystem) return;
+
+    const candidateIndexes = slots.map((_, index) => index);
+    for (let index = candidateIndexes.length - 1; index > 0; index -= 1) {
+      const randomIndex = Math.floor(Math.random() * (index + 1));
+      [candidateIndexes[index], candidateIndexes[randomIndex]] = [candidateIndexes[randomIndex], candidateIndexes[index]];
+    }
+
+    if (candidateIndexes.length > 1 && candidateIndexes[0] === lastSlotIndex) {
+      [candidateIndexes[0], candidateIndexes[1]] = [candidateIndexes[1], candidateIndexes[0]];
+    }
+
+    const boxRect = device.getBoundingClientRect();
+    let chosenIndex = candidateIndexes[0];
+
+    for (const slotIndex of candidateIndexes) {
+      const slot = slots[slotIndex];
+      activeSystem.style.left = `${slot.x}%`;
+      activeSystem.style.top = `${slot.y}%`;
+
+      const card = $(".hero-system__card", activeSystem);
+      if (!card) continue;
+
+      const cardRect = card.getBoundingClientRect();
+      if (!intersectsWithMargin(cardRect, boxRect)) {
+        chosenIndex = slotIndex;
+        break;
+      }
+    }
+
+    const chosenSlot = slots[chosenIndex];
+    activeSystem.style.left = `${chosenSlot.x}%`;
+    activeSystem.style.top = `${chosenSlot.y}%`;
+    lastSlotIndex = chosenIndex;
+  };
+
+  const updateActiveConnector = () => {
+    const activeSystem = systems[activeIndex];
+    if (!activeSystem) return;
+
+    const line = $(".hero-system__line", activeSystem);
+    const dot = $(".hero-system__dot", activeSystem);
+    const card = $(".hero-system__card", activeSystem);
+    if (!line || !dot || !card) return;
+
+    const visualRect = visual.getBoundingClientRect();
+    const boxRect = device.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+
+    const boxCenterX = boxRect.left + boxRect.width / 2;
+    const boxCenterY = boxRect.top + boxRect.height / 2;
+    const cardCenterX = cardRect.left + cardRect.width / 2;
+    const cardCenterY = cardRect.top + cardRect.height / 2;
+    const dx = cardCenterX - boxCenterX;
+    const dy = cardCenterY - boxCenterY;
+
+    let startX;
+    let startY;
+    if (Math.abs(dx) > Math.abs(dy)) {
+      startX = dx > 0 ? boxRect.right - 3 : boxRect.left + 3;
+      startY = Math.max(boxRect.top + 12, Math.min(boxRect.bottom - 12, cardCenterY));
+    } else {
+      startX = Math.max(boxRect.left + 12, Math.min(boxRect.right - 12, cardCenterX));
+      startY = dy > 0 ? boxRect.bottom - 3 : boxRect.top + 3;
+    }
+
+    let endX;
+    let endY;
+    if (Math.abs(dx) > Math.abs(dy)) {
+      endX = dx > 0 ? cardRect.left : cardRect.right;
+      endY = Math.max(cardRect.top + 16, Math.min(cardRect.bottom - 16, boxCenterY));
+    } else {
+      endX = Math.max(cardRect.left + 16, Math.min(cardRect.right - 16, boxCenterX));
+      endY = dy > 0 ? cardRect.top : cardRect.bottom;
+    }
+
+    const localStartX = startX - visualRect.left;
+    const localStartY = startY - visualRect.top;
+    const localEndX = endX - visualRect.left;
+    const localEndY = endY - visualRect.top;
+    const lineDx = localEndX - localStartX;
+    const lineDy = localEndY - localStartY;
+    const lineLength = Math.max(Math.hypot(lineDx, lineDy), 12);
+    const lineAngle = Math.atan2(lineDy, lineDx) * (180 / Math.PI);
+
+    const systemLeft = activeSystem.offsetLeft;
+    const systemTop = activeSystem.offsetTop;
+
+    line.style.setProperty("--line-x", `${localStartX - systemLeft}px`);
+    line.style.setProperty("--line-y", `${localStartY - systemTop}px`);
+    line.style.setProperty("--line-len", `${lineLength}px`);
+    line.style.setProperty("--line-angle", `${lineAngle}deg`);
+
+    dot.style.setProperty("--dot-x", `${localEndX - systemLeft}px`);
+    dot.style.setProperty("--dot-y", `${localEndY - systemTop}px`);
+  };
+
+  const setActiveSystem = () => {
+    const normalizedY = (((rotateY - initialRotateY) % 360) + 360) % 360;
+    const index = Math.floor(normalizedY / (360 / systems.length)) % systems.length;
+    const changed = index !== activeIndex;
+    activeIndex = index;
+
+    systems.forEach((system, systemIndex) => {
+      system.classList.toggle("is-active", systemIndex === index);
+    });
+
+    if (changed) {
+      placeActiveSystem();
+    }
+  };
+
+  const applyRotation = () => {
+    device.style.setProperty("--device-rotate-x", `${rotateX}deg`);
+    device.style.setProperty("--device-rotate-y", `${rotateY}deg`);
+    setActiveSystem();
+    updateActiveConnector();
+  };
+
+  const stopDragging = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    pointerId = null;
+    baseRotateX = rotateX;
+    baseRotateY = rotateY;
+    device.classList.remove("is-dragging");
+  };
+
+  device.addEventListener("pointerdown", (event) => {
+    pointerId = event.pointerId;
+    isDragging = true;
+    startX = event.clientX;
+    startY = event.clientY;
+    device.classList.add("is-dragging");
+    device.setPointerCapture(pointerId);
+  });
+
+  device.addEventListener("pointermove", (event) => {
+    if (!isDragging || event.pointerId !== pointerId) return;
+
+    const deltaX = event.clientX - startX;
+    const deltaY = event.clientY - startY;
+
+    rotateY = baseRotateY + deltaX * 0.55;
+    rotateX = baseRotateX - deltaY * 0.45;
+
+    applyRotation();
+  });
+
+  device.addEventListener("pointerup", (event) => {
+    if (event.pointerId !== pointerId) return;
+    device.releasePointerCapture(pointerId);
+    stopDragging();
+  });
+
+  device.addEventListener("pointercancel", stopDragging);
+  device.addEventListener("lostpointercapture", stopDragging);
+  window.addEventListener("blur", stopDragging);
+  window.addEventListener("resize", updateActiveConnector);
+
+  placeActiveSystem();
+  applyRotation();
 }
 
 /**
