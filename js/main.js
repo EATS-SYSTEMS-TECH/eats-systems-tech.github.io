@@ -5,6 +5,12 @@
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 const RTL_LANGS = new Set(["he", "ar"]);
+const LANGUAGE_FALLBACKS = {
+  ru: "en",
+  pt: "en",
+  pl: "en",
+  cs: "en"
+};
 
 // ================= TRANSLATIONS =================
 const translations = {
@@ -320,6 +326,14 @@ const translations = {
 
 // Current language state
 let currentLang = 'en';
+
+function getResolvedLanguage(lang = currentLang) {
+  return translations[lang] ? lang : LANGUAGE_FALLBACKS[lang] || "en";
+}
+
+function getTranslationBundle(lang = currentLang) {
+  return translations[getResolvedLanguage(lang)];
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   setupNav();
@@ -804,7 +818,7 @@ function setupHeroRotator() {
 
   // helper to perform a single fade swap
   function swapNext() {
-    const phrases = translations[currentLang].hero.rotator.phrases;
+    const phrases = getTranslationBundle().hero.rotator.phrases;
     const nextIdx = (idx + 1) % phrases.length;
 
     // Prefer Web Animations API for reliable fades; fall back to CSS class if unavailable
@@ -849,7 +863,7 @@ function setupHeroRotator() {
 function updateHeroRotatorPhrase() {
   const el = document.getElementById("hero-rotator");
   if (!el) return;
-  const phrases = translations[currentLang].hero.rotator.phrases;
+  const phrases = getTranslationBundle().hero.rotator.phrases;
   el.textContent = phrases[0];
 }
 
@@ -958,7 +972,9 @@ function setupLanguageSelector() {
  * Change website language
  */
 function changeLanguage(lang) {
-  if (!translations[lang]) {
+  const resolvedLang = getResolvedLanguage(lang);
+
+  if (!translations[resolvedLang]) {
     console.error('Language not found:', lang);
     return;
   }
@@ -967,7 +983,7 @@ function changeLanguage(lang) {
   localStorage.setItem('language', lang);
   
   // Update HTML lang attribute
-  document.documentElement.setAttribute('lang', lang);
+  document.documentElement.setAttribute('lang', resolvedLang);
   
   // Update dir attribute for RTL languages
   if (RTL_LANGS.has(lang)) {
@@ -990,10 +1006,11 @@ function changeLanguage(lang) {
  */
 function updateTranslations() {
   const elements = document.querySelectorAll('[data-i18n]');
+  const activeTranslations = getTranslationBundle();
   
   elements.forEach(element => {
     const key = element.getAttribute('data-i18n');
-    const translation = getNestedTranslation(translations[currentLang], key);
+    const translation = getNestedTranslation(activeTranslations, key);
     
     if (translation) {
       element.textContent = translation;
