@@ -15,7 +15,7 @@ var translations = {
       rotator: {
         phrases: ["Easy to Use", "Complete Privacy", "No Subscriptions"]
       },
-      subtitle: "Smart gate access with no subscriptions, no monthly fees, and full control.",
+      subtitle: "A smart access-control system that is secure, simple, and free of monthly fees.",
       cta: {
         contact: "Contact Us",
         about: "About"
@@ -92,7 +92,7 @@ var translations = {
       rotator: {
         phrases: ["קל לשימוש", "פרטיות מלאה", "ללא מנוי"]
       },
-      subtitle: "גישה חכמה לשערים ללא דמי מנוי, ללא תשלום חודשי ועם שליטה מלאה.",
+      subtitle: "מערכת חכמה לבקרת גישה, מאובטחת, פשוטה וללא עלויות חודשיות.",
       cta: {
         contact: "צור קשר",
         about: "אודות"
@@ -169,7 +169,7 @@ var translations = {
       rotator: {
         phrases: ["Fácil de usar", "Privacidad total", "Sin suscripciones"]
       },
-      subtitle: "Acceso inteligente al portón sin suscripciones, sin pagos mensuales y con control total.",
+      subtitle: "Un sistema inteligente de control de acceso, seguro, simple y sin costos mensuales.",
       cta: {
         contact: "Contáctanos",
         about: "Acerca de"
@@ -246,7 +246,7 @@ var translations = {
       rotator: {
         phrases: ["Fácil de utilizar", "Privacidade total", "Sem subscrições"]
       },
-      subtitle: "Acesso inteligente ao portão sem subscrições, sem mensalidades e com controlo total.",
+      subtitle: "Um sistema inteligente de controlo de acessos, seguro, simples e sem custos mensais.",
       cta: {
         contact: "Contacte-nos",
         about: "Sobre nós"
@@ -323,7 +323,7 @@ var translations = {
       rotator: {
         phrases: ["Łatwe w użyciu", "Pełna prywatność", "Bez abonamentu"]
       },
-      subtitle: "Inteligentny dostęp do bramy bez abonamentu, bez miesięcznych opłat i z pełną kontrolą.",
+      subtitle: "Inteligentny system kontroli dostępu, bezpieczny, prosty i bez miesięcznych opłat.",
       cta: {
         contact: "Skontaktuj się",
         about: "O nas"
@@ -400,7 +400,7 @@ var translations = {
       rotator: {
         phrases: ["Просто в использовании", "Полная приватность", "Без подписок"]
       },
-      subtitle: "Умный доступ к воротам без подписок, ежемесячных платежей и с полным контролем.",
+      subtitle: "Умная система контроля доступа: безопасная, простая и без ежемесячных платежей.",
       cta: {
         contact: "Связаться с нами",
         about: "О нас"
@@ -477,7 +477,7 @@ var translations = {
       rotator: {
         phrases: ["Snadné použití", "Naprosté soukromí", "Bez předplatného"]
       },
-      subtitle: "Chytré ovládání brány bez předplatného, bez měsíčních poplatků a s plnou kontrolou.",
+      subtitle: "Chytrý systém řízení přístupu, bezpečný, jednoduchý a bez měsíčních poplatků.",
       cta: {
         contact: "Kontaktujte nás",
         about: "O nás"
@@ -554,7 +554,7 @@ var translations = {
       rotator: {
         phrases: ["سهل الاستخدام", "خصوصية كاملة", "من دون اشتراكات"]
       },
-      subtitle: "تحكم ذكي بالبوابة من دون اشتراكات أو رسوم شهرية ومع تحكم كامل.",
+      subtitle: "نظام ذكي للتحكم في الوصول، آمن وبسيط ومن دون تكاليف شهرية.",
       cta: {
         contact: "تواصل معنا",
         about: "من نحن"

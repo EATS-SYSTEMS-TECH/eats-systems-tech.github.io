@@ -1350,10 +1350,6 @@ white-space: nowrap;
     min-height: min(46rem, calc(100vh - var(--nav-height)));
   }
 
-  .hero__text {
-    max-width: 50%;
-  }
-
   .hero__visual {
     min-height: 36rem;
     max-width: 46rem;
@@ -1462,12 +1458,6 @@ white-space: nowrap;
   .hero__content {
     padding-block: 3.2rem 4.2rem;
     min-height: min(38rem, calc(100vh - var(--nav-height)));
-  }
-
-  .hero__text {
-    padding: 1.35rem;
-    border-radius: 1.25rem;
-    background: linear-gradient(180deg, rgba(15, 23, 42, 0.78), rgba(15, 23, 42, 0.58));
   }
 
   .hero__title {
