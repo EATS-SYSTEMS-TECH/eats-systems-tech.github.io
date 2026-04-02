@@ -62,7 +62,7 @@ var translations = {
       }
     },
     action: {
-      title: "See It in Action"
+      title: "Why WIFIGATE?"
     },
     about: {
       title: "About Us",
@@ -73,8 +73,7 @@ var translations = {
       title: "Contact Us",
       subtitle: "We will be happy to demonstrate our capabilities and advise you about our system.",
       name: "Itay Nave",
-      whatsapp: "WhatsApp",
-      linkedin: "LinkedIn"
+      whatsapp: "WhatsApp"
     },
     footer: {
       copyright: "WIFIGATE. All rights reserved.",
@@ -139,7 +138,7 @@ var translations = {
       }
     },
     action: {
-      title: "ראו את המערכת בפעולה"
+      title: "למה WIFIGATE?"
     },
     about: {
       title: "אודותינו",
@@ -150,8 +149,7 @@ var translations = {
       title: "צור קשר",
       subtitle: "נשמח להציג את היכולות שלנו ולייעץ לכם לגבי המערכת.",
       name: "איתי נוה",
-      whatsapp: "וואטסאפ",
-      linkedin: "לינקדאין"
+      whatsapp: "וואטסאפ"
     },
     footer: {
       copyright: "WIFIGATE. כל הזכויות שמורות.",
@@ -216,7 +214,7 @@ var translations = {
       }
     },
     action: {
-      title: "Míralo en acción"
+      title: "¿Por qué WIFIGATE?"
     },
     about: {
       title: "Sobre nosotros",
@@ -227,8 +225,7 @@ var translations = {
       title: "Contáctanos",
       subtitle: "Estaremos encantados de mostrarte nuestras capacidades y asesorarte sobre nuestro sistema.",
       name: "Itay Nave",
-      whatsapp: "WhatsApp",
-      linkedin: "LinkedIn"
+      whatsapp: "WhatsApp"
     },
     footer: {
       copyright: "WIFIGATE. Todos los derechos reservados.",
@@ -293,7 +290,7 @@ var translations = {
       }
     },
     action: {
-      title: "Veja-o em ação"
+      title: "Por que WIFIGATE?"
     },
     about: {
       title: "Sobre nós",
@@ -304,8 +301,7 @@ var translations = {
       title: "Contacte-nos",
       subtitle: "Teremos todo o gosto em demonstrar as nossas capacidades e aconselhá-lo sobre o nosso sistema.",
       name: "Itay Nave",
-      whatsapp: "WhatsApp",
-      linkedin: "LinkedIn"
+      whatsapp: "WhatsApp"
     },
     footer: {
       copyright: "WIFIGATE. Todos os direitos reservados.",
@@ -370,7 +366,7 @@ var translations = {
       }
     },
     action: {
-      title: "Zobacz w działaniu"
+      title: "Dlaczego WIFIGATE?"
     },
     about: {
       title: "O nas",
@@ -381,8 +377,7 @@ var translations = {
       title: "Skontaktuj się",
       subtitle: "Chętnie pokażemy możliwości naszego rozwiązania i doradzimy w sprawie naszego systemu.",
       name: "Itay Nave",
-      whatsapp: "WhatsApp",
-      linkedin: "LinkedIn"
+      whatsapp: "WhatsApp"
     },
     footer: {
       copyright: "WIFIGATE. Wszelkie prawa zastrzeżone.",
@@ -447,7 +442,7 @@ var translations = {
       }
     },
     action: {
-      title: "Посмотрите в действии"
+      title: "Почему WIFIGATE?"
     },
     about: {
       title: "О нас",
@@ -458,8 +453,7 @@ var translations = {
       title: "Связаться с нами",
       subtitle: "Мы с удовольствием покажем возможности системы и проконсультируем вас по нашему решению.",
       name: "Itay Nave",
-      whatsapp: "WhatsApp",
-      linkedin: "LinkedIn"
+      whatsapp: "WhatsApp"
     },
     footer: {
       copyright: "WIFIGATE. Все права защищены.",
@@ -524,7 +518,7 @@ var translations = {
       }
     },
     action: {
-      title: "Podívejte se v akci"
+      title: "Proč WIFIGATE?"
     },
     about: {
       title: "O nás",
@@ -535,8 +529,7 @@ var translations = {
       title: "Kontaktujte nás",
       subtitle: "Rádi vám předvedeme možnosti našeho řešení a poradíme vám s naším systémem.",
       name: "Itay Nave",
-      whatsapp: "WhatsApp",
-      linkedin: "LinkedIn"
+      whatsapp: "WhatsApp"
     },
     footer: {
       copyright: "WIFIGATE. Všechna práva vyhrazena.",
@@ -601,7 +594,7 @@ var translations = {
       }
     },
     action: {
-      title: "شاهده أثناء العمل"
+      title: "لماذا WIFIGATE؟"
     },
     about: {
       title: "من نحن",
@@ -612,8 +605,7 @@ var translations = {
       title: "تواصل معنا",
       subtitle: "يسعدنا أن نستعرض إمكانياتنا وأن نقدم لك المشورة حول نظامنا.",
       name: "إيتاي نافيه",
-      whatsapp: "واتساب",
-      linkedin: "لينكدإن"
+      whatsapp: "واتساب"
     },
     footer: {
       copyright: "WIFIGATE. جميع الحقوق محفوظة.",
