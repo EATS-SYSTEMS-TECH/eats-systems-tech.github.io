@@ -5,12 +5,6 @@
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 const RTL_LANGS = new Set(["he", "ar"]);
-const LANGUAGE_FALLBACKS = {
-  ru: "en",
-  pt: "en",
-  pl: "en",
-  cs: "en"
-};
 
 // ================= TRANSLATIONS =================
 const translations = {
@@ -245,6 +239,314 @@ const translations = {
       tagline: "Inteligente. Seguro. Privado y sin suscripciones, nunca."
     }
   },
+  pt: {
+    nav: {
+      home: "Início",
+      features: "Funcionalidades",
+      about: "Sobre",
+      contact: "Contacte-nos"
+    },
+    hero: {
+      rotator: {
+        phrases: ["Fácil de usar", "Privacidade total", "Sem subscrições"]
+      },
+      subtitle: "Acesso inteligente ao portão sem subscrições, sem mensalidades e com controlo total.",
+      cta: {
+        contact: "Contacte-nos",
+        about: "Sobre"
+      },
+      systems: {
+        barrier: { kicker: "Saída", label: "Barreira" },
+        shutter: { kicker: "Saída", label: "Porta de enrolar" },
+        floodlight: { kicker: "Saída", label: "Projetor" },
+        door: { kicker: "Acesso", label: "Porta" },
+        field: { kicker: "Acesso", label: "Campo desportivo" },
+        maglock: { kicker: "Fecho", label: "Fechadura magnética" },
+        power: { kicker: "Entrada de alimentação" },
+        input: { kicker: "Entrada" }
+      }
+    },
+    features: {
+      title: "As nossas funcionalidades",
+      subtitle: "Estas são apenas algumas das capacidades que oferecemos aos nossos clientes como parte do produto que desenvolvemos",
+      items: {
+        noSubscription: {
+          title: "Sem taxas de subscrição",
+          text: "Pague apenas uma vez pelo dispositivo e pela instalação. Sem planos mensais, sem renovações e sem custos ocultos, agora ou no futuro."
+        },
+        security: {
+          title: "Arquitetura de segurança avançada",
+          text: "Concebido para uma proteção rigorosa com Secure Boot (RSA-3072), armazenamento encriptado (AES-128/256-XTS), um Ambiente de Execução Fidedigno, encriptação HMAC e proteção contra ataques de repetição."
+        },
+        noInternet: {
+          title: "Sem exposição à internet",
+          text: "Os seus dados nunca saem das suas instalações. As bases de dados de utilizadores permanecem no dispositivo, totalmente encriptadas e isoladas da internet."
+        },
+        guestAccess: {
+          title: "Acesso temporário para convidados",
+          text: "Deixe os convidados entrar sem interrupções. Partilhe um acesso temporário na aplicação para que os visitantes possam abrir o portão sozinhos, sem chamadas a pedir que o abra."
+        },
+        smartAccess: {
+          title: "Acesso inteligente",
+          text: "Acesso seguro ao portão através da aplicação iOS/Android ou de um comando RF. Os administradores podem consultar o histórico de entradas para ter visibilidade clara da atividade."
+        },
+        userManagement: {
+          title: "Gestão simples de utilizadores",
+          text: "Gira utilizadores e permissões facilmente através da aplicação móvel ou importando um ficheiro CSV. Suporta até 4.000 utilizadores por portão e até 100 administradores."
+        }
+      }
+    },
+    action: {
+      title: "Veja-o em ação"
+    },
+    about: {
+      title: "Sobre nós",
+      text1: "A WIFIGATE foi criada com o objetivo de desenvolver uma solução acessível e segura para sistemas de controlo de acessos.",
+      text2: "Desenvolvemos internamente tanto o hardware como o software para proporcionar uma experiência fluida, mantendo o mais alto nível de segurança."
+    },
+    contact: {
+      title: "Contacte-nos",
+      subtitle: "Teremos todo o gosto em demonstrar as nossas capacidades e aconselhá-lo sobre o nosso sistema.",
+      name: "Itay Nave",
+      whatsapp: "WhatsApp",
+      linkedin: "LinkedIn"
+    },
+    footer: {
+      copyright: "WIFIGATE. Todos os direitos reservados.",
+      tagline: "Inteligente. Seguro. Privado e sem subscrições, para sempre."
+    }
+  },
+  pl: {
+    nav: {
+      home: "Strona główna",
+      features: "Funkcje",
+      about: "O nas",
+      contact: "Skontaktuj się"
+    },
+    hero: {
+      rotator: {
+        phrases: ["Łatwe w użyciu", "Pełna prywatność", "Bez abonamentu"]
+      },
+      subtitle: "Inteligentny dostęp do bramy bez abonamentu, bez miesięcznych opłat i z pełną kontrolą.",
+      cta: {
+        contact: "Skontaktuj się",
+        about: "O nas"
+      },
+      systems: {
+        barrier: { kicker: "Wyjście", label: "Szlaban" },
+        shutter: { kicker: "Wyjście", label: "Roleta" },
+        floodlight: { kicker: "Wyjście", label: "Reflektor" },
+        door: { kicker: "Dostęp", label: "Drzwi" },
+        field: { kicker: "Dostęp", label: "Boisko sportowe" },
+        maglock: { kicker: "Zamek", label: "Zamek magnetyczny" },
+        power: { kicker: "Zasilanie" },
+        input: { kicker: "Wejście" }
+      }
+    },
+    features: {
+      title: "Nasze funkcje",
+      subtitle: "To tylko część możliwości, które oferujemy naszym klientom w ramach opracowanego przez nas produktu",
+      items: {
+        noSubscription: {
+          title: "Bez opłat abonamentowych",
+          text: "Płacisz tylko raz za urządzenie i instalację. Bez miesięcznych planów, bez odnowień i bez ukrytych opłat, teraz i w przyszłości."
+        },
+        security: {
+          title: "Zaawansowana architektura bezpieczeństwa",
+          text: "Zaprojektowany z myślą o bezkompromisowej ochronie dzięki Secure Boot (RSA-3072), szyfrowanej pamięci flash (AES-128/256-XTS), zaufanemu środowisku wykonawczemu, szyfrowaniu HMAC i ochronie przed atakami powtórzeniowymi."
+        },
+        noInternet: {
+          title: "Brak ekspozycji na internet",
+          text: "Twoje dane nigdy nie opuszczają obiektu. Bazy danych użytkowników pozostają na urządzeniu, są w pełni szyfrowane i odizolowane od internetu."
+        },
+        guestAccess: {
+          title: "Tymczasowy dostęp dla gości",
+          text: "Wpuszczaj gości bez zbędnych przerw. Udostępnij tymczasowy dostęp w aplikacji, aby odwiedzający mogli samodzielnie otworzyć bramę, bez telefonów z prośbą o wpuszczenie."
+        },
+        smartAccess: {
+          title: "Inteligentny dostęp",
+          text: "Bezpieczny dostęp do bramy z aplikacji iOS/Android lub pilota RF. Administratorzy mogą sprawdzać historię wejść, aby mieć pełny wgląd w aktywność."
+        },
+        userManagement: {
+          title: "Proste zarządzanie użytkownikami",
+          text: "Łatwo zarządzaj użytkownikami i uprawnieniami z poziomu aplikacji mobilnej lub importując plik CSV. Obsługa do 4 000 użytkowników na bramę i do 100 administratorów."
+        }
+      }
+    },
+    action: {
+      title: "Zobacz w działaniu"
+    },
+    about: {
+      title: "O nas",
+      text1: "WIFIGATE powstało z myślą o stworzeniu przystępnego cenowo i bezpiecznego rozwiązania dla systemów kontroli dostępu.",
+      text2: "Tworzymy zarówno sprzęt, jak i oprogramowanie we własnym zakresie, aby zapewnić płynne działanie i najwyższy poziom bezpieczeństwa."
+    },
+    contact: {
+      title: "Skontaktuj się",
+      subtitle: "Chętnie pokażemy możliwości naszego rozwiązania i doradzimy w sprawie naszego systemu.",
+      name: "Itay Nave",
+      whatsapp: "WhatsApp",
+      linkedin: "LinkedIn"
+    },
+    footer: {
+      copyright: "WIFIGATE. Wszelkie prawa zastrzeżone.",
+      tagline: "Inteligentne. Bezpieczne. Prywatne i bez abonamentu, na zawsze."
+    }
+  },
+  ru: {
+    nav: {
+      home: "Главная",
+      features: "Возможности",
+      about: "О нас",
+      contact: "Связаться с нами"
+    },
+    hero: {
+      rotator: {
+        phrases: ["Просто и удобно", "Полная приватность", "Без подписок"]
+      },
+      subtitle: "Умный доступ к воротам без подписок, ежемесячных платежей и с полным контролем.",
+      cta: {
+        contact: "Связаться с нами",
+        about: "О нас"
+      },
+      systems: {
+        barrier: { kicker: "Выход", label: "Шлагбаум" },
+        shutter: { kicker: "Выход", label: "Рольставни" },
+        floodlight: { kicker: "Выход", label: "Прожектор" },
+        door: { kicker: "Доступ", label: "Дверь" },
+        field: { kicker: "Доступ", label: "Спортивная площадка" },
+        maglock: { kicker: "Замок", label: "Магнитный замок" },
+        power: { kicker: "Питание" },
+        input: { kicker: "Вход" }
+      }
+    },
+    features: {
+      title: "Наши возможности",
+      subtitle: "Это лишь часть возможностей, которые мы предлагаем нашим клиентам в составе разработанного нами продукта",
+      items: {
+        noSubscription: {
+          title: "Без абонентской платы",
+          text: "Оплата один раз за устройство и установку. Никаких ежемесячных планов, продлений или скрытых платежей, ни сейчас, ни потом."
+        },
+        security: {
+          title: "Современная архитектура безопасности",
+          text: "Разработано для бескомпромиссной защиты: Secure Boot (RSA-3072), зашифрованная flash-память (AES-128/256-XTS), доверенная среда выполнения, шифрование HMAC и защита от атак повторного воспроизведения."
+        },
+        noInternet: {
+          title: "Без выхода в интернет",
+          text: "Ваши данные никогда не покидают объект. Базы данных пользователей хранятся на устройстве, полностью зашифрованы и изолированы от интернета."
+        },
+        guestAccess: {
+          title: "Временный доступ для гостей",
+          text: "Пускайте гостей без лишних отвлечений. Поделитесь временным доступом в приложении, чтобы посетители могли открыть ворота сами, без звонков с просьбой открыть."
+        },
+        smartAccess: {
+          title: "Умный доступ",
+          text: "Безопасный доступ к воротам через приложение iOS/Android или RF-пульт. Администраторы могут просматривать историю входов и видеть активность по воротам."
+        },
+        userManagement: {
+          title: "Простое управление пользователями",
+          text: "Управляйте пользователями и правами доступа через мобильное приложение или импорт CSV. Поддерживается до 4 000 пользователей на одни ворота и до 100 администраторов."
+        }
+      }
+    },
+    action: {
+      title: "Посмотрите в действии"
+    },
+    about: {
+      title: "О нас",
+      text1: "WIFIGATE была создана с целью разработки доступного и безопасного решения для систем контроля доступа.",
+      text2: "Мы разрабатываем и аппаратную часть, и программное обеспечение внутри компании, чтобы обеспечить удобный пользовательский опыт и максимальный уровень безопасности."
+    },
+    contact: {
+      title: "Связаться с нами",
+      subtitle: "Мы с удовольствием покажем возможности системы и проконсультируем вас по нашему решению.",
+      name: "Itay Nave",
+      whatsapp: "WhatsApp",
+      linkedin: "LinkedIn"
+    },
+    footer: {
+      copyright: "WIFIGATE. Все права защищены.",
+      tagline: "Умно. Безопасно. Конфиденциально и без подписок, навсегда."
+    }
+  },
+  cs: {
+    nav: {
+      home: "Domů",
+      features: "Funkce",
+      about: "O nás",
+      contact: "Kontaktujte nás"
+    },
+    hero: {
+      rotator: {
+        phrases: ["Snadné použití", "Naprosté soukromí", "Bez předplatného"]
+      },
+      subtitle: "Chytré ovládání brány bez předplatného, bez měsíčních poplatků a s plnou kontrolou.",
+      cta: {
+        contact: "Kontaktujte nás",
+        about: "O nás"
+      },
+      systems: {
+        barrier: { kicker: "Výstup", label: "Závora" },
+        shutter: { kicker: "Výstup", label: "Rolovací vrata" },
+        floodlight: { kicker: "Výstup", label: "Reflektor" },
+        door: { kicker: "Přístup", label: "Dveře" },
+        field: { kicker: "Přístup", label: "Sportovní hřiště" },
+        maglock: { kicker: "Zámek", label: "Magnetický zámek" },
+        power: { kicker: "Napájení" },
+        input: { kicker: "Vstup" }
+      }
+    },
+    features: {
+      title: "Naše funkce",
+      subtitle: "Tohle je jen část možností, které našim zákazníkům nabízíme jako součást produktu, který jsme vyvinuli",
+      items: {
+        noSubscription: {
+          title: "Bez poplatků za předplatné",
+          text: "Za zařízení a instalaci zaplatíte jen jednou. Žádné měsíční tarify, žádná prodloužení ani skryté poplatky, teď ani později."
+        },
+        security: {
+          title: "Pokročilá bezpečnostní architektura",
+          text: "Navrženo pro nekompromisní ochranu se Secure Boot (RSA-3072), šifrovaným úložištěm flash (AES-128/256-XTS), důvěryhodným běhovým prostředím, šifrováním HMAC a ochranou proti replay útokům."
+        },
+        noInternet: {
+          title: "Bez vystavení internetu",
+          text: "Vaše data nikdy neopustí váš objekt. Databáze uživatelů zůstávají v zařízení, plně šifrované a izolované od internetu."
+        },
+        guestAccess: {
+          title: "Dočasný přístup pro hosty",
+          text: "Pusťte hosty dovnitř bez vyrušování. Sdílejte z aplikace dočasný přístup, aby si návštěvníci mohli bránu otevřít sami, bez telefonátů s prosbou o otevření."
+        },
+        smartAccess: {
+          title: "Chytrý přístup",
+          text: "Bezpečný přístup k bráně z aplikace pro iOS/Android nebo přes RF ovladač. Správci mohou kontrolovat historii vstupů a mít jasný přehled o aktivitě."
+        },
+        userManagement: {
+          title: "Jednoduchá správa uživatelů",
+          text: "Uživatele a oprávnění snadno spravujete v mobilní aplikaci nebo importem CSV souboru. Podporuje až 4 000 uživatelů na bránu a až 100 správců."
+        }
+      }
+    },
+    action: {
+      title: "Podívejte se v akci"
+    },
+    about: {
+      title: "O nás",
+      text1: "WIFIGATE vznikla s cílem vyvinout dostupné a bezpečné řešení pro systémy řízení přístupu.",
+      text2: "Hardware i software vyvíjíme interně, aby spolu dokonale fungovaly, nabízely plynulý uživatelský zážitek a zároveň zajišťovaly nejvyšší úroveň zabezpečení."
+    },
+    contact: {
+      title: "Kontaktujte nás",
+      subtitle: "Rádi vám předvedeme možnosti našeho řešení a poradíme vám s naším systémem.",
+      name: "Itay Nave",
+      whatsapp: "WhatsApp",
+      linkedin: "LinkedIn"
+    },
+    footer: {
+      copyright: "WIFIGATE. Všechna práva vyhrazena.",
+      tagline: "Chytré. Bezpečné. Soukromé a bez předplatného, navždy."
+    }
+  },
   ar: {
     nav: {
       home: "الرئيسية",
@@ -328,7 +630,7 @@ const translations = {
 let currentLang = 'en';
 
 function getResolvedLanguage(lang = currentLang) {
-  return translations[lang] ? lang : LANGUAGE_FALLBACKS[lang] || "en";
+  return translations[lang] ? lang : "en";
 }
 
 function getTranslationBundle(lang = currentLang) {
