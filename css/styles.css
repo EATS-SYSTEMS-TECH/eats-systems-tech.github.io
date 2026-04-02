@@ -385,14 +385,12 @@ ul {
   align-items: center;
   justify-content: center;
   width: 50px;
-  height: 33px;
   flex-shrink: 0;
 }
 
 .language-selector__flag img {
-  width: auto;
-  height: 100%;
-  max-width: 100%;
+  width: 100%;
+  height: auto;
   display: block;
   border-radius: 2px;
 }
