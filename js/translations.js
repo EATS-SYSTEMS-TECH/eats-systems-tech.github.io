@@ -1,5 +1,5 @@
 // /js/translations.js
-// Version: 1.2.0
+// Version: 1.2.1
 
 var RTL_LANGS = new Set(["he", "ar"]);
 
@@ -13,7 +13,7 @@ var translations = {
     },
     hero: {
       rotator: {
-        phrases: ["User Intuitive", "Full Privacy", "No Subscriptions"]
+        phrases: ["Easy to Use", "Complete Privacy", "No Subscriptions"]
       },
       subtitle: "Smart gate access with no subscriptions, no monthly fees, and full control.",
       cta: {
@@ -32,45 +32,45 @@ var translations = {
       }
     },
     features: {
-      title: "Our features",
-      subtitle: "These are only part of the capabilities we offer to our clients as part of the product we developed",
+      title: "Our Features",
+      subtitle: "These are just some of the capabilities we offer our customers as part of the product we developed.",
       items: {
         noSubscription: {
           title: "No Subscription Fees",
-          text: "Pay once for the device and installation. No monthly plans, no renewals, no hidden fees - now or ever."
+          text: "Pay once for the device and installation. No monthly plans, no renewals, and no hidden fees, now or ever."
         },
         security: {
           title: "Advanced Security Architecture",
-          text: "Engineered for uncompromising protection with Secure Boot (RSA-3072), encrypted flash storage (AES-128/256-XTS), a Trusted Execution Environment, HMAC encryption, and anti replay attack."
+          text: "Built for uncompromising protection with Secure Boot (RSA-3072), encrypted flash storage (AES-128/256-XTS), a Trusted Execution Environment, HMAC encryption, and replay-attack protection."
         },
         noInternet: {
           title: "No Internet Exposure",
-          text: "Your data never leaves your premises. User databases stay on-device, fully encrypted and isolated from the internet."
+          text: "Your data never leaves your premises. User databases stay on the device, fully encrypted and isolated from the internet."
         },
         guestAccess: {
           title: "Guest Access Pass",
-          text: "Let guests in without the interruptions. Share a temporary access pass from the app so visitors can open the gate on their own, no more calls asking you to open the gate."
+          text: "Let guests in without the interruptions. Share a temporary access pass from the app so visitors can open the gate on their own, with no calls asking you to let them in."
         },
         smartAccess: {
           title: "Smart Access",
-          text: "Secure gate access from the iOS/Android app or an RF remote. Admins can access entry history for clear visibility of gate activity."
+          text: "Secure gate access from the iOS/Android app or an RF remote. Administrators can review entry history for clear visibility into gate activity."
         },
         userManagement: {
           title: "Simple User Management",
-          text: "Easily manage users and permissions through the mobile app or by importing a CSV file. Support up to 4,000 users per gate and assign up to 100 administrators."
+          text: "Easily manage users and permissions through the mobile app or by importing and exporting CSV files. Supports up to 4,000 users per gate and up to 100 administrators."
         }
       }
     },
     action: {
-      title: "See it in action"
+      title: "See It in Action"
     },
     about: {
-      title: "About us",
-      text1: "WIFIGATE was established with the aim of developing an affordable and secure solution for access control systems.",
-      text2: "We develop both hardware and software components in-house, that complement each other perfectly to provide a seamless user experience while ensuring the highest level of security."
+      title: "About Us",
+      text1: "WIFIGATE was founded to develop an affordable and secure solution for access-control systems.",
+      text2: "We develop both the hardware and software in-house so they work together seamlessly while maintaining the highest level of security."
     },
     contact: {
-      title: "Contact us",
+      title: "Contact Us",
       subtitle: "We will be happy to demonstrate our capabilities and advise you about our system.",
       name: "Itay Nave",
       whatsapp: "WhatsApp",
@@ -78,21 +78,21 @@ var translations = {
     },
     footer: {
       copyright: "WIFIGATE. All rights reserved.",
-      tagline: "Smart. Secure. Private — with no subscriptions, ever."
+      tagline: "Smart. Secure. Private. No subscriptions. Ever."
     }
   },
   he: {
     nav: {
       home: "בית",
       features: "יכולות",
-      about: "מי אנחנו",
+      about: "אודות",
       contact: "צור קשר"
     },
     hero: {
       rotator: {
-        phrases: ["ידידותי למשתמש", "פרטיות מלאה", "ללא דמי מנוי"]
+        phrases: ["קל לשימוש", "פרטיות מלאה", "ללא מנוי"]
       },
-      subtitle: "מערכת גישה חכמה לשערים ללא דמי מנוי וללא תשלום חודשי",
+      subtitle: "גישה חכמה לשערים ללא דמי מנוי, ללא תשלום חודשי ועם שליטה מלאה.",
       cta: {
         contact: "צור קשר",
         about: "אודות"
@@ -109,59 +109,59 @@ var translations = {
       }
     },
     features: {
-      title: "יכולות",
-      subtitle: "אלה הם חלק מהיכולות שאנו מציעים ללקוחות שלנו כחלק מהמוצר שאנו פיתחנו",
+      title: "היכולות שלנו",
+      subtitle: "אלו רק חלק מהיכולות שאנו מציעים ללקוחותינו כחלק מהמוצר שפיתחנו.",
       items: {
         noSubscription: {
           title: "ללא דמי מנוי",
-          text: "משלמים פעם אחת על המכשיר וההתקנה. בלי תשלום חודשי, בלי חידושים ובלי עלויות נסתרות, עכשיו ולתמיד"
+          text: "תשלום חד-פעמי עבור המכשיר וההתקנה. ללא תשלום חודשי, ללא חידושים וללא עלויות נסתרות, עכשיו ולתמיד."
         },
         security: {
           title: "ארכיטקטורת אבטחה מתקדמת",
-          text: "הונדס להגנה מחמירה באמצעות Secure Boot (RSA-3072), אחסון מוצפן (AES-128/256-XTS), סביבת הרצה מאובטחת (TEE), הצפנת HMAC והגנה מפני מתקפות Replay."
+          text: "המערכת תוכננה להגנה חסרת פשרות עם Secure Boot (RSA-3072), אחסון פלאש מוצפן (AES-128/256-XTS), סביבת הרצה מאובטחת, הצפנת HMAC והגנה מפני מתקפות Replay."
         },
         noInternet: {
           title: "ללא חשיפה לאינטרנט",
-          text: "המידע שלכם נשאר אצלך ללא חשיפה לענן, שרתים חיצוניים או לאינטרנט."
+          text: "המידע שלכם נשאר אצלכם. מאגרי המשתמשים נשמרים על גבי ההתקן, מוצפנים במלואם ומבודדים מהאינטרנט."
         },
         guestAccess: {
-          title: "קישור אורח",
-          text: "מכניסים אורחים בלי הפרעות. שולחים קישור גישה זמני מהאפליקציה והאורחים פותחים את השער בעצמם בלי טלפונים ובלי בקשות לפתוח שער"
+          title: "גישה לאורחים",
+          text: "הכניסו אורחים בלי הפרעות. שתפו מהאפליקציה קישור גישה זמני, כך שהמבקרים יוכלו לפתוח את השער בעצמם, בלי טלפונים ובלי בקשות לפתיחה."
         },
         smartAccess: {
-          title: "בקרת גישה חכמה",
-          text: "פותחים את השער בדרך שנוחה לכם דרך האפליקציה או עם שלט ויכולים לצפות בהיסטוריית כניסה ברורה, כך שתמיד יודעים מי נכנס ומתי, בלי שום מאמץ."
+          title: "גישה חכמה",
+          text: "פתיחה מאובטחת של השער דרך אפליקציית iOS/Android או באמצעות שלט RF. מנהלים יכולים לצפות בהיסטוריית הכניסות ולקבל תמונה ברורה של פעילות השער."
         },
         userManagement: {
           title: "ניהול משתמשים פשוט",
-          text: "ניהול קל של משתמשים והרשאות דרך האפליקציה בלחיצת כפתור או באמצעות ייבוא\\ייצוא קובץ CSV, יכולת תמיכה עד 4000 משתמשים ו100 מנהלים לכל שער"
+          text: "ניהול קל של משתמשים והרשאות דרך האפליקציה בלחיצת כפתור או באמצעות ייבוא/ייצוא של קובץ CSV, עם תמיכה בעד 4,000 משתמשים ו-100 מנהלים לכל שער."
         }
       }
     },
     action: {
-      title: "ראו אותנו בפעולה"
+      title: "ראו את המערכת בפעולה"
     },
     about: {
-      title: "עלינו",
-      text1: "WIFIGATE נוצרה במטרה לפתח פתרון בקרת גישה מאובטח, איכותי ונגיש לכל אחד.",
-      text2: "אנחנו מפתחים את רכיבי החומרה והתוכנה באופן עצמאי, כך שהם משלימים זה את זה ליצירת חוויית שימוש חלקה, תוך שמירה על רמת האבטחה הגבוהה ביותר."
+      title: "אודותינו",
+      text1: "WIFIGATE הוקמה במטרה לפתח פתרון מאובטח ונגיש למערכות בקרת גישה.",
+      text2: "אנו מפתחים את רכיבי החומרה והתוכנה בבית, כך שהם משתלבים זה בזה בצורה מושלמת ומספקים חוויית שימוש חלקה תוך שמירה על רמת האבטחה הגבוהה ביותר."
     },
     contact: {
-      title: "יצירת קשר",
-      subtitle: "נשמח להדגים את יכולותינו ולייעץ לכם בנוגע למערכת שלנו.",
+      title: "צור קשר",
+      subtitle: "נשמח להציג את היכולות שלנו ולייעץ לכם לגבי המערכת.",
       name: "איתי נוה",
       whatsapp: "וואטסאפ",
       linkedin: "לינקדאין"
     },
     footer: {
       copyright: "WIFIGATE. כל הזכויות שמורות.",
-      tagline: "חכם. מאובטח. פרטי וללא דמי מנוי לעולם."
+      tagline: "חכם. מאובטח. פרטי. ללא מנוי. לתמיד."
     }
   },
   es: {
     nav: {
       home: "Inicio",
-      features: "Funciones",
+      features: "Características",
       about: "Acerca de",
       contact: "Contáctanos"
     },
@@ -169,7 +169,7 @@ var translations = {
       rotator: {
         phrases: ["Fácil de usar", "Privacidad total", "Sin suscripciones"]
       },
-      subtitle: "Acceso inteligente para portones sin suscripciones, sin pagos mensuales y con control total.",
+      subtitle: "Acceso inteligente al portón sin suscripciones, sin pagos mensuales y con control total.",
       cta: {
         contact: "Contáctanos",
         about: "Acerca de"
@@ -186,8 +186,8 @@ var translations = {
       }
     },
     features: {
-      title: "Nuestras funciones",
-      subtitle: "Estas son solo algunas de las capacidades que ofrecemos a nuestros clientes como parte del producto que desarrollamos",
+      title: "Características",
+      subtitle: "Estas son solo algunas de las capacidades que ofrecemos a nuestros clientes como parte del producto que desarrollamos.",
       items: {
         noSubscription: {
           title: "Sin cuotas de suscripción",
@@ -199,19 +199,19 @@ var translations = {
         },
         noInternet: {
           title: "Sin exposición a internet",
-          text: "Tus datos nunca salen de tus instalaciones. Las bases de datos de usuarios permanecen en el dispositivo, cifradas y aisladas de internet."
+          text: "Tus datos nunca salen de tus instalaciones. Las bases de datos de usuarios permanecen en el dispositivo, completamente cifradas y aisladas de internet."
         },
         guestAccess: {
           title: "Acceso temporal para invitados",
-          text: "Deja entrar a tus invitados sin interrupciones. Comparte un acceso temporal desde la app para que puedan abrir el portón por su cuenta, sin llamadas para pedirte que lo abras."
+          text: "Permite que los invitados entren sin interrupciones. Comparte un acceso temporal desde la app para que los visitantes puedan abrir el portón por su cuenta, sin llamadas para pedirte que lo abras."
         },
         smartAccess: {
           title: "Acceso inteligente",
-          text: "Accede al portón de forma segura desde la app de iOS/Android o con un control RF. Los administradores pueden revisar el historial de accesos para tener visibilidad clara de la actividad."
+          text: "Accede al portón de forma segura desde la app de iOS/Android o con un control RF. Los administradores pueden revisar el historial de accesos para tener una visión clara de la actividad."
         },
         userManagement: {
           title: "Gestión simple de usuarios",
-          text: "Administra fácilmente usuarios y permisos desde la app móvil o importando un archivo CSV. Admite hasta 4.000 usuarios por portón y hasta 100 administradores."
+          text: "Gestiona usuarios y permisos fácilmente desde la app móvil o importando y exportando archivos CSV. Admite hasta 4.000 usuarios por portón y hasta 100 administradores."
         }
       }
     },
@@ -220,8 +220,8 @@ var translations = {
     },
     about: {
       title: "Sobre nosotros",
-      text1: "WIFIGATE fue creada con el objetivo de desarrollar una solución accesible y segura para sistemas de control de acceso.",
-      text2: "Desarrollamos internamente tanto el hardware como el software para ofrecer una experiencia fluida mientras mantenemos el nivel más alto de seguridad."
+      text1: "WIFIGATE nació con el objetivo de desarrollar una solución accesible y segura para sistemas de control de acceso.",
+      text2: "Desarrollamos internamente tanto el hardware como el software para ofrecer una experiencia fluida mientras mantenemos el más alto nivel de seguridad."
     },
     contact: {
       title: "Contáctanos",
@@ -232,24 +232,24 @@ var translations = {
     },
     footer: {
       copyright: "WIFIGATE. Todos los derechos reservados.",
-      tagline: "Inteligente. Seguro. Privado y sin suscripciones, nunca."
+      tagline: "Inteligente. Seguro. Privado. Sin suscripciones. Para siempre."
     }
   },
   pt: {
     nav: {
       home: "Início",
       features: "Funcionalidades",
-      about: "Sobre",
+      about: "Sobre nós",
       contact: "Contacte-nos"
     },
     hero: {
       rotator: {
-        phrases: ["Fácil de usar", "Privacidade total", "Sem subscrições"]
+        phrases: ["Fácil de utilizar", "Privacidade total", "Sem subscrições"]
       },
       subtitle: "Acesso inteligente ao portão sem subscrições, sem mensalidades e com controlo total.",
       cta: {
         contact: "Contacte-nos",
-        about: "Sobre"
+        about: "Sobre nós"
       },
       systems: {
         barrier: { kicker: "Saída", label: "Barreira" },
@@ -264,7 +264,7 @@ var translations = {
     },
     features: {
       title: "As nossas funcionalidades",
-      subtitle: "Estas são apenas algumas das capacidades que oferecemos aos nossos clientes como parte do produto que desenvolvemos",
+      subtitle: "Estas são apenas algumas das capacidades que oferecemos aos nossos clientes como parte do produto que desenvolvemos.",
       items: {
         noSubscription: {
           title: "Sem taxas de subscrição",
@@ -272,7 +272,7 @@ var translations = {
         },
         security: {
           title: "Arquitetura de segurança avançada",
-          text: "Concebido para uma proteção rigorosa com Secure Boot (RSA-3072), armazenamento encriptado (AES-128/256-XTS), um Ambiente de Execução Fidedigno, encriptação HMAC e proteção contra ataques de repetição."
+          text: "Concebido para uma proteção rigorosa com Secure Boot (RSA-3072), armazenamento encriptado (AES-128/256-XTS), um ambiente de execução fidedigno, encriptação HMAC e proteção contra ataques de repetição."
         },
         noInternet: {
           title: "Sem exposição à internet",
@@ -284,11 +284,11 @@ var translations = {
         },
         smartAccess: {
           title: "Acesso inteligente",
-          text: "Acesso seguro ao portão através da aplicação iOS/Android ou de um comando RF. Os administradores podem consultar o histórico de entradas para ter visibilidade clara da atividade."
+          text: "Acesso seguro ao portão através da aplicação iOS/Android ou de um comando RF. Os administradores podem consultar o histórico de entradas para ter uma visão clara da atividade."
         },
         userManagement: {
           title: "Gestão simples de utilizadores",
-          text: "Gira utilizadores e permissões facilmente através da aplicação móvel ou importando um ficheiro CSV. Suporta até 4.000 utilizadores por portão e até 100 administradores."
+          text: "Gira utilizadores e permissões facilmente através da aplicação móvel ou importando e exportando ficheiros CSV. Suporta até 4.000 utilizadores por portão e até 100 administradores."
         }
       }
     },
@@ -309,7 +309,7 @@ var translations = {
     },
     footer: {
       copyright: "WIFIGATE. Todos os direitos reservados.",
-      tagline: "Inteligente. Seguro. Privado e sem subscrições, para sempre."
+      tagline: "Inteligente. Seguro. Privado. Sem subscrições. Para sempre."
     }
   },
   pl: {
@@ -341,7 +341,7 @@ var translations = {
     },
     features: {
       title: "Nasze funkcje",
-      subtitle: "To tylko część możliwości, które oferujemy naszym klientom w ramach opracowanego przez nas produktu",
+      subtitle: "To tylko część możliwości, które oferujemy naszym klientom w ramach opracowanego przez nas produktu.",
       items: {
         noSubscription: {
           title: "Bez opłat abonamentowych",
@@ -365,7 +365,7 @@ var translations = {
         },
         userManagement: {
           title: "Proste zarządzanie użytkownikami",
-          text: "Łatwo zarządzaj użytkownikami i uprawnieniami z poziomu aplikacji mobilnej lub importując plik CSV. Obsługa do 4 000 użytkowników na bramę i do 100 administratorów."
+          text: "Łatwo zarządzaj użytkownikami i uprawnieniami z poziomu aplikacji mobilnej lub importując i eksportując pliki CSV. Obsługuje do 4 000 użytkowników na bramę i do 100 administratorów."
         }
       }
     },
@@ -386,7 +386,7 @@ var translations = {
     },
     footer: {
       copyright: "WIFIGATE. Wszelkie prawa zastrzeżone.",
-      tagline: "Inteligentne. Bezpieczne. Prywatne i bez abonamentu, na zawsze."
+      tagline: "Inteligentne. Bezpieczne. Prywatne. Bez abonamentu. Na zawsze."
     }
   },
   ru: {
@@ -398,7 +398,7 @@ var translations = {
     },
     hero: {
       rotator: {
-        phrases: ["Просто и удобно", "Полная приватность", "Без подписок"]
+        phrases: ["Просто в использовании", "Полная приватность", "Без подписок"]
       },
       subtitle: "Умный доступ к воротам без подписок, ежемесячных платежей и с полным контролем.",
       cta: {
@@ -418,11 +418,11 @@ var translations = {
     },
     features: {
       title: "Наши возможности",
-      subtitle: "Это лишь часть возможностей, которые мы предлагаем нашим клиентам в составе разработанного нами продукта",
+      subtitle: "Это лишь часть возможностей, которые мы предлагаем нашим клиентам в составе разработанного нами продукта.",
       items: {
         noSubscription: {
           title: "Без абонентской платы",
-          text: "Оплата один раз за устройство и установку. Никаких ежемесячных планов, продлений или скрытых платежей, ни сейчас, ни потом."
+          text: "Оплата один раз за устройство и установку. Никаких ежемесячных тарифов, продлений или скрытых платежей, ни сейчас, ни в будущем."
         },
         security: {
           title: "Современная архитектура безопасности",
@@ -438,11 +438,11 @@ var translations = {
         },
         smartAccess: {
           title: "Умный доступ",
-          text: "Безопасный доступ к воротам через приложение iOS/Android или RF-пульт. Администраторы могут просматривать историю входов и видеть активность по воротам."
+          text: "Безопасный доступ к воротам через приложение iOS/Android или RF-пульт. Администраторы могут просматривать историю входов и получать полную картину активности."
         },
         userManagement: {
           title: "Простое управление пользователями",
-          text: "Управляйте пользователями и правами доступа через мобильное приложение или импорт CSV. Поддерживается до 4 000 пользователей на одни ворота и до 100 администраторов."
+          text: "Легко управляйте пользователями и правами доступа через мобильное приложение или с помощью импорта и экспорта CSV-файлов. Поддерживается до 4 000 пользователей на одни ворота и до 100 администраторов."
         }
       }
     },
@@ -463,7 +463,7 @@ var translations = {
     },
     footer: {
       copyright: "WIFIGATE. Все права защищены.",
-      tagline: "Умно. Безопасно. Конфиденциально и без подписок, навсегда."
+      tagline: "Умно. Безопасно. Конфиденциально. Без подписок. Навсегда."
     }
   },
   cs: {
@@ -495,7 +495,7 @@ var translations = {
     },
     features: {
       title: "Naše funkce",
-      subtitle: "Tohle je jen část možností, které našim zákazníkům nabízíme jako součást produktu, který jsme vyvinuli",
+      subtitle: "Tohle je jen část možností, které našim zákazníkům nabízíme jako součást produktu, který jsme vyvinuli.",
       items: {
         noSubscription: {
           title: "Bez poplatků za předplatné",
@@ -519,7 +519,7 @@ var translations = {
         },
         userManagement: {
           title: "Jednoduchá správa uživatelů",
-          text: "Uživatele a oprávnění snadno spravujete v mobilní aplikaci nebo importem CSV souboru. Podporuje až 4 000 uživatelů na bránu a až 100 správců."
+          text: "Uživatele a oprávnění snadno spravujete v mobilní aplikaci nebo pomocí importu a exportu CSV souborů. Podporuje až 4 000 uživatelů na bránu a až 100 správců."
         }
       }
     },
@@ -540,13 +540,13 @@ var translations = {
     },
     footer: {
       copyright: "WIFIGATE. Všechna práva vyhrazena.",
-      tagline: "Chytré. Bezpečné. Soukromé a bez předplatného, navždy."
+      tagline: "Chytré. Bezpečné. Soukromé. Bez předplatného. Navždy."
     }
   },
   ar: {
     nav: {
       home: "الرئيسية",
-      features: "المزايا",
+      features: "الميزات",
       about: "من نحن",
       contact: "تواصل معنا"
     },
@@ -554,7 +554,7 @@ var translations = {
       rotator: {
         phrases: ["سهل الاستخدام", "خصوصية كاملة", "من دون اشتراكات"]
       },
-      subtitle: "نظام ذكي للتحكم بالبوابات من دون اشتراكات أو رسوم شهرية ومع تحكم كامل.",
+      subtitle: "تحكم ذكي بالبوابة من دون اشتراكات أو رسوم شهرية ومع تحكم كامل.",
       cta: {
         contact: "تواصل معنا",
         about: "من نحن"
@@ -563,16 +563,16 @@ var translations = {
         barrier: { kicker: "مخرج", label: "بوابة حاجز" },
         shutter: { kicker: "مخرج", label: "مصراع دوار" },
         floodlight: { kicker: "مخرج", label: "كشاف" },
-        door: { kicker: "وصول", label: "باب" },
-        field: { kicker: "وصول", label: "ملعب رياضي" },
+        door: { kicker: "دخول", label: "باب" },
+        field: { kicker: "دخول", label: "ملعب رياضي" },
         maglock: { kicker: "قفل", label: "قفل مغناطيسي" },
-        power: { kicker: "دخل الطاقة" },
+        power: { kicker: "مدخل الطاقة" },
         input: { kicker: "إدخال" }
       }
     },
     features: {
-      title: "مزاياتنا",
-      subtitle: "هذه بعض القدرات التي نقدمها لعملائنا كجزء من المنتج الذي قمنا بتطويره",
+      title: "ميزاتنا",
+      subtitle: "هذه مجرد بعض الإمكانيات التي نقدمها لعملائنا ضمن المنتج الذي قمنا بتطويره.",
       items: {
         noSubscription: {
           title: "من دون رسوم اشتراك",
@@ -580,23 +580,23 @@ var translations = {
         },
         security: {
           title: "بنية أمنية متقدمة",
-          text: "مصمم لحماية صارمة مع Secure Boot ‏(RSA-3072)، وتخزين مشفر ‏(AES-128/256-XTS)، وبيئة تنفيذ موثوقة، وتشفير HMAC، وحماية من هجمات إعادة الإرسال."
+          text: "صُمم لحماية صارمة مع Secure Boot ‏(RSA-3072)، وتخزين مشفر ‏(AES-128/256-XTS)، وبيئة تنفيذ موثوقة، وتشفير HMAC، وحماية من هجمات إعادة الإرسال."
         },
         noInternet: {
           title: "من دون تعرض للإنترنت",
           text: "بياناتك لا تغادر موقعك أبدًا. تبقى قواعد بيانات المستخدمين داخل الجهاز، مشفرة بالكامل ومعزولة عن الإنترنت."
         },
         guestAccess: {
-          title: "وصول مؤقت للضيوف",
-          text: "اسمح للضيوف بالدخول من دون مقاطعات. شارك رابط وصول مؤقت من التطبيق ليتمكن الزوار من فتح البوابة بأنفسهم، من دون اتصالات لطلب الفتح."
+          title: "دخول مؤقت للضيوف",
+          text: "اسمح للضيوف بالدخول من دون مقاطعات. شارك رابط دخول مؤقت من التطبيق ليتمكن الزوار من فتح البوابة بأنفسهم، من دون اتصالات لطلب الفتح."
         },
         smartAccess: {
-          title: "وصول ذكي",
-          text: "وصول آمن إلى البوابة من تطبيق iOS/Android أو من خلال جهاز تحكم RF. ويمكن للمشرفين الاطلاع على سجل الدخول للحصول على رؤية واضحة لنشاط البوابة."
+          title: "دخول ذكي",
+          text: "وصول آمن إلى البوابة من تطبيق iOS/Android أو من خلال جهاز تحكم RF. ويمكن للمشرفين الاطلاع على سجل الدخول للحصول على رؤية واضحة للنشاط."
         },
         userManagement: {
           title: "إدارة مستخدمين بسيطة",
-          text: "أدر المستخدمين والصلاحيات بسهولة من خلال التطبيق أو عبر استيراد ملف CSV. يدعم حتى 4000 مستخدم لكل بوابة وحتى 100 مسؤول."
+          text: "إدارة سهلة للمستخدمين والصلاحيات من خلال التطبيق أو عبر استيراد ملفات CSV وتصديرها. يدعم حتى 4,000 مستخدم لكل بوابة وحتى 100 مسؤول."
         }
       }
     },
@@ -617,7 +617,7 @@ var translations = {
     },
     footer: {
       copyright: "WIFIGATE. جميع الحقوق محفوظة.",
-      tagline: "ذكي. آمن. خاص ومن دون اشتراكات، إلى الأبد."
+      tagline: "ذكي. آمن. خاص. من دون اشتراكات. إلى الأبد."
     }
   }
 };
