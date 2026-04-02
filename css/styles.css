@@ -386,6 +386,9 @@ ul {
   justify-content: center;
   width: 50px;
   flex-shrink: 0;
+  background-color: #f8fafc;
+  border-radius: 2px;
+  padding: 2px;
 }
 
 .language-selector__flag img {
@@ -393,6 +396,8 @@ ul {
   height: auto;
   display: block;
   border-radius: 2px;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .language-selector.is-open .language-selector__arrow {
