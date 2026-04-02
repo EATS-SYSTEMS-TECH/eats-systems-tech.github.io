@@ -72,6 +72,9 @@ var translations = {
     contact: {
       title: "Contact Us",
       subtitle: "We will be happy to demonstrate our capabilities and advise you about our system.",
+      ctaTitle: "Ready to learn more?",
+      ctaText: "Get in touch with us via WhatsApp for a demo or any questions about WIFIGATE.",
+      ctaButton: "Contact via WhatsApp",
       name: "Itay Nave",
       whatsapp: "WhatsApp"
     },
@@ -148,6 +151,9 @@ var translations = {
     contact: {
       title: "צור קשר",
       subtitle: "נשמח להציג את היכולות שלנו ולייעץ לכם לגבי המערכת.",
+      ctaTitle: "מוכנים ללמוד עוד?",
+      ctaText: "צרו קשר בוואטסאפ לקבלת הדגמה או שאלות לגבי WIFIGATE.",
+      ctaButton: "צור קשר בוואטסאפ",
       name: "איתי נוה",
       whatsapp: "וואטסאפ"
     },
@@ -224,6 +230,9 @@ var translations = {
     contact: {
       title: "Contáctanos",
       subtitle: "Estaremos encantados de mostrarte nuestras capacidades y asesorarte sobre nuestro sistema.",
+      ctaTitle: "¿Listo para saber más?",
+      ctaText: "Ponte en contacto con nosotros por WhatsApp para una demo o cualquier pregunta sobre WIFIGATE.",
+      ctaButton: "Contactar por WhatsApp",
       name: "Itay Nave",
       whatsapp: "WhatsApp"
     },
@@ -300,6 +309,9 @@ var translations = {
     contact: {
       title: "Contacte-nos",
       subtitle: "Teremos todo o gosto em demonstrar as nossas capacidades e aconselhá-lo sobre o nosso sistema.",
+      ctaTitle: "Pronto para saber mais?",
+      ctaText: "Contacte-nos via WhatsApp para uma demonstração ou qualquer dúvida sobre o WIFIGATE.",
+      ctaButton: "Contactar via WhatsApp",
       name: "Itay Nave",
       whatsapp: "WhatsApp"
     },
@@ -376,6 +388,9 @@ var translations = {
     contact: {
       title: "Skontaktuj się",
       subtitle: "Chętnie pokażemy możliwości naszego rozwiązania i doradzimy w sprawie naszego systemu.",
+      ctaTitle: "Gotowy, aby dowiedzieć się więcej?",
+      ctaText: "Skontaktuj się z nami przez WhatsApp, aby umówić demo lub zadać pytania o WIFIGATE.",
+      ctaButton: "Skontaktuj się przez WhatsApp",
       name: "Itay Nave",
       whatsapp: "WhatsApp"
     },
@@ -452,6 +467,9 @@ var translations = {
     contact: {
       title: "Связаться с нами",
       subtitle: "Мы с удовольствием покажем возможности системы и проконсультируем вас по нашему решению.",
+      ctaTitle: "Готовы узнать больше?",
+      ctaText: "Свяжитесь с нами через WhatsApp для демонстрации или вопросов о WIFIGATE.",
+      ctaButton: "Связаться через WhatsApp",
       name: "Itay Nave",
       whatsapp: "WhatsApp"
     },
@@ -528,6 +546,9 @@ var translations = {
     contact: {
       title: "Kontaktujte nás",
       subtitle: "Rádi vám předvedeme možnosti našeho řešení a poradíme vám s naším systémem.",
+      ctaTitle: "Připraveni se dozvědět víc?",
+      ctaText: "Kontaktujte nás přes WhatsApp pro ukázku nebo otázky o WIFIGATE.",
+      ctaButton: "Kontaktovat přes WhatsApp",
       name: "Itay Nave",
       whatsapp: "WhatsApp"
     },
@@ -604,6 +625,9 @@ var translations = {
     contact: {
       title: "تواصل معنا",
       subtitle: "يسعدنا أن نستعرض إمكانياتنا وأن نقدم لك المشورة حول نظامنا.",
+      ctaTitle: "هل أنت جاهز لمعرفة المزيد؟",
+      ctaText: "تواصل معنا عبر واتساب للحصول على عرض تجريبي أو لأي استفسارات حول WIFIGATE.",
+      ctaButton: "التواصل عبر واتساب",
       name: "إيتاي نافيه",
       whatsapp: "واتساب"
     },
