@@ -59,6 +59,47 @@ function setYear() {
   yearEl.textContent = new Date().getFullYear();
 }
 
+function setupTabNavigation() {
+  const tabButtons = $$(".tab-button, .tab-dot");
+  const tabPanes = $$(".tab-pane");
+
+  if (!tabButtons.length || !tabPanes.length) return;
+
+  tabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const targetTab = button.getAttribute("data-tab");
+
+      // Remove active class from all controls and panes
+      tabButtons.forEach((btn) => {
+        btn.classList.remove("tab-button--active");
+        btn.classList.remove("tab-dot--active");
+        if (btn.matches(".tab-dot")) {
+          btn.setAttribute("aria-selected", "false");
+        }
+      });
+      tabPanes.forEach((pane) => pane.classList.remove("tab-pane--active"));
+
+      // Add active marker to clicked control and corresponding pane
+      if (button.matches(".tab-dot")) {
+        button.classList.add("tab-dot--active");
+        button.setAttribute("aria-selected", "true");
+      } else {
+        button.classList.add("tab-button--active");
+      }
+
+      const targetPane = $("#" + targetTab + "-tab");
+      if (targetPane) {
+        targetPane.classList.add("tab-pane--active");
+      }
+
+      const title = $("#action-title");
+      if (title && targetTab) {
+        title.textContent = targetTab === "why" ? (i18n[window.currentLanguage || "en"].action.title || "Why WIFIGATE?") : (i18n[window.currentLanguage || "en"].action.title || "Where WIFIGATE?");
+      }
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   setupNav();
   setupScrollSpy();
@@ -68,6 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupHeroRotator();
   setupVideoAutoplay();
   setupLanguageSelector();
+  setupTabNavigation();
   setYear();
 
   const savedLang = localStorage.getItem("language") || "en";

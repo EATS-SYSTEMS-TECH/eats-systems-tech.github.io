@@ -64,6 +64,20 @@ var translations = {
     action: {
       title: "Why WIFIGATE?"
     },
+    tabs: {
+      why: "Why",
+      where: "Where"
+    },
+    applications: {
+      barrierGates: "Barrier Gates",
+      parkingLots: "Parking Lots",
+      residentialComplexes: "Residential Complexes",
+      officeBuildings: "Office Buildings",
+      industrialFacilities: "Industrial Facilities",
+      sportsFacilities: "Sports Facilities",
+      educationalInstitutions: "Educational Institutions",
+      retailSpaces: "Retail Spaces"
+    },
     about: {
       title: "About Us",
       text1: "WIFIGATE was founded to develop an affordable and secure solution for access-control systems.",
@@ -142,6 +156,20 @@ var translations = {
     },
     action: {
       title: "למה WIFIGATE?"
+    },
+    tabs: {
+      why: "למה",
+      where: "איפה"
+    },
+    applications: {
+      barrierGates: "מחסומי כניסה",
+      parkingLots: "חניונים",
+      residentialComplexes: "מתחמי מגורים",
+      officeBuildings: "בנייני משרדים",
+      industrialFacilities: "מתקנים תעשייתיים",
+      sportsFacilities: "מתקני ספורט",
+      educationalInstitutions: "מוסדות חינוך",
+      retailSpaces: "שטחי מסחר"
     },
     about: {
       title: "אודותינו",
@@ -222,6 +250,20 @@ var translations = {
     action: {
       title: "¿Por qué WIFIGATE?"
     },
+    tabs: {
+      why: "Por qué",
+      where: "Dónde"
+    },
+    applications: {
+      barrierGates: "Barreras de Acceso",
+      parkingLots: "Estacionamientos",
+      residentialComplexes: "Complejos Residenciales",
+      officeBuildings: "Edificios de Oficinas",
+      industrialFacilities: "Instalaciones Industriales",
+      sportsFacilities: "Instalaciones Deportivas",
+      educationalInstitutions: "Instituciones Educativas",
+      retailSpaces: "Espacios Comerciales"
+    },
     about: {
       title: "Sobre nosotros",
       text1: "WIFIGATE nació con el objetivo de desarrollar una solución accesible y segura para sistemas de control de acceso.",
@@ -300,6 +342,20 @@ var translations = {
     },
     action: {
       title: "Por que WIFIGATE?"
+    },
+    tabs: {
+      why: "Por que",
+      where: "Onde"
+    },
+    applications: {
+      barrierGates: "Barreiras de Acesso",
+      parkingLots: "Estacionamentos",
+      residentialComplexes: "Complexos Residenciais",
+      officeBuildings: "Edifícios de Escritórios",
+      industrialFacilities: "Instalações Industriais",
+      sportsFacilities: "Instalações Esportivas",
+      educationalInstitutions: "Instituições Educativas",
+      retailSpaces: "Espaços Comerciais"
     },
     about: {
       title: "Sobre nós",
@@ -380,6 +436,20 @@ var translations = {
     action: {
       title: "Dlaczego WIFIGATE?"
     },
+    tabs: {
+      why: "Dlaczego",
+      where: "Gdzie"
+    },
+    applications: {
+      barrierGates: "Bramy Wjazdowe",
+      parkingLots: "Parkingi",
+      residentialComplexes: "Osiedla Mieszkaniowe",
+      officeBuildings: "Biurowce",
+      industrialFacilities: "Obiekty Przemysłowe",
+      sportsFacilities: "Obiekty Sportowe",
+      educationalInstitutions: "Instytucje Edukacyjne",
+      retailSpaces: "Przestrzenie Handlowe"
+    },
     about: {
       title: "O nas",
       text1: "WIFIGATE powstało z myślą o stworzeniu przystępnego cenowo i bezpiecznego rozwiązania dla systemów kontroli dostępu.",
@@ -458,6 +528,20 @@ var translations = {
     },
     action: {
       title: "Почему WIFIGATE?"
+    },
+    tabs: {
+      why: "Почему",
+      where: "Где"
+    },
+    applications: {
+      barrierGates: "Шлагбаумы",
+      parkingLots: "Парковки",
+      residentialComplexes: "Жилые Комплексы",
+      officeBuildings: "Офисные Здания",
+      industrialFacilities: "Промышленные Объекты",
+      sportsFacilities: "Спортивные Сооружения",
+      educationalInstitutions: "Образовательные Учреждения",
+      retailSpaces: "Торговые Площади"
     },
     about: {
       title: "О нас",
@@ -538,6 +622,20 @@ var translations = {
     action: {
       title: "Proč WIFIGATE?"
     },
+    tabs: {
+      why: "Proč",
+      where: "Kde"
+    },
+    applications: {
+      barrierGates: "Závory",
+      parkingLots: "Parkoviště",
+      residentialComplexes: "Rezidenční Komplexy",
+      officeBuildings: "Kancelářské Budovy",
+      industrialFacilities: "Průmyslové Závody",
+      sportsFacilities: "Sportovní Zařízení",
+      educationalInstitutions: "Vzdělávací Instituce",
+      retailSpaces: "Obchodní Prostory"
+    },
     about: {
       title: "O nás",
       text1: "WIFIGATE vznikla s cílem vyvinout dostupné a bezpečné řešení pro systémy řízení přístupu.",
@@ -616,6 +714,20 @@ var translations = {
     },
     action: {
       title: "لماذا WIFIGATE؟"
+    },
+    tabs: {
+      why: "لماذا",
+      where: "أين"
+    },
+    applications: {
+      barrierGates: "حواجز الدخول",
+      parkingLots: "مواقف السيارات",
+      residentialComplexes: "المجمعات السكنية",
+      officeBuildings: "المباني المكتبية",
+      industrialFacilities: "المنشآت الصناعية",
+      sportsFacilities: "المنشآت الرياضية",
+      educationalInstitutions: "المؤسسات التعليمية",
+      retailSpaces: "الأماكن التجارية"
     },
     about: {
       title: "من نحن",
