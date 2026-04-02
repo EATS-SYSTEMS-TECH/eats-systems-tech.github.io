@@ -14,29 +14,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Day+One&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=20251225d" />
-  <script src="js/main.js?v=20251225d" defer></script>
+  <link rel="stylesheet" href="css/styles.css?v=20260402a" />
+  <script src="js/utils.js?v=20260402b" defer></script>
+  <script src="js/translations.js?v=20260402b" defer></script>
+  <script src="js/navigation.js?v=20260402b" defer></script>
+  <script src="js/hero.js?v=20260402b" defer></script>
+  <script src="js/i18n.js?v=20260402b" defer></script>
+  <script src="js/main.js?v=20260402b" defer></script>
 
-  <!-- Hero: Day One + white text (scoped) -->
   <style>
-    .hero .hero__text,
-    .hero .hero__text * {
-      font-family: "Day One", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      color: #fff;
-    }
-
-    /* Ensure buttons text stays white even if .btn overrides it */
-    .hero .btn,
-    .hero .btn:visited {
-      color: #fff;
-    }
-
-    /* Keep About button text black */
-    .hero .btn--ghost,
-    .hero .btn--ghost:visited {
-      color: #000;
-    }
-
     /* Contact avatar styling */
     .contact-info__avatar {
       width: 50px;
@@ -165,6 +151,7 @@
   <main>
     <!-- ================= HERO ================= -->
     <section class="hero" id="home" aria-labelledby="hero-title" aria-describedby="hero-subtitle">
+      <img src="assets/img/wifigate_homepage.webp" alt="" class="hero__bg" fetchpriority="high" decoding="async">
       <div class="hero__overlay"></div>
 
       <div class="hero__content container js-reveal">
@@ -187,119 +174,6 @@
           </div>
 
           <!-- hero bullets removed per request -->
-        </div>
-
-        <div class="hero__visual" aria-label="WIFIGATE controller connected to supported access systems">
-          <div class="hero-system hero-system--barrier">
-            <span class="hero-system__line"></span>
-            <div class="hero-system__dot" aria-hidden="true"></div>
-            <div class="hero-system__card">
-              <div class="hero-system__media hero-system__media--barrier" aria-hidden="true"></div>
-              <div class="hero-system__copy">
-                <span class="hero-system__kicker" data-i18n="hero.systems.barrier.kicker">Output</span>
-                <strong data-i18n="hero.systems.barrier.label">Barrier Gate</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-system hero-system--shutter">
-            <span class="hero-system__line"></span>
-            <div class="hero-system__dot" aria-hidden="true"></div>
-            <div class="hero-system__card">
-              <div class="hero-system__media hero-system__media--shutter" aria-hidden="true"></div>
-              <div class="hero-system__copy">
-                <span class="hero-system__kicker" data-i18n="hero.systems.shutter.kicker">Output</span>
-                <strong data-i18n="hero.systems.shutter.label">Roller Shutter</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-system hero-system--floodlight">
-            <span class="hero-system__line"></span>
-            <div class="hero-system__dot" aria-hidden="true"></div>
-            <div class="hero-system__card">
-              <div class="hero-system__media hero-system__media--floodlight" aria-hidden="true"></div>
-              <div class="hero-system__copy">
-                <span class="hero-system__kicker" data-i18n="hero.systems.floodlight.kicker">Output</span>
-                <strong data-i18n="hero.systems.floodlight.label">Floodlight</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-system hero-system--door">
-            <span class="hero-system__line"></span>
-            <div class="hero-system__dot" aria-hidden="true"></div>
-            <div class="hero-system__card">
-              <div class="hero-system__media hero-system__media--door" aria-hidden="true"></div>
-              <div class="hero-system__copy">
-                <span class="hero-system__kicker" data-i18n="hero.systems.door.kicker">Access</span>
-                <strong data-i18n="hero.systems.door.label">Door</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-system hero-system--field">
-            <span class="hero-system__line"></span>
-            <div class="hero-system__dot" aria-hidden="true"></div>
-            <div class="hero-system__card">
-              <div class="hero-system__media hero-system__media--field" aria-hidden="true"></div>
-              <div class="hero-system__copy">
-                <span class="hero-system__kicker" data-i18n="hero.systems.field.kicker">Access</span>
-                <strong data-i18n="hero.systems.field.label">Sports Field</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-system hero-system--maglock">
-            <span class="hero-system__line"></span>
-            <div class="hero-system__dot" aria-hidden="true"></div>
-            <div class="hero-system__card">
-              <div class="hero-system__media hero-system__media--maglock" aria-hidden="true"></div>
-              <div class="hero-system__copy">
-                <span class="hero-system__kicker" data-i18n="hero.systems.maglock.kicker">Lock</span>
-                <strong data-i18n="hero.systems.maglock.label">Magnetic Lock</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-system hero-system--power">
-            <span class="hero-system__line"></span>
-            <div class="hero-system__dot" aria-hidden="true"></div>
-            <div class="hero-system__card">
-              <div class="hero-system__media hero-system__media--power" aria-hidden="true"></div>
-              <div class="hero-system__copy">
-                <span class="hero-system__kicker" data-i18n="hero.systems.power.kicker">Power In</span>
-                <strong>USB-C 5V / 3A</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-system hero-system--input">
-            <span class="hero-system__line"></span>
-            <div class="hero-system__dot" aria-hidden="true"></div>
-            <div class="hero-system__card">
-              <div class="hero-system__media hero-system__media--input" aria-hidden="true"></div>
-              <div class="hero-system__copy">
-                <span class="hero-system__kicker" data-i18n="hero.systems.input.kicker">Input</span>
-                <strong>9-36V DC</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-device" aria-hidden="true">
-            <div class="hero-device__glow"></div>
-            <div class="hero-device__body">
-              <span class="hero-device__screw hero-device__screw--tl"></span>
-              <span class="hero-device__screw hero-device__screw--tr"></span>
-              <span class="hero-device__screw hero-device__screw--bl"></span>
-              <span class="hero-device__screw hero-device__screw--br"></span>
-              <div class="hero-device__face">
-                <img src="assets/img/logo.png" alt="" class="hero-device__logo" />
-              </div>
-            </div>
-            <div class="hero-device__side"></div>
-            <div class="hero-device__top"></div>
-          </div>
         </div>
       </div>
     </section>
