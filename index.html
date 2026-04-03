@@ -79,11 +79,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Day+One&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="css/styles.css?v=20260402a" />
+  <link rel="stylesheet" href="css/accessibility.css?v=20260403a" />
   <script src="js/utils.js?v=20260402a" defer></script>
   <script src="js/translations.js?v=20260402a" defer></script>
   <script src="js/navigation.js?v=20260402a" defer></script>
   <script src="js/hero.js?v=20260402a" defer></script>
   <script src="js/i18n.js?v=20260402a" defer></script>
+  <script src="js/accessibility.js?v=20260403a" defer></script>
   <script src="js/main.js?v=20260402a" defer></script>
 
   <style>
@@ -122,6 +124,7 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header" id="top">
     <nav class="nav" aria-label="Main navigation">
       <a href="#home" class="nav__logo-link nav__brand">
@@ -207,7 +210,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main-content">
     <section class="hero" id="home" aria-labelledby="hero-title" aria-describedby="hero-subtitle">
       <img src="assets/img/wifigate_homepage.webp" alt="" class="hero__bg" fetchpriority="high" />
       <div class="hero__overlay"></div>
@@ -456,6 +459,88 @@
       </p>
     </div>
   </footer>
+
+  <button class="a11y-fab" id="a11y-fab" type="button" aria-controls="a11y-panel" aria-expanded="false"
+    aria-label="Open accessibility center">
+    <span class="a11y-fab__pulse" aria-hidden="true"></span>
+    <span class="a11y-fab__icon-wrap">
+      <img src="assets/icons/wifigate_accessibility_icon.webp" alt="" class="a11y-fab__icon" width="34" height="34"
+        decoding="async" />
+    </span>
+  </button>
+
+  <div class="a11y-backdrop" id="a11y-backdrop" aria-hidden="true"></div>
+
+  <aside class="a11y-panel" id="a11y-panel" aria-hidden="true" aria-labelledby="a11y-title" tabindex="-1">
+    <div class="a11y-panel__header">
+      <p class="a11y-panel__eyebrow" id="a11y-eyebrow">Accessibility</p>
+      <button class="a11y-panel__close" id="a11y-close" type="button" aria-label="Close accessibility center">
+        <span aria-hidden="true">&#10005;</span>
+      </button>
+    </div>
+
+    <h2 class="a11y-panel__title" id="a11y-title">Accessibility Center</h2>
+    <p class="a11y-panel__description" id="a11y-description">
+      Adjust the site to suit your reading and navigation preferences.
+    </p>
+
+    <div class="a11y-panel__status-row">
+      <span class="a11y-panel__status" id="a11y-status" aria-live="polite">Standard site view</span>
+      <button class="a11y-panel__reset" id="a11y-reset" type="button">Reset</button>
+    </div>
+
+    <div class="a11y-options">
+      <button class="a11y-option" type="button" data-a11y-setting="largeText" aria-pressed="false">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title">Larger text</span>
+          <span class="a11y-option__description">Increase font size across the site.</span>
+        </span>
+        <span class="a11y-option__switch" aria-hidden="true"></span>
+      </button>
+
+      <button class="a11y-option" type="button" data-a11y-setting="highContrast" aria-pressed="false">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title">High contrast</span>
+          <span class="a11y-option__description">Strengthen contrast for text and interface.</span>
+        </span>
+        <span class="a11y-option__switch" aria-hidden="true"></span>
+      </button>
+
+      <button class="a11y-option" type="button" data-a11y-setting="underlineLinks" aria-pressed="false">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title">Underline links</span>
+          <span class="a11y-option__description">Make links easier to identify.</span>
+        </span>
+        <span class="a11y-option__switch" aria-hidden="true"></span>
+      </button>
+
+      <button class="a11y-option" type="button" data-a11y-setting="readableFont" aria-pressed="false">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title">Readable font</span>
+          <span class="a11y-option__description">Switch to a cleaner, more legible font.</span>
+        </span>
+        <span class="a11y-option__switch" aria-hidden="true"></span>
+      </button>
+
+      <button class="a11y-option" type="button" data-a11y-setting="reducedMotion" aria-pressed="false">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title">Reduced motion</span>
+          <span class="a11y-option__description">Minimize animations and motion effects.</span>
+        </span>
+        <span class="a11y-option__switch" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <section class="a11y-support" aria-labelledby="a11y-support-title">
+      <h3 class="a11y-support__title" id="a11y-support-title">Built into this site</h3>
+      <ul class="a11y-support__list">
+        <li class="a11y-support__item">Keyboard-friendly navigation</li>
+        <li class="a11y-support__item">Clear focus indicators</li>
+        <li class="a11y-support__item">Multi-language and RTL support</li>
+        <li class="a11y-support__item">Responsive layout for mobile and desktop</li>
+      </ul>
+    </section>
+  </aside>
 </body>
 
 </html>

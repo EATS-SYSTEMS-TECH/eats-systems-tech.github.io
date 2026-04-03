@@ -87,11 +87,12 @@ function changeLanguage(lang) {
     return;
   }
 
-  currentLang = lang;
-  localStorage.setItem("language", lang);
+  currentLang = resolvedLang;
+  window.currentLanguage = resolvedLang;
+  localStorage.setItem("language", resolvedLang);
   document.documentElement.setAttribute("lang", resolvedLang);
 
-  if (RTL_LANGS.has(lang)) {
+  if (RTL_LANGS.has(resolvedLang)) {
     document.documentElement.setAttribute("dir", "rtl");
     document.body.classList.add("rtl");
   } else {
@@ -101,6 +102,13 @@ function changeLanguage(lang) {
 
   updateTranslations();
   updateHeroRotatorPhrase();
+  document.dispatchEvent(
+    new CustomEvent("site-language-change", {
+      detail: {
+        lang: resolvedLang,
+      },
+    })
+  );
 }
 
 function updateTranslations() {

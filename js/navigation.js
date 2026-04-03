@@ -55,10 +55,12 @@ function setupScrollSpy() {
 function centerScrollToElement(el, smooth = true) {
   if (!el) return;
 
+  const shouldSmoothScroll = smooth && !(typeof isReducedMotionRequested === "function" && isReducedMotionRequested());
+
   if (el.id === "features") {
     try {
       if ("scrollBehavior" in document.documentElement.style) {
-        el.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start", inline: "nearest" });
+        el.scrollIntoView({ behavior: shouldSmoothScroll ? "smooth" : "auto", block: "start", inline: "nearest" });
         return;
       }
     } catch (error) {
@@ -68,7 +70,7 @@ function centerScrollToElement(el, smooth = true) {
     const rect = el.getBoundingClientRect();
     const elTop = rect.top + window.scrollY;
     try {
-      window.scrollTo({ top: elTop, behavior: smooth ? "smooth" : "auto" });
+      window.scrollTo({ top: elTop, behavior: shouldSmoothScroll ? "smooth" : "auto" });
     } catch (error) {
       window.scrollTo(0, elTop);
     }
@@ -77,7 +79,7 @@ function centerScrollToElement(el, smooth = true) {
 
   try {
     if ("scrollBehavior" in document.documentElement.style) {
-      el.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "center", inline: "nearest" });
+      el.scrollIntoView({ behavior: shouldSmoothScroll ? "smooth" : "auto", block: "center", inline: "nearest" });
       return;
     }
   } catch (error) {
@@ -88,7 +90,7 @@ function centerScrollToElement(el, smooth = true) {
   const elTop = rect.top + window.scrollY;
   const targetScroll = Math.round(elTop - window.innerHeight / 2 + rect.height / 2);
   try {
-    window.scrollTo({ top: targetScroll, behavior: smooth ? "smooth" : "auto" });
+    window.scrollTo({ top: targetScroll, behavior: shouldSmoothScroll ? "smooth" : "auto" });
   } catch (error) {
     window.scrollTo(0, targetScroll);
   }
