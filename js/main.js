@@ -5,6 +5,11 @@ function setupRevealOnScroll() {
   const revealEls = $$(".js-reveal");
   if (!revealEls.length) return;
 
+  if (typeof isReducedMotionRequested === "function" && isReducedMotionRequested()) {
+    revealEls.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+
   const observer = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
@@ -20,6 +25,12 @@ function setupRevealOnScroll() {
   );
 
   revealEls.forEach((el) => observer.observe(el));
+
+  document.addEventListener("site-accessibility-change", () => {
+    if (typeof isReducedMotionRequested === "function" && isReducedMotionRequested()) {
+      revealEls.forEach((el) => el.classList.add("is-visible"));
+    }
+  });
 }
 
 function setupContactForm() {
@@ -92,15 +103,27 @@ function setupTabNavigation() {
         targetPane.classList.add("tab-pane--active");
       }
 
-      const title = $("#action-title");
-      if (title && targetTab) {
-        title.textContent = targetTab === "why" ? (i18n[window.currentLanguage || "en"].action.title || "Why WIFIGATE?") : (i18n[window.currentLanguage || "en"].action.title || "Where WIFIGATE?");
-      }
     });
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  const savedLang = localStorage.getItem("language") || "en";
+
+  if (savedLang !== "en") {
+    changeLanguage(savedLang);
+  } else {
+    currentLang = "en";
+    window.currentLanguage = "en";
+    document.documentElement.setAttribute("lang", "en");
+    document.documentElement.setAttribute("dir", "ltr");
+    document.body.classList.remove("rtl");
+  }
+
+  if (typeof setupAccessibilityWidget === "function") {
+    setupAccessibilityWidget();
+  }
+
   setupNav();
   setupScrollSpy();
   setupRevealOnScroll();
@@ -111,9 +134,4 @@ document.addEventListener("DOMContentLoaded", () => {
   setupLanguageSelector();
   setupTabNavigation();
   setYear();
-
-  const savedLang = localStorage.getItem("language") || "en";
-  if (savedLang !== "en") {
-    changeLanguage(savedLang);
-  }
 });
