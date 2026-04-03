@@ -86,15 +86,17 @@ var translations = {
     contact: {
       title: "Contact Us",
       subtitle: "We will be happy to demonstrate our capabilities and advise you about our system.",
-      ctaTitle: "Ready to learn more?",
-      ctaText: "Get in touch with us via WhatsApp for a demo or any questions about WIFIGATE.",
+      ctaTitle: "Interested in WIFIGATE?",
+      ctaText: "Send us a WhatsApp message for pricing, full system details, and a fit assessment for your needs.",
       ctaButton: "Contact via WhatsApp",
+      terms: "Terms & Conditions",
       name: "Itay Nave",
       whatsapp: "WhatsApp"
     },
     footer: {
       copyright: "WIFIGATE. All rights reserved.",
-      tagline: "Smart. Secure. Private. No subscriptions. Ever."
+      tagline: "Smart. Secure. Private. No subscriptions. Ever.",
+      terms: "Terms & Conditions"
     }
   },
   he: {
@@ -179,15 +181,17 @@ var translations = {
     contact: {
       title: "צור קשר",
       subtitle: "נשמח להציג את היכולות שלנו ולייעץ לכם לגבי המערכת.",
-      ctaTitle: "מוכנים ללמוד עוד?",
-      ctaText: "צרו קשר בוואטסאפ לקבלת הדגמה או שאלות לגבי WIFIGATE.",
+      ctaTitle: "מעוניינים ב-WIFIGATE?",
+      ctaText: "שלחו הודעה בוואטסאפ לקבלת הצעת מחיר, מידע מלא על המערכת ובדיקת התאמה לצרכים שלכם.",
       ctaButton: "צור קשר בוואטסאפ",
+      terms: "תנאים והגבלות",
       name: "איתי נוה",
       whatsapp: "וואטסאפ"
     },
     footer: {
       copyright: "WIFIGATE. כל הזכויות שמורות.",
-      tagline: "חכם. מאובטח. פרטי. ללא מנוי. לתמיד."
+      tagline: "חכם. מאובטח. פרטי. ללא מנוי. לתמיד.",
+      terms: "תנאים והגבלות"
     }
   },
   es: {
