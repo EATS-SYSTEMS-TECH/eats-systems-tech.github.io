@@ -32,8 +32,8 @@ var translations = {
       }
     },
     features: {
-      title: "Our Features",
-      subtitle: "These are just some of the capabilities we offer our customers as part of the product we developed.",
+      title: "Our Capabilities",
+      subtitle: "These are some of the capabilities that make WIFIGATE an advanced, secure, and easy-to-manage access-control solution.",
       items: {
         noSubscription: {
           title: "No Subscription Fees",
@@ -48,8 +48,8 @@ var translations = {
           text: "Your data never leaves your premises. User databases stay on the device, fully encrypted and isolated from the internet."
         },
         guestAccess: {
-          title: "Guest Access Pass",
-          text: "Let guests in without the interruptions. Share a temporary access pass from the app so visitors can open the gate on their own, with no calls asking you to let them in."
+          title: "Inviting Users and Temporary Guests",
+          text: "Inviting users and temporary guests has never been easier. With one click, without complicated systems and without unnecessary steps."
         },
         smartAccess: {
           title: "Smart Access",
@@ -128,7 +128,7 @@ var translations = {
     },
     features: {
       title: "היכולות שלנו",
-      subtitle: "אלו רק חלק מהיכולות שאנו מציעים ללקוחותינו כחלק מהמוצר שפיתחנו.",
+      subtitle: "אלו חלק מהיכולות שהופכות את WIFIGATE לפתרון מתקדם, מאובטח ונוח לניהול בקרת גישה.",
       items: {
         noSubscription: {
           title: "ללא דמי מנוי",
@@ -143,8 +143,8 @@ var translations = {
           text: "המידע שלכם נשאר אצלכם. מאגרי המשתמשים נשמרים על גבי ההתקן, מוצפנים במלואם ומבודדים מהאינטרנט."
         },
         guestAccess: {
-          title: "גישה לאורחים",
-          text: "הכניסו אורחים בלי הפרעות. שתפו מהאפליקציה קישור גישה זמני, כך שהמבקרים יוכלו לפתוח את השער בעצמם, בלי טלפונים ובלי בקשות לפתיחה."
+          title: "הזמנת משתמשים ואורחים זמניים",
+          text: "הזמנת משתמשים ואורחים זמניים מעולם לא הייתה פשוטה יותר. בלחיצת כפתור אחת, בלי מערכות מסובכות ובלי תהליכים מיותרים."
         },
         smartAccess: {
           title: "גישה חכמה",
@@ -222,8 +222,8 @@ var translations = {
       }
     },
     features: {
-      title: "Características",
-      subtitle: "Estas son solo algunas de las capacidades que ofrecemos a nuestros clientes como parte del producto que desarrollamos.",
+      title: "Nuestras capacidades",
+      subtitle: "Estas son algunas de las capacidades que convierten a WIFIGATE en una solución avanzada, segura y fácil de gestionar para el control de acceso.",
       items: {
         noSubscription: {
           title: "Sin cuotas de suscripción",
@@ -238,8 +238,8 @@ var translations = {
           text: "Tus datos nunca salen de tus instalaciones. Las bases de datos de usuarios permanecen en el dispositivo, completamente cifradas y aisladas de internet."
         },
         guestAccess: {
-          title: "Acceso temporal para invitados",
-          text: "Permite que los invitados entren sin interrupciones. Comparte un acceso temporal desde la app para que los visitantes puedan abrir el portón por su cuenta, sin llamadas para pedirte que lo abras."
+          title: "Invitación de usuarios e invitados temporales",
+          text: "Invitar a usuarios e invitados temporales nunca ha sido tan fácil. Con un solo clic, sin sistemas complicados y sin pasos innecesarios."
         },
         smartAccess: {
           title: "Acceso inteligente",
@@ -315,8 +315,8 @@ var translations = {
       }
     },
     features: {
-      title: "As nossas funcionalidades",
-      subtitle: "Estas são apenas algumas das capacidades que oferecemos aos nossos clientes como parte do produto que desenvolvemos.",
+      title: "As nossas capacidades",
+      subtitle: "Estas são algumas das capacidades que fazem da WIFIGATE uma solução avançada, segura e fácil de gerir para o controlo de acessos.",
       items: {
         noSubscription: {
           title: "Sem taxas de subscrição",
@@ -331,8 +331,8 @@ var translations = {
           text: "Os seus dados nunca saem das suas instalações. As bases de dados de utilizadores permanecem no dispositivo, totalmente encriptadas e isoladas da internet."
         },
         guestAccess: {
-          title: "Acesso temporário para convidados",
-          text: "Deixe os convidados entrar sem interrupções. Partilhe um acesso temporário na aplicação para que os visitantes possam abrir o portão sozinhos, sem chamadas a pedir que o abra."
+          title: "Convite de utilizadores e convidados temporários",
+          text: "Convidar utilizadores e convidados temporários nunca foi tão simples. Com um único clique, sem sistemas complicados e sem passos desnecessários."
         },
         smartAccess: {
           title: "Acesso inteligente",
@@ -408,8 +408,8 @@ var translations = {
       }
     },
     features: {
-      title: "Nasze funkcje",
-      subtitle: "To tylko część możliwości, które oferujemy naszym klientom w ramach opracowanego przez nas produktu.",
+      title: "Nasze możliwości",
+      subtitle: "To niektóre z możliwości, które sprawiają, że WIFIGATE jest zaawansowanym, bezpiecznym i łatwym w zarządzaniu rozwiązaniem do kontroli dostępu.",
       items: {
         noSubscription: {
           title: "Bez opłat abonamentowych",
@@ -424,8 +424,8 @@ var translations = {
           text: "Twoje dane nigdy nie opuszczają obiektu. Bazy danych użytkowników pozostają na urządzeniu, są w pełni szyfrowane i odizolowane od internetu."
         },
         guestAccess: {
-          title: "Tymczasowy dostęp dla gości",
-          text: "Wpuszczaj gości bez zbędnych przerw. Udostępnij tymczasowy dostęp w aplikacji, aby odwiedzający mogli samodzielnie otworzyć bramę, bez telefonów z prośbą o wpuszczenie."
+          title: "Zapraszanie użytkowników i gości tymczasowych",
+          text: "Zapraszanie użytkowników i gości tymczasowych nigdy nie było prostsze. Jednym kliknięciem, bez skomplikowanych systemów i bez zbędnych kroków."
         },
         smartAccess: {
           title: "Inteligentny dostęp",
@@ -502,7 +502,7 @@ var translations = {
     },
     features: {
       title: "Наши возможности",
-      subtitle: "Это лишь часть возможностей, которые мы предлагаем нашим клиентам в составе разработанного нами продукта.",
+      subtitle: "Это часть возможностей, которые делают WIFIGATE передовым, безопасным и удобным в управлении решением для контроля доступа.",
       items: {
         noSubscription: {
           title: "Без абонентской платы",
@@ -517,8 +517,8 @@ var translations = {
           text: "Ваши данные никогда не покидают объект. Базы данных пользователей хранятся на устройстве, полностью зашифрованы и изолированы от интернета."
         },
         guestAccess: {
-          title: "Временный доступ для гостей",
-          text: "Пускайте гостей без лишних отвлечений. Поделитесь временным доступом в приложении, чтобы посетители могли открыть ворота сами, без звонков с просьбой открыть."
+          title: "Приглашение пользователей и временных гостей",
+          text: "Приглашать пользователей и временных гостей еще никогда не было так просто. В один клик, без сложных систем и без лишних шагов."
         },
         smartAccess: {
           title: "Умный доступ",
@@ -594,8 +594,8 @@ var translations = {
       }
     },
     features: {
-      title: "Naše funkce",
-      subtitle: "Tohle je jen část možností, které našim zákazníkům nabízíme jako součást produktu, který jsme vyvinuli.",
+      title: "Naše možnosti",
+      subtitle: "Toto jsou některé z možností, díky nimž je WIFIGATE pokročilým, bezpečným a snadno spravovatelným řešením pro kontrolu přístupu.",
       items: {
         noSubscription: {
           title: "Bez poplatků za předplatné",
@@ -610,8 +610,8 @@ var translations = {
           text: "Vaše data nikdy neopustí váš objekt. Databáze uživatelů zůstávají v zařízení, plně šifrované a izolované od internetu."
         },
         guestAccess: {
-          title: "Dočasný přístup pro hosty",
-          text: "Pusťte hosty dovnitř bez vyrušování. Sdílejte z aplikace dočasný přístup, aby si návštěvníci mohli bránu otevřít sami, bez telefonátů s prosbou o otevření."
+          title: "Pozvání uživatelů a dočasných hostů",
+          text: "Pozvat uživatele a dočasné hosty nikdy nebylo jednodušší. Jedním kliknutím, bez složitých systémů a bez zbytečných kroků."
         },
         smartAccess: {
           title: "Chytrý přístup",
@@ -687,8 +687,8 @@ var translations = {
       }
     },
     features: {
-      title: "ميزاتنا",
-      subtitle: "هذه مجرد بعض الإمكانيات التي نقدمها لعملائنا ضمن المنتج الذي قمنا بتطويره.",
+      title: "قدراتنا",
+      subtitle: "هذه بعض القدرات التي تجعل WIFIGATE حلاً متقدماً وآمناً وسهل الإدارة للتحكم في الوصول.",
       items: {
         noSubscription: {
           title: "من دون رسوم اشتراك",
@@ -703,8 +703,8 @@ var translations = {
           text: "بياناتك لا تغادر موقعك أبدًا. تبقى قواعد بيانات المستخدمين داخل الجهاز، مشفرة بالكامل ومعزولة عن الإنترنت."
         },
         guestAccess: {
-          title: "دخول مؤقت للضيوف",
-          text: "اسمح للضيوف بالدخول من دون مقاطعات. شارك رابط دخول مؤقت من التطبيق ليتمكن الزوار من فتح البوابة بأنفسهم، من دون اتصالات لطلب الفتح."
+          title: "دعوة المستخدمين والضيوف المؤقتين",
+          text: "لم يكن دعوة المستخدمين والضيوف المؤقتين أسهل من أي وقت مضى. بضغطة زر واحدة، من دون أنظمة معقدة ومن دون خطوات غير ضرورية."
         },
         smartAccess: {
           title: "دخول ذكي",
