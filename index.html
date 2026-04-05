@@ -78,11 +78,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Day+One&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=20260403b" />
+  <link rel="stylesheet" href="css/styles.css?v=20260405a" />
   <link rel="stylesheet" href="css/accessibility.css?v=20260403a" />
   <script src="js/utils.js?v=20260402a" defer></script>
-  <script src="js/translations.js?v=20260403b" defer></script>
-  <script src="js/navigation.js?v=20260403b" defer></script>
+  <script src="js/translations.js?v=20260405a" defer></script>
+  <script src="js/navigation.js?v=20260405a" defer></script>
   <script src="js/hero.js?v=20260403b" defer></script>
   <script src="js/i18n.js?v=20260403b" defer></script>
   <script src="js/accessibility.js?v=20260403a" defer></script>
@@ -141,8 +141,9 @@
       <div class="nav__links-wrapper" id="primary-navigation">
         <nav class="topbar-nav">
           <a href="#home" class="nav-link nav__link" data-i18n="nav.home">Home</a>
-          <a href="#features" class="nav-link nav__link" data-i18n="nav.features">Features</a>
-          <a href="#about" class="nav-link nav__link" data-i18n="nav.about">About</a>
+          <a href="#advantages" class="nav-link nav__link" data-i18n="nav.features">Features</a>
+          <a href="#where" class="nav-link nav__link" data-i18n="tabs.where">Where</a>
+          <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about">Tutorials</a>
           <a href="#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact">Contact Us</a>
         </nav>
       </div>
@@ -229,15 +230,15 @@
             <a href="#contact" class="btn btn--primary hero__btn-primary" data-i18n="hero.cta.contact">
               Contact Us
             </a>
-            <a href="#about" class="btn btn--ghost hero__btn-secondary" data-i18n="hero.cta.about">
-              About
+            <a href="#tutorials" class="btn btn--ghost hero__btn-secondary" data-i18n="hero.cta.about">
+              Tutorials
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="features" aria-labelledby="features-title">
+    <section class="section" id="advantages" aria-labelledby="features-title">
       <div class="container">
         <header class="section__header js-reveal">
           <h2 class="section__title" id="features-title" data-i18n="features.title">
@@ -329,7 +330,7 @@
       </div>
     </section>
 
-    <section class="section section--alt" id="see-it-in-action" aria-labelledby="action-title">
+    <section class="section section--alt" id="where" aria-labelledby="action-title">
       <div class="container">
         <header class="section__header js-reveal">
           <h2 class="section__title" id="action-title" data-i18n="action.title">
@@ -366,18 +367,81 @@
       </div>
     </section>
 
-    <section class="section" id="about" aria-labelledby="about-title">
-      <div class="container about-layout">
-        <div class="about-layout__col about-layout__icon js-reveal" aria-hidden="true"></div>
-        <div class="about-layout__col js-reveal">
-          <h2 class="section__title" id="about-title" data-i18n="about.title">About Us</h2>
-          <p class="about__text" data-i18n="about.text1">
-            WIFIGATE was founded to develop an affordable and secure solution for access-control systems.
+    <section class="section" id="tutorials" aria-labelledby="tutorials-title" aria-describedby="tutorials-description">
+      <div class="container">
+        <header class="section__header js-reveal">
+          <h2 class="section__title" id="tutorials-title" data-i18n="tutorials.title">Tutorial Videos</h2>
+          <p class="section__subtitle" id="tutorials-description" data-i18n="tutorials.subtitle">
+            We will add direct YouTube links here soon. For now, these are example tutorial topics we plan to publish.
           </p>
-          <p class="about__text" data-i18n="about.text2">
-            We develop both the hardware and software in-house so they work together seamlessly while maintaining the
-            highest level of security.
-          </p>
+        </header>
+
+        <div class="tutorials-grid js-reveal">
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.initialUse">Getting Started</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status">Coming soon</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.scanQrCode">Scanning a QR Code</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status">Coming soon</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteGuest">Inviting a Guest</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status">Coming soon</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteUser">Inviting a User</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status">Coming soon</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteAdmin">Inviting an Admin</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status">Coming soon</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.openGate">Opening the Gate</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status">Coming soon</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.learnRfRemote">Learning an RF Remote</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status">Coming soon</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.exportCsv">Exporting CSV</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status">Coming soon</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.importCsv">Importing CSV</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status">Coming soon</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.changePulseLength">Changing Pulse Length</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status">Coming soon</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.electricShutterMode">Electric Shutter Mode</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status">Coming soon</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.barrierGateMode">Barrier Gate Mode</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status">Coming soon</p>
+          </article>
+          <article class="tutorial-card tutorial-card--more">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.andMore">And more...</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status">Coming soon</p>
+          </article>
         </div>
       </div>
     </section>
@@ -416,7 +480,7 @@
               Contact via WhatsApp
             </a>
             <p class="contact-cta__legal">
-              <a href="terms-and-conditions.html" class="contact-cta__legal-link" data-i18n="contact.terms">
+              <a href="terms-and-conditions/" class="contact-cta__legal-link" data-i18n="contact.terms">
                 Terms &amp; Conditions
               </a>
             </p>
@@ -432,7 +496,7 @@
         &copy; <span id="js-year"></span> <span data-i18n="footer.copyright">WIFIGATE. All rights reserved.</span>
       </p>
       <div class="site-footer__links">
-        <a href="terms-and-conditions.html" class="site-footer__link" data-i18n="footer.terms">Terms &amp; Conditions</a>
+        <a href="terms-and-conditions/" class="site-footer__link" data-i18n="footer.terms">Terms &amp; Conditions</a>
       </div>
       <p class="site-footer__tagline" data-i18n="footer.tagline">
         Smart. Secure. Private. No subscriptions. Ever.

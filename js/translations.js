@@ -8,7 +8,7 @@ var translations = {
     nav: {
       home: "Home",
       features: "Advantages",
-      about: "About",
+      about: "Tutorials",
       contact: "Contact Us"
     },
     hero: {
@@ -18,7 +18,7 @@ var translations = {
       subtitle: "A smart access-control system that is secure, simple, and free of monthly fees.",
       cta: {
         contact: "Contact Us",
-        about: "About"
+        about: "Tutorials"
       },
       systems: {
         barrier: { kicker: "Output", label: "Barrier Gate" },
@@ -84,6 +84,26 @@ var translations = {
       vacationRentals: "Vacation Rentals and Airbnb",
       andMore: "And More"
     },
+    tutorials: {
+      title: "Tutorial Videos",
+      subtitle: "We will add direct YouTube links here soon. For now, these are example tutorial topics we plan to publish.",
+      status: "Coming soon",
+      items: {
+        initialUse: "Getting Started",
+        scanQrCode: "Scanning a QR Code",
+        inviteGuest: "Inviting a Guest",
+        inviteUser: "Inviting a User",
+        inviteAdmin: "Inviting an Admin",
+        openGate: "Opening the Gate",
+        learnRfRemote: "Learning an RF Remote",
+        exportCsv: "Exporting CSV",
+        importCsv: "Importing CSV",
+        changePulseLength: "Changing Pulse Length",
+        electricShutterMode: "Electric Shutter Mode",
+        barrierGateMode: "Barrier Gate Mode",
+        andMore: "And More..."
+      }
+    },
     about: {
       title: "About Us",
       text1: "WIFIGATE was founded to provide a secure, convenient, and accessible access-control solution.",
@@ -109,7 +129,7 @@ var translations = {
     nav: {
       home: "בית",
       features: "יתרונות",
-      about: "אודות",
+      about: "הדרכות",
       contact: "צור קשר"
     },
     hero: {
@@ -119,7 +139,7 @@ var translations = {
       subtitle: "מערכת חכמה לבקרת גישה, מאובטחת, פשוטה וללא עלויות חודשיות.",
       cta: {
         contact: "צור קשר",
-        about: "אודות"
+        about: "סרטוני הדרכה"
       },
       systems: {
         barrier: { kicker: "יציאה", label: "שער מחסום" },
@@ -185,6 +205,26 @@ var translations = {
       vacationRentals: "דירות נופש ו-Airbnb",
       andMore: "ועוד"
     },
+    tutorials: {
+      title: "סרטוני הדרכה",
+      subtitle: "בקרוב נוסיף כאן קישורים ישירים לסרטוני הדרכה ביוטיוב. בינתיים אלו כמה נושאי הדרכה שנכין עבורכם.",
+      status: "בקרוב",
+      items: {
+        initialUse: "שימוש ראשוני",
+        scanQrCode: "סריקת QR CODE",
+        inviteGuest: "הזמנת אורח",
+        inviteUser: "הזמנת יוזר",
+        inviteAdmin: "הזמנת אדמין",
+        openGate: "פתיחת שער",
+        learnRfRemote: "למידה שלט RF",
+        exportCsv: "ייצוא CSV",
+        importCsv: "ייבוא CSV",
+        changePulseLength: "שינוי אורך פולס",
+        electricShutterMode: "מצב תריס חשמלי",
+        barrierGateMode: "מצב שער זרוע",
+        andMore: "ועוד..."
+      }
+    },
     about: {
       title: "אודותינו",
       text1: "WIFIGATE הוקמה כדי לספק פתרון מאובטח, נוח ונגיש לבקרת גישה.",
@@ -210,7 +250,7 @@ var translations = {
     nav: {
       home: "Inicio",
       features: "Ventajas",
-      about: "Acerca de",
+      about: "Tutoriales",
       contact: "Contáctanos"
     },
     hero: {
@@ -220,7 +260,7 @@ var translations = {
       subtitle: "Un sistema inteligente de control de acceso, seguro, simple y sin costos mensuales.",
       cta: {
         contact: "Contáctanos",
-        about: "Acerca de"
+        about: "Tutoriales"
       },
       systems: {
         barrier: { kicker: "Salida", label: "Barrera" },
@@ -286,6 +326,26 @@ var translations = {
       vacationRentals: "Alojamientos vacacionales y Airbnb",
       andMore: "Y más"
     },
+    tutorials: {
+      title: "Videos tutoriales",
+      subtitle: "Pronto añadiremos aquí enlaces directos a YouTube. Por ahora, estos son algunos temas de tutorial que planeamos publicar.",
+      status: "Próximamente",
+      items: {
+        initialUse: "Uso inicial",
+        scanQrCode: "Escaneo de código QR",
+        inviteGuest: "Invitar a un invitado",
+        inviteUser: "Invitar a un usuario",
+        inviteAdmin: "Invitar a un administrador",
+        openGate: "Apertura del portón",
+        learnRfRemote: "Aprendizaje del control RF",
+        exportCsv: "Exportación de CSV",
+        importCsv: "Importación de CSV",
+        changePulseLength: "Cambiar la duración del pulso",
+        electricShutterMode: "Modo persiana eléctrica",
+        barrierGateMode: "Modo barrera de brazo",
+        andMore: "Y más..."
+      }
+    },
     about: {
       title: "Sobre nosotros",
       text1: "WIFIGATE se creó para ofrecer una solución segura, cómoda y accesible para el control de acceso.",
@@ -309,7 +369,7 @@ var translations = {
     nav: {
       home: "Início",
       features: "Vantagens",
-      about: "Sobre nós",
+      about: "Tutoriais",
       contact: "Contacte-nos"
     },
     hero: {
@@ -319,7 +379,7 @@ var translations = {
       subtitle: "Um sistema inteligente de controlo de acessos, seguro, simples e sem custos mensais.",
       cta: {
         contact: "Contacte-nos",
-        about: "Sobre nós"
+        about: "Tutoriais"
       },
       systems: {
         barrier: { kicker: "Saída", label: "Barreira" },
@@ -385,6 +445,26 @@ var translations = {
       vacationRentals: "Alojamentos de férias e Airbnb",
       andMore: "E muito mais"
     },
+    tutorials: {
+      title: "Vídeos de tutorial",
+      subtitle: "Em breve vamos adicionar aqui links diretos para vídeos de tutorial no YouTube. Por agora, estes são alguns dos temas que planeamos publicar.",
+      status: "Em breve",
+      items: {
+        initialUse: "Utilização inicial",
+        scanQrCode: "Leitura de código QR",
+        inviteGuest: "Convidar um convidado",
+        inviteUser: "Convidar um utilizador",
+        inviteAdmin: "Convidar um administrador",
+        openGate: "Abrir o portão",
+        learnRfRemote: "Aprendizagem de comando RF",
+        exportCsv: "Exportar CSV",
+        importCsv: "Importar CSV",
+        changePulseLength: "Alterar a duração do pulso",
+        electricShutterMode: "Modo porta de enrolar elétrica",
+        barrierGateMode: "Modo barreira de braço",
+        andMore: "E muito mais..."
+      }
+    },
     about: {
       title: "Sobre nós",
       text1: "A WIFIGATE foi criada para oferecer uma solução segura, prática e acessível para o controlo de acessos.",
@@ -408,7 +488,7 @@ var translations = {
     nav: {
       home: "Strona główna",
       features: "Zalety",
-      about: "O nas",
+      about: "Poradniki",
       contact: "Skontaktuj się"
     },
     hero: {
@@ -418,7 +498,7 @@ var translations = {
       subtitle: "Inteligentny system kontroli dostępu, bezpieczny, prosty i bez miesięcznych opłat.",
       cta: {
         contact: "Skontaktuj się",
-        about: "O nas"
+        about: "Poradniki"
       },
       systems: {
         barrier: { kicker: "Wyjście", label: "Szlaban" },
@@ -484,6 +564,26 @@ var translations = {
       vacationRentals: "Apartamenty wakacyjne i Airbnb",
       andMore: "I wiele więcej"
     },
+    tutorials: {
+      title: "Filmy instruktażowe",
+      subtitle: "Wkrótce dodamy tutaj bezpośrednie linki do filmów instruktażowych na YouTube. Na razie są to przykładowe tematy, które planujemy opublikować.",
+      status: "Wkrótce",
+      items: {
+        initialUse: "Pierwsze użycie",
+        scanQrCode: "Skanowanie kodu QR",
+        inviteGuest: "Zapraszanie gościa",
+        inviteUser: "Zapraszanie użytkownika",
+        inviteAdmin: "Zapraszanie administratora",
+        openGate: "Otwieranie bramy",
+        learnRfRemote: "Programowanie pilota RF",
+        exportCsv: "Eksport CSV",
+        importCsv: "Import CSV",
+        changePulseLength: "Zmiana długości impulsu",
+        electricShutterMode: "Tryb rolety elektrycznej",
+        barrierGateMode: "Tryb szlabanu",
+        andMore: "I więcej..."
+      }
+    },
     about: {
       title: "O nas",
       text1: "WIFIGATE powstało, aby zapewnić bezpieczne, wygodne i dostępne rozwiązanie do kontroli dostępu.",
@@ -507,7 +607,7 @@ var translations = {
     nav: {
       home: "Главная",
       features: "Преимущества",
-      about: "О нас",
+      about: "Инструкции",
       contact: "Связаться с нами"
     },
     hero: {
@@ -517,7 +617,7 @@ var translations = {
       subtitle: "Умная система контроля доступа: безопасная, простая и без ежемесячных платежей.",
       cta: {
         contact: "Связаться с нами",
-        about: "О нас"
+        about: "Видеоуроки"
       },
       systems: {
         barrier: { kicker: "Выход", label: "Шлагбаум" },
@@ -583,6 +683,26 @@ var translations = {
       vacationRentals: "Апартаменты для отдыха и Airbnb",
       andMore: "И многое другое"
     },
+    tutorials: {
+      title: "Обучающие видео",
+      subtitle: "Скоро мы добавим сюда прямые ссылки на обучающие видео в YouTube. Пока это примерные темы, которые мы планируем опубликовать.",
+      status: "Скоро",
+      items: {
+        initialUse: "Первичное использование",
+        scanQrCode: "Сканирование QR-кода",
+        inviteGuest: "Приглашение гостя",
+        inviteUser: "Приглашение пользователя",
+        inviteAdmin: "Приглашение администратора",
+        openGate: "Открытие ворот",
+        learnRfRemote: "Обучение RF-пульта",
+        exportCsv: "Экспорт CSV",
+        importCsv: "Импорт CSV",
+        changePulseLength: "Изменение длины импульса",
+        electricShutterMode: "Режим рольставни",
+        barrierGateMode: "Режим шлагбаума",
+        andMore: "И многое другое..."
+      }
+    },
     about: {
       title: "О нас",
       text1: "WIFIGATE была создана, чтобы предложить безопасное, удобное и доступное решение для контроля доступа.",
@@ -606,7 +726,7 @@ var translations = {
     nav: {
       home: "Domů",
       features: "Výhody",
-      about: "O nás",
+      about: "Návody",
       contact: "Kontaktujte nás"
     },
     hero: {
@@ -616,7 +736,7 @@ var translations = {
       subtitle: "Chytrý systém řízení přístupu, bezpečný, jednoduchý a bez měsíčních poplatků.",
       cta: {
         contact: "Kontaktujte nás",
-        about: "O nás"
+        about: "Videonávody"
       },
       systems: {
         barrier: { kicker: "Výstup", label: "Závora" },
@@ -682,6 +802,26 @@ var translations = {
       vacationRentals: "Rekreační ubytování a Airbnb",
       andMore: "A další"
     },
+    tutorials: {
+      title: "Videonávody",
+      subtitle: "Brzy sem přidáme přímé odkazy na videonávody na YouTube. Zatím jsou to ukázková témata, která plánujeme publikovat.",
+      status: "Již brzy",
+      items: {
+        initialUse: "První použití",
+        scanQrCode: "Skenování QR kódu",
+        inviteGuest: "Pozvání hosta",
+        inviteUser: "Pozvání uživatele",
+        inviteAdmin: "Pozvání správce",
+        openGate: "Otevření brány",
+        learnRfRemote: "Naučení RF ovladače",
+        exportCsv: "Export CSV",
+        importCsv: "Import CSV",
+        changePulseLength: "Změna délky pulsu",
+        electricShutterMode: "Režim elektrické rolety",
+        barrierGateMode: "Režim závory",
+        andMore: "A další..."
+      }
+    },
     about: {
       title: "O nás",
       text1: "WIFIGATE vznikla proto, aby nabídla bezpečné, pohodlné a dostupné řešení pro kontrolu přístupu.",
@@ -705,7 +845,7 @@ var translations = {
     nav: {
       home: "الرئيسية",
       features: "المزايا",
-      about: "من نحن",
+      about: "الشروحات",
       contact: "تواصل معنا"
     },
     hero: {
@@ -715,7 +855,7 @@ var translations = {
       subtitle: "نظام ذكي للتحكم في الوصول، آمن وبسيط ومن دون تكاليف شهرية.",
       cta: {
         contact: "تواصل معنا",
-        about: "من نحن"
+        about: "فيديوهات إرشادية"
       },
       systems: {
         barrier: { kicker: "مخرج", label: "بوابة حاجز" },
@@ -780,6 +920,26 @@ var translations = {
       hotels: "الفنادق",
       vacationRentals: "بيوت العطلات وAirbnb",
       andMore: "والمزيد"
+    },
+    tutorials: {
+      title: "فيديوهات إرشادية",
+      subtitle: "سنضيف هنا قريبًا روابط مباشرة إلى فيديوهات الشرح على يوتيوب. وحتى ذلك الحين، هذه بعض الموضوعات الإرشادية التي نخطط لنشرها.",
+      status: "قريبًا",
+      items: {
+        initialUse: "الاستخدام الأولي",
+        scanQrCode: "مسح رمز QR",
+        inviteGuest: "دعوة ضيف",
+        inviteUser: "دعوة مستخدم",
+        inviteAdmin: "دعوة مسؤول",
+        openGate: "فتح البوابة",
+        learnRfRemote: "تعليم جهاز تحكم RF",
+        exportCsv: "تصدير CSV",
+        importCsv: "استيراد CSV",
+        changePulseLength: "تغيير طول النبضة",
+        electricShutterMode: "وضع المصراع الكهربائي",
+        barrierGateMode: "وضع حاجز الذراع",
+        andMore: "والمزيد..."
+      }
     },
     about: {
       title: "من نحن",
