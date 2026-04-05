@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,6 +9,15 @@
     content="Terms and Conditions for the WIFIGATE website, including website use, intellectual property, product information, quotations, and contact terms." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://wifigate.io/terms-and-conditions/" />
+
+  <link rel="alternate" hreflang="en" href="https://wifigate.io/terms-and-conditions/" />
+  <link rel="alternate" hreflang="he" href="https://wifigate.io/terms-and-conditions/" />
+  <link rel="alternate" hreflang="es" href="https://wifigate.io/terms-and-conditions/" />
+  <link rel="alternate" hreflang="pt" href="https://wifigate.io/terms-and-conditions/" />
+  <link rel="alternate" hreflang="pl" href="https://wifigate.io/terms-and-conditions/" />
+  <link rel="alternate" hreflang="ru" href="https://wifigate.io/terms-and-conditions/" />
+  <link rel="alternate" hreflang="cs" href="https://wifigate.io/terms-and-conditions/" />
+  <link rel="alternate" hreflang="ar" href="https://wifigate.io/terms-and-conditions/" />
 
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -23,85 +32,153 @@
 
   <link rel="stylesheet" href="../css/styles.css?v=20260405a" />
   <link rel="stylesheet" href="../css/accessibility.css?v=20260403a" />
-  <link rel="stylesheet" href="../css/legal.css?v=20260403a" />
+  <link rel="stylesheet" href="../css/legal.css?v=20260405b" />
+  <script src="../js/utils.js?v=20260402a" defer></script>
+  <script src="../js/translations.js?v=20260405a" defer></script>
+  <script src="../js/legal-translations.js?v=20260405a" defer></script>
+  <script src="../js/navigation.js?v=20260405a" defer></script>
+  <script src="../js/hero.js?v=20260403b" defer></script>
+  <script src="../js/i18n.js?v=20260403b" defer></script>
   <script src="../js/accessibility.js?v=20260403a" defer></script>
+  <script src="../js/legal-page.js?v=20260405a" defer></script>
 </head>
 
 <body class="legal-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <header class="legal-header">
-    <div class="container legal-header__inner">
-      <a href="../index.html" class="legal-header__brand" aria-label="Back to WIFIGATE home page">
-        <img src="../assets/img/logo.png" alt="WIFIGATE logo" class="legal-header__logo" />
-        <span>WIFIGATE</span>
+  <header class="site-header" id="top">
+    <nav class="nav legal-nav" aria-label="Terms page header">
+      <a href="../index.html#home" class="nav__logo-link nav__brand" aria-label="Back to WIFIGATE home page">
+        <img src="../assets/img/logo.png" alt="WIFIGATE logo" class="nav__logo" />
       </a>
 
-      <div class="legal-header__actions">
-        <a href="https://wa.me/972526996332" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
-          Contact on WhatsApp
-        </a>
-        <a href="../index.html#contact" class="btn btn--ghost">Back to site</a>
+      <div class="language-selector">
+        <div class="language-selector__button" id="language-button" aria-label="Select language" role="button"
+          tabindex="0">
+          <span class="language-selector__flag" id="selected-flag">
+            <img src="../assets/img/flags/flag-us.png" alt="US" width="50" height="26" />
+          </span>
+          <span class="language-selector__selected">English</span>
+          <span class="language-selector__arrow">&#9662;</span>
+        </div>
+        <div class="language-selector__dropdown" id="language-dropdown">
+          <div class="language-selector__option" data-lang="en">
+            <span class="language-selector__flag">
+              <img src="../assets/img/flags/flag-us.png" alt="US" width="50" height="26" />
+            </span>
+            <span>English</span>
+          </div>
+          <div class="language-selector__option" data-lang="es">
+            <span class="language-selector__flag">
+              <img src="../assets/img/flags/flag-es.svg" alt="ES" width="50" height="33" />
+            </span>
+            <span>EspaÃ±ol</span>
+          </div>
+          <div class="language-selector__option" data-lang="he">
+            <span class="language-selector__flag">
+              <img src="../assets/img/flags/flag-il.svg" alt="IL" width="50" height="36" />
+            </span>
+            <span>×¢×‘×¨×™×ª</span>
+          </div>
+          <div class="language-selector__option" data-lang="pt">
+            <span class="language-selector__flag">
+              <img src="../assets/img/flags/flag-pt.svg" alt="PT" width="50" height="33" />
+            </span>
+            <span>PortuguÃªs</span>
+          </div>
+          <div class="language-selector__option" data-lang="pl">
+            <span class="language-selector__flag">
+              <img src="../assets/img/flags/flag-pl.svg" alt="PL" width="50" height="31" />
+            </span>
+            <span>Polski</span>
+          </div>
+          <div class="language-selector__option" data-lang="ru">
+            <span class="language-selector__flag">
+              <img src="../assets/img/flags/flag-ru.svg" alt="RU" width="50" height="33" />
+            </span>
+            <span>Ð ÑƒÑÑÐºÐ¸Ð¹</span>
+          </div>
+          <div class="language-selector__option" data-lang="cs">
+            <span class="language-selector__flag">
+              <img src="../assets/img/flags/flag-cz.svg" alt="CZ" width="50" height="33" />
+            </span>
+            <span>ÄŒeÅ¡tina</span>
+          </div>
+          <div class="language-selector__option" data-lang="ar">
+            <span class="language-selector__flag">
+              <img src="../assets/img/flags/flag-ae.svg" alt="AE" width="50" height="25" />
+            </span>
+            <span>Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</span>
+          </div>
+        </div>
       </div>
-    </div>
+    </nav>
   </header>
 
   <main class="legal-main" id="main-content">
     <div class="container">
       <section class="legal-hero" aria-labelledby="terms-title">
-        <p class="legal-eyebrow">Legal</p>
-        <h1 class="legal-title" id="terms-title">Terms &amp; Conditions</h1>
-        <p class="legal-subtitle">
+        <p class="legal-eyebrow" data-i18n="legal.hero.eyebrow">Legal</p>
+        <h1 class="legal-title" id="terms-title" data-i18n="legal.hero.title">Terms &amp; Conditions</h1>
+        <p class="legal-subtitle" data-i18n="legal.hero.subtitle">
           These Terms &amp; Conditions govern the use of the WIFIGATE website and the submission of inquiries regarding
           WIFIGATE products, services, quotations, demonstrations, and installation assessments.
         </p>
         <div class="legal-meta" aria-label="Terms metadata">
-          <span class="legal-meta__item">Last updated: April 3, 2026</span>
-          <span class="legal-meta__item">Website owner: EATS SYSTEMS TECH</span>
+          <span class="legal-meta__item" data-i18n="legal.hero.updated">Last updated: April 3, 2026</span>
+          <span class="legal-meta__item" data-i18n="legal.hero.owner">Website owner: EATS SYSTEMS TECH</span>
         </div>
       </section>
 
       <article class="legal-card">
         <section class="legal-section" aria-labelledby="acceptance-title">
-          <h2 class="legal-section__title" id="acceptance-title">1. Acceptance of Terms</h2>
-          <p>
+          <h2 class="legal-section__title" id="acceptance-title" data-i18n="legal.sections.acceptance.title">1.
+            Acceptance of Terms</h2>
+          <p data-i18n="legal.sections.acceptance.body">
             By accessing or using this website, you agree to be bound by these Terms &amp; Conditions and by any
             applicable laws and regulations. If you do not agree, please do not use this website.
           </p>
         </section>
 
         <section class="legal-section" aria-labelledby="purpose-title">
-          <h2 class="legal-section__title" id="purpose-title">2. Informational Website Only</h2>
-          <p>
+          <h2 class="legal-section__title" id="purpose-title" data-i18n="legal.sections.purpose.title">2.
+            Informational Website Only</h2>
+          <p data-i18n="legal.sections.purpose.body1">
             This website is provided for general informational and marketing purposes. Content on this website does not
             constitute a binding offer, a final quotation, a technical commitment, or a guarantee of compatibility for
             any specific property, gate, barrier, door, or installation environment.
           </p>
-          <p>
+          <p data-i18n="legal.sections.purpose.body2">
             Any purchase, installation, deployment timeline, product scope, or commercial commitment shall become valid
             only if confirmed by WIFIGATE or EATS SYSTEMS TECH in writing.
           </p>
         </section>
 
         <section class="legal-section" aria-labelledby="use-title">
-          <h2 class="legal-section__title" id="use-title">3. Permitted Use</h2>
-          <p>You agree to use this website only for lawful purposes and in a way that does not:</p>
+          <h2 class="legal-section__title" id="use-title" data-i18n="legal.sections.use.title">3. Permitted Use</h2>
+          <p data-i18n="legal.sections.use.intro">You agree to use this website only for lawful purposes and in a way
+            that does not:</p>
           <ul class="legal-list">
-            <li>Interfere with the operation, security, or availability of the website.</li>
-            <li>Attempt to gain unauthorized access to any part of the website, systems, or data.</li>
-            <li>Copy, scrape, reproduce, or republish website content for commercial use without prior written permission.</li>
-            <li>Submit misleading, unlawful, abusive, or fraudulent inquiries.</li>
+            <li data-i18n="legal.sections.use.item1">Interfere with the operation, security, or availability of the
+              website.</li>
+            <li data-i18n="legal.sections.use.item2">Attempt to gain unauthorized access to any part of the website,
+              systems, or data.</li>
+            <li data-i18n="legal.sections.use.item3">Copy, scrape, reproduce, or republish website content for
+              commercial use without prior written permission.</li>
+            <li data-i18n="legal.sections.use.item4">Submit misleading, unlawful, abusive, or fraudulent inquiries.
+            </li>
           </ul>
         </section>
 
         <section class="legal-section" aria-labelledby="ip-title">
-          <h2 class="legal-section__title" id="ip-title">4. Intellectual Property</h2>
-          <p>
+          <h2 class="legal-section__title" id="ip-title" data-i18n="legal.sections.ip.title">4. Intellectual Property
+          </h2>
+          <p data-i18n="legal.sections.ip.body1">
             Unless otherwise stated, all content on this website, including text, branding, graphics, layout, logos,
             product descriptions, media, and design elements, is owned by or licensed to EATS SYSTEMS TECH and is
             protected by applicable intellectual property laws.
           </p>
-          <p>
+          <p data-i18n="legal.sections.ip.body2">
             You may view the website for personal or internal business evaluation purposes only. You may not reproduce,
             modify, distribute, transmit, publish, display, or create derivative works from website content without
             prior written consent.
@@ -109,12 +186,13 @@
         </section>
 
         <section class="legal-section" aria-labelledby="quotes-title">
-          <h2 class="legal-section__title" id="quotes-title">5. Product Information, Pricing, and Quotations</h2>
-          <p>
+          <h2 class="legal-section__title" id="quotes-title" data-i18n="legal.sections.quotes.title">5. Product
+            Information, Pricing, and Quotations</h2>
+          <p data-i18n="legal.sections.quotes.body1">
             Product descriptions, specifications, visuals, pricing references, and feature summaries appearing on the
             website are provided in good faith, but may change from time to time without prior notice.
           </p>
-          <p>
+          <p data-i18n="legal.sections.quotes.body2">
             Any quotation, price estimate, delivery commitment, system recommendation, or fit assessment provided
             through WhatsApp, email, phone, or another communication channel remains subject to review of the actual
             site conditions, technical requirements, scope of work, availability, and written confirmation.
@@ -122,47 +200,51 @@
         </section>
 
         <section class="legal-section" aria-labelledby="third-party-title">
-          <h2 class="legal-section__title" id="third-party-title">6. Third-Party Services and Links</h2>
-          <p>
+          <h2 class="legal-section__title" id="third-party-title" data-i18n="legal.sections.thirdParty.title">6.
+            Third-Party Services and Links</h2>
+          <p data-i18n="legal.sections.thirdParty.body">
             This website may contain links to third-party services or platforms, including WhatsApp. Your use of such
-            third-party services is subject to their own terms, privacy practices, and operational policies. WIFIGATE is
-            not responsible for the content, availability, or conduct of third-party services.
+            third-party services is subject to their own terms, privacy practices, and operational policies. WIFIGATE
+            is not responsible for the content, availability, or conduct of third-party services.
           </p>
         </section>
 
         <section class="legal-section" aria-labelledby="availability-title">
-          <h2 class="legal-section__title" id="availability-title">7. Availability and Accuracy</h2>
-          <p>
+          <h2 class="legal-section__title" id="availability-title" data-i18n="legal.sections.availability.title">7.
+            Availability and Accuracy</h2>
+          <p data-i18n="legal.sections.availability.body1">
             We make reasonable efforts to keep website information current and accurate, but we do not warrant that the
             website will always be error-free, uninterrupted, secure, or available at all times.
           </p>
-          <p>
+          <p data-i18n="legal.sections.availability.body2">
             We reserve the right to update, suspend, withdraw, or modify any part of the website or its content at any
             time, without liability.
           </p>
         </section>
 
         <section class="legal-section" aria-labelledby="liability-title">
-          <h2 class="legal-section__title" id="liability-title">8. Limitation of Liability</h2>
-          <p>
+          <h2 class="legal-section__title" id="liability-title" data-i18n="legal.sections.liability.title">8.
+            Limitation of Liability</h2>
+          <p data-i18n="legal.sections.liability.body1">
             To the fullest extent permitted by law, EATS SYSTEMS TECH and its representatives shall not be liable for
             any direct, indirect, incidental, consequential, special, or punitive damages arising out of or related to
             the use of, or inability to use, this website or reliance on website content.
           </p>
-          <p>
-            Nothing in these Terms &amp; Conditions excludes liability that cannot lawfully be excluded under applicable
-            law.
+          <p data-i18n="legal.sections.liability.body2">
+            Nothing in these Terms &amp; Conditions excludes liability that cannot lawfully be excluded under
+            applicable law.
           </p>
         </section>
 
         <section class="legal-section" aria-labelledby="privacy-title">
-          <h2 class="legal-section__title" id="privacy-title">9. Privacy and Submitted Information</h2>
-          <p>
+          <h2 class="legal-section__title" id="privacy-title" data-i18n="legal.sections.privacy.title">9. Privacy and
+            Submitted Information</h2>
+          <p data-i18n="legal.sections.privacy.body1">
             If you contact us through WhatsApp or any other communication method, you may provide contact details,
             project information, and other business-related data. Please do not send sensitive personal information
             unless specifically requested and reasonably necessary for handling your inquiry.
           </p>
-          <p>
+          <p data-i18n="legal.sections.privacy.body2">
             By sending an inquiry, you acknowledge that we may use the information you provide to respond to your
             request, prepare relevant information, and continue the commercial or technical discussion relating to your
             inquiry.
@@ -170,31 +252,31 @@
         </section>
 
         <section class="legal-section" aria-labelledby="changes-title">
-          <h2 class="legal-section__title" id="changes-title">10. Changes to These Terms</h2>
-          <p>
+          <h2 class="legal-section__title" id="changes-title" data-i18n="legal.sections.changes.title">10. Changes to
+            These Terms</h2>
+          <p data-i18n="legal.sections.changes.body">
             We may update these Terms &amp; Conditions from time to time. The revised version will become effective once
             published on this page, and the "Last updated" date will be revised accordingly.
           </p>
         </section>
 
         <section class="legal-section" aria-labelledby="law-title">
-          <h2 class="legal-section__title" id="law-title">11. Governing Law</h2>
-          <p>
+          <h2 class="legal-section__title" id="law-title" data-i18n="legal.sections.law.title">11. Governing Law</h2>
+          <p data-i18n="legal.sections.law.body">
             These Terms &amp; Conditions shall be governed by and interpreted in accordance with the laws applicable in
             the State of Israel, without prejudice to any mandatory legal rights that may apply under relevant law.
           </p>
         </section>
 
         <section class="legal-section" aria-labelledby="contact-title">
-          <h2 class="legal-section__title" id="contact-title">12. Contact</h2>
-          <p>
-            Questions regarding these Terms &amp; Conditions or any inquiry related to WIFIGATE may be directed to EATS
-            SYSTEMS TECH through the website contact options or by WhatsApp at
-            <a href="https://wa.me/972526996332" target="_blank" rel="noopener noreferrer">+972 52-699-6332</a>.
+          <h2 class="legal-section__title" id="contact-title" data-i18n="legal.sections.contact.title">12. Contact</h2>
+          <p data-i18n="legal.sections.contact.bodyLead">
+            Questions regarding these Terms &amp; Conditions or any inquiry related to WIFIGATE may be directed to
+            EATS SYSTEMS TECH through the website contact options or by WhatsApp.
           </p>
         </section>
 
-        <div class="legal-note">
+        <div class="legal-note" data-i18n="legal.note">
           These Terms &amp; Conditions are intended to govern use of this informational website and pre-sale inquiries.
           They do not replace a project proposal, purchase order, installation agreement, warranty terms, or any other
           signed commercial document.
@@ -202,17 +284,22 @@
 
         <section class="legal-cta" aria-label="Next steps">
           <div class="legal-cta__card">
-            <h2>Need pricing or a system match?</h2>
-            <p>Send us a WhatsApp message and we will help with a quotation, product details, and suitability review.</p>
-            <a href="https://wa.me/972526996332" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+            <h2 data-i18n="legal.cta.pricing.title">Need pricing or a system match?</h2>
+            <p data-i18n="legal.cta.pricing.text">
+              Send us a WhatsApp message and we will help with a quotation, product details, and suitability review.
+            </p>
+            <a href="https://wa.me/972526996332" class="btn btn--primary" target="_blank" rel="noopener noreferrer"
+              data-i18n="legal.cta.pricing.button">
               Open WhatsApp
             </a>
           </div>
 
           <div class="legal-cta__card">
-            <h2>Back to the main site</h2>
-            <p>Return to the homepage to review features, applications, and contact details.</p>
-            <a href="../index.html" class="btn btn--ghost">Go to homepage</a>
+            <h2 data-i18n="legal.cta.back.title">Back to the main site</h2>
+            <p data-i18n="legal.cta.back.text">
+              Return to the homepage to review features, applications, and contact details.
+            </p>
+            <a href="../index.html" class="btn btn--ghost" data-i18n="legal.cta.back.button">Go to homepage</a>
           </div>
         </section>
       </article>
@@ -221,8 +308,9 @@
 
   <footer class="legal-footer">
     <div class="container legal-footer__inner">
-      <p>&copy; <span id="js-year">2026</span> WIFIGATE. All rights reserved.</p>
-      <p>Smart access control for gates, doors, and secured properties.</p>
+      <p>&copy; <span id="js-year">2026</span> <span data-i18n="footer.copyright">WIFIGATE. All rights reserved.</span>
+      </p>
+      <p data-i18n="legal.footer.tagline">Smart access control for gates, doors, and secured properties.</p>
     </div>
   </footer>
 
@@ -307,17 +395,6 @@
       </ul>
     </section>
   </aside>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      document.getElementById("js-year").textContent = new Date().getFullYear();
-      if (typeof setupAccessibilityWidget === "function") {
-        setupAccessibilityWidget();
-      }
-    });
-  </script>
 </body>
 
 </html>
-
-
