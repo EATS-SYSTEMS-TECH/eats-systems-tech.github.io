@@ -18,7 +18,7 @@
     },
     sections: {
       acceptance: {
-        title: "1. Acceptance of Terms",
+        title: "1. Acceptance of Terms Eilon Cohen",
         body: "By accessing or using this website, you agree to be bound by these Terms & Conditions and by any applicable laws and regulations. If you do not agree, please do not use this website.",
       },
       purpose: {
