@@ -612,13 +612,14 @@ ul {
   position: absolute;
   inset: 0;
   z-index: 0;
+  overflow: hidden;
+  background-color: #020617;
 }
 
 .hero__bg {
   position: absolute;
   inset: 0;
   width: 100%;
-  height: 100%;
   object-fit: cover;
   object-position: center center;
   filter: saturate(105%) contrast(103%);
@@ -626,13 +627,27 @@ ul {
 }
 
 .hero__bg--image {
-  z-index: 0;
+  block-size: 100%;
 }
 
 .hero__bg--video {
-  z-index: 1;
+  block-size: 100%;
   background-color: #020617;
+  object-fit: cover;
+  object-position: center center;
+  transform: none;
   transition: opacity 280ms ease;
+}
+
+.hero__bg--image-backdrop,
+.hero__bg--video-backdrop {
+  z-index: 0;
+}
+
+.hero__stage {
+  z-index: 1;
+  filter: none;
+  transform: none;
 }
 
 .hero[data-hero-media-state="image"] .hero__bg--video {
@@ -643,7 +658,7 @@ ul {
 .hero__overlay {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   background:
     linear-gradient(90deg, rgba(2, 6, 23, 0.84) 0%, rgba(2, 6, 23, 0.62) 34%, rgba(2, 6, 23, 0.18) 64%, rgba(2, 6, 23, 0.04) 100%),
     linear-gradient(180deg, rgba(2, 6, 23, 0.1) 0%, rgba(2, 6, 23, 0.28) 100%);
@@ -738,18 +753,21 @@ ul {
   align-items: center;
   width: 100%;
   min-height: calc(100vh - var(--nav-height));
-  padding-block: clamp(4rem, 8vw, 5.75rem) clamp(5.75rem, 10vw, 7.5rem);
+  padding-block: clamp(4rem, 8vw, 6rem);
+  pointer-events: none;
 }
 
 .hero__text {
   max-width: 42rem;
   font-family: "Day One", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  pointer-events: auto;
 }
 
 .hero__text *,
 .hero__actions .btn,
 .hero__actions .btn * {
   font-family: inherit !important;
+  pointer-events: auto;
 }
 
 .hero__title {
@@ -796,13 +814,85 @@ ul {
 }
 
 @media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    display: block;
+  }
+
+  .hero__media {
+    position: relative;
+    inset: auto;
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+
   .hero__bg {
-    object-position: 60% center;
+    transform: none;
+    object-fit: contain;
+    object-position: center bottom;
+  }
+
+  .hero__bg--image-backdrop,
+  .hero__bg--video-backdrop {
+    display: none;
+  }
+
+  .hero__stage--image,
+  .hero__stage--video {
+    object-fit: contain;
+    object-position: center bottom;
+  }
+
+  .hero__overlay {
+    background:
+      linear-gradient(90deg, rgba(2, 6, 23, 0.74) 0%, rgba(2, 6, 23, 0.24) 44%, rgba(2, 6, 23, 0.06) 100%),
+      linear-gradient(180deg, rgba(2, 6, 23, 0.12) 0%, rgba(2, 6, 23, 0.3) 100%);
+  }
+
+  .hero__content {
+    min-height: 0;
+    padding: 1.35rem 1rem 0;
+    background: linear-gradient(180deg, #050b16 0%, #0f172a 100%);
+  }
+
+  .hero__text {
+    max-width: 100%;
+  }
+
+  .hero__title {
+    font-size: clamp(1.85rem, 8vw, 2.35rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-brand,
+  .hero-rotator,
+  #hero-rotator {
+    display: block;
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .hero-brand {
+    margin-right: 0;
+    margin-bottom: 0.12rem;
   }
 
   .hero__subtitle {
+    font-size: clamp(0.98rem, 4vw, 1.08rem);
     white-space: normal;
     max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .hero__actions {
+    margin-bottom: 0;
+    gap: 0.65rem;
+  }
+
+  .hero__actions .btn {
+    min-width: 8.5rem;
+    padding: 0.82rem 1rem;
+    font-size: 0.95rem;
   }
 }
 
@@ -1931,7 +2021,7 @@ ul {
 @media (max-width: 960px) {
   .hero__content {
     min-height: min(46rem, calc(100vh - var(--nav-height)));
-    padding-block: 3.8rem 6.6rem;
+    padding-block: 3.8rem 4.6rem;
   }
 
   .why-grid {
@@ -2046,8 +2136,8 @@ ul {
   }
 
   .hero__content {
-    padding-block: 3.2rem 6rem;
-    min-height: min(38rem, calc(100vh - var(--nav-height)));
+    padding-block: 1.35rem 0;
+    min-height: 0;
   }
 
   .hero__title {
@@ -2062,13 +2152,13 @@ ul {
   }
 
   .hero__replay {
-    left: 1rem;
+    left: 0.85rem;
     right: auto;
-    bottom: 1rem;
+    bottom: 0.85rem;
     transform: none;
     width: auto;
     min-width: 0;
-    max-width: calc(100% - 7rem);
+    max-width: calc(100% - 1.7rem);
   }
 
   .features-grid {
@@ -2084,18 +2174,40 @@ ul {
   }
 
   .hero__content {
-    padding-block: 2.8rem 6.3rem;
+    padding: 1.15rem 0.9rem 0;
+  }
+
+  .hero__title {
+    font-size: clamp(1.65rem, 8.8vw, 2rem);
+  }
+
+  .hero__subtitle {
+    font-size: 0.94rem;
   }
 
   .hero__media-control {
-    width: 2.65rem;
-    height: 2.65rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    top: 0.75rem;
+    right: 0.75rem;
   }
 
   .hero__replay {
-    padding-inline: 1rem;
+    left: 0.75rem;
+    bottom: 0.75rem;
+    padding-inline: 0.95rem;
     gap: 0.5rem;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+  }
+
+  .hero .hero__actions {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .hero .hero__actions .btn {
+    min-width: 7.8rem;
+    padding: 0.78rem 0.95rem;
   }
 
   .hero__actions {
@@ -2113,9 +2225,68 @@ ul {
   }
 }
 
+@media (min-width: 769px) {
+  .hero {
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    align-items: center;
+  }
+
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+
+  .hero__bg--image-backdrop,
+  .hero__bg--video-backdrop {
+    display: block;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .hero__stage--image,
+  .hero__stage--video {
+    object-fit: contain;
+    object-position: center center;
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: calc(100vh - var(--nav-height));
+    max-width: var(--container-width);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+    padding-block: clamp(4rem, 8vw, 6rem);
+    background: none;
+  }
+
+  .hero__text {
+    max-width: 42rem;
+  }
+
+  .hero__title {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+  }
+
+  .hero__subtitle {
+    font-size: 1.15rem;
+  }
+}
+
 /* ================= RESPONSIVE SCALING ================= */
 /* Desktop: larger logo, more spacing */
 @media (min-width: 769px) {
+  body.hero-video-visible .a11y-fab {
+    left: 1.5rem;
+    right: auto;
+  }
+
   .nav {
     justify-content: flex-start;
   }

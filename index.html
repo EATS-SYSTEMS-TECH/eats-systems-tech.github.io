@@ -78,7 +78,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Day+One&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=20260410a" />
+  <link rel="stylesheet" href="css/styles.css?v=20260410f" />
   <link rel="stylesheet" href="css/accessibility.css?v=20260403a" />
   <script src="js/utils.js?v=20260402a" defer></script>
   <script src="js/translations.js?v=20260410a" defer></script>
@@ -214,43 +214,49 @@
   <main id="main-content">
     <section class="hero" id="home" aria-labelledby="hero-title" aria-describedby="hero-subtitle"
       data-hero-media-state="video">
-      <div class="hero__media" aria-hidden="true">
-        <img src="assets/img/wifigate_homepage.webp" alt="" class="hero__bg hero__bg--image" fetchpriority="high" />
-        <video id="hero-video" class="hero__bg hero__bg--video" autoplay muted playsinline preload="auto"
+      <div class="hero__media">
+        <img src="assets/img/wifigate_homepage.webp" alt=""
+          class="hero__bg hero__bg--image hero__bg--image-backdrop" fetchpriority="high" />
+        <video id="hero-video-backdrop" class="hero__bg hero__bg--video hero__bg--video-backdrop" autoplay muted
+          playsinline preload="auto" aria-hidden="true">
+          <source src="assets/vid/wifigate-update-hero-720p.mp4" type="video/mp4" />
+        </video>
+        <img src="assets/img/wifigate_homepage.webp" alt="" class="hero__bg hero__bg--image hero__stage hero__stage--image" />
+        <video id="hero-video" class="hero__bg hero__bg--video hero__stage hero__stage--video" autoplay muted playsinline preload="auto"
           poster="assets/img/wifigate_homepage.webp">
           <source src="assets/vid/wifigate-update-hero-720p.mp4" type="video/mp4" />
         </video>
+        <div class="hero__overlay"></div>
+        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button"
+          aria-label="Unmute video" title="Unmute video" aria-pressed="false" data-muted="true">
+          <svg class="hero__media-control-icon hero__media-control-icon--muted" viewBox="0 0 24 24" fill="none"
+            aria-hidden="true">
+            <path
+              d="M14 4.12v15.76a1 1 0 0 1-1.68.73l-4.04-3.61H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.28l4.04-3.61A1 1 0 0 1 14 4.12Z"
+              fill="currentColor" />
+            <path d="m17 9 4 4m0-4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          <svg class="hero__media-control-icon hero__media-control-icon--unmuted" viewBox="0 0 24 24" fill="none"
+            aria-hidden="true">
+            <path
+              d="M14 4.12v15.76a1 1 0 0 1-1.68.73l-4.04-3.61H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.28l4.04-3.61A1 1 0 0 1 14 4.12Z"
+              fill="currentColor" />
+            <path d="M17 9.5a4.5 4.5 0 0 1 0 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M19.75 7a8 8 0 0 1 0 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+        <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" hidden>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 5V2l-4 4 4 4V7a7 7 0 1 1-7 7" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round" />
+            <path d="m11 10 5 3-5 3z" fill="currentColor" />
+          </svg>
+          <span>Play Video Again</span>
+        </button>
       </div>
-      <div class="hero__overlay"></div>
-      <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button"
-        aria-label="Unmute video" title="Unmute video" aria-pressed="false" data-muted="true">
-        <svg class="hero__media-control-icon hero__media-control-icon--muted" viewBox="0 0 24 24" fill="none"
-          aria-hidden="true">
-          <path
-            d="M14 4.12v15.76a1 1 0 0 1-1.68.73l-4.04-3.61H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.28l4.04-3.61A1 1 0 0 1 14 4.12Z"
-            fill="currentColor" />
-          <path d="m17 9 4 4m0-4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-        <svg class="hero__media-control-icon hero__media-control-icon--unmuted" viewBox="0 0 24 24" fill="none"
-          aria-hidden="true">
-          <path
-            d="M14 4.12v15.76a1 1 0 0 1-1.68.73l-4.04-3.61H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.28l4.04-3.61A1 1 0 0 1 14 4.12Z"
-            fill="currentColor" />
-          <path d="M17 9.5a4.5 4.5 0 0 1 0 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round" />
-          <path d="M19.75 7a8 8 0 0 1 0 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-      </button>
-      <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" hidden>
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 5V2l-4 4 4 4V7a7 7 0 1 1-7 7" stroke="currentColor" stroke-width="1.8"
-            stroke-linecap="round" stroke-linejoin="round" />
-          <path d="m11 10 5 3-5 3z" fill="currentColor" />
-        </svg>
-        <span>Play Video Again</span>
-      </button>
 
       <div class="hero__content container js-reveal">
         <div class="hero__text">

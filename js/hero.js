@@ -21,14 +21,62 @@ function getHeroMediaCopy() {
 function setupHeroMedia() {
   const hero = document.querySelector(".hero");
   const video = document.getElementById("hero-video");
+  const backdropVideo = document.getElementById("hero-video-backdrop");
   const muteButton = document.getElementById("hero-mute-toggle");
   const replayButton = document.getElementById("hero-replay");
   const replayLabel = replayButton?.querySelector("span");
+  let heroIsInView = true;
 
   if (!hero || !video || !muteButton || !replayButton || !replayLabel) return;
 
   video.muted = true;
   video.defaultMuted = true;
+  if (backdropVideo) {
+    backdropVideo.muted = true;
+    backdropVideo.defaultMuted = true;
+  }
+
+  function syncBackdropTime(force = false) {
+    if (!backdropVideo) return;
+
+    try {
+      const drift = Math.abs((backdropVideo.currentTime || 0) - (video.currentTime || 0));
+      if (force || drift > 0.2) {
+        backdropVideo.currentTime = video.currentTime || 0;
+      }
+    } catch (error) {
+      // Ignore seek failures while media metadata is loading.
+    }
+  }
+
+  function playBackdropVideo() {
+    if (!backdropVideo) return;
+
+    backdropVideo.muted = video.muted;
+    syncBackdropTime(true);
+
+    const backdropPlayPromise = backdropVideo.play();
+    if (backdropPlayPromise && typeof backdropPlayPromise.catch === "function") {
+      backdropPlayPromise.catch(() => {
+        // Ignore backdrop autoplay failures and keep the foreground video playing.
+      });
+    }
+  }
+
+  function pauseBackdropVideo() {
+    if (!backdropVideo) return;
+    backdropVideo.pause();
+  }
+
+  function syncHeroFloatingWidgetState() {
+    const shouldMoveAccessibilityFab =
+      heroIsInView &&
+      hero.dataset.heroMediaState === "video" &&
+      window.matchMedia &&
+      window.matchMedia("(min-width: 769px)").matches;
+
+    document.body.classList.toggle("hero-video-visible", shouldMoveAccessibilityFab);
+  }
 
   function updateHeroMediaCopy() {
     const copy = getHeroMediaCopy();
@@ -48,10 +96,12 @@ function setupHeroMedia() {
     hero.dataset.heroMediaState = state;
     muteButton.hidden = state !== "video";
     replayButton.hidden = state !== "image";
+    syncHeroFloatingWidgetState();
   }
 
   function showHeroImageState() {
     video.pause();
+    pauseBackdropVideo();
     setHeroMediaState("image");
     updateHeroMediaCopy();
   }
@@ -70,6 +120,8 @@ function setupHeroMedia() {
       } catch (error) {
         // Ignore seek failures while metadata is still loading.
       }
+
+      syncBackdropTime(true);
     }
 
     updateHeroMediaCopy();
@@ -80,10 +132,15 @@ function setupHeroMedia() {
         showHeroImageState();
       });
     }
+
+    playBackdropVideo();
   }
 
   muteButton.addEventListener("click", () => {
     video.muted = !video.muted;
+    if (backdropVideo) {
+      backdropVideo.muted = video.muted;
+    }
     updateHeroMediaCopy();
   });
 
@@ -93,9 +150,13 @@ function setupHeroMedia() {
 
   video.addEventListener("ended", showHeroImageState);
   video.addEventListener("play", () => {
+    playBackdropVideo();
     setHeroMediaState("video");
     updateHeroMediaCopy();
   });
+  video.addEventListener("pause", pauseBackdropVideo);
+  video.addEventListener("seeked", () => syncBackdropTime(true));
+  video.addEventListener("timeupdate", () => syncBackdropTime(false));
   video.addEventListener("volumechange", updateHeroMediaCopy);
   video.addEventListener("error", showHeroImageState);
 
@@ -113,6 +174,20 @@ function setupHeroMedia() {
 
     updateHeroMediaCopy();
   });
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        heroIsInView = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.35);
+        syncHeroFloatingWidgetState();
+      },
+      { threshold: [0, 0.35, 0.6] }
+    );
+
+    observer.observe(hero);
+  }
+
+  window.addEventListener("resize", syncHeroFloatingWidgetState);
 
   updateHeroMediaCopy();
   playHeroVideo();
