@@ -20,6 +20,11 @@ var translations = {
         contact: "Contact Us",
         about: "Tutorials"
       },
+      media: {
+        replay: "Play Video Again",
+        mute: "Mute video",
+        unmute: "Unmute video"
+      },
       systems: {
         barrier: { kicker: "Output", label: "Barrier Gate" },
         shutter: { kicker: "Output", label: "Roller Shutter" },
@@ -140,6 +145,11 @@ var translations = {
       cta: {
         contact: "צור קשר",
         about: "סרטוני הדרכה"
+      },
+      media: {
+        replay: "נגן שוב את הסרטון",
+        mute: "השתק סרטון",
+        unmute: "הפעל קול"
       },
       systems: {
         barrier: { kicker: "יציאה", label: "שער מחסום" },
@@ -262,6 +272,11 @@ var translations = {
         contact: "Contáctanos",
         about: "Tutoriales"
       },
+      media: {
+        replay: "Reproducir el video de nuevo",
+        mute: "Silenciar video",
+        unmute: "Activar sonido"
+      },
       systems: {
         barrier: { kicker: "Salida", label: "Barrera" },
         shutter: { kicker: "Salida", label: "Persiana enrollable" },
@@ -380,6 +395,11 @@ var translations = {
       cta: {
         contact: "Contacte-nos",
         about: "Tutoriais"
+      },
+      media: {
+        replay: "Reproduzir o vídeo novamente",
+        mute: "Silenciar vídeo",
+        unmute: "Ativar som"
       },
       systems: {
         barrier: { kicker: "Saída", label: "Barreira" },
@@ -500,6 +520,11 @@ var translations = {
         contact: "Skontaktuj się",
         about: "Poradniki"
       },
+      media: {
+        replay: "Odtwórz film ponownie",
+        mute: "Wycisz wideo",
+        unmute: "Włącz dźwięk"
+      },
       systems: {
         barrier: { kicker: "Wyjście", label: "Szlaban" },
         shutter: { kicker: "Wyjście", label: "Roleta" },
@@ -618,6 +643,11 @@ var translations = {
       cta: {
         contact: "Связаться с нами",
         about: "Видеоуроки"
+      },
+      media: {
+        replay: "Воспроизвести видео снова",
+        mute: "Выключить звук видео",
+        unmute: "Включить звук"
       },
       systems: {
         barrier: { kicker: "Выход", label: "Шлагбаум" },
@@ -738,6 +768,11 @@ var translations = {
         contact: "Kontaktujte nás",
         about: "Videonávody"
       },
+      media: {
+        replay: "Přehrát video znovu",
+        mute: "Ztlumit video",
+        unmute: "Zapnout zvuk"
+      },
       systems: {
         barrier: { kicker: "Výstup", label: "Závora" },
         shutter: { kicker: "Výstup", label: "Rolovací vrata" },
@@ -856,6 +891,11 @@ var translations = {
       cta: {
         contact: "تواصل معنا",
         about: "فيديوهات إرشادية"
+      },
+      media: {
+        replay: "تشغيل الفيديو مرة أخرى",
+        mute: "كتم الفيديو",
+        unmute: "تشغيل الصوت"
       },
       systems: {
         barrier: { kicker: "مخرج", label: "بوابة حاجز" },
