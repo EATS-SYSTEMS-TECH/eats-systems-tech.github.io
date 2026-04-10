@@ -1,7 +1,122 @@
 // /js/hero.js
-// Version: 1.2.0
+// Version: 1.3.0
 
 let heroRotatorIntervalId = null;
+
+const HERO_MEDIA_FALLBACK_COPY = {
+  replay: "Play Video Again",
+  mute: "Mute video",
+  unmute: "Unmute video",
+};
+
+function getHeroMediaCopy() {
+  const bundle = typeof getTranslationBundle === "function" ? getTranslationBundle() : null;
+
+  return {
+    ...HERO_MEDIA_FALLBACK_COPY,
+    ...(bundle?.hero?.media || {}),
+  };
+}
+
+function setupHeroMedia() {
+  const hero = document.querySelector(".hero");
+  const video = document.getElementById("hero-video");
+  const muteButton = document.getElementById("hero-mute-toggle");
+  const replayButton = document.getElementById("hero-replay");
+  const replayLabel = replayButton?.querySelector("span");
+
+  if (!hero || !video || !muteButton || !replayButton || !replayLabel) return;
+
+  video.muted = true;
+  video.defaultMuted = true;
+
+  function updateHeroMediaCopy() {
+    const copy = getHeroMediaCopy();
+    const muteLabel = video.muted ? copy.unmute : copy.mute;
+
+    muteButton.dataset.muted = String(video.muted);
+    muteButton.setAttribute("aria-label", muteLabel);
+    muteButton.setAttribute("title", muteLabel);
+    muteButton.setAttribute("aria-pressed", String(!video.muted));
+
+    replayLabel.textContent = copy.replay;
+    replayButton.setAttribute("aria-label", copy.replay);
+    replayButton.setAttribute("title", copy.replay);
+  }
+
+  function setHeroMediaState(state) {
+    hero.dataset.heroMediaState = state;
+    muteButton.hidden = state !== "video";
+    replayButton.hidden = state !== "image";
+  }
+
+  function showHeroImageState() {
+    video.pause();
+    setHeroMediaState("image");
+    updateHeroMediaCopy();
+  }
+
+  function playHeroVideo({ restart = false, userInitiated = false } = {}) {
+    if (typeof isReducedMotionRequested === "function" && isReducedMotionRequested() && !userInitiated) {
+      showHeroImageState();
+      return;
+    }
+
+    setHeroMediaState("video");
+
+    if (restart) {
+      try {
+        video.currentTime = 0;
+      } catch (error) {
+        // Ignore seek failures while metadata is still loading.
+      }
+    }
+
+    updateHeroMediaCopy();
+
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => {
+        showHeroImageState();
+      });
+    }
+  }
+
+  muteButton.addEventListener("click", () => {
+    video.muted = !video.muted;
+    updateHeroMediaCopy();
+  });
+
+  replayButton.addEventListener("click", () => {
+    playHeroVideo({ restart: true, userInitiated: true });
+  });
+
+  video.addEventListener("ended", showHeroImageState);
+  video.addEventListener("play", () => {
+    setHeroMediaState("video");
+    updateHeroMediaCopy();
+  });
+  video.addEventListener("volumechange", updateHeroMediaCopy);
+  video.addEventListener("error", showHeroImageState);
+
+  document.addEventListener("site-language-change", updateHeroMediaCopy);
+  document.addEventListener("site-accessibility-change", () => {
+    if (typeof isReducedMotionRequested === "function" && isReducedMotionRequested()) {
+      showHeroImageState();
+      return;
+    }
+
+    if (hero.dataset.heroMediaState === "video") {
+      playHeroVideo();
+      return;
+    }
+
+    updateHeroMediaCopy();
+  });
+
+  updateHeroMediaCopy();
+  playHeroVideo();
+}
 
 function setupHeroRotator() {
   const el = document.getElementById("hero-rotator");
@@ -41,7 +156,8 @@ function setupHeroRotator() {
 
     const phrases = getTranslationBundle().hero.rotator.phrases;
     const nextIdx = (idx + 1) % phrases.length;
-    const animMs = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--rotator-duration")) || 420;
+    const animMs =
+      parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--rotator-duration")) || 420;
 
     if (el.animate) {
       const out = el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: animMs, easing: "ease", fill: "forwards" });
@@ -55,6 +171,7 @@ function setupHeroRotator() {
       return;
     }
 
+    let fallbackTimer = null;
     const onTransitionEnd = (event) => {
       if (event && event.propertyName && event.propertyName !== "opacity") return;
       el.removeEventListener("transitionend", onTransitionEnd);
@@ -68,7 +185,7 @@ function setupHeroRotator() {
 
     el.addEventListener("transitionend", onTransitionEnd);
     el.classList.add(fadeClass);
-    const fallbackTimer = setTimeout(() => onTransitionEnd({ propertyName: "opacity" }), animMs + 80);
+    fallbackTimer = setTimeout(() => onTransitionEnd({ propertyName: "opacity" }), animMs + 80);
   }
 
   function syncRotator() {
@@ -113,10 +230,7 @@ function setupVideoAutoplay() {
     }
   }
 
-  const observer = new IntersectionObserver(
-    () => syncVideoPlayback(),
-    { threshold: 0.5 }
-  );
+  const observer = new IntersectionObserver(() => syncVideoPlayback(), { threshold: 0.5 });
 
   observer.observe(video);
   document.addEventListener("site-accessibility-change", syncVideoPlayback);

@@ -129,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupRevealOnScroll();
   setupCenteredScroll();
   setupContactForm();
+  setupHeroMedia();
   setupHeroRotator();
   setupVideoAutoplay();
   setupLanguageSelector();
