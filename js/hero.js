@@ -52,7 +52,9 @@ function setupHeroMedia() {
   function playBackdropVideo() {
     if (!backdropVideo) return;
 
-    backdropVideo.muted = video.muted;
+    backdropVideo.muted = true;
+    backdropVideo.defaultMuted = true;
+    backdropVideo.volume = 0;
     syncBackdropTime(true);
 
     const backdropPlayPromise = backdropVideo.play();
@@ -138,9 +140,6 @@ function setupHeroMedia() {
 
   muteButton.addEventListener("click", () => {
     video.muted = !video.muted;
-    if (backdropVideo) {
-      backdropVideo.muted = video.muted;
-    }
     updateHeroMediaCopy();
   });
 
