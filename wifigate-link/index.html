@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Open WiFiGate</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta property="og:title" content="WiFiGate Invitation" />
+  <meta property="og:description" content="Open your WiFiGate invitation securely in the app." />
+  <meta property="og:image" content="https://wifigate.io/logo-1024.png" />
+  <meta property="og:image:width" content="1024" />
+  <meta property="og:image:height" content="1024" />
+  <meta property="og:url" content="https://wifigate.io/wifigate-link/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="WiFiGate Invitation" />
+  <meta name="twitter:description" content="Open your WiFiGate invitation securely in the app." />
+  <meta name="twitter:image" content="https://wifigate.io/logo-1024.png" />
+  <style>
+    :root {
+      --bg-top: #f7f1e7;
+      --bg-bottom: #d7ede3;
+      --panel: rgba(255, 255, 255, 0.9);
+      --text: #10241d;
+      --muted: #4d635c;
+      --accent: #0f766e;
+      --accent-strong: #115e59;
+      --border: rgba(16, 36, 29, 0.08);
+      --shadow: 0 18px 60px rgba(16, 36, 29, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.75), transparent 34%),
+        linear-gradient(160deg, var(--bg-top), var(--bg-bottom));
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: min(100%, 520px);
+      background: var(--panel);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 32px 28px;
+      text-align: center;
+    }
+
+    .logo {
+      width: 96px;
+      height: 96px;
+      border-radius: 28px;
+      display: block;
+      margin: 0 auto 20px;
+      box-shadow: 0 10px 30px rgba(15, 118, 110, 0.18);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 5vw, 38px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .actions {
+      display: grid;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button,
+    .secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 52px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .button {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #ffffff;
+      box-shadow: 0 12px 24px rgba(15, 118, 110, 0.24);
+    }
+
+    .secondary {
+      border: 1px solid rgba(16, 36, 29, 0.12);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.66);
+    }
+
+    .button:hover,
+    .secondary:hover {
+      transform: translateY(-1px);
+    }
+
+    .hint {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #637973;
+    }
+  </style>
+  <script>
+    function firstNonEmpty() {
+      for (const value of arguments) {
+        if (typeof value === "string" && value.trim()) {
+          return value.trim();
+        }
+      }
+      return "";
+    }
+
+    function buildDeepLink() {
+      const params = new URLSearchParams(window.location.search);
+      const directLink = firstNonEmpty(params.get("link"));
+      if (directLink) {
+        return directLink;
+      }
+
+      const gateId = firstNonEmpty(
+        params.get("i"),
+        params.get("id"),
+        params.get("chip")
+      );
+
+      if (!gateId) {
+        return "";
+      }
+
+      params.delete("link");
+      if (!params.has("id")) {
+        params.set("id", gateId);
+      }
+
+      const query = params.toString();
+      return `wifigate://gate/${encodeURIComponent(gateId)}${query ? `?${query}` : ""}`;
+    }
+
+    function renderState(deepLink) {
+      const status = document.getElementById("status");
+      const openApp = document.getElementById("open-app");
+      const copyLink = document.getElementById("copy-link");
+
+      if (!deepLink) {
+        status.textContent = "This invitation link is missing the gate details. Ask the sender to share it again.";
+        openApp.hidden = true;
+        copyLink.hidden = true;
+        return;
+      }
+
+      openApp.href = deepLink;
+      copyLink.hidden = false;
+      copyLink.onclick = async function () {
+        try {
+          await navigator.clipboard.writeText(deepLink);
+          copyLink.textContent = "Copied app link";
+        } catch (error) {
+          console.error("Failed to copy deep link", error);
+        }
+      };
+
+      window.setTimeout(function () {
+        window.location.replace(deepLink);
+      }, 120);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      renderState(buildDeepLink());
+    });
+  </script>
+</head>
+<body>
+  <main class="card">
+    <img class="logo" src="/logo-1024.png" alt="WiFiGate" />
+    <h1>Opening your WiFiGate invitation</h1>
+    <p id="status">If the app does not open automatically, use the button below.</p>
+    <div class="actions">
+      <a id="open-app" class="button" href="#">Open in WiFiGate</a>
+      <button id="copy-link" class="secondary" type="button" hidden>Copy app link</button>
+    </div>
+    <p class="hint">This page supports both legacy and new invitation links and keeps the full secure invite payload intact.</p>
+  </main>
+</body>
+</html>
