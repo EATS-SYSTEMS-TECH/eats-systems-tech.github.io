@@ -144,17 +144,19 @@
         params.get("chip")
       );
 
-      if (!gateId) {
+      const routeId = gateId || (params.get("ep") ? "invite" : "");
+
+      if (!routeId) {
         return "";
       }
 
       params.delete("link");
       if (!params.has("id")) {
-        params.set("id", gateId);
+        params.set("id", routeId);
       }
 
       const query = params.toString();
-      return `wifigate://gate/${encodeURIComponent(gateId)}${query ? `?${query}` : ""}`;
+      return `wifigate://gate/${encodeURIComponent(routeId)}${query ? `?${query}` : ""}`;
     }
 
     function renderState(deepLink) {
