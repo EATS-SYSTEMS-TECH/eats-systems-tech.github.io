@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -17,15 +17,14 @@
   <meta name="twitter:image" content="https://wifigate.io/logo-1024.png" />
   <style>
     :root {
-      --bg-top: #f7f1e7;
-      --bg-bottom: #d7ede3;
-      --panel: rgba(255, 255, 255, 0.9);
+      --bg: #f7f7f4;
+      --panel: rgba(255, 255, 255, 0.94);
       --text: #10241d;
-      --muted: #4d635c;
+      --muted: #5f6c67;
       --accent: #0f766e;
       --accent-strong: #115e59;
       --border: rgba(16, 36, 29, 0.08);
-      --shadow: 0 18px 60px rgba(16, 36, 29, 0.14);
+      --shadow: 0 18px 48px rgba(16, 36, 29, 0.12);
     }
 
     * {
@@ -37,52 +36,51 @@
       min-height: 100vh;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(255, 255, 255, 0.75), transparent 34%),
-        linear-gradient(160deg, var(--bg-top), var(--bg-bottom));
-      display: grid;
+      background: var(--bg);
+      display: none;
       place-items: center;
       padding: 24px;
     }
 
+    body.ready {
+      display: grid;
+    }
+
     .card {
-      width: min(100%, 520px);
+      width: min(100%, 420px);
       background: var(--panel);
-      backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      border-radius: 28px;
+      border-radius: 24px;
       box-shadow: var(--shadow);
-      padding: 32px 28px;
+      padding: 28px 24px;
       text-align: center;
     }
 
     .logo {
-      width: 96px;
-      height: 96px;
-      border-radius: 28px;
+      width: 84px;
+      height: 84px;
+      border-radius: 24px;
       display: block;
-      margin: 0 auto 20px;
-      box-shadow: 0 10px 30px rgba(15, 118, 110, 0.18);
+      margin: 0 auto 18px;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(28px, 5vw, 38px);
-      line-height: 1.05;
-      letter-spacing: -0.04em;
+      font-size: clamp(24px, 5vw, 32px);
+      line-height: 1.08;
     }
 
     p {
       margin: 14px 0 0;
       color: var(--muted);
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.55;
     }
 
     .actions {
       display: grid;
       gap: 12px;
-      margin-top: 28px;
+      margin-top: 24px;
     }
 
     .button,
@@ -91,7 +89,7 @@
       align-items: center;
       justify-content: center;
       width: 100%;
-      min-height: 52px;
+      min-height: 50px;
       border-radius: 999px;
       font-weight: 700;
       text-decoration: none;
@@ -101,24 +99,18 @@
     .button {
       background: linear-gradient(135deg, var(--accent), var(--accent-strong));
       color: #ffffff;
-      box-shadow: 0 12px 24px rgba(15, 118, 110, 0.24);
+      box-shadow: 0 10px 24px rgba(15, 118, 110, 0.22);
     }
 
     .secondary {
       border: 1px solid rgba(16, 36, 29, 0.12);
       color: var(--text);
-      background: rgba(255, 255, 255, 0.66);
+      background: rgba(255, 255, 255, 0.82);
     }
 
     .button:hover,
     .secondary:hover {
       transform: translateY(-1px);
-    }
-
-    .hint {
-      margin-top: 20px;
-      font-size: 13px;
-      color: #637973;
     }
   </style>
   <script>
@@ -170,7 +162,6 @@
       );
 
       const routeId = gateId || (params.get("ep") ? "invite" : "");
-
       if (!routeId) {
         return "";
       }
@@ -184,21 +175,21 @@
       return `wifigate://gate/${encodeURIComponent(routeId)}${query ? `?${query}` : ""}`;
     }
 
-    function renderState(deepLink) {
+    function revealFallback(deepLink, statusText) {
       const status = document.getElementById("status");
       const openApp = document.getElementById("open-app");
       const copyLink = document.getElementById("copy-link");
 
-      if (!deepLink) {
-        status.textContent = "This invitation link is missing the gate details. Ask the sender to share it again.";
-        openApp.hidden = true;
-        copyLink.hidden = true;
-        return;
-      }
-
-      openApp.href = deepLink;
-      copyLink.hidden = false;
+      status.textContent = statusText;
+      openApp.hidden = !deepLink;
+      copyLink.hidden = !deepLink;
+      openApp.href = deepLink || "#";
+      copyLink.textContent = "Copy app link";
       copyLink.onclick = async function () {
+        if (!deepLink) {
+          return;
+        }
+
         try {
           await navigator.clipboard.writeText(deepLink);
           copyLink.textContent = "Copied app link";
@@ -207,26 +198,44 @@
         }
       };
 
+      document.body.classList.add("ready");
+    }
+
+    function openImmediately(deepLink) {
+      if (!deepLink) {
+        revealFallback(
+          "",
+          "This invitation link is missing the gate details. Ask the sender to share it again."
+        );
+        return;
+      }
+
+      window.setTimeout(function () {
+        revealFallback(
+          deepLink,
+          "If WiFiGate did not open automatically, use the button below."
+        );
+      }, 900);
+
       window.setTimeout(function () {
         window.location.replace(deepLink);
-      }, 120);
+      }, 40);
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-      renderState(buildDeepLink());
+      openImmediately(buildDeepLink());
     });
   </script>
 </head>
 <body>
   <main class="card">
     <img class="logo" src="/logo-1024.png" alt="WiFiGate" />
-    <h1>Opening your WiFiGate invitation</h1>
-    <p id="status">If the app does not open automatically, use the button below.</p>
+    <h1>Opening WiFiGate</h1>
+    <p id="status">We are trying to open your invitation in the app.</p>
     <div class="actions">
-      <a id="open-app" class="button" href="#">Open in WiFiGate</a>
+      <a id="open-app" class="button" href="#" hidden>Open in WiFiGate</a>
       <button id="copy-link" class="secondary" type="button" hidden>Copy app link</button>
     </div>
-    <p class="hint">This page supports both legacy and new invitation links and keeps the full secure invite payload intact.</p>
   </main>
 </body>
 </html>
