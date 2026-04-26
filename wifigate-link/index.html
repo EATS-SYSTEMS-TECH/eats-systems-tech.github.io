@@ -132,10 +132,35 @@
     }
 
     function buildDeepLink() {
-      const params = new URLSearchParams(window.location.search);
+      const currentUrl = new URL(window.location.href);
+      const params = currentUrl.searchParams;
       const directLink = firstNonEmpty(params.get("link"));
       if (directLink) {
         return directLink;
+      }
+
+      const pathSegments = currentUrl.pathname
+        .split("/")
+        .filter(Boolean)
+        .map((segment) => decodeURIComponent(segment));
+
+      const groupId = firstNonEmpty(
+        params.get("gid"),
+        params.get("groupId"),
+        pathSegments[0] === "group" ? pathSegments[1] : ""
+      );
+
+      if (groupId) {
+        params.delete("link");
+        if (!params.has("gid")) {
+          params.set("gid", groupId);
+        }
+        if (!params.has("id")) {
+          params.set("id", groupId);
+        }
+
+        const query = params.toString();
+        return `wifigate://group/${encodeURIComponent(groupId)}${query ? `?${query}` : ""}`;
       }
 
       const gateId = firstNonEmpty(
