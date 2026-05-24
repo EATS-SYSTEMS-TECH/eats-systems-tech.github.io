@@ -1647,13 +1647,13 @@ ul {
 
 .contact-video {
   margin-top: 0;
-  width: 100vw;
-  max-width: 100vw;
+  width: 80vw;
+  max-width: 80vw;
   position: relative;
   left: 50%;
   right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  margin-left: -40vw;
+  margin-right: -40vw;
 }
 
 .contact-video__player {
@@ -1662,6 +1662,14 @@ ul {
   display: block;
   object-fit: cover;
   object-position: center center;
+  border-radius: 0;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.16);
+}
+
+.contact-video__image {
+  width: 100%;
+  height: auto;
+  display: block;
   border-radius: 0;
   box-shadow: 0 24px 60px rgba(15, 23, 42, 0.16);
 }
@@ -1753,6 +1761,13 @@ ul {
   .contact-content {
     gap: 2rem;
     margin-top: 2rem;
+  }
+
+  .contact-video {
+    width: 80vw;
+    max-width: 80vw;
+    margin-left: -40vw;
+    margin-right: -40vw;
   }
 
   .contact-video__player {
