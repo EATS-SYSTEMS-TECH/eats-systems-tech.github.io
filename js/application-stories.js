@@ -1015,6 +1015,55 @@ var APPLICATION_STORIES = {
   },
 };
 
+var APPLICATION_STORY_CONTENT_OVERRIDES = {
+  en: {
+    hotels: {
+      solution:
+        "Hotel teams can manage access to gates, barriers, and controlled entry points from the phone. Guests can receive temporary access where relevant, staff can use recurring permissions for daily operations, and guest access can end automatically at check-out to help prevent return entry after the stay.",
+      value:
+        "A better guest arrival experience, less operational friction, cleaner parking access, and stronger check-out control without manual follow-up.",
+    },
+    vacationRentals: {
+      solution:
+        "The host sends temporary guest access, optionally limited to a time window or a specific phone. The guest can receive clear arrival details like apartment, floor, parking, and comments, and access can expire automatically at check-out to help prevent continued entry after the stay.",
+      value:
+        "Smoother check-in, fewer support calls, less dependence on physical access devices, better check-out control, and more confidence for the host or operator.",
+    },
+  },
+  he: {
+    hotels: {
+      solution:
+        "צוותי המלון יכולים לנהל גישה לשערים, למחסומים ולנקודות כניסה מבוקרות מהטלפון. אורחים יכולים לקבל גישה זמנית כשצריך, לעובדים יש הרשאות קבועות לתפעול היומיומי, והגישה של האורח יכולה להסתיים אוטומטית בזמן הצ'ק-אאוט כדי לצמצם גישה לאחר העזיבה.",
+      value:
+        "חוויית הגעה טובה יותר לאורח, פחות חיכוך תפעולי, גישת חניה מסודרת יותר ויותר שליטה על סיום גישה בצ'ק-אאוט בלי מעקב ידני.",
+    },
+    vacationRentals: {
+      solution:
+        "המארח שולח גישת אורח זמנית, עם אפשרות להגבלה לחלון זמן או לטלפון מסוים. האורח יכול לקבל פרטי הגעה ברורים כמו דירה, קומה, חניה והערות, והגישה יכולה לפוג אוטומטית בזמן הצ'ק-אאוט כדי לצמצם גישה לאחר הצ'ק-אאוט.",
+      value:
+        "צ'ק-אין חלק יותר, פחות שיחות תמיכה, פחות תלות באמצעי גישה פיזיים, יותר שליטה למארח או למפעיל ומניעת גישה לאחר צ'ק-אאוט.",
+    },
+  },
+};
+
+Object.keys(APPLICATION_STORY_CONTENT_OVERRIDES).forEach((lang) => {
+  if (!APPLICATION_STORIES[lang]) {
+    return;
+  }
+
+  Object.keys(APPLICATION_STORY_CONTENT_OVERRIDES[lang]).forEach((storyKey) => {
+    if (!APPLICATION_STORIES[lang][storyKey]) {
+      return;
+    }
+
+    APPLICATION_STORIES[lang][storyKey] = Object.assign(
+      {},
+      APPLICATION_STORIES[lang][storyKey],
+      APPLICATION_STORY_CONTENT_OVERRIDES[lang][storyKey]
+    );
+  });
+});
+
 var whereStoryState = {
   activeKey: null,
   initialized: false,
@@ -1146,8 +1195,6 @@ function renderApplicationStory(storyKey) {
   whereStoryState.title.textContent = getApplicationStoryTitle(storyKey, lang);
   whereStoryState.closeText.textContent = ui.close;
   whereStoryState.closeButton.setAttribute("aria-label", ui.closeAria);
-  whereStoryState.summaryLabel.textContent = ui.summary;
-  whereStoryState.bulletsTitle.textContent = ui.bulletsTitle;
   whereStoryState.winLabel.textContent = ui.winLabel;
   whereStoryState.video.label.textContent = ui.videoLabel;
   whereStoryState.video.status.textContent = ui.videoStatus;
@@ -1155,20 +1202,9 @@ function renderApplicationStory(storyKey) {
   whereStoryState.pitch.textContent = story.pitch;
   whereStoryState.labels.problem.textContent = ui.problem;
   whereStoryState.labels.solution.textContent = ui.solution;
-  whereStoryState.labels.buyer.textContent = ui.buyer;
-  whereStoryState.labels.demo.textContent = ui.demo;
   whereStoryState.fields.problem.textContent = story.problem;
   whereStoryState.fields.solution.textContent = story.solution;
   whereStoryState.fields.value.textContent = story.value;
-  whereStoryState.fields.buyer.textContent = story.buyer;
-  whereStoryState.fields.demo.textContent = story.demo;
-  whereStoryState.badges.innerHTML = "";
-  (ui.badges || []).forEach((badgeText) => {
-    const badge = document.createElement("span");
-    badge.className = "where-story-card__badge";
-    badge.textContent = badgeText;
-    whereStoryState.badges.appendChild(badge);
-  });
   whereStoryState.activeKey = storyKey;
 
   updateApplicationStoryLinkState(storyKey);
@@ -1215,10 +1251,7 @@ function setupApplicationStories() {
   whereStoryState.eyebrow = $("#where-story-eyebrow", root);
   whereStoryState.title = $("#where-story-title", root);
   whereStoryState.pitch = $("#where-story-pitch", root);
-  whereStoryState.summaryLabel = $("#where-story-summary-label", root);
-  whereStoryState.bulletsTitle = $("#where-story-bullet-title", root);
   whereStoryState.winLabel = $("#where-story-win-label", root);
-  whereStoryState.badges = $("#where-story-badges", root);
   whereStoryState.video = {
     label: $("#where-story-video-label", root),
     status: $("#where-story-video-status", root),
@@ -1227,37 +1260,26 @@ function setupApplicationStories() {
   whereStoryState.labels = {
     problem: $("#where-story-label-problem", root),
     solution: $("#where-story-label-solution", root),
-    buyer: $("#where-story-label-buyer", root),
-    demo: $("#where-story-label-demo", root),
   };
   whereStoryState.fields = {
     problem: $("#where-story-problem", root),
     solution: $("#where-story-solution", root),
     value: $("#where-story-value", root),
-    buyer: $("#where-story-buyer", root),
-    demo: $("#where-story-demo", root),
   };
 
   if (
     !whereStoryState.eyebrow ||
     !whereStoryState.title ||
     !whereStoryState.pitch ||
-    !whereStoryState.summaryLabel ||
-    !whereStoryState.bulletsTitle ||
     !whereStoryState.winLabel ||
-    !whereStoryState.badges ||
     !whereStoryState.video.label ||
     !whereStoryState.video.status ||
     !whereStoryState.video.note ||
     !whereStoryState.labels.problem ||
     !whereStoryState.labels.solution ||
-    !whereStoryState.labels.buyer ||
-    !whereStoryState.labels.demo ||
     !whereStoryState.fields.problem ||
     !whereStoryState.fields.solution ||
-    !whereStoryState.fields.value ||
-    !whereStoryState.fields.buyer ||
-    !whereStoryState.fields.demo
+    !whereStoryState.fields.value
   ) {
     return;
   }
