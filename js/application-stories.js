@@ -12,6 +12,7 @@ var APPLICATION_STORY_SLUGS = {
   privateHomes: "private-homes",
   residentialComplexes: "residential-complexes",
   officeBuildings: "office-buildings",
+  rollerShutters: "roller-shutters",
   industrialFacilities: "industrial-facilities",
   sportsFacilities: "sports-facilities",
   educationalInstitutions: "educational-institutions",
@@ -1015,6 +1016,53 @@ var APPLICATION_STORIES = {
   },
 };
 
+var APPLICATION_STORY_ADDITIONS = {
+  en: {
+    rollerShutters: {
+      pitch:
+        "WiFiGate can operate electric roller shutters with the same simple phone-based access flow used across the rest of the property.",
+      problem:
+        "Roller shutters at garages, service entries, or private access points are often controlled by separate remotes or wall switches, which makes access harder to share and harder to manage.",
+      solution:
+        "Authorized users can operate the shutter from the phone, while owners or admins can control who gets access and when, without handing out extra remotes.",
+      value:
+        "Fewer remotes, simpler access management, faster daily use, and a more consistent smart-entry experience.",
+      buyer:
+        "Property owners, installers, warehouses, garages, and sites that use electric roller shutters for controlled access.",
+      demo:
+        "Show one authorized user operating the shutter from the phone and then granting limited access to another person.",
+    },
+  },
+  he: {
+    rollerShutters: {
+      pitch:
+        "\u05d4-WiFiGate \u05d9\u05db\u05d5\u05dc\u05d4 \u05dc\u05d4\u05e4\u05e2\u05d9\u05dc \u05ea\u05e8\u05d9\u05e1\u05d9 \u05d2\u05dc\u05d9\u05dc\u05d4 \u05d7\u05e9\u05de\u05dc\u05d9\u05d9\u05dd \u05d1\u05d0\u05d5\u05ea\u05d4 \u05d6\u05e8\u05d9\u05de\u05ea \u05d2\u05d9\u05e9\u05d4 \u05e4\u05e9\u05d5\u05d8\u05d4 \u05de\u05d4\u05d8\u05dc\u05e4\u05d5\u05df \u05e9\u05de\u05e9\u05de\u05e9\u05ea \u05d0\u05ea \u05e9\u05d0\u05e8 \u05d4\u05de\u05e2\u05e8\u05db\u05ea.",
+      problem:
+        "\u05ea\u05e8\u05d9\u05e1\u05d9 \u05d2\u05dc\u05d9\u05dc\u05d4 \u05d1\u05d7\u05e0\u05d9\u05d5\u05ea, \u05d1\u05db\u05e0\u05d9\u05e1\u05d5\u05ea \u05e9\u05d9\u05e8\u05d5\u05ea \u05d0\u05d5 \u05d1\u05de\u05e2\u05d1\u05e8\u05d9\u05dd \u05e4\u05e8\u05d8\u05d9\u05d9\u05dd \u05e0\u05e9\u05dc\u05d8\u05d9\u05dd \u05dc\u05e2\u05d9\u05ea\u05d9\u05dd \u05e7\u05e8\u05d5\u05d1\u05d5\u05ea \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea \u05e9\u05dc\u05d8\u05d9\u05dd \u05e0\u05e4\u05e8\u05d3\u05d9\u05dd \u05d0\u05d5 \u05de\u05ea\u05d2\u05d9 \u05e7\u05d9\u05e8, \u05de\u05d4 \u05e9\u05de\u05e7\u05e9\u05d4 \u05e2\u05dc \u05e9\u05d9\u05ea\u05d5\u05e3 \u05d5\u05e0\u05d9\u05d4\u05d5\u05dc \u05d4\u05d2\u05d9\u05e9\u05d4.",
+      solution:
+        "\u05de\u05e9\u05ea\u05de\u05e9\u05d9\u05dd \u05de\u05d5\u05e8\u05e9\u05d9\u05dd \u05d9\u05db\u05d5\u05dc\u05d9\u05dd \u05dc\u05d4\u05e4\u05e2\u05d9\u05dc \u05d0\u05ea \u05d4\u05ea\u05e8\u05d9\u05e1 \u05de\u05d4\u05d8\u05dc\u05e4\u05d5\u05df, \u05d5\u05d1\u05e2\u05dc \u05d4\u05e0\u05db\u05e1 \u05d0\u05d5 \u05d4\u05d0\u05d3\u05de\u05d9\u05df \u05d9\u05db\u05d5\u05dc\u05d9\u05dd \u05dc\u05e7\u05d1\u05d5\u05e2 \u05de\u05d9 \u05de\u05e7\u05d1\u05dc \u05d2\u05d9\u05e9\u05d4 \u05d5\u05de\u05ea\u05d9, \u05d1\u05dc\u05d9 \u05dc\u05d7\u05dc\u05e7 \u05e9\u05dc\u05d8\u05d9\u05dd \u05e0\u05d5\u05e1\u05e4\u05d9\u05dd.",
+      value:
+        "\u05e4\u05d7\u05d5\u05ea \u05e9\u05dc\u05d8\u05d9\u05dd, \u05e0\u05d9\u05d4\u05d5\u05dc \u05d2\u05d9\u05e9\u05d4 \u05e4\u05e9\u05d5\u05d8 \u05d9\u05d5\u05ea\u05e8, \u05e9\u05d9\u05de\u05d5\u05e9 \u05d9\u05d5\u05de\u05d9\u05d5\u05de\u05d9 \u05de\u05d4\u05d9\u05e8 \u05d9\u05d5\u05ea\u05e8 \u05d5\u05d7\u05d5\u05d5\u05d9\u05d9\u05ea \u05db\u05e0\u05d9\u05e1\u05d4 \u05d7\u05db\u05de\u05d4 \u05d0\u05d7\u05d9\u05d3\u05d4 \u05d9\u05d5\u05ea\u05e8.",
+      buyer:
+        "\u05d1\u05e2\u05dc\u05d9 \u05e0\u05db\u05e1\u05d9\u05dd, \u05de\u05ea\u05e7\u05d9\u05e0\u05d9\u05dd, \u05de\u05d7\u05e1\u05e0\u05d9\u05dd, \u05d7\u05e0\u05d9\u05d5\u05ea \u05d5\u05d0\u05ea\u05e8\u05d9\u05dd \u05e9\u05de\u05e9\u05ea\u05de\u05e9\u05d9\u05dd \u05d1\u05ea\u05e8\u05d9\u05e1\u05d9 \u05d2\u05dc\u05d9\u05dc\u05d4 \u05d7\u05e9\u05de\u05dc\u05d9\u05d9\u05dd \u05dc\u05d2\u05d9\u05e9\u05d4 \u05de\u05d1\u05d5\u05e7\u05e8\u05ea.",
+      demo:
+        "\u05d4\u05e8\u05d0\u05d5 \u05de\u05e9\u05ea\u05de\u05e9 \u05de\u05d5\u05e8\u05e9\u05d4 \u05de\u05e4\u05e2\u05d9\u05dc \u05d0\u05ea \u05d4\u05ea\u05e8\u05d9\u05e1 \u05de\u05d4\u05d8\u05dc\u05e4\u05d5\u05df \u05d5\u05d0\u05d6 \u05de\u05e2\u05e0\u05d9\u05e7 \u05d2\u05d9\u05e9\u05d4 \u05de\u05d5\u05d2\u05d1\u05dc\u05ea \u05dc\u05de\u05e9\u05ea\u05de\u05e9 \u05e0\u05d5\u05e1\u05e3.",
+    },
+  },
+};
+
+Object.keys(APPLICATION_STORY_ADDITIONS).forEach((lang) => {
+  if (!APPLICATION_STORIES[lang]) {
+    APPLICATION_STORIES[lang] = {};
+  }
+
+  APPLICATION_STORIES[lang] = Object.assign(
+    {},
+    APPLICATION_STORIES[lang],
+    APPLICATION_STORY_ADDITIONS[lang]
+  );
+});
+
 var APPLICATION_STORY_CONTENT_OVERRIDES = {
   en: {
     hotels: {
@@ -1060,6 +1108,51 @@ Object.keys(APPLICATION_STORY_CONTENT_OVERRIDES).forEach((lang) => {
       {},
       APPLICATION_STORIES[lang][storyKey],
       APPLICATION_STORY_CONTENT_OVERRIDES[lang][storyKey]
+    );
+  });
+});
+
+var APPLICATION_STORY_CONTENT_EXTRA_OVERRIDES = {
+  en: {
+    barrierGates: {
+      pitch:
+        "WiFiGate gives private-home parking a cleaner access flow for family members, guests, and service vehicles without relying on shared remotes.",
+      problem:
+        "Private home parking often depends on remotes, calls, or manual gate opening, which creates delays, lost remotes, and too much day-to-day coordination.",
+      solution:
+        "Homeowners can open the gate from the phone, share time-limited access for guests or workers, and keep daily parking access simple for regular drivers.",
+      value:
+        "Cleaner parking access, fewer lost remotes, faster arrivals, and better control over who can enter the property.",
+    },
+  },
+  he: {
+    barrierGates: {
+      pitch:
+        "\u05d4-WiFiGate \u05de\u05e1\u05e4\u05e7\u05ea \u05dc\u05d7\u05e0\u05d9\u05d5\u05ea \u05dc\u05d1\u05ea\u05d9\u05dd \u05e4\u05e8\u05d8\u05d9\u05d9\u05dd \u05d6\u05e8\u05d9\u05de\u05ea \u05d2\u05d9\u05e9\u05d4 \u05e0\u05e7\u05d9\u05d9\u05d4 \u05d9\u05d5\u05ea\u05e8 \u05dc\u05d1\u05e0\u05d9 \u05d4\u05de\u05e9\u05e4\u05d7\u05d4, \u05dc\u05d0\u05d5\u05e8\u05d7\u05d9\u05dd \u05d5\u05dc\u05e8\u05db\u05d1\u05d9 \u05e9\u05d9\u05e8\u05d5\u05ea \u05d1\u05dc\u05d9 \u05dc\u05d4\u05e1\u05ea\u05de\u05da \u05e2\u05dc \u05e9\u05dc\u05d8\u05d9\u05dd \u05de\u05e9\u05d5\u05ea\u05e4\u05d9\u05dd.",
+      problem:
+        "\u05d7\u05e0\u05d9\u05d4 \u05d1\u05d1\u05d9\u05ea \u05e4\u05e8\u05d8\u05d9 \u05e0\u05e9\u05e2\u05e0\u05ea \u05dc\u05e2\u05d9\u05ea\u05d9\u05dd \u05e7\u05e8\u05d5\u05d1\u05d5\u05ea \u05e2\u05dc \u05e9\u05dc\u05d8\u05d9\u05dd, \u05e9\u05d9\u05d7\u05d5\u05ea \u05d0\u05d5 \u05e4\u05ea\u05d9\u05d7\u05d4 \u05d9\u05d3\u05e0\u05d9\u05ea \u05e9\u05dc \u05d4\u05e9\u05e2\u05e8, \u05de\u05d4 \u05e9\u05d9\u05d5\u05e6\u05e8 \u05e2\u05d9\u05db\u05d5\u05d1\u05d9\u05dd, \u05d0\u05d5\u05d1\u05d3\u05df \u05e9\u05dc\u05d8\u05d9\u05dd \u05d5\u05d9\u05d5\u05ea\u05e8 \u05de\u05d3\u05d9 \u05ea\u05d9\u05d0\u05d5\u05dd \u05d9\u05d5\u05de\u05d9\u05d5\u05de\u05d9.",
+      solution:
+        "\u05d1\u05e2\u05dc\u05d9 \u05d4\u05d1\u05d9\u05ea \u05d9\u05db\u05d5\u05dc\u05d9\u05dd \u05dc\u05e4\u05ea\u05d5\u05d7 \u05d0\u05ea \u05d4\u05e9\u05e2\u05e8 \u05de\u05d4\u05d8\u05dc\u05e4\u05d5\u05df, \u05dc\u05e9\u05ea\u05e3 \u05d2\u05d9\u05e9\u05d4 \u05de\u05d5\u05d2\u05d1\u05dc\u05ea \u05d1\u05d6\u05de\u05df \u05dc\u05d0\u05d5\u05e8\u05d7\u05d9\u05dd \u05d0\u05d5 \u05dc\u05e2\u05d5\u05d1\u05d3\u05d9\u05dd, \u05d5\u05dc\u05e9\u05de\u05d5\u05e8 \u05e2\u05dc \u05d6\u05e8\u05d9\u05de\u05ea \u05d7\u05e0\u05d9\u05d4 \u05d9\u05d5\u05de\u05d9\u05d5\u05de\u05d9\u05ea \u05e4\u05e9\u05d5\u05d8\u05d4 \u05dc\u05e0\u05d4\u05d2\u05d9\u05dd \u05e7\u05d1\u05d5\u05e2\u05d9\u05dd.",
+      value:
+        "\u05d2\u05d9\u05e9\u05ea \u05d7\u05e0\u05d9\u05d4 \u05de\u05e1\u05d5\u05d3\u05e8\u05ea \u05d9\u05d5\u05ea\u05e8, \u05e4\u05d7\u05d5\u05ea \u05e9\u05dc\u05d8\u05d9\u05dd \u05d0\u05d1\u05d5\u05d3\u05d9\u05dd, \u05d4\u05d2\u05e2\u05d4 \u05de\u05d4\u05d9\u05e8\u05d4 \u05d9\u05d5\u05ea\u05e8 \u05d5\u05d9\u05d5\u05ea\u05e8 \u05e9\u05dc\u05d9\u05d8\u05d4 \u05e2\u05dc \u05de\u05d9 \u05d9\u05db\u05d5\u05dc \u05dc\u05d4\u05d9\u05db\u05e0\u05e1 \u05dc\u05e0\u05db\u05e1.",
+    },
+  },
+};
+
+Object.keys(APPLICATION_STORY_CONTENT_EXTRA_OVERRIDES).forEach((lang) => {
+  if (!APPLICATION_STORIES[lang]) {
+    return;
+  }
+
+  Object.keys(APPLICATION_STORY_CONTENT_EXTRA_OVERRIDES[lang]).forEach((storyKey) => {
+    if (!APPLICATION_STORIES[lang][storyKey]) {
+      return;
+    }
+
+    APPLICATION_STORIES[lang][storyKey] = Object.assign(
+      {},
+      APPLICATION_STORIES[lang][storyKey],
+      APPLICATION_STORY_CONTENT_EXTRA_OVERRIDES[lang][storyKey]
     );
   });
 });
