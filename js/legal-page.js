@@ -1,7 +1,7 @@
 // /js/legal-page.js
 // Version: 2.0.0
 
-const LEGAL_PAGE_LANGUAGE = "en"
+const DEFAULT_LEGAL_PAGE_LANGUAGE = "en"
 
 function setLegalPageYear() {
   const yearEl = document.getElementById("js-year")
@@ -30,12 +30,14 @@ function applyLegalPageMeta() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const savedLang = localStorage.getItem("language") || LEGAL_PAGE_LANGUAGE
+  const savedLang = localStorage.getItem("language") || DEFAULT_LEGAL_PAGE_LANGUAGE
+  const initialLang =
+    typeof resolveLanguage === "function"
+      ? resolveLanguage(savedLang)
+      : savedLang
 
   if (typeof changeLanguage === "function") {
-    // Keep the legal draft consistent on first load without overwriting
-    // the visitor's preferred language for the rest of the site.
-    changeLanguage(LEGAL_PAGE_LANGUAGE)
+    changeLanguage(initialLang)
   }
 
   if (typeof setupAccessibilityWidget === "function") {
@@ -49,11 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof setupLanguageSelector === "function") {
     setupLanguageSelector()
   }
-
-  if (savedLang !== LEGAL_PAGE_LANGUAGE) {
-    localStorage.setItem("language", savedLang)
-  }
-
   setLegalPageYear()
   applyLegalPageMeta()
   document.addEventListener("site-language-change", applyLegalPageMeta)
