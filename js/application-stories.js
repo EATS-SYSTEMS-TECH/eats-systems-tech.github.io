@@ -1062,13 +1062,13 @@ var APPLICATION_STORY_CONTENT_OVERRIDES = {
     },
     vacationRentals: {
       pitch:
-        "WiFiGate removes the hassle around check-in and check-out in vacation rentals and Airbnb properties, without keys, remotes, or RFID tags.",
+        "WiFiGate removes the hassle around check-in and check-out in vacation rentals and Airbnb properties, without keys, remotes, RFID tags, or other physical access media.",
       problem:
-        "Hosts and property managers lose time coordinating arrivals, handing over keys or remotes, managing RFID tags, and helping guests who get stuck at the gate or parking entrance.",
+        "Hosts and property managers deal with guest arrivals, parking access, and the ongoing logistics of physical access tools that can be lost, stolen, or copied.",
       solution:
-        "Guest access can be sent proactively by the host or delivered automatically as soon as the stay is booked, depending on the setup. Guests receive a clear phone-based arrival flow instead of collecting physical access devices, and access can end automatically at check-out.",
+        "Guests can receive access automatically as soon as the booking is confirmed for the booked stay window, or the host or property manager can send guest access proactively from the phone and set it to start and end automatically around the stay.",
       value:
-        "Smoother guest arrival, fewer support calls, less dependence on physical keys or remotes, no RFID-tag logistics, and more control and confidence for the host or property manager.",
+        "Smoother guest arrival, less operational load, no key, remote, or RFID-tag logistics, tighter control over access permissions, and better security than physical access media that can be stolen or copied.",
     },
   },
   he: {
@@ -1084,13 +1084,13 @@ var APPLICATION_STORY_CONTENT_OVERRIDES = {
     },
     vacationRentals: {
       pitch:
-        "WiFiGate מונעת את כל ההתעסקות סביב תהליכי הצ'ק-אין והצ'ק-אאוט בדירות נופש ו-Airbnb, בלי מפתחות, שלטים או תגי RFID.",
+        "WiFiGate מייתרת את ההתעסקות סביב תהליכי הצ'ק-אין והצ'ק-אאוט בדירות נופש ו-Airbnb, בלי מפתחות, שלטים, תגי RFID או אמצעי גישה פיזיים.",
       problem:
-        "מארחים ומנהלי נכסים מאבדים זמן על תיאום הגעות, מסירת מפתחות או שלטים, ניהול תגי RFID ומענה לאורחים שמסתבכים ליד השער או בכניסה לחניה.",
+        "דירות נופש ו-Airbnb מתמודדות עם הגעות אורחים, כניסה לחניה, ועם לוגיסטיקה מתמשכת של מפתחות, שלטים ותגי RFID שעלולים ללכת לאיבוד, להיגנב או להיות מועתקים.",
       solution:
-        "ניתן להעניק גישת כניסה לאורח באופן אוטומטי מיד עם אישור ההזמנה, או לשלוח גישת אורח באופן יזום לפי הצורך. האורח מקבל תהליך הגעה ברור ופשוט ישירות לטלפון, בלי איסוף מפתחות, שלטים או תגי RFID, והגישה יכולה להסתיים אוטומטית בצ'ק-אאוט.",
+        "בעת אישור ההזמנה, האורחים יכולים לקבל גישת כניסה אוטומטית בהתאם לטווח השהות שהוזמן, או שבעל הנכס או מנהל הדירה יכול לשלוח גישת אורח באופן יזום ישירות מהטלפון, ולהגדיר שהגישה תופעל ותסתיים באופן אוטומטי לפי זמני האירוח.",
       value:
-        "הגעה חלקה יותר של האורח, פחות שיחות תמיכה, פחות תלות במפתחות או שלטים פיזיים, בלי התעסקות לוגיסטית בתגי RFID, ויותר שליטה ואמון למארח או למנהל הנכס.",
+        "כך האורחים נהנים מהגעה חלקה ופשוטה יותר, ובעל הנכס נהנה מפחות עומס תפעולי, פחות התעסקות לוגיסטית במפתחות, שלטים ותגי RFID, יותר שליטה על הרשאות הכניסה, ופתרון מאובטח יותר משום שאמצעי גישה פיזיים ניתנים לגניבה, לאובדן או להעתקה.",
     },
   },
 };
