@@ -126,6 +126,22 @@ body.rtl.legal-page .language-selector {
   color: #0542ad;
 }
 
+.legal-card a.btn {
+  text-decoration: none;
+}
+
+.legal-card a.btn--primary,
+.legal-card a.btn--primary:hover,
+.legal-card a.btn--primary:visited {
+  color: #ffffff;
+}
+
+.legal-card a.btn--ghost,
+.legal-card a.btn--ghost:hover,
+.legal-card a.btn--ghost:visited {
+  color: #111827;
+}
+
 .legal-note {
   margin-top: 1.75rem;
   padding: 1rem 1.1rem;
