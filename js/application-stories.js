@@ -1286,8 +1286,6 @@ function renderApplicationStory(storyKey) {
   whereStoryState.card.setAttribute("data-story-key", storyKey);
   whereStoryState.eyebrow.textContent = ui.eyebrow;
   whereStoryState.title.textContent = getApplicationStoryTitle(storyKey, lang);
-  whereStoryState.closeText.textContent = ui.close;
-  whereStoryState.closeButton.setAttribute("aria-label", ui.closeAria);
   whereStoryState.winLabel.textContent = ui.winLabel;
   whereStoryState.video.label.textContent = ui.videoLabel;
   whereStoryState.video.status.textContent = ui.videoStatus;
@@ -1328,10 +1326,8 @@ function setupApplicationStories() {
   const links = $$(".where-list__link[data-story-key]", root);
   const panel = $("#where-story-panel", root);
   const card = $("#where-story-card", root);
-  const closeButton = $("#where-story-close", root);
-  const closeText = $("#where-story-close-text", root);
 
-  if (!links.length || !panel || !card || !closeButton || !closeText) {
+  if (!links.length || !panel || !card) {
     return;
   }
 
@@ -1339,8 +1335,6 @@ function setupApplicationStories() {
   whereStoryState.links = links;
   whereStoryState.panel = panel;
   whereStoryState.card = card;
-  whereStoryState.closeButton = closeButton;
-  whereStoryState.closeText = closeText;
   whereStoryState.eyebrow = $("#where-story-eyebrow", root);
   whereStoryState.title = $("#where-story-title", root);
   whereStoryState.pitch = $("#where-story-pitch", root);
@@ -1398,15 +1392,35 @@ function setupApplicationStories() {
     });
   });
 
-  closeButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    hideApplicationStory({ focusTrigger: true, updateHash: true });
-  });
-
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && whereStoryState.activeKey) {
       hideApplicationStory({ focusTrigger: true, updateHash: true });
     }
+  });
+
+  document.addEventListener("click", (event) => {
+    if (
+      !whereStoryState.activeKey ||
+      whereStoryState.panel.hidden ||
+      !whereStoryState.card ||
+      !whereStoryState.card.isConnected
+    ) {
+      return;
+    }
+
+    const target = event.target;
+    if (!(target instanceof Element)) {
+      return;
+    }
+
+    if (
+      target.closest("#where-story-card") ||
+      target.closest(".where-list__link[data-story-key]")
+    ) {
+      return;
+    }
+
+    hideApplicationStory({ updateHash: true });
   });
 
   document.addEventListener("site-language-change", () => {

@@ -2033,14 +2033,14 @@ ul {
 }
 
 .where-story-card__header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
+  display: grid;
+  gap: 0.45rem;
 }
 
 .where-story-card__heading {
   min-width: 0;
+  width: 100%;
+  text-align: start;
 }
 
 .where-story-card__eyebrow {
@@ -2088,6 +2088,7 @@ ul {
 .where-story-card__title {
   margin: 0;
   font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  line-height: 1.2;
 }
 
 .where-story-card__hero {
@@ -2330,7 +2331,11 @@ html[dir="rtl"] .where-list__link.is-active {
 }
 
 html[dir="rtl"] .where-story-card__header {
-  flex-direction: row-reverse;
+  text-align: right;
+}
+
+html[dir="rtl"] .where-story-card__heading {
+  text-align: right;
 }
 
 html[dir="rtl"] .where-story-card__video-meta {
@@ -2370,17 +2375,21 @@ html[dir="rtl"] .where-story-card__video-meta {
   }
 
   .where-story-card__header {
-    flex-direction: column;
-    align-items: stretch;
+    gap: 0.35rem;
   }
 
   .where-story-card__hero {
     grid-template-columns: 1fr;
   }
 
-  .where-story-card__close {
-    width: 100%;
-    justify-content: center;
+  .where-story-card__eyebrow {
+    margin-bottom: 0.3rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+  }
+
+  .where-story-card__title {
+    font-size: clamp(1.2rem, 5vw, 1.55rem);
   }
 
   .where-story-card__video-meta {
