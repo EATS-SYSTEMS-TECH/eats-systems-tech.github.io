@@ -1051,10 +1051,14 @@ Object.keys(APPLICATION_STORY_ADDITIONS).forEach((lang) => {
 var APPLICATION_STORY_CONTENT_OVERRIDES = {
   en: {
     hotels: {
+      pitch:
+        "WiFiGate removes the hassle around check-in and check-out for hotels and hospitality sites, without keys, RFID tags, NFC cards, or other physical access media.",
+      problem:
+        "Hotels and hospitality sites deal with guest arrivals, parking access, staff entry, service providers, and the ongoing logistics of physical access tools that can be lost, stolen, or copied.",
       solution:
-        "Hotel teams can manage access to gates, barriers, and controlled entry points from the phone. Guests can receive temporary access where relevant, staff can use recurring permissions for daily operations, and guest access can end automatically at check-out to help prevent return entry after the stay.",
+        "Guests can receive access automatically as soon as the booking is confirmed for the booked stay window, or hotel staff can grant temporary access directly from the phone, assign the right staff permissions, and set access to start and end automatically around the stay.",
       value:
-        "A better guest arrival experience, less operational friction, cleaner parking access, and stronger check-out control without manual follow-up.",
+        "Smoother guest arrival, less operational load, no physical-key or card logistics, tighter control over access permissions, and better security than physical access media that can be stolen or copied.",
     },
     vacationRentals: {
       pitch:
@@ -1069,10 +1073,14 @@ var APPLICATION_STORY_CONTENT_OVERRIDES = {
   },
   he: {
     hotels: {
+      pitch:
+        "WiFiGate מייתרת את ההתעסקות סביב תהליכי הצ'ק-אין והצ'ק-אאוט בבתי מלון ואתרי אירוח, בלי מפתחות, תגי RFID, כרטיסי NFC או אמצעי גישה פיזיים.",
+      problem:
+        "בתי מלון ואתרי אירוח מתמודדים עם הגעות אורחים, חניה, כניסות צוות וספקים, ועם לוגיסטיקה מתמשכת של אמצעי גישה פיזיים שעלולים ללכת לאיבוד, להיגנב או להיות מועתקים.",
       solution:
-        "צוותי המלון יכולים לנהל גישה לשערים, למחסומים ולנקודות כניסה מבוקרות מהטלפון. אורחים יכולים לקבל גישה זמנית כשצריך, לעובדים יש הרשאות קבועות לתפעול היומיומי, והגישה של האורח יכולה להסתיים אוטומטית בזמן הצ'ק-אאוט כדי לצמצם גישה לאחר העזיבה.",
+        "בעת אישור ההזמנה, האורחים יכולים לקבל גישת כניסה אוטומטית בהתאם לטווח השהות שהוזמן, או שצוות המלון או האתר יכול להעניק גישת כניסה זמנית ישירות מהטלפון, להגדיר הרשאות מתאימות לצוות, ולקבוע שהגישה תופעל ותסתיים באופן אוטומטי לפי זמני האירוח.",
       value:
-        "חוויית הגעה טובה יותר לאורח, פחות חיכוך תפעולי, גישת חניה מסודרת יותר ויותר שליטה על סיום גישה בצ'ק-אאוט בלי מעקב ידני.",
+        "כך האורחים נהנים מהגעה חלקה ופשוטה יותר, והמלון נהנה מפחות עומס תפעולי, פחות התעסקות לוגיסטית במפתחות, תגי RFID וכרטיסי NFC, יותר שליטה על הרשאות הכניסה, ופתרון מאובטח יותר משום שאמצעי גישה פיזיים ניתנים לגניבה, לאובדן או להעתקה.",
     },
     vacationRentals: {
       pitch:
