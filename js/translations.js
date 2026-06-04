@@ -127,7 +127,9 @@ var translations = {
     footer: {
       copyright: "WIFIGATE. All rights reserved.",
       tagline: "Smart. Secure. Private. No subscription. No compromises.",
-      terms: "Terms & Conditions"
+      terms: "Terms & Conditions",
+      privacy: "Privacy Policy",
+      cookies: "Cookies"
     }
   },
   he: {
@@ -253,7 +255,9 @@ var translations = {
     footer: {
       copyright: "WIFIGATE. כל הזכויות שמורות.",
       tagline: "חכם. מאובטח. פרטי. בלי מנוי. בלי פשרות.",
-      terms: "תנאים והגבלות"
+      terms: "תנאים והגבלות",
+      privacy: "מדיניות פרטיות",
+      cookies: "עוגיות"
     }
   },
   es: {
@@ -377,7 +381,10 @@ var translations = {
     },
     footer: {
       copyright: "WIFIGATE. Todos los derechos reservados.",
-      tagline: "Inteligente. Seguro. Privado. Sin suscripción. Sin concesiones."
+      tagline: "Inteligente. Seguro. Privado. Sin suscripción. Sin concesiones.",
+      terms: "Términos y Condiciones",
+      privacy: "Política de Privacidad",
+      cookies: "Cookies"
     }
   },
   pt: {
@@ -501,7 +508,10 @@ var translations = {
     },
     footer: {
       copyright: "WIFIGATE. Todos os direitos reservados.",
-      tagline: "Inteligente. Seguro. Privado. Sem subscrição. Sem concessões."
+      tagline: "Inteligente. Seguro. Privado. Sem subscrição. Sem concessões.",
+      terms: "Termos e Condições",
+      privacy: "Política de Privacidade",
+      cookies: "Cookies"
     }
   },
   pl: {
@@ -625,7 +635,10 @@ var translations = {
     },
     footer: {
       copyright: "WIFIGATE. Wszelkie prawa zastrzeżone.",
-      tagline: "Inteligentne. Bezpieczne. Prywatne. Bez abonamentu. Bez kompromisów."
+      tagline: "Inteligentne. Bezpieczne. Prywatne. Bez abonamentu. Bez kompromisów.",
+      terms: "Regulamin",
+      privacy: "Polityka Prywatności",
+      cookies: "Pliki cookie"
     }
   },
   ru: {
@@ -749,7 +762,10 @@ var translations = {
     },
     footer: {
       copyright: "WIFIGATE. Все права защищены.",
-      tagline: "Умно. Безопасно. Конфиденциально. Без подписки. Без компромиссов."
+      tagline: "Умно. Безопасно. Конфиденциально. Без подписки. Без компромиссов.",
+      terms: "Условия и положения",
+      privacy: "Политика конфиденциальности",
+      cookies: "Файлы cookie"
     }
   },
   cs: {
@@ -873,7 +889,10 @@ var translations = {
     },
     footer: {
       copyright: "WIFIGATE. Všechna práva vyhrazena.",
-      tagline: "Chytré. Bezpečné. Soukromé. Bez předplatného. Bez kompromisů."
+      tagline: "Chytré. Bezpečné. Soukromé. Bez předplatného. Bez kompromisů.",
+      terms: "Podmínky používání",
+      privacy: "Zásady ochrany osobních údajů",
+      cookies: "Cookies"
     }
   },
   ar: {
@@ -997,7 +1016,10 @@ var translations = {
     },
     footer: {
       copyright: "WIFIGATE. جميع الحقوق محفوظة.",
-      tagline: "ذكي. آمن. خاص. بلا اشتراك. بلا تنازلات."
+      tagline: "ذكي. آمن. خاص. بلا اشتراك. بلا تنازلات.",
+      terms: "الشروط والأحكام",
+      privacy: "سياسة الخصوصية",
+      cookies: "ملفات تعريف الارتباط"
     }
   }
 };
