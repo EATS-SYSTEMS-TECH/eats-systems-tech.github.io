@@ -372,6 +372,10 @@ html.a11y-high-contrast body {
 html.a11y-high-contrast .site-header,
 html.a11y-high-contrast .feature-card,
 html.a11y-high-contrast .contact-cta,
+html.a11y-high-contrast .where-showcase,
+html.a11y-high-contrast .where-story-card,
+html.a11y-high-contrast .where-story-card__item,
+html.a11y-high-contrast .where-story-card__close,
 html.a11y-high-contrast .language-selector__button,
 html.a11y-high-contrast .language-selector__dropdown,
 html.a11y-high-contrast .a11y-panel,
@@ -395,11 +399,31 @@ html.a11y-high-contrast .section__subtitle,
 html.a11y-high-contrast .feature-card__text,
 html.a11y-high-contrast .about__text,
 html.a11y-high-contrast .contact-cta__text,
+html.a11y-high-contrast .where-story-card__pitch,
+html.a11y-high-contrast .where-story-card__value,
+html.a11y-high-contrast .where-list__item--static,
 html.a11y-high-contrast .site-footer__tagline,
 html.a11y-high-contrast .a11y-option__description,
 html.a11y-high-contrast .a11y-panel__description,
 html.a11y-high-contrast .a11y-support__item {
   color: #1e293b;
+}
+
+html.a11y-high-contrast .where-list__link {
+  color: #020617;
+}
+
+html.a11y-high-contrast .where-story-card__close {
+  color: #020617;
+}
+
+html.a11y-high-contrast .where-list__link.is-active {
+  background: #ffffff;
+  box-shadow: inset 4px 0 0 #020617;
+}
+
+html[dir="rtl"].a11y-high-contrast .where-list__link.is-active {
+  box-shadow: inset -4px 0 0 #020617;
 }
 
 html.a11y-high-contrast .btn--ghost {
