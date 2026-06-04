@@ -22,7 +22,6 @@ var APPLICATION_STORY_SLUGS = {
 
 var APPLICATION_STORY_UI = {
   en: {
-    eyebrow: "Deployment Scenario",
     summary: "Overview",
     bulletsTitle: "Why this deployment fits",
     problem: "Operational need",
@@ -30,7 +29,7 @@ var APPLICATION_STORY_UI = {
     buyer: "Best-fit customer",
     demo: "Best demo angle",
     winLabel: "Why teams choose it",
-    videoLabel: "Scenario video",
+    videoLabel: "Demo video",
     videoStatus: "Coming soon",
     videoNote: "Reserved for a niche-specific demo flow, installer walkthrough, or customer handover video.",
     badges: ["Local operation", "Mobile access", "Guest invites", "Access history"],
@@ -38,7 +37,6 @@ var APPLICATION_STORY_UI = {
     closeAria: "Close story",
   },
   he: {
-    eyebrow: "סיפור שימוש",
     problem: "הבעיה",
     solution: "סיפור WiFiGate",
     value: "הערך",
@@ -48,7 +46,6 @@ var APPLICATION_STORY_UI = {
     closeAria: "סגור סיפור",
   },
   es: {
-    eyebrow: "Historia de uso",
     problem: "Problema",
     solution: "Historia de WiFiGate",
     value: "Valor",
@@ -58,7 +55,6 @@ var APPLICATION_STORY_UI = {
     closeAria: "Cerrar historia",
   },
   pt: {
-    eyebrow: "Historia de uso",
     problem: "Problema",
     solution: "Historia da WiFiGate",
     value: "Valor",
@@ -68,7 +64,6 @@ var APPLICATION_STORY_UI = {
     closeAria: "Fechar historia",
   },
   pl: {
-    eyebrow: "Scenariusz zastosowania",
     problem: "Problem",
     solution: "Historia WiFiGate",
     value: "Wartosc",
@@ -78,7 +73,6 @@ var APPLICATION_STORY_UI = {
     closeAria: "Zamknij opis",
   },
   ru: {
-    eyebrow: "Сценарий применения",
     problem: "Проблема",
     solution: "История WiFiGate",
     value: "Ценность",
@@ -88,7 +82,6 @@ var APPLICATION_STORY_UI = {
     closeAria: "Закрыть историю",
   },
   cs: {
-    eyebrow: "Scenar pouziti",
     problem: "Problem",
     solution: "Pribeh WiFiGate",
     value: "Hodnota",
@@ -98,7 +91,6 @@ var APPLICATION_STORY_UI = {
     closeAria: "Zavrit pribeh",
   },
   ar: {
-    eyebrow: "قصة الاستخدام",
     problem: "المشكلة",
     solution: "قصة WiFiGate",
     value: "القيمة",
@@ -111,7 +103,6 @@ var APPLICATION_STORY_UI = {
 
 var APPLICATION_STORY_UI_OVERRIDES = {
   he: {
-    eyebrow: "\u05ea\u05e8\u05d7\u05d9\u05e9 \u05d9\u05d9\u05e9\u05d5\u05dd",
     summary: "\u05e1\u05e7\u05d9\u05e8\u05d4",
     bulletsTitle: "\u05dc\u05de\u05d4 \u05d4\u05ea\u05e8\u05d7\u05d9\u05e9 \u05d4\u05d6\u05d4 \u05de\u05ea\u05d0\u05d9\u05dd",
     problem: "\u05d4\u05e6\u05d5\u05e8\u05da \u05d4\u05ea\u05e4\u05e2\u05d5\u05dc\u05d9",
@@ -119,7 +110,7 @@ var APPLICATION_STORY_UI_OVERRIDES = {
     buyer: "\u05dc\u05de\u05d9 \u05d6\u05d4 \u05de\u05ea\u05d0\u05d9\u05dd \u05d1\u05de\u05d9\u05d5\u05d7\u05d3",
     demo: "\u05de\u05d4 \u05db\u05d3\u05d0\u05d9 \u05dc\u05d4\u05d3\u05d2\u05d9\u05dd",
     winLabel: "\u05dc\u05de\u05d4 \u05d1\u05d5\u05d7\u05e8\u05d9\u05dd \u05d1\u05d6\u05d4",
-    videoLabel: "\u05d5\u05d9\u05d3\u05d0\u05d5 \u05ea\u05e8\u05d7\u05d9\u05e9",
+    videoLabel: "\u05d5\u05d9\u05d3\u05d0\u05d5 \u05d4\u05d3\u05d2\u05de\u05d4",
     videoStatus: "\u05d1\u05e7\u05e8\u05d5\u05d1",
     videoNote: "\u05d4\u05d0\u05d6\u05d5\u05e8 \u05d4\u05d6\u05d4 \u05de\u05d9\u05d5\u05e2\u05d3 \u05dc\u05d5\u05d9\u05d3\u05d0\u05d5 \u05d4\u05d3\u05d2\u05de\u05d4 \u05d9\u05d9\u05e2\u05d5\u05d3\u05d9 \u05dc\u05e0\u05d9\u05e9\u05d4, \u05dc\u05d4\u05d3\u05e8\u05db\u05ea \u05d4\u05ea\u05e7\u05e0\u05d4 \u05d0\u05d5 \u05dc\u05d6\u05e8\u05d9\u05de\u05ea \u05de\u05e1\u05d9\u05e8\u05ea \u05d2\u05d9\u05e9\u05d4 \u05dc\u05dc\u05e7\u05d5\u05d7.",
     badges: [
@@ -130,7 +121,6 @@ var APPLICATION_STORY_UI_OVERRIDES = {
     ],
   },
   es: {
-    eyebrow: "Escenario de despliegue",
     summary: "Resumen",
     bulletsTitle: "Por que este despliegue encaja",
     problem: "Necesidad operativa",
@@ -138,13 +128,12 @@ var APPLICATION_STORY_UI_OVERRIDES = {
     buyer: "Cliente ideal",
     demo: "Mejor angulo de demo",
     winLabel: "Por que los equipos lo eligen",
-    videoLabel: "Video del escenario",
+    videoLabel: "Video de demostracion",
     videoStatus: "Proximamente",
     videoNote: "Reservado para un flujo de demostracion especifico por nicho, una guia de instalacion o un video de entrega al cliente.",
     badges: ["Operacion local", "Acceso movil", "Invitaciones de invitados", "Historial de acceso"],
   },
   pt: {
-    eyebrow: "Cenario de implantacao",
     summary: "Visao geral",
     bulletsTitle: "Por que esta implantacao funciona",
     problem: "Necessidade operacional",
@@ -152,13 +141,12 @@ var APPLICATION_STORY_UI_OVERRIDES = {
     buyer: "Cliente ideal",
     demo: "Melhor angulo de demonstracao",
     winLabel: "Por que as equipes escolhem",
-    videoLabel: "Video do cenario",
+    videoLabel: "Video de demonstracao",
     videoStatus: "Em breve",
     videoNote: "Reservado para um fluxo de demonstracao especifico do nicho, um guia de instalacao ou um video de entrega ao cliente.",
     badges: ["Operacao local", "Acesso movel", "Convites para convidados", "Historico de acesso"],
   },
   pl: {
-    eyebrow: "Scenariusz wdrozenia",
     summary: "Przeglad",
     bulletsTitle: "Dlaczego to wdrozenie pasuje",
     problem: "Potrzeba operacyjna",
@@ -166,13 +154,12 @@ var APPLICATION_STORY_UI_OVERRIDES = {
     buyer: "Najlepszy klient",
     demo: "Najlepszy kierunek prezentacji",
     winLabel: "Dlaczego zespoly to wybieraja",
-    videoLabel: "Wideo scenariusza",
+    videoLabel: "Wideo demonstracyjne",
     videoStatus: "Wkrotce",
     videoNote: "Miejsce na film dla danej niszy, instrukta\u017c instalatora lub material przekazania systemu klientowi.",
     badges: ["Praca lokalna", "Dostep mobilny", "Zaproszenia gosci", "Historia dostepu"],
   },
   ru: {
-    eyebrow: "\u0421\u0446\u0435\u043d\u0430\u0440\u0438\u0439 \u0432\u043d\u0435\u0434\u0440\u0435\u043d\u0438\u044f",
     summary: "\u041e\u0431\u0437\u043e\u0440",
     bulletsTitle: "\u041f\u043e\u0447\u0435\u043c\u0443 \u044d\u0442\u043e\u0442 \u0441\u0446\u0435\u043d\u0430\u0440\u0438\u0439 \u043f\u043e\u0434\u0445\u043e\u0434\u0438\u0442",
     problem: "\u041e\u043f\u0435\u0440\u0430\u0446\u0438\u043e\u043d\u043d\u0430\u044f \u0437\u0430\u0434\u0430\u0447\u0430",
@@ -180,7 +167,7 @@ var APPLICATION_STORY_UI_OVERRIDES = {
     buyer: "\u041b\u0443\u0447\u0448\u0438\u0439 \u0442\u0438\u043f \u043a\u043b\u0438\u0435\u043d\u0442\u0430",
     demo: "\u041b\u0443\u0447\u0448\u0438\u0439 \u0441\u0446\u0435\u043d\u0430\u0440\u0438\u0439 \u0434\u0435\u043c\u043e\u043d\u0441\u0442\u0440\u0430\u0446\u0438\u0438",
     winLabel: "\u041f\u043e\u0447\u0435\u043c\u0443 \u043a\u043e\u043c\u0430\u043d\u0434\u044b \u0432\u044b\u0431\u0438\u0440\u0430\u044e\u0442 \u044d\u0442\u043e",
-    videoLabel: "\u0412\u0438\u0434\u0435\u043e \u0441\u0446\u0435\u043d\u0430\u0440\u0438\u044f",
+    videoLabel: "\u0414\u0435\u043c\u043e-\u0432\u0438\u0434\u0435\u043e",
     videoStatus: "\u0421\u043a\u043e\u0440\u043e",
     videoNote: "\u0417\u0430\u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0434\u043b\u044f \u043e\u0442\u0440\u0430\u0441\u043b\u0435\u0432\u043e\u0433\u043e \u0434\u0435\u043c\u043e, \u0441\u0446\u0435\u043d\u0430\u0440\u0438\u044f \u0434\u043b\u044f \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u0449\u0438\u043a\u0430 \u0438\u043b\u0438 \u0432\u0438\u0434\u0435\u043e \u043f\u0435\u0440\u0435\u0434\u0430\u0447\u0438 \u0441\u0438\u0441\u0442\u0435\u043c\u044b \u043a\u043b\u0438\u0435\u043d\u0442\u0443.",
     badges: [
@@ -191,7 +178,6 @@ var APPLICATION_STORY_UI_OVERRIDES = {
     ],
   },
   cs: {
-    eyebrow: "Scenar nasazeni",
     summary: "Prehled",
     bulletsTitle: "Proc se toto nasazeni hodi",
     problem: "Provozni potreba",
@@ -199,13 +185,12 @@ var APPLICATION_STORY_UI_OVERRIDES = {
     buyer: "Idealni zakaznici",
     demo: "Nejlepsi smer ukazky",
     winLabel: "Proc si to tymy vybiraji",
-    videoLabel: "Video scenare",
+    videoLabel: "Ukazkove video",
     videoStatus: "Jiz brzy",
     videoNote: "Vyhrazeno pro ukazku pro konkretni segment, postup instalace nebo video pro predani zakaznikovi.",
     badges: ["Lokalni provoz", "Mobilni pristup", "Pozvanky pro hosty", "Historie pristupu"],
   },
   ar: {
-    eyebrow: "\u0633\u064a\u0646\u0627\u0631\u064a\u0648 \u0627\u0644\u062a\u0637\u0628\u064a\u0642",
     summary: "\u0646\u0638\u0631\u0629 \u0639\u0627\u0645\u0629",
     bulletsTitle: "\u0644\u0645\u0627\u0630\u0627 \u064a\u0646\u0627\u0633\u0628 \u0647\u0630\u0627 \u0627\u0644\u0633\u064a\u0646\u0627\u0631\u064a\u0648",
     problem: "\u0627\u0644\u062d\u0627\u062c\u0629 \u0627\u0644\u062a\u0634\u063a\u064a\u0644\u064a\u0629",
@@ -213,7 +198,7 @@ var APPLICATION_STORY_UI_OVERRIDES = {
     buyer: "\u0627\u0644\u0639\u0645\u064a\u0644 \u0627\u0644\u0627\u0646\u0633\u0628",
     demo: "\u0627\u0641\u0636\u0644 \u0632\u0627\u0648\u064a\u0629 \u0644\u0644\u0639\u0631\u0636",
     winLabel: "\u0644\u0645\u0627\u0630\u0627 \u062a\u062e\u062a\u0627\u0631\u0647 \u0627\u0644\u0641\u0631\u0642",
-    videoLabel: "\u0641\u064a\u062f\u064a\u0648 \u0627\u0644\u0633\u064a\u0646\u0627\u0631\u064a\u0648",
+    videoLabel: "\u0641\u064a\u062f\u064a\u0648 \u062a\u0648\u0636\u064a\u062d\u064a",
     videoStatus: "\u0642\u0631\u064a\u0628\u0627",
     videoNote: "\u0645\u062e\u0635\u0635 \u0644\u0641\u064a\u062f\u064a\u0648 \u0639\u0631\u0636 \u062e\u0627\u0635 \u0628\u0643\u0644 \u0642\u0637\u0627\u0639\u060c \u0627\u0648 \u0634\u0631\u062d \u0644\u0644\u0645\u062b\u0628\u062a\u060c \u0627\u0648 \u0641\u064a\u062f\u064a\u0648 \u062a\u0633\u0644\u064a\u0645 \u0644\u0644\u0639\u0645\u064a\u0644.",
     badges: [
@@ -1072,10 +1057,14 @@ var APPLICATION_STORY_CONTENT_OVERRIDES = {
         "A better guest arrival experience, less operational friction, cleaner parking access, and stronger check-out control without manual follow-up.",
     },
     vacationRentals: {
+      pitch:
+        "WiFiGate removes the hassle around check-in and check-out in vacation rentals and Airbnb properties, without keys, remotes, or RFID tags.",
+      problem:
+        "Hosts and property managers lose time coordinating arrivals, handing over keys or remotes, managing RFID tags, and helping guests who get stuck at the gate or parking entrance.",
       solution:
-        "The host sends temporary guest access, optionally limited to a time window or a specific phone. The guest can receive clear arrival details like apartment, floor, parking, and comments, and access can expire automatically at check-out to help prevent continued entry after the stay.",
+        "Guest access can be sent proactively by the host or delivered automatically as soon as the stay is booked, depending on the setup. Guests receive a clear phone-based arrival flow instead of collecting physical access devices, and access can end automatically at check-out.",
       value:
-        "Smoother check-in, fewer support calls, less dependence on physical access devices, better check-out control, and more confidence for the host or operator.",
+        "Smoother guest arrival, fewer support calls, less dependence on physical keys or remotes, no RFID-tag logistics, and more control and confidence for the host or property manager.",
     },
   },
   he: {
@@ -1086,10 +1075,14 @@ var APPLICATION_STORY_CONTENT_OVERRIDES = {
         "חוויית הגעה טובה יותר לאורח, פחות חיכוך תפעולי, גישת חניה מסודרת יותר ויותר שליטה על סיום גישה בצ'ק-אאוט בלי מעקב ידני.",
     },
     vacationRentals: {
+      pitch:
+        "WiFiGate מונעת את כל ההתעסקות סביב תהליכי הצ'ק-אין והצ'ק-אאוט בדירות נופש ו-Airbnb, בלי מפתחות, שלטים או תגי RFID.",
+      problem:
+        "מארחים ומנהלי נכסים מאבדים זמן על תיאום הגעות, מסירת מפתחות או שלטים, ניהול תגי RFID ומענה לאורחים שמסתבכים ליד השער או בכניסה לחניה.",
       solution:
-        "המארח שולח גישת אורח זמנית, עם אפשרות להגבלה לחלון זמן או לטלפון מסוים. האורח יכול לקבל פרטי הגעה ברורים כמו דירה, קומה, חניה והערות, והגישה יכולה לפוג אוטומטית בזמן הצ'ק-אאוט כדי לצמצם גישה לאחר הצ'ק-אאוט.",
+        "ניתן להעניק גישת כניסה לאורח באופן אוטומטי מיד עם אישור ההזמנה, או לשלוח גישת אורח באופן יזום לפי הצורך. האורח מקבל תהליך הגעה ברור ופשוט ישירות לטלפון, בלי איסוף מפתחות, שלטים או תגי RFID, והגישה יכולה להסתיים אוטומטית בצ'ק-אאוט.",
       value:
-        "צ'ק-אין חלק יותר, פחות שיחות תמיכה, פחות תלות באמצעי גישה פיזיים, יותר שליטה למארח או למפעיל ומניעת גישה לאחר צ'ק-אאוט.",
+        "הגעה חלקה יותר של האורח, פחות שיחות תמיכה, פחות תלות במפתחות או שלטים פיזיים, בלי התעסקות לוגיסטית בתגי RFID, ויותר שליטה ואמון למארח או למנהל הנכס.",
     },
   },
 };
@@ -1284,7 +1277,6 @@ function renderApplicationStory(storyKey) {
   whereStoryState.panel.setAttribute("data-story-key", storyKey);
   whereStoryState.card.id = getApplicationStoryAnchorId(storyKey);
   whereStoryState.card.setAttribute("data-story-key", storyKey);
-  whereStoryState.eyebrow.textContent = ui.eyebrow;
   whereStoryState.title.textContent = getApplicationStoryTitle(storyKey, lang);
   whereStoryState.winLabel.textContent = ui.winLabel;
   whereStoryState.video.label.textContent = ui.videoLabel;
@@ -1335,7 +1327,6 @@ function setupApplicationStories() {
   whereStoryState.links = links;
   whereStoryState.panel = panel;
   whereStoryState.card = card;
-  whereStoryState.eyebrow = $("#where-story-eyebrow", root);
   whereStoryState.title = $("#where-story-title", root);
   whereStoryState.pitch = $("#where-story-pitch", root);
   whereStoryState.winLabel = $("#where-story-win-label", root);
@@ -1355,7 +1346,6 @@ function setupApplicationStories() {
   };
 
   if (
-    !whereStoryState.eyebrow ||
     !whereStoryState.title ||
     !whereStoryState.pitch ||
     !whereStoryState.winLabel ||
