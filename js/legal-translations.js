@@ -45,6 +45,8 @@
           "Each user is responsible for protecting their phone, app access, passcodes, biometric access, permissions, and any other method used to open or manage access through the app.",
         body3:
           "Admins are responsible for granting, removing, and reviewing access permissions correctly, and users must invite only guests who are authorized to access the relevant property, gate, or shared area.",
+        body4:
+          "By using the mobile app, you agree that you will not use the WiFiGate mobile app while driving any vehicle. If you need to manage access, stop first and use the app only when it is lawful and safe to do so.",
       },
       localConnection: {
         title: "4. Local Connection and Device Availability",
@@ -131,6 +133,8 @@
           "Share access methods carelessly, leave admin permissions unmanaged, or allow use of the system in a way that creates avoidable safety or security risk.",
         item4:
           "Rely on WiFiGate as the sole method of emergency access, emergency exit, or property safety control.",
+        item5:
+          "Use the WiFiGate mobile app while driving, operating machinery, or in any situation where phone use could create a safety risk.",
       },
       termsUpdates: {
         title: "14. Updates to These Terms",
