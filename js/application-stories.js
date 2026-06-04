@@ -21,12 +21,18 @@ var APPLICATION_STORY_SLUGS = {
 
 var APPLICATION_STORY_UI = {
   en: {
-    eyebrow: "Application Story",
-    problem: "Problem",
-    solution: "WiFiGate Story",
-    value: "Value",
-    buyer: "Best Buyer",
-    demo: "Demo Angle",
+    eyebrow: "Deployment Scenario",
+    summary: "Overview",
+    bulletsTitle: "Why this deployment fits",
+    problem: "Operational need",
+    solution: "Why WiFiGate fits",
+    buyer: "Best-fit customer",
+    demo: "Best demo angle",
+    winLabel: "Why teams choose it",
+    videoLabel: "Scenario video",
+    videoStatus: "Coming soon",
+    videoNote: "Reserved for a niche-specific demo flow, installer walkthrough, or customer handover video.",
+    badges: ["Local operation", "Mobile access", "Guest invites", "Access history"],
     close: "Close",
     closeAria: "Close story",
   },
@@ -101,6 +107,126 @@ var APPLICATION_STORY_UI = {
     closeAria: "اغلاق القصة",
   },
 };
+
+var APPLICATION_STORY_UI_OVERRIDES = {
+  he: {
+    eyebrow: "\u05ea\u05e8\u05d7\u05d9\u05e9 \u05d9\u05d9\u05e9\u05d5\u05dd",
+    summary: "\u05e1\u05e7\u05d9\u05e8\u05d4",
+    bulletsTitle: "\u05dc\u05de\u05d4 \u05d4\u05ea\u05e8\u05d7\u05d9\u05e9 \u05d4\u05d6\u05d4 \u05de\u05ea\u05d0\u05d9\u05dd",
+    problem: "\u05d4\u05e6\u05d5\u05e8\u05da \u05d4\u05ea\u05e4\u05e2\u05d5\u05dc\u05d9",
+    solution: "\u05d0\u05d9\u05da WiFiGate \u05de\u05ea\u05d0\u05d9\u05de\u05d4",
+    buyer: "\u05dc\u05de\u05d9 \u05d6\u05d4 \u05de\u05ea\u05d0\u05d9\u05dd \u05d1\u05de\u05d9\u05d5\u05d7\u05d3",
+    demo: "\u05de\u05d4 \u05db\u05d3\u05d0\u05d9 \u05dc\u05d4\u05d3\u05d2\u05d9\u05dd",
+    winLabel: "\u05dc\u05de\u05d4 \u05d1\u05d5\u05d7\u05e8\u05d9\u05dd \u05d1\u05d6\u05d4",
+    videoLabel: "\u05d5\u05d9\u05d3\u05d0\u05d5 \u05ea\u05e8\u05d7\u05d9\u05e9",
+    videoStatus: "\u05d1\u05e7\u05e8\u05d5\u05d1",
+    videoNote: "\u05d4\u05d0\u05d6\u05d5\u05e8 \u05d4\u05d6\u05d4 \u05de\u05d9\u05d5\u05e2\u05d3 \u05dc\u05d5\u05d9\u05d3\u05d0\u05d5 \u05d4\u05d3\u05d2\u05de\u05d4 \u05d9\u05d9\u05e2\u05d5\u05d3\u05d9 \u05dc\u05e0\u05d9\u05e9\u05d4, \u05dc\u05d4\u05d3\u05e8\u05db\u05ea \u05d4\u05ea\u05e7\u05e0\u05d4 \u05d0\u05d5 \u05dc\u05d6\u05e8\u05d9\u05de\u05ea \u05de\u05e1\u05d9\u05e8\u05ea \u05d2\u05d9\u05e9\u05d4 \u05dc\u05dc\u05e7\u05d5\u05d7.",
+    badges: [
+      "\u05d1\u05e7\u05e8\u05d4 \u05de\u05e7\u05d5\u05de\u05d9\u05ea",
+      "\u05e4\u05ea\u05d9\u05d7\u05d4 \u05de\u05d4\u05e0\u05d9\u05d9\u05d3",
+      "\u05d4\u05d6\u05de\u05e0\u05d5\u05ea \u05d0\u05d5\u05e8\u05d7\u05d9\u05dd",
+      "\u05d4\u05d9\u05e1\u05d8\u05d5\u05e8\u05d9\u05d9\u05ea \u05d2\u05d9\u05e9\u05d4",
+    ],
+  },
+  es: {
+    eyebrow: "Escenario de despliegue",
+    summary: "Resumen",
+    bulletsTitle: "Por que este despliegue encaja",
+    problem: "Necesidad operativa",
+    solution: "Por que WiFiGate encaja",
+    buyer: "Cliente ideal",
+    demo: "Mejor angulo de demo",
+    winLabel: "Por que los equipos lo eligen",
+    videoLabel: "Video del escenario",
+    videoStatus: "Proximamente",
+    videoNote: "Reservado para un flujo de demostracion especifico por nicho, una guia de instalacion o un video de entrega al cliente.",
+    badges: ["Operacion local", "Acceso movil", "Invitaciones de invitados", "Historial de acceso"],
+  },
+  pt: {
+    eyebrow: "Cenario de implantacao",
+    summary: "Visao geral",
+    bulletsTitle: "Por que esta implantacao funciona",
+    problem: "Necessidade operacional",
+    solution: "Por que WiFiGate se encaixa",
+    buyer: "Cliente ideal",
+    demo: "Melhor angulo de demonstracao",
+    winLabel: "Por que as equipes escolhem",
+    videoLabel: "Video do cenario",
+    videoStatus: "Em breve",
+    videoNote: "Reservado para um fluxo de demonstracao especifico do nicho, um guia de instalacao ou um video de entrega ao cliente.",
+    badges: ["Operacao local", "Acesso movel", "Convites para convidados", "Historico de acesso"],
+  },
+  pl: {
+    eyebrow: "Scenariusz wdrozenia",
+    summary: "Przeglad",
+    bulletsTitle: "Dlaczego to wdrozenie pasuje",
+    problem: "Potrzeba operacyjna",
+    solution: "Dlaczego WiFiGate pasuje",
+    buyer: "Najlepszy klient",
+    demo: "Najlepszy kierunek prezentacji",
+    winLabel: "Dlaczego zespoly to wybieraja",
+    videoLabel: "Wideo scenariusza",
+    videoStatus: "Wkrotce",
+    videoNote: "Miejsce na film dla danej niszy, instrukta\u017c instalatora lub material przekazania systemu klientowi.",
+    badges: ["Praca lokalna", "Dostep mobilny", "Zaproszenia gosci", "Historia dostepu"],
+  },
+  ru: {
+    eyebrow: "\u0421\u0446\u0435\u043d\u0430\u0440\u0438\u0439 \u0432\u043d\u0435\u0434\u0440\u0435\u043d\u0438\u044f",
+    summary: "\u041e\u0431\u0437\u043e\u0440",
+    bulletsTitle: "\u041f\u043e\u0447\u0435\u043c\u0443 \u044d\u0442\u043e\u0442 \u0441\u0446\u0435\u043d\u0430\u0440\u0438\u0439 \u043f\u043e\u0434\u0445\u043e\u0434\u0438\u0442",
+    problem: "\u041e\u043f\u0435\u0440\u0430\u0446\u0438\u043e\u043d\u043d\u0430\u044f \u0437\u0430\u0434\u0430\u0447\u0430",
+    solution: "\u041f\u043e\u0447\u0435\u043c\u0443 \u043f\u043e\u0434\u0445\u043e\u0434\u0438\u0442 WiFiGate",
+    buyer: "\u041b\u0443\u0447\u0448\u0438\u0439 \u0442\u0438\u043f \u043a\u043b\u0438\u0435\u043d\u0442\u0430",
+    demo: "\u041b\u0443\u0447\u0448\u0438\u0439 \u0441\u0446\u0435\u043d\u0430\u0440\u0438\u0439 \u0434\u0435\u043c\u043e\u043d\u0441\u0442\u0440\u0430\u0446\u0438\u0438",
+    winLabel: "\u041f\u043e\u0447\u0435\u043c\u0443 \u043a\u043e\u043c\u0430\u043d\u0434\u044b \u0432\u044b\u0431\u0438\u0440\u0430\u044e\u0442 \u044d\u0442\u043e",
+    videoLabel: "\u0412\u0438\u0434\u0435\u043e \u0441\u0446\u0435\u043d\u0430\u0440\u0438\u044f",
+    videoStatus: "\u0421\u043a\u043e\u0440\u043e",
+    videoNote: "\u0417\u0430\u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0434\u043b\u044f \u043e\u0442\u0440\u0430\u0441\u043b\u0435\u0432\u043e\u0433\u043e \u0434\u0435\u043c\u043e, \u0441\u0446\u0435\u043d\u0430\u0440\u0438\u044f \u0434\u043b\u044f \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u0449\u0438\u043a\u0430 \u0438\u043b\u0438 \u0432\u0438\u0434\u0435\u043e \u043f\u0435\u0440\u0435\u0434\u0430\u0447\u0438 \u0441\u0438\u0441\u0442\u0435\u043c\u044b \u043a\u043b\u0438\u0435\u043d\u0442\u0443.",
+    badges: [
+      "\u041b\u043e\u043a\u0430\u043b\u044c\u043d\u0430\u044f \u0440\u0430\u0431\u043e\u0442\u0430",
+      "\u0414\u043e\u0441\u0442\u0443\u043f \u0441 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430",
+      "\u041f\u0440\u0438\u0433\u043b\u0430\u0448\u0435\u043d\u0438\u044f \u0434\u043b\u044f \u0433\u043e\u0441\u0442\u0435\u0439",
+      "\u0418\u0441\u0442\u043e\u0440\u0438\u044f \u0434\u043e\u0441\u0442\u0443\u043f\u0430",
+    ],
+  },
+  cs: {
+    eyebrow: "Scenar nasazeni",
+    summary: "Prehled",
+    bulletsTitle: "Proc se toto nasazeni hodi",
+    problem: "Provozni potreba",
+    solution: "Proc se WiFiGate hodi",
+    buyer: "Idealni zakaznici",
+    demo: "Nejlepsi smer ukazky",
+    winLabel: "Proc si to tymy vybiraji",
+    videoLabel: "Video scenare",
+    videoStatus: "Jiz brzy",
+    videoNote: "Vyhrazeno pro ukazku pro konkretni segment, postup instalace nebo video pro predani zakaznikovi.",
+    badges: ["Lokalni provoz", "Mobilni pristup", "Pozvanky pro hosty", "Historie pristupu"],
+  },
+  ar: {
+    eyebrow: "\u0633\u064a\u0646\u0627\u0631\u064a\u0648 \u0627\u0644\u062a\u0637\u0628\u064a\u0642",
+    summary: "\u0646\u0638\u0631\u0629 \u0639\u0627\u0645\u0629",
+    bulletsTitle: "\u0644\u0645\u0627\u0630\u0627 \u064a\u0646\u0627\u0633\u0628 \u0647\u0630\u0627 \u0627\u0644\u0633\u064a\u0646\u0627\u0631\u064a\u0648",
+    problem: "\u0627\u0644\u062d\u0627\u062c\u0629 \u0627\u0644\u062a\u0634\u063a\u064a\u0644\u064a\u0629",
+    solution: "\u0644\u0645\u0627\u0630\u0627 \u062a\u0646\u0627\u0633\u0628 WiFiGate",
+    buyer: "\u0627\u0644\u0639\u0645\u064a\u0644 \u0627\u0644\u0627\u0646\u0633\u0628",
+    demo: "\u0627\u0641\u0636\u0644 \u0632\u0627\u0648\u064a\u0629 \u0644\u0644\u0639\u0631\u0636",
+    winLabel: "\u0644\u0645\u0627\u0630\u0627 \u062a\u062e\u062a\u0627\u0631\u0647 \u0627\u0644\u0641\u0631\u0642",
+    videoLabel: "\u0641\u064a\u062f\u064a\u0648 \u0627\u0644\u0633\u064a\u0646\u0627\u0631\u064a\u0648",
+    videoStatus: "\u0642\u0631\u064a\u0628\u0627",
+    videoNote: "\u0645\u062e\u0635\u0635 \u0644\u0641\u064a\u062f\u064a\u0648 \u0639\u0631\u0636 \u062e\u0627\u0635 \u0628\u0643\u0644 \u0642\u0637\u0627\u0639\u060c \u0627\u0648 \u0634\u0631\u062d \u0644\u0644\u0645\u062b\u0628\u062a\u060c \u0627\u0648 \u0641\u064a\u062f\u064a\u0648 \u062a\u0633\u0644\u064a\u0645 \u0644\u0644\u0639\u0645\u064a\u0644.",
+    badges: [
+      "\u062a\u0634\u063a\u064a\u0644 \u0645\u062d\u0644\u064a",
+      "\u0648\u0635\u0648\u0644 \u0645\u0646 \u0627\u0644\u0647\u0627\u062a\u0641",
+      "\u062f\u0639\u0648\u0627\u062a \u0644\u0644\u0636\u064a\u0648\u0641",
+      "\u0633\u062c\u0644 \u0627\u0644\u0648\u0635\u0648\u0644",
+    ],
+  },
+};
+
+Object.keys(APPLICATION_STORY_UI_OVERRIDES).forEach((lang) => {
+  APPLICATION_STORY_UI[lang] = Object.assign({}, APPLICATION_STORY_UI[lang], APPLICATION_STORY_UI_OVERRIDES[lang]);
+});
 
 var APPLICATION_STORIES = {
   en: {
@@ -1020,10 +1146,15 @@ function renderApplicationStory(storyKey) {
   whereStoryState.title.textContent = getApplicationStoryTitle(storyKey, lang);
   whereStoryState.closeText.textContent = ui.close;
   whereStoryState.closeButton.setAttribute("aria-label", ui.closeAria);
+  whereStoryState.summaryLabel.textContent = ui.summary;
+  whereStoryState.bulletsTitle.textContent = ui.bulletsTitle;
+  whereStoryState.winLabel.textContent = ui.winLabel;
+  whereStoryState.video.label.textContent = ui.videoLabel;
+  whereStoryState.video.status.textContent = ui.videoStatus;
+  whereStoryState.video.note.textContent = ui.videoNote;
   whereStoryState.pitch.textContent = story.pitch;
   whereStoryState.labels.problem.textContent = ui.problem;
   whereStoryState.labels.solution.textContent = ui.solution;
-  whereStoryState.labels.value.textContent = ui.value;
   whereStoryState.labels.buyer.textContent = ui.buyer;
   whereStoryState.labels.demo.textContent = ui.demo;
   whereStoryState.fields.problem.textContent = story.problem;
@@ -1031,6 +1162,13 @@ function renderApplicationStory(storyKey) {
   whereStoryState.fields.value.textContent = story.value;
   whereStoryState.fields.buyer.textContent = story.buyer;
   whereStoryState.fields.demo.textContent = story.demo;
+  whereStoryState.badges.innerHTML = "";
+  (ui.badges || []).forEach((badgeText) => {
+    const badge = document.createElement("span");
+    badge.className = "where-story-card__badge";
+    badge.textContent = badgeText;
+    whereStoryState.badges.appendChild(badge);
+  });
   whereStoryState.activeKey = storyKey;
 
   updateApplicationStoryLinkState(storyKey);
@@ -1077,10 +1215,18 @@ function setupApplicationStories() {
   whereStoryState.eyebrow = $("#where-story-eyebrow", root);
   whereStoryState.title = $("#where-story-title", root);
   whereStoryState.pitch = $("#where-story-pitch", root);
+  whereStoryState.summaryLabel = $("#where-story-summary-label", root);
+  whereStoryState.bulletsTitle = $("#where-story-bullet-title", root);
+  whereStoryState.winLabel = $("#where-story-win-label", root);
+  whereStoryState.badges = $("#where-story-badges", root);
+  whereStoryState.video = {
+    label: $("#where-story-video-label", root),
+    status: $("#where-story-video-status", root),
+    note: $("#where-story-video-note", root),
+  };
   whereStoryState.labels = {
     problem: $("#where-story-label-problem", root),
     solution: $("#where-story-label-solution", root),
-    value: $("#where-story-label-value", root),
     buyer: $("#where-story-label-buyer", root),
     demo: $("#where-story-label-demo", root),
   };
@@ -1091,6 +1237,31 @@ function setupApplicationStories() {
     buyer: $("#where-story-buyer", root),
     demo: $("#where-story-demo", root),
   };
+
+  if (
+    !whereStoryState.eyebrow ||
+    !whereStoryState.title ||
+    !whereStoryState.pitch ||
+    !whereStoryState.summaryLabel ||
+    !whereStoryState.bulletsTitle ||
+    !whereStoryState.winLabel ||
+    !whereStoryState.badges ||
+    !whereStoryState.video.label ||
+    !whereStoryState.video.status ||
+    !whereStoryState.video.note ||
+    !whereStoryState.labels.problem ||
+    !whereStoryState.labels.solution ||
+    !whereStoryState.labels.buyer ||
+    !whereStoryState.labels.demo ||
+    !whereStoryState.fields.problem ||
+    !whereStoryState.fields.solution ||
+    !whereStoryState.fields.value ||
+    !whereStoryState.fields.buyer ||
+    !whereStoryState.fields.demo
+  ) {
+    return;
+  }
+
   whereStoryState.initialized = true;
 
   links.forEach((link) => {

@@ -375,6 +375,11 @@ html.a11y-high-contrast .contact-cta,
 html.a11y-high-contrast .where-showcase,
 html.a11y-high-contrast .where-story-card,
 html.a11y-high-contrast .where-story-card__item,
+html.a11y-high-contrast .where-story-card__video-frame,
+html.a11y-high-contrast .where-story-card__video-screen,
+html.a11y-high-contrast .where-story-card__bullet,
+html.a11y-high-contrast .where-story-card__win,
+html.a11y-high-contrast .where-story-card__badge,
 html.a11y-high-contrast .where-story-card__close,
 html.a11y-high-contrast .language-selector__button,
 html.a11y-high-contrast .language-selector__dropdown,
@@ -401,12 +406,31 @@ html.a11y-high-contrast .about__text,
 html.a11y-high-contrast .contact-cta__text,
 html.a11y-high-contrast .where-story-card__pitch,
 html.a11y-high-contrast .where-story-card__value,
+html.a11y-high-contrast .where-story-card__video-note,
+html.a11y-high-contrast .where-story-card__bullet-value,
+html.a11y-high-contrast .where-story-card__win-text,
 html.a11y-high-contrast .where-list__item--static,
 html.a11y-high-contrast .site-footer__tagline,
 html.a11y-high-contrast .a11y-option__description,
 html.a11y-high-contrast .a11y-panel__description,
 html.a11y-high-contrast .a11y-support__item {
   color: #1e293b;
+}
+
+html.a11y-high-contrast .where-story-card__video-label,
+html.a11y-high-contrast .where-story-card__video-status,
+html.a11y-high-contrast .where-story-card__summary-label,
+html.a11y-high-contrast .where-story-card__decision-title,
+html.a11y-high-contrast .where-story-card__bullet-label,
+html.a11y-high-contrast .where-story-card__win-label,
+html.a11y-high-contrast .where-story-card__badge {
+  color: #020617;
+}
+
+html.a11y-high-contrast .where-story-card__video-frame::before,
+html.a11y-high-contrast .where-story-card__video-screen::before,
+html.a11y-high-contrast .where-story-card__video-screen::after {
+  opacity: 0.08;
 }
 
 html.a11y-high-contrast .where-list__link {
