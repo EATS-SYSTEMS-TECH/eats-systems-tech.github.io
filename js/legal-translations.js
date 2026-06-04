@@ -88,7 +88,7 @@
           body2:
             "Depending on the implementation, data may be stored locally on the mobile device, on the WiFiGate device, or using another product-specific storage method used by the system.",
           body3:
-            "Please also review the WiFiGate Privacy Notice / Privacy Policy once published for more detail about data handling. This Terms page is not a full privacy notice.",
+            "Please also review the WiFiGate Privacy Policy and Cookies page for more detail about data handling and website storage practices. This Terms page is not a full privacy notice.",
         },
         payments: {
           title: "9. Payments, Plans, and Commercial Terms",
@@ -266,7 +266,7 @@
           body2:
             "בהתאם לאופן היישום, הנתונים עשויים להישמר מקומית במכשיר הנייד, במכשיר WiFiGate או בשיטת אחסון אחרת הספציפית למוצר שבה המערכת משתמשת.",
           body3:
-            "אנא עיינו גם בהודעת הפרטיות / מדיניות הפרטיות של WiFiGate לאחר פרסומה לקבלת פירוט נוסף על הטיפול בנתונים. עמוד תנאים זה אינו מדיניות פרטיות מלאה.",
+            "אנא עיינו גם במדיניות הפרטיות ובעמוד העוגיות של WiFiGate לקבלת פירוט נוסף על הטיפול בנתונים ועל נוהלי האחסון באתר. עמוד תנאים זה אינו מדיניות פרטיות מלאה.",
         },
         payments: {
           title: "9. תשלומים, תוכניות ותנאים מסחריים",
@@ -443,7 +443,7 @@
           body2:
             "Según la implementación, los datos pueden almacenarse localmente en el dispositivo móvil, en el dispositivo WiFiGate o mediante otro método de almacenamiento específico del producto utilizado por el sistema.",
           body3:
-            "Consulta también el Aviso de Privacidad / Política de Privacidad de WiFiGate una vez publicado para obtener más detalles sobre el tratamiento de datos. Esta página de Términos no es una política de privacidad completa.",
+            "Consulta también la Política de Privacidad y la página de Cookies de WiFiGate para obtener más detalles sobre el tratamiento de datos y las prácticas de almacenamiento del sitio web. Esta página de Términos no es una política de privacidad completa.",
         },
         payments: {
           title: "9. Pagos, planes y condiciones comerciales",
@@ -621,7 +621,7 @@
           body2:
             "Dependendo da implementação, os dados podem ser armazenados localmente no dispositivo móvel, no dispositivo WiFiGate ou através de outro método de armazenamento específico do produto usado pelo sistema.",
           body3:
-            "Consulte também o Aviso de Privacidade / Política de Privacidade da WiFiGate, quando publicado, para mais detalhes sobre o tratamento de dados. Esta página de Termos não é uma política de privacidade completa.",
+            "Consulte também a Política de Privacidade e a página de Cookies da WiFiGate para mais detalhes sobre o tratamento de dados e as práticas de armazenamento do website. Esta página de Termos não é uma política de privacidade completa.",
         },
         payments: {
           title: "9. Pagamentos, planos e termos comerciais",
@@ -799,7 +799,7 @@
           body2:
             "W zależności od sposobu wdrożenia dane mogą być przechowywane lokalnie na urządzeniu mobilnym, na urządzeniu WiFiGate lub przy użyciu innej metody przechowywania właściwej dla produktu, używanej przez system.",
           body3:
-            "Zapoznaj się również z Informacją o prywatności / Polityką prywatności WiFiGate po jej opublikowaniu, aby uzyskać więcej informacji o przetwarzaniu danych. Ta strona Warunków nie jest pełną polityką prywatności.",
+            "Zapoznaj się również z Polityką prywatności i stroną Cookies WiFiGate, aby uzyskać więcej informacji o przetwarzaniu danych i praktykach przechowywania danych na stronie. Ta strona Warunków nie jest pełną polityką prywatności.",
         },
         payments: {
           title: "9. Płatności, plany i warunki handlowe",
@@ -977,7 +977,7 @@
           body2:
             "В зависимости от реализации данные могут храниться локально на мобильном устройстве, на устройстве WiFiGate или с использованием другого метода хранения, характерного для продукта и используемого системой.",
           body3:
-            "Также ознакомьтесь с Уведомлением о конфиденциальности / Политикой конфиденциальности WiFiGate после их публикации для получения более подробной информации об обработке данных. Эта страница Условий не является полной политикой конфиденциальности.",
+            "Также ознакомьтесь с Политикой конфиденциальности и страницей Cookies WiFiGate, чтобы получить более подробную информацию об обработке данных и практике хранения данных на сайте. Эта страница Условий не является полной политикой конфиденциальности.",
         },
         payments: {
           title: "9. Платежи, планы и коммерческие условия",
@@ -1155,7 +1155,7 @@
           body2:
             "V závislosti na implementaci mohou být data ukládána lokálně v mobilním zařízení, v zařízení WiFiGate nebo jiným způsobem ukládání specifickým pro produkt, který systém používá.",
           body3:
-            "Po zveřejnění si prosím přečtěte také Oznámení o ochraně soukromí / Zásady ochrany soukromí WiFiGate, kde naleznete více podrobností o zpracování dat. Tato stránka Podmínek není úplnou zásadou ochrany soukromí.",
+            "Přečtěte si také Zásady ochrany soukromí a stránku Cookies WiFiGate, kde najdete více podrobností o zpracování dat a postupech ukládání údajů na webu. Tato stránka Podmínek není úplnou zásadou ochrany soukromí.",
         },
         payments: {
           title: "9. Platby, plány a obchodní podmínky",
@@ -1333,7 +1333,7 @@
           body2:
             "بحسب طريقة التنفيذ، قد يتم تخزين البيانات محليًا على الجهاز المحمول أو على جهاز WiFiGate أو باستخدام وسيلة تخزين أخرى خاصة بالمنتج يستخدمها النظام.",
           body3:
-            "يرجى أيضًا مراجعة إشعار الخصوصية / سياسة الخصوصية الخاصة بـ WiFiGate بعد نشرها للحصول على مزيد من التفاصيل حول التعامل مع البيانات. ولا تُعد صفحة الشروط هذه سياسة خصوصية كاملة.",
+            "يرجى أيضًا مراجعة سياسة الخصوصية وصفحة ملفات تعريف الارتباط الخاصة بـ WiFiGate للحصول على مزيد من التفاصيل حول التعامل مع البيانات وممارسات التخزين في الموقع. ولا تُعد صفحة الشروط هذه سياسة خصوصية كاملة.",
         },
         payments: {
           title: "9. المدفوعات والخطط والشروط التجارية",

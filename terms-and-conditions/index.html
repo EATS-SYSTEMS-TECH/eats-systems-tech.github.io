@@ -34,8 +34,8 @@
   <link rel="stylesheet" href="../css/accessibility.css?v=20260403a" />
   <link rel="stylesheet" href="../css/legal.css?v=20260604c" />
   <script src="../js/utils.js?v=20260402a" defer></script>
-  <script src="../js/translations.js?v=20260405a" defer></script>
-  <script src="../js/legal-translations.js?v=20260604d" defer></script>
+  <script src="../js/translations.js?v=20260604c" defer></script>
+  <script src="../js/legal-translations.js?v=20260604f" defer></script>
   <script src="../js/navigation.js?v=20260405a" defer></script>
   <script src="../js/hero.js?v=20260403b" defer></script>
   <script src="../js/i18n.js?v=20260403b" defer></script>
@@ -130,7 +130,7 @@
         </div>
         <div class="legal-note" data-i18n="legal.hero.disclaimer">
           This document is provided as a general product terms draft and should be reviewed by qualified legal counsel
-          before publication. For clarity, this draft is currently published in English.
+          before publication.
         </div>
       </section>
 
@@ -269,11 +269,18 @@
             Depending on the implementation, data may be stored locally on the mobile device, on the WiFiGate device,
             or using another product-specific storage method used by the system.
           </p>
-          <!-- TODO: Replace this placeholder privacy reference with the published Privacy Notice / Privacy Policy URL before publication. -->
           <p data-i18n="legal.sections.privacy.body3">
-            Please also review the WiFiGate Privacy Notice / Privacy Policy once published for more detail about data
-            handling. This Terms page is not a full privacy notice.
+            Please also review the WiFiGate Privacy Policy and Cookies page for more detail about data handling and
+            website storage practices. This Terms page is not a full privacy notice.
           </p>
+          <ul class="legal-list">
+            <li>
+              <a href="../privacy-policy/" data-i18n="footer.privacy">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="../cookies/" data-i18n="footer.cookies">Cookies</a>
+            </li>
+          </ul>
         </section>
 
         <section class="legal-section" aria-labelledby="payments-title">
@@ -454,6 +461,11 @@
     <div class="container legal-footer__inner">
       <p>&copy; <span id="js-year">2026</span> <span data-i18n="footer.copyright">WIFIGATE. All rights reserved.</span>
       </p>
+      <div class="site-footer__links">
+        <a href="../terms-and-conditions/" class="site-footer__link" data-i18n="footer.terms">Terms &amp; Conditions</a>
+        <a href="../privacy-policy/" class="site-footer__link" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="../cookies/" class="site-footer__link" data-i18n="footer.cookies">Cookies</a>
+      </div>
       <p data-i18n="legal.footer.tagline">Smart access control for gates, doors, and secured properties.</p>
     </div>
   </footer>
