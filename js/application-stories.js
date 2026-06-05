@@ -1050,6 +1050,16 @@ Object.keys(APPLICATION_STORY_ADDITIONS).forEach((lang) => {
 
 var APPLICATION_STORY_CONTENT_OVERRIDES = {
   en: {
+    residentialComplexes: {
+      pitch:
+        "WiFiGate strengthens security and control at residential-building entrances by replacing shared keypad codes, keys, and other physical access tools.",
+      problem:
+        "In many residential buildings, distributing the entry code among residents, guests, vendors, and service teams creates a security risk and makes it difficult to control who still has access in practice.",
+      solution:
+        "WiFiGate lets residents grant guest access in a controlled and secure way directly from the phone, without exposing the keypad code and with time-limited permissions when needed. In addition, the Auto Open feature enables automatic entry from the phone for a smoother resident arrival.",
+      value:
+        "More organized daily entry operations, stronger building security, and a better access experience for both residents and guests.",
+    },
     hotels: {
       pitch:
         "WiFiGate removes the hassle around check-in and check-out for hotels and hospitality sites, without keys, RFID tags, NFC cards, or other physical access media.",
@@ -1072,6 +1082,16 @@ var APPLICATION_STORY_CONTENT_OVERRIDES = {
     },
   },
   he: {
+    residentialComplexes: {
+      pitch:
+        "WiFiGate מחזקת את האבטחה והשליטה בכניסה לבנייני מגורים, ומחליפה את הצורך בשיתוף קוד קודן, מפתחות או אמצעי גישה פיזיים.",
+      problem:
+        "בבנייני מגורים רבים, הפצת קוד הכניסה בין דיירים, אורחים, ספקים ואנשי שירות יוצרת סיכון אבטחתי וחוסר שליטה על מי מחזיק בגישה בפועל.",
+      solution:
+        "באמצעות WiFiGate ניתן להעניק גישת אורח באופן מבוקר ומאובטח, ישירות מהטלפון, ללא חשיפת קוד הקודן ועם אפשרות להגבלת ההרשאה לפי זמן או צורך. בנוסף, פיצ'ר Auto Open מאפשר פתיחה אוטומטית של הכניסה דרך הטלפון, לחוויית מעבר מהירה ורציפה יותר עבור הדיירים.",
+      value:
+        "כך מתקבל תפעול מסודר ונוח יותר של הכניסה לבניין, לצד רמת אבטחה גבוהה יותר וחוויית שימוש טובה יותר לדיירים ולאורחים.",
+    },
     hotels: {
       pitch:
         "WiFiGate מייתרת את ההתעסקות סביב תהליכי הצ'ק-אין והצ'ק-אאוט בבתי מלון ואתרי אירוח, בלי מפתחות, תגי RFID, כרטיסי NFC או אמצעי גישה פיזיים.",
@@ -1117,25 +1137,25 @@ var APPLICATION_STORY_CONTENT_EXTRA_OVERRIDES = {
   en: {
     barrierGates: {
       pitch:
-        "WiFiGate gives private-home parking a cleaner access flow for family members, guests, and service vehicles without relying on shared remotes.",
+        "WiFiGate upgrades access to private-home parking and replaces dependence on RF remotes, keys, and outdated access tools, with no subscription fees.",
       problem:
-        "Private home parking often depends on remotes, calls, or manual gate opening, which creates delays, lost remotes, and too much day-to-day coordination.",
+        "Traditional RF remotes can be copied, lost, or exposed to cloning and break-in attempts, which makes them a weak point in private-home parking security.",
       solution:
-        "Homeowners can open the gate from the phone, share time-limited access for guests or workers, and keep daily parking access simple for regular drivers.",
+        "With WiFiGate, parking access happens through the phone over a secure, encrypted flow instead of shared remotes, while homeowners keep better control over who can enter and when.",
       value:
-        "Cleaner parking access, fewer lost remotes, faster arrivals, and better control over who can enter the property.",
+        "A more secure and encrypted entry experience, no subscription cost, less dependence on physical remotes, and better day-to-day control for the household.",
     },
   },
   he: {
     barrierGates: {
       pitch:
-        "\u05d4-WiFiGate \u05de\u05e1\u05e4\u05e7\u05ea \u05dc\u05d7\u05e0\u05d9\u05d5\u05ea \u05dc\u05d1\u05ea\u05d9\u05dd \u05e4\u05e8\u05d8\u05d9\u05d9\u05dd \u05d6\u05e8\u05d9\u05de\u05ea \u05d2\u05d9\u05e9\u05d4 \u05e0\u05e7\u05d9\u05d9\u05d4 \u05d9\u05d5\u05ea\u05e8 \u05dc\u05d1\u05e0\u05d9 \u05d4\u05de\u05e9\u05e4\u05d7\u05d4, \u05dc\u05d0\u05d5\u05e8\u05d7\u05d9\u05dd \u05d5\u05dc\u05e8\u05db\u05d1\u05d9 \u05e9\u05d9\u05e8\u05d5\u05ea \u05d1\u05dc\u05d9 \u05dc\u05d4\u05e1\u05ea\u05de\u05da \u05e2\u05dc \u05e9\u05dc\u05d8\u05d9\u05dd \u05de\u05e9\u05d5\u05ea\u05e4\u05d9\u05dd.",
+        "\u05d4-WiFiGate \u05de\u05e9\u05d3\u05e8\u05d2\u05ea \u05d0\u05ea \u05d4\u05db\u05e0\u05d9\u05e1\u05d4 \u05dc\u05d7\u05e0\u05d9\u05d5\u05ea \u05d1\u05d1\u05ea\u05d9\u05dd \u05e4\u05e8\u05d8\u05d9\u05d9\u05dd \u05d5\u05de\u05d7\u05dc\u05d9\u05e4\u05d4 \u05d0\u05ea \u05d4\u05ea\u05dc\u05d5\u05ea \u05d1\u05e9\u05dc\u05d8\u05d9 RF, \u05de\u05e4\u05ea\u05d7\u05d5\u05ea \u05d5\u05d0\u05de\u05e6\u05e2\u05d9 \u05d2\u05d9\u05e9\u05d4 \u05de\u05d9\u05d5\u05e9\u05e0\u05d9\u05dd, \u05dc\u05dc\u05d0 \u05d3\u05de\u05d9 \u05de\u05e0\u05d5\u05d9.",
       problem:
-        "\u05d7\u05e0\u05d9\u05d4 \u05d1\u05d1\u05d9\u05ea \u05e4\u05e8\u05d8\u05d9 \u05e0\u05e9\u05e2\u05e0\u05ea \u05dc\u05e2\u05d9\u05ea\u05d9\u05dd \u05e7\u05e8\u05d5\u05d1\u05d5\u05ea \u05e2\u05dc \u05e9\u05dc\u05d8\u05d9\u05dd, \u05e9\u05d9\u05d7\u05d5\u05ea \u05d0\u05d5 \u05e4\u05ea\u05d9\u05d7\u05d4 \u05d9\u05d3\u05e0\u05d9\u05ea \u05e9\u05dc \u05d4\u05e9\u05e2\u05e8, \u05de\u05d4 \u05e9\u05d9\u05d5\u05e6\u05e8 \u05e2\u05d9\u05db\u05d5\u05d1\u05d9\u05dd, \u05d0\u05d5\u05d1\u05d3\u05df \u05e9\u05dc\u05d8\u05d9\u05dd \u05d5\u05d9\u05d5\u05ea\u05e8 \u05de\u05d3\u05d9 \u05ea\u05d9\u05d0\u05d5\u05dd \u05d9\u05d5\u05de\u05d9\u05d5\u05de\u05d9.",
+        "\u05e9\u05dc\u05d8\u05d9 RF \u05de\u05e1\u05d5\u05e8\u05ea\u05d9\u05d9\u05dd \u05e2\u05dc\u05d5\u05dc\u05d9\u05dd \u05dc\u05d4\u05d9\u05d5\u05ea \u05de\u05d5\u05e2\u05ea\u05e7\u05d9\u05dd, \u05dc\u05d4\u05d9\u05d0\u05d1\u05d3 \u05d0\u05d5 \u05dc\u05d4\u05d9\u05d7\u05e9\u05e3 \u05dc\u05e0\u05d9\u05e1\u05d9\u05d5\u05e0\u05d5\u05ea \u05e9\u05db\u05e4\u05d5\u05dc \u05d5\u05e4\u05e8\u05d9\u05e6\u05d4, \u05d5\u05dc\u05db\u05df \u05d4\u05dd \u05de\u05d4\u05d5\u05d5\u05d9\u05dd \u05d7\u05d5\u05dc\u05d9\u05d4 \u05d7\u05dc\u05e9\u05d4 \u05d1\u05d0\u05d1\u05d8\u05d7\u05ea \u05d4\u05db\u05e0\u05d9\u05e1\u05d4 \u05dc\u05d7\u05e0\u05d9\u05d4.",
       solution:
-        "\u05d1\u05e2\u05dc\u05d9 \u05d4\u05d1\u05d9\u05ea \u05d9\u05db\u05d5\u05dc\u05d9\u05dd \u05dc\u05e4\u05ea\u05d5\u05d7 \u05d0\u05ea \u05d4\u05e9\u05e2\u05e8 \u05de\u05d4\u05d8\u05dc\u05e4\u05d5\u05df, \u05dc\u05e9\u05ea\u05e3 \u05d2\u05d9\u05e9\u05d4 \u05de\u05d5\u05d2\u05d1\u05dc\u05ea \u05d1\u05d6\u05de\u05df \u05dc\u05d0\u05d5\u05e8\u05d7\u05d9\u05dd \u05d0\u05d5 \u05dc\u05e2\u05d5\u05d1\u05d3\u05d9\u05dd, \u05d5\u05dc\u05e9\u05de\u05d5\u05e8 \u05e2\u05dc \u05d6\u05e8\u05d9\u05de\u05ea \u05d7\u05e0\u05d9\u05d4 \u05d9\u05d5\u05de\u05d9\u05d5\u05de\u05d9\u05ea \u05e4\u05e9\u05d5\u05d8\u05d4 \u05dc\u05e0\u05d4\u05d2\u05d9\u05dd \u05e7\u05d1\u05d5\u05e2\u05d9\u05dd.",
+        "\u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea WiFiGate, \u05d4\u05db\u05e0\u05d9\u05e1\u05d4 \u05dc\u05d7\u05e0\u05d9\u05d4 \u05de\u05ea\u05d1\u05e6\u05e2\u05ea \u05d3\u05e8\u05da \u05d4\u05d8\u05dc\u05e4\u05d5\u05df \u05d1\u05e6\u05d5\u05e8\u05d4 \u05de\u05d0\u05d5\u05d1\u05d8\u05d7\u05ea \u05d5\u05de\u05d5\u05e6\u05e4\u05e0\u05ea, \u05d1\u05de\u05e7\u05d5\u05dd \u05e9\u05dc\u05d8\u05d9 RF \u05de\u05e9\u05d5\u05ea\u05e4\u05d9\u05dd, \u05d5\u05de\u05e2\u05e0\u05d9\u05e7\u05d4 \u05e9\u05dc\u05d9\u05d8\u05d4 \u05d8\u05d5\u05d1\u05d4 \u05d9\u05d5\u05ea\u05e8 \u05e2\u05dc \u05de\u05d9 \u05de\u05e7\u05d1\u05dc \u05d2\u05d9\u05e9\u05d4 \u05d5\u05de\u05ea\u05d9.",
       value:
-        "\u05d2\u05d9\u05e9\u05ea \u05d7\u05e0\u05d9\u05d4 \u05de\u05e1\u05d5\u05d3\u05e8\u05ea \u05d9\u05d5\u05ea\u05e8, \u05e4\u05d7\u05d5\u05ea \u05e9\u05dc\u05d8\u05d9\u05dd \u05d0\u05d1\u05d5\u05d3\u05d9\u05dd, \u05d4\u05d2\u05e2\u05d4 \u05de\u05d4\u05d9\u05e8\u05d4 \u05d9\u05d5\u05ea\u05e8 \u05d5\u05d9\u05d5\u05ea\u05e8 \u05e9\u05dc\u05d9\u05d8\u05d4 \u05e2\u05dc \u05de\u05d9 \u05d9\u05db\u05d5\u05dc \u05dc\u05d4\u05d9\u05db\u05e0\u05e1 \u05dc\u05e0\u05db\u05e1.",
+        "\u05db\u05da \u05de\u05ea\u05e7\u05d1\u05dc\u05ea \u05db\u05e0\u05d9\u05e1\u05d4 \u05de\u05d0\u05d5\u05d1\u05d8\u05d7\u05ea, \u05de\u05d5\u05e6\u05e4\u05e0\u05ea \u05d5\u05e0\u05d5\u05d7\u05d4 \u05d9\u05d5\u05ea\u05e8, \u05dc\u05dc\u05d0 \u05d3\u05de\u05d9 \u05de\u05e0\u05d5\u05d9 \u05d5\u05e2\u05dd \u05e4\u05d7\u05d5\u05ea \u05ea\u05dc\u05d5\u05ea \u05d1\u05d0\u05de\u05e6\u05e2\u05d9 \u05d2\u05d9\u05e9\u05d4 \u05e4\u05d9\u05d6\u05d9\u05d9\u05dd.",
     },
   },
 };
