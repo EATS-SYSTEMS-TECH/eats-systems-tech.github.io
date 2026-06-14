@@ -142,6 +142,25 @@
         pathSegments[0] === "group" ? pathSegments[1] : ""
       );
 
+      const dualControlId = firstNonEmpty(
+        params.get("dcid"),
+        params.get("dualControlId"),
+        pathSegments[0] === "dual-control" ? pathSegments[1] : ""
+      );
+
+      if (dualControlId) {
+        params.delete("link");
+        if (!params.has("dcid")) {
+          params.set("dcid", dualControlId);
+        }
+        if (!params.has("id")) {
+          params.set("id", dualControlId);
+        }
+
+        const query = params.toString();
+        return `wifigate://dual-control/${encodeURIComponent(dualControlId)}${query ? `?${query}` : ""}`;
+      }
+
       if (groupId) {
         params.delete("link");
         if (!params.has("gid")) {
