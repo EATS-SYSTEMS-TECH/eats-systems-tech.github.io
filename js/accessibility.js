@@ -341,6 +341,695 @@ const accessibilityCopy = {
   },
 }
 
+const accessibilityCopyExtra = {
+  "fr": {
+    "skipLink": "Passer au contenu principal",
+    "eyebrow": "Accessibilité",
+    "openButton": "Centre d'accessibilité ouvert",
+    "closeButton": "Fermer le centre d’accessibilité",
+    "title": "Centre d'accessibilité",
+    "description": "Adaptez le site à vos préférences de lecture et de navigation.",
+    "reset": "Réinitialiser",
+    "statusDefault": "Vue standard du site",
+    "statusActive": "{count} ajustements d'accessibilité actifs",
+    "options": {
+      "largeText": {
+        "label": "Texte plus grand",
+        "description": "Augmentez la taille de la police sur tout le site."
+      },
+      "highContrast": {
+        "label": "Contraste élevé",
+        "description": "Renforcez le contraste du texte et de l'interface."
+      },
+      "underlineLinks": {
+        "label": "Souligner les liens",
+        "description": "Rendre les liens plus faciles à identifier."
+      },
+      "readableFont": {
+        "label": "Police lisible",
+        "description": "Passez à une police plus propre et plus lisible."
+      },
+      "reducedMotion": {
+        "label": "Mouvement réduit",
+        "description": "Réduisez les animations et les effets de mouvement."
+      }
+    },
+    "siteSupportTitle": "Intégré à ce site",
+    "siteSupport": [
+      "Navigation conviviale au clavier",
+      "Indicateurs de concentration clairs",
+      "Prise en charge multilingue et RTL",
+      "Mise en page réactive pour mobile et ordinateur de bureau"
+    ]
+  },
+  "de": {
+    "skipLink": "Zum Hauptinhalt springen",
+    "eyebrow": "Barrierefreiheit",
+    "openButton": "Offenes Barrierefreiheitszentrum",
+    "closeButton": "Barrierefreiheitszentrum schließen",
+    "title": "Barrierefreiheitszentrum",
+    "description": "Passen Sie die Website an Ihre Lese- und Navigationspräferenzen an.",
+    "reset": "Zurücksetzen",
+    "statusDefault": "Standard-Site-Ansicht",
+    "statusActive": "{count} Barrierefreiheitsanpassungen aktiv",
+    "options": {
+      "largeText": {
+        "label": "Größerer Text",
+        "description": "Erhöhen Sie die Schriftgröße auf der gesamten Website."
+      },
+      "highContrast": {
+        "label": "Hoher Kontrast",
+        "description": "Verstärken Sie den Kontrast für Text und Benutzeroberfläche."
+      },
+      "underlineLinks": {
+        "label": "Unterstreichen Sie Links",
+        "description": "Erleichtern Sie die Identifizierung von Links."
+      },
+      "readableFont": {
+        "label": "Lesbare Schriftart",
+        "description": "Wechseln Sie zu einer saubereren, besser lesbaren Schriftart."
+      },
+      "reducedMotion": {
+        "label": "Reduzierte Bewegung",
+        "description": "Minimieren Sie Animationen und Bewegungseffekte."
+      }
+    },
+    "siteSupportTitle": "In diese Site integriert",
+    "siteSupport": [
+      "Tastaturfreundliche Navigation",
+      "Klare Fokusindikatoren",
+      "Mehrsprachigkeit und RTL-Unterstützung",
+      "Responsives Layout für Mobilgeräte und Desktops"
+    ]
+  },
+  "nl": {
+    "skipLink": "Ga naar de hoofdinhoud",
+    "eyebrow": "Toegankelijkheid",
+    "openButton": "Open toegankelijkheidscentrum",
+    "closeButton": "Bereikbaarheidscentrum sluiten",
+    "title": "Toegankelijkheidscentrum",
+    "description": "Pas de site aan uw lees- en navigatievoorkeuren aan.",
+    "reset": "Opnieuw instellen",
+    "statusDefault": "Standaard siteweergave",
+    "statusActive": "{count} toegankelijkheidsaanpassingen actief",
+    "options": {
+      "largeText": {
+        "label": "Grotere tekst",
+        "description": "Vergroot de lettergrootte op de hele site."
+      },
+      "highContrast": {
+        "label": "Hoog contrast",
+        "description": "Versterk het contrast voor tekst en interface."
+      },
+      "underlineLinks": {
+        "label": "Onderstreep koppelingen",
+        "description": "Maak koppelingen gemakkelijker te identificeren."
+      },
+      "readableFont": {
+        "label": "Leesbaar lettertype",
+        "description": "Schakel over naar een schoner, beter leesbaar lettertype."
+      },
+      "reducedMotion": {
+        "label": "Verminderde beweging",
+        "description": "Minimaliseer animaties en bewegingseffecten."
+      }
+    },
+    "siteSupportTitle": "Ingebouwd in deze site",
+    "siteSupport": [
+      "Toetsenbordvriendelijke navigatie",
+      "Duidelijke focusindicatoren",
+      "Meertalige en RTL-ondersteuning",
+      "Responsieve lay-out voor mobiel en desktop"
+    ]
+  },
+  "it": {
+    "skipLink": "Passa al contenuto principale",
+    "eyebrow": "Accessibilità",
+    "openButton": "Centro aperto per l'accessibilità",
+    "closeButton": "Chiudere il centro per l'accessibilità",
+    "title": "Centro accessibilità",
+    "description": "Adatta il sito alle tue preferenze di lettura e navigazione.",
+    "reset": "Ripristina",
+    "statusDefault": "Visualizzazione standard del sito",
+    "statusActive": "{count} aggiustamenti di accessibilità attivi",
+    "options": {
+      "largeText": {
+        "label": "Testo più grande",
+        "description": "Aumenta la dimensione del carattere in tutto il sito."
+      },
+      "highContrast": {
+        "label": "Contrasto elevato",
+        "description": "Rafforzare il contrasto per testo e interfaccia."
+      },
+      "underlineLinks": {
+        "label": "Sottolinea i collegamenti",
+        "description": "Rendi i collegamenti più facili da identificare."
+      },
+      "readableFont": {
+        "label": "Carattere leggibile",
+        "description": "Passa a un carattere più pulito e leggibile."
+      },
+      "reducedMotion": {
+        "label": "Movimento ridotto",
+        "description": "Riduci al minimo le animazioni e gli effetti di movimento."
+      }
+    },
+    "siteSupportTitle": "Integrato in questo sito",
+    "siteSupport": [
+      "Navigazione intuitiva tramite tastiera",
+      "Indicatori di messa a fuoco chiari",
+      "Supporto multilingue e RTL",
+      "Layout responsivo per dispositivi mobili e desktop"
+    ]
+  },
+  "no": {
+    "skipLink": "Gå til hovedinnhold",
+    "eyebrow": "Tilgjengelighet",
+    "openButton": "Åpne tilgjengelighetssenter",
+    "closeButton": "Lukk tilgjengelighetssenteret",
+    "title": "Tilgjengelighetssenter",
+    "description": "Juster nettstedet slik at det passer dine lese- og navigasjonspreferanser.",
+    "reset": "Tilbakestill",
+    "statusDefault": "Standard sidevisning",
+    "statusActive": "{count} tilgjengelighetsjusteringer aktive",
+    "options": {
+      "largeText": {
+        "label": "Større tekst",
+        "description": "Øk skriftstørrelsen på hele nettstedet."
+      },
+      "highContrast": {
+        "label": "Høy kontrast",
+        "description": "Styrk kontrasten for tekst og grensesnitt."
+      },
+      "underlineLinks": {
+        "label": "Understrek lenker",
+        "description": "Gjør lenker lettere å identifisere."
+      },
+      "readableFont": {
+        "label": "Lesbar skrift",
+        "description": "Bytt til en renere, mer lesbar skrift."
+      },
+      "reducedMotion": {
+        "label": "Redusert bevegelse",
+        "description": "Minimer animasjoner og bevegelseseffekter."
+      }
+    },
+    "siteSupportTitle": "Innebygd i denne siden",
+    "siteSupport": [
+      "Tastaturvennlig navigering",
+      "Tydelige fokusindikatorer",
+      "Støtte for flere språk og RTL",
+      "Responsive layout for mobil og desktop"
+    ]
+  },
+  "uk": {
+    "skipLink": "Перейти до основного вмісту",
+    "eyebrow": "Доступність",
+    "openButton": "Відкритий центр доступності",
+    "closeButton": "Закрити центр доступності",
+    "title": "Центр доступності",
+    "description": "Налаштуйте сайт відповідно до своїх уподобань читання та навігації.",
+    "reset": "Скинути",
+    "statusDefault": "Стандартний вигляд сайту",
+    "statusActive": "{count} активних коригувань доступності",
+    "options": {
+      "largeText": {
+        "label": "Більший текст",
+        "description": "Збільште розмір шрифту на сайті."
+      },
+      "highContrast": {
+        "label": "Високий контраст",
+        "description": "Посилення контрасту для тексту та інтерфейсу."
+      },
+      "underlineLinks": {
+        "label": "Підкресліть посилання",
+        "description": "Полегшіть ідентифікацію посилань."
+      },
+      "readableFont": {
+        "label": "Читабельний шрифт",
+        "description": "Перейдіть на більш чистий і розбірливий шрифт."
+      },
+      "reducedMotion": {
+        "label": "Зменшений рух",
+        "description": "Мінімізуйте анімацію та ефекти руху."
+      }
+    },
+    "siteSupportTitle": "Вбудований на цьому сайті",
+    "siteSupport": [
+      "Зручна навігація за допомогою клавіатури",
+      "Чіткі індикатори фокусування",
+      "Багатомовність і підтримка RTL",
+      "Адаптивний макет для мобільних пристроїв і комп’ютерів"
+    ]
+  },
+  "tr": {
+    "skipLink": "Ana içeriğe atla",
+    "eyebrow": "Erişilebilirlik",
+    "openButton": "Erişilebilirlik merkezini aç",
+    "closeButton": "Erişilebilirlik merkezini kapat",
+    "title": "Erişilebilirlik Merkezi",
+    "description": "Siteyi okuma ve gezinme tercihlerinize uyacak şekilde ayarlayın.",
+    "reset": "Sıfırla",
+    "statusDefault": "Standart site görünümü",
+    "statusActive": "{count} erişilebilirlik düzenlemesi etkin",
+    "options": {
+      "largeText": {
+        "label": "Daha büyük metin",
+        "description": "Site genelinde yazı tipi boyutunu artırın."
+      },
+      "highContrast": {
+        "label": "Yüksek kontrast",
+        "description": "Metin ve arayüz için kontrastı güçlendirin."
+      },
+      "underlineLinks": {
+        "label": "Bağlantıların altını çizin",
+        "description": "Bağlantıların tanımlanmasını kolaylaştırın."
+      },
+      "readableFont": {
+        "label": "Okunabilir yazı tipi",
+        "description": "Daha temiz, daha okunaklı bir yazı tipine geçin."
+      },
+      "reducedMotion": {
+        "label": "Azaltılmış hareket",
+        "description": "Animasyonları ve hareket efektlerini en aza indirin."
+      }
+    },
+    "siteSupportTitle": "Bu siteye yerleşik",
+    "siteSupport": [
+      "Klavye dostu navigasyon",
+      "Net odak göstergeleri",
+      "Çoklu dil ve RTL desteği",
+      "Mobil ve masaüstü için duyarlı düzen"
+    ]
+  },
+  "hi": {
+    "skipLink": "मुख्य सामग्री पर जाएँ",
+    "eyebrow": "अभिगम्यता",
+    "openButton": "अभिगम्यता केंद्र खोलें",
+    "closeButton": "पहुंच केंद्र बंद करें",
+    "title": "अभिगम्यता केंद्र",
+    "description": "अपनी पढ़ने और नेविगेशन प्राथमिकताओं के अनुरूप साइट को समायोजित करें।",
+    "reset": "रीसेट करें",
+    "statusDefault": "मानक साइट दृश्य",
+    "statusActive": "{गिनती} पहुंच-योग्यता समायोजन सक्रिय",
+    "options": {
+      "largeText": {
+        "label": "बड़ा पाठ",
+        "description": "साइट पर फ़ॉन्ट आकार बढ़ाएँ।"
+      },
+      "highContrast": {
+        "label": "उच्च कंट्रास्ट",
+        "description": "टेक्स्ट और इंटरफ़ेस के लिए कंट्रास्ट को मजबूत करें।"
+      },
+      "underlineLinks": {
+        "label": "लिंकों को रेखांकित करें",
+        "description": "लिंक को पहचानना आसान बनाएं."
+      },
+      "readableFont": {
+        "label": "पढ़ने योग्य फ़ॉन्ट",
+        "description": "एक साफ़, अधिक सुपाठ्य फ़ॉन्ट पर स्विच करें।"
+      },
+      "reducedMotion": {
+        "label": "गति कम होना",
+        "description": "एनिमेशन और गति प्रभाव कम करें।"
+      }
+    },
+    "siteSupportTitle": "इस साइट में निर्मित",
+    "siteSupport": [
+      "कीबोर्ड के अनुकूल नेविगेशन",
+      "फोकस संकेतक साफ़ करें",
+      "बहु-भाषा और आरटीएल समर्थन",
+      "मोबाइल और डेस्कटॉप के लिए उत्तरदायी लेआउट"
+    ]
+  },
+  "bn": {
+    "skipLink": "প্রধান বিষয়বস্তু এড়িয়ে যান",
+    "eyebrow": "অ্যাক্সেসযোগ্যতা",
+    "openButton": "অ্যাক্সেসিবিলিটি সেন্টার খুলুন",
+    "closeButton": "অ্যাক্সেসিবিলিটি কেন্দ্র বন্ধ করুন",
+    "title": "অ্যাক্সেসিবিলিটি সেন্টার",
+    "description": "আপনার পড়ার এবং নেভিগেশন পছন্দ অনুসারে সাইটটি সামঞ্জস্য করুন।",
+    "reset": "রিসেট করুন",
+    "statusDefault": "স্ট্যান্ডার্ড সাইট ভিউ",
+    "statusActive": "{count} অ্যাক্সেসিবিলিটি অ্যাডজাস্টমেন্ট সক্রিয়",
+    "options": {
+      "largeText": {
+        "label": "বৃহত্তর পাঠ্য",
+        "description": "পুরো সাইট জুড়ে ফন্টের আকার বাড়ান।"
+      },
+      "highContrast": {
+        "label": "উচ্চ বৈসাদৃশ্য",
+        "description": "টেক্সট এবং ইন্টারফেসের জন্য বৈসাদৃশ্য শক্তিশালী করুন।"
+      },
+      "underlineLinks": {
+        "label": "আন্ডারলাইন লিঙ্ক",
+        "description": "লিঙ্কগুলি সনাক্ত করা সহজ করুন।"
+      },
+      "readableFont": {
+        "label": "পাঠযোগ্য ফন্ট",
+        "description": "একটি ক্লিনার, আরও সুস্পষ্ট ফন্টে স্যুইচ করুন।"
+      },
+      "reducedMotion": {
+        "label": "গতি কমানো",
+        "description": "অ্যানিমেশন এবং মোশন এফেক্ট মিনিমাইজ করুন।"
+      }
+    },
+    "siteSupportTitle": "এই সাইটে নির্মিত",
+    "siteSupport": [
+      "কীবোর্ড-বান্ধব নেভিগেশন",
+      "পরিষ্কার ফোকাস সূচক",
+      "বহু-ভাষা এবং RTL সমর্থন",
+      "মোবাইল এবং ডেস্কটপের জন্য প্রতিক্রিয়াশীল লেআউট"
+    ]
+  },
+  "mr": {
+    "skipLink": "मुख्य सामग्रीवर जा",
+    "eyebrow": "प्रवेशयोग्यता",
+    "openButton": "प्रवेशयोग्यता केंद्र उघडा",
+    "closeButton": "प्रवेशयोग्यता केंद्र बंद करा",
+    "title": "प्रवेशयोग्यता केंद्र",
+    "description": "तुमच्या वाचन आणि नेव्हिगेशन प्राधान्यांनुसार साइट समायोजित करा.",
+    "reset": "रीसेट करा",
+    "statusDefault": "मानक साइट दृश्य",
+    "statusActive": "{count} प्रवेशयोग्यता समायोजन सक्रिय",
+    "options": {
+      "largeText": {
+        "label": "मोठा मजकूर",
+        "description": "संपूर्ण साइटवर फॉन्ट आकार वाढवा."
+      },
+      "highContrast": {
+        "label": "उच्च कॉन्ट्रास्ट",
+        "description": "मजकूर आणि इंटरफेससाठी कॉन्ट्रास्ट मजबूत करा."
+      },
+      "underlineLinks": {
+        "label": "दुवे अधोरेखित करा",
+        "description": "दुवे ओळखणे सोपे करा."
+      },
+      "readableFont": {
+        "label": "वाचनीय फॉन्ट",
+        "description": "क्लिनर, अधिक सुवाच्य फॉन्टवर स्विच करा."
+      },
+      "reducedMotion": {
+        "label": "कमी गती",
+        "description": "ॲनिमेशन आणि गती प्रभाव कमी करा."
+      }
+    },
+    "siteSupportTitle": "या साइटमध्ये अंगभूत",
+    "siteSupport": [
+      "कीबोर्ड-अनुकूल नेव्हिगेशन",
+      "फोकस इंडिकेटर साफ करा",
+      "बहु-भाषा आणि RTL समर्थन",
+      "मोबाइल आणि डेस्कटॉपसाठी प्रतिसादात्मक लेआउट"
+    ]
+  },
+  "te": {
+    "skipLink": "ప్రధాన కంటెంట్‌కి దాటవేయండి",
+    "eyebrow": "యాక్సెసిబిలిటీ",
+    "openButton": "ప్రాప్యత కేంద్రాన్ని తెరవండి",
+    "closeButton": "ప్రాప్యత కేంద్రాన్ని మూసివేయండి",
+    "title": "యాక్సెసిబిలిటీ సెంటర్",
+    "description": "మీ పఠనం మరియు నావిగేషన్ ప్రాధాన్యతలకు అనుగుణంగా సైట్‌ను సర్దుబాటు చేయండి.",
+    "reset": "రీసెట్ చేయండి",
+    "statusDefault": "ప్రామాణిక సైట్ వీక్షణ",
+    "statusActive": "{count} యాక్సెసిబిలిటీ సర్దుబాట్లు సక్రియంగా ఉన్నాయి",
+    "options": {
+      "largeText": {
+        "label": "పెద్ద వచనం",
+        "description": "సైట్ అంతటా ఫాంట్ పరిమాణాన్ని పెంచండి."
+      },
+      "highContrast": {
+        "label": "అధిక కాంట్రాస్ట్",
+        "description": "టెక్స్ట్ మరియు ఇంటర్‌ఫేస్ కోసం కాంట్రాస్ట్‌ను బలోపేతం చేయండి."
+      },
+      "underlineLinks": {
+        "label": "లింక్‌లను అండర్లైన్ చేయండి",
+        "description": "లింక్‌లను సులభంగా గుర్తించేలా చేయండి."
+      },
+      "readableFont": {
+        "label": "చదవగలిగే ఫాంట్",
+        "description": "క్లీనర్, మరింత స్పష్టంగా కనిపించే ఫాంట్‌కి మారండి."
+      },
+      "reducedMotion": {
+        "label": "తగ్గిన కదలిక",
+        "description": "యానిమేషన్లు మరియు చలన ప్రభావాలను తగ్గించండి."
+      }
+    },
+    "siteSupportTitle": "ఈ సైట్‌లో నిర్మించబడింది",
+    "siteSupport": [
+      "కీబోర్డ్ అనుకూలమైన నావిగేషన్",
+      "దృష్టి సూచికలను క్లియర్ చేయండి",
+      "బహుళ-భాష మరియు RTL మద్దతు",
+      "మొబైల్ మరియు డెస్క్‌టాప్ కోసం ప్రతిస్పందించే లేఅవుట్"
+    ]
+  },
+  "zh-Hans": {
+    "skipLink": "跳至主要内容",
+    "eyebrow": "无障碍",
+    "openButton": "开放无障碍中心",
+    "closeButton": "关闭无障碍中心",
+    "title": "无障碍中心",
+    "description": "调整网站以适合您的阅读和导航偏好。",
+    "reset": "重置",
+    "statusDefault": "标准站点视图",
+    "statusActive": "{count} 个辅助功能调整处于活动状态",
+    "options": {
+      "largeText": {
+        "label": "较大的文字",
+        "description": "增加整个网站的字体大小。"
+      },
+      "highContrast": {
+        "label": "高对比度",
+        "description": "加强文本和界面的对比度。"
+      },
+      "underlineLinks": {
+        "label": "下划线链接",
+        "description": "使链接更容易识别。"
+      },
+      "readableFont": {
+        "label": "可读字体",
+        "description": "切换到更清晰、更易读的字体。"
+      },
+      "reducedMotion": {
+        "label": "减少运动",
+        "description": "最小化动画和运动效果。"
+      }
+    },
+    "siteSupportTitle": "内置于该网站",
+    "siteSupport": [
+      "键盘友好的导航",
+      "清晰的焦点指示器",
+      "多语言和 RTL 支持",
+      "适用于移动设备和桌面的响应式布局"
+    ]
+  },
+  "zh-Hant": {
+    "skipLink": "跳至主要內容",
+    "eyebrow": "無障礙",
+    "openButton": "開放無障礙中心",
+    "closeButton": "關閉無障礙中心",
+    "title": "無障礙中心",
+    "description": "調整網站以適合您的閱讀和導航偏好。",
+    "reset": "重置",
+    "statusDefault": "標準網站視圖",
+    "statusActive": "{count} 個輔助功能調整處於活動狀態",
+    "options": {
+      "largeText": {
+        "label": "較大的文字",
+        "description": "增加整個網站的字體大小。"
+      },
+      "highContrast": {
+        "label": "高對比度",
+        "description": "加強文本和介面的對比。"
+      },
+      "underlineLinks": {
+        "label": "底線連結",
+        "description": "使連結更容易識別。"
+      },
+      "readableFont": {
+        "label": "可讀字體",
+        "description": "切換到更清晰、更易讀的字體。"
+      },
+      "reducedMotion": {
+        "label": "減少運動",
+        "description": "最小化動畫和運動效果。"
+      }
+    },
+    "siteSupportTitle": "內建於該網站",
+    "siteSupport": [
+      "鍵盤友善的導航",
+      "清晰的焦點指示器",
+      "多語言和 RTL 支持",
+      "適用於行動裝置和桌面的響應式佈局"
+    ]
+  },
+  "ja": {
+    "skipLink": "メインコンテンツにスキップ",
+    "eyebrow": "アクセシビリティ",
+    "openButton": "アクセシビリティ センターを開く",
+    "closeButton": "アクセシビリティ センターを閉じる",
+    "title": "アクセシビリティ センター",
+    "description": "読書やナビゲーションの好みに合わせてサイトを調整します。",
+    "reset": "リセット",
+    "statusDefault": "標準サイトビュー",
+    "statusActive": "{count} 個のユーザー補助調整が有効です",
+    "options": {
+      "largeText": {
+        "label": "大きな文字",
+        "description": "サイト全体のフォント サイズを大きくします。"
+      },
+      "highContrast": {
+        "label": "ハイコントラスト",
+        "description": "テキストとインターフェイスのコントラストを強化します。"
+      },
+      "underlineLinks": {
+        "label": "リンクに下線を引く",
+        "description": "リンクを識別しやすくします。"
+      },
+      "readableFont": {
+        "label": "読みやすいフォント",
+        "description": "より鮮明で読みやすいフォントに切り替えます。"
+      },
+      "reducedMotion": {
+        "label": "動きの減少",
+        "description": "アニメーションとモーションエフェクトを最小限に抑えます。"
+      }
+    },
+    "siteSupportTitle": "このサイトに組み込まれています",
+    "siteSupport": [
+      "キーボードフレンドリーなナビゲーション",
+      "明確なフォーカスインジケーター",
+      "多言語とRTLのサポート",
+      "モバイルとデスクトップのレスポンシブ レイアウト"
+    ]
+  },
+  "ko": {
+    "skipLink": "주요 콘텐츠로 건너뛰기",
+    "eyebrow": "접근성",
+    "openButton": "개방형 접근성 센터",
+    "closeButton": "접근성 센터 닫기",
+    "title": "접근성 센터",
+    "description": "읽기 및 탐색 기본 설정에 맞게 사이트를 조정하십시오.",
+    "reset": "재설정",
+    "statusDefault": "표준 사이트 보기",
+    "statusActive": "{count}개의 접근성 조정이 활성화되었습니다.",
+    "options": {
+      "largeText": {
+        "label": "더 큰 텍스트",
+        "description": "사이트 전체에서 글꼴 크기를 늘립니다."
+      },
+      "highContrast": {
+        "label": "고대비",
+        "description": "텍스트와 인터페이스의 대비를 강화합니다."
+      },
+      "underlineLinks": {
+        "label": "링크에 밑줄을 긋습니다",
+        "description": "링크를 더 쉽게 식별할 수 있도록 만드세요."
+      },
+      "readableFont": {
+        "label": "읽을 수 있는 글꼴",
+        "description": "더 깨끗하고 읽기 쉬운 글꼴로 전환하세요."
+      },
+      "reducedMotion": {
+        "label": "움직임 감소",
+        "description": "애니메이션과 모션 효과를 최소화합니다."
+      }
+    },
+    "siteSupportTitle": "이 사이트에 내장됨",
+    "siteSupport": [
+      "키보드 친화적인 탐색",
+      "명확한 초점 표시",
+      "다중 언어 및 RTL 지원",
+      "모바일 및 데스크톱을 위한 반응형 레이아웃"
+    ]
+  },
+  "da": {
+    "skipLink": "Spring til hovedindhold",
+    "eyebrow": "Tilgængelighed",
+    "openButton": "Åbent tilgængelighedscenter",
+    "closeButton": "Luk tilgængelighedscenter",
+    "title": "Tilgængelighedscenter",
+    "description": "Juster webstedet, så det passer til dine læse- og navigationspræferencer.",
+    "reset": "Nulstil",
+    "statusDefault": "Standard sidevisning",
+    "statusActive": "{count} tilgængelighedsjusteringer aktive",
+    "options": {
+      "largeText": {
+        "label": "Større tekst",
+        "description": "Forøg skriftstørrelsen på tværs af webstedet."
+      },
+      "highContrast": {
+        "label": "Høj kontrast",
+        "description": "Styrk kontrasten til tekst og interface."
+      },
+      "underlineLinks": {
+        "label": "Understreg links",
+        "description": "Gør links nemmere at identificere."
+      },
+      "readableFont": {
+        "label": "Læsbar skrifttype",
+        "description": "Skift til en renere, mere læselig skrifttype."
+      },
+      "reducedMotion": {
+        "label": "Reduceret bevægelse",
+        "description": "Minimer animationer og bevægelseseffekter."
+      }
+    },
+    "siteSupportTitle": "Indbygget i dette websted",
+    "siteSupport": [
+      "Tastaturvenlig navigation",
+      "Tydelige fokusindikatorer",
+      "Understøttelse af flere sprog og RTL",
+      "Responsive layout til mobil og desktop"
+    ]
+  },
+  "hu": {
+    "skipLink": "Ugrás a fő tartalomhoz",
+    "eyebrow": "Hozzáférhetőség",
+    "openButton": "Nyissa meg a kisegítő lehetőségeket",
+    "closeButton": "Az akadálymentesítési központ bezárása",
+    "title": "Kisegítő lehetőségek központja",
+    "description": "Állítsa be a webhelyet olvasási és navigációs preferenciáinak megfelelően.",
+    "reset": "Reset",
+    "statusDefault": "Normál oldalnézet",
+    "statusActive": "{count} akadálymentesítési korrekció aktív",
+    "options": {
+      "largeText": {
+        "label": "Nagyobb szöveg",
+        "description": "Növelje a betűméretet a webhelyen."
+      },
+      "highContrast": {
+        "label": "Magas kontraszt",
+        "description": "A szöveg és a felület kontrasztjának erősítése."
+      },
+      "underlineLinks": {
+        "label": "A hivatkozások aláhúzása",
+        "description": "Tegye könnyebbé a linkek azonosítását."
+      },
+      "readableFont": {
+        "label": "Olvasható betűtípus",
+        "description": "Váltson tisztább, olvashatóbb betűtípusra."
+      },
+      "reducedMotion": {
+        "label": "Csökkentett mozgás",
+        "description": "Minimalizálja az animációkat és a mozgáseffektusokat."
+      }
+    },
+    "siteSupportTitle": "Beépítve erre az oldalra",
+    "siteSupport": [
+      "Billentyűzetbarát navigáció",
+      "Világos fókuszjelzők",
+      "Többnyelvű és RTL támogatás",
+      "Reszponzív elrendezés mobilhoz és asztali számítógéphez"
+    ]
+  }
+}
+
+Object.keys(accessibilityCopyExtra).forEach((lang) => {
+  accessibilityCopy[lang] = accessibilityCopyExtra[lang]
+})
+
+window.accessibilityCopy = accessibilityCopy
+
 let accessibilityState = { ...ACCESSIBILITY_DEFAULTS }
 let accessibilityRefs = null
 let accessibilityPanelOpen = false
@@ -466,7 +1155,9 @@ function updateAccessibilityCopy() {
   accessibilityRefs.title.textContent = copy.title
   accessibilityRefs.description.textContent = copy.description
   accessibilityRefs.resetButton.textContent = copy.reset
-  accessibilityRefs.supportTitle.textContent = copy.siteSupportTitle
+  if (accessibilityRefs.supportTitle) {
+    accessibilityRefs.supportTitle.textContent = copy.siteSupportTitle
+  }
 
   accessibilityRefs.optionButtons.forEach((button) => {
     const key = button.dataset.a11ySetting
@@ -565,7 +1256,7 @@ function setupAccessibilityWidget() {
   const optionButtons = Array.from(document.querySelectorAll(".a11y-option"))
   const supportItems = Array.from(document.querySelectorAll(".a11y-support__item"))
 
-  if (!fab || !panel || !backdrop || !closeButton || !resetButton || !status || !title || !description || !eyebrow || !supportTitle || !skipLink || !optionButtons.length) {
+  if (!fab || !panel || !backdrop || !closeButton || !resetButton || !status || !title || !description || !eyebrow || !skipLink || !optionButtons.length) {
     return
   }
 
