@@ -1536,13 +1536,16 @@ ul {
   font-size: 1rem;
   margin: 0 0 0.45rem;
   text-align: center;
+  text-wrap: balance;
 }
 
 .feature-card__text {
   font-size: 0.93rem;
+  line-height: 1.55;
   color: var(--color-text-muted);
   text-align: center;
   margin: 0;
+  max-width: 30ch;
 }
 
 /* ================= TUTORIALS ================= */
