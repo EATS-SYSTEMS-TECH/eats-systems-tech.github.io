@@ -83,6 +83,7 @@
   <script src="js/utils.js?v=20260402a" defer></script>
   <script src="js/translations.js?v=20260604d" defer></script>
   <script src="js/translations-extra.js?v=20260616a" defer></script>
+  <script src="js/features-refresh.js?v=20260616a" defer></script>
   <script src="js/navigation.js?v=20260405a" defer></script>
   <script src="js/hero.js?v=20260410b" defer></script>
   <script src="js/i18n.js?v=20260614a" defer></script>
@@ -288,88 +289,101 @@
       <div class="container">
         <header class="section__header js-reveal">
           <h2 class="section__title" id="features-title" data-i18n="features.title">
-            Our Features
+            The Advantages of WIFIGATE
           </h2>
           <p class="section__subtitle" data-i18n="features.subtitle">
-            These are just some of the capabilities we offer our customers as part of the product we developed.
+            These are some of the practical capabilities that make WIFIGATE stable, secure, and easy to manage in everyday use.
           </p>
         </header>
 
         <div class="features-grid">
-          <article class="feature-card feature-card--no-subscription js-reveal">
+          <article class="feature-card feature-card--no-sim-router js-reveal">
             <figure class="feature-card__media">
-              <img src="assets/features/no-subscription.svg"
-                alt="Illustration for one-time payment with no subscription" class="feature-card__image"
-                loading="lazy" />
+              <img src="assets/features/no-sim-router.svg" alt="" class="feature-card__image" loading="lazy" />
             </figure>
-            <h3 class="feature-card__title" data-i18n="features.items.noSubscription.title">No Subscription Fees</h3>
-            <p class="feature-card__text" data-i18n="features.items.noSubscription.text">
-              Pay once for the device and installation. No monthly plans, no renewals, and no hidden fees, now or ever.
+            <h3 class="feature-card__title" data-i18n="features.items.noSimRouter.title">No SIM, No Router</h3>
+            <p class="feature-card__text" data-i18n="features.items.noSimRouter.text">
+              WiFiGate uses a direct local connection to the device, with no SIM card, no internet plan, and no external Wi-Fi router required.
             </p>
           </article>
 
-          <article class="feature-card feature-card--security js-reveal">
+          <article class="feature-card feature-card--stability js-reveal">
             <figure class="feature-card__media">
-              <img src="assets/features/security.svg"
-                alt="Illustration of secure architecture with shield and processor" class="feature-card__image"
-                loading="lazy" />
+              <img src="assets/features/stability.svg" alt="" class="feature-card__image" loading="lazy" />
             </figure>
-            <h3 class="feature-card__title" data-i18n="features.items.security.title">Advanced Security Architecture
-            </h3>
-            <p class="feature-card__text" data-i18n="features.items.security.text">
-              Built for uncompromising protection with Secure Boot (RSA-3072), encrypted flash storage
-              (AES-128/256-XTS), a Trusted Execution Environment, HMAC encryption, and replay-attack protection.
+            <h3 class="feature-card__title" data-i18n="features.items.stability.title">Stability</h3>
+            <p class="feature-card__text" data-i18n="features.items.stability.text">
+              A local-first architecture keeps access responsive and dependable, with less friction and fewer moving parts in day-to-day operation.
             </p>
           </article>
 
-          <article class="feature-card feature-card--no-internet js-reveal">
+          <article class="feature-card feature-card--quick-guest-invite js-reveal">
             <figure class="feature-card__media">
-              <img src="assets/features/no-internet.svg"
-                alt="Illustration of local data storage with no internet exposure" class="feature-card__image"
-                loading="lazy" />
+              <img src="assets/features/quick-guest-invite.svg" alt="" class="feature-card__image" loading="lazy" />
             </figure>
-            <h3 class="feature-card__title" data-i18n="features.items.noInternet.title">No Internet Exposure</h3>
-            <p class="feature-card__text" data-i18n="features.items.noInternet.text">
-              Your data never leaves your premises. User databases stay on the device, fully encrypted and isolated from
-              the internet.
+            <h3 class="feature-card__title" data-i18n="features.items.quickGuestInvite.title">Quick Guest Invite</h3>
+            <p class="feature-card__text" data-i18n="features.items.quickGuestInvite.text">
+              Send a secure guest invitation in seconds so visitors can enter without calls, shared remotes, or manual coordination.
             </p>
           </article>
 
-          <article class="feature-card feature-card--guest-access js-reveal">
+          <article class="feature-card feature-card--history-30-day js-reveal">
             <figure class="feature-card__media">
-              <img src="assets/features/guest-access.svg"
-                alt="Illustration of guest access invitation from a mobile phone" class="feature-card__image"
-                loading="lazy" />
+              <img src="assets/features/history-30-day.svg" alt="" class="feature-card__image" loading="lazy" />
             </figure>
-            <h3 class="feature-card__title" data-i18n="features.items.guestAccess.title">Guest Access Pass</h3>
-            <p class="feature-card__text" data-i18n="features.items.guestAccess.text">
-              Let guests in without the interruptions. Share a temporary access pass from the app so visitors can open
-              the gate on their own, with no calls asking you to let them in.
+            <h3 class="feature-card__title" data-i18n="features.items.history30Day.title">30-Day History</h3>
+            <p class="feature-card__text" data-i18n="features.items.history30Day.text">
+              Review the last 30 days of access activity for clearer visibility into gate usage and recent entry events.
             </p>
           </article>
 
-          <article class="feature-card feature-card--smart-access js-reveal">
+          <article class="feature-card feature-card--auto-open js-reveal">
             <figure class="feature-card__media">
-              <img src="assets/features/smart-access.svg"
-                alt="Illustration of smart access using phone and remote control" class="feature-card__image"
-                loading="lazy" />
+              <img src="assets/features/auto-open.svg" alt="" class="feature-card__image" loading="lazy" />
             </figure>
-            <h3 class="feature-card__title" data-i18n="features.items.smartAccess.title">Smart Access</h3>
-            <p class="feature-card__text" data-i18n="features.items.smartAccess.text">
-              Secure gate access from the iOS/Android app or an RF remote. Administrators can review entry history for
-              clear visibility into gate activity.
+            <h3 class="feature-card__title" data-i18n="features.items.autoOpen.title">Auto Open</h3>
+            <p class="feature-card__text" data-i18n="features.items.autoOpen.text">
+              Let approved users open the gate automatically when they arrive for a smoother, more convenient hands-free experience.
             </p>
           </article>
 
-          <article class="feature-card feature-card--user-management js-reveal">
+          <article class="feature-card feature-card--events js-reveal">
             <figure class="feature-card__media">
-              <img src="assets/features/user-management.svg" alt="Illustration of user and admin management dashboard"
-                class="feature-card__image" loading="lazy" />
+              <img src="assets/features/events.svg" alt="" class="feature-card__image" loading="lazy" />
             </figure>
-            <h3 class="feature-card__title" data-i18n="features.items.userManagement.title">Simple User Management</h3>
-            <p class="feature-card__text" data-i18n="features.items.userManagement.text">
-              Easily manage users and permissions through the mobile app or by importing and exporting CSV files.
-              Supports up to 4,000 users per gate and up to 100 administrators.
+            <h3 class="feature-card__title" data-i18n="features.items.upTo10Events.title">Up to 10 Events</h3>
+            <p class="feature-card__text" data-i18n="features.items.upTo10Events.text">
+              Set up recurring access events and scheduled actions directly in the system to match how your site operates.
+            </p>
+          </article>
+
+          <article class="feature-card feature-card--rf-remote-learning js-reveal">
+            <figure class="feature-card__media">
+              <img src="assets/features/rf-remote-learning.svg" alt="" class="feature-card__image" loading="lazy" />
+            </figure>
+            <h3 class="feature-card__title" data-i18n="features.items.rfRemoteLearning.title">Digital RF Remote Learning</h3>
+            <p class="feature-card__text" data-i18n="features.items.rfRemoteLearning.text">
+              Learn and manage RF remotes digitally through the platform instead of relying on disconnected manual programming flows.
+            </p>
+          </article>
+
+          <article class="feature-card feature-card--security-privacy js-reveal">
+            <figure class="feature-card__media">
+              <img src="assets/features/security-privacy.svg" alt="" class="feature-card__image" loading="lazy" />
+            </figure>
+            <h3 class="feature-card__title" data-i18n="features.items.securityPrivacy.title">Security &amp; Privacy</h3>
+            <p class="feature-card__text" data-i18n="features.items.securityPrivacy.text">
+              Access data stays local to the device and the platform is designed around secure handling, encrypted storage, and private operation.
+            </p>
+          </article>
+
+          <article class="feature-card feature-card--no-subscription-fees js-reveal">
+            <figure class="feature-card__media">
+              <img src="assets/features/no-subscription-fees.svg" alt="" class="feature-card__image" loading="lazy" />
+            </figure>
+            <h3 class="feature-card__title" data-i18n="features.items.noSubscriptionFees.title">No Subscription Fees</h3>
+            <p class="feature-card__text" data-i18n="features.items.noSubscriptionFees.text">
+              Pay once for the device and installation, with no monthly subscription, renewal cycle, or ongoing platform fee.
             </p>
           </article>
         </div>
