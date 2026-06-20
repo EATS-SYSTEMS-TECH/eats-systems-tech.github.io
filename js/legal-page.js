@@ -3,6 +3,15 @@
 
 const DEFAULT_LEGAL_PAGE_LANGUAGE = "en"
 
+function getStaticLegalLanguage() {
+  const lang = document.documentElement.getAttribute("lang") || DEFAULT_LEGAL_PAGE_LANGUAGE
+  return typeof lang === "string" && lang.trim() ? lang.trim() : DEFAULT_LEGAL_PAGE_LANGUAGE
+}
+
+function getStaticLegalDirection(lang) {
+  return lang === "he" || lang === "ar" ? "rtl" : "ltr"
+}
+
 function setLegalPageYear() {
   const yearEl = document.getElementById("js-year")
   if (!yearEl) return
@@ -30,7 +39,9 @@ function applyLegalPageMeta() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const savedLang = localStorage.getItem("language") || DEFAULT_LEGAL_PAGE_LANGUAGE
+  const pageLang = getStaticLegalLanguage()
+  const pageDir = document.documentElement.getAttribute("dir") || getStaticLegalDirection(pageLang)
+  const savedLang = localStorage.getItem("language") || pageLang
   const initialLang =
     typeof resolveLanguage === "function"
       ? resolveLanguage(savedLang)
@@ -38,6 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (typeof changeLanguage === "function") {
     changeLanguage(initialLang)
+  } else {
+    window.currentLanguage = pageLang
+    document.documentElement.setAttribute("lang", pageLang)
+    document.documentElement.setAttribute("dir", pageDir)
+    document.body.classList.toggle("rtl", pageDir === "rtl")
   }
 
   if (typeof setupAccessibilityWidget === "function") {

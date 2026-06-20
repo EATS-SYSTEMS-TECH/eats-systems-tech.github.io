@@ -742,10 +742,22 @@ ul {
   background: rgba(30, 41, 59, 0.72);
 }
 
-.hero__replay svg {
-  width: 1.05rem;
-  height: 1.05rem;
+.hero__replay::before {
+  content: "\25B6";
+  display: inline-grid;
+  place-items: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 0.68rem;
+  line-height: 1;
+  padding-inline-start: 0.08rem;
   flex-shrink: 0;
+}
+
+.hero__replay svg {
+  display: none;
 }
 
 .hero__media-control[hidden],

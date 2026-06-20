@@ -113,10 +113,10 @@
       "industrialFacilities": "Installations industrielles",
       "sportsFacilities": "Installations sportives",
       "educationalInstitutions": "Établissements d'enseignement",
-      "hotels": "Hôtels et hospitalité",
+        "hotels": "Hôtels, Airbnb et hébergements",
       "vacationRentals": "Locations de vacances et Airbnb",
       "andMore": "Et plus encore",
-      "rollerShutters": "Volets roulants électriques"
+      "rollerShutters": "Garages commerciaux et volets roulants"
     },
     "tutorials": {
       "title": "Vidéos tutorielles",
@@ -268,10 +268,10 @@
       "industrialFacilities": "Industrieanlagen",
       "sportsFacilities": "Sportanlagen",
       "educationalInstitutions": "Bildungseinrichtungen",
-      "hotels": "Hotels und Gastgewerbe",
+        "hotels": "Hotels, Airbnb und Unterkünfte",
       "vacationRentals": "Ferienwohnungen und Airbnb",
       "andMore": "Und mehr",
-      "rollerShutters": "Elektrische Rollläden"
+      "rollerShutters": "Gewerbliche Garagen und Rollläden"
     },
     "tutorials": {
       "title": "Tutorial-Videos",
@@ -423,10 +423,10 @@
       "industrialFacilities": "Industriële faciliteiten",
       "sportsFacilities": "Sportfaciliteiten",
       "educationalInstitutions": "Onderwijsinstellingen",
-      "hotels": "Hotels en gastvrijheid",
+        "hotels": "Hotels, Airbnb en verblijfsaccommodaties",
       "vacationRentals": "Vakantiewoningen en Airbnb",
       "andMore": "En meer",
-      "rollerShutters": "Elektrische rolluiken"
+      "rollerShutters": "Commerciële garages en rolluiken"
     },
     "tutorials": {
       "title": "Instructievideo's",
@@ -578,10 +578,10 @@
       "industrialFacilities": "Impianti industriali",
       "sportsFacilities": "Impianti sportivi",
       "educationalInstitutions": "Istituzioni educative",
-      "hotels": "Hotel e ospitalità",
+        "hotels": "Hotel, Airbnb e strutture ricettive",
       "vacationRentals": "Case vacanze e Airbnb",
       "andMore": "E altro ancora",
-      "rollerShutters": "Tapparelle elettriche"
+      "rollerShutters": "Garage commerciali e serrande avvolgibili"
     },
     "tutorials": {
       "title": "Video tutorial",
@@ -733,10 +733,10 @@
       "industrialFacilities": "Industrianlegg",
       "sportsFacilities": "Idrettsanlegg",
       "educationalInstitutions": "Utdanningsinstitusjoner",
-      "hotels": "Hotell og gjestfrihet",
+        "hotels": "Hoteller, Airbnb og overnattingssteder",
       "vacationRentals": "Ferieutleie og Airbnb",
       "andMore": "Og mer",
-      "rollerShutters": "Elektriske rullegardiner"
+      "rollerShutters": "Kommersielle garasjer og rulleporter"
     },
     "tutorials": {
       "title": "Opplæringsvideoer",
@@ -888,10 +888,10 @@
       "industrialFacilities": "Промислові об'єкти",
       "sportsFacilities": "Спортивні споруди",
       "educationalInstitutions": "Навчальні заклади",
-      "hotels": "Готелі та готельний бізнес",
+        "hotels": "Готелі, Airbnb та об'єкти розміщення",
       "vacationRentals": "Оренда для відпочинку та Airbnb",
       "andMore": "І більше",
-      "rollerShutters": "Електричні рольставні"
+      "rollerShutters": "Комерційні гаражі та рольставні"
     },
     "tutorials": {
       "title": "Навчальні відео",
@@ -1043,10 +1043,10 @@
       "industrialFacilities": "Endüstriyel Tesisler",
       "sportsFacilities": "Spor Tesisleri",
       "educationalInstitutions": "Eğitim Kurumları",
-      "hotels": "Oteller ve Konaklama",
+        "hotels": "Oteller, Airbnb ve konaklama tesisleri",
       "vacationRentals": "Kiralık Tatil Yerleri ve Airbnb",
       "andMore": "Ve Daha Fazlası",
-      "rollerShutters": "Elektrikli Panjurlar"
+      "rollerShutters": "Ticari garajlar ve kepenkler"
     },
     "tutorials": {
       "title": "Eğitim Videoları",
@@ -1198,10 +1198,10 @@
       "industrialFacilities": "औद्योगिक सुविधाएं",
       "sportsFacilities": "खेल सुविधाएं",
       "educationalInstitutions": "शैक्षणिक संस्थान",
-      "hotels": "होटल और आतिथ्य",
+        "hotels": "होटल, Airbnb और आवास स्थल",
       "vacationRentals": "अवकाश किराया और Airbnb",
       "andMore": "और भी बहुत कुछ",
-      "rollerShutters": "इलेक्ट्रिक रोलर शटर"
+      "rollerShutters": "व्यावसायिक गैरेज और रोलर शटर"
     },
     "tutorials": {
       "title": "ट्यूटोरियल वीडियो",
@@ -1353,10 +1353,10 @@
       "industrialFacilities": "শিল্প সুবিধা",
       "sportsFacilities": "খেলাধুলার সুবিধা",
       "educationalInstitutions": "শিক্ষা প্রতিষ্ঠান",
-      "hotels": "হোটেল এবং আতিথেয়তা",
+        "hotels": "হোটেল, Airbnb এবং আবাসন কেন্দ্র",
       "vacationRentals": "অবকাশকালীন ভাড়া এবং Airbnb",
       "andMore": "এবং আরো",
-      "rollerShutters": "বৈদ্যুতিক রোলার শাটার"
+      "rollerShutters": "বাণিজ্যিক গ্যারেজ এবং রোলার শাটার"
     },
     "tutorials": {
       "title": "টিউটোরিয়াল ভিডিও",
@@ -1508,10 +1508,10 @@
       "industrialFacilities": "औद्योगिक सुविधा",
       "sportsFacilities": "क्रीडा सुविधा",
       "educationalInstitutions": "शैक्षणिक संस्था",
-      "hotels": "हॉटेल्स आणि हॉस्पिटॅलिटी",
+        "hotels": "हॉटेल्स, Airbnb आणि निवासस्थाने",
       "vacationRentals": "सुट्टीतील भाडे आणि Airbnb",
       "andMore": "आणि अधिक",
-      "rollerShutters": "इलेक्ट्रिक रोलर शटर"
+      "rollerShutters": "व्यावसायिक गॅरेज आणि रोलर शटर"
     },
     "tutorials": {
       "title": "ट्यूटोरियल व्हिडिओ",
@@ -1663,10 +1663,10 @@
       "industrialFacilities": "పారిశ్రామిక సౌకర్యాలు",
       "sportsFacilities": "క్రీడా సౌకర్యాలు",
       "educationalInstitutions": "విద్యా సంస్థలు",
-      "hotels": "హోటల్స్ మరియు హాస్పిటాలిటీ",
+        "hotels": "హోటళ్లు, Airbnb మరియు వసతి స్థలాలు",
       "vacationRentals": "వెకేషన్ రెంటల్స్ మరియు Airbnb",
       "andMore": "మరియు మరిన్ని",
-      "rollerShutters": "ఎలక్ట్రిక్ రోలర్ షట్టర్లు"
+      "rollerShutters": "వాణిజ్య గ్యారేజీలు మరియు రోలర్ షట్టర్లు"
     },
     "tutorials": {
       "title": "ట్యుటోరియల్ వీడియోలు",
@@ -1818,10 +1818,10 @@
       "industrialFacilities": "工业设施",
       "sportsFacilities": "体育设施",
       "educationalInstitutions": "教育机构",
-      "hotels": "酒店及酒店业",
+        "hotels": "酒店、Airbnb 和住宿场所",
       "vacationRentals": "度假租赁和 Airbnb",
       "andMore": "还有更多",
-      "rollerShutters": "电动卷帘"
+      "rollerShutters": "商业车库和卷帘门"
     },
     "tutorials": {
       "title": "教程视频",
@@ -1973,10 +1973,10 @@
       "industrialFacilities": "工業設施",
       "sportsFacilities": "體育設施",
       "educationalInstitutions": "教育機構",
-      "hotels": "飯店及飯店業",
+        "hotels": "飯店、Airbnb 和住宿場所",
       "vacationRentals": "度假租賃和 Airbnb",
       "andMore": "還有更多",
-      "rollerShutters": "電動捲簾"
+      "rollerShutters": "商用車庫和捲簾門"
     },
     "tutorials": {
       "title": "教學影片",
@@ -2128,10 +2128,10 @@
       "industrialFacilities": "産業施設",
       "sportsFacilities": "スポーツ施設",
       "educationalInstitutions": "教育機関",
-      "hotels": "ホテルとホスピタリティ",
+        "hotels": "ホテル、Airbnb、宿泊施設",
       "vacationRentals": "バケーションレンタルとAirbnb",
       "andMore": "その他",
-      "rollerShutters": "電動ローラーシャッター"
+      "rollerShutters": "商業用ガレージとローラーシャッター"
     },
     "tutorials": {
       "title": "チュートリアルビデオ",
@@ -2283,10 +2283,10 @@
       "industrialFacilities": "산업시설",
       "sportsFacilities": "스포츠 시설",
       "educationalInstitutions": "교육 기관",
-      "hotels": "호텔 및 숙박업",
+        "hotels": "호텔, Airbnb 및 숙박 시설",
       "vacationRentals": "휴가용 임대 숙소 및 에어비앤비",
       "andMore": "그리고 더",
-      "rollerShutters": "전동 롤러 셔터"
+      "rollerShutters": "상업용 차고 및 롤러 셔터"
     },
     "tutorials": {
       "title": "튜토리얼 비디오",
@@ -2438,10 +2438,10 @@
       "industrialFacilities": "Industrianlæg",
       "sportsFacilities": "Sportsfaciliteter",
       "educationalInstitutions": "Uddannelsesinstitutioner",
-      "hotels": "Hoteller og gæstfrihed",
+        "hotels": "Hoteller, Airbnb og overnatningssteder",
       "vacationRentals": "Ferieudlejning og Airbnb",
       "andMore": "Og mere",
-      "rollerShutters": "Elektriske rulleskodder"
+      "rollerShutters": "Erhvervsgarager og rulleskodder"
     },
     "tutorials": {
       "title": "Tutorial videoer",
@@ -2593,10 +2593,10 @@
       "industrialFacilities": "Ipari létesítmények",
       "sportsFacilities": "Sportlétesítmények",
       "educationalInstitutions": "Oktatási intézmények",
-      "hotels": "Szállodák és vendéglátás",
+        "hotels": "Szállodák, Airbnb és szálláshelyek",
       "vacationRentals": "Nyaralóbérlés és Airbnb",
       "andMore": "És még több",
-      "rollerShutters": "Elektromos redőnyök"
+      "rollerShutters": "Kereskedelmi garázsok és redőnykapuk"
     },
     "tutorials": {
       "title": "Oktatóvideók",

@@ -1,6 +1,11 @@
 // /js/main.js
 // Version: 1.2.0
 
+function resolveStaticPageLanguage() {
+  const lang = document.documentElement.getAttribute("lang") || "en";
+  return typeof lang === "string" && lang.trim() ? lang.trim() : "en";
+}
+
 function setupRevealOnScroll() {
   const revealEls = $$(".js-reveal");
   if (!revealEls.length) return;
@@ -108,31 +113,34 @@ function setupTabNavigation() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const savedLang = localStorage.getItem("language") || "en";
+  const pageLang = resolveStaticPageLanguage();
+  const pageDir =
+    document.documentElement.getAttribute("dir") ||
+    (pageLang === "he" || pageLang === "ar" ? "rtl" : "ltr");
+  const savedLang = localStorage.getItem("language") || pageLang;
 
-  if (savedLang !== "en") {
+  if (typeof changeLanguage === "function") {
     changeLanguage(savedLang);
   } else {
-    currentLang = "en";
-    window.currentLanguage = "en";
-    document.documentElement.setAttribute("lang", "en");
-    document.documentElement.setAttribute("dir", "ltr");
-    document.body.classList.remove("rtl");
+    window.currentLanguage = pageLang;
+    document.documentElement.setAttribute("lang", pageLang);
+    document.documentElement.setAttribute("dir", pageDir);
+    document.body.classList.toggle("rtl", pageDir === "rtl");
   }
 
   if (typeof setupAccessibilityWidget === "function") {
     setupAccessibilityWidget();
   }
 
-  setupNav();
-  setupScrollSpy();
-  setupRevealOnScroll();
-  setupCenteredScroll();
-  setupContactForm();
-  setupHeroMedia();
-  setupHeroRotator();
-  setupVideoAutoplay();
-  setupLanguageSelector();
-  setupTabNavigation();
+  if (typeof setupNav === "function") setupNav();
+  if (typeof setupScrollSpy === "function") setupScrollSpy();
+  if (typeof setupRevealOnScroll === "function") setupRevealOnScroll();
+  if (typeof setupCenteredScroll === "function") setupCenteredScroll();
+  if (typeof setupContactForm === "function") setupContactForm();
+  if (typeof setupHeroMedia === "function") setupHeroMedia();
+  if (typeof setupHeroRotator === "function") setupHeroRotator();
+  if (typeof setupVideoAutoplay === "function") setupVideoAutoplay();
+  if (typeof setupLanguageSelector === "function") setupLanguageSelector();
+  if (typeof setupTabNavigation === "function") setupTabNavigation();
   setYear();
 });
