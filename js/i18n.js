@@ -5,7 +5,6 @@ var currentLang = "en";
 
 var SITE_LANGUAGE_OPTIONS = [
   { code: "en", label: "English", flagType: "image", flagSrc: "flag-us.png", flagAlt: "US" },
-  { code: "he", label: "עברית", flagType: "image", flagSrc: "flag-il.svg", flagAlt: "IL" },
   { code: "es", label: "Español", flagType: "image", flagSrc: "flag-es.svg", flagAlt: "ES" },
   { code: "fr", label: "Français", flagType: "image", flagSrc: "flag-fr.svg", flagAlt: "FR" },
   { code: "de", label: "Deutsch", flagType: "image", flagSrc: "flag-de.svg", flagAlt: "DE" },
@@ -18,6 +17,7 @@ var SITE_LANGUAGE_OPTIONS = [
   { code: "ru", label: "Русский", flagType: "image", flagSrc: "flag-ru.svg", flagAlt: "RU" },
   { code: "uk", label: "Українська", flagType: "image", flagSrc: "flag-ua.svg", flagAlt: "UA" },
   { code: "tr", label: "Türkçe", flagType: "image", flagSrc: "flag-tr.svg", flagAlt: "TR" },
+  { code: "he", label: "עברית", flagType: "image", flagSrc: "flag-il.svg", flagAlt: "IL" },
   { code: "ar", label: "العربية", flagType: "image", flagSrc: "flag-ae.svg", flagAlt: "AE" },
   { code: "hi", label: "हिन्दी", flagType: "image", flagSrc: "flag-in.svg", flagAlt: "IN" },
   { code: "bn", label: "বাংলা", flagType: "image", flagSrc: "flag-in.svg", flagAlt: "IN" },
