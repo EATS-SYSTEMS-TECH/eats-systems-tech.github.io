@@ -2,6 +2,7 @@
 // Version: 1.3.0
 
 let heroRotatorIntervalId = null;
+let heroPageDataCache = null;
 
 const HERO_MEDIA_FALLBACK_COPY = {
   replay: "Play Video Again",
@@ -9,11 +10,47 @@ const HERO_MEDIA_FALLBACK_COPY = {
   unmute: "Unmute video",
 };
 
+function getHeroPageData() {
+  if (heroPageDataCache !== null) {
+    return heroPageDataCache;
+  }
+
+  const dataScript = document.getElementById("hero-locale-data");
+  if (!dataScript) {
+    heroPageDataCache = {};
+    return heroPageDataCache;
+  }
+
+  try {
+    heroPageDataCache = JSON.parse(dataScript.textContent || "{}");
+  } catch (error) {
+    heroPageDataCache = {};
+  }
+
+  return heroPageDataCache;
+}
+
+function getHeroRotatorPhrases() {
+  const bundle = typeof getTranslationBundle === "function" ? getTranslationBundle() : null;
+  if (bundle?.hero?.rotator?.phrases?.length) {
+    return bundle.hero.rotator.phrases;
+  }
+
+  const pageData = getHeroPageData();
+  if (Array.isArray(pageData.phrases) && pageData.phrases.length) {
+    return pageData.phrases;
+  }
+
+  return ["Smart."];
+}
+
 function getHeroMediaCopy() {
   const bundle = typeof getTranslationBundle === "function" ? getTranslationBundle() : null;
+  const pageData = getHeroPageData();
 
   return {
     ...HERO_MEDIA_FALLBACK_COPY,
+    ...(pageData.media || {}),
     ...(bundle?.hero?.media || {}),
   };
 }
@@ -228,7 +265,7 @@ function setupHeroRotator() {
       return;
     }
 
-    const phrases = getTranslationBundle().hero.rotator.phrases;
+    const phrases = getHeroRotatorPhrases();
     const nextIdx = (idx + 1) % phrases.length;
     const animMs =
       parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--rotator-duration")) || 420;
@@ -279,7 +316,7 @@ function updateHeroRotatorPhrase() {
   const el = document.getElementById("hero-rotator");
   if (!el) return;
 
-  const phrases = getTranslationBundle().hero.rotator.phrases;
+  const phrases = getHeroRotatorPhrases();
   el.textContent = phrases[0];
 }
 

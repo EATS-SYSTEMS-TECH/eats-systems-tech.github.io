@@ -1,0 +1,11 @@
+{
+    "name": "wifigate-static-site",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build:locales": "node scripts/build-localized-site.mjs"
+    },
+    "devDependencies": {
+        "cheerio": "^1.2.0"
+    }
+}
