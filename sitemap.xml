@@ -7,12 +7,6 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://wifigate.io/he/</loc>
-    <lastmod>2026-06-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://wifigate.io/es/</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -80,6 +74,12 @@
   </url>
   <url>
     <loc>https://wifigate.io/tr/</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://wifigate.io/he/</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -157,12 +157,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wifigate.io/he/cookies/</loc>
-    <lastmod>2026-06-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://wifigate.io/es/cookies/</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>yearly</changefreq>
@@ -230,6 +224,12 @@
   </url>
   <url>
     <loc>https://wifigate.io/tr/cookies/</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://wifigate.io/he/cookies/</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -307,12 +307,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wifigate.io/he/privacy-policy/</loc>
-    <lastmod>2026-06-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://wifigate.io/es/privacy-policy/</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>yearly</changefreq>
@@ -380,6 +374,12 @@
   </url>
   <url>
     <loc>https://wifigate.io/tr/privacy-policy/</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://wifigate.io/he/privacy-policy/</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -457,12 +457,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wifigate.io/he/terms-and-conditions/</loc>
-    <lastmod>2026-06-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://wifigate.io/es/terms-and-conditions/</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>yearly</changefreq>
@@ -530,6 +524,12 @@
   </url>
   <url>
     <loc>https://wifigate.io/tr/terms-and-conditions/</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://wifigate.io/he/terms-and-conditions/</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -607,12 +607,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://wifigate.io/he/wifigate-link/</loc>
-    <lastmod>2026-06-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://wifigate.io/es/wifigate-link/</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>yearly</changefreq>
@@ -680,6 +674,12 @@
   </url>
   <url>
     <loc>https://wifigate.io/tr/wifigate-link/</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://wifigate.io/he/wifigate-link/</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
