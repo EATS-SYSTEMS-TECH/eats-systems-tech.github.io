@@ -4,6 +4,7 @@ import vm from "node:vm";
 import * as cheerio from "cheerio";
 import { homeSeoLocales } from "./home-seo-locales.mjs";
 import { wifigateLinkLocales } from "./wifigate-link-locales.mjs";
+import { NICHE_DEFINITIONS, NICHE_CHROME, NICHE_OVERRIDES } from "./niche-content.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = "https://wifigate.io";
@@ -12,6 +13,7 @@ const nowDate = "2026-06-20";
 
 const homeTemplatePath = path.join(repoRoot, "templates", "index.template.html");
 const utilityTemplatePath = path.join(repoRoot, "templates", "wifigate-link.template.html");
+const nicheTemplatePath = path.join(repoRoot, "templates", "niche.template.html");
 const legalTemplatePaths = {
   cookies: path.join(repoRoot, "templates", "legal", "cookies.template.html"),
   "privacy-policy": path.join(repoRoot, "templates", "legal", "privacy-policy.template.html"),
@@ -69,10 +71,14 @@ const legalRuntimeScriptsToRemove = [
 const homeRuntimeScriptsToAdd = [
   "/js/locale-redirect.js?v=20260620a",
   "/js/language-selector.js?v=20260620a",
-  "/js/where-stories-static.js?v=20260620a",
 ];
 
 const legalRuntimeScriptsToAdd = [
+  "/js/locale-redirect.js?v=20260620a",
+  "/js/language-selector.js?v=20260620a",
+];
+
+const nicheRuntimeScriptsToAdd = [
   "/js/locale-redirect.js?v=20260620a",
   "/js/language-selector.js?v=20260620a",
 ];
@@ -81,6 +87,7 @@ const pageImages = {
   home: "https://wifigate.io/assets/img/wifigate_homepage.webp",
   legal: "https://wifigate.io/assets/img/wifigate_homepage.webp",
   utility: "https://wifigate.io/logo-1024.png",
+  niche: "https://wifigate.io/assets/img/wifigate_homepage.webp",
 };
 
 function createSandbox() {
@@ -615,47 +622,14 @@ function updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale) {
   $("#hero-replay span").text(bundle.hero.media.replay);
   $("#hero-replay").attr("aria-label", bundle.hero.media.replay);
   $("#hero-replay").attr("title", bundle.hero.media.replay);
-  $("#where-story-video-label").text(homeData.storyUi[locale]?.videoLabel || homeData.storyUi.en.videoLabel);
-  $("#where-story-video-status").text(homeData.storyUi[locale]?.videoStatus || homeData.storyUi.en.videoStatus);
-  $("#where-story-video-note").text(homeData.storyUi[locale]?.videoNote || homeData.storyUi.en.videoNote);
-  $("#where-story-label-problem").text(homeData.storyUi[locale]?.problem || homeData.storyUi.en.problem);
-  $("#where-story-label-solution").text(homeData.storyUi[locale]?.solution || homeData.storyUi.en.solution);
-  $("#where-story-win-label").text(homeData.storyUi[locale]?.winLabel || homeData.storyUi.en.winLabel);
 
   updateAccessibilityMarkup($, accessibilityBundle);
 }
 
-function buildWhereStoryPayload(homeData, bundle, locale) {
-  const stories = {};
-  const anchorToKey = {};
-
-  Object.keys(homeData.storySlugs).forEach((storyKey) => {
-    const localizedStories = homeData.stories[locale] || {};
-    const story = localizedStories[storyKey] || homeData.stories.en[storyKey];
-
-    if (!story) {
-      return;
-    }
-
-    const anchorId = `where-story-${homeData.storySlugs[storyKey] || storyKey}`;
-
-    stories[storyKey] = {
-      anchorId,
-      title: getNestedValue(bundle, `applications.${storyKey}`) || getNestedValue(homeData.translations.en, `applications.${storyKey}`) || storyKey,
-      pitch: story.pitch,
-      problem: story.problem,
-      solution: story.solution,
-      value: story.value,
-    };
-
-    anchorToKey[anchorId] = storyKey;
+function rewriteHomeNicheLinks($, locale) {
+  NICHE_DEFINITIONS.forEach((niche) => {
+    $(`.where-list__link[href='where-story-${niche.slug}/']`).attr("href", buildPagePath(locale, niche.key));
   });
-
-  return {
-    ui: homeData.storyUi[locale] || homeData.storyUi.en,
-    stories,
-    anchorToKey,
-  };
 }
 
 function insertPageDataScript($, scriptId, data, anchorSelector) {
@@ -741,6 +715,7 @@ async function buildHomePages(homeData) {
     setLanguageSelector($, homeData.localeOptions, locale, "home");
     updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale);
     rewriteHomeInternalLinks($, locale);
+    rewriteHomeNicheLinks($, locale);
     setHomeMeta($, bundle, locale, homeData.localeOptions);
     insertPageDataScript(
       $,
@@ -748,7 +723,6 @@ async function buildHomePages(homeData) {
       { phrases: bundle.hero.rotator.phrases, media: bundle.hero.media },
       "script[src*='js/main.js']"
     );
-    insertPageDataScript($, "where-story-data", buildWhereStoryPayload(homeData, bundle, locale), "script[src*='js/main.js']");
 
     const outputFile = buildOutputFilePath(locale, "home");
     await writeOutputFile(outputFile, serialize($));
@@ -827,6 +801,244 @@ async function buildUtilityPages(homeData) {
   return sitemapEntries;
 }
 
+function getNicheChrome(locale) {
+  const base = NICHE_CHROME[defaultLocale];
+  const override = NICHE_CHROME[locale] || {};
+  return { ...base, ...override };
+}
+
+function getNicheOverride(locale, storyKey) {
+  return (NICHE_OVERRIDES[locale] && NICHE_OVERRIDES[locale][storyKey]) || {};
+}
+
+function getNicheLabel(homeData, bundle, storyKey) {
+  return (
+    getNestedValue(bundle, `applications.${storyKey}`) ||
+    getNestedValue(homeData.translations[defaultLocale], `applications.${storyKey}`) ||
+    storyKey
+  );
+}
+
+function buildNicheContext(homeData, niche, locale) {
+  const storyKey = niche.storyKey;
+  const bundle = getBundle(homeData.translations, locale);
+  const enBundle = homeData.translations[defaultLocale];
+  const ui = homeData.storyUi[locale] || homeData.storyUi[defaultLocale];
+  const localizedStories = homeData.stories[locale] || {};
+  const story = localizedStories[storyKey] || homeData.stories[defaultLocale][storyKey] || {};
+  const chrome = getNicheChrome(locale);
+  const override = getNicheOverride(locale, storyKey);
+  const contact = bundle.contact || enBundle.contact;
+  const footer = bundle.footer || enBundle.footer;
+  const nicheLabel = getNicheLabel(homeData, bundle, storyKey);
+
+  const heroHeadline = override.heroHeadline || nicheLabel;
+  const heroSubline = override.heroSubline || story.pitch || chrome.comparisonLead || "";
+  const metaTitle = override.metaTitle || `${nicheLabel} | WIFIGATE`;
+  const metaDescription = override.metaDescription || story.pitch || nicheLabel;
+
+  return {
+    storyKey,
+    bundle,
+    enBundle,
+    ui,
+    story,
+    chrome,
+    contact,
+    footer,
+    nicheLabel,
+    heroHeadline,
+    heroSubline,
+    metaTitle,
+    metaDescription,
+  };
+}
+
+function setNicheList($, selector, items, className) {
+  const list = $(selector);
+  if (!list.length) {
+    return;
+  }
+
+  list.empty();
+  (items || []).forEach((item) => {
+    list.append($("<li>").addClass(className).text(item));
+  });
+}
+
+function setNicheComparison($, chrome) {
+  const rows = $("#niche-comparison-rows");
+  if (!rows.length) {
+    return;
+  }
+
+  rows.empty();
+  (chrome.rows || []).forEach((row) => {
+    const oldCell = $("<div>")
+      .addClass("niche-compare__cell niche-compare__old")
+      .append($("<span>").addClass("niche-compare__tag").text(chrome.headTraditional))
+      .append($("<p>").addClass("niche-compare__text").text(row.t));
+    const newCell = $("<div>")
+      .addClass("niche-compare__cell niche-compare__new")
+      .append($("<span>").addClass("niche-compare__tag").text(chrome.headWifigate))
+      .append($("<p>").addClass("niche-compare__text").text(row.w));
+    rows.append($("<li>").addClass("niche-compare__row").append(oldCell).append(newCell));
+  });
+}
+
+function updateNicheStaticUi($, ctx, accessibilityBundle) {
+  const { bundle, enBundle, ui, story, chrome, contact, footer, nicheLabel } = ctx;
+  const navText = (keyPath, fallback) =>
+    getNestedValue(bundle, keyPath) || getNestedValue(enBundle, keyPath) || fallback;
+
+  $(".nav__toggle").attr("aria-label", "Toggle navigation menu");
+  $("#language-button").attr("aria-label", "Select language");
+  $("#niche-nav-home").text(navText("nav.home", "Home"));
+  $("#niche-nav-features").text(navText("nav.features", "Features"));
+  $("#niche-nav-where").text(navText("tabs.where", "Where"));
+  $("#niche-nav-tutorials").text(navText("nav.about", "Tutorials"));
+  $("#niche-nav-contact").text(navText("nav.contact", "Contact Us"));
+
+  $("#niche-breadcrumb-home").text(chrome.homeLabel);
+  $("#niche-breadcrumb-current").text(nicheLabel);
+
+  $("#niche-eyebrow").text(chrome.eyebrow);
+  $("#niche-title").text(ctx.heroHeadline);
+  $("#niche-subline").text(ctx.heroSubline);
+  $("#niche-hero-cta-label").text(contact.ctaButton || "Contact via WhatsApp");
+  $("#niche-hero-back").text(chrome.backLabel);
+  setNicheList($, "#niche-badges", ui.badges, "niche-chip");
+
+  $("#niche-problem-title").text(chrome.problemTitle);
+  $("#niche-problem-body").text(story.problem || ctx.heroSubline);
+  $("#niche-better-title").text(chrome.betterTitle);
+  $("#niche-better-body").text(story.solution || story.value || "");
+
+  $("#niche-benefits-title").text(chrome.benefitsTitle);
+  $("#niche-benefits-lead").text(story.value || story.pitch || "");
+  setNicheList($, "#niche-benefits-list", ui.badges, "niche-benefit");
+
+  $("#niche-comparison-title").text(chrome.comparisonTitle);
+  $("#niche-comparison-lead").text(chrome.comparisonLead);
+  setNicheComparison($, chrome);
+
+  $("#niche-video-title").text(chrome.videoTitle);
+  $("#niche-video-label").text(ui.videoLabel);
+  $("#niche-video-status").text(ui.videoStatus);
+  $("#niche-video-note").text(ui.videoNote);
+
+  $("#niche-cta-title").text(contact.ctaTitle || "Interested in WIFIGATE?");
+  $("#niche-cta-text").text(contact.ctaText || "");
+  $("#niche-cta-button").text(contact.ctaButton || "Contact via WhatsApp");
+
+  $("#js-year").text(nowDate.slice(0, 4));
+  $("#footer-copyright").text(footer.copyright || "WIFIGATE. All rights reserved.");
+  $("#footer-terms").text(footer.terms || "Terms & Conditions");
+  $("#footer-privacy").text(footer.privacy || "Privacy Policy");
+  $("#footer-cookies").text(footer.cookies || "Cookies");
+  $("#footer-tagline").text(footer.tagline || "");
+
+  updateAccessibilityMarkup($, accessibilityBundle);
+}
+
+function rewriteNicheInternalLinks($, locale) {
+  const home = buildPagePath(locale, "home");
+
+  $(".nav__logo-link").attr("href", `${home}#home`);
+  $("a[href^='../index.html']").each((_, element) => {
+    const href = $(element).attr("href") || "";
+    const hashIndex = href.indexOf("#");
+    const hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
+    $(element).attr("href", `${home}${hash}`);
+  });
+  $("a[href='../terms-and-conditions/']").attr("href", buildPagePath(locale, "terms-and-conditions"));
+  $("a[href='../privacy-policy/']").attr("href", buildPagePath(locale, "privacy-policy"));
+  $("a[href='../cookies/']").attr("href", buildPagePath(locale, "cookies"));
+  $(".nav__logo-link").attr("aria-label", "Back to WIFIGATE home page");
+}
+
+function setNicheMeta($, ctx, niche, locale, localeOptions) {
+  const url = buildPageUrl(locale, niche.key);
+  const homeUrl = buildPageUrl(locale, "home");
+
+  $("title").text(ctx.metaTitle);
+  setMetaByName($, "description", ctx.metaDescription);
+  $("link[rel='canonical']").attr("href", url);
+  replaceAlternateLinks($, localeOptions, niche.key);
+
+  setMetaByProperty($, "og:type", "article");
+  setMetaByProperty($, "og:url", url);
+  setMetaByProperty($, "og:title", ctx.metaTitle);
+  setMetaByProperty($, "og:description", ctx.metaDescription);
+  setMetaByProperty($, "og:image", pageImages.niche);
+  setMetaByProperty($, "twitter:card", "summary_large_image");
+  setMetaByProperty($, "twitter:url", url);
+  setMetaByProperty($, "twitter:title", ctx.metaTitle);
+  setMetaByProperty($, "twitter:description", ctx.metaDescription);
+  setMetaByProperty($, "twitter:image", pageImages.niche);
+
+  replaceStructuredData($, [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: ctx.metaTitle,
+      description: ctx.metaDescription,
+      inLanguage: locale,
+      url,
+      isPartOf: {
+        "@type": "WebSite",
+        name: "WIFIGATE",
+        url: siteOrigin,
+      },
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        url: pageImages.niche,
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: ctx.chrome.homeLabel, item: homeUrl },
+        { "@type": "ListItem", position: 2, name: ctx.nicheLabel, item: url },
+      ],
+    },
+  ]);
+}
+
+async function buildNichePages(homeData) {
+  const template = await fs.readFile(nicheTemplatePath, "utf8");
+  const sitemapEntries = [];
+
+  for (const niche of NICHE_DEFINITIONS) {
+    for (const localeOption of homeData.localeOptions) {
+      const locale = localeOption.code;
+      const ctx = buildNicheContext(homeData, niche, locale);
+      const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale);
+      const $ = cheerio.load(template, { decodeEntities: false });
+
+      setBodyDirection($, locale);
+      rewriteStaticAssets($, locale, niche.key);
+      appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, niche.key);
+      setLanguageSelector($, homeData.localeOptions, locale, niche.key);
+      updateNicheStaticUi($, ctx, accessibilityBundle);
+      rewriteNicheInternalLinks($, locale);
+      setNicheMeta($, ctx, niche, locale, homeData.localeOptions);
+
+      const outputFile = buildOutputFilePath(locale, niche.key);
+      await writeOutputFile(outputFile, serialize($));
+
+      sitemapEntries.push({
+        loc: buildPageUrl(locale, niche.key),
+        changefreq: "monthly",
+        priority: locale === defaultLocale ? "0.8" : "0.7",
+      });
+    }
+  }
+
+  return sitemapEntries;
+}
+
 async function main() {
   const homeSandbox = await runFilesInSandbox(homeDataFiles);
   const legalCollections = {};
@@ -848,6 +1060,7 @@ async function main() {
   const sitemapEntries = [];
   sitemapEntries.push(...(await buildHomePages(homeData)));
   sitemapEntries.push(...(await buildLegalPages(homeData, legalCollections)));
+  sitemapEntries.push(...(await buildNichePages(homeData)));
   sitemapEntries.push(...(await buildUtilityPages(homeData)));
 
   await fs.writeFile(path.join(repoRoot, "sitemap.xml"), buildSitemap(sitemapEntries), "utf8");
