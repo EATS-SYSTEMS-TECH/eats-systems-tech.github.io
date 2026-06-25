@@ -10,10 +10,12 @@ const repoRoot = process.cwd();
 const siteOrigin = "https://wifigate.io";
 const defaultLocale = "en";
 const nowDate = "2026-06-20";
+const guestInvitesPageKey = "Automated-Guest-Invites-API";
 
 const homeTemplatePath = path.join(repoRoot, "templates", "index.template.html");
 const utilityTemplatePath = path.join(repoRoot, "templates", "wifigate-link.template.html");
 const nicheTemplatePath = path.join(repoRoot, "templates", "niche.template.html");
+const guestInvitesTemplatePath = path.join(repoRoot, "templates", "guest-invites-api.template.html");
 const legalTemplatePaths = {
   cookies: path.join(repoRoot, "templates", "legal", "cookies.template.html"),
   "privacy-policy": path.join(repoRoot, "templates", "legal", "privacy-policy.template.html"),
@@ -24,6 +26,7 @@ const homeDataFiles = [
   "js/translations.js",
   "js/translations-extra.js",
   "js/features-refresh.js",
+  "js/guest-invites-home.js",
   "js/application-stories.js",
   "js/application-stories-extra.js",
   "js/i18n.js",
@@ -88,6 +91,7 @@ const pageImages = {
   legal: "https://wifigate.io/assets/img/wifigate_homepage.webp",
   utility: "https://wifigate.io/logo-1024.png",
   niche: "https://wifigate.io/assets/img/wifigate_homepage.webp",
+  guestInvites: "https://wifigate.io/assets/img/wifigate_homepage.webp",
 };
 
 function createSandbox() {
@@ -632,6 +636,10 @@ function rewriteHomeNicheLinks($, locale) {
   });
 }
 
+function rewriteHomeGuestInvitesLink($, locale) {
+  $(`a[href='${guestInvitesPageKey}/']`).attr("href", buildPagePath(locale, guestInvitesPageKey));
+}
+
 function insertPageDataScript($, scriptId, data, anchorSelector) {
   $(anchorSelector).before(
     `\n  <script id="${scriptId}" type="application/json">${JSON.stringify(data)}</script>`
@@ -716,6 +724,7 @@ async function buildHomePages(homeData) {
     updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale);
     rewriteHomeInternalLinks($, locale);
     rewriteHomeNicheLinks($, locale);
+    rewriteHomeGuestInvitesLink($, locale);
     setHomeMeta($, bundle, locale, homeData.localeOptions);
     insertPageDataScript(
       $,
@@ -1039,6 +1048,132 @@ async function buildNichePages(homeData) {
   return sitemapEntries;
 }
 
+function getGuestInvitesStrings(homeData, locale) {
+  const bundle = getBundle(homeData.translations, locale);
+  const enBundle = homeData.translations[defaultLocale];
+  const gen = (bundle && bundle.guestInvites && bundle.guestInvites.generator) || {};
+  const enGen = (enBundle && enBundle.guestInvites && enBundle.guestInvites.generator) || {};
+  const pick = (key, fallback) => gen[key] || enGen[key] || fallback;
+
+  return {
+    metaTitle: pick("metaTitle", "Automated Guest Invites API | WIFIGATE"),
+    metaDescription: pick(
+      "metaDescription",
+      "Build and preview a WIFIGATE guest invitation API request, then copy the ready-to-use URL."
+    ),
+    copyButton: pick("copyButton", "Copy URL"),
+    copiedButton: pick("copiedButton", "Copied!"),
+    copyError: pick("copyError", "Copy failed \u2014 select the URL and copy it manually."),
+  };
+}
+
+function updateGuestInvitesStaticUi($, strings) {
+  $(".nav__toggle").attr("aria-label", "Toggle navigation menu");
+  $("#language-button").attr("aria-label", "Select language");
+  $("#js-year").text(nowDate.slice(0, 4));
+  $("#giapi-copy-data").text(
+    JSON.stringify({
+      copyButton: strings.copyButton,
+      copiedButton: strings.copiedButton,
+      copyError: strings.copyError,
+    })
+  );
+}
+
+function rewriteGuestInvitesInternalLinks($, locale) {
+  const home = buildPagePath(locale, "home");
+
+  $(".nav__logo-link").attr("href", `${home}#home`);
+  $("a[href^='../index.html']").each((_, element) => {
+    const href = $(element).attr("href") || "";
+    const hashIndex = href.indexOf("#");
+    const hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
+    $(element).attr("href", `${home}${hash}`);
+  });
+  $("a[href='../terms-and-conditions/']").attr("href", buildPagePath(locale, "terms-and-conditions"));
+  $("a[href='../privacy-policy/']").attr("href", buildPagePath(locale, "privacy-policy"));
+  $("a[href='../cookies/']").attr("href", buildPagePath(locale, "cookies"));
+  $(".nav__logo-link").attr("aria-label", "Back to WIFIGATE home page");
+}
+
+function setGuestInvitesMeta($, locale, localeOptions, strings) {
+  const url = buildPageUrl(locale, guestInvitesPageKey);
+  const homeUrl = buildPageUrl(locale, "home");
+
+  $("title").text(strings.metaTitle);
+  setMetaByName($, "description", strings.metaDescription);
+  $("link[rel='canonical']").attr("href", url);
+  replaceAlternateLinks($, localeOptions, guestInvitesPageKey);
+
+  setMetaByProperty($, "og:type", "website");
+  setMetaByProperty($, "og:url", url);
+  setMetaByProperty($, "og:title", strings.metaTitle);
+  setMetaByProperty($, "og:description", strings.metaDescription);
+  setMetaByProperty($, "og:image", pageImages.guestInvites);
+  setMetaByProperty($, "twitter:card", "summary_large_image");
+  setMetaByProperty($, "twitter:url", url);
+  setMetaByProperty($, "twitter:title", strings.metaTitle);
+  setMetaByProperty($, "twitter:description", strings.metaDescription);
+  setMetaByProperty($, "twitter:image", pageImages.guestInvites);
+
+  replaceStructuredData($, [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      name: strings.metaTitle,
+      description: strings.metaDescription,
+      inLanguage: locale,
+      url,
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Any",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      isPartOf: { "@type": "WebSite", name: "WIFIGATE", url: siteOrigin },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "WIFIGATE", item: homeUrl },
+        { "@type": "ListItem", position: 2, name: strings.metaTitle, item: url },
+      ],
+    },
+  ]);
+}
+
+async function buildGuestInvitesPages(homeData) {
+  const template = await fs.readFile(guestInvitesTemplatePath, "utf8");
+  const sitemapEntries = [];
+
+  for (const localeOption of homeData.localeOptions) {
+    const locale = localeOption.code;
+    const bundle = getBundle(homeData.translations, locale);
+    const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale);
+    const strings = getGuestInvitesStrings(homeData, locale);
+    const $ = cheerio.load(template, { decodeEntities: false });
+
+    setBodyDirection($, locale);
+    rewriteStaticAssets($, locale, guestInvitesPageKey);
+    appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, guestInvitesPageKey);
+    applyDataI18nTranslations($, bundle);
+    setLanguageSelector($, homeData.localeOptions, locale, guestInvitesPageKey);
+    updateAccessibilityMarkup($, accessibilityBundle);
+    updateGuestInvitesStaticUi($, strings);
+    rewriteGuestInvitesInternalLinks($, locale);
+    setGuestInvitesMeta($, locale, homeData.localeOptions, strings);
+
+    const outputFile = buildOutputFilePath(locale, guestInvitesPageKey);
+    await writeOutputFile(outputFile, serialize($));
+
+    sitemapEntries.push({
+      loc: buildPageUrl(locale, guestInvitesPageKey),
+      changefreq: "monthly",
+      priority: locale === defaultLocale ? "0.8" : "0.7",
+    });
+  }
+
+  return sitemapEntries;
+}
+
 async function main() {
   const homeSandbox = await runFilesInSandbox(homeDataFiles);
   const legalCollections = {};
@@ -1061,6 +1196,7 @@ async function main() {
   sitemapEntries.push(...(await buildHomePages(homeData)));
   sitemapEntries.push(...(await buildLegalPages(homeData, legalCollections)));
   sitemapEntries.push(...(await buildNichePages(homeData)));
+  sitemapEntries.push(...(await buildGuestInvitesPages(homeData)));
   sitemapEntries.push(...(await buildUtilityPages(homeData)));
 
   await fs.writeFile(path.join(repoRoot, "sitemap.xml"), buildSitemap(sitemapEntries), "utf8");

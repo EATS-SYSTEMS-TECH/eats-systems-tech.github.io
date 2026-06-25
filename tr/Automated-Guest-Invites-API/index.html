@@ -1,0 +1,705 @@
+<!DOCTYPE html><html lang="tr" dir="ltr"><head>
+  <meta charset="UTF-8">
+  <title>Otomatik Misafir Davetleri API'si | WIFIGATE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Bir WIFIGATE misafir daveti API isteği oluşturun ve önizleyin. Misafir bilgilerini ekleyin, erişim tarih ve saatlerini seçin ve kullanıma hazır URL'yi kopyalayın.">
+  <meta name="author" content="EATS SYSTEMS TECH">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://wifigate.io/tr/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="x-default" href="https://wifigate.io/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="en" href="https://wifigate.io/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="es" href="https://wifigate.io/es/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="fr" href="https://wifigate.io/fr/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="de" href="https://wifigate.io/de/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="he" href="https://wifigate.io/he/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="nl" href="https://wifigate.io/nl/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="it" href="https://wifigate.io/it/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="pt" href="https://wifigate.io/pt/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="pl" href="https://wifigate.io/pl/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="no" href="https://wifigate.io/no/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="cs" href="https://wifigate.io/cs/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="ru" href="https://wifigate.io/ru/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="uk" href="https://wifigate.io/uk/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="tr" href="https://wifigate.io/tr/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="ar" href="https://wifigate.io/ar/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="hi" href="https://wifigate.io/hi/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="bn" href="https://wifigate.io/bn/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="mr" href="https://wifigate.io/mr/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="te" href="https://wifigate.io/te/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wifigate.io/zh-hans/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="zh-Hant" href="https://wifigate.io/zh-hant/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="ja" href="https://wifigate.io/ja/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="ko" href="https://wifigate.io/ko/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="da" href="https://wifigate.io/da/Automated-Guest-Invites-API/">
+  <link rel="alternate" hreflang="hu" href="https://wifigate.io/hu/Automated-Guest-Invites-API/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wifigate.io/tr/Automated-Guest-Invites-API/">
+  <meta property="og:title" content="Otomatik Misafir Davetleri API'si | WIFIGATE">
+  <meta property="og:description" content="Bir WIFIGATE misafir daveti API isteği oluşturun ve önizleyin. Misafir bilgilerini ekleyin, erişim tarih ve saatlerini seçin ve kullanıma hazır URL'yi kopyalayın.">
+  <meta property="og:image" content="https://wifigate.io/assets/img/wifigate_homepage.webp">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://wifigate.io/tr/Automated-Guest-Invites-API/">
+  <meta property="twitter:title" content="Otomatik Misafir Davetleri API'si | WIFIGATE">
+  <meta property="twitter:description" content="Bir WIFIGATE misafir daveti API isteği oluşturun ve önizleyin. Misafir bilgilerini ekleyin, erişim tarih ve saatlerini seçin ve kullanıma hazır URL'yi kopyalayın.">
+  <meta property="twitter:image" content="https://wifigate.io/assets/img/wifigate_homepage.webp">
+
+  <!-- Hreflang alternates are generated per locale by the build. -->
+  
+
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../../android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="../../android-chrome-512x512.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Day+One&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/styles.css?v=20260614a">
+  <link rel="stylesheet" href="../../css/accessibility.css?v=20260604c">
+  <link rel="stylesheet" href="../../css/guest-invites.css?v=20260625a">
+  <script src="../../js/utils.js?v=20260402a" defer=""></script>
+  <script src="../../js/navigation.js?v=20260405a" defer=""></script>
+  
+  <script src="../../js/locale-redirect.js?v=20260620a" defer=""></script>
+  <script src="../../js/language-selector.js?v=20260620a" defer=""></script><script src="../../js/accessibility.js?v=20260616c" defer=""></script>
+
+  <script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Otomatik Misafir Davetleri API'si | WIFIGATE",
+    "description": "Bir WIFIGATE misafir daveti API isteği oluşturun ve önizleyin. Misafir bilgilerini ekleyin, erişim tarih ve saatlerini seçin ve kullanıma hazır URL'yi kopyalayın.",
+    "inLanguage": "tr",
+    "url": "https://wifigate.io/tr/Automated-Guest-Invites-API/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "WIFIGATE",
+      "url": "https://wifigate.io"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "WIFIGATE",
+        "item": "https://wifigate.io/tr/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Otomatik Misafir Davetleri API'si | WIFIGATE",
+        "item": "https://wifigate.io/tr/Automated-Guest-Invites-API/"
+      }
+    ]
+  }
+]
+  </script></head>
+
+<body class="giapi-page">
+  <a class="skip-link" href="#main-content">Ana içeriğe atla</a>
+
+  <header class="site-header" id="top">
+    <nav class="nav" aria-label="Main navigation">
+      <a href="/tr/#home" class="nav__logo-link nav__brand" aria-label="Back to WIFIGATE home page">
+        <img src="../../assets/img/logo.png" alt="WIFIGATE logo" class="nav__logo">
+      </a>
+
+      <button class="nav__toggle" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+
+      <div class="nav__links-wrapper" id="primary-navigation">
+        <nav class="topbar-nav">
+          <a href="/tr/#home" class="nav-link nav__link" data-i18n="nav.home">Ana Sayfa</a>
+          <a href="/tr/#advantages" class="nav-link nav__link" data-i18n="nav.features">Avantajları</a>
+          <a href="/tr/#where" class="nav-link nav__link" data-i18n="tabs.where">Nerede</a>
+          <a href="/tr/#tutorials" class="nav-link nav__link" data-i18n="nav.about">Öğreticiler</a>
+          <a href="/tr/#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact">Bize Ulaşın</a>
+        </nav>
+      </div>
+
+      <div class="language-selector">
+        <div class="language-selector__button" id="language-button" aria-label="Select language" role="button" tabindex="0">
+          <span class="language-selector__flag" id="selected-flag"><img src="../../assets/img/flags/flag-tr.svg" alt="TR" width="50" height="33"></span>
+          <span class="language-selector__selected">Türkçe</span>
+          <span class="language-selector__arrow">▾</span>
+        </div>
+        <div class="language-selector__dropdown" id="language-dropdown">
+          <a class="language-selector__option" href="/Automated-Guest-Invites-API/" data-lang="en">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-us.png" alt="US" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">English</span>
+          </a>
+          <a class="language-selector__option" href="/es/Automated-Guest-Invites-API/" data-lang="es">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-es.svg" alt="ES" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">Español</span>
+          </a>
+          <a class="language-selector__option" href="/fr/Automated-Guest-Invites-API/" data-lang="fr">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-fr.svg" alt="FR" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">Français</span>
+          </a>
+          <a class="language-selector__option" href="/de/Automated-Guest-Invites-API/" data-lang="de">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-de.svg" alt="DE" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">Deutsch</span>
+          </a>
+          <a class="language-selector__option" href="/he/Automated-Guest-Invites-API/" data-lang="he">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-il.svg" alt="IL" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="rtl">עברית</span>
+          </a>
+          <a class="language-selector__option" href="/nl/Automated-Guest-Invites-API/" data-lang="nl">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-nl.svg" alt="NL" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">Nederlands</span>
+          </a>
+          <a class="language-selector__option" href="/it/Automated-Guest-Invites-API/" data-lang="it">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-it.svg" alt="IT" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">Italiano</span>
+          </a>
+          <a class="language-selector__option" href="/pt/Automated-Guest-Invites-API/" data-lang="pt">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-pt.svg" alt="PT" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">Português</span>
+          </a>
+          <a class="language-selector__option" href="/pl/Automated-Guest-Invites-API/" data-lang="pl">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-pl.svg" alt="PL" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">Polski</span>
+          </a>
+          <a class="language-selector__option" href="/no/Automated-Guest-Invites-API/" data-lang="no">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-no.svg" alt="NO" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">Norsk</span>
+          </a>
+          <a class="language-selector__option" href="/cs/Automated-Guest-Invites-API/" data-lang="cs">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-cz.svg" alt="CZ" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">Čeština</span>
+          </a>
+          <a class="language-selector__option" href="/ru/Automated-Guest-Invites-API/" data-lang="ru">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-ru.svg" alt="RU" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">Русский</span>
+          </a>
+          <a class="language-selector__option" href="/uk/Automated-Guest-Invites-API/" data-lang="uk">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-ua.svg" alt="UA" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">Українська</span>
+          </a>
+          <a class="language-selector__option is-selected" href="/tr/Automated-Guest-Invites-API/" data-lang="tr" aria-current="true">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-tr.svg" alt="TR" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">Türkçe</span>
+          </a>
+          <a class="language-selector__option" href="/ar/Automated-Guest-Invites-API/" data-lang="ar">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-ae.svg" alt="AE" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="rtl">العربية</span>
+          </a>
+          <a class="language-selector__option" href="/hi/Automated-Guest-Invites-API/" data-lang="hi">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-in.svg" alt="IN" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">हिन्दी</span>
+          </a>
+          <a class="language-selector__option" href="/bn/Automated-Guest-Invites-API/" data-lang="bn">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-in.svg" alt="IN" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">বাংলা</span>
+          </a>
+          <a class="language-selector__option" href="/mr/Automated-Guest-Invites-API/" data-lang="mr">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-in.svg" alt="IN" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">मराठी</span>
+          </a>
+          <a class="language-selector__option" href="/te/Automated-Guest-Invites-API/" data-lang="te">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-in.svg" alt="IN" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">తెలుగు</span>
+          </a>
+          <a class="language-selector__option" href="/zh-hans/Automated-Guest-Invites-API/" data-lang="zh-Hans">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-cn.svg" alt="CN" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">简体中文</span>
+          </a>
+          <a class="language-selector__option" href="/zh-hant/Automated-Guest-Invites-API/" data-lang="zh-Hant">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-tw.svg" alt="TW" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">繁體中文</span>
+          </a>
+          <a class="language-selector__option" href="/ja/Automated-Guest-Invites-API/" data-lang="ja">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-jp.svg" alt="JP" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">日本語</span>
+          </a>
+          <a class="language-selector__option" href="/ko/Automated-Guest-Invites-API/" data-lang="ko">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-kr.svg" alt="KR" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">한국어</span>
+          </a>
+          <a class="language-selector__option" href="/da/Automated-Guest-Invites-API/" data-lang="da">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-dk.svg" alt="DK" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">Dansk</span>
+          </a>
+          <a class="language-selector__option" href="/hu/Automated-Guest-Invites-API/" data-lang="hu">
+            <span class="language-selector__flag">
+              <img src="../../assets/img/flags/flag-hu.svg" alt="HU" width="50" height="33">
+            </span>
+            <span class="language-selector__label" dir="auto">Magyar</span>
+          </a></div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="giapi-main" id="main-content">
+    <nav class="niche-breadcrumb giapi-breadcrumb" aria-label="Breadcrumb">
+      <div class="container">
+        <ol class="niche-breadcrumb__list">
+          <li class="niche-breadcrumb__item">
+            <a class="niche-breadcrumb__link" href="/tr/#home" id="giapi-breadcrumb-home" data-i18n="guestInvites.generator.backToHome">Ana sayfaya dön</a>
+          </li>
+          <li class="niche-breadcrumb__item" aria-current="page">
+            <span id="giapi-breadcrumb-current" data-i18n="guestInvites.generator.breadcrumb">Otomatik Misafir Davetleri API'si</span>
+          </li>
+        </ol>
+      </div>
+    </nav>
+
+    <section class="giapi-hero" aria-labelledby="giapi-heading">
+      <div class="container">
+        <p class="giapi-eyebrow" data-i18n="guestInvites.promo.eyebrow">Yeni · Geliştirici API'si</p>
+        <h1 class="giapi-heading" id="giapi-heading" data-i18n="guestInvites.generator.heading">Otomatik Misafir Davetleri API'si</h1>
+        <p class="giapi-subheading" data-i18n="guestInvites.generator.subheading">Bir davet isteği oluşturmak için aşağıdaki bilgileri doldurun. URL siz yazdıkça canlı olarak güncellenir — ardından kendi entegrasyonunuza kopyalayın.</p>
+      </div>
+    </section>
+
+    <section class="giapi-tool" aria-labelledby="giapi-form-title">
+      <div class="container giapi-tool__grid">
+        <form class="giapi-panel giapi-form" id="giapi-form" novalidate="" autocomplete="off">
+          <h2 class="giapi-panel__title" id="giapi-form-title" data-i18n="guestInvites.generator.formTitle">Davet bilgileri</h2>
+
+          <div class="giapi-field">
+            <label class="giapi-label" for="giapi-api-key" data-i18n="guestInvites.generator.apiKeyLabel">API anahtarı</label>
+            <input class="giapi-input giapi-input--locked" id="giapi-api-key" name="api_key" type="text" value="WIFIGATE_GUESTS_API_KEY" readonly="" aria-describedby="giapi-api-key-hint">
+            <p class="giapi-hint" id="giapi-api-key-hint" data-i18n="guestInvites.generator.apiKeyHint">Yalnızca yer tutucu. WIFIGATE_GUESTS_API_KEY değerini kendi güvenli ortamınızda gerçek anahtarınızla değiştirin — bunu asla herkese açık paylaşmayın.</p>
+          </div>
+
+          <div class="giapi-grid">
+            <div class="giapi-field">
+              <label class="giapi-label" for="giapi-guest-name" data-i18n="guestInvites.generator.guestNameLabel">Misafir adı</label>
+              <input class="giapi-input" id="giapi-guest-name" name="guest_name" type="text" inputmode="text">
+            </div>
+
+            <div class="giapi-field">
+              <label class="giapi-label" for="giapi-guest-phone" data-i18n="guestInvites.generator.guestPhoneLabel">Misafir telefonu</label>
+              <input class="giapi-input" id="giapi-guest-phone" name="guest_phone" type="tel" inputmode="tel">
+            </div>
+
+            <div class="giapi-field">
+              <label class="giapi-label" for="giapi-guest-email" data-i18n="guestInvites.generator.guestEmailLabel">Misafir e-postası</label>
+              <input class="giapi-input" id="giapi-guest-email" name="guest_email" type="email" inputmode="email">
+            </div>
+
+            <div class="giapi-field">
+              <label class="giapi-label" for="giapi-date-start" data-i18n="guestInvites.generator.dateStartLabel">Başlangıç tarihi</label>
+              <input class="giapi-input" id="giapi-date-start" name="date_start" type="date">
+            </div>
+
+            <div class="giapi-field">
+              <label class="giapi-label" for="giapi-date-end" data-i18n="guestInvites.generator.dateEndLabel">Bitiş tarihi</label>
+              <input class="giapi-input" id="giapi-date-end" name="date_end" type="date">
+            </div>
+
+            <div class="giapi-field">
+              <label class="giapi-label" for="giapi-time-start" data-i18n="guestInvites.generator.timeStartLabel">Başlangıç saati</label>
+              <input class="giapi-input" id="giapi-time-start" name="time_start" type="time">
+            </div>
+
+            <div class="giapi-field">
+              <label class="giapi-label" for="giapi-time-end" data-i18n="guestInvites.generator.timeEndLabel">Bitiş saati</label>
+              <input class="giapi-input" id="giapi-time-end" name="time_end" type="time">
+            </div>
+
+            <div class="giapi-field giapi-field--full">
+              <label class="giapi-label" for="giapi-comment">
+                <span data-i18n="guestInvites.generator.commentLabel">Yorum</span>
+                <span class="giapi-tag" data-i18n="guestInvites.generator.optionalTag">İsteğe bağlı</span>
+              </label>
+              <input class="giapi-input" id="giapi-comment" name="comment" type="text" inputmode="text">
+            </div>
+          </div>
+        </form>
+
+        <section class="giapi-panel giapi-output" aria-labelledby="giapi-preview-title">
+          <h2 class="giapi-panel__title" id="giapi-preview-title" data-i18n="guestInvites.generator.previewTitle">Oluşturulan URL</h2>
+          <p class="giapi-hint" data-i18n="guestInvites.generator.previewHint">Boşluklar, semboller ve Latin olmayan karakterler dahil tüm değerler otomatik olarak URL için kodlanır.</p>
+
+          <label class="giapi-visually-hidden" for="giapi-url" data-i18n="guestInvites.generator.previewTitle">Oluşturulan URL</label>
+          <textarea class="giapi-url" id="giapi-url" rows="6" readonly="" spellcheck="false" dir="ltr" aria-describedby="giapi-copy-status"></textarea>
+
+          <div class="giapi-output__actions">
+            <button class="btn btn--primary giapi-copy" id="giapi-copy" type="button">
+              <svg class="giapi-copy__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+                <path d="M5 15V5a2 2 0 0 1 2-2h10"></path>
+              </svg>
+              <span class="giapi-copy__label" data-i18n="guestInvites.generator.copyButton">URL'yi kopyala</span>
+            </button>
+            <p class="giapi-copy-status" id="giapi-copy-status" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="giapi-mapping-section" aria-labelledby="giapi-mapping-title">
+      <div class="container">
+        <div class="giapi-panel giapi-mapping">
+          <h2 class="giapi-panel__title" id="giapi-mapping-title" data-i18n="guestInvites.generator.mappingTitle">Parametre eşlemesi</h2>
+          <p class="giapi-hint" data-i18n="guestInvites.generator.mappingIntro">URL'deki her yer tutucu bir alana karşılık gelir:</p>
+
+          <pre class="giapi-format"><code dir="ltr">https://wifigate.io/api/guest-invites/create?api_key=<b>data1</b>&amp;guest_name=<b>data2</b>&amp;guest_phone=<b>data3</b>&amp;guest_email=<b>data4</b>&amp;date_start=<b>data5</b>&amp;date_end=<b>data6</b>&amp;time_start=<b>data7</b>&amp;time_end=<b>data8</b>&amp;comment=<b>data9</b></code></pre>
+
+          <ol class="giapi-mapping__list" dir="ltr">
+            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data1</code><span class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">WIFIGATE_GUESTS_API_KEY</code></li>
+            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data2</code><span class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">guest_name</code></li>
+            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data3</code><span class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">guest_phone</code></li>
+            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data4</code><span class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">guest_email</code></li>
+            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data5</code><span class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">date_start</code></li>
+            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data6</code><span class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">date_end</code></li>
+            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data7</code><span class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">time_start</code></li>
+            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data8</code><span class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">time_end</code></li>
+            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data9</code><span class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">comment</code></li>
+          </ol>
+
+          <div class="giapi-security" role="note">
+            <span class="giapi-security__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
+            </span>
+            <div class="giapi-security__copy">
+              <h3 class="giapi-security__title" data-i18n="guestInvites.generator.securityTitle">Güvenlik notu</h3>
+              <p class="giapi-security__text" data-i18n="guestInvites.generator.securityNote">Bu araç API'yi asla çağırmaz ve verilerinizi hiçbir yere göndermez. URL'yi yalnızca tarayıcınızda oluşturur, böylece kendi entegrasyonunuzda kullanabilirsiniz.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p class="site-footer__copy">
+        © <span id="js-year">2026</span> <span data-i18n="footer.copyright">WIFIGATE. Her hakkı saklıdır.</span>
+      </p>
+      <div class="site-footer__links">
+        <a href="/tr/terms-and-conditions/" class="site-footer__link" data-i18n="footer.terms">Şartlar ve Koşullar</a>
+        <a href="/tr/privacy-policy/" class="site-footer__link" data-i18n="footer.privacy">Gizlilik Politikası</a>
+        <a href="/tr/cookies/" class="site-footer__link" data-i18n="footer.cookies">Çerezler</a>
+      </div>
+      <p class="site-footer__tagline" data-i18n="footer.tagline">Akıllı. Güvenli. Özel. Abonelik yok. Uzlaşma yok.</p>
+    </div>
+  </footer>
+
+  <button class="a11y-fab" id="a11y-fab" type="button" aria-controls="a11y-panel" aria-expanded="false" aria-label="Erişilebilirlik merkezini aç" title="Erişilebilirlik merkezini aç">
+    <span class="a11y-fab__pulse" aria-hidden="true"></span>
+    <span class="a11y-fab__icon-wrap">
+      <img src="../../assets/icons/wifigate_accessibility_icon.webp" alt="" class="a11y-fab__icon" width="34" height="34" decoding="async">
+    </span>
+  </button>
+
+  <div class="a11y-backdrop" id="a11y-backdrop" aria-hidden="true"></div>
+
+  <aside class="a11y-panel" id="a11y-panel" aria-hidden="true" aria-labelledby="a11y-title" tabindex="-1">
+    <div class="a11y-panel__header">
+      <p class="a11y-panel__eyebrow" id="a11y-eyebrow">Erişilebilirlik</p>
+      <button class="a11y-panel__close" id="a11y-close" type="button" aria-label="Erişilebilirlik merkezini kapat">
+        <span aria-hidden="true">✕</span>
+      </button>
+    </div>
+
+    <h2 class="a11y-panel__title" id="a11y-title">Erişilebilirlik Merkezi</h2>
+    <p class="a11y-panel__description" id="a11y-description">Siteyi okuma ve gezinme tercihlerinize uyacak şekilde ayarlayın.</p>
+
+    <div class="a11y-panel__status-row">
+      <span class="a11y-panel__status" id="a11y-status" aria-live="polite">Standart site görünümü</span>
+      <button class="a11y-panel__reset" id="a11y-reset" type="button">Sıfırla</button>
+    </div>
+
+    <div class="a11y-options">
+      <button class="a11y-option" type="button" data-a11y-setting="largeText" aria-pressed="false">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title">Daha büyük metin</span>
+          <span class="a11y-option__description">Site genelinde yazı tipi boyutunu artırın.</span>
+        </span>
+        <span class="a11y-option__switch" aria-hidden="true"></span>
+      </button>
+
+      <button class="a11y-option" type="button" data-a11y-setting="highContrast" aria-pressed="false">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title">Yüksek kontrast</span>
+          <span class="a11y-option__description">Metin ve arayüz için kontrastı güçlendirin.</span>
+        </span>
+        <span class="a11y-option__switch" aria-hidden="true"></span>
+      </button>
+
+      <button class="a11y-option" type="button" data-a11y-setting="underlineLinks" aria-pressed="false">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title">Bağlantıların altını çizin</span>
+          <span class="a11y-option__description">Bağlantıların tanımlanmasını kolaylaştırın.</span>
+        </span>
+        <span class="a11y-option__switch" aria-hidden="true"></span>
+      </button>
+
+      <button class="a11y-option" type="button" data-a11y-setting="readableFont" aria-pressed="false">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title">Okunabilir yazı tipi</span>
+          <span class="a11y-option__description">Daha temiz, daha okunaklı bir yazı tipine geçin.</span>
+        </span>
+        <span class="a11y-option__switch" aria-hidden="true"></span>
+      </button>
+
+      <button class="a11y-option" type="button" data-a11y-setting="reducedMotion" aria-pressed="false">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title">Azaltılmış hareket</span>
+          <span class="a11y-option__description">Animasyonları ve hareket efektlerini en aza indirin.</span>
+        </span>
+        <span class="a11y-option__switch" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <section class="a11y-support" aria-labelledby="a11y-support-title">
+      <h3 class="a11y-support__title" id="a11y-support-title">Bu siteye yerleşik</h3>
+      <ul class="a11y-support__list">
+        <li class="a11y-support__item">Klavye dostu navigasyon</li>
+        <li class="a11y-support__item">Net odak göstergeleri</li>
+        <li class="a11y-support__item">Çoklu dil ve RTL desteği</li>
+        <li class="a11y-support__item">Mobil ve masaüstü için duyarlı düzen</li>
+      </ul>
+    </section>
+  </aside>
+
+  <script id="giapi-copy-data" type="application/json">{"copyButton":"URL'yi kopyala","copiedButton":"Kopyalandı!","copyError":"Kopyalama başarısız — URL'yi seçip elle kopyalayın."}</script>
+  <script>
+    (function () {
+      "use strict";
+
+      var BASE_URL = "https://wifigate.io/api/guest-invites/create";
+      var API_KEY_PLACEHOLDER = "WIFIGATE_GUESTS_API_KEY";
+
+      var DEFAULT_COPY = {
+        copyButton: "Copy URL",
+        copiedButton: "Copied!",
+        copyError: "Copy failed — select the URL and copy it manually."
+      };
+
+      function readCopy() {
+        var node = document.getElementById("giapi-copy-data");
+        if (!node) {
+          return DEFAULT_COPY;
+        }
+        try {
+          var parsed = JSON.parse(node.textContent || "{}");
+          return {
+            copyButton: parsed.copyButton || DEFAULT_COPY.copyButton,
+            copiedButton: parsed.copiedButton || DEFAULT_COPY.copiedButton,
+            copyError: parsed.copyError || DEFAULT_COPY.copyError
+          };
+        } catch (error) {
+          return DEFAULT_COPY;
+        }
+      }
+
+      function init() {
+        var form = document.getElementById("giapi-form");
+        var urlField = document.getElementById("giapi-url");
+        var copyButton = document.getElementById("giapi-copy");
+        var copyLabel = copyButton ? copyButton.querySelector(".giapi-copy__label") : null;
+        var copyStatus = document.getElementById("giapi-copy-status");
+
+        if (!form || !urlField || !copyButton) {
+          return;
+        }
+
+        var copy = readCopy();
+        var resetTimer = null;
+
+        // The api_key value is always the public placeholder. A real key must
+        // never be embedded here; users substitute it inside their own backend.
+        var orderedParams = [
+          ["api_key", function () { return API_KEY_PLACEHOLDER; }],
+          ["guest_name", fieldGetter("guest_name")],
+          ["guest_phone", fieldGetter("guest_phone")],
+          ["guest_email", fieldGetter("guest_email")],
+          ["date_start", fieldGetter("date_start")],
+          ["date_end", fieldGetter("date_end")],
+          ["time_start", fieldGetter("time_start")],
+          ["time_end", fieldGetter("time_end")],
+          ["comment", fieldGetter("comment")]
+        ];
+
+        function fieldGetter(name) {
+          var input = form.elements.namedItem(name);
+          return function () {
+            return input && typeof input.value === "string" ? input.value : "";
+          };
+        }
+
+        function buildUrl() {
+          var query = orderedParams
+            .map(function (entry) {
+              return entry[0] + "=" + encodeURIComponent(entry[1]());
+            })
+            .join("&");
+          return BASE_URL + "?" + query;
+        }
+
+        function setCopyLabel(text) {
+          if (copyLabel) {
+            copyLabel.textContent = text;
+          } else {
+            copyButton.textContent = text;
+          }
+        }
+
+        function refresh() {
+          urlField.value = buildUrl();
+        }
+
+        function clearStatusSoon() {
+          if (resetTimer) {
+            window.clearTimeout(resetTimer);
+          }
+          resetTimer = window.setTimeout(function () {
+            setCopyLabel(copy.copyButton);
+            if (copyStatus) {
+              copyStatus.textContent = "";
+            }
+          }, 2600);
+        }
+
+        function fallbackCopy() {
+          urlField.removeAttribute("readonly");
+          urlField.focus();
+          urlField.select();
+          var ok = false;
+          try {
+            ok = document.execCommand("copy");
+          } catch (error) {
+            ok = false;
+          }
+          urlField.setAttribute("readonly", "readonly");
+          window.getSelection().removeAllRanges();
+          return ok;
+        }
+
+        function announceCopied() {
+          setCopyLabel(copy.copiedButton);
+          if (copyStatus) {
+            copyStatus.textContent = copy.copiedButton;
+          }
+          clearStatusSoon();
+        }
+
+        function announceError() {
+          if (copyStatus) {
+            copyStatus.textContent = copy.copyError;
+          }
+          clearStatusSoon();
+        }
+
+        function handleCopy() {
+          var url = buildUrl();
+          urlField.value = url;
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(announceCopied, function () {
+              if (fallbackCopy()) {
+                announceCopied();
+              } else {
+                announceError();
+              }
+            });
+            return;
+          }
+
+          if (fallbackCopy()) {
+            announceCopied();
+          } else {
+            announceError();
+          }
+        }
+
+        form.addEventListener("input", function () {
+          refresh();
+          setCopyLabel(copy.copyButton);
+        });
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          handleCopy();
+        });
+        copyButton.addEventListener("click", handleCopy);
+
+        refresh();
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+
+
+
+</body></html>
