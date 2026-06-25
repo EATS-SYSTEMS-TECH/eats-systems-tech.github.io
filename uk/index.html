@@ -74,6 +74,7 @@
 
   <link rel="stylesheet" href="../css/styles.css?v=20260614a">
   <link rel="stylesheet" href="../css/accessibility.css?v=20260604c">
+  <link rel="stylesheet" href="../css/guest-invites.css?v=20260625a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
   
   
@@ -465,6 +466,86 @@
             <h3 class="feature-card__title" data-i18n="features.items.noSubscriptionFees.title">Без плати за підписку</h3>
             <p class="feature-card__text" data-i18n="features.items.noSubscriptionFees.text">Платіть один раз за пристрій і встановлення без місячної підписки, циклу поновлення або постійної плати за платформу.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section guest-invites" id="guest-invites-api" aria-labelledby="guest-invites-title">
+      <div class="container">
+        <div class="guest-invites__grid js-reveal">
+          <div class="guest-invites__copy">
+            <p class="guest-invites__eyebrow" data-i18n="guestInvites.promo.eyebrow">Нове · API для розробників</p>
+            <h2 class="guest-invites__title" id="guest-invites-title" data-i18n="guestInvites.promo.title">API автоматичних запрошень для гостей</h2>
+            <p class="guest-invites__subtitle" data-i18n="guestInvites.promo.subtitle">Видавайте безпечний гостьовий доступ з обмеженням у часі прямо з ваших систем. Підключіть процес бронювання, CRM або стійку реєстрації та дозвольте WIFIGATE створювати запрошення автоматично — без ручних кроків і без спільних пультів.</p>
+
+            <ul class="guest-invites__points">
+              <li class="guest-invites__point">
+                <span class="guest-invites__point-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2 2 7l10 5 10-5-10-5Z"></path>
+                    <path d="m2 17 10 5 10-5"></path>
+                    <path d="m2 12 10 5 10-5"></path>
+                  </svg>
+                </span>
+                <span class="guest-invites__point-copy">
+                  <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point1Title">Створено для автоматизації</span>
+                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point1Text">Створюйте гостьові запрошення програмно з будь-якого бекенду одним автентифікованим запитом.</span>
+                </span>
+              </li>
+              <li class="guest-invites__point">
+                <span class="guest-invites__point-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M12 7v5l3 3"></path>
+                  </svg>
+                </span>
+                <span class="guest-invites__point-copy">
+                  <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point2Title">Доступ з обмеженням у часі</span>
+                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point2Text">Задавайте точні дати й час початку та завершення, щоб кожне запрошення відкривалося та завершувалося саме тоді, коли потрібно.</span>
+                </span>
+              </li>
+              <li class="guest-invites__point">
+                <span class="guest-invites__point-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="10" width="16" height="11" rx="2"></rect>
+                    <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+                  </svg>
+                </span>
+                <span class="guest-invites__point-copy">
+                  <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point3Title">Приватно й безпечно</span>
+                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point3Text">Ваш ключ API залишається у вашому середовищі, а кожне значення безпечно кодується, тож ваші дані лишаються під вашим контролем.</span>
+                </span>
+              </li>
+            </ul>
+
+            <a class="btn btn--primary guest-invites__cta" href="/uk/Automated-Guest-Invites-API/">
+              <span data-i18n="guestInvites.promo.cta">Відкрити генератор запрошень</span>
+              <svg class="guest-invites__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14"></path>
+                <path d="m13 6 6 6-6 6"></path>
+              </svg>
+            </a>
+          </div>
+
+          <figure class="guest-invites__console" aria-hidden="true">
+            <div class="guest-invites__console-bar">
+              <span class="guest-invites__dot guest-invites__dot--r"></span>
+              <span class="guest-invites__dot guest-invites__dot--y"></span>
+              <span class="guest-invites__dot guest-invites__dot--g"></span>
+              <span class="guest-invites__console-method">POST</span>
+            </div>
+            <pre class="guest-invites__console-body"><code><span class="giapi-tok-url">https://wifigate.io/api/guest-invites/create</span>
+  ?<span class="giapi-tok-key">api_key</span>=<span class="giapi-tok-val">WIFIGATE_GUESTS_API_KEY</span>
+  &amp;<span class="giapi-tok-key">guest_name</span>=<span class="giapi-tok-val">Ada%20Lovelace</span>
+  &amp;<span class="giapi-tok-key">guest_phone</span>=<span class="giapi-tok-val">%2B972526996332</span>
+  &amp;<span class="giapi-tok-key">guest_email</span>=<span class="giapi-tok-val">ada%40example.com</span>
+  &amp;<span class="giapi-tok-key">date_start</span>=<span class="giapi-tok-val">2026-07-01</span>
+  &amp;<span class="giapi-tok-key">date_end</span>=<span class="giapi-tok-val">2026-07-03</span>
+  &amp;<span class="giapi-tok-key">time_start</span>=<span class="giapi-tok-val">09%3A00</span>
+  &amp;<span class="giapi-tok-key">time_end</span>=<span class="giapi-tok-val">18%3A00</span>
+  &amp;<span class="giapi-tok-key">comment</span>=<span class="giapi-tok-val">VIP%20guest</span></code></pre>
+            <figcaption class="guest-invites__console-caption" data-i18n="guestInvites.promo.consoleCaption">Перегляд запиту в реальному часі</figcaption>
+          </figure>
         </div>
       </div>
     </section>

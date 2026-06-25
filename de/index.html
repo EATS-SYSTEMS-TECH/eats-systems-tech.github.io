@@ -74,6 +74,7 @@
 
   <link rel="stylesheet" href="../css/styles.css?v=20260614a">
   <link rel="stylesheet" href="../css/accessibility.css?v=20260604c">
+  <link rel="stylesheet" href="../css/guest-invites.css?v=20260625a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
   
   
@@ -465,6 +466,86 @@
             <h3 class="feature-card__title" data-i18n="features.items.noSubscriptionFees.title">Keine Abonnementgebühren</h3>
             <p class="feature-card__text" data-i18n="features.items.noSubscriptionFees.text">Bezahlen Sie einmalig für das Gerät und die Installation, ohne monatliches Abonnement, Verlängerungszyklus oder laufende Plattformgebühr.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section guest-invites" id="guest-invites-api" aria-labelledby="guest-invites-title">
+      <div class="container">
+        <div class="guest-invites__grid js-reveal">
+          <div class="guest-invites__copy">
+            <p class="guest-invites__eyebrow" data-i18n="guestInvites.promo.eyebrow">Neu · Entwickler-API</p>
+            <h2 class="guest-invites__title" id="guest-invites-title" data-i18n="guestInvites.promo.title">API für automatische Gästeeinladungen</h2>
+            <p class="guest-invites__subtitle" data-i18n="guestInvites.promo.subtitle">Vergeben Sie sichere, zeitlich begrenzte Gastzugänge direkt aus Ihren eigenen Systemen. Verbinden Sie Ihren Buchungsablauf, Ihr CRM oder Ihren Empfang und lassen Sie WIFIGATE Einladungen automatisch erstellen – ohne manuelle Schritte und ohne geteilte Fernbedienungen.</p>
+
+            <ul class="guest-invites__points">
+              <li class="guest-invites__point">
+                <span class="guest-invites__point-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2 2 7l10 5 10-5-10-5Z"></path>
+                    <path d="m2 17 10 5 10-5"></path>
+                    <path d="m2 12 10 5 10-5"></path>
+                  </svg>
+                </span>
+                <span class="guest-invites__point-copy">
+                  <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point1Title">Für Automatisierung gemacht</span>
+                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point1Text">Erstellen Sie Gästeeinladungen programmgesteuert aus jedem Backend mit einer einzigen authentifizierten Anfrage.</span>
+                </span>
+              </li>
+              <li class="guest-invites__point">
+                <span class="guest-invites__point-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M12 7v5l3 3"></path>
+                  </svg>
+                </span>
+                <span class="guest-invites__point-copy">
+                  <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point2Title">Zeitlich begrenzter Zugang</span>
+                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point2Text">Legen Sie genaue Start- und Enddaten sowie -zeiten fest, damit jede Einladung genau dann öffnet und abläuft, wann sie soll.</span>
+                </span>
+              </li>
+              <li class="guest-invites__point">
+                <span class="guest-invites__point-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="10" width="16" height="11" rx="2"></rect>
+                    <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+                  </svg>
+                </span>
+                <span class="guest-invites__point-copy">
+                  <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point3Title">Privat und sicher</span>
+                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point3Text">Ihr API-Schlüssel bleibt in Ihrer Umgebung und jeder Wert wird sicher kodiert, sodass Ihre Daten unter Ihrer Kontrolle bleiben.</span>
+                </span>
+              </li>
+            </ul>
+
+            <a class="btn btn--primary guest-invites__cta" href="/de/Automated-Guest-Invites-API/">
+              <span data-i18n="guestInvites.promo.cta">Einladungs-Generator öffnen</span>
+              <svg class="guest-invites__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14"></path>
+                <path d="m13 6 6 6-6 6"></path>
+              </svg>
+            </a>
+          </div>
+
+          <figure class="guest-invites__console" aria-hidden="true">
+            <div class="guest-invites__console-bar">
+              <span class="guest-invites__dot guest-invites__dot--r"></span>
+              <span class="guest-invites__dot guest-invites__dot--y"></span>
+              <span class="guest-invites__dot guest-invites__dot--g"></span>
+              <span class="guest-invites__console-method">POST</span>
+            </div>
+            <pre class="guest-invites__console-body"><code><span class="giapi-tok-url">https://wifigate.io/api/guest-invites/create</span>
+  ?<span class="giapi-tok-key">api_key</span>=<span class="giapi-tok-val">WIFIGATE_GUESTS_API_KEY</span>
+  &amp;<span class="giapi-tok-key">guest_name</span>=<span class="giapi-tok-val">Ada%20Lovelace</span>
+  &amp;<span class="giapi-tok-key">guest_phone</span>=<span class="giapi-tok-val">%2B972526996332</span>
+  &amp;<span class="giapi-tok-key">guest_email</span>=<span class="giapi-tok-val">ada%40example.com</span>
+  &amp;<span class="giapi-tok-key">date_start</span>=<span class="giapi-tok-val">2026-07-01</span>
+  &amp;<span class="giapi-tok-key">date_end</span>=<span class="giapi-tok-val">2026-07-03</span>
+  &amp;<span class="giapi-tok-key">time_start</span>=<span class="giapi-tok-val">09%3A00</span>
+  &amp;<span class="giapi-tok-key">time_end</span>=<span class="giapi-tok-val">18%3A00</span>
+  &amp;<span class="giapi-tok-key">comment</span>=<span class="giapi-tok-val">VIP%20guest</span></code></pre>
+            <figcaption class="guest-invites__console-caption" data-i18n="guestInvites.promo.consoleCaption">Live-Vorschau der Anfrage</figcaption>
+          </figure>
         </div>
       </div>
     </section>
