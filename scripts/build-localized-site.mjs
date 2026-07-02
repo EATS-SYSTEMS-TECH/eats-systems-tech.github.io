@@ -31,21 +31,30 @@ const homeDataFiles = [
   "js/application-stories-extra.js",
   "js/i18n.js",
   "js/accessibility.js",
+  "js/language-polish.js",
 ];
 
 const legalDataFiles = {
-  cookies: ["js/translations.js", "js/translations-extra.js", "js/cookies-translations.js", "js/cookies-translations-extra.js"],
+  cookies: [
+    "js/translations.js",
+    "js/translations-extra.js",
+    "js/cookies-translations.js",
+    "js/cookies-translations-extra.js",
+    "js/language-polish.js",
+  ],
   "privacy-policy": [
     "js/translations.js",
     "js/translations-extra.js",
     "js/privacy-translations.js",
     "js/privacy-translations-extra.js",
+    "js/language-polish.js",
   ],
   "terms-and-conditions": [
     "js/translations.js",
     "js/translations-extra.js",
     "js/legal-translations.js",
     "js/legal-translations-extra.js",
+    "js/language-polish.js",
   ],
 };
 
