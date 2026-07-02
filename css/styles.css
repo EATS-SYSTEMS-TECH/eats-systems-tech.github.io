@@ -1503,7 +1503,7 @@ ul {
   object-fit: contain;
   object-position: center;
   display: block;
-  padding: 1rem;
+  padding: 0.15rem;
   transform: scale(1);
   transition: transform var(--transition-med), filter var(--transition-med);
   filter: none;
