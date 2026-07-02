@@ -9,18 +9,18 @@
 // the primary locales lives in NICHE_OVERRIDES.
 //
 // Slugs stay in English across every locale. URLs:
-//   English: /where-story-<slug>/
-//   Others : /<locale>/where-story-<slug>/
+//   English: /<slug>/
+//   Others : /<locale>/<slug>/
 
 export const NICHE_DEFINITIONS = [
-  { key: "where-story-hotels", slug: "hotels", storyKey: "hotels" },
-  { key: "where-story-roller-shutters", slug: "roller-shutters", storyKey: "rollerShutters" },
-  { key: "where-story-residential-complexes", slug: "residential-complexes", storyKey: "residentialComplexes" },
-  { key: "where-story-private-homes", slug: "private-homes", storyKey: "privateHomes" },
-  { key: "where-story-electric-gates", slug: "electric-gates", storyKey: "electricGates" },
-  { key: "where-story-office-buildings", slug: "office-buildings", storyKey: "officeBuildings" },
-  { key: "where-story-sports-facilities", slug: "sports-facilities", storyKey: "sportsFacilities" },
-  { key: "where-story-magnetic-locks", slug: "magnetic-locks", storyKey: "magneticLocks" },
+  { key: "hotels", legacyKey: "where-story-hotels", slug: "hotels", storyKey: "hotels" },
+  { key: "roller-shutters", legacyKey: "where-story-roller-shutters", slug: "roller-shutters", storyKey: "rollerShutters" },
+  { key: "residential-complexes", legacyKey: "where-story-residential-complexes", slug: "residential-complexes", storyKey: "residentialComplexes" },
+  { key: "private-homes", legacyKey: "where-story-private-homes", slug: "private-homes", storyKey: "privateHomes" },
+  { key: "electric-gates", legacyKey: "where-story-electric-gates", slug: "electric-gates", storyKey: "electricGates" },
+  { key: "office-buildings", legacyKey: "where-story-office-buildings", slug: "office-buildings", storyKey: "officeBuildings" },
+  { key: "sports-facilities", legacyKey: "where-story-sports-facilities", slug: "sports-facilities", storyKey: "sportsFacilities" },
+  { key: "magnetic-locks", legacyKey: "where-story-magnetic-locks", slug: "magnetic-locks", storyKey: "magneticLocks" },
 ];
 
 export const NICHE_STORY_KEYS = NICHE_DEFINITIONS.map((niche) => niche.storyKey);

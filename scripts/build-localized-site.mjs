@@ -641,7 +641,16 @@ function updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale) {
 
 function rewriteHomeNicheLinks($, locale) {
   NICHE_DEFINITIONS.forEach((niche) => {
-    $(`.where-list__link[href='where-story-${niche.slug}/']`).attr("href", buildPagePath(locale, niche.key));
+    const targetPath = buildPagePath(locale, niche.key);
+    [
+      `${niche.slug}/`,
+      `${niche.key}/`,
+      niche.legacyKey ? `${niche.legacyKey}/` : null,
+    ]
+      .filter(Boolean)
+      .forEach((href) => {
+        $(`.where-list__link[href='${href}']`).attr("href", targetPath);
+      });
   });
 }
 
@@ -691,6 +700,24 @@ function serialize($) {
 async function writeOutputFile(filePath, content) {
   await fs.mkdir(path.dirname(filePath), { recursive: true });
   await fs.writeFile(filePath, content, "utf8");
+}
+
+function buildRedirectPage(targetPath, canonicalUrl) {
+  return ensureTrailingNewline(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirecting...</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="${canonicalUrl}" />
+  <meta http-equiv="refresh" content="0; url=${targetPath}" />
+  <script>window.location.replace(${JSON.stringify(targetPath)});</script>
+</head>
+<body>
+  <p>Redirecting to <a href="${targetPath}">${targetPath}</a>...</p>
+</body>
+</html>
+`);
 }
 
 function buildSitemap(urlEntries) {
@@ -1045,6 +1072,14 @@ async function buildNichePages(homeData) {
 
       const outputFile = buildOutputFilePath(locale, niche.key);
       await writeOutputFile(outputFile, serialize($));
+
+      if (niche.legacyKey) {
+        const redirectFile = buildOutputFilePath(locale, niche.legacyKey);
+        await writeOutputFile(
+          redirectFile,
+          buildRedirectPage(buildPagePath(locale, niche.key), buildPageUrl(locale, niche.key))
+        );
+      }
 
       sitemapEntries.push({
         loc: buildPageUrl(locale, niche.key),
