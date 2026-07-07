@@ -1,6 +1,6 @@
 /* /css/niche.css */
 /* Styles for the dedicated niche landing pages. Reuses the site design tokens
-   from styles.css and mirrors the cinematic where-story video treatment. */
+   from styles.css: image hero, intro paragraph, benefits grid, closing CTA. */
 
 .niche-main {
   display: block;
@@ -50,7 +50,7 @@
 
 .niche-hero__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: clamp(1.5rem, 4vw, 3.5rem);
   align-items: center;
 }
@@ -66,16 +66,16 @@
 
 .niche-hero__title {
   margin: 0 0 1rem;
-  font-size: clamp(1.9rem, 4.2vw, 3rem);
-  line-height: 1.12;
+  font-size: clamp(1.9rem, 4.2vw, 2.7rem);
+  line-height: 1.14;
   letter-spacing: -0.01em;
   color: var(--color-text);
 }
 
 .niche-hero__subtitle {
   margin: 0 0 1.75rem;
-  font-size: clamp(1.02rem, 1.5vw, 1.2rem);
-  line-height: 1.75;
+  font-size: clamp(1rem, 1.4vw, 1.13rem);
+  line-height: 1.8;
   color: var(--color-text-muted);
   max-width: 40rem;
 }
@@ -84,30 +84,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.85rem;
-  margin-bottom: 1.75rem;
 }
 
 .niche-hero__cta {
   display: inline-flex;
   align-items: center;
-}
-
-.niche-hero__badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-}
-
-.niche-chip {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.5rem 0.9rem;
-  border-radius: var(--radius-pill);
-  background: var(--color-primary-soft);
-  border: 1px solid rgba(11, 99, 255, 0.18);
-  color: var(--color-primary-dark);
-  font-size: 0.85rem;
-  font-weight: 600;
 }
 
 .niche-hero__media {
@@ -117,9 +98,15 @@
 
 .niche-hero__image {
   width: 100%;
-  max-width: 30rem;
   height: auto;
-  filter: drop-shadow(0 26px 50px rgba(15, 23, 42, 0.18));
+}
+
+.niche-hero__image--photo {
+  max-width: 36rem;
+  border-radius: calc(var(--radius-lg) + 0.15rem);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 26px 50px rgba(15, 23, 42, 0.18);
+  object-fit: cover;
 }
 
 /* ---------- Generic section blocks ---------- */
@@ -128,48 +115,19 @@
 }
 
 .niche-section__title {
-  margin: 0 0 1rem;
+  margin: 0 0 1.5rem;
   font-size: clamp(1.45rem, 2.6vw, 2.05rem);
   line-height: 1.2;
 }
 
-.niche-prose {
-  max-width: 52rem;
-}
-
-.niche-section__body {
-  margin: 0;
-  font-size: clamp(1rem, 1.4vw, 1.13rem);
-  line-height: 1.85;
-  color: var(--color-text);
-}
-
-.niche-section__header {
-  max-width: 52rem;
-  margin-bottom: 1.75rem;
-}
-
-.niche-section__subtitle {
-  margin: 0;
-  font-size: 1.02rem;
-  line-height: 1.7;
-  color: var(--color-text-muted);
-}
-
 /* ---------- Benefits ---------- */
-.niche-benefits__lead {
-  margin: 0 0 1.75rem;
-  max-width: 52rem;
-  font-size: clamp(1.05rem, 1.5vw, 1.22rem);
-  font-weight: 600;
-  line-height: 1.7;
-  color: var(--color-primary-dark);
-}
-
 .niche-benefits__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .niche-benefit {
@@ -198,190 +156,6 @@
     radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.9) 0 18%, transparent 19%),
     linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
   box-shadow: 0 6px 14px rgba(11, 99, 255, 0.28);
-}
-
-/* ---------- Comparison ---------- */
-.niche-compare {
-  display: grid;
-  gap: 1rem;
-}
-
-.niche-compare__row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  align-items: stretch;
-}
-
-.niche-compare__cell {
-  display: grid;
-  gap: 0.45rem;
-  align-content: start;
-  padding: 1.15rem 1.25rem;
-  border-radius: var(--radius-md);
-  line-height: 1.6;
-}
-
-.niche-compare__old {
-  background: rgba(248, 113, 113, 0.08);
-  border: 1px solid rgba(248, 113, 113, 0.28);
-  color: #7f1d1d;
-}
-
-.niche-compare__new {
-  background: linear-gradient(135deg, rgba(11, 99, 255, 0.12), rgba(5, 66, 173, 0.06));
-  border: 1px solid rgba(11, 99, 255, 0.22);
-  color: #052c73;
-}
-
-.niche-compare__tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.niche-compare__old .niche-compare__tag {
-  color: #b91c1c;
-}
-
-.niche-compare__new .niche-compare__tag {
-  color: var(--color-primary-dark);
-}
-
-.niche-compare__tag::before {
-  content: "";
-  width: 0.6rem;
-  height: 0.6rem;
-  border-radius: 50%;
-  background: currentColor;
-}
-
-.niche-compare__text {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 500;
-  color: inherit;
-}
-
-/* ---------- Video block (cinematic placeholder) ---------- */
-.niche-video {
-  max-width: 60rem;
-}
-
-.niche-video__frame {
-  position: relative;
-  overflow: hidden;
-  padding: clamp(0.95rem, 2vw, 1.4rem);
-  border-radius: 1.4rem;
-  background:
-    radial-gradient(circle at top right, rgba(56, 189, 248, 0.2), transparent 35%),
-    linear-gradient(135deg, #071327 0%, #0a1f42 58%, #08172f 100%);
-  border: 1px solid rgba(147, 197, 253, 0.14);
-  box-shadow:
-    inset 0 0 0 1px rgba(148, 163, 184, 0.08),
-    0 22px 46px rgba(15, 23, 42, 0.24);
-}
-
-.niche-video__frame::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(120deg, rgba(255, 255, 255, 0.06), transparent 45%),
-    radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.18), transparent 28%);
-  pointer-events: none;
-}
-
-.niche-video__meta {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 0.9rem;
-}
-
-.niche-video__label {
-  margin: 0;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.niche-video__status {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.42rem 0.8rem;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  color: rgba(255, 255, 255, 0.92);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.niche-video__screen {
-  position: relative;
-  overflow: hidden;
-  display: grid;
-  place-items: center;
-  aspect-ratio: 16 / 9;
-  min-height: 14rem;
-  border-radius: 1.1rem;
-  background:
-    radial-gradient(circle at center, rgba(59, 130, 246, 0.18), transparent 28%),
-    linear-gradient(135deg, rgba(8, 23, 47, 0.95), rgba(17, 39, 78, 0.95));
-  border: 1px solid rgba(147, 197, 253, 0.16);
-}
-
-.niche-video__screen::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
-  background-size: 28px 28px;
-  pointer-events: none;
-}
-
-.niche-video__play {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 4.6rem;
-  height: 4.6rem;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 14px 32px rgba(2, 6, 23, 0.36);
-  color: #ffffff;
-}
-
-.niche-video__play svg {
-  width: 1.7rem;
-  height: 1.7rem;
-  margin-inline-start: 0.14rem;
-}
-
-.niche-video__note {
-  position: relative;
-  z-index: 1;
-  margin: 0.95rem 0 0;
-  font-size: 0.96rem;
-  line-height: 1.7;
-  color: rgba(226, 232, 240, 0.9);
 }
 
 /* ---------- Closing CTA ---------- */
@@ -428,18 +202,12 @@
     order: -1;
   }
 
-  .niche-hero__image {
-    max-width: 18rem;
-  }
-
-  .niche-compare__row {
-    grid-template-columns: 1fr;
+  .niche-hero__image--photo {
+    max-width: 100%;
   }
 }
 
 /* ---------- RTL ---------- */
-html[dir="rtl"] .niche-hero__subtitle,
-html[dir="rtl"] .niche-benefits__lead,
-html[dir="rtl"] .niche-section__body {
+html[dir="rtl"] .niche-hero__subtitle {
   text-align: right;
 }
