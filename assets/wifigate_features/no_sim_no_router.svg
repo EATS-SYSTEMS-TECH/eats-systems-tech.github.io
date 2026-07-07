@@ -1,0 +1,19 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+	<style>
+		.s0 { fill: none;stroke: #1463ff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 14 } 
+		.s1 { fill: #1463ff } 
+	</style>
+	<g>
+		<path class="s0" d="m92 118h118v180h-118z"/>
+		<path fill-rule="evenodd" class="s0" d="m128 184h44c1.1 0 2 0.9 2 2v56c0 1.1-0.9 2-2 2h-44c-1.1 0-2-0.9-2-2v-56c0-1.1 0.9-2 2-2z"/>
+		<path class="s0" d="m150 184v60"/>
+		<path class="s0" d="m126 214h48"/>
+		<path fill-rule="evenodd" class="s0" d="m264 216h96c3.31 0 6 2.69 6 6v32c0 3.31-2.69 6-6 6h-96c-3.31 0-6-2.69-6-6v-32c0-3.31 2.69-6 6-6z"/>
+		<path class="s0" d="m286 216v-52"/>
+		<path class="s0" d="m338 216v-52"/>
+		<path class="s0" d="m282 238h10"/>
+		<path class="s0" d="m306 238h10"/>
+		<path fill-rule="evenodd" class="s1" d="m344 241.5c-1.94 0-3.5-1.56-3.5-3.5 0-1.94 1.56-3.5 3.5-3.5 1.94 0 3.5 1.56 3.5 3.5 0 1.94-1.56 3.5-3.5 3.5z"/>
+		<path class="s0" d="m86 112l268 174"/>
+	</g>
+</svg>

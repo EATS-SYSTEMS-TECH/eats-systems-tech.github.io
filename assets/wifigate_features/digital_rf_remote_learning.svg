@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Digital RF Remote Learning icon">
+  <g stroke="#1463ff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <rect x="192" y="96" width="128" height="320" rx="56"/>
+    <circle cx="256" cy="182" r="28"/>
+    <circle cx="256" cy="330" r="28"/>
+    <circle cx="256" cy="256" r="9" fill="#1463ff" stroke="none"/>
+  </g>
+</svg>

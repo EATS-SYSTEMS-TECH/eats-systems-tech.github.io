@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Auto Open icon">
+  <g fill="none" stroke="#1463ff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M124 184 L224 226 L224 390 L124 432 Z"/>
+    <path d="M174 205 L174 405"/>
+    <path d="M388 184 L288 226 L288 390 L388 432 Z"/>
+    <path d="M338 205 L338 405"/>
+    <path d="M208 116 C236 92, 276 92, 304 116"/>
+    <path d="M228 154 C245 139, 267 139, 284 154"/>
+  </g>
+  <circle cx="256" cy="198" r="18" fill="#1463ff"/>
+</svg>
