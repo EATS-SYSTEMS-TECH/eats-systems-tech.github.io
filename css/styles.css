@@ -2381,17 +2381,6 @@ html[dir="rtl"] .where-story-card__video-meta {
     font-size: 1.05rem;
   }
 
-  .where-list__link {
-    padding: 0.9rem 0.8rem;
-    padding-inline-start: 1.15rem;
-    font-size: 1.05rem;
-  }
-
-  .why-list__item::before,
-  .where-list__item::before {
-    content: none;
-  }
-
   .where-story-card {
     padding: 1.2rem;
   }
@@ -2422,6 +2411,17 @@ html[dir="rtl"] .where-story-card__video-meta {
 
   .where-story-card__video-screen {
     min-height: 11.5rem;
+  }
+
+  .where-list__link {
+    padding: 0.9rem 0.8rem;
+    padding-inline-start: 1.15rem;
+    font-size: 1.05rem;
+  }
+
+  .why-list__item::before,
+  .where-list__item::before {
+    content: none;
   }
 
   .why-grid,

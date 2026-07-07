@@ -3,9 +3,11 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build:locales": "node scripts/build-localized-site.mjs"
+        "build:locales": "node scripts/build-localized-site.mjs",
+        "build:images": "node scripts/build-niche-images.mjs"
     },
     "devDependencies": {
-        "cheerio": "^1.2.0"
+        "cheerio": "^1.2.0",
+        "sharp": "^0.35.3"
     }
 }

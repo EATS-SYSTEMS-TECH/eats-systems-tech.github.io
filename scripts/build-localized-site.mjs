@@ -2,16 +2,15 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import vm from "node:vm";
 import * as cheerio from "cheerio";
-import { homeSeoLocales } from "./home-seo-locales.mjs";
 import { wifigateLinkLocales } from "./wifigate-link-locales.mjs";
-import { NICHE_DEFINITIONS, NICHE_CHROME, NICHE_OVERRIDES } from "./niche-content.mjs";
+import { NICHE_CHROME } from "./niche-content.mjs";
+import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = "https://wifigate.io";
 const defaultLocale = "en";
 const nowDate = new Date().toISOString().slice(0, 10);
 const guestInvitesPageKey = "Automated-Guest-Invites-API";
-const indexedPrimaryPageLocales = new Set([defaultLocale]);
 
 const homeTemplatePath = path.join(repoRoot, "templates", "index.template.html");
 const utilityTemplatePath = path.join(repoRoot, "templates", "wifigate-link.template.html");
@@ -101,8 +100,35 @@ const pageImages = {
   home: "https://wifigate.io/assets/img/wifigate_homepage.webp",
   legal: "https://wifigate.io/assets/img/wifigate_homepage.webp",
   utility: "https://wifigate.io/logo-1024.png",
-  niche: "https://wifigate.io/assets/img/wifigate_homepage.webp",
   guestInvites: "https://wifigate.io/assets/img/wifigate_homepage.webp",
+};
+
+const homeProductImageAlt = {
+  en: "WIFIGATE device next to the mobile app gate list",
+  he: "מכשיר WIFIGATE לצד מסך אפליקציה עם רשימת שערים",
+  es: "Dispositivo WIFIGATE junto a la app móvil con lista de accesos",
+  fr: "Boîtier WIFIGATE à côté de l'application mobile avec la liste des accès",
+  de: "WIFIGATE Gerät neben der mobilen App mit Torliste",
+  nl: "WIFIGATE apparaat naast de mobiele app met poortenlijst",
+  it: "Dispositivo WIFIGATE accanto all'app mobile con elenco degli accessi",
+  pt: "Dispositivo WIFIGATE junto à app móvel com lista de acessos",
+  pl: "Urządzenie WIFIGATE obok aplikacji mobilnej z listą bram",
+  no: "WIFIGATE-enhet ved siden av mobilappen med portliste",
+  cs: "Zařízení WIFIGATE vedle mobilní aplikace se seznamem bran",
+  ru: "Устройство WIFIGATE рядом с мобильным приложением со списком ворот",
+  uk: "Пристрій WIFIGATE поруч із мобільним застосунком зі списком воріт",
+  tr: "Kapı listesi gösteren mobil uygulamanın yanında WIFIGATE cihazı",
+  ar: "جهاز WIFIGATE بجانب تطبيق الهاتف مع قائمة البوابات",
+  hi: "गेट सूची दिखाने वाले मोबाइल ऐप के पास WIFIGATE डिवाइस",
+  bn: "গেটের তালিকা দেখানো মোবাইল অ্যাপের পাশে WIFIGATE ডিভাইস",
+  mr: "गेट यादी दाखवणाऱ्या मोबाइल अॅपजवळ WIFIGATE डिव्हाइस",
+  te: "గేట్ల జాబితా చూపిస్తున్న మొబైల్ యాప్ పక్కన WIFIGATE పరికరం",
+  "zh-Hans": "WIFIGATE 设备旁边显示门列表的手机应用",
+  "zh-Hant": "WIFIGATE 裝置旁邊顯示大門列表的手機應用程式",
+  ja: "ゲート一覧を表示するモバイルアプリの横にある WIFIGATE デバイス",
+  ko: "게이트 목록을 보여주는 모바일 앱 옆의 WIFIGATE 장치",
+  da: "WIFIGATE-enhed ved siden af mobilappen med portliste",
+  hu: "WIFIGATE eszköz a kapulistát mutató mobilalkalmazás mellett",
 };
 
 function createSandbox() {
@@ -233,12 +259,8 @@ function buildPageUrl(locale, pageKey = "home") {
   return `${siteOrigin}${buildPagePath(locale, pageKey)}`;
 }
 
-function isPrimaryPageIndexable(locale) {
-  return indexedPrimaryPageLocales.has(locale);
-}
-
-function getIndexablePrimaryLocaleOptions(localeOptions) {
-  return localeOptions.filter((option) => isPrimaryPageIndexable(option.code));
+function getNichePageContent(locale) {
+  return NICHE_PAGE_LOCALES[locale] || NICHE_PAGE_LOCALES[defaultLocale];
 }
 
 function buildOutputFilePath(locale, pageKey = "home") {
@@ -466,59 +488,34 @@ function setBodyDirection($, locale) {
   }
 }
 
-function getHomeSeoTitle(locale, bundle) {
-  return homeSeoLocales[locale]?.title || (locale === defaultLocale
-    ? "WIFIGATE - Smart Access Control System | Secure, No Subscriptions"
-    : `WIFIGATE | ${bundle.footer.tagline}`);
-}
-
-function buildHomeMeta(bundle, locale) {
-  const overrides = homeSeoLocales[locale] || {};
-  const title = overrides.title || getHomeSeoTitle(locale, bundle);
-  const description = overrides.description || bundle.action.subtitle || bundle.hero.subtitle;
+function buildHomeMeta(locale) {
+  const home = getNichePageContent(locale).home;
+  const enHome = NICHE_PAGE_LOCALES[defaultLocale].home;
+  const title = home.seoTitle;
+  const description = home.seoDescription;
 
   return {
     title,
     description,
     ogTitle: title,
     ogDescription: description,
-    keywords: overrides.keywords || [
-      "WIFIGATE",
-      "WiFiGate",
-      "smart access control",
-      bundle.applications?.electricGates,
-      bundle.applications?.garageDoors,
-      bundle.applications?.rollerShutters,
-      bundle.applications?.privateHomes,
-      bundle.applications?.residentialComplexes,
-      bundle.applications?.officeBuildings,
-      bundle.applications?.magneticLocks,
-    ]
-      .filter(Boolean)
-      .join(", "),
+    keywords: home.keywords || enHome.keywords,
   };
 }
 
-function buildLanguageSchemaTitle(locale, bundle) {
-  return locale === defaultLocale
-    ? "WIFIGATE - Smart Access Control System"
-    : `WIFIGATE | ${bundle.footer.tagline}`;
-}
-
-function setHomeMeta($, bundle, locale, localeOptions, indexable) {
-  const meta = buildHomeMeta(bundle, locale);
+function setHomeMeta($, bundle, locale, localeOptions) {
+  const meta = buildHomeMeta(locale);
   const url = buildPageUrl(locale, "home");
   const footerTagline =
     getNestedValue(bundle, "footer.tagline") ||
     "Smart. Secure. Private. No subscription. No compromises.";
-  const alternateLocaleOptions = indexable ? getIndexablePrimaryLocaleOptions(localeOptions) : [];
 
   $("title").text(meta.title);
   setMetaByName($, "description", meta.description);
   setMetaByName($, "keywords", meta.keywords);
-  setRobotsMeta($, indexable ? "index, follow" : "noindex, follow");
+  setRobotsMeta($, "index, follow");
   $("link[rel='canonical']").attr("href", url);
-  replaceAlternateLinks($, alternateLocaleOptions, "home");
+  replaceAlternateLinks($, localeOptions, "home");
 
   setMetaByProperty($, "og:type", "website");
   setMetaByProperty($, "og:site_name", "WIFIGATE");
@@ -537,7 +534,7 @@ function setHomeMeta($, bundle, locale, localeOptions, indexable) {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: "WIFIGATE",
-      alternateName: "WiFiGate",
+      alternateName: ["WiFiGate", "WiFi Gate"],
       url: siteOrigin,
       inLanguage: locale,
       description: meta.description,
@@ -555,7 +552,7 @@ function setHomeMeta($, bundle, locale, localeOptions, indexable) {
       "@context": "https://schema.org",
       "@type": "Product",
       name: "WIFIGATE",
-      alternateName: "WiFiGate",
+      alternateName: ["WiFiGate", "WiFi Gate"],
       description: meta.description,
       category: "Access control system",
       inLanguage: locale,
@@ -691,18 +688,22 @@ function updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale) {
   updateAccessibilityMarkup($, accessibilityBundle);
 }
 
-function rewriteHomeNicheLinks($, locale) {
+function updateHomeWhereSection($, locale) {
+  const content = getNichePageContent(locale);
+
+  $("#where-title").text(content.where.title);
+  $("#where-subtitle").text(content.where.subtitle);
+  $("#where-product-image").attr("alt", homeProductImageAlt[locale] || homeProductImageAlt[defaultLocale]);
+
   NICHE_DEFINITIONS.forEach((niche) => {
-    const targetPath = buildPagePath(locale, niche.key);
-    [
-      `${niche.slug}/`,
-      `${niche.key}/`,
-      niche.legacyKey ? `${niche.legacyKey}/` : null,
-    ]
-      .filter(Boolean)
-      .forEach((href) => {
-        $(`.where-list__link[href='${href}']`).attr("href", targetPath);
-      });
+    const link = $(`.where-list__link[data-niche-key='${niche.key}']`);
+    if (!link.length) {
+      return;
+    }
+
+    const nicheContent = content.niches[niche.key];
+    link.attr("href", buildPagePath(locale, niche.key));
+    link.text(nicheContent.label);
   });
 }
 
@@ -800,7 +801,6 @@ async function buildHomePages(homeData) {
 
   for (const localeOption of homeData.localeOptions) {
     const locale = localeOption.code;
-    const indexable = isPrimaryPageIndexable(locale);
     const bundle = getBundle(homeData.translations, locale);
     const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale);
     const $ = cheerio.load(template, { decodeEntities: false });
@@ -813,9 +813,9 @@ async function buildHomePages(homeData) {
     setLanguageSelector($, homeData.localeOptions, locale, "home");
     updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale);
     rewriteHomeInternalLinks($, locale);
-    rewriteHomeNicheLinks($, locale);
+    updateHomeWhereSection($, locale);
     rewriteHomeGuestInvitesLink($, locale);
-    setHomeMeta($, bundle, locale, homeData.localeOptions, indexable);
+    setHomeMeta($, bundle, locale, homeData.localeOptions);
     insertPageDataScript(
       $,
       "hero-locale-data",
@@ -826,13 +826,11 @@ async function buildHomePages(homeData) {
     const outputFile = buildOutputFilePath(locale, "home");
     await writeOutputFile(outputFile, serialize($));
 
-    if (indexable) {
-      sitemapEntries.push({
-        loc: buildPageUrl(locale, "home"),
-        changefreq: "monthly",
-        priority: "1.0",
-      });
-    }
+    sitemapEntries.push({
+      loc: buildPageUrl(locale, "home"),
+      changefreq: "monthly",
+      priority: "1.0",
+    });
   }
 
   return sitemapEntries;
@@ -892,50 +890,21 @@ function getNicheChrome(locale) {
   return { ...base, ...override };
 }
 
-function getNicheOverride(locale, storyKey) {
-  return (NICHE_OVERRIDES[locale] && NICHE_OVERRIDES[locale][storyKey]) || {};
-}
-
-function getNicheLabel(homeData, bundle, storyKey) {
-  return (
-    getNestedValue(bundle, `applications.${storyKey}`) ||
-    getNestedValue(homeData.translations[defaultLocale], `applications.${storyKey}`) ||
-    storyKey
-  );
-}
-
 function buildNicheContext(homeData, niche, locale) {
-  const storyKey = niche.storyKey;
   const bundle = getBundle(homeData.translations, locale);
   const enBundle = homeData.translations[defaultLocale];
-  const ui = homeData.storyUi[locale] || homeData.storyUi[defaultLocale];
-  const localizedStories = homeData.stories[locale] || {};
-  const story = localizedStories[storyKey] || homeData.stories[defaultLocale][storyKey] || {};
   const chrome = getNicheChrome(locale);
-  const override = getNicheOverride(locale, storyKey);
+  const content = getNichePageContent(locale).niches[niche.key];
   const contact = bundle.contact || enBundle.contact;
   const footer = bundle.footer || enBundle.footer;
-  const nicheLabel = getNicheLabel(homeData, bundle, storyKey);
-
-  const heroHeadline = override.heroHeadline || nicheLabel;
-  const heroSubline = override.heroSubline || story.pitch || chrome.comparisonLead || "";
-  const metaTitle = override.metaTitle || `${nicheLabel} | WIFIGATE`;
-  const metaDescription = override.metaDescription || story.pitch || nicheLabel;
 
   return {
-    storyKey,
     bundle,
     enBundle,
-    ui,
-    story,
     chrome,
+    content,
     contact,
     footer,
-    nicheLabel,
-    heroHeadline,
-    heroSubline,
-    metaTitle,
-    metaDescription,
   };
 }
 
@@ -951,30 +920,11 @@ function setNicheList($, selector, items, className) {
   });
 }
 
-function setNicheComparison($, chrome) {
-  const rows = $("#niche-comparison-rows");
-  if (!rows.length) {
-    return;
-  }
-
-  rows.empty();
-  (chrome.rows || []).forEach((row) => {
-    const oldCell = $("<div>")
-      .addClass("niche-compare__cell niche-compare__old")
-      .append($("<span>").addClass("niche-compare__tag").text(chrome.headTraditional))
-      .append($("<p>").addClass("niche-compare__text").text(row.t));
-    const newCell = $("<div>")
-      .addClass("niche-compare__cell niche-compare__new")
-      .append($("<span>").addClass("niche-compare__tag").text(chrome.headWifigate))
-      .append($("<p>").addClass("niche-compare__text").text(row.w));
-    rows.append($("<li>").addClass("niche-compare__row").append(oldCell).append(newCell));
-  });
-}
-
-function updateNicheStaticUi($, ctx, accessibilityBundle) {
-  const { bundle, enBundle, ui, story, chrome, contact, footer, nicheLabel } = ctx;
+function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
+  const { bundle, enBundle, chrome, content, contact, footer } = ctx;
   const navText = (keyPath, fallback) =>
     getNestedValue(bundle, keyPath) || getNestedValue(enBundle, keyPath) || fallback;
+  const assetPrefix = buildAssetPrefix(locale, niche.key);
 
   $(".nav__toggle").attr("aria-label", "Toggle navigation menu");
   $("#language-button").attr("aria-label", "Select language");
@@ -985,32 +935,22 @@ function updateNicheStaticUi($, ctx, accessibilityBundle) {
   $("#niche-nav-contact").text(navText("nav.contact", "Contact Us"));
 
   $("#niche-breadcrumb-home").text(chrome.homeLabel);
-  $("#niche-breadcrumb-current").text(nicheLabel);
+  $("#niche-breadcrumb-current").text(content.label);
 
   $("#niche-eyebrow").text(chrome.eyebrow);
-  $("#niche-title").text(ctx.heroHeadline);
-  $("#niche-subline").text(ctx.heroSubline);
+  $("#niche-title").text(content.title);
+  $("#niche-intro").text(content.paragraph);
   $("#niche-hero-cta-label").text(contact.ctaButton || "Contact via WhatsApp");
   $("#niche-hero-back").text(chrome.backLabel);
-  setNicheList($, "#niche-badges", ui.badges, "niche-chip");
 
-  $("#niche-problem-title").text(chrome.problemTitle);
-  $("#niche-problem-body").text(story.problem || ctx.heroSubline);
-  $("#niche-better-title").text(chrome.betterTitle);
-  $("#niche-better-body").text(story.solution || story.value || "");
+  $("#niche-image")
+    .attr("src", `${assetPrefix}${niche.image.hero}`)
+    .attr("alt", content.imageAlt)
+    .attr("width", String(niche.image.heroWidth))
+    .attr("height", String(niche.image.heroHeight));
 
   $("#niche-benefits-title").text(chrome.benefitsTitle);
-  $("#niche-benefits-lead").text(story.value || story.pitch || "");
-  setNicheList($, "#niche-benefits-list", ui.badges, "niche-benefit");
-
-  $("#niche-comparison-title").text(chrome.comparisonTitle);
-  $("#niche-comparison-lead").text(chrome.comparisonLead);
-  setNicheComparison($, chrome);
-
-  $("#niche-video-title").text(chrome.videoTitle);
-  $("#niche-video-label").text(ui.videoLabel);
-  $("#niche-video-status").text(ui.videoStatus);
-  $("#niche-video-note").text(ui.videoNote);
+  setNicheList($, "#niche-benefits-list", content.bullets, "niche-benefit");
 
   $("#niche-cta-title").text(contact.ctaTitle || "Interested in WIFIGATE?");
   $("#niche-cta-text").text(contact.ctaText || "");
@@ -1042,35 +982,36 @@ function rewriteNicheInternalLinks($, locale) {
   $(".nav__logo-link").attr("aria-label", "Back to WIFIGATE home page");
 }
 
-function setNicheMeta($, ctx, niche, locale, localeOptions, indexable) {
+function setNicheMeta($, ctx, niche, locale, localeOptions) {
   const url = buildPageUrl(locale, niche.key);
   const homeUrl = buildPageUrl(locale, "home");
-  const alternateLocaleOptions = indexable ? getIndexablePrimaryLocaleOptions(localeOptions) : [];
+  const { content } = ctx;
+  const socialImage = `${siteOrigin}/${niche.image.og}`;
 
-  $("title").text(ctx.metaTitle);
-  setMetaByName($, "description", ctx.metaDescription);
-  setRobotsMeta($, indexable ? "index, follow" : "noindex, follow");
+  $("title").text(content.seoTitle);
+  setMetaByName($, "description", content.seoDescription);
+  setRobotsMeta($, "index, follow");
   $("link[rel='canonical']").attr("href", url);
-  replaceAlternateLinks($, alternateLocaleOptions, niche.key);
+  replaceAlternateLinks($, localeOptions, niche.key);
 
   setMetaByProperty($, "og:type", "article");
   setMetaByProperty($, "og:site_name", "WIFIGATE");
   setMetaByProperty($, "og:url", url);
-  setMetaByProperty($, "og:title", ctx.metaTitle);
-  setMetaByProperty($, "og:description", ctx.metaDescription);
-  setMetaByProperty($, "og:image", pageImages.niche);
+  setMetaByProperty($, "og:title", content.seoTitle);
+  setMetaByProperty($, "og:description", content.seoDescription);
+  setMetaByProperty($, "og:image", socialImage);
   setMetaByProperty($, "twitter:card", "summary_large_image");
   setMetaByProperty($, "twitter:url", url);
-  setMetaByProperty($, "twitter:title", ctx.metaTitle);
-  setMetaByProperty($, "twitter:description", ctx.metaDescription);
-  setMetaByProperty($, "twitter:image", pageImages.niche);
+  setMetaByProperty($, "twitter:title", content.seoTitle);
+  setMetaByProperty($, "twitter:description", content.seoDescription);
+  setMetaByProperty($, "twitter:image", socialImage);
 
   replaceStructuredData($, [
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      name: ctx.metaTitle,
-      description: ctx.metaDescription,
+      name: content.seoTitle,
+      description: content.seoDescription,
       inLanguage: locale,
       url,
       isPartOf: {
@@ -1080,7 +1021,7 @@ function setNicheMeta($, ctx, niche, locale, localeOptions, indexable) {
       },
       primaryImageOfPage: {
         "@type": "ImageObject",
-        url: pageImages.niche,
+        url: socialImage,
       },
     },
     {
@@ -1088,7 +1029,7 @@ function setNicheMeta($, ctx, niche, locale, localeOptions, indexable) {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: ctx.chrome.homeLabel, item: homeUrl },
-        { "@type": "ListItem", position: 2, name: ctx.nicheLabel, item: url },
+        { "@type": "ListItem", position: 2, name: content.label, item: url },
       ],
     },
   ]);
@@ -1101,7 +1042,6 @@ async function buildNichePages(homeData) {
   for (const niche of NICHE_DEFINITIONS) {
     for (const localeOption of homeData.localeOptions) {
       const locale = localeOption.code;
-      const indexable = isPrimaryPageIndexable(locale);
       const ctx = buildNicheContext(homeData, niche, locale);
       const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale);
       const $ = cheerio.load(template, { decodeEntities: false });
@@ -1110,28 +1050,26 @@ async function buildNichePages(homeData) {
       rewriteStaticAssets($, locale, niche.key);
       appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, niche.key);
       setLanguageSelector($, homeData.localeOptions, locale, niche.key);
-      updateNicheStaticUi($, ctx, accessibilityBundle);
+      updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle);
       rewriteNicheInternalLinks($, locale);
-      setNicheMeta($, ctx, niche, locale, homeData.localeOptions, indexable);
+      setNicheMeta($, ctx, niche, locale, homeData.localeOptions);
 
       const outputFile = buildOutputFilePath(locale, niche.key);
       await writeOutputFile(outputFile, serialize($));
 
-      if (niche.legacyKey) {
-        const redirectFile = buildOutputFilePath(locale, niche.legacyKey);
+      for (const legacyKey of niche.legacyKeys || []) {
+        const redirectFile = buildOutputFilePath(locale, legacyKey);
         await writeOutputFile(
           redirectFile,
           buildRedirectPage(buildPagePath(locale, niche.key), buildPageUrl(locale, niche.key))
         );
       }
 
-      if (indexable) {
-        sitemapEntries.push({
-          loc: buildPageUrl(locale, niche.key),
-          changefreq: "monthly",
-          priority: "0.8",
-        });
-      }
+      sitemapEntries.push({
+        loc: buildPageUrl(locale, niche.key),
+        changefreq: "monthly",
+        priority: "0.8",
+      });
     }
   }
 
@@ -1272,10 +1210,14 @@ async function main() {
     localeOptions: homeSandbox.SITE_LANGUAGE_OPTIONS,
     translations: homeSandbox.translations,
     accessibilityCopy: homeSandbox.accessibilityCopy,
-    storyUi: homeSandbox.APPLICATION_STORY_UI,
-    stories: homeSandbox.APPLICATION_STORIES,
-    storySlugs: homeSandbox.APPLICATION_STORY_SLUGS,
   };
+
+  const contentProblems = validateNichePageLocales(homeData.localeOptions.map((option) => option.code));
+  if (contentProblems.length) {
+    throw new Error(
+      `Niche page content validation failed (${contentProblems.length} problems):\n  ${contentProblems.join("\n  ")}`
+    );
+  }
 
   const sitemapEntries = [];
   sitemapEntries.push(...(await buildHomePages(homeData)));
