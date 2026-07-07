@@ -148,7 +148,7 @@
       applications: {
         barrierGates: "שערי מחסום",
         hotels: "מלונות, Airbnb ואתרי אירוח",
-        rollerShutters: "חניונים מסחריים ותריסי גלילה",
+        rollerShutters: "גראז'ים ותריסי גלילה לעסקים",
       },
       contact: {
         name: "איתי נוה",
