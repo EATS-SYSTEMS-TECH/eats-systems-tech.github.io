@@ -1,7 +1,22 @@
 const LOCALE_STORAGE_KEY = "language";
 
-function getAlternateLocaleUrlMap() {
+function getLocaleUrlMap() {
   const map = new Map();
+
+  document.querySelectorAll("#language-dropdown a.language-selector__option[data-lang]").forEach((link) => {
+    const locale = link.dataset.lang;
+    const href = link.getAttribute("href");
+
+    if (!locale || !href) {
+      return;
+    }
+
+    map.set(locale, href);
+  });
+
+  if (map.size) {
+    return map;
+  }
 
   document.querySelectorAll("link[rel='alternate'][hreflang]").forEach((link) => {
     const locale = link.getAttribute("hreflang");
@@ -93,7 +108,7 @@ function redirectToLocale(locale, localeUrlMap) {
 }
 
 function autoRedirectLocale() {
-  const localeUrlMap = getAlternateLocaleUrlMap();
+  const localeUrlMap = getLocaleUrlMap();
   if (!localeUrlMap.size || !shouldHandleCurrentPage(localeUrlMap)) {
     return;
   }
