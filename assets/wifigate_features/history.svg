@@ -1,7 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="History icon">
-  <g transform="translate(-10 -10)" stroke="#1463ff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <path d="M176 164a160 160 0 1 1-22 196"/>
-    <path d="M184 116l-48 48 48 48"/>
-    <path d="M256 216v72l40 28"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="88 96 306 218" preserveAspectRatio="xMidYMid meet" role="img" aria-label="History icon">
+  <style>
+    .s0 { fill: none; stroke: #1463ff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 14 }
+  </style>
+  <g>
+    <circle class="s0" cx="241" cy="205" r="100"/>
+    <path class="s0" d="M241 150v56"/>
+    <path class="s0" d="M241 206l44 32"/>
   </g>
 </svg>
