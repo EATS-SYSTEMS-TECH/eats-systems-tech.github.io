@@ -1,11 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Auto Open icon">
-  <g fill="none" stroke="#1463ff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M124 184 L224 226 L224 390 L124 432 Z"/>
-    <path d="M174 205 L174 405"/>
-    <path d="M388 184 L288 226 L288 390 L388 432 Z"/>
-    <path d="M338 205 L338 405"/>
-    <path d="M208 116 C236 92, 276 92, 304 116"/>
-    <path d="M228 154 C245 139, 267 139, 284 154"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="88 96 306 218" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Auto Open icon">
+  <style>
+    .s0 { fill: none; stroke: #1463ff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 11 }
+    .s1 { fill: #1463ff }
+    .s2 { fill: none; stroke: #1463ff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 9 }
+  </style>
+  <g>
+    <path class="s2" d="M162 274V176L122 194V256L162 274Z"/>
+    <path class="s2" d="M132 252V198"/>
+    <path class="s2" d="M142 260V190"/>
+    <path class="s2" d="M152 268V182"/>
+    <path class="s2" d="M320 274V176L360 194V256L320 274Z"/>
+    <path class="s2" d="M350 252V198"/>
+    <path class="s2" d="M340 260V190"/>
+    <path class="s2" d="M330 268V182"/>
+    <path class="s0" d="M219 196C226 189 256 189 263 196"/>
+    <path class="s0" d="M206 178C218 166 264 166 276 178"/>
+    <path class="s0" d="M194 160C210 143 272 143 288 160"/>
+    <circle class="s1" cx="241" cy="208" r="5"/>
   </g>
-  <circle cx="256" cy="198" r="18" fill="#1463ff"/>
 </svg>

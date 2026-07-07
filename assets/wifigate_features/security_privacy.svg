@@ -1,6 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Security and Privacy icon">
-  <path d="M176 226v-34c0-44 36-80 80-80s80 36 80 80v34" fill="none" stroke="#1463ff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="136" y="214" width="240" height="190" rx="28" fill="#1463ff"/>
-  <circle cx="256" cy="292" r="18" fill="#ffffff"/>
-  <path d="M256 310v42" stroke="#ffffff" stroke-width="18" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="88 96 306 218" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Security and Privacy icon">
+  <style>
+    .s0 { fill: none; stroke: #1463ff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 14 }
+    .s1 { fill: #1463ff }
+    .s2 { fill: #ffffff }
+    .s3 { fill: none; stroke: #ffffff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 14 }
+  </style>
+  <g>
+    <path class="s1" d="M241 110l102 30v48c0 56-35 96-102 120-67-24-102-64-102-120v-48z"/>
+    <path class="s3" d="M206 188v-12c0-20 16-36 35-36s35 16 35 36v12"/>
+    <rect class="s2" x="188" y="188" width="106" height="76" rx="18"/>
+    <circle class="s1" cx="241" cy="220" r="9"/>
+    <path class="s0" d="M241 232v18"/>
+  </g>
 </svg>

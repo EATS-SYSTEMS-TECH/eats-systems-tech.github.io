@@ -1,6 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Stability icon">
-  <g transform="translate(0 -12)">
-    <path d="M256 94l126 40v102c0 92-57 166-126 202-69-36-126-110-126-202V134l126-40z" fill="none" stroke="#1463ff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M256 152l88 28v56c0 61-35 113-88 145-53-32-88-84-88-145v-56l88-28z" fill="#1463ff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="88 96 306 218" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Stability icon">
+  <style>
+    .s0 { fill: none; stroke: #1463ff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 14 }
+    .s1 { fill: #1463ff }
+  </style>
+  <g transform="translate(29 26) scale(0.88)">
+    <path class="s0" d="M241 112l96 24v46c0 60-38 104-96 132-58-28-96-72-96-132v-46z"/>
+    <path class="s1" d="M241 144l66 17v30c0 42-25 74-66 97-41-23-66-55-66-97v-30z"/>
   </g>
 </svg>

@@ -1514,17 +1514,92 @@ ul {
   filter: drop-shadow(0 24px 40px rgba(20, 99, 255, 0.18));
 }
 
-.feature-card--history-30-day .feature-card__image,
-.feature-card--auto-open .feature-card__image,
 .feature-card--no-subscription-fees .feature-card__image {
   width: 78%;
   height: 78%;
 }
 
-.feature-card--rf-remote-learning .feature-card__image,
+.feature-card--no-sim-router .feature-card__media {
+  padding: 0.65rem;
+}
+
+.feature-card--no-sim-router .feature-card__image {
+  width: 96%;
+  height: 96%;
+}
+
+.feature-card--quick-guest-invite .feature-card__media {
+  padding: 0.65rem;
+}
+
+.feature-card--quick-guest-invite .feature-card__image {
+  width: 96%;
+  height: 96%;
+}
+
+.feature-card--history-30-day .feature-card__media {
+  padding: 0.35rem;
+}
+
+.feature-card--history-30-day .feature-card__image {
+  width: 84%;
+  height: auto;
+  max-width: 96%;
+  max-height: 96%;
+}
+
+.feature-card--auto-open .feature-card__media {
+  padding: 0.65rem;
+}
+
+.feature-card--auto-open .feature-card__image {
+  width: 96%;
+  height: 96%;
+}
+
+.feature-card--events .feature-card__media {
+  padding: 0.65rem;
+}
+
+.feature-card--events .feature-card__image {
+  width: 96%;
+  height: 96%;
+}
+
+.feature-card--no-subscription-fees .feature-card__media {
+  padding: 0.65rem;
+}
+
+.feature-card--no-subscription-fees .feature-card__image {
+  width: 96%;
+  height: 96%;
+}
+
+.feature-card--stability .feature-card__media {
+  padding: 0.65rem;
+}
+
+.feature-card--stability .feature-card__image {
+  width: 96%;
+  height: 96%;
+}
+
+.feature-card--rf-remote-learning .feature-card__media {
+  padding: 0.65rem;
+}
+
+.feature-card--rf-remote-learning .feature-card__image {
+  width: 96%;
+  height: 96%;
+}
+
+.feature-card--security-privacy .feature-card__media {
+  padding: 0.65rem;
+}
+
 .feature-card--security-privacy .feature-card__image {
-  width: 82%;
-  height: 82%;
+  width: 96%;
+  height: 96%;
 }
 
 @media (max-width: 768px) {
@@ -1542,17 +1617,87 @@ ul {
     height: 90%;
   }
 
-  .feature-card--history-30-day .feature-card__image,
-  .feature-card--auto-open .feature-card__image,
-  .feature-card--no-subscription-fees .feature-card__image {
-    width: 82%;
-    height: 82%;
+  .feature-card--no-subscription-fees .feature-card__media {
+    padding: 0.55rem;
   }
 
-  .feature-card--rf-remote-learning .feature-card__image,
+  .feature-card--no-subscription-fees .feature-card__image {
+    width: 90%;
+    height: 90%;
+  }
+
+  .feature-card--no-sim-router .feature-card__media {
+    padding: 0.55rem;
+  }
+
+  .feature-card--no-sim-router .feature-card__image {
+    width: 90%;
+    height: 90%;
+  }
+
+  .feature-card--quick-guest-invite .feature-card__media {
+    padding: 0.55rem;
+  }
+
+  .feature-card--quick-guest-invite .feature-card__image {
+    width: 90%;
+    height: 90%;
+  }
+
+  .feature-card--history-30-day .feature-card__media {
+    padding: 0.3rem;
+  }
+
+  .feature-card--history-30-day .feature-card__image {
+    width: 84%;
+    height: auto;
+    max-width: 90%;
+    max-height: 90%;
+  }
+
+  .feature-card--auto-open .feature-card__media {
+    padding: 0.55rem;
+  }
+
+  .feature-card--auto-open .feature-card__image {
+    width: 90%;
+    height: 90%;
+  }
+
+  .feature-card--events .feature-card__media {
+    padding: 0.55rem;
+  }
+
+  .feature-card--events .feature-card__image {
+    width: 90%;
+    height: 90%;
+  }
+
+  .feature-card--stability .feature-card__media {
+    padding: 0.55rem;
+  }
+
+  .feature-card--stability .feature-card__image {
+    width: 90%;
+    height: 90%;
+  }
+
+  .feature-card--rf-remote-learning .feature-card__media {
+    padding: 0.55rem;
+  }
+
+  .feature-card--rf-remote-learning .feature-card__image {
+    width: 90%;
+    height: 90%;
+  }
+
+  .feature-card--security-privacy .feature-card__media {
+    padding: 0.55rem;
+  }
+
   .feature-card--security-privacy .feature-card__image {
-    width: 86%;
-    height: 86%;
+    width: 90%;
+    height: 90%;
   }
 }
 
@@ -2546,8 +2691,17 @@ html[dir="rtl"] .where-story-card__video-meta {
     padding: 0.75rem 1.4rem 0.35rem;
   }
 
+  body.rtl .topbar-nav {
+    align-items: flex-end;
+    text-align: right;
+  }
+
   .nav-link {
     padding-block: 0.35rem;
+  }
+
+  body.rtl .nav-link {
+    text-align: right;
   }
 
   /* Mobile: language selector inside nav menu */
@@ -2848,6 +3002,7 @@ html[dir="rtl"] .where-story-card__video-meta {
     padding: 8px 0;
   }
 }
+
 /* Shared utility for screen-reader-only text that still helps semantics. */
 .visually-hidden {
   position: absolute;
