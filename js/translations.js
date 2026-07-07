@@ -205,7 +205,7 @@ var translations = {
     applications: {
       electricGates: "שערים חשמליים",
       entranceDoors: "דלתות כניסה",
-      magneticLocks: "מנעולים מגנטיים",
+      magneticLocks: "דלתות כניסה ומנעולים מגנטיים",
       barrierGates: "מחסומי זרוע (Barrier Gates)",
       privateHomes: "בתים פרטיים",
       residentialComplexes: "מתחמי מגורים",
