@@ -1,7 +1,7 @@
 // scripts/niche-content.mjs
 // Centralized content + metadata model for the dedicated niche landing pages.
 //
-// Only the 8 homepage niches get a dedicated page. The page reuses existing
+// Only the homepage niches get a dedicated page. The page reuses existing
 // localized copy where possible (APPLICATION_STORIES, APPLICATION_STORY_UI,
 // translations.contact/footer/nav/applications) and layers a small amount of
 // niche-page "chrome" (section titles + a security-soft comparison table) on
@@ -14,6 +14,7 @@
 
 export const NICHE_DEFINITIONS = [
   { key: "hotels", legacyKey: "where-story-hotels", slug: "hotels", storyKey: "hotels" },
+  { key: "garage-doors", slug: "garage-doors", storyKey: "garageDoors" },
   { key: "roller-shutters", legacyKey: "where-story-roller-shutters", slug: "roller-shutters", storyKey: "rollerShutters" },
   { key: "residential-complexes", legacyKey: "where-story-residential-complexes", slug: "residential-complexes", storyKey: "residentialComplexes" },
   { key: "private-homes", legacyKey: "where-story-private-homes", slug: "private-homes", storyKey: "privateHomes" },
@@ -544,13 +545,21 @@ export const NICHE_OVERRIDES = {
       metaDescription:
         "WIFIGATE gives hotels and guest accommodations app-based access for gates, barriers, and entry points. No physical keys or cards, time-limited guest access, and full control from the phone.",
     },
-    rollerShutters: {
-      heroHeadline: "Move roller-shutter and commercial-garage control off the wall and into the app",
+    garageDoors: {
+      heroHeadline: "Move commercial garage-door control off the wall and into the app",
       heroSubline:
-        "Traditional exterior switches and shared remotes can create avoidable exposure. WIFIGATE moves the control point indoors, reduces exposed access methods, and adds app-based access with a clear access history.",
-      metaTitle: "Commercial Garage & Roller Shutter Access | WIFIGATE",
+        "Shared remotes and wall switches slow down service bays, loading areas, and indoor parking entries. WIFIGATE puts control on the phone, keeps access tighter, and adds a clear access history.",
+      metaTitle: "Commercial Garage Door Access | WIFIGATE",
       metaDescription:
-        "WIFIGATE operates commercial garages and electric roller shutters from the phone. Reduce exposed outdoor switches, cut shared remotes, and gain app-based control with access history.",
+        "WIFIGATE controls commercial garage doors from the phone. Reduce shared remotes, speed up service and vehicle access, and manage garage-door permissions with app-based access history.",
+    },
+    rollerShutters: {
+      heroHeadline: "Move roller-shutter control off the wall and into the app",
+      heroSubline:
+        "Traditional exterior switches and shared remotes can create avoidable exposure at storefronts, warehouses, and service openings. WIFIGATE moves the control point indoors, reduces exposed access methods, and adds app-based access with a clear access history.",
+      metaTitle: "Commercial Roller Shutter Access | WIFIGATE",
+      metaDescription:
+        "WIFIGATE operates electric roller shutters from the phone. Reduce exposed outdoor switches, cut shared remotes, and gain app-based control for storefront and service openings with access history.",
     },
     residentialComplexes: {
       heroHeadline: "Building access that residents love and managers can actually control",
@@ -610,13 +619,21 @@ export const NICHE_OVERRIDES = {
       metaDescription:
         "WIFIGATE מעניקה למלונות ולאתרי אירוח גישה מבוססת אפליקציה לשערים, מחסומים ונקודות כניסה, בלי מפתחות או כרטיסים, עם גישת אורח מוגבלת בזמן ושליטה מלאה מהטלפון.",
     },
-    rollerShutters: {
-      heroHeadline: "העבירו את השליטה בגראז' ובתריס הגלילה מהקיר אל האפליקציה",
+    garageDoors: {
+      heroHeadline: "העבירו את השליטה בדלת הגראז' מהקיר אל האפליקציה",
       heroSubline:
-        "מתגים חיצוניים ושלטים משותפים יכולים ליצור חשיפה מיותרת. WIFIGATE מעבירה את נקודת השליטה פנימה, מצמצמת אמצעי גישה חשופים ומוסיפה גישה מהאפליקציה עם היסטוריית גישה ברורה.",
-      metaTitle: "בקרת גישה לגראז'ים ותריסי גלילה לעסקים | WIFIGATE",
+        "שלטים משותפים ומתגי קיר מאטים מפרצי שירות, אזורי טעינה וכניסות לחניה מקורה. WIFIGATE מעבירה את השליטה לטלפון, מהדקת את הגישה ומוסיפה היסטוריית גישה ברורה.",
+      metaTitle: "בקרת גישה לדלתות גראז' לעסקים | WIFIGATE",
       metaDescription:
-        "WIFIGATE מאפשרת לפתוח ולנהל גראז'ים ותריסי גלילה לעסקים מהטלפון. צמצמו מתגים חיצוניים חשופים, הפחיתו שלטים משותפים וקבלו שליטה מהאפליקציה עם היסטוריית גישה.",
+        "WIFIGATE מאפשרת לפתוח ולנהל דלתות גראז' לעסקים מהטלפון. צמצמו שלטים משותפים, האיצו גישת רכב ושירות וקבלו ניהול הרשאות עם היסטוריית גישה באפליקציה.",
+    },
+    rollerShutters: {
+      heroHeadline: "העבירו את השליטה בתריס הגלילה מהקיר אל האפליקציה",
+      heroSubline:
+        "מתגים חיצוניים ושלטים משותפים יכולים ליצור חשיפה מיותרת בחזית חנות, במחסן או בפתח שירות. WIFIGATE מעבירה את נקודת השליטה פנימה, מצמצמת אמצעי גישה חשופים ומוסיפה גישה מהאפליקציה עם היסטוריית גישה ברורה.",
+      metaTitle: "בקרת גישה לתריסי גלילה לעסקים | WIFIGATE",
+      metaDescription:
+        "WIFIGATE מאפשרת לפתוח ולנהל תריסי גלילה לעסקים מהטלפון. צמצמו מתגים חיצוניים חשופים, הפחיתו שלטים משותפים וקבלו שליטה מהאפליקציה עם היסטוריית גישה.",
     },
     residentialComplexes: {
       heroHeadline: "גישה לבניין שהדיירים אוהבים ושהוועד באמת יכול לשלוט בה",

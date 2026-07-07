@@ -33,6 +33,7 @@ const homeDataFiles = [
   "js/i18n.js",
   "js/accessibility.js",
   "js/language-polish.js",
+  "js/niche-split-overrides.js",
 ];
 
 const legalDataFiles = {
@@ -486,6 +487,8 @@ function buildHomeMeta(bundle, locale) {
       "WiFiGate",
       "smart access control",
       bundle.applications?.electricGates,
+      bundle.applications?.garageDoors,
+      bundle.applications?.rollerShutters,
       bundle.applications?.privateHomes,
       bundle.applications?.residentialComplexes,
       bundle.applications?.officeBuildings,

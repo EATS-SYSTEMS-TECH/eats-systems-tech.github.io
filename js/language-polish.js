@@ -148,7 +148,8 @@
       applications: {
         barrierGates: "שערי מחסום",
         hotels: "מלונות, Airbnb ואתרי אירוח",
-        rollerShutters: "גראז'ים ותריסי גלילה לעסקים",
+        garageDoors: "דלתות גראז' לעסקים",
+        rollerShutters: "תריסי גלילה לעסקים",
       },
       contact: {
         name: "איתי נוה",
@@ -339,7 +340,8 @@
     pl: {
       applications: {
         barrierGates: "Szlabany",
-        rollerShutters: "Garaże komercyjne i bramy rolowane",
+        garageDoors: "Komercyjne bramy garażowe",
+        rollerShutters: "Komercyjne rolety rolowane",
       },
       features: {
         items: {
