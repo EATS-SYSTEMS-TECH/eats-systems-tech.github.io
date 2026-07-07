@@ -724,9 +724,16 @@ function rewriteHomeInternalLinks($, locale) {
 }
 
 function rewriteLegalInternalLinks($, locale, pageKey) {
-  $(".nav__logo-link").attr("href", `${buildPagePath(locale, "home")}#home`);
-  $("a[href='../index.html']").attr("href", buildPagePath(locale, "home"));
-  $("a[href='../index.html#home']").attr("href", `${buildPagePath(locale, "home")}#home`);
+  const home = buildPagePath(locale, "home");
+
+  $(".nav__logo-link").attr("href", `${home}#home`);
+  $("a[href='../index.html']").attr("href", home);
+  $("a[href^='../index.html']").each((_, element) => {
+    const href = $(element).attr("href") || "";
+    const hashIndex = href.indexOf("#");
+    const hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
+    $(element).attr("href", `${home}${hash}`);
+  });
   $("a[href='../terms-and-conditions/']").attr("href", buildPagePath(locale, "terms-and-conditions"));
   $("a[href='../privacy-policy/']").attr("href", buildPagePath(locale, "privacy-policy"));
   $("a[href='../cookies/']").attr("href", buildPagePath(locale, "cookies"));
@@ -920,8 +927,25 @@ function setNicheList($, selector, items, className) {
   });
 }
 
+function getCircularAdjacentNiches(currentKey) {
+  const index = NICHE_DEFINITIONS.findIndex((entry) => entry.key === currentKey);
+  if (index === -1) {
+    return null;
+  }
+
+  const prevIndex = (index - 1 + NICHE_DEFINITIONS.length) % NICHE_DEFINITIONS.length;
+  const nextIndex = (index + 1) % NICHE_DEFINITIONS.length;
+
+  return {
+    previous: NICHE_DEFINITIONS[prevIndex],
+    next: NICHE_DEFINITIONS[nextIndex],
+  };
+}
+
 function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
   const { bundle, enBundle, chrome, content, contact, footer } = ctx;
+  const localeNicheContent = getNichePageContent(locale);
+  const defaultNicheContent = getNichePageContent(defaultLocale);
   const navText = (keyPath, fallback) =>
     getNestedValue(bundle, keyPath) || getNestedValue(enBundle, keyPath) || fallback;
   const assetPrefix = buildAssetPrefix(locale, niche.key);
@@ -948,6 +972,26 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
     .attr("alt", content.imageAlt)
     .attr("width", String(niche.image.heroWidth))
     .attr("height", String(niche.image.heroHeight));
+
+  const adjacentNiches = getCircularAdjacentNiches(niche.key);
+  if (adjacentNiches) {
+    const previousLabel = localeNicheContent?.niches?.[adjacentNiches.previous.key]?.label
+      || defaultNicheContent?.niches?.[adjacentNiches.previous.key]?.label
+      || adjacentNiches.previous.key;
+    const nextLabel = localeNicheContent?.niches?.[adjacentNiches.next.key]?.label
+      || defaultNicheContent?.niches?.[adjacentNiches.next.key]?.label
+      || adjacentNiches.next.key;
+
+    $("#niche-prev-link")
+      .attr("href", buildPagePath(locale, adjacentNiches.previous.key))
+      .attr("aria-label", previousLabel)
+      .attr("title", previousLabel);
+
+    $("#niche-next-link")
+      .attr("href", buildPagePath(locale, adjacentNiches.next.key))
+      .attr("aria-label", nextLabel)
+      .attr("title", nextLabel);
+  }
 
   $("#niche-benefits-title").text(chrome.benefitsTitle);
   setNicheList($, "#niche-benefits-list", content.bullets, "niche-benefit");

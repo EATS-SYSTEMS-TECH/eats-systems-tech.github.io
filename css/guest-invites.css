@@ -56,6 +56,7 @@
   font-size: clamp(2rem, 4vw, 3rem);
   line-height: 1.1;
   letter-spacing: -0.015em;
+  white-space: pre-line;
   color: #ffffff;
 }
 
@@ -155,9 +156,17 @@
   display: inline-block;
 }
 
-.guest-invites__dot--r { background: #f87171; }
-.guest-invites__dot--y { background: #fbbf24; }
-.guest-invites__dot--g { background: #34d399; }
+.guest-invites__dot--r {
+  background: #f87171;
+}
+
+.guest-invites__dot--y {
+  background: #fbbf24;
+}
+
+.guest-invites__dot--g {
+  background: #34d399;
+}
 
 .guest-invites__console-method {
   margin-inline-start: auto;
@@ -188,9 +197,17 @@
   white-space: pre;
 }
 
-.giapi-tok-url { color: #7dd3fc; }
-.giapi-tok-key { color: #c4b5fd; }
-.giapi-tok-val { color: #6ee7b7; }
+.giapi-tok-url {
+  color: #7dd3fc;
+}
+
+.giapi-tok-key {
+  color: #c4b5fd;
+}
+
+.giapi-tok-val {
+  color: #6ee7b7;
+}
 
 .guest-invites__console-caption {
   padding: 0.65rem 1.2rem 0.95rem;
@@ -549,6 +566,7 @@
 /* Responsive                                                            */
 /* ===================================================================== */
 @media (max-width: 900px) {
+
   .guest-invites__grid,
   .giapi-tool__grid {
     grid-template-columns: minmax(0, 1fr);
