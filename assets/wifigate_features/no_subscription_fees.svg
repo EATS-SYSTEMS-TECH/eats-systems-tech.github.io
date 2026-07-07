@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="No Subscription Fees icon">
+  <g stroke="#1463ff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <circle cx="256" cy="256" r="152"/>
+    <path d="M282 174c-13-10-32-15-50-10-18 4-32 18-32 35 0 19 16 29 37 35l38 12c21 7 37 17 37 36 0 24-22 42-53 42-19 0-38-6-52-18"/>
+    <path d="M256 146v220"/>
+  </g>
+</svg>

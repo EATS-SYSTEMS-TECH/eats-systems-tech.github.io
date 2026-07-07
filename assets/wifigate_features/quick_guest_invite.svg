@@ -1,0 +1,25 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+	<style>
+		.s0 { fill: none;stroke: #1463ff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 14 } 
+		.s1 { fill: #ffffff;stroke: #1463ff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 14 } 
+	</style>
+	<g>
+		<g>
+			<path fill-rule="evenodd" class="s0" d="m184 202c-18.8 0-34-15.2-34-34 0-18.8 15.2-34 34-34 18.8 0 34 15.2 34 34 0 18.8-15.2 34-34 34z"/>
+			<path fill-rule="evenodd" class="s0" d="m318 194c-18.8 0-34-15.2-34-34 0-18.8 15.2-34 34-34 18.8 0 34 15.2 34 34 0 18.8-15.2 34-34 34z"/>
+			<path class="s0" d="m130 292v-44c0-22 18-40 40-40h36c28 0 50 22 50 50v34"/>
+			<path class="s0" d="m130 292h86"/>
+			<path class="s0" d="m256 292v-42c0-22 18-40 40-40h36c28 0 50 22 50 50v32"/>
+			<path class="s0" d="m296 292h86"/>
+		</g>
+		<g>
+			<path fill-rule="evenodd" class="s1" d="m208 232h114c3.31 0 6 2.69 6 6v70c0 3.31-2.69 6-6 6h-114c-3.31 0-6-2.69-6-6v-70c0-3.31 2.69-6 6-6z"/>
+		</g>
+		<g>
+			<path fill-rule="evenodd" class="s0" d="m208 232h114c3.31 0 6 2.69 6 6v70c0 3.31-2.69 6-6 6h-114c-3.31 0-6-2.69-6-6v-70c0-3.31 2.69-6 6-6z"/>
+			<path class="s0" d="m212 244l53 38 53-38"/>
+			<path class="s0" d="m210 306l40-34"/>
+			<path class="s0" d="m320 305l-40-34"/>
+		</g>
+	</g>
+</svg>
