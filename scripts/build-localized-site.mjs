@@ -11,6 +11,7 @@ const siteOrigin = "https://wifigate.io";
 const defaultLocale = "en";
 const nowDate = new Date().toISOString().slice(0, 10);
 const guestInvitesPageKey = "Automated-Guest-Invites-API";
+const indexedPrimaryPageLocales = new Set([defaultLocale]);
 
 const homeTemplatePath = path.join(repoRoot, "templates", "index.template.html");
 const utilityTemplatePath = path.join(repoRoot, "templates", "wifigate-link.template.html");
@@ -231,6 +232,14 @@ function buildPageUrl(locale, pageKey = "home") {
   return `${siteOrigin}${buildPagePath(locale, pageKey)}`;
 }
 
+function isPrimaryPageIndexable(locale) {
+  return indexedPrimaryPageLocales.has(locale);
+}
+
+function getIndexablePrimaryLocaleOptions(localeOptions) {
+  return localeOptions.filter((option) => isPrimaryPageIndexable(option.code));
+}
+
 function buildOutputFilePath(locale, pageKey = "home") {
   return path.join(repoRoot, ...getOutputSegments(locale, pageKey), "index.html");
 }
@@ -356,6 +365,10 @@ function appendScripts($, scriptList, anchorSelector, locale, pageKey) {
 
 function replaceAlternateLinks($, localeOptions, pageKey) {
   $("link[rel='alternate']").remove();
+
+  if (!localeOptions.length) {
+    return;
+  }
 
   const canonical = $("link[rel='canonical']").first();
   const links = [
@@ -489,19 +502,20 @@ function buildLanguageSchemaTitle(locale, bundle) {
     : `WIFIGATE | ${bundle.footer.tagline}`;
 }
 
-function setHomeMeta($, bundle, locale, localeOptions) {
+function setHomeMeta($, bundle, locale, localeOptions, indexable) {
   const meta = buildHomeMeta(bundle, locale);
   const url = buildPageUrl(locale, "home");
   const footerTagline =
     getNestedValue(bundle, "footer.tagline") ||
     "Smart. Secure. Private. No subscription. No compromises.";
+  const alternateLocaleOptions = indexable ? getIndexablePrimaryLocaleOptions(localeOptions) : [];
 
   $("title").text(meta.title);
   setMetaByName($, "description", meta.description);
   setMetaByName($, "keywords", meta.keywords);
-  setRobotsMeta($, "index, follow");
+  setRobotsMeta($, indexable ? "index, follow" : "noindex, follow");
   $("link[rel='canonical']").attr("href", url);
-  replaceAlternateLinks($, localeOptions, "home");
+  replaceAlternateLinks($, alternateLocaleOptions, "home");
 
   setMetaByProperty($, "og:type", "website");
   setMetaByProperty($, "og:site_name", "WIFIGATE");
@@ -570,7 +584,7 @@ function setLegalMeta($, locale, pageKey, localeOptions, legalBundle) {
   setMetaByName($, "description", description);
   setRobotsMeta($, "noindex, follow");
   $("link[rel='canonical']").attr("href", url);
-  replaceAlternateLinks($, localeOptions, pageKey);
+  replaceAlternateLinks($, [], pageKey);
 
   setMetaByProperty($, "og:type", "article");
   setMetaByProperty($, "og:site_name", "WIFIGATE");
@@ -612,7 +626,7 @@ function setUtilityMeta($, locale, localeOptions, copy) {
   setMetaByName($, "description", copy.description);
   setRobotsMeta($, "noindex, follow");
   $("link[rel='canonical']").attr("href", url);
-  replaceAlternateLinks($, localeOptions, pageKey);
+  replaceAlternateLinks($, [], pageKey);
 
   setMetaByProperty($, "og:type", "website");
   setMetaByProperty($, "og:site_name", "WIFIGATE");
@@ -783,6 +797,7 @@ async function buildHomePages(homeData) {
 
   for (const localeOption of homeData.localeOptions) {
     const locale = localeOption.code;
+    const indexable = isPrimaryPageIndexable(locale);
     const bundle = getBundle(homeData.translations, locale);
     const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale);
     const $ = cheerio.load(template, { decodeEntities: false });
@@ -797,7 +812,7 @@ async function buildHomePages(homeData) {
     rewriteHomeInternalLinks($, locale);
     rewriteHomeNicheLinks($, locale);
     rewriteHomeGuestInvitesLink($, locale);
-    setHomeMeta($, bundle, locale, homeData.localeOptions);
+    setHomeMeta($, bundle, locale, homeData.localeOptions, indexable);
     insertPageDataScript(
       $,
       "hero-locale-data",
@@ -808,11 +823,13 @@ async function buildHomePages(homeData) {
     const outputFile = buildOutputFilePath(locale, "home");
     await writeOutputFile(outputFile, serialize($));
 
-    sitemapEntries.push({
-      loc: buildPageUrl(locale, "home"),
-      changefreq: "monthly",
-      priority: locale === defaultLocale ? "1.0" : "0.9",
-    });
+    if (indexable) {
+      sitemapEntries.push({
+        loc: buildPageUrl(locale, "home"),
+        changefreq: "monthly",
+        priority: "1.0",
+      });
+    }
   }
 
   return sitemapEntries;
@@ -1022,15 +1039,16 @@ function rewriteNicheInternalLinks($, locale) {
   $(".nav__logo-link").attr("aria-label", "Back to WIFIGATE home page");
 }
 
-function setNicheMeta($, ctx, niche, locale, localeOptions) {
+function setNicheMeta($, ctx, niche, locale, localeOptions, indexable) {
   const url = buildPageUrl(locale, niche.key);
   const homeUrl = buildPageUrl(locale, "home");
+  const alternateLocaleOptions = indexable ? getIndexablePrimaryLocaleOptions(localeOptions) : [];
 
   $("title").text(ctx.metaTitle);
   setMetaByName($, "description", ctx.metaDescription);
-  setRobotsMeta($, "index, follow");
+  setRobotsMeta($, indexable ? "index, follow" : "noindex, follow");
   $("link[rel='canonical']").attr("href", url);
-  replaceAlternateLinks($, localeOptions, niche.key);
+  replaceAlternateLinks($, alternateLocaleOptions, niche.key);
 
   setMetaByProperty($, "og:type", "article");
   setMetaByProperty($, "og:site_name", "WIFIGATE");
@@ -1080,6 +1098,7 @@ async function buildNichePages(homeData) {
   for (const niche of NICHE_DEFINITIONS) {
     for (const localeOption of homeData.localeOptions) {
       const locale = localeOption.code;
+      const indexable = isPrimaryPageIndexable(locale);
       const ctx = buildNicheContext(homeData, niche, locale);
       const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale);
       const $ = cheerio.load(template, { decodeEntities: false });
@@ -1090,7 +1109,7 @@ async function buildNichePages(homeData) {
       setLanguageSelector($, homeData.localeOptions, locale, niche.key);
       updateNicheStaticUi($, ctx, accessibilityBundle);
       rewriteNicheInternalLinks($, locale);
-      setNicheMeta($, ctx, niche, locale, homeData.localeOptions);
+      setNicheMeta($, ctx, niche, locale, homeData.localeOptions, indexable);
 
       const outputFile = buildOutputFilePath(locale, niche.key);
       await writeOutputFile(outputFile, serialize($));
@@ -1103,11 +1122,13 @@ async function buildNichePages(homeData) {
         );
       }
 
-      sitemapEntries.push({
-        loc: buildPageUrl(locale, niche.key),
-        changefreq: "monthly",
-        priority: locale === defaultLocale ? "0.8" : "0.7",
-      });
+      if (indexable) {
+        sitemapEntries.push({
+          loc: buildPageUrl(locale, niche.key),
+          changefreq: "monthly",
+          priority: "0.8",
+        });
+      }
     }
   }
 
@@ -1170,7 +1191,7 @@ function setGuestInvitesMeta($, locale, localeOptions, strings) {
   setMetaByName($, "description", strings.metaDescription);
   setRobotsMeta($, "noindex, follow");
   $("link[rel='canonical']").attr("href", url);
-  replaceAlternateLinks($, localeOptions, guestInvitesPageKey);
+  replaceAlternateLinks($, [], guestInvitesPageKey);
 
   setMetaByProperty($, "og:type", "website");
   setMetaByProperty($, "og:site_name", "WIFIGATE");
