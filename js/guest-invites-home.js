@@ -15,10 +15,10 @@
   const guestInvites = {
     en: {
       promo: {
-        eyebrow: "New · Developer API",
-        title: "Automated Guest Invites API",
+        eyebrow: "Developer · WIFIGATE API",
+        title: "WIFIGATE API\nfor automated guest invites",
         subtitle:
-          "Issue secure, time-limited guest access straight from your own systems. Connect your booking flow, CRM, or front desk and let WIFIGATE create invitations automatically — no manual steps, no shared remotes.",
+          "Use the WIFIGATE API to automate guest access from the moment a booking is confirmed, with secure, time-limited invitations that match each stay automatically.",
         point1Title: "Built for automation",
         point1Text:
           "Create guest invitations programmatically from any backend with a single authenticated request.",
@@ -231,10 +231,10 @@
 
     he: {
       promo: {
-        eyebrow: "חדש · API למפתחים",
-        title: "API להזמנות אורחים אוטומטיות",
+        eyebrow: "למפתחים · WIFIGATE API",
+        title: "WIFIGATE API\nלהזמנות אורחים אוטומטיות",
         subtitle:
-          "הנפיקו גישת אורחים מאובטחת ומוגבלת בזמן ישירות מהמערכות שלכם. חברו את תהליך ההזמנות, ה-CRM או הקבלה ותנו ל-WIFIGATE ליצור הזמנות באופן אוטומטי — בלי שלבים ידניים ובלי שלטים משותפים.",
+          "שלבו את WIFIGATE API בתהליך ההזמנות שלכם כך שברגע שמתקבלת הזמנת חופשה, המערכת תיצור אוטומטית קישור לגישת אורח מאובטחת ומוגבלת בזמן לפי משך השהות — בלי שלבים ידניים ובלי כרטיסים, מפתחות או אמצעים פיזיים אחרים.",
         point1Title: "בנוי לאוטומציה",
         point1Text:
           "צרו הזמנות אורחים באופן תכנותי מכל שרת אחורי באמצעות בקשה מאומתת אחת.",

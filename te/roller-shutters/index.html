@@ -63,12 +63,13 @@
 
   <link rel="stylesheet" href="../../css/styles.css?v=20260707j">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20260604c">
-  <link rel="stylesheet" href="../../css/niche.css?v=20260707a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20260708c">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20260405a" defer=""></script>
   
   <script src="../../js/locale-redirect.js?v=20260620a" defer=""></script>
   <script src="../../js/language-selector.js?v=20260620a" defer=""></script><script src="../../js/accessibility.js?v=20260616c" defer=""></script>
+  <script src="../../js/niche-page.js?v=20260708a" defer=""></script>
 
   <meta name="googlebot" content="index, follow">
   <meta property="og:site_name" content="WIFIGATE">
@@ -131,6 +132,7 @@
         <nav class="topbar-nav">
           <a href="/te/#home" class="nav-link nav__link" id="niche-nav-home">హోమ్</a>
           <a href="/te/#advantages" class="nav-link nav__link" id="niche-nav-features">ప్రయోజనాలు</a>
+          <a href="/te/#guest-invites-api" class="nav-link nav__link">WIFIGATE API</a>
           <a href="/te/#where" class="nav-link nav__link" id="niche-nav-where">ఎక్కడ</a>
           <a href="/te/#tutorials" class="nav-link nav__link" id="niche-nav-tutorials">ట్యుటోరియల్స్</a>
           <a href="/te/#contact" class="nav-link nav__link nav__contact-link" id="niche-nav-contact">మమ్మల్ని సంప్రదించండి</a>
@@ -313,23 +315,29 @@
     </nav>
 
     <section class="niche-hero" aria-labelledby="niche-title">
-      <div class="container niche-hero__grid">
-        <div class="niche-hero__copy">
-          <p class="niche-hero__eyebrow" id="niche-eyebrow">WIFIGATE వినియోగ సందర్భం</p>
+      <div class="container niche-hero__stack">
+        <header class="niche-hero__header">
           <h1 class="niche-hero__title" id="niche-title">వ్యాపారాలు మరియు దుకాణాల రోలర్ షట్టర్లకు స్మార్ట్, భద్రమైన నియంత్రణ</h1>
-          <p class="niche-hero__subtitle" id="niche-intro">దుకాణాలు మరియు వ్యాపారాల్లో రోలర్ షట్టర్లు తరచుగా రిమోట్లు, తాళాలు, బయట ఉన్న కీ బాక్స్ లేదా బాహ్య స్విచ్‌లతో నియంత్రించబడతాయి. ఇవి పోవచ్చు, మాజీ ఉద్యోగుల దగ్గర ఉండిపోవచ్చు, కాపీ చేయబడవచ్చు లేదా బయట కనిపించే యాక్సెస్ పాయింట్‌గా మారవచ్చు. WIFIGATE నియంత్రణను యాప్‌కు మార్చి, యాక్సెస్ నియంత్రణను లోపల మరింత రక్షితంగా ఉంచడానికి సహాయపడుతుంది, తద్వారా షట్టర్‌ను సులభంగా తెరవడం లేదా మూసివేయడం, ఉద్యోగులు మరియు సరఫరాదారుల అనుమతులను నిర్వహించడం, భౌతిక తాళాలు మరియు రిమోట్లపై ఆధారాన్ని తగ్గించడం సాధ్యం అవుతుంది.</p>
-          <div class="niche-hero__actions">
-            <a href="https://wa.me/972526996332" class="btn btn--primary niche-hero__cta" target="_blank" rel="noopener noreferrer" id="niche-hero-cta">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" style="vertical-align: middle; margin-inline-end: 8px;">
-                <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"></path>
-              </svg>
-              <span id="niche-hero-cta-label">WhatsApp ద్వారా సంప్రదించండి</span>
-            </a>
-            <a href="/te/#where" class="btn btn--ghost niche-hero__secondary" id="niche-hero-back">అన్ని వినియోగ సందర్భాలు చూడండి</a>
-          </div>
-        </div>
-        <div class="niche-hero__media">
+        </header>
+
+        <figure class="niche-hero__media">
+          <a href="/te/hotels-airbnb/" class="niche-hero__nav-button niche-hero__nav-button--prev" id="niche-prev-link" aria-label="హోటళ్లు, Airbnb మరియు అతిథి అపార్ట్‌మెంట్‌లు" title="హోటళ్లు, Airbnb మరియు అతిథి అపార్ట్‌మెంట్‌లు">
+            <svg class="niche-hero__nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M14.5 5L8 12L14.5 19"></path>
+            </svg>
+          </a>
+
           <img src="../../assets/wifigate_niche_pages/roller-shutters-hero.webp" alt="దుకాణ యజమాని ఫోన్‌తో దుకాణ రోలర్ షట్టర్ తెరుస్తున్నారు" class="niche-hero__image niche-hero__image--photo" id="niche-image" loading="eager" fetchpriority="high" decoding="async" width="1280" height="720">
+
+          <a href="/te/electric-gates/" class="niche-hero__nav-button niche-hero__nav-button--next" id="niche-next-link" aria-label="ఎలక్ట్రిక్ గేట్లు మరియు పార్కింగ్ బ్యారియర్లు" title="ఎలక్ట్రిక్ గేట్లు మరియు పార్కింగ్ బ్యారియర్లు">
+            <svg class="niche-hero__nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M9.5 5L16 12L9.5 19"></path>
+            </svg>
+          </a>
+        </figure>
+
+        <div class="niche-hero__intro-card">
+          <p class="niche-hero__subtitle" id="niche-intro">దుకాణాలు మరియు వ్యాపారాల్లో రోలర్ షట్టర్లు తరచుగా రిమోట్లు, తాళాలు, బయట ఉన్న కీ బాక్స్ లేదా బాహ్య స్విచ్‌లతో నియంత్రించబడతాయి. ఇవి పోవచ్చు, మాజీ ఉద్యోగుల దగ్గర ఉండిపోవచ్చు, కాపీ చేయబడవచ్చు లేదా బయట కనిపించే యాక్సెస్ పాయింట్‌గా మారవచ్చు. WIFIGATE నియంత్రణను యాప్‌కు మార్చి, యాక్సెస్ నియంత్రణను లోపల మరింత రక్షితంగా ఉంచడానికి సహాయపడుతుంది, తద్వారా షట్టర్‌ను సులభంగా తెరవడం లేదా మూసివేయడం, ఉద్యోగులు మరియు సరఫరాదారుల అనుమతులను నిర్వహించడం, భౌతిక తాళాలు మరియు రిమోట్లపై ఆధారాన్ని తగ్గించడం సాధ్యం అవుతుంది.</p>
         </div>
       </div>
     </section>
@@ -448,7 +456,6 @@
       </ul>
     </section>
   </aside>
-
 
 
 </body></html>
