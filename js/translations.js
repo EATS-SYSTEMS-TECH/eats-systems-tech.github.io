@@ -15,7 +15,7 @@ var translations = {
       rotator: {
         phrases: ["Easy to Use", "Complete Privacy", "No Subscriptions"]
       },
-      subtitle: "A smart access-control system that is secure, simple, and free of monthly fees.",
+      subtitle: "Smart access control for gates, buildings, parking entrances, and private homes. Secure, local-first, and free of monthly fees.",
       cta: {
         contact: "Contact Us",
         about: "Tutorials"
@@ -68,7 +68,7 @@ var translations = {
     },
     action: {
       title: "Where Is WIFIGATE Suitable for Use?",
-      subtitle: "WIFIGATE is suitable for a wide range of environments and provides a smart, secure, and convenient access-management solution, from private applications to commercial and organizational settings."
+      subtitle: "WIFIGATE gives owners, residents, staff, and guests phone-based access to gates, doors, and shared entrances without shared remotes, exposed keypads, or monthly subscriptions."
     },
     tabs: {
       why: "Why",
@@ -111,7 +111,7 @@ var translations = {
     },
     about: {
       title: "About Us",
-      text1: "WIFIGATE was founded to provide a secure, convenient, and accessible access-control solution.",
+      text1: "WIFIGATE was created to deliver secure, convenient access control for gates, buildings, and private properties.",
       text2: "We develop the hardware and software end to end, so every part of the system works together precisely and delivers high reliability, ease of use, and an especially high level of security."
     },
     contact: {

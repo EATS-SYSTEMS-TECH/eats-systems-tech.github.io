@@ -9,7 +9,7 @@ import { NICHE_DEFINITIONS, NICHE_CHROME, NICHE_OVERRIDES } from "./niche-conten
 const repoRoot = process.cwd();
 const siteOrigin = "https://wifigate.io";
 const defaultLocale = "en";
-const nowDate = "2026-06-20";
+const nowDate = new Date().toISOString().slice(0, 10);
 const guestInvitesPageKey = "Automated-Guest-Invites-API";
 
 const homeTemplatePath = path.join(repoRoot, "templates", "index.template.html");
@@ -390,6 +390,11 @@ function setMetaByProperty($, property, content) {
   element.attr("content", content);
 }
 
+function setRobotsMeta($, robotsContent, googlebotContent = robotsContent) {
+  setMetaByName($, "robots", robotsContent);
+  setMetaByName($, "googlebot", googlebotContent);
+}
+
 function replaceStructuredData($, data) {
   $("script[type='application/ld+json']").remove();
   $("head").append(`\n  <script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n  </script>`);
@@ -454,16 +459,19 @@ function getHomeSeoTitle(locale, bundle) {
 }
 
 function buildHomeMeta(bundle, locale) {
-  const title = getHomeSeoTitle(locale, bundle);
-  const description = bundle.action.subtitle || bundle.hero.subtitle;
+  const overrides = homeSeoLocales[locale] || {};
+  const title = overrides.title || getHomeSeoTitle(locale, bundle);
+  const description = overrides.description || bundle.action.subtitle || bundle.hero.subtitle;
 
   return {
     title,
     description,
     ogTitle: title,
     ogDescription: description,
-    keywords: [
+    keywords: overrides.keywords || [
       "WIFIGATE",
+      "WiFiGate",
+      "smart access control",
       bundle.applications?.electricGates,
       bundle.applications?.privateHomes,
       bundle.applications?.residentialComplexes,
@@ -484,14 +492,19 @@ function buildLanguageSchemaTitle(locale, bundle) {
 function setHomeMeta($, bundle, locale, localeOptions) {
   const meta = buildHomeMeta(bundle, locale);
   const url = buildPageUrl(locale, "home");
+  const footerTagline =
+    getNestedValue(bundle, "footer.tagline") ||
+    "Smart. Secure. Private. No subscription. No compromises.";
 
   $("title").text(meta.title);
   setMetaByName($, "description", meta.description);
   setMetaByName($, "keywords", meta.keywords);
+  setRobotsMeta($, "index, follow");
   $("link[rel='canonical']").attr("href", url);
   replaceAlternateLinks($, localeOptions, "home");
 
   setMetaByProperty($, "og:type", "website");
+  setMetaByProperty($, "og:site_name", "WIFIGATE");
   setMetaByProperty($, "og:url", url);
   setMetaByProperty($, "og:title", meta.ogTitle);
   setMetaByProperty($, "og:description", meta.ogDescription);
@@ -502,33 +515,47 @@ function setHomeMeta($, bundle, locale, localeOptions) {
   setMetaByProperty($, "twitter:description", meta.ogDescription);
   setMetaByProperty($, "twitter:image", pageImages.home);
 
-  replaceStructuredData($, {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: "WIFIGATE",
-    description: meta.description,
-    inLanguage: locale,
-    url,
-    image: pageImages.home,
-    brand: {
-      "@type": "Brand",
-      name: "EATS SYSTEMS TECH",
-    },
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      seller: {
+  replaceStructuredData($, [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "WIFIGATE",
+      alternateName: "WiFiGate",
+      url: siteOrigin,
+      inLanguage: locale,
+      description: meta.description,
+      publisher: {
         "@type": "Organization",
         name: "EATS SYSTEMS TECH",
+        url: siteOrigin,
+        logo: {
+          "@type": "ImageObject",
+          url: "https://wifigate.io/assets/img/logo.png",
+        },
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "5",
-      reviewCount: "1",
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: "WIFIGATE",
+      alternateName: "WiFiGate",
+      description: meta.description,
+      category: "Access control system",
+      inLanguage: locale,
+      url,
+      image: pageImages.home,
+      slogan: footerTagline,
+      brand: {
+        "@type": "Brand",
+        name: "WIFIGATE",
+      },
+      manufacturer: {
+        "@type": "Organization",
+        name: "EATS SYSTEMS TECH",
+        url: siteOrigin,
+      },
     },
-  });
+  ]);
 
   return meta;
 }
@@ -541,10 +568,12 @@ function setLegalMeta($, locale, pageKey, localeOptions, legalBundle) {
 
   $("title").text(title);
   setMetaByName($, "description", description);
+  setRobotsMeta($, "noindex, follow");
   $("link[rel='canonical']").attr("href", url);
   replaceAlternateLinks($, localeOptions, pageKey);
 
   setMetaByProperty($, "og:type", "article");
+  setMetaByProperty($, "og:site_name", "WIFIGATE");
   setMetaByProperty($, "og:url", url);
   setMetaByProperty($, "og:title", title);
   setMetaByProperty($, "og:description", description);
@@ -581,10 +610,12 @@ function setUtilityMeta($, locale, localeOptions, copy) {
 
   $("title").text(title);
   setMetaByName($, "description", copy.description);
+  setRobotsMeta($, "noindex, follow");
   $("link[rel='canonical']").attr("href", url);
   replaceAlternateLinks($, localeOptions, pageKey);
 
   setMetaByProperty($, "og:type", "website");
+  setMetaByProperty($, "og:site_name", "WIFIGATE");
   setMetaByProperty($, "og:url", url);
   setMetaByProperty($, "og:title", copy.socialTitle);
   setMetaByProperty($, "og:description", copy.description);
@@ -627,8 +658,12 @@ function updateUtilityPageStaticUi($, copy) {
 }
 
 function updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale) {
+  const semanticHeroText = (bundle.action.subtitle || bundle.hero.subtitle || "WIFIGATE smart access control").trim();
+  const normalizedHeroText = semanticHeroText.replace(/^wifigate[\s.:,-]*/i, "");
+
   $(".nav__toggle").attr("aria-label", "Toggle navigation menu");
   $("#language-button").attr("aria-label", "Select language");
+  $("#hero-search-text").text(normalizedHeroText ? `WIFIGATE. ${normalizedHeroText}` : "WIFIGATE");
   $("#hero-rotator").text(bundle.hero.rotator.phrases[0]);
   $("#hero-mute-toggle").attr("aria-label", bundle.hero.media.unmute);
   $("#hero-mute-toggle").attr("title", bundle.hero.media.unmute);
@@ -709,6 +744,7 @@ function buildRedirectPage(targetPath, canonicalUrl) {
   <meta charset="UTF-8" />
   <title>Redirecting...</title>
   <meta name="robots" content="noindex, follow" />
+  <meta name="googlebot" content="noindex, follow" />
   <link rel="canonical" href="${canonicalUrl}" />
   <meta http-equiv="refresh" content="0; url=${targetPath}" />
   <script>window.location.replace(${JSON.stringify(targetPath)});</script>
@@ -728,7 +764,7 @@ function buildSitemap(urlEntries) {
       (entry) => [
         "  <url>",
         `    <loc>${entry.loc}</loc>`,
-        `    <lastmod>${nowDate}</lastmod>`,
+        `    <lastmod>${entry.lastmod || nowDate}</lastmod>`,
         `    <changefreq>${entry.changefreq}</changefreq>`,
         `    <priority>${entry.priority}</priority>`,
         "  </url>",
@@ -783,8 +819,6 @@ async function buildHomePages(homeData) {
 }
 
 async function buildLegalPages(homeData, legalCollections) {
-  const sitemapEntries = [];
-
   for (const [pageKey, templatePath] of Object.entries(legalTemplatePaths)) {
     const template = await fs.readFile(templatePath, "utf8");
     const translations = legalCollections[pageKey];
@@ -807,21 +841,13 @@ async function buildLegalPages(homeData, legalCollections) {
 
       const outputFile = buildOutputFilePath(locale, pageKey);
       await writeOutputFile(outputFile, serialize($));
-
-      sitemapEntries.push({
-        loc: buildPageUrl(locale, pageKey),
-        changefreq: "yearly",
-        priority: locale === defaultLocale ? "0.7" : "0.6",
-      });
     }
   }
-
-  return sitemapEntries;
+  return [];
 }
 
 async function buildUtilityPages(homeData) {
   const template = await fs.readFile(utilityTemplatePath, "utf8");
-  const sitemapEntries = [];
 
   for (const localeOption of homeData.localeOptions) {
     const locale = localeOption.code;
@@ -835,15 +861,9 @@ async function buildUtilityPages(homeData) {
 
     const outputFile = buildOutputFilePath(locale, "wifigate-link");
     await writeOutputFile(outputFile, serialize($));
-
-    sitemapEntries.push({
-      loc: buildPageUrl(locale, "wifigate-link"),
-      changefreq: "yearly",
-      priority: locale === defaultLocale ? "0.6" : "0.5",
-    });
   }
 
-  return sitemapEntries;
+  return [];
 }
 
 function getNicheChrome(locale) {
@@ -1008,10 +1028,12 @@ function setNicheMeta($, ctx, niche, locale, localeOptions) {
 
   $("title").text(ctx.metaTitle);
   setMetaByName($, "description", ctx.metaDescription);
+  setRobotsMeta($, "index, follow");
   $("link[rel='canonical']").attr("href", url);
   replaceAlternateLinks($, localeOptions, niche.key);
 
   setMetaByProperty($, "og:type", "article");
+  setMetaByProperty($, "og:site_name", "WIFIGATE");
   setMetaByProperty($, "og:url", url);
   setMetaByProperty($, "og:title", ctx.metaTitle);
   setMetaByProperty($, "og:description", ctx.metaDescription);
@@ -1146,10 +1168,12 @@ function setGuestInvitesMeta($, locale, localeOptions, strings) {
 
   $("title").text(strings.metaTitle);
   setMetaByName($, "description", strings.metaDescription);
+  setRobotsMeta($, "noindex, follow");
   $("link[rel='canonical']").attr("href", url);
   replaceAlternateLinks($, localeOptions, guestInvitesPageKey);
 
   setMetaByProperty($, "og:type", "website");
+  setMetaByProperty($, "og:site_name", "WIFIGATE");
   setMetaByProperty($, "og:url", url);
   setMetaByProperty($, "og:title", strings.metaTitle);
   setMetaByProperty($, "og:description", strings.metaDescription);
@@ -1186,7 +1210,6 @@ function setGuestInvitesMeta($, locale, localeOptions, strings) {
 
 async function buildGuestInvitesPages(homeData) {
   const template = await fs.readFile(guestInvitesTemplatePath, "utf8");
-  const sitemapEntries = [];
 
   for (const localeOption of homeData.localeOptions) {
     const locale = localeOption.code;
@@ -1207,15 +1230,9 @@ async function buildGuestInvitesPages(homeData) {
 
     const outputFile = buildOutputFilePath(locale, guestInvitesPageKey);
     await writeOutputFile(outputFile, serialize($));
-
-    sitemapEntries.push({
-      loc: buildPageUrl(locale, guestInvitesPageKey),
-      changefreq: "monthly",
-      priority: locale === defaultLocale ? "0.8" : "0.7",
-    });
   }
 
-  return sitemapEntries;
+  return [];
 }
 
 async function main() {

@@ -1,6 +1,8 @@
 export const homeSeoLocales = {
   en: {
-    title: "WIFIGATE | Smart Access Control for Gates, Buildings, and Homes"
+    title: "WIFIGATE | Smart Access Control for Gates, Buildings, and Homes",
+    description: "WIFIGATE is a local-first smart access control system for gates, doors, buildings, parking entrances, and private homes. Secure phone access, guest invites, and no monthly fees.",
+    keywords: "WIFIGATE, WiFiGate, smart access control, gate access control, building access control, door access control, guest access, no monthly fees"
   },
   he: {
     title: "WIFIGATE | בקרת גישה חכמה לשערים, בניינים ובתים"
