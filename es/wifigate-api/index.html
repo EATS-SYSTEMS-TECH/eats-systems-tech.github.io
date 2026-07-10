@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="es" dir="ltr"><head>
+    <meta charset="utf-8">
+    <title>Invitación de WiFiGate</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Abre tu invitación de WiFiGate de forma segura en la aplicación.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://wifigate.io/es/wifigate-api/">
+    <meta property="og:title" content="Invitación de WiFiGate">
+    <meta property="og:description" content="Abre tu invitación de WiFiGate de forma segura en la aplicación.">
+    <meta property="og:image" content="https://wifigate.io/logo-1024.png">
+    <meta property="og:image:width" content="1024">
+    <meta property="og:image:height" content="1024">
+    <meta property="og:url" content="https://wifigate.io/es/wifigate-api/">
+    <meta property="og:type" content="website">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Invitación de WiFiGate">
+    <meta property="twitter:description" content="Abre tu invitación de WiFiGate de forma segura en la aplicación.">
+    <meta property="twitter:image" content="https://wifigate.io/logo-1024.png">
+    <style>
+        :root {
+            --bg: #f7f7f4;
+            --panel: rgba(255, 255, 255, 0.94);
+            --text: #10241d;
+            --muted: #5f6c67;
+            --accent: #0f766e;
+            --accent-strong: #115e59;
+            --border: rgba(16, 36, 29, 0.08);
+            --shadow: 0 18px 48px rgba(16, 36, 29, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            display: none;
+            place-items: center;
+            padding: 24px;
+        }
+
+        body.ready {
+            display: grid;
+        }
+
+        .card {
+            width: min(100%, 420px);
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            padding: 28px 24px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 84px;
+            height: 84px;
+            border-radius: 24px;
+            display: block;
+            margin: 0 auto 18px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(24px, 5vw, 32px);
+            line-height: 1.08;
+        }
+
+        p {
+            margin: 14px 0 0;
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.55;
+        }
+
+        .actions {
+            display: grid;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .button,
+        .secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 50px;
+            border-radius: 999px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+        }
+
+        .button {
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            color: #ffffff;
+            box-shadow: 0 10px 24px rgba(15, 118, 110, 0.22);
+        }
+
+        .secondary {
+            border: 1px solid rgba(16, 36, 29, 0.12);
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.82);
+        }
+
+        .button:hover,
+        .secondary:hover {
+            transform: translateY(-1px);
+        }
+    </style>
+    <script src="../../js/locale-redirect.js?v=20260620a" defer=""></script>
+    <script id="wifigate-link-copy" type="application/json">{"statusOpening":"Estamos intentando abrir tu invitación en la aplicación.","statusMissing":"A este enlace de invitación le faltan los datos de acceso. Pídele al remitente que lo comparta de nuevo.","statusFallback":"Si WiFiGate no se abrió automáticamente, usa el botón de abajo.","copyButton":"Copiar enlace de la app","copiedButton":"Enlace de la app copiado"}</script>
+    <script>
+        const WIFIGATE_LINK_DEFAULT_COPY = {
+            statusOpening: "We are trying to open your invitation in the app.",
+            statusMissing: "This invitation link is missing the access details. Ask the sender to share it again.",
+            statusFallback: "If WiFiGate did not open automatically, use the button below.",
+            copyButton: "Copy app link",
+            copiedButton: "Copied app link"
+        };
+
+        function getUtilityPageCopy() {
+            const script = document.getElementById("wifigate-link-copy");
+            if (!script) {
+                return WIFIGATE_LINK_DEFAULT_COPY;
+            }
+
+            try {
+                return {
+                    ...WIFIGATE_LINK_DEFAULT_COPY,
+                    ...JSON.parse(script.textContent || "{}")
+                };
+            } catch (error) {
+                return WIFIGATE_LINK_DEFAULT_COPY;
+            }
+        }
+
+        function firstNonEmpty() {
+            for (const value of arguments) {
+                if (typeof value === "string" && value.trim()) {
+                    return value.trim();
+                }
+            }
+            return "";
+        }
+
+        function buildDeepLink() {
+            const currentUrl = new URL(window.location.href);
+            const params = currentUrl.searchParams;
+            const directLink = firstNonEmpty(params.get("link"));
+            if (directLink) {
+                return directLink;
+            }
+
+            const pathSegments = currentUrl.pathname
+                .split("/")
+                .filter(Boolean)
+                .map((segment) => decodeURIComponent(segment));
+
+            const groupId = firstNonEmpty(
+                params.get("gid"),
+                params.get("groupId"),
+                pathSegments[0] === "group" ? pathSegments[1] : ""
+            );
+
+            const dualControlId = firstNonEmpty(
+                params.get("dcid"),
+                params.get("dualControlId"),
+                pathSegments[0] === "dual-control" ? pathSegments[1] : ""
+            );
+
+            if (dualControlId) {
+                params.delete("link");
+                if (!params.has("dcid")) {
+                    params.set("dcid", dualControlId);
+                }
+                if (!params.has("id")) {
+                    params.set("id", dualControlId);
+                }
+
+                const query = params.toString();
+                return `wifigate://dual-control/${encodeURIComponent(dualControlId)}${query ? `?${query}` : ""}`;
+            }
+
+            if (groupId) {
+                params.delete("link");
+                if (!params.has("gid")) {
+                    params.set("gid", groupId);
+                }
+                if (!params.has("id")) {
+                    params.set("id", groupId);
+                }
+
+                const query = params.toString();
+                return `wifigate://group/${encodeURIComponent(groupId)}${query ? `?${query}` : ""}`;
+            }
+
+            const gateId = firstNonEmpty(
+                params.get("i"),
+                params.get("id"),
+                params.get("chip")
+            );
+
+            const routeId = gateId || (params.get("ep") ? "invite" : "");
+            if (!routeId) {
+                return "";
+            }
+
+            params.delete("link");
+            if (!params.has("id")) {
+                params.set("id", routeId);
+            }
+
+            const query = params.toString();
+            return `wifigate://gate/${encodeURIComponent(routeId)}${query ? `?${query}` : ""}`;
+        }
+
+        function revealFallback(deepLink, statusText) {
+            const copy = getUtilityPageCopy();
+            const status = document.getElementById("status");
+            const openApp = document.getElementById("open-app");
+            const copyLink = document.getElementById("copy-link");
+
+            status.textContent = statusText || copy.statusOpening;
+            openApp.hidden = !deepLink;
+            copyLink.hidden = !deepLink;
+            openApp.href = deepLink || "#";
+            copyLink.textContent = copy.copyButton;
+            copyLink.onclick = async function () {
+                if (!deepLink) {
+                    return;
+                }
+
+                try {
+                    await navigator.clipboard.writeText(deepLink);
+                    copyLink.textContent = copy.copiedButton;
+                } catch (error) {
+                    console.error("Failed to copy deep link", error);
+                }
+            };
+
+            document.body.classList.add("ready");
+        }
+
+        function openImmediately(deepLink) {
+            const copy = getUtilityPageCopy();
+
+            if (!deepLink) {
+                revealFallback("", copy.statusMissing);
+                return;
+            }
+
+            window.setTimeout(function () {
+                revealFallback(deepLink, copy.statusFallback);
+            }, 900);
+
+            window.setTimeout(function () {
+                window.location.replace(deepLink);
+            }, 40);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            openImmediately(buildDeepLink());
+        });
+    </script>
+
+  <meta name="googlebot" content="noindex, follow">
+  <meta property="og:site_name" content="WIFIGATE">
+  <meta property="twitter:url" content="https://wifigate.io/es/wifigate-api/">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Invitación de WiFiGate",
+  "description": "Abre tu invitación de WiFiGate de forma segura en la aplicación.",
+  "inLanguage": "es",
+  "url": "https://wifigate.io/es/wifigate-api/",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "WIFIGATE",
+    "url": "https://wifigate.io"
+  }
+}
+  </script></head>
+
+<body>
+    <main class="card" id="main-content">
+        <img class="logo" src="../../logo-1024.png" alt="WiFiGate">
+        <h1 id="page-title">Abriendo WiFiGate</h1>
+        <p id="status">Estamos intentando abrir tu invitación en la aplicación.</p>
+        <div class="actions">
+            <a id="open-app" class="button" href="#" hidden="">Abrir en WiFiGate</a>
+            <button id="copy-link" class="secondary" type="button" hidden="">Copiar enlace de la app</button>
+        </div>
+    </main>
+
+
+</body></html>

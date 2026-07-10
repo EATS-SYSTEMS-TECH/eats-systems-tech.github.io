@@ -1,16 +1,17 @@
+import * as cheerio from "cheerio";
 import fs from "node:fs/promises";
 import path from "node:path";
 import vm from "node:vm";
-import * as cheerio from "cheerio";
-import { wifigateLinkLocales } from "./wifigate-link-locales.mjs";
 import { NICHE_CHROME } from "./niche-content.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
+import { wifigateLinkLocales } from "./wifigate-link-locales.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = "https://wifigate.io";
 const defaultLocale = "en";
 const nowDate = new Date().toISOString().slice(0, 10);
 const guestInvitesPageKey = "Automated-Guest-Invites-API";
+const utilityPageKeys = ["wifigate-link", "wifigate-api"];
 
 const homeTemplatePath = path.join(repoRoot, "templates", "index.template.html");
 const utilityTemplatePath = path.join(repoRoot, "templates", "wifigate-link.template.html");
@@ -617,8 +618,7 @@ function getUtilityLocaleCopy(locale) {
   return wifigateLinkLocales[locale] || wifigateLinkLocales[defaultLocale];
 }
 
-function setUtilityMeta($, locale, localeOptions, copy) {
-  const pageKey = "wifigate-link";
+function setUtilityMeta($, locale, localeOptions, copy, pageKey) {
   const url = buildPageUrl(locale, pageKey);
   const title = copy.socialTitle || copy.pageTitle;
 
@@ -877,15 +877,18 @@ async function buildUtilityPages(homeData) {
   for (const localeOption of homeData.localeOptions) {
     const locale = localeOption.code;
     const copy = getUtilityLocaleCopy(locale);
-    const $ = cheerio.load(template, { decodeEntities: false });
 
-    setBodyDirection($, locale);
-    rewriteStaticAssets($, locale, "wifigate-link");
-    updateUtilityPageStaticUi($, copy);
-    setUtilityMeta($, locale, homeData.localeOptions, copy);
+    for (const pageKey of utilityPageKeys) {
+      const $ = cheerio.load(template, { decodeEntities: false });
 
-    const outputFile = buildOutputFilePath(locale, "wifigate-link");
-    await writeOutputFile(outputFile, serialize($));
+      setBodyDirection($, locale);
+      rewriteStaticAssets($, locale, pageKey);
+      updateUtilityPageStaticUi($, copy);
+      setUtilityMeta($, locale, homeData.localeOptions, copy, pageKey);
+
+      const outputFile = buildOutputFilePath(locale, pageKey);
+      await writeOutputFile(outputFile, serialize($));
+    }
   }
 
   return [];
