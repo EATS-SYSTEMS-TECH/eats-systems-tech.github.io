@@ -489,11 +489,15 @@ function setBodyDirection($, locale) {
   }
 }
 
-function buildHomeMeta(locale) {
+function buildHomeMeta(locale, bundle) {
   const home = getNichePageContent(locale).home;
   const enHome = NICHE_PAGE_LOCALES[defaultLocale].home;
   const title = home.seoTitle;
-  const description = home.seoDescription;
+  const bundleDescription = getNestedValue(bundle, "hero.subtitle") || home.seoDescription;
+  const description =
+    locale === defaultLocale
+      ? "WIFIGATE (WiFi Gate) is smart access control for gates, buildings, parking entrances, and private homes. Secure, private, encrypted, and free of monthly fees."
+      : bundleDescription;
 
   return {
     title,
@@ -505,7 +509,7 @@ function buildHomeMeta(locale) {
 }
 
 function setHomeMeta($, bundle, locale, localeOptions) {
-  const meta = buildHomeMeta(locale);
+  const meta = buildHomeMeta(locale, bundle);
   const url = buildPageUrl(locale, "home");
   const footerTagline =
     getNestedValue(bundle, "footer.tagline") ||

@@ -15,7 +15,7 @@ var translations = {
       rotator: {
         phrases: ["Easy to Use", "Complete Privacy", "No Subscriptions"]
       },
-      subtitle: "Smart access control for gates, buildings, parking entrances, and private homes. Secure, local-first, and free of monthly fees.",
+      subtitle: "Smart access control for gates, buildings, parking entrances, and private homes. Secure, private, encrypted, and free of monthly fees.",
       cta: {
         contact: "Contact Us",
         about: "Tutorials"
@@ -119,7 +119,7 @@ var translations = {
       subtitle: "We would be happy to learn about your needs, present the system's capabilities, and see together whether WIFIGATE is the right fit for you.",
       ctaTitle: "Interested in WIFIGATE?",
       ctaText: "Send us a WhatsApp message to receive a price quote, full system details, and a fit assessment for your needs.",
-      ctaButton: "Contact via WhatsApp",
+      ctaButton: "WhatsApp @WIFIAGTE",
       terms: "Terms & Conditions",
       name: "Itay Nave",
       whatsapp: "WhatsApp"

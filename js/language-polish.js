@@ -602,6 +602,225 @@
     },
   };
 
+  const WHATSAPP_HANDLE_LABEL = "WhatsApp @WIFIAGTE";
+
+  const marketingCopyOverrides = {
+    en: {
+      heroSubtitle: "Smart access control for gates, buildings, parking entrances, and private homes. Secure, private, encrypted, and free of monthly fees.",
+      noSimRouterText: "WiFiGate works directly with the device, with no SIM card, no internet plan, and no external Wi-Fi router required.",
+      stabilityText: "A streamlined architecture keeps access responsive and dependable while supporting secure, private, encrypted operation.",
+      securityText: "WiFiGate is designed around secure handling, encrypted storage, and private operation.",
+      storyBadge: "Encrypted Access",
+    },
+    he: {
+      noSimRouterText: "WIFIGATE פועלת ישירות מול ההתקן, בלי כרטיס SIM, בלי חבילת אינטרנט ובלי צורך בנתב Wi-Fi חיצוני.",
+      stabilityText: "ארכיטקטורה יעילה שומרת על גישה מהירה ואמינה, תוך שמירה על אבטחה, פרטיות והצפנה.",
+      securityText: "WIFIGATE מתוכננת סביב טיפול מאובטח, אחסון מוצפן ושמירה על פרטיות.",
+      storyBadge: "גישה מוצפנת",
+    },
+    es: {
+      noSimRouterText: "WIFIGATE funciona directamente con el dispositivo, sin tarjeta SIM, plan de Internet ni router Wi-Fi externo.",
+      stabilityText: "Una arquitectura optimizada mantiene el acceso ágil y confiable, con una operación segura, privada y cifrada.",
+      securityText: "WIFIGATE está diseñada en torno a una gestión segura, almacenamiento cifrado y operación privada.",
+      storyBadge: "Acceso cifrado",
+    },
+    fr: {
+      noSimRouterText: "WIFIGATE fonctionne directement avec l'appareil, sans carte SIM, sans forfait Internet et sans routeur Wi-Fi externe.",
+      stabilityText: "Une architecture optimisée maintient un accès réactif et fiable, avec un fonctionnement sécurisé, privé et chiffré.",
+      securityText: "WIFIGATE est conçue autour d'une gestion sécurisée, d'un stockage chiffré et d'un fonctionnement privé.",
+      storyBadge: "Accès chiffré",
+    },
+    de: {
+      noSimRouterText: "WIFIGATE arbeitet direkt mit dem Gerät, ohne SIM-Karte, ohne Internettarif und ohne externen WLAN-Router.",
+      stabilityText: "Eine optimierte Architektur hält den Zugriff reaktionsschnell und zuverlässig und unterstützt einen sicheren, privaten und verschlüsselten Betrieb.",
+      securityText: "WIFIGATE ist auf sichere Handhabung, verschlüsselte Speicherung und privaten Betrieb ausgelegt.",
+      storyBadge: "Verschlüsselter Zugang",
+    },
+    nl: {
+      noSimRouterText: "WIFIGATE werkt rechtstreeks met het apparaat, zonder simkaart, internetabonnement of externe Wi-Fi-router.",
+      stabilityText: "Een gestroomlijnde architectuur houdt de toegang responsief en betrouwbaar en ondersteunt een veilige, private en versleutelde werking.",
+      securityText: "WIFIGATE is ontworpen rond veilige verwerking, versleutelde opslag en private werking.",
+      storyBadge: "Versleutelde toegang",
+    },
+    it: {
+      noSimRouterText: "WIFIGATE funziona direttamente con il dispositivo, senza scheda SIM, senza piano Internet e senza router Wi-Fi esterno.",
+      stabilityText: "Un'architettura ottimizzata mantiene l'accesso reattivo e affidabile, supportando un funzionamento sicuro, privato e crittografato.",
+      securityText: "WIFIGATE è progettata attorno a una gestione sicura, archiviazione crittografata e funzionamento privato.",
+      storyBadge: "Accesso crittografato",
+    },
+    pt: {
+      noSimRouterText: "A WIFIGATE funciona diretamente com o dispositivo, sem cartão SIM, sem plano de internet e sem necessidade de roteador Wi-Fi externo.",
+      stabilityText: "Uma arquitetura otimizada mantém o acesso ágil e confiável, com uma operação segura, privada e criptografada.",
+      securityText: "A WIFIGATE foi concebida com foco em manuseio seguro, armazenamento criptografado e operação privada.",
+      storyBadge: "Acesso criptografado",
+    },
+    pl: {
+      noSimRouterText: "WIFIGATE działa bezpośrednio z urządzeniem, bez karty SIM, bez pakietu internetowego i bez zewnętrznego routera Wi-Fi.",
+      stabilityText: "Usprawniona architektura utrzymuje szybki i niezawodny dostęp, wspierając bezpieczne, prywatne i szyfrowane działanie.",
+      securityText: "WIFIGATE została zaprojektowana z myślą o bezpiecznej obsłudze, szyfrowanym przechowywaniu i prywatnym działaniu.",
+      storyBadge: "Szyfrowany dostęp",
+    },
+    no: {
+      noSimRouterText: "WIFIGATE fungerer direkte med enheten, uten SIM-kort, internettabonnement eller ekstern Wi-Fi-ruter.",
+      stabilityText: "En strømlinjeformet arkitektur holder tilgangen rask og pålitelig og støtter sikker, privat og kryptert drift.",
+      securityText: "WIFIGATE er utviklet rundt sikker håndtering, kryptert lagring og privat drift.",
+      storyBadge: "Kryptert tilgang",
+    },
+    cs: {
+      noSimRouterText: "WIFIGATE funguje přímo se zařízením, bez SIM karty, bez internetového tarifu a bez externího Wi-Fi routeru.",
+      stabilityText: "Optimalizovaná architektura udržuje přístup rychlý a spolehlivý a podporuje bezpečný, soukromý a šifrovaný provoz.",
+      securityText: "WIFIGATE je navržena s důrazem na bezpečné zpracování, šifrované ukládání a soukromý provoz.",
+      storyBadge: "Šifrovaný přístup",
+    },
+    ru: {
+      noSimRouterText: "WIFIGATE работает напрямую с устройством, без SIM-карты, без интернет-тарифа и без внешнего Wi-Fi роутера.",
+      stabilityText: "Оптимизированная архитектура сохраняет быстрый и надежный доступ и поддерживает безопасную, приватную и зашифрованную работу.",
+      securityText: "WIFIGATE разработана с упором на безопасную обработку, зашифрованное хранение и приватную работу.",
+      storyBadge: "Зашифрованный доступ",
+    },
+    uk: {
+      noSimRouterText: "WIFIGATE працює безпосередньо з пристроєм, без SIM-картки, без інтернет-тарифу та без зовнішнього Wi-Fi роутера.",
+      stabilityText: "Оптимізована архітектура зберігає швидкий і надійний доступ та підтримує безпечну, приватну й зашифровану роботу.",
+      securityText: "WIFIGATE розроблена з акцентом на безпечну обробку, зашифроване зберігання та приватну роботу.",
+      storyBadge: "Зашифрований доступ",
+    },
+    tr: {
+      noSimRouterText: "WIFIGATE, SIM kart, internet paketi veya harici Wi-Fi yönlendirici gerektirmeden doğrudan cihazla çalışır.",
+      stabilityText: "Optimize edilmiş mimari, erişimi hızlı ve güvenilir tutarken güvenli, özel ve şifreli çalışmayı destekler.",
+      securityText: "WIFIGATE; güvenli işleme, şifreli depolama ve özel çalışma odağında tasarlanmıştır.",
+      storyBadge: "Şifreli erişim",
+    },
+    ar: {
+      noSimRouterText: "يعمل WIFIGATE مباشرة مع الجهاز، من دون بطاقة SIM أو باقة إنترنت أو جهاز توجيه Wi-Fi خارجي.",
+      stabilityText: "تحافظ البنية المحسّنة على وصول سريع وموثوق وتدعم تشغيلًا آمنًا وخاصًا ومشفّرًا.",
+      securityText: "صُممت WIFIGATE حول المعالجة الآمنة والتخزين المشفّر والتشغيل الخاص.",
+      storyBadge: "وصول مشفّر",
+    },
+    hi: {
+      noSimRouterText: "WIFIGATE डिवाइस के साथ सीधे काम करता है, बिना SIM कार्ड, बिना इंटरनेट प्लान और बिना बाहरी Wi-Fi राउटर के।",
+      stabilityText: "सुव्यवस्थित आर्किटेक्चर एक्सेस को तेज और भरोसेमंद रखता है और सुरक्षित, निजी और एन्क्रिप्टेड संचालन का समर्थन करता है।",
+      securityText: "WIFIGATE को सुरक्षित प्रबंधन, एन्क्रिप्टेड स्टोरेज और निजी संचालन को ध्यान में रखकर बनाया गया है।",
+      storyBadge: "एन्क्रिप्टेड एक्सेस",
+    },
+    bn: {
+      noSimRouterText: "WIFIGATE ডিভাইসের সাথে সরাসরি কাজ করে, SIM কার্ড, ইন্টারনেট প্ল্যান বা বাহ্যিক Wi-Fi রাউটার ছাড়াই।",
+      stabilityText: "একটি সুসংগঠিত আর্কিটেকচার অ্যাক্সেসকে দ্রুত ও নির্ভরযোগ্য রাখে এবং নিরাপদ, ব্যক্তিগত ও এনক্রিপ্টেড অপারেশনকে সমর্থন করে।",
+      securityText: "WIFIGATE নিরাপদ ব্যবস্থাপনা, এনক্রিপ্টেড স্টোরেজ এবং ব্যক্তিগত অপারেশনকে কেন্দ্র করে তৈরি।",
+      storyBadge: "এনক্রিপ্টেড অ্যাক্সেস",
+    },
+    mr: {
+      noSimRouterText: "WIFIGATE हे उपकरणाशी थेट कार्य करते, SIM कार्ड, इंटरनेट प्लॅन किंवा बाह्य Wi-Fi राउटरशिवाय.",
+      stabilityText: "सुलभ आर्किटेक्चरमुळे प्रवेश जलद आणि विश्वासार्ह राहतो आणि सुरक्षित, खाजगी व एन्क्रिप्टेड कार्यप्रणालीला आधार मिळतो.",
+      securityText: "WIFIGATE सुरक्षित हाताळणी, एन्क्रिप्टेड स्टोरेज आणि खाजगी कार्यप्रणाली लक्षात घेऊन तयार केले आहे.",
+      storyBadge: "एन्क्रिप्टेड प्रवेश",
+    },
+    te: {
+      noSimRouterText: "WIFIGATE పరికరంతో నేరుగా పనిచేస్తుంది; SIM కార్డ్, ఇంటర్నెట్ ప్లాన్ లేదా బాహ్య Wi-Fi రౌటర్ అవసరం లేదు.",
+      stabilityText: "సరళీకృత నిర్మాణం యాక్సెస్‌ను వేగంగా మరియు నమ్మదగినదిగా ఉంచి, సురక్షితమైన, ప్రైవేట్ మరియు ఎన్‌క్రిప్టెడ్ ఆపరేషన్‌కు మద్దతు ఇస్తుంది.",
+      securityText: "WIFIGATE సురక్షిత నిర్వహణ, ఎన్‌క్రిప్టెడ్ నిల్వ మరియు ప్రైవేట్ ఆపరేషన్‌ను కేంద్రంగా చేసుకుని రూపొందించబడింది.",
+      storyBadge: "ఎన్‌క్రిప్టెడ్ యాక్సెస్",
+    },
+    "zh-Hans": {
+      noSimRouterText: "WIFIGATE 可直接与设备配合工作，无需 SIM 卡、互联网套餐或外部 Wi-Fi 路由器。",
+      stabilityText: "精简的架构让访问保持快速可靠，并支持安全、私密、加密的运行方式。",
+      securityText: "WIFIGATE 围绕安全处理、加密存储和私密运行而设计。",
+      storyBadge: "加密访问",
+    },
+    "zh-Hant": {
+      noSimRouterText: "WIFIGATE 可直接與設備配合運作，無需 SIM 卡、網路方案或外部 Wi-Fi 路由器。",
+      stabilityText: "精簡的架構讓存取保持快速可靠，並支援安全、私密、加密的運作方式。",
+      securityText: "WIFIGATE 圍繞安全處理、加密儲存與私密運作而設計。",
+      storyBadge: "加密存取",
+    },
+    ja: {
+      noSimRouterText: "WIFIGATE は端末と直接連携して動作し、SIM カード、インターネット契約、外部 Wi-Fi ルーターは不要です。",
+      stabilityText: "最適化されたアーキテクチャにより、アクセスは素早く確実に保たれ、安全でプライベートかつ暗号化された運用を支えます。",
+      securityText: "WIFIGATE は、安全な取り扱い、暗号化ストレージ、プライベートな運用を前提に設計されています。",
+      storyBadge: "暗号化アクセス",
+    },
+    ko: {
+      noSimRouterText: "WIFIGATE는 SIM 카드, 인터넷 요금제, 외부 Wi-Fi 라우터 없이 기기와 직접 작동합니다.",
+      stabilityText: "최적화된 아키텍처는 접근을 빠르고 안정적으로 유지하면서 안전하고 비공개이며 암호화된 운영을 지원합니다.",
+      securityText: "WIFIGATE는 안전한 처리, 암호화 저장소, 비공개 운영을 중심으로 설계되었습니다.",
+      storyBadge: "암호화된 접근",
+    },
+    da: {
+      noSimRouterText: "WIFIGATE fungerer direkte med enheden uden SIM-kort, internetabonnement eller ekstern Wi-Fi-router.",
+      stabilityText: "En strømlinet arkitektur holder adgangen hurtig og pålidelig og understøtter sikker, privat og krypteret drift.",
+      securityText: "WIFIGATE er udviklet med fokus på sikker håndtering, krypteret lagring og privat drift.",
+      storyBadge: "Krypteret adgang",
+    },
+    hu: {
+      noSimRouterText: "A WIFIGATE közvetlenül az eszközzel működik, SIM-kártya, internetcsomag és külső Wi-Fi router nélkül.",
+      stabilityText: "Az optimalizált architektúra gyors és megbízható hozzáférést biztosít, miközben támogatja a biztonságos, privát és titkosított működést.",
+      securityText: "A WIFIGATE biztonságos kezelésre, titkosított tárolásra és privát működésre épül.",
+      storyBadge: "Titkosított hozzáférés",
+    },
+  };
+
+  const applyMarketingCopyOverrides = (lang, bundle) => {
+    if (!bundle || typeof bundle !== "object") {
+      return;
+    }
+
+    const copy = marketingCopyOverrides[lang];
+    if (!copy) {
+      return;
+    }
+
+    if (copy.heroSubtitle && bundle.hero) {
+      bundle.hero.subtitle = copy.heroSubtitle;
+    }
+
+    const items = bundle.features?.items;
+    if (items?.noSimRouter && copy.noSimRouterText) {
+      items.noSimRouter.text = copy.noSimRouterText;
+    }
+    if (items?.stability && copy.stabilityText) {
+      items.stability.text = copy.stabilityText;
+    }
+    if (items?.history30Day) {
+      if (typeof items.history30Day.title === "string") {
+        items.history30Day.title = items.history30Day.title.replace(/30/g, "90");
+      }
+      if (typeof items.history30Day.text === "string") {
+        items.history30Day.text = items.history30Day.text.replace(/30/g, "90");
+      }
+    }
+    if (items?.securityPrivacy && copy.securityText) {
+      items.securityPrivacy.text = copy.securityText;
+    }
+
+    if (bundle.contact?.ctaButton) {
+      bundle.contact.ctaButton = WHATSAPP_HANDLE_LABEL;
+    }
+
+    if (bundle.legal?.cta?.pricing?.button) {
+      bundle.legal.cta.pricing.button = WHATSAPP_HANDLE_LABEL;
+    }
+
+    if (bundle.cta?.pricing?.button) {
+      bundle.cta.pricing.button = WHATSAPP_HANDLE_LABEL;
+    }
+  };
+
+  const applyStoryBadgeOverrides = (lang, storyGroup) => {
+    const badgeLabel = marketingCopyOverrides[lang]?.storyBadge;
+    if (!badgeLabel || !storyGroup || typeof storyGroup !== "object") {
+      return;
+    }
+
+    if (Array.isArray(storyGroup.badges) && storyGroup.badges.length) {
+      storyGroup.badges[0] = badgeLabel;
+    }
+
+    Object.values(storyGroup).forEach((story) => {
+      if (story && typeof story === "object" && Array.isArray(story.badges) && story.badges.length) {
+        story.badges[0] = badgeLabel;
+      }
+    });
+  };
+
   const storyUiOverrides = {
     es: {
       demo: "Mejor ángulo de demostración",
@@ -698,6 +917,7 @@
     });
 
     Object.keys(translations).forEach((lang) => {
+      applyMarketingCopyOverrides(lang, translations[lang]);
       polishCookieNotice(lang, translations[lang]);
       polishStringsDeep(translations[lang]);
     });
@@ -710,10 +930,16 @@
       }
       deepMerge(APPLICATION_STORY_UI[lang], storyUiOverrides[lang]);
     });
+    Object.keys(APPLICATION_STORY_UI).forEach((lang) => {
+      applyStoryBadgeOverrides(lang, APPLICATION_STORY_UI[lang]);
+    });
     polishStringsDeep(APPLICATION_STORY_UI);
   }
 
   if (typeof APPLICATION_STORIES !== "undefined") {
+    Object.keys(APPLICATION_STORIES).forEach((lang) => {
+      applyStoryBadgeOverrides(lang, APPLICATION_STORIES[lang]);
+    });
     polishStringsDeep(APPLICATION_STORIES);
   }
 })();

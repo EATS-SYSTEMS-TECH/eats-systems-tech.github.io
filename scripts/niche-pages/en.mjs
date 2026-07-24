@@ -8,7 +8,7 @@ export default {
   home: {
     seoTitle: "WIFIGATE | Smart Access Control for Gates, Doors, and Parking",
     seoDescription:
-      "WIFIGATE (WiFi Gate) is a smart access control system for opening gates, doors, parking entrances, shutters, and garages from your phone. A secure, local, and convenient solution with no monthly subscription.",
+      "WIFIGATE (WiFi Gate) is smart access control for gates, buildings, parking entrances, and private homes. Secure, private, encrypted, and free of monthly fees.",
     keywords:
       "WIFIGATE, WiFi Gate, wifi gate, smart access control, gate access control, open gate from phone, door access control, parking access, no monthly fees",
   },
