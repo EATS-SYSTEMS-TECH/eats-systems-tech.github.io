@@ -1086,3 +1086,160 @@ Object.keys(APPLICATION_LABEL_OVERRIDES).forEach((lang) => {
     APPLICATION_LABEL_OVERRIDES[lang]
   );
 });
+
+translations.sv = {
+  ...translations.en,
+  nav: {
+    ...translations.en.nav,
+    home: "Hem",
+    features: "Fördelar",
+    about: "Videoguider",
+    contact: "Kontakta oss",
+  },
+  hero: {
+    ...translations.en.hero,
+    rotator: {
+      phrases: ["Enkelt att använda", "Full integritet", "Inga abonnemang"],
+    },
+    subtitle:
+      "Smart åtkomstkontroll för grindar, byggnader, parkeringsinfarter och privata hem. Säker, privat, krypterad och utan månadsavgifter.",
+    cta: {
+      contact: "Kontakta oss",
+      about: "Videoguider",
+    },
+    media: {
+      replay: "Spela videon igen",
+      mute: "Stäng av ljudet",
+      unmute: "Sätt på ljudet",
+    },
+    systems: {
+      ...translations.en.hero.systems,
+      barrier: { kicker: "Utgång", label: "Parkeringsbom" },
+      shutter: { kicker: "Utgång", label: "Rulljalusi" },
+      floodlight: { kicker: "Utgång", label: "Strålkastare" },
+      door: { kicker: "Åtkomst", label: "Dörr" },
+      field: { kicker: "Åtkomst", label: "Idrottsplan" },
+      maglock: { kicker: "Lås", label: "Magnetlås" },
+      power: { kicker: "Ström in" },
+      input: { kicker: "Ingång" },
+    },
+  },
+  features: {
+    ...translations.en.features,
+    title: "Fördelarna med WIFIGATE",
+    subtitle:
+      "Här är några av funktionerna som gör WIFIGATE till en avancerad, säker och lättskött lösning för åtkomstkontroll.",
+    items: {
+      ...translations.en.features.items,
+      noSubscription: {
+        title: "Inga abonnemangsavgifter",
+        text:
+          "En engångsbetalning för enheten och installationen, utan månadsavgifter, förnyelser eller dolda kostnader. En gång, för gott.",
+      },
+      security: {
+        title: "Avancerad säkerhet",
+        text:
+          "WIFIGATE har utvecklats med avancerade säkerhetslager för att skydda ditt system och dina data, inklusive Secure Boot, krypterad lagring, en säker körningsmiljö och skydd mot replay-attacker.",
+      },
+      noInternet: {
+        title: "Full integritet",
+        text:
+          "Dina data stannar hos dig. Användardatabaser lagras på enheten, krypteras och isoleras från exponering mot internet.",
+      },
+      guestAccess: {
+        title: "Inbjudningar för användare och tillfälliga gäster",
+        text:
+          "Att bjuda in användare och tillfälliga gäster har aldrig varit enklare. Med ett klick, utan komplicerade system och utan onödiga steg.",
+      },
+      smartAccess: {
+        title: "Smart åtkomst",
+        text:
+          "Säker öppning av grinden via iOS- och Android-appen eller med en RF-fjärrkontroll. Dessutom ger åtkomsthistoriken bättre överblick och kontroll över grindaktiviteten.",
+      },
+      userManagement: {
+        title: "Enkel användarhantering",
+        text:
+          "Hantera användare och behörigheter enkelt via appen, inklusive import och export av CSV-filer, med stöd för upp till 4 000 användare och 100 administratörer per grind.",
+      },
+    },
+  },
+  action: {
+    ...translations.en.action,
+    title: "Var kan WIFIGATE användas?",
+    subtitle:
+      "WIFIGATE passar i många olika miljöer och erbjuder en smart, säker och smidig lösning för åtkomsthantering, från privata hem till kommersiella och organisatoriska miljöer.",
+  },
+  tabs: {
+    why: "Varför",
+    where: "Var",
+  },
+  applications: {
+    ...translations.en.applications,
+    electricGates: "Elektriska grindar",
+    entranceDoors: "Entrédörrar",
+    magneticLocks: "Magnetlås",
+    barrierGates: "Privat parkering",
+    privateHomes: "Privata hem",
+    residentialComplexes: "Bostadshus",
+    officeBuildings: "Kontorsbyggnader",
+    industrialFacilities: "Industrianläggningar",
+    sportsFacilities: "Idrottsanläggningar",
+    educationalInstitutions: "Utbildningsinstitutioner",
+    hotels: "Hotell, Airbnb och gästboenden",
+    vacationRentals: "Semesterboenden och Airbnb",
+    andMore: "Och mer",
+    rollerShutters: "Rullportar och jalusier",
+  },
+  tutorials: {
+    ...translations.en.tutorials,
+    title: "Videoguider",
+    subtitle:
+      "Vi lägger snart till direkta YouTube-länkar här. Tills dess är detta exempel på guider vi planerar att publicera.",
+    status: "Kommer snart",
+    items: {
+      ...translations.en.tutorials.items,
+      initialUse: "Komma igång",
+      scanQrCode: "Skanna en QR-kod",
+      inviteGuest: "Bjud in en gäst",
+      inviteUser: "Bjud in en användare",
+      inviteAdmin: "Bjud in en administratör",
+      openGate: "Öppna grinden",
+      learnRfRemote: "Lär in RF-fjärrkontroll",
+      exportCsv: "Exportera CSV",
+      importCsv: "Importera CSV",
+      changePulseLength: "Ändra pulslängd",
+      electricShutterMode: "Läge för elektrisk rulljalusi",
+      barrierGateMode: "Läge för bom",
+      andMore: "Och mer...",
+    },
+  },
+  about: {
+    ...translations.en.about,
+    title: "Om oss",
+    text1:
+      "WIFIGATE skapades för att leverera säker, bekväm och tillgänglig åtkomstkontroll för grindar, byggnader och privata fastigheter.",
+    text2:
+      "Vi utvecklar hårdvaran och mjukvaran från början till slut, så att alla delar av systemet fungerar exakt tillsammans och ger hög driftsäkerhet, enkel användning och en ovanligt hög säkerhetsnivå.",
+  },
+  contact: {
+    ...translations.en.contact,
+    title: "Kontakta oss",
+    subtitle:
+      "Vi berättar gärna mer om era behov, visar systemets möjligheter och ser tillsammans om WIFIGATE passar er.",
+    ctaTitle: "Intresserad av WIFIGATE?",
+    ctaText:
+      "Skicka oss ett WhatsApp-meddelande för att få en offert, fullständig systeminformation och en bedömning av vad som passar era behov.",
+    ctaButton: "WhatsApp",
+    terms: "Villkor",
+    name: "Itay Nave",
+    whatsapp: "WhatsApp",
+  },
+  footer: {
+    ...translations.en.footer,
+    copyright: "WIFIGATE. Alla rättigheter förbehållna.",
+    tagline: "Smart. Säker. Privat. Inget abonnemang. Inga kompromisser.",
+    terms: "Villkor",
+    privacy: "Integritetspolicy",
+    cookies: "Cookies",
+  },
+};

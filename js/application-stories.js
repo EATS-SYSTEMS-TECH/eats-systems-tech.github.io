@@ -99,6 +99,22 @@ var APPLICATION_STORY_UI = {
     close: "اغلاق",
     closeAria: "اغلاق القصة",
   },
+  sv: {
+    summary: "Översikt",
+    bulletsTitle: "Varför den här lösningen passar",
+    problem: "Operativt behov",
+    solution: "Varför WiFiGate passar",
+    value: "Värde",
+    buyer: "Bäst lämpad kund",
+    demo: "Bästa demo-vinkeln",
+    winLabel: "Varför team väljer den",
+    videoLabel: "Demovideo",
+    videoStatus: "Kommer snart",
+    videoNote: "Reserverat för ett nischspecifikt demo-flöde, en installatörsguide eller en video för kundöverlämning.",
+    badges: ["Lokal drift", "Mobil åtkomst", "Gästinbjudningar", "Åtkomsthistorik"],
+    close: "Stäng",
+    closeAria: "Stäng berättelsen",
+  },
 };
 
 var APPLICATION_STORY_UI_OVERRIDES = {

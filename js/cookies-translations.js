@@ -19,8 +19,126 @@
       footer: {
         tagline: "Smart access control for gates, doors, and secured properties.",
       },
+  },
+  sv: {
+    cta: {
+      pricing: {
+        title: "Behöver du prisuppgifter eller vägledning kring installation?",
+        text:
+          "Skicka ett WhatsApp-meddelande så hjälper vi dig med produktval, installationsfrågor och nästa steg.",
+        button: "Öppna WhatsApp",
+      },
+      back: {
+        title: "Tillbaka till huvudwebbplatsen",
+        text:
+          "Gå tillbaka till startsidan för att se funktioner, användningsområden, guider och kontaktuppgifter.",
+        button: "Gå till startsidan",
+      },
     },
-    he: {
+    footer: {
+      tagline: "Smart åtkomstkontroll för grindar, dörrar och säkrade fastigheter.",
+    },
+  },
+  sv: {
+    metaTags: {
+      title: "WIFIGATE Cookies",
+      description:
+        "Information om cookies och liknande tekniker för WIFIGATE-webbplatsen, inklusive webbläsarlagring, inställningar och resurser från tredje part.",
+    },
+    hero: {
+      eyebrow: "Juridiskt",
+      title: "Cookies",
+      subtitle:
+        "Den här sidan förklarar hur WIFIGATE-webbplatsen kan använda cookies, lokal webbläsarlagring och liknande tekniker för att stödja språkinställningar, tillgänglighetsinställningar och relaterade funktioner på webbplatsen.",
+      updated: "Gäller från: [Effective Date]",
+      owner: "Webbplatsägare: EATS SYSTEMS TECH",
+      disclaimer:
+        "Detta dokument är ett utkast till allmän cookieinformation och bör granskas av kvalificerad juridisk rådgivning innan publicering.",
+    },
+    sections: {
+      overview: {
+        title: "1. Översikt",
+        body1:
+          "Den här sidan förklarar hur WiFiGate-webbplatsen kan använda cookies och liknande tekniker på webbläsarsidan.",
+        body2:
+          "I den nuvarande webbplatsversionen använder WiFiGate främst begränsad lagring av inställningar och relaterade tekniker i webbläsaren för att stödja funktioner som språk- och tillgänglighetsinställningar.",
+      },
+      currentUse: {
+        title: "2. Vad den nuvarande webbplatsen använder",
+        body1:
+          "Utifrån den nuvarande webbplatsimplementationen använder WiFiGate begränsad lagring i webbläsaren för att komma ihåg besökarinställningar som valt språk och tillgänglighetsval.",
+        body2:
+          "Detta hjälper webbplatsen att behålla valda visningsinställningar mellan besök och förbättrar användarupplevelsen utan att du behöver ändra dem på nytt varje gång.",
+      },
+      types: {
+        title: "3. Typer av cookies och liknande tekniker",
+        intro:
+          "Webbplatsen kan använda följande kategorier av webbläsarbaserade tekniker:",
+        item1:
+          "Teknik som krävs för grundläggande drift, säkerhet och tillgänglighetsfunktioner.",
+        item2:
+          "Lagring av inställningar för att komma ihåg språkval och tillgänglighetsinställningar som besökaren valt.",
+        item3:
+          "Tekniska förfrågningar eller webbläsarresurser kopplade till tredjepartsleverantörer som används av webbplatsen, till exempel teckensnitt eller innehållsleveranser.",
+      },
+      localStorage: {
+        title: "4. Inställningslagring och liknande tekniker",
+        body1:
+          "Den nuvarande webbplatsimplementationen använder lokal lagring i webbläsaren för valda språk- och tillgänglighetsinställningar.",
+        body2:
+          "Lokal lagring i webbläsaren är inte alltid samma sak som en traditionell cookie, men den kan ha en liknande funktion genom att komma ihåg inställningar på besökarens enhet eller i webbläsaren.",
+      },
+      thirdParty: {
+        title: "5. Tredjepartstjänster och tekniska förfrågningar",
+        body1:
+          "Webbplatsen kan ladda resurser från tredje part, som teckensnittstjänster, vilka får standardiserad teknisk förfrågningsinformation när en sida laddas.",
+        body2:
+          "WiFiGate kontrollerar inte dessa tredjepartsleverantörers policyer. Deras egna villkor, integritetsmeddelanden och tekniska rutiner kan också gälla.",
+      },
+      analytics: {
+        title: "6. Nuvarande inställning till annonserings- och analysscookies",
+        body1:
+          "Utifrån den nuvarande webbplatsimplementeringen använder WiFiGate inte avsiktligt egna annonserings- eller analysscookies på denna webbplats.",
+        body2:
+          "Om webbplatsens arbetssätt ändras i framtiden bör denna sida uppdateras för att beskriva eventuella nya analys-, mät-, annonserings- eller samtyckesrelaterade tekniker som webbplatsen använder.",
+      },
+      manage: {
+        title: "7. Hantera dina webbläsarinställningar",
+        body1:
+          "Du kan vanligtvis styra cookies, lokal lagring och liknande tekniker via webbläsarinställningar, sekretessverktyg i webbläsaren eller enhetsinställningar.",
+        body2:
+          "Att blockera eller rensa vissa tekniker kan påverka språkval, tillgänglighetsinställningar eller delar av webbplatsupplevelsen.",
+      },
+      related: {
+        title: "8. Relaterade juridiska sidor",
+        body1:
+          "För mer information om hur WiFiGate kan hantera personuppgifter och produktinformation, se även sidorna Integritetspolicy och Villkor.",
+      },
+      changes: {
+        title: "9. Ändringar i detta cookie-meddelande",
+        body1:
+          "WiFiGate kan uppdatera detta cookie-meddelande från tid till annan. Den senaste versionen gäller när den publiceras på denna sida.",
+      },
+      contact: {
+        title: "10. Kontakt",
+        body1:
+          "Frågor om detta cookie-meddelande eller tekniker på webbläsarsidan kan skickas via kontaktuppgifterna nedan.",
+        item1Label: "Webbplatsägare / operativt namn:",
+        item1Value: "EATS SYSTEMS TECH",
+        item2Label: "Företagets juridiska namn:",
+        item2Value: "[Company Legal Name]",
+        item3Label: "Företagets adress:",
+        item3Value: "[Company Address]",
+        item4Label: "Support-e-post:",
+        item4Value: "[Support Email]",
+        item5Label: "Ikraftträdandedatum:",
+        item5Value: "[Effective Date]",
+      },
+    },
+    note:
+      "Den här cookiesidan är ett allmänt utkast för WiFiGate-webbplatsen. Den bör granskas och anpassas till de faktiska webbplatsteknikerna, webbhotellslösningen, tredjepartstjänsterna och de juridiska kraven innan publicering.",
+  },
+  he: {
       cta: {
         pricing: {
           title: "זקוקים למחיר או להכוונה לגבי התקנה?",

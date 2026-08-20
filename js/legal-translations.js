@@ -180,8 +180,185 @@
       footer: {
         tagline: "Smart access control for gates, doors, and secured properties.",
       },
+  },
+  sv: {
+    metaTags: {
+      title: "WIFIGATE Villkor och bestämmelser",
+      description:
+        "Villkor och bestämmelser för WIFIGATE-webbplatsen, mobilappen, kontrollenheten, installation, åtkomstkontroll, säkerhet, integritet, uppdateringar och ansvar.",
     },
-    he: {
+    hero: {
+      eyebrow: "Juridiskt",
+      title: "Villkor och bestämmelser",
+      subtitle:
+        "Dessa villkor och bestämmelser gäller för WIFIGATE-webbplatsen, mobilappen, WiFiGate-enheten, kontrollenheten och relaterade funktioner för åtkomstkontroll som används för att hantera åtkomst till fastigheter.",
+      updated: "Gäller från: [Effective Date]",
+      owner: "Webbplatsägare: EATS SYSTEMS TECH",
+      disclaimer:
+        "Detta dokument är ett allmänt utkast till produktvillkor och bör granskas av kvalificerad juridisk rådgivning innan publicering.",
+    },
+    sections: {
+      introduction: {
+        title: "1. Inledning",
+        body1:
+          "Dessa villkor och bestämmelser gäller för kunder, fastighetsägare, administratörer, installatörer, inbjudna användare, gäster och andra personer som får tillgång till eller använder WIFIGATE-webbplatsen, mobilappen, WiFiGate-enheten, kontrollenheten eller relaterade funktioner för åtkomstkontroll.",
+        body2:
+          "Genom att använda någon del av WiFiGate-systemet samtycker du till dessa villkor. Om du inte godkänner dem ska du inte använda webbplatsen, appen, enheten eller de relaterade funktionerna för åtkomstkontroll.",
+      },
+      websiteUse: {
+        title: "2. Användning av webbplatsen",
+        body1:
+          "Webbplatsen tillhandahåller allmän produkt-, marknadsförings- och supportinformation om WiFiGate och relaterade tjänster.",
+        body2:
+          "Webbplatsens innehåll kan inte alltid vara fullständigt, aktuellt eller felfritt och kan ändras utan förvarning.",
+        body3:
+          "Webbplatsens innehåll ersätter inte professionell installations-, säkerhets-, juridisk-, el-, regelverks- eller fastighetsspecifik rådgivning.",
+      },
+      mobileApp: {
+        title: "3. Användning av mobilappen",
+        body1:
+          "Mobilappen kan låta administratörer och användare hantera åtkomst, öppna grindar, bjuda in gäster, granska åtkomsthistorik och konfigurera vissa funktioner.",
+        body2:
+          "Varje användare ansvarar för att skydda sin telefon, sitt appkonto, passkoder, biometrisk åtkomst, behörigheter och alla andra metoder som används för att öppna eller hantera åtkomst via appen.",
+        body3:
+          "Administratörer ansvarar för att bevilja, ta bort och granska åtkomstbehörigheter korrekt, och användare får endast bjuda in gäster som är behöriga att få tillgång till den aktuella fastigheten, grinden eller gemensamma ytan.",
+        body4:
+          "Genom att använda mobilappen samtycker du till att du inte använder WiFiGate-mobilappen under körning av något fordon. Om du behöver hantera åtkomst ska du stanna först och endast använda appen när det är lagligt och säkert att göra det.",
+      },
+      localConnection: {
+        title: "4. Lokal anslutning och tillgänglighet",
+        body1:
+          "WiFiGate kan vara beroende av lokal kommunikation mellan mobilappen och WiFiGate-enheten. Funktionen kan bero på telefonkompatibilitet, appbehörigheter, kvaliteten på trådlös signal, enhetens närhet, strömförsörjning och lokala förhållanden.",
+        body2:
+          "WiFiGate garanterar inte att åtkomst alltid kommer att vara tillgänglig, omedelbar eller utan avbrott. Åtkomst kan utebli eller försenas på grund av telefoninställningar, svag signal, inaktiverade behörigheter, låg batterinivå, strömavbrott, maskinvaruproblem, felaktig konfiguration eller miljöförhållanden.",
+      },
+      deviceInstallation: {
+        title: "5. WiFiGate-enhet och installation",
+        body1:
+          "WiFiGate-enheten måste installeras, kopplas, konfigureras och testas korrekt. Kunder och installatörer ansvarar för att bekräfta kompatibilitet med den aktuella grinden, dörren, bommen, låset eller systemet för åtkomstkontroll.",
+        body2:
+          "När elektriska, säkerhets- eller regelmässiga krav gäller bör installationen utföras av en kvalificerad person.",
+        body3:
+          "Kunden ansvarar för att testa systemet efter installationen, efter ändringar i enhetskonfigurationen och efter programuppdateringar. Felaktig installation eller konfiguration kan få systemet att sluta fungera, bete sig oväntat eller påverka det anslutna grindsystemet eller åtkomstkontrollsystemet.",
+      },
+      physicalSafety: {
+        title: "6. Fysiskt säkerhetsansvar och grindsäkerhet",
+        body1:
+          "WiFiGate kan aktivera ett relä, en knappingång eller en signal för åtkomstkontroll som är ansluten till en grind, dörr, bom, lås eller liknande system.",
+        body2:
+          "WiFiGate ersätter inte säkerhetssensorer, hinderdetektering, nödöppningsmekanismer, manuella överstyrningar, professionella grindstyrningar eller lagstadgade säkerhetssystem. Det ska inte användas som den enda säkerhetsmekanismen.",
+        body3:
+          "WiFiGate är inte ett system för nödsituationer, livssäkerhet, medicinsk säkerhet, brandsäkerhet eller garanterad säkerhet. Kunden och installatören ansvarar för säker användning och för att följa lokala regler för el, säkerhet, fastighet och åtkomstkontroll.",
+      },
+      security: {
+        title: "7. Säkerhet och ansvar för åtkomst",
+        body1:
+          "WiFiGate använder rimliga säkerhetsåtgärder, men inget åtkomstkontrollsystem är helt säkert.",
+        body2:
+          "Användare måste skydda telefoner, appåtkomst, administratörsbehörigheter, gästinbjudningar, åtkomstlänkar, QR-koder, token och alla andra åtkomstmetoder som används av systemet. Administratörer måste omedelbart ta bort användare eller gäster som inte längre ska ha åtkomst.",
+        body3:
+          "I den utsträckning lagen tillåter är WiFiGate inte ansvarigt för obehörig åtkomst som orsakas av användarfel, delade enheter, komprometterade telefoner, exponerade inbjudningar, felaktig behörighetshantering eller felaktig installation.",
+      },
+      privacy: {
+        title: "8. Åtkomsthistorik, loggar och integritet",
+        body1:
+          "WiFiGate kan samla in, lagra eller visa åtkomsthändelser, enhetsstatus, information om användare, administratörer och gäster, inbjudningsdata, diagnostikinformation och tekniska loggar.",
+        body2:
+          "Beroende på implementationen kan data lagras lokalt på mobiltelefonen, på WiFiGate-enheten eller med en annan produkt-specifik lagringsmetod som systemet använder.",
+        body3:
+          "Se även WiFiGate:s integritetspolicy och cookiesida för mer information om datahantering och webbplatsens lagringspraxis. Den här sidan med villkor är inte ett fullständigt integritetsmeddelande.",
+      },
+      payments: {
+        title: "9. Betalningar, abonnemang och kommersiella villkor",
+        body1:
+          "Vissa funktioner, produkter, hårdvara, tjänster eller framtida planer kan erbjudas kostnadsfritt eller mot avgift. Webbplatsen kan beskriva aktuella produkter utan återkommande abonnemangsavgifter, men separata avgifter kan ändå gälla för hårdvara, installation, support, ersättningar, valfria tjänster eller framtida betalplaner om sådana införs.",
+        body2:
+          "Priser, skatter, leveransvillkor, arbetsomfattning, avbokningsvillkor och eventuella återbetalningsrättigheter bestäms av det specifika erbjudandet, fakturan, beställningen eller det skriftliga avtal som gäller för det relevanta köpet eller den relevanta tjänsten.",
+        body3:
+          "Om WiFiGate inte uttryckligen anger något annat skriftligen kan företaget i framtiden ändra priser, paket, kostnadsfria funktioner eller kommersiella villkor. Webbplatsens innehåll i sig utgör inte ett bindande löfte att tillhandahålla någon produkt, funktion eller tjänst till ett visst pris eller inom en viss tidsram.",
+      },
+      softwareUpdates: {
+        title: "10. Programuppdateringar och produktförändringar",
+        body1:
+          "WiFiGate kan släppa uppdateringar till webbplatsen, mobilappen, enhetens programvara, funktioner, design eller produktbeteende. Uppdateringar kan förbättra, ändra, lägga till, begränsa eller ta bort funktioner.",
+        body2:
+          "Kunder ansvarar för att testa systemet efter relevanta uppdateringar. WiFiGate garanterar inte att varje funktion, designelement eller produktbeteende kommer att vara tillgängligt för alltid.",
+      },
+      disclaimers: {
+        title: "11. Ansvarsfriskrivningar",
+        body1:
+          "I den utsträckning lagen tillåter tillhandahålls WiFiGate-webbplatsen, mobilappen, WiFiGate-enheten, kontrollenheten och relaterade material i befintligt skick och i mån av tillgång.",
+        body2:
+          "WiFiGate garanterar inte oavbruten drift, perfekt säkerhet, att åtkomst lyckas varje gång, att obehörig åtkomst förhindras, felfria loggar eller kompatibilitet med varje telefon, grindsystem, åtkomstkontrollsystem eller installationsmiljö.",
+      },
+      liability: {
+        title: "12. Ansvarsbegränsning",
+        body1:
+          "I den utsträckning lagen tillåter ansvarar inte WiFiGate och EATS SYSTEMS TECH för indirekta, tillfälliga, särskilda, följd-, exemplar- eller straffskador som uppstår till följd av eller i samband med webbplatsen, appen, enheten, kontrollenheten, installationen, åtkomstförsök eller användningen av systemet.",
+        body2:
+          "Detta omfattar utan begränsning krav som rör skador på egendom, åtkomstfel, obehörig åtkomst, installationsfel, grindfel, förlust av data eller loggar, förlorad verksamhet, driftsavbrott eller personskada. Inget i dessa villkor utesluter ansvar som enligt lag inte får uteslutas.",
+      },
+      userResponsibilities: {
+        title: "13. Användarens ansvar",
+        intro:
+          "Du samtycker till att använda WiFiGate lagligt, säkert och ansvarsfullt. Du får inte:",
+        item1:
+          "Använda WiFiGate för olaglig åtkomst, obehörigt intrång, intrång på mark, trakasserier eller osäker användning av en grind, dörr, bom, lås eller åtkomstsystem.",
+        item2:
+          "Försöka kringgå, inaktivera, skada, överbelasta, missbruka, bakåtutveckla eller störa WiFiGate-webbplatsen, mobilappen, WiFiGate-enheten, kontrollenheten eller relaterade funktioner, förutom där en begränsning inte är tillåten enligt lag.",
+        item3:
+          "Dela åtkomstmetoder vårdslöst, lämna administratörsbehörigheter utan tillsyn eller låta systemet användas på ett sätt som skapar undvikbar säkerhetsrisk.",
+        item4:
+          "Lita på WiFiGate som den enda metoden för nödtillträde, nödutgång eller säkerhetskontroll för fastigheten.",
+        item5:
+          "Använda WiFiGate-mobilappen under körning, maskinhantering eller i någon situation där telefonanvändning kan skapa säkerhetsrisk.",
+      },
+      termsUpdates: {
+        title: "14. Uppdateringar av dessa villkor",
+        body1:
+          "WiFiGate kan uppdatera dessa villkor från tid till annan. Den senaste versionen gäller när den publiceras på denna sida eller annars görs tillgänglig med produkten.",
+        body2:
+          "Fortsatt användning av webbplatsen, appen, enheten eller systemet efter en uppdatering innebär att du accepterar de uppdaterade villkoren. Om du inte godkänner dem ska du sluta använda de berörda tjänsterna eller produktfunktionerna.",
+      },
+      lawContact: {
+        title: "15. Tillämplig lag och kontakt",
+        body1:
+          "Dessa villkor regleras av Israels lagar, med förbehåll för eventuella obligatoriska rättigheter eller konsumentskydd som gäller enligt tillämplig lag. Frågor om dessa villkor kan skickas via kontaktuppgifterna nedan.",
+        item1Label: "Webbplatsägare / operativt namn:",
+        item1Value: "EATS SYSTEMS TECH",
+        item2Label: "Företagets juridiska namn:",
+        item2Value: "[Company Legal Name]",
+        item3Label: "Företagets adress:",
+        item3Value: "[Company Address]",
+        item4Label: "Support-e-post:",
+        item4Value: "[Support Email]",
+        item5Label: "Ikraftträdandedatum:",
+        item5Value: "[Effective Date]",
+        item6Label: "Tillämplig lag / jurisdiktion:",
+        item6Value: "Israel, med förbehåll för obligatoriska rättigheter enligt tillämplig lag",
+      },
+    },
+    note:
+      "Dessa villkor är allmänna produktvillkor. En separat offert, faktura, beställning, installationsavtal, garanti, serviceöverenskommelse eller annat undertecknat kommersiellt dokument kan innehålla ytterligare villkor för en specifik beställning, fastighet eller installation.",
+    cta: {
+      pricing: {
+        title: "Behöver du prisuppgifter eller vägledning kring installation?",
+        text:
+          "Skicka ett WhatsApp-meddelande så hjälper vi dig med produktval, installationsfrågor och nästa steg.",
+        button: "Öppna WhatsApp",
+      },
+      back: {
+        title: "Tillbaka till huvudwebbplatsen",
+        text:
+          "Gå tillbaka till startsidan för att se funktioner, användningsområden, guider och kontaktuppgifter.",
+        button: "Gå till startsidan",
+      },
+    },
+    footer: {
+      tagline: "Smart åtkomstkontroll för grindar, dörrar och säkrade fastigheter.",
+    },
+  },
+  he: {
       metaTags: {
         title: "תנאים והתניות | WIFIGATE",
         description:

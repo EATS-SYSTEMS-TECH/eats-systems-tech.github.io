@@ -39,6 +39,7 @@ import zhHant from "./zh-hant.mjs";
 import ja from "./ja.mjs";
 import ko from "./ko.mjs";
 import da from "./da.mjs";
+import sv from "./sv.mjs";
 import hu from "./hu.mjs";
 
 // Homepage card order is the canonical order of this array.
@@ -189,6 +190,7 @@ export const NICHE_PAGE_LOCALES = {
   ja,
   ko,
   da,
+  sv,
   hu,
 };
 

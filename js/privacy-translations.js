@@ -19,8 +19,162 @@
       footer: {
         tagline: "Smart access control for gates, doors, and secured properties.",
       },
+  },
+  sv: {
+    cta: {
+      pricing: {
+        title: "Behöver du prisuppgifter eller vägledning kring installation?",
+        text:
+          "Skicka ett WhatsApp-meddelande så hjälper vi dig med produktval, installationsfrågor och nästa steg.",
+        button: "Öppna WhatsApp",
+      },
+      back: {
+        title: "Tillbaka till huvudwebbplatsen",
+        text:
+          "Gå tillbaka till startsidan för att se funktioner, användningsområden, guider och kontaktuppgifter.",
+        button: "Gå till startsidan",
+      },
     },
-    he: {
+    footer: {
+      tagline: "Smart åtkomstkontroll för grindar, dörrar och säkrade fastigheter.",
+    },
+  },
+  sv: {
+    metaTags: {
+      title: "WIFIGATE Integritetspolicy",
+      description:
+        "Integritetspolicy för WIFIGATE-webbplatsen, mobilappen, WiFiGate-enheten, åtkomsthändelser, inbjudningar, diagnostik, lokal lagring och relaterade funktioner för åtkomstkontroll.",
+    },
+    hero: {
+      eyebrow: "Juridiskt",
+      title: "Integritetspolicy",
+      subtitle:
+        "Denna integritetspolicy förklarar hur WIFIGATE kan samla in, använda, lagra, visa och dela information kopplad till webbplatsen, mobilappen, WiFiGate-enheten, kontrollenheten, inbjudningar, åtkomsthändelser och relaterade funktioner för åtkomstkontroll.",
+      updated: "Gäller från: [Effective Date]",
+      owner: "Webbplatsägare: EATS SYSTEMS TECH",
+      disclaimer:
+        "Detta dokument är ett allmänt utkast till integritetspolicy och bör granskas av kvalificerad juridisk rådgivning innan publicering.",
+    },
+    sections: {
+      overview: {
+        title: "1. Översikt",
+        body1:
+          "Denna integritetspolicy gäller WIFIGATE-webbplatsen, mobilappen, WiFiGate-enheten, kontrollenheten och relaterade funktioner för åtkomstkontroll som används av kunder, fastighetsägare, administratörer, installatörer, användare och gäster.",
+        body2:
+          "Den förklarar i allmänna ordalag vilken information produkten kan hantera och hur den informationen kan användas, lagras, visas och delas.",
+      },
+      scope: {
+        title: "2. Vad denna policy omfattar",
+        body1:
+          "Denna policy omfattar information som rör webbplatsbesök, produktförfrågningar, supportkommunikation, användning av mobilappen, åtkomsthantering, inbjudningar, åtkomsthändelser, enhetsstatus, teknisk diagnostik och relaterade produktfunktioner.",
+        body2:
+          "Denna policy ersätter inte kundspecifika avtal, fastighetsmeddelanden, installationsmeddelanden eller tredje parts policyer som också kan gälla i en viss installation eller jurisdiktion.",
+      },
+      collect: {
+        title: "3. Information som WiFiGate kan samla in",
+        intro:
+          "Beroende på vilka produktfunktioner som används kan WiFiGate hantera följande kategorier av information:",
+        item1:
+          "Kontaktuppgifter och förfrågningsinformation som lämnas via webbplatsen, WhatsApp, e-post, telefon eller andra supportkanaler.",
+        item2:
+          "Användarprofiluppgifter som namn, telefonnummer, appspråk och rollinformation kopplad till åtkomst.",
+        item3:
+          "Information om åtkomsthantering som administratörer, användare, gäster, inbjudningar, inbjudningstid, åtkomstbehörigheter och relaterade fastighets- eller gruppuppgifter.",
+        item4:
+          "Åtkomsthändelser, åtkomsthistorik, enhetsstatus, teknisk diagnostik, uppdateringsrelaterad information och produktloggar.",
+        item5:
+          "Enhets- och appinformation som behövs för produktens funktion, till exempel lokal anslutningsstatus, behörigheter, telefonkompatibilitet och konfigurationsuppgifter.",
+        item6:
+          "Information om webbplatsinställningar och liknande inställningar på webbläsarsidan, inklusive valt språk och tillgänglighetsinställningar.",
+      },
+      use: {
+        title: "4. Hur WiFiGate kan använda information",
+        intro: "WiFiGate kan använda information för följande ändamål:",
+        item1:
+          "För att tillhandahålla, driva, konfigurera, underhålla och stödja webbplatsen, appen, enheten och relaterade funktioner för åtkomstkontroll.",
+        item2:
+          "För att hantera användare, administratörer, gäster, inbjudningar, åtkomstbehörigheter och produktinställningar.",
+        item3:
+          "För att visa åtkomsthändelser, systemaktivitet, enhetsstatus och relaterad produktinformation för behöriga användare.",
+        item4:
+          "För att felsöka tekniska problem, förbättra produkttillförlitligheten och granska säkerhets-, konfigurations- eller supportärenden.",
+        item5:
+          "För att svara på förfrågningar, ge kundsupport, kommunicera om installationer och skicka produkt- eller tjänsteinformation som är relevant för en förfrågan eller ett konto.",
+      },
+      sharing: {
+        title: "5. När information kan delas",
+        body1:
+          "WiFiGate kan visa eller göra information tillgänglig för behöriga fastighetsägare, administratörer, installatörer eller användare när den åtkomsten ingår i produktens avsedda funktion.",
+        body2:
+          "Information kan också delas när det rimligen krävs för att ge support, hantera tekniska eller säkerhetsrelaterade frågor, uppfylla rättsliga skyldigheter, genomföra tillämpliga villkor eller skydda rättigheter, egendom och säkerhet.",
+        body3:
+          "Detta utkast beskriver inte någon offentlig försäljning av personuppgifter. Eventuella framtida ändringar i produktens praxis för delning av data bör återspeglas i en uppdaterad integritetstext.",
+      },
+      storage: {
+        title: "6. Lokal lagring och produkt-specifik lagring",
+        body1:
+          "Beroende på implementationen kan information lagras lokalt på mobiltelefonen, på WiFiGate-enheten eller med en annan produkt-specifik lagringsmetod som används av produkten.",
+        body2:
+          "Olika installationer kan använda olika produktinställningar eller lagringsupplägg. Kunder, fastighetsägare och administratörer bör granska sin egen installation och sina åtkomstpraxis för att förstå hur data hanteras i deras miljö.",
+      },
+      websiteStorage: {
+        title: "7. Webbplatsinställningar, cookies och liknande tekniker",
+        body1:
+          "WIFIGATE-webbplatsen kan använda begränsade tekniker på webbläsarsidan, inklusive lagring av inställningar, för att komma ihåg valt språk och tillgänglighetsinställningar och förbättra webbplatsens användbarhet.",
+        body2:
+          "Se även sidan Cookies för mer information om cookies på webbplatsen och liknande tekniker.",
+      },
+      retention: {
+        title: "8. Databevaring",
+        body1:
+          "WiFiGate kan bevara information så länge det rimligen behövs för produktdrift, support, felsökning, rättslig efterlevnad, tvistlösning, arkivering eller andra legitima produkt- eller affärsändamål.",
+        body2:
+          "Bevarandetider kan variera beroende på informationstyp, installation, använd funktion, tillämpliga rättsliga skyldigheter och om informationen fortfarande behövs för produktadministration eller säkerhetsgranskning.",
+      },
+      security: {
+        title: "9. Säkerhet",
+        body1:
+          "WiFiGate använder rimliga åtgärder som är avsedda att skydda information och produktåtkomst, men ingen webbplats, app, enhet, telefon, trådlös anslutning eller åtkomstkontrollsystem kan garanteras vara helt säkert.",
+        body2:
+          "Kunder, administratörer, installatörer och användare spelar också en viktig roll för säkerheten genom att skydda enheter, behörigheter, inbjudningar, åtkomstmetoder och installationsinställningar.",
+      },
+      rights: {
+        title: "10. Dina val och rättigheter",
+        body1:
+          "Beroende på produktens konfiguration och tillämplig lag kan du ha möjlighet att begära tillgång till, rättelse av, radering av, begränsning av eller information om viss personuppgift som hanteras av WiFiGate.",
+        body2:
+          "Vissa begäranden kan behöva hanteras av den relevanta fastighetsägaren, systemadministratören, installatören eller kontokontakten, beroende på vem som kontrollerar installationen och de relaterade uppgifterna.",
+      },
+      children: {
+        title: "11. Barn",
+        body1:
+          "WiFiGate är inte utformat som en produkt för barn. Om personuppgifter som rör ett barn tros ha lämnats in på ett olämpligt sätt, kontakta WiFiGate så att ärendet kan granskas.",
+      },
+      changes: {
+        title: "12. Ändringar i denna integritetspolicy",
+        body1:
+          "WiFiGate kan uppdatera denna integritetspolicy från tid till annan. Den senaste versionen gäller när den publiceras på denna sida eller på annat sätt görs tillgänglig med produkten.",
+      },
+      contact: {
+        title: "13. Kontakt",
+        body1:
+          "Frågor om denna integritetspolicy eller integritetsrelaterade begäranden kan skickas via kontaktuppgifterna nedan.",
+        item1Label: "Webbplatsägare / operativt namn:",
+        item1Value: "EATS SYSTEMS TECH",
+        item2Label: "Företagets juridiska namn:",
+        item2Value: "[Company Legal Name]",
+        item3Label: "Företagets adress:",
+        item3Value: "[Company Address]",
+        item4Label: "Support-e-post:",
+        item4Value: "[Support Email]",
+        item5Label: "Ikraftträdandedatum:",
+        item5Value: "[Effective Date]",
+      },
+    },
+    note:
+      "Denna integritetspolicy är ett allmänt utkast för WiFiGate-produkten och webbplatsen. Den bör granskas och anpassas till det faktiska driftbolaget, installationsmodellen, dataflödena och de juridiska kraven innan publicering.",
+  },
+  he: {
       cta: {
         pricing: {
           title: "זקוקים למחיר או להכוונה לגבי התקנה?",

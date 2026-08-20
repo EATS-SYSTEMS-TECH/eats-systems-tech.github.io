@@ -59,6 +59,46 @@ const accessibilityCopy = {
       "Responsive layout for mobile and desktop",
     ],
   },
+  sv: {
+    skipLink: "Hoppa till huvudinnehållet",
+    eyebrow: "Tillgänglighet",
+    openButton: "Öppna tillgänglighetscentret",
+    closeButton: "Stäng tillgänglighetscentret",
+    title: "Tillgänglighetscenter",
+    description: "Anpassa webbplatsen efter dina läs- och navigeringspreferenser.",
+    reset: "Återställ",
+    statusDefault: "Standardvy på webbplatsen",
+    statusActive: "{count} tillgänglighetsanpassningar aktiva",
+    options: {
+      largeText: {
+        label: "Större text",
+        description: "Öka textstorleken på hela webbplatsen.",
+      },
+      highContrast: {
+        label: "Hög kontrast",
+        description: "Förstärk kontrasten för text och gränssnitt.",
+      },
+      underlineLinks: {
+        label: "Stryk under länkar",
+        description: "Gör länkar lättare att känna igen.",
+      },
+      readableFont: {
+        label: "Läsbart typsnitt",
+        description: "Byt till ett renare och mer lättläst typsnitt.",
+      },
+      reducedMotion: {
+        label: "Minskad rörelse",
+        description: "Minimera animationer och rörelseeffekter.",
+      },
+    },
+    siteSupportTitle: "Inbyggt i den här webbplatsen",
+    siteSupport: [
+      "Navigering som fungerar med tangentbord",
+      "Tydliga fokusmarkeringar",
+      "Stöd för flera språk och RTL",
+      "Responsiv layout för mobil och dator",
+    ],
+  },
   he: {
     skipLink: "דלג לתוכן הראשי",
     eyebrow: "נגישות",
