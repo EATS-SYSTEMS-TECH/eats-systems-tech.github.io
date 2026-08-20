@@ -221,6 +221,7 @@
   font-size: clamp(1.02rem, 1.55vw, 1.18rem);
   line-height: 1.9;
   color: #334155;
+  white-space: pre-line;
 }
 
 /* ---------- Generic section blocks ---------- */
