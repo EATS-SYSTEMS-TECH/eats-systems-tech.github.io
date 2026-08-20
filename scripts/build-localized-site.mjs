@@ -129,6 +129,7 @@ const homeProductImageAlt = {
   ja: "ゲート一覧を表示するモバイルアプリの横にある WIFIGATE デバイス",
   ko: "게이트 목록을 보여주는 모바일 앱 옆의 WIFIGATE 장치",
   da: "WIFIGATE-enhed ved siden af mobilappen med portliste",
+  sv: "WIFIGATE-enhet bredvid mobilappen med lista över grindar",
   hu: "WIFIGATE eszköz a kapulistát mutató mobilalkalmazás mellett",
 };
 

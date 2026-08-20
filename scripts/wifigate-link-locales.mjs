@@ -287,6 +287,18 @@ export const wifigateLinkLocales = {
     copyButton: "Kopiér applink",
     copiedButton: "Applink kopieret"
   },
+  sv: {
+    pageTitle: "Öppna WiFiGate",
+    socialTitle: "WiFiGate-inbjudan",
+    description: "Öppna din WiFiGate-inbjudan säkert i appen.",
+    heading: "Öppnar WiFiGate",
+    statusOpening: "Vi försöker öppna din inbjudan i appen.",
+    statusMissing: "Den här inbjudningslänken saknar åtkomstuppgifterna. Be avsändaren att dela den igen.",
+    statusFallback: "Om WiFiGate inte öppnas automatiskt, använd knappen nedan.",
+    openButton: "Öppna i WiFiGate",
+    copyButton: "Kopiera app-länk",
+    copiedButton: "App-länk kopierad"
+  },
   hu: {
     pageTitle: "WiFiGate megnyitása",
     socialTitle: "WiFiGate meghívó",

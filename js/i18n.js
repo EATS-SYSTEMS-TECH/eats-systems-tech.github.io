@@ -28,6 +28,7 @@ var SITE_LANGUAGE_OPTIONS = [
   { code: "ja", label: "日本語", flagType: "image", flagSrc: "flag-jp.svg", flagAlt: "JP" },
   { code: "ko", label: "한국어", flagType: "image", flagSrc: "flag-kr.svg", flagAlt: "KR" },
   { code: "da", label: "Dansk", flagType: "image", flagSrc: "flag-dk.svg", flagAlt: "DK" },
+  { code: "sv", label: "Svenska", flagType: "image", flagSrc: "flag-se.svg", flagAlt: "SE" },
   { code: "hu", label: "Magyar", flagType: "image", flagSrc: "flag-hu.svg", flagAlt: "HU" },
 ];
 
@@ -64,6 +65,7 @@ var SITE_LANGUAGE_ALIASES = {
   "te-in": "te",
   "tr-tr": "tr",
   "uk-ua": "uk",
+  "sv-se": "sv",
   "zh-cn": "zh-Hans",
   "zh-hans": "zh-Hans",
   "zh-tw": "zh-Hant",
