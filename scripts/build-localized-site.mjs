@@ -35,6 +35,7 @@ const homeDataFiles = [
   "js/accessibility.js",
   "js/language-polish.js",
   "js/niche-split-overrides.js",
+  "js/site-copy-overrides.js",
 ];
 
 const legalDataFiles = {
@@ -66,6 +67,7 @@ const homeRuntimeScriptsToRemove = [
   "js/translations-extra.js",
   "js/translations-new-locales.js",
   "js/features-refresh.js",
+  "js/site-copy-overrides.js",
   "js/i18n.js",
   "js/application-stories.js",
   "js/application-stories-extra.js",
@@ -695,10 +697,10 @@ function updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale) {
   updateAccessibilityMarkup($, accessibilityBundle);
 }
 
-function updateHomeWhereSection($, locale) {
+function updateHomeWhereSection($, locale, bundle) {
   const content = getNichePageContent(locale);
 
-  $("#where-title").text(content.where.title);
+  $("#where-title").text(bundle?.action?.title || content.where.title);
   $("#where-subtitle").text(content.where.subtitle);
   $("#where-product-image").attr("alt", homeProductImageAlt[locale] || homeProductImageAlt[defaultLocale]);
 
@@ -827,7 +829,7 @@ async function buildHomePages(homeData) {
     setLanguageSelector($, homeData.localeOptions, locale, "home");
     updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale);
     rewriteHomeInternalLinks($, locale);
-    updateHomeWhereSection($, locale);
+    updateHomeWhereSection($, locale, bundle);
     rewriteHomeGuestInvitesLink($, locale);
     setHomeMeta($, bundle, locale, homeData.localeOptions);
     insertPageDataScript(
