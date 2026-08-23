@@ -26,6 +26,7 @@ const legalTemplatePaths = {
 const homeDataFiles = [
   "js/translations.js",
   "js/translations-extra.js",
+  "js/translations-new-locales.js",
   "js/features-refresh.js",
   "js/guest-invites-home.js",
   "js/application-stories.js",
@@ -63,6 +64,7 @@ const legalDataFiles = {
 const homeRuntimeScriptsToRemove = [
   "js/translations.js",
   "js/translations-extra.js",
+  "js/translations-new-locales.js",
   "js/features-refresh.js",
   "js/i18n.js",
   "js/application-stories.js",
