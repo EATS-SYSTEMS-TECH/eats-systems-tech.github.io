@@ -41,6 +41,7 @@ import ko from "./ko.mjs";
 import da from "./da.mjs";
 import sv from "./sv.mjs";
 import hu from "./hu.mjs";
+import { ADDITIONAL_LOCALE_PAGE_CONTENT } from "./additional-locale-pages.mjs";
 
 // Homepage card order is the canonical order of this array.
 export const NICHE_DEFINITIONS = [
@@ -192,6 +193,7 @@ export const NICHE_PAGE_LOCALES = {
   da,
   sv,
   hu,
+  ...ADDITIONAL_LOCALE_PAGE_CONTENT,
 };
 
 const NICHE_MARKETING_OVERRIDES = {
