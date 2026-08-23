@@ -129,4 +129,9 @@
     const base = JSON.parse(JSON.stringify(translations.en));
     translations[locale] = merge(base, copy);
   });
+
+  if (translations.he) {
+    translations.he.nav.features = "למה לבחור בנו?";
+    translations.he.tabs.where = "שימושים";
+  }
 })();
