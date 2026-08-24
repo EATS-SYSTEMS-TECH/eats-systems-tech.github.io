@@ -844,44 +844,116 @@
 
     <section class="section section--alt" id="contact" aria-labelledby="contact-title" aria-describedby="contact-description">
       <div class="container">
-        <header class="section__header js-reveal">
-          <h2 class="section__title" id="contact-title" data-i18n="contact.title" dir="ltr">Επικοινωνήστε μαζί μας</h2>
-          <p class="section__subtitle" id="contact-description" data-i18n="contact.subtitle" dir="ltr">We would be happy to learn about your needs, present the system's capabilities, and see together whether WIFIGATE is the right fit for you.</p>
+        <header class="section__header contact-options__header js-reveal" dir="rtl">
+          <h2 class="section__title" id="contact-title">צור קשר</h2>
+          <p class="section__subtitle" id="contact-description">
+            נשמח להכיר את הצרכים שלכם, להציג את יכולות המערכת, ולבדוק אם WIFIGATE מתאים לכם.
+          </p>
         </header>
 
-        <div class="contact-content js-reveal">
-          <div class="contact-cta">
-            <h3 class="contact-cta__title" data-i18n="contact.ctaTitle" dir="ltr">Interested in WIFIGATE?</h3>
-            <p class="contact-cta__text" data-i18n="contact.ctaText" dir="ltr">Send us a WhatsApp message to receive a price quote, full system details, and a fit assessment for your needs.</p>
-            <a href="https://wa.me/972526996332" class="btn btn--primary contact-cta__button" target="_blank" rel="noopener noreferrer" data-i18n="contact.ctaButton" dir="ltr">WhatsApp</a>
-            <p class="contact-cta__legal">
-              <a href="/el/terms-and-conditions/" class="contact-cta__legal-link" data-i18n="contact.terms" dir="ltr">Terms &amp; Conditions</a>
+        <div class="contact-options js-reveal" dir="rtl">
+          <article class="contact-option-card">
+            <div class="contact-option-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="48" cy="48" r="35" opacity="0.22"></circle>
+                <path d="M24 52c-8-7-11-17-8-28" opacity="0.35"></path>
+                <path d="M72 52c8-7 11-17 8-28" opacity="0.35"></path>
+                <path d="M32 49 43 38c3-3 7-3 10 0l2 2"></path>
+                <path d="m45 59 9 8c2 2 5 2 7 0 2-2 2-5 0-7"></path>
+                <path d="m39 65 5 5c2 2 5 2 7 0 2-2 2-5 0-7"></path>
+                <path d="m33 59 8 8"></path>
+                <path d="M62 43h-9l-8 8c-2 2-5 2-7 0-2-2-2-5 0-7l9-9c3-3 8-4 12-1l12 8"></path>
+                <path d="m70 44-8 17"></path>
+                <path d="m26 44 8 18"></path>
+                <circle cx="19" cy="22" r="4" fill="currentColor" stroke="none" opacity="0.38"></circle>
+                <circle cx="77" cy="22" r="4" fill="currentColor" stroke="none" opacity="0.38"></circle>
+              </svg>
+            </div>
+            <h3 class="contact-option-card__title">תוכנית מפיצים</h3>
+            <p class="contact-option-card__text">
+              רוצים להפוך למפיצים של פתרונות WIFIGATE? הצטרפו לרשת השותפים שלנו ותיהנו מהטבות בלעדיות,
+              תמיכה שיווקית ופתרונות מתקדמים. צרו איתנו קשר לפרטים נוספים.
             </p>
-          </div>
+            <a href="mailto:support@wifigate.io?subject=WIFIGATE%20Distributor%20Program" class="contact-option-card__button contact-option-card__button--muted">יצירת קשר למפיצים</a>
+          </article>
+
+          <article class="contact-option-card">
+            <div class="contact-option-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M24 50v-5c0-14 10-25 24-25s24 11 24 25v5"></path>
+                <path d="M30 50h-4c-4 0-7 3-7 7v7c0 4 3 7 7 7h4V50Z"></path>
+                <path d="M66 50h4c4 0 7 3 7 7v7c0 4-3 7-7 7h-4V50Z"></path>
+                <path d="M35 71c3 4 7 6 13 6h8"></path>
+                <path d="M56 77h8c4 0 7-3 7-7"></path>
+                <path d="M32 38h32"></path>
+                <path d="M36 29c2-8 6-13 12-13s10 5 12 13" opacity="0.38"></path>
+                <path d="M36 50c0-5 5-9 12-9s12 4 12 9" opacity="0.45"></path>
+                <path d="M42 60h12"></path>
+                <path d="M45 68h6"></path>
+              </svg>
+            </div>
+            <h3 class="contact-option-card__title">תמיכה טכנית</h3>
+            <p class="contact-option-card__text">
+              יש לכם שאלה טכנית? אנחנו כאן כדי לעזור. צרו איתנו קשר.
+            </p>
+            <a href="mailto:support@wifigate.io" class="contact-option-card__email">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                <path d="m3 7 9 6 9-6"></path>
+              </svg>
+              support@wifigate.io
+            </a>
+          </article>
+
+          <article class="contact-option-card">
+            <div class="contact-option-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 23h54L55 49v17l-14 8V49L21 23Z"></path>
+                <path d="M31 34h34" opacity="0.42"></path>
+                <path d="M38 45h20" opacity="0.42"></path>
+                <path d="M18 73h13" opacity="0.45"></path>
+                <path d="M65 73h13" opacity="0.45"></path>
+                <path d="M16 61h9" opacity="0.45"></path>
+                <path d="M71 61h9" opacity="0.45"></path>
+                <circle cx="22" cy="61" r="3" fill="currentColor" stroke="none" opacity="0.42"></circle>
+                <circle cx="75" cy="73" r="3" fill="currentColor" stroke="none" opacity="0.42"></circle>
+                <circle cx="31" cy="73" r="3" fill="currentColor" stroke="none" opacity="0.42"></circle>
+              </svg>
+            </div>
+            <h3 class="contact-option-card__title">מתעניינים ב-WIFIGATE?</h3>
+            <p class="contact-option-card__text">
+              למידע נוסף, הצעות מחיר ובדיקת התאמה לצרכים שלכם.
+            </p>
+            <a href="https://wa.me/972526996332" target="_blank" rel="noopener noreferrer" class="contact-option-card__button contact-option-card__button--primary">
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M13.6 2.3A7.9 7.9 0 0 0 .1 7.9c0 1.4.4 2.8 1.1 4L0 16l4.2-1.1a7.9 7.9 0 0 0 3.8 1h.1a7.9 7.9 0 0 0 5.5-13.6ZM8 14.5a6.6 6.6 0 0 1-3.4-.9l-.2-.1-2.5.6.7-2.4-.2-.3A6.6 6.6 0 0 1 8 1.3a6.6 6.6 0 0 1 0 13.2Zm3.6-4.9c-.2-.1-1.2-.6-1.4-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.6-1-.6-.5-1-1.2-1.1-1.4-.1-.2 0-.3.1-.4l.3-.3c.1-.1.1-.2.2-.3.1-.1 0-.2 0-.3-.1-.1-.5-1.1-.6-1.5-.2-.4-.3-.3-.4-.3h-.4c-.1 0-.3.1-.5.2-.2.2-.7.7-.7 1.7s.7 1.9.8 2c.1.1 1.4 2.1 3.4 3 .5.2.8.3 1.1.4.5.2.9.1 1.2.1.4-.1 1.2-.5 1.3-.9.2-.5.2-.9.1-.9 0-.1-.2-.2-.4-.3Z"></path>
+              </svg>
+              WhatsApp @WIFIGATE
+            </a>
+          </article>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" dir="rtl">
     <div class="container site-footer__inner">
       <div class="site-footer__column site-footer__column--brand">
         <div class="site-footer__brand">
-          <img src="../assets/icons/wifigate_accessibility_icon.webp" alt="" class="site-footer__accessibility-icon" width="52" height="52" decoding="async">
           <img src="../assets/img/WIFIGATE_LOGO_NO_BG.png" alt="WIFIGATE" class="site-footer__logo" loading="lazy" decoding="async">
         </div>
-        <p class="site-footer__brand-copy">No keys. No signs. No need to wait for someone to let you in.</p>
+        <p class="site-footer__brand-copy">חכם. מאובטח. פרטי. בלי מנוי. בלי פשרות.</p>
       </div>
-      <nav class="site-footer__column" aria-label="Legal">
-        <h2 class="site-footer__heading">Legal</h2>
+      <nav class="site-footer__column" aria-label="משפטי">
+        <h2 class="site-footer__heading">משפטי</h2>
         <div class="site-footer__links">
-          <a href="/el/terms-and-conditions/" class="site-footer__link" data-i18n="footer.terms" dir="ltr">Όροι και προϋποθέσεις</a>
-          <a href="/el/privacy-policy/" class="site-footer__link" data-i18n="footer.privacy" dir="ltr">Πολιτική απορρήτου</a>
-          <a href="/el/cookies/" class="site-footer__link" data-i18n="footer.cookies" dir="ltr">Cookies</a>
+          <a href="/el/terms-and-conditions/" class="site-footer__link">תנאים והגבלות</a>
+          <a href="/el/privacy-policy/" class="site-footer__link">מדיניות פרטיות</a>
+          <a href="/el/cookies/" class="site-footer__link">קובצי Cookie</a>
         </div>
       </nav>
       <div class="site-footer__column">
-        <h2 class="site-footer__heading">App and Support</h2>
+        <h2 class="site-footer__heading">אפליקציה ותמיכה</h2>
         <div class="site-footer__stores" aria-label="Download the app">
           <a href="#" class="site-footer__store" aria-label="Download on Google Play">
             <svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true">
@@ -908,15 +980,15 @@
         </a>
       </div>
       <div class="site-footer__column">
-        <h2 class="site-footer__heading">Follow Us.</h2>
+        <h2 class="site-footer__heading">עקבו אחרינו</h2>
         <div class="site-footer__socials">
           <a href="#" class="site-footer__social-link" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v2H6v4h3v7h4v-7h3l1-4h-4V9c0-.7.3-1 1-1Z"></path></svg></a>
-          <a href="#" class="site-footer__social-link" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.2 2H21l-6.2 7.1L22 22h-5.6L12 14.2 5.7 22H3l6.6-7.6L2.7 2h5.7l4 7.1L18.2 2Zm-1 17.7h1.6L7.5 4.2H5.8l11.4 15.5Z"></path></svg></a>
+          <a href="#" class="site-footer__social-link" aria-label="YouTube"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.6 4.6 12 4.6 12 4.6s-5.6 0-7.5.5a3 3 0 0 0-2.1 2.1C2 9.1 2 12 2 12s0 2.9.4 4.8a3 3 0 0 0 2.1 2.1c1.9.5 7.5.5 7.5.5s5.6 0 7.5-.5a3 3 0 0 0 2.1-2.1c.4-1.9.4-4.8.4-4.8s0-2.9-.4-4.8ZM10 15.4V8.6l6 3.4-6 3.4Z"></path></svg></a>
           <a href="#" class="site-footer__social-link" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.9 8.8H3.1V21h3.8V8.8ZM5 3a2.2 2.2 0 1 0 0 4.4A2.2 2.2 0 0 0 5 3Zm16 10.9c0-3.3-1.8-5.4-4.6-5.4-1.7 0-2.8.9-3.3 1.8V8.8H9.5V21h3.8v-6.1c0-1.6.3-3.1 2.2-3.1 1.9 0 1.9 1.8 1.9 3.2v6H21v-7.1Z"></path></svg></a>
           <a href="#" class="site-footer__social-link" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg></a>
         </div>
       </div>
-      <p class="site-footer__copy">© WIFIGATE <span id="js-year"></span>. All rights reserved.</p>
+      <p class="site-footer__copy">© 2026 WIFIGATE. כל הזכויות שמורות.</p>
     </div>
   </footer>
 
