@@ -27,6 +27,7 @@ const homeDataFiles = [
   "js/translations.js",
   "js/translations-extra.js",
   "js/translations-new-locales.js",
+  "js/contact-footer-translations.js",
   "js/features-refresh.js",
   "js/guest-invites-home.js",
   "js/application-stories.js",
@@ -42,6 +43,7 @@ const legalDataFiles = {
   cookies: [
     "js/translations.js",
     "js/translations-extra.js",
+    "js/contact-footer-translations.js",
     "js/cookies-translations.js",
     "js/cookies-translations-extra.js",
     "js/language-polish.js",
@@ -49,6 +51,7 @@ const legalDataFiles = {
   "privacy-policy": [
     "js/translations.js",
     "js/translations-extra.js",
+    "js/contact-footer-translations.js",
     "js/privacy-translations.js",
     "js/privacy-translations-extra.js",
     "js/language-polish.js",
@@ -56,6 +59,7 @@ const legalDataFiles = {
   "terms-and-conditions": [
     "js/translations.js",
     "js/translations-extra.js",
+    "js/contact-footer-translations.js",
     "js/legal-translations.js",
     "js/legal-translations-extra.js",
     "js/language-polish.js",
@@ -66,6 +70,7 @@ const homeRuntimeScriptsToRemove = [
   "js/translations.js",
   "js/translations-extra.js",
   "js/translations-new-locales.js",
+  "js/contact-footer-translations.js",
   "js/features-refresh.js",
   "js/site-copy-overrides.js",
   "js/i18n.js",
@@ -470,6 +475,37 @@ function applyDataI18nTranslations($, bundle, locale) {
   });
 }
 
+function updateFooterStaticUi($, bundle, locale) {
+  const footer = bundle.footer || {};
+  const contact = bundle.contact || {};
+  const dir = isRtl(locale) ? "rtl" : "ltr";
+  const set = (selector, value) => {
+    if (typeof value === "string") {
+      $(selector).attr("dir", dir).text(formatTextForLocaleDirection(value, locale));
+    }
+  };
+
+  set(".site-footer__brand-copy", footer.tagline);
+  const headings = $(".site-footer__heading");
+  [footer.legalTitle, footer.appSupportTitle, footer.socialTitle].forEach((value, index) => {
+    if (typeof value === "string" && headings.eq(index).length) {
+      headings.eq(index).attr("dir", dir).text(formatTextForLocaleDirection(value, locale));
+    }
+  });
+  set(".site-footer__link:nth-child(1)", footer.terms);
+  set(".site-footer__link:nth-child(2)", footer.privacy);
+  set(".site-footer__link:nth-child(3)", footer.cookies);
+  set(".site-footer__copy", `${String.fromCharCode(0xa9)} 2026 ${footer.copyright || "WIFIGATE. All rights reserved."}`);
+  set("[data-i18n='contact.distributorTitle']", contact.distributorTitle);
+  set("[data-i18n='contact.distributorText']", contact.distributorText);
+  set("[data-i18n='contact.distributorButton']", contact.distributorButton);
+  set("[data-i18n='contact.supportTitle']", contact.supportTitle);
+  set("[data-i18n='contact.supportText']", contact.supportText);
+  set("[data-i18n='contact.interestTitle']", contact.interestTitle);
+  set("[data-i18n='contact.interestText']", contact.interestText);
+  set("[data-i18n='contact.whatsappButton']", contact.whatsappButton);
+}
+
 function updateAccessibilityMarkup($, accessibilityBundle) {
   $(".skip-link").text(accessibilityBundle.skipLink);
   $("#a11y-fab").attr("aria-label", accessibilityBundle.openButton);
@@ -737,6 +773,18 @@ function rewriteHomeGuestInvitesLink($, locale) {
   $(`a[href='${guestInvitesPageKey}/']`).attr("href", buildPagePath(locale, guestInvitesPageKey));
 }
 
+function reorderHomeSections($) {
+  const main = $("#main-content");
+  const sectionIds = ["home", "advantages", "where", "tutorials", "guest-invites-api", "contact"];
+
+  sectionIds.forEach((id) => {
+    const section = main.children(`#${id}`);
+    if (section.length) {
+      main.append(section);
+    }
+  });
+}
+
 function insertPageDataScript($, scriptId, data, anchorSelector) {
   $(anchorSelector).before(
     `\n  <script id="${scriptId}" type="application/json">${JSON.stringify(data)}</script>`
@@ -843,11 +891,13 @@ async function buildHomePages(homeData) {
     removeScripts($, homeRuntimeScriptsToRemove);
     appendScripts($, homeRuntimeScriptsToAdd, "script[src*='js/main.js']", locale, "home");
     applyDataI18nTranslations($, bundle, locale);
+    updateFooterStaticUi($, bundle, locale);
     setLanguageSelector($, homeData.localeOptions, locale, "home");
     updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale);
     rewriteHomeInternalLinks($, locale);
     updateHomeWhereSection($, locale, bundle);
     rewriteHomeGuestInvitesLink($, locale);
+    reorderHomeSections($);
     setHomeMeta($, bundle, locale, homeData.localeOptions);
     insertPageDataScript(
       $,
@@ -885,6 +935,7 @@ async function buildLegalPages(homeData, legalCollections) {
       removeScripts($, legalRuntimeScriptsToRemove);
       appendScripts($, legalRuntimeScriptsToAdd, "script[src*='js/legal-page.js']", locale, pageKey);
       applyDataI18nTranslations($, bundle, locale);
+      updateFooterStaticUi($, bundle, locale);
       setLanguageSelector($, homeData.localeOptions, locale, pageKey);
       updateAccessibilityMarkup($, accessibilityBundle);
       rewriteLegalInternalLinks($, locale, pageKey);
@@ -1124,6 +1175,7 @@ async function buildNichePages(homeData) {
       appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, niche.key);
       setLanguageSelector($, homeData.localeOptions, locale, niche.key);
       updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle);
+      updateFooterStaticUi($, ctx.bundle, locale);
       rewriteNicheInternalLinks($, locale);
       setNicheMeta($, ctx, niche, locale, homeData.localeOptions);
 
@@ -1257,6 +1309,7 @@ async function buildGuestInvitesPages(homeData) {
     rewriteStaticAssets($, locale, guestInvitesPageKey);
     appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, guestInvitesPageKey);
     applyDataI18nTranslations($, bundle, locale);
+    updateFooterStaticUi($, bundle, locale);
     setLanguageSelector($, homeData.localeOptions, locale, guestInvitesPageKey);
     updateAccessibilityMarkup($, accessibilityBundle);
     updateGuestInvitesStaticUi($, strings);
