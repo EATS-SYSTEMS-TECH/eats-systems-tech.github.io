@@ -311,16 +311,35 @@ function changeLanguage(lang) {
   );
 }
 
+function getTextDirectionForLanguage(lang = currentLang) {
+  return RTL_LANGS.has(resolveLanguage(lang)) ? "rtl" : "ltr";
+}
+
+function formatTranslatedTextForDirection(text, dir) {
+  if (typeof text !== "string" || dir !== "rtl") {
+    return text;
+  }
+
+  const trimmed = text.trimEnd();
+  if (!trimmed || /[\u200e\u200f]$/.test(trimmed)) {
+    return text;
+  }
+
+  return /[?!:;.,]$/.test(trimmed) ? `${text}\u200f` : text;
+}
+
 function updateTranslations() {
   const elements = document.querySelectorAll("[data-i18n]");
   const activeTranslations = getTranslationBundle();
+  const textDirection = getTextDirectionForLanguage();
 
   elements.forEach((element) => {
     const key = element.getAttribute("data-i18n");
     const translation = getNestedTranslation(activeTranslations, key);
 
     if (translation) {
-      element.textContent = translation;
+      element.setAttribute("dir", textDirection);
+      element.textContent = formatTranslatedTextForDirection(translation, textDirection);
     }
   });
 }

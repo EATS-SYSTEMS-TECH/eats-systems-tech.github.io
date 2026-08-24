@@ -442,13 +442,30 @@ function replaceStructuredData($, data) {
   $("head").append(`\n  <script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n  </script>`);
 }
 
-function applyDataI18nTranslations($, bundle) {
+function formatTextForLocaleDirection(text, locale) {
+  if (typeof text !== "string" || !isRtl(locale)) {
+    return text;
+  }
+
+  const trimmed = text.trimEnd();
+  if (!trimmed || /[\u200e\u200f]$/.test(trimmed)) {
+    return text;
+  }
+
+  return /[?!:;.,]$/.test(trimmed) ? `${text}\u200f` : text;
+}
+
+function applyDataI18nTranslations($, bundle, locale) {
+  const dir = isRtl(locale) ? "rtl" : "ltr";
+
   $("[data-i18n]").each((_, element) => {
     const key = $(element).attr("data-i18n");
     const translatedValue = key ? getNestedValue(bundle, key) : undefined;
 
     if (typeof translatedValue === "string") {
-      $(element).text(translatedValue);
+      $(element)
+        .attr("dir", dir)
+        .text(formatTextForLocaleDirection(translatedValue, locale));
     }
   });
 }
@@ -825,7 +842,7 @@ async function buildHomePages(homeData) {
     rewriteStaticAssets($, locale, "home");
     removeScripts($, homeRuntimeScriptsToRemove);
     appendScripts($, homeRuntimeScriptsToAdd, "script[src*='js/main.js']", locale, "home");
-    applyDataI18nTranslations($, bundle);
+    applyDataI18nTranslations($, bundle, locale);
     setLanguageSelector($, homeData.localeOptions, locale, "home");
     updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale);
     rewriteHomeInternalLinks($, locale);
@@ -867,7 +884,7 @@ async function buildLegalPages(homeData, legalCollections) {
       rewriteStaticAssets($, locale, pageKey);
       removeScripts($, legalRuntimeScriptsToRemove);
       appendScripts($, legalRuntimeScriptsToAdd, "script[src*='js/legal-page.js']", locale, pageKey);
-      applyDataI18nTranslations($, bundle);
+      applyDataI18nTranslations($, bundle, locale);
       setLanguageSelector($, homeData.localeOptions, locale, pageKey);
       updateAccessibilityMarkup($, accessibilityBundle);
       rewriteLegalInternalLinks($, locale, pageKey);
@@ -1239,7 +1256,7 @@ async function buildGuestInvitesPages(homeData) {
     setBodyDirection($, locale);
     rewriteStaticAssets($, locale, guestInvitesPageKey);
     appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, guestInvitesPageKey);
-    applyDataI18nTranslations($, bundle);
+    applyDataI18nTranslations($, bundle, locale);
     setLanguageSelector($, homeData.localeOptions, locale, guestInvitesPageKey);
     updateAccessibilityMarkup($, accessibilityBundle);
     updateGuestInvitesStaticUi($, strings);
