@@ -25,7 +25,7 @@ const localeOptions = [
 ];
 const rtlLocales = new Set(["he", "ar"]);
 const nicheKeys = NICHE_DEFINITIONS.map((n) => n.key);
-const indexablePages = ["home", ...nicheKeys];
+const indexablePages = ["home", "automation", ...nicheKeys];
 
 function pageSegments(locale, pageKey) {
   const segments = [];
@@ -138,12 +138,12 @@ async function main() {
       await checkResolvable($, filePath, "link[rel='stylesheet']", "href", "stylesheet");
       await checkResolvable($, filePath, "script[src]", "src", "script");
 
-      if (pageKey !== "home") {
+      if (nicheKeys.includes(pageKey)) {
         const bullets = $("#niche-benefits-list li").length;
         if (bullets < 5) problems.push(`${rel}: only ${bullets} benefit bullets rendered`);
         const alt = $("#niche-image").attr("alt") || "";
         if (!alt.trim()) problems.push(`${rel}: niche hero image has empty alt`);
-      } else {
+      } else if (pageKey === "home") {
         const links = $(".where-list__link[data-niche-key]").length;
         if (links !== nicheKeys.length) {
           problems.push(`${rel}: ${links} where-list links, expected ${nicheKeys.length}`);

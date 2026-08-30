@@ -10,7 +10,7 @@ const repoRoot = process.cwd();
 const siteOrigin = "https://wifigate.io";
 const defaultLocale = "en";
 const nowDate = new Date().toISOString().slice(0, 10);
-const guestInvitesPageKey = "Automated-Guest-Invites-API";
+const guestInvitesPageKey = "automation";
 const utilityPageKeys = ["wifigate-link", "wifigate-api"];
 
 const homeTemplatePath = path.join(repoRoot, "templates", "index.template.html");
@@ -1255,9 +1255,9 @@ function setGuestInvitesMeta($, locale, localeOptions, strings) {
 
   $("title").text(strings.metaTitle);
   setMetaByName($, "description", strings.metaDescription);
-  setRobotsMeta($, "noindex, follow");
+  setRobotsMeta($, "index, follow");
   $("link[rel='canonical']").attr("href", url);
-  replaceAlternateLinks($, [], guestInvitesPageKey);
+  replaceAlternateLinks($, localeOptions, guestInvitesPageKey);
 
   setMetaByProperty($, "og:type", "website");
   setMetaByProperty($, "og:site_name", "WIFIGATE");
@@ -1297,6 +1297,7 @@ function setGuestInvitesMeta($, locale, localeOptions, strings) {
 
 async function buildGuestInvitesPages(homeData) {
   const template = await fs.readFile(guestInvitesTemplatePath, "utf8");
+  const sitemapEntries = [];
 
   for (const localeOption of homeData.localeOptions) {
     const locale = localeOption.code;
@@ -1318,9 +1319,15 @@ async function buildGuestInvitesPages(homeData) {
 
     const outputFile = buildOutputFilePath(locale, guestInvitesPageKey);
     await writeOutputFile(outputFile, serialize($));
+
+    sitemapEntries.push({
+      loc: buildPageUrl(locale, guestInvitesPageKey),
+      changefreq: "monthly",
+      priority: "0.9",
+    });
   }
 
-  return [];
+  return sitemapEntries;
 }
 
 async function main() {

@@ -216,7 +216,7 @@
           <a href="#advantages" class="nav-link nav__link" data-i18n="nav.features" dir="ltr">మమ్మల్ని ఎందుకు ఎంచుకోవాలి?</a>
           <a href="#where" class="nav-link nav__link" data-i18n="tabs.where" dir="ltr">వినియోగాలు</a>
           <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about" dir="ltr">ట్యుటోరియల్స్</a>
-          <a href="#guest-invites-api" class="nav-link nav__link">WIFIGATE API</a>
+          <a href="#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
           <a href="#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact" dir="ltr">మమ్మల్ని సంప్రదించండి</a>
         </nav>
       </div>
@@ -737,9 +737,8 @@
               <li class="guest-invites__point">
                 <span class="guest-invites__point-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2 2 7l10 5 10-5-10-5Z"></path>
-                    <path d="m2 17 10 5 10-5"></path>
-                    <path d="m2 12 10 5 10-5"></path>
+                    <rect x="7" y="2" width="10" height="20" rx="2"></rect>
+                    <path d="M11 18h2"></path>
                   </svg>
                 </span>
                 <span class="guest-invites__point-copy">
@@ -773,7 +772,7 @@
               </li>
             </ul>
 
-            <a class="btn btn--primary guest-invites__cta" href="/te/Automated-Guest-Invites-API/">
+            <a class="btn btn--primary guest-invites__cta" href="/te/automation/">
               <span data-i18n="guestInvites.promo.cta" dir="ltr">ఇన్వైట్ జెనరేటర్‌ను తెరవండి</span>
               <svg class="guest-invites__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M5 12h14"></path>
@@ -787,18 +786,15 @@
               <span class="guest-invites__dot guest-invites__dot--r"></span>
               <span class="guest-invites__dot guest-invites__dot--y"></span>
               <span class="guest-invites__dot guest-invites__dot--g"></span>
-              <span class="guest-invites__console-method">POST</span>
+              <span class="guest-invites__console-method">AUTO</span>
             </div>
-            <pre class="guest-invites__console-body"><code><span class="giapi-tok-url">https://wifigate.io/api/guest-invites/create</span>
-  ?<span class="giapi-tok-key">api_key</span>=<span class="giapi-tok-val">WIFIGATE_GUESTS_API_KEY</span>
-  &amp;<span class="giapi-tok-key">guest_name</span>=<span class="giapi-tok-val">Ada%20Lovelace</span>
-  &amp;<span class="giapi-tok-key">guest_phone</span>=<span class="giapi-tok-val">%2B972526996332</span>
-  &amp;<span class="giapi-tok-key">guest_email</span>=<span class="giapi-tok-val">ada%40example.com</span>
-  &amp;<span class="giapi-tok-key">date_start</span>=<span class="giapi-tok-val">2026-07-01</span>
-  &amp;<span class="giapi-tok-key">date_end</span>=<span class="giapi-tok-val">2026-07-03</span>
-  &amp;<span class="giapi-tok-key">time_start</span>=<span class="giapi-tok-val">09%3A00</span>
-  &amp;<span class="giapi-tok-key">time_end</span>=<span class="giapi-tok-val">18%3A00</span>
-  &amp;<span class="giapi-tok-key">comment</span>=<span class="giapi-tok-val">VIP%20guest</span></code></pre>
+            <pre class="guest-invites__console-body"><code><span class="giapi-tok-url">✓ Guest access created</span>
+
+  <span class="giapi-tok-key">Guest</span>       <span class="giapi-tok-val">Dana Levi</span>
+  <span class="giapi-tok-key">Entrance</span>    <span class="giapi-tok-val">Main gate + parking</span>
+  <span class="giapi-tok-key">Check-in</span>    <span class="giapi-tok-val">Fri · 15:00</span>
+  <span class="giapi-tok-key">Check-out</span>   <span class="giapi-tok-val">Sun · 11:00</span>
+  <span class="giapi-tok-key">Status</span>      <span class="giapi-tok-val">Active · expires automatically</span></code></pre>
             <figcaption class="guest-invites__console-caption" data-i18n="guestInvites.promo.consoleCaption" dir="ltr">ప్రత్యక్ష అభ్యర్థన ప్రివ్యూ</figcaption>
           </figure>
         </div>
