@@ -479,6 +479,10 @@ function updateFooterStaticUi($, bundle, locale) {
   const footer = bundle.footer || {};
   const contact = bundle.contact || {};
   const dir = isRtl(locale) ? "rtl" : "ltr";
+  // These wrappers are authored dir="rtl" (Hebrew-first source). Flip them to
+  // match the page locale so LTR languages (English, etc.) are not mirrored.
+  $(".site-footer").attr("dir", dir);
+  $(".contact-options, .contact-options__header").attr("dir", dir);
   const set = (selector, value) => {
     if (typeof value === "string") {
       $(selector).attr("dir", dir).text(formatTextForLocaleDirection(value, locale));

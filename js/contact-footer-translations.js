@@ -24,7 +24,7 @@ var CONTACT_FOOTER_COPY = {
       interestText: "למידע נוסף, הצעות מחיר ובדיקת התאמה לצרכים שלכם.",
       whatsappButton: "WhatsApp @WIFIGATE"
     },
-    footer: { legalTitle: "משפטי", appSupportTitle: "אפליקציה ותמיכה", socialTitle: "עקבו אחרינו", tagline: "אין מפתחות . אין שלטים . אין צורך לחכות שמישהו יכניס אתכם." }
+    footer: { legalTitle: "משפטי", appSupportTitle: "אפליקציה ותמיכה", socialTitle: "עקבו אחרינו", tagline: "אין מפתחות. אין שלטים. אין כרטיסים.\nכניסה דיגיטלית מאובטחת — בלי לחכות שמישהו יפתח לכם." }
   },
   es: {
     contact: { distributorTitle: "Programa de distribuidores", distributorText: "¿Quieres distribuir las soluciones de WIFIGATE? Únete a nuestra red de socios y disfruta de ventajas exclusivas, apoyo de marketing y soluciones avanzadas. Contáctanos para más información.", distributorButton: "Contacto para distribuidores", supportTitle: "Soporte técnico", supportText: "¿Tienes una pregunta técnica? Estamos aquí para ayudarte. Contáctanos.", interestTitle: "¿Te interesa WIFIGATE?", interestText: "Más información, precios y una evaluación de adecuación a tus necesidades.", whatsappButton: "WhatsApp @WIFIGATE" },
