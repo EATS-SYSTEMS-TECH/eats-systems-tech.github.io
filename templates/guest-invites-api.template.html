@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,11 +9,11 @@
     content="Build and preview a WIFIGATE guest invitation API request. Add the guest details, choose access dates and times, and copy the ready-to-use URL." />
   <meta name="author" content="EATS SYSTEMS TECH" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://wifigate.io/Automated-Guest-Invites-API/" />
+  <link rel="canonical" href="https://wifigate.io/automation/" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://wifigate.io/Automated-Guest-Invites-API/" />
+  <meta property="og:url" content="https://wifigate.io/automation/" />
   <meta property="og:title" content="Automated Guest Invites API | WIFIGATE" />
   <meta property="og:description"
     content="Build and preview a WIFIGATE guest invitation API request, then copy the ready-to-use URL." />
@@ -21,14 +21,14 @@
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://wifigate.io/Automated-Guest-Invites-API/" />
+  <meta property="twitter:url" content="https://wifigate.io/automation/" />
   <meta property="twitter:title" content="Automated Guest Invites API | WIFIGATE" />
   <meta property="twitter:description"
     content="Build and preview a WIFIGATE guest invitation API request, then copy the ready-to-use URL." />
   <meta property="twitter:image" content="https://wifigate.io/assets/img/wifigate_homepage.webp" />
 
   <!-- Hreflang alternates are generated per locale by the build. -->
-  <link rel="alternate" hreflang="en" href="https://wifigate.io/Automated-Guest-Invites-API/" />
+  <link rel="alternate" hreflang="en" href="https://wifigate.io/automation/" />
 
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -43,13 +43,13 @@
 
   <link rel="stylesheet" href="../css/styles.css?v=20260824a" />
   <link rel="stylesheet" href="../css/accessibility.css?v=20260604c" />
-  <link rel="stylesheet" href="../css/guest-invites.css?v=20260625a" />
+  <link rel="stylesheet" href="../css/automation.css?v=20260830a" />
   <script src="../js/utils.js?v=20260402a" defer></script>
   <script src="../js/navigation.js?v=20260405a" defer></script>
   <script src="../js/accessibility.js?v=20260616c" defer></script>
 </head>
 
-<body class="giapi-page">
+<body class="wa-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="site-header" id="top">
@@ -71,7 +71,7 @@
           <a href="../index.html#advantages" class="nav-link nav__link" data-i18n="nav.features">Features</a>
           <a href="../index.html#where" class="nav-link nav__link" data-i18n="tabs.where">Where</a>
           <a href="../index.html#tutorials" class="nav-link nav__link" data-i18n="nav.about">Tutorials</a>
-          <a href="../index.html#guest-invites-api" class="nav-link nav__link">WIFIGATE API</a>
+          <a href="../index.html#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
           <a href="../index.html#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact">Contact
             Us</a>
         </nav>
@@ -87,7 +87,7 @@
           <span class="language-selector__arrow">&#9662;</span>
         </div>
         <div class="language-selector__dropdown" id="language-dropdown">
-          <a class="language-selector__option" href="/Automated-Guest-Invites-API/" data-lang="en">
+          <a class="language-selector__option" href="/automation/" data-lang="en">
             <span class="language-selector__flag">
               <img src="../assets/img/flags/flag-us.png" alt="US" width="50" height="26" />
             </span>
@@ -98,184 +98,303 @@
     </nav>
   </header>
 
-  <main class="giapi-main" id="main-content">
-    <nav class="niche-breadcrumb giapi-breadcrumb" aria-label="Breadcrumb">
-      <div class="container">
-        <ol class="niche-breadcrumb__list">
-          <li class="niche-breadcrumb__item">
-            <a class="niche-breadcrumb__link" href="../index.html#home" id="giapi-breadcrumb-home"
-              data-i18n="guestInvites.generator.backToHome">Back to home</a>
-          </li>
-          <li class="niche-breadcrumb__item" aria-current="page">
-            <span id="giapi-breadcrumb-current" data-i18n="guestInvites.generator.breadcrumb">Automated Guest Invites
-              API</span>
-          </li>
-        </ol>
-      </div>
-    </nav>
-
-    <section class="giapi-hero" aria-labelledby="giapi-heading">
-      <div class="container">
-        <p class="giapi-eyebrow" data-i18n="guestInvites.promo.eyebrow">New · Developer API</p>
-        <h1 class="giapi-heading" id="giapi-heading" data-i18n="guestInvites.generator.heading">
-          Automated Guest Invites API
-        </h1>
-        <p class="giapi-subheading" data-i18n="guestInvites.generator.subheading">
-          Fill in the details below to build a guest invitation request. The URL updates live as you type — then copy it
-          into your own integration.
-        </p>
-      </div>
-    </section>
-
-    <section class="giapi-tool" aria-labelledby="giapi-form-title">
-      <div class="container giapi-tool__grid">
-        <form class="giapi-panel giapi-form" id="giapi-form" novalidate autocomplete="off">
-          <h2 class="giapi-panel__title" id="giapi-form-title" data-i18n="guestInvites.generator.formTitle">
-            Invitation details
-          </h2>
-
-          <div class="giapi-field">
-            <label class="giapi-label" for="giapi-api-key" data-i18n="guestInvites.generator.apiKeyLabel">API
-              key</label>
-            <input class="giapi-input giapi-input--locked" id="giapi-api-key" name="api_key" type="text"
-              value="WIFIGATE_GUESTS_API_KEY" readonly aria-describedby="giapi-api-key-hint" />
-            <p class="giapi-hint" id="giapi-api-key-hint" data-i18n="guestInvites.generator.apiKeyHint">
-              Placeholder only. Replace WIFIGATE_GUESTS_API_KEY with your real key inside your own secure environment —
-              never share it publicly.
-            </p>
+  <main class="wa-main" id="main-content">
+    <!-- ============ HERO ============ -->
+    <section class="wa-hero" aria-labelledby="wa-hero-title">
+      <div class="container wa-hero__grid">
+        <div class="wa-hero__copy">
+          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.hero.eyebrow">WIFIGATE Automation</span>
+          <h1 class="wa-hero__title" id="wa-hero-title" data-i18n="guestInvites.marketing.hero.title">Guest access that
+            takes care of itself</h1>
+          <p class="wa-hero__lead" data-i18n="guestInvites.marketing.hero.lead">The moment a booking is confirmed,
+            WIFIGATE creates secure, time-limited access to your gate, door or garage — and it ends on its own at
+            checkout. No keys to hand over, no codes to chase, no one waiting at the entrance.</p>
+          <div class="wa-hero__actions">
+            <a class="btn btn--primary btn--hero" href="../index.html#contact"
+              data-i18n="guestInvites.marketing.hero.ctaPrimary">Talk to us</a>
+            <a class="btn btn--ghost btn--hero" href="#wa-how"
+              data-i18n="guestInvites.marketing.hero.ctaSecondary">See how it works</a>
           </div>
-
-          <div class="giapi-grid">
-            <div class="giapi-field">
-              <label class="giapi-label" for="giapi-guest-name" data-i18n="guestInvites.generator.guestNameLabel">Guest
-                name</label>
-              <input class="giapi-input" id="giapi-guest-name" name="guest_name" type="text" inputmode="text" />
-            </div>
-
-            <div class="giapi-field">
-              <label class="giapi-label" for="giapi-guest-phone"
-                data-i18n="guestInvites.generator.guestPhoneLabel">Guest phone</label>
-              <input class="giapi-input" id="giapi-guest-phone" name="guest_phone" type="tel" inputmode="tel" />
-            </div>
-
-            <div class="giapi-field">
-              <label class="giapi-label" for="giapi-guest-email"
-                data-i18n="guestInvites.generator.guestEmailLabel">Guest email</label>
-              <input class="giapi-input" id="giapi-guest-email" name="guest_email" type="email" inputmode="email" />
-            </div>
-
-            <div class="giapi-field">
-              <label class="giapi-label" for="giapi-date-start" data-i18n="guestInvites.generator.dateStartLabel">Start
-                date</label>
-              <input class="giapi-input" id="giapi-date-start" name="date_start" type="date" />
-            </div>
-
-            <div class="giapi-field">
-              <label class="giapi-label" for="giapi-date-end" data-i18n="guestInvites.generator.dateEndLabel">End
-                date</label>
-              <input class="giapi-input" id="giapi-date-end" name="date_end" type="date" />
-            </div>
-
-            <div class="giapi-field">
-              <label class="giapi-label" for="giapi-time-start" data-i18n="guestInvites.generator.timeStartLabel">Start
-                time</label>
-              <input class="giapi-input" id="giapi-time-start" name="time_start" type="time" />
-            </div>
-
-            <div class="giapi-field">
-              <label class="giapi-label" for="giapi-time-end" data-i18n="guestInvites.generator.timeEndLabel">End
-                time</label>
-              <input class="giapi-input" id="giapi-time-end" name="time_end" type="time" />
-            </div>
-
-            <div class="giapi-field giapi-field--full">
-              <label class="giapi-label" for="giapi-comment">
-                <span data-i18n="guestInvites.generator.commentLabel">Comment</span>
-                <span class="giapi-tag" data-i18n="guestInvites.generator.optionalTag">Optional</span>
-              </label>
-              <input class="giapi-input" id="giapi-comment" name="comment" type="text" inputmode="text" />
-            </div>
-          </div>
-        </form>
-
-        <section class="giapi-panel giapi-output" aria-labelledby="giapi-preview-title">
-          <h2 class="giapi-panel__title" id="giapi-preview-title" data-i18n="guestInvites.generator.previewTitle">
-            Generated URL
-          </h2>
-          <p class="giapi-hint" data-i18n="guestInvites.generator.previewHint">
-            All values are URL-encoded automatically, including spaces, symbols, and non-Latin characters.
-          </p>
-
-          <label class="giapi-visually-hidden" for="giapi-url" data-i18n="guestInvites.generator.previewTitle">Generated
-            URL</label>
-          <textarea class="giapi-url" id="giapi-url" rows="6" readonly spellcheck="false" dir="ltr"
-            aria-describedby="giapi-copy-status"></textarea>
-
-          <div class="giapi-output__actions">
-            <button class="btn btn--primary giapi-copy" id="giapi-copy" type="button">
-              <svg class="giapi-copy__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="9" y="9" width="11" height="11" rx="2" />
-                <path d="M5 15V5a2 2 0 0 1 2-2h10" />
-              </svg>
-              <span class="giapi-copy__label" data-i18n="guestInvites.generator.copyButton">Copy URL</span>
-            </button>
-            <p class="giapi-copy-status" id="giapi-copy-status" role="status" aria-live="polite"></p>
-          </div>
-        </section>
+          <p class="wa-hero__note" data-i18n="guestInvites.marketing.hero.note">For hotels, short-term rentals,
+            guesthouses and rental parking.</p>
+        </div>
+        <div class="wa-hero__media">
+          <img src="../assets/img/wifigate_homepage.webp" width="1280" height="960"
+            alt="The WIFIGATE device beside the mobile app showing a guest access invitation" loading="eager"
+            decoding="async" />
+        </div>
       </div>
     </section>
 
-    <section class="giapi-mapping-section" aria-labelledby="giapi-mapping-title">
+    <!-- ============ AUDIENCE ============ -->
+    <section class="wa-audience" aria-label="Who it is for">
+      <div class="container wa-audience__row">
+        <span class="wa-audience__label" data-i18n="guestInvites.marketing.audience.label">Built for:</span>
+        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.hotels">Hotels</span>
+        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.rentals">Airbnb &amp; short-term rentals</span>
+        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.guesthouses">Guesthouses</span>
+        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.parking">Rental parking &amp; garages</span>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="section wa-how" id="wa-how" aria-labelledby="wa-how-title">
       <div class="container">
-        <div class="giapi-panel giapi-mapping">
-          <h2 class="giapi-panel__title" id="giapi-mapping-title" data-i18n="guestInvites.generator.mappingTitle">
-            Parameter mapping
-          </h2>
-          <p class="giapi-hint" data-i18n="guestInvites.generator.mappingIntro">
-            Each placeholder in the URL maps to one field:
-          </p>
+        <div class="wa-head">
+          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.steps.eyebrow">How it works</span>
+          <h2 class="wa-h2" id="wa-how-title" data-i18n="guestInvites.marketing.steps.title">From booking to open gate —
+            automatically</h2>
+          <p class="wa-lead" data-i18n="guestInvites.marketing.steps.subtitle">Three steps, and then it runs on its own
+            for every reservation.</p>
+        </div>
+        <div class="wa-steps__grid">
+          <article class="wa-step">
+            <div class="wa-step__num" aria-hidden="true">1</div>
+            <h3 class="wa-step__title" data-i18n="guestInvites.marketing.steps.s1t">A booking comes in</h3>
+            <p class="wa-step__text" data-i18n="guestInvites.marketing.steps.s1x">Your booking or property-management
+              system tells WIFIGATE a new reservation is confirmed.</p>
+          </article>
+          <article class="wa-step">
+            <div class="wa-step__num" aria-hidden="true">2</div>
+            <h3 class="wa-step__title" data-i18n="guestInvites.marketing.steps.s2t">Access is created automatically</h3>
+            <p class="wa-step__text" data-i18n="guestInvites.marketing.steps.s2x">WIFIGATE issues a secure, time-limited
+              invitation for exactly the right gate, door or garage — valid only for that stay.</p>
+          </article>
+          <article class="wa-step">
+            <div class="wa-step__num" aria-hidden="true">3</div>
+            <h3 class="wa-step__title" data-i18n="guestInvites.marketing.steps.s3t">Your guest walks straight in</h3>
+            <p class="wa-step__text" data-i18n="guestInvites.marketing.steps.s3x">They open the entrance from their phone.
+              When checkout arrives, the access expires by itself — nothing to collect or cancel.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-          <pre
-            class="giapi-format"><code dir="ltr">https://wifigate.io/api/guest-invites/create?api_key=<b>data1</b>&amp;guest_name=<b>data2</b>&amp;guest_phone=<b>data3</b>&amp;guest_email=<b>data4</b>&amp;date_start=<b>data5</b>&amp;date_end=<b>data6</b>&amp;time_start=<b>data7</b>&amp;time_end=<b>data8</b>&amp;comment=<b>data9</b></code></pre>
+    <!-- ============ BENEFITS ============ -->
+    <section class="section wa-benefits" aria-labelledby="wa-benefits-title">
+      <div class="container">
+        <div class="wa-head">
+          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.benefits.eyebrow">Why WIFIGATE Automation</span>
+          <h2 class="wa-h2" id="wa-benefits-title" data-i18n="guestInvites.marketing.benefits.title">Less front desk. More
+            hands-off hosting.</h2>
+          <p class="wa-lead" data-i18n="guestInvites.marketing.benefits.subtitle">Everything a booking needs to become
+            access — handled for you.</p>
+        </div>
+        <div class="wa-benefits__grid">
+          <article class="wa-benefit">
+            <span class="wa-benefit__icon"><img src="../assets/wifigate_features/quick_guest_invite.svg" alt=""
+                width="30" height="30" loading="lazy" decoding="async" /></span>
+            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b1t">No keys to hand over</h3>
+            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b1x">Forget key pickups, lockboxes and
+              copied codes. Access arrives on your guest's phone the moment it is needed.</p>
+          </article>
+          <article class="wa-benefit">
+            <span class="wa-benefit__icon"><img src="../assets/wifigate_features/history.svg" alt="" width="30"
+                height="30" loading="lazy" decoding="async" /></span>
+            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b2t">Time-limited by design</h3>
+            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b2x">Every invitation opens at
+              check-in and expires at checkout — automatically, for every single stay.</p>
+          </article>
+          <article class="wa-benefit">
+            <span class="wa-benefit__icon"><img src="../assets/wifigate_features/security_privacy.svg" alt="" width="30"
+                height="30" loading="lazy" decoding="async" /></span>
+            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b3t">Encrypted and private</h3>
+            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b3x">Access is encrypted and the gate
+              works locally. Your property and your guests stay protected.</p>
+          </article>
+          <article class="wa-benefit">
+            <span class="wa-benefit__icon"><img src="../assets/wifigate_features/auto_open.svg" alt="" width="30"
+                height="30" loading="lazy" decoding="async" /></span>
+            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b4t">Works with your entrances</h3>
+            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b4x">Gates, garage doors, barriers and
+              entrance doors — WIFIGATE controls what you already have.</p>
+          </article>
+          <article class="wa-benefit">
+            <span class="wa-benefit__icon"><img src="../assets/wifigate_features/stability.svg" alt="" width="30"
+                height="30" loading="lazy" decoding="async" /></span>
+            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b5t">Scales to whole buildings</h3>
+            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b5x">From a single gate to an entire
+              complex, one invitation can cover every entrance a guest needs.</p>
+          </article>
+          <article class="wa-benefit">
+            <span class="wa-benefit__icon"><img src="../assets/wifigate_features/digital_rf_remote_learning.svg" alt=""
+                width="30" height="30" loading="lazy" decoding="async" /></span>
+            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b6t">Connects to your systems</h3>
+            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b6x">Plug WIFIGATE Automation into
+              your booking flow, PMS or channel manager and let it run.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-          <ol class="giapi-mapping__list" dir="ltr">
-            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data1</code><span
-                class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">WIFIGATE_GUESTS_API_KEY</code></li>
-            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data2</code><span
-                class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">guest_name</code></li>
-            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data3</code><span
-                class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">guest_phone</code></li>
-            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data4</code><span
-                class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">guest_email</code></li>
-            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data5</code><span
-                class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">date_start</code></li>
-            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data6</code><span
-                class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">date_end</code></li>
-            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data7</code><span
-                class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">time_start</code></li>
-            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data8</code><span
-                class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">time_end</code></li>
-            <li class="giapi-mapping__row"><code class="giapi-mapping__token">data9</code><span
-                class="giapi-mapping__eq">=</span><code class="giapi-mapping__value">comment</code></li>
-          </ol>
+    <!-- ============ SECURITY ============ -->
+    <section class="section wa-secure" aria-labelledby="wa-secure-title">
+      <div class="container">
+        <div class="wa-head">
+          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.secure.eyebrow">Security</span>
+          <h2 class="wa-h2" id="wa-secure-title" data-i18n="guestInvites.marketing.secure.title">Access you can safely
+            give a stranger</h2>
+          <p class="wa-lead" data-i18n="guestInvites.marketing.secure.subtitle">Built to protect the property behind
+            every gate.</p>
+        </div>
+        <div class="wa-secure__grid">
+          <article class="wa-secure__item">
+            <h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i1t">Encrypted end to end</h3>
+            <p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i1x">Every invitation is encrypted, so
+              access details cannot be read or copied in transit.</p>
+          </article>
+          <article class="wa-secure__item">
+            <h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i2t">Works at the gate, not the
+              cloud</h3>
+            <p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i2x">The entrance verifies access
+              locally, so it keeps working even without a connection.</p>
+          </article>
+          <article class="wa-secure__item">
+            <h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i3t">You stay in control</h3>
+            <p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i3x">Access is tied to each stay and each
+              guest — and you can shut it down whenever you need to.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-          <div class="giapi-security" role="note">
-            <span class="giapi-security__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
-                <path d="m9 12 2 2 4-4" />
-              </svg>
-            </span>
-            <div class="giapi-security__copy">
-              <h3 class="giapi-security__title" data-i18n="guestInvites.generator.securityTitle">Security note</h3>
-              <p class="giapi-security__text" data-i18n="guestInvites.generator.securityNote">
-                This tool never calls the API and never sends your data anywhere. It only assembles the URL in your
-                browser so you can use it in your own integration.
-              </p>
-            </div>
-          </div>
+    <!-- ============ PRICING ============ -->
+    <section class="section wa-pricing" id="wa-pricing" aria-labelledby="wa-pricing-title">
+      <div class="container">
+        <div class="wa-head">
+          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.pricing.eyebrow">Pricing</span>
+          <h2 class="wa-h2" id="wa-pricing-title" data-i18n="guestInvites.marketing.pricing.title">Simple plans for the
+            WIFIGATE Automation add-on</h2>
+          <p class="wa-lead" data-i18n="guestInvites.marketing.pricing.subtitle">Pay only for the automation. The
+            WIFIGATE device itself never has a subscription.</p>
+        </div>
+        <div class="wa-pricing__grid">
+          <article class="wa-plan">
+            <h3 class="wa-plan__name">Starter</h3>
+            <div class="wa-plan__price"><span class="wa-plan__amount">₪29</span><span class="wa-plan__per"
+                data-i18n="guestInvites.marketing.pricing.per">/ month</span></div>
+            <p class="wa-plan__desc" data-i18n="guestInvites.marketing.pricing.starterDesc">For a single property or
+              entrance.</p>
+            <ul class="wa-plan__features">
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="m5 12 5 5L20 7" />
+                </svg><span data-i18n="guestInvites.marketing.pricing.starterF1">1 system</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="m5 12 5 5L20 7" />
+                </svg><span data-i18n="guestInvites.marketing.pricing.starterF2">Up to 1,000 guest invitations /
+                  month</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="m5 12 5 5L20 7" />
+                </svg><span data-i18n="guestInvites.marketing.pricing.starterF3">Automatic time-limited access</span>
+              </li>
+            </ul>
+            <div class="wa-plan__cta"><a class="btn btn--ghost" href="../index.html#contact"
+                data-i18n="guestInvites.marketing.pricing.planCta">Talk to us</a></div>
+          </article>
+
+          <article class="wa-plan">
+            <h3 class="wa-plan__name">Pro</h3>
+            <div class="wa-plan__price"><span class="wa-plan__amount">₪99</span><span class="wa-plan__per"
+                data-i18n="guestInvites.marketing.pricing.per">/ month</span></div>
+            <p class="wa-plan__desc" data-i18n="guestInvites.marketing.pricing.proDesc">For a small management
+              company.</p>
+            <ul class="wa-plan__features">
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="m5 12 5 5L20 7" />
+                </svg><span data-i18n="guestInvites.marketing.pricing.proF1">Up to 5 systems</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="m5 12 5 5L20 7" />
+                </svg><span data-i18n="guestInvites.marketing.pricing.proF2">1,000 invitations per system</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="m5 12 5 5L20 7" />
+                </svg><span data-i18n="guestInvites.marketing.pricing.proF3">Priority email support</span></li>
+            </ul>
+            <div class="wa-plan__cta"><a class="btn btn--ghost" href="../index.html#contact"
+                data-i18n="guestInvites.marketing.pricing.planCta">Talk to us</a></div>
+          </article>
+
+          <article class="wa-plan wa-plan--featured">
+            <span class="wa-plan__badge" data-i18n="guestInvites.marketing.pricing.hotelBadge">Most popular</span>
+            <h3 class="wa-plan__name">Hotel</h3>
+            <div class="wa-plan__price"><span class="wa-plan__amount">₪299</span><span class="wa-plan__per"
+                data-i18n="guestInvites.marketing.pricing.per">/ month</span></div>
+            <p class="wa-plan__desc" data-i18n="guestInvites.marketing.pricing.hotelDesc">For a hotel or a whole
+              complex.</p>
+            <ul class="wa-plan__features">
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="m5 12 5 5L20 7" />
+                </svg><span data-i18n="guestInvites.marketing.pricing.hotelF1">Up to 20 systems</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="m5 12 5 5L20 7" />
+                </svg><span data-i18n="guestInvites.marketing.pricing.hotelF2">Centralized reporting</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="m5 12 5 5L20 7" />
+                </svg><span data-i18n="guestInvites.marketing.pricing.hotelF3">Preferred support</span></li>
+            </ul>
+            <div class="wa-plan__cta"><a class="btn btn--primary" href="../index.html#contact"
+                data-i18n="guestInvites.marketing.pricing.planCta">Talk to us</a></div>
+          </article>
+
+          <article class="wa-plan">
+            <h3 class="wa-plan__name">Enterprise</h3>
+            <div class="wa-plan__price"><span class="wa-plan__amount"
+                data-i18n="guestInvites.marketing.pricing.enterpriseAmount">Custom</span></div>
+            <p class="wa-plan__desc" data-i18n="guestInvites.marketing.pricing.enterpriseDesc">For PMS, channel managers
+              and large portfolios.</p>
+            <ul class="wa-plan__features">
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="m5 12 5 5L20 7" />
+                </svg><span data-i18n="guestInvites.marketing.pricing.enterpriseF1">Volume pricing</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="m5 12 5 5L20 7" />
+                </svg><span data-i18n="guestInvites.marketing.pricing.enterpriseF2">SLA &amp; onboarding</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="m5 12 5 5L20 7" />
+                </svg><span data-i18n="guestInvites.marketing.pricing.enterpriseF3">Custom integration</span></li>
+            </ul>
+            <div class="wa-plan__cta"><a class="btn btn--ghost" href="../index.html#contact"
+                data-i18n="guestInvites.marketing.pricing.planCta">Talk to us</a></div>
+          </article>
+        </div>
+        <p class="wa-pricing__note" data-i18n="guestInvites.marketing.pricing.note">Launch pricing for the WIFIGATE
+          Automation add-on, billed monthly. Extra systems and annual plans are available — ask us for details.</p>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="section wa-cta" aria-labelledby="wa-cta-title">
+      <div class="container">
+        <div class="wa-cta__box">
+          <h2 class="wa-cta__title" id="wa-cta-title" data-i18n="guestInvites.marketing.cta.title">Ready to automate
+            guest access?</h2>
+          <p class="wa-cta__text" data-i18n="guestInvites.marketing.cta.text">Tell us about your properties and we will
+            set up WIFIGATE Automation for the way you host.</p>
+          <a class="btn btn--primary btn--hero" href="../index.html#contact"
+            data-i18n="guestInvites.marketing.cta.button">Talk to us</a>
         </div>
       </div>
     </section>
@@ -432,179 +551,6 @@
       </ul>
     </section>
   </aside>
-
-  <script id="giapi-copy-data"
-    type="application/json">{"copyButton":"Copy URL","copiedButton":"Copied!","copyError":"Copy failed — select the URL and copy it manually."}</script>
-  <script>
-    (function () {
-      "use strict";
-
-      var BASE_URL = "https://wifigate.io/api/guest-invites/create";
-      var API_KEY_PLACEHOLDER = "WIFIGATE_GUESTS_API_KEY";
-
-      var DEFAULT_COPY = {
-        copyButton: "Copy URL",
-        copiedButton: "Copied!",
-        copyError: "Copy failed — select the URL and copy it manually."
-      };
-
-      function readCopy() {
-        var node = document.getElementById("giapi-copy-data");
-        if (!node) {
-          return DEFAULT_COPY;
-        }
-        try {
-          var parsed = JSON.parse(node.textContent || "{}");
-          return {
-            copyButton: parsed.copyButton || DEFAULT_COPY.copyButton,
-            copiedButton: parsed.copiedButton || DEFAULT_COPY.copiedButton,
-            copyError: parsed.copyError || DEFAULT_COPY.copyError
-          };
-        } catch (error) {
-          return DEFAULT_COPY;
-        }
-      }
-
-      function init() {
-        var form = document.getElementById("giapi-form");
-        var urlField = document.getElementById("giapi-url");
-        var copyButton = document.getElementById("giapi-copy");
-        var copyLabel = copyButton ? copyButton.querySelector(".giapi-copy__label") : null;
-        var copyStatus = document.getElementById("giapi-copy-status");
-
-        if (!form || !urlField || !copyButton) {
-          return;
-        }
-
-        var copy = readCopy();
-        var resetTimer = null;
-
-        // The api_key value is always the public placeholder. A real key must
-        // never be embedded here; users substitute it inside their own backend.
-        var orderedParams = [
-          ["api_key", function () { return API_KEY_PLACEHOLDER; }],
-          ["guest_name", fieldGetter("guest_name")],
-          ["guest_phone", fieldGetter("guest_phone")],
-          ["guest_email", fieldGetter("guest_email")],
-          ["date_start", fieldGetter("date_start")],
-          ["date_end", fieldGetter("date_end")],
-          ["time_start", fieldGetter("time_start")],
-          ["time_end", fieldGetter("time_end")],
-          ["comment", fieldGetter("comment")]
-        ];
-
-        function fieldGetter(name) {
-          var input = form.elements.namedItem(name);
-          return function () {
-            return input && typeof input.value === "string" ? input.value : "";
-          };
-        }
-
-        function buildUrl() {
-          var query = orderedParams
-            .map(function (entry) {
-              return entry[0] + "=" + encodeURIComponent(entry[1]());
-            })
-            .join("&");
-          return BASE_URL + "?" + query;
-        }
-
-        function setCopyLabel(text) {
-          if (copyLabel) {
-            copyLabel.textContent = text;
-          } else {
-            copyButton.textContent = text;
-          }
-        }
-
-        function refresh() {
-          urlField.value = buildUrl();
-        }
-
-        function clearStatusSoon() {
-          if (resetTimer) {
-            window.clearTimeout(resetTimer);
-          }
-          resetTimer = window.setTimeout(function () {
-            setCopyLabel(copy.copyButton);
-            if (copyStatus) {
-              copyStatus.textContent = "";
-            }
-          }, 2600);
-        }
-
-        function fallbackCopy() {
-          urlField.removeAttribute("readonly");
-          urlField.focus();
-          urlField.select();
-          var ok = false;
-          try {
-            ok = document.execCommand("copy");
-          } catch (error) {
-            ok = false;
-          }
-          urlField.setAttribute("readonly", "readonly");
-          window.getSelection().removeAllRanges();
-          return ok;
-        }
-
-        function announceCopied() {
-          setCopyLabel(copy.copiedButton);
-          if (copyStatus) {
-            copyStatus.textContent = copy.copiedButton;
-          }
-          clearStatusSoon();
-        }
-
-        function announceError() {
-          if (copyStatus) {
-            copyStatus.textContent = copy.copyError;
-          }
-          clearStatusSoon();
-        }
-
-        function handleCopy() {
-          var url = buildUrl();
-          urlField.value = url;
-
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(url).then(announceCopied, function () {
-              if (fallbackCopy()) {
-                announceCopied();
-              } else {
-                announceError();
-              }
-            });
-            return;
-          }
-
-          if (fallbackCopy()) {
-            announceCopied();
-          } else {
-            announceError();
-          }
-        }
-
-        form.addEventListener("input", function () {
-          refresh();
-          setCopyLabel(copy.copyButton);
-        });
-        form.addEventListener("submit", function (event) {
-          event.preventDefault();
-          handleCopy();
-        });
-        copyButton.addEventListener("click", handleCopy);
-
-        refresh();
-      }
-
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", init);
-      } else {
-        init();
-      }
-    })();
-  </script>
 </body>
 
 </html>

@@ -216,7 +216,7 @@
           <a href="#advantages" class="nav-link nav__link" data-i18n="nav.features" dir="ltr">Why Choose Us?</a>
           <a href="#where" class="nav-link nav__link" data-i18n="tabs.where" dir="ltr">Use Cases</a>
           <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about" dir="ltr">Tutorials</a>
-          <a href="#guest-invites-api" class="nav-link nav__link">WIFIGATE API</a>
+          <a href="#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
           <a href="#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact" dir="ltr">Contact Us</a>
         </nav>
       </div>
@@ -729,23 +729,22 @@
       <div class="container">
         <div class="guest-invites__grid js-reveal">
           <div class="guest-invites__copy">
-            <p class="guest-invites__eyebrow" data-i18n="guestInvites.promo.eyebrow" dir="ltr">Developer · WIFIGATE API</p>
-            <h2 class="guest-invites__title" id="guest-invites-title" data-i18n="guestInvites.promo.title" dir="ltr">WIFIGATE API
-for automated guest invites</h2>
-            <p class="guest-invites__subtitle" data-i18n="guestInvites.promo.subtitle" dir="ltr">Use the WIFIGATE API to automate guest access from the moment a booking is confirmed, with secure, time-limited invitations that match each stay automatically.</p>
+            <p class="guest-invites__eyebrow" data-i18n="guestInvites.promo.eyebrow" dir="ltr">WIFIGATE Automation</p>
+            <h2 class="guest-invites__title" id="guest-invites-title" data-i18n="guestInvites.promo.title" dir="ltr">Automatic guest access
+for every booking</h2>
+            <p class="guest-invites__subtitle" data-i18n="guestInvites.promo.subtitle" dir="ltr">From the moment a booking is confirmed, WIFIGATE gives each guest secure, time-limited access to your gate, door or garage — and it ends on its own at checkout.</p>
 
             <ul class="guest-invites__points">
               <li class="guest-invites__point">
                 <span class="guest-invites__point-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2 2 7l10 5 10-5-10-5Z"></path>
-                    <path d="m2 17 10 5 10-5"></path>
-                    <path d="m2 12 10 5 10-5"></path>
+                    <rect x="7" y="2" width="10" height="20" rx="2"></rect>
+                    <path d="M11 18h2"></path>
                   </svg>
                 </span>
                 <span class="guest-invites__point-copy">
-                  <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point1Title" dir="ltr">Built for automation</span>
-                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point1Text" dir="ltr">Create guest invitations programmatically from any backend with a single authenticated request.</span>
+                  <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point1Title" dir="ltr">No keys to hand over</span>
+                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point1Text" dir="ltr">Access arrives on your guest's phone — no pickups, lockboxes or codes to share.</span>
                 </span>
               </li>
               <li class="guest-invites__point">
@@ -756,8 +755,8 @@ for automated guest invites</h2>
                   </svg>
                 </span>
                 <span class="guest-invites__point-copy">
-                  <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point2Title" dir="ltr">Time-boxed access</span>
-                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point2Text" dir="ltr">Set exact start and end dates and times so every invite opens and expires precisely when it should.</span>
+                  <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point2Title" dir="ltr">Time-limited automatically</span>
+                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point2Text" dir="ltr">Every invitation opens at check-in and expires at checkout, for every stay.</span>
                 </span>
               </li>
               <li class="guest-invites__point">
@@ -768,14 +767,14 @@ for automated guest invites</h2>
                   </svg>
                 </span>
                 <span class="guest-invites__point-copy">
-                  <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point3Title" dir="ltr">Private and secure</span>
-                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point3Text" dir="ltr">Your API key stays in your environment and every value is safely encoded, so your data stays under your control.</span>
+                  <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point3Title" dir="ltr">Encrypted and private</span>
+                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point3Text" dir="ltr">Access is encrypted and works locally at the gate, so your property stays protected.</span>
                 </span>
               </li>
             </ul>
 
-            <a class="btn btn--primary guest-invites__cta" href="/Automated-Guest-Invites-API/">
-              <span data-i18n="guestInvites.promo.cta" dir="ltr">Open the invite generator</span>
+            <a class="btn btn--primary guest-invites__cta" href="/automation/">
+              <span data-i18n="guestInvites.promo.cta" dir="ltr">Explore WIFIGATE Automation</span>
               <svg class="guest-invites__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M5 12h14"></path>
                 <path d="m13 6 6 6-6 6"></path>
@@ -788,19 +787,16 @@ for automated guest invites</h2>
               <span class="guest-invites__dot guest-invites__dot--r"></span>
               <span class="guest-invites__dot guest-invites__dot--y"></span>
               <span class="guest-invites__dot guest-invites__dot--g"></span>
-              <span class="guest-invites__console-method">POST</span>
+              <span class="guest-invites__console-method">AUTO</span>
             </div>
-            <pre class="guest-invites__console-body"><code><span class="giapi-tok-url">https://wifigate.io/api/guest-invites/create</span>
-  ?<span class="giapi-tok-key">api_key</span>=<span class="giapi-tok-val">WIFIGATE_GUESTS_API_KEY</span>
-  &amp;<span class="giapi-tok-key">guest_name</span>=<span class="giapi-tok-val">Ada%20Lovelace</span>
-  &amp;<span class="giapi-tok-key">guest_phone</span>=<span class="giapi-tok-val">%2B972526996332</span>
-  &amp;<span class="giapi-tok-key">guest_email</span>=<span class="giapi-tok-val">ada%40example.com</span>
-  &amp;<span class="giapi-tok-key">date_start</span>=<span class="giapi-tok-val">2026-07-01</span>
-  &amp;<span class="giapi-tok-key">date_end</span>=<span class="giapi-tok-val">2026-07-03</span>
-  &amp;<span class="giapi-tok-key">time_start</span>=<span class="giapi-tok-val">09%3A00</span>
-  &amp;<span class="giapi-tok-key">time_end</span>=<span class="giapi-tok-val">18%3A00</span>
-  &amp;<span class="giapi-tok-key">comment</span>=<span class="giapi-tok-val">VIP%20guest</span></code></pre>
-            <figcaption class="guest-invites__console-caption" data-i18n="guestInvites.promo.consoleCaption" dir="ltr">Live request preview</figcaption>
+            <pre class="guest-invites__console-body"><code><span class="giapi-tok-url">✓ Guest access created</span>
+
+  <span class="giapi-tok-key">Guest</span>       <span class="giapi-tok-val">Dana Levi</span>
+  <span class="giapi-tok-key">Entrance</span>    <span class="giapi-tok-val">Main gate + parking</span>
+  <span class="giapi-tok-key">Check-in</span>    <span class="giapi-tok-val">Fri · 15:00</span>
+  <span class="giapi-tok-key">Check-out</span>   <span class="giapi-tok-val">Sun · 11:00</span>
+  <span class="giapi-tok-key">Status</span>      <span class="giapi-tok-val">Active · expires automatically</span></code></pre>
+            <figcaption class="guest-invites__console-caption" data-i18n="guestInvites.promo.consoleCaption" dir="ltr">From booking to access — automatically</figcaption>
           </figure>
         </div>
       </div>
