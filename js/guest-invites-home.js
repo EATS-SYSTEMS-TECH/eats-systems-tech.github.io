@@ -18,10 +18,10 @@
         eyebrow: "WIFIGATE Automation",
         title: "Automatic guest access\nfor every booking",
         subtitle:
-          "From the moment a booking is confirmed, WIFIGATE gives each guest secure, time-limited access to your gate, door or garage — and it ends on its own at checkout.",
+          "From the moment a booking is confirmed, WIFIGATE gives each guest secure, time-limited access to your gate, door or garage, and it ends on its own at checkout.",
         point1Title: "No keys to hand over",
         point1Text:
-          "Access arrives on your guest's phone — no pickups, lockboxes or codes to share.",
+          "Access arrives on your guest's phone, no pickups, lockboxes or codes to share.",
         point2Title: "Time-limited automatically",
         point2Text:
           "Every invitation opens at check-in and expires at checkout, for every stay.",
@@ -29,21 +29,21 @@
         point3Text:
           "Access is encrypted and works locally at the gate, so your property stays protected.",
         cta: "Explore WIFIGATE Automation",
-        consoleCaption: "From booking to access — automatically",
+        consoleCaption: "From booking to access, automatically",
       },
       generator: {
         metaTitle: "Automatic Guest Access for Rentals & Hotels | WIFIGATE",
         metaDescription:
-          "Automatic, time-limited access to gates, doors and garages for every booking. Built for hotels, short-term rentals, guesthouses and rental parking — no keys to hand over.",
+          "Automatic, time-limited access to gates, doors and garages for every booking. Built for hotels, short-term rentals, guesthouses and rental parking, no keys to hand over.",
         breadcrumb: "Automated Guest Invites API",
         backToHome: "Back to home",
         heading: "Automated Guest Invites API",
         subheading:
-          "Fill in the details below to build a guest invitation request. The URL updates live as you type — then copy it into your own integration.",
+          "Fill in the details below to build a guest invitation request. The URL updates live as you type, then copy it into your own integration.",
         formTitle: "Invitation details",
         apiKeyLabel: "API key",
         apiKeyHint:
-          "Placeholder only. Replace WIFIGATE_GUESTS_API_KEY with your real key inside your own secure environment — never share it publicly.",
+          "Placeholder only. Replace WIFIGATE_GUESTS_API_KEY with your real key inside your own secure environment, never share it publicly.",
         guestNameLabel: "Guest name",
         guestPhoneLabel: "Guest phone",
         guestEmailLabel: "Guest email",
@@ -58,7 +58,7 @@
           "All values are URL-encoded automatically, including spaces, symbols, and non-Latin characters.",
         copyButton: "Copy URL",
         copiedButton: "Copied!",
-        copyError: "Copy failed — select the URL and copy it manually.",
+        copyError: "Copy failed, select the URL and copy it manually.",
         mappingTitle: "Parameter mapping",
         mappingIntro: "Each placeholder in the URL maps to one field:",
         securityTitle: "Security note",
@@ -166,7 +166,7 @@
           "Toutes les valeurs sont automatiquement encodées pour l'URL, y compris les espaces, les symboles et les caractères non latins.",
         copyButton: "Copier l'URL",
         copiedButton: "Copiée !",
-        copyError: "Échec de la copie — sélectionnez l'URL et copiez-la manuellement.",
+        copyError: "Échec de la copie, sélectionnez l'URL et copiez-la manuellement.",
         mappingTitle: "Correspondance des paramètres",
         mappingIntro: "Chaque valeur d'exemple dans l'URL correspond à un champ :",
         securityTitle: "Note de sécurité",
@@ -234,10 +234,10 @@
         eyebrow: "WIFIGATE Automation",
         title: "גישת אורחים אוטומטית\nלכל הזמנה",
         subtitle:
-          "מרגע שההזמנה מאושרת, WIFIGATE מעניקה לכל אורח גישה מאובטחת ומוגבלת-בזמן לשער, לדלת או לחניה — והיא מסתיימת מעצמה בצ׳ק-אאוט.",
+          "מרגע שההזמנה מאושרת, WIFIGATE מעניקה לכל אורח גישה מאובטחת ומוגבלת-בזמן לשער, לדלת או לחניה, והיא מסתיימת מעצמה בצ׳ק-אאוט.",
         point1Title: "בלי למסור מפתחות",
         point1Text:
-          "הגישה מגיעה לטלפון של האורח — בלי איסוף, תיבות מפתח או קודים לשיתוף.",
+          "הגישה מגיעה לטלפון של האורח, בלי איסוף, תיבות מפתח או קודים לשיתוף.",
         point2Title: "מוגבלת-בזמן אוטומטית",
         point2Text:
           "כל הזמנה נפתחת בצ׳ק-אין ופגה בצ׳ק-אאוט, בכל שהות.",
@@ -245,21 +245,21 @@
         point3Text:
           "הגישה מוצפנת ופועלת מקומית בשער, כך שהנכס שלכם נשאר מוגן.",
         cta: "גלו את WIFIGATE Automation",
-        consoleCaption: "מהזמנה לגישה — אוטומטית",
+        consoleCaption: "מהזמנה לגישה, אוטומטית",
       },
       generator: {
         metaTitle: "גישת אורחים אוטומטית למלונות, דירות נופש וחניות | WIFIGATE",
         metaDescription:
-          "גישה מאובטחת ומוגבלת-בזמן לכל אורח — נוצרת אוטומטית לכל הזמנה. למלונות, דירות נופש, בתי אירוח וחניות/גראג'ים להשכרה. בלי החלפת מפתחות.",
+          "גישה מאובטחת ומוגבלת-בזמן לכל אורח, נוצרת אוטומטית לכל הזמנה. למלונות, דירות נופש, בתי אירוח וחניות/גראג'ים להשכרה. בלי החלפת מפתחות.",
         breadcrumb: "API להזמנות אורחים אוטומטיות",
         backToHome: "חזרה לדף הבית",
         heading: "API להזמנות אורחים אוטומטיות",
         subheading:
-          "מלאו את הפרטים כדי לבנות בקשת הזמנה. כתובת ה-URL מתעדכנת בזמן אמת תוך כדי הקלדה — לאחר מכן העתיקו אותה אל האינטגרציה שלכם.",
+          "מלאו את הפרטים כדי לבנות בקשת הזמנה. כתובת ה-URL מתעדכנת בזמן אמת תוך כדי הקלדה, לאחר מכן העתיקו אותה אל האינטגרציה שלכם.",
         formTitle: "פרטי ההזמנה",
         apiKeyLabel: "מפתח API",
         apiKeyHint:
-          "מציין מקום בלבד. החליפו את WIFIGATE_GUESTS_API_KEY במפתח האמיתי שלכם בתוך הסביבה המאובטחת שלכם — לעולם אל תשתפו אותו בפומבי.",
+          "מציין מקום בלבד. החליפו את WIFIGATE_GUESTS_API_KEY במפתח האמיתי שלכם בתוך הסביבה המאובטחת שלכם, לעולם אל תשתפו אותו בפומבי.",
         guestNameLabel: "שם האורח",
         guestPhoneLabel: "טלפון האורח",
         guestEmailLabel: 'דוא"ל האורח',
@@ -274,7 +274,7 @@
           "כל הערכים מקודדים אוטומטית עבור כתובת ה-URL, כולל רווחים, סמלים ותווים שאינם לטיניים.",
         copyButton: "העתק URL",
         copiedButton: "הועתק!",
-        copyError: "ההעתקה נכשלה — סמנו את כתובת ה-URL והעתיקו ידנית.",
+        copyError: "ההעתקה נכשלה, סמנו את כתובת ה-URL והעתיקו ידנית.",
         mappingTitle: "מיפוי פרמטרים",
         mappingIntro: "כל מציין מקום בכתובת ה-URL ממופה לשדה אחד:",
         securityTitle: "הערת אבטחה",
@@ -286,7 +286,7 @@
           eyebrow: "WIFIGATE Automation",
           title: "גישת אורחים שמנהלת את עצמה",
           lead:
-            "ברגע שהזמנה מאושרת, WIFIGATE יוצרת גישה מאובטחת ומוגבלת-בזמן לשער, לדלת או לחניה שלכם — והיא מסתיימת מעצמה בצ׳ק-אאוט. בלי למסור מפתחות, בלי לרדוף אחרי קודים, ובלי שמישהו ימתין בכניסה.",
+            "ברגע שהזמנה מאושרת, WIFIGATE יוצרת גישה מאובטחת ומוגבלת-בזמן לשער, לדלת או לחניה שלכם, והיא מסתיימת מעצמה בצ׳ק-אאוט. בלי למסור מפתחות, בלי לרדוף אחרי קודים, ובלי שמישהו ימתין בכניסה.",
           ctaPrimary: "דברו איתנו",
           ctaSecondary: "איך זה עובד",
           note: "למלונות, דירות נופש, בתי אירוח וחניות/גראג'ים להשכרה.",
@@ -300,27 +300,27 @@
         },
         steps: {
           eyebrow: "איך זה עובד",
-          title: "מהזמנה ועד שער פתוח — אוטומטית",
+          title: "מהזמנה ועד שער פתוח, אוטומטית",
           subtitle: "שלושה צעדים, ומשם זה רץ לבד בכל הזמנה.",
           s1t: "מתקבלת הזמנה",
           s1x: "מערכת ההזמנות או הניהול שלכם מעדכנת את WIFIGATE שאושרה הזמנה חדשה.",
           s2t: "הגישה נוצרת אוטומטית",
-          s2x: "WIFIGATE מנפיקה הזמנה מאובטחת ומוגבלת-בזמן בדיוק לשער, לדלת או לחניה הנכונים — בתוקף רק לאותה שהות.",
+          s2x: "WIFIGATE מנפיקה הזמנה מאובטחת ומוגבלת-בזמן בדיוק לשער, לדלת או לחניה הנכונים, בתוקף רק לאותה שהות.",
           s3t: "האורח פשוט נכנס",
-          s3x: "הוא פותח את הכניסה מהטלפון. כשמגיע הצ׳ק-אאוט, הגישה פגה מעצמה — אין מה לאסוף או לבטל.",
+          s3x: "הוא פותח את הכניסה מהטלפון. כשמגיע הצ׳ק-אאוט, הגישה פגה מעצמה, אין מה לאסוף או לבטל.",
         },
         benefits: {
           eyebrow: "למה WIFIGATE Automation",
           title: "פחות קבלה. יותר אירוח בלי ידיים.",
-          subtitle: "כל מה שהזמנה צריכה כדי להפוך לגישה — נעשה בשבילכם.",
+          subtitle: "כל מה שהזמנה צריכה כדי להפוך לגישה, נעשה בשבילכם.",
           b1t: "בלי למסור מפתחות",
           b1x: "שכחו מאיסוף מפתחות, מתיבות מפתח וקודים מועתקים. הגישה מגיעה לטלפון של האורח בדיוק כשצריך.",
           b2t: "מוגבלת-בזמן מעצם התכנון",
-          b2x: "כל הזמנה נפתחת בצ׳ק-אין ופגה בצ׳ק-אאוט — אוטומטית, בכל שהות.",
+          b2x: "כל הזמנה נפתחת בצ׳ק-אין ופגה בצ׳ק-אאוט, אוטומטית, בכל שהות.",
           b3t: "מוצפנת ופרטית",
           b3x: "הגישה מוצפנת והשער פועל מקומית. הנכס והאורחים שלכם נשארים מוגנים.",
           b4t: "עובדת עם הכניסות שלכם",
-          b4x: "שערים, דלתות חניה, מחסומים ודלתות כניסה — WIFIGATE שולטת במה שכבר יש לכם.",
+          b4x: "שערים, דלתות חניה, מחסומים ודלתות כניסה, WIFIGATE שולטת במה שכבר יש לכם.",
           b5t: "מתאימה גם לבניינים שלמים",
           b5x: "משער בודד ועד מתחם שלם, הזמנה אחת יכולה לכסות כל כניסה שהאורח צריך.",
           b6t: "מתחברת למערכות שלכם",
@@ -335,7 +335,7 @@
           i2t: "עובדת בשער, לא בענן",
           i2x: "הכניסה מאמתת את הגישה מקומית, כך שהיא ממשיכה לעבוד גם ללא חיבור לאינטרנט.",
           i3t: "השליטה נשארת אצלכם",
-          i3x: "הגישה צמודה לכל שהות ולכל אורח — ואתם יכולים לעצור אותה בכל רגע.",
+          i3x: "הגישה צמודה לכל שהות ולכל אורח, ואתם יכולים לעצור אותה בכל רגע.",
         },
         pricing: {
           eyebrow: "תמחור",
@@ -345,7 +345,7 @@
           planCta: "דברו איתנו",
           hotelBadge: "הכי פופולרי",
           note:
-            "מחירי השקה לתוסף WIFIGATE Automation, בחיוב חודשי. מערכות נוספות ומסלולים שנתיים זמינים — פנו אלינו לפרטים.",
+            "מחירי השקה לתוסף WIFIGATE Automation, בחיוב חודשי. מערכות נוספות ומסלולים שנתיים זמינים, פנו אלינו לפרטים.",
           starterDesc: "לנכס או כניסה בודדת.",
           starterF1: "מערכת אחת",
           starterF2: "עד 1,000 הזמנות אורח בחודש",
@@ -377,7 +377,7 @@
         eyebrow: "Nieuw · Ontwikkelaars-API",
         title: "API voor automatische gastuitnodigingen",
         subtitle:
-          "Geef veilige, in tijd beperkte gasttoegang rechtstreeks vanuit je eigen systemen. Koppel je boekingsflow, CRM of receptie en laat WIFIGATE automatisch uitnodigingen aanmaken — zonder handmatige stappen en zonder gedeelde afstandsbedieningen.",
+          "Geef veilige, in tijd beperkte gasttoegang rechtstreeks vanuit je eigen systemen. Koppel je boekingsflow, CRM of receptie en laat WIFIGATE automatisch uitnodigingen aanmaken, zonder handmatige stappen en zonder gedeelde afstandsbedieningen.",
         point1Title: "Gemaakt voor automatisering",
         point1Text:
           "Maak gastuitnodigingen programmatisch aan vanuit elke backend met één geverifieerd verzoek.",
@@ -398,11 +398,11 @@
         backToHome: "Terug naar home",
         heading: "API voor automatische gastuitnodigingen",
         subheading:
-          "Vul de gegevens hieronder in om een uitnodigingsverzoek te bouwen. De URL wordt live bijgewerkt terwijl je typt — kopieer hem daarna naar je eigen integratie.",
+          "Vul de gegevens hieronder in om een uitnodigingsverzoek te bouwen. De URL wordt live bijgewerkt terwijl je typt, kopieer hem daarna naar je eigen integratie.",
         formTitle: "Uitnodigingsgegevens",
         apiKeyLabel: "API-sleutel",
         apiKeyHint:
-          "Alleen een tijdelijke aanduiding. Vervang WIFIGATE_GUESTS_API_KEY door je echte sleutel binnen je eigen beveiligde omgeving — deel hem nooit openbaar.",
+          "Alleen een tijdelijke aanduiding. Vervang WIFIGATE_GUESTS_API_KEY door je echte sleutel binnen je eigen beveiligde omgeving, deel hem nooit openbaar.",
         guestNameLabel: "Naam van de gast",
         guestPhoneLabel: "Telefoon van de gast",
         guestEmailLabel: "E-mail van de gast",
@@ -417,7 +417,7 @@
           "Alle waarden worden automatisch URL-gecodeerd, inclusief spaties, symbolen en niet-Latijnse tekens.",
         copyButton: "URL kopiëren",
         copiedButton: "Gekopieerd!",
-        copyError: "Kopiëren mislukt — selecteer de URL en kopieer deze handmatig.",
+        copyError: "Kopiëren mislukt, selecteer de URL en kopieer deze handmatig.",
         mappingTitle: "Parametertoewijzing",
         mappingIntro: "Elke tijdelijke aanduiding in de URL hoort bij één veld:",
         securityTitle: "Beveiligingsnotitie",
@@ -471,7 +471,7 @@
           "Tutti i valori vengono codificati automaticamente per l'URL, inclusi spazi, simboli e caratteri non latini.",
         copyButton: "Copia URL",
         copiedButton: "Copiato!",
-        copyError: "Copia non riuscita — seleziona l'URL e copialo manualmente.",
+        copyError: "Copia non riuscita, seleziona l'URL e copialo manualmente.",
         mappingTitle: "Mappatura dei parametri",
         mappingIntro: "Ogni segnaposto nell'URL corrisponde a un campo:",
         securityTitle: "Nota sulla sicurezza",
@@ -506,11 +506,11 @@
         backToHome: "Voltar ao início",
         heading: "API de convites de convidados automáticos",
         subheading:
-          "Preencha os dados abaixo para construir um pedido de convite. O URL é atualizado em direto à medida que escreve — depois copie-o para a sua própria integração.",
+          "Preencha os dados abaixo para construir um pedido de convite. O URL é atualizado em direto à medida que escreve, depois copie-o para a sua própria integração.",
         formTitle: "Detalhes do convite",
         apiKeyLabel: "Chave de API",
         apiKeyHint:
-          "Apenas um marcador. Substitua WIFIGATE_GUESTS_API_KEY pela sua chave real dentro do seu próprio ambiente seguro — nunca a partilhe publicamente.",
+          "Apenas um marcador. Substitua WIFIGATE_GUESTS_API_KEY pela sua chave real dentro do seu próprio ambiente seguro, nunca a partilhe publicamente.",
         guestNameLabel: "Nome do convidado",
         guestPhoneLabel: "Telefone do convidado",
         guestEmailLabel: "E-mail do convidado",
@@ -525,7 +525,7 @@
           "Todos os valores são codificados automaticamente para o URL, incluindo espaços, símbolos e caracteres não latinos.",
         copyButton: "Copiar URL",
         copiedButton: "Copiado!",
-        copyError: "Falha ao copiar — selecione o URL e copie-o manualmente.",
+        copyError: "Falha ao copiar, selecione o URL e copie-o manualmente.",
         mappingTitle: "Mapeamento de parâmetros",
         mappingIntro: "Cada marcador no URL corresponde a um campo:",
         securityTitle: "Nota de segurança",
@@ -539,7 +539,7 @@
         eyebrow: "Nowość · API dla deweloperów",
         title: "API automatycznych zaproszeń dla gości",
         subtitle:
-          "Wydawaj bezpieczny, ograniczony czasowo dostęp dla gości bezpośrednio z własnych systemów. Połącz proces rezerwacji, CRM lub recepcję i pozwól WIFIGATE tworzyć zaproszenia automatycznie — bez ręcznych kroków i bez współdzielonych pilotów.",
+          "Wydawaj bezpieczny, ograniczony czasowo dostęp dla gości bezpośrednio z własnych systemów. Połącz proces rezerwacji, CRM lub recepcję i pozwól WIFIGATE tworzyć zaproszenia automatycznie, bez ręcznych kroków i bez współdzielonych pilotów.",
         point1Title: "Stworzone do automatyzacji",
         point1Text:
           "Twórz zaproszenia dla gości programowo z dowolnego backendu za pomocą jednego uwierzytelnionego żądania.",
@@ -560,11 +560,11 @@
         backToHome: "Powrót do strony głównej",
         heading: "API automatycznych zaproszeń dla gości",
         subheading:
-          "Wypełnij poniższe pola, aby zbudować żądanie zaproszenia. Adres URL aktualizuje się na żywo podczas pisania — następnie skopiuj go do własnej integracji.",
+          "Wypełnij poniższe pola, aby zbudować żądanie zaproszenia. Adres URL aktualizuje się na żywo podczas pisania, następnie skopiuj go do własnej integracji.",
         formTitle: "Szczegóły zaproszenia",
         apiKeyLabel: "Klucz API",
         apiKeyHint:
-          "Tylko symbol zastępczy. Zastąp WIFIGATE_GUESTS_API_KEY swoim prawdziwym kluczem we własnym bezpiecznym środowisku — nigdy nie udostępniaj go publicznie.",
+          "Tylko symbol zastępczy. Zastąp WIFIGATE_GUESTS_API_KEY swoim prawdziwym kluczem we własnym bezpiecznym środowisku, nigdy nie udostępniaj go publicznie.",
         guestNameLabel: "Imię gościa",
         guestPhoneLabel: "Telefon gościa",
         guestEmailLabel: "E-mail gościa",
@@ -579,7 +579,7 @@
           "Wszystkie wartości są automatycznie kodowane do adresu URL, w tym spacje, symbole i znaki spoza alfabetu łacińskiego.",
         copyButton: "Kopiuj URL",
         copiedButton: "Skopiowano!",
-        copyError: "Nie udało się skopiować — zaznacz adres URL i skopiuj go ręcznie.",
+        copyError: "Nie udało się skopiować, zaznacz adres URL i skopiuj go ręcznie.",
         mappingTitle: "Mapowanie parametrów",
         mappingIntro: "Każdy symbol zastępczy w adresie URL odpowiada jednemu polu:",
         securityTitle: "Uwaga dotycząca bezpieczeństwa",
@@ -593,7 +593,7 @@
         eyebrow: "Nytt · Utvikler-API",
         title: "API for automatiske gjesteinvitasjoner",
         subtitle:
-          "Gi sikker, tidsbegrenset gjestetilgang rett fra dine egne systemer. Koble til bestillingsflyten, CRM-en eller resepsjonen og la WIFIGATE opprette invitasjoner automatisk — uten manuelle steg og uten delte fjernkontroller.",
+          "Gi sikker, tidsbegrenset gjestetilgang rett fra dine egne systemer. Koble til bestillingsflyten, CRM-en eller resepsjonen og la WIFIGATE opprette invitasjoner automatisk, uten manuelle steg og uten delte fjernkontroller.",
         point1Title: "Bygd for automatisering",
         point1Text:
           "Opprett gjesteinvitasjoner programmatisk fra hvilken som helst backend med én autentisert forespørsel.",
@@ -614,11 +614,11 @@
         backToHome: "Tilbake til forsiden",
         heading: "API for automatiske gjesteinvitasjoner",
         subheading:
-          "Fyll inn detaljene nedenfor for å bygge en invitasjonsforespørsel. URL-en oppdateres i sanntid mens du skriver — kopier den deretter inn i din egen integrasjon.",
+          "Fyll inn detaljene nedenfor for å bygge en invitasjonsforespørsel. URL-en oppdateres i sanntid mens du skriver, kopier den deretter inn i din egen integrasjon.",
         formTitle: "Invitasjonsdetaljer",
         apiKeyLabel: "API-nøkkel",
         apiKeyHint:
-          "Bare en plassholder. Erstatt WIFIGATE_GUESTS_API_KEY med din ekte nøkkel i ditt eget sikre miljø — del den aldri offentlig.",
+          "Bare en plassholder. Erstatt WIFIGATE_GUESTS_API_KEY med din ekte nøkkel i ditt eget sikre miljø, del den aldri offentlig.",
         guestNameLabel: "Gjestens navn",
         guestPhoneLabel: "Gjestens telefon",
         guestEmailLabel: "Gjestens e-post",
@@ -633,7 +633,7 @@
           "Alle verdier kodes automatisk for URL-en, inkludert mellomrom, symboler og ikke-latinske tegn.",
         copyButton: "Kopier URL",
         copiedButton: "Kopiert!",
-        copyError: "Kopiering mislyktes — merk URL-en og kopier den manuelt.",
+        copyError: "Kopiering mislyktes, merk URL-en og kopier den manuelt.",
         mappingTitle: "Parametertilordning",
         mappingIntro: "Hver plassholder i URL-en tilsvarer ett felt:",
         securityTitle: "Sikkerhetsmerknad",
@@ -647,7 +647,7 @@
         eyebrow: "Novinka · API pro vývojáře",
         title: "API pro automatické pozvánky pro hosty",
         subtitle:
-          "Vydávejte bezpečný, časově omezený přístup pro hosty přímo z vlastních systémů. Propojte rezervační tok, CRM nebo recepci a nechte WIFIGATE vytvářet pozvánky automaticky — bez ručních kroků a bez sdílených ovladačů.",
+          "Vydávejte bezpečný, časově omezený přístup pro hosty přímo z vlastních systémů. Propojte rezervační tok, CRM nebo recepci a nechte WIFIGATE vytvářet pozvánky automaticky, bez ručních kroků a bez sdílených ovladačů.",
         point1Title: "Vytvořeno pro automatizaci",
         point1Text:
           "Vytvářejte pozvánky pro hosty programově z libovolného backendu jediným ověřeným požadavkem.",
@@ -668,11 +668,11 @@
         backToHome: "Zpět na domovskou stránku",
         heading: "API pro automatické pozvánky pro hosty",
         subheading:
-          "Vyplňte níže uvedené údaje a sestavte požadavek na pozvánku. URL se aktualizuje živě během psaní — poté ji zkopírujte do vlastní integrace.",
+          "Vyplňte níže uvedené údaje a sestavte požadavek na pozvánku. URL se aktualizuje živě během psaní, poté ji zkopírujte do vlastní integrace.",
         formTitle: "Údaje pozvánky",
         apiKeyLabel: "Klíč API",
         apiKeyHint:
-          "Pouze zástupný symbol. Nahraďte WIFIGATE_GUESTS_API_KEY svým skutečným klíčem ve vlastním zabezpečeném prostředí — nikdy jej veřejně nesdílejte.",
+          "Pouze zástupný symbol. Nahraďte WIFIGATE_GUESTS_API_KEY svým skutečným klíčem ve vlastním zabezpečeném prostředí, nikdy jej veřejně nesdílejte.",
         guestNameLabel: "Jméno hosta",
         guestPhoneLabel: "Telefon hosta",
         guestEmailLabel: "E-mail hosta",
@@ -687,7 +687,7 @@
           "Všechny hodnoty se automaticky kódují pro URL, včetně mezer, symbolů a nelatinkových znaků.",
         copyButton: "Kopírovat URL",
         copiedButton: "Zkopírováno!",
-        copyError: "Kopírování selhalo — označte URL a zkopírujte ji ručně.",
+        copyError: "Kopírování selhalo, označte URL a zkopírujte ji ručně.",
         mappingTitle: "Mapování parametrů",
         mappingIntro: "Každý zástupný symbol v URL odpovídá jednomu poli:",
         securityTitle: "Bezpečnostní poznámka",
@@ -701,7 +701,7 @@
         eyebrow: "Новинка · API для разработчиков",
         title: "API автоматических приглашений для гостей",
         subtitle:
-          "Выдавайте безопасный гостевой доступ с ограничением по времени прямо из ваших систем. Подключите процесс бронирования, CRM или стойку регистрации и позвольте WIFIGATE создавать приглашения автоматически — без ручных действий и без общих пультов.",
+          "Выдавайте безопасный гостевой доступ с ограничением по времени прямо из ваших систем. Подключите процесс бронирования, CRM или стойку регистрации и позвольте WIFIGATE создавать приглашения автоматически, без ручных действий и без общих пультов.",
         point1Title: "Создано для автоматизации",
         point1Text:
           "Создавайте гостевые приглашения программно из любого бэкенда одним аутентифицированным запросом.",
@@ -722,11 +722,11 @@
         backToHome: "Вернуться на главную",
         heading: "API автоматических приглашений для гостей",
         subheading:
-          "Заполните поля ниже, чтобы создать запрос приглашения. URL обновляется в реальном времени по мере ввода — затем скопируйте его в свою интеграцию.",
+          "Заполните поля ниже, чтобы создать запрос приглашения. URL обновляется в реальном времени по мере ввода, затем скопируйте его в свою интеграцию.",
         formTitle: "Данные приглашения",
         apiKeyLabel: "Ключ API",
         apiKeyHint:
-          "Только заполнитель. Замените WIFIGATE_GUESTS_API_KEY на свой настоящий ключ в собственной защищённой среде — никогда не публикуйте его.",
+          "Только заполнитель. Замените WIFIGATE_GUESTS_API_KEY на свой настоящий ключ в собственной защищённой среде, никогда не публикуйте его.",
         guestNameLabel: "Имя гостя",
         guestPhoneLabel: "Телефон гостя",
         guestEmailLabel: "Эл. почта гостя",
@@ -741,7 +741,7 @@
           "Все значения автоматически кодируются для URL, включая пробелы, символы и нелатинские символы.",
         copyButton: "Копировать URL",
         copiedButton: "Скопировано!",
-        copyError: "Не удалось скопировать — выделите URL и скопируйте вручную.",
+        copyError: "Не удалось скопировать, выделите URL и скопируйте вручную.",
         mappingTitle: "Сопоставление параметров",
         mappingIntro: "Каждый заполнитель в URL соответствует одному полю:",
         securityTitle: "Примечание о безопасности",
@@ -755,7 +755,7 @@
         eyebrow: "Нове · API для розробників",
         title: "API автоматичних запрошень для гостей",
         subtitle:
-          "Видавайте безпечний гостьовий доступ з обмеженням у часі прямо з ваших систем. Підключіть процес бронювання, CRM або стійку реєстрації та дозвольте WIFIGATE створювати запрошення автоматично — без ручних кроків і без спільних пультів.",
+          "Видавайте безпечний гостьовий доступ з обмеженням у часі прямо з ваших систем. Підключіть процес бронювання, CRM або стійку реєстрації та дозвольте WIFIGATE створювати запрошення автоматично, без ручних кроків і без спільних пультів.",
         point1Title: "Створено для автоматизації",
         point1Text:
           "Створюйте гостьові запрошення програмно з будь-якого бекенду одним автентифікованим запитом.",
@@ -776,11 +776,11 @@
         backToHome: "Назад на головну",
         heading: "API автоматичних запрошень для гостей",
         subheading:
-          "Заповніть поля нижче, щоб створити запит на запрошення. URL-адреса оновлюється в реальному часі під час введення — потім скопіюйте її у власну інтеграцію.",
+          "Заповніть поля нижче, щоб створити запит на запрошення. URL-адреса оновлюється в реальному часі під час введення, потім скопіюйте її у власну інтеграцію.",
         formTitle: "Деталі запрошення",
         apiKeyLabel: "Ключ API",
         apiKeyHint:
-          "Лише заповнювач. Замініть WIFIGATE_GUESTS_API_KEY на свій справжній ключ у власному захищеному середовищі — ніколи не діліться ним публічно.",
+          "Лише заповнювач. Замініть WIFIGATE_GUESTS_API_KEY на свій справжній ключ у власному захищеному середовищі, ніколи не діліться ним публічно.",
         guestNameLabel: "Ім'я гостя",
         guestPhoneLabel: "Телефон гостя",
         guestEmailLabel: "Ел. пошта гостя",
@@ -795,7 +795,7 @@
           "Усі значення автоматично кодуються для URL-адреси, включно з пробілами, символами та нелатинськими знаками.",
         copyButton: "Копіювати URL",
         copiedButton: "Скопійовано!",
-        copyError: "Не вдалося скопіювати — виділіть URL-адресу та скопіюйте вручну.",
+        copyError: "Не вдалося скопіювати, виділіть URL-адресу та скопіюйте вручну.",
         mappingTitle: "Зіставлення параметрів",
         mappingIntro: "Кожен заповнювач в URL-адресі відповідає одному полю:",
         securityTitle: "Примітка щодо безпеки",
@@ -809,7 +809,7 @@
         eyebrow: "Yeni · Geliştirici API'si",
         title: "Otomatik Misafir Davetleri API'si",
         subtitle:
-          "Güvenli, süreyle sınırlı misafir erişimini doğrudan kendi sistemlerinizden verin. Rezervasyon akışınızı, CRM'inizi veya resepsiyonunuzu bağlayın ve WIFIGATE'in davetleri otomatik oluşturmasına izin verin — manuel adım yok, paylaşılan kumanda yok.",
+          "Güvenli, süreyle sınırlı misafir erişimini doğrudan kendi sistemlerinizden verin. Rezervasyon akışınızı, CRM'inizi veya resepsiyonunuzu bağlayın ve WIFIGATE'in davetleri otomatik oluşturmasına izin verin, manuel adım yok, paylaşılan kumanda yok.",
         point1Title: "Otomasyon için tasarlandı",
         point1Text:
           "Tek bir kimlik doğrulamalı istekle herhangi bir arka uçtan programatik olarak misafir davetleri oluşturun.",
@@ -830,11 +830,11 @@
         backToHome: "Ana sayfaya dön",
         heading: "Otomatik Misafir Davetleri API'si",
         subheading:
-          "Bir davet isteği oluşturmak için aşağıdaki bilgileri doldurun. URL siz yazdıkça canlı olarak güncellenir — ardından kendi entegrasyonunuza kopyalayın.",
+          "Bir davet isteği oluşturmak için aşağıdaki bilgileri doldurun. URL siz yazdıkça canlı olarak güncellenir, ardından kendi entegrasyonunuza kopyalayın.",
         formTitle: "Davet bilgileri",
         apiKeyLabel: "API anahtarı",
         apiKeyHint:
-          "Yalnızca yer tutucu. WIFIGATE_GUESTS_API_KEY değerini kendi güvenli ortamınızda gerçek anahtarınızla değiştirin — bunu asla herkese açık paylaşmayın.",
+          "Yalnızca yer tutucu. WIFIGATE_GUESTS_API_KEY değerini kendi güvenli ortamınızda gerçek anahtarınızla değiştirin, bunu asla herkese açık paylaşmayın.",
         guestNameLabel: "Misafir adı",
         guestPhoneLabel: "Misafir telefonu",
         guestEmailLabel: "Misafir e-postası",
@@ -849,7 +849,7 @@
           "Boşluklar, semboller ve Latin olmayan karakterler dahil tüm değerler otomatik olarak URL için kodlanır.",
         copyButton: "URL'yi kopyala",
         copiedButton: "Kopyalandı!",
-        copyError: "Kopyalama başarısız — URL'yi seçip elle kopyalayın.",
+        copyError: "Kopyalama başarısız, URL'yi seçip elle kopyalayın.",
         mappingTitle: "Parametre eşlemesi",
         mappingIntro: "URL'deki her yer tutucu bir alana karşılık gelir:",
         securityTitle: "Güvenlik notu",
@@ -863,7 +863,7 @@
         eyebrow: "جديد · واجهة برمجة للمطورين",
         title: "واجهة برمجة دعوات الضيوف التلقائية",
         subtitle:
-          "امنح وصولاً آمناً ومحدوداً بوقت للضيوف مباشرةً من أنظمتك الخاصة. اربط مسار الحجز أو نظام إدارة العملاء أو مكتب الاستقبال، ودع WIFIGATE ينشئ الدعوات تلقائياً — دون خطوات يدوية ودون أجهزة تحكم مشتركة.",
+          "امنح وصولاً آمناً ومحدوداً بوقت للضيوف مباشرةً من أنظمتك الخاصة. اربط مسار الحجز أو نظام إدارة العملاء أو مكتب الاستقبال، ودع WIFIGATE ينشئ الدعوات تلقائياً, دون خطوات يدوية ودون أجهزة تحكم مشتركة.",
         point1Title: "مصمَّمة للأتمتة",
         point1Text:
           "أنشئ دعوات الضيوف برمجياً من أي خادم خلفي بطلب واحد موثَّق.",
@@ -884,11 +884,11 @@
         backToHome: "العودة إلى الصفحة الرئيسية",
         heading: "واجهة برمجة دعوات الضيوف التلقائية",
         subheading:
-          "املأ التفاصيل أدناه لإنشاء طلب دعوة. يتحدث الرابط مباشرةً أثناء الكتابة — ثم انسخه إلى تكاملك الخاص.",
+          "املأ التفاصيل أدناه لإنشاء طلب دعوة. يتحدث الرابط مباشرةً أثناء الكتابة, ثم انسخه إلى تكاملك الخاص.",
         formTitle: "تفاصيل الدعوة",
         apiKeyLabel: "مفتاح الواجهة",
         apiKeyHint:
-          "عنصر نائب فقط. استبدل WIFIGATE_GUESTS_API_KEY بمفتاحك الحقيقي داخل بيئتك الآمنة — ولا تشاركه علناً أبداً.",
+          "عنصر نائب فقط. استبدل WIFIGATE_GUESTS_API_KEY بمفتاحك الحقيقي داخل بيئتك الآمنة, ولا تشاركه علناً أبداً.",
         guestNameLabel: "اسم الضيف",
         guestPhoneLabel: "هاتف الضيف",
         guestEmailLabel: "بريد الضيف الإلكتروني",
@@ -903,7 +903,7 @@
           "تُرمَّز جميع القيم تلقائياً للرابط، بما في ذلك المسافات والرموز والأحرف غير اللاتينية.",
         copyButton: "نسخ الرابط",
         copiedButton: "تم النسخ!",
-        copyError: "تعذّر النسخ — حدد الرابط وانسخه يدوياً.",
+        copyError: "تعذّر النسخ, حدد الرابط وانسخه يدوياً.",
         mappingTitle: "تعيين المعاملات",
         mappingIntro: "كل عنصر نائب في الرابط يقابل حقلاً واحداً:",
         securityTitle: "ملاحظة أمنية",
@@ -917,7 +917,7 @@
         eyebrow: "नया · डेवलपर API",
         title: "स्वचालित अतिथि निमंत्रण API",
         subtitle:
-          "अपने ही सिस्टम से सुरक्षित, समय-सीमित अतिथि पहुँच जारी करें। अपने बुकिंग फ़्लो, CRM या रिसेप्शन को जोड़ें और WIFIGATE को निमंत्रण अपने आप बनाने दें — कोई मैन्युअल चरण नहीं, कोई साझा रिमोट नहीं।",
+          "अपने ही सिस्टम से सुरक्षित, समय-सीमित अतिथि पहुँच जारी करें। अपने बुकिंग फ़्लो, CRM या रिसेप्शन को जोड़ें और WIFIGATE को निमंत्रण अपने आप बनाने दें, कोई मैन्युअल चरण नहीं, कोई साझा रिमोट नहीं।",
         point1Title: "स्वचालन के लिए बना",
         point1Text:
           "एक ही प्रमाणित अनुरोध से किसी भी बैकएंड से प्रोग्रामेटिक रूप से अतिथि निमंत्रण बनाएँ।",
@@ -938,11 +938,11 @@
         backToHome: "होम पर वापस जाएँ",
         heading: "स्वचालित अतिथि निमंत्रण API",
         subheading:
-          "निमंत्रण अनुरोध बनाने के लिए नीचे विवरण भरें। टाइप करते ही URL लाइव अपडेट होता है — फिर इसे अपने एकीकरण में कॉपी करें।",
+          "निमंत्रण अनुरोध बनाने के लिए नीचे विवरण भरें। टाइप करते ही URL लाइव अपडेट होता है, फिर इसे अपने एकीकरण में कॉपी करें।",
         formTitle: "निमंत्रण विवरण",
         apiKeyLabel: "API कुंजी",
         apiKeyHint:
-          "केवल प्लेसहोल्डर। WIFIGATE_GUESTS_API_KEY को अपने सुरक्षित परिवेश में अपनी असली कुंजी से बदलें — इसे कभी सार्वजनिक रूप से साझा न करें।",
+          "केवल प्लेसहोल्डर। WIFIGATE_GUESTS_API_KEY को अपने सुरक्षित परिवेश में अपनी असली कुंजी से बदलें, इसे कभी सार्वजनिक रूप से साझा न करें।",
         guestNameLabel: "अतिथि का नाम",
         guestPhoneLabel: "अतिथि का फ़ोन",
         guestEmailLabel: "अतिथि का ईमेल",
@@ -957,7 +957,7 @@
           "सभी मान URL के लिए स्वतः एनकोड किए जाते हैं, जिनमें स्पेस, चिह्न और गैर-लैटिन अक्षर शामिल हैं।",
         copyButton: "URL कॉपी करें",
         copiedButton: "कॉपी हो गया!",
-        copyError: "कॉपी विफल — URL चुनें और इसे मैन्युअल रूप से कॉपी करें।",
+        copyError: "कॉपी विफल, URL चुनें और इसे मैन्युअल रूप से कॉपी करें।",
         mappingTitle: "पैरामीटर मैपिंग",
         mappingIntro: "URL में हर प्लेसहोल्डर एक फ़ील्ड से मेल खाता है:",
         securityTitle: "सुरक्षा नोट",
@@ -971,7 +971,7 @@
         eyebrow: "নতুন · ডেভেলপার API",
         title: "স্বয়ংক্রিয় অতিথি আমন্ত্রণ API",
         subtitle:
-          "আপনার নিজস্ব সিস্টেম থেকেই নিরাপদ, সময়-সীমিত অতিথি প্রবেশাধিকার দিন। আপনার বুকিং ফ্লো, CRM বা রিসেপশন যুক্ত করুন এবং WIFIGATE-কে স্বয়ংক্রিয়ভাবে আমন্ত্রণ তৈরি করতে দিন — কোনো ম্যানুয়াল ধাপ নেই, শেয়ার করা রিমোট নেই।",
+          "আপনার নিজস্ব সিস্টেম থেকেই নিরাপদ, সময়-সীমিত অতিথি প্রবেশাধিকার দিন। আপনার বুকিং ফ্লো, CRM বা রিসেপশন যুক্ত করুন এবং WIFIGATE-কে স্বয়ংক্রিয়ভাবে আমন্ত্রণ তৈরি করতে দিন, কোনো ম্যানুয়াল ধাপ নেই, শেয়ার করা রিমোট নেই।",
         point1Title: "অটোমেশনের জন্য তৈরি",
         point1Text:
           "একটি মাত্র প্রমাণীকৃত অনুরোধে যেকোনো ব্যাকএন্ড থেকে প্রোগ্রাম্যাটিকভাবে অতিথি আমন্ত্রণ তৈরি করুন।",
@@ -992,11 +992,11 @@
         backToHome: "হোমে ফিরে যান",
         heading: "স্বয়ংক্রিয় অতিথি আমন্ত্রণ API",
         subheading:
-          "একটি আমন্ত্রণ অনুরোধ তৈরি করতে নিচের তথ্য পূরণ করুন। আপনি টাইপ করার সাথে সাথে URL লাইভ আপডেট হয় — তারপর এটি আপনার নিজস্ব ইন্টিগ্রেশনে কপি করুন।",
+          "একটি আমন্ত্রণ অনুরোধ তৈরি করতে নিচের তথ্য পূরণ করুন। আপনি টাইপ করার সাথে সাথে URL লাইভ আপডেট হয়, তারপর এটি আপনার নিজস্ব ইন্টিগ্রেশনে কপি করুন।",
         formTitle: "আমন্ত্রণের বিবরণ",
         apiKeyLabel: "API কী",
         apiKeyHint:
-          "শুধুমাত্র প্লেসহোল্ডার। আপনার নিরাপদ পরিবেশে WIFIGATE_GUESTS_API_KEY-কে আপনার আসল কী দিয়ে প্রতিস্থাপন করুন — কখনও এটি প্রকাশ্যে শেয়ার করবেন না।",
+          "শুধুমাত্র প্লেসহোল্ডার। আপনার নিরাপদ পরিবেশে WIFIGATE_GUESTS_API_KEY-কে আপনার আসল কী দিয়ে প্রতিস্থাপন করুন, কখনও এটি প্রকাশ্যে শেয়ার করবেন না।",
         guestNameLabel: "অতিথির নাম",
         guestPhoneLabel: "অতিথির ফোন",
         guestEmailLabel: "অতিথির ইমেল",
@@ -1011,7 +1011,7 @@
           "স্পেস, চিহ্ন এবং নন-ল্যাটিন অক্ষরসহ সব মান স্বয়ংক্রিয়ভাবে URL-এর জন্য এনকোড করা হয়।",
         copyButton: "URL কপি করুন",
         copiedButton: "কপি হয়েছে!",
-        copyError: "কপি ব্যর্থ — URL নির্বাচন করে ম্যানুয়ালি কপি করুন।",
+        copyError: "কপি ব্যর্থ, URL নির্বাচন করে ম্যানুয়ালি কপি করুন।",
         mappingTitle: "প্যারামিটার ম্যাপিং",
         mappingIntro: "URL-এর প্রতিটি প্লেসহোল্ডার একটি ফিল্ডের সাথে মেলে:",
         securityTitle: "নিরাপত্তা নোট",
@@ -1025,7 +1025,7 @@
         eyebrow: "नवीन · डेव्हलपर API",
         title: "स्वयंचलित अतिथी आमंत्रण API",
         subtitle:
-          "तुमच्या स्वतःच्या प्रणालींमधूनच सुरक्षित, वेळ-मर्यादित अतिथी प्रवेश द्या. तुमचा बुकिंग फ्लो, CRM किंवा रिसेप्शन जोडा आणि WIFIGATE ला आमंत्रणे आपोआप तयार करू द्या — कोणतीही मॅन्युअल पायरी नाही, सामायिक रिमोट नाही.",
+          "तुमच्या स्वतःच्या प्रणालींमधूनच सुरक्षित, वेळ-मर्यादित अतिथी प्रवेश द्या. तुमचा बुकिंग फ्लो, CRM किंवा रिसेप्शन जोडा आणि WIFIGATE ला आमंत्रणे आपोआप तयार करू द्या, कोणतीही मॅन्युअल पायरी नाही, सामायिक रिमोट नाही.",
         point1Title: "ऑटोमेशनसाठी तयार",
         point1Text:
           "एकाच प्रमाणित विनंतीद्वारे कोणत्याही बॅकएंडवरून प्रोग्रामॅटिकरीत्या अतिथी आमंत्रणे तयार करा.",
@@ -1046,11 +1046,11 @@
         backToHome: "मुख्यपृष्ठावर परत जा",
         heading: "स्वयंचलित अतिथी आमंत्रण API",
         subheading:
-          "आमंत्रण विनंती तयार करण्यासाठी खालील तपशील भरा. तुम्ही टाइप करताच URL थेट अपडेट होते — नंतर ते तुमच्या स्वतःच्या एकत्रीकरणात कॉपी करा.",
+          "आमंत्रण विनंती तयार करण्यासाठी खालील तपशील भरा. तुम्ही टाइप करताच URL थेट अपडेट होते, नंतर ते तुमच्या स्वतःच्या एकत्रीकरणात कॉपी करा.",
         formTitle: "आमंत्रण तपशील",
         apiKeyLabel: "API की",
         apiKeyHint:
-          "फक्त प्लेसहोल्डर. तुमच्या सुरक्षित परिसरात WIFIGATE_GUESTS_API_KEY ला तुमच्या खऱ्या कीने बदला — ते कधीही सार्वजनिकपणे शेअर करू नका.",
+          "फक्त प्लेसहोल्डर. तुमच्या सुरक्षित परिसरात WIFIGATE_GUESTS_API_KEY ला तुमच्या खऱ्या कीने बदला, ते कधीही सार्वजनिकपणे शेअर करू नका.",
         guestNameLabel: "अतिथीचे नाव",
         guestPhoneLabel: "अतिथीचा फोन",
         guestEmailLabel: "अतिथीचा ईमेल",
@@ -1065,7 +1065,7 @@
           "स्पेस, चिन्हे आणि बिगर-लॅटिन अक्षरांसह सर्व मूल्ये URL साठी आपोआप एन्कोड केली जातात.",
         copyButton: "URL कॉपी करा",
         copiedButton: "कॉपी झाले!",
-        copyError: "कॉपी अयशस्वी — URL निवडा आणि ते मॅन्युअली कॉपी करा.",
+        copyError: "कॉपी अयशस्वी, URL निवडा आणि ते मॅन्युअली कॉपी करा.",
         mappingTitle: "पॅरामीटर मॅपिंग",
         mappingIntro: "URL मधील प्रत्येक प्लेसहोल्डर एका फील्डशी जुळतो:",
         securityTitle: "सुरक्षा टीप",
@@ -1079,7 +1079,7 @@
         eyebrow: "కొత్తది · డెవలపర్ API",
         title: "ఆటోమేటెడ్ గెస్ట్ ఇన్వైట్స్ API",
         subtitle:
-          "మీ స్వంత సిస్టమ్‌ల నుండే సురక్షితమైన, కాల-పరిమిత అతిథి యాక్సెస్‌ను జారీ చేయండి. మీ బుకింగ్ ఫ్లో, CRM లేదా రిసెప్షన్‌ను అనుసంధానించి, WIFIGATE ఆహ్వానాలను స్వయంచాలకంగా రూపొందించనివ్వండి — మాన్యువల్ దశలు లేవు, షేర్డ్ రిమోట్‌లు లేవు.",
+          "మీ స్వంత సిస్టమ్‌ల నుండే సురక్షితమైన, కాల-పరిమిత అతిథి యాక్సెస్‌ను జారీ చేయండి. మీ బుకింగ్ ఫ్లో, CRM లేదా రిసెప్షన్‌ను అనుసంధానించి, WIFIGATE ఆహ్వానాలను స్వయంచాలకంగా రూపొందించనివ్వండి, మాన్యువల్ దశలు లేవు, షేర్డ్ రిమోట్‌లు లేవు.",
         point1Title: "ఆటోమేషన్ కోసం రూపొందించబడింది",
         point1Text:
           "ఒకే ప్రామాణీకృత అభ్యర్థనతో ఏ బ్యాకెండ్ నుండైనా ప్రోగ్రామాటిక్‌గా అతిథి ఆహ్వానాలను రూపొందించండి.",
@@ -1100,11 +1100,11 @@
         backToHome: "హోమ్‌కు తిరిగి వెళ్లండి",
         heading: "ఆటోమేటెడ్ గెస్ట్ ఇన్వైట్స్ API",
         subheading:
-          "ఆహ్వాన అభ్యర్థనను రూపొందించడానికి కింది వివరాలను నింపండి. మీరు టైప్ చేస్తుండగానే URL ప్రత్యక్షంగా అప్‌డేట్ అవుతుంది — తర్వాత దానిని మీ స్వంత ఇంటిగ్రేషన్‌లోకి కాపీ చేయండి.",
+          "ఆహ్వాన అభ్యర్థనను రూపొందించడానికి కింది వివరాలను నింపండి. మీరు టైప్ చేస్తుండగానే URL ప్రత్యక్షంగా అప్‌డేట్ అవుతుంది, తర్వాత దానిని మీ స్వంత ఇంటిగ్రేషన్‌లోకి కాపీ చేయండి.",
         formTitle: "ఆహ్వాన వివరాలు",
         apiKeyLabel: "API కీ",
         apiKeyHint:
-          "ప్లేస్‌హోల్డర్ మాత్రమే. మీ సురక్షిత పరిసరంలో WIFIGATE_GUESTS_API_KEYని మీ నిజమైన కీతో భర్తీ చేయండి — దానిని ఎప్పుడూ బహిరంగంగా పంచుకోవద్దు.",
+          "ప్లేస్‌హోల్డర్ మాత్రమే. మీ సురక్షిత పరిసరంలో WIFIGATE_GUESTS_API_KEYని మీ నిజమైన కీతో భర్తీ చేయండి, దానిని ఎప్పుడూ బహిరంగంగా పంచుకోవద్దు.",
         guestNameLabel: "అతిథి పేరు",
         guestPhoneLabel: "అతిథి ఫోన్",
         guestEmailLabel: "అతిథి ఇమెయిల్",
@@ -1119,7 +1119,7 @@
           "ఖాళీలు, చిహ్నాలు మరియు లాటిన్ యేతర అక్షరాలతో సహా అన్ని విలువలు URL కోసం స్వయంచాలకంగా ఎన్‌కోడ్ చేయబడతాయి.",
         copyButton: "URLని కాపీ చేయండి",
         copiedButton: "కాపీ అయింది!",
-        copyError: "కాపీ విఫలమైంది — URLని ఎంచుకుని మాన్యువల్‌గా కాపీ చేయండి.",
+        copyError: "కాపీ విఫలమైంది, URLని ఎంచుకుని మాన్యువల్‌గా కాపీ చేయండి.",
         mappingTitle: "పారామితి మ్యాపింగ్",
         mappingIntro: "URLలోని ప్రతి ప్లేస్‌హోల్డర్ ఒక ఫీల్డ్‌కు సరిపోతుంది:",
         securityTitle: "భద్రతా గమనిక",
@@ -1133,7 +1133,7 @@
         eyebrow: "全新 · 开发者 API",
         title: "自动访客邀请 API",
         subtitle:
-          "直接从您自己的系统签发安全、限时的访客权限。接入您的预订流程、CRM 或前台，让 WIFIGATE 自动创建邀请——无需手动步骤，无需共享遥控器。",
+          "直接从您自己的系统签发安全、限时的访客权限。接入您的预订流程、CRM 或前台，让 WIFIGATE 自动创建邀请，无需手动步骤，无需共享遥控器。",
         point1Title: "为自动化而生",
         point1Text: "通过一次经过身份验证的请求，从任意后端以编程方式创建访客邀请。",
         point2Title: "限时访问",
@@ -1151,11 +1151,11 @@
         backToHome: "返回首页",
         heading: "自动访客邀请 API",
         subheading:
-          "填写下方信息以构建邀请请求。URL 会在您输入时实时更新——随后将其复制到您自己的集成中。",
+          "填写下方信息以构建邀请请求。URL 会在您输入时实时更新，随后将其复制到您自己的集成中。",
         formTitle: "邀请详情",
         apiKeyLabel: "API 密钥",
         apiKeyHint:
-          "仅为占位符。请在您自己的安全环境中将 WIFIGATE_GUESTS_API_KEY 替换为真实密钥——切勿公开分享。",
+          "仅为占位符。请在您自己的安全环境中将 WIFIGATE_GUESTS_API_KEY 替换为真实密钥，切勿公开分享。",
         guestNameLabel: "访客姓名",
         guestPhoneLabel: "访客电话",
         guestEmailLabel: "访客邮箱",
@@ -1169,7 +1169,7 @@
         previewHint: "所有值都会自动进行 URL 编码，包括空格、符号和非拉丁字符。",
         copyButton: "复制 URL",
         copiedButton: "已复制！",
-        copyError: "复制失败——请选中 URL 并手动复制。",
+        copyError: "复制失败，请选中 URL 并手动复制。",
         mappingTitle: "参数映射",
         mappingIntro: "URL 中的每个占位符对应一个字段：",
         securityTitle: "安全提示",
@@ -1183,7 +1183,7 @@
         eyebrow: "全新 · 開發者 API",
         title: "自動訪客邀請 API",
         subtitle:
-          "直接從您自己的系統簽發安全、限時的訪客權限。接入您的預訂流程、CRM 或前台，讓 WIFIGATE 自動建立邀請——無需手動步驟，無需共用遙控器。",
+          "直接從您自己的系統簽發安全、限時的訪客權限。接入您的預訂流程、CRM 或前台，讓 WIFIGATE 自動建立邀請，無需手動步驟，無需共用遙控器。",
         point1Title: "為自動化而生",
         point1Text: "透過一次經過身分驗證的請求，從任意後端以程式化方式建立訪客邀請。",
         point2Title: "限時存取",
@@ -1201,11 +1201,11 @@
         backToHome: "返回首頁",
         heading: "自動訪客邀請 API",
         subheading:
-          "填寫下方資訊以建立邀請請求。URL 會在您輸入時即時更新——隨後將其複製到您自己的整合中。",
+          "填寫下方資訊以建立邀請請求。URL 會在您輸入時即時更新，隨後將其複製到您自己的整合中。",
         formTitle: "邀請詳情",
         apiKeyLabel: "API 金鑰",
         apiKeyHint:
-          "僅為佔位符。請在您自己的安全環境中將 WIFIGATE_GUESTS_API_KEY 替換為真實金鑰——切勿公開分享。",
+          "僅為佔位符。請在您自己的安全環境中將 WIFIGATE_GUESTS_API_KEY 替換為真實金鑰，切勿公開分享。",
         guestNameLabel: "訪客姓名",
         guestPhoneLabel: "訪客電話",
         guestEmailLabel: "訪客電子郵件",
@@ -1219,7 +1219,7 @@
         previewHint: "所有值都會自動進行 URL 編碼，包括空格、符號和非拉丁字元。",
         copyButton: "複製 URL",
         copiedButton: "已複製！",
-        copyError: "複製失敗——請選取 URL 並手動複製。",
+        copyError: "複製失敗，請選取 URL 並手動複製。",
         mappingTitle: "參數對應",
         mappingIntro: "URL 中的每個佔位符對應一個欄位：",
         securityTitle: "安全提示",
@@ -1327,7 +1327,7 @@
           "공백, 기호, 비라틴 문자를 포함한 모든 값이 자동으로 URL 인코딩됩니다.",
         copyButton: "URL 복사",
         copiedButton: "복사됨!",
-        copyError: "복사 실패 — URL을 선택해 수동으로 복사하세요.",
+        copyError: "복사 실패, URL을 선택해 수동으로 복사하세요.",
         mappingTitle: "매개변수 매핑",
         mappingIntro: "URL의 각 자리표시자는 하나의 필드에 대응합니다:",
         securityTitle: "보안 참고",
@@ -1341,7 +1341,7 @@
         eyebrow: "Nyt · Udvikler-API",
         title: "API til automatiske gæsteinvitationer",
         subtitle:
-          "Udsted sikker, tidsbegrænset gæsteadgang direkte fra dine egne systemer. Forbind dit bookingflow, dit CRM eller din reception, og lad WIFIGATE oprette invitationer automatisk — uden manuelle trin og uden delte fjernbetjeninger.",
+          "Udsted sikker, tidsbegrænset gæsteadgang direkte fra dine egne systemer. Forbind dit bookingflow, dit CRM eller din reception, og lad WIFIGATE oprette invitationer automatisk, uden manuelle trin og uden delte fjernbetjeninger.",
         point1Title: "Bygget til automatisering",
         point1Text:
           "Opret gæsteinvitationer programmatisk fra enhver backend med en enkelt godkendt forespørgsel.",
@@ -1362,11 +1362,11 @@
         backToHome: "Tilbage til forsiden",
         heading: "API til automatiske gæsteinvitationer",
         subheading:
-          "Udfyld oplysningerne nedenfor for at bygge en invitationsforespørgsel. URL'en opdateres live, mens du skriver — kopiér den derefter ind i din egen integration.",
+          "Udfyld oplysningerne nedenfor for at bygge en invitationsforespørgsel. URL'en opdateres live, mens du skriver, kopiér den derefter ind i din egen integration.",
         formTitle: "Invitationsoplysninger",
         apiKeyLabel: "API-nøgle",
         apiKeyHint:
-          "Kun en pladsholder. Erstat WIFIGATE_GUESTS_API_KEY med din rigtige nøgle i dit eget sikre miljø — del den aldrig offentligt.",
+          "Kun en pladsholder. Erstat WIFIGATE_GUESTS_API_KEY med din rigtige nøgle i dit eget sikre miljø, del den aldrig offentligt.",
         guestNameLabel: "Gæstens navn",
         guestPhoneLabel: "Gæstens telefon",
         guestEmailLabel: "Gæstens e-mail",
@@ -1381,7 +1381,7 @@
           "Alle værdier URL-kodes automatisk, inklusive mellemrum, symboler og ikke-latinske tegn.",
         copyButton: "Kopiér URL",
         copiedButton: "Kopieret!",
-        copyError: "Kopiering mislykkedes — markér URL'en, og kopiér den manuelt.",
+        copyError: "Kopiering mislykkedes, markér URL'en, og kopiér den manuelt.",
         mappingTitle: "Parametertilknytning",
         mappingIntro: "Hver pladsholder i URL'en svarer til ét felt:",
         securityTitle: "Sikkerhedsnote",
@@ -1395,7 +1395,7 @@
         eyebrow: "Új · Fejlesztői API",
         title: "Automatikus vendégmeghívó API",
         subtitle:
-          "Adjon ki biztonságos, időkorlátos vendéghozzáférést közvetlenül a saját rendszereiből. Kösse össze a foglalási folyamatot, a CRM-et vagy a recepciót, és hagyja, hogy a WIFIGATE automatikusan hozza létre a meghívókat — kézi lépések és megosztott távirányítók nélkül.",
+          "Adjon ki biztonságos, időkorlátos vendéghozzáférést közvetlenül a saját rendszereiből. Kösse össze a foglalási folyamatot, a CRM-et vagy a recepciót, és hagyja, hogy a WIFIGATE automatikusan hozza létre a meghívókat, kézi lépések és megosztott távirányítók nélkül.",
         point1Title: "Automatizálásra tervezve",
         point1Text:
           "Hozzon létre vendégmeghívókat programozottan bármely háttérrendszerből egyetlen hitelesített kéréssel.",
@@ -1416,11 +1416,11 @@
         backToHome: "Vissza a főoldalra",
         heading: "Automatikus vendégmeghívó API",
         subheading:
-          "Töltse ki az alábbi mezőket egy meghívókérés összeállításához. Az URL gépelés közben élőben frissül — utána másolja a saját integrációjába.",
+          "Töltse ki az alábbi mezőket egy meghívókérés összeállításához. Az URL gépelés közben élőben frissül, utána másolja a saját integrációjába.",
         formTitle: "Meghívó adatai",
         apiKeyLabel: "API-kulcs",
         apiKeyHint:
-          "Csak helykitöltő. Cserélje le a WIFIGATE_GUESTS_API_KEY értéket a valódi kulcsára a saját biztonságos környezetében — soha ne ossza meg nyilvánosan.",
+          "Csak helykitöltő. Cserélje le a WIFIGATE_GUESTS_API_KEY értéket a valódi kulcsára a saját biztonságos környezetében, soha ne ossza meg nyilvánosan.",
         guestNameLabel: "Vendég neve",
         guestPhoneLabel: "Vendég telefonszáma",
         guestEmailLabel: "Vendég e-mail-címe",
@@ -1435,7 +1435,7 @@
           "Minden érték automatikusan URL-kódolásra kerül, beleértve a szóközöket, szimbólumokat és a nem latin karaktereket is.",
         copyButton: "URL másolása",
         copiedButton: "Másolva!",
-        copyError: "A másolás nem sikerült — jelölje ki az URL-t, és másolja ki kézzel.",
+        copyError: "A másolás nem sikerült, jelölje ki az URL-t, és másolja ki kézzel.",
         mappingTitle: "Paraméter-hozzárendelés",
         mappingIntro: "Az URL minden helykitöltője egy mezőnek felel meg:",
         securityTitle: "Biztonsági megjegyzés",

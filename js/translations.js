@@ -15,7 +15,7 @@ var translations = {
       rotator: {
         phrases: ["Easy to Use", "Complete Privacy", "No Subscriptions"]
       },
-      subtitle: "No keys. No remotes. No cards.\nSecure digital access — without waiting for anyone to let you in.",
+      subtitle: "No keys. No remotes. No cards.\nSecure digital access, without waiting for anyone to let you in.",
       cta: {
         contact: "Contact Us",
         about: "Tutorials"
@@ -126,7 +126,7 @@ var translations = {
     },
     footer: {
       copyright: "WIFIGATE. All rights reserved.",
-      tagline: "No keys. No remotes. No cards.\nSecure digital access — without waiting for anyone to let you in.",
+      tagline: "No keys. No remotes. No cards.\nSecure digital access, without waiting for anyone to let you in.",
       terms: "Terms & Conditions",
       privacy: "Privacy Policy",
       cookies: "Cookies"
@@ -143,7 +143,7 @@ var translations = {
       rotator: {
         phrases: ["קל לשימוש", "פרטיות מלאה", "ללא מנוי"]
       },
-      subtitle: "אין מפתחות. אין שלטים. אין כרטיסים.\nכניסה דיגיטלית מאובטחת — בלי לחכות שמישהו יפתח לכם.",
+      subtitle: "אין מפתחות. אין שלטים. אין כרטיסים.\nכניסה דיגיטלית מאובטחת, בלי לחכות שמישהו יפתח לכם.",
       cta: {
         contact: "צור קשר",
         about: "סרטוני הדרכה"

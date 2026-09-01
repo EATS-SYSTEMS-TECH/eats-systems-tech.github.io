@@ -188,6 +188,9 @@ async function main() {
       if (html.includes("\uFEFF")) {
         problems.push(`${rel}: contains a stray UTF-8 BOM that can create a gap above the header`);
       }
+      if (html.includes("\u2014")) {
+        problems.push(`${rel}: contains a disallowed em dash in visible site content`);
+      }
       if ($(".language-selector").length !== 1 || languageButton.length !== 1 || languageDropdown.length !== 1) {
         problems.push(`${rel}: incomplete or duplicated language selector markup`);
       }
