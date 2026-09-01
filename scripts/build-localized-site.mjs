@@ -93,17 +93,17 @@ const legalRuntimeScriptsToRemove = [
 
 const homeRuntimeScriptsToAdd = [
   "/js/locale-redirect.js?v=20260620a",
-  "/js/language-selector.js?v=20260620a",
+  "/js/language-selector.js?v=20260902a",
 ];
 
 const legalRuntimeScriptsToAdd = [
   "/js/locale-redirect.js?v=20260620a",
-  "/js/language-selector.js?v=20260620a",
+  "/js/language-selector.js?v=20260902a",
 ];
 
 const nicheRuntimeScriptsToAdd = [
   "/js/locale-redirect.js?v=20260620a",
-  "/js/language-selector.js?v=20260620a",
+  "/js/language-selector.js?v=20260902a",
 ];
 
 const pageImages = {
@@ -319,6 +319,12 @@ function buildLanguageSelectorMarkup(options, locale, pageKey, assetPrefix) {
 function setLanguageSelector($, options, locale, pageKey) {
   const currentOption = options.find((option) => option.code === locale) || options[0];
   const assetPrefix = buildAssetPrefix(locale, pageKey);
+
+  $("#language-button").attr({
+    "aria-controls": "language-dropdown",
+    "aria-haspopup": "true",
+    "aria-expanded": "false",
+  });
 
   $("#selected-flag").html(
     `<img src="${toStaticAssetPath(`assets/img/flags/${currentOption.flagSrc}`, assetPrefix)}" alt="${currentOption.flagAlt}" width="50" height="33" />`
@@ -831,6 +837,11 @@ function ensureTrailingNewline(source) {
   return source.endsWith("\n") ? source : `${source}\n`;
 }
 
+async function readHtmlTemplate(filePath) {
+  const source = await fs.readFile(filePath, "utf8");
+  return source.replace(/^\uFEFF/, "");
+}
+
 function serialize($) {
   return ensureTrailingNewline($.html({ decodeEntities: false }));
 }
@@ -881,7 +892,7 @@ function buildSitemap(urlEntries) {
 }
 
 async function buildHomePages(homeData) {
-  const template = await fs.readFile(homeTemplatePath, "utf8");
+  const template = await readHtmlTemplate(homeTemplatePath);
   const sitemapEntries = [];
 
   for (const localeOption of homeData.localeOptions) {
@@ -925,7 +936,7 @@ async function buildHomePages(homeData) {
 
 async function buildLegalPages(homeData, legalCollections) {
   for (const [pageKey, templatePath] of Object.entries(legalTemplatePaths)) {
-    const template = await fs.readFile(templatePath, "utf8");
+    const template = await readHtmlTemplate(templatePath);
     const translations = legalCollections[pageKey];
 
     for (const localeOption of homeData.localeOptions) {
@@ -953,7 +964,7 @@ async function buildLegalPages(homeData, legalCollections) {
 }
 
 async function buildUtilityPages(homeData) {
-  const template = await fs.readFile(utilityTemplatePath, "utf8");
+  const template = await readHtmlTemplate(utilityTemplatePath);
 
   for (const localeOption of homeData.localeOptions) {
     const locale = localeOption.code;
@@ -1164,7 +1175,7 @@ function setNicheMeta($, ctx, niche, locale, localeOptions) {
 }
 
 async function buildNichePages(homeData) {
-  const template = await fs.readFile(nicheTemplatePath, "utf8");
+  const template = await readHtmlTemplate(nicheTemplatePath);
   const sitemapEntries = [];
 
   for (const niche of NICHE_DEFINITIONS) {
@@ -1300,7 +1311,7 @@ function setGuestInvitesMeta($, locale, localeOptions, strings) {
 }
 
 async function buildGuestInvitesPages(homeData) {
-  const template = await fs.readFile(guestInvitesTemplatePath, "utf8");
+  const template = await readHtmlTemplate(guestInvitesTemplatePath);
   const sitemapEntries = [];
 
   for (const localeOption of homeData.localeOptions) {

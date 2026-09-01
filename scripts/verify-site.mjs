@@ -26,6 +26,14 @@ const localeOptions = [
 const rtlLocales = new Set(["he", "ar"]);
 const nicheKeys = NICHE_DEFINITIONS.map((n) => n.key);
 const indexablePages = ["home", "automation", ...nicheKeys];
+const interactivePages = [
+  "home",
+  "automation",
+  ...nicheKeys,
+  "cookies",
+  "privacy-policy",
+  "terms-and-conditions",
+];
 
 function pageSegments(locale, pageKey) {
   const segments = [];
@@ -154,6 +162,61 @@ async function main() {
       }
     }
 
+    // Every normal content page must carry the complete shared language and
+    // accessibility controls. Redirect/deep-link utility pages are excluded
+    // because they intentionally leave the website immediately.
+    for (const pageKey of interactivePages) {
+      const filePath = pageFile(locale, pageKey);
+      const rel = path.relative(repoRoot, filePath);
+
+      if (!(await fileExists(filePath))) {
+        problems.push(`${locale}/${pageKey}: interactive page not generated (${rel})`);
+        continue;
+      }
+
+      const html = await fs.readFile(filePath, "utf8");
+      const $ = cheerio.load(html);
+      const languageScript = $("script[src*='js/language-selector.js']");
+      const accessibilityScript = $("script[src*='js/accessibility.js']");
+      const languageButton = $("#language-button");
+      const languageDropdown = $("#language-dropdown");
+      const accessibilityOptions = $("[data-a11y-setting]");
+
+      if (!/^<!DOCTYPE html>/i.test(html)) {
+        problems.push(`${rel}: missing HTML doctype at the start of the document`);
+      }
+      if (html.includes("\uFEFF")) {
+        problems.push(`${rel}: contains a stray UTF-8 BOM that can create a gap above the header`);
+      }
+      if ($(".language-selector").length !== 1 || languageButton.length !== 1 || languageDropdown.length !== 1) {
+        problems.push(`${rel}: incomplete or duplicated language selector markup`);
+      }
+      if (languageScript.length !== 1) {
+        problems.push(`${rel}: expected one shared language-selector.js controller, found ${languageScript.length}`);
+      }
+      if (languageButton.attr("aria-controls") !== "language-dropdown") {
+        problems.push(`${rel}: language button does not control language-dropdown`);
+      }
+      if (languageButton.attr("aria-expanded") !== "false") {
+        problems.push(`${rel}: language button must start with aria-expanded=false`);
+      }
+      if ($("#a11y-fab").length !== 1 || $("#a11y-panel").length !== 1 || $("#a11y-backdrop").length !== 1) {
+        problems.push(`${rel}: incomplete or duplicated accessibility widget markup`);
+      }
+      if (accessibilityScript.length !== 1) {
+        problems.push(`${rel}: expected one accessibility.js controller, found ${accessibilityScript.length}`);
+      }
+      if ($("#a11y-fab").attr("aria-controls") !== "a11y-panel") {
+        problems.push(`${rel}: accessibility button does not control a11y-panel`);
+      }
+      if ($("#a11y-fab").attr("aria-expanded") !== "false" || $("#a11y-panel").attr("aria-hidden") !== "true") {
+        problems.push(`${rel}: accessibility widget has an invalid initial open/closed state`);
+      }
+      if (accessibilityOptions.length !== 5) {
+        problems.push(`${rel}: found ${accessibilityOptions.length} accessibility options, expected 5`);
+      }
+    }
+
     // Legacy routes must redirect to the new locations.
     for (const niche of NICHE_DEFINITIONS) {
       for (const legacyKey of niche.legacyKeys || []) {
@@ -201,6 +264,7 @@ async function main() {
   } else {
     console.log(
       `OK: ${localeOptions.length} locales x ${indexablePages.length} pages verified, ` +
+        `${localeOptions.length * interactivePages.length} interactive pages, ` +
         `${sitemapUrls.length} sitemap URLs, redirects in place`
     );
   }
