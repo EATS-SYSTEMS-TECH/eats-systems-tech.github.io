@@ -1351,3 +1351,14 @@ function setupAccessibilityWidget() {
   updateAccessibilityCopy()
   applyAccessibilitySettings()
 }
+
+function initializeAccessibilityWidget() {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupAccessibilityWidget, { once: true })
+    return
+  }
+
+  setupAccessibilityWidget()
+}
+
+initializeAccessibilityWidget()
