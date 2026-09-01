@@ -1,0 +1,32 @@
+name: dependency-audit
+
+# The static site ships no third-party JavaScript to visitors; cheerio and sharp
+# are build-time only. This gate keeps the dependency tree free of high/critical
+# advisories. If a future accepted exception is needed, switch to the allow-list
+# gate used by the mobile app.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/dependency-audit.yml"
+  pull_request:
+    paths:
+      - "package.json"
+      - "package-lock.json"
+  schedule:
+    - cron: "0 6 * * 1"
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: npm ci --no-audit --no-fund
+      - name: npm audit (fail on high or critical)
+        run: npm audit --audit-level=high
