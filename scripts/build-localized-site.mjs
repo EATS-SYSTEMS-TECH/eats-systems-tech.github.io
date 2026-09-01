@@ -1231,7 +1231,7 @@ function getGuestInvitesStrings(homeData, locale) {
     ),
     copyButton: pick("copyButton", "Copy URL"),
     copiedButton: pick("copiedButton", "Copied!"),
-    copyError: pick("copyError", "Copy failed \u2014 select the URL and copy it manually."),
+    copyError: pick("copyError", "Copy failed, select the URL and copy it manually."),
   };
 }
 

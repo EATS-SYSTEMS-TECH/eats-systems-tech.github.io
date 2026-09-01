@@ -1,7 +1,7 @@
 // scripts/niche-pages/he.mjs
 // Hebrew content for the homepage "where" section + the niche/use-case pages.
 // Source of truth: the approved Hebrew marketing copy. Other locales are
-// translated from this file and en.mjs — keep the meaning aligned when editing.
+// translated from this file and en.mjs, keep the meaning aligned when editing.
 
 export default {
   home: {

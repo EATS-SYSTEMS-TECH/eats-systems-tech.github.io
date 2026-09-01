@@ -606,7 +606,7 @@
 
   const marketingCopyOverrides = {
     en: {
-      heroSubtitle: "No keys. No remotes. No cards.\nSecure digital access — without waiting for anyone to let you in.",
+      heroSubtitle: "No keys. No remotes. No cards.\nSecure digital access, without waiting for anyone to let you in.",
       noSimRouterText: "WiFiGate works directly with the device, with no SIM card, no internet plan, and no external Wi-Fi router required.",
       stabilityText: "A streamlined architecture keeps access responsive and dependable while supporting secure, private, encrypted operation.",
       securityText: "WiFiGate is designed around secure handling, encrypted storage, and private operation.",

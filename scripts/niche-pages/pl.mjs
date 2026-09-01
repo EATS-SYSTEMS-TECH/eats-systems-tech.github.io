@@ -13,14 +13,14 @@ export default {
   where: {
     title: "Gdzie sprawdzi się WIFIGATE?",
     subtitle:
-      "WIFIGATE sprawdza się w wielu różnych środowiskach i zapewnia inteligentne, bezpieczne i wygodne zarządzanie dostępem — od domów jednorodzinnych po obiekty komercyjne i firmowe.",
+      "WIFIGATE sprawdza się w wielu różnych środowiskach i zapewnia inteligentne, bezpieczne i wygodne zarządzanie dostępem, od domów jednorodzinnych po obiekty komercyjne i firmowe.",
   },
   niches: {
     "hotels-airbnb": {
       label: "Hotele, Airbnb i apartamenty na wynajem",
       title: "Inteligentny dostęp dla hoteli, Airbnb i apartamentów na wynajem",
       paragraph:
-        "WIFIGATE pozwala gościom otrzymać wygodny i bezpieczny cyfrowy dostęp prosto na telefon — bez fizycznych kluczy, bez kart i bez zbędnych ustaleń z recepcją czy właścicielem obiektu. Dzięki WIFIGATE API proces rezerwacji można połączyć z systemem dostępu, tak aby w chwili potwierdzenia rezerwacji gość automatycznie otrzymywał dostęp gościnny ograniczony w czasie. Dostęp zaczyna działać w momencie zameldowania, kończy się automatycznie przy wymeldowaniu i znacząco ogranicza potrzebę przekazywania kluczy, udostępniania kodów czy ręcznej obsługi każdego gościa.",
+        "WIFIGATE pozwala gościom otrzymać wygodny i bezpieczny cyfrowy dostęp prosto na telefon, bez fizycznych kluczy, bez kart i bez zbędnych ustaleń z recepcją czy właścicielem obiektu. Dzięki WIFIGATE API proces rezerwacji można połączyć z systemem dostępu, tak aby w chwili potwierdzenia rezerwacji gość automatycznie otrzymywał dostęp gościnny ograniczony w czasie. Dostęp zaczyna działać w momencie zameldowania, kończy się automatycznie przy wymeldowaniu i znacząco ogranicza potrzebę przekazywania kluczy, udostępniania kodów czy ręcznej obsługi każdego gościa.",
       bullets: [
         "Automatyczny dostęp dla gościa po potwierdzeniu rezerwacji",
         "Pełna automatyzacja dzięki WIFIGATE API",
@@ -41,7 +41,7 @@ export default {
       label: "Rolety antywłamaniowe dla firm i sklepów",
       title: "Inteligentne i bezpieczniejsze sterowanie roletami w firmach i sklepach",
       paragraph:
-        "Rolety antywłamaniowe w firmach i sklepach często obsługuje się pilotami, kluczami, zewnętrzną skrzynką na klucz lub przełącznikami zamontowanymi na zewnątrz lokalu. Takie rozwiązania mogą się zgubić, zostać u byłych pracowników, zostać skopiowane albo zamienić się w odsłonięty punkt dostępu. Otwieranie i zamykanie kluczem oznacza też konieczność stania tuż przy punkcie obsługi, z kluczem w dłoni, czasem bez wygodnego widoku na strefę rolety. WIFIGATE przenosi sterowanie do aplikacji i pozwala umieścić kontrolę dostępu po lepiej chronionej, wewnętrznej stronie — dzięki temu otwierasz i zamykasz wygodniej, zarządzasz uprawnieniami pracowników i dostawców oraz ograniczasz zależność od kluczy, pilotów i odsłoniętych punktów dostępu.",
+        "Rolety antywłamaniowe w firmach i sklepach często obsługuje się pilotami, kluczami, zewnętrzną skrzynką na klucz lub przełącznikami zamontowanymi na zewnątrz lokalu. Takie rozwiązania mogą się zgubić, zostać u byłych pracowników, zostać skopiowane albo zamienić się w odsłonięty punkt dostępu. Otwieranie i zamykanie kluczem oznacza też konieczność stania tuż przy punkcie obsługi, z kluczem w dłoni, czasem bez wygodnego widoku na strefę rolety. WIFIGATE przenosi sterowanie do aplikacji i pozwala umieścić kontrolę dostępu po lepiej chronionej, wewnętrznej stronie, dzięki temu otwierasz i zamykasz wygodniej, zarządzasz uprawnieniami pracowników i dostawców oraz ograniczasz zależność od kluczy, pilotów i odsłoniętych punktów dostępu.",
       bullets: [
         "Otwieranie i zamykanie z telefonu, bez polegania na pilotach",
         "Mniejsza zależność od kluczy, które można skopiować lub zgubić",
@@ -98,7 +98,7 @@ export default {
       ],
       seoTitle: "Inteligentne otwieranie bram garażowych z telefonu | WIFIGATE",
       seoDescription:
-        "WIFIGATE otwiera bramy garażowe i parkingi prywatne z telefonu — mniejsza zależność od fizycznych pilotów, uprawnienia tymczasowe i prywatne zarządzanie dostępem.",
+        "WIFIGATE otwiera bramy garażowe i parkingi prywatne z telefonu, mniejsza zależność od fizycznych pilotów, uprawnienia tymczasowe i prywatne zarządzanie dostępem.",
       imageAlt: "Mężczyzna otwierający prywatną bramę garażową telefonem przy nowoczesnym domu",
     },
     "private-homes": {
@@ -145,7 +145,7 @@ export default {
       label: "Biurowce",
       title: "Inteligentny dostęp do biurowców",
       paragraph:
-        "Biurowce muszą zapewniać wygodne wejście pracownikom, gościom, dostawcom i zespołom technicznym — bez obciążania recepcji i bez ręcznego zarządzania kluczami czy kartami. WIFIGATE pozwala nadawać stałe uprawnienia pracownikom i tymczasowe odwiedzającym, kontrolować dostęp z telefonu i zarządzać wejściami w sposób, który pasuje do nowoczesnego, czystego i uporządkowanego środowiska biznesowego.",
+        "Biurowce muszą zapewniać wygodne wejście pracownikom, gościom, dostawcom i zespołom technicznym, bez obciążania recepcji i bez ręcznego zarządzania kluczami czy kartami. WIFIGATE pozwala nadawać stałe uprawnienia pracownikom i tymczasowe odwiedzającym, kontrolować dostęp z telefonu i zarządzać wejściami w sposób, który pasuje do nowoczesnego, czystego i uporządkowanego środowiska biznesowego.",
       bullets: [
         "Stałe uprawnienia dla pracowników i zespołów",
         "Dostęp tymczasowy dla odwiedzających, dostawców i kurierów",
@@ -158,7 +158,7 @@ export default {
       ],
       seoTitle: "Kontrola dostępu do biurowców | WIFIGATE",
       seoDescription:
-        "WIFIGATE pozwala biurowcom zarządzać wejściem pracowników, gości i dostawców z telefonu — z tymczasowymi i stałymi uprawnieniami oraz nowoczesnym zarządzaniem dostępem.",
+        "WIFIGATE pozwala biurowcom zarządzać wejściem pracowników, gości i dostawców z telefonu, z tymczasowymi i stałymi uprawnieniami oraz nowoczesnym zarządzaniem dostępem.",
       imageAlt: "Pracownica otwierająca telefonem szklane drzwi w nowoczesnym biurze",
     },
     "entry-doors-magnetic-locks": {
@@ -198,7 +198,7 @@ export default {
       ],
       seoTitle: "Kontrola dostępu do obiektów sportowych i kortów do padla | WIFIGATE",
       seoDescription:
-        "WIFIGATE zapewnia inteligentną kontrolę dostępu do obiektów sportowych, kortów do padla, siłowni i stref treningowych — wejście z telefonu i elastyczne uprawnienia.",
+        "WIFIGATE zapewnia inteligentną kontrolę dostępu do obiektów sportowych, kortów do padla, siłowni i stref treningowych, wejście z telefonu i elastyczne uprawnienia.",
       imageAlt: "Zawodniczka padla otwierająca telefonem wejście na oświetlony kort",
     },
   },

@@ -13,9 +13,9 @@ build machine.
 * `npm audit --omit=dev`: **0 vulnerabilities** (production tree clean).
 * `npm audit` (full tree): **0 vulnerabilities**.
 
-The one previously reported high — `undici` `7.28.0` (a transitive dependency of
+The one previously reported high, `undici` `7.28.0` (a transitive dependency of
 `cheerio`, used only by its network fetch helper, not by the HTML parser the
-build uses) — was resolved with `npm audit fix`, which bumped it to `7.29.0`.
+build uses), was resolved with `npm audit fix`, which bumped it to `7.29.0`.
 `cheerio` and `sharp` were smoke-tested after the bump.
 
 ## CI gate
