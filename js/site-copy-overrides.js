@@ -5,7 +5,7 @@
   }
 
   const copy = {
-    en: ["Why Choose Us?", "Use Cases", "WIFIGATE: The Winning Approach", "For Home, Business, or Guests: Smart Access Everywhere"],
+    en: ["Why Choose Us?", "Use Cases", "WIFIGATE: The Winning Approach", "Smart Access for Buildings, Businesses, and Hospitality"],
     he: ["למה לבחור בנו?", "שימושים", "WIFIGATE השיטה המנצחת", "לבית, לעסק או לאורחים: גישה חכמה בכל מקום"],
     es: ["¿Por qué elegirnos?", "Casos de uso", "WIFIGATE: el método ganador", "Para el hogar, el negocio o los invitados: acceso inteligente en cualquier lugar"],
     fr: ["Pourquoi nous choisir ?", "Cas d’usage", "WIFIGATE : la méthode gagnante", "Pour la maison, l’entreprise ou les invités : un accès intelligent partout"],
