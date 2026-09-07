@@ -67,8 +67,8 @@ var translations = {
       }
     },
     action: {
-      title: "Where Is WIFIGATE Suitable for Use?",
-      subtitle: "WIFIGATE gives owners, residents, staff, and guests phone-based access to gates, doors, and shared entrances without shared remotes, exposed keypads, or monthly subscriptions."
+      title: "Smart Access for Buildings, Businesses, and Hospitality",
+      subtitle: "WIFIGATE makes access management simple, secure, and convenient for residential buildings, businesses, and hospitality properties, with flexible control for entrances, gates, shutters, and parking areas."
     },
     tabs: {
       why: "Why",

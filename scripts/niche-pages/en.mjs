@@ -13,9 +13,9 @@ export default {
       "WIFIGATE, WiFi Gate, wifi gate, smart access control, gate access control, open gate from phone, door access control, parking access, no monthly fees",
   },
   where: {
-    title: "Where Is WIFIGATE Suitable for Use?",
+    title: "Smart Access for Buildings, Businesses, and Hospitality",
     subtitle:
-      "WIFIGATE fits a wide range of environments and provides a smart, secure, and convenient access-management solution, from private homes to commercial and organizational settings.",
+      "WIFIGATE makes access management simple, secure, and convenient for residential buildings, businesses, and hospitality properties, with flexible control for entrances, gates, shutters, and parking areas.",
   },
   niches: {
     "hotels-airbnb": {
