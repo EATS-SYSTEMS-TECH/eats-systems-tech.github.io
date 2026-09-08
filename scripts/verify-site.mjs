@@ -8,10 +8,11 @@
 //   - legacy niche routes exist and redirect to the right target
 //   - sitemap entries resolve to generated pages
 //   - no leftover "undefined" text in rendered pages
+//   - invitation redirects preserve opaque protocol query parameters
 
+import * as cheerio from "cheerio";
 import fs from "node:fs/promises";
 import path from "node:path";
-import * as cheerio from "cheerio";
 import { NICHE_DEFINITIONS } from "./niche-pages/index.mjs";
 
 const repoRoot = process.cwd();
@@ -85,6 +86,26 @@ async function checkResolvable($, fromFile, selector, attr, label) {
 async function main() {
   const titlesByLocale = new Map();
   const descriptionsByLocale = new Map();
+  const invitationTemplatePath = path.join(
+    repoRoot,
+    "templates",
+    "wifigate-link.template.html",
+  );
+  const invitationTemplate = await fs.readFile(invitationTemplatePath, "utf8");
+  const queryPassThroughCount = (
+    invitationTemplate.match(/const query = params\.toString\(\);/g) || []
+  ).length;
+
+  if (queryPassThroughCount !== 3) {
+    problems.push(
+      `templates/wifigate-link.template.html: found ${queryPassThroughCount} query pass-through routes, expected 3`,
+    );
+  }
+  if (/params\.delete\(["'](?:ep|ao)["']\)/.test(invitationTemplate)) {
+    problems.push(
+      "templates/wifigate-link.template.html: invitation protocol fields ep/ao must pass through unchanged",
+    );
+  }
 
   for (const locale of localeOptions) {
     for (const pageKey of indexablePages) {
