@@ -86,7 +86,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Day+One&amp;display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/styles.css?v=20260830a">
+  <link rel="stylesheet" href="../css/styles.css?v=20260908d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20260604c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20260708a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
@@ -209,11 +209,10 @@
 
       <div class="nav__links-wrapper" id="primary-navigation">
         <nav class="topbar-nav">
-          <a href="#home" class="nav-link nav__link" data-i18n="nav.home" dir="ltr">বাড়ি</a>
-          <a href="#advantages" class="nav-link nav__link" data-i18n="nav.features" dir="ltr">কেন আমাদের বেছে নেবেন?</a>
+          <a href="#advantages" class="nav-link nav__link" data-i18n="nav.features" dir="ltr">ফিচারসমূহ</a>
           <a href="#where" class="nav-link nav__link" data-i18n="tabs.where" dir="ltr">ব্যবহারের ক্ষেত্র</a>
-          <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about" dir="ltr">টিউটোরিয়াল</a>
           <a href="#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
+          <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about" dir="ltr">টিউটোরিয়াল</a>
           <a href="#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact" dir="ltr">আমাদের সাথে যোগাযোগ করুন</a>
         </nav>
       </div>
@@ -510,7 +509,7 @@
         <div class="hero__text">
           <h1 class="hero__title" id="hero-title">
             <span class="hero-brand" aria-hidden="true">WIFIGATE</span>
-            <span class="visually-hidden" id="hero-search-text">WIFIGATE. বিস্তৃত পরিবেশের জন্য উপযুক্ত এবং ব্যক্তিগত অ্যাপ্লিকেশন থেকে বাণিজ্যিক এবং সাংগঠনিক সেটিংস পর্যন্ত একটি স্মার্ট, নিরাপদ, এবং সুবিধাজনক অ্যাক্সেস-ম্যানেজমেন্ট সমাধান প্রদান করে।</span>
+            <span class="visually-hidden" id="hero-search-text">WIFIGATE. আবাসিক ভবন, ব্যবসা ও দোকান, আতিথেয়তা সম্পত্তি, ব্যক্তিগত বাড়ি, অফিস ভবন এবং ক্রীড়া সুবিধার জন্য স্মার্ট অ্যাক্সেস সহজ করে। বিশ্বজুড়ে সম্পত্তির জন্য তৈরি একটি নিরাপদ প্ল্যাটফর্মের মাধ্যমে রোলার শাটার, বৈদ্যুতিক গেট, পার্কিং ব্যারিয়ার, গ্যারেজ দরজা, ব্যক্তিগত পার্কিং অ্যাক্সেস, প্রবেশদ্বার এবং ম্যাগনেটিক লক পরিচালনা করুন।</span>
             <span id="hero-rotator" class="hero-rotator" aria-live="polite" aria-atomic="true">ব্যবহার করা সহজ</span>
           </h1>
           <p class="hero__subtitle" id="hero-subtitle" data-i18n="hero.subtitle" dir="ltr">একটি স্মার্ট অ্যাক্সেস-কন্ট্রোল সিস্টেম যা নিরাপদ, সহজ এবং মাসিক ফি ছাড়াই।</p>
@@ -602,11 +601,30 @@
           </article>
         </div>
       </div>
-    </section><section class="section section--alt" id="where" aria-labelledby="where-title">
+    </section><section class="section section--alt" id="where" aria-labelledby="where-title" aria-describedby="where-subtitle">
       <div class="container">
         <header class="section__header js-reveal">
-          <h2 class="section__title" id="where-title" data-i18n="action.title" dir="ltr">বাড়ি, ব্যবসা বা অতিথিদের জন্য: সর্বত্র স্মার্ট অ্যাক্সেস</h2>
-          <p class="section__subtitle" id="where-subtitle" data-i18n="action.subtitle" dir="ltr">প্রাইভেট বাড়ি থেকে শুরু করে বাণিজ্যিক ও প্রাতিষ্ঠানিক পরিবেশ পর্যন্ত, WIFIGATE নানা ধরনের জায়গায় মানিয়ে যায় এবং অ্যাক্সেস ব্যবস্থাপনার জন্য একটি স্মার্ট, নিরাপদ ও সুবিধাজনক সমাধান দেয়।</p>
+          <h2 class="section__title" id="where-title" data-i18n="action.title" dir="ltr">একটি প্ল্যাটফর্ম। প্রতিটি অ্যাক্সেস পয়েন্ট।</h2>
+          <div class="where-intro" id="where-subtitle" dir="ltr">
+            <p class="where-intro__item where-intro__item--properties">
+              <span class="where-intro__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 21h16M6.5 21V5.5L12 3l5.5 2.5V21M9 8.5h.01M15 8.5h.01M9 12.5h.01M15 12.5h.01M10 21v-4h4v4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+              <span class="where-intro__text" id="where-intro-properties">WIFIGATE আবাসিক ভবন, ব্যবসা ও দোকান, আতিথেয়তা সম্পত্তি, ব্যক্তিগত বাড়ি, অফিস ভবন এবং ক্রীড়া সুবিধার জন্য স্মার্ট অ্যাক্সেস সহজ করে।</span>
+            </p>
+            <p class="where-intro__item where-intro__item--controls">
+              <span class="where-intro__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.64 5.64l2.12 2.12M16.24 16.24l2.12 2.12M18.36 5.64l-2.12 2.12M7.76 16.24l-2.12 2.12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"></path>
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.75"></circle>
+                  <circle cx="12" cy="12" r="1.15" fill="currentColor"></circle>
+                </svg>
+              </span>
+              <span class="where-intro__text" id="where-intro-controls">বিশ্বজুড়ে সম্পত্তির জন্য তৈরি একটি নিরাপদ প্ল্যাটফর্মের মাধ্যমে রোলার শাটার, বৈদ্যুতিক গেট, পার্কিং ব্যারিয়ার, গ্যারেজ দরজা, ব্যক্তিগত পার্কিং অ্যাক্সেস, প্রবেশদ্বার এবং ম্যাগনেটিক লক পরিচালনা করুন।</span>
+            </p>
+          </div>
         </header>
 
         <div class="where-showcase js-reveal">
@@ -646,80 +664,6 @@
               </ul>
             </div>
           </div>
-        </div>
-      </div>
-    </section><section class="section" id="tutorials" aria-labelledby="tutorials-title">
-      <div class="container">
-        <header class="section__header js-reveal">
-          <h2 class="section__title" id="tutorials-title" data-i18n="tutorials.title" dir="ltr">টিউটোরিয়াল ভিডিও</h2>
-        </header>
-
-        <div class="tutorials-grid js-reveal">
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.initialUse" dir="ltr">শুরু করা</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.scanQrCode" dir="ltr">একটি QR কোড স্ক্যান করা হচ্ছে</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteGuest" dir="ltr">একজন অতিথিকে আমন্ত্রণ জানানো</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteUser" dir="ltr">একজন ব্যবহারকারীকে আমন্ত্রণ জানানো হচ্ছে</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteAdmin" dir="ltr">একজন অ্যাডমিনকে আমন্ত্রণ জানানো হচ্ছে</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.openGate" dir="ltr">গেট খোলা</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.learnRfRemote" dir="ltr">একটি আরএফ রিমোট শেখা</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.exportCsv" dir="ltr">CSV রপ্তানি করা হচ্ছে</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.importCsv" dir="ltr">CSV আমদানি করা হচ্ছে</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.changePulseLength" dir="ltr">পালস দৈর্ঘ্য পরিবর্তন</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.electricShutterMode" dir="ltr">বৈদ্যুতিক শাটার মোড</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.barrierGateMode" dir="ltr">ব্যারিয়ার গেট মোড</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
-          </article>
-          <article class="tutorial-card tutorial-card--more">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.andMore" dir="ltr">এবং আরো...</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
-          </article>
         </div>
       </div>
     </section><section class="section guest-invites" id="guest-invites-api" aria-labelledby="guest-invites-title">
@@ -794,6 +738,80 @@
   <span class="giapi-tok-key">Status</span>      <span class="giapi-tok-val">Active · expires automatically</span></code></pre>
             <figcaption class="guest-invites__console-caption" data-i18n="guestInvites.promo.consoleCaption" dir="ltr">লাইভ অনুরোধ প্রিভিউ</figcaption>
           </figure>
+        </div>
+      </div>
+    </section><section class="section" id="tutorials" aria-labelledby="tutorials-title">
+      <div class="container">
+        <header class="section__header js-reveal">
+          <h2 class="section__title" id="tutorials-title" data-i18n="tutorials.title" dir="ltr">টিউটোরিয়াল ভিডিও</h2>
+        </header>
+
+        <div class="tutorials-grid js-reveal">
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.initialUse" dir="ltr">শুরু করা</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.scanQrCode" dir="ltr">একটি QR কোড স্ক্যান করা হচ্ছে</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteGuest" dir="ltr">একজন অতিথিকে আমন্ত্রণ জানানো</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteUser" dir="ltr">একজন ব্যবহারকারীকে আমন্ত্রণ জানানো হচ্ছে</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteAdmin" dir="ltr">একজন অ্যাডমিনকে আমন্ত্রণ জানানো হচ্ছে</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.openGate" dir="ltr">গেট খোলা</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.learnRfRemote" dir="ltr">একটি আরএফ রিমোট শেখা</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.exportCsv" dir="ltr">CSV রপ্তানি করা হচ্ছে</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.importCsv" dir="ltr">CSV আমদানি করা হচ্ছে</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.changePulseLength" dir="ltr">পালস দৈর্ঘ্য পরিবর্তন</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.electricShutterMode" dir="ltr">বৈদ্যুতিক শাটার মোড</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.barrierGateMode" dir="ltr">ব্যারিয়ার গেট মোড</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
+          </article>
+          <article class="tutorial-card tutorial-card--more">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.andMore" dir="ltr">এবং আরো...</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">শীঘ্রই আসছে</p>
+          </article>
         </div>
       </div>
     </section><section class="section section--alt" id="contact" aria-labelledby="contact-title" aria-describedby="contact-description">

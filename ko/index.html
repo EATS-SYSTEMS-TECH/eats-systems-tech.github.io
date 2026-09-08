@@ -86,7 +86,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Day+One&amp;display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/styles.css?v=20260830a">
+  <link rel="stylesheet" href="../css/styles.css?v=20260908d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20260604c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20260708a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
@@ -209,11 +209,10 @@
 
       <div class="nav__links-wrapper" id="primary-navigation">
         <nav class="topbar-nav">
-          <a href="#home" class="nav-link nav__link" data-i18n="nav.home" dir="ltr">홈</a>
-          <a href="#advantages" class="nav-link nav__link" data-i18n="nav.features" dir="ltr">왜 WIFIGATE를 선택해야 할까요?</a>
+          <a href="#advantages" class="nav-link nav__link" data-i18n="nav.features" dir="ltr">기능</a>
           <a href="#where" class="nav-link nav__link" data-i18n="tabs.where" dir="ltr">활용 분야</a>
-          <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about" dir="ltr">튜토리얼</a>
           <a href="#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
+          <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about" dir="ltr">튜토리얼</a>
           <a href="#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact" dir="ltr">문의하기</a>
         </nav>
       </div>
@@ -510,7 +509,7 @@
         <div class="hero__text">
           <h1 class="hero__title" id="hero-title">
             <span class="hero-brand" aria-hidden="true">WIFIGATE</span>
-            <span class="visually-hidden" id="hero-search-text">WIFIGATE. 는 광범위한 환경에 적합하며 개인 애플리케이션부터 상업 및 조직 설정에 이르기까지 스마트하고 안전하며 편리한 액세스 관리 솔루션을 제공합니다.</span>
+            <span class="visually-hidden" id="hero-search-text">WIFIGATE. 는 공동주택, 기업과 매장, 숙박 시설, 개인 주택, 오피스 빌딩, 스포츠 시설의 스마트 출입 관리를 간편하게 만듭니다. 전 세계 시설을 위해 설계된 하나의 안전한 플랫폼으로 롤러 셔터, 전동 게이트, 주차 차단기, 차고문, 전용 주차장 출입, 출입문, 마그네틱 락을 관리하세요.</span>
             <span id="hero-rotator" class="hero-rotator" aria-live="polite" aria-atomic="true">사용하기 쉬움</span>
           </h1>
           <p class="hero__subtitle" id="hero-subtitle" data-i18n="hero.subtitle" dir="ltr">안전하고 간편하며 월 사용료가 없는 스마트한 출입통제 시스템입니다.</p>
@@ -602,11 +601,30 @@
           </article>
         </div>
       </div>
-    </section><section class="section section--alt" id="where" aria-labelledby="where-title">
+    </section><section class="section section--alt" id="where" aria-labelledby="where-title" aria-describedby="where-subtitle">
       <div class="container">
         <header class="section__header js-reveal">
-          <h2 class="section__title" id="where-title" data-i18n="action.title" dir="ltr">가정, 사업장 또는 게스트를 위해: 어디서나 스마트 액세스</h2>
-          <p class="section__subtitle" id="where-subtitle" data-i18n="action.subtitle" dir="ltr">WIFIGATE는 개인 주택부터 상업 및 조직 환경까지 다양한 장소에 적합하며, 출입 관리를 더 스마트하고 안전하며 편리하게 만들어 줍니다.</p>
+          <h2 class="section__title" id="where-title" data-i18n="action.title" dir="ltr">하나의 플랫폼. 모든 출입 지점.</h2>
+          <div class="where-intro" id="where-subtitle" dir="ltr">
+            <p class="where-intro__item where-intro__item--properties">
+              <span class="where-intro__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 21h16M6.5 21V5.5L12 3l5.5 2.5V21M9 8.5h.01M15 8.5h.01M9 12.5h.01M15 12.5h.01M10 21v-4h4v4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+              <span class="where-intro__text" id="where-intro-properties">WIFIGATE는 공동주택, 기업과 매장, 숙박 시설, 개인 주택, 오피스 빌딩, 스포츠 시설의 스마트 출입 관리를 간편하게 만듭니다.</span>
+            </p>
+            <p class="where-intro__item where-intro__item--controls">
+              <span class="where-intro__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.64 5.64l2.12 2.12M16.24 16.24l2.12 2.12M18.36 5.64l-2.12 2.12M7.76 16.24l-2.12 2.12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"></path>
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.75"></circle>
+                  <circle cx="12" cy="12" r="1.15" fill="currentColor"></circle>
+                </svg>
+              </span>
+              <span class="where-intro__text" id="where-intro-controls">전 세계 시설을 위해 설계된 하나의 안전한 플랫폼으로 롤러 셔터, 전동 게이트, 주차 차단기, 차고문, 전용 주차장 출입, 출입문, 마그네틱 락을 관리하세요.</span>
+            </p>
+          </div>
         </header>
 
         <div class="where-showcase js-reveal">
@@ -646,80 +664,6 @@
               </ul>
             </div>
           </div>
-        </div>
-      </div>
-    </section><section class="section" id="tutorials" aria-labelledby="tutorials-title">
-      <div class="container">
-        <header class="section__header js-reveal">
-          <h2 class="section__title" id="tutorials-title" data-i18n="tutorials.title" dir="ltr">튜토리얼 비디오</h2>
-        </header>
-
-        <div class="tutorials-grid js-reveal">
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.initialUse" dir="ltr">시작하기</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.scanQrCode" dir="ltr">QR 코드 스캔</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteGuest" dir="ltr">손님 초대</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteUser" dir="ltr">사용자 초대</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteAdmin" dir="ltr">관리자 초대</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.openGate" dir="ltr">게이트 열기</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.learnRfRemote" dir="ltr">RF 원격 학습</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.exportCsv" dir="ltr">CSV 내보내기</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.importCsv" dir="ltr">CSV 가져오기</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.changePulseLength" dir="ltr">펄스 길이 변경</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.electricShutterMode" dir="ltr">전기 셔터 모드</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.barrierGateMode" dir="ltr">배리어 게이트 모드</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
-          </article>
-          <article class="tutorial-card tutorial-card--more">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.andMore" dir="ltr">그리고 더...</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
-          </article>
         </div>
       </div>
     </section><section class="section guest-invites" id="guest-invites-api" aria-labelledby="guest-invites-title">
@@ -794,6 +738,80 @@
   <span class="giapi-tok-key">Status</span>      <span class="giapi-tok-val">Active · expires automatically</span></code></pre>
             <figcaption class="guest-invites__console-caption" data-i18n="guestInvites.promo.consoleCaption" dir="ltr">실시간 요청 미리보기</figcaption>
           </figure>
+        </div>
+      </div>
+    </section><section class="section" id="tutorials" aria-labelledby="tutorials-title">
+      <div class="container">
+        <header class="section__header js-reveal">
+          <h2 class="section__title" id="tutorials-title" data-i18n="tutorials.title" dir="ltr">튜토리얼 비디오</h2>
+        </header>
+
+        <div class="tutorials-grid js-reveal">
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.initialUse" dir="ltr">시작하기</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.scanQrCode" dir="ltr">QR 코드 스캔</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteGuest" dir="ltr">손님 초대</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteUser" dir="ltr">사용자 초대</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteAdmin" dir="ltr">관리자 초대</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.openGate" dir="ltr">게이트 열기</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.learnRfRemote" dir="ltr">RF 원격 학습</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.exportCsv" dir="ltr">CSV 내보내기</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.importCsv" dir="ltr">CSV 가져오기</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.changePulseLength" dir="ltr">펄스 길이 변경</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.electricShutterMode" dir="ltr">전기 셔터 모드</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.barrierGateMode" dir="ltr">배리어 게이트 모드</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
+          </article>
+          <article class="tutorial-card tutorial-card--more">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.andMore" dir="ltr">그리고 더...</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">곧 출시 예정</p>
+          </article>
         </div>
       </div>
     </section><section class="section section--alt" id="contact" aria-labelledby="contact-title" aria-describedby="contact-description">

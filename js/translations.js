@@ -7,9 +7,9 @@ var translations = {
   en: {
     nav: {
       home: "Home",
-      features: "Advantages",
+      features: "Features",
       about: "Tutorials",
-      contact: "Contact Us"
+      contact: "Contact"
     },
     hero: {
       rotator: {
@@ -67,8 +67,8 @@ var translations = {
       }
     },
     action: {
-      title: "Smart Access for Buildings, Businesses, and Hospitality",
-      subtitle: "WIFIGATE makes access management simple, secure, and convenient for residential buildings, businesses, and hospitality properties, with flexible control for entrances, gates, shutters, and parking areas."
+      title: "One Platform. Every Access Point.",
+      subtitle: "WIFIGATE makes smart access simple for residential buildings, businesses and shops, hospitality properties, private homes, office buildings, and sports facilities. Manage roller shutters, electric gates, parking barriers, garage doors, private parking access, entry doors, and magnetic locks through one secure platform built for properties worldwide."
     },
     tabs: {
       why: "Why",

@@ -86,7 +86,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Day+One&amp;display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/styles.css?v=20260830a">
+  <link rel="stylesheet" href="../css/styles.css?v=20260908d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20260604c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20260708a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
@@ -209,11 +209,10 @@
 
       <div class="nav__links-wrapper" id="primary-navigation">
         <nav class="topbar-nav">
-          <a href="#home" class="nav-link nav__link" data-i18n="nav.home" dir="ltr">घर</a>
-          <a href="#advantages" class="nav-link nav__link" data-i18n="nav.features" dir="ltr">हमें क्यों चुनें?</a>
+          <a href="#advantages" class="nav-link nav__link" data-i18n="nav.features" dir="ltr">विशेषताएँ</a>
           <a href="#where" class="nav-link nav__link" data-i18n="tabs.where" dir="ltr">उपयोग के क्षेत्र</a>
-          <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about" dir="ltr">ट्यूटोरियल</a>
           <a href="#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
+          <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about" dir="ltr">ट्यूटोरियल</a>
           <a href="#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact" dir="ltr">हमसे संपर्क करें</a>
         </nav>
       </div>
@@ -510,7 +509,7 @@
         <div class="hero__text">
           <h1 class="hero__title" id="hero-title">
             <span class="hero-brand" aria-hidden="true">WIFIGATE</span>
-            <span class="visually-hidden" id="hero-search-text">WIFIGATE. वातावरण की एक विस्तृत श्रृंखला के लिए उपयुक्त है और निजी अनुप्रयोगों से लेकर वाणिज्यिक और संगठनात्मक सेटिंग्स तक एक स्मार्ट, सुरक्षित और सुविधाजनक पहुंच-प्रबंधन समाधान प्रदान करता है।</span>
+            <span class="visually-hidden" id="hero-search-text">WIFIGATE. आवासीय इमारतों, व्यवसायों और दुकानों, आतिथ्य संपत्तियों, निजी घरों, कार्यालय भवनों और खेल सुविधाओं के लिए स्मार्ट एक्सेस को सरल बनाता है। दुनिया भर की संपत्तियों के लिए बनाए गए एक सुरक्षित प्लेटफ़ॉर्म से रोलर शटर, इलेक्ट्रिक गेट, पार्किंग बैरियर, गैराज दरवाज़े, निजी पार्किंग एक्सेस, प्रवेश द्वार और मैग्नेटिक लॉक प्रबंधित करें।</span>
             <span id="hero-rotator" class="hero-rotator" aria-live="polite" aria-atomic="true">उपयोग में आसान</span>
           </h1>
           <p class="hero__subtitle" id="hero-subtitle" data-i18n="hero.subtitle" dir="ltr">एक स्मार्ट एक्सेस-कंट्रोल प्रणाली जो सुरक्षित, सरल और मासिक शुल्क से मुक्त है।</p>
@@ -602,11 +601,30 @@
           </article>
         </div>
       </div>
-    </section><section class="section section--alt" id="where" aria-labelledby="where-title">
+    </section><section class="section section--alt" id="where" aria-labelledby="where-title" aria-describedby="where-subtitle">
       <div class="container">
         <header class="section__header js-reveal">
-          <h2 class="section__title" id="where-title" data-i18n="action.title" dir="ltr">घर, व्यवसाय या मेहमानों के लिए: हर जगह स्मार्ट एक्सेस</h2>
-          <p class="section__subtitle" id="where-subtitle" data-i18n="action.subtitle" dir="ltr">प्राइवेट घरों से लेकर कमर्शियल और संस्थागत परिसरों तक, WIFIGATE कई तरह के माहौल में फिट बैठता है और एक्सेस मैनेजमेंट का स्मार्ट, सुरक्षित और सुविधाजनक समाधान देता है।</p>
+          <h2 class="section__title" id="where-title" data-i18n="action.title" dir="ltr">एक प्लेटफ़ॉर्म। हर एक्सेस पॉइंट।</h2>
+          <div class="where-intro" id="where-subtitle" dir="ltr">
+            <p class="where-intro__item where-intro__item--properties">
+              <span class="where-intro__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 21h16M6.5 21V5.5L12 3l5.5 2.5V21M9 8.5h.01M15 8.5h.01M9 12.5h.01M15 12.5h.01M10 21v-4h4v4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+              <span class="where-intro__text" id="where-intro-properties">WIFIGATE आवासीय इमारतों, व्यवसायों और दुकानों, आतिथ्य संपत्तियों, निजी घरों, कार्यालय भवनों और खेल सुविधाओं के लिए स्मार्ट एक्सेस को सरल बनाता है।</span>
+            </p>
+            <p class="where-intro__item where-intro__item--controls">
+              <span class="where-intro__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.64 5.64l2.12 2.12M16.24 16.24l2.12 2.12M18.36 5.64l-2.12 2.12M7.76 16.24l-2.12 2.12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"></path>
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.75"></circle>
+                  <circle cx="12" cy="12" r="1.15" fill="currentColor"></circle>
+                </svg>
+              </span>
+              <span class="where-intro__text" id="where-intro-controls">दुनिया भर की संपत्तियों के लिए बनाए गए एक सुरक्षित प्लेटफ़ॉर्म से रोलर शटर, इलेक्ट्रिक गेट, पार्किंग बैरियर, गैराज दरवाज़े, निजी पार्किंग एक्सेस, प्रवेश द्वार और मैग्नेटिक लॉक प्रबंधित करें।</span>
+            </p>
+          </div>
         </header>
 
         <div class="where-showcase js-reveal">
@@ -646,80 +664,6 @@
               </ul>
             </div>
           </div>
-        </div>
-      </div>
-    </section><section class="section" id="tutorials" aria-labelledby="tutorials-title">
-      <div class="container">
-        <header class="section__header js-reveal">
-          <h2 class="section__title" id="tutorials-title" data-i18n="tutorials.title" dir="ltr">ट्यूटोरियल वीडियो</h2>
-        </header>
-
-        <div class="tutorials-grid js-reveal">
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.initialUse" dir="ltr">आरंभ करना</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.scanQrCode" dir="ltr">QR कोड स्कैन करना</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteGuest" dir="ltr">किसी अतिथि को आमंत्रित करना</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteUser" dir="ltr">किसी उपयोगकर्ता को आमंत्रित किया जा रहा है</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteAdmin" dir="ltr">व्यवस्थापक को आमंत्रित किया जा रहा है</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.openGate" dir="ltr">गेट खोलना</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.learnRfRemote" dir="ltr">आरएफ रिमोट सीखना</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.exportCsv" dir="ltr">सीएसवी निर्यात करना</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.importCsv" dir="ltr">सीएसवी आयात करना</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.changePulseLength" dir="ltr">नाड़ी की लंबाई बदलना</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.electricShutterMode" dir="ltr">इलेक्ट्रिक शटर मोड</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.barrierGateMode" dir="ltr">बैरियर गेट मोड</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
-          </article>
-          <article class="tutorial-card tutorial-card--more">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.andMore" dir="ltr">और भी बहुत कुछ...</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
-          </article>
         </div>
       </div>
     </section><section class="section guest-invites" id="guest-invites-api" aria-labelledby="guest-invites-title">
@@ -794,6 +738,80 @@
   <span class="giapi-tok-key">Status</span>      <span class="giapi-tok-val">Active · expires automatically</span></code></pre>
             <figcaption class="guest-invites__console-caption" data-i18n="guestInvites.promo.consoleCaption" dir="ltr">लाइव अनुरोध पूर्वावलोकन</figcaption>
           </figure>
+        </div>
+      </div>
+    </section><section class="section" id="tutorials" aria-labelledby="tutorials-title">
+      <div class="container">
+        <header class="section__header js-reveal">
+          <h2 class="section__title" id="tutorials-title" data-i18n="tutorials.title" dir="ltr">ट्यूटोरियल वीडियो</h2>
+        </header>
+
+        <div class="tutorials-grid js-reveal">
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.initialUse" dir="ltr">आरंभ करना</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.scanQrCode" dir="ltr">QR कोड स्कैन करना</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteGuest" dir="ltr">किसी अतिथि को आमंत्रित करना</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteUser" dir="ltr">किसी उपयोगकर्ता को आमंत्रित किया जा रहा है</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteAdmin" dir="ltr">व्यवस्थापक को आमंत्रित किया जा रहा है</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.openGate" dir="ltr">गेट खोलना</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.learnRfRemote" dir="ltr">आरएफ रिमोट सीखना</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.exportCsv" dir="ltr">सीएसवी निर्यात करना</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.importCsv" dir="ltr">सीएसवी आयात करना</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.changePulseLength" dir="ltr">नाड़ी की लंबाई बदलना</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.electricShutterMode" dir="ltr">इलेक्ट्रिक शटर मोड</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.barrierGateMode" dir="ltr">बैरियर गेट मोड</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
+          </article>
+          <article class="tutorial-card tutorial-card--more">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.andMore" dir="ltr">और भी बहुत कुछ...</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">जल्द आ रहा है</p>
+          </article>
         </div>
       </div>
     </section><section class="section section--alt" id="contact" aria-labelledby="contact-title" aria-describedby="contact-description">
