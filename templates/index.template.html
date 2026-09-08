@@ -78,7 +78,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Day+One&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=20260830a" />
+  <link rel="stylesheet" href="css/styles.css?v=20260908d" />
   <link rel="stylesheet" href="css/accessibility.css?v=20260604c" />
   <link rel="stylesheet" href="css/guest-invites.css?v=20260708a" />
   <script src="js/utils.js?v=20260402a" defer></script>
@@ -148,12 +148,11 @@
 
       <div class="nav__links-wrapper" id="primary-navigation">
         <nav class="topbar-nav">
-          <a href="#home" class="nav-link nav__link" data-i18n="nav.home">Home</a>
           <a href="#advantages" class="nav-link nav__link" data-i18n="nav.features">Features</a>
-          <a href="#where" class="nav-link nav__link" data-i18n="tabs.where">Where</a>
-          <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about">Tutorials</a>
+          <a href="#where" class="nav-link nav__link" data-i18n="tabs.where">Use Cases</a>
           <a href="#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
-          <a href="#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact">Contact Us</a>
+          <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about">Tutorials</a>
+          <a href="#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact">Contact</a>
         </nav>
       </div>
 
@@ -512,16 +511,34 @@
       </div>
     </section>
 
-    <section class="section section--alt" id="where" aria-labelledby="where-title">
+    <section class="section section--alt" id="where" aria-labelledby="where-title" aria-describedby="where-subtitle">
       <div class="container">
         <header class="section__header js-reveal">
           <h2 class="section__title" id="where-title" data-i18n="action.title">
-            Smart Access for Buildings, Businesses, and Hospitality
+            One Platform. Every Access Point.
           </h2>
-          <p class="section__subtitle" id="where-subtitle" data-i18n="action.subtitle">
-            WIFIGATE makes access management simple, secure, and convenient for residential buildings, businesses,
-            and hospitality properties, with flexible control for entrances, gates, shutters, and parking areas.
-          </p>
+          <div class="where-intro" id="where-subtitle">
+            <p class="where-intro__item where-intro__item--properties">
+              <span class="where-intro__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 21h16M6.5 21V5.5L12 3l5.5 2.5V21M9 8.5h.01M15 8.5h.01M9 12.5h.01M15 12.5h.01M10 21v-4h4v4"
+                    stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span class="where-intro__text" id="where-intro-properties">WIFIGATE makes smart access simple for residential buildings, businesses and shops, hospitality properties, private homes, office buildings, and sports facilities.</span>
+            </p>
+            <p class="where-intro__item where-intro__item--controls">
+              <span class="where-intro__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.64 5.64l2.12 2.12M16.24 16.24l2.12 2.12M18.36 5.64l-2.12 2.12M7.76 16.24l-2.12 2.12"
+                    stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.75" />
+                  <circle cx="12" cy="12" r="1.15" fill="currentColor" />
+                </svg>
+              </span>
+              <span class="where-intro__text" id="where-intro-controls">Manage roller shutters, electric gates, parking barriers, garage doors, private parking access, entry doors, and magnetic locks through one secure platform built for properties worldwide.</span>
+            </p>
+          </div>
         </header>
 
         <div class="where-showcase js-reveal">

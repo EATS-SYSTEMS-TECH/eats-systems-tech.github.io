@@ -86,7 +86,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Day+One&amp;display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/styles.css?v=20260830a">
+  <link rel="stylesheet" href="../css/styles.css?v=20260908d">
   <link rel="stylesheet" href="../css/accessibility.css?v=20260604c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20260708a">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
@@ -209,11 +209,10 @@
 
       <div class="nav__links-wrapper" id="primary-navigation">
         <nav class="topbar-nav">
-          <a href="#home" class="nav-link nav__link" data-i18n="nav.home" dir="ltr">హోమ్</a>
-          <a href="#advantages" class="nav-link nav__link" data-i18n="nav.features" dir="ltr">మమ్మల్ని ఎందుకు ఎంచుకోవాలి?</a>
+          <a href="#advantages" class="nav-link nav__link" data-i18n="nav.features" dir="ltr">ఫీచర్లు</a>
           <a href="#where" class="nav-link nav__link" data-i18n="tabs.where" dir="ltr">వినియోగాలు</a>
-          <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about" dir="ltr">ట్యుటోరియల్స్</a>
           <a href="#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
+          <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about" dir="ltr">ట్యుటోరియల్స్</a>
           <a href="#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact" dir="ltr">మమ్మల్ని సంప్రదించండి</a>
         </nav>
       </div>
@@ -510,7 +509,7 @@
         <div class="hero__text">
           <h1 class="hero__title" id="hero-title">
             <span class="hero-brand" aria-hidden="true">WIFIGATE</span>
-            <span class="visually-hidden" id="hero-search-text">WIFIGATE. అనేది అనేక రకాల వాతావరణాలకు అనుకూలంగా ఉంటుంది మరియు ప్రైవేట్ అప్లికేషన్‌ల నుండి వాణిజ్య మరియు సంస్థాగత సెట్టింగ్‌ల వరకు స్మార్ట్, సురక్షితమైన మరియు అనుకూలమైన యాక్సెస్-నిర్వహణ పరిష్కారాన్ని అందిస్తుంది.</span>
+            <span class="visually-hidden" id="hero-search-text">WIFIGATE. నివాస భవనాలు, వ్యాపారాలు మరియు దుకాణాలు, ఆతిథ్య ప్రాపర్టీలు, ప్రైవేట్ ఇళ్లు, కార్యాలయ భవనాలు మరియు క్రీడా సదుపాయాల కోసం స్మార్ట్ యాక్సెస్‌ను సులభతరం చేస్తుంది. ప్రపంచవ్యాప్తంగా ఉన్న ప్రాపర్టీల కోసం రూపొందించిన ఒక సురక్షిత ప్లాట్‌ఫామ్ ద్వారా రోలర్ షట్టర్లు, ఎలక్ట్రిక్ గేట్లు, పార్కింగ్ బ్యారియర్లు, గ్యారేజ్ తలుపులు, ప్రైవేట్ పార్కింగ్ యాక్సెస్, ప్రవేశ ద్వారాలు మరియు మాగ్నెటిక్ లాక్‌లను నిర్వహించండి.</span>
             <span id="hero-rotator" class="hero-rotator" aria-live="polite" aria-atomic="true">ఉపయోగించడానికి సులభం</span>
           </h1>
           <p class="hero__subtitle" id="hero-subtitle" data-i18n="hero.subtitle" dir="ltr">సురక్షితమైన, సరళమైన మరియు నెలవారీ రుసుము లేని స్మార్ట్ యాక్సెస్-నియంత్రణ వ్యవస్థ.</p>
@@ -602,11 +601,30 @@
           </article>
         </div>
       </div>
-    </section><section class="section section--alt" id="where" aria-labelledby="where-title">
+    </section><section class="section section--alt" id="where" aria-labelledby="where-title" aria-describedby="where-subtitle">
       <div class="container">
         <header class="section__header js-reveal">
-          <h2 class="section__title" id="where-title" data-i18n="action.title" dir="ltr">ఇల్లు, వ్యాపారం లేదా అతిథుల కోసం: ప్రతిచోటా స్మార్ట్ యాక్సెస్</h2>
-          <p class="section__subtitle" id="where-subtitle" data-i18n="action.subtitle" dir="ltr">WIFIGATE అనేక రకాల వాతావరణాలకు సరిపోతుంది. ప్రైవేట్ ఇళ్ల నుంచి వ్యాపార, సంస్థల పరిసరాల వరకు యాక్సెస్ నిర్వహణకు స్మార్ట్, భద్రమైన, సౌకర్యవంతమైన పరిష్కారం అందిస్తుంది.</p>
+          <h2 class="section__title" id="where-title" data-i18n="action.title" dir="ltr">ఒకే ప్లాట్‌ఫామ్. ప్రతి యాక్సెస్ పాయింట్.</h2>
+          <div class="where-intro" id="where-subtitle" dir="ltr">
+            <p class="where-intro__item where-intro__item--properties">
+              <span class="where-intro__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 21h16M6.5 21V5.5L12 3l5.5 2.5V21M9 8.5h.01M15 8.5h.01M9 12.5h.01M15 12.5h.01M10 21v-4h4v4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+              <span class="where-intro__text" id="where-intro-properties">WIFIGATE నివాస భవనాలు, వ్యాపారాలు మరియు దుకాణాలు, ఆతిథ్య ప్రాపర్టీలు, ప్రైవేట్ ఇళ్లు, కార్యాలయ భవనాలు మరియు క్రీడా సదుపాయాల కోసం స్మార్ట్ యాక్సెస్‌ను సులభతరం చేస్తుంది.</span>
+            </p>
+            <p class="where-intro__item where-intro__item--controls">
+              <span class="where-intro__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.64 5.64l2.12 2.12M16.24 16.24l2.12 2.12M18.36 5.64l-2.12 2.12M7.76 16.24l-2.12 2.12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"></path>
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.75"></circle>
+                  <circle cx="12" cy="12" r="1.15" fill="currentColor"></circle>
+                </svg>
+              </span>
+              <span class="where-intro__text" id="where-intro-controls">ప్రపంచవ్యాప్తంగా ఉన్న ప్రాపర్టీల కోసం రూపొందించిన ఒక సురక్షిత ప్లాట్‌ఫామ్ ద్వారా రోలర్ షట్టర్లు, ఎలక్ట్రిక్ గేట్లు, పార్కింగ్ బ్యారియర్లు, గ్యారేజ్ తలుపులు, ప్రైవేట్ పార్కింగ్ యాక్సెస్, ప్రవేశ ద్వారాలు మరియు మాగ్నెటిక్ లాక్‌లను నిర్వహించండి.</span>
+            </p>
+          </div>
         </header>
 
         <div class="where-showcase js-reveal">
@@ -646,80 +664,6 @@
               </ul>
             </div>
           </div>
-        </div>
-      </div>
-    </section><section class="section" id="tutorials" aria-labelledby="tutorials-title">
-      <div class="container">
-        <header class="section__header js-reveal">
-          <h2 class="section__title" id="tutorials-title" data-i18n="tutorials.title" dir="ltr">ట్యుటోరియల్ వీడియోలు</h2>
-        </header>
-
-        <div class="tutorials-grid js-reveal">
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.initialUse" dir="ltr">ప్రారంభించడం</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.scanQrCode" dir="ltr">QR కోడ్‌ని స్కాన్ చేస్తోంది</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteGuest" dir="ltr">అతిథిని ఆహ్వానిస్తున్నారు</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteUser" dir="ltr">వినియోగదారుని ఆహ్వానిస్తోంది</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteAdmin" dir="ltr">నిర్వాహకుడిని ఆహ్వానిస్తున్నాము</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.openGate" dir="ltr">గేట్ తెరవడం</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.learnRfRemote" dir="ltr">RF రిమోట్ నేర్చుకోవడం</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.exportCsv" dir="ltr">CSVని ఎగుమతి చేస్తోంది</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.importCsv" dir="ltr">CSVని దిగుమతి చేస్తోంది</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.changePulseLength" dir="ltr">పల్స్ పొడవును మార్చడం</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.electricShutterMode" dir="ltr">ఎలక్ట్రిక్ షట్టర్ మోడ్</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.barrierGateMode" dir="ltr">బారియర్ గేట్ మోడ్</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
-          </article>
-          <article class="tutorial-card tutorial-card--more">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.andMore" dir="ltr">మరియు మరిన్ని...</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
-          </article>
         </div>
       </div>
     </section><section class="section guest-invites" id="guest-invites-api" aria-labelledby="guest-invites-title">
@@ -794,6 +738,80 @@
   <span class="giapi-tok-key">Status</span>      <span class="giapi-tok-val">Active · expires automatically</span></code></pre>
             <figcaption class="guest-invites__console-caption" data-i18n="guestInvites.promo.consoleCaption" dir="ltr">ప్రత్యక్ష అభ్యర్థన ప్రివ్యూ</figcaption>
           </figure>
+        </div>
+      </div>
+    </section><section class="section" id="tutorials" aria-labelledby="tutorials-title">
+      <div class="container">
+        <header class="section__header js-reveal">
+          <h2 class="section__title" id="tutorials-title" data-i18n="tutorials.title" dir="ltr">ట్యుటోరియల్ వీడియోలు</h2>
+        </header>
+
+        <div class="tutorials-grid js-reveal">
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.initialUse" dir="ltr">ప్రారంభించడం</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.scanQrCode" dir="ltr">QR కోడ్‌ని స్కాన్ చేస్తోంది</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteGuest" dir="ltr">అతిథిని ఆహ్వానిస్తున్నారు</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteUser" dir="ltr">వినియోగదారుని ఆహ్వానిస్తోంది</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteAdmin" dir="ltr">నిర్వాహకుడిని ఆహ్వానిస్తున్నాము</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.openGate" dir="ltr">గేట్ తెరవడం</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.learnRfRemote" dir="ltr">RF రిమోట్ నేర్చుకోవడం</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.exportCsv" dir="ltr">CSVని ఎగుమతి చేస్తోంది</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.importCsv" dir="ltr">CSVని దిగుమతి చేస్తోంది</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.changePulseLength" dir="ltr">పల్స్ పొడవును మార్చడం</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.electricShutterMode" dir="ltr">ఎలక్ట్రిక్ షట్టర్ మోడ్</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
+          </article>
+          <article class="tutorial-card">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.barrierGateMode" dir="ltr">బారియర్ గేట్ మోడ్</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
+          </article>
+          <article class="tutorial-card tutorial-card--more">
+            <span class="tutorial-card__icon" aria-hidden="true"></span>
+            <h3 class="tutorial-card__title" data-i18n="tutorials.items.andMore" dir="ltr">మరియు మరిన్ని...</h3>
+            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">త్వరలో వస్తుంది</p>
+          </article>
         </div>
       </div>
     </section><section class="section section--alt" id="contact" aria-labelledby="contact-title" aria-describedby="contact-description">

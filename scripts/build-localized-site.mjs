@@ -47,6 +47,7 @@ const legalDataFiles = {
     "js/cookies-translations.js",
     "js/cookies-translations-extra.js",
     "js/language-polish.js",
+    "js/site-copy-overrides.js",
   ],
   "privacy-policy": [
     "js/translations.js",
@@ -55,6 +56,7 @@ const legalDataFiles = {
     "js/privacy-translations.js",
     "js/privacy-translations-extra.js",
     "js/language-polish.js",
+    "js/site-copy-overrides.js",
   ],
   "terms-and-conditions": [
     "js/translations.js",
@@ -63,6 +65,7 @@ const legalDataFiles = {
     "js/legal-translations.js",
     "js/legal-translations-extra.js",
     "js/language-polish.js",
+    "js/site-copy-overrides.js",
   ],
 };
 
@@ -760,11 +763,28 @@ function updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale) {
   updateAccessibilityMarkup($, accessibilityBundle);
 }
 
+function splitHomeWhereSubtitle(value) {
+  const subtitle = String(value || "").trim();
+  const match = subtitle.match(/^(.+?[.!?。！？।])\s*(.+)$/su);
+
+  return match ? [match[1].trim(), match[2].trim()] : [subtitle, ""];
+}
+
 function updateHomeWhereSection($, locale, bundle) {
   const content = getNichePageContent(locale);
+  const subtitle = bundle?.action?.subtitle || content.where.subtitle;
+  const [propertiesCopy, controlsCopy] = splitHomeWhereSubtitle(subtitle);
+  const controlsItem = $("#where-intro-controls").closest(".where-intro__item");
 
   $("#where-title").text(bundle?.action?.title || content.where.title);
-  $("#where-subtitle").text(content.where.subtitle);
+  $("#where-subtitle").attr("dir", isRtl(locale) ? "rtl" : "ltr");
+  $("#where-intro-properties").text(propertiesCopy);
+  $("#where-intro-controls").text(controlsCopy);
+  if (controlsCopy) {
+    controlsItem.removeAttr("hidden");
+  } else {
+    controlsItem.attr("hidden", "");
+  }
   $("#where-product-image").attr("alt", homeProductImageAlt[locale] || homeProductImageAlt[defaultLocale]);
 
   NICHE_DEFINITIONS.forEach((niche) => {
@@ -785,7 +805,7 @@ function rewriteHomeGuestInvitesLink($, locale) {
 
 function reorderHomeSections($) {
   const main = $("#main-content");
-  const sectionIds = ["home", "advantages", "where", "tutorials", "guest-invites-api", "contact"];
+  const sectionIds = ["home", "advantages", "where", "guest-invites-api", "tutorials", "contact"];
 
   sectionIds.forEach((id) => {
     const section = main.children(`#${id}`);
@@ -848,7 +868,18 @@ function serialize($) {
 
 async function writeOutputFile(filePath, content) {
   await fs.mkdir(path.dirname(filePath), { recursive: true });
-  await fs.writeFile(filePath, content, "utf8");
+  const retryableCodes = new Set(["EACCES", "EBUSY", "EPERM", "UNKNOWN"]);
+
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    try {
+      await fs.writeFile(filePath, content, "utf8");
+      return;
+    } catch (error) {
+      const shouldRetry = retryableCodes.has(error?.code) && attempt < 4;
+      if (!shouldRetry) throw error;
+      await new Promise((resolve) => setTimeout(resolve, 100 * 2 ** attempt));
+    }
+  }
 }
 
 function buildRedirectPage(targetPath, canonicalUrl) {
@@ -1047,11 +1078,10 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
 
   $(".nav__toggle").attr("aria-label", "Toggle navigation menu");
   $("#language-button").attr("aria-label", "Select language");
-  $("#niche-nav-home").text(navText("nav.home", "Home"));
   $("#niche-nav-features").text(navText("nav.features", "Features"));
-  $("#niche-nav-where").text(navText("tabs.where", "Where"));
+  $("#niche-nav-where").text(navText("tabs.where", "Use Cases"));
   $("#niche-nav-tutorials").text(navText("nav.about", "Tutorials"));
-  $("#niche-nav-contact").text(navText("nav.contact", "Contact Us"));
+  $("#niche-nav-contact").text(navText("nav.contact", "Contact"));
 
   $("#niche-breadcrumb-home").text(chrome.homeLabel);
   $("#niche-breadcrumb-current").text(content.label);
