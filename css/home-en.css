@@ -274,10 +274,14 @@ body.home-en {
 
 .home-en .hero .btn--ghost:hover,
 .home-en .hero .btn--ghost:focus-visible {
-  color: var(--home-black);
+  color: #ffffff;
   border-color: #ffffff;
-  background: #ffffff;
+  background: rgba(10, 10, 10, 0.18);
   transform: none;
+}
+
+.home-en .hero .btn--ghost:hover {
+  background: rgba(10, 10, 10, 0.1);
 }
 
 .home-en .hero__proof {
