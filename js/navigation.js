@@ -1,5 +1,5 @@
 // /js/navigation.js
-// Version: 1.2.0
+// Version: 1.2.1
 
 function setupNav() {
   const toggle = $(".nav__toggle");
@@ -31,7 +31,7 @@ function setupScrollSpy() {
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        const id = entry.target.getAttribute("id");
+        const id = entry.target.dataset.navTarget || entry.target.getAttribute("id");
         if (!id) return;
 
         navLinks.forEach((link) => {
@@ -57,7 +57,7 @@ function centerScrollToElement(el, smooth = true) {
 
   const shouldSmoothScroll = smooth && !(typeof isReducedMotionRequested === "function" && isReducedMotionRequested());
 
-  if (el.id === "advantages") {
+  if (el.id === "advantages" || el.id === "platform") {
     try {
       if ("scrollBehavior" in document.documentElement.style) {
         el.scrollIntoView({ behavior: shouldSmoothScroll ? "smooth" : "auto", block: "start", inline: "nearest" });
