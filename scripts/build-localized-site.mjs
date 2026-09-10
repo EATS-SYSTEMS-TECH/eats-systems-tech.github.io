@@ -554,7 +554,11 @@ function updateFooterStaticUi($, bundle, locale) {
     }
   };
 
-  set(".site-footer__brand-copy", footer.tagline);
+  if (Array.isArray(footer.taglineLines)) {
+    setLocalizedLines($, ".site-footer__brand-copy", footer.taglineLines, locale);
+  } else {
+    set(".site-footer__brand-copy", footer.tagline);
+  }
   const headings = $(".site-footer__heading");
   [footer.legalTitle, footer.appSupportTitle, footer.socialTitle].forEach((value, index) => {
     if (typeof value === "string" && headings.eq(index).length) {
@@ -1023,7 +1027,11 @@ function applyHomepageCopy($, copy, locale) {
   setLocalizedText($, "[data-i18n='contact.interestText']", copy.contact.interestText, locale);
   setLocalizedText($, "[data-i18n='contact.whatsappButton']", copy.contact.whatsappButton, locale);
 
-  setLocalizedText($, ".site-footer__brand-copy", copy.footer.tagline, locale);
+  if (Array.isArray(copy.footer.taglineLines)) {
+    setLocalizedLines($, ".site-footer__brand-copy", copy.footer.taglineLines, locale);
+  } else {
+    setLocalizedText($, ".site-footer__brand-copy", copy.footer.tagline, locale);
+  }
   const footerHeadings = $(".site-footer__heading");
   [copy.footer.legalTitle, copy.footer.appSupportTitle, copy.footer.socialTitle].forEach((value, index) => {
     setLocalizedText($, footerHeadings.eq(index), value, locale);
