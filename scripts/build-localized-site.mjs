@@ -2,6 +2,7 @@ import * as cheerio from "cheerio";
 import fs from "node:fs/promises";
 import path from "node:path";
 import vm from "node:vm";
+import { pathToFileURL } from "node:url";
 import { NICHE_CHROME } from "./niche-content.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
 import { wifigateLinkLocales } from "./wifigate-link-locales.mjs";
@@ -14,6 +15,7 @@ const guestInvitesPageKey = "automation";
 const utilityPageKeys = ["wifigate-link", "wifigate-api"];
 
 const homeTemplatePath = path.join(repoRoot, "templates", "index.template.html");
+const homeCopyDirectory = path.join(repoRoot, "scripts", "homepage-copy");
 const utilityTemplatePath = path.join(repoRoot, "templates", "wifigate-link.template.html");
 const nicheTemplatePath = path.join(repoRoot, "templates", "niche.template.html");
 const guestInvitesTemplatePath = path.join(repoRoot, "templates", "guest-invites-api.template.html");
@@ -79,6 +81,8 @@ const homeRuntimeScriptsToRemove = [
   "js/i18n.js",
   "js/application-stories.js",
   "js/application-stories-extra.js",
+  "js/locale-redirect.js",
+  "js/language-selector.js",
 ];
 
 const legalRuntimeScriptsToRemove = [
@@ -240,6 +244,58 @@ function getNestedValue(source, keyPath) {
 
 function getBundle(collection, locale) {
   return collection[locale] || collection[defaultLocale];
+}
+
+function validateCopyShape(reference, candidate, pathSegments = []) {
+  const keyPath = pathSegments.join(".") || "homepage copy";
+
+  if (Array.isArray(reference)) {
+    if (!Array.isArray(candidate) || candidate.length !== reference.length) {
+      throw new Error(`${keyPath} must contain exactly ${reference.length} items`);
+    }
+
+    reference.forEach((value, index) => validateCopyShape(value, candidate[index], [...pathSegments, String(index)]));
+    return;
+  }
+
+  if (reference && typeof reference === "object") {
+    if (!candidate || typeof candidate !== "object" || Array.isArray(candidate)) {
+      throw new Error(`${keyPath} must be an object`);
+    }
+
+    const referenceKeys = Object.keys(reference);
+    const candidateKeys = Object.keys(candidate);
+    if (referenceKeys.length !== candidateKeys.length || referenceKeys.some((key) => !candidateKeys.includes(key))) {
+      throw new Error(`${keyPath} must have keys: ${referenceKeys.join(", ")}`);
+    }
+
+    referenceKeys.forEach((key) => validateCopyShape(reference[key], candidate[key], [...pathSegments, key]));
+    return;
+  }
+
+  if (typeof candidate !== typeof reference || (typeof candidate === "string" && !candidate.trim())) {
+    throw new Error(`${keyPath} must be a non-empty ${typeof reference}`);
+  }
+}
+
+async function loadHomeCopy(localeOptions) {
+  const copies = {};
+
+  for (const option of localeOptions) {
+    const fileUrl = pathToFileURL(path.join(homeCopyDirectory, `${option.code}.mjs`));
+    copies[option.code] = (await import(fileUrl.href)).default;
+  }
+
+  const reference = copies[defaultLocale];
+  for (const option of localeOptions) {
+    try {
+      validateCopyShape(reference, copies[option.code]);
+    } catch (error) {
+      throw new Error(`Invalid homepage copy for ${option.code}: ${error.message}`);
+    }
+  }
+
+  return copies;
 }
 
 function normalizeLocalePath(locale) {
@@ -579,7 +635,7 @@ function buildHomeMeta(locale, bundle) {
   };
 }
 
-function setHomeMeta($, bundle, locale, localeOptions) {
+function setHomeMeta($, bundle, locale, localeOptions, copy) {
   const meta = buildHomeMeta(locale, bundle);
   const url = buildPageUrl(locale, "home");
   const footerTagline =
@@ -644,6 +700,37 @@ function setHomeMeta($, bundle, locale, localeOptions) {
         name: "EATS SYSTEMS TECH",
         url: siteOrigin,
       },
+      additionalProperty: [
+        {
+          "@type": "PropertyValue",
+          name: copy.schema.monthlySubscription,
+          value: copy.schema.subscriptionValue,
+        },
+        {
+          "@type": "PropertyValue",
+          name: copy.schema.simCard,
+          value: copy.schema.notRequired,
+        },
+        {
+          "@type": "PropertyValue",
+          name: copy.schema.externalRouter,
+          value: copy.schema.notRequired,
+        },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": `${url}#wifi-gate-faq`,
+      inLanguage: locale,
+      mainEntity: copy.faq.items.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
     },
   ]);
 
@@ -799,13 +886,173 @@ function updateHomeWhereSection($, locale, bundle) {
   });
 }
 
+function setLocalizedText($, target, value, locale) {
+  const element = typeof target === "string" ? $(target) : target;
+  element
+    .attr("dir", isRtl(locale) ? "rtl" : "ltr")
+    .text(formatTextForLocaleDirection(value, locale));
+}
+
+function setLocalizedLines($, selector, lines, locale) {
+  const element = $(selector);
+  element.attr("dir", isRtl(locale) ? "rtl" : "ltr");
+  element.empty();
+  lines.forEach((line, index) => {
+    if (index > 0) element.append("<br>");
+    element.append(formatTextForLocaleDirection(line, locale));
+  });
+}
+
+function splitHeroSubtitleLines(subtitle) {
+  const text = subtitle.trim();
+  const sentenceBoundary = text.match(/^(.+?[.!?。！？।])(?:\s+|(?=\S))(.+)$/u);
+
+  if (sentenceBoundary) {
+    return [sentenceBoundary[1].trim(), sentenceBoundary[2].trim()];
+  }
+
+  const commaBoundaries = [...text.matchAll(/[,，]\s*/gu)];
+  if (commaBoundaries.length) {
+    const midpoint = text.length / 2;
+    const boundary = commaBoundaries.reduce((closest, candidate) =>
+      Math.abs(candidate.index - midpoint) < Math.abs(closest.index - midpoint) ? candidate : closest
+    );
+    const splitAt = boundary.index + boundary[0].length;
+    return [text.slice(0, splitAt).trim(), text.slice(splitAt).trim()];
+  }
+
+  const words = text.split(/\s+/u);
+  const splitAt = Math.ceil(words.length / 2);
+  return [words.slice(0, splitAt).join(" "), words.slice(splitAt).join(" ")];
+}
+
+function applyHomepageCopy($, copy, locale) {
+  const dir = isRtl(locale) ? "rtl" : "ltr";
+  const navLinks = $(".topbar-nav .nav__link");
+  const navLabels = [
+    copy.navigation.platform,
+    copy.navigation.solutions,
+    copy.navigation.automation,
+    copy.navigation.productGuide,
+    copy.navigation.contact,
+  ];
+
+  $(".nav").attr("aria-label", copy.navigation.ariaLabel);
+  $(".nav__toggle").attr("aria-label", copy.navigation.toggleLabel);
+  $("#language-button").attr("aria-label", copy.navigation.selectLanguageLabel);
+  navLabels.forEach((label, index) => setLocalizedText($, navLinks.eq(index), label, locale));
+
+  setLocalizedText($, ".hero__eyebrow", copy.hero.eyebrow, locale);
+  setLocalizedLines($, "#hero-title", copy.hero.titleLines, locale);
+  setLocalizedLines($, "#hero-subtitle", splitHeroSubtitleLines(copy.hero.subtitle), locale);
+  setLocalizedText($, ".hero__btn-primary", copy.hero.primaryCta, locale);
+  setLocalizedText($, ".hero__btn-secondary", copy.hero.secondaryCta, locale);
+  $(".hero__proof").attr("aria-label", copy.hero.proofLabel).attr("dir", dir);
+  $(".hero__proof li").each((index, element) => $(element).text(copy.hero.proof[index]));
+
+  setLocalizedText($, "#platform .section__eyebrow", copy.platform.eyebrow, locale);
+  setLocalizedText($, "#features-title", copy.platform.title, locale);
+  setLocalizedText($, "#platform .section__subtitle", copy.platform.subtitle, locale);
+  $("#platform .feature-card").each((index, element) => {
+    setLocalizedText($, $(element).find(".feature-card__title"), copy.platform.features[index].title, locale);
+    setLocalizedText($, $(element).find(".feature-card__text"), copy.platform.features[index].text, locale);
+  });
+
+  setLocalizedText($, "#private-access .security-statement__eyebrow", copy.privateAccess.eyebrow, locale);
+  setLocalizedText($, "#private-access-title", copy.privateAccess.title, locale);
+  setLocalizedText($, "#private-access .security-statement__copy p", copy.privateAccess.description, locale);
+  setLocalizedText($, "#private-access .security-statement__link span", copy.privateAccess.cta, locale);
+
+  setLocalizedText($, "#solutions .section__eyebrow", copy.solutions.eyebrow, locale);
+  setLocalizedLines($, "#where-title", copy.solutions.titleLines, locale);
+  setLocalizedText($, "#where-subtitle", copy.solutions.subtitle, locale);
+  $("#where-product-image").attr("alt", copy.solutions.imageAlt);
+
+  setLocalizedText($, "#wifigate-automation .guest-invites__eyebrow", copy.automation.eyebrow, locale);
+  setLocalizedLines($, "#guest-invites-title", copy.automation.titleLines, locale);
+  $("#wifigate-automation .automation-audiences").attr("aria-label", copy.automation.audienceLabel).attr("dir", dir);
+  $("#wifigate-automation .automation-audiences li").each((index, element) => {
+    $(element).text(copy.automation.audiences[index]);
+  });
+  setLocalizedText($, "#wifigate-automation .automation-promise", copy.automation.promise, locale);
+  setLocalizedText($, "#wifigate-automation .guest-invites__subtitle", copy.automation.subtitle, locale);
+  setLocalizedText($, "#wifigate-automation .guest-invites__cta span", copy.automation.cta, locale);
+  $("#wifigate-automation .automation-stay img").attr("alt", copy.automation.imageAlt);
+  setLocalizedText($, "#wifigate-automation .automation-stay__label", copy.automation.stayCaption, locale);
+  $("#wifigate-automation .automation-stay__steps li").each((index, element) => {
+    $(element).text(copy.automation.staySteps[index]);
+  });
+  $("#wifigate-automation .guest-invites__point").each((index, element) => {
+    setLocalizedText($, $(element).find(".guest-invites__point-title"), copy.automation.points[index].title, locale);
+    setLocalizedText($, $(element).find(".guest-invites__point-text"), copy.automation.points[index].text, locale);
+  });
+
+  setLocalizedText($, "#product-guide .section__eyebrow", copy.productGuide.eyebrow, locale);
+  setLocalizedText($, "#tutorials-title", copy.productGuide.title, locale);
+  setLocalizedText($, "#product-guide .section__subtitle", copy.productGuide.subtitle, locale);
+  $("#product-guide .tutorial-card").each((index, element) => {
+    setLocalizedText($, $(element).find(".tutorial-card__title"), copy.productGuide.items[index], locale);
+    setLocalizedText($, $(element).find(".tutorial-card__status"), copy.productGuide.status, locale);
+  });
+
+  setLocalizedText($, "#one-tap-invite .security-statement__eyebrow", copy.oneTapInvite.eyebrow, locale);
+  setLocalizedText($, "#one-tap-invite-title", copy.oneTapInvite.title, locale);
+  setLocalizedText($, "#one-tap-invite .security-statement__copy p", copy.oneTapInvite.description, locale);
+
+  setLocalizedText($, "#wifi-gate-faq .section__eyebrow", copy.faq.eyebrow, locale);
+  setLocalizedText($, "#wifi-gate-faq-title", copy.faq.title, locale);
+  setLocalizedText($, "#wifi-gate-faq .section__subtitle", copy.faq.subtitle, locale);
+  $("#wifi-gate-faq .seo-faq__item").each((index, element) => {
+    setLocalizedText($, $(element).find("summary"), copy.faq.items[index].question, locale);
+    setLocalizedText($, $(element).find(".seo-faq__answer p"), copy.faq.items[index].answer, locale);
+  });
+
+  setLocalizedText($, "#why-wifigate .security-statement__eyebrow", copy.why.eyebrow, locale);
+  setLocalizedText($, "#why-wifigate-title", copy.why.title, locale);
+  setLocalizedText($, "#why-wifigate .security-statement__copy p", copy.why.description, locale);
+
+  setLocalizedText($, "#get-in-touch .section__eyebrow", copy.contact.eyebrow, locale);
+  setLocalizedText($, "#contact-title", copy.contact.title, locale);
+  setLocalizedText($, "#contact-description", copy.contact.subtitle, locale);
+  setLocalizedText($, "[data-i18n='contact.distributorTitle']", copy.contact.distributorTitle, locale);
+  setLocalizedText($, "[data-i18n='contact.distributorText']", copy.contact.distributorText, locale);
+  setLocalizedText($, "[data-i18n='contact.distributorButton']", copy.contact.distributorButton, locale);
+  setLocalizedText($, "[data-i18n='contact.supportTitle']", copy.contact.supportTitle, locale);
+  setLocalizedText($, "[data-i18n='contact.supportText']", copy.contact.supportText, locale);
+  setLocalizedText($, "[data-i18n='contact.interestTitle']", copy.contact.interestTitle, locale);
+  setLocalizedText($, "[data-i18n='contact.interestText']", copy.contact.interestText, locale);
+  setLocalizedText($, "[data-i18n='contact.whatsappButton']", copy.contact.whatsappButton, locale);
+
+  setLocalizedText($, ".site-footer__brand-copy", copy.footer.tagline, locale);
+  const footerHeadings = $(".site-footer__heading");
+  [copy.footer.legalTitle, copy.footer.appSupportTitle, copy.footer.socialTitle].forEach((value, index) => {
+    setLocalizedText($, footerHeadings.eq(index), value, locale);
+  });
+  const footerLinks = $(".site-footer__link");
+  [copy.footer.terms, copy.footer.privacy, copy.footer.cookies].forEach((value, index) => {
+    setLocalizedText($, footerLinks.eq(index), value, locale);
+  });
+  setLocalizedText($, ".site-footer__copy", `© 2026 ${copy.footer.copyright}`, locale);
+}
+
 function rewriteHomeGuestInvitesLink($, locale) {
-  $(`a[href='${guestInvitesPageKey}/']`).attr("href", buildPagePath(locale, guestInvitesPageKey));
+  $(".guest-invites__cta").attr("href", buildPagePath(locale, guestInvitesPageKey));
 }
 
 function reorderHomeSections($) {
   const main = $("#main-content");
-  const sectionIds = ["home", "advantages", "where", "guest-invites-api", "tutorials", "contact"];
+  const sectionIds = [
+    "home",
+    "advantages",
+    "private-access",
+    "where",
+    "guest-invites-api",
+    "tutorials",
+    "one-tap-invite",
+    "wifi-gate-faq",
+    "why-wifigate",
+    "contact",
+  ];
 
   sectionIds.forEach((id) => {
     const section = main.children(`#${id}`);
@@ -816,15 +1063,17 @@ function reorderHomeSections($) {
 }
 
 function insertPageDataScript($, scriptId, data, anchorSelector) {
+  $(`#${scriptId}`).remove();
   $(anchorSelector).before(
     `\n  <script id="${scriptId}" type="application/json">${JSON.stringify(data)}</script>`
   );
 }
 
 function rewriteHomeInternalLinks($, locale) {
-  $("a[href='terms-and-conditions/']").attr("href", buildPagePath(locale, "terms-and-conditions"));
-  $("a[href='privacy-policy/']").attr("href", buildPagePath(locale, "privacy-policy"));
-  $("a[href='cookies/']").attr("href", buildPagePath(locale, "cookies"));
+  $(".site-footer__link[href*='terms-and-conditions/']").attr("href", buildPagePath(locale, "terms-and-conditions"));
+  $(".site-footer__link[href*='privacy-policy/']").attr("href", buildPagePath(locale, "privacy-policy"));
+  $(".site-footer__link[href*='cookies/']").attr("href", buildPagePath(locale, "cookies"));
+  $("#private-access .security-statement__link").attr("href", `${buildPagePath(locale, "home")}#home`);
 }
 
 function rewriteLegalInternalLinks($, locale, pageKey) {
@@ -863,7 +1112,8 @@ async function readHtmlTemplate(filePath) {
 }
 
 function serialize($) {
-  return ensureTrailingNewline($.html({ decodeEntities: false }));
+  const html = $.html({ decodeEntities: false }).replace(/[ \t]+(?=\r?\n|$)/g, "");
+  return ensureTrailingNewline(html);
 }
 
 async function writeOutputFile(filePath, content) {
@@ -924,6 +1174,7 @@ function buildSitemap(urlEntries) {
 
 async function buildHomePages(homeData) {
   const template = await readHtmlTemplate(homeTemplatePath);
+  const homepageCopies = await loadHomeCopy(homeData.localeOptions);
   const sitemapEntries = [];
 
   for (const localeOption of homeData.localeOptions) {
@@ -942,9 +1193,10 @@ async function buildHomePages(homeData) {
     updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale);
     rewriteHomeInternalLinks($, locale);
     updateHomeWhereSection($, locale, bundle);
+    applyHomepageCopy($, homepageCopies[locale], locale);
     rewriteHomeGuestInvitesLink($, locale);
     reorderHomeSections($);
-    setHomeMeta($, bundle, locale, homeData.localeOptions);
+    setHomeMeta($, bundle, locale, homeData.localeOptions, homepageCopies[locale]);
     insertPageDataScript(
       $,
       "hero-locale-data",
