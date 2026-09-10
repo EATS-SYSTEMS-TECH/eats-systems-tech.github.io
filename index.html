@@ -84,11 +84,12 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Day+One&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/styles.css?v=20260908d">
   <link rel="stylesheet" href="css/accessibility.css?v=20260604c">
   <link rel="stylesheet" href="css/guest-invites.css?v=20260708a">
+  <link rel="stylesheet" href="css/home-en.css?v=20260910a">
   <script src="js/utils.js?v=20260402a" defer=""></script>
   
   
@@ -193,12 +194,12 @@
 ]
   </script></head>
 
-<body>
+<body class="home-en">
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header" id="top">
     <nav class="nav" aria-label="Main navigation">
       <a href="#home" class="nav__logo-link nav__brand">
-        <img src="assets/img/logo.png" alt="WIFIGATE logo" class="nav__logo">
+        <img src="assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE" class="nav__logo" width="1106" height="256">
       </a>
 
       <button class="nav__toggle" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">
@@ -209,11 +210,11 @@
 
       <div class="nav__links-wrapper" id="primary-navigation">
         <nav class="topbar-nav">
-          <a href="#advantages" class="nav-link nav__link" data-i18n="nav.features" dir="ltr">Features</a>
-          <a href="#where" class="nav-link nav__link" data-i18n="tabs.where" dir="ltr">Use Cases</a>
-          <a href="#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
-          <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about" dir="ltr">Tutorials</a>
-          <a href="#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact" dir="ltr">Contact</a>
+          <a href="#advantages" class="nav-link nav__link" data-i18n="nav.features" dir="ltr">Platform</a>
+          <a href="#where" class="nav-link nav__link" data-i18n="tabs.where" dir="ltr">Solutions</a>
+          <a href="#guest-invites-api" class="nav-link nav__link">Automation</a>
+          <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about" dir="ltr">Product Guide</a>
+          <a href="#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact" dir="ltr">Get in touch</a>
         </nav>
       </div>
 
@@ -476,12 +477,8 @@
     
   <section class="hero" id="home" aria-labelledby="hero-title" aria-describedby="hero-subtitle" data-hero-media-state="video">
       <div class="hero__media">
-        <img src="assets/img/wifigate_homepage.webp" alt="" class="hero__bg hero__bg--image hero__bg--image-backdrop" fetchpriority="high">
-        <video id="hero-video-backdrop" class="hero__bg hero__bg--video hero__bg--video-backdrop" autoplay="" muted="" loop="" playsinline="" preload="auto" aria-hidden="true">
-          <source src="assets/vid/wifigate-final-hero-720p.mp4" type="video/mp4">
-        </video>
-        <img src="assets/img/wifigate_homepage.webp" alt="" class="hero__bg hero__bg--image hero__stage hero__stage--image">
-        <video id="hero-video" class="hero__bg hero__bg--video hero__stage hero__stage--video" autoplay="" muted="" loop="" playsinline="" preload="auto" poster="assets/img/wifigate_homepage.webp">
+        <img src="assets/img/wifigate_homepage.webp" alt="" class="hero__bg hero__bg--image" fetchpriority="high">
+        <video id="hero-video" class="hero__bg hero__bg--video" autoplay="" muted="" loop="" playsinline="" preload="metadata" poster="assets/img/wifigate_homepage.webp" aria-hidden="true">
           <source src="assets/vid/wifigate-final-hero-720p.mp4" type="video/mp4">
         </video>
         <div class="hero__overlay"></div>
@@ -507,25 +504,29 @@
 
       <div class="hero__content container js-reveal">
         <div class="hero__text">
-          <h1 class="hero__title" id="hero-title">
-            <span class="hero-brand" aria-hidden="true">WIFIGATE</span>
-            <span class="visually-hidden" id="hero-search-text">WIFIGATE. makes smart access simple for residential buildings, businesses and shops, hospitality properties, private homes, office buildings, and sports facilities. Manage roller shutters, electric gates, parking barriers, garage doors, private parking access, entry doors, and magnetic locks through one secure platform built for properties worldwide.</span>
-            <span id="hero-rotator" class="hero-rotator" aria-live="polite" aria-atomic="true">Easy to Use</span>
-          </h1>
-          <p class="hero__subtitle" id="hero-subtitle" data-i18n="hero.subtitle" dir="ltr">No keys. No remotes. No cards.
-Secure digital access, without waiting for anyone to let you in.</p>
+          <p class="hero__eyebrow">Smart access. Built for the world.</p>
+          <h1 class="hero__title" id="hero-title">One platform.<br>Every property.</h1>
+          <p class="hero__subtitle" id="hero-subtitle">Smart access and control for residential, commercial, and hospitality spaces. All in one app. Effortlessly simple.</p>
 
           <div class="hero__actions">
-            <a href="#contact" class="btn btn--primary hero__btn-primary" data-i18n="hero.cta.contact" dir="ltr">Contact Us</a>
-            <a href="#tutorials" class="btn btn--ghost hero__btn-secondary" data-i18n="hero.cta.about" dir="ltr">Tutorials</a>
+            <a href="#advantages" class="btn btn--primary hero__btn-primary">Explore the platform</a>
+            <a href="#contact" class="btn btn--ghost hero__btn-secondary">Talk to our team</a>
           </div>
+
+          <ul class="hero__proof" aria-label="Platform benefits">
+            <li>Complete privacy</li>
+            <li>Easy to use</li>
+            <li>No subscription</li>
+            <li>Quick guest access</li>
+          </ul>
         </div>
       </div>
     </section><section class="section" id="advantages" aria-labelledby="features-title">
       <div class="container">
         <header class="section__header js-reveal">
-          <h2 class="section__title" id="features-title" data-i18n="features.title" dir="ltr">WIFIGATE: The Winning Approach</h2>
-          <p class="section__subtitle" data-i18n="features.subtitle" dir="ltr">These are some of the practical capabilities that make WIFIGATE stable, secure, and easy to manage in everyday use.</p>
+          <p class="section__eyebrow">The platform</p>
+          <h2 class="section__title" id="features-title" data-i18n="features.title" dir="ltr">Access without the usual friction.</h2>
+          <p class="section__subtitle" data-i18n="features.subtitle" dir="ltr">One compact system for secure, private access. Simple for people, dependable for every property.</p>
         </header>
 
         <div class="features-grid">
@@ -605,27 +606,9 @@ Secure digital access, without waiting for anyone to let you in.</p>
     </section><section class="section section--alt" id="where" aria-labelledby="where-title" aria-describedby="where-subtitle">
       <div class="container">
         <header class="section__header js-reveal">
-          <h2 class="section__title" id="where-title" data-i18n="action.title" dir="ltr">One Platform. Every Access Point.</h2>
-          <div class="where-intro" id="where-subtitle" dir="ltr">
-            <p class="where-intro__item where-intro__item--properties">
-              <span class="where-intro__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M4 21h16M6.5 21V5.5L12 3l5.5 2.5V21M9 8.5h.01M15 8.5h.01M9 12.5h.01M15 12.5h.01M10 21v-4h4v4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-              </span>
-              <span class="where-intro__text" id="where-intro-properties">WIFIGATE makes smart access simple for residential buildings, businesses and shops, hospitality properties, private homes, office buildings, and sports facilities.</span>
-            </p>
-            <p class="where-intro__item where-intro__item--controls">
-              <span class="where-intro__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.64 5.64l2.12 2.12M16.24 16.24l2.12 2.12M18.36 5.64l-2.12 2.12M7.76 16.24l-2.12 2.12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"></path>
-                  <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.75"></circle>
-                  <circle cx="12" cy="12" r="1.15" fill="currentColor"></circle>
-                </svg>
-              </span>
-              <span class="where-intro__text" id="where-intro-controls">Manage roller shutters, electric gates, parking barriers, garage doors, private parking access, entry doors, and magnetic locks through one secure platform built for properties worldwide.</span>
-            </p>
-          </div>
+          <p class="section__eyebrow">Built for every entrance</p>
+          <h2 class="section__title" id="where-title" data-i18n="action.title" dir="ltr">One system.<br>Every way in.</h2>
+          <p class="section__subtitle" id="where-subtitle" dir="ltr">From a private garage to a multi-property portfolio, manage every gate, door, barrier and lock through one secure platform.</p>
         </header>
 
         <div class="where-showcase js-reveal">
@@ -671,10 +654,9 @@ Secure digital access, without waiting for anyone to let you in.</p>
       <div class="container">
         <div class="guest-invites__grid js-reveal">
           <div class="guest-invites__copy">
-            <p class="guest-invites__eyebrow" data-i18n="guestInvites.promo.eyebrow" dir="ltr">WIFIGATE Automation</p>
-            <h2 class="guest-invites__title" id="guest-invites-title" data-i18n="guestInvites.promo.title" dir="ltr">Automatic guest access
-for every booking</h2>
-            <p class="guest-invites__subtitle" data-i18n="guestInvites.promo.subtitle" dir="ltr">From the moment a booking is confirmed, WIFIGATE gives each guest secure, time-limited access to your gate, door or garage, and it ends on its own at checkout.</p>
+            <p class="guest-invites__eyebrow" data-i18n="guestInvites.promo.eyebrow" dir="ltr">Access automation</p>
+            <h2 class="guest-invites__title" id="guest-invites-title" data-i18n="guestInvites.promo.title" dir="ltr">Guest access, handled before arrival.</h2>
+            <p class="guest-invites__subtitle" data-i18n="guestInvites.promo.subtitle" dir="ltr">Connect each booking to secure, time-limited access for the right gate, door or garage. Access starts at check-in and ends automatically at checkout.</p>
 
             <ul class="guest-invites__points">
               <li class="guest-invites__point">
@@ -744,83 +726,53 @@ for every booking</h2>
       </div>
     </section><section class="section" id="tutorials" aria-labelledby="tutorials-title">
       <div class="container">
-        <header class="section__header js-reveal">
-          <h2 class="section__title" id="tutorials-title" data-i18n="tutorials.title" dir="ltr">Tutorial Videos</h2>
-        </header>
+        <div class="tutorials-layout">
+          <header class="section__header js-reveal">
+            <p class="section__eyebrow">Product guide</p>
+            <h2 class="section__title" id="tutorials-title" data-i18n="tutorials.title" dir="ltr">Straightforward from day one.</h2>
+            <p class="section__subtitle">Clear guidance for installation, everyday access and advanced configuration.</p>
+          </header>
 
-        <div class="tutorials-grid js-reveal">
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.initialUse" dir="ltr">Getting Started</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.scanQrCode" dir="ltr">Scanning a QR Code</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteGuest" dir="ltr">Inviting a Guest</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteUser" dir="ltr">Inviting a User</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteAdmin" dir="ltr">Inviting an Admin</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.openGate" dir="ltr">Opening the Gate</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.learnRfRemote" dir="ltr">Learning an RF Remote</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.exportCsv" dir="ltr">Exporting CSV</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.importCsv" dir="ltr">Importing CSV</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.changePulseLength" dir="ltr">Changing Pulse Length</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.electricShutterMode" dir="ltr">Electric Shutter Mode</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
-          </article>
-          <article class="tutorial-card">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.barrierGateMode" dir="ltr">Barrier Gate Mode</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
-          </article>
-          <article class="tutorial-card tutorial-card--more">
-            <span class="tutorial-card__icon" aria-hidden="true"></span>
-            <h3 class="tutorial-card__title" data-i18n="tutorials.items.andMore" dir="ltr">And More...</h3>
-            <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
-          </article>
+          <div class="tutorials-grid js-reveal">
+            <article class="tutorial-card">
+              <span class="tutorial-card__number" aria-hidden="true">01</span>
+              <h3 class="tutorial-card__title" data-i18n="tutorials.items.initialUse" dir="ltr">Getting started</h3>
+              <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
+            </article>
+            <article class="tutorial-card">
+              <span class="tutorial-card__number" aria-hidden="true">02</span>
+              <h3 class="tutorial-card__title" data-i18n="tutorials.items.scanQrCode" dir="ltr">Connect with a QR code</h3>
+              <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
+            </article>
+            <article class="tutorial-card">
+              <span class="tutorial-card__number" aria-hidden="true">03</span>
+              <h3 class="tutorial-card__title" data-i18n="tutorials.items.inviteGuest" dir="ltr">Invite a guest</h3>
+              <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
+            </article>
+            <article class="tutorial-card">
+              <span class="tutorial-card__number" aria-hidden="true">04</span>
+              <h3 class="tutorial-card__title" data-i18n="tutorials.items.openGate" dir="ltr">Open an access point</h3>
+              <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
+            </article>
+            <article class="tutorial-card">
+              <span class="tutorial-card__number" aria-hidden="true">05</span>
+              <h3 class="tutorial-card__title" data-i18n="tutorials.items.learnRfRemote" dir="ltr">Learn an RF remote</h3>
+              <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
+            </article>
+            <article class="tutorial-card">
+              <span class="tutorial-card__number" aria-hidden="true">06</span>
+              <h3 class="tutorial-card__title" data-i18n="tutorials.items.barrierGateMode" dir="ltr">Configure access modes</h3>
+              <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Coming soon</p>
+            </article>
+          </div>
         </div>
       </div>
     </section><section class="section section--alt" id="contact" aria-labelledby="contact-title" aria-describedby="contact-description">
       <div class="container">
         <header class="section__header contact-options__header js-reveal" dir="ltr">
-          <h2 class="section__title" id="contact-title" data-i18n="contact.title" dir="ltr">Contact Us</h2>
-          <p class="section__subtitle" id="contact-description" data-i18n="contact.subtitle" dir="ltr">We would be happy to learn about your needs, present the system's capabilities, and see together whether WIFIGATE is the right fit for you.</p>
+          <p class="section__eyebrow">Start a conversation</p>
+          <h2 class="section__title" id="contact-title" data-i18n="contact.title" dir="ltr">Make every arrival simpler.</h2>
+          <p class="section__subtitle" id="contact-description" data-i18n="contact.subtitle" dir="ltr">Tell us what you need to secure, automate or simplify. Our team will help you find the right approach.</p>
         </header>
 
         <div class="contact-options js-reveal" dir="ltr">
@@ -833,9 +785,9 @@ for every booking</h2>
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
             </div>
-            <h3 class="contact-option-card__title" data-i18n="contact.distributorTitle" dir="ltr">Distributor Program</h3>
-            <p class="contact-option-card__text" data-i18n="contact.distributorText" dir="ltr">Want to become a WIFIGATE solutions distributor? Join our partner network for exclusive benefits, marketing support, and advanced solutions. Contact us for more details.</p>
-            <a href="mailto:support@wifigate.io?subject=WIFIGATE%20Distributor%20Program" class="contact-option-card__button contact-option-card__button--muted" data-i18n="contact.distributorButton" dir="ltr">Contact (for distributors)</a>
+            <h3 class="contact-option-card__title" data-i18n="contact.distributorTitle" dir="ltr">Build with us</h3>
+            <p class="contact-option-card__text" data-i18n="contact.distributorText" dir="ltr">Bring secure digital access to your market through our international distributor program.</p>
+            <a href="mailto:support@wifigate.io?subject=WIFIGATE%20Distributor%20Program" class="contact-option-card__button contact-option-card__button--muted" data-i18n="contact.distributorButton" dir="ltr">Become a distributor</a>
           </article>
 
           <article class="contact-option-card">
@@ -845,8 +797,8 @@ for every booking</h2>
                 <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
               </svg>
             </div>
-            <h3 class="contact-option-card__title" data-i18n="contact.supportTitle" dir="ltr">Technical Support</h3>
-            <p class="contact-option-card__text" data-i18n="contact.supportText" dir="ltr">Have a technical question? We are here to help. Contact us.</p>
+            <h3 class="contact-option-card__title" data-i18n="contact.supportTitle" dir="ltr">Product support</h3>
+            <p class="contact-option-card__text" data-i18n="contact.supportText" dir="ltr">Get practical help from a team that understands the product and your installation.</p>
             <a href="mailto:support@wifigate.io" class="contact-option-card__email">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect x="3" y="5" width="18" height="14" rx="2"></rect>
@@ -862,13 +814,13 @@ for every booking</h2>
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
               </svg>
             </div>
-            <h3 class="contact-option-card__title" data-i18n="contact.interestTitle" dir="ltr">Interested in WIFIGATE?</h3>
-            <p class="contact-option-card__text" data-i18n="contact.interestText" dir="ltr">For more information, pricing, and a suitability check for your needs.</p>
-            <a href="https://wa.me/972526996332" target="_blank" rel="noopener noreferrer" class="contact-option-card__button contact-option-card__button--primary">
+            <h3 class="contact-option-card__title" data-i18n="contact.interestTitle" dir="ltr">Plan your access</h3>
+            <p class="contact-option-card__text" data-i18n="contact.interestText" dir="ltr">Talk with us about your property, pricing and the right setup for your needs.</p>
+            <a href="https://wa.me/message/NZWNMX6V2XVHJ1" target="_blank" rel="noopener noreferrer" class="contact-option-card__button contact-option-card__button--primary">
               <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                 <path d="M13.6 2.3A7.9 7.9 0 0 0 .1 7.9c0 1.4.4 2.8 1.1 4L0 16l4.2-1.1a7.9 7.9 0 0 0 3.8 1h.1a7.9 7.9 0 0 0 5.5-13.6ZM8 14.5a6.6 6.6 0 0 1-3.4-.9l-.2-.1-2.5.6.7-2.4-.2-.3A6.6 6.6 0 0 1 8 1.3a6.6 6.6 0 0 1 0 13.2Zm3.6-4.9c-.2-.1-1.2-.6-1.4-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.6-1-.6-.5-1-1.2-1.1-1.4-.1-.2 0-.3.1-.4l.3-.3c.1-.1.1-.2.2-.3.1-.1 0-.2 0-.3-.1-.1-.5-1.1-.6-1.5-.2-.4-.3-.3-.4-.3h-.4c-.1 0-.3.1-.5.2-.2.2-.7.7-.7 1.7s.7 1.9.8 2c.1.1 1.4 2.1 3.4 3 .5.2.8.3 1.1.4.5.2.9.1 1.2.1.4-.1 1.2-.5 1.3-.9.2-.5.2-.9.1-.9 0-.1-.2-.2-.4-.3Z"></path>
               </svg>
-              <span data-i18n="contact.whatsappButton" dir="ltr">WhatsApp @WIFIGATE</span>
+              <span data-i18n="contact.whatsappButton" dir="ltr">Talk on WhatsApp</span>
             </a>
           </article>
         </div>
