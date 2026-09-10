@@ -2358,6 +2358,7 @@ ul {
   color: #ffffff;
 }
 
+
 .site-footer__socials {
   display: flex;
   align-items: center;
@@ -3450,4 +3451,77 @@ html[dir="rtl"] .where-story-card__video-meta {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+/* ================= SHARED FOOTER SKIN =================
+   One skin for the shared footer partial on every page type: homepage,
+   use-case pages, WIFIGATE Automation and the legal pages. Do NOT re-declare
+   these under a page-scoped class (.home-en, .niche-page, ...) - that is what
+   let the footer drift apart in the first place. */
+.site-footer {
+  padding: 5rem 0 2rem;
+  color: #ffffff;
+  background: #0a0a0a;
+}
+
+.site-footer__inner {
+  gap: 3.5rem 2rem;
+}
+
+.site-footer__brand-copy {
+  max-width: none;
+}
+
+.site-footer__logo {
+  filter: grayscale(1) brightness(0) invert(1);
+}
+
+.site-footer__brand-copy,
+.site-footer__link,
+.site-footer__support,
+.site-footer__copy {
+  color: #a4a4a4;
+}
+
+.site-footer__heading {
+  color: #ffffff;
+  letter-spacing: 0;
+}
+
+.site-footer__store,
+.site-footer__social-link {
+  border-color: #383838;
+  border-radius: 4px;
+  background: #151515;
+  box-shadow: none;
+}
+
+.site-footer__store:hover,
+.site-footer__social-link:hover {
+  border-color: #676767;
+  background: #222222;
+  transform: none;
+}
+
+/* Second support row in the shared footer partial, on every page type. */
+.site-footer__whatsapp {
+  display: flex;
+  width: fit-content;
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 1200px) {
+  .site-footer__inner {
+    grid-template-columns: minmax(30rem, 1.8fr) minmax(8rem, 0.65fr) minmax(13rem, 0.9fr) minmax(7rem, 0.55fr);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1199px) {
+  .site-footer__inner {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .site-footer__column--brand,
+  .site-footer__copy {
+    grid-column: 1 / -1;
+  }
 }

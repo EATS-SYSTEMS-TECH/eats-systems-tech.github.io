@@ -262,6 +262,48 @@ async function main() {
     }
   }
 
+  // Footer: every page type in a locale must render the exact same footer.
+  // It comes from templates/partials/site-footer.template.html, so any
+  // difference here means a template stopped using the shared partial or a
+  // builder is writing footer copy of its own.
+  for (const locale of localeOptions) {
+    const shapes = new Map();
+
+    for (const pageKey of interactivePages) {
+      const file = pageFile(locale, pageKey);
+      let html;
+      try {
+        html = await fs.readFile(file, "utf8");
+      } catch {
+        continue; // Missing pages are already reported above.
+      }
+
+      const start = html.indexOf('<footer class="site-footer"');
+      if (start === -1) {
+        problems.push(`${file}: no site footer`);
+        continue;
+      }
+
+      const footer = html.slice(start, html.indexOf("</footer>", start) + "</footer>".length);
+      if (!footer.includes("site-footer__whatsapp")) {
+        problems.push(`${file}: footer is missing the WhatsApp Business link`);
+      }
+
+      // Legal hrefs and the logo src legitimately vary with page depth.
+      const shape = footer
+        .replace(/href="[^"]*(?:terms-and-conditions|privacy-policy|cookies)\//g, 'href="LEGAL/')
+        .replace(/src="[^"]*WIFIGATE_LOGO_NO_BG\.png"/g, 'src="LOGO"');
+
+      if (!shapes.has(shape)) shapes.set(shape, []);
+      shapes.get(shape).push(pageKey);
+    }
+
+    if (shapes.size > 1) {
+      const groups = [...shapes.values()].map((keys) => keys.join("+")).join(" vs ");
+      problems.push(`${locale}: footer differs between page types (${groups})`);
+    }
+  }
+
   // Sitemap: every URL must resolve to a generated page, and every indexable
   // home/niche page must be listed.
   const sitemap = await fs.readFile(path.join(repoRoot, "sitemap.xml"), "utf8");

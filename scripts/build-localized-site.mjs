@@ -246,6 +246,11 @@ function getBundle(collection, locale) {
   return collection[locale] || collection[defaultLocale];
 }
 
+// Copy keys a locale may add on top of the English reference shape. The
+// renderer already treats these as optional (see updateHomeCopy), so the
+// validator must not reject a locale that supplies one.
+const OPTIONAL_COPY_KEYS = new Set(["footer.taglineLines"]);
+
 function validateCopyShape(reference, candidate, pathSegments = []) {
   const keyPath = pathSegments.join(".") || "homepage copy";
 
@@ -264,7 +269,8 @@ function validateCopyShape(reference, candidate, pathSegments = []) {
     }
 
     const referenceKeys = Object.keys(reference);
-    const candidateKeys = Object.keys(candidate);
+    const candidateKeys = Object.keys(candidate)
+      .filter((key) => !OPTIONAL_COPY_KEYS.has([...pathSegments, key].join(".")));
     if (referenceKeys.length !== candidateKeys.length || referenceKeys.some((key) => !candidateKeys.includes(key))) {
       throw new Error(`${keyPath} must have keys: ${referenceKeys.join(", ")}`);
     }
@@ -540,8 +546,12 @@ function applyDataI18nTranslations($, bundle, locale) {
   });
 }
 
-function updateFooterStaticUi($, bundle, locale) {
-  const footer = bundle.footer || {};
+// `footerCopy` is the curated footer block from scripts/homepage-copy/<locale>.mjs.
+// It is the single source of truth for footer wording on every page type; the
+// older js/translations.js bundle is only a fallback, so the homepage and the
+// inner pages can no longer disagree about the same footer.
+function updateFooterStaticUi($, bundle, locale, footerCopy) {
+  const footer = { ...(bundle.footer || {}), ...(footerCopy || {}) };
   const contact = bundle.contact || {};
   const dir = isRtl(locale) ? "rtl" : "ltr";
   // These wrappers are authored dir="rtl" (Hebrew-first source). Flip them to
@@ -556,6 +566,8 @@ function updateFooterStaticUi($, bundle, locale) {
 
   if (Array.isArray(footer.taglineLines)) {
     setLocalizedLines($, ".site-footer__brand-copy", footer.taglineLines, locale);
+  } else if (typeof footer.tagline === "string" && footer.tagline.includes("\n")) {
+    setLocalizedLines($, ".site-footer__brand-copy", footer.tagline.split("\n"), locale);
   } else {
     set(".site-footer__brand-copy", footer.tagline);
   }
@@ -1027,20 +1039,7 @@ function applyHomepageCopy($, copy, locale) {
   setLocalizedText($, "[data-i18n='contact.interestText']", copy.contact.interestText, locale);
   setLocalizedText($, "[data-i18n='contact.whatsappButton']", copy.contact.whatsappButton, locale);
 
-  if (Array.isArray(copy.footer.taglineLines)) {
-    setLocalizedLines($, ".site-footer__brand-copy", copy.footer.taglineLines, locale);
-  } else {
-    setLocalizedText($, ".site-footer__brand-copy", copy.footer.tagline, locale);
-  }
-  const footerHeadings = $(".site-footer__heading");
-  [copy.footer.legalTitle, copy.footer.appSupportTitle, copy.footer.socialTitle].forEach((value, index) => {
-    setLocalizedText($, footerHeadings.eq(index), value, locale);
-  });
-  const footerLinks = $(".site-footer__link");
-  [copy.footer.terms, copy.footer.privacy, copy.footer.cookies].forEach((value, index) => {
-    setLocalizedText($, footerLinks.eq(index), value, locale);
-  });
-  setLocalizedText($, ".site-footer__copy", `© 2026 ${copy.footer.copyright}`, locale);
+  // The footer is written once, for every page type, by updateFooterStaticUi().
 }
 
 function rewriteHomeGuestInvitesLink($, locale) {
@@ -1077,10 +1076,16 @@ function insertPageDataScript($, scriptId, data, anchorSelector) {
   );
 }
 
-function rewriteHomeInternalLinks($, locale) {
+// The footer comes from a shared partial, so its legal links are rewritten in
+// one place for every page type instead of once per page builder.
+function rewriteFooterLegalLinks($, locale) {
   $(".site-footer__link[href*='terms-and-conditions/']").attr("href", buildPagePath(locale, "terms-and-conditions"));
   $(".site-footer__link[href*='privacy-policy/']").attr("href", buildPagePath(locale, "privacy-policy"));
   $(".site-footer__link[href*='cookies/']").attr("href", buildPagePath(locale, "cookies"));
+}
+
+function rewriteHomeInternalLinks($, locale) {
+  rewriteFooterLegalLinks($, locale);
   $("#private-access .security-statement__link").attr("href", `${buildPagePath(locale, "home")}#home`);
 }
 
@@ -1095,6 +1100,8 @@ function rewriteLegalInternalLinks($, locale, pageKey) {
     const hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
     $(element).attr("href", `${home}${hash}`);
   });
+  rewriteFooterLegalLinks($, locale);
+  // Legal pages also cross-link each other from inside the body copy.
   $("a[href='../terms-and-conditions/']").attr("href", buildPagePath(locale, "terms-and-conditions"));
   $("a[href='../privacy-policy/']").attr("href", buildPagePath(locale, "privacy-policy"));
   $("a[href='../cookies/']").attr("href", buildPagePath(locale, "cookies"));
@@ -1114,9 +1121,63 @@ function ensureTrailingNewline(source) {
   return source.endsWith("\n") ? source : `${source}\n`;
 }
 
+// Shared markup that every page template pulls in via
+// `<div data-partial="NAME"></div>`. Keeping the footer here is what stops it
+// from drifting between page types.
+const partialPaths = {
+  "site-footer": path.join(repoRoot, "templates", "partials", "site-footer.template.html"),
+};
+const partialCache = new Map();
+
+async function readPartial(name) {
+  if (partialCache.has(name)) {
+    return partialCache.get(name);
+  }
+
+  const partialPath = partialPaths[name];
+  if (!partialPath) {
+    throw new Error(`Unknown template partial "${name}"`);
+  }
+
+  const source = await fs.readFile(partialPath, "utf8");
+  // Drop the leading authoring comment so it does not ship on every page.
+  const markup = source.replace(/^\uFEFF/, "").replace(/^\s*<!--[\s\S]*?-->\s*/, "").trim();
+  if (!markup) {
+    throw new Error(`Template partial "${name}" is empty`);
+  }
+
+  partialCache.set(name, markup);
+  return markup;
+}
+
+async function injectPartials(source, filePath) {
+  const placeholder = /^([ \t]*)<div data-partial="([a-z-]+)"><\/div>[ \t]*$/gm;
+  const names = [...source.matchAll(placeholder)].map((match) => match[2]);
+  if (!names.length) {
+    return source;
+  }
+
+  const markup = new Map();
+  for (const name of new Set(names)) {
+    markup.set(name, await readPartial(name));
+  }
+
+  return source.replace(placeholder, (_match, indent, name) => {
+    const partial = markup.get(name);
+    if (!partial) {
+      throw new Error(`Missing partial "${name}" required by ${filePath}`);
+    }
+    // Re-indent so the generated HTML keeps the host template's shape.
+    return partial
+      .split("\n")
+      .map((line) => (line.trim() ? `${indent}${line}` : line))
+      .join("\n");
+  });
+}
+
 async function readHtmlTemplate(filePath) {
   const source = await fs.readFile(filePath, "utf8");
-  return source.replace(/^\uFEFF/, "");
+  return injectPartials(source.replace(/^\uFEFF/, ""), filePath);
 }
 
 function serialize($) {
@@ -1182,7 +1243,7 @@ function buildSitemap(urlEntries) {
 
 async function buildHomePages(homeData) {
   const template = await readHtmlTemplate(homeTemplatePath);
-  const homepageCopies = await loadHomeCopy(homeData.localeOptions);
+  const homepageCopies = homeData.homepageCopies;
   const sitemapEntries = [];
 
   for (const localeOption of homeData.localeOptions) {
@@ -1196,7 +1257,7 @@ async function buildHomePages(homeData) {
     removeScripts($, homeRuntimeScriptsToRemove);
     appendScripts($, homeRuntimeScriptsToAdd, "script[src*='js/main.js']", locale, "home");
     applyDataI18nTranslations($, bundle, locale);
-    updateFooterStaticUi($, bundle, locale);
+    updateFooterStaticUi($, bundle, locale, homeData.homepageCopies[locale]?.footer);
     setLanguageSelector($, homeData.localeOptions, locale, "home");
     updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale);
     rewriteHomeInternalLinks($, locale);
@@ -1241,7 +1302,7 @@ async function buildLegalPages(homeData, legalCollections) {
       removeScripts($, legalRuntimeScriptsToRemove);
       appendScripts($, legalRuntimeScriptsToAdd, "script[src*='js/legal-page.js']", locale, pageKey);
       applyDataI18nTranslations($, bundle, locale);
-      updateFooterStaticUi($, bundle, locale);
+      updateFooterStaticUi($, bundle, locale, homeData.homepageCopies[locale]?.footer);
       setLanguageSelector($, homeData.localeOptions, locale, pageKey);
       updateAccessibilityMarkup($, accessibilityBundle);
       rewriteLegalInternalLinks($, locale, pageKey);
@@ -1313,6 +1374,55 @@ function setNicheList($, selector, items, className) {
   });
 }
 
+// Renders the optional three-message block above the overview. The section
+// stays hidden for any niche/locale that does not supply `highlights`.
+function setNicheHighlights($, highlights) {
+  const section = $("#niche-highlights");
+  const list = $("#niche-highlights-list");
+  if (!section.length || !list.length) {
+    return;
+  }
+
+  const entries = (Array.isArray(highlights) ? highlights : []).filter(
+    (entry) => entry && entry.title && entry.text
+  );
+
+  list.empty();
+  if (!entries.length) {
+    section.remove();
+    return;
+  }
+
+  section.removeAttr("hidden");
+  entries.forEach((entry) => {
+    const item = $("<article>").addClass("niche-highlight");
+    item.append($("<h2>").addClass("niche-highlight__title").text(entry.title));
+    item.append($("<p>").addClass("niche-highlight__text").text(entry.text));
+    list.append(item);
+  });
+}
+
+// The benefits grid is three columns wide. When a niche opts into
+// `benefitsCenterGap` and has exactly eight bullets, an inert tile is dropped
+// into the middle cell so the 3x3 grid reads as deliberately incomplete.
+function setNicheBenefits($, bullets, niche) {
+  const list = $("#niche-benefits-list");
+  if (!list.length) {
+    return;
+  }
+
+  const items = Array.isArray(bullets) ? bullets : [];
+  const centerGap = Boolean(niche.benefitsCenterGap) && items.length === 8;
+
+  list.empty();
+  items.forEach((item, index) => {
+    if (centerGap && index === 4) {
+      list.append($("<li>").addClass("niche-benefit niche-benefit--gap").attr("aria-hidden", "true"));
+    }
+    list.append($("<li>").addClass("niche-benefit").text(item));
+  });
+}
+
 function getCircularAdjacentNiches(currentKey) {
   const index = NICHE_DEFINITIONS.findIndex((entry) => entry.key === currentKey);
   if (index === -1) {
@@ -1348,9 +1458,31 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
 
   $("#niche-eyebrow").text(chrome.eyebrow);
   $("#niche-title").text(content.title);
+  $("#niche-overview-label").text(content.label);
   $("#niche-intro").text(content.paragraph);
+
+  const heroLead = $("#niche-hero-lead");
+  if (heroLead.length) {
+    if (content.heroLead) {
+      heroLead.removeAttr("hidden").text(content.heroLead);
+    } else {
+      heroLead.remove();
+    }
+  }
+  setNicheHighlights($, content.highlights);
+
+  // The hero carries exactly one supporting line. Where the niche supplies a
+  // `heroLead` that is it, and the bullets appear only in the benefits grid;
+  // otherwise the first couple of bullets stand in as proof points, mirroring
+  // the homepage hero. Never both, so no copy is repeated on the page.
+  if (content.heroLead) {
+    $("#niche-hero-proof").remove();
+  } else {
+    setNicheList($, "#niche-hero-proof", (content.bullets || []).slice(0, 2), "niche-hero__proof-item");
+  }
   $("#niche-hero-cta-label").text(contact.ctaButton || "Contact via WhatsApp");
   $("#niche-hero-back").text(chrome.backLabel);
+
 
   $("#niche-image")
     .attr("src", `${assetPrefix}${niche.image.hero}`)
@@ -1379,11 +1511,9 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
   }
 
   $("#niche-benefits-title").text(chrome.benefitsTitle);
-  setNicheList($, "#niche-benefits-list", content.bullets, "niche-benefit");
-
-  $("#niche-cta-title").text(contact.ctaTitle || "Interested in WIFIGATE?");
-  $("#niche-cta-text").text(contact.ctaText || "");
-  $("#niche-cta-button").text(contact.ctaButton || "Contact via WhatsApp");
+  setNicheBenefits($, content.bullets, niche);
+  // No closing CTA section: the hero already carries the WhatsApp action and
+  // the shared footer carries support + WhatsApp Business.
 
   $("#js-year").text(nowDate.slice(0, 4));
   $("#footer-copyright").text(footer.copyright || "WIFIGATE. All rights reserved.");
@@ -1405,9 +1535,7 @@ function rewriteNicheInternalLinks($, locale) {
     const hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
     $(element).attr("href", `${home}${hash}`);
   });
-  $("a[href='../terms-and-conditions/']").attr("href", buildPagePath(locale, "terms-and-conditions"));
-  $("a[href='../privacy-policy/']").attr("href", buildPagePath(locale, "privacy-policy"));
-  $("a[href='../cookies/']").attr("href", buildPagePath(locale, "cookies"));
+  rewriteFooterLegalLinks($, locale);
   $(".nav__logo-link").attr("aria-label", "Back to WIFIGATE home page");
 }
 
@@ -1480,7 +1608,7 @@ async function buildNichePages(homeData) {
       appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, niche.key);
       setLanguageSelector($, homeData.localeOptions, locale, niche.key);
       updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle);
-      updateFooterStaticUi($, ctx.bundle, locale);
+      updateFooterStaticUi($, ctx.bundle, locale, homeData.homepageCopies[locale]?.footer);
       rewriteNicheInternalLinks($, locale);
       setNicheMeta($, ctx, niche, locale, homeData.localeOptions);
 
@@ -1548,9 +1676,7 @@ function rewriteGuestInvitesInternalLinks($, locale) {
     const hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
     $(element).attr("href", `${home}${hash}`);
   });
-  $("a[href='../terms-and-conditions/']").attr("href", buildPagePath(locale, "terms-and-conditions"));
-  $("a[href='../privacy-policy/']").attr("href", buildPagePath(locale, "privacy-policy"));
-  $("a[href='../cookies/']").attr("href", buildPagePath(locale, "cookies"));
+  rewriteFooterLegalLinks($, locale);
   $(".nav__logo-link").attr("aria-label", "Back to WIFIGATE home page");
 }
 
@@ -1615,7 +1741,7 @@ async function buildGuestInvitesPages(homeData) {
     rewriteStaticAssets($, locale, guestInvitesPageKey);
     appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, guestInvitesPageKey);
     applyDataI18nTranslations($, bundle, locale);
-    updateFooterStaticUi($, bundle, locale);
+    updateFooterStaticUi($, bundle, locale, homeData.homepageCopies[locale]?.footer);
     setLanguageSelector($, homeData.localeOptions, locale, guestInvitesPageKey);
     updateAccessibilityMarkup($, accessibilityBundle);
     updateGuestInvitesStaticUi($, strings);
@@ -1648,6 +1774,8 @@ async function main() {
     localeOptions: homeSandbox.SITE_LANGUAGE_OPTIONS,
     translations: homeSandbox.translations,
     accessibilityCopy: homeSandbox.accessibilityCopy,
+    // Loaded once here so every page type shares the same footer wording.
+    homepageCopies: await loadHomeCopy(homeSandbox.SITE_LANGUAGE_OPTIONS),
   };
 
   const contentProblems = validateNichePageLocales(homeData.localeOptions.map((option) => option.code));
@@ -1664,7 +1792,9 @@ async function main() {
   sitemapEntries.push(...(await buildGuestInvitesPages(homeData)));
   sitemapEntries.push(...(await buildUtilityPages(homeData)));
 
-  await fs.writeFile(path.join(repoRoot, "sitemap.xml"), buildSitemap(sitemapEntries), "utf8");
+  // writeOutputFile, not fs.writeFile: on Windows the dev server can hold this
+  // file open and the bare write fails with EBUSY/UNKNOWN.
+  await writeOutputFile(path.join(repoRoot, "sitemap.xml"), buildSitemap(sitemapEntries));
 }
 
 main().catch((error) => {
