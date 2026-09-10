@@ -510,24 +510,25 @@
     </div>
   </main>
 
+  <!-- Shared footer: templates/partials/site-footer.template.html -->
   <footer class="site-footer" dir="ltr">
     <div class="container site-footer__inner">
       <div class="site-footer__column site-footer__column--brand">
         <div class="site-footer__brand">
           <img src="../../assets/img/WIFIGATE_LOGO_NO_BG.png" alt="WIFIGATE" class="site-footer__logo" loading="lazy" decoding="async">
         </div>
-        <p class="site-footer__brand-copy" dir="ltr">Intelligente. Sicuro. Privato. Nessun abbonamento. Nessun compromesso.</p>
+        <p class="site-footer__brand-copy" data-i18n="footer.tagline" dir="ltr">Niente chiavi. Niente telecomandi. Niente tessere. Accesso digitale sicuro, senza dover aspettare che qualcuno ti apra.</p>
       </div>
-      <nav class="site-footer__column" aria-label="משפטי">
-        <h2 class="site-footer__heading" dir="ltr">Note legali</h2>
+      <nav class="site-footer__column" aria-label="Legal">
+        <h2 class="site-footer__heading" data-i18n="footer.legalTitle" dir="ltr">Note legali</h2>
         <div class="site-footer__links">
-          <a href="/it/terms-and-conditions/" class="site-footer__link" dir="ltr">Termini e condizioni</a>
-          <a href="/it/privacy-policy/" class="site-footer__link" dir="ltr">Informativa sulla privacy</a>
-          <a href="/it/cookies/" class="site-footer__link" dir="ltr">Cookie</a>
+          <a href="/it/terms-and-conditions/" class="site-footer__link" data-i18n="footer.terms" dir="ltr">Termini e condizioni</a>
+          <a href="/it/privacy-policy/" class="site-footer__link" data-i18n="footer.privacy" dir="ltr">Informativa sulla privacy</a>
+          <a href="/it/cookies/" class="site-footer__link" data-i18n="footer.cookies" dir="ltr">Cookie</a>
         </div>
       </nav>
       <div class="site-footer__column">
-        <h2 class="site-footer__heading" dir="ltr">App e supporto</h2>
+        <h2 class="site-footer__heading" data-i18n="footer.appSupportTitle" dir="ltr">App e supporto</h2>
         <div class="site-footer__stores" aria-label="Download the app">
           <a href="#" class="site-footer__store" aria-label="Download on Google Play">
             <svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true">
@@ -540,7 +541,8 @@
           </a>
           <a href="#" class="site-footer__store" aria-label="Download on the Apple App Store">
             <svg width="18" height="22" viewBox="0 0 18 22" aria-hidden="true">
-              <path fill="currentColor" d="M14.7 11.7c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.7 2.2-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.4 3 2.3 1.2 0 1.7-.8 3.1-.8s1.8.8 3.1.8 2.1-1.1 2.9-2.3c.9-1.3 1.2-2.5 1.3-2.6-.1 0-3.2-1.2-3.2-3.5ZM12.5 5.1c.7-.8 1.1-1.9 1-3.1-1 .1-2.1.6-2.8 1.4-.6.7-1.1 1.9-1 3 1.1.1 2.1-.5 2.8-1.3Z"></path>
+              <path fill="currentColor" d="M14.7 11.7c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.7 2.2-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.4 3 2.3 1.2 0 1.7-.8 3.1-.8s1.8.8 3.1.8 2.1-1.1 2.9-2.3c.9-1.3 1.2-2.5 1.3-2.6-.1 0-3.2-1.2-3.2-3.5ZM12.5 5.1c.7-.8 1.1-1.9 1-3.1-1 .1-2.1.6-2.8 1.4-.6.7-1.1 1.9-1 3 1.1.1 2.1-.5 2.8-1.3Z">
+              </path>
             </svg>
             <span class="site-footer__store-text"><span class="site-footer__store-kicker">Download on the</span><span class="site-footer__store-name">App Store</span></span>
           </a>
@@ -550,19 +552,38 @@
             <rect x="3" y="5" width="18" height="14" rx="2"></rect>
             <path d="m3 7 9 6 9-6"></path>
           </svg>
-          support@wifigate.io
+          <span dir="ltr">support@wifigate.io</span>
+        </a>
+        <a href="https://wa.me/message/NZWNMX6V2XVHJ1" target="_blank" rel="noopener noreferrer" class="site-footer__support site-footer__whatsapp">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M13.6 2.3A7.9 7.9 0 0 0 .1 7.9c0 1.4.4 2.8 1.1 4L0 16l4.2-1.1a7.9 7.9 0 0 0 3.8 1h.1a7.9 7.9 0 0 0 5.5-13.6ZM8 14.5a6.6 6.6 0 0 1-3.4-.9l-.2-.1-2.5.6.7-2.4-.2-.3A6.6 6.6 0 0 1 8 1.3a6.6 6.6 0 0 1 0 13.2Zm3.6-4.9c-.2-.1-1.2-.6-1.4-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.6-1-.6-.5-1-1.2-1.1-1.4-.1-.2 0-.3.1-.4l.3-.3c.1-.1.1-.2.2-.3.1-.1 0-.2 0-.3-.1-.1-.5-1.1-.6-1.5-.2-.4-.3-.3-.4-.3h-.4c-.1 0-.3.1-.5.2-.2.2-.7.7-.7 1.7s.7 1.9.8 2c.1.1 1.4 2.1 3.4 3 .5.2.8.3 1.1.4.5.2.9.1 1.2.1.4-.1 1.2-.5 1.3-.9.2-.5.2-.9.1-.9 0-.1-.2-.2-.4-.3Z">
+            </path>
+          </svg>
+          <span dir="ltr">WhatsApp Business</span>
         </a>
       </div>
       <div class="site-footer__column">
-        <h2 class="site-footer__heading" dir="ltr">Seguici</h2>
+        <h2 class="site-footer__heading" data-i18n="footer.socialTitle" dir="ltr">Seguici</h2>
         <div class="site-footer__socials">
-          <a href="https://www.facebook.com/WIFIGATE.io" class="site-footer__social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v2H6v4h3v7h4v-7h3l1-4h-4V9c0-.7.3-1 1-1Z"></path></svg></a>
-          <a href="https://www.youtube.com/@WIFIGATE" class="site-footer__social-link" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.6 4.6 12 4.6 12 4.6s-5.6 0-7.5.5a3 3 0 0 0-2.1 2.1C2 9.1 2 12 2 12s0 2.9.4 4.8a3 3 0 0 0 2.1 2.1c1.9.5 7.5.5 7.5.5s5.6 0 7.5-.5a3 3 0 0 0 2.1-2.1c.4-1.9.4-4.8.4-4.8s0-2.9-.4-4.8ZM10 15.4V8.6l6 3.4-6 3.4Z"></path></svg></a>
-          <a href="https://www.linkedin.com/company/wifigate/" class="site-footer__social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.9 8.8H3.1V21h3.8V8.8ZM5 3a2.2 2.2 0 1 0 0 4.4A2.2 2.2 0 0 0 5 3Zm16 10.9c0-3.3-1.8-5.4-4.6-5.4-1.7 0-2.8.9-3.3 1.8V8.8H9.5V21h3.8v-6.1c0-1.6.3-3.1 2.2-3.1 1.9 0 1.9 1.8 1.9 3.2v6H21v-7.1Z"></path></svg></a>
-          <a href="https://www.instagram.com/wifigate.io/" class="site-footer__social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg></a>
+          <a href="https://www.facebook.com/WIFIGATE.io" class="site-footer__social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v2H6v4h3v7h4v-7h3l1-4h-4V9c0-.7.3-1 1-1Z"></path>
+            </svg></a>
+          <a href="https://www.youtube.com/@WIFIGATE" class="site-footer__social-link" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.6 4.6 12 4.6 12 4.6s-5.6 0-7.5.5a3 3 0 0 0-2.1 2.1C2 9.1 2 12 2 12s0 2.9.4 4.8a3 3 0 0 0 2.1 2.1c1.9.5 7.5.5 7.5.5s5.6 0 7.5-.5a3 3 0 0 0 2.1-2.1c.4-1.9.4-4.8.4-4.8s0-2.9-.4-4.8ZM10 15.4V8.6l6 3.4-6 3.4Z">
+              </path>
+            </svg></a>
+          <a href="https://www.linkedin.com/company/wifigate/" class="site-footer__social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M6.9 8.8H3.1V21h3.8V8.8ZM5 3a2.2 2.2 0 1 0 0 4.4A2.2 2.2 0 0 0 5 3Zm16 10.9c0-3.3-1.8-5.4-4.6-5.4-1.7 0-2.8.9-3.3 1.8V8.8H9.5V21h3.8v-6.1c0-1.6.3-3.1 2.2-3.1 1.9 0 1.9 1.8 1.9 3.2v6H21v-7.1Z">
+              </path>
+            </svg></a>
+          <a href="https://www.instagram.com/wifigate.io/" class="site-footer__social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle>
+            </svg></a>
         </div>
       </div>
-      <p class="site-footer__copy" dir="ltr">© 2026 WIFIGATE. Tutti i diritti riservati.</p>
+      <p class="site-footer__copy" data-i18n="footer.copyright" dir="ltr">© 2026 WIFIGATE. Tutti i diritti riservati.</p>
     </div>
   </footer>
 

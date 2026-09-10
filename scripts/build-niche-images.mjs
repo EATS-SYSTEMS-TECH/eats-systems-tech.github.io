@@ -3,9 +3,11 @@
 // assets/wifigate_niche_pages/:
 //   <key>-hero.webp  1280w  niche page hero image
 //   <key>-card.webp   640w  homepage "where" section card
-//   <key>-og.jpg   1200x630  Open Graph / social preview (cover crop)
+//   <key>-og.jpg   1200x630  Open Graph / social preview (full frame)
 // Source PNGs are kept untouched. Run after adding or replacing a source PNG:
 //   node scripts/build-niche-images.mjs
+// Generate only the new app variants, preserving all older derivatives:
+//   node scripts/build-niche-images.mjs --app
 
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -17,6 +19,7 @@ async function main() {
   const entries = await fs.readdir(sourceDir);
   const sources = entries.filter(
     (name) => name.endsWith(".png") && !name.includes("-hero") && !name.includes("-card")
+      && (!process.argv.includes("--app") || name.endsWith("-app.png") && name !== "wifigate-iphone-app.png")
   );
 
   for (const name of sources) {
@@ -34,7 +37,8 @@ async function main() {
       .toFile(path.join(sourceDir, `${key}-card.webp`));
 
     const og = await sharp(sourceFile)
-      .resize({ width: 1200, height: 630, fit: "cover", position: "attention" })
+      // Keep corner watermarks visible, including in 4:3 source images.
+      .resize({ width: 1200, height: 630, fit: "contain", background: "#101820" })
       .jpeg({ quality: 82 })
       .toFile(path.join(sourceDir, `${key}-og.jpg`));
 
