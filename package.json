@@ -3,6 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "dev": "node scripts/serve.mjs",
         "build:locales": "node scripts/build-localized-site.mjs",
         "build:images": "node scripts/build-niche-images.mjs"
     },
