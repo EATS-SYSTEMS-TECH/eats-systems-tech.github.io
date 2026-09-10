@@ -19,7 +19,7 @@
         title: "Automatic guest access\nfor every booking",
         subtitle:
           "From the moment a booking is confirmed, WIFIGATE gives each guest secure, time-limited access to your gate, door or garage, and it ends on its own at checkout.",
-        point1Title: "No keys to hand over",
+        point1Title: "No keys or cards to hand over",
         point1Text:
           "Access arrives on your guest's phone, no pickups, lockboxes or codes to share.",
         point2Title: "Time-limited automatically",

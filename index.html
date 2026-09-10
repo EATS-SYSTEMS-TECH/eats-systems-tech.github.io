@@ -212,7 +212,7 @@
         <nav class="topbar-nav">
           <a href="#advantages" class="nav-link nav__link" data-i18n="nav.features" dir="ltr">Platform</a>
           <a href="#where" class="nav-link nav__link" data-i18n="tabs.where" dir="ltr">Solutions</a>
-          <a href="#guest-invites-api" class="nav-link nav__link">Automation</a>
+          <a href="#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
           <a href="#tutorials" class="nav-link nav__link" data-i18n="nav.about" dir="ltr">Product Guide</a>
           <a href="#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact" dir="ltr">Get in touch</a>
         </nav>
@@ -654,10 +654,30 @@
       <div class="container">
         <div class="guest-invites__grid js-reveal">
           <div class="guest-invites__copy">
-            <p class="guest-invites__eyebrow" data-i18n="guestInvites.promo.eyebrow" dir="ltr">Access automation</p>
-            <h2 class="guest-invites__title" id="guest-invites-title" data-i18n="guestInvites.promo.title" dir="ltr">Guest access, handled before arrival.</h2>
-            <p class="guest-invites__subtitle" data-i18n="guestInvites.promo.subtitle" dir="ltr">Connect each booking to secure, time-limited access for the right gate, door or garage. Access starts at check-in and ends automatically at checkout.</p>
+            <p class="guest-invites__eyebrow">Built for hospitality</p>
+            <h2 class="guest-invites__title" id="guest-invites-title">WIFIGATE<br>Automation</h2>
+            <ul class="automation-audiences" aria-label="Made for"><li>Hotels</li><li>Airbnb</li><li>Guest Apartments</li><li>Hospitality spaces</li></ul>
+            <p class="automation-promise">Welcome your guests. Automate their access.</p>
+            <p class="guest-invites__subtitle">From hotel stays to holiday apartments, connect each booking to secure access for the right gate, door or garage. Guests enter using their phone, with access that starts at check-in and ends automatically at checkout.</p>
 
+
+
+            <a class="btn btn--primary guest-invites__cta" href="/automation/">
+              <span data-i18n="guestInvites.promo.cta" dir="ltr">Explore WIFIGATE Automation</span>
+              <svg class="guest-invites__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14"></path>
+                <path d="m13 6 6 6-6 6"></path>
+              </svg>
+            </a>
+          </div>
+
+          <figure class="automation-stay">
+            <img src="assets/wifigate_niche_pages/hotels-airbnb-hero.webp" alt="Guests using a phone to enter their hotel room" width="1280" height="720" loading="lazy">
+            <figcaption class="automation-stay__caption">
+              <span class="automation-stay__label">Every stay, taken care of</span>
+              <ol class="automation-stay__steps"><li>Booking received</li><li>Access at check-in</li><li>Expires at checkout</li></ol>
+            </figcaption>
+          </figure>
             <ul class="guest-invites__points">
               <li class="guest-invites__point">
                 <span class="guest-invites__point-icon" aria-hidden="true">
@@ -667,7 +687,7 @@
                   </svg>
                 </span>
                 <span class="guest-invites__point-copy">
-                  <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point1Title" dir="ltr">No keys to hand over</span>
+                  <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point1Title" dir="ltr">No keys or cards to hand over</span>
                   <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point1Text" dir="ltr">Access arrives on your guest's phone, no pickups, lockboxes or codes to share.</span>
                 </span>
               </li>
@@ -696,32 +716,6 @@
                 </span>
               </li>
             </ul>
-
-            <a class="btn btn--primary guest-invites__cta" href="/automation/">
-              <span data-i18n="guestInvites.promo.cta" dir="ltr">Explore WIFIGATE Automation</span>
-              <svg class="guest-invites__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M5 12h14"></path>
-                <path d="m13 6 6 6-6 6"></path>
-              </svg>
-            </a>
-          </div>
-
-          <figure class="guest-invites__console" aria-hidden="true">
-            <div class="guest-invites__console-bar">
-              <span class="guest-invites__dot guest-invites__dot--r"></span>
-              <span class="guest-invites__dot guest-invites__dot--y"></span>
-              <span class="guest-invites__dot guest-invites__dot--g"></span>
-              <span class="guest-invites__console-method">AUTO</span>
-            </div>
-            <pre class="guest-invites__console-body"><code><span class="giapi-tok-url">✓ Guest access created</span>
-
-  <span class="giapi-tok-key">Guest</span>       <span class="giapi-tok-val">Dana Levi</span>
-  <span class="giapi-tok-key">Entrance</span>    <span class="giapi-tok-val">Main gate + parking</span>
-  <span class="giapi-tok-key">Check-in</span>    <span class="giapi-tok-val">Fri · 15:00</span>
-  <span class="giapi-tok-key">Check-out</span>   <span class="giapi-tok-val">Sun · 11:00</span>
-  <span class="giapi-tok-key">Status</span>      <span class="giapi-tok-val">Active · expires automatically</span></code></pre>
-            <figcaption class="guest-invites__console-caption" data-i18n="guestInvites.promo.consoleCaption" dir="ltr">From booking to access, automatically</figcaption>
-          </figure>
         </div>
       </div>
     </section><section class="section" id="tutorials" aria-labelledby="tutorials-title">
@@ -787,7 +781,7 @@
             </div>
             <h3 class="contact-option-card__title" data-i18n="contact.distributorTitle" dir="ltr">Build with us</h3>
             <p class="contact-option-card__text" data-i18n="contact.distributorText" dir="ltr">Bring secure digital access to your market through our international distributor program.</p>
-            <a href="mailto:support@wifigate.io?subject=WIFIGATE%20Distributor%20Program" class="contact-option-card__button contact-option-card__button--muted" data-i18n="contact.distributorButton" dir="ltr">Become a distributor</a>
+            <a href="https://wa.me/message/NZWNMX6V2XVHJ1" target="_blank" rel="noopener noreferrer" class="contact-option-card__button contact-option-card__button--muted" data-i18n="contact.distributorButton" dir="ltr">Become a distributor</a>
           </article>
 
           <article class="contact-option-card">
@@ -869,6 +863,12 @@ Secure digital access, without waiting for anyone to let you in.</p>
             <path d="m3 7 9 6 9-6"></path>
           </svg>
           <span dir="ltr">support@wifigate.io</span>
+        </a>
+        <a href="https://wa.me/message/NZWNMX6V2XVHJ1" target="_blank" rel="noopener noreferrer" class="site-footer__support site-footer__whatsapp">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M13.6 2.3A7.9 7.9 0 0 0 .1 7.9c0 1.4.4 2.8 1.1 4L0 16l4.2-1.1a7.9 7.9 0 0 0 3.8 1h.1a7.9 7.9 0 0 0 5.5-13.6ZM8 14.5a6.6 6.6 0 0 1-3.4-.9l-.2-.1-2.5.6.7-2.4-.2-.3A6.6 6.6 0 0 1 8 1.3a6.6 6.6 0 0 1 0 13.2Zm3.6-4.9c-.2-.1-1.2-.6-1.4-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.6-1-.6-.5-1-1.2-1.1-1.4-.1-.2 0-.3.1-.4l.3-.3c.1-.1.1-.2.2-.3.1-.1 0-.2 0-.3-.1-.1-.5-1.1-.6-1.5-.2-.4-.3-.3-.4-.3h-.4c-.1 0-.3.1-.5.2-.2.2-.7.7-.7 1.7s.7 1.9.8 2c.1.1 1.4 2.1 3.4 3 .5.2.8.3 1.1.4.5.2.9.1 1.2.1.4-.1 1.2-.5 1.3-.9.2-.5.2-.9.1-.9 0-.1-.2-.2-.4-.3Z"></path>
+              </svg>
+          <span dir="ltr">WhatsApp Business</span>
         </a>
       </div>
       <div class="site-footer__column">
