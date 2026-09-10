@@ -5,6 +5,7 @@ import vm from "node:vm";
 import { pathToFileURL } from "node:url";
 import { NICHE_CHROME } from "./niche-content.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
+import { SITE_NAVIGATION } from "./site-navigation.mjs";
 import { wifigateLinkLocales } from "./wifigate-link-locales.mjs";
 
 const repoRoot = process.cwd();
@@ -385,7 +386,6 @@ function setLanguageSelector($, options, locale, pageKey) {
   const currentOption = options.find((option) => option.code === locale) || options[0];
   const assetPrefix = buildAssetPrefix(locale, pageKey);
 
-  $("#language-button").attr({
     "aria-controls": "language-dropdown",
     "aria-haspopup": "true",
     "aria-expanded": "false",
@@ -853,8 +853,6 @@ function updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale) {
   const semanticHeroText = (bundle.action.subtitle || bundle.hero.subtitle || "WIFIGATE smart access control").trim();
   const normalizedHeroText = semanticHeroText.replace(/^wifigate[\s.:,-]*/i, "");
 
-  $(".nav__toggle").attr("aria-label", "Toggle navigation menu");
-  $("#language-button").attr("aria-label", "Select language");
   $("#hero-search-text").text(normalizedHeroText ? `WIFIGATE. ${normalizedHeroText}` : "WIFIGATE");
   $("#hero-rotator").text(bundle.hero.rotator.phrases[0]);
   $("#hero-mute-toggle").attr("aria-label", bundle.hero.media.unmute);
@@ -944,19 +942,6 @@ function splitHeroSubtitleLines(subtitle) {
 
 function applyHomepageCopy($, copy, locale) {
   const dir = isRtl(locale) ? "rtl" : "ltr";
-  const navLinks = $(".topbar-nav .nav__link");
-  const navLabels = [
-    copy.navigation.platform,
-    copy.navigation.solutions,
-    copy.navigation.automation,
-    copy.navigation.productGuide,
-    copy.navigation.contact,
-  ];
-
-  $(".nav").attr("aria-label", copy.navigation.ariaLabel);
-  $(".nav__toggle").attr("aria-label", copy.navigation.toggleLabel);
-  $("#language-button").attr("aria-label", copy.navigation.selectLanguageLabel);
-  navLabels.forEach((label, index) => setLocalizedText($, navLinks.eq(index), label, locale));
 
   setLocalizedText($, ".hero__eyebrow", copy.hero.eyebrow, locale);
   setLocalizedLines($, "#hero-title", copy.hero.titleLines, locale);
@@ -1092,7 +1077,6 @@ function rewriteHomeInternalLinks($, locale) {
 function rewriteLegalInternalLinks($, locale, pageKey) {
   const home = buildPagePath(locale, "home");
 
-  $(".nav__logo-link").attr("href", `${home}#home`);
   $("a[href='../index.html']").attr("href", home);
   $("a[href^='../index.html']").each((_, element) => {
     const href = $(element).attr("href") || "";
@@ -1113,8 +1097,6 @@ function rewriteLegalInternalLinks($, locale, pageKey) {
     }
   });
 
-  $("#language-button").attr("aria-label", "Select language");
-  $(".nav__logo-link").attr("aria-label", "Back to WIFIGATE home page");
 }
 
 function ensureTrailingNewline(source) {
@@ -1125,6 +1107,7 @@ function ensureTrailingNewline(source) {
 // `<div data-partial="NAME"></div>`. Keeping the footer here is what stops it
 // from drifting between page types.
 const partialPaths = {
+  "site-header": path.join(repoRoot, "templates", "partials", "site-header.template.html"),
   "site-footer": path.join(repoRoot, "templates", "partials", "site-footer.template.html"),
 };
 const partialCache = new Map();
@@ -1180,7 +1163,30 @@ async function readHtmlTemplate(filePath) {
   return injectPartials(source.replace(/^\uFEFF/, ""), filePath);
 }
 
-function serialize($) {
+function updateSharedHeader($, homeData, locale, pageKey) {
+  if (!$(".site-header").length) return;
+  const copy = homeData.homepageCopies[locale].navigation;
+  const home = buildPagePath(locale, "home");
+  const menu = $(".topbar-nav").empty();
+  for (const item of SITE_NAVIGATION) {
+    const link = $("<a>").addClass("nav-link nav__link")
+      .attr("href", home + "#" + item.hash);
+    if (item.key === "contact") link.addClass("nav__contact-link");
+    setLocalizedText($, link, copy[item.key], locale);
+    menu.append(link);
+  }
+  $(".nav").attr("aria-label", copy.ariaLabel);
+  $(".nav__logo-link").attr({ href: home + "#home", "aria-label": "WIFIGATE" });
+  $(".nav__toggle").attr("aria-label", copy.toggleLabel);
+  $("#language-button").attr("aria-label", copy.selectLanguageLabel);
+  setLanguageSelector($, homeData.localeOptions, locale, pageKey);
+  const prefix = buildAssetPrefix(locale, pageKey);
+  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20260911a">');
+  $("script[src*='js/navigation.js']").attr("src", prefix + "js/navigation.js?v=20260911a");
+}
+
+function serialize($, homeData, locale, pageKey = "home") {
+  updateSharedHeader($, homeData, locale, pageKey);
   const html = $.html({ decodeEntities: false }).replace(/[ \t]+(?=\r?\n|$)/g, "");
   return ensureTrailingNewline(html);
 }
@@ -1258,7 +1264,6 @@ async function buildHomePages(homeData) {
     appendScripts($, homeRuntimeScriptsToAdd, "script[src*='js/main.js']", locale, "home");
     applyDataI18nTranslations($, bundle, locale);
     updateFooterStaticUi($, bundle, locale, homeData.homepageCopies[locale]?.footer);
-    setLanguageSelector($, homeData.localeOptions, locale, "home");
     updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale);
     rewriteHomeInternalLinks($, locale);
     updateHomeWhereSection($, locale, bundle);
@@ -1274,7 +1279,7 @@ async function buildHomePages(homeData) {
     );
 
     const outputFile = buildOutputFilePath(locale, "home");
-    await writeOutputFile(outputFile, serialize($));
+    await writeOutputFile(outputFile, serialize($, homeData, locale, "home"));
 
     sitemapEntries.push({
       loc: buildPageUrl(locale, "home"),
@@ -1303,13 +1308,12 @@ async function buildLegalPages(homeData, legalCollections) {
       appendScripts($, legalRuntimeScriptsToAdd, "script[src*='js/legal-page.js']", locale, pageKey);
       applyDataI18nTranslations($, bundle, locale);
       updateFooterStaticUi($, bundle, locale, homeData.homepageCopies[locale]?.footer);
-      setLanguageSelector($, homeData.localeOptions, locale, pageKey);
       updateAccessibilityMarkup($, accessibilityBundle);
       rewriteLegalInternalLinks($, locale, pageKey);
       setLegalMeta($, locale, pageKey, homeData.localeOptions, bundle);
 
       const outputFile = buildOutputFilePath(locale, pageKey);
-      await writeOutputFile(outputFile, serialize($));
+      await writeOutputFile(outputFile, serialize($, homeData, locale, pageKey));
     }
   }
   return [];
@@ -1331,7 +1335,7 @@ async function buildUtilityPages(homeData) {
       setUtilityMeta($, locale, homeData.localeOptions, copy, pageKey);
 
       const outputFile = buildOutputFilePath(locale, pageKey);
-      await writeOutputFile(outputFile, serialize($));
+      await writeOutputFile(outputFile, serialize($, homeData, locale, pageKey));
     }
   }
 
@@ -1442,16 +1446,8 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
   const { bundle, enBundle, chrome, content, contact, footer } = ctx;
   const localeNicheContent = getNichePageContent(locale);
   const defaultNicheContent = getNichePageContent(defaultLocale);
-  const navText = (keyPath, fallback) =>
-    getNestedValue(bundle, keyPath) || getNestedValue(enBundle, keyPath) || fallback;
   const assetPrefix = buildAssetPrefix(locale, niche.key);
 
-  $(".nav__toggle").attr("aria-label", "Toggle navigation menu");
-  $("#language-button").attr("aria-label", "Select language");
-  $("#niche-nav-features").text(navText("nav.features", "Features"));
-  $("#niche-nav-where").text(navText("tabs.where", "Use Cases"));
-  $("#niche-nav-tutorials").text(navText("nav.about", "Tutorials"));
-  $("#niche-nav-contact").text(navText("nav.contact", "Contact"));
 
   $("#niche-breadcrumb-home").text(chrome.homeLabel);
   $("#niche-breadcrumb-current").text(content.label);
@@ -1528,7 +1524,6 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
 function rewriteNicheInternalLinks($, locale) {
   const home = buildPagePath(locale, "home");
 
-  $(".nav__logo-link").attr("href", `${home}#home`);
   $("a[href^='../index.html']").each((_, element) => {
     const href = $(element).attr("href") || "";
     const hashIndex = href.indexOf("#");
@@ -1536,7 +1531,6 @@ function rewriteNicheInternalLinks($, locale) {
     $(element).attr("href", `${home}${hash}`);
   });
   rewriteFooterLegalLinks($, locale);
-  $(".nav__logo-link").attr("aria-label", "Back to WIFIGATE home page");
 }
 
 function setNicheMeta($, ctx, niche, locale, localeOptions) {
@@ -1606,14 +1600,13 @@ async function buildNichePages(homeData) {
       setBodyDirection($, locale);
       rewriteStaticAssets($, locale, niche.key);
       appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, niche.key);
-      setLanguageSelector($, homeData.localeOptions, locale, niche.key);
       updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle);
       updateFooterStaticUi($, ctx.bundle, locale, homeData.homepageCopies[locale]?.footer);
       rewriteNicheInternalLinks($, locale);
       setNicheMeta($, ctx, niche, locale, homeData.localeOptions);
 
       const outputFile = buildOutputFilePath(locale, niche.key);
-      await writeOutputFile(outputFile, serialize($));
+      await writeOutputFile(outputFile, serialize($, homeData, locale, niche.key));
 
       for (const legacyKey of niche.legacyKeys || []) {
         const redirectFile = buildOutputFilePath(locale, legacyKey);
@@ -1654,8 +1647,6 @@ function getGuestInvitesStrings(homeData, locale) {
 }
 
 function updateGuestInvitesStaticUi($, strings) {
-  $(".nav__toggle").attr("aria-label", "Toggle navigation menu");
-  $("#language-button").attr("aria-label", "Select language");
   $("#js-year").text(nowDate.slice(0, 4));
   $("#giapi-copy-data").text(
     JSON.stringify({
@@ -1669,7 +1660,6 @@ function updateGuestInvitesStaticUi($, strings) {
 function rewriteGuestInvitesInternalLinks($, locale) {
   const home = buildPagePath(locale, "home");
 
-  $(".nav__logo-link").attr("href", `${home}#home`);
   $("a[href^='../index.html']").each((_, element) => {
     const href = $(element).attr("href") || "";
     const hashIndex = href.indexOf("#");
@@ -1677,7 +1667,6 @@ function rewriteGuestInvitesInternalLinks($, locale) {
     $(element).attr("href", `${home}${hash}`);
   });
   rewriteFooterLegalLinks($, locale);
-  $(".nav__logo-link").attr("aria-label", "Back to WIFIGATE home page");
 }
 
 function setGuestInvitesMeta($, locale, localeOptions, strings) {
@@ -1742,14 +1731,13 @@ async function buildGuestInvitesPages(homeData) {
     appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, guestInvitesPageKey);
     applyDataI18nTranslations($, bundle, locale);
     updateFooterStaticUi($, bundle, locale, homeData.homepageCopies[locale]?.footer);
-    setLanguageSelector($, homeData.localeOptions, locale, guestInvitesPageKey);
     updateAccessibilityMarkup($, accessibilityBundle);
     updateGuestInvitesStaticUi($, strings);
     rewriteGuestInvitesInternalLinks($, locale);
     setGuestInvitesMeta($, locale, homeData.localeOptions, strings);
 
     const outputFile = buildOutputFilePath(locale, guestInvitesPageKey);
-    await writeOutputFile(outputFile, serialize($));
+    await writeOutputFile(outputFile, serialize($, homeData, locale, guestInvitesPageKey));
 
     sitemapEntries.push({
       loc: buildPageUrl(locale, guestInvitesPageKey),

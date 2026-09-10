@@ -13,7 +13,6 @@ body.niche-page {
   --home-soft: #f4f4f2;
   --home-blue: #146bff;
   --container-width: 1280px;
-  --nav-height: 4.75rem;
   margin: 0;
   color: var(--home-ink);
   background: #ffffff;
@@ -37,92 +36,6 @@ body.niche-page {
 
 .niche-page .container {
   padding-inline: clamp(1.25rem, 4vw, 4rem);
-}
-
-/* ---------- Header ---------- */
-.niche-page .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  height: var(--nav-height);
-  border-bottom: 1px solid rgba(10, 10, 10, 0.1);
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: none;
-  backdrop-filter: blur(18px);
-}
-
-.niche-page .nav {
-  width: min(100%, 1440px);
-  height: 100%;
-  margin-inline: auto;
-  padding-inline: clamp(1.25rem, 4vw, 4rem);
-}
-
-.niche-page .nav__brand {
-  display: inline-flex;
-  align-items: center;
-}
-
-.niche-page .nav__logo {
-  width: 13rem;
-  height: auto;
-  max-height: 2.75rem;
-  margin: 0;
-  object-fit: contain;
-}
-
-.niche-page .topbar-nav {
-  gap: clamp(1.25rem, 2.4vw, 2.25rem);
-}
-
-.niche-page .nav__link {
-  color: #242424;
-  font-size: 0.84rem;
-  font-weight: 600;
-}
-
-.niche-page .nav__link::after {
-  height: 1px;
-  border-radius: 0;
-  background: var(--home-black);
-}
-
-.niche-page .nav__contact-link {
-  min-height: 2.5rem;
-  padding: 0.65rem 1rem;
-  color: #ffffff;
-  border: 1px solid var(--home-black);
-  border-radius: 4px;
-  background: var(--home-black);
-}
-
-.niche-page .nav__contact-link::after {
-  display: none;
-}
-
-.niche-page .nav__contact-link:hover,
-.niche-page .nav__contact-link:focus-visible {
-  color: #ffffff;
-  background: #292929;
-  transform: none;
-}
-
-.niche-page .language-selector__button {
-  min-height: 2.5rem;
-  border: 1px solid #d6d6d6;
-  border-radius: 4px;
-  background: #ffffff;
-  box-shadow: none;
-}
-
-.niche-page .language-selector__dropdown {
-  border: 1px solid #d6d6d6;
-  border-radius: 4px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.14);
-}
-
-.niche-page .nav__toggle {
-  border-radius: 4px;
 }
 
 /* ---------- Buttons ---------- */
@@ -659,64 +572,7 @@ html[dir="rtl"] .niche-hero__nav-icon {
 }
 
 @media (max-width: 768px) {
-  body.niche-page {
-    --nav-height: 4.25rem;
-  }
 
-  .niche-page .nav {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 0.65rem;
-  }
-
-  .niche-page .nav__brand {
-    grid-column: 1;
-    grid-row: 1;
-    justify-self: start;
-  }
-
-  .niche-page .nav__logo {
-    width: 9.25rem;
-    height: auto;
-  }
-
-  .niche-page .language-selector {
-    grid-column: 2;
-    grid-row: 1;
-    justify-self: end;
-  }
-
-  .niche-page .language-selector__button {
-    min-width: 0;
-    padding-inline: 0.65rem;
-  }
-
-  .niche-page .language-selector__dropdown {
-    right: 0;
-    left: auto;
-  }
-
-  .niche-page .language-selector__selected {
-    display: none;
-  }
-
-  .niche-page .nav__toggle {
-    grid-column: 3;
-    grid-row: 1;
-    justify-self: end;
-    margin: 0;
-  }
-
-  .niche-page .nav__links-wrapper {
-    border: 1px solid var(--home-line);
-    border-radius: 4px;
-    background: #ffffff;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.14);
-  }
-
-  .niche-page .nav__contact-link {
-    color: #ffffff;
-  }
 
   .niche-hero {
     min-height: 560px;

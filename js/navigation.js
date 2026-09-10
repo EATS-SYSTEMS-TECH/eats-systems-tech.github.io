@@ -35,8 +35,8 @@ function setupScrollSpy() {
         if (!id) return;
 
         navLinks.forEach((link) => {
-          const href = link.getAttribute("href") || "";
-          if (href === `#${id}`) {
+          const url = new URL(link.href, location.href);
+          if (url.pathname === location.pathname && url.hash === `#${id}`) {
             link.classList.add("nav__link--active");
           } else {
             link.classList.remove("nav__link--active");
@@ -98,11 +98,13 @@ function centerScrollToElement(el, smooth = true) {
 
 function setupCenteredScroll() {
   document.addEventListener("click", (event) => {
-    const anchor = event.target.closest && event.target.closest('a[href^="#"]');
+    const anchor = event.target.closest && event.target.closest('a[href]');
     if (!anchor) return;
 
-    const href = anchor.getAttribute("href");
-    if (!href || href.charAt(0) !== "#" || href === "#") return;
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || anchor.target === "_blank" || anchor.hasAttribute("download")) return;
+    const url = new URL(anchor.href, location.href);
+    if (url.origin !== location.origin || url.pathname !== location.pathname || url.search !== location.search || !url.hash) return;
+    const href = url.hash;
 
     const id = href.slice(1);
     const target = document.getElementById(id);
