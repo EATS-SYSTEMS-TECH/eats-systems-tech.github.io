@@ -1,0 +1,151 @@
+/* Shared header appearance for every content page. Base controls live in styles.css. */
+:root { --nav-height: 4.75rem; }
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  border-bottom: 1px solid rgba(10, 10, 10, 0.1);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: none;
+  backdrop-filter: blur(18px);
+}
+
+.site-header .nav {
+  width: min(100%, 1440px);
+  height: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 4rem);
+}
+
+.site-header .nav__logo {
+  width: 13rem;
+  height: auto;
+  max-height: 2.75rem;
+  object-fit: contain;
+}
+
+.site-header .nav__brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.site-header .topbar-nav {
+  gap: clamp(1.25rem, 2.4vw, 2.25rem);
+}
+
+.site-header .nav__link {
+  color: #242424;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.site-header .nav__link::after {
+  height: 1px;
+  background: #0a0a0a;
+}
+
+.site-header .nav__contact-link {
+  min-height: 2.5rem;
+  padding: 0.65rem 1rem;
+  color: #ffffff;
+  border: 1px solid #0a0a0a;
+  border-radius: 4px;
+  background: #0a0a0a;
+}
+
+.site-header .nav__contact-link::after {
+  display: none;
+}
+
+.site-header .nav__contact-link:hover,
+.site-header .nav__contact-link:focus-visible {
+  color: #ffffff;
+  background: #292929;
+}
+
+.site-header .language-selector__button {
+  min-height: 2.5rem;
+  border: 1px solid #d6d6d6;
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.site-header .language-selector__dropdown {
+  border: 1px solid #d6d6d6;
+  border-radius: 4px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.14);
+}
+
+.site-header .nav__toggle {
+  border-radius: 4px;
+}
+
+
+.site-header { font-family: "Manrope", system-ui, sans-serif; letter-spacing: 0; }
+.site-header .nav__logo { margin: 0; }
+.site-header .nav__link { white-space: nowrap; }
+.site-header .language-selector { position: relative; inset: auto; transform: none; margin: 0; }
+@media (max-width: 768px) {
+  :root { --nav-height: 4.25rem; }
+  .site-header .nav {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.65rem;
+  }
+
+  .site-header .nav__brand {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  .site-header .nav__logo {
+    width: 9.25rem;
+    height: auto;
+  }
+
+  .site-header .language-selector {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  .site-header .language-selector__button {
+    min-width: 0;
+    padding-inline: 0.65rem;
+  }
+
+  .site-header .language-selector__dropdown {
+    right: 0;
+    left: auto;
+  }
+
+  .site-header .language-selector__selected {
+    display: none;
+  }
+
+  .site-header .nav__toggle {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    margin: 0;
+  }
+
+  .site-header .nav__links-wrapper {
+    border: 1px solid #dedede;
+    border-radius: 4px;
+    background: #ffffff;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.14);
+  }
+
+  .site-header .nav__contact-link {
+    color: #ffffff;
+  }
+
+
+.site-header .nav__links-wrapper { visibility: hidden; }
+.site-header .nav__links-wrapper.is-open { visibility: visible; }
+}
+@media (max-width: 360px) { .site-header .nav__logo { width: 7.75rem; } }
