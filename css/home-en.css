@@ -450,6 +450,15 @@ html[lang="he"] body.home-en .hero__overlay {
   line-height: 1.7;
 }
 
+/* Small print qualifying a claim in the card above it. Quieter than the body,
+   but deliberately kept at a readable size and contrast rather than hidden. */
+.home-en .feature-card__note {
+  margin: 0.85rem 0 0;
+  color: #7c7c7c;
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
 .home-en .security-statement {
   padding: 7rem 0;
   color: #ffffff;
