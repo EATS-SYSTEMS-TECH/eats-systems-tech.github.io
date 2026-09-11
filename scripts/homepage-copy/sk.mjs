@@ -144,6 +144,7 @@ const copy = {
     eyebrow: "Prečo WIFIGATE",
     title: "Globálne IoT skúsenosti v každom vstupe.",
     description: "Náš tím má bohaté skúsenosti s vývojom a nasadzovaním IoT systémov po celom svete. Tieto odborné znalosti využívame, aby bol WIFIGATE bezpečný, spoľahlivý a jednoduchý na inštaláciu, správu aj používanie.",
+    points: ["Residential buildings", "Private homes", "Hotels", "Electric gates", "Parking barriers", "Roller shutters"],
   },
   contact: {
     eyebrow: "Začnite rozhovor",

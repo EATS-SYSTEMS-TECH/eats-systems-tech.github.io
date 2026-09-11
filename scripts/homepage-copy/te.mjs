@@ -144,6 +144,7 @@ const copy = {
     eyebrow: "WIFIGATE ఎందుకు",
     title: "ప్రపంచవ్యాప్త IoT అనుభవం. ప్రతి ప్రవేశద్వారానికి.",
     description: "ప్రపంచవ్యాప్తంగా IoT సిస్టమ్‌ల అభివృద్ధి, అమలులో మా టీమ్‌కు లోతైన అనుభవం ఉంది. ఆ నైపుణ్యాన్ని ఉపయోగించి WIFIGATE‌ను సురక్షితంగా, నమ్మదగినదిగా, ఇన్‌స్టాల్ చేయడం, నిర్వహించడం, వాడటం సులభంగా ఉండేలా రూపొందించాం.",
+    points: ["Residential buildings", "Private homes", "Hotels", "Electric gates", "Parking barriers", "Roller shutters"],
   },
   contact: {
     eyebrow: "మాట్లాడుకుందాం",

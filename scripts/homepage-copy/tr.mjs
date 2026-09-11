@@ -144,6 +144,7 @@
     eyebrow: "Neden WIFIGATE",
     title: "Küresel IoT deneyimi, her girişte.",
     description: "Ekibimiz, dünya genelinde IoT sistemleri geliştirme ve sahaya alma konusunda kapsamlı deneyime sahiptir. Bu uzmanlık sayesinde WIFIGATE güvenli ve güvenilir olmasının yanı sıra kolayca kurulabilir, yönetilebilir ve kullanılabilir.",
+    points: ["Residential buildings", "Private homes", "Hotels", "Electric gates", "Parking barriers", "Roller shutters"],
   },
   contact: {
     eyebrow: "Bir görüşme başlatın",

@@ -144,6 +144,7 @@ const copy = {
     eyebrow: "Bakit WIFIGATE",
     title: "Pandaigdigang karanasan sa IoT, para sa bawat pasukan.",
     description: "May malawak na karanasan ang aming koponan sa pagbuo at pag-deploy ng mga IoT system sa buong mundo. Ginagamit namin ang kadalubhasaan na iyon upang gawing ligtas, maaasahan, at madaling i-install, pamahalaan, at gamitin ang WIFIGATE.",
+    points: ["Residential buildings", "Private homes", "Hotels", "Electric gates", "Parking barriers", "Roller shutters"],
   },
   contact: {
     eyebrow: "Simulan ang pag-uusap",

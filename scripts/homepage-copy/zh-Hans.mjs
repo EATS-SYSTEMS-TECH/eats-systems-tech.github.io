@@ -144,6 +144,7 @@ const copy = {
     eyebrow: "为什么选择 WIFIGATE",
     title: "将全球 IoT 经验，融入每一个入口。",
     description: "我们的团队在全球拥有丰富的 IoT 系统开发和部署经验，并将这些经验应用于 WIFIGATE，使其安全可靠，且易于安装、管理和使用。",
+    points: ["Residential buildings", "Private homes", "Hotels", "Electric gates", "Parking barriers", "Roller shutters"],
   },
   contact: {
     eyebrow: "欢迎咨询",
