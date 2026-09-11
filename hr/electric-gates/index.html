@@ -79,7 +79,7 @@
   <link rel="stylesheet" href="../../css/accessibility.css?v=20260604c">
   <link rel="stylesheet" href="../../css/niche.css?v=20260911a">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../../js/navigation.js?v=20260405a" defer=""></script>
+  <script src="../../js/navigation.js?v=20260911a" defer=""></script>
 
   <script src="../../js/locale-redirect.js?v=20260620a" defer=""></script>
   <script src="../../js/language-selector.js?v=20260902a" defer=""></script><script src="../../js/accessibility.js?v=20260902a" defer=""></script>
@@ -125,39 +125,30 @@
     ]
   }
 ]
-  </script></head>
+  </script><link rel="stylesheet" href="../../css/site-header.css?v=20260911a"></head>
 
 <body class="niche-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="site-header" id="top">
-    <nav class="nav" aria-label="Main navigation">
-      <a href="/hr/#home" class="nav__logo-link nav__brand" aria-label="Back to WIFIGATE home page">
+    <nav class="nav" aria-label="Glavna navigacija">
+      <a href="/hr/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
         <img src="../../assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE" class="nav__logo" width="1106" height="256">
       </a>
-
-      <button class="nav__toggle" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">
+      <button class="nav__toggle" aria-label="Prikaži ili sakrij navigacijski izbornik" aria-controls="primary-navigation" aria-expanded="false">
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
       </button>
-
       <div class="nav__links-wrapper" id="primary-navigation">
-        <nav class="topbar-nav">
-          <a href="/hr/#advantages" class="nav-link nav__link" id="niche-nav-features">Značajke</a>
-          <a href="/hr/#where" class="nav-link nav__link" id="niche-nav-where">Primjene</a>
-          <a href="/hr/#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
-          <a href="/hr/#tutorials" class="nav-link nav__link" id="niche-nav-tutorials">Vodiči</a>
-          <a href="/hr/#contact" class="nav-link nav__link nav__contact-link" id="niche-nav-contact">Kontakt</a>
-        </nav>
+        <div class="topbar-nav"><a class="nav-link nav__link" href="/hr/#platform" dir="ltr">Platforma</a><a class="nav-link nav__link" href="/hr/#solutions" dir="ltr">Rješenja</a><a class="nav-link nav__link" href="/hr/#wifigate-automation" dir="ltr">WIFIGATE Automation</a><a class="nav-link nav__link" href="/hr/#product-guide" dir="ltr">Vodič za proizvod</a><a class="nav-link nav__link nav__contact-link" href="/hr/#get-in-touch" dir="ltr">Javite nam se</a></div>
       </div>
-
       <div class="language-selector">
-        <div class="language-selector__button" id="language-button" aria-label="Select language" role="button" tabindex="0" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="language-selector__button" id="language-button" aria-label="Odaberite jezik" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="language-selector__flag" id="selected-flag"><img src="../../assets/img/flags/flag-hr.svg" alt="HR" width="50" height="33"></span>
           <span class="language-selector__selected">Hrvatski</span>
-          <span class="language-selector__arrow">▾</span>
-        </div>
+          <span class="language-selector__arrow" aria-hidden="true">▾</span>
+        </button>
         <div class="language-selector__dropdown" id="language-dropdown">
           <a class="language-selector__option" href="/electric-gates/" data-lang="en">
             <span class="language-selector__flag">

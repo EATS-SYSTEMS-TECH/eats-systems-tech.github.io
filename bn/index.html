@@ -125,7 +125,7 @@
   <link rel="stylesheet" href="../css/home-en.css?v=20260910h">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
 
-  <script src="../js/navigation.js?v=20260910a" defer=""></script>
+  <script src="../js/navigation.js?v=20260911a" defer=""></script>
   <script src="../js/hero.js?v=20260410b" defer=""></script>
 
   <script src="../js/accessibility.js?v=20260902a" defer=""></script>
@@ -284,38 +284,29 @@
     ]
   }
 ]
-  </script></head>
+  </script><link rel="stylesheet" href="../css/site-header.css?v=20260911a"></head>
 
 <body class="home-en">
   <a class="skip-link" href="#main-content">প্রধান বিষয়বস্তু এড়িয়ে যান</a>
   <header class="site-header" id="top">
     <nav class="nav" aria-label="প্রধান ন্যাভিগেশন">
-      <a href="#home" class="nav__logo-link nav__brand">
+      <a href="/bn/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
         <img src="../assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE" class="nav__logo" width="1106" height="256">
       </a>
-
       <button class="nav__toggle" aria-label="ন্যাভিগেশন মেনু খুলুন বা বন্ধ করুন" aria-controls="primary-navigation" aria-expanded="false">
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
       </button>
-
       <div class="nav__links-wrapper" id="primary-navigation">
-        <nav class="topbar-nav">
-          <a href="#platform" class="nav-link nav__link" data-i18n="nav.features" dir="ltr">প্ল্যাটফর্ম</a>
-          <a href="#solutions" class="nav-link nav__link" data-i18n="tabs.where" dir="ltr">সমাধান</a>
-          <a href="#wifigate-automation" class="nav-link nav__link" dir="ltr">WIFIGATE Automation</a>
-          <a href="#product-guide" class="nav-link nav__link" data-i18n="nav.about" dir="ltr">প্রোডাক্ট গাইড</a>
-          <a href="#get-in-touch" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact" dir="ltr">যোগাযোগ করুন</a>
-        </nav>
+        <div class="topbar-nav"><a class="nav-link nav__link" href="/bn/#platform" dir="ltr">প্ল্যাটফর্ম</a><a class="nav-link nav__link" href="/bn/#solutions" dir="ltr">সমাধান</a><a class="nav-link nav__link" href="/bn/#wifigate-automation" dir="ltr">WIFIGATE Automation</a><a class="nav-link nav__link" href="/bn/#product-guide" dir="ltr">প্রোডাক্ট গাইড</a><a class="nav-link nav__link nav__contact-link" href="/bn/#get-in-touch" dir="ltr">যোগাযোগ করুন</a></div>
       </div>
-
       <div class="language-selector">
-        <div class="language-selector__button" id="language-button" aria-label="ভাষা নির্বাচন করুন" role="button" tabindex="0" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="language-selector__button" id="language-button" aria-label="ভাষা নির্বাচন করুন" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="language-selector__flag" id="selected-flag"><img src="../assets/img/flags/flag-in.svg" alt="IN" width="50" height="33"></span>
           <span class="language-selector__selected">বাংলা</span>
-          <span class="language-selector__arrow">▼</span>
-        </div>
+          <span class="language-selector__arrow" aria-hidden="true">▾</span>
+        </button>
         <div class="language-selector__dropdown" id="language-dropdown">
           <a class="language-selector__option" href="/" data-lang="en">
             <span class="language-selector__flag">
@@ -685,20 +676,14 @@
           </article>
         </div>
       </div>
-    </section><section class="security-statement" id="private-access" aria-labelledby="private-access-title">
+    </section><section class="security-statement security-statement--media" id="private-access" aria-labelledby="private-access-title">
       <div class="container security-statement__inner js-reveal">
         <p class="security-statement__eyebrow" dir="ltr">ব্যক্তিগত অ্যাক্সেস</p>
         <h2 class="security-statement__title" id="private-access-title" dir="ltr">ভবন ও ব্যক্তিগত বাড়ি সর্বসাধারণের জায়গা নয়।</h2>
         <div class="security-statement__copy">
           <p dir="ltr">স্থায়ী ইন্টারকম কোড দেওয়া বন্ধ করুন। বদলে নির্দিষ্ট সময়ের জন্য অ্যাক্সেস দিন, যাতে অননুমোদিত প্রবেশ ও চুরির ঝুঁকি কমে।</p>
-          <a class="security-statement__link" href="/bn/#home">
-            <span dir="ltr">সময়-সীমিত অতিথি অ্যাক্সেস সম্পর্কে জানুন</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M5 12h14"></path>
-              <path d="m13 6 6 6-6 6"></path>
-            </svg>
-          </a>
         </div>
+        <img class="security-statement__media-image" src="../assets/img/private-access-arrival.webp" alt="A courier follows a dotted blue route to an apartment entrance while a resident holds the WIFIGATE app showing time-limited guest access." width="1536" height="1024" loading="lazy" decoding="async">
       </div>
     </section><section class="section section--alt" id="where" data-nav-target="solutions" aria-labelledby="where-title" aria-describedby="where-subtitle">
       <div class="container" id="solutions">
@@ -711,7 +696,7 @@
         <div class="where-showcase js-reveal">
           <div class="where-grid">
             <div class="where-media">
-              <img src="../assets/img/WIFIGATE_PRODUCT.png" alt="মোবাইল অ্যাপের গেট তালিকার পাশে রাখা WIFIGATE ডিভাইস" class="where-media__image" id="where-product-image" loading="lazy" decoding="async" width="1536" height="1024">
+              <img src="../assets/img/wifigate-iphone-app-v2.webp" alt="মোবাইল অ্যাপের গেট তালিকার পাশে রাখা WIFIGATE ডিভাইস" class="where-media__image" id="where-product-image" loading="lazy" decoding="async" width="672" height="938">
             </div>
             <div class="where-copy">
               <ul class="where-list">
@@ -858,7 +843,7 @@
           </div>
         </div>
       </div>
-    </section><section class="security-statement" id="one-tap-invite" aria-labelledby="one-tap-invite-title">
+    </section><section class="security-statement security-statement--media" id="one-tap-invite" aria-labelledby="one-tap-invite-title">
       <div class="container security-statement__inner">
         <p class="security-statement__eyebrow" dir="ltr">এক ট্যাপ। দরকারি সবকিছু।</p>
         <h2 class="security-statement__title" id="one-tap-invite-title" dir="ltr">বারবার পথ বোঝাতে হবে না।
@@ -867,7 +852,7 @@
           <p dir="ltr">WIFIGATE দিয়ে এক ট্যাপে পৌঁছানোর নির্দেশনা, ঠিকানা, তলা, অ্যাপার্টমেন্ট,
 ইন্টারকমের তথ্য ও সময়-সীমিত অ্যাক্সেস শেয়ার করুন।</p>
         </div>
-        <img class="one-tap-invite__map" src="../assets/img/one-tap-invite-map.webp" alt="A dotted blue route leads from the street to a location pin at an apartment building entrance." width="1536" height="1024" loading="lazy" decoding="async">
+        <img class="security-statement__media-image" src="../assets/img/one-tap-invite-map.webp" alt="A dotted blue route leads from the street to a location pin at an apartment building entrance." width="1536" height="1024" loading="lazy" decoding="async">
       </div>
     </section><section class="section section--alt seo-faq" id="wifi-gate-faq" aria-labelledby="wifi-gate-faq-title">
       <div class="container seo-faq__layout">
@@ -911,6 +896,7 @@
         <div class="security-statement__copy">
           <p dir="ltr">বিশ্বজুড়ে IoT সিস্টেম তৈরি ও বাস্তবায়নের গভীর অভিজ্ঞতা আমাদের টিমের আছে। সেই অভিজ্ঞতা কাজে লাগিয়ে আমরা WIFIGATE-কে নিরাপদ, নির্ভরযোগ্য এবং ইনস্টল, পরিচালনা ও ব্যবহার করা সহজ করে তুলেছি।</p>
         </div>
+        <img class="security-statement__media-image" src="../assets/img/why-wifigate-global.webp" alt="The WIFIGATE device and app in front of a connected globe, surrounded by gates, parking barriers, garages, apartment buildings, hotels, and homes." width="1536" height="864" loading="lazy" decoding="async">
       </div>
     </section><section class="section section--alt" id="contact" data-nav-target="get-in-touch" aria-labelledby="contact-title" aria-describedby="contact-description">
       <div class="container" id="get-in-touch">

@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Privétoegang",
     title: "Gebouwen en particuliere woningen zijn geen openbare ruimtes.",
     description: "Deel geen permanent geldige intercomcodes meer. Deel in plaats daarvan tijdgebonden toegang om onbevoegde toegang en het risico op diefstal te beperken.",
-    cta: "Ontdek tijdgebonden gasttoegang",
   },
   solutions: {
     eyebrow: "Ontwikkeld voor elke ingang",

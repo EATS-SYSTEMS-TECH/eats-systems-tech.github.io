@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Privat tilgang",
     title: "Bygninger og private boliger er ikke offentlige rom.",
     description: "Slutt å dele permanente dørtelefonkoder. Del tidsbegrenset tilgang i stedet, slik at du reduserer uautorisert adgang og bidrar til lavere tyveririsiko.",
-    cta: "Utforsk tidsbegrenset gjestetilgang",
   },
   solutions: {
     eyebrow: "Utviklet for hver inngang",

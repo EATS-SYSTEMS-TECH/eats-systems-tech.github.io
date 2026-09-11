@@ -79,7 +79,7 @@
   <link rel="stylesheet" href="../../css/accessibility.css?v=20260604c">
   <link rel="stylesheet" href="../../css/niche.css?v=20260911a">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../../js/navigation.js?v=20260405a" defer=""></script>
+  <script src="../../js/navigation.js?v=20260911a" defer=""></script>
 
   <script src="../../js/locale-redirect.js?v=20260620a" defer=""></script>
   <script src="../../js/language-selector.js?v=20260902a" defer=""></script><script src="../../js/accessibility.js?v=20260902a" defer=""></script>
@@ -125,39 +125,30 @@
     ]
   }
 ]
-  </script></head>
+  </script><link rel="stylesheet" href="../../css/site-header.css?v=20260911a"></head>
 
 <body class="niche-page">
   <a class="skip-link" href="#main-content">Zum Hauptinhalt springen</a>
 
   <header class="site-header" id="top">
-    <nav class="nav" aria-label="Main navigation">
-      <a href="/de/#home" class="nav__logo-link nav__brand" aria-label="Back to WIFIGATE home page">
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="/de/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
         <img src="../../assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE" class="nav__logo" width="1106" height="256">
       </a>
-
-      <button class="nav__toggle" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">
+      <button class="nav__toggle" aria-label="Navigationsmenü öffnen oder schließen" aria-controls="primary-navigation" aria-expanded="false">
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
       </button>
-
       <div class="nav__links-wrapper" id="primary-navigation">
-        <nav class="topbar-nav">
-          <a href="/de/#advantages" class="nav-link nav__link" id="niche-nav-features">Funktionen</a>
-          <a href="/de/#where" class="nav-link nav__link" id="niche-nav-where">Anwendungsbereiche</a>
-          <a href="/de/#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
-          <a href="/de/#tutorials" class="nav-link nav__link" id="niche-nav-tutorials">Tutorials</a>
-          <a href="/de/#contact" class="nav-link nav__link nav__contact-link" id="niche-nav-contact">Kontakt</a>
-        </nav>
+        <div class="topbar-nav"><a class="nav-link nav__link" href="/de/#platform" dir="ltr">Plattform</a><a class="nav-link nav__link" href="/de/#solutions" dir="ltr">Lösungen</a><a class="nav-link nav__link" href="/de/#wifigate-automation" dir="ltr">WIFIGATE Automation</a><a class="nav-link nav__link" href="/de/#product-guide" dir="ltr">Produktleitfaden</a><a class="nav-link nav__link nav__contact-link" href="/de/#get-in-touch" dir="ltr">Kontakt aufnehmen</a></div>
       </div>
-
       <div class="language-selector">
-        <div class="language-selector__button" id="language-button" aria-label="Select language" role="button" tabindex="0" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="language-selector__button" id="language-button" aria-label="Sprache wählen" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="language-selector__flag" id="selected-flag"><img src="../../assets/img/flags/flag-de.svg" alt="DE" width="50" height="33"></span>
           <span class="language-selector__selected">Deutsch</span>
-          <span class="language-selector__arrow">▾</span>
-        </div>
+          <span class="language-selector__arrow" aria-hidden="true">▾</span>
+        </button>
         <div class="language-selector__dropdown" id="language-dropdown">
           <a class="language-selector__option" href="/hotels-airbnb/" data-lang="en">
             <span class="language-selector__flag">

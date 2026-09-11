@@ -79,7 +79,7 @@
   <link rel="stylesheet" href="../../css/accessibility.css?v=20260604c">
   <link rel="stylesheet" href="../../css/niche.css?v=20260911a">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../../js/navigation.js?v=20260405a" defer=""></script>
+  <script src="../../js/navigation.js?v=20260911a" defer=""></script>
 
   <script src="../../js/locale-redirect.js?v=20260620a" defer=""></script>
   <script src="../../js/language-selector.js?v=20260902a" defer=""></script><script src="../../js/accessibility.js?v=20260902a" defer=""></script>
@@ -125,39 +125,30 @@
     ]
   }
 ]
-  </script></head>
+  </script><link rel="stylesheet" href="../../css/site-header.css?v=20260911a"></head>
 
 <body class="niche-page">
   <a class="skip-link" href="#main-content">मुख्य सामग्री पर जाएँ</a>
 
   <header class="site-header" id="top">
-    <nav class="nav" aria-label="Main navigation">
-      <a href="/hi/#home" class="nav__logo-link nav__brand" aria-label="Back to WIFIGATE home page">
+    <nav class="nav" aria-label="मुख्य नेविगेशन">
+      <a href="/hi/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
         <img src="../../assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE" class="nav__logo" width="1106" height="256">
       </a>
-
-      <button class="nav__toggle" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">
+      <button class="nav__toggle" aria-label="नेविगेशन मेनू खोलें या बंद करें" aria-controls="primary-navigation" aria-expanded="false">
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
       </button>
-
       <div class="nav__links-wrapper" id="primary-navigation">
-        <nav class="topbar-nav">
-          <a href="/hi/#advantages" class="nav-link nav__link" id="niche-nav-features">विशेषताएँ</a>
-          <a href="/hi/#where" class="nav-link nav__link" id="niche-nav-where">उपयोग के क्षेत्र</a>
-          <a href="/hi/#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
-          <a href="/hi/#tutorials" class="nav-link nav__link" id="niche-nav-tutorials">ट्यूटोरियल</a>
-          <a href="/hi/#contact" class="nav-link nav__link nav__contact-link" id="niche-nav-contact">हमसे संपर्क करें</a>
-        </nav>
+        <div class="topbar-nav"><a class="nav-link nav__link" href="/hi/#platform" dir="ltr">प्लेटफॉर्म</a><a class="nav-link nav__link" href="/hi/#solutions" dir="ltr">समाधान</a><a class="nav-link nav__link" href="/hi/#wifigate-automation" dir="ltr">WIFIGATE Automation</a><a class="nav-link nav__link" href="/hi/#product-guide" dir="ltr">प्रोडक्ट गाइड</a><a class="nav-link nav__link nav__contact-link" href="/hi/#get-in-touch" dir="ltr">संपर्क करें</a></div>
       </div>
-
       <div class="language-selector">
-        <div class="language-selector__button" id="language-button" aria-label="Select language" role="button" tabindex="0" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="language-selector__button" id="language-button" aria-label="भाषा चुनें" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="language-selector__flag" id="selected-flag"><img src="../../assets/img/flags/flag-in.svg" alt="IN" width="50" height="33"></span>
           <span class="language-selector__selected">हिन्दी</span>
-          <span class="language-selector__arrow">▾</span>
-        </div>
+          <span class="language-selector__arrow" aria-hidden="true">▾</span>
+        </button>
         <div class="language-selector__dropdown" id="language-dropdown">
           <a class="language-selector__option" href="/electric-gates/" data-lang="en">
             <span class="language-selector__flag">

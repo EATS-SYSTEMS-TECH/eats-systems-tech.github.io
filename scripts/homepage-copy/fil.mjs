@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Pribadong access",
     title: "Ang mga gusali at pribadong tahanan ay hindi pampublikong espasyo.",
     description: "Huwag nang magbahagi ng mga permanenteng intercom code. Sa halip, magbigay ng access na may takdang oras upang mabawasan ang hindi awtorisadong pagpasok at panganib ng pagnanakaw.",
-    cta: "Tuklasin ang access ng bisita na may takdang oras",
   },
   solutions: {
     eyebrow: "Dinisenyo para sa bawat pasukan",

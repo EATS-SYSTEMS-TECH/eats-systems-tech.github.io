@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Accesso privato",
     title: "Gli edifici e le case private non sono spazi pubblici.",
     description: "Smetti di condividere codici permanenti del citofono. Condividi invece accessi temporanei per ridurre gli ingressi non autorizzati e il rischio di furto.",
-    cta: "Scopri l'accesso temporaneo per gli ospiti",
   },
   solutions: {
     eyebrow: "Progettato per ogni ingresso",

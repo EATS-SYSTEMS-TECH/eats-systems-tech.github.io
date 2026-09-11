@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Yksityinen kulku",
     title: "Rakennukset ja yksityiskotit eivät ole julkisia tiloja.",
     description: "Lopeta pysyvien ovipuhelinkoodien jakaminen. Jaa sen sijaan ajallisesti rajattuja kulkuoikeuksia. Näin vähennät luvatonta sisäänpääsyä ja varkausriskiä.",
-    cta: "Tutustu määräaikaiseen vieraspääsyyn",
   },
   solutions: {
     eyebrow: "Suunniteltu jokaiseen sisäänkäyntiin",

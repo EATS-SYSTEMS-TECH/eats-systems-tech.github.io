@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Acces privat",
     title: "Clădirile și casele private nu sunt spații publice.",
     description: "Nu mai partajați coduri permanente de interfon. Oferiți în schimb acces limitat în timp pentru a reduce intrările neautorizate și riscul de furt.",
-    cta: "Explorați accesul temporar pentru oaspeți",
   },
   solutions: {
     eyebrow: "Construit pentru fiecare intrare",

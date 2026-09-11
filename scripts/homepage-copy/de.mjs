@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Privater Zutritt",
     title: "Gebäude und Privathäuser sind keine öffentlichen Räume.",
     description: "Geben Sie keine dauerhaft gültigen Codes für die Türsprechanlage mehr weiter. Teilen Sie stattdessen zeitlich begrenzte Zutrittsberechtigungen, um unbefugten Zutritt und das Diebstahlrisiko zu verringern.",
-    cta: "Zeitlich begrenzten Gastzugang entdecken",
   },
   solutions: {
     eyebrow: "Für jeden Eingang entwickelt",

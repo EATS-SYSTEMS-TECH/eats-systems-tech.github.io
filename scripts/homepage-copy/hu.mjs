@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Privát hozzáférés",
     title: "Az épületek és magánházak nem nyilvános terek.",
     description: "Ne osszon meg állandó kaputelefon-kódokat. Osszon inkább időben korlátozott hozzáférést, hogy csökkenjen az illetéktelen belépés és a lopás kockázata.",
-    cta: "Ismerje meg az időkorlátozott vendéghozzáférést",
   },
   solutions: {
     eyebrow: "Minden bejárathoz tervezve",

@@ -510,21 +510,71 @@ html[lang="he"] body.home-en .hero__overlay {
   line-height: 1.75;
 }
 
-.home-en #one-tap-invite {
-  padding: 2.5rem 0;
+/* Shared look for any statement-section artwork, whatever the layout. */
+.home-en .security-statement__media-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border-radius: 0.75rem;
 }
 
-.home-en #one-tap-invite .security-statement__inner {
+/* ---------- Statement sections with a side image ----------
+   One layout for every .security-statement--media section (#private-access,
+   #one-tap-invite), so both images render at the same size. Copy stacks in
+   column 1; the image holds a fixed column 2. */
+.home-en .security-statement--media .security-statement__inner {
   grid-template-columns: minmax(0, 1fr) 17.5rem;
   gap: 0.75rem 3rem;
   align-items: center;
 }
 
-.home-en #one-tap-invite .security-statement__eyebrow,
-.home-en #one-tap-invite .security-statement__title,
-.home-en #one-tap-invite .security-statement__copy {
+.home-en .security-statement--media .security-statement__eyebrow,
+.home-en .security-statement--media .security-statement__title,
+.home-en .security-statement--media .security-statement__copy {
   grid-column: 1;
   max-width: none;
+}
+
+.home-en .security-statement--media .security-statement__media-image {
+  grid-column: 2;
+  grid-row: 1 / 4;
+}
+
+/* ---------- Closing credibility statement (#why-wifigate) ----------
+   The one centred section on the page. Its artwork is a symmetrical hero
+   composition, so it is shown large and centred under centred copy, acting
+   as a visual full stop before the contact section. */
+.home-en .security-statement--why .security-statement__inner {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: 1.15rem;
+  align-items: center;
+  text-align: center;
+}
+
+.home-en .security-statement--why .security-statement__eyebrow {
+  justify-content: center;
+}
+
+.home-en .security-statement--why .security-statement__title {
+  max-width: 26ch;
+  margin-inline: auto;
+}
+
+.home-en .security-statement--why .security-statement__copy {
+  max-width: 46rem;
+  padding-bottom: 0;
+}
+
+.home-en .security-statement--why .security-statement__media-image {
+  width: min(100%, 62rem);
+  margin-top: clamp(2rem, 4.5vw, 3.5rem);
+}
+
+/* The one-tap band stays a compact interstitial between the big sections. */
+.home-en #one-tap-invite {
+  padding: 2.5rem 0;
 }
 
 .home-en #one-tap-invite .security-statement__title {
@@ -539,14 +589,11 @@ html[lang="he"] body.home-en .hero__overlay {
   white-space: pre-line;
 }
 
-.home-en #one-tap-invite .one-tap-invite__map {
-  display: block;
-  grid-column: 2;
-  grid-row: 1 / 4;
-  width: 100%;
-  height: auto;
-  margin: 0;
-  border-radius: 0.75rem;
+@media (max-width: 900px) {
+  .home-en .security-statement--media .security-statement__inner {
+    grid-template-columns: minmax(0, 1fr) 13rem;
+    column-gap: 2rem;
+  }
 }
 
 @media (max-width: 600px) {
@@ -554,17 +601,17 @@ html[lang="he"] body.home-en .hero__overlay {
     padding: 2rem 0;
   }
 
-  .home-en #one-tap-invite .security-statement__inner {
+  .home-en .security-statement--media .security-statement__inner {
     grid-template-columns: minmax(0, 1fr);
     gap: 0.75rem;
   }
 
-  .home-en #one-tap-invite .one-tap-invite__map {
+  .home-en .security-statement--media .security-statement__media-image {
     grid-column: 1;
     grid-row: auto;
-    width: 11.25rem;
+    width: 13rem;
     max-width: 100%;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
   }
 }
 

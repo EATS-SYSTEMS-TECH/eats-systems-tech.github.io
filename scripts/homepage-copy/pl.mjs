@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Dostęp prywatny",
     title: "Budynki i domy prywatne nie są przestrzeniami publicznymi.",
     description: "Przestań udostępniać stałe kody do domofonu. Zamiast nich przyznawaj dostęp ograniczony czasowo, aby ograniczyć nieuprawnione wejścia i zmniejszyć ryzyko kradzieży.",
-    cta: "Poznaj czasowy dostęp dla gości",
   },
   solutions: {
     eyebrow: "Stworzony dla każdego wejścia",
