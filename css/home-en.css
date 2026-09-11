@@ -710,7 +710,10 @@ html[lang="he"] body.home-en #where .section__header {
   display: flex;
   padding: 1.5rem 2.25rem;
   align-items: center;
-  border-left: 1px solid var(--home-line);
+  /* Logical, not border-left: this is the divider against the image column,
+     which sits on the other side in RTL. A physical border put the line on the
+     card's outer edge in Hebrew and left the two columns undivided. */
+  border-inline-start: 1px solid var(--home-line);
 }
 
 .home-en .where-list {
@@ -1269,7 +1272,7 @@ html[lang="he"] body.home-en #where .section__header {
 
   .home-en .where-copy {
     border-top: 1px solid var(--home-line);
-    border-left: 0;
+    border-inline-start: 0;
   }
 
   .home-en .contact-options {
