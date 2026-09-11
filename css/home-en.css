@@ -706,14 +706,13 @@ html[lang="he"] body.home-en #where .section__header {
   filter: none;
 }
 
+/* No divider between the image and the use-case list: the columns are told
+   apart by the white gap alone. */
 .home-en .where-copy {
   display: flex;
   padding: 1.5rem 2.25rem;
   align-items: center;
-  /* Logical, not border-left: this is the divider against the image column,
-     which sits on the other side in RTL. A physical border put the line on the
-     card's outer edge in Hebrew and left the two columns undivided. */
-  border-inline-start: 1px solid var(--home-line);
+  border: 0;
 }
 
 .home-en .where-list {
@@ -1268,11 +1267,6 @@ html[lang="he"] body.home-en #where .section__header {
 
   .home-en .where-media {
     min-height: 32rem;
-  }
-
-  .home-en .where-copy {
-    border-top: 1px solid var(--home-line);
-    border-inline-start: 0;
   }
 
   .home-en .contact-options {
