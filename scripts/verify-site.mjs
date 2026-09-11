@@ -168,8 +168,33 @@ async function main() {
       await checkResolvable($, filePath, "script[src]", "src", "script");
 
       if (nicheKeys.includes(pageKey)) {
-        const bullets = $("#niche-benefits-list li").length;
-        if (bullets < 5) problems.push(`${rel}: only ${bullets} benefit bullets rendered`);
+        // The benefits grid is a 3x3 square: eight bullets plus one inert tile
+        // in the middle cell. Any other count turns the square into a ragged
+        // block, and the gap tile is what makes the hole deliberate.
+        const bullets = $("#niche-benefits-list li").not(".niche-benefit--gap").length;
+        if (bullets !== 8) problems.push(`${rel}: ${bullets} benefit bullets rendered, expected 8`);
+        const gaps = $("#niche-benefits-list .niche-benefit--gap").length;
+        if (gaps !== 1) problems.push(`${rel}: ${gaps} centre gap tiles, expected 1`);
+
+        // Hero lead + exactly three icon highlights carry the page now that the
+        // long overview paragraph is gone.
+        if (!$("#niche-hero-lead").text().trim()) problems.push(`${rel}: hero lead is empty`);
+        const highlights = $(".niche-highlight").length;
+        if (highlights !== 3) problems.push(`${rel}: ${highlights} highlights, expected 3`);
+        const highlightIcons = $(".niche-highlight__icon svg").length;
+        if (highlightIcons !== 3) {
+          problems.push(`${rel}: ${highlightIcons} highlight icons, expected 3`);
+        }
+        $(".niche-highlight").each((i, el) => {
+          if (!$(el).find(".niche-highlight__title").text().trim()) {
+            problems.push(`${rel}: highlight ${i + 1} has no title`);
+          }
+          if (!$(el).find(".niche-highlight__text").text().trim()) {
+            problems.push(`${rel}: highlight ${i + 1} has no text`);
+          }
+        });
+        if ($(".niche-overview").length) problems.push(`${rel}: overview section is back`);
+
         const alt = $("#niche-image").attr("alt") || "";
         if (!alt.trim()) problems.push(`${rel}: niche hero image has empty alt`);
       } else if (pageKey === "home") {

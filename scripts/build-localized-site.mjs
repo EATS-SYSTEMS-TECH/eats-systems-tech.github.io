@@ -1387,7 +1387,17 @@ function buildNicheContext(homeData, niche, locale) {
   const bundle = getBundle(homeData.translations, locale);
   const enBundle = homeData.translations[defaultLocale];
   const chrome = getNicheChrome(locale);
-  const content = getNichePageContent(locale).niches[niche.key];
+  // heroLead and highlights are authored ahead of translation. A locale that
+  // does not carry them yet falls back to the English entry, so the section
+  // renders in English rather than disappearing -- the same way NICHE_CHROME
+  // already degrades.
+  const localeContent = getNichePageContent(locale).niches[niche.key];
+  const enContent = getNichePageContent(defaultLocale).niches[niche.key];
+  const content = {
+    ...localeContent,
+    heroLead: localeContent.heroLead || enContent.heroLead,
+    highlights: localeContent.highlights?.length ? localeContent.highlights : enContent.highlights,
+  };
   const contact = bundle.contact || enBundle.contact;
   const footer = bundle.footer || enBundle.footer;
 
@@ -1415,6 +1425,27 @@ function setNicheList($, selector, items, className) {
 
 // Renders the optional three-message block above the overview. The section
 // stays hidden for any niche/locale that does not supply `highlights`.
+// Line icons for the three hero highlights on every niche page. Niche copy
+// picks one by name (`icon: "roster"`); stroke, size and colour come from
+// .niche-highlight__icon in css/niche.css, so the markup carries no styling.
+const NICHE_HIGHLIGHT_ICONS = {
+  phone: '<svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="9" height="19" rx="2"/><path d="M10.5 18.5h3"/><path d="M18 8.5a5 5 0 0 1 0 7"/><path d="M20.5 6a8.5 8.5 0 0 1 0 12"/></svg>',
+  clock: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
+  roster: '<svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><path d="M2.8 19c0-3 2.3-5 5.2-5s5.2 2 5.2 5"/><path d="M16.5 8.5h4.7M16.5 12.5h4.7M16.5 16.5h4.7"/></svg>',
+  invite: '<svg viewBox="0 0 24 24"><path d="M21.5 3 2.5 10.5l7.5 3 3 7.5L21.5 3Z"/><path d="m10 13.5 4.5-4.5"/></svg>',
+  handsfree: '<svg viewBox="0 0 24 24"><path d="M5 20.5V4.5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16"/><path d="M2.5 20.5h14"/><circle cx="12.4" cy="12.3" r=".9"/><path d="M18.5 9.5a5 5 0 0 1 0 5"/><path d="M21.3 7.5a8.5 8.5 0 0 1 0 9"/></svg>',
+  keyless: '<svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3.5"/><path d="m10.5 10.5 8 8"/><path d="m15.5 15.5-2 2"/><path d="M3 21 21 3"/></svg>',
+  history: '<svg viewBox="0 0 24 24"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3.5 4.5V10H9"/><path d="M12 8v4.5l3 1.8"/></svg>',
+  shield: '<svg viewBox="0 0 24 24"><path d="M12 2.8 4.5 6v6c0 4.4 3.1 7.9 7.5 9.2 4.4-1.3 7.5-4.8 7.5-9.2V6L12 2.8Z"/><path d="m8.8 12 2.2 2.2 4.2-4.2"/></svg>',
+  gate: '<svg viewBox="0 0 24 24"><path d="M3 20.5V6M21 20.5V6"/><path d="M2 20.5h20"/><path d="M6 20.5V9.5h12v11"/><path d="M12 9.5v11"/><path d="M6 14.5h12"/></svg>',
+  shutter: '<svg viewBox="0 0 24 24"><path d="M3 5.5h18"/><path d="M4.5 5.5v15M19.5 5.5v15"/><path d="M2.5 20.5h19"/><path d="M4.5 9.5h15M4.5 12.5h15M4.5 15.5h15"/></svg>',
+  barrier: '<svg viewBox="0 0 24 24"><path d="M5 21v-11"/><circle cx="5" cy="7.5" r="1.75"/><path d="M3 21h4"/><path d="M7 8.75 21 13"/><path d="M11.5 10.1l-.9 2.8M16 11.5l-.9 2.8"/></svg>',
+  users: '<svg viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><path d="M2.8 19.5c0-3.2 2.8-5.6 6.2-5.6s6.2 2.4 6.2 5.6"/><path d="M16.5 6.2a3.2 3.2 0 0 1 0 6.1"/><path d="M17.8 14.4c2.1.6 3.6 2.4 3.6 5.1"/></svg>',
+  calendar: '<svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17"/><path d="M8 2.8v4M16 2.8v4"/><path d="M8.5 14h3"/></svg>',
+  bolt: '<svg viewBox="0 0 24 24"><path d="M13.5 2 4.5 13.5h6L10 22l9.5-11.5h-6L13.5 2Z"/></svg>',
+  default: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="m8.5 12 2.4 2.4 4.6-4.8"/></svg>',
+};
+
 function setNicheHighlights($, highlights) {
   const section = $("#niche-highlights");
   const list = $("#niche-highlights-list");
@@ -1435,23 +1466,30 @@ function setNicheHighlights($, highlights) {
   section.removeAttr("hidden");
   entries.forEach((entry) => {
     const item = $("<article>").addClass("niche-highlight");
+    item.append(
+      $("<span>")
+        .addClass("niche-highlight__icon")
+        .attr("aria-hidden", "true")
+        .html(NICHE_HIGHLIGHT_ICONS[entry.icon] || NICHE_HIGHLIGHT_ICONS.default)
+    );
     item.append($("<h2>").addClass("niche-highlight__title").text(entry.title));
     item.append($("<p>").addClass("niche-highlight__text").text(entry.text));
     list.append(item);
   });
 }
 
-// The benefits grid is three columns wide. When a niche opts into
-// `benefitsCenterGap` and has exactly eight bullets, an inert tile is dropped
-// into the middle cell so the 3x3 grid reads as deliberately incomplete.
-function setNicheBenefits($, bullets, niche) {
+// The benefits grid is a 3x3 square: eight bullets around an inert tile in
+// the middle cell, so the square reads as deliberately incomplete. Every niche
+// carries exactly eight bullets -- verify-site.mjs enforces that -- and any
+// other count simply renders as a plain grid instead of a broken square.
+function setNicheBenefits($, bullets) {
   const list = $("#niche-benefits-list");
   if (!list.length) {
     return;
   }
 
   const items = Array.isArray(bullets) ? bullets : [];
-  const centerGap = Boolean(niche.benefitsCenterGap) && items.length === 8;
+  const centerGap = items.length === 8;
 
   list.empty();
   items.forEach((item, index) => {
@@ -1489,8 +1527,6 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
 
   $("#niche-eyebrow").text(chrome.eyebrow);
   $("#niche-title").text(content.title);
-  $("#niche-overview-label").text(content.label);
-  $("#niche-intro").text(content.paragraph);
 
   const heroLead = $("#niche-hero-lead");
   if (heroLead.length) {
@@ -1512,7 +1548,7 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
     setNicheList($, "#niche-hero-proof", (content.bullets || []).slice(0, 2), "niche-hero__proof-item");
   }
   $("#niche-hero-cta-label").text(contact.ctaButton || "Contact via WhatsApp");
-  $("#niche-hero-back").text(chrome.backLabel);
+  $("#niche-hero-benefits").text(chrome.benefitsTitle);
 
 
   $("#niche-image")
@@ -1542,7 +1578,7 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
   }
 
   $("#niche-benefits-title").text(chrome.benefitsTitle);
-  setNicheBenefits($, content.bullets, niche);
+  setNicheBenefits($, content.bullets);
   // No closing CTA section: the hero already carries the WhatsApp action and
   // the shared footer carries support + WhatsApp Business.
 

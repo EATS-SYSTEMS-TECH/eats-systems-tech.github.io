@@ -18,6 +18,27 @@ export default {
     "hotels-airbnb": {
       label: "Hôtels, Airbnb et locations saisonnières",
       title: "Accès intelligent pour hôtels, Airbnb et locations saisonnières",
+      heroLead:
+        "The guest receives a personal entry permission on their phone the moment the booking is confirmed. No key cards, no lockbox, no waiting at reception.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "calendar",
+          title: "Opens at check-in, closes at check-out",
+          text: "There is no moment when somebody has to remember to revoke access. The permission activates at the arrival time you set and expires at departure, even when nobody from the team is on site.",
+        },
+        {
+          icon: "invite",
+          title: "The booking creates the access",
+          text: "Through the WIFIGATE API your reservation system connects straight to access, so every confirmed booking issues the entry permission itself, with no manual step in between.",
+        },
+        {
+          icon: "keyless",
+          title: "No cards to issue, no lockbox to share",
+          text: "Nothing to program, nothing to hand over, no card left behind by a previous guest and no lockbox code passed along. The phone already in the guest's pocket is the only way in.",
+        },
+      ],
       paragraph:
         "WIFIGATE permet aux voyageurs de recevoir un accès numérique pratique et sécurisé directement sur leur téléphone, sans clés physiques, sans cartes et sans coordination inutile avec la réception ou le propriétaire. Grâce à la WIFIGATE API, le processus de réservation peut être relié au système d'accès : dès qu'une réservation est confirmée, le voyageur reçoit automatiquement un accès invité limité dans le temps. L'accès démarre à l'heure du check-in, prend fin automatiquement au check-out et réduit considérablement la remise de clés, le partage de codes et la gestion manuelle de chaque arrivée.",
       bullets: [
@@ -25,7 +46,6 @@ export default {
         "Automatisation complète possible grâce à la WIFIGATE API",
         "Accès temporaire calé sur les dates et horaires du séjour",
         "Moins de check-in manuel, de clés, de cartes et de codes",
-        "Convient aux hôtels, Airbnb, locations de vacances et appartements d'hôtes",
         "Gestion des autorisations pour le personnel, le ménage, la maintenance et les prestataires",
         "Une expérience d'arrivée plus fluide et plus agréable pour les voyageurs",
         "Fin d'accès automatique à l'heure du check-out",
@@ -39,6 +59,27 @@ export default {
     "roller-shutters": {
       label: "Rideaux métalliques pour commerces et boutiques",
       title: "Contrôle intelligent et plus sûr des rideaux métalliques pour commerces et boutiques",
+      heroLead:
+        "The shutter opens from a phone, and control moves to the protected inner side of the business. Fewer remotes, fewer keys and fewer exposed entry points outside.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "shutter",
+          title: "Control moves inside, out of reach",
+          text: "A switch or key box on an exterior wall is exposed to anyone walking past. When opening comes from a phone, the control point can sit on the inside of the shop.",
+        },
+        {
+          icon: "users",
+          title: "A separate permission for every employee",
+          text: "A key or remote left with a former employee keeps working. A personal permission opens on the first day and closes on the last, with no lock to change and no hardware to collect.",
+        },
+        {
+          icon: "phone",
+          title: "Open without standing at the shutter",
+          text: "A key forces you to stand right at the control point, hands full, with a poor view of the shutter. From a phone it happens at a safer distance.",
+        },
+      ],
       paragraph:
         "Dans les commerces et les boutiques, les rideaux métalliques sont souvent commandés par des télécommandes, des clés, un boîtier à clé extérieur ou des interrupteurs installés à l'extérieur du local. Ces solutions peuvent se perdre, rester entre les mains d'anciens employés, être dupliquées ou devenir un point d'accès exposé. Ouvrir ou fermer avec une clé oblige aussi à se tenir tout près du point de commande, la clé à la main, parfois sans bonne visibilité sur la zone du rideau. WIFIGATE transfère la commande vers l'application et place le contrôle d'accès du côté intérieur, mieux protégé : vous ouvrez et fermez plus confortablement, gérez les autorisations de vos employés et prestataires, et réduisez la dépendance aux clés, aux télécommandes et aux points d'accès exposés.",
       bullets: [
@@ -50,7 +91,6 @@ export default {
         "Accès temporaire possible selon l'horaire ou le besoin",
         "Convient aux boutiques, entrepôts, entrées de service et commerces",
         "Une solution intérieure, plus ordonnée et mieux protégée au quotidien",
-        "Moins besoin de remplacer serrures, codes ou télécommandes",
       ],
       seoTitle: "Rideau métallique connecté pour commerces et boutiques | WIFIGATE",
       seoDescription:
@@ -60,6 +100,27 @@ export default {
     "electric-gates": {
       label: "Portails électriques et barrières de parking",
       title: "Ouverture intelligente des portails électriques et barrières de parking",
+      heroLead:
+        "Open the gate or barrier from your phone, send a temporary permission to a guest or supplier, and let daily users through automatically. Existing remotes keep working alongside it.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "handsfree",
+          title: "Automatic opening on the daily drive in",
+          text: "Auto Open recognises that you have arrived and opens the gate for you. No hunting through the glovebox and no winding the window down in the rain.",
+        },
+        {
+          icon: "clock",
+          title: "Temporary access for a supplier or guest",
+          text: "Instead of handing over a remote and hoping it comes back, send a permission valid only for the window in which it is actually needed, after which it closes itself.",
+        },
+        {
+          icon: "gate",
+          title: "Existing remotes do not go in the bin",
+          text: "WIFIGATE joins what is already installed on the gate. Whoever prefers a remote keeps using it, and whoever prefers a phone simply opens from the app.",
+        },
+      ],
       paragraph:
         "Les portails électriques et les barrières de parking servent aux résidents, employés, visiteurs et prestataires, mais gérer les télécommandes, les codes et les appels pour ouvrir le portail devient vite pesant. WIFIGATE vous permet d'ouvrir le portail depuis le téléphone, de partager un accès permanent ou temporaire, d'utiliser l'ouverture automatique pour les utilisateurs réguliers et de programmer des événements planifiés selon vos besoins. Le système est conçu pour un fonctionnement local, sécurisé et respectueux de la vie privée, sans abonnement mensuel ni prélèvement récurrent, et vous pouvez continuer à utiliser vos télécommandes existantes en parallèle de l'application.",
       bullets: [
@@ -70,9 +131,6 @@ export default {
         "Événements planifiés pour ouvrir selon les jours et les heures",
         "Commande depuis l'application ou avec les télécommandes existantes",
         "Moins besoin de distribuer des télécommandes physiques",
-        "Convient aux parkings, immeubles, entreprises et résidences privées",
-        "Gestion pratique des utilisateurs et des autorisations",
-        "Confidentialité et sécurité grâce à un accès local, sans dépendance au cloud",
         "Historique des ouvertures pour le contrôle et la transparence",
       ],
       seoTitle: "Portail électrique et barrière de parking sans abonnement | WIFIGATE",
@@ -83,6 +141,27 @@ export default {
     "garage-doors": {
       label: "Portes de garage et parkings privés",
       title: "Ouverture intelligente des portes de garage et parkings privés",
+      heroLead:
+        "The garage door opens from your phone, and access moves from a remote to a list you control. No remote to lose, and none left with someone who no longer needs it.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "keyless",
+          title: "A lost remote stops being a problem",
+          text: "A remote that falls out of a pocket keeps opening the garage for whoever finds it, and there is no way to cancel it. A permission on a phone is removed in a moment, with no motor to replace and no remotes to re-code.",
+        },
+        {
+          icon: "users",
+          title: "Access for the household and for tradespeople",
+          text: "Everyone at home gets their own permission, and a tradesperson coming once can be given access that closes at the end of the day. Nothing left under the mat.",
+        },
+        {
+          icon: "phone",
+          title: "Your phone is already with you",
+          text: "No remote to move between cars and nothing to hunt for when somebody else is driving. What opens the door is the one thing you never leave without.",
+        },
+      ],
       paragraph:
         "Les portes de garage et les parkings privés sont généralement commandés par des télécommandes physiques, qui peuvent se perdre, rester chez des personnes qui n'ont plus besoin d'y accéder ou être copiées dans certaines situations. WIFIGATE fait passer la commande à un accès numérique depuis le téléphone : vous gérez les autorisations des membres de la famille, des employés ou des invités, et partagez un accès temporaire sans remettre de télécommande ni de code. Résultat : une expérience plus pratique, plus privée et mieux organisée, avec moins de dépendance aux dispositifs d'accès physiques.",
       bullets: [
@@ -103,6 +182,27 @@ export default {
     "private-homes": {
       label: "Maisons individuelles",
       title: "Accès intelligent et sécurisé pour les maisons individuelles",
+      heroLead:
+        "A fixed keypad code wears down, gets passed around and stays with people who no longer need it. Give each person their own permission, and a temporary one to anyone visiting once.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "shield",
+          title: "A keypad gives your code away",
+          text: "After enough years, four worn keys say exactly which digits make up the code. A permission on a phone leaves no marks on the wall.",
+        },
+        {
+          icon: "clock",
+          title: "Access for the delivery, not forever",
+          text: "A code given to a courier, a technician or a guest is still with them a year later. A temporary permission closes itself the moment the visit is over.",
+        },
+        {
+          icon: "roster",
+          title: "A list instead of guesswork",
+          text: "A shared code has no list of holders. In its place comes a list where every permission has a name, so it is clear at any moment who can get into the house.",
+        },
+      ],
       paragraph:
         "Dans une maison individuelle, digicodes, clés et télécommandes peuvent devenir un point faible. Avec le temps, l'usure ou des traces apparaissent sur les touches du digicode, les télécommandes se perdent ou passent de main en main, et le code est parfois communiqué à des livreurs, des prestataires ou des invités qui le conservent bien après en avoir eu besoin. WIFIGATE vous permet de gérer l'entrée depuis le téléphone, de partager un accès invité temporaire sans révéler de code permanent, et de révoquer facilement les autorisations sans remplacer serrures, codes ou télécommandes.",
       bullets: [
@@ -123,6 +223,27 @@ export default {
     "residential-buildings": {
       label: "Immeubles résidentiels",
       title: "Gestion d'accès intelligente pour immeubles résidentiels",
+      heroLead:
+        "A fixed code that travels between couriers, guests and service people can end up in the wrong hands. Give each person a personal, time-limited entry permission and cut unauthorised entries and the risk of theft.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "roster",
+          title: "Know who holds access, at any moment",
+          text: "A shared code has no list of holders. There is no way to tell who has it, who passed it on or when. In its place comes a current list where every permission has a name, so the picture of who can enter the building is clear at any point in time.",
+        },
+        {
+          icon: "invite",
+          title: "Arrival instructions in one tap",
+          text: "Address, floor, apartment, gate code and lobby code. You dictate that same sequence again to every guest, every courier and every tradesperson. With WIFIGATE all of it collapses into a single tap, and the visitor finds their own way to the door.",
+        },
+        {
+          icon: "handsfree",
+          title: "Hands-free entry",
+          text: "Auto Open recognises that you have arrived and opens the gate or door for you. No searching for a key and no taking out your phone, even when your hands are full of shopping, a pushchair or children.",
+        },
+      ],
       paragraph:
         "Dans les immeubles résidentiels, un code d'entrée partagé circule vite entre résidents, invités, livreurs, prestataires et intervenants. Avec le temps, il devient difficile de savoir qui détient réellement un accès à l'immeuble, et quand il faut changer le code ou récupérer les télécommandes. WIFIGATE permet aux résidents et au syndic de gérer les accès de façon plus organisée, d'accorder des autorisations invité temporaires, de réduire la dépendance à un code partagé et de garder un meilleur contrôle sur l'entrée de l'immeuble, du hall, du portail ou du parking.",
       bullets: [
@@ -143,6 +264,27 @@ export default {
     "office-buildings": {
       label: "Immeubles de bureaux",
       title: "Accès intelligent pour immeubles de bureaux",
+      heroLead:
+        "Standing permissions for staff, temporary ones for visitors and suppliers. No queue at reception, no badges to issue and no keys to collect when somebody leaves.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "users",
+          title: "Somebody joins, somebody leaves",
+          text: "Onboarding and offboarding are one action on a list, not a round of issuing a badge, collecting a badge and changing a lock. The permission opens and closes on the dates you set.",
+        },
+        {
+          icon: "invite",
+          title: "The visitor arrives already holding the entry",
+          text: "Instead of waiting at reception for somebody to come down, the visitor arrives with a permission sent to their phone, valid only for the time of the meeting.",
+        },
+        {
+          icon: "history",
+          title: "A record of entries for operations",
+          text: "Every opening carries a name and a time, so you can check afterwards who entered a floor, a store room or the car park without reconstructing it from memory.",
+        },
+      ],
       paragraph:
         "Un immeuble de bureaux doit offrir une entrée fluide aux employés, visiteurs, prestataires et équipes techniques, sans surcharger l'accueil et sans gérer manuellement clés ou badges. WIFIGATE permet d'accorder des autorisations permanentes aux employés et des autorisations temporaires aux visiteurs, de contrôler les accès depuis le téléphone et de gérer les entrées d'une manière adaptée à un environnement professionnel moderne, propre et organisé.",
       bullets: [
@@ -163,6 +305,27 @@ export default {
     "entry-doors-magnetic-locks": {
       label: "Portes d'entrée et serrures magnétiques pour entreprises",
       title: "Ouverture intelligente des portes d'entrée et serrures magnétiques en entreprise",
+      heroLead:
+        "Your business entrance opens from a phone, and permissions change without changing a code. It works with the electric or magnetic lock already fitted to the door.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "keyless",
+          title: "One code for everyone stops being a solution",
+          text: "A code that travels between staff, suppliers and customers is no longer really closing the door. A personal permission for each person removes the need to change the code every time somebody moves on.",
+        },
+        {
+          icon: "clock",
+          title: "Temporary access for a supplier or technician",
+          text: "For the cleaner who comes in the evening, the technician who comes once and the courier who needs five minutes: a permission valid for exactly that window, which then closes itself.",
+        },
+        {
+          icon: "phone",
+          title: "No complex access control system",
+          text: "No control cabinet, no management software and no card reader to mount. The existing lock stays where it is, and everything is managed from the app.",
+        },
+      ],
       paragraph:
         "Petites entreprises, cabinets, studios, entrepôts et bureaux s'appuient souvent sur un digicode, une clé ou une simple serrure magnétique. Les difficultés commencent quand le code circule entre employés, prestataires et visiteurs, ou quand il faut donner un accès temporaire sans affaiblir la sécurité. WIFIGATE vous permet de gérer la porte d'entrée depuis le téléphone, de partager des autorisations temporaires et de réduire le besoin de codes permanents, de clés physiques ou de coordination manuelle à chaque entrée.",
       bullets: [
@@ -183,6 +346,27 @@ export default {
     "sports-facilities": {
       label: "Installations sportives",
       title: "Contrôle d'accès intelligent pour installations sportives",
+      heroLead:
+        "Members, coaches and guests enter on their own permission and within opening hours. No shared key, and no code going around a WhatsApp group.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "calendar",
+          title: "Access opens with the booking",
+          text: "Whoever booked a court for a given hour gets a permission that opens then and closes at the end of it. Nobody has to wait at the gate to let them in.",
+        },
+        {
+          icon: "users",
+          title: "A member, a coach and a guest are not the same",
+          text: "Each type of user gets their own permission: a standing member, a coach who comes on set days and a one-off guest. All on one list, with no key changing hands.",
+        },
+        {
+          icon: "history",
+          title: "Know who was on site and when",
+          text: "When traffic changes through the day, a record of entries helps operations, settles questions about incidents, and confirms the site was locked at the end of the day.",
+        },
+      ],
       paragraph:
         "Installations sportives, terrains de padel, courts de tennis, salles de sport et centres d'entraînement doivent gérer les accès des abonnés, coachs, équipes et visiteurs selon les horaires d'ouverture, les réservations et les événements. WIFIGATE permet d'accorder un accès temporaire ou permanent depuis le téléphone, de réduire la dépendance à une clé ou à un code partagé, et d'améliorer l'expérience d'entrée des utilisateurs, en particulier dans les complexes où la fréquentation varie au fil de la journée.",
       bullets: [
