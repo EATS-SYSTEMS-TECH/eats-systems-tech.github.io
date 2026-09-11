@@ -144,7 +144,7 @@
     eyebrow: "Зашто WIFIGATE",
     title: "Глобално IoT искуство уграђено у сваки улаз.",
     description: "Наш тим има богато искуство у развоју и примени IoT система широм света. То знање примењујемо у WIFIGATE-у како би систем био безбедан, поуздан и једноставан за уградњу, управљање и употребу.",
-    points: ["Residential buildings", "Private homes", "Hotels", "Electric gates", "Parking barriers", "Roller shutters"],
+    points: ["Door", "Gate", "Barrier gate", "Cantilever gate", "Electromagnetic lock", "Electric roller shutter", "Lighting", "Pump"],
   },
   contact: {
     eyebrow: "Покренимо разговор",

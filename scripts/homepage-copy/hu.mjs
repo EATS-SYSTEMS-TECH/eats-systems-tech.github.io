@@ -144,7 +144,7 @@ const copy = {
     eyebrow: "Miért WIFIGATE",
     title: "Globális IoT szakértelem, minden bejáratba építve.",
     description: "Csapatunk jelentős nemzetközi tapasztalattal rendelkezik IoT-rendszerek fejlesztésében és bevezetésében. Ezt a tudást használjuk arra, hogy a WIFIGATE biztonságos, megbízható és egyszerűen telepíthető, kezelhető és használható legyen.",
-    points: ["Residential buildings", "Private homes", "Hotels", "Electric gates", "Parking barriers", "Roller shutters"],
+    points: ["Door", "Gate", "Barrier gate", "Cantilever gate", "Electromagnetic lock", "Electric roller shutter", "Lighting", "Pump"],
   },
   contact: {
     eyebrow: "Kezdjük el a beszélgetést",

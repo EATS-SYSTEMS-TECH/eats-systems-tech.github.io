@@ -87,7 +87,7 @@
 .site-header .nav__logo { margin: 0; }
 .site-header .nav__link { white-space: nowrap; }
 .site-header .language-selector { position: relative; inset: auto; transform: none; margin: 0; }
-@media (max-width: 768px) {
+@media (max-width: 1199px) {
   :root { --nav-height: 4.25rem; }
   .site-header .nav {
     display: grid;
@@ -117,9 +117,11 @@
     padding-inline: 0.65rem;
   }
 
+  /* Logical, not right/left: in RTL the selector sits by the left edge, so a
+     physical right:0 pushed the panel off-screen and grew the page width. */
   .site-header .language-selector__dropdown {
-    right: 0;
-    left: auto;
+    inset-inline-end: 0;
+    inset-inline-start: auto;
   }
 
   .site-header .language-selector__selected {
@@ -147,5 +149,50 @@
 
 .site-header .nav__links-wrapper { visibility: hidden; }
 .site-header .nav__links-wrapper.is-open { visibility: visible; }
+
+  /* styles.css only collapses the nav below 769px; these carry that
+     behaviour up to the width the desktop header actually needs. */
+  .site-header .nav__toggle {
+    display: inline-flex;
+  }
+
+  .site-header .nav__links-wrapper {
+    position: absolute;
+    inset-inline: 0;
+    top: var(--nav-height);
+    display: grid;
+    grid-template-columns: 1fr;
+    flex: none;
+    margin: 0;
+    justify-content: stretch;
+    background: #ffffff;
+    transform: translateY(-110%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 220ms ease-out, opacity 220ms ease-out;
+  }
+
+  .site-header .nav__links-wrapper.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .site-header .topbar-nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.5rem 1.25rem 0.75rem;
+  }
+
+  .site-header .nav__link {
+    padding: 0.85rem 0;
+    font-size: 0.95rem;
+  }
+
+  .site-header .nav__contact-link {
+    margin-top: 0.5rem;
+    text-align: center;
+  }
 }
 @media (max-width: 360px) { .site-header .nav__logo { width: 7.75rem; } }

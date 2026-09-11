@@ -144,7 +144,7 @@ const copy = {
     eyebrow: "Miksi WIFIGATE",
     title: "Maailmanlaajuinen IoT-kokemus jokaisen sisäänkäynnin taustalla.",
     description: "Tiimillämme on laaja kokemus IoT-järjestelmien kehittämisestä ja käyttöönotosta ympäri maailmaa. Hyödynnämme tätä osaamista, jotta WIFIGATE on turvallinen, luotettava ja helppo asentaa, hallita ja käyttää.",
-    points: ["Residential buildings", "Private homes", "Hotels", "Electric gates", "Parking barriers", "Roller shutters"],
+    points: ["Door", "Gate", "Barrier gate", "Cantilever gate", "Electromagnetic lock", "Electric roller shutter", "Lighting", "Pump"],
   },
   contact: {
     eyebrow: "Aloita keskustelu",
