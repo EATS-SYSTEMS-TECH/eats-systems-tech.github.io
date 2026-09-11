@@ -1776,6 +1776,14 @@ function rewriteGuestInvitesInternalLinks($, locale) {
   rewriteFooterLegalLinks($, locale);
 }
 
+function reorderGuestInvitesSections($) {
+  const hero = $(".wa-hero");
+  const pricing = $(".wa-pricing");
+  if (hero.length && pricing.length) {
+    hero.after(pricing);
+  }
+}
+
 function setGuestInvitesMeta($, locale, localeOptions, strings) {
   const url = buildPageUrl(locale, guestInvitesPageKey);
   const homeUrl = buildPageUrl(locale, "home");
@@ -1841,6 +1849,7 @@ async function buildGuestInvitesPages(homeData) {
     updateAccessibilityMarkup($, accessibilityBundle);
     updateGuestInvitesStaticUi($, strings);
     rewriteGuestInvitesInternalLinks($, locale);
+    reorderGuestInvitesSections($);
     setGuestInvitesMeta($, locale, homeData.localeOptions, strings);
 
     const outputFile = buildOutputFilePath(locale, guestInvitesPageKey);
