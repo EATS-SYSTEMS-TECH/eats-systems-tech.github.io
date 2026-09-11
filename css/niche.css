@@ -343,22 +343,32 @@ html[dir="rtl"] .niche-hero__nav-icon {
   gap: clamp(2rem, 4vw, 3.5rem);
   padding-top: clamp(1.75rem, 3.5vw, 2.75rem);
   border-top: 1px solid var(--home-line);
-  counter-reset: highlight;
 }
 
 .niche-highlight {
   min-width: 0;
-  counter-increment: highlight;
 }
 
-.niche-highlight::before {
-  display: block;
-  margin-bottom: 1.1rem;
-  color: #9a9a9a;
-  content: counter(highlight, decimal-leading-zero);
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 0.72rem;
-  font-weight: 600;
+.niche-highlight__icon {
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: 1.35rem;
+  place-items: center;
+  color: var(--home-blue);
+  border: 1px solid rgba(20, 107, 255, 0.24);
+  border-radius: 4px;
+  background: rgba(20, 107, 255, 0.06);
+}
+
+.niche-highlight__icon svg {
+  width: 1.55rem;
+  height: 1.55rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .niche-highlight__title {
@@ -376,40 +386,6 @@ html[dir="rtl"] .niche-hero__nav-icon {
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.75;
-}
-
-/* ---------- Overview ---------- */
-.niche-overview {
-  padding: clamp(4rem, 9vw, 7rem) 0;
-  background: #ffffff;
-}
-
-.niche-overview__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: 1.5rem 5rem;
-  align-items: start;
-  padding-top: clamp(1.75rem, 3.5vw, 2.75rem);
-  border-top: 1px solid var(--home-line);
-}
-
-.niche-overview__label {
-  margin: 0;
-  color: var(--home-black);
-  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
-  font-weight: 600;
-  line-height: 1.1;
-  text-wrap: balance;
-}
-
-.niche-overview__text {
-  margin: 0;
-  max-width: 44rem;
-  color: var(--home-muted);
-  font-size: clamp(1.02rem, 1.3vw, 1.15rem);
-  font-weight: 500;
-  line-height: 1.85;
-  white-space: pre-line;
 }
 
 /* ---------- Benefits ---------- */
@@ -450,6 +426,7 @@ html[dir="rtl"] .niche-hero__nav-icon {
   display: flex;
   min-width: 0;
   min-height: 12.5rem;
+  aspect-ratio: 1 / 1;
   margin: 0;
   padding: 3.25rem 2rem 1.9rem;
   overflow: hidden;
@@ -511,19 +488,6 @@ html[dir="rtl"] .niche-hero__nav-icon {
   content: none;
 }
 
-@media (min-width: 1025px) {
-  /* Pages without an authored gap get the same empty centre tile while all
-     real benefits remain in the document and continue around it. */
-  .niche-benefits__grid:not(:has(.niche-benefit--gap))::before {
-    min-height: 12.5rem;
-    border-inline-end: 1px solid var(--home-line);
-    border-bottom: 1px solid var(--home-line);
-    content: "";
-    grid-column: 2;
-    grid-row: 2;
-  }
-}
-
 /* Header/footer chrome: the footer skin is shared by every page type and
    lives in css/styles.css (SHARED FOOTER SKIN). Nothing to override here. */
 
@@ -539,10 +503,6 @@ html[dir="rtl"] .niche-hero__nav-icon {
 }
 
 @media (max-width: 1024px) {
-  .niche-overview__grid {
-    gap: 1.25rem 3rem;
-  }
-
   .niche-benefits__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -562,11 +522,6 @@ html[dir="rtl"] .niche-hero__nav-icon {
   .niche-highlights__grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 2.25rem;
-  }
-
-  .niche-overview__grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.15rem;
   }
 
 }

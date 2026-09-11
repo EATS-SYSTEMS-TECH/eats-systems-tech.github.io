@@ -116,7 +116,6 @@ export const NICHE_DEFINITIONS = [
     // Deliberate design touch: leave the centre tile of the 3x3 benefits grid
     // empty. Only takes effect when the niche has exactly 8 bullets, so the
     // hole lands in the middle cell.
-    benefitsCenterGap: true,
     image: {
       hero: "assets/wifigate_niche_pages/residential-buildings-app-hero.webp",
       card: "assets/wifigate_niche_pages/residential-buildings-app-card.webp",
