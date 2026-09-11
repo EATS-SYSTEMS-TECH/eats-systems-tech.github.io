@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Privatni pristup",
     title: "Zgrade i privatne kuće nisu javni prostori.",
     description: "Prestanite dijeliti trajne kodove portafona. Umjesto toga dijelite vremenski ograničen pristup kako biste smanjili broj neovlaštenih ulazaka i rizik od krađe.",
-    cta: "Istražite vremenski ograničen pristup za goste",
   },
   solutions: {
     eyebrow: "Stvoreno za svaki ulaz",

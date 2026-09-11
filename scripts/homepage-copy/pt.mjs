@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Acesso privado",
     title: "Os edifícios e as casas particulares não são espaços públicos.",
     description: "Deixe de partilhar códigos permanentes do intercomunicador. Partilhe, em vez disso, acessos temporários para reduzir as entradas não autorizadas e o risco de roubo.",
-    cta: "Explorar o acesso temporário para hóspedes",
   },
   solutions: {
     eyebrow: "Concebido para cada entrada",

@@ -79,7 +79,7 @@
   <link rel="stylesheet" href="../../css/accessibility.css?v=20260604c">
   <link rel="stylesheet" href="../../css/niche.css?v=20260911a">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../../js/navigation.js?v=20260405a" defer=""></script>
+  <script src="../../js/navigation.js?v=20260911a" defer=""></script>
 
   <script src="../../js/locale-redirect.js?v=20260620a" defer=""></script>
   <script src="../../js/language-selector.js?v=20260902a" defer=""></script><script src="../../js/accessibility.js?v=20260902a" defer=""></script>
@@ -125,39 +125,30 @@
     ]
   }
 ]
-  </script></head>
+  </script><link rel="stylesheet" href="../../css/site-header.css?v=20260911a"></head>
 
 <body class="niche-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="site-header" id="top">
-    <nav class="nav" aria-label="Main navigation">
-      <a href="/vi/#home" class="nav__logo-link nav__brand" aria-label="Back to WIFIGATE home page">
+    <nav class="nav" aria-label="Điều hướng chính">
+      <a href="/vi/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
         <img src="../../assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE" class="nav__logo" width="1106" height="256">
       </a>
-
-      <button class="nav__toggle" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">
+      <button class="nav__toggle" aria-label="Mở hoặc đóng menu điều hướng" aria-controls="primary-navigation" aria-expanded="false">
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
       </button>
-
       <div class="nav__links-wrapper" id="primary-navigation">
-        <nav class="topbar-nav">
-          <a href="/vi/#advantages" class="nav-link nav__link" id="niche-nav-features">Tính năng</a>
-          <a href="/vi/#where" class="nav-link nav__link" id="niche-nav-where">Các trường hợp sử dụng</a>
-          <a href="/vi/#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
-          <a href="/vi/#tutorials" class="nav-link nav__link" id="niche-nav-tutorials">Hướng dẫn</a>
-          <a href="/vi/#contact" class="nav-link nav__link nav__contact-link" id="niche-nav-contact">Liên hệ</a>
-        </nav>
+        <div class="topbar-nav"><a class="nav-link nav__link" href="/vi/#platform" dir="ltr">Nền tảng</a><a class="nav-link nav__link" href="/vi/#solutions" dir="ltr">Giải pháp</a><a class="nav-link nav__link" href="/vi/#wifigate-automation" dir="ltr">WIFIGATE Automation</a><a class="nav-link nav__link" href="/vi/#product-guide" dir="ltr">Hướng dẫn sản phẩm</a><a class="nav-link nav__link nav__contact-link" href="/vi/#get-in-touch" dir="ltr">Liên hệ với chúng tôi</a></div>
       </div>
-
       <div class="language-selector">
-        <div class="language-selector__button" id="language-button" aria-label="Select language" role="button" tabindex="0" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="language-selector__button" id="language-button" aria-label="Chọn ngôn ngữ" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="language-selector__flag" id="selected-flag"><img src="../../assets/img/flags/flag-vn.svg" alt="VN" width="50" height="33"></span>
           <span class="language-selector__selected">Tiếng Việt</span>
-          <span class="language-selector__arrow">▾</span>
-        </div>
+          <span class="language-selector__arrow" aria-hidden="true">▾</span>
+        </button>
         <div class="language-selector__dropdown" id="language-dropdown">
           <a class="language-selector__option" href="/sports-facilities/" data-lang="en">
             <span class="language-selector__flag">

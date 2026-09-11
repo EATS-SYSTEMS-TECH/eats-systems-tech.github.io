@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Soukromý přístup",
     title: "Budovy a soukromé domy nejsou veřejné prostory.",
     description: "Přestaňte sdílet trvalé domovní kódy. Sdílejte místo toho přístup s časovým omezením, abyste snížili neoprávněné vstupy a riziko krádeží.",
-    cta: "Prozkoumejte přístup s časovým omezením pro hosty",
   },
   solutions: {
     eyebrow: "Vytvořeno pro každý vchod",

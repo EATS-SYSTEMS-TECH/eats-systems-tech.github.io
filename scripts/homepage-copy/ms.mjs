@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Akses peribadi",
     title: "Bangunan dan rumah persendirian bukan ruang awam.",
     description: "Berhenti berkongsi kod interkom kekal. Sebaliknya, berikan akses untuk tempoh terhad bagi mengurangkan kemasukan tanpa kebenaran dan risiko kecurian.",
-    cta: "Terokai akses tetamu untuk tempoh terhad",
   },
   solutions: {
     eyebrow: "Direka untuk setiap pintu masuk",

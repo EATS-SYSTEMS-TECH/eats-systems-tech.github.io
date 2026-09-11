@@ -79,7 +79,7 @@
   <link rel="stylesheet" href="../../css/accessibility.css?v=20260604c">
   <link rel="stylesheet" href="../../css/niche.css?v=20260911a">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../../js/navigation.js?v=20260405a" defer=""></script>
+  <script src="../../js/navigation.js?v=20260911a" defer=""></script>
 
   <script src="../../js/locale-redirect.js?v=20260620a" defer=""></script>
   <script src="../../js/language-selector.js?v=20260902a" defer=""></script><script src="../../js/accessibility.js?v=20260902a" defer=""></script>
@@ -125,39 +125,30 @@
     ]
   }
 ]
-  </script></head>
+  </script><link rel="stylesheet" href="../../css/site-header.css?v=20260911a"></head>
 
 <body class="niche-page">
   <a class="skip-link" href="#main-content">주요 콘텐츠로 건너뛰기</a>
 
   <header class="site-header" id="top">
-    <nav class="nav" aria-label="Main navigation">
-      <a href="/ko/#home" class="nav__logo-link nav__brand" aria-label="Back to WIFIGATE home page">
+    <nav class="nav" aria-label="메인 내비게이션">
+      <a href="/ko/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
         <img src="../../assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE" class="nav__logo" width="1106" height="256">
       </a>
-
-      <button class="nav__toggle" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">
+      <button class="nav__toggle" aria-label="내비게이션 메뉴 열기/닫기" aria-controls="primary-navigation" aria-expanded="false">
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
       </button>
-
       <div class="nav__links-wrapper" id="primary-navigation">
-        <nav class="topbar-nav">
-          <a href="/ko/#advantages" class="nav-link nav__link" id="niche-nav-features">기능</a>
-          <a href="/ko/#where" class="nav-link nav__link" id="niche-nav-where">활용 분야</a>
-          <a href="/ko/#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
-          <a href="/ko/#tutorials" class="nav-link nav__link" id="niche-nav-tutorials">튜토리얼</a>
-          <a href="/ko/#contact" class="nav-link nav__link nav__contact-link" id="niche-nav-contact">문의하기</a>
-        </nav>
+        <div class="topbar-nav"><a class="nav-link nav__link" href="/ko/#platform" dir="ltr">플랫폼</a><a class="nav-link nav__link" href="/ko/#solutions" dir="ltr">솔루션</a><a class="nav-link nav__link" href="/ko/#wifigate-automation" dir="ltr">WIFIGATE Automation</a><a class="nav-link nav__link" href="/ko/#product-guide" dir="ltr">제품 가이드</a><a class="nav-link nav__link nav__contact-link" href="/ko/#get-in-touch" dir="ltr">문의하기</a></div>
       </div>
-
       <div class="language-selector">
-        <div class="language-selector__button" id="language-button" aria-label="Select language" role="button" tabindex="0" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="language-selector__button" id="language-button" aria-label="언어 선택" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="language-selector__flag" id="selected-flag"><img src="../../assets/img/flags/flag-kr.svg" alt="KR" width="50" height="33"></span>
           <span class="language-selector__selected">한국어</span>
-          <span class="language-selector__arrow">▾</span>
-        </div>
+          <span class="language-selector__arrow" aria-hidden="true">▾</span>
+        </button>
         <div class="language-selector__dropdown" id="language-dropdown">
           <a class="language-selector__option" href="/garage-doors/" data-lang="en">
             <span class="language-selector__flag">

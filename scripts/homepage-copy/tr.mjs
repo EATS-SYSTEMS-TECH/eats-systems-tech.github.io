@@ -65,7 +65,6 @@
     eyebrow: "Özel erişim",
     title: "Binalar ve özel evler kamusal alan değildir.",
     description: "Artık kalıcı interkom kodlarını paylaşmayın. Bunun yerine süreli erişim vererek yetkisiz girişleri ve hırsızlık riskini azaltın.",
-    cta: "Zaman sınırlı misafir erişimini keşfedin",
   },
   solutions: {
     eyebrow: "Her giriş için tasarlandı",

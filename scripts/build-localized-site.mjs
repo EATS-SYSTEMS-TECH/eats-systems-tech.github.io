@@ -386,6 +386,7 @@ function setLanguageSelector($, options, locale, pageKey) {
   const currentOption = options.find((option) => option.code === locale) || options[0];
   const assetPrefix = buildAssetPrefix(locale, pageKey);
 
+  $("#language-button").attr({
     "aria-controls": "language-dropdown",
     "aria-haspopup": "true",
     "aria-expanded": "false",
@@ -962,7 +963,6 @@ function applyHomepageCopy($, copy, locale) {
   setLocalizedText($, "#private-access .security-statement__eyebrow", copy.privateAccess.eyebrow, locale);
   setLocalizedText($, "#private-access-title", copy.privateAccess.title, locale);
   setLocalizedText($, "#private-access .security-statement__copy p", copy.privateAccess.description, locale);
-  setLocalizedText($, "#private-access .security-statement__link span", copy.privateAccess.cta, locale);
 
   setLocalizedText($, "#solutions .section__eyebrow", copy.solutions.eyebrow, locale);
   setLocalizedLines($, "#where-title", copy.solutions.titleLines, locale);
@@ -1071,7 +1071,6 @@ function rewriteFooterLegalLinks($, locale) {
 
 function rewriteHomeInternalLinks($, locale) {
   rewriteFooterLegalLinks($, locale);
-  $("#private-access .security-statement__link").attr("href", `${buildPagePath(locale, "home")}#home`);
 }
 
 function rewriteLegalInternalLinks($, locale, pageKey) {

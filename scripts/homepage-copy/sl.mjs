@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Zasebni dostop",
     title: "Stavbe in zasebne hiše niso javni prostori.",
     description: "Nehajte deliti trajne kode domofona. Namesto tega delite časovno omejen dostop, da zmanjšate nepooblaščen vstop in tveganje kraje.",
-    cta: "Raziščite časovno omejen dostop za goste",
   },
   solutions: {
     eyebrow: "Ustvarjeno za vsak vhod",

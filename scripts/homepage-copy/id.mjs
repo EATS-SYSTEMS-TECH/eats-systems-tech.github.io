@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Akses pribadi",
     title: "Bangunan dan rumah pribadi bukan ruang publik.",
     description: "Berhenti membagikan kode interkom permanen. Bagikan akses berbatas waktu untuk mengurangi akses tanpa izin dan membantu menekan risiko pencurian.",
-    cta: "Pelajari akses tamu berbatas waktu",
   },
   solutions: {
     eyebrow: "Dirancang untuk semua titik masuk",

@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Kiểm soát lối vào riêng tư",
     title: "Tòa nhà và nhà riêng không phải không gian công cộng.",
     description: "Không còn chia sẻ mã hệ thống liên lạc nội bộ cố định. Thay vào đó, hãy cấp quyền ra vào có thời hạn để giảm tình trạng xâm nhập trái phép và nguy cơ mất cắp.",
-    cta: "Khám phá quyền truy cập có thời hạn cho khách",
   },
   solutions: {
     eyebrow: "Dành cho mọi lối vào",

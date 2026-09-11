@@ -34,7 +34,7 @@
 
 
 
-  <script src="../../js/navigation.js?v=20260405a" defer=""></script>
+  <script src="../../js/navigation.js?v=20260911a" defer=""></script>
 
 
   <script src="../../js/accessibility.js?v=20260902a" defer=""></script>
@@ -68,39 +68,30 @@
     "url": "https://wifigate.io"
   }
 }
-  </script></head>
+  </script><link rel="stylesheet" href="../../css/site-header.css?v=20260911a"></head>
 
 <body class="legal-page">
   <a class="skip-link" href="#main-content">Hoppa till huvudinnehållet</a>
 
   <header class="site-header" id="top">
-    <nav class="nav legal-nav" aria-label="Terms page header">
-      <a href="/sv/#home" class="nav__logo-link nav__brand" aria-label="Back to WIFIGATE home page">
-        <img src="../../assets/img/logo.png" alt="WIFIGATE logo" class="nav__logo">
+    <nav class="nav" aria-label="Huvudnavigation">
+      <a href="/sv/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
+        <img src="../../assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE" class="nav__logo" width="1106" height="256">
       </a>
-
-      <button class="nav__toggle" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">
+      <button class="nav__toggle" aria-label="Öppna eller stäng navigeringsmenyn" aria-controls="primary-navigation" aria-expanded="false">
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
       </button>
-
       <div class="nav__links-wrapper" id="primary-navigation">
-        <nav class="topbar-nav">
-          <a href="/sv/#advantages" class="nav-link nav__link" data-i18n="nav.features" dir="ltr">Funktioner</a>
-          <a href="/sv/#where" class="nav-link nav__link" data-i18n="tabs.where" dir="ltr">Användningsområden</a>
-          <a href="/sv/#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
-          <a href="/sv/#tutorials" class="nav-link nav__link" data-i18n="nav.about" dir="ltr">Videoguider</a>
-          <a href="/sv/#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact" dir="ltr">Kontakta oss</a>
-        </nav>
+        <div class="topbar-nav"><a class="nav-link nav__link" href="/sv/#platform" dir="ltr">Plattform</a><a class="nav-link nav__link" href="/sv/#solutions" dir="ltr">Lösningar</a><a class="nav-link nav__link" href="/sv/#wifigate-automation" dir="ltr">WIFIGATE Automation</a><a class="nav-link nav__link" href="/sv/#product-guide" dir="ltr">Produktguide</a><a class="nav-link nav__link nav__contact-link" href="/sv/#get-in-touch" dir="ltr">Kontakta oss</a></div>
       </div>
-
       <div class="language-selector">
-        <div class="language-selector__button" id="language-button" aria-label="Select language" role="button" tabindex="0" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="language-selector__button" id="language-button" aria-label="Välj språk" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="language-selector__flag" id="selected-flag"><img src="../../assets/img/flags/flag-se.svg" alt="SE" width="50" height="33"></span>
           <span class="language-selector__selected">Svenska</span>
-          <span class="language-selector__arrow">▾</span>
-        </div>
+          <span class="language-selector__arrow" aria-hidden="true">▾</span>
+        </button>
         <div class="language-selector__dropdown" id="language-dropdown">
           <a class="language-selector__option" href="/terms-and-conditions/" data-lang="en">
             <span class="language-selector__flag">

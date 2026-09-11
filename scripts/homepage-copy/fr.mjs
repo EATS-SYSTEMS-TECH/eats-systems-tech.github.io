@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Accès privé",
     title: "Les immeubles et les résidences privées ne sont pas des espaces publics.",
     description: "Cessez de partager des codes d'interphone permanents. Privilégiez les accès limités dans le temps pour réduire les entrées non autorisées et le risque de vol.",
-    cta: "Découvrir les accès temporaires pour les invités",
   },
   solutions: {
     eyebrow: "Pour chaque entrée",

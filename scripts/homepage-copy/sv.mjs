@@ -65,7 +65,6 @@ const copy = {
     eyebrow: "Privat åtkomst",
     title: "Byggnader och privata hem är inte offentliga rum.",
     description: "Sluta dela permanenta porttelefonkoder. Dela i stället tidsbegränsad åtkomst för att minska obehörigt tillträde och stöldrisken.",
-    cta: "Utforska tidsbegränsad gäståtkomst",
   },
   solutions: {
     eyebrow: "Utformat för varje ingång",

@@ -65,13 +65,12 @@ const copy = {
     eyebrow: "Private access",
     title: "Buildings and private homes are not public spaces.",
     description: "Stop sharing permanent intercom codes. Share time-limited access instead to reduce unauthorized entry and help lower the risk of theft.",
-    cta: "Explore time-limited guest access",
   },
   solutions: {
     eyebrow: "Built for every entrance",
     titleLines: ["One system.", "Every way in."],
     subtitle: "From a private garage to a multi-property portfolio, manage every gate, door, barrier, and lock through one secure platform.",
-    imageAlt: "WIFIGATE device next to the mobile app gate list",
+    imageAlt: "The WIFIGATE app on a phone, listing a home gate, a workplace, and a time-limited guest pass",
   },
   automation: {
     eyebrow: "Built for hospitality",
