@@ -333,7 +333,7 @@ html[dir="rtl"] .niche-hero__nav-icon {
 
 /* ---------- Three core messages ---------- */
 .niche-highlights {
-  padding: clamp(4rem, 9vw, 7rem) 0 0;
+  padding: clamp(4rem, 9vw, 7rem) 0;
   background: #ffffff;
 }
 
@@ -342,7 +342,9 @@ html[dir="rtl"] .niche-hero__nav-icon {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(2rem, 4vw, 3.5rem);
   padding-top: clamp(1.75rem, 3.5vw, 2.75rem);
+  padding-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
   border-top: 1px solid var(--home-line);
+  border-bottom: 1px solid var(--home-line);
 }
 
 .niche-highlight {
