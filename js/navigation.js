@@ -57,7 +57,7 @@ function centerScrollToElement(el, smooth = true) {
 
   const shouldSmoothScroll = smooth && !(typeof isReducedMotionRequested === "function" && isReducedMotionRequested());
 
-  if (el.id === "advantages" || el.id === "platform") {
+  if (el.id === "advantages" || el.id === "how-it-works") {
     try {
       if ("scrollBehavior" in document.documentElement.style) {
         el.scrollIntoView({ behavior: shouldSmoothScroll ? "smooth" : "auto", block: "start", inline: "nearest" });
