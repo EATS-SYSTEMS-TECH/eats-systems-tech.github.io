@@ -684,20 +684,23 @@ html[lang="he"] body.home-en #where .section__header {
   align-items: stretch;
 }
 
+/* No inset frame and no tinted ground: the artwork fills the panel edge to
+   edge at its own scale and the panel simply crops it. */
 .home-en .where-media {
   display: grid;
   min-height: 43rem;
-  padding: 3rem;
-  place-items: center;
+  padding: 0;
   overflow: hidden;
-  background: #ececea;
+  background: #ffffff;
 }
 
 .home-en .where-media__image {
   width: 100%;
-  max-height: 36rem;
-  object-fit: contain;
-  filter: saturate(0.75) contrast(1.03);
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  object-position: center top;
+  filter: none;
 }
 
 .home-en .where-copy {
@@ -1396,7 +1399,7 @@ html[lang="he"] body.home-en #where .section__header {
 
   .home-en .where-media {
     min-height: 24rem;
-    padding: 1.5rem;
+    padding: 0;
   }
 
   .home-en .where-copy {
