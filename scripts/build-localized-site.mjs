@@ -250,7 +250,26 @@ function getBundle(collection, locale) {
 // Copy keys a locale may add on top of the English reference shape. The
 // renderer already treats these as optional (see updateHomeCopy), so the
 // validator must not reject a locale that supplies one.
-const OPTIONAL_COPY_KEYS = new Set(["footer.taglineLines", "platform.subscriptionNote", "why.pointsNote"]);
+const OPTIONAL_COPY_KEYS = new Set([
+  "footer.taglineLines",
+  "platform.subscriptionNote",
+  "why.pointsNote",
+  "automation.points.0.icon",
+  "automation.points.1.icon",
+  "automation.points.2.icon",
+]);
+
+// The homepage template ships one icon per automation point, shared by every
+// locale. A locale that rewrites a point into a different message can name a
+// replacement icon here rather than forcing the swap on all 38 locales.
+const AUTOMATION_POINT_ICONS = {
+  team: [
+    '<path d="M16 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 18.5V20"></path>',
+    '<circle cx="10" cy="8" r="3.5"></circle>',
+    '<path d="M20 20v-1.5a3.5 3.5 0 0 0-2.6-3.4"></path>',
+    '<path d="M15 5.1a3.5 3.5 0 0 1 0 5.8"></path>',
+  ].join(""),
+};
 
 function validateCopyShape(reference, candidate, pathSegments = []) {
   const keyPath = pathSegments.join(".") || "homepage copy";
@@ -1005,8 +1024,17 @@ function applyHomepageCopy($, copy, locale) {
     $(element).text(copy.automation.staySteps[index]);
   });
   $("#wifigate-automation .guest-invites__point").each((index, element) => {
-    setLocalizedText($, $(element).find(".guest-invites__point-title"), copy.automation.points[index].title, locale);
-    setLocalizedText($, $(element).find(".guest-invites__point-text"), copy.automation.points[index].text, locale);
+    const point = copy.automation.points[index];
+    setLocalizedText($, $(element).find(".guest-invites__point-title"), point.title, locale);
+    setLocalizedText($, $(element).find(".guest-invites__point-text"), point.text, locale);
+    if (point.icon) {
+      const iconMarkup = AUTOMATION_POINT_ICONS[point.icon];
+      if (!iconMarkup) {
+        throw new Error(`${locale}: automation.points.${index}.icon references unknown icon "${point.icon}"`);
+      }
+
+      $(element).find(".guest-invites__point-icon svg").html(iconMarkup);
+    }
   });
 
   setLocalizedText($, "#tutorial-videos .section__eyebrow", copy.productGuide.eyebrow, locale);
