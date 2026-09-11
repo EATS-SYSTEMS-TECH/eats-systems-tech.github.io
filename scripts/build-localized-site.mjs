@@ -1502,6 +1502,14 @@ function setNicheHighlights($, highlights) {
     );
     item.append($("<h2>").addClass("niche-highlight__title").text(entry.title));
     item.append($("<p>").addClass("niche-highlight__text").text(entry.text));
+    if (entry.ctaLabel && entry.ctaHref) {
+      item.append(
+        $("<a>")
+          .addClass("btn btn--ghost btn--small niche-highlight__cta")
+          .attr("href", entry.ctaHref)
+          .text(entry.ctaLabel)
+      );
+    }
     list.append(item);
   });
 }

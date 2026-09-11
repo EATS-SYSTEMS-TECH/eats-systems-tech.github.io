@@ -390,6 +390,10 @@ html[dir="rtl"] .niche-hero__nav-icon {
   line-height: 1.75;
 }
 
+.niche-highlight__cta {
+  margin-top: 1.35rem;
+}
+
 /* ---------- Benefits ---------- */
 .niche-section {
   padding: clamp(4rem, 9vw, 8rem) 0;
