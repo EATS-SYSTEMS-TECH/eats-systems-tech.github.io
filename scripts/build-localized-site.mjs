@@ -1043,6 +1043,7 @@ function reorderHomeSections($) {
     "one-tap-invite",
     "wifi-gate-faq",
     "why-wifigate",
+    "system-overview",
     "contact",
   ];
 
