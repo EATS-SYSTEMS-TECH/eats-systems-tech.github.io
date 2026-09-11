@@ -128,7 +128,7 @@ export default {
     },
     "residential-buildings": {
       label: "בנייני מגורים",
-      title: "הפסיקו לשתף את קוד האינטרקום",
+      title: "בנייני מגורים לא נועדו להיות ציבוריים!",
       heroLead:
         "קוד קבוע שעובר בין שליחים, אורחים ואנשי שירות עלול להישאר בידיים הלא נכונות. העניקו הרשאת כניסה אישית ומוגבלת בזמן, וצמצמו כניסות לא מורשות ואת הסיכון לגניבות.",
       // Each highlight must stand alone: the hero lead states the problem, the
