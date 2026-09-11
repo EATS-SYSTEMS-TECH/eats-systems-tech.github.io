@@ -73,11 +73,12 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Day+One&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../../css/styles.css?v=20260908d">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20260604c">
-  <link rel="stylesheet" href="../../css/automation.css?v=20260830a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20260911a">
+  <link rel="stylesheet" href="../../css/automation.css?v=20260912b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20260911a" defer=""></script>
 
@@ -129,7 +130,7 @@
 ]
   </script><link rel="stylesheet" href="../../css/site-header.css?v=20260911b"></head>
 
-<body class="wa-page">
+<body class="niche-page wa-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="site-header" id="top">
@@ -392,25 +393,131 @@
 
   <main class="wa-main" id="main-content">
     <!-- ============ HERO ============ -->
-    <section class="wa-hero" aria-labelledby="wa-hero-title">
-      <div class="container wa-hero__grid">
-        <div class="wa-hero__copy">
-          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.hero.eyebrow">WIFIGATE Automation</span>
-          <h1 class="wa-hero__title" id="wa-hero-title" data-i18n="guestInvites.marketing.hero.title">Guest access that
-            takes care of itself</h1>
-          <p class="wa-hero__lead" data-i18n="guestInvites.marketing.hero.lead">The moment a booking is confirmed,
-            WIFIGATE creates secure, time-limited access to your gate, door or garage, and it ends on its own at
-            checkout. No keys to hand over, no codes to chase, no one waiting at the entrance.</p>
-          <div class="wa-hero__actions">
+    <section class="niche-hero wa-hero" aria-labelledby="wa-hero-title">
+      <div class="niche-hero__media wa-hero__media">
+        <img src="../../assets/wifigate_niche_pages/hotels-airbnb-v2-app-hero.webp" width="1280" height="720" alt="" class="niche-hero__bg" loading="eager" fetchpriority="high" decoding="async">
+        <div class="niche-hero__overlay"></div>
+      </div>
+
+      <div class="niche-hero__content container wa-hero__grid">
+        <div class="niche-hero__topbar">
+          <nav class="niche-breadcrumb" aria-label="Breadcrumb">
+            <ol class="niche-breadcrumb__list">
+              <li class="niche-breadcrumb__item">
+                <a class="niche-breadcrumb__link" href="/sk/#home" data-i18n="nav.home" dir="ltr">Domov</a>
+              </li>
+              <li class="niche-breadcrumb__item" aria-current="page">WIFIGATE Automation</li>
+            </ol>
+          </nav>
+        </div>
+
+        <div class="niche-hero__text wa-hero__copy">
+          <p class="niche-hero__eyebrow" data-i18n="guestInvites.marketing.hero.eyebrow">WIFIGATE Automation</p>
+          <h1 class="niche-hero__title wa-hero__title" id="wa-hero-title" data-i18n="guestInvites.marketing.hero.title">Guest access that takes care of itself</h1>
+          <p class="niche-hero__lead wa-hero__lead" data-i18n="guestInvites.marketing.hero.lead">The moment a booking
+            is confirmed, WIFIGATE creates secure, time-limited access to your gate, door or garage, and it ends on
+            its own at checkout. No keys to hand over, no codes to chase, no one waiting at the entrance.</p>
+          <div class="niche-hero__actions wa-hero__actions">
             <a class="btn btn--primary btn--hero" href="/sk/#contact" data-i18n="guestInvites.marketing.hero.ctaPrimary">Talk to us</a>
-            <a class="btn btn--ghost btn--hero" href="#wa-how" data-i18n="guestInvites.marketing.hero.ctaSecondary">See how it works</a>
+            <a class="btn btn--ghost btn--hero" href="#wa-pricing" data-i18n="guestInvites.marketing.pricing.eyebrow">Pricing</a>
           </div>
-          <p class="wa-hero__note" data-i18n="guestInvites.marketing.hero.note">For hotels, short-term rentals,
-            guesthouses and rental parking.</p>
+          <ul class="niche-hero__proof">
+            <li class="niche-hero__proof-item" data-i18n="guestInvites.marketing.hero.note">For hotels, short-term
+              rentals, guesthouses and rental parking.</li>
+          </ul>
         </div>
-        <div class="wa-hero__media">
-          <img src="../../assets/img/wifigate_homepage.webp" width="1280" height="960" alt="The WIFIGATE device beside the mobile app showing a guest access invitation" loading="eager" decoding="async">
+      </div>
+    </section><section class="section wa-pricing" id="wa-pricing" aria-labelledby="wa-pricing-title">
+      <div class="container">
+        <div class="wa-head">
+          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.pricing.eyebrow">Pricing</span>
+          <h2 class="wa-h2" id="wa-pricing-title" data-i18n="guestInvites.marketing.pricing.title">Simple plans for the
+            WIFIGATE Automation add-on</h2>
+          <p class="wa-lead" data-i18n="guestInvites.marketing.pricing.subtitle">Pay only for the automation. The
+            WIFIGATE device itself never has a subscription.</p>
         </div>
+        <div class="wa-pricing__grid">
+          <article class="wa-plan">
+            <h3 class="wa-plan__name">Starter</h3>
+            <div class="wa-plan__price"><span class="wa-plan__amount">₪29</span><span class="wa-plan__per" data-i18n="guestInvites.marketing.pricing.per">/ month</span></div>
+            <p class="wa-plan__desc" data-i18n="guestInvites.marketing.pricing.starterDesc">For a single property or
+              entrance.</p>
+            <ul class="wa-plan__features">
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m5 12 5 5L20 7"></path>
+                </svg><span data-i18n="guestInvites.marketing.pricing.starterF1">1 system</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m5 12 5 5L20 7"></path>
+                </svg><span data-i18n="guestInvites.marketing.pricing.starterF2">Up to 1,000 guest invitations /
+                  month</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m5 12 5 5L20 7"></path>
+                </svg><span data-i18n="guestInvites.marketing.pricing.starterF3">Automatic time-limited access</span>
+              </li>
+            </ul>
+            <div class="wa-plan__cta"><a class="btn btn--ghost" href="/sk/#contact" data-i18n="guestInvites.marketing.pricing.planCta">Talk to us</a></div>
+          </article>
+
+          <article class="wa-plan">
+            <h3 class="wa-plan__name">Pro</h3>
+            <div class="wa-plan__price"><span class="wa-plan__amount">₪99</span><span class="wa-plan__per" data-i18n="guestInvites.marketing.pricing.per">/ month</span></div>
+            <p class="wa-plan__desc" data-i18n="guestInvites.marketing.pricing.proDesc">For a small management
+              company.</p>
+            <ul class="wa-plan__features">
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m5 12 5 5L20 7"></path>
+                </svg><span data-i18n="guestInvites.marketing.pricing.proF1">Up to 5 systems</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m5 12 5 5L20 7"></path>
+                </svg><span data-i18n="guestInvites.marketing.pricing.proF2">1,000 invitations per system</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m5 12 5 5L20 7"></path>
+                </svg><span data-i18n="guestInvites.marketing.pricing.proF3">Priority email support</span></li>
+            </ul>
+            <div class="wa-plan__cta"><a class="btn btn--ghost" href="/sk/#contact" data-i18n="guestInvites.marketing.pricing.planCta">Talk to us</a></div>
+          </article>
+
+          <article class="wa-plan wa-plan--featured">
+            <span class="wa-plan__badge" data-i18n="guestInvites.marketing.pricing.hotelBadge">Most popular</span>
+            <h3 class="wa-plan__name">Hotel</h3>
+            <div class="wa-plan__price"><span class="wa-plan__amount">₪299</span><span class="wa-plan__per" data-i18n="guestInvites.marketing.pricing.per">/ month</span></div>
+            <p class="wa-plan__desc" data-i18n="guestInvites.marketing.pricing.hotelDesc">For a hotel or a whole
+              complex.</p>
+            <ul class="wa-plan__features">
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m5 12 5 5L20 7"></path>
+                </svg><span data-i18n="guestInvites.marketing.pricing.hotelF1">Up to 20 systems</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m5 12 5 5L20 7"></path>
+                </svg><span data-i18n="guestInvites.marketing.pricing.hotelF2">Centralized reporting</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m5 12 5 5L20 7"></path>
+                </svg><span data-i18n="guestInvites.marketing.pricing.hotelF3">Preferred support</span></li>
+            </ul>
+            <div class="wa-plan__cta"><a class="btn btn--primary" href="/sk/#contact" data-i18n="guestInvites.marketing.pricing.planCta">Talk to us</a></div>
+          </article>
+
+          <article class="wa-plan">
+            <h3 class="wa-plan__name">Enterprise</h3>
+            <div class="wa-plan__price"><span class="wa-plan__amount" data-i18n="guestInvites.marketing.pricing.enterpriseAmount">Custom</span></div>
+            <p class="wa-plan__desc" data-i18n="guestInvites.marketing.pricing.enterpriseDesc">For PMS, channel managers
+              and large portfolios.</p>
+            <ul class="wa-plan__features">
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m5 12 5 5L20 7"></path>
+                </svg><span data-i18n="guestInvites.marketing.pricing.enterpriseF1">Volume pricing</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m5 12 5 5L20 7"></path>
+                </svg><span data-i18n="guestInvites.marketing.pricing.enterpriseF2">SLA &amp; onboarding</span></li>
+              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m5 12 5 5L20 7"></path>
+                </svg><span data-i18n="guestInvites.marketing.pricing.enterpriseF3">Custom integration</span></li>
+            </ul>
+            <div class="wa-plan__cta"><a class="btn btn--ghost" href="/sk/#contact" data-i18n="guestInvites.marketing.pricing.planCta">Talk to us</a></div>
+          </article>
+        </div>
+        <p class="wa-pricing__note" data-i18n="guestInvites.marketing.pricing.note">Launch pricing for the WIFIGATE
+          Automation add-on, billed monthly. Extra systems and annual plans are available, ask us for details.</p>
       </div>
     </section>
 
@@ -541,99 +648,7 @@
     </section>
 
     <!-- ============ PRICING ============ -->
-    <section class="section wa-pricing" id="wa-pricing" aria-labelledby="wa-pricing-title">
-      <div class="container">
-        <div class="wa-head">
-          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.pricing.eyebrow">Pricing</span>
-          <h2 class="wa-h2" id="wa-pricing-title" data-i18n="guestInvites.marketing.pricing.title">Simple plans for the
-            WIFIGATE Automation add-on</h2>
-          <p class="wa-lead" data-i18n="guestInvites.marketing.pricing.subtitle">Pay only for the automation. The
-            WIFIGATE device itself never has a subscription.</p>
-        </div>
-        <div class="wa-pricing__grid">
-          <article class="wa-plan">
-            <h3 class="wa-plan__name">Starter</h3>
-            <div class="wa-plan__price"><span class="wa-plan__amount">₪29</span><span class="wa-plan__per" data-i18n="guestInvites.marketing.pricing.per">/ month</span></div>
-            <p class="wa-plan__desc" data-i18n="guestInvites.marketing.pricing.starterDesc">For a single property or
-              entrance.</p>
-            <ul class="wa-plan__features">
-              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg><span data-i18n="guestInvites.marketing.pricing.starterF1">1 system</span></li>
-              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg><span data-i18n="guestInvites.marketing.pricing.starterF2">Up to 1,000 guest invitations /
-                  month</span></li>
-              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg><span data-i18n="guestInvites.marketing.pricing.starterF3">Automatic time-limited access</span>
-              </li>
-            </ul>
-            <div class="wa-plan__cta"><a class="btn btn--ghost" href="/sk/#contact" data-i18n="guestInvites.marketing.pricing.planCta">Talk to us</a></div>
-          </article>
 
-          <article class="wa-plan">
-            <h3 class="wa-plan__name">Pro</h3>
-            <div class="wa-plan__price"><span class="wa-plan__amount">₪99</span><span class="wa-plan__per" data-i18n="guestInvites.marketing.pricing.per">/ month</span></div>
-            <p class="wa-plan__desc" data-i18n="guestInvites.marketing.pricing.proDesc">For a small management
-              company.</p>
-            <ul class="wa-plan__features">
-              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg><span data-i18n="guestInvites.marketing.pricing.proF1">Up to 5 systems</span></li>
-              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg><span data-i18n="guestInvites.marketing.pricing.proF2">1,000 invitations per system</span></li>
-              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg><span data-i18n="guestInvites.marketing.pricing.proF3">Priority email support</span></li>
-            </ul>
-            <div class="wa-plan__cta"><a class="btn btn--ghost" href="/sk/#contact" data-i18n="guestInvites.marketing.pricing.planCta">Talk to us</a></div>
-          </article>
-
-          <article class="wa-plan wa-plan--featured">
-            <span class="wa-plan__badge" data-i18n="guestInvites.marketing.pricing.hotelBadge">Most popular</span>
-            <h3 class="wa-plan__name">Hotel</h3>
-            <div class="wa-plan__price"><span class="wa-plan__amount">₪299</span><span class="wa-plan__per" data-i18n="guestInvites.marketing.pricing.per">/ month</span></div>
-            <p class="wa-plan__desc" data-i18n="guestInvites.marketing.pricing.hotelDesc">For a hotel or a whole
-              complex.</p>
-            <ul class="wa-plan__features">
-              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg><span data-i18n="guestInvites.marketing.pricing.hotelF1">Up to 20 systems</span></li>
-              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg><span data-i18n="guestInvites.marketing.pricing.hotelF2">Centralized reporting</span></li>
-              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg><span data-i18n="guestInvites.marketing.pricing.hotelF3">Preferred support</span></li>
-            </ul>
-            <div class="wa-plan__cta"><a class="btn btn--primary" href="/sk/#contact" data-i18n="guestInvites.marketing.pricing.planCta">Talk to us</a></div>
-          </article>
-
-          <article class="wa-plan">
-            <h3 class="wa-plan__name">Enterprise</h3>
-            <div class="wa-plan__price"><span class="wa-plan__amount" data-i18n="guestInvites.marketing.pricing.enterpriseAmount">Custom</span></div>
-            <p class="wa-plan__desc" data-i18n="guestInvites.marketing.pricing.enterpriseDesc">For PMS, channel managers
-              and large portfolios.</p>
-            <ul class="wa-plan__features">
-              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg><span data-i18n="guestInvites.marketing.pricing.enterpriseF1">Volume pricing</span></li>
-              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg><span data-i18n="guestInvites.marketing.pricing.enterpriseF2">SLA &amp; onboarding</span></li>
-              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg><span data-i18n="guestInvites.marketing.pricing.enterpriseF3">Custom integration</span></li>
-            </ul>
-            <div class="wa-plan__cta"><a class="btn btn--ghost" href="/sk/#contact" data-i18n="guestInvites.marketing.pricing.planCta">Talk to us</a></div>
-          </article>
-        </div>
-        <p class="wa-pricing__note" data-i18n="guestInvites.marketing.pricing.note">Launch pricing for the WIFIGATE
-          Automation add-on, billed monthly. Extra systems and annual plans are available, ask us for details.</p>
-      </div>
-    </section>
 
     <!-- ============ FINAL CTA ============ -->
     <section class="section wa-cta" aria-labelledby="wa-cta-title">
