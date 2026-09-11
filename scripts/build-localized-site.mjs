@@ -250,7 +250,7 @@ function getBundle(collection, locale) {
 // Copy keys a locale may add on top of the English reference shape. The
 // renderer already treats these as optional (see updateHomeCopy), so the
 // validator must not reject a locale that supplies one.
-const OPTIONAL_COPY_KEYS = new Set(["footer.taglineLines"]);
+const OPTIONAL_COPY_KEYS = new Set(["footer.taglineLines", "platform.subscriptionNote"]);
 
 function validateCopyShape(reference, candidate, pathSegments = []) {
   const keyPath = pathSegments.join(".") || "homepage copy";
@@ -959,6 +959,19 @@ function applyHomepageCopy($, copy, locale) {
     setLocalizedText($, $(element).find(".feature-card__title"), copy.platform.features[index].title, locale);
     setLocalizedText($, $(element).find(".feature-card__text"), copy.platform.features[index].text, locale);
   });
+
+  // Optional small print under the no-subscription card. Locales that do not
+  // supply it keep the exception inline in the card text instead, so the
+  // qualification is never dropped.
+  const subscriptionNote = $("#subscription-note");
+  if (subscriptionNote.length) {
+    if (copy.platform.subscriptionNote) {
+      subscriptionNote.removeAttr("hidden");
+      setLocalizedText($, subscriptionNote, copy.platform.subscriptionNote, locale);
+    } else {
+      subscriptionNote.remove();
+    }
+  }
 
   setLocalizedText($, "#private-access .security-statement__eyebrow", copy.privateAccess.eyebrow, locale);
   setLocalizedText($, "#private-access-title", copy.privateAccess.title, locale);
