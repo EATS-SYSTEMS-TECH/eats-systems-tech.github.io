@@ -262,6 +262,47 @@ async function main() {
     }
   }
 
+  // Nav + localised section copy. Both guard the same failure mode: the build
+  // addresses homepage sections by id, and cheerio silently does nothing when a
+  // selector stops matching, so renaming a section id can break anchors or drop
+  // a locale's copy without failing the build.
+  const rtlScript = /[֐-׿؀-ۿ]/;
+  for (const locale of localeOptions) {
+    const file = pageFile(locale, "home");
+    let html;
+    try {
+      html = await fs.readFile(file, "utf8");
+    } catch {
+      continue; // Already reported above.
+    }
+    const $ = cheerio.load(html);
+
+    // 1. Every in-page nav link must land on an element that exists.
+    $(".topbar-nav .nav__link").each((_, el) => {
+      const href = $(el).attr("href") || "";
+      const hashIndex = href.indexOf("#");
+      if (hashIndex === -1) return;
+      const id = href.slice(hashIndex + 1);
+      if (!id || !/^[A-Za-z][\w-]*$/.test(id)) return;
+      if (!$(`#${id}`).length) {
+        problems.push(`${file}: nav link "${$(el).text().trim()}" points at #${id}, which does not exist`);
+      }
+    });
+
+    // 2. In an RTL locale, a section heading still in Latin script means the
+    //    build wrote the template's English default instead of the translation.
+    if (rtlLocales.has(locale)) {
+      $("#main-content .section__eyebrow, #main-content .guest-invites__eyebrow").each((_, el) => {
+        const text = $(el).text().trim();
+        if (!text || rtlScript.test(text)) return;
+        // Brand names legitimately stay in Latin script.
+        if (/^(WIFIGATE|WiFi Gate)[\w\s]*$/i.test(text)) return;
+        const section = $(el).closest("section").attr("id") || "?";
+        problems.push(`${locale}: section#${section} eyebrow is untranslated ("${text}")`);
+      });
+    }
+  }
+
   // Footer: every page type in a locale must render the exact same footer.
   // It comes from templates/partials/site-footer.template.html, so any
   // difference here means a template stopped using the shared partial or a

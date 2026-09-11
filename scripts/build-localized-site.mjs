@@ -952,10 +952,10 @@ function applyHomepageCopy($, copy, locale) {
   $(".hero__proof").attr("aria-label", copy.hero.proofLabel).attr("dir", dir);
   $(".hero__proof li").each((index, element) => $(element).text(copy.hero.proof[index]));
 
-  setLocalizedText($, "#platform .section__eyebrow", copy.platform.eyebrow, locale);
+  setLocalizedText($, "#how-it-works .section__eyebrow", copy.platform.eyebrow, locale);
   setLocalizedText($, "#features-title", copy.platform.title, locale);
-  setLocalizedText($, "#platform .section__subtitle", copy.platform.subtitle, locale);
-  $("#platform .feature-card").each((index, element) => {
+  setLocalizedText($, "#how-it-works .section__subtitle", copy.platform.subtitle, locale);
+  $("#how-it-works .feature-card").each((index, element) => {
     setLocalizedText($, $(element).find(".feature-card__title"), copy.platform.features[index].title, locale);
     setLocalizedText($, $(element).find(".feature-card__text"), copy.platform.features[index].text, locale);
   });
@@ -964,7 +964,7 @@ function applyHomepageCopy($, copy, locale) {
   setLocalizedText($, "#private-access-title", copy.privateAccess.title, locale);
   setLocalizedText($, "#private-access .security-statement__copy p", copy.privateAccess.description, locale);
 
-  setLocalizedText($, "#solutions .section__eyebrow", copy.solutions.eyebrow, locale);
+  setLocalizedText($, "#use-cases .section__eyebrow", copy.solutions.eyebrow, locale);
   setLocalizedLines($, "#where-title", copy.solutions.titleLines, locale);
   setLocalizedText($, "#where-subtitle", copy.solutions.subtitle, locale);
   $("#where-product-image").attr("alt", copy.solutions.imageAlt);
@@ -988,10 +988,10 @@ function applyHomepageCopy($, copy, locale) {
     setLocalizedText($, $(element).find(".guest-invites__point-text"), copy.automation.points[index].text, locale);
   });
 
-  setLocalizedText($, "#product-guide .section__eyebrow", copy.productGuide.eyebrow, locale);
+  setLocalizedText($, "#tutorial-videos .section__eyebrow", copy.productGuide.eyebrow, locale);
   setLocalizedText($, "#tutorials-title", copy.productGuide.title, locale);
-  setLocalizedText($, "#product-guide .section__subtitle", copy.productGuide.subtitle, locale);
-  $("#product-guide .tutorial-card").each((index, element) => {
+  setLocalizedText($, "#tutorial-videos .section__subtitle", copy.productGuide.subtitle, locale);
+  $("#tutorial-videos .tutorial-card").each((index, element) => {
     setLocalizedText($, $(element).find(".tutorial-card__title"), copy.productGuide.items[index], locale);
     setLocalizedText($, $(element).find(".tutorial-card__status"), copy.productGuide.status, locale);
   });

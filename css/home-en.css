@@ -33,7 +33,7 @@ body.home-en {
   padding-inline: clamp(1.25rem, 4vw, 4rem);
 }
 
-.home-en :is(#platform, #solutions, #wifigate-automation, #product-guide, #get-in-touch) {
+.home-en :is(#how-it-works, #use-cases, #wifigate-automation, #tutorial-videos, #get-in-touch) {
   scroll-margin-top: calc(var(--nav-height) + 1rem);
 }
 
