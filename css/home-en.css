@@ -541,6 +541,33 @@ html[lang="he"] body.home-en .hero__overlay {
   grid-row: 1 / 4;
 }
 
+/* ---------- System overview figure ----------
+   A spec graphic, not a hero: it carries its own title and fine terminal
+   labels, so it is held to the page's measure rather than run full bleed.
+   The band takes the artwork's own ground colour so the graphic dissolves
+   into the section instead of sitting in a box, and the figure carries no
+   frame. #f8f8f8 is the mean of the eight edge samples read off the shipped
+   webp, which run #f6f6f6-#fafafa - within 2 levels all round. */
+.home-en .product-overview {
+  padding: clamp(3.5rem, 7vw, 6rem) 0;
+  background: #f8f8f8;
+}
+
+.home-en .product-overview__figure {
+  max-width: 58rem;
+  margin: 0 auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.home-en .product-overview__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
 /* ---------- Closing credibility statement (#why-wifigate) ----------
    The one centred section on the page. Its artwork is a symmetrical hero
    composition, so it is shown large and centred under centred copy, acting
