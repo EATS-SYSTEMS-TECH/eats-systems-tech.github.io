@@ -1011,6 +1011,10 @@ function applyHomepageCopy($, copy, locale) {
   setLocalizedText($, "#why-wifigate .security-statement__eyebrow", copy.why.eyebrow, locale);
   setLocalizedText($, "#why-wifigate-title", copy.why.title, locale);
   setLocalizedText($, "#why-wifigate .security-statement__copy p", copy.why.description, locale);
+  $("#why-wifigate .entry-point__label").each((index, element) => {
+    const label = copy.why.points[index];
+    if (label) setLocalizedText($, $(element), label, locale);
+  });
 
   setLocalizedText($, "#get-in-touch .section__eyebrow", copy.contact.eyebrow, locale);
   setLocalizedText($, "#contact-title", copy.contact.title, locale);

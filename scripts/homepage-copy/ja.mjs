@@ -144,6 +144,7 @@ const copy = {
     eyebrow: "WIFIGATE が選ばれる理由",
     title: "グローバル IoT の知見を、すべての入口へ。",
     description: "私たちには、世界各地で IoT システムを開発・導入してきた豊富な経験があります。その知見を生かし、安全性と信頼性に優れ、設置・管理・利用が簡単な WIFIGATE を実現しています。",
+    points: ["Residential buildings", "Private homes", "Hotels", "Electric gates", "Parking barriers", "Roller shutters"],
   },
   contact: {
     eyebrow: "まずはご相談ください",

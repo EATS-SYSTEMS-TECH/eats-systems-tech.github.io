@@ -144,6 +144,7 @@ const copy = {
     eyebrow: "Γιατί WIFIGATE",
     title: "Παγκόσμια τεχνογνωσία IoT σε κάθε είσοδο.",
     description: "Η ομάδα μας διαθέτει εκτεταμένη εμπειρία στην ανάπτυξη και εγκατάσταση συστημάτων IoT σε όλο τον κόσμο. Αξιοποιούμε αυτή την τεχνογνωσία ώστε το WIFIGATE να είναι ασφαλές, αξιόπιστο και εύκολο στην εγκατάσταση, τη διαχείριση και τη χρήση.",
+    points: ["Residential buildings", "Private homes", "Hotels", "Electric gates", "Parking barriers", "Roller shutters"],
   },
   contact: {
     eyebrow: "Ξεκινήστε μια συζήτηση",

@@ -144,6 +144,7 @@ const copy = {
     eyebrow: "WIFIGATE का",
     title: "जागतिक IoT अनुभव. प्रत्येक प्रवेशद्वारासाठी.",
     description: "आमच्या टीमला जगभर IoT प्रणाली विकसित आणि कार्यान्वित करण्याचा सखोल अनुभव आहे. त्या कौशल्यामुळे WIFIGATE सुरक्षित, विश्वासार्ह आणि इंस्टॉल, व्यवस्थापित व वापरण्यास सोपे बनते.",
+    points: ["Residential buildings", "Private homes", "Hotels", "Electric gates", "Parking barriers", "Roller shutters"],
   },
   contact: {
     eyebrow: "चला, बोलूया",
