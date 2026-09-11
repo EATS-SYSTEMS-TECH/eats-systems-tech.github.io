@@ -144,7 +144,7 @@ const copy = {
     eyebrow: "Mengapa WIFIGATE",
     title: "Pengalaman IoT global, hadir di setiap titik masuk.",
     description: "Tim kami memiliki pengalaman mendalam dalam mengembangkan dan menerapkan sistem IoT di berbagai negara. Keahlian itu kami terapkan agar WIFIGATE aman, andal, serta mudah dipasang, dikelola, dan digunakan.",
-    points: ["Residential buildings", "Private homes", "Hotels", "Electric gates", "Parking barriers", "Roller shutters"],
+    points: ["Door", "Gate", "Barrier gate", "Cantilever gate", "Electromagnetic lock", "Electric roller shutter", "Lighting", "Pump"],
   },
   contact: {
     eyebrow: "Mulai konsultasi",

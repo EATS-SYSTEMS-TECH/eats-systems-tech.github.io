@@ -614,8 +614,8 @@ html[lang="he"] body.home-en .hero__overlay {
    used, since circles are not part of this page's vocabulary. */
 .home-en .entry-points {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: clamp(1rem, 2.2vw, 1.75rem);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.75rem, 3vw, 2.5rem) clamp(1rem, 2.2vw, 1.75rem);
   width: min(100%, 62rem);
   margin: clamp(2.25rem, 4.5vw, 3.25rem) 0 0;
   padding: clamp(2rem, 4vw, 2.75rem) 0 0;
@@ -652,6 +652,14 @@ html[lang="he"] body.home-en .hero__overlay {
   stroke-linejoin: round;
 }
 
+/* "and more" line under the grid. */
+.home-en .entry-points__note {
+  margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
 .home-en .entry-point__label {
   color: rgba(255, 255, 255, 0.76);
   font-size: 0.82rem;
@@ -685,7 +693,6 @@ html[lang="he"] body.home-en .hero__overlay {
 
   .home-en .entry-points {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    row-gap: 2rem;
   }
 }
 

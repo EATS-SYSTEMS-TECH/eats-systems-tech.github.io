@@ -250,7 +250,7 @@ function getBundle(collection, locale) {
 // Copy keys a locale may add on top of the English reference shape. The
 // renderer already treats these as optional (see updateHomeCopy), so the
 // validator must not reject a locale that supplies one.
-const OPTIONAL_COPY_KEYS = new Set(["footer.taglineLines", "platform.subscriptionNote"]);
+const OPTIONAL_COPY_KEYS = new Set(["footer.taglineLines", "platform.subscriptionNote", "why.pointsNote"]);
 
 function validateCopyShape(reference, candidate, pathSegments = []) {
   const keyPath = pathSegments.join(".") || "homepage copy";
@@ -269,14 +269,22 @@ function validateCopyShape(reference, candidate, pathSegments = []) {
       throw new Error(`${keyPath} must be an object`);
     }
 
-    const referenceKeys = Object.keys(reference);
-    const candidateKeys = Object.keys(candidate)
-      .filter((key) => !OPTIONAL_COPY_KEYS.has([...pathSegments, key].join(".")));
+    // Optional keys are excluded from the shape comparison on BOTH sides: the
+    // reference is English, so a key present there would otherwise become
+    // mandatory for every locale, which is the opposite of optional.
+    const isOptional = (key) => OPTIONAL_COPY_KEYS.has([...pathSegments, key].join("."));
+    const referenceKeys = Object.keys(reference).filter((key) => !isOptional(key));
+    const candidateKeys = Object.keys(candidate).filter((key) => !isOptional(key));
     if (referenceKeys.length !== candidateKeys.length || referenceKeys.some((key) => !candidateKeys.includes(key))) {
       throw new Error(`${keyPath} must have keys: ${referenceKeys.join(", ")}`);
     }
 
     referenceKeys.forEach((key) => validateCopyShape(reference[key], candidate[key], [...pathSegments, key]));
+
+    // An optional key that a locale does supply still has to be well formed.
+    Object.keys(candidate)
+      .filter((key) => isOptional(key) && key in reference)
+      .forEach((key) => validateCopyShape(reference[key], candidate[key], [...pathSegments, key]));
     return;
   }
 
@@ -1029,6 +1037,16 @@ function applyHomepageCopy($, copy, locale) {
     if (label) setLocalizedText($, $(element), label, locale);
   });
 
+  const pointsNote = $("#entry-points-note");
+  if (pointsNote.length) {
+    if (copy.why.pointsNote) {
+      pointsNote.removeAttr("hidden");
+      setLocalizedText($, pointsNote, copy.why.pointsNote, locale);
+    } else {
+      pointsNote.remove();
+    }
+  }
+
   setLocalizedText($, "#get-in-touch .section__eyebrow", copy.contact.eyebrow, locale);
   setLocalizedText($, "#contact-title", copy.contact.title, locale);
   setLocalizedText($, "#contact-description", copy.contact.subtitle, locale);
@@ -1198,7 +1216,7 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   $("#language-button").attr("aria-label", copy.selectLanguageLabel);
   setLanguageSelector($, homeData.localeOptions, locale, pageKey);
   const prefix = buildAssetPrefix(locale, pageKey);
-  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20260911a">');
+  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20260911b">');
   $("script[src*='js/navigation.js']").attr("src", prefix + "js/navigation.js?v=20260911a");
 }
 
