@@ -1897,6 +1897,7 @@ ul {
 
 .section#contact .section__subtitle {
   color: rgba(226, 232, 240, 0.9);
+  white-space: pre-line;
 }
 
 .section#contact .container {
