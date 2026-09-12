@@ -10,7 +10,7 @@
   --home-muted: #626262;
   --home-line: #dedede;
   --home-soft: #f4f4f2;
-  --home-blue: #146bff;
+  --home-blue: #0a0a0a;
   --container-width: 1280px;
   margin: 0;
   color: var(--home-ink);
@@ -50,7 +50,7 @@
   align-items: center;
   gap: 0.7rem;
   margin-bottom: 1.25rem;
-  color: var(--home-blue);
+  color: var(--home-black);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -306,7 +306,7 @@ html[dir="rtl"] .wa-hero::after {
   margin-bottom: 1rem;
   border-radius: 50%;
   border-radius: 4px;
-  background: var(--home-blue);
+  background: var(--home-black);
   color: #fff;
   font-weight: 700;
   font-size: 1.05rem;
@@ -362,9 +362,9 @@ html[dir="rtl"] .wa-hero::after {
   width: 3.1rem;
   height: 3.1rem;
   margin-bottom: 1.05rem;
-  border: 1px solid rgba(20, 107, 255, 0.24);
+  border: 1px solid var(--home-line);
   border-radius: 4px;
-  background: rgba(20, 107, 255, 0.06);
+  background: var(--home-soft);
 }
 
 .wa-benefit__icon img {
@@ -384,13 +384,12 @@ html[dir="rtl"] .wa-hero::after {
 
 /* ================= SECURITY BAND ================= */
 .wa-secure {
-  background: linear-gradient(135deg, #071528, #102d4c);
-  color: #eaf1ff;
+  background: var(--home-black);
+  color: #f5f5f5;
 }
 
 .wa-secure .wa-eyebrow {
-  background: rgba(255, 255, 255, 0.1);
-  color: #7fd8ff;
+  color: #fff;
 }
 
 .wa-secure .wa-h2 {
@@ -398,7 +397,7 @@ html[dir="rtl"] .wa-hero::after {
 }
 
 .wa-secure .wa-lead {
-  color: #b9c8dd;
+  color: #cfcfcf;
 }
 
 .wa-secure__grid {
@@ -410,9 +409,9 @@ html[dir="rtl"] .wa-hero::after {
 
 .wa-secure__item {
   padding: 1.6rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .wa-secure__title {
@@ -423,7 +422,7 @@ html[dir="rtl"] .wa-hero::after {
 
 .wa-secure__text {
   margin: 0;
-  color: #b9c8dd;
+  color: #cfcfcf;
 }
 
 /* ================= PRICING ================= */
@@ -454,7 +453,7 @@ html[dir="rtl"] .wa-hero::after {
 
 .wa-plan--featured {
   position: relative;
-  border-top: 3px solid var(--home-blue);
+  border-top: 3px solid var(--home-black);
   box-shadow: none;
 }
 
@@ -464,7 +463,7 @@ html[dir="rtl"] .wa-hero::after {
   inset-inline-start: 1.5rem;
   padding: 0.3rem 0.75rem;
   border-radius: 2px;
-  background: var(--home-blue);
+  background: var(--home-black);
   color: #fff;
   font-size: 0.7rem;
   font-weight: 700;
@@ -517,7 +516,7 @@ html[dir="rtl"] .wa-hero::after {
 .wa-plan__feature svg {
   flex: none;
   margin-block-start: 0.15rem;
-  color: var(--home-blue);
+  color: var(--home-black);
 }
 
 .wa-plan__cta {
@@ -540,7 +539,7 @@ html[dir="rtl"] .wa-hero::after {
 .wa-cta__box {
   padding: clamp(2rem, 4vw, 3.2rem);
   border-radius: 4px;
-  background: var(--home-blue);
+  background: var(--home-black);
   box-shadow: none;
   text-align: center;
 }
@@ -559,12 +558,12 @@ html[dir="rtl"] .wa-hero::after {
 
 .wa-cta__box .btn--primary {
   background: #fff;
-  color: var(--color-primary-dark);
+  color: var(--home-black);
   box-shadow: none;
 }
 
 .wa-cta__box .btn--primary:hover {
-  background: #eef4ff;
+  background: #f2f2f2;
   transform: translateY(-1px);
 }
 
