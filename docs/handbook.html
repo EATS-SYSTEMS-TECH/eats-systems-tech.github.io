@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WiFiGate Handbook</title>
+<style>
+  :root{
+    --bg:#0f1420; --surface:#161c2b; --surface-2:#1b2233; --code-bg:#0c111c;
+    --text:#e6e9f0; --muted:#9aa4b8; --border:#232c40;
+    --accent:#7c8bff; --accent-2:#38bdf8; --accent-soft:rgba(124,139,255,.14);
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+    --sidebar-w:312px;
+  }
+  html[data-theme="light"]{
+    --bg:#f6f7fb; --surface:#ffffff; --surface-2:#f0f2f8; --code-bg:#0e1522;
+    --text:#1e2330; --muted:#5b6577; --border:#e4e8f0;
+    --accent:#4f46e5; --accent-2:#0ea5e9; --accent-soft:rgba(79,70,229,.10);
+    --shadow:0 10px 30px rgba(20,30,60,.10);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,"Noto Sans Hebrew",sans-serif;
+    line-height:1.7; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* progress bar */
+  #progress{position:fixed; inset-block-start:0; inset-inline:0; height:3px; z-index:60;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2)); width:0%; transition:width .1s linear}
+
+  /* mobile topbar */
+  #topbar{display:none; position:fixed; inset-block-start:0; inset-inline:0; height:56px; z-index:50;
+    background:var(--surface); border-block-end:1px solid var(--border);
+    align-items:center; gap:12px; padding:0 14px}
+  #topbar .brand{font-weight:700}
+  #hamburger{background:none;border:1px solid var(--border);color:var(--text);border-radius:10px;
+    width:40px;height:40px;font-size:18px;cursor:pointer}
+
+  /* sidebar */
+  aside{position:fixed; inset-block:0; inset-inline-start:0; width:var(--sidebar-w);
+    background:var(--surface); border-inline-end:1px solid var(--border);
+    display:flex; flex-direction:column; z-index:40}
+  .side-head{padding:20px 20px 14px; border-block-end:1px solid var(--border)}
+  .logo{display:flex; align-items:center; gap:10px; font-size:19px; font-weight:800; letter-spacing:.2px}
+  .logo .spark{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:9px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-size:17px;box-shadow:var(--shadow)}
+  .logo small{display:block;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+  .controls{display:flex; gap:8px; margin-top:14px}
+  .seg{display:flex; background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:3px; flex:1}
+  .seg button{flex:1; border:0; background:none; color:var(--muted); font-weight:700; padding:7px 0; border-radius:8px; cursor:pointer; font-size:13px}
+  .seg button.active{background:var(--accent); color:#fff}
+  .icon-btn{width:40px; border:1px solid var(--border); background:var(--surface-2); color:var(--text);
+    border-radius:10px; cursor:pointer; font-size:16px}
+  .search{margin-top:12px; position:relative}
+  .search input{width:100%; padding:10px 12px 10px 34px; border-radius:10px; border:1px solid var(--border);
+    background:var(--surface-2); color:var(--text); font-size:13px; outline:none}
+  html[dir="rtl"] .search input{padding:10px 34px 10px 12px}
+  .search svg{position:absolute; inset-block-start:50%; transform:translateY(-50%); inset-inline-start:11px; color:var(--muted)}
+  html[dir="rtl"] .search svg{inset-inline-start:auto; inset-inline-end:11px}
+
+  nav.toc{overflow-y:auto; padding:12px 12px 40px; flex:1}
+  nav.toc a{display:block; color:var(--muted); font-size:13.5px; padding:7px 12px; border-radius:8px;
+    border-inline-start:2px solid transparent; margin:1px 0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  nav.toc a:hover{color:var(--text); background:var(--surface-2); text-decoration:none}
+  nav.toc a.toc-h3{font-size:12.5px; padding-inline-start:26px; color:var(--muted); opacity:.85}
+  nav.toc a.active{color:var(--accent); background:var(--accent-soft); border-inline-start-color:var(--accent); font-weight:700}
+  nav.toc .empty{color:var(--muted); font-size:12px; padding:12px}
+
+  /* main */
+  main{margin-inline-start:var(--sidebar-w); padding:56px 40px 120px; display:flex; justify-content:center}
+  article{width:100%; max-width:880px}
+  #backdrop{display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:35}
+
+  /* content typography */
+  article h1{font-size:34px; line-height:1.2; margin:.2em 0 .4em; letter-spacing:-.3px}
+  article h2{font-size:25px; margin:2.2em 0 .7em; padding-block-end:.35em; border-block-end:1px solid var(--border); scroll-margin-top:80px}
+  article h3{font-size:19px; margin:1.8em 0 .5em; scroll-margin-top:80px}
+  article h4{font-size:16px; margin:1.4em 0 .4em; color:var(--muted); scroll-margin-top:80px}
+  article p{margin:.8em 0}
+  article ul,article ol{margin:.7em 0; padding-inline-start:1.5em}
+  article li{margin:.3em 0}
+  article hr{border:0; border-block-start:1px solid var(--border); margin:2.4em 0}
+  article strong{color:var(--text)}
+  .task{display:inline-flex;align-items:center;gap:8px}
+  .task input{width:16px;height:16px;accent-color:var(--accent)}
+
+  code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace; font-size:.88em}
+  :not(pre)>code{background:var(--accent-soft); color:var(--accent); padding:.13em .42em; border-radius:6px;
+    border:1px solid var(--border); direction:ltr; unicode-bidi:embed; display:inline-block}
+  pre{background:var(--code-bg); border:1px solid var(--border); border-radius:14px; padding:18px 20px;
+    overflow:auto; margin:1.2em 0; box-shadow:var(--shadow); direction:ltr; text-align:left}
+  pre code{color:#c8d3f5; font-size:13px; line-height:1.6; white-space:pre; background:none; border:0; padding:0}
+
+  blockquote{margin:1.3em 0; padding:14px 18px; background:var(--surface); border:1px solid var(--border);
+    border-inline-start:4px solid var(--accent); border-radius:12px; color:var(--text)}
+  blockquote p{margin:.4em 0}
+  blockquote code{direction:ltr}
+
+  .table-wrap{overflow-x:auto; margin:1.2em 0; border:1px solid var(--border); border-radius:14px; box-shadow:var(--shadow)}
+  table{border-collapse:collapse; width:100%; font-size:14px; background:var(--surface)}
+  thead th{background:var(--surface-2); text-align:start; font-weight:700; padding:12px 14px; border-block-end:1px solid var(--border); white-space:nowrap}
+  td{padding:11px 14px; border-block-end:1px solid var(--border); vertical-align:top}
+  tbody tr:last-child td{border-block-end:0}
+  tbody tr:hover{background:var(--accent-soft)}
+
+  ::-webkit-scrollbar{width:11px;height:11px}
+  ::-webkit-scrollbar-thumb{background:var(--border); border-radius:20px; border:3px solid var(--surface)}
+  ::-webkit-scrollbar-thumb:hover{background:var(--muted)}
+
+  @media (max-width:900px){
+    #topbar{display:flex}
+    aside{transform:translateX(-102%); transition:transform .25s ease; box-shadow:var(--shadow); inset-block-start:0}
+    html[dir="rtl"] aside{transform:translateX(102%)}
+    aside.open{transform:translateX(0)}
+    main{margin-inline-start:0; padding:78px 20px 100px}
+    #backdrop.show{display:block}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header id="topbar">
+  <button id="hamburger" aria-label="Menu">☰</button>
+  <div class="brand">WiFiGate <span style="color:var(--muted);font-weight:600">Handbook</span></div>
+</header>
+
+<aside id="sidebar">
+  <div class="side-head">
+    <div class="logo">
+      <span class="spark">⚡</span>
+      <span>WiFiGate<small>Handbook</small></span>
+    </div>
+    <div class="controls">
+      <div class="seg" id="lang-seg">
+        <button data-lang="he">עברית</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <button class="icon-btn" id="theme-btn" title="Toggle theme">🌙</button>
+    </div>
+    <div class="search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="search" type="text" placeholder="חיפוש בפרקים…" autocomplete="off">
+    </div>
+  </div>
+  <nav class="toc" id="toc"></nav>
+</aside>
+
+<div id="backdrop"></div>
+
+<main><article id="content"></article></main>
+
+<template id="tpl-he"><h1 id="מחברת-wifigate-מדריך-מקצועי-מקצה-לקצה">מחברת WiFiGate — מדריך מקצועי מקצה לקצה</h1>
+<blockquote><p>מסמך לימוד מלא של מערכת WiFiGate: איך הכול עובד, <strong>למה</strong> זה בנוי ככה, אילו ספריות בשימוש, כל ה-flows, והלוגים החשובים לכל שלב. נכתב מתוך קריאה של קוד המקור בפועל, לא מהזיכרון.</p>
+<p>אם אתם קוראים README כללי — קראו קודם את <a href="../README.md">README.md</a>. המסמך הזה הוא שכבה עמוקה יותר: מדריך למידה + reference.</p>
+<p>🇬🇧 An English version of this handbook is available at <a href="./WIFIGATE_HANDBOOK_EN.md">WIFIGATE_HANDBOOK_EN.md</a>.</p></blockquote>
+<hr>
+<h2 id="תוכן-עניינים">תוכן עניינים</h2>
+<ol><li><a href="#1-תמונת-על">תמונת-על: מה זו WiFiGate ולמה</a></li><li><a href="#2-הstack-הטכנולוגי">ה-Stack הטכנולוגי — כל ספרייה ולמה בחרו בה</a></li><li><a href="#3-מפת-הקוד">מפת הקוד — איפה כל דבר יושב</a></li><li><a href="#4-מודל-הנתונים">מודל הנתונים — Gate, Role, Group, Dual Control</a></li><li><a href="#5-שכבת-האחסון">שכבת האחסון — למה local-first ואיך זה עובד</a></li><li><a href="#6-ניהול-state">ניהול state — ה-store המותאם אישית</a></li><li><a href="#7-הflows-המרכזיים">ה-Flows המרכזיים מקצה לקצה</a></li><li><a href="#8-פרוטוקול-הble-המאובטח">פרוטוקול ה-BLE המאובטח SECURE_V3 — לעומק</a></li><li><a href="#9-הצפנת-קישורי-הזמנה">הצפנת קישורי הזמנה — לעומק</a></li><li><a href="#10-deep-linking">Deep Linking — איך קישור הופך למסך</a></li><li><a href="#11-fota--ota">FOTA / OTA — עדכון קושחה</a></li><li><a href="#12-nearby-wi-fi-setup">Nearby Wi-Fi Setup — עמוד ההגדרה המקומי</a></li><li><a href="#13-לוגים-חשובים">לוגים חשובים — קטלוג מלא לפי תגית</a></li><li><a href="#14-הרשאות-ופלטפורמה">הרשאות ופלטפורמה</a></li><li><a href="#15-סודות-וbuild-inputs">סודות ו-Build Inputs</a></li><li><a href="#16-פיתוח-מקומי-וריליז">פיתוח מקומי, בדיקות ו-Release</a></li><li><a href="#17-גבולות-אבטחה">גבולות אבטחה — מה מוגן ומה לא</a></li><li><a href="#18-cheat-sheet">Cheat Sheet — הפניות מהירות</a></li></ol>
+<hr>
+<h2 id="1-תמונת-על">1. תמונת-על</h2>
+<p>WiFiGate היא אפליקציית <strong>React Native / Expo</strong> לשליטה בשערים פיזיים שמונעים על ידי קושחת WiFiGate (מבוססת ESP32-C6). האפליקציה היא בעצם שני דברים במקביל:</p>
+<ol><li><strong>ארנק שערים (gate wallet)</strong> על הטלפון — רשימת שערים עם רמות גישה ותוקף שונים.</li><li><strong>לקוח שליטה מאובטח</strong> מול המכשיר — פותח שער דרך Bluetooth Low Energy בפרוטוקול</li></ol>
+<p>   מוצפן.</p>
+<h3 id="שלושת-התפקידים-של-האפליקציה">שלושת התפקידים של האפליקציה</h3>
+<p>האפליקציה שומרת מטא-דאטה של שערים <strong>מקומית</strong> (local-first) ומשתמשת ברשימה הזאת כדי להניע שלוש משימות:</p>
+<ul><li><strong>פתיחת שער דרך BLE</strong> (הליבה).</li><li><strong>שיתוף / קבלת גישה</strong> דרך קישורי הזמנה מוצפנים.</li><li><strong>כניסה ל-setup מקומי דרך Wi-Fi</strong> (עמוד <code>http://192.168.4.1/</code>).</li></ul>
+<h3 id="עיקרון-על-הפרדת-שכבות-אבטחה">עיקרון על: הפרדת שכבות אבטחה</h3>
+<p>זו נקודה קריטית להבנת כל הארכיטקטורה — יש <strong>שתי בעיות אבטחה נפרדות</strong> עם <strong>שני פתרונות נפרדים</strong>:</p>
+<table><thead><tr><th>שכבה</th><th>מה מגנה</th><th>מנגנון</th></tr></thead><tbody><tr><td>BLE (SECURE_V3)</td><td>תקשורת טלפון↔שער</td><td>ECDH + HKDF + AES-256-GCM + HMAC</td></tr><tr><td>קישורי הזמנה</td><td>ה-payload בתוך ה-URL</td><td>AES-256-GCM עם מפתח נגזר מ-<code>HMAC_URL_SECRET</code></td></tr></tbody></table>
+<p>הן <strong>לא</strong> מחליפות זו את זו. קישור מוצפן לא מגן על ה-BLE, ו-SECURE_V3 לא מגן על ה-URL. ראו <a href="#17-גבולות-אבטחה">סעיף 17</a>.</p>
+<pre><code>┌───────────────────────────────────────────────────────────────┐
+│                        אפליקציית WiFiGate                       │
+│                                                                │
+│   UI (app/ - Expo Router)                                      │
+│        │                                                       │
+│   openGateFlow  ─┬─ gatesStore (state)  ─── storage (AsyncStorage)
+│        │         │                                             │
+│   ble/openGate ──┴─ ble/secureProtocol (crypto SECURE_V3)      │
+│        │                                                       │
+└────────┼───────────────────────────────────────────────────────┘
+         │ BLE (Nordic UART Service)          │ Wi-Fi AP 192.168.4.1
+         ▼                                     ▼
+   ┌──────────────┐                     ┌──────────────┐
+   │ שער ESP32-C6 │◄── OTA (Firebase) ──│  setup page  │
+   └──────────────┘                     └──────────────┘</code></pre>
+<hr>
+<h2 id="2-ה-stack-הטכנולוגי">2. ה-Stack הטכנולוגי</h2>
+<p>מקור: <a href="../package.json">package.json</a>. להלן הספריות המשמעותיות ו<strong>למה</strong> הן שם.</p>
+<h3 id="ליבה-runtime-ו-navigation">ליבה — Runtime ו-Navigation</h3>
+<table><thead><tr><th>ספרייה</th><th>תפקיד</th><th>למה זה</th></tr></thead><tbody><tr><td><code>expo</code> ~54 / <code>react-native</code> 0.81 / <code>react</code> 19</td><td>הבסיס</td><td>Expo נותן dev-client, build (EAS), ו-config plugins בלי לגעת ב-native ידנית</td></tr><tr><td><code>expo-router</code> ~6</td><td>ניתוב file-based</td><td>כל קובץ ב-<code>app/</code> הוא route; deep-linking מובנה</td></tr><tr><td><code>expo-dev-client</code></td><td>dev build מותאם</td><td>חובה — האפליקציה תלויה במודולים native (BLE, Wi-Fi) שלא קיימים ב-Expo Go</td></tr><tr><td><code>react-native-reanimated</code> / <code>gesture-handler</code> / <code>worklets</code></td><td>אנימציות ו-gestures</td><td>UI חלק, drag-to-reorder</td></tr><tr><td><code>zustand</code></td><td>state (זמין)</td><td><strong>הערה:</strong> ה-gate store הראשי (<code>gatesStore.ts</code>) בנוי ידנית ולא משתמש ב-zustand. ראו <a href="#6-ניהול-state">סעיף 6</a></td></tr></tbody></table>
+<h3 id="קריפטוגרפיה-הלב-של-האבטחה">קריפטוגרפיה — הלב של האבטחה</h3>
+<table><thead><tr><th>ספרייה</th><th>תפקיד</th></tr></thead><tbody><tr><td><code>@noble/curves</code></td><td>עקומת P-256 (ECDH ל-handshake)</td></tr><tr><td><code>@noble/hashes</code></td><td>SHA-256, HKDF, HMAC</td></tr><tr><td><code>@noble/ciphers</code></td><td>AES-256-GCM</td></tr><tr><td><code>react-native-get-random-values</code></td><td>polyfill ל-<code>crypto.getRandomValues</code> (חובה שיטען <strong>ראשון</strong> — ראו שורה 1 ב-<code>app/_layout.tsx</code>)</td></tr><tr><td><code>buffer</code> / <code>base-64</code></td><td>קידוד base64 ל-BLE וקישורים</td></tr></tbody></table>
+<p>בחרו ב-<code>@noble/*</code> כי הן ספריות crypto טהורות ב-JS, ללא תלות ב-native, audited, ומתאימות ל-React Native (שאין בו <code>crypto</code> מלא).</p>
+<h3 id="ble-ו-wi-fi-התקשורת-הפיזית">BLE ו-Wi-Fi — התקשורת הפיזית</h3>
+<table><thead><tr><th>ספרייה</th><th>תפקיד</th></tr></thead><tbody><tr><td><code>react-native-ble-plx</code></td><td>ליבת ה-BLE: scan, connect, GATT, notify/write</td></tr><tr><td><code>react-native-bluetooth-state-manager</code></td><td>מצב ה-Bluetooth (on/off) ובקשת הפעלה</td></tr><tr><td><code>react-native-wifi-reborn</code></td><td>scan/connect ל-AP של השער (flow ה-Nearby setup)</td></tr><tr><td><code>react-native-webview</code></td><td>הצגת עמוד ה-setup המקומי <code>192.168.4.1</code></td></tr></tbody></table>
+<h3 id="זהות-ו-auth">זהות ו-Auth</h3>
+<table><thead><tr><th>ספרייה</th><th>תפקיד</th></tr></thead><tbody><tr><td><code>@react-native-firebase/auth</code> + <code>firebase</code></td><td>אימות טלפון ב-SMS OTP</td></tr><tr><td><code>@react-native-google-signin/google-signin</code></td><td>זהות Google (מילוי אימייל ל-BLE)</td></tr><tr><td><code>expo-apple-authentication</code></td><td>Sign in with Apple</td></tr><tr><td><code>expo-auth-session</code></td><td>OAuth flows</td></tr><tr><td><code>libphonenumber-js</code> + <code>country-list</code></td><td>נירמול/ולידציה של מספרי טלפון וקידומות מדינה</td></tr></tbody></table>
+<h3 id="קלטפלט-ו-ui">קלט/פלט ו-UI</h3>
+<p><code>expo-camera</code> (סריקת QR), <code>react-native-qrcode-svg</code> (יצירת QR לשיתוף), <code>expo-contacts</code> (בחירת מוזמן מאנשי קשר), <code>expo-file-system</code> + <code>expo-sharing</code> (ייצוא CSV / קבצים), <code>react-native-draggable-flatlist</code> (סידור מחדש של שערים), <code>lottie-react-native</code> (אנימציות), <code>@react-native-async-storage/async-storage</code> (אחסון מקומי).</p>
+<hr>
+<h2 id="3-מפת-הקוד">3. מפת הקוד</h2>
+<pre><code>app/                         # Expo Router — כל מסך הוא route
+  _layout.tsx                # root: deep-link routing, auth gating, splash
+  index.tsx                  # מסך הבית: רשימת שערים, קבוצות, חיפוש, reorder
+  scan.tsx                   # סריקת QR + import
+  gate/[id].tsx              # import של קישור + מסך פרטי שער
+  open-gate/[id].tsx         # פתיחה מהירה (מ-widget/deep link)
+  group/[id].tsx             # מסך קבוצה
+  dual-control/[id].tsx      # מסך dual-control
+  nearby-wifigate-link.tsx   # כניסה ל-Nearby Wi-Fi setup
+  wifigate-setup.tsx         # ה-WebView של עמוד ההגדרה המקומי
+  firmware-update.tsx        # מסך OTA
+  settings/[id].tsx          # הגדרות שער
+  auth/login.tsx             # login (provider)
+  auth/phone.tsx             # OTP טלפון
+
+src/
+  models.ts                  # כל ה-types: Gate, UserRole, GateGroup, DualControl...
+  storage.ts                 # AsyncStorage — כל ה-keys, load/save, נירמול
+  gatesStore.ts              # ה-state store המרכזי (observable ידני) + merge rules
+  gateService.ts             # ולידציית guest access ולוגיקת שירות
+  openGateFlow.ts            # ה-orchestration של פתיחת שער (permissions→BT→BLE)
+  gateOpenBlockReason.ts     # מיפוי הודעות שגיאה ל-block reasons
+  gateSecurity.ts            # פרסינג/נרמול של security bundle (SECURE_V3)
+
+  ble/
+    openGate.ts              # ליבת ה-BLE (scan/connect/handshake/frames) — הקובץ הגדול
+    secureProtocol.ts        # הקריפטו של SECURE_V3 (handshake, keys, frames)
+    bluetoothState.ts        # מצב Bluetooth + ensureBluetoothReady
+    permissions.ts           # הרשאות BLE
+
+  inviteLinkCrypto.ts        # הצפנה/פענוח של payload קישורים (AES-GCM)
+  linkService.ts             # פרסינג/בנייה של קישורי הזמנה (single/group/dual)
+  dualControlInviteImport.ts # import של הזמנת dual-control
+  groupInviteImport.ts       # import של הזמנת קבוצה
+
+  auth/                      # LocalAuthContext, providerIdentity, google/apple
+  auto-open/                 # beacon key + capability (spec: docs/WIFIGATE_AUTO_OPEN.html)
+  fota/                      # publicFota (Firebase), driveFota (legacy)
+  widgets/                   # widget שער (Android) + headless open
+  wifi/                      # useGateWifiConnectionGuard
+  crypto/                    # hmacSecrets (שחזור HMAC_URL_SECRET)
+  i18n/                      # שפות ותרגומים
+  permissions/               # appLaunch, contacts, wifi
+  utils/                     # datetime, gateCommand, guestAccess, subscription...
+  components/                # כל ה-UI: modals, gate-settings, admin-access...
+  features/my-gates/         # ה-collections של מסך הבית (tiles, helpers)
+
+docs/
+  ble-security-protocol-v3.md  # המפרט הפורמלי של SECURE_V3
+  WIFIGATE_HANDBOOK_HE.md      # המסמך הזה
+
+README.md                          # סקירה כללית
+README_WIFIGATE_LINK_INVITATIONS.md# פרוטוקול קישורי ההזמנה במלואו
+README_OTA_FIREBASE.md             # OTA מ-Firebase Storage
+WIFIGATE_API_README.md             # קישורים שהונפקו ע"י WIFIGATE API</code></pre>
+<hr>
+<h2 id="4-מודל-הנתונים">4. מודל הנתונים</h2>
+<p>מקור: <a href="../src/models.ts">src/models.ts</a>.</p>
+<h3 id="41-gate">4.1 Gate</h3>
+<p>הישות המרכזית. שדות חשובים:</p>
+<pre><code>type Gate = {
+  id: string;            // מזהה מקומי (= systemId כרגע)
+  systemId: string;      // מזהה החומרה, משמש ב-BLE ובקישורים. למשל "9876543210123456"
+  systemName: string;    // השם המקורי/מיובא
+  displayName: string;   // השם שהמשתמש יכול לערוך
+  role: UserRole;        // ★ התפקיד קובע הכול (ראו 4.2)
+  subscription?: "OFFLINE" | "ONLINE" | "WIFI" | "ALL_IN_ONE";
+  security?: GateSecurityConfig;   // ה-bundle של SECURE_V3
+  gateCommand?: GateCommandType;   // סוג הפעולה שהקושחה דיווחה (PULSE/TOGGLE/PUSH_BUTTON...)
+  autoOpen?: GateAutoOpenSettings;
+  // שיתוף/אירוח:
+  hostPhone/hostName/hostEmail?    // המזמין
+  guestPhone?                      // המוזמן (בקישור guest פרטי)
+  accessStart/accessEnd?           // חלון תוקף (ms)
+  // רישום ל-PRE_USER/PRE_ADMIN:
+  residentName/floorNumber/apartmentNumber/parkingNumber?
+  openHistory?: GateOpenHistoryEntry[];  // לוג מקומי של פתיחות אחרונות (newest-first)
+};</code></pre>
+<h3 id="42-role-התפקיד-קובע-הכול">4.2 Role — התפקיד קובע הכול</h3>
+<pre><code>type UserRole = "ADMIN" | "USER" | "GUEST" | "PRE_USER" | "PRE_ADMIN";</code></pre>
+<table><thead><tr><th>תפקיד</th><th>משמעות</th><th>מקור</th><th>פקודת BLE אחרי import</th></tr></thead><tbody><tr><td><code>ADMIN</code></td><td>מנהל מאושר</td><td>אחרי אישור קושחה</td><td><code>OPEN</code> / <code>TOGGLE_*</code></td></tr><tr><td><code>USER</code></td><td>משתמש קבוע מאושר</td><td>אחרי אישור קושחה</td><td><code>OPEN</code> / <code>TOGGLE_*</code></td></tr><tr><td><code>GUEST</code></td><td>גישה זמנית עם חלון זמן</td><td>קישור guest</td><td><code>OPEN_GUEST</code> / <code>TOGGLE_*_GUEST</code></td></tr><tr><td><code>PRE_USER</code></td><td>הוזמן כ-user, טרם אושר</td><td>קישור user (<code>r=PU</code>)</td><td><code>ADD_USER</code></td></tr><tr><td><code>PRE_ADMIN</code></td><td>הוזמן/נוסף כ-admin, טרם אושר</td><td>QR/manual או קישור admin (<code>r=PA</code>)</td><td><code>ADD_ADMIN</code></td></tr></tbody></table>
+<p><strong>למה <code>PRE_*</code>?</strong> כי האפליקציה local-first — היא לא יכולה לדעת שהקושחה אישרה אותך. עד שהמכשיר מאשר, אתה במצב "ממתין". כשמריצים <code>ADD_USER</code>/<code>ADD_ADMIN</code> בהצלחה מול השער, הקושחה מאשרת, וה-callback <code>onRoleUpgrade</code> משדרג <code>PRE_USER→USER</code> / <code>PRE_ADMIN→ADMIN</code> (ראו <code>maybeUpgradeRole</code> ב-<a href="../src/ble/openGate.ts">openGate.ts</a> ואת ה-persist ב- <a href="../src/openGateFlow.ts">openGateFlow.ts</a>).</p>
+<h3 id="43-חוקי-מיזוג-תפקידים-למה-שער-לא-נהרס">4.3 חוקי מיזוג תפקידים (למה שער לא "נהרס")</h3>
+<p>מקור: <code>addGate</code> ב-<a href="../src/gatesStore.ts">gatesStore.ts</a>. המערכת מגנה על גישה קבועה מפני downgrade בטעות:</p>
+<ul><li>שער קבוע (ADMIN/USER) <strong>לא</strong> יורד ל-GUEST כשמייבאים קישור guest.</li><li>תפקיד קבוע <strong>לא</strong> נדרס ע"י תפקיד <code>PRE_*</code> חלש יותר.</li><li>שער guest <strong>כן</strong> יכול להשתדרג לתפקיד קבוע/pending.</li><li>שם מותאם אישית (<code>displayName</code>) נשמר אם import מאוחר מביא רק שם ברירת-מחדל.</li></ul>
+<h3 id="44-gategroup-ו-dualcontrol">4.4 GateGroup ו-DualControl</h3>
+<ul><li><strong>GateGroup</strong> — קונטיינר UI מקומי בלבד. לא משנה שום התנהגות קושחה/BLE. ניתן לקינון</li></ul>
+<p>  דרך <code>parentGroupId</code>. מכיל <code>gateIds[]</code> ו-<code>dualControlIds[]</code>.</p>
+<ul><li><strong>DualControl</strong> — זוג שערים (<code>firstGateId</code>/<code>secondGateId</code>) עם שתי תוויות פעולה</li></ul>
+<p>  (<code>firstLabel</code>/<code>secondLabel</code>, למשל "פתח"/"סגור"). כל הזמנת dual-control מכילה <strong>בדיוק   2 שערים</strong>.</p>
+<hr>
+<h2 id="5-שכבת-האחסון">5. שכבת האחסון</h2>
+<p>מקור: <a href="../src/storage.ts">src/storage.ts</a>. המערכת <strong>local-first</strong> — מצב השערים חי ב-AsyncStorage, לא בענן. אין "בעלות שער" מרכזית בשרת.</p>
+<h3 id="מפתחות-האחסון-keys">מפתחות האחסון (<code>KEYS</code>)</h3>
+<pre><code>wifigate:gates                 # מערך השערים
+wifigate:localProfile          # פרופיל onboarding (name/email/phone/provider/terms)
+wifigate:phone                 # מספר טלפון
+wifigate:username              # שם תצוגה
+wifigate:language / :languagePreview
+wifigate:gates:order           # סדר תצוגה
+wifigate:gates:groups          # קבוצות
+wifigate:gates:dualControls    # dual controls
+wifigate:gates:toggleRelayStates # מצב relay אחרון לשערי TOGGLE
+wifigate:firmware:url          # URL קושחה אחרון
+wifigate:defaultCountryIso2    # קידומת מדינה ברירת מחדל
+wifigate:appleIdentityRecords  # מיפוי userId→זהות Apple (Apple לא שולח אימייל בכל פעם)
+wifigate:guestTable:*          # העדפות תצוגת טבלת guests</code></pre>
+<h3 id="נקודות-עדינות-שכדאי-להכיר">נקודות עדינות שכדאי להכיר</h3>
+<ul><li><strong><code>loadGates()</code> מנרמל בכל טעינה</strong>: ממזג <code>openHistory</code> עם <code>lastOpenedAt</code>, מנרמל</li></ul>
+<p>  <code>gateCommand</code>, <code>fotaChannel</code>, <code>hostEmail</code> (lowercase), guest access.</p>
+<ul><li><strong><code>getJSON</code>/<code>setJSON</code> בולעים שגיאות</strong> ומחזירים fallback — כתיבה כושלת לא מפילה את</li></ul>
+<p>  האפליקציה (אבל גם לא מתריעה — שווה לזכור ב-debug).</p>
+<ul><li><strong>מגבלת Android</strong>: <code>DEFAULT_ANDROID_ASYNC_STORAGE_LIMIT_BYTES = 6MB</code>.</li></ul>
+<p>  <code>debugPrintAllLocalStorage()</code> מדפיס שימוש/נותר + dump מלא — כלי debug מצוין.</p>
+<ul><li><strong>פרופיל מטמון</strong>: <code>cachedLocalProfile</code> נטען פעם אחת; <code>loadPhone/loadUsername/loadEmail</code></li></ul>
+<p>  מעדיפים אותו.</p>
+<hr>
+<h2 id="6-ניהול-state">6. ניהול state</h2>
+<p>מקור: <a href="../src/gatesStore.ts">src/gatesStore.ts</a>.</p>
+<p>זהו <strong>observable store בנוי ידנית</strong> — לא Redux ולא zustand (למרות ש-zustand ב-deps):</p>
+<pre><code>let _gates: Gate[] = [];
+const listeners = new Set&lt;() =&gt; void&gt;();
+export function subscribe(fn) { listeners.add(fn); return () =&gt; listeners.delete(fn); }
+function notify() { listeners.forEach(f =&gt; f()); }</code></pre>
+<p>כל מוטציה (<code>addGate</code>, <code>updateGateRole</code>, <code>renameGate</code>, ...) עובדת <strong>immutably</strong> (בונה מערך חדש), קוראת <code>saveGates</code>, <code>notify</code>, ובמידת הצורך <code>syncGateWidgets()</code> + <code>syncAutoOpen()</code>.</p>
+<h3 id="initgates-מה-קורה-באתחול-חשוב-מאוד"><code>initGates()</code> — מה קורה באתחול (חשוב מאוד)</h3>
+<ol><li><code>loadGates()</code> מ-AsyncStorage.</li><li><code>normalizeGateRoleOnLoad</code> — מיגרציה של guests ישנים (<code>isGuest:true</code> → <code>role:"GUEST"</code>).</li><li>מיגרציית comments (ברירת מחדל).</li><li><strong>הסרת שערים ישנים ללא <code>role</code></strong> — המודל היום role-based בלבד.</li><li><code>notify()</code>.</li><li><code>cleanupExpired(true)</code> — <strong>מסיר שערי guest שפג תוקפם</strong> ומראה Alert.</li><li><code>syncGateWidgets()</code> + <code>syncAutoOpen()</code>.</li></ol>
+<p>לוגים לחפש: <code>🔄 [Store] initGates()</code>, <code>📦 [Store] N gates loaded</code>, <code>🧹 [Store] Removed N legacy gate(s)</code>, <code>🧹 [Store] N guest gate(s) removed (expired)</code>.</p>
+<hr>
+<h2 id="7-ה-flows-המרכזיים">7. ה-Flows המרכזיים</h2>
+<h3 id="71-onboarding-sign-in">7.1 Onboarding / Sign in</h3>
+<p>מסלולים: <a href="../app/auth/login.tsx">app/auth/login.tsx</a>, <a href="../app/auth/phone.tsx">app/auth/phone.tsx</a>.</p>
+<p>הזרימה:</p>
+<ol><li>המשתמש נכנס דרך provider (Google/Apple) → נשמר אימייל מנורמל בפרופיל.</li><li>שם פרופיל → קידומת מדינה → מספר טלפון → אישור תנאי שימוש.</li><li>SMS OTP (Firebase Auth) → אישור קוד.</li><li><code>saveLocalOnboardingProfile</code> שומר את הכול, מסנכרן טלפון/שם למראה ה-native.</li></ol>
+<p><strong>למה טלפון+אימייל?</strong> בפתיחת BLE מאובטחת, הקושחה מאמתת את זוג המזמין (host phone + host email) עבור guests. לכן האימייל נשמר ומועבר ב-command.</p>
+<p>ה-gating עצמו ב-<code>_layout.tsx</code> (<code>LayoutNavigator</code>): אם לא onboarded → מפנה ל- <code>/auth/phone</code> (אם כבר יש provider identity) או <code>/auth/login</code>.</p>
+<h3 id="72-הוספת-שער-qr-manual">7.2 הוספת שער (QR / Manual)</h3>
+<ul><li><strong>Manual/QR</strong> → <code>addGateFromQrOrManual</code> → role <code>PRE_ADMIN</code>.</li><li>QR שמכיל security bundle קומפקטי (<code>dpk</code>/<code>psk</code>, בלי <code>protocol</code>/<code>keyId</code>) מנורמל ל-</li></ul>
+<p>  <code>SECURE_V3</code> עם <code>keyId="key-1"</code> (ראו <a href="../src/gateSecurity.ts">gateSecurity.ts</a>).</p>
+<ul><li>import/save <strong>דוחה שער ללא security bundle</strong> — שערים חדשים חייבים SECURE_V3.</li></ul>
+<h3 id="73-import-של-קישור-הזמנה-singlegroupdual">7.3 Import של קישור הזמנה (single/group/dual)</h3>
+<p>מקורות: <a href="../src/linkService.ts">linkService.ts</a>, <a href="../src/inviteLinkCrypto.ts">inviteLinkCrypto.ts</a>, <a href="../app/_layout.tsx">_layout.tsx</a>, [app/gate/[id].tsx](../app/gate/[id].tsx). פרוטוקול מלא ב- <a href="../README_WIFIGATE_LINK_INVITATIONS.md">README_WIFIGATE_LINK_INVITATIONS.md</a>.</p>
+<p>הזרימה:</p>
+<ol><li>ה-OS פותח <code>wifigate.io/wifigate-link/</code> (או <code>-api/</code>) או <code>wifigate://</code>.</li><li><code>_layout.tsx</code> → <code>extractInvitationRoute</code> מזהה את הסוג (single/group/dual/open-gate).</li><li>אם לא onboarded → הקישור <strong>נכנס לתור</strong> (<code>pendingInviteUrl</code>) עד סיום onboarding.</li><li>ניתוב ל-<code>app/gate/[id].tsx</code> (או group/dual).</li><li><code>parseIncomingLink</code> מפענח <code>ep=</code> (AES-GCM) ל-JSON קומפקטי.</li><li><strong>ולידציה</strong>: פענוח תקין? חלון זמן? הרשאת טלפון (private vs public)?</li><li><code>addGateFromGuestInvite</code> / <code>addGateFromUserInvite</code> / <code>addGate</code> (PRE_ADMIN) —</li></ol>
+<p>   ממזג לתוך ה-state לפי חוקי המיזוג.</p>
+<p><strong>Public vs Private</strong> (מקור: פרוטוקול הקישורים):</p>
+<ul><li>אם שדה <code>p</code> (טלפון יעד) קיים → הזמנה <strong>פרטית</strong>: רק הטלפון המטמון שתואם ל-<code>p</code> יכול לקבל.</li><li>אם <code>p</code> חסר → <strong>ציבורית</strong>: מוגבלת רק בחלון הזמן (ל-guest).</li></ul>
+<p><strong>מיפוי role code</strong>: <code>A→ADMIN</code>, <code>U→USER</code>, <code>G→GUEST</code>, <code>PU→PRE_USER</code>, <code>PA→PRE_ADMIN</code>. בפועל: הזמנת admin נשלחת כ-<code>r="PA"</code>, user כ-<code>r="PU"</code>, guest כ-<code>g=1</code>.</p>
+<h3 id="74-פתיחת-שער-דרך-ble-ה-flow-המלא">7.4 פתיחת שער דרך BLE — ה-flow המלא</h3>
+<p>זהו ה-flow החשוב ביותר. Orchestration ב-<a href="../src/openGateFlow.ts">openGateFlow.ts</a>:</p>
+<pre><code>runGateOpenFlow(gate)
+  ├─ ensureBlePermissionsInteractive()   → "permissions_blocked"
+  ├─ ensureBluetoothReady()              → "bluetooth_off"
+  ├─ loadPhone()                         → "phone_missing"
+  ├─ getGuestAccessValidation(gate)      → "guest_expired"
+  ├─ טוען email/username/toggleRelayState
+  └─ openGateBLE({...}) ──────────────────► ble/openGate.ts
+        ├─ (מטפל ב-onRoleUpgrade → updateGateRole)
+        ├─ שומר toggleRelayState אם gateCommand=TOGGLE
+        └─ אם OK ולא PRE_* → markGateOpened (openHistory)</code></pre>
+<p>מיפוי סטטוסים: <code>OK→ok</code>, <code>BUSY→busy</code>, <code>UNAUTHORIZED→unauthorized</code>, <code>TIMEOUT→timeout</code>, <code>FAIL→fail</code> (ואם ההודעה מעידה על אירוע פעיל/חיישן → <code>event_active</code>/<code>sensor_inactive</code>).</p>
+<p>בתוך <code>openGateBLE</code> (ב-<a href="../src/ble/openGate.ts">ble/openGate.ts</a>):</p>
+<ol><li><strong>Scan / Connect</strong> — <code>findConnectedGate</code>: סורק devices, מתאים לפי <code>systemId</code></li></ol>
+<p>   (שם ה-advertise), מתחבר. יש profile מהיר (<code>default</code>) ואיטי (<code>slow-android</code>).    אם יש <code>preferredDeviceId</code> — מנסה חיבור ישיר קודם.</p>
+<ol><li><strong>Discover GATT</strong> — מבקש MTU 517 (Android), מגלה את שירות ה-<strong>Nordic UART</strong>:</li><li>Service <code>6e400001-...</code></li><li>RX <code>6e400002-...</code> (כתיבה מהאפליקציה לשער)</li><li>TX <code>6e400003-...</code> (notify מהשער לאפליקציה)</li><li><strong>Inbox</strong> — <code>createBleTextInbox</code>: מרכיב הודעות מ-chunks לפי <code>\n</code>, תומך גם</li></ol>
+<p>   ב-notify וגם ב-polling (fallback), ומסנן echo מקומי.</p>
+<ol><li><strong>Handshake SECURE_V3</strong> — client_hello → device_hello → session keys (ראו סעיף 8).</li><li><strong>Encrypted command frame</strong> — בונה את הפקודה, מוסיף <code>authTag</code>, מצפין ושולח (<code>seq=1</code>).</li><li><strong>Encrypted response frame</strong> — קורא, מפענח, מחזיר <code>SecureDeviceResponse</code>.</li></ol>
+<h3 id="75-בחירת-הפקודה-לפי-תפקיד-וסוג-שער">7.5 בחירת הפקודה לפי תפקיד וסוג שער</h3>
+<table><thead><tr><th>מצב</th><th>פקודת BLE</th></tr></thead><tbody><tr><td>USER/ADMIN, שער רגיל</td><td><code>OPEN</code></td></tr><tr><td>USER/ADMIN, שער TOGGLE</td><td><code>TOGGLE_ON</code> / <code>TOGGLE_OFF</code> (מצב יעד מפורש, לפי <code>toggleRelayState</code> השמור)</td></tr><tr><td>USER/ADMIN, שער PUSH_BUTTON</td><td><code>PUSH_BUTTON_HOLD</code> (חוזר) + <code>PUSH_BUTTON_RELEASE</code></td></tr><tr><td>GUEST, שער רגיל</td><td><code>OPEN_GUEST</code></td></tr><tr><td>GUEST, שער TOGGLE</td><td><code>TOGGLE_GUEST_ON</code> / <code>TOGGLE_GUEST_OFF</code> (מצב יעד מפורש עם היסטוריית אורח)</td></tr><tr><td>PRE_USER</td><td><code>ADD_USER</code> (מאשר → USER)</td></tr><tr><td>PRE_ADMIN</td><td><code>ADD_ADMIN</code> (מאשר → ADMIN)</td></tr></tbody></table>
+<p><strong>Guest open</strong> מעביר בנוסף <code>guestName</code>, <code>inviterName</code>, <code>inviterPhone</code>, <code>inviterEmail</code> — והקושחה מאמתת את זוג המזמין לפני פתיחה. אם חסר <code>inviterEmail</code> בהזמנת guest — האפליקציה עוצרת עם הודעה לבקש הזמנה חדשה.</p>
+<p><strong>Push button</strong> הוא מקרה מיוחד (מקור: <code>docs/ble-security-protocol-v3.md</code>): כל frame של HOLD מרענן את ה-session TTL; אותו חיבור BLE נשאר פתוח כל עוד לוחצים; ה-<code>seq</code> עולה בכל frame; ב-finger-up נשלח <code>PUSH_BUTTON_RELEASE</code>. לקושחה יש watchdog של 1s כ-fallback.</p>
+<h3 id="76-שיתוף-גישה-יצירת-קישורים">7.6 שיתוף גישה (יצירת קישורים)</h3>
+<p>מקורות: <code>buildShareData</code> (single), <code>buildGroupShareData</code>, <code>buildDualControlShareData</code> ב-<a href="../src/linkService.ts">linkService.ts</a>.</p>
+<p>Admin יכול ליצור: קישור guest, קישור user, קישור admin, וקישור Nearby Wi-Fi setup. ה-payload נבנה קומפקטי (<code>i</code>,<code>n</code>,<code>r</code>,<code>h</code>,<code>he</code>,<code>p</code>,<code>kid</code>,<code>dpk</code>,<code>psk</code>...), מוצפן ב- <code>encryptInviteLinkPayload</code> ל-<code>ep=v1.&lt;base64url&gt;</code>, ומשולב ל-URL הציבורי.</p>
+<hr>
+<h2 id="8-פרוטוקול-ה-ble-המאובטח">8. פרוטוקול ה-BLE המאובטח</h2>
+<p>מקורות: <a href="../src/ble/secureProtocol.ts">src/ble/secureProtocol.ts</a> + המפרט <a href="./ble-security-protocol-v3.md">docs/ble-security-protocol-v3.md</a>.</p>
+<p><code>SECURE_V3</code> הוא <strong>הפרוטוקול המאובטח היחיד</strong>. גם האפליקציה וגם הקושחה חייבות v3.</p>
+<h3 id="81-provisioning-bundle">8.1 Provisioning bundle</h3>
+<p>כל שער מאובטח מחזיק ב-<code>Gate.security</code>:</p>
+<pre><code>{ protocol: "SECURE_V3",
+  keyId: string,            // חריץ מפתח, למשל "key-1"
+  devicePublicKey: string,  // מפתח ציבורי P-256 דחוס, hex
+  pairingSecret: string }   // סוד pairing 32 בייט לכל שער, hex</code></pre>
+<h3 id="82-ה-handshake-צעד-אחר-צעד">8.2 ה-Handshake — צעד אחר צעד</h3>
+<p><strong>קבועים</strong> (secureProtocol.ts): גרסה <code>3</code>, freshness ברירת מחדל <code>15000ms</code>, תוויות: <code>wifigate-ble-secure-v3</code> (transcript), <code>device-hello-proof-v3</code>, <code>command-auth-v3</code>.</p>
+<pre><code>אפליקציה                                     שער (ESP32)
+   │  1. client_hello (plaintext JSON)          │
+   │  { v:3, type, keyId, sessionId,            │
+   │    clientPub, clientNonce }                │
+   │ ─────────────────────────────────────────►│
+   │                                            │  מאמת v/keyId/nonce
+   │  2. device_hello (מוצפן)                    │  גוזר helloKey/helloNonce
+   │  { v:3, type, ct, devicePub, nonce,        │
+   │    sessionId, sid }                        │
+   │◄───────────────────────────────────────── │
+   │  ct מפוענח ל:                               │
+   │  { deviceNonce, expiresInMs:30000,         │
+   │    keyId, pairingProof }                   │
+   │                                            │
+   │  3. שני הצדדים גוזרים session keys           │
+   │  4. frame מוצפן (OPEN...) seq=1  ──────────►│
+   │  5. ◄────── response frame מוצפן seq=1      │</code></pre>
+<h3 id="83-גזירת-המפתחות-key-schedule">8.3 גזירת המפתחות (key schedule)</h3>
+<pre><code>ephemeral P-256 keypair (client)
+sharedSecret = ECDH(clientSecret, devicePub).X    // 32 בייט (X של הנקודה הדחוסה)
+
+helloKey   = HKDF-SHA256(sharedSecret, salt=clientNonce, info="hello-key|sid|session|keyId", 32)
+helloNonce = HKDF-SHA256(sharedSecret, salt=clientNonce, info="hello-nonce|...", 12)
+
+// device_hello מפוענח:
+plaintext = AES-256-GCM(helloKey, helloNonce, AAD="device_hello|systemId|sessionId").decrypt(ct)
+
+// אימות זהות המכשיר (proof-of-possession של pairingSecret):
+pairingProof = HMAC-SHA256(pairingSecret, "device-hello-proof-v3|systemId|session|keyId|clientPub|clientNonce|devicePub|deviceNonce")
+
+transcriptHash = SHA256("wifigate-ble-secure-v3|systemId|session|keyId|clientPub|clientNonce|devicePub|deviceNonce")
+
+// מפתחות session (salt = clientNonce || deviceNonce):
+clientWriteKey     = HKDF(sharedSecret, salt, "client-write-key|...", 32)
+deviceWriteKey     = HKDF(sharedSecret, salt, "device-write-key|...", 32)
+clientNoncePrefix  = HKDF(sharedSecret, salt, "client-nonce-prefix|...", 8)
+deviceNoncePrefix  = HKDF(sharedSecret, salt, "device-nonce-prefix|...", 8)
+authKey            = HKDF(pairingSecret, salt=transcriptHash, "command-auth-key|...", 32)</code></pre>
+<h3 id="84-מסגרת-פקודה-מוצפנת-command-frame">8.4 מסגרת פקודה מוצפנת (command frame)</h3>
+<pre><code>command = { cmd, systemId, timestamp, freshnessMs:15000, phone, role, name, ... }
+commandHash = SHA256(stableJson(command))                       // JSON יציב (מפתחות ממויינים)
+authTag = HMAC-SHA256(authKey, "command-auth-v3" || transcriptHash || seq(4B BE) || commandHash)
+
+innerPayload = { authTag, command }
+nonce = clientNoncePrefix(8) || seq(4B BE)                       // 12 בייט
+ct = AES-256-GCM(clientWriteKey, nonce, AAD="frame|c2d|systemId|session|seq").encrypt(innerPayload)
+frame = { v:3, type:"frame", seq, ct }</code></pre>
+<p>התגובה (d2c) סימטרית: <code>deviceWriteKey</code>, <code>deviceNoncePrefix</code>, AAD עם <code>d2c</code>. הקושחה מחזירה <code>{ type:"response", cmd, status:OK|BUSY|FAIL|UNAUTHORIZED, gateCommand?, relayState?, ... }</code>.</p>
+<blockquote><p><strong>stableJson חשוב</strong>: הפקודה מסודרת עם מפתחות ממויינים אלפביתית ובלי <code>undefined</code> (<code>stableStringify</code>), כדי ש-SHA256 יהיה זהה בשני הצדדים. שינוי סדר שדות ישבור את ה-HMAC. בנוסף, <code>systemId</code> <strong>מושמט</strong> מה-command על ה-wire כשאפשר לגזור אותו מה-session.</p></blockquote>
+<h3 id="85-עמידות-ל-replay-ו-freshness">8.5 עמידות ל-Replay ו-Freshness</h3>
+<p>Replay resistance נובעת מ<strong>שכבות מרובות</strong>: <code>sessionId</code> טרי, <code>clientNonce</code>/<code>deviceNonce</code> טריים, <code>seq</code> פר-frame, <code>authTag</code> קשור ל-transcript, session TTL, ואכיפת freshness.</p>
+<p><strong>Freshness</strong> (הקושחה): דוחה פקודה אם <code>freshnessMs</code> חסר/0, אם הוא גדול מ-TTL של ה-session, או אם גיל ה-session גדול מ-<code>freshnessMs</code>. הקושחה מתעדת את <code>freshnessMs</code> המבוקש, את הגיל הנמדד, ואת סיבת הדחייה.</p>
+<h3 id="86-שחזור-מפתח-מכשיר-device-key-rotation">8.6 שחזור מפתח מכשיר (device key rotation)</h3>
+<p>אם השער מחזיר <code>devicePub</code> שונה מהשמור אבל ה-<code>pairingProof</code> תקין — האפליקציה מקבלת את המפתח החדש (<code>usedStoredDevicePublicKey=false</code>) ומרעננת אותו לאחר הצלחת הפקודה. אם הפענוח נכשל לגמרי → שגיאה ידידותית: *"This gate's secure identity changed. Scan the latest WIFIGATE QR..."* (המכשיר כנראה עבר reprovision/flash-format).</p>
+<h3 id="87-פרמטרים-של-התעבורה-ble-transport">8.7 פרמטרים של התעבורה (BLE transport)</h3>
+<p>מ-<a href="../src/ble/openGate.ts">openGate.ts</a>: MTU מבוקש <code>517</code> (attribute מוגבל ל-512B), chunk = <code>mtu-3</code>, timeout להודעה <code>10000ms</code>, פריימינג לפי <code>\n</code>, כתיבה עם/בלי response לפי המאפיין. הודעות מיוחדות (<code>device_hello</code>, <code>frame</code>) מסוננות לפי <code>systemId</code>/ <code>sessionId</code>/<code>seq</code> — הודעות לא צפויות מדולגות עם <code>[BLE][SECURE] Ignoring unexpected...</code>.</p>
+<hr>
+<h2 id="9-הצפנת-קישורי-הזמנה">9. הצפנת קישורי הזמנה</h2>
+<p>מקור: <a href="../src/inviteLinkCrypto.ts">src/inviteLinkCrypto.ts</a>.</p>
+<pre><code>key = HKDF-SHA256(HMAC_URL_SECRET_bytes,
+                  salt="wifigate-invite-link:key-salt",
+                  info="wifigate-invite-link:aes-256-gcm", 32)
+ciphertext = AES-256-GCM(key, managedNonce, AAD="wifigate-invite-link:v1").encrypt(JSON)
+token = "v1." + base64url(nonce||ciphertext)</code></pre>
+<ul><li><code>managedNonce(gcm)</code> — ה-nonce מוגרל ומוצמד לפני ה-ciphertext אוטומטית.</li><li>הפלט מגורסה <code>v1.</code> — מאפשר version bump עתידי.</li><li><strong>אתר האינטרנט לא מפענח</strong> — הוא רק מעביר את ה-<code>ep=</code> לאפליקציה.</li></ul>
+<h3 id="מאפייני-אבטחה-ומגבלה-חשובה">מאפייני אבטחה ומגבלה חשובה</h3>
+<p>✅ ה-payload אטום ב-chat/דפדפן/preview. ✅ שיבוש גורם לכשל פענוח באפליקציה. ✅ האתר הסטטי לא צריך לדעת plaintext.</p>
+<p>⚠️ <strong>מגבלה</strong>: זו הצפנה עם <strong>shared secret שמוטמע ב-build</strong> — לא end-to-end לפי נמען. כל build אמין שמכיל את ה-URL secret יכול לפענח קישורים תקינים. זה חזק מ-query params רגילים, אבל <strong>לא</strong> שקול ל-token חד-פעמי/מונפק-שרת/קשור-נמען.</p>
+<hr>
+<h2 id="10-deep-linking">10. Deep Linking</h2>
+<p>מקור: <code>extractInvitationRoute</code> ב-<a href="../app/_layout.tsx">app/_layout.tsx</a>.</p>
+<p><strong>סכימות נתמכות</strong>: <code>wifigate://</code> (native) ו-<code>https://wifigate.io</code> (paths: <code>wifigate-link</code>, <code>wifigate-api</code>).</p>
+<p>הפונקציה מפרקת URL ומחליטה על היעד לפי סדר עדיפויות: <code>dual-control</code> → <code>group</code> → <code>open-gate</code> (widget) → <code>gate</code> (כולל <code>?ep=</code> שהופך ל- <code>gateId="invite"</code>). תומכת גם ב-<code>?link=</code> מקונן.</p>
+<p><strong>עדינות</strong>: אם המשתמש לא onboarded, הקישור נכנס לתור (<code>pendingInviteUrl</code>) ומעובד רק אחרי סיום ה-onboarding (<code>useEffect</code> על <code>isOnboarded</code>). כפילות מסוננת דרך <code>lastHandledInviteUrlRef</code>.</p>
+<p>לוגים לחפש: <code>[Linking] event/initial URL received</code>, <code>[Linking] Routing invitation URL</code>, <code>[Linking] Queueing invitation URL until onboarding completes</code>, <code>[Linking] Ignoring unsupported URL</code>.</p>
+<hr>
+<h2 id="11-fota-ota">11. FOTA / OTA</h2>
+<p>מקורות: <a href="../src/fota/publicFota.ts">src/fota/publicFota.ts</a> (Firebase, החדש), <code>driveFota.ts</code> (Google Drive, legacy), <a href="../app/firmware-update.tsx">app/firmware-update.tsx</a>. מדריך: <a href="../README_OTA_FIREBASE.md">README_OTA_FIREBASE.md</a>.</p>
+<p>הקושחה נקראת מ-<strong>Firebase Storage</strong> לפי שני מימדים:</p>
+<ul><li>ערוץ QR: <code>fotaChannel</code> = <code>dev</code> / <code>prod</code>.</li><li>variant חומרה: <code>8MB</code> / <code>16MB</code>.</li></ul>
+<p>⇒ 4 feeds: <code>{dev|prod}-fota/{8mb|16mb}/manifest.json</code>. האפליקציה מורידה chunks מוצפנים <code>.wgfota</code> שרשומים ב-manifest, ומאמתת <code>flashVariantMb</code> לפני המשך.</p>
+<p>הזרימה מול השער: <code>OTA_OPEN</code> דרך BLE → השער מחזיר SSID/password/token של ה-AP → האפליקציה מתחברת ומזרימה את הקושחה. ה-config הציבורי ב-<a href="../app.json">app.json</a> (<code>expo.extra.fotaStorage*</code>).</p>
+<p>לוגים: <code>[FOTA]</code>.</p>
+<hr>
+<h2 id="12-nearby-wi-fi-setup">12. Nearby Wi-Fi Setup</h2>
+<p>מקורות: <code>src/components/gate-settings/admin-access/NearbyWIFIGATELink.tsx</code>, <a href="../app/wifigate-setup.tsx">app/wifigate-setup.tsx</a>.</p>
+<p>מאפשר ל-admin לפתוח את ה-AP המקומי של השער ולהיכנס לעמוד ההגדרה:</p>
+<ol><li>admin בוחר "Nearby WIFIGATE Link".</li><li>בקשת הרשאות BLE + ודא Bluetooth.</li><li>שליחת <code>WIFI_OPEN</code> דרך BLE.</li><li>אם השער מאשר → מחזיר SSID/password נוכחיים.</li><li>scan רשתות Wi-Fi סמוכות (<code>react-native-wifi-reborn</code>).</li><li>חיבור ל-AP של השער.</li><li>פתיחת <code>http://192.168.4.1/</code> ב-WebView.</li></ol>
+<p><strong>ה-WebView מוקשח</strong>: מוגבל ל-host המקומי של השער, חוסם ניווט חיצוני שרירותי, חוסם app-scheme, תומך בהורדת CSV, ומציע reload/recovery.</p>
+<p>⚠️ פרוטוקול ה-BLE <strong>לא</strong> מאבטח את עמוד ה-HTTP הזה — זו workflow נפרדת על רשת מקומית.</p>
+<p>לוגים: <code>[NearbyWIFIGATELink]</code>, <code>[WebView]</code>, <code>[WiFi]</code>.</p>
+<hr>
+<h2 id="13-לוגים-חשובים">13. לוגים חשובים</h2>
+<p><code>logger.ts</code> מגדיר <code>log</code>/<code>warn</code> שרצים <strong>רק ב-<code>__DEV__</code></strong>. אבל שים לב: הרבה מהלוגים הקריטיים (BLE, Store, Linking) משתמשים ב-<code>console.log</code>/<code>console.warn</code> <strong>ישירות</strong>, כלומר יופיעו גם ב-builds רגילים. לכן ה-BLE trace הוא כלי ה-debug המרכזי בשטח.</p>
+<h3 id="141-קטלוג-תגיות-לפי-תדירות">14.1 קטלוג תגיות (לפי תדירות)</h3>
+<table><thead><tr><th>תגית</th><th>היכן</th><th>מה מספרת</th></tr></thead><tbody><tr><td><code>[BLE]</code></td><td>ble/openGate.ts</td><td>scan, connect, MTU, chunks TX/RX, timeouts</td></tr><tr><td><code>[BLE][SECURE]</code></td><td>ble/openGate.ts</td><td>handshake, client/device hello, frames מוצפנים</td></tr><tr><td><code>[Store]</code></td><td>gatesStore.ts</td><td>טעינה, merge, downgrade prevention, cleanup</td></tr><tr><td><code>[GateOpenFlow]</code></td><td>openGateFlow.ts</td><td>שלבי ה-orchestration של הפתיחה</td></tr><tr><td><code>[MyGates]</code></td><td>features/my-gates</td><td>מסך הבית (collections, tiles)</td></tr><tr><td><code>[GateScreen]</code></td><td>app/gate</td><td>מסך פרטי שער</td></tr><tr><td><code>[AutoOpen]*</code></td><td>auto-open/*</td><td>מפתח ה‑beacon וההרשאה</td></tr><tr><td><code>[Linking]</code></td><td>_layout.tsx</td><td>קליטת deep links וניתוב</td></tr><tr><td><code>[ENCRYPTED_INVITE_PARAM]</code></td><td>linkService</td><td>פרסינג <code>ep=</code></td></tr><tr><td><code>[InviteLinkCrypto]</code></td><td>inviteLinkCrypto.ts</td><td>כשל פענוח payload</td></tr><tr><td><code>[FOTA]</code></td><td>fota/*</td><td>OTA</td></tr><tr><td><code>[NearbyWIFIGATELink]</code> <code>[WebView]</code> <code>[WiFi]</code></td><td>setup flow</td><td>Nearby Wi-Fi</td></tr><tr><td><code>[GateWidget]</code> <code>[WidgetHeadlessOpen]</code> <code>[WidgetOpenGate]</code></td><td>widgets/*</td><td>widget פתיחה</td></tr><tr><td><code>[storage]</code></td><td>storage.ts</td><td>usage, dump, כשלי כתיבה</td></tr><tr><td><code>[Contacts]</code> <code>[Camera]</code></td><td>permissions</td><td>הרשאות</td></tr></tbody></table>
+<h3 id="142-מה-לחפש-בכל-flow-debug-playbook">14.2 מה לחפש בכל flow (debug playbook)</h3>
+<p><strong>פתיחת שער נכשלת:</strong></p>
+<pre><code>[GateOpenFlow] Checking BLE permissions / Bluetooth state
+[BLE] Scanning for gate for Nms...
+[BLE] Gate not found. Move closer...        ← TIMEOUT (קרבה/שם advertise)
+[BLE] Requested MTU 517, negotiated N
+[BLE][SECURE] Sending client_hello. sessionId=...
+[BLE][SECURE] Waiting for device_hello...
+[BLE][SECURE][DEVICE_HELLO_PARSE] ...        ← bundle לא תואם (reprovision?)
+[BLE][SECURE] Sending encrypted OPEN frame. seq=1
+[GateOpenFlow] BLE result: { status: ... }</code></pre>
+<p><strong>זהות שער השתנתה:</strong> חפש <code>Could not decrypt device_hello with the stored secure bundle</code> / <code>pairing proof mismatch</code> → צריך לסרוק QR מחדש.</p>
+<p><strong>Import של קישור נכשל:</strong> <code>[Linking] Routing invitation URL</code> → <code>[InviteLinkCrypto] Failed to decrypt invitation payload</code> (שיבוש/secret לא תקין) או Alert "Invalid invitation / Access expired / Unauthorized".</p>
+<p><strong>guest נעלם:</strong> <code>🧹 [Store] N guest gate(s) removed (expired)</code> — פג תוקף בעת אתחול.</p>
+<p><strong>downgrade נמנע:</strong> <code>[Store] Preventing role downgrade for gate X: ADMIN stays</code>.</p>
+<hr>
+<h2 id="14-הרשאות-ופלטפורמה">14. הרשאות ופלטפורמה</h2>
+<p>מוגדר ב-<a href="../app.json">app.json</a> וקבצים native. האפליקציה צריכה:</p>
+<ul><li><strong>מצלמה</strong> — סריקת QR.</li><li><strong>Bluetooth</strong> — תקשורת שער.</li><li><strong>Location (Android)</strong> — נדרש היסטורית ל-BLE/Wi-Fi scanning.</li><li><strong>Nearby Wi-Fi devices (Android)</strong>.</li><li><strong>Local network (iOS)</strong> — גישה ל-<code>192.168.4.1</code>.</li></ul>
+<p>Deep linking מוגדר ל-<code>wifigate://</code> ו-<code>https://wifigate.io</code>.</p>
+<ul><li>שער כניסה להרשאות: <a href="../src/permissions/appLaunch.ts">src/permissions/appLaunch.ts</a></li></ul>
+<p>  (<code>checkAppLaunchPermissions</code> = BLE + Bluetooth ready; <code>prepareStartupPermissionsForSignIn</code>   = contacts + BLE).</p>
+<ul><li>מצב Bluetooth: <code>ble/bluetoothState.ts</code> (<code>ensureBluetoothReady</code>).</li><li>הרשאות BLE: <code>ble/permissions.ts</code> (<code>ensureBlePermissionsInteractive</code>, <code>hasBlePermissions</code>).</li></ul>
+<hr>
+<h2 id="15-סודות-ו-build-inputs">15. סודות ו-Build Inputs</h2>
+<p>קלטים נדרשים (חלקם <strong>gitignored</strong>):</p>
+<ul><li><code>src/crypto/HMAC_SECRETS.json</code> — <strong>סוד</strong>. משמש לשחזור <code>HMAC_URL_SECRET</code> (הצפנת</li></ul>
+<p>  קישורים) וכל הגנת URL/HMAC legacy. נגזר דרך <a href="../src/crypto/hmacSecrets.ts">src/crypto/hmacSecrets.ts</a>.</p>
+<ul><li><code>GoogleService-Info.plist</code> (iOS) + <code>google-services.json</code> (Android) — Firebase.</li></ul>
+<p><strong>EAS</strong>: הסקריפט <a href="../scripts/eas-pre-install.js">scripts/eas-pre-install.js</a> שם את <code>HMAC_SECRETS.json</code> בסביבת ה-build (<code>eas-build-pre-install</code>). מחוץ ל-repo, מסופק דרך משתנה סביבה/CI.</p>
+<p>⚠️ אם <code>HMAC_URL_SECRET</code> לא מוגדר — <code>deriveInviteLinkKey</code> זורק שגיאה וכל הצפנת/פענוח הקישורים תיכשל.</p>
+<hr>
+<h2 id="16-פיתוח-מקומי-וריליז">16. פיתוח מקומי וריליז</h2>
+<p>מ-<a href="../package.json">package.json</a>:</p>
+<pre><code>npm install
+# ספק src/crypto/HMAC_SECRETS.json (או HMAC_SECRETS_JSON ב-EAS)
+# ודא קבצי Firembase לסביבה
+
+npm run start:dev-client   # expo start --dev-client
+npm run start:usb          # Android דרך USB (PowerShell script)
+npm run reset:app          # איפוס state של אפליקציית Android
+npm run reset:usb          # reset + relaunch
+
+npm run lint               # eslint
+npm run typecheck          # tsc --noEmit
+npm run verify             # lint + typecheck ★ הרץ לפני shipping</code></pre>
+<h3 id="release-checklist-smoke-test-על-מכשיר">Release checklist (smoke test על מכשיר)</h3>
+<ul><li><label class="task"><input type="checkbox" disabled > Sign-in ב-phone OTP</label></li><li><label class="task"><input type="checkbox" disabled > QR / manual import</label></li><li><label class="task"><input type="checkbox" disabled > import של קישור מוצפן</label></li><li><label class="task"><input type="checkbox" disabled > guest invite flow</label></li><li><label class="task"><input type="checkbox" disabled > user/admin invite flow</label></li><li><label class="task"><input type="checkbox" disabled > פתיחת שער ב-BLE</label></li><li><label class="task"><input type="checkbox" disabled > Nearby Wi-Fi setup</label></li><li><label class="task"><input type="checkbox" disabled > ייצוא CSV מעמוד ה-setup (אם רלוונטי)</label></li></ul>
+<p>build ו-submit עם EAS אחרי smoke test.</p>
+<hr>
+<h2 id="17-גבולות-אבטחה">17. גבולות אבטחה</h2>
+<p>חשוב להבין <strong>מה לא מוגן</strong>:</p>
+<ul><li><code>SECURE_V3</code> מגן על תעבורת ה-BLE <strong>בלבד</strong> — לא על עמוד ה-HTTP setup</li></ul>
+<p>  (<code>192.168.4.1</code>), לא על שיתוף הקישורים, ולא על אחסון ה-credentials בטלפון.</p>
+<ul><li>קישורי הזמנה מוצפנים ועמידים לשיבוש, אבל משתמשים ב-<strong>shared secret ב-build</strong> —</li></ul>
+<p>  לא token מונפק-שרת/חד-פעמי/קשור-נמען.</p>
+<ul><li>מצב השערים <strong>local-first</strong> ב-AsyncStorage — אין בעלות שער מסונכרנת בענן.</li><li>תפקידים נאכפים גם ע"י לוגיקת האפליקציה וגם ע"י התנהגות המכשיר, אבל **ההרשאה</li></ul>
+<p>  הסופית של החומרה חייבת להיאכף בקושחה** — לא לסמוך על ה-UI.</p>
+<hr>
+<h2 id="18-cheat-sheet">18. Cheat Sheet</h2>
+<h3 id="קבצים-לפי-משימה">קבצים לפי משימה</h3>
+<table><thead><tr><th>רוצה להבין...</th><th>קרא</th></tr></thead><tbody><tr><td>קריפטו BLE ו-message flow</td><td><a href="./ble-security-protocol-v3.md">docs/ble-security-protocol-v3.md</a>, <a href="../src/ble/secureProtocol.ts">secureProtocol.ts</a></td></tr><tr><td>ליבת BLE (scan/connect/frames)</td><td><a href="../src/ble/openGate.ts">ble/openGate.ts</a></td></tr><tr><td>orchestration של פתיחה</td><td><a href="../src/openGateFlow.ts">openGateFlow.ts</a></td></tr><tr><td>חוקי role ו-merge</td><td><a href="../src/models.ts">models.ts</a>, <a href="../src/gatesStore.ts">gatesStore.ts</a></td></tr><tr><td>יצירת/import קישורים</td><td><a href="../src/linkService.ts">linkService.ts</a>, <a href="../src/inviteLinkCrypto.ts">inviteLinkCrypto.ts</a></td></tr><tr><td>פרוטוקול קישורים מלא</td><td><a href="../README_WIFIGATE_LINK_INVITATIONS.md">README_WIFIGATE_LINK_INVITATIONS.md</a></td></tr><tr><td>deep linking</td><td><a href="../app/_layout.tsx">app/_layout.tsx</a></td></tr><tr><td>Nearby setup</td><td><code>NearbyWIFIGATELink.tsx</code>, <a href="../app/wifigate-setup.tsx">app/wifigate-setup.tsx</a></td></tr><tr><td>OTA</td><td><a href="../README_OTA_FIREBASE.md">README_OTA_FIREBASE.md</a>, <a href="../src/fota/publicFota.ts">fota/publicFota.ts</a></td></tr><tr><td>אחסון</td><td><a href="../src/storage.ts">storage.ts</a></td></tr></tbody></table>
+<h3 id="פקודות-ble-securecommandname">פקודות BLE (SecureCommandName)</h3>
+<pre><code>OPEN  TOGGLE_ON  TOGGLE_OFF
+OPEN_GUEST  TOGGLE_GUEST_ON  TOGGLE_GUEST_OFF
+PUSH_BUTTON_HOLD  PUSH_BUTTON_RELEASE
+ADD_USER  ADD_ADMIN
+WIFI_OPEN  OTA_OPEN  GET_FW_VERSION
+GET_AUTO_OPEN_STATUS  CHECK_AUTO_OPEN_RSSI  GET_GATE_COMMAND</code></pre>
+<h3 id="ערכי-gatecommand-בתגובה">ערכי gateCommand בתגובה</h3>
+<p><code>1=PULSE  2=PULSE_AFTER_PULSE  3=PULSE_AFTER_PULSE_AFTER_PULSE  4=TOGGLE  5=PUSH_BUTTON</code></p>
+<h3 id="nordic-uart-uuids">Nordic UART UUIDs</h3>
+<pre><code>Service  6e400001-b5a3-f393-e0a9-e50e24dcca9a
+RX (write) 6e400002-b5a3-f393-e0a9-e50e24dcca9a
+TX (notify) 6e400003-b5a3-f393-e0a9-e50e24dcca9a</code></pre>
+<hr>
+<p>*מסמך זה נכתב מקריאת קוד המקור. כשמשהו בקוד משתנה (במיוחד <code>secureProtocol.ts</code>, <code>linkService.ts</code>, <code>gatesStore.ts</code>) — עדכנו גם כאן.*</p></template>
+<template id="tpl-en"><h1 id="wifigate-handbook-end-to-end-professional-guide">WiFiGate Handbook — End-to-End Professional Guide</h1>
+<blockquote><p>A complete learning document for the WiFiGate system: how everything works, <strong>why</strong> it is built this way, which libraries are used, all the flows, and the important logs for each stage. Written by reading the actual source code, not from memory.</p>
+<p>If you want a general overview, read <a href="../README.md">README.md</a> first. This document is a deeper layer: a learning guide + reference.</p>
+<p>🇮🇱 A Hebrew version of this handbook is available at <a href="./WIFIGATE_HANDBOOK_HE.md">WIFIGATE_HANDBOOK_HE.md</a>.</p></blockquote>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol><li><a href="#1-big-picture">Big Picture: what WiFiGate is and why</a></li><li><a href="#2-the-tech-stack">The tech stack — every library and why it was chosen</a></li><li><a href="#3-code-map">Code map — where everything lives</a></li><li><a href="#4-data-model">Data model — Gate, Role, Group, Dual Control</a></li><li><a href="#5-the-storage-layer">The storage layer — why local-first and how it works</a></li><li><a href="#6-state-management">State management — the custom store</a></li><li><a href="#7-the-core-flows">The core end-to-end flows</a></li><li><a href="#8-the-secure-ble-protocol">The secure BLE protocol SECURE_V3 — in depth</a></li><li><a href="#9-invitation-link-encryption">Invitation-link encryption — in depth</a></li><li><a href="#10-deep-linking">Deep Linking — how a link becomes a screen</a></li><li><a href="#11-fota--ota">FOTA / OTA — firmware update</a></li><li><a href="#12-nearby-wi-fi-setup">Nearby Wi-Fi Setup — the local setup page</a></li><li><a href="#13-important-logs">Important logs — full catalog by tag</a></li><li><a href="#14-permissions-and-platform">Permissions and platform</a></li><li><a href="#15-secrets-and-build-inputs">Secrets and build inputs</a></li><li><a href="#16-local-development-and-release">Local development, checks, and release</a></li><li><a href="#17-security-boundaries">Security boundaries — what is protected and what is not</a></li><li><a href="#18-cheat-sheet">Cheat Sheet — quick references</a></li></ol>
+<hr>
+<h2 id="1-big-picture">1. Big Picture</h2>
+<p>WiFiGate is a <strong>React Native / Expo</strong> app for controlling physical gates driven by WiFiGate firmware (based on the ESP32-C6). The app is essentially two things at once:</p>
+<ol><li>A <strong>gate wallet</strong> on the phone — a list of gates with different access levels</li></ol>
+<p>   and lifetimes.</p>
+<ol><li>A <strong>secure control client</strong> for the device — it opens a gate over Bluetooth</li></ol>
+<p>   Low Energy using an encrypted protocol.</p>
+<h3 id="the-apps-three-jobs">The app's three jobs</h3>
+<p>The app stores gate metadata <strong>locally</strong> (local-first) and uses that list to drive three jobs:</p>
+<ul><li><strong>Opening a gate over BLE</strong> (the core).</li><li><strong>Sharing / receiving access</strong> via encrypted invitation links.</li><li><strong>Entering local setup over Wi-Fi</strong> (the <code>http://192.168.4.1/</code> page).</li></ul>
+<h3 id="guiding-principle-separation-of-security-layers">Guiding principle: separation of security layers</h3>
+<p>This is a critical point for understanding the whole architecture — there are <strong>two separate security problems</strong> with <strong>two separate solutions</strong>:</p>
+<table><thead><tr><th>Layer</th><th>What it protects</th><th>Mechanism</th></tr></thead><tbody><tr><td>BLE (SECURE_V3)</td><td>phone↔gate communication</td><td>ECDH + HKDF + AES-256-GCM + HMAC</td></tr><tr><td>Invitation links</td><td>the payload inside the URL</td><td>AES-256-GCM with a key derived from <code>HMAC_URL_SECRET</code></td></tr></tbody></table>
+<p>They do <strong>not</strong> replace each other. An encrypted link does not protect BLE, and SECURE_V3 does not protect the URL. See <a href="#17-security-boundaries">Section 17</a>.</p>
+<pre><code>┌───────────────────────────────────────────────────────────────┐
+│                        WiFiGate app                            │
+│                                                                │
+│   UI (app/ - Expo Router)                                      │
+│        │                                                       │
+│   openGateFlow  ─┬─ gatesStore (state)  ─── storage (AsyncStorage)
+│        │         │                                             │
+│   ble/openGate ──┴─ ble/secureProtocol (crypto SECURE_V3)      │
+│        │                                                       │
+└────────┼───────────────────────────────────────────────────────┘
+         │ BLE (Nordic UART Service)          │ Wi-Fi AP 192.168.4.1
+         ▼                                     ▼
+   ┌──────────────┐                     ┌──────────────┐
+   │ ESP32-C6 gate│◄── OTA (Firebase) ──│  setup page  │
+   └──────────────┘                     └──────────────┘</code></pre>
+<hr>
+<h2 id="2-the-tech-stack">2. The Tech Stack</h2>
+<p>Source: <a href="../package.json">package.json</a>. Below are the significant libraries and <strong>why</strong> they are there.</p>
+<h3 id="core-runtime-and-navigation">Core — Runtime and Navigation</h3>
+<table><thead><tr><th>Library</th><th>Role</th><th>Why</th></tr></thead><tbody><tr><td><code>expo</code> ~54 / <code>react-native</code> 0.81 / <code>react</code> 19</td><td>the base</td><td>Expo provides a dev-client, builds (EAS), and config plugins without touching native code by hand</td></tr><tr><td><code>expo-router</code> ~6</td><td>file-based routing</td><td>every file in <code>app/</code> is a route; deep-linking is built in</td></tr><tr><td><code>expo-dev-client</code></td><td>custom dev build</td><td>required — the app depends on native modules (BLE, Wi-Fi) that don't exist in Expo Go</td></tr><tr><td><code>react-native-reanimated</code> / <code>gesture-handler</code> / <code>worklets</code></td><td>animations and gestures</td><td>smooth UI, drag-to-reorder</td></tr><tr><td><code>zustand</code></td><td>state (available)</td><td><strong>Note:</strong> the main gate store (<code>gatesStore.ts</code>) is hand-built and does <strong>not</strong> use zustand. See <a href="#6-state-management">Section 6</a></td></tr></tbody></table>
+<h3 id="cryptography-the-heart-of-security">Cryptography — the heart of security</h3>
+<table><thead><tr><th>Library</th><th>Role</th></tr></thead><tbody><tr><td><code>@noble/curves</code></td><td>P-256 curve (ECDH for the handshake)</td></tr><tr><td><code>@noble/hashes</code></td><td>SHA-256, HKDF, HMAC</td></tr><tr><td><code>@noble/ciphers</code></td><td>AES-256-GCM</td></tr><tr><td><code>react-native-get-random-values</code></td><td>polyfill for <code>crypto.getRandomValues</code> (must load <strong>first</strong> — see line 1 of <code>app/_layout.tsx</code>)</td></tr><tr><td><code>buffer</code> / <code>base-64</code></td><td>base64 encoding for BLE and links</td></tr></tbody></table>
+<p><code>@noble/*</code> were chosen because they are pure-JS crypto libraries, no native dependency, audited, and suitable for React Native (which lacks a full <code>crypto</code>).</p>
+<h3 id="ble-and-wi-fi-the-physical-transport">BLE and Wi-Fi — the physical transport</h3>
+<table><thead><tr><th>Library</th><th>Role</th></tr></thead><tbody><tr><td><code>react-native-ble-plx</code></td><td>the BLE core: scan, connect, GATT, notify/write</td></tr><tr><td><code>react-native-bluetooth-state-manager</code></td><td>Bluetooth state (on/off) and enable request</td></tr><tr><td><code>react-native-wifi-reborn</code></td><td>scan/connect to the gate's AP (the Nearby setup flow)</td></tr><tr><td><code>react-native-webview</code></td><td>displaying the local <code>192.168.4.1</code> setup page</td></tr></tbody></table>
+<h3 id="identity-and-auth">Identity and Auth</h3>
+<table><thead><tr><th>Library</th><th>Role</th></tr></thead><tbody><tr><td><code>@react-native-firebase/auth</code> + <code>firebase</code></td><td>SMS OTP phone authentication</td></tr><tr><td><code>@react-native-google-signin/google-signin</code></td><td>Google identity (fills email for BLE)</td></tr><tr><td><code>expo-apple-authentication</code></td><td>Sign in with Apple</td></tr><tr><td><code>expo-auth-session</code></td><td>OAuth flows</td></tr><tr><td><code>libphonenumber-js</code> + <code>country-list</code></td><td>normalizing/validating phone numbers and country codes</td></tr></tbody></table>
+<h3 id="io-and-ui">I/O and UI</h3>
+<p><code>expo-camera</code> (QR scanning), <code>react-native-qrcode-svg</code> (QR generation for sharing), <code>expo-contacts</code> (picking an invitee from contacts), <code>expo-file-system</code> + <code>expo-sharing</code> (CSV / file export), <code>react-native-draggable-flatlist</code> (reordering gates), <code>lottie-react-native</code> (animations), <code>@react-native-async-storage/async-storage</code> (local storage).</p>
+<hr>
+<h2 id="3-code-map">3. Code Map</h2>
+<pre><code>app/                         # Expo Router — each screen is a route
+  _layout.tsx                # root: deep-link routing, auth gating, splash
+  index.tsx                  # home screen: gate list, groups, search, reorder
+  scan.tsx                   # QR scanning + import
+  gate/[id].tsx              # link import + gate details screen
+  open-gate/[id].tsx         # quick open (from widget/deep link)
+  group/[id].tsx             # group screen
+  dual-control/[id].tsx      # dual-control screen
+  nearby-wifigate-link.tsx   # entry to Nearby Wi-Fi setup
+  wifigate-setup.tsx         # the WebView of the local setup page
+  firmware-update.tsx        # OTA screen
+  settings/[id].tsx          # gate settings
+  auth/login.tsx             # login (provider)
+  auth/phone.tsx             # phone OTP
+
+src/
+  models.ts                  # all types: Gate, UserRole, GateGroup, DualControl...
+  storage.ts                 # AsyncStorage — all keys, load/save, normalization
+  gatesStore.ts              # the central state store (manual observable) + merge rules
+  gateService.ts             # guest-access validation and service logic
+  openGateFlow.ts            # the gate-open orchestration (permissions→BT→BLE)
+  gateOpenBlockReason.ts     # mapping error messages to block reasons
+  gateSecurity.ts            # parsing/normalizing the security bundle (SECURE_V3)
+
+  ble/
+    openGate.ts              # the BLE core (scan/connect/handshake/frames) — the big file
+    secureProtocol.ts        # the SECURE_V3 crypto (handshake, keys, frames)
+    bluetoothState.ts        # Bluetooth state + ensureBluetoothReady
+    permissions.ts           # BLE permissions
+
+  inviteLinkCrypto.ts        # encrypt/decrypt of link payloads (AES-GCM)
+  linkService.ts             # parse/build invitation links (single/group/dual)
+  dualControlInviteImport.ts # import of a dual-control invitation
+  groupInviteImport.ts       # import of a group invitation
+
+  auth/                      # LocalAuthContext, providerIdentity, google/apple
+  auto-open/                 # beacon key + capability (spec: docs/WIFIGATE_AUTO_OPEN.html)
+  fota/                      # publicFota (Firebase), driveFota (legacy)
+  widgets/                   # gate widget (Android) + headless open
+  wifi/                      # useGateWifiConnectionGuard
+  crypto/                    # hmacSecrets (reconstructs HMAC_URL_SECRET)
+  i18n/                      # languages and translations
+  permissions/               # appLaunch, contacts, wifi
+  utils/                     # datetime, gateCommand, guestAccess, subscription...
+  components/                # all UI: modals, gate-settings, admin-access...
+  features/my-gates/         # the home-screen collections (tiles, helpers)
+
+docs/
+  ble-security-protocol-v3.md  # the formal SECURE_V3 spec
+  WIFIGATE_HANDBOOK_EN.md      # this document
+  WIFIGATE_HANDBOOK_HE.md      # Hebrew version
+
+README.md                          # general overview
+README_WIFIGATE_LINK_INVITATIONS.md# the full invitation-link protocol
+README_OTA_FIREBASE.md             # OTA from Firebase Storage
+WIFIGATE_API_README.md             # links issued by the WIFIGATE API</code></pre>
+<hr>
+<h2 id="4-data-model">4. Data Model</h2>
+<p>Source: <a href="../src/models.ts">src/models.ts</a>.</p>
+<h3 id="41-gate">4.1 Gate</h3>
+<p>The central entity. Important fields:</p>
+<pre><code>type Gate = {
+  id: string;            // local identifier (= systemId currently)
+  systemId: string;      // hardware id, used in BLE and links. e.g. "9876543210123456"
+  systemName: string;    // the original/imported name
+  displayName: string;   // the name the user can edit
+  role: UserRole;        // ★ the role decides everything (see 4.2)
+  subscription?: "OFFLINE" | "ONLINE" | "WIFI" | "ALL_IN_ONE";
+  security?: GateSecurityConfig;   // the SECURE_V3 bundle
+  gateCommand?: GateCommandType;   // the command type the firmware reported (PULSE/TOGGLE/PUSH_BUTTON...)
+  autoOpen?: GateAutoOpenSettings;
+  // sharing/hosting:
+  hostPhone/hostName/hostEmail?    // the inviter
+  guestPhone?                      // the invitee (in a private guest link)
+  accessStart/accessEnd?           // validity window (ms)
+  // registration for PRE_USER/PRE_ADMIN:
+  residentName/floorNumber/apartmentNumber/parkingNumber?
+  openHistory?: GateOpenHistoryEntry[];  // local log of recent opens (newest-first)
+};</code></pre>
+<h3 id="42-role-the-role-decides-everything">4.2 Role — the role decides everything</h3>
+<pre><code>type UserRole = "ADMIN" | "USER" | "GUEST" | "PRE_USER" | "PRE_ADMIN";</code></pre>
+<table><thead><tr><th>Role</th><th>Meaning</th><th>Source</th><th>BLE command after import</th></tr></thead><tbody><tr><td><code>ADMIN</code></td><td>confirmed admin</td><td>after firmware confirmation</td><td><code>OPEN</code> / <code>TOGGLE_*</code></td></tr><tr><td><code>USER</code></td><td>confirmed permanent user</td><td>after firmware confirmation</td><td><code>OPEN</code> / <code>TOGGLE_*</code></td></tr><tr><td><code>GUEST</code></td><td>temporary access with a time window</td><td>guest link</td><td><code>OPEN_GUEST</code> / <code>TOGGLE_*_GUEST</code></td></tr><tr><td><code>PRE_USER</code></td><td>invited as user, not yet confirmed</td><td>user link (<code>r=PU</code>)</td><td><code>ADD_USER</code></td></tr><tr><td><code>PRE_ADMIN</code></td><td>invited/added as admin, not yet confirmed</td><td>QR/manual or admin link (<code>r=PA</code>)</td><td><code>ADD_ADMIN</code></td></tr></tbody></table>
+<p><strong>Why <code>PRE_*</code>?</strong> Because the app is local-first — it cannot know that the firmware confirmed you. Until the device confirms, you are in a "pending" state. When <code>ADD_USER</code>/<code>ADD_ADMIN</code> runs successfully against the gate, the firmware confirms, and the <code>onRoleUpgrade</code> callback upgrades <code>PRE_USER→USER</code> / <code>PRE_ADMIN→ADMIN</code> (see <code>maybeUpgradeRole</code> in <a href="../src/ble/openGate.ts">openGate.ts</a> and the persist in <a href="../src/openGateFlow.ts">openGateFlow.ts</a>).</p>
+<h3 id="43-role-merge-rules-why-a-gate-isnt-destroyed">4.3 Role merge rules (why a gate isn't "destroyed")</h3>
+<p>Source: <code>addGate</code> in <a href="../src/gatesStore.ts">gatesStore.ts</a>. The system protects permanent access from an accidental downgrade:</p>
+<ul><li>A permanent gate (ADMIN/USER) is <strong>not</strong> downgraded to GUEST when importing a</li></ul>
+<p>  guest link.</p>
+<ul><li>A permanent role is <strong>not</strong> overwritten by a weaker <code>PRE_*</code> role.</li><li>A guest gate <strong>can</strong> be upgraded to a permanent/pending role.</li><li>A custom name (<code>displayName</code>) is preserved if a later import brings only a</li></ul>
+<p>  default name.</p>
+<h3 id="44-gategroup-and-dualcontrol">4.4 GateGroup and DualControl</h3>
+<ul><li><strong>GateGroup</strong> — a purely local UI container. It changes no firmware/BLE</li></ul>
+<p>  behavior. It supports nesting via <code>parentGroupId</code>. It holds <code>gateIds[]</code> and   <code>dualControlIds[]</code>.</p>
+<ul><li><strong>DualControl</strong> — a pair of gates (<code>firstGateId</code>/<code>secondGateId</code>) with two</li></ul>
+<p>  action labels (<code>firstLabel</code>/<code>secondLabel</code>, e.g. "Open"/"Close"). Every   dual-control invitation contains <strong>exactly 2 gates</strong>.</p>
+<hr>
+<h2 id="5-the-storage-layer">5. The Storage Layer</h2>
+<p>Source: <a href="../src/storage.ts">src/storage.ts</a>. The system is <strong>local-first</strong> — gate state lives in AsyncStorage, not in the cloud. There is no central "gate ownership" server.</p>
+<h3 id="storage-keys-keys">Storage keys (<code>KEYS</code>)</h3>
+<pre><code>wifigate:gates                 # the gates array
+wifigate:localProfile          # onboarding profile (name/email/phone/provider/terms)
+wifigate:phone                 # phone number
+wifigate:username              # display name
+wifigate:language / :languagePreview
+wifigate:gates:order           # display order
+wifigate:gates:groups          # groups
+wifigate:gates:dualControls    # dual controls
+wifigate:gates:toggleRelayStates # last relay state for TOGGLE gates
+wifigate:firmware:url          # last firmware URL
+wifigate:defaultCountryIso2    # default country code
+wifigate:appleIdentityRecords  # map userId→Apple identity (Apple doesn't send email every time)
+wifigate:guestTable:*          # guest-table display preferences</code></pre>
+<h3 id="subtleties-worth-knowing">Subtleties worth knowing</h3>
+<ul><li><strong><code>loadGates()</code> normalizes on every load</strong>: it merges <code>openHistory</code> with</li></ul>
+<p>  <code>lastOpenedAt</code>, normalizes <code>gateCommand</code>, <code>fotaChannel</code>, <code>hostEmail</code>   (lowercase), and guest access.</p>
+<ul><li><strong><code>getJSON</code>/<code>setJSON</code> swallow errors</strong> and return a fallback — a failed write</li></ul>
+<p>  won't crash the app (but also won't alert — worth remembering while debugging).</p>
+<ul><li><strong>Android limit</strong>: <code>DEFAULT_ANDROID_ASYNC_STORAGE_LIMIT_BYTES = 6MB</code>.</li></ul>
+<p>  <code>debugPrintAllLocalStorage()</code> prints used/remaining + a full dump — an   excellent debug tool.</p>
+<ul><li><strong>Cached profile</strong>: <code>cachedLocalProfile</code> is loaded once;</li></ul>
+<p>  <code>loadPhone/loadUsername/loadEmail</code> prefer it.</p>
+<hr>
+<h2 id="6-state-management">6. State Management</h2>
+<p>Source: <a href="../src/gatesStore.ts">src/gatesStore.ts</a>.</p>
+<p>This is a <strong>hand-built observable store</strong> — not Redux and not zustand (even though zustand is in the deps):</p>
+<pre><code>let _gates: Gate[] = [];
+const listeners = new Set&lt;() =&gt; void&gt;();
+export function subscribe(fn) { listeners.add(fn); return () =&gt; listeners.delete(fn); }
+function notify() { listeners.forEach(f =&gt; f()); }</code></pre>
+<p>Every mutation (<code>addGate</code>, <code>updateGateRole</code>, <code>renameGate</code>, ...) works <strong>immutably</strong> (builds a new array), calls <code>saveGates</code>, <code>notify</code>, and when needed <code>syncGateWidgets()</code> + <code>syncAutoOpen()</code>.</p>
+<h3 id="initgates-what-happens-at-startup-very-important"><code>initGates()</code> — what happens at startup (very important)</h3>
+<ol><li><code>loadGates()</code> from AsyncStorage.</li><li><code>normalizeGateRoleOnLoad</code> — migration of old guests (<code>isGuest:true</code> →</li></ol>
+<p>   <code>role:"GUEST"</code>).</p>
+<ol><li>Comment migration (default).</li><li><strong>Remove old gates without a <code>role</code></strong> — the model is role-based only now.</li><li><code>notify()</code>.</li><li><code>cleanupExpired(true)</code> — <strong>removes expired guest gates</strong> and shows an Alert.</li><li><code>syncGateWidgets()</code> + <code>syncAutoOpen()</code>.</li></ol>
+<p>Logs to look for: <code>🔄 [Store] initGates()</code>, <code>📦 [Store] N gates loaded</code>, <code>🧹 [Store] Removed N legacy gate(s)</code>, <code>🧹 [Store] N guest gate(s) removed (expired)</code>.</p>
+<hr>
+<h2 id="7-the-core-flows">7. The Core Flows</h2>
+<h3 id="71-onboarding-sign-in">7.1 Onboarding / Sign in</h3>
+<p>Routes: <a href="../app/auth/login.tsx">app/auth/login.tsx</a>, <a href="../app/auth/phone.tsx">app/auth/phone.tsx</a>.</p>
+<p>The flow:</p>
+<ol><li>The user signs in through a provider (Google/Apple) → a normalized email is</li></ol>
+<p>   stored in the profile.</p>
+<ol><li>Profile name → country code → phone number → accept terms of use.</li><li>SMS OTP (Firebase Auth) → confirm code.</li><li><code>saveLocalOnboardingProfile</code> stores everything and syncs phone/name to the</li></ol>
+<p>   native mirror.</p>
+<p><strong>Why phone + email?</strong> In a secure BLE open, the firmware validates the inviter pair (host phone + host email) for guests. So the email is stored and passed in the command.</p>
+<p>The gating itself is in <code>_layout.tsx</code> (<code>LayoutNavigator</code>): if not onboarded → redirect to <code>/auth/phone</code> (if there is already a provider identity) or <code>/auth/login</code>.</p>
+<h3 id="72-adding-a-gate-qr-manual">7.2 Adding a gate (QR / Manual)</h3>
+<ul><li><strong>Manual/QR</strong> → <code>addGateFromQrOrManual</code> → role <code>PRE_ADMIN</code>.</li><li>A QR that contains a compact security bundle (<code>dpk</code>/<code>psk</code>, without</li></ul>
+<p>  <code>protocol</code>/<code>keyId</code>) is normalized to <code>SECURE_V3</code> with <code>keyId="key-1"</code> (see   <a href="../src/gateSecurity.ts">gateSecurity.ts</a>).</p>
+<ul><li>The import/save path <strong>rejects a gate without a security bundle</strong> — new gates</li></ul>
+<p>  must have SECURE_V3.</p>
+<h3 id="73-importing-an-invitation-link-singlegroupdual">7.3 Importing an invitation link (single/group/dual)</h3>
+<p>Sources: <a href="../src/linkService.ts">linkService.ts</a>, <a href="../src/inviteLinkCrypto.ts">inviteLinkCrypto.ts</a>, <a href="../app/_layout.tsx">_layout.tsx</a>, [app/gate/[id].tsx](../app/gate/[id].tsx). Full protocol in <a href="../README_WIFIGATE_LINK_INVITATIONS.md">README_WIFIGATE_LINK_INVITATIONS.md</a>.</p>
+<p>The flow:</p>
+<ol><li>The OS opens <code>wifigate.io/wifigate-link/</code> (or <code>-api/</code>) or <code>wifigate://</code>.</li><li><code>_layout.tsx</code> → <code>extractInvitationRoute</code> recognizes the type</li></ol>
+<p>   (single/group/dual/open-gate).</p>
+<ol><li>If not onboarded → the link is <strong>queued</strong> (<code>pendingInviteUrl</code>) until</li></ol>
+<p>   onboarding completes.</p>
+<ol><li>Route to <code>app/gate/[id].tsx</code> (or group/dual).</li><li><code>parseIncomingLink</code> decrypts <code>ep=</code> (AES-GCM) into compact JSON.</li><li><strong>Validation</strong>: valid decryption? time window? phone authorization (private</li></ol>
+<p>   vs public)?</p>
+<ol><li><code>addGateFromGuestInvite</code> / <code>addGateFromUserInvite</code> / <code>addGate</code> (PRE_ADMIN) —</li></ol>
+<p>   merged into state per the merge rules.</p>
+<p><strong>Public vs Private</strong> (source: the links protocol):</p>
+<ul><li>If field <code>p</code> (target phone) is present → the invitation is <strong>private</strong>: only</li></ul>
+<p>  the cached phone matching <code>p</code> can accept.</p>
+<ul><li>If <code>p</code> is absent → <strong>public</strong>: restricted only by the time window (for guests).</li></ul>
+<p><strong>Role-code mapping</strong>: <code>A→ADMIN</code>, <code>U→USER</code>, <code>G→GUEST</code>, <code>PU→PRE_USER</code>, <code>PA→PRE_ADMIN</code>. In practice: an admin invitation is sent as <code>r="PA"</code>, user as <code>r="PU"</code>, guest as <code>g=1</code>.</p>
+<h3 id="74-opening-a-gate-over-ble-the-full-flow">7.4 Opening a gate over BLE — the full flow</h3>
+<p>This is the most important flow. Orchestration in <a href="../src/openGateFlow.ts">openGateFlow.ts</a>:</p>
+<pre><code>runGateOpenFlow(gate)
+  ├─ ensureBlePermissionsInteractive()   → "permissions_blocked"
+  ├─ ensureBluetoothReady()              → "bluetooth_off"
+  ├─ loadPhone()                         → "phone_missing"
+  ├─ getGuestAccessValidation(gate)      → "guest_expired"
+  ├─ loads email/username/toggleRelayState
+  └─ openGateBLE({...}) ──────────────────► ble/openGate.ts
+        ├─ (handles onRoleUpgrade → updateGateRole)
+        ├─ saves toggleRelayState if gateCommand=TOGGLE
+        └─ if OK and not PRE_* → markGateOpened (openHistory)</code></pre>
+<p>Status mapping: <code>OK→ok</code>, <code>BUSY→busy</code>, <code>UNAUTHORIZED→unauthorized</code>, <code>TIMEOUT→timeout</code>, <code>FAIL→fail</code> (and if the message indicates an active event/sensor → <code>event_active</code>/<code>sensor_inactive</code>).</p>
+<p>Inside <code>openGateBLE</code> (in <a href="../src/ble/openGate.ts">ble/openGate.ts</a>):</p>
+<ol><li><strong>Scan / Connect</strong> — <code>findConnectedGate</code>: scans devices, matches by</li></ol>
+<p>   <code>systemId</code> (the advertised name), connects. There is a fast profile    (<code>default</code>) and a slow one (<code>slow-android</code>). If there is a <code>preferredDeviceId</code>    — it tries a direct connection first.</p>
+<ol><li><strong>Discover GATT</strong> — requests MTU 517 (Android), discovers the <strong>Nordic UART</strong></li></ol>
+<p>   service:</p>
+<ul><li>Service <code>6e400001-...</code></li><li>RX <code>6e400002-...</code> (write from app to gate)</li><li>TX <code>6e400003-...</code> (notify from gate to app)</li><li><strong>Inbox</strong> — <code>createBleTextInbox</code>: assembles messages from chunks by <code>\n</code>,</li></ul>
+<p>   supports both notify and polling (fallback), and filters local echo.</p>
+<ol><li><strong>Handshake SECURE_V3</strong> — client_hello → device_hello → session keys (see</li></ol>
+<p>   Section 8).</p>
+<ol><li><strong>Encrypted command frame</strong> — builds the command, adds the <code>authTag</code>,</li></ol>
+<p>   encrypts and sends (<code>seq=1</code>).</p>
+<ol><li><strong>Encrypted response frame</strong> — reads, decrypts, returns a</li></ol>
+<p>   <code>SecureDeviceResponse</code>.</p>
+<h3 id="75-choosing-the-command-by-role-and-gate-type">7.5 Choosing the command by role and gate type</h3>
+<table><thead><tr><th>State</th><th>BLE command</th></tr></thead><tbody><tr><td>USER/ADMIN, regular gate</td><td><code>OPEN</code></td></tr><tr><td>USER/ADMIN, TOGGLE gate</td><td><code>TOGGLE_ON</code> / <code>TOGGLE_OFF</code> (explicit target state, based on the stored <code>toggleRelayState</code>)</td></tr><tr><td>USER/ADMIN, PUSH_BUTTON gate</td><td><code>PUSH_BUTTON_HOLD</code> (repeated) + <code>PUSH_BUTTON_RELEASE</code></td></tr><tr><td>GUEST, regular gate</td><td><code>OPEN_GUEST</code></td></tr><tr><td>GUEST, TOGGLE gate</td><td><code>TOGGLE_GUEST_ON</code> / <code>TOGGLE_GUEST_OFF</code> (explicit target state with guest history)</td></tr><tr><td>PRE_USER</td><td><code>ADD_USER</code> (confirms → USER)</td></tr><tr><td>PRE_ADMIN</td><td><code>ADD_ADMIN</code> (confirms → ADMIN)</td></tr></tbody></table>
+<p><strong>Guest open</strong> additionally passes <code>guestName</code>, <code>inviterName</code>, <code>inviterPhone</code>, <code>inviterEmail</code> — and the firmware validates the inviter pair before opening. If <code>inviterEmail</code> is missing in a guest invitation — the app stops with a message to request a new invitation.</p>
+<p><strong>Push button</strong> is a special case (source: <code>docs/ble-security-protocol-v3.md</code>): each HOLD frame refreshes the session TTL; the same BLE connection stays open while pressing; <code>seq</code> increments per frame; on finger-up a <code>PUSH_BUTTON_RELEASE</code> is sent. The firmware keeps a 1s watchdog as a fallback.</p>
+<h3 id="76-sharing-access-creating-links">7.6 Sharing access (creating links)</h3>
+<p>Sources: <code>buildShareData</code> (single), <code>buildGroupShareData</code>, <code>buildDualControlShareData</code> in <a href="../src/linkService.ts">linkService.ts</a>.</p>
+<p>An admin can create: a guest link, a user link, an admin link, and a Nearby Wi-Fi setup link. The payload is built compact (<code>i</code>,<code>n</code>,<code>r</code>,<code>h</code>,<code>he</code>,<code>p</code>,<code>kid</code>, <code>dpk</code>,<code>psk</code>...), encrypted by <code>encryptInviteLinkPayload</code> into <code>ep=v1.&lt;base64url&gt;</code>, and combined into the public URL.</p>
+<hr>
+<h2 id="8-the-secure-ble-protocol">8. The Secure BLE Protocol</h2>
+<p>Sources: <a href="../src/ble/secureProtocol.ts">src/ble/secureProtocol.ts</a> + the spec <a href="./ble-security-protocol-v3.md">docs/ble-security-protocol-v3.md</a>.</p>
+<p><code>SECURE_V3</code> is the <strong>only supported secure protocol</strong>. Both the app and the firmware must use v3.</p>
+<h3 id="81-provisioning-bundle">8.1 Provisioning bundle</h3>
+<p>Every secure gate holds a <code>Gate.security</code>:</p>
+<pre><code>{ protocol: "SECURE_V3",
+  keyId: string,            // key slot, e.g. "key-1"
+  devicePublicKey: string,  // compressed P-256 public key, hex
+  pairingSecret: string }   // 32-byte per-gate pairing secret, hex</code></pre>
+<h3 id="82-the-handshake-step-by-step">8.2 The handshake — step by step</h3>
+<p><strong>Constants</strong> (secureProtocol.ts): version <code>3</code>, default freshness <code>15000ms</code>, labels: <code>wifigate-ble-secure-v3</code> (transcript), <code>device-hello-proof-v3</code>, <code>command-auth-v3</code>.</p>
+<pre><code>app                                          gate (ESP32)
+   │  1. client_hello (plaintext JSON)          │
+   │  { v:3, type, keyId, sessionId,            │
+   │    clientPub, clientNonce }                │
+   │ ─────────────────────────────────────────►│
+   │                                            │  validates v/keyId/nonce
+   │  2. device_hello (encrypted)                │  derives helloKey/helloNonce
+   │  { v:3, type, ct, devicePub, nonce,        │
+   │    sessionId, sid }                        │
+   │◄───────────────────────────────────────── │
+   │  ct decrypts to:                           │
+   │  { deviceNonce, expiresInMs:30000,         │
+   │    keyId, pairingProof }                   │
+   │                                            │
+   │  3. both sides derive session keys          │
+   │  4. encrypted frame (OPEN...) seq=1 ───────►│
+   │  5. ◄────── encrypted response frame seq=1  │</code></pre>
+<h3 id="83-key-derivation-key-schedule">8.3 Key derivation (key schedule)</h3>
+<pre><code>ephemeral P-256 keypair (client)
+sharedSecret = ECDH(clientSecret, devicePub).X    // 32 bytes (X of the compressed point)
+
+helloKey   = HKDF-SHA256(sharedSecret, salt=clientNonce, info="hello-key|sid|session|keyId", 32)
+helloNonce = HKDF-SHA256(sharedSecret, salt=clientNonce, info="hello-nonce|...", 12)
+
+// device_hello decrypts:
+plaintext = AES-256-GCM(helloKey, helloNonce, AAD="device_hello|systemId|sessionId").decrypt(ct)
+
+// device identity check (proof-of-possession of pairingSecret):
+pairingProof = HMAC-SHA256(pairingSecret, "device-hello-proof-v3|systemId|session|keyId|clientPub|clientNonce|devicePub|deviceNonce")
+
+transcriptHash = SHA256("wifigate-ble-secure-v3|systemId|session|keyId|clientPub|clientNonce|devicePub|deviceNonce")
+
+// session keys (salt = clientNonce || deviceNonce):
+clientWriteKey     = HKDF(sharedSecret, salt, "client-write-key|...", 32)
+deviceWriteKey     = HKDF(sharedSecret, salt, "device-write-key|...", 32)
+clientNoncePrefix  = HKDF(sharedSecret, salt, "client-nonce-prefix|...", 8)
+deviceNoncePrefix  = HKDF(sharedSecret, salt, "device-nonce-prefix|...", 8)
+authKey            = HKDF(pairingSecret, salt=transcriptHash, "command-auth-key|...", 32)</code></pre>
+<h3 id="84-encrypted-command-frame">8.4 Encrypted command frame</h3>
+<pre><code>command = { cmd, systemId, timestamp, freshnessMs:15000, phone, role, name, ... }
+commandHash = SHA256(stableJson(command))                       // stable JSON (sorted keys)
+authTag = HMAC-SHA256(authKey, "command-auth-v3" || transcriptHash || seq(4B BE) || commandHash)
+
+innerPayload = { authTag, command }
+nonce = clientNoncePrefix(8) || seq(4B BE)                       // 12 bytes
+ct = AES-256-GCM(clientWriteKey, nonce, AAD="frame|c2d|systemId|session|seq").encrypt(innerPayload)
+frame = { v:3, type:"frame", seq, ct }</code></pre>
+<p>The response (d2c) is symmetric: <code>deviceWriteKey</code>, <code>deviceNoncePrefix</code>, AAD with <code>d2c</code>. The firmware returns <code>{ type:"response", cmd, status:OK|BUSY|FAIL|UNAUTHORIZED, gateCommand?, relayState?, ... }</code>.</p>
+<blockquote><p><strong>stableJson matters</strong>: the command is serialized with alphabetically sorted keys and without <code>undefined</code> (<code>stableStringify</code>), so that the SHA256 is identical on both sides. Reordering fields would break the HMAC. Also, <code>systemId</code> is <strong>omitted</strong> from the wire command when it can be derived from the session.</p></blockquote>
+<h3 id="85-replay-and-freshness-resistance">8.5 Replay and Freshness resistance</h3>
+<p>Replay resistance comes from <strong>multiple layers</strong>: a fresh <code>sessionId</code>, fresh <code>clientNonce</code>/<code>deviceNonce</code>, per-frame <code>seq</code>, a transcript-bound <code>authTag</code>, session TTL, and freshness enforcement.</p>
+<p><strong>Freshness</strong> (firmware): rejects a command if <code>freshnessMs</code> is missing/0, if it exceeds the session TTL, or if the session age is greater than <code>freshnessMs</code>. The firmware logs the requested <code>freshnessMs</code>, the measured age, and the rejection reason.</p>
+<h3 id="86-device-key-rotation-recovery">8.6 Device key rotation (recovery)</h3>
+<p>If the gate returns a <code>devicePub</code> that differs from the stored one but the <code>pairingProof</code> is valid — the app accepts the new key (<code>usedStoredDevicePublicKey=false</code>) and refreshes it after the command succeeds. If decryption fails entirely → a friendly error: *"This gate's secure identity changed. Scan the latest WIFIGATE QR..."* (the device was probably reprovisioned/flash-formatted).</p>
+<h3 id="87-transport-parameters-ble">8.7 Transport parameters (BLE)</h3>
+<p>From <a href="../src/ble/openGate.ts">openGate.ts</a>: requested MTU <code>517</code> (attribute capped at 512B), chunk = <code>mtu-3</code>, message timeout <code>10000ms</code>, framing by <code>\n</code>, write with/without response depending on the characteristic. Special messages (<code>device_hello</code>, <code>frame</code>) are filtered by <code>systemId</code>/<code>sessionId</code>/<code>seq</code> — unexpected messages are skipped with <code>[BLE][SECURE] Ignoring unexpected...</code>.</p>
+<hr>
+<h2 id="9-invitation-link-encryption">9. Invitation-Link Encryption</h2>
+<p>Source: <a href="../src/inviteLinkCrypto.ts">src/inviteLinkCrypto.ts</a>.</p>
+<pre><code>key = HKDF-SHA256(HMAC_URL_SECRET_bytes,
+                  salt="wifigate-invite-link:key-salt",
+                  info="wifigate-invite-link:aes-256-gcm", 32)
+ciphertext = AES-256-GCM(key, managedNonce, AAD="wifigate-invite-link:v1").encrypt(JSON)
+token = "v1." + base64url(nonce||ciphertext)</code></pre>
+<ul><li><code>managedNonce(gcm)</code> — the nonce is randomized and prepended to the ciphertext</li></ul>
+<p>  automatically.</p>
+<ul><li>The output is versioned <code>v1.</code> — allows a future version bump.</li><li><strong>The website does not decrypt</strong> — it just forwards the <code>ep=</code> to the app.</li></ul>
+<h3 id="security-properties-and-an-important-limitation">Security properties and an important limitation</h3>
+<p>✅ The payload is opaque in chats/browsers/previews. ✅ Tampering causes decryption failure in the app. ✅ The static website doesn't need to know the plaintext.</p>
+<p>⚠️ <strong>Limitation</strong>: this is encryption with a <strong>shared secret embedded in the build</strong> — not end-to-end per recipient. Any trusted build that contains the URL secret can decrypt valid links. This is stronger than plain query params, but <strong>not</strong> equivalent to a server-issued/one-time/recipient-bound token.</p>
+<hr>
+<h2 id="10-deep-linking">10. Deep Linking</h2>
+<p>Source: <code>extractInvitationRoute</code> in <a href="../app/_layout.tsx">app/_layout.tsx</a>.</p>
+<p><strong>Supported schemes</strong>: <code>wifigate://</code> (native) and <code>https://wifigate.io</code> (paths: <code>wifigate-link</code>, <code>wifigate-api</code>).</p>
+<p>The function parses a URL and decides on the target by priority order: <code>dual-control</code> → <code>group</code> → <code>open-gate</code> (widget) → <code>gate</code> (including <code>?ep=</code>, which becomes <code>gateId="invite"</code>). It also supports a nested <code>?link=</code>.</p>
+<p><strong>Subtlety</strong>: if the user is not onboarded, the link is queued (<code>pendingInviteUrl</code>) and processed only after onboarding completes (a <code>useEffect</code> on <code>isOnboarded</code>). Duplicates are filtered via <code>lastHandledInviteUrlRef</code>.</p>
+<p>Logs to look for: <code>[Linking] event/initial URL received</code>, <code>[Linking] Routing invitation URL</code>, <code>[Linking] Queueing invitation URL until onboarding completes</code>, <code>[Linking] Ignoring unsupported URL</code>.</p>
+<hr>
+<h2 id="11-fota-ota">11. FOTA / OTA</h2>
+<p>Sources: <a href="../src/fota/publicFota.ts">src/fota/publicFota.ts</a> (Firebase, the new one), <code>driveFota.ts</code> (Google Drive, legacy), <a href="../app/firmware-update.tsx">app/firmware-update.tsx</a>. Guide: <a href="../README_OTA_FIREBASE.md">README_OTA_FIREBASE.md</a>.</p>
+<p>The firmware is read from <strong>Firebase Storage</strong> by two dimensions:</p>
+<ul><li>QR channel: <code>fotaChannel</code> = <code>dev</code> / <code>prod</code>.</li><li>hardware variant: <code>8MB</code> / <code>16MB</code>.</li></ul>
+<p>⇒ 4 feeds: <code>{dev|prod}-fota/{8mb|16mb}/manifest.json</code>. The app downloads encrypted <code>.wgfota</code> chunks listed in the manifest and validates <code>flashVariantMb</code> before continuing.</p>
+<p>The gate-side flow: <code>OTA_OPEN</code> over BLE → the gate returns the AP SSID/password/token → the app connects and streams the firmware. The public config is in <a href="../app.json">app.json</a> (<code>expo.extra.fotaStorage*</code>).</p>
+<p>Logs: <code>[FOTA]</code>.</p>
+<hr>
+<h2 id="12-nearby-wi-fi-setup">12. Nearby Wi-Fi Setup</h2>
+<p>Sources: <code>src/components/gate-settings/admin-access/NearbyWIFIGATELink.tsx</code>, <a href="../app/wifigate-setup.tsx">app/wifigate-setup.tsx</a>.</p>
+<p>Lets an admin open the gate's local AP and enter the setup page:</p>
+<ol><li>The admin chooses "Nearby WIFIGATE Link".</li><li>Request BLE permissions + confirm Bluetooth.</li><li>Send <code>WIFI_OPEN</code> over BLE.</li><li>If the gate approves → it returns the current SSID/password.</li><li>Scan nearby Wi-Fi networks (<code>react-native-wifi-reborn</code>).</li><li>Connect to the gate's AP.</li><li>Open <code>http://192.168.4.1/</code> in a WebView.</li></ol>
+<p><strong>The WebView is hardened</strong>: restricted to the gate's local host, blocks arbitrary external navigation, blocks app-scheme navigation, supports CSV download, and offers reload/recovery.</p>
+<p>⚠️ The BLE protocol does <strong>not</strong> secure this HTTP page — it is a separate local-network workflow.</p>
+<p>Logs: <code>[NearbyWIFIGATELink]</code>, <code>[WebView]</code>, <code>[WiFi]</code>.</p>
+<hr>
+<h2 id="13-important-logs">13. Important Logs</h2>
+<p><code>logger.ts</code> defines <code>log</code>/<code>warn</code> that run <strong>only in <code>__DEV__</code></strong>. But note: many of the critical logs (BLE, Store, Linking) use <code>console.log</code>/<code>console.warn</code> <strong>directly</strong>, meaning they appear in regular builds too. So the BLE trace is the main field debug tool.</p>
+<h3 id="141-tag-catalog-by-frequency">14.1 Tag catalog (by frequency)</h3>
+<table><thead><tr><th>Tag</th><th>Where</th><th>What it tells you</th></tr></thead><tbody><tr><td><code>[BLE]</code></td><td>ble/openGate.ts</td><td>scan, connect, MTU, TX/RX chunks, timeouts</td></tr><tr><td><code>[BLE][SECURE]</code></td><td>ble/openGate.ts</td><td>handshake, client/device hello, encrypted frames</td></tr><tr><td><code>[Store]</code></td><td>gatesStore.ts</td><td>load, merge, downgrade prevention, cleanup</td></tr><tr><td><code>[GateOpenFlow]</code></td><td>openGateFlow.ts</td><td>the orchestration steps of the open</td></tr><tr><td><code>[MyGates]</code></td><td>features/my-gates</td><td>home screen (collections, tiles)</td></tr><tr><td><code>[GateScreen]</code></td><td>app/gate</td><td>gate details screen</td></tr><tr><td><code>[AutoOpen]*</code></td><td>auto-open/*</td><td>beacon key and capability</td></tr><tr><td><code>[Linking]</code></td><td>_layout.tsx</td><td>receiving deep links and routing</td></tr><tr><td><code>[ENCRYPTED_INVITE_PARAM]</code></td><td>linkService</td><td>parsing <code>ep=</code></td></tr><tr><td><code>[InviteLinkCrypto]</code></td><td>inviteLinkCrypto.ts</td><td>payload decryption failure</td></tr><tr><td><code>[FOTA]</code></td><td>fota/*</td><td>OTA</td></tr><tr><td><code>[NearbyWIFIGATELink]</code> <code>[WebView]</code> <code>[WiFi]</code></td><td>setup flow</td><td>Nearby Wi-Fi</td></tr><tr><td><code>[GateWidget]</code> <code>[WidgetHeadlessOpen]</code> <code>[WidgetOpenGate]</code></td><td>widgets/*</td><td>widget open</td></tr><tr><td><code>[storage]</code></td><td>storage.ts</td><td>usage, dump, write failures</td></tr><tr><td><code>[Contacts]</code> <code>[Camera]</code></td><td>permissions</td><td>permissions</td></tr></tbody></table>
+<h3 id="142-what-to-look-for-per-flow-debug-playbook">14.2 What to look for per flow (debug playbook)</h3>
+<p><strong>A gate open fails:</strong></p>
+<pre><code>[GateOpenFlow] Checking BLE permissions / Bluetooth state
+[BLE] Scanning for gate for Nms...
+[BLE] Gate not found. Move closer...        ← TIMEOUT (proximity / advertised name)
+[BLE] Requested MTU 517, negotiated N
+[BLE][SECURE] Sending client_hello. sessionId=...
+[BLE][SECURE] Waiting for device_hello...
+[BLE][SECURE][DEVICE_HELLO_PARSE] ...        ← bundle mismatch (reprovision?)
+[BLE][SECURE] Sending encrypted OPEN frame. seq=1
+[GateOpenFlow] BLE result: { status: ... }</code></pre>
+<p><strong>Gate identity changed:</strong> look for <code>Could not decrypt device_hello with the stored secure bundle</code> / <code>pairing proof mismatch</code> → need to re-scan the QR.</p>
+<p><strong>A link import fails:</strong> <code>[Linking] Routing invitation URL</code> → <code>[InviteLinkCrypto] Failed to decrypt invitation payload</code> (tampering/bad secret) or an Alert "Invalid invitation / Access expired / Unauthorized".</p>
+<p><strong>A guest disappeared:</strong> <code>🧹 [Store] N guest gate(s) removed (expired)</code> — expired at startup.</p>
+<p><strong>A downgrade was prevented:</strong> <code>[Store] Preventing role downgrade for gate X: ADMIN stays</code>.</p>
+<hr>
+<h2 id="14-permissions-and-platform">14. Permissions and Platform</h2>
+<p>Configured in <a href="../app.json">app.json</a> and native files. The app needs:</p>
+<ul><li><strong>Camera</strong> — QR scanning.</li><li><strong>Bluetooth</strong> — gate communication.</li><li><strong>Location (Android)</strong> — historically required for BLE/Wi-Fi scanning.</li><li><strong>Nearby Wi-Fi devices (Android)</strong>.</li><li><strong>Local network (iOS)</strong> — access to <code>192.168.4.1</code>.</li></ul>
+<p>Deep linking is configured for <code>wifigate://</code> and <code>https://wifigate.io</code>.</p>
+<ul><li>Permissions entry point:</li></ul>
+<p>  <a href="../src/permissions/appLaunch.ts">src/permissions/appLaunch.ts</a>   (<code>checkAppLaunchPermissions</code> = BLE + Bluetooth ready;   <code>prepareStartupPermissionsForSignIn</code> = contacts + BLE).</p>
+<ul><li>Bluetooth state: <code>ble/bluetoothState.ts</code> (<code>ensureBluetoothReady</code>).</li><li>BLE permissions: <code>ble/permissions.ts</code> (<code>ensureBlePermissionsInteractive</code>,</li></ul>
+<p>  <code>hasBlePermissions</code>).</p>
+<hr>
+<h2 id="15-secrets-and-build-inputs">15. Secrets and Build Inputs</h2>
+<p>Required inputs (some are <strong>gitignored</strong>):</p>
+<ul><li><code>src/crypto/HMAC_SECRETS.json</code> — a <strong>secret</strong>. Used to reconstruct</li></ul>
+<p>  <code>HMAC_URL_SECRET</code> (link encryption) and any legacy URL/HMAC protection. Derived   through <a href="../src/crypto/hmacSecrets.ts">src/crypto/hmacSecrets.ts</a>.</p>
+<ul><li><code>GoogleService-Info.plist</code> (iOS) + <code>google-services.json</code> (Android) — Firebase.</li></ul>
+<p><strong>EAS</strong>: the script <a href="../scripts/eas-pre-install.js">scripts/eas-pre-install.js</a> places <code>HMAC_SECRETS.json</code> into the build environment (<code>eas-build-pre-install</code>). Outside the repo, provided via an environment variable/CI.</p>
+<p>⚠️ If <code>HMAC_URL_SECRET</code> is not configured — <code>deriveInviteLinkKey</code> throws, and all link encryption/decryption fails.</p>
+<hr>
+<h2 id="16-local-development-and-release">16. Local Development and Release</h2>
+<p>From <a href="../package.json">package.json</a>:</p>
+<pre><code>npm install
+# provide src/crypto/HMAC_SECRETS.json (or HMAC_SECRETS_JSON in EAS)
+# make sure Firebase files exist for the environment
+
+npm run start:dev-client   # expo start --dev-client
+npm run start:usb          # Android over USB (PowerShell script)
+npm run reset:app          # reset Android app state
+npm run reset:usb          # reset + relaunch
+
+npm run lint               # eslint
+npm run typecheck          # tsc --noEmit
+npm run verify             # lint + typecheck ★ run before shipping</code></pre>
+<h3 id="release-checklist-device-smoke-test">Release checklist (device smoke test)</h3>
+<ul><li><label class="task"><input type="checkbox" disabled > Sign-in via phone OTP</label></li><li><label class="task"><input type="checkbox" disabled > QR / manual import</label></li><li><label class="task"><input type="checkbox" disabled > Encrypted link import</label></li><li><label class="task"><input type="checkbox" disabled > Guest invite flow</label></li><li><label class="task"><input type="checkbox" disabled > User/admin invite flow</label></li><li><label class="task"><input type="checkbox" disabled > Gate open over BLE</label></li><li><label class="task"><input type="checkbox" disabled > Nearby Wi-Fi setup</label></li><li><label class="task"><input type="checkbox" disabled > CSV export from the setup page (if relevant)</label></li></ul>
+<p>Build and submit with EAS after the smoke test.</p>
+<hr>
+<h2 id="17-security-boundaries">17. Security Boundaries</h2>
+<p>It is important to understand <strong>what is not protected</strong>:</p>
+<ul><li><code>SECURE_V3</code> protects the BLE transport <strong>only</strong> — not the HTTP setup page</li></ul>
+<p>  (<code>192.168.4.1</code>), not link sharing, and not credential storage on the phone.</p>
+<ul><li>Invitation links are encrypted and tamper-resistant, but use a **shared secret</li></ul>
+<p>  in the build** — not a server-issued/one-time/recipient-bound token.</p>
+<ul><li>Gate state is <strong>local-first</strong> in AsyncStorage — there is no cloud-synced gate</li></ul>
+<p>  ownership.</p>
+<ul><li>Roles are enforced by both app logic and device behavior, but the **ultimate</li></ul>
+<p>  hardware authorization must be enforced in the firmware** — do not trust the   UI.</p>
+<hr>
+<h2 id="18-cheat-sheet">18. Cheat Sheet</h2>
+<h3 id="files-by-task">Files by task</h3>
+<table><thead><tr><th>Want to understand...</th><th>Read</th></tr></thead><tbody><tr><td>BLE crypto and message flow</td><td><a href="./ble-security-protocol-v3.md">docs/ble-security-protocol-v3.md</a>, <a href="../src/ble/secureProtocol.ts">secureProtocol.ts</a></td></tr><tr><td>BLE core (scan/connect/frames)</td><td><a href="../src/ble/openGate.ts">ble/openGate.ts</a></td></tr><tr><td>open orchestration</td><td><a href="../src/openGateFlow.ts">openGateFlow.ts</a></td></tr><tr><td>role and merge rules</td><td><a href="../src/models.ts">models.ts</a>, <a href="../src/gatesStore.ts">gatesStore.ts</a></td></tr><tr><td>creating/importing links</td><td><a href="../src/linkService.ts">linkService.ts</a>, <a href="../src/inviteLinkCrypto.ts">inviteLinkCrypto.ts</a></td></tr><tr><td>full links protocol</td><td><a href="../README_WIFIGATE_LINK_INVITATIONS.md">README_WIFIGATE_LINK_INVITATIONS.md</a></td></tr><tr><td>deep linking</td><td><a href="../app/_layout.tsx">app/_layout.tsx</a></td></tr><tr><td>Nearby setup</td><td><code>NearbyWIFIGATELink.tsx</code>, <a href="../app/wifigate-setup.tsx">app/wifigate-setup.tsx</a></td></tr><tr><td>OTA</td><td><a href="../README_OTA_FIREBASE.md">README_OTA_FIREBASE.md</a>, <a href="../src/fota/publicFota.ts">fota/publicFota.ts</a></td></tr><tr><td>storage</td><td><a href="../src/storage.ts">storage.ts</a></td></tr></tbody></table>
+<h3 id="ble-commands-securecommandname">BLE commands (SecureCommandName)</h3>
+<pre><code>OPEN  TOGGLE_ON  TOGGLE_OFF
+OPEN_GUEST  TOGGLE_GUEST_ON  TOGGLE_GUEST_OFF
+PUSH_BUTTON_HOLD  PUSH_BUTTON_RELEASE
+ADD_USER  ADD_ADMIN
+WIFI_OPEN  OTA_OPEN  GET_FW_VERSION
+GET_AUTO_OPEN_STATUS  CHECK_AUTO_OPEN_RSSI  GET_GATE_COMMAND</code></pre>
+<h3 id="gatecommand-values-in-the-response">gateCommand values in the response</h3>
+<p><code>1=PULSE  2=PULSE_AFTER_PULSE  3=PULSE_AFTER_PULSE_AFTER_PULSE  4=TOGGLE  5=PUSH_BUTTON</code></p>
+<h3 id="nordic-uart-uuids">Nordic UART UUIDs</h3>
+<pre><code>Service    6e400001-b5a3-f393-e0a9-e50e24dcca9a
+RX (write) 6e400002-b5a3-f393-e0a9-e50e24dcca9a
+TX (notify)6e400003-b5a3-f393-e0a9-e50e24dcca9a</code></pre>
+<hr>
+<p>*This document was written by reading the source code. When something in the code changes (especially <code>secureProtocol.ts</code>, <code>linkService.ts</code>, <code>gatesStore.ts</code>) — update this too.*</p></template>
+
+<script>
+(function(){
+  var content = document.getElementById('content');
+  var tocNav  = document.getElementById('toc');
+  var searchEl= document.getElementById('search');
+  var sidebar = document.getElementById('sidebar');
+  var backdrop= document.getElementById('backdrop');
+  var spy = null;
+
+  var lang = localStorage.getItem('wg_lang') || 'he';
+  var theme = localStorage.getItem('wg_theme') ||
+    (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+
+  function applyTheme(){
+    document.documentElement.setAttribute('data-theme', theme);
+    document.getElementById('theme-btn').textContent = theme === 'dark' ? '🌙' : '☀️';
+    localStorage.setItem('wg_theme', theme);
+  }
+
+  function hideInDocTOC(){
+    var hs = content.querySelectorAll('h2');
+    for (var k=0;k<hs.length;k++){
+      var t = hs[k].textContent.trim().toLowerCase();
+      if (t.indexOf('table of contents')>=0 || t.indexOf('תוכן עניינים')>=0){
+        var n = hs[k].nextElementSibling;
+        hs[k].remove();
+        if (n && (n.tagName==='OL'||n.tagName==='UL')) n.remove();
+        break;
+      }
+    }
+  }
+
+  function wrapTables(){
+    var tables = content.querySelectorAll('table');
+    tables.forEach(function(tb){
+      if (tb.parentElement.classList.contains('table-wrap')) return;
+      var w = document.createElement('div'); w.className='table-wrap';
+      tb.parentNode.insertBefore(w, tb); w.appendChild(tb);
+    });
+  }
+
+  function buildTOC(){
+    var heads = content.querySelectorAll('h2, h3');
+    tocNav.innerHTML = '';
+    heads.forEach(function(h){
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      a.className = 'toc-' + h.tagName.toLowerCase();
+      a.dataset.target = h.id;
+      a.addEventListener('click', function(){ closeMobile(); });
+      tocNav.appendChild(a);
+    });
+    setupSpy(heads);
+    filterTOC();
+  }
+
+  function setupSpy(heads){
+    if (spy) spy.disconnect();
+    var visible = {};
+    spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ visible[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0; });
+      var bestId=null, best=-1;
+      Object.keys(visible).forEach(function(id){ if (visible[id] > best){ best=visible[id]; bestId=id; } });
+      if (bestId){
+        tocNav.querySelectorAll('a').forEach(function(a){
+          a.classList.toggle('active', a.dataset.target === bestId);
+        });
+        var act = tocNav.querySelector('a.active');
+        if (act) act.scrollIntoView({block:'nearest'});
+      }
+    }, {rootMargin:'-70px 0px -70% 0px', threshold:[0,1]});
+    heads.forEach(function(h){ spy.observe(h); });
+  }
+
+  function filterTOC(){
+    var q = (searchEl.value||'').trim().toLowerCase();
+    var any=false;
+    tocNav.querySelectorAll('a').forEach(function(a){
+      var hit = !q || a.textContent.toLowerCase().indexOf(q) >= 0;
+      a.style.display = hit ? '' : 'none';
+      if (hit) any=true;
+    });
+    var e = tocNav.querySelector('.empty');
+    if (!any){ if(!e){ e=document.createElement('div'); e.className='empty'; tocNav.appendChild(e);} e.textContent = lang==='he'?'לא נמצאו פרקים':'No sections found'; }
+    else if (e){ e.remove(); }
+  }
+
+  function setLang(l){
+    lang = l; localStorage.setItem('wg_lang', l);
+    document.documentElement.lang = l;
+    document.documentElement.dir = (l==='he') ? 'rtl' : 'ltr';
+    searchEl.placeholder = (l==='he') ? 'חיפוש בפרקים…' : 'Search chapters…';
+    var tpl = document.getElementById('tpl-'+l);
+    content.replaceChildren(tpl.content.cloneNode(true));
+    hideInDocTOC(); wrapTables(); buildTOC();
+    document.querySelectorAll('#lang-seg button').forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang===l);
+    });
+    window.scrollTo(0,0);
+    updateProgress();
+  }
+
+  function closeMobile(){ sidebar.classList.remove('open'); backdrop.classList.remove('show'); }
+
+  function updateProgress(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var p = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    document.getElementById('progress').style.width = p + '%';
+  }
+
+  // wire up
+  document.querySelectorAll('#lang-seg button').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.dataset.lang); });
+  });
+  document.getElementById('theme-btn').addEventListener('click', function(){
+    theme = theme==='dark' ? 'light' : 'dark'; applyTheme();
+  });
+  document.getElementById('hamburger').addEventListener('click', function(){
+    var open = sidebar.classList.toggle('open'); backdrop.classList.toggle('show', open);
+  });
+  backdrop.addEventListener('click', closeMobile);
+  searchEl.addEventListener('input', filterTOC);
+  window.addEventListener('scroll', updateProgress, {passive:true});
+
+  applyTheme();
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

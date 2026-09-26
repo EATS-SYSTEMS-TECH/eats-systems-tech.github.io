@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="he" dir="rtl" data-ui-lang="he" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="WIFIGATE Host API — bilingual end-to-end product, protocol, security and portal specification.">
+<title>WIFIGATE Host API</title>
+<style>
+:root{
+  --bg:#f5f7f6; --surface:#fff; --surface-2:#eef4f1; --ink:#12201c; --muted:#62716b;
+  --line:#dce5e1; --brand:#0b6b58; --brand-2:#084c40; --soft:#dff2eb; --blue:#235fa4;
+  --blue-soft:#e7f0fb; --amber:#9a6217; --amber-soft:#fff2d8; --red:#a7353d;
+  --red-soft:#fde8ea; --green:#18704a; --green-soft:#e1f3e9; --code:#10221d;
+  --shadow:0 18px 54px rgba(15,49,40,.09); --radius:22px;
+}
+:root[data-theme="dark"]{
+  --bg:#101512; --surface:#171d1a; --surface-2:#202924; --ink:#edf5f1; --muted:#a6b4ad;
+  --line:#314039; --brand:#65cdb4; --brand-2:#9fe2d1; --soft:#173a31; --blue:#83b9ef;
+  --blue-soft:#182b3d; --amber:#e1b568; --amber-soft:#3b2e18; --red:#ef9aa0;
+  --red-soft:#402226; --green:#7bd0a3; --green-soft:#18372a; --code:#09110e;
+  --shadow:0 18px 54px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+button,input{font:inherit}
+a{color:var(--brand);text-underline-offset:3px}
+code,.mono{font-family:"SFMono-Regular",Consolas,monospace;direction:ltr;unicode-bidi:embed}
+code{padding:.12rem .34rem;border-radius:5px;background:var(--surface-2);font-size:.88em}
+[data-lang="en"]{display:none!important}
+html[data-ui-lang="en"] [data-lang="he"]{display:none!important}
+html[data-ui-lang="en"] [data-lang="en"]{display:revert!important}
+html[data-ui-lang="he"] [data-lang="he"]{display:revert!important}
+.page{width:min(1180px,calc(100% - 28px));margin:auto;padding:18px 0 80px}
+.toolbar{position:sticky;top:10px;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;margin-bottom:14px;border:1px solid var(--line);border-radius:16px;background:color-mix(in srgb,var(--surface) 90%,transparent);box-shadow:0 10px 32px rgba(10,38,30,.08);backdrop-filter:blur(18px)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:.04em}
+.brand-mark{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;color:#fff;background:linear-gradient(145deg,var(--brand),#18a483);font-weight:900}
+.toolbar-actions{display:flex;gap:8px;align-items:center}
+.segmented{display:flex;padding:3px;border:1px solid var(--line);border-radius:11px;background:var(--bg)}
+.segmented button,.icon-button{border:0;border-radius:8px;color:var(--muted);background:transparent;cursor:pointer;font-weight:750}
+.segmented button{min-width:44px;padding:6px 10px}
+.segmented button[aria-pressed="true"]{color:#fff;background:var(--brand)}
+.icon-button{padding:8px 10px;border:1px solid var(--line);background:var(--surface)}
+.hero{position:relative;overflow:hidden;min-height:430px;padding:clamp(28px,6vw,70px);border-radius:32px;color:#f4fffb;background:radial-gradient(circle at 15% 12%,rgba(38,207,166,.34),transparent 28%),linear-gradient(135deg,#08261f,#0b5748 62%,#0c7c66);box-shadow:var(--shadow)}
+.hero:after{content:"";position:absolute;inset:auto -90px -150px auto;width:440px;height:440px;border:1px solid rgba(255,255,255,.13);border-radius:50%;box-shadow:0 0 0 55px rgba(255,255,255,.035),0 0 0 110px rgba(255,255,255,.025)}
+.eyebrow{margin:0 0 12px;color:#8ff2da;font-size:12px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}
+h1{max-width:830px;margin:0;font-size:clamp(38px,7vw,78px);line-height:1.02;letter-spacing:-.05em}
+.hero-lede{max-width:780px;margin:22px 0 0;color:#d6eee7;font-size:clamp(17px,2.3vw,22px)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}
+.pill{display:inline-flex;align-items:center;padding:6px 11px;border:1px solid rgba(255,255,255,.18);border-radius:999px;color:#eafff9;background:rgba(255,255,255,.08);font-size:12px;font-weight:800}
+.hero-note{position:relative;z-index:2;max-width:880px;margin-top:28px;padding:15px 18px;border:1px solid rgba(255,255,255,.17);border-radius:15px;background:rgba(3,23,18,.3)}
+.toc{display:flex;gap:7px;overflow:auto;margin:14px 0 0;padding:11px;border:1px solid var(--line);border-radius:17px;background:var(--surface);scrollbar-width:thin}
+.toc a{flex:0 0 auto;padding:7px 11px;border-radius:9px;color:var(--muted);text-decoration:none;font-size:13px;font-weight:750}
+.toc a:hover,.toc a:focus-visible{color:var(--brand);background:var(--soft);outline:none}
+.section{margin-top:18px;padding:clamp(22px,4vw,42px);border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);scroll-margin-top:88px}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:22px}
+.section h2{margin:3px 0 8px;font-size:clamp(27px,4vw,42px);line-height:1.12;letter-spacing:-.035em}
+.section h3{margin:24px 0 10px;font-size:19px;line-height:1.28}
+.section p{margin:0 0 13px;max-width:82ch}
+.kicker{color:var(--brand);font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.lede{color:var(--muted);font-size:17px}
+.status{flex:0 0 auto;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:850}
+.status.target{color:var(--blue);background:var(--blue-soft)}
+.status.current{color:var(--green);background:var(--green-soft)}
+.status.gap{color:var(--amber);background:var(--amber-soft)}
+.grid-2,.grid-3,.grid-4{display:grid;gap:13px}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{padding:19px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(180deg,var(--surface),var(--surface-2))}
+.card h3{margin-top:0}.card>:last-child{margin-bottom:0}
+.muted{color:var(--muted)}
+.callout{margin:16px 0;padding:15px 17px;border-inline-start:4px solid var(--brand);border-radius:12px;background:var(--soft)}
+.callout.warn{border-color:var(--amber);background:var(--amber-soft)}
+.callout.bad{border-color:var(--red);background:var(--red-soft)}
+.callout.good{border-color:var(--green);background:var(--green-soft)}
+.callout>:last-child{margin-bottom:0}
+.table-wrap{overflow:auto;margin-top:14px;border:1px solid var(--line);border-radius:15px}
+table{width:100%;min-width:680px;border-collapse:collapse;background:var(--surface)}
+th,td{padding:11px 13px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top;font-size:14px}
+th{color:var(--brand-2);background:var(--soft);font-size:12px;letter-spacing:.03em;text-transform:uppercase}
+tr:last-child td{border-bottom:0}
+pre{overflow:auto;margin:0;padding:18px;color:#d9efe8;background:var(--code);font:13px/1.62 "SFMono-Regular",Consolas,monospace;text-align:left;direction:ltr;white-space:pre}
+.code-block{overflow:hidden;margin:14px 0;border:1px solid #1d4237;border-radius:15px;background:var(--code)}
+.code-title{display:flex;justify-content:space-between;gap:12px;padding:9px 13px;border-bottom:1px solid rgba(255,255,255,.12);color:#93b8ab;font-size:12px;direction:ltr}
+.copy{padding:5px 9px;border:1px solid rgba(255,255,255,.2);border-radius:8px;color:#d8eee7;background:rgba(255,255,255,.07);cursor:pointer}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin-top:17px;direction:ltr}
+.flow-step{position:relative;min-height:142px;padding:17px;border:1px solid var(--line);border-radius:16px;background:var(--surface-2);text-align:left}
+.flow-step:not(:last-child):after{content:"→";position:absolute;right:-15px;top:48%;z-index:2;width:21px;height:21px;display:grid;place-items:center;border-radius:50%;color:#fff;background:var(--brand);font-weight:900}
+.flow-step b{display:block;margin-bottom:5px;color:var(--brand)}
+.arch{display:grid;grid-template-columns:1fr 45px 1fr 45px 1fr;align-items:center;gap:10px;margin:18px 0;direction:ltr}
+.arch-box{min-height:155px;display:flex;flex-direction:column;justify-content:center;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--surface-2);text-align:center}
+.arch-box .emoji{font-size:29px}.arch-box h3{margin:5px 0}.arrow{color:var(--brand);font-size:27px;font-weight:900;text-align:center}
+.steps{display:grid;gap:10px;counter-reset:steps}
+.step{position:relative;min-height:64px;padding:15px 58px 15px 16px;border:1px solid var(--line);border-radius:15px;background:var(--surface-2)}
+html[dir="ltr"] .step{padding:15px 16px 15px 58px}
+.step:before{counter-increment:steps;content:counter(steps);position:absolute;inset-inline-start:14px;top:14px;display:grid;place-items:center;width:32px;height:32px;border-radius:10px;color:#fff;background:var(--brand);font-weight:900}
+.screen-frame{overflow:hidden;margin-top:16px;border:1px solid #cdd9d4;border-radius:22px;background:#f7faf9;box-shadow:0 22px 55px rgba(11,57,45,.14);color:#12201c;direction:ltr}
+.screen-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 17px;color:#fff;background:#102e27}
+.screen-top small{color:#b7d2c9}.screen-body{display:grid;grid-template-columns:190px 1fr;min-height:480px}
+.screen-nav{padding:18px 12px;color:#b7cbc4;background:#173c33}
+.screen-nav strong{display:block;margin:0 8px 12px;color:#fff}
+.nav-item{margin:4px 0;padding:9px 10px;border-radius:9px;font-size:13px}.nav-item.active{color:#fff;background:#0d775f}
+.screen-main{padding:20px;overflow:auto;background:#f6f8f7}
+.screen-title{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:15px}
+.screen-title h4{margin:0;font-size:23px}.screen-title p{margin:3px 0;color:#66756f;font-size:13px}
+.fake-button{padding:9px 12px;border:0;border-radius:9px;color:#fff;background:#0b715c;font-size:13px;font-weight:800}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(120px,1fr));gap:9px;margin-bottom:14px}
+.metric{padding:13px;border:1px solid #d9e3df;border-radius:12px;background:#fff}.metric small{display:block;color:#6c7b75}.metric b{display:block;margin-top:4px;font-size:22px}
+.fake-table{overflow:auto;border:1px solid #d9e3df;border-radius:12px;background:#fff}.fake-row{display:grid;grid-template-columns:1.35fr .9fr .8fr .8fr .8fr;min-width:620px;padding:10px 12px;border-bottom:1px solid #e5ebe8;font-size:12px}.fake-row.head{color:#5f6f69;background:#edf3f0;font-weight:850}.fake-row:last-child{border:0}
+.state{display:inline-block;width:max-content;padding:2px 7px;border-radius:999px;color:#18704a;background:#dff3e8;font-weight:850}
+.login-demo{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;margin-top:16px;border:1px solid var(--line);border-radius:22px;background:var(--surface-2)}
+.login-brand{min-height:380px;display:flex;flex-direction:column;justify-content:flex-end;padding:34px;color:#fff;background:radial-gradient(circle at 70% 20%,rgba(45,220,176,.35),transparent 26%),linear-gradient(145deg,#08251e,#0b6754)}
+.login-brand h3{font-size:31px}.login-card{align-self:center;margin:28px;padding:27px;border:1px solid var(--line);border-radius:18px;background:var(--surface);box-shadow:var(--shadow)}
+.login-card label{display:block;margin:12px 0 5px;color:var(--muted);font-size:12px;font-weight:800}.fake-input{padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);direction:ltr}.login-card .fake-button{width:100%;margin-top:13px;padding:12px}
+.reference-wrap{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:var(--shadow);direction:ltr}
+.reference-img{display:block;width:100%;height:auto;background:#fff}
+.reference-logo{position:absolute;left:0;top:0;width:16.4%;height:11.5%;display:flex;align-items:center;gap:7px;padding:2.1%;color:#fff;background:#171717;font-size:clamp(7px,1.25vw,18px);font-weight:850;letter-spacing:-.02em}
+.reference-logo .brand-mark{flex:0 0 auto;width:clamp(17px,2.25vw,34px);height:clamp(17px,2.25vw,34px);border-radius:28%}
+.reference-footer{position:absolute;left:0;bottom:0;width:16.4%;height:9.5%;display:flex;align-items:flex-end;padding:1.35% 1.7%;color:#93aaa1;background:#171717;font-size:clamp(6px,.78vw,12px)}
+.figure-caption{margin-top:9px;color:var(--muted);font-size:13px}
+.tag{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:850}.tag.now{color:var(--green);background:var(--green-soft)}.tag.build{color:var(--amber);background:var(--amber-soft)}.tag.contract{color:var(--blue);background:var(--blue-soft)}
+.key-anatomy{display:grid;grid-template-columns:auto auto 1fr;overflow:hidden;margin:17px 0;border:1px solid var(--line);border-radius:17px;background:var(--code);direction:ltr}
+.key-part{padding:16px 18px;color:#d8eee7;border-right:1px solid rgba(255,255,255,.12);font-family:"SFMono-Regular",Consolas,monospace;overflow-wrap:anywhere}.key-part:last-child{border:0}.key-part small{display:block;margin-bottom:5px;color:#8db3a6;font:700 10px/1.3 Inter,sans-serif;letter-spacing:.09em;text-transform:uppercase}.key-part.prefix{color:#81e0c8}.key-part.version{color:#8fc3f2}.key-part.cipher{color:#f1d89f}
+.key-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:17px 0}.key-tile{position:relative;overflow:hidden;padding:20px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(150deg,var(--surface),var(--surface-2))}.key-tile:after{content:"";position:absolute;right:-42px;top:-42px;width:120px;height:120px;border-radius:50%;background:var(--soft);opacity:.7}.key-tile>*{position:relative;z-index:1}.key-tile-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.key-icon{display:grid;place-items:center;width:39px;height:39px;border-radius:12px;color:#fff;background:var(--brand);font-weight:900}.key-tile h3{margin:14px 0 5px;font-size:22px}.scope-line{display:inline-flex;margin-top:8px;padding:4px 8px;border-radius:8px;color:var(--brand);background:var(--soft);font:750 12px/1.2 "SFMono-Regular",Consolas,monospace;direction:ltr}.field-list{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}.field-list code{border:1px solid var(--line);background:var(--surface)}
+.modern-table th:first-child,.modern-table td:first-child{position:sticky;inset-inline-start:0;z-index:1;background:var(--surface);font-weight:800}.modern-table thead th:first-child{background:var(--soft)}.modern-table td:nth-child(n+2){min-width:220px}.required{color:var(--red);font-weight:850}.optional{color:var(--muted)}.sensitive{color:var(--red);font-weight:800}.field-purpose{display:block;margin-top:3px;color:var(--muted);font-size:12px}
+.checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.check{position:relative;padding:13px 44px 13px 13px;border:1px solid var(--line);border-radius:13px;background:var(--surface-2)}
+html[dir="ltr"] .check{padding:13px 13px 13px 44px}.check:before{content:"✓";position:absolute;inset-inline-start:13px;top:13px;display:grid;place-items:center;width:22px;height:22px;border-radius:7px;color:#fff;background:var(--green);font-weight:900}
+footer{padding:28px 12px;color:var(--muted);text-align:center;font-size:13px}
+@media(max-width:900px){.grid-3,.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}.key-summary{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.flow-step:not(:last-child):after{content:"↓";right:calc(50% - 10px);top:auto;bottom:-15px}.arch{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}.screen-body{grid-template-columns:1fr}.screen-nav{display:none}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.page{width:min(100% - 16px,1180px);padding-top:8px}.toolbar{top:5px}.toolbar .brand span:last-child{display:none}.hero,.section{padding:22px 17px;border-radius:22px}.hero{min-height:470px}.section-head{display:block}.status{display:inline-block;margin-top:8px}.grid-2,.grid-3,.grid-4,.checklist,.login-demo{grid-template-columns:1fr}.key-anatomy{grid-template-columns:1fr}.key-part{border-right:0;border-bottom:1px solid rgba(255,255,255,.12)}.login-brand{min-height:260px}.login-card{margin:16px}.metrics{grid-template-columns:1fr 1fr}}
+@media print{.toolbar,.toc,.copy{display:none!important}.page{width:100%;padding:0}.hero,.section{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="toolbar">
+    <div class="brand"><span class="brand-mark">W</span><span>WIFIGATE Host</span></div>
+    <div class="toolbar-actions">
+      <div class="segmented" role="group" aria-label="Language">
+        <button type="button" data-set-lang="he" aria-pressed="true">עברית</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="icon-button" type="button" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">◐</button>
+    </div>
+  </header>
+
+  <section class="hero" aria-labelledby="doc-title">
+    <p class="eyebrow">Product · Protocol · Portal · Security</p>
+    <h1 id="doc-title">WIFIGATE<br>Host API</h1>
+    <p class="hero-lede" data-lang="he">מחברת איפיון מקצה לקצה להפיכת הזמנת מלון או PMS למפתח גישה דיגיטלי מוגבל בזמן — מסך הכניסה, פורטל Admin, פורטל משתמש, חוזה API, פרוטוקול ההזמנה והפתיחה המקומית בשער.</p>
+    <p class="hero-lede" data-lang="en">An end-to-end specification for turning a hotel or PMS reservation into a time-bound digital access key — login, Admin portal, user portal, API contract, invitation protocol and local gate opening.</p>
+    <div class="hero-meta"><span class="pill">Bilingual · עברית / English</span><span class="pill">Protocol-aligned</span><span class="pill">Gate · Dual Control · Group</span><span class="pill">Specification — not implementation</span></div>
+    <div class="hero-note">
+      <div data-lang="he"><strong>מצב המסמך:</strong> זהו ה־target specification ל־WIFIGATE Host. הוא מסונכרן לפרוטוקול הקיים של קישורי ההזמנה, אך מסמן במפורש מה קיים היום ומה עדיין נדרש לבנייה.</div>
+      <div data-lang="en"><strong>Document status:</strong> this is the target specification for WIFIGATE Host. It is aligned with the current invitation-link protocol and explicitly separates what exists today from what still has to be built.</div>
+    </div>
+  </section>
+
+  <nav class="toc" aria-label="Document navigation">
+    <a href="#scope"><span data-lang="he">מטרה וגבולות</span><span data-lang="en">Scope</span></a>
+    <a href="#architecture"><span data-lang="he">ארכיטקטורה</span><span data-lang="en">Architecture</span></a>
+    <a href="#protocol"><span data-lang="he">פרוטוקול</span><span data-lang="en">Protocol</span></a>
+    <a href="#host-key">Host KEY</a>
+    <a href="#api"><span data-lang="he">חוזה API</span><span data-lang="en">API contract</span></a>
+    <a href="#lifecycle"><span data-lang="he">מסע הזמנה</span><span data-lang="en">Reservation flow</span></a>
+    <a href="#keys"><span data-lang="he">מפתחות</span><span data-lang="en">Keys</span></a>
+    <a href="#login">Login</a>
+    <a href="#viewers"><span data-lang="he">מסכי פורטל</span><span data-lang="en">Portal views</span></a>
+    <a href="#host">WIFIGATE Host</a>
+    <a href="#data"><span data-lang="he">נתונים</span><span data-lang="en">Data</span></a>
+    <a href="#security"><span data-lang="he">אבטחה</span><span data-lang="en">Security</span></a>
+    <a href="#delivery"><span data-lang="he">תכנית ביצוע</span><span data-lang="en">Delivery</span></a>
+  </nav>
+
+  <section class="section" id="scope">
+    <div class="section-head"><div><div class="kicker">01 · Product boundary</div>
+      <h2 data-lang="he">מה WIFIGATE Host עושה</h2><h2 data-lang="en">What WIFIGATE Host does</h2>
+      <p class="lede" data-lang="he">שירות server-to-server שמקבל פרטי אורח והזמנה ממערכת מלון, יוצר קישור WIFIGATE מוצפן ותואם־אפליקציה, ומחזיר אותו למשלוח לאורח.</p>
+      <p class="lede" data-lang="en">A server-to-server service that accepts guest and reservation data from a hotel system, creates an encrypted app-compatible WIFIGATE link, and returns it for delivery to the guest.</p>
+    </div><span class="status target"><span data-lang="he">איפיון יעד</span><span data-lang="en">Target specification</span></span></div>
+    <div class="grid-3">
+      <article class="card"><h3 data-lang="he">מקור האירוע</h3><h3 data-lang="en">Event source</h3><p data-lang="he">PMS, Channel Manager, OTA backend או מערכת מלון שולחים אירוע ל־WIFIGATE Host לאחר יצירה או עדכון של הזמנה.</p><p data-lang="en">A PMS, Channel Manager, OTA backend or hotel system sends an event to WIFIGATE Host after a reservation is created or updated.</p></article>
+      <article class="card"><h3 data-lang="he">תוצאת השירות</h3><h3 data-lang="en">Service outcome</h3><p data-lang="he">קישור <code>/wifigate-api/?ep=…</code> פרטי ומוגבל בזמן, שניתן לשלוח ב־SMS, אימייל או אפליקציית האירוח.</p><p data-lang="en">A private, time-bound <code>/wifigate-api/?ep=…</code> link ready for SMS, email or the hospitality app.</p></article>
+      <article class="card"><h3 data-lang="he">פתיחה בפועל</h3><h3 data-lang="en">Actual opening</h3><p data-lang="he">האורח מייבא את הקישור לאפליקציה; הפתיחה מתבצעת מקומית מול השער ב־BLE המאובטח הקיים, בלי שהשער תלוי בענן בזמן הכניסה.</p><p data-lang="en">The guest imports the link into the app; opening remains local over the existing secure BLE protocol, with no cloud dependency at entry time.</p></article>
+    </div>
+    <div class="callout warn"><p data-lang="he"><strong>גבול חשוב:</strong> WIFIGATE Host אינו פותח שער דרך האינטרנט, אינו מחליף את <code>SECURE_V3</code>, ואינו עוקף את אימות <code>inviterPhone + inviterEmail</code> בקושחה.</p><p data-lang="en"><strong>Important boundary:</strong> WIFIGATE Host does not open a gate over the internet, replace <code>SECURE_V3</code>, or bypass firmware validation of <code>inviterPhone + inviterEmail</code>.</p></div>
+    <h3 data-lang="he">השחקנים במערכת</h3><h3 data-lang="en">System actors</h3>
+    <div class="table-wrap"><table><thead><tr><th><span data-lang="he">שחקן</span><span data-lang="en">Actor</span></th><th><span data-lang="he">אחריות</span><span data-lang="en">Responsibility</span></th><th><span data-lang="he">Credential</span><span data-lang="en">Credential</span></th></tr></thead><tbody>
+      <tr><td>WIFIGATE Platform Admin</td><td><span data-lang="he">לקוחות, משתמשים, entitlements, lifecycle של מפתחות, שימוש ו־audit.</span><span data-lang="en">Clients, users, entitlements, key lifecycle, usage and audit.</span></td><td>Firebase identity + <code>platform_admin</code> + MFA</td></tr>
+      <tr><td>Client Owner / Member</td><td><span data-lang="he">צפייה במפתחות ובשימוש המורשים; Reveal רק לבעל המפתח.</span><span data-lang="en">View permitted keys and usage; Reveal only for the key owner.</span></td><td>Firebase identity + active membership</td></tr>
+      <tr><td>PMS / Hotel backend</td><td><span data-lang="he">מיפוי הזמנה ליעד WIFIGATE ושליחת POST אידמפוטנטי ל־WIFIGATE Host.</span><span data-lang="en">Map a reservation to a WIFIGATE target and send an idempotent POST to WIFIGATE Host.</span></td><td>Client API key + WIFIGATE Host KEY</td></tr>
+      <tr><td><span data-lang="he">אורח</span><span data-lang="en">Guest</span></td><td><span data-lang="he">מקבל קישור, מזדהה באפליקציה ומפעיל גישה בחלון הזמן.</span><span data-lang="en">Receives the link, identifies in the app and uses access during the allowed window.</span></td><td><span data-lang="he">קישור הזמנה פרטי + זהות טלפון</span><span data-lang="en">Private invite link + phone identity</span></td></tr>
+      <tr><td><span data-lang="he">שער</span><span data-lang="en">Gate</span></td><td><span data-lang="he">מאמת session, זהות מזמין וחלון אורח; פותח מקומית.</span><span data-lang="en">Validates session, inviter identity and guest window; opens locally.</span></td><td>SECURE_V3 device credentials</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="section" id="architecture">
+    <div class="section-head"><div><div class="kicker">02 · End-to-end architecture</div><h2 data-lang="he">שני מישורים, ללא ערבוב credentials</h2><h2 data-lang="en">Two planes, with no credential mixing</h2><p class="lede" data-lang="he">מישור הניהול מיועד לבני אדם; מישור האינטגרציה של WIFIGATE Host מיועד לשרתים. שניהם פוגשים backend אחד שמבצע הרשאה, אך משתמשים בזהויות שונות.</p><p class="lede" data-lang="en">The management plane is for humans; the WIFIGATE Host integration plane is for servers. Both reach one authorization backend, but use different identities.</p></div></div>
+    <div class="arch">
+      <div class="arch-box"><span class="emoji">🏨</span><h3>PMS / Hotel system</h3><span class="muted">Reservation event<br>Client API key<br>WIFIGATE Host KEY</span></div><div class="arrow">→</div>
+      <div class="arch-box"><span class="emoji">🛡️</span><h3>WIFIGATE API</h3><span class="muted">Auth · entitlement · decrypt<br>idempotency · metering</span></div><div class="arrow">→</div>
+      <div class="arch-box"><span class="emoji">🔗</span><h3>Guest access</h3><span class="muted">Invite link → mobile app<br>SECURE_V3 → gate</span></div>
+    </div>
+    <div class="grid-2">
+      <article class="card"><h3 data-lang="he">מישור פורטל</h3><h3 data-lang="en">Portal plane</h3><p data-lang="he"><code>/login/</code> ו־<code>/dashboard/</code>. הדפדפן שולח Firebase ID token ל־Portal API. אין גישה ישירה ל־Firestore ואין Client API key ב־URL, ב־analytics או באחסון דפדפן.</p><p data-lang="en"><code>/login/</code> and <code>/dashboard/</code>. The browser sends a Firebase ID token to the Portal API. There is no direct Firestore access and no Client API key in URLs, analytics or browser storage.</p></article>
+      <article class="card"><h3 data-lang="he">מישור אינטגרציה</h3><h3 data-lang="en">Integration plane</h3><p data-lang="he"><code>POST /v1/guest-invitations</code>. שרת השותף שולח Bearer key ו־JSON. אין Firebase token אנושי ואין קריאה מה־frontend של הלקוח.</p><p data-lang="en"><code>POST /v1/guest-invitations</code>. The partner server sends a Bearer key and JSON. No human Firebase token and no call from the partner frontend.</p></article>
+    </div>
+    <div class="callout"><p data-lang="he"><strong>סדר העיבוד המחייב:</strong> authenticate Client API key → rate limit → validate body → idempotency → decrypt system value → validate target → check every system entitlement → build protocol payload → encrypt invite → meter → respond.</p><p data-lang="en"><strong>Required processing order:</strong> authenticate Client API key → rate limit → validate body → idempotency → decrypt system value → validate target → check every system entitlement → build protocol payload → encrypt invite → meter → respond.</p></div>
+  </section>
+
+  <section class="section" id="protocol">
+    <div class="section-head"><div><div class="kicker">03 · Invitation protocol alignment</div><h2 data-lang="he">אותו פרוטוקול שהאפליקציה כבר קוראת</h2><h2 data-lang="en">The same protocol the app already reads</h2><p class="lede" data-lang="he">WIFIGATE Host אינו ממציא פורמט הזמנה שני. הוא מפיק את אותו <code>ep</code> מוצפן ואת אותם payloads קומפקטיים המוגדרים ב־<code>README_WIFIGATE_LINK_INVITATIONS.md</code>.</p><p class="lede" data-lang="en">WIFIGATE Host does not invent a second invitation format. It emits the same encrypted <code>ep</code> and compact payloads defined by <code>README_WIFIGATE_LINK_INVITATIONS.md</code>.</p></div><span class="status current"><span data-lang="he">מקור אמת קיים</span><span data-lang="en">Existing source of truth</span></span></div>
+    <div class="grid-3">
+      <article class="card"><h3>Route</h3><p><code>https://wifigate.io/wifigate-api/?ep=&lt;token&gt;</code></p><p class="muted" data-lang="he">ב־Dual נוסף <code>dcid</code>; ב־Group נוסף <code>gid</code>.</p><p class="muted" data-lang="en">Dual adds <code>dcid</code>; Group adds <code>gid</code>.</p></article>
+      <article class="card"><h3>Token</h3><p><code>ep=v1.&lt;base64url-ciphertext&gt;</code></p><p class="muted">AES-256-GCM · HKDF-SHA256 · AAD <code>wifigate-invite-link:v1</code></p></article>
+      <article class="card"><h3>Families</h3><p>Gate · <code>k="dual-control"</code> · <code>k="group"</code></p><p class="muted" data-lang="he">Dual מכיל בדיוק שני שערים; Group מכיל שערים ישירים ו־Dual Controls.</p><p class="muted" data-lang="en">Dual contains exactly two gates; Group contains direct gates and Dual Controls.</p></article>
+    </div>
+    <h3 data-lang="he">מיפוי שדות ה־API לפרוטוקול ההזמנה</h3><h3 data-lang="en">API-to-invitation field mapping</h3>
+    <div class="table-wrap"><table><thead><tr><th>API</th><th>Wire</th><th><span data-lang="he">משמעות וכלל</span><span data-lang="en">Meaning and rule</span></th></tr></thead><tbody>
+      <tr><td><code>guest.name</code></td><td><code>gn</code></td><td><span data-lang="he">שם האורח, נשמר גם להיסטוריית פתיחה.</span><span data-lang="en">Guest name, also retained for opening history.</span></td></tr>
+      <tr><td><code>guest.phone</code></td><td><code>p</code></td><td><span data-lang="he">חובה ב־WIFIGATE Host v1; הופך את הקישור לפרטי ומחייב התאמת טלפון.</span><span data-lang="en">Required by WIFIGATE Host v1; makes the link private and enforces phone matching.</span></td></tr>
+      <tr><td><code>access.startsAt</code></td><td><code>ss</code></td><td><span data-lang="he">Epoch milliseconds; השרת מנרמל מ־ISO-8601.</span><span data-lang="en">Epoch milliseconds; the server normalizes from ISO-8601.</span></td></tr>
+      <tr><td><code>access.endsAt</code></td><td><code>se</code></td><td><span data-lang="he">Epoch milliseconds; חייב להיות אחרי <code>ss</code> ובתוך מגבלת המוצר.</span><span data-lang="en">Epoch milliseconds; must be after <code>ss</code> and within the product limit.</span></td></tr>
+      <tr><td><code>guest.floor</code>, <code>apartment</code>, <code>parking</code></td><td><code>fl</code>, <code>ap</code>, <code>pk</code></td><td><span data-lang="he">אופציונלי; קלט ההזמנה קודם ל־Access Note שנשמר ביעד.</span><span data-lang="en">Optional; request data takes precedence over the saved target Access Note.</span></td></tr>
+      <tr><td><code>guest.comment</code>, <code>carNumber</code></td><td><code>cm</code>, <code>car</code></td><td><span data-lang="he">אופציונלי ומוגבל אורך; לא נרשם ללוג.</span><span data-lang="en">Optional and length-limited; never logged.</span></td></tr>
+      <tr><td><span data-lang="he">זהות מזמין מהמפתח המוצפן</span><span data-lang="en">Inviter identity from encrypted key</span></td><td><code>h</code>, <code>hn</code>, <code>he</code></td><td><span data-lang="he"><code>h</code> ו־<code>he</code> חובה; השותף אינו רשאי לשלוט בהם.</span><span data-lang="en"><code>h</code> and <code>he</code> are required; the partner cannot control them.</span></td></tr>
+      <tr><td><span data-lang="he">קבוע שרת</span><span data-lang="en">Server constant</span></td><td><code>g=1</code>, <code>it="TB"</code>, <code>ti</code></td><td><span data-lang="he">תמיד Guest מוגבל בזמן; <code>ti</code> הוא זמן ההנפקה.</span><span data-lang="en">Always a time-bound Guest; <code>ti</code> is issuance time.</span></td></tr>
+    </tbody></table></div>
+    <div class="callout"><p data-lang="he"><strong>דיוק הזמן בפרוטוקול:</strong> ה־backend יפיק epoch במילישניות. ה־mobile מקבל גם seconds וגם milliseconds, ואם <code>se</code> מסתיים בדיוק ב־<code>HH:mm:00.000</code> הוא מנרמל את סוף החלון ל־<code>HH:mm:59.999</code>; לכן זמן checkout של 09:00 תקף עד סוף הדקה 09:00.</p><p data-lang="en"><strong>Protocol time precision:</strong> the backend emits epoch milliseconds. Mobile accepts seconds or milliseconds, and when <code>se</code> lands exactly on <code>HH:mm:00.000</code> it normalizes the window end to <code>HH:mm:59.999</code>; a 09:00 checkout is therefore valid through the end of the 09:00 minute.</p></div>
+    <div class="callout"><p data-lang="he"><strong>ייבוא אטומי של יעד מרובה שערים:</strong> שער אחד לא תקין, פג או לא מורשה מבטל את כל הייבוא של Dual Control או Group. שום שער חלקי אינו נשמר, ושום role קבוע אינו יורד ל־GUEST.</p><p data-lang="en"><strong>Atomic multi-gate import:</strong> one invalid, expired or unauthorized gate aborts the entire Dual Control or Group import. No partial gate is saved and no permanent role is downgraded to GUEST.</p></div>
+    <div class="code-block"><div class="code-title"><span>single-gate decrypted invite payload — protocol example</span><button class="copy" type="button" data-copy="protocol-example">Copy</button></div><pre id="protocol-example">{
+  "i": "9876543210123456",
+  "n": "Grand Plaza · Main Entrance",
+  "g": 1,
+  "h": "+972501111111",
+  "hn": "Grand Plaza Operations",
+  "he": "operations@grand-plaza.example",
+  "p": "+972509999999",
+  "cg": 0,
+  "it": "TB",
+  "ti": 1786400000000,
+  "ss": 1786536000000,
+  "se": 1786881600000,
+  "gn": "Christopher Martin",
+  "cm": "Reservation WGA-8241 · Room 101",
+  "kid": "key-1",
+  "dpk": "&lt;redacted-device-public-key&gt;",
+  "psk": "&lt;redacted-pairing-secret&gt;"
+}</pre></div>
+    <div class="callout warn"><p data-lang="he"><strong>פער מימוש מזוהה:</strong> כיום <code>buildGateGuestsApiKey</code> ו־<code>buildDualControlGuestsApiKey</code> יוצרים מעטפות <code>guests-api-key</code>, אך אינם כוללים עדיין <code>h/he/hn</code>; אין עדיין builder מקביל ל־Group. לפני השקת WIFIGATE Host חייבים להשלים את שלושתם ולנעול golden vectors משותפים ל־mobile ול־backend.</p><p data-lang="en"><strong>Known implementation gap:</strong> today <code>buildGateGuestsApiKey</code> and <code>buildDualControlGuestsApiKey</code> create <code>guests-api-key</code> envelopes, but do not yet include <code>h/he/hn</code>; there is no equivalent Group builder yet. Before WIFIGATE Host launches, all three must be completed and locked with shared mobile/backend golden vectors.</p></div>
+    <div class="callout bad"><p data-lang="he"><strong>אין לשים סודות בדוגמאות אמיתיות:</strong> <code>psk</code>, WIFIGATE Host KEY, Client API key ו־invite URL מלא הם credentials. הדוגמאות במסמך מכילות placeholders בלבד.</p><p data-lang="en"><strong>Never put secrets in real examples:</strong> <code>psk</code>, WIFIGATE Host KEYs, Client API keys and full invite URLs are credentials. This document uses placeholders only.</p></div>
+  </section>
+
+  <section class="section" id="host-key">
+    <div class="section-head"><div><div class="kicker">04 · WIFIGATE Host KEY</div>
+      <h2 data-lang="he">מה המפתח מכיל בכל סוג יעד</h2><h2 data-lang="en">What the key contains for every target type</h2>
+      <p class="lede" data-lang="he">זהו חוזה היסוד שעליו נבנית WIFIGATE Host: מפתח מוצפן אחד מתאר בדיוק Gate,‏ Dual Control או Group, כולל הזהות, המבנה, הגדרות התצוגה וחומר ה־BLE הדרוש להפקת הזמנות אורח.</p>
+      <p class="lede" data-lang="en">This is the foundational contract for WIFIGATE Host: one encrypted key describes exactly one Gate, Dual Control or Group, including identity, topology, display settings and the BLE material required to issue guest invitations.</p>
+    </div><span class="status contract"><span data-lang="he">חוזה בסיס</span><span data-lang="en">Foundation contract</span></span></div>
+
+    <div class="callout good"><p data-lang="he"><strong>השם במוצר ובתיעוד:</strong> <span class="mono">WIFIGATE Host KEY</span>. לצורך backward compatibility, שם השדה ב־API נשאר <code>encryptedKeyValue</code>, ה־prefix נשאר <code>wgk_live_</code>, והסמן הפנימי המוצפן נשאר כרגע <code>k="guests-api-key"</code>. השמות הטכניים אינם שם המוצר שמוצג למשתמש.</p><p data-lang="en"><strong>Product and documentation name:</strong> <span class="mono">WIFIGATE Host KEY</span>. For backward compatibility, the API field remains <code>encryptedKeyValue</code>, the prefix remains <code>wgk_live_</code>, and the encrypted internal marker remains <code>k="guests-api-key"</code> for now. These technical identifiers are not the user-facing product name.</p></div>
+
+    <div class="key-anatomy" role="group" aria-label="WIFIGATE Host KEY structure">
+      <div class="key-part prefix"><small>Product + environment</small>wgk_live_</div>
+      <div class="key-part version"><small>Envelope version</small>v1.</div>
+      <div class="key-part cipher"><small>Authenticated ciphertext</small>&lt;base64url: nonce + AES-256-GCM ciphertext + tag&gt;</div>
+    </div>
+
+    <div class="key-summary">
+      <article class="key-tile"><div class="key-tile-head"><span class="key-icon">G</span><span class="tag build"><span data-lang="he">קיים · דורש השלמה</span><span data-lang="en">Exists · needs completion</span></span></div><h3>Gate</h3><p data-lang="he">מעטפת אחת עם snapshot מלא של שער פיזי יחיד.</p><p data-lang="en">One envelope containing a complete snapshot of one physical gate.</p><span class="scope-line">sc = "gate"</span><div class="field-list"><code>gate</code><code>h</code><code>he</code><code>hn?</code></div></article>
+      <article class="key-tile"><div class="key-tile-head"><span class="key-icon">D</span><span class="tag build"><span data-lang="he">קיים · דורש השלמה</span><span data-lang="en">Exists · needs completion</span></span></div><h3>Dual Control</h3><p data-lang="he">ישות משולבת עם metadata משלה ובדיוק שני snapshots של שערים.</p><p data-lang="en">A combined entity with its own metadata and exactly two gate snapshots.</p><span class="scope-line">sc = "dual-control"</span><div class="field-list"><code>dcid</code><code>gs[2]</code><code>l1</code><code>l2</code></div></article>
+      <article class="key-tile"><div class="key-tile-head"><span class="key-icon">GR</span><span class="tag contract"><span data-lang="he">חוזה יעד · לבנייה</span><span data-lang="en">Target contract · to build</span></span></div><h3>Group</h3><p data-lang="he">snapshot שטוח של שערים ישירים ו־Dual Controls, ללא pointers לקבוצות אחרות.</p><p data-lang="en">A flat snapshot of direct gates and Dual Controls, with no pointers to other groups.</p><span class="scope-line">sc = "group"</span><div class="field-list"><code>gid</code><code>gs[]</code><code>dcs[]</code></div></article>
+    </div>
+
+    <h3 data-lang="he">טבלת השוואה — מה בדיוק נמצא בכל מפתח</h3><h3 data-lang="en">Comparison table — exactly what each key contains</h3>
+    <div class="table-wrap"><table class="modern-table"><thead><tr><th><span data-lang="he">רכיב</span><span data-lang="en">Component</span></th><th>Gate</th><th>Dual Control</th><th>Group</th></tr></thead><tbody>
+      <tr><td><span data-lang="he">סוג היעד</span><span data-lang="en">Target type</span><span class="field-purpose"><code>sc</code></span></td><td><code>"gate"</code></td><td><code>"dual-control"</code></td><td><code>"group"</code></td></tr>
+      <tr><td><span data-lang="he">זהות המזמין</span><span data-lang="en">Inviter identity</span><span class="field-purpose"><code>h</code> / <code>he</code> / <code>hn</code></span></td><td colspan="3"><span data-lang="he"><span class="required">חובה בכל שלושת הסוגים:</span> טלפון מזמין מנורמל, אימייל מזמין lowercase, ושם תצוגה אופציונלי. השדות נקבעים באפליקציה ואינם מתקבלים מה־PMS.</span><span data-lang="en"><span class="required">Required for all three types:</span> normalized inviter phone, lowercase inviter email and optional display name. These fields are set by the app and never accepted from the PMS.</span></td></tr>
+      <tr><td><span data-lang="he">זהות האובייקט</span><span data-lang="en">Object identity</span></td><td><code>gate.i</code> + <code>gate.n</code></td><td><code>dcid</code> + <code>n</code></td><td><code>gid</code> + <code>n</code></td></tr>
+      <tr><td><span data-lang="he">מיקום השערים</span><span data-lang="en">Gate container</span></td><td><code>gate { … }</code></td><td><code>gs[2]</code></td><td><code>gs[]</code> <span data-lang="he">לשערים ישירים</span><span data-lang="en">for direct gates</span> + <code>dcs[]</code></td></tr>
+      <tr><td><span data-lang="he">מספר שערים</span><span data-lang="en">Gate count</span></td><td><strong>1</strong></td><td><strong>2 exactly</strong></td><td><strong>1–20</strong> <span data-lang="he">מזהי מערכת פיזיים ייחודיים</span><span data-lang="en">unique physical system IDs</span></td></tr>
+      <tr><td><span data-lang="he">חומר BLE לכל שער</span><span data-lang="en">BLE material per gate</span><span class="field-purpose"><code>kid</code> / <code>dpk</code> / <code>psk</code></span></td><td colspan="3"><span data-lang="he">אותו snapshot מאובטח בכל מקום שבו שער מופיע. <code>psk</code> הוא סוד pairing רגיש ביותר; מפתח בלי חבילה מלאה אינו כשיר ל־Production.</span><span data-lang="en">The same secure snapshot wherever a gate appears. <code>psk</code> is a highly sensitive pairing secret; a key without the complete bundle is not production-eligible.</span></td></tr>
+      <tr><td><span data-lang="he">פעולות משולבות</span><span data-lang="en">Combined actions</span></td><td>—</td><td><code>l1</code>, <code>l2</code>, <code>dcf?</code>, <code>dci?</code></td><td><span data-lang="he">בתוך כל איבר של</span><span data-lang="en">Inside every</span> <code>dcs[]</code></td></tr>
+      <tr><td><span data-lang="he">כתובת וקואורדינטות</span><span data-lang="en">Address and coordinates</span></td><td><code>gate.ad/alat/alng</code></td><td><code>ad/alat/alng</code> <span data-lang="he">לישות, וגם בתוך כל שער</span><span data-lang="en">for the entity and inside each gate</span></td><td><code>ad/alat/alng</code> <span data-lang="he">לקבוצה; בנוסף בתוך שערים ו־Duals</span><span data-lang="en">for the group, plus nested gates and Duals</span></td></tr>
+      <tr><td><span data-lang="he">Access Note</span><span data-lang="en">Access Note</span><span class="field-purpose"><code>cm</code> / <code>rn</code> / <code>fl</code> / <code>ap</code> / <code>pk</code></span></td><td><span data-lang="he">בתוך <code>gate</code></span><span data-lang="en">Inside <code>gate</code></span></td><td><span data-lang="he">בתוך כל gate snapshot</span><span data-lang="en">Inside each gate snapshot</span></td><td><span data-lang="he">ב־Group metadata לפי הצורך ובכל snapshot רלוונטי</span><span data-lang="en">In Group metadata when needed and in every relevant snapshot</span></td></tr>
+      <tr><td><span data-lang="he">מבנה היררכי</span><span data-lang="en">Hierarchy</span></td><td>—</td><td>—</td><td><span data-lang="he">אין nested groups. כל הצאצאים נאספים רקורסיבית, משוטחים ומוסרים ללא כפילויות.</span><span data-lang="en">No nested groups. Descendants are collected recursively, flattened and de-duplicated.</span></td></tr>
+      <tr><td><span data-lang="he">מצב המימוש כיום</span><span data-lang="en">Current implementation</span></td><td><span class="tag build"><span data-lang="he">Builder קיים</span><span data-lang="en">Builder exists</span></span><span class="field-purpose" data-lang="he">חסרים h/he/hn ואכיפת bundle מלאה</span><span class="field-purpose" data-lang="en">Missing h/he/hn and complete-bundle enforcement</span></td><td><span class="tag build"><span data-lang="he">Builder קיים</span><span data-lang="en">Builder exists</span></span><span class="field-purpose" data-lang="he">חסרים h/he/hn ואכיפת bundle מלאה</span><span class="field-purpose" data-lang="en">Missing h/he/hn and complete-bundle enforcement</span></td><td><span class="tag contract"><span data-lang="he">טרם נבנה</span><span data-lang="en">Not built</span></span><span class="field-purpose" data-lang="he">נדרש builder, UI ו־tests</span><span class="field-purpose" data-lang="en">Builder, UI and tests required</span></td></tr>
+    </tbody></table></div>
+
+    <h3 data-lang="he">שדות המעטפת המשותפת</h3><h3 data-lang="en">Shared envelope fields</h3>
+    <div class="table-wrap"><table><thead><tr><th><span data-lang="he">שדה</span><span data-lang="en">Field</span></th><th><span data-lang="he">חובה</span><span data-lang="en">Required</span></th><th><span data-lang="he">מה הוא מכיל</span><span data-lang="en">What it contains</span></th><th><span data-lang="he">מקור ואחריות</span><span data-lang="en">Source and responsibility</span></th></tr></thead><tbody>
+      <tr><td><code>k</code></td><td><span class="required"><span data-lang="he">כן</span><span data-lang="en">Yes</span></span></td><td><code>"guests-api-key"</code></td><td><span data-lang="he">סמן wire פנימי לבחירת parser; שם המוצר נשאר WIFIGATE Host KEY.</span><span data-lang="en">Internal wire marker used to select the parser; the product name remains WIFIGATE Host KEY.</span></td></tr>
+      <tr><td><code>sc</code></td><td><span class="required"><span data-lang="he">כן</span><span data-lang="en">Yes</span></span></td><td><code>gate</code> / <code>dual-control</code> / <code>group</code></td><td><span data-lang="he">קובע את ה־schema. השרת אינו מקבל target type נפרד מהשותף.</span><span data-lang="en">Selects the schema. The server does not accept a separate partner-controlled target type.</span></td></tr>
+      <tr><td><code>h</code></td><td><span class="required"><span data-lang="he">כן</span><span data-lang="en">Yes</span></span></td><td><span data-lang="he">טלפון המזמין בפורמט E.164.</span><span data-lang="en">Inviter phone in E.164 format.</span></td><td><span data-lang="he">נלקח מהמשתמש המחובר בזמן יצירת המפתח.</span><span data-lang="en">Read from the signed-in user when the key is created.</span></td></tr>
+      <tr><td><code>he</code></td><td><span class="required"><span data-lang="he">כן</span><span data-lang="en">Yes</span></span></td><td><span data-lang="he">אימייל מזמין מנורמל lowercase.</span><span data-lang="en">Normalized lowercase inviter email.</span></td><td><span data-lang="he">חובה לפתיחת Guest; הקושחה מאמתת <code>h + he</code>.</span><span data-lang="en">Required for Guest opening; firmware validates <code>h + he</code>.</span></td></tr>
+      <tr><td><code>hn</code></td><td><span class="optional"><span data-lang="he">אופציונלי</span><span data-lang="en">Optional</span></span></td><td><span data-lang="he">שם התצוגה של המזמין.</span><span data-lang="en">Inviter display name.</span></td><td><span data-lang="he">מיועד לתצוגה ולהיסטוריה; אינו גבול הרשאה.</span><span data-lang="en">Used for display and history; not an authorization boundary.</span></td></tr>
+    </tbody></table></div>
+
+    <h3 data-lang="he">Gate snapshot — אבני הבניין המשותפות לשלושת הסוגים</h3><h3 data-lang="en">Gate snapshot — the shared building block for all three types</h3>
+    <div class="table-wrap"><table><thead><tr><th><span data-lang="he">שדה</span><span data-lang="en">Field</span></th><th><span data-lang="he">דרישה</span><span data-lang="en">Requirement</span></th><th><span data-lang="he">תוכן מדויק</span><span data-lang="en">Exact content</span></th><th><span data-lang="he">שימוש</span><span data-lang="en">Use</span></th></tr></thead><tbody>
+      <tr><td><code>i</code></td><td><span class="required"><span data-lang="he">חובה</span><span data-lang="en">Required</span></span></td><td><span data-lang="he"><code>systemId</code>, או <code>id</code> כ־fallback היסטורי.</span><span data-lang="en"><code>systemId</code>, with <code>id</code> as a legacy fallback.</span></td><td><span data-lang="he">זהות פיזית, dedupe ו־entitlement.</span><span data-lang="en">Physical identity, dedupe and entitlement.</span></td></tr>
+      <tr><td><code>n</code></td><td><span class="required"><span data-lang="he">חובה</span><span data-lang="en">Required</span></span></td><td><span data-lang="he">שם התצוגה; fallback ל־systemId.</span><span data-lang="en">Display name; falls back to systemId.</span></td><td><span data-lang="he">תצוגה באפליקציה ובהזמנה.</span><span data-lang="en">App and invitation display.</span></td></tr>
+      <tr><td><code>kid</code></td><td><span class="required"><span data-lang="he">חובה ל־Production</span><span data-lang="en">Production required</span></span></td><td>SECURE_V3 key ID</td><td><span data-lang="he">בחירת credential slot בשער.</span><span data-lang="en">Selects the credential slot on the gate.</span></td></tr>
+      <tr><td><code>dpk</code></td><td><span class="required"><span data-lang="he">חובה ל־Production</span><span data-lang="en">Production required</span></span></td><td>P-256 compressed device public key</td><td><span data-lang="he">אימות זהות המכשיר ב־handshake.</span><span data-lang="en">Device identity verification during handshake.</span></td></tr>
+      <tr><td><code>psk</code></td><td><span class="required"><span data-lang="he">חובה ל־Production</span><span data-lang="en">Production required</span></span></td><td><span class="sensitive">Pairing secret</span></td><td><span data-lang="he">סוד רגיש ביותר ל־secure pairing; לעולם אינו נרשם ללוג.</span><span data-lang="en">Highly sensitive secure-pairing secret; never logged.</span></td></tr>
+      <tr><td><code>sn</code>, <code>s</code></td><td><span class="optional"><span data-lang="he">אופציונלי</span><span data-lang="en">Optional</span></span></td><td><span data-lang="he">שם מערכת ו־subscription.</span><span data-lang="en">System name and subscription.</span></td><td><span data-lang="he">metadata תפעולי ותאימות.</span><span data-lang="en">Operational metadata and compatibility.</span></td></tr>
+      <tr><td><code>gc</code>, <code>fc</code>, <code>v</code></td><td><span class="optional"><span data-lang="he">אופציונלי</span><span data-lang="en">Optional</span></span></td><td><span data-lang="he">משפחת פקודה, ערוץ FOTA וגרסה.</span><span data-lang="en">Command family, FOTA channel and version.</span></td><td><span data-lang="he">התנהגות, תאימות ודיאגנוסטיקה.</span><span data-lang="en">Behavior, compatibility and diagnostics.</span></td></tr>
+      <tr><td><code>gi</code></td><td><span class="optional"><span data-lang="he">אופציונלי</span><span data-lang="en">Optional</span></span></td><td><span data-lang="he">שם האייקון שנבחר.</span><span data-lang="en">Selected icon name.</span></td><td><span data-lang="he">תצוגה בלבד.</span><span data-lang="en">Display only.</span></td></tr>
+      <tr><td><code>ad</code>, <code>alat</code>, <code>alng</code></td><td><span class="optional"><span data-lang="he">אופציונלי</span><span data-lang="en">Optional</span></span></td><td><span data-lang="he">כתובת, latitude ו־longitude.</span><span data-lang="en">Address, latitude and longitude.</span></td><td><span data-lang="he">מיקום, ניווט ופתיחת מפה.</span><span data-lang="en">Location, navigation and map launch.</span></td></tr>
+      <tr><td><code>cm</code>, <code>rn</code></td><td><span class="optional"><span data-lang="he">אופציונלי</span><span data-lang="en">Optional</span></span></td><td><span data-lang="he">הערת גישה ושם דייר.</span><span data-lang="en">Access note and resident name.</span></td><td><span data-lang="he">ברירת מחדל שניתנת לדריסה בפרטי ההזמנה.</span><span data-lang="en">Defaults that reservation data may override.</span></td></tr>
+      <tr><td><code>fl</code>, <code>ap</code>, <code>pk</code></td><td><span class="optional"><span data-lang="he">אופציונלי</span><span data-lang="en">Optional</span></span></td><td><span data-lang="he">קומה, דירה/חדר וחניה.</span><span data-lang="en">Floor, apartment/room and parking.</span></td><td><span data-lang="he">פרטי הגעה ברירת־מחדל.</span><span data-lang="en">Default arrival details.</span></td></tr>
+    </tbody></table></div>
+
+    <h3 data-lang="he">שדות ייחודיים ל־Dual Control ול־Group</h3><h3 data-lang="en">Fields unique to Dual Control and Group</h3>
+    <div class="table-wrap"><table><thead><tr><th><span data-lang="he">שדה</span><span data-lang="en">Field</span></th><th><span data-lang="he">נמצא ב</span><span data-lang="en">Present in</span></th><th><span data-lang="he">תוכן וכלל</span><span data-lang="en">Content and rule</span></th></tr></thead><tbody>
+      <tr><td><code>dcid</code>, <code>n</code></td><td>Dual / <code>dcs[]</code></td><td><span data-lang="he">מזהה ושם Dual Control.</span><span data-lang="en">Dual Control ID and display name.</span></td></tr>
+      <tr><td><code>gs</code></td><td>Dual / Group</td><td><span data-lang="he">ב־Dual: בדיוק שני gate snapshots. ב־Group: שערים ישירים לאחר flatten ו־dedupe.</span><span data-lang="en">Dual: exactly two gate snapshots. Group: direct gates after flattening and deduplication.</span></td></tr>
+      <tr><td><code>l1</code>, <code>l2</code></td><td>Dual / <code>dcs[]</code></td><td><span data-lang="he">תוויות הפעולה הראשונה והשנייה, למשל Open / Close.</span><span data-lang="en">First and second action labels, for example Open / Close.</span></td></tr>
+      <tr><td><code>dcf</code>, <code>dci</code></td><td>Dual / <code>dcs[]</code></td><td><span data-lang="he">משפחת פקודות <code>PULSE|PUSH_BUTTON|TOGGLE</code> ואייקון הפעולה.</span><span data-lang="en">Command family <code>PULSE|PUSH_BUTTON|TOGGLE</code> and action icon.</span></td></tr>
+      <tr><td><code>ad</code>, <code>alat</code>, <code>alng</code></td><td>Dual / Group</td><td><span data-lang="he">כתובת הישות וקואורדינטות אופציונליות; אינן מחליפות את המיקום הנשמר בתוך כל Gate snapshot.</span><span data-lang="en">Optional entity address and coordinates; they do not replace the location stored in each Gate snapshot.</span></td></tr>
+      <tr><td><code>gid</code>, <code>n</code></td><td>Group</td><td><span data-lang="he">מזהה ושם הקבוצה השטוחה שנשמרת במפתח.</span><span data-lang="en">ID and name of the flat Group snapshot stored in the key.</span></td></tr>
+      <tr><td><code>dcs</code></td><td>Group</td><td><span data-lang="he">מערך Dual Controls; כל איבר כולל <code>dcid/n/gs[2]/l1/l2</code> ו־metadata אופציונלי.</span><span data-lang="en">Array of Dual Controls; each item contains <code>dcid/n/gs[2]/l1/l2</code> and optional metadata.</span></td></tr>
+      <tr><td><code>cm</code>, <code>rn</code>, <code>fl</code>, <code>ap</code>, <code>pk</code></td><td>Group</td><td><span data-lang="he">ברירות־מחדל אופציונליות להערת גישה, שם דייר, קומה, חדר/דירה וחניה ברמת הקבוצה.</span><span data-lang="en">Optional Group-level defaults for access note, resident name, floor, room/apartment and parking.</span></td></tr>
+    </tbody></table></div>
+
+    <div class="grid-2" style="margin-top:16px">
+      <article class="card"><h3 data-lang="he">כללי יצירה</h3><h3 data-lang="en">Creation rules</h3><ul><li data-lang="he">רק Admin מקומי רשאי ליצור WIFIGATE Host KEY.</li><li data-lang="en">Only a local Admin may create a WIFIGATE Host KEY.</li><li data-lang="he">Dual דורש Admin בשני השערים.</li><li data-lang="en">Dual requires Admin on both gates.</li><li data-lang="he">Group דורש Admin והרשאת הזמנת אורחים בכל שער ישיר ובכל שער שבתוך Dual או קבוצת־בת.</li><li data-lang="en">Group requires Admin and guest-invitation permission on every direct gate and every gate inside a Dual or child group.</li><li data-lang="he">חוסר ב־<code>h</code>, <code>he</code> או בחבילת SECURE_V3 מלאה חוסם יצירה.</li><li data-lang="en">Missing <code>h</code>, <code>he</code> or a complete SECURE_V3 bundle blocks creation.</li></ul></article>
+      <article class="card"><h3 data-lang="he">כללי snapshot</h3><h3 data-lang="en">Snapshot rules</h3><ul><li data-lang="he">המפתח הוא snapshot קבוע, לא pointer חי לאפליקציה.</li><li data-lang="en">The key is an immutable snapshot, not a live pointer into the app.</li><li data-lang="he">שינוי שם, כתובת, שער או הרכב Group דורש מפתח חדש.</li><li data-lang="en">Changing a name, address, gate or Group composition requires a new key.</li><li data-lang="he">Group ריק, כפול, גדול מ־20 systems או גדול מ־12KB נחסם.</li><li data-lang="en">An empty, duplicate, over-20-system or over-12KB Group is rejected.</li><li data-lang="he">כל <code>systemId</code> ביעד חייב entitlement פעיל בזמן יצירת הזמנה.</li><li data-lang="en">Every <code>systemId</code> in the target needs an active entitlement when an invitation is created.</li></ul></article>
+    </div>
+    <div class="callout bad"><p data-lang="he"><strong>סיווג אבטחה:</strong> WIFIGATE Host KEY הוא credential סודי של המערכת, לא מזהה ציבורי. הוא מכיל <code>pairingSecret</code>, חומר BLE וזהות מזמין. שומרים אותו רק ב־server secret storage; לא בדפדפן, לא ב־Git, לא ב־URL, לא ב־analytics ולא בלוג.</p><p data-lang="en"><strong>Security classification:</strong> a WIFIGATE Host KEY is a secret system credential, not a public identifier. It contains <code>pairingSecret</code>, BLE material and inviter identity. Store it only in server-side secret storage — never in a browser, Git, URL, analytics or logs.</p></div>
+  </section>
+
+  <section class="section" id="api">
+    <div class="section-head"><div><div class="kicker">05 · Public API contract</div><h2 data-lang="he">יצירת הזמנת אורח</h2><h2 data-lang="en">Create a guest invitation</h2><p class="lede" data-lang="he">חוזה POST יחיד ל־Gate, Dual Control ו־Group. סוג היעד נקבע מתוך WIFIGATE Host KEY ולא מתוך שדה שהשותף יכול לזייף.</p><p class="lede" data-lang="en">One POST contract for Gate, Dual Control and Group. Target type is derived from the WIFIGATE Host KEY, not a partner-controlled field.</p></div><span class="status contract">API v1</span></div>
+    <div class="code-block"><div class="code-title"><span>request</span><button class="copy" type="button" data-copy="api-request">Copy</button></div><pre id="api-request">POST https://api.wifigate.io/v1/guest-invitations
+Authorization: Bearer wfg_live_k_7H2M9Q4P8D.&lt;secret&gt;
+Content-Type: application/json
+Idempotency-Key: wifigate-host-reservation-8241-v3
+
+{
+  "encryptedKeyValue": "wgk_live_v1.&lt;base64url-ciphertext&gt;",
+  "guest": {
+    "name": "Christopher Martin",
+    "phone": "+972509999999",
+    "email": "christopher@example.com",
+    "floor": "1",
+    "apartment": "Room 101",
+    "parking": "P-18",
+    "carNumber": "12-345-67",
+    "comment": "Reservation WGA-8241"
+  },
+  "access": {
+    "startsAt": "2026-01-08T13:00:00Z",
+    "endsAt": "2026-01-21T09:00:00Z"
+  },
+  "externalReference": "WGA-8241",
+  "delivery": { "channel": "none" }
+}</pre></div>
+    <div class="code-block"><div class="code-title"><span>201 response</span><button class="copy" type="button" data-copy="api-response">Copy</button></div><pre id="api-response">{
+  "requestId": "req_01K7R4V7ZE7M7K2ZX5Q8",
+  "invitationId": "inv_01K7R4V8BX6D4M9QW1N3",
+  "targetType": "gate",
+  "targetId": "9876543210123456",
+  "startsAt": "2026-01-08T13:00:00Z",
+  "endsAt": "2026-01-21T09:00:00Z",
+  "inviteUrl": "https://wifigate.io/wifigate-api/?ep=v1.&lt;ciphertext&gt;"
+}</pre></div>
+    <div class="grid-2">
+      <article class="card"><h3 data-lang="he">Headers מחייבים</h3><h3 data-lang="en">Required headers</h3><ul><li><code>Authorization: Bearer …</code></li><li><code>Content-Type: application/json</code></li><li><code>Idempotency-Key</code> — 16–128 chars, unique per logical reservation version</li><li data-lang="he">אין credential ב־query string.</li><li data-lang="en">No credential in the query string.</li></ul></article>
+      <article class="card"><h3 data-lang="he">ברירות מחדל ומגבלות</h3><h3 data-lang="en">Defaults and limits</h3><ul><li data-lang="he">טלפון אורח חובה ומנורמל ל־E.164.</li><li data-lang="en">Guest phone is required and normalized to E.164.</li><li data-lang="he">זמן UTC ב־ISO-8601; חלון מקסימלי ו־clock skew מוגדרים ב־server config.</li><li data-lang="en">UTC ISO-8601 times; maximum window and clock skew are server-configured.</li><li data-lang="he">גוף עד 32KB; Group system value עד 12KB; URL מוחזר עד 16KB.</li><li data-lang="en">Body up to 32KB; Group system value up to 12KB; returned URL up to 16KB.</li><li><code>delivery.channel="none"</code> in v1 — <span data-lang="he">השותף שולח לאורח</span><span data-lang="en">the partner delivers to the guest</span>.</li></ul></article>
+    </div>
+    <h3 data-lang="he">חוזה שגיאות יציב</h3><h3 data-lang="en">Stable error contract</h3>
+    <div class="table-wrap"><table><thead><tr><th>HTTP</th><th>Code</th><th><span data-lang="he">משמעות</span><span data-lang="en">Meaning</span></th></tr></thead><tbody>
+      <tr><td>400</td><td><code>INVALID_REQUEST</code></td><td><span data-lang="he">Schema, טלפון, זמן או גודל אינם תקינים.</span><span data-lang="en">Invalid schema, phone, time or size.</span></td></tr>
+      <tr><td>401</td><td><code>INVALID_CLIENT_API_KEY</code></td><td><span data-lang="he">מפתח לא קיים, פג, בוטל או אינו תואם סביבה.</span><span data-lang="en">Key is unknown, expired, revoked or for another environment.</span></td></tr>
+      <tr><td>403</td><td><code>SCOPE_DENIED</code> / <code>TARGET_TYPE_DENIED</code></td><td><span data-lang="he">המפתח אינו מורשה לפעולה או לסוג היעד.</span><span data-lang="en">The key lacks the operation or target permission.</span></td></tr>
+      <tr><td>402</td><td><code>ENTITLEMENT_REQUIRED</code></td><td><span data-lang="he">לפחות systemId אחד אינו פעיל במנוי WIFIGATE Host.</span><span data-lang="en">At least one systemId lacks an active WIFIGATE Host entitlement.</span></td></tr>
+      <tr><td>409</td><td><code>IDEMPOTENCY_CONFLICT</code></td><td><span data-lang="he">אותו key נשלח עם body שונה.</span><span data-lang="en">The same key was reused with a different body.</span></td></tr>
+      <tr><td>422</td><td><code>INVALID_SYSTEM_VALUE</code></td><td><span data-lang="he">פענוח נכשל או מבנה Gate/Dual/Group אינו תקין.</span><span data-lang="en">Decryption failed or the Gate/Dual/Group shape is invalid.</span></td></tr>
+      <tr><td>429</td><td><code>RATE_LIMITED</code> / <code>QUOTA_EXCEEDED</code></td><td><span data-lang="he">מגבלת קצב או hard quota; כולל <code>Retry-After</code>.</span><span data-lang="en">Rate or hard-quota limit; includes <code>Retry-After</code>.</span></td></tr>
+      <tr><td>500/503</td><td><code>INTERNAL_ERROR</code> / <code>DEPENDENCY_UNAVAILABLE</code></td><td><span data-lang="he">תגובה בטוחה עם <code>requestId</code>; לעולם לא מוחזר secret.</span><span data-lang="en">Safe response with <code>requestId</code>; never returns a secret.</span></td></tr>
+    </tbody></table></div>
+    <div class="callout good"><p data-lang="he"><strong>Idempotency:</strong> retry זהה עם אותו key מחזיר את אותה תשובת 201 ואינו יוצר קישור נוסף, אינו צורך quota נוסף ואינו מחויב פעם נוספת. body שונה עם אותו key נכשל ב־409.</p><p data-lang="en"><strong>Idempotency:</strong> an identical retry with the same key returns the stored 201 response, creates no new link, consumes no additional quota and is not billed twice. A different body with the same key fails with 409.</p></div>
+  </section>
+
+  <section class="section" id="lifecycle">
+    <div class="section-head"><div><div class="kicker">06 · Reservation lifecycle</div><h2 data-lang="he">מהזמנה ועד לפתיחת הדלת</h2><h2 data-lang="en">From reservation to door opening</h2><p class="lede" data-lang="he">ה־happy path וההתנהגות בעדכון או ביטול חייבים להיות חד־משמעיים לפני חיבור PMS ראשון.</p><p class="lede" data-lang="en">The happy path and update/cancellation behavior must be unambiguous before the first PMS integration.</p></div></div>
+    <div class="flow">
+      <div class="flow-step"><b>1 · Reservation</b><span data-lang="he">הזמנה מאושרת מקבלת חדר/נכס, אורח, טלפון וחלון check-in/out.</span><span data-lang="en">A confirmed reservation receives a room/property, guest, phone and check-in/out window.</span></div>
+      <div class="flow-step"><b>2 · Target mapping</b><span data-lang="he">ה־PMS בוחר WIFIGATE Host KEY שהוגדר מראש עבור החדר או המתחם.</span><span data-lang="en">The PMS selects the preconfigured WIFIGATE Host KEY for that room or property.</span></div>
+      <div class="flow-step"><b>3 · API</b><span data-lang="he">POST אידמפוטנטי עובר auth, entitlement ויצירת payload תואם protocol.</span><span data-lang="en">An idempotent POST passes authentication, entitlement and protocol payload generation.</span></div>
+      <div class="flow-step"><b>4 · Delivery</b><span data-lang="he">השותף שולח את הקישור הפרטי לטלפון האורח ושומר רק reference פנימי.</span><span data-lang="en">The partner sends the private link to the guest phone and stores only its internal reference.</span></div>
+      <div class="flow-step"><b>5 · Local access</b><span data-lang="he">האפליקציה מייבאת GUEST; בזמן החלון היא שולחת <code>OPEN_GUEST</code> או <code>TOGGLE_GUEST_*</code>.</span><span data-lang="en">The app imports GUEST; during the window it sends <code>OPEN_GUEST</code> or <code>TOGGLE_GUEST_*</code>.</span></div>
+    </div>
+    <h3 data-lang="he">עדכון וביטול</h3><h3 data-lang="en">Update and cancellation</h3>
+    <div class="grid-3">
+      <article class="card"><h3 data-lang="he">שינוי תאריכים</h3><h3 data-lang="en">Date change</h3><p data-lang="he">השותף שולח version חדש עם Idempotency-Key חדש. הקישור החדש מחליף את הישן בתקשורת לאורח, אך הקישור הישן נשאר תקף בחלון המקורי.</p><p data-lang="en">The partner sends a new version with a new Idempotency-Key. The new link replaces the old one in guest communication, but the old link remains valid in its original window.</p></article>
+      <article class="card"><h3 data-lang="he">ביטול לפני מסירה</h3><h3 data-lang="en">Cancellation before delivery</h3><p data-lang="he">אין שולחים את הקישור. רשומת WIFIGATE Host עוברת ל־cancelled ואין יצירה נוספת.</p><p data-lang="en">Do not deliver the link. Mark the WIFIGATE Host record cancelled and do not create another invitation.</p></article>
+      <article class="card"><h3 data-lang="he">ביטול אחרי מסירה</h3><h3 data-lang="en">Cancellation after delivery</h3><p data-lang="he">ב־v1 אין ביטול ענני פרטני של קישור שכבר הגיע לטלפון, כי השער פועל offline. מצמצמים חלונות, מנפיקים סמוך להגעה ומציגים את המגבלה לצוות.</p><p data-lang="en">v1 cannot individually revoke a delivered link in the cloud because the gate works offline. Keep windows tight, issue near arrival and make the limitation visible to staff.</p></article>
+    </div>
+    <div class="callout bad"><p data-lang="he"><strong>לא להבטיח revoke שאינו קיים:</strong> ביטול Client API key עוצר רק יצירת הזמנות חדשות. הוא אינו מבטל קישור קיים. הסרת זהות המזמין מהשער מבטלת קישורים קיימים של אותו מזמין — אך היא פעולה רחבה, לא ביטול של reservation יחיד.</p><p data-lang="en"><strong>Do not promise revocation that does not exist:</strong> revoking a Client API key only stops new invitations. It does not cancel an existing link. Removing the inviter identity from the gate invalidates that inviter's existing links — but it is a broad action, not single-reservation cancellation.</p></div>
+  </section>
+
+  <section class="section" id="keys">
+    <div class="section-head"><div><div class="kicker">07 · Digital keys &amp; credentials</div><h2 data-lang="he">שני מפתחות שונים, שתי מטרות שונות</h2><h2 data-lang="en">Two different keys for two different purposes</h2><p class="lede" data-lang="he">ה־Client API key מזהה את האינטגרציה. ה־WIFIGATE Host KEY מגדיר את השערים ואת זהות המזמין. רק שילוב תקין של שניהם מאפשר יצירת קישור.</p><p class="lede" data-lang="en">The Client API key identifies the integration. The WIFIGATE Host KEY defines gates and inviter identity. Only a valid combination can create a link.</p></div></div>
+    <div class="grid-2">
+      <article class="card"><h3>Client API key</h3><p><code>wfg_live_k_7H2M9Q4P8D.&lt;256-bit-secret&gt;</code></p><ul><li data-lang="he">מונפק בשרת ל־client ול־ownerUid.</li><li data-lang="en">Server-issued to a client and ownerUid.</li><li data-lang="he">כולל scopes, target types, environment, rate limit ו־quota.</li><li data-lang="en">Carries scopes, target types, environment, rate limit and quota.</li><li data-lang="he">ניתן ל־rotation ול־revoke מיידי; revoked לעולם לא מופעל מחדש.</li><li data-lang="en">Supports rotation and immediate revoke; a revoked key is never reactivated.</li></ul></article>
+      <article class="card"><h3>WIFIGATE Host KEY</h3><p><code>wgk_live_v1.&lt;AES-GCM-envelope&gt;</code></p><ul><li data-lang="he">נוצר באפליקציה רק על ידי Admin מקומי מורשה.</li><li data-lang="en">Created in the app only by an authorized local Admin.</li><li data-lang="he">מכיל snapshot של Gate/Dual/Group, חומר BLE ו־h/he/hn.</li><li data-lang="en">Contains a Gate/Dual/Group snapshot, BLE material and h/he/hn.</li><li data-lang="he">אינו נשמר בפורטל ואינו מוצג בדוחות; ה־PMS שומר אותו כ־server secret.</li><li data-lang="en">Not stored in the portal or shown in reports; the PMS stores it as a server secret.</li></ul></article>
+    </div>
+    <h3 data-lang="he">Lifecycle של Client API key</h3><h3 data-lang="en">Client API key lifecycle</h3>
+    <div class="steps">
+      <div class="step"><strong>Issue.</strong> <span data-lang="he">Admin בוחר client, owner, label, סביבה, scopes, target types ומגבלות. הוא רואה metadata בלבד.</span><span data-lang="en">Admin chooses client, owner, label, environment, scopes, target types and limits. Admin sees metadata only.</span></div>
+      <div class="step"><strong>Reveal.</strong> <span data-lang="he">רק owner פעיל, אחרי MFA ו־recent re-auth, מפענח את הסוד לזיכרון. כל חשיפה נרשמת.</span><span data-lang="en">Only the active owner, after MFA and recent re-auth, decrypts the secret into memory. Every reveal is audited.</span></div>
+      <div class="step"><strong>Use.</strong> <span data-lang="he">השרת מאתר לפי key ID, משווה HMAC בזמן קבוע, בודק status/scope/expiry ומודד שימוש.</span><span data-lang="en">The server resolves by key ID, compares HMAC in constant time, checks status/scope/expiry and meters use.</span></div>
+      <div class="step"><strong>Rotate.</strong> <span data-lang="he">נוצר successor חדש; overlap מרבי 24 שעות; הישן מבוטל אוטומטית.</span><span data-lang="en">A new successor is created; overlap is capped at 24 hours; the old key is auto-revoked.</span></div>
+      <div class="step"><strong>Revoke.</strong> <span data-lang="he">ביטול מיידי ובלתי הפיך; ה־ciphertext הניתן ל־Reveal נמחק והיסטוריית audit נשמרת.</span><span data-lang="en">Immediate and irreversible; revealable ciphertext is deleted while audit history remains.</span></div>
+    </div>
+    <div class="callout"><p data-lang="he"><strong>שמירה:</strong> לאימות נשמר HMAC-SHA-256 עם pepper versioned. כדי לאפשר Reveal נשמר עותק נפרד ב־envelope encryption עם Cloud KMS, נגיש רק לשירות Key Vault פנימי. plaintext אינו נשמר לעולם.</p><p data-lang="en"><strong>Storage:</strong> authentication uses HMAC-SHA-256 with a versioned pepper. Reveal uses a separate envelope-encrypted copy with Cloud KMS, accessible only to an internal Key Vault service. Plaintext is never persisted.</p></div>
+  </section>
+
+  <section class="section" id="login">
+    <div class="section-head"><div><div class="kicker">08 · Login &amp; authorization</div><h2 data-lang="he">כניסה אחת, תצוגה לפי תפקיד</h2><h2 data-lang="en">One login, role-based experience</h2><p class="lede" data-lang="he"><code>https://wifigate.io/login/</code> הוא שער כניסה יחיד. אחרי אימות, <code>GET /v1/me</code> מחזיר role ו־memberships וה־dashboard מורכב בהתאם.</p><p class="lede" data-lang="en"><code>https://wifigate.io/login/</code> is the single entry point. After authentication, <code>GET /v1/me</code> returns role and memberships and the dashboard is composed accordingly.</p></div></div>
+    <div class="login-demo" role="img" aria-label="WIFIGATE Host login example">
+      <div class="login-brand"><div class="brand"><span class="brand-mark">W</span>WIFIGATE</div><h3>Host Portal</h3><p data-lang="he">ניהול מאובטח של אינטגרציות, מפתחות והזמנות.</p><p data-lang="en">Secure management of integrations, keys and invitations.</p></div>
+      <div class="login-card"><h3 data-lang="he">כניסה לחשבון</h3><h3 data-lang="en">Sign in to your account</h3><p class="muted" data-lang="he">השתמשו באימייל שאליו נשלחה ההזמנה.</p><p class="muted" data-lang="en">Use the email address that received the invitation.</p><label>Email</label><div class="fake-input">operations@grand-plaza.example</div><button class="fake-button" type="button" disabled><span data-lang="he">שליחת קישור כניסה</span><span data-lang="en">Send sign-in link</span></button><p class="muted" style="margin-top:12px;font-size:12px" data-lang="he">או Google Sign-In · MFA נדרש לפעולות רגישות</p><p class="muted" style="margin-top:12px;font-size:12px" data-lang="en">or Google Sign-In · MFA is required for sensitive actions</p></div>
+    </div>
+    <div class="grid-3" style="margin-top:15px">
+      <article class="card"><h3 data-lang="he">Onboarding סגור</h3><h3 data-lang="en">Closed onboarding</h3><p data-lang="he">אין self-signup. Admin יוצר client ושולח הזמנה חד־פעמית ל־72 שעות; email_verified חייב להתאים.</p><p data-lang="en">No self-signup. Admin creates a client and sends a one-time 72-hour invitation; email_verified must match.</p></article>
+      <article class="card"><h3 data-lang="he">הרשאה שרתית</h3><h3 data-lang="en">Server authorization</h3><p data-lang="he">custom claim לבדו אינו מספיק. Platform Admin דורש גם allowlist פעיל; משתמש לקוח דורש membership פעיל בכל request.</p><p data-lang="en">A custom claim alone is insufficient. Platform Admin also needs an active allowlist record; a client user needs an active membership on every request.</p></article>
+      <article class="card"><h3 data-lang="he">Session בטוח</h3><h3 data-lang="en">Safe session</h3><p data-lang="he">ID token קצר־חיים, revocation check בפעולות רגישות, CSP קשיח, no-store ל־Reveal ו־reauth כאשר <code>auth_time</code> ישן מ־15 דקות.</p><p data-lang="en">Short-lived ID token, revocation checks on sensitive actions, strict CSP, no-store for Reveal and reauth when <code>auth_time</code> is older than 15 minutes.</p></article>
+    </div>
+    <h3 data-lang="he">מטריצת הרשאות</h3><h3 data-lang="en">Authorization matrix</h3>
+    <div class="table-wrap"><table><thead><tr><th>Role</th><th><span data-lang="he">צפייה</span><span data-lang="en">View</span></th><th><span data-lang="he">פעולות</span><span data-lang="en">Actions</span></th><th>Reveal</th></tr></thead><tbody>
+      <tr><td><code>platform_admin</code></td><td><span data-lang="he">כל הלקוחות, משתמשים, metadata, usage, entitlement ו־audit.</span><span data-lang="en">All clients, users, metadata, usage, entitlement and audit.</span></td><td><span data-lang="he">יצירה, השעיה, הקצאה, rotation, revoke, quota ו־billing metadata.</span><span data-lang="en">Create, suspend, assign, rotate, revoke, quota and billing metadata.</span></td><td><strong data-lang="he">לא</strong><strong data-lang="en">No</strong></td></tr>
+      <tr><td><code>client_owner</code></td><td><span data-lang="he">כל metadata והפעילות של ה־client שלו.</span><span data-lang="en">All metadata and activity for their client.</span></td><td><span data-lang="he">סינון וייצוא; lifecycle נשאר בידי Admin ב־v1.</span><span data-lang="en">Filter and export; lifecycle remains Admin-only in v1.</span></td><td><span data-lang="he">רק אם <code>ownerUid</code> תואם</span><span data-lang="en">Only when <code>ownerUid</code> matches</span></td></tr>
+      <tr><td><code>client_member</code></td><td><span data-lang="he">רק מפתחות ופעילות המשויכים אליו.</span><span data-lang="en">Only keys and activity assigned to them.</span></td><td><span data-lang="he">צפייה בלבד.</span><span data-lang="en">View only.</span></td><td><span data-lang="he">רק מפתח Active שלו</span><span data-lang="en">Only their Active key</span></td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="section" id="viewers">
+    <div class="section-head"><div><div class="kicker">09 · Example portal views</div><h2 data-lang="he">Admin Viewer ו־User Viewer</h2><h2 data-lang="en">Admin Viewer and User Viewer</h2><p class="lede" data-lang="he">המסכים הבאים הם mockups פונקציונליים למסמך האיפיון — לא צילום של מוצר שכבר פועל.</p><p class="lede" data-lang="en">The screens below are functional specification mockups — not screenshots of an already deployed product.</p></div><span class="status target">UI reference</span></div>
+    <h3>Admin Viewer</h3>
+    <div class="screen-frame" role="img" aria-label="WIFIGATE Host Admin viewer example">
+      <div class="screen-top"><strong>WIFIGATE · Host</strong><small>admin@wifigate.io · Platform Admin</small></div>
+      <div class="screen-body"><aside class="screen-nav"><strong>ADMIN</strong><div class="nav-item active">Overview</div><div class="nav-item">Clients</div><div class="nav-item">Members</div><div class="nav-item">API Keys</div><div class="nav-item">Entitlements</div><div class="nav-item">Usage</div><div class="nav-item">Audit</div></aside><main class="screen-main">
+        <div class="screen-title"><div><h4><span data-lang="he">סקירת פלטפורמה</span><span data-lang="en">Platform overview</span></h4><p><span data-lang="he">כל הלקוחות והמפתחות — ללא חשיפת secrets</span><span data-lang="en">All clients and keys — without secret disclosure</span></p></div><button class="fake-button" disabled><span data-lang="he">+ לקוח חדש</span><span data-lang="en">+ New client</span></button></div>
+        <div class="metrics"><div class="metric"><small><span data-lang="he">לקוחות פעילים</span><span data-lang="en">Active clients</span></small><b>18</b></div><div class="metric"><small><span data-lang="he">מפתחות פעילים</span><span data-lang="en">Active keys</span></small><b>31</b></div><div class="metric"><small><span data-lang="he">הזמנות · 30d</span><span data-lang="en">Invites · 30d</span></small><b>24.6K</b></div><div class="metric"><small><span data-lang="he">הצלחה</span><span data-lang="en">Success</span></small><b>99.4%</b></div></div>
+        <div class="fake-table"><div class="fake-row head"><span>Client</span><span>Keys</span><span>Usage 30d</span><span>Status</span><span>Action</span></div><div class="fake-row"><strong>Grand Plaza Hotels</strong><span>3</span><span>9,611</span><span><i class="state">Active</i></span><span>Open · Suspend</span></div><div class="fake-row"><strong>WIFIGATE Host</strong><span>2</span><span>7,284</span><span><i class="state">Active</i></span><span>Open · Audit</span></div><div class="fake-row"><strong>CityStay PMS</strong><span>4</span><span>4,772</span><span><i class="state">Active</i></span><span>Open · Rotate</span></div></div>
+      </main></div>
+    </div>
+    <div class="callout"><p data-lang="he"><strong>Admin רואה metadata בלבד:</strong> prefix/last4, owner, scopes, status, last used, usage ו־audit. הוא יכול להנפיק, לסובב ולבטל — אך אינו רשאי Reveal לסוד של משתמש.</p><p data-lang="en"><strong>Admin sees metadata only:</strong> prefix/last4, owner, scopes, status, last used, usage and audit. Admin can issue, rotate and revoke — but cannot Reveal a user's secret.</p></div>
+
+    <h3>User Viewer</h3>
+    <div class="screen-frame" role="img" aria-label="WIFIGATE Host user viewer example">
+      <div class="screen-top"><strong>WIFIGATE · API Portal</strong><small>Grand Plaza Hotels · operations@grand-plaza.example · Client Owner</small></div>
+      <div class="screen-body"><aside class="screen-nav"><strong>PORTAL</strong><div class="nav-item active">Overview</div><div class="nav-item">My keys</div><div class="nav-item">Usage</div><div class="nav-item">Exports</div><div class="nav-item">Documentation</div></aside><main class="screen-main">
+        <div class="screen-title"><div><h4><span data-lang="he">המפתחות והפעילות שלי</span><span data-lang="en">My keys and activity</span></h4><p><span data-lang="he">רק הנתונים המורשים לחשבון Grand Plaza</span><span data-lang="en">Only data authorized for the Grand Plaza account</span></p></div><button class="fake-button" disabled><span data-lang="he">ייצוא CSV</span><span data-lang="en">Export CSV</span></button></div>
+        <div class="metrics"><div class="metric"><small><span data-lang="he">המפתחות שלי</span><span data-lang="en">My keys</span></small><b>2</b></div><div class="metric"><small>Requests · 30d</small><b>9,842</b></div><div class="metric"><small><span data-lang="he">הזמנות נוצרו</span><span data-lang="en">Invites created</span></small><b>9,611</b></div><div class="metric"><small><span data-lang="he">נכשלו</span><span data-lang="en">Failed</span></small><b>58</b></div></div>
+        <div class="fake-table"><div class="fake-row head"><span>Label</span><span>Prefix</span><span>Status</span><span>Last used</span><span>Action</span></div><div class="fake-row"><strong>WIFIGATE_HOST_PRODUCTION</strong><span>wfg_live_k_7H2M…8D</span><span><i class="state">Active</i></span><span>2 min ago</span><span>Activity · Reveal</span></div><div class="fake-row"><strong>WIFIGATE_HOST_ROTATION_02</strong><span>wfg_live_k_9KF3…QX</span><span><i class="state">Active</i></span><span>Never</span><span>Activity · Reveal</span></div></div>
+      </main></div>
+    </div>
+    <div class="callout"><p data-lang="he"><strong>User Viewer מבודד לפי tenant:</strong> המשתמש אינו יכול לבחור <code>clientId</code> שרירותי, לראות לקוחות אחרים, לנהל entitlement או לחשוף מפתח שאינו בבעלותו. כל Reveal דורש MFA ו־reauth ונרשם ל־audit.</p><p data-lang="en"><strong>User Viewer is tenant-isolated:</strong> the user cannot select an arbitrary <code>clientId</code>, see other clients, manage entitlements or reveal a key they do not own. Every Reveal requires MFA and reauth and is audited.</p></div>
+  </section>
+
+  <section class="section" id="host">
+    <div class="section-head"><div><div class="kicker">10 · WIFIGATE Host calendar</div><h2 data-lang="he">לוח הזמנות של WIFIGATE Host</h2><h2 data-lang="en">WIFIGATE Host reservation calendar</h2><p class="lede" data-lang="he">התמונה ממחישה את ה־workflow המתוכנן של WIFIGATE Host לניהול שהיות, חדרים ואורחים ולהפקת גישה דיגיטלית מוגבלת בזמן.</p><p class="lede" data-lang="en">The image illustrates the planned WIFIGATE Host workflow for managing stays, rooms and guests and issuing time-bound digital access.</p></div><span class="status target"><span data-lang="he">תמונת המחשה</span><span data-lang="en">Concept image</span></span></div>
+    <figure style="margin:0"><div class="reference-wrap"><img class="reference-img" src="assets/wifigate-host-calendar-reference.png" alt="WIFIGATE Host reservation calendar showing rooms and guest stays across a two-week view"><div class="reference-logo" aria-hidden="true"><span class="brand-mark">W</span><span>WIFIGATE<br>Host</span></div><div class="reference-footer" aria-hidden="true">Powered by WIFIGATE Host</div></div><figcaption class="figure-caption" data-lang="he">WIFIGATE Host — לוח הזמנות לדוגמה. הנתונים בתמונה הם להמחשה בלבד.</figcaption><figcaption class="figure-caption" data-lang="en">WIFIGATE Host — sample reservation calendar. Data in the image is illustrative only.</figcaption></figure>
+    <h3 data-lang="he">מיפוי מוצע</h3><h3 data-lang="en">Proposed mapping</h3>
+    <div class="table-wrap"><table><thead><tr><th>Hotel / PMS</th><th>WIFIGATE Host</th><th><span data-lang="he">כלל</span><span data-lang="en">Rule</span></th></tr></thead><tbody>
+      <tr><td>Place / Apartment / Room</td><td><code>encryptedKeyValue</code> mapping</td><td><span data-lang="he">מוגדר פעם אחת ב־PMS כ־secret per unit; יכול להפנות ל־Gate, Dual או Group.</span><span data-lang="en">Configured once in the PMS as a per-unit secret; may target Gate, Dual or Group.</span></td></tr>
+      <tr><td>Reservation ID</td><td><code>externalReference</code> + Idempotency-Key</td><td><span data-lang="he">אותו reservation version חייב להחזיר אותה תוצאה.</span><span data-lang="en">The same reservation version must return the same result.</span></td></tr>
+      <tr><td>Guest name / phone / email</td><td><code>guest.*</code></td><td><span data-lang="he">טלפון חובה; אימייל מיועד למסירה של השותף ואינו חלק מאימות השער.</span><span data-lang="en">Phone is required; email is for partner delivery and is not part of gate authentication.</span></td></tr>
+      <tr><td>Check-in / Check-out</td><td><code>access.startsAt / endsAt</code></td><td><span data-lang="he">מומרים ל־UTC; grace period הוא policy מפורש ולא שינוי שקט.</span><span data-lang="en">Converted to UTC; any grace period is explicit policy, never a silent change.</span></td></tr>
+      <tr><td>Status / Change / Cancel</td><td><span data-lang="he">create / supersede / stop delivery</span><span data-lang="en">create / supersede / stop delivery</span></td><td><span data-lang="he">Cancellation אחרי מסירה כפוף למגבלת offline המתוארת לעיל.</span><span data-lang="en">Post-delivery cancellation is subject to the offline limitation described above.</span></td></tr>
+    </tbody></table></div>
+    <div class="callout"><p data-lang="he"><strong>נקודת האינטגרציה המומלצת:</strong> event/webhook מה־backend של ה־PMS אל WIFIGATE Host API דרך adapter ייעודי של המלון. אין לבצע scraping למסך ואין לשים Client API key בדפדפן.</p><p data-lang="en"><strong>Recommended integration point:</strong> an event/webhook from the PMS backend to the WIFIGATE Host API through a hotel-specific adapter. Do not scrape the screen and do not place the Client API key in the browser.</p></div>
+  </section>
+
+  <section class="section" id="data">
+    <div class="section-head"><div><div class="kicker">11 · Data model &amp; management APIs</div><h2 data-lang="he">ישויות מינימליות ל־Production</h2><h2 data-lang="en">Minimum production entities</h2><p class="lede" data-lang="he">הנתונים מפרידים בין זהות האינטגרציה, זהות המשתמש, הרשאת מערכת והחיוב. WIFIGATE Host KEY אינו collection במערכת.</p><p class="lede" data-lang="en">Data separates integration identity, human identity, system entitlement and billing. The WIFIGATE Host KEY is not a collection in the platform.</p></div></div>
+    <div class="table-wrap"><table><thead><tr><th>Collection</th><th><span data-lang="he">שדות עיקריים</span><span data-lang="en">Key fields</span></th><th><span data-lang="he">Retention / כלל</span><span data-lang="en">Retention / rule</span></th></tr></thead><tbody>
+      <tr><td><code>platform_admins</code></td><td>uid, email, status, roles</td><td><span data-lang="he">Allowlist שרתי בנוסף ל־claim.</span><span data-lang="en">Server allowlist in addition to claim.</span></td></tr>
+      <tr><td><code>clients</code></td><td>clientId, name, status, contacts</td><td><span data-lang="he">Tenant של PMS/מלון/שותף.</span><span data-lang="en">PMS/hotel/partner tenant.</span></td></tr>
+      <tr><td><code>client_memberships</code></td><td>clientId, uid, role, status</td><td><span data-lang="he">בדיקה חיה בכל request.</span><span data-lang="en">Live check on every request.</span></td></tr>
+      <tr><td><code>api_keys</code></td><td>ownerUid, keyId, keyHmac, scopes, targetTypes, status, limits</td><td><span data-lang="he">ללא secret מלא.</span><span data-lang="en">No full secret.</span></td></tr>
+      <tr><td><code>api_key_secrets</code></td><td>secretCiphertext, wrappedDataKey, kmsVersion</td><td><span data-lang="he">נמחק ב־revoke/suspend/expiry.</span><span data-lang="en">Deleted on revoke/suspend/expiry.</span></td></tr>
+      <tr><td><code>api_entitlements</code></td><td>environment, systemId, subscriptionId, status</td><td><span data-lang="he">אחד פעיל לכל environment + systemId.</span><span data-lang="en">One active record per environment + systemId.</span></td></tr>
+      <tr><td><code>idempotency_records</code></td><td>apiKeyId, keyHash, bodyHash, responseCiphertext, state</td><td>90 days</td></tr>
+      <tr><td><code>api_request_events</code></td><td>requestId, apiKeyId, targetType, targetId, status, latency</td><td><span data-lang="he">90 יום; ללא PII/secret/URL.</span><span data-lang="en">90 days; no PII/secret/URL.</span></td></tr>
+      <tr><td><code>api_usage_daily</code></td><td>date, apiKeyId, total, created, replay, error</td><td>25 months</td></tr>
+      <tr><td><code>audit_events</code></td><td>actor, action, target, beforeSummary, afterSummary</td><td>24 months · append-only</td></tr>
+    </tbody></table></div>
+    <h3 data-lang="he">Endpoints של הפורטל</h3><h3 data-lang="en">Portal endpoints</h3>
+    <div class="grid-2">
+      <article class="card"><h3>Identity &amp; Client</h3><ul><li><code>GET /v1/me</code></li><li><code>POST /v1/auth/invitations/{id}/accept</code></li><li><code>GET /v1/portal/keys</code></li><li><code>POST /v1/portal/keys/{id}/reveal</code></li><li><code>GET /v1/portal/usage</code></li><li><code>GET /v1/portal/usage/export</code></li></ul></article>
+      <article class="card"><h3>Platform Admin</h3><ul><li><code>/v1/admin/clients</code> — create/list/suspend</li><li><code>/v1/admin/clients/{id}/members</code></li><li><code>/v1/admin/clients/{id}/keys</code></li><li><code>/v1/admin/keys/{id}/rotate|revoke</code></li><li><code>/v1/admin/entitlements</code></li><li><code>/v1/admin/usage</code> · <code>/v1/admin/audit</code></li></ul></article>
+    </div>
+    <div class="callout"><p data-lang="he"><strong>Metering:</strong> כל request עם מפתח מאומת מגדיל <code>totalAuthenticatedRequests</code>. רק יצירה חדשה מוצלחת מגדילה <code>invitationsCreated</code>. Replay אידמפוטנטי מגדיל <code>idempotentReplays</code> בלבד. Group או Dual מוצלח נספר כהזמנה אחת, ובמקביל נשמר <code>systemCount</code> לבדיקת entitlements.</p><p data-lang="en"><strong>Metering:</strong> every request with an authenticated key increments <code>totalAuthenticatedRequests</code>. Only a successful new creation increments <code>invitationsCreated</code>. An idempotent replay increments only <code>idempotentReplays</code>. A successful Group or Dual counts as one invitation while <code>systemCount</code> is retained for entitlement checks.</p></div>
+  </section>
+
+  <section class="section" id="security">
+    <div class="section-head"><div><div class="kicker">12 · Security, privacy &amp; operations</div><h2 data-lang="he">Fail closed בכל גבול הרשאה</h2><h2 data-lang="en">Fail closed at every authorization boundary</h2><p class="lede" data-lang="he">מפתח תקין ללא entitlement אינו מספיק; WIFIGATE Host KEY תקין ללא Client API key אינו מספיק; תצוגת UI אינה הרשאה.</p><p class="lede" data-lang="en">A valid key without entitlement is insufficient; a valid WIFIGATE Host KEY without a Client API key is insufficient; UI visibility is not authorization.</p></div></div>
+    <div class="checklist">
+      <div class="check"><span data-lang="he">השוואת HMAC בזמן קבוע ו־pepper versioned</span><span data-lang="en">Constant-time HMAC comparison and versioned pepper</span></div>
+      <div class="check"><span data-lang="he">TLS בלבד, HSTS ו־CSP קשיח לפורטל</span><span data-lang="en">TLS only, HSTS and strict portal CSP</span></div>
+      <div class="check"><span data-lang="he">Rate limit מבוזר ו־quota fail-closed</span><span data-lang="en">Distributed rate limit and fail-closed quota</span></div>
+      <div class="check"><span data-lang="he">MFA + reauth ל־Reveal ולפעולות lifecycle</span><span data-lang="en">MFA + reauth for Reveal and lifecycle actions</span></div>
+      <div class="check"><span data-lang="he">אין secrets, inviteUrl או PII בלוגים</span><span data-lang="en">No secrets, inviteUrl or PII in logs</span></div>
+      <div class="check"><span data-lang="he">Audit append-only ל־Reveal, export ושינוי הרשאות</span><span data-lang="en">Append-only audit for Reveal, export and authorization changes</span></div>
+      <div class="check"><span data-lang="he">Firestore פרטי; אין SDK ישיר מהדפדפן לנתוני מוצר</span><span data-lang="en">Private Firestore; no direct browser SDK access to product data</span></div>
+      <div class="check"><span data-lang="he">Production ו־Staging מופרדים במפתחות, projects ו־databases</span><span data-lang="en">Production and Staging separated by keys, projects and databases</span></div>
+      <div class="check"><span data-lang="he">Response headers: <code>Cache-Control: no-store</code></span><span data-lang="en">Response headers: <code>Cache-Control: no-store</code></span></div>
+      <div class="check"><span data-lang="he">Backups, PITR, restore drill ו־KMS rotation</span><span data-lang="en">Backups, PITR, restore drill and KMS rotation</span></div>
+    </div>
+    <h3 data-lang="he">מה מותר לשמור באירוע שימוש</h3><h3 data-lang="en">What a usage event may retain</h3>
+    <p data-lang="he">מותר: <code>requestId</code>, <code>clientId</code>, <code>apiKeyId</code>, fingerprint חד־כיווני, target type/id, system IDs, status, outcome, latency ותאריך. אסור: Authorization header, הסוד המלא, <code>encryptedKeyValue</code>, <code>inviteUrl</code>, <code>psk</code>, שם/טלפון/אימייל אורח או body מלא.</p>
+    <p data-lang="en">Allowed: <code>requestId</code>, <code>clientId</code>, <code>apiKeyId</code>, one-way fingerprint, target type/id, system IDs, status, outcome, latency and timestamp. Forbidden: Authorization header, full secret, <code>encryptedKeyValue</code>, <code>inviteUrl</code>, <code>psk</code>, guest name/phone/email or full body.</p>
+    <div class="callout warn"><p data-lang="he"><strong>הערת trust:</strong> סוד ההצפנה של invite links שנארז באפליקציית client אינו trust root. ההרשאה האמיתית נשענת על Client API key ו־entitlement בשרת, זהות אורח באפליקציה, pairing מאובטח, ואימות מקומי בקושחה.</p><p data-lang="en"><strong>Trust note:</strong> an invite-link encryption secret shipped in a client app is not a trust root. Real authorization relies on the server-side Client API key and entitlement, guest identity in the app, secure pairing and local firmware validation.</p></div>
+  </section>
+
+  <section class="section" id="delivery">
+    <div class="section-head"><div><div class="kicker">13 · Delivery plan &amp; acceptance</div><h2 data-lang="he">בנייה לפי vertical slices</h2><h2 data-lang="en">Build in vertical slices</h2><p class="lede" data-lang="he">הסדר הבא מונע בניית פורטל יפה לפני שהחוזה וה־protocol הוכחו מקצה לקצה.</p><p class="lede" data-lang="en">This order prevents building a polished portal before the contract and protocol are proven end to end.</p></div></div>
+    <div class="steps">
+      <div class="step"><strong>Contract freeze.</strong> <span data-lang="he">OpenAPI, JSON Schema, error codes ו־golden vectors ל־Gate/Dual/Group.</span><span data-lang="en">OpenAPI, JSON Schema, error codes and Gate/Dual/Group golden vectors.</span></div>
+      <div class="step"><strong>Mobile key completion.</strong> <span data-lang="he">להוסיף h/he/hn ל־Gate ול־Dual, לבנות Group key, ולאכוף הרשאות Admin מקומי.</span><span data-lang="en">Add h/he/hn to Gate and Dual, build Group key, and enforce local Admin authorization.</span></div>
+      <div class="step"><strong>Backend core.</strong> <span data-lang="he">Auth, HMAC, KMS, entitlement, idempotency, rate limit, payload generation ו־metering.</span><span data-lang="en">Auth, HMAC, KMS, entitlement, idempotency, rate limit, payload generation and metering.</span></div>
+      <div class="step"><strong>Gate vertical slice.</strong> <span data-lang="he">ADC fixture → API → link → Android/iOS import → OPEN_GUEST על חומרה אמיתית.</span><span data-lang="en">ADC fixture → API → link → Android/iOS import → OPEN_GUEST on real hardware.</span></div>
+      <div class="step"><strong>Dual &amp; Group.</strong> <span data-lang="he">בדיוק שני שערים ב־Dual, dedupe ו־flatten בקבוצה, entitlements לכל systemId.</span><span data-lang="en">Exactly two gates in Dual, dedupe and flatten in Group, entitlements for every systemId.</span></div>
+      <div class="step"><strong>Portal.</strong> <span data-lang="he">Login, Admin Viewer, User Viewer, MFA/Reveal, export ו־role-matrix E2E.</span><span data-lang="en">Login, Admin Viewer, User Viewer, MFA/Reveal, export and role-matrix E2E.</span></div>
+      <div class="step"><strong>Pilot.</strong> <span data-lang="he">Staging, load/security tests, restore/rollback rehearsal, לקוח design partner אחד ואז rollout מדורג.</span><span data-lang="en">Staging, load/security tests, restore/rollback rehearsal, one design partner, then staged rollout.</span></div>
+    </div>
+    <h3 data-lang="he">קריטריוני קבלה ל־GA</h3><h3 data-lang="en">GA acceptance criteria</h3>
+    <div class="checklist">
+      <div class="check"><span data-lang="he">שלושת סוגי היעד נפתחים על Android ו־iOS מול שער אמיתי</span><span data-lang="en">All three target types open on Android and iOS against a real gate</span></div>
+      <div class="check"><span data-lang="he">Retry מקביל יוצר הזמנה אחת בלבד</span><span data-lang="en">Concurrent retry creates exactly one invitation</span></div>
+      <div class="check"><span data-lang="he">Admin, owner ו־member חסומים גם ב־API ולא רק ב־UI</span><span data-lang="en">Admin, owner and member are enforced in the API, not only the UI</span></div>
+      <div class="check"><span data-lang="he">Revoke חל בבקשה הבאה ללא cache עוקף</span><span data-lang="en">Revoke applies on the next request with no bypassing cache</span></div>
+      <div class="check"><span data-lang="he">אין secret או PII ב־logs, fixtures, analytics או error reporting</span><span data-lang="en">No secret or PII in logs, fixtures, analytics or error reporting</span></div>
+      <div class="check"><span data-lang="he">SLO, alerts, backup restore ו־rollback עברו rehearsal</span><span data-lang="en">SLO, alerts, backup restore and rollback have been rehearsed</span></div>
+      <div class="check"><span data-lang="he">תיעוד cancellation מציג במפורש את מגבלת ה־offline</span><span data-lang="en">Cancellation documentation explicitly states the offline limitation</span></div>
+      <div class="check"><span data-lang="he">Protocol fixtures תואמים ל־README ול־parser הקיים</span><span data-lang="en">Protocol fixtures match the README and existing parser</span></div>
+    </div>
+    <h3 data-lang="he">מקורות אמת מקומיים</h3><h3 data-lang="en">Local sources of truth</h3>
+    <div class="grid-2">
+      <article class="card"><p><a href="../README_WIFIGATE_LINK_INVITATIONS.md"><code>README_WIFIGATE_LINK_INVITATIONS.md</code></a></p><p class="muted" data-lang="he">משפחות ההזמנה, השדות, validation ומיפוי BLE.</p><p class="muted" data-lang="en">Invitation families, fields, validation and BLE mapping.</p></article>
+      <article class="card"><p><a href="WIFIGATE_AUTO_OPEN.html"><code>WIFIGATE_AUTO_OPEN.html</code></a></p><p class="muted" data-lang="he">המשמעות המדויקת של <code>ao</code> וכללי Auto Open.</p><p class="muted" data-lang="en">Exact <code>ao</code> semantics and Auto Open rules.</p></article>
+      <article class="card"><p><a href="../src/linkService.ts"><code>src/linkService.ts</code></a></p><p class="muted" data-lang="he">ה־routes, prefixes, builders וה־parser בפועל.</p><p class="muted" data-lang="en">Actual routes, prefixes, builders and parser.</p></article>
+      <article class="card"><p><a href="../src/inviteLinkCrypto.ts"><code>src/inviteLinkCrypto.ts</code></a></p><p class="muted" data-lang="he">AES-GCM, HKDF, version ו־AAD.</p><p class="muted" data-lang="en">AES-GCM, HKDF, version and AAD.</p></article>
+    </div>
+    <div class="callout good"><p data-lang="he"><strong>החלטת מסמך:</strong> אם קוד, test או מסמך אחר סותרים את פרוטוקול ההזמנות הקנוני, קודם מתקנים את הסתירה ומוסיפים golden vector. לא משנים את ה־wire format “דרך” מימוש WIFIGATE Host.</p><p data-lang="en"><strong>Document decision:</strong> if code, a test or another document conflicts with the canonical invitation protocol, resolve the conflict and add a golden vector first. Do not change the wire format indirectly through the WIFIGATE Host implementation.</p></div>
+  </section>
+
+  <footer><span data-lang="he">WIFIGATE Host API · איפיון דו־לשוני מקצה לקצה · עודכן 21 בספטמבר 2026 · ללא credentials אמיתיים</span><span data-lang="en">WIFIGATE Host API · bilingual end-to-end specification · updated 21 September 2026 · contains no real credentials</span></footer>
+</div>
+<script>
+(() => {
+  const root = document.documentElement;
+  const langButtons = [...document.querySelectorAll('[data-set-lang]')];
+  const setLanguage = (language) => {
+    const next = language === 'en' ? 'en' : 'he';
+    root.dataset.uiLang = next;
+    root.lang = next;
+    root.dir = next === 'he' ? 'rtl' : 'ltr';
+    langButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.setLang === next)));
+    try { localStorage.setItem('wifigate-host-language', next); } catch {}
+  };
+  langButtons.forEach((button) => button.addEventListener('click', () => setLanguage(button.dataset.setLang)));
+  try {
+    const requestedLanguage = new URLSearchParams(location.search).get('lang');
+    setLanguage(requestedLanguage || localStorage.getItem('wifigate-host-language') || 'he');
+  } catch { setLanguage('he'); }
+
+  const themeButton = document.getElementById('theme-toggle');
+  themeButton.addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('wifigate-host-theme', root.dataset.theme); } catch {}
+  });
+  try {
+    const requestedTheme = new URLSearchParams(location.search).get('theme');
+    const storedTheme = localStorage.getItem('wifigate-host-theme');
+    if (requestedTheme === 'dark' || requestedTheme === 'light') root.dataset.theme = requestedTheme;
+    else if (storedTheme === 'dark' || storedTheme === 'light') root.dataset.theme = storedTheme;
+    else if (matchMedia('(prefers-color-scheme: dark)').matches) root.dataset.theme = 'dark';
+  } catch {}
+
+  document.querySelectorAll('[data-copy]').forEach((button) => button.addEventListener('click', async () => {
+    const target = document.getElementById(button.dataset.copy);
+    if (!target) return;
+    const previous = button.textContent;
+    try {
+      await navigator.clipboard.writeText(target.textContent);
+      button.textContent = root.dataset.uiLang === 'he' ? 'הועתק' : 'Copied';
+    } catch {
+      button.textContent = root.dataset.uiLang === 'he' ? 'העתקה נכשלה' : 'Copy failed';
+    }
+    setTimeout(() => { button.textContent = previous; }, 1400);
+  }));
+
+  const requestedSection = new URLSearchParams(location.search).get('section');
+  if (requestedSection) window.setTimeout(() => document.getElementById(requestedSection)?.scrollIntoView({block: 'start'}), 100);
+})();
+</script>
+</body>
+</html>
