@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <title>Dashboard | WIFIGATE Host</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/host-portal.css">
+  <script type="module" src="/js/host-dashboard.js"></script>
+</head>
+<body class="portal-dashboard">
+  <div class="dashboard-shell">
+    <aside class="dashboard-sidebar">
+      <a class="brand" href="/" aria-label="WIFIGATE — דף הבית"><img src="/assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE"></a>
+      <div class="sidebar-caption">HOST PORTAL</div>
+      <nav aria-label="ניווט בדשבורד" id="dashboard-nav"></nav>
+      <a class="sidebar-site-link" href="/">חזרה לאתר ↗</a>
+    </aside>
+    <main class="dashboard-main">
+      <header class="dashboard-topbar"><div><span class="eyebrow">WIFIGATE HOST</span><h1 id="dashboard-title">הדשבורד שלי</h1><span class="staging-badge" data-staging hidden>STAGING · נתוני בדיקה</span></div><div class="account-menu"><span id="account-name"></span><button id="sign-out" type="button">התנתקות</button></div></header>
+      <p id="dashboard-status" class="dashboard-status" role="status" aria-live="polite">מאמת חשבון והרשאות…</p>
+      <div id="dashboard-content" hidden>
+        <section class="welcome-panel"><div><span id="role-badge" class="role-badge"></span><h2 id="welcome-title"></h2><p id="welcome-description"></p></div><div class="welcome-art" aria-hidden="true"><span>W</span></div></section>
+        <section class="dashboard-section" id="memberships-section"><div class="section-heading"><h2>השיוכים שלי</h2></div><div id="memberships-list" class="membership-list"></div></section>
+        <section class="dashboard-section" id="keys-section"><div class="section-heading"><div><span class="eyebrow">CREDENTIALS</span><h2>מפתחות API</h2></div><button class="refresh-button" type="button" data-refresh="keys">רענון</button></div><p class="section-status" id="keys-status"></p><div class="table-scroll"><table><thead><tr><th>תווית</th><th>קידומת</th><th>מצב</th><th>שימוש אחרון</th></tr></thead><tbody id="keys-body"></tbody></table></div></section>
+        <section class="dashboard-section" id="usage-section"><div class="section-heading"><div><span class="eyebrow">ACTIVITY</span><h2>שימוש ופעילות</h2></div><button class="refresh-button" type="button" data-refresh="usage">רענון</button></div><p class="section-status" id="usage-status"></p><div id="usage-cards" class="metric-grid"></div></section>
+        <section class="dashboard-section admin-only" id="clients-section" hidden><div class="section-heading"><div><span class="eyebrow">PLATFORM</span><h2>לקוחות</h2></div><button class="refresh-button" type="button" data-refresh="clients">רענון</button></div><p class="section-status" id="clients-status"></p><div class="table-scroll"><table><thead><tr><th>לקוח</th><th>מזהה</th><th>מצב</th></tr></thead><tbody id="clients-body"></tbody></table></div></section>
+        <section class="dashboard-section admin-only" id="audit-section" hidden><div class="section-heading"><div><span class="eyebrow">SECURITY</span><h2>אירועי Audit</h2></div><button class="refresh-button" type="button" data-refresh="audit">רענון</button></div><p class="section-status" id="audit-status"></p><div class="table-scroll"><table><thead><tr><th>פעולה</th><th>יעד</th><th>תאריך</th></tr></thead><tbody id="audit-body"></tbody></table></div></section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

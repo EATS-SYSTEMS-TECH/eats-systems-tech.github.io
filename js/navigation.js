@@ -2,6 +2,7 @@
 // Version: 1.2.1
 
 function setupNav() {
+  setupSiteLogin();
   const toggle = $(".nav__toggle");
   const navWrapper = $(".nav__links-wrapper");
   if (!toggle || !navWrapper) return;
@@ -21,6 +22,15 @@ function setupNav() {
   });
 }
 
+function setupSiteLogin() {
+  const nav = document.querySelector(".site-header .nav");
+  if (!nav || nav.querySelector(".site-login__trigger")) return;
+  const link = document.createElement("a");
+  link.className = "site-login__trigger";
+  link.href = "/login/";
+  link.textContent = document.documentElement.lang.toLowerCase().startsWith("he") ? "התחברות" : "Login";
+  nav.insertBefore(link, nav.querySelector(".language-selector"));
+}
 function setupScrollSpy() {
   const sections = $$("main section[id]");
   const navLinks = $$(".nav__link");
