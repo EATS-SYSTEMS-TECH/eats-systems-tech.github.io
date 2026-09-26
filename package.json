@@ -7,13 +7,14 @@
         "build:locales": "node scripts/build-localized-site.mjs",
         "build:images": "node scripts/build-niche-images.mjs",
         "staging": "node scripts/start-staging.mjs",
-        "test:staging": "node scripts/staging-e2e.mjs"
+        "test:staging": "node scripts/run-staging-tests.mjs"
     },
     "devDependencies": {
         "cheerio": "^1.2.0",
         "firebase": "^12.19.0",
         "firebase-admin": "^13.6.0",
         "firebase-tools": "^15.31.0",
+        "playwright-core": "^1.63.0",
         "sharp": "^0.35.3"
     }
 }

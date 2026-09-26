@@ -62,10 +62,12 @@ In the Firebase mock Google or Apple popup, use one of these emails:
 - `member@grandplaza.test` — client member, one assigned key and usage.
 - Any other email — signed in, but denied portal access.
 
-Run `npm run test:staging` in a second terminal while staging is running. It
-exchanges mock Google and Apple credentials with the Auth Emulator and checks
-ID token verification, role views, tenant isolation, and denied requests. The
-test uses separate `-e2e` accounts so it does not affect the manual personas.
+Run `npm run test:staging` on its own. It starts staging when needed, tests the
+Firebase ID tokens and API permissions, then opens Chrome and follows the site
+through Home → Login → mock Google/Apple popup → Dashboard → sign-out → Login.
+It checks Admin, Owner, Member and denied access, then stops the staging services
+it started. Set `STAGING_HEADLESS=1` for an invisible browser run (or use `CI=true`).
+The test uses separate `-e2e` accounts so it does not affect the manual personas.
 Staging data is illustrative, kept in memory, and reset on restart. The local
 OAuth popup tests Firebase's emulated provider flow; real Google/Apple
 configuration and production backend integration still need separate checks.

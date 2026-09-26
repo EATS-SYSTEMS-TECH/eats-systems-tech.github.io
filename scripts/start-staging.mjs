@@ -6,7 +6,7 @@ const root = fileURLToPath(new URL("../", import.meta.url));
 const children = [];
 
 function start(args, env = {}) {
-  const child = spawn(process.execPath, args, { cwd: root, stdio: "inherit", env: { ...process.env, ...env }, windowsHide: true });
+  const child = spawn(process.execPath, args, { cwd: root, stdio: ["ignore", "inherit", "inherit"], env: { ...process.env, ...env }, windowsHide: true });
   children.push(child);
   child.once("exit", (code) => {
     if (!shuttingDown) {
@@ -26,6 +26,10 @@ function shutdown() {
 }
 process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
+if (process.env.STAGING_TEST_RUN === "1") {
+  process.stdin.setEncoding("utf8");
+  process.stdin.on("data", (value) => { if (value.includes("shutdown")) shutdown(); });
+}
 
 async function waitForPort(port, timeoutMs = 30000) {
   const deadline = Date.now() + timeoutMs;
