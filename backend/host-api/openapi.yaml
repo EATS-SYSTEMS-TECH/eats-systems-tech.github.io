@@ -1,0 +1,142 @@
+openapi: 3.1.0
+info:
+  title: WIFIGATE Host invitation API
+  version: 1.0.0
+  description: Contract for server-to-server invitation creation. Host KEY is a secret snapshot, never a browser value.
+servers:
+  - url: https://api.wifigate.io
+    description: Production
+  - url: https://api-staging.wifigate.io
+    description: Staging
+paths:
+  /v1/guest-invitations:
+    post:
+      operationId: createGuestInvitation
+      summary: Create one private time-bound invitation for a Gate, Dual Control or Group
+      security:
+        - ClientApiKey: []
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          description: Unique for one reservation version; identical retries return the original 201 response.
+          schema:
+            type: string
+            minLength: 16
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInvitationRequest'
+      responses:
+        '201':
+          description: Created or identical idempotent replay
+          headers:
+            Cache-Control:
+              schema: { type: string, const: no-store }
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvitationResponse'
+        '400': { $ref: '#/components/responses/InvalidRequest' }
+        '401': { $ref: '#/components/responses/InvalidClientKey' }
+        '402': { $ref: '#/components/responses/EntitlementRequired' }
+        '403': { $ref: '#/components/responses/Denied' }
+        '409': { $ref: '#/components/responses/Conflict' }
+        '422': { $ref: '#/components/responses/InvalidSystemValue' }
+        '429': { $ref: '#/components/responses/Limited' }
+        '503': { $ref: '#/components/responses/Unavailable' }
+components:
+  securitySchemes:
+    ClientApiKey:
+      type: http
+      scheme: bearer
+      bearerFormat: 'wfg_live_k_<id>.<256-bit-secret>'
+  schemas:
+    CreateInvitationRequest:
+      type: object
+      additionalProperties: false
+      required: [encryptedKeyValue, guest, access, delivery]
+      properties:
+        encryptedKeyValue:
+          type: string
+          description: Opaque encrypted WIFIGATE Host KEY, stored only by the partner backend.
+          pattern: '^wgk_(live|test)_v1\.[A-Za-z0-9_-]+$'
+          writeOnly: true
+        guest:
+          type: object
+          additionalProperties: false
+          required: [name, phone]
+          properties:
+            name: { type: string, minLength: 1, maxLength: 120 }
+            phone: { type: string, pattern: '^\+[1-9][0-9]{6,14}$' }
+            email: { type: string, format: email, maxLength: 254, description: Partner delivery only; omitted from gate authorization. }
+            floor: { type: string, maxLength: 50 }
+            apartment: { type: string, maxLength: 80 }
+            parking: { type: string, maxLength: 80 }
+            carNumber: { type: string, maxLength: 50 }
+            comment: { type: string, maxLength: 100 }
+        access:
+          type: object
+          additionalProperties: false
+          required: [startsAt, endsAt]
+          properties:
+            startsAt: { type: string, format: date-time, description: RFC 3339 with timezone offset. }
+            endsAt: { type: string, format: date-time, description: RFC 3339 with timezone offset. }
+        externalReference: { type: string, maxLength: 128 }
+        delivery:
+          type: object
+          additionalProperties: false
+          required: [channel]
+          properties:
+            channel: { type: string, const: none }
+    InvitationResponse:
+      type: object
+      additionalProperties: false
+      required: [requestId, invitationId, targetType, targetId, startsAt, endsAt, inviteUrl]
+      properties:
+        requestId: { type: string }
+        invitationId: { type: string }
+        targetType: { type: string, enum: [gate, dual-control, group] }
+        targetId: { type: string }
+        startsAt: { type: string, format: date-time }
+        endsAt: { type: string, format: date-time }
+        inviteUrl: { type: string, format: uri, description: Private credential; deliver only to the invited guest. }
+    Error:
+      type: object
+      required: [requestId, code]
+      properties:
+        requestId: { type: string }
+        code:
+          type: string
+          enum: [INVALID_REQUEST, INVALID_CLIENT_API_KEY, ENTITLEMENT_REQUIRED, SCOPE_DENIED, TARGET_TYPE_DENIED, IDEMPOTENCY_CONFLICT, INVALID_SYSTEM_VALUE, RATE_LIMITED, QUOTA_EXCEEDED, DEPENDENCY_UNAVAILABLE]
+        message: { type: string }
+  responses:
+    InvalidRequest:
+      description: Invalid JSON, field, phone, time window or body size
+      content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+    InvalidClientKey:
+      description: Unknown, expired, revoked or wrong-environment Client API key
+      content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+    EntitlementRequired:
+      description: At least one system lacks an active entitlement
+      content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+    Denied:
+      description: Scope or target type denied
+      content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+    Conflict:
+      description: Idempotency key reused with a different body
+      content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+    InvalidSystemValue:
+      description: Host KEY cannot be authenticated or its target snapshot is invalid
+      content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+    Limited:
+      description: Rate or quota limit exceeded
+      headers:
+        Retry-After: { schema: { type: integer } }
+      content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+    Unavailable:
+      description: Dependency unavailable; no credentials disclosed
+      content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
