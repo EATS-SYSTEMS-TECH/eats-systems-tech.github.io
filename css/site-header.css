@@ -196,3 +196,33 @@
   }
 }
 @media (max-width: 360px) { .site-header .nav__logo { width: 7.75rem; } }
+
+.site-header .site-login__trigger {
+  flex: none;
+  min-height: 2.5rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid #0a0a0a;
+  border-radius: 4px;
+  background: #fff;
+  color: #0a0a0a;
+  font: 600 0.84rem "Manrope", system-ui, sans-serif;
+  cursor: pointer;
+  max-width: 11rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.site-header .site-login__trigger:hover,
+.site-header .site-login__trigger:focus-visible { background: #f3f3f3; }
+@media (max-width: 1199px) {
+  .site-header .nav { grid-template-columns: auto 1fr auto auto; }
+  .site-header .site-login__trigger { grid-column: 2; grid-row: 1; justify-self: end; }
+  .site-header .language-selector { grid-column: 3; }
+  .site-header .nav__toggle { grid-column: 4; }
+}
+@media (max-width: 430px) {
+  .site-header .nav { gap: .35rem; padding-inline: .65rem; }
+  .site-header .site-login__trigger { padding-inline: .55rem; }
+  .site-header .language-selector__button { padding-inline: .4rem; }
+}
