@@ -27,6 +27,20 @@ The shared site header includes a Login button backed by Firebase Authentication
 according to the server response. It then fetches the matching read-only portal
 endpoints. Client API keys and WIFIGATE Host KEY values are never sent by the browser.
 
+After Google or Apple sign-in, `/login/` sends the Firebase ID token to
+`PUT /api/v1/users/me` with an empty JSON body and waits for the returned `user`
+before opening the dashboard. The shared Axios client is authored in `api/api.ts`,
+with profile and portal calls under `api/auth/` and `api/host/`. Run
+`npm run build:api` after editing these TypeScript files; the browser loads the
+generated `js/api/index.js`. `npm run dev` and `npm run staging` build it before
+starting their servers. Run `npm run test:api` for the focused API checks.
+
+On the local site (`127.0.0.1:8000` or `localhost:8000`), the profile request
+goes to `http://127.0.0.1:8001`. Local staging uses its mock API on port 8101.
+The deployed site currently uses `https://api.wifigate.io` for both API clients.
+The profile API must allow the site origin through CORS, including `PUT` and the
+`Authorization` and `Content-Type` request headers.
+
 Set the Web app values (`apiKey`, `authDomain`, `projectId`, `appId`) in
 `js/firebase-config.js` using the **same Firebase project** as the WiFiGate app.
 Set the deployed management API origin in `js/host-api-config.js`.
