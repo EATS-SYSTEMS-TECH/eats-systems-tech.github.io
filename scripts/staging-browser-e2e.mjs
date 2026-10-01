@@ -15,11 +15,15 @@ async function login(context, provider, email, fromHome = false) {
     await page.waitForURL("**/login/");
   }
   assert.equal(new URL(page.url()).pathname, "/login/");
+  const profileResponse = page.waitForResponse((response) =>
+    response.url().endsWith("/api/v1/users/me") && response.request().method() === "PUT"
+  );
   const popupPromise = page.waitForEvent("popup");
   await page.locator(`[data-provider="${provider}"]`).click();
   const popup = await popupPromise;
   await popup.waitForLoadState("networkidle");
   await popup.getByText(email, { exact: true }).click();
+  assert.equal((await profileResponse).status(), 200);
   await page.waitForURL("**/dashboard/");
   return page;
 }

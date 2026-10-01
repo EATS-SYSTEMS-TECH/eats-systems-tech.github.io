@@ -47,15 +47,15 @@ const server = createServer(async (req, res) => {
     if (!allowedOrigins.has(origin)) { send(res, 403, { code: "ORIGIN_DENIED" }, origin); return; }
     res.writeHead(204, {
       "Access-Control-Allow-Origin": origin,
-      "Access-Control-Allow-Methods": "GET, OPTIONS",
-      "Access-Control-Allow-Headers": "Authorization, Accept",
+      "Access-Control-Allow-Methods": "GET, PUT, OPTIONS",
+      "Access-Control-Allow-Headers": "Authorization, Accept, Content-Type, Cache-Control",
       "Access-Control-Max-Age": "600",
       "Vary": "Origin"
     });
     res.end();
     return;
   }
-  if (req.method !== "GET") { send(res, 405, { code: "METHOD_NOT_ALLOWED" }, origin); return; }
+  if (req.method !== "GET" && req.method !== "PUT") { send(res, 405, { code: "METHOD_NOT_ALLOWED" }, origin); return; }
   if (req.url === "/health") { send(res, 200, { status: "ok", environment: "local-staging" }, origin); return; }
   if (origin && !allowedOrigins.has(origin)) { send(res, 403, { code: "ORIGIN_DENIED" }, origin); return; }
   const bearer = /^Bearer (\S+)$/.exec(req.headers.authorization || "");
@@ -63,6 +63,11 @@ const server = createServer(async (req, res) => {
   let decoded;
   try { decoded = await auth.verifyIdToken(bearer[1]); }
   catch { send(res, 401, { code: "INVALID_ID_TOKEN" }, origin); return; }
+  if (req.method === "PUT" && req.url === "/api/v1/users/me") {
+    send(res, 200, { user: { uid: decoded.uid, email: decoded.email || null } }, origin);
+    return;
+  }
+  if (req.method !== "GET") { send(res, 405, { code: "METHOD_NOT_ALLOWED" }, origin); return; }
   const access = persona(decoded);
   if (!access) { send(res, 403, { code: "MEMBERSHIP_REQUIRED" }, origin); return; }
   const admin = access.role === "platform_admin";

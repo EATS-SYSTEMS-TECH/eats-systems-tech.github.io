@@ -1,7 +1,7 @@
 name: dependency-audit
 
-# The static site ships no third-party JavaScript to visitors; cheerio and sharp
-# are build-time only. This gate keeps the dependency tree free of high/critical
+# The site bundles Axios for browser API calls. Cheerio, sharp, esbuild and
+# TypeScript are build-time only. This gate keeps dependencies free of high/critical
 # advisories. If a future accepted exception is needed, switch to the allow-list
 # gate used by the mobile app.
 
