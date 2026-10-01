@@ -1,22 +1,21 @@
 # Website dependency audit
 
-Scope: `wifigate-static-site` build tooling (`package.json`, `package-lock.json`).
-Date: **2026-09-01**.
+Scope: `wifigate-static-site` browser and build dependencies (`package.json`, `package-lock.json`).
+Date: **2026-09-29**.
 
-The site is static HTML: **no third-party JavaScript is shipped to visitors**.
-`cheerio` and `sharp` are `devDependencies` used only by the build scripts
-(`scripts/build-localized-site.mjs`, `scripts/build-niche-images.mjs`) on the
-build machine.
+The site is static HTML with a bundled Axios API client in `js/api/index.js`.
+`cheerio`, `sharp`, `esbuild`, and `typescript` are build-time dependencies.
 
 ## Status
 
-* `npm audit --omit=dev`: **0 vulnerabilities** (production tree clean).
-* `npm audit` (full tree): **0 vulnerabilities**.
+* `npm audit --omit=dev --audit-level=high`: **0 vulnerabilities**.
+* `npm audit --audit-level=high`: **0 high/critical**, 12 moderate findings in
+  development tooling and its transitive dependencies.
 
-The one previously reported high, `undici` `7.28.0` (a transitive dependency of
-`cheerio`, used only by its network fetch helper, not by the HTML parser the
-build uses), was resolved with `npm audit fix`, which bumped it to `7.29.0`.
-`cheerio` and `sharp` were smoke-tested after the bump.
+The high-severity `sharp` advisory found during this update was addressed by
+upgrading `sharp` to `0.35.5`. The remaining moderate findings are in the
+development dependency tree; the CI gate continues to reject high/critical
+findings.
 
 ## CI gate
 
