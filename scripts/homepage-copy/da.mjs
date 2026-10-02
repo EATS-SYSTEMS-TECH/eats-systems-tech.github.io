@@ -44,7 +44,7 @@ const copy = {
         text: "Lad autoriserede brugere åbne porten automatisk ved ankomst for en mere smidig oplevelse uden manuel betjening.",
       },
       {
-        title: "Op til 10 planlagte hændelser",
+        title: "Op til 50 planlagte hændelser",
         text: "Opret tilbagevendende adgangsplaner og automatiske handlinger direkte i systemet, så det matcher den daglige drift.",
       },
       {

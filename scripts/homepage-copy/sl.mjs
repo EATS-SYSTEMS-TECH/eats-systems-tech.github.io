@@ -44,7 +44,7 @@ const copy = {
         text: "Pooblaščenim uporabnikom omogočite samodejno odpiranje dvoriščnih vrat ob prihodu za nemoten in udoben prostoročni dostop.",
       },
       {
-        title: "Do 10 načrtovanih dogodkov",
+        title: "Do 50 načrtovanih dogodkov",
         text: "Ustvarite ponavljajoče se urnike dostopa in avtomatizirana dejanja neposredno v sistemu glede na način delovanja vašega objekta.",
       },
       {

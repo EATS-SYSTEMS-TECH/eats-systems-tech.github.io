@@ -44,7 +44,7 @@ const copy = {
         text: "Izinkan pengguna terotorisasi membuka gerbang secara otomatis saat tiba untuk pengalaman hands-free yang lebih mulus dan nyaman.",
       },
       {
-        title: "Hingga 10 Aktivitas Terjadwal",
+        title: "Hingga 50 Aktivitas Terjadwal",
         text: "Buat jadwal akses berulang dan tindakan otomatis langsung di sistem agar sesuai dengan operasional lokasi Anda.",
       },
       {

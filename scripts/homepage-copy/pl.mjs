@@ -44,7 +44,7 @@ const copy = {
         text: "Pozwól uprawnionym użytkownikom automatycznie otwierać bramę po przybyciu, aby zapewnić im płynniejszy i wygodniejszy dostęp bez użycia rąk.",
       },
       {
-        title: "Do 10 zaplanowanych zdarzeń",
+        title: "Do 50 zaplanowanych zdarzeń",
         text: "Twórz cykliczne harmonogramy dostępu i zautomatyzowane działania bezpośrednio w systemie, odpowiednio do sposobu funkcjonowania obiektu.",
       },
       {

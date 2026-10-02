@@ -44,7 +44,7 @@ const copy = {
         text: "Cho phép người dùng được cấp quyền tự động mở cổng khi đến nơi để có trải nghiệm rảnh tay thuận tiện và liền mạch hơn.",
       },
       {
-        title: "Tối đa 10 sự kiện theo lịch",
+        title: "Tối đa 50 sự kiện theo lịch",
         text: "Tạo lịch truy cập định kỳ và thao tác tự động ngay trong hệ thống để phù hợp với cách vận hành tại địa điểm của bạn.",
       },
       {

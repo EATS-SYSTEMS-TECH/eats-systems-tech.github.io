@@ -44,7 +44,7 @@ const copy = {
         text: "Laat bevoegde gebruikers de poort bij aankomst automatisch openen voor een soepelere, comfortabele ervaring zonder handmatige bediening.",
       },
       {
-        title: "Tot 10 geplande acties",
+        title: "Tot 50 geplande acties",
         text: "Maak terugkerende toegangsschema's en geautomatiseerde acties rechtstreeks in het systeem aan die aansluiten bij uw werkwijze.",
       },
       {

@@ -44,7 +44,7 @@ const copy = {
         text: "Permita que os utilizadores autorizados abram o portão automaticamente à chegada, para uma experiência mais cómoda e sem terem de usar as mãos.",
       },
       {
-        title: "Até 10 eventos agendados",
+        title: "Até 50 eventos agendados",
         text: "Crie horários de acesso recorrentes e ações automatizadas diretamente no sistema, de acordo com o funcionamento do seu espaço.",
       },
       {

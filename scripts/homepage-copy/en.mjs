@@ -44,7 +44,7 @@ const copy = {
         text: "Let approved users open the gate automatically when they arrive for a smoother, more convenient hands-free experience.",
       },
       {
-        title: "Up to 10 Scheduled Events",
+        title: "Up to 50 Scheduled Events",
         text: "Create recurring access schedules and automated actions directly in the system to match how your site operates.",
       },
       {

@@ -44,7 +44,7 @@ const copy = {
         text: "Permiteți utilizatorilor aprobați să deschidă automat poarta la sosire pentru o experiență mai fluidă și mai comodă, fără a folosi mâinile.",
       },
       {
-        title: "Până la 10 evenimente programate",
+        title: "Până la 50 evenimente programate",
         text: "Creați programe recurente de acces și acțiuni automatizate direct în sistem, în funcție de modul de operare al locației.",
       },
       {
