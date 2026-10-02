@@ -44,7 +44,7 @@ const copy = {
         text: "Benarkan pengguna yang diluluskan membuka pintu pagar secara automatik apabila tiba, untuk pengalaman bebas tangan yang lebih lancar dan mudah.",
       },
       {
-        title: "Sehingga 10 Aktiviti Berjadual",
+        title: "Sehingga 50 Aktiviti Berjadual",
         text: "Cipta jadual akses berulang dan tindakan automatik terus dalam sistem agar sepadan dengan operasi tapak anda.",
       },
       {

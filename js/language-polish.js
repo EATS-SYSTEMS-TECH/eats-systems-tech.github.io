@@ -81,8 +81,8 @@
       },
       features: {
         items: {
-          upTo10Events: {
-            title: "Up to 10 Scheduled Events",
+          upTo50Events: {
+            title: "Up to 50 Scheduled Events",
             text: "Create recurring access schedules and automated actions directly in the system to match how your site operates.",
           },
           rfRemoteLearning: {
@@ -124,8 +124,8 @@
             title: "פתיחה אוטומטית",
             text: "אפשרו למשתמשים מורשים לפתוח את השער אוטומטית כשהם מגיעים, לחוויית כניסה חלקה ונוחה יותר.",
           },
-          upTo10Events: {
-            title: "עד 10 אירועים מתוזמנים",
+          upTo50Events: {
+            title: "עד 50 אירועים מתוזמנים",
             text: "הגדירו אירועי גישה חוזרים ופעולות מתוזמנות ישירות במערכת, בהתאם לאופן שבו האתר או המבנה פועלים, כולל תמיכה בשעון שבת.",
           },
           rfRemoteLearning: {
@@ -166,8 +166,8 @@
       features: {
         items: {
           history30Day: { title: "Historial de 30 días" },
-          upTo10Events: {
-            title: "Hasta 10 eventos programados",
+          upTo50Events: {
+            title: "Hasta 50 eventos programados",
             text: "Configura accesos recurrentes y acciones programadas directamente en el sistema, según el funcionamiento de tu sitio.",
           },
           rfRemoteLearning: {
@@ -199,8 +199,8 @@
       },
       features: {
         items: {
-          upTo10Events: {
-            title: "Jusqu'à 10 événements programmés",
+          upTo50Events: {
+            title: "Jusqu'à 50 événements programmés",
             text: "Configurez des accès récurrents et des actions planifiées directement dans le système, selon le fonctionnement de votre site.",
           },
           rfRemoteLearning: {
@@ -234,8 +234,8 @@
           autoOpen: {
             text: "Autorisierte Nutzer können das Tor bei ihrer Ankunft automatisch öffnen, für einen reibungsloseren und bequemeren Ablauf.",
           },
-          upTo10Events: {
-            title: "Bis zu 10 Zeitpläne",
+          upTo50Events: {
+            title: "Bis zu 50 Zeitpläne",
             text: "Richten Sie wiederkehrende Zutrittsereignisse und geplante Aktionen direkt im System ein, passend zu Ihrem Standort.",
           },
           rfRemoteLearning: {
@@ -270,8 +270,8 @@
       },
       features: {
         items: {
-          upTo10Events: {
-            title: "Tot 10 planningen",
+          upTo50Events: {
+            title: "Tot 50 planningen",
             text: "Stel terugkerende toegangen en geplande acties rechtstreeks in het systeem in, afgestemd op de werking van uw locatie.",
           },
           rfRemoteLearning: {
@@ -300,8 +300,8 @@
       },
       features: {
         items: {
-          upTo10Events: {
-            title: "Fino a 10 eventi programmati",
+          upTo50Events: {
+            title: "Fino a 50 eventi programmati",
             text: "Configura accessi ricorrenti e azioni programmate direttamente nel sistema, in base al funzionamento del tuo sito.",
           },
           rfRemoteLearning: {
@@ -326,8 +326,8 @@
       },
       features: {
         items: {
-          upTo10Events: {
-            title: "Até 10 eventos programados",
+          upTo50Events: {
+            title: "Até 50 eventos programados",
             text: "Configure acessos recorrentes e ações programadas diretamente no sistema, de acordo com a operação do seu espaço.",
           },
           rfRemoteLearning: {
@@ -345,8 +345,8 @@
       },
       features: {
         items: {
-          upTo10Events: {
-            title: "Do 10 harmonogramów",
+          upTo50Events: {
+            title: "Do 50 harmonogramów",
             text: "Ustawiaj cykliczny dostęp i zaplanowane działania bezpośrednio w systemie, zgodnie ze sposobem działania obiektu.",
           },
           rfRemoteLearning: {
@@ -368,8 +368,8 @@
       },
       features: {
         items: {
-          upTo10Events: {
-            title: "Opptil 10 tidsplaner",
+          upTo50Events: {
+            title: "Opptil 50 tidsplaner",
             text: "Sett opp gjentakende adgang og planlagte handlinger direkte i systemet, tilpasset måten stedet brukes på.",
           },
           rfRemoteLearning: {
@@ -386,8 +386,8 @@
       },
       features: {
         items: {
-          upTo10Events: {
-            title: "Až 10 plánovaných událostí",
+          upTo50Events: {
+            title: "Až 50 plánovaných událostí",
             text: "Nastavte opakovaný přístup a plánované akce přímo v systému podle provozu vašeho objektu.",
           },
           rfRemoteLearning: {
@@ -550,8 +550,8 @@
           autoOpen: {
             title: "Automatisk åbning",
           },
-          upTo10Events: {
-            title: "Op til 10 tidsplaner",
+          upTo50Events: {
+            title: "Op til 50 tidsplaner",
             text: "Opsæt tilbagevendende adgang og planlagte handlinger direkte i systemet, så de passer til den daglige drift.",
           },
           rfRemoteLearning: {
@@ -589,8 +589,8 @@
           autoOpen: {
             text: "Engedélyezze, hogy a jóváhagyott felhasználók érkezéskor automatikusan nyithassák a kaput, a gördülékenyebb belépés érdekében.",
           },
-          upTo10Events: {
-            title: "Akár 10 ütemezés",
+          upTo50Events: {
+            title: "Akár 50 ütemezés",
             text: "Állítson be ismétlődő hozzáféréseket és ütemezett műveleteket közvetlenül a rendszerben, az objektum működéséhez igazítva.",
           },
           rfRemoteLearning: {

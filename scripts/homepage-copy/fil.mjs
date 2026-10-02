@@ -44,7 +44,7 @@ const copy = {
         text: "Hayaang awtomatikong mabuksan ng mga awtorisadong user ang gate pagdating nila, para sa mas maayos at maginhawang hands-free na karanasan.",
       },
       {
-        title: "Hanggang 10 Naka-iskedyul na Aktibidad",
+        title: "Hanggang 50 Naka-iskedyul na Aktibidad",
         text: "Gumawa ng mga umuulit na iskedyul ng access at awtomatikong pagkilos direkta sa system ayon sa operasyon ng iyong lokasyon.",
       },
       {

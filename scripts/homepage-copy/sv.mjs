@@ -44,7 +44,7 @@ const copy = {
         text: "Låt behöriga användare öppna grinden automatiskt när de anländer, för en smidigare och bekvämare passage utan manuell hantering.",
       },
       {
-        title: "Upp till 10 schemalagda händelser",
+        title: "Upp till 50 schemalagda händelser",
         text: "Skapa återkommande åtkomstscheman och automatiserade åtgärder direkt i systemet, anpassade efter hur din fastighet används.",
       },
       {

@@ -44,7 +44,7 @@ const copy = {
         text: "Ovlaštenim korisnicima omogućite automatsko otvaranje dvorišnih vrata pri dolasku za jednostavniji i praktičniji pristup bez uporabe ruku.",
       },
       {
-        title: "Do 10 zakazanih događaja",
+        title: "Do 50 zakazanih događaja",
         text: "Izradite ponavljajuće rasporede pristupa i automatizirane radnje izravno u sustavu, prema načinu rada vašeg objekta.",
       },
       {

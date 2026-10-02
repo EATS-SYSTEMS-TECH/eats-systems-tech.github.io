@@ -44,7 +44,7 @@ const copy = {
         text: "Engedélyezze, hogy a jóváhagyott felhasználók érkezéskor automatikusan kinyissák a kaput, így még gördülékenyebben és kényelmesebben juthatnak be.",
       },
       {
-        title: "Akár 10 ütemezett esemény",
+        title: "Akár 50 ütemezett esemény",
         text: "Hozzon létre ismétlődő hozzáférési ütemezéseket és automatizált műveleteket közvetlenül a rendszerben, a helyszín működéséhez igazítva.",
       },
       {
