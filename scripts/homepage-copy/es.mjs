@@ -44,7 +44,7 @@ const copy = {
         text: "Permite que los usuarios autorizados abran el portón automáticamente al llegar para disfrutar de una experiencia más cómoda y sin usar las manos.",
       },
       {
-        title: "Hasta 10 eventos programados",
+        title: "Hasta 50 eventos programados",
         text: "Crea horarios de acceso recurrentes y acciones automatizadas directamente en el sistema para adaptarlos al funcionamiento de tus instalaciones.",
       },
       {

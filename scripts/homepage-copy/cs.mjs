@@ -44,7 +44,7 @@ const copy = {
         text: "Umožněte oprávněným uživatelům automaticky otevřít bránu při příjezdu a dopřejte jim plynulejší a pohodlnější přístup bez použití rukou.",
       },
       {
-        title: "Až 10 naplánovaných akcí",
+        title: "Až 50 naplánovaných akcí",
         text: "Vytvářejte opakující se harmonogramy přístupu a automatizované akce přímo v systému podle vašeho provozu.",
       },
       {

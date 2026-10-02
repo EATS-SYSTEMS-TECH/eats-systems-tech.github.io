@@ -44,7 +44,7 @@ const copy = {
         text: "Autorisierte Nutzer können das Tor bei ihrer Ankunft automatisch öffnen lassen, für einen reibungslosen und komfortablen Zutritt ohne manuelle Bedienung.",
       },
       {
-        title: "Bis zu 10 geplante Ereignisse",
+        title: "Bis zu 50 geplante Ereignisse",
         text: "Erstellen Sie direkt im System wiederkehrende Zutrittszeitpläne und automatisierte Aktionen, passend zu den Abläufen an Ihrem Standort.",
       },
       {

@@ -44,7 +44,7 @@ const copy = {
         text: "Umožnite oprávneným používateľom automaticky otvoriť bránu pri príchode a doprajte im plynulejší a pohodlnejší prístup bez použitia rúk.",
       },
       {
-        title: "Až 10 naplánovaných udalostí",
+        title: "Až 50 naplánovaných udalostí",
         text: "Vytvorte opakujúce sa harmonogramy prístupu a automatizované akcie priamo v systéme podľa potrieb vašej prevádzky.",
       },
       {

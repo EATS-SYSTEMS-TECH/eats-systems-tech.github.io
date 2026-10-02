@@ -44,7 +44,7 @@ const copy = {
         text: "Consenti agli utenti autorizzati di aprire automaticamente il cancello al loro arrivo, per un'esperienza più fluida e senza usare le mani.",
       },
       {
-        title: "Fino a 10 eventi programmati",
+        title: "Fino a 50 eventi programmati",
         text: "Crea programmi di accesso ricorrenti e azioni automatizzate direttamente nel sistema, in base all'operatività della struttura.",
       },
       {

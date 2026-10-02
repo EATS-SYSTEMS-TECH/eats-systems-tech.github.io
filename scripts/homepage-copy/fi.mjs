@@ -44,7 +44,7 @@ const copy = {
         text: "Hyväksytyt käyttäjät voivat avata portin automaattisesti saapuessaan, jolloin kulku on sujuvaa ja vaivatonta ilman manuaalista käyttöä.",
       },
       {
-        title: "Jopa 10 ajastettua tapahtumaa",
+        title: "Jopa 50 ajastettua tapahtumaa",
         text: "Luo toistuvia kulkuaikatauluja ja automatisoituja toimintoja suoraan järjestelmään kiinteistösi tarpeiden mukaan.",
       },
       {

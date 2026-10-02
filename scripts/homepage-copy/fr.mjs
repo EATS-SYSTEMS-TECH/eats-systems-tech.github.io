@@ -44,7 +44,7 @@ const copy = {
         text: "Permettez aux utilisateurs autorisés d'ouvrir automatiquement le portail à leur arrivée, pour une expérience plus fluide et plus pratique, sans intervention manuelle.",
       },
       {
-        title: "Jusqu'à 10 événements programmés",
+        title: "Jusqu'à 50 événements programmés",
         text: "Créez des calendriers d'accès récurrents et des actions automatisées directement dans le système, en fonction du fonctionnement de votre site.",
       },
       {

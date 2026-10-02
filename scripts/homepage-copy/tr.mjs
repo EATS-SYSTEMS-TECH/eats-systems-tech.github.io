@@ -44,7 +44,7 @@
         text: "Yetkili kullanıcılar vardıklarında kapının otomatik açılmasını sağlayarak daha akıcı, rahat ve eller serbest bir deneyim sunun.",
       },
       {
-        title: "10 adede kadar zamanlanmış işlem",
+        title: "50 adede kadar zamanlanmış işlem",
         text: "Sahanızın işleyişine uygun yinelenen erişim programları ve otomatik işlemler oluşturun.",
       },
       {
