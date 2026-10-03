@@ -42,6 +42,7 @@ try {
   }
   await run("scripts/staging-e2e.mjs");
   await run("scripts/staging-browser-e2e.mjs");
+  await run("scripts/host-portal-browser.test.mjs");
 } catch (error) {
   console.error(error.message);
   process.exitCode = 1;
