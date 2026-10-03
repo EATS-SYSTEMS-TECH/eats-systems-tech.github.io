@@ -19,69 +19,34 @@ link. The mobile payload may contain the `ao` user capability (`1` enabled,
 rewrite that field. Legacy verbose query parameters, including `ao`, are also
 preserved by the same pass-through behavior.
 
-## WIFIGATE Host portal
+## WIFIGATE Host V1 portal
 
-The shared site header includes a Login button backed by Firebase Authentication.
-`/login/` offers Google and Apple sign-in. After sign-in, `/dashboard/` requests
-`GET /v1/me` with the Firebase ID token and renders the admin or client viewer
-according to the server response. It then fetches the matching read-only portal
-endpoints. Client API keys and WIFIGATE Host KEY values are never sent by the browser.
+The frontend uses Firebase Google/Apple authentication, including redirect callback handling, session restoration, logout, and TOTP challenges. It synchronizes the profile with an empty PUT /api/v1/users/me and reads authorization from GET /api/v1/users/me. A profile alone never grants portal access.
 
-After Google or Apple sign-in, `/login/` sends the Firebase ID token to
-`PUT /api/v1/users/me` with an empty JSON body and waits for the returned `user`
-before opening the dashboard. The shared Axios client is authored in `api/api.ts`,
-with profile and portal calls under `api/auth/` and `api/host/`. Run
-`npm run build:api` after editing these TypeScript files; the browser loads the
-generated `js/api/index.js`. `npm run dev` and `npm run staging` build it before
-starting their servers. Run `npm run test:api` for the focused API checks.
+The dashboard contains the Calendar reference image only, an admin email approval form, and account/security controls. It has no live calendar, clients, keys, usage, room management, or other V2 screens. Pending, denied, unavailable, mandatory enrollment, and MFA verification states keep portal content hidden.
 
-On the local site (`127.0.0.1:8000` or `localhost:8000`), the profile request
-goes to `http://127.0.0.1:8001`. Local staging uses its mock API on port 8101.
-The deployed site currently uses `https://api.wifigate.io` for both API clients.
-The profile API must allow the site origin through CORS, including `PUT` and the
-`Authorization` and `Content-Type` request headers.
+The proposed backend contract and setup requirements are in [docs/host-portal-v1.md](docs/host-portal-v1.md). The current local backend only returns the profile; it still needs the authorization/MFA fields and email approval endpoint. Missing fields fail closed.
 
-Set the Web app values (`apiKey`, `authDomain`, `projectId`, `appId`) in
-`js/firebase-config.js` using the **same Firebase project** as the WiFiGate app.
-Set the deployed management API origin in `js/host-api-config.js`.
-In Firebase Authentication, enable the Google and Apple providers and add
-`wifigate.io` and any local test host (for example `localhost` or `127.0.0.1`)
-to Authorized domains. Apple also needs its Web Services ID and Firebase auth
-handler return URL configured in Apple Developer and Firebase Console.
+### Calendar asset
 
-For an end-to-end check, open `/login/`, sign in with a test account, and verify
-that `/dashboard/` loads the expected role and memberships from `/v1/me`. Check
-the Keys/Usage view for a client account and Clients/Usage/Audit for an admin.
-Refresh the page to check session restoration, then sign out and confirm the
-dashboard returns to `/login/`. Run `node --test scripts/host-portal.test.mjs`
-for the local auth-header and role-mapping checks.
+The supplied WIFIGATE_HOST.html references a Calendar image but contains no image attachment. Once the approved image is supplied, add it to assets/img/ and set calendarReferenceUrl in js/host-portal-config.js. The responsive image container is implemented; no replacement calendar or invented reference is shipped.
 
-The backend copy currently contains only `POST /v1/guest-invitations`; the
-management endpoints listed in `docs/WIFIGATE_HOST.html` are still pending.
-The dashboard shows an unavailable state until they are deployed. The site also
-requires a Firebase Web app configuration before provider sign-in can run.
+### Configuration and build
 
-### Local staging
+Public Firebase Web configuration is in js/firebase-config.js (eats-wifigate). The backend must verify tokens for that same project. Enable Google and Apple in Firebase, authorize the site domains, and configure Apple's Web Services ID and Firebase handler return URL. Apple private keys belong in Firebase/server configuration, never in this repository's browser code.
 
-Run `npm install`, then `npm run staging`. Open
-`http://127.0.0.1:8100/login/`. This starts the Firebase Authentication
-Emulator on port 9099, a local management API on port 8101, and the site on
-port 8100. Only the site served from port 8100 uses the demo Firebase project;
-the normal site continues to require production Web configuration.
+TOTP requires Firebase Authentication with Identity Platform and project-level TOTP activation. The UI generates QR codes locally with a vendored MIT QR encoder; no setup secret goes to a QR service, application API, browser storage, or logs. There is no public role assignment or MFA recovery endpoint in the frontend.
 
-In the Firebase mock Google or Apple popup, use one of these emails:
+Axios endpoints live in api/auth/ and share api/api.ts. After editing TypeScript, run npm run build:api to regenerate js/api/index.js. npm run dev performs that build and serves the normal site on port 8000; it is not needed for each edit.
 
-- `admin@wifigate.test` — platform admin, clients, usage, audit.
-- `owner@grandplaza.test` — client owner, two keys and usage.
-- `member@grandplaza.test` — client member, one assigned key and usage.
-- Any other email — signed in, but denied portal access.
+Local API requests go to http://127.0.0.1:8001. Local staging uses port 8101. The deployed API origin remains https://api.wifigate.io and needs confirmation before deployment. Set the origin in js/host-api-config.js. CORS must permit the site origin, GET/PUT/POST, and Authorization, Content-Type, Cache-Control, and Idempotency-Key headers.
 
-Run `npm run test:staging` on its own. It starts staging when needed, tests the
-Firebase ID tokens and API permissions, then opens Chrome and follows the site
-through Home → Login → mock Google/Apple popup → Dashboard → sign-out → Login.
-It checks Admin, Owner, Member and denied access, then stops the staging services
-it started. Set `STAGING_HEADLESS=1` for an invisible browser run (or use `CI=true`).
-The test uses separate `-e2e` accounts so it does not affect the manual personas.
-Staging data is illustrative, kept in memory, and reset on restart. The local
-OAuth popup tests Firebase's emulated provider flow; real Google/Apple
-configuration and production backend integration still need separate checks.
+### Checks
+
+- npm run test:api: TypeScript build and access/API unit tests.
+- npm run test:staging: Auth Emulator token/API tests, mock Google/Apple browser flows, and isolated browser fixtures for TOTP enrollment/challenges/approval.
+- node scripts/host-portal-browser.test.mjs: browser fixtures against an existing site on port 8100; no emulator required for this fixture suite.
+
+Staging is entirely local. Approved user fixtures: owner@grandplaza.test and member@grandplaza.test. admin@wifigate.test is an admin without TOTP and must remain in enrollment. pending@wifigate.test is pending; other emails are denied. These names are fixtures, not a production allowlist.
+
+The Auth Emulator does not provide a production TOTP acceptance test. The fixture suite exercises SDK call ordering, invalid codes, admin enrollment and verified-session gates, optional user enrollment, revoked access, error states, logout, and responsive image rendering with a test-only image. Real Google/Apple configuration, production backend authorization, real authenticator enrollment, and the actual Calendar reference asset require an integration check before release.

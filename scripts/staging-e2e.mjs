@@ -1,63 +1,35 @@
 import assert from "node:assert/strict";
 import { initializeApp } from "firebase/app";
 import { getAuth, connectAuthEmulator, GoogleAuthProvider, OAuthProvider, signInWithCredential, signOut } from "firebase/auth";
-
 const apiOrigin = "http://127.0.0.1:8101";
 const projectId = "demo-wifigate-host";
-const firebaseAuth = getAuth(initializeApp({ apiKey: "fake-api-key", authDomain: `${projectId}.firebaseapp.com`, projectId, appId: "1:123456789:web:staging" }));
-connectAuthEmulator(firebaseAuth, "http://127.0.0.1:9099", { disableWarnings: true });
-
-async function tokenFor(email, providerName) {
-  const mockIdToken = JSON.stringify({ sub: `${providerName}-${email}`, email, email_verified: true });
-  const credential = providerName === "google"
-    ? GoogleAuthProvider.credential(mockIdToken)
-    : new OAuthProvider("apple.com").credential({ idToken: mockIdToken });
-  const result = await signInWithCredential(firebaseAuth, credential);
-  assert.equal(result.user.email, email);
-  assert.ok(result.user.providerData.some((provider) => provider.providerId === `${providerName}.com`));
-  const idToken = await result.user.getIdToken();
-  await signOut(firebaseAuth);
-  return idToken;
+const auth = getAuth(initializeApp({ apiKey: "fake-api-key", authDomain: projectId + ".firebaseapp.com", projectId, appId: "1:123456789:web:staging" }));
+connectAuthEmulator(auth, "http://127.0.0.1:9099", { disableWarnings: true });
+async function tokenFor(email, provider) {
+  const idToken = JSON.stringify({ sub: provider + "-" + email, email, email_verified: true });
+  const credential = provider === "google" ? GoogleAuthProvider.credential(idToken) : new OAuthProvider("apple.com").credential({ idToken });
+  const result = await signInWithCredential(auth, credential); const token = await result.user.getIdToken(); await signOut(auth); return token;
 }
-
-async function get(path, token) {
-  const response = await fetch(`${apiOrigin}${path}`, {
-    headers: token ? { Authorization: `Bearer ${token}`, Origin: "http://127.0.0.1:8100" } : { Origin: "http://127.0.0.1:8100" }
-  });
+async function request(path, token, method = "GET", body) {
+  const response = await fetch(apiOrigin + path, { method, headers: { Origin: "http://127.0.0.1:8100", ...(token ? { Authorization: "Bearer " + token } : {}), ...(body ? { "Content-Type": "application/json" } : {}) }, body: body ? JSON.stringify(body) : undefined });
   return { status: response.status, body: await response.json(), headers: response.headers };
 }
-
-const health = await get("/health");
-assert.equal(health.status, 200, "staging API is running");
-assert.equal((await get("/v1/me")).status, 401, "anonymous request is denied");
-assert.equal((await get("/v1/me", "invalid-token")).status, 401, "invalid token is denied");
-
+assert.equal((await request("/health")).status, 200);
+assert.equal((await request("/api/v1/users/me")).status, 401);
+assert.equal((await request("/api/v1/users/me", "invalid-token")).status, 401);
 const admin = await tokenFor("admin-e2e@wifigate.test", "google");
-const owner = await tokenFor("owner-e2e@grandplaza.test", "apple");
-const member = await tokenFor("member-e2e@grandplaza.test", "google");
+const member = await tokenFor("owner-e2e@grandplaza.test", "apple");
 const stranger = await tokenFor("stranger-e2e@wifigate.test", "apple");
-
-const adminMe = await get("/v1/me", admin);
-assert.equal(adminMe.status, 200);
-assert.equal(adminMe.body.role, "platform_admin");
-assert.equal((await get("/v1/admin/clients", admin)).body.clients.length, 2);
-assert.equal((await get("/v1/admin/audit", admin)).status, 200);
-assert.equal((await get("/v1/portal/keys", admin)).status, 403);
-
-const ownerMe = await get("/v1/me", owner);
-assert.equal(ownerMe.body.role, "client_owner");
-assert.equal(ownerMe.body.memberships[0].clientId, "grand-plaza");
-const ownerKeys = await get("/v1/portal/keys", owner);
-assert.equal(ownerKeys.body.keys.length, 2);
-assert.equal(JSON.stringify(ownerKeys.body).includes("ownerEmail"), false);
-assert.equal((await get("/v1/portal/usage", owner)).status, 200);
-assert.equal((await get("/v1/admin/clients", owner)).status, 403);
-
-const memberMe = await get("/v1/me", member);
-assert.equal(memberMe.body.role, "client_member");
-assert.equal((await get("/v1/portal/keys", member)).body.keys.length, 1);
-assert.equal((await get("/v1/me", stranger)).status, 403);
-assert.equal(ownerKeys.headers.get("cache-control"), "no-store");
-assert.equal(ownerKeys.headers.get("access-control-allow-origin"), "http://127.0.0.1:8100");
-
-console.log("Staging E2E passed: Firebase emulator tokens, all three roles, tenant isolation, and denied access.");
+const pending = await tokenFor("pending-e2e@wifigate.test", "google");
+const adminMe = await request("/api/v1/users/me", admin);
+assert.equal(adminMe.body.role, "admin"); assert.equal(adminMe.body.mfa.required, true); assert.equal(adminMe.body.mfa.verified, false);
+assert.equal((await request("/api/v1/admin/portal-access", admin, "POST", { email: "new@test.example" })).status, 403);
+const memberMe = await request("/api/v1/users/me", member);
+assert.equal(memberMe.body.access.state, "active"); assert.equal(memberMe.body.mfa.required, false);
+assert.equal((await request("/api/v1/admin/portal-access", member, "POST", { email: "new@test.example" })).status, 403);
+assert.equal((await request("/api/v1/users/me", stranger)).body.access.state, "denied");
+assert.equal((await request("/api/v1/users/me", pending)).body.access.state, "pending");
+assert.equal((await request("/api/v1/users/me", member, "PUT", {})).status, 200);
+assert.equal(memberMe.headers.get("cache-control"), "no-store");
+assert.equal(memberMe.headers.get("access-control-allow-origin"), "http://127.0.0.1:8100");
+console.log("Staging API passed: Firebase tokens, profile contract, pending/denied access, and approval denied without MFA.");

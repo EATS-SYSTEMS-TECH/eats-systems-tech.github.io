@@ -1,12 +1,8 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig } from "axios";
 import { hostApiBaseUrl, profileApiBaseUrl } from "../js/host-api-config.js";
 
-export type FirebaseUser = {
-  getIdToken(): Promise<string>;
-};
-
-export type JsonValue = string | number | boolean | null | JsonObject | JsonValue[];
-export type JsonObject = { [key: string]: JsonValue };
+import type { FirebaseUser, ApiErrorResponse, ApiError } from "./types.js";
+export type { FirebaseUser, JsonValue, JsonObject } from "./types.js";
 
 function createClient(baseURL: string): AxiosInstance {
   return axios.create({
@@ -28,17 +24,18 @@ export async function apiRequest<T>(
     const response = await client.request<T>(config);
     return response.data;
   } catch (error) {
-    if (!axios.isAxiosError(error)) throw error;
+    if (!axios.isAxiosError<ApiErrorResponse>(error)) {
+      throw error;
+    }
     const data = error.response?.data;
 
     const apiError = new Error(
       data?.error?.message || error.message || "Request failed",
-    ) as Error & {
-      status?: number;
-    };
+    ) as ApiError;
 
     apiError.name = "ApiError";
     apiError.status = error.response?.status;
+    apiError.code = data?.error?.code || data?.code;
     throw apiError;
   }
 }
