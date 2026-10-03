@@ -1,49 +1,67 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { hostGet } from "../js/host-api.js";
-import { createProfile, hostApi, profileApi } from "../js/api/index.js";
-import { parseIdentity, records } from "../js/host-dashboard-model.js";
-
-test("portal identity accepts only specified roles and active memberships", () => {
-  assert.equal(parseIdentity({ role: "other", memberships: [] }), null);
-  assert.deepEqual(parseIdentity({ role: "client_member", memberships: [
-    { clientId: "one", status: "active" }, { clientId: "two", status: "suspended" }
-  ] }), { role: "client_member", memberships: [{ clientId: "one", status: "active" }] });
-  assert.deepEqual(records({ keys: [{ label: "A" }] }, ["keys"]), [{ label: "A" }]);
+import { createProfile, getProfile, approveEmail, profileApi } from "../js/api/index.js";
+import { parseIdentity, portalState, canApproveEmail } from "../js/host-dashboard-model.js";
+const user = { uid: "user-1", email: "person@example.test", displayName: "Person", emailVerified: true };
+const me = (role = "user", state = "active", enrolled = false, verified = false) => ({ user, role, access: { state }, mfa: { required: role === "admin", enrolled, verified } });
+test("access requires an explicit backend state and verified identity", () => {
+  assert.throws(() => parseIdentity({ user }), /portal-contract-incomplete/);
+  assert.throws(() => parseIdentity({ ...me(), role: "platform_admin" }), /portal-contract-incomplete/);
+  assert.throws(() => parseIdentity({ ...me(), mfa: {} }), /portal-contract-incomplete/);
+  assert.equal(portalState(parseIdentity(me())), "approved");
+  assert.equal(portalState(parseIdentity(me(null, "pending"))), "pending");
+  assert.equal(portalState(parseIdentity(me(null, "denied"))), "denied");
+  assert.equal(portalState(parseIdentity({ ...me(), user: { ...user, emailVerified: false } })), "denied");
 });
-
-test("management requests use a Firebase ID token and never cache responses", async () => {
-  const originalAdapter = hostApi.defaults.adapter;
-  let request;
-  hostApi.defaults.adapter = async (config) => {
-    request = config;
-    return { data: { role: "platform_admin", memberships: [] }, status: 200, statusText: "OK", headers: {}, config };
+test("admins require enrollment and verified MFA; regular users are not blocked", () => {
+  assert.equal(portalState(me("admin")), "enrollment");
+  assert.equal(portalState(me("admin", "active", true)), "verification");
+  assert.equal(portalState(me("admin", "active", true, true)), "approved");
+  assert.equal(portalState(me("admin", "denied", true, true)), "denied");
+  assert.equal(portalState(me("user")), "approved");
+  assert.equal(canApproveEmail(me("admin")), false);
+  assert.equal(canApproveEmail(me("admin", "active", true)), false);
+  assert.equal(canApproveEmail(me("admin", "active", true, true)), true);
+  assert.equal(canApproveEmail(me("user", "active", true, true)), false);
+  assert.equal(canApproveEmail(undefined), false);
+});
+async function withAdapter(run) {
+  const previous = profileApi.defaults.adapter;
+  const requests = [];
+  profileApi.defaults.adapter = async (config) => {
+    requests.push(config);
+    return { data: me(), status: 200, statusText: "OK", headers: {}, config };
   };
-  try {
-    const result = await hostGet({ getIdToken: async () => "test-id-token" }, "/v1/me");
-    assert.equal(result.role, "platform_admin");
-    assert.equal(request.url, "/v1/me");
-    assert.equal(request.headers.get("Authorization"), "Bearer test-id-token");
+  try { await run(requests); } finally { profileApi.defaults.adapter = previous; }
+}
+test("GET profile sends only the Firebase ID token without cookies or caching", async () => {
+  await withAdapter(async (requests) => {
+    const result = await getProfile({ getIdToken: async () => "firebase-id-token" });
+    assert.equal(result.role, "user");
+    const request = requests[0];
+    assert.equal(request.url, "/api/v1/users/me");
+    assert.equal(request.method, "get");
+    assert.equal(request.headers.get("Authorization"), "Bearer firebase-id-token");
     assert.equal(request.headers.get("Cache-Control"), "no-store");
     assert.equal(request.withCredentials, false);
-    assert.throws(() => hostGet({ getIdToken: async () => "x" }, "https://evil.example/v1/me"));
-  } finally { hostApi.defaults.adapter = originalAdapter; }
+    assert.equal(request.data, undefined);
+  });
 });
-
-test("createProfile sends an empty JSON PUT with the Firebase ID token", async () => {
-  const originalAdapter = profileApi.defaults.adapter;
-  let request;
-  profileApi.defaults.adapter = async (config) => {
-    request = config;
-    return { data: { user: { uid: "user-1" } }, status: 200, statusText: "OK", headers: {}, config };
-  };
-  try {
-    const profile = await createProfile({ getIdToken: async () => "profile-token" });
-    assert.deepEqual(profile, { uid: "user-1" });
-    assert.equal(request.method, "put");
-    assert.equal(request.url, "/api/v1/users/me");
-    assert.equal(request.headers.get("Authorization"), "Bearer profile-token");
-    assert.equal(request.headers.get("Content-Type"), "application/json");
-    assert.equal(request.data, "{}");
-  } finally { profileApi.defaults.adapter = originalAdapter; }
+test("profile synchronization keeps the empty PUT contract", async () => {
+  await withAdapter(async (requests) => {
+    assert.deepEqual(await createProfile({ getIdToken: async () => "profile-token" }), user);
+    assert.equal(requests[0].method, "put");
+    assert.equal(requests[0].data, "{}");
+    assert.equal(requests[0].headers.get("Authorization"), "Bearer profile-token");
+  });
+});
+test("approval sends only a normalized email and idempotency key", async () => {
+  await withAdapter(async (requests) => {
+    await approveEmail({ getIdToken: async () => "admin-token" }, " PERSON@Example.test ", "approval-request-1");
+    assert.equal(requests[0].url, "/api/v1/admin/portal-access");
+    assert.equal(requests[0].method, "post");
+    assert.equal(requests[0].data, '{"email":"person@example.test"}');
+    assert.equal(requests[0].headers.get("Idempotency-Key"), "approval-request-1");
+    assert.equal(requests[0].headers.get("Authorization"), "Bearer admin-token");
+  });
 });
