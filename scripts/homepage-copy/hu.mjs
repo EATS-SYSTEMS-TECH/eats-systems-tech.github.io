@@ -167,7 +167,7 @@ const copy = {
     cookies: "Sütik",
     appSupportTitle: "Alkalmazás és támogatás",
     socialTitle: "Kövessen minket",
-    copyright: "WIFIGATE. Minden jog fenntartva.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. Minden jog fenntartva.",
   },
   schema: {
     productCategory: "Beléptetőrendszer",

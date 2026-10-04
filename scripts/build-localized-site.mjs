@@ -6,7 +6,7 @@ import { pathToFileURL } from "node:url";
 import { NICHE_CHROME } from "./niche-content.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
 import { SITE_NAVIGATION } from "./site-navigation.mjs";
-import { accessibilityLinkLabels, operatorLines } from "./legal/footer-labels.mjs";
+import { accessibilityLinkLabels } from "./legal/footer-labels.mjs";
 import { wifigateLinkLocales } from "./wifigate-link-locales.mjs";
 
 const repoRoot = process.cwd();
@@ -591,7 +591,7 @@ function updateFooterStaticUi($, bundle, locale, footerCopy) {
   set(".site-footer__link:nth-child(1)", footer.terms);
   set(".site-footer__link:nth-child(2)", footer.privacy);
   set(".site-footer__link:nth-child(3)", footer.cookies);
-  set(".site-footer__copy", `${String.fromCharCode(0xa9)} 2026 ${footer.copyright || "WIFIGATE. All rights reserved."}`);
+  set(".site-footer__copy", `${String.fromCharCode(0xa9)} 2026 ${footer.copyright || "WIFIGATE · EATS SYSTEMS TECH. All rights reserved."}`);
   set("[data-i18n='contact.distributorTitle']", contact.distributorTitle);
   set("[data-i18n='contact.distributorText']", contact.distributorText);
   set("[data-i18n='contact.distributorButton']", contact.distributorButton);
@@ -1117,10 +1117,6 @@ function rewriteFooterLegalLinks($, locale) {
   $(".site-footer__link[href*='accessibility/']")
     .attr("href", buildPagePath(locale, "accessibility"))
     .text(accessibilityLinkLabels[locale] || accessibilityLinkLabels.en);
-  // The operator and its registered name, as in its D-U-N-S record.
-  $(".site-footer__entity")
-    .attr("dir", locale === "he" ? "rtl" : "ltr")
-    .text(operatorLines[locale] || operatorLines.en);
 }
 
 function rewriteHomeInternalLinks($, locale) {
@@ -1356,7 +1352,7 @@ function applyLegalContentLanguage($, bundle, locale) {
     note.attr("lang", locale).attr("role", "note");
   }
   if (legal.contentLang !== "en") return;
-  $('[data-i18n^="legal.s."], [data-i18n="legal.contents"], [data-i18n^="legal.hero."]').each((_, element) => {
+  $('[data-i18n^="legal.s."], [data-i18n^="legal.company."], [data-i18n="legal.contents"], [data-i18n^="legal.hero."]').each((_, element) => {
     const key = $(element).attr("data-i18n");
     if (key === "legal.hero.languageNote" || key === "legal.hero.eyebrow") return;
     const value = getNestedValue(bundle, key);
@@ -1364,7 +1360,7 @@ function applyLegalContentLanguage($, bundle, locale) {
       $(element).attr("lang", "en").attr("dir", "ltr").text(value);
     }
   });
-  $(".legal-card .legal-toc, .legal-card .legal-section").attr("lang", "en").attr("dir", "ltr");
+  $(".legal-card .legal-company, .legal-card .legal-toc, .legal-card .legal-section").attr("lang", "en").attr("dir", "ltr");
 }
 
 async function buildLegalPages(homeData, legalCollections) {
@@ -1633,7 +1629,7 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
   // the shared footer carries support + WhatsApp Business.
 
   $("#js-year").text(nowDate.slice(0, 4));
-  $("#footer-copyright").text(footer.copyright || "WIFIGATE. All rights reserved.");
+  $("#footer-copyright").text(footer.copyright || "WIFIGATE · EATS SYSTEMS TECH. All rights reserved.");
   $("#footer-terms").text(footer.terms || "Terms & Conditions");
   $("#footer-privacy").text(footer.privacy || "Privacy Policy");
   $("#footer-cookies").text(footer.cookies || "Cookies");

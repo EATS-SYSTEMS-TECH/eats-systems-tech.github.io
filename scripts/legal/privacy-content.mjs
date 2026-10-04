@@ -13,7 +13,7 @@ export const privacy = {
     subtitle:
       "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
     updated: "Effective date: October 4, 2026",
-    owner: "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+    owner: "Operator: EATS SYSTEMS TECH",
     sections: [
       {
         id: "who-we-are",
@@ -162,7 +162,7 @@ export const privacy = {
         id: "contact",
         title: "14. Contact",
         blocks: [
-          "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
+          "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
           "Email: support@wifigate.io",
           "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
           { link: { href: "../cookies/", text: "Read our Cookie Policy" } },
@@ -181,7 +181,7 @@ export const privacy = {
     subtitle:
       "מדיניות פרטיות זו מסבירה איזה מידע אישי WIFIGATE מעבדת, לשם מה, עם מי הוא משותף, כמה זמן הוא נשמר, ואילו בחירות וזכויות עומדות לרשותכם.",
     updated: "תאריך תחילה: 4 באוקטובר 2026",
-    owner: "המפעילה: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+    owner: "המפעילה: EATS SYSTEMS TECH",
     sections: [
       {
         id: "who-we-are",
@@ -330,7 +330,7 @@ export const privacy = {
         id: "contact",
         title: "14. יצירת קשר",
         blocks: [
-          "בעלת השליטה במידע: EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
+          "בעלת השליטה במידע: EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions",
           "דוא\"ל: support@wifigate.io",
           "מדיניות זו מתפרסמת באנגלית ובעברית, ובדפים בשפות אחרות היא עשויה להופיע באנגלית. במקרה של סתירה בין הנוסחים, הנוסח האנגלי גובר.",
           { link: { href: "../cookies/", text: "למדיניות העוגיות" } },

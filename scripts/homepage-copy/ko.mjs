@@ -167,7 +167,7 @@ const copy = {
     cookies: "쿠키",
     appSupportTitle: "앱 및 지원",
     socialTitle: "소셜 미디어",
-    copyright: "WIFIGATE. 모든 권리 보유.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. 모든 권리 보유.",
   },
   schema: {
     productCategory: "출입통제 시스템",

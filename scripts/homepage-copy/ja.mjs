@@ -167,7 +167,7 @@ const copy = {
     cookies: "Cookie ポリシー",
     appSupportTitle: "アプリ・サポート",
     socialTitle: "フォローする",
-    copyright: "WIFIGATE。すべての権利を留保します。",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH。すべての権利を留保します。",
   },
   schema: {
     productCategory: "入退室管理システム",

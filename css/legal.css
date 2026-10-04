@@ -270,3 +270,48 @@
 .legal-language-note {
   margin-top: 1rem;
 }
+
+.legal-company {
+  margin: 0 0 1.5rem;
+  padding: 1rem 1.2rem;
+  border-radius: 1rem;
+  background: rgba(241, 245, 249, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.legal-company__title {
+  margin: 0 0 0.7rem;
+  font-size: 1rem;
+}
+
+.legal-company__list {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.legal-company__row {
+  display: grid;
+  grid-template-columns: minmax(8rem, 11rem) 1fr;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.legal-company__row dt {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.legal-company__row dd {
+  margin: 0;
+  color: #0f172a;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 520px) {
+  .legal-company__row {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+}

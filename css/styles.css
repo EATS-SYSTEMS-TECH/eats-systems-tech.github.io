@@ -3537,12 +3537,3 @@ html[dir="rtl"] .where-story-card__video-meta {
   }
 }
 
-/* The operator line under the copyright. */
-.site-footer__entity {
-  grid-column: 1 / -1;
-  margin: 0.35rem 0 0;
-  color: #a4a4a4;
-  font-size: 0.8rem;
-  line-height: 1.6;
-  text-align: center;
-}

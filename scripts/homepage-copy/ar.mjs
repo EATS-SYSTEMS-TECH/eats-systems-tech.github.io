@@ -167,7 +167,7 @@ const copy = {
     cookies: "ملفات تعريف الارتباط",
     appSupportTitle: "التطبيق والدعم",
     socialTitle: "تابعنا",
-    copyright: "WIFIGATE. جميع الحقوق محفوظة.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. جميع الحقوق محفوظة.",
   },
   schema: {
     productCategory: "نظام التحكم في الوصول",

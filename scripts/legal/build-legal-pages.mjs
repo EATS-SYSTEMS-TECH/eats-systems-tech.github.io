@@ -13,6 +13,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { accessibility } from "./accessibility-content.mjs";
+import { company } from "./company.mjs";
 import { cookies } from "./cookies-content.mjs";
 import { languageNotices } from "./locale-notices.mjs";
 import { privacy } from "./privacy-content.mjs";
@@ -25,7 +26,7 @@ const LOCALES = [
   "el", "ro", "hr", "fi", "bg", "sr", "sk", "sl", "id", "th", "vi", "ms", "fil",
 ];
 const FULL_TEXT_LOCALES = new Set(["en", "he"]);
-const CSS_VERSION = "20261004b";
+const CSS_VERSION = "20261005a";
 
 const DOCUMENTS = [
   { page: "privacy-policy", content: privacy, contentsLabel: { en: "Contents", he: "תוכן העניינים" } },
@@ -98,10 +99,32 @@ function legalBundle(doc, ctaFor, extra = {}) {
       languageNote: extra.languageNote || "",
     },
     contents: extra.contents,
+    company: companyData(extra.companyLocale || "en"),
     contentLang: extra.contentLang,
     s: sectionData(doc),
     cta: ctaFor,
   };
+}
+
+function companyData(locale) {
+  const box = company[locale] || company.en;
+  const data = { title: box.title };
+  box.rows.forEach(([label, value], r) => {
+    data[`r${r}k`] = label;
+    data[`r${r}v`] = value;
+  });
+  return data;
+}
+
+function renderCompany() {
+  const rows = company.en.rows.map(([label, value], r) =>
+    `            <div class="legal-company__row"><dt data-i18n="legal.company.r${r}k">${escapeHtml(label)}</dt><dd data-i18n="legal.company.r${r}v">${escapeHtml(value)}</dd></div>`).join("\n");
+  return `        <section class="legal-company" aria-labelledby="company-title">
+          <h2 class="legal-company__title" id="company-title" data-i18n="legal.company.title">${escapeHtml(company.en.title)}</h2>
+          <dl class="legal-company__list">
+${rows}
+          </dl>
+        </section>`;
 }
 
 function ctaFor(locale) {
@@ -172,6 +195,8 @@ function renderMain(page, doc) {
       </section>
 
       <article class="legal-card">
+${renderCompany()}
+
         <nav class="legal-toc" aria-labelledby="${page}-contents">
           <h2 class="legal-toc__title" id="${page}-contents" data-i18n="legal.contents">Contents</h2>
           <ol>
@@ -219,7 +244,7 @@ async function writeData(page, doc, contentsLabel) {
   const bundles = {};
   for (const locale of LOCALES) {
     if (FULL_TEXT_LOCALES.has(locale)) {
-      bundles[locale] = legalBundle(doc[locale], ctaFor(locale), { contents: contentsLabel[locale] });
+      bundles[locale] = legalBundle(doc[locale], ctaFor(locale), { contents: contentsLabel[locale], companyLocale: locale });
     } else {
       bundles[locale] = legalBundle(doc.en, ctaFor(locale), {
         eyebrow: localeCta[locale]?.eyebrow,

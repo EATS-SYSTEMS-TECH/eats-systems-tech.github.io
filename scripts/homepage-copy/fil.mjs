@@ -167,7 +167,7 @@ const copy = {
     cookies: "Mga Cookie",
     appSupportTitle: "App at Suporta",
     socialTitle: "Sundan kami",
-    copyright: "WIFIGATE. Lahat ng karapatan ay nakalaan.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. Lahat ng karapatan ay nakalaan.",
   },
   schema: {
     productCategory: "Sistema ng kontrol sa pagpasok",

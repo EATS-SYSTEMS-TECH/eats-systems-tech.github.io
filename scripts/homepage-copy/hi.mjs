@@ -168,7 +168,7 @@ const copy = {
     cookies: "कुकीज़",
     appSupportTitle: "ऐप और सपोर्ट",
     socialTitle: "हमें फॉलो करें",
-    copyright: "WIFIGATE. सर्वाधिकार सुरक्षित।",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. सर्वाधिकार सुरक्षित।",
   },
   schema: {
     productCategory: "एक्सेस कंट्रोल सिस्टम",

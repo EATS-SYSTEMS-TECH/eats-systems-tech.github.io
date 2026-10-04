@@ -167,7 +167,7 @@ const copy = {
     cookies: "కుకీలు",
     appSupportTitle: "యాప్ మరియు సహాయం",
     socialTitle: "మమ్మల్ని అనుసరించండి",
-    copyright: "WIFIGATE. సర్వ హక్కులూ ప్రత్యేకించబడినవి.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. సర్వ హక్కులూ ప్రత్యేకించబడినవి.",
   },
   schema: {
     productCategory: "యాక్సెస్ కంట్రోల్ సిస్టమ్",

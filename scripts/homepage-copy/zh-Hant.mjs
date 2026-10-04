@@ -167,7 +167,7 @@ const copy = {
     cookies: "Cookie 政策",
     appSupportTitle: "App 與支援",
     socialTitle: "追蹤我們",
-    copyright: "WIFIGATE。著作權所有。",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH。著作權所有。",
   },
   schema: {
     productCategory: "門禁管制系統",

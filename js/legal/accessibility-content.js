@@ -13,10 +13,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": ""
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "s": {
       "commitment": {
         "title": "1. Our commitment",
@@ -85,10 +96,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Este documento está disponible en inglés. La versión en inglés es la versión jurídicamente vinculante."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -158,10 +180,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ce document est disponible en anglais. La version anglaise est la version juridiquement contraignante."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -231,10 +264,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dieses Dokument ist auf Englisch verfügbar. Die englische Fassung ist die rechtsverbindliche Fassung."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -304,10 +348,21 @@
       "title": "הצהרת נגישות",
       "subtitle": "אנחנו רוצים שכל אדם, ובכלל זה אנשים עם מוגבלות, יוכל להשתמש באתר wifigate.io באופן עצמאי, נוח ומכבד.",
       "updated": "עודכן לאחרונה: 4 באוקטובר 2026",
-      "owner": "המפעילה: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "המפעילה: EATS SYSTEMS TECH",
       "languageNote": ""
     },
     "contents": "תוכן העניינים",
+    "company": {
+      "title": "פרטי החברה",
+      "r0k": "המפעילה",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "השם הרשום",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "יצירת קשר",
+      "r3v": "support@wifigate.io"
+    },
     "s": {
       "commitment": {
         "title": "1. המחויבות שלנו",
@@ -376,10 +431,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dit document is beschikbaar in het Engels. De Engelse versie is de juridisch bindende versie."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -449,10 +515,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Questo documento è disponibile in inglese. La versione inglese è quella giuridicamente vincolante."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -522,10 +599,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Este documento está disponível em inglês. A versão em inglês é a versão juridicamente vinculativa."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -595,10 +683,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ten dokument jest dostępny w języku angielskim. Wersja angielska jest wersją prawnie wiążącą."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -668,10 +767,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dette dokumentet er tilgjengelig på engelsk. Den engelske versjonen er den juridisk bindende versjonen."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -741,10 +851,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tento dokument je k dispozici v angličtině. Právně závazná je anglická verze."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -814,10 +935,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Этот документ доступен на английском языке. Юридически обязывающей является английская версия."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -887,10 +1019,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Цей документ доступний англійською мовою. Юридично обов'язковою є англійська версія."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -960,10 +1103,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Bu belge İngilizce olarak sunulmaktadır. Hukuken bağlayıcı olan İngilizce sürümdür."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -1033,10 +1187,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "هذا المستند متاح باللغة الإنجليزية. النسخة الإنجليزية هي النسخة الملزمة قانونيًا."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -1106,10 +1271,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "यह दस्तावेज़ अंग्रेज़ी में उपलब्ध है। कानूनी रूप से बाध्यकारी संस्करण अंग्रेज़ी संस्करण है।"
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -1179,10 +1355,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "এই নথিটি ইংরেজিতে উপলব্ধ। ইংরেজি সংস্করণটিই আইনগতভাবে বাধ্যতামূলক সংস্করণ।"
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -1252,10 +1439,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "हा दस्तऐवज इंग्रजीमध्ये उपलब्ध आहे. इंग्रजी आवृत्ती ही कायदेशीररित्या बंधनकारक आवृत्ती आहे."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -1325,10 +1523,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "ఈ పత్రం ఆంగ్లంలో అందుబాటులో ఉంది. చట్టపరంగా కట్టుబడి ఉండే సంస్కరణ ఆంగ్ల సంస్కరణ."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -1398,10 +1607,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "本文件以英文提供。英文版本为具有法律约束力的版本。"
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -1471,10 +1691,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "本文件以英文提供。英文版本為具有法律約束力的版本。"
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -1544,10 +1775,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "この文書は英語で提供されています。法的拘束力を持つのは英語版です。"
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -1617,10 +1859,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "이 문서는 영어로 제공됩니다. 법적 구속력이 있는 버전은 영어 버전입니다."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -1690,10 +1943,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dette dokument er tilgængeligt på engelsk. Den engelske version er den juridisk bindende version."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -1763,10 +2027,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Detta dokument finns på engelska. Den engelska versionen är den juridiskt bindande versionen."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -1836,10 +2111,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ez a dokumentum angol nyelven érhető el. A jogilag kötelező változat az angol változat."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -1909,10 +2195,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Το παρόν έγγραφο διατίθεται στα αγγλικά. Η αγγλική έκδοση είναι η νομικά δεσμευτική έκδοση."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -1982,10 +2279,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Acest document este disponibil în limba engleză. Versiunea în limba engleză este versiunea obligatorie din punct de vedere juridic."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -2055,10 +2363,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ovaj je dokument dostupan na engleskom jeziku. Pravno obvezujuća je verzija na engleskom jeziku."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -2128,10 +2447,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tämä asiakirja on saatavilla englanniksi. Oikeudellisesti sitova on englanninkielinen versio."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -2201,10 +2531,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Този документ е достъпен на английски език. Правно обвързваща е версията на английски език."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -2274,10 +2615,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Овај документ је доступан на енглеском језику. Правно обавезујућа је верзија на енглеском језику."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -2347,10 +2699,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tento dokument je k dispozícii v angličtine. Právne záväzná je anglická verzia."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -2420,10 +2783,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ta dokument je na voljo v angleščini. Pravno zavezujoča je angleška različica."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -2493,10 +2867,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggris. Versi bahasa Inggris adalah versi yang mengikat secara hukum."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -2566,10 +2951,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "เอกสารนี้มีให้บริการเป็นภาษาอังกฤษ ฉบับภาษาอังกฤษเป็นฉบับที่มีผลผูกพันทางกฎหมาย"
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -2639,10 +3035,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tài liệu này được cung cấp bằng tiếng Anh. Bản tiếng Anh là bản có giá trị ràng buộc về mặt pháp lý."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -2712,10 +3119,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggeris. Versi bahasa Inggeris ialah versi yang mengikat dari segi undang-undang."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {
@@ -2785,10 +3203,21 @@
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
       "updated": "Last updated: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ang dokumentong ito ay makukuha sa Ingles. Ang bersyong Ingles ang may bisang legal."
     },
     "contents": "Contents",
+    "company": {
+      "title": "Company details",
+      "r0k": "Operator",
+      "r0v": "EATS SYSTEMS TECH",
+      "r1k": "Registered name",
+      "r1v": "Itay Nave – Engineering and Technology Solutions",
+      "r2k": "D-U-N-S",
+      "r2v": "626518977",
+      "r3k": "Contact",
+      "r3v": "support@wifigate.io"
+    },
     "contentLang": "en",
     "s": {
       "commitment": {

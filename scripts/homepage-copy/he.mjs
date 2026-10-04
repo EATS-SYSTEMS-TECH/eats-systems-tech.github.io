@@ -174,7 +174,7 @@ const copy = {
     cookies: "עוגיות",
     appSupportTitle: "אפליקציה ותמיכה",
     socialTitle: "עקבו אחרינו",
-    copyright: "WIFIGATE. כל הזכויות שמורות.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. כל הזכויות שמורות.",
   },
   schema: {
     productCategory: "מערכת בקרת כניסה",

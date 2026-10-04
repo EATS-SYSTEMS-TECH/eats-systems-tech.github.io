@@ -167,7 +167,7 @@ const copy = {
     cookies: "Cookies",
     appSupportTitle: "Aplikácia a podpora",
     socialTitle: "Sledujte nás",
-    copyright: "WIFIGATE. Všetky práva vyhradené.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. Všetky práva vyhradené.",
   },
   schema: {
     productCategory: "Systém riadenia prístupu",
