@@ -1230,7 +1230,7 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   $("#language-button").attr("aria-label", copy.selectLanguageLabel);
   setLanguageSelector($, homeData.localeOptions, locale, pageKey);
   const prefix = buildAssetPrefix(locale, pageKey);
-  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20260911b">');
+  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20261004b">');
   $("script[src*='js/navigation.js']").attr("src", prefix + "js/navigation.js?v=20260911a");
 }
 

@@ -549,3 +549,42 @@ html.a11y-reduced-motion *::after {
     opacity: 0;
   }
 }
+
+/* Long press: the button can be dragged (or hidden for this visit). */
+.a11y-fab {
+  touch-action: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+.a11y-fab.is-arranging {
+  cursor: grabbing;
+  transform: scale(1.08);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.95), 0 0 0 7px #0b63ff, 0 24px 48px rgba(11, 99, 255, 0.42);
+  transition: none;
+}
+
+.a11y-fab__dismiss {
+  position: fixed;
+  z-index: 81;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background: #0f172a;
+  color: #ffffff;
+  font: 700 1.1rem/1 system-ui, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.35);
+}
+
+.a11y-fab__dismiss:focus-visible {
+  outline: 3px solid #0b63ff;
+  outline-offset: 2px;
+}
+
+.a11y-fab__dismiss[hidden] {
+  display: none;
+}

@@ -38,7 +38,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -111,7 +111,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -184,7 +184,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -257,7 +257,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -329,7 +329,7 @@
           "i5": "לקישורים, לכפתורים ולשדות הטופס יש שמות נגישים.",
           "i6": "האנימציות מכבדות את הגדרת \"הפחתת תנועה\" של מערכת ההפעלה, וניתן לעצור את סרטון הרקע."
         },
-        "b1": "תפריט הנגישות, הנפתח באמצעות כפתור הנגישות בתחתית כל דף, מאפשר להגדיל את הטקסט, לעבור לניגודיות גבוהה, להדגיש קישורים בקו תחתון, להשתמש בגופן קריא יותר ולהפחית תנועה. הבחירות נשמרות במכשיר שלכם."
+        "b1": "תפריט הנגישות, הנפתח באמצעות כפתור הנגישות בתחתית כל דף, מאפשר להגדיל את הטקסט, לעבור לניגודיות גבוהה, להדגיש קישורים בקו תחתון, להשתמש בגופן קריא יותר ולהפחית תנועה. הבחירות נשמרות במכשיר שלכם. לחיצה ארוכה על הכפתור מאפשרת להזיז אותו למקום אחר במסך, או להסתיר אותו לביקור הנוכחי; הוא יחזור בביקור הבא."
       },
       "limitations": {
         "title": "4. מגבלות ידועות",
@@ -402,7 +402,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -475,7 +475,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -548,7 +548,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -621,7 +621,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -694,7 +694,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -767,7 +767,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -840,7 +840,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -913,7 +913,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -986,7 +986,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1059,7 +1059,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1132,7 +1132,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1205,7 +1205,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1278,7 +1278,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1351,7 +1351,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1424,7 +1424,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1497,7 +1497,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1570,7 +1570,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1643,7 +1643,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1716,7 +1716,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1789,7 +1789,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1862,7 +1862,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1935,7 +1935,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2008,7 +2008,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2081,7 +2081,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2154,7 +2154,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2227,7 +2227,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2300,7 +2300,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2373,7 +2373,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2446,7 +2446,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2519,7 +2519,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2592,7 +2592,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2665,7 +2665,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2738,7 +2738,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2811,7 +2811,7 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device."
+        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
       },
       "limitations": {
         "title": "4. Known limitations",
