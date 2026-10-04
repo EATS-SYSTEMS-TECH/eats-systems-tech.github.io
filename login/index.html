@@ -6,12 +6,14 @@
   <section class="login-intro"><a class="brand" href="/" aria-label="WIFIGATE home"><img src="/assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE"></a><div><span class="eyebrow">WIFIGATE HOST</span><h1>Your access starts here.</h1><p>A secure portal for approved WIFIGATE Host users.</p></div><p class="login-footnote">Use the verified email address approved by your administrator.</p></section>
   <section class="login-card" aria-labelledby="login-title"><span class="eyebrow">HOST PORTAL</span><h2 id="login-title">Sign in to your account</h2><p>Choose the provider that owns your approved email. For Apple Hide My Email, your admin must approve the relay address.</p>
     <div class="login-actions"><button type="button" data-provider="google" disabled>Continue with Google</button><button type="button" data-provider="apple" disabled>Continue with Apple</button></div>
-    <p id="login-status" class="form-status" role="status" aria-live="polite">Checking your session?</p>
+    <p class="legal-consent">By continuing, you agree to the <a href="/terms-and-conditions/">Terms &amp; Conditions</a> and acknowledge the <a href="/privacy-policy/">Privacy Policy</a>.</p>
+    <p id="login-status" class="form-status" role="status" aria-live="polite">Checking your session…</p>
     <div id="redirect-options" hidden><p>Your browser blocked the sign-in window. Continue in this tab:</p><button type="button" id="redirect-sign-in">Continue sign-in</button></div>
     <button id="retry-login" type="button" hidden>Try again</button>
     <div class="staging-note" data-staging hidden><strong>Local test environment</strong><p>Use mock Google or Apple accounts. No provider password is needed.</p><code>admin@wifigate.test</code><code>owner@grandplaza.test</code><code>pending@wifigate.test</code></div><a class="return-link" href="/">Back to website</a>
   </section>
 </main>
+<nav class="portal-legal" aria-label="Legal"><a href="/terms-and-conditions/">Terms &amp; Conditions</a><a href="/privacy-policy/">Privacy Policy</a><a href="/cookies/">Cookie Policy</a><a href="/accessibility/">Accessibility Statement</a></nav>
 <dialog id="mfa-challenge" aria-labelledby="challenge-title">
   <form><h2 id="challenge-title">Verify your authenticator</h2><p>Enter the current code from your authenticator app to finish signing in.</p>
     <label>Authenticator<select name="factor" required></select></label>

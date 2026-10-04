@@ -12,6 +12,7 @@
 
 import fs from "node:fs/promises";
 import path from "node:path";
+import { accessibility } from "./accessibility-content.mjs";
 import { cookies } from "./cookies-content.mjs";
 import { languageNotices } from "./locale-notices.mjs";
 import { privacy } from "./privacy-content.mjs";
@@ -30,6 +31,7 @@ const DOCUMENTS = [
   { page: "privacy-policy", content: privacy, contentsLabel: { en: "Contents", he: "תוכן העניינים" } },
   { page: "terms-and-conditions", content: terms, contentsLabel: { en: "Contents", he: "תוכן העניינים" } },
   { page: "cookies", content: cookies, contentsLabel: { en: "Contents", he: "תוכן העניינים" } },
+  { page: "accessibility", content: accessibility, contentsLabel: { en: "Contents", he: "תוכן העניינים" } },
 ];
 
 const localeCta = JSON.parse(await fs.readFile(path.join(repoRoot, "scripts", "legal", "locale-cta.json"), "utf8"));
@@ -141,7 +143,8 @@ function renderBlocks(section) {
         `          </div>`,
       ].join("\n");
     }
-    return `          <p><a href="${block.link.href}" data-i18n="${key(`b${b}`)}">${escapeHtml(block.link.text)}</a></p>`;
+    const external = /^https?:/.test(block.link.href) ? ' target="_blank" rel="noopener noreferrer"' : "";
+    return `          <p><a href="${block.link.href}"${external} data-i18n="${key(`b${b}`)}">${escapeHtml(block.link.text)}</a></p>`;
   }).join("\n");
 }
 

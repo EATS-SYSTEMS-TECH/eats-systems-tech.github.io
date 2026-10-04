@@ -1226,6 +1226,7 @@ function openAccessibilityPanel() {
 
   accessibilityRefs.fab.setAttribute("aria-expanded", "true")
   accessibilityRefs.panel.setAttribute("aria-hidden", "false")
+  accessibilityRefs.panel.inert = false
   accessibilityRefs.backdrop.classList.add("is-visible")
   accessibilityRefs.panel.classList.add("is-open")
   document.body.classList.add("a11y-panel-open")
@@ -1244,6 +1245,8 @@ function closeAccessibilityPanel(restoreFocus = true) {
 
   accessibilityRefs.fab.setAttribute("aria-expanded", "false")
   accessibilityRefs.panel.setAttribute("aria-hidden", "true")
+  // Closed: out of the tab order as well as hidden from screen readers.
+  accessibilityRefs.panel.inert = true
   accessibilityRefs.backdrop.classList.remove("is-visible")
   accessibilityRefs.panel.classList.remove("is-open")
   document.body.classList.remove("a11y-panel-open")
@@ -1299,6 +1302,9 @@ function setupAccessibilityWidget() {
   if (!fab || !panel || !backdrop || !closeButton || !resetButton || !status || !title || !description || !eyebrow || !skipLink || !optionButtons.length) {
     return
   }
+
+  // The panel starts closed, so its controls must not take keyboard focus.
+  panel.inert = true
 
   accessibilityRefs = {
     fab,

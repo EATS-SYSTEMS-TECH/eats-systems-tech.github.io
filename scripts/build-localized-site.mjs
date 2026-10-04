@@ -6,6 +6,7 @@ import { pathToFileURL } from "node:url";
 import { NICHE_CHROME } from "./niche-content.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
 import { SITE_NAVIGATION } from "./site-navigation.mjs";
+import { accessibilityLinkLabels } from "./legal/footer-labels.mjs";
 import { wifigateLinkLocales } from "./wifigate-link-locales.mjs";
 
 const repoRoot = process.cwd();
@@ -24,6 +25,7 @@ const legalTemplatePaths = {
   cookies: path.join(repoRoot, "templates", "legal", "cookies.template.html"),
   "privacy-policy": path.join(repoRoot, "templates", "legal", "privacy-policy.template.html"),
   "terms-and-conditions": path.join(repoRoot, "templates", "legal", "terms-and-conditions.template.html"),
+  accessibility: path.join(repoRoot, "templates", "legal", "accessibility.template.html"),
 };
 
 const homeDataFiles = [
@@ -56,6 +58,7 @@ const legalDataFiles = {
   cookies: legalPageData("cookies"),
   "privacy-policy": legalPageData("privacy-policy"),
   "terms-and-conditions": legalPageData("terms-and-conditions"),
+  accessibility: legalPageData("accessibility"),
 };
 
 const homeRuntimeScriptsToRemove = [
@@ -1111,6 +1114,9 @@ function rewriteFooterLegalLinks($, locale) {
   $(".site-footer__link[href*='terms-and-conditions/']").attr("href", buildPagePath(locale, "terms-and-conditions"));
   $(".site-footer__link[href*='privacy-policy/']").attr("href", buildPagePath(locale, "privacy-policy"));
   $(".site-footer__link[href*='cookies/']").attr("href", buildPagePath(locale, "cookies"));
+  $(".site-footer__link[href*='accessibility/']")
+    .attr("href", buildPagePath(locale, "accessibility"))
+    .text(accessibilityLinkLabels[locale] || accessibilityLinkLabels.en);
 }
 
 function rewriteHomeInternalLinks($, locale) {

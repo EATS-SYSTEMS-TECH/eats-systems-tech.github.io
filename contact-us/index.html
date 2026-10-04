@@ -15,10 +15,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Day+One&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/contact-page.css" />
+  <link rel="stylesheet" href="../css/contact-page.css?v=20261004a" />
 </head>
 
 <body class="contact-page">
@@ -120,7 +117,12 @@
     </section>
 
     <footer class="contact-page__bottom">
-      <a href="../terms-and-conditions/" class="contact-page__terms">Terms and Conditions</a>
+      <nav class="contact-page__legal" aria-label="Legal">
+        <a href="../terms-and-conditions/" class="contact-page__terms">Terms and Conditions</a>
+        <a href="../privacy-policy/" class="contact-page__terms">Privacy Policy</a>
+        <a href="../cookies/" class="contact-page__terms">Cookie Policy</a>
+        <a href="../accessibility/" class="contact-page__terms">Accessibility Statement</a>
+      </nav>
       <a href="../" class="contact-page__brand" aria-label="WIFIGATE home">
         <svg class="contact-page__brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
           <path d="M13 27c10-10 28-10 38 0" stroke="currentColor" stroke-width="5" stroke-linecap="round" />

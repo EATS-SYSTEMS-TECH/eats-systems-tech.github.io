@@ -13,7 +13,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": ""
     },
     "contents": "Contents",
@@ -54,7 +54,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -72,7 +72,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -101,7 +101,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Este documento está disponible en inglés. La versión en inglés es la versión jurídicamente vinculante."
     },
     "contents": "Contents",
@@ -143,7 +143,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -161,7 +161,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -190,7 +190,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ce document est disponible en anglais. La version anglaise est la version juridiquement contraignante."
     },
     "contents": "Contents",
@@ -232,7 +232,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -250,7 +250,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -279,7 +279,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dieses Dokument ist auf Englisch verfügbar. Die englische Fassung ist die rechtsverbindliche Fassung."
     },
     "contents": "Contents",
@@ -321,7 +321,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -339,7 +339,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -368,7 +368,7 @@
       "title": "מדיניות עוגיות",
       "subtitle": "מדיניות עוגיות זו מסבירה באילו עוגיות וטכנולוגיות דומות נעשה שימוש באתר wifigate.io ובפורטל האינטרנט של WIFIGATE, לשם מה, וכיצד תוכלו לשלוט בהן.",
       "updated": "תאריך תחילה: 4 באוקטובר 2026",
-      "owner": "המפעילה: EATS SYSTEMS TECH LTD",
+      "owner": "המפעילה: EATS SYSTEMS TECH",
       "languageNote": ""
     },
     "contents": "תוכן העניינים",
@@ -409,7 +409,7 @@
       },
       "third-party": {
         "title": "4. שירותי צד שלישי",
-        "b0": "Google Fonts. הדפים טוענים גופנים מהשרתים של Google, ולכן הדפדפן שולח ל‑Google את כתובת ה‑IP ופרטי הדפדפן שלכם. איננו משתמשים ב‑Google Fonts לשמירת עוגיות.",
+        "b0": "גופנים. האתר מגיש את הגופנים שלו מ‑wifigate.io עצמו, כך שאין פנייה לשירות גופנים של צד שלישי.",
         "b1": "כניסה באמצעות Google ו‑Apple. כשאתם נכנסים לפורטל, חלון הכניסה של Google או של Apple עשוי לשמור עוגיות משלו בדומיין שלו, בכפוף למדיניות הפרטיות של Google או של Apple.",
         "b2": "קישורים לשירותים אחרים. קישורים ל‑WhatsApp, לרשתות חברתיות, לחנויות אפליקציות ולשירותי ניווט מובילים לאתרים שלהם מדיניות עוגיות משלהם."
       },
@@ -427,7 +427,7 @@
       },
       "contact": {
         "title": "8. יצירת קשר",
-        "b0": "EATS SYSTEMS TECH LTD, ישראל. דוא\"ל: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. דוא\"ל: support@wifigate.io",
         "b1": "מדיניות זו מתפרסמת באנגלית ובעברית, ובדפים בשפות אחרות היא עשויה להופיע באנגלית. במקרה של סתירה בין הנוסחים, הנוסח האנגלי גובר.",
         "b2": "למדיניות הפרטיות",
         "b3": "לתנאי השימוש"
@@ -456,7 +456,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dit document is beschikbaar in het Engels. De Engelse versie is de juridisch bindende versie."
     },
     "contents": "Contents",
@@ -498,7 +498,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -516,7 +516,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -545,7 +545,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Questo documento è disponibile in inglese. La versione inglese è quella giuridicamente vincolante."
     },
     "contents": "Contents",
@@ -587,7 +587,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -605,7 +605,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -634,7 +634,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Este documento está disponível em inglês. A versão em inglês é a versão juridicamente vinculativa."
     },
     "contents": "Contents",
@@ -676,7 +676,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -694,7 +694,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -723,7 +723,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ten dokument jest dostępny w języku angielskim. Wersja angielska jest wersją prawnie wiążącą."
     },
     "contents": "Contents",
@@ -765,7 +765,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -783,7 +783,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -812,7 +812,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dette dokumentet er tilgjengelig på engelsk. Den engelske versjonen er den juridisk bindende versjonen."
     },
     "contents": "Contents",
@@ -854,7 +854,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -872,7 +872,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -901,7 +901,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tento dokument je k dispozici v angličtině. Právně závazná je anglická verze."
     },
     "contents": "Contents",
@@ -943,7 +943,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -961,7 +961,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -990,7 +990,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Этот документ доступен на английском языке. Юридически обязывающей является английская версия."
     },
     "contents": "Contents",
@@ -1032,7 +1032,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -1050,7 +1050,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1079,7 +1079,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Цей документ доступний англійською мовою. Юридично обов'язковою є англійська версія."
     },
     "contents": "Contents",
@@ -1121,7 +1121,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -1139,7 +1139,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1168,7 +1168,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Bu belge İngilizce olarak sunulmaktadır. Hukuken bağlayıcı olan İngilizce sürümdür."
     },
     "contents": "Contents",
@@ -1210,7 +1210,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -1228,7 +1228,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1257,7 +1257,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "هذا المستند متاح باللغة الإنجليزية. النسخة الإنجليزية هي النسخة الملزمة قانونيًا."
     },
     "contents": "Contents",
@@ -1299,7 +1299,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -1317,7 +1317,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1346,7 +1346,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "यह दस्तावेज़ अंग्रेज़ी में उपलब्ध है। कानूनी रूप से बाध्यकारी संस्करण अंग्रेज़ी संस्करण है।"
     },
     "contents": "Contents",
@@ -1388,7 +1388,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -1406,7 +1406,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1435,7 +1435,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "এই নথিটি ইংরেজিতে উপলব্ধ। ইংরেজি সংস্করণটিই আইনগতভাবে বাধ্যতামূলক সংস্করণ।"
     },
     "contents": "Contents",
@@ -1477,7 +1477,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -1495,7 +1495,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1524,7 +1524,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "हा दस्तऐवज इंग्रजीमध्ये उपलब्ध आहे. इंग्रजी आवृत्ती ही कायदेशीररित्या बंधनकारक आवृत्ती आहे."
     },
     "contents": "Contents",
@@ -1566,7 +1566,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -1584,7 +1584,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1613,7 +1613,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "ఈ పత్రం ఆంగ్లంలో అందుబాటులో ఉంది. చట్టపరంగా కట్టుబడి ఉండే సంస్కరణ ఆంగ్ల సంస్కరణ."
     },
     "contents": "Contents",
@@ -1655,7 +1655,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -1673,7 +1673,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1702,7 +1702,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "本文件以英文提供。英文版本为具有法律约束力的版本。"
     },
     "contents": "Contents",
@@ -1744,7 +1744,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -1762,7 +1762,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1791,7 +1791,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "本文件以英文提供。英文版本為具有法律約束力的版本。"
     },
     "contents": "Contents",
@@ -1833,7 +1833,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -1851,7 +1851,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1880,7 +1880,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "この文書は英語で提供されています。法的拘束力を持つのは英語版です。"
     },
     "contents": "Contents",
@@ -1922,7 +1922,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -1940,7 +1940,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1969,7 +1969,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "이 문서는 영어로 제공됩니다. 법적 구속력이 있는 버전은 영어 버전입니다."
     },
     "contents": "Contents",
@@ -2011,7 +2011,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -2029,7 +2029,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2058,7 +2058,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dette dokument er tilgængeligt på engelsk. Den engelske version er den juridisk bindende version."
     },
     "contents": "Contents",
@@ -2100,7 +2100,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -2118,7 +2118,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2147,7 +2147,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Detta dokument finns på engelska. Den engelska versionen är den juridiskt bindande versionen."
     },
     "contents": "Contents",
@@ -2189,7 +2189,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -2207,7 +2207,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2236,7 +2236,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ez a dokumentum angol nyelven érhető el. A jogilag kötelező változat az angol változat."
     },
     "contents": "Contents",
@@ -2278,7 +2278,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -2296,7 +2296,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2325,7 +2325,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Το παρόν έγγραφο διατίθεται στα αγγλικά. Η αγγλική έκδοση είναι η νομικά δεσμευτική έκδοση."
     },
     "contents": "Contents",
@@ -2367,7 +2367,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -2385,7 +2385,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2414,7 +2414,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Acest document este disponibil în limba engleză. Versiunea în limba engleză este versiunea obligatorie din punct de vedere juridic."
     },
     "contents": "Contents",
@@ -2456,7 +2456,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -2474,7 +2474,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2503,7 +2503,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ovaj je dokument dostupan na engleskom jeziku. Pravno obvezujuća je verzija na engleskom jeziku."
     },
     "contents": "Contents",
@@ -2545,7 +2545,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -2563,7 +2563,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2592,7 +2592,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tämä asiakirja on saatavilla englanniksi. Oikeudellisesti sitova on englanninkielinen versio."
     },
     "contents": "Contents",
@@ -2634,7 +2634,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -2652,7 +2652,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2681,7 +2681,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Този документ е достъпен на английски език. Правно обвързваща е версията на английски език."
     },
     "contents": "Contents",
@@ -2723,7 +2723,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -2741,7 +2741,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2770,7 +2770,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Овај документ је доступан на енглеском језику. Правно обавезујућа је верзија на енглеском језику."
     },
     "contents": "Contents",
@@ -2812,7 +2812,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -2830,7 +2830,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2859,7 +2859,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tento dokument je k dispozícii v angličtine. Právne záväzná je anglická verzia."
     },
     "contents": "Contents",
@@ -2901,7 +2901,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -2919,7 +2919,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2948,7 +2948,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ta dokument je na voljo v angleščini. Pravno zavezujoča je angleška različica."
     },
     "contents": "Contents",
@@ -2990,7 +2990,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -3008,7 +3008,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3037,7 +3037,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggris. Versi bahasa Inggris adalah versi yang mengikat secara hukum."
     },
     "contents": "Contents",
@@ -3079,7 +3079,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -3097,7 +3097,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3126,7 +3126,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "เอกสารนี้มีให้บริการเป็นภาษาอังกฤษ ฉบับภาษาอังกฤษเป็นฉบับที่มีผลผูกพันทางกฎหมาย"
     },
     "contents": "Contents",
@@ -3168,7 +3168,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -3186,7 +3186,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3215,7 +3215,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tài liệu này được cung cấp bằng tiếng Anh. Bản tiếng Anh là bản có giá trị ràng buộc về mặt pháp lý."
     },
     "contents": "Contents",
@@ -3257,7 +3257,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -3275,7 +3275,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3304,7 +3304,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggeris. Versi bahasa Inggeris ialah versi yang mengikat dari segi undang-undang."
     },
     "contents": "Contents",
@@ -3346,7 +3346,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -3364,7 +3364,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3393,7 +3393,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH LTD",
+      "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ang dokumentong ito ay makukuha sa Ingles. Ang bersyong Ingles ang may bisang legal."
     },
     "contents": "Contents",
@@ -3435,7 +3435,7 @@
       },
       "third-party": {
         "title": "4. Third-party services",
-        "b0": "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+        "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
         "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
         "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
@@ -3453,7 +3453,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"

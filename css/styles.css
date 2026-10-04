@@ -801,6 +801,16 @@ ul {
   height: 1.25rem;
 }
 
+/* The pause control sits beside the mute control. */
+.hero__media-control--pause {
+  margin-right: 3.6rem;
+}
+
+.hero__media-control[data-paused="true"] .hero__media-control-icon--pause,
+.hero__media-control[data-paused="false"] .hero__media-control-icon--play {
+  display: none;
+}
+
 .hero__media-control[data-muted="true"] .hero__media-control-icon--unmuted,
 .hero__media-control[data-muted="false"] .hero__media-control-icon--muted {
   display: none;
