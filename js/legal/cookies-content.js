@@ -13,7 +13,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": ""
     },
     "contents": "Contents",
@@ -72,7 +72,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -101,7 +101,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Este documento está disponible en inglés. La versión en inglés es la versión jurídicamente vinculante."
     },
     "contents": "Contents",
@@ -161,7 +161,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -190,7 +190,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Ce document est disponible en anglais. La version anglaise est la version juridiquement contraignante."
     },
     "contents": "Contents",
@@ -250,7 +250,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -279,7 +279,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Dieses Dokument ist auf Englisch verfügbar. Die englische Fassung ist die rechtsverbindliche Fassung."
     },
     "contents": "Contents",
@@ -339,7 +339,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -368,7 +368,7 @@
       "title": "מדיניות עוגיות",
       "subtitle": "מדיניות עוגיות זו מסבירה באילו עוגיות וטכנולוגיות דומות נעשה שימוש באתר wifigate.io ובפורטל האינטרנט של WIFIGATE, לשם מה, וכיצד תוכלו לשלוט בהן.",
       "updated": "תאריך תחילה: 4 באוקטובר 2026",
-      "owner": "המפעילה: EATS SYSTEMS TECH",
+      "owner": "המפעילה: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": ""
     },
     "contents": "תוכן העניינים",
@@ -427,7 +427,7 @@
       },
       "contact": {
         "title": "8. יצירת קשר",
-        "b0": "EATS SYSTEMS TECH. דוא\"ל: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions. דוא\"ל: support@wifigate.io",
         "b1": "מדיניות זו מתפרסמת באנגלית ובעברית, ובדפים בשפות אחרות היא עשויה להופיע באנגלית. במקרה של סתירה בין הנוסחים, הנוסח האנגלי גובר.",
         "b2": "למדיניות הפרטיות",
         "b3": "לתנאי השימוש"
@@ -456,7 +456,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Dit document is beschikbaar in het Engels. De Engelse versie is de juridisch bindende versie."
     },
     "contents": "Contents",
@@ -516,7 +516,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -545,7 +545,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Questo documento è disponibile in inglese. La versione inglese è quella giuridicamente vincolante."
     },
     "contents": "Contents",
@@ -605,7 +605,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -634,7 +634,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Este documento está disponível em inglês. A versão em inglês é a versão juridicamente vinculativa."
     },
     "contents": "Contents",
@@ -694,7 +694,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -723,7 +723,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Ten dokument jest dostępny w języku angielskim. Wersja angielska jest wersją prawnie wiążącą."
     },
     "contents": "Contents",
@@ -783,7 +783,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -812,7 +812,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Dette dokumentet er tilgjengelig på engelsk. Den engelske versjonen er den juridisk bindende versjonen."
     },
     "contents": "Contents",
@@ -872,7 +872,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -901,7 +901,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Tento dokument je k dispozici v angličtině. Právně závazná je anglická verze."
     },
     "contents": "Contents",
@@ -961,7 +961,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -990,7 +990,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Этот документ доступен на английском языке. Юридически обязывающей является английская версия."
     },
     "contents": "Contents",
@@ -1050,7 +1050,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1079,7 +1079,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Цей документ доступний англійською мовою. Юридично обов'язковою є англійська версія."
     },
     "contents": "Contents",
@@ -1139,7 +1139,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1168,7 +1168,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Bu belge İngilizce olarak sunulmaktadır. Hukuken bağlayıcı olan İngilizce sürümdür."
     },
     "contents": "Contents",
@@ -1228,7 +1228,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1257,7 +1257,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "هذا المستند متاح باللغة الإنجليزية. النسخة الإنجليزية هي النسخة الملزمة قانونيًا."
     },
     "contents": "Contents",
@@ -1317,7 +1317,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1346,7 +1346,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "यह दस्तावेज़ अंग्रेज़ी में उपलब्ध है। कानूनी रूप से बाध्यकारी संस्करण अंग्रेज़ी संस्करण है।"
     },
     "contents": "Contents",
@@ -1406,7 +1406,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1435,7 +1435,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "এই নথিটি ইংরেজিতে উপলব্ধ। ইংরেজি সংস্করণটিই আইনগতভাবে বাধ্যতামূলক সংস্করণ।"
     },
     "contents": "Contents",
@@ -1495,7 +1495,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1524,7 +1524,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "हा दस्तऐवज इंग्रजीमध्ये उपलब्ध आहे. इंग्रजी आवृत्ती ही कायदेशीररित्या बंधनकारक आवृत्ती आहे."
     },
     "contents": "Contents",
@@ -1584,7 +1584,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1613,7 +1613,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "ఈ పత్రం ఆంగ్లంలో అందుబాటులో ఉంది. చట్టపరంగా కట్టుబడి ఉండే సంస్కరణ ఆంగ్ల సంస్కరణ."
     },
     "contents": "Contents",
@@ -1673,7 +1673,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1702,7 +1702,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "本文件以英文提供。英文版本为具有法律约束力的版本。"
     },
     "contents": "Contents",
@@ -1762,7 +1762,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1791,7 +1791,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "本文件以英文提供。英文版本為具有法律約束力的版本。"
     },
     "contents": "Contents",
@@ -1851,7 +1851,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1880,7 +1880,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "この文書は英語で提供されています。法的拘束力を持つのは英語版です。"
     },
     "contents": "Contents",
@@ -1940,7 +1940,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1969,7 +1969,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "이 문서는 영어로 제공됩니다. 법적 구속력이 있는 버전은 영어 버전입니다."
     },
     "contents": "Contents",
@@ -2029,7 +2029,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2058,7 +2058,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Dette dokument er tilgængeligt på engelsk. Den engelske version er den juridisk bindende version."
     },
     "contents": "Contents",
@@ -2118,7 +2118,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2147,7 +2147,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Detta dokument finns på engelska. Den engelska versionen är den juridiskt bindande versionen."
     },
     "contents": "Contents",
@@ -2207,7 +2207,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2236,7 +2236,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Ez a dokumentum angol nyelven érhető el. A jogilag kötelező változat az angol változat."
     },
     "contents": "Contents",
@@ -2296,7 +2296,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2325,7 +2325,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Το παρόν έγγραφο διατίθεται στα αγγλικά. Η αγγλική έκδοση είναι η νομικά δεσμευτική έκδοση."
     },
     "contents": "Contents",
@@ -2385,7 +2385,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2414,7 +2414,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Acest document este disponibil în limba engleză. Versiunea în limba engleză este versiunea obligatorie din punct de vedere juridic."
     },
     "contents": "Contents",
@@ -2474,7 +2474,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2503,7 +2503,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Ovaj je dokument dostupan na engleskom jeziku. Pravno obvezujuća je verzija na engleskom jeziku."
     },
     "contents": "Contents",
@@ -2563,7 +2563,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2592,7 +2592,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Tämä asiakirja on saatavilla englanniksi. Oikeudellisesti sitova on englanninkielinen versio."
     },
     "contents": "Contents",
@@ -2652,7 +2652,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2681,7 +2681,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Този документ е достъпен на английски език. Правно обвързваща е версията на английски език."
     },
     "contents": "Contents",
@@ -2741,7 +2741,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2770,7 +2770,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Овај документ је доступан на енглеском језику. Правно обавезујућа је верзија на енглеском језику."
     },
     "contents": "Contents",
@@ -2830,7 +2830,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2859,7 +2859,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Tento dokument je k dispozícii v angličtine. Právne záväzná je anglická verzia."
     },
     "contents": "Contents",
@@ -2919,7 +2919,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2948,7 +2948,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Ta dokument je na voljo v angleščini. Pravno zavezujoča je angleška različica."
     },
     "contents": "Contents",
@@ -3008,7 +3008,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3037,7 +3037,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggris. Versi bahasa Inggris adalah versi yang mengikat secara hukum."
     },
     "contents": "Contents",
@@ -3097,7 +3097,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3126,7 +3126,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "เอกสารนี้มีให้บริการเป็นภาษาอังกฤษ ฉบับภาษาอังกฤษเป็นฉบับที่มีผลผูกพันทางกฎหมาย"
     },
     "contents": "Contents",
@@ -3186,7 +3186,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3215,7 +3215,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Tài liệu này được cung cấp bằng tiếng Anh. Bản tiếng Anh là bản có giá trị ràng buộc về mặt pháp lý."
     },
     "contents": "Contents",
@@ -3275,7 +3275,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3304,7 +3304,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggeris. Versi bahasa Inggeris ialah versi yang mengikat dari segi undang-undang."
     },
     "contents": "Contents",
@@ -3364,7 +3364,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3393,7 +3393,7 @@
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Ang dokumentong ito ay makukuha sa Ingles. Ang bersyong Ingles ang may bisang legal."
     },
     "contents": "Contents",
@@ -3453,7 +3453,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
