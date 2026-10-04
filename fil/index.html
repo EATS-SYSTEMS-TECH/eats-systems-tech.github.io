@@ -115,20 +115,18 @@
   <link rel="icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/styles.css?v=20260908d">
+  <link rel="stylesheet" href="../css/fonts.css?v=20261004a">
+  <link rel="stylesheet" href="../css/styles.css?v=20261004a">
   <link rel="stylesheet" href="../css/accessibility.css?v=20260604c">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20260708a">
   <link rel="stylesheet" href="../css/home-en.css?v=20260910h">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
 
   <script src="../js/navigation.js?v=20260911a" defer=""></script>
-  <script src="../js/hero.js?v=20260410b" defer=""></script>
+  <script src="../js/hero.js?v=20261004a" defer=""></script>
 
-  <script src="../js/accessibility.js?v=20260902a" defer=""></script>
+  <script src="../js/accessibility.js?v=20261004a" defer=""></script>
 
 
 
@@ -555,6 +553,15 @@
           <source src="../assets/vid/wifigate-final-hero-720p.mp4" type="video/mp4">
         </video>
         <div class="hero__overlay"></div>
+        <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="Pause video" title="Pause video" aria-pressed="false" data-paused="false">
+          <svg class="hero__media-control-icon hero__media-control-icon--pause" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
+            <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
+          </svg>
+          <svg class="hero__media-control-icon hero__media-control-icon--play" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" fill="currentColor"></path>
+          </svg>
+        </button>
         <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="Unmute video" title="Unmute video" aria-pressed="false" data-muted="true">
           <svg class="hero__media-control-icon hero__media-control-icon--muted" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M14 4.12v15.76a1 1 0 0 1-1.68.73l-4.04-3.61H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.28l4.04-3.61A1 1 0 0 1 14 4.12Z" fill="currentColor"></path>
@@ -1030,6 +1037,7 @@ detalye ng intercom, at access na may takdang oras gamit ang WIFIGATE.</p>
           <a href="/fil/terms-and-conditions/" class="site-footer__link" data-i18n="footer.terms" dir="ltr">Mga Tuntunin at Kondisyon</a>
           <a href="/fil/privacy-policy/" class="site-footer__link" data-i18n="footer.privacy" dir="ltr">Patakaran sa Privacy</a>
           <a href="/fil/cookies/" class="site-footer__link" data-i18n="footer.cookies" dir="ltr">Mga Cookie</a>
+          <a href="/fil/accessibility/" class="site-footer__link" dir="ltr">Pahayag sa accessibility</a>
         </div>
       </nav>
       <div class="site-footer__column">

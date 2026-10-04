@@ -5,19 +5,19 @@ export const terms = {
   en: {
     metaTitle: "Terms & Conditions | WIFIGATE",
     metaDescription:
-      "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law.",
+      "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law.",
     eyebrow: "Legal",
     title: "Terms & Conditions",
     subtitle:
       "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
     updated: "Effective date: October 4, 2026",
-    owner: "Provider: EATS SYSTEMS TECH LTD",
+    owner: "Provider: EATS SYSTEMS TECH",
     sections: [
       {
         id: "agreement",
         title: "1. Agreement",
         blocks: [
-          "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+          "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
           "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
           "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use.",
         ],
@@ -199,7 +199,7 @@ export const terms = {
         id: "contact",
         title: "21. Contact",
         blocks: [
-          "EATS SYSTEMS TECH LTD, Israel.",
+          "EATS SYSTEMS TECH",
           "Email: support@wifigate.io",
           { link: { href: "../privacy-policy/", text: "Read our Privacy Policy" } },
           { link: { href: "../cookies/", text: "Read our Cookie Policy" } },
@@ -211,19 +211,19 @@ export const terms = {
   he: {
     metaTitle: "תנאי שימוש | WIFIGATE",
     metaDescription:
-      "התנאים החלים על אפליקציית WIFIGATE, בקרי השער, האתר ופורטל האינטרנט, הניתנים על ידי EATS SYSTEMS TECH LTD: חשבונות, מנהלים, הזמנות, התקנה ובטיחות, אחריות ודין חל.",
+      "התנאים החלים על אפליקציית WIFIGATE, בקרי השער, האתר ופורטל האינטרנט, הניתנים על ידי EATS SYSTEMS TECH: חשבונות, מנהלים, הזמנות, התקנה ובטיחות, אחריות ודין חל.",
     eyebrow: "משפטי",
     title: "תנאי שימוש",
     subtitle:
       "תנאי שימוש אלה חלים על השימוש שלכם באפליקציית WIFIGATE, בבקרי השער, באתר ובפורטל האינטרנט. אנא קראו אותם בעיון.",
     updated: "תאריך תחילה: 4 באוקטובר 2026",
-    owner: "נותנת השירות: EATS SYSTEMS TECH LTD",
+    owner: "נותנת השירות: EATS SYSTEMS TECH",
     sections: [
       {
         id: "agreement",
         title: "1. ההסכם",
         blocks: [
-          "תנאי שימוש אלה (\"התנאים\") הם הסכם ביניכם לבין EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"אנחנו\") לגבי אפליקציית WIFIGATE, בקר השער של WIFIGATE והקושחה שלו, האתר wifigate.io ופורטל האינטרנט של WIFIGATE (יחד: \"השירות\").",
+          "תנאי שימוש אלה (\"התנאים\") הם הסכם ביניכם לבין EATS SYSTEMS TECH (\"WIFIGATE\", \"אנחנו\") לגבי אפליקציית WIFIGATE, בקר השער של WIFIGATE והקושחה שלו, האתר wifigate.io ופורטל האינטרנט של WIFIGATE (יחד: \"השירות\").",
           "ביצירת חשבון, בהתקנת האפליקציה או בשימוש בה, או בהתקנת בקר או בהפעלתו, אתם מקבלים את התנאים ואת מדיניות הפרטיות שלנו. אם אתם משתמשים בשירות מטעם ארגון, אתם מאשרים שאתם מוסמכים לקבל את התנאים בשמו. אם אינכם מקבלים את התנאים, אל תשתמשו בשירות.",
           "פתיחת חשבון או ניהול בקר מותרים רק למי שמלאו לו 18 שנים, או גיל הכשרות המשפטית במקום מגוריו. קטין רשאי להשתמש בשירות רק כשהוא רשום על ידי מנהל האחראי לשימוש זה.",
         ],
@@ -405,7 +405,7 @@ export const terms = {
         id: "contact",
         title: "21. יצירת קשר",
         blocks: [
-          "EATS SYSTEMS TECH LTD, ישראל.",
+          "EATS SYSTEMS TECH",
           "דוא\"ל: support@wifigate.io",
           { link: { href: "../privacy-policy/", text: "למדיניות הפרטיות" } },
           { link: { href: "../cookies/", text: "למדיניות העוגיות" } },

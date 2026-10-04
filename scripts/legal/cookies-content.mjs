@@ -11,7 +11,7 @@ export const cookies = {
     subtitle:
       "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
     updated: "Effective date: October 4, 2026",
-    owner: "Operator: EATS SYSTEMS TECH LTD",
+    owner: "Operator: EATS SYSTEMS TECH",
     sections: [
       {
         id: "summary",
@@ -49,7 +49,7 @@ export const cookies = {
         id: "third-party",
         title: "4. Third-party services",
         blocks: [
-          "Google Fonts. Pages load fonts from Google's servers, so your browser sends Google your IP address and browser details. We do not use Google Fonts to set cookies.",
+          "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
           "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
           "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies.",
         ],
@@ -79,7 +79,7 @@ export const cookies = {
         id: "contact",
         title: "8. Contact",
         blocks: [
-          "EATS SYSTEMS TECH LTD, Israel. Email: support@wifigate.io",
+          "EATS SYSTEMS TECH. Email: support@wifigate.io",
           "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
           { link: { href: "../privacy-policy/", text: "Read our Privacy Policy" } },
           { link: { href: "../terms-and-conditions/", text: "Read our Terms & Conditions" } },
@@ -97,7 +97,7 @@ export const cookies = {
     subtitle:
       "מדיניות עוגיות זו מסבירה באילו עוגיות וטכנולוגיות דומות נעשה שימוש באתר wifigate.io ובפורטל האינטרנט של WIFIGATE, לשם מה, וכיצד תוכלו לשלוט בהן.",
     updated: "תאריך תחילה: 4 באוקטובר 2026",
-    owner: "המפעילה: EATS SYSTEMS TECH LTD",
+    owner: "המפעילה: EATS SYSTEMS TECH",
     sections: [
       {
         id: "summary",
@@ -135,7 +135,7 @@ export const cookies = {
         id: "third-party",
         title: "4. שירותי צד שלישי",
         blocks: [
-          "Google Fonts. הדפים טוענים גופנים מהשרתים של Google, ולכן הדפדפן שולח ל‑Google את כתובת ה‑IP ופרטי הדפדפן שלכם. איננו משתמשים ב‑Google Fonts לשמירת עוגיות.",
+          "גופנים. האתר מגיש את הגופנים שלו מ‑wifigate.io עצמו, כך שאין פנייה לשירות גופנים של צד שלישי.",
           "כניסה באמצעות Google ו‑Apple. כשאתם נכנסים לפורטל, חלון הכניסה של Google או של Apple עשוי לשמור עוגיות משלו בדומיין שלו, בכפוף למדיניות הפרטיות של Google או של Apple.",
           "קישורים לשירותים אחרים. קישורים ל‑WhatsApp, לרשתות חברתיות, לחנויות אפליקציות ולשירותי ניווט מובילים לאתרים שלהם מדיניות עוגיות משלהם.",
         ],
@@ -165,7 +165,7 @@ export const cookies = {
         id: "contact",
         title: "8. יצירת קשר",
         blocks: [
-          "EATS SYSTEMS TECH LTD, ישראל. דוא\"ל: support@wifigate.io",
+          "EATS SYSTEMS TECH. דוא\"ל: support@wifigate.io",
           "מדיניות זו מתפרסמת באנגלית ובעברית, ובדפים בשפות אחרות היא עשויה להופיע באנגלית. במקרה של סתירה בין הנוסחים, הנוסח האנגלי גובר.",
           { link: { href: "../privacy-policy/", text: "למדיניות הפרטיות" } },
           { link: { href: "../terms-and-conditions/", text: "לתנאי השימוש" } },

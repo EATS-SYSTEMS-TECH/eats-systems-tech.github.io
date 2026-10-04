@@ -4,6 +4,15 @@
 let heroRotatorIntervalId = null;
 let heroPageDataCache = null;
 
+// WCAG 2.2.2: labels of the control that pauses the looping hero video.
+const HERO_PAUSE_LABELS = {"en":["Pause video","Play video"],"he":["השהיית הסרטון","הפעלת הסרטון"],"es":["Pausar vídeo","Reproducir vídeo"],"fr":["Mettre la vidéo en pause","Lire la vidéo"],"de":["Video anhalten","Video abspielen"],"nl":["Video pauzeren","Video afspelen"],"it":["Metti in pausa il video","Riproduci il video"],"pt":["Pausar vídeo","Reproduzir vídeo"],"pl":["Wstrzymaj wideo","Odtwórz wideo"],"no":["Sett videoen på pause","Spill av videoen"],"cs":["Pozastavit video","Přehrát video"],"ru":["Приостановить видео","Воспроизвести видео"],"uk":["Призупинити відео","Відтворити відео"],"tr":["Videoyu duraklat","Videoyu oynat"],"ar":["إيقاف الفيديو مؤقتًا","تشغيل الفيديو"],"hi":["वीडियो रोकें","वीडियो चलाएँ"],"bn":["ভিডিও থামান","ভিডিও চালান"],"mr":["व्हिडिओ थांबवा","व्हिडिओ चालू करा"],"te":["వీడియోను పాజ్ చేయండి","వీడియోను ప్లే చేయండి"],"zh-hans":["暂停视频","播放视频"],"zh-hant":["暫停影片","播放影片"],"ja":["動画を一時停止","動画を再生"],"ko":["동영상 일시정지","동영상 재생"],"da":["Sæt videoen på pause","Afspil videoen"],"sv":["Pausa videon","Spela upp videon"],"hu":["Videó szüneteltetése","Videó lejátszása"],"el":["Παύση βίντεο","Αναπαραγωγή βίντεο"],"ro":["Întrerupe videoclipul","Redă videoclipul"],"hr":["Pauziraj videozapis","Reproduciraj videozapis"],"fi":["Keskeytä video","Toista video"],"bg":["Пауза на видеото","Пусни видеото"],"sr":["Паузирај видео","Пусти видео"],"sk":["Pozastaviť video","Prehrať video"],"sl":["Začasno ustavi video","Predvajaj video"],"id":["Jeda video","Putar video"],"th":["หยุดวิดีโอชั่วคราว","เล่นวิดีโอ"],"vi":["Tạm dừng video","Phát video"],"ms":["Jeda video","Main video"],"fil":["I-pause ang video","I-play ang video"]};
+
+function getHeroPauseLabels() {
+  const lang = (document.documentElement.getAttribute("lang") || "en").toLowerCase();
+  const [pause, play] = HERO_PAUSE_LABELS[lang] || HERO_PAUSE_LABELS[lang.split("-")[0]] || HERO_PAUSE_LABELS.en;
+  return { pause, play };
+}
+
 const HERO_MEDIA_FALLBACK_COPY = {
   replay: "Play Video Again",
   mute: "Mute video",
@@ -52,6 +61,7 @@ function getHeroMediaCopy() {
     ...HERO_MEDIA_FALLBACK_COPY,
     ...(pageData.media || {}),
     ...(bundle?.hero?.media || {}),
+    ...getHeroPauseLabels(),
   };
 }
 
@@ -62,7 +72,10 @@ function setupHeroMedia() {
   const muteButton = document.getElementById("hero-mute-toggle");
   const replayButton = document.getElementById("hero-replay");
   const replayLabel = replayButton?.querySelector("span");
+  const pauseButton = document.getElementById("hero-pause-toggle");
   let heroIsInView = true;
+  // Set when the visitor pauses: nothing restarts the video until they press play.
+  let pausedByVisitor = false;
 
   if (!hero || !video || !muteButton || !replayButton || !replayLabel) return;
 
@@ -126,6 +139,15 @@ function setupHeroMedia() {
     muteButton.setAttribute("title", muteLabel);
     muteButton.setAttribute("aria-pressed", String(!video.muted));
 
+    if (pauseButton) {
+      const paused = video.paused;
+      const pauseLabel = paused ? copy.play : copy.pause;
+      pauseButton.dataset.paused = String(paused);
+      pauseButton.setAttribute("aria-label", pauseLabel);
+      pauseButton.setAttribute("title", pauseLabel);
+      pauseButton.setAttribute("aria-pressed", String(paused));
+    }
+
     replayLabel.textContent = copy.replay;
     replayButton.setAttribute("aria-label", copy.replay);
     replayButton.setAttribute("title", copy.replay);
@@ -134,6 +156,7 @@ function setupHeroMedia() {
   function setHeroMediaState(state) {
     hero.dataset.heroMediaState = state;
     muteButton.hidden = state !== "video";
+    if (pauseButton) pauseButton.hidden = state !== "video";
     replayButton.hidden = state !== "image";
     syncHeroFloatingWidgetState();
   }
@@ -181,8 +204,25 @@ function setupHeroMedia() {
   });
 
   replayButton.addEventListener("click", () => {
+    pausedByVisitor = false;
+    document.dispatchEvent(new CustomEvent("hero-motion-resume"));
     playHeroVideo({ restart: true, userInitiated: true });
   });
+
+  if (pauseButton) {
+    pauseButton.addEventListener("click", () => {
+      if (video.paused) {
+        pausedByVisitor = false;
+        document.dispatchEvent(new CustomEvent("hero-motion-resume"));
+        playHeroVideo({ userInitiated: true });
+      } else {
+        pausedByVisitor = true;
+        video.pause();
+        document.dispatchEvent(new CustomEvent("hero-motion-pause"));
+      }
+      updateHeroMediaCopy();
+    });
+  }
 
   video.addEventListener("ended", showHeroImageState);
   video.addEventListener("play", () => {
@@ -190,7 +230,10 @@ function setupHeroMedia() {
     setHeroMediaState("video");
     updateHeroMediaCopy();
   });
-  video.addEventListener("pause", pauseBackdropVideo);
+  video.addEventListener("pause", () => {
+    pauseBackdropVideo();
+    updateHeroMediaCopy();
+  });
   video.addEventListener("seeked", () => syncBackdropTime(true));
   video.addEventListener("timeupdate", () => syncBackdropTime(false));
   video.addEventListener("volumechange", updateHeroMediaCopy);
@@ -203,7 +246,7 @@ function setupHeroMedia() {
       return;
     }
 
-    if (hero.dataset.heroMediaState === "video") {
+    if (hero.dataset.heroMediaState === "video" && !pausedByVisitor) {
       playHeroVideo();
       return;
     }
@@ -235,6 +278,7 @@ function setupHeroRotator() {
 
   let idx = 0;
   const interval = 3000;
+  let rotatorPaused = false;
   const fadeClass = "is-fading";
 
   function clearRotatorInterval() {
@@ -244,8 +288,18 @@ function setupHeroRotator() {
     heroRotatorIntervalId = null;
   }
 
+  document.addEventListener("hero-motion-pause", () => {
+    rotatorPaused = true;
+    clearRotatorInterval();
+  });
+  document.addEventListener("hero-motion-resume", () => {
+    rotatorPaused = false;
+    startRotatorInterval();
+  });
+
   function startRotatorInterval() {
     clearRotatorInterval();
+    if (rotatorPaused) return;
 
     if (typeof isReducedMotionRequested === "function" && isReducedMotionRequested()) {
       el.classList.remove(fadeClass);
