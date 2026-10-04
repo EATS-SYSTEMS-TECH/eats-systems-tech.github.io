@@ -268,7 +268,7 @@ export const terms = {
         id: "contact",
         title: "27. Contact",
         blocks: [
-          "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+          "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
           "Email: support@wifigate.io",
           { link: { href: "../privacy-policy/", text: "Read our Privacy Policy" } },
           { link: { href: "../cookies/", text: "Read our Cookie Policy" } },
@@ -544,7 +544,7 @@ export const terms = {
         id: "contact",
         title: "27. יצירת קשר",
         blocks: [
-          "EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions",
+          "EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
           "דוא\"ל: support@wifigate.io",
           { link: { href: "../privacy-policy/", text: "למדיניות הפרטיות" } },
           { link: { href: "../cookies/", text: "למדיניות העוגיות" } },

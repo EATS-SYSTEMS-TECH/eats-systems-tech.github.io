@@ -72,7 +72,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -161,7 +161,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -250,7 +250,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -339,7 +339,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -427,7 +427,7 @@
       },
       "contact": {
         "title": "8. יצירת קשר",
-        "b0": "EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions. דוא\"ל: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). דוא\"ל: support@wifigate.io",
         "b1": "מדיניות זו מתפרסמת באנגלית ובעברית, ובדפים בשפות אחרות היא עשויה להופיע באנגלית. במקרה של סתירה בין הנוסחים, הנוסח האנגלי גובר.",
         "b2": "למדיניות הפרטיות",
         "b3": "לתנאי השימוש"
@@ -516,7 +516,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -605,7 +605,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -694,7 +694,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -783,7 +783,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -872,7 +872,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -961,7 +961,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1050,7 +1050,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1139,7 +1139,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1228,7 +1228,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1317,7 +1317,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1406,7 +1406,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1495,7 +1495,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1584,7 +1584,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1673,7 +1673,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1762,7 +1762,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1851,7 +1851,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -1940,7 +1940,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2029,7 +2029,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2118,7 +2118,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2207,7 +2207,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2296,7 +2296,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2385,7 +2385,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2474,7 +2474,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2563,7 +2563,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2652,7 +2652,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2741,7 +2741,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2830,7 +2830,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -2919,7 +2919,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3008,7 +3008,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3097,7 +3097,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3186,7 +3186,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3275,7 +3275,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3364,7 +3364,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
@@ -3453,7 +3453,7 @@
       },
       "contact": {
         "title": "8. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977). Email: support@wifigate.io",
         "b1": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Terms & Conditions"
