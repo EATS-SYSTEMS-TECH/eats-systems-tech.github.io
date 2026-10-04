@@ -44,6 +44,6 @@ export const accessibilityLinkLabels = {
 // The footer line naming the operator and its registered (D-U-N-S) name.
 // The registered name stays in English in every locale.
 export const operatorLines = {
-  en: "WIFIGATE is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions.",
-  he: "WIFIGATE מופעלת על ידי EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions.",
+  en: "WIFIGATE is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977).",
+  he: "WIFIGATE מופעלת על ידי EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977).",
 };
