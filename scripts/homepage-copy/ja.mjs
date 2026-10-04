@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "言語を選択",
     platform: "プラットフォーム",
     solutions: "ソリューション",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "製品ガイド",
     contact: "お問い合わせ",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "サブスクリプション料金なし",
-        text: "標準 WIFIGATE は、機器代と設置費を一度支払うだけです。月額料金はかからず、契約更新も不要で、継続的なプラットフォーム利用料もありません。唯一の例外は商用 WIFIGATE Automation で、サブスクリプション制です。",
+        text: "標準 WIFIGATE は、機器代と設置費を一度支払うだけです。月額料金はかからず、契約更新も不要で、継続的なプラットフォーム利用料もありません。唯一の例外は商用 WIFIGATE Host で、サブスクリプション制です。",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["ホテル", "Airbnb", "ゲスト向けアパートメント", "宿泊施設"],
     promise: "ゲストを迎える。アクセス管理は自動で。",
     subtitle: "ホテルからバケーションレンタルまで、予約ごとに対象のゲート、ドア、ガレージへ安全なアクセス権を自動で付与します。ゲストはスマートフォンで入場でき、権限はチェックイン時に有効になり、チェックアウト時に自動で失効します。",
-    cta: "WIFIGATE Automation を詳しく見る",
+    cta: "WIFIGATE Host を詳しく見る",
     imageAlt: "スマートフォンで宿泊施設に入るゲスト",
     stayCaption: "滞在ごとのアクセスを自動管理",
     staySteps: ["予約を受け付け", "チェックイン時に有効", "チェックアウト時に失効"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "WIFIGATE には月額サブスクリプションが必要ですか？",
-        answer: "いいえ。標準 WIFIGATE は、機器代と設置費を一度支払うだけです。月額料金はかからず、契約更新も不要で、継続的なプラットフォーム利用料もありません。唯一の例外は商用 WIFIGATE Automation で、サブスクリプション制です。",
+        answer: "いいえ。標準 WIFIGATE は、機器代と設置費を一度支払うだけです。月額料金はかからず、契約更新も不要で、継続的なプラットフォーム利用料もありません。唯一の例外は商用 WIFIGATE Host で、サブスクリプション制です。",
       },
       {
         question: "WIFIGATE で一時的なゲストアクセスを発行できますか？",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "入退室管理システム",
     monthlySubscription: "月額サブスクリプション",
-    subscriptionValue: "標準 WIFIGATE では不要。唯一の例外である商用 WIFIGATE Automation はサブスクリプション制",
+    subscriptionValue: "標準 WIFIGATE では不要。唯一の例外である商用 WIFIGATE Host はサブスクリプション制",
     simCard: "SIM カード",
     externalRouter: "外部 Wi-Fi ルーター",
     notRequired: "不要",

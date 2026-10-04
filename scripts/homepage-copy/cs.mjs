@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Vybrat jazyk",
     platform: "Platforma",
     solutions: "Řešení",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Průvodce produktem",
     contact: "Kontaktujte nás",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Bez poplatků za předplatné",
-        text: "Zaplaťte jednou za zařízení a instalaci, bez měsíčního předplatného, cyklu obnovení nebo průběžných poplatků za platformu. Jedinou výjimkou je komerční využití WIFIGATE Automation, které je založeno na předplatném.",
+        text: "Zaplaťte jednou za zařízení a instalaci, bez měsíčního předplatného, cyklu obnovení nebo průběžných poplatků za platformu. Jedinou výjimkou je komerční využití WIFIGATE Host, které je založeno na předplatném.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hotely", "Ubytování Airbnb", "Apartmány pro hosty", "Ubytovací zařízení"],
     promise: "Přivítejte své hosty. Automatizujte jejich přístup.",
     subtitle: "Od hotelových pobytů až po prázdninové apartmány propojte každou rezervaci s bezpečným přístupem ke správné bráně, dveřím nebo garáži. Hosté vstupují pomocí telefonu a jejich přístup začíná při příjezdu a automaticky končí při odjezdu.",
-    cta: "Prozkoumejte WIFIGATE Automation",
+    cta: "Prozkoumejte WIFIGATE Host",
     imageAlt: "Hosté používající telefon pro vstup do svého ubytování",
     stayCaption: "Každý pobyt je zajištěn",
     staySteps: ["Rezervace přijata", "Přístup při příjezdu", "Skončí při odjezdu"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "Vyžaduje WIFIGATE měsíční předplatné?",
-        answer: "Ne. Zaplaťte jednou za zařízení WIFIGATE a instalaci bez měsíčního předplatného, obnovy nebo poplatků za platformu. WIFIGATE Automation pro komerční použití je jedinou výjimkou a je dostupná na bázi předplatného.",
+        answer: "Ne. Zaplaťte jednou za zařízení WIFIGATE a instalaci bez měsíčního předplatného, obnovy nebo poplatků za platformu. WIFIGATE Host pro komerční použití je jedinou výjimkou a je dostupná na bázi předplatného.",
       },
       {
         question: "Může WIFIGATE poskytnout dočasný přístup pro hosty?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Systém kontroly přístupu",
     monthlySubscription: "Měsíční předplatné",
-    subscriptionValue: "U standardního WIFIGATE není vyžadováno; komerční využití WIFIGATE Automation je založeno na předplatném",
+    subscriptionValue: "U standardního WIFIGATE není vyžadováno; komerční využití WIFIGATE Host je založeno na předplatném",
     simCard: "SIM karta",
     externalRouter: "Externí WiFi router",
     notRequired: "Není vyžadováno",

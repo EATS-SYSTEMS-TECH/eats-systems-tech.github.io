@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "언어 선택",
     platform: "플랫폼",
     solutions: "솔루션",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "제품 가이드",
     contact: "문의하기",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "표준 WIFIGATE 구독료 없음",
-        text: "표준 WIFIGATE는 기기와 설치 비용만 한 번 결제하면 되며, 월 구독이나 정기 갱신이 필요 없고 지속적인 플랫폼 이용료도 없습니다. 유일한 예외는 상업용 WIFIGATE Automation이며, 구독제로 제공됩니다.",
+        text: "표준 WIFIGATE는 기기와 설치 비용만 한 번 결제하면 되며, 월 구독이나 정기 갱신이 필요 없고 지속적인 플랫폼 이용료도 없습니다. 유일한 예외는 상업용 WIFIGATE Host이며, 구독제로 제공됩니다.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["호텔", "Airbnb", "숙박용 아파트", "숙박 시설"],
     promise: "게스트를 맞이하세요. 출입 관리는 자동으로.",
     subtitle: "호텔부터 휴가용 임대 숙소까지, 각 예약을 해당 게이트·문·차고의 안전한 출입 권한과 자동으로 연결합니다. 게스트는 휴대폰으로 출입하며, 권한은 체크인 시 시작되고 체크아웃 시 자동으로 종료됩니다.",
-    cta: "WIFIGATE Automation 알아보기",
+    cta: "WIFIGATE Host 알아보기",
     imageAlt: "휴대폰으로 숙소에 출입하는 게스트",
     stayCaption: "숙박마다 출입을 자동 관리",
     staySteps: ["예약 접수", "체크인 시 활성화", "체크아웃 시 만료"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "WIFIGATE는 월 구독이 필요한가요?",
-        answer: "아니요. 표준 WIFIGATE는 기기와 설치 비용만 한 번 결제하면 되며, 월 구독이나 정기 갱신이 필요 없고 지속적인 플랫폼 이용료도 없습니다. 유일한 예외는 상업용 WIFIGATE Automation이며, 구독제로 제공됩니다.",
+        answer: "아니요. 표준 WIFIGATE는 기기와 설치 비용만 한 번 결제하면 되며, 월 구독이나 정기 갱신이 필요 없고 지속적인 플랫폼 이용료도 없습니다. 유일한 예외는 상업용 WIFIGATE Host이며, 구독제로 제공됩니다.",
       },
       {
         question: "WIFIGATE로 임시 게스트 출입 권한을 제공할 수 있나요?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "출입통제 시스템",
     monthlySubscription: "월 구독",
-    subscriptionValue: "표준 WIFIGATE는 구독이 필요하지 않으며, 상업용 WIFIGATE Automation만 구독제로 제공됩니다",
+    subscriptionValue: "표준 WIFIGATE는 구독이 필요하지 않으며, 상업용 WIFIGATE Host만 구독제로 제공됩니다",
     simCard: "SIM 카드",
     externalRouter: "외부 Wi-Fi 라우터",
     notRequired: "필요 없음",

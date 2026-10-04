@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Pilih bahasa",
     platform: "Platform",
     solutions: "Solusi",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Panduan Produk",
     contact: "Hubungi pasukan kami",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Tiada Bayaran Langganan",
-        text: "Bayar sekali untuk peranti dan pemasangan WIFIGATE, tanpa langganan bulanan, kitaran pembaharuan, atau bayaran platform berterusan. Satu-satunya pengecualian ialah WIFIGATE Automation untuk penggunaan komersial yang berasaskan langganan.",
+        text: "Bayar sekali untuk peranti dan pemasangan WIFIGATE, tanpa langganan bulanan, kitaran pembaharuan, atau bayaran platform berterusan. Satu-satunya pengecualian ialah WIFIGATE Host untuk penggunaan komersial yang berasaskan langganan.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hotel", "Airbnb", "Pangsapuri tetamu", "Premis hospitaliti"],
     promise: "Sambut tetamu anda. Automasikan akses mereka.",
     subtitle: "Daripada penginapan hotel hingga pangsapuri percutian, sambungkan setiap tempahan kepada akses selamat untuk pintu pagar, pintu, atau garaj yang betul. Tetamu masuk menggunakan telefon mereka, dengan akses yang bermula semasa check-in dan tamat secara automatik semasa check-out.",
-    cta: "Terokai WIFIGATE Automation",
+    cta: "Terokai WIFIGATE Host",
     imageAlt: "Tetamu menggunakan telefon untuk memasuki penginapan mereka",
     stayCaption: "Setiap penginapan diurus sepenuhnya",
     staySteps: ["Tempahan diterima", "Akses semasa check-in", "Luput semasa check-out"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "Adakah WIFIGATE memerlukan langganan bulanan?",
-        answer: "Tidak. Anda hanya bayar sekali untuk peranti dan pemasangan WIFIGATE, tanpa langganan bulanan, kitaran pembaharuan, atau bayaran platform berterusan. Satu-satunya pengecualian ialah WIFIGATE Automation untuk penggunaan komersial yang tersedia melalui langganan.",
+        answer: "Tidak. Anda hanya bayar sekali untuk peranti dan pemasangan WIFIGATE, tanpa langganan bulanan, kitaran pembaharuan, atau bayaran platform berterusan. Satu-satunya pengecualian ialah WIFIGATE Host untuk penggunaan komersial yang tersedia melalui langganan.",
       },
       {
         question: "Bolehkah WIFIGATE memberikan akses tetamu sementara?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Sistem kawalan akses",
     monthlySubscription: "Langganan bulanan",
-    subscriptionValue: "WIFIGATE standard tidak memerlukan langganan; WIFIGATE Automation komersial ditawarkan melalui langganan",
+    subscriptionValue: "WIFIGATE standard tidak memerlukan langganan; WIFIGATE Host komersial ditawarkan melalui langganan",
     simCard: "Kad SIM",
     externalRouter: "Penghala Wi-Fi luaran",
     notRequired: "Tidak diperlukan",

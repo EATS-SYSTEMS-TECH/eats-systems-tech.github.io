@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Valitse kieli",
     platform: "Alusta",
     solutions: "Ratkaisut",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Tuoteopas",
     contact: "Ota yhteyttä",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Ei tilausmaksuja",
-        text: "Maksa laitteesta ja asennuksesta kerran, ilman kuukausitilausta, uusintamaksuja tai jatkuvia alustamaksuja. Ainoa poikkeus on WIFIGATE Automationin kaupallinen käyttö, joka perustuu tilaukseen.",
+        text: "Maksa laitteesta ja asennuksesta kerran, ilman kuukausitilausta, uusintamaksuja tai jatkuvia alustamaksuja. Ainoa poikkeus on WIFIGATE Hostin kaupallinen käyttö, joka perustuu tilaukseen.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hotellit", "Airbnb", "Vierashuoneistot", "Majoituskohteet"],
     promise: "Toivota vieraat tervetulleiksi. Automatisoi heidän pääsynsä.",
     subtitle: "Hotelleista loma-asuntoihin: liitä jokaiseen varaukseen turvallinen kulkuoikeus oikean portin, oven tai autotallin kautta. Vieraat pääsevät sisään puhelimellaan. Kulkuoikeus alkaa sisäänkirjautumisesta ja päättyy automaattisesti uloskirjautumiseen.",
-    cta: "Tutustu WIFIGATE Automationiin",
+    cta: "Tutustu WIFIGATE Hostiin",
     imageAlt: "Vieraat käyttävät puhelinta päästäkseen majoituskohteeseen",
     stayCaption: "Kaikki valmiina jokaiseen vierailuun",
     staySteps: ["Varaus vastaanotettu", "Kulkuoikeus sisäänkirjautuessa", "Päättyy uloskirjautuessa"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "Vaatiiko WIFIGATE kuukausitilauksen?",
-        answer: "Ei. Maksat WIFIGATE-laitteesta ja asennuksesta kerran, ilman kuukausitilausta, uusintamaksuja tai jatkuvia alustamaksuja. WIFIGATE Automationin kaupallinen käyttö on ainoa poikkeus, ja se perustuu tilaukseen.",
+        answer: "Ei. Maksat WIFIGATE-laitteesta ja asennuksesta kerran, ilman kuukausitilausta, uusintamaksuja tai jatkuvia alustamaksuja. WIFIGATE Hostin kaupallinen käyttö on ainoa poikkeus, ja se perustuu tilaukseen.",
       },
       {
         question: "Voiko WIFIGATE tarjota väliaikaista vieraspääsyä?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Kulunhallintajärjestelmä",
     monthlySubscription: "Kuukausitilaus",
-    subscriptionValue: "Ei vaadita WIFIGATE-järjestelmän peruskäytössä; WIFIGATE Automation on kaupallisessa käytössä tilauspohjainen",
+    subscriptionValue: "Ei vaadita WIFIGATE-järjestelmän peruskäytössä; WIFIGATE Host on kaupallisessa käytössä tilauspohjainen",
     simCard: "SIM-kortti",
     externalRouter: "Ulkoinen WiFi-reititin",
     notRequired: "Ei vaadita",

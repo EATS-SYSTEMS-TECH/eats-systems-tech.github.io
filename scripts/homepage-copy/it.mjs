@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Seleziona la lingua",
     platform: "Piattaforma",
     solutions: "Soluzioni",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Guida del prodotto",
     contact: "Contattaci",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Nessun canone di abbonamento",
-        text: "Paghi una sola volta il dispositivo e l'installazione, senza abbonamento mensile, rinnovi o costi ricorrenti per la piattaforma. L'uso commerciale di WIFIGATE Automation è l'unica eccezione e richiede un abbonamento.",
+        text: "Paghi una sola volta il dispositivo e l'installazione, senza abbonamento mensile, rinnovi o costi ricorrenti per la piattaforma. L'uso commerciale di WIFIGATE Host è l'unica eccezione e richiede un abbonamento.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hotel", "Airbnb", "Appartamenti turistici", "Strutture ricettive"],
     promise: "Accogli i tuoi ospiti. Automatizza il loro accesso.",
     subtitle: "Dai soggiorni in hotel agli appartamenti per vacanze, associa ogni prenotazione all'accesso sicuro per l'ingresso giusto, che si tratti del cancello, della porta o del garage. Gli ospiti entrano con lo smartphone e il loro accesso inizia al check-in e termina automaticamente al check-out.",
-    cta: "Scopri WIFIGATE Automation",
+    cta: "Scopri WIFIGATE Host",
     imageAlt: "Ospiti che usano lo smartphone per entrare nel loro alloggio",
     stayCaption: "Ogni soggiorno, gestito in ogni dettaglio",
     staySteps: ["Prenotazione ricevuta", "Accesso al check-in", "Scade al check-out"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "WIFIGATE richiede un abbonamento mensile?",
-        answer: "No. Paghi una sola volta per il dispositivo WIFIGATE e l'installazione, senza abbonamento mensile, rinnovi o canoni ricorrenti. WIFIGATE Automation per uso commerciale è l'unica eccezione ed è disponibile tramite abbonamento.",
+        answer: "No. Paghi una sola volta per il dispositivo WIFIGATE e l'installazione, senza abbonamento mensile, rinnovi o canoni ricorrenti. WIFIGATE Host per uso commerciale è l'unica eccezione ed è disponibile tramite abbonamento.",
       },
       {
         question: "WIFIGATE può fornire un accesso temporaneo agli ospiti?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Sistema di controllo accessi",
     monthlySubscription: "Abbonamento mensile",
-    subscriptionValue: "Non richiesto per WIFIGATE standard; l'uso commerciale di WIFIGATE Automation richiede un abbonamento",
+    subscriptionValue: "Non richiesto per WIFIGATE standard; l'uso commerciale di WIFIGATE Host richiede un abbonamento",
     simCard: "SIM",
     externalRouter: "Router WiFi esterno",
     notRequired: "Non richiesto",

@@ -32,9 +32,9 @@ export default {
         },
         {
           icon: "invite",
-          title: "WIFIGATE Automation מחברת בין ההזמנה לכניסה",
-          text: "עם WIFIGATE Automation, אישור ההזמנה במערכת המלון או בדירת האירוח יוצר ושולח לאורח את הרשאת הכניסה באופן אוטומטי. בלי להעתיק פרטים, בלי להנפיק כרטיס ובלי שלב ידני בדרך.",
-          ctaLabel: "גלו את WIFIGATE Automation",
+          title: "WIFIGATE Host מחברת בין ההזמנה לכניסה",
+          text: "עם WIFIGATE Host, אישור ההזמנה במערכת המלון או בדירת האירוח יוצר ושולח לאורח את הרשאת הכניסה באופן אוטומטי. בלי להעתיק פרטים, בלי להנפיק כרטיס ובלי שלב ידני בדרך.",
+          ctaLabel: "גלו את WIFIGATE Host",
           ctaHref: "/he/automation/",
         },
         {

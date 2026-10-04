@@ -3465,7 +3465,7 @@ html[dir="rtl"] .where-story-card__video-meta {
 }
 /* ================= SHARED FOOTER SKIN =================
    One skin for the shared footer partial on every page type: homepage,
-   use-case pages, WIFIGATE Automation and the legal pages. Do NOT re-declare
+   use-case pages, WIFIGATE Host and the legal pages. Do NOT re-declare
    these under a page-scoped class (.home-en, .niche-page, ...) - that is what
    let the footer drift apart in the first place. */
 .site-footer {

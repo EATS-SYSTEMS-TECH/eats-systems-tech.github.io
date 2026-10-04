@@ -1,5 +1,5 @@
 /* /css/automation.css
-   Marketing landing page for WIFIGATE Automation (/automation/).
+   Marketing landing page for WIFIGATE Host (/automation/).
    Uses the design tokens from styles.css. Written with logical properties
    (margin-inline, inset-inline, etc.) so it renders correctly in both LTR
    locales and RTL locales (he, ar) without extra rules. */
