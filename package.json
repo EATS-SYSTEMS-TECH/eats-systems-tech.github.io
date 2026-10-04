@@ -4,7 +4,7 @@
     "type": "module",
     "scripts": {
         "dev": "npm run build:api && node scripts/serve.mjs",
-        "build:api": "esbuild api/index.ts --bundle --format=esm --platform=browser --target=es2022 --outfile=js/api/index.js --minify",
+        "build:api": "node scripts/build-api.mjs",
         "typecheck": "tsc --noEmit",
         "test:api": "npm run build:api && npm run typecheck && node --test scripts/host-portal.test.mjs",
         "build:locales": "node scripts/build-localized-site.mjs",

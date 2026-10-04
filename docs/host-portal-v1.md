@@ -1,6 +1,6 @@
 # Frontend V1 integration contract
 
-This is the frontend's proposed contract, pending agreement with the backend. No backend files or Firebase project settings were changed. Source specification: WIFIGATE_HOST.html, reviewed 30 September 2026.
+Implemented V1 contract, reviewed 5 October 2026 against WIFIGATE_HOST.html. The source explicitly gates V2–V10 behind V1 completion. The backend, frontend and Auth authorized website domains have been updated; real TOTP activation and HTTPS deployment remain release gates.
 
 ## Identity and authorization
 
@@ -31,9 +31,9 @@ GET /api/v1/users/me must return:
 - mfa.enrolled: an enrolled **TOTP** factor, verified by the server from Firebase user metadata.
 - mfa.verified: the current token/session actually completed a TOTP challenge, not merely enrollment. Validate the Firebase second-factor claim. The backend must enforce this on admin mutations.
 
-Return access/MFA state even for pending/denied users and admins who need enrollment, so the UI can route them correctly. 401 means invalid/expired session. A 403 may also represent denied access; PORTAL_ACCESS_PENDING selects pending copy. Missing or malformed authorization fields show an error and never expose the portal. All responses need Cache-Control: no-store.
+The actual Host returns 403 without a profile for unapproved/blocked users, and returns the trusted state above for approved admins who need enrollment. The UI renders denial on 403. Pending remains supported for compatible future servers. 401 means invalid/expired session. Missing or malformed authorization fields show an error and never expose the portal. All application responses use Cache-Control: no-store.
 
-## Approve a regular user's email
+## Manage user or administrator access
 
 POST /api/v1/admin/portal-access:
 
@@ -42,10 +42,10 @@ Authorization: Bearer <Firebase ID token>
 Content-Type: application/json
 Idempotency-Key: <UUID per logical approval; retained on retry>
 
-{"email":"new-user@example.com"}
+{"email":"new-user@example.com","status":"active","role":"user"}
 ```
 
-The frontend sends a normalized email only, no UID, admin role, or MFA assertions. A 2xx response means the email approval was committed. The server must verify active admin access, a TOTP-verified session, email validation, idempotency, and audit. It must not offer self-promotion or accept role assignment from this body. First-admin bootstrap stays out of band.
+The frontend sends normalized email, active/blocked status and optional user/admin role, never UID or MFA assertions. Omitting role during block/unblock preserves the existing role. DELETE on the same endpoint sends only {email} and removes portal access, retaining the Auth account and profile. The backend verifies active admin access, current verified TOTP, validation, idempotency and audit. It rejects own-access changes and blocking/deleting/demoting the last active administrator, inside the mutation transaction. New administrators must enroll TOTP. First-admin bootstrap stays out of band.
 
 For errors, use { "error": { "code": "MFA_REQUIRED", "message": "..." } }. The UI shows safe local messages and preserves the idempotency key for an uncertain retry. It refreshes authorization before submitting and hides admin controls if access has changed. Backend enforcement remains necessary on the POST itself.
 
@@ -63,9 +63,11 @@ Recovery instructions direct users to a platform owner. Actual recovery must be 
 
 ## Remaining release dependencies
 
-- Agreement on the response/body above and backend implementation.
+- Backend implemented; machine-readable API contract and recovery/release procedures are in the Host repository.
 - Firebase provider/TOTP configuration and real integration verification.
-- The actual Calendar reference image; the supplied HTML does not embed or link it. Set its path in js/host-portal-config.js once supplied.
+- The supplied 3840×2160 Calendar reference image is configured at docs/assets/wifigate-host-calendar-reference.png and checked on desktop/mobile browsers.
 - Production origin, CORS, and hosting headers. GitHub Pages does not provide application API enforcement; the API must do it.
+
+Verification: npm run test:api builds/typechecks the request contracts; npm run test:staging checks emulator Google/Apple popups against the demonstration API and browser MFA fixtures. The Host npm run test:emulators additionally runs this actual website against real Host HTTP enforcement, real Auth emulator tokens and Firestore. Browser SDK adapters are substituted in that cross-repository test; application responses are real. Real authenticator verification and real provider redirects need separate staging evidence. The public API origin module stays external to the client bundle so deployment configuration does not require rebuilding the client.
 
 QR encoder: qrcode-generator js2.0.4, vendored from upstream commit 83b7e8fe3fddd3b0368dbafd6ce56995bd25e3c8 (js/dist/qrcode.js), with MIT license. Only an ESM export was appended; no package was installed.

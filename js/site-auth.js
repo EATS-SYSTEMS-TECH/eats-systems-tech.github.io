@@ -81,7 +81,7 @@ export async function signInRedirect(providerName) {
 export async function reauthenticate(user, onChallenge) {
   const token = await user.getIdTokenResult();
   const id = token.claims.firebase?.sign_in_provider;
-  const name = id === AuthProviders.GOOGLE_ID ? [AuthProviders.GOOGLE] : id === AuthProviders.APPLE_ID ? [AuthProviders.APPLE] : null;
+  const name = id === AuthProviders.GOOGLE_ID ? AuthProviders.GOOGLE : id === AuthProviders.APPLE_ID ? AuthProviders.APPLE : null;
   return authenticate(
     () => authApi.reauthenticateWithPopup(user, providerFor(name)),
     onChallenge

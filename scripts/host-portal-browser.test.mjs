@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { chromium } from "playwright-core";
+import { join } from "node:path";
 const origin = "http://127.0.0.1:8100";
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const active = { role: "user", access: { state: "active" }, mfa: { required: false, enrolled: false, verified: false } };
@@ -22,14 +23,14 @@ async function scenario(options = {}) {
     let observer;
     const user = { uid: "fixture-user", email: "approved@example.test", displayName: "Approved User", emailVerified: true,
       getIdToken: async () => verified ? "fixture-id-token-mfa" : "fixture-id-token",
-      getIdTokenResult: async () => ({claims:{firebase:{sign_in_provider:"google.com"}}}) };
+      getIdTokenResult: async () => ({claims:{firebase:{sign_in_provider:${JSON.stringify(state.provider ?? "google.com")}}}}) };
     export const getAuth = () => ({get currentUser(){return signedIn ? user : null;}});
     export const connectAuthEmulator = () => {};
     export const browserSessionPersistence = {};
     export const setPersistence = async () => {};
     export const onAuthStateChanged = (_, callback) => { observer=callback; setTimeout(()=>callback(signedIn ? user : null),0); return ()=>{}; };
-    export const GoogleAuthProvider = function(){this.setCustomParameters=()=>{};};
-    export const OAuthProvider = function(){this.addScope=()=>{};};
+    export const GoogleAuthProvider = function(){this.providerId="google.com";this.setCustomParameters=()=>{};};
+    export const OAuthProvider = function(id){this.providerId=id;this.addScope=()=>{};};
     export const signInWithPopup = async () => {
       if (enrolled) throw Object.assign(new Error("MFA required"),{code:"auth/multi-factor-auth-required"});
       signedIn=true; await window.fixtureAuthEvent("signed-in"); observer?.(user); return {user};
@@ -37,7 +38,8 @@ async function scenario(options = {}) {
     export const signInWithRedirect = async () => {};
     export const getRedirectResult = async () => null;
     export const signOut = async () => {signedIn=false; await window.fixtureAuthEvent("signed-out"); observer?.(null);};
-    export const reauthenticateWithPopup = async () => {
+    export const reauthenticateWithPopup = async (_,provider) => {
+      if(provider.providerId!==${JSON.stringify(state.provider ?? "google.com")}) throw new Error("Incorrect reauthentication provider");
       await window.fixtureAuthEvent("reauthenticated");
       if(enrolled) throw Object.assign(new Error("MFA required"),{code:"auth/multi-factor-auth-required"});
       return {user};
@@ -59,15 +61,13 @@ async function scenario(options = {}) {
     const request = route.request();
     calls.push({ path: new URL(request.url()).pathname, method: request.method(), headers: request.headers(), body: request.postData() });
     if (state.errorStatus) { await route.fulfill({ status: state.errorStatus, json: { error: { code: "DEPENDENCY_UNAVAILABLE" } } }); return; }
-    if (request.method() === "POST") {
+    if (["POST", "DELETE"].includes(request.method())) {
+      if (state.failMutationOnce) { state.failMutationOnce=false; await route.fulfill({status:503,json:{error:{code:"DEPENDENCY_UNAVAILABLE"}}}); return; }
       if (state.role !== "admin" || !state.mfa.verified || state.access.state !== "active") { await route.fulfill({ status: 403, json: { error: { code: "MFA_REQUIRED" } } }); return; }
       await route.fulfill({ json: { access: { state: "active" } } }); return;
     }
     await route.fulfill({ json: { user: { uid: "fixture-user", email: "approved@example.test", displayName: "Approved User", emailVerified: true }, ...(state.incomplete ? {} : { role: state.role, access: state.access, mfa: state.mfa }) } });
   });
-  // Test-only asset fixture: the real reference image is still awaited.
-  await context.route("**/js/host-portal-config.js", (route) => route.fulfill({ contentType: "application/javascript", body: 'export const calendarReferenceUrl="/fixture-calendar.svg";' }));
-  await context.route("**/fixture-calendar.svg", (route) => route.fulfill({ contentType: "image/svg+xml", body: '<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700"><rect width="1200" height="700" fill="#eaf0f6"/><text x="40" y="80" font-size="40">Calendar test fixture</text></svg>' }));
   const page = await context.newPage();
   return { context, page, state, calls };
 }
@@ -105,23 +105,50 @@ try {
   await admin.page.locator('#mfa-challenge [role="status"]').getByText("That code is incorrect or expired.",{exact:false}).waitFor();
   await admin.page.locator('#mfa-challenge input[name="code"]').fill("123456"); await admin.page.locator('#mfa-challenge button[type="submit"]').click();
   await admin.page.locator("#admin-approval").waitFor({state:"visible"});
+  if (process.env.WIFIGATE_SCREENSHOT_DIR) await admin.page.screenshot({path:join(process.env.WIFIGATE_SCREENSHOT_DIR,"admin-portal.png"),fullPage:true});
   await admin.page.locator('#approval-form input').fill("NEW@Example.test"); await admin.page.locator('#approval-form button').click();
   await admin.page.getByText("Access approved for new@example.test.",{exact:false}).waitFor();
   const approval=admin.calls.find(call=>call.method==="POST");
-  assert.equal(approval.body,'{"email":"new@example.test"}');
+  assert.deepEqual(JSON.parse(approval.body),{email:"new@example.test",status:"active",role:"user"});
   assert.equal(approval.headers.authorization,"Bearer fixture-id-token-mfa");
   assert.ok(approval.headers["idempotency-key"]);
+  await admin.page.locator('#approval-form input').fill("admin@example.test");
+  await admin.page.locator('#approval-form select[name="role"]').selectOption("admin");
+  await admin.page.locator('#approval-form button').click();
+  await admin.page.getByText("Access approved for admin@example.test.",{exact:false}).waitFor();
+  assert.equal(JSON.parse(admin.calls.filter(call=>call.method==="POST").at(-1).body).role,"admin");
+  for (const action of ["block","unblock","delete"]) {
+    await admin.page.locator('#approval-form select[name="action"]').selectOption(action);
+    assert.equal(await admin.page.locator('#access-role-label').isVisible(),false);
+    await admin.page.locator('#approval-form input').fill("target@example.test");
+    await admin.page.locator('#approval-form button').click();
+    await admin.page.locator('#approval-status').getByText(action === "delete" ? "Portal access deleted" : action === "block" ? "Portal access blocked" : "Access approved",{exact:false}).waitFor();
+    const mutation=admin.calls.filter(call=>["POST","DELETE"].includes(call.method)).at(-1);
+    assert.equal(mutation.method,action === "delete" ? "DELETE" : "POST");
+    assert.deepEqual(JSON.parse(mutation.body),action === "delete" ? {email:"target@example.test"} : {email:"target@example.test",status:action === "block" ? "blocked" : "active"});
+  }
+  const mutationCount=admin.calls.filter(call=>["POST","DELETE"].includes(call.method)).length;
+  admin.state.failMutationOnce=true;
+  await admin.page.locator('#approval-form input').fill("retry@example.test");
+  await admin.page.locator('#approval-form button').click();
+  await admin.page.locator('#approval-status').getByText("Something went wrong",{exact:false}).waitFor();
+  await admin.page.locator('#approval-form button').click();
+  await admin.page.getByText("Access approved for retry@example.test.",{exact:false}).waitFor();
+  const retryCalls=admin.calls.filter(call=>call.method==="POST"&&JSON.parse(call.body).email==="retry@example.test");
+  assert.equal(retryCalls.length,2);
+  assert.equal(retryCalls[0].headers["idempotency-key"],retryCalls[1].headers["idempotency-key"]);
   admin.state.access.state="denied";
   await admin.page.locator('#approval-form input').fill("revoked@example.test"); await admin.page.locator('#approval-form button').click();
   await admin.page.getByRole("heading",{name:"Portal access denied",exact:true}).waitFor();
-  assert.equal(admin.calls.filter(call=>call.method==="POST").length,1);
+  assert.equal(admin.calls.filter(call=>["POST","DELETE"].includes(call.method)).length,mutationCount+2);
   await admin.context.close();
   for (const mobile of [false,true]) {
-    const regular=await scenario({mobile}); await openPortal(regular);
+    const regular=await scenario({mobile,provider:mobile?"apple.com":"google.com"}); await openPortal(regular);
     await regular.page.locator("#dashboard-content").waitFor({state:"visible"});
     await regular.page.locator("#calendar-image").waitFor({state:"visible"});
     const dimensions=await regular.page.locator("#calendar-image").evaluate(image=>({width:image.clientWidth,naturalWidth:image.naturalWidth}));
-    assert.equal(dimensions.naturalWidth,1200); assert.ok(dimensions.width<=(mobile ? 390:1440));
+    assert.equal(dimensions.naturalWidth,3840); assert.ok(dimensions.width<=(mobile ? 390:1440));
+    if (process.env.WIFIGATE_SCREENSHOT_DIR) await regular.page.screenshot({path:join(process.env.WIFIGATE_SCREENSHOT_DIR,mobile?"user-mobile.png":"user-desktop.png"),fullPage:true});
     await regular.page.locator("#account-details summary").click(); await regular.page.locator("#optional-enrollment").click();
     await regular.page.locator("#cancel-enrollment").click(); await regular.page.locator("#dashboard-content").waitFor({state:"visible"});
     await regular.page.locator("#optional-enrollment").click(); await enroll(regular);

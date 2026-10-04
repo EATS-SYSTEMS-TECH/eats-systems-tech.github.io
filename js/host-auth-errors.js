@@ -1,6 +1,9 @@
 import { AuthErrors, HttpStatus } from "./host-constants.js";
 export function authErrorMessage(error) {
   const messages = {
+    SELF_ACCESS_PROTECTED: "You cannot change your own portal access.",
+    LAST_ADMIN_PROTECTED: "The last active administrator must remain active.",
+    IDEMPOTENCY_CONFLICT: "This request has already been used for a different change. Review the action and retry.",
     [AuthErrors.UNCONFIGURED]: "Firebase configuration is missing. Contact support.",
     [AuthErrors.INCOMPLETE_CONTRACT]: "Portal access could not be verified. Try again later.",
     [AuthErrors.POPUP_CANCELLED]: "Sign-in was cancelled.",

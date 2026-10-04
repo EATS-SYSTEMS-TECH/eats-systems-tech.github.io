@@ -10,6 +10,14 @@ export function approveEmail(
   email: string,
   idempotencyKey: string,
 ) {
+  return changePortalAccess(user, { email, status: "active" }, idempotencyKey);
+}
+
+export function changePortalAccess(
+  user: FirebaseUser,
+  input: { email: string; status: "active" | "blocked"; role?: "user" | "admin" },
+  idempotencyKey: string,
+) {
   return authenticatedRequest<JsonObject>(profileApi, user, {
     method: "POST",
     url: "/api/v1/admin/portal-access",
@@ -17,7 +25,15 @@ export function approveEmail(
       "Content-Type": "application/json",
       "Idempotency-Key": idempotencyKey,
     },
-    // The Host takes exactly { email, status } (portal-access changeSchema).
-    data: { email: email.trim().toLowerCase(), status: "active" },
+    data: { ...input, email: input.email.trim().toLowerCase() },
+  });
+}
+
+export function deletePortalAccess(user: FirebaseUser, email: string, idempotencyKey: string) {
+  return authenticatedRequest<JsonObject>(profileApi, user, {
+    method: "DELETE",
+    url: "/api/v1/admin/portal-access",
+    headers: { "Content-Type": "application/json", "Idempotency-Key": idempotencyKey },
+    data: { email: email.trim().toLowerCase() },
   });
 }
