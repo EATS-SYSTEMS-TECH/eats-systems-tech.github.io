@@ -23,7 +23,7 @@ const server = createServer(async (req, res) => {
   if (origin && !allowedOrigins.has(origin)) { send(res, 403, { error: { code: "ORIGIN_DENIED" } }, origin); return; }
   if (req.method === "OPTIONS") {
     if (!allowedOrigins.has(origin)) { send(res, 403, { error: { code: "ORIGIN_DENIED" } }, origin); return; }
-    res.writeHead(204, { "Access-Control-Allow-Origin": origin, "Access-Control-Allow-Methods": "GET, PUT, POST, OPTIONS", "Access-Control-Allow-Headers": "Authorization, Accept, Content-Type, Cache-Control, Idempotency-Key", Vary: "Origin" }); res.end(); return;
+    res.writeHead(204, { "Access-Control-Allow-Origin": origin, "Access-Control-Allow-Methods": "GET, PUT, POST, OPTIONS", "Access-Control-Allow-Headers": "Authorization, Content-Type, Idempotency-Key", Vary: "Origin" }); res.end(); return;
   }
   if (req.url === "/health") { send(res, 200, { status: "ok", environment: "local-staging" }, origin); return; }
   const bearer = /^Bearer (\S+)$/.exec(req.headers.authorization || "");
@@ -37,7 +37,11 @@ const server = createServer(async (req, res) => {
     if (me.role !== "admin" || me.access.state !== "active" || !me.mfa.verified) { send(res, 403, { error: { code: "MFA_REQUIRED" } }, origin); return; }
     try {
       let raw = ""; for await (const chunk of req) { raw += chunk; if (raw.length > 2048) throw new Error("body-size"); }
-      const { email } = JSON.parse(raw);
+      // As strict as the Host: exactly { email, status }.
+      const body = JSON.parse(raw);
+      const { email, status } = body;
+      if (Object.keys(body).some((key) => key !== "email" && key !== "status")) throw new Error("unknown-field");
+      if (status !== "active" && status !== "blocked") throw new Error("invalid-status");
       if (typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("invalid-email");
       approvals.add(email.trim().toLowerCase()); send(res, 200, { access: { state: "active" } }, origin);
     } catch { send(res, 400, { error: { code: "INVALID_REQUEST" } }, origin); }
