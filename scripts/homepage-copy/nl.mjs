@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Taal selecteren",
     platform: "Platform",
     solutions: "Oplossingen",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Productgids",
     contact: "Neem contact op",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Geen abonnementskosten",
-        text: "U betaalt eenmalig voor het apparaat en de installatie. Er zijn geen maandelijkse abonnementskosten, verlengingen of doorlopende platformkosten. Alleen WIFIGATE Automation voor commercieel gebruik werkt op abonnementsbasis.",
+        text: "U betaalt eenmalig voor het apparaat en de installatie. Er zijn geen maandelijkse abonnementskosten, verlengingen of doorlopende platformkosten. Alleen WIFIGATE Host voor commercieel gebruik werkt op abonnementsbasis.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hotels", "Airbnb", "Gastenappartementen", "Verblijfsaccommodaties"],
     promise: "Verwelkom uw gasten. Automatiseer hun toegang.",
     subtitle: "Van hotelverblijven tot vakantieappartementen: koppel elke boeking aan beveiligde toegang tot de juiste poort, deur of garage. Gasten gaan naar binnen met hun telefoon. Hun toegang begint bij het inchecken en eindigt automatisch bij het uitchecken.",
-    cta: "Ontdek WIFIGATE Automation",
+    cta: "Ontdek WIFIGATE Host",
     imageAlt: "Gasten gebruiken hun telefoon om hun accommodatie in te gaan",
     stayCaption: "Elk verblijf, volledig verzorgd",
     staySteps: ["Boeking ontvangen", "Toegang bij het inchecken", "Vervalt bij het uitchecken"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "Vereist WIFIGATE een maandelijks abonnement?",
-        answer: "Nee. U betaalt eenmalig voor het WIFIGATE-apparaat en de installatie. Er zijn geen maandelijkse abonnementskosten, verlengingen of doorlopende platformkosten. WIFIGATE Automation voor commercieel gebruik is de enige uitzondering en wordt op abonnementsbasis aangeboden.",
+        answer: "Nee. U betaalt eenmalig voor het WIFIGATE-apparaat en de installatie. Er zijn geen maandelijkse abonnementskosten, verlengingen of doorlopende platformkosten. WIFIGATE Host voor commercieel gebruik is de enige uitzondering en wordt op abonnementsbasis aangeboden.",
       },
       {
         question: "Kan WIFIGATE tijdelijke gasttoegang bieden?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Toegangscontrolesysteem",
     monthlySubscription: "Maandelijks abonnement",
-    subscriptionValue: "Niet vereist voor standaardgebruik van WIFIGATE; WIFIGATE Automation voor commercieel gebruik werkt op abonnementsbasis",
+    subscriptionValue: "Niet vereist voor standaardgebruik van WIFIGATE; WIFIGATE Host voor commercieel gebruik werkt op abonnementsbasis",
     simCard: "Simkaart",
     externalRouter: "Externe WiFi-router",
     notRequired: "Niet vereist",

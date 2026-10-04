@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Seleccionar idioma",
     platform: "Plataforma",
     solutions: "Soluciones",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Guía del producto",
     contact: "Contáctanos",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Sin cuotas de suscripción",
-        text: "Paga una sola vez por el dispositivo y la instalación, sin suscripción mensual, renovaciones ni cargos recurrentes por la plataforma. El uso comercial de WIFIGATE Automation es la única excepción y requiere suscripción.",
+        text: "Paga una sola vez por el dispositivo y la instalación, sin suscripción mensual, renovaciones ni cargos recurrentes por la plataforma. El uso comercial de WIFIGATE Host es la única excepción y requiere suscripción.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hoteles", "Airbnb", "Apartamentos turísticos", "Establecimientos de hospedaje"],
     promise: "Recibe a tus huéspedes. Automatiza su acceso.",
     subtitle: "Desde estancias en hoteles hasta apartamentos vacacionales, conecta cada reserva con un acceso seguro al portón, la puerta o el garaje correspondiente. Los huéspedes entran con su teléfono y el acceso comienza en el check-in y termina automáticamente en el check-out.",
-    cta: "Explorar WIFIGATE Automation",
+    cta: "Explorar WIFIGATE Host",
     imageAlt: "Huéspedes usando el teléfono para acceder a su alojamiento",
     stayCaption: "Cada estancia, atendida de principio a fin",
     staySteps: ["Reserva recibida", "Acceso en el check-in", "Caduca en el check-out"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "¿Requiere WIFIGATE una suscripción mensual?",
-        answer: "No. Pagas una sola vez por el dispositivo WIFIGATE y la instalación, sin suscripción mensual, renovaciones ni cargos recurrentes por la plataforma. WIFIGATE Automation para uso comercial es la única excepción y requiere suscripción.",
+        answer: "No. Pagas una sola vez por el dispositivo WIFIGATE y la instalación, sin suscripción mensual, renovaciones ni cargos recurrentes por la plataforma. WIFIGATE Host para uso comercial es la única excepción y requiere suscripción.",
       },
       {
         question: "¿Puede WIFIGATE proporcionar acceso temporal para huéspedes?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Sistema de control de acceso",
     monthlySubscription: "Suscripción mensual",
-    subscriptionValue: "No se requiere para WIFIGATE estándar; el uso comercial de WIFIGATE Automation requiere suscripción",
+    subscriptionValue: "No se requiere para WIFIGATE estándar; el uso comercial de WIFIGATE Host requiere suscripción",
     simCard: "Tarjeta SIM",
     externalRouter: "Enrutador WiFi externo",
     notRequired: "No se requiere",
