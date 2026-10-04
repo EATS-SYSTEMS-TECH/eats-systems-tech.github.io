@@ -11,7 +11,7 @@ export const terms = {
     subtitle:
       "These Terms & Conditions govern your use of WIFIGATE. They include important provisions on safety, on what WIFIGATE is responsible for and what it is not, and on the limitation of our liability. Please read them carefully.",
     updated: "Effective date: October 4, 2026",
-    owner: "Provider: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+    owner: "Provider: EATS SYSTEMS TECH",
     sections: [
       {
         id: "agreement",
@@ -268,7 +268,7 @@ export const terms = {
         id: "contact",
         title: "27. Contact",
         blocks: [
-          "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
+          "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
           "Email: support@wifigate.io",
           { link: { href: "../privacy-policy/", text: "Read our Privacy Policy" } },
           { link: { href: "../cookies/", text: "Read our Cookie Policy" } },
@@ -287,7 +287,7 @@ export const terms = {
     subtitle:
       "תנאי שימוש אלה חלים על השימוש שלכם ב‑WIFIGATE. הם כוללים הוראות חשובות בנושא בטיחות, בנושא מה ש‑WIFIGATE אחראית לו ומה שאינה אחראית לו, ובנושא הגבלת האחריות שלנו. אנא קראו אותם בעיון.",
     updated: "תאריך תחילה: 4 באוקטובר 2026",
-    owner: "נותנת השירות: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
+    owner: "נותנת השירות: EATS SYSTEMS TECH",
     sections: [
       {
         id: "agreement",
@@ -544,7 +544,7 @@ export const terms = {
         id: "contact",
         title: "27. יצירת קשר",
         blocks: [
-          "EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
+          "EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions",
           "דוא\"ל: support@wifigate.io",
           { link: { href: "../privacy-policy/", text: "למדיניות הפרטיות" } },
           { link: { href: "../cookies/", text: "למדיניות העוגיות" } },

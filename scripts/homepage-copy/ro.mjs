@@ -167,7 +167,7 @@ const copy = {
     cookies: "Cookie-uri",
     appSupportTitle: "Aplicație și asistență",
     socialTitle: "Urmăriți-ne",
-    copyright: "WIFIGATE. Toate drepturile rezervate.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. Toate drepturile rezervate.",
   },
   schema: {
     productCategory: "Sistem de control al accesului",

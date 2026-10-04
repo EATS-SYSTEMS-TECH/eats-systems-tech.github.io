@@ -167,7 +167,7 @@ const copy = {
     cookies: "Cookie",
     appSupportTitle: "Ứng dụng và Hỗ trợ",
     socialTitle: "Theo dõi chúng tôi",
-    copyright: "WIFIGATE. Bảo lưu mọi quyền.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. Bảo lưu mọi quyền.",
   },
   schema: {
     productCategory: "Hệ thống kiểm soát truy cập",

@@ -167,7 +167,7 @@
     cookies: "Çerezler",
     appSupportTitle: "Uygulama ve Destek",
     socialTitle: "Bizi takip edin",
-    copyright: "WIFIGATE. Tüm hakları saklıdır.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. Tüm hakları saklıdır.",
   },
   schema: {
     productCategory: "Erişim kontrol sistemi",

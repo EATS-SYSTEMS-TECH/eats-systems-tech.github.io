@@ -167,7 +167,7 @@ const copy = {
     cookies: "কুকিজ",
     appSupportTitle: "অ্যাপ ও সহায়তা",
     socialTitle: "আমাদের অনুসরণ করুন",
-    copyright: "WIFIGATE। সর্বাধিকার সংরক্ষিত।",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH। সর্বাধিকার সংরক্ষিত।",
   },
   schema: {
     productCategory: "অ্যাক্সেস কন্ট্রোল সিস্টেম",
