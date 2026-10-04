@@ -167,7 +167,7 @@ const copy = {
     cookies: "Kuki",
     appSupportTitle: "Aplikasi dan Dukungan",
     socialTitle: "Ikuti kami",
-    copyright: "WIFIGATE. Semua hak dilindungi.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. Semua hak dilindungi.",
   },
   schema: {
     productCategory: "Sistem kendali akses",

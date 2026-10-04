@@ -167,7 +167,7 @@ const copy = {
     cookies: "Kakor",
     appSupportTitle: "App och support",
     socialTitle: "Följ oss",
-    copyright: "WIFIGATE. Alla rättigheter förbehållna.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. Alla rättigheter förbehållna.",
   },
   schema: {
     productCategory: "Passersystem",

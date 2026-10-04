@@ -167,7 +167,7 @@ const copy = {
     cookies: "คุกกี้",
     appSupportTitle: "แอปและการสนับสนุน",
     socialTitle: "ติดตามเรา",
-    copyright: "WIFIGATE สงวนลิขสิทธิ์",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH สงวนลิขสิทธิ์",
   },
   schema: {
     productCategory: "ระบบควบคุมการเข้าออก",

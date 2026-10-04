@@ -167,7 +167,7 @@ const copy = {
     cookies: "Cookies",
     appSupportTitle: "App og support",
     socialTitle: "Følg os",
-    copyright: "WIFIGATE. Alle rettigheder forbeholdt.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. Alle rettigheder forbeholdt.",
   },
   schema: {
     productCategory: "Adgangskontrolsystem",

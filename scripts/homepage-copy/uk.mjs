@@ -167,7 +167,7 @@
     cookies: "Файли cookie",
     appSupportTitle: "Застосунок і підтримка",
     socialTitle: "Стежте за нами",
-    copyright: "WIFIGATE. Усі права захищено.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. Усі права захищено.",
   },
   schema: {
     productCategory: "Система контролю доступу",

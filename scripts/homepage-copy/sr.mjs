@@ -167,7 +167,7 @@
     cookies: "Колачићи",
     appSupportTitle: "Апликација и подршка",
     socialTitle: "Пратите нас",
-    copyright: "WIFIGATE. Сва права задржана.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. Сва права задржана.",
   },
   schema: {
     productCategory: "Систем контроле приступа",

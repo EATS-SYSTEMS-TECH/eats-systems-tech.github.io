@@ -167,7 +167,7 @@ const copy = {
     cookies: "Evästeet",
     appSupportTitle: "Sovellus ja tuki",
     socialTitle: "Seuraa meitä",
-    copyright: "WIFIGATE. Kaikki oikeudet pidätetään.",
+    copyright: "WIFIGATE · EATS SYSTEMS TECH. Kaikki oikeudet pidätetään.",
   },
   schema: {
     productCategory: "Kulunhallintajärjestelmä",
