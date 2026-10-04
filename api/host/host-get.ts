@@ -13,6 +13,5 @@ export function hostGet(
     method: "GET",
     url: path,
     signal,
-    headers: { "Cache-Control": "no-store" },
   });
 }

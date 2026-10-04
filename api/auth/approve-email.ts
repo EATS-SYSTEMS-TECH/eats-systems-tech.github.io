@@ -17,6 +17,7 @@ export function approveEmail(
       "Content-Type": "application/json",
       "Idempotency-Key": idempotencyKey,
     },
-    data: { email: email.trim().toLowerCase() },
+    // The Host takes exactly { email, status } (portal-access changeSchema).
+    data: { email: email.trim().toLowerCase(), status: "active" },
   });
 }
