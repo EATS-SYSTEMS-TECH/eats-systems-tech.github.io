@@ -42,7 +42,8 @@ test("GET profile sends only the Firebase ID token without cookies or caching", 
     assert.equal(request.url, "/api/v1/users/me");
     assert.equal(request.method, "get");
     assert.equal(request.headers.get("Authorization"), "Bearer firebase-id-token");
-    assert.equal(request.headers.get("Cache-Control"), "no-store");
+    // Only CORS headers the Host allows (Authorization, Content-Type, Idempotency-Key).
+    assert.equal(request.headers.get("Cache-Control"), undefined);
     assert.equal(request.withCredentials, false);
     assert.equal(request.data, undefined);
   });
@@ -55,12 +56,12 @@ test("profile synchronization keeps the empty PUT contract", async () => {
     assert.equal(requests[0].headers.get("Authorization"), "Bearer profile-token");
   });
 });
-test("approval sends only a normalized email and idempotency key", async () => {
+test("approval sends the Host's exact { email, status } body and an idempotency key", async () => {
   await withAdapter(async (requests) => {
     await approveEmail({ getIdToken: async () => "admin-token" }, " PERSON@Example.test ", "approval-request-1");
     assert.equal(requests[0].url, "/api/v1/admin/portal-access");
     assert.equal(requests[0].method, "post");
-    assert.equal(requests[0].data, '{"email":"person@example.test"}');
+    assert.equal(requests[0].data, '{"email":"person@example.test","status":"active"}');
     assert.equal(requests[0].headers.get("Idempotency-Key"), "approval-request-1");
     assert.equal(requests[0].headers.get("Authorization"), "Bearer admin-token");
   });
