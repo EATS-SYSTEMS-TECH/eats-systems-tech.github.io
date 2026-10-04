@@ -1282,6 +1282,172 @@ function handleAccessibilityMotionPreferenceChange() {
   dispatchAccessibilityChange()
 }
 
+// Long press on the accessibility button lets the visitor drag it to another
+// place (remembered on this device) or hide it for the current visit only, so
+// the accessibility menu is always back on the next visit.
+const A11Y_FAB_POSITION_KEY = "wifigate-a11y-fab-position"
+const A11Y_FAB_HIDDEN_KEY = "wifigate-a11y-fab-hidden"
+const A11Y_FAB_LONG_PRESS_MS = 550
+const A11Y_FAB_MARGIN = 8
+
+function getAccessibilityFabHideLabel() {
+  const lang = (document.documentElement.getAttribute("lang") || "en").toLowerCase()
+  if (lang.startsWith("he")) return "הסתרת כפתור הנגישות לביקור זה"
+  if (lang.startsWith("ar")) return "إخفاء زر إمكانية الوصول لهذه الزيارة"
+  return "Hide the accessibility button for this visit"
+}
+
+function placeAccessibilityFab(fab, left, top) {
+  const rect = fab.getBoundingClientRect()
+  const maxLeft = Math.max(A11Y_FAB_MARGIN, window.innerWidth - rect.width - A11Y_FAB_MARGIN)
+  const maxTop = Math.max(A11Y_FAB_MARGIN, window.innerHeight - rect.height - A11Y_FAB_MARGIN)
+  const x = Math.min(Math.max(A11Y_FAB_MARGIN, left), maxLeft)
+  const y = Math.min(Math.max(A11Y_FAB_MARGIN, top), maxTop)
+  // Logical insets first: in RTL inset-inline-end is the same property as left.
+  fab.style.insetInlineEnd = "auto"
+  fab.style.insetBlockEnd = "auto"
+  fab.style.right = "auto"
+  fab.style.bottom = "auto"
+  fab.style.left = x + "px"
+  fab.style.top = y + "px"
+  return { x, y }
+}
+
+function setupAccessibilityFabArrange(fab) {
+  try {
+    if (sessionStorage.getItem(A11Y_FAB_HIDDEN_KEY) === "1") fab.hidden = true
+  } catch (error) {
+    // Storage may be unavailable; the button simply stays visible.
+  }
+
+  function applySavedPosition() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(A11Y_FAB_POSITION_KEY) || "null")
+      if (saved && typeof saved.x === "number" && typeof saved.y === "number") {
+        placeAccessibilityFab(fab, saved.x * window.innerWidth, saved.y * window.innerHeight)
+      }
+    } catch (error) {
+      // Ignore a missing or malformed saved position.
+    }
+  }
+
+  const dismiss = document.createElement("button")
+  dismiss.type = "button"
+  dismiss.className = "a11y-fab__dismiss"
+  dismiss.hidden = true
+  dismiss.textContent = "\u00d7"
+  document.body.appendChild(dismiss)
+
+  let pressTimer = null
+  let pressStart = null
+  let grabOffset = null
+  let arranging = false
+  let moved = false
+  let hideDismissTimer = null
+
+  function positionDismiss() {
+    const rect = fab.getBoundingClientRect()
+    dismiss.style.left = Math.max(4, rect.left - 6) + "px"
+    dismiss.style.top = Math.max(4, rect.top - 6) + "px"
+  }
+
+  function showDismiss() {
+    const label = getAccessibilityFabHideLabel()
+    dismiss.setAttribute("aria-label", label)
+    dismiss.title = label
+    positionDismiss()
+    dismiss.hidden = false
+    clearTimeout(hideDismissTimer)
+    hideDismissTimer = setTimeout(() => {
+      dismiss.hidden = true
+    }, 5000)
+  }
+
+  function cancelPress() {
+    clearTimeout(pressTimer)
+    pressTimer = null
+  }
+
+  fab.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0) return
+    const rect = fab.getBoundingClientRect()
+    pressStart = { x: event.clientX, y: event.clientY }
+    grabOffset = { x: event.clientX - rect.left, y: event.clientY - rect.top }
+    moved = false
+    cancelPress()
+    pressTimer = setTimeout(() => {
+      arranging = true
+      fab.classList.add("is-arranging")
+      if (fab.setPointerCapture) {
+        try {
+          fab.setPointerCapture(event.pointerId)
+        } catch (error) {
+          // Capture is best-effort; dragging still follows the pointer.
+        }
+      }
+      if (navigator.vibrate) navigator.vibrate(15)
+      showDismiss()
+    }, A11Y_FAB_LONG_PRESS_MS)
+  })
+
+  fab.addEventListener("pointermove", (event) => {
+    if (!arranging) {
+      if (pressStart && Math.hypot(event.clientX - pressStart.x, event.clientY - pressStart.y) > 8) cancelPress()
+      return
+    }
+    event.preventDefault()
+    moved = true
+    placeAccessibilityFab(fab, event.clientX - grabOffset.x, event.clientY - grabOffset.y)
+    positionDismiss()
+  })
+
+  function endPress() {
+    cancelPress()
+    pressStart = null
+    if (!arranging) return
+    arranging = false
+    fab.classList.remove("is-arranging")
+    fab.dataset.suppressClick = "true"
+    if (moved) {
+      const rect = fab.getBoundingClientRect()
+      try {
+        localStorage.setItem(A11Y_FAB_POSITION_KEY, JSON.stringify({ x: rect.left / window.innerWidth, y: rect.top / window.innerHeight }))
+      } catch (error) {
+        // The new position still applies for this page.
+      }
+      showDismiss()
+    }
+  }
+
+  fab.addEventListener("pointerup", endPress)
+  fab.addEventListener("pointercancel", endPress)
+  fab.addEventListener("contextmenu", (event) => event.preventDefault())
+
+  dismiss.addEventListener("click", () => {
+    if (accessibilityPanelOpen) closeAccessibilityPanel(false)
+    fab.hidden = true
+    dismiss.hidden = true
+    try {
+      sessionStorage.setItem(A11Y_FAB_HIDDEN_KEY, "1")
+    } catch (error) {
+      // Hidden for this page only.
+    }
+  })
+
+  document.addEventListener("pointerdown", (event) => {
+    if (event.target !== dismiss && !fab.contains(event.target)) dismiss.hidden = true
+  })
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") dismiss.hidden = true
+  })
+  window.addEventListener("resize", () => {
+    if (fab.style.left) placeAccessibilityFab(fab, parseFloat(fab.style.left), parseFloat(fab.style.top))
+    if (!dismiss.hidden) positionDismiss()
+  })
+
+  applySavedPosition()
+}
+
 function setupAccessibilityWidget() {
   if (accessibilityRefs) return
 
@@ -1325,6 +1491,12 @@ function setupAccessibilityWidget() {
   accessibilityState = loadAccessibilitySettings()
 
   fab.addEventListener("click", () => {
+    // The click that ends a long press only arranges the button.
+    if (fab.dataset.suppressClick === "true") {
+      delete fab.dataset.suppressClick
+      return
+    }
+
     if (accessibilityPanelOpen) {
       closeAccessibilityPanel()
       return
@@ -1354,6 +1526,7 @@ function setupAccessibilityWidget() {
     }
   }
 
+  setupAccessibilityFabArrange(fab)
   updateAccessibilityCopy()
   applyAccessibilitySettings()
 }
