@@ -117,8 +117,13 @@ function companyData(locale) {
 }
 
 function renderCompany() {
-  const rows = company.en.rows.map(([label, value], r) =>
-    `            <div class="legal-company__row"><dt data-i18n="legal.company.r${r}k">${escapeHtml(label)}</dt><dd data-i18n="legal.company.r${r}v">${escapeHtml(value)}</dd></div>`).join("\n");
+  const rows = company.en.rows.map(([label, value, href], r) => {
+    const external = href && /^https?:/.test(href) ? ' target="_blank" rel="noopener noreferrer"' : "";
+    const shown = href
+      ? `<dd><a href="${href}"${external} data-i18n="legal.company.r${r}v">${escapeHtml(value)}</a></dd>`
+      : `<dd data-i18n="legal.company.r${r}v">${escapeHtml(value)}</dd>`;
+    return `            <div class="legal-company__row"><dt data-i18n="legal.company.r${r}k">${escapeHtml(label)}</dt>${shown}</div>`;
+  }).join("\n");
   return `        <section class="legal-company" aria-labelledby="company-title">
           <h2 class="legal-company__title" id="company-title" data-i18n="legal.company.title">${escapeHtml(company.en.title)}</h2>
           <dl class="legal-company__list">
