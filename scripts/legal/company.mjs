@@ -1,4 +1,5 @@
 // The "Company details" box at the top of every legal page.
+// A row is [label, value] or [label, value, link].
 export const company = {
   en: {
     title: "Company details",
@@ -6,7 +7,8 @@ export const company = {
       ["Operator", "EATS SYSTEMS TECH"],
       ["Registered name", "Itay Nave – Engineering and Technology Solutions"],
       ["D-U-N-S", "626518977"],
-      ["Contact", "support@wifigate.io"],
+      ["Email", "support@wifigate.io", "mailto:support@wifigate.io"],
+      ["WhatsApp", "WhatsApp @WIFIGATE", "https://wa.me/message/NZWNMX6V2XVHJ1"],
     ],
   },
   he: {
@@ -15,7 +17,8 @@ export const company = {
       ["המפעילה", "EATS SYSTEMS TECH"],
       ["השם הרשום", "Itay Nave – Engineering and Technology Solutions"],
       ["D-U-N-S", "626518977"],
-      ["יצירת קשר", "support@wifigate.io"],
+      ["דוא\"ל", "support@wifigate.io", "mailto:support@wifigate.io"],
+      ["WhatsApp", "WhatsApp @WIFIGATE", "https://wa.me/message/NZWNMX6V2XVHJ1"],
     ],
   },
 };

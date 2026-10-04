@@ -25,8 +25,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "s": {
       "agreement": {
@@ -238,8 +240,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -452,8 +456,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -666,8 +672,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -880,8 +888,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "יצירת קשר",
-      "r3v": "support@wifigate.io"
+      "r3k": "דוא\"ל",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "s": {
       "agreement": {
@@ -1093,8 +1103,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -1307,8 +1319,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -1521,8 +1535,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -1735,8 +1751,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -1949,8 +1967,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -2163,8 +2183,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -2377,8 +2399,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -2591,8 +2615,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -2805,8 +2831,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -3019,8 +3047,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -3233,8 +3263,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -3447,8 +3479,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -3661,8 +3695,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -3875,8 +3911,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -4089,8 +4127,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -4303,8 +4343,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -4517,8 +4559,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -4731,8 +4775,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -4945,8 +4991,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -5159,8 +5207,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -5373,8 +5423,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -5587,8 +5639,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -5801,8 +5855,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -6015,8 +6071,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -6229,8 +6287,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -6443,8 +6503,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -6657,8 +6719,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -6871,8 +6935,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -7085,8 +7151,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -7299,8 +7367,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -7513,8 +7583,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -7727,8 +7799,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -7941,8 +8015,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
@@ -8155,8 +8231,10 @@
       "r1v": "Itay Nave – Engineering and Technology Solutions",
       "r2k": "D-U-N-S",
       "r2v": "626518977",
-      "r3k": "Contact",
-      "r3v": "support@wifigate.io"
+      "r3k": "Email",
+      "r3v": "support@wifigate.io",
+      "r4k": "WhatsApp",
+      "r4v": "WhatsApp @WIFIGATE"
     },
     "contentLang": "en",
     "s": {
