@@ -1,0 +1,357 @@
+import { Roles, PortalStates, AuthErrors, HttpStatus } from "./host-constants.js";
+import {
+  initializeSiteAuth,
+  signOut,
+  reauthenticate,
+  beginTotpEnrollment,
+  finishTotpEnrollment
+} from "./site-auth.js";
+import { getProfile, approveEmail } from "./api/index.js";
+import {
+  parseIdentity,
+  portalState,
+  canApproveEmail,
+  canEnroll
+} from "./host-dashboard-model.js";
+import { requestMfaChallenge } from "./host-mfa-challenge.js";
+import { authErrorMessage } from "./host-auth-errors.js";
+import { isLocalStaging } from "./firebase-config.js";
+import { calendarReferenceUrl } from "./host-portal-config.js";
+import qrcode from "./vendor/qrcode-generator.js";
+const $ = (selector) => document.querySelector(selector);
+let currentUser;
+let identity;
+let generation = 0;
+let enrollmentSecret;
+let actionBusy = false;
+let approvalAttempt;
+if (isLocalStaging) {
+  $("[data-staging]").hidden = false;
+}
+function clearSecret() {
+  enrollmentSecret = undefined;
+  $("#totp-secret").value = "";
+  $("#totp-qr").removeAttribute("src");
+  $("#enrollment-form").reset();
+  $("#totp-setup").hidden = true;
+}
+const protectedElements = {
+  dashboard: $("#dashboard-content"),
+  approval: $("#admin-approval"),
+  enrollment: $("#mfa-enrollment"),
+  verification: $("#mfa-verification"),
+  account: $("#account-details")
+};
+function hideProtected() {
+  protectedElements.dashboard.hidden = true;
+  protectedElements.approval.hidden = true;
+  protectedElements.enrollment.hidden = true;
+  protectedElements.verification.hidden = true;
+  protectedElements.account.hidden = true;
+  clearSecret();
+}
+function showStatus(title, message, retry = true) {
+  $("#access-panel").hidden = false;
+  $("#access-title").textContent = title;
+  $("#dashboard-status").textContent = message;
+  $("#refresh-access").hidden = !retry;
+}
+function renderProfile() {
+  const profile = identity.user;
+  $("#profile-name").textContent = profile.displayName || "-";
+  $("#profile-email").textContent = profile.email || "-";
+  $("#profile-role").textContent = identity.role || "No portal role";
+  $("#profile-access").textContent = identity.access.state;
+  $("#profile-mfa").textContent = identity.mfa.verified ? "Enrolled - session verified" : identity.mfa.enrolled ? "Enrolled - verification needed" : "Not enrolled";
+  $("#profile-mfa-policy").textContent = identity.role === Roles.ADMIN || identity.mfa.required ? "Required" : "Optional";
+  $("#account-details").hidden = false;
+  $("#optional-enrollment").hidden = portalState(identity) !== PortalStates.APPROVED || identity.mfa.enrolled || identity.role !== Roles.USER;
+}
+function showEnrollment(optional) {
+  $("#mfa-enrollment").hidden = false;
+  $("#enrollment-description").textContent = optional ? "Add an authenticator for extra account security. You can return to the calendar without enrolling." : "Your account requires an authenticator before you can enter the portal.";
+  $("#cancel-enrollment").hidden = !optional;
+  $("#enrollment-status").textContent = "";
+  $("#start-enrollment").hidden = false;
+  $("#start-enrollment").disabled = false;
+}
+async function loadDashboard(user) {
+  const requestGeneration = ++generation;
+  currentUser = user;
+  identity = undefined;
+  hideProtected();
+  $("#account-name").textContent = user.email || "Signed-in account";
+  $("#sign-out").disabled = false;
+  showStatus("Checking portal access", "Verifying your account...", false);
+  try {
+    const value = await getProfile(user);
+    if (requestGeneration !== generation) {
+      return;
+    }
+    identity = parseIdentity(value);
+    if (identity.user.uid !== user.uid) {
+      throw new Error(AuthErrors.INCOMPLETE_CONTRACT);
+    }
+    renderProfile();
+    const state = portalState(identity);
+    if (state === PortalStates.PENDING) {
+      showStatus(
+        "Approval pending",
+        "Your email is awaiting administrator approval. Check again after your admin approves it."
+      );
+      return;
+    }
+    if (state === PortalStates.DENIED) {
+      showStatus(
+        "Portal access denied",
+        "This verified email does not have active portal access. Contact your administrator. For Apple Hide My Email, provide your relay address."
+      );
+      return;
+    }
+    $("#access-panel").hidden = true;
+    if (state === PortalStates.ENROLLMENT) {
+      showEnrollment(false);
+      return;
+    }
+    if (state === PortalStates.VERIFICATION) {
+      $("#mfa-verification").hidden = false;
+      return;
+    }
+    $("#dashboard-content").hidden = false;
+    $("#admin-approval").hidden = !canApproveEmail(identity);
+  } catch (error) {
+    if (requestGeneration !== generation) {
+      return;
+    }
+    hideProtected();
+    identity = undefined;
+    if (error.status === HttpStatus.FORBIDDEN) {
+      showStatus(
+        error.code === AuthErrors.ACCESS_PENDING ? "Approval pending" : "Portal access denied",
+        "Your account is signed in but the server has not granted portal access. Contact your administrator."
+      );
+    } else {
+      showStatus("Unable to check access", authErrorMessage(error));
+    }
+  }
+}
+if (calendarReferenceUrl) {
+  $("#calendar-image").src = calendarReferenceUrl;
+  $("#calendar-image").addEventListener("load", () => {
+    $("#calendar-image").hidden = false;
+    $("#calendar-status").hidden = true;
+  });
+  $("#calendar-image").addEventListener("error", () => {
+    $("#calendar-image").hidden = true;
+    $("#calendar-status").hidden = false;
+    $("#calendar-status").textContent = "The calendar reference image could not be loaded.";
+  });
+}
+initializeSiteAuth((user) => {
+  if (!user) {
+    ++generation;
+    currentUser = undefined;
+    identity = undefined;
+    hideProtected();
+    location.replace("/login/");
+    return;
+  }
+  void loadDashboard(user);
+}).catch(
+  (error) => showStatus("Unable to sign in", authErrorMessage(error), false)
+);
+$("#sign-out").addEventListener("click", async () => {
+  ++generation;
+  hideProtected();
+  identity = undefined;
+  $("#sign-out").disabled = true;
+  try {
+    await signOut();
+    location.replace("/login/");
+  } catch (error) {
+    $("#sign-out").disabled = false;
+    showStatus("Unable to sign out", authErrorMessage(error));
+  }
+});
+$("#refresh-access").addEventListener("click", () => {
+  if (currentUser && !actionBusy) {
+    void loadDashboard(currentUser);
+  }
+});
+$("#optional-enrollment").addEventListener("click", () => {
+  if (identity?.role !== Roles.USER || portalState(identity) !== PortalStates.APPROVED) {
+    return;
+  }
+  clearSecret();
+  showEnrollment(true);
+  $("#dashboard-content").hidden = true;
+});
+$("#cancel-enrollment").addEventListener("click", () => {
+  if (actionBusy) {
+    return;
+  }
+  clearSecret();
+  if (currentUser) {
+    void loadDashboard(currentUser);
+  }
+});
+$("#start-enrollment").addEventListener("click", async () => {
+  if (actionBusy || !identity || !canEnroll(identity)) {
+    return;
+  }
+  actionBusy = true;
+  const user = currentUser;
+  const requestGeneration = generation;
+  $("#start-enrollment").disabled = true;
+  $("#enrollment-status").textContent = "Confirm your identity in the provider window...";
+  try {
+    await reauthenticate(user, requestMfaChallenge);
+    if (requestGeneration !== generation) {
+      return;
+    }
+    const fresh = parseIdentity(await getProfile(user));
+    if (requestGeneration !== generation) {
+      return;
+    }
+    if (fresh.user.uid !== user.uid || !canEnroll(fresh)) {
+      await loadDashboard(user);
+      return;
+    }
+    enrollmentSecret = await beginTotpEnrollment(user);
+    if (requestGeneration !== generation) {
+      clearSecret();
+      return;
+    }
+    const qr = qrcode(0, "M");
+    qr.addData(enrollmentSecret.generateQrCodeUrl(user.email, "WIFIGATE Host"));
+    qr.make();
+    $("#totp-qr").src = qr.createDataURL(5, 20);
+    $("#totp-secret").value = enrollmentSecret.secretKey;
+    $("#totp-settings").textContent = "Time-based code - " + enrollmentSecret.codeLength + " digits - " + enrollmentSecret.codeIntervalSeconds + " seconds - " + enrollmentSecret.hashingAlgorithm;
+    $("#totp-setup").hidden = false;
+    $("#start-enrollment").hidden = true;
+    $("#enrollment-status").textContent = "Enter the current code to confirm setup.";
+    $("#enrollment-form input").focus();
+  } catch (error) {
+    if (requestGeneration === generation) {
+      clearSecret();
+      $("#enrollment-status").textContent = authErrorMessage(error);
+    }
+  } finally {
+    actionBusy = false;
+    $("#start-enrollment").disabled = false;
+  }
+});
+$("#enrollment-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (actionBusy || !enrollmentSecret) {
+    return;
+  }
+  const user = currentUser;
+  const requestGeneration = generation;
+  const button = event.currentTarget.querySelector("button");
+  actionBusy = true;
+  button.disabled = true;
+  $("#enrollment-status").textContent = "Verifying setup...";
+  try {
+    await finishTotpEnrollment(
+      user,
+      enrollmentSecret,
+      event.currentTarget.elements.namedItem("code").value.trim()
+    );
+    clearSecret();
+    if (requestGeneration === generation) {
+      await loadDashboard(user);
+    }
+  } catch (error) {
+    if (requestGeneration === generation) {
+      $("#enrollment-status").textContent = authErrorMessage(error);
+    }
+  } finally {
+    actionBusy = false;
+    button.disabled = false;
+  }
+});
+$("#verify-session").addEventListener("click", async () => {
+  if (actionBusy || !currentUser) {
+    return;
+  }
+  actionBusy = true;
+  const user = currentUser;
+  const requestGeneration = generation;
+  $("#verify-session").disabled = true;
+  $("#verification-status").textContent = "Confirm sign-in and enter your authenticator code...";
+  try {
+    await reauthenticate(user, requestMfaChallenge);
+    await user.getIdToken(true);
+    if (requestGeneration === generation) {
+      await loadDashboard(user);
+    }
+  } catch (error) {
+    if (requestGeneration === generation) {
+      $("#verification-status").textContent = authErrorMessage(error);
+    }
+  } finally {
+    actionBusy = false;
+    $("#verify-session").disabled = false;
+  }
+});
+$("#approval-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (actionBusy || !canApproveEmail(identity)) {
+    return;
+  }
+  const form = event.currentTarget;
+  const email = form.elements.namedItem("email").value.trim().toLowerCase();
+  if (!approvalAttempt || approvalAttempt.email !== email) {
+    approvalAttempt = { email, key: crypto.randomUUID() };
+  }
+  const user = currentUser;
+  const requestGeneration = generation;
+  const button = form.querySelector("button");
+  actionBusy = true;
+  button.disabled = true;
+  $("#approval-status").textContent = "Checking administrator access...";
+  try {
+    const fresh = parseIdentity(await getProfile(user));
+    if (requestGeneration !== generation) {
+      return;
+    }
+    if (fresh.user.uid !== user.uid || !canApproveEmail(fresh)) {
+      await loadDashboard(user);
+      return;
+    }
+    await approveEmail(user, email, approvalAttempt.key);
+    if (requestGeneration !== generation) {
+      return;
+    }
+    $("#approval-status").textContent = "Access approved for " + email + ". They can now sign in with that verified email.";
+    approvalAttempt = undefined;
+    form.reset();
+  } catch (error) {
+    if (requestGeneration !== generation) {
+      return;
+    }
+    $("#approval-status").textContent = authErrorMessage(error);
+    if (error.status === HttpStatus.UNAUTHORIZED || error.status === HttpStatus.FORBIDDEN) {
+      await loadDashboard(user);
+    }
+  } finally {
+    actionBusy = false;
+    button.disabled = false;
+  }
+});
+window.addEventListener("focus", () => {
+  if (currentUser && !actionBusy && !enrollmentSecret) {
+    void loadDashboard(currentUser);
+  }
+});
+window.addEventListener("pagehide", () => {
+  ++generation;
+  hideProtected();
+});
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted && currentUser) {
+    void loadDashboard(currentUser);
+  }
+});

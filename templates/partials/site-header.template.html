@@ -1,0 +1,24 @@
+<!-- Shared site navigation. Labels and URLs come from scripts/site-navigation.mjs. -->
+<header class="site-header" id="top">
+  <nav class="nav" aria-label="Main navigation">
+    <a href="/" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
+      <img src="/assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE" class="nav__logo" width="1106" height="256">
+    </a>
+    <button class="nav__toggle" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">
+      <span class="nav__toggle-bar"></span>
+      <span class="nav__toggle-bar"></span>
+      <span class="nav__toggle-bar"></span>
+    </button>
+    <div class="nav__links-wrapper" id="primary-navigation">
+      <div class="topbar-nav"></div>
+    </div>
+    <div class="language-selector">
+      <button type="button" class="language-selector__button" id="language-button" aria-label="Select language">
+        <span class="language-selector__flag" id="selected-flag"></span>
+        <span class="language-selector__selected"></span>
+        <span class="language-selector__arrow" aria-hidden="true">▾</span>
+      </button>
+      <div class="language-selector__dropdown" id="language-dropdown"></div>
+    </div>
+  </nav>
+</header>

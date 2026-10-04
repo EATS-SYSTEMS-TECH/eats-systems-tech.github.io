@@ -18,6 +18,27 @@ export default {
     "hotels-airbnb": {
       label: "హోటళ్లు, Airbnb మరియు అతిథి అపార్ట్‌మెంట్‌లు",
       title: "హోటళ్లు, Airbnb మరియు అతిథి అపార్ట్‌మెంట్‌లకు స్మార్ట్ యాక్సెస్",
+      heroLead:
+        "The guest receives a personal entry permission on their phone the moment the booking is confirmed. No key cards, no lockbox, no waiting at reception.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "calendar",
+          title: "Opens at check-in, closes at check-out",
+          text: "There is no moment when somebody has to remember to revoke access. The permission activates at the arrival time you set and expires at departure, even when nobody from the team is on site.",
+        },
+        {
+          icon: "invite",
+          title: "The booking creates the access",
+          text: "Through the WIFIGATE API your reservation system connects straight to access, so every confirmed booking issues the entry permission itself, with no manual step in between.",
+        },
+        {
+          icon: "keyless",
+          title: "No cards to issue, no lockbox to share",
+          text: "Nothing to program, nothing to hand over, no card left behind by a previous guest and no lockbox code passed along. The phone already in the guest's pocket is the only way in.",
+        },
+      ],
       paragraph:
         "WIFIGATE అతిథులు తమ ఫోన్‌లోనే సులభమైన, భద్రమైన డిజిటల్ యాక్సెస్ పొందేలా చేస్తుంది. భౌతిక తాళాలు, కార్డులు లేదా రిసెప్షన్‌తో అవసరం లేని సమన్వయం తగ్గుతుంది. WIFIGATE API ద్వారా బుకింగ్ ప్రక్రియను యాక్సెస్ వ్యవస్థతో అనుసంధానించవచ్చు, కాబట్టి బుకింగ్ ఆమోదం పొందిన వెంటనే అతిథికి కాల పరిమితి ఉన్న యాక్సెస్ ఆటోమేటిక్‌గా పంపవచ్చు. యాక్సెస్ చెక్-ఇన్ సమయంలో ప్రారంభమై చెక్-అవుట్ సమయంలో స్వయంగా ముగుస్తుంది.",
       bullets: [
@@ -25,7 +46,6 @@ export default {
         "WIFIGATE API ద్వారా పూర్తి ఆటోమేషన్‌కు మద్దతు",
         "ఆతిథ్య తేదీలు మరియు సమయాల ప్రకారం తాత్కాలిక యాక్సెస్",
         "మాన్యువల్ చెక్-ఇన్, తాళాలు, కార్డులు లేదా కోడ్‌ల అవసరం తగ్గుతుంది",
-        "హోటళ్లు, Airbnb, సెలవు ఇళ్లు మరియు అతిథి అపార్ట్‌మెంట్‌లకు అనుకూలం",
         "సిబ్బంది, శుభ్రపరిచే బృందం, నిర్వహణ మరియు సరఫరాదారుల అనుమతుల నిర్వహణ",
         "అతిథులకు మరింత మృదువైన రాక అనుభవం",
         "చెక్-అవుట్ సమయంలో యాక్సెస్ స్వయంగా ముగింపు",
@@ -39,6 +59,27 @@ export default {
     "roller-shutters": {
       label: "వ్యాపారాలు మరియు దుకాణాల రోలర్ షట్టర్లు",
       title: "వ్యాపారాలు మరియు దుకాణాల రోలర్ షట్టర్లకు స్మార్ట్, భద్రమైన నియంత్రణ",
+      heroLead:
+        "The shutter opens from a phone, and control moves to the protected inner side of the business. Fewer remotes, fewer keys and fewer exposed entry points outside.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "shutter",
+          title: "Control moves inside, out of reach",
+          text: "A switch or key box on an exterior wall is exposed to anyone walking past. When opening comes from a phone, the control point can sit on the inside of the shop.",
+        },
+        {
+          icon: "users",
+          title: "A separate permission for every employee",
+          text: "A key or remote left with a former employee keeps working. A personal permission opens on the first day and closes on the last, with no lock to change and no hardware to collect.",
+        },
+        {
+          icon: "phone",
+          title: "Open without standing at the shutter",
+          text: "A key forces you to stand right at the control point, hands full, with a poor view of the shutter. From a phone it happens at a safer distance.",
+        },
+      ],
       paragraph:
         "దుకాణాలు మరియు వ్యాపారాల్లో రోలర్ షట్టర్లు తరచుగా రిమోట్లు, తాళాలు, బయట ఉన్న కీ బాక్స్ లేదా బాహ్య స్విచ్‌లతో నియంత్రించబడతాయి. ఇవి పోవచ్చు, మాజీ ఉద్యోగుల దగ్గర ఉండిపోవచ్చు, కాపీ చేయబడవచ్చు లేదా బయట కనిపించే యాక్సెస్ పాయింట్‌గా మారవచ్చు. WIFIGATE నియంత్రణను యాప్‌కు మార్చి, యాక్సెస్ నియంత్రణను లోపల మరింత రక్షితంగా ఉంచడానికి సహాయపడుతుంది, తద్వారా షట్టర్‌ను సులభంగా తెరవడం లేదా మూసివేయడం, ఉద్యోగులు మరియు సరఫరాదారుల అనుమతులను నిర్వహించడం, భౌతిక తాళాలు మరియు రిమోట్లపై ఆధారాన్ని తగ్గించడం సాధ్యం అవుతుంది.",
       bullets: [
@@ -50,7 +91,6 @@ export default {
         "సమయం లేదా అవసరం ఆధారంగా తాత్కాలిక యాక్సెస్",
         "దుకాణాలు, గిడ్డంగులు, సేవా ప్రవేశాలు మరియు వ్యాపారాలకు అనుకూలం",
         "రోజువారీ ఆపరేషన్‌కు లోపలి, క్రమబద్ధమైన మరియు భద్రమైన పరిష్కారం",
-        "తాళాలు, కోడ్‌లు లేదా రిమోట్లు మార్చాల్సిన అవసరం తగ్గుతుంది",
       ],
       seoTitle: "వ్యాపారాలు మరియు దుకాణాల రోలర్ షట్టర్ల స్మార్ట్ నియంత్రణ | WIFIGATE",
       seoDescription:
@@ -60,6 +100,27 @@ export default {
     "electric-gates": {
       label: "ఎలక్ట్రిక్ గేట్లు మరియు పార్కింగ్ బ్యారియర్లు",
       title: "ఎలక్ట్రిక్ గేట్లు మరియు పార్కింగ్ బ్యారియర్లకు స్మార్ట్ ఓపెనింగ్",
+      heroLead:
+        "Open the gate or barrier from your phone, send a temporary permission to a guest or supplier, and let daily users through automatically. Existing remotes keep working alongside it.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "handsfree",
+          title: "Automatic opening on the daily drive in",
+          text: "Auto Open recognises that you have arrived and opens the gate for you. No hunting through the glovebox and no winding the window down in the rain.",
+        },
+        {
+          icon: "clock",
+          title: "Temporary access for a supplier or guest",
+          text: "Instead of handing over a remote and hoping it comes back, send a permission valid only for the window in which it is actually needed, after which it closes itself.",
+        },
+        {
+          icon: "gate",
+          title: "Existing remotes do not go in the bin",
+          text: "WIFIGATE joins what is already installed on the gate. Whoever prefers a remote keeps using it, and whoever prefers a phone simply opens from the app.",
+        },
+      ],
       paragraph:
         "ఎలక్ట్రిక్ గేట్లు మరియు పార్కింగ్ బ్యారియర్లు నివాసులు, ఉద్యోగులు, అతిథులు మరియు సరఫరాదారులు ఉపయోగిస్తారు. కానీ రిమోట్లు, కోడ్‌లు మరియు గేట్ తెరవడానికి ఫోన్ కాల్స్ నిర్వహణ త్వరగా క్లిష్టమవుతుంది. WIFIGATE ఫోన్ నుంచి గేటును తెరవడం, స్థిరమైన లేదా తాత్కాలిక యాక్సెస్ పంచడం, రోజూ వచ్చే వినియోగదారుల కోసం Auto Open ఉపయోగించడం, అవసరానికి అనుగుణంగా షెడ్యూల్ చేసిన ఈవెంట్లు ఏర్పాటు చేయడం సాధ్యం చేస్తుంది. వ్యవస్థ స్థానిక, భద్రమైన మరియు ప్రైవసీపై దృష్టి పెట్టిన ఆపరేషన్ కోసం రూపొందించబడింది, నెలవారీ సబ్‌స్క్రిప్షన్ అవసరం లేదు, అలాగే ఇప్పటికే ఉన్న రిమోట్లను యాప్ నియంత్రణతో పాటు ఉపయోగించవచ్చు.",
       bullets: [
@@ -70,9 +131,6 @@ export default {
         "రోజులు మరియు సమయాల ప్రకారం షెడ్యూల్ చేసిన ఓపెనింగ్ ఈవెంట్లు",
         "యాప్ నియంత్రణతో పాటు ఇప్పటికే ఉన్న రిమోట్లకు మద్దతు",
         "భౌతిక రిమోట్లు పంచాల్సిన అవసరం తగ్గుతుంది",
-        "పార్కింగ్ ప్రదేశాలు, భవనాలు, వ్యాపారాలు మరియు ప్రైవేట్ సముదాయాలకు అనుకూలం",
-        "వినియోగదారులు మరియు అనుమతులను సులభంగా నిర్వహించడం",
-        "క్లౌడ్‌పై తక్కువ ఆధారంతో స్థానిక, ప్రైవసీ-కేంద్రీకృత యాక్సెస్",
         "నియంత్రణ మరియు పారదర్శకత కోసం ఓపెనింగ్ చరిత్ర",
       ],
       seoTitle: "సబ్‌స్క్రిప్షన్ లేకుండా ఎలక్ట్రిక్ గేట్లు, పార్కింగ్ బ్యారియర్ల యాక్సెస్ | WIFIGATE",
@@ -83,6 +141,27 @@ export default {
     "garage-doors": {
       label: "గ్యారేజ్ తలుపులు మరియు ప్రైవేట్ పార్కింగ్",
       title: "గ్యారేజ్ తలుపులు మరియు ప్రైవేట్ పార్కింగ్‌కు స్మార్ట్ ఓపెనింగ్",
+      heroLead:
+        "The garage door opens from your phone, and access moves from a remote to a list you control. No remote to lose, and none left with someone who no longer needs it.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "keyless",
+          title: "A lost remote stops being a problem",
+          text: "A remote that falls out of a pocket keeps opening the garage for whoever finds it, and there is no way to cancel it. A permission on a phone is removed in a moment, with no motor to replace and no remotes to re-code.",
+        },
+        {
+          icon: "users",
+          title: "Access for the household and for tradespeople",
+          text: "Everyone at home gets their own permission, and a tradesperson coming once can be given access that closes at the end of the day. Nothing left under the mat.",
+        },
+        {
+          icon: "phone",
+          title: "Your phone is already with you",
+          text: "No remote to move between cars and nothing to hunt for when somebody else is driving. What opens the door is the one thing you never leave without.",
+        },
+      ],
       paragraph:
         "గ్యారేజ్ తలుపులు మరియు ప్రైవేట్ పార్కింగ్ సాధారణంగా భౌతిక రిమోట్లతో నియంత్రించబడతాయి. అవి పోవచ్చు, ఇక యాక్సెస్ అవసరం లేని వ్యక్తుల దగ్గర ఉండిపోవచ్చు లేదా కొన్ని పరిస్థితుల్లో కాపీ చేయబడవచ్చు. WIFIGATE నియంత్రణను ఫోన్ నుంచి డిజిటల్ యాక్సెస్‌గా మార్చి, కుటుంబ సభ్యులు, ఉద్యోగులు లేదా అతిథుల అనుమతులను నిర్వహించడానికి, రిమోట్ లేదా కోడ్ ఇవ్వకుండా తాత్కాలిక యాక్సెస్ పంచడానికి సహాయపడుతుంది.",
       bullets: [
@@ -103,6 +182,27 @@ export default {
     "private-homes": {
       label: "ప్రైవేట్ ఇళ్లు",
       title: "ప్రైవేట్ ఇళ్లకు స్మార్ట్, భద్రమైన యాక్సెస్",
+      heroLead:
+        "A fixed keypad code wears down, gets passed around and stays with people who no longer need it. Give each person their own permission, and a temporary one to anyone visiting once.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "shield",
+          title: "A keypad gives your code away",
+          text: "After enough years, four worn keys say exactly which digits make up the code. A permission on a phone leaves no marks on the wall.",
+        },
+        {
+          icon: "clock",
+          title: "Access for the delivery, not forever",
+          text: "A code given to a courier, a technician or a guest is still with them a year later. A temporary permission closes itself the moment the visit is over.",
+        },
+        {
+          icon: "roster",
+          title: "A list instead of guesswork",
+          text: "A shared code has no list of holders. In its place comes a list where every permission has a name, so it is clear at any moment who can get into the house.",
+        },
+      ],
       paragraph:
         "ప్రైవేట్ ఇళ్లలో కీప్యాడ్‌లు, తాళాలు మరియు రిమోట్లు బలహీన పాయింట్లుగా మారవచ్చు. కాలక్రమేణా కీప్యాడ్ బటన్‌లపై గుర్తులు కనిపించవచ్చు, రిమోట్లు పోవచ్చు లేదా ఇతరుల దగ్గర ఉండిపోవచ్చు, అలాగే కోడ్ డెలివరీ సిబ్బంది, సేవా వ్యక్తులు లేదా అతిథులకు ఇచ్చి తర్వాత కూడా వారి దగ్గర ఉండవచ్చు. WIFIGATE ఫోన్ నుంచి ప్రవేశాన్ని నిర్వహించడం, స్థిర కోడ్‌ను బయటపెట్టకుండా తాత్కాలిక అతిథి యాక్సెస్ పంచడం, తాళాలు, కోడ్‌లు లేదా రిమోట్లు మార్చకుండా అనుమతులను రద్దు చేయడం సులభం చేస్తుంది.",
       bullets: [
@@ -123,6 +223,27 @@ export default {
     "residential-buildings": {
       label: "నివాస భవనాలు",
       title: "నివాస భవనాలకు స్మార్ట్ యాక్సెస్ నిర్వహణ",
+      heroLead:
+        "A fixed code that travels between couriers, guests and service people can end up in the wrong hands. Give each person a personal, time-limited entry permission and cut unauthorised entries and the risk of theft.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "roster",
+          title: "Know who holds access, at any moment",
+          text: "A shared code has no list of holders. There is no way to tell who has it, who passed it on or when. In its place comes a current list where every permission has a name, so the picture of who can enter the building is clear at any point in time.",
+        },
+        {
+          icon: "invite",
+          title: "Arrival instructions in one tap",
+          text: "Address, floor, apartment, gate code and lobby code. You dictate that same sequence again to every guest, every courier and every tradesperson. With WIFIGATE all of it collapses into a single tap, and the visitor finds their own way to the door.",
+        },
+        {
+          icon: "handsfree",
+          title: "Hands-free entry",
+          text: "Auto Open recognises that you have arrived and opens the gate or door for you. No searching for a key and no taking out your phone, even when your hands are full of shopping, a pushchair or children.",
+        },
+      ],
       paragraph:
         "నివాస భవనాల్లో పంచుకునే ప్రవేశ కోడ్ నివాసులు, అతిథులు, డెలివరీలు, సరఫరాదారులు మరియు సేవా సిబ్బందికి త్వరగా వ్యాపిస్తుంది. కాలక్రమేణా భవనానికి యాక్సెస్ ఎవరి దగ్గర ఉందో, కోడ్ ఎప్పుడు మార్చాలో లేదా రిమోట్లు ఎప్పుడు సేకరించాలో తెలుసుకోవడం కష్టమవుతుంది. WIFIGATE నివాసులు మరియు భవన కమిటీ యాక్సెస్‌ను క్రమబద్ధంగా నిర్వహించడం, తాత్కాలిక అతిథి అనుమతులు ఇవ్వడం, పంచుకునే కోడ్‌పై ఆధారాన్ని తగ్గించడం, భవనం, లాబీ, గేట్ లేదా పార్కింగ్ ప్రవేశంపై మెరుగైన నియంత్రణ ఉంచడం సాధ్యం చేస్తుంది.",
       bullets: [
@@ -143,6 +264,27 @@ export default {
     "office-buildings": {
       label: "ఆఫీస్ భవనాలు",
       title: "ఆఫీస్ భవనాలకు స్మార్ట్ యాక్సెస్",
+      heroLead:
+        "Standing permissions for staff, temporary ones for visitors and suppliers. No queue at reception, no badges to issue and no keys to collect when somebody leaves.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "users",
+          title: "Somebody joins, somebody leaves",
+          text: "Onboarding and offboarding are one action on a list, not a round of issuing a badge, collecting a badge and changing a lock. The permission opens and closes on the dates you set.",
+        },
+        {
+          icon: "invite",
+          title: "The visitor arrives already holding the entry",
+          text: "Instead of waiting at reception for somebody to come down, the visitor arrives with a permission sent to their phone, valid only for the time of the meeting.",
+        },
+        {
+          icon: "history",
+          title: "A record of entries for operations",
+          text: "Every opening carries a name and a time, so you can check afterwards who entered a floor, a store room or the car park without reconstructing it from memory.",
+        },
+      ],
       paragraph:
         "ఆఫీస్ భవనాలు ఉద్యోగులు, సందర్శకులు, సరఫరాదారులు మరియు ఆపరేషన్ బృందాలకు సులభమైన ప్రవేశాన్ని ఇవ్వాలి, అదే సమయంలో రిసెప్షన్‌పై ఒత్తిడి పెరగకూడదు మరియు తాళాలు లేదా కార్డులను చేతితో నిర్వహించాల్సిన అవసరం ఉండకూడదు. WIFIGATE ఉద్యోగులకు స్థిర అనుమతులు, సందర్శకులకు తాత్కాలిక అనుమతులు ఇవ్వడం, ఫోన్ నుంచి యాక్సెస్ నియంత్రించడం, ఆధునిక వ్యాపార వాతావరణానికి సరిపోయే క్రమబద్ధమైన ప్రవేశ నిర్వహణను అందిస్తుంది.",
       bullets: [
@@ -163,6 +305,27 @@ export default {
     "entry-doors-magnetic-locks": {
       label: "వ్యాపారాల ప్రవేశ తలుపులు మరియు మాగ్నెటిక్ లాక్‌లు",
       title: "వ్యాపారాల ప్రవేశ తలుపులు మరియు మాగ్నెటిక్ లాక్‌లకు స్మార్ట్ ఓపెనింగ్",
+      heroLead:
+        "Your business entrance opens from a phone, and permissions change without changing a code. It works with the electric or magnetic lock already fitted to the door.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "keyless",
+          title: "One code for everyone stops being a solution",
+          text: "A code that travels between staff, suppliers and customers is no longer really closing the door. A personal permission for each person removes the need to change the code every time somebody moves on.",
+        },
+        {
+          icon: "clock",
+          title: "Temporary access for a supplier or technician",
+          text: "For the cleaner who comes in the evening, the technician who comes once and the courier who needs five minutes: a permission valid for exactly that window, which then closes itself.",
+        },
+        {
+          icon: "phone",
+          title: "No complex access control system",
+          text: "No control cabinet, no management software and no card reader to mount. The existing lock stays where it is, and everything is managed from the app.",
+        },
+      ],
       paragraph:
         "చిన్న వ్యాపారాలు, క్లినిక్‌లు, స్టూడియోలు, గిడ్డంగులు మరియు కార్యాలయాలు తరచుగా కీప్యాడ్, తాళం లేదా సాధారణ మాగ్నెటిక్ లాక్ ఉపయోగిస్తాయి. కోడ్ ఉద్యోగులు, సరఫరాదారులు మరియు అతిథుల మధ్య పంచబడినప్పుడు లేదా భద్రతను తగ్గించకుండా తాత్కాలిక యాక్సెస్ ఇవ్వాల్సినప్పుడు సమస్య మొదలవుతుంది. WIFIGATE ఫోన్ నుంచి ప్రవేశ తలుపును నిర్వహించడం, తాత్కాలిక అనుమతి పంచడం, స్థిర కోడ్‌లు, భౌతిక తాళాలు లేదా ప్రతి ప్రవేశానికి చేతితో సమన్వయం అవసరం తగ్గించడం సాధ్యం చేస్తుంది.",
       bullets: [
@@ -183,6 +346,27 @@ export default {
     "sports-facilities": {
       label: "స్పోర్ట్స్ ఫెసిలిటీలు",
       title: "స్పోర్ట్స్ ఫెసిలిటీలకు స్మార్ట్ యాక్సెస్ నియంత్రణ",
+      heroLead:
+        "Members, coaches and guests enter on their own permission and within opening hours. No shared key, and no code going around a WhatsApp group.",
+      // Each highlight stands alone: the hero lead states the problem and the
+      // benefits grid lists the specifics. Nothing is repeated between them.
+      highlights: [
+        {
+          icon: "calendar",
+          title: "Access opens with the booking",
+          text: "Whoever booked a court for a given hour gets a permission that opens then and closes at the end of it. Nobody has to wait at the gate to let them in.",
+        },
+        {
+          icon: "users",
+          title: "A member, a coach and a guest are not the same",
+          text: "Each type of user gets their own permission: a standing member, a coach who comes on set days and a one-off guest. All on one list, with no key changing hands.",
+        },
+        {
+          icon: "history",
+          title: "Know who was on site and when",
+          text: "When traffic changes through the day, a record of entries helps operations, settles questions about incidents, and confirms the site was locked at the end of the day.",
+        },
+      ],
       paragraph:
         "స్పోర్ట్స్ ఫెసిలిటీలు, Padel కోర్టులు, టెన్నిస్ కోర్టులు, జిమ్‌లు మరియు ట్రైనింగ్ కేంద్రాలు సభ్యులు, కోచ్‌లు, సిబ్బంది మరియు అతిథుల యాక్సెస్‌ను పని గంటలు, బుకింగ్‌లు మరియు ఈవెంట్ల ప్రకారం నిర్వహించాలి. WIFIGATE ఫోన్ నుంచి తాత్కాలిక లేదా స్థిర యాక్సెస్ ఇవ్వడం, పంచుకునే తాళం లేదా కోడ్‌పై ఆధారాన్ని తగ్గించడం, రోజంతా రాకపోకలు మారుతూ ఉండే ప్రదేశాల్లో వినియోగదారుల ప్రవేశ అనుభవాన్ని మెరుగుపరచడం సాధ్యం చేస్తుంది.",
       bullets: [
