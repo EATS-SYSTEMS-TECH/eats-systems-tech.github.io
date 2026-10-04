@@ -18,6 +18,7 @@ import { authErrorMessage } from "./host-auth-errors.js";
 import { isLocalStaging } from "./firebase-config.js";
 import { calendarReferenceUrl } from "./host-portal-config.js";
 import qrcode from "./vendor/qrcode-generator.js";
+import { loadHostManagement, clearHostManagement } from "./host-management.js";
 const $ = (selector) => document.querySelector(selector);
 let currentUser;
 let identity;
@@ -43,6 +44,7 @@ const protectedElements = {
   account: $("#account-details")
 };
 function hideProtected() {
+  clearHostManagement();
   protectedElements.dashboard.hidden = true;
   protectedElements.approval.hidden = true;
   protectedElements.enrollment.hidden = true;
@@ -119,6 +121,7 @@ async function loadDashboard(user) {
     }
     $("#dashboard-content").hidden = false;
     $("#admin-approval").hidden = !canApproveEmail(identity);
+    void loadHostManagement(user, identity);
   } catch (error) {
     if (requestGeneration !== generation) {
       return;
@@ -360,6 +363,11 @@ function updateAccessAction() {
   $("#access-role-label").hidden = action !== "approve";
   $("#delete-access-note").hidden = action !== "delete";
 }
+window.addEventListener("host:totp-required", () => {
+  if (!currentUser || !identity || actionBusy) return;
+  if (!identity.mfa.enrolled) showEnrollment(false);
+  else $("#mfa-verification").hidden = false;
+});
 $("#approval-form").elements.namedItem("action").addEventListener("change", updateAccessAction);
 window.addEventListener("focus", () => {
   if (currentUser && !actionBusy && !enrollmentSecret) {
