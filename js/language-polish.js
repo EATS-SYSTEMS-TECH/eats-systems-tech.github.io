@@ -602,7 +602,7 @@
     },
   };
 
-  const WHATSAPP_HANDLE_LABEL = "WhatsApp @WIFIAGTE";
+  const WHATSAPP_HANDLE_LABEL = "WhatsApp @WIFIGATE";
 
   const marketingCopyOverrides = {
     en: {

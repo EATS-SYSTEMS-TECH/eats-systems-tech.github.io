@@ -119,7 +119,7 @@ var translations = {
       subtitle: "We would be happy to learn about your needs, present the system's capabilities, and see together whether WIFIGATE is the right fit for you.",
       ctaTitle: "Interested in WIFIGATE?",
       ctaText: "Send us a WhatsApp message to receive a price quote, full system details, and a fit assessment for your needs.",
-      ctaButton: "WhatsApp @WIFIAGTE",
+      ctaButton: "WhatsApp @WIFIGATE",
       terms: "Terms & Conditions",
       name: "Itay Nave",
       whatsapp: "WhatsApp"
