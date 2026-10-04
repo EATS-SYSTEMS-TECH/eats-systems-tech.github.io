@@ -42,34 +42,20 @@ const homeDataFiles = [
   "js/site-copy-overrides.js",
 ];
 
+// The legal text comes last: it is generated from scripts/legal/*-content.mjs
+// (scripts/legal/build-legal-pages.mjs) and nothing may rewrite it afterwards.
+const legalPageData = (pageKey) => [
+  "js/translations.js",
+  "js/translations-extra.js",
+  "js/contact-footer-translations.js",
+  "js/language-polish.js",
+  "js/site-copy-overrides.js",
+  `js/legal/${pageKey}-content.js`,
+];
 const legalDataFiles = {
-  cookies: [
-    "js/translations.js",
-    "js/translations-extra.js",
-    "js/contact-footer-translations.js",
-    "js/cookies-translations.js",
-    "js/cookies-translations-extra.js",
-    "js/language-polish.js",
-    "js/site-copy-overrides.js",
-  ],
-  "privacy-policy": [
-    "js/translations.js",
-    "js/translations-extra.js",
-    "js/contact-footer-translations.js",
-    "js/privacy-translations.js",
-    "js/privacy-translations-extra.js",
-    "js/language-polish.js",
-    "js/site-copy-overrides.js",
-  ],
-  "terms-and-conditions": [
-    "js/translations.js",
-    "js/translations-extra.js",
-    "js/contact-footer-translations.js",
-    "js/legal-translations.js",
-    "js/legal-translations-extra.js",
-    "js/language-polish.js",
-    "js/site-copy-overrides.js",
-  ],
+  cookies: legalPageData("cookies"),
+  "privacy-policy": legalPageData("privacy-policy"),
+  "terms-and-conditions": legalPageData("terms-and-conditions"),
 };
 
 const homeRuntimeScriptsToRemove = [
@@ -89,12 +75,6 @@ const homeRuntimeScriptsToRemove = [
 const legalRuntimeScriptsToRemove = [
   "js/translations.js",
   "js/translations-extra.js",
-  "js/cookies-translations.js",
-  "js/cookies-translations-extra.js",
-  "js/privacy-translations.js",
-  "js/privacy-translations-extra.js",
-  "js/legal-translations.js",
-  "js/legal-translations-extra.js",
   "js/i18n.js",
   "js/hero.js",
 ];
@@ -1354,6 +1334,29 @@ async function buildHomePages(homeData) {
   return sitemapEntries;
 }
 
+// English and Hebrew carry the full legal text. Every other locale shows the
+// English text (lang="en", left to right) under a note in its own language
+// that the English version governs; English and Hebrew drop that note.
+function applyLegalContentLanguage($, bundle, locale) {
+  const legal = bundle.legal || {};
+  const note = $('[data-i18n="legal.hero.languageNote"]');
+  if (!legal.hero?.languageNote) {
+    note.remove();
+  } else {
+    note.attr("lang", locale).attr("role", "note");
+  }
+  if (legal.contentLang !== "en") return;
+  $('[data-i18n^="legal.s."], [data-i18n="legal.contents"], [data-i18n^="legal.hero."]').each((_, element) => {
+    const key = $(element).attr("data-i18n");
+    if (key === "legal.hero.languageNote" || key === "legal.hero.eyebrow") return;
+    const value = getNestedValue(bundle, key);
+    if (typeof value === "string") {
+      $(element).attr("lang", "en").attr("dir", "ltr").text(value);
+    }
+  });
+  $(".legal-card .legal-toc, .legal-card .legal-section").attr("lang", "en").attr("dir", "ltr");
+}
+
 async function buildLegalPages(homeData, legalCollections) {
   for (const [pageKey, templatePath] of Object.entries(legalTemplatePaths)) {
     const template = await readHtmlTemplate(templatePath);
@@ -1370,6 +1373,7 @@ async function buildLegalPages(homeData, legalCollections) {
       removeScripts($, legalRuntimeScriptsToRemove);
       appendScripts($, legalRuntimeScriptsToAdd, "script[src*='js/legal-page.js']", locale, pageKey);
       applyDataI18nTranslations($, bundle, locale);
+      applyLegalContentLanguage($, bundle, locale);
       updateFooterStaticUi($, bundle, locale, homeData.homepageCopies[locale]?.footer);
       updateAccessibilityMarkup($, accessibilityBundle);
       rewriteLegalInternalLinks($, locale, pageKey);
