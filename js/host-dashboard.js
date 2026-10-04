@@ -43,8 +43,8 @@ const protectedElements = {
   verification: $("#mfa-verification"),
   account: $("#account-details")
 };
-function hideProtected() {
-  clearHostManagement();
+function hideProtected(sessionEnded = false) {
+  clearHostManagement({ sessionEnded });
   protectedElements.dashboard.hidden = true;
   protectedElements.approval.hidden = true;
   protectedElements.enrollment.hidden = true;
@@ -97,6 +97,7 @@ async function loadDashboard(user) {
     renderProfile();
     const state = portalState(identity);
     if (state === PortalStates.PENDING) {
+      clearHostManagement({ sessionEnded: true });
       showStatus(
         "Approval pending",
         "Your email is awaiting administrator approval. Check again after your admin approves it."
@@ -104,6 +105,7 @@ async function loadDashboard(user) {
       return;
     }
     if (state === PortalStates.DENIED) {
+      clearHostManagement({ sessionEnded: true });
       showStatus(
         "Portal access denied",
         "This verified email does not have active portal access. Contact your administrator. For Apple Hide My Email, provide your relay address."
@@ -126,7 +128,7 @@ async function loadDashboard(user) {
     if (requestGeneration !== generation) {
       return;
     }
-    hideProtected();
+    hideProtected(error.status === HttpStatus.FORBIDDEN || error.status === HttpStatus.UNAUTHORIZED);
     identity = undefined;
     if (error.status === HttpStatus.FORBIDDEN) {
       showStatus(
@@ -155,7 +157,7 @@ initializeSiteAuth((user) => {
     ++generation;
     currentUser = undefined;
     identity = undefined;
-    hideProtected();
+    hideProtected(true);
     location.replace("/login/");
     return;
   }
