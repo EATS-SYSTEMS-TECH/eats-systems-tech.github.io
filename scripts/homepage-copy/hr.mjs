@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Odaberite jezik",
     platform: "Platforma",
     solutions: "Rješenja",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Vodič za proizvod",
     contact: "Javite nam se",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Bez naknada za pretplatu",
-        text: "Uređaj i instalaciju plaćate jednokratno, bez mjesečne pretplate, ciklusa obnove ili stalnih naknada za platformu. Jedina iznimka je komercijalna upotreba WIFIGATE Automation, za koju je potrebna pretplata.",
+        text: "Uređaj i instalaciju plaćate jednokratno, bez mjesečne pretplate, ciklusa obnove ili stalnih naknada za platformu. Jedina iznimka je komercijalna upotreba WIFIGATE Host, za koju je potrebna pretplata.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hotele", "Smještaje na Airbnbju", "Apartmane za goste", "Smještajne objekte"],
     promise: "Dočekajte goste. Automatizirajte njihov pristup.",
     subtitle: "Od hotelskih boravaka do apartmana za odmor povežite svaku rezervaciju sa sigurnim pristupom odgovarajućim dvorišnim vratima, ulaznim vratima ili garaži. Gosti ulaze telefonom, a pristup počinje pri prijavi i automatski završava pri odjavi.",
-    cta: "Istražite WIFIGATE Automation",
+    cta: "Istražite WIFIGATE Host",
     imageAlt: "Gosti ulaze u smještaj uz pomoć telefona",
     stayCaption: "Za svaki boravak je sve riješeno",
     staySteps: ["Rezervacija zaprimljena", "Pristup pri prijavi", "Istječe pri odjavi"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "Zahtijeva li WIFIGATE mjesečnu pretplatu?",
-        answer: "Ne. WIFIGATE uređaj i instalaciju plaćate jednokratno, bez mjesečne pretplate, ciklusa obnove ili stalnih naknada za platformu. Jedina iznimka je komercijalna upotreba WIFIGATE Automation, za koju je potrebna pretplata.",
+        answer: "Ne. WIFIGATE uređaj i instalaciju plaćate jednokratno, bez mjesečne pretplate, ciklusa obnove ili stalnih naknada za platformu. Jedina iznimka je komercijalna upotreba WIFIGATE Host, za koju je potrebna pretplata.",
       },
       {
         question: "Može li WIFIGATE omogućiti privremeni pristup za goste?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Sustav kontrole pristupa",
     monthlySubscription: "Mjesečna pretplata",
-    subscriptionValue: "Nije potrebna za standardni WIFIGATE; komercijalna upotreba WIFIGATE Automation zahtijeva pretplatu",
+    subscriptionValue: "Nije potrebna za standardni WIFIGATE; komercijalna upotreba WIFIGATE Host zahtijeva pretplatu",
     simCard: "SIM kartica",
     externalRouter: "Vanjski WiFi usmjerivač",
     notRequired: "Nije potrebno",

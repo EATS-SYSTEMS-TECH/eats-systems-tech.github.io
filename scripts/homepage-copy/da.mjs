@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Vælg sprog",
     platform: "Platform",
     solutions: "Løsninger",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Produktguide",
     contact: "Kontakt os",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Ingen abonnementsgebyrer",
-        text: "Betal én gang for enhed og installation uden månedligt abonnement, fornyelsescyklus eller løbende platformsgebyr. Kun kommerciel brug af WIFIGATE Automation er abonnementsbaseret.",
+        text: "Betal én gang for enhed og installation uden månedligt abonnement, fornyelsescyklus eller løbende platformsgebyr. Kun kommerciel brug af WIFIGATE Host er abonnementsbaseret.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hoteller", "Airbnb", "Gæstelejligheder", "Overnatningssteder"],
     promise: "Byd dine gæster velkommen. Automatiser deres adgang.",
     subtitle: "Fra hotelophold til ferieboliger kan du koble hver booking til sikker adgang til den rette port, dør eller garage. Gæsterne kommer ind med deres telefon, og adgangen starter ved indtjekning og udløber automatisk ved udtjekning.",
-    cta: "Udforsk WIFIGATE Automation",
+    cta: "Udforsk WIFIGATE Host",
     imageAlt: "Gæster bruger en telefon til at få adgang til deres overnatningssted",
     stayCaption: "Der er styr på hvert ophold",
     staySteps: ["Booking modtaget", "Adgang ved indtjekning", "Udløber ved udtjekning"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "Kræver WIFIGATE et månedligt abonnement?",
-        answer: "Nej. Du betaler én gang for WIFIGATE-enheden og installationen uden månedligt abonnement, fornyelsescyklus eller løbende platformsgebyr. WIFIGATE Automation til kommerciel brug er den eneste undtagelse og leveres som abonnement.",
+        answer: "Nej. Du betaler én gang for WIFIGATE-enheden og installationen uden månedligt abonnement, fornyelsescyklus eller løbende platformsgebyr. WIFIGATE Host til kommerciel brug er den eneste undtagelse og leveres som abonnement.",
       },
       {
         question: "Kan WIFIGATE give midlertidig gæsteadgang?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Adgangskontrolsystem",
     monthlySubscription: "Månedligt abonnement",
-    subscriptionValue: "Ikke påkrævet ved standardbrug af WIFIGATE; kommerciel brug af WIFIGATE Automation er abonnementsbaseret",
+    subscriptionValue: "Ikke påkrævet ved standardbrug af WIFIGATE; kommerciel brug af WIFIGATE Host er abonnementsbaseret",
     simCard: "SIM-kort",
     externalRouter: "Ekstern WiFi-router",
     notRequired: "Ikke påkrævet",

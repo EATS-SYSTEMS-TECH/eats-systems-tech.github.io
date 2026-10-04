@@ -8,23 +8,6 @@ a { color: inherit; }
 .brand { display: inline-block; width: 12rem; }
 .brand img { display: block; width: 100%; height: auto; }
 .eyebrow { color: #517095; font-size: .71rem; font-weight: 800; letter-spacing: .15em; }
-.portal-login { background: #eaf0f6; }
-.login-layout { min-height: 100vh; display: grid; grid-template-columns: minmax(0,1.1fr) minmax(22rem,.9fr); }
-.login-intro { display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; padding: clamp(2rem,5vw,5rem); color: #fff; background: radial-gradient(circle at 20% 75%, #1c567b 0, transparent 38%), linear-gradient(145deg,#102b46,#071827); }
-.login-intro .brand { filter: brightness(0) invert(1); }
-.login-intro .eyebrow { color: #83d4ff; }
-.login-intro h1 { max-width: 12ch; margin: 1rem 0; font-size: clamp(2.6rem,5vw,5.5rem); line-height: 1.13; letter-spacing: -.04em; }
-.login-intro p { max-width: 36rem; color: #c2d0de; line-height: 1.85; }
-.login-intro .login-footnote { margin: 0; font-size: .84rem; }
-.login-card { align-self: center; justify-self: center; width: min(27rem, calc(100% - 3rem)); padding: clamp(1.5rem,3vw,2.5rem); border: 1px solid #e0e6ed; border-radius: 16px; background: #fff; box-shadow: 0 24px 65px rgba(14,35,55,.1); }
-.login-card h2 { margin: .7rem 0; font-size: 1.8rem; }
-.login-card p { color: #637183; line-height: 1.6; }
-.login-actions { display: grid; gap: .75rem; margin-top: 2rem; }
-.login-actions button { width: 100%; min-height: 3.3rem; padding: .75rem 1rem; border: 1px solid #152d43; border-radius: 7px; background: #152d43; color: #fff; font-weight: 700; }
-.login-actions button + button { background: #fff; color: #152d43; }
-.login-actions button:hover { filter: brightness(1.14); }
-.form-status { min-height: 1.5rem; margin: 1rem 0; color: #a43535 !important; font-size: .85rem; }
-.return-link { color: #43657d; font-size: .85rem; }
 .staging-note { margin: 1rem 0; padding: 1rem; border: 1px solid #e6d394; border-radius: 8px; background: #fff9e7; font-size: .8rem; }
 .staging-note[hidden], .staging-badge[hidden] { display: none; }
 .staging-note p { margin: .4rem 0; }
@@ -60,11 +43,6 @@ dialog { max-width: min(30rem,calc(100vw - 2rem)); max-height: calc(100vh - 2rem
 dialog::backdrop { background: rgb(7 24 39 / 65%); }
 .form-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
 @media (max-width: 760px) {
-  .login-layout { grid-template-columns: 1fr; }
-  .login-intro { min-height: 20rem; gap: 1.5rem; }
-  .login-intro h1 { max-width: 16ch; font-size: 2.5rem; }
-  .login-intro .login-footnote { display: none; }
-  .login-card { margin: 2rem 0; }
   .portal-header { align-items: flex-start; }
   .portal-header .brand { width: 9rem; flex-shrink: 0; }
   .account-menu { max-width: 55%; }
@@ -93,3 +71,30 @@ dialog::backdrop { background: rgb(7 24 39 / 65%); }
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
+
+/* Sign-in: the same design as the mobile app's login screen
+   (app/auth/login.tsx, LoginProviderButtons, LoginBackdrop). */
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.app-login { background: #ffffff url("../assets/img/login-backdrop.svg") center / cover no-repeat fixed; }
+.app-login__screen { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+.app-login__card { width: 100%; max-width: 420px; box-sizing: border-box; padding: 22px; border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 28px; background: rgba(255, 255, 255, 0.97); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12); }
+.app-login__logo { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 280px; height: 190px; margin: 0 auto 28px; }
+.app-login__logo img { width: 100%; height: 100%; object-fit: contain; }
+.app-login__actions { display: grid; gap: 12px; }
+.app-login__provider { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 58px; padding: 0 16px; border-radius: 16px; font: 700 1rem/1 "Manrope", system-ui, sans-serif; cursor: pointer; transition: filter 150ms ease, opacity 150ms ease; }
+.app-login__provider svg { width: 20px; height: 20px; flex: none; }
+.app-login__provider--google { border: 1px solid #d7e0e8; background: #ffffff; color: #0f172a; }
+.app-login__provider--apple { border: 1px solid #000000; background: #000000; color: #ffffff; }
+.app-login__provider:hover:not(:disabled) { filter: brightness(0.96); }
+.app-login__provider--apple:hover:not(:disabled) { filter: brightness(1.25); }
+.app-login__provider:disabled { opacity: 0.55; cursor: progress; }
+.app-login__provider:focus-visible, .app-login__text-button:focus-visible, .app-login__legal a:focus-visible { outline: 3px solid #0b63ff; outline-offset: 2px; }
+.app-login__status { min-height: 1.25rem; margin: 14px 0 0; color: #64748b; font-size: 0.875rem; line-height: 1.5; text-align: center; }
+.app-login__status:empty { display: none; }
+.app-login__redirect { margin-top: 12px; color: #64748b; font-size: 0.875rem; text-align: center; }
+.app-login__redirect[hidden] { display: none; }
+.app-login__redirect p { margin: 0 0 6px; }
+.app-login__text-button { display: block; margin: 10px auto 0; padding: 6px 10px; border: 0; background: none; color: #0b63ff; font: 700 0.9rem "Manrope", system-ui, sans-serif; cursor: pointer; }
+.app-login__text-button[hidden] { display: none; }
+.app-login__legal { margin: 18px 0 0; color: #64748b; font-size: 0.78rem; line-height: 1.6; text-align: center; }
+.app-login__legal a { color: #475569; text-decoration: underline; text-underline-offset: 0.15em; }

@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Välj språk",
     platform: "Plattform",
     solutions: "Lösningar",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Produktguide",
     contact: "Kontakta oss",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Inga abonnemangsavgifter",
-        text: "Betala en gång för enheten och installationen, utan månadsabonnemang, förnyelseavgifter eller löpande plattformsavgifter. Det enda undantaget är kommersiell användning av WIFIGATE Automation, som är abonnemangsbaserad.",
+        text: "Betala en gång för enheten och installationen, utan månadsabonnemang, förnyelseavgifter eller löpande plattformsavgifter. Det enda undantaget är kommersiell användning av WIFIGATE Host, som är abonnemangsbaserad.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hotell", "Airbnb", "Gästlägenheter", "Boendeanläggningar"],
     promise: "Välkomna dina gäster. Automatisera deras åtkomst.",
     subtitle: "Från hotellvistelser till semesterlägenheter: koppla varje bokning till säker åtkomst genom rätt grind, dörr eller garageport. Gästerna kommer in med sin telefon, och åtkomsten börjar vid incheckning och upphör automatiskt vid utcheckning.",
-    cta: "Utforska WIFIGATE Automation",
+    cta: "Utforska WIFIGATE Host",
     imageAlt: "Gäster använder en telefon för att komma in i sitt boende",
     stayCaption: "Allt ordnat för varje vistelse",
     staySteps: ["Bokning mottagen", "Åtkomst vid incheckning", "Upphör vid utcheckning"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "Kräver WIFIGATE ett månadsabonnemang?",
-        answer: "Nej. Du betalar en gång för WIFIGATE-enheten och installationen, utan månadsabonnemang, förnyelseavgifter eller löpande plattformsavgifter. WIFIGATE Automation för kommersiell användning är det enda undantaget och erbjuds som abonnemang.",
+        answer: "Nej. Du betalar en gång för WIFIGATE-enheten och installationen, utan månadsabonnemang, förnyelseavgifter eller löpande plattformsavgifter. WIFIGATE Host för kommersiell användning är det enda undantaget och erbjuds som abonnemang.",
       },
       {
         question: "Kan WIFIGATE ge tillfällig gäståtkomst?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Passersystem",
     monthlySubscription: "Månadsabonnemang",
-    subscriptionValue: "Krävs inte vid standardanvändning av WIFIGATE; kommersiell användning av WIFIGATE Automation kräver abonnemang",
+    subscriptionValue: "Krävs inte vid standardanvändning av WIFIGATE; kommersiell användning av WIFIGATE Host kräver abonnemang",
     simCard: "SIM-kort",
     externalRouter: "Extern WiFi-router",
     notRequired: "Inte nödvändigt",

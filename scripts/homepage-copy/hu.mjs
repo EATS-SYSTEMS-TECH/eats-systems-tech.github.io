@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Nyelv kiválasztása",
     platform: "Platform",
     solutions: "Megoldások",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Termékútmutató",
     contact: "Kapcsolatfelvétel",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Nincs előfizetési díj",
-        text: "A készülékért és a telepítésért egyszer kell fizetni, havi előfizetés, megújítási ciklus vagy folyamatos platformdíj nélkül. Az egyetlen kivétel a WIFIGATE Automation kereskedelmi célú használata, amely előfizetéshez kötött.",
+        text: "A készülékért és a telepítésért egyszer kell fizetni, havi előfizetés, megújítási ciklus vagy folyamatos platformdíj nélkül. Az egyetlen kivétel a WIFIGATE Host kereskedelmi célú használata, amely előfizetéshez kötött.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Szállodák", "Airbnb-szálláshelyek", "Vendégapartmanok", "Egyéb szálláshelyek"],
     promise: "Fogadja vendégeit. Automatizálja a hozzáférésüket.",
     subtitle: "A szállodai tartózkodásoktól az üdülőapartmanokig rendeljen minden foglaláshoz biztonságos hozzáférést a megfelelő kapuhoz, ajtóhoz vagy garázshoz. A vendégek telefonnal lépnek be, a hozzáférés pedig bejelentkezéskor kezdődik, és kijelentkezéskor automatikusan lejár.",
-    cta: "Fedezze fel a WIFIGATE Automation szolgáltatást",
+    cta: "Fedezze fel a WIFIGATE Host szolgáltatást",
     imageAlt: "Vendégek telefonnal lépnek be a szállásra",
     stayCaption: "Minden tartózkodásról gondoskodunk",
     staySteps: ["Foglalás beérkezett", "Hozzáférés bejelentkezéskor", "Lejár kijelentkezéskor"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "Igényel havi előfizetést a WIFIGATE?",
-        answer: "Nem. A WIFIGATE készülékért és telepítésért egyszeri díjat fizet, havi előfizetés, megújítás vagy folyamatos platformdíj nélkül. Egyetlen kivétel a kereskedelmi célú WIFIGATE Automation, amely előfizetéssel érhető el.",
+        answer: "Nem. A WIFIGATE készülékért és telepítésért egyszeri díjat fizet, havi előfizetés, megújítás vagy folyamatos platformdíj nélkül. Egyetlen kivétel a kereskedelmi célú WIFIGATE Host, amely előfizetéssel érhető el.",
       },
       {
         question: "Adható ideiglenes vendéghozzáférés a WIFIGATE-tel?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Beléptetőrendszer",
     monthlySubscription: "Havi előfizetés",
-    subscriptionValue: "A standard WIFIGATE használatához nem szükséges; a WIFIGATE Automation kereskedelmi használata előfizetéshez kötött",
+    subscriptionValue: "A standard WIFIGATE használatához nem szükséges; a WIFIGATE Host kereskedelmi használata előfizetéshez kötött",
     simCard: "SIM-kártya",
     externalRouter: "Külső WiFi router",
     notRequired: "Nem szükséges",

@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Vyberte jazyk",
     platform: "Platforma",
     solutions: "Riešenia",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Sprievodca produktom",
     contact: "Kontaktujte nás",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Bez poplatkov za predplatné",
-        text: "Za zariadenie a inštaláciu zaplatíte iba raz, bez mesačného predplatného, cyklu obnovovania alebo priebežných poplatkov za platformu. Jedinou výnimkou je komerčné používanie WIFIGATE Automation, ktoré funguje na báze predplatného.",
+        text: "Za zariadenie a inštaláciu zaplatíte iba raz, bez mesačného predplatného, cyklu obnovovania alebo priebežných poplatkov za platformu. Jedinou výnimkou je komerčné používanie WIFIGATE Host, ktoré funguje na báze predplatného.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hotely", "Ubytovania cez Airbnb", "Apartmány pre hostí", "Ubytovacie zariadenia"],
     promise: "Privítajte hostí. Zautomatizujte ich prístup.",
     subtitle: "Od hotelových pobytov po rekreačné apartmány prepojte každú rezerváciu s bezpečným prístupom k správnej bráne, dverám alebo garáži. Hostia vstupujú pomocou telefónu, pričom prístup sa aktivuje pri ubytovaní a automaticky končí pri odhlásení z pobytu.",
-    cta: "Preskúmajte WIFIGATE Automation",
+    cta: "Preskúmajte WIFIGATE Host",
     imageAlt: "Hostia používajú telefón na vstup do ubytovania",
     stayCaption: "Každý pobyt pod kontrolou",
     staySteps: ["Rezervácia prijatá", "Prístup pri ubytovaní", "Vyprší pri odhlásení"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "Vyžaduje WIFIGATE mesačné predplatné?",
-        answer: "Nie. Za zariadenie WIFIGATE a inštaláciu platíte jednorazovo, bez mesačného predplatného, obnovovania alebo priebežných poplatkov za platformu. Jedinou výnimkou je WIFIGATE Automation pre komerčné použitie, ktoré je dostupné formou predplatného.",
+        answer: "Nie. Za zariadenie WIFIGATE a inštaláciu platíte jednorazovo, bez mesačného predplatného, obnovovania alebo priebežných poplatkov za platformu. Jedinou výnimkou je WIFIGATE Host pre komerčné použitie, ktoré je dostupné formou predplatného.",
       },
       {
         question: "Dokáže WIFIGATE poskytnúť dočasný prístup pre hostí?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Systém riadenia prístupu",
     monthlySubscription: "Mesačné predplatné",
-    subscriptionValue: "Pri štandardnom WIFIGATE nie je potrebné; komerčné používanie WIFIGATE Automation funguje na báze predplatného",
+    subscriptionValue: "Pri štandardnom WIFIGATE nie je potrebné; komerčné používanie WIFIGATE Host funguje na báze predplatného",
     simCard: "SIM karta",
     externalRouter: "Externý WiFi router",
     notRequired: "Nie je potrebné",

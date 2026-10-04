@@ -15,7 +15,7 @@
   const guestInvites = {
     en: {
       promo: {
-        eyebrow: "WIFIGATE Automation",
+        eyebrow: "WIFIGATE Host",
         title: "Automatic guest access\nfor every booking",
         subtitle:
           "From the moment a booking is confirmed, WIFIGATE gives each guest secure, time-limited access to your gate, door or garage, and it ends on its own at checkout.",
@@ -28,7 +28,7 @@
         point3Title: "Encrypted and private",
         point3Text:
           "Access is encrypted and works locally at the gate, so your property stays protected.",
-        cta: "Explore WIFIGATE Automation",
+        cta: "Explore WIFIGATE Host",
         consoleCaption: "From booking to access, automatically",
       },
       generator: {
@@ -231,7 +231,7 @@
 
     he: {
       promo: {
-        eyebrow: "WIFIGATE Automation",
+        eyebrow: "WIFIGATE Host",
         title: "גישת אורחים אוטומטית\nלכל הזמנה",
         subtitle:
           "מרגע שההזמנה מאושרת, WIFIGATE מעניקה לכל אורח גישה מאובטחת ומוגבלת-בזמן לשער, לדלת או לחניה, והיא מסתיימת מעצמה בצ׳ק-אאוט.",
@@ -244,7 +244,7 @@
         point3Title: "חוסכת שעות עבודה",
         point3Text:
           "הצוות מתרכז באירוח במקום בלוגיסטיקת כרטיסים או אמצעים פיזיים אחרים.",
-        cta: "גלו את WIFIGATE Automation",
+        cta: "גלו את WIFIGATE Host",
         consoleCaption: "מהזמנה לגישה, אוטומטית",
       },
       generator: {
@@ -283,7 +283,7 @@
       },
       marketing: {
         hero: {
-          eyebrow: "WIFIGATE Automation API",
+          eyebrow: "WIFIGATE Host API",
           title: "גישת אורחים שמנהלת את עצמה",
           lead:
             "ברגע שהזמנה מאושרת, WIFIGATE יוצרת גישה מאובטחת ומוגבלת בזמן לשער, לדלת או לחניה שלכם, והיא מסתיימת מעצמה בצ׳ק אאוט. בלי למסור מפתחות, בלי לרדוף אחרי קודים, ובלי שמישהו ימתין בכניסה.",
@@ -303,14 +303,14 @@
           title: "מהזמנה ועד שער פתוח, אוטומטית",
           subtitle: "שלושה צעדים, ומשם זה רץ לבד בכל הזמנה.",
           s1t: "מתקבלת הזמנה",
-          s1x: "מערכת ההזמנות או הניהול שלכם מעדכנת את WIFIGATE Automation API על הזמנה חדשה שאושרה.",
+          s1x: "מערכת ההזמנות או הניהול שלכם מעדכנת את WIFIGATE Host API על הזמנה חדשה שאושרה.",
           s2t: "הגישה נוצרת אוטומטית",
-          s2x: "WIFIGATE Automation API מנפיקה הזמנה מאובטחת ומוגבלת-בזמן בדיוק לשער, לדלת או לחניה הנכונים, בתוקף רק לאותה שהות.",
+          s2x: "WIFIGATE Host API מנפיקה הזמנה מאובטחת ומוגבלת-בזמן בדיוק לשער, לדלת או לחניה הנכונים, בתוקף רק לאותה שהות.",
           s3t: "האורח פשוט נכנס",
           s3x: "הוא פותח את הכניסה מהטלפון. כשמגיע הצ׳ק-אאוט, הגישה פגה מעצמה, אין מה לאסוף או לבטל.",
         },
         benefits: {
-          eyebrow: "למה WIFIGATE Automation API",
+          eyebrow: "למה WIFIGATE Host API",
           title: "פחות קבלה. יותר אירוח בלי ידיים.",
           subtitle: "כל מה שהזמנה צריכה כדי להפוך לגישה, נעשה בשבילכם.",
           b1t: "בלי למסור מפתחות",
@@ -324,7 +324,7 @@
           b5t: "מתאימה גם לבניינים שלמים",
           b5x: "משער בודד ועד מתחם שלם, הזמנה אחת יכולה לכסות כל כניסה שהאורח צריך.",
           b6t: "מתחברת למערכות שלכם",
-          b6x: "חברו את WIFIGATE Automation API לתהליך ההזמנות, ל-PMS או ל-Channel Manager ותנו לזה לרוץ.",
+          b6x: "חברו את WIFIGATE Host API לתהליך ההזמנות, ל-PMS או ל-Channel Manager ותנו לזה לרוץ.",
         },
         secure: {
           eyebrow: "אבטחה",
@@ -339,13 +339,13 @@
         },
         pricing: {
           eyebrow: "תמחור",
-          title: "מסלולים פשוטים לתוסף WIFIGATE Automation API",
+          title: "מסלולים פשוטים לתוסף WIFIGATE Host API",
           subtitle: "משלמים רק על האוטומציה. מכשיר WIFIGATE עצמו לעולם ללא מנוי.",
           per: "/ חודש",
           planCta: "דברו איתנו",
           hotelBadge: "הכי פופולרי",
           note:
-            "מחירי השקה לתוסף WIFIGATE Automation API, בחיוב חודשי. מערכות נוספות ומסלולים שנתיים זמינים, פנו אלינו לפרטים.",
+            "מחירי השקה לתוסף WIFIGATE Host API, בחיוב חודשי. מערכות נוספות ומסלולים שנתיים זמינים, פנו אלינו לפרטים.",
           starterDesc: "לנכס או כניסה בודדת.",
           starterF1: "מערכת אחת",
           starterF2: "עד 1,000 הזמנות אורח בחודש",
@@ -366,7 +366,7 @@
         },
         cta: {
           title: "מוכנים להפוך את גישת האורחים לאוטומטית?",
-          text: "ספרו לנו על הנכסים שלכם ונתאים את WIFIGATE Automation API לאופן שבו אתם מארחים.",
+          text: "ספרו לנו על הנכסים שלכם ונתאים את WIFIGATE Host API לאופן שבו אתם מארחים.",
           button: "דברו איתנו",
         },
       },

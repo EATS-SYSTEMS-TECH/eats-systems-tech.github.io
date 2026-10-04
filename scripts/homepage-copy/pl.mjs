@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Wybierz język",
     platform: "Platforma",
     solutions: "Rozwiązania",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Przewodnik po produkcie",
     contact: "Skontaktuj się z nami",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Bez opłat subskrypcyjnych",
-        text: "Płacisz raz za urządzenie i instalację, bez miesięcznej subskrypcji, cyklu odnowień ani stałych opłat za platformę. Jedynym wyjątkiem jest komercyjne korzystanie z WIFIGATE Automation, które wymaga subskrypcji.",
+        text: "Płacisz raz za urządzenie i instalację, bez miesięcznej subskrypcji, cyklu odnowień ani stałych opłat za platformę. Jedynym wyjątkiem jest komercyjne korzystanie z WIFIGATE Host, które wymaga subskrypcji.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hoteli", "Obiektów Airbnb", "Apartamentów dla gości", "Obiektów noclegowych"],
     promise: "Powitaj swoich gości. Zautomatyzuj ich dostęp.",
     subtitle: "Od pobytów w hotelach po apartamenty wakacyjne: powiąż każdą rezerwację z bezpiecznym dostępem do odpowiedniej bramy, drzwi lub garażu. Goście wchodzą za pomocą telefonu, a dostęp rozpoczyna się przy zameldowaniu i automatycznie wygasa przy wymeldowaniu.",
-    cta: "Poznaj WIFIGATE Automation",
+    cta: "Poznaj WIFIGATE Host",
     imageAlt: "Goście używający telefonu, aby wejść do miejsca zakwaterowania",
     stayCaption: "Każdy pobyt pod kontrolą",
     staySteps: ["Rezerwacja otrzymana", "Dostęp przy zameldowaniu", "Wygasa przy wymeldowaniu"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "Czy WIFIGATE wymaga miesięcznej subskrypcji?",
-        answer: "Nie. Płacisz raz za urządzenie WIFIGATE i instalację, bez miesięcznej subskrypcji, cyklu odnowień ani stałych opłat za platformę. Jedynym wyjątkiem jest WIFIGATE Automation do użytku komercyjnego, dostępne w ramach subskrypcji.",
+        answer: "Nie. Płacisz raz za urządzenie WIFIGATE i instalację, bez miesięcznej subskrypcji, cyklu odnowień ani stałych opłat za platformę. Jedynym wyjątkiem jest WIFIGATE Host do użytku komercyjnego, dostępne w ramach subskrypcji.",
       },
       {
         question: "Czy WIFIGATE umożliwia czasowy dostęp dla gości?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "System kontroli dostępu",
     monthlySubscription: "Subskrypcja miesięczna",
-    subscriptionValue: "Standardowy WIFIGATE nie wymaga subskrypcji; komercyjne korzystanie z WIFIGATE Automation wymaga subskrypcji",
+    subscriptionValue: "Standardowy WIFIGATE nie wymaga subskrypcji; komercyjne korzystanie z WIFIGATE Host wymaga subskrypcji",
     simCard: "Karta SIM",
     externalRouter: "Zewnętrzny router WiFi",
     notRequired: "Niewymagane",

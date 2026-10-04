@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "בחר שפה",
     platform: "איך זה עובד",
     solutions: "תרחישי שימוש",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "סרטוני הדרכה",
     contact: "דברו איתנו",
   },
@@ -60,7 +60,7 @@ const copy = {
         text: "משלמים פעם אחת עבור התקן WIFIGATE וההתקנה, ללא מנוי חודשי, חידושים תקופתיים או דמי פלטפורמה שוטפים.",
       },
     ],
-    subscriptionNote: "* שימוש מסחרי ב-WIFIGATE Automation מחייב מנוי.",
+    subscriptionNote: "* שימוש מסחרי ב-WIFIGATE Host מחייב מנוי.",
   },
   privateAccess: {
     eyebrow: "גישה פרטית",
@@ -80,7 +80,7 @@ const copy = {
     audiences: ["מלונות", "Airbnb", "דירות אירוח", "מרחבי אירוח"],
     promise: "קבלו את פני האורחים. תנו לכניסה להתנהל אוטומטית.",
     subtitle: "ממלונות ועד דירות נופש, חברו כל הזמנה להרשאת כניסה מאובטחת לשער, לדלת או לגראז׳ המתאימים. האורחים נכנסים באמצעות הטלפון, וההרשאה נכנסת לתוקף בצ׳ק-אין ומסתיימת אוטומטית בצ׳ק-אאוט.",
-    cta: "גלו את WIFIGATE Automation",
+    cta: "גלו את WIFIGATE Host",
     imageAlt: "אורחים משתמשים בטלפון כדי להיכנס למקום האירוח",
     stayCaption: "כל שהייה, מההזמנה ועד העזיבה",
     staySteps: ["ההזמנה התקבלה", "גישה בצ׳ק-אין", "התוקף פג בצ׳ק-אאוט"],
@@ -134,7 +134,7 @@ const copy = {
       },
       {
         question: "האם WIFIGATE דורשת מנוי חודשי?",
-        answer: "לא. משלמים פעם אחת עבור התקן WIFIGATE וההתקנה, ללא מנוי חודשי, חידושים תקופתיים או דמי פלטפורמה שוטפים. WIFIGATE Automation לשימוש מסחרי היא החריג היחיד ומחייבת מנוי.",
+        answer: "לא. משלמים פעם אחת עבור התקן WIFIGATE וההתקנה, ללא מנוי חודשי, חידושים תקופתיים או דמי פלטפורמה שוטפים. WIFIGATE Host לשימוש מסחרי היא החריג היחיד ומחייבת מנוי.",
       },
       {
         question: "האם WIFIGATE יכולה לספק גישת אורח זמנית?",
@@ -179,7 +179,7 @@ const copy = {
   schema: {
     productCategory: "מערכת בקרת כניסה",
     monthlySubscription: "מנוי חודשי",
-    subscriptionValue: "לא נדרש עבור WIFIGATE בשימוש רגיל; WIFIGATE Automation לשימוש מסחרי מחייבת מנוי",
+    subscriptionValue: "לא נדרש עבור WIFIGATE בשימוש רגיל; WIFIGATE Host לשימוש מסחרי מחייבת מנוי",
     simCard: "כרטיס SIM",
     externalRouter: "נתב WiFi חיצוני",
     notRequired: "לא נדרש",

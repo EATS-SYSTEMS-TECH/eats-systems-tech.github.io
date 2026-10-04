@@ -5,7 +5,7 @@
     selectLanguageLabel: "Dil seç",
     platform: "Platform",
     solutions: "Çözümler",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Ürün Rehberi",
     contact: "İletişime geçin",
   },
@@ -57,7 +57,7 @@
       },
       {
         title: "Abonelik ücreti yok",
-        text: "Cihaz ve kurulum için bir kez ödeme yaparsınız; aylık abonelik, yenileme döngüsü veya sürekli platform ücreti yoktur. Tek istisna, ticari kullanım için WIFIGATE Automation'dır ve abonelikle sunulur.",
+        text: "Cihaz ve kurulum için bir kez ödeme yaparsınız; aylık abonelik, yenileme döngüsü veya sürekli platform ücreti yoktur. Tek istisna, ticari kullanım için WIFIGATE Host'dır ve abonelikle sunulur.",
       },
     ],
   },
@@ -79,7 +79,7 @@
     audiences: ["Oteller", "Airbnb", "Misafir daireleri", "Konaklama tesisleri"],
     promise: "Misafirlerinizi karşılayın. Erişimlerini otomatikleştirin.",
     subtitle: "Otellerden tatil dairelerine kadar her rezervasyonu doğru kapı, giriş veya garaja güvenli erişimle eşleyin. Misafirler telefonlarıyla giriş yapar; erişim check-in'de başlar ve check-out'ta otomatik biter.",
-    cta: "WIFIGATE Automation'ı keşfedin",
+    cta: "WIFIGATE Host'ı keşfedin",
     imageAlt: "Misafirler konaklama yerine girmek için telefon kullanıyor",
     stayCaption: "Her konaklama eksiksiz yönetilir",
     staySteps: ["Rezervasyon alındı", "Check-in'de erişim", "Check-out'ta sona erer"],
@@ -132,7 +132,7 @@
       },
       {
         question: "WIFIGATE aylık abonelik gerektirir mi?",
-        answer: "Hayır. WIFIGATE cihazı ve kurulumu için bir kez ödeme yaparsınız; aylık abonelik, yenileme döngüsü veya sürekli platform ücreti yoktur. Tek istisna, ticari kullanım için WIFIGATE Automation'dır ve abonelikle sunulur.",
+        answer: "Hayır. WIFIGATE cihazı ve kurulumu için bir kez ödeme yaparsınız; aylık abonelik, yenileme döngüsü veya sürekli platform ücreti yoktur. Tek istisna, ticari kullanım için WIFIGATE Host'dır ve abonelikle sunulur.",
       },
       {
         question: "WIFIGATE geçici misafir erişimi sağlayabilir mi?",
@@ -172,7 +172,7 @@
   schema: {
     productCategory: "Erişim kontrol sistemi",
     monthlySubscription: "Aylık abonelik",
-    subscriptionValue: "Standart WIFIGATE abonelik gerektirmez; ticari WIFIGATE Automation abonelikle sunulur",
+    subscriptionValue: "Standart WIFIGATE abonelik gerektirmez; ticari WIFIGATE Host abonelikle sunulur",
     simCard: "SIM kart",
     externalRouter: "Harici Wi-Fi router",
     notRequired: "Gerekli değildir",

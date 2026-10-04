@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Chọn ngôn ngữ",
     platform: "Nền tảng",
     solutions: "Giải pháp",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Hướng dẫn sản phẩm",
     contact: "Liên hệ với chúng tôi",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Không mất phí thuê bao",
-        text: "Thanh toán một lần cho thiết bị và việc lắp đặt, không có phí thuê bao hằng tháng, chu kỳ gia hạn hoặc phí nền tảng định kỳ. Ngoại lệ duy nhất là WIFIGATE Automation dùng cho mục đích thương mại, được cung cấp theo hình thức thuê bao.",
+        text: "Thanh toán một lần cho thiết bị và việc lắp đặt, không có phí thuê bao hằng tháng, chu kỳ gia hạn hoặc phí nền tảng định kỳ. Ngoại lệ duy nhất là WIFIGATE Host dùng cho mục đích thương mại, được cung cấp theo hình thức thuê bao.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Khách sạn", "Airbnb", "Căn hộ dành cho khách", "Cơ sở lưu trú"],
     promise: "Chào đón khách của bạn. Tự động hóa quyền truy cập.",
     subtitle: "Từ khách sạn đến căn hộ nghỉ dưỡng, liên kết từng lượt đặt phòng với quyền truy cập an toàn vào đúng cổng, cửa hoặc gara. Khách dùng điện thoại để vào; quyền truy cập bắt đầu khi nhận phòng và tự động kết thúc khi trả phòng.",
-    cta: "Khám phá WIFIGATE Automation",
+    cta: "Khám phá WIFIGATE Host",
     imageAlt: "Khách sử dụng điện thoại để vào chỗ ở của họ",
     stayCaption: "Mỗi kỳ lưu trú đều được quản lý trọn vẹn",
     staySteps: ["Đã nhận đặt phòng", "Cấp quyền khi nhận phòng", "Hết hạn khi trả phòng"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "WIFIGATE có yêu cầu thuê bao hằng tháng không?",
-        answer: "Không. Bạn thanh toán một lần cho thiết bị WIFIGATE và việc lắp đặt, không có phí thuê bao hằng tháng, chu kỳ gia hạn hoặc phí nền tảng định kỳ. Ngoại lệ duy nhất là WIFIGATE Automation dùng cho mục đích thương mại, được cung cấp theo hình thức thuê bao.",
+        answer: "Không. Bạn thanh toán một lần cho thiết bị WIFIGATE và việc lắp đặt, không có phí thuê bao hằng tháng, chu kỳ gia hạn hoặc phí nền tảng định kỳ. Ngoại lệ duy nhất là WIFIGATE Host dùng cho mục đích thương mại, được cung cấp theo hình thức thuê bao.",
       },
       {
         question: "WIFIGATE có thể cấp quyền truy cập khách tạm thời không?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Hệ thống kiểm soát truy cập",
     monthlySubscription: "Phí thuê bao hằng tháng",
-    subscriptionValue: "WIFIGATE tiêu chuẩn không cần thuê bao; WIFIGATE Automation dùng cho mục đích thương mại được cung cấp theo hình thức thuê bao",
+    subscriptionValue: "WIFIGATE tiêu chuẩn không cần thuê bao; WIFIGATE Host dùng cho mục đích thương mại được cung cấp theo hình thức thuê bao",
     simCard: "Thẻ SIM",
     externalRouter: "Router Wi-Fi bên ngoài",
     notRequired: "Không cần",

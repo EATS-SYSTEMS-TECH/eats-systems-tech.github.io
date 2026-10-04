@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Piliin ang wika",
     platform: "Platform",
     solutions: "Mga Solusyon",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Gabay sa Produkto",
     contact: "Makipag-ugnayan",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Walang Bayad sa Subscription",
-        text: "Isang beses lang ang bayad para sa device at installation. Walang buwanang subscription, renewal, o tuloy-tuloy na platform fee. Ang tanging pagbubukod ay komersyal na paggamit ng WIFIGATE Automation, na nangangailangan ng subscription.",
+        text: "Isang beses lang ang bayad para sa device at installation. Walang buwanang subscription, renewal, o tuloy-tuloy na platform fee. Ang tanging pagbubukod ay komersyal na paggamit ng WIFIGATE Host, na nangangailangan ng subscription.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Mga hotel", "Airbnb", "Mga apartment para sa bisita", "Iba pang tuluyan"],
     promise: "Salubungin ang iyong mga bisita. I-automate ang kanilang access.",
     subtitle: "Mula sa mga hotel hanggang sa mga apartment na paupahan para sa bakasyon, iugnay ang bawat booking sa ligtas na access sa tamang gate, pinto, o garahe. Makakapasok ang mga bisita gamit ang kanilang telepono; magsisimula ang access sa check-in at awtomatikong magtatapos sa check-out.",
-    cta: "Tuklasin ang WIFIGATE Automation",
+    cta: "Tuklasin ang WIFIGATE Host",
     imageAlt: "Mga bisitang gumagamit ng telepono para makapasok sa kanilang tutuluyan",
     stayCaption: "Bawat pananatili, ganap na nakaayos",
     staySteps: ["Natanggap ang booking", "Access sa check-in", "Magtatapos sa check-out"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "Kailangan ba ng WIFIGATE ng buwanang subscription?",
-        answer: "Hindi. Isang beses lang ang bayad para sa WIFIGATE device at installation. Walang buwanang subscription, renewal, o tuloy-tuloy na platform fee. Ang tanging pagbubukod ay WIFIGATE Automation para sa komersyal na paggamit, na nangangailangan ng subscription.",
+        answer: "Hindi. Isang beses lang ang bayad para sa WIFIGATE device at installation. Walang buwanang subscription, renewal, o tuloy-tuloy na platform fee. Ang tanging pagbubukod ay WIFIGATE Host para sa komersyal na paggamit, na nangangailangan ng subscription.",
       },
       {
         question: "Maaari bang magbigay ang WIFIGATE ng pansamantalang access para sa bisita?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Sistema ng kontrol sa pagpasok",
     monthlySubscription: "Buwanang subscription",
-    subscriptionValue: "Hindi kailangan ng subscription para sa karaniwang WIFIGATE; nangangailangan ng subscription ang komersyal na WIFIGATE Automation",
+    subscriptionValue: "Hindi kailangan ng subscription para sa karaniwang WIFIGATE; nangangailangan ng subscription ang komersyal na WIFIGATE Host",
     simCard: "SIM card",
     externalRouter: "External na Wi-Fi router",
     notRequired: "Hindi kailangan",

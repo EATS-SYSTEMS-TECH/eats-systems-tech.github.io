@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Izberite jezik",
     platform: "Platforma",
     solutions: "Rešitve",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Vodnik po izdelku",
     contact: "Stopite v stik",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Brez naročnine",
-        text: "Napravo in namestitev plačate enkrat, brez mesečne naročnine, cikla podaljševanja ali stalnih stroškov platforme. Edina izjema je komercialna uporaba WIFIGATE Automation, za katero je potrebna naročnina.",
+        text: "Napravo in namestitev plačate enkrat, brez mesečne naročnine, cikla podaljševanja ali stalnih stroškov platforme. Edina izjema je komercialna uporaba WIFIGATE Host, za katero je potrebna naročnina.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hotele", "Nastanitve Airbnb", "Apartmaje za goste", "Nastanitvene objekte"],
     promise: "Pozdravite goste. Avtomatizirajte njihov dostop.",
     subtitle: "Od hotelskih bivanj do počitniških apartmajev povežite vsako rezervacijo z varnim dostopom do ustreznih dvoriščnih vrat, vhodnih vrat ali garaže. Gostje vstopijo s telefonom, dostop pa se začne ob prijavi in samodejno konča ob odjavi.",
-    cta: "Raziščite WIFIGATE Automation",
+    cta: "Raziščite WIFIGATE Host",
     imageAlt: "Gostje uporabljajo telefon za vstop v nastanitev",
     stayCaption: "Za vsako bivanje je poskrbljeno",
     staySteps: ["Rezervacija prejeta", "Dostop ob prijavi", "Poteče ob odjavi"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "Ali WIFIGATE zahteva mesečno naročnino?",
-        answer: "Ne. Napravo WIFIGATE in namestitev plačate enkrat, brez mesečne naročnine, podaljševanja ali stalnih platformnih stroškov. Edina izjema je WIFIGATE Automation za komercialno uporabo, ki je na voljo prek naročnine.",
+        answer: "Ne. Napravo WIFIGATE in namestitev plačate enkrat, brez mesečne naročnine, podaljševanja ali stalnih platformnih stroškov. Edina izjema je WIFIGATE Host za komercialno uporabo, ki je na voljo prek naročnine.",
       },
       {
         question: "Ali lahko WIFIGATE omogoči začasen dostop za goste?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Sistem za nadzor dostopa",
     monthlySubscription: "Mesečna naročnina",
-    subscriptionValue: "Za standardni WIFIGATE ni potrebna; komercialna uporaba WIFIGATE Automation zahteva naročnino",
+    subscriptionValue: "Za standardni WIFIGATE ni potrebna; komercialna uporaba WIFIGATE Host zahteva naročnino",
     simCard: "Kartica SIM",
     externalRouter: "Zunanji WiFi usmerjevalnik",
     notRequired: "Ni potrebno",

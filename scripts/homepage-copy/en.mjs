@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Select language",
     platform: "Platform",
     solutions: "Solutions",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Product Guide",
     contact: "Get in touch",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "No Subscription Fees",
-        text: "Pay once for the device and installation, with no monthly subscription, renewal cycle, or ongoing platform fee. Commercial use of WIFIGATE Automation is the only exception and is subscription-based.",
+        text: "Pay once for the device and installation, with no monthly subscription, renewal cycle, or ongoing platform fee. Commercial use of WIFIGATE Host is the only exception and is subscription-based.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hotels", "Airbnb", "Guest apartments", "Hospitality spaces"],
     promise: "Welcome your guests. Automate their access.",
     subtitle: "From hotel stays to holiday apartments, connect each booking to secure access for the right gate, door, or garage. Guests enter using their phone, with access that starts at check-in and ends automatically at checkout.",
-    cta: "Explore WIFIGATE Automation",
+    cta: "Explore WIFIGATE Host",
     imageAlt: "Guests using a phone to enter their accommodation",
     stayCaption: "Every stay, taken care of",
     staySteps: ["Booking received", "Access at check-in", "Expires at checkout"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "Does WIFIGATE require a monthly subscription?",
-        answer: "No. You pay once for the WIFIGATE device and installation, with no monthly subscription, renewal cycle, or ongoing platform fee. WIFIGATE Automation for commercial use is the only exception and is available by subscription.",
+        answer: "No. You pay once for the WIFIGATE device and installation, with no monthly subscription, renewal cycle, or ongoing platform fee. WIFIGATE Host for commercial use is the only exception and is available by subscription.",
       },
       {
         question: "Can WIFIGATE provide temporary guest access?",
@@ -173,7 +173,7 @@ const copy = {
   schema: {
     productCategory: "Access control system",
     monthlySubscription: "Monthly subscription",
-    subscriptionValue: "Not required for standard WIFIGATE; commercial WIFIGATE Automation is subscription-based",
+    subscriptionValue: "Not required for standard WIFIGATE; commercial WIFIGATE Host is subscription-based",
     simCard: "SIM card",
     externalRouter: "External Wi-Fi router",
     notRequired: "Not required",

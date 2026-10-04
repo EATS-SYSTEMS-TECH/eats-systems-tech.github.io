@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "選擇語言",
     platform: "平台",
     solutions: "解決方案",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "產品指南",
     contact: "聯絡我們",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "標準版無訂閱費",
-        text: "標準 WIFIGATE 的裝置與安裝只需一次付費，無月費、無續訂，也不收取後續平台費用。唯一例外是商用 WIFIGATE Automation，此服務採訂閱制。",
+        text: "標準 WIFIGATE 的裝置與安裝只需一次付費，無月費、無續訂，也不收取後續平台費用。唯一例外是商用 WIFIGATE Host，此服務採訂閱制。",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["飯店", "Airbnb", "短租公寓", "各類旅宿空間"],
     promise: "迎接每位房客，通行自動到位。",
     subtitle: "從飯店住宿到度假公寓，每筆預訂都可自動連結到對應大門、房門或車庫的安全通行權限。房客用手機即可進入，權限在入住時生效，退房時自動失效。",
-    cta: "探索 WIFIGATE Automation",
+    cta: "探索 WIFIGATE Host",
     imageAlt: "房客使用手機進入住宿空間",
     stayCaption: "每次入住，全程自動管理",
     staySteps: ["收到預訂", "入住時啟用", "退房時失效"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "WIFIGATE 需要按月訂閱嗎？",
-        answer: "不需要。標準 WIFIGATE 的裝置與安裝只需一次付費，無月費、無續訂，也不收取後續平台費用。唯一例外是商用 WIFIGATE Automation，此服務採訂閱制。",
+        answer: "不需要。標準 WIFIGATE 的裝置與安裝只需一次付費，無月費、無續訂，也不收取後續平台費用。唯一例外是商用 WIFIGATE Host，此服務採訂閱制。",
       },
       {
         question: "WIFIGATE 可以提供臨時訪客通行權限嗎？",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "門禁管制系統",
     monthlySubscription: "按月訂閱",
-    subscriptionValue: "標準 WIFIGATE 無需訂閱；唯一例外是商用 WIFIGATE Automation，此服務採訂閱制",
+    subscriptionValue: "標準 WIFIGATE 無需訂閱；唯一例外是商用 WIFIGATE Host，此服務採訂閱制",
     simCard: "SIM 卡",
     externalRouter: "外部 Wi-Fi 路由器",
     notRequired: "不需要",

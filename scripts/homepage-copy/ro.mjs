@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Selectați limba",
     platform: "Platformă",
     solutions: "Soluții",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Ghid de produs",
     contact: "Luați legătura cu noi",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Fără taxe de abonament",
-        text: "Plătiți o singură dată pentru dispozitiv și instalare, fără abonament lunar, reînnoiri sau costuri recurente de platformă. Singura excepție este utilizarea WIFIGATE Automation în scop comercial, disponibilă pe bază de abonament.",
+        text: "Plătiți o singură dată pentru dispozitiv și instalare, fără abonament lunar, reînnoiri sau costuri recurente de platformă. Singura excepție este utilizarea WIFIGATE Host în scop comercial, disponibilă pe bază de abonament.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hoteluri", "Airbnb", "Apartamente pentru oaspeți", "Unități de cazare"],
     promise: "Întâmpinați-vă oaspeții. Automatizați-le accesul.",
     subtitle: "De la sejururi hoteliere la apartamente de vacanță, asociați fiecare rezervare cu accesul securizat la intrarea potrivită, fie că este vorba despre poartă, ușă sau garaj. Oaspeții intră cu telefonul, iar accesul începe la check-in și se oprește automat la check-out.",
-    cta: "Explorați WIFIGATE Automation",
+    cta: "Explorați WIFIGATE Host",
     imageAlt: "Oaspeți care folosesc telefonul pentru a intra în spațiul de cazare",
     stayCaption: "Fiecare sejur, gestionat până la ultimul detaliu",
     staySteps: ["Rezervare primită", "Acces la check-in", "Expiră la check-out"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "WIFIGATE necesită abonament lunar?",
-        answer: "Nu. Plătiți o singură dată pentru dispozitivul WIFIGATE și pentru instalare, fără abonament lunar, reînnoiri sau costuri recurente de platformă. Singura excepție este WIFIGATE Automation pentru utilizare comercială, disponibil pe bază de abonament.",
+        answer: "Nu. Plătiți o singură dată pentru dispozitivul WIFIGATE și pentru instalare, fără abonament lunar, reînnoiri sau costuri recurente de platformă. Singura excepție este WIFIGATE Host pentru utilizare comercială, disponibil pe bază de abonament.",
       },
       {
         question: "Poate WIFIGATE oferi acces temporar pentru oaspeți?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Sistem de control al accesului",
     monthlySubscription: "Abonament lunar",
-    subscriptionValue: "Nu este necesar pentru WIFIGATE standard; utilizarea comercială a WIFIGATE Automation este disponibilă pe bază de abonament",
+    subscriptionValue: "Nu este necesar pentru WIFIGATE standard; utilizarea comercială a WIFIGATE Host este disponibilă pe bază de abonament",
     simCard: "Cartelă SIM",
     externalRouter: "Router WiFi extern",
     notRequired: "Nu este necesar",

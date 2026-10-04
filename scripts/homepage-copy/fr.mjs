@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Sélectionner la langue",
     platform: "Plateforme",
     solutions: "Solutions",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Guide produit",
     contact: "Nous contacter",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Aucun frais d'abonnement",
-        text: "Vous ne payez qu'une seule fois l'appareil et l'installation, sans abonnement mensuel, renouvellement ni frais de plateforme récurrents. L'utilisation commerciale de WIFIGATE Automation est la seule exception et nécessite un abonnement.",
+        text: "Vous ne payez qu'une seule fois l'appareil et l'installation, sans abonnement mensuel, renouvellement ni frais de plateforme récurrents. L'utilisation commerciale de WIFIGATE Host est la seule exception et nécessite un abonnement.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hôtels", "Airbnb", "Appartements de vacances", "Espaces d'hébergement"],
     promise: "Accueillez vos hôtes. Automatisez leur accès.",
     subtitle: "De l'hôtel à la location saisonnière, associez chaque réservation à l'accès sécurisé du portail, de la porte ou du garage concerné. Vos hôtes entrent avec leur téléphone, grâce à un accès qui débute à leur arrivée et expire automatiquement à leur départ.",
-    cta: "Découvrir WIFIGATE Automation",
+    cta: "Découvrir WIFIGATE Host",
     imageAlt: "Hôtes utilisant leur téléphone pour accéder à leur hébergement",
     stayCaption: "Chaque séjour, pris en charge",
     staySteps: ["Réservation reçue", "Accès à l'arrivée", "Expire au départ"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "WIFIGATE demande-t-il un abonnement mensuel ?",
-        answer: "Non. Vous ne payez qu'une seule fois l'appareil WIFIGATE et son installation, sans abonnement mensuel, renouvellement ni frais de plateforme récurrents. WIFIGATE Automation pour un usage commercial est la seule exception et nécessite un abonnement.",
+        answer: "Non. Vous ne payez qu'une seule fois l'appareil WIFIGATE et son installation, sans abonnement mensuel, renouvellement ni frais de plateforme récurrents. WIFIGATE Host pour un usage commercial est la seule exception et nécessite un abonnement.",
       },
       {
         question: "WIFIGATE permet-il de créer des accès temporaires pour les invités ?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Système de contrôle d'accès",
     monthlySubscription: "Abonnement mensuel",
-    subscriptionValue: "Non requis pour WIFIGATE standard ; l'utilisation commerciale de WIFIGATE Automation nécessite un abonnement",
+    subscriptionValue: "Non requis pour WIFIGATE standard ; l'utilisation commerciale de WIFIGATE Host nécessite un abonnement",
     simCard: "Carte SIM",
     externalRouter: "Routeur WiFi externe",
     notRequired: "Non nécessaire",

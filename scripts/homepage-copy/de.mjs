@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Sprache wählen",
     platform: "Plattform",
     solutions: "Lösungen",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Produktleitfaden",
     contact: "Kontakt aufnehmen",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Keine Abonnementgebühren",
-        text: "Sie zahlen einmalig für Gerät und Installation. Es gibt kein monatliches Abonnement, keine Verlängerung und keine laufende Plattformgebühr. Einzige Ausnahme ist die kommerzielle Nutzung von WIFIGATE Automation, die abonnementpflichtig ist.",
+        text: "Sie zahlen einmalig für Gerät und Installation. Es gibt kein monatliches Abonnement, keine Verlängerung und keine laufende Plattformgebühr. Einzige Ausnahme ist die kommerzielle Nutzung von WIFIGATE Host, die abonnementpflichtig ist.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hotels", "Airbnb", "Gästeapartments", "Unterkünfte"],
     promise: "Heißen Sie Ihre Gäste willkommen. Automatisieren Sie ihren Zutritt.",
     subtitle: "Von Hotelaufenthalten bis zu Ferienwohnungen: Verknüpfen Sie jede Buchung mit einem sicheren Zugang zum richtigen Tor, zur richtigen Tür oder zur richtigen Garage. Gäste gelangen mit ihrem Smartphone hinein. Ihre Zugangsberechtigung beginnt beim Check-in und endet automatisch beim Check-out.",
-    cta: "WIFIGATE Automation entdecken",
+    cta: "WIFIGATE Host entdecken",
     imageAlt: "Gäste nutzen ein Telefon, um ihre Unterkunft zu betreten",
     stayCaption: "Bei jedem Aufenthalt ist für alles gesorgt",
     staySteps: ["Buchung eingegangen", "Zutritt ab Check-in", "Läuft beim Check-out ab"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "Erfordert WIFIGATE ein monatliches Abonnement?",
-        answer: "Nein. Sie zahlen einmalig für das WIFIGATE-Gerät und die Installation. Es gibt kein monatliches Abonnement, keine Verlängerung und keine laufende Plattformgebühr. Die einzige Ausnahme ist WIFIGATE Automation für die kommerzielle Nutzung. Diese Lösung wird im Abonnement angeboten.",
+        answer: "Nein. Sie zahlen einmalig für das WIFIGATE-Gerät und die Installation. Es gibt kein monatliches Abonnement, keine Verlängerung und keine laufende Plattformgebühr. Die einzige Ausnahme ist WIFIGATE Host für die kommerzielle Nutzung. Diese Lösung wird im Abonnement angeboten.",
       },
       {
         question: "Kann WIFIGATE zeitlich begrenzten Gastzugang anbieten?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Zutrittskontrollsystem",
     monthlySubscription: "Monatliches Abonnement",
-    subscriptionValue: "Für WIFIGATE in der Standardausführung nicht erforderlich; die kommerzielle Nutzung von WIFIGATE Automation ist abonnementpflichtig",
+    subscriptionValue: "Für WIFIGATE in der Standardausführung nicht erforderlich; die kommerzielle Nutzung von WIFIGATE Host ist abonnementpflichtig",
     simCard: "SIM-Karte",
     externalRouter: "Externer WiFi-Router",
     notRequired: "Nicht erforderlich",

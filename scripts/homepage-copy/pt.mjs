@@ -5,7 +5,7 @@ const copy = {
     selectLanguageLabel: "Selecionar idioma",
     platform: "Plataforma",
     solutions: "Soluções",
-    automation: "WIFIGATE Automation",
+    automation: "WIFIGATE Host",
     productGuide: "Guia do produto",
     contact: "Contacte-nos",
   },
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Sem taxas de subscrição",
-        text: "Pague uma única vez pelo dispositivo e pela instalação, sem subscrição mensal, renovações ou taxas recorrentes da plataforma. A utilização comercial de WIFIGATE Automation é a única exceção e requer subscrição.",
+        text: "Pague uma única vez pelo dispositivo e pela instalação, sem subscrição mensal, renovações ou taxas recorrentes da plataforma. A utilização comercial de WIFIGATE Host é a única exceção e requer subscrição.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const copy = {
     audiences: ["Hotéis", "Airbnb", "Apartamentos turísticos", "Espaços de alojamento"],
     promise: "Acolha os seus hóspedes. Automatize o seu acesso.",
     subtitle: "De estadias em hotéis a apartamentos de férias, associe cada reserva ao acesso seguro da entrada certa, quer se trate do portão, da porta ou da garagem. Os hóspedes entram com o telemóvel, com um acesso que começa no check-in e termina automaticamente no check-out.",
-    cta: "Explorar WIFIGATE Automation",
+    cta: "Explorar WIFIGATE Host",
     imageAlt: "Hóspedes a usar o telemóvel para entrar no alojamento",
     stayCaption: "Cada estadia, devidamente gerida",
     staySteps: ["Reserva recebida", "Acesso no check-in", "Expira no check-out"],
@@ -132,7 +132,7 @@ const copy = {
       },
       {
         question: "WIFIGATE requer uma subscrição mensal?",
-        answer: "Não. Paga uma única vez pelo dispositivo WIFIGATE e pela instalação, sem subscrição mensal, renovações ou taxas recorrentes da plataforma. WIFIGATE Automation para utilização comercial é a única exceção e requer subscrição.",
+        answer: "Não. Paga uma única vez pelo dispositivo WIFIGATE e pela instalação, sem subscrição mensal, renovações ou taxas recorrentes da plataforma. WIFIGATE Host para utilização comercial é a única exceção e requer subscrição.",
       },
       {
         question: "WIFIGATE pode proporcionar acesso temporário para hóspedes?",
@@ -172,7 +172,7 @@ const copy = {
   schema: {
     productCategory: "Sistema de controlo de acesso",
     monthlySubscription: "Subscrição mensal",
-    subscriptionValue: "Não é necessária para WIFIGATE standard; a utilização comercial de WIFIGATE Automation requer subscrição",
+    subscriptionValue: "Não é necessária para WIFIGATE standard; a utilização comercial de WIFIGATE Host requer subscrição",
     simCard: "Cartão SIM",
     externalRouter: "Router WiFi externo",
     notRequired: "Não necessário",
