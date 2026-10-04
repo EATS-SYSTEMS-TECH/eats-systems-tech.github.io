@@ -1,0 +1,252 @@
+// scripts/legal/build-legal-pages.mjs
+//
+// The three legal documents have one source each (privacy-content.mjs,
+// terms-content.mjs, cookies-content.mjs): English, which governs, and Hebrew,
+// block for block. This script writes from them
+//   - templates/legal/<page>.template.html  (the markup, data-i18n keys, English text)
+//   - js/legal/<page>-content.js            (translations[locale].legal for every locale)
+// Every locale other than English and Hebrew gets the English text, a note in
+// its own language that the English version governs, and its localized CTAs.
+//
+// Run: node scripts/legal/build-legal-pages.mjs   (then npm run build:locales)
+
+import fs from "node:fs/promises";
+import path from "node:path";
+import { cookies } from "./cookies-content.mjs";
+import { languageNotices } from "./locale-notices.mjs";
+import { privacy } from "./privacy-content.mjs";
+import { terms } from "./terms-content.mjs";
+
+const repoRoot = process.cwd();
+const LOCALES = [
+  "en", "es", "fr", "de", "he", "nl", "it", "pt", "pl", "no", "cs", "ru", "uk",
+  "tr", "ar", "hi", "bn", "mr", "te", "zh-Hans", "zh-Hant", "ja", "ko", "da", "sv", "hu",
+  "el", "ro", "hr", "fi", "bg", "sr", "sk", "sl", "id", "th", "vi", "ms", "fil",
+];
+const FULL_TEXT_LOCALES = new Set(["en", "he"]);
+const CSS_VERSION = "20261004b";
+
+const DOCUMENTS = [
+  { page: "privacy-policy", content: privacy, contentsLabel: { en: "Contents", he: "תוכן העניינים" } },
+  { page: "terms-and-conditions", content: terms, contentsLabel: { en: "Contents", he: "תוכן העניינים" } },
+  { page: "cookies", content: cookies, contentsLabel: { en: "Contents", he: "תוכן העניינים" } },
+];
+
+const localeCta = JSON.parse(await fs.readFile(path.join(repoRoot, "scripts", "legal", "locale-cta.json"), "utf8"));
+const DEFAULT_CTA = {
+  eyebrow: { en: "Legal", he: "משפטי" },
+  pricing: {
+    en: { title: "Need pricing or installation guidance?", text: "Send us a WhatsApp message and we will help with product fit, installation and next steps.", button: "Open WhatsApp" },
+    he: { title: "צריכים הצעת מחיר או ייעוץ להתקנה?", text: "שלחו לנו הודעת WhatsApp ונעזור בהתאמת המוצר, בהתקנה ובצעדים הבאים.", button: "פתיחת WhatsApp" },
+  },
+  back: {
+    en: { title: "Back to the main site", text: "Return to the homepage to review features, applications, tutorials and contact details.", button: "Go to homepage" },
+    he: { title: "חזרה לאתר הראשי", text: "חזרו לדף הבית כדי לעיין בתכונות, בשימושים, בהדרכות ובפרטי ההתקשרות.", button: "מעבר לדף הבית" },
+  },
+};
+
+function escapeHtml(text) {
+  return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+// The key path of every text block; the same walk builds the markup and the data.
+function blockShape(block) {
+  if (typeof block === "string") return "p";
+  if (block.list) return `list:${block.list.length}`;
+  if (block.table) return `table:${block.table.head.length}x${block.table.rows.length}`;
+  if (block.link) return `link:${block.link.href}`;
+  throw new Error(`unknown block ${JSON.stringify(block).slice(0, 60)}`);
+}
+
+function assertSameShape(page, en, he) {
+  const shape = (doc) => doc.sections.map((s) => `${s.id}[${s.blocks.map(blockShape).join(",")}]`).join("|");
+  if (shape(en) !== shape(he)) {
+    throw new Error(`${page}: Hebrew does not mirror English block for block\nen: ${shape(en)}\nhe: ${shape(he)}`);
+  }
+}
+
+function sectionData(doc) {
+  const sections = {};
+  for (const section of doc.sections) {
+    const data = { title: section.title };
+    section.blocks.forEach((block, b) => {
+      if (typeof block === "string") data[`b${b}`] = block;
+      else if (block.list) data[`b${b}`] = Object.fromEntries(block.list.map((item, i) => [`i${i}`, item]));
+      else if (block.table) {
+        const table = {};
+        block.table.head.forEach((cell, c) => (table[`h${c}`] = cell));
+        block.table.rows.forEach((row, r) => row.forEach((cell, c) => (table[`r${r}c${c}`] = cell)));
+        data[`b${b}`] = table;
+      } else if (block.link) data[`b${b}`] = block.link.text;
+    });
+    sections[section.id] = data;
+  }
+  return sections;
+}
+
+function legalBundle(doc, ctaFor, extra = {}) {
+  return {
+    metaTags: { title: doc.metaTitle, description: doc.metaDescription },
+    hero: {
+      eyebrow: extra.eyebrow || doc.eyebrow,
+      title: doc.title,
+      subtitle: doc.subtitle,
+      updated: doc.updated,
+      owner: doc.owner,
+      languageNote: extra.languageNote || "",
+    },
+    contents: extra.contents,
+    contentLang: extra.contentLang,
+    s: sectionData(doc),
+    cta: ctaFor,
+  };
+}
+
+function ctaFor(locale) {
+  const local = localeCta[locale];
+  const base = locale === "he" ? "he" : "en";
+  const pick = (kind) => ({
+    title: local?.[kind]?.title || DEFAULT_CTA[kind][base].title,
+    text: local?.[kind]?.text || DEFAULT_CTA[kind][base].text,
+    // The button names the action, never a handle.
+    button: kind === "pricing"
+      ? (local?.pricing?.button && !/@/.test(local.pricing.button) ? local.pricing.button : DEFAULT_CTA.pricing[base].button)
+      : local?.back?.button || DEFAULT_CTA.back[base].button,
+  });
+  return { pricing: pick("pricing"), back: pick("back") };
+}
+
+function renderBlocks(section) {
+  const key = (suffix) => `legal.s.${section.id}.${suffix}`;
+  return section.blocks.map((block, b) => {
+    if (typeof block === "string") {
+      return `          <p data-i18n="${key(`b${b}`)}">${escapeHtml(block)}</p>`;
+    }
+    if (block.list) {
+      const items = block.list.map((item, i) => `            <li data-i18n="${key(`b${b}.i${i}`)}">${escapeHtml(item)}</li>`);
+      return [`          <ul class="legal-list">`, ...items, `          </ul>`].join("\n");
+    }
+    if (block.table) {
+      const head = block.table.head.map((cell, c) => `<th scope="col" data-i18n="${key(`b${b}.h${c}`)}">${escapeHtml(cell)}</th>`).join("");
+      const rows = block.table.rows.map((row, r) =>
+        `                <tr>${row.map((cell, c) => `<td data-i18n="${key(`b${b}.r${r}c${c}`)}">${escapeHtml(cell)}</td>`).join("")}</tr>`);
+      return [
+        `          <div class="legal-table-wrap">`,
+        `            <table class="legal-table">`,
+        `              <thead><tr>${head}</tr></thead>`,
+        `              <tbody>`,
+        ...rows,
+        `              </tbody>`,
+        `            </table>`,
+        `          </div>`,
+      ].join("\n");
+    }
+    return `          <p><a href="${block.link.href}" data-i18n="${key(`b${b}`)}">${escapeHtml(block.link.text)}</a></p>`;
+  }).join("\n");
+}
+
+function renderMain(page, doc) {
+  const toc = doc.sections.map((s) =>
+    `            <li><a href="#${s.id}" data-i18n="legal.s.${s.id}.title">${escapeHtml(s.title)}</a></li>`).join("\n");
+  const sections = doc.sections.map((s) => [
+    `        <section class="legal-section" id="${s.id}" aria-labelledby="${s.id}-title">`,
+    `          <h2 class="legal-section__title" id="${s.id}-title" data-i18n="legal.s.${s.id}.title">${escapeHtml(s.title)}</h2>`,
+    renderBlocks(s),
+    `        </section>`,
+  ].join("\n")).join("\n\n");
+  const cta = ctaFor("en");
+  return `  <main class="legal-main" id="main-content">
+    <div class="container">
+      <section class="legal-hero" aria-labelledby="${page}-title">
+        <p class="legal-eyebrow" data-i18n="legal.hero.eyebrow">${escapeHtml(doc.eyebrow)}</p>
+        <h1 class="legal-title" id="${page}-title" data-i18n="legal.hero.title">${escapeHtml(doc.title)}</h1>
+        <p class="legal-subtitle" data-i18n="legal.hero.subtitle">${escapeHtml(doc.subtitle)}</p>
+        <div class="legal-meta">
+          <span class="legal-meta__item" data-i18n="legal.hero.updated">${escapeHtml(doc.updated)}</span>
+          <span class="legal-meta__item" data-i18n="legal.hero.owner">${escapeHtml(doc.owner)}</span>
+        </div>
+        <div class="legal-note legal-language-note" data-i18n="legal.hero.languageNote"></div>
+      </section>
+
+      <article class="legal-card">
+        <nav class="legal-toc" aria-labelledby="${page}-contents">
+          <h2 class="legal-toc__title" id="${page}-contents" data-i18n="legal.contents">Contents</h2>
+          <ol>
+${toc}
+          </ol>
+        </nav>
+
+${sections}
+
+        <section class="legal-cta" aria-label="Next steps">
+          <div class="legal-cta__card">
+            <h2 data-i18n="legal.cta.pricing.title">${escapeHtml(cta.pricing.title)}</h2>
+            <p data-i18n="legal.cta.pricing.text">${escapeHtml(cta.pricing.text)}</p>
+            <a href="https://wa.me/message/NZWNMX6V2XVHJ1" class="btn btn--primary" target="_blank" rel="noopener noreferrer"
+              data-i18n="legal.cta.pricing.button">${escapeHtml(cta.pricing.button)}</a>
+          </div>
+
+          <div class="legal-cta__card">
+            <h2 data-i18n="legal.cta.back.title">${escapeHtml(cta.back.title)}</h2>
+            <p data-i18n="legal.cta.back.text">${escapeHtml(cta.back.text)}</p>
+            <a href="../index.html" class="btn btn--ghost" data-i18n="legal.cta.back.button">${escapeHtml(cta.back.button)}</a>
+          </div>
+        </section>
+      </article>
+    </div>
+  </main>`;
+}
+
+async function writeTemplate(page, doc) {
+  const file = path.join(repoRoot, "templates", "legal", `${page}.template.html`);
+  let html = await fs.readFile(file, "utf8");
+  const start = html.indexOf('  <main class="legal-main"');
+  const end = html.indexOf("</main>", start) + "</main>".length;
+  if (start < 0 || end < start) throw new Error(`${page}: <main> not found`);
+  html = html.slice(0, start) + renderMain(page, doc) + html.slice(end);
+  html = html
+    .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(doc.metaTitle)}</title>`)
+    .replace(/<meta name="description"\s+content="[^"]*" \/>/, `<meta name="description"\n    content="${escapeHtml(doc.metaDescription)}" />`)
+    .replace(/\n\s*<script src="\.\.\/js\/(?:legal|privacy|cookies)-translations(?:-extra)?\.js[^"]*" defer><\/script>/g, "")
+    .replace(/legal\.css\?v=[^"]+/, `legal.css?v=${CSS_VERSION}`);
+  await fs.writeFile(file, html);
+}
+
+async function writeData(page, doc, contentsLabel) {
+  const bundles = {};
+  for (const locale of LOCALES) {
+    if (FULL_TEXT_LOCALES.has(locale)) {
+      bundles[locale] = legalBundle(doc[locale], ctaFor(locale), { contents: contentsLabel[locale] });
+    } else {
+      bundles[locale] = legalBundle(doc.en, ctaFor(locale), {
+        eyebrow: localeCta[locale]?.eyebrow,
+        contents: contentsLabel.en,
+        contentLang: "en",
+        languageNote: languageNotices[locale],
+      });
+      if (!languageNotices[locale]) throw new Error(`no language notice for ${locale}`);
+    }
+  }
+  const js = `// /js/legal/${page}-content.js
+// Generated by scripts/legal/build-legal-pages.mjs from scripts/legal/*-content.mjs.
+// Do not edit by hand.
+(function () {
+  const legal = ${JSON.stringify(bundles, null, 2)};
+  Object.keys(legal).forEach((lang) => {
+    if (!translations[lang]) {
+      translations[lang] = {};
+    }
+    translations[lang].legal = legal[lang];
+  });
+})();
+`;
+  await fs.mkdir(path.join(repoRoot, "js", "legal"), { recursive: true });
+  await fs.writeFile(path.join(repoRoot, "js", "legal", `${page}-content.js`), js);
+}
+
+for (const { page, content, contentsLabel } of DOCUMENTS) {
+  assertSameShape(page, content.en, content.he);
+  await writeTemplate(page, content.en);
+  await writeData(page, content, contentsLabel);
+  console.log(`${page}: ${content.en.sections.length} sections, ${LOCALES.length} locales`);
+}
