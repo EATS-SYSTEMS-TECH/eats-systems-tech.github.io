@@ -6,7 +6,7 @@ import { pathToFileURL } from "node:url";
 import { NICHE_CHROME } from "./niche-content.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
 import { SITE_NAVIGATION } from "./site-navigation.mjs";
-import { accessibilityLinkLabels } from "./legal/footer-labels.mjs";
+import { accessibilityLinkLabels, operatorLines } from "./legal/footer-labels.mjs";
 import { wifigateLinkLocales } from "./wifigate-link-locales.mjs";
 
 const repoRoot = process.cwd();
@@ -1117,6 +1117,10 @@ function rewriteFooterLegalLinks($, locale) {
   $(".site-footer__link[href*='accessibility/']")
     .attr("href", buildPagePath(locale, "accessibility"))
     .text(accessibilityLinkLabels[locale] || accessibilityLinkLabels.en);
+  // The operator and its registered name, as in its D-U-N-S record.
+  $(".site-footer__entity")
+    .attr("dir", locale === "he" ? "rtl" : "ltr")
+    .text(operatorLines[locale] || operatorLines.en);
 }
 
 function rewriteHomeInternalLinks($, locale) {

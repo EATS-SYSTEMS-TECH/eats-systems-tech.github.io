@@ -13,13 +13,13 @@ export const privacy = {
     subtitle:
       "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
     updated: "Effective date: October 4, 2026",
-    owner: "Operator: EATS SYSTEMS TECH",
+    owner: "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
     sections: [
       {
         id: "who-we-are",
         title: "1. Who we are and what this policy covers",
         blocks: [
-          "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+          "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
           "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies.",
         ],
       },
@@ -162,7 +162,7 @@ export const privacy = {
         id: "contact",
         title: "14. Contact",
         blocks: [
-          "Controller: EATS SYSTEMS TECH",
+          "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
           "Email: support@wifigate.io",
           "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
           { link: { href: "../cookies/", text: "Read our Cookie Policy" } },
@@ -181,13 +181,13 @@ export const privacy = {
     subtitle:
       "מדיניות פרטיות זו מסבירה איזה מידע אישי WIFIGATE מעבדת, לשם מה, עם מי הוא משותף, כמה זמן הוא נשמר, ואילו בחירות וזכויות עומדות לרשותכם.",
     updated: "תאריך תחילה: 4 באוקטובר 2026",
-    owner: "המפעילה: EATS SYSTEMS TECH",
+    owner: "המפעילה: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
     sections: [
       {
         id: "who-we-are",
         title: "1. מי אנחנו ועל מה חלה מדיניות זו",
         blocks: [
-          "WIFIGATE הוא מוצר חכם לבקרת כניסה, הכולל את אפליקציית WIFIGATE ל‑Android ול‑iOS, את בקר השער של WIFIGATE המותקן בשער, בדלת או במחסום, את האתר wifigate.io ואת פורטל האינטרנט של WIFIGATE. המוצר מופעל על ידי EATS SYSTEMS TECH (\"WIFIGATE\", \"אנחנו\"). ניתן לפנות אלינו בכתובת support@wifigate.io.",
+          "WIFIGATE הוא מוצר חכם לבקרת כניסה, הכולל את אפליקציית WIFIGATE ל‑Android ול‑iOS, את בקר השער של WIFIGATE המותקן בשער, בדלת או במחסום, את האתר wifigate.io ואת פורטל האינטרנט של WIFIGATE. המוצר מופעל על ידי EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"אנחנו\"). ניתן לפנות אלינו בכתובת support@wifigate.io.",
           "מדיניות זו חלה על מידע אישי המעובד באמצעות האפליקציה, הבקר, האתר והפורטל. היא אינה חלה על אתרים או שירותים של צדדים שלישיים שיש אליהם קישור מהמוצר, ואשר להם מדיניות משלהם.",
         ],
       },
@@ -330,7 +330,7 @@ export const privacy = {
         id: "contact",
         title: "14. יצירת קשר",
         blocks: [
-          "בעלת השליטה במידע: EATS SYSTEMS TECH",
+          "בעלת השליטה במידע: EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions",
           "דוא\"ל: support@wifigate.io",
           "מדיניות זו מתפרסמת באנגלית ובעברית, ובדפים בשפות אחרות היא עשויה להופיע באנגלית. במקרה של סתירה בין הנוסחים, הנוסח האנגלי גובר.",
           { link: { href: "../cookies/", text: "למדיניות העוגיות" } },
