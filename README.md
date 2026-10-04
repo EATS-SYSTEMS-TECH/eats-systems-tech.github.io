@@ -23,13 +23,13 @@ preserved by the same pass-through behavior.
 
 The frontend uses Firebase Google/Apple authentication, including redirect callback handling, session restoration, logout, and TOTP challenges. It synchronizes the profile with an empty PUT /api/v1/users/me and reads authorization from GET /api/v1/users/me. A profile alone never grants portal access.
 
-The dashboard contains the Calendar reference image only, an admin email approval form, and account/security controls. It has no live calendar, clients, keys, usage, room management, or other V2 screens. Pending, denied, unavailable, mandatory enrollment, and MFA verification states keep portal content hidden.
+The dashboard contains the Calendar reference image, administrator access management, account/security controls, and organization management. Active members select their organization and view properties/rooms; owners manage organization settings and the team; owners/admins create, edit and delete properties/rooms. The backend checks every permission and current version. Mutations retain their idempotency key for safe retries, and responses from a previous session are discarded. Organization administration requires TOTP. Pending, denied, unavailable, mandatory enrollment, and MFA verification states keep protected content hidden.
 
-The proposed backend contract and setup requirements are in [docs/host-portal-v1.md](docs/host-portal-v1.md). The current local backend only returns the profile; it still needs the authorization/MFA fields and email approval endpoint. Missing fields fail closed.
+The authentication contract and setup requirements are in [docs/host-portal-v1.md](docs/host-portal-v1.md). The backend implements authorization/MFA fields, access lifecycle, and tenant endpoints under `/api/v1/organizations`; its README is the complete endpoint registry. Missing authorization fields fail closed.
 
 ### Calendar asset
 
-The supplied WIFIGATE_HOST.html references a Calendar image but contains no image attachment. Once the approved image is supplied, add it to assets/img/ and set calendarReferenceUrl in js/host-portal-config.js. The responsive image container is implemented; no replacement calendar or invented reference is shipped.
+The Calendar reference image is configured in `js/host-portal-config.js` and ships in the website assets. Tenant management uses the authenticated API adapter in `api/host/portal-request.ts`; no product data is read directly from Firestore. The Host emulator suite exercises the actual portal against Firestore for organization, property, room and team lifecycle at desktop and mobile widths.
 
 ### Configuration and build
 
