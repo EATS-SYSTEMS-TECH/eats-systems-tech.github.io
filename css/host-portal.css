@@ -98,3 +98,13 @@ dialog::backdrop { background: rgb(7 24 39 / 65%); }
 .app-login__text-button[hidden] { display: none; }
 .app-login__legal { margin: 18px 0 0; color: #64748b; font-size: 0.78rem; line-height: 1.6; text-align: center; }
 .app-login__legal a { color: #475569; text-decoration: underline; text-underline-offset: 0.15em; }
+
+/* Phones: one line per message. The type scales with the screen width, and
+   the screen and card margins are tighter, so the footnote and the status fit
+   on a single line down to a 320 px screen. */
+@media (max-width: 480px) {
+  .app-login__screen { padding: 14px; }
+  .app-login__card { padding: 18px 16px; }
+  .app-login__status, .app-login__redirect p { white-space: nowrap; font-size: min(0.875rem, 3.3vw); }
+  .app-login__legal { white-space: nowrap; font-size: min(0.78rem, 2.95vw); }
+}
