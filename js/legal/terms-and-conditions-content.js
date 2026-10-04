@@ -6,21 +6,21 @@
   "en": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": ""
     },
     "contents": "Contents",
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -138,7 +138,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -160,14 +160,14 @@
   "es": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Este documento está disponible en inglés. La versión en inglés es la versión jurídicamente vinculante."
     },
     "contents": "Contents",
@@ -175,7 +175,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -293,7 +293,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -315,14 +315,14 @@
   "fr": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Juridique",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Ce document est disponible en anglais. La version anglaise est la version juridiquement contraignante."
     },
     "contents": "Contents",
@@ -330,7 +330,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -448,7 +448,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -470,14 +470,14 @@
   "de": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Dieses Dokument ist auf Englisch verfügbar. Die englische Fassung ist die rechtsverbindliche Fassung."
     },
     "contents": "Contents",
@@ -485,7 +485,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -603,7 +603,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -625,21 +625,21 @@
   "he": {
     "metaTags": {
       "title": "תנאי שימוש | WIFIGATE",
-      "description": "התנאים החלים על אפליקציית WIFIGATE, בקרי השער, האתר ופורטל האינטרנט, הניתנים על ידי EATS SYSTEMS TECH LTD: חשבונות, מנהלים, הזמנות, התקנה ובטיחות, אחריות ודין חל."
+      "description": "התנאים החלים על אפליקציית WIFIGATE, בקרי השער, האתר ופורטל האינטרנט, הניתנים על ידי EATS SYSTEMS TECH: חשבונות, מנהלים, הזמנות, התקנה ובטיחות, אחריות ודין חל."
     },
     "hero": {
       "eyebrow": "משפטי",
       "title": "תנאי שימוש",
       "subtitle": "תנאי שימוש אלה חלים על השימוש שלכם באפליקציית WIFIGATE, בבקרי השער, באתר ובפורטל האינטרנט. אנא קראו אותם בעיון.",
       "updated": "תאריך תחילה: 4 באוקטובר 2026",
-      "owner": "נותנת השירות: EATS SYSTEMS TECH LTD",
+      "owner": "נותנת השירות: EATS SYSTEMS TECH",
       "languageNote": ""
     },
     "contents": "תוכן העניינים",
     "s": {
       "agreement": {
         "title": "1. ההסכם",
-        "b0": "תנאי שימוש אלה (\"התנאים\") הם הסכם ביניכם לבין EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"אנחנו\") לגבי אפליקציית WIFIGATE, בקר השער של WIFIGATE והקושחה שלו, האתר wifigate.io ופורטל האינטרנט של WIFIGATE (יחד: \"השירות\").",
+        "b0": "תנאי שימוש אלה (\"התנאים\") הם הסכם ביניכם לבין EATS SYSTEMS TECH (\"WIFIGATE\", \"אנחנו\") לגבי אפליקציית WIFIGATE, בקר השער של WIFIGATE והקושחה שלו, האתר wifigate.io ופורטל האינטרנט של WIFIGATE (יחד: \"השירות\").",
         "b1": "ביצירת חשבון, בהתקנת האפליקציה או בשימוש בה, או בהתקנת בקר או בהפעלתו, אתם מקבלים את התנאים ואת מדיניות הפרטיות שלנו. אם אתם משתמשים בשירות מטעם ארגון, אתם מאשרים שאתם מוסמכים לקבל את התנאים בשמו. אם אינכם מקבלים את התנאים, אל תשתמשו בשירות.",
         "b2": "פתיחת חשבון או ניהול בקר מותרים רק למי שמלאו לו 18 שנים, או גיל הכשרות המשפטית במקום מגוריו. קטין רשאי להשתמש בשירות רק כשהוא רשום על ידי מנהל האחראי לשימוש זה."
       },
@@ -757,7 +757,7 @@
       },
       "contact": {
         "title": "21. יצירת קשר",
-        "b0": "EATS SYSTEMS TECH LTD, ישראל.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "דוא\"ל: support@wifigate.io",
         "b2": "למדיניות הפרטיות",
         "b3": "למדיניות העוגיות"
@@ -779,14 +779,14 @@
   "nl": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legaal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Dit document is beschikbaar in het Engels. De Engelse versie is de juridisch bindende versie."
     },
     "contents": "Contents",
@@ -794,7 +794,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -912,7 +912,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -934,14 +934,14 @@
   "it": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legale",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Questo documento è disponibile in inglese. La versione inglese è quella giuridicamente vincolante."
     },
     "contents": "Contents",
@@ -949,7 +949,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -1067,7 +1067,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -1089,14 +1089,14 @@
   "pt": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Este documento está disponível em inglês. A versão em inglês é a versão juridicamente vinculativa."
     },
     "contents": "Contents",
@@ -1104,7 +1104,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -1222,7 +1222,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -1244,14 +1244,14 @@
   "pl": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Informacje prawne",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Ten dokument jest dostępny w języku angielskim. Wersja angielska jest wersją prawnie wiążącą."
     },
     "contents": "Contents",
@@ -1259,7 +1259,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -1377,7 +1377,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -1399,14 +1399,14 @@
   "no": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Lovlig",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Dette dokumentet er tilgjengelig på engelsk. Den engelske versjonen er den juridisk bindende versjonen."
     },
     "contents": "Contents",
@@ -1414,7 +1414,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -1532,7 +1532,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -1554,14 +1554,14 @@
   "cs": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Právní informace",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Tento dokument je k dispozici v angličtině. Právně závazná je anglická verze."
     },
     "contents": "Contents",
@@ -1569,7 +1569,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -1687,7 +1687,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -1709,14 +1709,14 @@
   "ru": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Правовая информация",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Этот документ доступен на английском языке. Юридически обязывающей является английская версия."
     },
     "contents": "Contents",
@@ -1724,7 +1724,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -1842,7 +1842,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -1864,14 +1864,14 @@
   "uk": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "юридичний",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Цей документ доступний англійською мовою. Юридично обов'язковою є англійська версія."
     },
     "contents": "Contents",
@@ -1879,7 +1879,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -1997,7 +1997,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -2019,14 +2019,14 @@
   "tr": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Yasal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Bu belge İngilizce olarak sunulmaktadır. Hukuken bağlayıcı olan İngilizce sürümdür."
     },
     "contents": "Contents",
@@ -2034,7 +2034,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -2152,7 +2152,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -2174,14 +2174,14 @@
   "ar": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "قانوني",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "هذا المستند متاح باللغة الإنجليزية. النسخة الإنجليزية هي النسخة الملزمة قانونيًا."
     },
     "contents": "Contents",
@@ -2189,7 +2189,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -2307,7 +2307,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -2329,14 +2329,14 @@
   "hi": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "कानूनी",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "यह दस्तावेज़ अंग्रेज़ी में उपलब्ध है। कानूनी रूप से बाध्यकारी संस्करण अंग्रेज़ी संस्करण है।"
     },
     "contents": "Contents",
@@ -2344,7 +2344,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -2462,7 +2462,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -2484,14 +2484,14 @@
   "bn": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "আইনি",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "এই নথিটি ইংরেজিতে উপলব্ধ। ইংরেজি সংস্করণটিই আইনগতভাবে বাধ্যতামূলক সংস্করণ।"
     },
     "contents": "Contents",
@@ -2499,7 +2499,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -2617,7 +2617,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -2639,14 +2639,14 @@
   "mr": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "कायदेशीर",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "हा दस्तऐवज इंग्रजीमध्ये उपलब्ध आहे. इंग्रजी आवृत्ती ही कायदेशीररित्या बंधनकारक आवृत्ती आहे."
     },
     "contents": "Contents",
@@ -2654,7 +2654,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -2772,7 +2772,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -2794,14 +2794,14 @@
   "te": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "చట్టపరమైన",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "ఈ పత్రం ఆంగ్లంలో అందుబాటులో ఉంది. చట్టపరంగా కట్టుబడి ఉండే సంస్కరణ ఆంగ్ల సంస్కరణ."
     },
     "contents": "Contents",
@@ -2809,7 +2809,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -2927,7 +2927,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -2949,14 +2949,14 @@
   "zh-Hans": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "法律",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "本文件以英文提供。英文版本为具有法律约束力的版本。"
     },
     "contents": "Contents",
@@ -2964,7 +2964,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -3082,7 +3082,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -3104,14 +3104,14 @@
   "zh-Hant": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "法律",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "本文件以英文提供。英文版本為具有法律約束力的版本。"
     },
     "contents": "Contents",
@@ -3119,7 +3119,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -3237,7 +3237,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -3259,14 +3259,14 @@
   "ja": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "法的",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "この文書は英語で提供されています。法的拘束力を持つのは英語版です。"
     },
     "contents": "Contents",
@@ -3274,7 +3274,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -3392,7 +3392,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -3414,14 +3414,14 @@
   "ko": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "법적",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "이 문서는 영어로 제공됩니다. 법적 구속력이 있는 버전은 영어 버전입니다."
     },
     "contents": "Contents",
@@ -3429,7 +3429,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -3547,7 +3547,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -3569,14 +3569,14 @@
   "da": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Juridisk",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Dette dokument er tilgængeligt på engelsk. Den engelske version er den juridisk bindende version."
     },
     "contents": "Contents",
@@ -3584,7 +3584,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -3702,7 +3702,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -3724,14 +3724,14 @@
   "sv": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Juridiskt",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Detta dokument finns på engelska. Den engelska versionen är den juridiskt bindande versionen."
     },
     "contents": "Contents",
@@ -3739,7 +3739,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -3857,7 +3857,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -3879,14 +3879,14 @@
   "hu": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Jogi",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Ez a dokumentum angol nyelven érhető el. A jogilag kötelező változat az angol változat."
     },
     "contents": "Contents",
@@ -3894,7 +3894,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -4012,7 +4012,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -4034,14 +4034,14 @@
   "el": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Το παρόν έγγραφο διατίθεται στα αγγλικά. Η αγγλική έκδοση είναι η νομικά δεσμευτική έκδοση."
     },
     "contents": "Contents",
@@ -4049,7 +4049,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -4167,7 +4167,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -4189,14 +4189,14 @@
   "ro": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Acest document este disponibil în limba engleză. Versiunea în limba engleză este versiunea obligatorie din punct de vedere juridic."
     },
     "contents": "Contents",
@@ -4204,7 +4204,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -4322,7 +4322,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -4344,14 +4344,14 @@
   "hr": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Ovaj je dokument dostupan na engleskom jeziku. Pravno obvezujuća je verzija na engleskom jeziku."
     },
     "contents": "Contents",
@@ -4359,7 +4359,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -4477,7 +4477,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -4499,14 +4499,14 @@
   "fi": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Tämä asiakirja on saatavilla englanniksi. Oikeudellisesti sitova on englanninkielinen versio."
     },
     "contents": "Contents",
@@ -4514,7 +4514,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -4632,7 +4632,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -4654,14 +4654,14 @@
   "bg": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Този документ е достъпен на английски език. Правно обвързваща е версията на английски език."
     },
     "contents": "Contents",
@@ -4669,7 +4669,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -4787,7 +4787,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -4809,14 +4809,14 @@
   "sr": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Овај документ је доступан на енглеском језику. Правно обавезујућа је верзија на енглеском језику."
     },
     "contents": "Contents",
@@ -4824,7 +4824,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -4942,7 +4942,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -4964,14 +4964,14 @@
   "sk": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Tento dokument je k dispozícii v angličtine. Právne záväzná je anglická verzia."
     },
     "contents": "Contents",
@@ -4979,7 +4979,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -5097,7 +5097,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -5119,14 +5119,14 @@
   "sl": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Ta dokument je na voljo v angleščini. Pravno zavezujoča je angleška različica."
     },
     "contents": "Contents",
@@ -5134,7 +5134,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -5252,7 +5252,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -5274,14 +5274,14 @@
   "id": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggris. Versi bahasa Inggris adalah versi yang mengikat secara hukum."
     },
     "contents": "Contents",
@@ -5289,7 +5289,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -5407,7 +5407,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -5429,14 +5429,14 @@
   "th": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "เอกสารนี้มีให้บริการเป็นภาษาอังกฤษ ฉบับภาษาอังกฤษเป็นฉบับที่มีผลผูกพันทางกฎหมาย"
     },
     "contents": "Contents",
@@ -5444,7 +5444,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -5562,7 +5562,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -5584,14 +5584,14 @@
   "vi": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Tài liệu này được cung cấp bằng tiếng Anh. Bản tiếng Anh là bản có giá trị ràng buộc về mặt pháp lý."
     },
     "contents": "Contents",
@@ -5599,7 +5599,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -5717,7 +5717,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -5739,14 +5739,14 @@
   "ms": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggeris. Versi bahasa Inggeris ialah versi yang mengikat dari segi undang-undang."
     },
     "contents": "Contents",
@@ -5754,7 +5754,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -5872,7 +5872,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"
@@ -5894,14 +5894,14 @@
   "fil": {
     "metaTags": {
       "title": "Terms & Conditions | WIFIGATE",
-      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH LTD: accounts, administrators, invitations, installation and safety, liability and governing law."
+      "description": "The terms that govern the WIFIGATE app, gate controllers, website and web portal, provided by EATS SYSTEMS TECH: accounts, administrators, invitations, installation and safety, liability and governing law."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Terms & Conditions",
       "subtitle": "These Terms & Conditions govern your use of the WIFIGATE app, gate controllers, website and web portal. Please read them carefully.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Provider: EATS SYSTEMS TECH LTD",
+      "owner": "Provider: EATS SYSTEMS TECH",
       "languageNote": "Ang dokumentong ito ay makukuha sa Ingles. Ang bersyong Ingles ang may bisang legal."
     },
     "contents": "Contents",
@@ -5909,7 +5909,7 @@
     "s": {
       "agreement": {
         "title": "1. Agreement",
-        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+        "b0": "These Terms & Conditions (\"Terms\") are an agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE gate controller and its firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
         "b1": "By creating an account, installing or using the app, or installing or operating a controller, you accept these Terms and our Privacy Policy. If you use the Service on behalf of an organisation, you confirm that you are authorised to accept these Terms for it. If you do not accept these Terms, do not use the Service.",
         "b2": "You must be at least 18 years old, or the age of legal capacity where you live, to open an account or administer a controller. A minor may use the Service only when enrolled by an administrator who is responsible for that use."
       },
@@ -6027,7 +6027,7 @@
       },
       "contact": {
         "title": "21. Contact",
-        "b0": "EATS SYSTEMS TECH LTD, Israel.",
+        "b0": "EATS SYSTEMS TECH",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy"

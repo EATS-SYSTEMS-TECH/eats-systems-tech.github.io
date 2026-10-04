@@ -7,19 +7,19 @@ export const privacy = {
   en: {
     metaTitle: "Privacy Policy | WIFIGATE",
     metaDescription:
-      "How EATS SYSTEMS TECH LTD collects, uses, shares and protects personal data in the WIFIGATE app, gate controllers, website and web portal, and how to exercise your rights or delete your account.",
+      "How EATS SYSTEMS TECH collects, uses, shares and protects personal data in the WIFIGATE app, gate controllers, website and web portal, and how to exercise your rights or delete your account.",
     eyebrow: "Legal",
     title: "Privacy Policy",
     subtitle:
       "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
     updated: "Effective date: October 4, 2026",
-    owner: "Operator: EATS SYSTEMS TECH LTD",
+    owner: "Operator: EATS SYSTEMS TECH",
     sections: [
       {
         id: "who-we-are",
         title: "1. Who we are and what this policy covers",
         blocks: [
-          "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+          "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
           "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies.",
         ],
       },
@@ -42,7 +42,7 @@ export const privacy = {
         id: "roles",
         title: "3. Our role and the role of gate administrators",
         blocks: [
-          "For account data, app usage statistics, firmware-update requests, the website and the web portal, EATS SYSTEMS TECH LTD is the controller of your personal data.",
+          "For account data, app usage statistics, firmware-update requests, the website and the web portal, EATS SYSTEMS TECH is the controller of your personal data.",
           "A gate controller is managed by its administrator, such as a property owner, building committee, property manager or business. The administrator decides who is enrolled on the controller, what details are recorded about them and how long people keep access. For the data stored on a controller, the administrator is responsible for having a lawful basis, informing the people concerned and responding to their requests. We provide the technology, but we have no access to the data stored on a controller.",
         ],
       },
@@ -85,7 +85,7 @@ export const privacy = {
         id: "sharing",
         title: "6. When personal data is shared",
         blocks: [
-          "Service providers that process data on our behalf under contract: Google (Firebase Authentication, Firebase Analytics, Firebase App Check, Cloud Firestore, Cloud Storage, Cloud Run and Google Fonts), Apple (Sign in with Apple and App Attest) and GitHub (website hosting).",
+          "Service providers that process data on our behalf under contract: Google (Firebase Authentication, Firebase Analytics, Firebase App Check, Cloud Firestore, Cloud Storage and Cloud Run), Apple (Sign in with Apple and App Attest) and GitHub (website hosting).",
           "Gate administrators. If you are enrolled on a controller, its administrators can see your enrolment details and the controller's access history in the app.",
           "Invitation links you share. A private invitation link contains, in signed and encoded form, the phone number it is intended for, and a guest pass contains the guest's name. Anyone who holds a link can read what it contains, so share it only with the intended person. Links are shared through the app of your choice, such as WhatsApp or SMS, under that app's own terms.",
           "Navigation apps. If you tap a gate address, it is opened in the map or navigation app you choose, such as Google Maps or Waze.",
@@ -98,7 +98,7 @@ export const privacy = {
         id: "transfers",
         title: "7. International transfers",
         blocks: [
-          "Our service providers may process personal data in the United States and other countries outside Israel and the European Economic Area. Where required, transfers rely on adequacy decisions or on appropriate safeguards such as the European Commission's standard contractual clauses.",
+          "Our service providers may process personal data in the United States and in other countries outside your country of residence and the European Economic Area. Where required, transfers rely on adequacy decisions or on appropriate safeguards such as the European Commission's standard contractual clauses.",
         ],
       },
       {
@@ -162,7 +162,7 @@ export const privacy = {
         id: "contact",
         title: "14. Contact",
         blocks: [
-          "Controller: EATS SYSTEMS TECH LTD, Israel.",
+          "Controller: EATS SYSTEMS TECH",
           "Email: support@wifigate.io",
           "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
           { link: { href: "../cookies/", text: "Read our Cookie Policy" } },
@@ -175,19 +175,19 @@ export const privacy = {
   he: {
     metaTitle: "מדיניות פרטיות | WIFIGATE",
     metaDescription:
-      "כיצד EATS SYSTEMS TECH LTD אוספת, משתמשת, משתפת ומגינה על מידע אישי באפליקציית WIFIGATE, בבקרי השער, באתר ובפורטל, וכיצד לממש את זכויותיכם או למחוק את החשבון.",
+      "כיצד EATS SYSTEMS TECH אוספת, משתמשת, משתפת ומגינה על מידע אישי באפליקציית WIFIGATE, בבקרי השער, באתר ובפורטל, וכיצד לממש את זכויותיכם או למחוק את החשבון.",
     eyebrow: "משפטי",
     title: "מדיניות פרטיות",
     subtitle:
       "מדיניות פרטיות זו מסבירה איזה מידע אישי WIFIGATE מעבדת, לשם מה, עם מי הוא משותף, כמה זמן הוא נשמר, ואילו בחירות וזכויות עומדות לרשותכם.",
     updated: "תאריך תחילה: 4 באוקטובר 2026",
-    owner: "המפעילה: EATS SYSTEMS TECH LTD",
+    owner: "המפעילה: EATS SYSTEMS TECH",
     sections: [
       {
         id: "who-we-are",
         title: "1. מי אנחנו ועל מה חלה מדיניות זו",
         blocks: [
-          "WIFIGATE הוא מוצר חכם לבקרת כניסה, הכולל את אפליקציית WIFIGATE ל‑Android ול‑iOS, את בקר השער של WIFIGATE המותקן בשער, בדלת או במחסום, את האתר wifigate.io ואת פורטל האינטרנט של WIFIGATE. המוצר מופעל על ידי EATS SYSTEMS TECH LTD (\"WIFIGATE\", \"אנחנו\"). ניתן לפנות אלינו בכתובת support@wifigate.io.",
+          "WIFIGATE הוא מוצר חכם לבקרת כניסה, הכולל את אפליקציית WIFIGATE ל‑Android ול‑iOS, את בקר השער של WIFIGATE המותקן בשער, בדלת או במחסום, את האתר wifigate.io ואת פורטל האינטרנט של WIFIGATE. המוצר מופעל על ידי EATS SYSTEMS TECH (\"WIFIGATE\", \"אנחנו\"). ניתן לפנות אלינו בכתובת support@wifigate.io.",
           "מדיניות זו חלה על מידע אישי המעובד באמצעות האפליקציה, הבקר, האתר והפורטל. היא אינה חלה על אתרים או שירותים של צדדים שלישיים שיש אליהם קישור מהמוצר, ואשר להם מדיניות משלהם.",
         ],
       },
@@ -210,7 +210,7 @@ export const privacy = {
         id: "roles",
         title: "3. התפקיד שלנו ותפקיד מנהלי השערים",
         blocks: [
-          "לגבי נתוני חשבון, סטטיסטיקות שימוש באפליקציה, בקשות לעדכון קושחה, האתר והפורטל, EATS SYSTEMS TECH LTD היא בעלת השליטה במידע האישי שלכם.",
+          "לגבי נתוני חשבון, סטטיסטיקות שימוש באפליקציה, בקשות לעדכון קושחה, האתר והפורטל, EATS SYSTEMS TECH היא בעלת השליטה במידע האישי שלכם.",
           "בקר שער מנוהל על ידי המנהל שלו, כגון בעל הנכס, ועד הבית, חברת הניהול או העסק. המנהל מחליט מי רשום בבקר, אילו פרטים נשמרים עליו ולכמה זמן ניתנת לו גישה. לגבי המידע השמור בבקר, המנהל אחראי לקיומו של בסיס חוקי, ליידוע האנשים הנוגעים בדבר ולמענה לבקשותיהם. אנחנו מספקים את הטכנולוגיה, אך אין לנו גישה למידע השמור בבקר.",
         ],
       },
@@ -253,7 +253,7 @@ export const privacy = {
         id: "sharing",
         title: "6. מתי מידע אישי משותף",
         blocks: [
-          "ספקי שירות המעבדים מידע מטעמנו לפי חוזה: Google (Firebase Authentication, Firebase Analytics, Firebase App Check, Cloud Firestore, Cloud Storage, Cloud Run ו‑Google Fonts), Apple (Sign in with Apple ו‑App Attest) ו‑GitHub (אחסון האתר).",
+          "ספקי שירות המעבדים מידע מטעמנו לפי חוזה: Google (Firebase Authentication, Firebase Analytics, Firebase App Check, Cloud Firestore, Cloud Storage ו‑Cloud Run), Apple (Sign in with Apple ו‑App Attest) ו‑GitHub (אחסון האתר).",
           "מנהלי שערים. אם אתם רשומים בבקר, המנהלים שלו יכולים לראות באפליקציה את פרטי הרישום שלכם ואת היסטוריית הכניסות של הבקר.",
           "קישורי הזמנה שאתם משתפים. קישור הזמנה פרטי מכיל, בצורה חתומה ומקודדת, את מספר הטלפון שאליו הוא מיועד, וכרטיס אורח מכיל את שם האורח. כל מי שמחזיק בקישור יכול לקרוא את תוכנו, ולכן שתפו אותו רק עם האדם שאליו הוא מיועד. הקישורים נשלחים באפליקציה שתבחרו, כגון WhatsApp או SMS, בכפוף לתנאים שלה.",
           "אפליקציות ניווט. אם תקישו על כתובת שער, היא תיפתח באפליקציית המפות או הניווט שתבחרו, כגון Google Maps או Waze.",
@@ -264,9 +264,9 @@ export const privacy = {
       },
       {
         id: "transfers",
-        title: "7. העברת מידע אל מחוץ לישראל",
+        title: "7. העברת מידע בין‑לאומית",
         blocks: [
-          "ספקי השירות שלנו עשויים לעבד מידע אישי בארצות הברית ובמדינות אחרות מחוץ לישראל ולאזור הכלכלי האירופי. כאשר הדבר נדרש, ההעברות נשענות על החלטות הלימות או על אמצעי הגנה מתאימים, כגון הסעיפים החוזיים התקניים של הנציבות האירופית.",
+          "ספקי השירות שלנו עשויים לעבד מידע אישי בארצות הברית ובמדינות אחרות מחוץ למדינת מגוריכם ולאזור הכלכלי האירופי. כאשר הדבר נדרש, ההעברות נשענות על החלטות הלימות או על אמצעי הגנה מתאימים, כגון הסעיפים החוזיים התקניים של הנציבות האירופית.",
         ],
       },
       {
@@ -330,7 +330,7 @@ export const privacy = {
         id: "contact",
         title: "14. יצירת קשר",
         blocks: [
-          "בעלת השליטה במידע: EATS SYSTEMS TECH LTD, ישראל.",
+          "בעלת השליטה במידע: EATS SYSTEMS TECH",
           "דוא\"ל: support@wifigate.io",
           "מדיניות זו מתפרסמת באנגלית ובעברית, ובדפים בשפות אחרות היא עשויה להופיע באנגלית. במקרה של סתירה בין הנוסחים, הנוסח האנגלי גובר.",
           { link: { href: "../cookies/", text: "למדיניות העוגיות" } },
