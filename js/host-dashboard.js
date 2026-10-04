@@ -6,7 +6,7 @@ import {
   beginTotpEnrollment,
   finishTotpEnrollment
 } from "./site-auth.js";
-import { getProfile, approveEmail } from "./api/index.js";
+import { getProfile, changePortalAccess, deletePortalAccess } from "./api/index.js";
 import {
   parseIdentity,
   portalState,
@@ -303,8 +303,11 @@ $("#approval-form").addEventListener("submit", async (event) => {
   }
   const form = event.currentTarget;
   const email = form.elements.namedItem("email").value.trim().toLowerCase();
-  if (!approvalAttempt || approvalAttempt.email !== email) {
-    approvalAttempt = { email, key: crypto.randomUUID() };
+  const action = form.elements.namedItem("action").value;
+  const role = form.elements.namedItem("role").value;
+  const signature = JSON.stringify([email, action, action === "approve" ? role : null]);
+  if (!approvalAttempt || approvalAttempt.signature !== signature) {
+    approvalAttempt = { signature, key: crypto.randomUUID() };
   }
   const user = currentUser;
   const requestGeneration = generation;
@@ -321,13 +324,24 @@ $("#approval-form").addEventListener("submit", async (event) => {
       await loadDashboard(user);
       return;
     }
-    await approveEmail(user, email, approvalAttempt.key);
+    if (action === "delete") {
+      await deletePortalAccess(user, email, approvalAttempt.key);
+    } else {
+      await changePortalAccess(user, {
+        email,
+        status: action === "block" ? "blocked" : "active",
+        ...(action === "approve" ? { role } : {}),
+      }, approvalAttempt.key);
+    }
     if (requestGeneration !== generation) {
       return;
     }
-    $("#approval-status").textContent = "Access approved for " + email + ". They can now sign in with that verified email.";
+    $("#approval-status").textContent = action === "delete" ? "Portal access deleted for " + email + "." :
+      action === "block" ? "Portal access blocked for " + email + "." :
+      "Access approved for " + email + ". They can now sign in with that verified email.";
     approvalAttempt = undefined;
     form.reset();
+    updateAccessAction();
   } catch (error) {
     if (requestGeneration !== generation) {
       return;
@@ -341,6 +355,12 @@ $("#approval-form").addEventListener("submit", async (event) => {
     button.disabled = false;
   }
 });
+function updateAccessAction() {
+  const action = $("#approval-form").elements.namedItem("action").value;
+  $("#access-role-label").hidden = action !== "approve";
+  $("#delete-access-note").hidden = action !== "delete";
+}
+$("#approval-form").elements.namedItem("action").addEventListener("change", updateAccessAction);
 window.addEventListener("focus", () => {
   if (currentUser && !actionBusy && !enrollmentSecret) {
     void loadDashboard(currentUser);

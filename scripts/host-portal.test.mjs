@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createProfile, getProfile, approveEmail, profileApi } from "../js/api/index.js";
+import { createProfile, getProfile, approveEmail, changePortalAccess, deletePortalAccess, profileApi } from "../js/api/index.js";
 import { parseIdentity, portalState, canApproveEmail } from "../js/host-dashboard-model.js";
 const user = { uid: "user-1", email: "person@example.test", displayName: "Person", emailVerified: true };
 const me = (role = "user", state = "active", enrolled = false, verified = false) => ({ user, role, access: { state }, mfa: { required: role === "admin", enrolled, verified } });
@@ -64,5 +64,19 @@ test("approval sends the Host's exact { email, status } body and an idempotency 
     assert.equal(requests[0].data, '{"email":"person@example.test","status":"active"}');
     assert.equal(requests[0].headers.get("Idempotency-Key"), "approval-request-1");
     assert.equal(requests[0].headers.get("Authorization"), "Bearer admin-token");
+  });
+});
+test("role changes and deletion use explicit contracts without deleting an Auth account", async () => {
+  await withAdapter(async (requests) => {
+    const identity = { getIdToken: async () => "admin-token" };
+    await changePortalAccess(identity, {email:" ADMIN@Example.test ",status:"active",role:"admin"},"add-admin-request");
+    await changePortalAccess(identity, {email:"admin@example.test",status:"blocked"},"block-admin-request");
+    await deletePortalAccess(identity," ADMIN@Example.test ","delete-access-request");
+    assert.deepEqual(JSON.parse(requests[0].data),{email:"admin@example.test",status:"active",role:"admin"});
+    assert.deepEqual(JSON.parse(requests[1].data),{email:"admin@example.test",status:"blocked"});
+    assert.equal(requests[2].method,"delete");
+    assert.equal(requests[2].url,"/api/v1/admin/portal-access");
+    assert.deepEqual(JSON.parse(requests[2].data),{email:"admin@example.test"});
+    assert.equal(requests[2].headers.get("Idempotency-Key"),"delete-access-request");
   });
 });
