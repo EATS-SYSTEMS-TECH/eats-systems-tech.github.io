@@ -185,7 +185,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -388,7 +388,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -591,7 +591,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -794,7 +794,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -996,7 +996,7 @@
       },
       "contact": {
         "title": "27. יצירת קשר",
-        "b0": "EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "דוא\"ל: support@wifigate.io",
         "b2": "למדיניות הפרטיות",
         "b3": "למדיניות העוגיות",
@@ -1199,7 +1199,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -1402,7 +1402,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -1605,7 +1605,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -1808,7 +1808,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -2011,7 +2011,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -2214,7 +2214,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -2417,7 +2417,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -2620,7 +2620,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -2823,7 +2823,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -3026,7 +3026,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -3229,7 +3229,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -3432,7 +3432,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -3635,7 +3635,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -3838,7 +3838,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -4041,7 +4041,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -4244,7 +4244,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -4447,7 +4447,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -4650,7 +4650,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -4853,7 +4853,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -5056,7 +5056,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -5259,7 +5259,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -5462,7 +5462,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -5665,7 +5665,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -5868,7 +5868,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -6071,7 +6071,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -6274,7 +6274,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -6477,7 +6477,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -6680,7 +6680,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -6883,7 +6883,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -7086,7 +7086,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -7289,7 +7289,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -7492,7 +7492,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -7695,7 +7695,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",
@@ -7898,7 +7898,7 @@
       },
       "contact": {
         "title": "27. Contact",
-        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "Read our Privacy Policy",
         "b3": "Read our Cookie Policy",

@@ -118,7 +118,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -254,7 +254,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -390,7 +390,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -526,7 +526,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -661,7 +661,7 @@
       },
       "contact": {
         "title": "14. יצירת קשר",
-        "b0": "בעלת השליטה במידע: EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions",
+        "b0": "בעלת השליטה במידע: EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "דוא\"ל: support@wifigate.io",
         "b2": "מדיניות זו מתפרסמת באנגלית ובעברית, ובדפים בשפות אחרות היא עשויה להופיע באנגלית. במקרה של סתירה בין הנוסחים, הנוסח האנגלי גובר.",
         "b3": "למדיניות העוגיות",
@@ -797,7 +797,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -933,7 +933,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -1069,7 +1069,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -1205,7 +1205,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -1341,7 +1341,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -1477,7 +1477,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -1613,7 +1613,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -1749,7 +1749,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -1885,7 +1885,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -2021,7 +2021,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -2157,7 +2157,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -2293,7 +2293,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -2429,7 +2429,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -2565,7 +2565,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -2701,7 +2701,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -2837,7 +2837,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -2973,7 +2973,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -3109,7 +3109,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -3245,7 +3245,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -3381,7 +3381,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -3517,7 +3517,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -3653,7 +3653,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -3789,7 +3789,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -3925,7 +3925,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -4061,7 +4061,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -4197,7 +4197,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -4333,7 +4333,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -4469,7 +4469,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -4605,7 +4605,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -4741,7 +4741,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -4877,7 +4877,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -5013,7 +5013,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -5149,7 +5149,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -5285,7 +5285,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (D-U-N-S 626518977)",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
