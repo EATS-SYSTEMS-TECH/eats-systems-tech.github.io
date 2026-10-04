@@ -204,3 +204,69 @@
     align-items: flex-start;
   }
 }
+
+.legal-toc {
+  margin: 0 0 1.8rem;
+  padding: 1rem 1.2rem;
+  border-radius: 1rem;
+  background: rgba(241, 245, 249, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.legal-toc__title {
+  margin: 0 0 0.6rem;
+  font-size: 1rem;
+}
+
+.legal-toc ol {
+  margin: 0;
+  padding-inline-start: 1.2rem;
+  columns: 2 16rem;
+  column-gap: 2rem;
+  list-style: none;
+}
+
+.legal-toc li {
+  break-inside: avoid;
+  margin-bottom: 0.35rem;
+  line-height: 1.5;
+}
+
+.legal-table-wrap {
+  margin: 0 0 0.9rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.legal-table {
+  width: 100%;
+  min-width: 38rem;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+.legal-table th,
+.legal-table td {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  text-align: start;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.legal-table th {
+  background: rgba(241, 245, 249, 0.9);
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.legal-table td:first-child {
+  overflow-wrap: break-word;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+}
+
+.legal-language-note {
+  margin-top: 1rem;
+}
