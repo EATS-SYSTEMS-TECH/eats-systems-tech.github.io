@@ -39,8 +39,27 @@ summary { cursor: pointer; font-weight: 700; }
 .host-resource-list { list-style: none; padding: 0; }
 .host-resource-list li { padding: 1rem 0; border-bottom: 1px solid #dbe3ec; overflow-wrap: anywhere; }
 #host-management details { margin: .75rem 0; }
+#host-management { min-width: 0; overflow-wrap: anywhere; }
 #host-management form { max-width: 36rem; }
 #host-management select, #host-management input { max-width: 100%; min-width: 0; }
+.host-calendar { margin-top: 2rem; min-width: 0; }
+.calendar-controls { display: flex; flex-wrap: wrap; align-items: end; gap: .75rem; }
+#host-management .calendar-controls { max-width: none; }
+.calendar-controls label { min-width: 10rem; flex: 1; }
+.calendar-scroll { width: 100%; max-width: 100%; overflow-x: auto; margin-top: 1rem; }
+.calendar-scroll table { border-collapse: collapse; min-width: 100%; }
+.calendar-scroll caption { text-align: left; font-weight: 700; padding: .75rem; }
+.calendar-scroll th, .calendar-scroll td { min-width: 8rem; border: 1px solid #dbe3ec; padding: .5rem; vertical-align: top; }
+.calendar-scroll th { background: #f5f7fb; }
+.calendar-scroll tbody th { position: sticky; left: 0; z-index: 1; }
+.reservation-chip { display: block; width: 100%; text-align: left; margin: .25rem 0; padding: .5rem; font-size: .8rem; white-space: normal; }
+.host-calendar .reservation-chip.reservation-draft { background: #e8edf5; color: #263546; }
+.host-calendar .reservation-chip.reservation-confirmed { background: #d9f2e3; color: #164b2d; }
+.host-calendar .reservation-chip.reservation-changed { background: #fff0c6; color: #603c00; }
+.host-calendar .reservation-chip.reservation-cancelled { background: #fce3e3; color: #6b2222; }
+.host-calendar .reservation-chip.reservation-completed { background: #e5e5f0; color: #343451; }
+.reservation-form { margin: 1rem 0; border: 1px solid #dbe3ec; border-radius: 10px; padding: 1rem; }
+.host-calendar > .form-actions { margin: 1rem 0; }
 .calendar-reference { margin: 1rem 0; border: 1px solid #dbe3ec; border-radius: 14px; background: #fff; overflow: hidden; }
 .calendar-reference img { display: block; width: 100%; height: auto; }
 .calendar-reference p { padding: 2rem; color: #637183; }
