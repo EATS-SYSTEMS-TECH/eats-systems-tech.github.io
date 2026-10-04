@@ -30,8 +30,8 @@
         "title": "Auto Open",
         "text": "Let approved users open the gate automatically when they arrive for a smoother, more convenient hands-free experience."
       },
-      "upTo10Events": {
-        "title": "Up to 10 Events",
+      "upTo50Events": {
+        "title": "Up to 50 Events",
         "text": "Set up recurring access events and scheduled actions directly in the system to match how your site operates."
       },
       "rfRemoteLearning": {
@@ -50,7 +50,7 @@
   },
   "he": {
     "title": "היתרונות של WIFIGATE",
-    "subtitle": "אלו הן חלק מהיכולות המעשיות שהופכות את WIFIGATE ליציבה, מאובטחת וקל לניהול בשימוש יומיומי.",
+    "subtitle": "אלו הן חלק מהיכולות המעשיות שהופכות את WIFIGATE ליציבה, מאובטחת וקל לניהול בשימוש יומיומי. הרשאת הפתיחה פועלת בטווח של עד 20 מטר.",
     "items": {
       "noSimRouter": {
         "title": "ללא סים, ללא נתב",
@@ -72,8 +72,8 @@
         "title": "פתיחה אוטומטית",
         "text": "אפשר למשתמשים מאושרים לפתוח את השער אוטומטית כשהם מגיעים לחוויה חלקה ונוחה יותר של דיבורית."
       },
-      "upTo10Events": {
-        "title": "עד 10 אירועים",
+      "upTo50Events": {
+        "title": "עד 50 אירועים",
         "text": "הגדר אירועי גישה חוזרים ופעולות מתוזמנות ישירות במערכת כדי להתאים לאופן פעולת האתר שלך."
       },
       "rfRemoteLearning": {
@@ -82,7 +82,7 @@
       },
       "securityPrivacy": {
         "title": "אבטחה ופרטיות",
-        "text": "הגישה מנוהלת בצורה מאובטחת, עם אחסון מוצפן ושמירה על פרטיות המשתמשים."
+        "text": "התקשורת עם ההתקן והנתונים השמורים מוצפנים. שמות ומספרי טלפון הם נתונים רגישים, ולכן הגישה לנכס שלכם והמידע עליה נשארים פרטיים."
       },
       "noSubscriptionFees": {
         "title": "ללא דמי מנוי",
@@ -114,8 +114,8 @@
         "title": "Apertura automática",
         "text": "Permita que los usuarios aprobados abran la puerta automáticamente cuando lleguen para disfrutar de una experiencia de manos libres más fluida y conveniente."
       },
-      "upTo10Events": {
-        "title": "Hasta 10 eventos",
+      "upTo50Events": {
+        "title": "Hasta 50 eventos",
         "text": "Configure eventos de acceso recurrentes y acciones programadas directamente en el sistema para que coincidan con el funcionamiento de su sitio."
       },
       "rfRemoteLearning": {
@@ -156,8 +156,8 @@
         "title": "Ouverture automatique",
         "text": "Laissez les utilisateurs approuvés ouvrir le portail automatiquement à leur arrivée pour une expérience mains libres plus fluide et plus pratique."
       },
-      "upTo10Events": {
-        "title": "Jusqu'à 10 événements",
+      "upTo50Events": {
+        "title": "Jusqu'à 50 événements",
         "text": "Configurez des événements d'accès récurrents et des actions planifiées directement dans le système pour correspondre au fonctionnement de votre site."
       },
       "rfRemoteLearning": {
@@ -198,8 +198,8 @@
         "title": "Automatisches Öffnen",
         "text": "Lassen Sie zugelassene Benutzer das Tor bei ihrer Ankunft automatisch öffnen, um ein reibungsloseres und bequemeres Freisprecherlebnis zu gewährleisten."
       },
-      "upTo10Events": {
-        "title": "Bis zu 10 Veranstaltungen",
+      "upTo50Events": {
+        "title": "Bis zu 50 Veranstaltungen",
         "text": "Richten Sie wiederkehrende Zugriffsereignisse und geplante Aktionen direkt im System ein, um sie an die Funktionsweise Ihrer Website anzupassen."
       },
       "rfRemoteLearning": {
@@ -240,8 +240,8 @@
         "title": "Automatisch openen",
         "text": "Laat goedgekeurde gebruikers de poort automatisch openen wanneer ze aankomen, voor een soepelere, handigere handsfree-ervaring."
       },
-      "upTo10Events": {
-        "title": "Maximaal 10 evenementen",
+      "upTo50Events": {
+        "title": "Maximaal 50 evenementen",
         "text": "Stel terugkerende toegangsgebeurtenissen en geplande acties rechtstreeks in het systeem in, passend bij de werking van uw site."
       },
       "rfRemoteLearning": {
@@ -282,8 +282,8 @@
         "title": "Apertura automatica",
         "text": "Consenti agli utenti approvati di aprire automaticamente il cancello al loro arrivo per un'esperienza a mani libere più fluida e comoda."
       },
-      "upTo10Events": {
-        "title": "Fino a 10 eventi",
+      "upTo50Events": {
+        "title": "Fino a 50 eventi",
         "text": "Imposta eventi di accesso ricorrenti e azioni pianificate direttamente nel sistema per adattarli al funzionamento del tuo sito."
       },
       "rfRemoteLearning": {
@@ -324,8 +324,8 @@
         "title": "Abertura automática",
         "text": "Permita que usuários aprovados abram o portão automaticamente quando chegarem para uma experiência de mãos livres mais tranquila e conveniente."
       },
-      "upTo10Events": {
-        "title": "Até 10 eventos",
+      "upTo50Events": {
+        "title": "Até 50 eventos",
         "text": "Configure eventos de acesso recorrentes e ações agendadas diretamente no sistema para corresponder ao funcionamento do seu site."
       },
       "rfRemoteLearning": {
@@ -366,8 +366,8 @@
         "title": "Automatyczne otwieranie",
         "text": "Pozwól zatwierdzonym użytkownikom automatycznie otwierać bramę po przybyciu, aby uzyskać płynniejszą i wygodniejszą obsługę bez użycia rąk."
       },
-      "upTo10Events": {
-        "title": "Do 10 wydarzeń",
+      "upTo50Events": {
+        "title": "Do 50 wydarzeń",
         "text": "Skonfiguruj powtarzające się zdarzenia dostępu i zaplanowane działania bezpośrednio w systemie, aby dopasować je do sposobu działania Twojej witryny."
       },
       "rfRemoteLearning": {
@@ -408,8 +408,8 @@
         "title": "Automatisk åpen",
         "text": "La godkjente brukere åpne porten automatisk når de ankommer for en jevnere og mer praktisk håndfri opplevelse."
       },
-      "upTo10Events": {
-        "title": "Opptil 10 hendelser",
+      "upTo50Events": {
+        "title": "Opptil 50 hendelser",
         "text": "Sett opp gjentakende tilgangshendelser og planlagte handlinger direkte i systemet for å matche hvordan nettstedet ditt fungerer."
       },
       "rfRemoteLearning": {
@@ -450,8 +450,8 @@
         "title": "Automatické otevření",
         "text": "Umožněte schváleným uživatelům, aby automaticky otevřeli bránu, když dorazí, pro hladší a pohodlnější hands-free zážitek."
       },
-      "upTo10Events": {
-        "title": "Až 10 událostí",
+      "upTo50Events": {
+        "title": "Až 50 událostí",
         "text": "Nastavte opakující se události přístupu a plánované akce přímo v systému tak, aby odpovídaly fungování vašeho webu."
       },
       "rfRemoteLearning": {
@@ -492,8 +492,8 @@
         "title": "Автоматическое открытие",
         "text": "Позвольте одобренным пользователям автоматически открывать ворота по прибытии, чтобы обеспечить более плавное и удобное управление без помощи рук."
       },
-      "upTo10Events": {
-        "title": "До 10 событий",
+      "upTo50Events": {
+        "title": "До 50 событий",
         "text": "Настройте повторяющиеся события доступа и запланированные действия непосредственно в системе в соответствии с работой вашего сайта."
       },
       "rfRemoteLearning": {
@@ -534,8 +534,8 @@
         "title": "Автоматичне відкриття",
         "text": "Дозвольте схваленим користувачам автоматично відкривати ворота, коли вони прибувають, для зручнішого та зручнішого використання рук."
       },
-      "upTo10Events": {
-        "title": "До 10 подій",
+      "upTo50Events": {
+        "title": "До 50 подій",
         "text": "Налаштуйте повторювані події доступу та заплановані дії безпосередньо в системі відповідно до того, як працює ваш сайт."
       },
       "rfRemoteLearning": {
@@ -576,8 +576,8 @@
         "title": "Otomatik Aç",
         "text": "Daha sorunsuz, daha rahat bir eller serbest deneyimi için, onaylı kullanıcıların vardıklarında kapıyı otomatik olarak açmasına izin verin."
       },
-      "upTo10Events": {
-        "title": "10 Etkinliğe kadar",
+      "upTo50Events": {
+        "title": "50 Etkinliğe kadar",
         "text": "Sitenizin çalışma şekline uyacak şekilde yinelenen erişim etkinliklerini ve planlanmış eylemleri doğrudan sistemde ayarlayın."
       },
       "rfRemoteLearning": {
@@ -618,8 +618,8 @@
         "title": "فتح تلقائي",
         "text": "اسمح للمستخدمين المعتمدين بفتح البوابة تلقائيًا عند وصولهم للحصول على تجربة أكثر سلاسة وملاءمة بدون استخدام اليدين."
       },
-      "upTo10Events": {
-        "title": "ما يصل إلى 10 الأحداث",
+      "upTo50Events": {
+        "title": "ما يصل إلى 50 الأحداث",
         "text": "قم بإعداد أحداث الوصول المتكررة والإجراءات المجدولة مباشرة في النظام لتتناسب مع كيفية عمل موقعك."
       },
       "rfRemoteLearning": {
@@ -660,8 +660,8 @@
         "title": "स्वतः खुला",
         "text": "स्वीकृत उपयोगकर्ताओं को सहज, अधिक सुविधाजनक हैंड्स-फ़्री अनुभव के लिए आने पर गेट स्वचालित रूप से खोलने दें।"
       },
-      "upTo10Events": {
-        "title": "10 इवेंट तक",
+      "upTo50Events": {
+        "title": "50 इवेंट तक",
         "text": "आपकी साइट कैसे संचालित होती है, उससे मिलान करने के लिए सीधे सिस्टम में आवर्ती एक्सेस ईवेंट और शेड्यूल की गई कार्रवाइयां सेट करें।"
       },
       "rfRemoteLearning": {
@@ -702,8 +702,8 @@
         "title": "স্বয়ংক্রিয় খোলা",
         "text": "অনুমোদিত ব্যবহারকারীরা একটি মসৃণ, আরও সুবিধাজনক হ্যান্ডস-ফ্রি অভিজ্ঞতার জন্য পৌঁছালে তাদের স্বয়ংক্রিয়ভাবে গেট খুলতে দিন।"
       },
-      "upTo10Events": {
-        "title": "10টি ইভেন্ট পর্যন্ত",
+      "upTo50Events": {
+        "title": "50টি ইভেন্ট পর্যন্ত",
         "text": "আপনার সাইট কিভাবে কাজ করে তা মেলানোর জন্য সরাসরি সিস্টেমে পুনরাবৃত্ত অ্যাক্সেস ইভেন্ট এবং নির্ধারিত অ্যাকশন সেট আপ করুন।"
       },
       "rfRemoteLearning": {
@@ -744,8 +744,8 @@
         "title": "स्वयं उघडा",
         "text": "स्वीकृत वापरकर्ते जेव्हा नितळ, अधिक सोयीस्कर हँड्स-फ्री अनुभवासाठी येतात तेव्हा त्यांना गेट आपोआप उघडू द्या."
       },
-      "upTo10Events": {
-        "title": "10 इव्हेंट पर्यंत",
+      "upTo50Events": {
+        "title": "50 इव्हेंट पर्यंत",
         "text": "तुमची साइट कशी चालते ते जुळण्यासाठी थेट सिस्टममध्ये आवर्ती ऍक्सेस इव्हेंट आणि शेड्यूल केलेल्या क्रिया सेट करा."
       },
       "rfRemoteLearning": {
@@ -786,8 +786,8 @@
         "title": "స్వయంచాలకంగా తెరవండి",
         "text": "ఆమోదం పొందిన వినియోగదారులు సున్నితమైన, మరింత సౌకర్యవంతమైన హ్యాండ్స్-ఫ్రీ అనుభవం కోసం వచ్చినప్పుడు ఆటోమేటిక్‌గా గేట్‌ను తెరవనివ్వండి."
       },
-      "upTo10Events": {
-        "title": "10 ఈవెంట్‌ల వరకు",
+      "upTo50Events": {
+        "title": "50 ఈవెంట్‌ల వరకు",
         "text": "మీ సైట్ ఎలా పనిచేస్తుందో సరిపోలడానికి నేరుగా సిస్టమ్‌లో పునరావృత యాక్సెస్ ఈవెంట్‌లు మరియు షెడ్యూల్ చేసిన చర్యలను సెటప్ చేయండి."
       },
       "rfRemoteLearning": {
@@ -828,8 +828,8 @@
         "title": "自动打开",
         "text": "让获得批准的用户在到达时自动开门，获得更顺畅、更方便的免提体验。"
       },
-      "upTo10Events": {
-        "title": "最多 10 个活动",
+      "upTo50Events": {
+        "title": "最多 50 个活动",
         "text": "直接在系统中设置重复访问事件和计划操作，以匹配您站点的运行方式。"
       },
       "rfRemoteLearning": {
@@ -870,8 +870,8 @@
         "title": "自動開啟",
         "text": "讓獲得批准的用戶在到達時自動開門，獲得更順暢、更方便的免持體驗。"
       },
-      "upTo10Events": {
-        "title": "最多 10 個活動",
+      "upTo50Events": {
+        "title": "最多 50 個活動",
         "text": "直接在系統中設定重複存取事件和排程操作，以符合您網站的運作方式。"
       },
       "rfRemoteLearning": {
@@ -912,8 +912,8 @@
         "title": "オートオープン",
         "text": "承認されたユーザーが到着時にゲートを自動的に開けられるようにし、よりスムーズで便利なハンズフリー体験を実現します。"
       },
-      "upTo10Events": {
-        "title": "最大10イベント",
+      "upTo50Events": {
+        "title": "最大50イベント",
         "text": "サイトの運用方法に合わせて、定期的なアクセス イベントとスケジュールされたアクションをシステムに直接設定します。"
       },
       "rfRemoteLearning": {
@@ -954,8 +954,8 @@
         "title": "자동열림",
         "text": "보다 원활하고 편리한 핸즈프리 경험을 위해 승인된 사용자가 도착하면 자동으로 게이트를 열 수 있습니다."
       },
-      "upTo10Events": {
-        "title": "최대 10개 이벤트",
+      "upTo50Events": {
+        "title": "최대 50개 이벤트",
         "text": "사이트 운영 방식에 맞게 시스템에서 직접 반복 액세스 이벤트와 예약된 작업을 설정하세요."
       },
       "rfRemoteLearning": {
@@ -996,8 +996,8 @@
         "title": "Automatisk åben",
         "text": "Lad godkendte brugere åbne porten automatisk, når de ankommer, for en smidigere og mere bekvem håndfri oplevelse."
       },
-      "upTo10Events": {
-        "title": "Op til 10 begivenheder",
+      "upTo50Events": {
+        "title": "Op til 50 begivenheder",
         "text": "Konfigurer tilbagevendende adgangsbegivenheder og planlagte handlinger direkte i systemet for at matche, hvordan dit websted fungerer."
       },
       "rfRemoteLearning": {
@@ -1038,8 +1038,8 @@
         "title": "Automatikus nyitás",
         "text": "Hagyja, hogy a jóváhagyott felhasználók automatikusan kinyithassák a kaput, amikor megérkeznek, a simább és kényelmesebb kihangosítás érdekében."
       },
-      "upTo10Events": {
-        "title": "Akár 10 esemény",
+      "upTo50Events": {
+        "title": "Akár 50 esemény",
         "text": "Állítsa be az ismétlődő hozzáférési eseményeket és ütemezett műveleteket közvetlenül a rendszerben, hogy megfeleljen webhelye működésének."
       },
       "rfRemoteLearning": {

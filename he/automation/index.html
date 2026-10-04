@@ -62,7 +62,7 @@
   <meta property="twitter:image" content="https://wifigate.io/assets/img/wifigate_homepage.webp">
 
   <!-- Hreflang alternates are generated per locale by the build. -->
-  
+
 
   <link rel="icon" type="image/x-icon" href="../../favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
@@ -73,14 +73,15 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Day+One&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../../css/styles.css?v=20260908d">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20260604c">
-  <link rel="stylesheet" href="../../css/automation.css?v=20260830a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20260911a">
+  <link rel="stylesheet" href="../../css/automation.css?v=20260912b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
-  <script src="../../js/navigation.js?v=20260405a" defer=""></script>
-  
+  <script src="../../js/navigation.js?v=20260911a" defer=""></script>
+
   <script src="../../js/locale-redirect.js?v=20260620a" defer=""></script>
   <script src="../../js/language-selector.js?v=20260902a" defer=""></script><script src="../../js/accessibility.js?v=20260902a" defer=""></script>
 
@@ -127,39 +128,30 @@
     ]
   }
 ]
-  </script></head>
+  </script><link rel="stylesheet" href="../../css/site-header.css?v=20260911b"></head>
 
-<body class="wa-page rtl">
+<body class="niche-page wa-page rtl">
   <a class="skip-link" href="#main-content">דלג לתוכן הראשי</a>
 
   <header class="site-header" id="top">
-    <nav class="nav" aria-label="Main navigation">
-      <a href="/he/#home" class="nav__logo-link nav__brand" aria-label="Back to WIFIGATE home page">
-        <img src="../../assets/img/logo.png" alt="WIFIGATE logo" class="nav__logo">
+    <nav class="nav" aria-label="ניווט ראשי">
+      <a href="/he/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
+        <img src="../../assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE" class="nav__logo" width="1106" height="256">
       </a>
-
-      <button class="nav__toggle" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">
+      <button class="nav__toggle" aria-label="פתיחת או סגירת תפריט הניווט" aria-controls="primary-navigation" aria-expanded="false">
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
       </button>
-
       <div class="nav__links-wrapper" id="primary-navigation">
-        <nav class="topbar-nav">
-          <a href="/he/#advantages" class="nav-link nav__link" data-i18n="nav.features" dir="rtl">יכולות</a>
-          <a href="/he/#where" class="nav-link nav__link" data-i18n="tabs.where" dir="rtl">שימושים</a>
-          <a href="/he/#guest-invites-api" class="nav-link nav__link">WIFIGATE Automation</a>
-          <a href="/he/#tutorials" class="nav-link nav__link" data-i18n="nav.about" dir="rtl">הדרכות</a>
-          <a href="/he/#contact" class="nav-link nav__link nav__contact-link" data-i18n="nav.contact" dir="rtl">צור קשר</a>
-        </nav>
+        <div class="topbar-nav"><a class="nav-link nav__link" href="/he/#how-it-works" dir="rtl">איך זה עובד</a><a class="nav-link nav__link" href="/he/#use-cases" dir="rtl">תרחישי שימוש</a><a class="nav-link nav__link" href="/he/#wifigate-automation" dir="rtl">WIFIGATE Automation</a><a class="nav-link nav__link" href="/he/#tutorial-videos" dir="rtl">סרטוני הדרכה</a><a class="nav-link nav__link nav__contact-link" href="/he/#get-in-touch" dir="rtl">דברו איתנו</a></div>
       </div>
-
       <div class="language-selector">
-        <div class="language-selector__button" id="language-button" aria-label="Select language" role="button" tabindex="0" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="language-selector__button" id="language-button" aria-label="בחר שפה" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="language-selector__flag" id="selected-flag"><img src="../../assets/img/flags/flag-il.svg" alt="IL" width="50" height="33"></span>
           <span class="language-selector__selected">עברית</span>
-          <span class="language-selector__arrow">▾</span>
-        </div>
+          <span class="language-selector__arrow" aria-hidden="true">▾</span>
+        </button>
         <div class="language-selector__dropdown" id="language-dropdown">
           <a class="language-selector__option" href="/automation/" data-lang="en">
             <span class="language-selector__flag">
@@ -401,137 +393,42 @@
 
   <main class="wa-main" id="main-content">
     <!-- ============ HERO ============ -->
-    <section class="wa-hero" aria-labelledby="wa-hero-title">
-      <div class="container wa-hero__grid">
-        <div class="wa-hero__copy">
-          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.hero.eyebrow" dir="rtl">WIFIGATE Automation</span>
-          <h1 class="wa-hero__title" id="wa-hero-title" data-i18n="guestInvites.marketing.hero.title" dir="rtl">גישת אורחים שמנהלת את עצמה</h1>
-          <p class="wa-hero__lead" data-i18n="guestInvites.marketing.hero.lead" dir="rtl">ברגע שהזמנה מאושרת, WIFIGATE יוצרת גישה מאובטחת ומוגבלת-בזמן לשער, לדלת או לחניה שלכם, והיא מסתיימת מעצמה בצ׳ק-אאוט. בלי למסור מפתחות, בלי לרדוף אחרי קודים, ובלי שמישהו ימתין בכניסה.‏</p>
-          <div class="wa-hero__actions">
+    <section class="niche-hero wa-hero" aria-labelledby="wa-hero-title">
+      <div class="niche-hero__media wa-hero__media">
+        <img src="../../assets/wifigate_niche_pages/hotels-airbnb-v2-app-hero.webp" width="1280" height="720" alt="" class="niche-hero__bg" loading="eager" fetchpriority="high" decoding="async">
+        <div class="niche-hero__overlay"></div>
+      </div>
+
+      <div class="niche-hero__content container wa-hero__grid">
+        <div class="niche-hero__topbar">
+          <nav class="niche-breadcrumb" aria-label="Breadcrumb">
+            <ol class="niche-breadcrumb__list">
+              <li class="niche-breadcrumb__item">
+                <a class="niche-breadcrumb__link" href="/he/#home" data-i18n="nav.home" dir="rtl">בית</a>
+              </li>
+              <li class="niche-breadcrumb__item" aria-current="page">WIFIGATE Automation</li>
+            </ol>
+          </nav>
+        </div>
+
+        <div class="niche-hero__text wa-hero__copy">
+          <p class="niche-hero__eyebrow" data-i18n="guestInvites.marketing.hero.eyebrow" dir="rtl">WIFIGATE Automation API</p>
+          <h1 class="niche-hero__title wa-hero__title" id="wa-hero-title" data-i18n="guestInvites.marketing.hero.title" dir="rtl">גישת אורחים שמנהלת את עצמה</h1>
+          <p class="niche-hero__lead wa-hero__lead" data-i18n="guestInvites.marketing.hero.lead" dir="rtl">ברגע שהזמנה מאושרת, WIFIGATE יוצרת גישה מאובטחת ומוגבלת בזמן לשער, לדלת או לחניה שלכם, והיא מסתיימת מעצמה בצ׳ק אאוט. בלי למסור מפתחות, בלי לרדוף אחרי קודים, ובלי שמישהו ימתין בכניסה.‏</p>
+          <div class="niche-hero__actions wa-hero__actions">
             <a class="btn btn--primary btn--hero" href="/he/#contact" data-i18n="guestInvites.marketing.hero.ctaPrimary" dir="rtl">דברו איתנו</a>
-            <a class="btn btn--ghost btn--hero" href="#wa-how" data-i18n="guestInvites.marketing.hero.ctaSecondary" dir="rtl">איך זה עובד</a>
+            <a class="btn btn--ghost btn--hero" href="#wa-pricing" data-i18n="guestInvites.marketing.pricing.eyebrow" dir="rtl">תמחור</a>
           </div>
-          <p class="wa-hero__note" data-i18n="guestInvites.marketing.hero.note" dir="rtl">למלונות, דירות נופש, בתי אירוח וחניות/גראג'ים להשכרה.‏</p>
-        </div>
-        <div class="wa-hero__media">
-          <img src="../../assets/img/wifigate_homepage.webp" width="1280" height="960" alt="The WIFIGATE device beside the mobile app showing a guest access invitation" loading="eager" decoding="async">
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ AUDIENCE ============ -->
-    <section class="wa-audience" aria-label="Who it is for">
-      <div class="container wa-audience__row">
-        <span class="wa-audience__label" data-i18n="guestInvites.marketing.audience.label" dir="rtl">מיועד ל:‏</span>
-        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.hotels" dir="rtl">מלונות</span>
-        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.rentals" dir="rtl">Airbnb ודירות נופש</span>
-        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.guesthouses" dir="rtl">בתי אירוח</span>
-        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.parking" dir="rtl">חניות וגראג'ים להשכרה</span>
-      </div>
-    </section>
-
-    <!-- ============ HOW IT WORKS ============ -->
-    <section class="section wa-how" id="wa-how" aria-labelledby="wa-how-title">
-      <div class="container">
-        <div class="wa-head">
-          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.steps.eyebrow" dir="rtl">איך זה עובד</span>
-          <h2 class="wa-h2" id="wa-how-title" data-i18n="guestInvites.marketing.steps.title" dir="rtl">מהזמנה ועד שער פתוח, אוטומטית</h2>
-          <p class="wa-lead" data-i18n="guestInvites.marketing.steps.subtitle" dir="rtl">שלושה צעדים, ומשם זה רץ לבד בכל הזמנה.‏</p>
-        </div>
-        <div class="wa-steps__grid">
-          <article class="wa-step">
-            <div class="wa-step__num" aria-hidden="true">1</div>
-            <h3 class="wa-step__title" data-i18n="guestInvites.marketing.steps.s1t" dir="rtl">מתקבלת הזמנה</h3>
-            <p class="wa-step__text" data-i18n="guestInvites.marketing.steps.s1x" dir="rtl">מערכת ההזמנות או הניהול שלכם מעדכנת את WIFIGATE שאושרה הזמנה חדשה.‏</p>
-          </article>
-          <article class="wa-step">
-            <div class="wa-step__num" aria-hidden="true">2</div>
-            <h3 class="wa-step__title" data-i18n="guestInvites.marketing.steps.s2t" dir="rtl">הגישה נוצרת אוטומטית</h3>
-            <p class="wa-step__text" data-i18n="guestInvites.marketing.steps.s2x" dir="rtl">WIFIGATE מנפיקה הזמנה מאובטחת ומוגבלת-בזמן בדיוק לשער, לדלת או לחניה הנכונים, בתוקף רק לאותה שהות.‏</p>
-          </article>
-          <article class="wa-step">
-            <div class="wa-step__num" aria-hidden="true">3</div>
-            <h3 class="wa-step__title" data-i18n="guestInvites.marketing.steps.s3t" dir="rtl">האורח פשוט נכנס</h3>
-            <p class="wa-step__text" data-i18n="guestInvites.marketing.steps.s3x" dir="rtl">הוא פותח את הכניסה מהטלפון. כשמגיע הצ׳ק-אאוט, הגישה פגה מעצמה, אין מה לאסוף או לבטל.‏</p>
-          </article>
+          <ul class="niche-hero__proof">
+            <li class="niche-hero__proof-item" data-i18n="guestInvites.marketing.hero.note" dir="rtl">למלונות, דירות נופש, בתי אירוח וחניות/גראג'ים להשכרה.‏</li>
+          </ul>
         </div>
       </div>
-    </section>
-
-    <!-- ============ BENEFITS ============ -->
-    <section class="section wa-benefits" aria-labelledby="wa-benefits-title">
-      <div class="container">
-        <div class="wa-head">
-          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.benefits.eyebrow" dir="rtl">למה WIFIGATE Automation</span>
-          <h2 class="wa-h2" id="wa-benefits-title" data-i18n="guestInvites.marketing.benefits.title" dir="rtl">פחות קבלה. יותר אירוח בלי ידיים.‏</h2>
-          <p class="wa-lead" data-i18n="guestInvites.marketing.benefits.subtitle" dir="rtl">כל מה שהזמנה צריכה כדי להפוך לגישה, נעשה בשבילכם.‏</p>
-        </div>
-        <div class="wa-benefits__grid">
-          <article class="wa-benefit">
-            <span class="wa-benefit__icon"><img src="../../assets/wifigate_features/quick_guest_invite.svg" alt="" width="30" height="30" loading="lazy" decoding="async"></span>
-            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b1t" dir="rtl">בלי למסור מפתחות</h3>
-            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b1x" dir="rtl">שכחו מאיסוף מפתחות, מתיבות מפתח וקודים מועתקים. הגישה מגיעה לטלפון של האורח בדיוק כשצריך.‏</p>
-          </article>
-          <article class="wa-benefit">
-            <span class="wa-benefit__icon"><img src="../../assets/wifigate_features/history.svg" alt="" width="30" height="30" loading="lazy" decoding="async"></span>
-            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b2t" dir="rtl">מוגבלת-בזמן מעצם התכנון</h3>
-            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b2x" dir="rtl">כל הזמנה נפתחת בצ׳ק-אין ופגה בצ׳ק-אאוט, אוטומטית, בכל שהות.‏</p>
-          </article>
-          <article class="wa-benefit">
-            <span class="wa-benefit__icon"><img src="../../assets/wifigate_features/security_privacy.svg" alt="" width="30" height="30" loading="lazy" decoding="async"></span>
-            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b3t" dir="rtl">מוצפנת ופרטית</h3>
-            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b3x" dir="rtl">הגישה מוצפנת והשער פועל מקומית. הנכס והאורחים שלכם נשארים מוגנים.‏</p>
-          </article>
-          <article class="wa-benefit">
-            <span class="wa-benefit__icon"><img src="../../assets/wifigate_features/auto_open.svg" alt="" width="30" height="30" loading="lazy" decoding="async"></span>
-            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b4t" dir="rtl">עובדת עם הכניסות שלכם</h3>
-            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b4x" dir="rtl">שערים, דלתות חניה, מחסומים ודלתות כניסה, WIFIGATE שולטת במה שכבר יש לכם.‏</p>
-          </article>
-          <article class="wa-benefit">
-            <span class="wa-benefit__icon"><img src="../../assets/wifigate_features/stability.svg" alt="" width="30" height="30" loading="lazy" decoding="async"></span>
-            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b5t" dir="rtl">מתאימה גם לבניינים שלמים</h3>
-            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b5x" dir="rtl">משער בודד ועד מתחם שלם, הזמנה אחת יכולה לכסות כל כניסה שהאורח צריך.‏</p>
-          </article>
-          <article class="wa-benefit">
-            <span class="wa-benefit__icon"><img src="../../assets/wifigate_features/digital_rf_remote_learning.svg" alt="" width="30" height="30" loading="lazy" decoding="async"></span>
-            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b6t" dir="rtl">מתחברת למערכות שלכם</h3>
-            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b6x" dir="rtl">חברו את WIFIGATE Automation לתהליך ההזמנות, ל-PMS או ל-Channel Manager ותנו לזה לרוץ.‏</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ SECURITY ============ -->
-    <section class="section wa-secure" aria-labelledby="wa-secure-title">
-      <div class="container">
-        <div class="wa-head">
-          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.secure.eyebrow" dir="rtl">אבטחה</span>
-          <h2 class="wa-h2" id="wa-secure-title" data-i18n="guestInvites.marketing.secure.title" dir="rtl">גישה שאפשר לתת בביטחון גם לזרים</h2>
-          <p class="wa-lead" data-i18n="guestInvites.marketing.secure.subtitle" dir="rtl">נבנתה כדי להגן על הנכס שמאחורי כל שער.‏</p>
-        </div>
-        <div class="wa-secure__grid">
-          <article class="wa-secure__item">
-            <h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i1t" dir="rtl">מוצפנת מקצה לקצה</h3>
-            <p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i1x" dir="rtl">כל הזמנה מוצפנת, כך שפרטי הגישה אינם ניתנים לקריאה או להעתקה בדרך.‏</p>
-          </article>
-          <article class="wa-secure__item">
-            <h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i2t" dir="rtl">עובדת בשער, לא בענן</h3>
-            <p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i2x" dir="rtl">הכניסה מאמתת את הגישה מקומית, כך שהיא ממשיכה לעבוד גם ללא חיבור לאינטרנט.‏</p>
-          </article>
-          <article class="wa-secure__item">
-            <h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i3t" dir="rtl">השליטה נשארת אצלכם</h3>
-            <p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i3x" dir="rtl">הגישה צמודה לכל שהות ולכל אורח, ואתם יכולים לעצור אותה בכל רגע.‏</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ PRICING ============ -->
-    <section class="section wa-pricing" id="wa-pricing" aria-labelledby="wa-pricing-title">
+    </section><section class="section wa-pricing" id="wa-pricing" aria-labelledby="wa-pricing-title">
       <div class="container">
         <div class="wa-head">
           <span class="wa-eyebrow" data-i18n="guestInvites.marketing.pricing.eyebrow" dir="rtl">תמחור</span>
-          <h2 class="wa-h2" id="wa-pricing-title" data-i18n="guestInvites.marketing.pricing.title" dir="rtl">מסלולים פשוטים לתוסף WIFIGATE Automation</h2>
+          <h2 class="wa-h2" id="wa-pricing-title" data-i18n="guestInvites.marketing.pricing.title" dir="rtl">מסלולים פשוטים לתוסף WIFIGATE Automation API</h2>
           <p class="wa-lead" data-i18n="guestInvites.marketing.pricing.subtitle" dir="rtl">משלמים רק על האוטומציה. מכשיר WIFIGATE עצמו לעולם ללא מנוי.‏</p>
         </div>
         <div class="wa-pricing__grid">
@@ -609,41 +506,151 @@
             <div class="wa-plan__cta"><a class="btn btn--ghost" href="/he/#contact" data-i18n="guestInvites.marketing.pricing.planCta" dir="rtl">דברו איתנו</a></div>
           </article>
         </div>
-        <p class="wa-pricing__note" data-i18n="guestInvites.marketing.pricing.note" dir="rtl">מחירי השקה לתוסף WIFIGATE Automation, בחיוב חודשי. מערכות נוספות ומסלולים שנתיים זמינים, פנו אלינו לפרטים.‏</p>
+        <p class="wa-pricing__note" data-i18n="guestInvites.marketing.pricing.note" dir="rtl">מחירי השקה לתוסף WIFIGATE Automation API, בחיוב חודשי. מערכות נוספות ומסלולים שנתיים זמינים, פנו אלינו לפרטים.‏</p>
       </div>
     </section>
+
+    <!-- ============ AUDIENCE ============ -->
+    <section class="wa-audience" aria-label="Who it is for">
+      <div class="container wa-audience__row">
+        <span class="wa-audience__label" data-i18n="guestInvites.marketing.audience.label" dir="rtl">מיועד ל:‏</span>
+        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.hotels" dir="rtl">מלונות</span>
+        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.rentals" dir="rtl">Airbnb ודירות נופש</span>
+        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.guesthouses" dir="rtl">בתי אירוח</span>
+        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.parking" dir="rtl">חניות וגראג'ים להשכרה</span>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="section wa-how" id="wa-how" aria-labelledby="wa-how-title">
+      <div class="container">
+        <div class="wa-head">
+          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.steps.eyebrow" dir="rtl">איך זה עובד</span>
+          <h2 class="wa-h2" id="wa-how-title" data-i18n="guestInvites.marketing.steps.title" dir="rtl">מהזמנה ועד שער פתוח, אוטומטית</h2>
+          <p class="wa-lead" data-i18n="guestInvites.marketing.steps.subtitle" dir="rtl">שלושה צעדים, ומשם זה רץ לבד בכל הזמנה.‏</p>
+        </div>
+        <div class="wa-steps__grid">
+          <article class="wa-step">
+            <div class="wa-step__num" aria-hidden="true">1</div>
+            <h3 class="wa-step__title" data-i18n="guestInvites.marketing.steps.s1t" dir="rtl">מתקבלת הזמנה</h3>
+            <p class="wa-step__text" data-i18n="guestInvites.marketing.steps.s1x" dir="rtl">מערכת ההזמנות או הניהול שלכם מעדכנת את WIFIGATE Automation API על הזמנה חדשה שאושרה.‏</p>
+          </article>
+          <article class="wa-step">
+            <div class="wa-step__num" aria-hidden="true">2</div>
+            <h3 class="wa-step__title" data-i18n="guestInvites.marketing.steps.s2t" dir="rtl">הגישה נוצרת אוטומטית</h3>
+            <p class="wa-step__text" data-i18n="guestInvites.marketing.steps.s2x" dir="rtl">WIFIGATE Automation API מנפיקה הזמנה מאובטחת ומוגבלת-בזמן בדיוק לשער, לדלת או לחניה הנכונים, בתוקף רק לאותה שהות.‏</p>
+          </article>
+          <article class="wa-step">
+            <div class="wa-step__num" aria-hidden="true">3</div>
+            <h3 class="wa-step__title" data-i18n="guestInvites.marketing.steps.s3t" dir="rtl">האורח פשוט נכנס</h3>
+            <p class="wa-step__text" data-i18n="guestInvites.marketing.steps.s3x" dir="rtl">הוא פותח את הכניסה מהטלפון. כשמגיע הצ׳ק-אאוט, הגישה פגה מעצמה, אין מה לאסוף או לבטל.‏</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BENEFITS ============ -->
+    <section class="section wa-benefits" aria-labelledby="wa-benefits-title">
+      <div class="container">
+        <div class="wa-head">
+          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.benefits.eyebrow" dir="rtl">למה WIFIGATE Automation API</span>
+          <h2 class="wa-h2" id="wa-benefits-title" data-i18n="guestInvites.marketing.benefits.title" dir="rtl">פחות קבלה. יותר אירוח בלי ידיים.‏</h2>
+          <p class="wa-lead" data-i18n="guestInvites.marketing.benefits.subtitle" dir="rtl">כל מה שהזמנה צריכה כדי להפוך לגישה, נעשה בשבילכם.‏</p>
+        </div>
+        <div class="wa-benefits__grid">
+          <article class="wa-benefit">
+            <span class="wa-benefit__icon"><img src="../../assets/wifigate_features/quick_guest_invite.svg" alt="" width="30" height="30" loading="lazy" decoding="async"></span>
+            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b1t" dir="rtl">בלי למסור מפתחות</h3>
+            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b1x" dir="rtl">שכחו מאיסוף מפתחות, מתיבות מפתח וקודים מועתקים. הגישה מגיעה לטלפון של האורח בדיוק כשצריך.‏</p>
+          </article>
+          <article class="wa-benefit">
+            <span class="wa-benefit__icon"><img src="../../assets/wifigate_features/history.svg" alt="" width="30" height="30" loading="lazy" decoding="async"></span>
+            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b2t" dir="rtl">מוגבלת-בזמן מעצם התכנון</h3>
+            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b2x" dir="rtl">כל הזמנה נפתחת בצ׳ק-אין ופגה בצ׳ק-אאוט, אוטומטית, בכל שהות.‏</p>
+          </article>
+          <article class="wa-benefit">
+            <span class="wa-benefit__icon"><img src="../../assets/wifigate_features/security_privacy.svg" alt="" width="30" height="30" loading="lazy" decoding="async"></span>
+            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b3t" dir="rtl">מוצפנת ופרטית</h3>
+            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b3x" dir="rtl">הגישה מוצפנת ומוגבלת להרשאה שהונפקה. הנכס והאורחים שלכם נשארים מוגנים.‏</p>
+          </article>
+          <article class="wa-benefit">
+            <span class="wa-benefit__icon"><img src="../../assets/wifigate_features/auto_open.svg" alt="" width="30" height="30" loading="lazy" decoding="async"></span>
+            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b4t" dir="rtl">עובדת עם הכניסות שלכם</h3>
+            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b4x" dir="rtl">שערים, דלתות חניה, מחסומים ודלתות כניסה, WIFIGATE שולטת במה שכבר יש לכם.‏</p>
+          </article>
+          <article class="wa-benefit">
+            <span class="wa-benefit__icon"><img src="../../assets/wifigate_features/stability.svg" alt="" width="30" height="30" loading="lazy" decoding="async"></span>
+            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b5t" dir="rtl">מתאימה גם לבניינים שלמים</h3>
+            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b5x" dir="rtl">משער בודד ועד מתחם שלם, הזמנה אחת יכולה לכסות כל כניסה שהאורח צריך.‏</p>
+          </article>
+          <article class="wa-benefit">
+            <span class="wa-benefit__icon"><img src="../../assets/wifigate_features/digital_rf_remote_learning.svg" alt="" width="30" height="30" loading="lazy" decoding="async"></span>
+            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b6t" dir="rtl">מתחברת למערכות שלכם</h3>
+            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b6x" dir="rtl">חברו את WIFIGATE Automation API לתהליך ההזמנות, ל-PMS או ל-Channel Manager ותנו לזה לרוץ.‏</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECURITY ============ -->
+    <section class="section wa-secure" aria-labelledby="wa-secure-title">
+      <div class="container">
+        <div class="wa-head">
+          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.secure.eyebrow" dir="rtl">אבטחה</span>
+          <h2 class="wa-h2" id="wa-secure-title" data-i18n="guestInvites.marketing.secure.title" dir="rtl">גישה שאפשר לתת בביטחון גם לזרים</h2>
+          <p class="wa-lead" data-i18n="guestInvites.marketing.secure.subtitle" dir="rtl">נבנתה כדי להגן על הנכס שמאחורי כל שער.‏</p>
+        </div>
+        <div class="wa-secure__grid">
+          <article class="wa-secure__item">
+            <h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i1t" dir="rtl">מוצפנת מקצה לקצה</h3>
+            <p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i1x" dir="rtl">כל הזמנה מוצפנת, כך שפרטי הגישה אינם ניתנים לקריאה או להעתקה בדרך.‏</p>
+          </article>
+          <article class="wa-secure__item">
+            <h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i2t" dir="rtl">פחות אמצעים פיזיים, יותר אירוח</h3>
+            <p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i2x" dir="rtl">הגישה הדיגיטלית מצמצמת את הצורך במפתחות, כרטיסים ושלטים, כדי שהצוות יוכל להתרכז באורחים ובאירוח.‏</p>
+          </article>
+          <article class="wa-secure__item">
+            <h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i3t" dir="rtl">השליטה נשארת אצלכם</h3>
+            <p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i3x" dir="rtl">הגישה צמודה לכל שהות ולכל אורח, ואתם יכולים לעצור אותה בכל רגע.‏</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRICING ============ -->
+
 
     <!-- ============ FINAL CTA ============ -->
     <section class="section wa-cta" aria-labelledby="wa-cta-title">
       <div class="container">
         <div class="wa-cta__box">
           <h2 class="wa-cta__title" id="wa-cta-title" data-i18n="guestInvites.marketing.cta.title" dir="rtl">מוכנים להפוך את גישת האורחים לאוטומטית?‏</h2>
-          <p class="wa-cta__text" data-i18n="guestInvites.marketing.cta.text" dir="rtl">ספרו לנו על הנכסים שלכם ונתאים את WIFIGATE Automation לאופן שבו אתם מארחים.‏</p>
+          <p class="wa-cta__text" data-i18n="guestInvites.marketing.cta.text" dir="rtl">ספרו לנו על הנכסים שלכם ונתאים את WIFIGATE Automation API לאופן שבו אתם מארחים.‏</p>
           <a class="btn btn--primary btn--hero" href="/he/#contact" data-i18n="guestInvites.marketing.cta.button" dir="rtl">דברו איתנו</a>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- Shared footer: templates/partials/site-footer.template.html -->
   <footer class="site-footer" dir="rtl">
     <div class="container site-footer__inner">
       <div class="site-footer__column site-footer__column--brand">
         <div class="site-footer__brand">
           <img src="../../assets/img/WIFIGATE_LOGO_NO_BG.png" alt="WIFIGATE" class="site-footer__logo" loading="lazy" decoding="async">
         </div>
-        <p class="site-footer__brand-copy" dir="rtl">אין מפתחות. אין שלטים. אין כרטיסים.
-כניסה דיגיטלית מאובטחת, בלי לחכות שמישהו יפתח לכם.‏</p>
+        <p class="site-footer__brand-copy" data-i18n="footer.tagline" dir="rtl">ללא מפתחות. ללא שלטים. ללא כרטיסים.‏<br>גישה דיגיטלית מאובטחת, בלי להמתין שמישהו יפתח לכם.‏</p>
       </div>
-      <nav class="site-footer__column" aria-label="משפטי">
-        <h2 class="site-footer__heading" dir="rtl">משפטי</h2>
+      <nav class="site-footer__column" aria-label="Legal">
+        <h2 class="site-footer__heading" data-i18n="footer.legalTitle" dir="rtl">מידע משפטי</h2>
         <div class="site-footer__links">
-          <a href="/he/terms-and-conditions/" class="site-footer__link" dir="rtl">תנאים והגבלות</a>
-          <a href="/he/privacy-policy/" class="site-footer__link" dir="rtl">מדיניות פרטיות</a>
-          <a href="/he/cookies/" class="site-footer__link" dir="rtl">עוגיות</a>
+          <a href="/he/terms-and-conditions/" class="site-footer__link" data-i18n="footer.terms" dir="rtl">תנאים והגבלות</a>
+          <a href="/he/privacy-policy/" class="site-footer__link" data-i18n="footer.privacy" dir="rtl">מדיניות פרטיות</a>
+          <a href="/he/cookies/" class="site-footer__link" data-i18n="footer.cookies" dir="rtl">עוגיות</a>
         </div>
       </nav>
       <div class="site-footer__column">
-        <h2 class="site-footer__heading" dir="rtl">אפליקציה ותמיכה</h2>
+        <h2 class="site-footer__heading" data-i18n="footer.appSupportTitle" dir="rtl">אפליקציה ותמיכה</h2>
         <div class="site-footer__stores" aria-label="Download the app">
           <a href="#" class="site-footer__store" aria-label="Download on Google Play">
             <svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true">
@@ -656,7 +663,8 @@
           </a>
           <a href="#" class="site-footer__store" aria-label="Download on the Apple App Store">
             <svg width="18" height="22" viewBox="0 0 18 22" aria-hidden="true">
-              <path fill="currentColor" d="M14.7 11.7c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.7 2.2-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.4 3 2.3 1.2 0 1.7-.8 3.1-.8s1.8.8 3.1.8 2.1-1.1 2.9-2.3c.9-1.3 1.2-2.5 1.3-2.6-.1 0-3.2-1.2-3.2-3.5ZM12.5 5.1c.7-.8 1.1-1.9 1-3.1-1 .1-2.1.6-2.8 1.4-.6.7-1.1 1.9-1 3 1.1.1 2.1-.5 2.8-1.3Z"></path>
+              <path fill="currentColor" d="M14.7 11.7c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.7 2.2-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.4 3 2.3 1.2 0 1.7-.8 3.1-.8s1.8.8 3.1.8 2.1-1.1 2.9-2.3c.9-1.3 1.2-2.5 1.3-2.6-.1 0-3.2-1.2-3.2-3.5ZM12.5 5.1c.7-.8 1.1-1.9 1-3.1-1 .1-2.1.6-2.8 1.4-.6.7-1.1 1.9-1 3 1.1.1 2.1-.5 2.8-1.3Z">
+              </path>
             </svg>
             <span class="site-footer__store-text"><span class="site-footer__store-kicker">Download on the</span><span class="site-footer__store-name">App Store</span></span>
           </a>
@@ -666,19 +674,38 @@
             <rect x="3" y="5" width="18" height="14" rx="2"></rect>
             <path d="m3 7 9 6 9-6"></path>
           </svg>
-          support@wifigate.io
+          <span dir="ltr">support@wifigate.io</span>
+        </a>
+        <a href="https://wa.me/message/NZWNMX6V2XVHJ1" target="_blank" rel="noopener noreferrer" class="site-footer__support site-footer__whatsapp">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M13.6 2.3A7.9 7.9 0 0 0 .1 7.9c0 1.4.4 2.8 1.1 4L0 16l4.2-1.1a7.9 7.9 0 0 0 3.8 1h.1a7.9 7.9 0 0 0 5.5-13.6ZM8 14.5a6.6 6.6 0 0 1-3.4-.9l-.2-.1-2.5.6.7-2.4-.2-.3A6.6 6.6 0 0 1 8 1.3a6.6 6.6 0 0 1 0 13.2Zm3.6-4.9c-.2-.1-1.2-.6-1.4-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.6-1-.6-.5-1-1.2-1.1-1.4-.1-.2 0-.3.1-.4l.3-.3c.1-.1.1-.2.2-.3.1-.1 0-.2 0-.3-.1-.1-.5-1.1-.6-1.5-.2-.4-.3-.3-.4-.3h-.4c-.1 0-.3.1-.5.2-.2.2-.7.7-.7 1.7s.7 1.9.8 2c.1.1 1.4 2.1 3.4 3 .5.2.8.3 1.1.4.5.2.9.1 1.2.1.4-.1 1.2-.5 1.3-.9.2-.5.2-.9.1-.9 0-.1-.2-.2-.4-.3Z">
+            </path>
+          </svg>
+          <span dir="ltr">WhatsApp Business</span>
         </a>
       </div>
       <div class="site-footer__column">
-        <h2 class="site-footer__heading" dir="rtl">עקבו אחרינו</h2>
+        <h2 class="site-footer__heading" data-i18n="footer.socialTitle" dir="rtl">עקבו אחרינו</h2>
         <div class="site-footer__socials">
-          <a href="#" class="site-footer__social-link" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v2H6v4h3v7h4v-7h3l1-4h-4V9c0-.7.3-1 1-1Z"></path></svg></a>
-          <a href="#" class="site-footer__social-link" aria-label="YouTube"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.6 4.6 12 4.6 12 4.6s-5.6 0-7.5.5a3 3 0 0 0-2.1 2.1C2 9.1 2 12 2 12s0 2.9.4 4.8a3 3 0 0 0 2.1 2.1c1.9.5 7.5.5 7.5.5s5.6 0 7.5-.5a3 3 0 0 0 2.1-2.1c.4-1.9.4-4.8.4-4.8s0-2.9-.4-4.8ZM10 15.4V8.6l6 3.4-6 3.4Z"></path></svg></a>
-          <a href="#" class="site-footer__social-link" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.9 8.8H3.1V21h3.8V8.8ZM5 3a2.2 2.2 0 1 0 0 4.4A2.2 2.2 0 0 0 5 3Zm16 10.9c0-3.3-1.8-5.4-4.6-5.4-1.7 0-2.8.9-3.3 1.8V8.8H9.5V21h3.8v-6.1c0-1.6.3-3.1 2.2-3.1 1.9 0 1.9 1.8 1.9 3.2v6H21v-7.1Z"></path></svg></a>
-          <a href="#" class="site-footer__social-link" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg></a>
+          <a href="https://www.facebook.com/WIFIGATE.io" class="site-footer__social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v2H6v4h3v7h4v-7h3l1-4h-4V9c0-.7.3-1 1-1Z"></path>
+            </svg></a>
+          <a href="https://www.youtube.com/@WIFIGATE" class="site-footer__social-link" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.6 4.6 12 4.6 12 4.6s-5.6 0-7.5.5a3 3 0 0 0-2.1 2.1C2 9.1 2 12 2 12s0 2.9.4 4.8a3 3 0 0 0 2.1 2.1c1.9.5 7.5.5 7.5.5s5.6 0 7.5-.5a3 3 0 0 0 2.1-2.1c.4-1.9.4-4.8.4-4.8s0-2.9-.4-4.8ZM10 15.4V8.6l6 3.4-6 3.4Z">
+              </path>
+            </svg></a>
+          <a href="https://www.linkedin.com/company/wifigate/" class="site-footer__social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M6.9 8.8H3.1V21h3.8V8.8ZM5 3a2.2 2.2 0 1 0 0 4.4A2.2 2.2 0 0 0 5 3Zm16 10.9c0-3.3-1.8-5.4-4.6-5.4-1.7 0-2.8.9-3.3 1.8V8.8H9.5V21h3.8v-6.1c0-1.6.3-3.1 2.2-3.1 1.9 0 1.9 1.8 1.9 3.2v6H21v-7.1Z">
+              </path>
+            </svg></a>
+          <a href="https://www.instagram.com/wifigate.io/" class="site-footer__social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle>
+            </svg></a>
         </div>
       </div>
-      <p class="site-footer__copy" dir="rtl">© 2026 WIFIGATE. כל הזכויות שמורות.‏</p>
+      <p class="site-footer__copy" data-i18n="footer.copyright" dir="rtl">© 2026 WIFIGATE. כל הזכויות שמורות.‏</p>
     </div>
   </footer>
 

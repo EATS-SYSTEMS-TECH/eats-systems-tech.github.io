@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="he" dir="rtl" data-ui-lang="he" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="WIFIGATE Repeat Access — bilingual product, UX, protocol and security specification.">
+<title>WIFIGATE Repeat Access</title>
+<style>
+:root{
+  --bg:#f5f7f6;--surface:#fff;--surface-2:#eef4f1;--ink:#12201c;--muted:#62716b;
+  --line:#dce5e1;--brand:#0b6b58;--brand-2:#084c40;--soft:#dff2eb;--blue:#235fa4;
+  --blue-soft:#e7f0fb;--amber:#9a6217;--amber-soft:#fff2d8;--red:#a7353d;
+  --red-soft:#fde8ea;--green:#18704a;--green-soft:#e1f3e9;--code:#10221d;
+  --shadow:0 18px 54px rgba(15,49,40,.09);--radius:22px;
+}
+:root[data-theme="dark"]{
+  --bg:#101512;--surface:#171d1a;--surface-2:#202924;--ink:#edf5f1;--muted:#a6b4ad;
+  --line:#314039;--brand:#65cdb4;--brand-2:#9fe2d1;--soft:#173a31;--blue:#83b9ef;
+  --blue-soft:#182b3d;--amber:#e1b568;--amber-soft:#3b2e18;--red:#ef9aa0;
+  --red-soft:#402226;--green:#7bd0a3;--green-soft:#18372a;--code:#09110e;
+  --shadow:0 18px 54px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+button,input{font:inherit}a{color:var(--brand);text-underline-offset:3px}
+code,.mono{font-family:"SFMono-Regular",Consolas,monospace;direction:ltr;unicode-bidi:embed}
+code{padding:.12rem .34rem;border-radius:5px;background:var(--surface-2);font-size:.88em}
+[data-lang="en"]{display:none!important}html[data-ui-lang="en"] [data-lang="he"]{display:none!important}
+html[data-ui-lang="en"] [data-lang="en"]{display:revert!important}html[data-ui-lang="he"] [data-lang="he"]{display:revert!important}
+.page{width:min(1180px,calc(100% - 28px));margin:auto;padding:18px 0 80px}
+.toolbar{position:sticky;top:10px;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;margin-bottom:14px;border:1px solid var(--line);border-radius:16px;background:color-mix(in srgb,var(--surface) 90%,transparent);box-shadow:0 10px 32px rgba(10,38,30,.08);backdrop-filter:blur(18px)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:.04em}.brand-mark{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;color:#fff;background:linear-gradient(145deg,var(--brand),#18a483);font-weight:900}
+.toolbar-actions{display:flex;gap:8px;align-items:center}.segmented{display:flex;padding:3px;border:1px solid var(--line);border-radius:11px;background:var(--bg)}
+.segmented button,.icon-button{border:0;border-radius:8px;color:var(--muted);background:transparent;cursor:pointer;font-weight:750}.segmented button{min-width:44px;padding:6px 10px}.segmented button[aria-pressed="true"]{color:#fff;background:var(--brand)}.icon-button{padding:8px 10px;border:1px solid var(--line);background:var(--surface)}
+.hero{position:relative;overflow:hidden;min-height:430px;padding:clamp(28px,6vw,70px);border-radius:32px;color:#f4fffb;background:radial-gradient(circle at 15% 12%,rgba(38,207,166,.34),transparent 28%),linear-gradient(135deg,#08261f,#0b5748 62%,#0c7c66);box-shadow:var(--shadow)}
+.hero:after{content:"";position:absolute;inset:auto -90px -150px auto;width:440px;height:440px;border:1px solid rgba(255,255,255,.13);border-radius:50%;box-shadow:0 0 0 55px rgba(255,255,255,.035),0 0 0 110px rgba(255,255,255,.025)}
+.eyebrow{margin:0 0 12px;color:#8ff2da;font-size:12px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}h1{max-width:900px;margin:0;font-size:clamp(38px,7vw,78px);line-height:1.02;letter-spacing:-.05em}
+.hero-lede{max-width:820px;margin:22px 0 0;color:#d6eee7;font-size:clamp(17px,2.3vw,22px)}.hero-meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}.pill{display:inline-flex;align-items:center;padding:6px 11px;border:1px solid rgba(255,255,255,.18);border-radius:999px;color:#eafff9;background:rgba(255,255,255,.08);font-size:12px;font-weight:800}.hero-note{position:relative;z-index:2;max-width:900px;margin-top:28px;padding:15px 18px;border:1px solid rgba(255,255,255,.17);border-radius:15px;background:rgba(3,23,18,.3)}
+.toc{display:flex;gap:7px;overflow:auto;margin:14px 0 0;padding:11px;border:1px solid var(--line);border-radius:17px;background:var(--surface);scrollbar-width:thin}.toc a{flex:0 0 auto;padding:7px 11px;border-radius:9px;color:var(--muted);text-decoration:none;font-size:13px;font-weight:750}.toc a:hover,.toc a:focus-visible{color:var(--brand);background:var(--soft);outline:none}
+.section{margin-top:18px;padding:clamp(22px,4vw,42px);border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);scroll-margin-top:88px}.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:22px}.section h2{margin:3px 0 8px;font-size:clamp(27px,4vw,42px);line-height:1.12;letter-spacing:-.035em}.section h3{margin:24px 0 10px;font-size:19px;line-height:1.28}.section p{margin:0 0 13px;max-width:84ch}.kicker{color:var(--brand);font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.lede,.muted{color:var(--muted)}.lede{font-size:17px}.status{flex:0 0 auto;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:850}.status.target{color:var(--blue);background:var(--blue-soft)}.status.gap{color:var(--amber);background:var(--amber-soft)}
+.grid-2,.grid-3,.grid-4{display:grid;gap:13px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}.card{padding:19px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(180deg,var(--surface),var(--surface-2))}.card h3{margin-top:0}.card>:last-child{margin-bottom:0}.number{display:grid;place-items:center;width:38px;height:38px;margin-bottom:12px;border-radius:12px;color:#fff;background:var(--brand);font-weight:900}
+.callout{margin:16px 0;padding:15px 17px;border-inline-start:4px solid var(--brand);border-radius:12px;background:var(--soft)}.callout.warn{border-color:var(--amber);background:var(--amber-soft)}.callout.bad{border-color:var(--red);background:var(--red-soft)}.callout.good{border-color:var(--green);background:var(--green-soft)}.callout>:last-child{margin-bottom:0}
+.table-wrap{overflow:auto;margin-top:14px;border:1px solid var(--line);border-radius:15px}table{width:100%;min-width:680px;border-collapse:collapse;background:var(--surface)}th,td{padding:11px 13px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top;font-size:14px}th{color:var(--brand-2);background:var(--soft);font-size:12px;letter-spacing:.03em;text-transform:uppercase}tr:last-child td{border-bottom:0}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin-top:17px;direction:ltr}.flow-step{position:relative;min-height:142px;padding:17px;border:1px solid var(--line);border-radius:16px;background:var(--surface-2);text-align:left}.flow-step:not(:last-child):after{content:"→";position:absolute;right:-15px;top:48%;z-index:2;width:21px;height:21px;display:grid;place-items:center;border-radius:50%;color:#fff;background:var(--brand);font-weight:900}.flow-step b{display:block;margin-bottom:5px;color:var(--brand)}
+.schedule{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin:16px 0;direction:ltr}.day{padding:14px 5px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2);text-align:center;font-size:12px;font-weight:850}.day.active{color:#fff;border-color:var(--brand);background:var(--brand)}
+.state{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:850}.state.green{color:var(--green);background:var(--green-soft)}.state.red{color:var(--red);background:var(--red-soft)}.state.amber{color:var(--amber);background:var(--amber-soft)}.state.blue{color:var(--blue);background:var(--blue-soft)}
+.code-block{overflow:hidden;margin:14px 0;border:1px solid #1d4237;border-radius:15px;background:var(--code)}.code-title{display:flex;justify-content:space-between;padding:9px 13px;border-bottom:1px solid rgba(255,255,255,.12);color:#93b8ab;font-size:12px;direction:ltr}pre{overflow:auto;margin:0;padding:18px;color:#d9efe8;background:var(--code);font:13px/1.62 "SFMono-Regular",Consolas,monospace;text-align:left;direction:ltr;white-space:pre}
+.checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.check{position:relative;padding:13px 44px 13px 13px;border:1px solid var(--line);border-radius:13px;background:var(--surface-2)}html[dir="ltr"] .check{padding:13px 13px 13px 44px}.check:before{content:"✓";position:absolute;inset-inline-start:13px;top:13px;display:grid;place-items:center;width:22px;height:22px;border-radius:7px;color:#fff;background:var(--green);font-weight:900}
+.mockups{display:grid;grid-template-columns:repeat(2,minmax(0,360px));justify-content:center;gap:22px;margin:22px 0}.mockup{min-height:610px;padding:19px 17px 25px;border:1px solid #e7e8ec;border-radius:28px;background:#f8f9fd;color:#1c1d22;box-shadow:0 16px 36px rgba(22,31,42,.13);font:14px/1.45 Arial,sans-serif}.mockup *{box-sizing:border-box}.mockup-head{display:flex;align-items:center;gap:15px;margin-bottom:25px;font-size:18px;font-weight:700}.mockup-back{font-size:23px;font-weight:400}.mockup-sub{margin-bottom:19px;font-size:13px}.mockup-label{margin:16px 0 4px;color:#73777f;font-size:12px}.mockup-panel{overflow:hidden;border-radius:22px;background:#fff}.mockup-row{display:flex;align-items:center;gap:14px;min-height:50px;margin:0 18px;border-bottom:1px solid #edf0f4}.mockup-row:last-child{border-bottom:0}.mockup-row .value{margin-inline-start:auto;color:#73777f;text-align:end}.mockup-radio{display:inline-block;flex:0 0 18px;width:18px;height:18px;border:1.5px solid #a1a7b2;border-radius:50%}.mockup-radio.selected{border:5px solid #4e7af6}.mockup-input{display:inline-block;min-width:20px;padding:0 3px;border-bottom:1px solid #abb0b8;text-align:center}.mockup-weekdays{display:flex;justify-content:space-between;gap:4px;margin:4px 18px 13px;padding:7px 0 13px;border-bottom:1px solid #edf0f4;direction:ltr}.mockup-weekdays span{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;font-size:11px}.mockup-weekdays .selected{border:1px solid #4e7af6;color:#4e7af6}.mockup-calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;padding:10px 0 20px;text-align:center;direction:ltr}.mockup-calendar span{padding:5px 0}.mockup-calendar .selected{border-radius:50%;background:#4e7af6;color:#fff}.mockup-calendar .muted{color:#aab0bb}.mockup-save{width:max-content;margin:28px auto 0;padding:11px 23px;border-radius:999px;background:#fff;box-shadow:0 3px 9px #0002;font-weight:700}.mockup-caption{margin:0 0 9px;color:var(--muted);font-size:13px;font-weight:750;text-align:center}
+.hero-lede code{color:#eafff9;background:rgba(3,23,18,.35)}
+footer{padding:28px 12px;color:var(--muted);text-align:center;font-size:13px}
+@media(max-width:900px){.grid-3,.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}.flow{grid-template-columns:1fr}.flow-step:not(:last-child):after{content:"↓";right:calc(50% - 10px);top:auto;bottom:-15px}}
+@media(max-width:640px){.page{width:min(100% - 16px,1180px);padding-top:8px}.toolbar{top:5px}.toolbar .brand span:last-child{display:none}.hero,.section{padding:22px 17px;border-radius:22px}.hero{min-height:470px}.section-head{display:block}.status{display:inline-block;margin-top:8px}.grid-2,.grid-3,.grid-4,.checklist{grid-template-columns:1fr}.schedule{gap:3px}.day{padding:11px 2px;font-size:10px}}
+@media(max-width:760px){.mockups{grid-template-columns:minmax(0,360px)}}
+@media print{.toolbar,.toc{display:none!important}.page{width:100%;padding:0}.hero,.section{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="toolbar">
+    <div class="brand"><span class="brand-mark">W</span><span>WIFIGATE Repeat Access</span></div>
+    <div class="toolbar-actions">
+      <div class="segmented" role="group" aria-label="Language">
+        <button type="button" data-set-lang="he" aria-pressed="true">עברית</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="icon-button" type="button" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">◐</button>
+    </div>
+  </header>
+
+  <section class="hero" aria-labelledby="doc-title">
+    <p class="eyebrow">Product · UX · Protocol · Security</p>
+    <h1 id="doc-title">WIFIGATE<br>Repeat Access</h1>
+    <p class="hero-lede" data-lang="he">הרשאת כניסה חד־פעמית או חוזרת לאורח, עם תדירות ומשך לפי בחירה, באמצעות הזמנה אחת.</p>
+    <p class="hero-lede" data-lang="en">One-time or repeating guest access, with selectable frequency and duration, through one invitation.</p>
+    <div class="hero-meta"><span class="pill">Bilingual · עברית / English</span><span class="pill">Daily / weekly / monthly / yearly</span><span class="pill">One invitation</span><span class="pill">Gate-enforced</span><span class="pill">UX proposal · 25 Sep 2026</span></div>
+    <div class="hero-note">
+      <div data-lang="he"><strong>דוגמת היעד:</strong> מנקה שמגיע בכל יום חמישי בין 08:00 ל־14:00 מקבל הרשאה פעם אחת. מחוץ לחלון הזה השער מסרב לפתיחה. ניתן להשהות, לערוך או לבטל את ההרשאה בכל עת.</div>
+      <div data-lang="en"><strong>Target example:</strong> a cleaner arriving every Thursday from 08:00 to 14:00 accepts once. Outside that window the gate denies access. The owner can pause, edit or revoke the schedule at any time.</div>
+    </div>
+    <p class="hero-lede" style="font-size:14px"><span data-lang="he">שם קובץ האפיון: </span><span data-lang="en">Specification filename: </span><code>WIFIGATE_REPEAT_ACCESS.html</code></p>
+  </section>
+
+  <nav class="toc" aria-label="Document navigation">
+    <a href="#scope"><span data-lang="he">מטרה וגבולות</span><span data-lang="en">Scope</span></a>
+    <a href="#principles"><span data-lang="he">עקרונות</span><span data-lang="en">Principles</span></a>
+    <a href="#journey"><span data-lang="he">מסע משתמש</span><span data-lang="en">Journey</span></a>
+    <a href="#rules"><span data-lang="he">חוקי זמן</span><span data-lang="en">Schedule rules</span></a>
+    <a href="#ux">UX</a><a href="#data"><span data-lang="he">מודל נתונים</span><span data-lang="en">Data</span></a>
+    <a href="#api">API</a><a href="#security"><span data-lang="he">אבטחה</span><span data-lang="en">Security</span></a>
+    <a href="#acceptance"><span data-lang="he">קריטריוני קבלה</span><span data-lang="en">Acceptance</span></a>
+  </nav>
+
+  <section class="section" id="scope">
+    <div class="section-head"><div><div class="kicker">01 · Product definition</div><h2><span data-lang="he">מטרה, בעיה וגבולות</span><span data-lang="en">Goal, problem and boundaries</span></h2><p class="lede" data-lang="he">לאפשר יצירת הרשאת אורח חד־פעמית או חוזרת, עם בחירת תדירות, ימים ומשך בצורה מוכרת מלוח שנה.</p><p class="lede" data-lang="en">Let owners create one-time or repeating guest access with calendar-like frequency, weekday and duration controls.</p></div><span class="status target">UX PROPOSAL</span></div>
+    <div class="grid-3">
+      <article class="card"><h3 data-lang="he">הבעיה</h3><h3 data-lang="en">Problem</h3><p data-lang="he">כיום בעל השער צריך לייצר ולשלוח הרשאה חדשה לכל ביקור. פעולה שבועית קבועה מייצרת חיכוך וטעויות.</p><p data-lang="en">Today the owner must create and send a new permission for every visit, producing recurring work and mistakes.</p></article>
+      <article class="card"><h3 data-lang="he">הפתרון</h3><h3 data-lang="en">Solution</h3><p data-lang="he">שדה “חזרה” בטופס פותח מסך נפרד עם ללא חזרה, כל N ימים/שבועות/חודשים/שנים, ומשך עד תאריך או מספר מופעים.</p><p data-lang="en">A Repeat row opens a separate screen with no repeat, every N days/weeks/months/years, and duration by date or occurrence count.</p></article>
+      <article class="card"><h3 data-lang="he">מדד הצלחה</h3><h3 data-lang="en">Success</h3><p data-lang="he">האורח נכנס רק בחלון המאושר; הבעלים אינו שולח קישור נוסף; שינוי או ביטול נכנסים לתוקף בצורה אמינה.</p><p data-lang="en">The guest enters only in approved windows; no new link is needed; edits and revocation take effect reliably.</p></article>
+    </div>
+    <div class="callout warn"><p data-lang="he"><strong>Repeat Access:</strong> ההרשאה מאפשרת לאורח לבצע פעולת פתיחה ידנית רק בזמן מורשה. פתיחה אוטומטית בשישי/שבת היא מוצר נפרד, עם סיכוני בטיחות וכללי ביצוע אחרים. שני הפיצ'רים יכולים להשתמש באותו מנוע תזמון, אך לא באותה הרשאה.</p><p data-lang="en"><strong>Repeat Access:</strong> the grant lets a guest manually open during an allowed window. Scheduled automatic opening is a separate product with different safety constraints. Both may share a scheduling engine, but not the same permission.</p></div>
+    <h3><span data-lang="he">הצעת תכולה למסך החזרה</span><span data-lang="en">Proposed Repeat screen scope</span></h3>
+    <div class="checklist">
+      <div class="check"><span data-lang="he">ללא חזרה, או כל N ימים / שבועות / חודשים / שנים</span><span data-lang="en">No repeat, or every N days / weeks / months / years</span></div>
+      <div class="check"><span data-lang="he">בבחירה שבועית: יום אחד או יותר בשבוע</span><span data-lang="en">For weekly repeat: one or more weekdays</span></div>
+      <div class="check"><span data-lang="he">משך: לתמיד, מספר מופעים, או עד תאריך</span><span data-lang="en">Duration: forever, occurrence count, or until date</span></div>
+      <div class="check"><span data-lang="he">שעת התחלה ושעת סיום</span><span data-lang="en">Start and end time</span></div>
+      <div class="check"><span data-lang="he">תאריך התחלה ברור, שממנו נגזר יום ברירת המחדל</span><span data-lang="en">Explicit start date used to seed the default weekday</span></div>
+      <div class="check"><span data-lang="he">הזמנה חד־פעמית וקבלת הרשאה קבועה</span><span data-lang="en">One-time claim invitation</span></div>
+      <div class="check"><span data-lang="he">עריכה, השהיה וביטול</span><span data-lang="en">Edit, pause and revoke</span></div>
+      <div class="check"><span data-lang="he">היסטוריית פתיחות וסירובים</span><span data-lang="en">Open and denial audit history</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="principles">
+    <div class="section-head"><div><div class="kicker">02 · Product principles</div><h2><span data-lang="he">החלטות יסוד</span><span data-lang="en">Core decisions</span></h2></div><span class="status target">NORMATIVE</span></div>
+    <div class="grid-4">
+      <article class="card"><div class="number">1</div><h3 data-lang="he">לינק אחד, הרשאה אחת</h3><h3 data-lang="en">One link, one grant</h3><p data-lang="he">הקישור משמש לקבלת ההרשאה בלבד. לאחר הקבלה המשתמש מזוהה דרך החשבון שלו; הקישור אינו מפתח פתיחה קבוע.</p><p data-lang="en">The link claims the grant once. Afterwards identity comes from the account; the URL is not a permanent key.</p></article>
+      <article class="card"><div class="number">2</div><h3 data-lang="he">השער מכריע</h3><h3 data-lang="en">Gate decides</h3><p data-lang="he">האפליקציה יכולה להציג זמינות, אך השער או שירות האימות הם שמאשרים את הזמן בפועל.</p><p data-lang="en">The app may show availability, but the gate or authorization service makes the final time decision.</p></article>
+      <article class="card"><div class="number">3</div><h3 data-lang="he">ברירת מחדל סגורה</h3><h3 data-lang="en">Fail closed</h3><p data-lang="he">זמן לא אמין, הרשאה חסרה או תזמון לא תקין גורמים לסירוב, לא לפתיחה.</p><p data-lang="en">Untrusted time, missing permission or invalid schedules deny access.</p></article>
+      <article class="card"><div class="number">4</div><h3 data-lang="he">ביטול מיידי</h3><h3 data-lang="en">Immediate revocation</h3><p data-lang="he">ביטול אינו תלוי במחיקת האפליקציה אצל האורח. ההרשאה נשללת במקור הסמכות.</p><p data-lang="en">Revocation does not depend on the guest deleting anything; authority is removed at its source.</p></article>
+    </div>
+  </section>
+
+  <section class="section" id="journey">
+    <div class="section-head"><div><div class="kicker">03 · End-to-end journey</div><h2><span data-lang="he">מסע המשתמש</span><span data-lang="en">User journey</span></h2><p class="lede" data-lang="he">הגדרה אחת על ידי בעל השער, קבלה אחת על ידי האורח, ושימוש חוזר ללא הודעות נוספות.</p><p class="lede" data-lang="en">One setup by the owner, one claim by the guest, then repeated use without more messages.</p></div></div>
+    <div class="flow">
+      <div class="flow-step"><b>1 · Create</b><span data-lang="he">בעל השער בוחר שער, אורח ולוח זמנים.</span><span data-lang="en">Owner chooses gate, guest and schedule.</span></div>
+      <div class="flow-step"><b>2 · Invite</b><span data-lang="he">נשלח קישור קבלה קצר־חיים לטלפון המיועד.</span><span data-lang="en">A short-lived claim link is sent to the intended phone.</span></div>
+      <div class="flow-step"><b>3 · Claim</b><span data-lang="he">האורח מזדהה ומקבל את ההרשאה פעם אחת.</span><span data-lang="en">Guest signs in and claims once.</span></div>
+      <div class="flow-step"><b>4 · Open</b><span data-lang="he">בכל ביקור האורח לוחץ על השער; הזמן נבדק.</span><span data-lang="en">On each visit the guest taps the gate; time is evaluated.</span></div>
+      <div class="flow-step"><b>5 · Manage</b><span data-lang="he">הבעלים עורך, משהה או מבטל ללא הזמנה מחדש.</span><span data-lang="en">Owner edits, pauses or revokes without reinviting.</span></div>
+    </div>
+    <h3><span data-lang="he">מצבי ההרשאה</span><span data-lang="en">Grant states</span></h3>
+    <div class="table-wrap"><table><thead><tr><th>Status</th><th data-lang="he">משמעות</th><th data-lang="en">Meaning</th><th data-lang="he">התנהגות</th><th data-lang="en">Behaviour</th></tr></thead><tbody>
+      <tr><td><span class="state amber">PENDING</span></td><td data-lang="he">ההזמנה טרם התקבלה</td><td data-lang="en">Invitation not claimed</td><td data-lang="he">אין גישה</td><td data-lang="en">No access</td></tr>
+      <tr><td><span class="state green">ACTIVE</span></td><td data-lang="he">ההרשאה תקפה</td><td data-lang="en">Grant is valid</td><td data-lang="he">גישה רק בחלון הזמן</td><td data-lang="en">Access only in schedule</td></tr>
+      <tr><td><span class="state blue">PAUSED</span></td><td data-lang="he">הושהתה זמנית</td><td data-lang="en">Temporarily paused</td><td data-lang="he">אין גישה עד חידוש</td><td data-lang="en">No access until resumed</td></tr>
+      <tr><td><span class="state red">REVOKED</span></td><td data-lang="he">בוטלה לצמיתות</td><td data-lang="en">Permanently revoked</td><td data-lang="he">אין גישה; נדרשת הזמנה חדשה</td><td data-lang="en">No access; new invite required</td></tr>
+      <tr><td><span class="state red">EXPIRED</span></td><td data-lang="he">עבר תאריך הסיום או הסתיים מניין המופעים</td><td data-lang="en">End date or occurrence count reached</td><td data-lang="he">אין גישה</td><td data-lang="en">No access</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="section" id="rules">
+    <div class="section-head"><div><div class="kicker">04 · Scheduling semantics</div><h2><span data-lang="he">חוקי התזמון</span><span data-lang="en">Schedule semantics</span></h2></div><span class="status target">PROPOSAL</span></div>
+    <div class="schedule"><div class="day">SUN</div><div class="day">MON</div><div class="day">TUE</div><div class="day">WED</div><div class="day active">THU</div><div class="day">FRI</div><div class="day">SAT</div></div>
+    <div class="grid-2">
+      <article class="card"><h3 data-lang="he">דוגמה</h3><h3 data-lang="en">Example</h3><p><code>THU · 08:00–14:00 · Asia/Jerusalem</code></p><p data-lang="he">מותר מ־08:00:00 כולל ועד 14:00:00 לא כולל. ב־14:00 הבקשה נדחית.</p><p data-lang="en">Allowed from 08:00:00 inclusive until 14:00:00 exclusive. At 14:00 access is denied.</p></article>
+      <article class="card"><h3 data-lang="he">אזור זמן</h3><h3 data-lang="en">Timezone</h3><p data-lang="he">כל הרשאה שומרת מזהה IANA, לדוגמה <code>Asia/Jerusalem</code>. אין לשמור רק UTC offset, משום ששינויי שעון קיץ משנים אותו.</p><p data-lang="en">Every grant stores an IANA timezone such as <code>Asia/Jerusalem</code>. A fixed UTC offset is insufficient because daylight-saving changes it.</p></article>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th data-lang="he">כלל</th><th data-lang="en">Rule</th><th data-lang="he">החלטה</th><th data-lang="en">Decision</th></tr></thead><tbody>
+      <tr><td data-lang="he">ללא חזרה</td><td data-lang="en">Don't repeat</td><td data-lang="he">חלון גישה יחיד בתאריך ההתחלה ובשעות שנבחרו; ללא שדות משך.</td><td data-lang="en">A single access window on the start date at the selected hours; no duration controls.</td></tr>
+      <tr><td data-lang="he">תדירות</td><td data-lang="en">Frequency</td><td data-lang="he">חזרה כל <code>N</code> ימים, שבועות, חודשים או שנים; <code>N</code> מספר שלם חיובי.</td><td data-lang="en">Repeat every positive integer <code>N</code> days, weeks, months or years.</td></tr>
+      <tr><td data-lang="he">ימים שבועיים</td><td data-lang="en">Weekly weekdays</td><td data-lang="he">במצב שבועי בלבד: לפחות יום אחד, ואפשר לבחור כמה ימים. יום תאריך ההתחלה מסומן אוטומטית בבחירה הראשונה.</td><td data-lang="en">Weekly mode only: at least one weekday; multiple are allowed. The start weekday is preselected initially.</td></tr>
+      <tr><td data-lang="he">תאריך עוגן</td><td data-lang="en">Anchor date</td><td data-lang="he">תאריך תחילת ההרשאה קובע את תחילת המחזור; אין ליצור מופע לפניו.</td><td data-lang="en">The access start date anchors the cycle; no occurrence precedes it.</td></tr>
+      <tr><td data-lang="he">משך</td><td data-lang="en">Duration</td><td data-lang="he">לתמיד עד ביטול, מספר מופעים, או עד תאריך מקומי כולל. “מספר מופעים” סופר חלונות מתוזמנים, לא מספר לחיצות פתיחה.</td><td data-lang="en">Forever until revoked, a number of scheduled occurrences, or an inclusive local end date. Count refers to scheduled windows, not open taps.</td></tr>
+      <tr><td data-lang="he">חלונות</td><td data-lang="en">Windows</td><td data-lang="he">MVP: חלון אחד לכל הרשאה, זהה בכל הימים שנבחרו.</td><td data-lang="en">MVP: one window per grant, shared by selected days.</td></tr>
+      <tr><td data-lang="he">חצות</td><td data-lang="en">Midnight</td><td data-lang="he">חלון שחוצה חצות אינו נתמך ב־MVP; יש ליצור שתי הרשאות/חלונות בעתיד.</td><td data-lang="en">Overnight windows are not supported in MVP.</td></tr>
+      <tr><td data-lang="he">תוקף כולל</td><td data-lang="en">Overall validity</td><td data-lang="he"><code>startDate</code> נדרש. <code>UNTIL</code> מחייב תאריך שאינו קודם לתאריך ההתחלה. <code>FOREVER</code> ממשיך עד ביטול.</td><td data-lang="en"><code>startDate</code> is required. <code>UNTIL</code> needs a date on or after the start date. <code>FOREVER</code> continues until revoked.</td></tr>
+      <tr><td data-lang="he">שינוי שעון</td><td data-lang="en">DST</td><td data-lang="he">השעה המקומית נשמרת קבועה; מנוע התזמון מחשב את ה־offset לפי התאריך.</td><td data-lang="en">Local wall time remains fixed; offset is calculated per occurrence.</td></tr>
+      <tr><td data-lang="he">גרייס</td><td data-lang="en">Grace</td><td data-lang="he">אין גרייס נסתר. אם יידרש, יוצג ויישמר כשדה מפורש.</td><td data-lang="en">No hidden grace period; any future grace must be explicit.</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="section" id="ux">
+    <div class="section-head"><div><div class="kicker">05 · Experience</div><h2><span data-lang="he">מסכים והתנהגות UX</span><span data-lang="en">Screens and UX behaviour</span></h2><p class="lede" data-lang="he">טיוטת מראה המבוססת על שתי התמונות שצורפו. הדוגמאות כאן סטטיות לצורך אישור האפיון.</p><p class="lede" data-lang="en">Visual proposal based on the two supplied screenshots. These examples are static for specification review.</p></div><span class="status target">FOR REVIEW</span></div>
+    <div class="mockups">
+      <div><p class="mockup-caption"><span data-lang="he">1 · טופס יצירת הרשאה</span><span data-lang="en">1 · Create access</span></p><div class="mockup">
+        <div class="mockup-head"><span class="mockup-back">‹</span><span data-lang="he">הרשאה חדשה</span><span data-lang="en">New access</span></div>
+        <div class="mockup-row"><span data-lang="he">שער</span><span data-lang="en">Gate</span><span class="value"><span data-lang="he">שער ראשי</span><span data-lang="en">Main gate</span></span></div>
+        <div class="mockup-row"><span data-lang="he">אורח</span><span data-lang="en">Guest</span><span class="value"><span data-lang="he">דנה</span><span data-lang="en">Dana</span></span></div>
+        <div class="mockup-label"><span data-lang="he">תחילת ההרשאה</span><span data-lang="en">Access starts</span></div>
+        <div class="mockup-panel"><div class="mockup-row"><span data-lang="he">2 בספטמבר 2026</span><span data-lang="en">2 September 2026</span><span class="value" dir="ltr">08:00–09:00</span></div></div>
+        <div class="mockup-calendar"><span class="muted">30</span><span class="muted">31</span><span>1</span><span class="selected">2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span></div>
+        <div class="mockup-panel"><div class="mockup-row"><span data-lang="he">חזרה</span><span data-lang="en">Repeat</span><span class="value"><span data-lang="he">כל שבוע ביום רביעי</span><span data-lang="en">Every Wednesday</span> ›</span></div></div>
+        <div class="mockup-save"><span data-lang="he">ביטול&nbsp;&nbsp; | &nbsp;&nbsp;שמירה</span><span data-lang="en">Cancel&nbsp;&nbsp; | &nbsp;&nbsp;Save</span></div>
+      </div></div>
+      <div><p class="mockup-caption"><span data-lang="he">2 · מסך חזרה</span><span data-lang="en">2 · Repeat</span></p><div class="mockup">
+        <div class="mockup-head"><span class="mockup-back">‹</span><span data-lang="he">חזרה</span><span data-lang="en">Repeat</span></div>
+        <div class="mockup-sub"><span data-lang="he">ההרשאה תחזור בכל יום רביעי.</span><span data-lang="en">This access will repeat every Wednesday.</span></div>
+        <div class="mockup-panel">
+          <div class="mockup-row"><span class="mockup-radio"></span><span data-lang="he">ללא חזרה</span><span data-lang="en">Don't repeat</span></div>
+          <div class="mockup-row"><span class="mockup-radio"></span><span data-lang="he">כל</span><span data-lang="en">Every</span><span class="mockup-input">1</span><span data-lang="he">יום</span><span data-lang="en">day</span></div>
+          <div class="mockup-row"><span class="mockup-radio selected"></span><span data-lang="he">כל</span><span data-lang="en">Every</span><span class="mockup-input">1</span><span data-lang="he">שבוע</span><span data-lang="en">week</span></div>
+          <div class="mockup-weekdays"><span>S</span><span>M</span><span>T</span><span class="selected">W</span><span>T</span><span>F</span><span>S</span></div>
+          <div class="mockup-row"><span class="mockup-radio"></span><span data-lang="he">כל</span><span data-lang="en">Every</span><span class="mockup-input">1</span><span data-lang="he">חודש</span><span data-lang="en">month</span></div>
+          <div class="mockup-row"><span class="mockup-radio"></span><span data-lang="he">כל</span><span data-lang="en">Every</span><span class="mockup-input">1</span><span data-lang="he">שנה</span><span data-lang="en">year</span></div>
+        </div>
+        <div class="mockup-label"><span data-lang="he">משך</span><span data-lang="en">Duration</span></div>
+        <div class="mockup-panel">
+          <div class="mockup-row"><span class="mockup-radio selected"></span><span data-lang="he">לתמיד</span><span data-lang="en">Forever</span></div>
+          <div class="mockup-row"><span class="mockup-radio"></span><span data-lang="he">מספר מופעים</span><span data-lang="en">Specific number of times</span></div>
+          <div class="mockup-row"><span class="mockup-radio"></span><span data-lang="he">עד תאריך</span><span data-lang="en">Until</span></div>
+        </div>
+      </div></div>
+    </div>
+    <h3><span data-lang="he">התנהגות מוצעת במסכים</span><span data-lang="en">Proposed screen behaviour</span></h3>
+    <div class="table-wrap"><table><thead><tr><th data-lang="he">פעולה</th><th data-lang="en">Action</th><th data-lang="he">תוצאה</th><th data-lang="en">Result</th></tr></thead><tbody>
+      <tr><td data-lang="he">פתיחת “חזרה”</td><td data-lang="en">Open Repeat</td><td data-lang="he">מסך נפרד; ברירת המחדל היא “ללא חזרה”. אם נבחרת תדירות, היום/התאריך הראשוני נגזרים מתאריך תחילת ההרשאה.</td><td data-lang="en">Separate screen; default is Don't repeat. Selecting a frequency seeds the weekday/date from the access start date.</td></tr>
+      <tr><td data-lang="he">בחירת תדירות</td><td data-lang="en">Select frequency</td><td data-lang="he">רק אפשרות אחת פעילה. שדה המספר מופיע לצד יום/שבוע/חודש/שנה; בחירה שבועית מציגה שבעה ימים לבחירה.</td><td data-lang="en">One frequency is active. The interval field sits next to day/week/month/year; weekly selection reveals seven weekdays.</td></tr>
+      <tr><td data-lang="he">בחירת משך</td><td data-lang="en">Select duration</td><td data-lang="he">“לתמיד”, “מספר מופעים” עם קלט מספרי, או “עד תאריך” עם בורר תאריך. משך מוצג רק עבור חזרה.</td><td data-lang="en">Forever, Specific number of times with a numeric field, or Until with a date picker. Duration appears only when repeating.</td></tr>
+      <tr><td data-lang="he">חזרה לטופס</td><td data-lang="en">Return to form</td><td data-lang="he">השורה “חזרה” מציגה תקציר קריא; שמירת ההרשאה עצמה מתבצעת בטופס הראשי.</td><td data-lang="en">The Repeat row shows a readable summary; the grant is saved from the main form.</td></tr>
+    </tbody></table></div>
+    <div class="grid-3">
+      <article class="card"><h3 data-lang="he">יצירת הרשאה</h3><h3 data-lang="en">Create grant</h3><p data-lang="he">בחירת שער, אורח, תאריך התחלה, שעות, חזרה והערה אופציונלית. טופס ההרשאה מציג תקציר קריא לפני השליחה.</p><p data-lang="en">Gate, guest, start date, hours, repeat settings and optional note, followed by a readable summary before sending.</p></article>
+      <article class="card"><h3 data-lang="he">מסך האורח</h3><h3 data-lang="en">Guest view</h3><p data-lang="he">הכרטיס מציג “זמין עכשיו” בירוק או את חלון הגישה הבא. לחיצה מחוץ לזמן אינה מנסה לפתוח ומציגה סיבה ברורה.</p><p data-lang="en">The card shows “Available now” or the next access window. An out-of-window tap shows a clear reason.</p></article>
+      <article class="card"><h3 data-lang="he">ניהול הרשאות</h3><h3 data-lang="en">Manage grants</h3><p data-lang="he">רשימה לפי שער עם סטטוס, אורח, לוח זמנים ושימוש אחרון. פעולות: עריכה, השהיה, חידוש וביטול.</p><p data-lang="en">Per-gate list with state, guest, schedule and last use. Actions: edit, pause, resume and revoke.</p></article>
+    </div>
+    <div class="callout good"><p data-lang="he"><strong>טקסט הסיכום:</strong> “לדנה תהיה גישה לשער הראשי בכל יום חמישי, 08:00–14:00, החל מ־1 באוקטובר 2026, עד לביטול.”</p><p data-lang="en"><strong>Summary copy:</strong> “Dana can access Main Gate every Thursday, 08:00–14:00, starting 1 October 2026, until revoked.”</p></div>
+    <h3><span data-lang="he">הודעות מרכזיות</span><span data-lang="en">Key messages</span></h3>
+    <div class="table-wrap"><table><thead><tr><th>Case</th><th>English UI</th><th data-lang="he">הנחיה</th><th data-lang="en">Guidance</th></tr></thead><tbody>
+      <tr><td><code>ACTIVE_NOW</code></td><td>Access available until 14:00</td><td data-lang="he">ירוק; כפתור פתיחה פעיל</td><td data-lang="en">Green; open enabled</td></tr>
+      <tr><td><code>OUTSIDE_SCHEDULE</code></td><td>Access is available Thursday, 08:00–14:00</td><td data-lang="he">כפתור מושבת והחלון הבא מוצג</td><td data-lang="en">Disabled button and next window</td></tr>
+      <tr><td><code>PAUSED</code></td><td>This access has been paused by the owner</td><td data-lang="he">אין להבטיח מועד חידוש</td><td data-lang="en">Do not promise a resume time</td></tr>
+      <tr><td><code>REVOKED</code></td><td>This access is no longer active</td><td data-lang="he">הכרטיס מוסר לאחר אישור הסנכרון</td><td data-lang="en">Remove card after sync confirmation</td></tr>
+    </tbody></table></div>
+    <h3><span data-lang="he">החלטות לאישור לפני מימוש</span><span data-lang="en">Decisions to confirm before implementation</span></h3>
+    <div class="grid-2">
+      <article class="card"><h3 data-lang="he">יום חסר בחודש</h3><h3 data-lang="en">Missing day in a month</h3><p data-lang="he">אם נבחר 31 בחודש, האם בחודש קצר מדלגים על המופע או מעבירים אותו ליום האחרון? הצעה: לדלג, ולהציג זאת בתקציר לפני שמירה.</p><p data-lang="en">If the start date is the 31st, should a shorter month be skipped or use its last day? Proposal: skip and explain this in the summary.</p></article>
+      <article class="card"><h3 data-lang="he">משמעות “מספר פעמים”</h3><h3 data-lang="en">Meaning of “number of times”</h3><p data-lang="he">הצעה: מספר חלונות ההרשאה המתוזמנים. גם אם האורח פתח כמה פעמים באותו חלון, הוא נספר כמופע אחד. מכסת פתיחות היא תכונה אחרת.</p><p data-lang="en">Proposal: count scheduled access windows. Multiple opens in one window count as one occurrence. An open quota is a separate feature.</p></article>
+      <article class="card"><h3 data-lang="he">תאריך 29 בפברואר</h3><h3 data-lang="en">29 February</h3><p data-lang="he">בהרשאה שנתית שמתחילה ב־29 בפברואר, הצעה לדלג על שנה שאינה מעוברת.</p><p data-lang="en">For yearly access starting on 29 February, proposal: skip non-leap years.</p></article>
+      <article class="card"><h3 data-lang="he">“ללא חזרה” במוצר</h3><h3 data-lang="en">Don't repeat in the product</h3><p data-lang="he">הצעה: אותו טופס יוצר גם הרשאה חד־פעמית לחלון תאריך ושעה אחד. יש לאשר שהיא מחליפה את מסלול ההזמנה החד־פעמית הקיים או מתקיימת לצדו.</p><p data-lang="en">Proposal: the same form can create a one-time dated access window. Confirm whether it replaces or coexists with the current one-time invitation flow.</p></article>
+    </div>
+  </section>
+
+  <section class="section" id="data">
+    <div class="section-head"><div><div class="kicker">06 · Domain model</div><h2><span data-lang="he">מודל נתונים</span><span data-lang="en">Data model</span></h2></div><span class="status target">PROPOSED CONTRACT</span></div>
+    <div class="code-block"><div class="code-title"><span>RepeatAccessGrant</span><span>JSON · weekly example</span></div><pre><code>{
+  "id": "rep_01K...",
+  "gateId": "gate_123",
+  "ownerUserId": "user_owner",
+  "guestUserId": "user_guest",
+  "guestPhoneE164": "+972506357050",
+  "status": "ACTIVE",
+  "schedule": {
+    "timezone": "Asia/Jerusalem",
+    "startDate": "2026-10-01",
+    "startTime": "08:00",
+    "endTime": "14:00",
+    "repeat": {
+      "frequency": "WEEK",
+      "interval": 1,
+      "weekdays": ["THU"],
+      "end": { "mode": "FOREVER" }
+    }
+  },
+  "version": 3,
+  "createdAt": "2026-09-22T09:10:00Z",
+  "updatedAt": "2026-09-22T09:10:00Z",
+  "revokedAt": null
+}</code></pre></div>
+    <div class="callout"><p data-lang="he"><strong><code>version</code> הוא שדה חובה.</strong> כל שינוי מגדיל אותו. השער לעולם אינו מחליף מדיניות חדשה בעותק ישן שהגיע באיחור.</p><p data-lang="en"><strong><code>version</code> is required.</strong> Every mutation increments it. A gate must never replace a newer policy with a delayed older copy.</p></div>
+    <div class="table-wrap"><table><thead><tr><th>Field</th><th>Required</th><th data-lang="he">כלל</th><th data-lang="en">Rule</th></tr></thead><tbody>
+      <tr><td><code>guestPhoneE164</code></td><td>Yes</td><td data-lang="he">יעד ההזמנה; לאחר claim ההרשאה נקשרת גם ל־user ID.</td><td data-lang="en">Invitation target; after claim it is also bound to user ID.</td></tr>
+      <tr><td><code>startDate</code></td><td>Yes</td><td data-lang="he">התאריך המקומי המוקדם ביותר שממנו ההרשאה יכולה לחול, ועוגן למחזור.</td><td data-lang="en">Earliest eligible local date and recurrence anchor.</td></tr>
+      <tr><td><code>repeat.frequency</code></td><td>Yes</td><td data-lang="he"><code>NONE</code>, <code>DAY</code>, <code>WEEK</code>, <code>MONTH</code> או <code>YEAR</code>.</td><td data-lang="en"><code>NONE</code>, <code>DAY</code>, <code>WEEK</code>, <code>MONTH</code> or <code>YEAR</code>.</td></tr>
+      <tr><td><code>repeat.interval</code></td><td>If repeating</td><td data-lang="he">מספר שלם גדול מאפס; אינו נדרש כאשר <code>frequency=NONE</code>.</td><td data-lang="en">Positive integer; omitted for <code>frequency=NONE</code>.</td></tr>
+      <tr><td><code>repeat.weekdays</code></td><td>If weekly</td><td data-lang="he">מערך ייחודי ולא ריק של SUN…SAT; רלוונטי רק ל־<code>WEEK</code>.</td><td data-lang="en">Unique, non-empty SUN…SAT array; only for <code>WEEK</code>.</td></tr>
+      <tr><td><code>repeat.end</code></td><td>If repeating</td><td data-lang="he"><code>FOREVER</code>, <code>COUNT</code> עם <code>occurrences</code> חיובי, או <code>UNTIL</code> עם <code>untilDate</code>.</td><td data-lang="en"><code>FOREVER</code>, <code>COUNT</code> with positive <code>occurrences</code>, or <code>UNTIL</code> with <code>untilDate</code>.</td></tr>
+      <tr><td><code>startTime/endTime</code></td><td>Yes</td><td data-lang="he">פורמט HH:mm; זמן הסיום חייב להיות מאוחר מההתחלה.</td><td data-lang="en">HH:mm; end must be later than start.</td></tr>
+      <tr><td><code>timezone</code></td><td>Yes</td><td data-lang="he">מזהה IANA תקין.</td><td data-lang="en">Valid IANA identifier.</td></tr>
+      <tr><td><code>untilDate</code></td><td>If UNTIL</td><td data-lang="he">תאריך מקומי כולל; לאחר סוף היום ההרשאה פגה.</td><td data-lang="en">Inclusive local date; the grant expires after that day.</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="section" id="api">
+    <div class="section-head"><div><div class="kicker">07 · Service contract</div><h2>API &amp; synchronization</h2></div><span class="status gap">TO BUILD</span></div>
+    <div class="table-wrap"><table><thead><tr><th>Method</th><th>Endpoint</th><th data-lang="he">תפקיד</th><th data-lang="en">Purpose</th></tr></thead><tbody>
+      <tr><td>POST</td><td><code>/v1/repeat-access</code></td><td data-lang="he">יצירה ושליחת הזמנה</td><td data-lang="en">Create and send invitation</td></tr>
+      <tr><td>POST</td><td><code>/v1/repeat-access/{id}/claim</code></td><td data-lang="he">קבלה חד־פעמית של ההרשאה</td><td data-lang="en">One-time claim</td></tr>
+      <tr><td>PATCH</td><td><code>/v1/repeat-access/{id}</code></td><td data-lang="he">עריכת תזמון או פרטים</td><td data-lang="en">Edit schedule or metadata</td></tr>
+      <tr><td>POST</td><td><code>/v1/repeat-access/{id}/pause</code></td><td data-lang="he">השהיה</td><td data-lang="en">Pause</td></tr>
+      <tr><td>POST</td><td><code>/v1/repeat-access/{id}/resume</code></td><td data-lang="he">חידוש</td><td data-lang="en">Resume</td></tr>
+      <tr><td>DELETE</td><td><code>/v1/repeat-access/{id}</code></td><td data-lang="he">ביטול בלתי הפיך</td><td data-lang="en">Irreversible revoke</td></tr>
+      <tr><td>POST</td><td><code>/v1/gates/{gateId}/authorize-open</code></td><td data-lang="he">בדיקת הרשאה והפקת אישור פתיחה קצר־חיים</td><td data-lang="en">Authorize and issue a short-lived open proof</td></tr>
+    </tbody></table></div>
+    <h3><span data-lang="he">תשובת הרשאה</span><span data-lang="en">Authorization response</span></h3>
+    <div class="code-block"><div class="code-title"><span>authorize-open</span><span>JSON</span></div><pre><code>{
+  "allowed": false,
+  "reason": "OUTSIDE_SCHEDULE",
+  "serverTime": "2026-09-22T18:30:00Z",
+  "nextWindow": {
+    "startsAt": "2026-09-24T05:00:00Z",
+    "endsAt": "2026-09-24T11:00:00Z"
+  }
+}</code></pre></div>
+    <p data-lang="he">סיבות סירוב תקניות: <code>OUTSIDE_SCHEDULE</code>, <code>NOT_STARTED</code>, <code>EXPIRED</code>, <code>PAUSED</code>, <code>REVOKED</code>, <code>IDENTITY_MISMATCH</code>, <code>CLOCK_UNTRUSTED</code>, <code>GATE_OFFLINE</code>.</p>
+    <p data-lang="en">Canonical denial reasons: <code>OUTSIDE_SCHEDULE</code>, <code>NOT_STARTED</code>, <code>EXPIRED</code>, <code>PAUSED</code>, <code>REVOKED</code>, <code>IDENTITY_MISMATCH</code>, <code>CLOCK_UNTRUSTED</code>, <code>GATE_OFFLINE</code>.</p>
+    <div class="callout warn"><p data-lang="he"><strong>עבודה אופליין:</strong> אם השער חייב לעבוד ללא אינטרנט, הוא יקבל עותק חתום, ממוספר ובעל תוקף קצר של ההרשאות. רשימת ביטולים ותיקונים מסתנכרנת בעדיפות גבוהה. אם הזמן או טריות המדיניות אינם ניתנים לאימות — אין פתיחה.</p><p data-lang="en"><strong>Offline operation:</strong> if required, the gate receives signed, versioned, short-lived policy snapshots. Revocations and edits sync at high priority. If time or policy freshness cannot be trusted, deny.</p></div>
+  </section>
+
+  <section class="section" id="security">
+    <div class="section-head"><div><div class="kicker">08 · Security & audit</div><h2><span data-lang="he">אבטחה, פרטיות והיסטוריה</span><span data-lang="en">Security, privacy and audit</span></h2></div></div>
+    <div class="grid-2">
+      <article class="card"><h3 data-lang="he">קישור ההזמנה</h3><h3 data-lang="en">Invitation link</h3><ul><li data-lang="he">טוקן אקראי חד־פעמי עם TTL קצר.</li><li data-lang="en">Random, one-time token with short TTL.</li><li data-lang="he">נעילה למספר הטלפון שאליו נשלח.</li><li data-lang="en">Bound to the target phone number.</li><li data-lang="he">אין פרטי שער רגישים בתוך ה־URL.</li><li data-lang="en">No sensitive gate data in the URL.</li><li data-lang="he">שליחה מחדש מבטלת את הטוקן הקודם.</li><li data-lang="en">Resend invalidates the previous token.</li></ul></article>
+      <article class="card"><h3 data-lang="he">החלטת פתיחה</h3><h3 data-lang="en">Open decision</h3><ul><li data-lang="he">זהות משתמש מאומתת והוכחת החזקת הרשאה.</li><li data-lang="en">Authenticated identity and grant proof.</li><li data-lang="he">בדיקת שער, סטטוס, גרסה, תדירות, משך וחלון השעות.</li><li data-lang="en">Gate, state, version, frequency, duration and time window checked.</li><li data-lang="he">מניעת replay לאישור פתיחה.</li><li data-lang="en">Replay protection on open proof.</li><li data-lang="he">Rate limit לבקשות חוזרות.</li><li data-lang="en">Rate limit repeated attempts.</li></ul></article>
+    </div>
+    <h3><span data-lang="he">אירועי Audit</span><span data-lang="en">Audit events</span></h3>
+    <div class="table-wrap"><table><thead><tr><th>Event</th><th data-lang="he">מתי נרשם</th><th data-lang="en">Recorded when</th><th data-lang="he">שדות מרכזיים</th><th data-lang="en">Key fields</th></tr></thead><tbody>
+      <tr><td><code>GRANT_CREATED</code></td><td data-lang="he">יצירה</td><td data-lang="en">Created</td><td colspan="2"><code>actorId, guest, gateId, schedule, version</code></td></tr>
+      <tr><td><code>GRANT_CLAIMED</code></td><td data-lang="he">האורח קיבל</td><td data-lang="en">Guest claimed</td><td colspan="2"><code>guestUserId, claimedAt</code></td></tr>
+      <tr><td><code>GRANT_CHANGED</code></td><td data-lang="he">עריכה/השהיה/חידוש</td><td data-lang="en">Edit/pause/resume</td><td colspan="2"><code>before, after, actorId, version</code></td></tr>
+      <tr><td><code>ACCESS_DECIDED</code></td><td data-lang="he">כל ניסיון פתיחה</td><td data-lang="en">Every open attempt</td><td colspan="2"><code>allowed, reason, evaluatedAt, gateId, grantId</code></td></tr>
+      <tr><td><code>GRANT_REVOKED</code></td><td data-lang="he">ביטול</td><td data-lang="en">Revoked</td><td colspan="2"><code>actorId, revokedAt, lastKnownGateSync</code></td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="section" id="edge-cases">
+    <div class="section-head"><div><div class="kicker">09 · Failure modes</div><h2><span data-lang="he">מקרי קצה</span><span data-lang="en">Edge cases</span></h2></div></div>
+    <div class="grid-3">
+      <article class="card"><h3 data-lang="he">הטלפון הוחלף</h3><h3 data-lang="en">Phone changed</h3><p data-lang="he">ההרשאה קשורה לחשבון, לא להתקנה. התחברות מאומתת במכשיר החדש מחזירה אותה בהתאם למדיניות המכשירים.</p><p data-lang="en">The grant belongs to the account, not an install. Verified sign-in restores it under device policy.</p></article>
+      <article class="card"><h3 data-lang="he">אותו מספר כבר רשום</h3><h3 data-lang="en">Existing account</h3><p data-lang="he">ההזמנה מצטרפת לחשבון הקיים רק לאחר אימות המספר; אין יצירת משתמש כפול.</p><p data-lang="en">The grant joins the existing account after phone verification; no duplicate user.</p></article>
+      <article class="card"><h3 data-lang="he">עריכה בזמן חלון פעיל</h3><h3 data-lang="en">Edit during window</h3><p data-lang="he">הגרסה החדשה קובעת לבקשה הבאה. פתיחה שכבר אושרה אינה “נסגרת”, אך אישור שלא נוצל פג תוך שניות.</p><p data-lang="en">The new version governs the next attempt. A completed open is not undone; unused proofs expire in seconds.</p></article>
+      <article class="card"><h3 data-lang="he">אין רשת</h3><h3 data-lang="en">No network</h3><p data-lang="he">מותר רק אם לשער יש זמן אמין ומדיניות חתומה שעדיין טרייה. אחרת מתקבל <code>GATE_OFFLINE</code>.</p><p data-lang="en">Allowed only with trusted time and a fresh signed policy; otherwise <code>GATE_OFFLINE</code>.</p></article>
+      <article class="card"><h3 data-lang="he">שעון קיץ</h3><h3 data-lang="en">DST transition</h3><p data-lang="he">מחשבים לפי timezone מקומי. בשעה כפולה שתי ההופעות נחשבות בתוך החלון; בשעה חסרה עוברים לזמן החוקי הבא.</p><p data-lang="en">Evaluate in local timezone. Repeated times both qualify; nonexistent times advance to the next valid instant.</p></article>
+      <article class="card"><h3 data-lang="he">בעלים איבד הרשאת Admin</h3><h3 data-lang="en">Owner loses Admin</h3><p data-lang="he">מדיניות מוצר: ההרשאות שיצר מושהות אוטומטית עד שאדמין פעיל מאשר או מבטל אותן.</p><p data-lang="en">Product rule: grants they created are auto-paused until an active admin confirms or revokes them.</p></article>
+    </div>
+  </section>
+
+  <section class="section" id="acceptance">
+    <div class="section-head"><div><div class="kicker">10 · Definition of done</div><h2><span data-lang="he">קריטריוני קבלה</span><span data-lang="en">Acceptance criteria</span></h2></div><span class="status target">PROPOSED SCOPE</span></div>
+    <div class="checklist">
+      <div class="check"><span data-lang="he">שורת “חזרה” בטופס פותחת מסך עם חמש אפשרויות התדירות ושלוש אפשרויות המשך.</span><span data-lang="en">The Repeat row opens a screen with five frequency choices and three duration choices.</span></div>
+      <div class="check"><span data-lang="he">“ללא חזרה” יוצר חלון יחיד בתאריך ובשעות שנבחרו.</span><span data-lang="en">Don't repeat creates one window on the selected date and hours.</span></div>
+      <div class="check"><span data-lang="he">כל N ימים, שבועות, חודשים ושנים מחושב מתאריך התחלה מקומי; בחירה שבועית תומכת בכמה ימים.</span><span data-lang="en">Every N days, weeks, months and years is anchored to the local start date; weekly mode allows multiple weekdays.</span></div>
+      <div class="check"><span data-lang="he">לתמיד, מספר מופעים ועד תאריך מגבילים את חלונות הגישה כפי שמוצג בתקציר.</span><span data-lang="en">Forever, occurrence count and until date constrain access windows as shown in the summary.</span></div>
+      <div class="check"><span data-lang="he">Admin יכול ליצור הרשאה ליום חמישי 08:00–14:00 ולשלוח אותה פעם אחת.</span><span data-lang="en">Admin creates Thursday 08:00–14:00 access and sends it once.</span></div>
+      <div class="check"><span data-lang="he">האורח מקבל את ההרשאה אחרי אימות זהות ורואה אותה באפליקציה.</span><span data-lang="en">Guest claims after identity verification and sees it in the app.</span></div>
+      <div class="check"><span data-lang="he">פתיחה ביום חמישי ב־10:00 מצליחה.</span><span data-lang="en">Opening Thursday at 10:00 succeeds.</span></div>
+      <div class="check"><span data-lang="he">פתיחה ביום רביעי או בחמישי ב־14:00 נדחית עם <code>OUTSIDE_SCHEDULE</code>.</span><span data-lang="en">Wednesday or Thursday at 14:00 is denied with <code>OUTSIDE_SCHEDULE</code>.</span></div>
+      <div class="check"><span data-lang="he">עריכת השעות מתעדכנת ללא שליחת קישור חדש.</span><span data-lang="en">Editing hours applies without a new invitation.</span></div>
+      <div class="check"><span data-lang="he">Pause ו־Revoke חוסמים את ניסיון הפתיחה הבא.</span><span data-lang="en">Pause and revoke block the next open attempt.</span></div>
+      <div class="check"><span data-lang="he">החלטות נבדקות נכון במעבר שעון קיץ וב־timezone של השער.</span><span data-lang="en">DST and gate-timezone decisions are correct.</span></div>
+      <div class="check"><span data-lang="he">כל ניסיון פתיחה וכל שינוי נרשמים ב־Audit.</span><span data-lang="en">Every attempt and mutation is audited.</span></div>
+      <div class="check"><span data-lang="he">קישור שכבר התקבל, פג או הוחלף אינו ניתן לשימוש חוזר.</span><span data-lang="en">Claimed, expired or replaced links cannot be reused.</span></div>
+      <div class="check"><span data-lang="he">שער עם זמן לא אמין מסרב לפתוח.</span><span data-lang="en">A gate with untrusted time denies access.</span></div>
+    </div>
+    <h3><span data-lang="he">מחוץ ל־MVP</span><span data-lang="en">Out of MVP</span></h3>
+    <p data-lang="he">חריגים לפי תאריך (“לא השבוע”), חגים, כמה חלונות באותו יום, מכסת פתיחות, פתיחה אוטומטית, הרשאה לקבוצה של אורחים וייבוא מלוח שנה.</p>
+    <p data-lang="en">Date exceptions, holidays, multiple daily windows, open quotas, automatic opening, guest groups and calendar import.</p>
+  </section>
+
+  <section class="section" id="delivery">
+    <div class="section-head"><div><div class="kicker">11 · Delivery plan</div><h2><span data-lang="he">סדר מימוש מומלץ</span><span data-lang="en">Recommended delivery order</span></h2></div></div>
+    <div class="grid-4">
+      <article class="card"><div class="number">1</div><h3>Domain</h3><p data-lang="he">מודל, ולידציה, evaluator טהור ובדיקות timezone/DST.</p><p data-lang="en">Model, validation, pure evaluator and timezone/DST tests.</p></article>
+      <article class="card"><div class="number">2</div><h3>Service</h3><p data-lang="he">CRUD, claim, authorization, audit וסנכרון ביטולים.</p><p data-lang="en">CRUD, claim, authorization, audit and revocation sync.</p></article>
+      <article class="card"><div class="number">3</div><h3>App</h3><p data-lang="he">יצירה, קבלת הזמנה, כרטיס אורח ומסך ניהול.</p><p data-lang="en">Create, claim, guest card and management screens.</p></article>
+      <article class="card"><div class="number">4</div><h3>Gate</h3><p data-lang="he">אכיפה מקומית/מקוונת, שעון אמין, replay protection וטלמטריה.</p><p data-lang="en">Local/online enforcement, trusted clock, replay protection and telemetry.</p></article>
+    </div>
+    <div class="callout bad"><p data-lang="he"><strong>תנאי השקה:</strong> אין להפעיל את הפיצ'ר בפרודקשן כאשר האכיפה קיימת רק באפליקציה. משתמש יכול לשנות שעון, להריץ לקוח ישן או לשלוח פקודה ישירות.</p><p data-lang="en"><strong>Launch gate:</strong> do not ship when enforcement exists only in the app. A user can alter device time, run an old client or send a command directly.</p></div>
+  </section>
+
+  <footer><span data-lang="he">WIFIGATE Repeat Access · אפיון דו־לשוני מקצה לקצה · עודכן 25 בספטמבר 2026 · ללא credentials אמיתיים</span><span data-lang="en">WIFIGATE Repeat Access · bilingual end-to-end specification · updated 25 September 2026 · contains no real credentials</span></footer>
+</div>
+<script>
+(function(){
+  const root=document.documentElement;
+  const languageButtons=[...document.querySelectorAll('[data-set-lang]')];
+  function setLanguage(language){
+    root.dataset.uiLang=language;
+    root.dir=language==='he'?'rtl':'ltr';
+    root.lang=language;
+    languageButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.setLang===language)));
+    try{localStorage.setItem('wifigate-spec-language',language)}catch(_error){}
+  }
+  languageButtons.forEach(button=>button.addEventListener('click',()=>setLanguage(button.dataset.setLang)));
+  document.getElementById('theme-toggle').addEventListener('click',()=>{
+    const next=root.dataset.theme==='dark'?'light':'dark';
+    root.dataset.theme=next;
+    try{localStorage.setItem('wifigate-spec-theme',next)}catch(_error){}
+  });
+  try{
+    const storedLanguage=localStorage.getItem('wifigate-spec-language');
+    const storedTheme=localStorage.getItem('wifigate-spec-theme');
+    if(storedLanguage==='he'||storedLanguage==='en')setLanguage(storedLanguage);
+    if(storedTheme==='light'||storedTheme==='dark')root.dataset.theme=storedTheme;
+  }catch(_error){}
+})();
+</script>
+</body>
+</html>

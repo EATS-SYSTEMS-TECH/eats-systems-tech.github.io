@@ -3,11 +3,26 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "dev": "npm run build:api && node scripts/serve.mjs",
+        "build:api": "esbuild api/index.ts --bundle --format=esm --platform=browser --target=es2022 --outfile=js/api/index.js --minify",
+        "typecheck": "tsc --noEmit",
+        "test:api": "npm run build:api && npm run typecheck && node --test scripts/host-portal.test.mjs",
         "build:locales": "node scripts/build-localized-site.mjs",
-        "build:images": "node scripts/build-niche-images.mjs"
+        "build:images": "node scripts/build-niche-images.mjs",
+        "staging": "npm run build:api && node scripts/start-staging.mjs",
+        "test:staging": "npm run build:api && node scripts/run-staging-tests.mjs"
     },
     "devDependencies": {
         "cheerio": "^1.2.0",
-        "sharp": "^0.35.3"
+        "esbuild": "^0.28.2",
+        "firebase": "^12.19.0",
+        "firebase-admin": "^13.6.0",
+        "firebase-tools": "^15.31.0",
+        "playwright-core": "^1.63.0",
+        "sharp": "^0.35.5",
+        "typescript": "^7.0.2"
+    },
+    "dependencies": {
+        "axios": "^1.20.0"
     }
 }

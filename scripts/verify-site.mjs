@@ -168,8 +168,33 @@ async function main() {
       await checkResolvable($, filePath, "script[src]", "src", "script");
 
       if (nicheKeys.includes(pageKey)) {
-        const bullets = $("#niche-benefits-list li").length;
-        if (bullets < 5) problems.push(`${rel}: only ${bullets} benefit bullets rendered`);
+        // The benefits grid is a 3x3 square: eight bullets plus one inert tile
+        // in the middle cell. Any other count turns the square into a ragged
+        // block, and the gap tile is what makes the hole deliberate.
+        const bullets = $("#niche-benefits-list li").not(".niche-benefit--gap").length;
+        if (bullets !== 8) problems.push(`${rel}: ${bullets} benefit bullets rendered, expected 8`);
+        const gaps = $("#niche-benefits-list .niche-benefit--gap").length;
+        if (gaps !== 1) problems.push(`${rel}: ${gaps} centre gap tiles, expected 1`);
+
+        // Hero lead + exactly three icon highlights carry the page now that the
+        // long overview paragraph is gone.
+        if (!$("#niche-hero-lead").text().trim()) problems.push(`${rel}: hero lead is empty`);
+        const highlights = $(".niche-highlight").length;
+        if (highlights !== 3) problems.push(`${rel}: ${highlights} highlights, expected 3`);
+        const highlightIcons = $(".niche-highlight__icon svg").length;
+        if (highlightIcons !== 3) {
+          problems.push(`${rel}: ${highlightIcons} highlight icons, expected 3`);
+        }
+        $(".niche-highlight").each((i, el) => {
+          if (!$(el).find(".niche-highlight__title").text().trim()) {
+            problems.push(`${rel}: highlight ${i + 1} has no title`);
+          }
+          if (!$(el).find(".niche-highlight__text").text().trim()) {
+            problems.push(`${rel}: highlight ${i + 1} has no text`);
+          }
+        });
+        if ($(".niche-overview").length) problems.push(`${rel}: overview section is back`);
+
         const alt = $("#niche-image").attr("alt") || "";
         if (!alt.trim()) problems.push(`${rel}: niche hero image has empty alt`);
       } else if (pageKey === "home") {
@@ -259,6 +284,89 @@ async function main() {
           problems.push(`${rel}: redirect page is missing noindex`);
         }
       }
+    }
+  }
+
+  // Nav + localised section copy. Both guard the same failure mode: the build
+  // addresses homepage sections by id, and cheerio silently does nothing when a
+  // selector stops matching, so renaming a section id can break anchors or drop
+  // a locale's copy without failing the build.
+  const rtlScript = /[֐-׿؀-ۿ]/;
+  for (const locale of localeOptions) {
+    const file = pageFile(locale, "home");
+    let html;
+    try {
+      html = await fs.readFile(file, "utf8");
+    } catch {
+      continue; // Already reported above.
+    }
+    const $ = cheerio.load(html);
+
+    // 1. Every in-page nav link must land on an element that exists.
+    $(".topbar-nav .nav__link").each((_, el) => {
+      const href = $(el).attr("href") || "";
+      const hashIndex = href.indexOf("#");
+      if (hashIndex === -1) return;
+      const id = href.slice(hashIndex + 1);
+      if (!id || !/^[A-Za-z][\w-]*$/.test(id)) return;
+      if (!$(`#${id}`).length) {
+        problems.push(`${file}: nav link "${$(el).text().trim()}" points at #${id}, which does not exist`);
+      }
+    });
+
+    // 2. In an RTL locale, a section heading still in Latin script means the
+    //    build wrote the template's English default instead of the translation.
+    if (rtlLocales.has(locale)) {
+      $("#main-content .section__eyebrow, #main-content .guest-invites__eyebrow").each((_, el) => {
+        const text = $(el).text().trim();
+        if (!text || rtlScript.test(text)) return;
+        // Brand names legitimately stay in Latin script.
+        if (/^(WIFIGATE|WiFi Gate)[\w\s]*$/i.test(text)) return;
+        const section = $(el).closest("section").attr("id") || "?";
+        problems.push(`${locale}: section#${section} eyebrow is untranslated ("${text}")`);
+      });
+    }
+  }
+
+  // Footer: every page type in a locale must render the exact same footer.
+  // It comes from templates/partials/site-footer.template.html, so any
+  // difference here means a template stopped using the shared partial or a
+  // builder is writing footer copy of its own.
+  for (const locale of localeOptions) {
+    const shapes = new Map();
+
+    for (const pageKey of interactivePages) {
+      const file = pageFile(locale, pageKey);
+      let html;
+      try {
+        html = await fs.readFile(file, "utf8");
+      } catch {
+        continue; // Missing pages are already reported above.
+      }
+
+      const start = html.indexOf('<footer class="site-footer"');
+      if (start === -1) {
+        problems.push(`${file}: no site footer`);
+        continue;
+      }
+
+      const footer = html.slice(start, html.indexOf("</footer>", start) + "</footer>".length);
+      if (!footer.includes("site-footer__whatsapp")) {
+        problems.push(`${file}: footer is missing the WhatsApp Business link`);
+      }
+
+      // Legal hrefs and the logo src legitimately vary with page depth.
+      const shape = footer
+        .replace(/href="[^"]*(?:terms-and-conditions|privacy-policy|cookies)\//g, 'href="LEGAL/')
+        .replace(/src="[^"]*WIFIGATE_LOGO_NO_BG\.png"/g, 'src="LOGO"');
+
+      if (!shapes.has(shape)) shapes.set(shape, []);
+      shapes.get(shape).push(pageKey);
+    }
+
+    if (shapes.size > 1) {
+      const groups = [...shapes.values()].map((keys) => keys.join("+")).join(" vs ");
+      problems.push(`${locale}: footer differs between page types (${groups})`);
     }
   }
 
