@@ -13,14 +13,14 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": ""
     },
     "contents": "Contents",
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -118,7 +118,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -148,7 +148,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Este documento está disponible en inglés. La versión en inglés es la versión jurídicamente vinculante."
     },
     "contents": "Contents",
@@ -156,7 +156,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -254,7 +254,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -284,7 +284,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Ce document est disponible en anglais. La version anglaise est la version juridiquement contraignante."
     },
     "contents": "Contents",
@@ -292,7 +292,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -390,7 +390,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -420,7 +420,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Dieses Dokument ist auf Englisch verfügbar. Die englische Fassung ist die rechtsverbindliche Fassung."
     },
     "contents": "Contents",
@@ -428,7 +428,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -526,7 +526,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -556,14 +556,14 @@
       "title": "מדיניות פרטיות",
       "subtitle": "מדיניות פרטיות זו מסבירה איזה מידע אישי WIFIGATE מעבדת, לשם מה, עם מי הוא משותף, כמה זמן הוא נשמר, ואילו בחירות וזכויות עומדות לרשותכם.",
       "updated": "תאריך תחילה: 4 באוקטובר 2026",
-      "owner": "המפעילה: EATS SYSTEMS TECH",
+      "owner": "המפעילה: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": ""
     },
     "contents": "תוכן העניינים",
     "s": {
       "who-we-are": {
         "title": "1. מי אנחנו ועל מה חלה מדיניות זו",
-        "b0": "WIFIGATE הוא מוצר חכם לבקרת כניסה, הכולל את אפליקציית WIFIGATE ל‑Android ול‑iOS, את בקר השער של WIFIGATE המותקן בשער, בדלת או במחסום, את האתר wifigate.io ואת פורטל האינטרנט של WIFIGATE. המוצר מופעל על ידי EATS SYSTEMS TECH (\"WIFIGATE\", \"אנחנו\"). ניתן לפנות אלינו בכתובת support@wifigate.io.",
+        "b0": "WIFIGATE הוא מוצר חכם לבקרת כניסה, הכולל את אפליקציית WIFIGATE ל‑Android ול‑iOS, את בקר השער של WIFIGATE המותקן בשער, בדלת או במחסום, את האתר wifigate.io ואת פורטל האינטרנט של WIFIGATE. המוצר מופעל על ידי EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"אנחנו\"). ניתן לפנות אלינו בכתובת support@wifigate.io.",
         "b1": "מדיניות זו חלה על מידע אישי המעובד באמצעות האפליקציה, הבקר, האתר והפורטל. היא אינה חלה על אתרים או שירותים של צדדים שלישיים שיש אליהם קישור מהמוצר, ואשר להם מדיניות משלהם."
       },
       "summary": {
@@ -661,7 +661,7 @@
       },
       "contact": {
         "title": "14. יצירת קשר",
-        "b0": "בעלת השליטה במידע: EATS SYSTEMS TECH",
+        "b0": "בעלת השליטה במידע: EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions",
         "b1": "דוא\"ל: support@wifigate.io",
         "b2": "מדיניות זו מתפרסמת באנגלית ובעברית, ובדפים בשפות אחרות היא עשויה להופיע באנגלית. במקרה של סתירה בין הנוסחים, הנוסח האנגלי גובר.",
         "b3": "למדיניות העוגיות",
@@ -691,7 +691,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Dit document is beschikbaar in het Engels. De Engelse versie is de juridisch bindende versie."
     },
     "contents": "Contents",
@@ -699,7 +699,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -797,7 +797,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -827,7 +827,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Questo documento è disponibile in inglese. La versione inglese è quella giuridicamente vincolante."
     },
     "contents": "Contents",
@@ -835,7 +835,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -933,7 +933,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -963,7 +963,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Este documento está disponível em inglês. A versão em inglês é a versão juridicamente vinculativa."
     },
     "contents": "Contents",
@@ -971,7 +971,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -1069,7 +1069,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -1099,7 +1099,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Ten dokument jest dostępny w języku angielskim. Wersja angielska jest wersją prawnie wiążącą."
     },
     "contents": "Contents",
@@ -1107,7 +1107,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -1205,7 +1205,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -1235,7 +1235,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Dette dokumentet er tilgjengelig på engelsk. Den engelske versjonen er den juridisk bindende versjonen."
     },
     "contents": "Contents",
@@ -1243,7 +1243,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -1341,7 +1341,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -1371,7 +1371,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Tento dokument je k dispozici v angličtině. Právně závazná je anglická verze."
     },
     "contents": "Contents",
@@ -1379,7 +1379,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -1477,7 +1477,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -1507,7 +1507,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Этот документ доступен на английском языке. Юридически обязывающей является английская версия."
     },
     "contents": "Contents",
@@ -1515,7 +1515,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -1613,7 +1613,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -1643,7 +1643,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Цей документ доступний англійською мовою. Юридично обов'язковою є англійська версія."
     },
     "contents": "Contents",
@@ -1651,7 +1651,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -1749,7 +1749,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -1779,7 +1779,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Bu belge İngilizce olarak sunulmaktadır. Hukuken bağlayıcı olan İngilizce sürümdür."
     },
     "contents": "Contents",
@@ -1787,7 +1787,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -1885,7 +1885,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -1915,7 +1915,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "هذا المستند متاح باللغة الإنجليزية. النسخة الإنجليزية هي النسخة الملزمة قانونيًا."
     },
     "contents": "Contents",
@@ -1923,7 +1923,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -2021,7 +2021,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -2051,7 +2051,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "यह दस्तावेज़ अंग्रेज़ी में उपलब्ध है। कानूनी रूप से बाध्यकारी संस्करण अंग्रेज़ी संस्करण है।"
     },
     "contents": "Contents",
@@ -2059,7 +2059,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -2157,7 +2157,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -2187,7 +2187,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "এই নথিটি ইংরেজিতে উপলব্ধ। ইংরেজি সংস্করণটিই আইনগতভাবে বাধ্যতামূলক সংস্করণ।"
     },
     "contents": "Contents",
@@ -2195,7 +2195,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -2293,7 +2293,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -2323,7 +2323,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "हा दस्तऐवज इंग्रजीमध्ये उपलब्ध आहे. इंग्रजी आवृत्ती ही कायदेशीररित्या बंधनकारक आवृत्ती आहे."
     },
     "contents": "Contents",
@@ -2331,7 +2331,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -2429,7 +2429,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -2459,7 +2459,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "ఈ పత్రం ఆంగ్లంలో అందుబాటులో ఉంది. చట్టపరంగా కట్టుబడి ఉండే సంస్కరణ ఆంగ్ల సంస్కరణ."
     },
     "contents": "Contents",
@@ -2467,7 +2467,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -2565,7 +2565,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -2595,7 +2595,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "本文件以英文提供。英文版本为具有法律约束力的版本。"
     },
     "contents": "Contents",
@@ -2603,7 +2603,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -2701,7 +2701,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -2731,7 +2731,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "本文件以英文提供。英文版本為具有法律約束力的版本。"
     },
     "contents": "Contents",
@@ -2739,7 +2739,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -2837,7 +2837,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -2867,7 +2867,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "この文書は英語で提供されています。法的拘束力を持つのは英語版です。"
     },
     "contents": "Contents",
@@ -2875,7 +2875,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -2973,7 +2973,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -3003,7 +3003,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "이 문서는 영어로 제공됩니다. 법적 구속력이 있는 버전은 영어 버전입니다."
     },
     "contents": "Contents",
@@ -3011,7 +3011,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -3109,7 +3109,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -3139,7 +3139,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Dette dokument er tilgængeligt på engelsk. Den engelske version er den juridisk bindende version."
     },
     "contents": "Contents",
@@ -3147,7 +3147,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -3245,7 +3245,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -3275,7 +3275,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Detta dokument finns på engelska. Den engelska versionen är den juridiskt bindande versionen."
     },
     "contents": "Contents",
@@ -3283,7 +3283,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -3381,7 +3381,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -3411,7 +3411,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Ez a dokumentum angol nyelven érhető el. A jogilag kötelező változat az angol változat."
     },
     "contents": "Contents",
@@ -3419,7 +3419,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -3517,7 +3517,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -3547,7 +3547,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Το παρόν έγγραφο διατίθεται στα αγγλικά. Η αγγλική έκδοση είναι η νομικά δεσμευτική έκδοση."
     },
     "contents": "Contents",
@@ -3555,7 +3555,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -3653,7 +3653,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -3683,7 +3683,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Acest document este disponibil în limba engleză. Versiunea în limba engleză este versiunea obligatorie din punct de vedere juridic."
     },
     "contents": "Contents",
@@ -3691,7 +3691,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -3789,7 +3789,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -3819,7 +3819,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Ovaj je dokument dostupan na engleskom jeziku. Pravno obvezujuća je verzija na engleskom jeziku."
     },
     "contents": "Contents",
@@ -3827,7 +3827,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -3925,7 +3925,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -3955,7 +3955,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Tämä asiakirja on saatavilla englanniksi. Oikeudellisesti sitova on englanninkielinen versio."
     },
     "contents": "Contents",
@@ -3963,7 +3963,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -4061,7 +4061,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -4091,7 +4091,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Този документ е достъпен на английски език. Правно обвързваща е версията на английски език."
     },
     "contents": "Contents",
@@ -4099,7 +4099,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -4197,7 +4197,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -4227,7 +4227,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Овај документ је доступан на енглеском језику. Правно обавезујућа је верзија на енглеском језику."
     },
     "contents": "Contents",
@@ -4235,7 +4235,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -4333,7 +4333,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -4363,7 +4363,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Tento dokument je k dispozícii v angličtine. Právne záväzná je anglická verzia."
     },
     "contents": "Contents",
@@ -4371,7 +4371,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -4469,7 +4469,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -4499,7 +4499,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Ta dokument je na voljo v angleščini. Pravno zavezujoča je angleška različica."
     },
     "contents": "Contents",
@@ -4507,7 +4507,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -4605,7 +4605,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -4635,7 +4635,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggris. Versi bahasa Inggris adalah versi yang mengikat secara hukum."
     },
     "contents": "Contents",
@@ -4643,7 +4643,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -4741,7 +4741,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -4771,7 +4771,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "เอกสารนี้มีให้บริการเป็นภาษาอังกฤษ ฉบับภาษาอังกฤษเป็นฉบับที่มีผลผูกพันทางกฎหมาย"
     },
     "contents": "Contents",
@@ -4779,7 +4779,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -4877,7 +4877,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -4907,7 +4907,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Tài liệu này được cung cấp bằng tiếng Anh. Bản tiếng Anh là bản có giá trị ràng buộc về mặt pháp lý."
     },
     "contents": "Contents",
@@ -4915,7 +4915,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -5013,7 +5013,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -5043,7 +5043,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggeris. Versi bahasa Inggeris ialah versi yang mengikat dari segi undang-undang."
     },
     "contents": "Contents",
@@ -5051,7 +5051,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -5149,7 +5149,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",
@@ -5179,7 +5179,7 @@
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
       "updated": "Effective date: October 4, 2026",
-      "owner": "Operator: EATS SYSTEMS TECH",
+      "owner": "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
       "languageNote": "Ang dokumentong ito ay makukuha sa Ingles. Ang bersyong Ingles ang may bisang legal."
     },
     "contents": "Contents",
@@ -5187,7 +5187,7 @@
     "s": {
       "who-we-are": {
         "title": "1. Who we are and what this policy covers",
-        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
+        "b0": "WIFIGATE is a smart access-control product made up of the WIFIGATE mobile app for Android and iOS, the WIFIGATE gate controller that is installed at a gate, door or barrier, the website at wifigate.io, and the WIFIGATE web portal. The product is operated by EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\"). You can contact us at support@wifigate.io.",
         "b1": "This policy applies to personal data processed through the app, the controller, the website and the portal. It does not apply to third-party websites or services that are linked from our product, which have their own policies."
       },
       "summary": {
@@ -5285,7 +5285,7 @@
       },
       "contact": {
         "title": "14. Contact",
-        "b0": "Controller: EATS SYSTEMS TECH",
+        "b0": "Controller: EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
         "b1": "Email: support@wifigate.io",
         "b2": "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
         "b3": "Read our Cookie Policy",

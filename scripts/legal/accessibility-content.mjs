@@ -11,7 +11,7 @@ export const accessibility = {
     subtitle:
       "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
     updated: "Last updated: October 4, 2026",
-    owner: "Operator: EATS SYSTEMS TECH",
+    owner: "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
     sections: [
       {
         id: "commitment",
@@ -90,7 +90,7 @@ export const accessibility = {
     subtitle:
       "אנחנו רוצים שכל אדם, ובכלל זה אנשים עם מוגבלות, יוכל להשתמש באתר wifigate.io באופן עצמאי, נוח ומכבד.",
     updated: "עודכן לאחרונה: 4 באוקטובר 2026",
-    owner: "המפעילה: EATS SYSTEMS TECH",
+    owner: "המפעילה: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
     sections: [
       {
         id: "commitment",

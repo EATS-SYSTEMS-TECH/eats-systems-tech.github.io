@@ -11,7 +11,7 @@ export const cookies = {
     subtitle:
       "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
     updated: "Effective date: October 4, 2026",
-    owner: "Operator: EATS SYSTEMS TECH",
+    owner: "Operator: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
     sections: [
       {
         id: "summary",
@@ -79,7 +79,7 @@ export const cookies = {
         id: "contact",
         title: "8. Contact",
         blocks: [
-          "EATS SYSTEMS TECH. Email: support@wifigate.io",
+          "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions. Email: support@wifigate.io",
           "This policy is published in English and Hebrew and may be shown in English on pages in other languages. If versions differ, the English version prevails.",
           { link: { href: "../privacy-policy/", text: "Read our Privacy Policy" } },
           { link: { href: "../terms-and-conditions/", text: "Read our Terms & Conditions" } },
@@ -97,7 +97,7 @@ export const cookies = {
     subtitle:
       "מדיניות עוגיות זו מסבירה באילו עוגיות וטכנולוגיות דומות נעשה שימוש באתר wifigate.io ובפורטל האינטרנט של WIFIGATE, לשם מה, וכיצד תוכלו לשלוט בהן.",
     updated: "תאריך תחילה: 4 באוקטובר 2026",
-    owner: "המפעילה: EATS SYSTEMS TECH",
+    owner: "המפעילה: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
     sections: [
       {
         id: "summary",
@@ -165,7 +165,7 @@ export const cookies = {
         id: "contact",
         title: "8. יצירת קשר",
         blocks: [
-          "EATS SYSTEMS TECH. דוא\"ל: support@wifigate.io",
+          "EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions. דוא\"ל: support@wifigate.io",
           "מדיניות זו מתפרסמת באנגלית ובעברית, ובדפים בשפות אחרות היא עשויה להופיע באנגלית. במקרה של סתירה בין הנוסחים, הנוסח האנגלי גובר.",
           { link: { href: "../privacy-policy/", text: "למדיניות הפרטיות" } },
           { link: { href: "../terms-and-conditions/", text: "לתנאי השימוש" } },

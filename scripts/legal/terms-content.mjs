@@ -11,13 +11,13 @@ export const terms = {
     subtitle:
       "These Terms & Conditions govern your use of WIFIGATE. They include important provisions on safety, on what WIFIGATE is responsible for and what it is not, and on the limitation of our liability. Please read them carefully.",
     updated: "Effective date: October 4, 2026",
-    owner: "Provider: EATS SYSTEMS TECH",
+    owner: "Provider: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
     sections: [
       {
         id: "agreement",
         title: "1. Agreement and acceptance",
         blocks: [
-          "These Terms & Conditions (\"Terms\") are a binding agreement between you and EATS SYSTEMS TECH (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE controllers and their firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
+          "These Terms & Conditions (\"Terms\") are a binding agreement between you and EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"we\", \"us\") about the WIFIGATE mobile app, the WIFIGATE controllers and their firmware, the website at wifigate.io and the WIFIGATE web portal (together, the \"Service\").",
           "You accept these Terms, and our Privacy Policy, by creating an account, by ticking the acceptance box in the app, or by installing, configuring or using any part of the Service. If you use the Service on behalf of a business, a building committee or another organisation, you confirm that you are authorised to bind it, and \"you\" includes that organisation. If you do not accept these Terms, do not use the Service.",
           "You must be at least 18 years old, or the age of legal capacity where you live, to open an account, to administer a controller or to accept these Terms. A minor may use the Service only when enrolled by an adult administrator who is responsible for that use and for supervising it.",
         ],
@@ -268,7 +268,7 @@ export const terms = {
         id: "contact",
         title: "27. Contact",
         blocks: [
-          "EATS SYSTEMS TECH",
+          "EATS SYSTEMS TECH, the trade name of Itay Nave – Engineering and Technology Solutions",
           "Email: support@wifigate.io",
           { link: { href: "../privacy-policy/", text: "Read our Privacy Policy" } },
           { link: { href: "../cookies/", text: "Read our Cookie Policy" } },
@@ -287,13 +287,13 @@ export const terms = {
     subtitle:
       "תנאי שימוש אלה חלים על השימוש שלכם ב‑WIFIGATE. הם כוללים הוראות חשובות בנושא בטיחות, בנושא מה ש‑WIFIGATE אחראית לו ומה שאינה אחראית לו, ובנושא הגבלת האחריות שלנו. אנא קראו אותם בעיון.",
     updated: "תאריך תחילה: 4 באוקטובר 2026",
-    owner: "נותנת השירות: EATS SYSTEMS TECH",
+    owner: "נותנת השירות: EATS SYSTEMS TECH (Itay Nave – Engineering and Technology Solutions)",
     sections: [
       {
         id: "agreement",
         title: "1. ההסכם והסכמתכם",
         blocks: [
-          "תנאי שימוש אלה (\"התנאים\") הם הסכם מחייב ביניכם לבין EATS SYSTEMS TECH (\"WIFIGATE\", \"אנחנו\") לגבי אפליקציית WIFIGATE, בקרי WIFIGATE והקושחה שלהם, האתר wifigate.io ופורטל האינטרנט של WIFIGATE (יחד: \"השירות\").",
+          "תנאי שימוש אלה (\"התנאים\") הם הסכם מחייב ביניכם לבין EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions (\"WIFIGATE\", \"אנחנו\") לגבי אפליקציית WIFIGATE, בקרי WIFIGATE והקושחה שלהם, האתר wifigate.io ופורטל האינטרנט של WIFIGATE (יחד: \"השירות\").",
           "אתם מקבלים את התנאים ואת מדיניות הפרטיות שלנו ביצירת חשבון, בסימון תיבת ההסכמה באפליקציה, או בהתקנה, בהגדרה או בשימוש בחלק כלשהו מהשירות. אם אתם משתמשים בשירות מטעם עסק, ועד בית או ארגון אחר, אתם מאשרים שאתם מוסמכים לחייב אותו, ו\"אתם\" כולל גם אותו. אם אינכם מקבלים את התנאים, אל תשתמשו בשירות.",
           "פתיחת חשבון, ניהול בקר וקבלת התנאים מותרים רק למי שמלאו לו 18 שנים, או גיל הכשרות המשפטית במקום מגוריו. קטין רשאי להשתמש בשירות רק כשהוא רשום על ידי מנהל בגיר האחראי לשימוש זה ולפיקוח עליו.",
         ],
@@ -544,7 +544,7 @@ export const terms = {
         id: "contact",
         title: "27. יצירת קשר",
         blocks: [
-          "EATS SYSTEMS TECH",
+          "EATS SYSTEMS TECH, השם המסחרי של Itay Nave – Engineering and Technology Solutions",
           "דוא\"ל: support@wifigate.io",
           { link: { href: "../privacy-policy/", text: "למדיניות הפרטיות" } },
           { link: { href: "../cookies/", text: "למדיניות העוגיות" } },
