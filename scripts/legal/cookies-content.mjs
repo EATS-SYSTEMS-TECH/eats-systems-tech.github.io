@@ -5,19 +5,19 @@ export const cookies = {
   en: {
     metaTitle: "Cookie Policy | WIFIGATE",
     metaDescription:
-      "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session.",
+      "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent.",
     eyebrow: "Legal",
     title: "Cookie Policy",
     subtitle:
       "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-    updated: "Effective date: October 4, 2026",
+    updated: "Effective date: October 5, 2026",
     owner: "Operator: EATS SYSTEMS TECH",
     sections: [
       {
         id: "summary",
         title: "1. Summary",
         blocks: [
-          "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner.",
+          "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it.",
         ],
       },
       {
@@ -37,12 +37,14 @@ export const cookies = {
               rows: [
                 ["language", "Local storage (first party)", "Remembers the website language you chose.", "Until you clear it"],
                 ["wifigate-accessibility-settings-v1", "Local storage (first party)", "Remembers your accessibility settings, such as larger text or high contrast.", "Until you clear it"],
+                ["wifigate-cookie-consent-v1", "Local storage (first party)", "Remembers your analytics choice.", "Up to 180 days"],
+                ["_ga and _ga_*", "Analytics cookies (Google, only with consent)", "Measure visits and site usage.", "Up to 180 days"],
                 ["Firebase Authentication session", "Session storage (first party, web portal only)", "Keeps you signed in to the web portal while the browser tab is open.", "Until you sign out or close the tab"],
                 ["Firebase SDK data", "IndexedDB (first party, web portal only)", "Technical data the Firebase sign-in library needs in order to operate.", "Until you clear site data"],
               ],
             },
           },
-          "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages.",
+          "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages.",
         ],
       },
       {
@@ -50,6 +52,7 @@ export const cookies = {
         title: "4. Third-party services",
         blocks: [
           "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
+          "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
           "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
           "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies.",
         ],
@@ -65,14 +68,14 @@ export const cookies = {
         id: "control",
         title: "6. How to control cookies",
         blocks: [
-          "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session.",
+          "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session.",
         ],
       },
       {
         id: "changes",
         title: "7. Changes to this policy",
         blocks: [
-          "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version.",
+          "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version.",
         ],
       },
       {
@@ -91,19 +94,19 @@ export const cookies = {
   he: {
     metaTitle: "מדיניות עוגיות | WIFIGATE",
     metaDescription:
-      "העוגיות והאחסון בדפדפן שבהם נעשה שימוש באתר wifigate.io ובפורטל האינטרנט של WIFIGATE: ללא עוגיות פרסום או ניתוח, רק העדפות שפה ונגישות וסשן כניסה.",
+      "העוגיות והאחסון בדפדפן באתר wifigate.io ובפורטל WIFIGATE, כולל Google Analytics רק לאחר הסכמה.",
     eyebrow: "משפטי",
     title: "מדיניות עוגיות",
     subtitle:
       "מדיניות עוגיות זו מסבירה באילו עוגיות וטכנולוגיות דומות נעשה שימוש באתר wifigate.io ובפורטל האינטרנט של WIFIGATE, לשם מה, וכיצד תוכלו לשלוט בהן.",
-    updated: "תאריך תחילה: 4 באוקטובר 2026",
+    updated: "תאריך תחילה: 5 באוקטובר 2026",
     owner: "המפעילה: EATS SYSTEMS TECH",
     sections: [
       {
         id: "summary",
         title: "1. בקצרה",
         blocks: [
-          "איננו משתמשים באתר בעוגיות פרסום, בפיקסלי מעקב או בעוגיות ניתוח. האתר שומר רק את ההעדפות שבחרתם, כגון שפה והגדרות נגישות, ופורטל האינטרנט שומר סשן כניסה בזמן השימוש בו. מאחר שאחסון זה הכרחי או נעשה לבקשתכם, איננו מציגים באנר הסכמה לעוגיות.",
+          "האתר משתמש באחסון הכרחי לשמירת בחירות השפה, הנגישות והעוגיות שלכם. אם תאשרו, נשתמש גם ב־Google Analytics כדי להבין את השימוש באתר ולשפר אותו. המדידה אינה נטענת לפני אישור. איננו משתמשים בעוגיות פרסום או בפיקסלי מעקב. הפורטל שומר גם סשן כניסה בזמן השימוש בו.",
         ],
       },
       {
@@ -123,12 +126,14 @@ export const cookies = {
               rows: [
                 ["language", "אחסון מקומי (צד ראשון)", "זוכר את שפת האתר שבחרתם.", "עד שתמחקו אותו"],
                 ["wifigate-accessibility-settings-v1", "אחסון מקומי (צד ראשון)", "זוכר את הגדרות הנגישות שלכם, כגון טקסט מוגדל או ניגודיות גבוהה.", "עד שתמחקו אותו"],
+                ["wifigate-cookie-consent-v1", "אחסון מקומי (צד ראשון)", "זוכר את בחירתכם לגבי מדידה.", "עד 180 ימים"],
+                ["_ga ו־_ga_*", "עוגיות מדידה (Google, רק בהסכמה)", "מדידת ביקורים ושימוש באתר.", "עד 180 ימים"],
                 ["סשן Firebase Authentication", "אחסון סשן (צד ראשון, בפורטל בלבד)", "שומר על החיבור שלכם לפורטל כל עוד לשונית הדפדפן פתוחה.", "עד ההתנתקות או סגירת הלשונית"],
                 ["נתוני Firebase SDK", "IndexedDB (צד ראשון, בפורטל בלבד)", "נתונים טכניים שספריית הכניסה של Firebase צריכה כדי לפעול.", "עד שתמחקו את נתוני האתר"],
               ],
             },
           },
-          "הדפים הציבוריים של האתר אינם שומרים עוגיות. אחסון סשן ו‑IndexedDB משמשים רק בדפי הכניסה ולוח הבקרה של הפורטל.",
+          "הדפים הציבוריים שומרים עוגיות מדידה רק לאחר אישורכם. אחסון סשן ו־IndexedDB משמשים רק בדפי הכניסה ולוח הבקרה של הפורטל.",
         ],
       },
       {
@@ -136,6 +141,7 @@ export const cookies = {
         title: "4. שירותי צד שלישי",
         blocks: [
           "גופנים. האתר מגיש את הגופנים שלו מ‑wifigate.io עצמו, כך שאין פנייה לשירות גופנים של צד שלישי.",
+          "Google Analytics. לאחר אישור המדידה, התג של Google מודד ביקורים באתר ועשוי לקבל נתונים טכניים כגון כתובת IP, סוג מכשיר וצפיות בדפים. איננו מפעילים תכונות פרסום בתג האתר.",
           "כניסה באמצעות Google ו‑Apple. כשאתם נכנסים לפורטל, חלון הכניסה של Google או של Apple עשוי לשמור עוגיות משלו בדומיין שלו, בכפוף למדיניות הפרטיות של Google או של Apple.",
           "קישורים לשירותים אחרים. קישורים ל‑WhatsApp, לרשתות חברתיות, לחנויות אפליקציות ולשירותי ניווט מובילים לאתרים שלהם מדיניות עוגיות משלהם.",
         ],
@@ -151,14 +157,14 @@ export const cookies = {
         id: "control",
         title: "6. איך לשלוט בעוגיות",
         blocks: [
-          "תוכלו לצפות בעוגיות ובנתוני האתר ולמחוק אותם בהגדרות הדפדפן, ולחסום אותם עבור wifigate.io. אם תמחקו את האחסון של האתר, העדפות השפה והנגישות שלכם יאופסו. אם תחסמו אחסון עבור הפורטל, לא תוכלו להישאר מחוברים. התנתקות מהפורטל מסיימת את סשן הכניסה.",
+          "תוכלו לשנות או לבטל את הסכמתכם למדידה בכל עת דרך ״הגדרות עוגיות״ בתחתית האתר. ביטול ההסכמה מפסיק מדידה נוספת ומוחק את עוגיות Google Analytics באתר. תוכלו גם לצפות בנתוני האתר, למחוק או לחסום אותם בהגדרות הדפדפן. מחיקת האחסון תאפס את העדפותיכם; חסימת אחסון הפורטל תמנע הישארות מחוברים אליו.",
         ],
       },
       {
         id: "changes",
         title: "7. שינויים במדיניות",
         blocks: [
-          "אם נתחיל להשתמש בעוגיות אחרות, נעדכן מדיניות זו לפני כן, וכאשר הדין מחייב זאת נבקש קודם את הסכמתכם. תאריך התחילה בראש הדף מציין את הגרסה הנוכחית.",
+          "אם נוסיף עוגיות אופציונליות אחרות, נעדכן מדיניות זו ונבקש הסכמה לפני טעינתן. תאריך התחילה בראש הדף מציין את הגרסה הנוכחית.",
         ],
       },
       {
