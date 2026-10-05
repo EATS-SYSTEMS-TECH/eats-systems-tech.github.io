@@ -1,11 +1,29 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import vm from "node:vm";
 import { chromium } from "playwright-core";
 
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 try {
+  const sandbox = { window: {} };
+  vm.runInNewContext(await readFile(path.resolve("js/cookie-consent-copy.js"), "utf8"), sandbox);
+  const copies = sandbox.window.WIFIGATE_COOKIE_COPY;
+  const locales = (await readdir(path.resolve("scripts/homepage-copy")))
+    .filter((file) => file.endsWith(".mjs"))
+    .map((file) => file.slice(0, -4));
+  assert.deepEqual(Object.keys(copies).sort(), locales.sort(), "Every published locale needs cookie copy");
+  const keys = Object.keys(copies.en);
+  for (const locale of locales) {
+    assert.deepEqual(Object.keys(copies[locale]), keys, `${locale}: missing copy key`);
+    for (const key of keys) assert.ok(copies[locale][key]?.trim(), `${locale}: empty ${key}`);
+    const file = path.resolve(locale === "en" ? "index.html" : `${locale.toLowerCase()}/index.html`);
+    const html = await readFile(file, "utf8");
+    assert.ok(html.includes("cookie-consent-copy.js"), `${locale}: copy script missing`);
+    assert.ok(html.includes("data-cookie-settings"), `${locale}: settings entry missing`);
+  }
+
   for (const locale of ["en", "he"]) {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
     const page = await context.newPage();
@@ -30,6 +48,23 @@ try {
     assert.equal(await panel.isVisible(), false);
     await context.close();
   }
+  for (const locale of locales.filter((name) => name !== "en" && name !== "he")) {
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    const page = await context.newPage();
+    await page.goto(pathToFileURL(path.resolve(`${locale.toLowerCase()}/index.html`)).href, { waitUntil: "domcontentloaded" });
+    const panel = page.getByRole("dialog", { name: copies[locale].title });
+    await panel.waitFor();
+    if (process.env.CONSENT_SCREENSHOTS && ["es", "ar", "zh-Hant"].includes(locale)) {
+      await page.screenshot({ path: path.resolve(`.cookie-consent-${locale}.png`) });
+    }
+    assert.equal(await panel.getAttribute("dir"), locale === "ar" ? "rtl" : "ltr", `${locale}: direction`);
+    assert.equal(await panel.getByRole("button", { name: copies[locale].accept }).count(), 1);
+    assert.equal(await panel.getByRole("button", { name: copies[locale].accept }).evaluate((button) => getComputedStyle(button).backgroundColor), "rgb(11, 99, 255)");
+    assert.equal(await page.locator("[data-cookie-settings]").innerText(), copies[locale].reopen);
+    assert.equal(await panel.getByRole("link", { name: copies[locale].privacy }).getAttribute("href"), `/${locale.toLowerCase()}/privacy-policy/`);
+    assert.equal(await panel.evaluate((element) => element.scrollWidth <= element.clientWidth + 1), true, `${locale}: horizontal overflow`);
+    await context.close();
+  }
   const context = await browser.newContext();
   const source = (await readFile(path.resolve("js/cookie-consent.js"), "utf8"))
     .replace('const GA_MEASUREMENT_ID = "";', 'const GA_MEASUREMENT_ID = "G-TEST12345";');
@@ -49,7 +84,7 @@ try {
   await page.locator("[data-cookie-reject]").click();
   assert.equal(await page.evaluate(() => window["ga-disable-G-TEST12345"]), true);
   await context.close();
-  console.log("Cookie consent choice, persistence, reopening and analytics gating passed.");
+  console.log("Cookie consent localization, choice, persistence, reopening and analytics gating passed.");
 } finally {
   await browser.close();
 }
