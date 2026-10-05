@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "Ακολουθήστε μας",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Όλα τα δικαιώματα διατηρούνται.",
   },
-  schema: {
-    productCategory: "Σύστημα ελέγχου πρόσβασης",
-    monthlySubscription: "Μηνιαία συνδρομή",
-    subscriptionValue: "Δεν απαιτείται για το βασικό WIFIGATE. Το WIFIGATE Host για εμπορική χρήση παρέχεται με συνδρομή",
-    simCard: "Κάρτα SIM",
-    externalRouter: "Εξωτερικό router Wi-Fi",
-    notRequired: "Δεν απαιτείται",
-  },
 };
 
 export default copy;

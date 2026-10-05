@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "Obserwuj nas",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Wszystkie prawa zastrzeżone.",
   },
-  schema: {
-    productCategory: "System kontroli dostępu",
-    monthlySubscription: "Subskrypcja miesięczna",
-    subscriptionValue: "Standardowy WIFIGATE nie wymaga subskrypcji; komercyjne korzystanie z WIFIGATE Host wymaga subskrypcji",
-    simCard: "Karta SIM",
-    externalRouter: "Zewnętrzny router WiFi",
-    notRequired: "Niewymagane",
-  },
 };
 
 export default copy;

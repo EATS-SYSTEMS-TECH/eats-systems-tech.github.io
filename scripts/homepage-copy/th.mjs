@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "ติดตามเรา",
     copyright: "WIFIGATE · EATS SYSTEMS TECH สงวนลิขสิทธิ์",
   },
-  schema: {
-    productCategory: "ระบบควบคุมการเข้าออก",
-    monthlySubscription: "ค่าสมาชิกรายเดือน",
-    subscriptionValue: "WIFIGATE มาตรฐานไม่ต้องสมัครสมาชิก ส่วน WIFIGATE Host สำหรับการใช้งานเชิงพาณิชย์เป็นบริการแบบสมัครสมาชิก",
-    simCard: "ซิมการ์ด",
-    externalRouter: "เราเตอร์ Wi-Fi ภายนอก",
-    notRequired: "ไม่จำเป็น",
-  },
 };
 
 export default copy;

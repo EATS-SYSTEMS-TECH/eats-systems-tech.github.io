@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "소셜 미디어",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. 모든 권리 보유.",
   },
-  schema: {
-    productCategory: "출입통제 시스템",
-    monthlySubscription: "월 구독",
-    subscriptionValue: "표준 WIFIGATE는 구독이 필요하지 않으며, 상업용 WIFIGATE Host만 구독제로 제공됩니다",
-    simCard: "SIM 카드",
-    externalRouter: "외부 Wi-Fi 라우터",
-    notRequired: "필요 없음",
-  },
 };
 
 export default copy;

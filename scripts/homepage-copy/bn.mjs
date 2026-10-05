@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "আমাদের অনুসরণ করুন",
     copyright: "WIFIGATE · EATS SYSTEMS TECH। সর্বাধিকার সংরক্ষিত।",
   },
-  schema: {
-    productCategory: "অ্যাক্সেস কন্ট্রোল সিস্টেম",
-    monthlySubscription: "মাসিক সাবস্ক্রিপশন",
-    subscriptionValue: "স্ট্যান্ডার্ড WIFIGATE ব্যবহারে প্রয়োজন নেই; বাণিজ্যিক WIFIGATE Host সাবস্ক্রিপশনভিত্তিক",
-    simCard: "SIM কার্ড",
-    externalRouter: "বাহ্যিক Wi-Fi রাউটার",
-    notRequired: "প্রয়োজন নেই",
-  },
 };
 
 export default copy;

@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "Seuraa meitä",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Kaikki oikeudet pidätetään.",
   },
-  schema: {
-    productCategory: "Kulunhallintajärjestelmä",
-    monthlySubscription: "Kuukausitilaus",
-    subscriptionValue: "Ei vaadita WIFIGATE-järjestelmän peruskäytössä; WIFIGATE Host on kaupallisessa käytössä tilauspohjainen",
-    simCard: "SIM-kortti",
-    externalRouter: "Ulkoinen WiFi-reititin",
-    notRequired: "Ei vaadita",
-  },
 };
 
 export default copy;

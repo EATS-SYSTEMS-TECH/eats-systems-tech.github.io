@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "Sledujte nás",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Všetky práva vyhradené.",
   },
-  schema: {
-    productCategory: "Systém riadenia prístupu",
-    monthlySubscription: "Mesačné predplatné",
-    subscriptionValue: "Pri štandardnom WIFIGATE nie je potrebné; komerčné používanie WIFIGATE Host funguje na báze predplatného",
-    simCard: "SIM karta",
-    externalRouter: "Externý WiFi router",
-    notRequired: "Nie je potrebné",
-  },
 };
 
 export default copy;

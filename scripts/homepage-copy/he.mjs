@@ -176,14 +176,6 @@ const copy = {
     socialTitle: "עקבו אחרינו",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. כל הזכויות שמורות.",
   },
-  schema: {
-    productCategory: "מערכת בקרת כניסה",
-    monthlySubscription: "מנוי חודשי",
-    subscriptionValue: "לא נדרש עבור WIFIGATE בשימוש רגיל; WIFIGATE Host לשימוש מסחרי מחייבת מנוי",
-    simCard: "כרטיס SIM",
-    externalRouter: "נתב WiFi חיצוני",
-    notRequired: "לא נדרש",
-  },
 };
 
 export default copy;
