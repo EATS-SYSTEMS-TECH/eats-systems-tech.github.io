@@ -74,7 +74,7 @@ const copy = {
   },
   automation: {
     eyebrow: "Skabt til hotel- og overnatningsbranchen",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Udviklet til",
     audiences: ["Hoteller", "Airbnb", "Gæstelejligheder", "Overnatningssteder"],
     promise: "Byd dine gæster velkommen. Automatiser deres adgang.",

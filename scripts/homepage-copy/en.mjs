@@ -74,7 +74,7 @@ const copy = {
   },
   automation: {
     eyebrow: "Built for hospitality",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Made for",
     audiences: ["Hotels", "Airbnb", "Guest apartments", "Hospitality spaces"],
     promise: "Welcome your guests. Automate their access.",

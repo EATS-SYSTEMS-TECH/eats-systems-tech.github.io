@@ -74,7 +74,7 @@
   },
   automation: {
     eyebrow: "Създаден за хотелиерството",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Подходящ за",
     audiences: ["Хотели", "Airbnb", "Апартаменти за гости", "Места за настаняване"],
     promise: "Посрещайте гостите. Автоматизирайте достъпа им.",
