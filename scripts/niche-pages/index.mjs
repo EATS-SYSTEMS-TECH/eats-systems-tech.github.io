@@ -165,6 +165,19 @@ export const NICHE_DEFINITIONS = [
       cardHeight: 360,
     },
   },
+  {
+    key: "self-storage",
+    legacyKeys: [],
+    image: {
+      hero: "assets/wifigate_niche_pages/self-storage-app-hero.webp",
+      card: "assets/wifigate_niche_pages/self-storage-app-card.webp",
+      og: "assets/wifigate_niche_pages/self-storage-app-og.jpg",
+      heroWidth: 1280,
+      heroHeight: 720,
+      cardWidth: 640,
+      cardHeight: 360,
+    },
+  },
 ];
 
 export const NICHE_KEYS = NICHE_DEFINITIONS.map((niche) => niche.key);
