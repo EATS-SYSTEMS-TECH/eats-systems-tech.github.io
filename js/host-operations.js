@@ -1,3 +1,4 @@
+import { renderServiceTargets } from "./host-slo.js";
 import { portalRequest } from "./api/index.js";
 import { field, node, downloadHostCsv } from "./host-ui.js";
 
@@ -19,6 +20,7 @@ export async function renderHostOperations({ container, user, organization, prop
     if (!attempts.has(signature)) attempts.set(signature, crypto.randomUUID());
     return portalRequest(user, `${root}/operations${path}`, "PUT", body, attempts.get(signature));
   }
+  renderServiceTargets({ section, user, root, current, run, status, owner: role === "owner" });
   const reliability = node("div"), reliabilityButton = node("button", "Measure last hour", { type: "button" });
   section.append(node("h3", "Operational observations"), node("p", "Observed authenticated API requests and jobs created in the selected hour. Service targets and physical gate availability require separate operational verification."), reliabilityButton, reliability);
   reliabilityButton.addEventListener("click", () => run(reliabilityButton, async () => {
@@ -28,6 +30,11 @@ export async function renderHostOperations({ container, user, organization, prop
     const automation = value.automation.timeliness, delivery = value.delivery.outcomes;
     if (automation) reliability.append(node("p", `${automation.measuredJobs} completed jobs with timing · preparation ${automation.readinessPercent === null ? "Unknown" : `${automation.readinessPercent.toFixed(2)}%`} · p95 preparation ${automation.p95PreparationLatencyMs === null ? "Unknown" : `${automation.p95PreparationLatencyMs} ms`} · oldest pending schedule ${Math.round(automation.oldestPendingScheduledMs / 1000)} s · ${automation.unknownTimingJobs} completed jobs without timing evidence`));
     if (delivery) reliability.append(node("p", `${delivery.requestedCompletedJobs} completed reservation message jobs · provider acceptance ${delivery.acceptancePercent === null ? "Unknown" : `${delivery.acceptancePercent.toFixed(2)}%`} · p95 acceptance ${delivery.p95AcceptanceLatencyMs === null ? "Unknown" : `${delivery.p95AcceptanceLatencyMs} ms`} · ${delivery.unknownRequirementJobs} completed jobs without delivery requirement evidence`));
+    if (value.sloAssessment) {
+      const assessment = value.sloAssessment;
+      reliability.append(node("p", `Service targets: ${assessment.state}`));
+      for (const [dimension, result] of Object.entries(assessment.dimensions ?? {})) reliability.append(node("p", `${dimension}: ${result.state}${result.reasons.length ? ` · ${result.reasons.join(", ")}` : ""}`));
+    }
     status.textContent = "Operational observations loaded.";
   }));
   if (role === "owner") {
