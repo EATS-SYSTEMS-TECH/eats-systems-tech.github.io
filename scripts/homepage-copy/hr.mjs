@@ -74,7 +74,7 @@ const copy = {
   },
   automation: {
     eyebrow: "Stvoreno za pružatelje smještaja",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Namijenjeno za",
     audiences: ["Hotele", "Smještaje na Airbnbju", "Apartmane za goste", "Smještajne objekte"],
     promise: "Dočekajte goste. Automatizirajte njihov pristup.",

@@ -74,7 +74,7 @@ const copy = {
   },
   automation: {
     eyebrow: "专为住宿业打造",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "适用于",
     audiences: ["酒店", "Airbnb", "短租公寓", "各类住宿场所"],
     promise: "迎接客人，自动完成通行管理。",

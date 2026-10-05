@@ -74,7 +74,7 @@ const copy = {
   },
   automation: {
     eyebrow: "Dinisenyo para sa mga negosyo sa hospitality",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Para sa",
     audiences: ["Mga hotel", "Airbnb", "Mga apartment para sa bisita", "Iba pang tuluyan"],
     promise: "Salubungin ang iyong mga bisita. I-automate ang kanilang access.",

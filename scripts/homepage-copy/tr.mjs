@@ -74,7 +74,7 @@
   },
   automation: {
     eyebrow: "Konaklama sektörü için üretildi",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Uygun olduğu alanlar",
     audiences: ["Oteller", "Airbnb", "Misafir daireleri", "Konaklama tesisleri"],
     promise: "Misafirlerinizi karşılayın. Erişimlerini otomatikleştirin.",

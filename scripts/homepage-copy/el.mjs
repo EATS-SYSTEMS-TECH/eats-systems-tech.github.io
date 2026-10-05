@@ -74,7 +74,7 @@ const copy = {
   },
   automation: {
     eyebrow: "Σχεδιασμένο για τον κλάδο της φιλοξενίας",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Ιδανικό για",
     audiences: ["Ξενοδοχεία", "Airbnb", "Διαμερίσματα φιλοξενίας", "Τουριστικά καταλύματα"],
     promise: "Υποδεχτείτε τους επισκέπτες σας. Αυτοματοποιήστε την πρόσβασή τους.",

@@ -75,7 +75,7 @@ const copy = {
   },
   automation: {
     eyebrow: "נבנתה לעולם האירוח",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "מיועדת ל",
     audiences: ["מלונות", "Airbnb", "דירות אירוח", "מרחבי אירוח"],
     promise: "קבלו את פני האורחים. תנו לכניסה להתנהל אוטומטית.",

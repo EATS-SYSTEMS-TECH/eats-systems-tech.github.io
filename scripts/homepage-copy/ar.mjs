@@ -74,7 +74,7 @@ const copy = {
   },
   automation: {
     eyebrow: "مصمم لقطاع الضيافة",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "مخصص لـ",
     audiences: ["الفنادق", "Airbnb", "شقق الضيوف", "مرافق الضيافة"],
     promise: "رحّب بضيوفك. أتمت دخولهم.",
