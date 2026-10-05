@@ -55,6 +55,11 @@ export async function renderHostAutomation({ container, user, organization, prop
       const row = node("article"); row.append(node("p", `${job.reservationId} · revision ${job.reservationVersion} · ${job.status} · attempts ${job.attempts}`));
       if (job.lastErrorCode) row.append(node("p", job.lastErrorCode));
       if (job.deliveryId) row.append(node("p", `Delivery receipt: ${job.deliveryId}`));
+      if (!["delivered", "expired", "cancelled"].includes(job.status)) {
+        const form = node("form"), reason = field(form, "Automatic access stop reason", "reason"); reason.minLength = 5; reason.maxLength = 200;
+        const stop = node("button", "Stop automatic access", { type: "submit" }); form.append(stop);
+        form.addEventListener("submit", event => { event.preventDefault(); if (!form.reportValidity()) return; void run(stop, async () => { await mutate(`${root}/jobs/${encodeURIComponent(job.id)}/stop`, "POST", { reason: reason.value }); if (current()) { await loadJobs(); status.textContent = "Automatic access stopped. An already imported offline pass remains valid until its expiry."; } }); }); row.append(form);
+      }
       if (["failed", "paused"].includes(job.status)) {
         const form = node("form"), reason = field(form, "Automatic access retry reason", "reason"); reason.minLength = 5; reason.maxLength = 200;
         const retry = node("button", "Retry automatic access", { type: "submit" }); form.append(retry);
