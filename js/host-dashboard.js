@@ -1,3 +1,4 @@
+import "./host-dashboard-navigation.js";
 import { Roles, PortalStates, AuthErrors, HttpStatus } from "./host-constants.js";
 import {
   initializeSiteAuth,
@@ -38,6 +39,7 @@ function clearSecret() {
 }
 const protectedElements = {
   dashboard: $("#dashboard-content"),
+  sidebar: $("#host-sidebar"),
   approval: $("#admin-approval"),
   enrollment: $("#mfa-enrollment"),
   verification: $("#mfa-verification"),
@@ -46,6 +48,7 @@ const protectedElements = {
 function hideProtected(sessionEnded = false) {
   clearHostManagement({ sessionEnded });
   protectedElements.dashboard.hidden = true;
+  protectedElements.sidebar.hidden = true;
   protectedElements.approval.hidden = true;
   protectedElements.enrollment.hidden = true;
   protectedElements.verification.hidden = true;
@@ -83,6 +86,7 @@ async function loadDashboard(user) {
   identity = undefined;
   hideProtected();
   $("#account-name").textContent = user.email || "Signed-in account";
+  $("#sidebar-account-name").textContent = user.email || "Signed-in account";
   $("#sign-out").disabled = false;
   showStatus("Checking portal access", "Verifying your account...", false);
   try {
@@ -122,6 +126,7 @@ async function loadDashboard(user) {
       return;
     }
     $("#dashboard-content").hidden = false;
+    $("#host-sidebar").hidden = false;
     $("#admin-approval").hidden = !canApproveEmail(identity);
     void loadHostManagement(user, identity);
   } catch (error) {
@@ -190,6 +195,7 @@ $("#optional-enrollment").addEventListener("click", () => {
   clearSecret();
   showEnrollment(true);
   $("#dashboard-content").hidden = true;
+  $("#host-sidebar").hidden = true;
 });
 $("#cancel-enrollment").addEventListener("click", () => {
   if (actionBusy) {
