@@ -1284,9 +1284,9 @@ async function buildUtilityPages(homeData) {
 }
 
 function getNicheChrome(locale) {
-  const base = NICHE_CHROME[defaultLocale];
-  const override = NICHE_CHROME[locale] || {};
-  return { ...base, ...override };
+  const chrome = NICHE_CHROME[locale];
+  if (!chrome) throw new Error(`No use-case page labels (scripts/niche-content.mjs) for ${locale}`);
+  return chrome;
 }
 
 function buildNicheContext(homeData, niche, locale) {
@@ -1493,6 +1493,17 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
 
   $("#niche-benefits-title").text(chrome.benefitsTitle);
   setNicheBenefits($, content.bullets);
+
+  // Every other use case and WIFIGATE Host, so each page leads to the rest.
+  $("#niche-related-title").text(chrome.relatedTitle);
+  const related = $("#niche-related-list").empty();
+  for (const other of NICHE_DEFINITIONS) {
+    if (other.key === niche.key) continue;
+    const link = $("<a>").addClass("niche-related__link").attr("href", buildPagePath(locale, other.key));
+    setLocalizedText($, link, localeNicheContent.niches[other.key].label, locale);
+    related.append($("<li>").append(link));
+  }
+  related.append($("<li>").append($("<a>").addClass("niche-related__link").attr("href", buildPagePath(locale, guestInvitesPageKey)).text("WIFIGATE Host")));
   // No closing CTA section: the hero already carries the WhatsApp action and
   // the shared footer carries support + WhatsApp Business.
 
