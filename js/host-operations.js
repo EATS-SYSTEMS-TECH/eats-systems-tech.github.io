@@ -27,6 +27,26 @@ export async function renderHostOperations({ container, user, organization, prop
     reliability.replaceChildren(node("p", `${value.api.observedRequests} observed API requests · ${value.api.serverFailures} server failures · availability ${value.api.availabilityPercent === null ? "Unknown (no observations)" : `${value.api.availabilityPercent.toFixed(2)}%`} · p95 ${value.api.p95LatencyMs === null ? "Unknown" : `${value.api.p95LatencyMs} ms`}`), node("p", `${value.automation.observedJobs} observed jobs · ${value.automation.dueJobs} due · oldest due ${Math.round(value.automation.oldestDueMs / 1000)} s · ${value.delivery.acceptedReceipts} persisted accepted delivery receipts`));
     status.textContent = "Operational observations loaded.";
   }));
+  if (role === "owner") {
+    const statementForm = node("form"), today = new Date(), previousMonth = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
+    const statementMonth = field(statementForm, "Monthly statement period", "month", previousMonth, "month"), statementButton = node("button", "Generate monthly draft", { type: "submit" }), statementRows = node("div");
+    statementForm.append(statementButton); section.append(node("h3", "Monthly billing statements"), node("p", "Closed-month drafts use recorded physical system days. Pricing remains an internal proposal; generating a draft does not charge a payment."), statementForm, statementRows);
+    const baselineButton = node("button", "Start verified billing history", { type: "button" });
+    section.append(node("p", "Older organizations can start a verified history baseline for future full months. Existing history is preserved and past use is never invented."), baselineButton);
+    baselineButton.addEventListener("click", () => run(baselineButton, async () => {
+      const signature = "billing-history-baseline"; if (!attempts.has(signature)) attempts.set(signature, crypto.randomUUID());
+      const { history } = await portalRequest(user, `${root}/billing/history/baseline`, "POST", {}, attempts.get(signature));
+      if (current()) status.textContent = history.existing ? "Existing billing history preserved." : `Verified billing history started. First full month: ${history.firstFullMonth}. No past charges were created.`;
+    }));
+    statementForm.addEventListener("submit", event => { event.preventDefault(); if (!statementForm.reportValidity()) return; void run(statementButton, async () => {
+      const signature = `billing-statement:${statementMonth.value}`; if (!attempts.has(signature)) attempts.set(signature, crypto.randomUUID());
+      const { statement } = await portalRequest(user, `${root}/billing/statements`, "POST", { month: statementMonth.value }, attempts.get(signature));
+      if (!current()) return;
+      const exportStatement = node("button", "Export statement daily breakdown", { type: "button" });
+      exportStatement.addEventListener("click", () => downloadHostCsv(statement.daily, ["date", "activePhysicalSystems", "activeProperties", "plan"], `wifigate-statement-${statement.month}.csv`));
+      statementRows.replaceChildren(node("p", `Draft ${statement.month} · USD ${(statement.monthlyEstimateCents / 100).toFixed(2)} · ${statement.physicalSystemDays} physical system days`), exportStatement); status.textContent = "Canonical monthly draft generated. No payment was charged.";
+    }); });
+  }
   const readinessForm = node("form"), readinessQuery = field(readinessForm, "Search access systems", "q"), readinessButton = node("button", "Check system configuration", { type: "submit" }), readinessRows = node("div");
   readinessQuery.required = false; readinessQuery.maxLength = 120; readinessForm.append(readinessButton);
   section.append(node("h3", "System configuration"), node("p", "These checks cover Host permissions and configuration. Check the gate through BLE in the mobile app before relying on physical availability."), readinessForm, readinessRows);
