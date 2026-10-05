@@ -281,6 +281,8 @@ export async function loadHostManagement(user, identity, preferredId) {
     if (epoch !== generation) return;
     await renderHostCalendar({ container: root, user, organization: org, properties: properties.items, rooms: rooms.items, isCurrent: () => epoch === generation });
     if (epoch !== generation) return;
+    const calendarSection = root.querySelector(".host-calendar"), firstSection = root.querySelector("section");
+    if (calendarSection && firstSection !== calendarSection) root.insertBefore(calendarSection, firstSection);
     await renderHostApiKeys({ container: root, user, organization: org, isCurrent: () => epoch === generation });
     if (epoch !== generation) return;
     await renderHostIntegrations({ container: root, user, organization: org, properties: properties.items, rooms: rooms.items, isCurrent: () => epoch === generation });
