@@ -1237,6 +1237,10 @@ function updateSharedHeader($, homeData, locale, pageKey) {
 function serialize($, homeData, locale, pageKey = "home") {
   updateSharedHeader($, homeData, locale, pageKey);
   if ($(".site-footer").length) {
+    const settingsLabel = homeData.cookieCopy[locale].reopen;
+    $(".cookie-settings-trigger")
+      .text(settingsLabel)
+      .attr({ "aria-label": settingsLabel, dir: isRtl(locale) ? "rtl" : "ltr" });
     const prefix = buildAssetPrefix(locale, pageKey);
     $("head").append(`<link rel="stylesheet" href="${prefix}css/cookie-consent.css?v=20261005a">`);
     $("body").append(`<script src="${prefix}js/cookie-consent-copy.js?v=20261005a" defer></script>`);
@@ -1883,6 +1887,8 @@ async function buildGuestInvitesPages(homeData) {
 
 async function main() {
   const homeSandbox = await runFilesInSandbox(homeDataFiles);
+  const cookieSandbox = { window: {} };
+  vm.runInNewContext(await fs.readFile(path.join(repoRoot, "js", "cookie-consent-copy.js"), "utf8"), cookieSandbox);
   const legalCollections = {};
 
   for (const [pageKey, files] of Object.entries(legalDataFiles)) {
@@ -1896,7 +1902,14 @@ async function main() {
     accessibilityCopy: homeSandbox.accessibilityCopy,
     // Loaded once here so every page type shares the same footer wording.
     homepageCopies: await loadHomeCopy(homeSandbox.SITE_LANGUAGE_OPTIONS),
+    cookieCopy: cookieSandbox.window.WIFIGATE_COOKIE_COPY,
   };
+
+  for (const localeOption of homeData.localeOptions) {
+    if (!homeData.cookieCopy?.[localeOption.code]?.reopen) {
+      throw new Error(`Missing cookie settings translation for ${localeOption.code}`);
+    }
+  }
 
   const contentProblems = validateNichePageLocales(homeData.localeOptions.map((option) => option.code));
   if (contentProblems.length) {
