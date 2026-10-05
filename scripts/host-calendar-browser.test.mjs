@@ -49,6 +49,11 @@ test('reference dashboard: authorized navigation, three-week spans, editor and m
   await page.getByRole('button',{name:'Close reservation',exact:true}).click();
   await page.getByRole('button',{name:'Settings',exact:true}).click();
   assert.equal(await page.locator('#account-details').evaluate(element=>element.open),true);
+  await page.evaluate(()=>{for(const label of ['properties','rooms']){const section=document.createElement('section');section.setAttribute('aria-label',label);section.textContent=label;document.getElementById('host-management').append(section);}});
+  await page.getByRole('button',{name:'Properties',exact:true}).click();
+  assert.equal(await page.locator('section[aria-label="properties"]').isVisible(),true);
+  assert.equal(await page.locator('section[aria-label="rooms"]').isVisible(),true);
+  assert.equal(await page.locator('.host-calendar').isVisible(),false);
   await page.getByRole('button',{name:'Calendar',exact:true}).click();
   await page.screenshot({path:process.env.WIFIGATE_DASHBOARD_SCREENSHOT??path.join(tmpdir(),`wifigate-dashboard-${process.pid}-desktop.png`),fullPage:true});
   await page.setViewportSize({width:390,height:844});
