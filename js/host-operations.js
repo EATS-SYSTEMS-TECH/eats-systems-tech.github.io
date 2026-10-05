@@ -19,6 +19,14 @@ export async function renderHostOperations({ container, user, organization, prop
     if (!attempts.has(signature)) attempts.set(signature, crypto.randomUUID());
     return portalRequest(user, `${root}/operations${path}`, "PUT", body, attempts.get(signature));
   }
+  const reliability = node("div"), reliabilityButton = node("button", "Measure last hour", { type: "button" });
+  section.append(node("h3", "Operational observations"), node("p", "Observed authenticated API requests and jobs created in the selected hour. Service targets and physical gate availability require separate operational verification."), reliabilityButton, reliability);
+  reliabilityButton.addEventListener("click", () => run(reliabilityButton, async () => {
+    const end = Date.now(), value = await portalRequest(user, `${root}/operations/reliability?${new URLSearchParams({ from: new Date(end - 3600000).toISOString(), to: new Date(end).toISOString() })}`);
+    if (!current()) return;
+    reliability.replaceChildren(node("p", `${value.api.observedRequests} observed API requests · ${value.api.serverFailures} server failures · availability ${value.api.availabilityPercent === null ? "Unknown (no observations)" : `${value.api.availabilityPercent.toFixed(2)}%`} · p95 ${value.api.p95LatencyMs === null ? "Unknown" : `${value.api.p95LatencyMs} ms`}`), node("p", `${value.automation.observedJobs} observed jobs · ${value.automation.dueJobs} due · oldest due ${Math.round(value.automation.oldestDueMs / 1000)} s · ${value.delivery.acceptedReceipts} persisted accepted delivery receipts`));
+    status.textContent = "Operational observations loaded.";
+  }));
   const readinessForm = node("form"), readinessQuery = field(readinessForm, "Search access systems", "q"), readinessButton = node("button", "Check system configuration", { type: "submit" }), readinessRows = node("div");
   readinessQuery.required = false; readinessQuery.maxLength = 120; readinessForm.append(readinessButton);
   section.append(node("h3", "System configuration"), node("p", "These checks cover Host permissions and configuration. Check the gate through BLE in the mobile app before relying on physical availability."), readinessForm, readinessRows);
