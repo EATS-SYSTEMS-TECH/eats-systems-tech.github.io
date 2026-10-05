@@ -385,5 +385,41 @@ export default {
         "WIFIGATE zapewnia inteligentną kontrolę dostępu do obiektów sportowych, kortów do padla, siłowni i stref treningowych, wejście z telefonu i elastyczne uprawnienia.",
       imageAlt: "Zawodniczka padla otwierająca telefonem wejście na oświetlony kort",
     },
+    "self-storage": {
+      "label": "Magazyny self storage",
+      "title": "Inteligentny dostęp do magazynów self storage",
+      "heroLead": "Każdy najemca otwiera bramę obiektu i drzwi budynku z własnego telefonu, tylko w godzinach, na które pozwalasz. Gdy kończy się najem, kończy się też dostęp: bez odbierania kluczy i bez zmiany kodów.",
+      "highlights": [
+        {
+          "icon": "users",
+          "title": "Osobiste uprawnienie dla każdego najemcy",
+          "text": "Koniec ze wspólnym kodem do bramy, który byli najemcy wciąż pamiętają. Każdy najemca ma własny dostęp, a jego odebranie zajmuje chwilę, gdy umowa wygasa lub płatność jest zaległa."
+        },
+        {
+          "icon": "clock",
+          "title": "Godziny dostępu, które ustalasz",
+          "text": "Wpuszczaj tylko w godzinach otwarcia obiektu albo daj najemcy szersze okno czasowe. Firma przeprowadzkowa lub członek rodziny może dostać jednorazowy dostęp na jeden dzień."
+        },
+        {
+          "icon": "history",
+          "title": "Wiesz, kto wszedł i kiedy",
+          "text": "Każde otwarcie jest zapisywane z nazwą osoby i godziną, więc pytanie o wizytę rozstrzyga historia, a nie nagrania z monitoringu."
+        }
+      ],
+      "paragraph": "Magazyny self storage zwykle opierają się na wspólnych kodach do bramy, klawiaturach i fizycznych kluczach, które są kopiowane, przekazywane dalej i rzadko zmieniane. WIFIGATE przenosi dostęp do telefonu: każdy najemca ma osobiste uprawnienie do bramy obiektu, wejścia do budynku oraz, tam gdzie są zamontowane, elektrycznie sterowanych drzwi boksu, ograniczone do wybranych przez Ciebie godzin i odbierane w chwili zakończenia najmu. Telefon komunikuje się bezpośrednio z urządzeniem na miejscu, bez karty SIM i bez połączenia z internetem przy bramie, a do standardowego użytkowania nie jest potrzebny abonament.",
+      "bullets": [
+        "Otwieranie bramy obiektu i drzwi budynku z telefonu",
+        "Osobiste uprawnienie dla każdego najemcy",
+        "Dostęp ograniczony do godzin otwarcia lub własnego okna czasowego",
+        "Jednorazowy dostęp dla firm przeprowadzkowych i członków rodziny",
+        "Odebranie dostępu w chwili zakończenia najmu",
+        "Historia, kto otworzył i kiedy",
+        "Bez wspólnych kodów, klawiatur i kluczy do wymiany",
+        "Bez karty SIM i internetu przy bramie"
+      ],
+      "seoTitle": "Inteligentna kontrola dostępu do magazynów self storage | WIFIGATE",
+      "seoDescription": "WIFIGATE daje każdemu najemcy magazynu self storage osobisty dostęp z telefonu do bramy i drzwi obiektu, ograniczony do godzin otwarcia, zapisany w historii i odbierany po zakończeniu najmu.",
+      "imageAlt": "Kobieta otwiera telefonem bramę magazynu self storage"
+    },
   },
 };

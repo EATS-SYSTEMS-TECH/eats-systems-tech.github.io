@@ -387,5 +387,41 @@ export default {
         "WIFIGATE brings smart access control to sports facilities, padel courts, gyms, and training complexes, with phone-based entry and temporary or permanent permissions.",
       imageAlt: "Padel player opening the entrance to a floodlit sports court with a phone",
     },
+    "self-storage": {
+      "label": "Self-Storage",
+      "title": "Smart Access for Self-Storage Facilities",
+      "heroLead": "Every renter opens the site gate and the building door from their own phone, only during the hours you allow. When the rental ends, their access ends with it: no keys to collect and no codes to change.",
+      "highlights": [
+        {
+          "icon": "users",
+          "title": "A personal permission for every renter",
+          "text": "No shared gate code that former renters still remember. Each renter gets access of their own, and removing it takes a moment when the contract ends or a payment is overdue."
+        },
+        {
+          "icon": "clock",
+          "title": "Access hours you set",
+          "text": "Allow entry only during the facility's opening hours, or give a renter a wider window. A mover or a family member can get one-time access for a single day."
+        },
+        {
+          "icon": "history",
+          "title": "Know who came in and when",
+          "text": "Every opening is recorded with the person and the time, so a question about a visit is answered from the history instead of from security footage."
+        }
+      ],
+      "paragraph": "Self-storage sites usually rely on shared gate codes, keypads and physical keys that are copied, passed on and rarely changed. WIFIGATE moves access to the phone: each renter has a personal permission to the site gate, the building entrance and, where installed, an electrically operated unit door, limited to the hours you choose and removed the moment the rental ends. The phone communicates directly with the device on site, with no SIM card or internet connection at the gate, and there is no monthly subscription for standard use.",
+      "bullets": [
+        "Open the site gate and building door from the phone",
+        "A personal permission for every renter",
+        "Access limited to opening hours or a custom window",
+        "One-time access for movers and family members",
+        "Remove access the moment a rental ends",
+        "History of who opened and when",
+        "No shared codes, keypads or keys to change",
+        "No SIM card or internet connection at the gate"
+      ],
+      "seoTitle": "Smart Access Control for Self-Storage Facilities | WIFIGATE",
+      "seoDescription": "WIFIGATE gives every self-storage renter personal phone access to the site gate and doors, limited to opening hours, recorded in a history and removed when the rental ends.",
+      "imageAlt": "Woman opening the gate of a self-storage facility with her phone"
+    },
   },
 };

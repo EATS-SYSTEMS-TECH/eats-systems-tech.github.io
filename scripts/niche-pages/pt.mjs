@@ -385,5 +385,41 @@ export default {
         "Controlo de acessos inteligente para instalações desportivas, padel e ginásios com a WIFIGATE: entrada pelo telemóvel e permissões temporárias ou permanentes.",
       imageAlt: "Jogadora de padel a abrir a entrada de um campo desportivo iluminado com o telemóvel",
     },
+    "self-storage": {
+      "label": "Self-storage",
+      "title": "Acesso inteligente para espaços de self-storage",
+      "heroLead": "Cada cliente abre o portão do espaço e a porta do edifício a partir do seu próprio telemóvel, apenas nos horários autorizados. Quando o arrendamento termina, o acesso termina também: sem chaves para recolher nem códigos para mudar.",
+      "highlights": [
+        {
+          "icon": "users",
+          "title": "Uma permissão pessoal para cada cliente",
+          "text": "Nada de um código de portão partilhado de que antigos clientes ainda se lembram. Cada cliente tem o seu próprio acesso, e retirá-lo demora um instante quando o contrato termina ou há um pagamento em atraso."
+        },
+        {
+          "icon": "clock",
+          "title": "Horários de acesso definidos por si",
+          "text": "Permita a entrada apenas no horário de funcionamento do espaço ou dê a um cliente um período mais alargado. Uma empresa de mudanças ou um familiar pode receber um acesso único válido por um só dia."
+        },
+        {
+          "icon": "history",
+          "title": "Saber quem entrou e quando",
+          "text": "Cada abertura fica registada com a pessoa e a hora, por isso uma dúvida sobre uma visita é esclarecida pelo histórico e não pelas imagens das câmaras de segurança."
+        }
+      ],
+      "paragraph": "Os espaços de self-storage dependem normalmente de códigos de portão partilhados, teclados e chaves físicas que são copiados, passam de mão em mão e raramente são mudados. A WIFIGATE leva o acesso para o telemóvel: cada cliente tem uma permissão pessoal para o portão do espaço, a entrada do edifício e, onde estiver instalada, a porta elétrica do seu box, limitada ao horário que escolher e retirada no momento em que o arrendamento termina. O telemóvel comunica diretamente com o dispositivo instalado no local, sem cartão SIM nem ligação à internet no portão, e sem mensalidades para a utilização normal.",
+      "bullets": [
+        "Abertura do portão do espaço e da porta do edifício a partir do telemóvel",
+        "Uma permissão pessoal para cada cliente",
+        "Acesso limitado ao horário de funcionamento ou a um período à medida",
+        "Acesso único para empresas de mudanças e familiares",
+        "Retirada do acesso no momento em que o arrendamento termina",
+        "Histórico de quem abriu e quando",
+        "Sem códigos partilhados, teclados ou chaves para mudar",
+        "Sem cartão SIM nem ligação à internet no portão"
+      ],
+      "seoTitle": "Controlo de acessos inteligente para self-storage | WIFIGATE",
+      "seoDescription": "A WIFIGATE dá a cada cliente de self-storage acesso pessoal pelo telemóvel ao portão e às portas do espaço, limitado ao horário de funcionamento, registado num histórico e retirado quando o arrendamento termina.",
+      "imageAlt": "Mulher a abrir o portão de um espaço de self-storage com o telemóvel"
+    },
   },
 };

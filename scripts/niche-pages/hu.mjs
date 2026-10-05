@@ -384,5 +384,41 @@ export default {
         "A WIFIGATE okos beléptetést ad sportlétesítményekhez, Padel-pályákhoz, edzőtermekhez és edzőközpontokhoz telefonos belépéssel, ideiglenes vagy állandó jogosultságokkal.",
       imageAlt: "Padel játékos telefonnal nyitja egy kivilágított sportpálya bejáratát",
     },
+    "self-storage": {
+      "label": "Self storage raktárak",
+      "title": "Okos hozzáférés self storage raktárakhoz",
+      "heroLead": "Minden bérlő a saját telefonjáról nyitja a telephely kapuját és az épület ajtaját, de csak az Ön által engedélyezett időszakban. Amikor a bérlet lejár, a hozzáférés is megszűnik: nincs kulcs, amit vissza kell szedni, és nincs kód, amit módosítani kell.",
+      "highlights": [
+        {
+          "icon": "users",
+          "title": "Személyes jogosultság minden bérlőnek",
+          "text": "Nincs közös kapukód, amelyre a korábbi bérlők még emlékeznek. Minden bérlő saját hozzáférést kap, amelyet szerződés lejártakor vagy fizetési késedelem esetén egy pillanat alatt vissza lehet vonni."
+        },
+        {
+          "icon": "clock",
+          "title": "Ön határozza meg a belépési időt",
+          "text": "Engedélyezze a belépést csak a telephely nyitvatartási idejében, vagy adjon egy bérlőnek szélesebb időablakot. Egy költöztető vagy egy családtag egyetlen napra szóló, egyszeri hozzáférést kaphat."
+        },
+        {
+          "icon": "history",
+          "title": "Tudja, ki és mikor lépett be",
+          "text": "Minden nyitás a személlyel és az időponttal együtt rögzül, így egy látogatással kapcsolatos kérdésre az előzmények adnak választ, nem a biztonsági kamerák felvételei."
+        }
+      ],
+      "paragraph": "A self storage raktárak általában közös kapukódokra, kódbillentyűzetekre és fizikai kulcsokra támaszkodnak, amelyeket lemásolnak, továbbadnak és ritkán cserélnek. A WIFIGATE a hozzáférést a telefonra helyezi: minden bérlő személyes jogosultságot kap a telephely kapujához, az épület bejáratához és – ahol telepítve van – a saját tárolóegysége elektromos ajtajához, az Ön által választott időszakra korlátozva, és a bérlet lejártának pillanatában visszavonva. A telefon közvetlenül kommunikál a helyszíni eszközzel, a kapunál nincs szükség SIM-kártyára vagy internetkapcsolatra, és normál használathoz nincs havi előfizetés.",
+      "bullets": [
+        "A telephely kapujának és az épület ajtajának nyitása telefonról",
+        "Személyes jogosultság minden bérlőnek",
+        "Nyitvatartási időre vagy egyedi időablakra korlátozott hozzáférés",
+        "Egyszeri hozzáférés költöztetőknek és családtagoknak",
+        "A hozzáférés visszavonása a bérlet lejártának pillanatában",
+        "Előzmények arról, ki és mikor nyitott",
+        "Nincs cserélendő közös kód, kódbillentyűzet vagy kulcs",
+        "Nincs SIM-kártya vagy internetkapcsolat a kapunál"
+      ],
+      "seoTitle": "Okos beléptetés self storage raktárakhoz | WIFIGATE",
+      "seoDescription": "A WIFIGATE minden self storage bérlőnek személyes, telefonos hozzáférést ad a telephely kapujához és ajtajaihoz, nyitvatartási időre korlátozva, előzményekben rögzítve, és a bérlet lejártakor visszavonva.",
+      "imageAlt": "Nő telefonnal nyitja egy self storage raktár kapuját"
+    },
   },
 };

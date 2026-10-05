@@ -385,5 +385,41 @@ export default {
         "WIFIGATE aporta control de acceso a instalaciones deportivas, canchas de pádel y gimnasios, con entrada desde el teléfono y permisos temporales o permanentes.",
       imageAlt: "Jugadora de pádel abriendo la entrada de una cancha deportiva iluminada con el teléfono",
     },
+    "self-storage": {
+      "label": "Self storage y minibodegas",
+      "title": "Acceso inteligente para centros de self storage",
+      "heroLead": "Cada inquilino abre el portón del recinto y la puerta del edificio desde su propio teléfono, solo en los horarios autorizados. Cuando termina el alquiler, su acceso termina también: sin llaves que recoger ni códigos que cambiar.",
+      "highlights": [
+        {
+          "icon": "users",
+          "title": "Un permiso personal para cada inquilino",
+          "text": "Sin un código de portón compartido que los antiguos inquilinos todavía recuerdan. Cada inquilino tiene su propio acceso, y retirarlo lleva un instante cuando termina el contrato o hay un pago atrasado."
+        },
+        {
+          "icon": "clock",
+          "title": "Horarios de acceso a su medida",
+          "text": "Permita la entrada solo en el horario de atención del recinto, o dé a un inquilino una franja más amplia. Una empresa de mudanzas o un familiar puede recibir un acceso único para un solo día."
+        },
+        {
+          "icon": "history",
+          "title": "Sepa quién entró y cuándo",
+          "text": "Cada apertura queda registrada con la persona y la hora, así que una pregunta sobre una visita se responde con el historial y no revisando las cámaras de seguridad."
+        }
+      ],
+      "paragraph": "Los centros de self storage suelen depender de códigos de portón compartidos, teclados y llaves físicas que se copian, pasan de mano en mano y rara vez se cambian. WIFIGATE lleva el acceso al teléfono: cada inquilino tiene un permiso personal para el portón del recinto, la entrada del edificio y, donde esté instalada, la puerta eléctrica de su bodega, limitado a los horarios que usted elija y retirado en el momento en que termina el alquiler. El teléfono se comunica directamente con el dispositivo instalado en el lugar, sin tarjeta SIM ni conexión a internet en el portón, y sin suscripción mensual para el uso estándar.",
+      "bullets": [
+        "Apertura del portón del recinto y de la puerta del edificio desde el teléfono",
+        "Un permiso personal para cada inquilino",
+        "Acceso limitado al horario de atención o a una franja personalizada",
+        "Acceso único para empresas de mudanzas y familiares",
+        "Retiro del acceso en el momento en que termina el alquiler",
+        "Historial de quién abrió y cuándo",
+        "Sin códigos compartidos, teclados ni llaves que cambiar",
+        "Sin tarjeta SIM ni conexión a internet en el portón"
+      ],
+      "seoTitle": "Control de acceso inteligente para self storage y minibodegas | WIFIGATE",
+      "seoDescription": "WIFIGATE da a cada inquilino de self storage acceso personal desde el teléfono al portón y las puertas del recinto, limitado al horario de atención, registrado en un historial y retirado al terminar el alquiler.",
+      "imageAlt": "Mujer abriendo con el teléfono el portón de un centro de self storage"
+    },
   },
 };
