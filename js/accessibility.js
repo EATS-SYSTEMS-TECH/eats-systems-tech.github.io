@@ -1422,6 +1422,8 @@ function setupAccessibilityFabArrange(fab) {
   fab.addEventListener("pointerup", endPress)
   fab.addEventListener("pointercancel", endPress)
   fab.addEventListener("contextmenu", (event) => event.preventDefault())
+  // A native drag of anything inside the button would cancel the long press.
+  fab.addEventListener("dragstart", (event) => event.preventDefault())
 
   dismiss.addEventListener("click", () => {
     if (accessibilityPanelOpen) closeAccessibilityPanel(false)

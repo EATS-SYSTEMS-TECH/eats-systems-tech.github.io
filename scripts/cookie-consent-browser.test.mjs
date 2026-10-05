@@ -65,6 +65,63 @@ try {
     assert.equal(await panel.evaluate((element) => element.scrollWidth <= element.clientWidth + 1), true, `${locale}: horizontal overflow`);
     await context.close();
   }
+  // Every published page asks for consent; an instant redirect page has nothing to show.
+  const pages = [];
+  async function collectPages(dir) {
+    for (const entry of await readdir(dir, { withFileTypes: true })) {
+      if (["node_modules", "templates", "docs", ".git"].includes(entry.name)) continue;
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) await collectPages(full);
+      else if (entry.name.endsWith(".html")) pages.push(full);
+    }
+  }
+  await collectPages(path.resolve("."));
+  let consentPages = 0;
+  for (const file of pages) {
+    const html = await readFile(file, "utf8");
+    const name = path.relative(process.cwd(), file);
+    assert.doesNotMatch(html, /locale-redirect\.js/, `${name}: no remembered-language redirect`);
+    if (/http-equiv="refresh"/i.test(html)) continue;
+    assert.equal(html.match(/cookie-consent\.js/g)?.length, 1, `${name}: cookie consent script`);
+    assert.equal(html.match(/cookie-consent-copy\.js/g)?.length, 1, `${name}: cookie consent copy`);
+    consentPages += 1;
+  }
+  assert.ok(consentPages > 500, `only ${consentPages} pages ask for consent`);
+
+  // The site keeps no language choice: the URL alone sets the language.
+  for (const file of (await readdir(path.resolve("js"))).filter((name) => name.endsWith(".js"))) {
+    const source = await readFile(path.resolve("js", file), "utf8");
+    assert.doesNotMatch(source, /localStorage\.setItem\(\s*["']language["']/, `js/${file}: stores a language`);
+  }
+  {
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    await context.addInitScript(() => {
+      if (!sessionStorage.getItem("seeded")) {
+        localStorage.setItem("language", "fr");
+        sessionStorage.setItem("seeded", "1");
+      }
+    });
+    const page = await context.newPage();
+    await page.goto(pathToFileURL(path.resolve("index.html")).href);
+    await page.getByRole("dialog", { name: copies.en.title }).waitFor();
+    assert.equal(await page.evaluate(() => document.documentElement.lang), "en", "an English URL stays English");
+    assert.equal(await page.evaluate(() => localStorage.getItem("language")), null, "an old language choice is cleared");
+
+    // Rejecting is as prominent as accepting.
+    const style = (selector) => page.locator(selector).evaluate((button) => {
+      const s = getComputedStyle(button);
+      return [s.backgroundColor, s.color, s.borderColor, s.fontWeight, button.offsetHeight].join("|");
+    });
+    assert.equal(await style("[data-cookie-reject]"), await style("[data-cookie-accept]"));
+
+    // The invitation link page asks too, in its own language.
+    await page.goto(pathToFileURL(path.resolve("he/wifigate-link/index.html")).href);
+    const panel = page.getByRole("dialog", { name: copies.he.title });
+    await panel.waitFor();
+    assert.equal(await panel.getAttribute("dir"), "rtl");
+    await context.close();
+  }
+
   const context = await browser.newContext();
   const source = (await readFile(path.resolve("js/cookie-consent.js"), "utf8"))
     .replace('const GA_MEASUREMENT_ID = "";', 'const GA_MEASUREMENT_ID = "G-TEST12345";');

@@ -48,12 +48,6 @@ function setupLanguageSelector() {
 
   dropdown.querySelectorAll("a.language-selector__option").forEach((option) => {
     option.addEventListener("click", () => {
-      try {
-        localStorage.setItem("language", option.dataset.lang || "en");
-      } catch (error) {
-        // Ignore storage failures.
-      }
-
       closeSelector();
     });
   });
