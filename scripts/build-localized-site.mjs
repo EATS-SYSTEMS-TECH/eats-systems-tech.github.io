@@ -33,16 +33,10 @@ const homeDataFiles = [
   "js/translations.js",
   "js/translations-extra.js",
   "js/translations-new-locales.js",
-  "js/contact-footer-translations.js",
-  "js/features-refresh.js",
   "js/guest-invites-home.js",
-  "js/application-stories.js",
-  "js/application-stories-extra.js",
   "js/i18n.js",
   "js/accessibility-copy.js",
   "js/language-polish.js",
-  "js/niche-split-overrides.js",
-  "js/site-copy-overrides.js",
 ];
 
 // The legal text comes last: it is generated from scripts/legal/*-content.mjs
@@ -50,9 +44,7 @@ const homeDataFiles = [
 const legalPageData = (pageKey) => [
   "js/translations.js",
   "js/translations-extra.js",
-  "js/contact-footer-translations.js",
   "js/language-polish.js",
-  "js/site-copy-overrides.js",
   `js/legal/${pageKey}-content.js`,
 ];
 const legalDataFiles = {
@@ -66,12 +58,7 @@ const homeRuntimeScriptsToRemove = [
   "js/translations.js",
   "js/translations-extra.js",
   "js/translations-new-locales.js",
-  "js/contact-footer-translations.js",
-  "js/features-refresh.js",
-  "js/site-copy-overrides.js",
   "js/i18n.js",
-  "js/application-stories.js",
-  "js/application-stories-extra.js",
   "js/language-selector.js",
 ];
 
@@ -660,9 +647,8 @@ function buildHomeMeta(locale, bundle) {
 function setHomeMeta($, bundle, locale, localeOptions, copy) {
   const meta = buildHomeMeta(locale, bundle);
   const url = buildPageUrl(locale, "home");
-  const footerTagline =
-    getNestedValue(bundle, "footer.tagline") ||
-    "Smart. Secure. Private. No subscription. No compromises.";
+  // The slogan is the tagline the footer shows on this page.
+  const footerTagline = copy.footer.tagline;
 
   $("title").text(meta.title);
   setMetaByName($, "description", meta.description);

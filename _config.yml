@@ -15,5 +15,11 @@ exclude:
   - tsconfig.json
   - firebase.staging.json
   - favicon-html-snippet.txt
+  # Image sources: the site serves the WebP/JPG derivatives made from them.
   - assets/wifigate_niche_pages/*.png
+  - assets/wifigate_watermark/
+  - assets/img/private-access-arrival.png
+  - assets/img/wifigate-product-v2.png
+  - assets/img/wifigate-system-overview.png
+  - assets/wifigate_product/HOMEPAGE_WIFIGATE.png
   - assets/wifigate_niche_pages/app-edits.md
