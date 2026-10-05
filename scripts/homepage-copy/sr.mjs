@@ -169,14 +169,6 @@
     socialTitle: "Пратите нас",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Сва права задржана.",
   },
-  schema: {
-    productCategory: "Систем контроле приступа",
-    monthlySubscription: "Месечна претплата",
-    subscriptionValue: "Није потребна за стандардни WIFIGATE; комерцијална употреба WIFIGATE Host захтева претплату",
-    simCard: "SIM картица",
-    externalRouter: "Спољни WiFi рутер",
-    notRequired: "Није потребно",
-  },
 };
 
 export default copy;

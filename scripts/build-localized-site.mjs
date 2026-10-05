@@ -704,43 +704,25 @@ function setHomeMeta($, bundle, locale, localeOptions, copy) {
         },
       },
     },
+    // No Product item: the site publishes no price, offer or rating, and
+    // Google rejects a Product without one of them. The brand belongs to the
+    // company that makes it.
     {
       "@context": "https://schema.org",
-      "@type": "Product",
-      name: "WIFIGATE",
-      alternateName: ["WiFiGate", "WiFi Gate"],
-      description: meta.description,
-      category: "Access control system",
-      inLanguage: locale,
-      url,
-      image: pageImages.home,
-      slogan: footerTagline,
+      "@type": "Organization",
+      "@id": `${siteOrigin}/#organization`,
+      name: "EATS SYSTEMS TECH",
+      url: siteOrigin,
+      logo: "https://wifigate.io/assets/img/logo.png",
       brand: {
         "@type": "Brand",
         name: "WIFIGATE",
+        alternateName: ["WiFiGate", "WiFi Gate"],
+        description: meta.description,
+        slogan: footerTagline,
+        logo: "https://wifigate.io/assets/img/logo.png",
+        url,
       },
-      manufacturer: {
-        "@type": "Organization",
-        name: "EATS SYSTEMS TECH",
-        url: siteOrigin,
-      },
-      additionalProperty: [
-        {
-          "@type": "PropertyValue",
-          name: copy.schema.monthlySubscription,
-          value: copy.schema.subscriptionValue,
-        },
-        {
-          "@type": "PropertyValue",
-          name: copy.schema.simCard,
-          value: copy.schema.notRequired,
-        },
-        {
-          "@type": "PropertyValue",
-          name: copy.schema.externalRouter,
-          value: copy.schema.notRequired,
-        },
-      ],
     },
     {
       "@context": "https://schema.org",

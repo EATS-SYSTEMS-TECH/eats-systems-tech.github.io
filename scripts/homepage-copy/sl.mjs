@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "Spremljajte nas",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Vse pravice pridržane.",
   },
-  schema: {
-    productCategory: "Sistem za nadzor dostopa",
-    monthlySubscription: "Mesečna naročnina",
-    subscriptionValue: "Za standardni WIFIGATE ni potrebna; komercialna uporaba WIFIGATE Host zahteva naročnino",
-    simCard: "Kartica SIM",
-    externalRouter: "Zunanji WiFi usmerjevalnik",
-    notRequired: "Ni potrebno",
-  },
 };
 
 export default copy;

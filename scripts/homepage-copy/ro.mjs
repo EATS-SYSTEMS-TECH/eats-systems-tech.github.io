@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "Urmăriți-ne",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Toate drepturile rezervate.",
   },
-  schema: {
-    productCategory: "Sistem de control al accesului",
-    monthlySubscription: "Abonament lunar",
-    subscriptionValue: "Nu este necesar pentru WIFIGATE standard; utilizarea comercială a WIFIGATE Host este disponibilă pe bază de abonament",
-    simCard: "Cartelă SIM",
-    externalRouter: "Router WiFi extern",
-    notRequired: "Nu este necesar",
-  },
 };
 
 export default copy;

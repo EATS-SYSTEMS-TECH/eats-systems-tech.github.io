@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "フォローする",
     copyright: "WIFIGATE · EATS SYSTEMS TECH。すべての権利を留保します。",
   },
-  schema: {
-    productCategory: "入退室管理システム",
-    monthlySubscription: "月額サブスクリプション",
-    subscriptionValue: "標準 WIFIGATE では不要。唯一の例外である商用 WIFIGATE Host はサブスクリプション制",
-    simCard: "SIM カード",
-    externalRouter: "外部 Wi-Fi ルーター",
-    notRequired: "不要",
-  },
 };
 
 export default copy;
