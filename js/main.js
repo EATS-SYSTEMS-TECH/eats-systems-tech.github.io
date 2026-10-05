@@ -137,8 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof setupCenteredScroll === "function") setupCenteredScroll();
   if (typeof setupContactForm === "function") setupContactForm();
   if (typeof setupHeroMedia === "function") setupHeroMedia();
-  if (typeof setupHeroRotator === "function") setupHeroRotator();
-  if (typeof setupVideoAutoplay === "function") setupVideoAutoplay();
   if (typeof setupLanguageSelector === "function") setupLanguageSelector();
   if (typeof setupTabNavigation === "function") setupTabNavigation();
   setYear();
