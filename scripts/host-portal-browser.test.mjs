@@ -60,6 +60,9 @@ async function scenario(options = {}) {
   await context.route("**/api/v1/**", async (route) => {
     const request = route.request();
     calls.push({ path: new URL(request.url()).pathname, method: request.method(), headers: request.headers(), body: request.postData() });
+    const requestPath=new URL(request.url()).pathname;
+    if(request.method()==="GET"&&requestPath==="/api/v1/organizations"){await route.fulfill({status:200,json:{organizations:[],nextCursor:null}});return;}
+    if(request.method()==="GET"&&requestPath==="/api/v1/auth/invitations"){await route.fulfill({status:200,json:{items:[],nextCursor:null}});return;}
     if (state.errorStatus) { await route.fulfill({ status: state.errorStatus, json: { error: { code: "DEPENDENCY_UNAVAILABLE" } } }); return; }
     if (["POST", "DELETE"].includes(request.method())) {
       if (state.failMutationOnce) { state.failMutationOnce=false; await route.fulfill({status:503,json:{error:{code:"DEPENDENCY_UNAVAILABLE"}}}); return; }
@@ -104,6 +107,7 @@ try {
   await admin.page.locator('#mfa-challenge input[name="code"]').fill("000000"); await admin.page.locator('#mfa-challenge button[type="submit"]').click();
   await admin.page.locator('#mfa-challenge [role="status"]').getByText("That code is incorrect or expired.",{exact:false}).waitFor();
   await admin.page.locator('#mfa-challenge input[name="code"]').fill("123456"); await admin.page.locator('#mfa-challenge button[type="submit"]').click();
+  await admin.page.getByRole("button",{name:"Settings",exact:true}).click();
   await admin.page.locator("#admin-approval").waitFor({state:"visible"});
   if (process.env.WIFIGATE_SCREENSHOT_DIR) await admin.page.screenshot({path:join(process.env.WIFIGATE_SCREENSHOT_DIR,"admin-portal.png"),fullPage:true});
   await admin.page.locator('#approval-form input').fill("NEW@Example.test"); await admin.page.locator('#approval-form button').click();
@@ -145,12 +149,15 @@ try {
   for (const mobile of [false,true]) {
     const regular=await scenario({mobile,provider:mobile?"apple.com":"google.com"}); await openPortal(regular);
     await regular.page.locator("#dashboard-content").waitFor({state:"visible"});
-    await regular.page.locator("#calendar-image").waitFor({state:"visible"});
-    const dimensions=await regular.page.locator("#calendar-image").evaluate(image=>({width:image.clientWidth,naturalWidth:image.naturalWidth}));
-    assert.equal(dimensions.naturalWidth,3840); assert.ok(dimensions.width<=(mobile ? 390:1440));
-    if (process.env.WIFIGATE_SCREENSHOT_DIR) await regular.page.screenshot({path:join(process.env.WIFIGATE_SCREENSHOT_DIR,mobile?"user-mobile.png":"user-desktop.png"),fullPage:true});
-    await regular.page.locator("#account-details summary").click(); await regular.page.locator("#optional-enrollment").click();
+    await regular.page.getByRole("region",{name:"Reservation calendar",exact:true}).waitFor();
+    assert.equal(await regular.page.locator("#calendar-image").count(),0);
+    assert.equal(await regular.page.locator("#account-details").isVisible(),false);
+    assert.equal(await regular.page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true);
+    if(process.env.WIFIGATE_SCREENSHOT_DIR) await regular.page.screenshot({path:join(process.env.WIFIGATE_SCREENSHOT_DIR,`empty-calendar-${mobile?"mobile":"desktop"}.png`),fullPage:true});
+    await regular.page.getByRole("button",{name:"Settings",exact:true}).click();
+    await regular.page.locator("#optional-enrollment").click();
     await regular.page.locator("#cancel-enrollment").click(); await regular.page.locator("#dashboard-content").waitFor({state:"visible"});
+    await regular.page.getByRole("button",{name:"Settings",exact:true}).click();
     await regular.page.locator("#optional-enrollment").click(); await enroll(regular);
     await regular.page.locator("#dashboard-content").waitFor({state:"visible"});
     assert.equal(await regular.page.locator("#admin-approval").isVisible(),false);
@@ -164,5 +171,5 @@ try {
     await t.page.waitForURL("**/dashboard/"); await t.page.locator("#dashboard-content").waitFor({state:"visible"});
     assert.ok(t.calls.some(call=>call.method==="PUT")); await t.context.close();
   }
-  console.log("Portal browser fixtures passed: denial/errors, admin MFA enrollment/challenge/approval, revoked access, optional MFA, responsive image, login and logout.");
+  console.log("Portal browser fixtures passed: denial/errors, admin MFA enrollment/challenge/approval, revoked access, optional MFA, responsive calendar workspace, login and logout.");
 } finally { await browser.close(); }
