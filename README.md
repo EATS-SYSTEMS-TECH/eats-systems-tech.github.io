@@ -1,5 +1,7 @@
 # eats-systems-tech.github.io
 
+The Host portal now manages organizations, physical system ownership, reservation calendars and signed guest access. The API integrations section lets owner/admin members create scoped client keys, rotate them with up to 24 hours of overlap and revoke them. Only owners can explicitly reveal a private key after TOTP and recent sign-in; secrets are removed from the page when hidden or the organization/session changes. The backend enforces every permission independently. Desktop and mobile browser tests exercise key creation, disclosure/hiding, rotation and revocation against Host HTTP routes and the isolated Firestore emulator.
+
 Static multilingual site structure:
 
 - Source templates live under `templates/`.
