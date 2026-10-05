@@ -85,7 +85,7 @@ export async function renderHostOperations({ container, user, organization, prop
     if ([...staffTemplate.options].some(option => option.value === selected)) staffTemplate.value = selected;
   };
   locale.addEventListener("change", drawStaffTemplates);
-  const eventTypes = field(settings, "Alert events (empty means all)", "eventTypes", "", "text", ["automation.failed", "automation.retry", "automation.paused", "automation.cancelled", "automation.delivered", "integration.event.dead_letter", "integration.event.retry"].map(value => [value, value])); eventTypes.multiple = true; eventTypes.required = false; eventTypes.size = 4;
+  const eventTypes = field(settings, "Alert events (empty means all)", "eventTypes", "", "text", ["automation.failed", "automation.retry", "automation.paused", "automation.cancelled", "automation.delivered", "integration.event.dead_letter", "integration.event.retry", "operations.slo_api_breached", "operations.slo_automation_breached", "operations.slo_delivery_breached", "operations.slo_unowned", "operations.slo_unavailable"].map(value => [value, value])); eventTypes.multiple = true; eventTypes.required = false; eventTypes.size = 4;
   for (const option of eventTypes.options) option.selected = (preferences.alerts.eventTypes ?? []).includes(option.value);
   const channels = {};
   for (const name of ["inApp", "email", "sms"]) {
