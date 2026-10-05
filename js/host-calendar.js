@@ -105,6 +105,27 @@ export async function renderHostCalendar({ container, user, organization, proper
       form.append(close);
     } else form.append(save, close);
     form.append(resultStatus); editor.append(heading, form);
+    if (record && readOnly && organization.membership.role === "owner" && !record.guestRedactedAt) {
+      const privacy = node("section", undefined, { "aria-label": "Guest privacy" });
+      const approval = node("input", undefined, { type: "checkbox" });
+      const label = node("label", "Permanently delete this closed reservation's guest details"); label.prepend(approval);
+      const erase = node("button", "Delete guest details", { type: "button" }); erase.disabled = true;
+      const message = node("p", "", { role: "status" });
+      privacy.append(node("p", "This deletes stored guest details and private delivery content. An offline pass already imported remains valid until its effective end."), label, erase, message); editor.append(privacy);
+      let busy = false; const key = crypto.randomUUID();
+      approval.addEventListener("change", () => { erase.disabled = busy || !approval.checked; });
+      erase.addEventListener("click", async () => {
+        if (busy || !approval.checked) return; busy = true; erase.disabled = approval.disabled = true; message.textContent = "Deleting guest details…";
+        try {
+          await portalRequest(user, path(`/${encodeURIComponent(record.id)}/privacy/redact`), "POST", { version: record.version, confirm: "delete_guest_details" }, key);
+          if (!current() || !privacy.isConnected) return;
+          editor.replaceChildren(); await load();
+        } catch (error) {
+          if (!current() || !privacy.isConnected) return;
+          message.textContent = errors[error.code] || (error.code === "RECENT_AUTH_REQUIRED" ? "Sign in again with TOTP before deleting guest details." : "Guest details could not be deleted. Refresh before retrying.");
+        } finally { if (current() && privacy.isConnected) { busy = false; approval.disabled = false; erase.disabled = !approval.checked; } }
+      });
+    }
     if (record) void renderHostAccessGrants({ container: editor, user, organization, reservation: record, isCurrent: current });
     heading.tabIndex = -1; heading.focus();
     let attempt;
