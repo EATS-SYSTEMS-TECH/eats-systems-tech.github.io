@@ -1,5 +1,5 @@
 import { portalRequest } from "./api/index.js";
-import { field, node } from "./host-ui.js";
+import { field, node, downloadHostCsv } from "./host-ui.js";
 
 export async function renderHostOperations({ container, user, organization, properties, rooms, isCurrent }) {
   const role = organization.membership.role;
@@ -19,11 +19,26 @@ export async function renderHostOperations({ container, user, organization, prop
     if (!attempts.has(signature)) attempts.set(signature, crypto.randomUUID());
     return portalRequest(user, `${root}/operations${path}`, "PUT", body, attempts.get(signature));
   }
+  const readinessForm = node("form"), readinessQuery = field(readinessForm, "Search access systems", "q"), readinessButton = node("button", "Check system configuration", { type: "submit" }), readinessRows = node("div");
+  readinessQuery.required = false; readinessQuery.maxLength = 120; readinessForm.append(readinessButton);
+  section.append(node("h3", "System configuration"), node("p", "These checks cover Host permissions and configuration. Check the gate through BLE in the mobile app before relying on physical availability."), readinessForm, readinessRows);
+  async function readReadiness(cursor, append = false) {
+    const response = await portalRequest(user, `${root}/operations/readiness?${new URLSearchParams({ limit: "20", ...(readinessQuery.value.trim() ? { q: readinessQuery.value.trim() } : {}), ...(cursor ? { cursor } : {}) })}`);
+    if (!current()) return;
+    if (!append) readinessRows.replaceChildren();
+    for (const item of response.items) readinessRows.append(node("p", `${item.name} · ${item.configured ? "Configured" : item.reasons.join(", ")} · BLE: unknown`));
+    if (response.nextCursor) { const more = node("button", "Check more systems", { type: "button" }); more.addEventListener("click", () => run(more, async () => { await readReadiness(response.nextCursor, true); if (current()) more.remove(); })); readinessRows.append(more); }
+    if (!response.items.length) readinessRows.append(node("p", response.nextCursor ? "No matches on this page. Continue to check later systems." : "No matching systems."));
+    status.textContent = "System configuration checked.";
+  }
+  readinessForm.addEventListener("submit", event => { event.preventDefault(); if (readinessForm.reportValidity()) void run(readinessButton, () => readReadiness()); });
   const response = await portalRequest(user, `${root}/operations/preferences`);
   if (!current()) return;
   let preferences = response.preferences;
   const settings = node("form"), locale = field(settings, "Operations language", "locale", preferences.locale, "text", [["en", "English"], ["he", "עברית"]]);
   const severity = field(settings, "Minimum alert severity", "minimumSeverity", preferences.alerts.minimumSeverity, "text", [["info", "Information"], ["warning", "Warning"], ["error", "Error"]]);
+  const eventTypes = field(settings, "Alert events (empty means all)", "eventTypes", "", "text", ["automation.failed", "automation.retry", "automation.paused", "automation.cancelled", "automation.delivered", "integration.event.dead_letter", "integration.event.retry"].map(value => [value, value])); eventTypes.multiple = true; eventTypes.required = false; eventTypes.size = 4;
+  for (const option of eventTypes.options) option.selected = (preferences.alerts.eventTypes ?? []).includes(option.value);
   const channels = {};
   for (const name of ["inApp", "email", "sms"]) {
     const label = node("label", `Alert preference: ${name}`), input = node("input", undefined, { type: "checkbox", name }); input.checked = preferences.alerts[name]; label.prepend(input); settings.append(label); channels[name] = input;
@@ -48,16 +63,28 @@ export async function renderHostOperations({ container, user, organization, prop
     void run(save, async () => {
       const savedFilters = [...preferences.savedFilters];
       if (filterName.value.trim()) savedFilters.push({ name: filterName.value.trim(), ...(property.value ? { propertyId: property.value } : {}), ...(room.value ? { roomId: room.value } : {}), ...(filterStatus.value ? { status: filterStatus.value } : {}) });
-      const result = await write("/preferences", { savedFilters, alerts: { inApp: channels.inApp.checked, email: channels.email.checked, sms: channels.sms.checked, minimumSeverity: severity.value }, locale: locale.value, ...(preferences.version ? { version: preferences.version } : {}) });
+      const result = await write("/preferences", { savedFilters, alerts: { inApp: channels.inApp.checked, email: channels.email.checked, sms: channels.sms.checked, minimumSeverity: severity.value, eventTypes: [...eventTypes.selectedOptions].map(option => option.value) }, locale: locale.value, ...(preferences.version ? { version: preferences.version } : {}) });
       if (current()) { preferences = result.preferences; filterName.value = ""; drawFilters(); status.textContent = "Operation preferences saved."; }
     });
   });
+  const alertsButton = node("button", "Refresh operational alerts", { type: "button" }), alertRows = node("div", undefined, { "aria-live": "polite" }); section.append(node("h3", "Operational alerts"), alertsButton, alertRows);
+  async function readAlerts(cursor, append = false) {
+    const result = await portalRequest(user, `${root}/operations/alerts?${new URLSearchParams({ limit: "50", ...(cursor ? { cursor } : {}) })}`);
+    if (!current()) return;
+    if (!append) alertRows.replaceChildren();
+    for (const item of result.items) alertRows.append(node("p", `${item.severity} · ${item.title} · ${item.targetId} · ${new Date(item.createdAt).toLocaleString()}`));
+    if (!result.enabled) alertRows.append(node("p", "In-app alerts are disabled in your preferences."));
+    else if (!result.items.length) alertRows.append(node("p", result.nextCursor ? "No matching alerts on this page. Continue to check earlier events." : "No matching operational alerts."));
+    if (result.nextCursor) { const more = node("button", "Load earlier operational alerts", { type: "button" }); more.addEventListener("click", () => run(more, async () => { await readAlerts(result.nextCursor, true); if (current()) more.remove(); })); alertRows.append(more); }
+  }
+  alertsButton.addEventListener("click", () => run(alertsButton, () => readAlerts()));
   const timelineForm = node("form"), target = field(timelineForm, "Timeline target ID", "targetId"); target.required = false;
   const loadTimeline = node("button", "Load activity timeline", { type: "submit" }), timeline = node("div"); timelineForm.append(loadTimeline); section.append(timelineForm, timeline);
   async function readTimeline(cursor, append = false) {
     const result = await portalRequest(user, `${root}/operations/timeline?${new URLSearchParams({ limit: "50", ...(target.value ? { targetId: target.value } : {}), ...(cursor ? { cursor } : {}) })}`);
     if (!current()) return; if (!append) timeline.replaceChildren();
     for (const item of result.items) timeline.append(node("p", `${item.createdAt} · ${item.type} · ${item.targetId ?? ""}`));
+    const download = node("button", "Export this audit page", { type: "button" }); download.addEventListener("click", () => downloadHostCsv(result.items, ["id", "type", "targetId", "requestId", "createdAt"], "wifigate-audit-page.csv")); timeline.append(download);
     if (result.nextCursor) { const more = node("button", "Load more timeline entries", { type: "button" }); more.addEventListener("click", () => run(more, async () => { await readTimeline(result.nextCursor, true); if (current()) more.remove(); })); timeline.append(more); }
     status.textContent = result.items.length ? "Activity timeline loaded." : "No matching activity.";
   }
@@ -90,9 +117,7 @@ export async function renderHostOperations({ container, user, organization, prop
       for (const item of result.items) rows.append(node("p", `${item.date} · ${item.apiKeyId} · total ${item.total} · created ${item.created} · replay ${item.replay ?? 0} · errors ${item.error ?? 0} · physical gate invitations ${item.physicalGateInvitations}`));
       const download = node("button", "Export this usage page", { type: "button" });
       download.addEventListener("click", () => {
-        const cell = value => { const text = String(value ?? ""), safe = /^[\s]*[=+\-@]/.test(text) ? `'${text}` : text; return `"${safe.replaceAll('"', '""')}"`; };
-        const fields = ["date", "apiKeyId", "created", "total", "replay", "error", "physicalGateInvitations"], csv = [fields, ...result.items.map(item => fields.map(field => item[field]))].map(row => row.map(cell).join(",")).join("\r\n") + "\r\n";
-        const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" })), link = node("a", undefined, { href: url, download: "wifigate-usage-page.csv" }); document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+        downloadHostCsv(result.items, ["date", "apiKeyId", "created", "total", "replay", "error", "physicalGateInvitations"], "wifigate-usage-page.csv");
       }); rows.append(download);
       if (result.nextCursor) { const more = node("button", "Load more usage", { type: "button" }); more.addEventListener("click", () => run(more, async () => { await readUsage(result.nextCursor, true); if (current()) more.remove(); })); rows.append(more); }
       status.textContent = "API usage loaded. Each export contains one bounded page.";

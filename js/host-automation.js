@@ -28,7 +28,8 @@ export async function renderHostAutomation({ container, user, organization, prop
     for (const input of [early, late]) { input.min = "0"; input.max = "10080"; input.step = "1"; }
     const channel = field(form, "Automatic delivery channel", "channel", "none", "text", [["none", "Generate only"], ["partner-webhook", "Configured partner delivery"]]);
     const destination = field(form, "Delivery destination ID", "destinationId"); destination.maxLength = 100; destination.pattern = "[A-Za-z0-9_-]+";
-    const syncChannel = () => { destination.required = channel.value === "partner-webhook"; destination.disabled = !destination.required; }; channel.addEventListener("change", syncChannel); syncChannel();
+    const template = field(form, "Guest message template ID (optional)", "guestTemplateId"); template.required = false; template.maxLength = 100; template.pattern = "[A-Za-z0-9_-]+";
+    const syncChannel = () => { destination.required = channel.value === "partner-webhook"; destination.disabled = !destination.required; template.disabled = !destination.required; }; channel.addEventListener("change", syncChannel); syncChannel();
     let version = 0, loadedProperty;
     const load = node("button", "Load automation policy", { type: "button" }), save = node("button", "Save automation policy", { type: "submit", disabled: "" }); form.append(load, save); section.append(form);
     property.addEventListener("change", () => { loadedProperty = undefined; save.disabled = true; });
@@ -36,11 +37,11 @@ export async function renderHostAutomation({ container, user, organization, prop
       const id = property.value, response = await portalRequest(user, `${root}/properties/${encodeURIComponent(id)}/policy`);
       if (!current() || property.value !== id) return;
       const policy = response.policy; loadedProperty = id; version = policy.version;
-      enabled.checked = policy.enabled; early.value = String(policy.earlyAccessMinutes); late.value = String(policy.lateExpiryMinutes); channel.value = policy.channel; destination.value = policy.destinationId ?? ""; syncChannel(); save.disabled = false; status.textContent = "Automation policy loaded.";
+      enabled.checked = policy.enabled; early.value = String(policy.earlyAccessMinutes); late.value = String(policy.lateExpiryMinutes); channel.value = policy.channel; destination.value = policy.destinationId ?? ""; template.value = policy.guestTemplateId ?? ""; syncChannel(); save.disabled = false; status.textContent = "Automation policy loaded.";
     }));
     form.addEventListener("submit", event => { event.preventDefault(); if (!form.reportValidity() || loadedProperty !== property.value) return;
       void run(save, async () => {
-        const id = property.value, body = { enabled: enabled.checked, earlyAccessMinutes: Number(early.value), lateExpiryMinutes: Number(late.value), channel: channel.value, ...(channel.value === "partner-webhook" ? { destinationId: destination.value } : {}), ...(version ? { version } : {}) };
+        const id = property.value, body = { enabled: enabled.checked, earlyAccessMinutes: Number(early.value), lateExpiryMinutes: Number(late.value), channel: channel.value, ...(channel.value === "partner-webhook" ? { destinationId: destination.value, ...(template.value.trim() ? { guestTemplateId: template.value.trim() } : {}) } : {}), ...(version ? { version } : {}) };
         const response = await mutate(`${root}/properties/${encodeURIComponent(id)}/policy`, "PUT", body);
         if (!current() || property.value !== id) return;
         version = response.policy.version; status.textContent = "Automation policy saved. Review paused jobs before retrying them.";
