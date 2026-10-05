@@ -282,7 +282,7 @@ export async function loadHostManagement(user, identity, preferredId) {
     if (epoch !== generation) return;
     await renderHostOperations({ container: root, user, organization: org, properties: properties.items, rooms: rooms.items, isCurrent: () => epoch === generation });
     if (epoch !== generation) return;
-    await renderHostImportRequests({ container: root, user, organization: org, isCurrent: () => epoch === generation });
+    await renderHostImportRequests({ container: root, user, organization: org, isCurrent: () => epoch === generation, onConnected: () => epoch === generation ? loadHostManagement(user, identity, org.id) : undefined });
   } catch (error) {
     if (epoch !== generation) return;
     root.replaceChildren(node("h2", "Organizations"), node("p", message(error), { role: "status" }));
