@@ -6,13 +6,13 @@
   "en": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": ""
     },
@@ -33,7 +33,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -54,22 +54,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -77,11 +86,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -107,13 +116,13 @@
   "es": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Este documento está disponible en inglés. La versión en inglés es la versión jurídicamente vinculante."
     },
@@ -135,7 +144,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -156,22 +165,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -179,11 +197,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -209,13 +227,13 @@
   "fr": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Juridique",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ce document est disponible en anglais. La version anglaise est la version juridiquement contraignante."
     },
@@ -237,7 +255,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -258,22 +276,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -281,11 +308,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -311,13 +338,13 @@
   "de": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dieses Dokument ist auf Englisch verfügbar. Die englische Fassung ist die rechtsverbindliche Fassung."
     },
@@ -339,7 +366,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -360,22 +387,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -383,11 +419,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -413,13 +449,13 @@
   "he": {
     "metaTags": {
       "title": "מדיניות עוגיות | WIFIGATE",
-      "description": "העוגיות והאחסון בדפדפן שבהם נעשה שימוש באתר wifigate.io ובפורטל האינטרנט של WIFIGATE: ללא עוגיות פרסום או ניתוח, רק העדפות שפה ונגישות וסשן כניסה."
+      "description": "העוגיות והאחסון בדפדפן באתר wifigate.io ובפורטל WIFIGATE, כולל Google Analytics רק לאחר הסכמה."
     },
     "hero": {
       "eyebrow": "משפטי",
       "title": "מדיניות עוגיות",
       "subtitle": "מדיניות עוגיות זו מסבירה באילו עוגיות וטכנולוגיות דומות נעשה שימוש באתר wifigate.io ובפורטל האינטרנט של WIFIGATE, לשם מה, וכיצד תוכלו לשלוט בהן.",
-      "updated": "תאריך תחילה: 4 באוקטובר 2026",
+      "updated": "תאריך תחילה: 5 באוקטובר 2026",
       "owner": "המפעילה: EATS SYSTEMS TECH",
       "languageNote": ""
     },
@@ -440,7 +476,7 @@
     "s": {
       "summary": {
         "title": "1. בקצרה",
-        "b0": "איננו משתמשים באתר בעוגיות פרסום, בפיקסלי מעקב או בעוגיות ניתוח. האתר שומר רק את ההעדפות שבחרתם, כגון שפה והגדרות נגישות, ופורטל האינטרנט שומר סשן כניסה בזמן השימוש בו. מאחר שאחסון זה הכרחי או נעשה לבקשתכם, איננו מציגים באנר הסכמה לעוגיות."
+        "b0": "האתר משתמש באחסון הכרחי לשמירת בחירות השפה, הנגישות והעוגיות שלכם. אם תאשרו, נשתמש גם ב־Google Analytics כדי להבין את השימוש באתר ולשפר אותו. המדידה אינה נטענת לפני אישור. איננו משתמשים בעוגיות פרסום או בפיקסלי מעקב. הפורטל שומר גם סשן כניסה בזמן השימוש בו."
       },
       "what": {
         "title": "2. מהן עוגיות וטכנולוגיות דומות",
@@ -461,22 +497,31 @@
           "r1c1": "אחסון מקומי (צד ראשון)",
           "r1c2": "זוכר את הגדרות הנגישות שלכם, כגון טקסט מוגדל או ניגודיות גבוהה.",
           "r1c3": "עד שתמחקו אותו",
-          "r2c0": "סשן Firebase Authentication",
-          "r2c1": "אחסון סשן (צד ראשון, בפורטל בלבד)",
-          "r2c2": "שומר על החיבור שלכם לפורטל כל עוד לשונית הדפדפן פתוחה.",
-          "r2c3": "עד ההתנתקות או סגירת הלשונית",
-          "r3c0": "נתוני Firebase SDK",
-          "r3c1": "IndexedDB (צד ראשון, בפורטל בלבד)",
-          "r3c2": "נתונים טכניים שספריית הכניסה של Firebase צריכה כדי לפעול.",
-          "r3c3": "עד שתמחקו את נתוני האתר"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "אחסון מקומי (צד ראשון)",
+          "r2c2": "זוכר את בחירתכם לגבי מדידה.",
+          "r2c3": "עד 180 ימים",
+          "r3c0": "_ga ו־_ga_*",
+          "r3c1": "עוגיות מדידה (Google, רק בהסכמה)",
+          "r3c2": "מדידת ביקורים ושימוש באתר.",
+          "r3c3": "עד 180 ימים",
+          "r4c0": "סשן Firebase Authentication",
+          "r4c1": "אחסון סשן (צד ראשון, בפורטל בלבד)",
+          "r4c2": "שומר על החיבור שלכם לפורטל כל עוד לשונית הדפדפן פתוחה.",
+          "r4c3": "עד ההתנתקות או סגירת הלשונית",
+          "r5c0": "נתוני Firebase SDK",
+          "r5c1": "IndexedDB (צד ראשון, בפורטל בלבד)",
+          "r5c2": "נתונים טכניים שספריית הכניסה של Firebase צריכה כדי לפעול.",
+          "r5c3": "עד שתמחקו את נתוני האתר"
         },
-        "b1": "הדפים הציבוריים של האתר אינם שומרים עוגיות. אחסון סשן ו‑IndexedDB משמשים רק בדפי הכניסה ולוח הבקרה של הפורטל."
+        "b1": "הדפים הציבוריים שומרים עוגיות מדידה רק לאחר אישורכם. אחסון סשן ו־IndexedDB משמשים רק בדפי הכניסה ולוח הבקרה של הפורטל."
       },
       "third-party": {
         "title": "4. שירותי צד שלישי",
         "b0": "גופנים. האתר מגיש את הגופנים שלו מ‑wifigate.io עצמו, כך שאין פנייה לשירות גופנים של צד שלישי.",
-        "b1": "כניסה באמצעות Google ו‑Apple. כשאתם נכנסים לפורטל, חלון הכניסה של Google או של Apple עשוי לשמור עוגיות משלו בדומיין שלו, בכפוף למדיניות הפרטיות של Google או של Apple.",
-        "b2": "קישורים לשירותים אחרים. קישורים ל‑WhatsApp, לרשתות חברתיות, לחנויות אפליקציות ולשירותי ניווט מובילים לאתרים שלהם מדיניות עוגיות משלהם."
+        "b1": "Google Analytics. לאחר אישור המדידה, התג של Google מודד ביקורים באתר ועשוי לקבל נתונים טכניים כגון כתובת IP, סוג מכשיר וצפיות בדפים. איננו מפעילים תכונות פרסום בתג האתר.",
+        "b2": "כניסה באמצעות Google ו‑Apple. כשאתם נכנסים לפורטל, חלון הכניסה של Google או של Apple עשוי לשמור עוגיות משלו בדומיין שלו, בכפוף למדיניות הפרטיות של Google או של Apple.",
+        "b3": "קישורים לשירותים אחרים. קישורים ל‑WhatsApp, לרשתות חברתיות, לחנויות אפליקציות ולשירותי ניווט מובילים לאתרים שלהם מדיניות עוגיות משלהם."
       },
       "app": {
         "title": "5. האפליקציה",
@@ -484,11 +529,11 @@
       },
       "control": {
         "title": "6. איך לשלוט בעוגיות",
-        "b0": "תוכלו לצפות בעוגיות ובנתוני האתר ולמחוק אותם בהגדרות הדפדפן, ולחסום אותם עבור wifigate.io. אם תמחקו את האחסון של האתר, העדפות השפה והנגישות שלכם יאופסו. אם תחסמו אחסון עבור הפורטל, לא תוכלו להישאר מחוברים. התנתקות מהפורטל מסיימת את סשן הכניסה."
+        "b0": "תוכלו לשנות או לבטל את הסכמתכם למדידה בכל עת דרך ״הגדרות עוגיות״ בתחתית האתר. ביטול ההסכמה מפסיק מדידה נוספת ומוחק את עוגיות Google Analytics באתר. תוכלו גם לצפות בנתוני האתר, למחוק או לחסום אותם בהגדרות הדפדפן. מחיקת האחסון תאפס את העדפותיכם; חסימת אחסון הפורטל תמנע הישארות מחוברים אליו."
       },
       "changes": {
         "title": "7. שינויים במדיניות",
-        "b0": "אם נתחיל להשתמש בעוגיות אחרות, נעדכן מדיניות זו לפני כן, וכאשר הדין מחייב זאת נבקש קודם את הסכמתכם. תאריך התחילה בראש הדף מציין את הגרסה הנוכחית."
+        "b0": "אם נוסיף עוגיות אופציונליות אחרות, נעדכן מדיניות זו ונבקש הסכמה לפני טעינתן. תאריך התחילה בראש הדף מציין את הגרסה הנוכחית."
       },
       "contact": {
         "title": "8. יצירת קשר",
@@ -514,13 +559,13 @@
   "nl": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legaal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dit document is beschikbaar in het Engels. De Engelse versie is de juridisch bindende versie."
     },
@@ -542,7 +587,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -563,22 +608,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -586,11 +640,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -616,13 +670,13 @@
   "it": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legale",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Questo documento è disponibile in inglese. La versione inglese è quella giuridicamente vincolante."
     },
@@ -644,7 +698,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -665,22 +719,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -688,11 +751,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -718,13 +781,13 @@
   "pt": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Este documento está disponível em inglês. A versão em inglês é a versão juridicamente vinculativa."
     },
@@ -746,7 +809,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -767,22 +830,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -790,11 +862,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -820,13 +892,13 @@
   "pl": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Informacje prawne",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ten dokument jest dostępny w języku angielskim. Wersja angielska jest wersją prawnie wiążącą."
     },
@@ -848,7 +920,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -869,22 +941,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -892,11 +973,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -922,13 +1003,13 @@
   "no": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Lovlig",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dette dokumentet er tilgjengelig på engelsk. Den engelske versjonen er den juridisk bindende versjonen."
     },
@@ -950,7 +1031,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -971,22 +1052,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -994,11 +1084,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -1024,13 +1114,13 @@
   "cs": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Právní informace",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tento dokument je k dispozici v angličtině. Právně závazná je anglická verze."
     },
@@ -1052,7 +1142,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -1073,22 +1163,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -1096,11 +1195,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -1126,13 +1225,13 @@
   "ru": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Правовая информация",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Этот документ доступен на английском языке. Юридически обязывающей является английская версия."
     },
@@ -1154,7 +1253,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -1175,22 +1274,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -1198,11 +1306,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -1228,13 +1336,13 @@
   "uk": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "юридичний",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Цей документ доступний англійською мовою. Юридично обов'язковою є англійська версія."
     },
@@ -1256,7 +1364,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -1277,22 +1385,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -1300,11 +1417,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -1330,13 +1447,13 @@
   "tr": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Yasal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Bu belge İngilizce olarak sunulmaktadır. Hukuken bağlayıcı olan İngilizce sürümdür."
     },
@@ -1358,7 +1475,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -1379,22 +1496,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -1402,11 +1528,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -1432,13 +1558,13 @@
   "ar": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "قانوني",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "هذا المستند متاح باللغة الإنجليزية. النسخة الإنجليزية هي النسخة الملزمة قانونيًا."
     },
@@ -1460,7 +1586,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -1481,22 +1607,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -1504,11 +1639,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -1534,13 +1669,13 @@
   "hi": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "कानूनी",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "यह दस्तावेज़ अंग्रेज़ी में उपलब्ध है। कानूनी रूप से बाध्यकारी संस्करण अंग्रेज़ी संस्करण है।"
     },
@@ -1562,7 +1697,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -1583,22 +1718,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -1606,11 +1750,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -1636,13 +1780,13 @@
   "bn": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "আইনি",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "এই নথিটি ইংরেজিতে উপলব্ধ। ইংরেজি সংস্করণটিই আইনগতভাবে বাধ্যতামূলক সংস্করণ।"
     },
@@ -1664,7 +1808,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -1685,22 +1829,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -1708,11 +1861,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -1738,13 +1891,13 @@
   "mr": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "कायदेशीर",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "हा दस्तऐवज इंग्रजीमध्ये उपलब्ध आहे. इंग्रजी आवृत्ती ही कायदेशीररित्या बंधनकारक आवृत्ती आहे."
     },
@@ -1766,7 +1919,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -1787,22 +1940,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -1810,11 +1972,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -1840,13 +2002,13 @@
   "te": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "చట్టపరమైన",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "ఈ పత్రం ఆంగ్లంలో అందుబాటులో ఉంది. చట్టపరంగా కట్టుబడి ఉండే సంస్కరణ ఆంగ్ల సంస్కరణ."
     },
@@ -1868,7 +2030,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -1889,22 +2051,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -1912,11 +2083,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -1942,13 +2113,13 @@
   "zh-Hans": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "法律",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "本文件以英文提供。英文版本为具有法律约束力的版本。"
     },
@@ -1970,7 +2141,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -1991,22 +2162,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -2014,11 +2194,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -2044,13 +2224,13 @@
   "zh-Hant": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "法律",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "本文件以英文提供。英文版本為具有法律約束力的版本。"
     },
@@ -2072,7 +2252,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -2093,22 +2273,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -2116,11 +2305,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -2146,13 +2335,13 @@
   "ja": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "法的",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "この文書は英語で提供されています。法的拘束力を持つのは英語版です。"
     },
@@ -2174,7 +2363,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -2195,22 +2384,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -2218,11 +2416,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -2248,13 +2446,13 @@
   "ko": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "법적",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "이 문서는 영어로 제공됩니다. 법적 구속력이 있는 버전은 영어 버전입니다."
     },
@@ -2276,7 +2474,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -2297,22 +2495,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -2320,11 +2527,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -2350,13 +2557,13 @@
   "da": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Juridisk",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dette dokument er tilgængeligt på engelsk. Den engelske version er den juridisk bindende version."
     },
@@ -2378,7 +2585,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -2399,22 +2606,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -2422,11 +2638,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -2452,13 +2668,13 @@
   "sv": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Juridiskt",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Detta dokument finns på engelska. Den engelska versionen är den juridiskt bindande versionen."
     },
@@ -2480,7 +2696,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -2501,22 +2717,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -2524,11 +2749,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -2554,13 +2779,13 @@
   "hu": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Jogi",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ez a dokumentum angol nyelven érhető el. A jogilag kötelező változat az angol változat."
     },
@@ -2582,7 +2807,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -2603,22 +2828,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -2626,11 +2860,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -2656,13 +2890,13 @@
   "el": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Το παρόν έγγραφο διατίθεται στα αγγλικά. Η αγγλική έκδοση είναι η νομικά δεσμευτική έκδοση."
     },
@@ -2684,7 +2918,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -2705,22 +2939,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -2728,11 +2971,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -2758,13 +3001,13 @@
   "ro": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Acest document este disponibil în limba engleză. Versiunea în limba engleză este versiunea obligatorie din punct de vedere juridic."
     },
@@ -2786,7 +3029,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -2807,22 +3050,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -2830,11 +3082,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -2860,13 +3112,13 @@
   "hr": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ovaj je dokument dostupan na engleskom jeziku. Pravno obvezujuća je verzija na engleskom jeziku."
     },
@@ -2888,7 +3140,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -2909,22 +3161,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -2932,11 +3193,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -2962,13 +3223,13 @@
   "fi": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tämä asiakirja on saatavilla englanniksi. Oikeudellisesti sitova on englanninkielinen versio."
     },
@@ -2990,7 +3251,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -3011,22 +3272,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -3034,11 +3304,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -3064,13 +3334,13 @@
   "bg": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Този документ е достъпен на английски език. Правно обвързваща е версията на английски език."
     },
@@ -3092,7 +3362,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -3113,22 +3383,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -3136,11 +3415,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -3166,13 +3445,13 @@
   "sr": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Овај документ је доступан на енглеском језику. Правно обавезујућа је верзија на енглеском језику."
     },
@@ -3194,7 +3473,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -3215,22 +3494,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -3238,11 +3526,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -3268,13 +3556,13 @@
   "sk": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tento dokument je k dispozícii v angličtine. Právne záväzná je anglická verzia."
     },
@@ -3296,7 +3584,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -3317,22 +3605,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -3340,11 +3637,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -3370,13 +3667,13 @@
   "sl": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ta dokument je na voljo v angleščini. Pravno zavezujoča je angleška različica."
     },
@@ -3398,7 +3695,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -3419,22 +3716,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -3442,11 +3748,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -3472,13 +3778,13 @@
   "id": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggris. Versi bahasa Inggris adalah versi yang mengikat secara hukum."
     },
@@ -3500,7 +3806,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -3521,22 +3827,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -3544,11 +3859,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -3574,13 +3889,13 @@
   "th": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "เอกสารนี้มีให้บริการเป็นภาษาอังกฤษ ฉบับภาษาอังกฤษเป็นฉบับที่มีผลผูกพันทางกฎหมาย"
     },
@@ -3602,7 +3917,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -3623,22 +3938,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -3646,11 +3970,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -3676,13 +4000,13 @@
   "vi": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tài liệu này được cung cấp bằng tiếng Anh. Bản tiếng Anh là bản có giá trị ràng buộc về mặt pháp lý."
     },
@@ -3704,7 +4028,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -3725,22 +4049,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -3748,11 +4081,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -3778,13 +4111,13 @@
   "ms": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggeris. Versi bahasa Inggeris ialah versi yang mengikat dari segi undang-undang."
     },
@@ -3806,7 +4139,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -3827,22 +4160,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -3850,11 +4192,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
@@ -3880,13 +4222,13 @@
   "fil": {
     "metaTags": {
       "title": "Cookie Policy | WIFIGATE",
-      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal: no advertising or analytics cookies, only language and accessibility preferences and a sign-in session."
+      "description": "The cookies and browser storage used on wifigate.io and the WIFIGATE web portal, including optional Google Analytics after consent."
     },
     "hero": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
       "subtitle": "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-      "updated": "Effective date: October 4, 2026",
+      "updated": "Effective date: October 5, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ang dokumentong ito ay makukuha sa Ingles. Ang bersyong Ingles ang may bisang legal."
     },
@@ -3908,7 +4250,7 @@
     "s": {
       "summary": {
         "title": "1. Summary",
-        "b0": "We do not use advertising cookies, tracking pixels or analytics cookies on our website. The website stores only the preferences you choose, such as language and accessibility settings, and the web portal stores a sign-in session while you use it. Because this storage is strictly necessary or is what you ask for, we do not show a cookie consent banner."
+        "b0": "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it."
       },
       "what": {
         "title": "2. What cookies and similar technologies are",
@@ -3929,22 +4271,31 @@
           "r1c1": "Local storage (first party)",
           "r1c2": "Remembers your accessibility settings, such as larger text or high contrast.",
           "r1c3": "Until you clear it",
-          "r2c0": "Firebase Authentication session",
-          "r2c1": "Session storage (first party, web portal only)",
-          "r2c2": "Keeps you signed in to the web portal while the browser tab is open.",
-          "r2c3": "Until you sign out or close the tab",
-          "r3c0": "Firebase SDK data",
-          "r3c1": "IndexedDB (first party, web portal only)",
-          "r3c2": "Technical data the Firebase sign-in library needs in order to operate.",
-          "r3c3": "Until you clear site data"
+          "r2c0": "wifigate-cookie-consent-v1",
+          "r2c1": "Local storage (first party)",
+          "r2c2": "Remembers your analytics choice.",
+          "r2c3": "Up to 180 days",
+          "r3c0": "_ga and _ga_*",
+          "r3c1": "Analytics cookies (Google, only with consent)",
+          "r3c2": "Measure visits and site usage.",
+          "r3c3": "Up to 180 days",
+          "r4c0": "Firebase Authentication session",
+          "r4c1": "Session storage (first party, web portal only)",
+          "r4c2": "Keeps you signed in to the web portal while the browser tab is open.",
+          "r4c3": "Until you sign out or close the tab",
+          "r5c0": "Firebase SDK data",
+          "r5c1": "IndexedDB (first party, web portal only)",
+          "r5c2": "Technical data the Firebase sign-in library needs in order to operate.",
+          "r5c3": "Until you clear site data"
         },
-        "b1": "The public pages of the website set no cookies. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
+        "b1": "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages."
       },
       "third-party": {
         "title": "4. Third-party services",
         "b0": "Fonts. The website serves its fonts from wifigate.io itself, so no request goes to a third-party font service.",
-        "b1": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
-        "b2": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
+        "b1": "Google Analytics. After you allow analytics, Google's tag measures website visits and may receive technical data such as your IP address, device and page views. We do not enable advertising features for this website tag.",
+        "b2": "Google and Apple sign-in. When you sign in to the web portal, Google's or Apple's sign-in window may set its own cookies on its own domain, under Google's or Apple's privacy policy.",
+        "b3": "Links to other services. Links to WhatsApp, social networks, app stores and navigation services take you to sites with their own cookie policies."
       },
       "app": {
         "title": "5. The mobile app",
@@ -3952,11 +4303,11 @@
       },
       "control": {
         "title": "6. How to control cookies",
-        "b0": "You can view and delete cookies and site data in your browser settings, and block them for wifigate.io. If you clear the website's storage, your language and accessibility preferences are reset. If you block storage for the portal, you will not be able to stay signed in. Signing out of the portal ends the sign-in session."
+        "b0": "You can change or withdraw your analytics choice at any time using Cookie settings in the footer. Withdrawal stops further analytics and removes Google Analytics cookies on this site. You can also view, delete or block site data in your browser settings. Clearing storage resets your site preferences. Blocking storage for the portal prevents you from staying signed in; signing out ends its session."
       },
       "changes": {
         "title": "7. Changes to this policy",
-        "b0": "If we start using other cookies, we will update this policy before doing so and, where the law requires it, ask for your consent first. The effective date at the top shows the current version."
+        "b0": "If we add other optional cookies, we will update this policy and ask for consent before loading them. The effective date at the top shows the current version."
       },
       "contact": {
         "title": "8. Contact",
