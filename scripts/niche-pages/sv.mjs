@@ -384,5 +384,41 @@ export default {
         "WIFIGATE ger smart åtkomstkontroll till idrottsanläggningar, padelbanor, gym och träningsanläggningar med åtkomst från mobilen och tillfälliga eller permanenta behörigheter.",
       imageAlt: "Padelspelare öppnar entrén till en upplyst idrottsanläggning med mobilen",
     },
+    "self-storage": {
+      "label": "Self storage",
+      "title": "Smart åtkomst för self storage-anläggningar",
+      "heroLead": "Varje hyresgäst öppnar grinden till anläggningen och dörren till byggnaden från sin egen mobil, bara under de tider du tillåter. När hyran upphör, upphör också åtkomsten: inga nycklar att samla in och inga koder att byta.",
+      "highlights": [
+        {
+          "icon": "users",
+          "title": "En personlig behörighet för varje hyresgäst",
+          "text": "Ingen gemensam grindkod som tidigare hyresgäster fortfarande minns. Varje hyresgäst får en egen åtkomst, och den tas bort på ett ögonblick när avtalet löper ut eller en betalning är försenad."
+        },
+        {
+          "icon": "clock",
+          "title": "Åtkomsttider som du bestämmer",
+          "text": "Tillåt inpassering bara under anläggningens öppettider, eller ge en hyresgäst ett bredare tidsfönster. En flyttfirma eller en familjemedlem kan få engångsåtkomst för en enda dag."
+        },
+        {
+          "icon": "history",
+          "title": "Vet vem som kom in och när",
+          "text": "Varje öppning registreras med person och tid, så en fråga om ett besök besvaras med historiken i stället för med övervakningsfilmer."
+        }
+      ],
+      "paragraph": "Self storage-anläggningar förlitar sig oftast på gemensamma grindkoder, kodlås och fysiska nycklar som kopieras, lämnas vidare och sällan byts. WIFIGATE flyttar åtkomsten till mobilen: varje hyresgäst har en personlig behörighet till grinden, entrén till byggnaden och, där en sådan finns installerad, den eldrivna dörren till sitt förråd, begränsad till de tider du väljer och borttagen i samma stund som hyran upphör. Mobilen kommunicerar direkt med enheten på plats, utan SIM-kort eller internetanslutning vid grinden, och utan månadsavgift vid normal användning.",
+      "bullets": [
+        "Öppna grinden och dörren till byggnaden från mobilen",
+        "En personlig behörighet för varje hyresgäst",
+        "Åtkomst begränsad till öppettider eller ett eget tidsfönster",
+        "Engångsåtkomst för flyttfirmor och familjemedlemmar",
+        "Ta bort åtkomsten i samma stund som hyran upphör",
+        "Historik över vem som öppnade och när",
+        "Inga gemensamma koder, kodlås eller nycklar att byta",
+        "Inget SIM-kort eller internetanslutning vid grinden"
+      ],
+      "seoTitle": "Smart åtkomstkontroll för self storage-anläggningar | WIFIGATE",
+      "seoDescription": "WIFIGATE ger varje hyresgäst på en self storage-anläggning personlig åtkomst från mobilen till grinden och dörrarna, begränsad till öppettiderna, registrerad i en historik och borttagen när hyran upphör.",
+      "imageAlt": "Kvinna öppnar grinden till en self storage-anläggning med mobilen"
+    },
   },
 };
