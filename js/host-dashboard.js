@@ -18,6 +18,7 @@ import { authErrorMessage } from "./host-auth-errors.js";
 import { isLocalStaging } from "./firebase-config.js";
 import { calendarReferenceUrl } from "./host-portal-config.js";
 import qrcode from "./vendor/qrcode-generator.js";
+import { loadHostManagement, clearHostManagement } from "./host-management.js";
 const $ = (selector) => document.querySelector(selector);
 let currentUser;
 let identity;
@@ -42,7 +43,8 @@ const protectedElements = {
   verification: $("#mfa-verification"),
   account: $("#account-details")
 };
-function hideProtected() {
+function hideProtected(sessionEnded = false) {
+  clearHostManagement({ sessionEnded });
   protectedElements.dashboard.hidden = true;
   protectedElements.approval.hidden = true;
   protectedElements.enrollment.hidden = true;
@@ -95,6 +97,7 @@ async function loadDashboard(user) {
     renderProfile();
     const state = portalState(identity);
     if (state === PortalStates.PENDING) {
+      clearHostManagement({ sessionEnded: true });
       showStatus(
         "Approval pending",
         "Your email is awaiting administrator approval. Check again after your admin approves it."
@@ -102,6 +105,7 @@ async function loadDashboard(user) {
       return;
     }
     if (state === PortalStates.DENIED) {
+      clearHostManagement({ sessionEnded: true });
       showStatus(
         "Portal access denied",
         "This verified email does not have active portal access. Contact your administrator. For Apple Hide My Email, provide your relay address."
@@ -119,11 +123,12 @@ async function loadDashboard(user) {
     }
     $("#dashboard-content").hidden = false;
     $("#admin-approval").hidden = !canApproveEmail(identity);
+    void loadHostManagement(user, identity);
   } catch (error) {
     if (requestGeneration !== generation) {
       return;
     }
-    hideProtected();
+    hideProtected(error.status === HttpStatus.FORBIDDEN || error.status === HttpStatus.UNAUTHORIZED);
     identity = undefined;
     if (error.status === HttpStatus.FORBIDDEN) {
       showStatus(
@@ -152,7 +157,7 @@ initializeSiteAuth((user) => {
     ++generation;
     currentUser = undefined;
     identity = undefined;
-    hideProtected();
+    hideProtected(true);
     location.replace("/login/");
     return;
   }
@@ -360,6 +365,11 @@ function updateAccessAction() {
   $("#access-role-label").hidden = action !== "approve";
   $("#delete-access-note").hidden = action !== "delete";
 }
+window.addEventListener("host:totp-required", () => {
+  if (!currentUser || !identity || actionBusy) return;
+  if (!identity.mfa.enrolled) showEnrollment(false);
+  else $("#mfa-verification").hidden = false;
+});
 $("#approval-form").elements.namedItem("action").addEventListener("change", updateAccessAction);
 window.addEventListener("focus", () => {
   if (currentUser && !actionBusy && !enrollmentSecret) {
