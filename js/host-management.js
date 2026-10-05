@@ -1,6 +1,7 @@
 import { portalRequest } from "./api/index.js";
 import { renderHostApiKeys } from "./host-api-keys.js";
 import { renderHostIntegrations } from "./host-integrations.js";
+import { renderHostAutomation } from "./host-automation.js";
 import { node, field } from "./host-ui.js";
 import { renderHostCalendar, clearHostCalendar } from "./host-calendar.js";
 
@@ -272,6 +273,8 @@ export async function loadHostManagement(user, identity, preferredId) {
     await renderHostApiKeys({ container: root, user, organization: org, isCurrent: () => epoch === generation });
     if (epoch !== generation) return;
     await renderHostIntegrations({ container: root, user, organization: org, properties: properties.items, rooms: rooms.items, isCurrent: () => epoch === generation });
+    if (epoch !== generation) return;
+    await renderHostAutomation({ container: root, user, organization: org, properties: properties.items, isCurrent: () => epoch === generation });
   } catch (error) {
     if (epoch !== generation) return;
     root.replaceChildren(node("h2", "Organizations"), node("p", message(error), { role: "status" }));
