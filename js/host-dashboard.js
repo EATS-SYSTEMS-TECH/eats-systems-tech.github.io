@@ -17,7 +17,6 @@ import {
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
 import { authErrorMessage } from "./host-auth-errors.js";
 import { isLocalStaging } from "./firebase-config.js";
-import { calendarReferenceUrl } from "./host-portal-config.js";
 import qrcode from "./vendor/qrcode-generator.js";
 import { loadHostManagement, clearHostManagement } from "./host-management.js";
 const $ = (selector) => document.querySelector(selector);
@@ -47,6 +46,7 @@ const protectedElements = {
 };
 function hideProtected(sessionEnded = false) {
   clearHostManagement({ sessionEnded });
+  window.dispatchEvent(new CustomEvent("host:workspace-reset"));
   protectedElements.dashboard.hidden = true;
   protectedElements.sidebar.hidden = true;
   protectedElements.approval.hidden = true;
@@ -64,6 +64,8 @@ function showStatus(title, message, retry = true) {
 function renderProfile() {
   const profile = identity.user;
   $("#profile-name").textContent = profile.displayName || "-";
+  $("#sidebar-profile-name").textContent = profile.displayName || "WIFIGATE Host";
+  $("#sidebar-avatar").textContent = (profile.displayName || profile.email || "WG").split(/\s+/).map(part=>part[0]).slice(0,2).join("").toUpperCase();
   $("#profile-email").textContent = profile.email || "-";
   $("#profile-role").textContent = identity.role || "No portal role";
   $("#profile-access").textContent = identity.access.state;
@@ -144,18 +146,6 @@ async function loadDashboard(user) {
       showStatus("Unable to check access", authErrorMessage(error));
     }
   }
-}
-if (calendarReferenceUrl) {
-  $("#calendar-image").src = calendarReferenceUrl;
-  $("#calendar-image").addEventListener("load", () => {
-    $("#calendar-image").hidden = false;
-    $("#calendar-status").hidden = true;
-  });
-  $("#calendar-image").addEventListener("error", () => {
-    $("#calendar-image").hidden = true;
-    $("#calendar-status").hidden = false;
-    $("#calendar-status").textContent = "The calendar reference image could not be loaded.";
-  });
 }
 initializeSiteAuth((user) => {
   if (!user) {
