@@ -1242,9 +1242,9 @@ function serialize($, homeData, locale, pageKey = "home") {
       .text(settingsLabel)
       .attr({ "aria-label": settingsLabel, dir: isRtl(locale) ? "rtl" : "ltr" });
     const prefix = buildAssetPrefix(locale, pageKey);
-    $("head").append(`<link rel="stylesheet" href="${prefix}css/cookie-consent.css?v=20261005a">`);
-    $("body").append(`<script src="${prefix}js/cookie-consent-copy.js?v=20261005a" defer></script>`);
-    $("body").append(`<script src="${prefix}js/cookie-consent.js?v=20261005a" defer></script>`);
+    $("head").append(`<link rel="stylesheet" href="${prefix}css/cookie-consent.css?v=20261006b">`);
+    $("body").append(`<script src="${prefix}js/cookie-consent-copy.js?v=20261005b" defer></script>`);
+    $("body").append(`<script src="${prefix}js/cookie-consent.js?v=20261005b" defer></script>`);
   }
   const html = $.html({ decodeEntities: false }).replace(/[ \t]+(?=\r?\n|$)/g, "");
   return ensureTrailingNewline(html);
