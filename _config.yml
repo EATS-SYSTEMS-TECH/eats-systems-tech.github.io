@@ -1,0 +1,19 @@
+# GitHub Pages (Jekyll) publishes the repository root. Only the website
+# itself goes out: sources, internal documents and tooling stay in the
+# repository and are never served on wifigate.io.
+exclude:
+  - docs/
+  - scripts/
+  - templates/
+  - api/
+  - backend/
+  - node_modules/
+  - README.md
+  - DEPENDENCY_AUDIT.md
+  - package.json
+  - package-lock.json
+  - tsconfig.json
+  - firebase.staging.json
+  - favicon-html-snippet.txt
+  - assets/wifigate_niche_pages/*.png
+  - assets/wifigate_niche_pages/app-edits.md
