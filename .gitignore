@@ -4,3 +4,4 @@ firebase-debug.*.log
 .firebase/
 # Local Codex settings (per machine)
 /.codex/config.toml
+/.codex-artifacts/
