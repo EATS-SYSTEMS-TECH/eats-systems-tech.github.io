@@ -5,6 +5,7 @@ import { renderHostIntegrations } from "./host-integrations.js";
 import { renderHostAutomation } from "./host-automation.js";
 import { renderHostOperations } from "./host-operations.js";
 import { renderHostImportRequests } from "./host-import-requests.js";
+import { renderSupportDiagnostics, renderSupportOwner } from "./host-support.js";
 import { node, field } from "./host-ui.js";
 import { renderHostCalendar, clearHostCalendar } from "./host-calendar.js";
 
@@ -246,6 +247,7 @@ export async function loadHostManagement(user, identity, preferredId) {
     if (epoch !== generation) return;
     organizations = result.items;
     root.replaceChildren(node("h2", "Organizations"));
+    renderSupportDiagnostics({container: root, user, identity, isCurrent: () => epoch === generation});
     if (identity.role === "admin") actionForm(root, "Create organization", "/api/v1/organizations", "POST", (form) => { field(form, "Organization name", "name"); field(form, "IANA timezone", "timezone", timezone); }, undefined, (value) => { selectedId = value.organization.id; });
     if (!organizations.length) { root.append(node("p", "No active organization memberships. An owner can add your verified email.")); return; }
     const preferred = preferredId ?? preferredOrganizationId;
@@ -281,6 +283,8 @@ export async function loadHostManagement(user, identity, preferredId) {
     await renderHostAutomation({ container: root, user, organization: org, properties: properties.items, isCurrent: () => epoch === generation });
     if (epoch !== generation) return;
     await renderHostOperations({ container: root, user, organization: org, properties: properties.items, rooms: rooms.items, isCurrent: () => epoch === generation });
+    if (epoch !== generation) return;
+    await renderSupportOwner({container: root, user, organization: org, isCurrent: () => epoch === generation});
     if (epoch !== generation) return;
     await renderHostImportRequests({ container: root, user, organization: org, isCurrent: () => epoch === generation, onConnected: () => epoch === generation ? loadHostManagement(user, identity, org.id) : undefined });
   } catch (error) {
