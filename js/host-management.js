@@ -1,4 +1,5 @@
 import { portalRequest } from "./api/index.js";
+import { readHostPages } from "./host-pages.js";
 import { renderHostApiKeys } from "./host-api-keys.js";
 import { renderHostIntegrations } from "./host-integrations.js";
 import { renderHostAutomation } from "./host-automation.js";
@@ -19,6 +20,7 @@ let sessionUid;
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
 const path = (suffix = "") => `/api/v1/organizations/${encodeURIComponent(selectedId)}${suffix}`;
 const message = (error) => ({
+  RESOURCE_CAPACITY_EXCEEDED: "This organization needs a capacity review before loading all resources. Contact support.",
   TOTP_REQUIRED: "Verify your authenticator to manage this organization.",
   TENANT_ACCESS_DENIED: "Your access to this organization is unavailable. Refresh your account.",
   VERSION_CONFLICT: "This record changed. Refresh before saving again.",
@@ -240,9 +242,9 @@ export async function loadHostManagement(user, identity, preferredId) {
   currentIdentity = identity;
   root.replaceChildren(node("h2", "Organizations"), node("p", "Loading your organizations…", { role: "status" }));
   try {
-    const result = await portalRequest(user, "/api/v1/organizations?limit=100");
+    const result = await readHostPages(user, "/api/v1/organizations", () => epoch === generation, "organizations");
     if (epoch !== generation) return;
-    organizations = Array.isArray(result.organizations) ? result.organizations : [];
+    organizations = result.items;
     root.replaceChildren(node("h2", "Organizations"));
     if (identity.role === "admin") actionForm(root, "Create organization", "/api/v1/organizations", "POST", (form) => { field(form, "Organization name", "name"); field(form, "IANA timezone", "timezone", timezone); }, undefined, (value) => { selectedId = value.organization.id; });
     if (!organizations.length) { root.append(node("p", "No active organization memberships. An owner can add your verified email.")); return; }
@@ -261,7 +263,7 @@ export async function loadHostManagement(user, identity, preferredId) {
     if (sessionTransfer) root.append(node("p", `Approved transfer ID: ${sessionTransfer}`));
     if (owner) actionForm(root, "Organization settings", path(), "PUT", (form) => { field(form, "Organization name", "name", org.name); field(form, "IANA timezone", "timezone", org.timezone); }, (data) => ({ ...data, version: org.version }));
     const [properties, rooms, members] = await Promise.all([
-      portalRequest(user, path("/properties?limit=100")), portalRequest(user, path("/rooms?limit=100")),
+      readHostPages(user, path("/properties"), () => epoch === generation), readHostPages(user, path("/rooms"), () => epoch === generation),
       owner ? portalRequest(user, path("/members?limit=100")) : Promise.resolve({ items: [] }),
     ]);
     if (epoch !== generation) return;

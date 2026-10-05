@@ -1,4 +1,5 @@
 import { portalRequest } from "./api/index.js";
+import { readHostPages } from "./host-pages.js";
 import { node, field } from "./host-ui.js";
 import { renderHostAccessGrants } from "./host-access-grants.js";
 
@@ -52,7 +53,7 @@ export async function renderHostCalendar({ container, user, organization, proper
   const grid = node("div", undefined, { class: "calendar-scroll", tabindex: "0", "aria-label": "Calendar table" });
   section.append(controls, navigation, ...(canWrite ? [add] : []), status, editor, grid);
   container.append(section);
-  const systemsPage = await portalRequest(user, `/api/v1/organizations/${encodeURIComponent(organization.id)}/systems?limit=100`);
+  const systemsPage = await readHostPages(user, `/api/v1/organizations/${encodeURIComponent(organization.id)}/systems`, current);
   if (!current()) return;
   const systems = systemsPage.items ?? [];
   let data = [];
