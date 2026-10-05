@@ -1,5 +1,6 @@
 import { portalRequest } from "./api/index.js";
 import { node, field } from "./host-ui.js";
+import { renderHostAccessGrants } from "./host-access-grants.js";
 
 const states = ["draft", "confirmed", "changed", "cancelled", "completed"];
 let sessionGeneration = 0;
@@ -99,6 +100,7 @@ export async function renderHostCalendar({ container, user, organization, proper
       form.append(close);
     } else form.append(save, close);
     form.append(resultStatus); editor.append(heading, form);
+    if (record) void renderHostAccessGrants({ container: editor, user, organization, reservation: record, isCurrent: current });
     heading.tabIndex = -1; heading.focus();
     let attempt;
     form.addEventListener("submit", async (event) => {
