@@ -38,6 +38,7 @@ export async function renderHostOperations({ container, user, organization, prop
     for (const [index, filter] of preferences.savedFilters.entries()) {
       const row = node("p", `${filter.name} · ${filter.propertyId ?? "All properties"} · ${filter.roomId ?? "All rooms"} · ${filter.status ?? "All statuses"}`), remove = node("button", "Remove saved filter", { type: "button" });
       remove.addEventListener("click", () => { preferences.savedFilters.splice(index, 1); drawFilters(); }); row.append(remove); filters.append(row);
+      const apply = node("button", "Apply saved filter", { type: "button" }); apply.addEventListener("click", () => { if (current()) window.dispatchEvent(new CustomEvent("host:operations-filter", { detail: { ...filter, orgId: organization.id } })); }); row.append(apply);
     }
   };
   drawFilters(); settings.append(filters);
@@ -86,11 +87,11 @@ export async function renderHostOperations({ container, user, organization, prop
     async function readUsage(cursor, append = false) {
       const result = await portalRequest(user, `${root}/operations/usage?${new URLSearchParams({ from: from.value, to: to.value, limit: "100", ...(keyId.value ? { apiKeyId: keyId.value } : {}), ...(cursor ? { cursor } : {}) })}`);
       if (!current()) return; if (!append) rows.replaceChildren();
-      for (const item of result.items) rows.append(node("p", `${item.date} · ${item.apiKeyId} · created ${item.created} · physical gate invitations ${item.physicalGateInvitations}`));
+      for (const item of result.items) rows.append(node("p", `${item.date} · ${item.apiKeyId} · total ${item.total} · created ${item.created} · replay ${item.replay ?? 0} · errors ${item.error ?? 0} · physical gate invitations ${item.physicalGateInvitations}`));
       const download = node("button", "Export this usage page", { type: "button" });
       download.addEventListener("click", () => {
         const cell = value => { const text = String(value ?? ""), safe = /^[\s]*[=+\-@]/.test(text) ? `'${text}` : text; return `"${safe.replaceAll('"', '""')}"`; };
-        const fields = ["date", "apiKeyId", "created", "total", "physicalGateInvitations"], csv = [fields, ...result.items.map(item => fields.map(field => item[field]))].map(row => row.map(cell).join(",")).join("\r\n") + "\r\n";
+        const fields = ["date", "apiKeyId", "created", "total", "replay", "error", "physicalGateInvitations"], csv = [fields, ...result.items.map(item => fields.map(field => item[field]))].map(row => row.map(cell).join(",")).join("\r\n") + "\r\n";
         const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" })), link = node("a", undefined, { href: url, download: "wifigate-usage-page.csv" }); document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
       }); rows.append(download);
       if (result.nextCursor) { const more = node("button", "Load more usage", { type: "button" }); more.addEventListener("click", () => run(more, async () => { await readUsage(result.nextCursor, true); if (current()) more.remove(); })); rows.append(more); }
