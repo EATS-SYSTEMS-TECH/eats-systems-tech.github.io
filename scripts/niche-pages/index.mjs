@@ -167,7 +167,7 @@ export const NICHE_DEFINITIONS = [
   },
   {
     key: "storage-lockers",
-    legacyKeys: ["self-storage"],
+    legacyKeys: [],
     image: {
       hero: "assets/wifigate_niche_pages/storage-lockers-app-hero.webp",
       card: "assets/wifigate_niche_pages/storage-lockers-app-card.webp",

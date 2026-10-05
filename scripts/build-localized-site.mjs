@@ -2,15 +2,19 @@ import * as cheerio from "cheerio";
 import fs from "node:fs/promises";
 import path from "node:path";
 import vm from "node:vm";
+import { execFileSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 import { NICHE_CHROME } from "./niche-content.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
 import { SITE_NAVIGATION } from "./site-navigation.mjs";
 import { accessibilityLinkLabels } from "./legal/footer-labels.mjs";
 import { wifigateLinkLocales } from "./wifigate-link-locales.mjs";
+import { buildLlmsTxt } from "./llms-txt.mjs";
+import { buildNotFoundPage } from "./not-found-page.mjs";
+import { BRAND_ID, ORGANIZATION_ID, SITE_ORIGIN, breadcrumbNode, faqNode, setPageMeta, webPageNode } from "./seo.mjs";
 
 const repoRoot = process.cwd();
-const siteOrigin = "https://wifigate.io";
+const siteOrigin = SITE_ORIGIN;
 const defaultLocale = "en";
 const nowDate = new Date().toISOString().slice(0, 10);
 const guestInvitesPageKey = "automation";
@@ -81,11 +85,13 @@ const nicheRuntimeScriptsToAdd = [
   "/js/language-selector.js?v=20261006a",
 ];
 
+// Social share images (Open Graph / Twitter), at the sizes the platforms crop to.
+const shareImage = { url: `${SITE_ORIGIN}/assets/img/wifigate-share.jpg`, width: 1200, height: 630, alt: "WIFIGATE" };
 const pageImages = {
-  home: "https://wifigate.io/assets/img/wifigate_homepage.webp",
-  legal: "https://wifigate.io/assets/img/wifigate_homepage.webp",
-  utility: "https://wifigate.io/logo-1024.png",
-  guestInvites: "https://wifigate.io/assets/img/wifigate_homepage.webp",
+  home: shareImage,
+  legal: shareImage,
+  utility: { url: `${SITE_ORIGIN}/logo-1024.png`, width: 1024, height: 1024, alt: "WIFIGATE" },
+  guestInvites: shareImage,
 };
 
 const homeProductImageAlt = {
@@ -463,54 +469,13 @@ function appendScripts($, scriptList, anchorSelector, locale, pageKey) {
   });
 }
 
-function replaceAlternateLinks($, localeOptions, pageKey) {
-  $("link[rel='alternate']").remove();
-
-  if (!localeOptions.length) {
-    return;
-  }
-
-  const canonical = $("link[rel='canonical']").first();
-  const links = [
-    `<link rel="alternate" hreflang="x-default" href="${buildPageUrl(defaultLocale, pageKey)}" />`,
-    ...localeOptions.map(
-      (option) => `<link rel="alternate" hreflang="${option.code}" href="${buildPageUrl(option.code, pageKey)}" />`
-    ),
-  ].join("\n  ");
-
-  if (canonical.length) {
-    canonical.after(`\n  ${links}`);
-  } else {
-    $("head").append(`\n  ${links}`);
-  }
-}
-
-function setMetaByName($, name, content) {
-  let element = $(`meta[name='${name}']`).first();
-  if (!element.length) {
-    $("head").append(`\n  <meta name="${name}" content="" />`);
-    element = $(`meta[name='${name}']`).first();
-  }
-  element.attr("content", content);
-}
-
-function setMetaByProperty($, property, content) {
-  let element = $(`meta[property='${property}']`).first();
-  if (!element.length) {
-    $("head").append(`\n  <meta property="${property}" content="" />`);
-    element = $(`meta[property='${property}']`).first();
-  }
-  element.attr("content", content);
-}
-
-function setRobotsMeta($, robotsContent, googlebotContent = robotsContent) {
-  setMetaByName($, "robots", robotsContent);
-  setMetaByName($, "googlebot", googlebotContent);
-}
-
-function replaceStructuredData($, data) {
-  $("script[type='application/ld+json']").remove();
-  $("head").append(`\n  <script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n  </script>`);
+// The hreflang cluster of a page: x-default (English) plus every locale given.
+function alternatesFor(localeOptions, pageKey) {
+  if (!localeOptions.length) return [];
+  return [
+    { hreflang: "x-default", href: buildPageUrl(defaultLocale, pageKey) },
+    ...localeOptions.map((option) => ({ hreflang: option.code, href: buildPageUrl(option.code, pageKey) })),
+  ];
 }
 
 function formatTextForLocaleDirection(text, locale) {
@@ -625,144 +590,64 @@ function setBodyDirection($, locale) {
   }
 }
 
-function buildHomeMeta(locale, bundle) {
+function buildHomeMeta(locale) {
   const home = getNichePageContent(locale).home;
-  const enHome = NICHE_PAGE_LOCALES[defaultLocale].home;
-  const title = home.seoTitle;
-  const bundleDescription = getNestedValue(bundle, "hero.subtitle") || home.seoDescription;
-  const description =
-    locale === defaultLocale
-      ? "WIFIGATE (WiFi Gate) is smart access control for gates, buildings, parking entrances, and private homes. Secure, private, encrypted, and free of monthly fees."
-      : bundleDescription;
-
   return {
-    title,
-    description,
-    ogTitle: title,
-    ogDescription: description,
-    keywords: home.keywords || enHome.keywords,
+    title: home.seoTitle,
+    description: home.seoDescription,
+    keywords: home.keywords || NICHE_PAGE_LOCALES[defaultLocale].home.keywords,
   };
 }
 
-function setHomeMeta($, bundle, locale, localeOptions, copy) {
-  const meta = buildHomeMeta(locale, bundle);
+function setHomeMeta($, locale, localeOptions, copy) {
+  const meta = buildHomeMeta(locale);
   const url = buildPageUrl(locale, "home");
-  // The slogan is the tagline the footer shows on this page.
-  const footerTagline = copy.footer.tagline;
 
-  $("title").text(meta.title);
-  setMetaByName($, "description", meta.description);
-  setMetaByName($, "keywords", meta.keywords);
-  setRobotsMeta($, "index, follow");
-  $("link[rel='canonical']").attr("href", url);
-  replaceAlternateLinks($, localeOptions, "home");
-
-  setMetaByProperty($, "og:type", "website");
-  setMetaByProperty($, "og:site_name", "WIFIGATE");
-  setMetaByProperty($, "og:url", url);
-  setMetaByProperty($, "og:title", meta.ogTitle);
-  setMetaByProperty($, "og:description", meta.ogDescription);
-  setMetaByProperty($, "og:image", pageImages.home);
-  setMetaByProperty($, "twitter:card", "summary_large_image");
-  setMetaByProperty($, "twitter:url", url);
-  setMetaByProperty($, "twitter:title", meta.ogTitle);
-  setMetaByProperty($, "twitter:description", meta.ogDescription);
-  setMetaByProperty($, "twitter:image", pageImages.home);
-
-  replaceStructuredData($, [
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: "WIFIGATE",
-      alternateName: ["WiFiGate", "WiFi Gate"],
-      url: siteOrigin,
-      inLanguage: locale,
-      description: meta.description,
-      publisher: {
-        "@type": "Organization",
-        name: "EATS SYSTEMS TECH",
-        url: siteOrigin,
-        logo: {
-          "@type": "ImageObject",
-          url: "https://wifigate.io/assets/img/logo.png",
-        },
-      },
-    },
-    // No Product item: the site publishes no price, offer or rating, and
-    // Google rejects a Product without one of them. The brand belongs to the
-    // company that makes it.
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "@id": `${siteOrigin}/#organization`,
-      name: "EATS SYSTEMS TECH",
-      url: siteOrigin,
-      logo: "https://wifigate.io/assets/img/logo.png",
-      brand: {
-        "@type": "Brand",
-        name: "WIFIGATE",
-        alternateName: ["WiFiGate", "WiFi Gate"],
-        description: meta.description,
-        slogan: footerTagline,
-        logo: "https://wifigate.io/assets/img/logo.png",
-        url,
-      },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "@id": `${url}#wifi-gate-faq`,
-      inLanguage: locale,
-      mainEntity: copy.faq.items.map((item) => ({
-        "@type": "Question",
-        name: item.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: item.answer,
-        },
-      })),
-    },
-  ]);
+  $("meta[name='keywords']").remove();
+  if (meta.keywords) $("head").append(`\n  <meta name="keywords" content="${meta.keywords}" />`);
+  setPageMeta($, {
+    locale,
+    url,
+    title: meta.title,
+    description: meta.description,
+    alternates: alternatesFor(localeOptions, "home"),
+    image: pageImages.home,
+    // The slogan is the tagline the footer shows on this page.
+    brand: { description: meta.description, slogan: copy.footer.tagline },
+    graph: [
+      webPageNode({ url, title: meta.title, description: meta.description, locale, image: pageImages.home }),
+      faqNode(url, locale, copy.faq.items),
+    ],
+  });
 
   return meta;
 }
+
+// English and Hebrew carry the full legal text and form one hreflang
+// cluster; every other locale shows the English text, so it stays out of the
+// index.
+const LEGAL_INDEXED_LOCALES = ["en", "he"];
 
 function setLegalMeta($, locale, pageKey, localeOptions, legalBundle) {
   const metaTags = legalBundle.legal?.metaTags || {};
   const title = metaTags.title || "WIFIGATE";
   const description = metaTags.description || "";
   const url = buildPageUrl(locale, pageKey);
+  const indexed = LEGAL_INDEXED_LOCALES.includes(locale);
+  const types = { "privacy-policy": "WebPage", "terms-and-conditions": "WebPage", cookies: "WebPage", accessibility: "WebPage" };
 
-  $("title").text(title);
-  setMetaByName($, "description", description);
-  setRobotsMeta($, "noindex, follow");
-  $("link[rel='canonical']").attr("href", url);
-  replaceAlternateLinks($, [], pageKey);
-
-  setMetaByProperty($, "og:type", "article");
-  setMetaByProperty($, "og:site_name", "WIFIGATE");
-  setMetaByProperty($, "og:url", url);
-  setMetaByProperty($, "og:title", title);
-  setMetaByProperty($, "og:description", description);
-  setMetaByProperty($, "og:image", pageImages.legal);
-  setMetaByProperty($, "twitter:card", "summary_large_image");
-  setMetaByProperty($, "twitter:url", url);
-  setMetaByProperty($, "twitter:title", title);
-  setMetaByProperty($, "twitter:description", description);
-  setMetaByProperty($, "twitter:image", pageImages.legal);
-
-  replaceStructuredData($, {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: title,
-    description,
-    inLanguage: locale,
+  setPageMeta($, {
+    locale,
     url,
-    isPartOf: {
-      "@type": "WebSite",
-      name: "WIFIGATE",
-      url: siteOrigin,
-    },
+    title,
+    description,
+    robots: indexed ? "index, follow" : "noindex, follow",
+    alternates: indexed
+      ? alternatesFor(localeOptions.filter((option) => LEGAL_INDEXED_LOCALES.includes(option.code)), pageKey)
+      : [],
+    ogType: "article",
+    image: pageImages.legal,
+    graph: [webPageNode({ type: types[pageKey], url, title, description, locale })],
   });
 }
 
@@ -774,36 +659,14 @@ function setUtilityMeta($, locale, localeOptions, copy, pageKey) {
   const url = buildPageUrl(locale, pageKey);
   const title = copy.socialTitle || copy.pageTitle;
 
-  $("title").text(title);
-  setMetaByName($, "description", copy.description);
-  setRobotsMeta($, "noindex, follow");
-  $("link[rel='canonical']").attr("href", url);
-  replaceAlternateLinks($, [], pageKey);
-
-  setMetaByProperty($, "og:type", "website");
-  setMetaByProperty($, "og:site_name", "WIFIGATE");
-  setMetaByProperty($, "og:url", url);
-  setMetaByProperty($, "og:title", copy.socialTitle);
-  setMetaByProperty($, "og:description", copy.description);
-  setMetaByProperty($, "og:image", pageImages.utility);
-  setMetaByProperty($, "twitter:card", "summary_large_image");
-  setMetaByProperty($, "twitter:url", url);
-  setMetaByProperty($, "twitter:title", copy.socialTitle);
-  setMetaByProperty($, "twitter:description", copy.description);
-  setMetaByProperty($, "twitter:image", pageImages.utility);
-
-  replaceStructuredData($, {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: title,
-    description: copy.description,
-    inLanguage: locale,
+  setPageMeta($, {
+    locale,
     url,
-    isPartOf: {
-      "@type": "WebSite",
-      name: "WIFIGATE",
-      url: siteOrigin,
-    },
+    title,
+    description: copy.description,
+    robots: "noindex, follow",
+    image: pageImages.utility,
+    graph: [webPageNode({ url, title, description: copy.description, locale })],
   });
 }
 
@@ -1214,8 +1077,15 @@ function serialize($, homeData, locale, pageKey = "home") {
   return ensureTrailingNewline(html);
 }
 
+// Pages whose generated content changed in this build; the sitemap dates them
+// today and keeps the previous lastmod of every other page.
+const changedFiles = new Set();
+
 async function writeOutputFile(filePath, content) {
   await fs.mkdir(path.dirname(filePath), { recursive: true });
+  const previous = await fs.readFile(filePath, "utf8").catch(() => null);
+  if (previous !== null && previous.replace(/\r\n/g, "\n") === content.replace(/\r\n/g, "\n")) return;
+  changedFiles.add(path.resolve(filePath));
   const retryableCodes = new Set(["EACCES", "EBUSY", "EPERM", "UNKNOWN"]);
 
   for (let attempt = 0; attempt < 5; attempt += 1) {
@@ -1236,8 +1106,6 @@ function buildRedirectPage(targetPath, canonicalUrl) {
 <head>
   <meta charset="UTF-8" />
   <title>Redirecting...</title>
-  <meta name="robots" content="noindex, follow" />
-  <meta name="googlebot" content="noindex, follow" />
   <link rel="canonical" href="${canonicalUrl}" />
   <meta http-equiv="refresh" content="0; url=${targetPath}" />
   <script>window.location.replace(${JSON.stringify(targetPath)});</script>
@@ -1249,7 +1117,22 @@ function buildRedirectPage(targetPath, canonicalUrl) {
 `);
 }
 
-function buildSitemap(urlEntries) {
+// lastmod is the day a page's content last changed: today for a page this
+// build rewrote, otherwise the date the previous sitemap gave it.
+async function readPreviousLastmods() {
+  const previous = await fs.readFile(path.join(repoRoot, "sitemap.xml"), "utf8").catch(() => "");
+  return new Map([...previous.matchAll(/<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
+}
+
+function pageFileForUrl(url) {
+  return path.resolve(repoRoot, `.${new URL(url).pathname}`, "index.html");
+}
+
+function buildSitemap(urlEntries, previousLastmods) {
+  for (const entry of urlEntries) {
+    const changed = changedFiles.has(pageFileForUrl(entry.loc));
+    entry.lastmod = entry.lastmod || (!changed && previousLastmods.get(entry.loc)) || nowDate;
+  }
   const lines = [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
@@ -1257,7 +1140,7 @@ function buildSitemap(urlEntries) {
       (entry) => [
         "  <url>",
         `    <loc>${entry.loc}</loc>`,
-        `    <lastmod>${entry.lastmod || nowDate}</lastmod>`,
+        `    <lastmod>${entry.lastmod}</lastmod>`,
         `    <changefreq>${entry.changefreq}</changefreq>`,
         `    <priority>${entry.priority}</priority>`,
         "  </url>",
@@ -1293,7 +1176,7 @@ async function buildHomePages(homeData) {
     applyHomepageCopy($, homepageCopies[locale], locale);
     rewriteHomeGuestInvitesLink($, locale);
     reorderHomeSections($);
-    setHomeMeta($, bundle, locale, homeData.localeOptions, homepageCopies[locale]);
+    setHomeMeta($, locale, homeData.localeOptions, homepageCopies[locale]);
     insertPageDataScript(
       $,
       "hero-locale-data",
@@ -1363,7 +1246,9 @@ async function buildLegalPages(homeData, legalCollections) {
       await writeOutputFile(outputFile, serialize($, homeData, locale, pageKey));
     }
   }
-  return [];
+  return Object.keys(legalTemplatePaths).flatMap((pageKey) =>
+    LEGAL_INDEXED_LOCALES.map((locale) => ({ loc: buildPageUrl(locale, pageKey), changefreq: "yearly", priority: "0.3" }))
+  );
 }
 
 async function buildUtilityPages(homeData) {
@@ -1626,55 +1511,31 @@ function rewriteNicheInternalLinks($, locale) {
 
 function setNicheMeta($, ctx, niche, locale, localeOptions) {
   const url = buildPageUrl(locale, niche.key);
-  const homeUrl = buildPageUrl(locale, "home");
   const { content } = ctx;
-  const socialImage = `${siteOrigin}/${niche.image.og}`;
-
-  $("title").text(content.seoTitle);
-  setMetaByName($, "description", content.seoDescription);
-  setRobotsMeta($, "index, follow");
-  $("link[rel='canonical']").attr("href", url);
-  replaceAlternateLinks($, localeOptions, niche.key);
-
-  setMetaByProperty($, "og:type", "article");
-  setMetaByProperty($, "og:site_name", "WIFIGATE");
-  setMetaByProperty($, "og:url", url);
-  setMetaByProperty($, "og:title", content.seoTitle);
-  setMetaByProperty($, "og:description", content.seoDescription);
-  setMetaByProperty($, "og:image", socialImage);
-  setMetaByProperty($, "twitter:card", "summary_large_image");
-  setMetaByProperty($, "twitter:url", url);
-  setMetaByProperty($, "twitter:title", content.seoTitle);
-  setMetaByProperty($, "twitter:description", content.seoDescription);
-  setMetaByProperty($, "twitter:image", socialImage);
-
-  replaceStructuredData($, [
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: content.seoTitle,
-      description: content.seoDescription,
-      inLanguage: locale,
-      url,
-      isPartOf: {
-        "@type": "WebSite",
-        name: "WIFIGATE",
-        url: siteOrigin,
-      },
-      primaryImageOfPage: {
-        "@type": "ImageObject",
-        url: socialImage,
-      },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: ctx.chrome.homeLabel, item: homeUrl },
-        { "@type": "ListItem", position: 2, name: content.label, item: url },
-      ],
-    },
+  const image = {
+    url: `${siteOrigin}/${niche.image.og}`,
+    width: 1200,
+    height: 630,
+    alt: content.imageAlt,
+  };
+  const breadcrumb = breadcrumbNode(url, [
+    { name: ctx.chrome.homeLabel, url: buildPageUrl(locale, "home") },
+    { name: content.label, url },
   ]);
+
+  setPageMeta($, {
+    locale,
+    url,
+    title: content.seoTitle,
+    description: content.seoDescription,
+    alternates: alternatesFor(localeOptions, niche.key),
+    ogType: "article",
+    image,
+    graph: [
+      webPageNode({ url, title: content.seoTitle, description: content.seoDescription, locale, image, breadcrumbId: breadcrumb["@id"] }),
+      breadcrumb,
+    ],
+  });
 }
 
 async function buildNichePages(homeData) {
@@ -1770,48 +1631,35 @@ function reorderGuestInvitesSections($) {
 
 function setGuestInvitesMeta($, locale, localeOptions, strings) {
   const url = buildPageUrl(locale, guestInvitesPageKey);
-  const homeUrl = buildPageUrl(locale, "home");
-
-  $("title").text(strings.metaTitle);
-  setMetaByName($, "description", strings.metaDescription);
-  setRobotsMeta($, "index, follow");
-  $("link[rel='canonical']").attr("href", url);
-  replaceAlternateLinks($, localeOptions, guestInvitesPageKey);
-
-  setMetaByProperty($, "og:type", "website");
-  setMetaByProperty($, "og:site_name", "WIFIGATE");
-  setMetaByProperty($, "og:url", url);
-  setMetaByProperty($, "og:title", strings.metaTitle);
-  setMetaByProperty($, "og:description", strings.metaDescription);
-  setMetaByProperty($, "og:image", pageImages.guestInvites);
-  setMetaByProperty($, "twitter:card", "summary_large_image");
-  setMetaByProperty($, "twitter:url", url);
-  setMetaByProperty($, "twitter:title", strings.metaTitle);
-  setMetaByProperty($, "twitter:description", strings.metaDescription);
-  setMetaByProperty($, "twitter:image", pageImages.guestInvites);
-
-  replaceStructuredData($, [
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      name: strings.metaTitle,
-      description: strings.metaDescription,
-      inLanguage: locale,
-      url,
-      applicationCategory: "DeveloperApplication",
-      operatingSystem: "Any",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-      isPartOf: { "@type": "WebSite", name: "WIFIGATE", url: siteOrigin },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "WIFIGATE", item: homeUrl },
-        { "@type": "ListItem", position: 2, name: strings.metaTitle, item: url },
-      ],
-    },
+  const breadcrumb = breadcrumbNode(url, [
+    { name: "WIFIGATE", url: buildPageUrl(locale, "home") },
+    { name: "WIFIGATE Host", url },
   ]);
+
+  setPageMeta($, {
+    locale,
+    url,
+    title: strings.metaTitle,
+    description: strings.metaDescription,
+    alternates: alternatesFor(localeOptions, guestInvitesPageKey),
+    image: pageImages.guestInvites,
+    graph: [
+      webPageNode({ url, title: strings.metaTitle, description: strings.metaDescription, locale, image: pageImages.guestInvites, breadcrumbId: breadcrumb["@id"] }),
+      breadcrumb,
+      // WIFIGATE Host: the commercial service that turns bookings into
+      // time-limited guest access.
+      {
+        "@type": "Service",
+        "@id": `${siteOrigin}/automation/#service`,
+        name: "WIFIGATE Host",
+        serviceType: "Automated guest access for hospitality",
+        provider: { "@id": ORGANIZATION_ID },
+        brand: { "@id": BRAND_ID },
+        url: buildPageUrl(defaultLocale, guestInvitesPageKey),
+        description: strings.metaDescription,
+      },
+    ],
+  });
 }
 
 async function buildGuestInvitesPages(homeData) {
@@ -1888,10 +1736,30 @@ async function main() {
   sitemapEntries.push(...(await buildNichePages(homeData)));
   sitemapEntries.push(...(await buildGuestInvitesPages(homeData)));
   sitemapEntries.push(...(await buildUtilityPages(homeData)));
+  // Contact Us is written by hand (it serves the app too); it is dated by its
+  // last commit.
+  sitemapEntries.push({
+    loc: `${siteOrigin}/contact-us/`,
+    lastmod: execFileSync("git", ["log", "-1", "--format=%cs", "--", "contact-us/index.html"], { cwd: repoRoot, encoding: "utf8" }).trim() || nowDate,
+    changefreq: "yearly",
+    priority: "0.5",
+  });
+  const previousLastmods = await readPreviousLastmods();
 
   // writeOutputFile, not fs.writeFile: on Windows the dev server can hold this
   // file open and the bare write fails with EBUSY/UNKNOWN.
-  await writeOutputFile(path.join(repoRoot, "sitemap.xml"), buildSitemap(sitemapEntries));
+  await writeOutputFile(path.join(repoRoot, "sitemap.xml"), buildSitemap(sitemapEntries, previousLastmods));
+  const englishNiches = NICHE_DEFINITIONS.map((niche) => ({ key: niche.key, content: getNichePageContent(defaultLocale).niches[niche.key] }));
+  await writeOutputFile(
+    path.join(repoRoot, "llms.txt"),
+    buildLlmsTxt({
+      homeCopy: homeData.homepageCopies[defaultLocale],
+      homeSeo: getNichePageContent(defaultLocale).home,
+      niches: englishNiches,
+      pageUrl: buildPageUrl,
+    })
+  );
+  await writeOutputFile(path.join(repoRoot, "404.html"), buildNotFoundPage({ niches: englishNiches, pageUrl: buildPageUrl, cookieConsentVersion: COOKIE_CONSENT_VERSION }));
 }
 
 main().catch((error) => {

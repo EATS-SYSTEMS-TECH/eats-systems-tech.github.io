@@ -130,8 +130,8 @@ for (const localeFile of localeFiles) {
       }
     })
     .get()
-    .flat()
-    .filter(Boolean);
+    .filter(Boolean)
+    .flatMap((entry) => entry["@graph"] || [entry]);
   const faqSchema = structuredData.find((entry) => entry["@type"] === "FAQPage");
   const structuredFaq = (faqSchema?.mainEntity || []).map((item) => ({
     question: normalize(item.name),
