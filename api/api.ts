@@ -35,7 +35,11 @@ export async function apiRequest<T>(
 
     apiError.name = "ApiError";
     apiError.status = error.response?.status;
-    apiError.code = data?.error?.code || data?.code;
+    apiError.code = error.response
+      ? data?.error?.code || data?.code
+      : ["ERR_NETWORK", "ECONNABORTED", "ETIMEDOUT"].includes(error.code ?? "")
+        ? "HOST_API_UNAVAILABLE"
+        : undefined;
     throw apiError;
   }
 }

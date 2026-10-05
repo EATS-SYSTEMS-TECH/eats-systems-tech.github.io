@@ -1,3 +1,5 @@
+import { AxiosError } from "axios";
+import { authErrorMessage } from "../js/host-auth-errors.js";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createProfile, getProfile, approveEmail, changePortalAccess, deletePortalAccess, profileApi, portalRequest, portalExport, pendingMembershipInvitations, acceptMembershipInvitation } from "../js/api/index.js";
@@ -150,4 +152,25 @@ test("membership invitations validate before token reads and accept only the cur
     assert.equal(requests[1].headers.get("Authorization"), "Bearer recipient-token-2");
     for (const request of requests) assert.equal(request.withCredentials, false);
   });
+});
+
+test("Host transport failures explain server unavailability without hiding authorization failures or exposing request details", async () => {
+  const previous = profileApi.defaults.adapter;
+  try {
+    for (const code of ["ERR_NETWORK", "ECONNABORTED", "ETIMEDOUT"]) {
+      profileApi.defaults.adapter = async config => { throw new AxiosError("private transport details", code, config); };
+      await assert.rejects(createProfile({ getIdToken: async () => "private-token" }), error => {
+        assert.equal(error.code, "HOST_API_UNAVAILABLE"); assert.equal(error.status, undefined);
+        assert.equal(authErrorMessage(error), "Cannot reach the WIFIGATE Host server. Please try again later or contact support.");
+        assert(!authErrorMessage(error).includes("private")); return true;
+      });
+    }
+    profileApi.defaults.adapter = async config => { throw new AxiosError("denied", "ERR_BAD_REQUEST", config, {}, { status: 403, data: { error: { code: "PORTAL_ACCESS_DENIED", message: "Access denied" } }, headers: {}, statusText: "Forbidden", config }); };
+    await assert.rejects(createProfile({ getIdToken: async () => "token" }), error => {
+      assert.equal(error.status, 403); assert.equal(error.code, "PORTAL_ACCESS_DENIED");
+      assert.equal(authErrorMessage(error), "Access was not permitted. Contact your admin."); return true;
+    });
+    assert.equal(authErrorMessage({code:"auth/network-request-failed"}), "Unable to connect. Check your connection.");
+    assert.equal(authErrorMessage({code:"unknown"}), "Something went wrong. Please try again.");
+  } finally { profileApi.defaults.adapter = previous; }
 });
