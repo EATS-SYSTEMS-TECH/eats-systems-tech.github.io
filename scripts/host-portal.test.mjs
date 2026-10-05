@@ -1,9 +1,24 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createProfile, getProfile, approveEmail, changePortalAccess, deletePortalAccess, profileApi } from "../js/api/index.js";
+import { createProfile, getProfile, approveEmail, changePortalAccess, deletePortalAccess, profileApi, portalRequest } from "../js/api/index.js";
 import { parseIdentity, portalState, canApproveEmail } from "../js/host-dashboard-model.js";
 const user = { uid: "user-1", email: "person@example.test", displayName: "Person", emailVerified: true };
 const me = (role = "user", state = "active", enrolled = false, verified = false) => ({ user, role, access: { state }, mfa: { required: role === "admin", enrolled, verified } });
+test("portal paths reject encoded traversal before reading the identity token", async () => {
+  let reads = 0;
+  const identity = { getIdToken: async () => { reads++; return "private-token"; } };
+  await withAdapter(async requests => {
+    for (const path of ["//foreign.test/api/v1/organizations", "/api/v1/organizations/../admin", "/api/v1/organizations/%2e%2e/admin", "/api/v1/organizations/%252e%252e/admin", "/api/v1/organizations/%2fadmin", "/api/v1/organizations\\..\\admin", "/api/v1/organizations/org#fragment", "/api/v1/organizations/org\n/admin", "/api/v1/organizations//admin"]) {
+      assert.throws(() => portalRequest(identity, path), /invalid-request/);
+    }
+    assert.equal(reads, 0);
+    assert.equal(requests.length, 0);
+    await portalRequest(identity, "/api/v1/organizations/org-1/reservations?cursor=abc%2Fdef&search=Guest%20Name");
+    assert.equal(reads, 1);
+    assert.equal(requests.length, 1);
+    assert.equal(requests[0].headers.get("Authorization"), "Bearer private-token");
+  });
+});
 test("access requires an explicit backend state and verified identity", () => {
   assert.throws(() => parseIdentity({ user }), /portal-contract-incomplete/);
   assert.throws(() => parseIdentity({ ...me(), role: "platform_admin" }), /portal-contract-incomplete/);
