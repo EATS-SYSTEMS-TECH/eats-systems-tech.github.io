@@ -1,7 +1,7 @@
 // Views reuse server-authorized components; no image or sample reservations are rendered.
 const nav=document.getElementById('host-section-navigation'),root=document.getElementById('host-management');
 const entries=[
- ['Calendar','.host-calendar','calendar',''],['Properties','section[aria-label="properties"]','home',''],['Reservations','section[aria-label="Reservations"]','key',''],
+ ['Calendar','.host-calendar','calendar',''],['Properties','section[aria-label="properties"], section[aria-label="rooms"]','home',''],['Reservations','section[aria-label="Reservations"]','key',''],
  ['Guests','section[aria-label="Guests"]','users','Management'],['Staff','section[aria-label="members"], section[aria-label="Invite team members"]','users','Management'],
  ['Access Keys','section[aria-label="WIFIGATE systems"]','key','Management'],['Automation','section[aria-label="Automatic guest access"]','bolt','Management'],['Jobs Calendar','section[aria-label="Host operations"]','calendar','Management'],
  ['Invoices','[data-workspace-billing]','file','Billing'],['API integrations','section[aria-label="API integrations"], section[aria-label="Reservation integrations"]','key','Management'],
