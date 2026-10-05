@@ -174,3 +174,20 @@ test("Host transport failures explain server unavailability without hiding autho
     assert.equal(authErrorMessage({code:"unknown"}), "Something went wrong. Please try again.");
   } finally { profileApi.defaults.adapter = previous; }
 });
+
+import { calendarSpans } from "../js/host-calendar-layout.js";
+const calendarDate = (instant, timezone) => new Intl.DateTimeFormat("en-CA", {timeZone:timezone,year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date(instant));
+test("calendar cards clip to the visible range and keep midnight expiry exclusive", () => {
+  const result = calendarSpans([{id:"before",startsAt:"2026-01-01T00:00:00Z",endsAt:"2026-01-09T00:00:00Z"},{id:"after",startsAt:"2026-01-20T00:00:00Z",endsAt:"2026-02-01T00:00:00Z"},{id:"outside",startsAt:"2026-02-01T00:00:00Z",endsAt:"2026-02-02T00:00:00Z"}],"2026-01-08",14,calendarDate,"UTC");
+  assert.deepEqual(result.spans.map(({record,start,end})=>[record.id,start,end]),[["before",0,1],["after",12,14]]);
+});
+test("same-day turnovers and overlapping cancelled stays remain separately accessible", () => {
+  const records=[{id:"b",startsAt:"2026-01-08T12:00:00Z",endsAt:"2026-01-09T00:00:00Z"},{id:"a",startsAt:"2026-01-08T00:00:00Z",endsAt:"2026-01-08T11:00:00Z"}];
+  assert.equal(calendarSpans(records,"2026-01-08",21,calendarDate,"UTC").lanes,2);
+  assert.deepEqual(calendarSpans(records,"2026-01-08",21,calendarDate,"UTC").spans.map(x=>x.record.id),["a","b"]);
+  assert.deepEqual(calendarSpans([],"2026-01-08",21,calendarDate,"UTC"),{spans:[],lanes:1});
+});
+test("calendar spans follow local dates across DST instead of fixed 24-hour days", () => {
+  const {spans}=calendarSpans([{id:"dst",startsAt:"2026-03-28T23:00:00Z",endsAt:"2026-03-29T22:00:00Z"}],"2026-03-29",7,calendarDate,"Europe/Berlin");
+  assert.equal(spans[0].start,0); assert.equal(spans[0].end,1);
+});
