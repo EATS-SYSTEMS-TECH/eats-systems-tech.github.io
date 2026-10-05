@@ -1,4 +1,33 @@
+# wifigate.io welcomes search engines and AI assistants: every public page
+# may be crawled, indexed, quoted and used to answer questions about WIFIGATE.
+
 User-agent: *
 Allow: /
+Disallow: /login/
+Disallow: /dashboard/
+
+# Search and answer engines, named so the intent is explicit.
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: Applebot
+User-agent: DuckDuckBot
+User-agent: YandexBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: meta-externalagent
+User-agent: CCBot
+User-agent: MistralAI-User
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /login/
+Disallow: /dashboard/
 
 Sitemap: https://wifigate.io/sitemap.xml
