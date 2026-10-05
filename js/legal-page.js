@@ -41,11 +41,10 @@ function applyLegalPageMeta() {
 document.addEventListener("DOMContentLoaded", () => {
   const pageLang = getStaticLegalLanguage()
   const pageDir = document.documentElement.getAttribute("dir") || getStaticLegalDirection(pageLang)
-  const savedLang = localStorage.getItem("language") || pageLang
   const initialLang =
     typeof resolveLanguage === "function"
-      ? resolveLanguage(savedLang)
-      : savedLang
+      ? resolveLanguage(pageLang)
+      : pageLang
 
   if (typeof changeLanguage === "function") {
     changeLanguage(initialLang)

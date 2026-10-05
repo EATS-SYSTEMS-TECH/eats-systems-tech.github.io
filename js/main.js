@@ -117,10 +117,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const pageDir =
     document.documentElement.getAttribute("dir") ||
     (pageLang === "he" || pageLang === "ar" ? "rtl" : "ltr");
-  const savedLang = localStorage.getItem("language") || pageLang;
 
   if (typeof changeLanguage === "function") {
-    changeLanguage(savedLang);
+    changeLanguage(pageLang);
   } else {
     window.currentLanguage = pageLang;
     document.documentElement.setAttribute("lang", pageLang);

@@ -164,6 +164,16 @@
   text-decoration: none;
 }
 
+button.contact-page__terms {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 0.96rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .contact-page__brand {
   display: inline-flex;
   align-items: center;

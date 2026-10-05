@@ -54,7 +54,9 @@ for (const localeFile of localeFiles) {
   if ($("html").attr("dir") !== expectedDir) report(locale, "incorrect html direction");
   if (!$("body").hasClass("home-en")) report(locale, "missing redesigned body class");
   if ($("link[href*='home-en.css']").length !== 1) report(locale, "redesign stylesheet must appear once");
-  if ($("script[src*='locale-redirect.js']").length !== 1) report(locale, "locale redirect script must appear once");
+  // The URL alone sets the language: nothing redirects on a remembered choice.
+  if ($("script[src*='locale-redirect.js']").length !== 0) report(locale, "no locale redirect script");
+  if ($("script[src*='cookie-consent.js']").length !== 1) report(locale, "cookie consent script must appear once");
   if ($("script[src*='language-selector.js']").length !== 1) report(locale, "language selector script must appear once");
 
   const ids = $("[id]").map((_, element) => $(element).attr("id")).get();

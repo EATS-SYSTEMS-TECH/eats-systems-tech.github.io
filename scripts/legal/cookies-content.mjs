@@ -10,14 +10,14 @@ export const cookies = {
     title: "Cookie Policy",
     subtitle:
       "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-    updated: "Effective date: October 5, 2026",
+    updated: "Effective date: October 6, 2026",
     owner: "Operator: EATS SYSTEMS TECH",
     sections: [
       {
         id: "summary",
         title: "1. Summary",
         blocks: [
-          "The website uses essential browser storage for your language, accessibility and cookie choices. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it.",
+          "The website uses essential browser storage for your accessibility and cookie choices. The language comes from the page address and is not stored. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it.",
         ],
       },
       {
@@ -35,8 +35,9 @@ export const cookies = {
             table: {
               head: ["Name", "Type", "Purpose", "Duration"],
               rows: [
-                ["language", "Local storage (first party)", "Remembers the website language you chose.", "Until you clear it"],
                 ["wifigate-accessibility-settings-v1", "Local storage (first party)", "Remembers your accessibility settings, such as larger text or high contrast.", "Until you clear it"],
+                ["wifigate-a11y-fab-position", "Local storage (first party)", "Remembers where you moved the accessibility button.", "Until you clear it"],
+                ["wifigate-a11y-fab-hidden", "Session storage (first party)", "Keeps the accessibility button hidden after you close it.", "Until you close the tab"],
                 ["wifigate-cookie-consent-v1", "Local storage (first party)", "Remembers your analytics choice.", "Up to 180 days"],
                 ["_ga and _ga_*", "Analytics cookies (Google, only with consent)", "Measure visits and site usage.", "Up to 180 days"],
                 ["Firebase Authentication session", "Session storage (first party, web portal only)", "Keeps you signed in to the web portal while the browser tab is open.", "Until you sign out or close the tab"],
@@ -99,14 +100,14 @@ export const cookies = {
     title: "מדיניות עוגיות",
     subtitle:
       "מדיניות עוגיות זו מסבירה באילו עוגיות וטכנולוגיות דומות נעשה שימוש באתר wifigate.io ובפורטל האינטרנט של WIFIGATE, לשם מה, וכיצד תוכלו לשלוט בהן.",
-    updated: "תאריך תחילה: 5 באוקטובר 2026",
+    updated: "תאריך תחילה: 6 באוקטובר 2026",
     owner: "המפעילה: EATS SYSTEMS TECH",
     sections: [
       {
         id: "summary",
         title: "1. בקצרה",
         blocks: [
-          "האתר משתמש באחסון הכרחי לשמירת בחירות השפה, הנגישות והעוגיות שלכם. אם תאשרו, נשתמש גם ב־Google Analytics כדי להבין את השימוש באתר ולשפר אותו. המדידה אינה נטענת לפני אישור. איננו משתמשים בעוגיות פרסום או בפיקסלי מעקב. הפורטל שומר גם סשן כניסה בזמן השימוש בו.",
+          "האתר משתמש באחסון הכרחי לשמירת בחירות הנגישות והעוגיות שלכם. השפה נקבעת לפי כתובת הדף ואינה נשמרת. אם תאשרו, נשתמש גם ב־Google Analytics כדי להבין את השימוש באתר ולשפר אותו. המדידה אינה נטענת לפני אישור. איננו משתמשים בעוגיות פרסום או בפיקסלי מעקב. הפורטל שומר גם סשן כניסה בזמן השימוש בו.",
         ],
       },
       {
@@ -124,8 +125,9 @@ export const cookies = {
             table: {
               head: ["שם", "סוג", "מטרה", "משך"],
               rows: [
-                ["language", "אחסון מקומי (צד ראשון)", "זוכר את שפת האתר שבחרתם.", "עד שתמחקו אותו"],
                 ["wifigate-accessibility-settings-v1", "אחסון מקומי (צד ראשון)", "זוכר את הגדרות הנגישות שלכם, כגון טקסט מוגדל או ניגודיות גבוהה.", "עד שתמחקו אותו"],
+                ["wifigate-a11y-fab-position", "אחסון מקומי (צד ראשון)", "זוכר לאן הזזתם את כפתור הנגישות.", "עד שתמחקו אותו"],
+                ["wifigate-a11y-fab-hidden", "אחסון סשן (צד ראשון)", "משאיר את כפתור הנגישות מוסתר אחרי שסגרתם אותו.", "עד סגירת הלשונית"],
                 ["wifigate-cookie-consent-v1", "אחסון מקומי (צד ראשון)", "זוכר את בחירתכם לגבי מדידה.", "עד 180 ימים"],
                 ["_ga ו־_ga_*", "עוגיות מדידה (Google, רק בהסכמה)", "מדידת ביקורים ושימוש באתר.", "עד 180 ימים"],
                 ["סשן Firebase Authentication", "אחסון סשן (צד ראשון, בפורטל בלבד)", "שומר על החיבור שלכם לפורטל כל עוד לשונית הדפדפן פתוחה.", "עד ההתנתקות או סגירת הלשונית"],

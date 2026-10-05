@@ -1,11 +1,13 @@
 // Website analytics stays unloaded until the visitor makes an affirmative choice.
+// Rejecting is as easy and as prominent as accepting: both buttons look the same.
 // Set this to the site's GA4 measurement ID (G-...) when the property is connected.
 const GA_MEASUREMENT_ID = "";
 const CONSENT_KEY = "wifigate-cookie-consent-v1";
 const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
 
 (() => {
-  const pageLocale = document.documentElement.lang || "en";
+  // A page whose layout direction differs from its text names its locale.
+  const pageLocale = document.documentElement.dataset.cookieLocale || document.documentElement.lang || "en";
   const copy = window.WIFIGATE_COOKIE_COPY?.[pageLocale] || window.WIFIGATE_COOKIE_COPY.en;
   const isRtl = pageLocale === "he" || pageLocale === "ar";
   const locale = pageLocale === "en" ? "" : `/${pageLocale.toLowerCase()}`;
@@ -102,6 +104,9 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
   }
 
   function init() {
+    // The URL alone sets the language, so the site keeps no language choice.
+    try { localStorage.removeItem("language"); } catch (_) { /* Nothing stored. */ }
+
     document.querySelectorAll("[data-cookie-settings]").forEach((button) => {
       button.textContent = copy.reopen;
       button.setAttribute("aria-label", copy.reopen);
@@ -135,7 +140,7 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
         </label>
       </div>
       <div class="cookie-consent__actions">
-        <button type="button" class="cookie-consent__button cookie-consent__button--outline" data-cookie-reject>${copy.reject}</button>
+        <button type="button" class="cookie-consent__button cookie-consent__button--primary" data-cookie-reject>${copy.reject}</button>
         <button type="button" class="cookie-consent__button cookie-consent__button--outline" data-cookie-settings-open>${copy.settings}</button>
         <button type="button" class="cookie-consent__button cookie-consent__button--primary" data-cookie-accept>${copy.accept}</button>
         <button type="button" class="cookie-consent__button cookie-consent__button--primary" data-cookie-save hidden>${copy.save}</button>

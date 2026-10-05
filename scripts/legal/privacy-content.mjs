@@ -12,7 +12,7 @@ export const privacy = {
     title: "Privacy Policy",
     subtitle:
       "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-    updated: "Effective date: October 5, 2026",
+    updated: "Effective date: October 6, 2026",
     owner: "Operator: EATS SYSTEMS TECH",
     sections: [
       {
@@ -61,7 +61,7 @@ export const privacy = {
           "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
           "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
           "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-          "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+          "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
           "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share.",
         ],
       },
@@ -181,7 +181,7 @@ export const privacy = {
     title: "מדיניות פרטיות",
     subtitle:
       "מדיניות פרטיות זו מסבירה איזה מידע אישי WIFIGATE מעבדת, לשם מה, עם מי הוא משותף, כמה זמן הוא נשמר, ואילו בחירות וזכויות עומדות לרשותכם.",
-    updated: "תאריך תחילה: 5 באוקטובר 2026",
+    updated: "תאריך תחילה: 6 באוקטובר 2026",
     owner: "המפעילה: EATS SYSTEMS TECH",
     sections: [
       {
@@ -230,7 +230,7 @@ export const privacy = {
           "סטטיסטיקות שימוש. האפליקציה משתמשת ב‑Google Firebase Analytics עם אירועים הנאספים אוטומטית בלבד, כגון פתיחת האפליקציה, הפעלות, גרסת האפליקציה, דגם המכשיר, מערכת ההפעלה ומדינה או אזור משוערים הנגזרים מכתובת ה‑IP. איננו מגדירים מזהה משתמש, איננו רושמים אירועים מותאמים, ומזהי פרסום, אחסון לצורכי פרסום והתאמה אישית של מודעות כבויים.",
           "תקינות האפליקציה ועדכוני קושחה. כשהאפליקציה בודקת או מורידה קושחה לבקר, היא שולחת אסימון תקינות של Firebase App Check (Google Play Integrity או Apple App Attest), יחד עם ערוץ העדכון וסוג החומרה. ספקי הענן שלנו מעבדים את כתובת ה‑IP ואת נתוני הבקשה הטכניים הדרושים למסירת הקובץ.",
           "פורטל האינטרנט. אם אושרה לכם גישה לפורטל, אנו שומרים את מזהה החשבון, השם, כתובת הדוא\"ל, האם הדוא\"ל מאומת, ספקי הכניסה, סטטוס הגישה והתפקיד, וחותמות זמן. רשומות ביקורת אבטחה שומרות מזהה וגיבוב חד‑כיווני של כתובת הדוא\"ל, ולא את הדוא\"ל עצמו.",
-          "האתר. גלישה באתר אינה מחייבת חשבון. ספק האחסון שלנו מעבד נתונים טכניים כגון כתובת ה־IP כדי להציג את הדפים. האתר שומר את בחירות השפה, הנגישות והעוגיות שלכם. אם תאשרו מדידה, Google Analytics ימדוד ביקורים, צפיות בדפים ונתונים טכניים על המכשיר כדי לסייע לנו לשפר את האתר. תוכלו לבטל הסכמה דרך ״הגדרות עוגיות״ בתחתית האתר. הפרטים מופיעים במדיניות העוגיות.",
+          "האתר. גלישה באתר אינה מחייבת חשבון. ספק האחסון שלנו מעבד נתונים טכניים כגון כתובת ה־IP כדי להציג את הדפים. האתר שומר את בחירות הנגישות והעוגיות שלכם, ואינו שומר בחירת שפה. אם תאשרו מדידה, Google Analytics ימדוד ביקורים, צפיות בדפים ונתונים טכניים על המכשיר כדי לסייע לנו לשפר את האתר. תוכלו לבטל הסכמה דרך ״הגדרות עוגיות״ בתחתית האתר. הפרטים מופיעים במדיניות העוגיות.",
           "פניות. אם תפנו אלינו בדוא\"ל או ב‑WhatsApp, נעבד את ההודעה, את פרטי ההתקשרות ואת המידע שתבחרו למסור.",
         ],
       },
