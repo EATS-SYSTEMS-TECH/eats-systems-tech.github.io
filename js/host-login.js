@@ -44,6 +44,9 @@ async function finishLogin(user) {
 function report(error) {
   status.textContent = authErrorMessage(error);
   document.querySelector("#redirect-options").hidden = error.code !== AuthErrors.POPUP_BLOCKED;
+  if (error.code === "HOST_API_UNAVAILABLE") {
+    document.querySelector("#retry-login").hidden = false;
+  }
 }
 async function start() {
   setBusy(true);
