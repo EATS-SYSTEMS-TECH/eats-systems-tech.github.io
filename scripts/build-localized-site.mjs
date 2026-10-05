@@ -15,7 +15,7 @@ const defaultLocale = "en";
 const nowDate = new Date().toISOString().slice(0, 10);
 const guestInvitesPageKey = "automation";
 const utilityPageKeys = ["wifigate-link", "wifigate-api"];
-const COOKIE_CONSENT_VERSION = "20261006a";
+const COOKIE_CONSENT_VERSION = "20261006c";
 
 const homeTemplatePath = path.join(repoRoot, "templates", "index.template.html");
 const homeCopyDirectory = path.join(repoRoot, "scripts", "homepage-copy");
