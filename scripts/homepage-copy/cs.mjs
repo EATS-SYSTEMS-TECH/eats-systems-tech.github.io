@@ -74,7 +74,7 @@ const copy = {
   },
   automation: {
     eyebrow: "Vytvořeno pro ubytovací služby",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Vytvořeno pro",
     audiences: ["Hotely", "Ubytování Airbnb", "Apartmány pro hosty", "Ubytovací zařízení"],
     promise: "Přivítejte své hosty. Automatizujte jejich přístup.",

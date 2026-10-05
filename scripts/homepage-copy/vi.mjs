@@ -74,7 +74,7 @@ const copy = {
   },
   automation: {
     eyebrow: "Dành cho ngành lưu trú",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Dành cho",
     audiences: ["Khách sạn", "Airbnb", "Căn hộ dành cho khách", "Cơ sở lưu trú"],
     promise: "Chào đón khách của bạn. Tự động hóa quyền truy cập.",

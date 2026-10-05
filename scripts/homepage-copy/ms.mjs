@@ -74,7 +74,7 @@ const copy = {
   },
   automation: {
     eyebrow: "Direka untuk industri hospitaliti",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Direka untuk",
     audiences: ["Hotel", "Airbnb", "Pangsapuri tetamu", "Premis hospitaliti"],
     promise: "Sambut tetamu anda. Automasikan akses mereka.",

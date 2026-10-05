@@ -74,7 +74,7 @@ const copy = {
   },
   automation: {
     eyebrow: "Szálláshelyek számára tervezve",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Kinek készült?",
     audiences: ["Szállodák", "Airbnb-szálláshelyek", "Vendégapartmanok", "Egyéb szálláshelyek"],
     promise: "Fogadja vendégeit. Automatizálja a hozzáférésüket.",

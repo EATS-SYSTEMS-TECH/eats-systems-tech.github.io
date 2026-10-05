@@ -74,7 +74,7 @@
   },
   automation: {
     eyebrow: "Решение для гостеприимства",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Подходит для",
     audiences: ["Отелей", "Объектов Airbnb", "Гостевых апартаментов", "Объектов размещения"],
     promise: "Встречайте гостей. Автоматизируйте их доступ.",

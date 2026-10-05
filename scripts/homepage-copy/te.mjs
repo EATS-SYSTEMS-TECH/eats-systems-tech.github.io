@@ -74,7 +74,7 @@ const copy = {
   },
   automation: {
     eyebrow: "ఆతిథ్య రంగం కోసం రూపొందించబడింది",
-    titleLines: ["WIFIGATE", "Automation"],
+    titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "వీరి కోసం",
     audiences: ["హోటళ్లు", "Airbnb", "అతిథి అపార్ట్‌మెంట్‌లు", "ఆతిథ్య వసతి ప్రదేశాలు"],
     promise: "మీ అతిథులకు స్వాగతం పలకండి. వారి యాక్సెస్‌ను ఆటోమేట్ చేయండి.",
