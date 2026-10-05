@@ -33,27 +33,38 @@ export async function renderHostCalendar({ container, user, organization, proper
   const path = (suffix = "") => `/api/v1/organizations/${encodeURIComponent(organization.id)}/reservations${suffix}`;
   const canWrite = ["owner", "admin", "staff"].includes(organization.membership.role);
   const section = node("section", undefined, { "aria-label": "Reservation calendar", class: "host-calendar" });
-  const rangeTitle = node("h2", "Reservation calendar"); section.append(rangeTitle);
-  const controls = node("form", undefined, { class: "calendar-controls" });
+  const rangeTitle = node("h2", "Reservation calendar");
+  const controls = node("form", undefined, { class: "calendar-controls", id: `calendar-filters-${crypto.randomUUID()}` });
   const propertySelect = field(controls, "Calendar property", "propertyId", properties[0].id, "text", [["", "All properties"], ...properties.map((item) => [item.id, item.name])]);
   const roomFilter = field(controls, "Calendar room", "roomId", "", "text", [["", "All rooms"]]);
   const mapRooms = () => { roomFilter.replaceChildren(node("option", "All rooms", { value: "" }), ...rooms.filter(item => !propertySelect.value || item.propertyId === propertySelect.value).map(item => node("option", item.name, { value: item.id }))); }; mapRooms();
-  const view = field(controls, "Calendar view", "view", "week", "text", [["week", "Week"], ["two-week", "Two weeks"], ["three-week", "Three weeks"], ["month", "Month"]]);
+  const view = field(controls, "Calendar view", "view", "two-week", "text", [["week", "Week"], ["two-week", "Two weeks"], ["three-week", "Three weeks"], ["month", "Month"]]);
   const date = field(controls, "Start date", "date", dateAt(Date.now(), properties[0].timezone), "date");
   const search = field(controls, "Search guest or reference", "q"); search.required = false;
   const filter = field(controls, "Reservation status", "status", "", "text", [["", "All states"], ...states.map((state) => [state, state])]); filter.required = false;
   controls.append(node("button", "Update calendar", { type: "submit" }));
-  const navigation = node("div", undefined, { class: "form-actions" });
+  const navigation = node("div", undefined, { class: "calendar-navigation" });
   const previous = node("button", "Previous", { type: "button" });
   const today = node("button", "Today", { type: "button" });
   const next = node("button", "Next", { type: "button" });
   navigation.append(previous, today, next);
-  const add = node("button", "New reservation", { type: "button" });
+  const add = node("button", "Add Reservation", { type: "button", "aria-label":"New reservation" });
   const status = node("p", "", { role: "status", "aria-live": "polite" });
   const refreshed = node("p", "", {class: "calendar-refreshed"});
-  const editor = node("div");
+  const editorDialog = node("dialog",undefined,{class:"reservation-editor","aria-label":"Reservation details"}), editor = node("div"); editorDialog.append(editor);
+  let editorEpoch=0;
+  function clearEditor(){editorEpoch++;editor.replaceChildren();if(editorDialog.open)editorDialog.close();}
+  editorDialog.addEventListener("cancel",()=>{editorEpoch++;editor.replaceChildren();});
   const grid = node("div", undefined, { class: "calendar-scroll", tabindex: "0", "aria-label": "Calendar table" });
-  section.append(controls, navigation, ...(canWrite ? [add] : []), status, refreshed, editor, grid);
+  const heading = node("div", undefined, {class:"calendar-heading"}), headingText = node("div",undefined,{class:"calendar-heading-text"}), headingActions=node("div",undefined,{class:"calendar-heading-actions"});
+  headingText.append(rangeTitle,status,refreshed);
+  search.placeholder="Search";search.setAttribute("form",controls.id);search.parentElement.classList.add("calendar-search");headingActions.append(search.parentElement,...(canWrite?[add]:[]));heading.append(headingText,headingActions);
+  const ranges=node("div",undefined,{class:"calendar-ranges","aria-label":"Calendar range"}), rangeButtons=[];
+  for(const [label,value] of [["1 Week","week"],["2 Weeks","two-week"],["3 Weeks","three-week"],["1 Month","month"]]){const button=node("button",label,{type:"button","aria-pressed":String(view.value===value)});button.addEventListener("click",()=>{view.value=value;syncRange();void load();});ranges.append(button);rangeButtons.push([button,value]);}
+  function syncRange(){for(const [button,value] of rangeButtons)button.setAttribute("aria-pressed",String(view.value===value));}
+  view.parentElement.hidden=true;
+  const toolbar=node("div",undefined,{class:"calendar-toolbar"});toolbar.append(navigation,ranges);
+  section.append(heading,toolbar,controls,editorDialog,grid);
   container.append(section);
   const systemsPage = await readHostPages(user, `/api/v1/organizations/${encodeURIComponent(organization.id)}/systems`, current);
   if (!current()) return;
@@ -62,12 +73,15 @@ export async function renderHostCalendar({ container, user, organization, proper
   let cursor;
   let activeRange;
   let loading = 0;
+  const reservationsView=node("section",undefined,{"aria-label":"Reservations",class:"host-reservations-view"}), guestsView=node("section",undefined,{"aria-label":"Guests",class:"host-guests-view"});
+  container.append(reservationsView,guestsView);
   const collapsedProperties = new Set();
   const property = () => properties.find((item) => item.id === propertySelect.value) ?? { name: "All properties", timezone: organization.timezone ?? "UTC" };
   const duration = () => view.value === "week" ? 7 : view.value === "two-week" ? 14 : view.value === "three-week" ? 21 : new Date(Date.UTC(Number(date.value.slice(0, 4)), Number(date.value.slice(5, 7)), 0)).getUTCDate();
   const resolve = async (value, disambiguation = "reject", propertyId = propertySelect.value) => (await portalRequest(user, path("/time-zone/resolve"), "POST", { ...(propertyId ? { propertyId } : {}), localTime: value, disambiguation })).instant;
   function openEditor(record) {
-    editor.replaceChildren();
+    clearEditor();
+    const editEpoch=editorEpoch;
     const readOnly = !canWrite || (record && ["cancelled", "completed"].includes(record.status));
     const heading = node("h3", record ? "Edit reservation" : "Create reservation");
     const form = node("form", undefined, { class: "reservation-form" });
@@ -75,7 +89,7 @@ export async function renderHostCalendar({ container, user, organization, proper
     const zone = properties.find((item) => item.id === editingPropertyId).timezone;
     const roomOptions = rooms.filter((item) => item.propertyId === editingPropertyId);
     if (record && !roomOptions.some((item) => item.id === record.roomId)) roomOptions.push({ id: record.roomId, name: `${record.roomName || record.roomId} (archived)` });
-    if (!roomOptions.length) { editor.append(node("p", "Add a room to this property before creating a reservation.")); return; }
+    if (!roomOptions.length) { const close=node("button","Close reservation",{type:"button"});close.addEventListener("click",clearEditor);editor.append(node("p", "Add a room to this property before creating a reservation."),close);editorDialog.showModal();return; }
     field(form, "Guest name", "name", record?.guest.name || "");
     field(form, "Guest phone (E.164)", "phone", record?.guest.phone || "", "tel");
     const email = field(form, "Guest email (optional)", "email", record?.guest.email || "", "email"); email.required = false;
@@ -101,7 +115,7 @@ export async function renderHostCalendar({ container, user, organization, proper
     const resultStatus = node("p", "", { role: "status", "aria-live": "polite" });
     const save = node("button", "Save reservation", { type: "submit" });
     const close = node("button", "Close reservation", { type: "button" });
-    close.addEventListener("click", () => editor.replaceChildren());
+    close.addEventListener("click", () => clearEditor());
     if (record) form.append(node("p", `Version ${record.version} · ${record.status} · Timezone ${record.timezone}`));
     if (readOnly) {
       for (const input of form.querySelectorAll("input,select")) input.disabled = true;
@@ -122,7 +136,7 @@ export async function renderHostCalendar({ container, user, organization, proper
         try {
           await portalRequest(user, path(`/${encodeURIComponent(record.id)}/privacy/redact`), "POST", { version: record.version, confirm: "delete_guest_details" }, key);
           if (!current() || !privacy.isConnected) return;
-          editor.replaceChildren(); await load();
+          clearEditor(); await load();
         } catch (error) {
           if (!current() || !privacy.isConnected) return;
           message.textContent = errors[error.code] || (error.code === "RECENT_AUTH_REQUIRED" ? "Sign in again with TOTP before deleting guest details." : "Guest details could not be deleted. Refresh before retrying.");
@@ -130,6 +144,7 @@ export async function renderHostCalendar({ container, user, organization, proper
       });
     }
     if (record) void renderHostAccessGrants({ container: editor, user, organization, reservation: record, isCurrent: current });
+    editorDialog.showModal();
     heading.tabIndex = -1; heading.focus();
     let attempt;
     form.addEventListener("submit", async (event) => {
@@ -149,7 +164,8 @@ export async function renderHostCalendar({ container, user, organization, proper
         if (!attempt || attempt.signature !== signature) attempt = { signature, key: crypto.randomUUID() };
         await portalRequest(user, path(record ? `/${encodeURIComponent(record.id)}` : ""), record ? "PUT" : "POST", input, attempt.key);
         if (!current()) return;
-        editor.replaceChildren(); await load();
+        if (editEpoch !== editorEpoch) { await load(); return; }
+        clearEditor(); await load();
       } catch (error) { if (current()) resultStatus.textContent = errors[error.code] || "The reservation could not be saved. You can retry safely."; }
       finally { if (current()) save.disabled = false; }
     });
@@ -159,8 +175,8 @@ export async function renderHostCalendar({ container, user, organization, proper
     const table = node("table");
     table.append(node("caption", `${property().name} · ${property().timezone} · ${view.selectedOptions[0].textContent}`));
     const header = node("tr"); header.append(node("th", "Room", { scope: "col" }));
-    for (let index = 0; index < days; index++) header.append(node("th", addDays(date.value, index), { scope: "col" }));
-    for (const cell of header.children) if (cell.textContent === dateAt(Date.now(), property().timezone)) cell.classList.add("calendar-today");
+    for (let index = 0; index < days; index++) {const day=addDays(date.value,index),cell=node("th",undefined,{scope:"col", "data-calendar-date":day});const instant=new Date(day+"T12:00:00Z");cell.append(node("small",new Intl.DateTimeFormat("en-US",{weekday:"short",timeZone:"UTC"}).format(instant)),node("span",String(instant.getUTCDate())));header.append(cell);}
+    for (const cell of header.children) if (cell.dataset.calendarDate === dateAt(Date.now(), property().timezone)) cell.classList.add("calendar-today");
     const head = node("thead"); head.append(header); table.append(head);
     const body = node("tbody");
     const visibleRooms = rooms.filter((item) => (!propertySelect.value || item.propertyId === propertySelect.value) && (!roomFilter.value || item.id === roomFilter.value));
@@ -198,7 +214,14 @@ export async function renderHostCalendar({ container, user, organization, proper
       if (!spans.length) timeline.append(node("span", "No reservations", {class: "calendar-empty-room"}));
       cell.append(timeline); row.append(cell); body.append(row);
     }
-    rangeTitle.textContent = `${date.value} — ${addDays(date.value, days - 1)}`;
+    const format=new Intl.DateTimeFormat("en-US",{month:"long",day:"numeric",year:"numeric",timeZone:"UTC"});
+    rangeTitle.textContent = `${format.format(new Date(date.value+"T12:00:00Z"))} – ${format.format(new Date(addDays(date.value,days-1)+"T12:00:00Z"))}`;
+    for(const [viewPanel,label] of [[reservationsView,"Reservations"],[guestsView,"Guests"]]){
+      viewPanel.replaceChildren(node("h2",label),node("p",`Showing ${data.length} loaded reservations for the selected calendar range${cursor?"; more results are available in Calendar":""}.`));
+      const list=node("ul",undefined,{class:"host-resource-list"});
+      for(const reservation of data){const row=node("li"),button=node("button",reservation.guest.name,{type:"button"});button.addEventListener("click",()=>{if(!current())return;window.dispatchEvent(new CustomEvent("host:workspace-view",{detail:"Calendar"}));openEditor(reservation);});row.append(button,node("p",label==="Guests"?`${reservation.guest.email||""} · ${reservation.guest.phone||""}`:`${reservation.roomName||reservation.roomId} · ${localAt(reservation.startsAt,property().timezone)} — ${localAt(reservation.endsAt,property().timezone)} · ${reservation.status}`));list.append(row);}
+      viewPanel.append(list);if(!data.length)viewPanel.append(node("p",`No ${label.toLowerCase()} in this calendar range.`));
+    }
     table.append(body); grid.replaceChildren(table);
     const reference = document.querySelector(".calendar-reference");
     if (reference) reference.hidden = true;
@@ -212,7 +235,7 @@ export async function renderHostCalendar({ container, user, organization, proper
     const request = ++loading;
     const selection = { propertyId: propertySelect.value, roomId: roomFilter.value, date: date.value, days: duration(), q: search.value.trim(), status: filter.value };
     status.textContent = "Loading reservations…";
-    if (!more) grid.replaceChildren(node("p", "Loading calendar…"));
+    if (!more) { grid.replaceChildren(node("p", "Loading calendar…")); reservationsView.replaceChildren(node("p","Loading reservations…")); guestsView.replaceChildren(node("p","Loading guests…")); }
     try {
       if (!more) {
         const [from, to] = await Promise.all([resolve(`${selection.date}T00:00`, "earlier", selection.propertyId), resolve(`${addDays(selection.date, selection.days)}T00:00`, "later", selection.propertyId)]);
@@ -227,17 +250,17 @@ export async function renderHostCalendar({ container, user, organization, proper
       draw(); status.textContent = `${data.length} reservation${data.length === 1 ? "" : "s"}`; refreshed.textContent = `Refreshed ${new Date().toLocaleTimeString()}${cursor ? " · More results available; count is partial" : ""}`;
     } catch (error) { if (current() && request === loading) status.textContent = errors[error.code] || "The calendar could not be loaded. Update it to retry."; }
   }
-  controls.addEventListener("submit", (event) => { event.preventDefault(); editor.replaceChildren(); void load(); });
-  propertySelect.addEventListener("change", () => { editor.replaceChildren(); mapRooms(); date.value = dateAt(Date.now(), property().timezone); void load(); });
-  roomFilter.addEventListener("change", () => { editor.replaceChildren(); void load(); });
+  controls.addEventListener("submit", (event) => { event.preventDefault(); clearEditor(); void load(); });
+  propertySelect.addEventListener("change", () => { clearEditor(); mapRooms(); date.value = dateAt(Date.now(), property().timezone); void load(); });
+  roomFilter.addEventListener("change", () => { clearEditor(); void load(); });
   filterListener = new AbortController();
   window.addEventListener("host:operations-filter", event => {
     const saved = event.detail;
     if (!current() || saved?.orgId !== organization.id) return;
     if ((saved.propertyId && !properties.some(item => item.id === saved.propertyId)) || (saved.roomId && !rooms.some(item => item.id === saved.roomId && (!saved.propertyId || item.propertyId === saved.propertyId))) || (saved.status && !states.includes(saved.status))) { status.textContent = "Saved filter resources are unavailable. Refresh the organization."; return; }
-    propertySelect.value = saved.propertyId ?? ""; mapRooms(); roomFilter.value = saved.roomId ?? ""; filter.value = saved.status ?? ""; editor.replaceChildren(); void load();
+    propertySelect.value = saved.propertyId ?? ""; mapRooms(); roomFilter.value = saved.roomId ?? ""; filter.value = saved.status ?? ""; clearEditor(); void load();
   }, { signal: filterListener.signal });
-  view.addEventListener("change", () => void load());
+  view.addEventListener("change", () => { syncRange(); void load(); });
   const move = (direction) => { date.value = view.value === "month" ? new Date(Date.UTC(Number(date.value.slice(0, 4)), Number(date.value.slice(5, 7)) - 1 + direction, 1)).toISOString().slice(0, 10) : addDays(date.value, direction * duration()); void load(); };
   previous.addEventListener("click", () => move(-1));
   next.addEventListener("click", () => move(1));
