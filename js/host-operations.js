@@ -101,7 +101,7 @@ export async function renderHostOperations({ container, user, organization, prop
   if (role === "owner") {
     const form = node("form"), month = field(form, "Pricing preview month", "month", new Date().toISOString().slice(0, 7), "month"), preview = node("button", "Preview monthly pricing", { type: "submit" }), output = node("p");
     form.append(preview, output); section.append(node("h3", "Internal pricing proposal"), node("p", "This estimate does not issue an invoice or charge a payment method."), form);
-    form.addEventListener("submit", event => { event.preventDefault(); if (!form.reportValidity()) return; void run(preview, async () => { const value = await portalRequest(user, `${root}/billing/preview?${new URLSearchParams({ month: month.value })}`); if (current()) { output.textContent = `${value.plan} · ${value.activePhysicalSystems} verified physical gates · estimated USD ${(value.monthlyEstimateCents / 100).toFixed(2)} · unverified excluded ${value.unverifiedPhysicalSystems}`; status.textContent = "Internal monthly estimate loaded."; } }); });
+    form.addEventListener("submit", event => { event.preventDefault(); if (!form.reportValidity()) return; void run(preview, async () => { const { preview: value } = await portalRequest(user, `${root}/billing/preview?${new URLSearchParams({ month: month.value })}`); if (current()) { output.textContent = `${value.plan} · ${value.activePhysicalSystems} verified physical gates · estimated USD ${(value.monthlyEstimateCents / 100).toFixed(2)} · unverified excluded ${value.unverifiedPhysicalSystems}`; status.textContent = "Internal monthly estimate loaded."; } }); });
   }
   if (current()) status.textContent = "Operations loaded.";
 }
