@@ -577,3 +577,39 @@ html[dir="rtl"] .niche-hero__nav-icon {
     flex: 1 1 100%;
   }
 }
+
+/* Links to every other use case and WIFIGATE Host. */
+.niche-related__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: 0 2.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.niche-related__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.15rem 0.25rem;
+  border-bottom: 1px solid var(--home-line);
+  color: var(--home-black);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.niche-related__link::after {
+  content: "→";
+  color: var(--home-blue, #146bff);
+}
+
+[dir="rtl"] .niche-related__link::after {
+  content: "←";
+}
+
+.niche-related__link:hover,
+.niche-related__link:focus-visible {
+  color: var(--home-blue, #146bff);
+}
