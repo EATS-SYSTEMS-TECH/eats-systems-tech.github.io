@@ -1,6 +1,6 @@
 import { renderServiceTargets } from "./host-slo.js";
-import { portalRequest } from "./api/index.js";
-import { field, node, downloadHostCsv } from "./host-ui.js";
+import { portalRequest, portalExport } from "./api/index.js";
+import { field, node, downloadHostCsv, downloadHostTextCsv } from "./host-ui.js";
 
 export async function renderHostOperations({ container, user, organization, properties, rooms, isCurrent }) {
   const role = organization.membership.role;
@@ -167,10 +167,11 @@ export async function renderHostOperations({ container, user, organization, prop
   const timelineForm = node("form"), target = field(timelineForm, "Timeline target ID", "targetId"); target.required = false;
   const loadTimeline = node("button", "Load activity timeline", { type: "submit" }), timeline = node("div"); timelineForm.append(loadTimeline); section.append(timelineForm, timeline);
   async function readTimeline(cursor, append = false) {
-    const result = await portalRequest(user, `${root}/operations/timeline?${new URLSearchParams({ limit: "50", ...(target.value ? { targetId: target.value } : {}), ...(cursor ? { cursor } : {}) })}`);
+    const query = new URLSearchParams({ limit: "50", ...(target.value ? { targetId: target.value } : {}), ...(cursor ? { cursor } : {}) });
+    const result = await portalRequest(user, `${root}/operations/timeline?${query}`);
     if (!current()) return; if (!append) timeline.replaceChildren();
     for (const item of result.items) timeline.append(node("p", `${item.createdAt} · ${item.type} · ${item.targetId ?? ""}`));
-    const download = node("button", "Export this audit page", { type: "button" }); download.addEventListener("click", () => downloadHostCsv(result.items, ["id", "type", "targetId", "requestId", "createdAt"], "wifigate-audit-page.csv")); timeline.append(download);
+    const download = node("button", "Export current audit page", { type: "button" }); download.addEventListener("click", () => run(download, async () => { const csv = await portalExport(user, `${root}/operations/timeline/export?${query}`); if (current()) downloadHostTextCsv(csv, "wifigate-audit-page.csv"); })); timeline.append(download);
     if (result.nextCursor) { const more = node("button", "Load more timeline entries", { type: "button" }); more.addEventListener("click", () => run(more, async () => { await readTimeline(result.nextCursor, true); if (current()) more.remove(); })); timeline.append(more); }
     status.textContent = result.items.length ? "Activity timeline loaded." : "No matching activity.";
   }
@@ -200,13 +201,14 @@ export async function renderHostOperations({ container, user, organization, prop
     const usageForm = node("form"), today = new Date().toISOString().slice(0, 10), from = field(usageForm, "Usage from date", "from", today.slice(0, 8) + "01", "date"), to = field(usageForm, "Usage to date", "to", today, "date"), keyId = field(usageForm, "Usage API key ID", "apiKeyId"); keyId.required = false;
     const load = node("button", "Load API usage", { type: "submit" }), rows = node("div"); usageForm.append(load); section.append(node("h3", "API creation usage"), usageForm, rows);
     async function readUsage(cursor, append = false) {
-      const result = await portalRequest(user, `${root}/operations/usage?${new URLSearchParams({ from: from.value, to: to.value, limit: "100", ...(keyId.value ? { apiKeyId: keyId.value } : {}), ...(cursor ? { cursor } : {}) })}`);
+      const query = new URLSearchParams({ from: from.value, to: to.value, limit: "100", ...(keyId.value ? { apiKeyId: keyId.value } : {}), ...(cursor ? { cursor } : {}) });
+      const result = await portalRequest(user, `${root}/operations/usage?${query}`);
       if (!current()) return; if (!append) rows.replaceChildren();
       for (const item of result.items) rows.append(node("p", `${item.date} · ${item.apiKeyId} · total ${item.total} · created ${item.created} · replay ${item.replay ?? 0} · errors ${item.error ?? 0} · physical gate invitations ${item.physicalGateInvitations}`));
-      const download = node("button", "Export this usage page", { type: "button" });
-      download.addEventListener("click", () => {
-        downloadHostCsv(result.items, ["date", "apiKeyId", "created", "total", "replay", "error", "physicalGateInvitations"], "wifigate-usage-page.csv");
-      }); rows.append(download);
+      const download = node("button", "Export current usage page", { type: "button" });
+      download.addEventListener("click", () => run(download, async () => {
+        const csv = await portalExport(user, `${root}/operations/usage/export?${query}`); if (current()) downloadHostTextCsv(csv, "wifigate-usage-page.csv");
+      })); rows.append(download);
       if (result.nextCursor) { const more = node("button", "Load more usage", { type: "button" }); more.addEventListener("click", () => run(more, async () => { await readUsage(result.nextCursor, true); if (current()) more.remove(); })); rows.append(more); }
       status.textContent = "API usage loaded. Each export contains one bounded page.";
     }

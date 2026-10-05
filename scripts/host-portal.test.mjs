@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createProfile, getProfile, approveEmail, changePortalAccess, deletePortalAccess, profileApi, portalRequest } from "../js/api/index.js";
+import { createProfile, getProfile, approveEmail, changePortalAccess, deletePortalAccess, profileApi, portalRequest, portalExport } from "../js/api/index.js";
 import { parseIdentity, portalState, canApproveEmail } from "../js/host-dashboard-model.js";
 import { readHostPages } from "../js/host-pages.js";
 const user = { uid: "user-1", email: "person@example.test", displayName: "Person", emailVerified: true };
@@ -114,4 +114,15 @@ test("role changes and deletion use explicit contracts without deleting an Auth 
     assert.deepEqual(JSON.parse(requests[2].data),{email:"admin@example.test"});
     assert.equal(requests[2].headers.get("Idempotency-Key"),"delete-access-request");
   });
+});
+
+test("CSV exports use fresh authenticated GET text requests and reject non-export paths before reading tokens", async () => {
+  const previous=profileApi.defaults.adapter; let reads=0;
+  const user={getIdToken:async()=>{reads++; return "fresh-export-token";}};
+  profileApi.defaults.adapter=async config=>{ assert.equal(config.responseType,"text"); assert.equal(config.method,"get"); assert.equal(config.headers.get("Authorization"),"Bearer fresh-export-token"); assert.equal(config.headers.get("Accept"),"text/csv"); assert.equal(config.withCredentials,false); return {data:'"date","total"\r\n"2026-10-05","1"\r\n',status:200,statusText:"OK",headers:{},config}; };
+  try {
+    for (const path of ["//foreign.test/api/v1/organizations/a/operations/usage/export","/api/v1/organizations/a/operations/usage","/api/v1/organizations/a/operations/../usage/export","/api/v1/organizations/a/operations/usage/export#fragment"]) assert.throws(()=>portalExport(user,path),/invalid-request/);
+    assert.equal(reads,0);
+    assert.equal(await portalExport(user,"/api/v1/organizations/a/operations/usage/export?from=2026-10-05&to=2026-10-05"),'"date","total"\r\n"2026-10-05","1"\r\n'); assert.equal(reads,1);
+  } finally {profileApi.defaults.adapter=previous;}
 });
