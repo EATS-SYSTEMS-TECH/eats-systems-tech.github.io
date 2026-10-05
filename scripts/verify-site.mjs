@@ -311,8 +311,10 @@ async function main() {
         if (!html.includes(`url=${expectedTarget}`)) {
           problems.push(`${rel}: does not redirect to ${expectedTarget}`);
         }
-        if (!html.includes("noindex")) {
-          problems.push(`${rel}: redirect page is missing noindex`);
+        // A 0-second refresh plus a canonical is a permanent redirect; noindex
+        // would only blur that signal.
+        if (html.includes("noindex") || !html.includes(`rel="canonical" href="${siteOrigin}${expectedTarget}"`)) {
+          problems.push(`${rel}: redirect page must carry only a canonical to ${expectedTarget}`);
         }
       }
     }
@@ -411,6 +413,11 @@ async function main() {
       expectedUrls.add(`${siteOrigin}${pagePath(locale, pageKey)}`);
     }
   }
+  // The legal pages are indexed in English and Hebrew; Contact Us in English.
+  for (const pageKey of ["privacy-policy", "terms-and-conditions", "cookies", "accessibility"]) {
+    for (const locale of ["en", "he"]) expectedUrls.add(`${siteOrigin}${pagePath(locale, pageKey)}`);
+  }
+  expectedUrls.add(`${siteOrigin}/contact-us/`);
   for (const url of sitemapUrls) {
     if (!expectedUrls.has(url)) problems.push(`sitemap.xml: unexpected URL ${url}`);
   }
