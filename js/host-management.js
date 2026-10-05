@@ -1,3 +1,4 @@
+import { renderEmptyHostCalendar } from "./host-empty-calendar.js";
 import { renderPendingMembershipInvitations, renderOwnerMembershipInvitations } from "./host-membership-invitations.js";
 import { portalRequest } from "./api/index.js";
 import { readHostPages } from "./host-pages.js";
@@ -73,6 +74,7 @@ export function clearHostManagement({ sessionEnded = false } = {}) {
   organizations = [];
   if (sessionEnded) { attempts.clear(); sessionTransfer = undefined; sessionUid = undefined; preferredOrganizationId = undefined; }
   root.replaceChildren();
+  clearOrganizationSelector();
   const reference = document.querySelector(".calendar-reference");
   if (reference) reference.hidden = false;
 }
@@ -236,10 +238,17 @@ async function renderInventory(container, org, properties, rooms, epoch, loadedP
     });
   } catch (error) { if (epoch === generation) section.append(node("p", message(error), { role: "status" })); }
 }
+function clearOrganizationSelector() {
+  const holder=document.getElementById("workspace-org-switcher");
+  if(holder){const label=node("label","Organization"),select=node("select",undefined,{"aria-label":"Organization",disabled:""});select.append(node("option","No organization selected"));label.append(select);holder.replaceChildren(label);}
+  delete root.dataset.organizationId;
+}
 let sessionTransfer;
 export async function loadHostManagement(user, identity, preferredId) {
   if (sessionUid !== user.uid) { attempts.clear(); sessionTransfer = undefined; preferredOrganizationId = undefined; sessionUid = user.uid; }
   const epoch = ++generation;
+  clearOrganizationSelector();
+  root.dataset.loading="true";
   currentUser = user;
   currentIdentity = identity;
   root.replaceChildren(node("h2", "Organizations"), node("p", "Loading your organizations…", { role: "status" }));
@@ -252,14 +261,16 @@ export async function loadHostManagement(user, identity, preferredId) {
     if (identity.role === "admin") actionForm(root, "Create organization", "/api/v1/organizations", "POST", (form) => { field(form, "Organization name", "name"); field(form, "IANA timezone", "timezone", timezone); }, undefined, (value) => { selectedId = value.organization.id; });
     await renderPendingMembershipInvitations({ container: root, user, isCurrent: () => epoch === generation, onAccepted: id => epoch === generation ? loadHostManagement(user, identity, id) : undefined });
     if (epoch !== generation) return;
-    if (!organizations.length) { root.append(node("p", "No active organization memberships. An owner can add your verified email.")); return; }
+    if (!organizations.length) { root.append(node("p", "No active organization memberships. An owner can add your verified email.")); renderEmptyHostCalendar(root); root.dataset.loading="false"; return; }
     const preferred = preferredId ?? preferredOrganizationId;
     selectedId = organizations.some((org) => org.id === preferred) ? preferred : organizations[0].id;
     preferredOrganizationId = selectedId;
     const selection = node("form");
     const select = field(selection, "Organization", "organization", selectedId, "text", organizations.map((org) => [org.id, org.name]));
-    root.append(selection);
-    select.addEventListener("change", () => void loadHostManagement(user, identity, select.value));
+    (document.getElementById("workspace-org-switcher") ?? root).append(selection);
+    const selectorHolder=document.getElementById("workspace-org-switcher"); if(selectorHolder) selectorHolder.replaceChildren(selection);
+    root.dataset.organizationId=selectedId;
+    select.addEventListener("change", () => { window.dispatchEvent(new CustomEvent("host:workspace-view",{detail:"Calendar"})); void loadHostManagement(user, identity, select.value); });
     const org = organizations.find((entry) => entry.id === selectedId);
     const owner = org.membership.role === "owner";
     const manager = owner || org.membership.role === "admin";
@@ -279,6 +290,7 @@ export async function loadHostManagement(user, identity, preferredId) {
     if (epoch !== generation) return;
     await renderInventory(root, org, properties.items, rooms.items, epoch);
     if (epoch !== generation) return;
+    if (!properties.items.length) renderEmptyHostCalendar(root, {organization:org,reason:"properties"});
     await renderHostCalendar({ container: root, user, organization: org, properties: properties.items, rooms: rooms.items, isCurrent: () => epoch === generation });
     if (epoch !== generation) return;
     const calendarSection = root.querySelector(".host-calendar"), firstSection = root.querySelector("section");
@@ -296,6 +308,7 @@ export async function loadHostManagement(user, identity, preferredId) {
     await renderHostImportRequests({ container: root, user, organization: org, isCurrent: () => epoch === generation, onConnected: () => epoch === generation ? loadHostManagement(user, identity, org.id) : undefined });
   } catch (error) {
     if (epoch !== generation) return;
+    root.dataset.loading="false";
     root.replaceChildren(node("h2", "Organizations"), node("p", message(error), { role: "status" }));
     if (error.code === "TOTP_REQUIRED") {
       const verify = node("button", "Verify authenticator", { type: "button" });
@@ -305,5 +318,5 @@ export async function loadHostManagement(user, identity, preferredId) {
     const retry = node("button", "Refresh organizations", { type: "button" });
     retry.addEventListener("click", () => void loadHostManagement(user, identity, preferredId));
     root.append(retry);
-  }
+  } finally { if(epoch===generation) root.dataset.loading="false"; }
 }
