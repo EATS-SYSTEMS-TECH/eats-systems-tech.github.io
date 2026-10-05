@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createProfile, getProfile, approveEmail, changePortalAccess, deletePortalAccess, profileApi, portalRequest, portalExport } from "../js/api/index.js";
+import { createProfile, getProfile, approveEmail, changePortalAccess, deletePortalAccess, profileApi, portalRequest, portalExport, pendingMembershipInvitations, acceptMembershipInvitation } from "../js/api/index.js";
 import { parseIdentity, portalState, canApproveEmail } from "../js/host-dashboard-model.js";
 import { readHostPages } from "../js/host-pages.js";
 const user = { uid: "user-1", email: "person@example.test", displayName: "Person", emailVerified: true };
@@ -125,4 +125,29 @@ test("CSV exports use fresh authenticated GET text requests and reject non-expor
     assert.equal(reads,0);
     assert.equal(await portalExport(user,"/api/v1/organizations/a/operations/usage/export?from=2026-10-05&to=2026-10-05"),'"date","total"\r\n"2026-10-05","1"\r\n'); assert.equal(reads,1);
   } finally {profileApi.defaults.adapter=previous;}
+});
+
+test("membership invitations validate before token reads and accept only the current recipient with a version", async () => {
+  let reads = 0;
+  const identity = { getIdToken: async () => { reads++; return `recipient-token-${reads}`; } };
+  await withAdapter(async requests => {
+    for (const limit of [0, 101, 1.5, NaN]) assert.throws(() => pendingMembershipInvitations(identity, { limit }), /invalid-request/);
+    for (const id of ["../other", "%2fother", "a?uid=other", "a#fragment", ""]) {
+      assert.throws(() => pendingMembershipInvitations(identity, { cursor: id }), /invalid-request/);
+      assert.throws(() => acceptMembershipInvitation(identity, id, 1, "invitation-request-1"), /invalid-request/);
+    }
+    assert.throws(() => acceptMembershipInvitation(identity, "invite-1", 0, "invitation-request-1"), /invalid-request/);
+    assert.throws(() => acceptMembershipInvitation(identity, "invite-1", 1, "short"), /invalid-request/);
+    assert.equal(reads, 0); assert.equal(requests.length, 0);
+    await pendingMembershipInvitations(identity, { limit: 1, cursor: "invite-1" });
+    await acceptMembershipInvitation(identity, "invite-1", 2, "invitation-request-1");
+    assert.equal(requests[0].url, "/api/v1/auth/invitations?limit=1&cursor=invite-1");
+    assert.equal(requests[0].method, "get"); assert.equal(requests[0].data, undefined);
+    assert.equal(requests[0].headers.get("Authorization"), "Bearer recipient-token-1");
+    assert.equal(requests[1].url, "/api/v1/auth/invitations/invite-1/accept");
+    assert.equal(requests[1].method, "post"); assert.deepEqual(JSON.parse(requests[1].data), { version: 2 });
+    assert.equal(requests[1].headers.get("Idempotency-Key"), "invitation-request-1");
+    assert.equal(requests[1].headers.get("Authorization"), "Bearer recipient-token-2");
+    for (const request of requests) assert.equal(request.withCredentials, false);
+  });
 });

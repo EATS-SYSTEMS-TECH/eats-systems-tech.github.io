@@ -1,3 +1,4 @@
+import { renderPendingMembershipInvitations, renderOwnerMembershipInvitations } from "./host-membership-invitations.js";
 import { portalRequest } from "./api/index.js";
 import { readHostPages } from "./host-pages.js";
 import { renderHostApiKeys } from "./host-api-keys.js";
@@ -249,6 +250,8 @@ export async function loadHostManagement(user, identity, preferredId) {
     root.replaceChildren(node("h2", "Organizations"));
     renderSupportDiagnostics({container: root, user, identity, isCurrent: () => epoch === generation});
     if (identity.role === "admin") actionForm(root, "Create organization", "/api/v1/organizations", "POST", (form) => { field(form, "Organization name", "name"); field(form, "IANA timezone", "timezone", timezone); }, undefined, (value) => { selectedId = value.organization.id; });
+    await renderPendingMembershipInvitations({ container: root, user, isCurrent: () => epoch === generation, onAccepted: id => epoch === generation ? loadHostManagement(user, identity, id) : undefined });
+    if (epoch !== generation) return;
     if (!organizations.length) { root.append(node("p", "No active organization memberships. An owner can add your verified email.")); return; }
     const preferred = preferredId ?? preferredOrganizationId;
     selectedId = organizations.some((org) => org.id === preferred) ? preferred : organizations[0].id;
@@ -272,6 +275,8 @@ export async function loadHostManagement(user, identity, preferredId) {
     await renderResources(root, "properties", properties.items, manager, [], properties.nextCursor, epoch);
     await renderResources(root, "rooms", rooms.items, manager, properties.items, rooms.nextCursor, epoch);
     if (owner) await renderResources(root, "members", members.items, owner, [], members.nextCursor, epoch);
+    await renderOwnerMembershipInvitations({container:root,user,organization:org,isCurrent:()=>epoch===generation});
+    if (epoch !== generation) return;
     await renderInventory(root, org, properties.items, rooms.items, epoch);
     if (epoch !== generation) return;
     await renderHostCalendar({ container: root, user, organization: org, properties: properties.items, rooms: rooms.items, isCurrent: () => epoch === generation });
