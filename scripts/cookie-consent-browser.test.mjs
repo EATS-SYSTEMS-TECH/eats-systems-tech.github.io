@@ -20,7 +20,7 @@ try {
     for (const key of keys) assert.ok(copies[locale][key]?.trim(), `${locale}: empty ${key}`);
     const file = path.resolve(locale === "en" ? "index.html" : `${locale.toLowerCase()}/index.html`);
     const html = await readFile(file, "utf8");
-    assert.ok(html.includes("cookie-consent-copy.js"), `${locale}: copy script missing`);
+    assert.ok(html.includes(`window.WIFIGATE_COOKIE_COPY = {"${locale}":`), `${locale}: embedded copy missing`);
     assert.ok(html.includes("data-cookie-settings"), `${locale}: settings entry missing`);
   }
 
@@ -97,7 +97,9 @@ try {
     assert.doesNotMatch(html, /locale-redirect\.js/, `${name}: no remembered-language redirect`);
     if (/http-equiv="refresh"/i.test(html)) continue;
     assert.equal(html.match(/cookie-consent\.js/g)?.length, 1, `${name}: cookie consent script`);
-    assert.equal(html.match(/cookie-consent-copy\.js/g)?.length, 1, `${name}: cookie consent copy`);
+    // Generated pages embed their own language; hand-written pages load the full file.
+    const copySources = (html.match(/cookie-consent-copy\.js/g)?.length || 0) + (html.match(/window\.WIFIGATE_COOKIE_COPY = /g)?.length || 0);
+    assert.equal(copySources, 1, `${name}: cookie consent copy`);
     consentPages += 1;
   }
   assert.ok(consentPages > 500, `only ${consentPages} pages ask for consent`);

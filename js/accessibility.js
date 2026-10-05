@@ -28,10 +28,11 @@ function getAccessibilityCopies() {
   return window.accessibilityCopy || {}
 }
 
+// A generated page embeds its own language only; the full file has them all.
 function getAccessibilityLanguage() {
   const copies = getAccessibilityCopies()
   const lang = document.documentElement.getAttribute("lang") || "en"
-  return copies[lang] ? lang : "en"
+  return copies[lang] ? lang : copies.en ? "en" : Object.keys(copies)[0]
 }
 
 function getAccessibilityBundle() {

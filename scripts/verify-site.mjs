@@ -292,8 +292,8 @@ async function main() {
       if ($("#a11y-statement").attr("href") !== pagePath(locale, "accessibility")) {
         problems.push(`${rel}: accessibility menu must link to the statement in its own language`);
       }
-      if (!$("script[src*='accessibility-copy.js']").length) {
-        problems.push(`${rel}: accessibility copy script missing`);
+      if (!/window.accessibilityCopy = {"[^"]+":/.test(html)) {
+        problems.push(`${rel}: the page must embed its accessibility copy`);
       }
     }
 
@@ -391,7 +391,7 @@ async function main() {
       // Legal hrefs and the logo src legitimately vary with page depth.
       const shape = footer
         .replace(/href="[^"]*(?:terms-and-conditions|privacy-policy|cookies)\//g, 'href="LEGAL/')
-        .replace(/src="[^"]*WIFIGATE_LOGO_NO_BG\.png"/g, 'src="LOGO"');
+        .replace(/src="[^"]*wifigate-logo-footer.webp"/g, 'src="LOGO"');
 
       if (!shapes.has(shape)) shapes.set(shape, []);
       shapes.get(shape).push(pageKey);

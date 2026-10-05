@@ -19,7 +19,7 @@ const defaultLocale = "en";
 const nowDate = new Date().toISOString().slice(0, 10);
 const guestInvitesPageKey = "automation";
 const utilityPageKeys = ["wifigate-link", "wifigate-api"];
-const COOKIE_CONSENT_VERSION = "20261006c";
+const COOKIE_CONSENT_VERSION = "20261007a";
 
 const homeTemplatePath = path.join(repoRoot, "templates", "index.template.html");
 const homeCopyDirectory = path.join(repoRoot, "scripts", "homepage-copy");
@@ -37,7 +37,6 @@ const homeDataFiles = [
   "js/translations.js",
   "js/translations-extra.js",
   "js/translations-new-locales.js",
-  "js/guest-invites-home.js",
   "js/i18n.js",
   "js/accessibility-copy.js",
   "js/language-polish.js",
@@ -374,7 +373,7 @@ function buildLanguageSelectorMarkup(options, locale, pageKey, assetPrefix) {
       return `
           <a class="language-selector__option${selectedClass}" href="${buildPagePath(option.code, pageKey)}" data-lang="${option.code}"${currentAttr}>
             <span class="language-selector__flag">
-              <img src="${toStaticAssetPath(`assets/img/flags/${option.flagSrc}`, assetPrefix)}" alt="${option.flagAlt}" width="50" height="33" />
+              <img src="${toStaticAssetPath(`assets/img/flags/${option.flagSrc}`, assetPrefix)}" alt="${option.flagAlt}" width="50" height="33" loading="lazy" decoding="async" />
             </span>
             <span class="language-selector__label" dir="${itemDir}">${option.label}</span>
           </a>`;
@@ -1061,6 +1060,11 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   $("script[src*='js/navigation.js']").attr("src", prefix + "js/navigation.js?v=20260911a");
 }
 
+// JSON safe to embed in an inline <script>.
+function inlineJson(value) {
+  return JSON.stringify(value).replace(/</g, "<");
+}
+
 function serialize($, homeData, locale, pageKey = "home") {
   updateSharedHeader($, homeData, locale, pageKey);
   // Every published page asks for cookie consent in its own language; the
@@ -1071,7 +1075,12 @@ function serialize($, homeData, locale, pageKey = "home") {
     .attr({ "aria-label": settingsLabel, dir: isRtl(locale) ? "rtl" : "ltr" });
   const prefix = buildAssetPrefix(locale, pageKey);
   $("head").append(`<link rel="stylesheet" href="${prefix}css/cookie-consent.css?v=${COOKIE_CONSENT_VERSION}">`);
-  $("body").append(`<script src="${prefix}js/cookie-consent-copy.js?v=${COOKIE_CONSENT_VERSION}" defer></script>`);
+  // A page carries the copy of its own language only; js/cookie-consent-copy.js
+  // and js/accessibility-copy.js stay the single source.
+  $("body").append(`<script>window.WIFIGATE_COOKIE_COPY = ${inlineJson({ [locale]: homeData.cookieCopy[locale] })};</script>`);
+  $("script[src*='js/accessibility-copy.js']").replaceWith(
+    `<script>window.accessibilityCopy = ${inlineJson({ [locale]: homeData.accessibilityCopy[locale] })};</script>`
+  );
   $("body").append(`<script src="${prefix}js/cookie-consent.js?v=${COOKIE_CONSENT_VERSION}" defer></script>`);
   const html = $.html({ decodeEntities: false }).replace(/[ \t]+(?=\r?\n|$)/g, "");
   return ensureTrailingNewline(html);
@@ -1579,34 +1588,15 @@ async function buildNichePages(homeData) {
   return sitemapEntries;
 }
 
-function getGuestInvitesStrings(homeData, locale) {
-  const bundle = getBundle(homeData.translations, locale);
-  const enBundle = homeData.translations[defaultLocale];
-  const gen = (bundle && bundle.guestInvites && bundle.guestInvites.generator) || {};
-  const enGen = (enBundle && enBundle.guestInvites && enBundle.guestInvites.generator) || {};
-  const pick = (key, fallback) => gen[key] || enGen[key] || fallback;
-
-  return {
-    metaTitle: pick("metaTitle", "Automated Guest Invites API | WIFIGATE"),
-    metaDescription: pick(
-      "metaDescription",
-      "Build and preview a WIFIGATE guest invitation API request, then copy the ready-to-use URL."
-    ),
-    copyButton: pick("copyButton", "Copy URL"),
-    copiedButton: pick("copiedButton", "Copied!"),
-    copyError: pick("copyError", "Copy failed, select the URL and copy it manually."),
-  };
-}
-
-function updateGuestInvitesStaticUi($, strings) {
-  $("#js-year").text(nowDate.slice(0, 4));
-  $("#giapi-copy-data").text(
-    JSON.stringify({
-      copyButton: strings.copyButton,
-      copiedButton: strings.copiedButton,
-      copyError: strings.copyError,
-    })
-  );
+// The WIFIGATE Host page copy: scripts/host-page-copy/<locale>.mjs.
+const hostPageCopyCache = new Map();
+async function loadHostPageCopy(locale) {
+  if (!hostPageCopyCache.has(locale)) {
+    const file = path.join(repoRoot, "scripts", "host-page-copy", `${locale}.mjs`);
+    const copy = await fs.access(file).then(() => import(pathToFileURL(file).href).then((m) => m.default), () => null);
+    hostPageCopyCache.set(locale, copy);
+  }
+  return hostPageCopyCache.get(locale) || loadHostPageCopy(defaultLocale);
 }
 
 function rewriteGuestInvitesInternalLinks($, locale) {
@@ -1670,19 +1660,18 @@ async function buildGuestInvitesPages(homeData) {
     const locale = localeOption.code;
     const bundle = getBundle(homeData.translations, locale);
     const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale);
-    const strings = getGuestInvitesStrings(homeData, locale);
+    const hostCopy = await loadHostPageCopy(locale);
     const $ = cheerio.load(template, { decodeEntities: false });
 
     setBodyDirection($, locale);
     rewriteStaticAssets($, locale, guestInvitesPageKey);
     appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, guestInvitesPageKey);
-    applyDataI18nTranslations($, bundle, locale);
+    applyDataI18nTranslations($, { ...bundle, guestInvites: { marketing: hostCopy.marketing } }, locale);
     updateFooterStaticUi($, bundle, locale, homeData.homepageCopies[locale]?.footer);
     updateAccessibilityMarkup($, accessibilityBundle, locale);
-    updateGuestInvitesStaticUi($, strings);
     rewriteGuestInvitesInternalLinks($, locale);
     reorderGuestInvitesSections($);
-    setGuestInvitesMeta($, locale, homeData.localeOptions, strings);
+    setGuestInvitesMeta($, locale, homeData.localeOptions, hostCopy);
 
     const outputFile = buildOutputFilePath(locale, guestInvitesPageKey);
     await writeOutputFile(outputFile, serialize($, homeData, locale, guestInvitesPageKey));
