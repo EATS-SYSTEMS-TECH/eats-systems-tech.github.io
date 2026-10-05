@@ -385,15 +385,15 @@ export default {
         "WIFIGATE; spor tesislerine, padel kortlarına, spor salonlarına ve antrenman merkezlerine akıllı geçiş kontrolü getirir: telefondan giriş, geçici veya kalıcı yetkiler.",
       imageAlt: "Işıklandırılmış spor kortunun girişini telefonuyla açan padel oyuncusu",
     },
-    "self-storage": {
-      "label": "Self Storage Depolar",
-      "title": "Self Storage Tesisleri için Akıllı Erişim",
-      "heroLead": "Her kiracı tesis kapısını ve bina kapısını kendi telefonundan, yalnızca sizin izin verdiğiniz saatlerde açar. Kiralama sona erdiğinde erişim de sona erer: toplanacak anahtar, değiştirilecek şifre yok.",
+    "storage-lockers": {
+      "label": "Depolar ve Emanet Dolapları",
+      "title": "Depolama Alanları ve Emanet Dolapları için Akıllı Erişim",
+      "heroLead": "Her kiracı tesis kapısını, bina kapısını ve kendi dolabını telefonundan, yalnızca sizin izin verdiğiniz saatlerde açar. Kiralama sona erdiğinde erişim de sona erer: toplanacak anahtar, değiştirilecek şifre yok.",
       "highlights": [
         {
           "icon": "users",
           "title": "Her kiracıya kişisel yetki",
-          "text": "Eski kiracıların hâlâ hatırladığı ortak bir kapı şifresi yok. Her kiracının kendi erişimi vardır; sözleşme bittiğinde ya da ödeme geciktiğinde bu erişimi kaldırmak bir an sürer."
+          "text": "Eski kiracıların hâlâ hatırladığı ortak bir şifre yok. Her kiracının kendi erişimi vardır; sözleşme bittiğinde ya da ödeme geciktiğinde bu erişimi kaldırmak bir an sürer."
         },
         {
           "icon": "clock",
@@ -406,9 +406,9 @@ export default {
           "text": "Her açılış kişi ve saat bilgisiyle kaydedilir; böylece bir ziyaretle ilgili soru güvenlik kamerası kayıtlarından değil, erişim geçmişinden yanıtlanır."
         }
       ],
-      "paragraph": "Self storage tesisleri genellikle ortak kapı şifrelerine, tuş takımlarına ve kopyalanan, elden ele geçen ve nadiren değiştirilen fiziksel anahtarlara dayanır. WIFIGATE erişimi telefona taşır: her kiracının tesis kapısı, bina girişi ve kurulu olduğu yerlerde deposunun elektrikli kapısı için kişisel bir yetkisi olur; bu yetki seçtiğiniz saatlerle sınırlıdır ve kiralama sona erdiği anda kaldırılır. Telefon sahadaki cihazla doğrudan iletişim kurar; kapıda SIM kart veya internet bağlantısı gerekmez ve standart kullanım için aylık abonelik yoktur.",
+      "paragraph": "Depolama tesisleri ve dolap odaları genellikle ortak şifrelere, tuş takımlarına ve kopyalanan, elden ele geçen ve nadiren değiştirilen fiziksel anahtarlara dayanır. WIFIGATE erişimi telefona taşır: her kiracının tesis kapısı, bina girişi ve kurulu olduğu yerlerde elektrikli kilitli deposu veya dolabı için kişisel bir yetkisi olur; bu yetki seçtiğiniz saatlerle sınırlıdır ve kiralama sona erdiği anda kaldırılır. Telefon sahadaki cihazla doğrudan iletişim kurar; kapıda SIM kart veya internet bağlantısı gerekmez ve standart kullanım için aylık abonelik yoktur.",
       "bullets": [
-        "Tesis kapısını ve bina kapısını telefondan açma",
+        "Tesis kapısını, bina kapısını ve dolabı telefondan açma",
         "Her kiracıya kişisel yetki",
         "Çalışma saatleriyle veya özel bir zaman aralığıyla sınırlı erişim",
         "Nakliyeciler ve aile üyeleri için tek seferlik erişim",
@@ -417,9 +417,9 @@ export default {
         "Değiştirilecek ortak şifre, tuş takımı veya anahtar yok",
         "Kapıda SIM kart veya internet bağlantısı yok"
       ],
-      "seoTitle": "Self Storage Tesisleri için Akıllı Geçiş Kontrolü | WIFIGATE",
-      "seoDescription": "WIFIGATE, her self storage kiracısına tesis kapısına ve kapılara telefondan kişisel erişim sağlar; erişim çalışma saatleriyle sınırlıdır, geçmişe kaydedilir ve kiralama bitince kaldırılır.",
-      "imageAlt": "Self storage tesisinin kapısını telefonuyla açan kadın"
+      "seoTitle": "Depolama Alanları ve Emanet Dolapları için Akıllı Geçiş Kontrolü | WIFIGATE",
+      "seoDescription": "WIFIGATE, her depo ve dolap kiracısına tesis kapısına, kapılara ve kendi dolabına telefondan kişisel erişim sağlar; erişim çalışma saatleriyle sınırlıdır, geçmişe kaydedilir ve kiralama bitince kaldırılır.",
+      "imageAlt": "Dolapların ve depo birimlerinin bulunduğu bir depolama tesisinin kapısını telefonuyla açan kadın"
     },
   },
 };

@@ -166,12 +166,12 @@ export const NICHE_DEFINITIONS = [
     },
   },
   {
-    key: "self-storage",
-    legacyKeys: [],
+    key: "storage-lockers",
+    legacyKeys: ["self-storage"],
     image: {
-      hero: "assets/wifigate_niche_pages/self-storage-app-hero.webp",
-      card: "assets/wifigate_niche_pages/self-storage-app-card.webp",
-      og: "assets/wifigate_niche_pages/self-storage-app-og.jpg",
+      hero: "assets/wifigate_niche_pages/storage-lockers-app-hero.webp",
+      card: "assets/wifigate_niche_pages/storage-lockers-app-card.webp",
+      og: "assets/wifigate_niche_pages/storage-lockers-app-og.jpg",
       heroWidth: 1280,
       heroHeight: 720,
       cardWidth: 640,
