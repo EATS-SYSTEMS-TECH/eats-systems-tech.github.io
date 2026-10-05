@@ -4,3 +4,4 @@ export { approveEmail, changePortalAccess, deletePortalAccess } from "./auth/app
 export { hostGet } from "./host/host-get.js";
 export { hostApi, profileApi } from "./api.js";
 export { portalRequest, portalExport } from "./host/portal-request.js";
+export { pendingMembershipInvitations, acceptMembershipInvitation } from "./host/membership-invitations.js";
