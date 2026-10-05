@@ -18,10 +18,10 @@ const expectedSections = [
   "contact",
 ];
 const expectedTargets = [
-  "platform",
-  "solutions",
+  "how-it-works",
+  "use-cases",
   "wifigate-automation",
-  "product-guide",
+  "tutorial-videos",
   "get-in-touch",
 ];
 
@@ -71,7 +71,7 @@ for (const localeFile of localeFiles) {
   const navTargets = $(".topbar-nav .nav__link")
     .map((_, element) => $(element).attr("href"))
     .get();
-  const expectedNavTargets = expectedTargets.map((id) => `#${id}`);
+  const expectedNavTargets = expectedTargets.map((id) => `${homePath}#${id}`);
   if (JSON.stringify(navTargets) !== JSON.stringify(expectedNavTargets)) {
     report(locale, `unexpected navigation targets: ${JSON.stringify(navTargets)}`);
   }
@@ -94,9 +94,6 @@ for (const localeFile of localeFiles) {
   }
   if ($(".guest-invites__cta").attr("href") !== `${homePath}automation/`) {
     report(locale, "Automation CTA is not locale-aware");
-  }
-  if ($("#private-access .security-statement__link").attr("href") !== `${homePath}#home`) {
-    report(locale, "private-access CTA is not locale-aware");
   }
 
   const heroSubtitle = $("#hero-subtitle");

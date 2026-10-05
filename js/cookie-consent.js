@@ -6,8 +6,7 @@ const CONSENT_KEY = "wifigate-cookie-consent-v1";
 const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
 
 (() => {
-  // A page whose layout direction differs from its text names its locale.
-  const requestedLocale = document.documentElement.dataset.cookieLocale || document.documentElement.lang || "en";
+  const requestedLocale = document.documentElement.lang || "en";
   const pageLocale = Object.hasOwn(window.WIFIGATE_COOKIE_COPY, requestedLocale) ? requestedLocale : "en";
   const copy = window.WIFIGATE_COOKIE_COPY[pageLocale];
   const isRtl = pageLocale === "he" || pageLocale === "ar";
