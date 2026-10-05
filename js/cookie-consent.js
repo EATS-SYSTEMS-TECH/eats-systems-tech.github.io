@@ -7,7 +7,9 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
 
 (() => {
   const requestedLocale = document.documentElement.lang || "en";
-  const pageLocale = Object.hasOwn(window.WIFIGATE_COOKIE_COPY, requestedLocale) ? requestedLocale : "en";
+  const copies = window.WIFIGATE_COOKIE_COPY;
+  // A generated page embeds its own language only; the full file has them all.
+  const pageLocale = Object.hasOwn(copies, requestedLocale) ? requestedLocale : Object.hasOwn(copies, "en") ? "en" : Object.keys(copies)[0];
   const copy = window.WIFIGATE_COOKIE_COPY[pageLocale];
   const isRtl = pageLocale === "he" || pageLocale === "ar";
   const locale = pageLocale === "en" ? "" : `/${pageLocale.toLowerCase()}`;

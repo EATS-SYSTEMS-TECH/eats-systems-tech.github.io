@@ -4,8 +4,8 @@
 var currentLang = "en";
 
 var SITE_LANGUAGE_OPTIONS = [
-  { code: "en", label: "English", flagType: "image", flagSrc: "flag-us.png", flagAlt: "US" },
-  { code: "es", label: "Español", flagType: "image", flagSrc: "flag-es.svg", flagAlt: "ES" },
+  { code: "en", label: "English", flagType: "image", flagSrc: "flag-us.webp", flagAlt: "US" },
+  { code: "es", label: "Español", flagType: "image", flagSrc: "flag-es.webp", flagAlt: "ES" },
   { code: "fr", label: "Français", flagType: "image", flagSrc: "flag-fr.svg", flagAlt: "FR" },
   { code: "de", label: "Deutsch", flagType: "image", flagSrc: "flag-de.svg", flagAlt: "DE" },
   { code: "he", label: "עברית", flagType: "image", flagSrc: "flag-il.svg", flagAlt: "IL" },
@@ -298,7 +298,6 @@ function changeLanguage(lang) {
   }
 
   updateTranslations();
-  updateHeroRotatorPhrase();
   document.dispatchEvent(
     new CustomEvent("site-language-change", {
       detail: {
