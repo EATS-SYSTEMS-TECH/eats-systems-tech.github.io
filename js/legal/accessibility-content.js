@@ -12,7 +12,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": ""
     },
@@ -38,7 +38,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -51,7 +51,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -97,7 +106,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Este documento está disponible en inglés. La versión en inglés es la versión jurídicamente vinculante."
     },
@@ -124,7 +133,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -137,7 +146,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -183,7 +201,7 @@
       "eyebrow": "Juridique",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ce document est disponible en anglais. La version anglaise est la version juridiquement contraignante."
     },
@@ -210,7 +228,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -223,7 +241,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -269,7 +296,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dieses Dokument ist auf Englisch verfügbar. Die englische Fassung ist die rechtsverbindliche Fassung."
     },
@@ -296,7 +323,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -309,7 +336,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -355,7 +391,7 @@
       "eyebrow": "משפטי",
       "title": "הצהרת נגישות",
       "subtitle": "אנחנו רוצים שכל אדם, ובכלל זה אנשים עם מוגבלות, יוכל להשתמש באתר wifigate.io באופן עצמאי, נוח ומכבד.",
-      "updated": "עודכן לאחרונה: 4 באוקטובר 2026",
+      "updated": "עודכן לאחרונה: 6 באוקטובר 2026",
       "owner": "המפעילה: EATS SYSTEMS TECH",
       "languageNote": ""
     },
@@ -381,7 +417,7 @@
       "standard": {
         "title": "2. התקן",
         "b0": "האתר הותאם לתקן הישראלי ת\"י 5568 ברמה AA, המבוסס על הנחיות הנגישות לתוכן אינטרנט (WCAG) 2.0 של ארגון W3C, בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע\"ג‑2013. אנו מיישמים גם את קריטריוני ההצלחה הנוספים של WCAG 2.1 ברמה AA ככל שהדבר אפשרי.",
-        "b1": "האתר נבדק בכלים אוטומטיים לבדיקת נגישות ובבדיקות ידניות של ניווט במקלדת, מיקוד, מבנה, חלופות טקסט וניגודיות צבעים, בגרסאות העדכניות של Chrome, Edge, Safari ו‑Firefox, במחשב ובנייד."
+        "b1": "האתר נבדק בכלים אוטומטיים לבדיקת נגישות ובבדיקות ידניות של ניווט במקלדת, מיקוד, מבנה, חלופות טקסט וניגודיות צבעים, בגרסאות העדכניות של Chrome, Edge, Safari ו‑Firefox, במחשב ובנייד. סקירת הנגישות האחרונה הושלמה ב‑6 באוקטובר 2026."
       },
       "features": {
         "title": "3. אמצעי הנגישות באתר",
@@ -394,7 +430,16 @@
           "i5": "לקישורים, לכפתורים ולשדות הטופס יש שמות נגישים.",
           "i6": "האנימציות מכבדות את הגדרת \"הפחתת תנועה\" של מערכת ההפעלה, וניתן לעצור את סרטון הרקע."
         },
-        "b1": "תפריט הנגישות, הנפתח באמצעות כפתור הנגישות בתחתית כל דף, מאפשר להגדיל את הטקסט, לעבור לניגודיות גבוהה, להדגיש קישורים בקו תחתון, להשתמש בגופן קריא יותר ולהפחית תנועה. הבחירות נשמרות במכשיר שלכם. לחיצה ארוכה על הכפתור מאפשרת להזיז אותו למקום אחר במסך, או להסתיר אותו לביקור הנוכחי; הוא יחזור בביקור הבא."
+        "b1": "תפריט הנגישות נפתח בכפתור הנגישות בתחתית כל דף, או במקלדת (Tab עד הכפתור ואז Enter). הוא זמין בכל שפות האתר ומציע:",
+        "b2": {
+          "i0": "גודל טקסט בארבע דרגות, עד 150%.",
+          "i1": "ניגודיות גבוהה וגווני אפור.",
+          "i2": "הדגשת קישורים והדגשת כותרות.",
+          "i3": "גופן קריא וריווח טקסט מוגדל (בין שורות, מילים ואותיות).",
+          "i4": "סמן עכבר גדול וסימון מיקוד מקלדת בולט.",
+          "i5": "עצירת אנימציות, שעוצרת גם את סרטון הרקע."
+        },
+        "b3": "הבחירות נשמרות במכשיר שלכם עד שתאפסו אותן. לחיצה ארוכה על הכפתור מאפשרת להזיז אותו למקום אחר במסך; ה‑X שמופיע מסתיר אותו עד לטעינה הבאה של הדף. התפריט פועל עם מקלדת ועם קורא מסך, ו‑Esc סוגר אותו."
       },
       "limitations": {
         "title": "4. מגבלות ידועות",
@@ -440,7 +485,7 @@
       "eyebrow": "Legaal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dit document is beschikbaar in het Engels. De Engelse versie is de juridisch bindende versie."
     },
@@ -467,7 +512,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -480,7 +525,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -526,7 +580,7 @@
       "eyebrow": "Legale",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Questo documento è disponibile in inglese. La versione inglese è quella giuridicamente vincolante."
     },
@@ -553,7 +607,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -566,7 +620,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -612,7 +675,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Este documento está disponível em inglês. A versão em inglês é a versão juridicamente vinculativa."
     },
@@ -639,7 +702,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -652,7 +715,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -698,7 +770,7 @@
       "eyebrow": "Informacje prawne",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ten dokument jest dostępny w języku angielskim. Wersja angielska jest wersją prawnie wiążącą."
     },
@@ -725,7 +797,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -738,7 +810,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -784,7 +865,7 @@
       "eyebrow": "Lovlig",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dette dokumentet er tilgjengelig på engelsk. Den engelske versjonen er den juridisk bindende versjonen."
     },
@@ -811,7 +892,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -824,7 +905,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -870,7 +960,7 @@
       "eyebrow": "Právní informace",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tento dokument je k dispozici v angličtině. Právně závazná je anglická verze."
     },
@@ -897,7 +987,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -910,7 +1000,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -956,7 +1055,7 @@
       "eyebrow": "Правовая информация",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Этот документ доступен на английском языке. Юридически обязывающей является английская версия."
     },
@@ -983,7 +1082,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -996,7 +1095,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1042,7 +1150,7 @@
       "eyebrow": "юридичний",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Цей документ доступний англійською мовою. Юридично обов'язковою є англійська версія."
     },
@@ -1069,7 +1177,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -1082,7 +1190,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1128,7 +1245,7 @@
       "eyebrow": "Yasal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Bu belge İngilizce olarak sunulmaktadır. Hukuken bağlayıcı olan İngilizce sürümdür."
     },
@@ -1155,7 +1272,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -1168,7 +1285,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1214,7 +1340,7 @@
       "eyebrow": "قانوني",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "هذا المستند متاح باللغة الإنجليزية. النسخة الإنجليزية هي النسخة الملزمة قانونيًا."
     },
@@ -1241,7 +1367,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -1254,7 +1380,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1300,7 +1435,7 @@
       "eyebrow": "कानूनी",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "यह दस्तावेज़ अंग्रेज़ी में उपलब्ध है। कानूनी रूप से बाध्यकारी संस्करण अंग्रेज़ी संस्करण है।"
     },
@@ -1327,7 +1462,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -1340,7 +1475,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1386,7 +1530,7 @@
       "eyebrow": "আইনি",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "এই নথিটি ইংরেজিতে উপলব্ধ। ইংরেজি সংস্করণটিই আইনগতভাবে বাধ্যতামূলক সংস্করণ।"
     },
@@ -1413,7 +1557,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -1426,7 +1570,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1472,7 +1625,7 @@
       "eyebrow": "कायदेशीर",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "हा दस्तऐवज इंग्रजीमध्ये उपलब्ध आहे. इंग्रजी आवृत्ती ही कायदेशीररित्या बंधनकारक आवृत्ती आहे."
     },
@@ -1499,7 +1652,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -1512,7 +1665,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1558,7 +1720,7 @@
       "eyebrow": "చట్టపరమైన",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "ఈ పత్రం ఆంగ్లంలో అందుబాటులో ఉంది. చట్టపరంగా కట్టుబడి ఉండే సంస్కరణ ఆంగ్ల సంస్కరణ."
     },
@@ -1585,7 +1747,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -1598,7 +1760,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1644,7 +1815,7 @@
       "eyebrow": "法律",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "本文件以英文提供。英文版本为具有法律约束力的版本。"
     },
@@ -1671,7 +1842,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -1684,7 +1855,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1730,7 +1910,7 @@
       "eyebrow": "法律",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "本文件以英文提供。英文版本為具有法律約束力的版本。"
     },
@@ -1757,7 +1937,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -1770,7 +1950,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1816,7 +2005,7 @@
       "eyebrow": "法的",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "この文書は英語で提供されています。法的拘束力を持つのは英語版です。"
     },
@@ -1843,7 +2032,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -1856,7 +2045,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1902,7 +2100,7 @@
       "eyebrow": "법적",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "이 문서는 영어로 제공됩니다. 법적 구속력이 있는 버전은 영어 버전입니다."
     },
@@ -1929,7 +2127,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -1942,7 +2140,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -1988,7 +2195,7 @@
       "eyebrow": "Juridisk",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dette dokument er tilgængeligt på engelsk. Den engelske version er den juridisk bindende version."
     },
@@ -2015,7 +2222,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -2028,7 +2235,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2074,7 +2290,7 @@
       "eyebrow": "Juridiskt",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Detta dokument finns på engelska. Den engelska versionen är den juridiskt bindande versionen."
     },
@@ -2101,7 +2317,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -2114,7 +2330,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2160,7 +2385,7 @@
       "eyebrow": "Jogi",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ez a dokumentum angol nyelven érhető el. A jogilag kötelező változat az angol változat."
     },
@@ -2187,7 +2412,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -2200,7 +2425,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2246,7 +2480,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Το παρόν έγγραφο διατίθεται στα αγγλικά. Η αγγλική έκδοση είναι η νομικά δεσμευτική έκδοση."
     },
@@ -2273,7 +2507,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -2286,7 +2520,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2332,7 +2575,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Acest document este disponibil în limba engleză. Versiunea în limba engleză este versiunea obligatorie din punct de vedere juridic."
     },
@@ -2359,7 +2602,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -2372,7 +2615,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2418,7 +2670,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ovaj je dokument dostupan na engleskom jeziku. Pravno obvezujuća je verzija na engleskom jeziku."
     },
@@ -2445,7 +2697,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -2458,7 +2710,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2504,7 +2765,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tämä asiakirja on saatavilla englanniksi. Oikeudellisesti sitova on englanninkielinen versio."
     },
@@ -2531,7 +2792,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -2544,7 +2805,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2590,7 +2860,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Този документ е достъпен на английски език. Правно обвързваща е версията на английски език."
     },
@@ -2617,7 +2887,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -2630,7 +2900,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2676,7 +2955,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Овај документ је доступан на енглеском језику. Правно обавезујућа је верзија на енглеском језику."
     },
@@ -2703,7 +2982,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -2716,7 +2995,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2762,7 +3050,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tento dokument je k dispozícii v angličtine. Právne záväzná je anglická verzia."
     },
@@ -2789,7 +3077,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -2802,7 +3090,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2848,7 +3145,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ta dokument je na voljo v angleščini. Pravno zavezujoča je angleška različica."
     },
@@ -2875,7 +3172,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -2888,7 +3185,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -2934,7 +3240,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggris. Versi bahasa Inggris adalah versi yang mengikat secara hukum."
     },
@@ -2961,7 +3267,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -2974,7 +3280,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -3020,7 +3335,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "เอกสารนี้มีให้บริการเป็นภาษาอังกฤษ ฉบับภาษาอังกฤษเป็นฉบับที่มีผลผูกพันทางกฎหมาย"
     },
@@ -3047,7 +3362,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -3060,7 +3375,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -3106,7 +3430,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tài liệu này được cung cấp bằng tiếng Anh. Bản tiếng Anh là bản có giá trị ràng buộc về mặt pháp lý."
     },
@@ -3133,7 +3457,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -3146,7 +3470,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -3192,7 +3525,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggeris. Versi bahasa Inggeris ialah versi yang mengikat dari segi undang-undang."
     },
@@ -3219,7 +3552,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -3232,7 +3565,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",
@@ -3278,7 +3620,7 @@
       "eyebrow": "Legal",
       "title": "Accessibility Statement",
       "subtitle": "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-      "updated": "Last updated: October 4, 2026",
+      "updated": "Last updated: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ang dokumentong ito ay makukuha sa Ingles. Ang bersyong Ingles ang may bisang legal."
     },
@@ -3305,7 +3647,7 @@
       "standard": {
         "title": "2. Standard",
         "b0": "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile."
+        "b1": "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026."
       },
       "features": {
         "title": "3. Accessibility features",
@@ -3318,7 +3660,16 @@
           "i5": "Links, buttons and form fields have accessible names.",
           "i6": "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused."
         },
-        "b1": "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit."
+        "b1": "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+        "b2": {
+          "i0": "Text size in four steps, up to 150%.",
+          "i1": "High contrast and grayscale.",
+          "i2": "Highlighted links and highlighted headings.",
+          "i3": "A readable font and increased text spacing (line, word and letter spacing).",
+          "i4": "A large mouse cursor and a strong keyboard focus indicator.",
+          "i5": "Stop animations, which also stops the background video."
+        },
+        "b3": "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it."
       },
       "limitations": {
         "title": "4. Known limitations",

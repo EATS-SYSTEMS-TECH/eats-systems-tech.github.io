@@ -4,7 +4,8 @@ import { pathToFileURL } from "node:url";
 import { chromium } from "playwright-core";
 
 // The accessibility button: a long press anywhere on the circle drags it, the
-// X that appears hides it for the visit, and a plain press opens the panel.
+// X that appears hides it until the page loads again, and a plain press opens
+// the panel.
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const consent = JSON.stringify({ version: 1, analytics: false, savedAt: Date.now() });
 
@@ -43,18 +44,19 @@ try {
     assert.ok(Math.abs(moved.x - target.x) < 4 && Math.abs(moved.y - target.y) < 4, `${page}: dragged from the center ${JSON.stringify({ start, moved })}`);
     assert.equal(await tab.locator("#a11y-panel").getAttribute("aria-hidden"), "true", `${page}: a drag does not open the panel`);
 
-    // The X hides the button completely, for the rest of the visit.
+    // The X hides the button completely, until the page loads again.
     const dismiss = tab.locator(".a11y-fab__dismiss");
     assert.equal(await dismiss.isVisible(), true);
     await dismiss.click();
     assert.equal(await fab.isVisible(), false, `${page}: X hides the button`);
     assert.equal(await dismiss.isVisible(), false);
     await tab.reload();
-    assert.equal(await tab.locator("#a11y-fab").isVisible(), false, `${page}: stays hidden this visit`);
+    assert.equal(await tab.locator("#a11y-fab").isVisible(), true, `${page}: back after a reload`);
+    assert.equal(await tab.evaluate(() => Object.keys(sessionStorage).length), 0, `${page}: nothing kept for the hidden button`);
     await context.close();
   }
 
-  // A new visit shows it again, at the place it was moved to; a plain press opens the panel.
+  // A plain press opens the panel.
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
   await context.addInitScript((value) => localStorage.setItem("wifigate-cookie-consent-v1", value), consent);
   const tab = await openPage(context);
@@ -64,7 +66,7 @@ try {
   await tab.touchscreen.tap(x, y);
   assert.equal(await tab.locator("#a11y-panel").getAttribute("aria-hidden"), "false", "a tap opens the panel");
   await context.close();
-  console.log("Accessibility button: center long press drags, X hides it for the visit, tap opens the panel.");
+  console.log("Accessibility button: center long press drags, X hides it until a reload, tap opens the panel.");
 } finally {
   await browser.close();
 }

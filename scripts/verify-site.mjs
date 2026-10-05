@@ -283,8 +283,17 @@ async function main() {
       if ($("#a11y-fab").attr("aria-expanded") !== "false" || $("#a11y-panel").attr("aria-hidden") !== "true") {
         problems.push(`${rel}: accessibility widget has an invalid initial open/closed state`);
       }
-      if (accessibilityOptions.length !== 5) {
-        problems.push(`${rel}: found ${accessibilityOptions.length} accessibility options, expected 5`);
+      if (accessibilityOptions.length !== 9) {
+        problems.push(`${rel}: found ${accessibilityOptions.length} accessibility options, expected 9`);
+      }
+      if ($("#a11y-panel").attr("role") !== "dialog" || $("#a11y-text-smaller").length !== 1 || $("#a11y-text-larger").length !== 1) {
+        problems.push(`${rel}: accessibility menu must be a dialog with text size controls`);
+      }
+      if ($("#a11y-statement").attr("href") !== pagePath(locale, "accessibility")) {
+        problems.push(`${rel}: accessibility menu must link to the statement in its own language`);
+      }
+      if (!$("script[src*='accessibility-copy.js']").length) {
+        problems.push(`${rel}: accessibility copy script missing`);
       }
     }
 

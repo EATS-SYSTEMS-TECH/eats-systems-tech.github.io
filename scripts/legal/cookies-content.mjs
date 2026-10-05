@@ -35,9 +35,8 @@ export const cookies = {
             table: {
               head: ["Name", "Type", "Purpose", "Duration"],
               rows: [
-                ["wifigate-accessibility-settings-v1", "Local storage (first party)", "Remembers your accessibility settings, such as larger text or high contrast.", "Until you clear it"],
+                ["wifigate-accessibility-settings-v2", "Local storage (first party)", "Remembers the accessibility adjustments you turned on, such as text size or high contrast.", "Until you clear it"],
                 ["wifigate-a11y-fab-position", "Local storage (first party)", "Remembers where you moved the accessibility button.", "Until you clear it"],
-                ["wifigate-a11y-fab-hidden", "Session storage (first party)", "Keeps the accessibility button hidden after you close it.", "Until you close the tab"],
                 ["wifigate-cookie-consent-v1", "Local storage (first party)", "Remembers your analytics choice.", "Up to 180 days"],
                 ["_ga and _ga_*", "Analytics cookies (Google, only with consent)", "Measure visits and site usage.", "Up to 180 days"],
                 ["Firebase Authentication session", "Session storage (first party, web portal only)", "Keeps you signed in to the web portal while the browser tab is open.", "Until you sign out or close the tab"],
@@ -125,9 +124,8 @@ export const cookies = {
             table: {
               head: ["שם", "סוג", "מטרה", "משך"],
               rows: [
-                ["wifigate-accessibility-settings-v1", "אחסון מקומי (צד ראשון)", "זוכר את הגדרות הנגישות שלכם, כגון טקסט מוגדל או ניגודיות גבוהה.", "עד שתמחקו אותו"],
+                ["wifigate-accessibility-settings-v2", "אחסון מקומי (צד ראשון)", "זוכר את התאמות הנגישות שהפעלתם, כגון גודל טקסט או ניגודיות גבוהה.", "עד שתמחקו אותו"],
                 ["wifigate-a11y-fab-position", "אחסון מקומי (צד ראשון)", "זוכר לאן הזזתם את כפתור הנגישות.", "עד שתמחקו אותו"],
-                ["wifigate-a11y-fab-hidden", "אחסון סשן (צד ראשון)", "משאיר את כפתור הנגישות מוסתר אחרי שסגרתם אותו.", "עד סגירת הלשונית"],
                 ["wifigate-cookie-consent-v1", "אחסון מקומי (צד ראשון)", "זוכר את בחירתכם לגבי מדידה.", "עד 180 ימים"],
                 ["_ga ו־_ga_*", "עוגיות מדידה (Google, רק בהסכמה)", "מדידת ביקורים ושימוש באתר.", "עד 180 ימים"],
                 ["סשן Firebase Authentication", "אחסון סשן (צד ראשון, בפורטל בלבד)", "שומר על החיבור שלכם לפורטל כל עוד לשונית הדפדפן פתוחה.", "עד ההתנתקות או סגירת הלשונית"],

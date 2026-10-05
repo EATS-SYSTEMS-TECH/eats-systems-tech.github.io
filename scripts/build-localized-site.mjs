@@ -39,7 +39,7 @@ const homeDataFiles = [
   "js/application-stories.js",
   "js/application-stories-extra.js",
   "js/i18n.js",
-  "js/accessibility.js",
+  "js/accessibility-copy.js",
   "js/language-polish.js",
   "js/niche-split-overrides.js",
   "js/site-copy-overrides.js",
@@ -599,32 +599,30 @@ function updateFooterStaticUi($, bundle, locale, footerCopy) {
   set("[data-i18n='contact.whatsappButton']", contact.whatsappButton);
 }
 
-function updateAccessibilityMarkup($, accessibilityBundle) {
-  $(".skip-link").text(accessibilityBundle.skipLink);
-  $("#a11y-fab").attr("aria-label", accessibilityBundle.openButton);
-  $("#a11y-fab").attr("title", accessibilityBundle.openButton);
-  $("#a11y-eyebrow").text(accessibilityBundle.eyebrow);
-  $("#a11y-close").attr("aria-label", accessibilityBundle.closeButton);
-  $("#a11y-title").text(accessibilityBundle.title);
-  $("#a11y-description").text(accessibilityBundle.description);
-  $("#a11y-status").text(accessibilityBundle.statusDefault);
-  $("#a11y-reset").text(accessibilityBundle.reset);
-  $("#a11y-support-title").text(accessibilityBundle.siteSupportTitle);
+function updateAccessibilityMarkup($, accessibilityBundle, locale) {
+  const copy = accessibilityBundle;
+  $(".skip-link").text(copy.skipLink);
+  $("#a11y-fab").attr({ "aria-label": copy.openButton, title: copy.openButton });
+  $("#a11y-eyebrow").text(copy.eyebrow);
+  $("#a11y-close").attr("aria-label", copy.closeButton);
+  $("#a11y-title").text(copy.title);
+  $("#a11y-description").text(copy.description);
+  $("#a11y-status").text(copy.statusDefault);
+  $("#a11y-reset").text(copy.reset);
+  $("#a11y-text-size-title").text(copy.textSize.label);
+  $("#a11y-text-size-description").text(copy.textSize.description);
+  $("#a11y-text-smaller").attr({ "aria-label": copy.textSize.decrease, title: copy.textSize.decrease });
+  $("#a11y-text-larger").attr({ "aria-label": copy.textSize.increase, title: copy.textSize.increase });
+  $("#a11y-statement").text(copy.statementLink).attr("href", buildPagePath(locale, "accessibility"));
 
   $(".a11y-option").each((_, element) => {
     const key = $(element).attr("data-a11y-setting");
-    const optionCopy = key ? accessibilityBundle.options[key] : null;
+    const optionCopy = key ? copy.options[key] : null;
     if (!optionCopy) {
-      return;
+      throw new Error(`${locale}: no accessibility copy for ${key}`);
     }
-
     $(element).find(".a11y-option__title").text(optionCopy.label);
     $(element).find(".a11y-option__description").text(optionCopy.description);
-  });
-
-  $(".a11y-support__item").each((index, element) => {
-    const text = accessibilityBundle.siteSupport[index] || accessibilityBundle.siteSupport.at(-1) || "";
-    $(element).text(text);
   });
 }
 
@@ -851,7 +849,7 @@ function updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale) {
   $("#hero-replay").attr("aria-label", bundle.hero.media.replay);
   $("#hero-replay").attr("title", bundle.hero.media.replay);
 
-  updateAccessibilityMarkup($, accessibilityBundle);
+  updateAccessibilityMarkup($, accessibilityBundle, locale);
 }
 
 function splitHomeWhereSubtitle(value) {
@@ -1137,6 +1135,7 @@ function ensureTrailingNewline(source) {
 const partialPaths = {
   "site-header": path.join(repoRoot, "templates", "partials", "site-header.template.html"),
   "site-footer": path.join(repoRoot, "templates", "partials", "site-footer.template.html"),
+  "accessibility-widget": path.join(repoRoot, "templates", "partials", "accessibility-widget.template.html"),
 };
 const partialCache = new Map();
 
@@ -1209,7 +1208,7 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   $("#language-button").attr("aria-label", copy.selectLanguageLabel);
   setLanguageSelector($, homeData.localeOptions, locale, pageKey);
   const prefix = buildAssetPrefix(locale, pageKey);
-  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20261004b">');
+  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20261006a">');
   $("script[src*='js/navigation.js']").attr("src", prefix + "js/navigation.js?v=20260911a");
 }
 
@@ -1370,7 +1369,7 @@ async function buildLegalPages(homeData, legalCollections) {
       applyDataI18nTranslations($, bundle, locale);
       applyLegalContentLanguage($, bundle, locale);
       updateFooterStaticUi($, bundle, locale, homeData.homepageCopies[locale]?.footer);
-      updateAccessibilityMarkup($, accessibilityBundle);
+      updateAccessibilityMarkup($, accessibilityBundle, locale);
       rewriteLegalInternalLinks($, locale, pageKey);
       setLegalMeta($, locale, pageKey, homeData.localeOptions, bundle);
 
@@ -1624,7 +1623,7 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
   $("#footer-cookies").text(footer.cookies || "Cookies");
   $("#footer-tagline").text(footer.tagline || "");
 
-  updateAccessibilityMarkup($, accessibilityBundle);
+  updateAccessibilityMarkup($, accessibilityBundle, locale);
 }
 
 function rewriteNicheInternalLinks($, locale) {
@@ -1845,7 +1844,7 @@ async function buildGuestInvitesPages(homeData) {
     appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, guestInvitesPageKey);
     applyDataI18nTranslations($, bundle, locale);
     updateFooterStaticUi($, bundle, locale, homeData.homepageCopies[locale]?.footer);
-    updateAccessibilityMarkup($, accessibilityBundle);
+    updateAccessibilityMarkup($, accessibilityBundle, locale);
     updateGuestInvitesStaticUi($, strings);
     rewriteGuestInvitesInternalLinks($, locale);
     reorderGuestInvitesSections($);

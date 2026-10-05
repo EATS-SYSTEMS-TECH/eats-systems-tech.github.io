@@ -10,7 +10,7 @@ export const accessibility = {
     title: "Accessibility Statement",
     subtitle:
       "We want everyone, including people with disabilities, to be able to use the wifigate.io website independently, easily and with dignity.",
-    updated: "Last updated: October 4, 2026",
+    updated: "Last updated: October 6, 2026",
     owner: "Operator: EATS SYSTEMS TECH",
     sections: [
       {
@@ -25,7 +25,7 @@ export const accessibility = {
         title: "2. Standard",
         blocks: [
           "The website has been adapted to the Israeli Standard IS 5568 at level AA, which is based on the Web Content Accessibility Guidelines (WCAG) 2.0 of the W3C, in accordance with the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013. We also follow the additional success criteria of WCAG 2.1 at level AA where we can.",
-          "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile.",
+          "The website was tested with automated accessibility tools and by manual checks of keyboard navigation, focus, structure, text alternatives and colour contrast, on current versions of Chrome, Edge, Safari and Firefox, on desktop and mobile. The last accessibility review was completed on October 6, 2026.",
         ],
       },
       {
@@ -43,7 +43,18 @@ export const accessibility = {
               "Animations respect the operating system's \"reduce motion\" setting, and the background video can be paused.",
             ],
           },
-          "The accessibility menu, opened with the accessibility button at the bottom of every page, lets you enlarge the text, switch to high contrast, underline links, use a more readable font and reduce motion. Your choices are remembered on your device. Press and hold the button to move it to another place on the screen, or to hide it for the current visit; it returns on your next visit.",
+          "The accessibility menu opens with the accessibility button at the bottom of every page, or with the keyboard (Tab to the button, then Enter). It is available in every language of the website and offers:",
+          {
+            list: [
+              "Text size in four steps, up to 150%.",
+              "High contrast and grayscale.",
+              "Highlighted links and highlighted headings.",
+              "A readable font and increased text spacing (line, word and letter spacing).",
+              "A large mouse cursor and a strong keyboard focus indicator.",
+              "Stop animations, which also stops the background video.",
+            ],
+          },
+          "Your choices are kept on your device until you reset them. Press and hold the button to move it to another place on the screen; the X that appears hides it until the page is loaded again. The menu works with a keyboard and a screen reader, and Esc closes it.",
         ],
       },
       {
@@ -89,7 +100,7 @@ export const accessibility = {
     title: "הצהרת נגישות",
     subtitle:
       "אנחנו רוצים שכל אדם, ובכלל זה אנשים עם מוגבלות, יוכל להשתמש באתר wifigate.io באופן עצמאי, נוח ומכבד.",
-    updated: "עודכן לאחרונה: 4 באוקטובר 2026",
+    updated: "עודכן לאחרונה: 6 באוקטובר 2026",
     owner: "המפעילה: EATS SYSTEMS TECH",
     sections: [
       {
@@ -104,7 +115,7 @@ export const accessibility = {
         title: "2. התקן",
         blocks: [
           "האתר הותאם לתקן הישראלי ת\"י 5568 ברמה AA, המבוסס על הנחיות הנגישות לתוכן אינטרנט (WCAG) 2.0 של ארגון W3C, בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע\"ג‑2013. אנו מיישמים גם את קריטריוני ההצלחה הנוספים של WCAG 2.1 ברמה AA ככל שהדבר אפשרי.",
-          "האתר נבדק בכלים אוטומטיים לבדיקת נגישות ובבדיקות ידניות של ניווט במקלדת, מיקוד, מבנה, חלופות טקסט וניגודיות צבעים, בגרסאות העדכניות של Chrome, Edge, Safari ו‑Firefox, במחשב ובנייד.",
+          "האתר נבדק בכלים אוטומטיים לבדיקת נגישות ובבדיקות ידניות של ניווט במקלדת, מיקוד, מבנה, חלופות טקסט וניגודיות צבעים, בגרסאות העדכניות של Chrome, Edge, Safari ו‑Firefox, במחשב ובנייד. סקירת הנגישות האחרונה הושלמה ב‑6 באוקטובר 2026.",
         ],
       },
       {
@@ -122,7 +133,18 @@ export const accessibility = {
               "האנימציות מכבדות את הגדרת \"הפחתת תנועה\" של מערכת ההפעלה, וניתן לעצור את סרטון הרקע.",
             ],
           },
-          "תפריט הנגישות, הנפתח באמצעות כפתור הנגישות בתחתית כל דף, מאפשר להגדיל את הטקסט, לעבור לניגודיות גבוהה, להדגיש קישורים בקו תחתון, להשתמש בגופן קריא יותר ולהפחית תנועה. הבחירות נשמרות במכשיר שלכם. לחיצה ארוכה על הכפתור מאפשרת להזיז אותו למקום אחר במסך, או להסתיר אותו לביקור הנוכחי; הוא יחזור בביקור הבא.",
+          "תפריט הנגישות נפתח בכפתור הנגישות בתחתית כל דף, או במקלדת (Tab עד הכפתור ואז Enter). הוא זמין בכל שפות האתר ומציע:",
+          {
+            list: [
+              "גודל טקסט בארבע דרגות, עד 150%.",
+              "ניגודיות גבוהה וגווני אפור.",
+              "הדגשת קישורים והדגשת כותרות.",
+              "גופן קריא וריווח טקסט מוגדל (בין שורות, מילים ואותיות).",
+              "סמן עכבר גדול וסימון מיקוד מקלדת בולט.",
+              "עצירת אנימציות, שעוצרת גם את סרטון הרקע.",
+            ],
+          },
+          "הבחירות נשמרות במכשיר שלכם עד שתאפסו אותן. לחיצה ארוכה על הכפתור מאפשרת להזיז אותו למקום אחר במסך; ה‑X שמופיע מסתיר אותו עד לטעינה הבאה של הדף. התפריט פועל עם מקלדת ועם קורא מסך, ו‑Esc סוגר אותו.",
         ],
       },
       {

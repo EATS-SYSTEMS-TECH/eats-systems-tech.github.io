@@ -119,7 +119,7 @@
 
   <link rel="stylesheet" href="../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../css/styles.css?v=20261005b">
-  <link rel="stylesheet" href="../css/accessibility.css?v=20261006a">
+  <link rel="stylesheet" href="../css/accessibility.css?v=20261006b">
   <link rel="stylesheet" href="../css/guest-invites.css?v=20260708a">
   <link rel="stylesheet" href="../css/home-en.css?v=20260910h">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
@@ -127,7 +127,8 @@
   <script src="../js/navigation.js?v=20260911a" defer=""></script>
   <script src="../js/hero.js?v=20261004a" defer=""></script>
 
-  <script src="../js/accessibility.js?v=20261006a" defer=""></script>
+  <script src="../js/accessibility-copy.js?v=20261006b" defer=""></script>
+  <script src="../js/accessibility.js?v=20261006b" defer=""></script>
 
 
 
@@ -260,10 +261,10 @@
     ]
   }
 ]
-  </script><link rel="stylesheet" href="../css/site-header.css?v=20261004b"><link rel="stylesheet" href="../css/cookie-consent.css?v=20261006c"></head>
+  </script><link rel="stylesheet" href="../css/site-header.css?v=20261006a"><link rel="stylesheet" href="../css/cookie-consent.css?v=20261006c"></head>
 
 <body class="home-en">
-  <a class="skip-link" href="#main-content">ప్రధాన కంటెంట్‌కి దాటవేయండి</a>
+  <a class="skip-link" href="#main-content">ప్రధాన కంటెంట్‌కు వెళ్లండి</a>
   <header class="site-header" id="top">
     <nav class="nav" aria-label="ప్రధాన నావిగేషన్">
       <a href="/te/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
@@ -1079,84 +1080,111 @@
     </div>
   </footer>
 
-  <button class="a11y-fab" id="a11y-fab" type="button" aria-controls="a11y-panel" aria-expanded="false" aria-label="ప్రాప్యత కేంద్రాన్ని తెరవండి" title="ప్రాప్యత కేంద్రాన్ని తెరవండి">
-    <svg class="a11y-fab__icon" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
-      <circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="1.8" opacity=".5"></circle>
-      <circle cx="16" cy="8.7" r="2.3" fill="currentColor"></circle>
-      <path d="M8.6 12.4c2.6.8 5 1.2 7.4 1.2s4.8-.4 7.4-1.2M16 13.7v5.1m0 0-3 6.1m3-6.1 3 6.1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+  <button class="a11y-fab" id="a11y-fab" type="button" aria-controls="a11y-panel" aria-expanded="false" aria-haspopup="dialog" aria-label="యాక్సెసిబిలిటీ మెనూను తెరవండి" title="యాక్సెసిబిలిటీ మెనూను తెరవండి">
+    <svg class="a11y-fab__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="3.9" r="2.3" fill="currentColor"></circle>
+      <path d="M4.2 8.1c2.6.8 5.2 1.2 7.8 1.2s5.2-.4 7.8-1.2M12 9.4v4.9m0 0-3.4 7.3m3.4-7.3 3.4 7.3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
     </svg>
   </button>
 
   <div class="a11y-backdrop" id="a11y-backdrop" aria-hidden="true"></div>
 
-  <aside class="a11y-panel" id="a11y-panel" aria-hidden="true" aria-labelledby="a11y-title" tabindex="-1">
+  <div class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="a11y-title" aria-describedby="a11y-description" tabindex="-1">
     <div class="a11y-panel__header">
       <p class="a11y-panel__eyebrow" id="a11y-eyebrow">యాక్సెసిబిలిటీ</p>
-      <button class="a11y-panel__close" id="a11y-close" type="button" aria-label="ప్రాప్యత కేంద్రాన్ని మూసివేయండి">
+      <button class="a11y-panel__close" id="a11y-close" type="button" aria-label="యాక్సెసిబిలిటీ మెనూను మూసివేయండి">
         <span aria-hidden="true">✕</span>
       </button>
     </div>
 
-    <h2 class="a11y-panel__title" id="a11y-title">యాక్సెసిబిలిటీ సెంటర్</h2>
-    <p class="a11y-panel__description" id="a11y-description">మీ పఠనం మరియు నావిగేషన్ ప్రాధాన్యతలకు అనుగుణంగా సైట్‌ను సర్దుబాటు చేయండి.</p>
+    <h2 class="a11y-panel__title" id="a11y-title">యాక్సెసిబిలిటీ మెనూ</h2>
+    <p class="a11y-panel__description" id="a11y-description">మీరు చదివే, నావిగేట్ చేసే విధానానికి తగ్గట్టుగా సైట్‌ను సర్దుబాటు చేసుకోండి. మీ ఎంపికలు ఈ పరికరంలోనే సేవ్ అవుతాయి.</p>
 
     <div class="a11y-panel__status-row">
-      <span class="a11y-panel__status" id="a11y-status" aria-live="polite">ప్రామాణిక సైట్ వీక్షణ</span>
-      <button class="a11y-panel__reset" id="a11y-reset" type="button">రీసెట్ చేయండి</button>
+      <span class="a11y-panel__status" id="a11y-status" role="status">సైట్ సాధారణ వీక్షణ</span>
+      <button class="a11y-panel__reset" id="a11y-reset" type="button">అన్నీ రీసెట్ చేయండి</button>
+    </div>
+
+    <div class="a11y-text-size" role="group" aria-labelledby="a11y-text-size-title">
+      <span class="a11y-option__copy">
+        <span class="a11y-option__title" id="a11y-text-size-title">టెక్స్ట్ పరిమాణం</span>
+        <span class="a11y-option__description" id="a11y-text-size-description">సైట్ అంతటా టెక్స్ట్‌ను పెద్దదిగా చేయండి.</span>
+      </span>
+      <span class="a11y-text-size__controls">
+        <button class="a11y-text-size__step" id="a11y-text-smaller" type="button" dir="ltr" aria-label="చిన్న టెక్స్ట్" title="చిన్న టెక్స్ట్">A−</button>
+        <output class="a11y-text-size__value" id="a11y-text-size-value" aria-live="polite">100%</output>
+        <button class="a11y-text-size__step" id="a11y-text-larger" type="button" dir="ltr" aria-label="పెద్ద టెక్స్ట్" title="పెద్ద టెక్స్ట్">A+</button>
+      </span>
     </div>
 
     <div class="a11y-options">
-      <button class="a11y-option" type="button" data-a11y-setting="largeText" aria-pressed="false">
-        <span class="a11y-option__copy">
-          <span class="a11y-option__title">పెద్ద వచనం</span>
-          <span class="a11y-option__description">సైట్ అంతటా ఫాంట్ పరిమాణాన్ని పెంచండి.</span>
-        </span>
-        <span class="a11y-option__switch" aria-hidden="true"></span>
-      </button>
-
       <button class="a11y-option" type="button" data-a11y-setting="highContrast" aria-pressed="false">
         <span class="a11y-option__copy">
           <span class="a11y-option__title">అధిక కాంట్రాస్ట్</span>
-          <span class="a11y-option__description">టెక్స్ట్ మరియు ఇంటర్‌ఫేస్ కోసం కాంట్రాస్ట్‌ను బలోపేతం చేయండి.</span>
+          <span class="a11y-option__description">లేత నేపథ్యంపై ముదురు టెక్స్ట్, స్పష్టమైన అంచులు.</span>
         </span>
         <span class="a11y-option__switch" aria-hidden="true"></span>
       </button>
-
+      <button class="a11y-option" type="button" data-a11y-setting="grayscale" aria-pressed="false">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title">గ్రేస్కేల్</span>
+          <span class="a11y-option__description">సైట్‌ను రంగులు లేకుండా చూపండి.</span>
+        </span>
+        <span class="a11y-option__switch" aria-hidden="true"></span>
+      </button>
       <button class="a11y-option" type="button" data-a11y-setting="underlineLinks" aria-pressed="false">
         <span class="a11y-option__copy">
-          <span class="a11y-option__title">లింక్‌లను అండర్లైన్ చేయండి</span>
-          <span class="a11y-option__description">లింక్‌లను సులభంగా గుర్తించేలా చేయండి.</span>
+          <span class="a11y-option__title">లింక్‌లను హైలైట్ చేయండి</span>
+          <span class="a11y-option__description">ప్రతి లింక్‌కు అండర్‌లైన్ చేసి గుర్తించండి.</span>
         </span>
         <span class="a11y-option__switch" aria-hidden="true"></span>
       </button>
-
       <button class="a11y-option" type="button" data-a11y-setting="readableFont" aria-pressed="false">
         <span class="a11y-option__copy">
           <span class="a11y-option__title">చదవగలిగే ఫాంట్</span>
-          <span class="a11y-option__description">క్లీనర్, మరింత స్పష్టంగా కనిపించే ఫాంట్‌కి మారండి.</span>
+          <span class="a11y-option__description">సరళమైన, సులభంగా చదవగలిగే ఫాంట్.</span>
         </span>
         <span class="a11y-option__switch" aria-hidden="true"></span>
       </button>
-
+      <button class="a11y-option" type="button" data-a11y-setting="textSpacing" aria-pressed="false">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title">టెక్స్ట్ అంతరం</span>
+          <span class="a11y-option__description">పంక్తులు, పదాలు, అక్షరాల మధ్య ఎక్కువ ఖాళీ.</span>
+        </span>
+        <span class="a11y-option__switch" aria-hidden="true"></span>
+      </button>
+      <button class="a11y-option" type="button" data-a11y-setting="highlightHeadings" aria-pressed="false">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title">శీర్షికలను హైలైట్ చేయండి</span>
+          <span class="a11y-option__description">పేజీ నిర్మాణాన్ని చూపడానికి శీర్షికలను గుర్తించండి.</span>
+        </span>
+        <span class="a11y-option__switch" aria-hidden="true"></span>
+      </button>
+      <button class="a11y-option" type="button" data-a11y-setting="bigCursor" aria-pressed="false">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title">పెద్ద కర్సర్</span>
+          <span class="a11y-option__description">పెద్ద మౌస్ పాయింటర్.</span>
+        </span>
+        <span class="a11y-option__switch" aria-hidden="true"></span>
+      </button>
+      <button class="a11y-option" type="button" data-a11y-setting="focusHighlight" aria-pressed="false">
+        <span class="a11y-option__copy">
+          <span class="a11y-option__title">స్పష్టమైన ఫోకస్</span>
+          <span class="a11y-option__description">కీబోర్డ్ ఫోకస్‌లో ఉన్న మూలకం చుట్టూ మందపాటి అంచు.</span>
+        </span>
+        <span class="a11y-option__switch" aria-hidden="true"></span>
+      </button>
       <button class="a11y-option" type="button" data-a11y-setting="reducedMotion" aria-pressed="false">
         <span class="a11y-option__copy">
-          <span class="a11y-option__title">తగ్గిన కదలిక</span>
-          <span class="a11y-option__description">యానిమేషన్లు మరియు చలన ప్రభావాలను తగ్గించండి.</span>
+          <span class="a11y-option__title">యానిమేషన్‌లను ఆపండి</span>
+          <span class="a11y-option__description">యానిమేషన్‌లు, ట్రాన్సిషన్‌లు, నేపథ్య వీడియోను ఆపండి.</span>
         </span>
         <span class="a11y-option__switch" aria-hidden="true"></span>
       </button>
     </div>
 
-    <section class="a11y-support" aria-labelledby="a11y-support-title">
-      <h3 class="a11y-support__title" id="a11y-support-title">ఈ సైట్‌లో నిర్మించబడింది</h3>
-      <ul class="a11y-support__list">
-        <li class="a11y-support__item">కీబోర్డ్ అనుకూలమైన నావిగేషన్</li>
-        <li class="a11y-support__item">దృష్టి సూచికలను క్లియర్ చేయండి</li>
-        <li class="a11y-support__item">బహుళ-భాష మరియు RTL మద్దతు</li>
-        <li class="a11y-support__item">మొబైల్ మరియు డెస్క్‌టాప్ కోసం ప్రతిస్పందించే లేఅవుట్</li>
-      </ul>
-    </section>
-  </aside>
+    <a class="a11y-panel__statement" id="a11y-statement" href="/te/accessibility/">యాక్సెసిబిలిటీ ప్రకటన</a>
+  </div>
 
 
 
