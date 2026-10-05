@@ -2,8 +2,28 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createProfile, getProfile, approveEmail, changePortalAccess, deletePortalAccess, profileApi, portalRequest } from "../js/api/index.js";
 import { parseIdentity, portalState, canApproveEmail } from "../js/host-dashboard-model.js";
+import { readHostPages } from "../js/host-pages.js";
 const user = { uid: "user-1", email: "person@example.test", displayName: "Person", emailVerified: true };
 const me = (role = "user", state = "active", enrolled = false, verified = false) => ({ user, role, access: { state }, mfa: { required: role === "admin", enrolled, verified } });
+test("resource pagination traverses empty pages, deduplicates rows and stops on identity changes or cyclic cursors", async () => {
+  const previous = profileApi.defaults.adapter;
+  const identity = { getIdToken: async () => "test-token" };
+  let calls = 0, active = true;
+  profileApi.defaults.adapter = async config => {
+    const pages = [{items: [],nextCursor:"first"},{items:[{id:"room-1"}],nextCursor:"second"},{items:[{id:"room-1"},{id:"room-2"}],nextCursor:null}];
+    return { data: pages[calls++], status:200,statusText:"OK",headers:{},config };
+  };
+  try {
+    assert.deepEqual((await readHostPages(identity,"/api/v1/organizations/org/rooms",()=>active)).items,[{id:"room-1"},{id:"room-2"}]);
+    assert.equal(calls,3);
+    profileApi.defaults.adapter = async config => { calls++; active=false; return {data:{items:[],nextCursor:"more"},status:200,statusText:"OK",headers:{},config}; };
+    await assert.rejects(readHostPages(identity,"/api/v1/organizations/org/rooms",()=>active), /session-changed/);
+    assert.equal(calls,4);
+    active=true;
+    profileApi.defaults.adapter = async config => ({data:{items:[],nextCursor:"cycle"},status:200,statusText:"OK",headers:{},config});
+    await assert.rejects(readHostPages(identity,"/api/v1/organizations/org/rooms",()=>active), /repeated-cursor/);
+  } finally { profileApi.defaults.adapter=previous; }
+});
 test("portal paths reject encoded traversal before reading the identity token", async () => {
   let reads = 0;
   const identity = { getIdToken: async () => { reads++; return "private-token"; } };
