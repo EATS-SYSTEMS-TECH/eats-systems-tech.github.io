@@ -1,6 +1,7 @@
 import { AuthErrors, HttpStatus } from "./host-constants.js";
 export function authErrorMessage(error) {
   const messages = {
+    HOST_API_UNAVAILABLE: "Cannot reach the WIFIGATE Host server. Please try again later or contact support.",
     SELF_ACCESS_PROTECTED: "You cannot change your own portal access.",
     LAST_ADMIN_PROTECTED: "The last active administrator must remain active.",
     IDEMPOTENCY_CONFLICT: "This request has already been used for a different change. Review the action and retry.",
