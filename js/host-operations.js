@@ -65,6 +65,16 @@ export async function renderHostOperations({ container, user, organization, prop
   let preferences = response.preferences;
   const settings = node("form"), locale = field(settings, "Operations language", "locale", preferences.locale, "text", [["en", "English"], ["he", "עברית"]]);
   const severity = field(settings, "Minimum alert severity", "minimumSeverity", preferences.alerts.minimumSeverity, "text", [["info", "Information"], ["warning", "Warning"], ["error", "Error"]]);
+  const staffTemplate = field(settings, "Staff alert message", "staffTemplateId", "", "text", [["", "Default localized message"]]); staffTemplate.required = false;
+  const staffTemplates = new Map();
+  const drawStaffTemplates = () => {
+    const selected = staffTemplate.value || preferences.alerts.staffTemplateId || "";
+    staffTemplate.replaceChildren(node("option", "Default localized message", { value: "" }));
+    for (const item of staffTemplates.values()) if (item.locale === locale.value) staffTemplate.append(node("option", item.name, { value: item.id }));
+    if (selected && preferences.locale === locale.value && !staffTemplates.has(selected)) staffTemplate.append(node("option", "Current staff alert message", { value: selected }));
+    if ([...staffTemplate.options].some(option => option.value === selected)) staffTemplate.value = selected;
+  };
+  locale.addEventListener("change", drawStaffTemplates);
   const eventTypes = field(settings, "Alert events (empty means all)", "eventTypes", "", "text", ["automation.failed", "automation.retry", "automation.paused", "automation.cancelled", "automation.delivered", "integration.event.dead_letter", "integration.event.retry"].map(value => [value, value])); eventTypes.multiple = true; eventTypes.required = false; eventTypes.size = 4;
   for (const option of eventTypes.options) option.selected = (preferences.alerts.eventTypes ?? []).includes(option.value);
   const channels = {};
@@ -91,7 +101,7 @@ export async function renderHostOperations({ container, user, organization, prop
     void run(save, async () => {
       const savedFilters = [...preferences.savedFilters];
       if (filterName.value.trim()) savedFilters.push({ name: filterName.value.trim(), ...(property.value ? { propertyId: property.value } : {}), ...(room.value ? { roomId: room.value } : {}), ...(filterStatus.value ? { status: filterStatus.value } : {}) });
-      const result = await write("/preferences", { savedFilters, alerts: { inApp: channels.inApp.checked, email: channels.email.checked, sms: channels.sms.checked, minimumSeverity: severity.value, eventTypes: [...eventTypes.selectedOptions].map(option => option.value) }, locale: locale.value, ...(preferences.version ? { version: preferences.version } : {}) });
+      const result = await write("/preferences", { savedFilters, alerts: { inApp: channels.inApp.checked, email: channels.email.checked, sms: channels.sms.checked, minimumSeverity: severity.value, ...(staffTemplate.value ? { staffTemplateId: staffTemplate.value } : {}), eventTypes: [...eventTypes.selectedOptions].map(option => option.value) }, locale: locale.value, ...(preferences.version ? { version: preferences.version } : {}) });
       if (current()) { preferences = result.preferences; filterName.value = ""; drawFilters(); status.textContent = "Operation preferences saved."; }
     });
   });
@@ -106,6 +116,18 @@ export async function renderHostOperations({ container, user, organization, prop
     if (result.nextCursor) { const more = node("button", "Load earlier operational alerts", { type: "button" }); more.addEventListener("click", () => run(more, async () => { await readAlerts(result.nextCursor, true); if (current()) more.remove(); })); alertRows.append(more); }
   }
   alertsButton.addEventListener("click", () => run(alertsButton, () => readAlerts()));
+  const deliveryButton = node("button", "Refresh staff delivery receipts", { type: "button" }), deliveryRows = node("div", undefined, { "aria-live": "polite" });
+  section.append(node("h3", "Staff notification delivery"), deliveryButton, deliveryRows);
+  async function readDelivery(cursor, append = false) {
+    const result = await portalRequest(user, `${root}/operations/notifications?${new URLSearchParams({ limit: "50", ...(cursor ? { cursor } : {}) })}`);
+    if (!current()) return; if (!append) deliveryRows.replaceChildren();
+    for (const item of result.items) deliveryRows.append(node("p", `${item.channel} · ${item.event} · ${item.status} · attempts ${item.attempts}${item.lastErrorCode ? ` · ${item.lastErrorCode}` : ""}`));
+    for (const item of result.failedEvents ?? []) deliveryRows.append(node("p", `Staff alert needs review · ${item.event} · ${item.lastErrorCode}`));
+    if (result.moreFailedEvents) deliveryRows.append(node("p", "Additional staff alerts need operator review."));
+    if (!result.items.length) deliveryRows.append(node("p", "No staff notification deliveries on this page."));
+    if (result.nextCursor) { const more = node("button", "Load more staff delivery receipts", { type: "button" }); more.addEventListener("click", () => run(more, async () => { await readDelivery(result.nextCursor, true); if (current()) more.remove(); })); deliveryRows.append(more); }
+  }
+  deliveryButton.addEventListener("click", () => run(deliveryButton, () => readDelivery()));
   const timelineForm = node("form"), target = field(timelineForm, "Timeline target ID", "targetId"); target.required = false;
   const loadTimeline = node("button", "Load activity timeline", { type: "submit" }), timeline = node("div"); timelineForm.append(loadTimeline); section.append(timelineForm, timeline);
   async function readTimeline(cursor, append = false) {
@@ -126,12 +148,14 @@ export async function renderHostOperations({ container, user, organization, prop
   templateId.addEventListener("input", () => { selectedTemplate = undefined; });
   async function readTemplates(cursor, append = false) {
     const result = await portalRequest(user, `${root}/operations/templates?${new URLSearchParams({ limit: "50", ...(cursor ? { cursor } : {}) })}`);
-    if (!current()) return; if (!append) templateList.replaceChildren();
+    if (!current()) return; if (!append) { templateList.replaceChildren(); staffTemplates.clear(); }
     for (const item of result.items) {
+      if (item.audience === "staff") staffTemplates.set(item.id, item);
       const row = node("article"); row.append(node("p", `${item.name} · ${item.locale} · ${item.audience}`));
       if (manager) { const edit = node("button", "Edit message template", { type: "button" }); edit.addEventListener("click", () => { selectedTemplate = item; templateId.value = item.id; name.value = item.name; language.value = item.locale; audience.value = item.audience; text.value = item.text; }); row.append(edit); }
-      const preview = node("button", "Preview message template", { type: "button" }), output = node("p"); preview.addEventListener("click", () => run(preview, async () => { const result = await portalRequest(user, `${root}/operations/templates/${encodeURIComponent(item.id)}/preview`, "POST", {}); if (current()) { output.textContent = result.preview; output.dir = result.locale === "he" ? "rtl" : "ltr"; } })); row.append(preview, output); templateList.append(row);
+      const preview = node("button", "Preview message template", { type: "button" }), output = node("p"); preview.addEventListener("click", () => run(preview, async () => { const result = await portalRequest(user, `${root}/operations/templates/${encodeURIComponent(item.id)}/preview`, "POST", item.audience === "staff" ? { status: "automation.failed" } : {}); if (current()) { output.textContent = result.preview; output.dir = result.locale === "he" ? "rtl" : "ltr"; } })); row.append(preview, output); templateList.append(row);
     }
+    drawStaffTemplates();
     if (result.nextCursor) { const more = node("button", "Load more message templates", { type: "button" }); more.addEventListener("click", () => run(more, async () => { await readTemplates(result.nextCursor, true); if (current()) more.remove(); })); templateList.append(more); }
   }
   templateForm.addEventListener("submit", event => { event.preventDefault(); if (!templateForm.reportValidity()) return; void run(saveTemplate, async () => { const result = await write(`/templates/${encodeURIComponent(templateId.value)}`, { name: name.value, locale: language.value, audience: audience.value, text: text.value, ...(selectedTemplate ? { version: selectedTemplate.version } : {}) }); if (current()) { selectedTemplate = result.template; await readTemplates(); status.textContent = "Message template saved."; } }); });
