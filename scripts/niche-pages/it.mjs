@@ -385,15 +385,15 @@ export default {
         "WIFIGATE porta il controllo accessi smart in impianti sportivi, campi da padel e palestre, con ingresso dal telefono e permessi temporanei o permanenti.",
       imageAlt: "Giocatrice di padel che apre l'ingresso di un campo sportivo illuminato con il telefono",
     },
-    "self-storage": {
-      "label": "Self storage",
-      "title": "Accesso smart per centri di self storage",
-      "heroLead": "Ogni cliente apre il cancello del centro e la porta dell'edificio dal proprio telefono, solo negli orari consentiti. Quando la locazione finisce, finisce anche l'accesso: nessuna chiave da ritirare e nessun codice da cambiare.",
+    "storage-lockers": {
+      "label": "Depositi e armadietti",
+      "title": "Accesso smart per depositi e armadietti",
+      "heroLead": "Ogni cliente apre il cancello del centro, la porta dell'edificio e il proprio armadietto dal telefono, solo negli orari consentiti. Quando la locazione finisce, finisce anche l'accesso: nessuna chiave da ritirare e nessun codice da cambiare.",
       "highlights": [
         {
           "icon": "users",
           "title": "Un permesso personale per ogni cliente",
-          "text": "Nessun codice del cancello condiviso che gli ex clienti ricordano ancora. Ogni cliente ha un accesso tutto suo, e revocarlo richiede un attimo quando il contratto scade o un pagamento è in ritardo."
+          "text": "Nessun codice condiviso che gli ex clienti ricordano ancora. Ogni cliente ha un accesso tutto suo, e revocarlo richiede un attimo quando il contratto scade o un pagamento è in ritardo."
         },
         {
           "icon": "clock",
@@ -406,20 +406,20 @@ export default {
           "text": "Ogni apertura viene registrata con la persona e l'orario, così una domanda su una visita trova risposta nella cronologia invece che nelle registrazioni delle telecamere."
         }
       ],
-      "paragraph": "I centri di self storage si affidano di solito a codici del cancello condivisi, tastierini e chiavi fisiche che vengono copiati, passati di mano e cambiati raramente. WIFIGATE porta l'accesso sul telefono: ogni cliente ha un permesso personale per il cancello del centro, l'ingresso dell'edificio e, dove installata, la porta elettrica del proprio box, limitato agli orari scelti e revocato nel momento in cui la locazione termina. Il telefono comunica direttamente con il dispositivo installato sul posto, senza scheda SIM né connessione internet al cancello, e senza canone mensile per l'uso standard.",
+      "paragraph": "I centri di deposito e le sale armadietti si affidano di solito a codici condivisi, tastierini e chiavi fisiche che vengono copiati, passati di mano e cambiati raramente. WIFIGATE porta l'accesso sul telefono: ogni cliente ha un permesso personale per il cancello del centro, l'ingresso dell'edificio e, dove installato, un box o un armadietto con serratura elettrica, limitato agli orari scelti e revocato nel momento in cui la locazione termina. Il telefono comunica direttamente con il dispositivo installato sul posto, senza scheda SIM né connessione internet alla porta, e senza canone mensile per l'uso standard.",
       "bullets": [
-        "Apertura del cancello del centro e della porta dell'edificio dal telefono",
+        "Apertura del cancello del centro, della porta dell'edificio e dell'armadietto dal telefono",
         "Un permesso personale per ogni cliente",
         "Accesso limitato agli orari di apertura o a una fascia personalizzata",
         "Accesso una tantum per traslocatori e familiari",
         "Revoca dell'accesso nel momento in cui la locazione termina",
         "Cronologia di chi ha aperto e quando",
         "Nessun codice condiviso, tastierino o chiave da cambiare",
-        "Nessuna scheda SIM né connessione internet al cancello"
+        "Nessuna scheda SIM né connessione internet alla porta"
       ],
-      "seoTitle": "Controllo accessi smart per centri di self storage | WIFIGATE",
-      "seoDescription": "WIFIGATE dà a ogni cliente di un self storage un accesso personale dal telefono al cancello e alle porte del centro, limitato agli orari di apertura, registrato nella cronologia e revocato al termine della locazione.",
-      "imageAlt": "Donna che apre con il telefono il cancello di un centro di self storage"
+      "seoTitle": "Controllo accessi smart per depositi e armadietti | WIFIGATE",
+      "seoDescription": "WIFIGATE dà a ogni cliente di un deposito o di un armadietto un accesso personale dal telefono al cancello, alle porte e al proprio armadietto, limitato agli orari di apertura, registrato nella cronologia e revocato al termine della locazione.",
+      "imageAlt": "Donna che apre con il telefono la porta di un centro di deposito con armadietti e box"
     },
   },
 };

@@ -384,15 +384,15 @@ export default {
         "WIFIGATE brengt slimme toegangscontrole naar sportaccommodaties, padelbanen en sportscholen, met toegang via de telefoon en tijdelijke of vaste rechten.",
       imageAlt: "Padelspeelster opent de toegang tot een verlichte sportbaan met de telefoon",
     },
-    "self-storage": {
-      "label": "Self-storage",
-      "title": "Slimme toegang voor self-storagelocaties",
-      "heroLead": "Elke huurder opent de poort van het terrein en de deur van het gebouw met de eigen telefoon, alleen op de tijden die jij toestaat. Stopt de huur, dan stopt ook de toegang: geen sleutels innemen en geen codes wijzigen.",
+    "storage-lockers": {
+      "label": "Opslagruimtes en lockers",
+      "title": "Slimme toegang voor opslagruimtes en lockers",
+      "heroLead": "Elke huurder opent de poort van het terrein, de deur van het gebouw en de eigen locker met de telefoon, alleen op de tijden die jij toestaat. Stopt de huur, dan stopt ook de toegang: geen sleutels innemen en geen codes wijzigen.",
       "highlights": [
         {
           "icon": "users",
           "title": "Een persoonlijk toegangsrecht voor elke huurder",
-          "text": "Geen gedeelde poortcode die oud-huurders nog kennen. Elke huurder krijgt eigen toegang, en die intrekken kost een moment wanneer het contract afloopt of een betaling achterstallig is."
+          "text": "Geen gedeelde code die oud-huurders nog kennen. Elke huurder krijgt eigen toegang, en die intrekken kost een moment wanneer het contract afloopt of een betaling achterstallig is."
         },
         {
           "icon": "clock",
@@ -405,20 +405,20 @@ export default {
           "text": "Elke opening wordt vastgelegd met de persoon en het tijdstip, zodat een vraag over een bezoek wordt beantwoord vanuit de geschiedenis in plaats van vanuit camerabeelden."
         }
       ],
-      "paragraph": "Self-storagelocaties werken meestal met gedeelde poortcodes, codepanelen en fysieke sleutels die worden gekopieerd, doorgegeven en zelden worden gewijzigd. WIFIGATE brengt de toegang naar de telefoon: elke huurder heeft een persoonlijk toegangsrecht voor de poort van het terrein, de ingang van het gebouw en, waar geïnstalleerd, de elektrisch bediende deur van de opslagbox, beperkt tot de tijden die jij kiest en ingetrokken zodra de huur stopt. De telefoon communiceert rechtstreeks met het apparaat ter plaatse, zonder SIM-kaart of internetverbinding bij de poort, en zonder maandelijks abonnement voor standaardgebruik.",
+      "paragraph": "Opslaglocaties en lockerruimtes werken meestal met gedeelde codes, codepanelen en fysieke sleutels die worden gekopieerd, doorgegeven en zelden worden gewijzigd. WIFIGATE brengt de toegang naar de telefoon: elke huurder heeft een persoonlijk toegangsrecht voor de poort van het terrein, de ingang van het gebouw en, waar geïnstalleerd, een elektrisch vergrendelde opslagbox of locker, beperkt tot de tijden die jij kiest en ingetrokken zodra de huur stopt. De telefoon communiceert rechtstreeks met het apparaat ter plaatse, zonder SIM-kaart of internetverbinding bij de deur, en zonder maandelijks abonnement voor standaardgebruik.",
       "bullets": [
-        "Open de poort van het terrein en de deur van het gebouw met de telefoon",
+        "Open de poort van het terrein, de deur van het gebouw en de locker met de telefoon",
         "Een persoonlijk toegangsrecht voor elke huurder",
         "Toegang beperkt tot openingstijden of een eigen tijdvenster",
         "Eenmalige toegang voor verhuizers en familieleden",
         "Trek toegang in zodra de huur stopt",
         "Geschiedenis van wie wanneer opende",
         "Geen gedeelde codes, codepanelen of sleutels om te vervangen",
-        "Geen SIM-kaart of internetverbinding bij de poort"
+        "Geen SIM-kaart of internetverbinding bij de deur"
       ],
-      "seoTitle": "Slimme toegangscontrole voor self-storagelocaties | WIFIGATE",
-      "seoDescription": "WIFIGATE geeft elke self-storagehuurder persoonlijke toegang via de telefoon tot de poort en deuren van de locatie, beperkt tot openingstijden, vastgelegd in de geschiedenis en ingetrokken wanneer de huur stopt.",
-      "imageAlt": "Vrouw opent met haar telefoon de poort van een self-storagelocatie"
+      "seoTitle": "Slimme toegangscontrole voor opslagruimtes en lockers | WIFIGATE",
+      "seoDescription": "WIFIGATE geeft elke huurder van een opslagruimte of locker persoonlijke toegang via de telefoon tot de poort, de deuren en de eigen locker, beperkt tot openingstijden, vastgelegd in de geschiedenis en ingetrokken wanneer de huur stopt.",
+      "imageAlt": "Vrouw opent met haar telefoon de deur van een opslaglocatie met lockers en opslagboxen"
     },
   },
 };

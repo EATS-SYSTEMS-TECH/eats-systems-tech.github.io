@@ -386,15 +386,15 @@ export default {
         "WIFIGATE bringt smarte Zutrittskontrolle in Sportanlagen, Padel-Plätze, Fitnessstudios und Trainingszentren – Zutritt per Smartphone, temporär oder dauerhaft.",
       imageAlt: "Padel-Spielerin öffnet den Zugang zu einem beleuchteten Sportplatz mit dem Smartphone",
     },
-    "self-storage": {
-      "label": "Self-Storage",
-      "title": "Smarter Zutritt für Self-Storage-Anlagen",
-      "heroLead": "Jeder Mieter öffnet das Tor der Anlage und die Gebäudetür mit dem eigenen Smartphone, nur zu den Zeiten, die Sie freigeben. Endet die Miete, endet auch der Zutritt: keine Schlüssel einsammeln, keine Codes ändern.",
+    "storage-lockers": {
+      "label": "Lagerräume und Schließfächer",
+      "title": "Smarter Zutritt für Lagerräume und Schließfächer",
+      "heroLead": "Jeder Mieter öffnet das Tor der Anlage, die Gebäudetür und sein eigenes Schließfach mit dem Smartphone, nur zu den Zeiten, die Sie freigeben. Endet die Miete, endet auch der Zutritt: keine Schlüssel einsammeln, keine Codes ändern.",
       "highlights": [
         {
           "icon": "users",
           "title": "Eine persönliche Berechtigung für jeden Mieter",
-          "text": "Kein gemeinsamer Torcode, den frühere Mieter noch kennen. Jeder Mieter erhält seinen eigenen Zutritt, und das Entziehen dauert nur einen Moment, wenn der Vertrag endet oder eine Zahlung aussteht."
+          "text": "Kein gemeinsamer Code, den frühere Mieter noch kennen. Jeder Mieter erhält seinen eigenen Zutritt, und das Entziehen dauert nur einen Moment, wenn der Vertrag endet oder eine Zahlung aussteht."
         },
         {
           "icon": "clock",
@@ -407,20 +407,20 @@ export default {
           "text": "Jede Öffnung wird mit Person und Uhrzeit erfasst. So beantwortet die Zutrittshistorie eine Frage zu einem Besuch, nicht erst die Aufnahmen der Überwachungskamera."
         }
       ],
-      "paragraph": "Self-Storage-Anlagen setzen meist auf gemeinsame Torcodes, Codetastaturen und physische Schlüssel, die kopiert, weitergegeben und selten geändert werden. WIFIGATE verlagert den Zutritt auf das Smartphone: Jeder Mieter hat eine persönliche Berechtigung für das Tor der Anlage, den Gebäudeeingang und, sofern vorhanden, die elektrisch betriebene Tür seines Lagerabteils – beschränkt auf die von Ihnen gewählten Zeiten und entzogen, sobald die Miete endet. Das Smartphone kommuniziert direkt mit dem Gerät vor Ort, ohne SIM-Karte und ohne Internetverbindung am Tor, und ohne monatliches Abo für die Standardnutzung.",
+      "paragraph": "Lageranlagen und Schließfachräume setzen meist auf gemeinsame Codes, Codetastaturen und physische Schlüssel, die kopiert, weitergegeben und selten geändert werden. WIFIGATE verlagert den Zutritt auf das Smartphone: Jeder Mieter hat eine persönliche Berechtigung für das Tor der Anlage, den Gebäudeeingang und, sofern vorhanden, ein elektrisch verriegeltes Lagerabteil oder Schließfach – beschränkt auf die von Ihnen gewählten Zeiten und entzogen, sobald die Miete endet. Das Smartphone kommuniziert direkt mit dem Gerät vor Ort, ohne SIM-Karte und ohne Internetverbindung an der Tür, und ohne monatliches Abo für die Standardnutzung.",
       "bullets": [
-        "Tor der Anlage und Gebäudetür per Smartphone öffnen",
+        "Tor der Anlage, Gebäudetür und Schließfach per Smartphone öffnen",
         "Eine persönliche Berechtigung für jeden Mieter",
         "Zutritt nur zu Öffnungszeiten oder in einem individuellen Zeitfenster",
         "Einmaliger Zutritt für Umzugshelfer und Familienmitglieder",
         "Zutritt entziehen, sobald die Miete endet",
         "Historie, wer wann geöffnet hat",
         "Keine gemeinsamen Codes, Tastaturen oder Schlüssel zum Austauschen",
-        "Keine SIM-Karte und keine Internetverbindung am Tor"
+        "Keine SIM-Karte und keine Internetverbindung an der Tür"
       ],
-      "seoTitle": "Smarte Zutrittskontrolle für Self-Storage-Anlagen | WIFIGATE",
-      "seoDescription": "WIFIGATE gibt jedem Self-Storage-Mieter persönlichen Zutritt per Smartphone zu Tor und Türen der Anlage – beschränkt auf die Öffnungszeiten, in der Historie erfasst und entzogen, wenn die Miete endet.",
-      "imageAlt": "Frau öffnet das Tor einer Self-Storage-Anlage mit dem Smartphone"
+      "seoTitle": "Smarte Zutrittskontrolle für Lagerräume und Schließfächer | WIFIGATE",
+      "seoDescription": "WIFIGATE gibt jedem Mieter eines Lagerraums oder Schließfachs persönlichen Zutritt per Smartphone zu Tor, Türen und seinem Schließfach – beschränkt auf die Öffnungszeiten, in der Historie erfasst und entzogen, wenn die Miete endet.",
+      "imageAlt": "Frau öffnet mit dem Smartphone die Tür einer Lageranlage mit Schließfächern und Lagerabteilen"
     },
   },
 };

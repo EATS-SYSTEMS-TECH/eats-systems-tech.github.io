@@ -385,15 +385,15 @@ export default {
         "WIFIGATE gir smart adgangskontroll til idrettsanlegg, padelbaner, treningssentre og treningsanlegg, med inngang fra mobilen og midlertidige eller faste tilganger.",
       imageAlt: "Padelspiller åpner inngangen til en flomlyst bane med mobilen",
     },
-    "self-storage": {
-      "label": "Minilager",
-      "title": "Smart adgang for minilager",
-      "heroLead": "Hver leietaker åpner porten til anlegget og døren til bygget fra sin egen mobil, bare i tidsrommet du tillater. Når leieforholdet avsluttes, forsvinner også tilgangen: ingen nøkler å samle inn og ingen koder å bytte.",
+    "storage-lockers": {
+      "label": "Lager og oppbevaringsskap",
+      "title": "Smart adgang for lager og oppbevaringsskap",
+      "heroLead": "Hver leietaker åpner porten til anlegget, døren til bygget og sitt eget skap fra mobilen, bare i tidsrommet du tillater. Når leieforholdet avsluttes, forsvinner også tilgangen: ingen nøkler å samle inn og ingen koder å bytte.",
       "highlights": [
         {
           "icon": "users",
           "title": "En personlig tilgang for hver leietaker",
-          "text": "Ingen felles portkode som tidligere leietakere fortsatt husker. Hver leietaker får sin egen tilgang, og den fjernes på et øyeblikk når kontrakten utløper eller en betaling er forfalt."
+          "text": "Ingen felles kode som tidligere leietakere fortsatt husker. Hver leietaker får sin egen tilgang, og den fjernes på et øyeblikk når kontrakten utløper eller en betaling er forfalt."
         },
         {
           "icon": "clock",
@@ -406,20 +406,20 @@ export default {
           "text": "Hver åpning registreres med person og klokkeslett, så et spørsmål om et besøk besvares fra historikken i stedet for fra overvåkingsopptak."
         }
       ],
-      "paragraph": "Minilager er som regel avhengige av felles portkoder, kodetastaturer og fysiske nøkler som kopieres, gis videre og sjelden byttes. WIFIGATE flytter adgangen til mobilen: hver leietaker har en personlig tilgang til porten, inngangen til bygget og, der det er montert, den elektrisk styrte døren til lagerboden, begrenset til tidene du velger og fjernet i det øyeblikket leieforholdet avsluttes. Mobilen kommuniserer direkte med enheten på stedet, uten SIM-kort eller internettforbindelse ved porten, og uten månedsabonnement ved vanlig bruk.",
+      "paragraph": "Lageranlegg og skaprom er som regel avhengige av felles koder, kodetastaturer og fysiske nøkler som kopieres, gis videre og sjelden byttes. WIFIGATE flytter adgangen til mobilen: hver leietaker har en personlig tilgang til porten, inngangen til bygget og, der det er montert, en lagerbod eller et skap med elektrisk lås, begrenset til tidene du velger og fjernet i det øyeblikket leieforholdet avsluttes. Mobilen kommuniserer direkte med enheten på stedet, uten SIM-kort eller internettforbindelse ved døren, og uten månedsabonnement ved vanlig bruk.",
       "bullets": [
-        "Åpne porten og døren til bygget fra mobilen",
+        "Åpne porten, døren til bygget og skapet fra mobilen",
         "En personlig tilgang for hver leietaker",
         "Adgang begrenset til åpningstider eller et eget tidsvindu",
         "Engangstilgang for flyttefolk og familiemedlemmer",
         "Fjern tilgangen i det øyeblikket leieforholdet avsluttes",
         "Historikk over hvem som åpnet og når",
         "Ingen felles koder, kodetastaturer eller nøkler å bytte",
-        "Ingen SIM-kort eller internettforbindelse ved porten"
+        "Ingen SIM-kort eller internettforbindelse ved døren"
       ],
-      "seoTitle": "Smart adgangskontroll for minilager | WIFIGATE",
-      "seoDescription": "WIFIGATE gir hver leietaker på et minilager personlig tilgang fra mobilen til porten og dørene, begrenset til åpningstidene, registrert i en historikk og fjernet når leieforholdet avsluttes.",
-      "imageAlt": "Kvinne åpner porten til et minilager med mobilen"
+      "seoTitle": "Smart adgangskontroll for lager og oppbevaringsskap | WIFIGATE",
+      "seoDescription": "WIFIGATE gir hver leietaker av lagerplass eller skap personlig tilgang fra mobilen til porten, dørene og sitt eget skap, begrenset til åpningstidene, registrert i en historikk og fjernet når leieforholdet avsluttes.",
+      "imageAlt": "Kvinne åpner døren til et lageranlegg med skap og lagerboder med mobilen"
     },
   },
 };

@@ -385,15 +385,15 @@ export default {
         "WIFIGATE přináší chytrou kontrolu vstupu do sportovních areálů, na padelové kurty, do posiloven a tréninkových center – vstup z telefonu, dočasná i trvalá oprávnění.",
       imageAlt: "Hráčka padelu otevírá telefonem vstup na osvětlený sportovní kurt",
     },
-    "self-storage": {
-      "label": "Skladové boxy",
-      "title": "Chytrý přístup do areálů se skladovými boxy",
-      "heroLead": "Každý nájemce otevře bránu areálu i dveře budovy ze svého telefonu, a to jen v hodinách, které povolíte. Když nájem skončí, skončí i jeho přístup: žádné klíče k vybírání a žádné kódy ke změně.",
+    "storage-lockers": {
+      "label": "Skladové boxy a skříňky",
+      "title": "Chytrý přístup ke skladovým boxům a skříňkám",
+      "heroLead": "Každý nájemce otevře bránu areálu, dveře budovy i svou vlastní skříňku z telefonu, a to jen v hodinách, které povolíte. Když nájem skončí, skončí i jeho přístup: žádné klíče k vybírání a žádné kódy ke změně.",
       "highlights": [
         {
           "icon": "users",
           "title": "Osobní oprávnění pro každého nájemce",
-          "text": "Žádný sdílený kód k bráně, který si bývalí nájemci stále pamatují. Každý nájemce má vlastní přístup a jeho odebrání zabere chvilku, když smlouva skončí nebo je platba po splatnosti."
+          "text": "Žádný sdílený kód, který si bývalí nájemci stále pamatují. Každý nájemce má vlastní přístup a jeho odebrání zabere chvilku, když smlouva skončí nebo je platba po splatnosti."
         },
         {
           "icon": "clock",
@@ -406,20 +406,20 @@ export default {
           "text": "Každé otevření se zaznamená s osobou a časem, takže dotaz na návštěvu zodpoví historie, ne záznamy z bezpečnostních kamer."
         }
       ],
-      "paragraph": "Areály se skladovými boxy obvykle spoléhají na sdílené kódy k bráně, klávesnice a fyzické klíče, které se kopírují, předávají dál a jen zřídka mění. WIFIGATE přenáší přístup do telefonu: každý nájemce má osobní oprávnění k bráně areálu, vstupu do budovy a tam, kde jsou nainstalované, i k elektricky ovládaným dveřím svého boxu, omezené na hodiny, které zvolíte, a odebrané ve chvíli, kdy nájem skončí. Telefon komunikuje přímo se zařízením na místě, bez SIM karty a bez připojení k internetu u brány, a pro běžné používání bez měsíčních poplatků.",
+      "paragraph": "Skladové areály a místnosti se skříňkami obvykle spoléhají na sdílené kódy, klávesnice a fyzické klíče, které se kopírují, předávají dál a jen zřídka mění. WIFIGATE přenáší přístup do telefonu: každý nájemce má osobní oprávnění k bráně areálu, vstupu do budovy a tam, kde je k dispozici, i ke skladovému boxu nebo skříňce s elektrickým zámkem, omezené na hodiny, které zvolíte, a odebrané ve chvíli, kdy nájem skončí. Telefon komunikuje přímo se zařízením na místě, bez SIM karty a bez připojení k internetu u dveří, a pro běžné používání bez měsíčních poplatků.",
       "bullets": [
-        "Otevření brány areálu a dveří budovy z telefonu",
+        "Otevření brány areálu, dveří budovy a skříňky z telefonu",
         "Osobní oprávnění pro každého nájemce",
         "Přístup omezený na provozní dobu nebo vlastní časové okno",
         "Jednorázový přístup pro stěhováky a členy rodiny",
         "Odebrání přístupu ve chvíli, kdy nájem skončí",
         "Historie, kdo otevřel a kdy",
         "Žádné sdílené kódy, klávesnice ani klíče k výměně",
-        "Bez SIM karty a bez internetu u brány"
+        "Bez SIM karty a bez internetu u dveří"
       ],
-      "seoTitle": "Chytrá kontrola vstupu pro skladové boxy a self storage | WIFIGATE",
-      "seoDescription": "WIFIGATE dává každému nájemci skladového boxu osobní přístup z telefonu k bráně a dveřím areálu, omezený na provozní dobu, zaznamenaný v historii a odebraný po skončení nájmu.",
-      "imageAlt": "Žena otevírá telefonem bránu areálu se skladovými boxy"
+      "seoTitle": "Chytrá kontrola vstupu pro skladové boxy a skříňky | WIFIGATE",
+      "seoDescription": "WIFIGATE dává každému nájemci skladového boxu nebo skříňky osobní přístup z telefonu k bráně, dveřím i vlastní skříňce, omezený na provozní dobu, zaznamenaný v historii a odebraný po skončení nájmu.",
+      "imageAlt": "Žena otevírá telefonem dveře skladového areálu se skříňkami a boxy"
     },
   },
 };

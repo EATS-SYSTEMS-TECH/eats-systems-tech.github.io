@@ -384,15 +384,15 @@ export default {
         "WIFIGATE giver smart adgangskontrol til sportsfaciliteter, Padel-baner, fitnesscentre og træningsområder med adgang fra telefonen og midlertidige eller faste rettigheder.",
       imageAlt: "Padel-spiller åbner indgangen til en oplyst sportsbane med telefonen",
     },
-    "self-storage": {
-      "label": "Self storage",
-      "title": "Smart adgang til self storage-anlæg",
-      "heroLead": "Hver lejer åbner porten til anlægget og døren til bygningen fra sin egen telefon, kun i de tidsrum, du tillader. Når lejemålet slutter, slutter adgangen også: ingen nøgler at samle ind og ingen koder at skifte.",
+    "storage-lockers": {
+      "label": "Depotrum og skabe",
+      "title": "Smart adgang til depotrum og opbevaringsskabe",
+      "heroLead": "Hver lejer åbner porten til anlægget, døren til bygningen og sit eget skab fra telefonen, kun i de tidsrum, du tillader. Når lejemålet slutter, slutter adgangen også: ingen nøgler at samle ind og ingen koder at skifte.",
       "highlights": [
         {
           "icon": "users",
           "title": "En personlig rettighed til hver lejer",
-          "text": "Ingen fælles portkode, som tidligere lejere stadig kan huske. Hver lejer får sin egen adgang, og det tager et øjeblik at fjerne den, når kontrakten udløber, eller en betaling er forfalden."
+          "text": "Ingen fælles kode, som tidligere lejere stadig kan huske. Hver lejer får sin egen adgang, og det tager et øjeblik at fjerne den, når kontrakten udløber, eller en betaling er forfalden."
         },
         {
           "icon": "clock",
@@ -405,20 +405,20 @@ export default {
           "text": "Hver åbning registreres med person og tidspunkt, så et spørgsmål om et besøg besvares ud fra historikken i stedet for ud fra overvågningsoptagelser."
         }
       ],
-      "paragraph": "Self storage-anlæg bygger normalt på fælles portkoder, kodetastaturer og fysiske nøgler, der kopieres, gives videre og sjældent skiftes. WIFIGATE flytter adgangen over på telefonen: hver lejer har en personlig rettighed til porten, indgangen til bygningen og, hvor det er installeret, den eldrevne dør til sit depotrum, begrænset til de tider, du vælger, og fjernet i det øjeblik, lejemålet slutter. Telefonen kommunikerer direkte med enheden på stedet, uden SIM-kort eller internetforbindelse ved porten, og uden månedligt abonnement ved almindelig brug.",
+      "paragraph": "Depotanlæg og skaberum bygger normalt på fælles koder, kodetastaturer og fysiske nøgler, der kopieres, gives videre og sjældent skiftes. WIFIGATE flytter adgangen over på telefonen: hver lejer har en personlig rettighed til porten, indgangen til bygningen og, hvor det er installeret, et depotrum eller skab med elektrisk lås, begrænset til de tider, du vælger, og fjernet i det øjeblik, lejemålet slutter. Telefonen kommunikerer direkte med enheden på stedet, uden SIM-kort eller internetforbindelse ved døren, og uden månedligt abonnement ved almindelig brug.",
       "bullets": [
-        "Åbn porten og døren til bygningen fra telefonen",
+        "Åbn porten, døren til bygningen og skabet fra telefonen",
         "En personlig rettighed til hver lejer",
         "Adgang begrænset til åbningstider eller et tilpasset tidsrum",
         "Engangsadgang til flyttefolk og familiemedlemmer",
         "Fjern adgangen i det øjeblik, lejemålet slutter",
         "Historik over, hvem der åbnede og hvornår",
         "Ingen fælles koder, kodetastaturer eller nøgler at skifte",
-        "Intet SIM-kort eller internetforbindelse ved porten"
+        "Intet SIM-kort eller internetforbindelse ved døren"
       ],
-      "seoTitle": "Smart adgangskontrol til self storage-anlæg | WIFIGATE",
-      "seoDescription": "WIFIGATE giver hver lejer i et self storage-anlæg personlig adgang fra telefonen til porten og dørene, begrænset til åbningstiderne, registreret i en historik og fjernet, når lejemålet slutter.",
-      "imageAlt": "Kvinde åbner porten til et self storage-anlæg med telefonen"
+      "seoTitle": "Smart adgangskontrol til depotrum og opbevaringsskabe | WIFIGATE",
+      "seoDescription": "WIFIGATE giver hver lejer af et depotrum eller skab personlig adgang fra telefonen til porten, dørene og sit eget skab, begrænset til åbningstiderne, registreret i en historik og fjernet, når lejemålet slutter.",
+      "imageAlt": "Kvinde åbner døren til et depotanlæg med skabe og depotrum med telefonen"
     },
   },
 };
