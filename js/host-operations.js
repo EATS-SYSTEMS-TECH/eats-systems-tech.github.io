@@ -121,8 +121,34 @@ export async function renderHostOperations({ container, user, organization, prop
   async function readDelivery(cursor, append = false) {
     const result = await portalRequest(user, `${root}/operations/notifications?${new URLSearchParams({ limit: "50", ...(cursor ? { cursor } : {}) })}`);
     if (!current()) return; if (!append) deliveryRows.replaceChildren();
-    for (const item of result.items) deliveryRows.append(node("p", `${item.channel} · ${item.event} · ${item.status} · attempts ${item.attempts}${item.lastErrorCode ? ` · ${item.lastErrorCode}` : ""}`));
-    for (const item of result.failedEvents ?? []) deliveryRows.append(node("p", `Staff alert needs review · ${item.event} · ${item.lastErrorCode}`));
+    const review = (row, suffix, body, caption) => {
+      const controls = node("div"), reason = field(controls, "Notification review reason", "reason"); reason.maxLength = 300;
+      const button = node("button", caption, { type: "button" }); controls.append(button); row.append(controls);
+      const keys = new Map();
+      button.addEventListener("click", () => run(button, async () => {
+        if (!reason.value.trim() || !row.isConnected) { status.textContent = "Enter a reason before reviewing this notification."; return; }
+        const input = { ...body, reason: reason.value.trim() }, signature = JSON.stringify(input);
+        if (!keys.has(signature)) keys.set(signature, crypto.randomUUID());
+        reason.disabled = true;
+        try {
+          const response = await portalRequest(user, `${root}/operations${suffix}`, "POST", input, keys.get(signature));
+          if (!current()) return;
+          await readDelivery();
+          if (current()) status.textContent = response.providerAcceptanceMayAlreadyHaveOccurred ? "Future delivery stopped. The provider may already have accepted the current attempt; check its receipt." : "Notification review saved.";
+        } finally { if (current()) reason.disabled = false; }
+      }));
+    };
+    for (const item of result.items) {
+      const row = node("div", undefined, { "aria-label": "Staff delivery receipt" });
+      row.append(node("p", `${item.channel} · ${item.event} · ${item.status} · attempts ${item.attempts}${item.lastErrorCode ? ` · ${item.lastErrorCode}` : ""}${item.acceptedAfterCancellation ? " · Provider accepted after stop" : ""}`));
+      if (["queued", "retry", "processing", "failed"].includes(item.status)) review(row, `/notifications/${encodeURIComponent(item.id)}/${item.status === "failed" ? "retry" : "stop"}`, {status: item.status, attempts: item.attempts}, item.status === "failed" ? "Retry staff notification" : "Stop staff notification");
+      deliveryRows.append(row);
+    }
+    for (const item of result.failedEvents ?? []) {
+      const row = node("div"); row.append(node("p", `Staff alert needs review · ${item.event} · ${item.lastErrorCode}`));
+      if (item.lastErrorCode === "NOTIFICATION_CAPACITY_EXCEEDED") review(row, `/notification-events/${encodeURIComponent(item.id)}/retry`, {}, "Retry staff alert fan-out");
+      deliveryRows.append(row);
+    }
     if (result.moreFailedEvents) deliveryRows.append(node("p", "Additional staff alerts need operator review."));
     if (!result.items.length) deliveryRows.append(node("p", "No staff notification deliveries on this page."));
     if (result.nextCursor) { const more = node("button", "Load more staff delivery receipts", { type: "button" }); more.addEventListener("click", () => run(more, async () => { await readDelivery(result.nextCursor, true); if (current()) more.remove(); })); deliveryRows.append(more); }
