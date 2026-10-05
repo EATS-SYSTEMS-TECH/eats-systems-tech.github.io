@@ -132,3 +132,40 @@ dialog::backdrop { background: rgb(7 24 39 / 65%); }
   .app-login__status, .app-login__redirect p { white-space: nowrap; font-size: min(0.875rem, 3.3vw); }
   .app-login__legal { white-space: nowrap; font-size: min(0.78rem, 2.95vw); }
 }
+
+/* Host calendar workspace: the supplied WIFIGATE dashboard reference. */
+.host-sidebar { position:fixed; inset:0 auto 0 0; width:240px; padding:26px 16px; background:#0d1928; color:#dae3ef; overflow:auto; z-index:5; }
+.host-sidebar[hidden] { display:none; }
+.host-sidebar .brand { width:200px; margin-bottom:30px; filter:brightness(0) invert(1); }
+.host-sidebar nav { display:grid; gap:7px; }
+.host-sidebar button { text-align:start; padding:12px 16px; background:transparent; color:inherit; border:0; border-radius:8px; }
+.host-sidebar button:hover, .host-sidebar button[aria-current] { color:white; background:#0878ff; }
+.sidebar-note { overflow-wrap:anywhere; margin-top:30px; font-size:12px; color:#9daec5; }
+.portal-dashboard:has(.host-sidebar:not([hidden])) { padding-left:240px; background:#fff; }
+.portal-dashboard .portal-shell { max-width:none; padding:28px 36px; }
+.portal-dashboard .portal-panel { box-shadow:none; border-color:#e7edf5; }
+.portal-dashboard button:focus-visible, .host-sidebar button:focus-visible { outline:3px solid #29b5ff; outline-offset:3px; }
+.portal-dashboard .portal-panel button { background:#0878ff; border-color:#0878ff; border-radius:8px; }
+.calendar-scroll { border:1px solid #e6edf5; border-radius:12px; }
+.calendar-scroll th, .calendar-scroll td { border-color:#e6edf5; }
+.calendar-scroll th { background:#f6f9fd; font-size:12px; }
+.calendar-scroll thead th:not(:first-child) { min-width:64px; text-align:center; }
+.calendar-scroll tbody th { min-width:180px; vertical-align:middle; font-size:14px; }
+.calendar-scroll td.calendar-room-timeline { padding:0; }
+.calendar-timeline { display:grid; grid-template-columns:repeat(var(--calendar-days), minmax(64px,1fr)); align-items:stretch; background:repeating-linear-gradient(to right,transparent 0,transparent calc(100% / var(--calendar-days) - 1px),#e6edf5 calc(100% / var(--calendar-days) - 1px),#e6edf5 calc(100% / var(--calendar-days))); }
+.host-calendar .reservation-chip { min-width:0; width:auto; margin:7px 4px; padding:8px 10px; border:0; border-radius:8px; overflow:hidden; background:#d9eaff; color:#15336e; }
+.reservation-chip strong, .reservation-chip small { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.reservation-chip small { font-weight:400; margin-top:3px; font-size:11px; }
+.host-calendar .reservation-chip.reservation-confirmed { background:#d9eaff; color:#15336e; }
+.host-calendar .reservation-chip.reservation-completed { background:#d9f8e6; color:#164b2d; }
+.calendar-scroll .calendar-today { color:#0878ff; background:#e5f1ff; }
+.calendar-empty-room { grid-column:1 / -1; padding:20px; font-size:12px; color:#8190a6; }
+@media(max-width:1000px) { .host-sidebar { width:190px; } .host-sidebar .brand { width:158px; } .portal-dashboard:has(.host-sidebar:not([hidden])) { padding-left:190px; } .portal-dashboard .portal-shell { padding:20px; } }
+@media(max-width:760px) { .host-sidebar { position:static; width:100%; padding:14px; max-height:230px; } .host-sidebar .brand { width:150px; margin-bottom:10px; } .host-sidebar nav { display:flex; overflow-x:auto; gap:6px; } .host-sidebar button { flex-shrink:0; padding:10px; } .sidebar-note { display:none; } .portal-dashboard:has(.host-sidebar:not([hidden])) { padding-left:0; } .portal-dashboard .portal-shell { padding:16px; } }
+
+.host-calendar .calendar-controls label { margin:.35rem 0; min-width:8rem; }
+.host-calendar .calendar-property-group { position:static; text-align:start; background:#eff5fb; }
+.host-calendar .calendar-property-group button { background:transparent; border:0; color:#142943; padding:8px; }
+.host-calendar .calendar-property-group button::before { content:"▾ "; }
+.host-calendar .calendar-property-group button[aria-expanded="false"]::before { content:"▸ "; }
+@media(max-width:760px) { .host-calendar h2 { font-size:20px; } .calendar-controls label { flex-basis:40%; font-size:12px; } }

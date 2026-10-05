@@ -6,6 +6,7 @@
         "dev": "npm run build:api && node scripts/serve.mjs",
         "build:api": "node scripts/build-api.mjs",
         "typecheck": "tsc --noEmit",
+        "test:dashboard": "node --test scripts/host-calendar-browser.test.mjs",
         "test:api": "npm run build:api && npm run typecheck && node --test scripts/host-portal.test.mjs",
         "build:locales": "node scripts/build-localized-site.mjs",
         "build:images": "node scripts/build-niche-images.mjs",
