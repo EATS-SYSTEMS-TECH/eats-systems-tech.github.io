@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "关注我们",
     copyright: "WIFIGATE · EATS SYSTEMS TECH。版权所有。",
   },
-  schema: {
-    productCategory: "门禁控制系统",
-    monthlySubscription: "按月订阅",
-    subscriptionValue: "标准 WIFIGATE 无需订阅；唯一例外是商用 WIFIGATE Host，该服务采用订阅制",
-    simCard: "SIM 卡",
-    externalRouter: "外部 Wi-Fi 路由器",
-    notRequired: "不需要",
-  },
 };
 
 export default copy;

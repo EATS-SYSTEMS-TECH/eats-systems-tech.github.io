@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "మమ్మల్ని అనుసరించండి",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. సర్వ హక్కులూ ప్రత్యేకించబడినవి.",
   },
-  schema: {
-    productCategory: "యాక్సెస్ కంట్రోల్ సిస్టమ్",
-    monthlySubscription: "నెలవారీ సబ్‌స్క్రిప్షన్",
-    subscriptionValue: "స్టాండర్డ్ WIFIGATEకు అవసరం లేదు; వాణిజ్య WIFIGATE Host సబ్‌స్క్రిప్షన్ ద్వారా లభిస్తుంది",
-    simCard: "SIM కార్డ్",
-    externalRouter: "బాహ్య Wi-Fi రూటర్",
-    notRequired: "అవసరం లేదు",
-  },
 };
 
 export default copy;

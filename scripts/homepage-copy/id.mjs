@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "Ikuti kami",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Semua hak dilindungi.",
   },
-  schema: {
-    productCategory: "Sistem kendali akses",
-    monthlySubscription: "Langganan bulanan",
-    subscriptionValue: "Tidak diperlukan untuk WIFIGATE standar; WIFIGATE Host komersial berbasis langganan",
-    simCard: "Kartu SIM",
-    externalRouter: "Router Wi-Fi eksternal",
-    notRequired: "Tidak diperlukan",
-  },
 };
 
 export default copy;

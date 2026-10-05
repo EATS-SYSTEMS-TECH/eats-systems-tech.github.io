@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "تابعنا",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. جميع الحقوق محفوظة.",
   },
-  schema: {
-    productCategory: "نظام التحكم في الوصول",
-    monthlySubscription: "الاشتراك الشهري",
-    subscriptionValue: "غير مطلوب للاستخدام القياسي لـ WIFIGATE؛ ويتطلب الاستخدام التجاري لـ WIFIGATE Host اشتراكاً",
-    simCard: "بطاقة SIM",
-    externalRouter: "راوتر Wi-Fi خارجي",
-    notRequired: "غير مطلوب",
-  },
 };
 
 export default copy;

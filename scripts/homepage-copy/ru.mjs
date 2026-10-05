@@ -169,14 +169,6 @@
     socialTitle: "Мы в соцсетях",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Все права защищены.",
   },
-  schema: {
-    productCategory: "Система контроля доступа",
-    monthlySubscription: "Ежемесячная подписка",
-    subscriptionValue: "Для стандартного WIFIGATE не требуется; коммерческое использование WIFIGATE Host доступно по подписке",
-    simCard: "SIM-карта",
-    externalRouter: "Внешний Wi-Fi роутер",
-    notRequired: "Не требуется",
-  },
 };
 
 export default copy;

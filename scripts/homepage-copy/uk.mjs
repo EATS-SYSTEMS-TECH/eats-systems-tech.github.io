@@ -169,14 +169,6 @@
     socialTitle: "Стежте за нами",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Усі права захищено.",
   },
-  schema: {
-    productCategory: "Система контролю доступу",
-    monthlySubscription: "Щомісячна передплата",
-    subscriptionValue: "Не потрібна для стандартного WIFIGATE; комерційне використання WIFIGATE Host потребує передплати",
-    simCard: "SIM-картка",
-    externalRouter: "Зовнішній Wi-Fi роутер",
-    notRequired: "Не потрібно",
-  },
 };
 
 export default copy;

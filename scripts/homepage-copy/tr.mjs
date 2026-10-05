@@ -169,14 +169,6 @@
     socialTitle: "Bizi takip edin",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Tüm hakları saklıdır.",
   },
-  schema: {
-    productCategory: "Erişim kontrol sistemi",
-    monthlySubscription: "Aylık abonelik",
-    subscriptionValue: "Standart WIFIGATE abonelik gerektirmez; ticari WIFIGATE Host abonelikle sunulur",
-    simCard: "SIM kart",
-    externalRouter: "Harici Wi-Fi router",
-    notRequired: "Gerekli değildir",
-  },
 };
 
 export default copy;

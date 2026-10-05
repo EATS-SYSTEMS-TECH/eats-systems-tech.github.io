@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "Sundan kami",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Lahat ng karapatan ay nakalaan.",
   },
-  schema: {
-    productCategory: "Sistema ng kontrol sa pagpasok",
-    monthlySubscription: "Buwanang subscription",
-    subscriptionValue: "Hindi kailangan ng subscription para sa karaniwang WIFIGATE; nangangailangan ng subscription ang komersyal na WIFIGATE Host",
-    simCard: "SIM card",
-    externalRouter: "External na Wi-Fi router",
-    notRequired: "Hindi kailangan",
-  },
 };
 
 export default copy;

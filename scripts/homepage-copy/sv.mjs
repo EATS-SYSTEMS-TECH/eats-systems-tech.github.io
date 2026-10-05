@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "Följ oss",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Alla rättigheter förbehållna.",
   },
-  schema: {
-    productCategory: "Passersystem",
-    monthlySubscription: "Månadsabonnemang",
-    subscriptionValue: "Krävs inte vid standardanvändning av WIFIGATE; kommersiell användning av WIFIGATE Host kräver abonnemang",
-    simCard: "SIM-kort",
-    externalRouter: "Extern WiFi-router",
-    notRequired: "Inte nödvändigt",
-  },
 };
 
 export default copy;

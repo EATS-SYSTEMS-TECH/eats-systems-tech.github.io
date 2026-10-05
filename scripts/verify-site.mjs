@@ -120,6 +120,28 @@ async function main() {
       const html = await fs.readFile(filePath, "utf8");
       const $ = cheerio.load(html);
 
+      // Structured data parses, and a Product carries what Google requires:
+      // an offer, a review or a rating (the site publishes none of them).
+      $("script[type='application/ld+json']").each((_, element) => {
+        let data;
+        try {
+          data = JSON.parse($(element).text());
+        } catch {
+          problems.push(`${rel}: invalid JSON-LD`);
+          return;
+        }
+        const visit = (node) => {
+          if (Array.isArray(node)) return node.forEach(visit);
+          if (!node || typeof node !== "object") return;
+          const types = [].concat(node["@type"] || []);
+          if (types.includes("Product") && !node.offers && !node.review && !node.aggregateRating) {
+            problems.push(`${rel}: Product without offers, review or aggregateRating`);
+          }
+          Object.values(node).forEach(visit);
+        };
+        visit(data);
+      });
+
       const title = $("title").text().trim();
       const description = $("meta[name='description']").attr("content")?.trim() || "";
       const canonical = $("link[rel='canonical']").attr("href") || "";

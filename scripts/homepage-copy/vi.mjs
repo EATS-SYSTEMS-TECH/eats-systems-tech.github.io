@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "Theo dõi chúng tôi",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Bảo lưu mọi quyền.",
   },
-  schema: {
-    productCategory: "Hệ thống kiểm soát truy cập",
-    monthlySubscription: "Phí thuê bao hằng tháng",
-    subscriptionValue: "WIFIGATE tiêu chuẩn không cần thuê bao; WIFIGATE Host dùng cho mục đích thương mại được cung cấp theo hình thức thuê bao",
-    simCard: "Thẻ SIM",
-    externalRouter: "Router Wi-Fi bên ngoài",
-    notRequired: "Không cần",
-  },
 };
 
 export default copy;

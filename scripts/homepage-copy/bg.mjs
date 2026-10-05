@@ -169,14 +169,6 @@
     socialTitle: "Последвайте ни",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Всички права запазени.",
   },
-  schema: {
-    productCategory: "Система за контрол на достъпа",
-    monthlySubscription: "Месечен абонамент",
-    subscriptionValue: "Не е необходим за стандартния WIFIGATE; търговското използване на WIFIGATE Host изисква абонамент",
-    simCard: "SIM карта",
-    externalRouter: "Външен Wi-Fi рутер",
-    notRequired: "Не се изисква",
-  },
 };
 
 export default copy;

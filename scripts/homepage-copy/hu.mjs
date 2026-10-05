@@ -169,14 +169,6 @@ const copy = {
     socialTitle: "Kövessen minket",
     copyright: "WIFIGATE · EATS SYSTEMS TECH. Minden jog fenntartva.",
   },
-  schema: {
-    productCategory: "Beléptetőrendszer",
-    monthlySubscription: "Havi előfizetés",
-    subscriptionValue: "A standard WIFIGATE használatához nem szükséges; a WIFIGATE Host kereskedelmi használata előfizetéshez kötött",
-    simCard: "SIM-kártya",
-    externalRouter: "Külső WiFi router",
-    notRequired: "Nem szükséges",
-  },
 };
 
 export default copy;
