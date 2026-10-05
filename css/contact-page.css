@@ -56,7 +56,12 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1.15rem, 2.8vw, 2rem);
+  /* The cards run right to left; their English text reads left to right. */
   direction: rtl;
+}
+
+.contact-card {
+  direction: ltr;
 }
 
 .contact-card {
@@ -69,7 +74,7 @@
   border-radius: 1.35rem;
   background: rgba(255, 255, 255, 0.94);
   box-shadow: 0 1rem 2.4rem rgba(42, 73, 102, 0.16);
-  text-align: right;
+  text-align: center;
 }
 
 .contact-card__icon {
@@ -100,7 +105,7 @@
   color: #5c7084;
   font-size: 0.98rem;
   line-height: 1.65;
-  text-align: right;
+  text-align: center;
 }
 
 .contact-card__action {
