@@ -34,7 +34,7 @@ export default {
       "enterpriseF1": "Volume pricing",
       "enterpriseF2": "SLA & onboarding",
       "enterpriseF3": "Custom integration",
-      "note": "Launch pricing for the WIFIGATE Automation add-on, billed monthly. Extra systems and annual plans are available, ask us for details."
+      "note": "Launch pricing for the WIFIGATE Host add-on, billed monthly. Extra systems and annual plans are available, ask us for details."
     },
     "audience": {
       "label": "Built for:",
