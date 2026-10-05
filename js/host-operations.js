@@ -38,11 +38,13 @@ export async function renderHostOperations({ container, user, organization, prop
     status.textContent = "Operational observations loaded.";
   }));
   if (role === "owner") {
+    const billing = node("section", undefined, {"aria-label":"Billing statements", "data-workspace-billing":""});
+    section.append(billing);
     const statementForm = node("form"), today = new Date(), previousMonth = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
     const statementMonth = field(statementForm, "Monthly statement period", "month", previousMonth, "month"), statementButton = node("button", "Generate monthly draft", { type: "submit" }), statementRows = node("div");
-    statementForm.append(statementButton); section.append(node("h3", "Monthly billing statements"), node("p", "Closed-month drafts use recorded physical system days. Pricing remains an internal proposal; generating a draft does not charge a payment."), statementForm, statementRows);
+    statementForm.append(statementButton); billing.append(node("h3", "Monthly billing statements"), node("p", "Closed-month drafts use recorded physical system days. Pricing remains an internal proposal; generating a draft does not charge a payment."), statementForm, statementRows);
     const baselineButton = node("button", "Start verified billing history", { type: "button" });
-    section.append(node("p", "Older organizations can start a verified history baseline for future full months. Existing history is preserved and past use is never invented."), baselineButton);
+    billing.append(node("p", "Older organizations can start a verified history baseline for future full months. Existing history is preserved and past use is never invented."), baselineButton);
     baselineButton.addEventListener("click", () => run(baselineButton, async () => {
       const signature = "billing-history-baseline"; if (!attempts.has(signature)) attempts.set(signature, crypto.randomUUID());
       const { history } = await portalRequest(user, `${root}/billing/history/baseline`, "POST", {}, attempts.get(signature));
