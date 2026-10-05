@@ -1,47 +1,40 @@
 // scripts/niche-pages/ko.mjs
-// Korean content for the homepage "where" section + niche/use-case pages.
+// Korean: homepage SEO, the "where" section and every use-case page.
 
 export default {
-  home: {
-    seoTitle: "WIFIGATE | 게이트, 출입문, 주차장을 위한 스마트 출입 관리",
-    seoDescription:
-      "WIFIGATE(WiFi Gate)는 휴대폰으로 게이트, 출입문, 주차장 입구, 셔터, 차고문을 열 수 있는 스마트 출입 관리 시스템입니다. 월 구독료 없이 로컬 중심으로 안전하고 편리하게 사용할 수 있습니다.",
-    keywords:
-      "WIFIGATE, WiFi Gate, wifi gate, 스마트 출입 관리, 휴대폰으로 게이트 열기, 전동 게이트, 출입문 관리, 주차장 출입, 월 구독료 없음",
+  "home": {
+    "seoTitle": "WIFIGATE | 게이트, 출입문, 주차장을 위한 스마트 출입 관리",
+    "seoDescription": "WIFIGATE(WiFi Gate)는 휴대폰으로 게이트, 출입문, 주차장 입구, 셔터, 차고문을 열 수 있는 스마트 출입 관리 시스템입니다. 월 구독료 없이 로컬 중심으로 안전하고 편리하게 사용할 수 있습니다.",
+    "keywords": "WIFIGATE, WiFi Gate, wifi gate, 스마트 출입 관리, 휴대폰으로 게이트 열기, 전동 게이트, 출입문 관리, 주차장 출입, 월 구독료 없음"
   },
-  where: {
-    title: "WIFIGATE는 어디에 적합한가요?",
-    subtitle:
-      "WIFIGATE는 개인 주택부터 상업 및 조직 환경까지 다양한 장소에 적합하며, 출입 관리를 더 스마트하고 안전하며 편리하게 만들어 줍니다.",
+  "where": {
+    "title": "WIFIGATE는 어디에 적합한가요?",
+    "subtitle": "WIFIGATE는 개인 주택부터 상업 및 조직 환경까지 다양한 장소에 적합하며, 출입 관리를 더 스마트하고 안전하며 편리하게 만들어 줍니다."
   },
-  niches: {
+  "niches": {
     "hotels-airbnb": {
-      label: "호텔, Airbnb, 게스트 아파트",
-      title: "호텔, Airbnb, 게스트 아파트를 위한 스마트 출입",
-      heroLead:
-        "The guest receives a personal entry permission on their phone the moment the booking is confirmed. No key cards, no lockbox, no waiting at reception.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "호텔, Airbnb, 게스트 아파트",
+      "title": "호텔, Airbnb, 게스트 아파트를 위한 스마트 출입",
+      "heroLead": "예약이 확정되는 순간 투숙객의 휴대폰으로 개인 출입 권한이 전송됩니다. 키 카드도, 키 박스도, 프런트 대기도 필요 없습니다.",
+      "highlights": [
         {
-          icon: "calendar",
-          title: "Opens at check-in, closes at check-out",
-          text: "There is no moment when somebody has to remember to revoke access. The permission activates at the arrival time you set and expires at departure, even when nobody from the team is on site.",
+          "icon": "calendar",
+          "title": "체크인에 열리고 체크아웃에 닫힙니다",
+          "text": "누군가 출입 권한 회수를 기억해야 할 필요가 없습니다. 권한은 설정한 도착 시간에 활성화되고 출발 시간에 자동 만료되며, 현장에 직원이 없어도 마찬가지입니다."
         },
         {
-          icon: "invite",
-          title: "The booking creates the access",
-          text: "Through the WIFIGATE API your reservation system connects straight to access, so every confirmed booking issues the entry permission itself, with no manual step in between.",
+          "icon": "invite",
+          "title": "예약이 곧 출입 권한이 됩니다",
+          "text": "WIFIGATE API로 예약 시스템을 출입 관리와 바로 연결하면, 확정된 모든 예약이 중간의 수동 작업 없이 출입 권한을 자동으로 발급합니다."
         },
         {
-          icon: "keyless",
-          title: "No cards to issue, no lockbox to share",
-          text: "Nothing to program, nothing to hand over, no card left behind by a previous guest and no lockbox code passed along. The phone already in the guest's pocket is the only way in.",
-        },
+          "icon": "keyless",
+          "title": "발급할 카드도, 공유할 키 박스도 없습니다",
+          "text": "설정할 것도, 전달할 것도 없습니다. 이전 투숙객이 두고 간 카드도, 이리저리 전해지는 키 박스 코드도 없습니다. 투숙객 주머니 속 휴대폰이 유일한 출입 수단입니다."
+        }
       ],
-      paragraph:
-        "WIFIGATE를 사용하면 투숙객이 실물 열쇠나 카드 없이 휴대폰으로 편리하고 안전한 디지털 출입 권한을 받을 수 있습니다. 프런트나 숙소 관리자와의 불필요한 조율도 줄어듭니다. WIFIGATE API를 통해 예약 과정과 출입 시스템을 연결하면, 예약이 승인되는 즉시 시간 제한이 있는 게스트 출입 권한을 자동으로 발급할 수 있습니다. 권한은 체크인 시간에 시작되고 체크아웃 시간에 자동 종료됩니다.",
-      bullets: [
+      "paragraph": "WIFIGATE를 사용하면 투숙객이 실물 열쇠나 카드 없이 휴대폰으로 편리하고 안전한 디지털 출입 권한을 받을 수 있습니다. 프런트나 숙소 관리자와의 불필요한 조율도 줄어듭니다. WIFIGATE API를 통해 예약 과정과 출입 시스템을 연결하면, 예약이 승인되는 즉시 시간 제한이 있는 게스트 출입 권한을 자동으로 발급할 수 있습니다. 권한은 체크인 시간에 시작되고 체크아웃 시간에 자동 종료됩니다.",
+      "bullets": [
         "예약 승인 후 게스트 출입 권한 자동 생성",
         "WIFIGATE API를 통한 전체 자동화 지원",
         "숙박 날짜와 시간에 따른 임시 출입 권한",
@@ -49,40 +42,35 @@ export default {
         "직원, 청소, 유지보수, 공급업체 권한 관리",
         "투숙객에게 더 매끄러운 도착 경험 제공",
         "체크아웃 시 출입 권한 자동 종료",
-        "투명성과 관리를 위한 출입 기록",
+        "투명성과 관리를 위한 출입 기록"
       ],
-      seoTitle: "호텔, Airbnb, 게스트 아파트 출입 관리 | WIFIGATE API",
-      seoDescription:
-        "WIFIGATE는 호텔, Airbnb, 게스트 아파트에 스마트 디지털 출입을 제공합니다. WIFIGATE API 기반 게스트 권한 자동화, 예약 기반 임시 권한, 열쇠와 수동 체크인 감소를 지원합니다.",
-      imageAlt: "현대적인 호텔 복도에서 투숙객이 휴대폰으로 객실 문을 여는 모습",
+      "seoTitle": "호텔, Airbnb, 게스트 아파트 출입 관리 | WIFIGATE API",
+      "seoDescription": "WIFIGATE는 호텔, Airbnb, 게스트 아파트에 스마트 디지털 출입을 제공합니다. WIFIGATE API 기반 게스트 권한 자동화, 예약 기반 임시 권한, 열쇠와 수동 체크인 감소를 지원합니다.",
+      "imageAlt": "현대적인 호텔 복도에서 투숙객이 휴대폰으로 객실 문을 여는 모습"
     },
     "roller-shutters": {
-      label: "매장과 비즈니스용 롤러 셔터",
-      title: "매장과 비즈니스용 롤러 셔터의 스마트하고 안전한 제어",
-      heroLead:
-        "The shutter opens from a phone, and control moves to the protected inner side of the business. Fewer remotes, fewer keys and fewer exposed entry points outside.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "매장과 비즈니스용 롤러 셔터",
+      "title": "매장과 비즈니스용 롤러 셔터의 스마트하고 안전한 제어",
+      "heroLead": "휴대폰으로 셔터를 열고, 제어 지점을 매장 안쪽의 보호된 곳으로 옮길 수 있습니다. 리모컨과 열쇠가 줄고, 외부에 노출된 출입 지점도 줄어듭니다.",
+      "highlights": [
         {
-          icon: "shutter",
-          title: "Control moves inside, out of reach",
-          text: "A switch or key box on an exterior wall is exposed to anyone walking past. When opening comes from a phone, the control point can sit on the inside of the shop.",
+          "icon": "shutter",
+          "title": "제어 지점을 안으로, 손이 닿지 않는 곳에",
+          "text": "외벽에 달린 스위치나 키 박스는 지나가는 누구에게나 노출됩니다. 휴대폰으로 열면 제어 지점을 매장 안쪽에 둘 수 있습니다."
         },
         {
-          icon: "users",
-          title: "A separate permission for every employee",
-          text: "A key or remote left with a former employee keeps working. A personal permission opens on the first day and closes on the last, with no lock to change and no hardware to collect.",
+          "icon": "users",
+          "title": "직원마다 별도의 권한",
+          "text": "퇴사자에게 남은 열쇠나 리모컨은 계속 작동합니다. 개인 권한은 첫날 열리고 마지막 날 닫히므로 잠금장치를 바꾸거나 장비를 회수할 필요가 없습니다."
         },
         {
-          icon: "phone",
-          title: "Open without standing at the shutter",
-          text: "A key forces you to stand right at the control point, hands full, with a poor view of the shutter. From a phone it happens at a safer distance.",
-        },
+          "icon": "phone",
+          "title": "셔터 앞에 서지 않고 열기",
+          "text": "열쇠를 쓰면 양손에 짐을 든 채, 셔터가 잘 보이지 않는 제어 지점 바로 앞에 서야 합니다. 휴대폰으로는 더 안전한 거리에서 열 수 있습니다."
+        }
       ],
-      paragraph:
-        "매장과 비즈니스의 롤러 셔터는 리모컨, 열쇠, 외부 키 박스 또는 실외 스위치로 제어되는 경우가 많습니다. 이런 방식은 분실되거나 퇴사자에게 남아 있거나 복제될 수 있으며, 외부에 노출된 출입 지점이 될 수도 있습니다. WIFIGATE는 제어를 앱으로 옮기고 출입 관리를 더 보호된 내부 위치에 둘 수 있게 해, 더 편리하게 열고 닫고 직원과 공급업체의 권한을 관리하며 실물 열쇠, 리모컨, 노출된 접근 지점에 대한 의존을 줄입니다.",
-      bullets: [
+      "paragraph": "매장과 비즈니스의 롤러 셔터는 리모컨, 열쇠, 외부 키 박스 또는 실외 스위치로 제어되는 경우가 많습니다. 이런 방식은 분실되거나 퇴사자에게 남아 있거나 복제될 수 있으며, 외부에 노출된 출입 지점이 될 수도 있습니다. WIFIGATE는 제어를 앱으로 옮기고 출입 관리를 더 보호된 내부 위치에 둘 수 있게 해, 더 편리하게 열고 닫고 직원과 공급업체의 권한을 관리하며 실물 열쇠, 리모컨, 노출된 접근 지점에 대한 의존을 줄입니다.",
+      "bullets": [
         "리모컨에 의존하지 않고 휴대폰으로 열고 닫기",
         "분실 또는 복제될 수 있는 열쇠 의존도 감소",
         "비즈니스 외부에 노출된 접근 지점 감소",
@@ -90,40 +78,35 @@ export default {
         "직원, 관리자, 공급업체 권한 관리",
         "시간 또는 필요에 따른 임시 출입 권한",
         "매장, 창고, 서비스 입구, 비즈니스 공간에 적합",
-        "일상 운영을 위한 내부 중심의 정돈되고 안전한 솔루션",
+        "일상 운영을 위한 내부 중심의 정돈되고 안전한 솔루션"
       ],
-      seoTitle: "매장과 비즈니스용 롤러 셔터 스마트 제어 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE는 휴대폰으로 매장과 비즈니스용 롤러 셔터를 스마트하게 제어합니다. 권한 관리, 열쇠와 리모컨 의존도 감소, 외부 노출 접근 지점 감소를 지원합니다.",
-      imageAlt: "매장 주인이 휴대폰으로 매장 롤러 셔터를 여는 모습",
+      "seoTitle": "매장과 비즈니스용 롤러 셔터 스마트 제어 | WIFIGATE",
+      "seoDescription": "WIFIGATE는 휴대폰으로 매장과 비즈니스용 롤러 셔터를 스마트하게 제어합니다. 권한 관리, 열쇠와 리모컨 의존도 감소, 외부 노출 접근 지점 감소를 지원합니다.",
+      "imageAlt": "매장 주인이 휴대폰으로 매장 롤러 셔터를 여는 모습"
     },
     "electric-gates": {
-      label: "전동 게이트와 주차 차단기",
-      title: "전동 게이트와 주차 차단기를 위한 스마트 오픈",
-      heroLead:
-        "Open the gate or barrier from your phone, send a temporary permission to a guest or supplier, and let daily users through automatically. Existing remotes keep working alongside it.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "전동 게이트와 주차 차단기",
+      "title": "전동 게이트와 주차 차단기를 위한 스마트 오픈",
+      "heroLead": "휴대폰으로 게이트나 차단기를 열고, 방문객이나 공급업체에 임시 권한을 보내며, 매일 이용하는 사용자는 자동으로 통과하게 하세요. 기존 리모컨도 함께 계속 사용할 수 있습니다.",
+      "highlights": [
         {
-          icon: "handsfree",
-          title: "Automatic opening on the daily drive in",
-          text: "Auto Open recognises that you have arrived and opens the gate for you. No hunting through the glovebox and no winding the window down in the rain.",
+          "icon": "handsfree",
+          "title": "매일 들어올 때 자동으로 열림",
+          "text": "Auto Open이 도착을 인식해 게이트를 대신 열어 줍니다. 글로브박스를 뒤질 필요도, 비 오는 날 창문을 내릴 필요도 없습니다."
         },
         {
-          icon: "clock",
-          title: "Temporary access for a supplier or guest",
-          text: "Instead of handing over a remote and hoping it comes back, send a permission valid only for the window in which it is actually needed, after which it closes itself.",
+          "icon": "clock",
+          "title": "공급업체나 방문객을 위한 임시 출입",
+          "text": "리모컨을 건네고 돌려받기를 기다리는 대신, 실제로 필요한 시간대에만 유효한 권한을 보내세요. 시간이 지나면 자동으로 닫힙니다."
         },
         {
-          icon: "gate",
-          title: "Existing remotes do not go in the bin",
-          text: "WIFIGATE joins what is already installed on the gate. Whoever prefers a remote keeps using it, and whoever prefers a phone simply opens from the app.",
-        },
+          "icon": "gate",
+          "title": "기존 리모컨을 버릴 필요가 없습니다",
+          "text": "WIFIGATE는 게이트에 이미 설치된 장비에 더해 작동합니다. 리모컨을 선호하는 사람은 계속 리모컨을, 휴대폰을 선호하는 사람은 앱으로 열면 됩니다."
+        }
       ],
-      paragraph:
-        "전동 게이트와 주차 차단기는 입주민, 직원, 방문객, 공급업체가 사용하지만 리모컨, 코드, 전화 개방 관리는 금방 복잡해집니다. WIFIGATE는 휴대폰으로 게이트를 열고, 고정 또는 임시 출입 권한을 공유하며, 고정 사용자에게 Auto Open을 제공하고, 필요에 따라 예약 이벤트를 설정할 수 있게 합니다. 시스템은 로컬, 보안, 개인정보 보호 중심의 운영을 위해 설계되었고 월 구독료가 필요하지 않으며, 기존 리모컨도 앱 제어와 함께 계속 사용할 수 있습니다.",
-      bullets: [
+      "paragraph": "전동 게이트와 주차 차단기는 입주민, 직원, 방문객, 공급업체가 사용하지만 리모컨, 코드, 전화 개방 관리는 금방 복잡해집니다. WIFIGATE는 휴대폰으로 게이트를 열고, 고정 또는 임시 출입 권한을 공유하며, 고정 사용자에게 Auto Open을 제공하고, 필요에 따라 예약 이벤트를 설정할 수 있게 합니다. 시스템은 로컬, 보안, 개인정보 보호 중심의 운영을 위해 설계되었고 월 구독료가 필요하지 않으며, 기존 리모컨도 앱 제어와 함께 계속 사용할 수 있습니다.",
+      "bullets": [
         "휴대폰으로 전동 게이트 또는 주차 차단기 열기",
         "월 구독료 없음, 정기 자동 결제 없음",
         "방문객, 공급업체, 직원에게 임시 출입 권한 공유",
@@ -131,40 +114,35 @@ export default {
         "요일과 시간에 따른 예약 개방 이벤트",
         "앱 제어와 기존 리모컨 사용 모두 지원",
         "실물 리모컨 배포 필요성 감소",
-        "관리와 투명성을 위한 개방 기록",
+        "관리와 투명성을 위한 개방 기록"
       ],
-      seoTitle: "월 구독료 없는 전동 게이트와 주차 차단기 출입 관리 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE는 휴대폰으로 전동 게이트와 주차 차단기를 스마트하게 열 수 있게 합니다. Auto Open, 예약 이벤트, 기존 리모컨, 권한 관리, 월 구독료 없는 운영을 지원합니다.",
-      imageAlt: "운전자가 휴대폰으로 주차 차단기와 전동 게이트를 여는 모습",
+      "seoTitle": "월 구독료 없는 전동 게이트와 주차 차단기 출입 관리 | WIFIGATE",
+      "seoDescription": "WIFIGATE는 휴대폰으로 전동 게이트와 주차 차단기를 스마트하게 열 수 있게 합니다. Auto Open, 예약 이벤트, 기존 리모컨, 권한 관리, 월 구독료 없는 운영을 지원합니다.",
+      "imageAlt": "운전자가 휴대폰으로 주차 차단기와 전동 게이트를 여는 모습"
     },
     "garage-doors": {
-      label: "차고문과 개인 주차",
-      title: "차고문과 개인 주차를 위한 스마트 오픈",
-      heroLead:
-        "The garage door opens from your phone, and access moves from a remote to a list you control. No remote to lose, and none left with someone who no longer needs it.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "차고문과 개인 주차",
+      "title": "차고문과 개인 주차를 위한 스마트 오픈",
+      "heroLead": "휴대폰으로 차고문을 열고, 출입 권한은 리모컨에서 직접 관리하는 목록으로 옮겨집니다. 잃어버릴 리모컨도, 더 이상 필요 없는 사람에게 남은 리모컨도 없습니다.",
+      "highlights": [
         {
-          icon: "keyless",
-          title: "A lost remote stops being a problem",
-          text: "A remote that falls out of a pocket keeps opening the garage for whoever finds it, and there is no way to cancel it. A permission on a phone is removed in a moment, with no motor to replace and no remotes to re-code.",
+          "icon": "keyless",
+          "title": "리모컨 분실이 더 이상 문제가 되지 않습니다",
+          "text": "주머니에서 떨어진 리모컨은 주운 사람 누구에게나 차고를 열어 주고, 취소할 방법도 없습니다. 휴대폰의 권한은 즉시 삭제할 수 있어 모터를 교체하거나 리모컨을 다시 등록할 필요가 없습니다."
         },
         {
-          icon: "users",
-          title: "Access for the household and for tradespeople",
-          text: "Everyone at home gets their own permission, and a tradesperson coming once can be given access that closes at the end of the day. Nothing left under the mat.",
+          "icon": "users",
+          "title": "가족과 기사님 모두를 위한 출입",
+          "text": "가족 모두가 각자의 권한을 갖고, 한 번 방문하는 기사님에게는 그날이 끝나면 닫히는 권한을 줄 수 있습니다. 매트 밑에 무언가를 숨겨 둘 필요가 없습니다."
         },
         {
-          icon: "phone",
-          title: "Your phone is already with you",
-          text: "No remote to move between cars and nothing to hunt for when somebody else is driving. What opens the door is the one thing you never leave without.",
-        },
+          "icon": "phone",
+          "title": "휴대폰은 이미 손에 있습니다",
+          "text": "차량마다 리모컨을 옮길 필요도, 다른 사람이 운전할 때 찾아다닐 필요도 없습니다. 문을 여는 것은 언제나 챙겨 나가는 바로 그 물건입니다."
+        }
       ],
-      paragraph:
-        "차고문과 개인 주차 공간은 보통 실물 리모컨으로 제어됩니다. 리모컨은 분실되거나 더 이상 출입 권한이 필요 없는 사람에게 남아 있거나 특정 상황에서 복제될 수 있습니다. WIFIGATE는 제어를 휴대폰 기반 디지털 출입으로 전환하여 가족, 직원, 방문객 권한을 관리하고 리모컨이나 코드를 전달하지 않고도 임시 출입 권한을 공유할 수 있게 합니다.",
-      bullets: [
+      "paragraph": "차고문과 개인 주차 공간은 보통 실물 리모컨으로 제어됩니다. 리모컨은 분실되거나 더 이상 출입 권한이 필요 없는 사람에게 남아 있거나 특정 상황에서 복제될 수 있습니다. WIFIGATE는 제어를 휴대폰 기반 디지털 출입으로 전환하여 가족, 직원, 방문객 권한을 관리하고 리모컨이나 코드를 전달하지 않고도 임시 출입 권한을 공유할 수 있게 합니다.",
+      "bullets": [
         "휴대폰으로 차고문 열기",
         "실물 리모컨 의존도 감소",
         "리모컨 분실, 전달, 복제로 인한 위험 감소",
@@ -172,40 +150,35 @@ export default {
         "리모컨이나 코드를 주지 않고 임시 출입 제공",
         "개인 주차, 주택, 정원형 아파트에 적합",
         "더 로컬이고 개인정보에 집중한 출입 관리",
-        "일상에서 더 편리하고 안전한 제어",
+        "일상에서 더 편리하고 안전한 제어"
       ],
-      seoTitle: "차고문과 개인 주차 스마트 오픈 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE는 휴대폰으로 차고문과 개인 주차를 스마트하게 열 수 있게 합니다. 실물 리모컨 의존도를 줄이고 임시 권한과 더 편리하고 사적인 출입 관리를 지원합니다.",
-      imageAlt: "현대적인 주택에서 남성이 휴대폰으로 개인 차고문을 여는 모습",
+      "seoTitle": "차고문과 개인 주차 스마트 오픈 | WIFIGATE",
+      "seoDescription": "WIFIGATE는 휴대폰으로 차고문과 개인 주차를 스마트하게 열 수 있게 합니다. 실물 리모컨 의존도를 줄이고 임시 권한과 더 편리하고 사적인 출입 관리를 지원합니다.",
+      "imageAlt": "현대적인 주택에서 남성이 휴대폰으로 개인 차고문을 여는 모습"
     },
     "private-homes": {
-      label: "개인 주택",
-      title: "개인 주택을 위한 스마트하고 안전한 출입",
-      heroLead:
-        "A fixed keypad code wears down, gets passed around and stays with people who no longer need it. Give each person their own permission, and a temporary one to anyone visiting once.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "개인 주택",
+      "title": "개인 주택을 위한 스마트하고 안전한 출입",
+      "heroLead": "고정된 키패드 코드는 닳고, 여기저기 전해지고, 더 이상 필요 없는 사람에게 남습니다. 사람마다 개인 권한을 주고, 한 번 방문하는 사람에게는 임시 권한을 주세요.",
+      "highlights": [
         {
-          icon: "shield",
-          title: "A keypad gives your code away",
-          text: "After enough years, four worn keys say exactly which digits make up the code. A permission on a phone leaves no marks on the wall.",
+          "icon": "shield",
+          "title": "키패드는 코드를 드러냅니다",
+          "text": "몇 년이 지나면 닳은 네 개의 버튼이 코드가 어떤 숫자로 이루어졌는지 그대로 알려 줍니다. 휴대폰의 권한은 벽에 아무 흔적도 남기지 않습니다."
         },
         {
-          icon: "clock",
-          title: "Access for the delivery, not forever",
-          text: "A code given to a courier, a technician or a guest is still with them a year later. A temporary permission closes itself the moment the visit is over.",
+          "icon": "clock",
+          "title": "배달을 위한 출입, 영원히가 아니라",
+          "text": "택배 기사, 기술자, 방문객에게 알려 준 코드는 1년 후에도 그들에게 남아 있습니다. 임시 권한은 방문이 끝나는 순간 자동으로 닫힙니다."
         },
         {
-          icon: "roster",
-          title: "A list instead of guesswork",
-          text: "A shared code has no list of holders. In its place comes a list where every permission has a name, so it is clear at any moment who can get into the house.",
-        },
+          "icon": "roster",
+          "title": "추측 대신 목록으로",
+          "text": "공유 코드에는 보유자 목록이 없습니다. 대신 모든 권한에 이름이 붙은 목록으로, 누가 집에 들어올 수 있는지 언제든 명확히 알 수 있습니다."
+        }
       ],
-      paragraph:
-        "개인 주택에서는 키패드, 열쇠, 리모컨이 취약한 지점이 될 수 있습니다. 시간이 지나면 키패드 버튼에 마모나 흔적이 생기고, 리모컨은 분실되거나 사람들 사이에 전달될 수 있으며, 고정 코드는 배달원, 서비스 직원, 방문객에게 공유된 뒤 계속 남아 있을 수 있습니다. WIFIGATE는 휴대폰에서 출입을 관리하고 고정 코드를 노출하지 않고 임시 게스트 권한을 공유하며, 잠금장치, 코드, 리모컨을 교체하지 않고도 권한을 쉽게 취소할 수 있게 합니다.",
-      bullets: [
+      "paragraph": "개인 주택에서는 키패드, 열쇠, 리모컨이 취약한 지점이 될 수 있습니다. 시간이 지나면 키패드 버튼에 마모나 흔적이 생기고, 리모컨은 분실되거나 사람들 사이에 전달될 수 있으며, 고정 코드는 배달원, 서비스 직원, 방문객에게 공유된 뒤 계속 남아 있을 수 있습니다. WIFIGATE는 휴대폰에서 출입을 관리하고 고정 코드를 노출하지 않고 임시 게스트 권한을 공유하며, 잠금장치, 코드, 리모컨을 교체하지 않고도 권한을 쉽게 취소할 수 있게 합니다.",
+      "bullets": [
         "키패드, 열쇠, 리모컨 의존도 감소",
         "배달원, 방문객, 서비스 직원에게 임시 출입 제공",
         "휴대폰에서 권한을 쉽게 취소",
@@ -213,40 +186,35 @@ export default {
         "개인 주택의 게이트, 문, 주차, 차고에 적합",
         "가족과 고정 사용자를 쉽게 관리",
         "일상 출입을 더 편리하게",
-        "누가 들어올 수 있는지에 대한 더 나은 개인정보 보호와 통제",
+        "누가 들어올 수 있는지에 대한 더 나은 개인정보 보호와 통제"
       ],
-      seoTitle: "공유 키패드 코드 없는 개인 주택 스마트 출입 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE는 개인 주택에서 휴대폰으로 출입을 관리하고 방문객과 배달원에게 임시 권한을 공유하며 키패드, 열쇠, 리모컨 의존도를 줄여 줍니다.",
-      imageAlt: "여성이 키패드 대신 휴대폰으로 개인 주택 출입 게이트를 여는 모습",
+      "seoTitle": "공유 키패드 코드 없는 개인 주택 스마트 출입 | WIFIGATE",
+      "seoDescription": "WIFIGATE는 개인 주택에서 휴대폰으로 출입을 관리하고 방문객과 배달원에게 임시 권한을 공유하며 키패드, 열쇠, 리모컨 의존도를 줄여 줍니다.",
+      "imageAlt": "여성이 키패드 대신 휴대폰으로 개인 주택 출입 게이트를 여는 모습"
     },
     "residential-buildings": {
-      label: "주거용 건물",
-      title: "주거용 건물을 위한 스마트 출입 관리",
-      heroLead:
-        "A fixed code that travels between couriers, guests and service people can end up in the wrong hands. Give each person a personal, time-limited entry permission and cut unauthorised entries and the risk of theft.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "주거용 건물",
+      "title": "주거용 건물을 위한 스마트 출입 관리",
+      "heroLead": "배달원, 방문객, 서비스 직원 사이를 오가는 고정 코드는 엉뚱한 사람의 손에 들어갈 수 있습니다. 사람마다 시간 제한이 있는 개인 출입 권한을 주어 무단 출입과 도난 위험을 줄이세요.",
+      "highlights": [
         {
-          icon: "roster",
-          title: "Know who holds access, at any moment",
-          text: "A shared code has no list of holders. There is no way to tell who has it, who passed it on or when. In its place comes a current list where every permission has a name, so the picture of who can enter the building is clear at any point in time.",
+          "icon": "roster",
+          "title": "누가 출입 권한을 가졌는지 언제든 파악",
+          "text": "공유 코드에는 보유자 목록이 없어 누가 가지고 있는지, 누가 언제 전달했는지 알 수 없습니다. 대신 모든 권한에 이름이 붙은 최신 목록으로, 누가 건물에 들어올 수 있는지 언제든 명확히 파악할 수 있습니다."
         },
         {
-          icon: "invite",
-          title: "Arrival instructions in one tap",
-          text: "Address, floor, apartment, gate code and lobby code. You dictate that same sequence again to every guest, every courier and every tradesperson. With WIFIGATE all of it collapses into a single tap, and the visitor finds their own way to the door.",
+          "icon": "invite",
+          "title": "도착 안내를 한 번의 탭으로",
+          "text": "주소, 층, 호수, 게이트 코드, 로비 코드. 방문객, 배달원, 기사님이 올 때마다 같은 설명을 반복합니다. WIFIGATE를 사용하면 이 모든 것이 한 번의 탭으로 끝나고, 방문자는 스스로 문 앞까지 찾아옵니다."
         },
         {
-          icon: "handsfree",
-          title: "Hands-free entry",
-          text: "Auto Open recognises that you have arrived and opens the gate or door for you. No searching for a key and no taking out your phone, even when your hands are full of shopping, a pushchair or children.",
-        },
+          "icon": "handsfree",
+          "title": "손을 쓰지 않는 출입",
+          "text": "Auto Open이 도착을 인식해 게이트나 문을 대신 열어 줍니다. 장바구니, 유모차, 아이들로 양손이 가득해도 열쇠를 찾거나 휴대폰을 꺼낼 필요가 없습니다."
+        }
       ],
-      paragraph:
-        "주거용 건물에서는 공용 출입 코드가 입주민, 방문객, 배달원, 공급업체, 서비스 직원 사이에 빠르게 퍼집니다. 시간이 지나면 누가 실제로 건물 출입 권한을 가지고 있는지, 언제 코드를 바꾸거나 리모컨을 회수해야 하는지 알기 어려워집니다. WIFIGATE는 입주민과 관리 주체가 출입을 더 체계적으로 관리하고, 임시 게스트 권한을 제공하며, 공용 코드 의존도를 줄이고, 건물, 로비, 게이트, 주차장 출입을 더 잘 통제할 수 있게 합니다.",
-      bullets: [
+      "paragraph": "주거용 건물에서는 공용 출입 코드가 입주민, 방문객, 배달원, 공급업체, 서비스 직원 사이에 빠르게 퍼집니다. 시간이 지나면 누가 실제로 건물 출입 권한을 가지고 있는지, 언제 코드를 바꾸거나 리모컨을 회수해야 하는지 알기 어려워집니다. WIFIGATE는 입주민과 관리 주체가 출입을 더 체계적으로 관리하고, 임시 게스트 권한을 제공하며, 공용 코드 의존도를 줄이고, 건물, 로비, 게이트, 주차장 출입을 더 잘 통제할 수 있게 합니다.",
+      "bullets": [
         "입주민이 휴대폰으로 편리하게 출입",
         "고정 코드를 노출하지 않는 임시 게스트 초대",
         "입주민, 공급업체, 서비스 직원 권한 관리",
@@ -254,40 +222,35 @@ export default {
         "키패드, 열쇠, 리모컨 의존도 감소",
         "출입 기록을 통한 더 나은 투명성",
         "관리위원회 또는 관리회사에 더 쉬운 관리",
-        "입주민과 방문객에게 더 편리한 출입 경험",
+        "입주민과 방문객에게 더 편리한 출입 경험"
       ],
-      seoTitle: "주거용 건물 출입 관리 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE는 주거용 건물에 스마트 출입 관리를 제공합니다. 휴대폰 개방, 임시 게스트 권한, 키패드 의존도 감소, 더 나은 투명성을 지원합니다.",
-      imageAlt: "입주민이 휴대폰으로 주거용 건물 입구를 여는 모습",
+      "seoTitle": "주거용 건물 출입 관리 | WIFIGATE",
+      "seoDescription": "WIFIGATE는 주거용 건물에 스마트 출입 관리를 제공합니다. 휴대폰 개방, 임시 게스트 권한, 키패드 의존도 감소, 더 나은 투명성을 지원합니다.",
+      "imageAlt": "입주민이 휴대폰으로 주거용 건물 입구를 여는 모습"
     },
     "office-buildings": {
-      label: "오피스 빌딩",
-      title: "오피스 빌딩을 위한 스마트 출입",
-      heroLead:
-        "Standing permissions for staff, temporary ones for visitors and suppliers. No queue at reception, no badges to issue and no keys to collect when somebody leaves.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "오피스 빌딩",
+      "title": "오피스 빌딩을 위한 스마트 출입",
+      "heroLead": "직원에게는 고정 권한을, 방문객과 공급업체에는 임시 권한을. 프런트 대기 줄도, 출입증 발급도, 퇴사 시 열쇠 회수도 필요 없습니다.",
+      "highlights": [
         {
-          icon: "users",
-          title: "Somebody joins, somebody leaves",
-          text: "Onboarding and offboarding are one action on a list, not a round of issuing a badge, collecting a badge and changing a lock. The permission opens and closes on the dates you set.",
+          "icon": "users",
+          "title": "누군가는 입사하고, 누군가는 퇴사합니다",
+          "text": "입사와 퇴사는 출입증 발급, 회수, 잠금장치 교체를 반복하는 일이 아니라 목록에서 한 번의 작업입니다. 권한은 설정한 날짜에 열리고 닫힙니다."
         },
         {
-          icon: "invite",
-          title: "The visitor arrives already holding the entry",
-          text: "Instead of waiting at reception for somebody to come down, the visitor arrives with a permission sent to their phone, valid only for the time of the meeting.",
+          "icon": "invite",
+          "title": "방문객은 이미 출입 권한을 가지고 도착합니다",
+          "text": "누군가 내려오기를 프런트에서 기다리는 대신, 방문객은 휴대폰으로 받은 권한을 가지고 도착하며, 이 권한은 회의 시간에만 유효합니다."
         },
         {
-          icon: "history",
-          title: "A record of entries for operations",
-          text: "Every opening carries a name and a time, so you can check afterwards who entered a floor, a store room or the car park without reconstructing it from memory.",
-        },
+          "icon": "history",
+          "title": "운영을 위한 출입 기록",
+          "text": "모든 개방에 이름과 시간이 남아, 누가 어느 층, 창고, 주차장에 들어갔는지 기억에 의존하지 않고 나중에 확인할 수 있습니다."
+        }
       ],
-      paragraph:
-        "오피스 빌딩은 직원, 방문객, 공급업체, 운영팀에게 편리한 출입을 제공해야 하지만, 프런트 부담을 늘리거나 열쇠와 카드를 수동으로 관리하고 싶지는 않습니다. WIFIGATE는 직원에게 고정 권한을, 방문객에게 임시 권한을 제공하고, 휴대폰으로 출입을 제어하며, 현대적인 비즈니스 환경에 맞는 정돈된 출입 관리를 가능하게 합니다.",
-      bullets: [
+      "paragraph": "오피스 빌딩은 직원, 방문객, 공급업체, 운영팀에게 편리한 출입을 제공해야 하지만, 프런트 부담을 늘리거나 열쇠와 카드를 수동으로 관리하고 싶지는 않습니다. WIFIGATE는 직원에게 고정 권한을, 방문객에게 임시 권한을 제공하고, 휴대폰으로 출입을 제어하며, 현대적인 비즈니스 환경에 맞는 정돈된 출입 관리를 가능하게 합니다.",
+      "bullets": [
         "직원과 팀을 위한 고정 권한",
         "방문객, 공급업체, 배달원을 위한 임시 출입",
         "프런트와 운영팀의 부담 감소",
@@ -295,40 +258,35 @@ export default {
         "사용자와 권한을 체계적으로 관리",
         "열쇠, 출입 카드, 코드 의존도 감소",
         "건물에 더 현대적이고 편리한 이미지 제공",
-        "관리와 투명성을 위한 출입 기록",
+        "관리와 투명성을 위한 출입 기록"
       ],
-      seoTitle: "오피스 빌딩 출입 관리 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE는 오피스 빌딩에서 직원, 방문객, 공급업체의 출입을 휴대폰으로 관리할 수 있게 합니다. 임시 및 고정 권한을 지원하는 현대적인 출입 관리입니다.",
-      imageAlt: "현대적인 사무실에서 직원이 휴대폰으로 유리문을 여는 모습",
+      "seoTitle": "오피스 빌딩 출입 관리 | WIFIGATE",
+      "seoDescription": "WIFIGATE는 오피스 빌딩에서 직원, 방문객, 공급업체의 출입을 휴대폰으로 관리할 수 있게 합니다. 임시 및 고정 권한을 지원하는 현대적인 출입 관리입니다.",
+      "imageAlt": "현대적인 사무실에서 직원이 휴대폰으로 유리문을 여는 모습"
     },
     "entry-doors-magnetic-locks": {
-      label: "비즈니스 출입문과 마그네틱 락",
-      title: "비즈니스 출입문과 마그네틱 락을 위한 스마트 오픈",
-      heroLead:
-        "Your business entrance opens from a phone, and permissions change without changing a code. It works with the electric or magnetic lock already fitted to the door.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "비즈니스 출입문과 마그네틱 락",
+      "title": "비즈니스 출입문과 마그네틱 락을 위한 스마트 오픈",
+      "heroLead": "휴대폰으로 사업장 출입문을 열고, 코드를 바꾸지 않고도 권한을 변경하세요. 문에 이미 설치된 전기 잠금장치나 마그네틱 락과 함께 작동합니다.",
+      "highlights": [
         {
-          icon: "keyless",
-          title: "One code for everyone stops being a solution",
-          text: "A code that travels between staff, suppliers and customers is no longer really closing the door. A personal permission for each person removes the need to change the code every time somebody moves on.",
+          "icon": "keyless",
+          "title": "모두가 쓰는 하나의 코드는 더 이상 해결책이 아닙니다",
+          "text": "직원, 공급업체, 고객 사이를 오가는 코드로는 더 이상 문을 제대로 지킬 수 없습니다. 사람마다 개인 권한을 주면 누군가 떠날 때마다 코드를 바꿀 필요가 없습니다."
         },
         {
-          icon: "clock",
-          title: "Temporary access for a supplier or technician",
-          text: "For the cleaner who comes in the evening, the technician who comes once and the courier who needs five minutes: a permission valid for exactly that window, which then closes itself.",
+          "icon": "clock",
+          "title": "공급업체나 기술자를 위한 임시 출입",
+          "text": "저녁에 오는 청소 직원, 한 번 오는 기술자, 5분만 필요한 배달원에게 딱 그 시간대에만 유효하고 이후 자동으로 닫히는 권한을 주세요."
         },
         {
-          icon: "phone",
-          title: "No complex access control system",
-          text: "No control cabinet, no management software and no card reader to mount. The existing lock stays where it is, and everything is managed from the app.",
-        },
+          "icon": "phone",
+          "title": "복잡한 출입 통제 시스템이 필요 없습니다",
+          "text": "제어함도, 관리 소프트웨어도, 카드 리더기 설치도 필요 없습니다. 기존 잠금장치는 그대로 두고 모든 것을 앱에서 관리합니다."
+        }
       ],
-      paragraph:
-        "소규모 비즈니스, 클리닉, 스튜디오, 창고, 사무실은 키패드, 열쇠 또는 간단한 마그네틱 락을 사용하는 경우가 많습니다. 코드가 직원, 공급업체, 방문객 사이에 공유되거나 보안을 낮추지 않고 임시 출입을 제공해야 할 때 문제가 시작됩니다. WIFIGATE는 휴대폰에서 출입문을 관리하고 임시 권한을 공유하며 고정 코드, 실물 열쇠, 매번 수동 조율의 필요성을 줄입니다.",
-      bullets: [
+      "paragraph": "소규모 비즈니스, 클리닉, 스튜디오, 창고, 사무실은 키패드, 열쇠 또는 간단한 마그네틱 락을 사용하는 경우가 많습니다. 코드가 직원, 공급업체, 방문객 사이에 공유되거나 보안을 낮추지 않고 임시 출입을 제공해야 할 때 문제가 시작됩니다. WIFIGATE는 휴대폰에서 출입문을 관리하고 임시 권한을 공유하며 고정 코드, 실물 열쇠, 매번 수동 조율의 필요성을 줄입니다.",
+      "bullets": [
         "전기 잠금장치 또는 마그네틱 락이 있는 출입문에 적합",
         "직원과 관리자가 휴대폰으로 열기",
         "방문객, 공급업체, 서비스 직원에게 임시 출입 제공",
@@ -336,40 +294,35 @@ export default {
         "소규모 비즈니스, 클리닉, 스튜디오, 사무실에 적합",
         "더 간단하고 안전한 권한 관리",
         "실물 열쇠 필요성 감소",
-        "복잡한 시스템 없이 현대적인 출입을 원하는 비즈니스에 적합",
+        "복잡한 시스템 없이 현대적인 출입을 원하는 비즈니스에 적합"
       ],
-      seoTitle: "비즈니스 출입문과 마그네틱 락 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE는 비즈니스 출입문과 마그네틱 락을 스마트하게 열 수 있게 합니다. 휴대폰 권한 관리, 임시 출입, 키패드와 열쇠 의존도 감소를 지원합니다.",
-      imageAlt: "고객이 휴대폰으로 소규모 비즈니스 출입문을 여는 모습",
+      "seoTitle": "비즈니스 출입문과 마그네틱 락 | WIFIGATE",
+      "seoDescription": "WIFIGATE는 비즈니스 출입문과 마그네틱 락을 스마트하게 열 수 있게 합니다. 휴대폰 권한 관리, 임시 출입, 키패드와 열쇠 의존도 감소를 지원합니다.",
+      "imageAlt": "고객이 휴대폰으로 소규모 비즈니스 출입문을 여는 모습"
     },
     "sports-facilities": {
-      label: "스포츠 시설",
-      title: "스포츠 시설을 위한 스마트 출입 관리",
-      heroLead:
-        "Members, coaches and guests enter on their own permission and within opening hours. No shared key, and no code going around a WhatsApp group.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "스포츠 시설",
+      "title": "스포츠 시설을 위한 스마트 출입 관리",
+      "heroLead": "회원, 코치, 게스트가 각자의 권한으로 운영 시간 안에 입장합니다. 공유 열쇠도, WhatsApp 단체방에 돌아다니는 코드도 없습니다.",
+      "highlights": [
         {
-          icon: "calendar",
-          title: "Access opens with the booking",
-          text: "Whoever booked a court for a given hour gets a permission that opens then and closes at the end of it. Nobody has to wait at the gate to let them in.",
+          "icon": "calendar",
+          "title": "예약과 함께 열리는 출입",
+          "text": "특정 시간에 코트를 예약한 사람은 그 시간에 열리고 끝나면 닫히는 권한을 받습니다. 누군가 게이트에서 기다렸다가 문을 열어 줄 필요가 없습니다."
         },
         {
-          icon: "users",
-          title: "A member, a coach and a guest are not the same",
-          text: "Each type of user gets their own permission: a standing member, a coach who comes on set days and a one-off guest. All on one list, with no key changing hands.",
+          "icon": "users",
+          "title": "회원, 코치, 게스트는 서로 다릅니다",
+          "text": "사용자 유형마다 각자의 권한을 받습니다. 정기 회원, 정해진 요일에 오는 코치, 한 번 방문하는 게스트 모두 하나의 목록에 있고, 열쇠를 주고받을 필요가 없습니다."
         },
         {
-          icon: "history",
-          title: "Know who was on site and when",
-          text: "When traffic changes through the day, a record of entries helps operations, settles questions about incidents, and confirms the site was locked at the end of the day.",
-        },
+          "icon": "history",
+          "title": "누가 언제 시설에 있었는지 파악",
+          "text": "하루 동안 이용객 흐름이 바뀌는 시설에서 출입 기록은 운영을 돕고, 사고 관련 의문을 해결하며, 하루가 끝날 때 시설이 잠겼는지 확인해 줍니다."
+        }
       ],
-      paragraph:
-        "스포츠 시설, Padel 코트, 테니스 코트, 헬스장, 트레이닝 센터는 운영 시간, 예약, 이벤트에 따라 회원, 코치, 직원, 방문객의 출입을 관리해야 합니다. WIFIGATE는 휴대폰으로 임시 또는 고정 출입 권한을 제공하고, 공유 열쇠나 공용 코드 의존도를 줄이며, 하루 동안 유동 인원이 달라지는 시설의 입장 경험을 개선합니다.",
-      bullets: [
+      "paragraph": "스포츠 시설, Padel 코트, 테니스 코트, 헬스장, 트레이닝 센터는 운영 시간, 예약, 이벤트에 따라 회원, 코치, 직원, 방문객의 출입을 관리해야 합니다. WIFIGATE는 휴대폰으로 임시 또는 고정 출입 권한을 제공하고, 공유 열쇠나 공용 코드 의존도를 줄이며, 하루 동안 유동 인원이 달라지는 시설의 입장 경험을 개선합니다.",
+      "bullets": [
         "Padel, 테니스, 헬스장, 트레이닝 시설에 적합",
         "운영 시간, 예약 또는 권한에 따른 출입",
         "회원, 코치, 직원, 방문객 관리",
@@ -377,12 +330,11 @@ export default {
         "휴대폰으로 빠르고 편리하게 입장",
         "운영 시간이 변동되는 시설에 적합",
         "이벤트, 수업, 훈련을 위한 임시 권한",
-        "운영과 관리를 위한 출입 기록",
+        "운영과 관리를 위한 출입 기록"
       ],
-      seoTitle: "스포츠 시설과 Padel 코트 출입 관리 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE는 스포츠 시설, Padel 코트, 헬스장, 트레이닝 센터에 스마트 출입 관리를 제공합니다. 휴대폰 입장과 임시 또는 고정 권한을 지원합니다.",
-      imageAlt: "Padel 선수가 조명이 켜진 스포츠 코트 입구를 휴대폰으로 여는 모습",
+      "seoTitle": "스포츠 시설과 Padel 코트 출입 관리 | WIFIGATE",
+      "seoDescription": "WIFIGATE는 스포츠 시설, Padel 코트, 헬스장, 트레이닝 센터에 스마트 출입 관리를 제공합니다. 휴대폰 입장과 임시 또는 고정 권한을 지원합니다.",
+      "imageAlt": "Padel 선수가 조명이 켜진 스포츠 코트 입구를 휴대폰으로 여는 모습"
     },
     "storage-lockers": {
       "label": "보관 공간 및 사물함",
@@ -419,6 +371,6 @@ export default {
       "seoTitle": "보관 공간과 사물함 스마트 출입 관리 | WIFIGATE",
       "seoDescription": "WIFIGATE는 보관 공간과 사물함 임차인마다 휴대폰으로 게이트, 출입문, 자신의 사물함을 여는 개인 권한을 제공합니다. 운영 시간으로 제한되고, 기록으로 남으며, 임대가 끝나면 삭제됩니다.",
       "imageAlt": "휴대폰으로 사물함과 보관 공간이 있는 시설의 출입문을 여는 여성"
-    },
-  },
+    }
+  }
 };

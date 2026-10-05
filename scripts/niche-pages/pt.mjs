@@ -1,48 +1,40 @@
 // scripts/niche-pages/pt.mjs
-// European Portuguese (pt-PT) content for the homepage "where" section + the
-// niche/use-case pages, translated from the Hebrew (he.mjs) and English (en.mjs) source.
+// Portuguese (Portugal): homepage SEO, the "where" section and every use-case page.
 
 export default {
-  home: {
-    seoTitle: "WIFIGATE | Controlo de Acesso a Portões, Portas e Parques",
-    seoDescription:
-      "A WIFIGATE permite abrir portões, portas, estacionamentos, estores e garagens a partir do telemóvel. Solução segura, local e conveniente, sem mensalidades.",
-    keywords:
-      "WIFIGATE, WiFi Gate, wifi gate, controlo de acessos inteligente, abrir portão pelo telemóvel, portão elétrico, controlo de entradas, acesso a estacionamento, sem mensalidades",
+  "home": {
+    "seoTitle": "WIFIGATE | Controlo de Acesso a Portões, Portas e Parques",
+    "seoDescription": "A WIFIGATE permite abrir portões, portas, estacionamentos, estores e garagens a partir do telemóvel. Solução segura, local e conveniente, sem mensalidades.",
+    "keywords": "WIFIGATE, WiFi Gate, wifi gate, controlo de acessos inteligente, abrir portão pelo telemóvel, portão elétrico, controlo de entradas, acesso a estacionamento, sem mensalidades"
   },
-  where: {
-    title: "Onde pode utilizar a WIFIGATE?",
-    subtitle:
-      "A WIFIGATE adapta-se a uma grande variedade de ambientes e oferece uma solução de gestão de acessos inteligente, segura e conveniente, desde moradias até espaços comerciais e empresariais.",
+  "where": {
+    "title": "Onde pode utilizar a WIFIGATE?",
+    "subtitle": "A WIFIGATE adapta-se a uma grande variedade de ambientes e oferece uma solução de gestão de acessos inteligente, segura e conveniente, desde moradias até espaços comerciais e empresariais."
   },
-  niches: {
+  "niches": {
     "hotels-airbnb": {
-      label: "Hotéis, Airbnb e Alojamento Local",
-      title: "Acesso inteligente para hotéis, Airbnb e Alojamento Local",
-      heroLead:
-        "The guest receives a personal entry permission on their phone the moment the booking is confirmed. No key cards, no lockbox, no waiting at reception.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "Hotéis, Airbnb e Alojamento Local",
+      "title": "Acesso inteligente para hotéis, Airbnb e Alojamento Local",
+      "heroLead": "O hóspede recebe no telemóvel uma permissão de entrada pessoal assim que a reserva é confirmada. Sem cartões-chave, sem cofre de chaves, sem esperas na receção.",
+      "highlights": [
         {
-          icon: "calendar",
-          title: "Opens at check-in, closes at check-out",
-          text: "There is no moment when somebody has to remember to revoke access. The permission activates at the arrival time you set and expires at departure, even when nobody from the team is on site.",
+          "icon": "calendar",
+          "title": "Abre no check-in, fecha no check-out",
+          "text": "Ninguém tem de se lembrar de revogar o acesso. A permissão ativa-se à hora de chegada definida e expira à saída, mesmo quando não há ninguém da equipa no local."
         },
         {
-          icon: "invite",
-          title: "The booking creates the access",
-          text: "Through the WIFIGATE API your reservation system connects straight to access, so every confirmed booking issues the entry permission itself, with no manual step in between.",
+          "icon": "invite",
+          "title": "A reserva cria o acesso",
+          "text": "Através da WIFIGATE API, o seu sistema de reservas liga-se diretamente ao acesso: cada reserva confirmada emite por si só a permissão de entrada, sem qualquer passo manual pelo meio."
         },
         {
-          icon: "keyless",
-          title: "No cards to issue, no lockbox to share",
-          text: "Nothing to program, nothing to hand over, no card left behind by a previous guest and no lockbox code passed along. The phone already in the guest's pocket is the only way in.",
-        },
+          "icon": "keyless",
+          "title": "Sem cartões para emitir, sem cofre de chaves para partilhar",
+          "text": "Nada para programar, nada para entregar, nenhum cartão esquecido por um hóspede anterior e nenhum código de cofre a circular. O telemóvel que o hóspede já tem no bolso é a única forma de entrar."
+        }
       ],
-      paragraph:
-        "A WIFIGATE permite que os hóspedes recebam um acesso digital cómodo e seguro diretamente no telemóvel, sem chaves físicas, sem cartões e sem coordenação desnecessária com a receção ou com o proprietário. Através da WIFIGATE API, é possível ligar o processo de reserva ao sistema de acessos: assim que uma reserva é confirmada, o hóspede pode receber automaticamente um acesso de hóspede limitado no tempo. O acesso começa à hora do check-in, termina automaticamente no check-out e reduz significativamente a necessidade de entregar chaves, partilhar códigos ou tratar manualmente de cada hóspede.",
-      bullets: [
+      "paragraph": "A WIFIGATE permite que os hóspedes recebam um acesso digital cómodo e seguro diretamente no telemóvel, sem chaves físicas, sem cartões e sem coordenação desnecessária com a receção ou com o proprietário. Através da WIFIGATE API, é possível ligar o processo de reserva ao sistema de acessos: assim que uma reserva é confirmada, o hóspede pode receber automaticamente um acesso de hóspede limitado no tempo. O acesso começa à hora do check-in, termina automaticamente no check-out e reduz significativamente a necessidade de entregar chaves, partilhar códigos ou tratar manualmente de cada hóspede.",
+      "bullets": [
         "Acesso de hóspede criado automaticamente após a confirmação da reserva",
         "Suporte para automatização completa através da WIFIGATE API",
         "Acesso temporário de acordo com as datas e horas da estadia",
@@ -50,40 +42,35 @@ export default {
         "Gestão de permissões para equipas, limpezas, manutenção e fornecedores",
         "Uma experiência de chegada mais fluida e cómoda para os hóspedes",
         "O acesso termina automaticamente à hora do check-out",
-        "Histórico de acessos para transparência e controlo",
+        "Histórico de acessos para transparência e controlo"
       ],
-      seoTitle: "Controlo de acessos para hotéis, Airbnb e Alojamento Local | WIFIGATE API",
-      seoDescription:
-        "A WIFIGATE traz acesso inteligente a hotéis, Airbnb e alojamento local: permissões de hóspede automáticas via WIFIGATE API, acessos temporários por reserva e menos chaves.",
-      imageAlt: "Hóspedes a abrir a porta de um quarto de hotel com o telemóvel num corredor moderno",
+      "seoTitle": "Controlo de acessos para hotéis, Airbnb e Alojamento Local | WIFIGATE API",
+      "seoDescription": "A WIFIGATE traz acesso inteligente a hotéis, Airbnb e alojamento local: permissões de hóspede automáticas via WIFIGATE API, acessos temporários por reserva e menos chaves.",
+      "imageAlt": "Hóspedes a abrir a porta de um quarto de hotel com o telemóvel num corredor moderno"
     },
     "roller-shutters": {
-      label: "Portas de enrolar para lojas e negócios",
-      title: "Controlo inteligente e mais seguro de portas de enrolar para lojas e negócios",
-      heroLead:
-        "The shutter opens from a phone, and control moves to the protected inner side of the business. Fewer remotes, fewer keys and fewer exposed entry points outside.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "Portas de enrolar para lojas e negócios",
+      "title": "Controlo inteligente e mais seguro de portas de enrolar para lojas e negócios",
+      "heroLead": "A porta de enrolar abre-se a partir do telemóvel e o controlo passa para o lado interior, protegido, do negócio. Menos comandos, menos chaves e menos pontos de acesso expostos no exterior.",
+      "highlights": [
         {
-          icon: "shutter",
-          title: "Control moves inside, out of reach",
-          text: "A switch or key box on an exterior wall is exposed to anyone walking past. When opening comes from a phone, the control point can sit on the inside of the shop.",
+          "icon": "shutter",
+          "title": "O controlo passa para dentro, fora do alcance",
+          "text": "Um interruptor ou uma caixa de chave numa parede exterior está exposto a quem passa. Quando a abertura é feita pelo telemóvel, o ponto de controlo pode ficar no interior da loja."
         },
         {
-          icon: "users",
-          title: "A separate permission for every employee",
-          text: "A key or remote left with a former employee keeps working. A personal permission opens on the first day and closes on the last, with no lock to change and no hardware to collect.",
+          "icon": "users",
+          "title": "Uma permissão própria para cada funcionário",
+          "text": "Uma chave ou um comando que fica com um antigo funcionário continua a funcionar. Uma permissão pessoal abre no primeiro dia e fecha no último, sem trocar fechaduras nem recolher equipamentos."
         },
         {
-          icon: "phone",
-          title: "Open without standing at the shutter",
-          text: "A key forces you to stand right at the control point, hands full, with a poor view of the shutter. From a phone it happens at a safer distance.",
-        },
+          "icon": "phone",
+          "title": "Abrir sem estar junto à porta",
+          "text": "Com uma chave, é preciso estar mesmo junto ao ponto de acionamento, de mãos ocupadas e com pouca visibilidade sobre a porta. Pelo telemóvel, faz-se a uma distância mais segura."
+        }
       ],
-      paragraph:
-        "As portas de enrolar de lojas e negócios são muitas vezes acionadas com comandos, chaves, uma caixa de chave exterior ou interruptores instalados fora do espaço. Estas soluções podem perder-se, ficar na posse de antigos funcionários, ser duplicadas ou tornar-se num ponto de acesso exposto. Além disso, abrir ou fechar com chave obriga a estar mesmo junto ao ponto de acionamento, com a chave na mão, por vezes sem uma boa linha de visão para a zona da porta. A WIFIGATE passa o controlo para a aplicação e coloca a gestão de acessos do lado interior, mais protegido, para poder abrir e fechar com mais comodidade, gerir permissões de funcionários e fornecedores e reduzir a dependência de chaves, comandos e pontos de acesso expostos.",
-      bullets: [
+      "paragraph": "As portas de enrolar de lojas e negócios são muitas vezes acionadas com comandos, chaves, uma caixa de chave exterior ou interruptores instalados fora do espaço. Estas soluções podem perder-se, ficar na posse de antigos funcionários, ser duplicadas ou tornar-se num ponto de acesso exposto. Além disso, abrir ou fechar com chave obriga a estar mesmo junto ao ponto de acionamento, com a chave na mão, por vezes sem uma boa linha de visão para a zona da porta. A WIFIGATE passa o controlo para a aplicação e coloca a gestão de acessos do lado interior, mais protegido, para poder abrir e fechar com mais comodidade, gerir permissões de funcionários e fornecedores e reduzir a dependência de chaves, comandos e pontos de acesso expostos.",
+      "bullets": [
         "Abertura e fecho a partir do telemóvel, sem depender de comandos",
         "Menos dependência de chaves que podem ser copiadas ou perdidas",
         "Menos pontos de acesso expostos no exterior do negócio",
@@ -91,40 +78,35 @@ export default {
         "Gestão de permissões para funcionários, gerentes e fornecedores",
         "Possibilidade de acesso temporário por horário ou necessidade",
         "Indicado para lojas, armazéns, entradas de serviço e negócios",
-        "Uma solução interior, mais organizada e protegida para o dia a dia",
+        "Uma solução interior, mais organizada e protegida para o dia a dia"
       ],
-      seoTitle: "Controlo inteligente de portas de enrolar para lojas | WIFIGATE",
-      seoDescription:
-        "A WIFIGATE dá a lojas e negócios controlo inteligente das portas de enrolar pelo telemóvel, com gestão de permissões e menos dependência de chaves e comandos.",
-      imageAlt: "Proprietário de uma loja a abrir a porta de enrolar com o telemóvel",
+      "seoTitle": "Controlo inteligente de portas de enrolar para lojas | WIFIGATE",
+      "seoDescription": "A WIFIGATE dá a lojas e negócios controlo inteligente das portas de enrolar pelo telemóvel, com gestão de permissões e menos dependência de chaves e comandos.",
+      "imageAlt": "Proprietário de uma loja a abrir a porta de enrolar com o telemóvel"
     },
     "electric-gates": {
-      label: "Portões elétricos e cancelas de estacionamento",
-      title: "Abertura inteligente de portões elétricos e cancelas de estacionamento",
-      heroLead:
-        "Open the gate or barrier from your phone, send a temporary permission to a guest or supplier, and let daily users through automatically. Existing remotes keep working alongside it.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "Portões elétricos e cancelas de estacionamento",
+      "title": "Abertura inteligente de portões elétricos e cancelas de estacionamento",
+      "heroLead": "Abra o portão ou a cancela a partir do telemóvel, envie uma permissão temporária a uma visita ou fornecedor e deixe os utilizadores habituais passar automaticamente. Os comandos existentes continuam a funcionar em paralelo.",
+      "highlights": [
         {
-          icon: "handsfree",
-          title: "Automatic opening on the daily drive in",
-          text: "Auto Open recognises that you have arrived and opens the gate for you. No hunting through the glovebox and no winding the window down in the rain.",
+          "icon": "handsfree",
+          "title": "Abertura automática na entrada do dia a dia",
+          "text": "O Auto Open reconhece que chegou e abre o portão por si. Sem procurar no porta-luvas e sem abrir o vidro à chuva."
         },
         {
-          icon: "clock",
-          title: "Temporary access for a supplier or guest",
-          text: "Instead of handing over a remote and hoping it comes back, send a permission valid only for the window in which it is actually needed, after which it closes itself.",
+          "icon": "clock",
+          "title": "Acesso temporário para um fornecedor ou visita",
+          "text": "Em vez de emprestar um comando e esperar que volte, envie uma permissão válida apenas no período em que é realmente necessária, que depois se fecha sozinha."
         },
         {
-          icon: "gate",
-          title: "Existing remotes do not go in the bin",
-          text: "WIFIGATE joins what is already installed on the gate. Whoever prefers a remote keeps using it, and whoever prefers a phone simply opens from the app.",
-        },
+          "icon": "gate",
+          "title": "Os comandos existentes não vão para o lixo",
+          "text": "A WIFIGATE junta-se ao que já está instalado no portão. Quem prefere o comando continua a usá-lo, e quem prefere o telemóvel abre simplesmente pela aplicação."
+        }
       ],
-      paragraph:
-        "Os portões elétricos e as cancelas de estacionamento servem moradores, funcionários, visitas e fornecedores, mas gerir comandos, códigos e telefonemas para abrir o portão torna-se rapidamente complicado. A WIFIGATE permite abrir o portão a partir do telemóvel, partilhar acessos permanentes ou temporários, usar a abertura automática para utilizadores habituais e definir eventos agendados conforme necessário. O sistema foi concebido para funcionar de forma local, segura e privada, sem mensalidades nem débitos diretos, e é possível continuar a usar os comandos existentes em paralelo com o controlo pela aplicação.",
-      bullets: [
+      "paragraph": "Os portões elétricos e as cancelas de estacionamento servem moradores, funcionários, visitas e fornecedores, mas gerir comandos, códigos e telefonemas para abrir o portão torna-se rapidamente complicado. A WIFIGATE permite abrir o portão a partir do telemóvel, partilhar acessos permanentes ou temporários, usar a abertura automática para utilizadores habituais e definir eventos agendados conforme necessário. O sistema foi concebido para funcionar de forma segura, privada e criptografada, sem mensalidades nem débitos diretos, e é possível continuar a usar os comandos existentes em paralelo com o controlo pela aplicação.",
+      "bullets": [
         "Abertura de portões elétricos e cancelas a partir do telemóvel",
         "Sem mensalidades e sem débitos diretos",
         "Partilha de acessos temporários com visitas, fornecedores e funcionários",
@@ -132,81 +114,71 @@ export default {
         "Eventos agendados para abrir por dias e horas",
         "Controlo pela aplicação ou com os comandos existentes",
         "Menos necessidade de distribuir comandos físicos",
-        "Histórico de aberturas para controlo e transparência",
+        "Histórico de aberturas para controlo e transparência"
       ],
-      seoTitle: "Portões elétricos e cancelas sem mensalidades | WIFIGATE",
-      seoDescription:
-        "Abra portões elétricos e cancelas de estacionamento pelo telemóvel com a WIFIGATE: Auto Open, eventos agendados, comandos existentes e sem mensalidades.",
-      imageAlt: "Condutor a abrir uma cancela de estacionamento e um portão elétrico com o telemóvel",
+      "seoTitle": "Portões elétricos e cancelas sem mensalidades | WIFIGATE",
+      "seoDescription": "Abra portões elétricos e cancelas de estacionamento pelo telemóvel com a WIFIGATE: Auto Open, eventos agendados, comandos existentes e sem mensalidades.",
+      "imageAlt": "Condutor a abrir uma cancela de estacionamento e um portão elétrico com o telemóvel"
     },
     "garage-doors": {
-      label: "Portões de garagem e estacionamentos privados",
-      title: "Abertura inteligente de portões de garagem e estacionamentos privados",
-      heroLead:
-        "The garage door opens from your phone, and access moves from a remote to a list you control. No remote to lose, and none left with someone who no longer needs it.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "Portões de garagem e estacionamentos privados",
+      "title": "Abertura inteligente de portões de garagem e estacionamentos privados",
+      "heroLead": "O portão da garagem abre-se a partir do telemóvel e o acesso passa de um comando para uma lista controlada por si. Nenhum comando para perder, e nenhum nas mãos de quem já não precisa dele.",
+      "highlights": [
         {
-          icon: "keyless",
-          title: "A lost remote stops being a problem",
-          text: "A remote that falls out of a pocket keeps opening the garage for whoever finds it, and there is no way to cancel it. A permission on a phone is removed in a moment, with no motor to replace and no remotes to re-code.",
+          "icon": "keyless",
+          "title": "Um comando perdido deixa de ser um problema",
+          "text": "Um comando que cai do bolso continua a abrir a garagem a quem o encontrar, e não há forma de o anular. Uma permissão no telemóvel remove-se num instante, sem trocar o motor nem reprogramar comandos."
         },
         {
-          icon: "users",
-          title: "Access for the household and for tradespeople",
-          text: "Everyone at home gets their own permission, and a tradesperson coming once can be given access that closes at the end of the day. Nothing left under the mat.",
+          "icon": "users",
+          "title": "Acesso para a família e para técnicos",
+          "text": "Cada pessoa da casa tem a sua própria permissão, e um técnico que vem uma única vez pode receber um acesso que fecha ao fim do dia. Nada escondido debaixo do tapete."
         },
         {
-          icon: "phone",
-          title: "Your phone is already with you",
-          text: "No remote to move between cars and nothing to hunt for when somebody else is driving. What opens the door is the one thing you never leave without.",
-        },
+          "icon": "phone",
+          "title": "O telemóvel já está consigo",
+          "text": "Nenhum comando para passar de carro em carro e nada para procurar quando é outra pessoa a conduzir. O que abre o portão é a única coisa sem a qual nunca sai de casa."
+        }
       ],
-      paragraph:
-        "Os portões de garagem e os estacionamentos privados funcionam normalmente com comandos físicos, que podem perder-se, ficar com pessoas que já não precisam de acesso ou, em certas situações, ser copiados. A WIFIGATE passa o controlo para um acesso digital no telemóvel, permite gerir permissões para familiares, funcionários ou visitas e partilhar acessos temporários sem entregar um comando ou um código. O resultado é uma experiência mais cómoda, mais privada e mais organizada, com menos dependência de dispositivos de acesso físicos.",
-      bullets: [
+      "paragraph": "Os portões de garagem e os estacionamentos privados funcionam normalmente com comandos físicos, que podem perder-se, ficar com pessoas que já não precisam de acesso ou, em certas situações, ser copiados. A WIFIGATE passa o controlo para um acesso digital no telemóvel, permite gerir permissões para familiares, funcionários ou visitas e partilhar acessos temporários sem entregar um comando ou um código. O resultado é uma experiência mais cómoda, mais privada e mais organizada, com menos dependência de dispositivos de acesso físicos.",
+      "bullets": [
         "Abertura do portão da garagem a partir do telemóvel",
         "Menos dependência de comandos físicos",
         "Menor risco associado a comandos perdidos, emprestados ou copiados",
         "Gestão de acessos para familiares, funcionários e visitas",
         "Acesso temporário sem entregar comandos ou códigos",
         "Indicado para estacionamentos privados, moradias e apartamentos com jardim",
-        "Uma forma mais local e privada de gerir acessos",
-        "Um controlo diário mais cómodo e seguro",
+        "Uma forma mais privada e segura de gerir acessos",
+        "Um controlo diário mais cómodo e seguro"
       ],
-      seoTitle: "Abertura inteligente de portões de garagem | WIFIGATE",
-      seoDescription:
-        "A WIFIGATE abre portões de garagem e estacionamentos privados pelo telemóvel, com menos comandos físicos, permissões temporárias e gestão de acessos mais privada.",
-      imageAlt: "Homem a abrir o portão de uma garagem privada com o telemóvel numa casa moderna",
+      "seoTitle": "Abertura inteligente de portões de garagem | WIFIGATE",
+      "seoDescription": "A WIFIGATE abre portões de garagem e estacionamentos privados pelo telemóvel, com menos comandos físicos, permissões temporárias e gestão de acessos mais privada.",
+      "imageAlt": "Homem a abrir o portão de uma garagem privada com o telemóvel numa casa moderna"
     },
     "private-homes": {
-      label: "Moradias",
-      title: "Acesso inteligente e seguro para moradias",
-      heroLead:
-        "A fixed keypad code wears down, gets passed around and stays with people who no longer need it. Give each person their own permission, and a temporary one to anyone visiting once.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "Moradias",
+      "title": "Acesso inteligente e seguro para moradias",
+      "heroLead": "Um código fixo de teclado desgasta-se, passa de mão em mão e fica com pessoas que já não precisam dele. Dê a cada pessoa a sua própria permissão, e uma temporária a quem vem só uma vez.",
+      "highlights": [
         {
-          icon: "shield",
-          title: "A keypad gives your code away",
-          text: "After enough years, four worn keys say exactly which digits make up the code. A permission on a phone leaves no marks on the wall.",
+          "icon": "shield",
+          "title": "O teclado denuncia o seu código",
+          "text": "Ao fim de alguns anos, quatro teclas gastas mostram exatamente que dígitos formam o código. Uma permissão no telemóvel não deixa marcas na parede."
         },
         {
-          icon: "clock",
-          title: "Access for the delivery, not forever",
-          text: "A code given to a courier, a technician or a guest is still with them a year later. A temporary permission closes itself the moment the visit is over.",
+          "icon": "clock",
+          "title": "Acesso para a entrega, não para sempre",
+          "text": "Um código dado a um estafeta, a um técnico ou a uma visita continua com eles um ano depois. Uma permissão temporária fecha-se sozinha assim que a visita termina."
         },
         {
-          icon: "roster",
-          title: "A list instead of guesswork",
-          text: "A shared code has no list of holders. In its place comes a list where every permission has a name, so it is clear at any moment who can get into the house.",
-        },
+          "icon": "roster",
+          "title": "Uma lista em vez de suposições",
+          "text": "Um código partilhado não tem uma lista de quem o conhece. Em seu lugar surge uma lista em que cada permissão tem um nome, para que fique claro, a qualquer momento, quem pode entrar em casa."
+        }
       ],
-      paragraph:
-        "Nas moradias, os teclados de código, as chaves e os comandos podem tornar-se um ponto fraco. Com o tempo, surgem marcas de desgaste nas teclas do código, os comandos perdem-se ou passam de mão em mão, e o código é por vezes dado a estafetas, técnicos ou visitas, que o guardam muito depois de deixar de ser necessário. A WIFIGATE permite gerir a entrada a partir do telemóvel, partilhar acessos temporários de visita sem expor um código fixo e revogar permissões facilmente, sem trocar fechaduras, códigos ou comandos.",
-      bullets: [
+      "paragraph": "Nas moradias, os teclados de código, as chaves e os comandos podem tornar-se um ponto fraco. Com o tempo, surgem marcas de desgaste nas teclas do código, os comandos perdem-se ou passam de mão em mão, e o código é por vezes dado a estafetas, técnicos ou visitas, que o guardam muito depois de deixar de ser necessário. A WIFIGATE permite gerir a entrada a partir do telemóvel, partilhar acessos temporários de visita sem expor um código fixo e revogar permissões facilmente, sem trocar fechaduras, códigos ou comandos.",
+      "bullets": [
         "Menos dependência de teclados de código, chaves e comandos",
         "Acesso temporário para estafetas, visitas e técnicos",
         "Revogação de permissões com facilidade, a partir do telemóvel",
@@ -214,40 +186,35 @@ export default {
         "Indicado para portões, portas, estacionamentos e garagens de moradias",
         "Gestão simples para familiares e utilizadores habituais",
         "Uma entrada do dia a dia mais cómoda",
-        "Mais privacidade e controlo sobre quem pode entrar",
+        "Mais privacidade e controlo sobre quem pode entrar"
       ],
-      seoTitle: "Acesso inteligente para moradias sem código partilhado | WIFIGATE",
-      seoDescription:
-        "A WIFIGATE permite gerir os acessos da moradia pelo telemóvel, com permissões temporárias para visitas e estafetas e menos dependência de teclados, chaves e comandos.",
-      imageAlt: "Mulher a abrir o portão de entrada de uma moradia com o telemóvel, em vez de usar o teclado de código",
+      "seoTitle": "Acesso inteligente para moradias sem código partilhado | WIFIGATE",
+      "seoDescription": "A WIFIGATE permite gerir os acessos da moradia pelo telemóvel, com permissões temporárias para visitas e estafetas e menos dependência de teclados, chaves e comandos.",
+      "imageAlt": "Mulher a abrir o portão de entrada de uma moradia com o telemóvel, em vez de usar o teclado de código"
     },
     "residential-buildings": {
-      label: "Prédios de habitação",
-      title: "Gestão de acessos inteligente para prédios de habitação",
-      heroLead:
-        "A fixed code that travels between couriers, guests and service people can end up in the wrong hands. Give each person a personal, time-limited entry permission and cut unauthorised entries and the risk of theft.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "Prédios de habitação",
+      "title": "Gestão de acessos inteligente para prédios de habitação",
+      "heroLead": "Um código fixo que circula entre estafetas, visitas e prestadores de serviços pode acabar nas mãos erradas. Dê a cada pessoa uma permissão de entrada pessoal e limitada no tempo, e reduza as entradas não autorizadas e o risco de furto.",
+      "highlights": [
         {
-          icon: "roster",
-          title: "Know who holds access, at any moment",
-          text: "A shared code has no list of holders. There is no way to tell who has it, who passed it on or when. In its place comes a current list where every permission has a name, so the picture of who can enter the building is clear at any point in time.",
+          "icon": "roster",
+          "title": "Saber a qualquer momento quem tem acesso",
+          "text": "Um código partilhado não tem uma lista de quem o conhece. Não há forma de saber quem o tem, quem o passou a outros nem quando. Em seu lugar surge uma lista atualizada em que cada permissão tem um nome, para que fique sempre claro quem pode entrar no prédio."
         },
         {
-          icon: "invite",
-          title: "Arrival instructions in one tap",
-          text: "Address, floor, apartment, gate code and lobby code. You dictate that same sequence again to every guest, every courier and every tradesperson. With WIFIGATE all of it collapses into a single tap, and the visitor finds their own way to the door.",
+          "icon": "invite",
+          "title": "Instruções de chegada num só toque",
+          "text": "Morada, andar, apartamento, código do portão e código do hall: a mesma sequência é ditada a cada visita, cada estafeta e cada técnico. Com a WIFIGATE, tudo se resume a um só toque, e a visita encontra sozinha o caminho até à porta."
         },
         {
-          icon: "handsfree",
-          title: "Hands-free entry",
-          text: "Auto Open recognises that you have arrived and opens the gate or door for you. No searching for a key and no taking out your phone, even when your hands are full of shopping, a pushchair or children.",
-        },
+          "icon": "handsfree",
+          "title": "Entrada de mãos livres",
+          "text": "O Auto Open reconhece que chegou e abre o portão ou a porta por si. Sem procurar a chave nem tirar o telemóvel, mesmo com as mãos cheias de compras, um carrinho de bebé ou crianças."
+        }
       ],
-      paragraph:
-        "Nos prédios de habitação, um código de entrada partilhado circula rapidamente entre moradores, visitas, estafetas, fornecedores e prestadores de serviços. Com o tempo, torna-se difícil saber quem tem realmente acesso ao prédio e quando é altura de mudar o código ou recolher comandos. A WIFIGATE permite aos moradores e à administração do condomínio gerir os acessos de forma mais organizada, atribuir permissões temporárias a visitas, reduzir a dependência de um código partilhado e manter um melhor controlo sobre a entrada do prédio, do hall, do portão ou do estacionamento.",
-      bullets: [
+      "paragraph": "Nos prédios de habitação, um código de entrada partilhado circula rapidamente entre moradores, visitas, estafetas, fornecedores e prestadores de serviços. Com o tempo, torna-se difícil saber quem tem realmente acesso ao prédio e quando é altura de mudar o código ou recolher comandos. A WIFIGATE permite aos moradores e à administração do condomínio gerir os acessos de forma mais organizada, atribuir permissões temporárias a visitas, reduzir a dependência de um código partilhado e manter um melhor controlo sobre a entrada do prédio, do hall, do portão ou do estacionamento.",
+      "bullets": [
         "Acesso cómodo para os moradores através do telemóvel",
         "Convites de visita temporários sem expor um código fixo",
         "Gestão de permissões para moradores, fornecedores e prestadores de serviços",
@@ -255,40 +222,35 @@ export default {
         "Menos dependência de teclados de código, chaves e comandos",
         "Mais transparência com o histórico de acessos",
         "Gestão mais simples para a administração do condomínio",
-        "Uma entrada mais cómoda para moradores e visitas",
+        "Uma entrada mais cómoda para moradores e visitas"
       ],
-      seoTitle: "Controlo de acessos para prédios de habitação | WIFIGATE",
-      seoDescription:
-        "A WIFIGATE traz gestão de acessos inteligente a prédios de habitação: entrada pelo telemóvel, permissões temporárias, menos códigos partilhados e mais transparência.",
-      imageAlt: "Moradora a abrir a entrada de um prédio de habitação com o telemóvel",
+      "seoTitle": "Controlo de acessos para prédios de habitação | WIFIGATE",
+      "seoDescription": "A WIFIGATE traz gestão de acessos inteligente a prédios de habitação: entrada pelo telemóvel, permissões temporárias, menos códigos partilhados e mais transparência.",
+      "imageAlt": "Moradora a abrir a entrada de um prédio de habitação com o telemóvel"
     },
     "office-buildings": {
-      label: "Edifícios de escritórios",
-      title: "Acesso inteligente para edifícios de escritórios",
-      heroLead:
-        "Standing permissions for staff, temporary ones for visitors and suppliers. No queue at reception, no badges to issue and no keys to collect when somebody leaves.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "Edifícios de escritórios",
+      "title": "Acesso inteligente para edifícios de escritórios",
+      "heroLead": "Permissões permanentes para a equipa, temporárias para visitantes e fornecedores. Sem filas na receção, sem cartões para emitir e sem chaves para recolher quando alguém sai.",
+      "highlights": [
         {
-          icon: "users",
-          title: "Somebody joins, somebody leaves",
-          text: "Onboarding and offboarding are one action on a list, not a round of issuing a badge, collecting a badge and changing a lock. The permission opens and closes on the dates you set.",
+          "icon": "users",
+          "title": "Alguém entra, alguém sai",
+          "text": "Admissões e saídas são uma única ação numa lista, e não uma ronda de emitir um cartão, recolher um cartão e trocar uma fechadura. A permissão abre e fecha nas datas definidas por si."
         },
         {
-          icon: "invite",
-          title: "The visitor arrives already holding the entry",
-          text: "Instead of waiting at reception for somebody to come down, the visitor arrives with a permission sent to their phone, valid only for the time of the meeting.",
+          "icon": "invite",
+          "title": "O visitante chega já com a entrada na mão",
+          "text": "Em vez de esperar na receção que alguém desça, o visitante chega com uma permissão enviada para o telemóvel, válida apenas durante a reunião."
         },
         {
-          icon: "history",
-          title: "A record of entries for operations",
-          text: "Every opening carries a name and a time, so you can check afterwards who entered a floor, a store room or the car park without reconstructing it from memory.",
-        },
+          "icon": "history",
+          "title": "Um registo de entradas para a operação",
+          "text": "Cada abertura tem um nome e uma hora, para poder verificar depois quem entrou num piso, num armazém ou no parque de estacionamento, sem ter de o reconstituir de memória."
+        }
       ],
-      paragraph:
-        "Os edifícios de escritórios precisam de proporcionar uma entrada cómoda a funcionários, visitantes, fornecedores e equipas de operação, sem sobrecarregar a receção e sem gerir chaves ou cartões manualmente. A WIFIGATE permite atribuir permissões permanentes aos funcionários e permissões temporárias aos visitantes, controlar os acessos a partir do telemóvel e gerir as entradas de uma forma adequada a um ambiente empresarial moderno, limpo e organizado.",
-      bullets: [
+      "paragraph": "Os edifícios de escritórios precisam de proporcionar uma entrada cómoda a funcionários, visitantes, fornecedores e equipas de operação, sem sobrecarregar a receção e sem gerir chaves ou cartões manualmente. A WIFIGATE permite atribuir permissões permanentes aos funcionários e permissões temporárias aos visitantes, controlar os acessos a partir do telemóvel e gerir as entradas de uma forma adequada a um ambiente empresarial moderno, limpo e organizado.",
+      "bullets": [
         "Permissões permanentes para funcionários e equipas",
         "Acesso temporário para visitantes, fornecedores e estafetas",
         "Menos carga sobre a receção e a equipa de operação",
@@ -296,40 +258,35 @@ export default {
         "Gestão organizada de utilizadores e permissões",
         "Menos dependência de chaves, cartões de acesso e códigos",
         "Uma imagem mais moderna e conveniente para o edifício",
-        "Histórico de acessos para controlo e transparência",
+        "Histórico de acessos para controlo e transparência"
       ],
-      seoTitle: "Controlo de acessos para edifícios de escritórios | WIFIGATE",
-      seoDescription:
-        "A WIFIGATE permite gerir a entrada de funcionários, visitantes e fornecedores em edifícios de escritórios pelo telemóvel, com permissões temporárias e permanentes.",
-      imageAlt: "Funcionária a abrir uma porta de vidro num escritório moderno com o telemóvel",
+      "seoTitle": "Controlo de acessos para edifícios de escritórios | WIFIGATE",
+      "seoDescription": "A WIFIGATE permite gerir a entrada de funcionários, visitantes e fornecedores em edifícios de escritórios pelo telemóvel, com permissões temporárias e permanentes.",
+      "imageAlt": "Funcionária a abrir uma porta de vidro num escritório moderno com o telemóvel"
     },
     "entry-doors-magnetic-locks": {
-      label: "Portas de entrada e fechaduras magnéticas para negócios",
-      title: "Abertura inteligente de portas de entrada e fechaduras magnéticas para negócios",
-      heroLead:
-        "Your business entrance opens from a phone, and permissions change without changing a code. It works with the electric or magnetic lock already fitted to the door.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "Portas de entrada e fechaduras magnéticas para negócios",
+      "title": "Abertura inteligente de portas de entrada e fechaduras magnéticas para negócios",
+      "heroLead": "A entrada do seu negócio abre-se a partir do telemóvel e as permissões mudam sem mudar o código. Funciona com a fechadura elétrica ou magnética que já está instalada na porta.",
+      "highlights": [
         {
-          icon: "keyless",
-          title: "One code for everyone stops being a solution",
-          text: "A code that travels between staff, suppliers and customers is no longer really closing the door. A personal permission for each person removes the need to change the code every time somebody moves on.",
+          "icon": "keyless",
+          "title": "Um código para todos deixa de ser solução",
+          "text": "Um código que circula entre funcionários, fornecedores e clientes já não fecha verdadeiramente a porta. Uma permissão pessoal para cada pessoa elimina a necessidade de mudar o código sempre que alguém sai."
         },
         {
-          icon: "clock",
-          title: "Temporary access for a supplier or technician",
-          text: "For the cleaner who comes in the evening, the technician who comes once and the courier who needs five minutes: a permission valid for exactly that window, which then closes itself.",
+          "icon": "clock",
+          "title": "Acesso temporário para um fornecedor ou técnico",
+          "text": "Para a pessoa das limpezas que vem ao fim do dia, o técnico que vem uma vez e o estafeta que precisa de cinco minutos: uma permissão válida exatamente para esse período, que depois se fecha sozinha."
         },
         {
-          icon: "phone",
-          title: "No complex access control system",
-          text: "No control cabinet, no management software and no card reader to mount. The existing lock stays where it is, and everything is managed from the app.",
-        },
+          "icon": "phone",
+          "title": "Sem um sistema de controlo de acessos complexo",
+          "text": "Sem quadro de controlo, sem software de gestão e sem leitor de cartões para instalar. A fechadura existente fica onde está e tudo é gerido pela aplicação."
+        }
       ],
-      paragraph:
-        "Pequenos negócios, clínicas, estúdios, armazéns e escritórios recorrem muitas vezes a um teclado de código, a uma chave ou a uma fechadura magnética simples. O problema começa quando o código circula entre funcionários, fornecedores e visitas, ou quando é preciso dar acesso temporário sem comprometer a segurança. A WIFIGATE permite gerir a porta de entrada a partir do telemóvel, partilhar permissões temporárias e reduzir a necessidade de códigos fixos, chaves físicas ou coordenação manual em cada entrada.",
-      bullets: [
+      "paragraph": "Pequenos negócios, clínicas, estúdios, armazéns e escritórios recorrem muitas vezes a um teclado de código, a uma chave ou a uma fechadura magnética simples. O problema começa quando o código circula entre funcionários, fornecedores e visitas, ou quando é preciso dar acesso temporário sem comprometer a segurança. A WIFIGATE permite gerir a porta de entrada a partir do telemóvel, partilhar permissões temporárias e reduzir a necessidade de códigos fixos, chaves físicas ou coordenação manual em cada entrada.",
+      "bullets": [
         "Indicado para portas de entrada com fechadura elétrica ou magnética",
         "Abertura pelo telemóvel para funcionários e gerentes",
         "Acesso temporário para visitas, fornecedores e técnicos",
@@ -337,40 +294,35 @@ export default {
         "Indicado para pequenos negócios, clínicas, estúdios e escritórios",
         "Gestão de permissões mais simples e segura",
         "Menos necessidade de chaves físicas",
-        "Uma opção prática para negócios que querem uma entrada moderna sem um sistema complexo",
+        "Uma opção prática para negócios que querem uma entrada moderna sem um sistema complexo"
       ],
-      seoTitle: "Portas de entrada e fechaduras magnéticas para negócios | WIFIGATE",
-      seoDescription:
-        "A WIFIGATE traz abertura inteligente a portas de entrada e fechaduras magnéticas de negócios: permissões pelo telemóvel, acessos temporários e menos códigos e chaves.",
-      imageAlt: "Cliente a abrir a porta de entrada de um pequeno negócio com o telemóvel",
+      "seoTitle": "Portas de entrada e fechaduras magnéticas para negócios | WIFIGATE",
+      "seoDescription": "A WIFIGATE traz abertura inteligente a portas de entrada e fechaduras magnéticas de negócios: permissões pelo telemóvel, acessos temporários e menos códigos e chaves.",
+      "imageAlt": "Cliente a abrir a porta de entrada de um pequeno negócio com o telemóvel"
     },
     "sports-facilities": {
-      label: "Instalações desportivas",
-      title: "Controlo de acessos inteligente para instalações desportivas",
-      heroLead:
-        "Members, coaches and guests enter on their own permission and within opening hours. No shared key, and no code going around a WhatsApp group.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "Instalações desportivas",
+      "title": "Controlo de acessos inteligente para instalações desportivas",
+      "heroLead": "Sócios, treinadores e visitas entram com a sua própria permissão e dentro do horário de funcionamento. Sem uma chave partilhada e sem um código a circular num grupo de WhatsApp.",
+      "highlights": [
         {
-          icon: "calendar",
-          title: "Access opens with the booking",
-          text: "Whoever booked a court for a given hour gets a permission that opens then and closes at the end of it. Nobody has to wait at the gate to let them in.",
+          "icon": "calendar",
+          "title": "O acesso abre com a reserva",
+          "text": "Quem reservou um campo para uma determinada hora recebe uma permissão que abre nesse momento e fecha no fim. Ninguém tem de esperar ao portão para o deixar entrar."
         },
         {
-          icon: "users",
-          title: "A member, a coach and a guest are not the same",
-          text: "Each type of user gets their own permission: a standing member, a coach who comes on set days and a one-off guest. All on one list, with no key changing hands.",
+          "icon": "users",
+          "title": "Um sócio, um treinador e uma visita não são a mesma coisa",
+          "text": "Cada tipo de utilizador recebe a sua própria permissão: o sócio habitual, o treinador que vem em dias certos e a visita ocasional. Tudo numa só lista, sem chaves a passar de mão em mão."
         },
         {
-          icon: "history",
-          title: "Know who was on site and when",
-          text: "When traffic changes through the day, a record of entries helps operations, settles questions about incidents, and confirms the site was locked at the end of the day.",
-        },
+          "icon": "history",
+          "title": "Saber quem esteve no local e quando",
+          "text": "Quando o movimento varia ao longo do dia, um registo de entradas ajuda a operação, esclarece dúvidas em caso de incidente e confirma que o espaço ficou fechado ao fim do dia."
+        }
       ],
-      paragraph:
-        "Instalações desportivas, campos de padel, campos de ténis, ginásios e centros de treino precisam de gerir o acesso de sócios, treinadores, equipas e visitas de acordo com os horários de funcionamento, as reservas e os eventos. A WIFIGATE permite atribuir acessos temporários ou permanentes a partir do telemóvel, reduzir a dependência de uma chave ou de um código partilhado e melhorar a experiência de entrada dos utilizadores, sobretudo em espaços com movimento variável ao longo do dia.",
-      bullets: [
+      "paragraph": "Instalações desportivas, campos de padel, campos de ténis, ginásios e centros de treino precisam de gerir o acesso de sócios, treinadores, equipas e visitas de acordo com os horários de funcionamento, as reservas e os eventos. A WIFIGATE permite atribuir acessos temporários ou permanentes a partir do telemóvel, reduzir a dependência de uma chave ou de um código partilhado e melhorar a experiência de entrada dos utilizadores, sobretudo em espaços com movimento variável ao longo do dia.",
+      "bullets": [
         "Indicado para campos de padel, ténis, ginásios e centros de treino",
         "Acesso por horário de funcionamento, reservas ou permissões",
         "Gestão de sócios, treinadores, funcionários e visitas",
@@ -378,12 +330,11 @@ export default {
         "Entrada rápida e cómoda a partir do telemóvel",
         "Indicado para espaços com horários de funcionamento variáveis",
         "Permissões temporárias para eventos, aulas ou treinos",
-        "Histórico de acessos para controlo e operação",
+        "Histórico de acessos para controlo e operação"
       ],
-      seoTitle: "Controlo de acessos para instalações desportivas e padel | WIFIGATE",
-      seoDescription:
-        "Controlo de acessos inteligente para instalações desportivas, padel e ginásios com a WIFIGATE: entrada pelo telemóvel e permissões temporárias ou permanentes.",
-      imageAlt: "Jogadora de padel a abrir a entrada de um campo desportivo iluminado com o telemóvel",
+      "seoTitle": "Controlo de acessos para instalações desportivas e padel | WIFIGATE",
+      "seoDescription": "Controlo de acessos inteligente para instalações desportivas, padel e ginásios com a WIFIGATE: entrada pelo telemóvel e permissões temporárias ou permanentes.",
+      "imageAlt": "Jogadora de padel a abrir a entrada de um campo desportivo iluminado com o telemóvel"
     },
     "storage-lockers": {
       "label": "Armazenamento e cacifos",
@@ -420,6 +371,6 @@ export default {
       "seoTitle": "Controlo de acessos inteligente para armazenamento e cacifos | WIFIGATE",
       "seoDescription": "A WIFIGATE dá a cada cliente de um espaço de armazenamento ou cacifo acesso pessoal pelo telemóvel ao portão, às portas e ao seu cacifo, limitado ao horário de funcionamento, registado num histórico e retirado quando o arrendamento termina.",
       "imageAlt": "Mulher a abrir com o telemóvel a porta de um espaço de armazenamento com cacifos e boxes"
-    },
-  },
+    }
+  }
 };

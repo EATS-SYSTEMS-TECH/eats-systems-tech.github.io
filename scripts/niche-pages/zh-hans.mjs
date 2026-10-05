@@ -1,47 +1,40 @@
 // scripts/niche-pages/zh-hans.mjs
-// Simplified Chinese content for the homepage "where" section + niche/use-case pages.
+// Chinese (Simplified): homepage SEO, the "where" section and every use-case page.
 
 export default {
-  home: {
-    seoTitle: "WIFIGATE | 适用于大门、门禁和停车场的智能门禁控制",
-    seoDescription:
-      "WIFIGATE（WiFi Gate）可通过手机开启大门、门、停车入口、卷帘门和车库门。一个本地化、安全、便捷且无需月费的智能门禁控制方案。",
-    keywords:
-      "WIFIGATE, WiFi Gate, wifi gate, 智能门禁控制, 手机开门, 电动大门, 门禁系统, 停车场门禁, 无月费",
+  "home": {
+    "seoTitle": "WIFIGATE | 适用于大门、门禁和停车场的智能门禁控制",
+    "seoDescription": "WIFIGATE（WiFi Gate）可通过手机开启大门、门、停车入口、卷帘门和车库门。一个本地化、安全、便捷且无需月费的智能门禁控制方案。",
+    "keywords": "WIFIGATE, WiFi Gate, wifi gate, 智能门禁控制, 手机开门, 电动大门, 门禁系统, 停车场门禁, 无月费"
   },
-  where: {
-    title: "WIFIGATE 适合用在哪里？",
-    subtitle:
-      "WIFIGATE 适用于多种环境，为私人住宅、商业场所和组织空间提供智能、安全、便捷的访问管理方案。",
+  "where": {
+    "title": "WIFIGATE 适合用在哪里？",
+    "subtitle": "WIFIGATE 适用于多种环境，为私人住宅、商业场所和组织空间提供智能、安全、便捷的访问管理方案。"
   },
-  niches: {
+  "niches": {
     "hotels-airbnb": {
-      label: "酒店、Airbnb 和客用公寓",
-      title: "面向酒店、Airbnb 和客用公寓的智能访问",
-      heroLead:
-        "The guest receives a personal entry permission on their phone the moment the booking is confirmed. No key cards, no lockbox, no waiting at reception.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "酒店、Airbnb 和客用公寓",
+      "title": "面向酒店、Airbnb 和客用公寓的智能访问",
+      "heroLead": "预订一经确认，住客的手机上就会收到个人专属的进入权限。无需房卡，无需钥匙盒，也不用在前台排队等候。",
+      "highlights": [
         {
-          icon: "calendar",
-          title: "Opens at check-in, closes at check-out",
-          text: "There is no moment when somebody has to remember to revoke access. The permission activates at the arrival time you set and expires at departure, even when nobody from the team is on site.",
+          "icon": "calendar",
+          "title": "入住时开启，退房时关闭",
+          "text": "没有人需要记着去撤销权限。权限在您设定的到达时间生效，在离店时自动失效，即使团队中无人在现场也是如此。"
         },
         {
-          icon: "invite",
-          title: "The booking creates the access",
-          text: "Through the WIFIGATE API your reservation system connects straight to access, so every confirmed booking issues the entry permission itself, with no manual step in between.",
+          "icon": "invite",
+          "title": "预订即生成权限",
+          "text": "通过 WIFIGATE API，您的预订系统直接与门禁相连，每笔确认的预订都会自动签发进入权限，中间无需任何人工步骤。"
         },
         {
-          icon: "keyless",
-          title: "No cards to issue, no lockbox to share",
-          text: "Nothing to program, nothing to hand over, no card left behind by a previous guest and no lockbox code passed along. The phone already in the guest's pocket is the only way in.",
-        },
+          "icon": "keyless",
+          "title": "无需发卡，也无需共享钥匙盒",
+          "text": "没有需要编程的东西，没有需要交接的东西，没有上一位住客遗落的房卡，也没有到处流传的钥匙盒密码。住客口袋里本就带着的手机，就是唯一的进门方式。"
+        }
       ],
-      paragraph:
-        "WIFIGATE 让住客直接在手机上获得便捷、安全的数字访问权限，无需实体钥匙、房卡，也减少了与前台或房东反复协调的需要。通过 WIFIGATE API，可以把预订流程与访问系统连接起来：预订确认后，住客可自动获得限时访客权限。访问在入住时间开始，在退房时间自动结束，从而显著减少钥匙、密码和人工处理。",
-      bullets: [
+      "paragraph": "WIFIGATE 让住客直接在手机上获得便捷、安全的数字访问权限，无需实体钥匙、房卡，也减少了与前台或房东反复协调的需要。通过 WIFIGATE API，可以把预订流程与访问系统连接起来：预订确认后，住客可自动获得限时访客权限。访问在入住时间开始，在退房时间自动结束，从而显著减少钥匙、密码和人工处理。",
+      "bullets": [
         "预订确认后自动创建访客访问权限",
         "支持通过 WIFIGATE API 实现完整自动化",
         "按入住日期和时间提供临时访问",
@@ -49,40 +42,35 @@ export default {
         "管理员工、清洁、维护和供应商权限",
         "为住客提供更顺畅的到达体验",
         "退房时访问权限自动结束",
-        "访问记录便于透明管理和审计",
+        "访问记录便于透明管理和审计"
       ],
-      seoTitle: "酒店、Airbnb 和客用公寓门禁控制 | WIFIGATE API",
-      seoDescription:
-        "WIFIGATE 为酒店、Airbnb 和客用公寓提供智能数字访问，包括通过 WIFIGATE API 自动化访客权限、按预订提供临时访问、减少钥匙和人工入住流程。",
-      imageAlt: "住客在现代酒店走廊中用手机打开客房门",
+      "seoTitle": "酒店、Airbnb 和客用公寓门禁控制 | WIFIGATE API",
+      "seoDescription": "WIFIGATE 为酒店、Airbnb 和客用公寓提供智能数字访问，包括通过 WIFIGATE API 自动化访客权限、按预订提供临时访问、减少钥匙和人工入住流程。",
+      "imageAlt": "住客在现代酒店走廊中用手机打开客房门"
     },
     "roller-shutters": {
-      label: "商铺和企业卷帘门",
-      title: "商铺和企业卷帘门的智能、安全控制",
-      heroLead:
-        "The shutter opens from a phone, and control moves to the protected inner side of the business. Fewer remotes, fewer keys and fewer exposed entry points outside.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "商铺和企业卷帘门",
+      "title": "商铺和企业卷帘门的智能、安全控制",
+      "heroLead": "卷帘门用手机开启，控制点转移到店铺内侧更受保护的位置。更少的遥控器、更少的钥匙，室外暴露的出入点也更少。",
+      "highlights": [
         {
-          icon: "shutter",
-          title: "Control moves inside, out of reach",
-          text: "A switch or key box on an exterior wall is exposed to anyone walking past. When opening comes from a phone, the control point can sit on the inside of the shop.",
+          "icon": "shutter",
+          "title": "控制移到室内，外人无从接触",
+          "text": "装在外墙上的开关或钥匙盒，任何路人都能碰到。改为用手机开启后，控制点就可以设在店内。"
         },
         {
-          icon: "users",
-          title: "A separate permission for every employee",
-          text: "A key or remote left with a former employee keeps working. A personal permission opens on the first day and closes on the last, with no lock to change and no hardware to collect.",
+          "icon": "users",
+          "title": "每位员工都有独立权限",
+          "text": "留在前员工手里的钥匙或遥控器依然能用。个人权限在入职第一天开启、在最后一天关闭，无需换锁，也无需收回任何设备。"
         },
         {
-          icon: "phone",
-          title: "Open without standing at the shutter",
-          text: "A key forces you to stand right at the control point, hands full, with a poor view of the shutter. From a phone it happens at a safer distance.",
-        },
+          "icon": "phone",
+          "title": "无需站在卷帘门前开启",
+          "text": "用钥匙开门，您必须站在控制点跟前，双手拿满东西，还看不清卷帘门。用手机则可以在更安全的距离外完成。"
+        }
       ],
-      paragraph:
-        "商铺和企业的卷帘门常通过遥控器、钥匙、外部钥匙盒或室外开关控制。这些方式可能丢失、留在离职员工手中、被复制，或成为暴露在外的访问点。WIFIGATE 可把控制转移到手机应用，并将访问控制放在更受保护的内部位置，让开关卷帘门更方便，同时管理员工和供应商权限，减少对实体钥匙、遥控器和外露访问点的依赖。",
-      bullets: [
+      "paragraph": "商铺和企业的卷帘门常通过遥控器、钥匙、外部钥匙盒或室外开关控制。这些方式可能丢失、留在离职员工手中、被复制，或成为暴露在外的访问点。WIFIGATE 可把控制转移到手机应用，并将访问控制放在更受保护的内部位置，让开关卷帘门更方便，同时管理员工和供应商权限，减少对实体钥匙、遥控器和外露访问点的依赖。",
+      "bullets": [
         "无需依赖遥控器，可用手机开启和关闭",
         "减少对可能丢失或复制的钥匙的依赖",
         "减少企业外部暴露的访问点",
@@ -90,40 +78,35 @@ export default {
         "管理员工、经理和供应商权限",
         "可按时间或实际需要提供临时访问",
         "适用于商店、仓库、服务入口和企业场所",
-        "更适合日常运营的内部、规范、安全方案",
+        "更适合日常运营的内部、规范、安全方案"
       ],
-      seoTitle: "商铺和企业卷帘门智能控制 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE 可通过手机智能控制商铺和企业卷帘门，支持权限管理，减少对钥匙和遥控器的依赖，并降低外部暴露访问点。",
-      imageAlt: "店主用手机打开商店卷帘门",
+      "seoTitle": "商铺和企业卷帘门智能控制 | WIFIGATE",
+      "seoDescription": "WIFIGATE 可通过手机智能控制商铺和企业卷帘门，支持权限管理，减少对钥匙和遥控器的依赖，并降低外部暴露访问点。",
+      "imageAlt": "店主用手机打开商店卷帘门"
     },
     "electric-gates": {
-      label: "电动大门和停车场道闸",
-      title: "电动大门和停车场道闸的智能开启",
-      heroLead:
-        "Open the gate or barrier from your phone, send a temporary permission to a guest or supplier, and let daily users through automatically. Existing remotes keep working alongside it.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "电动大门和停车场道闸",
+      "title": "电动大门和停车场道闸的智能开启",
+      "heroLead": "用手机开启大门或道闸，向访客或供应商发送临时权限，让日常用户自动通行。现有遥控器也可同时继续使用。",
+      "highlights": [
         {
-          icon: "handsfree",
-          title: "Automatic opening on the daily drive in",
-          text: "Auto Open recognises that you have arrived and opens the gate for you. No hunting through the glovebox and no winding the window down in the rain.",
+          "icon": "handsfree",
+          "title": "日常驶入，自动开启",
+          "text": "Auto Open 会识别您已到达，并为您打开大门。不用在储物箱里翻找遥控器，也不用在雨中摇下车窗。"
         },
         {
-          icon: "clock",
-          title: "Temporary access for a supplier or guest",
-          text: "Instead of handing over a remote and hoping it comes back, send a permission valid only for the window in which it is actually needed, after which it closes itself.",
+          "icon": "clock",
+          "title": "为供应商或访客提供临时访问",
+          "text": "与其把遥控器交出去再盼着它被归还，不如发送一个只在真正需要的时段内有效的权限，到期后自动关闭。"
         },
         {
-          icon: "gate",
-          title: "Existing remotes do not go in the bin",
-          text: "WIFIGATE joins what is already installed on the gate. Whoever prefers a remote keeps using it, and whoever prefers a phone simply opens from the app.",
-        },
+          "icon": "gate",
+          "title": "现有遥控器无需丢弃",
+          "text": "WIFIGATE 与大门上已安装的设备协同工作。喜欢用遥控器的人继续使用遥控器，喜欢用手机的人直接在应用中开门。"
+        }
       ],
-      paragraph:
-        "电动大门和停车场道闸需要服务住户、员工、访客和供应商，但遥控器、密码和电话开门很快会变得难以管理。WIFIGATE 可通过手机开门，分享长期或临时访问权限，为固定用户启用 Auto Open，并按需要设置定时事件。系统面向本地、安全、注重隐私的运行方式，无需月费，也可继续配合现有遥控器使用。",
-      bullets: [
+      "paragraph": "电动大门和停车场道闸需要服务住户、员工、访客和供应商，但遥控器、密码和电话开门很快会变得难以管理。WIFIGATE 可通过手机开门，分享长期或临时访问权限，为固定用户启用 Auto Open，并按需要设置定时事件。系统以安全、私密、加密的方式运行，无需月费，也可继续配合现有遥控器使用。",
+      "bullets": [
         "用手机开启电动大门或停车场道闸",
         "无需月费，也无需固定扣款",
         "向访客、供应商和员工分享临时访问",
@@ -131,81 +114,71 @@ export default {
         "按日期和时间设置定时开启事件",
         "支持应用控制，也可继续使用现有遥控器",
         "减少分发实体遥控器的需求",
-        "开启记录便于控制和透明管理",
+        "开启记录便于控制和透明管理"
       ],
-      seoTitle: "无需月费的电动大门和停车场道闸门禁控制 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE 可通过手机智能开启电动大门和停车场道闸，支持 Auto Open、定时事件、现有遥控器、权限管理，且无需月费或固定扣款。",
-      imageAlt: "司机用手机开启停车场道闸和电动大门",
+      "seoTitle": "无需月费的电动大门和停车场道闸门禁控制 | WIFIGATE",
+      "seoDescription": "WIFIGATE 可通过手机智能开启电动大门和停车场道闸，支持 Auto Open、定时事件、现有遥控器、权限管理，且无需月费或固定扣款。",
+      "imageAlt": "司机用手机开启停车场道闸和电动大门"
     },
     "garage-doors": {
-      label: "车库门和私人停车位",
-      title: "车库门和私人停车位的智能开启",
-      heroLead:
-        "The garage door opens from your phone, and access moves from a remote to a list you control. No remote to lose, and none left with someone who no longer needs it.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "车库门和私人停车位",
+      "title": "车库门和私人停车位的智能开启",
+      "heroLead": "车库门用手机开启，访问权限从遥控器转移到由您掌控的名单上。没有会丢失的遥控器，也不会有遥控器留在已不再需要的人手里。",
+      "highlights": [
         {
-          icon: "keyless",
-          title: "A lost remote stops being a problem",
-          text: "A remote that falls out of a pocket keeps opening the garage for whoever finds it, and there is no way to cancel it. A permission on a phone is removed in a moment, with no motor to replace and no remotes to re-code.",
+          "icon": "keyless",
+          "title": "遥控器丢失不再是问题",
+          "text": "从口袋里掉出的遥控器，谁捡到都能继续打开车库，而且无法作废。手机上的权限片刻即可移除，无需更换电机，也无需重新对码遥控器。"
         },
         {
-          icon: "users",
-          title: "Access for the household and for tradespeople",
-          text: "Everyone at home gets their own permission, and a tradesperson coming once can be given access that closes at the end of the day. Nothing left under the mat.",
+          "icon": "users",
+          "title": "为家人和维修师傅提供访问",
+          "text": "家里每个人都有自己的权限，只来一次的维修师傅可以获得当天结束即关闭的访问权限。再也不用把钥匙藏在门垫下。"
         },
         {
-          icon: "phone",
-          title: "Your phone is already with you",
-          text: "No remote to move between cars and nothing to hunt for when somebody else is driving. What opens the door is the one thing you never leave without.",
-        },
+          "icon": "phone",
+          "title": "手机本来就随身携带",
+          "text": "不用在几辆车之间来回挪遥控器，别人开车时也不用到处翻找。打开车库门的，正是您出门时从不会落下的那样东西。"
+        }
       ],
-      paragraph:
-        "车库门和私人停车位通常由实体遥控器控制，而遥控器可能丢失、留在不再需要访问的人手中，或在某些情况下被复制。WIFIGATE 将控制转为手机上的数字访问，方便管理家人、员工或访客权限，并在不交出遥控器或密码的情况下分享临时访问。",
-      bullets: [
+      "paragraph": "车库门和私人停车位通常由实体遥控器控制，而遥控器可能丢失、留在不再需要访问的人手中，或在某些情况下被复制。WIFIGATE 将控制转为手机上的数字访问，方便管理家人、员工或访客权限，并在不交出遥控器或密码的情况下分享临时访问。",
+      "bullets": [
         "用手机开启车库门",
         "减少对实体遥控器的依赖",
         "降低遥控器丢失、转交或复制带来的风险",
         "管理家人、员工和访客访问权限",
         "无需交出遥控器或密码即可提供临时访问",
         "适用于私人停车位、住宅和花园公寓",
-        "更本地、更注重隐私的访问管理方案",
-        "日常使用中更方便、更安全的控制",
+        "更私密、更安全的访问管理方式",
+        "日常使用中更方便、更安全的控制"
       ],
-      seoTitle: "车库门和私人停车位智能开启 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE 可通过手机智能开启车库门和私人停车位，减少对实体遥控器的依赖，支持临时权限和更便捷、更私密的访问管理。",
-      imageAlt: "男子在现代住宅中用手机打开私人车库门",
+      "seoTitle": "车库门和私人停车位智能开启 | WIFIGATE",
+      "seoDescription": "WIFIGATE 可通过手机智能开启车库门和私人停车位，减少对实体遥控器的依赖，支持临时权限和更便捷、更私密的访问管理。",
+      "imageAlt": "男子在现代住宅中用手机打开私人车库门"
     },
     "private-homes": {
-      label: "私人住宅",
-      title: "私人住宅的智能、安全访问",
-      heroLead:
-        "A fixed keypad code wears down, gets passed around and stays with people who no longer need it. Give each person their own permission, and a temporary one to anyone visiting once.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "私人住宅",
+      "title": "私人住宅的智能、安全访问",
+      "heroLead": "固定的键盘密码会磨损、会外传，还会留在已不再需要的人手里。为每个人分配专属权限，为只来一次的访客发放临时权限。",
+      "highlights": [
         {
-          icon: "shield",
-          title: "A keypad gives your code away",
-          text: "After enough years, four worn keys say exactly which digits make up the code. A permission on a phone leaves no marks on the wall.",
+          "icon": "shield",
+          "title": "密码键盘会泄露您的密码",
+          "text": "用上几年后，四个磨损的按键就会准确暴露密码由哪几个数字组成。手机上的权限不会在墙上留下任何痕迹。"
         },
         {
-          icon: "clock",
-          title: "Access for the delivery, not forever",
-          text: "A code given to a courier, a technician or a guest is still with them a year later. A temporary permission closes itself the moment the visit is over.",
+          "icon": "clock",
+          "title": "为这次送货开放，而不是永久开放",
+          "text": "告诉快递员、技术人员或访客的密码，一年后仍在他们手里。临时权限会在到访结束时自动关闭。"
         },
         {
-          icon: "roster",
-          title: "A list instead of guesswork",
-          text: "A shared code has no list of holders. In its place comes a list where every permission has a name, so it is clear at any moment who can get into the house.",
-        },
+          "icon": "roster",
+          "title": "用名单代替猜测",
+          "text": "共用密码没有持有人名单。取而代之的是一份每个权限都对应姓名的名单，任何时候都清楚谁可以进入家门。"
+        }
       ],
-      paragraph:
-        "在私人住宅中，键盘密码、钥匙和遥控器都可能成为薄弱点。随着时间推移，键盘按键可能出现磨损痕迹，遥控器可能丢失或转交给他人，固定密码也可能交给快递员、服务人员或客人后一直保留。WIFIGATE 可从手机管理入口，在不暴露固定密码的情况下分享临时访客访问，并可轻松取消权限，无需更换锁具、密码或遥控器。",
-      bullets: [
+      "paragraph": "在私人住宅中，键盘密码、钥匙和遥控器都可能成为薄弱点。随着时间推移，键盘按键可能出现磨损痕迹，遥控器可能丢失或转交给他人，固定密码也可能交给快递员、服务人员或客人后一直保留。WIFIGATE 可从手机管理入口，在不暴露固定密码的情况下分享临时访客访问，并可轻松取消权限，无需更换锁具、密码或遥控器。",
+      "bullets": [
         "减少对键盘密码、钥匙和遥控器的依赖",
         "向快递员、访客和服务人员提供临时访问",
         "可从手机轻松取消权限",
@@ -213,40 +186,35 @@ export default {
         "适用于私人住宅的大门、门、停车位和车库",
         "便于管理家人和固定用户",
         "日常进出更方便",
-        "更好掌控谁可以进入，提升隐私和控制",
+        "更好掌控谁可以进入，提升隐私和控制"
       ],
-      seoTitle: "无需共享键盘密码的私人住宅智能访问 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE 帮助私人住宅通过手机管理访问，向访客和快递员分享临时权限，并减少对键盘密码、钥匙和遥控器的依赖。",
-      imageAlt: "女子不用键盘密码，而是用手机打开私人住宅入口大门",
+      "seoTitle": "无需共享键盘密码的私人住宅智能访问 | WIFIGATE",
+      "seoDescription": "WIFIGATE 帮助私人住宅通过手机管理访问，向访客和快递员分享临时权限，并减少对键盘密码、钥匙和遥控器的依赖。",
+      "imageAlt": "女子不用键盘密码，而是用手机打开私人住宅入口大门"
     },
     "residential-buildings": {
-      label: "住宅楼",
-      title: "住宅楼的智能访问管理",
-      heroLead:
-        "A fixed code that travels between couriers, guests and service people can end up in the wrong hands. Give each person a personal, time-limited entry permission and cut unauthorised entries and the risk of theft.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "住宅楼",
+      "title": "住宅楼的智能访问管理",
+      "heroLead": "在快递员、访客和服务人员之间流传的固定密码，可能落入不该拥有的人手中。为每个人分配个人专属、有时限的进入权限，减少未经授权的进入和失窃风险。",
+      "highlights": [
         {
-          icon: "roster",
-          title: "Know who holds access, at any moment",
-          text: "A shared code has no list of holders. There is no way to tell who has it, who passed it on or when. In its place comes a current list where every permission has a name, so the picture of who can enter the building is clear at any point in time.",
+          "icon": "roster",
+          "title": "随时掌握谁拥有访问权限",
+          "text": "共用密码没有持有人名单。无从知道谁知道密码、谁把它传了出去、又是什么时候传的。取而代之的是一份实时更新、每个权限都对应姓名的名单，任何时候都能清楚了解谁可以进入大楼。"
         },
         {
-          icon: "invite",
-          title: "Arrival instructions in one tap",
-          text: "Address, floor, apartment, gate code and lobby code. You dictate that same sequence again to every guest, every courier and every tradesperson. With WIFIGATE all of it collapses into a single tap, and the visitor finds their own way to the door.",
+          "icon": "invite",
+          "title": "一键发送到访指引",
+          "text": "地址、楼层、门牌号、大门密码和门厅密码。同样的一串信息，您要一遍又一遍地告诉每位访客、每位快递员和每位维修师傅。有了 WIFIGATE，这一切都浓缩为一次点击，来访者可以自己找到门口。"
         },
         {
-          icon: "handsfree",
-          title: "Hands-free entry",
-          text: "Auto Open recognises that you have arrived and opens the gate or door for you. No searching for a key and no taking out your phone, even when your hands are full of shopping, a pushchair or children.",
-        },
+          "icon": "handsfree",
+          "title": "免手动进入",
+          "text": "Auto Open 会识别您已到达，并为您打开大门或楼门。不用找钥匙，也不用掏手机，即使双手提满购物袋、推着婴儿车或抱着孩子也没问题。"
+        }
       ],
-      paragraph:
-        "在住宅楼中，共用入口密码会很快在住户、访客、快递员、供应商和服务人员之间传播。时间久了，很难知道谁真正拥有进入权限，也不清楚什么时候需要换密码或收回遥控器。WIFIGATE 让住户和业委会更有序地管理访问，提供临时访客权限，减少对共用密码的依赖，并更好控制楼栋、门厅、大门或停车场入口。",
-      bullets: [
+      "paragraph": "在住宅楼中，共用入口密码会很快在住户、访客、快递员、供应商和服务人员之间传播。时间久了，很难知道谁真正拥有进入权限，也不清楚什么时候需要换密码或收回遥控器。WIFIGATE 让住户和业委会更有序地管理访问，提供临时访客权限，减少对共用密码的依赖，并更好控制楼栋、门厅、大门或停车场入口。",
+      "bullets": [
         "住户可通过手机便捷进入",
         "无需暴露固定密码即可发送临时访客邀请",
         "管理住户、供应商和服务人员权限",
@@ -254,40 +222,35 @@ export default {
         "减少对键盘密码、钥匙和遥控器的依赖",
         "通过访问记录提升透明度",
         "便于业委会或物业公司管理",
-        "为住户和访客提供更方便的进入体验",
+        "为住户和访客提供更方便的进入体验"
       ],
-      seoTitle: "住宅楼门禁控制 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE 为住宅楼提供智能访问管理，包括手机开门、临时访客权限、减少对键盘密码的依赖以及更好的透明度。",
-      imageAlt: "住户用手机打开住宅楼入口",
+      "seoTitle": "住宅楼门禁控制 | WIFIGATE",
+      "seoDescription": "WIFIGATE 为住宅楼提供智能访问管理，包括手机开门、临时访客权限、减少对键盘密码的依赖以及更好的透明度。",
+      "imageAlt": "住户用手机打开住宅楼入口"
     },
     "office-buildings": {
-      label: "办公楼",
-      title: "办公楼的智能访问",
-      heroLead:
-        "Standing permissions for staff, temporary ones for visitors and suppliers. No queue at reception, no badges to issue and no keys to collect when somebody leaves.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "办公楼",
+      "title": "办公楼的智能访问",
+      "heroLead": "员工使用长期权限，访客和供应商使用临时权限。前台无需排队，无需制作工牌，有人离职时也无需收回钥匙。",
+      "highlights": [
         {
-          icon: "users",
-          title: "Somebody joins, somebody leaves",
-          text: "Onboarding and offboarding are one action on a list, not a round of issuing a badge, collecting a badge and changing a lock. The permission opens and closes on the dates you set.",
+          "icon": "users",
+          "title": "有人入职，有人离职",
+          "text": "入职和离职只是名单上的一次操作，而不是发工牌、收工牌、换锁的一整套流程。权限按您设定的日期开启和关闭。"
         },
         {
-          icon: "invite",
-          title: "The visitor arrives already holding the entry",
-          text: "Instead of waiting at reception for somebody to come down, the visitor arrives with a permission sent to their phone, valid only for the time of the meeting.",
+          "icon": "invite",
+          "title": "访客到达时已持有进入权限",
+          "text": "访客无需在前台等人下楼来接，而是带着发送到手机上的权限到达，该权限仅在会议时段内有效。"
         },
         {
-          icon: "history",
-          title: "A record of entries for operations",
-          text: "Every opening carries a name and a time, so you can check afterwards who entered a floor, a store room or the car park without reconstructing it from memory.",
-        },
+          "icon": "history",
+          "title": "供运营使用的进出记录",
+          "text": "每次开门都记录姓名和时间，事后可以查到谁进入过某个楼层、储藏室或停车场，无需凭记忆拼凑。"
+        }
       ],
-      paragraph:
-        "办公楼需要让员工、访客、供应商和运营团队顺畅进入，同时避免增加前台负担，也不希望人工管理钥匙或卡片。WIFIGATE 可为员工提供长期权限，为访客提供临时权限，通过手机控制访问，并以适合现代商业环境的方式管理进出。",
-      bullets: [
+      "paragraph": "办公楼需要让员工、访客、供应商和运营团队顺畅进入，同时避免增加前台负担，也不希望人工管理钥匙或卡片。WIFIGATE 可为员工提供长期权限，为访客提供临时权限，通过手机控制访问，并以适合现代商业环境的方式管理进出。",
+      "bullets": [
         "为员工和团队提供长期权限",
         "为访客、供应商和快递员提供临时访问",
         "减轻前台和运营团队负担",
@@ -295,40 +258,35 @@ export default {
         "有序管理用户和权限",
         "减少对钥匙、门禁卡和密码的依赖",
         "让办公楼体验更现代、更便捷",
-        "访问记录便于控制和透明管理",
+        "访问记录便于控制和透明管理"
       ],
-      seoTitle: "办公楼门禁控制 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE 帮助办公楼通过手机管理员工、访客和供应商进入，支持临时和长期权限，并提供现代化访问管理。",
-      imageAlt: "员工在现代办公室中用手机打开玻璃门",
+      "seoTitle": "办公楼门禁控制 | WIFIGATE",
+      "seoDescription": "WIFIGATE 帮助办公楼通过手机管理员工、访客和供应商进入，支持临时和长期权限，并提供现代化访问管理。",
+      "imageAlt": "员工在现代办公室中用手机打开玻璃门"
     },
     "entry-doors-magnetic-locks": {
-      label: "企业入口门和磁力锁",
-      title: "企业入口门和磁力锁的智能开启",
-      heroLead:
-        "Your business entrance opens from a phone, and permissions change without changing a code. It works with the electric or magnetic lock already fitted to the door.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "企业入口门和磁力锁",
+      "title": "企业入口门和磁力锁的智能开启",
+      "heroLead": "您的店门用手机开启，权限变更无需更换密码。它可直接配合门上已安装的电控锁或磁力锁使用。",
+      "highlights": [
         {
-          icon: "keyless",
-          title: "One code for everyone stops being a solution",
-          text: "A code that travels between staff, suppliers and customers is no longer really closing the door. A personal permission for each person removes the need to change the code every time somebody moves on.",
+          "icon": "keyless",
+          "title": "人人共用一个密码已不再可行",
+          "text": "在员工、供应商和顾客之间流传的密码，实际上已经锁不住门。每人一个个人权限，就不必在每次有人离开时更换密码。"
         },
         {
-          icon: "clock",
-          title: "Temporary access for a supplier or technician",
-          text: "For the cleaner who comes in the evening, the technician who comes once and the courier who needs five minutes: a permission valid for exactly that window, which then closes itself.",
+          "icon": "clock",
+          "title": "为供应商或技术人员提供临时访问",
+          "text": "傍晚来的保洁员、只来一次的技术人员、只需五分钟的快递员：权限只在那个时段内有效，之后自动关闭。"
         },
         {
-          icon: "phone",
-          title: "No complex access control system",
-          text: "No control cabinet, no management software and no card reader to mount. The existing lock stays where it is, and everything is managed from the app.",
-        },
+          "icon": "phone",
+          "title": "无需复杂的门禁系统",
+          "text": "无需控制柜，无需管理软件，也无需安装读卡器。现有门锁保持原样，一切都在应用中管理。"
+        }
       ],
-      paragraph:
-        "小型企业、诊所、工作室、仓库和办公室常使用键盘密码、钥匙或简单的磁力锁。当密码在员工、供应商和访客之间传播，或需要在不降低安全性的前提下提供临时访问时，问题就会出现。WIFIGATE 可通过手机管理入口门，分享临时权限，并减少固定密码、实体钥匙和每次人工协调的需求。",
-      bullets: [
+      "paragraph": "小型企业、诊所、工作室、仓库和办公室常使用键盘密码、钥匙或简单的磁力锁。当密码在员工、供应商和访客之间传播，或需要在不降低安全性的前提下提供临时访问时，问题就会出现。WIFIGATE 可通过手机管理入口门，分享临时权限，并减少固定密码、实体钥匙和每次人工协调的需求。",
+      "bullets": [
         "适用于带电锁或磁力锁的入口门",
         "员工和管理者可通过手机开门",
         "为访客、供应商和服务人员提供临时访问",
@@ -336,40 +294,35 @@ export default {
         "适用于小型企业、诊所、工作室和办公室",
         "权限管理更简单、更安全",
         "减少实体钥匙需求",
-        "适合希望实现现代入口、但不想部署复杂系统的企业",
+        "适合希望实现现代入口、但不想部署复杂系统的企业"
       ],
-      seoTitle: "企业入口门和磁力锁 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE 可智能开启企业入口门和磁力锁，通过手机管理权限，提供临时访问，并减少对键盘密码和钥匙的依赖。",
-      imageAlt: "顾客用手机打开小型企业入口门",
+      "seoTitle": "企业入口门和磁力锁 | WIFIGATE",
+      "seoDescription": "WIFIGATE 可智能开启企业入口门和磁力锁，通过手机管理权限，提供临时访问，并减少对键盘密码和钥匙的依赖。",
+      "imageAlt": "顾客用手机打开小型企业入口门"
     },
     "sports-facilities": {
-      label: "体育设施",
-      title: "体育设施的智能门禁控制",
-      heroLead:
-        "Members, coaches and guests enter on their own permission and within opening hours. No shared key, and no code going around a WhatsApp group.",
-      // Each highlight stands alone: the hero lead states the problem and the
-      // benefits grid lists the specifics. Nothing is repeated between them.
-      highlights: [
+      "label": "体育设施",
+      "title": "体育设施的智能门禁控制",
+      "heroLead": "会员、教练和访客凭各自的权限、在开放时间内进入。没有共用钥匙，也没有在 WhatsApp 群里流传的密码。",
+      "highlights": [
         {
-          icon: "calendar",
-          title: "Access opens with the booking",
-          text: "Whoever booked a court for a given hour gets a permission that opens then and closes at the end of it. Nobody has to wait at the gate to let them in.",
+          "icon": "calendar",
+          "title": "预订即开放访问",
+          "text": "预订了某个时段场地的人，会获得一个在该时段开始时开启、结束时关闭的权限。无需有人守在门口为其开门。"
         },
         {
-          icon: "users",
-          title: "A member, a coach and a guest are not the same",
-          text: "Each type of user gets their own permission: a standing member, a coach who comes on set days and a one-off guest. All on one list, with no key changing hands.",
+          "icon": "users",
+          "title": "会员、教练和访客各不相同",
+          "text": "每类用户都有自己的权限：长期会员、固定日期来上课的教练、一次性访客。全部在同一份名单上，无需钥匙转手。"
         },
         {
-          icon: "history",
-          title: "Know who was on site and when",
-          text: "When traffic changes through the day, a record of entries helps operations, settles questions about incidents, and confirms the site was locked at the end of the day.",
-        },
+          "icon": "history",
+          "title": "了解谁在何时到过场地",
+          "text": "当全天客流不断变化时，进出记录有助于日常运营，可以厘清与事件相关的疑问，并确认场地在一天结束时已上锁。"
+        }
       ],
-      paragraph:
-        "体育设施、Padel 球场、网球场、健身房和训练中心需要按营业时间、预订和活动管理会员、教练、员工和访客访问。WIFIGATE 可通过手机提供临时或长期访问，减少对共用钥匙或密码的依赖，并改善人流全天变化场所的进入体验。",
-      bullets: [
+      "paragraph": "体育设施、Padel 球场、网球场、健身房和训练中心需要按营业时间、预订和活动管理会员、教练、员工和访客访问。WIFIGATE 可通过手机提供临时或长期访问，减少对共用钥匙或密码的依赖，并改善人流全天变化场所的进入体验。",
+      "bullets": [
         "适用于 Padel 球场、网球场、健身房和训练中心",
         "按营业时间、预订或权限提供访问",
         "管理会员、教练、员工和访客",
@@ -377,12 +330,11 @@ export default {
         "通过手机快速、方便地进入",
         "适合营业时间变化的场所",
         "为活动、课程或训练提供临时权限",
-        "访问记录便于运营和控制",
+        "访问记录便于运营和控制"
       ],
-      seoTitle: "体育设施和 Padel 球场门禁控制 | WIFIGATE",
-      seoDescription:
-        "WIFIGATE 为体育设施、Padel 球场、健身房和训练中心提供智能门禁控制，通过手机进入，并支持临时或长期权限。",
-      imageAlt: "Padel 运动员用手机打开灯光球场入口",
+      "seoTitle": "体育设施和 Padel 球场门禁控制 | WIFIGATE",
+      "seoDescription": "WIFIGATE 为体育设施、Padel 球场、健身房和训练中心提供智能门禁控制，通过手机进入，并支持临时或长期权限。",
+      "imageAlt": "Padel 运动员用手机打开灯光球场入口"
     },
     "storage-lockers": {
       "label": "仓储空间与储物柜",
@@ -419,6 +371,6 @@ export default {
       "seoTitle": "仓储空间与储物柜智能门禁控制 | WIFIGATE",
       "seoDescription": "WIFIGATE 为每位仓储空间和储物柜租户提供通过手机开启大门、各道门和自己储物柜的个人权限，仅限营业时间，全程留有记录，并在租期结束时移除。",
       "imageAlt": "女士用手机打开设有储物柜和仓位的仓储场所的门"
-    },
-  },
+    }
+  }
 };
