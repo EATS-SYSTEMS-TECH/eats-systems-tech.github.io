@@ -4,7 +4,8 @@ import { renderHostAccessGrants } from "./host-access-grants.js";
 
 const states = ["draft", "confirmed", "changed", "cancelled", "completed"];
 let sessionGeneration = 0;
-export function clearHostCalendar() { sessionGeneration++; }
+let filterListener;
+export function clearHostCalendar() { sessionGeneration++; filterListener?.abort(); filterListener = undefined; }
 const dateAt = (value, timezone) => new Intl.DateTimeFormat("en-CA", { timeZone: timezone, year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(value));
 const localAt = (value, timezone) => {
   const parts = Object.fromEntries(new Intl.DateTimeFormat("en-CA", { timeZone: timezone, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date(value)).map((item) => [item.type, item.value]));
@@ -23,6 +24,7 @@ const errors = {
   RATE_LIMITED: "Too many requests. Wait a moment and retry with the same form.",
 };
 export async function renderHostCalendar({ container, user, organization, properties, rooms, isCurrent }) {
+  clearHostCalendar();
   if (!properties.length) return;
   const epoch = sessionGeneration;
   const current = () => epoch === sessionGeneration && isCurrent();
@@ -31,7 +33,9 @@ export async function renderHostCalendar({ container, user, organization, proper
   const section = node("section", undefined, { "aria-label": "Reservation calendar", class: "host-calendar" });
   section.append(node("h2", "Reservation calendar"));
   const controls = node("form", undefined, { class: "calendar-controls" });
-  const propertySelect = field(controls, "Calendar property", "propertyId", properties[0].id, "text", properties.map((item) => [item.id, item.name]));
+  const propertySelect = field(controls, "Calendar property", "propertyId", properties[0].id, "text", [["", "All properties"], ...properties.map((item) => [item.id, item.name])]);
+  const roomFilter = field(controls, "Calendar room", "roomId", "", "text", [["", "All rooms"]]);
+  const mapRooms = () => { roomFilter.replaceChildren(node("option", "All rooms", { value: "" }), ...rooms.filter(item => !propertySelect.value || item.propertyId === propertySelect.value).map(item => node("option", item.name, { value: item.id }))); }; mapRooms();
   const view = field(controls, "Calendar view", "view", "week", "text", [["week", "Week"], ["two-week", "Two weeks"], ["month", "Month"]]);
   const date = field(controls, "Start date", "date", dateAt(Date.now(), properties[0].timezone), "date");
   const search = field(controls, "Search guest or reference", "q"); search.required = false;
@@ -55,9 +59,9 @@ export async function renderHostCalendar({ container, user, organization, proper
   let cursor;
   let activeRange;
   let loading = 0;
-  const property = () => properties.find((item) => item.id === propertySelect.value);
+  const property = () => properties.find((item) => item.id === propertySelect.value) ?? { name: "All properties", timezone: organization.timezone ?? "UTC" };
   const duration = () => view.value === "week" ? 7 : view.value === "two-week" ? 14 : new Date(Date.UTC(Number(date.value.slice(0, 4)), Number(date.value.slice(5, 7)), 0)).getUTCDate();
-  const resolve = async (value, disambiguation = "reject", propertyId = propertySelect.value) => (await portalRequest(user, path("/time-zone/resolve"), "POST", { propertyId, localTime: value, disambiguation })).instant;
+  const resolve = async (value, disambiguation = "reject", propertyId = propertySelect.value) => (await portalRequest(user, path("/time-zone/resolve"), "POST", { ...(propertyId ? { propertyId } : {}), localTime: value, disambiguation })).instant;
   function openEditor(record) {
     editor.replaceChildren();
     const readOnly = !canWrite || (record && ["cancelled", "completed"].includes(record.status));
@@ -133,7 +137,7 @@ export async function renderHostCalendar({ container, user, organization, proper
     for (let index = 0; index < days; index++) header.append(node("th", addDays(date.value, index), { scope: "col" }));
     const head = node("thead"); head.append(header); table.append(head);
     const body = node("tbody");
-    const visibleRooms = rooms.filter((item) => item.propertyId === propertySelect.value);
+    const visibleRooms = rooms.filter((item) => (!propertySelect.value || item.propertyId === propertySelect.value) && (!roomFilter.value || item.id === roomFilter.value));
     for (const booking of data) if (!visibleRooms.some((item) => item.id === booking.roomId)) visibleRooms.push({ id: booking.roomId, name: `${booking.roomName || booking.roomId} (archived)` });
     for (const room of visibleRooms) {
       const row = node("tr"); row.append(node("th", room.name, { scope: "row" }));
@@ -161,7 +165,7 @@ export async function renderHostCalendar({ container, user, organization, proper
   async function load(more = false) {
     if (view.value === "month" && !more) date.value = `${date.value.slice(0, 7)}-01`;
     const request = ++loading;
-    const selection = { propertyId: propertySelect.value, date: date.value, days: duration(), q: search.value.trim(), status: filter.value };
+    const selection = { propertyId: propertySelect.value, roomId: roomFilter.value, date: date.value, days: duration(), q: search.value.trim(), status: filter.value };
     status.textContent = "Loading reservations…";
     if (!more) grid.replaceChildren(node("p", "Loading calendar…"));
     try {
@@ -170,7 +174,7 @@ export async function renderHostCalendar({ container, user, organization, proper
         if (!current() || request !== loading) return;
         activeRange = { from, to };
       }
-      const query = new URLSearchParams({ ...activeRange, propertyId: selection.propertyId, limit: "100", ...(selection.q ? { q: selection.q } : {}), ...(selection.status ? { status: selection.status } : {}), ...(more && cursor ? { cursor } : {}) });
+      const query = new URLSearchParams({ ...activeRange, ...(selection.propertyId ? { propertyId: selection.propertyId } : {}), ...(selection.roomId ? { roomId: selection.roomId } : {}), limit: "100", ...(selection.q ? { q: selection.q } : {}), ...(selection.status ? { status: selection.status } : {}), ...(more && cursor ? { cursor } : {}) });
       const response = await portalRequest(user, path(`?${query}`));
       if (!current() || request !== loading) return;
       data = more ? [...data, ...response.items] : response.items;
@@ -179,12 +183,20 @@ export async function renderHostCalendar({ container, user, organization, proper
     } catch (error) { if (current() && request === loading) status.textContent = errors[error.code] || "The calendar could not be loaded. Update it to retry."; }
   }
   controls.addEventListener("submit", (event) => { event.preventDefault(); editor.replaceChildren(); void load(); });
-  propertySelect.addEventListener("change", () => { editor.replaceChildren(); date.value = dateAt(Date.now(), property().timezone); void load(); });
+  propertySelect.addEventListener("change", () => { editor.replaceChildren(); mapRooms(); date.value = dateAt(Date.now(), property().timezone); void load(); });
+  roomFilter.addEventListener("change", () => { editor.replaceChildren(); void load(); });
+  filterListener = new AbortController();
+  window.addEventListener("host:operations-filter", event => {
+    const saved = event.detail;
+    if (!current() || saved?.orgId !== organization.id) return;
+    if ((saved.propertyId && !properties.some(item => item.id === saved.propertyId)) || (saved.roomId && !rooms.some(item => item.id === saved.roomId && (!saved.propertyId || item.propertyId === saved.propertyId))) || (saved.status && !states.includes(saved.status))) { status.textContent = "Saved filter resources are unavailable. Refresh the organization."; return; }
+    propertySelect.value = saved.propertyId ?? ""; mapRooms(); roomFilter.value = saved.roomId ?? ""; filter.value = saved.status ?? ""; editor.replaceChildren(); void load();
+  }, { signal: filterListener.signal });
   view.addEventListener("change", () => void load());
   const move = (direction) => { date.value = view.value === "month" ? new Date(Date.UTC(Number(date.value.slice(0, 4)), Number(date.value.slice(5, 7)) - 1 + direction, 1)).toISOString().slice(0, 10) : addDays(date.value, direction * duration()); void load(); };
   previous.addEventListener("click", () => move(-1));
   next.addEventListener("click", () => move(1));
   today.addEventListener("click", () => { date.value = dateAt(Date.now(), property().timezone); void load(); });
-  add.addEventListener("click", () => openEditor());
+  add.addEventListener("click", () => { if (!propertySelect.value) { status.textContent = "Choose a specific property before creating a reservation."; return; } openEditor(); });
   await load();
 }
