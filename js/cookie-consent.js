@@ -7,16 +7,27 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
 
 (() => {
   // A page whose layout direction differs from its text names its locale.
-  const pageLocale = document.documentElement.dataset.cookieLocale || document.documentElement.lang || "en";
-  const copy = window.WIFIGATE_COOKIE_COPY?.[pageLocale] || window.WIFIGATE_COOKIE_COPY.en;
+  const requestedLocale = document.documentElement.dataset.cookieLocale || document.documentElement.lang || "en";
+  const pageLocale = Object.hasOwn(window.WIFIGATE_COOKIE_COPY, requestedLocale) ? requestedLocale : "en";
+  const copy = window.WIFIGATE_COOKIE_COPY[pageLocale];
   const isRtl = pageLocale === "he" || pageLocale === "ar";
   const locale = pageLocale === "en" ? "" : `/${pageLocale.toLowerCase()}`;
+  const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  })[character]);
+  const safe = Object.fromEntries(Object.entries(copy).map(([key, value]) => [key, escapeHtml(value)]));
   const consent = readConsent();
   let currentConsent = consent;
   let analyticsLoaded = false;
   let panel;
   let details;
   let analyticsInput;
+
+  function syncBannerOffset() {
+    const visible = panel && !panel.hidden;
+    document.body.classList.toggle("has-cookie-banner", Boolean(visible));
+    document.body.style.setProperty("--cookie-banner-height", visible ? `${Math.ceil(panel.getBoundingClientRect().height)}px` : "0px");
+  }
 
   function readConsent() {
     try {
@@ -82,6 +93,8 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
     if (!currentConsent || !panel) return;
     panel.hidden = true;
     details.hidden = true;
+    panel.classList.remove("is-customizing");
+    syncBannerOffset();
     document.querySelector("[data-cookie-settings]")?.focus();
   }
 
@@ -90,17 +103,20 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
     applyConsent(analytics);
     panel.hidden = true;
     details.hidden = true;
+    panel.classList.remove("is-customizing");
+    syncBannerOffset();
   }
 
   function openPanel(showDetails = false) {
     analyticsInput.checked = currentConsent?.analytics === true;
     details.hidden = !showDetails;
-    panel.querySelector("[data-cookie-settings-open]").hidden = showDetails;
+    panel.classList.toggle("is-customizing", showDetails);
     panel.querySelector("[data-cookie-accept]").hidden = showDetails;
     panel.querySelector("[data-cookie-save]").hidden = !showDetails;
     panel.querySelector("[data-cookie-close]").hidden = !currentConsent;
     panel.hidden = false;
-    panel.querySelector(showDetails ? "[data-cookie-save]" : "[data-cookie-settings-open]")?.focus();
+    syncBannerOffset();
+    panel.querySelector(showDetails ? "[data-cookie-analytics]" : "[data-cookie-reject]")?.focus();
   }
 
   function init() {
@@ -123,43 +139,32 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
     panel.hidden = true;
     panel.innerHTML = `
       <div class="cookie-consent__heading">
-        <span class="cookie-consent__mark" aria-hidden="true">◈</span>
-        <h2 id="cookie-consent-title">${copy.title}</h2>
-        <button class="cookie-consent__close" type="button" data-cookie-close aria-label="${copy.close}" hidden>×</button>
+        <h2 id="cookie-consent-title">${safe.title}</h2>
+        <button class="cookie-consent__close" type="button" data-cookie-close aria-label="${safe.close}" hidden>×</button>
       </div>
-      <p class="cookie-consent__description">${copy.description}</p>
-      <p class="cookie-consent__links"><a href="${locale}/privacy-policy/">${copy.privacy}</a><span aria-hidden="true">·</span><a href="${locale}/cookies/">${copy.cookies}</a></p>
+      <p class="cookie-consent__description">${safe.banner} <a href="${locale}/privacy-policy/">${safe.privacy}</a></p>
       <div class="cookie-consent__details" data-cookie-details hidden>
         <div class="cookie-consent__category">
-          <span><strong>${copy.necessary}</strong><small>${copy.necessaryHelp}</small></span>
-          <span class="cookie-consent__always">${copy.alwaysOn}</span>
+          <span><strong>${safe.necessary}</strong><small>${safe.necessaryHelp}</small></span>
+          <span class="cookie-consent__always">${safe.alwaysOn}</span>
         </div>
         <label class="cookie-consent__category" for="cookie-analytics">
-          <span><strong>${copy.analytics}</strong><small>${copy.analyticsHelp}</small></span>
+          <span><strong>${safe.analytics}</strong><small>${safe.analyticsHelp}</small></span>
           <input id="cookie-analytics" type="checkbox" data-cookie-analytics>
         </label>
       </div>
       <div class="cookie-consent__actions">
-        <button type="button" class="cookie-consent__button cookie-consent__button--primary" data-cookie-reject>${copy.reject}</button>
-        <button type="button" class="cookie-consent__button cookie-consent__button--outline" data-cookie-settings-open>${copy.settings}</button>
-        <button type="button" class="cookie-consent__button cookie-consent__button--primary" data-cookie-accept>${copy.accept}</button>
-        <button type="button" class="cookie-consent__button cookie-consent__button--primary" data-cookie-save hidden>${copy.save}</button>
+        <button type="button" class="cookie-consent__button cookie-consent__button--primary" data-cookie-reject>${safe.reject}</button>
+        <button type="button" class="cookie-consent__button cookie-consent__button--primary" data-cookie-accept>${safe.accept}</button>
+        <button type="button" class="cookie-consent__button cookie-consent__button--primary" data-cookie-save hidden>${safe.save}</button>
       </div>`;
     document.body.append(panel);
     details = panel.querySelector("[data-cookie-details]");
     analyticsInput = panel.querySelector("[data-cookie-analytics]");
-    const settingsButton = panel.querySelector("[data-cookie-settings-open]");
     const acceptButton = panel.querySelector("[data-cookie-accept]");
     const saveButton = panel.querySelector("[data-cookie-save]");
     const closeButton = panel.querySelector("[data-cookie-close]");
 
-    settingsButton.addEventListener("click", () => {
-      details.hidden = false;
-      settingsButton.hidden = true;
-      acceptButton.hidden = true;
-      saveButton.hidden = false;
-      analyticsInput.focus();
-    });
     panel.querySelector("[data-cookie-reject]").addEventListener("click", () => save(false));
     acceptButton.addEventListener("click", () => save(true));
     saveButton.addEventListener("click", () => save(analyticsInput.checked));
@@ -174,6 +179,8 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
       panel.focus({ preventScroll: true });
     }
     closeButton.hidden = !currentConsent;
+    syncBannerOffset();
+    window.addEventListener("resize", syncBannerOffset);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
