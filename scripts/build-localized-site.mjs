@@ -1236,6 +1236,12 @@ function updateSharedHeader($, homeData, locale, pageKey) {
 
 function serialize($, homeData, locale, pageKey = "home") {
   updateSharedHeader($, homeData, locale, pageKey);
+  if ($(".site-footer").length) {
+    const prefix = buildAssetPrefix(locale, pageKey);
+    $("head").append(`<link rel="stylesheet" href="${prefix}css/cookie-consent.css?v=20261005a">`);
+    $("body").append(`<script src="${prefix}js/cookie-consent-copy.js?v=20261005a" defer></script>`);
+    $("body").append(`<script src="${prefix}js/cookie-consent.js?v=20261005a" defer></script>`);
+  }
   const html = $.html({ decodeEntities: false }).replace(/[ \t]+(?=\r?\n|$)/g, "");
   return ensureTrailingNewline(html);
 }
