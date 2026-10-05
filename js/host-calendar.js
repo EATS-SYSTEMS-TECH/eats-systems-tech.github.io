@@ -1,3 +1,4 @@
+import { calendarSpans } from "./host-calendar-layout.js";
 import { portalRequest } from "./api/index.js";
 import { readHostPages } from "./host-pages.js";
 import { node, field } from "./host-ui.js";
@@ -32,12 +33,12 @@ export async function renderHostCalendar({ container, user, organization, proper
   const path = (suffix = "") => `/api/v1/organizations/${encodeURIComponent(organization.id)}/reservations${suffix}`;
   const canWrite = ["owner", "admin", "staff"].includes(organization.membership.role);
   const section = node("section", undefined, { "aria-label": "Reservation calendar", class: "host-calendar" });
-  section.append(node("h2", "Reservation calendar"));
+  const rangeTitle = node("h2", "Reservation calendar"); section.append(rangeTitle);
   const controls = node("form", undefined, { class: "calendar-controls" });
   const propertySelect = field(controls, "Calendar property", "propertyId", properties[0].id, "text", [["", "All properties"], ...properties.map((item) => [item.id, item.name])]);
   const roomFilter = field(controls, "Calendar room", "roomId", "", "text", [["", "All rooms"]]);
   const mapRooms = () => { roomFilter.replaceChildren(node("option", "All rooms", { value: "" }), ...rooms.filter(item => !propertySelect.value || item.propertyId === propertySelect.value).map(item => node("option", item.name, { value: item.id }))); }; mapRooms();
-  const view = field(controls, "Calendar view", "view", "week", "text", [["week", "Week"], ["two-week", "Two weeks"], ["month", "Month"]]);
+  const view = field(controls, "Calendar view", "view", "week", "text", [["week", "Week"], ["two-week", "Two weeks"], ["three-week", "Three weeks"], ["month", "Month"]]);
   const date = field(controls, "Start date", "date", dateAt(Date.now(), properties[0].timezone), "date");
   const search = field(controls, "Search guest or reference", "q"); search.required = false;
   const filter = field(controls, "Reservation status", "status", "", "text", [["", "All states"], ...states.map((state) => [state, state])]); filter.required = false;
@@ -49,9 +50,10 @@ export async function renderHostCalendar({ container, user, organization, proper
   navigation.append(previous, today, next);
   const add = node("button", "New reservation", { type: "button" });
   const status = node("p", "", { role: "status", "aria-live": "polite" });
+  const refreshed = node("p", "", {class: "calendar-refreshed"});
   const editor = node("div");
   const grid = node("div", undefined, { class: "calendar-scroll", tabindex: "0", "aria-label": "Calendar table" });
-  section.append(controls, navigation, ...(canWrite ? [add] : []), status, editor, grid);
+  section.append(controls, navigation, ...(canWrite ? [add] : []), status, refreshed, editor, grid);
   container.append(section);
   const systemsPage = await readHostPages(user, `/api/v1/organizations/${encodeURIComponent(organization.id)}/systems`, current);
   if (!current()) return;
@@ -60,8 +62,9 @@ export async function renderHostCalendar({ container, user, organization, proper
   let cursor;
   let activeRange;
   let loading = 0;
+  const collapsedProperties = new Set();
   const property = () => properties.find((item) => item.id === propertySelect.value) ?? { name: "All properties", timezone: organization.timezone ?? "UTC" };
-  const duration = () => view.value === "week" ? 7 : view.value === "two-week" ? 14 : new Date(Date.UTC(Number(date.value.slice(0, 4)), Number(date.value.slice(5, 7)), 0)).getUTCDate();
+  const duration = () => view.value === "week" ? 7 : view.value === "two-week" ? 14 : view.value === "three-week" ? 21 : new Date(Date.UTC(Number(date.value.slice(0, 4)), Number(date.value.slice(5, 7)), 0)).getUTCDate();
   const resolve = async (value, disambiguation = "reject", propertyId = propertySelect.value) => (await portalRequest(user, path("/time-zone/resolve"), "POST", { ...(propertyId ? { propertyId } : {}), localTime: value, disambiguation })).instant;
   function openEditor(record) {
     editor.replaceChildren();
@@ -157,25 +160,45 @@ export async function renderHostCalendar({ container, user, organization, proper
     table.append(node("caption", `${property().name} · ${property().timezone} · ${view.selectedOptions[0].textContent}`));
     const header = node("tr"); header.append(node("th", "Room", { scope: "col" }));
     for (let index = 0; index < days; index++) header.append(node("th", addDays(date.value, index), { scope: "col" }));
+    for (const cell of header.children) if (cell.textContent === dateAt(Date.now(), property().timezone)) cell.classList.add("calendar-today");
     const head = node("thead"); head.append(header); table.append(head);
     const body = node("tbody");
     const visibleRooms = rooms.filter((item) => (!propertySelect.value || item.propertyId === propertySelect.value) && (!roomFilter.value || item.id === roomFilter.value));
-    for (const booking of data) if (!visibleRooms.some((item) => item.id === booking.roomId)) visibleRooms.push({ id: booking.roomId, name: `${booking.roomName || booking.roomId} (archived)` });
+    for (const booking of data) if (!visibleRooms.some((item) => item.id === booking.roomId)) visibleRooms.push({ id: booking.roomId, propertyId: booking.propertyId, name: `${booking.roomName || booking.roomId} (archived)` });
+    visibleRooms.sort((a,b) => (a.propertyId ?? "").localeCompare(b.propertyId ?? "") || a.name.localeCompare(b.name));
+    let lastProperty;
     for (const room of visibleRooms) {
-      const row = node("tr"); row.append(node("th", room.name, { scope: "row" }));
-      for (let index = 0; index < days; index++) {
-        const day = addDays(date.value, index);
-        const cell = node("td");
-        const matches = data.filter((item) => item.roomId === room.id && dateAt(item.startsAt, property().timezone) <= day && dateAt(new Date(Date.parse(item.endsAt) - 1), property().timezone) >= day);
-        for (const reservation of matches) {
-          const button = node("button", `${reservation.guest.name} · ${reservation.status}`, { type: "button", class: `reservation-chip reservation-${reservation.status}`, "aria-label": `${reservation.guest.name}, ${reservation.status}, ${room.name}, ${day}` });
-          button.addEventListener("click", () => openEditor(reservation)); cell.append(button);
-        }
-        if (!matches.length) cell.append(node("span", "—"));
-        row.append(cell);
+      const group = room.propertyId ?? "archived";
+      if (group !== lastProperty) {
+        lastProperty = group;
+        const groupRow = node("tr"), groupCell = node("th", undefined, {colspan:String(days + 1),class:"calendar-property-group"});
+        const toggle = node("button", properties.find(item => item.id === group)?.name ?? "Archived property", {type:"button","aria-expanded":String(!collapsedProperties.has(group))});
+        toggle.setAttribute("aria-label", toggle.textContent);
+        toggle.addEventListener("click", () => {
+          if (collapsedProperties.has(group)) collapsedProperties.delete(group); else collapsedProperties.add(group);
+          toggle.setAttribute("aria-expanded", String(!collapsedProperties.has(group)));
+          for (const item of body.children) if (item.dataset.calendarProperty === group) item.hidden = collapsedProperties.has(group);
+        });
+        groupCell.append(toggle); groupRow.append(groupCell); body.append(groupRow);
       }
-      body.append(row);
+      const row = node("tr"); row.dataset.calendarProperty = group; row.hidden = collapsedProperties.has(group); row.append(node("th", room.name, { scope: "row" }));
+      const cell = node("td", undefined, { colspan: String(days), class: "calendar-room-timeline" });
+      const timeline = node("div", undefined, { class: "calendar-timeline" });
+      timeline.style.setProperty("--calendar-days", String(days));
+      const {spans, lanes} = calendarSpans(data.filter(item => item.roomId === room.id), date.value, days, dateAt, property().timezone);
+      timeline.style.gridTemplateRows = `repeat(${lanes}, 64px)`;
+      for (const {record: reservation, start, end, lane} of spans) {
+        const button = node("button", undefined, { type: "button", class: `reservation-chip reservation-${reservation.status}`, "aria-label": `${reservation.guest.name}, ${reservation.status}, ${room.name}, ${reservation.startsAt} to ${reservation.endsAt}` });
+        button.style.gridColumn = `${start + 1} / ${end + 1}`;
+        button.style.gridRow = String(lane + 1);
+        button.append(node("strong", reservation.guest.name), node("small", `${reservation.guest.email || reservation.externalReference || ""} · ${reservation.status}`));
+        button.title = `${reservation.guest.name} · ${reservation.status} · ${localAt(reservation.startsAt, property().timezone)} — ${localAt(reservation.endsAt, property().timezone)}`;
+        button.addEventListener("click", () => openEditor(reservation)); timeline.append(button);
+      }
+      if (!spans.length) timeline.append(node("span", "No reservations", {class: "calendar-empty-room"}));
+      cell.append(timeline); row.append(cell); body.append(row);
     }
+    rangeTitle.textContent = `${date.value} — ${addDays(date.value, days - 1)}`;
     table.append(body); grid.replaceChildren(table);
     const reference = document.querySelector(".calendar-reference");
     if (reference) reference.hidden = true;
@@ -201,7 +224,7 @@ export async function renderHostCalendar({ container, user, organization, proper
       if (!current() || request !== loading) return;
       data = more ? [...data, ...response.items] : response.items;
       cursor = response.nextCursor;
-      draw(); status.textContent = `${data.length} reservation${data.length === 1 ? "" : "s"}`;
+      draw(); status.textContent = `${data.length} reservation${data.length === 1 ? "" : "s"}`; refreshed.textContent = `Refreshed ${new Date().toLocaleTimeString()}${cursor ? " · More results available; count is partial" : ""}`;
     } catch (error) { if (current() && request === loading) status.textContent = errors[error.code] || "The calendar could not be loaded. Update it to retry."; }
   }
   controls.addEventListener("submit", (event) => { event.preventDefault(); editor.replaceChildren(); void load(); });
