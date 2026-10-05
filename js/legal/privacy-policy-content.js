@@ -12,7 +12,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": ""
     },
@@ -64,7 +64,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -161,7 +161,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Este documento está disponible en inglés. La versión en inglés es la versión jurídicamente vinculante."
     },
@@ -214,7 +214,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -311,7 +311,7 @@
       "eyebrow": "Juridique",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ce document est disponible en anglais. La version anglaise est la version juridiquement contraignante."
     },
@@ -364,7 +364,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -461,7 +461,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dieses Dokument ist auf Englisch verfügbar. Die englische Fassung ist die rechtsverbindliche Fassung."
     },
@@ -514,7 +514,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -611,7 +611,7 @@
       "eyebrow": "משפטי",
       "title": "מדיניות פרטיות",
       "subtitle": "מדיניות פרטיות זו מסבירה איזה מידע אישי WIFIGATE מעבדת, לשם מה, עם מי הוא משותף, כמה זמן הוא נשמר, ואילו בחירות וזכויות עומדות לרשותכם.",
-      "updated": "תאריך תחילה: 5 באוקטובר 2026",
+      "updated": "תאריך תחילה: 6 באוקטובר 2026",
       "owner": "המפעילה: EATS SYSTEMS TECH",
       "languageNote": ""
     },
@@ -663,7 +663,7 @@
         "b8": "סטטיסטיקות שימוש. האפליקציה משתמשת ב‑Google Firebase Analytics עם אירועים הנאספים אוטומטית בלבד, כגון פתיחת האפליקציה, הפעלות, גרסת האפליקציה, דגם המכשיר, מערכת ההפעלה ומדינה או אזור משוערים הנגזרים מכתובת ה‑IP. איננו מגדירים מזהה משתמש, איננו רושמים אירועים מותאמים, ומזהי פרסום, אחסון לצורכי פרסום והתאמה אישית של מודעות כבויים.",
         "b9": "תקינות האפליקציה ועדכוני קושחה. כשהאפליקציה בודקת או מורידה קושחה לבקר, היא שולחת אסימון תקינות של Firebase App Check (Google Play Integrity או Apple App Attest), יחד עם ערוץ העדכון וסוג החומרה. ספקי הענן שלנו מעבדים את כתובת ה‑IP ואת נתוני הבקשה הטכניים הדרושים למסירת הקובץ.",
         "b10": "פורטל האינטרנט. אם אושרה לכם גישה לפורטל, אנו שומרים את מזהה החשבון, השם, כתובת הדוא\"ל, האם הדוא\"ל מאומת, ספקי הכניסה, סטטוס הגישה והתפקיד, וחותמות זמן. רשומות ביקורת אבטחה שומרות מזהה וגיבוב חד‑כיווני של כתובת הדוא\"ל, ולא את הדוא\"ל עצמו.",
-        "b11": "האתר. גלישה באתר אינה מחייבת חשבון. ספק האחסון שלנו מעבד נתונים טכניים כגון כתובת ה־IP כדי להציג את הדפים. האתר שומר את בחירות השפה, הנגישות והעוגיות שלכם. אם תאשרו מדידה, Google Analytics ימדוד ביקורים, צפיות בדפים ונתונים טכניים על המכשיר כדי לסייע לנו לשפר את האתר. תוכלו לבטל הסכמה דרך ״הגדרות עוגיות״ בתחתית האתר. הפרטים מופיעים במדיניות העוגיות.",
+        "b11": "האתר. גלישה באתר אינה מחייבת חשבון. ספק האחסון שלנו מעבד נתונים טכניים כגון כתובת ה־IP כדי להציג את הדפים. האתר שומר את בחירות הנגישות והעוגיות שלכם, ואינו שומר בחירת שפה. אם תאשרו מדידה, Google Analytics ימדוד ביקורים, צפיות בדפים ונתונים טכניים על המכשיר כדי לסייע לנו לשפר את האתר. תוכלו לבטל הסכמה דרך ״הגדרות עוגיות״ בתחתית האתר. הפרטים מופיעים במדיניות העוגיות.",
         "b12": "פניות. אם תפנו אלינו בדוא\"ל או ב‑WhatsApp, נעבד את ההודעה, את פרטי ההתקשרות ואת המידע שתבחרו למסור."
       },
       "use": {
@@ -760,7 +760,7 @@
       "eyebrow": "Legaal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dit document is beschikbaar in het Engels. De Engelse versie is de juridisch bindende versie."
     },
@@ -813,7 +813,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -910,7 +910,7 @@
       "eyebrow": "Legale",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Questo documento è disponibile in inglese. La versione inglese è quella giuridicamente vincolante."
     },
@@ -963,7 +963,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -1060,7 +1060,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Este documento está disponível em inglês. A versão em inglês é a versão juridicamente vinculativa."
     },
@@ -1113,7 +1113,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -1210,7 +1210,7 @@
       "eyebrow": "Informacje prawne",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ten dokument jest dostępny w języku angielskim. Wersja angielska jest wersją prawnie wiążącą."
     },
@@ -1263,7 +1263,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -1360,7 +1360,7 @@
       "eyebrow": "Lovlig",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dette dokumentet er tilgjengelig på engelsk. Den engelske versjonen er den juridisk bindende versjonen."
     },
@@ -1413,7 +1413,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -1510,7 +1510,7 @@
       "eyebrow": "Právní informace",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tento dokument je k dispozici v angličtině. Právně závazná je anglická verze."
     },
@@ -1563,7 +1563,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -1660,7 +1660,7 @@
       "eyebrow": "Правовая информация",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Этот документ доступен на английском языке. Юридически обязывающей является английская версия."
     },
@@ -1713,7 +1713,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -1810,7 +1810,7 @@
       "eyebrow": "юридичний",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Цей документ доступний англійською мовою. Юридично обов'язковою є англійська версія."
     },
@@ -1863,7 +1863,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -1960,7 +1960,7 @@
       "eyebrow": "Yasal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Bu belge İngilizce olarak sunulmaktadır. Hukuken bağlayıcı olan İngilizce sürümdür."
     },
@@ -2013,7 +2013,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -2110,7 +2110,7 @@
       "eyebrow": "قانوني",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "هذا المستند متاح باللغة الإنجليزية. النسخة الإنجليزية هي النسخة الملزمة قانونيًا."
     },
@@ -2163,7 +2163,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -2260,7 +2260,7 @@
       "eyebrow": "कानूनी",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "यह दस्तावेज़ अंग्रेज़ी में उपलब्ध है। कानूनी रूप से बाध्यकारी संस्करण अंग्रेज़ी संस्करण है।"
     },
@@ -2313,7 +2313,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -2410,7 +2410,7 @@
       "eyebrow": "আইনি",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "এই নথিটি ইংরেজিতে উপলব্ধ। ইংরেজি সংস্করণটিই আইনগতভাবে বাধ্যতামূলক সংস্করণ।"
     },
@@ -2463,7 +2463,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -2560,7 +2560,7 @@
       "eyebrow": "कायदेशीर",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "हा दस्तऐवज इंग्रजीमध्ये उपलब्ध आहे. इंग्रजी आवृत्ती ही कायदेशीररित्या बंधनकारक आवृत्ती आहे."
     },
@@ -2613,7 +2613,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -2710,7 +2710,7 @@
       "eyebrow": "చట్టపరమైన",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "ఈ పత్రం ఆంగ్లంలో అందుబాటులో ఉంది. చట్టపరంగా కట్టుబడి ఉండే సంస్కరణ ఆంగ్ల సంస్కరణ."
     },
@@ -2763,7 +2763,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -2860,7 +2860,7 @@
       "eyebrow": "法律",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "本文件以英文提供。英文版本为具有法律约束力的版本。"
     },
@@ -2913,7 +2913,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -3010,7 +3010,7 @@
       "eyebrow": "法律",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "本文件以英文提供。英文版本為具有法律約束力的版本。"
     },
@@ -3063,7 +3063,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -3160,7 +3160,7 @@
       "eyebrow": "法的",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "この文書は英語で提供されています。法的拘束力を持つのは英語版です。"
     },
@@ -3213,7 +3213,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -3310,7 +3310,7 @@
       "eyebrow": "법적",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "이 문서는 영어로 제공됩니다. 법적 구속력이 있는 버전은 영어 버전입니다."
     },
@@ -3363,7 +3363,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -3460,7 +3460,7 @@
       "eyebrow": "Juridisk",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dette dokument er tilgængeligt på engelsk. Den engelske version er den juridisk bindende version."
     },
@@ -3513,7 +3513,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -3610,7 +3610,7 @@
       "eyebrow": "Juridiskt",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Detta dokument finns på engelska. Den engelska versionen är den juridiskt bindande versionen."
     },
@@ -3663,7 +3663,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -3760,7 +3760,7 @@
       "eyebrow": "Jogi",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ez a dokumentum angol nyelven érhető el. A jogilag kötelező változat az angol változat."
     },
@@ -3813,7 +3813,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -3910,7 +3910,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Το παρόν έγγραφο διατίθεται στα αγγλικά. Η αγγλική έκδοση είναι η νομικά δεσμευτική έκδοση."
     },
@@ -3963,7 +3963,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -4060,7 +4060,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Acest document este disponibil în limba engleză. Versiunea în limba engleză este versiunea obligatorie din punct de vedere juridic."
     },
@@ -4113,7 +4113,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -4210,7 +4210,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ovaj je dokument dostupan na engleskom jeziku. Pravno obvezujuća je verzija na engleskom jeziku."
     },
@@ -4263,7 +4263,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -4360,7 +4360,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tämä asiakirja on saatavilla englanniksi. Oikeudellisesti sitova on englanninkielinen versio."
     },
@@ -4413,7 +4413,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -4510,7 +4510,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Този документ е достъпен на английски език. Правно обвързваща е версията на английски език."
     },
@@ -4563,7 +4563,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -4660,7 +4660,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Овај документ је доступан на енглеском језику. Правно обавезујућа је верзија на енглеском језику."
     },
@@ -4713,7 +4713,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -4810,7 +4810,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tento dokument je k dispozícii v angličtine. Právne záväzná je anglická verzia."
     },
@@ -4863,7 +4863,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -4960,7 +4960,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ta dokument je na voljo v angleščini. Pravno zavezujoča je angleška različica."
     },
@@ -5013,7 +5013,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -5110,7 +5110,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggris. Versi bahasa Inggris adalah versi yang mengikat secara hukum."
     },
@@ -5163,7 +5163,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -5260,7 +5260,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "เอกสารนี้มีให้บริการเป็นภาษาอังกฤษ ฉบับภาษาอังกฤษเป็นฉบับที่มีผลผูกพันทางกฎหมาย"
     },
@@ -5313,7 +5313,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -5410,7 +5410,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Tài liệu này được cung cấp bằng tiếng Anh. Bản tiếng Anh là bản có giá trị ràng buộc về mặt pháp lý."
     },
@@ -5463,7 +5463,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -5560,7 +5560,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Dokumen ini tersedia dalam bahasa Inggeris. Versi bahasa Inggeris ialah versi yang mengikat dari segi undang-undang."
     },
@@ -5613,7 +5613,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {
@@ -5710,7 +5710,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "subtitle": "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-      "updated": "Effective date: October 5, 2026",
+      "updated": "Effective date: October 6, 2026",
       "owner": "Operator: EATS SYSTEMS TECH",
       "languageNote": "Ang dokumentong ito ay makukuha sa Ingles. Ang bersyong Ingles ang may bisang legal."
     },
@@ -5763,7 +5763,7 @@
         "b8": "Usage statistics. The app uses Google Firebase Analytics with automatically collected events only, such as app opens, sessions, app version, device model, operating system and approximate country or region derived from the IP address. We do not set a user identifier, we do not log custom events, and advertising identifiers, advertising storage and ad personalisation are disabled.",
         "b9": "App integrity and firmware updates. When the app checks for or downloads firmware for a controller, it sends an app-integrity token from Firebase App Check (Google Play Integrity or Apple App Attest) together with the update channel and hardware variant. Our cloud providers process the IP address and technical request data needed to deliver the file.",
         "b10": "Web portal. If you are approved to use the portal, we store your account identifier, name, email address, whether your email is verified, your sign-in providers, your access status and role, and timestamps. Security audit records store an identifier and a one-way hash of your email address rather than the email itself.",
-        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your language, accessibility and cookie choices. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
+        "b11": "Website. Browsing does not require an account. Our hosting provider processes technical data such as your IP address to deliver pages. The website stores your accessibility and cookie choices; it does not store a language choice. If you allow analytics, Google Analytics measures visits, page views and technical device information to help us improve the website. You can withdraw consent through Cookie settings in the footer. Details are in our Cookie Policy.",
         "b12": "Communications. If you contact us by email or WhatsApp, we process your message, your contact details and the information you choose to share."
       },
       "use": {

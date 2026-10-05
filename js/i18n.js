@@ -257,14 +257,13 @@ function setupLanguageSelector() {
     }
   });
 
-  const savedLang = resolveLanguage(
-    localStorage.getItem("language") ||
-      document.documentElement.getAttribute("data-selected-language") ||
+  const selectedLang = resolveLanguage(
+    document.documentElement.getAttribute("data-selected-language") ||
       currentLang ||
       "en"
   );
   const selectedOption =
-    dropdown.querySelector(`[data-lang="${savedLang}"]`) ||
+    dropdown.querySelector(`[data-lang="${selectedLang}"]`) ||
     dropdown.querySelector('[data-lang="en"]');
 
   if (!selectedOption) {
@@ -287,7 +286,6 @@ function changeLanguage(lang) {
   currentLang = requestedLang;
   window.currentLanguage = requestedLang;
   window.resolvedLanguage = resolvedLang;
-  localStorage.setItem("language", requestedLang);
   document.documentElement.setAttribute("lang", resolvedLang);
   document.documentElement.setAttribute("data-selected-language", requestedLang);
 

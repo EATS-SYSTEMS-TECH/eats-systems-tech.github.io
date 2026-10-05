@@ -15,6 +15,7 @@ const defaultLocale = "en";
 const nowDate = new Date().toISOString().slice(0, 10);
 const guestInvitesPageKey = "automation";
 const utilityPageKeys = ["wifigate-link", "wifigate-api"];
+const COOKIE_CONSENT_VERSION = "20261006a";
 
 const homeTemplatePath = path.join(repoRoot, "templates", "index.template.html");
 const homeCopyDirectory = path.join(repoRoot, "scripts", "homepage-copy");
@@ -71,7 +72,6 @@ const homeRuntimeScriptsToRemove = [
   "js/i18n.js",
   "js/application-stories.js",
   "js/application-stories-extra.js",
-  "js/locale-redirect.js",
   "js/language-selector.js",
 ];
 
@@ -83,18 +83,15 @@ const legalRuntimeScriptsToRemove = [
 ];
 
 const homeRuntimeScriptsToAdd = [
-  "/js/locale-redirect.js?v=20260620a",
-  "/js/language-selector.js?v=20260902a",
+  "/js/language-selector.js?v=20261006a",
 ];
 
 const legalRuntimeScriptsToAdd = [
-  "/js/locale-redirect.js?v=20260620a",
-  "/js/language-selector.js?v=20260902a",
+  "/js/language-selector.js?v=20261006a",
 ];
 
 const nicheRuntimeScriptsToAdd = [
-  "/js/locale-redirect.js?v=20260620a",
-  "/js/language-selector.js?v=20260902a",
+  "/js/language-selector.js?v=20261006a",
 ];
 
 const pageImages = {
@@ -1236,16 +1233,16 @@ function updateSharedHeader($, homeData, locale, pageKey) {
 
 function serialize($, homeData, locale, pageKey = "home") {
   updateSharedHeader($, homeData, locale, pageKey);
-  if ($(".site-footer").length) {
-    const settingsLabel = homeData.cookieCopy[locale].reopen;
-    $(".cookie-settings-trigger")
-      .text(settingsLabel)
-      .attr({ "aria-label": settingsLabel, dir: isRtl(locale) ? "rtl" : "ltr" });
-    const prefix = buildAssetPrefix(locale, pageKey);
-    $("head").append(`<link rel="stylesheet" href="${prefix}css/cookie-consent.css?v=20261005a">`);
-    $("body").append(`<script src="${prefix}js/cookie-consent-copy.js?v=20261005a" defer></script>`);
-    $("body").append(`<script src="${prefix}js/cookie-consent.js?v=20261005a" defer></script>`);
-  }
+  // Every published page asks for cookie consent in its own language; the
+  // footer's "Cookie settings" button reopens the choice.
+  const settingsLabel = homeData.cookieCopy[locale].reopen;
+  $(".cookie-settings-trigger")
+    .text(settingsLabel)
+    .attr({ "aria-label": settingsLabel, dir: isRtl(locale) ? "rtl" : "ltr" });
+  const prefix = buildAssetPrefix(locale, pageKey);
+  $("head").append(`<link rel="stylesheet" href="${prefix}css/cookie-consent.css?v=${COOKIE_CONSENT_VERSION}">`);
+  $("body").append(`<script src="${prefix}js/cookie-consent-copy.js?v=${COOKIE_CONSENT_VERSION}" defer></script>`);
+  $("body").append(`<script src="${prefix}js/cookie-consent.js?v=${COOKIE_CONSENT_VERSION}" defer></script>`);
   const html = $.html({ decodeEntities: false }).replace(/[ \t]+(?=\r?\n|$)/g, "");
   return ensureTrailingNewline(html);
 }
