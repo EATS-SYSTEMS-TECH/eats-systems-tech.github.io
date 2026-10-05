@@ -384,15 +384,15 @@ export default {
         "WIFIGATE apporte un contrôle d'accès intelligent aux terrains de padel, salles de sport et complexes sportifs : entrée par téléphone, autorisations temporaires ou permanentes.",
       imageAlt: "Une joueuse de padel ouvre l'entrée d'un terrain de sport éclairé avec son téléphone",
     },
-    "self-storage": {
-      "label": "Self-stockage",
-      "title": "Accès intelligent pour centres de self-stockage",
-      "heroLead": "Chaque locataire ouvre le portail du site et la porte du bâtiment depuis son propre téléphone, uniquement aux horaires que vous autorisez. Quand la location prend fin, son accès aussi : aucune clé à récupérer, aucun code à changer.",
+    "storage-lockers": {
+      "label": "Stockage et casiers",
+      "title": "Accès intelligent pour espaces de stockage et casiers",
+      "heroLead": "Chaque locataire ouvre le portail du site, la porte du bâtiment et son propre casier depuis son téléphone, uniquement aux horaires que vous autorisez. Quand la location prend fin, son accès aussi : aucune clé à récupérer, aucun code à changer.",
       "highlights": [
         {
           "icon": "users",
           "title": "Une autorisation personnelle pour chaque locataire",
-          "text": "Plus de code de portail partagé dont les anciens locataires se souviennent encore. Chaque locataire dispose de son propre accès, et le retirer ne prend qu'un instant à la fin du contrat ou en cas d'impayé."
+          "text": "Plus de code partagé dont les anciens locataires se souviennent encore. Chaque locataire dispose de son propre accès, et le retirer ne prend qu'un instant à la fin du contrat ou en cas d'impayé."
         },
         {
           "icon": "clock",
@@ -405,20 +405,20 @@ export default {
           "text": "Chaque ouverture est enregistrée avec la personne et l'heure : une question sur une visite trouve sa réponse dans l'historique plutôt que dans les images de vidéosurveillance."
         }
       ],
-      "paragraph": "Les centres de self-stockage reposent généralement sur des codes de portail partagés, des claviers à code et des clés physiques qui sont copiés, transmis et rarement changés. WIFIGATE fait passer l'accès sur le téléphone : chaque locataire dispose d'une autorisation personnelle pour le portail du site, l'entrée du bâtiment et, lorsqu'elle est installée, la porte motorisée de son box, limitée aux horaires que vous choisissez et retirée dès la fin de la location. Le téléphone communique directement avec le boîtier installé sur place, sans carte SIM ni connexion Internet au portail, et sans abonnement mensuel pour un usage standard.",
+      "paragraph": "Les sites de stockage et les espaces de casiers reposent généralement sur des codes partagés, des claviers à code et des clés physiques qui sont copiés, transmis et rarement changés. WIFIGATE fait passer l'accès sur le téléphone : chaque locataire dispose d'une autorisation personnelle pour le portail du site, l'entrée du bâtiment et, lorsqu'il est installé, un box ou un casier à verrouillage électrique, limitée aux horaires que vous choisissez et retirée dès la fin de la location. Le téléphone communique directement avec le boîtier installé sur place, sans carte SIM ni connexion Internet à la porte, et sans abonnement mensuel pour un usage standard.",
       "bullets": [
-        "Ouverture du portail du site et de la porte du bâtiment depuis le téléphone",
+        "Ouverture du portail du site, de la porte du bâtiment et du casier depuis le téléphone",
         "Une autorisation personnelle pour chaque locataire",
         "Accès limité aux horaires d'ouverture ou à une plage sur mesure",
         "Accès ponctuel pour les déménageurs et les proches",
         "Retrait de l'accès dès la fin de la location",
         "Historique de qui a ouvert et quand",
         "Aucun code partagé, clavier ou clé à changer",
-        "Ni carte SIM ni connexion Internet au portail"
+        "Ni carte SIM ni connexion Internet à la porte"
       ],
-      "seoTitle": "Contrôle d'accès intelligent pour le self-stockage | WIFIGATE",
-      "seoDescription": "WIFIGATE donne à chaque locataire de self-stockage un accès personnel par téléphone au portail et aux portes du site, limité aux horaires d'ouverture, enregistré dans un historique et retiré à la fin de la location.",
-      "imageAlt": "Une femme ouvre le portail d'un centre de self-stockage avec son téléphone"
+      "seoTitle": "Contrôle d'accès intelligent pour espaces de stockage et casiers | WIFIGATE",
+      "seoDescription": "WIFIGATE donne à chaque locataire d'un espace de stockage ou d'un casier un accès personnel par téléphone au portail, aux portes et à son casier, limité aux horaires d'ouverture, enregistré dans un historique et retiré à la fin de la location.",
+      "imageAlt": "Une femme ouvre avec son téléphone la porte d'un site de stockage avec casiers et box"
     },
   },
 };
