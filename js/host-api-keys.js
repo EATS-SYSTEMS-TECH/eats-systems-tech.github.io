@@ -15,7 +15,7 @@ export async function renderHostApiKeys({ container, user, organization, isCurre
   const list = node("div"), privateOutput = node("div");
   const form = node("form");
   const name = field(form, "API key name", "name");
-  const scopeOptions = [["guest-invitations:create", "Create guest invitations"]];
+  const scopeOptions = [["guest-invitations:create", "Create guest invitations"], ["reservations:write", "Update reservations"], ["webhooks:receive", "Receive provider webhooks"]];
   const scopes = node("fieldset"), types = node("fieldset");
   scopes.append(node("legend", "Allowed API operations"));
   types.append(node("legend", "Allowed target types"));
