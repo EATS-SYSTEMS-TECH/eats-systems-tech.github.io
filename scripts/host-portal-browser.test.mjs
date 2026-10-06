@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { chromium } from "playwright-core";
 import { join } from "node:path";
-const origin = "http://127.0.0.1:8100";
-const browser = await chromium.launch({ channel: "chrome", headless: true });
+const origin = process.env.WIFIGATE_SITE_ORIGIN ?? "http://127.0.0.1:8100";
+const browser = await chromium.launch({ channel: process.env.WIFIGATE_BROWSER_CHANNEL ?? "chrome", headless: true });
 const active = { role: "user", access: { state: "active" }, mfa: { required: false, enrolled: false, verified: false } };
 async function scenario(options = {}) {
   const state = { ...structuredClone(active), signedIn: true, ...options };
@@ -46,7 +46,7 @@ async function scenario(options = {}) {
     };
     export const getMultiFactorResolver = () => ({hints:[{factorId:"totp",uid:"totp-factor",displayName:"Test authenticator"}],resolveSignIn:async assertion=>{
       if(assertion.code!=="123456") throw Object.assign(new Error("Bad code"),{code:"auth/invalid-verification-code"});
-      verified=true; signedIn=true; await window.fixtureAuthEvent("verified"); await window.fixtureAuthEvent("signed-in"); observer?.(user); return {user};
+      verified=true; await window.fixtureAuthEvent("verified"); if(!signedIn){signedIn=true;await window.fixtureAuthEvent("signed-in");observer?.(user);} return {user};
     }});
     export const multiFactor = () => ({ getSession:async()=>({}),enroll:async assertion=>{
       if(assertion.code!=="123456") throw Object.assign(new Error("Bad code"),{code:"auth/invalid-verification-code"});
@@ -64,6 +64,16 @@ async function scenario(options = {}) {
     if(request.method()==="GET"&&requestPath==="/api/v1/organizations"){await route.fulfill({status:200,json:{organizations:[],nextCursor:null}});return;}
     if(request.method()==="GET"&&requestPath==="/api/v1/auth/invitations"){await route.fulfill({status:200,json:{items:[],nextCursor:null}});return;}
     if (state.errorStatus) { await route.fulfill({ status: state.errorStatus, json: { error: { code: "DEPENDENCY_UNAVAILABLE" } } }); return; }
+    if (requestPath === "/api/v1/platform/me") {
+      let host = state.access.state === "active" ? "active" : state.access.state === "pending" ? "pending" : "no-plan";
+      if (host === "active" && state.role === "admin" && (!state.mfa.enrolled || !state.mfa.verified)) host = "mfa-required";
+      await route.fulfill({ json: {
+        user: { uid: "fixture-user", email: "approved@example.test", displayName: "Approved User", emailVerified: true },
+        mfa: { enrolled: state.mfa.enrolled, verified: state.mfa.verified },
+        ...(state.incomplete ? {} : { products: { host: { state: host }, pay: { state: "no-plan" }, manager: { state: "no-plan" } } }),
+      } });
+      return;
+    }
     if (["POST", "DELETE"].includes(request.method())) {
       if (state.failMutationOnce) { state.failMutationOnce=false; await route.fulfill({status:503,json:{error:{code:"DEPENDENCY_UNAVAILABLE"}}}); return; }
       if (state.role !== "admin" || !state.mfa.verified || state.access.state !== "active") { await route.fulfill({ status: 403, json: { error: { code: "MFA_REQUIRED" } } }); return; }
@@ -74,7 +84,11 @@ async function scenario(options = {}) {
   const page = await context.newPage();
   return { context, page, state, calls };
 }
-async function openPortal(t) { await t.page.goto(origin + "/dashboard/"); }
+async function openPortal(t) {
+  await t.page.goto(origin + "/dashboard/host/");
+  const consent = t.page.locator("[data-cookie-reject]");
+  if (await consent.isVisible()) await consent.click();
+}
 async function enroll(t) {
   const page = t.page;
   await page.locator("#start-enrollment").click();
@@ -89,7 +103,7 @@ async function enroll(t) {
 try {
   for (const state of ["pending", "denied"]) {
     const t = await scenario({role:null,access:{state}}); await openPortal(t);
-    await t.page.getByRole("heading",{name:state === "pending" ? "Approval pending" : "Portal access denied",exact:true}).waitFor();
+    await t.page.locator('[data-product="host"][data-state="' + (state === "pending" ? "pending" : "no-plan") + '"]').waitFor();
     assert.equal(await t.page.locator("#dashboard-content").isVisible(),false);
     assert.equal(await t.page.locator("#mfa-enrollment").isVisible(),false); await t.context.close();
   }
@@ -98,15 +112,16 @@ try {
     assert.equal(await t.page.locator("#dashboard-content").isVisible(),false); await t.context.close();
   }
   const admin=await scenario({role:"admin",mfa:{required:true,enrolled:false,verified:false}}); await openPortal(admin);
-  await admin.page.locator("#mfa-enrollment").waitFor({state:"visible"});
+  await admin.page.locator("#platform-security").waitFor({state:"visible"});
   assert.equal(await admin.page.locator("#dashboard-content").isVisible(),false);
   assert.equal(await admin.page.locator("#cancel-enrollment").isVisible(),false);
-  await enroll(admin); await admin.page.locator("#mfa-verification").waitFor({state:"visible"});
+  await enroll(admin); await admin.page.locator("#verify-session").waitFor({state:"visible"});
   assert.equal(await admin.page.locator("#totp-secret").inputValue(),"");
   await admin.page.locator("#verify-session").click(); await admin.page.locator("#mfa-challenge").waitFor({state:"visible"});
   await admin.page.locator('#mfa-challenge input[name="code"]').fill("000000"); await admin.page.locator('#mfa-challenge button[type="submit"]').click();
   await admin.page.locator('#mfa-challenge [role="status"]').getByText("That code is incorrect or expired.",{exact:false}).waitFor();
   await admin.page.locator('#mfa-challenge input[name="code"]').fill("123456"); await admin.page.locator('#mfa-challenge button[type="submit"]').click();
+  await admin.page.locator('[data-product="host"][data-state="active"] a').click();
   await admin.page.getByRole("button",{name:"Settings",exact:true}).click();
   await admin.page.locator("#admin-approval").waitFor({state:"visible"});
   if (process.env.WIFIGATE_SCREENSHOT_DIR) await admin.page.screenshot({path:join(process.env.WIFIGATE_SCREENSHOT_DIR,"admin-portal.png"),fullPage:true});
@@ -126,6 +141,10 @@ try {
     assert.equal(await admin.page.locator('#access-role-label').isVisible(),false);
     await admin.page.locator('#approval-form input').fill("target@example.test");
     await admin.page.locator('#approval-form button').click();
+    if (action === "delete") {
+      await admin.page.locator('#mfa-challenge input[name="code"]').fill("123456");
+      await admin.page.locator('#mfa-challenge button[type="submit"]').click();
+    }
     await admin.page.locator('#approval-status').getByText(action === "delete" ? "Portal access deleted" : action === "block" ? "Portal access blocked" : "Access approved",{exact:false}).waitFor();
     const mutation=admin.calls.filter(call=>["POST","DELETE"].includes(call.method)).at(-1);
     assert.equal(mutation.method,action === "delete" ? "DELETE" : "POST");
@@ -143,7 +162,7 @@ try {
   assert.equal(retryCalls[0].headers["idempotency-key"],retryCalls[1].headers["idempotency-key"]);
   admin.state.access.state="denied";
   await admin.page.locator('#approval-form input').fill("revoked@example.test"); await admin.page.locator('#approval-form button').click();
-  await admin.page.getByRole("heading",{name:"Portal access denied",exact:true}).waitFor();
+  await admin.page.locator('[data-product="host"][data-state="no-plan"]').waitFor();
   assert.equal(admin.calls.filter(call=>["POST","DELETE"].includes(call.method)).length,mutationCount+2);
   await admin.context.close();
   for (const mobile of [false,true]) {
@@ -162,14 +181,15 @@ try {
     await regular.page.locator("#dashboard-content").waitFor({state:"visible"});
     assert.equal(await regular.page.locator("#admin-approval").isVisible(),false);
     await regular.page.locator("#sign-out").click(); await regular.page.waitForURL("**/login/");
-    await regular.page.goto(origin+"/dashboard/"); await regular.page.waitForURL("**/login/"); await regular.context.close();
+    await regular.page.goto(origin+"/dashboard/"); await regular.page.waitForURL(url => url.pathname === "/login/"); await regular.context.close();
   }
   for(const provider of ["google","apple"]) {
     const t=await scenario({signedIn:false,mfa:{required:false,enrolled:true,verified:false}});
     await t.page.goto(origin+"/login/"); await t.page.locator('[data-provider="'+provider+'"]').click();
     await t.page.locator('#mfa-challenge input[name="code"]').fill("123456"); await t.page.locator('#mfa-challenge button[type="submit"]').click();
-    await t.page.waitForURL("**/dashboard/"); await t.page.locator("#dashboard-content").waitFor({state:"visible"});
-    assert.ok(t.calls.some(call=>call.method==="PUT")); await t.context.close();
+    await t.page.waitForURL("**/dashboard/"); await t.page.locator("#product-grid").waitFor({state:"visible"});
+    assert.ok(t.calls.some(call=>call.path==="/api/v1/platform/me"));
+    assert.equal(t.calls.some(call=>call.method==="PUT"),false); await t.context.close();
   }
   console.log("Portal browser fixtures passed: denial/errors, admin MFA enrollment/challenge/approval, revoked access, optional MFA, responsive calendar workspace, login and logout.");
 } finally { await browser.close(); }

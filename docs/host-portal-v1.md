@@ -1,6 +1,14 @@
 # Frontend V1 integration contract
 
-Implemented V1 contract, reviewed 5 October 2026 against WIFIGATE_HOST.html. The source explicitly gates V2–V10 behind V1 completion. The backend, frontend and Auth authorized website domains have been updated; real TOTP activation and HTTPS deployment remain release gates.
+Frontend contract aligned with the shared-login section of WIFIGATE_HOST.html, 6 October 2026. Local implementation and browser checks do not activate Firebase Identity Platform, TOTP or production deployment.
+
+## Shared product entry
+
+`/login/` is neutral English WIFIGATE sign-in; `/he/login/` is Hebrew RTL. Neither persists a language preference. Shared authentication calls `GET /api/v1/platform/me`, returning `{ user, mfa: { enrolled, verified }, products: { host, pay, manager } }`. Each product has a server-provided `state` and may include an organization count. Supported states are `active`, `pending`, `no-plan`, `blocked`, `mfa-required` and `unavailable`.
+
+`/dashboard/` is the product picker. The visual order remains Host, Pay, Manager at desktop/mobile sizes and in both directions. Active products link to `/dashboard/host/`, `/dashboard/pay/` and `/dashboard/manager/`. Pay and Manager currently expose guarded empty workspaces, not payment or remote administration functions. An inactive product cannot be opened through a direct route. Host profile synchronization occurs only after entering the authorized Host workspace.
+
+The `next` parameter accepts the implemented `/dashboard/host/`, `/dashboard/pay/` and `/dashboard/manager/` pages, with their query and fragment preserved. Encoded path separators, traversal, external origins, malformed paths and unimplemented nested routes are rejected. A permitted path resumes only when its product is active; other return paths fall back to the picker. Arbitrary nested product screens in the target specification remain future work. The interface checks access on entry and focus; API401 signs out and access-denial403 clears product data and returns to the picker. Recent-authentication failures retain their recovery controls. Resource-specific rejections remain in their action view; expired or revoked support approval clears prior diagnostics without revoking unrelated portal access. A late organization-scoped denial is ignored after switching organizations. Firebase sessions remain per-tab with a 30-minute inactivity timeout. TOTP enrollment/verification is reachable from the shared picker without an admin API call.
 
 ## Identity and authorization
 
@@ -45,7 +53,7 @@ Idempotency-Key: <UUID per logical approval; retained on retry>
 {"email":"new-user@example.com","status":"active","role":"user"}
 ```
 
-The frontend sends normalized email, active/blocked status and optional user/admin role, never UID or MFA assertions. Omitting role during block/unblock preserves the existing role. DELETE on the same endpoint sends only {email} and removes portal access, retaining the Auth account and profile. The backend verifies active admin access, current verified TOTP, validation, idempotency and audit. It rejects own-access changes and blocking/deleting/demoting the last active administrator, inside the mutation transaction. New administrators must enroll TOTP. First-admin bootstrap stays out of band.
+The frontend sends normalized email, active/blocked status and optional user/admin role, never UID or MFA assertions. Omitting role during block/unblock preserves the existing role. DELETE on the same endpoint sends only {email} and removes portal access, retaining the Auth account and profile. Before deleting access the UI reauthenticates with the original provider and completes TOTP, retaining the logical idempotency key. The backend verifies active admin access, recent authentication, current verified TOTP, validation, idempotency and audit. It rejects own-access changes and blocking/deleting/demoting the last active administrator, inside the mutation transaction. New administrators must enroll TOTP. First-admin bootstrap stays out of band.
 
 For errors, use { "error": { "code": "MFA_REQUIRED", "message": "..." } }. The UI shows safe local messages and preserves the idempotency key for an uncertain retry. It refreshes authorization before submitting and hides admin controls if access has changed. Backend enforcement remains necessary on the POST itself.
 

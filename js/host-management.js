@@ -67,6 +67,7 @@ function actionForm(container, title, resourcePath, method, fields, transform = 
 export function clearHostManagement({ sessionEnded = false } = {}) {
   clearHostCalendar();
   generation++;
+  root.dataset.requestGeneration = String(generation);
   currentUser = undefined;
   currentIdentity = undefined;
   if (selectedId) preferredOrganizationId = selectedId;
@@ -247,6 +248,7 @@ let sessionTransfer;
 export async function loadHostManagement(user, identity, preferredId) {
   if (sessionUid !== user.uid) { attempts.clear(); sessionTransfer = undefined; preferredOrganizationId = undefined; sessionUid = user.uid; }
   const epoch = ++generation;
+  root.dataset.requestGeneration = String(epoch);
   clearOrganizationSelector();
   root.dataset.loading="true";
   currentUser = user;
