@@ -10,7 +10,6 @@ const copy = {
     contact: "Kapcsolatfelvétel",
   },
   hero: {
-    eyebrow: "Okos hozzáférés. Az egész világra tervezve.",
     titleLines: ["Egy platform.", "Minden ingatlan."],
     subtitle: "Okos hozzáférés és vezérlés lakóingatlanokhoz, üzleti ingatlanokhoz és szálláshelyekhez. Minden egy alkalmazásban. Egyszerűen, felesleges bonyodalmak nélkül.",
     primaryCta: "Fedezze fel a platformot",
@@ -100,7 +99,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "A WIFIGATE rendszer áttekintése: az IP67 eszköz, a mobilalkalmazás és a vezérlőpanel sorkapcsokkal, USB Type-C és 12-24V bemenettel, Wi-Fi 6-tal, Bluetooth LE-vel és 433,92MHz-es vevővel, mellettük a platform funkciói – 5000 felhasználó, 100 adminisztrátor, korlátlan vendégmeghívás, API automatizált vendégmeghívásokhoz, nincs szükség SIM-kártyára vagy routerre, stabilitás, gyors vendégmeghívás, 90 napos előzmények, automatikus nyitás, legfeljebb 10 esemény, digitális RF-távirányítók betanítása, biztonság és adatvédelem, valamint előfizetési díjak nélkül.",
+    imageAlt: "A WIFIGATE rendszer áttekintése: az IP67 eszköz, a mobilalkalmazás és a vezérlőpanel sorkapcsokkal, USB Type-C és 12-24V bemenettel, Wi-Fi 6-tal, Bluetooth LE-vel és 433,92MHz-es vevővel, mellettük a platform funkciói – 5000 felhasználó, 100 adminisztrátor, korlátlan vendégmeghívás, API automatizált vendégmeghívásokhoz, nincs szükség SIM-kártyára vagy routerre, stabilitás, gyors vendégmeghívás, 90 napos előzmények, automatikus nyitás, legfeljebb 50 esemény, digitális RF-távirányítók betanítása, biztonság és adatvédelem, valamint előfizetési díjak nélkül.",
     eyebrow: "Termékútmutató",
     title: "Egyszerű már az első naptól.",
     subtitle: "Világos útmutatás a telepítéshez, a mindennapi hozzáféréshez és a haladó beállításokhoz.",

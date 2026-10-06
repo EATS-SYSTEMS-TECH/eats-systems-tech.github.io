@@ -10,7 +10,6 @@ const copy = {
     contact: "Luați legătura cu noi",
   },
   hero: {
-    eyebrow: "Acces inteligent. Creat pentru întreaga lume.",
     titleLines: ["O singură platformă.", "Pentru orice proprietate."],
     subtitle: "Acces și control inteligente pentru spații rezidențiale, comerciale și de cazare. Totul într-o singură aplicație. Simplu, fără complicații.",
     primaryCta: "Explorați platforma",
@@ -100,7 +99,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Prezentare generală a sistemului WIFIGATE: dispozitivul IP67, aplicația mobilă și placa de control cu blocuri de borne, USB Type-C și intrare de 12-24V, Wi-Fi 6, Bluetooth LE și un receptor de 433,92MHz, alături de funcțiile platformei – 5.000 de utilizatori, 100 de administratori, invitații nelimitate pentru oaspeți, un API pentru invitații automate, fără SIM sau router, stabilitate, invitație rapidă pentru oaspeți, istoric de 90 de zile, deschidere automată, până la 10 evenimente, învățarea telecomenzilor RF digitale, securitate și confidențialitate și fără taxe de abonament.",
+    imageAlt: "Prezentare generală a sistemului WIFIGATE: dispozitivul IP67, aplicația mobilă și placa de control cu blocuri de borne, USB Type-C și intrare de 12-24V, Wi-Fi 6, Bluetooth LE și un receptor de 433,92MHz, alături de funcțiile platformei – 5.000 de utilizatori, 100 de administratori, invitații nelimitate pentru oaspeți, un API pentru invitații automate, fără SIM sau router, stabilitate, invitație rapidă pentru oaspeți, istoric de 90 de zile, deschidere automată, până la 50 evenimente, învățarea telecomenzilor RF digitale, securitate și confidențialitate și fără taxe de abonament.",
     eyebrow: "Ghid de produs",
     title: "Clar încă din prima zi.",
     subtitle: "Instrucțiuni clare pentru instalare, acces de zi cu zi și configurare avansată.",

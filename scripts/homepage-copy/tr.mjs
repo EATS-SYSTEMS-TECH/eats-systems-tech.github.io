@@ -10,7 +10,6 @@
     contact: "İletişime geçin",
   },
   hero: {
-    eyebrow: "Akıllı erişim. Tüm dünya için tasarlandı.",
     titleLines: ["Tek platform.", "Her mülk için."],
     subtitle: "Konutlar, ticari alanlar ve konaklama tesisleri için akıllı erişim ve kontrol. Hepsi tek uygulamada. Son derece kolay.",
     primaryCta: "Platformu keşfedin",
@@ -100,7 +99,7 @@
     ],
   },
   productGuide: {
-    imageAlt: "WIFIGATE sistemine genel bakış: IP67 cihaz, mobil uygulama ve klemens blokları, USB Type-C ve 12-24V girişi, Wi-Fi 6, Bluetooth LE ile 433,92MHz alıcısı bulunan kontrol kartı; yanında platform özellikleri - 5.000 kullanıcı, 100 yönetici, sınırsız misafir daveti, otomatik misafir davetleri için API, SIM kart veya modem gerektirmeme, kararlılık, hızlı misafir daveti, 90 günlük geçmiş, otomatik açılma, en fazla 10 etkinlik, dijital RF kumanda tanıtma, güvenlik ve gizlilik ile abonelik ücreti olmaması.",
+    imageAlt: "WIFIGATE sistemine genel bakış: IP67 cihaz, mobil uygulama ve klemens blokları, USB Type-C ve 12-24V girişi, Wi-Fi 6, Bluetooth LE ile 433,92MHz alıcısı bulunan kontrol kartı; yanında platform özellikleri - 5.000 kullanıcı, 100 yönetici, sınırsız misafir daveti, otomatik misafir davetleri için API, SIM kart veya modem gerektirmeme, kararlılık, hızlı misafir daveti, 90 günlük geçmiş, otomatik açılma, en fazla 50 etkinlik, dijital RF kumanda tanıtma, güvenlik ve gizlilik ile abonelik ücreti olmaması.",
     eyebrow: "Ürün rehberi",
     title: "İlk günden net.",
     subtitle: "Kurulum, günlük kullanım ve gelişmiş yapılandırma için açık ve anlaşılır rehberlik.",

@@ -10,7 +10,6 @@ const copy = {
     contact: "Liên hệ với chúng tôi",
   },
   hero: {
-    eyebrow: "Kiểm soát ra vào thông minh. Được thiết kế cho mọi nơi trên thế giới.",
     titleLines: ["Một nền tảng.", "Cho mọi bất động sản."],
     subtitle: "Kiểm soát ra vào thông minh cho nhà ở, không gian thương mại và cơ sở lưu trú. Tất cả trong một ứng dụng. Đơn giản và thuận tiện.",
     primaryCta: "Khám phá nền tảng",
@@ -100,7 +99,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Tổng quan hệ thống WIFIGATE: thiết bị IP67, ứng dụng di động và bo mạch điều khiển với các khối đấu dây, USB Type-C và đầu vào 12-24V, Wi-Fi 6, Bluetooth LE cùng bộ thu 433,92MHz, bên cạnh các tính năng của nền tảng - 5.000 người dùng, 100 quản trị viên, lời mời khách không giới hạn, API mời khách tự động, không cần SIM hay router, ổn định, mời khách nhanh, lịch sử 90 ngày, tự động mở, tối đa 10 sự kiện, học remote RF kỹ thuật số, bảo mật và quyền riêng tư, và không mất phí thuê bao.",
+    imageAlt: "Tổng quan hệ thống WIFIGATE: thiết bị IP67, ứng dụng di động và bo mạch điều khiển với các khối đấu dây, USB Type-C và đầu vào 12-24V, Wi-Fi 6, Bluetooth LE cùng bộ thu 433,92MHz, bên cạnh các tính năng của nền tảng - 5.000 người dùng, 100 quản trị viên, lời mời khách không giới hạn, API mời khách tự động, không cần SIM hay router, ổn định, mời khách nhanh, lịch sử 90 ngày, tự động mở, tối đa 50 sự kiện, học remote RF kỹ thuật số, bảo mật và quyền riêng tư, và không mất phí thuê bao.",
     eyebrow: "Hướng dẫn sản phẩm",
     title: "Đơn giản ngay từ ngày đầu.",
     subtitle: "Hướng dẫn rõ ràng về lắp đặt, truy cập hằng ngày và cấu hình nâng cao.",

@@ -10,7 +10,6 @@ const copy = {
     contact: "Stopite v stik",
   },
   hero: {
-    eyebrow: "Pameten dostop. Ustvarjen za ves svet.",
     titleLines: ["Ena platforma.", "Vsaka nepremičnina."],
     subtitle: "Pameten dostop in upravljanje za stanovanjske, poslovne in nastanitvene objekte. Vse v eni aplikaciji. Preprosto in brez zapletov.",
     primaryCta: "Raziščite platformo",
@@ -100,7 +99,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Pregled sistema WIFIGATE: naprava IP67, mobilna aplikacija in krmilna plošča s priključnimi sponkami, USB Type-C in vhodom 12-24V, Wi-Fi 6, Bluetooth LE ter sprejemnikom 433,92MHz, ob tem pa funkcije platforme – 5000 uporabnikov, 100 skrbnikov, neomejena povabila za goste, API za samodejna povabila, brez kartice SIM ali usmerjevalnika, stabilnost, hitro povabilo za gosta, 90-dnevna zgodovina, samodejno odpiranje, do 10 dogodkov, učenje digitalnih daljinskih upravljalnikov RF, varnost in zasebnost ter brez naročnine.",
+    imageAlt: "Pregled sistema WIFIGATE: naprava IP67, mobilna aplikacija in krmilna plošča s priključnimi sponkami, USB Type-C in vhodom 12-24V, Wi-Fi 6, Bluetooth LE ter sprejemnikom 433,92MHz, ob tem pa funkcije platforme – 5000 uporabnikov, 100 skrbnikov, neomejena povabila za goste, API za samodejna povabila, brez kartice SIM ali usmerjevalnika, stabilnost, hitro povabilo za gosta, 90-dnevna zgodovina, samodejno odpiranje, do 50 dogodkov, učenje digitalnih daljinskih upravljalnikov RF, varnost in zasebnost ter brez naročnine.",
     eyebrow: "Vodnik po izdelku",
     title: "Preprosto od prvega dne.",
     subtitle: "Jasna navodila za namestitev, vsakodnevni dostop in napredno konfiguracijo.",

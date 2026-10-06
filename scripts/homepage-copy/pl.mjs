@@ -10,7 +10,6 @@ const copy = {
     contact: "Skontaktuj się z nami",
   },
   hero: {
-    eyebrow: "Inteligentny dostęp. Stworzony dla całego świata.",
     titleLines: ["Jedna platforma.", "Każda nieruchomość."],
     subtitle: "Inteligentny dostęp i sterowanie w budynkach mieszkalnych, obiektach komercyjnych i miejscach noclegowych. Wszystko w jednej aplikacji, niezwykle prosto.",
     primaryCta: "Odkryj platformę",
@@ -100,7 +99,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Przegląd systemu WIFIGATE: urządzenie IP67, aplikacja mobilna i płyta sterująca z listwami zaciskowymi, USB Type-C i wejściem 12-24V, Wi-Fi 6, Bluetooth LE oraz odbiornikiem 433,92MHz, a obok funkcje platformy – 5000 użytkowników, 100 administratorów, nieograniczone zaproszenia dla gości, API do automatycznych zaproszeń, bez karty SIM i routera, stabilność, szybkie zaproszenie dla gościa, 90-dniowa historia, automatyczne otwieranie, do 10 wydarzeń, uczenie cyfrowych pilotów RF, bezpieczeństwo i prywatność oraz brak opłat abonamentowych.",
+    imageAlt: "Przegląd systemu WIFIGATE: urządzenie IP67, aplikacja mobilna i płyta sterująca z listwami zaciskowymi, USB Type-C i wejściem 12-24V, Wi-Fi 6, Bluetooth LE oraz odbiornikiem 433,92MHz, a obok funkcje platformy – 5000 użytkowników, 100 administratorów, nieograniczone zaproszenia dla gości, API do automatycznych zaproszeń, bez karty SIM i routera, stabilność, szybkie zaproszenie dla gościa, 90-dniowa historia, automatyczne otwieranie, do 50 wydarzeń, uczenie cyfrowych pilotów RF, bezpieczeństwo i prywatność oraz brak opłat abonamentowych.",
     eyebrow: "Przewodnik po produkcie",
     title: "Prostota od pierwszego dnia.",
     subtitle: "Jasne instrukcje dotyczące instalacji, codziennego dostępu i konfiguracji zaawansowanej.",

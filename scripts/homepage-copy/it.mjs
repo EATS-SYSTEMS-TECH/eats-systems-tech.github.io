@@ -10,7 +10,6 @@ const copy = {
     contact: "Contattaci",
   },
   hero: {
-    eyebrow: "Accesso intelligente. Pensato per il mondo intero.",
     titleLines: ["Una piattaforma.", "Per ogni immobile."],
     subtitle: "Accesso e controllo intelligenti per spazi residenziali, commerciali e ricettivi. Tutto in un'unica app. Semplice, senza sforzo.",
     primaryCta: "Esplora la piattaforma",
@@ -100,7 +99,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Panoramica del sistema WIFIGATE: il dispositivo IP67, l'app mobile e la scheda di controllo con morsettiere, USB Type-C e ingresso 12-24V, Wi-Fi 6, Bluetooth LE e un ricevitore a 433,92MHz, insieme alle funzioni della piattaforma: 5.000 utenti, 100 amministratori, inviti illimitati per gli ospiti, un'API per inviti automatizzati, nessuna SIM né router, stabilità, invito rapido per gli ospiti, cronologia di 90 giorni, apertura automatica, fino a 10 eventi, apprendimento di telecomandi RF digitali, sicurezza e privacy, e nessun costo di abbonamento.",
+    imageAlt: "Panoramica del sistema WIFIGATE: il dispositivo IP67, l'app mobile e la scheda di controllo con morsettiere, USB Type-C e ingresso 12-24V, Wi-Fi 6, Bluetooth LE e un ricevitore a 433,92MHz, insieme alle funzioni della piattaforma: 5.000 utenti, 100 amministratori, inviti illimitati per gli ospiti, un'API per inviti automatizzati, nessuna SIM né router, stabilità, invito rapido per gli ospiti, cronologia di 90 giorni, apertura automatica, fino a 50 eventi, apprendimento di telecomandi RF digitali, sicurezza e privacy, e nessun costo di abbonamento.",
     eyebrow: "Guida del prodotto",
     title: "Semplice dal primo giorno.",
     subtitle: "Guida chiara per l'installazione, l'uso quotidiano e la configurazione avanzata.",
