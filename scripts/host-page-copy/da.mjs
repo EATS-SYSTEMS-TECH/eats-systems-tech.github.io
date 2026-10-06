@@ -2,15 +2,15 @@
 // The WIFIGATE Host page (/automation/) in Danish: title, description and body.
 
 export default {
-  "metaTitle": "Automatisk gæsteadgang til udlejning og hoteller | WIFIGATE",
-  "metaDescription": "Automatisk, tidsbegrænset adgang til porte, døre og garager ved hver booking. Til hoteller, korttidsudlejning, gæstehuse og parkering, uden nøgleoverdragelse.",
+  "metaTitle": "Automatisk gæsteadgang til hoteller, ferieboliger og parkering | WIFIGATE",
+  "metaDescription": "Sikker, tidsbegrænset adgang for hver gæst, oprettet automatisk for hver booking. Til hoteller, ferieboliger, gæstehuse og udlejningsparkering eller garager. Ingen nøgleoverdragelse.",
   "marketing": {
     "hero": {
       "eyebrow": "WIFIGATE Host",
       "title": "Gæsteadgang, der klarer sig selv",
-      "lead": "I det øjeblik en booking bekræftes, opretter WIFIGATE sikker, tidsbegrænset adgang til din port, dør eller garage, og den ophører af sig selv ved check-out. Ingen nøgler at udlevere, ingen koder at jagte og ingen, der venter ved indgangen.",
+      "lead": "I det øjeblik en booking bekræftes, opretter WIFIGATE sikker, tidsbegrænset adgang til din port, dør eller parkering, og den ophører af sig selv ved check-out. Ingen nøgler at udlevere, ingen koder at jagte og ingen, der venter ved indgangen.",
       "ctaPrimary": "Kontakt os",
-      "note": "Til hoteller, korttidsudlejning, gæstehuse og udlejningsparkering."
+      "note": "Til hoteller, ferieboliger, gæstehuse og udlejningsparkering eller garager."
     },
     "pricing": {
       "eyebrow": "Priser",
@@ -41,7 +41,7 @@ export default {
     "audience": {
       "label": "Skabt til:",
       "hotels": "Hoteller",
-      "rentals": "Airbnb og korttidsudlejning",
+      "rentals": "Airbnb og ferieboliger",
       "guesthouses": "Gæstehuse",
       "parking": "Udlejningsparkering og garager"
     },
@@ -50,22 +50,22 @@ export default {
       "title": "Fra booking til åben port, automatisk",
       "subtitle": "Tre trin, og derefter kører det af sig selv for hver reservation.",
       "s1t": "En booking kommer ind",
-      "s1x": "Dit booking- eller ejendomsadministrationssystem fortæller WIFIGATE, at en ny reservation er bekræftet.",
+      "s1x": "Dit booking- eller ejendomsadministrationssystem giver WIFIGATE Host besked om en nyligt bekræftet reservation.",
       "s2t": "Adgangen oprettes automatisk",
-      "s2x": "WIFIGATE udsteder en sikker, tidsbegrænset invitation til præcis den rigtige port, dør eller garage, kun gyldig under netop det ophold.",
+      "s2x": "WIFIGATE Host udsteder en sikker, tidsbegrænset invitation til præcis den rigtige port, dør eller parkering, kun gyldig under netop det ophold.",
       "s3t": "Din gæst går direkte ind",
       "s3x": "Gæsten åbner indgangen fra telefonen. Når check-out kommer, udløber adgangen af sig selv, uden noget at indsamle eller annullere."
     },
     "benefits": {
       "eyebrow": "Hvorfor WIFIGATE Host",
-      "title": "Mindre reception. Mere bekymringsfri udlejning.",
+      "title": "Mindre reception. Mere bekymringsfrit værtskab.",
       "subtitle": "Alt, hvad en booking kræver for at blive til adgang, klaret for dig.",
       "b1t": "Ingen nøgler at udlevere",
       "b1x": "Glem nøgleafhentning, nøglebokse og kopierede koder. Adgangen lander på gæstens telefon, i det øjeblik der er brug for den.",
       "b2t": "Tidsbegrænset fra start",
       "b2x": "Hver invitation åbner ved check-in og udløber ved check-out, automatisk, ved hvert eneste ophold.",
       "b3t": "Krypteret og privat",
-      "b3x": "Adgangen er krypteret, og porten arbejder lokalt. Din ejendom og dine gæster forbliver beskyttet.",
+      "b3x": "Adgangen er krypteret og begrænset til den rettighed, der er udstedt. Din ejendom og dine gæster forbliver beskyttet.",
       "b4t": "Fungerer med dine indgange",
       "b4x": "Porte, garageporte, bomme og indgangsdøre: WIFIGATE styrer det, du allerede har.",
       "b5t": "Skalerer til hele bygninger",
@@ -79,14 +79,14 @@ export default {
       "subtitle": "Bygget til at beskytte ejendommen bag hver port.",
       "i1t": "Krypteret hele vejen",
       "i1x": "Hver invitation er krypteret, så adgangsoplysninger ikke kan læses eller kopieres undervejs.",
-      "i2t": "Fungerer ved porten, ikke i skyen",
-      "i2x": "Indgangen verificerer adgangen lokalt, så den fortsat virker, selv uden forbindelse.",
+      "i2t": "Færre fysiske adgangsmidler, mere gæstfrihed",
+      "i2x": "Digital adgang mindsker behovet for nøgler, kort og fjernbetjeninger, så personalet kan fokusere på gæsterne og gæstfriheden.",
       "i3t": "Du bevarer kontrollen",
       "i3x": "Adgangen er knyttet til hvert ophold og hver gæst, og du kan lukke den, når du har brug for det."
     },
     "cta": {
       "title": "Klar til at automatisere gæsteadgangen?",
-      "text": "Fortæl os om dine ejendomme, så sætter vi WIFIGATE Host op efter den måde, du driver udlejning på.",
+      "text": "Fortæl os om dine ejendomme, så sætter vi WIFIGATE Host op efter den måde, du tager imod gæster på.",
       "button": "Kontakt os"
     }
   }

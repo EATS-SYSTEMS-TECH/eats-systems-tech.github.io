@@ -4,18 +4,18 @@
 export default {
   "home": {
     "seoTitle": "WIFIGATE | Smart adgangskontrol til porte, døre og parkering",
-    "seoDescription": "WIFIGATE (WiFi Gate) er et smart adgangskontrolsystem til at åbne porte, døre, parkeringsindgange, rulleporte og garageporte fra telefonen. En sikker, lokal og praktisk løsning uden månedligt abonnement.",
-    "keywords": "WIFIGATE, WiFi Gate, wifi gate, smart adgangskontrol, åbne port med telefon, elektrisk port, døradgang, parkeringsadgang, ingen månedlige gebyrer"
+    "seoDescription": "WIFIGATE er et smart adgangskontrolsystem, der åbner porte, døre, parkering, rulleskodder og garager fra telefonen. Sikkert, krypteret og praktisk, uden månedligt abonnement.",
+    "keywords": "WIFIGATE, WiFi Gate, wifi gate, smart adgangskontrol, åbne port med telefon, elektrisk port, adgangskontrol, uden månedligt abonnement"
   },
   "where": {
-    "title": "Hvor kan WIFIGATE bruges?",
-    "subtitle": "WIFIGATE passer til mange forskellige miljøer og giver en smart, sikker og praktisk løsning til adgangsstyring, fra private hjem til kommercielle og organisatoriske omgivelser."
+    "title": "Hvor passer WIFIGATE ind?",
+    "subtitle": "WIFIGATE passer til mange forskellige miljøer og giver en smart, sikker og praktisk måde at styre adgang på, fra private hjem til erhvervs- og virksomhedsmiljøer."
   },
   "niches": {
     "hotels-airbnb": {
       "label": "Hoteller, Airbnb og gæstelejligheder",
-      "title": "Smart adgang til hoteller, Airbnb og gæstelejligheder",
-      "heroLead": "Gæsten får en personlig adgangsrettighed på telefonen, i det øjeblik bookingen bekræftes. Ingen nøglekort, ingen nøgleboks og ingen ventetid i receptionen.",
+      "title": "En gæst, der er ankommet, skal ikke vente på, at nogen lukker op!",
+      "heroLead": "Et kort, der skal udstedes, en nøgle, der skal overdrages, eller en nøglebokskode, der går videre fra gæst til gæst, gør hver ankomst til manuel koordinering. Giv hver gæst en personlig adgangsrettighed, der åbner ved check-in og lukker ved check-out.",
       "highlights": [
         {
           "icon": "calendar",
@@ -24,8 +24,10 @@ export default {
         },
         {
           "icon": "invite",
-          "title": "Bookingen skaber adgangen",
-          "text": "Med WIFIGATE API kobles dit bookingsystem direkte til adgangen, så hver bekræftet booking selv udsteder adgangsrettigheden uden manuelle trin undervejs."
+          "title": "WIFIGATE Host forbinder bookingen med indgangen",
+          "text": "Med WIFIGATE Host opretter en bekræftet booking i dit hotel- eller udlejningssystem automatisk gæstens adgangsrettighed og sender den til gæsten. Ingen kopiering af oplysninger, intet kort at udstede og intet manuelt trin undervejs.",
+          "ctaLabel": "Udforsk WIFIGATE Host",
+          "ctaHref": "/da/automation/"
         },
         {
           "icon": "keyless",
@@ -33,19 +35,19 @@ export default {
           "text": "Intet at programmere, intet at udlevere, intet kort glemt af den forrige gæst og ingen nøglebokskode, der bliver givet videre. Telefonen i gæstens lomme er den eneste vej ind."
         }
       ],
-      "paragraph": "WIFIGATE gør det muligt for gæster at få praktisk og sikker digital adgang direkte på telefonen uden fysiske nøgler, kort eller unødvendig koordinering med receptionen eller ejeren. Med WIFIGATE API kan bookingprocessen kobles til adgangssystemet, så gæsten automatisk kan få tidsbegrænset adgang, når en reservation er bekræftet. Adgangen starter ved check-in, slutter automatisk ved check-out og reducerer behovet for nøgler, koder og manuel håndtering.",
+      "paragraph": "WIFIGATE giver hoteller, ferielejligheder (Airbnb) og feriecentre mulighed for at tilbyde gæsterne en bekvem og sikker digital adgang direkte fra mobiltelefonen.\nI stedet for at udstede magnetkort, udlevere fysiske nøgler eller bruge nøglebokse bliver adgangskontrollen automatisk.\nMed WIFIGATE Host kan du koble dit bookingsystem direkte til adgangssystemet.\nTakket være forbindelsen modtager gæsten en personlig adgangsrettighed, så snart bookingen er bekræftet.\nRettigheden aktiveres præcis ved check-in og udløber automatisk ved check-out, uden manuel indgriben, nøgleoverdragelse eller koordinering fra reception og værter.",
       "bullets": [
         "Automatisk oprettelse af gæsteadgang efter bekræftet booking",
-        "Understøtter fuld automatisering med WIFIGATE API",
+        "Fuld automatisering med WIFIGATE Host",
         "Midlertidig adgang efter opholdets datoer og tider",
-        "Mindre behov for manuel check-in, nøgler, kort eller koder",
+        "Mindre behov for at udstede, udlevere og udskifte værelseskort",
         "Rettighedsstyring for personale, rengøring, vedligehold og leverandører",
         "En mere smidig ankomstoplevelse for gæster",
         "Automatisk afslutning af adgang ved check-out",
         "Adgangshistorik for gennemsigtighed og kontrol"
       ],
-      "seoTitle": "Adgangskontrol til hoteller, Airbnb og gæstelejligheder | WIFIGATE API",
-      "seoDescription": "WIFIGATE giver smart digital adgang til hoteller, Airbnb og gæstelejligheder med automatisering af gæsterettigheder via WIFIGATE API, midlertidig adgang efter booking og mindre manuel check-in.",
+      "seoTitle": "WIFIGATE | Digital gæsteadgang til hoteller, Airbnb og feriecentre",
+      "seoDescription": "Med WIFIGATE Host styrer hoteller, Airbnb-værter og feriecentre gæsteadgangen digitalt og automatisk: en personlig rettighed pr. booking, uden nøgler, magnetkort eller nøgleboks.",
       "imageAlt": "Gæster åbner døren til et hotelværelse med telefonen i en moderne gang",
       "faq": [
         {
@@ -54,7 +56,7 @@ export default {
         },
         {
           "question": "Kan gæsteadgang oprettes automatisk ud fra bookinger?",
-          "answer": "Ja. Med WIFIGATE Host og WIFIGATE API kan en bekræftet booking automatisk oprette gæstens adgang, tilpasset opholdets datoer og tider."
+          "answer": "Ja. Med WIFIGATE Host og dets API kan en bekræftet booking automatisk oprette gæstens adgang, tilpasset opholdets datoer og tidspunkter."
         },
         {
           "question": "Kan rengøring og vedligeholdelsespersonale få deres egen adgang?",
@@ -68,8 +70,8 @@ export default {
     },
     "roller-shutters": {
       "label": "Rulleporte til virksomheder og butikker",
-      "title": "Smart og sikker styring af rulleporte til virksomheder og butikker",
-      "heroLead": "Rulleporten åbnes fra telefonen, og betjeningen flyttes til virksomhedens beskyttede inderside. Færre fjernbetjeninger, færre nøgler og færre udsatte adgangspunkter udenfor.",
+      "title": "Betjeningen af din rulleport skal ikke sidde ubeskyttet uden for butikken!",
+      "heroLead": "En kontakt, en nøgleboks eller en fjernbetjening, der sidder udenfor eller går videre mellem medarbejdere, kan havne i de forkerte hænder. Flyt betjeningen til virksomhedens beskyttede inderside, og åbn rulleporten fra telefonen med en personlig rettighed til hver medarbejder.",
       "highlights": [
         {
           "icon": "shutter",
@@ -96,7 +98,7 @@ export default {
         "Rettighedsstyring for medarbejdere, ledere og leverandører",
         "Mulighed for midlertidig adgang efter tid eller behov",
         "Velegnet til butikker, lagre, serviceindgange og virksomheder",
-        "En mere intern, organiseret og sikker løsning til daglig drift"
+        "En mere beskyttet og velordnet indendørs løsning til den daglige drift"
       ],
       "seoTitle": "Smart styring af rulleporte til virksomheder og butikker | WIFIGATE",
       "seoDescription": "WIFIGATE gør det muligt at styre rulleporte i virksomheder og butikker fra telefonen med rettighedsstyring, mindre afhængighed af nøgler og fjernbetjeninger samt færre udsatte adgangspunkter.",
@@ -122,8 +124,8 @@ export default {
     },
     "electric-gates": {
       "label": "Elektriske porte og parkeringsbomme",
-      "title": "Smart åbning af elektriske porte og parkeringsbomme",
-      "heroLead": "Åbn porten eller bommen fra telefonen, send en midlertidig rettighed til en gæst eller leverandør, og lad faste brugere komme automatisk igennem. Eksisterende fjernbetjeninger virker fortsat side om side.",
+      "title": "Det skal ikke kræve en betalingsaftale at åbne din port!",
+      "heroLead": "Systemer til at åbne porte fra telefonen kommer ofte med et månedligt abonnement, der bliver ved med at blive trukket hver måned. Skift til smart åbning uden abonnementsgebyrer og uden betalingsaftale, med personlige rettigheder og automatisk åbning for faste brugere.",
       "highlights": [
         {
           "icon": "handsfree",
@@ -133,26 +135,26 @@ export default {
         {
           "icon": "clock",
           "title": "Midlertidig adgang til leverandør eller gæst",
-          "text": "I stedet for at udlevere en fjernbetjening og håbe på at få den tilbage sender du en rettighed, der kun gælder i det tidsrum, hvor den faktisk skal bruges, og som derefter lukker af sig selv."
+          "text": "I stedet for at få opkald om at åbne porten på et upassende tidspunkt sender du en rettighed, der kun gælder i det tidsrum, hvor der faktisk er brug for den, og som derefter lukker af sig selv."
         },
         {
           "icon": "gate",
-          "title": "Eksisterende fjernbetjeninger ryger ikke i skraldespanden",
-          "text": "WIFIGATE kobles på det, der allerede er installeret ved porten. Den, der foretrækker en fjernbetjening, bruger den fortsat, og den, der foretrækker telefonen, åbner bare fra appen."
+          "title": "Stabilitet, pålidelighed og privatliv",
+          "text": "Navne og telefonnumre er følsomme oplysninger, især i AI-alderen. Hos WIFIGATE gemmes brugerdatabasen på selve enheden, krypteret og afskærmet fra internettet, på et stabilt og pålideligt system til daglig åbning."
         }
       ],
       "paragraph": "Elektriske porte og parkeringsbomme bruges af beboere, medarbejdere, gæster og leverandører, men styring af fjernbetjeninger, koder og telefonopkald til åbning bliver hurtigt besværligt. WIFIGATE gør det muligt at åbne porten fra telefonen, dele fast eller midlertidig adgang, bruge Auto Open til faste brugere og oprette planlagte hændelser efter behov. Systemet er designet til sikker, privat og krypteret drift uden månedligt abonnement, og eksisterende fjernbetjeninger kan fortsat bruges sammen med appen.",
       "bullets": [
         "Åbn elektrisk port eller parkeringsbom fra telefonen",
-        "Ingen månedligt abonnement og ingen løbende betalingsaftale",
+        "Intet månedligt abonnement og ingen løbende betalingsaftale",
         "Del midlertidig adgang med gæster, leverandører og medarbejdere",
         "Auto Open til faste brugere i daglig indkørsel",
         "Planlagte åbninger efter dage og tider",
         "Understøtter appstyring og eksisterende fjernbetjeninger",
         "Mindre behov for at uddele fysiske fjernbetjeninger",
-        "Åbningshistorik for kontrol og gennemsigtighed"
+        "Adgangshistorik til kontrol og gennemsigtighed"
       ],
-      "seoTitle": "Adgangskontrol til elektriske porte og parkeringsbomme uden abonnement | WIFIGATE",
+      "seoTitle": "Elektriske porte og parkeringsbomme uden abonnement | WIFIGATE",
       "seoDescription": "WIFIGATE giver smart åbning af elektriske porte og parkeringsbomme fra telefonen med Auto Open, planlagte hændelser, eksisterende fjernbetjeninger, rettighedsstyring og uden månedligt abonnement.",
       "imageAlt": "Chauffør åbner en parkeringsbom og elektrisk port med telefonen",
       "faq": [
@@ -176,8 +178,8 @@ export default {
     },
     "garage-doors": {
       "label": "Garageporte og privat parkering",
-      "title": "Smart åbning af garageporte og privat parkering",
-      "heroLead": "Garageporten åbnes fra telefonen, og adgangen flytter fra en fjernbetjening til en liste, du styrer. Ingen fjernbetjening at miste, og ingen tilbage hos nogen, der ikke længere har brug for den.",
+      "title": "En billig RF-fjernbetjening kan være nem at kopiere!",
+      "heroLead": "Simple RF-fjernbetjeninger kan være nemme at kopiere og kan give adgang til personer, der aldrig har fået tilladelse. WIFIGATE beskytter adgangen med avancerede sikkerhedslag, krypteret lagring og beskyttelse af brugernes privatliv.",
       "highlights": [
         {
           "icon": "keyless",
@@ -186,13 +188,13 @@ export default {
         },
         {
           "icon": "users",
-          "title": "Adgang til husstanden og til håndværkere",
-          "text": "Alle i hjemmet får deres egen rettighed, og en håndværker, der kommer én gang, kan få adgang, der lukker ved dagens slutning. Intet gemt under måtten."
+          "title": "Vid, hvem der åbnede og hvornår",
+          "text": "Når alle bruger den samme fjernbetjening, kan man ikke vide, hvem der kom ind. Med WIFIGATE åbner hver bruger med en personlig rettighed, og adgangshistorikken viser, hvem der åbnede og hvornår."
         },
         {
           "icon": "phone",
-          "title": "Telefonen har du allerede på dig",
-          "text": "Ingen fjernbetjening at flytte mellem bilerne og intet at lede efter, når en anden kører. Det, der åbner porten, er det eneste, du aldrig går uden."
+          "title": "Mindre afhængighed af fysiske adgangsmidler",
+          "text": "I stedet for at have en fjernbetjening til hver bil og hver bruger åbner du med den telefon, du alligevel har på dig. Færre fjernbetjeninger at købe, kode, udlevere og administrere."
         }
       ],
       "paragraph": "Garageporte og private parkeringspladser styres typisk med fysiske fjernbetjeninger, som kan blive væk, blive hos personer der ikke længere skal have adgang, eller i visse situationer kopieres. WIFIGATE flytter styringen til digital adgang fra telefonen, så rettigheder kan administreres for familie, medarbejdere eller gæster, og midlertidig adgang kan deles uden at udlevere en fjernbetjening eller kode.",
@@ -230,18 +232,18 @@ export default {
     },
     "private-homes": {
       "label": "Private hjem",
-      "title": "Smart og sikker adgang til private hjem",
-      "heroLead": "En fast tastaturkode slides, bliver givet videre og bliver hos folk, der ikke længere har brug for den. Giv hver person sin egen rettighed og en midlertidig til dem, der kun kommer på besøg én gang.",
+      "title": "Private hjem er ikke beregnet til at være offentlige!",
+      "heroLead": "Dørtelefonkoden, du gav et bud, en tekniker eller en gæst, bliver hos dem længe efter besøget, og den går videre, uden at du ved det. Giv alle en personlig, tidsbegrænset adgangsrettighed, og mindsk uautoriseret adgang og risikoen for tyveri.",
       "highlights": [
         {
-          "icon": "shield",
-          "title": "Et tastatur afslører din kode",
-          "text": "Efter nogle år viser fire slidte taster præcis, hvilke cifre koden består af. En rettighed på telefonen efterlader ingen spor på væggen."
+          "icon": "keyless",
+          "title": "Dørtelefonkoden bliver ved med at gå rundt",
+          "text": "Koden går til bude, teknikere og gæster og derfra videre, uden at du ved det. Og efter nok år afslører de fire slidte taster på tastaturet helt af sig selv, hvilke cifre den består af."
         },
         {
           "icon": "clock",
-          "title": "Adgang til leveringen, ikke for altid",
-          "text": "En kode givet til et bud, en tekniker eller en gæst har de stadig et år senere. En midlertidig rettighed lukker af sig selv, i det øjeblik besøget er slut."
+          "title": "Adgang, der slutter af sig selv, mindsker risikoen",
+          "text": "Et bud, der skal bruge fem minutter, får fem minutter. Når rettigheden udløber af sig selv, er der ingen vej ind for dem, der ikke længere skal ind, og det er netop det, der mindsker uautoriseret adgang og risikoen for tyveri."
         },
         {
           "icon": "roster",
@@ -284,7 +286,7 @@ export default {
     },
     "residential-buildings": {
       "label": "Boligbygninger",
-      "title": "Smart adgangsstyring til boligbygninger",
+      "title": "Boligbygninger er ikke beregnet til at være offentlige!",
       "heroLead": "En fast kode, der går videre mellem bude, gæster og servicefolk, kan havne i de forkerte hænder. Giv hver person en personlig, tidsbegrænset adgangsrettighed, og skær ned på uautoriserede adgange og risikoen for tyveri.",
       "highlights": [
         {
@@ -303,16 +305,16 @@ export default {
           "text": "Auto Open genkender, at du er ankommet, og åbner porten eller døren for dig. Ingen leden efter nøgler og ingen telefon op af lommen, heller ikke når hænderne er fulde af indkøb, en barnevogn eller børn."
         }
       ],
-      "paragraph": "I boligbygninger spredes en fælles indgangskode hurtigt mellem beboere, gæster, bude, leverandører og servicefolk. Med tiden bliver det svært at vide, hvem der reelt har adgang til bygningen, og hvornår koder skal ændres eller fjernbetjeninger indsamles. WIFIGATE gør det muligt for beboere og bestyrelse at styre adgang mere organiseret, give midlertidige gæsterettigheder, reducere afhængigheden af fælles koder og bevare bedre kontrol over indgangen til bygning, lobby, port eller parkering.",
+      "paragraph": "I en boligbygning slutter adgangen ikke ved hoveddøren: Der er en port, en indkørsel til parkering, døre til depotrum og nogle gange en sidedør. Og det involverer ikke kun beboerne, men også skiftende lejere, bestyrelsen eller administrationsselskabet, rengøring, vedligehold og faste leverandører. Når alt det kører på én kode og et par fjernbetjeninger, kræver hver lille ændring, en beboer der flytter, en mistet fjernbetjening eller en ny leverandør, at koden skiftes og alle informeres igen. WIFIGATE erstatter den metode med organiseret adgangsstyring på bygningsniveau.",
       "bullets": [
-        "Praktisk adgang for beboere via telefonen",
-        "Midlertidige gæsteinvitationer uden at afsløre fast kode",
-        "Rettighedsstyring for beboere, leverandører og servicefolk",
+        "En personlig rettighed til hver beboer i stedet for én kode til alle",
+        "Tilføj og fjern beboere uden at skifte koden for hele bygningen",
+        "Separate rettigheder til rengøring, vedligehold og faste leverandører",
         "Velegnet til lobbydøre, porte og parkering",
         "Mindre afhængighed af tastaturer, nøgler og fjernbetjeninger",
-        "Bedre gennemsigtighed med adgangshistorik",
-        "Enklere administration for bestyrelse eller ejendomsadministration",
-        "Mere praktisk adgang for beboere og gæster"
+        "Adgangshistorik til bestyrelsen eller administrationsselskabet",
+        "Styr alle bygningens rettigheder fra telefonen",
+        "Adgang for nye lejere fra indflytningsdagen, uden nøgleoverdragelse"
       ],
       "seoTitle": "Adgangskontrol til boligbygninger | WIFIGATE",
       "seoDescription": "WIFIGATE giver smart adgangsstyring til boligbygninger med åbning fra telefonen, midlertidige gæsterettigheder, mindre afhængighed af tastaturkoder og bedre gennemsigtighed.",
@@ -338,8 +340,8 @@ export default {
     },
     "office-buildings": {
       "label": "Kontorbygninger",
-      "title": "Smart adgang til kontorbygninger",
-      "heroLead": "Faste rettigheder til medarbejdere, midlertidige til besøgende og leverandører. Ingen kø i receptionen, ingen adgangskort at udstede og ingen nøgler at indsamle, når nogen stopper.",
+      "title": "Vejen ind på kontoret skal ikke gå gennem receptionen!",
+      "heroLead": "Besøgende, jobkandidater og leverandører venter på, at nogen kommer ned og lukker op, og medarbejdere får adgangskort eller nøgler, der skal samles ind, når de stopper. Giv alle en personlig rettighed: fast for medarbejdere og tidsbegrænset for alle andre.",
       "highlights": [
         {
           "icon": "users",
@@ -348,8 +350,8 @@ export default {
         },
         {
           "icon": "invite",
-          "title": "Den besøgende ankommer med adgangen klar",
-          "text": "I stedet for at vente i receptionen på, at nogen kommer ned, ankommer den besøgende med en rettighed sendt til telefonen, som kun gælder i mødets tidsrum."
+          "title": "Inviter en jobkandidat med ét tryk",
+          "text": "Send en jobkandidat en invitation til jobsamtale, der giver en verificeret og sikker åbningsrettighed, komplet med vejvisning og detaljer."
         },
         {
           "icon": "history",
@@ -392,18 +394,18 @@ export default {
     },
     "entry-doors-magnetic-locks": {
       "label": "Indgangsdøre og magnetlåse til virksomheder",
-      "title": "Smart åbning af indgangsdøre og magnetlåse til virksomheder",
-      "heroLead": "Virksomhedens indgang åbnes fra telefonen, og rettigheder ændres uden at skifte kode. Det fungerer med den elektriske lås eller magnetlås, der allerede sidder på døren.",
+      "title": "Adgangskoden til din virksomhed skal ikke gå fra hånd til hånd!",
+      "heroLead": "En fast kode, som medarbejdere, leverandører og teknikere får, kan blive hos folk, der ikke længere skal ind. Giv alle en personlig, tidsbegrænset åbningsrettighed via den elektriske lås eller magnetlås, der allerede sidder på døren.",
       "highlights": [
         {
           "icon": "keyless",
-          "title": "Én kode til alle er ikke længere en løsning",
-          "text": "En kode, der går videre mellem medarbejdere, leverandører og kunder, holder ikke længere rigtig døren lukket. En personlig rettighed til hver person fjerner behovet for at skifte kode, hver gang nogen stopper."
+          "title": "Mindsk risikoen for uautoriseret adgang",
+          "text": "I stedet for en fælles kode, der kan havne i de forkerte hænder, har hver medarbejder, leverandør eller gæst en personlig åbningsrettighed, som du kan tilbagekalde når som helst. Adgangshistorikken viser, hvem der åbnede og hvornår, og hjælper med at mindske uautoriseret adgang og risikoen for tyveri."
         },
         {
           "icon": "clock",
           "title": "Midlertidig adgang til leverandør eller tekniker",
-          "text": "Til rengøringen, der kommer om aftenen, teknikeren, der kommer én gang, og buddet, der skal bruge fem minutter: en rettighed, der gælder i præcis det tidsrum og derefter lukker af sig selv."
+          "text": "Leverandøren, der kommer om morgenen for at losse varer, rengøringen, der kommer om aftenen, en tekniker på engangsbesøg og et bud, der skal bruge fem minutter: Hver får en rettighed til sit eget tidsrum, og den lukker af sig selv. Ejeren behøver ikke at møde op eller tage telefonen for at åbne døren."
         },
         {
           "icon": "phone",
@@ -446,8 +448,8 @@ export default {
     },
     "sports-facilities": {
       "label": "Sportsfaciliteter",
-      "title": "Smart adgangskontrol til sportsfaciliteter",
-      "heroLead": "Medlemmer, trænere og gæster kommer ind med deres egen rettighed og inden for åbningstiden. Ingen fælles nøgle og ingen kode, der cirkulerer i en WhatsApp-gruppe.",
+      "title": "Adgangskoden til jeres anlæg skal ikke gå rundt i WhatsApp-gruppen!",
+      "heroLead": "En fælles kode, der går videre mellem medlemmer, trænere og gæster, bliver ved med at åbne, også når den ikke burde. Giv alle en personlig rettighed, der passer til åbningstiderne og medlemskabets periode, og som lukker, når der ikke længere er brug for den.",
       "highlights": [
         {
           "icon": "calendar",
@@ -465,9 +467,9 @@ export default {
           "text": "Når trafikken skifter i løbet af dagen, hjælper en adgangslog driften, afklarer spørgsmål om hændelser og bekræfter, at stedet blev låst ved dagens slutning."
         }
       ],
-      "paragraph": "Sportsfaciliteter, Padel-baner, tennisbaner, fitnesscentre og træningsområder skal styre adgang for medlemmer, trænere, personale og gæster efter åbningstider, bookinger og arrangementer. WIFIGATE gør det muligt at give midlertidig eller fast adgang fra telefonen, reducere afhængigheden af fælles nøgler eller koder og forbedre adgangsoplevelsen på steder med skiftende trafik gennem dagen.",
+      "paragraph": "Sportsfaciliteter, padelbaner, tennisbaner, fitnesscentre og træningsområder skal styre adgang for medlemmer, trænere, personale og gæster efter åbningstider, bookinger og arrangementer. WIFIGATE gør det muligt at give midlertidig eller fast adgang fra telefonen, reducere afhængigheden af fælles nøgler eller koder og forbedre adgangsoplevelsen på steder med skiftende trafik gennem dagen.",
       "bullets": [
-        "Velegnet til Padel-baner, tennis, fitnesscentre og træningsområder",
+        "Velegnet til padelbaner, tennisbaner, fitnesscentre og træningsanlæg",
         "Adgang efter åbningstider, bookinger eller rettigheder",
         "Styring af medlemmer, trænere, medarbejdere og gæster",
         "Mindre afhængighed af fælles nøgler og koder",
@@ -476,13 +478,13 @@ export default {
         "Midlertidige rettigheder til events, hold eller træning",
         "Adgangshistorik til drift og kontrol"
       ],
-      "seoTitle": "Adgangskontrol til sportsfaciliteter og Padel-baner | WIFIGATE",
-      "seoDescription": "WIFIGATE giver smart adgangskontrol til sportsfaciliteter, Padel-baner, fitnesscentre og træningsområder med adgang fra telefonen og midlertidige eller faste rettigheder.",
-      "imageAlt": "Padel-spiller åbner indgangen til en oplyst sportsbane med telefonen",
+      "seoTitle": "Adgangskontrol til sportsfaciliteter og padelbaner | WIFIGATE",
+      "seoDescription": "WIFIGATE giver smart adgangskontrol til sportsfaciliteter, padelbaner, fitnesscentre og træningsanlæg med adgang fra telefonen og midlertidige eller faste rettigheder.",
+      "imageAlt": "Padelspiller åbner indgangen til en oplyst sportsbane med telefonen",
       "faq": [
         {
           "question": "Kan adgangen følge åbningstider eller bookinger?",
-          "answer": "Ja. Adgang kan gives efter åbningstider, bookinger eller rettigheder, og planlagte begivenheder kan åbne efter dage og tider."
+          "answer": "Ja. Adgang kan gives efter åbningstider, bookinger eller rettigheder, og planlagte hændelser kan åbne efter dage og tider."
         },
         {
           "question": "Kan medlemmer, trænere og gæster have forskellig adgang?",
@@ -494,7 +496,7 @@ export default {
         },
         {
           "question": "Hvilke sportsfaciliteter passer WIFIGATE til?",
-          "answer": "Padel-baner, tennisbaner, fitnesscentre og træningsanlæg."
+          "answer": "Padelbaner, tennisbaner, fitnesscentre og træningsanlæg."
         }
       ]
     },
