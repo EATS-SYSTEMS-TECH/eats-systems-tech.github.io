@@ -10,7 +10,6 @@ const copy = {
     contact: "Makipag-ugnayan",
   },
   hero: {
-    eyebrow: "Matalinong pag-access. Dinisenyo para sa buong mundo.",
     titleLines: ["Isang platform.", "Para sa bawat ari-arian."],
     subtitle: "Matalinong pag-access at kontrol para sa mga tirahan, komersyal na gusali, hotel, at iba pang tuluyan. Lahat sa iisang app. Napakadaling gamitin.",
     primaryCta: "Tuklasin ang platform",
@@ -100,7 +99,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Pangkalahatang-ideya ng WIFIGATE system: ang IP67 device, ang mobile app, at ang control board na may terminal blocks, USB Type-C at 12-24V input, Wi-Fi 6, Bluetooth LE at 433.92MHz receiver, kasama ang mga feature ng platform - 5,000 user, 100 admin, walang limitasyong imbitasyon para sa bisita, API para sa awtomatikong imbitasyon ng bisita, walang SIM o router, katatagan, mabilis na imbitasyon para sa bisita, 90 araw na history, auto open, hanggang 10 event, pag-aaral ng digital RF remote, seguridad at privacy, at walang bayad sa subscription.",
+    imageAlt: "Pangkalahatang-ideya ng WIFIGATE system: ang IP67 device, ang mobile app, at ang control board na may terminal blocks, USB Type-C at 12-24V input, Wi-Fi 6, Bluetooth LE at 433.92MHz receiver, kasama ang mga feature ng platform - 5,000 user, 100 admin, walang limitasyong imbitasyon para sa bisita, API para sa awtomatikong imbitasyon ng bisita, walang SIM o router, katatagan, mabilis na imbitasyon para sa bisita, 90 araw na history, auto open, hanggang 50 event, pag-aaral ng digital RF remote, seguridad at privacy, at walang bayad sa subscription.",
     eyebrow: "Gabay sa produkto",
     title: "Malinaw at madali mula sa unang araw.",
     subtitle: "Malinaw na gabay para sa installation, pang-araw-araw na access, at advanced configuration.",

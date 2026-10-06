@@ -10,7 +10,6 @@ const copy = {
     contact: "Hubungi tim kami",
   },
   hero: {
-    eyebrow: "Akses cerdas. Dirancang untuk dunia.",
     titleLines: ["Satu platform.", "Setiap properti."],
     subtitle: "Akses dan kontrol cerdas untuk hunian, area komersial, dan properti perhotelan. Semuanya dalam satu aplikasi. Praktis dan mudah digunakan.",
     primaryCta: "Jelajahi platform",
@@ -100,7 +99,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Gambaran umum sistem WIFIGATE: perangkat IP67, aplikasi seluler, dan papan kontrol dengan blok terminal, USB Type-C dan input 12-24V, Wi-Fi 6, Bluetooth LE, serta penerima 433,92MHz, beserta fitur platform - 5.000 pengguna, 100 admin, undangan tamu tanpa batas, API undangan tamu otomatis, tanpa SIM atau router, stabilitas, undangan tamu cepat, riwayat 90 hari, buka otomatis, hingga 10 acara, pembelajaran remote RF digital, keamanan dan privasi, serta tanpa biaya langganan.",
+    imageAlt: "Gambaran umum sistem WIFIGATE: perangkat IP67, aplikasi seluler, dan papan kontrol dengan blok terminal, USB Type-C dan input 12-24V, Wi-Fi 6, Bluetooth LE, serta penerima 433,92MHz, beserta fitur platform - 5.000 pengguna, 100 admin, undangan tamu tanpa batas, API undangan tamu otomatis, tanpa SIM atau router, stabilitas, undangan tamu cepat, riwayat 90 hari, buka otomatis, hingga 50 acara, pembelajaran remote RF digital, keamanan dan privasi, serta tanpa biaya langganan.",
     eyebrow: "Panduan produk",
     title: "Mudah sejak hari pertama.",
     subtitle: "Panduan jelas untuk instalasi, akses sehari-hari, dan konfigurasi tingkat lanjut.",

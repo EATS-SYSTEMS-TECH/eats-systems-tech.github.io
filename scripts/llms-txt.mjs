@@ -3,13 +3,15 @@
 // assistants and agents, built from the same English copy as the pages so it
 // never drifts from the site.
 
-import { SITE_ORIGIN, SOCIAL_PROFILES, SUPPORT_EMAIL, WHATSAPP_URL } from "./seo.mjs";
+import { BRAND_ALTERNATE_NAMES, SITE_ORIGIN, SOCIAL_PROFILES, SUPPORT_EMAIL, WHATSAPP_URL } from "./seo.mjs";
 
 export function buildLlmsTxt({ homeCopy, homeSeo, niches, pageUrl }) {
   const lines = [
     "# WIFIGATE",
     "",
     `> ${homeSeo.seoDescription}`,
+    "",
+    `WIFIGATE is also written ${BRAND_ALTERNATE_NAMES.join(", ")}: all of them are this product and wifigate.io.`,
     "",
     `${homeCopy.platform.subtitle} It is made by EATS SYSTEMS TECH (Israel). ${homeCopy.platform.features.map((feature) => `${feature.title}: ${feature.text}`).join(" ")}`,
     "",

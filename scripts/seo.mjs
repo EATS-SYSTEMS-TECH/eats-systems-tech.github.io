@@ -10,6 +10,9 @@ export const ORGANIZATION_ID = `${SITE_ORIGIN}/#organization`;
 export const WEBSITE_ID = `${SITE_ORIGIN}/#website`;
 export const BRAND_ID = `${SITE_ORIGIN}/#brand`;
 export const LOGO_URL = `${SITE_ORIGIN}/logo-1024.png`;
+// Every way people write the brand; search and answer engines match them all
+// to the same WIFIGATE entity.
+export const BRAND_ALTERNATE_NAMES = ["WiFi Gate", "Wi-Fi Gate", "Wifigate", "WiFiGate"];
 
 // The profiles the footer links to; they identify the company (sameAs).
 export const SOCIAL_PROFILES = [
@@ -68,7 +71,7 @@ export function brandNode({ description, slogan }) {
     "@type": "Brand",
     "@id": BRAND_ID,
     name: "WIFIGATE",
-    alternateName: ["WiFiGate", "WiFi Gate"],
+    alternateName: BRAND_ALTERNATE_NAMES,
     url: SITE_ORIGIN,
     logo: LOGO_URL,
     ...(description ? { description } : {}),
@@ -81,7 +84,7 @@ export function websiteNode(locale) {
     "@type": "WebSite",
     "@id": WEBSITE_ID,
     name: "WIFIGATE",
-    alternateName: ["WiFiGate", "WiFi Gate"],
+    alternateName: BRAND_ALTERNATE_NAMES,
     url: `${SITE_ORIGIN}/`,
     inLanguage: locale,
     publisher: { "@id": ORGANIZATION_ID },
