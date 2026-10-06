@@ -100,7 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "WIFIGATE system overview: the IP67 device, the mobile app, and the control board with its terminal blocks, USB Type-C and 12-24V input, Wi-Fi 6, Bluetooth LE and a 433.92MHz receiver, alongside the platform features - 5,000 users, 100 admins, unlimited guest invites, an automated guest invites API, no SIM or router, stability, quick guest invite, 90-day history, auto open, up to 50 events, digital RF remote learning, security and privacy, and no subscription fees.",
+    imageAlt: "WIFIGATE system overview: the IP67 device, the mobile app, and the control board with its terminal blocks, USB Type-C and 12-24V input, Wi-Fi 6, Bluetooth LE and a 433.92MHz receiver, alongside the platform features - 500 users, 20 admins, unlimited guest invites, an automated guest invites API, no SIM or router, stability, quick guest invite, 90-day history, auto open, up to 50 events, digital RF remote learning, security and privacy, and no subscription fees.",
     eyebrow: "Product guide",
     title: "Straightforward from day one.",
     subtitle: "Clear guidance for installation, everyday access, and advanced configuration.",

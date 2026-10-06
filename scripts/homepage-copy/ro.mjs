@@ -100,7 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Prezentare generală a sistemului WIFIGATE: dispozitivul IP67, aplicația mobilă și placa de control cu blocuri de borne, USB Type-C și intrare de 12-24V, Wi-Fi 6, Bluetooth LE și un receptor de 433,92MHz, alături de funcțiile platformei – 5.000 de utilizatori, 100 de administratori, invitații nelimitate pentru oaspeți, un API pentru invitații automate, fără SIM sau router, stabilitate, invitație rapidă pentru oaspeți, istoric de 90 de zile, deschidere automată, până la 50 evenimente, învățarea telecomenzilor RF digitale, securitate și confidențialitate și fără taxe de abonament.",
+    imageAlt: "Prezentare generală a sistemului WIFIGATE: dispozitivul IP67, aplicația mobilă și placa de control cu blocuri de borne, USB Type-C și intrare de 12-24V, Wi-Fi 6, Bluetooth LE și un receptor de 433,92MHz, alături de funcțiile platformei – 500 de utilizatori, 20 de administratori, invitații nelimitate pentru oaspeți, un API pentru invitații automate, fără SIM sau router, stabilitate, invitație rapidă pentru oaspeți, istoric de 90 de zile, deschidere automată, până la 50 evenimente, învățarea telecomenzilor RF digitale, securitate și confidențialitate și fără taxe de abonament.",
     eyebrow: "Ghid de produs",
     title: "Clar încă din prima zi.",
     subtitle: "Instrucțiuni clare pentru instalare, acces de zi cu zi și configurare avansată.",

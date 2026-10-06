@@ -100,7 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Oversikt over WIFIGATE-systemet: IP67-enheten, mobilappen og styrekortet med rekkeklemmer, USB Type-C og 12-24V-inngang, Wi-Fi 6, Bluetooth LE og en 433,92MHz-mottaker, sammen med plattformfunksjonene – 5000 brukere, 100 administratorer, ubegrensede gjesteinvitasjoner, et API for automatiserte gjesteinvitasjoner, uten SIM-kort eller ruter, stabilitet, rask gjesteinvitasjon, 90 dagers historikk, automatisk åpning, opptil 50 arrangementer, innlæring av digitale RF-fjernkontroller, sikkerhet og personvern, og ingen abonnementsavgifter.",
+    imageAlt: "Oversikt over WIFIGATE-systemet: IP67-enheten, mobilappen og styrekortet med rekkeklemmer, USB Type-C og 12-24V-inngang, Wi-Fi 6, Bluetooth LE og en 433,92MHz-mottaker, sammen med plattformfunksjonene – 500 brukere, 20 administratorer, ubegrensede gjesteinvitasjoner, et API for automatiserte gjesteinvitasjoner, uten SIM-kort eller ruter, stabilitet, rask gjesteinvitasjon, 90 dagers historikk, automatisk åpning, opptil 50 arrangementer, innlæring av digitale RF-fjernkontroller, sikkerhet og personvern, og ingen abonnementsavgifter.",
     eyebrow: "Produktveiledning",
     title: "Enkelt fra første dag.",
     subtitle: "Klar veiledning for installasjon, daglig tilgang og avansert konfigurasjon.",
