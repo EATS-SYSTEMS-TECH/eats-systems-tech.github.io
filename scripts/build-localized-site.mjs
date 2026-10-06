@@ -10,6 +10,7 @@ import { SITE_LOGIN_LABELS, SITE_NAVIGATION } from "./site-navigation.mjs";
 import { accessibilityLinkLabels } from "./legal/footer-labels.mjs";
 import { wifigateLinkLocales } from "./wifigate-link-locales.mjs";
 import { buildLlmsTxt } from "./llms-txt.mjs";
+import { LEGAL_PAGES, legalBundles, renderLegalMain } from "./legal/legal-pages.mjs";
 import { buildNotFoundPage } from "./not-found-page.mjs";
 import { BRAND_ID, ORGANIZATION_ID, SITE_ORIGIN, breadcrumbNode, faqNode, setPageMeta, webPageNode } from "./seo.mjs";
 
@@ -26,12 +27,7 @@ const homeCopyDirectory = path.join(repoRoot, "scripts", "homepage-copy");
 const utilityTemplatePath = path.join(repoRoot, "templates", "wifigate-link.template.html");
 const nicheTemplatePath = path.join(repoRoot, "templates", "niche.template.html");
 const guestInvitesTemplatePath = path.join(repoRoot, "templates", "guest-invites-api.template.html");
-const legalTemplatePaths = {
-  cookies: path.join(repoRoot, "templates", "legal", "cookies.template.html"),
-  "privacy-policy": path.join(repoRoot, "templates", "legal", "privacy-policy.template.html"),
-  "terms-and-conditions": path.join(repoRoot, "templates", "legal", "terms-and-conditions.template.html"),
-  accessibility: path.join(repoRoot, "templates", "legal", "accessibility.template.html"),
-};
+const legalTemplatePath = path.join(repoRoot, "templates", "legal.template.html");
 
 const homeDataFiles = [
   "js/translations.js",
@@ -42,20 +38,10 @@ const homeDataFiles = [
   "js/language-polish.js",
 ];
 
-// The legal text comes last: it is generated from scripts/legal/*-content.mjs
-// (scripts/legal/build-legal-pages.mjs) and nothing may rewrite it afterwards.
-const legalPageData = (pageKey) => [
-  "js/translations.js",
-  "js/translations-extra.js",
-  "js/language-polish.js",
-  `js/legal/${pageKey}-content.js`,
-];
-const legalDataFiles = {
-  cookies: legalPageData("cookies"),
-  "privacy-policy": legalPageData("privacy-policy"),
-  "terms-and-conditions": legalPageData("terms-and-conditions"),
-  accessibility: legalPageData("accessibility"),
-};
+// The shared strings under the legal text (header, footer fallbacks); the
+// legal text itself comes from scripts/legal/legal-pages.mjs and nothing
+// rewrites it afterwards.
+const legalBaseDataFiles = ["js/translations.js", "js/translations-extra.js", "js/language-polish.js"];
 
 const homeRuntimeScriptsToRemove = [
   "js/translations.js",
@@ -1236,8 +1222,9 @@ function applyLegalContentLanguage($, bundle, locale) {
 }
 
 async function buildLegalPages(homeData, legalCollections) {
-  for (const [pageKey, templatePath] of Object.entries(legalTemplatePaths)) {
-    const template = await readHtmlTemplate(templatePath);
+  const shell = await readHtmlTemplate(legalTemplatePath);
+  for (const pageKey of LEGAL_PAGES) {
+    const template = shell.replace('  <main class="legal-main" id="main-content"></main>', renderLegalMain(pageKey));
     const translations = legalCollections[pageKey];
 
     for (const localeOption of homeData.localeOptions) {
@@ -1261,7 +1248,7 @@ async function buildLegalPages(homeData, legalCollections) {
       await writeOutputFile(outputFile, serialize($, homeData, locale, pageKey));
     }
   }
-  return Object.keys(legalTemplatePaths).flatMap((pageKey) =>
+  return LEGAL_PAGES.flatMap((pageKey) =>
     LEGAL_INDEXED_LOCALES.map((locale) => ({ loc: buildPageUrl(locale, pageKey), changefreq: "yearly", priority: "0.3" }))
   );
 }
@@ -1707,11 +1694,13 @@ async function main() {
   const homeSandbox = await runFilesInSandbox(homeDataFiles);
   const cookieSandbox = { window: {} };
   vm.runInNewContext(await fs.readFile(path.join(repoRoot, "js", "cookie-consent-copy.js"), "utf8"), cookieSandbox);
+  const legalBase = (await runFilesInSandbox(legalBaseDataFiles)).translations;
   const legalCollections = {};
-
-  for (const [pageKey, files] of Object.entries(legalDataFiles)) {
-    const sandbox = await runFilesInSandbox(files);
-    legalCollections[pageKey] = sandbox.translations;
+  for (const pageKey of LEGAL_PAGES) {
+    const bundles = legalBundles(pageKey);
+    legalCollections[pageKey] = Object.fromEntries(
+      Object.entries(bundles).map(([locale, legal]) => [locale, { ...legalBase[locale], legal }])
+    );
   }
 
   const homeData = {
