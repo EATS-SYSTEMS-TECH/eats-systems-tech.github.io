@@ -10,6 +10,7 @@ const copy = {
     contact: "联系我们",
   },
   hero: {
+    media: {"replay":"再次播放视频","mute":"将视频静音","unmute":"取消视频静音","pause":"暂停视频","play":"播放视频"},
     titleLines: ["一个平台。", "适用于各类物业。"],
     subtitle: "住宅、商业和住宿场所的智能门禁与控制，尽在一款 App，简单易用。",
     primaryCta: "探索平台",

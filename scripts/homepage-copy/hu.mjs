@@ -10,6 +10,7 @@ const copy = {
     contact: "Kapcsolatfelvétel",
   },
   hero: {
+    media: {"replay":"Videó lejátszása újra","mute":"Videó némítása","unmute":"Videó némításának feloldása","pause":"Videó szüneteltetése","play":"Videó lejátszása"},
     titleLines: ["Egy platform.", "Minden ingatlan."],
     subtitle: "Okos hozzáférés és vezérlés lakóingatlanokhoz, üzleti ingatlanokhoz és szálláshelyekhez. Minden egy alkalmazásban. Egyszerűen, felesleges bonyodalmak nélkül.",
     primaryCta: "Fedezze fel a platformot",

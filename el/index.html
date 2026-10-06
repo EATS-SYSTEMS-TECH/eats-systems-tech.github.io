@@ -85,7 +85,7 @@
   <script src="../js/utils.js?v=20260402a" defer=""></script>
 
   <script src="../js/navigation.js?v=20261007a" defer=""></script>
-  <script src="../js/hero.js?v=20261007a" defer=""></script>
+  <script src="../js/hero.js?v=20261007b" defer=""></script>
 
   <script>window.accessibilityCopy = {"el":{"skipLink":"Μετάβαση στο κύριο περιεχόμενο","eyebrow":"Προσβασιμότητα","openButton":"Άνοιγμα μενού προσβασιμότητας","closeButton":"Κλείσιμο μενού προσβασιμότητας","title":"Μενού προσβασιμότητας","description":"Προσαρμόστε τον ιστότοπο στον τρόπο που διαβάζετε και περιηγείστε. Οι επιλογές σας αποθηκεύονται σε αυτή τη συσκευή.","reset":"Επαναφορά όλων","statusDefault":"Τυπική προβολή ιστότοπου","statusActive":"Ενεργές προσαρμογές: {count}","hideButton":"Απόκρυψη του κουμπιού προσβασιμότητας μέχρι την επαναφόρτωση της σελίδας","statementLink":"Δήλωση προσβασιμότητας","textSize":{"label":"Μέγεθος κειμένου","description":"Μεγέθυνση του κειμένου σε όλο τον ιστότοπο.","decrease":"Μικρότερο κείμενο","increase":"Μεγαλύτερο κείμενο","level":"Μέγεθος κειμένου {percent}%"},"options":{"highContrast":{"label":"Υψηλή αντίθεση","description":"Σκούρο κείμενο σε ανοιχτό φόντο με έντονα περιγράμματα."},"grayscale":{"label":"Κλίμακα του γκρι","description":"Προβολή του ιστότοπου χωρίς χρώματα."},"underlineLinks":{"label":"Επισήμανση συνδέσμων","description":"Υπογράμμιση και σήμανση κάθε συνδέσμου."},"readableFont":{"label":"Ευανάγνωστη γραμματοσειρά","description":"Απλή, πολύ ευανάγνωστη γραμματοσειρά."},"textSpacing":{"label":"Απόσταση κειμένου","description":"Περισσότερος χώρος ανάμεσα σε γραμμές, λέξεις και γράμματα."},"highlightHeadings":{"label":"Επισήμανση επικεφαλίδων","description":"Σήμανση των επικεφαλίδων ώστε να φαίνεται η δομή της σελίδας."},"bigCursor":{"label":"Μεγάλος δρομέας","description":"Μεγαλύτερος δείκτης ποντικιού."},"focusHighlight":{"label":"Έντονη εστίαση","description":"Παχύ περίγραμμα γύρω από το στοιχείο που έχει την εστίαση πληκτρολογίου."},"reducedMotion":{"label":"Διακοπή κινούμενων εικόνων","description":"Διακοπή κινούμενων εικόνων, μεταβάσεων και του βίντεο φόντου."}}}};</script>
   <script src="../js/accessibility.js?v=20261007a" defer=""></script>
@@ -93,7 +93,7 @@
 
 
   <script src="../js/language-selector.js?v=20261006a" defer=""></script>
-  <script id="hero-locale-data" type="application/json">{"phrases":["Εύκολο στη χρήση","Πλήρης ιδιωτικότητα","Χωρίς συνδρομές"],"media":{"replay":"Play Video Again","mute":"Mute video","unmute":"Unmute video"}}</script><script src="../js/main.js?v=20261007a" defer=""></script>
+  <script id="hero-locale-data" type="application/json">{"media":{"replay":"Αναπαραγωγή ξανά","mute":"Σίγαση βίντεο","unmute":"Ενεργοποίηση ήχου","pause":"Παύση βίντεο","play":"Αναπαραγωγή βίντεο"}}</script><script src="../js/main.js?v=20261007b" defer=""></script>
 
   <style>
     .contact-info__avatar {
@@ -641,7 +641,7 @@
           <source src="../assets/vid/wifigate-final-hero-720p.mp4?v=20261007" type="video/mp4">
         </video>
         <div class="hero__overlay"></div>
-        <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="Pause video" title="Pause video" aria-pressed="false" data-paused="false">
+        <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="Παύση βίντεο" title="Παύση βίντεο" aria-pressed="false" data-paused="false">
           <svg class="hero__media-control-icon hero__media-control-icon--pause" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
             <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
@@ -650,7 +650,7 @@
             <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" fill="currentColor"></path>
           </svg>
         </button>
-        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="Unmute video" title="Unmute video" aria-pressed="false" data-muted="true">
+        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="Ενεργοποίηση ήχου" title="Ενεργοποίηση ήχου" aria-pressed="false" data-muted="true">
           <svg class="hero__media-control-icon hero__media-control-icon--muted" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M14 4.12v15.76a1 1 0 0 1-1.68.73l-4.04-3.61H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.28l4.04-3.61A1 1 0 0 1 14 4.12Z" fill="currentColor"></path>
             <path d="m17 9 4 4m0-4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -661,12 +661,12 @@
             <path d="M19.75 7a8 8 0 0 1 0 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
         </button>
-        <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" hidden="" aria-label="Play Video Again" title="Play Video Again">
+        <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" hidden="" aria-label="Αναπαραγωγή ξανά" title="Αναπαραγωγή ξανά">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 5V2l-4 4 4 4V7a7 7 0 1 1-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
             <path d="m11 10 5 3-5 3z" fill="currentColor"></path>
           </svg>
-          <span>Play Video Again</span>
+          <span>Αναπαραγωγή ξανά</span>
         </button>
       </div>
 

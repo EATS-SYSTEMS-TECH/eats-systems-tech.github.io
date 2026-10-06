@@ -3,25 +3,23 @@
 // not with reduced motion, Save-Data, a slow connection or a phone-sized
 // screen. Everyone else sees the poster image and can start the video.
 
-// WCAG 2.2.2: labels of the control that pauses the looping hero video.
-const HERO_PAUSE_LABELS = {"en":["Pause video","Play video"],"he":["השהיית הסרטון","הפעלת הסרטון"],"es":["Pausar vídeo","Reproducir vídeo"],"fr":["Mettre la vidéo en pause","Lire la vidéo"],"de":["Video anhalten","Video abspielen"],"nl":["Video pauzeren","Video afspelen"],"it":["Metti in pausa il video","Riproduci il video"],"pt":["Pausar vídeo","Reproduzir vídeo"],"pl":["Wstrzymaj wideo","Odtwórz wideo"],"no":["Sett videoen på pause","Spill av videoen"],"cs":["Pozastavit video","Přehrát video"],"ru":["Приостановить видео","Воспроизвести видео"],"uk":["Призупинити відео","Відтворити відео"],"tr":["Videoyu duraklat","Videoyu oynat"],"ar":["إيقاف الفيديو مؤقتًا","تشغيل الفيديو"],"hi":["वीडियो रोकें","वीडियो चलाएँ"],"bn":["ভিডিও থামান","ভিডিও চালান"],"mr":["व्हिडिओ थांबवा","व्हिडिओ चालू करा"],"te":["వీడియోను పాజ్ చేయండి","వీడియోను ప్లే చేయండి"],"zh-hans":["暂停视频","播放视频"],"zh-hant":["暫停影片","播放影片"],"ja":["動画を一時停止","動画を再生"],"ko":["동영상 일시정지","동영상 재생"],"da":["Sæt videoen på pause","Afspil videoen"],"sv":["Pausa videon","Spela upp videon"],"hu":["Videó szüneteltetése","Videó lejátszása"],"el":["Παύση βίντεο","Αναπαραγωγή βίντεο"],"ro":["Întrerupe videoclipul","Redă videoclipul"],"hr":["Pauziraj videozapis","Reproduciraj videozapis"],"fi":["Keskeytä video","Toista video"],"bg":["Пауза на видеото","Пусни видеото"],"sr":["Паузирај видео","Пусти видео"],"sk":["Pozastaviť video","Prehrať video"],"sl":["Začasno ustavi video","Predvajaj video"],"id":["Jeda video","Putar video"],"th":["หยุดวิดีโอชั่วคราว","เล่นวิดีโอ"],"vi":["Tạm dừng video","Phát video"],"ms":["Jeda video","Main video"],"fil":["I-pause ang video","I-play ang video"]};
-
+// The labels of the video controls (pause/play, mute, replay) in the page
+// language; the build writes them into #hero-locale-data.
 const HERO_MEDIA_FALLBACK_COPY = {
   replay: "Play Video Again",
   mute: "Mute video",
   unmute: "Unmute video",
+  pause: "Pause video",
+  play: "Play video",
 };
 
 function getHeroMediaCopy() {
-  const lang = (document.documentElement.getAttribute("lang") || "en").toLowerCase();
-  const [pause, play] = HERO_PAUSE_LABELS[lang] || HERO_PAUSE_LABELS[lang.split("-")[0]] || HERO_PAUSE_LABELS.en;
-  let pageMedia = {};
   try {
-    pageMedia = JSON.parse(document.getElementById("hero-locale-data")?.textContent || "{}").media || {};
+    const media = JSON.parse(document.getElementById("hero-locale-data")?.textContent || "{}").media || {};
+    return { ...HERO_MEDIA_FALLBACK_COPY, ...media };
   } catch (error) {
-    // The fallback copy applies.
+    return HERO_MEDIA_FALLBACK_COPY;
   }
-  return { ...HERO_MEDIA_FALLBACK_COPY, ...pageMedia, pause, play };
 }
 
 // Autoplay downloads the whole video; only a desktop-sized screen on a

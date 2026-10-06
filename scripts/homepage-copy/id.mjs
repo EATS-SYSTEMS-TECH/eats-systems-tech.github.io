@@ -10,6 +10,7 @@ const copy = {
     contact: "Hubungi tim kami",
   },
   hero: {
+    media: {"replay":"Putar video lagi","mute":"Bisukan video","unmute":"Aktifkan suara","pause":"Jeda video","play":"Putar video"},
     titleLines: ["Satu platform.", "Setiap properti."],
     subtitle: "Akses dan kontrol cerdas untuk hunian, area komersial, dan properti perhotelan. Semuanya dalam satu aplikasi. Praktis dan mudah digunakan.",
     primaryCta: "Jelajahi platform",

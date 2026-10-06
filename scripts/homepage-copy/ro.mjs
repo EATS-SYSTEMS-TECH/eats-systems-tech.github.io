@@ -10,6 +10,7 @@ const copy = {
     contact: "Luați legătura cu noi",
   },
   hero: {
+    media: {"replay":"Redă din nou videoclipul","mute":"Dezactivează sunetul","unmute":"Activează sunetul","pause":"Întrerupe videoclipul","play":"Redă videoclipul"},
     titleLines: ["O singură platformă.", "Pentru orice proprietate."],
     subtitle: "Acces și control inteligente pentru spații rezidențiale, comerciale și de cazare. Totul într-o singură aplicație. Simplu, fără complicații.",
     primaryCta: "Explorați platforma",

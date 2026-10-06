@@ -7,6 +7,7 @@ import { pathToFileURL } from "node:url";
 import { NICHE_CHROME } from "./niche-content.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
 import { SITE_LOGIN_LABELS, SITE_NAVIGATION } from "./site-navigation.mjs";
+import { RTL_LANGUAGES, SITE_LANGUAGES } from "./site-languages.mjs";
 import { accessibilityLinkLabels } from "./legal/footer-labels.mjs";
 import { wifigateLinkLocales } from "./wifigate-link-locales.mjs";
 import { buildLlmsTxt } from "./llms-txt.mjs";
@@ -29,34 +30,9 @@ const nicheTemplatePath = path.join(repoRoot, "templates", "niche.template.html"
 const guestInvitesTemplatePath = path.join(repoRoot, "templates", "guest-invites-api.template.html");
 const legalTemplatePath = path.join(repoRoot, "templates", "legal.template.html");
 
-const homeDataFiles = [
-  "js/translations.js",
-  "js/translations-extra.js",
-  "js/translations-new-locales.js",
-  "js/i18n.js",
-  "js/accessibility-copy.js",
-  "js/language-polish.js",
-];
 
-// The shared strings under the legal text (header, footer fallbacks); the
-// legal text itself comes from scripts/legal/legal-pages.mjs and nothing
-// rewrites it afterwards.
-const legalBaseDataFiles = ["js/translations.js", "js/translations-extra.js", "js/language-polish.js"];
+const homeRuntimeScriptsToRemove = ["js/language-selector.js"];
 
-const homeRuntimeScriptsToRemove = [
-  "js/translations.js",
-  "js/translations-extra.js",
-  "js/translations-new-locales.js",
-  "js/i18n.js",
-  "js/language-selector.js",
-];
-
-const legalRuntimeScriptsToRemove = [
-  "js/translations.js",
-  "js/translations-extra.js",
-  "js/i18n.js",
-  "js/hero.js",
-];
 
 const homeRuntimeScriptsToAdd = [
   "/js/language-selector.js?v=20261006a",
@@ -78,118 +54,6 @@ const pageImages = {
   utility: { url: `${SITE_ORIGIN}/logo-1024.png`, width: 1024, height: 1024, alt: "WIFIGATE" },
   guestInvites: shareImage,
 };
-
-const homeProductImageAlt = {
-  en: "WIFIGATE device next to the mobile app gate list",
-  he: "מכשיר WIFIGATE לצד מסך אפליקציה עם רשימת שערים",
-  es: "Dispositivo WIFIGATE junto a la app móvil con lista de accesos",
-  fr: "Boîtier WIFIGATE à côté de l'application mobile avec la liste des accès",
-  de: "WIFIGATE Gerät neben der mobilen App mit Torliste",
-  nl: "WIFIGATE apparaat naast de mobiele app met poortenlijst",
-  it: "Dispositivo WIFIGATE accanto all'app mobile con elenco degli accessi",
-  pt: "Dispositivo WIFIGATE junto à app móvel com lista de acessos",
-  pl: "Urządzenie WIFIGATE obok aplikacji mobilnej z listą bram",
-  no: "WIFIGATE-enhet ved siden av mobilappen med portliste",
-  cs: "Zařízení WIFIGATE vedle mobilní aplikace se seznamem bran",
-  ru: "Устройство WIFIGATE рядом с мобильным приложением со списком ворот",
-  uk: "Пристрій WIFIGATE поруч із мобільним застосунком зі списком воріт",
-  tr: "Kapı listesi gösteren mobil uygulamanın yanında WIFIGATE cihazı",
-  ar: "جهاز WIFIGATE بجانب تطبيق الهاتف مع قائمة البوابات",
-  hi: "गेट सूची दिखाने वाले मोबाइल ऐप के पास WIFIGATE डिवाइस",
-  bn: "গেটের তালিকা দেখানো মোবাইল অ্যাপের পাশে WIFIGATE ডিভাইস",
-  mr: "गेट यादी दाखवणाऱ्या मोबाइल अॅपजवळ WIFIGATE डिव्हाइस",
-  te: "గేట్ల జాబితా చూపిస్తున్న మొబైల్ యాప్ పక్కన WIFIGATE పరికరం",
-  "zh-Hans": "WIFIGATE 设备旁边显示门列表的手机应用",
-  "zh-Hant": "WIFIGATE 裝置旁邊顯示大門列表的手機應用程式",
-  ja: "ゲート一覧を表示するモバイルアプリの横にある WIFIGATE デバイス",
-  ko: "게이트 목록을 보여주는 모바일 앱 옆의 WIFIGATE 장치",
-  da: "WIFIGATE-enhed ved siden af mobilappen med portliste",
-  sv: "WIFIGATE-enhet bredvid mobilappen med lista över grindar",
-  hu: "WIFIGATE eszköz a kapulistát mutató mobilalkalmazás mellett",
-};
-
-function createSandbox() {
-  const sandbox = {
-    console,
-    setTimeout,
-    clearTimeout,
-    setInterval,
-    clearInterval,
-    window: {},
-    history: { pushState() {} },
-    location: { hash: "", href: siteOrigin, pathname: "/" },
-    navigator: {},
-    localStorage: {
-      getItem() {
-        return null;
-      },
-      setItem() {},
-      removeItem() {},
-    },
-    document: {
-      documentElement: {
-        getAttribute(name) {
-          if (name === "lang") return defaultLocale;
-          return null;
-        },
-        setAttribute() {},
-        classList: { toggle() {} },
-      },
-      body: { classList: { add() {}, remove() {}, toggle() {} } },
-      addEventListener() {},
-      removeEventListener() {},
-      querySelector() {
-        return null;
-      },
-      querySelectorAll() {
-        return [];
-      },
-      getElementById() {
-        return null;
-      },
-    },
-    CustomEvent: class CustomEvent {
-      constructor(type, init = {}) {
-        this.type = type;
-        this.detail = init.detail;
-      }
-    },
-    IntersectionObserver: class IntersectionObserver {
-      observe() {}
-      unobserve() {}
-      disconnect() {}
-    },
-    Element: class Element {},
-    requestAnimationFrame(callback) {
-      return callback();
-    },
-    cancelAnimationFrame() {},
-    matchMedia() {
-      return {
-        matches: false,
-        addEventListener() {},
-        addListener() {},
-      };
-    },
-  };
-
-  sandbox.window = sandbox;
-  sandbox.globalThis = sandbox;
-  sandbox.global = sandbox;
-  return vm.createContext(sandbox);
-}
-
-async function runFilesInSandbox(files) {
-  const sandbox = createSandbox();
-
-  for (const relativeFile of files) {
-    const absoluteFile = path.join(repoRoot, relativeFile);
-    const source = await fs.readFile(absoluteFile, "utf8");
-    vm.runInContext(source, sandbox, { filename: absoluteFile });
-  }
-
-  return sandbox;
-}
 
 function getNestedValue(source, keyPath) {
   return keyPath.split(".").reduce((value, key) => {
@@ -295,7 +159,7 @@ function normalizeLocalePath(locale) {
 }
 
 function isRtl(locale) {
-  return locale === "he" || locale === "ar";
+  return RTL_LANGUAGES.has(locale);
 }
 
 function getOutputSegments(locale, pageKey = "home") {
@@ -492,12 +356,8 @@ function applyDataI18nTranslations($, bundle, locale) {
 }
 
 // `footerCopy` is the curated footer block from scripts/homepage-copy/<locale>.mjs.
-// It is the single source of truth for footer wording on every page type; the
-// older js/translations.js bundle is only a fallback, so the homepage and the
-// inner pages can no longer disagree about the same footer.
-function updateFooterStaticUi($, bundle, locale, footerCopy) {
-  const footer = { ...(bundle.footer || {}), ...(footerCopy || {}) };
-  const contact = bundle.contact || {};
+// It is the single source of truth for footer wording on every page type.
+function updateFooterStaticUi($, locale, footer) {
   const dir = isRtl(locale) ? "rtl" : "ltr";
   // These wrappers are authored dir="rtl" (Hebrew-first source). Flip them to
   // match the page locale so LTR languages (English, etc.) are not mirrored.
@@ -526,14 +386,6 @@ function updateFooterStaticUi($, bundle, locale, footerCopy) {
   set(".site-footer__link:nth-child(2)", footer.privacy);
   set(".site-footer__link:nth-child(3)", footer.cookies);
   set(".site-footer__copy", `${String.fromCharCode(0xa9)} 2026 ${footer.copyright || "WIFIGATE · EATS SYSTEMS TECH. All rights reserved."}`);
-  set("[data-i18n='contact.distributorTitle']", contact.distributorTitle);
-  set("[data-i18n='contact.distributorText']", contact.distributorText);
-  set("[data-i18n='contact.distributorButton']", contact.distributorButton);
-  set("[data-i18n='contact.supportTitle']", contact.supportTitle);
-  set("[data-i18n='contact.supportText']", contact.supportText);
-  set("[data-i18n='contact.interestTitle']", contact.interestTitle);
-  set("[data-i18n='contact.interestText']", contact.interestText);
-  set("[data-i18n='contact.whatsappButton']", contact.whatsappButton);
 }
 
 function updateAccessibilityMarkup($, accessibilityBundle, locale) {
@@ -671,17 +523,12 @@ function updateUtilityPageStaticUi($, copy) {
   );
 }
 
-function updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale) {
-  const semanticHeroText = (bundle.action.subtitle || bundle.hero.subtitle || "WIFIGATE smart access control").trim();
-  const normalizedHeroText = semanticHeroText.replace(/^wifigate[\s.:,-]*/i, "");
-
-  $("#hero-search-text").text(normalizedHeroText ? `WIFIGATE. ${normalizedHeroText}` : "WIFIGATE");
-  $("#hero-rotator").text(bundle.hero.rotator.phrases[0]);
-  $("#hero-mute-toggle").attr("aria-label", bundle.hero.media.unmute);
-  $("#hero-mute-toggle").attr("title", bundle.hero.media.unmute);
-  $("#hero-replay span").text(bundle.hero.media.replay);
-  $("#hero-replay").attr("aria-label", bundle.hero.media.replay);
-  $("#hero-replay").attr("title", bundle.hero.media.replay);
+function updateHomeStaticUi($, copy, accessibilityBundle, locale) {
+  const media = copy.hero.media;
+  $("#hero-mute-toggle").attr({ "aria-label": media.unmute, title: media.unmute });
+  $("#hero-pause-toggle").attr({ "aria-label": media.pause, title: media.pause });
+  $("#hero-replay span").text(media.replay);
+  $("#hero-replay").attr({ "aria-label": media.replay, title: media.replay });
 
   updateAccessibilityMarkup($, accessibilityBundle, locale);
 }
@@ -693,33 +540,14 @@ function splitHomeWhereSubtitle(value) {
   return match ? [match[1].trim(), match[2].trim()] : [subtitle, ""];
 }
 
-function updateHomeWhereSection($, locale, bundle) {
+// The use-case links of the homepage list, in the page language.
+function updateHomeWhereLinks($, locale) {
   const content = getNichePageContent(locale);
-  const subtitle = bundle?.action?.subtitle || content.where.subtitle;
-  const [propertiesCopy, controlsCopy] = splitHomeWhereSubtitle(subtitle);
-  const controlsItem = $("#where-intro-controls").closest(".where-intro__item");
-
-  $("#where-title").text(bundle?.action?.title || content.where.title);
-  $("#where-subtitle").attr("dir", isRtl(locale) ? "rtl" : "ltr");
-  $("#where-intro-properties").text(propertiesCopy);
-  $("#where-intro-controls").text(controlsCopy);
-  if (controlsCopy) {
-    controlsItem.removeAttr("hidden");
-  } else {
-    controlsItem.attr("hidden", "");
+  for (const niche of NICHE_DEFINITIONS) {
+    $(`.where-list__link[data-niche-key='${niche.key}']`)
+      .attr("href", buildPagePath(locale, niche.key))
+      .text(content.niches[niche.key].label);
   }
-  $("#where-product-image").attr("alt", homeProductImageAlt[locale] || homeProductImageAlt[defaultLocale]);
-
-  NICHE_DEFINITIONS.forEach((niche) => {
-    const link = $(`.where-list__link[data-niche-key='${niche.key}']`);
-    if (!link.length) {
-      return;
-    }
-
-    const nicheContent = content.niches[niche.key];
-    link.attr("href", buildPagePath(locale, niche.key));
-    link.text(nicheContent.label);
-  });
 }
 
 function setLocalizedText($, target, value, locale) {
@@ -1171,7 +999,6 @@ async function buildHomePages(homeData) {
 
   for (const localeOption of homeData.localeOptions) {
     const locale = localeOption.code;
-    const bundle = getBundle(homeData.translations, locale);
     const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale);
     const $ = cheerio.load(template, { decodeEntities: false });
 
@@ -1179,11 +1006,10 @@ async function buildHomePages(homeData) {
     rewriteStaticAssets($, locale, "home");
     removeScripts($, homeRuntimeScriptsToRemove);
     appendScripts($, homeRuntimeScriptsToAdd, "script[src*='js/main.js']", locale, "home");
-    applyDataI18nTranslations($, bundle, locale);
-    updateFooterStaticUi($, bundle, locale, homeData.homepageCopies[locale]?.footer);
-    updateHomeStaticUi($, bundle, accessibilityBundle, homeData, locale);
+    updateFooterStaticUi($, locale, homepageCopies[locale].footer);
+    updateHomeStaticUi($, homepageCopies[locale], accessibilityBundle, locale);
     rewriteHomeInternalLinks($, locale);
-    updateHomeWhereSection($, locale, bundle);
+    updateHomeWhereLinks($, locale);
     applyHomepageCopy($, homepageCopies[locale], locale);
     rewriteHomeGuestInvitesLink($, locale);
     reorderHomeSections($);
@@ -1191,7 +1017,7 @@ async function buildHomePages(homeData) {
     insertPageDataScript(
       $,
       "hero-locale-data",
-      { phrases: bundle.hero.rotator.phrases, media: bundle.hero.media },
+      { media: homepageCopies[locale].hero.media },
       "script[src*='js/main.js']"
     );
 
@@ -1239,17 +1065,16 @@ async function buildLegalPages(homeData, legalCollections) {
 
     for (const localeOption of homeData.localeOptions) {
       const locale = localeOption.code;
-      const bundle = getBundle(translations, locale);
+      const bundle = translations[locale];
       const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale);
       const $ = cheerio.load(template, { decodeEntities: false });
 
       setBodyDirection($, locale);
       rewriteStaticAssets($, locale, pageKey);
-      removeScripts($, legalRuntimeScriptsToRemove);
       appendScripts($, legalRuntimeScriptsToAdd, "script[src*='js/legal-page.js']", locale, pageKey);
       applyDataI18nTranslations($, bundle, locale);
       applyLegalContentLanguage($, bundle, locale);
-      updateFooterStaticUi($, bundle, locale, homeData.homepageCopies[locale]?.footer);
+      updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer);
       updateAccessibilityMarkup($, accessibilityBundle, locale);
       rewriteLegalInternalLinks($, locale, pageKey);
       setLegalMeta($, locale, pageKey, homeData.localeOptions, bundle);
@@ -1293,30 +1118,9 @@ function getNicheChrome(locale) {
 }
 
 function buildNicheContext(homeData, niche, locale) {
-  const bundle = getBundle(homeData.translations, locale);
-  const enBundle = homeData.translations[defaultLocale];
-  const chrome = getNicheChrome(locale);
-  // heroLead and highlights are authored ahead of translation. A locale that
-  // does not carry them yet falls back to the English entry, so the section
-  // renders in English rather than disappearing -- the same way NICHE_CHROME
-  // already degrades.
-  const localeContent = getNichePageContent(locale).niches[niche.key];
-  const enContent = getNichePageContent(defaultLocale).niches[niche.key];
-  const content = {
-    ...localeContent,
-    heroLead: localeContent.heroLead || enContent.heroLead,
-    highlights: localeContent.highlights?.length ? localeContent.highlights : enContent.highlights,
-  };
-  const contact = bundle.contact || enBundle.contact;
-  const footer = bundle.footer || enBundle.footer;
-
   return {
-    bundle,
-    enBundle,
-    chrome,
-    content,
-    contact,
-    footer,
+    chrome: getNicheChrome(locale),
+    content: getNichePageContent(locale).niches[niche.key],
   };
 }
 
@@ -1433,7 +1237,7 @@ function getCircularAdjacentNiches(currentKey) {
 }
 
 function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
-  const { bundle, enBundle, chrome, content, contact, footer } = ctx;
+  const { chrome, content } = ctx;
   const localeNicheContent = getNichePageContent(locale);
   const defaultNicheContent = getNichePageContent(defaultLocale);
   const assetPrefix = buildAssetPrefix(locale, niche.key);
@@ -1464,7 +1268,7 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
   } else {
     setNicheList($, "#niche-hero-proof", (content.bullets || []).slice(0, 2), "niche-hero__proof-item");
   }
-  $("#niche-hero-cta-label").text(contact.ctaButton || "Contact via WhatsApp");
+  $("#niche-hero-cta-label").text("WhatsApp @WIFIGATE");
   $("#niche-hero-benefits").text(chrome.benefitsTitle);
 
 
@@ -1524,11 +1328,6 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
   // the shared footer carries support + WhatsApp Business.
 
   $("#js-year").text(nowDate.slice(0, 4));
-  $("#footer-copyright").text(footer.copyright || "WIFIGATE · EATS SYSTEMS TECH. All rights reserved.");
-  $("#footer-terms").text(footer.terms || "Terms & Conditions");
-  $("#footer-privacy").text(footer.privacy || "Privacy Policy");
-  $("#footer-cookies").text(footer.cookies || "Cookies");
-  $("#footer-tagline").text(footer.tagline || "");
 
   updateAccessibilityMarkup($, accessibilityBundle, locale);
 }
@@ -1590,7 +1389,7 @@ async function buildNichePages(homeData) {
       rewriteStaticAssets($, locale, niche.key);
       appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, niche.key);
       updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle);
-      updateFooterStaticUi($, ctx.bundle, locale, homeData.homepageCopies[locale]?.footer);
+      updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer);
       rewriteNicheInternalLinks($, locale);
       setNicheMeta($, ctx, niche, locale, homeData.localeOptions);
 
@@ -1686,7 +1485,6 @@ async function buildGuestInvitesPages(homeData) {
 
   for (const localeOption of homeData.localeOptions) {
     const locale = localeOption.code;
-    const bundle = getBundle(homeData.translations, locale);
     const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale);
     const hostCopy = await loadHostPageCopy(locale);
     const $ = cheerio.load(template, { decodeEntities: false });
@@ -1694,8 +1492,8 @@ async function buildGuestInvitesPages(homeData) {
     setBodyDirection($, locale);
     rewriteStaticAssets($, locale, guestInvitesPageKey);
     appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, guestInvitesPageKey);
-    applyDataI18nTranslations($, { ...bundle, guestInvites: { marketing: hostCopy.marketing } }, locale);
-    updateFooterStaticUi($, bundle, locale, homeData.homepageCopies[locale]?.footer);
+    applyDataI18nTranslations($, { nav: { home: getNicheChrome(locale).homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
+    updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer);
     updateAccessibilityMarkup($, accessibilityBundle, locale);
     rewriteGuestInvitesInternalLinks($, locale);
     reorderGuestInvitesSections($);
@@ -1715,25 +1513,25 @@ async function buildGuestInvitesPages(homeData) {
 }
 
 async function main() {
-  const homeSandbox = await runFilesInSandbox(homeDataFiles);
-  const cookieSandbox = { window: {} };
-  vm.runInNewContext(await fs.readFile(path.join(repoRoot, "js", "cookie-consent-copy.js"), "utf8"), cookieSandbox);
-  const legalBase = (await runFilesInSandbox(legalBaseDataFiles)).translations;
+  // The runtime copy files are plain scripts that set a window global.
+  const readWindowGlobal = async (file, name) => {
+    const sandbox = { window: {} };
+    vm.runInNewContext(await fs.readFile(path.join(repoRoot, "js", file), "utf8"), sandbox);
+    return sandbox.window[name];
+  };
   const legalCollections = {};
   for (const pageKey of LEGAL_PAGES) {
-    const bundles = legalBundles(pageKey);
     legalCollections[pageKey] = Object.fromEntries(
-      Object.entries(bundles).map(([locale, legal]) => [locale, { ...legalBase[locale], legal }])
+      Object.entries(legalBundles(pageKey)).map(([locale, legal]) => [locale, { legal }])
     );
   }
 
   const homeData = {
-    localeOptions: homeSandbox.SITE_LANGUAGE_OPTIONS,
-    translations: homeSandbox.translations,
-    accessibilityCopy: homeSandbox.accessibilityCopy,
+    localeOptions: SITE_LANGUAGES,
+    accessibilityCopy: await readWindowGlobal("accessibility-copy.js", "accessibilityCopy"),
     // Loaded once here so every page type shares the same footer wording.
-    homepageCopies: await loadHomeCopy(homeSandbox.SITE_LANGUAGE_OPTIONS),
-    cookieCopy: cookieSandbox.window.WIFIGATE_COOKIE_COPY,
+    homepageCopies: await loadHomeCopy(SITE_LANGUAGES),
+    cookieCopy: await readWindowGlobal("cookie-consent-copy.js", "WIFIGATE_COOKIE_COPY"),
   };
 
   for (const localeOption of homeData.localeOptions) {

@@ -10,6 +10,7 @@ const copy = {
     contact: "Contacte-nos",
   },
   hero: {
+    media: {"replay":"Reproduzir o vídeo novamente","mute":"Silenciar vídeo","unmute":"Ativar som","pause":"Pausar vídeo","play":"Reproduzir vídeo"},
     titleLines: ["Uma plataforma.", "Para todas as propriedades."],
     subtitle: "Acesso inteligente e controlo para espaços residenciais, comerciais e hoteleiros. Tudo numa aplicação. Simples e sem esforço.",
     primaryCta: "Explorar a plataforma",

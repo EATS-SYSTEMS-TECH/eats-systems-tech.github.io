@@ -10,6 +10,7 @@ const copy = {
     contact: "Ota yhteyttä",
   },
   hero: {
+    media: {"replay":"Toista video uudelleen","mute":"Mykistä video","unmute":"Poista mykistys","pause":"Keskeytä video","play":"Toista video"},
     titleLines: ["Yksi alusta.", "Jokainen kiinteistö."],
     subtitle: "Älykäs kulunhallinta asuin-, liike- ja majoituskohteisiin. Kaikki yhdessä sovelluksessa. Helppoa ja vaivatonta.",
     primaryCta: "Tutustu alustaan",

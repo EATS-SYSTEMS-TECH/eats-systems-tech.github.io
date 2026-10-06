@@ -10,6 +10,7 @@ const copy = {
     contact: "Skontaktuj się z nami",
   },
   hero: {
+    media: {"replay":"Odtwórz film ponownie","mute":"Wycisz wideo","unmute":"Włącz dźwięk","pause":"Wstrzymaj wideo","play":"Odtwórz wideo"},
     titleLines: ["Jedna platforma.", "Każda nieruchomość."],
     subtitle: "Inteligentny dostęp i sterowanie w budynkach mieszkalnych, obiektach komercyjnych i miejscach noclegowych. Wszystko w jednej aplikacji, niezwykle prosto.",
     primaryCta: "Odkryj platformę",

@@ -10,6 +10,7 @@ const copy = {
     contact: "Javite nam se",
   },
   hero: {
+    media: {"replay":"Ponovno reproduciraj video","mute":"Isključi zvuk","unmute":"Uključi zvuk","pause":"Pauziraj videozapis","play":"Reproduciraj videozapis"},
     titleLines: ["Jedna platforma.", "Svaka nekretnina."],
     subtitle: "Pametan pristup i upravljanje za stambene, poslovne i smještajne objekte. Sve u jednoj aplikaciji. Jednostavno i bez komplikacija.",
     primaryCta: "Istražite platformu",

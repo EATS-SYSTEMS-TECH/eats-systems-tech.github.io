@@ -85,7 +85,7 @@
   <script src="../js/utils.js?v=20260402a" defer=""></script>
 
   <script src="../js/navigation.js?v=20261007a" defer=""></script>
-  <script src="../js/hero.js?v=20261007a" defer=""></script>
+  <script src="../js/hero.js?v=20261007b" defer=""></script>
 
   <script>window.accessibilityCopy = {"th":{"skipLink":"ข้ามไปยังเนื้อหาหลัก","eyebrow":"การเข้าถึง","openButton":"เปิดเมนูการเข้าถึง","closeButton":"ปิดเมนูการเข้าถึง","title":"เมนูการเข้าถึง","description":"ปรับเว็บไซต์ให้เหมาะกับวิธีอ่านและการใช้งานของคุณ ตัวเลือกของคุณจะถูกบันทึกไว้ในอุปกรณ์นี้","reset":"รีเซ็ตทั้งหมด","statusDefault":"มุมมองเว็บไซต์มาตรฐาน","statusActive":"เปิดใช้การปรับ {count} รายการ","hideButton":"ซ่อนปุ่มการเข้าถึงจนกว่าจะโหลดหน้าใหม่","statementLink":"คำแถลงการเข้าถึง","textSize":{"label":"ขนาดข้อความ","description":"ขยายข้อความทั่วทั้งเว็บไซต์","decrease":"ข้อความเล็กลง","increase":"ข้อความใหญ่ขึ้น","level":"ขนาดข้อความ {percent}%"},"options":{"highContrast":{"label":"ความคมชัดสูง","description":"ข้อความสีเข้มบนพื้นหลังสีอ่อนพร้อมเส้นขอบชัดเจน"},"grayscale":{"label":"โทนสีเทา","description":"แสดงเว็บไซต์โดยไม่มีสี"},"underlineLinks":{"label":"เน้นลิงก์","description":"ขีดเส้นใต้และทำเครื่องหมายทุกลิงก์"},"readableFont":{"label":"แบบอักษรอ่านง่าย","description":"แบบอักษรเรียบง่ายที่อ่านง่ายมาก"},"textSpacing":{"label":"ระยะห่างข้อความ","description":"เพิ่มระยะห่างระหว่างบรรทัด คำ และตัวอักษร"},"highlightHeadings":{"label":"เน้นหัวข้อ","description":"ทำเครื่องหมายหัวข้อเพื่อแสดงโครงสร้างของหน้า"},"bigCursor":{"label":"เคอร์เซอร์ขนาดใหญ่","description":"ตัวชี้เมาส์ที่ใหญ่ขึ้น"},"focusHighlight":{"label":"โฟกัสที่เห็นชัด","description":"เส้นขอบหนารอบองค์ประกอบที่มีโฟกัสของแป้นพิมพ์"},"reducedMotion":{"label":"หยุดภาพเคลื่อนไหว","description":"หยุดภาพเคลื่อนไหว เอฟเฟกต์การเปลี่ยนหน้า และวิดีโอพื้นหลัง"}}}};</script>
   <script src="../js/accessibility.js?v=20261007a" defer=""></script>
@@ -93,7 +93,7 @@
 
 
   <script src="../js/language-selector.js?v=20261006a" defer=""></script>
-  <script id="hero-locale-data" type="application/json">{"phrases":["ใช้งานง่าย","ความเป็นส่วนตัวเต็มรูปแบบ","ไม่มีค่าบริการรายเดือน"],"media":{"replay":"Play Video Again","mute":"Mute video","unmute":"Unmute video"}}</script><script src="../js/main.js?v=20261007a" defer=""></script>
+  <script id="hero-locale-data" type="application/json">{"media":{"replay":"เล่นวิดีโออีกครั้ง","mute":"ปิดเสียงวิดีโอ","unmute":"เปิดเสียงวิดีโอ","pause":"หยุดวิดีโอชั่วคราว","play":"เล่นวิดีโอ"}}</script><script src="../js/main.js?v=20261007b" defer=""></script>
 
   <style>
     .contact-info__avatar {
@@ -641,7 +641,7 @@
           <source src="../assets/vid/wifigate-final-hero-720p.mp4?v=20261007" type="video/mp4">
         </video>
         <div class="hero__overlay"></div>
-        <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="Pause video" title="Pause video" aria-pressed="false" data-paused="false">
+        <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="หยุดวิดีโอชั่วคราว" title="หยุดวิดีโอชั่วคราว" aria-pressed="false" data-paused="false">
           <svg class="hero__media-control-icon hero__media-control-icon--pause" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
             <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
@@ -650,7 +650,7 @@
             <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" fill="currentColor"></path>
           </svg>
         </button>
-        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="Unmute video" title="Unmute video" aria-pressed="false" data-muted="true">
+        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="เปิดเสียงวิดีโอ" title="เปิดเสียงวิดีโอ" aria-pressed="false" data-muted="true">
           <svg class="hero__media-control-icon hero__media-control-icon--muted" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M14 4.12v15.76a1 1 0 0 1-1.68.73l-4.04-3.61H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.28l4.04-3.61A1 1 0 0 1 14 4.12Z" fill="currentColor"></path>
             <path d="m17 9 4 4m0-4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -661,12 +661,12 @@
             <path d="M19.75 7a8 8 0 0 1 0 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
         </button>
-        <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" hidden="" aria-label="Play Video Again" title="Play Video Again">
+        <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" hidden="" aria-label="เล่นวิดีโออีกครั้ง" title="เล่นวิดีโออีกครั้ง">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 5V2l-4 4 4 4V7a7 7 0 1 1-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
             <path d="m11 10 5 3-5 3z" fill="currentColor"></path>
           </svg>
-          <span>Play Video Again</span>
+          <span>เล่นวิดีโออีกครั้ง</span>
         </button>
       </div>
 

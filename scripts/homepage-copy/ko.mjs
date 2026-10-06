@@ -10,6 +10,7 @@ const copy = {
     contact: "문의하기",
   },
   hero: {
+    media: {"replay":"비디오 다시 재생","mute":"비디오 음소거","unmute":"동영상 음소거 해제","pause":"동영상 일시정지","play":"동영상 재생"},
     titleLines: ["하나의 플랫폼.", "모든 공간."],
     subtitle: "주거, 상업, 숙박 공간의 스마트 출입과 제어를 하나의 앱으로 통합 관리하세요. 도입도 운영도 간단합니다.",
     primaryCta: "플랫폼 살펴보기",

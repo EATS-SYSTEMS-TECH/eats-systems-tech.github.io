@@ -13,8 +13,8 @@
     applyHomepageCopy() localise them by position.
   - Keep the `../` prefix on the legal hrefs and on asset paths; the build
     rewrites both to the right depth per locale and page.
-  - `data-i18n` attributes are build-time markers only. js/i18n.js is stripped
-    from every generated page, so they are inert in the shipped HTML.
+  - `data-i18n` attributes are build-time markers only; nothing reads them in
+    the shipped HTML.
   - `dir` is overwritten per locale by updateFooterStaticUi().
 -->
 <footer class="site-footer" dir="ltr">

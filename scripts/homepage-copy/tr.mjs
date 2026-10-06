@@ -10,6 +10,7 @@
     contact: "İletişime geçin",
   },
   hero: {
+    media: {"replay":"Videoyu Tekrar Oynat","mute":"Videonun sesini kapat","unmute":"Videonun sesini aç","pause":"Videoyu duraklat","play":"Videoyu oynat"},
     titleLines: ["Tek platform.", "Her mülk için."],
     subtitle: "Konutlar, ticari alanlar ve konaklama tesisleri için akıllı erişim ve kontrol. Hepsi tek uygulamada. Son derece kolay.",
     primaryCta: "Platformu keşfedin",

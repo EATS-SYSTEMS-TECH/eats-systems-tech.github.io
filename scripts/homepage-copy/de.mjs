@@ -10,6 +10,7 @@ const copy = {
     contact: "Kontakt aufnehmen",
   },
   hero: {
+    media: {"replay":"Video erneut abspielen","mute":"Video stumm schalten","unmute":"Stummschaltung des Videos aufheben","pause":"Video anhalten","play":"Video abspielen"},
     titleLines: ["Eine Plattform.", "Jede Immobilie."],
     subtitle: "Intelligente Zutrittskontrolle für Wohngebäude, Gewerbeobjekte und Beherbergungsbetriebe. Alles in einer App. Einfach und intuitiv.",
     primaryCta: "Plattform entdecken",

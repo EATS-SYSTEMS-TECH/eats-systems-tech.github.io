@@ -10,6 +10,7 @@ const copy = {
     contact: "Hubungi pasukan kami",
   },
   hero: {
+    media: {"replay":"Main video semula","mute":"Senyapkan video","unmute":"Nyahsenyap video","pause":"Jeda video","play":"Main video"},
     titleLines: ["Satu platform.", "Setiap hartanah."],
     subtitle: "Akses pintar dan kawalan untuk ruang kediaman, komersial, dan hospitaliti. Semuanya dalam satu aplikasi. Ringkas dan mudah digunakan.",
     primaryCta: "Terokai platform",
