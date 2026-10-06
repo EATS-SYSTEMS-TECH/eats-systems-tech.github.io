@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../../css/styles.css?v=20261005b">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20261006b">
-  <link rel="stylesheet" href="../../css/niche.css?v=20261007a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20261007b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
   <script>window.accessibilityCopy = {"hu":{"skipLink":"Ugrás a fő tartalomhoz","eyebrow":"Akadálymentesség","openButton":"Akadálymentességi menü megnyitása","closeButton":"Akadálymentességi menü bezárása","title":"Akadálymentességi menü","description":"Igazítsa a webhelyet ahhoz, ahogyan olvas és navigál. A választásait ez az eszköz tárolja.","reset":"Minden visszaállítása","statusDefault":"Normál webhelynézet","statusActive":"{count} beállítás aktív","hideButton":"Az akadálymentességi gomb elrejtése az oldal újratöltéséig","statementLink":"Akadálymentességi nyilatkozat","textSize":{"label":"Szövegméret","description":"A szöveg nagyítása a teljes webhelyen.","decrease":"Kisebb szöveg","increase":"Nagyobb szöveg","level":"Szövegméret: {percent}%"},"options":{"highContrast":{"label":"Nagy kontraszt","description":"Sötét szöveg világos háttéren, erős keretekkel."},"grayscale":{"label":"Szürkeárnyalat","description":"A webhely megjelenítése színek nélkül."},"underlineLinks":{"label":"Hivatkozások kiemelése","description":"Minden hivatkozás aláhúzása és megjelölése."},"readableFont":{"label":"Olvasható betűtípus","description":"Egyszerű, jól olvasható betűtípus."},"textSpacing":{"label":"Szövegtávolság","description":"Több hely a sorok, szavak és betűk között."},"highlightHeadings":{"label":"Címsorok kiemelése","description":"A címsorok megjelölése az oldal szerkezetének mutatásához."},"bigCursor":{"label":"Nagy kurzor","description":"Nagyobb egérmutató."},"focusHighlight":{"label":"Jól látható fókusz","description":"Vastag keret a billentyűzetfókuszban lévő elem körül."},"reducedMotion":{"label":"Animációk leállítása","description":"Az animációk, átmenetek és a háttérvideó leállítása."}}}};</script>
@@ -247,6 +247,48 @@
           "position": 2,
           "name": "Szállodák, Airbnb és vendégapartmanok",
           "item": "https://wifigate.io/hu/hotels-airbnb/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/hu/hotels-airbnb/#faq",
+      "inLanguage": "hu",
+      "isPartOf": {
+        "@id": "https://wifigate.io/hu/hotels-airbnb/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Hogyan nyitják a vendégek a kaput vagy az ajtót a WIFIGATE-tel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Minden vendég időkorlátos meghívót kap a telefonjára, és a WIFIGATE alkalmazásból nyitja a kaput, az ajtót vagy a garázst. A hozzáférés bejelentkezéskor kezdődik és kijelentkezéskor automatikusan véget ér, így nem kell kulcsot, kártyát vagy kódot átadni."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Létrehozható a vendéghozzáférés automatikusan a foglalásokból?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Igen. A WIFIGATE Host és a WIFIGATE API segítségével egy megerősített foglalás automatikusan létrehozhatja a vendég hozzáférését, a tartózkodás dátumaihoz és időpontjaihoz igazítva."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kaphatnak saját hozzáférést a takarítók és a karbantartók?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Igen. A személyzet, a takarítók, a karbantartók és a beszállítók mind saját jogosultságot kapnak, a hozzáférési előzmények pedig megmutatják, ki és mikor nyitott."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kell előfizetés a WIFIGATE-hez szállodáknak és kiadó szálláshelyeknek?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A WIFIGATE eszközhöz nem tartozik havi előfizetés. A WIFIGATE Host, a szállodák és kiadó szálláshelyek foglalási automatizálása az egyetlen előfizetéssel elérhető rész."
+          }
         }
       ]
     }
@@ -579,6 +621,15 @@
           <h2 class="niche-section__title" id="niche-benefits-title">Fő előnyök</h2>
         </div>
         <ul class="niche-benefits__grid" id="niche-benefits-list"><li class="niche-benefit">Automatikus vendéghozzáférés létrehozása jóváhagyott foglalás után</li><li class="niche-benefit">Teljes automatizálás támogatása WIFIGATE API-val</li><li class="niche-benefit">Ideiglenes hozzáférés a tartózkodás dátumai és időpontjai szerint</li><li class="niche-benefit">Kevesebb kézi check-in, kulcs, kártya vagy kód</li><li class="niche-benefit niche-benefit--gap" aria-hidden="true"></li><li class="niche-benefit">Jogosultságkezelés személyzetnek, takarítóknak, karbantartóknak és beszállítóknak</li><li class="niche-benefit">Gördülékenyebb érkezési élmény a vendégeknek</li><li class="niche-benefit">Automatikus hozzáféréslezárás kijelentkezéskor</li><li class="niche-benefit">Hozzáférési előzmények az átláthatóság és ellenőrzés érdekében</li></ul>
+      </div>
+    </section>
+
+    <section class="niche-section niche-faq" id="niche-faq" aria-labelledby="niche-faq-title">
+      <div class="container">
+        <div class="niche-section__header">
+          <h2 class="niche-section__title" id="niche-faq-title">Gyakori kérdések</h2>
+        </div>
+        <div class="niche-faq__list" id="niche-faq-list"><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Hogyan nyitják a vendégek a kaput vagy az ajtót a WIFIGATE-tel?</summary><p class="niche-faq__answer" dir="ltr">Minden vendég időkorlátos meghívót kap a telefonjára, és a WIFIGATE alkalmazásból nyitja a kaput, az ajtót vagy a garázst. A hozzáférés bejelentkezéskor kezdődik és kijelentkezéskor automatikusan véget ér, így nem kell kulcsot, kártyát vagy kódot átadni.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Létrehozható a vendéghozzáférés automatikusan a foglalásokból?</summary><p class="niche-faq__answer" dir="ltr">Igen. A WIFIGATE Host és a WIFIGATE API segítségével egy megerősített foglalás automatikusan létrehozhatja a vendég hozzáférését, a tartózkodás dátumaihoz és időpontjaihoz igazítva.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Kaphatnak saját hozzáférést a takarítók és a karbantartók?</summary><p class="niche-faq__answer" dir="ltr">Igen. A személyzet, a takarítók, a karbantartók és a beszállítók mind saját jogosultságot kapnak, a hozzáférési előzmények pedig megmutatják, ki és mikor nyitott.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Kell előfizetés a WIFIGATE-hez szállodáknak és kiadó szálláshelyeknek?</summary><p class="niche-faq__answer" dir="ltr">A WIFIGATE eszközhöz nem tartozik havi előfizetés. A WIFIGATE Host, a szállodák és kiadó szálláshelyek foglalási automatizálása az egyetlen előfizetéssel elérhető rész.</p></details></div>
       </div>
     </section>
 

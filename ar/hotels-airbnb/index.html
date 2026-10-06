@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../../css/styles.css?v=20261005b">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20261006b">
-  <link rel="stylesheet" href="../../css/niche.css?v=20261007a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20261007b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
   <script>window.accessibilityCopy = {"ar":{"skipLink":"انتقل إلى المحتوى الرئيسي","eyebrow":"إمكانية الوصول","openButton":"فتح قائمة إمكانية الوصول","closeButton":"إغلاق قائمة إمكانية الوصول","title":"قائمة إمكانية الوصول","description":"عدّل الموقع ليناسب طريقتك في القراءة والتنقل. تُحفظ اختياراتك على هذا الجهاز.","reset":"إعادة تعيين الكل","statusDefault":"العرض القياسي للموقع","statusActive":"التعديلات النشطة: {count}","hideButton":"إخفاء زر إمكانية الوصول حتى إعادة تحميل الصفحة","statementLink":"بيان إمكانية الوصول","textSize":{"label":"حجم النص","description":"تكبير النص في الموقع بالكامل.","decrease":"تصغير النص","increase":"تكبير النص","level":"حجم النص {percent}%"},"options":{"highContrast":{"label":"تباين عالٍ","description":"نص داكن على خلفية فاتحة مع حدود واضحة."},"grayscale":{"label":"تدرج رمادي","description":"عرض الموقع بدون ألوان."},"underlineLinks":{"label":"تمييز الروابط","description":"وضع خط تحت كل رابط وتمييزه."},"readableFont":{"label":"خط سهل القراءة","description":"خط بسيط وواضح جدًا."},"textSpacing":{"label":"تباعد النص","description":"مسافة أكبر بين الأسطر والكلمات والحروف."},"highlightHeadings":{"label":"تمييز العناوين","description":"تمييز العناوين لإظهار بنية الصفحة."},"bigCursor":{"label":"مؤشر كبير","description":"مؤشر فأرة أكبر."},"focusHighlight":{"label":"تركيز واضح","description":"إطار سميك حول العنصر الذي عليه تركيز لوحة المفاتيح."},"reducedMotion":{"label":"إيقاف الحركة","description":"إيقاف الرسوم المتحركة والانتقالات وفيديو الخلفية."}}}};</script>
@@ -247,6 +247,48 @@
           "position": 2,
           "name": "الفنادق وAirbnb وشقق الضيافة",
           "item": "https://wifigate.io/ar/hotels-airbnb/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/ar/hotels-airbnb/#faq",
+      "inLanguage": "ar",
+      "isPartOf": {
+        "@id": "https://wifigate.io/ar/hotels-airbnb/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "كيف يفتح الضيوف البوابة أو الباب باستخدام WIFIGATE؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "يحصل كل ضيف على دعوة محدودة المدة على هاتفه، ويفتح البوابة أو الباب أو الكراج من تطبيق WIFIGATE. تبدأ الصلاحية عند تسجيل الوصول وتنتهي تلقائياً عند تسجيل المغادرة، فلا حاجة إلى تسليم مفاتيح أو بطاقات أو رموز."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل يمكن إنشاء صلاحيات الضيوف تلقائياً من الحجوزات؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "نعم. مع WIFIGATE Host وWIFIGATE API، يمكن للحجز المؤكد أن ينشئ صلاحية الضيف تلقائياً، وفق تواريخ الإقامة وساعاتها."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل يمكن لعمال النظافة والصيانة الحصول على صلاحيات خاصة بهم؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "نعم. يحصل كل من الطاقم وعمال النظافة والصيانة والموردين على صلاحية خاصة به، ويُظهر سجل الوصول من فتح ومتى."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل يتطلب WIFIGATE اشتراكاً للفنادق وشقق الضيافة؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "لا يوجد اشتراك شهري لجهاز WIFIGATE. أما WIFIGATE Host، وهو أتمتة الحجوزات للفنادق وشقق الضيافة، فهو الجزء الوحيد المقدَّم باشتراك."
+          }
         }
       ]
     }
@@ -579,6 +621,15 @@
           <h2 class="niche-section__title" id="niche-benefits-title">أهم المزايا</h2>
         </div>
         <ul class="niche-benefits__grid" id="niche-benefits-list"><li class="niche-benefit">إنشاء صلاحية ضيف تلقائياً بعد تأكيد الحجز</li><li class="niche-benefit">دعم الأتمتة الكاملة عبر WIFIGATE API</li><li class="niche-benefit">وصول مؤقت وفق تواريخ الإقامة وساعاتها</li><li class="niche-benefit">حاجة أقل لتسجيل الوصول اليدوي أو المفاتيح أو البطاقات أو الرموز</li><li class="niche-benefit niche-benefit--gap" aria-hidden="true"></li><li class="niche-benefit">إدارة صلاحيات للطاقم وعمال النظافة والصيانة والموردين</li><li class="niche-benefit">تجربة وصول أكثر سلاسة وراحة للضيوف</li><li class="niche-benefit">انتهاء الوصول تلقائياً عند موعد تسجيل المغادرة</li><li class="niche-benefit">سجل وصول يوفر الشفافية والمتابعة</li></ul>
+      </div>
+    </section>
+
+    <section class="niche-section niche-faq" id="niche-faq" aria-labelledby="niche-faq-title">
+      <div class="container">
+        <div class="niche-section__header">
+          <h2 class="niche-section__title" id="niche-faq-title">الأسئلة الشائعة</h2>
+        </div>
+        <div class="niche-faq__list" id="niche-faq-list"><details class="niche-faq__item"><summary class="niche-faq__question" dir="rtl">كيف يفتح الضيوف البوابة أو الباب باستخدام WIFIGATE؟</summary><p class="niche-faq__answer" dir="rtl">يحصل كل ضيف على دعوة محدودة المدة على هاتفه، ويفتح البوابة أو الباب أو الكراج من تطبيق WIFIGATE. تبدأ الصلاحية عند تسجيل الوصول وتنتهي تلقائياً عند تسجيل المغادرة، فلا حاجة إلى تسليم مفاتيح أو بطاقات أو رموز.‏</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="rtl">هل يمكن إنشاء صلاحيات الضيوف تلقائياً من الحجوزات؟</summary><p class="niche-faq__answer" dir="rtl">نعم. مع WIFIGATE Host وWIFIGATE API، يمكن للحجز المؤكد أن ينشئ صلاحية الضيف تلقائياً، وفق تواريخ الإقامة وساعاتها.‏</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="rtl">هل يمكن لعمال النظافة والصيانة الحصول على صلاحيات خاصة بهم؟</summary><p class="niche-faq__answer" dir="rtl">نعم. يحصل كل من الطاقم وعمال النظافة والصيانة والموردين على صلاحية خاصة به، ويُظهر سجل الوصول من فتح ومتى.‏</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="rtl">هل يتطلب WIFIGATE اشتراكاً للفنادق وشقق الضيافة؟</summary><p class="niche-faq__answer" dir="rtl">لا يوجد اشتراك شهري لجهاز WIFIGATE. أما WIFIGATE Host، وهو أتمتة الحجوزات للفنادق وشقق الضيافة، فهو الجزء الوحيد المقدَّم باشتراك.‏</p></details></div>
       </div>
     </section>
 

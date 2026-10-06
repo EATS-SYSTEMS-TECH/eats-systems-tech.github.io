@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../../css/styles.css?v=20261005b">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20261006b">
-  <link rel="stylesheet" href="../../css/niche.css?v=20261007a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20261007b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
   <script>window.accessibilityCopy = {"ja":{"skipLink":"メインコンテンツへスキップ","eyebrow":"アクセシビリティ","openButton":"アクセシビリティメニューを開く","closeButton":"アクセシビリティメニューを閉じる","title":"アクセシビリティメニュー","description":"読み方や操作方法に合わせてサイトを調整できます。設定はこのデバイスに保存されます。","reset":"すべてリセット","statusDefault":"標準のサイト表示","statusActive":"{count} 件の調整が有効","hideButton":"ページを再読み込みするまでアクセシビリティボタンを非表示にする","statementLink":"アクセシビリティ方針","textSize":{"label":"文字サイズ","description":"サイト全体の文字を拡大します。","decrease":"文字を小さく","increase":"文字を大きく","level":"文字サイズ {percent}%"},"options":{"highContrast":{"label":"ハイコントラスト","description":"明るい背景に濃い文字と、はっきりした枠線を表示します。"},"grayscale":{"label":"グレースケール","description":"サイトを色なしで表示します。"},"underlineLinks":{"label":"リンクを強調","description":"すべてのリンクに下線と目印を付けます。"},"readableFont":{"label":"読みやすいフォント","description":"シンプルで読みやすいフォントを使用します。"},"textSpacing":{"label":"文字間隔","description":"行・単語・文字の間隔を広げます。"},"highlightHeadings":{"label":"見出しを強調","description":"見出しに目印を付けてページの構造を示します。"},"bigCursor":{"label":"大きいカーソル","description":"マウスポインターを大きくします。"},"focusHighlight":{"label":"フォーカスを強調","description":"キーボードフォーカスのある要素を太い枠で囲みます。"},"reducedMotion":{"label":"アニメーションを停止","description":"アニメーション、トランジション、背景動画を停止します。"}}}};</script>
@@ -247,6 +247,48 @@
           "position": 2,
           "name": "オフィスビル",
           "item": "https://wifigate.io/ja/office-buildings/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/ja/office-buildings/#faq",
+      "inLanguage": "ja",
+      "isPartOf": {
+        "@id": "https://wifigate.io/ja/office-buildings/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "従業員はどのようにオフィスへのアクセスを受け取るのですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "従業員はスマートフォンで常時の権限を受け取り、退職時にはすぐに取り消されます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "来訪者は受付で待たずにどのように入館するのですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "来訪者は到着前に一時アクセスを受け取るので、スマートフォンで入館でき、受付が対応する来訪者も減ります。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "オフィスビルでは WIFIGATE で何を管理できますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "入口ドア、フロア、部屋、駐車場入口です。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "入館の記録は残りますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "はい。アクセス履歴で誰がいつ開けたかを確認でき、運用と透明性に役立ちます。"
+          }
         }
       ]
     }
@@ -579,6 +621,15 @@
           <h2 class="niche-section__title" id="niche-benefits-title">主なメリット</h2>
         </div>
         <ul class="niche-benefits__grid" id="niche-benefits-list"><li class="niche-benefit">従業員とチーム向けの固定権限</li><li class="niche-benefit">来訪者、業者、配達員向けの一時アクセス</li><li class="niche-benefit">受付と運用チームの負担を軽減</li><li class="niche-benefit">入口ドア、フロア、部屋、駐車場に対応</li><li class="niche-benefit niche-benefit--gap" aria-hidden="true"></li><li class="niche-benefit">ユーザーと権限を整理して管理</li><li class="niche-benefit">鍵、アクセスカード、暗証番号への依存を低減</li><li class="niche-benefit">ビルの印象をよりモダンで便利に</li><li class="niche-benefit">管理と透明性のためのアクセス履歴</li></ul>
+      </div>
+    </section>
+
+    <section class="niche-section niche-faq" id="niche-faq" aria-labelledby="niche-faq-title">
+      <div class="container">
+        <div class="niche-section__header">
+          <h2 class="niche-section__title" id="niche-faq-title">よくある質問</h2>
+        </div>
+        <div class="niche-faq__list" id="niche-faq-list"><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">従業員はどのようにオフィスへのアクセスを受け取るのですか？</summary><p class="niche-faq__answer" dir="ltr">従業員はスマートフォンで常時の権限を受け取り、退職時にはすぐに取り消されます。</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">来訪者は受付で待たずにどのように入館するのですか？</summary><p class="niche-faq__answer" dir="ltr">来訪者は到着前に一時アクセスを受け取るので、スマートフォンで入館でき、受付が対応する来訪者も減ります。</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">オフィスビルでは WIFIGATE で何を管理できますか？</summary><p class="niche-faq__answer" dir="ltr">入口ドア、フロア、部屋、駐車場入口です。</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">入館の記録は残りますか？</summary><p class="niche-faq__answer" dir="ltr">はい。アクセス履歴で誰がいつ開けたかを確認でき、運用と透明性に役立ちます。</p></details></div>
       </div>
     </section>
 

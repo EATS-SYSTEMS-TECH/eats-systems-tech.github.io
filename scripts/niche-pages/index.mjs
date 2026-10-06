@@ -237,6 +237,7 @@ export const NICHE_PAGE_LOCALES = {
 };
 
 const REQUIRED_NICHE_FIELDS = [
+  "faq",
   "label",
   "title",
   "paragraph",
@@ -306,7 +307,11 @@ export function validateNichePageLocales(localeCodes) {
 
       for (const field of REQUIRED_NICHE_FIELDS) {
         const value = niche[field];
-        if (field === "bullets") {
+        if (field === "faq") {
+          if (!Array.isArray(value) || value.length < 3 || !value.every((item) => isNonEmptyString(item?.question) && isNonEmptyString(item?.answer))) {
+            problems.push(`${locale}: niches["${key}"].faq needs at least 3 questions with answers`);
+          }
+        } else if (field === "bullets") {
           if (!Array.isArray(value) || value.length === 0 || !value.every(isNonEmptyString)) {
             problems.push(`${locale}: niches["${key}"].bullets must be a non-empty list of strings`);
           }

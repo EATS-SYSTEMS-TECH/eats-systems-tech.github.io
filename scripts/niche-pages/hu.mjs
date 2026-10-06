@@ -46,7 +46,25 @@ export default {
       ],
       "seoTitle": "Beléptetés szállodákhoz, Airbnb-hez és vendégapartmanokhoz | WIFIGATE API",
       "seoDescription": "A WIFIGATE okos digitális hozzáférést ad szállodákhoz, Airbnb-hez és vendégapartmanokhoz, WIFIGATE API alapú vendégjogosultság-automatizálással, foglaláshoz kötött ideiglenes hozzáféréssel és kevesebb kézi check-innel.",
-      "imageAlt": "Vendégek telefonnal nyitnak hotelszobaajtót egy modern folyosón"
+      "imageAlt": "Vendégek telefonnal nyitnak hotelszobaajtót egy modern folyosón",
+      "faq": [
+        {
+          "question": "Hogyan nyitják a vendégek a kaput vagy az ajtót a WIFIGATE-tel?",
+          "answer": "Minden vendég időkorlátos meghívót kap a telefonjára, és a WIFIGATE alkalmazásból nyitja a kaput, az ajtót vagy a garázst. A hozzáférés bejelentkezéskor kezdődik és kijelentkezéskor automatikusan véget ér, így nem kell kulcsot, kártyát vagy kódot átadni."
+        },
+        {
+          "question": "Létrehozható a vendéghozzáférés automatikusan a foglalásokból?",
+          "answer": "Igen. A WIFIGATE Host és a WIFIGATE API segítségével egy megerősített foglalás automatikusan létrehozhatja a vendég hozzáférését, a tartózkodás dátumaihoz és időpontjaihoz igazítva."
+        },
+        {
+          "question": "Kaphatnak saját hozzáférést a takarítók és a karbantartók?",
+          "answer": "Igen. A személyzet, a takarítók, a karbantartók és a beszállítók mind saját jogosultságot kapnak, a hozzáférési előzmények pedig megmutatják, ki és mikor nyitott."
+        },
+        {
+          "question": "Kell előfizetés a WIFIGATE-hez szállodáknak és kiadó szálláshelyeknek?",
+          "answer": "A WIFIGATE eszközhöz nem tartozik havi előfizetés. A WIFIGATE Host, a szállodák és kiadó szálláshelyek foglalási automatizálása az egyetlen előfizetéssel elérhető rész."
+        }
+      ]
     },
     "roller-shutters": {
       "label": "Redőnykapuk üzletekhez és vállalkozásokhoz",
@@ -82,7 +100,25 @@ export default {
       ],
       "seoTitle": "Okos redőnykapu-vezérlés üzleteknek és vállalkozásoknak | WIFIGATE",
       "seoDescription": "A WIFIGATE telefonos vezérlést ad üzletek és vállalkozások redőnykapuihoz, jogosultságkezeléssel, kisebb kulcs- és távirányítófüggéssel, valamint kevesebb kitett hozzáférési ponttal.",
-      "imageAlt": "Üzlettulajdonos telefonnal nyitja egy bolt redőnykapuját"
+      "imageAlt": "Üzlettulajdonos telefonnal nyitja egy bolt redőnykapuját",
+      "faq": [
+        {
+          "question": "Hogyan nyitja a WIFIGATE a redőnykaput?",
+          "answer": "A WIFIGATE a redőnykapu vezérléséhez csatlakozik, és lehetővé teszi, hogy a jogosult személyek a WIFIGATE alkalmazásból nyissák és zárják. A vezérlés a védett belső oldalon van, nem egy kitett kulcsos kapcsolón vagy távirányítón."
+        },
+        {
+          "question": "Kaphat minden munkatárs külön hozzáférést a redőnykapuhoz?",
+          "answer": "Igen. Minden munkatárs, vezető vagy beszállító személyes jogosultságot kap, amelyet bármikor visszavonhat, kulcsok vagy távirányítók visszagyűjtése nélkül."
+        },
+        {
+          "question": "Adhatok ideiglenes hozzáférést egy beszállítónak?",
+          "answer": "Igen. Időben korlátozott hozzáférést oszthat meg egy beszállítóval vagy ideiglenes munkatárssal, és az idő lejártával megszűnik működni."
+        },
+        {
+          "question": "Milyen vállalkozásoknak alkalmas?",
+          "answer": "Üzleteknek, raktáraknak, szervizbejáratoknak és minden olyan vállalkozásnak, amelynek elektromos redőnykapuja van, és kevesebb kulcsot, távirányítót és kitett hozzáférési pontot szeretne."
+        }
+      ]
     },
     "electric-gates": {
       "label": "Elektromos kapuk és parkolósorompók",
@@ -118,7 +154,25 @@ export default {
       ],
       "seoTitle": "Beléptetés elektromos kapukhoz és parkolósorompókhoz előfizetés nélkül | WIFIGATE",
       "seoDescription": "A WIFIGATE telefonról nyitható elektromos kapukat és parkolósorompókat kínál Auto Open funkcióval, ütemezett eseményekkel, meglévő távirányítók támogatásával, jogosultságkezeléssel és havi díj nélkül.",
-      "imageAlt": "Sofőr telefonnal nyit parkolósorompót és elektromos kaput"
+      "imageAlt": "Sofőr telefonnal nyit parkolósorompót és elektromos kaput",
+      "faq": [
+        {
+          "question": "Nyithatok elektromos kaput vagy parkolósorompót a telefonomról?",
+          "answer": "Igen. A WIFIGATE a kapuhoz vagy sorompóhoz csatlakozik, a jogosult felhasználók pedig a WIFIGATE alkalmazásból nyitják, állandó vagy ideiglenes jogosultsággal."
+        },
+        {
+          "question": "Kell a kapuhoz SIM-kártya vagy internetkapcsolat?",
+          "answer": "Nem. A telefon közvetlenül a WIFIGATE eszközzel kommunikál, így a kapunak nincs szüksége SIM-kártyára, internet-előfizetésre vagy külső Wi-Fi routerre."
+        },
+        {
+          "question": "Használhatom továbbra is a meglévő távirányítóimat?",
+          "answer": "Igen. A meglévő távirányítók az alkalmazásos vezérlés mellett továbbra is működnek, így semmit sem kell kidobni."
+        },
+        {
+          "question": "Van havidíj?",
+          "answer": "Nincs. Egyszer fizet az eszközért és a telepítésért, havi előfizetés vagy rendszeres fizetés nélkül."
+        }
+      ]
     },
     "garage-doors": {
       "label": "Garázskapuk és magánparkolók",
@@ -154,7 +208,25 @@ export default {
       ],
       "seoTitle": "Okos nyitás garázskapukhoz és magánparkolókhoz | WIFIGATE",
       "seoDescription": "A WIFIGATE telefonról nyitható garázskapukat és magánparkolókat biztosít, kevesebb fizikai távirányító-függéssel, ideiglenes jogosultságokkal és kényelmesebb, privátabb hozzáférés-kezeléssel.",
-      "imageAlt": "Férfi telefonnal nyit magán garázskaput egy modern háznál"
+      "imageAlt": "Férfi telefonnal nyit magán garázskaput egy modern háznál",
+      "faq": [
+        {
+          "question": "Hogyan nyithatom a garázskaput a telefonommal?",
+          "answer": "A WIFIGATE a garázskapuhoz csatlakozik, Ön pedig a WIFIGATE alkalmazásból nyitja. A háztartás minden tagja saját jogosultságot kap a saját telefonjára."
+        },
+        {
+          "question": "Mi történik, ha valaki elveszít egy távirányítót?",
+          "answer": "Az elveszett távirányító addig működik, amíg a távirányítókat át nem kódolják. A telefonon lévő jogosultság egy pillanat alatt törölhető az alkalmazásból, semmit sem kell cserélni vagy átkódolni."
+        },
+        {
+          "question": "Beengedhetek egy szakembert anélkül, hogy távirányítót adnék neki?",
+          "answer": "Igen. Küldjön ideiglenes jogosultságot, amely akkor jár le, amikor Ön dönt róla, távirányító vagy kód átadása nélkül."
+        },
+        {
+          "question": "Hol használható a WIFIGATE parkoláshoz?",
+          "answer": "Magángarázsokban, magánparkolók bejáratainál, házaknál és kertkapcsolatos lakásoknál."
+        }
+      ]
     },
     "private-homes": {
       "label": "Magánotthonok",
@@ -190,7 +262,25 @@ export default {
       ],
       "seoTitle": "Okos hozzáférés magánotthonokhoz közös kód nélkül | WIFIGATE",
       "seoDescription": "A WIFIGATE segít magánotthonokban telefonról kezelni a hozzáférést, ideiglenes jogosultságot adni vendégeknek és futároknak, és csökkenteni a kódok, kulcsok és távirányítók használatát.",
-      "imageAlt": "Nő telefonnal nyitja egy magánotthon bejárati kapuját kódbillentyűzet helyett"
+      "imageAlt": "Nő telefonnal nyitja egy magánotthon bejárati kapuját kódbillentyűzet helyett",
+      "faq": [
+        {
+          "question": "Miért biztonságosabb a WIFIGATE egy billentyűzetkódnál?",
+          "answer": "Mindenki saját jogosultságot kap a telefonjára, így nincs állandó kód, amely kikoptatja a gombokat vagy eljut futárokhoz és vendégekhez, és bármelyik jogosultság azonnal visszavonható."
+        },
+        {
+          "question": "Adhatok egyszeri hozzáférést egy futárnak vagy vendégnek?",
+          "answer": "Igen. Küldjön időkorlátos meghívót, amely csak az Ön által választott ideig működik, állandó kód felfedése nélkül."
+        },
+        {
+          "question": "Mit tud nyitni a WIFIGATE egy magánotthonban?",
+          "answer": "Az otthon kapuit, bejárati ajtóit, parkolóját és garázskapuit, mindet egyetlen alkalmazásból."
+        },
+        {
+          "question": "Hogyan vonhatom vissza valakinek a hozzáférését?",
+          "answer": "A telefonjáról, egy pillanat alatt. Nincs cserélendő zár, kód vagy távirányító."
+        }
+      ]
     },
     "residential-buildings": {
       "label": "Lakóépületek",
@@ -226,7 +316,25 @@ export default {
       ],
       "seoTitle": "Beléptetés lakóépületekhez | WIFIGATE",
       "seoDescription": "A WIFIGATE okos hozzáférés-kezelést ad lakóépületekhez telefonos nyitással, ideiglenes vendégjogosultságokkal, kevesebb kódhasználattal és jobb átláthatósággal.",
-      "imageAlt": "Lakó telefonnal nyitja egy lakóépület bejáratát"
+      "imageAlt": "Lakó telefonnal nyitja egy lakóépület bejáratát",
+      "faq": [
+        {
+          "question": "Hogyan jutnak be a lakók az épületbe a WIFIGATE-tel?",
+          "answer": "A lakók saját jogosultságukkal a telefonjukról nyitják a lobbyajtót, a kaput vagy a parkoló bejáratát."
+        },
+        {
+          "question": "Hogyan jutnak be a vendégek és a futárok?",
+          "answer": "A lakó időkorlátos vendégmeghívót küld, az érkezési adatokkal egyetlen koppintással, állandó kód felfedése nélkül."
+        },
+        {
+          "question": "Láthatja a közös képviselet, kinek van hozzáférése?",
+          "answer": "Igen. A közös képviselet vagy az üzemeltető kezeli a jogosultságok listáját, a hozzáférési előzmények pedig az átláthatóság érdekében mutatják a belépéseket."
+        },
+        {
+          "question": "Kiváltja a WIFIGATE a közös belépőkódot?",
+          "answer": "Megszünteti egyetlen kód megosztásának szükségességét: minden lakónak személyes jogosultsága van, a vendégek pedig az épület kódja helyett ideiglenes hozzáférést kapnak."
+        }
+      ]
     },
     "office-buildings": {
       "label": "Irodaházak",
@@ -262,7 +370,25 @@ export default {
       ],
       "seoTitle": "Beléptetés irodaházakhoz | WIFIGATE",
       "seoDescription": "A WIFIGATE segít irodaházaknak telefonról kezelni a dolgozók, látogatók és beszállítók belépését, ideiglenes és állandó jogosultságokkal, modern hozzáférés-kezeléssel.",
-      "imageAlt": "Munkatárs telefonnal nyit üvegajtót egy modern irodában"
+      "imageAlt": "Munkatárs telefonnal nyit üvegajtót egy modern irodában",
+      "faq": [
+        {
+          "question": "Hogyan kapnak hozzáférést a munkatársak az irodához?",
+          "answer": "A munkatársak állandó jogosultságot kapnak a telefonjukra, amely egy pillanat alatt visszavonható, ha valaki távozik."
+        },
+        {
+          "question": "Hogyan jutnak be a látogatók recepciós várakozás nélkül?",
+          "answer": "A látogatók érkezésük előtt ideiglenes hozzáférést kapnak, így a telefonjukkal lépnek be, a recepciónak pedig kevesebb érkezőt kell kezelnie."
+        },
+        {
+          "question": "Mit vezérelhet a WIFIGATE egy irodaházban?",
+          "answer": "Bejárati ajtókat, szinteket, helyiségeket és parkolóbejáratokat."
+        },
+        {
+          "question": "Van nyilvántartás a belépésekről?",
+          "answer": "Igen. A hozzáférési előzmények megmutatják, ki és mikor nyitott, az üzemeltetés és az átláthatóság érdekében."
+        }
+      ]
     },
     "entry-doors-magnetic-locks": {
       "label": "Bejárati ajtók és mágneszárak vállalkozásoknak",
@@ -298,7 +424,25 @@ export default {
       ],
       "seoTitle": "Bejárati ajtók és mágneszárak vállalkozásoknak | WIFIGATE",
       "seoDescription": "A WIFIGATE okos nyitást ad vállalkozások bejárati ajtóihoz és mágneszáraihoz, telefonos jogosultságkezeléssel, ideiglenes hozzáféréssel és kevesebb kód- vagy kulcsfüggéssel.",
-      "imageAlt": "Ügyfél telefonnal nyitja egy kisvállalkozás bejárati ajtaját"
+      "imageAlt": "Ügyfél telefonnal nyitja egy kisvállalkozás bejárati ajtaját",
+      "faq": [
+        {
+          "question": "Működik a WIFIGATE mágneszárral?",
+          "answer": "Igen. A WIFIGATE elektromos zárral vagy mágneszárral ellátott bejárati ajtókhoz alkalmas, és telefonról nyitja őket."
+        },
+        {
+          "question": "Adhatok ideiglenes hozzáférést egy technikusnak vagy beszállítónak?",
+          "answer": "Igen. Ossza meg a látogatás idejére szóló ideiglenes jogosultságot az ajtókód kiadása helyett."
+        },
+        {
+          "question": "Szükségem van bonyolult beléptetőrendszerre?",
+          "answer": "Nincs. A WIFIGATE egyszerű, modern megoldás azoknak a vállalkozásoknak, amelyek telefonos belépést szeretnének bonyolult beléptetőrendszer nélkül."
+        },
+        {
+          "question": "Milyen vállalkozások használják?",
+          "answer": "Kisvállalkozások, rendelők, stúdiók, irodák és raktárak."
+        }
+      ]
     },
     "sports-facilities": {
       "label": "Sportlétesítmények",
@@ -334,7 +478,25 @@ export default {
       ],
       "seoTitle": "Beléptetés sportlétesítményekhez és Padel-pályákhoz | WIFIGATE",
       "seoDescription": "A WIFIGATE okos beléptetést ad sportlétesítményekhez, Padel-pályákhoz, edzőtermekhez és edzőközpontokhoz telefonos belépéssel, ideiglenes vagy állandó jogosultságokkal.",
-      "imageAlt": "Padel játékos telefonnal nyitja egy kivilágított sportpálya bejáratát"
+      "imageAlt": "Padel játékos telefonnal nyitja egy kivilágított sportpálya bejáratát",
+      "faq": [
+        {
+          "question": "Igazodhat a hozzáférés a nyitvatartáshoz vagy a foglalásokhoz?",
+          "answer": "Igen. A hozzáférés megadható nyitvatartás, foglalás vagy jogosultság szerint, az ütemezett események pedig napok és időpontok szerint nyithatnak."
+        },
+        {
+          "question": "Kaphatnak a tagok, edzők és vendégek eltérő hozzáférést?",
+          "answer": "Igen. Minden felhasználótípus saját jogosultságot kap: a rendszeres tag, a bizonyos napokon érkező edző vagy az egyszeri vendég."
+        },
+        {
+          "question": "Láthatom, ki járt a létesítményben?",
+          "answer": "Igen. A hozzáférési előzmények megmutatják, ki és mikor nyitott, ami segíti az üzemeltetést, és igazolja, hogy a helyszín a nap végén zárva volt."
+        },
+        {
+          "question": "Milyen sportlétesítményekhez alkalmas a WIFIGATE?",
+          "answer": "Padel-pályákhoz, teniszpályákhoz, edzőtermekhez és edzőközpontokhoz."
+        }
+      ]
     },
     "storage-lockers": {
       "label": "Raktárak és zárható szekrények",
@@ -370,7 +532,25 @@ export default {
       ],
       "seoTitle": "Okos beléptetés raktárakhoz és zárható szekrényekhez | WIFIGATE",
       "seoDescription": "A WIFIGATE minden raktár- és szekrénybérlőnek személyes, telefonos hozzáférést ad a kapuhoz, az ajtókhoz és a saját szekrényéhez, nyitvatartási időre korlátozva, előzményekben rögzítve, és a bérlet lejártakor visszavonva.",
-      "imageAlt": "Nő telefonnal nyitja egy szekrényekkel és tárolóegységekkel felszerelt raktár ajtaját"
+      "imageAlt": "Nő telefonnal nyitja egy szekrényekkel és tárolóegységekkel felszerelt raktár ajtaját",
+      "faq": [
+        {
+          "question": "Hogyan nyitják a bérlők a kaput és a szekrényüket?",
+          "answer": "A telefonjukról, személyes jogosultsággal a telephely kapujához, az épület bejáratához és, ahol telepítve van, egy elektromos zárral ellátott raktárhelyiséghez vagy szekrényhez."
+        },
+        {
+          "question": "Korlátozható a hozzáférés a nyitvatartási időre?",
+          "answer": "Igen. Engedélyezze a belépést csak nyitvatartási időben, vagy adjon egy bérlőnek szélesebb időablakot; a költöztetők és a családtagok egyszeri hozzáférést kaphatnak."
+        },
+        {
+          "question": "Mi történik, ha egy bérlet lejár?",
+          "answer": "Azonnal visszavonja a bérlő hozzáférését. Nincs visszaszedendő kulcs és nincs módosítandó kód."
+        },
+        {
+          "question": "Kell internet a telephelyen az ajtónál?",
+          "answer": "Nem. A telefon közvetlenül a helyszíni eszközzel kommunikál, SIM-kártya vagy internetkapcsolat nélkül az ajtónál."
+        }
+      ]
     }
   }
 };

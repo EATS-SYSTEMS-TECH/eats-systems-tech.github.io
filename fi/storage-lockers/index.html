@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../../css/styles.css?v=20261005b">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20261006b">
-  <link rel="stylesheet" href="../../css/niche.css?v=20261007a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20261007b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
   <script>window.accessibilityCopy = {"fi":{"skipLink":"Siirry pääsisältöön","eyebrow":"Saavutettavuus","openButton":"Avaa saavutettavuusvalikko","closeButton":"Sulje saavutettavuusvalikko","title":"Saavutettavuusvalikko","description":"Mukauta sivusto omaan tapaasi lukea ja liikkua. Valintasi tallennetaan tälle laitteelle.","reset":"Palauta kaikki","statusDefault":"Sivuston vakionäkymä","statusActive":"Käytössä olevat mukautukset: {count}","hideButton":"Piilota saavutettavuuspainike, kunnes sivu ladataan uudelleen","statementLink":"Saavutettavuusseloste","textSize":{"label":"Tekstin koko","description":"Suurenna tekstiä koko sivustolla.","decrease":"Pienempi teksti","increase":"Suurempi teksti","level":"Tekstin koko {percent} %"},"options":{"highContrast":{"label":"Suuri kontrasti","description":"Tumma teksti vaalealla taustalla ja selkeät reunat."},"grayscale":{"label":"Harmaasävy","description":"Näytä sivusto ilman värejä."},"underlineLinks":{"label":"Korosta linkit","description":"Alleviivaa ja merkitse jokainen linkki."},"readableFont":{"label":"Helppolukuinen fontti","description":"Yksinkertainen, erittäin selkeä fontti."},"textSpacing":{"label":"Tekstin välistys","description":"Enemmän tilaa rivien, sanojen ja kirjainten välillä."},"highlightHeadings":{"label":"Korosta otsikot","description":"Merkitse otsikot, jotta sivun rakenne näkyy."},"bigCursor":{"label":"Suuri osoitin","description":"Suurempi hiiren osoitin."},"focusHighlight":{"label":"Selkeä kohdistus","description":"Paksu reunus näppäimistön kohdistuksessa olevan elementin ympärillä."},"reducedMotion":{"label":"Pysäytä animaatiot","description":"Pysäytä animaatiot, siirtymät ja taustavideo."}}}};</script>
@@ -247,6 +247,48 @@
           "position": 2,
           "name": "Varastotilat ja lokerot",
           "item": "https://wifigate.io/fi/storage-lockers/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/fi/storage-lockers/#faq",
+      "inLanguage": "fi",
+      "isPartOf": {
+        "@id": "https://wifigate.io/fi/storage-lockers/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Miten vuokralaiset avaavat portin ja lokeronsa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puhelimellaan, henkilökohtaisella kulkuoikeudella alueen porttiin, rakennuksen sisäänkäyntiin ja, missä sellainen on asennettu, sähkölukittuun varastotilaan tai lokeroon."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Voiko kulun rajata aukioloaikoihin?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kyllä. Salli sisäänpääsy vain aukioloaikoina tai anna vuokralaiselle laajempi aikaikkuna; muuttomiehet ja perheenjäsenet voivat saada kertakäyttöisen kulkuoikeuden."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Mitä tapahtuu, kun vuokrasuhde päättyy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Poistat vuokralaisen kulkuoikeuden heti. Avaimia ei tarvitse kerätä eikä koodeja vaihtaa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Tarvitaanko kohteessa internetyhteys ovella?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ei. Puhelin viestii suoraan paikan päällä olevan laitteen kanssa, ilman SIM-korttia tai internetyhteyttä ovella."
+          }
         }
       ]
     }
@@ -579,6 +621,15 @@
           <h2 class="niche-section__title" id="niche-benefits-title">Tärkeimmät edut</h2>
         </div>
         <ul class="niche-benefits__grid" id="niche-benefits-list"><li class="niche-benefit">Avaa alueen portti, rakennuksen ovi ja lokero puhelimella</li><li class="niche-benefit">Henkilökohtainen kulkuoikeus jokaiselle vuokralaiselle</li><li class="niche-benefit">Kulku rajattu aukioloaikoihin tai omaan aikaikkunaan</li><li class="niche-benefit">Kertakäyttöinen kulkuoikeus muuttomiehille ja perheenjäsenille</li><li class="niche-benefit niche-benefit--gap" aria-hidden="true"></li><li class="niche-benefit">Poista kulkuoikeus heti, kun vuokrasuhde päättyy</li><li class="niche-benefit">Historia siitä, kuka avasi ja milloin</li><li class="niche-benefit">Ei jaettuja koodeja, koodilukkoja tai vaihdettavia avaimia</li><li class="niche-benefit">Ei SIM-korttia eikä internetyhteyttä ovella</li></ul>
+      </div>
+    </section>
+
+    <section class="niche-section niche-faq" id="niche-faq" aria-labelledby="niche-faq-title">
+      <div class="container">
+        <div class="niche-section__header">
+          <h2 class="niche-section__title" id="niche-faq-title">Usein kysytyt kysymykset</h2>
+        </div>
+        <div class="niche-faq__list" id="niche-faq-list"><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Miten vuokralaiset avaavat portin ja lokeronsa?</summary><p class="niche-faq__answer" dir="ltr">Puhelimellaan, henkilökohtaisella kulkuoikeudella alueen porttiin, rakennuksen sisäänkäyntiin ja, missä sellainen on asennettu, sähkölukittuun varastotilaan tai lokeroon.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Voiko kulun rajata aukioloaikoihin?</summary><p class="niche-faq__answer" dir="ltr">Kyllä. Salli sisäänpääsy vain aukioloaikoina tai anna vuokralaiselle laajempi aikaikkuna; muuttomiehet ja perheenjäsenet voivat saada kertakäyttöisen kulkuoikeuden.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Mitä tapahtuu, kun vuokrasuhde päättyy?</summary><p class="niche-faq__answer" dir="ltr">Poistat vuokralaisen kulkuoikeuden heti. Avaimia ei tarvitse kerätä eikä koodeja vaihtaa.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Tarvitaanko kohteessa internetyhteys ovella?</summary><p class="niche-faq__answer" dir="ltr">Ei. Puhelin viestii suoraan paikan päällä olevan laitteen kanssa, ilman SIM-korttia tai internetyhteyttä ovella.</p></details></div>
       </div>
     </section>
 

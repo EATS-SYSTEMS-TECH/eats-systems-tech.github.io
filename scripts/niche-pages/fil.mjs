@@ -46,7 +46,25 @@ export default {
       ],
       "seoTitle": "Access Control para sa Hotel at Airbnb | WIFIGATE",
       "seoDescription": "Matalinong access control ng WIFIGATE para sa hotel, Airbnb, at apartment ng bisita, may awtomatikong pahintulot sa API at pansamantalang access sa booking.",
-      "imageAlt": "Mga bisitang nagbubukas ng pinto ng kuwarto sa hotel gamit ang telepono sa modernong pasilyo"
+      "imageAlt": "Mga bisitang nagbubukas ng pinto ng kuwarto sa hotel gamit ang telepono sa modernong pasilyo",
+      "faq": [
+        {
+          "question": "Paano binubuksan ng mga bisita ang gate o pinto gamit ang WIFIGATE?",
+          "answer": "Bawat bisita ay nakakatanggap ng imbitasyong may takdang oras sa kanyang telepono at binubuksan ang gate, pinto, o garahe mula sa WIFIGATE app. Nagsisimula ang access sa check-in at awtomatikong nagtatapos sa check-out, kaya walang susi, card, o code na ipinapasa."
+        },
+        {
+          "question": "Puwede bang awtomatikong malikha ang access ng bisita mula sa booking?",
+          "answer": "Oo. Gamit ang WIFIGATE Host at ang WIFIGATE API, ang nakumpirmang booking ay puwedeng awtomatikong lumikha ng access ng bisita, na tugma sa mga petsa at oras ng pananatili."
+        },
+        {
+          "question": "Puwede bang magkaroon ng sariling access ang mga tagalinis at maintenance staff?",
+          "answer": "Oo. Ang staff, tagalinis, maintenance, at supplier ay may kanya-kanyang pahintulot, at ipinapakita ng kasaysayan ng access kung sino ang nagbukas at kailan."
+        },
+        {
+          "question": "Kailangan ba ng subscription ang WIFIGATE para sa mga hotel at paupahan?",
+          "answer": "Walang buwanang subscription ang WIFIGATE device. Ang WIFIGATE Host, ang booking automation para sa mga hotel at paupahan, ang tanging bahaging inaalok sa pamamagitan ng subscription."
+        }
+      ]
     },
     "roller-shutters": {
       "label": "Roller Shutter para sa Negosyo at Tindahan",
@@ -82,7 +100,25 @@ export default {
       ],
       "seoTitle": "Matalinong Kontrol ng Roller Shutter sa Negosyo | WIFIGATE",
       "seoDescription": "Matalinong kontrol ng roller shutter gamit ang telepono para sa negosyo at tindahan, may pamamahala ng pahintulot at mas kaunting susi at remote. WIFIGATE.",
-      "imageAlt": "May-ari ng negosyo na nagbubukas ng roller shutter ng tindahan gamit ang telepono"
+      "imageAlt": "May-ari ng negosyo na nagbubukas ng roller shutter ng tindahan gamit ang telepono",
+      "faq": [
+        {
+          "question": "Paano binubuksan ng WIFIGATE ang roller shutter?",
+          "answer": "Nakakonekta ang WIFIGATE sa kontrol ng shutter at hinahayaan nito ang mga awtorisadong tao na buksan at isara ito mula sa WIFIGATE app. Nasa protektadong loob ang kontrol, sa halip na nakalantad na key switch o remote."
+        },
+        {
+          "question": "Puwede bang may hiwalay na access sa shutter ang bawat empleyado?",
+          "answer": "Oo. Bawat empleyado, manager, o supplier ay nakakakuha ng personal na pahintulot na puwede mong alisin anumang oras, nang hindi kinokolekta ang mga susi o remote."
+        },
+        {
+          "question": "Puwede ko bang bigyan ng pansamantalang access ang isang supplier?",
+          "answer": "Oo. Puwede kang magbahagi ng access na may takdang oras sa isang supplier o pansamantalang empleyado, at hihinto itong gumana kapag tapos na ang oras."
+        },
+        {
+          "question": "Para sa anong mga negosyo ito angkop?",
+          "answer": "Mga tindahan, bodega, service entrance, at anumang negosyong may electric roller shutter na gustong bawasan ang mga susi, remote, at nakalantad na access point."
+        }
+      ]
     },
     "electric-gates": {
       "label": "Electric Gate at Harang sa Paradahan",
@@ -118,7 +154,25 @@ export default {
       ],
       "seoTitle": "Gate Opener App na Walang Subscription | WIFIGATE",
       "seoDescription": "Ang gate opener app ng WIFIGATE ay nagbubukas ng electric gate at harang sa paradahan gamit ang telepono, may Awtomatikong Pagbukas at walang subscription.",
-      "imageAlt": "Drayber na nagbubukas ng harang sa paradahan at electric gate gamit ang telepono"
+      "imageAlt": "Drayber na nagbubukas ng harang sa paradahan at electric gate gamit ang telepono",
+      "faq": [
+        {
+          "question": "Puwede ko bang buksan ang electric gate o harang sa paradahan gamit ang telepono?",
+          "answer": "Oo. Nakakonekta ang WIFIGATE sa gate o harang, at binubuksan ito ng mga awtorisadong user mula sa WIFIGATE app, gamit ang permanente o pansamantalang pahintulot."
+        },
+        {
+          "question": "Kailangan ba ng gate ng SIM card o koneksyon sa internet?",
+          "answer": "Hindi. Direktang nakikipag-ugnayan ang telepono sa WIFIGATE device, kaya hindi kailangan ng gate ng SIM card, internet plan, o panlabas na Wi‑Fi router."
+        },
+        {
+          "question": "Puwede ko bang patuloy na gamitin ang mga kasalukuyang remote?",
+          "answer": "Oo. Patuloy na gumagana ang mga kasalukuyang remote kasabay ng kontrol mula sa app, kaya walang kailangang itapon."
+        },
+        {
+          "question": "May buwanang bayad ba?",
+          "answer": "Wala. Isang beses ka lang magbabayad para sa device at installation, nang walang buwanang subscription o paulit-ulit na bayad."
+        }
+      ]
     },
     "garage-doors": {
       "label": "Pinto ng Garahe at Pribadong Paradahan",
@@ -154,7 +208,25 @@ export default {
       ],
       "seoTitle": "Matalinong Access sa Garahe at Paradahan | WIFIGATE",
       "seoDescription": "Binubuksan ng WIFIGATE ang garahe at pribadong paradahan gamit ang telepono, may pansamantalang pahintulot at mas kaunting pag-asa sa pisikal na remote.",
-      "imageAlt": "Lalaking nagbubukas ng pinto ng pribadong garahe gamit ang telepono sa isang modernong bahay"
+      "imageAlt": "Lalaking nagbubukas ng pinto ng pribadong garahe gamit ang telepono sa isang modernong bahay",
+      "faq": [
+        {
+          "question": "Paano ko bubuksan ang pinto ng garahe gamit ang telepono?",
+          "answer": "Nakakonekta ang WIFIGATE sa pinto ng garahe at binubuksan mo ito mula sa WIFIGATE app. Bawat miyembro ng sambahayan ay may sariling pahintulot sa sarili niyang telepono."
+        },
+        {
+          "question": "Ano ang mangyayari kapag may nawalan ng remote?",
+          "answer": "Patuloy na gumagana ang nawalang remote hangga't hindi nire-recode ang mga remote. Ang pahintulot sa telepono ay naaalis mula sa app sa isang iglap, nang walang papalitan o ire-recode."
+        },
+        {
+          "question": "Puwede ko bang papasukin ang isang technician nang hindi siya binibigyan ng remote?",
+          "answer": "Oo. Magpadala ng pansamantalang pahintulot na matatapos kung kailan mo gusto, nang hindi nag-aabot ng remote o code."
+        },
+        {
+          "question": "Saan puwedeng gamitin ang WIFIGATE para sa paradahan?",
+          "answer": "Mga pribadong garahe, pasukan ng pribadong paradahan, bahay, at garden apartment."
+        }
+      ]
     },
     "private-homes": {
       "label": "Mga Pribadong Tahanan",
@@ -190,7 +262,25 @@ export default {
       ],
       "seoTitle": "Smart Home Access na Walang Shared Code | WIFIGATE",
       "seoDescription": "Smart home access control ng WIFIGATE: pamahalaan ang pasukan gamit ang telepono at magbahagi ng pansamantalang pahintulot sa bisita at courier, walang keypad.",
-      "imageAlt": "Babaeng nagbubukas ng gate ng pribadong tahanan gamit ang telepono sa halip na keypad"
+      "imageAlt": "Babaeng nagbubukas ng gate ng pribadong tahanan gamit ang telepono sa halip na keypad",
+      "faq": [
+        {
+          "question": "Bakit mas ligtas ang WIFIGATE kaysa sa keypad code?",
+          "answer": "May sariling pahintulot ang bawat tao sa kanyang telepono, kaya walang permanenteng code na nag-iiwan ng pudpod na marka sa mga button o kumakalat sa mga courier at bisita, at puwedeng alisin agad ang anumang pahintulot."
+        },
+        {
+          "question": "Puwede ko bang bigyan ng isang beses na access ang courier o bisita?",
+          "answer": "Oo. Magpadala ng imbitasyong may takdang oras na gumagana lamang sa oras na pipiliin mo, nang hindi inilalantad ang permanenteng code."
+        },
+        {
+          "question": "Ano ang kayang buksan ng WIFIGATE sa isang pribadong tahanan?",
+          "answer": "Mga gate, pinto sa pasukan, paradahan, at pinto ng garahe sa bahay, lahat mula sa iisang app."
+        },
+        {
+          "question": "Paano ko aalisin ang access ng isang tao?",
+          "answer": "Mula sa iyong telepono, sa isang iglap. Walang lock, code, o remote na kailangang palitan."
+        }
+      ]
     },
     "residential-buildings": {
       "label": "Mga Residential na Gusali",
@@ -226,7 +316,25 @@ export default {
       ],
       "seoTitle": "Access Control para sa Residential na Gusali | WIFIGATE",
       "seoDescription": "Matalinong access control ng WIFIGATE para sa residential na gusali: pagpasok gamit ang telepono, pansamantalang pahintulot sa bisita, at malinaw na kasaysayan.",
-      "imageAlt": "Residenteng nagbubukas ng pasukan ng residential na gusali gamit ang telepono"
+      "imageAlt": "Residenteng nagbubukas ng pasukan ng residential na gusali gamit ang telepono",
+      "faq": [
+        {
+          "question": "Paano pumapasok ang mga residente sa gusali gamit ang WIFIGATE?",
+          "answer": "Binubuksan ng mga residente ang pinto ng lobby, gate, o pasukan ng paradahan mula sa kanilang telepono gamit ang sarili nilang pahintulot."
+        },
+        {
+          "question": "Paano nakakapasok ang mga bisita at courier?",
+          "answer": "Nagpapadala ang residente ng imbitasyon para sa bisita na may takdang oras, kasama ang mga detalye ng pagdating sa isang tap, nang hindi inilalantad ang permanenteng code."
+        },
+        {
+          "question": "Nakikita ba ng building committee kung sino ang may access?",
+          "answer": "Oo. Pinamamahalaan ng committee o ng management company ang listahan ng mga pahintulot, at ipinapakita ng kasaysayan ng access ang mga pagpasok para sa transparency."
+        },
+        {
+          "question": "Pinapalitan ba ng WIFIGATE ang shared na entry code?",
+          "answer": "Inaalis nito ang pangangailangang magbahagi ng iisang code: may personal na pahintulot ang bawat residente, at pansamantalang access ang natatanggap ng mga bisita sa halip na ang code ng gusali."
+        }
+      ]
     },
     "office-buildings": {
       "label": "Mga Gusali ng Opisina",
@@ -262,7 +370,25 @@ export default {
       ],
       "seoTitle": "Access Control para sa Gusali ng Opisina | WIFIGATE",
       "seoDescription": "Sa access control ng WIFIGATE, pinamamahalaan ng opisina ang pagpasok ng empleyado, bisita, at supplier gamit ang telepono, pansamantala man o permanente.",
-      "imageAlt": "Empleyadong nagbubukas ng salaming pinto sa modernong opisina gamit ang telepono"
+      "imageAlt": "Empleyadong nagbubukas ng salaming pinto sa modernong opisina gamit ang telepono",
+      "faq": [
+        {
+          "question": "Paano nakakakuha ng access sa opisina ang mga empleyado?",
+          "answer": "Nakakatanggap ang mga empleyado ng permanenteng pahintulot sa kanilang telepono, at naaalis ito sa isang iglap kapag may umalis."
+        },
+        {
+          "question": "Paano pumapasok ang mga bisita nang hindi naghihintay sa reception?",
+          "answer": "Natatanggap ng mga bisita ang pansamantalang access bago sila dumating, kaya pumapasok sila gamit ang telepono at mas kaunting pagdating ang inaasikaso ng reception."
+        },
+        {
+          "question": "Ano ang kayang kontrolin ng WIFIGATE sa isang gusali ng opisina?",
+          "answer": "Mga pasukan, palapag, kuwarto, at pasukan ng paradahan."
+        },
+        {
+          "question": "May talaan ba ng mga pumasok?",
+          "answer": "Oo. Ipinapakita ng kasaysayan ng access kung sino ang nagbukas at kailan, para sa operasyon at transparency."
+        }
+      ]
     },
     "entry-doors-magnetic-locks": {
       "label": "Pasukan at Magnetic Lock para sa Negosyo",
@@ -298,7 +424,25 @@ export default {
       ],
       "seoTitle": "Pasukan at Magnetic Lock para sa Negosyo | WIFIGATE",
       "seoDescription": "Matalinong access control ng WIFIGATE para sa pasukan ng negosyo at magnetic lock: pahintulot gamit ang telepono, pansamantalang access, mas kaunting susi.",
-      "imageAlt": "Customer na nagbubukas ng pasukan ng maliit na negosyo gamit ang telepono"
+      "imageAlt": "Customer na nagbubukas ng pasukan ng maliit na negosyo gamit ang telepono",
+      "faq": [
+        {
+          "question": "Gumagana ba ang WIFIGATE sa magnetic lock?",
+          "answer": "Oo. Angkop ang WIFIGATE sa mga pasukang may electric o magnetic lock at binubuksan ang mga ito gamit ang telepono."
+        },
+        {
+          "question": "Puwede ko bang bigyan ng pansamantalang access ang technician o supplier?",
+          "answer": "Oo. Magbahagi ng pansamantalang pahintulot para sa pagbisita sa halip na ibigay ang code ng pinto."
+        },
+        {
+          "question": "Kailangan ko ba ng komplikadong access control system?",
+          "answer": "Hindi. Ang WIFIGATE ay simple at modernong opsyon para sa mga negosyong gusto ng pagpasok gamit ang telepono nang walang komplikadong access control system."
+        },
+        {
+          "question": "Anong mga negosyo ang gumagamit nito?",
+          "answer": "Maliliit na negosyo, klinika, studio, opisina, at bodega."
+        }
+      ]
     },
     "sports-facilities": {
       "label": "Mga Pasilidad sa Sports",
@@ -334,7 +478,25 @@ export default {
       ],
       "seoTitle": "Access Control para sa Sports at Padel Court | WIFIGATE",
       "seoDescription": "Matalinong access control ng WIFIGATE para sa sports facility, padel court, at gym, may pagpasok gamit ang telepono at pansamantala o permanenteng pahintulot.",
-      "imageAlt": "Manlalaro ng padel na nagbubukas ng pasukan ng maliwanag na sports court gamit ang telepono"
+      "imageAlt": "Manlalaro ng padel na nagbubukas ng pasukan ng maliwanag na sports court gamit ang telepono",
+      "faq": [
+        {
+          "question": "Puwede bang sumunod ang access sa oras ng operasyon o sa mga booking?",
+          "answer": "Oo. Puwedeng ibigay ang access ayon sa oras ng operasyon, booking, o pahintulot, at puwedeng magbukas ang mga naka-iskedyul na aktibidad ayon sa araw at oras."
+        },
+        {
+          "question": "Puwede bang magkakaiba ang access ng mga miyembro, coach, at bisita?",
+          "answer": "Oo. Bawat uri ng user ay may sariling pahintulot: regular na miyembro, coach sa ilang partikular na araw, o isang beses na bisita."
+        },
+        {
+          "question": "Makikita ko ba kung sino ang nasa pasilidad?",
+          "answer": "Oo. Ipinapakita ng kasaysayan ng access kung sino ang nagbukas at kailan, na nakakatulong sa operasyon at nagpapatunay na sarado ang lugar sa pagtatapos ng araw."
+        },
+        {
+          "question": "Para sa anong mga pasilidad sa sports angkop ang WIFIGATE?",
+          "answer": "Mga padel court, tennis court, gym, at training complex."
+        }
+      ]
     },
     "storage-lockers": {
       "label": "Storage at mga Locker",
@@ -370,7 +532,25 @@ export default {
       ],
       "seoTitle": "Matalinong Access Control sa Storage at Locker | WIFIGATE",
       "seoDescription": "Sa access control ng WIFIGATE, bawat umuupa ng storage at locker ay may personal na access sa telepono, limitado sa oras ng operasyon at tapos kasabay ng upa.",
-      "imageAlt": "Babaeng nagbubukas ng pinto ng storage site na may mga locker at storage unit gamit ang kanyang telepono"
+      "imageAlt": "Babaeng nagbubukas ng pinto ng storage site na may mga locker at storage unit gamit ang kanyang telepono",
+      "faq": [
+        {
+          "question": "Paano binubuksan ng mga umuupa ang gate at ang kanilang locker?",
+          "answer": "Gamit ang kanilang telepono, na may personal na pahintulot sa gate ng lugar, sa pasukan ng gusali, at, kung may naka-install, sa storage unit o locker na may electric lock."
+        },
+        {
+          "question": "Puwede bang limitahan ang access sa oras ng operasyon?",
+          "answer": "Oo. Payagan ang pagpasok sa oras ng operasyon lamang, o bigyan ang umuupa ng mas malawak na oras; puwedeng makakuha ng isang beses na access ang mga naglilipat ng gamit at kapamilya."
+        },
+        {
+          "question": "Ano ang mangyayari kapag natapos ang upa?",
+          "answer": "Inaalis mo agad ang access ng umuupa. Walang susing babawiin at walang code na papalitan."
+        },
+        {
+          "question": "Kailangan ba ng lugar ng internet sa pinto?",
+          "answer": "Hindi. Direktang nakikipag-ugnayan ang telepono sa device sa lugar, nang walang SIM card o koneksyon sa internet sa pinto."
+        }
+      ]
     }
   }
 };

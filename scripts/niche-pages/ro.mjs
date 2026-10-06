@@ -46,7 +46,25 @@ export default {
       ],
       "seoTitle": "Control acces pentru hoteluri și Airbnb | WIFIGATE",
       "seoDescription": "Control al accesului pentru hoteluri, Airbnb și apartamente: permisiuni automate pentru oaspeți prin WIFIGATE API, acces temporar pe rezervare, fără chei.",
-      "imageAlt": "Oaspeți care deschid ușa unei camere de hotel cu telefonul, într-un hol modern"
+      "imageAlt": "Oaspeți care deschid ușa unei camere de hotel cu telefonul, într-un hol modern",
+      "faq": [
+        {
+          "question": "Cum deschid oaspeții poarta sau ușa cu WIFIGATE?",
+          "answer": "Fiecare oaspete primește pe telefon o invitație limitată în timp și deschide poarta, ușa sau garajul din aplicația WIFIGATE. Accesul începe la check-in și se încheie automat la check-out, așa că nu se predau chei, carduri sau coduri."
+        },
+        {
+          "question": "Poate fi creat automat accesul oaspeților din rezervări?",
+          "answer": "Da. Cu WIFIGATE Host și WIFIGATE API, o rezervare confirmată poate crea automat accesul oaspetelui, corelat cu datele și orele sejurului."
+        },
+        {
+          "question": "Pot personalul de curățenie și cel de mentenanță să aibă propriul acces?",
+          "answer": "Da. Personalul, echipa de curățenie, mentenanța și furnizorii primesc fiecare propria permisiune, iar istoricul de acces arată cine a deschis și când."
+        },
+        {
+          "question": "Necesită WIFIGATE un abonament pentru hoteluri și închirieri?",
+          "answer": "Dispozitivul WIFIGATE nu are abonament lunar. WIFIGATE Host, automatizarea rezervărilor pentru hoteluri și închirieri, este singura parte oferită prin abonament."
+        }
+      ]
     },
     "roller-shutters": {
       "label": "Rulouri pentru firme și magazine",
@@ -82,7 +100,25 @@ export default {
       ],
       "seoTitle": "Control inteligent al rulourilor pentru magazine | WIFIGATE",
       "seoDescription": "Control inteligent din telefon al rulourilor electrice pentru firme și magazine, cu gestionarea permisiunilor și mai puține chei, telecomenzi și puncte expuse.",
-      "imageAlt": "Proprietar de afacere care deschide ruloul magazinului cu telefonul"
+      "imageAlt": "Proprietar de afacere care deschide ruloul magazinului cu telefonul",
+      "faq": [
+        {
+          "question": "Cum deschide WIFIGATE un rulou?",
+          "answer": "WIFIGATE se conectează la comanda ruloului și permite persoanelor autorizate să îl deschidă și să îl închidă din aplicația WIFIGATE. Comanda se află pe partea interioară, protejată, în locul unui comutator cu cheie sau al unei telecomenzi expuse."
+        },
+        {
+          "question": "Poate avea fiecare angajat acces separat la rulou?",
+          "answer": "Da. Fiecare angajat, manager sau furnizor primește o permisiune personală pe care o puteți elimina oricând, fără a strânge chei sau telecomenzi."
+        },
+        {
+          "question": "Pot oferi unui furnizor acces temporar?",
+          "answer": "Da. Puteți partaja un acces limitat în timp cu un furnizor sau un angajat temporar, iar acesta nu mai funcționează când expiră timpul."
+        },
+        {
+          "question": "Pentru ce afaceri este potrivit?",
+          "answer": "Magazine, depozite, intrări de serviciu și orice afacere cu un rulou electric care dorește mai puține chei, telecomenzi și puncte de acces expuse."
+        }
+      ]
     },
     "electric-gates": {
       "label": "Porți electrice și bariere de parcare",
@@ -118,7 +154,25 @@ export default {
       ],
       "seoTitle": "Porți electrice și bariere fără abonament | WIFIGATE",
       "seoDescription": "Aplicație de deschidere a porților electrice și barierelor de parcare, cu deschidere automată, evenimente programate, telecomenzi existente și fără abonament.",
-      "imageAlt": "Șofer care deschide o barieră de parcare și o poartă electrică cu telefonul"
+      "imageAlt": "Șofer care deschide o barieră de parcare și o poartă electrică cu telefonul",
+      "faq": [
+        {
+          "question": "Pot deschide o poartă electrică sau o barieră de parcare din telefon?",
+          "answer": "Da. WIFIGATE se conectează la poartă sau la barieră, iar utilizatorii autorizați o deschid din aplicația WIFIGATE, cu permisiuni permanente sau temporare."
+        },
+        {
+          "question": "Are nevoie poarta de o cartelă SIM sau de conexiune la internet?",
+          "answer": "Nu. Telefonul comunică direct cu dispozitivul WIFIGATE, așa că poarta nu are nevoie de cartelă SIM, abonament de internet sau router Wi-Fi extern."
+        },
+        {
+          "question": "Pot folosi în continuare telecomenzile existente?",
+          "answer": "Da. Telecomenzile existente funcționează în continuare, în paralel cu controlul din aplicație, așa că nu trebuie aruncat nimic."
+        },
+        {
+          "question": "Există o taxă lunară?",
+          "answer": "Nu. Plătiți o singură dată pentru dispozitiv și instalare, fără abonament lunar sau plăți recurente."
+        }
+      ]
     },
     "garage-doors": {
       "label": "Uși de garaj și parcări private",
@@ -154,7 +208,25 @@ export default {
       ],
       "seoTitle": "Acces inteligent pentru garaje și parcări private | WIFIGATE",
       "seoDescription": "Deschideți din telefon ușile de garaj și intrările în parcări private, cu permisiuni temporare, mai puține telecomenzi și gestionare privată a accesului.",
-      "imageAlt": "Bărbat care deschide ușa unui garaj privat cu telefonul, la o casă modernă"
+      "imageAlt": "Bărbat care deschide ușa unui garaj privat cu telefonul, la o casă modernă",
+      "faq": [
+        {
+          "question": "Cum îmi deschid ușa de garaj din telefon?",
+          "answer": "WIFIGATE se conectează la ușa de garaj, iar dumneavoastră o deschideți din aplicația WIFIGATE. Fiecare membru al familiei primește propria permisiune pe propriul telefon."
+        },
+        {
+          "question": "Ce se întâmplă când cineva pierde o telecomandă?",
+          "answer": "O telecomandă pierdută funcționează în continuare până când telecomenzile sunt recodificate. O permisiune de pe telefon se elimină din aplicație într-o clipă, fără nimic de înlocuit sau de recodificat."
+        },
+        {
+          "question": "Pot lăsa un meșter să intre fără să îi dau o telecomandă?",
+          "answer": "Da. Trimiteți o permisiune temporară care expiră când decideți dumneavoastră, fără a preda o telecomandă sau un cod."
+        },
+        {
+          "question": "Unde poate fi folosit WIFIGATE pentru parcare?",
+          "answer": "Garaje private, intrări în parcări private, case și apartamente la parter cu grădină."
+        }
+      ]
     },
     "private-homes": {
       "label": "Case private",
@@ -190,7 +262,25 @@ export default {
       ],
       "seoTitle": "Acces inteligent acasă fără cod comun | WIFIGATE",
       "seoDescription": "Control inteligent al accesului pentru case private: gestionare din telefon, permisiuni temporare pentru oaspeți și curieri, mai puține tastaturi și chei.",
-      "imageAlt": "Femeie care deschide poarta unei case private cu telefonul în loc de tastatură"
+      "imageAlt": "Femeie care deschide poarta unei case private cu telefonul în loc de tastatură",
+      "faq": [
+        {
+          "question": "De ce este WIFIGATE mai sigur decât un cod de tastatură?",
+          "answer": "Fiecare persoană primește propria permisiune pe telefon, așa că nu există un cod permanent care să lase urme de uzură pe taste sau să ajungă la curieri și oaspeți, iar orice permisiune poate fi eliminată imediat."
+        },
+        {
+          "question": "Pot oferi unui curier sau unui oaspete acces o singură dată?",
+          "answer": "Da. Trimiteți o invitație limitată în timp, care funcționează doar în intervalul ales de dumneavoastră, fără a expune un cod permanent."
+        },
+        {
+          "question": "Ce poate deschide WIFIGATE la o casă privată?",
+          "answer": "Porțile, ușile de intrare, parcarea și ușile de garaj ale casei, toate dintr-o singură aplicație."
+        },
+        {
+          "question": "Cum elimin accesul cuiva?",
+          "answer": "Din telefonul dumneavoastră, într-o clipă. Nu există încuietori, coduri sau telecomenzi de înlocuit."
+        }
+      ]
     },
     "residential-buildings": {
       "label": "Clădiri rezidențiale",
@@ -226,7 +316,25 @@ export default {
       ],
       "seoTitle": "Control acces pentru clădiri rezidențiale | WIFIGATE",
       "seoDescription": "Control inteligent al accesului pentru clădiri rezidențiale: intrare din telefon, permisiuni temporare pentru oaspeți, mai puține tastaturi și chei.",
-      "imageAlt": "Locatar care deschide intrarea unei clădiri rezidențiale cu telefonul"
+      "imageAlt": "Locatar care deschide intrarea unei clădiri rezidențiale cu telefonul",
+      "faq": [
+        {
+          "question": "Cum intră locatarii în clădire cu WIFIGATE?",
+          "answer": "Locatarii deschid ușa holului, poarta sau intrarea în parcare din telefon, cu propria permisiune."
+        },
+        {
+          "question": "Cum intră oaspeții și curierii?",
+          "answer": "Un locatar trimite o invitație temporară pentru oaspeți, cu detaliile de sosire la o singură atingere, fără a expune un cod permanent."
+        },
+        {
+          "question": "Poate asociația de proprietari să vadă cine are acces?",
+          "answer": "Da. Asociația de proprietari sau firma de administrare gestionează lista permisiunilor, iar istoricul de acces arată intrările, pentru transparență."
+        },
+        {
+          "question": "Înlocuiește WIFIGATE codul comun de intrare?",
+          "answer": "Elimină nevoia de a partaja un singur cod: fiecare locatar are o permisiune personală, iar oaspeții primesc acces temporar în locul codului clădirii."
+        }
+      ]
     },
     "office-buildings": {
       "label": "Clădiri de birouri",
@@ -262,7 +370,25 @@ export default {
       ],
       "seoTitle": "Control acces pentru clădiri de birouri | WIFIGATE",
       "seoDescription": "Control al accesului pentru clădiri de birouri: gestionați din telefon intrarea angajaților, vizitatorilor și furnizorilor, cu permisiuni temporare și fixe.",
-      "imageAlt": "Angajat care deschide o ușă de sticlă într-un birou modern cu telefonul"
+      "imageAlt": "Angajat care deschide o ușă de sticlă într-un birou modern cu telefonul",
+      "faq": [
+        {
+          "question": "Cum primesc angajații acces la birou?",
+          "answer": "Angajații primesc o permisiune permanentă pe telefon, care se elimină într-o clipă când cineva pleacă."
+        },
+        {
+          "question": "Cum intră vizitatorii fără să aștepte la recepție?",
+          "answer": "Vizitatorii primesc acces temporar înainte de sosire, așa că intră cu telefonul, iar recepția gestionează mai puține sosiri."
+        },
+        {
+          "question": "Ce poate controla WIFIGATE într-o clădire de birouri?",
+          "answer": "Uși de intrare, etaje, săli și intrări în parcare."
+        },
+        {
+          "question": "Există o evidență a intrărilor?",
+          "answer": "Da. Istoricul de acces arată cine a deschis și când, pentru operațiuni și transparență."
+        }
+      ]
     },
     "entry-doors-magnetic-locks": {
       "label": "Uși de intrare și încuietori magnetice pentru firme",
@@ -298,7 +424,25 @@ export default {
       ],
       "seoTitle": "Uși de intrare și încuietori magnetice | WIFIGATE",
       "seoDescription": "Control al accesului pentru ușile de intrare ale firmelor și încuietori magnetice: deschidere din telefon, permisiuni temporare, mai puține tastaturi și chei.",
-      "imageAlt": "Client care deschide ușa de intrare a unei mici afaceri cu telefonul"
+      "imageAlt": "Client care deschide ușa de intrare a unei mici afaceri cu telefonul",
+      "faq": [
+        {
+          "question": "Funcționează WIFIGATE cu o încuietoare magnetică?",
+          "answer": "Da. WIFIGATE este potrivit pentru uși de intrare cu încuietoare electrică sau magnetică și le deschide din telefon."
+        },
+        {
+          "question": "Pot oferi unui tehnician sau furnizor acces temporar?",
+          "answer": "Da. Partajați o permisiune temporară pentru durata vizitei, în loc să dați codul ușii."
+        },
+        {
+          "question": "Am nevoie de un sistem complicat de control al accesului?",
+          "answer": "Nu. WIFIGATE este o opțiune simplă și modernă pentru firmele care vor intrare din telefon fără un sistem complicat de control al accesului."
+        },
+        {
+          "question": "Ce firme îl folosesc?",
+          "answer": "Firme mici, clinici, studiouri, birouri și depozite."
+        }
+      ]
     },
     "sports-facilities": {
       "label": "Baze sportive",
@@ -334,7 +478,25 @@ export default {
       ],
       "seoTitle": "Control acces pentru baze sportive și padel | WIFIGATE",
       "seoDescription": "Control inteligent al accesului pentru baze sportive, terenuri de padel, săli de fitness și complexe de antrenament, cu intrare din telefon și permisiuni.",
-      "imageAlt": "Jucător de padel care deschide cu telefonul intrarea unui teren sportiv iluminat"
+      "imageAlt": "Jucător de padel care deschide cu telefonul intrarea unui teren sportiv iluminat",
+      "faq": [
+        {
+          "question": "Poate accesul să urmeze programul sau rezervările?",
+          "answer": "Da. Accesul poate fi acordat în funcție de program, rezervări sau permisiuni, iar evenimentele programate pot deschide în funcție de zile și ore."
+        },
+        {
+          "question": "Pot membrii, antrenorii și oaspeții să aibă acces diferit?",
+          "answer": "Da. Fiecare tip de utilizator primește propria permisiune: un membru obișnuit, un antrenor în anumite zile sau un oaspete o singură dată."
+        },
+        {
+          "question": "Pot vedea cine a fost în bază?",
+          "answer": "Da. Istoricul de acces arată cine a deschis și când, ceea ce ajută operațiunile și confirmă că baza a fost închisă la sfârșitul zilei."
+        },
+        {
+          "question": "Pentru ce baze sportive este potrivit WIFIGATE?",
+          "answer": "Terenuri de padel, terenuri de tenis, săli de fitness și complexe de antrenament."
+        }
+      ]
     },
     "storage-lockers": {
       "label": "Spații de depozitare și boxe",
@@ -370,7 +532,25 @@ export default {
       ],
       "seoTitle": "Control acces pentru depozite și boxe | WIFIGATE",
       "seoDescription": "Control al accesului pentru spații de depozitare și boxe: fiecare chiriaș deschide din telefon, în program, cu istoric și acces eliminat la finalul închirierii.",
-      "imageAlt": "Femeie care deschide cu telefonul ușa unui spațiu de depozitare cu boxe și unități de stocare"
+      "imageAlt": "Femeie care deschide cu telefonul ușa unui spațiu de depozitare cu boxe și unități de stocare",
+      "faq": [
+        {
+          "question": "Cum deschid chiriașii poarta și boxa lor?",
+          "answer": "Din telefon, cu o permisiune personală pentru poarta incintei, intrarea în clădire și, acolo unde este instalat, un spațiu de depozitare sau o boxă cu încuietoare electrică."
+        },
+        {
+          "question": "Poate fi limitat accesul la program?",
+          "answer": "Da. Permiteți intrarea doar în timpul programului sau oferiți unui chiriaș un interval mai larg; firmele de mutări și membrii familiei pot primi acces unic."
+        },
+        {
+          "question": "Ce se întâmplă când se încheie o închiriere?",
+          "answer": "Eliminați imediat accesul chiriașului. Nu există chei de recuperat și nici coduri de schimbat."
+        },
+        {
+          "question": "Are nevoie incinta de internet la ușă?",
+          "answer": "Nu. Telefonul comunică direct cu dispozitivul de la fața locului, fără cartelă SIM sau conexiune la internet la ușă."
+        }
+      ]
     }
   }
 };

@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../../css/styles.css?v=20261005b">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20261006b">
-  <link rel="stylesheet" href="../../css/niche.css?v=20261007a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20261007b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
   <script>window.accessibilityCopy = {"ko":{"skipLink":"본문으로 건너뛰기","eyebrow":"접근성","openButton":"접근성 메뉴 열기","closeButton":"접근성 메뉴 닫기","title":"접근성 메뉴","description":"읽고 탐색하는 방식에 맞게 사이트를 조정하세요. 선택한 설정은 이 기기에 저장됩니다.","reset":"모두 초기화","statusDefault":"기본 사이트 보기","statusActive":"{count}개 조정 사용 중","hideButton":"페이지를 새로 고칠 때까지 접근성 버튼 숨기기","statementLink":"접근성 정책","textSize":{"label":"글자 크기","description":"사이트 전체의 글자를 확대합니다.","decrease":"글자 작게","increase":"글자 크게","level":"글자 크기 {percent}%"},"options":{"highContrast":{"label":"고대비","description":"밝은 배경에 어두운 글자와 뚜렷한 테두리."},"grayscale":{"label":"회색조","description":"사이트를 색상 없이 표시합니다."},"underlineLinks":{"label":"링크 강조","description":"모든 링크에 밑줄과 표시를 추가합니다."},"readableFont":{"label":"읽기 쉬운 글꼴","description":"단순하고 읽기 쉬운 글꼴."},"textSpacing":{"label":"텍스트 간격","description":"줄, 단어, 글자 사이 간격을 넓힙니다."},"highlightHeadings":{"label":"제목 강조","description":"제목을 표시해 페이지 구조를 보여 줍니다."},"bigCursor":{"label":"큰 커서","description":"더 큰 마우스 포인터."},"focusHighlight":{"label":"포커스 강조","description":"키보드 포커스가 있는 요소 주위에 굵은 윤곽선."},"reducedMotion":{"label":"애니메이션 중지","description":"애니메이션, 전환 효과, 배경 동영상을 중지합니다."}}}};</script>
@@ -247,6 +247,48 @@
           "position": 2,
           "name": "오피스 빌딩",
           "item": "https://wifigate.io/ko/office-buildings/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/ko/office-buildings/#faq",
+      "inLanguage": "ko",
+      "isPartOf": {
+        "@id": "https://wifigate.io/ko/office-buildings/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "직원은 사무실 출입 권한을 어떻게 받나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "직원은 휴대폰으로 고정 권한을 받으며, 퇴사하면 즉시 삭제됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "방문객은 프런트에서 기다리지 않고 어떻게 들어오나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "방문객은 도착하기 전에 임시 출입 권한을 받으므로 휴대폰으로 들어올 수 있고, 프런트가 응대할 방문도 줄어듭니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "오피스 빌딩에서 WIFIGATE로 무엇을 제어할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "출입문, 층, 방, 주차장 입구입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "출입 기록이 남나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네. 출입 기록으로 누가 언제 열었는지 확인할 수 있어 운영과 투명성에 도움이 됩니다."
+          }
         }
       ]
     }
@@ -579,6 +621,15 @@
           <h2 class="niche-section__title" id="niche-benefits-title">핵심 이점</h2>
         </div>
         <ul class="niche-benefits__grid" id="niche-benefits-list"><li class="niche-benefit">직원과 팀을 위한 고정 권한</li><li class="niche-benefit">방문객, 공급업체, 배달원을 위한 임시 출입</li><li class="niche-benefit">프런트와 운영팀의 부담 감소</li><li class="niche-benefit">출입문, 층, 방, 주차장에 적합</li><li class="niche-benefit niche-benefit--gap" aria-hidden="true"></li><li class="niche-benefit">사용자와 권한을 체계적으로 관리</li><li class="niche-benefit">열쇠, 출입 카드, 코드 의존도 감소</li><li class="niche-benefit">건물에 더 현대적이고 편리한 이미지 제공</li><li class="niche-benefit">관리와 투명성을 위한 출입 기록</li></ul>
+      </div>
+    </section>
+
+    <section class="niche-section niche-faq" id="niche-faq" aria-labelledby="niche-faq-title">
+      <div class="container">
+        <div class="niche-section__header">
+          <h2 class="niche-section__title" id="niche-faq-title">자주 묻는 질문</h2>
+        </div>
+        <div class="niche-faq__list" id="niche-faq-list"><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">직원은 사무실 출입 권한을 어떻게 받나요?</summary><p class="niche-faq__answer" dir="ltr">직원은 휴대폰으로 고정 권한을 받으며, 퇴사하면 즉시 삭제됩니다.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">방문객은 프런트에서 기다리지 않고 어떻게 들어오나요?</summary><p class="niche-faq__answer" dir="ltr">방문객은 도착하기 전에 임시 출입 권한을 받으므로 휴대폰으로 들어올 수 있고, 프런트가 응대할 방문도 줄어듭니다.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">오피스 빌딩에서 WIFIGATE로 무엇을 제어할 수 있나요?</summary><p class="niche-faq__answer" dir="ltr">출입문, 층, 방, 주차장 입구입니다.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">출입 기록이 남나요?</summary><p class="niche-faq__answer" dir="ltr">네. 출입 기록으로 누가 언제 열었는지 확인할 수 있어 운영과 투명성에 도움이 됩니다.</p></details></div>
       </div>
     </section>
 

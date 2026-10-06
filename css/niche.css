@@ -613,3 +613,51 @@ html[dir="rtl"] .niche-hero__nav-icon {
 .niche-related__link:focus-visible {
   color: var(--home-blue, #146bff);
 }
+
+/* Use-case FAQ: questions open in place; the answers are in the HTML. */
+.niche-faq__list {
+  border-top: 1px solid var(--home-line);
+}
+
+.niche-faq__item {
+  border-bottom: 1px solid var(--home-line);
+}
+
+.niche-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.35rem 0.25rem;
+  color: var(--home-black);
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.35;
+  cursor: pointer;
+  list-style: none;
+}
+
+.niche-faq__question::-webkit-details-marker {
+  display: none;
+}
+
+.niche-faq__question::after {
+  content: "+";
+  flex: none;
+  color: var(--home-blue, #146bff);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.niche-faq__item[open] .niche-faq__question::after {
+  content: "−";
+}
+
+.niche-faq__answer {
+  max-width: 62rem;
+  margin: 0;
+  padding: 0 0.25rem 1.4rem;
+  color: var(--home-muted, #4b5563);
+  line-height: 1.65;
+}

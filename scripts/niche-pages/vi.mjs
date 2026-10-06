@@ -46,7 +46,25 @@ export default {
       ],
       "seoTitle": "Kiểm soát ra vào cho khách sạn và Airbnb | WIFIGATE",
       "seoDescription": "Kiểm soát ra vào thông minh cho khách sạn, Airbnb và căn hộ cho thuê: tự cấp quyền cho khách qua WIFIGATE API theo lượt đặt phòng, bớt chìa khóa và thủ tục.",
-      "imageAlt": "Khách mở cửa phòng khách sạn bằng điện thoại trong hành lang hiện đại"
+      "imageAlt": "Khách mở cửa phòng khách sạn bằng điện thoại trong hành lang hiện đại",
+      "faq": [
+        {
+          "question": "Khách mở cổng hoặc cửa bằng WIFIGATE như thế nào?",
+          "answer": "Mỗi khách nhận một lời mời có thời hạn trên điện thoại và mở cổng, cửa hoặc gara bằng ứng dụng WIFIGATE. Quyền truy cập bắt đầu khi nhận phòng và tự động kết thúc khi trả phòng, nên không cần trao chìa khóa, thẻ hay mã."
+        },
+        {
+          "question": "Có thể tự động tạo quyền truy cập cho khách từ đặt phòng không?",
+          "answer": "Có. Với WIFIGATE Host và WIFIGATE API, một lượt đặt phòng đã xác nhận có thể tự động tạo quyền truy cập cho khách, khớp với ngày và giờ lưu trú."
+        },
+        {
+          "question": "Người dọn phòng và nhân viên bảo trì có được cấp quyền riêng không?",
+          "answer": "Có. Nhân viên, người dọn phòng, bảo trì và nhà cung cấp mỗi người có quyền riêng, và lịch sử ra vào cho biết ai đã mở và lúc nào."
+        },
+        {
+          "question": "WIFIGATE cho khách sạn và nhà cho thuê có cần thuê bao không?",
+          "answer": "Thiết bị WIFIGATE không có phí thuê bao hằng tháng. WIFIGATE Host, giải pháp tự động hóa đặt phòng cho khách sạn và nhà cho thuê, là phần duy nhất được cung cấp theo thuê bao."
+        }
+      ]
     },
     "roller-shutters": {
       "label": "Cửa cuốn cho doanh nghiệp và cửa hàng",
@@ -82,7 +100,25 @@ export default {
       ],
       "seoTitle": "Điều khiển cửa cuốn thông minh cho cửa hàng | WIFIGATE",
       "seoDescription": "Ứng dụng điều khiển cửa cuốn bằng điện thoại cho cửa hàng và doanh nghiệp: phân quyền nhân viên, ít phụ thuộc chìa khóa, điều khiển và điểm truy cập bên ngoài.",
-      "imageAlt": "Chủ cửa hàng mở cửa cuốn bằng điện thoại"
+      "imageAlt": "Chủ cửa hàng mở cửa cuốn bằng điện thoại",
+      "faq": [
+        {
+          "question": "WIFIGATE mở cửa cuốn như thế nào?",
+          "answer": "WIFIGATE được kết nối với bộ điều khiển cửa cuốn và cho phép người được cấp quyền đóng mở bằng ứng dụng WIFIGATE. Điểm điều khiển nằm ở phía trong được bảo vệ, thay vì công tắc chìa khóa hay điều khiển từ xa lộ ra bên ngoài."
+        },
+        {
+          "question": "Mỗi nhân viên có thể có quyền riêng với cửa cuốn không?",
+          "answer": "Có. Mỗi nhân viên, quản lý hoặc nhà cung cấp nhận một quyền cá nhân mà bạn có thể xóa bất cứ lúc nào, không cần thu lại chìa khóa hay điều khiển."
+        },
+        {
+          "question": "Tôi có thể cấp quyền tạm thời cho nhà cung cấp không?",
+          "answer": "Có. Bạn có thể chia sẻ quyền có thời hạn với nhà cung cấp hoặc nhân viên thời vụ, và quyền sẽ ngừng hoạt động khi hết thời gian."
+        },
+        {
+          "question": "Giải pháp này phù hợp với doanh nghiệp nào?",
+          "answer": "Cửa hàng, nhà kho, lối vào dịch vụ và mọi doanh nghiệp có cửa cuốn điện muốn bớt chìa khóa, điều khiển và các điểm ra vào lộ ra bên ngoài."
+        }
+      ]
     },
     "electric-gates": {
       "label": "Cổng điện và barie bãi xe",
@@ -118,7 +154,25 @@ export default {
       ],
       "seoTitle": "Ứng dụng mở cổng điện không thuê bao | WIFIGATE",
       "seoDescription": "Ứng dụng mở cổng điện và barie bãi xe bằng điện thoại: Mở cửa tự động, sự kiện theo lịch, dùng cùng điều khiển cũ, phân quyền và không phí thuê bao hằng tháng.",
-      "imageAlt": "Tài xế mở barie bãi xe và cổng điện bằng điện thoại"
+      "imageAlt": "Tài xế mở barie bãi xe và cổng điện bằng điện thoại",
+      "faq": [
+        {
+          "question": "Tôi có thể mở cổng điện hoặc barie bãi xe bằng điện thoại không?",
+          "answer": "Có. WIFIGATE được kết nối với cổng hoặc barie, và người dùng được cấp quyền mở bằng ứng dụng WIFIGATE, với quyền cố định hoặc tạm thời."
+        },
+        {
+          "question": "Cổng có cần thẻ SIM hay kết nối internet không?",
+          "answer": "Không. Điện thoại giao tiếp trực tiếp với thiết bị WIFIGATE, nên cổng không cần thẻ SIM, gói internet hay bộ phát Wi‑Fi bên ngoài."
+        },
+        {
+          "question": "Tôi có thể tiếp tục dùng điều khiển từ xa hiện có không?",
+          "answer": "Có. Điều khiển từ xa hiện có vẫn hoạt động song song với điều khiển bằng ứng dụng, nên không phải bỏ đi thứ gì."
+        },
+        {
+          "question": "Có phí hằng tháng không?",
+          "answer": "Không. Bạn trả một lần cho thiết bị và lắp đặt, không có phí thuê bao hằng tháng hay thanh toán định kỳ."
+        }
+      ]
     },
     "garage-doors": {
       "label": "Cửa gara và bãi đỗ xe riêng",
@@ -154,7 +208,25 @@ export default {
       ],
       "seoTitle": "Mở cửa gara thông minh bằng điện thoại | WIFIGATE",
       "seoDescription": "Ứng dụng mở cửa gara và lối vào bãi đỗ xe riêng bằng điện thoại, ít phụ thuộc điều khiển vật lý, cấp quyền tạm thời và quản lý ra vào thuận tiện, riêng tư hơn.",
-      "imageAlt": "Người đàn ông mở cửa gara của ngôi nhà hiện đại bằng điện thoại"
+      "imageAlt": "Người đàn ông mở cửa gara của ngôi nhà hiện đại bằng điện thoại",
+      "faq": [
+        {
+          "question": "Làm sao để mở cửa gara bằng điện thoại?",
+          "answer": "WIFIGATE được kết nối với cửa gara và bạn mở cửa bằng ứng dụng WIFIGATE. Mỗi thành viên trong gia đình nhận quyền riêng trên điện thoại của mình."
+        },
+        {
+          "question": "Chuyện gì xảy ra khi ai đó làm mất điều khiển?",
+          "answer": "Chiếc điều khiển bị mất vẫn hoạt động cho đến khi các điều khiển được cài lại mã. Quyền trên điện thoại được xóa khỏi ứng dụng trong chốc lát, không cần thay thế hay cài lại mã."
+        },
+        {
+          "question": "Tôi có thể cho thợ vào mà không đưa điều khiển không?",
+          "answer": "Có. Hãy gửi quyền tạm thời kết thúc vào thời điểm bạn chọn, không cần trao điều khiển hay mã số."
+        },
+        {
+          "question": "Có thể dùng WIFIGATE cho chỗ đỗ xe ở đâu?",
+          "answer": "Gara riêng, lối vào bãi đỗ xe riêng, nhà ở và căn hộ tầng trệt có sân vườn."
+        }
+      ]
     },
     "private-homes": {
       "label": "Nhà riêng",
@@ -190,7 +262,25 @@ export default {
       ],
       "seoTitle": "Ra vào nhà riêng không cần mã dùng chung | WIFIGATE",
       "seoDescription": "Kiểm soát ra vào cho nhà riêng bằng điện thoại: chia sẻ quyền tạm thời cho khách và người giao hàng, giảm phụ thuộc vào bàn phím, chìa khóa và điều khiển từ xa.",
-      "imageAlt": "Người phụ nữ mở cổng nhà riêng bằng điện thoại thay vì dùng bàn phím"
+      "imageAlt": "Người phụ nữ mở cổng nhà riêng bằng điện thoại thay vì dùng bàn phím",
+      "faq": [
+        {
+          "question": "Vì sao WIFIGATE an toàn hơn mã bàn phím?",
+          "answer": "Mỗi người có quyền riêng trên điện thoại, nên không có mã cố định để lại vết mòn trên phím hay lan sang người giao hàng và khách, và mọi quyền đều có thể xóa ngay lập tức."
+        },
+        {
+          "question": "Tôi có thể cấp quyền vào một lần cho người giao hàng hoặc khách không?",
+          "answer": "Có. Hãy gửi lời mời có thời hạn chỉ hoạt động trong khoảng thời gian bạn chọn, mà không lộ mã cố định."
+        },
+        {
+          "question": "WIFIGATE có thể mở những gì ở nhà riêng?",
+          "answer": "Cổng, cửa ra vào, chỗ đỗ xe và cửa gara của ngôi nhà, tất cả từ một ứng dụng."
+        },
+        {
+          "question": "Làm sao để thu hồi quyền của một người?",
+          "answer": "Ngay trên điện thoại của bạn, trong chốc lát. Không có ổ khóa, mã hay điều khiển nào phải thay."
+        }
+      ]
     },
     "residential-buildings": {
       "label": "Tòa nhà chung cư",
@@ -226,7 +316,25 @@ export default {
       ],
       "seoTitle": "Kiểm soát ra vào cho tòa nhà chung cư | WIFIGATE",
       "seoDescription": "Kiểm soát ra vào thông minh cho tòa nhà chung cư: vào cửa bằng điện thoại, cấp quyền tạm thời cho khách, ít phụ thuộc bàn phím, minh bạch nhờ lịch sử ra vào.",
-      "imageAlt": "Cư dân mở lối vào tòa nhà chung cư bằng điện thoại"
+      "imageAlt": "Cư dân mở lối vào tòa nhà chung cư bằng điện thoại",
+      "faq": [
+        {
+          "question": "Cư dân vào tòa nhà bằng WIFIGATE như thế nào?",
+          "answer": "Cư dân mở cửa sảnh, cổng hoặc lối vào bãi đỗ xe bằng điện thoại với quyền riêng của mình."
+        },
+        {
+          "question": "Khách và người giao hàng vào bằng cách nào?",
+          "answer": "Cư dân gửi lời mời khách có thời hạn, kèm thông tin đến nơi chỉ trong một chạm, mà không lộ mã cố định."
+        },
+        {
+          "question": "Ban quản trị có xem được ai đang có quyền ra vào không?",
+          "answer": "Có. Ban quản trị hoặc công ty quản lý quản lý danh sách quyền, và lịch sử ra vào hiển thị các lượt vào để đảm bảo minh bạch."
+        },
+        {
+          "question": "WIFIGATE có thay thế mã ra vào dùng chung không?",
+          "answer": "WIFIGATE loại bỏ nhu cầu chia sẻ một mã chung: mỗi cư dân có quyền cá nhân, còn khách nhận quyền tạm thời thay cho mã của tòa nhà."
+        }
+      ]
     },
     "office-buildings": {
       "label": "Tòa nhà văn phòng",
@@ -262,7 +370,25 @@ export default {
       ],
       "seoTitle": "Kiểm soát ra vào cho tòa nhà văn phòng | WIFIGATE",
       "seoDescription": "Kiểm soát ra vào cho tòa nhà văn phòng: quản lý lượt vào của nhân viên, khách và nhà cung cấp bằng điện thoại, với quyền tạm thời, cố định và quản lý hiện đại.",
-      "imageAlt": "Nhân viên mở cửa kính trong văn phòng hiện đại bằng điện thoại"
+      "imageAlt": "Nhân viên mở cửa kính trong văn phòng hiện đại bằng điện thoại",
+      "faq": [
+        {
+          "question": "Nhân viên được cấp quyền vào văn phòng như thế nào?",
+          "answer": "Nhân viên nhận quyền cố định trên điện thoại, và quyền này được xóa trong chốc lát khi có người nghỉ việc."
+        },
+        {
+          "question": "Khách vào bằng cách nào mà không phải chờ ở lễ tân?",
+          "answer": "Khách nhận quyền tạm thời trước khi đến, nên họ vào bằng điện thoại và lễ tân phải tiếp đón ít lượt hơn."
+        },
+        {
+          "question": "WIFIGATE có thể điều khiển những gì trong tòa nhà văn phòng?",
+          "answer": "Cửa ra vào, tầng, phòng và lối vào bãi đỗ xe."
+        },
+        {
+          "question": "Có lưu lại các lượt ra vào không?",
+          "answer": "Có. Lịch sử ra vào cho biết ai đã mở và lúc nào, phục vụ vận hành và minh bạch."
+        }
+      ]
     },
     "entry-doors-magnetic-locks": {
       "label": "Cửa ra vào và khóa từ cho doanh nghiệp",
@@ -298,7 +424,25 @@ export default {
       ],
       "seoTitle": "Cửa ra vào và khóa từ cho doanh nghiệp | WIFIGATE",
       "seoDescription": "Kiểm soát ra vào thông minh cho cửa doanh nghiệp và khóa từ: quản lý quyền bằng điện thoại, cấp quyền tạm thời, ít phụ thuộc vào bàn phím và chìa khóa vật lý.",
-      "imageAlt": "Khách hàng mở cửa ra vào của một doanh nghiệp nhỏ bằng điện thoại"
+      "imageAlt": "Khách hàng mở cửa ra vào của một doanh nghiệp nhỏ bằng điện thoại",
+      "faq": [
+        {
+          "question": "WIFIGATE có dùng được với khóa từ không?",
+          "answer": "Có. WIFIGATE phù hợp cho cửa ra vào dùng khóa điện hoặc khóa từ và mở cửa bằng điện thoại."
+        },
+        {
+          "question": "Tôi có thể cấp quyền tạm thời cho kỹ thuật viên hoặc nhà cung cấp không?",
+          "answer": "Có. Hãy chia sẻ quyền tạm thời cho lượt ghé thăm thay vì đưa mã cửa."
+        },
+        {
+          "question": "Tôi có cần một hệ thống kiểm soát ra vào phức tạp không?",
+          "answer": "Không. WIFIGATE là lựa chọn đơn giản, hiện đại cho doanh nghiệp muốn ra vào bằng điện thoại mà không cần hệ thống kiểm soát ra vào phức tạp."
+        },
+        {
+          "question": "Những doanh nghiệp nào đang sử dụng?",
+          "answer": "Doanh nghiệp nhỏ, phòng khám, studio, văn phòng và nhà kho."
+        }
+      ]
     },
     "sports-facilities": {
       "label": "Cơ sở thể thao",
@@ -334,7 +478,25 @@ export default {
       ],
       "seoTitle": "Kiểm soát ra vào cho sân thể thao và padel | WIFIGATE",
       "seoDescription": "Kiểm soát ra vào thông minh cho cơ sở thể thao, sân padel, phòng gym và khu tập luyện: vào bằng điện thoại, quyền tạm thời hoặc cố định cho hội viên và khách.",
-      "imageAlt": "Người chơi padel mở lối vào sân thể thao có đèn chiếu sáng bằng điện thoại"
+      "imageAlt": "Người chơi padel mở lối vào sân thể thao có đèn chiếu sáng bằng điện thoại",
+      "faq": [
+        {
+          "question": "Quyền ra vào có thể theo giờ hoạt động hoặc lượt đặt sân không?",
+          "answer": "Có. Quyền có thể được cấp theo giờ hoạt động, lượt đặt sân hoặc quyền được cấp, và các sự kiện theo lịch có thể tự mở theo ngày và giờ."
+        },
+        {
+          "question": "Hội viên, huấn luyện viên và khách có thể có quyền khác nhau không?",
+          "answer": "Có. Mỗi loại người dùng nhận quyền riêng: hội viên thường xuyên, huấn luyện viên vào một số ngày nhất định hoặc khách đến một lần."
+        },
+        {
+          "question": "Tôi có xem được ai đã có mặt tại cơ sở không?",
+          "answer": "Có. Lịch sử ra vào cho biết ai đã mở và lúc nào, giúp vận hành và xác nhận cơ sở đã đóng cửa vào cuối ngày."
+        },
+        {
+          "question": "WIFIGATE phù hợp với cơ sở thể thao nào?",
+          "answer": "Sân padel, sân tennis, phòng gym và khu tập luyện."
+        }
+      ]
     },
     "storage-lockers": {
       "label": "Kho lưu trữ và tủ khóa",
@@ -370,7 +532,25 @@ export default {
       ],
       "seoTitle": "Kiểm soát ra vào cho kho lưu trữ và tủ khóa | WIFIGATE",
       "seoDescription": "Kiểm soát ra vào cho kho lưu trữ và tủ khóa: mỗi người thuê mở cổng, cửa và tủ của mình bằng điện thoại, giới hạn theo giờ, có lịch sử, xóa quyền khi hết hạn.",
-      "imageAlt": "Người phụ nữ dùng điện thoại mở cửa khu kho có tủ khóa và ô lưu trữ"
+      "imageAlt": "Người phụ nữ dùng điện thoại mở cửa khu kho có tủ khóa và ô lưu trữ",
+      "faq": [
+        {
+          "question": "Người thuê mở cổng và tủ khóa của mình như thế nào?",
+          "answer": "Bằng điện thoại, với quyền cá nhân cho cổng khu kho, lối vào tòa nhà và, nếu có lắp đặt, kho chứa hoặc tủ khóa dùng khóa điện."
+        },
+        {
+          "question": "Có thể giới hạn ra vào theo giờ hoạt động không?",
+          "answer": "Có. Chỉ cho phép vào trong giờ hoạt động, hoặc cấp cho người thuê khung giờ rộng hơn; người chuyển đồ và người thân có thể nhận quyền dùng một lần."
+        },
+        {
+          "question": "Chuyện gì xảy ra khi hợp đồng thuê kết thúc?",
+          "answer": "Bạn xóa quyền của người thuê ngay lập tức. Không phải thu chìa khóa và không phải đổi mã."
+        },
+        {
+          "question": "Khu kho có cần internet tại cửa không?",
+          "answer": "Không. Điện thoại giao tiếp trực tiếp với thiết bị tại chỗ, không cần thẻ SIM hay kết nối internet tại cửa."
+        }
+      ]
     }
   }
 };

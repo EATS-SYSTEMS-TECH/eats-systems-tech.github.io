@@ -46,7 +46,25 @@ export default {
       ],
       "seoTitle": "Kulunhallinta hotelleihin ja Airbnb-kohteisiin | WIFIGATE",
       "seoDescription": "WIFIGATE tuo älykkään kulunhallinnan hotelleihin ja Airbnb-kohteisiin: automaattiset vieraskulkuoikeudet API:n kautta ja varaukseen sidottu pääsy.",
-      "imageAlt": "Vieraat avaavat hotellihuoneen oven puhelimella modernissa käytävässä"
+      "imageAlt": "Vieraat avaavat hotellihuoneen oven puhelimella modernissa käytävässä",
+      "faq": [
+        {
+          "question": "Miten vieraat avaavat portin tai oven WIFIGATEn avulla?",
+          "answer": "Jokainen vieras saa puhelimeensa ajallisesti rajatun kutsun ja avaa portin, oven tai autotallin WIFIGATE-sovelluksesta. Kulkuoikeus alkaa sisäänkirjautumisesta ja päättyy automaattisesti uloskirjautumiseen, joten avaimia, kortteja tai koodeja ei luovuteta kenellekään."
+        },
+        {
+          "question": "Voiko vieraan kulkuoikeuden luoda automaattisesti varauksista?",
+          "answer": "Kyllä. WIFIGATE Hostin ja WIFIGATE API:n avulla vahvistettu varaus voi luoda vieraan kulkuoikeuden automaattisesti majoituksen päivien ja kellonaikojen mukaan."
+        },
+        {
+          "question": "Voivatko siivoojat ja huoltohenkilöstö saada oman kulkuoikeuden?",
+          "answer": "Kyllä. Henkilökunta, siivoojat, huolto ja toimittajat saavat kukin oman kulkuoikeutensa, ja kulkuhistoriasta näkee, kuka avasi ja milloin."
+        },
+        {
+          "question": "Vaatiiko WIFIGATE tilauksen hotelleille ja vuokrakohteille?",
+          "answer": "WIFIGATE-laitteessa ei ole kuukausitilausta. WIFIGATE Host, hotellien ja vuokrakohteiden varausautomaatio, on ainoa tilauksena tarjottava osa."
+        }
+      ]
     },
     "roller-shutters": {
       "label": "Liikkeiden ja yritysten rullaovet",
@@ -82,7 +100,25 @@ export default {
       ],
       "seoTitle": "Rullaovien älyohjaus liikkeisiin ja yrityksiin | WIFIGATE",
       "seoDescription": "WIFIGATE tuo liikkeille rullaovien älykkään ohjauksen puhelimella: kulkuoikeuksien hallinta sekä vähemmän avaimia, kaukosäätimiä ja alttiita kulkupisteitä.",
-      "imageAlt": "Liikkeen omistaja avaa liikkeen rullaoven puhelimella"
+      "imageAlt": "Liikkeen omistaja avaa liikkeen rullaoven puhelimella",
+      "faq": [
+        {
+          "question": "Miten WIFIGATE avaa rullaoven?",
+          "answer": "WIFIGATE kytketään rullaoven ohjaukseen, ja valtuutetut henkilöt voivat avata ja sulkea sen WIFIGATE-sovelluksesta. Ohjaus on suojatulla sisäpuolella alttiin avainkytkimen tai kaukosäätimen sijaan."
+        },
+        {
+          "question": "Voiko jokaisella työntekijällä olla oma kulkuoikeus rullaoveen?",
+          "answer": "Kyllä. Jokainen työntekijä, esihenkilö tai toimittaja saa henkilökohtaisen kulkuoikeuden, jonka voit poistaa milloin tahansa ilman avainten tai kaukosäätimien keräämistä."
+        },
+        {
+          "question": "Voinko antaa toimittajalle väliaikaisen kulkuoikeuden?",
+          "answer": "Kyllä. Voit jakaa ajallisesti rajatun kulkuoikeuden toimittajalle tai määräaikaiselle työntekijälle, ja se lakkaa toimimasta, kun aika umpeutuu."
+        },
+        {
+          "question": "Mihin yrityksiin se sopii?",
+          "answer": "Liikkeisiin, varastoihin, huoltosisäänkäynteihin ja kaikkiin yrityksiin, joissa on sähköinen rullaovi ja joissa halutaan vähemmän avaimia, kaukosäätimiä ja alttiita kulkupisteitä."
+        }
+      ]
     },
     "electric-gates": {
       "label": "Sähköportit ja pysäköintipuomit",
@@ -118,7 +154,25 @@ export default {
       ],
       "seoTitle": "Sähköportit ja pysäköintipuomit ilman tilausta | WIFIGATE",
       "seoDescription": "WIFIGATE avaa sähköportit ja pysäköintipuomit puhelimella: automaattinen avaus, ajastetut tapahtumat, nykyiset kaukosäätimet eikä kuukausitilausta.",
-      "imageAlt": "Kuljettaja avaa pysäköintipuomin ja sähköportin puhelimella"
+      "imageAlt": "Kuljettaja avaa pysäköintipuomin ja sähköportin puhelimella",
+      "faq": [
+        {
+          "question": "Voinko avata sähköportin tai pysäköintipuomin puhelimella?",
+          "answer": "Kyllä. WIFIGATE kytketään porttiin tai puomiin, ja valtuutetut käyttäjät avaavat sen WIFIGATE-sovelluksesta pysyvillä tai väliaikaisilla kulkuoikeuksilla."
+        },
+        {
+          "question": "Tarvitseeko portti SIM-kortin tai internetyhteyden?",
+          "answer": "Ei. Puhelin viestii suoraan WIFIGATE-laitteen kanssa, joten portti ei tarvitse SIM-korttia, internetliittymää eikä ulkoista Wi-Fi-reititintä."
+        },
+        {
+          "question": "Voinko jatkaa nykyisten kaukosäätimieni käyttöä?",
+          "answer": "Kyllä. Nykyiset kaukosäätimet toimivat edelleen sovellusohjauksen rinnalla, joten mitään ei tarvitse heittää pois."
+        },
+        {
+          "question": "Onko kuukausimaksua?",
+          "answer": "Ei. Maksat kerran laitteesta ja asennuksesta, ilman kuukausitilausta tai toistuvaa maksua."
+        }
+      ]
     },
     "garage-doors": {
       "label": "Autotallin ovet ja yksityinen pysäköinti",
@@ -154,7 +208,25 @@ export default {
       ],
       "seoTitle": "Älykäs autotallin oven ja pysäköinnin avaus | WIFIGATE",
       "seoDescription": "WIFIGATE avaa autotallin ovet ja yksityisen pysäköinnin sisäänkäynnit puhelimella: vähemmän kaukosäätimiä, väliaikaiset kulkuoikeudet ja yksityinen hallinta.",
-      "imageAlt": "Mies avaa yksityisen autotallin oven puhelimella modernin talon edessä"
+      "imageAlt": "Mies avaa yksityisen autotallin oven puhelimella modernin talon edessä",
+      "faq": [
+        {
+          "question": "Miten avaan autotallin oven puhelimellani?",
+          "answer": "WIFIGATE kytketään autotallin oveen, ja avaat sen WIFIGATE-sovelluksesta. Jokainen perheenjäsen saa oman kulkuoikeutensa omaan puhelimeensa."
+        },
+        {
+          "question": "Mitä tapahtuu, kun joku kadottaa kaukosäätimen?",
+          "answer": "Kadonnut kaukosäädin toimii edelleen, kunnes kaukosäätimet koodataan uudelleen. Puhelimessa oleva kulkuoikeus poistetaan sovelluksesta hetkessä, eikä mitään tarvitse vaihtaa tai koodata uudelleen."
+        },
+        {
+          "question": "Voinko päästää remonttimiehen sisään antamatta hänelle kaukosäädintä?",
+          "answer": "Kyllä. Lähetä väliaikainen kulkuoikeus, joka päättyy valitsemanasi hetkenä, luovuttamatta kaukosäädintä tai koodia."
+        },
+        {
+          "question": "Missä WIFIGATEa voi käyttää pysäköintiin?",
+          "answer": "Yksityisissä autotalleissa, yksityisten pysäköintialueiden sisäänajoissa, omakotitaloissa ja pihallisissa asunnoissa."
+        }
+      ]
     },
     "private-homes": {
       "label": "Yksityiskodit",
@@ -190,7 +262,25 @@ export default {
       ],
       "seoTitle": "Älykäs kotiin pääsy ilman jaettua koodia | WIFIGATE",
       "seoDescription": "WIFIGATE tuo yksityiskoteihin kulunhallinnan puhelimella: väliaikaiset kulkuoikeudet vieraille ja läheteille sekä vähemmän koodilukkoja ja avaimia.",
-      "imageAlt": "Nainen avaa yksityiskodin portin puhelimella koodilukon sijaan"
+      "imageAlt": "Nainen avaa yksityiskodin portin puhelimella koodilukon sijaan",
+      "faq": [
+        {
+          "question": "Miksi WIFIGATE on turvallisempi kuin koodilukon koodi?",
+          "answer": "Jokainen saa oman kulkuoikeuden puhelimeensa, joten ei ole pysyvää koodia, joka kuluttaa jälkiä näppäimiin tai leviää lähettien ja vieraiden keskuuteen, ja minkä tahansa kulkuoikeuden voi poistaa heti."
+        },
+        {
+          "question": "Voinko antaa lähetille tai vieraalle kertakäyttöisen kulkuoikeuden?",
+          "answer": "Kyllä. Lähetä ajallisesti rajattu kutsu, joka toimii vain valitsemasi ajan, paljastamatta pysyvää koodia."
+        },
+        {
+          "question": "Mitä WIFIGATE voi avata yksityiskodissa?",
+          "answer": "Kodin portit, ulko-ovet, pysäköinnin ja autotallin ovet, kaikki yhdestä sovelluksesta."
+        },
+        {
+          "question": "Miten poistan jonkun kulkuoikeuden?",
+          "answer": "Puhelimestasi, hetkessä. Lukkoja, koodeja tai kaukosäätimiä ei tarvitse vaihtaa."
+        }
+      ]
     },
     "residential-buildings": {
       "label": "Asuinrakennukset",
@@ -226,7 +316,25 @@ export default {
       ],
       "seoTitle": "Kulunhallinta asuinrakennuksiin | WIFIGATE",
       "seoDescription": "WIFIGATE tuo asuinrakennuksiin älykkään kulunhallinnan: sisäänpääsy puhelimella, väliaikaiset vieraskulkuoikeudet, vähemmän koodilukkoja, parempi läpinäkyvyys.",
-      "imageAlt": "Asukas avaa asuinrakennuksen ulko-oven puhelimella"
+      "imageAlt": "Asukas avaa asuinrakennuksen ulko-oven puhelimella",
+      "faq": [
+        {
+          "question": "Miten asukkaat pääsevät rakennukseen WIFIGATEn avulla?",
+          "answer": "Asukkaat avaavat aulan oven, portin tai pysäköinnin sisäänkäynnin puhelimellaan omalla kulkuoikeudellaan."
+        },
+        {
+          "question": "Miten vieraat ja lähetit pääsevät sisään?",
+          "answer": "Asukas lähettää ajallisesti rajatun vieraskutsun, jossa saapumistiedot ovat yhden napautuksen päässä, paljastamatta pysyvää koodia."
+        },
+        {
+          "question": "Näkeekö taloyhtiön hallitus, kenellä on kulkuoikeus?",
+          "answer": "Kyllä. Hallitus tai isännöitsijä hallinnoi kulkuoikeuksien listaa, ja kulkuhistoria näyttää sisäänkulut läpinäkyvyyden vuoksi."
+        },
+        {
+          "question": "Korvaako WIFIGATE yhteisen ovikoodin?",
+          "answer": "Se poistaa tarpeen jakaa yhtä koodia: jokaisella asukkaalla on henkilökohtainen kulkuoikeus, ja vieraat saavat väliaikaisen kulkuoikeuden rakennuksen koodin sijaan."
+        }
+      ]
     },
     "office-buildings": {
       "label": "Toimistorakennukset",
@@ -262,7 +370,25 @@ export default {
       ],
       "seoTitle": "Kulunhallinta toimistorakennuksiin | WIFIGATE",
       "seoDescription": "WIFIGATE antaa toimistorakennusten hallita työntekijöiden, vierailijoiden ja toimittajien kulkua puhelimella pysyvillä ja väliaikaisilla kulkuoikeuksilla.",
-      "imageAlt": "Työntekijä avaa lasioven modernissa toimistossa puhelimella"
+      "imageAlt": "Työntekijä avaa lasioven modernissa toimistossa puhelimella",
+      "faq": [
+        {
+          "question": "Miten työntekijät saavat kulkuoikeuden toimistoon?",
+          "answer": "Työntekijät saavat puhelimeensa pysyvän kulkuoikeuden, ja se poistetaan hetkessä, kun joku lähtee."
+        },
+        {
+          "question": "Miten vierailijat pääsevät sisään odottamatta vastaanotossa?",
+          "answer": "Vierailijat saavat väliaikaisen kulkuoikeuden ennen saapumistaan, joten he kulkevat sisään puhelimellaan ja vastaanotto käsittelee vähemmän saapujia."
+        },
+        {
+          "question": "Mitä WIFIGATE voi ohjata toimistorakennuksessa?",
+          "answer": "Ulko-ovia, kerroksia, huoneita ja pysäköinnin sisäänkäyntejä."
+        },
+        {
+          "question": "Jääkö sisäänkulusta kirjaus?",
+          "answer": "Kyllä. Kulkuhistoria näyttää, kuka avasi ja milloin, toimintaa ja läpinäkyvyyttä varten."
+        }
+      ]
     },
     "entry-doors-magnetic-locks": {
       "label": "Yritysten sisäänkäyntiovet ja magneettilukot",
@@ -298,7 +424,25 @@ export default {
       ],
       "seoTitle": "Yritysten ovet ja magneettilukot | WIFIGATE",
       "seoDescription": "WIFIGATE tuo älykkään avauksen yritysten sisäänkäyntioville ja magneettilukoille: kulkuoikeuksien hallinta puhelimella, väliaikainen pääsy ja vähemmän koodeja.",
-      "imageAlt": "Asiakas avaa pienyrityksen sisäänkäyntioven puhelimella"
+      "imageAlt": "Asiakas avaa pienyrityksen sisäänkäyntioven puhelimella",
+      "faq": [
+        {
+          "question": "Toimiiko WIFIGATE magneettilukon kanssa?",
+          "answer": "Kyllä. WIFIGATE sopii sisäänkäyntioviin, joissa on sähkö- tai magneettilukko, ja avaa ne puhelimella."
+        },
+        {
+          "question": "Voinko antaa asentajalle tai toimittajalle väliaikaisen kulkuoikeuden?",
+          "answer": "Kyllä. Jaa väliaikainen kulkuoikeus käynnin ajaksi oven koodin antamisen sijaan."
+        },
+        {
+          "question": "Tarvitsenko monimutkaisen kulunvalvontajärjestelmän?",
+          "answer": "Et. WIFIGATE on yksinkertainen ja moderni vaihtoehto yrityksille, jotka haluavat puhelimella toimivan sisäänkulun ilman monimutkaista kulunvalvontajärjestelmää."
+        },
+        {
+          "question": "Mitkä yritykset käyttävät sitä?",
+          "answer": "Pienyritykset, klinikat, studiot, toimistot ja varastot."
+        }
+      ]
     },
     "sports-facilities": {
       "label": "Urheilutilat",
@@ -334,7 +478,25 @@ export default {
       ],
       "seoTitle": "Kulunhallinta urheilutiloihin ja padelkentille | WIFIGATE",
       "seoDescription": "WIFIGATE tuo älykkään kulunhallinnan urheilutiloihin, padelkentille ja kuntosaleille: sisäänpääsy puhelimella sekä väliaikaiset tai pysyvät kulkuoikeudet.",
-      "imageAlt": "Padelpelaaja avaa valaistun urheilukentän sisäänkäynnin puhelimella"
+      "imageAlt": "Padelpelaaja avaa valaistun urheilukentän sisäänkäynnin puhelimella",
+      "faq": [
+        {
+          "question": "Voiko kulku noudattaa aukioloaikoja tai varauksia?",
+          "answer": "Kyllä. Kulku voidaan sallia aukioloaikojen, varausten tai kulkuoikeuksien mukaan, ja ajastetut tapahtumat voivat avata päivien ja kellonaikojen mukaan."
+        },
+        {
+          "question": "Voiko jäsenillä, valmentajilla ja vierailla olla eri kulkuoikeudet?",
+          "answer": "Kyllä. Jokainen käyttäjätyyppi saa oman kulkuoikeutensa: vakituinen jäsen, tiettyinä päivinä käyvä valmentaja tai kertavieras."
+        },
+        {
+          "question": "Näenkö, kuka on käynyt tiloissa?",
+          "answer": "Kyllä. Kulkuhistoria näyttää, kuka avasi ja milloin, mikä helpottaa toimintaa ja vahvistaa, että paikka suljettiin päivän päätteeksi."
+        },
+        {
+          "question": "Mihin urheilutiloihin WIFIGATE sopii?",
+          "answer": "Padelkentille, tenniskentille, kuntosaleille ja harjoituskeskuksiin."
+        }
+      ]
     },
     "storage-lockers": {
       "label": "Varastotilat ja lokerot",
@@ -370,7 +532,25 @@ export default {
       ],
       "seoTitle": "Kulunhallinta varastotiloihin ja lokeroihin | WIFIGATE",
       "seoDescription": "WIFIGATE antaa jokaiselle varasto- ja lokerovuokralaiselle henkilökohtaisen kulkuoikeuden puhelimella porttiin, oviin ja lokeroon, rajattuna aukioloaikoihin.",
-      "imageAlt": "Nainen avaa varastoalueen oven puhelimellaan, taustalla lokeroita ja varastoyksiköitä"
+      "imageAlt": "Nainen avaa varastoalueen oven puhelimellaan, taustalla lokeroita ja varastoyksiköitä",
+      "faq": [
+        {
+          "question": "Miten vuokralaiset avaavat portin ja lokeronsa?",
+          "answer": "Puhelimellaan, henkilökohtaisella kulkuoikeudella alueen porttiin, rakennuksen sisäänkäyntiin ja, missä sellainen on asennettu, sähkölukittuun varastotilaan tai lokeroon."
+        },
+        {
+          "question": "Voiko kulun rajata aukioloaikoihin?",
+          "answer": "Kyllä. Salli sisäänpääsy vain aukioloaikoina tai anna vuokralaiselle laajempi aikaikkuna; muuttomiehet ja perheenjäsenet voivat saada kertakäyttöisen kulkuoikeuden."
+        },
+        {
+          "question": "Mitä tapahtuu, kun vuokrasuhde päättyy?",
+          "answer": "Poistat vuokralaisen kulkuoikeuden heti. Avaimia ei tarvitse kerätä eikä koodeja vaihtaa."
+        },
+        {
+          "question": "Tarvitaanko kohteessa internetyhteys ovella?",
+          "answer": "Ei. Puhelin viestii suoraan paikan päällä olevan laitteen kanssa, ilman SIM-korttia tai internetyhteyttä ovella."
+        }
+      ]
     }
   }
 };

@@ -46,7 +46,25 @@ export default {
       ],
       "seoTitle": "Controllo accessi per hotel, Airbnb e case vacanza | WIFIGATE API",
       "seoDescription": "Accesso smart per hotel, Airbnb e case vacanza: permessi ospite automatici con WIFIGATE API, accessi temporanei per ogni prenotazione e meno check-in manuali.",
-      "imageAlt": "Ospiti che aprono la porta di una camera d'hotel con il telefono in un corridoio moderno"
+      "imageAlt": "Ospiti che aprono la porta di una camera d'hotel con il telefono in un corridoio moderno",
+      "faq": [
+        {
+          "question": "Come aprono il cancello o la porta gli ospiti con WIFIGATE?",
+          "answer": "Ogni ospite riceve sul telefono un invito a tempo limitato e apre il cancello, la porta o il garage dall'app WIFIGATE. L'accesso inizia al check-in e termina automaticamente al check-out, quindi non si scambiano chiavi, tessere o codici."
+        },
+        {
+          "question": "L'accesso degli ospiti si può creare automaticamente dalle prenotazioni?",
+          "answer": "Sì. Con WIFIGATE Host e WIFIGATE API, una prenotazione confermata può creare automaticamente l'accesso dell'ospite, in base alle date e agli orari del soggiorno."
+        },
+        {
+          "question": "Il personale delle pulizie e della manutenzione può avere un accesso proprio?",
+          "answer": "Sì. Staff, pulizie, manutenzione e fornitori ricevono ciascuno il proprio permesso, e la cronologia degli accessi mostra chi ha aperto e quando."
+        },
+        {
+          "question": "WIFIGATE richiede un abbonamento per hotel e case vacanza?",
+          "answer": "Il dispositivo WIFIGATE non ha abbonamento mensile. WIFIGATE Host, l'automazione delle prenotazioni per hotel e case vacanza, è l'unica parte offerta in abbonamento."
+        }
+      ]
     },
     "roller-shutters": {
       "label": "Serrande per negozi e attività",
@@ -82,7 +100,25 @@ export default {
       ],
       "seoTitle": "Controllo smart delle serrande per negozi e attività | WIFIGATE",
       "seoDescription": "WIFIGATE dà a negozi e attività il controllo delle serrande dal telefono: gestione dei permessi, meno chiavi e telecomandi, meno punti di accesso esposti.",
-      "imageAlt": "Titolare di un'attività che apre la serranda del negozio con il telefono"
+      "imageAlt": "Titolare di un'attività che apre la serranda del negozio con il telefono",
+      "faq": [
+        {
+          "question": "Come fa WIFIGATE ad aprire una serranda?",
+          "answer": "WIFIGATE si collega al comando della serranda e permette alle persone autorizzate di aprirla e chiuderla dall'app WIFIGATE. Il comando sta sul lato interno, protetto, invece che in un selettore a chiave o in un telecomando esposti."
+        },
+        {
+          "question": "Ogni dipendente può avere un accesso separato alla serranda?",
+          "answer": "Sì. Ogni dipendente, responsabile o fornitore riceve un permesso personale che puoi revocare in qualsiasi momento, senza ritirare chiavi o telecomandi."
+        },
+        {
+          "question": "Posso dare un accesso temporaneo a un fornitore?",
+          "answer": "Sì. Puoi condividere un accesso a tempo limitato con un fornitore o un dipendente temporaneo, e smette di funzionare allo scadere del tempo."
+        },
+        {
+          "question": "Per quali attività è adatto?",
+          "answer": "Per negozi, magazzini, ingressi di servizio e qualsiasi attività con una serranda elettrica che voglia meno chiavi, meno telecomandi e meno punti di accesso esposti."
+        }
+      ]
     },
     "electric-gates": {
       "label": "Cancelli elettrici e sbarre per parcheggi",
@@ -118,7 +154,25 @@ export default {
       ],
       "seoTitle": "Apertura cancelli elettrici e sbarre senza canone | WIFIGATE",
       "seoDescription": "WIFIGATE apre cancelli elettrici e sbarre per parcheggi dal telefono, con Auto Open, eventi programmati, supporto ai telecomandi esistenti e nessun canone mensile.",
-      "imageAlt": "Automobilista che apre una sbarra del parcheggio e un cancello elettrico con il telefono"
+      "imageAlt": "Automobilista che apre una sbarra del parcheggio e un cancello elettrico con il telefono",
+      "faq": [
+        {
+          "question": "Posso aprire un cancello elettrico o una sbarra del parcheggio dal telefono?",
+          "answer": "Sì. WIFIGATE si collega al cancello o alla sbarra e gli utenti autorizzati lo aprono dall'app WIFIGATE, con permessi permanenti o temporanei."
+        },
+        {
+          "question": "Il cancello ha bisogno di una scheda SIM o di una connessione internet?",
+          "answer": "No. Il telefono comunica direttamente con il dispositivo WIFIGATE, quindi il cancello non ha bisogno di scheda SIM, piano internet o router Wi‑Fi esterno."
+        },
+        {
+          "question": "Posso continuare a usare i telecomandi che ho già?",
+          "answer": "Sì. I telecomandi esistenti continuano a funzionare insieme al controllo dall'app, quindi non bisogna buttare via niente."
+        },
+        {
+          "question": "C'è un canone mensile?",
+          "answer": "No. Paghi una sola volta il dispositivo e l'installazione, senza abbonamento mensile né costi ricorrenti."
+        }
+      ]
     },
     "garage-doors": {
       "label": "Porte del garage e parcheggi privati",
@@ -154,7 +208,25 @@ export default {
       ],
       "seoTitle": "Apertura smart per porte del garage e parcheggi privati | WIFIGATE",
       "seoDescription": "WIFIGATE apre porte del garage e parcheggi privati dal telefono: meno telecomandi fisici, permessi temporanei e una gestione degli accessi più riservata.",
-      "imageAlt": "Uomo che apre la porta del garage di casa con il telefono in un'abitazione moderna"
+      "imageAlt": "Uomo che apre la porta del garage di casa con il telefono in un'abitazione moderna",
+      "faq": [
+        {
+          "question": "Come apro la porta del garage con il telefono?",
+          "answer": "WIFIGATE si collega alla porta del garage e la apri dall'app WIFIGATE. Ognuno in casa riceve il proprio permesso sul proprio telefono."
+        },
+        {
+          "question": "Cosa succede se qualcuno perde un telecomando?",
+          "answer": "Un telecomando perso continua a funzionare finché i telecomandi non vengono riprogrammati. Un permesso sul telefono si rimuove dall'app in un attimo, senza nulla da sostituire o riprogrammare."
+        },
+        {
+          "question": "Posso far entrare un artigiano senza dargli un telecomando?",
+          "answer": "Sì. Invia un permesso temporaneo che termina quando decidi tu, senza consegnare un telecomando o un codice."
+        },
+        {
+          "question": "Dove si può usare WIFIGATE per il parcheggio?",
+          "answer": "In garage privati, ingressi di parcheggi privati, case e appartamenti con giardino."
+        }
+      ]
     },
     "private-homes": {
       "label": "Case private",
@@ -190,7 +262,25 @@ export default {
       ],
       "seoTitle": "Accesso smart per la casa senza codici condivisi | WIFIGATE",
       "seoDescription": "Con WIFIGATE gestisci l'accesso a casa dal telefono: permessi temporanei per ospiti e corrieri e meno dipendenza da tastierini, chiavi e telecomandi.",
-      "imageAlt": "Donna che apre il cancello d'ingresso di una casa privata con il telefono invece di usare il tastierino"
+      "imageAlt": "Donna che apre il cancello d'ingresso di una casa privata con il telefono invece di usare il tastierino",
+      "faq": [
+        {
+          "question": "Perché WIFIGATE è più sicuro di un tastierino a codice?",
+          "answer": "Ognuno ha il proprio permesso sul telefono, quindi non c'è un codice fisso che consuma i tasti o finisce a corrieri e ospiti, e qualsiasi permesso si può revocare subito."
+        },
+        {
+          "question": "Posso dare a un corriere o a un ospite un accesso una tantum?",
+          "answer": "Sì. Invia un invito a tempo limitato che funziona solo nell'intervallo che scegli, senza rivelare un codice fisso."
+        },
+        {
+          "question": "Cosa può aprire WIFIGATE in una casa privata?",
+          "answer": "Cancelli, porte d'ingresso, parcheggi e porte del garage di casa, tutto da un'unica app."
+        },
+        {
+          "question": "Come tolgo l'accesso a qualcuno?",
+          "answer": "Dal telefono, in un attimo. Non ci sono serrature, codici o telecomandi da sostituire."
+        }
+      ]
     },
     "residential-buildings": {
       "label": "Condomini",
@@ -226,7 +316,25 @@ export default {
       ],
       "seoTitle": "Controllo accessi per condomini | WIFIGATE",
       "seoDescription": "WIFIGATE porta la gestione smart degli accessi nei condomini: apertura dal telefono, permessi ospite temporanei, meno dipendenza dai tastierini e più trasparenza.",
-      "imageAlt": "Residente che apre l'ingresso di un condominio con il telefono"
+      "imageAlt": "Residente che apre l'ingresso di un condominio con il telefono",
+      "faq": [
+        {
+          "question": "Come entrano i residenti nel condominio con WIFIGATE?",
+          "answer": "I residenti aprono il portone, il cancello o l'ingresso del parcheggio dal telefono, ciascuno con il proprio permesso."
+        },
+        {
+          "question": "Come entrano ospiti e corrieri?",
+          "answer": "Un residente invia un invito ospite a tempo limitato, con le indicazioni d'arrivo in un solo tocco, senza rivelare un codice fisso."
+        },
+        {
+          "question": "L'amministratore può vedere chi ha accesso?",
+          "answer": "Sì. L'amministratore o la società di gestione gestisce l'elenco dei permessi, e la cronologia degli accessi mostra gli ingressi per garantire trasparenza."
+        },
+        {
+          "question": "WIFIGATE sostituisce il codice d'ingresso condiviso?",
+          "answer": "Elimina la necessità di condividere un unico codice: ogni residente ha un permesso personale e gli ospiti ricevono un accesso temporaneo al posto del codice del condominio."
+        }
+      ]
     },
     "office-buildings": {
       "label": "Edifici per uffici",
@@ -262,7 +370,25 @@ export default {
       ],
       "seoTitle": "Controllo accessi per uffici e sedi aziendali | WIFIGATE",
       "seoDescription": "WIFIGATE permette agli uffici di gestire dal telefono l'ingresso di dipendenti, visitatori e fornitori, con permessi temporanei o permanenti e più ordine.",
-      "imageAlt": "Impiegata che apre una porta a vetri in un ufficio moderno con il telefono"
+      "imageAlt": "Impiegata che apre una porta a vetri in un ufficio moderno con il telefono",
+      "faq": [
+        {
+          "question": "Come ottengono i dipendenti l'accesso all'ufficio?",
+          "answer": "I dipendenti ricevono un permesso permanente sul telefono, che si rimuove in un attimo quando qualcuno lascia l'azienda."
+        },
+        {
+          "question": "Come entrano i visitatori senza aspettare alla reception?",
+          "answer": "I visitatori ricevono un accesso temporaneo prima di arrivare, così entrano con il telefono e la reception gestisce meno arrivi."
+        },
+        {
+          "question": "Cosa può controllare WIFIGATE in un edificio per uffici?",
+          "answer": "Porte d'ingresso, piani, sale e ingressi dei parcheggi."
+        },
+        {
+          "question": "Resta una traccia degli ingressi?",
+          "answer": "Sì. La cronologia degli accessi mostra chi ha aperto e quando, per la gestione e la trasparenza."
+        }
+      ]
     },
     "entry-doors-magnetic-locks": {
       "label": "Porte d'ingresso e serrature magnetiche per aziende",
@@ -298,7 +424,25 @@ export default {
       ],
       "seoTitle": "Porte d'ingresso e serrature magnetiche per aziende | WIFIGATE",
       "seoDescription": "Apertura smart per porte d'ingresso e serrature magnetiche aziendali con WIFIGATE: permessi dal telefono, accessi temporanei, meno tastierini e chiavi.",
-      "imageAlt": "Cliente che apre la porta d'ingresso di una piccola attività con il telefono"
+      "imageAlt": "Cliente che apre la porta d'ingresso di una piccola attività con il telefono",
+      "faq": [
+        {
+          "question": "WIFIGATE funziona con una serratura magnetica?",
+          "answer": "Sì. WIFIGATE è adatto alle porte d'ingresso con elettroserratura o serratura magnetica e le apre dal telefono."
+        },
+        {
+          "question": "Posso dare un accesso temporaneo a un tecnico o a un fornitore?",
+          "answer": "Sì. Condividi un permesso temporaneo per la visita invece di dare il codice della porta."
+        },
+        {
+          "question": "Mi serve un sistema di controllo accessi complesso?",
+          "answer": "No. WIFIGATE è un'opzione semplice e moderna per le aziende che vogliono entrare con il telefono senza un sistema di controllo accessi complesso."
+        },
+        {
+          "question": "Quali attività lo usano?",
+          "answer": "Piccole attività, ambulatori, studi, uffici e magazzini."
+        }
+      ]
     },
     "sports-facilities": {
       "label": "Impianti sportivi",
@@ -334,7 +478,25 @@ export default {
       ],
       "seoTitle": "Controllo accessi per impianti sportivi e campi da padel | WIFIGATE",
       "seoDescription": "WIFIGATE porta il controllo accessi smart in impianti sportivi, campi da padel e palestre, con ingresso dal telefono e permessi temporanei o permanenti.",
-      "imageAlt": "Giocatrice di padel che apre l'ingresso di un campo sportivo illuminato con il telefono"
+      "imageAlt": "Giocatrice di padel che apre l'ingresso di un campo sportivo illuminato con il telefono",
+      "faq": [
+        {
+          "question": "L'accesso può seguire gli orari di apertura o le prenotazioni?",
+          "answer": "Sì. L'accesso si può concedere in base a orari di apertura, prenotazioni o permessi, e gli eventi programmati possono aprire in giorni e orari stabiliti."
+        },
+        {
+          "question": "Soci, allenatori e ospiti possono avere accessi diversi?",
+          "answer": "Sì. Ogni tipo di utente riceve il proprio permesso: un socio abituale, un allenatore che viene in certi giorni o un ospite occasionale."
+        },
+        {
+          "question": "Posso vedere chi era presente nella struttura?",
+          "answer": "Sì. La cronologia degli accessi mostra chi ha aperto e quando, il che aiuta la gestione e conferma che la struttura è stata chiusa a fine giornata."
+        },
+        {
+          "question": "Per quali impianti sportivi è adatto WIFIGATE?",
+          "answer": "Per campi da padel, campi da tennis, palestre e centri di allenamento."
+        }
+      ]
     },
     "storage-lockers": {
       "label": "Depositi e armadietti",
@@ -370,7 +532,25 @@ export default {
       ],
       "seoTitle": "Controllo accessi smart per depositi e armadietti | WIFIGATE",
       "seoDescription": "WIFIGATE dà a ogni cliente di un deposito o di un armadietto un accesso personale dal telefono al cancello, alle porte e al proprio armadietto, limitato agli orari di apertura, registrato nella cronologia e revocato al termine della locazione.",
-      "imageAlt": "Donna che apre con il telefono la porta di un centro di deposito con armadietti e box"
+      "imageAlt": "Donna che apre con il telefono la porta di un centro di deposito con armadietti e box",
+      "faq": [
+        {
+          "question": "Come aprono i clienti il cancello e il loro armadietto?",
+          "answer": "Dal telefono, con un permesso personale per il cancello del centro, l'ingresso dell'edificio e, dove installato, un box o un armadietto con serratura elettrica."
+        },
+        {
+          "question": "Si può limitare l'accesso agli orari di apertura?",
+          "answer": "Sì. È possibile consentire l'ingresso solo negli orari di apertura oppure dare a un cliente una fascia più ampia; traslocatori e familiari possono ricevere un accesso una tantum."
+        },
+        {
+          "question": "Cosa succede quando la locazione termina?",
+          "answer": "L'accesso del cliente si revoca subito. Non ci sono chiavi da ritirare né codici da cambiare."
+        },
+        {
+          "question": "Il centro ha bisogno di internet alla porta?",
+          "answer": "No. Il telefono comunica direttamente con il dispositivo installato sul posto, senza scheda SIM né connessione internet alla porta."
+        }
+      ]
     }
   }
 };

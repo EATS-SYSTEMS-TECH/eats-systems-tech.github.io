@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../../css/styles.css?v=20261005b">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20261006b">
-  <link rel="stylesheet" href="../../css/niche.css?v=20261007a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20261007b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
   <script>window.accessibilityCopy = {"de":{"skipLink":"Zum Hauptinhalt springen","eyebrow":"Barrierefreiheit","openButton":"Barrierefreiheitsmenü öffnen","closeButton":"Barrierefreiheitsmenü schließen","title":"Barrierefreiheitsmenü","description":"Passen Sie die Website an Ihre Art zu lesen und zu navigieren an. Ihre Auswahl wird auf diesem Gerät gespeichert.","reset":"Alles zurücksetzen","statusDefault":"Standardansicht der Website","statusActive":"{count} Anpassungen aktiv","hideButton":"Barrierefreiheits-Schaltfläche bis zum Neuladen der Seite ausblenden","statementLink":"Erklärung zur Barrierefreiheit","textSize":{"label":"Textgröße","description":"Text auf der gesamten Website vergrößern.","decrease":"Kleinerer Text","increase":"Größerer Text","level":"Textgröße {percent} %"},"options":{"highContrast":{"label":"Hoher Kontrast","description":"Dunkler Text auf hellem Hintergrund mit kräftigen Rahmen."},"grayscale":{"label":"Graustufen","description":"Website ohne Farben anzeigen."},"underlineLinks":{"label":"Links hervorheben","description":"Alle Links unterstreichen und markieren."},"readableFont":{"label":"Lesbare Schrift","description":"Eine schlichte, gut lesbare Schrift."},"textSpacing":{"label":"Textabstand","description":"Mehr Abstand zwischen Zeilen, Wörtern und Buchstaben."},"highlightHeadings":{"label":"Überschriften hervorheben","description":"Überschriften markieren, um die Seitenstruktur zu zeigen."},"bigCursor":{"label":"Großer Cursor","description":"Ein größerer Mauszeiger."},"focusHighlight":{"label":"Deutlicher Fokus","description":"Ein dicker Rahmen um das Element mit dem Tastaturfokus."},"reducedMotion":{"label":"Animationen stoppen","description":"Animationen, Übergänge und das Hintergrundvideo stoppen."}}}};</script>
@@ -247,6 +247,48 @@
           "position": 2,
           "name": "Hotels, Airbnb und Ferienwohnungen",
           "item": "https://wifigate.io/de/hotels-airbnb/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/de/hotels-airbnb/#faq",
+      "inLanguage": "de",
+      "isPartOf": {
+        "@id": "https://wifigate.io/de/hotels-airbnb/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Wie öffnen Gäste mit WIFIGATE das Tor oder die Tür?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Jeder Gast erhält eine zeitlich begrenzte Einladung auf sein Smartphone und öffnet Tor, Tür oder Garage über die WIFIGATE-App. Der Zutritt beginnt mit dem Check-in und endet automatisch mit dem Check-out – es werden keine Schlüssel, Karten oder Codes übergeben."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kann der Gastzugang automatisch aus Buchungen erstellt werden?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. Mit WIFIGATE Host und der WIFIGATE API kann eine bestätigte Buchung den Zutritt des Gastes automatisch erstellen – passend zu den Daten und Uhrzeiten des Aufenthalts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Können Reinigungs- und Wartungspersonal einen eigenen Zutritt bekommen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. Personal, Reinigung, Wartung und Dienstleister erhalten jeweils ihre eigene Berechtigung, und die Zugriffshistorie zeigt, wer wann geöffnet hat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Braucht WIFIGATE für Hotels und Ferienwohnungen ein Abo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Das WIFIGATE-Gerät hat kein monatliches Abo. WIFIGATE Host, die Buchungsautomatisierung für Hotels und Ferienwohnungen, ist der einzige Teil, der im Abo angeboten wird."
+          }
         }
       ]
     }
@@ -579,6 +621,15 @@
           <h2 class="niche-section__title" id="niche-benefits-title">Wichtigste Vorteile</h2>
         </div>
         <ul class="niche-benefits__grid" id="niche-benefits-list"><li class="niche-benefit">Automatischer Gastzugang, sobald eine Buchung bestätigt ist</li><li class="niche-benefit">Volle Automatisierung über die WIFIGATE API</li><li class="niche-benefit">Zeitlich begrenzter Zutritt passend zu den Daten und Zeiten des Aufenthalts</li><li class="niche-benefit">Weniger manueller Check-in, weniger Schlüssel, Karten und Codes</li><li class="niche-benefit niche-benefit--gap" aria-hidden="true"></li><li class="niche-benefit">Berechtigungen für Personal, Reinigung, Wartung und Dienstleister</li><li class="niche-benefit">Eine reibungslosere, angenehmere Ankunft für Ihre Gäste</li><li class="niche-benefit">Zutritt endet automatisch zum Check-out</li><li class="niche-benefit">Zugriffshistorie für Transparenz und Kontrolle</li></ul>
+      </div>
+    </section>
+
+    <section class="niche-section niche-faq" id="niche-faq" aria-labelledby="niche-faq-title">
+      <div class="container">
+        <div class="niche-section__header">
+          <h2 class="niche-section__title" id="niche-faq-title">Häufige Fragen</h2>
+        </div>
+        <div class="niche-faq__list" id="niche-faq-list"><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Wie öffnen Gäste mit WIFIGATE das Tor oder die Tür?</summary><p class="niche-faq__answer" dir="ltr">Jeder Gast erhält eine zeitlich begrenzte Einladung auf sein Smartphone und öffnet Tor, Tür oder Garage über die WIFIGATE-App. Der Zutritt beginnt mit dem Check-in und endet automatisch mit dem Check-out – es werden keine Schlüssel, Karten oder Codes übergeben.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Kann der Gastzugang automatisch aus Buchungen erstellt werden?</summary><p class="niche-faq__answer" dir="ltr">Ja. Mit WIFIGATE Host und der WIFIGATE API kann eine bestätigte Buchung den Zutritt des Gastes automatisch erstellen – passend zu den Daten und Uhrzeiten des Aufenthalts.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Können Reinigungs- und Wartungspersonal einen eigenen Zutritt bekommen?</summary><p class="niche-faq__answer" dir="ltr">Ja. Personal, Reinigung, Wartung und Dienstleister erhalten jeweils ihre eigene Berechtigung, und die Zugriffshistorie zeigt, wer wann geöffnet hat.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Braucht WIFIGATE für Hotels und Ferienwohnungen ein Abo?</summary><p class="niche-faq__answer" dir="ltr">Das WIFIGATE-Gerät hat kein monatliches Abo. WIFIGATE Host, die Buchungsautomatisierung für Hotels und Ferienwohnungen, ist der einzige Teil, der im Abo angeboten wird.</p></details></div>
       </div>
     </section>
 

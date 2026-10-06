@@ -46,7 +46,25 @@ export default {
       ],
       "seoTitle": "Zutrittskontrolle für Hotels, Airbnb & Ferienwohnungen | WIFIGATE API",
       "seoDescription": "WIFIGATE bringt smarten digitalen Zutritt in Hotels, Airbnb und Ferienwohnungen – Gastzugänge automatisch per WIFIGATE API, weniger Schlüssel, weniger Aufwand.",
-      "imageAlt": "Gäste öffnen eine Hotelzimmertür mit dem Smartphone in einem modernen Flur"
+      "imageAlt": "Gäste öffnen eine Hotelzimmertür mit dem Smartphone in einem modernen Flur",
+      "faq": [
+        {
+          "question": "Wie öffnen Gäste mit WIFIGATE das Tor oder die Tür?",
+          "answer": "Jeder Gast erhält eine zeitlich begrenzte Einladung auf sein Smartphone und öffnet Tor, Tür oder Garage über die WIFIGATE-App. Der Zutritt beginnt mit dem Check-in und endet automatisch mit dem Check-out – es werden keine Schlüssel, Karten oder Codes übergeben."
+        },
+        {
+          "question": "Kann der Gastzugang automatisch aus Buchungen erstellt werden?",
+          "answer": "Ja. Mit WIFIGATE Host und der WIFIGATE API kann eine bestätigte Buchung den Zutritt des Gastes automatisch erstellen – passend zu den Daten und Uhrzeiten des Aufenthalts."
+        },
+        {
+          "question": "Können Reinigungs- und Wartungspersonal einen eigenen Zutritt bekommen?",
+          "answer": "Ja. Personal, Reinigung, Wartung und Dienstleister erhalten jeweils ihre eigene Berechtigung, und die Zugriffshistorie zeigt, wer wann geöffnet hat."
+        },
+        {
+          "question": "Braucht WIFIGATE für Hotels und Ferienwohnungen ein Abo?",
+          "answer": "Das WIFIGATE-Gerät hat kein monatliches Abo. WIFIGATE Host, die Buchungsautomatisierung für Hotels und Ferienwohnungen, ist der einzige Teil, der im Abo angeboten wird."
+        }
+      ]
     },
     "roller-shutters": {
       "label": "Rolltore für Gewerbe und Läden",
@@ -82,7 +100,25 @@ export default {
       ],
       "seoTitle": "Rolltore smart steuern – für Gewerbe und Läden | WIFIGATE",
       "seoDescription": "WIFIGATE steuert Rolltore von Läden und Betrieben per Smartphone: Berechtigungen verwalten, weniger Schlüssel und Handsender, weniger exponierte Zugangspunkte.",
-      "imageAlt": "Geschäftsinhaber öffnet das Rolltor seines Ladens mit dem Smartphone"
+      "imageAlt": "Geschäftsinhaber öffnet das Rolltor seines Ladens mit dem Smartphone",
+      "faq": [
+        {
+          "question": "Wie öffnet WIFIGATE ein Rolltor?",
+          "answer": "WIFIGATE wird an die Steuerung des Rolltors angeschlossen und ermöglicht berechtigten Personen, es über die WIFIGATE-App zu öffnen und zu schließen. Die Bedienung liegt auf der geschützten Innenseite statt an einem offen zugänglichen Schlüsselschalter oder Handsender."
+        },
+        {
+          "question": "Kann jeder Mitarbeiter einen eigenen Zutritt zum Rolltor haben?",
+          "answer": "Ja. Jeder Mitarbeiter, jede Führungskraft und jeder Dienstleister erhält eine persönliche Berechtigung, die Sie jederzeit entziehen können – ohne Schlüssel oder Handsender einzusammeln."
+        },
+        {
+          "question": "Kann ich einem Dienstleister vorübergehend Zutritt geben?",
+          "answer": "Ja. Sie können einem Dienstleister oder einer Aushilfe zeitlich begrenzten Zutritt freigeben, der nach Ablauf der Zeit nicht mehr funktioniert."
+        },
+        {
+          "question": "Für welche Betriebe eignet sich das?",
+          "answer": "Für Läden, Lager, Lieferanteneingänge und jeden Betrieb mit elektrischem Rolltor, der weniger Schlüssel, Handsender und offen zugängliche Zugangspunkte möchte."
+        }
+      ]
     },
     "electric-gates": {
       "label": "Elektrische Tore und Parkschranken",
@@ -118,7 +154,25 @@ export default {
       ],
       "seoTitle": "Elektrische Tore und Parkschranken ohne Abo öffnen | WIFIGATE",
       "seoDescription": "WIFIGATE öffnet elektrische Tore und Parkschranken per Smartphone – mit Auto Open, Zeitplänen, vorhandenen Handsendern, Berechtigungen und ohne Abo.",
-      "imageAlt": "Autofahrer öffnet eine Parkschranke und ein elektrisches Tor mit dem Smartphone"
+      "imageAlt": "Autofahrer öffnet eine Parkschranke und ein elektrisches Tor mit dem Smartphone",
+      "faq": [
+        {
+          "question": "Kann ich ein elektrisches Tor oder eine Parkschranke mit dem Smartphone öffnen?",
+          "answer": "Ja. WIFIGATE wird an das Tor oder die Schranke angeschlossen, und berechtigte Nutzer öffnen es über die WIFIGATE-App – mit dauerhaften oder temporären Berechtigungen."
+        },
+        {
+          "question": "Braucht das Tor eine SIM-Karte oder eine Internetverbindung?",
+          "answer": "Nein. Das Smartphone kommuniziert direkt mit dem WIFIGATE-Gerät, daher braucht das Tor keine SIM-Karte, keinen Internettarif und keinen externen Wi‑Fi-Router."
+        },
+        {
+          "question": "Kann ich meine vorhandenen Handsender weiter nutzen?",
+          "answer": "Ja. Vorhandene Handsender funktionieren parallel zur Steuerung über die App weiter, es muss also nichts weggeworfen werden."
+        },
+        {
+          "question": "Gibt es eine monatliche Gebühr?",
+          "answer": "Nein. Sie zahlen einmal für Gerät und Installation – ohne monatliches Abo und ohne laufende Gebühren."
+        }
+      ]
     },
     "garage-doors": {
       "label": "Garagentore und private Stellplätze",
@@ -154,7 +208,25 @@ export default {
       ],
       "seoTitle": "Garagentor per Smartphone öffnen – smarter Zutritt | WIFIGATE",
       "seoDescription": "WIFIGATE öffnet Garagentore und private Zufahrten per Smartphone – weniger Handsender, zeitlich begrenzte Berechtigungen und private, komfortable Zutrittsverwaltung.",
-      "imageAlt": "Mann öffnet ein privates Garagentor mit dem Smartphone an einem modernen Haus"
+      "imageAlt": "Mann öffnet ein privates Garagentor mit dem Smartphone an einem modernen Haus",
+      "faq": [
+        {
+          "question": "Wie öffne ich mein Garagentor mit dem Smartphone?",
+          "answer": "WIFIGATE wird an das Garagentor angeschlossen, und Sie öffnen es über die WIFIGATE-App. Jedes Haushaltsmitglied erhält seine eigene Berechtigung auf dem eigenen Smartphone."
+        },
+        {
+          "question": "Was passiert, wenn jemand einen Handsender verliert?",
+          "answer": "Ein verlorener Handsender funktioniert weiter, bis die Handsender neu angelernt werden. Eine Berechtigung auf dem Smartphone ist im Nu über die App entfernt – nichts muss ersetzt oder neu angelernt werden."
+        },
+        {
+          "question": "Kann ich einen Handwerker hereinlassen, ohne ihm einen Handsender zu geben?",
+          "answer": "Ja. Senden Sie eine temporäre Berechtigung, die endet, wann Sie es festlegen – ohne Handsender oder Code weiterzugeben."
+        },
+        {
+          "question": "Wo lässt sich WIFIGATE für Stellplätze einsetzen?",
+          "answer": "In privaten Garagen, an Zufahrten zu privaten Stellplätzen, an Häusern und Gartenwohnungen."
+        }
+      ]
     },
     "private-homes": {
       "label": "Privathäuser",
@@ -190,7 +262,25 @@ export default {
       ],
       "seoTitle": "Smarter Zutritt fürs Privathaus ohne geteilten Code | WIFIGATE",
       "seoDescription": "Mit WIFIGATE verwalten Sie den Zutritt zum Privathaus per Smartphone: temporäre Berechtigungen für Gäste und Paketboten, weniger Codes, Schlüssel und Handsender.",
-      "imageAlt": "Frau öffnet das Eingangstor eines Privathauses mit dem Smartphone statt mit einer Codetastatur"
+      "imageAlt": "Frau öffnet das Eingangstor eines Privathauses mit dem Smartphone statt mit einer Codetastatur",
+      "faq": [
+        {
+          "question": "Warum ist WIFIGATE sicherer als eine Codetastatur?",
+          "answer": "Jede Person hat ihre eigene Berechtigung auf dem Smartphone. Es gibt also keinen festen Code, der Spuren auf den Tasten hinterlässt oder an Paketboten und Gäste weitergegeben wird, und jede Berechtigung lässt sich sofort entziehen."
+        },
+        {
+          "question": "Kann ich einem Paketboten oder Gast einmaligen Zutritt geben?",
+          "answer": "Ja. Senden Sie eine zeitlich begrenzte Einladung, die nur in dem von Ihnen gewählten Zeitraum gilt – ohne einen festen Code preiszugeben."
+        },
+        {
+          "question": "Was kann WIFIGATE an einem Privathaus öffnen?",
+          "answer": "Tore, Eingangstüren, Stellplätze und Garagentore am Haus – alles über eine einzige App."
+        },
+        {
+          "question": "Wie entziehe ich jemandem den Zutritt?",
+          "answer": "Vom Smartphone aus, im Nu. Es müssen keine Schlösser, Codes oder Handsender ausgetauscht werden."
+        }
+      ]
     },
     "residential-buildings": {
       "label": "Wohngebäude",
@@ -226,7 +316,25 @@ export default {
       ],
       "seoTitle": "Zutrittskontrolle für Wohngebäude | WIFIGATE",
       "seoDescription": "WIFIGATE bringt smarte Zutrittsverwaltung in Wohngebäude – mit Öffnen per Smartphone, temporären Gastberechtigungen, weniger geteilten Codes und mehr Transparenz.",
-      "imageAlt": "Bewohnerin öffnet den Eingang eines Wohngebäudes mit dem Smartphone"
+      "imageAlt": "Bewohnerin öffnet den Eingang eines Wohngebäudes mit dem Smartphone",
+      "faq": [
+        {
+          "question": "Wie kommen Bewohner mit WIFIGATE ins Gebäude?",
+          "answer": "Bewohner öffnen Eingangstür, Tor oder Parkzufahrt mit dem Smartphone, jeweils mit ihrer eigenen Berechtigung."
+        },
+        {
+          "question": "Wie kommen Gäste und Paketboten hinein?",
+          "answer": "Ein Bewohner sendet eine zeitlich begrenzte Gasteinladung mit den Anfahrtsinfos per Fingertipp – ohne einen festen Code preiszugeben."
+        },
+        {
+          "question": "Kann die Eigentümergemeinschaft sehen, wer Zutritt hat?",
+          "answer": "Ja. Die Eigentümergemeinschaft oder die Hausverwaltung verwaltet die Liste der Berechtigungen, und die Zugriffshistorie zeigt die Zutritte für mehr Transparenz."
+        },
+        {
+          "question": "Ersetzt WIFIGATE den gemeinsamen Eingangscode?",
+          "answer": "WIFIGATE macht einen gemeinsamen Code überflüssig: Jeder Bewohner hat eine persönliche Berechtigung, und Gäste erhalten temporären Zutritt statt des Gebäudecodes."
+        }
+      ]
     },
     "office-buildings": {
       "label": "Bürogebäude",
@@ -262,7 +370,25 @@ export default {
       ],
       "seoTitle": "Zutrittskontrolle für Bürogebäude | WIFIGATE",
       "seoDescription": "Mit WIFIGATE verwalten Bürogebäude den Zutritt für Mitarbeiter, Besucher und Dienstleister per Smartphone – mit temporären und dauerhaften Berechtigungen.",
-      "imageAlt": "Mitarbeiterin öffnet eine Glastür in einem modernen Büro mit dem Smartphone"
+      "imageAlt": "Mitarbeiterin öffnet eine Glastür in einem modernen Büro mit dem Smartphone",
+      "faq": [
+        {
+          "question": "Wie erhalten Mitarbeiter Zutritt zum Büro?",
+          "answer": "Mitarbeiter erhalten eine dauerhafte Berechtigung auf ihr Smartphone, die im Nu entfernt wird, wenn jemand das Unternehmen verlässt."
+        },
+        {
+          "question": "Wie kommen Besucher hinein, ohne am Empfang zu warten?",
+          "answer": "Besucher erhalten vor ihrer Ankunft einen temporären Zutritt. So kommen sie mit dem Smartphone hinein, und der Empfang hat weniger Ankünfte zu betreuen."
+        },
+        {
+          "question": "Was kann WIFIGATE in einem Bürogebäude steuern?",
+          "answer": "Eingangstüren, Etagen, Räume und Parkzufahrten."
+        },
+        {
+          "question": "Gibt es ein Protokoll der Zutritte?",
+          "answer": "Ja. Die Zugriffshistorie zeigt, wer wann geöffnet hat – für den Betrieb und für Transparenz."
+        }
+      ]
     },
     "entry-doors-magnetic-locks": {
       "label": "Eingangstüren und Magnetschlösser für Unternehmen",
@@ -298,7 +424,25 @@ export default {
       ],
       "seoTitle": "Eingangstüren und Magnetschlösser für Unternehmen | WIFIGATE",
       "seoDescription": "WIFIGATE öffnet Eingangstüren und Magnetschlösser in Unternehmen per Smartphone – mit Berechtigungsverwaltung, temporärem Zutritt und weniger Codes und Schlüsseln.",
-      "imageAlt": "Kundin öffnet die Eingangstür eines kleinen Geschäfts mit dem Smartphone"
+      "imageAlt": "Kundin öffnet die Eingangstür eines kleinen Geschäfts mit dem Smartphone",
+      "faq": [
+        {
+          "question": "Funktioniert WIFIGATE mit einem Magnetschloss?",
+          "answer": "Ja. WIFIGATE eignet sich für Eingangstüren mit elektrischem Türöffner oder Magnetschloss und öffnet sie per Smartphone."
+        },
+        {
+          "question": "Kann ich einem Techniker oder Lieferanten vorübergehend Zutritt geben?",
+          "answer": "Ja. Geben Sie eine temporäre Berechtigung für den Besuch frei, statt den Türcode herauszugeben."
+        },
+        {
+          "question": "Brauche ich ein komplexes Zutrittskontrollsystem?",
+          "answer": "Nein. WIFIGATE ist eine einfache, moderne Lösung für Unternehmen, die Zutritt per Smartphone ohne komplexes Zutrittskontrollsystem möchten."
+        },
+        {
+          "question": "Welche Unternehmen nutzen es?",
+          "answer": "Kleine Unternehmen, Praxen, Studios, Büros und Lager."
+        }
+      ]
     },
     "sports-facilities": {
       "label": "Sportanlagen",
@@ -334,7 +478,25 @@ export default {
       ],
       "seoTitle": "Zutrittskontrolle für Sportanlagen und Padel-Plätze | WIFIGATE",
       "seoDescription": "WIFIGATE bringt smarte Zutrittskontrolle in Sportanlagen, Padel-Plätze, Fitnessstudios und Trainingszentren – Zutritt per Smartphone, temporär oder dauerhaft.",
-      "imageAlt": "Padel-Spielerin öffnet den Zugang zu einem beleuchteten Sportplatz mit dem Smartphone"
+      "imageAlt": "Padel-Spielerin öffnet den Zugang zu einem beleuchteten Sportplatz mit dem Smartphone",
+      "faq": [
+        {
+          "question": "Kann sich der Zutritt nach Öffnungszeiten oder Buchungen richten?",
+          "answer": "Ja. Zutritt lässt sich nach Öffnungszeiten, Buchungen oder Berechtigungen vergeben, und zeitgesteuerte Ereignisse können nach Tagen und Uhrzeiten öffnen."
+        },
+        {
+          "question": "Können Mitglieder, Trainer und Gäste unterschiedlichen Zutritt haben?",
+          "answer": "Ja. Jede Nutzergruppe erhält ihre eigene Berechtigung: ein Stammmitglied, ein Trainer an bestimmten Tagen oder ein einmaliger Gast."
+        },
+        {
+          "question": "Kann ich sehen, wer auf der Anlage war?",
+          "answer": "Ja. Die Zugriffshistorie zeigt, wer wann geöffnet hat. Das hilft dem Betrieb und bestätigt, dass die Anlage am Ende des Tages abgeschlossen war."
+        },
+        {
+          "question": "Für welche Sportanlagen eignet sich WIFIGATE?",
+          "answer": "Für Padel-Plätze, Tennisplätze, Fitnessstudios und Trainingszentren."
+        }
+      ]
     },
     "storage-lockers": {
       "label": "Lagerräume und Schließfächer",
@@ -370,7 +532,25 @@ export default {
       ],
       "seoTitle": "Smarte Zutrittskontrolle für Lagerräume und Schließfächer | WIFIGATE",
       "seoDescription": "WIFIGATE gibt jedem Mieter eines Lagerraums oder Schließfachs persönlichen Zutritt per Smartphone zu Tor, Türen und seinem Schließfach – beschränkt auf die Öffnungszeiten, in der Historie erfasst und entzogen, wenn die Miete endet.",
-      "imageAlt": "Frau öffnet mit dem Smartphone die Tür einer Lageranlage mit Schließfächern und Lagerabteilen"
+      "imageAlt": "Frau öffnet mit dem Smartphone die Tür einer Lageranlage mit Schließfächern und Lagerabteilen",
+      "faq": [
+        {
+          "question": "Wie öffnen Mieter das Tor und ihr Schließfach?",
+          "answer": "Mit dem Smartphone, über eine persönliche Berechtigung für das Tor der Anlage, den Gebäudeeingang und, wo installiert, einen elektrisch verriegelten Lagerraum oder ein Schließfach."
+        },
+        {
+          "question": "Lässt sich der Zutritt auf die Öffnungszeiten beschränken?",
+          "answer": "Ja. Erlauben Sie den Zutritt nur während der Öffnungszeiten oder geben Sie einem Mieter ein größeres Zeitfenster; Umzugshelfer und Familienmitglieder können einen einmaligen Zutritt erhalten."
+        },
+        {
+          "question": "Was passiert, wenn die Miete endet?",
+          "answer": "Sie entziehen dem Mieter den Zutritt sofort. Es müssen keine Schlüssel eingesammelt und keine Codes geändert werden."
+        },
+        {
+          "question": "Braucht die Anlage Internet an der Tür?",
+          "answer": "Nein. Das Smartphone kommuniziert direkt mit dem Gerät vor Ort – ohne SIM-Karte und ohne Internetverbindung an der Tür."
+        }
+      ]
     }
   }
 };

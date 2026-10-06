@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../../css/styles.css?v=20261005b">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20261006b">
-  <link rel="stylesheet" href="../../css/niche.css?v=20261007a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20261007b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
   <script>window.accessibilityCopy = {"uk":{"skipLink":"Перейти до основного вмісту","eyebrow":"Доступність","openButton":"Відкрити меню доступності","closeButton":"Закрити меню доступності","title":"Меню доступності","description":"Налаштуйте сайт під те, як ви читаєте та переміщуєтеся ним. Ваш вибір зберігається на цьому пристрої.","reset":"Скинути все","statusDefault":"Стандартний вигляд сайту","statusActive":"Активних налаштувань: {count}","hideButton":"Приховати кнопку доступності до перезавантаження сторінки","statementLink":"Заява про доступність","textSize":{"label":"Розмір тексту","description":"Збільшити текст на всьому сайті.","decrease":"Зменшити текст","increase":"Збільшити текст","level":"Розмір тексту {percent}%"},"options":{"highContrast":{"label":"Високий контраст","description":"Темний текст на світлому тлі з чіткими рамками."},"grayscale":{"label":"Відтінки сірого","description":"Показати сайт без кольорів."},"underlineLinks":{"label":"Виділити посилання","description":"Підкреслити та позначити кожне посилання."},"readableFont":{"label":"Зручний шрифт","description":"Простий шрифт, який легко читати."},"textSpacing":{"label":"Інтервали тексту","description":"Більше простору між рядками, словами та літерами."},"highlightHeadings":{"label":"Виділити заголовки","description":"Позначити заголовки, щоб показати структуру сторінки."},"bigCursor":{"label":"Великий курсор","description":"Збільшений вказівник миші."},"focusHighlight":{"label":"Помітний фокус","description":"Товста рамка навколо елемента у фокусі клавіатури."},"reducedMotion":{"label":"Зупинити анімацію","description":"Зупинити анімацію, переходи та фонове відео."}}}};</script>
@@ -247,6 +247,48 @@
           "position": 2,
           "name": "Житлові будинки",
           "item": "https://wifigate.io/uk/residential-buildings/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/uk/residential-buildings/#faq",
+      "inLanguage": "uk",
+      "isPartOf": {
+        "@id": "https://wifigate.io/uk/residential-buildings/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як мешканці заходять до будинку з WIFIGATE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Мешканці відчиняють двері вестибюля, ворота чи в'їзд на паркінг з телефона, кожен за власним правом доступу."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як заходять гості й кур'єри?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Мешканець надсилає гостьове запрошення з обмеженим терміном дії та підказкою, як дістатися, в один дотик – не розкриваючи постійного коду."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи може ОСББ бачити, хто має доступ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так. ОСББ чи керуюча компанія веде список прав доступу, а історія доступу показує входи для прозорості."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи замінює WIFIGATE спільний код будинку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "З WIFIGATE більше не треба ділитися одним кодом: кожен мешканець має персональне право доступу, а гості отримують тимчасовий доступ замість коду будинку."
+          }
         }
       ]
     }
@@ -579,6 +621,15 @@
           <h2 class="niche-section__title" id="niche-benefits-title">Ключові переваги</h2>
         </div>
         <ul class="niche-benefits__grid" id="niche-benefits-list"><li class="niche-benefit">Зручний доступ для мешканців через телефон</li><li class="niche-benefit">Тимчасові запрошення для гостей без розкриття постійного коду</li><li class="niche-benefit">Керування правами для мешканців, постачальників і сервісних служб</li><li class="niche-benefit">Підходить для дверей вестибюля, воріт і в'їздів на паркінг</li><li class="niche-benefit niche-benefit--gap" aria-hidden="true"></li><li class="niche-benefit">Менше залежності від кодових панелей, ключів і пультів</li><li class="niche-benefit">Більше прозорості завдяки історії доступу</li><li class="niche-benefit">Простіше керування для ОСББ чи керуючої компанії</li><li class="niche-benefit">Зручніший вхід для мешканців і гостей</li></ul>
+      </div>
+    </section>
+
+    <section class="niche-section niche-faq" id="niche-faq" aria-labelledby="niche-faq-title">
+      <div class="container">
+        <div class="niche-section__header">
+          <h2 class="niche-section__title" id="niche-faq-title">Поширені запитання</h2>
+        </div>
+        <div class="niche-faq__list" id="niche-faq-list"><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Як мешканці заходять до будинку з WIFIGATE?</summary><p class="niche-faq__answer" dir="ltr">Мешканці відчиняють двері вестибюля, ворота чи в'їзд на паркінг з телефона, кожен за власним правом доступу.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Як заходять гості й кур'єри?</summary><p class="niche-faq__answer" dir="ltr">Мешканець надсилає гостьове запрошення з обмеженим терміном дії та підказкою, як дістатися, в один дотик – не розкриваючи постійного коду.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Чи може ОСББ бачити, хто має доступ?</summary><p class="niche-faq__answer" dir="ltr">Так. ОСББ чи керуюча компанія веде список прав доступу, а історія доступу показує входи для прозорості.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Чи замінює WIFIGATE спільний код будинку?</summary><p class="niche-faq__answer" dir="ltr">З WIFIGATE більше не треба ділитися одним кодом: кожен мешканець має персональне право доступу, а гості отримують тимчасовий доступ замість коду будинку.</p></details></div>
       </div>
     </section>
 

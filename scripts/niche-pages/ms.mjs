@@ -46,7 +46,25 @@ export default {
       ],
       "seoTitle": "Kawalan Akses Hotel dan Airbnb | WIFIGATE",
       "seoDescription": "WIFIGATE membawa kawalan akses pintar ke hotel, Airbnb dan pangsapuri tetamu, dengan kebenaran tetamu automatik melalui API dan akses sementara ikut tempahan.",
-      "imageAlt": "Tetamu membuka pintu bilik hotel dengan telefon di koridor moden"
+      "imageAlt": "Tetamu membuka pintu bilik hotel dengan telefon di koridor moden",
+      "faq": [
+        {
+          "question": "Bagaimana tetamu membuka pintu pagar atau pintu dengan WIFIGATE?",
+          "answer": "Setiap tetamu menerima jemputan terhad masa di telefon mereka dan membuka pintu pagar, pintu atau garaj melalui aplikasi WIFIGATE. Akses bermula semasa check-in dan tamat secara automatik semasa check-out, jadi tiada kunci, kad atau kod yang bertukar tangan."
+        },
+        {
+          "question": "Bolehkah akses tetamu dicipta secara automatik daripada tempahan?",
+          "answer": "Boleh. Dengan WIFIGATE Host dan WIFIGATE API, tempahan yang disahkan boleh mencipta akses tetamu secara automatik, sepadan dengan tarikh dan waktu penginapan."
+        },
+        {
+          "question": "Bolehkah pencuci dan kakitangan penyelenggaraan mendapat akses sendiri?",
+          "answer": "Boleh. Kakitangan, pencuci, penyelenggaraan dan pembekal masing-masing mendapat kebenaran sendiri, dan sejarah akses menunjukkan siapa yang membuka dan bila."
+        },
+        {
+          "question": "Adakah WIFIGATE memerlukan langganan untuk hotel dan hartanah sewaan?",
+          "answer": "Peranti WIFIGATE tiada langganan bulanan. WIFIGATE Host, automasi tempahan untuk hotel dan hartanah sewaan, adalah satu-satunya bahagian yang ditawarkan secara langganan."
+        }
+      ]
     },
     "roller-shutters": {
       "label": "Roller Shutter untuk Perniagaan dan Kedai",
@@ -82,7 +100,25 @@ export default {
       ],
       "seoTitle": "Kawalan Roller Shutter Pintar untuk Kedai | WIFIGATE",
       "seoDescription": "WIFIGATE memberi kedai dan perniagaan kawalan roller shutter pintar melalui telefon, dengan pengurusan kebenaran dan kurang bergantung pada kunci.",
-      "imageAlt": "Pemilik perniagaan membuka roller shutter kedai dengan telefon"
+      "imageAlt": "Pemilik perniagaan membuka roller shutter kedai dengan telefon",
+      "faq": [
+        {
+          "question": "Bagaimana WIFIGATE membuka roller shutter?",
+          "answer": "WIFIGATE disambungkan ke kawalan shutter dan membolehkan orang yang diberi kebenaran membuka dan menutupnya melalui aplikasi WIFIGATE. Kawalan terletak di bahagian dalam yang terlindung, bukan pada suis kunci atau alat kawalan jauh yang terdedah."
+        },
+        {
+          "question": "Bolehkah setiap pekerja mempunyai akses berasingan ke shutter?",
+          "answer": "Boleh. Setiap pekerja, pengurus atau pembekal mendapat kebenaran peribadi yang boleh anda buang pada bila-bila masa, tanpa perlu mengutip kunci atau alat kawalan jauh."
+        },
+        {
+          "question": "Bolehkah saya memberi pembekal akses sementara?",
+          "answer": "Boleh. Anda boleh berkongsi akses terhad masa dengan pembekal atau pekerja sementara, dan ia berhenti berfungsi apabila masanya tamat."
+        },
+        {
+          "question": "Perniagaan jenis apa yang sesuai?",
+          "answer": "Kedai, gudang, pintu masuk servis dan mana-mana perniagaan dengan roller shutter elektrik yang mahu kurang kunci, alat kawalan jauh dan titik akses yang terdedah."
+        }
+      ]
     },
     "electric-gates": {
       "label": "Pintu Pagar Elektrik dan Palang Parkir",
@@ -118,7 +154,25 @@ export default {
       ],
       "seoTitle": "Aplikasi Pembuka Pintu Pagar Tanpa Langganan | WIFIGATE",
       "seoDescription": "Aplikasi pembuka pintu pagar WIFIGATE membuka pintu pagar elektrik dan palang parkir melalui telefon, dengan Buka Automatik dan tanpa langganan bulanan.",
-      "imageAlt": "Pemandu membuka palang parkir dan pintu pagar elektrik dengan telefon"
+      "imageAlt": "Pemandu membuka palang parkir dan pintu pagar elektrik dengan telefon",
+      "faq": [
+        {
+          "question": "Bolehkah saya membuka pintu pagar elektrik atau palang parkir melalui telefon?",
+          "answer": "Boleh. WIFIGATE disambungkan ke pintu pagar atau palang, dan pengguna yang diberi kebenaran membukanya melalui aplikasi WIFIGATE, dengan kebenaran kekal atau sementara."
+        },
+        {
+          "question": "Adakah pintu pagar memerlukan kad SIM atau sambungan internet?",
+          "answer": "Tidak. Telefon berkomunikasi terus dengan peranti WIFIGATE, jadi pintu pagar tidak memerlukan kad SIM, pelan internet atau penghala Wi‑Fi luaran."
+        },
+        {
+          "question": "Bolehkah saya terus menggunakan alat kawalan jauh sedia ada?",
+          "answer": "Boleh. Alat kawalan jauh sedia ada terus berfungsi bersama kawalan melalui aplikasi, jadi tiada apa yang perlu dibuang."
+        },
+        {
+          "question": "Adakah ada bayaran bulanan?",
+          "answer": "Tiada. Anda membayar sekali untuk peranti dan pemasangan, tanpa langganan bulanan atau bayaran berulang."
+        }
+      ]
     },
     "garage-doors": {
       "label": "Pintu Garaj dan Parkir Persendirian",
@@ -154,7 +208,25 @@ export default {
       ],
       "seoTitle": "Akses Pintar Pintu Garaj dan Parkir Persendirian | WIFIGATE",
       "seoDescription": "WIFIGATE membuka pintu garaj dan parkir persendirian melalui telefon, dengan kebenaran sementara dan kurang bergantung pada alat kawalan jauh fizikal.",
-      "imageAlt": "Lelaki membuka pintu garaj persendirian dengan telefon di rumah moden"
+      "imageAlt": "Lelaki membuka pintu garaj persendirian dengan telefon di rumah moden",
+      "faq": [
+        {
+          "question": "Bagaimana saya membuka pintu garaj dengan telefon?",
+          "answer": "WIFIGATE disambungkan ke pintu garaj dan anda membukanya melalui aplikasi WIFIGATE. Setiap ahli isi rumah mendapat kebenaran sendiri di telefon masing-masing."
+        },
+        {
+          "question": "Apa yang berlaku apabila seseorang kehilangan alat kawalan jauh?",
+          "answer": "Alat kawalan jauh yang hilang terus berfungsi sehingga semua alat kawalan jauh dikod semula. Kebenaran di telefon dibuang daripada aplikasi dalam sekelip mata, tanpa apa-apa untuk diganti atau dikod semula."
+        },
+        {
+          "question": "Bolehkah saya membenarkan tukang masuk tanpa memberinya alat kawalan jauh?",
+          "answer": "Boleh. Hantar kebenaran sementara yang tamat bila-bila masa yang anda pilih, tanpa menyerahkan alat kawalan jauh atau kod."
+        },
+        {
+          "question": "Di mana WIFIGATE boleh digunakan untuk parkir?",
+          "answer": "Garaj persendirian, pintu masuk parkir persendirian, rumah dan pangsapuri bertaman."
+        }
+      ]
     },
     "private-homes": {
       "label": "Rumah Persendirian",
@@ -190,7 +262,25 @@ export default {
       ],
       "seoTitle": "Akses Rumah Pintar Tanpa Kod Dikongsi | WIFIGATE",
       "seoDescription": "Kawalan akses rumah pintar WIFIGATE: urus pintu masuk melalui telefon dan kongsi kebenaran sementara dengan tetamu dan kurier, tanpa kod papan kekunci.",
-      "imageAlt": "Wanita membuka pintu pagar rumah persendirian dengan telefon dan bukan dengan papan kekunci"
+      "imageAlt": "Wanita membuka pintu pagar rumah persendirian dengan telefon dan bukan dengan papan kekunci",
+      "faq": [
+        {
+          "question": "Mengapa WIFIGATE lebih selamat daripada kod papan kekunci?",
+          "answer": "Setiap orang mendapat kebenaran sendiri di telefon mereka, jadi tiada kod tetap yang meninggalkan kesan haus pada butang atau tersebar kepada kurier dan tetamu, dan sebarang kebenaran boleh dibuang serta-merta."
+        },
+        {
+          "question": "Bolehkah saya memberi kurier atau tetamu akses sekali sahaja?",
+          "answer": "Boleh. Hantar jemputan terhad masa yang hanya berfungsi pada masa yang anda pilih, tanpa mendedahkan kod kekal."
+        },
+        {
+          "question": "Apakah yang boleh dibuka oleh WIFIGATE di rumah persendirian?",
+          "answer": "Pintu pagar, pintu masuk, parkir dan pintu garaj di rumah, semuanya daripada satu aplikasi."
+        },
+        {
+          "question": "Bagaimana saya membuang akses seseorang?",
+          "answer": "Melalui telefon anda, dalam sekelip mata. Tiada kunci, kod atau alat kawalan jauh yang perlu diganti."
+        }
+      ]
     },
     "residential-buildings": {
       "label": "Bangunan Kediaman",
@@ -226,7 +316,25 @@ export default {
       ],
       "seoTitle": "Kawalan Akses Bangunan Kediaman | WIFIGATE",
       "seoDescription": "WIFIGATE membawa kawalan akses pintar ke bangunan kediaman, dengan kemasukan melalui telefon, kebenaran tetamu sementara dan ketelusan yang lebih baik.",
-      "imageAlt": "Penduduk membuka pintu masuk bangunan kediaman dengan telefon"
+      "imageAlt": "Penduduk membuka pintu masuk bangunan kediaman dengan telefon",
+      "faq": [
+        {
+          "question": "Bagaimana penduduk memasuki bangunan dengan WIFIGATE?",
+          "answer": "Penduduk membuka pintu lobi, pintu pagar atau pintu masuk parkir melalui telefon dengan kebenaran mereka sendiri."
+        },
+        {
+          "question": "Bagaimana tetamu dan kurier masuk?",
+          "answer": "Penduduk menghantar jemputan tetamu terhad masa, dengan butiran ketibaan dalam satu ketikan, tanpa mendedahkan kod kekal."
+        },
+        {
+          "question": "Bolehkah jawatankuasa bangunan melihat siapa yang mempunyai akses?",
+          "answer": "Boleh. Jawatankuasa atau syarikat pengurusan mengurus senarai kebenaran, dan sejarah akses menunjukkan kemasukan untuk ketelusan."
+        },
+        {
+          "question": "Adakah WIFIGATE menggantikan kod masuk yang dikongsi?",
+          "answer": "Ia menghapuskan keperluan berkongsi satu kod: setiap penduduk mempunyai kebenaran peribadi, dan tetamu mendapat akses sementara sebagai ganti kod bangunan."
+        }
+      ]
     },
     "office-buildings": {
       "label": "Bangunan Pejabat",
@@ -262,7 +370,25 @@ export default {
       ],
       "seoTitle": "Kawalan Akses Bangunan Pejabat | WIFIGATE",
       "seoDescription": "Kawalan akses WIFIGATE membolehkan bangunan pejabat mengurus kemasukan pekerja, pelawat dan pembekal melalui telefon, dengan kebenaran sementara dan kekal.",
-      "imageAlt": "Pekerja membuka pintu kaca di pejabat moden dengan telefon"
+      "imageAlt": "Pekerja membuka pintu kaca di pejabat moden dengan telefon",
+      "faq": [
+        {
+          "question": "Bagaimana pekerja mendapat akses ke pejabat?",
+          "answer": "Pekerja menerima kebenaran kekal di telefon mereka, dan ia dibuang dalam sekelip mata apabila seseorang berhenti."
+        },
+        {
+          "question": "Bagaimana pelawat masuk tanpa menunggu di kaunter penyambut tetamu?",
+          "answer": "Pelawat menerima akses sementara sebelum tiba, jadi mereka masuk dengan telefon dan kaunter penyambut tetamu mengendalikan lebih sedikit ketibaan."
+        },
+        {
+          "question": "Apakah yang boleh dikawal oleh WIFIGATE di bangunan pejabat?",
+          "answer": "Pintu masuk, tingkat, bilik dan pintu masuk parkir."
+        },
+        {
+          "question": "Adakah terdapat rekod kemasukan?",
+          "answer": "Ada. Sejarah akses menunjukkan siapa yang membuka dan bila, untuk operasi dan ketelusan."
+        }
+      ]
     },
     "entry-doors-magnetic-locks": {
       "label": "Pintu Masuk dan Kunci Magnet untuk Perniagaan",
@@ -298,7 +424,25 @@ export default {
       ],
       "seoTitle": "Pintu Masuk dan Kunci Magnet untuk Perniagaan | WIFIGATE",
       "seoDescription": "Kawalan akses pintar WIFIGATE untuk pintu masuk perniagaan dan kunci magnet, dengan kebenaran melalui telefon, akses sementara dan kurang kunci fizikal.",
-      "imageAlt": "Pelanggan membuka pintu masuk perniagaan kecil dengan telefon"
+      "imageAlt": "Pelanggan membuka pintu masuk perniagaan kecil dengan telefon",
+      "faq": [
+        {
+          "question": "Adakah WIFIGATE berfungsi dengan kunci magnet?",
+          "answer": "Ya. WIFIGATE sesuai untuk pintu masuk dengan kunci elektrik atau kunci magnet dan membukanya melalui telefon."
+        },
+        {
+          "question": "Bolehkah saya memberi juruteknik atau pembekal akses sementara?",
+          "answer": "Boleh. Kongsi kebenaran sementara untuk lawatan tersebut dan bukannya memberikan kod pintu."
+        },
+        {
+          "question": "Adakah saya memerlukan sistem kawalan akses yang rumit?",
+          "answer": "Tidak. WIFIGATE ialah pilihan yang mudah dan moden untuk perniagaan yang mahukan kemasukan melalui telefon tanpa sistem kawalan akses yang rumit."
+        },
+        {
+          "question": "Perniagaan apakah yang menggunakannya?",
+          "answer": "Perniagaan kecil, klinik, studio, pejabat dan gudang."
+        }
+      ]
     },
     "sports-facilities": {
       "label": "Kemudahan Sukan",
@@ -334,7 +478,25 @@ export default {
       ],
       "seoTitle": "Kawalan Akses Kemudahan Sukan dan Padel | WIFIGATE",
       "seoDescription": "Kawalan akses pintar WIFIGATE untuk kemudahan sukan, gelanggang padel dan gimnasium, dengan kemasukan melalui telefon dan kebenaran sementara atau kekal.",
-      "imageAlt": "Pemain padel membuka pintu masuk gelanggang sukan berlampu limpah dengan telefon"
+      "imageAlt": "Pemain padel membuka pintu masuk gelanggang sukan berlampu limpah dengan telefon",
+      "faq": [
+        {
+          "question": "Bolehkah akses mengikut waktu operasi atau tempahan?",
+          "answer": "Boleh. Akses boleh diberi mengikut waktu operasi, tempahan atau kebenaran, dan aktiviti berjadual boleh membuka mengikut hari dan waktu."
+        },
+        {
+          "question": "Bolehkah ahli, jurulatih dan tetamu mempunyai akses yang berbeza?",
+          "answer": "Boleh. Setiap jenis pengguna mendapat kebenaran sendiri: ahli tetap, jurulatih pada hari tertentu atau tetamu sekali datang."
+        },
+        {
+          "question": "Bolehkah saya melihat siapa yang berada di kemudahan?",
+          "answer": "Boleh. Sejarah akses menunjukkan siapa yang membuka dan bila, yang membantu operasi dan mengesahkan tapak telah ditutup pada penghujung hari."
+        },
+        {
+          "question": "Kemudahan sukan apakah yang sesuai untuk WIFIGATE?",
+          "answer": "Gelanggang padel, gelanggang tenis, gimnasium dan kompleks latihan."
+        }
+      ]
     },
     "storage-lockers": {
       "label": "Ruang Simpanan dan Loker",
@@ -370,7 +532,25 @@ export default {
       ],
       "seoTitle": "Kawalan Akses Pintar Ruang Simpanan dan Loker | WIFIGATE",
       "seoDescription": "Kawalan akses WIFIGATE memberi setiap penyewa ruang simpanan dan loker akses peribadi melalui telefon, terhad kepada waktu operasi dan tamat bersama sewaan.",
-      "imageAlt": "Wanita membuka pintu tapak simpanan dengan loker dan unit simpanan menggunakan telefonnya"
+      "imageAlt": "Wanita membuka pintu tapak simpanan dengan loker dan unit simpanan menggunakan telefonnya",
+      "faq": [
+        {
+          "question": "Bagaimana penyewa membuka pintu pagar dan loker mereka?",
+          "answer": "Melalui telefon, dengan kebenaran peribadi untuk pintu pagar tapak, pintu masuk bangunan dan, jika dipasang, unit simpanan atau loker berkunci elektrik."
+        },
+        {
+          "question": "Bolehkah akses dihadkan kepada waktu operasi?",
+          "answer": "Boleh. Benarkan kemasukan hanya dalam waktu operasi, atau beri penyewa tempoh yang lebih luas; pengangkut barang dan ahli keluarga boleh mendapat akses sekali sahaja."
+        },
+        {
+          "question": "Apa yang berlaku apabila sewaan tamat?",
+          "answer": "Anda membuang akses penyewa serta-merta. Tiada kunci untuk dikutip dan tiada kod untuk ditukar."
+        },
+        {
+          "question": "Adakah tapak memerlukan internet di pintu?",
+          "answer": "Tidak. Telefon berkomunikasi terus dengan peranti di tapak, tanpa kad SIM atau sambungan internet di pintu."
+        }
+      ]
     }
   }
 };

@@ -46,7 +46,25 @@ export default {
       ],
       "seoTitle": "Control de acceso para hoteles, Airbnb y apartamentos turísticos | WIFIGATE API",
       "seoDescription": "WIFIGATE lleva acceso digital a hoteles, Airbnb y apartamentos turísticos: permisos de huésped automatizados con la WIFIGATE API, acceso temporal por reserva y menos llaves.",
-      "imageAlt": "Huéspedes abriendo la puerta de una habitación de hotel con el teléfono en un pasillo moderno"
+      "imageAlt": "Huéspedes abriendo la puerta de una habitación de hotel con el teléfono en un pasillo moderno",
+      "faq": [
+        {
+          "question": "¿Cómo abren los huéspedes el portón o la puerta con WIFIGATE?",
+          "answer": "Cada huésped recibe en su teléfono una invitación limitada en el tiempo y abre el portón, la puerta o el garaje desde la aplicación WIFIGATE. El acceso empieza en el check-in y termina automáticamente en el check-out, así que no hay que entregar llaves, tarjetas ni códigos."
+        },
+        {
+          "question": "¿Se puede crear el acceso de los huéspedes automáticamente a partir de las reservas?",
+          "answer": "Sí. Con WIFIGATE Host y la WIFIGATE API, una reserva confirmada puede crear automáticamente el acceso del huésped, ajustado a las fechas y los horarios de la estancia."
+        },
+        {
+          "question": "¿El personal de limpieza y mantenimiento puede tener su propio acceso?",
+          "answer": "Sí. El personal, la limpieza, el mantenimiento y los proveedores reciben cada uno su propio permiso, y el historial de accesos muestra quién abrió y cuándo."
+        },
+        {
+          "question": "¿WIFIGATE requiere una suscripción para hoteles y apartamentos turísticos?",
+          "answer": "El dispositivo WIFIGATE no tiene suscripción mensual. WIFIGATE Host, la automatización de reservas para hoteles y apartamentos turísticos, es la única parte que se ofrece por suscripción."
+        }
+      ]
     },
     "roller-shutters": {
       "label": "Persianas metálicas para negocios y tiendas",
@@ -82,7 +100,25 @@ export default {
       ],
       "seoTitle": "Control inteligente de persianas metálicas para negocios | WIFIGATE",
       "seoDescription": "WIFIGATE permite manejar las persianas metálicas del negocio desde el teléfono, con gestión de permisos, menos llaves y controles remotos y menos puntos expuestos.",
-      "imageAlt": "Dueño de un negocio abriendo la persiana metálica de su tienda con el teléfono"
+      "imageAlt": "Dueño de un negocio abriendo la persiana metálica de su tienda con el teléfono",
+      "faq": [
+        {
+          "question": "¿Cómo abre WIFIGATE una persiana metálica?",
+          "answer": "WIFIGATE se conecta al mando de la persiana y permite que las personas autorizadas la abran y la cierren desde la aplicación WIFIGATE. El control queda en el lado interior, protegido, en lugar de un interruptor de llave o un control remoto expuestos."
+        },
+        {
+          "question": "¿Cada empleado puede tener un acceso independiente a la persiana?",
+          "answer": "Sí. Cada empleado, encargado o proveedor recibe un permiso personal que puedes retirar en cualquier momento, sin recoger llaves ni controles remotos."
+        },
+        {
+          "question": "¿Puedo dar acceso temporal a un proveedor?",
+          "answer": "Sí. Puedes compartir un acceso limitado en el tiempo con un proveedor o un empleado temporal, y deja de funcionar cuando se acaba el plazo."
+        },
+        {
+          "question": "¿Para qué negocios es adecuado?",
+          "answer": "Para tiendas, almacenes, entradas de servicio y cualquier negocio con una persiana metálica eléctrica que quiera menos llaves, menos controles remotos y menos puntos de acceso expuestos."
+        }
+      ]
     },
     "electric-gates": {
       "label": "Portones eléctricos y barreras de estacionamiento",
@@ -118,7 +154,25 @@ export default {
       ],
       "seoTitle": "Portones eléctricos y barreras de estacionamiento sin suscripción | WIFIGATE",
       "seoDescription": "WIFIGATE abre portones eléctricos y barreras desde el teléfono, con Auto Open, eventos programados, controles remotos existentes y sin suscripción mensual.",
-      "imageAlt": "Conductor abriendo una barrera de estacionamiento y un portón eléctrico con el teléfono"
+      "imageAlt": "Conductor abriendo una barrera de estacionamiento y un portón eléctrico con el teléfono",
+      "faq": [
+        {
+          "question": "¿Puedo abrir un portón eléctrico o una barrera de estacionamiento desde el teléfono?",
+          "answer": "Sí. WIFIGATE se conecta al portón o a la barrera, y los usuarios autorizados lo abren desde la aplicación WIFIGATE, con permisos permanentes o temporales."
+        },
+        {
+          "question": "¿El portón necesita una tarjeta SIM o conexión a internet?",
+          "answer": "No. El teléfono se comunica directamente con el dispositivo WIFIGATE, así que el portón no necesita tarjeta SIM, plan de internet ni un router Wi‑Fi externo."
+        },
+        {
+          "question": "¿Puedo seguir usando mis controles remotos actuales?",
+          "answer": "Sí. Los controles remotos existentes siguen funcionando junto con el control desde la aplicación, así que no hay que tirar nada."
+        },
+        {
+          "question": "¿Hay una cuota mensual?",
+          "answer": "No. Pagas una sola vez por el dispositivo y la instalación, sin suscripción mensual ni pagos recurrentes."
+        }
+      ]
     },
     "garage-doors": {
       "label": "Puertas de garaje y estacionamientos privados",
@@ -154,7 +208,25 @@ export default {
       ],
       "seoTitle": "Apertura inteligente de puertas de garaje | WIFIGATE",
       "seoDescription": "WIFIGATE abre puertas de garaje y estacionamientos privados desde el teléfono, con permisos temporales, menos controles remotos físicos y una gestión más privada.",
-      "imageAlt": "Hombre abriendo la puerta de un garaje privado con el teléfono en una casa moderna"
+      "imageAlt": "Hombre abriendo la puerta de un garaje privado con el teléfono en una casa moderna",
+      "faq": [
+        {
+          "question": "¿Cómo abro la puerta del garaje con el teléfono?",
+          "answer": "WIFIGATE se conecta a la puerta del garaje y la abres desde la aplicación WIFIGATE. Cada persona de la casa recibe su propio permiso en su propio teléfono."
+        },
+        {
+          "question": "¿Qué pasa cuando alguien pierde un control remoto?",
+          "answer": "Un control remoto perdido sigue funcionando hasta que se reprograman los controles remotos. Un permiso en el teléfono se elimina desde la aplicación en un momento, sin nada que sustituir ni reprogramar."
+        },
+        {
+          "question": "¿Puedo dejar entrar a un técnico sin darle un control remoto?",
+          "answer": "Sí. Envía un permiso temporal que termina cuando tú decidas, sin entregar un control remoto ni un código."
+        },
+        {
+          "question": "¿Dónde se puede usar WIFIGATE para estacionamientos?",
+          "answer": "En garajes privados, entradas de estacionamientos privados, casas y apartamentos con jardín."
+        }
+      ]
     },
     "private-homes": {
       "label": "Casas particulares",
@@ -190,7 +262,25 @@ export default {
       ],
       "seoTitle": "Acceso inteligente para casas sin código compartido | WIFIGATE",
       "seoDescription": "WIFIGATE permite gestionar el acceso a tu casa desde el teléfono, compartir permisos temporales con invitados y repartidores, y depender menos de teclados y llaves.",
-      "imageAlt": "Mujer abriendo el portón de entrada de una casa particular con el teléfono en lugar de usar un teclado de código"
+      "imageAlt": "Mujer abriendo el portón de entrada de una casa particular con el teléfono en lugar de usar un teclado de código",
+      "faq": [
+        {
+          "question": "¿Por qué WIFIGATE es más seguro que un código de teclado?",
+          "answer": "Cada persona tiene su propio permiso en su teléfono, así que no hay un código permanente que deje marcas en las teclas o que pase a repartidores e invitados, y cualquier permiso se puede revocar al instante."
+        },
+        {
+          "question": "¿Puedo dar a un repartidor o a un invitado un acceso de un solo uso?",
+          "answer": "Sí. Envía una invitación limitada en el tiempo que solo funciona durante el intervalo que elijas, sin exponer un código permanente."
+        },
+        {
+          "question": "¿Qué puede abrir WIFIGATE en una casa particular?",
+          "answer": "Portones, puertas de entrada, estacionamientos y puertas de garaje de la casa, todo desde una sola aplicación."
+        },
+        {
+          "question": "¿Cómo le quito el acceso a alguien?",
+          "answer": "Desde tu teléfono, en un momento. No hay cerraduras, códigos ni controles remotos que cambiar."
+        }
+      ]
     },
     "residential-buildings": {
       "label": "Edificios residenciales",
@@ -226,7 +316,25 @@ export default {
       ],
       "seoTitle": "Control de acceso para edificios residenciales | WIFIGATE",
       "seoDescription": "WIFIGATE lleva gestión de acceso inteligente a edificios residenciales: entrada desde el teléfono, permisos temporales de invitado y menos códigos compartidos.",
-      "imageAlt": "Vecina abriendo la entrada de un edificio residencial con el teléfono"
+      "imageAlt": "Vecina abriendo la entrada de un edificio residencial con el teléfono",
+      "faq": [
+        {
+          "question": "¿Cómo entran los vecinos al edificio con WIFIGATE?",
+          "answer": "Los vecinos abren la puerta del vestíbulo, el portón o la entrada del estacionamiento desde su teléfono, cada uno con su propio permiso."
+        },
+        {
+          "question": "¿Cómo entran los invitados y los repartidores?",
+          "answer": "Un vecino envía una invitación de invitado limitada en el tiempo, con las indicaciones de llegada en un solo toque, sin exponer un código permanente."
+        },
+        {
+          "question": "¿La comunidad de vecinos puede ver quién tiene acceso?",
+          "answer": "Sí. La comunidad o la empresa administradora gestiona la lista de permisos, y el historial de accesos muestra las entradas para mayor transparencia."
+        },
+        {
+          "question": "¿WIFIGATE sustituye al código de entrada compartido?",
+          "answer": "Elimina la necesidad de compartir un único código: cada vecino tiene un permiso personal, y los invitados reciben un acceso temporal en lugar del código del edificio."
+        }
+      ]
     },
     "office-buildings": {
       "label": "Edificios de oficinas",
@@ -262,7 +370,25 @@ export default {
       ],
       "seoTitle": "Control de acceso para edificios de oficinas | WIFIGATE",
       "seoDescription": "WIFIGATE ayuda a los edificios de oficinas a gestionar la entrada de empleados, visitantes y proveedores desde el teléfono, con permisos temporales y permanentes.",
-      "imageAlt": "Empleada abriendo una puerta de vidrio en una oficina moderna con el teléfono"
+      "imageAlt": "Empleada abriendo una puerta de vidrio en una oficina moderna con el teléfono",
+      "faq": [
+        {
+          "question": "¿Cómo obtienen los empleados acceso a la oficina?",
+          "answer": "Los empleados reciben un permiso permanente en su teléfono, que se elimina en un momento cuando alguien se va."
+        },
+        {
+          "question": "¿Cómo entran los visitantes sin esperar en recepción?",
+          "answer": "Los visitantes reciben un acceso temporal antes de llegar, así que entran con su teléfono y la recepción atiende menos llegadas."
+        },
+        {
+          "question": "¿Qué puede controlar WIFIGATE en un edificio de oficinas?",
+          "answer": "Puertas de entrada, pisos, salas y entradas de estacionamiento."
+        },
+        {
+          "question": "¿Queda un registro de las entradas?",
+          "answer": "Sí. El historial de accesos muestra quién abrió y cuándo, para la operación y la transparencia."
+        }
+      ]
     },
     "entry-doors-magnetic-locks": {
       "label": "Puertas de entrada y cerraduras magnéticas para negocios",
@@ -298,7 +424,25 @@ export default {
       ],
       "seoTitle": "Puertas de entrada y cerraduras magnéticas para negocios | WIFIGATE",
       "seoDescription": "WIFIGATE aporta apertura inteligente a puertas de entrada y cerraduras magnéticas de negocios, con permisos desde el teléfono, acceso temporal y menos llaves.",
-      "imageAlt": "Clienta abriendo la puerta de entrada de un pequeño negocio con el teléfono"
+      "imageAlt": "Clienta abriendo la puerta de entrada de un pequeño negocio con el teléfono",
+      "faq": [
+        {
+          "question": "¿WIFIGATE funciona con una cerradura magnética?",
+          "answer": "Sí. WIFIGATE es adecuado para puertas de entrada con cerradura eléctrica o magnética y las abre desde el teléfono."
+        },
+        {
+          "question": "¿Puedo dar acceso temporal a un técnico o a un proveedor?",
+          "answer": "Sí. Comparte un permiso temporal para la visita en lugar de dar el código de la puerta."
+        },
+        {
+          "question": "¿Necesito un sistema de control de acceso complejo?",
+          "answer": "No. WIFIGATE es una opción sencilla y moderna para negocios que quieren entrar con el teléfono sin un sistema de control de acceso complejo."
+        },
+        {
+          "question": "¿Qué negocios lo usan?",
+          "answer": "Pequeños negocios, clínicas, estudios, oficinas y almacenes."
+        }
+      ]
     },
     "sports-facilities": {
       "label": "Instalaciones deportivas",
@@ -334,7 +478,25 @@ export default {
       ],
       "seoTitle": "Control de acceso para instalaciones deportivas y pádel | WIFIGATE",
       "seoDescription": "WIFIGATE aporta control de acceso a instalaciones deportivas, canchas de pádel y gimnasios, con entrada desde el teléfono y permisos temporales o permanentes.",
-      "imageAlt": "Jugadora de pádel abriendo la entrada de una cancha deportiva iluminada con el teléfono"
+      "imageAlt": "Jugadora de pádel abriendo la entrada de una cancha deportiva iluminada con el teléfono",
+      "faq": [
+        {
+          "question": "¿El acceso puede ajustarse a los horarios de actividad o a las reservas?",
+          "answer": "Sí. El acceso puede otorgarse según horarios de actividad, reservas o permisos, y los eventos programados pueden abrir según días y horarios."
+        },
+        {
+          "question": "¿Socios, entrenadores e invitados pueden tener accesos distintos?",
+          "answer": "Sí. Cada tipo de usuario recibe su propio permiso: un socio habitual, un entrenador que viene ciertos días o un invitado puntual."
+        },
+        {
+          "question": "¿Puedo ver quién estuvo en las instalaciones?",
+          "answer": "Sí. El historial de accesos muestra quién abrió y cuándo, lo que ayuda a la operación y confirma que el lugar quedó cerrado al final del día."
+        },
+        {
+          "question": "¿Para qué instalaciones deportivas es adecuado WIFIGATE?",
+          "answer": "Para canchas de pádel, canchas de tenis, gimnasios y centros de entrenamiento."
+        }
+      ]
     },
     "storage-lockers": {
       "label": "Bodegas y casilleros",
@@ -370,7 +532,25 @@ export default {
       ],
       "seoTitle": "Control de acceso inteligente para bodegas y casilleros | WIFIGATE",
       "seoDescription": "WIFIGATE da a cada inquilino de una bodega o un casillero acceso personal desde el teléfono al portón, las puertas y su casillero, limitado al horario de atención, registrado en un historial y retirado al terminar el alquiler.",
-      "imageAlt": "Mujer abriendo con el teléfono la puerta de un centro de almacenamiento con casilleros y bodegas"
+      "imageAlt": "Mujer abriendo con el teléfono la puerta de un centro de almacenamiento con casilleros y bodegas",
+      "faq": [
+        {
+          "question": "¿Cómo abren los inquilinos el portón y su casillero?",
+          "answer": "Desde su teléfono, con un permiso personal para el portón del recinto, la entrada del edificio y, donde esté instalada, una bodega o un casillero con cerradura eléctrica."
+        },
+        {
+          "question": "¿Se puede limitar el acceso al horario de atención?",
+          "answer": "Sí. Permita la entrada solo en el horario de atención o dé a un inquilino una franja más amplia; las empresas de mudanzas y los familiares pueden recibir un acceso único."
+        },
+        {
+          "question": "¿Qué pasa cuando termina el alquiler?",
+          "answer": "Usted retira el acceso del inquilino al instante. No hay llaves que recoger ni códigos que cambiar."
+        },
+        {
+          "question": "¿El recinto necesita internet en la puerta?",
+          "answer": "No. El teléfono se comunica directamente con el dispositivo instalado en el lugar, sin tarjeta SIM ni conexión a internet en la puerta."
+        }
+      ]
     }
   }
 };

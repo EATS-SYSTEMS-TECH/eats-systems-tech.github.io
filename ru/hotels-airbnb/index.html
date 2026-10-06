@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../../css/styles.css?v=20261005b">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20261006b">
-  <link rel="stylesheet" href="../../css/niche.css?v=20261007a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20261007b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
   <script>window.accessibilityCopy = {"ru":{"skipLink":"Перейти к основному содержимому","eyebrow":"Доступность","openButton":"Открыть меню доступности","closeButton":"Закрыть меню доступности","title":"Меню доступности","description":"Настройте сайт под то, как вы читаете и перемещаетесь по нему. Ваш выбор сохраняется на этом устройстве.","reset":"Сбросить всё","statusDefault":"Стандартный вид сайта","statusActive":"Активных настроек: {count}","hideButton":"Скрыть кнопку доступности до перезагрузки страницы","statementLink":"Заявление о доступности","textSize":{"label":"Размер текста","description":"Увеличить текст на всём сайте.","decrease":"Уменьшить текст","increase":"Увеличить текст","level":"Размер текста {percent}%"},"options":{"highContrast":{"label":"Высокий контраст","description":"Тёмный текст на светлом фоне с чёткими рамками."},"grayscale":{"label":"Оттенки серого","description":"Показать сайт без цветов."},"underlineLinks":{"label":"Выделить ссылки","description":"Подчеркнуть и выделить каждую ссылку."},"readableFont":{"label":"Удобочитаемый шрифт","description":"Простой, хорошо читаемый шрифт."},"textSpacing":{"label":"Интервалы текста","description":"Больше места между строками, словами и буквами."},"highlightHeadings":{"label":"Выделить заголовки","description":"Отметить заголовки, чтобы показать структуру страницы."},"bigCursor":{"label":"Большой курсор","description":"Увеличенный указатель мыши."},"focusHighlight":{"label":"Заметный фокус","description":"Толстая рамка вокруг элемента в фокусе клавиатуры."},"reducedMotion":{"label":"Остановить анимацию","description":"Остановить анимацию, переходы и фоновое видео."}}}};</script>
@@ -247,6 +247,48 @@
           "position": 2,
           "name": "Отели, Airbnb и гостевые апартаменты",
           "item": "https://wifigate.io/ru/hotels-airbnb/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/ru/hotels-airbnb/#faq",
+      "inLanguage": "ru",
+      "isPartOf": {
+        "@id": "https://wifigate.io/ru/hotels-airbnb/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Как гости открывают ворота или дверь с WIFIGATE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Каждый гость получает на телефон приглашение с ограниченным сроком действия и открывает ворота, дверь или гараж в приложении WIFIGATE. Доступ начинается при заселении и автоматически заканчивается при выезде, поэтому не нужно передавать ключи, карты или коды."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли создавать гостевой доступ автоматически из бронирований?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. С WIFIGATE Host и WIFIGATE API подтверждённая бронь может автоматически создать доступ для гостя на даты и часы проживания."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Могут ли уборщики и техники получить собственный доступ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Персонал, уборщики, техники и подрядчики получают каждый своё право доступа, а история доступа показывает, кто и когда открывал."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Нужна ли подписка на WIFIGATE для отелей и апартаментов?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "У устройства WIFIGATE нет ежемесячной подписки. WIFIGATE Host – автоматизация бронирований для отелей и апартаментов – единственная часть, которая предлагается по подписке."
+          }
         }
       ]
     }
@@ -579,6 +621,15 @@
           <h2 class="niche-section__title" id="niche-benefits-title">Ключевые преимущества</h2>
         </div>
         <ul class="niche-benefits__grid" id="niche-benefits-list"><li class="niche-benefit">Гостевой доступ создаётся автоматически после подтверждения брони</li><li class="niche-benefit">Полная автоматизация через WIFIGATE API</li><li class="niche-benefit">Временный доступ по датам и времени проживания</li><li class="niche-benefit">Меньше ручного заселения, ключей, карт и кодов</li><li class="niche-benefit niche-benefit--gap" aria-hidden="true"></li><li class="niche-benefit">Управление правами доступа для персонала, уборщиков, техников и подрядчиков</li><li class="niche-benefit">Более простое и комфортное прибытие для гостей</li><li class="niche-benefit">Доступ автоматически завершается при выезде</li><li class="niche-benefit">История доступа для прозрачности и контроля</li></ul>
+      </div>
+    </section>
+
+    <section class="niche-section niche-faq" id="niche-faq" aria-labelledby="niche-faq-title">
+      <div class="container">
+        <div class="niche-section__header">
+          <h2 class="niche-section__title" id="niche-faq-title">Частые вопросы</h2>
+        </div>
+        <div class="niche-faq__list" id="niche-faq-list"><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Как гости открывают ворота или дверь с WIFIGATE?</summary><p class="niche-faq__answer" dir="ltr">Каждый гость получает на телефон приглашение с ограниченным сроком действия и открывает ворота, дверь или гараж в приложении WIFIGATE. Доступ начинается при заселении и автоматически заканчивается при выезде, поэтому не нужно передавать ключи, карты или коды.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Можно ли создавать гостевой доступ автоматически из бронирований?</summary><p class="niche-faq__answer" dir="ltr">Да. С WIFIGATE Host и WIFIGATE API подтверждённая бронь может автоматически создать доступ для гостя на даты и часы проживания.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Могут ли уборщики и техники получить собственный доступ?</summary><p class="niche-faq__answer" dir="ltr">Да. Персонал, уборщики, техники и подрядчики получают каждый своё право доступа, а история доступа показывает, кто и когда открывал.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Нужна ли подписка на WIFIGATE для отелей и апартаментов?</summary><p class="niche-faq__answer" dir="ltr">У устройства WIFIGATE нет ежемесячной подписки. WIFIGATE Host – автоматизация бронирований для отелей и апартаментов – единственная часть, которая предлагается по подписке.</p></details></div>
       </div>
     </section>
 

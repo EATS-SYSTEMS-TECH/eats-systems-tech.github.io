@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../../css/styles.css?v=20261005b">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20261006b">
-  <link rel="stylesheet" href="../../css/niche.css?v=20261007a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20261007b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
   <script>window.accessibilityCopy = {"bg":{"skipLink":"Към основното съдържание","eyebrow":"Достъпност","openButton":"Отваряне на менюто за достъпност","closeButton":"Затваряне на менюто за достъпност","title":"Меню за достъпност","description":"Настройте сайта според начина, по който четете и навигирате. Изборът ви се запазва на това устройство.","reset":"Нулиране на всичко","statusDefault":"Стандартен изглед на сайта","statusActive":"Активни настройки: {count}","hideButton":"Скриване на бутона за достъпност до презареждане на страницата","statementLink":"Декларация за достъпност","textSize":{"label":"Размер на текста","description":"Уголемяване на текста в целия сайт.","decrease":"По-малък текст","increase":"По-голям текст","level":"Размер на текста {percent}%"},"options":{"highContrast":{"label":"Висок контраст","description":"Тъмен текст на светъл фон с ясни рамки."},"grayscale":{"label":"Нюанси на сивото","description":"Показване на сайта без цветове."},"underlineLinks":{"label":"Открояване на връзките","description":"Подчертаване и маркиране на всяка връзка."},"readableFont":{"label":"Четим шрифт","description":"Прост, лесно четим шрифт."},"textSpacing":{"label":"Разстояние в текста","description":"Повече място между редовете, думите и буквите."},"highlightHeadings":{"label":"Открояване на заглавията","description":"Маркиране на заглавията, за да се вижда структурата на страницата."},"bigCursor":{"label":"Голям курсор","description":"По-голям показалец на мишката."},"focusHighlight":{"label":"Ясен фокус","description":"Дебела рамка около елемента на фокус от клавиатурата."},"reducedMotion":{"label":"Спиране на анимациите","description":"Спиране на анимациите, преходите и фоновото видео."}}}};</script>
@@ -247,6 +247,48 @@
           "position": 2,
           "name": "Хотели, Airbnb и апартаменти за гости",
           "item": "https://wifigate.io/bg/hotels-airbnb/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/bg/hotels-airbnb/#faq",
+      "inLanguage": "bg",
+      "isPartOf": {
+        "@id": "https://wifigate.io/bg/hotels-airbnb/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Как гостите отварят портата или вратата с WIFIGATE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Всеки гост получава на телефона си покана с ограничение във времето и отваря портата, вратата или гаража от приложението WIFIGATE. Достъпът започва при настаняване и приключва автоматично при напускане, така че не се предават ключове, карти или кодове."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Може ли достъпът за гости да се създава автоматично от резервациите?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. С WIFIGATE Host и WIFIGATE API потвърдената резервация може автоматично да създаде достъпа на госта, съобразен с датите и часовете на престоя."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Могат ли чистачите и персоналът по поддръжка да имат собствен достъп?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Персоналът, чистачите, поддръжката и доставчиците получават всеки собствено разрешение, а историята на достъпа показва кой е отварял и кога."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Изисква ли WIFIGATE абонамент за хотели и имоти под наем?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Устройството WIFIGATE няма месечен абонамент. WIFIGATE Host, автоматизацията на резервациите за хотели и имоти под наем, е единствената част, която се предлага с абонамент."
+          }
         }
       ]
     }
@@ -579,6 +621,15 @@
           <h2 class="niche-section__title" id="niche-benefits-title">Основни предимства</h2>
         </div>
         <ul class="niche-benefits__grid" id="niche-benefits-list"><li class="niche-benefit">Автоматичен достъп за гости при потвърждаване на резервация</li><li class="niche-benefit">Пълна поддръжка на автоматизация чрез WIFIGATE API</li><li class="niche-benefit">Временен достъп, съобразен с датите и часовете на престоя</li><li class="niche-benefit">По-малко ръчно настаняване, ключове, карти и кодове</li><li class="niche-benefit niche-benefit--gap" aria-hidden="true"></li><li class="niche-benefit">Управление на разрешения за персонал, почистване, поддръжка и доставчици</li><li class="niche-benefit">По-гладко и удобно пристигане за гостите</li><li class="niche-benefit">Достъпът приключва автоматично в часа на напускане</li><li class="niche-benefit">История на достъпа за прозрачност и контрол</li></ul>
+      </div>
+    </section>
+
+    <section class="niche-section niche-faq" id="niche-faq" aria-labelledby="niche-faq-title">
+      <div class="container">
+        <div class="niche-section__header">
+          <h2 class="niche-section__title" id="niche-faq-title">Често задавани въпроси</h2>
+        </div>
+        <div class="niche-faq__list" id="niche-faq-list"><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Как гостите отварят портата или вратата с WIFIGATE?</summary><p class="niche-faq__answer" dir="ltr">Всеки гост получава на телефона си покана с ограничение във времето и отваря портата, вратата или гаража от приложението WIFIGATE. Достъпът започва при настаняване и приключва автоматично при напускане, така че не се предават ключове, карти или кодове.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Може ли достъпът за гости да се създава автоматично от резервациите?</summary><p class="niche-faq__answer" dir="ltr">Да. С WIFIGATE Host и WIFIGATE API потвърдената резервация може автоматично да създаде достъпа на госта, съобразен с датите и часовете на престоя.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Могат ли чистачите и персоналът по поддръжка да имат собствен достъп?</summary><p class="niche-faq__answer" dir="ltr">Да. Персоналът, чистачите, поддръжката и доставчиците получават всеки собствено разрешение, а историята на достъпа показва кой е отварял и кога.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Изисква ли WIFIGATE абонамент за хотели и имоти под наем?</summary><p class="niche-faq__answer" dir="ltr">Устройството WIFIGATE няма месечен абонамент. WIFIGATE Host, автоматизацията на резервациите за хотели и имоти под наем, е единствената част, която се предлага с абонамент.</p></details></div>
       </div>
     </section>
 
