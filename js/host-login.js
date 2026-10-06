@@ -3,10 +3,17 @@ import {
   initializeSiteAuth,
   signIn,
   completeAuthCallback,
-  signInRedirect
+  signInRedirect,
 } from "./site-auth.js";
 import { isLocalStaging } from "./firebase-config.js";
-import { createProfile } from "./api/index.js";
+import { getPlatformProfile } from "./api/index.js";
+import {
+  parsePlatformIdentity,
+  loginDestination,
+  loginPath,
+} from "./platform-model.js";
+import { platformText } from "./platform-copy.js";
+import { watchSession } from "./platform-session.js";
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
 import { authErrorMessage } from "./host-auth-errors.js";
 const status = document.querySelector("#login-status");
@@ -20,7 +27,14 @@ let providerName;
 let loginAttempt;
 let restoredUser;
 let leaving = false;
-// Shows the progress bar with a step label until the dashboard opens.
+let session;
+const language = location.pathname.startsWith("/he/") ? "he" : "en";
+const copy = platformText(language);
+const requestedPath = new URLSearchParams(location.search).get("next");
+document.querySelector(".app-login__language a").href = loginPath(
+  requestedPath,
+  language === "he" ? "en" : "he",
+);
 function showProgress(text) {
   progress.hidden = false;
   status.textContent = text;
@@ -40,11 +54,12 @@ async function finishLogin(user) {
   if (loginAttempt?.uid === user.uid) {
     return loginAttempt.promise;
   }
-  showProgress("Preparing your account...");
-  const promise = createProfile(user).then(() => {
+  showProgress(copy.checking);
+  const promise = getPlatformProfile(user).then((value) => {
+    const identity = parsePlatformIdentity(value, user.uid);
     leaving = true;
-    showProgress("Opening your dashboard...");
-    location.replace("/dashboard/");
+    showProgress(copy.opening);
+    location.replace(loginDestination(identity, requestedPath, language));
   });
   loginAttempt = { uid: user.uid, promise };
   try {
@@ -58,8 +73,13 @@ async function finishLogin(user) {
 }
 function report(error) {
   hideProgress();
-  status.textContent = authErrorMessage(error);
-  document.querySelector("#redirect-options").hidden = error.code !== AuthErrors.POPUP_BLOCKED;
+  status.textContent =
+    error.status >= 500 || error.code === "HOST_API_UNAVAILABLE"
+      ? copy.accessUnavailable
+      : authErrorMessage(error, language);
+  document.querySelector("#retry-login").hidden = !restoredUser;
+  document.querySelector("#redirect-options").hidden =
+    error.code !== AuthErrors.POPUP_BLOCKED;
 }
 async function start() {
   setBusy(true);
@@ -67,9 +87,27 @@ async function start() {
     await completeAuthCallback(requestMfaChallenge);
     await initializeSiteAuth((user) => {
       restoredUser = user;
+      if (user && !session) {
+        session = watchSession({
+          clear: () => {
+            leaving = true;
+            restoredUser = undefined;
+            loginAttempt = undefined;
+          },
+        });
+      }
+      if (!user) {
+        const ended = session?.ended;
+        session?.stop();
+        session = undefined;
+        loginAttempt = undefined;
+        if (ended) return;
+      }
       if (user && !busy) {
         setBusy(true);
-        void finishLogin(user).catch(report).finally(() => setBusy(false));
+        void finishLogin(user)
+          .catch(report)
+          .finally(() => setBusy(false));
       } else if (!user && !busy) {
         status.textContent = "";
       }
@@ -85,32 +123,46 @@ async function start() {
     setBusy(false);
   }
 }
-buttons.forEach(
-  (button) => button.addEventListener("click", async () => {
+buttons.forEach((button) =>
+  button.addEventListener("click", async () => {
     if (busy) {
       return;
     }
     providerName = button.dataset.provider;
     setBusy(true);
-    showProgress("Signing in...");
+    showProgress(copy.signingIn);
     document.querySelector("#redirect-options").hidden = true;
     try {
       const credential = await signIn(providerName, requestMfaChallenge);
+      restoredUser = credential.user;
       await finishLogin(credential.user);
     } catch (error) {
       report(error);
     } finally {
       setBusy(false);
     }
-  })
+  }),
 );
-document.querySelector("#redirect-sign-in").addEventListener("click", async () => {
+document
+  .querySelector("#redirect-sign-in")
+  .addEventListener("click", async () => {
+    setBusy(true);
+    showProgress(copy.signingIn);
+    try {
+      await signInRedirect(providerName);
+    } catch (error) {
+      report(error);
+      setBusy(false);
+    }
+  });
+document.querySelector("#retry-login").addEventListener("click", async () => {
+  if (busy || !restoredUser) return;
   setBusy(true);
-  showProgress("Signing in...");
   try {
-    await signInRedirect(providerName);
+    await finishLogin(restoredUser);
   } catch (error) {
     report(error);
+  } finally {
     setBusy(false);
   }
 });
