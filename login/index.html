@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer"><title>Sign in | WIFIGATE Host</title><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/host-portal.css?v=20261007a"><script type="module" src="/js/host-login.js"></script><link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer"><title>Sign in | WIFIGATE Host</title><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/host-portal.css?v=20261007b"><script type="module" src="/js/host-login.js"></script><link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c"></head>
 <body class="portal-login app-login">
 <main class="app-login__screen">
   <section class="app-login__card" aria-labelledby="login-title">
@@ -16,6 +16,7 @@
         <span>Continue with Apple</span>
       </button>
     </div>
+    <div id="login-progress" class="app-login__progress" role="progressbar" aria-label="Signing in" hidden><span></span></div>
     <p id="login-status" class="app-login__status" role="status" aria-live="polite"></p>
     <div id="redirect-options" class="app-login__redirect" hidden><p>Your browser blocked the sign-in window.</p><button type="button" id="redirect-sign-in" class="app-login__text-button">Continue in this tab</button></div>
     <div class="staging-note" data-staging hidden><strong>Local test environment</strong><p>Use mock Google or Apple accounts. No provider password is needed.</p><code>admin@wifigate.test</code><code>owner@grandplaza.test</code><code>pending@wifigate.test</code></div>
