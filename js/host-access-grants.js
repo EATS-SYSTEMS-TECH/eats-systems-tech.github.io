@@ -22,7 +22,12 @@ export async function renderHostAccessGrants({ container, user, organization, re
   const issueKey = crypto.randomUUID();
   const revealKeys = new Map();
   const issue = node("button", "Issue guest access", { type: "button" });
-  if (canWrite && ["confirmed", "changed"].includes(reservation.status)) section.append(issue);
+  if (canWrite && ["confirmed", "changed"].includes(reservation.status)) {
+    section.append(
+      node("p", "New guest access is limited to 31 days including grace. Existing access history remains available."),
+      issue,
+    );
+  }
   async function load(cursor, append = false) {
     const response = await portalRequest(user, `${path}?${new URLSearchParams({ limit: "50", ...(cursor ? { cursor } : {}) })}`);
     if (!current()) return;

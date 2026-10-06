@@ -1,18 +1,35 @@
 import "./host-dashboard-navigation.js";
-import { Roles, PortalStates, AuthErrors, HttpStatus } from "./host-constants.js";
+import {
+  Roles,
+  PortalStates,
+  AuthErrors,
+  HttpStatus,
+} from "./host-constants.js";
 import {
   initializeSiteAuth,
-  signOut,
   reauthenticate,
   beginTotpEnrollment,
-  finishTotpEnrollment
+  finishTotpEnrollment,
 } from "./site-auth.js";
-import { getProfile, changePortalAccess, deletePortalAccess } from "./api/index.js";
+import {
+  getProfile,
+  createProfile,
+  getPlatformProfile,
+  changePortalAccess,
+  deletePortalAccess,
+} from "./api/index.js";
+import {
+  parsePlatformIdentity,
+  pageLanguage,
+  loginPath,
+} from "./platform-model.js";
+import { renderProductSwitcher } from "./product-switcher.js";
+import { watchSession } from "./platform-session.js";
 import {
   parseIdentity,
   portalState,
   canApproveEmail,
-  canEnroll
+  canEnroll,
 } from "./host-dashboard-model.js";
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
 import { authErrorMessage } from "./host-auth-errors.js";
@@ -26,6 +43,8 @@ let generation = 0;
 let enrollmentSecret;
 let actionBusy = false;
 let approvalAttempt;
+let session;
+const language = pageLanguage();
 if (isLocalStaging) {
   $("[data-staging]").hidden = false;
 }
@@ -42,7 +61,7 @@ const protectedElements = {
   approval: $("#admin-approval"),
   enrollment: $("#mfa-enrollment"),
   verification: $("#mfa-verification"),
-  account: $("#account-details")
+  account: $("#account-details"),
 };
 function hideProtected(sessionEnded = false) {
   clearHostManagement({ sessionEnded });
@@ -55,6 +74,18 @@ function hideProtected(sessionEnded = false) {
   protectedElements.account.hidden = true;
   clearSecret();
 }
+function clearSession() {
+  ++generation;
+  identity = undefined;
+  approvalAttempt = undefined;
+  hideProtected(true);
+  $("#approval-form").reset();
+  $("#product-switcher").replaceChildren();
+  for (const element of document.querySelectorAll(
+    ".profile-grid dd, #account-name, #sidebar-account-name, #sidebar-profile-name, #approval-status",
+  ))
+    element.textContent = "";
+}
 function showStatus(title, message, retry = true, loading = false) {
   $("#access-panel").hidden = false;
   $("#access-progress").hidden = !loading;
@@ -65,19 +96,41 @@ function showStatus(title, message, retry = true, loading = false) {
 function renderProfile() {
   const profile = identity.user;
   $("#profile-name").textContent = profile.displayName || "-";
-  $("#sidebar-profile-name").textContent = profile.displayName || "WIFIGATE Host";
-  $("#sidebar-avatar").textContent = (profile.displayName || profile.email || "WG").split(/\s+/).map(part=>part[0]).slice(0,2).join("").toUpperCase();
+  $("#sidebar-profile-name").textContent =
+    profile.displayName || "WIFIGATE Host";
+  $("#sidebar-avatar").textContent = (
+    profile.displayName ||
+    profile.email ||
+    "WG"
+  )
+    .split(/\s+/)
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
   $("#profile-email").textContent = profile.email || "-";
   $("#profile-role").textContent = identity.role || "No portal role";
   $("#profile-access").textContent = identity.access.state;
-  $("#profile-mfa").textContent = identity.mfa.verified ? "Enrolled - session verified" : identity.mfa.enrolled ? "Enrolled - verification needed" : "Not enrolled";
-  $("#profile-mfa-policy").textContent = identity.role === Roles.ADMIN || identity.mfa.required ? "Required" : "Optional";
+  $("#profile-mfa").textContent = identity.mfa.verified
+    ? "Enrolled - session verified"
+    : identity.mfa.enrolled
+      ? "Enrolled - verification needed"
+      : "Not enrolled";
+  $("#profile-mfa-policy").textContent =
+    identity.role === Roles.ADMIN || identity.mfa.required
+      ? "Required"
+      : "Optional";
   $("#account-details").hidden = false;
-  $("#optional-enrollment").hidden = portalState(identity) !== PortalStates.APPROVED || identity.mfa.enrolled || identity.role !== Roles.USER;
+  $("#optional-enrollment").hidden =
+    portalState(identity) !== PortalStates.APPROVED ||
+    identity.mfa.enrolled ||
+    identity.role !== Roles.USER;
 }
 function showEnrollment(optional) {
   $("#mfa-enrollment").hidden = false;
-  $("#enrollment-description").textContent = optional ? "Add an authenticator for extra account security. You can return to the calendar without enrolling." : "Your account requires an authenticator before you can enter the portal.";
+  $("#enrollment-description").textContent = optional
+    ? "Add an authenticator for extra account security. You can return to the calendar without enrolling."
+    : "Your account requires an authenticator before you can enter the portal.";
   $("#cancel-enrollment").hidden = !optional;
   $("#enrollment-status").textContent = "";
   $("#start-enrollment").hidden = false;
@@ -91,9 +144,33 @@ async function loadDashboard(user) {
   $("#account-name").textContent = user.email || "Signed-in account";
   $("#sidebar-account-name").textContent = user.email || "Signed-in account";
   $("#sign-out").disabled = false;
-  showStatus("Checking portal access", "Verifying your account...", false, true);
+  showStatus(
+    "Checking portal access",
+    "Verifying your account...",
+    false,
+    true,
+  );
   try {
-    const value = await getProfile(user);
+    const platform = parsePlatformIdentity(
+      await getPlatformProfile(user),
+      user.uid,
+    );
+    if (requestGeneration !== generation) return;
+    if (platform.products.host.state !== "active") {
+      location.replace(
+        language === "he" ? "/dashboard/?lang=he" : "/dashboard/",
+      );
+      return;
+    }
+    renderProductSwitcher($("#product-switcher"), platform, "host", language);
+    let value;
+    try {
+      value = await getProfile(user);
+    } catch (error) {
+      if (error.status !== 404) throw error;
+      await createProfile(user);
+      value = await getProfile(user);
+    }
     if (requestGeneration !== generation) {
       return;
     }
@@ -107,7 +184,7 @@ async function loadDashboard(user) {
       clearHostManagement({ sessionEnded: true });
       showStatus(
         "Approval pending",
-        "Your email is awaiting administrator approval. Check again after your admin approves it."
+        "Your email is awaiting administrator approval. Check again after your admin approves it.",
       );
       return;
     }
@@ -115,7 +192,7 @@ async function loadDashboard(user) {
       clearHostManagement({ sessionEnded: true });
       showStatus(
         "Portal access denied",
-        "This verified email does not have active portal access. Contact your administrator. For Apple Hide My Email, provide your relay address."
+        "This verified email does not have active portal access. Contact your administrator. For Apple Hide My Email, provide your relay address.",
       );
       return;
     }
@@ -136,12 +213,17 @@ async function loadDashboard(user) {
     if (requestGeneration !== generation) {
       return;
     }
-    hideProtected(error.status === HttpStatus.FORBIDDEN || error.status === HttpStatus.UNAUTHORIZED);
+    hideProtected(
+      error.status === HttpStatus.FORBIDDEN ||
+        error.status === HttpStatus.UNAUTHORIZED,
+    );
     identity = undefined;
     if (error.status === HttpStatus.FORBIDDEN) {
       showStatus(
-        error.code === AuthErrors.ACCESS_PENDING ? "Approval pending" : "Portal access denied",
-        "Your account is signed in but the server has not granted portal access. Contact your administrator."
+        error.code === AuthErrors.ACCESS_PENDING
+          ? "Approval pending"
+          : "Portal access denied",
+        "Your account is signed in but the server has not granted portal access. Contact your administrator.",
       );
     } else {
       showStatus("Unable to check access", authErrorMessage(error));
@@ -154,12 +236,18 @@ initializeSiteAuth((user) => {
     currentUser = undefined;
     identity = undefined;
     hideProtected(true);
-    location.replace("/login/");
+    session?.stop();
+    if (session?.ended) return;
+    location.replace(
+      loginPath(location.pathname + location.search + location.hash, language),
+    );
     return;
   }
+  session?.stop();
+  session = watchSession({ clear: clearSession });
   void loadDashboard(user);
-}).catch(
-  (error) => showStatus("Unable to sign in", authErrorMessage(error), false)
+}).catch((error) =>
+  showStatus("Unable to sign in", authErrorMessage(error), false),
 );
 $("#sign-out").addEventListener("click", async () => {
   ++generation;
@@ -167,8 +255,7 @@ $("#sign-out").addEventListener("click", async () => {
   identity = undefined;
   $("#sign-out").disabled = true;
   try {
-    await signOut();
-    location.replace("/login/");
+    await session.endSession();
   } catch (error) {
     $("#sign-out").disabled = false;
     showStatus("Unable to sign out", authErrorMessage(error));
@@ -180,7 +267,10 @@ $("#refresh-access").addEventListener("click", () => {
   }
 });
 $("#optional-enrollment").addEventListener("click", () => {
-  if (identity?.role !== Roles.USER || portalState(identity) !== PortalStates.APPROVED) {
+  if (
+    identity?.role !== Roles.USER ||
+    portalState(identity) !== PortalStates.APPROVED
+  ) {
     return;
   }
   clearSecret();
@@ -205,7 +295,8 @@ $("#start-enrollment").addEventListener("click", async () => {
   const user = currentUser;
   const requestGeneration = generation;
   $("#start-enrollment").disabled = true;
-  $("#enrollment-status").textContent = "Confirm your identity in the provider window...";
+  $("#enrollment-status").textContent =
+    "Confirm your identity in the provider window...";
   try {
     await reauthenticate(user, requestMfaChallenge);
     if (requestGeneration !== generation) {
@@ -229,10 +320,17 @@ $("#start-enrollment").addEventListener("click", async () => {
     qr.make();
     $("#totp-qr").src = qr.createDataURL(5, 20);
     $("#totp-secret").value = enrollmentSecret.secretKey;
-    $("#totp-settings").textContent = "Time-based code - " + enrollmentSecret.codeLength + " digits - " + enrollmentSecret.codeIntervalSeconds + " seconds - " + enrollmentSecret.hashingAlgorithm;
+    $("#totp-settings").textContent =
+      "Time-based code - " +
+      enrollmentSecret.codeLength +
+      " digits - " +
+      enrollmentSecret.codeIntervalSeconds +
+      " seconds - " +
+      enrollmentSecret.hashingAlgorithm;
     $("#totp-setup").hidden = false;
     $("#start-enrollment").hidden = true;
-    $("#enrollment-status").textContent = "Enter the current code to confirm setup.";
+    $("#enrollment-status").textContent =
+      "Enter the current code to confirm setup.";
     $("#enrollment-form input").focus();
   } catch (error) {
     if (requestGeneration === generation) {
@@ -259,7 +357,7 @@ $("#enrollment-form").addEventListener("submit", async (event) => {
     await finishTotpEnrollment(
       user,
       enrollmentSecret,
-      event.currentTarget.elements.namedItem("code").value.trim()
+      event.currentTarget.elements.namedItem("code").value.trim(),
     );
     clearSecret();
     if (requestGeneration === generation) {
@@ -282,7 +380,8 @@ $("#verify-session").addEventListener("click", async () => {
   const user = currentUser;
   const requestGeneration = generation;
   $("#verify-session").disabled = true;
-  $("#verification-status").textContent = "Confirm sign-in and enter your authenticator code...";
+  $("#verification-status").textContent =
+    "Confirm sign-in and enter your authenticator code...";
   try {
     await reauthenticate(user, requestMfaChallenge);
     await user.getIdToken(true);
@@ -307,7 +406,11 @@ $("#approval-form").addEventListener("submit", async (event) => {
   const email = form.elements.namedItem("email").value.trim().toLowerCase();
   const action = form.elements.namedItem("action").value;
   const role = form.elements.namedItem("role").value;
-  const signature = JSON.stringify([email, action, action === "approve" ? role : null]);
+  const signature = JSON.stringify([
+    email,
+    action,
+    action === "approve" ? role : null,
+  ]);
   if (!approvalAttempt || approvalAttempt.signature !== signature) {
     approvalAttempt = { signature, key: crypto.randomUUID() };
   }
@@ -327,20 +430,32 @@ $("#approval-form").addEventListener("submit", async (event) => {
       return;
     }
     if (action === "delete") {
+      await reauthenticate(user, requestMfaChallenge);
+      await user.getIdToken(true);
+      if (requestGeneration !== generation) return;
       await deletePortalAccess(user, email, approvalAttempt.key);
     } else {
-      await changePortalAccess(user, {
-        email,
-        status: action === "block" ? "blocked" : "active",
-        ...(action === "approve" ? { role } : {}),
-      }, approvalAttempt.key);
+      await changePortalAccess(
+        user,
+        {
+          email,
+          status: action === "block" ? "blocked" : "active",
+          ...(action === "approve" ? { role } : {}),
+        },
+        approvalAttempt.key,
+      );
     }
     if (requestGeneration !== generation) {
       return;
     }
-    $("#approval-status").textContent = action === "delete" ? "Portal access deleted for " + email + "." :
-      action === "block" ? "Portal access blocked for " + email + "." :
-      "Access approved for " + email + ". They can now sign in with that verified email.";
+    $("#approval-status").textContent =
+      action === "delete"
+        ? "Portal access deleted for " + email + "."
+        : action === "block"
+          ? "Portal access blocked for " + email + "."
+          : "Access approved for " +
+            email +
+            ". They can now sign in with that verified email.";
     approvalAttempt = undefined;
     form.reset();
     updateAccessAction();
@@ -349,7 +464,11 @@ $("#approval-form").addEventListener("submit", async (event) => {
       return;
     }
     $("#approval-status").textContent = authErrorMessage(error);
-    if (error.status === HttpStatus.UNAUTHORIZED || error.status === HttpStatus.FORBIDDEN) {
+    if (
+      error.status === HttpStatus.UNAUTHORIZED ||
+      (error.status === HttpStatus.FORBIDDEN &&
+        error.code !== "SELF_ACCESS_PROTECTED")
+    ) {
       await loadDashboard(user);
     }
   } finally {
@@ -367,7 +486,9 @@ window.addEventListener("host:totp-required", () => {
   if (!identity.mfa.enrolled) showEnrollment(false);
   else $("#mfa-verification").hidden = false;
 });
-$("#approval-form").elements.namedItem("action").addEventListener("change", updateAccessAction);
+$("#approval-form")
+  .elements.namedItem("action")
+  .addEventListener("change", updateAccessAction);
 window.addEventListener("focus", () => {
   if (currentUser && !actionBusy && !enrollmentSecret) {
     void loadDashboard(currentUser);

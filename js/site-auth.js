@@ -100,7 +100,7 @@ export async function finishTotpEnrollment(user, secret, code) {
     secret,
     code
   );
-  await authApi.multiFactor(user).enroll(assertion, "WIFIGATE Host authenticator");
+  await authApi.multiFactor(user).enroll(assertion, "WIFIGATE authenticator");
   await user.getIdToken(true);
 }
 export async function signOut() {

@@ -1,0 +1,671 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { createServer } from "node:http";
+import { readFile, stat } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { chromium } from "playwright-core";
+
+const root = fileURLToPath(new URL("../", import.meta.url));
+
+function fixtureProfile(state) {
+  const host =
+    state.host === "active" && state.admin && !state.verified
+      ? "mfa-required"
+      : state.host;
+  return {
+    user: {
+      uid: "fixture-user",
+      email: "fixture@example.test",
+      displayName: "Fixture User",
+      emailVerified: true,
+    },
+    mfa: { enrolled: state.enrolled, verified: state.verified },
+    products: {
+      host: { state: host },
+      pay: { state: state.pay },
+      manager: { state: state.manager },
+    },
+  };
+}
+
+async function scenario(browser, options = {}) {
+  const state = {
+    signedIn: true,
+    enrolled: false,
+    verified: false,
+    admin: false,
+    host: "active",
+    pay: "no-plan",
+    manager: "pending",
+    ...options,
+  };
+  const context = await browser.newContext({
+    viewport: options.mobile
+      ? { width: 390, height: 844 }
+      : { width: 1440, height: 950 },
+  });
+  const calls = [];
+  const errors = [];
+  await context.exposeBinding("authFixtureEvent", (_, event) => {
+    if (event === "signin") state.signedIn = true;
+    if (event === "signout") state.signedIn = false;
+    if (event === "enroll") state.enrolled = true;
+    if (event === "verify") state.verified = true;
+    calls.push(event);
+  });
+  await context.route(
+    "https://www.gstatic.com/firebasejs/**/firebase-app.js",
+    (route) =>
+      route.fulfill({
+        contentType: "application/javascript",
+        body: "export const initializeApp = value => value;",
+      }),
+  );
+  await context.route(
+    "https://www.gstatic.com/firebasejs/**/firebase-auth.js",
+    (route) =>
+      route.fulfill({
+        contentType: "application/javascript",
+        body: `
+      let signedIn = ${JSON.stringify(state.signedIn)};
+      let enrolled = ${JSON.stringify(state.enrolled)};
+      let observer;
+      const user = { uid: "fixture-user", email: "fixture@example.test", emailVerified: true,
+        getIdToken: async () => "isolated-token",
+        getIdTokenResult: async () => ({claims: {firebase: {sign_in_provider: "google.com"}}}) };
+      export const getAuth = () => ({});
+      export const connectAuthEmulator = () => {};
+      export const browserSessionPersistence = {};
+      export const setPersistence = async () => {};
+      export const onAuthStateChanged = (_, callback) => { observer = callback; setTimeout(() => callback(signedIn ? user : null), 0); return () => {}; };
+      export const GoogleAuthProvider = function () { this.setCustomParameters = () => {}; };
+      export const OAuthProvider = function () { this.addScope = () => {}; };
+      export const signInWithPopup = async () => {
+        if (${JSON.stringify(Boolean(state.popupBlocked))}) throw Object.assign(new Error(), {code: "auth/popup-blocked"});
+        if (enrolled) throw Object.assign(new Error(), {code: "auth/multi-factor-auth-required"});
+        signedIn = true; await window.authFixtureEvent("signin"); observer?.(user); return { user };
+      };
+      export const getRedirectResult = async () => null;
+      export const signInWithRedirect = async () => { await window.authFixtureEvent("redirect"); };
+      export const signOut = async () => { signedIn = false; await window.authFixtureEvent("signout"); observer?.(null); };
+      export const reauthenticateWithPopup = async () => {
+        await window.authFixtureEvent("reauth");
+        if (enrolled) throw Object.assign(new Error(), {code: "auth/multi-factor-auth-required"});
+        return { user };
+      };
+      export const getMultiFactorResolver = () => ({
+        hints: [{factorId: "totp", uid: "test-factor", displayName: "Authenticator"}],
+        resolveSignIn: async ({code}) => {
+          if (code !== "123456") throw Object.assign(new Error(), {code: "auth/invalid-verification-code"});
+          await window.authFixtureEvent("verify");
+          if (!signedIn) { signedIn = true; await window.authFixtureEvent("signin"); observer?.(user); }
+          return { user };
+        }
+      });
+      export const multiFactor = () => ({getSession: async () => ({}), enroll: async ({code}) => {
+        if (code !== "123456") throw Object.assign(new Error(), {code: "auth/invalid-verification-code"});
+        enrolled = true; await window.authFixtureEvent("enroll");
+      }});
+      export const TotpMultiFactorGenerator = {
+        assertionForSignIn: (_, code) => ({code}), assertionForEnrollment: (_, code) => ({code}),
+        generateSecret: async () => ({ secretKey: "JBSWY3DPEHPK3PXP", generateQrCodeUrl: () => "otpauth://totp/Fixture?secret=JBSWY3DPEHPK3PXP" })
+      };
+    `,
+      }),
+  );
+  await context.route("**/api/v1/**", async (route) => {
+    const request = route.request();
+    const url = new URL(request.url());
+    calls.push({ method: request.method(), path: url.pathname });
+    if (url.pathname === "/api/v1/platform/me") {
+      if (state.unavailable)
+        return route.fulfill({
+          status: 503,
+          json: { error: { code: "AUTH_UNAVAILABLE" } },
+        });
+      return route.fulfill({ json: fixtureProfile(state) });
+    }
+    if (state.deniedStatus)
+      return route.fulfill({
+        status: state.deniedStatus,
+        json: { error: { code: state.deniedCode ?? "PORTAL_ACCESS_DENIED" } },
+      });
+    if (url.pathname === "/api/v1/users/me") {
+      return route.fulfill({
+        json: {
+          user: fixtureProfile(state).user,
+          role: state.admin ? "admin" : "user",
+          access: { state: "active" },
+          mfa: {
+            required: state.admin,
+            enrolled: state.enrolled,
+            verified: state.verified,
+          },
+        },
+      });
+    }
+    if (url.pathname === "/api/v1/organizations")
+      return route.fulfill({ json: { organizations: [], nextCursor: null } });
+    return route.fulfill({ json: { items: [], nextCursor: null } });
+  });
+  const page = await context.newPage();
+  page.on("pageerror", (error) => errors.push(error.message));
+  return { state, context, page, calls, errors };
+}
+
+test("shared login, product isolation, MFA, safe redirects and session cleanup", async (t) => {
+  const server = createServer(async (request, response) => {
+    try {
+      let file = path.resolve(
+        root,
+        "." + new URL(request.url, "http://localhost").pathname,
+      );
+      if (!file.startsWith(root)) {
+        response.writeHead(403).end();
+        return;
+      }
+      if ((await stat(file)).isDirectory())
+        file = path.join(file, "index.html");
+      response.setHeader(
+        "Content-Type",
+        file.endsWith(".js")
+          ? "application/javascript"
+          : file.endsWith(".css")
+            ? "text/css"
+            : file.endsWith(".html")
+              ? "text/html; charset=utf-8"
+              : "application/octet-stream",
+      );
+      response.end(await readFile(file));
+    } catch {
+      response.writeHead(404).end();
+    }
+  });
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+  t.after(() => new Promise((resolve) => server.close(resolve)));
+  const browser = await chromium.launch({
+    channel: process.env.WIFIGATE_BROWSER_CHANNEL ?? "chrome",
+    headless: true,
+  });
+  t.after(() => browser.close());
+  const origin = `http://127.0.0.1:${server.address().port}`;
+
+  await t.test(
+    "EN and Hebrew mobile picker keep Host, Pay, Manager order and use only platform GET",
+    async () => {
+      for (const mobile of [false, true]) {
+        const fixture = await scenario(browser, {
+          mobile,
+          signedIn: false,
+          manager: "unavailable",
+        });
+        await fixture.page.goto(origin + (mobile ? "/he/login/" : "/login/"));
+        await fixture.page.locator('[data-provider="google"]').click();
+        await fixture.page.locator(".product-tile").first().waitFor();
+        assert.deepEqual(
+          await fixture.page
+            .locator(".product-tile")
+            .evaluateAll((tiles) => tiles.map((tile) => tile.dataset.product)),
+          ["host", "pay", "manager"],
+        );
+        const positions = await fixture.page
+          .locator(".product-tile")
+          .evaluateAll((tiles) =>
+            tiles.map((tile) => tile.getBoundingClientRect().left),
+          );
+        assert.ok(positions[0] < positions[1] && positions[1] < positions[2]);
+        assert.equal(
+          await fixture.page.locator("html").getAttribute("dir"),
+          mobile ? "rtl" : "ltr",
+        );
+        assert.equal(
+          await fixture.page.evaluate(
+            () => document.documentElement.scrollWidth <= innerWidth,
+          ),
+          true,
+        );
+        assert.equal(
+          await fixture.page
+            .locator('[data-product="host"] a')
+            .getAttribute("href"),
+          mobile ? "/dashboard/host/?lang=he" : "/dashboard/host/",
+        );
+        assert.equal(
+          fixture.calls.filter((call) => call.path === "/api/v1/users/me")
+            .length,
+          0,
+        );
+        assert.equal(
+          fixture.calls.filter((call) => call.method && call.method !== "GET")
+            .length,
+          0,
+        );
+        if (process.env.WIFIGATE_SCREENSHOT_DIR) {
+          await fixture.page.screenshot({
+            path: path.join(
+              process.env.WIFIGATE_SCREENSHOT_DIR,
+              `platform-${mobile ? "he-mobile" : "en-desktop"}.png`,
+            ),
+            fullPage: true,
+          });
+        }
+        assert.deepEqual(fixture.errors, []);
+        await fixture.context.close();
+      }
+    },
+  );
+
+  await t.test(
+    "all no-plan tiles do not create access and platform failure retains authentication",
+    async () => {
+      const fixture = await scenario(browser, {
+        host: "no-plan",
+        pay: "no-plan",
+        manager: "no-plan",
+      });
+      await fixture.page.goto(origin + "/dashboard/");
+      await fixture.page
+        .locator('.product-tile[data-state="no-plan"]')
+        .first()
+        .waitFor();
+      assert.equal(
+        await fixture.page
+          .locator('.product-tile[data-state="no-plan"]')
+          .count(),
+        3,
+      );
+      fixture.state.unavailable = true;
+      await fixture.page.locator("#platform-retry").click();
+      await fixture.page
+        .getByText("Unable to check access right now. Please try again.", {
+          exact: true,
+        })
+        .waitFor();
+      assert.equal(
+        await fixture.page.locator("#product-grid").isVisible(),
+        false,
+      );
+      assert.equal(fixture.calls.includes("signout"), false);
+      fixture.state.unavailable = false;
+      await fixture.page.locator("#platform-retry").click();
+      await fixture.page.locator(".product-tile").first().waitFor();
+      await fixture.context.close();
+    },
+  );
+
+  await t.test(
+    "deep links require active product and discard external next",
+    async () => {
+      const fixture = await scenario(browser);
+      await fixture.page.goto(
+        origin + "/login/?next=https%3A%2F%2Foutside.example",
+      );
+      await fixture.page.waitForURL(origin + "/dashboard/");
+      await fixture.page.goto(origin + "/login/?next=%2Fdashboard%2Fpay%2F");
+      await fixture.page.waitForURL(origin + "/dashboard/");
+      fixture.state.pay = "active";
+      await fixture.page.goto(
+        origin + "/login/?next=%2Fdashboard%2Fpay%2Ftransactions%2F1",
+      );
+      await fixture.page.waitForURL(origin + "/dashboard/");
+      await fixture.page.goto(
+        origin + "/login/?next=%2Fdashboard%2Fpay%2F%3Fview%3Dtransactions",
+      );
+      await fixture.page.waitForURL(
+        origin + "/dashboard/pay/?view=transactions",
+      );
+      await fixture.page
+        .locator("#product-workspace")
+        .waitFor({ state: "visible" });
+      assert.equal(
+        await fixture.page
+          .locator('#product-switcher option[value="manager"]')
+          .evaluate((option) => option.disabled),
+        true,
+      );
+      assert.deepEqual(fixture.errors, []);
+      await fixture.context.close();
+    },
+  );
+
+  await t.test(
+    "admin enrolls and verifies TOTP from picker before Host calls",
+    async () => {
+      const fixture = await scenario(browser, { admin: true });
+      await fixture.page.goto(origin + "/dashboard/");
+      await fixture.page.locator('[data-state="mfa-required"]').waitFor();
+      assert.equal(
+        fixture.calls.some((call) => call.path === "/api/v1/users/me"),
+        false,
+      );
+      await fixture.page.locator("#start-enrollment").click();
+      await fixture.page.locator("#totp-setup").waitFor({ state: "visible" });
+      await fixture.page.locator("#enrollment-form input").fill("000000");
+      await fixture.page.locator("#enrollment-form button").click();
+      await fixture.page
+        .getByText("That code is incorrect or expired.", { exact: true })
+        .waitFor();
+      await fixture.page.locator("#enrollment-form input").fill("123456");
+      await fixture.page.locator("#enrollment-form button").click();
+      await fixture.page
+        .locator("#verify-session")
+        .waitFor({ state: "visible" });
+      assert.equal(await fixture.page.locator("#totp-secret").inputValue(), "");
+      await fixture.page.locator("#verify-session").click();
+      await fixture.page
+        .locator('#mfa-challenge input[name="code"]')
+        .fill("123456");
+      await fixture.page
+        .locator('#mfa-challenge button[type="submit"]')
+        .click();
+      await fixture.page
+        .locator('[data-product="host"][data-state="active"]')
+        .waitFor();
+      await fixture.page.locator('[data-product="host"] a').click();
+      await fixture.page
+        .locator("#dashboard-content")
+        .waitFor({ state: "visible" });
+      assert.deepEqual(fixture.errors, []);
+      await fixture.context.close();
+    },
+  );
+
+  await t.test(
+    "recent-authentication errors keep the recovery message in the current workspace",
+    async () => {
+      const fixture = await scenario(browser);
+      await fixture.page.goto(origin + "/dashboard/host/");
+      await fixture.page
+        .locator("#dashboard-content")
+        .waitFor({ state: "visible" });
+      await fixture.page.waitForFunction(
+        () =>
+          document.querySelector("#host-management").dataset.loading ===
+          "false",
+      );
+      await fixture.page.evaluate(() => {
+        document.querySelector("#host-management").dataset.organizationId =
+          "current";
+      });
+      fixture.state.deniedStatus = 403;
+      const stepUpCodes = [
+        "RECENT_REAUTH_REQUIRED",
+        "RECENT_AUTH_REQUIRED",
+        "RECENT_TOTP_REQUIRED",
+      ];
+      for (const code of stepUpCodes) {
+        fixture.state.deniedCode = code;
+        const recovery = await fixture.page.evaluate(async () => {
+          const { portalRequest } = await import("/js/api/index.js");
+          const { authErrorMessage } = await import("/js/host-auth-errors.js");
+          try {
+            await portalRequest(
+              { getIdToken: async () => "isolated-token" },
+              "/api/v1/organizations/current/client-api-keys/key/reveal",
+              "POST",
+              {},
+              "step-up-request",
+            );
+          } catch (error) {
+            const message = document.createElement("p");
+            message.id = "step-up-recovery";
+            message.textContent = authErrorMessage(error);
+            document.querySelector("#step-up-recovery")?.remove();
+            document.querySelector("#dashboard-content").append(message);
+            return error.code;
+          }
+        });
+        assert.equal(recovery, code);
+        assert.equal(fixture.page.url(), origin + "/dashboard/host/");
+        assert.match(
+          await fixture.page.locator("#step-up-recovery").textContent(),
+          /Sign in again/,
+        );
+        assert.equal(
+          await fixture.page.locator("#dashboard-content").isVisible(),
+          true,
+        );
+      }
+      await fixture.context.close();
+    },
+  );
+
+  await t.test(
+    "revoked support access clears diagnostics without leaving the workspace",
+    async () => {
+      const fixture = await scenario(browser, {
+        admin: true,
+        enrolled: true,
+        verified: true,
+      });
+      let revoked = false;
+      await fixture.context.route(
+        "**/api/v1/organizations/support-org/support/grants/support-grant/diagnostics",
+        (route) =>
+          revoked
+            ? route.fulfill({
+                status: 403,
+                json: { error: { code: "SUPPORT_ACCESS_DENIED" } },
+              })
+            : route.fulfill({
+                json: {
+                  diagnostics: {
+                    expiresAt: "2030-01-01T00:00:00.000Z",
+                    sources: { jobs: { records: 4, statuses: { queued: 4 } } },
+                  },
+                },
+              }),
+      );
+      await fixture.page.goto(origin + "/dashboard/host/");
+      await fixture.page.waitForFunction(
+        () =>
+          document.querySelector("#host-management")?.dataset.loading ===
+          "false",
+      );
+      await fixture.page.evaluate(() => {
+        document.querySelector("#host-management").dataset.organizationId =
+          "support-org";
+      });
+      await fixture.page
+        .getByRole("button", { name: "Support", exact: true })
+        .click();
+      const support = fixture.page.getByRole("region", {
+        name: "Approved support diagnostics",
+      });
+      await support.getByLabel("Support organization ID").fill("support-org");
+      await support.getByLabel("Support approval ID").fill("support-grant");
+      await support
+        .getByRole("button", { name: "Read approved support diagnostics" })
+        .click();
+      await support.getByText(/jobs.*records 4.*queued: 4/).waitFor();
+      revoked = true;
+      await support
+        .getByRole("button", { name: "Read approved support diagnostics" })
+        .click();
+      await support
+        .getByText("This support approval is unavailable, expired or revoked.")
+        .waitFor();
+      assert.equal(await support.getByText(/jobs.*records 4/).count(), 0);
+      assert.equal(fixture.page.url(), origin + "/dashboard/host/");
+      assert.equal(
+        await fixture.page.locator("#dashboard-content").isVisible(),
+        true,
+      );
+      assert.deepEqual(fixture.errors, []);
+      await fixture.context.close();
+    },
+  );
+
+  await t.test(
+    "a late denial from an old organization request does not clear the new workspace",
+    async () => {
+      const fixture = await scenario(browser);
+      await fixture.page.goto(origin + "/dashboard/host/");
+      await fixture.page.waitForFunction(
+        () =>
+          document.querySelector("#host-management")?.dataset.loading ===
+          "false",
+      );
+      let resolveRequest;
+      const pendingRequest = new Promise((resolve) => {
+        resolveRequest = resolve;
+      });
+      await fixture.context.route(
+        "**/api/v1/organizations/org-a/rooms",
+        (route) => resolveRequest(route),
+      );
+      await fixture.page.evaluate(() => {
+        const workspace = document.querySelector("#host-management");
+        workspace.dataset.organizationId = "org-a";
+        workspace.dataset.requestGeneration = "1";
+        void import("/js/api/index.js")
+          .then(({ portalRequest }) => {
+            return portalRequest(
+              { getIdToken: async () => "isolated-token" },
+              "/api/v1/organizations/org-a/rooms",
+            );
+          })
+          .catch((error) => {
+            window.oldOrganizationError = error.code;
+          });
+      });
+      const delayed = await pendingRequest;
+      await fixture.page.evaluate(() => {
+        const workspace = document.querySelector("#host-management");
+        workspace.dataset.organizationId = "org-b";
+        workspace.dataset.requestGeneration = "2";
+        workspace.textContent = "Current organization B";
+      });
+      await delayed.fulfill({
+        status: 403,
+        json: { error: { code: "TENANT_ACCESS_DENIED" } },
+      });
+      await fixture.page.waitForFunction(
+        () => window.oldOrganizationError === "TENANT_ACCESS_DENIED",
+      );
+      assert.equal(fixture.page.url(), origin + "/dashboard/host/");
+      assert.equal(
+        await fixture.page.locator("#host-management").textContent(),
+        "Current organization B",
+      );
+      assert.equal(
+        await fixture.page.locator("#dashboard-content").isVisible(),
+        true,
+      );
+      await fixture.context.close();
+    },
+  );
+
+  await t.test(
+    "a supported signed-out link preserves its query and fragment through sign-in",
+    async () => {
+      const fixture = await scenario(browser, {
+        signedIn: false,
+        pay: "active",
+      });
+      await fixture.page.goto(
+        origin + "/dashboard/pay/?view=transactions#details",
+      );
+      await fixture.page.waitForURL((url) => url.pathname === "/login/");
+      const next = new URL(fixture.page.url()).searchParams.get("next");
+      assert.equal(next, "/dashboard/pay/?view=transactions#details");
+      await fixture.page.locator('[data-provider="google"]').click();
+      await fixture.page.waitForURL(
+        origin + "/dashboard/pay/?view=transactions#details",
+      );
+      await fixture.page
+        .locator("#product-workspace")
+        .waitFor({ state: "visible" });
+      await fixture.context.close();
+    },
+  );
+
+  await t.test(
+    "a restored login session gets a new idle watcher after sign-out and sign-in",
+    async () => {
+      const fixture = await scenario(browser, { unavailable: true });
+      await fixture.page.clock.install();
+      await fixture.page.goto(origin + "/login/");
+      await fixture.page.locator("#retry-login").waitFor({ state: "visible" });
+      await fixture.page.evaluate(async () => {
+        const { signOut } = await import("/js/site-auth.js");
+        await signOut();
+      });
+      await fixture.page.locator('[data-provider="google"]').click();
+      await fixture.page.locator("#retry-login").waitFor({ state: "visible" });
+      await fixture.page.clock.fastForward(30 * 60 * 1000 + 1);
+      await fixture.page.waitForURL(origin + "/login/");
+      await fixture.page.waitForFunction(
+        () => !document.querySelector('[data-provider="google"]').disabled,
+      );
+      assert.equal(
+        fixture.calls.filter((call) => call === "signout").length,
+        2,
+      );
+      await fixture.context.close();
+    },
+  );
+
+  await t.test(
+    "blocked Host clears workspace on403 while other product access remains",
+    async () => {
+      const fixture = await scenario(browser, { pay: "active" });
+      await fixture.page.goto(origin + "/dashboard/host/");
+      await fixture.page
+        .locator("#dashboard-content")
+        .waitFor({ state: "visible" });
+      fixture.state.host = "blocked";
+      fixture.state.deniedStatus = 403;
+      await fixture.page.evaluate(() => {
+        void import("/js/api/index.js")
+          .then(({ getProfile }) =>
+            getProfile({ getIdToken: async () => "isolated-token" }),
+          )
+          .catch(() => {});
+      });
+      await fixture.page.waitForURL(origin + "/dashboard/");
+      await fixture.page
+        .locator('[data-product="host"][data-state="blocked"]')
+        .waitFor();
+      assert.equal(
+        await fixture.page
+          .locator('[data-product="pay"][data-state="active"] a')
+          .count(),
+        1,
+      );
+      assert.equal(await fixture.page.locator("#host-management").count(), 0);
+      await fixture.context.close();
+    },
+  );
+
+  await t.test(
+    "thirty idle minutes and401 both end the tab session",
+    async () => {
+      const idle = await scenario(browser);
+      await idle.page.clock.install();
+      await idle.page.goto(origin + "/dashboard/");
+      await idle.page.locator(".product-tile").first().waitFor();
+      await idle.page.clock.fastForward(30 * 60 * 1000 + 1);
+      await idle.page.waitForURL(origin + "/login/");
+      assert.ok(idle.calls.includes("signout"));
+      await idle.context.close();
+      const expired = await scenario(browser);
+      await expired.page.goto(origin + "/dashboard/host/");
+      await expired.page
+        .locator("#dashboard-content")
+        .waitFor({ state: "visible" });
+      expired.state.deniedStatus = 401;
+      await expired.page.evaluate(() => {
+        void import("/js/api/index.js")
+          .then(({ getProfile }) =>
+            getProfile({ getIdToken: async () => "isolated-token" }),
+          )
+          .catch(() => {});
+      });
+      await expired.page.waitForURL(origin + "/login/");
+      assert.ok(expired.calls.includes("signout"));
+      await expired.context.close();
+    },
+  );
+});
