@@ -14,25 +14,25 @@ export default {
   "niches": {
     "hotels-airbnb": {
       "label": "Oteller, Airbnb ve Kiralık Daireler",
-      "title": "Gelen misafir, kapıyı birinin açmasını beklemek zorunda kalmamalı!",
-      "heroLead": "Hazırlanması gereken bir kart, teslim edilmesi gereken bir anahtar ya da misafirden misafire geçen bir anahtar kutusu şifresi, her varışı elle koordinasyona dönüştürür. Her misafire check-in'de açılan ve check-out'ta kapanan kişisel bir yetki verin.",
+      "title": "Gelen misafir, kapıyı açacak birini beklememeli!",
+      "heroLead": "Basılması gereken bir kart, teslim edilmesi gereken bir anahtar ya da misafirden misafire geçen bir anahtar kutusu şifresi, her gelişi manuel bir organizasyona dönüştürür. Her misafire check-in'de açılan ve check-out'ta kapanan kişisel bir yetki verin.",
       "highlights": [
         {
           "icon": "calendar",
           "title": "Check-in'de açılır, check-out'ta kapanır",
-          "text": "Kimsenin erişimi geri almayı hatırlaması gerekmez. Yetki, belirlediğiniz varış saatinde etkinleşir ve ayrılışta sona erer; ekipten kimse tesiste olmasa bile."
+          "text": "Erişimi iptal etmeyi kimsenin hatırlaması gerekmez. Yetki, belirlenen giriş saatinde etkinleşir ve çıkış saatinde sona erer; ekipten kimse tesiste olmasa bile."
         },
         {
           "icon": "invite",
           "title": "WIFIGATE Host rezervasyonu girişe bağlar",
-          "text": "WIFIGATE Host ile otel veya kiralık daire sisteminizde onaylanan bir rezervasyon, misafirin giriş yetkisini otomatik olarak oluşturur ve ona gönderir. Bilgi kopyalamak, kart hazırlamak ya da arada elle yapılacak bir adım yok.",
+          "text": "WIFIGATE Host ile otel veya kiralık daire sisteminizde onaylanan bir rezervasyon, misafirin giriş yetkisini otomatik olarak oluşturur ve ona gönderir. Bilgi kopyalama, kart basma ya da araya giren manuel bir adım yok.",
           "ctaLabel": "WIFIGATE Host'u keşfedin",
           "ctaHref": "/tr/automation/"
         },
         {
           "icon": "keyless",
-          "title": "Dağıtılacak kart yok, paylaşılacak anahtar kutusu yok",
-          "text": "Hazırlanacak bir şey yok, teslim edilecek bir şey yok, önceki misafirden kalan kart yok ve elden ele dolaşan anahtar kutusu şifresi yok. İçeri girmenin tek yolu misafirin telefonu."
+          "title": "Kart yok, anahtar kutusu yok",
+          "text": "Basılacak bir şey yok, teslim edilecek bir şey yok; önceki misafirde kalmış bir kart ya da elden ele dolaşan bir anahtar kutusu şifresi de yok. Girişin tek anahtarı misafirin telefonu."
         }
       ],
       "paragraph": "WIFIGATE; otellerin, kiralık dairelerin (Airbnb) ve tatil köylerinin misafirlerine doğrudan cep telefonundan rahat ve güvenli bir dijital giriş deneyimi sunmasını sağlar.\nManyetik kart basmak, fiziksel anahtar teslim etmek veya anahtar kutusu (Lockbox) kullanmak yerine geçiş kontrolü otomatik hale gelir.\nWIFIGATE Host ile rezervasyon sisteminizi doğrudan geçiş sistemine bağlayabilirsiniz.\nBu bağlantı sayesinde rezervasyon onaylandıktan sonra misafir kişisel bir giriş yetkisi alır.\nYetki tam check-in saatinde etkinleşir ve check-out'ta otomatik olarak sona erer; elle müdahale, anahtar teslimi veya resepsiyon ekibinin ya da ev sahiplerinin koordinasyonu gerekmez.",
@@ -40,13 +40,13 @@ export default {
         "Rezervasyon onaylandığında otomatik oluşturulan misafir erişimi",
         "WIFIGATE Host ile tam otomasyon desteği",
         "Konaklama tarih ve saatlerine göre geçici erişim",
-        "Oda kartı basma, teslim etme ve değiştirme ihtiyacında azalma",
+        "Daha az oda kartı basma, teslim etme ve değiştirme",
         "Personel, temizlik, bakım ve tedarikçiler için yetki yönetimi",
         "Misafirler için daha akıcı ve konforlu bir varış deneyimi",
         "Check-out saatinde otomatik olarak sona eren erişim",
         "Şeffaflık ve denetim için erişim geçmişi"
       ],
-      "seoTitle": "WIFIGATE | Otel, Airbnb ve Tatil Köyleri için Dijital Misafir Girişi",
+      "seoTitle": "WIFIGATE | Otel, Airbnb ve Tatil Köyü için Dijital Misafir Girişi",
       "seoDescription": "WIFIGATE Host ile otel, Airbnb ve tatil köylerinde dijital ve otomatik misafir girişi: rezervasyona özel kişisel yetkiler; anahtar, manyetik kart veya Lockbox yok.",
       "imageAlt": "Modern bir koridorda otel odasının kapısını telefonla açan misafirler",
       "faq": [
@@ -64,18 +64,18 @@ export default {
         },
         {
           "question": "Oteller ve kiralık daireler için WIFIGATE abonelik gerektirir mi?",
-          "answer": "WIFIGATE cihazının aylık aboneliği yoktur. Oteller ve kiralık daireler için rezervasyon otomasyonu olan WIFIGATE Host, abonelikle sunulan tek bölümdür."
+          "answer": "WIFIGATE cihazının aylık aboneliği yoktur. Oteller ve kiralık daireler için rezervasyon otomasyonu olan WIFIGATE Host, abonelikle sunulan tek hizmettir."
         }
       ]
     },
     "roller-shutters": {
       "label": "İşyeri ve Mağaza Kepenkleri",
-      "title": "Kepengin kumanda noktası işyerinizin dışında açıkta olmamalı!",
+      "title": "Kepenk kumandası işyerinizin dışında açıkta kalmamalı!",
       "heroLead": "Dışarıda duran ya da çalışanlar arasında elden ele geçen bir şalter, anahtar kutusu veya kumanda yanlış ellere geçebilir. Kontrolü işyerinizin korunaklı iç tarafına taşıyın ve kepengi her çalışana özel bir yetkiyle telefondan açın.",
       "highlights": [
         {
           "icon": "shutter",
-          "title": "Kontrol içeride, erişilemeyecek yerde",
+          "title": "Kontrol içeride, kimsenin ulaşamayacağı yerde",
           "text": "Dış duvardaki bir şalter veya anahtar kutusu, önünden geçen herkese açıktır. Açma işlemi telefondan yapıldığında kontrol noktası mağazanın içinde olabilir."
         },
         {
@@ -124,8 +124,8 @@ export default {
     },
     "electric-gates": {
       "label": "Otomatik Kapılar ve Otopark Bariyerleri",
-      "title": "Kapıyı açmak otomatik ödeme talimatıyla gelmemeli!",
-      "heroLead": "Kapıyı telefondan açan sistemler çoğu zaman her ay ödemeye devam ettiğiniz bir abonelikle gelir. Abonelik ücreti ve otomatik ödeme talimatı olmadan; kişisel yetkiler ve düzenli kullanıcılar için otomatik açılışla akıllı açmaya geçin.",
+      "title": "Kapı açmak için otomatik ödeme talimatına gerek yok!",
+      "heroLead": "Kapıyı telefondan açan sistemler çoğu zaman her ay hesabınızdan çekilmeye devam eden bir abonelikle gelir. Abonelik ücreti ve otomatik ödeme talimatı olmayan akıllı açmaya geçin: kişisel yetkiler ve düzenli kullanıcılar için otomatik açılış.",
       "highlights": [
         {
           "icon": "handsfree",
@@ -135,27 +135,27 @@ export default {
         {
           "icon": "clock",
           "title": "Tedarikçi veya misafir için geçici erişim",
-          "text": "Uygun olmayan bir saatte kapıyı açmanızı isteyen telefonlar yerine, yalnızca gerçekten ihtiyaç duyulan zaman aralığında geçerli olan ve ardından kendiliğinden kapanan bir yetki gönderin."
+          "text": "Olmadık saatlerde gelen “kapıyı açar mısınız?” telefonları yerine, yalnızca gerçekten gereken zaman aralığında geçerli olan ve ardından kendiliğinden kapanan bir yetki gönderin."
         },
         {
           "icon": "gate",
           "title": "Kararlılık, güvenilirlik ve gizlilik",
-          "text": "İsimler ve telefon numaraları, özellikle yapay zekâ çağında hassas bilgilerdir. WIFIGATE'te kullanıcı veritabanı cihazın kendisinde, şifreli ve internetten yalıtılmış olarak saklanır; günlük kullanım için kararlı ve güvenilir bir sistemle birlikte."
+          "text": "İsimler ve telefon numaraları, özellikle yapay zekâ çağında hassas bilgilerdir. WIFIGATE'te kullanıcı listesi cihazın kendisinde, şifreli ve internetten yalıtılmış olarak saklanır; sistem de her gün kararlı ve güvenilir şekilde çalışır."
         }
       ],
-      "paragraph": "Otomatik kapılardan ve otopark bariyerlerinden sakinler, çalışanlar, misafirler ve tedarikçiler yararlanır; ancak kumandaları, kodları ve kapı açma telefonlarını yönetmek kısa sürede yorucu bir işe dönüşür. WIFIGATE kapıyı telefondan açmanızı, kalıcı veya geçici erişim paylaşmanızı, düzenli kullanıcılar için otomatik açılıştan yararlanmanızı ve ihtiyaca göre zamanlanmış etkinlikler tanımlamanızı sağlar. Sistem güvenli, şifreli ve mahremiyete önem veren bir çalışma için tasarlanmıştır; aylık abonelik veya otomatik ödeme talimatı gerektirmez ve uygulamadan kontrolün yanında mevcut kumandaları kullanmaya devam edebilirsiniz.",
+      "paragraph": "Otomatik kapılardan ve otopark bariyerlerinden sakinler, çalışanlar, misafirler ve tedarikçiler yararlanır; ancak kumandaları, kodları ve kapı açma telefonlarını yönetmek kısa sürede yorucu bir işe dönüşür. WIFIGATE kapıyı telefondan açmanızı, kalıcı veya geçici erişim paylaşmanızı, düzenli kullanıcılar için otomatik açılıştan yararlanmanızı ve ihtiyaca göre zamanlanmış görevler tanımlamanızı sağlar. Sistem güvenli, şifreli ve gizliliği koruyan bir çalışma için tasarlanmıştır; aylık abonelik veya otomatik ödeme talimatı gerektirmez ve uygulamadan kontrolün yanında mevcut kumandaları kullanmaya devam edebilirsiniz.",
       "bullets": [
         "Otomatik kapıyı veya otopark bariyerini telefondan açma",
         "Aylık abonelik ve otomatik ödeme talimatı yok",
         "Misafirler, tedarikçiler ve çalışanlarla geçici erişim paylaşımı",
         "Düzenli kullanıcıların günlük girişleri için Auto Open",
-        "Gün ve saate göre açılış için zamanlanmış etkinlikler",
+        "Gün ve saate göre açılış için zamanlanmış görevler",
         "Uygulamadan veya mevcut kumandalarla kontrol",
         "Daha az fiziksel kumanda dağıtma ihtiyacı",
         "Denetim ve şeffaflık için açılış geçmişi"
       ],
-      "seoTitle": "Aboneliksiz Otomatik Kapı ve Otopark Bariyeri Kontrolü | WIFIGATE",
-      "seoDescription": "WIFIGATE, otomatik kapıları ve otopark bariyerlerini telefondan açar: Auto Open, zamanlanmış etkinlikler, mevcut kumandalar, yetki yönetimi; aylık abonelik yok.",
+      "seoTitle": "Aboneliksiz Otomatik Kapı ve Bariyer Kontrolü | WIFIGATE",
+      "seoDescription": "WIFIGATE, otomatik kapıları ve otopark bariyerlerini telefondan açar: Auto Open, zamanlanmış görevler, mevcut kumandalar, yetki yönetimi; abonelik ve otomatik ödeme yok.",
       "imageAlt": "Otopark bariyerini ve otomatik kapıyı telefonuyla açan sürücü",
       "faq": [
         {
@@ -164,7 +164,7 @@ export default {
         },
         {
           "question": "Kapının SIM karta veya internet bağlantısına ihtiyacı var mı?",
-          "answer": "Hayır. Telefon doğrudan WIFIGATE cihazıyla iletişim kurar; bu yüzden kapının SIM karta, internet paketine veya harici bir Wi‑Fi yönlendiricisine ihtiyacı yoktur."
+          "answer": "Hayır. Telefon doğrudan WIFIGATE cihazıyla iletişim kurar; bu yüzden kapının SIM karta, internet paketine veya harici bir Wi‑Fi modeme ihtiyacı yoktur."
         },
         {
           "question": "Mevcut kumandalarımı kullanmaya devam edebilir miyim?",
@@ -172,7 +172,7 @@ export default {
         },
         {
           "question": "Aylık bir ücret var mı?",
-          "answer": "Hayır. Cihaz ve kurulum için bir kez ödersiniz; aylık abonelik veya düzenli ödeme yoktur."
+          "answer": "Hayır. Cihaz ve kurulum için bir kez ödersiniz; aylık abonelik veya tekrarlayan ödeme yoktur."
         }
       ]
     },
@@ -193,7 +193,7 @@ export default {
         },
         {
           "icon": "phone",
-          "title": "Fiziksel araçlara daha az bağımlılık",
+          "title": "Fiziksel araçlara bağımlılığı azaltın",
           "text": "Her araç ve her kullanıcı için ayrı kumanda tutmak yerine zaten yanınızda olan telefonla açın. Satın alınacak, kodlanacak, teslim edilecek ve yönetilecek daha az kumanda."
         }
       ],
@@ -222,7 +222,7 @@ export default {
         },
         {
           "question": "Bir ustayı kumanda vermeden içeri alabilir miyim?",
-          "answer": "Evet. Kumanda veya kod vermeden, sizin seçtiğiniz zamanda sona eren geçici bir yetki gönderin."
+          "answer": "Evet. Kumanda veya kod vermeden, seçtiğiniz zamanda sona eren geçici bir yetki gönderebilirsiniz."
         },
         {
           "question": "WIFIGATE otopark için nerelerde kullanılabilir?",
@@ -232,12 +232,12 @@ export default {
     },
     "private-homes": {
       "label": "Müstakil Evler",
-      "title": "Müstakil evler herkese açık olmak için yapılmadı!",
-      "heroLead": "Kuryeye, teknisyene veya misafire verdiğiniz diyafon şifresi ziyaret bittikten çok sonra bile onlarda kalır ve sizin haberiniz olmadan başkalarına geçer. Herkese kişisel ve süreli bir giriş yetkisi verin; yetkisiz girişleri ve hırsızlık riskini azaltın.",
+      "title": "Müstakil eviniz herkese açık bir alan değil!",
+      "heroLead": "Kuryeye, teknisyene veya misafire verdiğiniz diafon şifresi ziyaret bittikten çok sonra bile onlarda kalır ve sizin haberiniz olmadan başkalarına geçer. Herkese kişisel ve süreli bir giriş yetkisi verin; yetkisiz girişleri ve hırsızlık riskini azaltın.",
       "highlights": [
         {
           "icon": "keyless",
-          "title": "Diyafon şifresi dolaşmaya devam ediyor",
+          "title": "Diafon şifresi dolaşmaya devam ediyor",
           "text": "Şifre kuryelere, teknisyenlere ve misafirlere, onlardan da sizin haberiniz olmadan başkalarına geçer. Yıllar geçtikçe tuş takımındaki dört aşınmış tuş, şifrenin hangi rakamlardan oluştuğunu kendiliğinden ele verir."
         },
         {
@@ -247,17 +247,17 @@ export default {
         },
         {
           "icon": "roster",
-          "title": "Tahmin yerine liste",
+          "title": "Tahmin değil, net bir liste",
           "text": "Ortak şifrenin kimlerde olduğunu gösteren bir liste yoktur. Onun yerine her yetkinin bir isme bağlı olduğu bir liste gelir; böylece eve kimin girebileceği her an bellidir."
         }
       ],
-      "paragraph": "Müstakil evlerde şifreli tuş takımları, anahtarlar ve kumandalar zamanla zayıf bir noktaya dönüşebilir. Tuş takımının tuşlarında aşınma veya izler oluşur, kumandalar kaybolur ya da elden ele dolaşır; şifre bazen kuryelere, servis personeline veya misafirlere verilir ve ihtiyaç ortadan kalktıktan çok sonra bile onlarda kalır. WIFIGATE girişi telefondan yönetmenizi, kalıcı şifreyi açık etmeden geçici misafir erişimi paylaşmanızı ve kilitleri, kodları veya kumandaları değiştirmeden yetkileri kolayca iptal etmenizi sağlar.",
+      "paragraph": "Müstakil evlerde şifreli tuş takımları, anahtarlar ve kumandalar zamanla zayıf bir noktaya dönüşebilir. Tuş takımının tuşlarında aşınma veya izler oluşur, kumandalar kaybolur ya da elden ele dolaşır; şifre bazen kuryelere, servis personeline veya misafirlere verilir ve ihtiyaç ortadan kalktıktan çok sonra bile onlarda kalır. WIFIGATE girişi telefondan yönetmenizi, sabit şifreyi paylaşmadan geçici misafir erişimi paylaşmanızı ve kilitleri, kodları veya kumandaları değiştirmeden yetkileri kolayca iptal etmenizi sağlar.",
       "bullets": [
         "Tuş takımı, anahtar ve kumandalara daha az bağımlılık",
         "Kuryeler, misafirler ve servis personeli için geçici erişim",
         "Telefondan kolayca yetki iptali",
         "Paylaşılan şifrelerden ve elden ele geçen kumandalardan doğan riskte azalma",
-        "Müstakil evdeki kapılar, girişler, otoparklar ve garajlar için uygun",
+        "Müstakil evlerde bahçe kapıları, kapılar, otoparklar ve garajlar için uygun",
         "Aile üyeleri ve düzenli kullanıcılar için basit yönetim",
         "Günlük girişte daha konforlu bir deneyim",
         "Kimin girebileceği üzerinde daha iyi mahremiyet ve kontrol"
@@ -272,11 +272,11 @@ export default {
         },
         {
           "question": "Bir kuryeye veya misafire tek seferlik erişim verebilir miyim?",
-          "answer": "Evet. Yalnızca seçtiğiniz süre boyunca çalışan, süresi sınırlı bir davet gönderin; kalıcı bir şifreyi açık etmenize gerek kalmaz."
+          "answer": "Evet. Yalnızca seçtiğiniz süre boyunca çalışan, süresi sınırlı bir davet gönderin; sabit bir şifreyi paylaşmanıza gerek kalmaz."
         },
         {
           "question": "WIFIGATE müstakil bir evde neleri açabilir?",
-          "answer": "Evdeki bahçe kapılarını, giriş kapılarını, otoparkı ve garaj kapılarını, hepsini tek bir uygulamadan."
+          "answer": "Bahçe kapısını, giriş kapılarını, otopark girişini ve garaj kapısını; hepsini tek bir uygulamadan."
         },
         {
           "question": "Birinin erişimini nasıl kaldırırım?",
@@ -286,7 +286,7 @@ export default {
     },
     "residential-buildings": {
       "label": "Apartmanlar ve Siteler",
-      "title": "Apartmanlar herkese açık olmak için yapılmadı!",
+      "title": "Apartmanınız herkese açık bir alan değil!",
       "heroLead": "Kuryeler, misafirler ve servis personeli arasında dolaşan sabit bir şifre yanlış ellere geçebilir. Herkese kişisel, süresi sınırlı bir giriş yetkisi verin; yetkisiz girişleri ve hırsızlık riskini azaltın.",
       "highlights": [
         {
@@ -297,7 +297,7 @@ export default {
         {
           "icon": "invite",
           "title": "Tek dokunuşla yol tarifi",
-          "text": "Adres, kat, daire, bahçe kapısı şifresi ve lobi şifresi. Aynı sırayı her misafire, her kuryeye ve her ustaya yeniden yazdırırsınız. WIFIGATE ile hepsi tek bir dokunuşa iner ve ziyaretçi kapıya kendi yolunu bulur."
+          "text": "Adres, kat, daire, bahçe kapısı şifresi ve lobi şifresi. Aynı bilgileri her misafire, her kuryeye ve her ustaya baştan anlatırsınız. WIFIGATE ile hepsi tek dokunuşa sığar ve misafir kapıya kadar yolunu kendisi bulur."
         },
         {
           "icon": "handsfree",
@@ -326,7 +326,7 @@ export default {
         },
         {
           "question": "Misafirler ve kuryeler nasıl girer?",
-          "answer": "Bir sakin, kalıcı bir şifreyi açık etmeden, yol tarifini tek dokunuşla içeren süreli bir misafir daveti gönderir."
+          "answer": "Bir sakin, sabit bir şifreyi paylaşmadan, yol tarifini tek dokunuşla içeren süreli bir misafir daveti gönderir."
         },
         {
           "question": "Apartman yönetimi kimin erişimi olduğunu görebilir mi?",
@@ -345,25 +345,25 @@ export default {
       "highlights": [
         {
           "icon": "users",
-          "title": "Biri gelir, biri gider",
-          "text": "İşe giriş ve işten çıkış, kart verme, kart geri alma ve kilit değiştirme turu değil; listede tek bir işlemdir. Yetki, belirlediğiniz tarihlerde açılır ve kapanır."
+          "title": "Çalışan gelir, çalışan gider",
+          "text": "İşe giriş ve işten çıkış; kart verme, kart toplama ve kilit değiştirme telaşı değil, listede tek bir işlemdir. Yetki, belirlediğiniz tarihlerde açılır ve kapanır."
         },
         {
           "icon": "invite",
           "title": "Tek dokunuşla iş görüşmesi daveti",
-          "text": "Adaya; doğrulanmış ve güvenli bir açma yetkisi veren, yol tarifi ve ayrıntıları içeren bir iş görüşmesi daveti gönderin."
+          "text": "Adaya, yol tarifi ve ayrıntıları içeren, doğrulanmış ve güvenli bir açma yetkisi sağlayan bir iş görüşmesi daveti gönderin."
         },
         {
           "icon": "history",
-          "title": "Operasyon için giriş kaydı",
-          "text": "Her açılışın bir ismi ve saati vardır; böylece bir kata, depoya veya otoparka kimin girdiğini sonradan hafızanıza güvenmeden kontrol edebilirsiniz."
+          "title": "Operasyon ve denetim için giriş kaydı",
+          "text": "Her açılışın bir ismi ve saati vardır; böylece bir kata, depoya veya otoparka kimin girdiğini sonradan, kimsenin hafızasına güvenmeden kontrol edebilirsiniz."
         }
       ],
-      "paragraph": "Ofis binaları; çalışanlara, ziyaretçilere, tedarikçilere ve operasyon ekiplerine, resepsiyona yük bindirmeden ve anahtarları ya da kartları elle yönetmeden pratik bir giriş sunmak zorundadır. WIFIGATE çalışanlara kalıcı, ziyaretçilere geçici yetkiler tanımlamanızı, erişimi telefondan kontrol etmenizi ve girişleri modern, temiz ve düzenli bir iş ortamına yakışır şekilde yönetmenizi sağlar.",
+      "paragraph": "Ofis binaları; çalışanlara, ziyaretçilere, tedarikçilere ve operasyon ekiplerine, resepsiyona yük bindirmeden ve anahtarları ya da kartları elle yönetmeden pratik bir giriş sunabilmelidir. WIFIGATE çalışanlara kalıcı, ziyaretçilere geçici yetkiler tanımlamanızı, erişimi telefondan kontrol etmenizi ve girişleri modern, temiz ve düzenli bir iş ortamına yakışır şekilde yönetmenizi sağlar.",
       "bullets": [
         "Çalışanlar ve ekipler için kalıcı yetkiler",
         "Ziyaretçiler, tedarikçiler ve kuryeler için geçici erişim",
-        "Resepsiyon ve operasyon ekibinde daha az yük",
+        "Resepsiyon ve operasyon ekibine daha az yük",
         "Giriş kapıları, katlar, odalar ve otoparklar için uygun",
         "Düzenli kullanıcı ve yetki yönetimi",
         "Anahtar, erişim kartı ve kodlara daha az bağımlılık",
@@ -375,12 +375,12 @@ export default {
       "imageAlt": "Modern bir ofiste cam kapıyı telefonuyla açan çalışan",
       "faq": [
         {
-          "question": "Çalışanlar ofise erişimi nasıl alır?",
+          "question": "Çalışanlar ofis erişimini nasıl alır?",
           "answer": "Çalışanlar telefonlarına kalıcı bir yetki alır; biri ayrıldığında bu yetki bir anda kaldırılır."
         },
         {
           "question": "Ziyaretçiler resepsiyonda beklemeden nasıl girer?",
-          "answer": "Ziyaretçiler gelmeden önce geçici erişim alır; böylece telefonlarıyla girerler ve resepsiyon daha az gelenle uğraşır."
+          "answer": "Ziyaretçiler gelmeden önce geçici erişim alır; böylece telefonlarıyla girerler ve resepsiyon daha az ziyaretçiyle uğraşır."
         },
         {
           "question": "WIFIGATE bir ofis binasında neleri kontrol edebilir?",
@@ -395,7 +395,7 @@ export default {
     "entry-doors-magnetic-locks": {
       "label": "İşyerleri için Giriş Kapıları ve Manyetik Kilitler",
       "title": "İşyerinizin giriş şifresi elden ele dolaşmamalı!",
-      "heroLead": "Çalışanlara, tedarikçilere ve teknisyenlere verilen kalıcı bir şifre, artık girmesi gerekmeyen kişilerde kalabilir. Kapıda zaten takılı olan elektrikli veya manyetik kilit üzerinden herkese kişisel ve süreli bir açma yetkisi verin.",
+      "heroLead": "Çalışanlara, tedarikçilere ve teknisyenlere verilen sabit bir şifre, artık girmesi gerekmeyen kişilerde kalabilir. Kapıda zaten takılı olan elektrikli veya manyetik kilit üzerinden herkese kişisel ve süreli bir açma yetkisi verin.",
       "highlights": [
         {
           "icon": "keyless",
@@ -413,18 +413,18 @@ export default {
           "text": "Kontrol panosu yok, yönetim yazılımı yok, monte edilecek kart okuyucu yok. Mevcut kilit yerinde kalır ve her şey uygulamadan yönetilir."
         }
       ],
-      "paragraph": "Küçük işletmeler, klinikler, stüdyolar, depolar ve ofisler çoğu zaman şifreli tuş takımına, anahtara veya basit bir manyetik kilide güvenir. Sorun, şifre çalışanlar, tedarikçiler ve misafirler arasında yayıldığında ya da güvenlikten ödün vermeden geçici erişim vermek gerektiğinde başlar. WIFIGATE giriş kapısını telefondan yönetmenizi, geçici yetki paylaşmanızı ve kalıcı şifrelere, fiziksel anahtarlara veya her girişte elle koordinasyona duyulan ihtiyacı azaltmanızı sağlar.",
+      "paragraph": "Küçük işletmeler, klinikler, stüdyolar, depolar ve ofisler çoğu zaman şifreli tuş takımına, anahtara veya basit bir manyetik kilide güvenir. Sorun, şifre çalışanlar, tedarikçiler ve misafirler arasında yayıldığında ya da güvenlikten ödün vermeden geçici erişim vermek gerektiğinde başlar. WIFIGATE giriş kapısını telefondan yönetmenizi, geçici yetki paylaşmanızı ve sabit şifrelere, fiziksel anahtarlara veya her girişte manuel organizasyona duyulan ihtiyacı azaltmanızı sağlar.",
       "bullets": [
         "Elektrikli veya manyetik kilitli giriş kapıları için uygun",
         "Çalışanlar ve yöneticiler için telefondan açma",
         "Misafirler, tedarikçiler ve servis personeli için geçici erişim",
-        "Tuş takımına veya kalıcı şifreye daha az ihtiyaç",
+        "Tuş takımına veya sabit şifreye daha az ihtiyaç",
         "Küçük işletmeler, klinikler, stüdyolar ve ofisler için uygun",
         "Daha basit ve daha güvenli yetki yönetimi",
         "Fiziksel anahtar ihtiyacında azalma",
         "Karmaşık bir sistem kurmadan modern giriş isteyen işletmeler için pratik bir seçenek"
       ],
-      "seoTitle": "İşyerleri için Giriş Kapısı ve Manyetik Kilit Kontrolü | WIFIGATE",
+      "seoTitle": "İşyeri Giriş Kapısı ve Manyetik Kilit Kontrolü | WIFIGATE",
       "seoDescription": "WIFIGATE, işyeri giriş kapılarına ve manyetik kilitlere akıllı açılış getirir: telefondan yetki yönetimi, geçici erişim, tuş takımı ve anahtarlara daha az bağımlılık.",
       "imageAlt": "Küçük bir işletmenin giriş kapısını telefonuyla açan müşteri",
       "faq": [
@@ -458,13 +458,13 @@ export default {
         },
         {
           "icon": "users",
-          "title": "Üye, antrenör ve misafir aynı değildir",
+          "title": "Üye, antrenör ve misafir aynı değil",
           "text": "Her kullanıcı türü kendi yetkisini alır: düzenli üye, belirli günlerde gelen antrenör ve tek seferlik misafir. Hepsi tek bir listede, elden ele geçen anahtar olmadan."
         },
         {
           "icon": "history",
           "title": "Tesiste kimin ne zaman olduğunu bilin",
-          "text": "Yoğunluk gün içinde değiştiğinde giriş kaydı operasyona yardımcı olur, olaylarla ilgili soruları netleştirir ve tesisin gün sonunda kilitlendiğini doğrular."
+          "text": "Yoğunluk gün içinde değiştiğinde giriş kaydı operasyona yardımcı olur, olası olayların aydınlatılmasına katkı sağlar ve tesisin gün sonunda kilitlendiğini doğrular."
         }
       ],
       "paragraph": "Spor tesisleri, padel kortları, tenis kortları, spor salonları ve antrenman merkezleri; üyeler, antrenörler, ekipler ve misafirler için erişimi çalışma saatlerine, rezervasyonlara ve etkinliklere göre yönetmek zorundadır. WIFIGATE telefondan geçici veya kalıcı erişim vermenizi, ortak anahtara ya da şifreye bağımlılığı azaltmanızı ve özellikle gün içinde yoğunluğun sürekli değiştiği tesislerde kullanıcıların giriş deneyimini iyileştirmenizi sağlar.",
@@ -484,7 +484,7 @@ export default {
       "faq": [
         {
           "question": "Erişim çalışma saatlerine veya rezervasyonlara göre ayarlanabilir mi?",
-          "answer": "Evet. Erişim çalışma saatlerine, rezervasyonlara veya yetkilere göre verilebilir; zamanlanmış etkinlikler de gün ve saate göre açabilir."
+          "answer": "Evet. Erişim çalışma saatlerine, rezervasyonlara veya yetkilere göre verilebilir; zamanlanmış görevlerle kapı belirli gün ve saatlerde açılabilir."
         },
         {
           "question": "Üyeler, antrenörler ve misafirler farklı erişime sahip olabilir mi?",

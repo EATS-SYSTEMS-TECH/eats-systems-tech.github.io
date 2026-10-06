@@ -14,12 +14,12 @@ export default {
   "niches": {
     "hotels-airbnb": {
       "label": "Hoteli, Airbnb i apartmani",
-      "title": "Gost koji je stigao ne bi trebao čekati da mu netko otvori!",
-      "heroLead": "Kartica koju treba izdati, ključ koji treba predati ili kod kutije za ključeve koji prelazi od gosta do gosta pretvaraju svaki dolazak u ručno dogovaranje. Dajte svakom gostu osobnu dozvolu koja se otvara pri prijavi i zatvara pri odjavi.",
+      "title": "Kad gost stigne, ne bi trebao čekati da mu netko otvori!",
+      "heroLead": "Kartica koju treba izdati, ključ koji treba predati ili kod kutije za ključeve koji prelazi od gosta do gosta pretvaraju svaki dolazak u ručno dogovaranje. Dajte svakom gostu osobnu dozvolu koja vrijedi od prijave do odjave.",
       "highlights": [
         {
           "icon": "calendar",
-          "title": "Otvara se pri prijavi, zatvara pri odjavi",
+          "title": "Vrijedi od prijave do odjave",
           "text": "Nitko se ne mora sjetiti ukinuti pristup. Dozvola počinje vrijediti u dogovoreno vrijeme dolaska i istječe u vrijeme odlaska, čak i kad nikoga od osoblja nema na licu mjesta."
         },
         {
@@ -46,7 +46,7 @@ export default {
         "Pristup automatski završava u vrijeme odjave",
         "Povijest pristupa za transparentnost i kontrolu"
       ],
-      "seoTitle": "WIFIGATE | Digitalni ulaz za goste hotela, Airbnb i naselja",
+      "seoTitle": "WIFIGATE | Digitalni ulaz za hotele, Airbnb i turistička naselja",
       "seoDescription": "WIFIGATE uz WIFIGATE Host hotelima, Airbnb domaćinima i turističkim naseljima donosi automatski digitalni ulaz za goste, bez ključeva, magnetskih kartica i lockboxa.",
       "imageAlt": "Gosti otvaraju vrata hotelske sobe telefonom u modernom hodniku",
       "faq": [
@@ -59,7 +59,7 @@ export default {
           "answer": "Da. Uz WIFIGATE Host i njegov API potvrđena rezervacija može automatski stvoriti pristup za gosta, prema datumima i satima boravka."
         },
         {
-          "question": "Mogu li osoblje za čišćenje i održavanje dobiti vlastiti pristup?",
+          "question": "Može li osoblje za čišćenje i održavanje dobiti vlastiti pristup?",
           "answer": "Da. Zaposlenici, osoblje za čišćenje, održavanje i dobavljači dobivaju svatko svoju dozvolu, a povijest ulazaka pokazuje tko je otvarao i kada."
         },
         {
@@ -70,7 +70,7 @@ export default {
     },
     "roller-shutters": {
       "label": "Rolete za tvrtke i trgovine",
-      "title": "Upravljanje roletom ne bi smjelo biti izloženo ispred vašeg poslovnog prostora!",
+      "title": "Upravljanje roletom ne smije biti na dohvat svakome ispred vašeg lokala!",
       "heroLead": "Prekidač, kutija s ključem ili daljinski upravljač koji se nalaze vani ili prelaze s jednog zaposlenika na drugog mogu završiti u pogrešnim rukama. Premjestite upravljanje na zaštićenu unutarnju stranu i otvarajte roletu telefonom, uz osobnu dozvolu za svakog zaposlenika.",
       "highlights": [
         {
@@ -124,7 +124,7 @@ export default {
     },
     "electric-gates": {
       "label": "Električna dvorišna vrata i parkirne rampe",
-      "title": "Otvaranje dvorišnih vrata ne bi trebalo dolaziti s trajnim nalogom!",
+      "title": "Za otvaranje dvorišnih vrata ne treba vam trajni nalog!",
       "heroLead": "Sustavi za otvaranje dvorišnih vrata telefonom često dolaze s mjesečnom pretplatom koja vam se naplaćuje svaki mjesec. Prijeđite na pametno otvaranje bez pretplate i bez trajnog naloga, uz osobne dozvole i automatsko otvaranje za redovite korisnike.",
       "highlights": [
         {
@@ -149,9 +149,9 @@ export default {
         "Bez mjesečne pretplate i bez trajnog naloga",
         "Dijeljenje privremenog pristupa s gostima, dobavljačima i zaposlenicima",
         "Auto Open za redovite korisnike pri svakodnevnom ulasku",
-        "Zakazani događaji koji otvaraju prema danima i satima",
+        "Zakazano otvaranje po danima i satima",
         "Upravljanje iz aplikacije ili postojećim daljinskim upravljačima",
-        "Manja potreba za dijeljenjem fizičkih daljinskih upravljača",
+        "Manje dijeljenja fizičkih daljinskih upravljača",
         "Povijest otvaranja za kontrolu i transparentnost"
       ],
       "seoTitle": "Dvorišna vrata i rampe bez pretplate | WIFIGATE",
@@ -172,7 +172,7 @@ export default {
         },
         {
           "question": "Postoji li mjesečna naknada?",
-          "answer": "Ne. Uređaj i ugradnju plaćate samo jednom, bez mjesečne pretplate i bez ponavljajućih plaćanja."
+          "answer": "Ne. Uređaj i ugradnju plaćate samo jednom, bez mjesečne pretplate i bez periodičnih plaćanja."
         }
       ]
     },
@@ -301,7 +301,7 @@ export default {
         },
         {
           "icon": "handsfree",
-          "title": "Ulazak bez ruku",
+          "title": "Ulazak slobodnih ruku",
           "text": "Automatsko otvaranje prepoznaje da ste stigli i otvara vam dvorišna ili ulazna vrata. Bez traženja ključa i bez vađenja telefona, čak i kad su vam ruke pune vrećica, kolica ili djece."
         }
       ],
@@ -322,7 +322,7 @@ export default {
       "faq": [
         {
           "question": "Kako stanari ulaze u zgradu s WIFIGATE-om?",
-          "answer": "Stanari telefonom otvaraju ulazna vrata zgrade, dvorišna vrata ili ulaz u garažu, svojom vlastitom dozvolom."
+          "answer": "Stanari telefonom otvaraju ulazna vrata zgrade, dvorišna vrata ili ulaz u garažu, svatko sa svojom dozvolom."
         },
         {
           "question": "Kako ulaze gosti i dostavljači?",
@@ -340,13 +340,13 @@ export default {
     },
     "office-buildings": {
       "label": "Poslovne zgrade",
-      "title": "Ulazak u ured ne bi trebao ići preko recepcije!",
+      "title": "Ulazak u ured ne mora ići preko recepcije!",
       "heroLead": "Posjetitelji, kandidati za posao i dobavljači čekaju da netko siđe i otvori im, a zaposlenicima se izdaju propusnice ili ključevi koje treba prikupiti kad odu. Dajte svakome osobnu dozvolu: trajnu za zaposlenike, vremenski ograničenu za sve ostale.",
       "highlights": [
         {
           "icon": "users",
           "title": "Netko dolazi, netko odlazi",
-          "text": "Dolazak i odlazak zaposlenika jedna su radnja na popisu, a ne krug izdavanja propusnice, njezina prikupljanja i promjene brave. Dozvola se otvara i zatvara na datume koje odredite."
+          "text": "Dolazak i odlazak zaposlenika jedna su radnja na popisu, a ne krug izdavanja propusnice, njezina prikupljanja i promjene brave. Dozvola počinje i prestaje vrijediti na datume koje odredite."
         },
         {
           "icon": "invite",
@@ -355,7 +355,7 @@ export default {
         },
         {
           "icon": "history",
-          "title": "Evidencija ulazaka za poslovanje",
+          "title": "Evidencija ulazaka za rad i nadzor",
           "text": "Svako otvaranje ima ime i vrijeme, pa naknadno možete provjeriti tko je ušao na kat, u spremište ili na parkiralište, bez rekonstruiranja iz sjećanja."
         }
       ],
@@ -380,7 +380,7 @@ export default {
         },
         {
           "question": "Kako posjetitelji ulaze bez čekanja na recepciji?",
-          "answer": "Posjetitelji dobivaju privremeni pristup prije dolaska, pa ulaze telefonom, a recepcija obrađuje manje dolazaka."
+          "answer": "Posjetitelji dobivaju privremeni pristup prije dolaska, pa ulaze telefonom, a recepcija je manje opterećena."
         },
         {
           "question": "Čime WIFIGATE može upravljati u poslovnoj zgradi?",
@@ -503,17 +503,17 @@ export default {
     "storage-lockers": {
       "label": "Skladišni prostori i ormarići",
       "title": "Pametan pristup za skladišne prostore i ormariće",
-      "heroLead": "Svaki najmoprimac telefonom otvara vrata kompleksa, ulaz u zgradu i svoj ormarić, samo u satima koje dopustite. Kad najam završi, završava i njegov pristup: bez prikupljanja ključeva i bez mijenjanja kodova.",
+      "heroLead": "Svaki zakupac telefonom otvara vrata kompleksa, ulaz u zgradu i svoj ormarić, samo u satima koje dopustite. Kad zakup istekne, prestaje i njegov pristup: bez prikupljanja ključeva i bez mijenjanja kodova.",
       "highlights": [
         {
           "icon": "users",
-          "title": "Osobna dozvola za svakog najmoprimca",
-          "text": "Nema zajedničkog koda koji bivši najmoprimci još pamte. Svaki najmoprimac ima vlastiti pristup, a njegovo uklanjanje traje trenutak kad ugovor istekne ili plaćanje kasni."
+          "title": "Osobna dozvola za svakog zakupca",
+          "text": "Nema zajedničkog koda koji bivši zakupci još pamte. Svaki zakupac ima vlastiti pristup, a njegovo uklanjanje traje trenutak kad ugovor istekne ili plaćanje kasni."
         },
         {
           "icon": "clock",
           "title": "Sati pristupa koje vi određujete",
-          "text": "Dopustite ulazak samo u radno vrijeme objekta ili najmoprimcu dajte šire razdoblje. Selidbena služba ili član obitelji može dobiti jednokratni pristup za jedan dan."
+          "text": "Dopustite ulazak samo u radno vrijeme objekta ili zakupcu dajte šire razdoblje. Selidbena služba ili član obitelji može dobiti jednokratni pristup za jedan dan."
         },
         {
           "icon": "history",
@@ -521,32 +521,32 @@ export default {
           "text": "Svako otvaranje bilježi se s osobom i vremenom, pa se na pitanje o posjetu odgovara iz povijesti umjesto iz snimki nadzornih kamera."
         }
       ],
-      "paragraph": "Skladišni prostori i prostorije s ormarićima obično se oslanjaju na zajedničke kodove, tipkovnice i fizičke ključeve koji se kopiraju, prenose dalje i rijetko mijenjaju. WIFIGATE seli pristup na telefon: svaki najmoprimac ima osobnu dozvolu za vrata kompleksa, ulaz u zgradu i, gdje je ugrađena, skladišnu jedinicu ili ormarić s električnom bravom, ograničenu na sate koje odaberete i uklonjenu u trenutku kad najam završi. Telefon komunicira izravno s uređajem na lokaciji, bez SIM kartice ili internetske veze na vratima, a za standardnu upotrebu nema mjesečne pretplate.",
+      "paragraph": "Skladišni prostori i prostorije s ormarićima obično se oslanjaju na zajedničke kodove, tipkovnice i fizičke ključeve koji se kopiraju, prenose dalje i rijetko mijenjaju. WIFIGATE seli pristup na telefon: svaki zakupac ima osobnu dozvolu za vrata kompleksa, ulaz u zgradu i, gdje je ugrađena, skladišnu jedinicu ili ormarić s električnom bravom, ograničenu na sate koje odaberete i uklonjenu u trenutku kad zakup istekne. Telefon komunicira izravno s uređajem na lokaciji, bez SIM kartice ili internetske veze na vratima, a za standardnu upotrebu nema mjesečne pretplate.",
       "bullets": [
         "Otvaranje vrata kompleksa, ulaza u zgradu i ormarića telefonom",
-        "Osobna dozvola za svakog najmoprimca",
+        "Osobna dozvola za svakog zakupca",
         "Pristup ograničen na radno vrijeme ili prilagođeno razdoblje",
         "Jednokratni pristup za selidbene službe i članove obitelji",
-        "Uklanjanje pristupa u trenutku završetka najma",
+        "Uklanjanje pristupa čim zakup istekne",
         "Povijest o tome tko je otvarao i kada",
         "Bez zajedničkih kodova, tipkovnica ili ključeva za mijenjanje",
         "Bez SIM kartice ili internetske veze na vratima"
       ],
       "seoTitle": "Kontrola pristupa za skladišta i ormariće | WIFIGATE",
-      "seoDescription": "WIFIGATE svakom najmoprimcu skladišta ili ormarića daje osobni pristup telefonom do vrata i ormarića, u radno vrijeme, uz povijest ulazaka i ukidanje po isteku najma.",
+      "seoDescription": "WIFIGATE svakom zakupcu skladišta ili ormarića daje osobni pristup telefonom do vrata i ormarića, u radno vrijeme, uz povijest ulazaka i ukidanje po isteku zakupa.",
       "imageAlt": "Žena telefonom otvara vrata skladišnog prostora s ormarićima i skladišnim jedinicama",
       "faq": [
         {
-          "question": "Kako najmoprimci otvaraju vrata kompleksa i svoj ormarić?",
+          "question": "Kako zakupci otvaraju vrata kompleksa i svoj ormarić?",
           "answer": "Telefonom, s osobnom dozvolom za vrata kompleksa, ulaz u zgradu i, gdje je ugrađen, skladišni prostor ili ormarić s električnom bravom."
         },
         {
           "question": "Može li se pristup ograničiti na radno vrijeme?",
-          "answer": "Da. Dopustite ulazak samo tijekom radnog vremena ili dajte najmoprimcu šire razdoblje; selidbene službe i članovi obitelji mogu dobiti jednokratni pristup."
+          "answer": "Da. Dopustite ulazak samo tijekom radnog vremena ili dajte zakupcu šire razdoblje; selidbene službe i članovi obitelji mogu dobiti jednokratni pristup."
         },
         {
-          "question": "Što se događa kad najam završi?",
-          "answer": "Odmah uklanjate pristup najmoprimca. Nema ključeva za prikupljanje ni kodova za mijenjanje."
+          "question": "Što se događa kad zakup istekne?",
+          "answer": "Odmah uklanjate pristup zakupca. Nema ključeva za prikupljanje ni kodova za mijenjanje."
         },
         {
           "question": "Treba li kompleksu internet na vratima?",

@@ -2,7 +2,7 @@
 // The WIFIGATE Host page (/automation/) in Danish: title, description and body.
 
 export default {
-  "metaTitle": "Automatisk gæsteadgang til hoteller, ferieboliger og parkering | WIFIGATE",
+  "metaTitle": "Automatisk gæsteadgang: hoteller, ferieboliger, parkering | WIFIGATE",
   "metaDescription": "Sikker, tidsbegrænset adgang for hver gæst, oprettet automatisk for hver booking. Til hoteller, ferieboliger, gæstehuse og udlejningsparkering eller garager. Ingen nøgleoverdragelse.",
   "marketing": {
     "hero": {
@@ -14,7 +14,7 @@ export default {
     },
     "pricing": {
       "eyebrow": "Priser",
-      "title": "Enkle planer til WIFIGATE Host-tilføjelsen",
+      "title": "Enkle pakker til WIFIGATE Host-tilføjelsen",
       "subtitle": "Betal kun for automatiseringen. Selve WIFIGATE-enheden har aldrig et abonnement.",
       "per": "/ måned",
       "starterDesc": "Til en enkelt ejendom eller indgang.",
@@ -36,7 +36,7 @@ export default {
       "enterpriseF1": "Mængdepriser",
       "enterpriseF2": "SLA og onboarding",
       "enterpriseF3": "Skræddersyet integration",
-      "note": "Introduktionspriser for WIFIGATE Host-tilføjelsen, faktureret månedligt. Ekstra systemer og årsplaner fås også, spørg os for detaljer."
+      "note": "Introduktionspriser for WIFIGATE Host-tilføjelsen, faktureret månedligt. Ekstra systemer og årsabonnementer fås også, spørg os for detaljer."
     },
     "audience": {
       "label": "Skabt til:",
@@ -58,7 +58,7 @@ export default {
     },
     "benefits": {
       "eyebrow": "Hvorfor WIFIGATE Host",
-      "title": "Mindre reception. Mere bekymringsfrit værtskab.",
+      "title": "Mindre reception. Nemmere værtskab.",
       "subtitle": "Alt, hvad en booking kræver for at blive til adgang, klaret for dig.",
       "b1t": "Ingen nøgler at udlevere",
       "b1x": "Glem nøgleafhentning, nøglebokse og kopierede koder. Adgangen lander på gæstens telefon, i det øjeblik der er brug for den.",
@@ -71,12 +71,12 @@ export default {
       "b5t": "Skalerer til hele bygninger",
       "b5x": "Fra en enkelt port til et helt kompleks kan én invitation dække alle de indgange, en gæst har brug for.",
       "b6t": "Forbindes med dine systemer",
-      "b6x": "Kobl WIFIGATE Host til dit bookingflow, PMS eller channel manager, og lad det køre."
+      "b6x": "Kobl WIFIGATE Host til dit bookingflow, PMS eller channel manager, og lad det køre af sig selv."
     },
     "secure": {
       "eyebrow": "Sikkerhed",
       "title": "Adgang, du trygt kan give en fremmed",
-      "subtitle": "Bygget til at beskytte ejendommen bag hver port.",
+      "subtitle": "Udviklet til at beskytte det, der ligger bag hver port.",
       "i1t": "Krypteret hele vejen",
       "i1x": "Hver invitation er krypteret, så adgangsoplysninger ikke kan læses eller kopieres undervejs.",
       "i2t": "Færre fysiske adgangsmidler, mere gæstfrihed",

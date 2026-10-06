@@ -14,7 +14,7 @@ export default {
   "niches": {
     "hotels-airbnb": {
       "label": "Hotéis, Airbnb e Alojamento Local",
-      "title": "Um hóspede que já chegou não deve ter de esperar que alguém lhe abra a porta!",
+      "title": "Um hóspede que chega não deve ficar à espera que lhe abram a porta!",
       "heroLead": "Um cartão para emitir, uma chave para entregar ou um código de cofre de chaves que passa de hóspede para hóspede transformam cada chegada numa coordenação manual. Dê a cada hóspede uma permissão pessoal que abre no check-in e fecha no check-out.",
       "highlights": [
         {
@@ -70,12 +70,12 @@ export default {
     },
     "roller-shutters": {
       "label": "Portas de enrolar para lojas e negócios",
-      "title": "O comando da porta de enrolar não deve ficar exposto no exterior do negócio!",
-      "heroLead": "Um interruptor, uma caixa de chave ou um comando que fica no exterior ou passa de funcionário para funcionário pode acabar nas mãos erradas. Leve o controlo para o lado interior e protegido do negócio e abra a porta de enrolar pelo telemóvel, com uma permissão pessoal para cada funcionário.",
+      "title": "O comando da porta de enrolar não deve ficar exposto na rua!",
+      "heroLead": "Um interruptor, uma caixa de chave ou um comando que fica no exterior ou passa de funcionário para funcionário pode acabar nas mãos erradas. Passe o controlo para o interior protegido do estabelecimento e abra a porta de enrolar pelo telemóvel, com uma permissão pessoal para cada funcionário.",
       "highlights": [
         {
           "icon": "shutter",
-          "title": "O controlo passa para dentro, fora do alcance",
+          "title": "O controlo passa para dentro, longe de mãos alheias",
           "text": "Um interruptor ou uma caixa de chave numa parede exterior está exposto a quem passa. Quando a abertura é feita pelo telemóvel, o ponto de controlo pode ficar no interior da loja."
         },
         {
@@ -101,7 +101,7 @@ export default {
         "Uma solução interior, mais organizada e segura para o dia a dia"
       ],
       "seoTitle": "Controlo inteligente de portas de enrolar para lojas | WIFIGATE",
-      "seoDescription": "A WIFIGATE dá a lojas e negócios controlo inteligente das portas de enrolar pelo telemóvel, com gestão de permissões, menos chaves e comandos e menos pontos de acesso expostos.",
+      "seoDescription": "A WIFIGATE dá a lojas e negócios controlo inteligente das portas de enrolar pelo telemóvel, com gestão de permissões, menos chaves e comandos e menos pontos expostos.",
       "imageAlt": "Proprietário de uma loja a abrir a porta de enrolar com o telemóvel",
       "faq": [
         {
@@ -124,8 +124,8 @@ export default {
     },
     "electric-gates": {
       "label": "Portões elétricos e barreiras de estacionamento",
-      "title": "Abrir o portão não deve vir com um débito direto!",
-      "heroLead": "Os sistemas para abrir portões pelo telemóvel trazem muitas vezes uma subscrição mensal que continua a ser cobrada todos os meses. Mude para uma abertura inteligente sem mensalidades e sem débito direto, com permissões pessoais e abertura automática para utilizadores habituais.",
+      "title": "Abrir o portão não tem de vir com débito direto!",
+      "heroLead": "Os sistemas para abrir portões pelo telemóvel trazem muitas vezes uma subscrição que continua a ser cobrada mês após mês. Mude para uma abertura inteligente sem mensalidades e sem débito direto, com permissões pessoais e abertura automática para utilizadores habituais.",
       "highlights": [
         {
           "icon": "handsfree",
@@ -135,12 +135,12 @@ export default {
         {
           "icon": "clock",
           "title": "Acesso temporário para um fornecedor ou uma visita",
-          "text": "Em vez de receber chamadas a pedir para abrir o portão a horas inconvenientes, envie uma permissão válida apenas no período em que é realmente necessária, que depois se fecha sozinha."
+          "text": "Em vez de receber chamadas a pedir para abrir o portão a horas impróprias, envie uma permissão válida só durante o período necessário, que depois expira sozinha."
         },
         {
           "icon": "gate",
           "title": "Estabilidade, fiabilidade e privacidade",
-          "text": "Nomes e números de telefone são informação sensível, sobretudo na era da IA. Na WIFIGATE, a base de dados de utilizadores fica guardada no próprio dispositivo, encriptada e protegida da exposição à internet, num sistema estável e fiável para a abertura do dia a dia."
+          "text": "Nomes e números de telefone são informação sensível, sobretudo na era da IA. Na WIFIGATE, a base de dados de utilizadores fica guardada no próprio dispositivo, encriptada e isolada da internet, num sistema estável e fiável para a abertura do dia a dia."
         }
       ],
       "paragraph": "Os portões elétricos e as barreiras de estacionamento servem moradores, funcionários, visitas e fornecedores, mas gerir comandos, códigos e telefonemas para abrir o portão torna-se rapidamente complicado. A WIFIGATE permite abrir o portão a partir do telemóvel, partilhar acessos permanentes ou temporários, usar a abertura automática para utilizadores habituais e definir eventos agendados conforme necessário. O sistema foi concebido para funcionar de forma segura, encriptada e privada, sem mensalidades nem débitos diretos, e é possível continuar a usar os comandos existentes em paralelo com o controlo pela aplicação.",
@@ -178,8 +178,8 @@ export default {
     },
     "garage-doors": {
       "label": "Portões de garagem e estacionamentos privados",
-      "title": "Um comando RF barato pode ser fácil de copiar!",
-      "heroLead": "Os comandos RF simples podem ser fáceis de copiar e dar acesso a quem nunca foi autorizado. A WIFIGATE protege o acesso com camadas de segurança avançadas, armazenamento encriptado e proteção da privacidade dos utilizadores.",
+      "title": "Um comando RF barato pode ser copiado com facilidade!",
+      "heroLead": "Os comandos RF simples podem ser copiados com facilidade e dar acesso a quem nunca foi autorizado. A WIFIGATE protege o acesso com camadas de segurança avançadas, armazenamento encriptado e proteção da privacidade dos utilizadores.",
       "highlights": [
         {
           "icon": "keyless",
@@ -204,7 +204,7 @@ export default {
         "Menor risco associado a comandos perdidos, emprestados ou copiados",
         "Gestão de acessos para familiares, funcionários e visitas",
         "Acesso temporário sem entregar comandos ou códigos",
-        "Indicado para estacionamentos privados, moradias e apartamentos com jardim",
+        "Indicado para estacionamentos privados, moradias e rés-do-chão com jardim",
         "Uma forma mais privada e segura de gerir acessos",
         "Um controlo diário mais cómodo e seguro"
       ],
@@ -226,14 +226,14 @@ export default {
         },
         {
           "question": "Onde se pode usar a WIFIGATE para estacionamento?",
-          "answer": "Em garagens privadas, entradas de estacionamentos privados, moradias e apartamentos com jardim."
+          "answer": "Em garagens privadas, entradas de estacionamentos privados, moradias e rés-do-chão com jardim."
         }
       ]
     },
     "private-homes": {
       "label": "Moradias",
-      "title": "As casas particulares não foram feitas para ser públicas!",
-      "heroLead": "O código do intercomunicador que deu a um estafeta, a um técnico ou a uma visita fica com eles muito depois de a visita terminar e passa a outras pessoas sem que saiba. Dê a cada pessoa uma permissão de entrada pessoal e limitada no tempo, e reduza as entradas não autorizadas e o risco de furto.",
+      "title": "A sua casa não é um espaço público!",
+      "heroLead": "O código do intercomunicador que deu a um estafeta, a um técnico ou a uma visita fica com eles muito depois de a visita terminar e passa a outras pessoas sem o seu conhecimento. Dê a cada pessoa uma permissão de entrada pessoal e limitada no tempo, e reduza as entradas não autorizadas e o risco de furto.",
       "highlights": [
         {
           "icon": "keyless",
@@ -248,7 +248,7 @@ export default {
         {
           "icon": "roster",
           "title": "Uma lista em vez de suposições",
-          "text": "Um código partilhado não tem uma lista de quem o conhece. Em seu lugar surge uma lista em que cada permissão tem um nome, para que fique claro, a qualquer momento, quem pode entrar em casa."
+          "text": "Ninguém sabe ao certo quem conhece um código partilhado. Em vez dele, passa a ter uma lista em que cada permissão tem um nome, para saber a qualquer momento quem pode entrar em casa."
         }
       ],
       "paragraph": "Nas moradias, os teclados de código, as chaves e os comandos podem tornar-se um ponto fraco. Com o tempo, surgem marcas de desgaste nas teclas do código, os comandos perdem-se ou passam de mão em mão, e o código é por vezes dado a estafetas, técnicos ou visitas, que o guardam muito depois de deixar de ser necessário. A WIFIGATE permite gerir a entrada a partir do telemóvel, partilhar acessos temporários de visita sem expor um código fixo e revogar permissões facilmente, sem trocar fechaduras, códigos ou comandos.",
@@ -286,13 +286,13 @@ export default {
     },
     "residential-buildings": {
       "label": "Prédios de habitação",
-      "title": "Os prédios de habitação não foram feitos para ser públicos!",
+      "title": "Um prédio de habitação não é um espaço público!",
       "heroLead": "Um código fixo que circula entre estafetas, visitas e prestadores de serviços pode ficar nas mãos erradas. Dê uma permissão de entrada pessoal e limitada no tempo, e reduza as entradas não autorizadas e o risco de furto.",
       "highlights": [
         {
           "icon": "roster",
           "title": "Saber a qualquer momento quem tem acesso",
-          "text": "Um código partilhado não tem uma lista de quem o conhece. Não há forma de saber quem o tem, quem o passou a outros nem quando. Em seu lugar surge uma lista atualizada em que cada permissão tem um nome, para que o acesso ao prédio esteja sempre claro."
+          "text": "Ninguém sabe ao certo quem conhece um código partilhado: quem o tem, a quem o passou nem quando. Em vez dele, passa a ter uma lista atualizada em que cada permissão tem um nome, para que o acesso ao prédio esteja sempre claro."
         },
         {
           "icon": "invite",
@@ -340,8 +340,8 @@ export default {
     },
     "office-buildings": {
       "label": "Edifícios de escritórios",
-      "title": "Entrar no escritório não deve ter de passar pela receção!",
-      "heroLead": "Visitantes, candidatos e fornecedores esperam que alguém desça para lhes abrir a porta, e aos funcionários são emitidos cartões ou entregues chaves que têm de ser recolhidos quando saem da empresa. Dê a cada pessoa uma permissão pessoal: permanente para os funcionários e limitada no tempo para todos os outros.",
+      "title": "Entrar no escritório não tem de passar pela receção!",
+      "heroLead": "Visitantes, candidatos e fornecedores esperam que alguém desça para lhes abrir a porta, e os funcionários recebem cartões ou chaves que é preciso recolher quando saem da empresa. Dê a cada pessoa uma permissão pessoal: permanente para os funcionários e limitada no tempo para todos os outros.",
       "highlights": [
         {
           "icon": "users",
@@ -351,11 +351,11 @@ export default {
         {
           "icon": "invite",
           "title": "Convocar um candidato num toque",
-          "text": "Envie ao candidato uma convocatória para a entrevista de emprego que lhe dá uma permissão de abertura verificada e segura, com as indicações de chegada e os detalhes."
+          "text": "Envie ao candidato a convocatória para a entrevista, já com uma permissão de abertura verificada e segura, as indicações de chegada e todos os detalhes."
         },
         {
           "icon": "history",
-          "title": "Registo de entradas para a operação e o controlo",
+          "title": "Registo de entradas para gestão e controlo",
           "text": "Cada abertura tem um nome e uma hora, para poder verificar depois quem entrou num piso, num armazém ou no parque de estacionamento, sem depender da memória das pessoas."
         }
       ],
@@ -501,14 +501,14 @@ export default {
       ]
     },
     "storage-lockers": {
-      "label": "Armazenamento e cacifos",
-      "title": "Acesso inteligente para espaços de armazenamento e cacifos",
-      "heroLead": "Cada cliente abre o portão do espaço, a porta do edifício e o seu próprio cacifo a partir do telemóvel, apenas nos horários que autorizar. Quando o arrendamento termina, o acesso termina também: sem chaves para recolher nem códigos para mudar.",
+      "label": "Boxes de arrumação e cacifos",
+      "title": "Acesso inteligente para boxes de arrumação e cacifos",
+      "heroLead": "Cada cliente abre o portão do espaço, a porta do edifício e o seu próprio cacifo a partir do telemóvel, apenas nos horários que autorizar. Quando o aluguer termina, o acesso termina também: sem chaves para recolher nem códigos para mudar.",
       "highlights": [
         {
           "icon": "users",
           "title": "Uma permissão pessoal para cada cliente",
-          "text": "Nada de um código partilhado de que antigos clientes ainda se lembram. Cada cliente tem o seu próprio acesso, e retirá-lo demora um instante quando o contrato termina ou há um pagamento em atraso."
+          "text": "Acabaram-se os códigos partilhados de que os antigos clientes ainda se lembram. Cada cliente tem o seu próprio acesso, e retirá-lo demora um instante quando o contrato termina ou há um pagamento em atraso."
         },
         {
           "icon": "clock",
@@ -521,20 +521,20 @@ export default {
           "text": "Cada abertura fica registada com o nome do utilizador e a hora, por isso uma dúvida sobre uma visita é esclarecida pelo histórico de acessos e não pelas câmaras de segurança."
         }
       ],
-      "paragraph": "Os espaços de armazenamento e as salas de cacifos dependem normalmente de códigos partilhados, teclados e chaves físicas que são copiados, passam de mão em mão e raramente são mudados. A WIFIGATE leva o acesso para o telemóvel: cada cliente tem uma permissão pessoal para o portão do espaço, a entrada do edifício e, onde estiver instalado, um box ou cacifo com fecho elétrico, limitada ao horário que escolher e retirada no momento em que o arrendamento termina. O telemóvel comunica diretamente com o dispositivo instalado no local, sem cartão SIM nem ligação à internet na porta, e sem mensalidades para a utilização normal.",
+      "paragraph": "Os centros de boxes de arrumação e as salas de cacifos dependem normalmente de códigos partilhados, teclados e chaves físicas que são copiados, passam de mão em mão e raramente são mudados. A WIFIGATE leva o acesso para o telemóvel: cada cliente tem uma permissão pessoal para o portão do espaço, a entrada do edifício e, onde estiver instalado, um box ou cacifo com fecho elétrico, limitada ao horário que escolher e retirada no momento em que o aluguer termina. O telemóvel comunica diretamente com o dispositivo instalado no local, sem cartão SIM nem ligação à internet na porta, e sem mensalidades para a utilização normal.",
       "bullets": [
         "Abertura do portão do espaço, da porta do edifício e do cacifo a partir do telemóvel",
         "Uma permissão pessoal para cada cliente",
         "Acesso limitado ao horário de funcionamento ou a um período à medida",
         "Acesso único para empresas de mudanças e familiares",
-        "Retirada do acesso no momento em que o arrendamento termina",
+        "Retirada do acesso no momento em que o aluguer termina",
         "Histórico de quem abriu e quando",
         "Sem códigos partilhados, teclados ou chaves para mudar",
         "Sem cartão SIM nem ligação à internet na porta"
       ],
-      "seoTitle": "Acesso inteligente para armazenamento e cacifos | WIFIGATE",
-      "seoDescription": "A WIFIGATE dá a cada cliente de um espaço de armazenamento ou cacifo acesso pessoal pelo telemóvel ao portão, às portas e ao seu cacifo, limitado ao horário de funcionamento, registado num histórico e retirado quando o arrendamento termina.",
-      "imageAlt": "Mulher a abrir com o telemóvel a porta de um espaço de armazenamento com cacifos e boxes",
+      "seoTitle": "Controlo de acessos para boxes e cacifos | WIFIGATE",
+      "seoDescription": "A WIFIGATE dá a cada cliente acesso pelo telemóvel ao portão, às portas e ao seu box ou cacifo, no horário definido, com histórico e retirado quando o aluguer termina.",
+      "imageAlt": "Mulher a abrir com o telemóvel a porta de um centro de arrumação com cacifos e boxes",
       "faq": [
         {
           "question": "Como é que os clientes abrem o portão e o seu cacifo?",
@@ -545,7 +545,7 @@ export default {
           "answer": "Sim. Permita a entrada apenas no horário de funcionamento ou dê a um cliente um período mais alargado; as empresas de mudanças e os familiares podem receber um acesso único."
         },
         {
-          "question": "O que acontece quando o arrendamento termina?",
+          "question": "O que acontece quando o aluguer termina?",
           "answer": "Retira de imediato o acesso do cliente. Não há chaves para recolher nem códigos para mudar."
         },
         {

@@ -14,7 +14,7 @@ export default {
   "niches": {
     "hotels-airbnb": {
       "label": "Hotell, Airbnb och gästlägenheter",
-      "title": "En gäst som har kommit fram ska inte behöva vänta på att någon öppnar!",
+      "title": "En gäst som har kommit fram ska inte behöva vänta på att någon öppnar",
       "heroLead": "Ett kort som ska utfärdas, en nyckel som ska lämnas över eller en nyckelboxkod som går från gäst till gäst gör varje ankomst till manuell samordning. Ge varje gäst en personlig behörighet som öppnar vid incheckning och stänger vid utcheckning.",
       "highlights": [
         {
@@ -32,10 +32,10 @@ export default {
         {
           "icon": "keyless",
           "title": "Inga kort att utfärda, ingen nyckelbox att dela",
-          "text": "Inget att programmera, inget att lämna över, inget kort som en tidigare gäst glömt kvar och ingen nyckelboxkod som förs vidare. Mobilen som redan finns i gästens ficka är den enda vägen in."
+          "text": "Inget att programmera, inget att lämna över, inget kort som en tidigare gäst glömt kvar och ingen nyckelboxkod som förs vidare. Mobilen som redan finns i gästens ficka är den enda nyckel som behövs."
         }
       ],
-      "paragraph": "WIFIGATE låter hotell, semesterlägenheter (Airbnb) och semesteranläggningar ge gästerna en bekväm och säker digital entré direkt från mobilen.\nI stället för att utfärda magnetkort, lämna över fysiska nycklar eller använda nyckelboxar blir åtkomstkontrollen automatisk.\nMed WIFIGATE Host kan du koppla ditt bokningssystem direkt till passersystemet.\nTack vare kopplingen får gästen en personlig behörighet när bokningen har bekräftats.\nBehörigheten aktiveras exakt vid incheckningstiden och upphör automatiskt vid utcheckning, utan manuella ingrepp, nyckelöverlämning eller samordning från receptionen och värdarna.",
+      "paragraph": "WIFIGATE låter hotell, semesterlägenheter (Airbnb) och semesteranläggningar ge gästerna en bekväm och säker digital entré direkt från mobilen.\nMagnetkort, nyckelöverlämningar och nyckelboxar behövs inte längre, eftersom åtkomstkontrollen sköts automatiskt.\nMed WIFIGATE Host kan du koppla ditt bokningssystem direkt till passersystemet.\nTack vare kopplingen får gästen en personlig behörighet när bokningen har bekräftats.\nBehörigheten aktiveras exakt vid incheckningstiden och upphör automatiskt vid utcheckning, utan manuella ingrepp, nyckelöverlämning eller samordning från receptionen och värdarna.",
       "bullets": [
         "Automatisk gäståtkomst skapas när en bokning bekräftas",
         "Fullständig automatisering med WIFIGATE Host",
@@ -46,7 +46,7 @@ export default {
         "Åtkomsten avslutas automatiskt vid utcheckning",
         "Åtkomsthistorik för transparens och kontroll"
       ],
-      "seoTitle": "WIFIGATE | Digital gäståtkomst för hotell, Airbnb och semesteranläggningar",
+      "seoTitle": "Digital gäståtkomst: hotell, Airbnb, semesteranläggningar | WIFIGATE",
       "seoDescription": "Med WIFIGATE Host hanterar hotell, Airbnb-värdar och semesteranläggningar gäståtkomst digitalt och automatiskt: en personlig behörighet per bokning, utan nycklar, magnetkort eller nyckelbox.",
       "imageAlt": "Gäster öppnar en hotellrumsdörr med mobilen i en modern korridor",
       "faq": [
@@ -70,13 +70,13 @@ export default {
     },
     "roller-shutters": {
       "label": "Rulljalusier för företag och butiker",
-      "title": "Jalusiets manöverpunkt ska inte sitta oskyddad utanför verksamheten!",
-      "heroLead": "En strömbrytare, en nyckelbox eller en fjärrkontroll som sitter utomhus eller går mellan anställda kan hamna i fel händer. Flytta styrningen till verksamhetens skyddade insida och öppna jalusiet från mobilen, med en personlig behörighet för varje anställd.",
+      "title": "Rulljalusins manöverpanel hör inte hemma utanför butiken",
+      "heroLead": "En strömbrytare, en nyckelbox eller en fjärrkontroll som sitter utomhus eller går mellan anställda kan hamna i fel händer. Flytta styrningen till verksamhetens skyddade insida och öppna rulljalusin från mobilen, med en personlig behörighet för varje anställd.",
       "highlights": [
         {
           "icon": "shutter",
           "title": "Styrningen flyttar in, utom räckhåll",
-          "text": "En strömbrytare eller nyckelbox på en yttervägg är synlig för alla som går förbi. När öppningen sker från mobilen kan styrpunkten sitta på butikens insida."
+          "text": "En strömbrytare eller nyckelbox på en yttervägg är åtkomlig för alla som går förbi. När öppningen sker från mobilen kan manöverpunkten sitta på butikens insida."
         },
         {
           "icon": "users",
@@ -85,31 +85,31 @@ export default {
         },
         {
           "icon": "phone",
-          "title": "Öppna utan att stå vid jalusiet",
-          "text": "En nyckel tvingar dig att stå precis vid styrpunkten, med fulla händer och dålig sikt mot jalusiet. Från mobilen sker det på ett säkrare avstånd."
+          "title": "Öppna utan att stå vid rulljalusin",
+          "text": "En nyckel tvingar dig att stå precis vid manöverpunkten, med fulla händer och dålig sikt mot jalusin. Från mobilen sker det på ett säkrare avstånd."
         }
       ],
-      "paragraph": "Rulljalusier i butiker och företag styrs ofta med fjärrkontroller, nycklar, en extern nyckelbox eller strömbrytare placerade utanför verksamheten. Sådana lösningar kan tappas bort, bli kvar hos tidigare anställda, kopieras eller bli en exponerad åtkomstpunkt. WIFIGATE flyttar styrningen in i appen och placerar åtkomstkontrollen på den mer skyddade insidan, så att du kan öppna och stänga mer bekvämt, hantera behörigheter för anställda och leverantörer och minska beroendet av nycklar, fjärrkontroller och utsatta åtkomstpunkter.",
+      "paragraph": "Rulljalusier i butiker och företag styrs ofta med fjärrkontroller, nycklar, en extern nyckelbox eller strömbrytare placerade utanför verksamheten. Sådana lösningar kan tappas bort, bli kvar hos tidigare anställda, kopieras eller bli en utsatt åtkomstpunkt. Att öppna eller stänga med nyckel innebär dessutom att man måste stå precis vid manöverpunkten med nyckeln i handen och ibland utan bra sikt över jalusin. WIFIGATE flyttar styrningen in i appen och placerar åtkomstkontrollen på den mer skyddade insidan, så att du kan öppna och stänga bekvämare, hantera behörigheter för anställda och leverantörer och minska beroendet av nycklar, fjärrkontroller och utsatta åtkomstpunkter.",
       "bullets": [
         "Öppna och stäng från mobilen utan att vara beroende av fjärrkontroller",
         "Mindre beroende av nycklar som kan kopieras eller tappas bort",
-        "Färre exponerade åtkomstpunkter utanför verksamheten",
-        "Bekvämare styrning med bättre överblick över jalusiet",
+        "Färre utsatta åtkomstpunkter utanför verksamheten",
+        "Bekvämare styrning med bättre överblick över jalusin",
         "Behörighetshantering för anställda, chefer och leverantörer",
         "Möjlighet till tillfällig åtkomst efter tid eller behov",
         "Lämplig för butiker, lager, serviceingångar och företag",
         "En mer skyddad och organiserad lösning för daglig drift"
       ],
-      "seoTitle": "Smart styrning av rulljalusier för företag och butiker | WIFIGATE",
-      "seoDescription": "WIFIGATE ger företag och butiker smart mobilstyrning av rulljalusier, med behörighetshantering, mindre beroende av nycklar och fjärrkontroller samt färre exponerade åtkomstpunkter.",
-      "imageAlt": "Butiksägare öppnar en butikslucka med mobilen",
+      "seoTitle": "Smarta rulljalusier för företag och butiker | WIFIGATE",
+      "seoDescription": "WIFIGATE ger företag och butiker smart mobilstyrning av rulljalusier, med behörighetshantering, färre nycklar och fjärrkontroller samt färre utsatta åtkomstpunkter.",
+      "imageAlt": "Butiksägare öppnar butikens rulljalusi med mobilen",
       "faq": [
         {
           "question": "Hur öppnar WIFIGATE en rulljalusi?",
-          "answer": "WIFIGATE ansluts till jalusiets styrning och låter behöriga personer öppna och stänga det från WIFIGATE-appen. Styrningen sitter på den skyddade insidan i stället för en exponerad nyckelbrytare eller fjärrkontroll."
+          "answer": "WIFIGATE ansluts till jalusins styrning och låter behöriga personer öppna och stänga den från WIFIGATE-appen. Styrningen sitter på den skyddade insidan i stället för vid en utsatt nyckelbrytare eller fjärrkontroll."
         },
         {
-          "question": "Kan varje anställd ha separat åtkomst till jalusiet?",
+          "question": "Kan varje anställd ha separat åtkomst till rulljalusin?",
           "answer": "Ja. Varje anställd, chef eller leverantör får en personlig behörighet som du kan ta bort när som helst, utan att samla in nycklar eller fjärrkontroller."
         },
         {
@@ -118,19 +118,19 @@ export default {
         },
         {
           "question": "Vilka verksamheter passar det för?",
-          "answer": "Butiker, lager, serviceingångar och alla verksamheter med en elektrisk rulljalusi som vill ha färre nycklar, fjärrkontroller och exponerade åtkomstpunkter."
+          "answer": "Butiker, lager, serviceingångar och alla verksamheter med en elektrisk rulljalusi som vill ha färre nycklar, fjärrkontroller och utsatta åtkomstpunkter."
         }
       ]
     },
     "electric-gates": {
       "label": "Elektriska grindar och parkeringsbommar",
-      "title": "Att öppna grinden ska inte kräva autogiro!",
+      "title": "Att öppna grinden ska inte kräva autogiro",
       "heroLead": "System för att öppna grindar med mobilen kommer ofta med ett månadsabonnemang som fortsätter att dras varje månad. Byt till smart öppning utan abonnemangsavgifter och utan autogiro, med personliga behörigheter och automatisk öppning för återkommande användare.",
       "highlights": [
         {
           "icon": "handsfree",
           "title": "Automatisk öppning vid den dagliga infarten",
-          "text": "Auto Open känner av att du har kommit fram och öppnar grinden åt dig. Inget letande i handskfacket och ingen nedvevad ruta i regnet."
+          "text": "Automatisk öppning (Auto Open) känner av att du har kommit fram och öppnar grinden åt dig. Inget letande efter fjärrkontrollen i handskfacket, inget fipplande med mobilen och ingen nedvevad ruta i regnet."
         },
         {
           "icon": "clock",
@@ -143,7 +143,7 @@ export default {
           "text": "Namn och telefonnummer är känsliga uppgifter, särskilt i AI-eran. Med WIFIGATE lagras användardatabasen på själva enheten, krypterad och skyddad från exponering mot internet, på ett stabilt och tillförlitligt system för daglig öppning."
         }
       ],
-      "paragraph": "Elektriska grindar och parkeringsbommar används av boende, anställda, gäster och leverantörer, men hanteringen av fjärrkontroller, koder och telefonsamtal för öppning blir snabbt omständig. WIFIGATE gör det möjligt att öppna grinden från mobilen, dela permanent eller tillfällig åtkomst, använda Auto Open för återkommande användare och skapa schemalagda öppningar vid behov. Systemet är utformat för lokal, säker och privat drift utan månadsabonnemang, och befintliga fjärrkontroller kan fortsätta användas parallellt med appstyrning.",
+      "paragraph": "Elektriska grindar och parkeringsbommar används av boende, anställda, gäster och leverantörer, men hanteringen av fjärrkontroller, koder och telefonsamtal om att öppna blir snabbt omständlig. WIFIGATE gör det möjligt att öppna grinden från mobilen, dela permanent eller tillfällig åtkomst, använda Auto Open för återkommande användare och skapa schemalagda öppningar vid behov. Systemet är utformat för säker, privat och krypterad drift utan månadsabonnemang eller autogiro, och befintliga fjärrkontroller kan fortsätta användas parallellt med appstyrning.",
       "bullets": [
         "Öppna elektrisk grind eller parkeringsbom från mobilen",
         "Inget månadsabonnemang och inga återkommande avgifter",
@@ -154,7 +154,7 @@ export default {
         "Mindre behov av att dela ut fysiska fjärrkontroller",
         "Åtkomsthistorik för kontroll och transparens"
       ],
-      "seoTitle": "Elektriska grindar och parkeringsbommar utan abonnemang | WIFIGATE",
+      "seoTitle": "Elektrisk grind och parkeringsbom utan abonnemang | WIFIGATE",
       "seoDescription": "WIFIGATE öppnar elektriska grindar och parkeringsbommar från mobilen, med Auto Open, schemalagda öppningar, stöd för befintliga fjärrkontroller, behörighetshantering och inget månadsabonnemang.",
       "imageAlt": "Förare öppnar en parkeringsbom och elektrisk grind med mobilen",
       "faq": [
@@ -178,7 +178,7 @@ export default {
     },
     "garage-doors": {
       "label": "Garageportar och privat parkering",
-      "title": "En billig RF-fjärrkontroll kan vara lätt att kopiera!",
+      "title": "En billig RF-fjärrkontroll kan vara lätt att kopiera",
       "heroLead": "Enkla RF-fjärrkontroller kan vara lätta att kopiera och ge åtkomst till personer som aldrig har fått behörighet. WIFIGATE skyddar åtkomsten med avancerade säkerhetslager, krypterad lagring och skydd av användarnas integritet.",
       "highlights": [
         {
@@ -197,7 +197,7 @@ export default {
           "text": "I stället för att ha en fjärrkontroll till varje bil och varje användare öppnar du med mobilen som du ändå har med dig. Färre fjärrkontroller att köpa, koda, lämna över och hantera."
         }
       ],
-      "paragraph": "Garageportar och privata parkeringsinfarter styrs vanligtvis med fysiska fjärrkontroller som kan tappas bort, bli kvar hos personer som inte längre behöver åtkomst eller i vissa fall kopieras. WIFIGATE flyttar styrningen till digital åtkomst från mobilen, gör det möjligt att hantera behörigheter för familjemedlemmar, anställda eller gäster och dela tillfällig åtkomst utan att lämna över en fjärrkontroll eller kod. Resultatet blir en mer bekväm, mer privat och bättre organiserad upplevelse, med mindre beroende av fysiska åtkomstverktyg.",
+      "paragraph": "Garageportar och privata parkeringsinfarter styrs vanligtvis med fysiska fjärrkontroller som kan tappas bort, bli kvar hos personer som inte längre behöver åtkomst eller i vissa fall kopieras. WIFIGATE flyttar styrningen till digital åtkomst från mobilen, gör det möjligt att hantera behörigheter för familjemedlemmar, anställda eller gäster och dela tillfällig åtkomst utan att lämna över en fjärrkontroll eller kod. Resultatet blir en bekvämare, mer privat och bättre organiserad vardag, med mindre beroende av fysiska passermedel.",
       "bullets": [
         "Öppna garageporten från mobilen",
         "Mindre beroende av fysiska fjärrkontroller",
@@ -225,19 +225,19 @@ export default {
           "answer": "Ja. Skicka en tillfällig behörighet som upphör när du bestämmer, utan att lämna över en fjärrkontroll eller en kod."
         },
         {
-          "question": "Var kan WIFIGATE användas för parkering?",
+          "question": "Vilka parkeringar passar WIFIGATE för?",
           "answer": "Privata garage, infarter till privat parkering, hus och marklägenheter."
         }
       ]
     },
     "private-homes": {
       "label": "Privata hem",
-      "title": "Privata hem är inte till för att vara offentliga!",
-      "heroLead": "Porttelefonkoden som du gav ett bud, en tekniker eller en gäst finns kvar hos dem långt efter att besöket är över och förs vidare utan att du vet om det. Ge alla en personlig, tidsbegränsad behörighet och minska obehöriga inpasseringar och risken för stölder.",
+      "title": "Ditt hem är ingen offentlig plats",
+      "heroLead": "Portkoden som du gav ett bud, en tekniker eller en gäst finns kvar hos dem långt efter att besöket är över och förs vidare utan att du vet om det. Ge alla en personlig, tidsbegränsad behörighet och minska risken för obehöriga inpasseringar och stölder.",
       "highlights": [
         {
           "icon": "keyless",
-          "title": "Porttelefonkoden fortsätter att spridas",
+          "title": "Portkoden fortsätter att spridas",
           "text": "Koden går till bud, tekniker och gäster och därifrån vidare utan att du vet om det. Och efter tillräckligt många år avslöjar de fyra slitna knapparna på knappsatsen helt av sig själva vilka siffror den består av."
         },
         {
@@ -286,7 +286,7 @@ export default {
     },
     "residential-buildings": {
       "label": "Bostadshus",
-      "title": "Bostadshus är inte till för att vara offentliga!",
+      "title": "Ett bostadshus är ingen offentlig plats",
       "heroLead": "En fast kod som vandrar mellan bud, gäster och servicepersonal kan hamna i fel händer. Ge varje person en personlig, tidsbegränsad behörighet och minska obehöriga inpasseringar och risken för stölder.",
       "highlights": [
         {
@@ -296,13 +296,13 @@ export default {
         },
         {
           "icon": "invite",
-          "title": "Vägbeskrivningen med ett tryck",
+          "title": "Vägbeskrivning med ett tryck",
           "text": "Adress, våning, lägenhet, grindkod och portkod. Samma ramsa upprepar du för varje gäst, varje bud och varje hantverkare. Med WIFIGATE blir allt detta ett enda tryck, och besökaren hittar själv fram till dörren."
         },
         {
           "icon": "handsfree",
           "title": "Inpassering utan händer",
-          "text": "Auto Open känner av att du har kommit fram och öppnar grinden eller dörren åt dig. Inget letande efter nycklar och ingen mobil som behöver tas fram, inte ens när händerna är fulla av matkassar, en barnvagn eller barn."
+          "text": "Automatisk öppning (Auto Open) känner av att du har kommit fram och öppnar grinden eller dörren åt dig. Inget letande efter nycklar och ingen mobil som behöver tas fram, inte ens när du har famnen full av matkassar, barnvagn eller barn."
         }
       ],
       "paragraph": "I ett bostadshus slutar åtkomsten inte vid entrédörren: det finns en grind, en infart till parkeringen, förrådsdörrar och ibland en sidodörr. Och det handlar inte bara om de boende, utan också om hyresgäster som byts ut, styrelsen eller förvaltningsbolaget, städare, underhållspersonal och fasta leverantörer. När allt detta sköts med en enda kod och några fjärrkontroller kräver varje liten förändring, en boende som flyttar, en borttappad fjärrkontroll eller en ny leverantör, att koden byts och att alla informeras på nytt. WIFIGATE ersätter det arbetssättet med ordnad åtkomsthantering på byggnadsnivå.",
@@ -330,7 +330,7 @@ export default {
         },
         {
           "question": "Kan styrelsen se vem som har åtkomst?",
-          "answer": "Ja. Styrelsen eller fastighetsförvaltningen hanterar listan över behörigheter, och åtkomsthistoriken visar inpasseringarna för transparens."
+          "answer": "Ja. Styrelsen eller förvaltningsbolaget hanterar listan över behörigheter, och åtkomsthistoriken visar inpasseringarna för full transparens."
         },
         {
           "question": "Ersätter WIFIGATE den gemensamma portkoden?",
@@ -340,7 +340,7 @@ export default {
     },
     "office-buildings": {
       "label": "Kontorsbyggnader",
-      "title": "Vägen in på kontoret ska inte gå via receptionen!",
+      "title": "Vägen in på kontoret ska inte gå via receptionen",
       "heroLead": "Besökare, jobbkandidater och leverantörer väntar på att någon ska komma ner och öppna, och anställda får passerkort eller nycklar som måste samlas in när de slutar. Ge alla en personlig behörighet: permanent för anställda, tidsbegränsad för alla andra.",
       "highlights": [
         {
@@ -394,7 +394,7 @@ export default {
     },
     "entry-doors-magnetic-locks": {
       "label": "Entrédörrar och magnetlås för företag",
-      "title": "Koden till företagets entré ska inte gå från hand till hand!",
+      "title": "Koden till företagets entré ska inte gå från hand till hand",
       "heroLead": "En fast kod som delas med anställda, leverantörer och tekniker kan bli kvar hos personer som inte längre behöver komma in. Ge alla en personlig, tidsbegränsad behörighet att öppna, via det elektriska lås eller magnetlås som redan sitter på dörren.",
       "highlights": [
         {
@@ -448,7 +448,7 @@ export default {
     },
     "sports-facilities": {
       "label": "Idrottsanläggningar",
-      "title": "Koden till anläggningen ska inte cirkulera i WhatsApp-gruppen!",
+      "title": "Koden till anläggningen hör inte hemma i WhatsApp-gruppen",
       "heroLead": "En delad kod som går mellan medlemmar, tränare och gäster fortsätter att öppna även när den inte borde. Ge alla en personlig behörighet som följer öppettiderna och medlemskapets period, och som stänger när den inte längre behövs.",
       "highlights": [
         {
@@ -478,7 +478,7 @@ export default {
         "Tillfälliga behörigheter för evenemang, klasser eller träningspass",
         "Åtkomsthistorik för drift och kontroll"
       ],
-      "seoTitle": "Åtkomstkontroll för idrottsanläggningar och padelbanor | WIFIGATE",
+      "seoTitle": "Passersystem för idrottsanläggningar och padel | WIFIGATE",
       "seoDescription": "WIFIGATE ger smart åtkomstkontroll till idrottsanläggningar, padelbanor, gym och träningsanläggningar med åtkomst från mobilen och tillfälliga eller permanenta behörigheter.",
       "imageAlt": "Padelspelare öppnar entrén till en upplyst idrottsanläggning med mobilen",
       "faq": [
@@ -532,8 +532,8 @@ export default {
         "Inga gemensamma koder, kodlås eller nycklar att byta",
         "Inget SIM-kort eller internetanslutning vid dörren"
       ],
-      "seoTitle": "Smart åtkomstkontroll för förråd och förvaringsskåp | WIFIGATE",
-      "seoDescription": "WIFIGATE ger varje hyresgäst av förråd eller förvaringsskåp personlig åtkomst från mobilen till grinden, dörrarna och sitt eget skåp, begränsad till öppettiderna, registrerad i en historik och borttagen när hyran upphör.",
+      "seoTitle": "Smart åtkomst för förråd och förvaringsskåp | WIFIGATE",
+      "seoDescription": "WIFIGATE ger varje hyresgäst av förråd eller förvaringsskåp personlig åtkomst via mobilen: bara under öppettider, loggad och borttagen när hyran upphör.",
       "imageAlt": "Kvinna öppnar dörren till en förrådsanläggning med skåp och förråd med mobilen",
       "faq": [
         {

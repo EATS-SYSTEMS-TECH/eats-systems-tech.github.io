@@ -16,11 +16,11 @@ const copy = {
     primaryCta: "Cara ia berfungsi",
     secondaryCta: "Hubungi pasukan kami",
     proofLabel: "Kelebihan platform",
-    proof: ["Privasi sepenuhnya", "Mudah digunakan", "Arahan ketibaan dengan satu sentuhan", "Kebenaran tetamu terhad masa"],
+    proof: ["Privasi sepenuhnya", "Mudah digunakan", "Panduan arah dengan satu sentuhan", "Kebenaran tetamu terhad masa"],
   },
   platform: {
     eyebrow: "Apakah WIFIGATE?",
-    title: "Akses tanpa kerumitan yang biasa.",
+    title: "Akses mudah, tanpa leceh.",
     subtitle: "WIFIGATE ialah sistem kawalan akses yang disulitkan, menggabungkan WiFi dan Bluetooth untuk membuka pintu pagar, pintu, palang letak kereta, pintu garaj dan pintu gulung elektrik melalui telefon. Ia menyatukan akses harian dan akses tetamu dalam satu platform yang selamat.",
     features: [
       {
@@ -33,7 +33,7 @@ const copy = {
       },
       {
         title: "Jemputan Tetamu Pantas",
-        text: "Hantar jemputan masuk yang selamat beserta arahan ketibaan kepada kurier atau tetamu dalam beberapa saat, supaya pelawat boleh masuk tanpa panggilan telefon, alat kawalan jauh yang dikongsi atau penyelarasan manual.",
+        text: "Hantar jemputan masuk yang selamat beserta panduan arah kepada kurier atau tetamu dalam beberapa saat, supaya pelawat boleh masuk tanpa panggilan telefon, alat kawalan jauh yang dikongsi atau penyelarasan manual.",
       },
       {
         title: "Sejarah Akses 90 Hari",
@@ -48,8 +48,8 @@ const copy = {
         text: "Cipta jadual berulang dan tindakan automatik terus dalam sistem, mengikut cara premis anda beroperasi, termasuk sokongan mod Sabat.",
       },
       {
-        title: "Pembelajaran Digital Alat Kawalan Jauh RF",
-        text: "Tetapkan dan urus alat kawalan jauh RF melalui platform, tanpa bergantung pada proses pengaturcaraan manual yang rumit.",
+        title: "Daftar Alat Kawalan Jauh RF Secara Digital",
+        text: "Daftar dan urus alat kawalan jauh RF secara digital melalui platform, tanpa perlu pengaturcaraan manual yang leceh.",
       },
       {
         title: "Keselamatan & Privasi",
@@ -66,7 +66,7 @@ const copy = {
     imageAlt: "Seorang kurier mengikut laluan biru bertitik ke pintu masuk bangunan kediaman, sementara seorang penghuni memegang aplikasi WIFIGATE yang memaparkan kebenaran tetamu terhad masa.",
     eyebrow: "Akses peribadi",
     title: "Bangunan dan rumah persendirian bukan ruang awam.",
-    description: "Berhenti berkongsi kod interkom tetap. Hantar kebenaran masuk terhad masa beserta arahan ketibaan dengan satu sentuhan, dan kurangkan kemasukan tanpa kebenaran serta risiko kecurian.",
+    description: "Berhenti berkongsi kod interkom tetap. Hantar kebenaran masuk terhad masa beserta panduan arah dengan satu sentuhan, dan kurangkan kemasukan tanpa kebenaran serta risiko kecurian.",
   },
   solutions: {
     eyebrow: "Sesuai untuk setiap pintu masuk",
@@ -78,8 +78,8 @@ const copy = {
     eyebrow: "Dibina untuk industri hospitaliti",
     titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Untuk",
-    audiences: ["Hotel", "Airbnb", "Pangsapuri tetamu", "Premis hospitaliti"],
-    promise: "Sambut tetamu anda. Biarkan akses masuk berjalan secara automatik.",
+    audiences: ["Hotel", "Airbnb", "Homestay", "Premis hospitaliti"],
+    promise: "Sambut tetamu anda. Akses masuk diurus secara automatik.",
     subtitle: "Daripada hotel hingga pangsapuri percutian, sambungkan setiap tempahan kepada kebenaran masuk yang selamat untuk pintu pagar, pintu atau garaj yang betul. Tetamu masuk menggunakan telefon, dan kebenaran berkuat kuasa semasa daftar masuk serta tamat secara automatik semasa daftar keluar.",
     cta: "Terokai WIFIGATE Host",
     imageAlt: "Tetamu menggunakan telefon untuk memasuki tempat penginapan",
@@ -96,7 +96,7 @@ const copy = {
       },
       {
         icon: "team",
-        title: "Menjimatkan jam kerja kakitangan",
+        title: "Jimat masa kakitangan",
         text: "Pasukan anda menumpukan perhatian pada layanan tetamu, bukan pada urusan kad kunci atau peranti fizikal yang lain.",
       },
     ],
@@ -111,7 +111,7 @@ const copy = {
       "Sambung dengan kod QR",
       "Jemput tetamu",
       "Buka titik masuk",
-      "Pelajari alat kawalan jauh RF",
+      "Daftar alat kawalan jauh RF",
       "Tetapkan mod akses",
     ],
     status: "Akan datang",
@@ -119,8 +119,8 @@ const copy = {
   oneTapInvite: {
     imageAlt: "Laluan biru bertitik menghala dari jalan ke penanda lokasi di pintu masuk bangunan kediaman.",
     eyebrow: "Satu sentuhan. Semua yang tetamu perlukan.",
-    title: "Tidak perlu lagi mengulang arahan ketibaan.\nHantar satu jemputan dengan semua butiran.",
-    description: "WIFIGATE membolehkan anda berkongsi arahan ketibaan, alamat,\ntingkat, nombor unit, butiran tambahan dan kebenaran masuk terhad masa dengan satu sentuhan.",
+    title: "Tidak perlu lagi menerangkan arah berulang kali.\nHantar satu jemputan yang lengkap.",
+    description: "WIFIGATE membolehkan anda berkongsi panduan arah, alamat,\ntingkat, nombor unit, butiran tambahan dan kebenaran masuk terhad masa dengan satu sentuhan.",
   },
   faq: {
     eyebrow: "Semua tentang pintu pagar WiFi",
@@ -147,7 +147,7 @@ const copy = {
   },
   why: {
     eyebrow: "Mengapa WIFIGATE",
-    title: "Membawa pengalaman IoT global ke setiap pintu masuk.",
+    title: "Pengalaman IoT global di setiap pintu masuk.",
     description: "Pasukan kami mempunyai pengalaman luas dalam membangunkan dan melaksanakan sistem IoT di seluruh dunia. Kami menggunakan kepakaran ini untuk menjadikan WIFIGATE selamat, boleh diharap dan mudah dipasang, diurus serta digunakan.",
     points: ["Pintu", "Pintu pagar", "Palang letak kereta", "Pintu pagar kantilever", "Kunci elektromagnet", "Pintu gulung elektrik", "Pencahayaan", "Pam"],
     pointsNote: "Dan banyak lagi, mengikut apa yang perlu anda kendalikan.",
@@ -157,8 +157,8 @@ const copy = {
     title: "Jadikan setiap ketibaan lebih mudah.",
     subtitle: "Beritahu kami apa yang anda mahu buka: pintu pagar, pintu, pintu gulung elektrik...\nPasukan kami akan membantu anda mencari penyelesaian yang sesuai.",
     distributorTitle: "Program pengedar",
-    distributorText: "Anda mengenali pasaran dan pelanggan, kami menyediakan produk, latihan dan sokongan.",
-    distributorButton: "Sertai sebagai pengedar",
+    distributorText: "Anda kenal pasaran dan pelanggan. Kami sediakan produk, latihan dan sokongan.",
+    distributorButton: "Jadi pengedar",
     supportTitle: "Sokongan produk",
     supportText: "Dapatkan bantuan praktikal daripada pasukan yang mengenali produk ini dan memahami pemasangan anda.",
     interestTitle: "Rancang penyelesaian akses anda bersama kami",

@@ -9,18 +9,18 @@ export default {
   },
   "where": {
     "title": "Dove si può usare WIFIGATE?",
-    "subtitle": "WIFIGATE si adatta a un'ampia gamma di ambienti e offre una soluzione smart, sicura e comoda per gestire gli accessi, dalle case private agli ambienti commerciali e aziendali."
+    "subtitle": "WIFIGATE si adatta a un'ampia gamma di ambienti e offre una soluzione smart, sicura e comoda per gestire gli accessi, dalle case private alle attività commerciali e alle aziende."
   },
   "niches": {
     "hotels-airbnb": {
       "label": "Hotel, Airbnb e case vacanza",
-      "title": "Un ospite appena arrivato non deve aspettare che qualcuno gli apra!",
-      "heroLead": "Una tessera da emettere, una chiave da consegnare o un codice della cassetta portachiavi che passa da un ospite all'altro trasformano ogni arrivo in un coordinamento manuale. Dai a ogni ospite un'autorizzazione personale che si attiva al check-in e si chiude al check-out.",
+      "title": "L'ospite è arrivato: non deve aspettare che qualcuno gli apra!",
+      "heroLead": "Una tessera da emettere, una chiave da consegnare o un codice della cassetta portachiavi che passa da un ospite all'altro trasformano ogni arrivo in un'operazione da coordinare a mano. Dai a ogni ospite un'autorizzazione personale che si attiva al check-in e si disattiva al check-out.",
       "highlights": [
         {
           "icon": "calendar",
-          "title": "Si attiva al check-in, si chiude al check-out",
-          "text": "Nessuno deve ricordarsi di revocare l'accesso. L'autorizzazione entra in vigore all'orario di arrivo stabilito e scade all'orario di partenza, anche quando in struttura non c'è nessuno del personale."
+          "title": "Attiva al check-in, scade al check-out",
+          "text": "Nessuno deve ricordarsi di revocare l'accesso. L'autorizzazione si attiva all'orario di arrivo previsto e scade all'orario di partenza, anche quando in struttura non c'è nessuno."
         },
         {
           "icon": "invite",
@@ -70,8 +70,8 @@ export default {
     },
     "roller-shutters": {
       "label": "Serrande per negozi e attività",
-      "title": "Il comando della serranda non deve restare esposto fuori dall'attività!",
-      "heroLead": "Un interruttore, un selettore a chiave o un telecomando che stanno all'esterno o passano da un dipendente all'altro possono finire nelle mani sbagliate. Sposta il comando sul lato interno e protetto dell'attività e apri la serranda dallo smartphone, con un'autorizzazione personale per ogni dipendente.",
+      "title": "Il comando della serranda non deve stare fuori, alla portata di tutti!",
+      "heroLead": "Un interruttore, un selettore a chiave o un telecomando che stanno all'esterno o passano da un dipendente all'altro possono finire nelle mani sbagliate. Porta il comando all'interno, al riparo, e apri la serranda dallo smartphone, con un'autorizzazione personale per ogni dipendente.",
       "highlights": [
         {
           "icon": "shutter",
@@ -81,7 +81,7 @@ export default {
         {
           "icon": "users",
           "title": "Un'autorizzazione separata per ogni dipendente",
-          "text": "Una chiave o un telecomando rimasti a un ex dipendente continuano a funzionare. Un'autorizzazione personale si attiva il primo giorno e si chiude l'ultimo, senza cambiare serrature né ritirare dispositivi."
+          "text": "Una chiave o un telecomando rimasti a un ex dipendente continuano a funzionare. Un'autorizzazione personale si attiva il primo giorno e si disattiva l'ultimo, senza cambiare serrature né ritirare dispositivi."
         },
         {
           "icon": "phone",
@@ -124,8 +124,8 @@ export default {
     },
     "electric-gates": {
       "label": "Cancelli elettrici e barriere per parcheggi",
-      "title": "Aprire il cancello non deve comportare un addebito ricorrente!",
-      "heroLead": "I sistemi per aprire il cancello dallo smartphone spesso prevedono un abbonamento mensile che continua ad addebitarti ogni mese. Passa a un'apertura smart senza canone di abbonamento e senza addebiti ricorrenti, con autorizzazioni personali e apertura automatica per gli utenti abituali.",
+      "title": "Aprire il cancello non deve costarti un addebito ogni mese!",
+      "heroLead": "I sistemi per aprire il cancello dallo smartphone spesso prevedono un abbonamento che ti viene addebitato mese dopo mese. Passa a un'apertura smart senza abbonamento e senza addebiti ricorrenti, con autorizzazioni personali e apertura automatica per chi entra ogni giorno.",
       "highlights": [
         {
           "icon": "handsfree",
@@ -135,7 +135,7 @@ export default {
         {
           "icon": "clock",
           "title": "Accesso temporaneo per un fornitore o un ospite",
-          "text": "Invece di ricevere telefonate per aprire il cancello nel momento meno opportuno, invii un'autorizzazione valida solo nella fascia oraria in cui serve davvero, che poi si chiude da sola."
+          "text": "Invece di rispondere al telefono per aprire il cancello nel momento meno opportuno, invii un'autorizzazione valida solo nella fascia oraria in cui serve davvero, che poi scade da sola."
         },
         {
           "icon": "gate",
@@ -148,7 +148,7 @@ export default {
         "Apertura di cancelli elettrici e barriere dallo smartphone",
         "Nessun abbonamento mensile e nessun addebito ricorrente",
         "Condivisione di accessi temporanei con ospiti, fornitori e dipendenti",
-        "Auto Open per gli utenti abituali nell'ingresso di ogni giorno",
+        "Auto Open per gli utenti abituali, ogni giorno",
         "Eventi programmati per aprire in giorni e orari stabiliti",
         "Controllo dall'app o con i telecomandi esistenti",
         "Meno telecomandi fisici da distribuire",
@@ -178,8 +178,8 @@ export default {
     },
     "garage-doors": {
       "label": "Porte da garage e parcheggi privati",
-      "title": "Un telecomando RF economico può essere facile da copiare!",
-      "heroLead": "I telecomandi RF più semplici possono essere facili da copiare e dare accesso a chi non è mai stato autorizzato. WIFIGATE protegge l'accesso con livelli di sicurezza avanzati, archiviazione crittografata e tutela della privacy degli utenti.",
+      "title": "Un telecomando RF economico si può clonare in un attimo!",
+      "heroLead": "I telecomandi RF più semplici si possono clonare con facilità e finire per aprire a chi non è mai stato autorizzato. WIFIGATE protegge l'accesso con livelli di sicurezza avanzati, archiviazione crittografata e tutela della privacy degli utenti.",
       "highlights": [
         {
           "icon": "keyless",
@@ -197,11 +197,11 @@ export default {
           "text": "Invece di tenere un telecomando per ogni auto e ogni utente, apri con lo smartphone che hai già con te. Meno telecomandi da comprare, programmare, consegnare e gestire."
         }
       ],
-      "paragraph": "Le porte da garage e gli ingressi dei parcheggi privati si azionano di solito con telecomandi fisici, che possono andare persi, rimanere a persone che non hanno più bisogno di accedere o, in certi casi, essere copiati. WIFIGATE sposta il controllo su un accesso digitale dallo smartphone: puoi gestire le autorizzazioni di familiari, dipendenti o ospiti e condividere un accesso temporaneo senza consegnare un telecomando o un codice. Il risultato è un'esperienza più comoda, più riservata e più ordinata, con meno dipendenza dai supporti di accesso fisici.",
+      "paragraph": "Le porte da garage e gli ingressi dei parcheggi privati si azionano di solito con telecomandi fisici, che possono andare persi, rimanere a persone che non hanno più bisogno di accedere o, in certi casi, essere clonati. WIFIGATE sposta il controllo su un accesso digitale dallo smartphone: puoi gestire le autorizzazioni di familiari, dipendenti o ospiti e condividere un accesso temporaneo senza consegnare un telecomando o un codice. Il risultato è un'esperienza più comoda, più riservata e più ordinata, con meno dipendenza dai supporti di accesso fisici.",
       "bullets": [
         "Apertura della porta da garage dallo smartphone",
         "Meno dipendenza dai telecomandi fisici",
-        "Meno rischi legati a telecomandi persi, passati di mano o copiati",
+        "Meno rischi legati a telecomandi persi, passati di mano o clonati",
         "Gestione degli accessi per familiari, dipendenti e ospiti",
         "Accesso temporaneo senza consegnare telecomandi o codici",
         "Ideale per parcheggi privati, case e appartamenti con giardino",
@@ -232,7 +232,7 @@ export default {
     },
     "private-homes": {
       "label": "Case private",
-      "title": "Le case private non sono fatte per essere pubbliche!",
+      "title": "Casa tua non è un luogo pubblico!",
       "heroLead": "Il codice del citofono che hai dato a un corriere, a un tecnico o a un ospite gli resta molto tempo dopo la fine della visita, e passa ad altri a tua insaputa. Dai a ognuno un'autorizzazione di ingresso personale e a tempo limitato, e riduci gli ingressi non autorizzati e il rischio di furti.",
       "highlights": [
         {
@@ -247,7 +247,7 @@ export default {
         },
         {
           "icon": "roster",
-          "title": "Un elenco al posto delle supposizioni",
+          "title": "Un elenco, non supposizioni",
           "text": "Un codice condiviso non ha un elenco di chi lo possiede. Al suo posto arriva un elenco in cui ogni autorizzazione ha un nome, così in ogni momento è chiaro chi può entrare in casa."
         }
       ],
@@ -286,7 +286,7 @@ export default {
     },
     "residential-buildings": {
       "label": "Condomini",
-      "title": "I condomini non sono fatti per essere pubblici!",
+      "title": "Il condominio non è un luogo pubblico!",
       "heroLead": "Un codice fisso che passa tra corrieri, ospiti e tecnici può finire nelle mani sbagliate. Concedi un'autorizzazione di ingresso personale e a tempo limitato, e riduci gli ingressi non autorizzati e il rischio di furti.",
       "highlights": [
         {
@@ -296,7 +296,7 @@ export default {
         },
         {
           "icon": "invite",
-          "title": "Indicazioni di arrivo con un tocco",
+          "title": "Come arrivare, in un tocco",
           "text": "Indirizzo, piano, interno, codice del cancello e codice del portone: la stessa sequenza che detti ogni volta a ogni ospite, corriere e tecnico. Con WIFIGATE tutto si riduce a un solo tocco, e l'ospite arriva da solo fino alla porta."
         },
         {
@@ -305,7 +305,7 @@ export default {
           "text": "L'apertura automatica (Auto Open) riconosce che sei arrivato e apre il cancello o la porta per te. Senza cercare le chiavi né tirare fuori lo smartphone, anche con le mani occupate dalla spesa, dal passeggino o dai bambini."
         }
       ],
-      "paragraph": "In un condominio l'accesso non finisce al portone: ci sono il cancello, l'ingresso del parcheggio, le porte delle cantine e a volte anche un ingresso laterale. E non riguarda solo i condòmini, ma anche gli inquilini che cambiano, l'amministratore di condominio o la società di gestione, gli addetti alle pulizie, il personale di manutenzione e i fornitori abituali. Quando tutto questo si regge su un unico codice e qualche telecomando, ogni piccolo cambiamento, un residente che se ne va, un telecomando perso o un fornitore nuovo, costringe a cambiare il codice e ad avvisare di nuovo tutti. WIFIGATE sostituisce questo metodo con una gestione degli accessi ordinata, a livello di edificio.",
+      "paragraph": "In un condominio l'accesso non finisce al portone: ci sono il cancello, l'ingresso del parcheggio, le porte delle cantine e a volte anche un ingresso laterale. E non riguarda solo i condòmini, ma anche gli inquilini che cambiano, l'amministratore di condominio o la società di gestione, gli addetti alle pulizie, il personale di manutenzione e i fornitori abituali. Quando tutto questo si regge su un unico codice e qualche telecomando, ogni piccolo cambiamento (un residente che se ne va, un telecomando perso, un nuovo fornitore) costringe a cambiare il codice e ad avvisare di nuovo tutti. WIFIGATE sostituisce questo metodo con una gestione degli accessi ordinata, a livello di edificio.",
       "bullets": [
         "Un'autorizzazione personale per ogni residente, invece di un codice unico per tutti",
         "Aggiunta e rimozione dei residenti senza cambiare il codice di tutto l'edificio",
@@ -326,11 +326,11 @@ export default {
         },
         {
           "question": "Come entrano ospiti e corrieri?",
-          "answer": "Un residente invia un invito ospite a tempo limitato, con le indicazioni di arrivo in un solo tocco, senza rivelare un codice fisso."
+          "answer": "Un residente invia un invito ospite a tempo limitato, con le indicazioni per arrivare in un solo tocco, senza rivelare un codice fisso."
         },
         {
           "question": "L'amministratore di condominio può vedere chi ha accesso?",
-          "answer": "Sì. L'amministratore di condominio o la società di gestione gestisce l'elenco delle autorizzazioni, e la cronologia degli accessi mostra gli ingressi per garantire trasparenza."
+          "answer": "Sì. L'amministratore di condominio o la società di gestione tiene l'elenco delle autorizzazioni, e la cronologia degli accessi mostra gli ingressi in piena trasparenza."
         },
         {
           "question": "WIFIGATE sostituisce il codice condiviso del condominio?",
@@ -340,18 +340,18 @@ export default {
     },
     "office-buildings": {
       "label": "Edifici per uffici",
-      "title": "Per entrare in ufficio non si deve passare dalla reception!",
+      "title": "Per entrare in ufficio non serve passare dalla reception!",
       "heroLead": "Visitatori, candidati e fornitori aspettano che qualcuno scenda ad aprire, e ai dipendenti si emettono badge o si consegnano chiavi da ritirare a fine rapporto. Dai a ognuno un'autorizzazione personale: permanente per i dipendenti, a tempo limitato per tutti gli altri.",
       "highlights": [
         {
           "icon": "users",
-          "title": "Un dipendente arriva, un dipendente se ne va",
-          "text": "Assunzione e fine del rapporto sono un'unica azione in un elenco, non un giro fatto di badge da emettere, badge da ritirare e serrature da cambiare. L'autorizzazione si attiva e si chiude nelle date che stabilisci tu."
+          "title": "Chi arriva, chi se ne va",
+          "text": "Assunzione e fine del rapporto sono un'unica azione in un elenco, non un giro fatto di badge da emettere, badge da ritirare e serrature da cambiare. L'autorizzazione si attiva e si disattiva nelle date che stabilisci tu."
         },
         {
           "icon": "invite",
           "title": "Convoca un candidato con un tocco",
-          "text": "Invia al candidato una convocazione per il colloquio di lavoro che gli dà un'autorizzazione di apertura verificata e sicura, con indicazioni di arrivo e dettagli."
+          "text": "Invia al candidato una convocazione per il colloquio di lavoro che gli dà un'autorizzazione di apertura verificata e sicura, con le indicazioni per arrivare e tutti i dettagli."
         },
         {
           "icon": "history",
@@ -370,7 +370,7 @@ export default {
         "Un'immagine più moderna e accogliente per l'edificio",
         "Cronologia degli accessi per controllo e trasparenza"
       ],
-      "seoTitle": "Controllo accessi per edifici per uffici | WIFIGATE",
+      "seoTitle": "Controllo accessi negli edifici per uffici | WIFIGATE",
       "seoDescription": "WIFIGATE permette agli edifici per uffici di gestire dallo smartphone l'ingresso di dipendenti, visitatori e fornitori, con autorizzazioni temporanee e permanenti.",
       "imageAlt": "Impiegata che apre una porta a vetri in un ufficio moderno con lo smartphone",
       "faq": [
@@ -410,7 +410,7 @@ export default {
         {
           "icon": "phone",
           "title": "Nessun sistema di controllo accessi complesso",
-          "text": "Nessun quadro di controllo, nessun software gestionale e nessun lettore di badge da installare. La serratura esistente resta dov'è e tutto si gestisce dall'app."
+          "text": "Nessuna centrale di controllo, nessun software gestionale e nessun lettore di badge da installare. La serratura esistente resta dov'è e tutto si gestisce dall'app."
         }
       ],
       "paragraph": "Piccole attività, ambulatori, studi, magazzini e uffici si affidano spesso a un tastierino, a una chiave o a una semplice serratura magnetica. Il problema nasce quando il codice passa tra dipendenti, fornitori e ospiti, o quando serve un accesso temporaneo senza indebolire la sicurezza. WIFIGATE permette di gestire la porta d'ingresso dallo smartphone, condividere autorizzazioni temporanee e ridurre la necessità di codici fissi, chiavi fisiche o coordinamento manuale a ogni ingresso.",
@@ -449,12 +449,12 @@ export default {
     "sports-facilities": {
       "label": "Impianti sportivi",
       "title": "Il codice d'ingresso dell'impianto non deve girare nel gruppo WhatsApp!",
-      "heroLead": "Un codice condiviso che passa tra soci, allenatori e ospiti continua ad aprire anche quando non dovrebbe più. Dai a ognuno un'autorizzazione personale in linea con gli orari di apertura e con la durata dell'iscrizione, che si chiude quando non serve più.",
+      "heroLead": "Un codice condiviso che passa tra soci, allenatori e ospiti continua ad aprire anche quando non dovrebbe più. Dai a ognuno un'autorizzazione personale in linea con gli orari di apertura e con la durata dell'iscrizione, che si disattiva quando non serve più.",
       "highlights": [
         {
           "icon": "calendar",
           "title": "L'accesso si apre con la prenotazione",
-          "text": "Chi ha prenotato un campo per una certa ora riceve un'autorizzazione che si attiva in quel momento e si chiude allo scadere dell'ora. Nessuno deve aspettare al cancello per aprire."
+          "text": "Chi ha prenotato un campo per una certa ora riceve un'autorizzazione che si attiva in quel momento e si disattiva a fine ora. Nessuno deve aspettare al cancello per aprire."
         },
         {
           "icon": "users",
@@ -464,7 +464,7 @@ export default {
         {
           "icon": "history",
           "title": "Sapere chi era presente e quando",
-          "text": "Quando il flusso di persone cambia durante la giornata, un registro degli ingressi aiuta la gestione, chiarisce i dubbi in caso di incidenti e conferma che la struttura è stata chiusa a fine giornata."
+          "text": "Quando il flusso di persone cambia durante la giornata, un registro degli ingressi aiuta la gestione, aiuta a fare chiarezza in caso di problemi e conferma che la struttura è stata chiusa a fine giornata."
         }
       ],
       "paragraph": "Impianti sportivi, campi da padel, campi da tennis, palestre e centri di allenamento devono gestire l'accesso di soci, allenatori, squadre e ospiti in base a orari di apertura, prenotazioni ed eventi. WIFIGATE permette di concedere accessi temporanei o permanenti dallo smartphone, ridurre la dipendenza da una chiave o un codice condivisi e migliorare l'esperienza d'ingresso degli utenti, soprattutto nelle strutture dove il flusso di persone cambia durante la giornata.",
@@ -508,7 +508,7 @@ export default {
         {
           "icon": "users",
           "title": "Un'autorizzazione personale per ogni cliente",
-          "text": "Nessun codice condiviso che gli ex clienti ricordano ancora. Ogni cliente ha un accesso tutto suo, e revocarlo richiede un attimo quando il contratto scade o un pagamento non è stato saldato."
+          "text": "Nessun codice condiviso che gli ex clienti ricordano ancora. Ogni cliente ha un accesso tutto suo, e revocarlo richiede un attimo quando il contratto scade o un pagamento resta in sospeso."
         },
         {
           "icon": "clock",

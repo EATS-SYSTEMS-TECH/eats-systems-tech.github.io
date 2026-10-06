@@ -1,48 +1,48 @@
 # WIFIGATE
 
-> WIFIGATE (WiFi Gate) is a smart access control system that opens gates, doors, parking, shutters, and garages from your phone. Secure, encrypted, and convenient, with no monthly subscription.
+> WIFIGATE (WiFi Gate) is smart access control for opening gates, doors, parking, shutters, and garages from your phone. Secure, encrypted, convenient, no subscription.
 
 WIFIGATE is also written WiFi Gate, Wi-Fi Gate, Wifigate, WiFiGate: all of them are this product and wifigate.io.
 
-WIFIGATE is an encrypted access control system that combines WiFi and Bluetooth to open gates, doors, parking barriers, garage doors, and electric roller shutters from your phone. It brings everyday access and guest access together in one secure platform. It is made by EATS SYSTEMS TECH (Israel). No SIM, No Router: WIFIGATE works directly with the device, with no SIM card, internet plan, or external Wi-Fi router required. Stability: The direct connection to the device responds instantly and just as fast every time, with no remote-server delays and no dependence on network load or poor reception. Quick Guest Invite: Send a secure entry invitation with arrival directions to a courier or guest in seconds, so visitors can get in without calls, shared remotes, or manual coordination. 90-Day History: Review the last 90 days of access activity for clearer visibility into gate usage and recent entry events. Auto Open: Let approved users open the gate automatically when they arrive for a smoother, more convenient hands-free experience. Up to 50 Scheduled Events: Create recurring schedules and automated actions directly in the system to match how your site operates, including Shabbat mode support. Digital RF Remote Learning: Teach and manage RF remotes digitally through the platform instead of relying on manual programming workflows. Security & Privacy: Communication with the device and stored data are encrypted, so access to your property and the information about it stay private. No Subscription Fees: Pay once for the WIFIGATE device and installation, with no monthly subscription, renewal cycle, or ongoing platform fee.
+WIFIGATE is an encrypted access control system that combines WiFi and Bluetooth to open gates, doors, parking barriers, garage doors, and electric roller shutters from your phone. It brings everyday access and guest access together in one secure platform. It is made by EATS SYSTEMS TECH (Israel). No SIM, No Router: WIFIGATE talks directly to the installed device, so the entrance needs no SIM card, data plan, or external Wi-Fi router. Stability: The direct connection to the device responds instantly and just as fast every time, with no remote-server lag and no dependence on network congestion or weak reception. Quick Guest Invite: Send a courier or guest a secure entry invite with arrival directions in seconds, so visitors get in without calls, shared remotes, or back-and-forth coordination. 90-Day History: See the last 90 days of entry activity and get a clear picture of how the gate is used and who came in recently. Auto Open: Let authorized users open the gate automatically as they arrive, for smooth, convenient, hands-free entry. Up to 50 Scheduled Events: Create recurring schedules and automated actions right in the system, to fit the way your property runs, including Sabbath mode. Digital RF Remote Pairing: Pair and manage RF remotes through the platform instead of relying on clunky manual programming. Security & Privacy: Communication with the device and stored data are encrypted, so access to your property, and the data about it, stays private. No Subscription Fees: Pay once for the WIFIGATE device and installation, with no monthly subscription, renewals, or ongoing platform fees.
 
 The website is published in 39 languages; every page has a language version at /<language>/ (for example https://wifigate.io/he/).
 
 ## Product
 
 - [WIFIGATE home](https://wifigate.io/): what WIFIGATE is, how it works, use cases and FAQ.
-- [WIFIGATE Host](https://wifigate.io/automation/): From hotel stays to holiday apartments, connect each booking to secure access for the right gate, door, or garage. Guests enter using their phone, with access that starts at check-in and ends automatically at checkout.
+- [WIFIGATE Host](https://wifigate.io/automation/): From hotels to vacation rentals, link every booking to secure access for the right gate, door, or garage. Guests get in with their phone, and access starts at check-in and ends automatically at checkout.
 
 ## Use cases
 
-- [Hotels, Airbnb, and Guest Apartments](https://wifigate.io/hotels-airbnb/): WIFIGATE lets hotels, Airbnb hosts, and holiday complexes manage digital, automatic guest access with WIFIGATE Host, with personal entry permissions for each booking and no physical keys, magnetic cards, or lockboxes.
-- [Roller Shutters for Businesses and Shops](https://wifigate.io/roller-shutters/): WIFIGATE gives businesses and shops smart phone-based control of roller shutters, with permission management, less dependence on keys and remotes, and fewer exposed access points outside the premises.
-- [Electric Gates and Parking Barriers](https://wifigate.io/electric-gates/): WIFIGATE opens electric gates and parking barriers from the phone, with Auto Open, scheduled events, support for existing remotes, permission management, and no monthly subscription or recurring payment.
-- [Garage Doors and Private Parking](https://wifigate.io/garage-doors/): WIFIGATE opens garage doors and private parking entrances from the phone, with less dependence on physical remotes, temporary permissions, and more convenient, private access management.
-- [Private Homes](https://wifigate.io/private-homes/): WIFIGATE lets private homes manage access from the phone, share temporary permissions with guests and couriers, and reduce dependence on keypads, keys, and remotes.
-- [Residential Buildings](https://wifigate.io/residential-buildings/): WIFIGATE brings smart access management to residential buildings, with phone-based entry, temporary guest permissions, less dependence on keypads, and better transparency.
-- [Office Buildings](https://wifigate.io/office-buildings/): WIFIGATE lets office buildings manage entry for employees, visitors, and vendors from the phone, with temporary and permanent permissions and modern access management.
-- [Entry Doors and Magnetic Locks for Businesses](https://wifigate.io/entry-doors-magnetic-locks/): WIFIGATE brings smart opening to business entry doors and magnetic locks, with phone-based permission management, temporary access, and less dependence on keypads and keys.
-- [Sports Facilities](https://wifigate.io/sports-facilities/): WIFIGATE brings smart access control to sports facilities, padel courts, gyms, and training complexes, with phone-based entry and temporary or permanent permissions.
-- [Storage Spaces and Lockers](https://wifigate.io/storage-lockers/): WIFIGATE gives every storage and locker renter personal phone access to the gate, the doors and their locker, limited to opening hours, recorded in a history and removed when the rental ends.
+- [Hotels, Airbnb, and Vacation Rentals](https://wifigate.io/hotels-airbnb/): With WIFIGATE Host, hotels, Airbnb hosts, and resorts automate digital guest access: a personal pass for each booking, with no keys, key cards, or lockboxes.
+- [Roller Shutters for Businesses and Shops](https://wifigate.io/roller-shutters/): WIFIGATE lets shops and businesses control roller shutters from a phone, with permission management, less reliance on keys and remotes, and fewer exposed access points.
+- [Electric Gates and Parking Barriers](https://wifigate.io/electric-gates/): WIFIGATE opens electric gates and parking barriers from your phone: Auto Open, scheduled events, existing remotes, permissions, and no subscription or recurring charges.
+- [Garage Doors and Private Parking](https://wifigate.io/garage-doors/): WIFIGATE opens garage doors and private parking entrances from your phone, with fewer physical remotes, temporary access, and convenient, private access management.
+- [Private Homes](https://wifigate.io/private-homes/): WIFIGATE lets you manage home access from your phone, share temporary access with guests and couriers, and rely less on keypads, keys, and remotes.
+- [Residential Buildings](https://wifigate.io/residential-buildings/): WIFIGATE brings smart access management to residential buildings: phone-based entry, temporary guest access, less reliance on keypads, and better transparency.
+- [Office Buildings](https://wifigate.io/office-buildings/): WIFIGATE lets office buildings manage entry for employees, visitors, and vendors from a phone, with temporary and permanent access, managed the modern way.
+- [Entry Doors and Magnetic Locks for Businesses](https://wifigate.io/entry-doors-magnetic-locks/): WIFIGATE brings smart opening to business entry doors and magnetic locks, with phone-based permission management, temporary access, and less reliance on keypads and keys.
+- [Sports Facilities](https://wifigate.io/sports-facilities/): WIFIGATE brings smart access control to sports facilities, padel courts, gyms, and training centers, with phone-based entry and temporary or permanent access.
+- [Storage Units and Lockers](https://wifigate.io/storage-lockers/): WIFIGATE gives each storage or locker renter phone access to the gate, doors, and their locker, limited to opening hours, logged, and removed when the rental ends.
 
 ## FAQ
 
 ### What is a WiFi gate access control system?
 
-A WiFi gate access control system lets authorized people open gates, doors, parking barriers, garage doors, and electric roller shutters from a phone. WIFIGATE brings these access points into one secure platform.
+A WiFi gate access control system lets authorized users open gates, doors, parking barriers, garage doors, and electric roller shutters from a phone. WIFIGATE brings these access points into one secure platform.
 
 ### Does WIFIGATE need a SIM card or external Wi-Fi router?
 
-No. WIFIGATE communicates directly with the installed device, so the access point does not need a SIM card, internet plan, or external Wi-Fi router.
+No. WIFIGATE communicates directly with the installed device, so the entrance needs no SIM card, data plan, or external Wi-Fi router.
 
 ### Does WIFIGATE require a monthly subscription?
 
-No. You pay once for the WIFIGATE device and installation, with no monthly subscription, renewal cycle, or ongoing platform fee. WIFIGATE Host for commercial use is the only exception and requires a subscription.
+No. You pay once for the WIFIGATE device and installation, with no monthly subscription, renewals, or ongoing platform fees. WIFIGATE Host for commercial use is the only exception and requires a subscription.
 
 ### Can WIFIGATE provide temporary guest access?
 
-Yes. You can send a secure guest invitation limited to the dates and times you choose, making it suitable for homes, offices, hotels, Airbnb properties, and other managed entrances.
+Yes. You can send a secure guest invite limited to the dates and times you choose, which makes it a fit for homes, offices, hotels, Airbnb properties, and other managed entrances.
 
 ## Company and contact
 

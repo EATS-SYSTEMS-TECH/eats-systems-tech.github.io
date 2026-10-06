@@ -13,29 +13,29 @@ export default {
   },
   "niches": {
     "hotels-airbnb": {
-      "label": "Hotel, Airbnb dan Pangsapuri Tetamu",
-      "title": "Tetamu yang sudah tiba tidak sepatutnya menunggu seseorang membukakan pintu!",
-      "heroLead": "Kad yang perlu dikeluarkan, kunci yang perlu diserahkan atau kod peti kunci yang berpindah dari tetamu ke tetamu menjadikan setiap ketibaan satu urusan penyelarasan manual. Berikan setiap tetamu kebenaran peribadi yang dibuka semasa daftar masuk dan ditutup semasa daftar keluar.",
+      "label": "Hotel, Airbnb dan Homestay",
+      "title": "Tetamu sudah tiba? Jangan biarkan mereka menunggu di pintu!",
+      "heroLead": "Kad yang perlu dikeluarkan, kunci yang perlu diserahkan atau kod peti kunci yang beredar dari tetamu ke tetamu menjadikan setiap ketibaan urusan yang perlu diselaraskan secara manual. Berikan setiap tetamu kebenaran peribadi yang aktif semasa daftar masuk dan tamat semasa daftar keluar.",
       "highlights": [
         {
           "icon": "calendar",
-          "title": "Dibuka semasa daftar masuk, ditutup semasa daftar keluar",
+          "title": "Aktif semasa daftar masuk, tamat semasa daftar keluar",
           "text": "Tiada sesiapa perlu ingat untuk membatalkan akses. Kebenaran berkuat kuasa pada waktu ketibaan yang ditetapkan dan luput pada waktu berlepas, walaupun tiada kakitangan berada di lokasi."
         },
         {
           "icon": "invite",
           "title": "WIFIGATE Host menghubungkan tempahan dengan pintu masuk",
-          "text": "Dengan WIFIGATE Host, pengesahan tempahan dalam sistem hotel atau pangsapuri tetamu anda mencipta dan menghantar kebenaran masuk kepada tetamu secara automatik. Tiada butiran untuk disalin, tiada kad untuk dikeluarkan dan tiada langkah manual di sepanjang proses.",
+          "text": "Dengan WIFIGATE Host, sebaik sahaja tempahan disahkan dalam sistem hotel atau homestay anda, kebenaran masuk tetamu dicipta dan dihantar kepadanya secara automatik. Tiada butiran untuk disalin, tiada kad untuk dikeluarkan dan tiada langkah manual di sepanjang proses.",
           "ctaLabel": "Terokai WIFIGATE Host",
           "ctaHref": "/ms/automation/"
         },
         {
           "icon": "keyless",
           "title": "Tanpa kad dan tanpa peti kunci",
-          "text": "Tiada apa untuk dikeluarkan, tiada apa untuk diserahkan, tiada kad yang tertinggal pada tetamu sebelumnya dan tiada kod peti kunci yang diturunkan kepada orang lain. Telefon tetamu ialah satu-satunya cara untuk masuk."
+          "text": "Tiada apa-apa untuk diprogram atau diserahkan, tiada kad yang tertinggal oleh tetamu sebelumnya dan tiada kod peti kunci yang beredar. Telefon yang sudah ada dalam poket tetamu ialah satu-satunya kunci masuk."
         }
       ],
-      "paragraph": "WIFIGATE membolehkan hotel, pangsapuri tetamu (Airbnb) dan resort percutian memberikan tetamu pengalaman masuk digital yang mudah dan selamat terus daripada telefon bimbit mereka.\nTanpa perlu mengeluarkan kad magnetik, menyerahkan kunci fizikal atau menggunakan peti kunci (lockbox), kawalan akses menjadi automatik.\nMelalui WIFIGATE Host, anda boleh menyambungkan sistem tempahan anda terus kepada sistem akses.\nHasil sambungan ini, sebaik sahaja tempahan disahkan, tetamu menerima kebenaran masuk peribadi.\nKebenaran itu aktif tepat pada waktu daftar masuk dan tamat secara automatik semasa daftar keluar, tanpa campur tangan manual, penyerahan kunci atau penyelarasan oleh kaunter penyambut tetamu dan tuan rumah.",
+      "paragraph": "WIFIGATE membolehkan hotel, homestay (Airbnb) dan resort percutian memberikan tetamu pengalaman masuk digital yang mudah dan selamat terus daripada telefon bimbit mereka.\nTanpa perlu mengeluarkan kad magnetik, menyerahkan kunci fizikal atau menggunakan peti kunci (lockbox), kawalan akses menjadi automatik.\nMelalui WIFIGATE Host, anda boleh menyambungkan sistem tempahan anda terus kepada sistem akses.\nHasil sambungan ini, sebaik sahaja tempahan disahkan, tetamu menerima kebenaran masuk peribadi.\nKebenaran itu aktif tepat pada waktu daftar masuk dan tamat secara automatik semasa daftar keluar, tanpa campur tangan manual, penyerahan kunci atau penyelarasan oleh kaunter penyambut tetamu dan tuan rumah.",
       "bullets": [
         "Akses tetamu dicipta secara automatik selepas tempahan disahkan",
         "Sokongan automasi penuh melalui WIFIGATE Host",
@@ -63,19 +63,19 @@ export default {
           "answer": "Boleh. Kakitangan, pencuci, pasukan penyelenggaraan dan pembekal masing-masing mendapat kebenaran sendiri, dan sejarah kemasukan menunjukkan siapa yang membuka dan bila."
         },
         {
-          "question": "Adakah hotel dan pangsapuri tetamu memerlukan langganan?",
-          "answer": "Peranti WIFIGATE tidak memerlukan langganan bulanan. WIFIGATE Host, automasi tempahan untuk hotel dan pangsapuri tetamu, ialah satu-satunya bahagian yang ditawarkan secara langganan."
+          "question": "Adakah hotel dan homestay memerlukan langganan?",
+          "answer": "Peranti WIFIGATE tidak memerlukan langganan bulanan. WIFIGATE Host, automasi tempahan untuk hotel dan homestay, ialah satu-satunya bahagian yang ditawarkan secara langganan."
         }
       ]
     },
     "roller-shutters": {
       "label": "Pintu Gulung untuk Perniagaan dan Kedai",
-      "title": "Titik kawalan pintu gulung tidak sepatutnya terdedah di luar premis!",
+      "title": "Kawalan pintu gulung anda tidak sepatutnya terdedah di luar premis!",
       "heroLead": "Suis, kotak kunci atau alat kawalan jauh yang berada di luar atau berpindah antara pekerja boleh jatuh ke tangan yang salah. Pindahkan kawalan ke bahagian dalam premis yang terlindung, dan buka pintu gulung melalui telefon dengan kebenaran peribadi untuk setiap pekerja.",
       "highlights": [
         {
           "icon": "shutter",
-          "title": "Kawalan berpindah ke dalam, jauh daripada jangkauan",
+          "title": "Kawalan di dalam, jauh dari jangkauan",
           "text": "Suis atau kotak kunci pada dinding luar terdedah kepada sesiapa sahaja yang lalu. Apabila pintu dibuka melalui telefon, titik kawalan boleh diletakkan di bahagian dalam kedai."
         },
         {
@@ -124,13 +124,13 @@ export default {
     },
     "electric-gates": {
       "label": "Pintu Pagar Elektrik dan Palang Letak Kereta",
-      "title": "Membuka pintu pagar tidak sepatutnya disertai potongan bulanan!",
-      "heroLead": "Sistem membuka pintu pagar melalui telefon sering datang dengan langganan bulanan yang terus dipotong setiap bulan. Beralih kepada pembukaan pintar tanpa yuran langganan dan tanpa potongan automatik, dengan kebenaran peribadi dan Buka Automatik untuk pengguna tetap.",
+      "title": "Membuka pintu pagar tidak sepatutnya dikenakan potongan bulanan!",
+      "heroLead": "Sistem membuka pintu pagar melalui telefon sering datang dengan langganan yang terus memotong akaun anda setiap bulan. Beralih kepada pembukaan pintar tanpa yuran langganan dan tanpa potongan automatik, dengan kebenaran peribadi dan Buka Automatik untuk pengguna tetap.",
       "highlights": [
         {
           "icon": "handsfree",
           "title": "Buka automatik untuk kemasukan harian",
-          "text": "Buka Automatik (Auto Open) mengesan ketibaan anda dan membuka pintu pagar untuk anda. Tiada lagi mencari alat kawalan jauh di dalam laci kereta, meraba-raba telefon atau menurunkan tingkap ketika hujan."
+          "text": "Buka Automatik (Auto Open) mengesan ketibaan anda dan membuka pintu pagar untuk anda. Tiada lagi menyelongkar laci dashboard atau menurunkan tingkap ketika hujan."
         },
         {
           "icon": "clock",
@@ -140,7 +140,7 @@ export default {
         {
           "icon": "gate",
           "title": "Stabil, boleh diharap dan peribadi",
-          "text": "Nama dan nombor telefon ialah maklumat sensitif, terutamanya dalam era AI. Dalam WIFIGATE, pangkalan data pengguna disimpan pada peranti itu sendiri, disulitkan dan terasing daripada pendedahan internet, bersama sistem yang stabil dan boleh diharap untuk pembukaan harian."
+          "text": "Nama dan nombor telefon ialah maklumat sensitif, terutamanya dalam era AI. Dalam WIFIGATE, pangkalan data pengguna disimpan pada peranti itu sendiri, disulitkan dan terlindung daripada pendedahan internet, dalam sistem yang stabil dan boleh diharap untuk kegunaan harian."
         }
       ],
       "paragraph": "Pintu pagar elektrik dan palang letak kereta digunakan oleh penghuni, pekerja, tetamu dan pembekal, tetapi mengurus alat kawalan jauh, kod dan panggilan telefon untuk membuka pintu pagar cepat menjadi rumit. WIFIGATE membolehkan anda membuka pintu pagar melalui telefon, berkongsi akses tetap atau sementara, menggunakan Buka Automatik untuk pengguna tetap dan menetapkan acara berjadual mengikut keperluan. Sistem ini direka untuk operasi yang selamat, disulitkan dan peribadi, tanpa langganan bulanan atau potongan automatik, dan alat kawalan jauh sedia ada boleh terus digunakan bersama kawalan melalui aplikasi.",
@@ -178,7 +178,7 @@ export default {
     },
     "garage-doors": {
       "label": "Pintu Garaj dan Tempat Letak Kereta Persendirian",
-      "title": "Alat kawalan jauh RF yang murah mungkin mudah disalin!",
+      "title": "Alat kawalan jauh RF murah boleh jadi mudah disalin!",
       "heroLead": "Alat kawalan jauh RF yang ringkas mungkin mudah disalin dan memberi akses kepada orang yang tidak diberi kebenaran. WIFIGATE melindungi akses dengan lapisan keselamatan termaju, storan yang disulitkan dan perlindungan privasi pengguna.",
       "highlights": [
         {
@@ -204,7 +204,7 @@ export default {
         "Risiko lebih rendah daripada alat kawalan jauh yang hilang, berpindah tangan atau disalin",
         "Pengurusan akses untuk ahli keluarga, pekerja dan tetamu",
         "Akses sementara tanpa menyerahkan alat kawalan jauh atau kod",
-        "Sesuai untuk tempat letak kereta persendirian, rumah dan pangsapuri bertaman",
+        "Sesuai untuk tempat letak kereta persendirian, rumah dan unit tingkat bawah bertaman",
         "Penyelesaian pengurusan akses yang lebih peribadi dan selamat",
         "Kawalan harian yang lebih mudah dan selamat"
       ],
@@ -226,7 +226,7 @@ export default {
         },
         {
           "question": "Di manakah WIFIGATE boleh digunakan untuk tempat letak kereta?",
-          "answer": "Di garaj persendirian, pintu masuk tempat letak kereta persendirian, rumah dan pangsapuri bertaman."
+          "answer": "Di garaj persendirian, pintu masuk tempat letak kereta persendirian, rumah dan unit tingkat bawah bertaman."
         }
       ]
     },
@@ -238,7 +238,7 @@ export default {
         {
           "icon": "keyless",
           "title": "Kod interkom terus tersebar",
-          "text": "Kod itu berpindah kepada kurier, juruteknik dan tetamu, dan dari situ kepada orang lain tanpa pengetahuan anda. Selepas beberapa tahun, empat butang yang haus pada pad kekunci sendiri mendedahkan digit yang membentuk kod itu."
+          "text": "Kod itu sampai kepada kurier, juruteknik dan tetamu, lalu tersebar kepada orang lain tanpa pengetahuan anda. Selepas beberapa tahun pula, empat butang yang haus pada pad kekunci akan mendedahkan sendiri digit kod itu."
         },
         {
           "icon": "clock",
@@ -296,8 +296,8 @@ export default {
         },
         {
           "icon": "invite",
-          "title": "Arahan ketibaan dengan satu sentuhan",
-          "text": "Alamat, tingkat, unit, kod pintu pagar dan kod lobi. Urutan yang sama anda ulang kepada setiap tetamu, setiap kurier dan setiap tukang. Dengan WIFIGATE, semuanya dirangkum dalam satu sentuhan, dan tetamu sampai ke pintu sendiri."
+          "title": "Panduan arah dengan satu sentuhan",
+          "text": "Alamat, tingkat, unit, kod pintu pagar dan kod lobi. Urutan yang sama terpaksa anda ulang kepada setiap tetamu, setiap kurier dan setiap tukang. Dengan WIFIGATE, semuanya diringkaskan menjadi satu sentuhan, dan pelawat sampai ke pintu tanpa bantuan."
         },
         {
           "icon": "handsfree",
@@ -326,7 +326,7 @@ export default {
         },
         {
           "question": "Bagaimana tetamu dan kurier masuk?",
-          "answer": "Penghuni menghantar jemputan tetamu terhad masa, beserta arahan ketibaan dengan satu sentuhan, tanpa mendedahkan kod tetap."
+          "answer": "Penghuni menghantar jemputan tetamu terhad masa, beserta panduan arah dengan satu sentuhan, tanpa mendedahkan kod tetap."
         },
         {
           "question": "Bolehkah jawatankuasa pengurusan melihat siapa yang mempunyai akses?",
@@ -340,18 +340,18 @@ export default {
     },
     "office-buildings": {
       "label": "Bangunan Pejabat",
-      "title": "Masuk ke pejabat tidak sepatutnya melalui kaunter penyambut tetamu!",
+      "title": "Masuk ke pejabat tidak sepatutnya bergantung pada kaunter penyambut tetamu!",
       "heroLead": "Pelawat, calon temu duga dan pembekal menunggu seseorang turun untuk membuka pintu, manakala pekerja diberi pas atau kunci yang perlu dikutip semula apabila mereka berhenti kerja. Berikan setiap orang kebenaran peribadi, tetap untuk pekerja dan terhad masa untuk orang lain.",
       "highlights": [
         {
           "icon": "users",
           "title": "Pekerja masuk, pekerja keluar",
-          "text": "Menerima masuk atau melepaskan pekerja hanyalah satu tindakan dalam senarai, bukan pusingan mengeluarkan pas, mengutip pas dan menukar kunci. Kebenaran bermula dan tamat pada tarikh yang anda tetapkan."
+          "text": "Menerima pekerja baharu atau melepaskan pekerja hanya satu tindakan dalam senarai, bukan urusan mengeluarkan pas, mengutip semula pas dan menukar kunci. Kebenaran bermula dan tamat pada tarikh yang anda tetapkan."
         },
         {
           "icon": "invite",
-          "title": "Panggilan temu duga dengan satu sentuhan",
-          "text": "Hantar kepada calon panggilan temu duga yang memberinya kebenaran membuka pintu yang disahkan dan selamat, lengkap dengan arahan ketibaan dan butiran."
+          "title": "Jemput calon temu duga dengan satu sentuhan",
+          "text": "Hantar jemputan temu duga kepada calon, lengkap dengan kebenaran masuk yang disahkan dan selamat, panduan arah serta butiran lain."
         },
         {
           "icon": "history",
@@ -448,7 +448,7 @@ export default {
     },
     "sports-facilities": {
       "label": "Kemudahan Sukan",
-      "title": "Kod masuk kompleks tidak sepatutnya tersebar dalam kumpulan WhatsApp!",
+      "title": "Kod masuk kompleks sukan anda tidak sepatutnya tersebar dalam kumpulan WhatsApp!",
       "heroLead": "Kod dikongsi yang berpindah antara ahli, jurulatih dan tetamu terus membuka pintu walaupun tidak sepatutnya lagi. Berikan setiap orang kebenaran peribadi yang sepadan dengan waktu operasi dan tempoh keahlian, dan tamat apabila tidak diperlukan lagi.",
       "highlights": [
         {
@@ -464,12 +464,12 @@ export default {
         {
           "icon": "history",
           "title": "Ketahui siapa yang berada di kompleks dan bila",
-          "text": "Apabila trafik berubah sepanjang hari, rekod kemasukan membantu operasi, membantu menyiasat insiden dan mengesahkan bahawa kompleks ditutup pada penghujung hari."
+          "text": "Apabila kunjungan berubah-ubah sepanjang hari, rekod kemasukan membantu operasi, menjawab persoalan tentang insiden dan mengesahkan bahawa kompleks dikunci pada penghujung hari."
         }
       ],
-      "paragraph": "Kemudahan sukan, gelanggang Padel, gelanggang tenis, gimnasium dan kompleks latihan perlu mengurus akses untuk ahli, jurulatih, pasukan dan tetamu mengikut waktu operasi, tempahan dan acara. WIFIGATE membolehkan anda memberikan akses sementara atau tetap melalui telefon, mengurangkan kebergantungan pada kunci atau kod yang dikongsi, dan menambah baik pengalaman masuk pengguna, terutamanya di kompleks yang trafiknya berubah sepanjang hari.",
+      "paragraph": "Kemudahan sukan, gelanggang padel, gelanggang tenis, gimnasium dan kompleks latihan perlu mengurus akses untuk ahli, jurulatih, pasukan dan tetamu mengikut waktu operasi, tempahan dan acara. WIFIGATE membolehkan anda memberikan akses sementara atau tetap melalui telefon, mengurangkan kebergantungan pada kunci atau kod yang dikongsi, dan menambah baik pengalaman masuk pengguna, terutamanya di kompleks yang trafiknya berubah sepanjang hari.",
       "bullets": [
-        "Sesuai untuk gelanggang Padel, tenis, gimnasium dan kompleks latihan",
+        "Sesuai untuk gelanggang padel, tenis, gimnasium dan kompleks latihan",
         "Akses mengikut waktu operasi, tempahan atau kebenaran",
         "Pengurusan ahli, jurulatih, pekerja dan tetamu",
         "Kurang kebergantungan pada kunci dan kod yang dikongsi",
@@ -479,8 +479,8 @@ export default {
         "Sejarah akses untuk kawalan dan operasi"
       ],
       "seoTitle": "Kawalan Akses Kemudahan Sukan dan Gelanggang Padel | WIFIGATE",
-      "seoDescription": "WIFIGATE membolehkan kawalan akses pintar untuk kemudahan sukan, gelanggang Padel, gimnasium dan kompleks latihan, dengan kemasukan melalui telefon dan kebenaran sementara atau tetap.",
-      "imageAlt": "Pemain Padel membuka pintu masuk gelanggang sukan berlampu dengan telefon",
+      "seoDescription": "WIFIGATE membolehkan kawalan akses pintar untuk kemudahan sukan, gelanggang padel, gimnasium dan kompleks latihan, dengan kemasukan melalui telefon dan kebenaran sementara atau tetap.",
+      "imageAlt": "Pemain padel membuka pintu masuk gelanggang sukan berlampu dengan telefon",
       "faq": [
         {
           "question": "Bolehkah akses disesuaikan dengan waktu operasi atau tempahan?",
@@ -518,7 +518,7 @@ export default {
         {
           "icon": "history",
           "title": "Ketahui siapa yang masuk dan bila",
-          "text": "Setiap pembukaan direkodkan bersama nama pengguna dan masa, jadi persoalan tentang sesuatu lawatan dijawab daripada sejarah kemasukan, bukan daripada kamera keselamatan."
+          "text": "Setiap pembukaan direkodkan bersama nama pengguna dan masa, jadi persoalan tentang sesuatu lawatan dijawab daripada sejarah kemasukan, bukan dengan menyemak rakaman CCTV."
         }
       ],
       "paragraph": "Ruang simpanan dan bilik loker biasanya bergantung pada kod yang dikongsi, pad kekunci dan kunci fizikal yang disalin, berpindah tangan dan jarang ditukar. WIFIGATE memindahkan akses ke telefon: setiap penyewa mempunyai kebenaran peribadi ke pintu pagar kompleks, pintu masuk bangunan dan, jika dipasang, unit simpanan atau loker berkunci elektrik, terhad kepada waktu yang anda pilih dan dibuang sebaik sahaja sewaan tamat. Telefon berkomunikasi terus dengan peranti di lokasi, tanpa kad SIM dan tanpa sambungan internet di pintu, serta tanpa langganan bulanan untuk penggunaan biasa.",

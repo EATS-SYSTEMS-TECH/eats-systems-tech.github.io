@@ -20,7 +20,7 @@ export default {
         {
           "icon": "calendar",
           "title": "Aktif saat check-in, berakhir saat check-out",
-          "text": "Tidak ada lagi momen ketika seseorang harus ingat mencabut akses. Izin mulai berlaku pada jam kedatangan yang ditetapkan dan berakhir pada jam keberangkatan, bahkan saat tidak ada staf di lokasi."
+          "text": "Tak ada lagi yang perlu ingat untuk mencabut akses. Izin mulai berlaku pada jam kedatangan yang ditetapkan dan berakhir pada jam keberangkatan, bahkan saat tidak ada staf di lokasi."
         },
         {
           "icon": "invite",
@@ -32,7 +32,7 @@ export default {
         {
           "icon": "keyless",
           "title": "Tanpa kartu, tanpa kotak kunci",
-          "text": "Tidak ada yang perlu diterbitkan atau diserahkan, tidak ada kartu yang tertinggal pada tamu sebelumnya, dan tidak ada kode kotak kunci yang beredar. Ponsel tamu adalah satu-satunya sarana untuk masuk."
+          "text": "Tidak ada yang perlu diprogram atau diserahkan, tidak ada kartu yang tertinggal dari tamu sebelumnya, dan tidak ada kode kotak kunci yang beredar. Ponsel yang sudah ada di saku tamu menjadi satu-satunya kunci masuk."
         }
       ],
       "paragraph": "WIFIGATE memungkinkan hotel, apartemen sewa (Airbnb), dan resor memberikan pengalaman masuk digital yang praktis dan aman langsung dari ponsel tamu.\nAlih-alih repot menerbitkan kartu magnetik, menyerahkan kunci fisik, atau memakai kotak kunci (lockbox), kontrol akses berjalan otomatis.\nMelalui WIFIGATE Host, sistem pemesanan Anda dapat dihubungkan langsung ke sistem akses.\nBerkat koneksi ini, setelah pemesanan dikonfirmasi, tamu menerima izin masuk pribadi.\nIzin aktif tepat pada jam check-in dan berakhir otomatis saat check-out, tanpa campur tangan manual, serah terima kunci, atau koordinasi dari staf resepsionis maupun tuan rumah.",
@@ -70,13 +70,13 @@ export default {
     },
     "roller-shutters": {
       "label": "Rolling Door untuk Usaha dan Toko",
-      "title": "Titik kendali rolling door tidak boleh terbuka di luar tempat usaha!",
+      "title": "Kendali rolling door Anda tidak seharusnya terekspos di luar tempat usaha!",
       "heroLead": "Sakelar, kotak kunci, atau remote yang berada di luar atau berpindah antarkaryawan bisa jatuh ke tangan yang salah. Pindahkan kendali ke sisi dalam usaha Anda yang terlindungi, dan buka rolling door dari ponsel dengan izin pribadi untuk setiap karyawan.",
       "highlights": [
         {
           "icon": "shutter",
-          "title": "Kendali pindah ke dalam, di luar jangkauan",
-          "text": "Sakelar atau kotak kunci di dinding luar terbuka bagi siapa pun yang lewat. Saat pembukaan dilakukan dari ponsel, titik kendali bisa ditempatkan di sisi dalam toko."
+          "title": "Kendali di dalam, jauh dari jangkauan",
+          "text": "Sakelar atau kotak kunci di dinding luar bisa dijangkau siapa pun yang lewat. Saat pembukaan dilakukan dari ponsel, titik kendali bisa ditempatkan di sisi dalam toko."
         },
         {
           "icon": "users",
@@ -89,11 +89,11 @@ export default {
           "text": "Membuka dengan kunci mengharuskan Anda berdiri tepat di titik kendali, dengan tangan penuh dan pandangan terbatas ke area rolling door. Dari ponsel, semuanya bisa dilakukan dari jarak yang lebih aman."
         }
       ],
-      "paragraph": "Rolling door di tempat usaha dan toko sering dioperasikan dengan remote, kunci, kotak kunci eksternal, atau sakelar yang berada di luar tempat usaha. Solusi seperti ini bisa hilang, tetap dipegang mantan karyawan, digandakan, atau menjadi titik akses yang terbuka. Selain itu, membuka atau menutup dengan kunci berarti berdiri dekat titik kendali sambil memegang kunci, dan terkadang tanpa pandangan yang nyaman ke area rolling door. WIFIGATE memindahkan kendali ke aplikasi dan menempatkan kontrol akses di sisi dalam yang lebih terlindungi, sehingga Anda dapat membuka dan menutup dengan lebih nyaman, mengelola izin untuk karyawan dan pemasok, serta mengurangi ketergantungan pada kunci, remote, dan titik akses yang terbuka.",
+      "paragraph": "Rolling door di tempat usaha dan toko sering dioperasikan dengan remote, kunci, kotak kunci eksternal, atau sakelar yang berada di luar tempat usaha. Solusi seperti ini bisa hilang, tetap dipegang mantan karyawan, digandakan, atau menjadi titik akses yang rawan. Selain itu, membuka atau menutup dengan kunci berarti berdiri dekat titik kendali sambil memegang kunci, dan terkadang tanpa pandangan yang nyaman ke area rolling door. WIFIGATE memindahkan kendali ke aplikasi dan menempatkan kontrol akses di sisi dalam yang lebih terlindungi, sehingga Anda dapat membuka dan menutup dengan lebih nyaman, mengelola izin untuk karyawan dan pemasok, serta mengurangi ketergantungan pada kunci, remote, dan titik akses yang rawan.",
       "bullets": [
         "Buka dan tutup dari ponsel tanpa bergantung pada remote",
         "Lebih sedikit ketergantungan pada kunci yang bisa digandakan atau hilang",
-        "Lebih sedikit titik akses terbuka di luar tempat usaha",
+        "Lebih sedikit titik akses yang rawan di luar tempat usaha",
         "Kendali lebih nyaman dengan pandangan lebih baik ke area rolling door",
         "Pengelolaan izin untuk karyawan, manajer, dan pemasok",
         "Opsi akses sementara sesuai waktu atau kebutuhan",
@@ -101,12 +101,12 @@ export default {
         "Solusi di sisi dalam yang lebih rapi dan aman untuk operasional harian"
       ],
       "seoTitle": "Kendali Rolling Door Cerdas untuk Usaha dan Toko | WIFIGATE",
-      "seoDescription": "WIFIGATE menghadirkan kendali rolling door cerdas dari ponsel untuk usaha dan toko, dengan pengelolaan izin dan lebih sedikit kunci, remote, serta titik akses terbuka.",
+      "seoDescription": "WIFIGATE menghadirkan kendali rolling door cerdas dari ponsel untuk usaha dan toko, dengan pengelolaan izin dan lebih sedikit kunci, remote, serta titik akses yang rawan.",
       "imageAlt": "Pemilik usaha membuka rolling door toko dengan ponsel",
       "faq": [
         {
           "question": "Bagaimana WIFIGATE membuka rolling door?",
-          "answer": "WIFIGATE terhubung ke kontrol rolling door dan memungkinkan pemegang izin membuka dan menutupnya dari aplikasi WIFIGATE. Kendali pindah ke sisi dalam yang terlindungi, bukan lagi di sakelar kunci atau remote yang terbuka."
+          "answer": "WIFIGATE terhubung ke kontrol rolling door dan memungkinkan pemegang izin membuka dan menutupnya dari aplikasi WIFIGATE. Kendali pindah ke sisi dalam yang terlindungi, bukan lagi di sakelar kunci atau remote yang rawan."
         },
         {
           "question": "Bisakah setiap karyawan mendapat akses terpisah ke rolling door?",
@@ -118,7 +118,7 @@ export default {
         },
         {
           "question": "Cocok untuk usaha apa saja?",
-          "answer": "Toko, gudang, pintu servis, dan usaha apa pun dengan rolling door listrik yang ingin mengurangi kunci, remote, dan titik akses yang terbuka."
+          "answer": "Toko, gudang, pintu servis, dan usaha apa pun dengan rolling door listrik yang ingin mengurangi kunci, remote, dan titik akses yang rawan."
         }
       ]
     },
@@ -130,7 +130,7 @@ export default {
         {
           "icon": "handsfree",
           "title": "Buka otomatis saat masuk setiap hari",
-          "text": "Buka Otomatis (Auto Open) mengenali bahwa Anda sudah tiba dan membukakan gerbang untuk Anda. Tanpa mencari remote di laci dasbor, tanpa repot dengan ponsel, dan tanpa menurunkan kaca saat hujan."
+          "text": "Buka Otomatis (Auto Open) mengenali bahwa Anda sudah tiba dan membukakan gerbang untuk Anda. Tak perlu lagi mencari-cari remote di laci dasbor atau menurunkan kaca jendela saat hujan."
         },
         {
           "icon": "clock",
@@ -297,11 +297,11 @@ export default {
         {
           "icon": "invite",
           "title": "Petunjuk arah dalam satu ketukan",
-          "text": "Alamat, lantai, nomor unit, kode gerbang, dan kode lobi. Urutan yang sama Anda diktekan lagi kepada setiap tamu, setiap kurir, dan setiap tukang. Dengan WIFIGATE, semuanya cukup dengan satu ketukan, dan tamu bisa sampai ke pintu sendiri."
+          "text": "Alamat, lantai, nomor unit, kode gerbang, dan kode lobi. Urutan yang sama harus Anda ulangi untuk setiap tamu, setiap kurir, dan setiap tukang. Dengan WIFIGATE, semuanya cukup satu ketukan, dan tamu bisa menemukan sendiri jalan ke pintu."
         },
         {
           "icon": "handsfree",
-          "title": "Masuk tanpa tangan",
+          "title": "Masuk tanpa sentuhan",
           "text": "Buka Otomatis (Auto Open) mengenali bahwa Anda sudah tiba dan membukakan gerbang atau pintu untuk Anda. Tanpa mencari kunci dan tanpa mengeluarkan ponsel, bahkan saat tangan penuh belanjaan, kereta dorong, atau anak-anak."
         }
       ],
@@ -345,13 +345,13 @@ export default {
       "highlights": [
         {
           "icon": "users",
-          "title": "Karyawan masuk, karyawan keluar",
-          "text": "Penerimaan dan pemberhentian karyawan cukup dengan satu tindakan di daftar, bukan rangkaian menerbitkan kartu, menarik kartu, dan mengganti kunci. Izin aktif dan berakhir pada tanggal yang Anda tetapkan."
+          "title": "Ada yang bergabung, ada yang keluar",
+          "text": "Menambah atau melepas karyawan cukup satu tindakan di daftar, bukan urusan menerbitkan kartu, menarik kartu, dan mengganti kunci. Izin aktif dan berakhir pada tanggal yang Anda tetapkan."
         },
         {
           "icon": "invite",
           "title": "Undang kandidat dalam satu ketukan",
-          "text": "Kirim undangan wawancara kerja kepada kandidat yang sekaligus memberinya izin pembukaan yang terverifikasi dan aman, lengkap dengan petunjuk arah dan detailnya."
+          "text": "Kirim undangan wawancara kerja kepada kandidat, lengkap dengan izin masuk yang terverifikasi dan aman, petunjuk arah, serta detail lainnya."
         },
         {
           "icon": "history",
@@ -394,13 +394,13 @@ export default {
     },
     "entry-doors-magnetic-locks": {
       "label": "Pintu Masuk dan Kunci Magnetik untuk Usaha",
-      "title": "Kode pintu usaha Anda tidak boleh berpindah dari tangan ke tangan!",
-      "heroLead": "Kode permanen yang diberikan kepada karyawan, pemasok, dan teknisi bisa tetap dipegang orang yang sudah tidak perlu masuk. Beri setiap orang izin pembukaan pribadi yang berbatas waktu, melalui kunci elektrik atau magnetik yang sudah terpasang di pintu.",
+      "title": "Kode pintu usaha Anda tidak seharusnya berpindah dari tangan ke tangan!",
+      "heroLead": "Kode permanen yang diberikan kepada karyawan, pemasok, dan teknisi bisa tetap dipegang orang yang sudah tidak perlu masuk. Beri setiap orang izin pribadi berbatas waktu untuk membuka pintu, melalui kunci elektrik atau magnetik yang sudah terpasang.",
       "highlights": [
         {
           "icon": "keyless",
           "title": "Kurangi risiko akses tanpa izin",
-          "text": "Alih-alih kode bersama yang bisa jatuh ke tangan yang salah, setiap karyawan, pemasok, atau tamu memiliki izin pembukaan pribadi yang bisa dicabut kapan saja. Riwayat akses menunjukkan siapa yang membuka dan kapan, dan membantu mengurangi akses tanpa izin serta risiko pencurian."
+          "text": "Alih-alih kode bersama yang bisa jatuh ke tangan yang salah, setiap karyawan, pemasok, atau tamu memiliki izin pribadi untuk membuka pintu, yang bisa dicabut kapan saja. Riwayat akses menunjukkan siapa yang membuka dan kapan, dan membantu mengurangi akses tanpa izin serta risiko pencurian."
         },
         {
           "icon": "clock",
@@ -453,7 +453,7 @@ export default {
       "highlights": [
         {
           "icon": "calendar",
-          "title": "Akses terbuka sesuai pemesanan",
+          "title": "Akses aktif sesuai pemesanan",
           "text": "Siapa pun yang memesan lapangan untuk jam tertentu mendapat izin yang aktif pada jam itu dan berakhir saat jam itu selesai. Tidak ada yang perlu menunggu di gerbang untuk membukakan pintu."
         },
         {
@@ -464,7 +464,7 @@ export default {
         {
           "icon": "history",
           "title": "Tahu siapa yang berada di lokasi dan kapan",
-          "text": "Saat jumlah pengunjung berubah sepanjang hari, catatan akses masuk membantu operasional, memudahkan penelusuran insiden, dan memastikan lokasi sudah tertutup di akhir hari."
+          "text": "Saat jumlah pengunjung berubah sepanjang hari, catatan akses masuk membantu operasional, memudahkan penelusuran insiden, dan memastikan lokasi sudah terkunci di akhir hari."
         }
       ],
       "paragraph": "Fasilitas olahraga, lapangan padel, lapangan tenis, pusat kebugaran, dan kompleks latihan perlu mengelola akses untuk anggota, pelatih, staf, dan tamu sesuai jam operasional, pemesanan, dan acara. WIFIGATE memungkinkan Anda memberikan akses sementara atau permanen dari ponsel, mengurangi ketergantungan pada kunci atau kode bersama, dan meningkatkan pengalaman masuk bagi pengguna, terutama di kompleks yang jumlah pengunjungnya berubah sepanjang hari.",
@@ -492,7 +492,7 @@ export default {
         },
         {
           "question": "Bisakah saya melihat siapa yang berada di lokasi?",
-          "answer": "Bisa. Riwayat akses menunjukkan siapa yang membuka dan kapan, yang membantu operasional dan memastikan lokasi sudah tertutup di akhir hari."
+          "answer": "Bisa. Riwayat akses menunjukkan siapa yang membuka dan kapan, yang membantu operasional dan memastikan lokasi sudah terkunci di akhir hari."
         },
         {
           "question": "Fasilitas olahraga apa saja yang cocok untuk WIFIGATE?",
@@ -508,7 +508,7 @@ export default {
         {
           "icon": "users",
           "title": "Izin pribadi untuk setiap penyewa",
-          "text": "Tidak ada kode bersama yang masih diingat mantan penyewa. Setiap penyewa mendapat aksesnya sendiri, dan menghapusnya hanya butuh sesaat ketika kontrak berakhir atau pembayaran belum diselesaikan."
+          "text": "Tidak ada kode bersama yang masih diingat mantan penyewa. Setiap penyewa mendapat aksesnya sendiri, dan menghapusnya hanya butuh sesaat ketika kontrak berakhir atau pembayaran menunggak."
         },
         {
           "icon": "clock",
@@ -518,7 +518,7 @@ export default {
         {
           "icon": "history",
           "title": "Tahu siapa yang masuk dan kapan",
-          "text": "Setiap pembukaan tercatat dengan nama pengguna dan waktunya, sehingga pertanyaan tentang suatu kunjungan terjawab dari riwayat akses, bukan dari rekaman kamera keamanan."
+          "text": "Setiap pembukaan tercatat dengan nama pengguna dan waktunya, sehingga pertanyaan tentang suatu kunjungan terjawab dari riwayat akses, bukan dari rekaman CCTV."
         }
       ],
       "paragraph": "Lokasi penyimpanan dan ruang loker biasanya mengandalkan kode bersama, keypad, dan kunci fisik yang digandakan, berpindah tangan, dan jarang diganti. WIFIGATE memindahkan akses ke ponsel: setiap penyewa memiliki izin pribadi ke gerbang lokasi, pintu masuk gedung, dan, jika terpasang, unit penyimpanan atau loker dengan kunci elektrik, terbatas pada jam yang Anda pilih dan dihapus begitu masa sewa berakhir. Ponsel berkomunikasi langsung dengan perangkat di lokasi, tanpa kartu SIM atau koneksi internet di pintu, dan tanpa langganan bulanan untuk penggunaan standar.",

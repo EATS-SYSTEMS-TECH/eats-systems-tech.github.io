@@ -2,7 +2,7 @@
 // The WIFIGATE Host page (/automation/) in Turkish: title, description and body.
 
 export default {
-  "metaTitle": "Otel, Tatil Evi ve Otopark için Otomatik Misafir Erişimi | WIFIGATE",
+  "metaTitle": "Otel, Tatil Evi, Otopark: Otomatik Misafir Erişimi | WIFIGATE",
   "metaDescription": "Her rezervasyon için otomatik oluşturulan, güvenli ve süreli misafir erişimi. Oteller, tatil evleri, pansiyonlar, kiralık otopark ve garajlar için. Anahtar teslimi yok.",
   "marketing": {
     "hero": {
@@ -36,7 +36,7 @@ export default {
       "enterpriseF1": "Hacme göre fiyatlandırma",
       "enterpriseF2": "SLA ve kurulum desteği",
       "enterpriseF3": "Özel entegrasyon",
-      "note": "WIFIGATE Host eklentisi için lansman fiyatları, aylık faturalandırılır. Ek sistemler ve yıllık planlar mevcuttur; ayrıntılar için bize ulaşın."
+      "note": "WIFIGATE Host eklentisinde lansmana özel fiyatlar, aylık faturalandırma. Ek sistemler ve yıllık planlar da mevcut; ayrıntılar için bize ulaşın."
     },
     "audience": {
       "label": "Kimler için:",
@@ -48,17 +48,17 @@ export default {
     "steps": {
       "eyebrow": "Nasıl çalışır",
       "title": "Rezervasyondan açık kapıya, otomatik olarak",
-      "subtitle": "Üç adım; ardından her rezervasyon için kendi kendine işler.",
+      "subtitle": "Üç adım, sonrası her rezervasyonda kendiliğinden işler.",
       "s1t": "Bir rezervasyon gelir",
       "s1x": "Rezervasyon veya tesis yönetim sisteminiz, yeni onaylanan bir rezervasyonu WIFIGATE Host'a bildirir.",
       "s2t": "Erişim otomatik oluşturulur",
       "s2x": "WIFIGATE Host, tam olarak doğru kapı, giriş veya otopark için, yalnızca o konaklama süresince geçerli, güvenli ve süreli bir davet oluşturur.",
-      "s3t": "Misafiriniz doğrudan içeri girer",
+      "s3t": "Misafir rahatça içeri girer",
       "s3x": "Misafir girişi telefonundan açar. Check-out zamanı geldiğinde erişim kendiliğinden sona erer; toplanacak veya iptal edilecek bir şey yoktur."
     },
     "benefits": {
       "eyebrow": "Neden WIFIGATE Host",
-      "title": "Daha az resepsiyon. Daha zahmetsiz misafirperverlik.",
+      "title": "Daha az resepsiyon işi. Daha zahmetsiz ağırlama.",
       "subtitle": "Bir rezervasyonun erişime dönüşmesi için gereken her şey sizin yerinize halledilir.",
       "b1t": "Teslim edilecek anahtar yok",
       "b1x": "Anahtar teslimlerini, anahtar kutularını ve kopyalanan şifreleri unutun. Erişim, ihtiyaç duyulduğu anda misafirinizin telefonuna ulaşır.",
@@ -86,7 +86,7 @@ export default {
     },
     "cta": {
       "title": "Misafir erişimini otomatikleştirmeye hazır mısınız?",
-      "text": "Bize tesislerinizden bahsedin, WIFIGATE Host'u ev sahipliği tarzınıza göre kuralım.",
+      "text": "Bize tesislerinizden bahsedin, WIFIGATE Host'u misafir ağırlama şeklinize göre uyarlayalım.",
       "button": "Bizimle konuşun"
     }
   }

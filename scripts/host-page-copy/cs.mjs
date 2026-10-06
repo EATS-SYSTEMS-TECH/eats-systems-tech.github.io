@@ -7,7 +7,7 @@ export default {
   "marketing": {
     "hero": {
       "eyebrow": "WIFIGATE Host",
-      "title": "Přístup pro hosty, který se postará sám o sebe",
+      "title": "Přístup pro hosty, o který se nemusíte starat",
       "lead": "Jakmile je rezervace potvrzena, WIFIGATE vytvoří zabezpečený, časově omezený přístup k vaší bráně, dveřím nebo parkování, který při check-outu sám skončí. Žádné předávání klíčů, žádné shánění kódů a nikdo nemusí čekat u vchodu.",
       "ctaPrimary": "Ozvěte se nám",
       "note": "Pro hotely, prázdninové apartmány, penziony a pronajímaná parkovací místa či garáže."
@@ -54,15 +54,15 @@ export default {
       "s2t": "Přístup se vytvoří automaticky",
       "s2x": "WIFIGATE Host vystaví zabezpečenou, časově omezenou pozvánku přesně pro správnou bránu, dveře nebo parkování, platnou jen po dobu daného pobytu.",
       "s3t": "Host prostě vejde",
-      "s3x": "Host otevře vstup z telefonu. Při check-outu přístup sám vyprší, nic se nevrací ani neruší."
+      "s3x": "Host otevře vstup z telefonu. Při check-outu přístup sám vyprší a není co vybírat ani rušit."
     },
     "benefits": {
       "eyebrow": "Proč WIFIGATE Host",
-      "title": "Méně recepce. Více ubytování bez starostí.",
+      "title": "Méně práce na recepci. Ubytování, které běží samo.",
       "subtitle": "Vše, co je potřeba, aby se z rezervace stal přístup, vyřešíme za vás.",
       "b1t": "Žádné předávání klíčů",
       "b1x": "Zapomeňte na vyzvedávání klíčů, schránky na klíče a kopírované kódy. Přístup dorazí do telefonu hosta přesně ve chvíli, kdy je potřeba.",
-      "b2t": "Časově omezený ze své podstaty",
+      "b2t": "Časově omezený už z principu",
       "b2x": "Každá pozvánka začne platit při check-inu a při check-outu vyprší, automaticky u každého pobytu.",
       "b3t": "Šifrovaný a soukromý",
       "b3x": "Přístup je šifrovaný a omezený na vydané oprávnění. Vaše nemovitost i vaši hosté zůstávají v bezpečí.",
@@ -75,8 +75,8 @@ export default {
     },
     "secure": {
       "eyebrow": "Bezpečnost",
-      "title": "Přístup, který můžete bezpečně dát cizímu člověku",
-      "subtitle": "Navrženo k ochraně nemovitosti za každou bránou.",
+      "title": "Přístup, který můžete bez obav dát i cizímu člověku",
+      "subtitle": "Navrženo tak, aby chránilo nemovitost za každou bránou.",
       "i1t": "Koncové šifrování",
       "i1x": "Každá pozvánka je šifrovaná, takže údaje o přístupu nelze při přenosu přečíst ani zkopírovat.",
       "i2t": "Méně fyzických prostředků, více péče o hosty",
@@ -85,8 +85,8 @@ export default {
       "i3x": "Přístup je vázaný na každý pobyt a každého hosta a můžete ho kdykoli zastavit."
     },
     "cta": {
-      "title": "Jste připraveni automatizovat přístup hostů?",
-      "text": "Řekněte nám o svých nemovitostech a my WIFIGATE Host přizpůsobíme tomu, jak ubytováváte.",
+      "title": "Chcete, aby se přístup hostů řídil sám?",
+      "text": "Řekněte nám o svých nemovitostech a my WIFIGATE Host přizpůsobíme vašemu způsobu ubytování.",
       "button": "Ozvěte se nám"
     }
   }

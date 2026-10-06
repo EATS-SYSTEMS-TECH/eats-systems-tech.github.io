@@ -7,7 +7,7 @@ export default {
   "marketing": {
     "hero": {
       "eyebrow": "WIFIGATE Host",
-      "title": "Akses tamu yang berjalan dengan sendirinya",
+      "title": "Akses tamu yang beres dengan sendirinya",
       "lead": "Begitu pemesanan dikonfirmasi, WIFIGATE membuat akses yang aman dan berbatas waktu ke gerbang, pintu, atau parkir Anda, dan akses itu berakhir dengan sendirinya saat check-out. Tanpa serah terima kunci, tanpa repot mengurus kode, dan tanpa ada yang menunggu di pintu masuk.",
       "ctaPrimary": "Hubungi kami",
       "note": "Untuk hotel, apartemen liburan, guesthouse, serta parkir/garasi sewaan."
@@ -15,7 +15,7 @@ export default {
     "pricing": {
       "eyebrow": "Harga",
       "title": "Paket sederhana untuk add-on WIFIGATE Host",
-      "subtitle": "Bayar hanya untuk otomatisasinya. Perangkat WIFIGATE sendiri tidak pernah memerlukan langganan.",
+      "subtitle": "Bayar hanya untuk otomatisasinya. Perangkat WIFIGATE sendiri tidak memerlukan langganan sama sekali.",
       "per": "/ bulan",
       "starterDesc": "Untuk satu properti atau satu pintu masuk.",
       "starterF1": "Satu sistem",
@@ -46,7 +46,7 @@ export default {
       "parking": "Parkir & garasi sewaan"
     },
     "steps": {
-      "eyebrow": "Cara kerjanya",
+      "eyebrow": "Cara kerja",
       "title": "Dari pemesanan hingga gerbang terbuka, otomatis",
       "subtitle": "Tiga langkah, lalu semuanya berjalan sendiri untuk setiap pemesanan.",
       "s1t": "Pemesanan masuk",
@@ -62,7 +62,7 @@ export default {
       "subtitle": "Semua yang dibutuhkan agar pemesanan menjadi akses, kami tangani untuk Anda.",
       "b1t": "Tanpa serah terima kunci",
       "b1x": "Lupakan pengambilan kunci, kotak kunci, dan kode yang disalin. Akses tiba di ponsel tamu tepat saat dibutuhkan.",
-      "b2t": "Berbatas waktu sejak awal",
+      "b2t": "Selalu berbatas waktu",
       "b2x": "Setiap undangan aktif saat check-in dan berakhir saat check-out, otomatis, untuk setiap masa inap.",
       "b3t": "Terenkripsi dan privat",
       "b3x": "Akses dienkripsi dan terbatas pada izin yang diterbitkan. Properti dan tamu Anda tetap terlindungi.",
@@ -79,7 +79,7 @@ export default {
       "subtitle": "Dirancang untuk melindungi properti di balik setiap gerbang.",
       "i1t": "Terenkripsi dari ujung ke ujung",
       "i1x": "Setiap undangan dienkripsi, sehingga detail akses tidak dapat dibaca atau disalin selama pengiriman.",
-      "i2t": "Lebih sedikit sarana fisik, lebih banyak keramahan",
+      "i2t": "Lebih sedikit kunci dan kartu, lebih fokus pada tamu",
       "i2x": "Akses digital mengurangi kebutuhan akan kunci, kartu, dan remote, sehingga tim Anda bisa fokus pada tamu dan pelayanan.",
       "i3t": "Kendali tetap di tangan Anda",
       "i3x": "Akses terikat pada setiap masa inap dan setiap tamu, dan Anda dapat menghentikannya kapan saja."

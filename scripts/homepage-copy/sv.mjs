@@ -29,15 +29,15 @@ const copy = {
       },
       {
         title: "Stabilitet",
-        text: "Den direkta anslutningen till enheten svarar direkt och lika snabbt varje gång, utan fördröjningar från en avlägsen server och oberoende av nätbelastning eller dålig täckning.",
+        text: "Tack vare den direkta anslutningen till enheten reagerar systemet omedelbart och lika snabbt varje gång, utan fördröjning från en avlägsen server och oberoende av nätbelastning eller dålig täckning.",
       },
       {
         title: "Snabb gästinbjudan",
         text: "Skicka en säker inbjudan med vägbeskrivning till ett bud eller en gäst på några sekunder, så att besökare kommer in utan samtal, delade fjärrkontroller eller manuell samordning.",
       },
       {
-        title: "Åtkomsthistorik för 90 dagar",
-        text: "Se åtkomstaktiviteten för de senaste 90 dagarna och få en tydlig bild av hur grinden används och de senaste passagehändelserna.",
+        title: "90 dagars åtkomsthistorik",
+        text: "Se åtkomstaktiviteten för de senaste 90 dagarna och få en tydlig bild av hur grinden används och vilka passager som skett nyligen.",
       },
       {
         title: "Automatisk öppning",
@@ -49,7 +49,7 @@ const copy = {
       },
       {
         title: "Digital inlärning av RF-fjärrkontroller",
-        text: "Lär in och hantera RF-fjärrkontroller digitalt via plattformen i stället för att förlita dig på krånglig manuell programmering.",
+        text: "Lär in och hantera RF-fjärrkontroller digitalt via plattformen, utan krånglig manuell programmering.",
       },
       {
         title: "Säkerhet och integritet",
@@ -66,7 +66,7 @@ const copy = {
     imageAlt: "Ett bud följer en blå prickad rutt till entrén till ett flerbostadshus medan en boende håller upp WIFIGATE-appen som visar tidsbegränsad gäståtkomst.",
     eyebrow: "Privat åtkomst",
     title: "Byggnader och privata hem är inte offentliga rum.",
-    description: "Sluta dela fasta porttelefonkoder. Skicka en tidsbegränsad behörighet med vägbeskrivning med ett enda tryck, och minska obehörigt tillträde och risken för stöld.",
+    description: "Sluta dela fasta portkoder. Skicka en tidsbegränsad behörighet med vägbeskrivning med ett enda tryck, och minska risken för obehörigt tillträde och stöld.",
   },
   solutions: {
     eyebrow: "Utformat för varje ingång",
@@ -79,7 +79,7 @@ const copy = {
     titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "För",
     audiences: ["Hotell", "Airbnb", "Semesterlägenheter", "Boendeanläggningar"],
-    promise: "Välkomna dina gäster. Låt åtkomsten sköta sig själv.",
+    promise: "Ta emot dina gäster. Låt åtkomsten sköta sig själv.",
     subtitle: "Från hotell till semesterlägenheter: koppla varje bokning till en säker behörighet för rätt grind, dörr eller garage. Gästerna kommer in med mobilen, och behörigheten börjar gälla vid incheckning och upphör automatiskt vid utcheckning.",
     cta: "Utforska WIFIGATE Host",
     imageAlt: "Gäster använder mobilen för att komma in i sitt boende",
@@ -119,7 +119,7 @@ const copy = {
   oneTapInvite: {
     imageAlt: "En blå prickad rutt leder från gatan till en platsmarkör vid entrén till ett flerbostadshus.",
     eyebrow: "Ett tryck. Allt gästerna behöver.",
-    title: "Sluta upprepa vägbeskrivningen.\nSkicka en inbjudan med alla detaljer.",
+    title: "Sluta förklara vägen om och om igen.\nSkicka en inbjudan med allt som behövs.",
     description: "Med WIFIGATE delar du vägbeskrivning, adress, våning,\nlägenhetsnummer, övriga detaljer och den tidsbegränsade behörigheten med ett tryck.",
   },
   faq: {

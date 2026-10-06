@@ -13,14 +13,14 @@ const copy = {
     media: {"replay":"Putar ulang video","mute":"Bisukan video","unmute":"Aktifkan suara video","pause":"Jeda video","play":"Putar video"},
     titleLines: ["Satu aplikasi.", "Semua pintu masuk Anda."],
     subtitle: "Solusi cerdas untuk akses dan kontrol di rumah, gedung, tempat usaha, dan properti perhotelan. Semuanya dalam satu platform, praktis dan tanpa repot.",
-    primaryCta: "Cara kerjanya",
+    primaryCta: "Cara kerja",
     secondaryCta: "Bicara dengan tim kami",
     proofLabel: "Keunggulan platform",
     proof: ["Privasi penuh", "Mudah digunakan", "Petunjuk arah dalam satu ketukan", "Izin tamu berbatas waktu"],
   },
   platform: {
     eyebrow: "Apa itu WIFIGATE?",
-    title: "Akses tanpa kerumitan yang biasa.",
+    title: "Akses tanpa ribet.",
     subtitle: "WIFIGATE adalah sistem kontrol akses terenkripsi yang menggabungkan WiFi dan Bluetooth untuk membuka gerbang, pintu, palang parkir, pintu garasi, dan rolling door listrik dari ponsel. Sistem ini menyatukan akses sehari-hari dan akses tamu dalam satu platform yang aman.",
     features: [
       {
@@ -79,7 +79,7 @@ const copy = {
     titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Ditujukan untuk",
     audiences: ["Hotel", "Airbnb", "Apartemen sewa", "Properti penginapan"],
-    promise: "Sambut tamu Anda. Biarkan akses masuk berjalan otomatis.",
+    promise: "Sambut tamu Anda. Akses masuk diatur otomatis.",
     subtitle: "Dari hotel hingga apartemen liburan, hubungkan setiap pemesanan dengan izin masuk yang aman ke gerbang, pintu, atau garasi yang sesuai. Tamu masuk dengan ponselnya, dan izin mulai berlaku saat check-in lalu berakhir otomatis saat check-out.",
     cta: "Jelajahi WIFIGATE Host",
     imageAlt: "Tamu menggunakan ponsel untuk masuk ke tempat menginap",
@@ -96,7 +96,7 @@ const copy = {
       },
       {
         icon: "team",
-        title: "Menghemat jam kerja staf",
+        title: "Hemat waktu staf",
         text: "Tim Anda bisa fokus melayani tamu, bukan mengurus kartu kunci atau sarana fisik lainnya.",
       },
     ],
@@ -119,11 +119,11 @@ const copy = {
   oneTapInvite: {
     imageAlt: "Rute biru putus-putus mengarah dari jalan ke penanda lokasi di pintu masuk gedung hunian.",
     eyebrow: "Satu ketukan. Semua yang dibutuhkan tamu.",
-    title: "Tak perlu lagi mengulang petunjuk arah.\nKirim satu undangan lengkap dengan semua detailnya.",
+    title: "Tak perlu lagi menjelaskan arah berulang kali.\nKirim satu undangan yang lengkap.",
     description: "Dengan WIFIGATE, Anda bisa membagikan petunjuk arah, alamat,\nlantai, nomor apartemen, detail tambahan, dan izin masuk berbatas waktu dalam satu ketukan.",
   },
   faq: {
-    eyebrow: "Semua yang perlu Anda ketahui tentang gerbang WiFi",
+    eyebrow: "Seputar gerbang WiFi",
     title: "Akses gerbang WiFi, tanpa tanda tanya.",
     subtitle: "Jawaban jelas seputar instalasi, konektivitas, biaya, dan akses tamu.",
     items: [
@@ -157,8 +157,8 @@ const copy = {
     title: "Jadikan setiap kedatangan lebih mudah.",
     subtitle: "Ceritakan apa yang ingin Anda buka: gerbang, pintu, rolling door listrik...\nTim kami akan membantu Anda menemukan solusi yang tepat.",
     distributorTitle: "Program distributor",
-    distributorText: "Anda mengenal pasar dan pelanggannya, kami menghadirkan produk, pelatihan, dan dukungannya.",
-    distributorButton: "Bergabung sebagai distributor",
+    distributorText: "Anda mengenal pasar dan pelanggannya. Kami menyediakan produk, pelatihan, dan dukungannya.",
+    distributorButton: "Jadi distributor",
     supportTitle: "Dukungan produk",
     supportText: "Dapatkan bantuan praktis dari tim yang mengenal produk dan memahami instalasi Anda.",
     interestTitle: "Rancang solusi akses Anda bersama kami",
@@ -166,10 +166,10 @@ const copy = {
     whatsappButton: "Hubungi kami di WhatsApp",
   },
   footer: {
-    tagline: "Tanpa kunci. Tanpa remote. Tanpa kartu. Akses digital yang aman, tanpa menunggu seseorang membukakan pintu.",
+    tagline: "Tanpa kunci. Tanpa remote. Tanpa kartu. Akses digital yang aman, tanpa harus menunggu dibukakan pintu.",
     taglineLines: [
       "Tanpa kunci. Tanpa remote. Tanpa kartu.",
-      "Akses digital yang aman, tanpa menunggu seseorang membukakan pintu.",
+      "Akses digital yang aman, tanpa harus menunggu dibukakan pintu.",
     ],
     legalTitle: "Informasi hukum",
     terms: "Syarat & Ketentuan",

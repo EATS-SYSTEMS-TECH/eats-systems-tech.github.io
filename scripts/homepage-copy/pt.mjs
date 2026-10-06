@@ -11,12 +11,12 @@ const copy = {
   },
   hero: {
     media: {"replay":"Reproduzir o vídeo novamente","mute":"Silenciar o vídeo","unmute":"Ativar o som do vídeo","pause":"Pausar o vídeo","play":"Reproduzir o vídeo"},
-    titleLines: ["Uma aplicação.", "Todas as suas entradas."],
-    subtitle: "Acesso e controlo inteligentes para casas, edifícios, empresas e espaços de alojamento. Tudo numa só plataforma, de forma simples e sem esforço.",
+    titleLines: ["Uma só aplicação.", "Todas as suas entradas."],
+    subtitle: "Acesso e controlo inteligentes para casas, edifícios, empresas e espaços de alojamento. Tudo numa só plataforma, simples e sem complicações.",
     primaryCta: "Como funciona",
     secondaryCta: "Fale com a nossa equipa",
     proofLabel: "Vantagens da plataforma",
-    proof: ["Privacidade total", "Fácil de usar", "Indicações de chegada num toque", "Acessos de visita limitados no tempo"],
+    proof: ["Privacidade total", "Fácil de usar", "Indicações de chegada num toque", "Acessos temporários para visitas"],
   },
   platform: {
     eyebrow: "O que é a WIFIGATE?",
@@ -29,15 +29,15 @@ const copy = {
       },
       {
         title: "Estabilidade",
-        text: "A ligação direta ao dispositivo responde de imediato e com a mesma rapidez todas as vezes, sem atrasos de um servidor remoto e sem depender da carga da rede ou de má receção.",
+        text: "A ligação direta ao dispositivo responde de imediato e com a mesma rapidez todas as vezes, sem atrasos de um servidor remoto e sem depender do congestionamento da rede nem da qualidade do sinal.",
       },
       {
         title: "Convite rápido para visitas",
-        text: "Envie em segundos um convite de entrada seguro, com indicações de chegada, a um estafeta ou a uma visita, para que possam entrar sem chamadas, comandos partilhados nem coordenação manual.",
+        text: "Em segundos, envie a um estafeta ou a uma visita um convite de entrada seguro, com indicações de chegada. Entram sem chamadas, sem comandos partilhados e sem combinar nada à última hora.",
       },
       {
         title: "Histórico de acessos de 90 dias",
-        text: "Consulte a atividade de entrada dos últimos 90 dias e tenha uma visão clara da utilização do portão e das entradas mais recentes.",
+        text: "Consulte o registo de entradas dos últimos 90 dias e tenha uma visão clara da utilização do portão e das entradas mais recentes.",
       },
       {
         title: "Abertura automática",
@@ -45,11 +45,11 @@ const copy = {
       },
       {
         title: "Até 50 eventos agendados",
-        text: "Crie horários recorrentes e ações automáticas diretamente no sistema, de acordo com o funcionamento do seu espaço, incluindo suporte para o modo Shabbat.",
+        text: "Crie horários recorrentes e ações automáticas diretamente no sistema, de acordo com o funcionamento do seu espaço, incluindo o modo Shabat.",
       },
       {
         title: "Programação digital de comandos RF",
-        text: "Configure e faça a gestão dos comandos RF através da plataforma, em vez de depender de processos de programação manuais e complicados.",
+        text: "Configure e gira os comandos RF através da plataforma, sem processos de programação manuais e complicados.",
       },
       {
         title: "Segurança e privacidade",
@@ -65,12 +65,12 @@ const copy = {
   privateAccess: {
     imageAlt: "Um estafeta segue um percurso azul tracejado até à entrada de um prédio de apartamentos, enquanto um morador segura a aplicação WIFIGATE com uma permissão de visita limitada no tempo.",
     eyebrow: "Acesso privado",
-    title: "Os prédios e as casas particulares não são espaços públicos.",
+    title: "Prédios e moradias não são espaços públicos.",
     description: "Deixe de partilhar códigos fixos do intercomunicador. Envie num toque uma permissão de entrada limitada no tempo, com indicações de chegada, e reduza as entradas não autorizadas e o risco de furto.",
   },
   solutions: {
     eyebrow: "Para qualquer entrada",
-    titleLines: ["Um sistema.", "Para cada ponto de acesso."],
+    titleLines: ["Um só sistema.", "Para cada entrada."],
     subtitle: "Abra a partir do telemóvel, dê acesso a quem precisa e decida quando termina.",
     imageAlt: "A aplicação WIFIGATE no telemóvel, com o portão de casa, o local de trabalho e uma permissão de visita limitada no tempo",
   },
@@ -78,8 +78,8 @@ const copy = {
     eyebrow: "Criado para a hotelaria",
     titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Para",
-    audiences: ["Hotéis", "Airbnb", "Alojamento local", "Espaços de alojamento"],
-    promise: "Receba os seus hóspedes. Deixe a entrada funcionar sozinha.",
+    audiences: ["Hotéis", "Airbnb", "Alojamento Local", "Espaços de alojamento"],
+    promise: "Receba os seus hóspedes. A entrada funciona sozinha.",
     subtitle: "De hotéis a casas de férias, associe cada reserva a uma permissão de entrada segura para o portão, a porta ou a garagem certos. Os hóspedes entram com o telemóvel, e a permissão entra em vigor no check-in e termina automaticamente no check-out.",
     cta: "Conheça o WIFIGATE Host",
     imageAlt: "Hóspedes a usar o telemóvel para entrar no alojamento",
@@ -102,7 +102,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Visão geral do sistema WIFIGATE: o dispositivo IP67, a aplicação móvel e a placa de controlo com os terminais de aperto, USB Type-C e entrada de 12-24V, Wi-Fi 6, Bluetooth LE e um recetor de 433,92MHz, a par das funcionalidades da plataforma: 500 utilizadores, 20 administradores, convites de visita ilimitados, uma API de convites automáticos, sem SIM nem router, estabilidade, convite rápido para visitas, histórico de 90 dias, abertura automática, até 50 eventos, programação digital de comandos RF, segurança e privacidade, e sem mensalidades.",
+    imageAlt: "Visão geral do sistema WIFIGATE: o dispositivo IP67, a aplicação móvel e a placa de controlo com os bornes de parafuso, USB Type-C e entrada de 12-24V, Wi-Fi 6, Bluetooth LE e um recetor de 433,92MHz, a par das funcionalidades da plataforma: 500 utilizadores, 20 administradores, convites de visita ilimitados, uma API de convites automáticos, sem SIM nem router, estabilidade, convite rápido para visitas, histórico de 90 dias, abertura automática, até 50 eventos, programação digital de comandos RF, segurança e privacidade, e sem mensalidades.",
     eyebrow: "Vídeos tutoriais",
     title: "Simples desde o primeiro dia.",
     subtitle: "Instruções claras para a instalação, a utilização diária e as definições avançadas.",
@@ -124,7 +124,7 @@ const copy = {
   },
   faq: {
     eyebrow: "Tudo o que precisa de saber sobre um portão WiFi",
-    title: "Acesso com portão WiFi, sem pontos de interrogação.",
+    title: "Acesso por portão WiFi, sem mistérios.",
     subtitle: "Respostas claras sobre instalação, conectividade, custos e acesso de visitas.",
     items: [
       {
@@ -147,17 +147,17 @@ const copy = {
   },
   why: {
     eyebrow: "Porquê a WIFIGATE",
-    title: "Experiência global em IoT em cada ponto de acesso.",
+    title: "Experiência internacional em IoT ao serviço de cada entrada.",
     description: "A nossa equipa tem uma vasta experiência no desenvolvimento e na implementação de sistemas IoT em todo o mundo. Aplicamos esse conhecimento para tornar a WIFIGATE segura, fiável e simples de instalar, gerir e utilizar.",
     points: ["Porta", "Portão", "Barreira de estacionamento", "Portão autoportante", "Fechadura eletromagnética", "Estore elétrico", "Iluminação", "Bomba"],
     pointsNote: "E muito mais, conforme o que precisar de acionar.",
   },
   contact: {
     eyebrow: "Vamos conversar",
-    title: "Torne cada chegada mais simples.",
+    title: "Simplifique cada chegada.",
     subtitle: "Diga-nos o que quer abrir: um portão, uma porta, um estore elétrico...\nA nossa equipa ajuda-o a encontrar a solução certa.",
     distributorTitle: "Programa de distribuidores",
-    distributorText: "Conhece o mercado e os clientes. Nós trazemos o produto, a formação e o apoio.",
+    distributorText: "Conhece o mercado e os clientes; nós trazemos o produto, a formação e o apoio.",
     distributorButton: "Torne-se distribuidor",
     supportTitle: "Apoio ao produto",
     supportText: "Obtenha ajuda prática de uma equipa que conhece o produto e compreende a sua instalação.",

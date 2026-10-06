@@ -14,8 +14,8 @@ export default {
   "niches": {
     "hotels-airbnb": {
       "label": "Hotele, Airbnb i apartamenty na wynajem",
-      "title": "Gość, który przyjechał, nie powinien czekać, aż ktoś mu otworzy!",
-      "heroLead": "Karta do wydania, klucz do przekazania albo kod do skrytki na klucze, który krąży od gościa do gościa, zamieniają każdy przyjazd w ręczne uzgadnianie. Daj każdemu gościowi osobiste uprawnienie, które otwiera się przy zameldowaniu i zamyka przy wymeldowaniu.",
+      "title": "Gość na miejscu nie powinien czekać, aż ktoś mu otworzy!",
+      "heroLead": "Karta do wydania, klucz do przekazania albo kod do sejfu na klucze, który przechodzi z gościa na gościa: przez nie każdy przyjazd wymaga ręcznego uzgadniania. Daj każdemu gościowi osobiste uprawnienie, które otwiera się przy zameldowaniu i zamyka przy wymeldowaniu.",
       "highlights": [
         {
           "icon": "calendar",
@@ -31,23 +31,23 @@ export default {
         },
         {
           "icon": "keyless",
-          "title": "Bez kart i bez skrytki na klucze",
-          "text": "Nie ma czego wydawać ani przekazywać, nie ma karty, która została u poprzedniego gościa, ani kodu do skrytki, który krąży dalej. Telefon gościa jest jedynym sposobem wejścia."
+          "title": "Bez kart i bez sejfu na klucze",
+          "text": "Nie ma czego wydawać ani przekazywać, nie ma karty, która została u poprzedniego gościa, ani kodu do sejfu, który krąży dalej. Telefon gościa jest jedynym sposobem wejścia."
         }
       ],
-      "paragraph": "WIFIGATE pozwala hotelom, apartamentom na wynajem (Airbnb) i ośrodkom wypoczynkowym zapewnić gościom wygodne i bezpieczne cyfrowe wejście prosto z telefonu.\nKontrola dostępu staje się automatyczna, bez wydawania kart magnetycznych, przekazywania fizycznych kluczy czy korzystania ze skrytek na klucze (Lockbox).\nDzięki WIFIGATE Host możesz połączyć swój system rezerwacji bezpośrednio z systemem dostępu.\nPo potwierdzeniu rezerwacji gość otrzymuje wtedy osobiste uprawnienie do wejścia.\nUprawnienie aktywuje się dokładnie o godzinie zameldowania i wygasa automatycznie przy wymeldowaniu, bez ręcznej obsługi, przekazywania kluczy i uzgodnień z recepcją czy gospodarzami.",
+      "paragraph": "WIFIGATE pozwala hotelom, apartamentom na wynajem (Airbnb) i ośrodkom wypoczynkowym zapewnić gościom wygodne i bezpieczne cyfrowe wejście prosto z telefonu.\nKontrola dostępu staje się automatyczna, bez wydawania kart magnetycznych, przekazywania fizycznych kluczy czy korzystania z sejfów na klucze (Lockbox).\nDzięki WIFIGATE Host możesz połączyć swój system rezerwacji bezpośrednio z systemem dostępu.\nDzięki temu po potwierdzeniu rezerwacji gość otrzymuje osobiste uprawnienie do wejścia.\nUprawnienie aktywuje się dokładnie o godzinie zameldowania i wygasa automatycznie przy wymeldowaniu, bez ręcznej obsługi, przekazywania kluczy i uzgodnień z recepcją czy gospodarzami.",
       "bullets": [
         "Automatyczne tworzenie dostępu dla gościa po potwierdzeniu rezerwacji",
         "Pełna automatyzacja dzięki WIFIGATE Host",
         "Dostęp tymczasowy zgodny z datami i godzinami pobytu",
         "Mniej wydawania, przekazywania i wymiany kart do pokoi",
-        "Zarządzanie uprawnieniami personelu, sprzątania, serwisu i dostawców",
+        "Zarządzanie uprawnieniami personelu, ekip sprzątających, serwisu i dostawców",
         "Płynniejszy i wygodniejszy przyjazd dla gości",
         "Automatyczne wygaśnięcie dostępu przy wymeldowaniu",
         "Historia dostępu dla przejrzystości i kontroli"
       ],
       "seoTitle": "WIFIGATE | Cyfrowy dostęp gości: hotele, Airbnb, ośrodki",
-      "seoDescription": "Hotele, Airbnb i ośrodki wypoczynkowe: automatyczny, cyfrowy dostęp gości z WIFIGATE Host. Osobiste uprawnienia dla każdej rezerwacji, bez kluczy, kart i skrytek.",
+      "seoDescription": "Hotele, Airbnb i ośrodki wypoczynkowe: automatyczny, cyfrowy dostęp gości z WIFIGATE Host. Osobiste uprawnienia dla każdej rezerwacji, bez kluczy, kart i sejfów na klucze.",
       "imageAlt": "Goście otwierają telefonem drzwi pokoju hotelowego w nowoczesnym korytarzu",
       "faq": [
         {
@@ -75,7 +75,7 @@ export default {
       "highlights": [
         {
           "icon": "shutter",
-          "title": "Sterowanie przenosi się do środka, poza zasięg",
+          "title": "Sterowanie w środku, poza zasięgiem obcych",
           "text": "Przełącznik lub skrzynka na klucz na zewnętrznej ścianie są dostępne dla każdego przechodnia. Gdy otwierasz telefonem, punkt sterowania może znajdować się po wewnętrznej stronie sklepu."
         },
         {
@@ -89,7 +89,7 @@ export default {
           "text": "Otwieranie kluczem wymaga stania tuż przy punkcie sterowania, z zajętymi rękami i bez dobrego widoku na strefę rolety. Telefonem robisz to z bezpieczniejszej odległości."
         }
       ],
-      "paragraph": "Rolety antywłamaniowe w firmach i sklepach często obsługuje się pilotami, kluczami, zewnętrzną skrzynką na klucz lub przełącznikami umieszczonymi na zewnątrz lokalu. Takie rozwiązania mogą się zgubić, zostać u byłych pracowników, zostać skopiowane albo stać się odsłoniętym punktem dostępu. Ponadto otwieranie lub zamykanie kluczem wymaga stania blisko punktu sterowania, trzymania klucza w dłoni, a czasem także rezygnacji z wygodnego widoku na strefę rolety. WIFIGATE pozwala przenieść sterowanie do aplikacji i umieścić kontrolę dostępu po wewnętrznej, lepiej chronionej stronie, dzięki czemu wygodniej otwierasz i zamykasz, zarządzasz uprawnieniami pracowników i dostawców oraz ograniczasz zależność od kluczy, pilotów i odsłoniętych punktów dostępu.",
+      "paragraph": "Rolety antywłamaniowe w firmach i sklepach często obsługuje się pilotami, kluczami, zewnętrzną skrzynką na klucz lub przełącznikami umieszczonymi na zewnątrz lokalu. Takie rozwiązania mogą się zgubić, zostać u byłych pracowników, zostać skopiowane albo stać się odsłoniętym punktem dostępu. Ponadto otwieranie lub zamykanie kluczem wymaga stania blisko punktu sterowania, trzymania klucza w dłoni, a czasem także ograniczonej widoczności strefy rolety. WIFIGATE pozwala przenieść sterowanie do aplikacji i umieścić kontrolę dostępu po wewnętrznej, lepiej chronionej stronie, dzięki czemu wygodniej otwierasz i zamykasz, zarządzasz uprawnieniami pracowników i dostawców oraz ograniczasz zależność od kluczy, pilotów i odsłoniętych punktów dostępu.",
       "bullets": [
         "Otwieranie i zamykanie telefonem, bez polegania na pilotach",
         "Mniejsza zależność od kluczy, które można skopiować lub zgubić",
@@ -124,13 +124,13 @@ export default {
     },
     "electric-gates": {
       "label": "Bramy automatyczne i szlabany parkingowe",
-      "title": "Otwieranie bramy nie powinno wiązać się ze zleceniem stałym!",
-      "heroLead": "Systemy do otwierania bram telefonem często wiążą się z miesięcznym abonamentem, który co miesiąc znika z konta. Przejdź na inteligentne otwieranie bez opłat abonamentowych i bez zlecenia stałego, z osobistymi uprawnieniami i automatycznym otwieraniem dla stałych użytkowników.",
+      "title": "Otwieranie bramy nie powinno oznaczać comiesięcznych opłat!",
+      "heroLead": "Systemy do otwierania bram telefonem często wiążą się z miesięcznym abonamentem, który co miesiąc znika z konta. Przejdź na inteligentne otwieranie bez opłat abonamentowych i płatności cyklicznych, z osobistymi uprawnieniami i automatycznym otwieraniem dla stałych użytkowników.",
       "highlights": [
         {
           "icon": "handsfree",
           "title": "Automatyczne otwieranie przy codziennym wjeździe",
-          "text": "Automatyczne otwieranie (Auto Open) rozpoznaje Twój przyjazd i otwiera bramę za Ciebie. Bez szukania pilota w schowku, bez zajmowania się telefonem i bez opuszczania szyby w deszczu."
+          "text": "Automatyczne otwieranie (Auto Open) rozpoznaje Twój przyjazd i otwiera bramę za Ciebie. Bez szukania pilota w schowku, bez sięgania po telefon i bez opuszczania szyby w deszczu."
         },
         {
           "icon": "clock",
@@ -143,10 +143,10 @@ export default {
           "text": "Imiona, nazwiska i numery telefonów to wrażliwe informacje, zwłaszcza w erze AI. W WIFIGATE baza użytkowników jest przechowywana w samym urządzeniu, zaszyfrowana i odizolowana od internetu, a system działa stabilnie i niezawodnie przy codziennym otwieraniu."
         }
       ],
-      "paragraph": "Z bram automatycznych i szlabanów parkingowych korzystają mieszkańcy, pracownicy, goście i dostawcy, ale zarządzanie pilotami, kodami i telefonami z prośbą o otwarcie szybko staje się uciążliwe. WIFIGATE pozwala otwierać bramę telefonem, udostępniać dostęp stały lub tymczasowy, korzystać z automatycznego otwierania dla stałych użytkowników i ustawiać zaplanowane zdarzenia według potrzeb. System zapewnia bezpieczną, szyfrowaną i prywatną pracę bez miesięcznego abonamentu i bez zlecenia stałego, a dotychczasowe piloty mogą dalej działać równolegle ze sterowaniem z aplikacji.",
+      "paragraph": "Z bram automatycznych i szlabanów parkingowych korzystają mieszkańcy, pracownicy, goście i dostawcy, ale zarządzanie pilotami, kodami i telefonami z prośbą o otwarcie szybko staje się uciążliwe. WIFIGATE pozwala otwierać bramę telefonem, udostępniać dostęp stały lub tymczasowy, korzystać z automatycznego otwierania dla stałych użytkowników i ustawiać zaplanowane zdarzenia według potrzeb. System zapewnia bezpieczną, szyfrowaną i prywatną pracę bez miesięcznego abonamentu i płatności cyklicznych, a dotychczasowe piloty mogą dalej działać równolegle ze sterowaniem z aplikacji.",
       "bullets": [
         "Otwieranie bramy automatycznej lub szlabanu telefonem",
-        "Bez miesięcznego abonamentu i bez zlecenia stałego",
+        "Bez miesięcznego abonamentu i płatności cyklicznych",
         "Udostępnianie dostępu tymczasowego gościom, dostawcom i pracownikom",
         "Auto Open dla stałych użytkowników przy codziennym wjeździe",
         "Zaplanowane zdarzenia otwierania według dni i godzin",
@@ -155,7 +155,7 @@ export default {
         "Historia otwarć dla kontroli i przejrzystości"
       ],
       "seoTitle": "Bramy automatyczne i szlabany bez abonamentu | WIFIGATE",
-      "seoDescription": "Otwieraj telefonem bramy automatyczne i szlabany z WIFIGATE: Auto Open, zaplanowane zdarzenia, dotychczasowe piloty i uprawnienia. Bez abonamentu i zlecenia stałego.",
+      "seoDescription": "Otwieraj telefonem bramy automatyczne i szlabany z WIFIGATE: Auto Open, zaplanowane zdarzenia, dotychczasowe piloty i uprawnienia. Bez abonamentu i płatności cyklicznych.",
       "imageAlt": "Kierowca otwiera telefonem szlaban parkingowy i bramę automatyczną",
       "faq": [
         {
@@ -172,13 +172,13 @@ export default {
         },
         {
           "question": "Czy jest jakaś opłata miesięczna?",
-          "answer": "Nie. Płacisz jednorazowo za urządzenie i instalację, bez miesięcznego abonamentu i bez powtarzających się opłat."
+          "answer": "Nie. Płacisz jednorazowo za urządzenie i instalację, bez miesięcznego abonamentu i bez płatności cyklicznych."
         }
       ]
     },
     "garage-doors": {
       "label": "Bramy garażowe i parkingi prywatne",
-      "title": "Tani pilot RF może być łatwy do skopiowania!",
+      "title": "Tani pilot RF łatwo sklonować!",
       "heroLead": "Proste piloty RF bywają łatwe do skopiowania i mogą dać dostęp komuś, kto nigdy nie dostał uprawnienia. WIFIGATE chroni dostęp dzięki zaawansowanym warstwom zabezpieczeń, szyfrowanemu przechowywaniu danych i ochronie prywatności użytkowników.",
       "highlights": [
         {
@@ -193,11 +193,11 @@ export default {
         },
         {
           "icon": "phone",
-          "title": "Ogranicz zależność od fizycznych urządzeń",
+          "title": "Mniejsza zależność od fizycznych pilotów",
           "text": "Zamiast trzymać pilota dla każdego samochodu i każdego użytkownika, otwierasz telefonem, który i tak masz przy sobie. Mniej pilotów do kupowania, programowania, przekazywania i pilnowania."
         }
       ],
-      "paragraph": "Bramy garażowe i wjazdy na parkingi prywatne zwykle obsługuje się fizycznymi pilotami, które mogą się zgubić, zostać u osób niepotrzebujących już dostępu, a w pewnych sytuacjach zostać skopiowane. WIFIGATE przenosi sterowanie do cyfrowego dostępu z telefonu: możesz zarządzać uprawnieniami członków rodziny, pracowników i gości oraz udostępniać dostęp tymczasowy bez przekazywania pilota czy kodu. Efekt to wygodniejsze, bardziej prywatne i lepiej uporządkowane korzystanie na co dzień, z mniejszą zależnością od fizycznych urządzeń dostępowych.",
+      "paragraph": "Bramy garażowe i wjazdy na parkingi prywatne zwykle obsługuje się fizycznymi pilotami, które mogą się zgubić, zostać u osób niepotrzebujących już dostępu, a w pewnych sytuacjach zostać skopiowane. WIFIGATE zastępuje je cyfrowym dostępem z telefonu: możesz zarządzać uprawnieniami członków rodziny, pracowników i gości oraz udostępniać dostęp tymczasowy bez przekazywania pilota czy kodu. Efekt: wygodniejsze, bardziej prywatne i lepiej uporządkowane korzystanie na co dzień, z mniejszą zależnością od fizycznych urządzeń dostępowych.",
       "bullets": [
         "Otwieranie bramy garażowej telefonem",
         "Mniejsza zależność od fizycznych pilotów",
@@ -243,7 +243,7 @@ export default {
         {
           "icon": "clock",
           "title": "Uprawnienie, które wygasa samo, zmniejsza ryzyko",
-          "text": "Kurier, który potrzebuje pięciu minut, dostaje pięć minut. Gdy uprawnienie samo wygasa, nikt, kto nie powinien już wchodzić, nie ma jak wejść, i właśnie to zmniejsza liczbę nieuprawnionych wejść oraz ryzyko kradzieży."
+          "text": "Kurier, który potrzebuje pięciu minut, dostaje pięć minut. Gdy uprawnienie samo wygasa, nie zostaje żadna furtka dla kogoś, kto nie powinien już wchodzić. To właśnie zmniejsza liczbę nieuprawnionych wejść oraz ryzyko kradzieży."
         },
         {
           "icon": "roster",
@@ -297,7 +297,7 @@ export default {
         {
           "icon": "invite",
           "title": "Wskazówki dojazdu jednym dotknięciem",
-          "text": "Adres, piętro, mieszkanie, kod do bramy i kod do klatki. Tę samą sekwencję dyktujesz od nowa każdemu gościowi, kurierowi i fachowcowi. Z WIFIGATE wszystko to mieści się w jednym dotknięciu, a gość sam trafia pod drzwi."
+          "text": "Adres, piętro, mieszkanie, kod do bramy i kod do klatki. Tę samą sekwencję dyktujesz od nowa każdemu gościowi, kurierowi i fachowcowi. Z WIFIGATE wystarczy jedno kliknięcie, a gość sam trafia pod drzwi."
         },
         {
           "icon": "handsfree",
@@ -305,14 +305,14 @@ export default {
           "text": "Automatyczne otwieranie (Auto Open) rozpoznaje Twój przyjazd i otwiera bramę lub drzwi za Ciebie. Bez szukania klucza i bez wyjmowania telefonu, nawet gdy ręce masz zajęte zakupami, wózkiem czy dziećmi."
         }
       ],
-      "paragraph": "W budynku mieszkalnym dostęp nie kończy się na drzwiach do klatki: jest brama, wjazd na parking, drzwi do komórek lokatorskich, a czasem także boczne wejście. Dotyczy on nie tylko mieszkańców, ale też zmieniających się najemców, wspólnoty mieszkaniowej lub firmy zarządzającej, ekip sprzątających, konserwatorów i stałych dostawców. Gdy wszystko opiera się na jednym kodzie i kilku pilotach, każda drobna zmiana, wyprowadzka mieszkańca, zgubiony pilot czy nowy dostawca, oznacza zmianę kodu i ponowne powiadomienie wszystkich. WIFIGATE zastępuje ten sposób uporządkowanym zarządzaniem dostępem na poziomie całego budynku.",
+      "paragraph": "W budynku mieszkalnym dostęp nie kończy się na drzwiach do klatki: jest brama, wjazd na parking, drzwi do komórek lokatorskich, a czasem także boczne wejście. Dotyczy on nie tylko mieszkańców, ale też zmieniających się najemców, zarządu wspólnoty lub zarządcy nieruchomości, ekip sprzątających, konserwatorów i stałych dostawców. Gdy wszystko opiera się na jednym kodzie i kilku pilotach, każda drobna zmiana, wyprowadzka mieszkańca, zgubiony pilot czy nowy dostawca, oznacza zmianę kodu i ponowne powiadomienie wszystkich. WIFIGATE zastępuje ten sposób uporządkowanym zarządzaniem dostępem na poziomie całego budynku.",
       "bullets": [
         "Osobiste uprawnienie dla każdego mieszkańca zamiast jednego kodu dla wszystkich",
         "Dodawanie i usuwanie mieszkańców bez zmiany kodu w całym budynku",
         "Osobne uprawnienia dla ekip sprzątających, konserwatorów i stałych dostawców",
         "Sprawdza się przy drzwiach do klatki, bramie i wjeździe na parking",
         "Mniejsza zależność od klawiatur kodowych, kluczy i pilotów",
-        "Historia wejść dla wspólnoty mieszkaniowej lub firmy zarządzającej",
+        "Historia wejść dla zarządu wspólnoty lub zarządcy",
         "Zarządzanie wszystkimi uprawnieniami w budynku z telefonu",
         "Dostęp dla nowych najemców od dnia przeprowadzki, bez przekazywania kluczy"
       ],
@@ -326,11 +326,11 @@ export default {
         },
         {
           "question": "Jak wchodzą goście i kurierzy?",
-          "answer": "Mieszkaniec wysyła ograniczone czasowo zaproszenie dla gościa ze wskazówkami dojazdu w jednym dotknięciu, bez ujawniania stałego kodu."
+          "answer": "Mieszkaniec wysyła ograniczone czasowo zaproszenie dla gościa ze wskazówkami dojazdu wysłanymi jednym kliknięciem, bez ujawniania stałego kodu."
         },
         {
-          "question": "Czy wspólnota mieszkaniowa może sprawdzić, kto ma dostęp?",
-          "answer": "Tak. Wspólnota lub firma zarządzająca prowadzi listę uprawnień, a historia wejść pokazuje wejścia dla przejrzystości."
+          "question": "Czy zarząd wspólnoty może sprawdzić, kto ma dostęp?",
+          "answer": "Tak. Zarząd wspólnoty lub zarządca prowadzi listę uprawnień, a historia wejść zapewnia pełną przejrzystość."
         },
         {
           "question": "Czy WIFIGATE zastępuje wspólny kod do budynku?",
@@ -341,25 +341,25 @@ export default {
     "office-buildings": {
       "label": "Biurowce",
       "title": "Wejście do biura nie powinno prowadzić przez recepcję!",
-      "heroLead": "Goście, kandydaci na rozmowy i dostawcy czekają, aż ktoś zejdzie im otworzyć, a pracownikom wydaje się identyfikatory lub klucze, które trzeba odebrać, gdy odchodzą. Daj każdemu osobiste uprawnienie: stałe dla pracowników, ograniczone czasowo dla wszystkich pozostałych.",
+      "heroLead": "Goście, kandydaci do pracy i dostawcy czekają, aż ktoś zejdzie i im otworzy, a pracownikom wydaje się identyfikatory lub klucze, które trzeba potem odebrać, gdy odchodzą z firmy. Daj każdemu osobiste uprawnienie: stałe dla pracowników, ograniczone czasowo dla wszystkich pozostałych.",
       "highlights": [
         {
           "icon": "users",
           "title": "Pracownik przychodzi, pracownik odchodzi",
-          "text": "Przyjęcie i odejście pracownika to jedna czynność na liście, a nie seria wydawania identyfikatora, odbierania go i wymiany zamka. Uprawnienie otwiera się i zamyka w ustalonych przez Ciebie datach."
+          "text": "Zatrudnienie i odejście pracownika to jedna zmiana na liście, a nie cały proces wydawania identyfikatora, jego odbierania i wymiany zamka. Uprawnienie aktywuje się i wygasa w ustalonych przez Ciebie datach."
         },
         {
           "icon": "invite",
-          "title": "Zaproszenie na rozmowę jednym dotknięciem",
-          "text": "Wyślij kandydatowi zaproszenie na rozmowę o pracę, które daje mu zweryfikowane i bezpieczne uprawnienie do otwarcia, razem ze wskazówkami dojazdu i szczegółami."
+          "title": "Zaproszenie na rozmowę jednym kliknięciem",
+          "text": "Wyślij kandydatowi zaproszenie na rozmowę kwalifikacyjną z potwierdzonym, bezpiecznym uprawnieniem do wejścia, wskazówkami dojazdu i wszystkimi szczegółami."
         },
         {
           "icon": "history",
           "title": "Rejestr wejść dla obsługi i kontroli",
-          "text": "Każde otwarcie ma przypisaną osobę i godzinę, więc możesz później sprawdzić, kto wszedł na piętro, do magazynu czy na parking, bez odtwarzania tego z ludzkiej pamięci."
+          "text": "Każde otwarcie ma przypisaną osobę i godzinę, więc możesz później sprawdzić, kto wszedł na piętro, do magazynu czy na parking, bez polegania na czyjejś pamięci."
         }
       ],
-      "paragraph": "Biurowce muszą zapewniać wygodne wejście pracownikom, odwiedzającym, dostawcom i zespołom technicznym, bez obciążania recepcji i bez ręcznego zarządzania kluczami czy kartami. WIFIGATE pozwala nadawać stałe uprawnienia pracownikom i tymczasowe odwiedzającym, kontrolować dostęp z telefonu i zarządzać wejściami w sposób, który pasuje do nowoczesnego, czystego i uporządkowanego środowiska biznesowego.",
+      "paragraph": "Biurowce muszą zapewniać wygodne wejście pracownikom, odwiedzającym, dostawcom i zespołom technicznym, bez obciążania recepcji i bez ręcznego zarządzania kluczami czy kartami. WIFIGATE pozwala nadawać stałe uprawnienia pracownikom i tymczasowe odwiedzającym, kontrolować dostęp z telefonu i zarządzać wejściami w sposób, który pasuje do nowoczesnej, dobrze zorganizowanej firmy.",
       "bullets": [
         "Stałe uprawnienia dla pracowników i zespołów",
         "Dostęp tymczasowy dla odwiedzających, dostawców i kurierów",
@@ -380,7 +380,7 @@ export default {
         },
         {
           "question": "Jak odwiedzający wchodzą bez czekania w recepcji?",
-          "answer": "Odwiedzający dostają dostęp tymczasowy jeszcze przed przyjazdem, więc wchodzą z telefonem, a recepcja obsługuje mniej przybyć."
+          "answer": "Odwiedzający dostają dostęp tymczasowy jeszcze przed przyjazdem, więc wchodzą z telefonem, a recepcja ma mniej pracy."
         },
         {
           "question": "Czym WIFIGATE może sterować w biurowcu?",
@@ -418,11 +418,11 @@ export default {
         "Sprawdza się przy drzwiach z zamkiem elektrycznym lub magnetycznym",
         "Otwieranie telefonem dla pracowników i kierowników",
         "Dostęp tymczasowy dla gości, dostawców i serwisantów",
-        "Mniejsza potrzeba klawiatury kodowej i stałego kodu",
+        "Mniejsza zależność od klawiatury kodowej i stałego kodu",
         "Sprawdza się w małych firmach, gabinetach, studiach i biurach",
         "Prostsze i bezpieczniejsze zarządzanie uprawnieniami",
         "Mniej fizycznych kluczy w obiegu",
-        "Wygodna opcja dla firm, które chcą nowoczesnego wejścia bez skomplikowanego systemu"
+        "Wygodne rozwiązanie dla firm, które chcą nowoczesnego dostępu bez skomplikowanego systemu"
       ],
       "seoTitle": "Drzwi wejściowe i zamki magnetyczne dla firm | WIFIGATE",
       "seoDescription": "WIFIGATE to inteligentne otwieranie drzwi wejściowych i zamków magnetycznych w firmach: uprawnienia z telefonu, dostęp tymczasowy, mniej klawiatur kodowych i kluczy.",
@@ -438,7 +438,7 @@ export default {
         },
         {
           "question": "Czy potrzebuję skomplikowanego systemu kontroli dostępu?",
-          "answer": "Nie. WIFIGATE to prosta, nowoczesna opcja dla firm, które chcą wchodzić z telefonem bez skomplikowanego systemu kontroli dostępu."
+          "answer": "Nie. WIFIGATE to proste, nowoczesne rozwiązanie dla firm, które chcą wchodzić z telefonem bez skomplikowanego systemu kontroli dostępu."
         },
         {
           "question": "Jakie firmy z tego korzystają?",
@@ -449,17 +449,17 @@ export default {
     "sports-facilities": {
       "label": "Obiekty sportowe",
       "title": "Kod do obiektu nie powinien krążyć po grupie na WhatsAppie!",
-      "heroLead": "Wspólny kod, który krąży między członkami, trenerami i gośćmi, otwiera dalej, nawet gdy już nie powinien. Daj każdemu osobiste uprawnienie dopasowane do godzin otwarcia i okresu karnetu, które wygasa, gdy przestaje być potrzebne.",
+      "heroLead": "Wspólny kod, który krąży między klubowiczami, trenerami i gośćmi, nadal otwiera drzwi, choć już nie powinien. Daj każdemu osobiste uprawnienie dopasowane do godzin otwarcia i okresu karnetu, które wygasa, gdy przestaje być potrzebne.",
       "highlights": [
         {
           "icon": "calendar",
-          "title": "Dostęp otwiera się zgodnie z rezerwacją",
-          "text": "Kto zarezerwował kort na konkretną godzinę, dostaje uprawnienie, które otwiera się o tej godzinie i zamyka z jej końcem. Nikt nie musi czekać przy bramie, żeby otworzyć."
+          "title": "Dostęp zgodny z rezerwacją",
+          "text": "Kto zarezerwował kort na konkretną godzinę, dostaje uprawnienie, które działa dokładnie w tym czasie. Nikt nie musi czekać przy bramie, żeby wpuścić graczy."
         },
         {
           "icon": "users",
-          "title": "Członek, trener i gość to nie to samo",
-          "text": "Każdy typ użytkownika ma własne uprawnienie: stały członek, trener przychodzący w wybrane dni i jednorazowy gość. Wszyscy na jednej liście, bez klucza przechodzącego z rąk do rąk."
+          "title": "Klubowicz, trener i gość to nie to samo",
+          "text": "Każdy typ użytkownika ma własne uprawnienie: stały klubowicz, trener przychodzący w wybrane dni i jednorazowy gość. Wszyscy na jednej liście, bez klucza przechodzącego z rąk do rąk."
         },
         {
           "icon": "history",
@@ -467,11 +467,11 @@ export default {
           "text": "Gdy ruch zmienia się w ciągu dnia, rejestr wejść ułatwia obsługę obiektu, pomaga wyjaśniać zdarzenia i potwierdza, że obiekt został zamknięty na koniec dnia."
         }
       ],
-      "paragraph": "Obiekty sportowe, korty do padla, korty tenisowe, siłownie i strefy treningowe muszą zarządzać dostępem członków, trenerów, zespołów i gości zgodnie z godzinami otwarcia, rezerwacjami i wydarzeniami. WIFIGATE pozwala nadawać tymczasowy lub stały dostęp z telefonu, ograniczyć zależność od wspólnego klucza czy kodu i poprawić komfort wejścia, zwłaszcza w obiektach, w których ruch zmienia się w ciągu dnia.",
+      "paragraph": "Obiekty sportowe, korty do padla, korty tenisowe, siłownie i strefy treningowe muszą zarządzać dostępem klubowiczów, trenerów, zespołów i gości zgodnie z godzinami otwarcia, rezerwacjami i wydarzeniami. WIFIGATE pozwala nadawać tymczasowy lub stały dostęp z telefonu, ograniczyć zależność od wspólnego klucza czy kodu i poprawić komfort wejścia, zwłaszcza w obiektach, w których ruch zmienia się w ciągu dnia.",
       "bullets": [
         "Sprawdza się na kortach do padla i tenisa, w siłowniach i strefach treningowych",
         "Dostęp według godzin otwarcia, rezerwacji lub uprawnień",
-        "Zarządzanie członkami, trenerami, pracownikami i gośćmi",
+        "Zarządzanie klubowiczami, trenerami, pracownikami i gośćmi",
         "Mniejsza zależność od wspólnych kluczy i kodów",
         "Szybkie i wygodne wejście z telefonu",
         "Sprawdza się w obiektach o zmiennych godzinach otwarcia",
@@ -487,8 +487,8 @@ export default {
           "answer": "Tak. Dostęp można nadawać według godzin otwarcia, rezerwacji lub uprawnień, a zaplanowane zdarzenia mogą otwierać według dni i godzin."
         },
         {
-          "question": "Czy członkowie, trenerzy i goście mogą mieć różny dostęp?",
-          "answer": "Tak. Każdy typ użytkownika dostaje własne uprawnienie: stały członek, trener przychodzący w wybrane dni czy jednorazowy gość."
+          "question": "Czy klubowicze, trenerzy i goście mogą mieć różny dostęp?",
+          "answer": "Tak. Każdy typ użytkownika dostaje własne uprawnienie: stały klubowicz, trener przychodzący w wybrane dni czy jednorazowy gość."
         },
         {
           "question": "Czy mogę sprawdzić, kto był na obiekcie?",
@@ -512,7 +512,7 @@ export default {
         },
         {
           "icon": "clock",
-          "title": "Godziny dostępu, które ustalasz",
+          "title": "Ty ustalasz godziny dostępu",
           "text": "Wpuszczaj tylko w godzinach otwarcia obiektu albo daj najemcy szersze okno czasowe. Firma przeprowadzkowa lub członek rodziny może dostać jednorazowy dostęp na jeden dzień."
         },
         {

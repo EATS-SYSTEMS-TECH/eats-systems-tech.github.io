@@ -14,13 +14,13 @@ export default {
   "niches": {
     "hotels-airbnb": {
       "label": "Mga Hotel, Airbnb, at Apartment para sa Bisita",
-      "title": "Hindi dapat maghintay ang dumating na bisita na may magbukas para sa kanya!",
+      "title": "Nandiyan na ang bisita? Hindi na niya kailangang maghintay na pagbuksan!",
       "heroLead": "Card na kailangang i-issue, susing kailangang iabot, o lockbox code na ipinapasa mula sa isang bisita papunta sa susunod: ginagawa nitong mano-manong pag-aayos ang bawat pagdating. Bigyan ang bawat bisita ng personal na pahintulot na nagbubukas sa check-in at nagsasara sa check-out.",
       "highlights": [
         {
           "icon": "calendar",
           "title": "Bukas sa check-in, sarado sa check-out",
-          "text": "Walang sandaling kailangang may makaalalang bawiin ang access. Nagiging aktibo ang pahintulot sa itinakdang oras ng check-in at nag-e-expire sa oras ng check-out, kahit walang staff sa lugar."
+          "text": "Hindi na kailangang may makaalalang bawiin ang access. Nagiging aktibo ang pahintulot sa itinakdang oras ng check-in at nag-e-expire sa oras ng check-out, kahit walang staff sa lugar."
         },
         {
           "icon": "invite",
@@ -32,7 +32,7 @@ export default {
         {
           "icon": "keyless",
           "title": "Walang card at walang lockbox",
-          "text": "Walang ii-issue, walang iaabot, walang card na naiwan sa naunang bisita, at walang lockbox code na ipinapasa. Ang telepono ng bisita ang tanging paraan para makapasok."
+          "text": "Walang ipo-program, walang iaabot, walang card na naiwan ng naunang bisita, at walang lockbox code na ipinapasa. Ang teleponong nasa bulsa na ng bisita ang tanging susi papasok."
         }
       ],
       "paragraph": "Sa WIFIGATE, makapagbibigay ang mga hotel, apartment para sa bisita (Airbnb), at bakasyunang resort ng maginhawa at ligtas na digital na pagpasok sa mga bisita, direkta mula sa kanilang mobile phone.\nSa halip na mag-issue ng magnetic key card, mag-abot ng pisikal na susi, o gumamit ng lockbox, nagiging awtomatiko ang kontrol sa access.\nSa WIFIGATE Host, maikokonekta ninyo ang inyong booking system direkta sa access system.\nDahil sa koneksyong ito, kapag nakumpirma ang booking, makakatanggap ang bisita ng personal na pahintulot sa pagpasok.\nNagiging aktibo ang pahintulot eksakto sa oras ng check-in at awtomatikong nagtatapos sa check-out, nang walang mano-manong pakikialam, abutan ng susi, o pakikipag-ayos ng front desk at ng mga host.",
@@ -75,7 +75,7 @@ export default {
       "highlights": [
         {
           "icon": "shutter",
-          "title": "Lumilipat sa loob ang kontrol, malayo sa abot ng iba",
+          "title": "Nasa loob na ang kontrol, malayo sa abot ng iba",
           "text": "Nakalantad sa sinumang dumaraan ang switch o key box sa panlabas na pader. Kapag sa telepono nagmumula ang pagbukas, puwedeng ilagay ang control point sa loob ng tindahan."
         },
         {
@@ -130,7 +130,7 @@ export default {
         {
           "icon": "handsfree",
           "title": "Awtomatikong pagbukas sa araw-araw na pagdating",
-          "text": "Nakikilala ng awtomatikong pagbukas (Auto Open) na dumating na kayo at binubuksan nito ang gate para sa inyo. Walang paghahanap ng remote sa glove compartment, walang kakalikutin sa telepono, at walang pagbaba ng bintana habang umuulan."
+          "text": "Nakikilala ng awtomatikong pagbukas (Auto Open) na dumating na kayo at binubuksan nito ang gate para sa inyo. Wala nang paghahalughog ng remote sa glove compartment at pagbaba ng bintana habang umuulan."
         },
         {
           "icon": "clock",
@@ -296,7 +296,7 @@ export default {
         },
         {
           "icon": "invite",
-          "title": "Direksyon papunta sa isang tap",
+          "title": "Direksyon sa isang tap lang",
           "text": "Address, palapag, apartment, code ng gate, at code ng lobby. Paulit-ulit ninyong idinidikta ang parehong pagkakasunod-sunod sa bawat bisita, bawat courier, at bawat technician. Sa WIFIGATE, lahat ng iyon ay nasa iisang tap, at ang bisita na mismo ang makakarating hanggang pinto."
         },
         {
@@ -326,7 +326,7 @@ export default {
         },
         {
           "question": "Paano nakakapasok ang mga bisita at courier?",
-          "answer": "Nagpapadala ang residente ng imbitasyon para sa bisita na may takdang oras, kasama ang direksyon papunta sa isang tap, nang hindi inilalantad ang permanenteng code."
+          "answer": "Nagpapadala ang residente ng imbitasyon para sa bisita na may takdang oras, kasama ang direksyon sa isang tap, nang hindi inilalantad ang permanenteng code."
         },
         {
           "question": "Nakikita ba ng asosasyon ng mga residente kung sino ang may access?",
@@ -351,7 +351,7 @@ export default {
         {
           "icon": "invite",
           "title": "Imbitasyon sa interview sa isang tap",
-          "text": "Padalhan ang aplikante ng imbitasyon sa job interview na nagbibigay sa kanya ng beripikado at ligtas na pahintulot sa pagbukas, kasama ang direksyon papunta at mga detalye."
+          "text": "Padalhan ang aplikante ng imbitasyon sa job interview na may kasamang beripikado at ligtas na pahintulot sa pagpasok, pati direksyon at iba pang detalye."
         },
         {
           "icon": "history",
@@ -448,7 +448,7 @@ export default {
     },
     "sports-facilities": {
       "label": "Mga Pasilidad sa Sports",
-      "title": "Hindi dapat umiikot sa WhatsApp group ang code sa pasukan ng pasilidad!",
+      "title": "Hindi dapat umiikot sa group chat ang code sa pasukan ng pasilidad!",
       "heroLead": "Ang shared code na ipinapasa sa mga miyembro, coach, at bisita ay patuloy na nagbubukas kahit hindi na dapat. Bigyan ang bawat isa ng personal na pahintulot na tugma sa oras ng operasyon at sa panahon ng membership, at nagsasara kapag hindi na kailangan.",
       "highlights": [
         {
@@ -518,7 +518,7 @@ export default {
         {
           "icon": "history",
           "title": "Alamin kung sino ang pumasok at kailan",
-          "text": "Bawat pagbukas ay nakatala kasama ang pangalan ng user at ang oras, kaya ang tanong tungkol sa isang pagbisita ay nasasagot ng kasaysayan ng mga pagpasok, hindi ng security camera."
+          "text": "Bawat pagbukas ay nakatala kasama ang pangalan ng user at ang oras, kaya ang tanong tungkol sa isang pagbisita ay nasasagot ng kasaysayan ng mga pagpasok, hindi ng CCTV footage."
         }
       ],
       "paragraph": "Ang mga storage facility at locker room ay kadalasang umaasa sa shared code, keypad, at pisikal na susi na nakokopya, naipapasa, at bihirang palitan. Inililipat ng WIFIGATE ang access sa telepono: may personal na pahintulot ang bawat umuupa sa gate ng pasilidad, sa pasukan ng gusali, at, kung naka-install, sa storage unit o locker na may electric lock, limitado sa mga oras na pipiliin ninyo at inaalis sa sandaling matapos ang upa. Direktang nakikipag-ugnayan ang telepono sa device sa lugar, nang walang SIM card o koneksyon sa internet sa pinto, at walang buwanang subscription para sa karaniwang paggamit.",

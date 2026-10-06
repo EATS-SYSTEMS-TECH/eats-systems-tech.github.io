@@ -8,7 +8,7 @@ export default {
       "title": "Guest access that takes care of itself",
       "lead": "The moment a booking is confirmed, WIFIGATE creates secure, time-limited access to your gate, door or parking, and it ends on its own at checkout. No keys to hand over, no codes to chase, no one waiting at the entrance.",
       "ctaPrimary": "Talk to us",
-      "note": "For hotels, holiday rentals, guesthouses and rental parking or garages."
+      "note": "For hotels, vacation rentals, guesthouses, and rental parking or garages."
     },
     "pricing": {
       "eyebrow": "Pricing",
@@ -17,12 +17,12 @@ export default {
       "per": "/ month",
       "starterDesc": "For a single property or entrance.",
       "starterF1": "1 system",
-      "starterF2": "Up to 1,000 guest invitations / month",
+      "starterF2": "Up to 1,000 guest invites / month",
       "starterF3": "Automatic time-limited access",
       "planCta": "Talk to us",
       "proDesc": "For a small management company.",
       "proF1": "Up to 5 systems",
-      "proF2": "1,000 invitations per system",
+      "proF2": "1,000 invites per system",
       "proF3": "Priority email support",
       "hotelBadge": "Most popular",
       "hotelDesc": "For a hotel or a whole complex.",
@@ -34,7 +34,7 @@ export default {
       "enterpriseF1": "Volume pricing",
       "enterpriseF2": "SLA & onboarding",
       "enterpriseF3": "Custom integration",
-      "note": "Launch pricing for the WIFIGATE Host add-on, billed monthly. Extra systems and annual plans are available, ask us for details."
+      "note": "Launch pricing for the WIFIGATE Host add-on, billed monthly. Extra systems and annual plans are available; ask us for details."
     },
     "audience": {
       "label": "Built for:",
@@ -50,9 +50,9 @@ export default {
       "s1t": "A booking comes in",
       "s1x": "Your booking or property-management system notifies WIFIGATE Host of a newly confirmed reservation.",
       "s2t": "Access is created automatically",
-      "s2x": "WIFIGATE Host issues a secure, time-limited invitation for exactly the right gate, door or parking, valid only for that stay.",
+      "s2x": "WIFIGATE Host issues a secure, time-limited invite for exactly the right gate, door or parking, valid only for that stay.",
       "s3t": "Your guest walks straight in",
-      "s3x": "They open the entrance from their phone. When checkout arrives, the access expires by itself, nothing to collect or cancel."
+      "s3x": "They open the entrance from their phone. At checkout, access expires by itself. Nothing to collect or cancel."
     },
     "benefits": {
       "eyebrow": "Why WIFIGATE Host",
@@ -61,13 +61,13 @@ export default {
       "b1t": "No keys to hand over",
       "b1x": "Forget key pickups, lockboxes and copied codes. Access arrives on your guest's phone the moment it is needed.",
       "b2t": "Time-limited by design",
-      "b2x": "Every invitation opens at check-in and expires at checkout, automatically, for every single stay.",
+      "b2x": "Every invite opens at check-in and expires at checkout, automatically, for every single stay.",
       "b3t": "Encrypted and private",
-      "b3x": "Access is encrypted and limited to the permission that was issued. Your property and your guests stay protected.",
+      "b3x": "Access is encrypted and limited to exactly what was granted. Your property and your guests stay protected.",
       "b4t": "Works with your entrances",
-      "b4x": "Gates, garage doors, barriers and entrance doors, WIFIGATE controls what you already have.",
+      "b4x": "Gates, garage doors, barriers, and entrance doors: WIFIGATE controls what you already have.",
       "b5t": "Scales to whole buildings",
-      "b5x": "From a single gate to an entire complex, one invitation can cover every entrance a guest needs.",
+      "b5x": "From a single gate to an entire complex, one invite can cover every entrance a guest needs.",
       "b6t": "Connects to your systems",
       "b6x": "Plug WIFIGATE Host into your booking flow, PMS or channel manager and let it run."
     },
@@ -76,7 +76,7 @@ export default {
       "title": "Access you can safely give a stranger",
       "subtitle": "Built to protect the property behind every gate.",
       "i1t": "Encrypted end to end",
-      "i1x": "Every invitation is encrypted, so access details cannot be read or copied in transit.",
+      "i1x": "Every invite is encrypted, so access details cannot be read or copied in transit.",
       "i2t": "Fewer physical credentials, more hospitality",
       "i2x": "Digital access reduces the need for keys, cards and remotes, so your team can focus on guests and hospitality.",
       "i3t": "You stay in control",
@@ -84,10 +84,10 @@ export default {
     },
     "cta": {
       "title": "Ready to automate guest access?",
-      "text": "Tell us about your properties and we will set up WIFIGATE Host for the way you host.",
+      "text": "Tell us about your properties, and we'll set up WIFIGATE Host for the way you host.",
       "button": "Talk to us"
     }
   },
-  "metaTitle": "Automatic Guest Access for Hotels, Holiday Rentals & Parking | WIFIGATE",
-  "metaDescription": "Secure, time-limited access for every guest, created automatically for each booking. For hotels, holiday rentals, guesthouses and rental parking or garages. No key handovers."
+  "metaTitle": "Automatic Guest Access for Hotels, Rentals & Parking | WIFIGATE",
+  "metaDescription": "Secure, time-limited guest access, created automatically for every booking. For hotels, vacation rentals, guesthouses, and rental parking or garages. No key handovers."
 };

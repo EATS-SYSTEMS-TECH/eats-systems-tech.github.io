@@ -14,30 +14,30 @@ export default {
   "niches": {
     "hotels-airbnb": {
       "label": "Hotely, Airbnb a apartmány pre hostí",
-      "title": "Hosť, ktorý už dorazil, by nemal čakať, kým mu niekto otvorí!",
-      "heroLead": "Karta, ktorú treba vydať, kľúč, ktorý treba odovzdať, alebo kód od schránky na kľúče, ktorý putuje od hosťa k hosťovi, menia každý príchod na ručné dohadovanie. Dajte každému hosťovi osobné oprávnenie, ktoré sa otvorí pri príchode a zatvorí pri odchode.",
+      "title": "Hosť, ktorý už prišiel, nemusí čakať, kým mu niekto otvorí!",
+      "heroLead": "Karta, ktorú treba vydať, kľúč, ktorý treba odovzdať, alebo kód ku schránke na kľúče, ktorý putuje od hosťa k hosťovi, menia každý príchod na ručné dohadovanie. Dajte každému hosťovi osobné oprávnenie, ktoré začne platiť pri check-ine a skončí pri check-oute.",
       "highlights": [
         {
           "icon": "calendar",
-          "title": "Otvára sa pri príchode, zatvára pri odchode",
-          "text": "Nikto si nemusí pamätať, že má prístup zrušiť. Oprávnenie sa aktivuje v čase príchodu, ktorý nastavíte, a vyprší pri odchode, aj keď na mieste nie je nikto z tímu."
+          "title": "Platí od check-inu do check-outu",
+          "text": "Nikto si nemusí pamätať, že má prístup zrušiť. Oprávnenie sa aktivuje v čase check-inu, ktorý nastavíte, a pri check-oute vyprší, aj keď na mieste nie je nikto z tímu."
         },
         {
           "icon": "invite",
           "title": "WIFIGATE Host prepojí rezerváciu so vstupom",
-          "text": "S WIFIGATE Host potvrdenie rezervácie v systéme hotela alebo apartmánu automaticky vytvorí oprávnenie na vstup a pošle ho hosťovi. Žiadne prepisovanie údajov, žiadne vydávanie kariet a žiadny ručný krok.",
+          "text": "Vďaka WIFIGATE Host sa po potvrdení rezervácie v systéme hotela alebo apartmánu automaticky vytvorí oprávnenie na vstup a pošle sa hosťovi. Žiadne prepisovanie údajov, žiadne vydávanie kariet a žiadny ručný krok.",
           "ctaLabel": "Objavte WIFIGATE Host",
           "ctaHref": "/sk/automation/"
         },
         {
           "icon": "keyless",
-          "title": "Žiadne karty na vydávanie, žiadna schránka na kľúče",
-          "text": "Nič na vydávanie, nič na odovzdávanie, žiadna karta, ktorá zostala u predchádzajúceho hosťa, a žiadny kód od schránky, ktorý koluje ďalej. Jedinou cestou dnu je telefón hosťa."
+          "title": "Bez kariet a bez schránky na kľúče",
+          "text": "Nič na vydávanie, nič na odovzdávanie, žiadna karta, ktorá zostala u predchádzajúceho hosťa, a žiadny kód ku schránke, ktorý koluje ďalej. Jedinou cestou dnu je telefón hosťa."
         }
       ],
-      "paragraph": "WIFIGATE umožňuje hotelom, apartmánom pre hostí (Airbnb) a rekreačným areálom ponúknuť hosťom pohodlný a bezpečný digitálny vstup priamo z mobilného telefónu.\nNamiesto vydávania magnetických kariet, odovzdávania fyzických kľúčov či používania schránok na kľúče (lockbox) sa riadenie prístupu stáva automatickým.\nPomocou WIFIGATE Host môžete prepojiť svoj rezervačný systém priamo so systémom prístupu.\nVďaka tomuto prepojeniu dostane hosť po potvrdení rezervácie osobné oprávnenie na vstup.\nOprávnenie sa aktivuje presne v čase príchodu a automaticky skončí pri odchode, bez ručného zásahu, odovzdávania kľúčov či koordinácie zo strany recepcie a hostiteľov.",
+      "paragraph": "WIFIGATE umožňuje hotelom, apartmánom pre hostí (Airbnb) a rekreačným areálom ponúknuť hosťom pohodlný a bezpečný digitálny vstup priamo z mobilného telefónu.\nNamiesto vydávania magnetických kariet, odovzdávania fyzických kľúčov či používania schránok na kľúče (lockbox) sa prístup riadi automaticky.\nPomocou WIFIGATE Host môžete prepojiť svoj rezervačný systém priamo so systémom prístupu.\nVďaka tomuto prepojeniu dostane hosť po potvrdení rezervácie osobné oprávnenie na vstup.\nOprávnenie sa aktivuje presne v čase príchodu a automaticky skončí pri odchode, bez ručného zásahu, odovzdávania kľúčov či koordinácie zo strany recepcie a hostiteľov.",
       "bullets": [
-        "Automatický prístup pre hosťa vytvorený po potvrdení rezervácie",
+        "Prístup pre hosťa sa vytvorí automaticky po potvrdení rezervácie",
         "Plná podpora automatizácie cez WIFIGATE Host",
         "Dočasný prístup prispôsobený dátumom a hodinám pobytu",
         "Menej vydávania, odovzdávania a výmeny izbových kariet",
@@ -70,43 +70,43 @@ export default {
     },
     "roller-shutters": {
       "label": "Rolety pre firmy a obchody",
-      "title": "Ovládanie rolety nemá byť vonku na očiach všetkým!",
-      "heroLead": "Vypínač, kľúčový spínač alebo ovládač, ktorý je umiestnený vonku alebo putuje medzi zamestnancami, sa môže dostať do nesprávnych rúk. Presuňte ovládanie na chránenú vnútornú stranu prevádzky a otvárajte roletu z telefónu s osobným oprávnením pre každého zamestnanca.",
+      "title": "Ovládanie rolety nepatrí von, na oči všetkým!",
+      "heroLead": "Vypínač, kľúčový spínač či ovládač, ktorý je vonku alebo koluje medzi zamestnancami, sa môže dostať do nesprávnych rúk. Presuňte ovládanie dovnútra prevádzky, kde je v bezpečí, a otvárajte roletu z telefónu s osobným oprávnením pre každého zamestnanca.",
       "highlights": [
         {
           "icon": "shutter",
-          "title": "Ovládanie sa presúva dnu, mimo dosahu",
-          "text": "Vypínač alebo kľúčový spínač na vonkajšej stene je vystavený každému okoloidúcemu. Keď sa otvára z telefónu, ovládací bod môže byť vo vnútri obchodu."
+          "title": "Ovládanie dovnútra, mimo dosahu cudzích",
+          "text": "Vypínač alebo kľúčový spínač na vonkajšej stene je vystavený každému okoloidúcemu. Keď otvárate z telefónu, ovládací prvok môže zostať vo vnútri obchodu."
         },
         {
           "icon": "users",
           "title": "Samostatné oprávnenie pre každého zamestnanca",
-          "text": "Kľúč alebo ovládač, ktorý zostal bývalému zamestnancovi, funguje ďalej. Osobné oprávnenie sa otvorí v prvý deň a zatvorí v posledný, bez výmeny zámku a bez zbierania zariadení."
+          "text": "Kľúč alebo ovládač, ktorý zostal bývalému zamestnancovi, funguje ďalej. Osobné oprávnenie začne platiť v prvý pracovný deň a skončí v posledný, bez výmeny zámku a bez vyberania ovládačov."
         },
         {
           "icon": "phone",
-          "title": "Otvárajte bez státia pri rolete",
+          "title": "Otvárajte bez státia priamo pri rolete",
           "text": "Kľúč vás núti stáť priamo pri ovládacom bode, s plnými rukami a so zlým výhľadom na roletu. Z telefónu to zvládnete z bezpečnejšej vzdialenosti."
         }
       ],
-      "paragraph": "Rolety vo firmách a obchodoch sa často ovládajú diaľkovými ovládačmi, kľúčmi, vonkajším kľúčovým spínačom alebo vypínačmi umiestnenými mimo prevádzky. Takéto riešenia sa môžu stratiť, zostať bývalým zamestnancom, dať sa skopírovať alebo sa stať odhaleným prístupovým bodom. Otváranie či zatváranie kľúčom tiež znamená stáť priamo pri ovládacom bode s kľúčom v ruke a niekedy bez pohodlného výhľadu na priestor pod roletou. WIFIGATE presúva ovládanie do aplikácie a riadenie prístupu umiestňuje na chránenejšiu vnútornú stranu, takže môžete otvárať a zatvárať pohodlnejšie, spravovať oprávnenia zamestnancov a dodávateľov a znížiť závislosť od kľúčov, ovládačov a odhalených prístupových bodov.",
+      "paragraph": "Rolety vo firmách a obchodoch sa často ovládajú diaľkovými ovládačmi, kľúčmi, vonkajším kľúčovým spínačom alebo vypínačmi umiestnenými mimo prevádzky. Takéto riešenia sa môžu stratiť, zostať bývalým zamestnancom, dať sa skopírovať alebo sa stať nechráneným prístupovým bodom. Otváranie či zatváranie kľúčom tiež znamená stáť priamo pri ovládacom bode s kľúčom v ruke a niekedy bez pohodlného výhľadu na priestor pod roletou. WIFIGATE presúva ovládanie do aplikácie a riadenie prístupu dovnútra, kde je lepšie chránené, takže môžete otvárať a zatvárať pohodlnejšie, spravovať oprávnenia zamestnancov a dodávateľov a znížiť závislosť od kľúčov, ovládačov a nechránených prístupových bodov.",
       "bullets": [
         "Otváranie a zatváranie z telefónu bez závislosti od ovládačov",
         "Menšia závislosť od kľúčov, ktoré sa dajú skopírovať alebo stratiť",
-        "Menej odhalených prístupových bodov mimo prevádzky",
+        "Menej nechránených prístupových bodov mimo prevádzky",
         "Pohodlnejšie ovládanie s lepším výhľadom na roletu",
         "Správa oprávnení pre zamestnancov, manažérov a dodávateľov",
         "Voliteľný dočasný prístup podľa času alebo potreby",
         "Vhodné pre obchody, sklady, služobné vchody a firmy",
-        "Úhľadnejšie a chránenejšie vnútorné riešenie na každodennú prevádzku"
+        "Úhľadné a lepšie chránené riešenie vo vnútri prevádzky"
       ],
       "seoTitle": "Inteligentné ovládanie roliet pre firmy a obchody | WIFIGATE",
-      "seoDescription": "WIFIGATE prináša firmám a obchodom ovládanie roliet z telefónu so správou oprávnení, menšou závislosťou od kľúčov a ovládačov a menej odhalenými prístupovými bodmi.",
+      "seoDescription": "WIFIGATE prináša firmám a obchodom ovládanie roliet z telefónu so správou oprávnení, menšou závislosťou od kľúčov a ovládačov a menej nechránenými prístupovými bodmi.",
       "imageAlt": "Majiteľ firmy otvára roletu obchodu telefónom",
       "faq": [
         {
           "question": "Ako WIFIGATE otvára roletu?",
-          "answer": "WIFIGATE sa pripojí k ovládaniu rolety a umožní oprávneným osobám otvárať a zatvárať ju z aplikácie WIFIGATE. Ovládanie je na chránenej vnútornej strane namiesto odhaleného kľúčového spínača alebo ovládača."
+          "answer": "WIFIGATE sa pripojí k ovládaniu rolety a umožní oprávneným osobám otvárať a zatvárať ju z aplikácie WIFIGATE. Ovládanie je bezpečne vo vnútri, nie na vonkajšom kľúčovom spínači či ovládači."
         },
         {
           "question": "Môže mať každý zamestnanec samostatný prístup k rolete?",
@@ -114,28 +114,28 @@ export default {
         },
         {
           "question": "Môžem dať dodávateľovi dočasný prístup?",
-          "answer": "Áno. Dodávateľovi alebo dočasnému zamestnancovi môžete zdieľať časovo obmedzený prístup, ktorý po uplynutí času prestane fungovať."
+          "answer": "Áno. Dodávateľovi alebo dočasnému zamestnancovi môžete poslať časovo obmedzený prístup, ktorý po uplynutí času prestane fungovať."
         },
         {
           "question": "Pre aké firmy je to vhodné?",
-          "answer": "Pre obchody, sklady, služobné vchody a každú firmu s elektrickou roletou, ktorá chce menej kľúčov, ovládačov a odhalených prístupových bodov."
+          "answer": "Pre obchody, sklady, služobné vchody a každú firmu s elektrickou roletou, ktorá chce menej kľúčov, ovládačov a nechránených prístupových bodov."
         }
       ]
     },
     "electric-gates": {
       "label": "Elektrické brány a parkovacie závory",
-      "title": "Otváranie brány by nemalo byť spojené s trvalým príkazom!",
-      "heroLead": "Systémy na otváranie brán z telefónu často prichádzajú s mesačným predplatným, ktoré sa vám strháva každý mesiac. Prejdite na inteligentné otváranie bez poplatkov za predplatné a bez trvalého príkazu, s osobnými oprávneniami a automatickým otvorením pre pravidelných používateľov.",
+      "title": "Za otváranie brány nemusíte platiť trvalým príkazom!",
+      "heroLead": "Systémy na otváranie brán z telefónu často prichádzajú s predplatným, ktoré vám každý mesiac odchádza z účtu. Prejdite na inteligentné otváranie bez poplatkov za predplatné a bez trvalého príkazu, s osobnými oprávneniami a automatickým otvorením pre pravidelných používateľov.",
       "highlights": [
         {
           "icon": "handsfree",
           "title": "Automatické otvorenie pri každodennom príchode",
-          "text": "Automatické otvorenie rozpozná, že ste prišli, a otvorí vám bránu. Žiadne hľadanie v priehradke a žiadne sťahovanie okna v daždi."
+          "text": "Automatické otvorenie rozpozná, že ste prišli, a otvorí vám bránu. Žiadne hľadanie ovládača v priehradke a žiadne sťahovanie okna v daždi."
         },
         {
           "icon": "clock",
           "title": "Dočasný prístup pre dodávateľa alebo hosťa",
-          "text": "Namiesto telefonátov s prosbou o otvorenie brány v nevhodnej chvíli pošlite oprávnenie platné len na čas, keď je naozaj potrebné. Potom sa samo uzavrie."
+          "text": "Namiesto telefonátov s prosbou o otvorenie brány v nevhodnej chvíli pošlite oprávnenie platné len na čas, keď je naozaj potrebné. Potom samo vyprší."
         },
         {
           "icon": "gate",
@@ -178,8 +178,8 @@ export default {
     },
     "garage-doors": {
       "label": "Garážové brány a súkromné parkovanie",
-      "title": "Lacný RF ovládač sa dá často ľahko skopírovať!",
-      "heroLead": "Jednoduché RF ovládače sa dajú často ľahko skopírovať a môžu otvoriť aj tým, ktorí oprávnenie nikdy nedostali. WIFIGATE chráni prístup pokročilými vrstvami zabezpečenia, šifrovaným ukladaním údajov a ochranou súkromia používateľov.",
+      "title": "Lacný RF ovládač sa často dá ľahko skopírovať!",
+      "heroLead": "Jednoduché RF ovládače sa často dajú ľahko skopírovať a môžu otvoriť aj tým, ktorí oprávnenie nikdy nedostali. WIFIGATE chráni prístup pokročilými vrstvami zabezpečenia, šifrovaným ukladaním údajov a ochranou súkromia používateľov.",
       "highlights": [
         {
           "icon": "keyless",
@@ -233,17 +233,17 @@ export default {
     "private-homes": {
       "label": "Rodinné domy",
       "title": "Rodinné domy nie sú verejný priestor!",
-      "heroLead": "Kód od interkomu, ktorý ste dali kuriérovi, technikovi alebo hosťovi, mu zostane ešte dlho po skončení návštevy a putuje ďalej bez vášho vedomia. Dajte každému osobné, časovo obmedzené oprávnenie na vstup a obmedzte neoprávnené vstupy aj riziko krádeží.",
+      "heroLead": "Kód k interkomu, ktorý ste dali kuriérovi, technikovi alebo hosťovi, mu zostane ešte dlho po skončení návštevy a putuje ďalej bez vášho vedomia. Dajte každému osobné, časovo obmedzené oprávnenie na vstup a znížte riziko neoprávneného vstupu aj krádeže.",
       "highlights": [
         {
           "icon": "keyless",
-          "title": "Kód od interkomu stále koluje",
+          "title": "Kód k interkomu koluje ďalej",
           "text": "Kód sa dostane ku kuriérom, technikom a hosťom a od nich ďalej bez vášho vedomia. A po rokoch používania štyri opotrebované tlačidlá na klávesnici samy prezradia, z ktorých číslic sa skladá."
         },
         {
           "icon": "clock",
           "title": "Oprávnenie, ktoré skončí samo, znižuje riziko",
-          "text": "Kuriér, ktorý potrebuje päť minút, dostane päť minút. Keď oprávnenie samo vyprší, nezostane žiadna cesta dnu pre toho, kto už nemá vstupovať, a práve to obmedzuje neoprávnené vstupy a riziko krádeží."
+          "text": "Kuriér, ktorý potrebuje päť minút, dostane päť minút. Keď oprávnenie samo vyprší, nezostane žiadna cesta dnu pre toho, kto už nemá vstupovať, a práve to znižuje riziko neoprávneného vstupu aj krádeže."
         },
         {
           "icon": "roster",
@@ -251,7 +251,7 @@ export default {
           "text": "Zdieľaný kód nemá zoznam držiteľov. Namiesto neho máte zoznam, v ktorom má každé oprávnenie meno, takže v každej chvíli viete, kto sa môže dostať do domu."
         }
       ],
-      "paragraph": "V rodinných domoch sa klávesnice, kľúče a ovládače môžu stať slabým miestom. Časom sa na tlačidlách klávesnice objavia opotrebenie alebo stopy, ovládače sa stratia alebo putujú medzi ľuďmi a kód sa niekedy dostane ku kuriérom, poskytovateľom služieb či hosťom a zostane im dlho po tom, čo ho potrebovali. WIFIGATE vám umožní spravovať vstup z telefónu, zdieľať dočasný prístup pre hostí bez prezradenia trvalého kódu a jednoducho rušiť oprávnenia bez výmeny zámkov, kódov či ovládačov.",
+      "paragraph": "V rodinných domoch sa klávesnice, kľúče a ovládače môžu stať slabým miestom. Na tlačidlách klávesnice sa časom objavia stopy opotrebenia, ovládače sa stratia alebo putujú medzi ľuďmi a kód sa niekedy dostane ku kuriérom, poskytovateľom služieb či hosťom a zostane im dlho po tom, čo ho potrebovali. WIFIGATE vám umožní spravovať vstup z telefónu, zdieľať dočasný prístup pre hostí bez prezradenia trvalého kódu a jednoducho rušiť oprávnenia bez výmeny zámkov, kódov či ovládačov.",
       "bullets": [
         "Menšia závislosť od klávesníc, kľúčov a ovládačov",
         "Dočasný prístup pre kuriérov, hostí a poskytovateľov služieb",
@@ -287,7 +287,7 @@ export default {
     "residential-buildings": {
       "label": "Bytové domy",
       "title": "Bytové domy nie sú verejný priestor!",
-      "heroLead": "Pevný kód, ktorý putuje medzi kuriérmi, hosťami a servisnými pracovníkmi, sa môže dostať do nesprávnych rúk. Dajte každému osobné, časovo obmedzené oprávnenie na vstup a obmedzte neoprávnené vstupy aj riziko krádeže.",
+      "heroLead": "Pevný kód, ktorý putuje medzi kuriérmi, hosťami a servisnými pracovníkmi, sa môže dostať do nesprávnych rúk. Dajte každému osobné, časovo obmedzené oprávnenie na vstup a znížte riziko neoprávneného vstupu aj krádeže.",
       "highlights": [
         {
           "icon": "roster",
@@ -297,7 +297,7 @@ export default {
         {
           "icon": "invite",
           "title": "Pokyny k príchodu jedným ťuknutím",
-          "text": "Adresa, poschodie, byt, kód brány a kód vchodu. Tú istú postupnosť diktujete znova každému hosťovi, kuriérovi aj remeselníkovi. S WIFIGATE sa to všetko zmestí do jedného ťuknutia a návštevník si cestu k dverám nájde sám."
+          "text": "Adresa, poschodie, číslo bytu, kód k bráne a kód ku vchodu. To isté dookola diktujete každému hosťovi, kuriérovi aj remeselníkovi. S WIFIGATE sa to všetko zmestí do jedného ťuknutia a návštevník si cestu k dverám nájde sám."
         },
         {
           "icon": "handsfree",
@@ -305,7 +305,7 @@ export default {
           "text": "Automatické otvorenie rozpozná, že ste prišli, a otvorí vám bránu alebo dvere. Žiadne hľadanie kľúča a žiadne vyťahovanie telefónu, ani keď máte plné ruky nákupu, kočík alebo deti."
         }
       ],
-      "paragraph": "V bytovom dome sa prístup nekončí pri dverách vstupnej haly: je tu brána, vjazd na parkovisko, dvere do pivníc a niekedy aj bočný vchod. A netýka sa len obyvateľov, ale aj striedajúcich sa nájomníkov, spoločenstva vlastníkov alebo správcovskej spoločnosti, upratovania, údržby a stálych dodávateľov. Keď to všetko funguje na jednom kóde a niekoľkých ovládačoch, každá malá zmena (obyvateľ, ktorý sa odsťahoval, stratený ovládač či nový dodávateľ) znamená zmeniť kód a znova o tom informovať všetkých. WIFIGATE nahrádza tento spôsob prehľadnou správou prístupu na úrovni celej budovy.",
+      "paragraph": "V bytovom dome sa prístup nekončí pri dverách vstupnej haly: je tu brána, vjazd na parkovisko, dvere do pivníc a niekedy aj bočný vchod. A netýka sa len obyvateľov, ale aj striedajúcich sa nájomcov, spoločenstva vlastníkov alebo správcovskej spoločnosti, upratovania, údržby a stálych dodávateľov. Keď to všetko funguje na jednom kóde a niekoľkých ovládačoch, každá malá zmena (obyvateľ, ktorý sa odsťahoval, stratený ovládač či nový dodávateľ) znamená zmeniť kód a znova o tom informovať všetkých. WIFIGATE nahrádza tento spôsob prehľadnou správou prístupu na úrovni celej budovy.",
       "bullets": [
         "Osobné oprávnenie pre každého obyvateľa namiesto jedného kódu pre všetkých",
         "Pridávanie a odoberanie obyvateľov bez zmeny kódu pre celú budovu",
@@ -314,7 +314,7 @@ export default {
         "Menšia závislosť od klávesníc, kľúčov a ovládačov",
         "História prístupov pre spoločenstvo vlastníkov alebo správcovskú spoločnosť",
         "Správa všetkých oprávnení budovy z telefónu",
-        "Prístup pre nových nájomníkov odo dňa nasťahovania, bez odovzdávania kľúčov"
+        "Prístup pre nových nájomcov odo dňa nasťahovania, bez odovzdávania kľúčov"
       ],
       "seoTitle": "Riadenie prístupu pre bytové domy | WIFIGATE",
       "seoDescription": "WIFIGATE prináša bytovým domom inteligentnú správu prístupu: vstup z telefónu, dočasné oprávnenia pre hostí, menšiu závislosť od klávesníc a lepší prehľad.",
@@ -340,13 +340,13 @@ export default {
     },
     "office-buildings": {
       "label": "Administratívne budovy",
-      "title": "Vstup do kancelárie by nemal viesť cez recepciu!",
+      "title": "Cesta do kancelárie nemusí viesť cez recepciu!",
       "heroLead": "Návštevníci, uchádzači o prácu a dodávatelia čakajú, kým im niekto príde otvoriť, a zamestnancom sa vydávajú preukazy alebo kľúče, ktoré treba pri odchode z firmy zozbierať. Dajte každému osobné oprávnenie: trvalé pre zamestnancov a časovo obmedzené pre všetkých ostatných.",
       "highlights": [
         {
           "icon": "users",
           "title": "Niekto nastúpi, niekto odíde",
-          "text": "Nástup aj odchod zamestnanca sú jedna akcia v zozname, nie kolotoč vydávania preukazu, jeho zbierania a výmeny zámku. Oprávnenie sa otvorí a zatvorí v dátumoch, ktoré nastavíte."
+          "text": "Nástup aj odchod zamestnanca sú jedna akcia v zozname, nie kolotoč vydávania preukazu, jeho zbierania a výmeny zámku. Oprávnenie začne a prestane platiť v dňoch, ktoré nastavíte."
         },
         {
           "icon": "invite",
@@ -376,7 +376,7 @@ export default {
       "faq": [
         {
           "question": "Ako zamestnanci získajú prístup do kancelárie?",
-          "answer": "Zamestnanci dostanú do telefónu trvalé oprávnenie, ktoré sa okamžite odoberie, keď niekto odíde."
+          "answer": "Zamestnanci dostanú do telefónu trvalé oprávnenie, ktoré mu pri odchode z firmy okamžite odoberiete."
         },
         {
           "question": "Ako návštevníci vstúpia bez čakania na recepcii?",
@@ -394,7 +394,7 @@ export default {
     },
     "entry-doors-magnetic-locks": {
       "label": "Vstupné dvere a magnetické zámky pre firmy",
-      "title": "Vstupný kód do firmy by nemal putovať z ruky do ruky!",
+      "title": "Vstupný kód do firmy nemá kolovať z ruky do ruky!",
       "heroLead": "Trvalý kód, ktorý dostali zamestnanci, dodávatelia a technici, môže zostať aj tým, ktorí už vstupovať nemajú. Dajte každému osobné, časovo obmedzené oprávnenie na otvorenie cez elektrický alebo magnetický zámok, ktorý už na dverách máte.",
       "highlights": [
         {
@@ -405,12 +405,12 @@ export default {
         {
           "icon": "clock",
           "title": "Dočasný prístup pre dodávateľa alebo technika",
-          "text": "Dodávateľ, ktorý ráno prichádza vyložiť tovar, upratovanie, ktoré prichádza večer, jednorazový technik aj kuriér, ktorý potrebuje päť minút: každý dostane oprávnenie na svoje časové okno a to sa samo uzavrie. Majiteľ nemusí prísť špeciálne ani dvíhať telefón, aby otvoril dvere."
+          "text": "Dodávateľ, ktorý ráno prichádza vyložiť tovar, upratovanie, ktoré prichádza večer, jednorazový technik aj kuriér, ktorý potrebuje päť minút: každý dostane oprávnenie na svoje časové okno a to sa samo uzavrie. Majiteľ kvôli tomu nemusí chodiť na miesto ani dvíhať telefón."
         },
         {
           "icon": "phone",
           "title": "Žiadny zložitý prístupový systém",
-          "text": "Žiadny riadiaci rozvádzač, žiadny softvér na správu a žiadna čítačka kariet na montáž. Existujúci zámok zostáva na svojom mieste a všetko sa spravuje z aplikácie."
+          "text": "Žiadna riadiaca ústredňa, žiadny softvér na správu a žiadna čítačka kariet na montáž. Existujúci zámok zostáva na svojom mieste a všetko sa spravuje z aplikácie."
         }
       ],
       "paragraph": "Malé firmy, ambulancie, štúdiá, sklady a kancelárie sa často spoliehajú na klávesnicu, kľúč alebo jednoduchý magnetický zámok. Problém nastáva, keď sa kód rozšíri medzi zamestnancov, dodávateľov a hostí, alebo keď je potrebný dočasný prístup bez oslabenia bezpečnosti. WIFIGATE vám umožní spravovať vstupné dvere z telefónu, zdieľať dočasné oprávnenia a znížiť potrebu trvalých kódov, fyzických kľúčov či ručného dohadovania pri každom vstupe.",
@@ -422,7 +422,7 @@ export default {
         "Vhodné pre malé firmy, ambulancie, štúdiá a kancelárie",
         "Jednoduchšia a bezpečnejšia správa oprávnení",
         "Menšia potreba fyzických kľúčov",
-        "Pohodlná možnosť pre firmy, ktoré chcú moderný vstup bez zložitého systému"
+        "Pohodlné riešenie pre firmy, ktoré chcú moderný vstup bez zložitého systému"
       ],
       "seoTitle": "Vstupné dvere a magnetické zámky pre firmy | WIFIGATE",
       "seoDescription": "WIFIGATE prináša inteligentné otváranie firemných vstupných dverí a magnetických zámkov, so správou oprávnení z telefónu, dočasným prístupom a menšou závislosťou od klávesníc a kľúčov.",
@@ -438,7 +438,7 @@ export default {
         },
         {
           "question": "Potrebujem zložitý prístupový systém?",
-          "answer": "Nie. WIFIGATE je jednoduchá a moderná možnosť pre firmy, ktoré chcú vstup cez telefón bez zložitého prístupového systému."
+          "answer": "Nie. WIFIGATE je jednoduché a moderné riešenie pre firmy, ktoré chcú vstup cez telefón bez zložitého prístupového systému."
         },
         {
           "question": "Ktoré firmy ho používajú?",
@@ -448,18 +448,18 @@ export default {
     },
     "sports-facilities": {
       "label": "Športové zariadenia",
-      "title": "Vstupný kód do areálu by nemal kolovať vo WhatsApp skupine!",
-      "heroLead": "Zdieľaný kód, ktorý putuje medzi členmi, trénermi a hosťami, otvára aj vtedy, keď by už nemal. Dajte každému osobné oprávnenie podľa otváracích hodín a obdobia členstva, ktoré sa uzavrie, keď už nie je potrebné.",
+      "title": "Vstupný kód do areálu nepatrí do WhatsApp skupiny!",
+      "heroLead": "Zdieľaný kód, ktorý putuje medzi členmi, trénermi a hosťami, otvára aj vtedy, keď by už nemal. Dajte každému osobné oprávnenie podľa otváracích hodín a obdobia členstva, ktoré skončí, keď už nie je potrebné.",
       "highlights": [
         {
           "icon": "calendar",
-          "title": "Prístup sa otvára s rezerváciou",
-          "text": "Kto si rezervoval kurt na určitú hodinu, dostane oprávnenie, ktoré sa vtedy otvorí a na jej konci zatvorí. Nikto nemusí čakať pri bráne, aby ho pustil dnu."
+          "title": "Prístup podľa rezervácie",
+          "text": "Kto si rezervoval kurt na určitú hodinu, dostane oprávnenie, ktoré v tom čase začne platiť a po skončení hodiny vyprší. Nikto nemusí čakať pri bráne, aby ho pustil dnu."
         },
         {
           "icon": "users",
           "title": "Člen, tréner a hosť nie sú to isté",
-          "text": "Každý typ používateľa dostane vlastné oprávnenie: stály člen, tréner, ktorý chodí v určené dni, aj jednorazový hosť. Všetci v jednom zozname, bez kľúča, ktorý mení majiteľa."
+          "text": "Každý typ používateľa dostane vlastné oprávnenie: stály člen, tréner, ktorý chodí v určené dni, aj jednorazový hosť. Všetci v jednom zozname, bez kľúča, ktorý putuje z ruky do ruky."
         },
         {
           "icon": "history",
@@ -488,7 +488,7 @@ export default {
         },
         {
           "question": "Môžu mať členovia, tréneri a hostia rozdielny prístup?",
-          "answer": "Áno. Každý typ používateľa dostane vlastné oprávnenie: pravidelný člen, tréner v určité dni alebo jednorazový hosť."
+          "answer": "Áno. Každý typ používateľa dostane vlastné oprávnenie: stály člen, tréner v určité dni alebo jednorazový hosť."
         },
         {
           "question": "Môžem vidieť, kto bol v zariadení?",
@@ -502,7 +502,7 @@ export default {
     },
     "storage-lockers": {
       "label": "Skladové priestory a skrinky",
-      "title": "Inteligentný prístup pre skladové priestory a skrinky",
+      "title": "Inteligentný prístup k skladovým priestorom a skrinkám",
       "heroLead": "Každý nájomca otvára bránu areálu, dvere budovy aj vlastnú skrinku z telefónu, a to len v hodinách, ktoré povolíte. Keď sa prenájom skončí, skončí sa aj jeho prístup: žiadne kľúče na zbieranie a žiadne kódy na zmenu.",
       "highlights": [
         {
@@ -518,7 +518,7 @@ export default {
         {
           "icon": "history",
           "title": "Viete, kto prišiel a kedy",
-          "text": "Každé otvorenie sa zaznamená s osobou a časom, takže otázku o návšteve zodpoviete z histórie, a nie z bezpečnostných kamier."
+          "text": "Každé otvorenie sa zaznamená s osobou a časom, takže otázku o návšteve zodpoviete z histórie, a nie z kamerových záznamov."
         }
       ],
       "paragraph": "Skladové areály a miestnosti so skrinkami sa zvyčajne spoliehajú na zdieľané kódy, klávesnice a fyzické kľúče, ktoré sa kopírujú, odovzdávajú ďalej a len zriedka menia. WIFIGATE presúva prístup do telefónu: každý nájomca má osobné oprávnenie k bráne areálu, vchodu do budovy a tam, kde je to nainštalované, aj k elektricky zamykanej skladovej jednotke alebo skrinke, obmedzené na hodiny, ktoré si zvolíte, a odstránené v momente, keď sa prenájom skončí. Telefón komunikuje priamo so zariadením na mieste, bez SIM karty či internetového pripojenia pri dverách, a pri štandardnom používaní neplatíte žiadne mesačné predplatné.",

@@ -14,7 +14,7 @@ export default {
   "niches": {
     "hotels-airbnb": {
       "label": "Hotels, Airbnb en vakantiewoningen",
-      "title": "Een gast die is aangekomen, hoort niet te hoeven wachten tot iemand opendoet!",
+      "title": "Wie aankomt, hoeft niet te wachten tot iemand opendoet",
       "heroLead": "Een pas die moet worden aangemaakt, een sleutel die moet worden overgedragen of een sleutelkluiscode die van gast naar gast gaat: zo wordt elke aankomst handmatig regelwerk. Geef elke gast een persoonlijk toegangsrecht dat opengaat bij het inchecken en sluit bij het uitchecken.",
       "highlights": [
         {
@@ -25,17 +25,17 @@ export default {
         {
           "icon": "invite",
           "title": "WIFIGATE Host verbindt de boeking met de ingang",
-          "text": "Met WIFIGATE Host maakt het bevestigen van een boeking in je hotel- of verhuursysteem automatisch het toegangsrecht van de gast aan en stuurt het naar hem toe. Geen gegevens overtypen, geen pas aanmaken en geen handmatige tussenstap.",
+          "text": "Met WIFIGATE Host maakt het bevestigen van een boeking in je hotel- of verhuursysteem automatisch het toegangsrecht van de gast aan en stuurt het meteen door. Geen gegevens overtypen, geen pas aanmaken en geen handmatige tussenstap.",
           "ctaLabel": "Ontdek WIFIGATE Host",
           "ctaHref": "/nl/automation/"
         },
         {
           "icon": "keyless",
           "title": "Geen pasjes uitgeven, geen sleutelkluisje delen",
-          "text": "Niets te programmeren, niets over te dragen, geen pasje dat een vorige gast heeft laten liggen en geen kluiscode die wordt doorgegeven. De telefoon die de gast al op zak heeft, is de enige manier om binnen te komen."
+          "text": "Niets te programmeren, niets over te dragen, geen pasje dat een vorige gast heeft laten liggen en geen kluiscode die wordt doorgegeven. De telefoon die de gast al op zak heeft, is de enige sleutel die hij nodig heeft."
         }
       ],
-      "paragraph": "Met WIFIGATE bieden hotels, vakantiewoningen (Airbnb) en vakantieparken hun gasten een handige, veilige digitale toegang, rechtstreeks via hun telefoon.\nIn plaats van magneetpassen aan te maken, fysieke sleutels over te dragen of sleutelkluisjes te gebruiken, verloopt de toegangscontrole automatisch.\nMet WIFIGATE Host koppel je je boekingssysteem rechtstreeks aan het toegangssysteem.\nDankzij die koppeling ontvangt de gast na bevestiging van de boeking een persoonlijk toegangsrecht.\nHet toegangsrecht wordt precies op het incheckmoment actief en eindigt automatisch bij het uitchecken, zonder handmatige tussenkomst, sleuteloverdracht of afstemming met de receptie of de verhuurder.",
+      "paragraph": "Met WIFIGATE bieden hotels, vakantiewoningen (Airbnb) en vakantieparken hun gasten een handige, veilige digitale toegang, rechtstreeks via hun telefoon.\nGeen magneetpassen aanmaken, geen sleutels overdragen en geen sleutelkluisjes meer: de toegangscontrole verloopt automatisch.\nMet WIFIGATE Host koppel je je boekingssysteem rechtstreeks aan het toegangssysteem.\nDankzij die koppeling ontvangt de gast na bevestiging van de boeking een persoonlijk toegangsrecht.\nHet toegangsrecht wordt precies op het incheckmoment actief en eindigt automatisch bij het uitchecken, zonder handmatige tussenkomst, sleuteloverdracht of afstemming met de receptie of de verhuurder.",
       "bullets": [
         "Automatische gasttoegang zodra een boeking is bevestigd",
         "Volledige automatisering via WIFIGATE Host",
@@ -70,7 +70,7 @@ export default {
     },
     "roller-shutters": {
       "label": "Rolluiken voor bedrijven en winkels",
-      "title": "Het bedieningspunt van je rolluik hoort niet onbeschermd buiten te zitten!",
+      "title": "De bediening van je rolluik hoort niet aan de buitenkant",
       "heroLead": "Een schakelaar, sleutelkastje of afstandsbediening die buiten zit of tussen medewerkers wordt doorgegeven, kan in verkeerde handen vallen. Verplaats de bediening naar de beschermde binnenkant van je zaak en open het rolluik met je telefoon, met een persoonlijk toegangsrecht voor elke medewerker.",
       "highlights": [
         {
@@ -100,7 +100,7 @@ export default {
         "Geschikt voor winkels, magazijnen, dienstingangen en bedrijven",
         "Een nettere en beter beschermde oplossing voor dagelijks gebruik"
       ],
-      "seoTitle": "Slimme bediening van rolluiken voor bedrijven en winkels | WIFIGATE",
+      "seoTitle": "Rolluiken slim bedienen voor winkels en bedrijven | WIFIGATE",
       "seoDescription": "Bedien rolluiken van winkels en bedrijven vanaf de telefoon met WIFIGATE: rechtenbeheer, minder sleutels en afstandsbedieningen, minder kwetsbare toegangspunten.",
       "imageAlt": "Ondernemer opent het rolluik van een winkel met de telefoon",
       "faq": [
@@ -124,13 +124,13 @@ export default {
     },
     "electric-gates": {
       "label": "Elektrische poorten en slagbomen",
-      "title": "Je poort openen hoort niet met een automatische incasso te komen!",
+      "title": "Je poort openen zonder maandelijkse incasso",
       "heroLead": "Systemen om poorten met de telefoon te openen komen vaak met een maandabonnement dat elke maand opnieuw wordt afgeschreven. Stap over op slim openen zonder abonnementskosten en zonder automatische incasso, met persoonlijke toegangsrechten en automatisch openen voor vaste gebruikers.",
       "highlights": [
         {
           "icon": "handsfree",
           "title": "Automatisch open bij je dagelijkse binnenkomst",
-          "text": "Auto Open herkent dat je er bent en opent de poort voor je. Niet zoeken in het handschoenenkastje en niet in de regen het raampje omlaag."
+          "text": "Automatisch openen (Auto Open) herkent dat je er bent en opent de poort voor je. Niet zoeken naar de afstandsbediening in het dashboardkastje, niet rommelen met je telefoon en niet in de regen het raampje omlaag."
         },
         {
           "icon": "clock",
@@ -143,7 +143,7 @@ export default {
           "text": "Namen en telefoonnummers zijn gevoelige gegevens, zeker in het tijdperk van AI. Bij WIFIGATE wordt de gebruikersdatabase op het apparaat zelf opgeslagen, versleuteld en afgeschermd van het internet, op een stabiel en betrouwbaar systeem voor dagelijks openen."
         }
       ],
-      "paragraph": "Elektrische poorten en slagbomen worden gebruikt door bewoners, medewerkers, gasten en leveranciers, maar het beheren van afstandsbedieningen, codes en telefoontjes om de poort te openen wordt al snel omslachtig. Met WIFIGATE open je de poort vanaf je telefoon, deel je vaste of tijdelijke toegang, gebruik je automatisch openen voor vaste gebruikers en stel je waar nodig geplande acties in. Het systeem is ontworpen voor een veilige, private en versleutelde werking, zonder maandabonnement of doorlopende kosten, en bestaande afstandsbedieningen blijven gewoon bruikbaar naast de app.",
+      "paragraph": "Elektrische poorten en slagbomen worden gebruikt door bewoners, medewerkers, gasten en leveranciers, maar het beheren van afstandsbedieningen, codes en telefoontjes om de poort te openen wordt al snel omslachtig. Met WIFIGATE open je de poort vanaf je telefoon, deel je vaste of tijdelijke toegang, gebruik je automatisch openen voor vaste gebruikers en stel je waar nodig geplande acties in. Het systeem werkt veilig, privé en versleuteld, zonder maandabonnement of doorlopende kosten, en bestaande afstandsbedieningen blijven gewoon bruikbaar naast de app.",
       "bullets": [
         "Open een elektrische poort of slagboom vanaf de telefoon",
         "Geen maandelijks abonnement en geen doorlopende kosten",
@@ -154,7 +154,7 @@ export default {
         "Minder fysieke afstandsbedieningen uitdelen",
         "Toegangsgeschiedenis voor controle en transparantie"
       ],
-      "seoTitle": "Elektrische poort en slagboom openen zonder abonnement | WIFIGATE",
+      "seoTitle": "Elektrische poort of slagboom zonder abonnement | WIFIGATE",
       "seoDescription": "Open elektrische poorten en slagbomen met je telefoon via WIFIGATE: Auto Open, tijdschema's, bestaande afstandsbedieningen en geen maandelijks abonnement.",
       "imageAlt": "Automobilist opent een slagboom en elektrische poort met de telefoon",
       "faq": [
@@ -178,7 +178,7 @@ export default {
     },
     "garage-doors": {
       "label": "Garagedeuren en privéparkeerplaatsen",
-      "title": "Een goedkope RF-afstandsbediening is vaak makkelijk te kopiëren!",
+      "title": "Een goedkope RF-afstandsbediening is vaak makkelijk te kopiëren",
       "heroLead": "Eenvoudige RF-afstandsbedieningen zijn soms makkelijk te kopiëren en kunnen toegang geven aan mensen die daar nooit toestemming voor kregen. WIFIGATE beschermt de toegang met geavanceerde beveiligingslagen, versleutelde opslag en respect voor de privacy van gebruikers.",
       "highlights": [
         {
@@ -197,7 +197,7 @@ export default {
           "text": "In plaats van een afstandsbediening voor elke auto en elke gebruiker, open je met de telefoon die je toch al bij je hebt. Minder afstandsbedieningen om te kopen, te programmeren, uit te delen en te beheren."
         }
       ],
-      "paragraph": "Garagedeuren en privéparkeerplaatsen worden meestal bediend met fysieke afstandsbedieningen, die kunnen kwijtraken, achterblijven bij mensen die geen toegang meer nodig hebben of in bepaalde situaties gekopieerd worden. WIFIGATE vervangt dit door digitale toegang vanaf de telefoon: je beheert toegangsrechten voor gezinsleden, medewerkers of gasten en deelt tijdelijke toegang zonder een afstandsbediening of code uit handen te geven. Het resultaat is een prettigere, privacyvriendelijkere en overzichtelijkere ervaring, met minder afhankelijkheid van fysieke toegangsmiddelen.",
+      "paragraph": "Garagedeuren en privéparkeerplaatsen worden meestal bediend met fysieke afstandsbedieningen, die kunnen kwijtraken, achterblijven bij mensen die geen toegang meer nodig hebben of in bepaalde situaties gekopieerd worden. WIFIGATE vervangt dit door digitale toegang vanaf de telefoon: je beheert toegangsrechten voor gezinsleden, medewerkers of gasten en deelt tijdelijke toegang zonder een afstandsbediening of code uit handen te geven. Het resultaat: meer gemak, meer privacy en meer overzicht, met minder afhankelijkheid van fysieke toegangsmiddelen.",
       "bullets": [
         "Open de garagedeur vanaf de telefoon",
         "Minder afhankelijk van fysieke afstandsbedieningen",
@@ -205,7 +205,7 @@ export default {
         "Toegangsbeheer voor gezinsleden, medewerkers en gasten",
         "Tijdelijke toegang zonder een afstandsbediening of code af te geven",
         "Geschikt voor privéparkeerplaatsen, woonhuizen en benedenwoningen met tuin",
-        "Een meer private en veilige manier om toegang te beheren",
+        "Een veiligere manier om toegang te beheren, met meer privacy",
         "Comfortabeler en veiliger in het dagelijks gebruik"
       ],
       "seoTitle": "Garagedeuren en privéparkeerplaatsen slim openen | WIFIGATE",
@@ -225,19 +225,19 @@ export default {
           "answer": "Ja. Stuur een tijdelijk toegangsrecht dat stopt wanneer jij dat wilt, zonder een afstandsbediening of code af te geven."
         },
         {
-          "question": "Waar kun je WIFIGATE gebruiken om te parkeren?",
+          "question": "Bij welke parkeerplekken kun je WIFIGATE gebruiken?",
           "answer": "Bij privégarages, toegangen tot privéparkeerplaatsen, woonhuizen en benedenwoningen met tuin."
         }
       ]
     },
     "private-homes": {
       "label": "Particuliere woningen",
-      "title": "Particuliere woningen zijn niet bedoeld om openbaar te zijn!",
-      "heroLead": "De intercomcode die je aan een bezorger, monteur of gast gaf, blijft bij hen hangen, lang nadat het bezoek voorbij is, en wordt doorgegeven zonder dat je het weet. Geef iedereen een persoonlijk, tijdgebonden toegangsrecht en beperk onbevoegde toegang en het risico op diefstal.",
+      "title": "Je huis is geen openbare ruimte",
+      "heroLead": "De deurcode die je aan een bezorger, monteur of gast gaf, blijft bij hen hangen, lang nadat het bezoek voorbij is, en wordt doorgegeven zonder dat je het weet. Geef iedereen een persoonlijk, tijdgebonden toegangsrecht en verklein de kans op onbevoegde toegang en diefstal.",
       "highlights": [
         {
           "icon": "keyless",
-          "title": "De intercomcode blijft maar rondgaan",
+          "title": "De deurcode blijft maar rondgaan",
           "text": "De code gaat naar bezorgers, monteurs en gasten, en van hen weer verder zonder dat je het weet. En na genoeg jaren verraden de vier versleten toetsen op het codepaneel vanzelf uit welke cijfers hij bestaat."
         },
         {
@@ -286,7 +286,7 @@ export default {
     },
     "residential-buildings": {
       "label": "Appartementencomplexen",
-      "title": "Appartementencomplexen zijn niet bedoeld om openbaar te zijn!",
+      "title": "Een appartementencomplex is geen openbare ruimte",
       "heroLead": "Een vaste code die rondgaat tussen bezorgers, gasten en monteurs kan in verkeerde handen vallen. Geef iedereen een persoonlijk, tijdgebonden toegangsrecht en beperk onbevoegde toegang en het risico op diefstal.",
       "highlights": [
         {
@@ -297,15 +297,15 @@ export default {
         {
           "icon": "invite",
           "title": "Aankomstinstructies met één tik",
-          "text": "Adres, verdieping, appartement, poortcode en code van de hal: dezelfde reeks dicteer je telkens opnieuw aan elke gast, elke bezorger en elke monteur. Met WIFIGATE gaat dat allemaal in één tik, en de bezoeker vindt zelf de weg naar de deur."
+          "text": "Adres, verdieping, appartement, poortcode en code van de hoofdingang: dezelfde reeks dicteer je telkens opnieuw aan elke gast, elke bezorger en elke monteur. Met WIFIGATE gaat dat allemaal in één tik, en de bezoeker vindt zelf de weg naar de deur."
         },
         {
           "icon": "handsfree",
           "title": "Handsfree naar binnen",
-          "text": "Auto Open herkent dat je er bent en opent de poort of deur voor je. Geen sleutel zoeken en je telefoon niet pakken, ook niet als je handen vol boodschappen, een kinderwagen of kinderen zijn."
+          "text": "Automatisch openen (Auto Open) herkent dat je er bent en opent de poort of deur voor je. Geen sleutel zoeken en je telefoon niet pakken, ook niet als je je handen vol hebt aan boodschappen, een kinderwagen of de kinderen."
         }
       ],
-      "paragraph": "In een appartementencomplex houdt toegang niet op bij de deur van de hal: er is een poort, een ingang van de parkeergarage, deuren van bergingen en soms een zijdeur. En het gaat niet alleen om de bewoners, maar ook om wisselende huurders, de VvE of de beheerder, schoonmakers, onderhoudsmedewerkers en vaste leveranciers. Als dat allemaal draait op één code en een paar afstandsbedieningen, betekent elke kleine wijziging, een bewoner die vertrekt, een kwijtgeraakte afstandsbediening of een nieuwe leverancier, dat de code moet worden gewijzigd en iedereen opnieuw moet worden ingelicht. WIFIGATE vervangt die aanpak door overzichtelijk toegangsbeheer op gebouwniveau.",
+      "paragraph": "In een appartementencomplex houdt toegang niet op bij de hoofdingang: er is een poort, een ingang van de parkeergarage, deuren van bergingen en soms een zijdeur. En het gaat niet alleen om de bewoners, maar ook om wisselende huurders, de VvE of de beheerder, schoonmakers, onderhoudsmedewerkers en vaste leveranciers. Als dat allemaal draait op één code en een paar afstandsbedieningen, betekent elke kleine wijziging, een bewoner die vertrekt, een kwijtgeraakte afstandsbediening of een nieuwe leverancier, dat de code moet worden gewijzigd en iedereen opnieuw moet worden ingelicht. WIFIGATE vervangt die aanpak door overzichtelijk toegangsbeheer op gebouwniveau.",
       "bullets": [
         "Een persoonlijk toegangsrecht voor elke bewoner, in plaats van één code voor iedereen",
         "Bewoners toevoegen en verwijderen zonder de code van het hele gebouw te wijzigen",
@@ -322,7 +322,7 @@ export default {
       "faq": [
         {
           "question": "Hoe komen bewoners met WIFIGATE het gebouw in?",
-          "answer": "Bewoners openen de deur van de hal, de poort of de ingang van de parkeergarage met hun telefoon, ieder met een eigen toegangsrecht."
+          "answer": "Bewoners openen de hoofdingang, de poort of de ingang van de parkeergarage met hun telefoon, ieder met een eigen toegangsrecht."
         },
         {
           "question": "Hoe komen gasten en bezorgers binnen?",
@@ -340,7 +340,7 @@ export default {
     },
     "office-buildings": {
       "label": "Kantoorpanden",
-      "title": "Het kantoor binnenkomen hoort niet via de receptie te lopen!",
+      "title": "Wie naar kantoor komt, hoeft niet langs de receptie",
       "heroLead": "Bezoekers, sollicitanten en leveranciers wachten tot iemand naar beneden komt om open te doen, en medewerkers krijgen pasjes of sleutels die bij hun vertrek weer moeten worden ingenomen. Geef iedereen een persoonlijk toegangsrecht: vast voor medewerkers, tijdgebonden voor alle anderen.",
       "highlights": [
         {
@@ -394,7 +394,7 @@ export default {
     },
     "entry-doors-magnetic-locks": {
       "label": "Toegangsdeuren en magneetsloten voor bedrijven",
-      "title": "De toegangscode van je bedrijf hoort niet van hand tot hand te gaan!",
+      "title": "De toegangscode van je bedrijf hoort niet van hand tot hand te gaan",
       "heroLead": "Een vaste code die medewerkers, leveranciers en monteurs krijgen, kan blijven hangen bij mensen die niet meer naar binnen hoeven. Geef iedereen een persoonlijk, tijdgebonden toegangsrecht, via het elektrische slot of magneetslot dat al op de deur zit.",
       "highlights": [
         {
@@ -448,7 +448,7 @@ export default {
     },
     "sports-facilities": {
       "label": "Sportaccommodaties",
-      "title": "De toegangscode van je accommodatie hoort niet rond te gaan in de WhatsApp-groep!",
+      "title": "De toegangscode van je sportlocatie hoort niet in de WhatsApp-groep",
       "heroLead": "Een gedeelde code die tussen leden, trainers en gasten wordt doorgegeven, blijft de deur openen, ook als dat niet meer de bedoeling is. Geef iedereen een persoonlijk toegangsrecht dat past bij de openingstijden en de looptijd van het lidmaatschap, en dat sluit zodra het niet meer nodig is.",
       "highlights": [
         {
@@ -478,7 +478,7 @@ export default {
         "Tijdelijke toegangsrechten voor evenementen, lessen of trainingen",
         "Toegangsgeschiedenis voor controle en beheer"
       ],
-      "seoTitle": "Toegangscontrole voor sportaccommodaties en padelbanen | WIFIGATE",
+      "seoTitle": "Toegang voor sportaccommodaties en padelbanen | WIFIGATE",
       "seoDescription": "WIFIGATE brengt slimme toegangscontrole naar sportaccommodaties, padelbanen en sportscholen, met toegang via de telefoon en tijdelijke of vaste toegangsrechten.",
       "imageAlt": "Padelspeelster opent de toegang tot een verlichte sportbaan met de telefoon",
       "faq": [
@@ -508,7 +508,7 @@ export default {
         {
           "icon": "users",
           "title": "Een persoonlijk toegangsrecht voor elke huurder",
-          "text": "Geen gedeelde code die oud-huurders nog kennen. Elke huurder krijgt eigen toegang, en die intrekken kost een moment wanneer het contract afloopt of een betaling achterstallig is."
+          "text": "Geen gedeelde code die oud-huurders nog kennen. Elke huurder krijgt eigen toegang, en die trek je in een oogwenk in wanneer het contract afloopt of een betaling achterstallig is."
         },
         {
           "icon": "clock",
@@ -532,8 +532,8 @@ export default {
         "Geen gedeelde codes, codepanelen of sleutels om te vervangen",
         "Geen simkaart of internetverbinding bij de deur"
       ],
-      "seoTitle": "Slimme toegangscontrole voor opslagruimtes en lockers | WIFIGATE",
-      "seoDescription": "WIFIGATE geeft elke huurder van een opslagruimte of locker persoonlijke toegang via de telefoon tot de poort, de deuren en de eigen locker, beperkt tot openingstijden, vastgelegd in de geschiedenis en ingetrokken wanneer de huur stopt.",
+      "seoTitle": "Slimme toegang voor opslagruimtes en lockers | WIFIGATE",
+      "seoDescription": "WIFIGATE geeft elke huurder van een opslagruimte of locker persoonlijke toegang via de telefoon: alleen tijdens openingstijden, vastgelegd en ingetrokken als de huur stopt.",
       "imageAlt": "Vrouw opent met haar telefoon de deur van een opslaglocatie met lockers en opslagboxen",
       "faq": [
         {

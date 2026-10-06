@@ -2,8 +2,8 @@
 // The WIFIGATE Host page (/automation/) in Polish: title, description and body.
 
 export default {
-  "metaTitle": "Automatyczny dostęp gości: hotele, najem, parkingi | WIFIGATE",
-  "metaDescription": "Bezpieczny, ograniczony czasowo dostęp dla każdego gościa, tworzony automatycznie przy rezerwacji. Hotele, apartamenty, pensjonaty, parkingi i garaże. Bez kluczy.",
+  "metaTitle": "Automatyczny dostęp gości: hotele, apartamenty, garaże | WIFIGATE",
+  "metaDescription": "Bezpieczny, ograniczony czasowo dostęp dla każdego gościa, tworzony automatycznie dla każdej rezerwacji. Hotele, apartamenty, pensjonaty, parkingi i garaże. Bez przekazywania kluczy.",
   "marketing": {
     "hero": {
       "eyebrow": "WIFIGATE Host",
@@ -33,10 +33,10 @@ export default {
       "hotelF3": "Wsparcie priorytetowe",
       "enterpriseAmount": "Indywidualnie",
       "enterpriseDesc": "Dla systemów PMS, channel managerów i dużych portfeli nieruchomości.",
-      "enterpriseF1": "Ceny zależne od skali",
+      "enterpriseF1": "Rabaty ilościowe",
       "enterpriseF2": "SLA i wdrożenie",
       "enterpriseF3": "Integracja na zamówienie",
-      "note": "Ceny na start dodatku WIFIGATE Host, rozliczane co miesiąc. Dostępne są dodatkowe systemy i plany roczne, zapytaj nas o szczegóły."
+      "note": "Ceny startowe dodatku WIFIGATE Host, rozliczane co miesiąc. Dostępne są też dodatkowe systemy i plany roczne, zapytaj nas o szczegóły."
     },
     "audience": {
       "label": "Dla kogo:",
@@ -54,30 +54,30 @@ export default {
       "s2t": "Dostęp powstaje automatycznie",
       "s2x": "WIFIGATE Host wystawia bezpieczne, ograniczone czasowo zaproszenie dokładnie do właściwej bramy, drzwi lub parkingu, ważne tylko na ten pobyt.",
       "s3t": "Gość po prostu wchodzi",
-      "s3x": "Otwiera wejście telefonem. Gdy nadchodzi wymeldowanie, dostęp sam wygasa, nie trzeba niczego odbierać ani anulować."
+      "s3x": "Otwiera wejście telefonem. Przy wymeldowaniu dostęp sam wygasa, nie trzeba niczego odbierać ani anulować."
     },
     "benefits": {
       "eyebrow": "Dlaczego WIFIGATE Host",
-      "title": "Mniej recepcji. Więcej goszczenia bez wysiłku.",
+      "title": "Mniej pracy na recepcji. Więcej czasu dla gości.",
       "subtitle": "Wszystko, czego potrzeba, by rezerwacja zamieniła się w dostęp, robimy za Ciebie.",
       "b1t": "Bez przekazywania kluczy",
-      "b1x": "Zapomnij o odbieraniu kluczy, skrytkach na klucze i kopiowanych kodach. Dostęp trafia na telefon gościa dokładnie wtedy, gdy jest potrzebny.",
+      "b1x": "Zapomnij o odbieraniu kluczy, sejfach na klucze i kopiowanych kodach. Dostęp trafia na telefon gościa dokładnie wtedy, gdy jest potrzebny.",
       "b2t": "Z założenia ograniczony czasowo",
-      "b2x": "Każde zaproszenie zaczyna działać przy zameldowaniu i wygasa przy wymeldowaniu, automatycznie, przy każdym pobycie.",
+      "b2x": "Przy każdym pobycie zaproszenie samo zaczyna działać przy zameldowaniu i wygasa przy wymeldowaniu.",
       "b3t": "Szyfrowany i prywatny",
       "b3x": "Dostęp jest szyfrowany i ograniczony do wydanego uprawnienia. Twój obiekt i Twoi goście pozostają chronieni.",
       "b4t": "Działa z Twoimi wejściami",
-      "b4x": "Bramy, drzwi garażowe, szlabany i drzwi wejściowe: WIFIGATE steruje tym, co już masz.",
+      "b4x": "Bramy, bramy garażowe, szlabany i drzwi wejściowe: WIFIGATE steruje tym, co już masz.",
       "b5t": "Sprawdza się w całych budynkach",
       "b5x": "Od jednej bramy po cały kompleks: jedno zaproszenie może obejmować każde wejście, którego potrzebuje gość.",
       "b6t": "Łączy się z Twoimi systemami",
-      "b6x": "Połącz WIFIGATE Host z procesem rezerwacji, systemem PMS lub channel managerem i pozwól mu działać."
+      "b6x": "Połącz WIFIGATE Host z procesem rezerwacji, systemem PMS lub channel managerem, a resztę zrobi za Ciebie."
     },
     "secure": {
       "eyebrow": "Bezpieczeństwo",
       "title": "Dostęp, który bezpiecznie dasz nawet nieznajomemu",
       "subtitle": "Stworzony, by chronić obiekt za każdą bramą.",
-      "i1t": "Pełne szyfrowanie end-to-end",
+      "i1t": "Szyfrowanie end-to-end",
       "i1x": "Każde zaproszenie jest szyfrowane, więc danych dostępu nie da się odczytać ani skopiować podczas przesyłania.",
       "i2t": "Mniej fizycznych identyfikatorów, więcej gościnności",
       "i2x": "Dostęp cyfrowy zmniejsza potrzebę używania kluczy, kart i pilotów, dzięki czemu zespół może skupić się na gościach i ich obsłudze.",

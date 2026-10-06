@@ -2,7 +2,7 @@
 // The WIFIGATE Host page (/automation/) in Norwegian (Bokmål): title, description and body.
 
 export default {
-  "metaTitle": "Automatisk gjestetilgang for hoteller, ferieboliger og parkering | WIFIGATE",
+  "metaTitle": "Automatisk gjestetilgang: hotell, ferieboliger, parkering | WIFIGATE",
   "metaDescription": "Sikker, tidsbegrenset tilgang for hver gjest, opprettet automatisk for hver bestilling. For hoteller, ferieboliger, gjestehus og utleieparkering eller garasjer. Ingen nøkkelutlevering.",
   "marketing": {
     "hero": {
@@ -14,7 +14,7 @@ export default {
     },
     "pricing": {
       "eyebrow": "Priser",
-      "title": "Enkle planer for tillegget WIFIGATE Host",
+      "title": "Enkle pakker for tillegget WIFIGATE Host",
       "subtitle": "Du betaler bare for automatiseringen. Selve WIFIGATE-enheten har aldri abonnement.",
       "per": "/ måned",
       "starterDesc": "For én eiendom eller inngang.",
@@ -32,11 +32,11 @@ export default {
       "hotelF2": "Sentralisert rapportering",
       "hotelF3": "Fortrinnsstøtte",
       "enterpriseAmount": "Tilpasset",
-      "enterpriseDesc": "For PMS, kanalforvaltere og store porteføljer.",
+      "enterpriseDesc": "For PMS, channel managere og store porteføljer.",
       "enterpriseF1": "Volumpriser",
       "enterpriseF2": "SLA og oppstartshjelp",
       "enterpriseF3": "Skreddersydd integrasjon",
-      "note": "Lanseringspriser for tillegget WIFIGATE Host, fakturert månedlig. Ekstra systemer og årsplaner er tilgjengelige, spør oss om detaljer."
+      "note": "Lanseringspriser for tillegget WIFIGATE Host, fakturert månedlig. Ekstra systemer og årsavtaler er tilgjengelige, spør oss om detaljer."
     },
     "audience": {
       "label": "Laget for:",
@@ -62,8 +62,8 @@ export default {
       "subtitle": "Alt som skal til for at en bestilling blir til tilgang, ordnet for deg.",
       "b1t": "Ingen nøkler å levere ut",
       "b1x": "Glem nøkkelhenting, nøkkelbokser og kopierte koder. Tilgangen kommer på gjestens mobil akkurat når den trengs.",
-      "b2t": "Tidsbegrenset fra grunnen av",
-      "b2x": "Hver invitasjon åpner ved innsjekking og utløper ved utsjekking, automatisk, for hvert eneste opphold.",
+      "b2t": "Alltid tidsbegrenset",
+      "b2x": "Hver invitasjon åpner ved innsjekk og utløper ved utsjekk, automatisk, for hvert eneste opphold.",
       "b3t": "Kryptert og privat",
       "b3x": "Tilgangen er kryptert og begrenset til tillatelsen som er utstedt. Eiendommen din og gjestene dine forblir beskyttet.",
       "b4t": "Fungerer med inngangene dine",
@@ -71,12 +71,12 @@ export default {
       "b5t": "Skalerer til hele bygg",
       "b5x": "Fra én enkelt port til et helt kompleks: én invitasjon kan dekke alle innganger en gjest trenger.",
       "b6t": "Kobles til systemene dine",
-      "b6x": "Koble WIFIGATE Host til bookingflyten, PMS-en eller kanalforvalteren din, og la det gå av seg selv."
+      "b6x": "Koble WIFIGATE Host til bookingflyten, PMS-en eller channel manageren din, og la det gå av seg selv."
     },
     "secure": {
       "eyebrow": "Sikkerhet",
       "title": "Tilgang du trygt kan gi en fremmed",
-      "subtitle": "Laget for å beskytte eiendommen bak hver port.",
+      "subtitle": "Utviklet for å beskytte det som er bak hver port.",
       "i1t": "Ende-til-ende-kryptert",
       "i1x": "Hver invitasjon er kryptert, slik at tilgangsdetaljer ikke kan leses eller kopieres underveis.",
       "i2t": "Færre fysiske adgangsmidler, mer gjestfrihet",

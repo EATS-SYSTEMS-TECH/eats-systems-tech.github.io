@@ -3,19 +3,19 @@
 
 export default {
   "metaTitle": "Acesso automático para hotéis, AL e estacionamento | WIFIGATE",
-  "metaDescription": "Acesso seguro e limitado no tempo para cada hóspede, criado automaticamente em cada reserva. Para hotéis, Alojamento Local, casas de hóspedes e estacionamento. Sem entregar chaves.",
+  "metaDescription": "Acesso seguro e limitado no tempo para cada hóspede, criado automaticamente em cada reserva. Para hotéis, AL, casas de hóspedes e estacionamento. Sem entregar chaves.",
   "marketing": {
     "hero": {
       "eyebrow": "WIFIGATE Host",
-      "title": "Um acesso de hóspedes que funciona sozinho",
-      "lead": "Assim que uma reserva é confirmada, a WIFIGATE cria um acesso seguro e limitado no tempo ao seu portão, porta ou estacionamento, que termina sozinho no check-out. Sem chaves para entregar, sem códigos para andar atrás e sem ninguém à espera à entrada.",
+      "title": "Acesso de hóspedes que se gere sozinho",
+      "lead": "Assim que uma reserva é confirmada, a WIFIGATE cria um acesso seguro e limitado no tempo ao seu portão, porta ou estacionamento, que termina sozinho no check-out. Sem chaves para entregar, sem andar atrás de códigos e sem ninguém à espera à entrada.",
       "ctaPrimary": "Fale connosco",
       "note": "Para hotéis, Alojamento Local, casas de hóspedes e estacionamentos ou garagens para arrendar."
     },
     "pricing": {
       "eyebrow": "Preços",
       "title": "Planos simples para o complemento WIFIGATE Host",
-      "subtitle": "Paga apenas pela automatização. O dispositivo WIFIGATE em si nunca tem subscrição.",
+      "subtitle": "Paga apenas pela automatização. O dispositivo WIFIGATE nunca tem subscrição.",
       "per": "/ mês",
       "starterDesc": "Para um único alojamento ou entrada.",
       "starterF1": "Um sistema",
@@ -25,12 +25,12 @@ export default {
       "proDesc": "Para uma pequena empresa de gestão.",
       "proF1": "Até 5 sistemas",
       "proF2": "1.000 convites por sistema",
-      "proF3": "Suporte prioritário por e-mail",
+      "proF3": "Apoio prioritário por e-mail",
       "hotelBadge": "O mais popular",
       "hotelDesc": "Para um hotel ou um complexo inteiro.",
       "hotelF1": "Até 20 sistemas",
       "hotelF2": "Relatórios centralizados",
-      "hotelF3": "Suporte prioritário",
+      "hotelF3": "Apoio prioritário",
       "enterpriseAmount": "Personalizado",
       "enterpriseDesc": "Para PMS, channel managers e grandes carteiras de imóveis.",
       "enterpriseF1": "Preços por volume",
@@ -59,10 +59,10 @@ export default {
     "benefits": {
       "eyebrow": "Porquê o WIFIGATE Host",
       "title": "Menos receção. Mais hospitalidade, sem esforço.",
-      "subtitle": "Tudo o que é preciso para transformar uma reserva em acesso é tratado por nós.",
+      "subtitle": "Nós tratamos de tudo o que é preciso para transformar uma reserva em acesso.",
       "b1t": "Sem chaves para entregar",
       "b1x": "Esqueça a recolha de chaves, os cofres de chaves e os códigos copiados. O acesso chega ao telemóvel do hóspede exatamente quando é preciso.",
-      "b2t": "Limitado no tempo por natureza",
+      "b2t": "Temporário por definição",
       "b2x": "Cada convite abre no check-in e expira no check-out, automaticamente, em cada estadia.",
       "b3t": "Encriptado e privado",
       "b3x": "O acesso é encriptado e limitado à permissão emitida. A sua propriedade e os seus hóspedes ficam protegidos.",

@@ -8,7 +8,7 @@ export default {
     "hero": {
       "eyebrow": "WIFIGATE Host",
       "title": "Un accès voyageurs qui se gère tout seul",
-      "lead": "Dès qu'une réservation est confirmée, WIFIGATE crée un accès sécurisé et limité dans le temps à votre portail, votre porte ou votre parking, qui prend fin de lui-même au départ. Sans clés à remettre, sans codes à transmettre et sans personne qui attend à l'entrée.",
+      "lead": "Dès qu'une réservation est confirmée, WIFIGATE crée un accès sécurisé et limité dans le temps à votre portail, votre porte ou votre parking, qui prend fin de lui-même au départ. Sans clés à remettre, sans courir après les codes, et personne n'attend à l'entrée.",
       "ctaPrimary": "Parlons-en",
       "note": "Pour les hôtels, locations saisonnières, maisons d'hôtes, parkings et garages en location."
     },
@@ -48,7 +48,7 @@ export default {
     "steps": {
       "eyebrow": "Comment ça marche",
       "title": "De la réservation au portail ouvert, automatiquement",
-      "subtitle": "Trois étapes, puis tout se fait seul à chaque réservation.",
+      "subtitle": "Trois étapes, puis tout tourne tout seul à chaque réservation.",
       "s1t": "Une réservation arrive",
       "s1x": "Votre système de réservation ou de gestion locative informe WIFIGATE Host de chaque nouvelle réservation confirmée.",
       "s2t": "L'accès est créé automatiquement",
@@ -58,20 +58,20 @@ export default {
     },
     "benefits": {
       "eyebrow": "Pourquoi WIFIGATE Host",
-      "title": "Moins de réception. Plus d'accueil en pilote automatique.",
-      "subtitle": "Tout ce qu'il faut pour transformer une réservation en accès, pris en charge pour vous.",
+      "title": "Moins de temps à la réception. Plus d'accueil, en pilote automatique.",
+      "subtitle": "Tout ce qu'il faut pour qu'une réservation devienne un accès, on s'en charge.",
       "b1t": "Aucune clé à remettre",
-      "b1x": "Oubliez les remises de clés, les boîtes à clés et les codes recopiés. L'accès arrive sur le téléphone de votre voyageur au moment précis où il en a besoin.",
-      "b2t": "Limité dans le temps, par conception",
+      "b1x": "Oubliez la remise des clés, les boîtes à clés et les codes recopiés. L'accès arrive sur le téléphone de votre voyageur au moment précis où il en a besoin.",
+      "b2t": "Temporaire par nature",
       "b2x": "Chaque invitation s'ouvre à l'arrivée et expire au départ, automatiquement, pour chaque séjour.",
       "b3t": "Chiffré et privé",
       "b3x": "L'accès est chiffré et limité à l'autorisation délivrée. Votre établissement et vos voyageurs restent protégés.",
       "b4t": "Compatible avec vos entrées",
       "b4x": "Portails, portes de parking, barrières et portes d'entrée : WIFIGATE commande ce que vous avez déjà.",
-      "b5t": "Adapté aussi aux bâtiments entiers",
+      "b5t": "Même pour un bâtiment entier",
       "b5x": "D'un seul portail à un complexe entier, une seule invitation peut couvrir toutes les entrées dont votre voyageur a besoin.",
-      "b6t": "Se connecte à vos systèmes",
-      "b6x": "Connectez WIFIGATE Host à votre processus de réservation, à votre PMS ou à votre channel manager, et laissez faire."
+      "b6t": "Connecté à vos systèmes",
+      "b6x": "Connectez WIFIGATE Host à votre processus de réservation, à votre PMS ou à votre channel manager, et laissez-le travailler pour vous."
     },
     "secure": {
       "eyebrow": "Sécurité",

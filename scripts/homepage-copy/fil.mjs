@@ -16,11 +16,11 @@ const copy = {
     primaryCta: "Paano ito gumagana",
     secondaryCta: "Makipag-usap sa aming team",
     proofLabel: "Mga bentahe ng platform",
-    proof: ["Buong privacy", "Madaling gamitin", "Direksyon papunta sa isang tap", "Access ng bisita na may takdang oras"],
+    proof: ["Buong privacy", "Madaling gamitin", "Direksyon sa isang tap lang", "Access ng bisita na may takdang oras"],
   },
   platform: {
     eyebrow: "Ano ang WIFIGATE?",
-    title: "Access nang walang nakasanayang abala.",
+    title: "Access na walang abala.",
     subtitle: "Ang WIFIGATE ay isang naka-encrypt na access control system na pinagsasama ang WiFi at Bluetooth para mabuksan mula sa telepono ang mga gate, pinto, harang sa paradahan, pinto ng garahe, at de-kuryenteng roller shutter. Pinagsasama nito ang pang-araw-araw na access at ang access ng mga bisita sa iisang ligtas na platform.",
     features: [
       {
@@ -33,7 +33,7 @@ const copy = {
       },
       {
         title: "Mabilis na Imbitasyon sa Bisita",
-        text: "Magpadala sa loob ng ilang segundo ng ligtas na imbitasyon sa pagpasok, kasama ang direksyon papunta, sa courier o bisita, para makapasok sila nang walang tawag, hiraman ng remote, o mano-manong pakikipag-ayos.",
+        text: "Magpadala sa loob ng ilang segundo ng ligtas na imbitasyon sa pagpasok, kasama ang direksyon, sa courier o bisita, para makapasok sila nang walang tawag, hiraman ng remote, o mano-manong pakikipag-ayos.",
       },
       {
         title: "90 Araw na Kasaysayan ng Access",
@@ -66,7 +66,7 @@ const copy = {
     imageAlt: "Naglalakad ang isang courier sa may tuldok na asul na ruta papunta sa pasukan ng isang residential building, habang hawak ng isang residente ang WIFIGATE app na nagpapakita ng pahintulot para sa bisita na may takdang oras.",
     eyebrow: "Pribadong access",
     title: "Hindi pampublikong lugar ang mga gusali at pribadong bahay.",
-    description: "Tigilan na ang pagbabahagi ng permanenteng intercom code. Magpadala sa isang tap ng pahintulot sa pagpasok na may takdang oras, kasama ang direksyon papunta, at bawasan ang hindi awtorisadong pagpasok at ang panganib ng pagnanakaw.",
+    description: "Tigilan na ang pagbabahagi ng permanenteng intercom code. Magpadala sa isang tap ng pahintulot sa pagpasok na may takdang oras, kasama ang direksyon, at bawasan ang hindi awtorisadong pagpasok at ang panganib ng pagnanakaw.",
   },
   solutions: {
     eyebrow: "Bagay sa bawat pasukan",
@@ -79,11 +79,11 @@ const copy = {
     titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Para sa",
     audiences: ["Mga hotel", "Airbnb", "Mga apartment para sa bisita", "Mga tuluyan"],
-    promise: "Salubungin ang inyong mga bisita. Hayaang kusang umandar ang pagpasok.",
+    promise: "Salubungin ang inyong mga bisita. Awtomatiko na ang kanilang pagpasok.",
     subtitle: "Mula sa mga hotel hanggang sa mga bakasyunang apartment, ikonekta ang bawat booking sa ligtas na pahintulot sa pagpasok para sa tamang gate, pinto, o garahe. Pumapasok ang mga bisita gamit ang kanilang telepono, at nagsisimula ang pahintulot sa check-in at awtomatikong nagtatapos sa check-out.",
     cta: "Tuklasin ang WIFIGATE Host",
     imageAlt: "Mga bisitang gumagamit ng telepono para makapasok sa kanilang tutuluyan",
-    stayCaption: "Bawat pananatili, mula booking hanggang pag-alis",
+    stayCaption: "Bawat pananatili, mula booking hanggang check-out",
     staySteps: ["Natanggap ang booking", "Access sa check-in", "Mag-e-expire sa check-out"],
     points: [
       {
@@ -96,7 +96,7 @@ const copy = {
       },
       {
         icon: "team",
-        title: "Nakakatipid ng oras ng staff",
+        title: "Tipid sa oras ng staff",
         text: "Nakatuon ang staff sa pag-aasikaso ng mga bisita sa halip na sa logistics ng mga card o iba pang pisikal na gamit sa pagpasok.",
       },
     ],
@@ -119,11 +119,11 @@ const copy = {
   oneTapInvite: {
     imageAlt: "Isang may tuldok na asul na ruta mula sa kalye papunta sa location pin sa pasukan ng isang residential building.",
     eyebrow: "Isang tap. Lahat ng kailangan ng mga bisita.",
-    title: "Tama na ang paulit-ulit na pagbibigay ng direksyon.\nMagpadala ng isang imbitasyong kumpleto na ang detalye.",
-    description: "Sa WIFIGATE, maibabahagi ninyo sa isang tap ang direksyon papunta, ang address,\nang palapag, numero ng apartment, iba pang detalye, at ang pahintulot sa pagpasok na may takdang oras.",
+    title: "Tama na ang paulit-ulit na pagtuturo ng direksyon.\nIsang imbitasyon, kumpleto na.",
+    description: "Sa WIFIGATE, maibabahagi ninyo sa isang tap ang direksyon, ang address,\nang palapag, numero ng apartment, iba pang detalye, at ang pahintulot sa pagpasok na may takdang oras.",
   },
   faq: {
-    eyebrow: "Lahat ng dapat malaman tungkol sa WiFi gate",
+    eyebrow: "Tungkol sa WiFi gate",
     title: "Access gamit ang WiFi gate, malinaw at walang palaisipan.",
     subtitle: "Malinaw na sagot tungkol sa installation, koneksyon, gastos, at access ng bisita.",
     items: [

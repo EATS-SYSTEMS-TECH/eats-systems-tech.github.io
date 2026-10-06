@@ -193,7 +193,7 @@ window.accessibilityCopy = {
       "description": "Agrandir le texte sur tout le site.",
       "decrease": "Texte plus petit",
       "increase": "Texte plus grand",
-      "level": "Taille du texte {percent} %"
+      "level": "Taille du texte {percent} %"
     },
     "options": {
       "highContrast": {
@@ -283,7 +283,7 @@ window.accessibilityCopy = {
         "description": "Ein größerer Mauszeiger."
       },
       "focusHighlight": {
-        "label": "Deutlicher Fokus",
+        "label": "Deutliche Fokusanzeige",
         "description": "Ein dicker Rahmen um das Element mit dem Tastaturfokus."
       },
       "reducedMotion": {
@@ -415,10 +415,10 @@ window.accessibilityCopy = {
     "closeButton": "Fechar o menu de acessibilidade",
     "title": "Menu de acessibilidade",
     "description": "Ajuste o site à sua forma de ler e navegar. As suas escolhas ficam guardadas neste dispositivo.",
-    "reset": "Redefinir tudo",
+    "reset": "Repor tudo",
     "statusDefault": "Vista normal do site",
     "statusActive": "{count} ajustes ativos",
-    "hideButton": "Ocultar o botão de acessibilidade até a página voltar a ser carregada",
+    "hideButton": "Ocultar o botão de acessibilidade até recarregar a página",
     "statementLink": "Declaração de acessibilidade",
     "textSize": {
       "label": "Tamanho do texto",
@@ -457,7 +457,7 @@ window.accessibilityCopy = {
         "description": "Um ponteiro do rato maior."
       },
       "focusHighlight": {
-        "label": "Foco bem visível",
+        "label": "Foco bem destacado",
         "description": "Um contorno grosso à volta do elemento com o foco do teclado."
       },
       "reducedMotion": {
@@ -472,7 +472,7 @@ window.accessibilityCopy = {
     "openButton": "Otwórz menu dostępności",
     "closeButton": "Zamknij menu dostępności",
     "title": "Menu dostępności",
-    "description": "Dostosuj witrynę do sposobu, w jaki czytasz i nawigujesz. Twoje wybory są zapisywane na tym urządzeniu.",
+    "description": "Dostosuj stronę do tego, jak czytasz i poruszasz się po niej. Twoje ustawienia są zapisywane na tym urządzeniu.",
     "reset": "Resetuj wszystko",
     "statusDefault": "Standardowy widok strony",
     "statusActive": "Aktywne dostosowania: {count}",
@@ -480,7 +480,7 @@ window.accessibilityCopy = {
     "statementLink": "Deklaracja dostępności",
     "textSize": {
       "label": "Rozmiar tekstu",
-      "description": "Powiększ tekst w całej witrynie.",
+      "description": "Powiększ tekst na całej stronie.",
       "decrease": "Mniejszy tekst",
       "increase": "Większy tekst",
       "level": "Rozmiar tekstu {percent}%"
@@ -515,7 +515,7 @@ window.accessibilityCopy = {
         "description": "Większy wskaźnik myszy."
       },
       "focusHighlight": {
-        "label": "Wyraźny fokus",
+        "label": "Wyraźny wskaźnik fokusu",
         "description": "Gruba ramka wokół elementu z fokusem klawiatury."
       },
       "reducedMotion": {
@@ -646,7 +646,7 @@ window.accessibilityCopy = {
     "openButton": "Открыть меню доступности",
     "closeButton": "Закрыть меню доступности",
     "title": "Меню доступности",
-    "description": "Настройте сайт под то, как вы читаете и перемещаетесь по нему. Ваш выбор сохраняется на этом устройстве.",
+    "description": "Настройте сайт так, как вам удобно читать и перемещаться по нему. Ваш выбор сохраняется на этом устройстве.",
     "reset": "Сбросить всё",
     "statusDefault": "Стандартный вид сайта",
     "statusActive": "Активных настроек: {count}",
@@ -704,7 +704,7 @@ window.accessibilityCopy = {
     "openButton": "Відкрити меню доступності",
     "closeButton": "Закрити меню доступності",
     "title": "Меню доступності",
-    "description": "Налаштуйте сайт під те, як ви читаєте та переміщуєтеся ним. Ваш вибір зберігається на цьому пристрої.",
+    "description": "Налаштуйте сайт так, щоб вам було зручно читати й переміщуватися ним. Ваш вибір зберігається на цьому пристрої.",
     "reset": "Скинути все",
     "statusDefault": "Стандартний вигляд сайту",
     "statusActive": "Активних налаштувань: {count}",
@@ -771,8 +771,8 @@ window.accessibilityCopy = {
     "textSize": {
       "label": "Metin boyutu",
       "description": "Sitedeki tüm metinleri büyütür.",
-      "decrease": "Daha küçük metin",
-      "increase": "Daha büyük metin",
+      "decrease": "Metni küçült",
+      "increase": "Metni büyüt",
       "level": "Metin boyutu %{percent}"
     },
     "options": {
@@ -822,7 +822,7 @@ window.accessibilityCopy = {
     "title": "قائمة إمكانية الوصول",
     "description": "عدّل الموقع ليناسب طريقتك في القراءة والتنقل. تُحفظ اختياراتك على هذا الجهاز.",
     "reset": "إعادة تعيين الكل",
-    "statusDefault": "العرض القياسي للموقع",
+    "statusDefault": "العرض الافتراضي للموقع",
     "statusActive": "التعديلات النشطة: {count}",
     "hideButton": "إخفاء زر إمكانية الوصول حتى إعادة تحميل الصفحة",
     "statementLink": "بيان إمكانية الوصول",
@@ -878,10 +878,10 @@ window.accessibilityCopy = {
     "openButton": "सुलभता मेनू खोलें",
     "closeButton": "सुलभता मेनू बंद करें",
     "title": "सुलभता मेनू",
-    "description": "साइट को अपने पढ़ने और नेविगेट करने के तरीके के अनुसार बदलें। आपकी पसंद इसी डिवाइस पर सहेजी जाती है।",
+    "description": "साइट को अपने पढ़ने और नेविगेट करने के तरीक़े के हिसाब से बदलें। आपकी पसंद इसी डिवाइस पर सेव रहती है।",
     "reset": "सब रीसेट करें",
     "statusDefault": "साइट का सामान्य दृश्य",
-    "statusActive": "{count} समायोजन सक्रिय",
+    "statusActive": "{count} बदलाव चालू",
     "hideButton": "पेज दोबारा लोड होने तक सुलभता बटन छिपाएँ",
     "statementLink": "सुलभता कथन",
     "textSize": {
@@ -922,7 +922,7 @@ window.accessibilityCopy = {
       },
       "focusHighlight": {
         "label": "स्पष्ट फ़ोकस",
-        "description": "कीबोर्ड फ़ोकस वाले तत्व के चारों ओर मोटी रूपरेखा।"
+        "description": "कीबोर्ड फ़ोकस वाले हिस्से के चारों ओर मोटी आउटलाइन।"
       },
       "reducedMotion": {
         "label": "एनिमेशन रोकें",
@@ -939,7 +939,7 @@ window.accessibilityCopy = {
     "description": "আপনি যেভাবে পড়েন ও নেভিগেট করেন, সেভাবে সাইটটি সাজিয়ে নিন। আপনার পছন্দগুলো এই ডিভাইসে সংরক্ষিত থাকে।",
     "reset": "সব রিসেট করুন",
     "statusDefault": "সাইটের সাধারণ ভিউ",
-    "statusActive": "{count}টি সমন্বয় চালু আছে",
+    "statusActive": "{count}টি পরিবর্তন চালু",
     "hideButton": "পেজ আবার লোড না হওয়া পর্যন্ত অ্যাক্সেসিবিলিটি বোতাম লুকান",
     "statementLink": "অ্যাক্সেসিবিলিটি বিবৃতি",
     "textSize": {
@@ -997,7 +997,7 @@ window.accessibilityCopy = {
     "description": "तुम्ही जसे वाचता आणि नेव्हिगेट करता त्यानुसार साइट जुळवून घ्या. तुमच्या निवडी या डिव्हाइसवर जतन केल्या जातात.",
     "reset": "सर्व रीसेट करा",
     "statusDefault": "साइटचे सामान्य दृश्य",
-    "statusActive": "{count} समायोजने सक्रिय",
+    "statusActive": "{count} बदल सुरू",
     "hideButton": "पेज पुन्हा लोड होईपर्यंत सुलभता बटण लपवा",
     "statementLink": "सुलभता विधान",
     "textSize": {
@@ -1055,7 +1055,7 @@ window.accessibilityCopy = {
     "description": "మీరు చదివే, నావిగేట్ చేసే విధానానికి తగ్గట్టుగా సైట్‌ను సర్దుబాటు చేసుకోండి. మీ ఎంపికలు ఈ పరికరంలోనే సేవ్ అవుతాయి.",
     "reset": "అన్నీ రీసెట్ చేయండి",
     "statusDefault": "సైట్ సాధారణ వీక్షణ",
-    "statusActive": "{count} సర్దుబాట్లు సక్రియంగా ఉన్నాయి",
+    "statusActive": "{count} మార్పులు ఆన్‌లో ఉన్నాయి",
     "hideButton": "పేజీ మళ్లీ లోడ్ అయ్యే వరకు యాక్సెసిబిలిటీ బటన్‌ను దాచండి",
     "statementLink": "యాక్సెసిబిలిటీ ప్రకటన",
     "textSize": {
@@ -1096,7 +1096,7 @@ window.accessibilityCopy = {
       },
       "focusHighlight": {
         "label": "స్పష్టమైన ఫోకస్",
-        "description": "కీబోర్డ్ ఫోకస్‌లో ఉన్న మూలకం చుట్టూ మందపాటి అంచు."
+        "description": "కీబోర్డ్ ఫోకస్‌లో ఉన్న భాగం చుట్టూ మందపాటి అంచు."
       },
       "reducedMotion": {
         "label": "యానిమేషన్‌లను ఆపండి",
@@ -1112,7 +1112,7 @@ window.accessibilityCopy = {
     "title": "无障碍菜单",
     "description": "按照您的阅读和浏览方式调整网站。您的选择会保存在此设备上。",
     "reset": "全部重置",
-    "statusDefault": "网站标准视图",
+    "statusDefault": "网站默认显示",
     "statusActive": "已启用 {count} 项调整",
     "hideButton": "隐藏无障碍按钮，直到页面重新加载",
     "statementLink": "无障碍声明",
@@ -1153,7 +1153,7 @@ window.accessibilityCopy = {
         "description": "更大的鼠标指针。"
       },
       "focusHighlight": {
-        "label": "醒目焦点",
+        "label": "突出显示焦点",
         "description": "在键盘焦点所在元素周围显示粗边框。"
       },
       "reducedMotion": {
@@ -1170,7 +1170,7 @@ window.accessibilityCopy = {
     "title": "無障礙選單",
     "description": "依照您的閱讀與瀏覽方式調整網站。您的選擇會儲存在這部裝置上。",
     "reset": "全部重設",
-    "statusDefault": "網站標準檢視",
+    "statusDefault": "網站預設顯示",
     "statusActive": "已啟用 {count} 項調整",
     "hideButton": "隱藏無障礙按鈕，直到重新載入頁面",
     "statementLink": "無障礙聲明",
@@ -1200,7 +1200,7 @@ window.accessibilityCopy = {
       },
       "textSpacing": {
         "label": "文字間距",
-        "description": "加大行距與字距。"
+        "description": "加大行距、詞距與字距。"
       },
       "highlightHeadings": {
         "label": "醒目標示標題",
@@ -1211,7 +1211,7 @@ window.accessibilityCopy = {
         "description": "更大的滑鼠指標。"
       },
       "focusHighlight": {
-        "label": "醒目焦點",
+        "label": "醒目標示焦點",
         "description": "在鍵盤焦點所在元素周圍顯示粗外框。"
       },
       "reducedMotion": {
@@ -1287,7 +1287,7 @@ window.accessibilityCopy = {
     "description": "읽고 탐색하는 방식에 맞게 사이트를 조정하세요. 선택한 설정은 이 기기에 저장됩니다.",
     "reset": "모두 초기화",
     "statusDefault": "기본 사이트 보기",
-    "statusActive": "{count}개 조정 사용 중",
+    "statusActive": "{count}개 항목 적용 중",
     "hideButton": "페이지를 새로 고칠 때까지 접근성 버튼 숨기기",
     "statementLink": "접근성 정책",
     "textSize": {
@@ -1300,7 +1300,7 @@ window.accessibilityCopy = {
     "options": {
       "highContrast": {
         "label": "고대비",
-        "description": "밝은 배경에 어두운 글자와 뚜렷한 테두리."
+        "description": "밝은 배경에 어두운 글자와 뚜렷한 테두리를 표시합니다."
       },
       "grayscale": {
         "label": "회색조",
@@ -1312,7 +1312,7 @@ window.accessibilityCopy = {
       },
       "readableFont": {
         "label": "읽기 쉬운 글꼴",
-        "description": "단순하고 읽기 쉬운 글꼴."
+        "description": "단순하고 읽기 쉬운 글꼴을 사용합니다."
       },
       "textSpacing": {
         "label": "텍스트 간격",
@@ -1324,11 +1324,11 @@ window.accessibilityCopy = {
       },
       "bigCursor": {
         "label": "큰 커서",
-        "description": "더 큰 마우스 포인터."
+        "description": "마우스 포인터를 더 크게 표시합니다."
       },
       "focusHighlight": {
         "label": "포커스 강조",
-        "description": "키보드 포커스가 있는 요소 주위에 굵은 윤곽선."
+        "description": "키보드 포커스가 있는 요소 주위에 굵은 테두리를 표시합니다."
       },
       "reducedMotion": {
         "label": "애니메이션 중지",
@@ -1458,7 +1458,7 @@ window.accessibilityCopy = {
     "openButton": "Akadálymentességi menü megnyitása",
     "closeButton": "Akadálymentességi menü bezárása",
     "title": "Akadálymentességi menü",
-    "description": "Igazítsa a webhelyet ahhoz, ahogyan olvas és navigál. A választásait ez az eszköz tárolja.",
+    "description": "Szabja a webhelyet a saját olvasási és böngészési szokásaihoz. A beállításokat ez az eszköz tárolja.",
     "reset": "Minden visszaállítása",
     "statusDefault": "Normál webhelynézet",
     "statusActive": "{count} beállítás aktív",
@@ -1489,7 +1489,7 @@ window.accessibilityCopy = {
         "description": "Egyszerű, jól olvasható betűtípus."
       },
       "textSpacing": {
-        "label": "Szövegtávolság",
+        "label": "Szövegtérköz",
         "description": "Több hely a sorok, szavak és betűk között."
       },
       "highlightHeadings": {
@@ -1520,7 +1520,7 @@ window.accessibilityCopy = {
     "reset": "Επαναφορά όλων",
     "statusDefault": "Τυπική προβολή ιστότοπου",
     "statusActive": "Ενεργές προσαρμογές: {count}",
-    "hideButton": "Απόκρυψη του κουμπιού προσβασιμότητας μέχρι την επαναφόρτωση της σελίδας",
+    "hideButton": "Απόκρυψη κουμπιού προσβασιμότητας έως την επαναφόρτωση της σελίδας",
     "statementLink": "Δήλωση προσβασιμότητας",
     "textSize": {
       "label": "Μέγεθος κειμένου",
@@ -1547,7 +1547,7 @@ window.accessibilityCopy = {
         "description": "Απλή, πολύ ευανάγνωστη γραμματοσειρά."
       },
       "textSpacing": {
-        "label": "Απόσταση κειμένου",
+        "label": "Αποστάσεις κειμένου",
         "description": "Περισσότερος χώρος ανάμεσα σε γραμμές, λέξεις και γράμματα."
       },
       "highlightHeadings": {
@@ -1574,7 +1574,7 @@ window.accessibilityCopy = {
     "openButton": "Deschide meniul de accesibilitate",
     "closeButton": "Închide meniul de accesibilitate",
     "title": "Meniu de accesibilitate",
-    "description": "Adaptează site-ul la modul în care citești și navighezi. Alegerile tale sunt păstrate pe acest dispozitiv.",
+    "description": "Adaptați site-ul la felul în care citiți și navigați. Alegerile dumneavoastră se păstrează pe acest dispozitiv.",
     "reset": "Resetează tot",
     "statusDefault": "Afișare standard a site-ului",
     "statusActive": "Ajustări active: {count}",
@@ -1632,15 +1632,15 @@ window.accessibilityCopy = {
     "openButton": "Otvori izbornik pristupačnosti",
     "closeButton": "Zatvori izbornik pristupačnosti",
     "title": "Izbornik pristupačnosti",
-    "description": "Prilagodite web-mjesto načinu na koji čitate i krećete se. Vaši se odabiri spremaju na ovom uređaju.",
+    "description": "Prilagodite stranicu načinu na koji čitate i krećete se. Vaši se odabiri spremaju na ovom uređaju.",
     "reset": "Poništi sve",
-    "statusDefault": "Standardni prikaz web-mjesta",
+    "statusDefault": "Standardni prikaz stranice",
     "statusActive": "Aktivne prilagodbe: {count}",
     "hideButton": "Sakrij gumb pristupačnosti do ponovnog učitavanja stranice",
     "statementLink": "Izjava o pristupačnosti",
     "textSize": {
       "label": "Veličina teksta",
-      "description": "Povećaj tekst na cijelom web-mjestu.",
+      "description": "Povećanje teksta na cijeloj stranici.",
       "decrease": "Manji tekst",
       "increase": "Veći tekst",
       "level": "Veličina teksta {percent} %"
@@ -1652,11 +1652,11 @@ window.accessibilityCopy = {
       },
       "grayscale": {
         "label": "Sivi tonovi",
-        "description": "Prikaži web-mjesto bez boja."
+        "description": "Prikaz stranice bez boja."
       },
       "underlineLinks": {
         "label": "Istakni poveznice",
-        "description": "Podcrtaj i označi svaku poveznicu."
+        "description": "Podcrtavanje i isticanje svake poveznice."
       },
       "readableFont": {
         "label": "Čitljiv font",
@@ -1668,19 +1668,19 @@ window.accessibilityCopy = {
       },
       "highlightHeadings": {
         "label": "Istakni naslove",
-        "description": "Označi naslove kako bi se vidjela struktura stranice."
+        "description": "Isticanje naslova radi jasnije strukture stranice."
       },
       "bigCursor": {
         "label": "Veliki pokazivač",
         "description": "Veći pokazivač miša."
       },
       "focusHighlight": {
-        "label": "Jasan fokus",
+        "label": "Istaknut fokus",
         "description": "Debeli obrub oko elementa u fokusu tipkovnice."
       },
       "reducedMotion": {
         "label": "Zaustavi animacije",
-        "description": "Zaustavi animacije, prijelaze i pozadinski videozapis."
+        "description": "Zaustavljanje animacija, prijelaza i pozadinskog videozapisa."
       }
     }
   },
@@ -1864,8 +1864,8 @@ window.accessibilityCopy = {
     "openButton": "Otvoriť ponuku prístupnosti",
     "closeButton": "Zavrieť ponuku prístupnosti",
     "title": "Ponuka prístupnosti",
-    "description": "Prispôsobte si web tomu, ako čítate a prechádzate. Vaše voľby sa uložia v tomto zariadení.",
-    "reset": "Obnoviť všetko",
+    "description": "Prispôsobte si web svojmu spôsobu čítania a ovládania. Vaše nastavenia sa uložia v tomto zariadení.",
+    "reset": "Obnoviť pôvodné",
     "statusDefault": "Štandardné zobrazenie webu",
     "statusActive": "Aktívne úpravy: {count}",
     "hideButton": "Skryť tlačidlo prístupnosti do opätovného načítania stránky",
@@ -1907,7 +1907,7 @@ window.accessibilityCopy = {
         "description": "Väčší ukazovateľ myši."
       },
       "focusHighlight": {
-        "label": "Výrazný fokus",
+        "label": "Výrazný indikátor fokusu",
         "description": "Hrubý obrys okolo prvku, na ktorom je fokus klávesnice."
       },
       "reducedMotion": {
@@ -1930,7 +1930,7 @@ window.accessibilityCopy = {
     "statementLink": "Izjava o dostopnosti",
     "textSize": {
       "label": "Velikost besedila",
-      "description": "Povečaj besedilo na celotnem spletnem mestu.",
+      "description": "Poveča besedilo na celotnem spletnem mestu.",
       "decrease": "Manjše besedilo",
       "increase": "Večje besedilo",
       "level": "Velikost besedila {percent} %"
@@ -1942,11 +1942,11 @@ window.accessibilityCopy = {
       },
       "grayscale": {
         "label": "Sivine",
-        "description": "Prikaži spletno mesto brez barv."
+        "description": "Prikaže spletno mesto brez barv."
       },
       "underlineLinks": {
-        "label": "Poudari povezave",
-        "description": "Podčrtaj in označi vsako povezavo."
+        "label": "Poudarjene povezave",
+        "description": "Podčrta in označi vse povezave."
       },
       "readableFont": {
         "label": "Berljiva pisava",
@@ -1957,8 +1957,8 @@ window.accessibilityCopy = {
         "description": "Več prostora med vrsticami, besedami in črkami."
       },
       "highlightHeadings": {
-        "label": "Poudari naslove",
-        "description": "Označi naslove, da se vidi zgradba strani."
+        "label": "Poudarjeni naslovi",
+        "description": "Označi naslove, da je razvidna zgradba strani."
       },
       "bigCursor": {
         "label": "Velik kazalec",
@@ -1966,10 +1966,10 @@ window.accessibilityCopy = {
       },
       "focusHighlight": {
         "label": "Izrazit fokus",
-        "description": "Debela obroba okoli elementa s fokusom tipkovnice."
+        "description": "Debela obroba okoli elementa, ki je v fokusu tipkovnice."
       },
       "reducedMotion": {
-        "label": "Ustavi animacije",
+        "label": "Brez animacij",
         "description": "Ustavi animacije, prehode in videoposnetek v ozadju."
       }
     }

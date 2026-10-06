@@ -2,20 +2,20 @@
 // The WIFIGATE Host page (/automation/) in Malay: title, description and body.
 
 export default {
-  "metaTitle": "Akses Tetamu Automatik: Hotel, Rumah Percutian & Parkir | WIFIGATE",
-  "metaDescription": "Akses selamat terhad masa untuk setiap tetamu, dicipta automatik bagi setiap tempahan. Untuk hotel, rumah percutian, rumah tamu dan parkir atau garaj sewa. Tanpa serahan kunci.",
+  "metaTitle": "Akses Tetamu Automatik: Hotel, Homestay & Parkir | WIFIGATE",
+  "metaDescription": "Akses selamat terhad masa untuk setiap tetamu, dicipta automatik bagi setiap tempahan. Untuk hotel, homestay, rumah tamu dan parkir atau garaj sewa. Tanpa serahan kunci.",
   "marketing": {
     "hero": {
       "eyebrow": "WIFIGATE Host",
-      "title": "Akses tetamu yang mengurus dirinya sendiri",
-      "lead": "Sebaik sahaja tempahan disahkan, WIFIGATE mencipta akses selamat yang terhad masa ke pintu pagar, pintu atau tempat letak kereta anda, dan ia tamat dengan sendirinya semasa daftar keluar. Tiada kunci untuk diserahkan, tiada kod untuk dikejar dan tiada sesiapa yang perlu menunggu di pintu masuk.",
+      "title": "Akses tetamu yang terurus dengan sendirinya",
+      "lead": "Sebaik sahaja tempahan disahkan, WIFIGATE mencipta akses selamat yang terhad masa ke pintu pagar, pintu atau tempat letak kereta anda, dan akses itu tamat sendiri semasa daftar keluar. Tiada kunci untuk diserahkan, tiada kod yang perlu dihantar berulang kali dan tiada sesiapa yang perlu menunggu di pintu masuk.",
       "ctaPrimary": "Hubungi kami",
-      "note": "Untuk hotel, rumah percutian, rumah tamu serta tempat letak kereta dan garaj sewa."
+      "note": "Untuk hotel, homestay, rumah tamu serta tempat letak kereta dan garaj sewa."
     },
     "pricing": {
       "eyebrow": "Harga",
       "title": "Pelan ringkas untuk tambahan WIFIGATE Host",
-      "subtitle": "Bayar hanya untuk automasi. Peranti WIFIGATE itu sendiri tidak pernah memerlukan langganan.",
+      "subtitle": "Bayar hanya untuk automasi. Peranti WIFIGATE sendiri tidak memerlukan sebarang langganan.",
       "per": "/ bulan",
       "starterDesc": "Untuk satu hartanah atau satu pintu masuk.",
       "starterF1": "Satu sistem",
@@ -41,7 +41,7 @@ export default {
     "audience": {
       "label": "Direka untuk:",
       "hotels": "Hotel",
-      "rentals": "Airbnb dan rumah percutian",
+      "rentals": "Airbnb dan homestay",
       "guesthouses": "Rumah tamu",
       "parking": "Tempat letak kereta dan garaj sewa"
     },
@@ -54,15 +54,15 @@ export default {
       "s2t": "Akses dicipta secara automatik",
       "s2x": "WIFIGATE Host mengeluarkan jemputan selamat yang terhad masa tepat untuk pintu pagar, pintu atau tempat letak kereta yang betul, sah hanya untuk penginapan itu.",
       "s3t": "Tetamu terus masuk",
-      "s3x": "Mereka membuka pintu masuk melalui telefon. Apabila tiba waktu daftar keluar, akses luput dengan sendirinya, tiada apa untuk dikutip atau dibatalkan."
+      "s3x": "Mereka membuka pintu masuk melalui telefon. Apabila tiba waktu daftar keluar, akses luput dengan sendirinya. Tiada apa-apa yang perlu dikutip atau dibatalkan."
     },
     "benefits": {
       "eyebrow": "Mengapa WIFIGATE Host",
-      "title": "Kurang urusan kaunter. Lebih banyak hospitaliti tanpa campur tangan.",
+      "title": "Kurang kerja di kaunter. Lebih banyak hospitaliti tanpa leceh.",
       "subtitle": "Semua yang diperlukan untuk menukar tempahan kepada akses, diuruskan untuk anda.",
       "b1t": "Tiada kunci untuk diserahkan",
       "b1x": "Lupakan pengambilan kunci, peti kunci dan kod yang disalin. Akses tiba di telefon tetamu tepat apabila diperlukan.",
-      "b2t": "Terhad masa sejak awal",
+      "b2t": "Sentiasa terhad masa",
       "b2x": "Setiap jemputan dibuka semasa daftar masuk dan luput semasa daftar keluar, secara automatik, untuk setiap penginapan.",
       "b3t": "Disulitkan dan peribadi",
       "b3x": "Akses disulitkan dan terhad kepada kebenaran yang dikeluarkan. Hartanah dan tetamu anda kekal dilindungi.",
@@ -75,11 +75,11 @@ export default {
     },
     "secure": {
       "eyebrow": "Keselamatan",
-      "title": "Akses yang boleh diberikan dengan yakin, walaupun kepada orang asing",
+      "title": "Akses yang selamat diberikan, walaupun kepada orang asing",
       "subtitle": "Dibina untuk melindungi hartanah di sebalik setiap pintu pagar.",
       "i1t": "Disulitkan hujung ke hujung",
       "i1x": "Setiap jemputan disulitkan, jadi butiran akses tidak boleh dibaca atau disalin semasa penghantaran.",
-      "i2t": "Kurang peranti fizikal, lebih banyak hospitaliti",
+      "i2t": "Kurang kunci dan kad, lebih fokus pada tetamu",
       "i2x": "Akses digital mengurangkan keperluan untuk kunci, kad dan alat kawalan jauh, supaya pasukan anda boleh menumpukan perhatian pada tetamu dan layanan.",
       "i3t": "Kawalan kekal di tangan anda",
       "i3x": "Akses dikaitkan dengan setiap penginapan dan setiap tetamu, dan anda boleh menghentikannya pada bila-bila masa."

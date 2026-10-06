@@ -13,8 +13,8 @@ export default {
   },
   "niches": {
     "hotels-airbnb": {
-      "label": "Hotellit, Airbnb ja vierashuoneistot",
-      "title": "Perille saapuneen vieraan ei pitäisi joutua odottamaan, että joku avaa oven!",
+      "label": "Hotellit, Airbnb ja loma-asunnot",
+      "title": "Vieraan ei pidä joutua odottamaan oven takana.",
       "heroLead": "Myönnettävä kortti, luovutettava avain tai vieraalta toiselle kulkeva avainlaatikon koodi tekee jokaisesta saapumisesta käsin sovittavan asian. Anna jokaiselle vieraalle henkilökohtainen kulkuoikeus, joka aukeaa sisäänkirjautuessa ja sulkeutuu uloskirjautuessa.",
       "highlights": [
         {
@@ -35,7 +35,7 @@ export default {
           "text": "Ei mitään myönnettävää tai luovutettavaa, ei edelliselle vieraalle jäänyttä korttia eikä eteenpäin kulkevaa avainlaatikon koodia. Vieraan puhelin on ainoa tapa päästä sisään."
         }
       ],
-      "paragraph": "WIFIGATE antaa hotelleille, vierashuoneistoille (Airbnb) ja lomakylille mahdollisuuden tarjota vieraille kätevä ja turvallinen digitaalinen sisäänpääsy suoraan puhelimesta.\nMagneettisten avainkorttien myöntämisen, fyysisten avainten luovuttamisen tai avainlaatikoiden käytön sijaan kulunhallinta hoituu automaattisesti.\nWIFIGATE Hostin avulla voit yhdistää varausjärjestelmäsi suoraan kulunhallintajärjestelmään.\nTämän yhteyden ansiosta vieras saa henkilökohtaisen kulkuoikeuden heti, kun varaus on vahvistettu.\nKulkuoikeus aktivoituu täsmälleen sisäänkirjautumisaikaan ja päättyy automaattisesti uloskirjautuessa ilman käsin tehtäviä toimia, avainten luovutusta tai vastaanoton ja majoittajien koordinointia.",
+      "paragraph": "WIFIGATE antaa hotelleille, loma-asunnoille (Airbnb) ja lomakylille mahdollisuuden tarjota vieraille kätevä ja turvallinen digitaalinen sisäänpääsy suoraan puhelimesta.\nMagneettisten avainkorttien myöntämisen, fyysisten avainten luovuttamisen tai avainlaatikoiden käytön sijaan kulunhallinta hoituu automaattisesti.\nWIFIGATE Hostin avulla voit yhdistää varausjärjestelmäsi suoraan kulunhallintajärjestelmään.\nTämän yhteyden ansiosta vieras saa henkilökohtaisen kulkuoikeuden heti, kun varaus on vahvistettu.\nKulkuoikeus aktivoituu täsmälleen sisäänkirjautumisaikaan ja päättyy automaattisesti uloskirjautuessa ilman käsin tehtäviä toimia, avainten luovutusta tai vastaanoton ja majoittajien koordinointia.",
       "bullets": [
         "Vieraan kulkuoikeus luodaan automaattisesti, kun varaus vahvistetaan",
         "Täysi automaatiotuki WIFIGATE Hostin kautta",
@@ -63,15 +63,15 @@ export default {
           "answer": "Kyllä. Henkilökunta, siivoojat, huolto ja toimittajat saavat kukin oman kulkuoikeutensa, ja kulkuhistoriasta näkee, kuka avasi ja milloin."
         },
         {
-          "question": "Tarvitaanko hotelleissa ja vierashuoneistoissa tilaus?",
-          "answer": "WIFIGATE-laitteessa ei ole kuukausitilausta. WIFIGATE Host, hotellien ja vierashuoneistojen varausautomaatio, on ainoa tilauksena tarjottava osa."
+          "question": "Tarvitaanko hotelleissa ja loma-asunnoissa tilaus?",
+          "answer": "WIFIGATE-laitteessa ei ole kuukausitilausta. WIFIGATE Host, hotellien ja loma-asuntojen varausautomaatio, on ainoa tilauspohjainen osa."
         }
       ]
     },
     "roller-shutters": {
       "label": "Yritysten ja liikkeiden rullaovet",
-      "title": "Rullaoven ohjauspisteen ei pitäisi olla esillä liikkeesi ulkopuolella!",
-      "heroLead": "Ulkona oleva tai työntekijältä toiselle kulkeva kytkin, avainkytkin tai kaukosäädin voi päätyä vääriin käsiin. Siirrä ohjaus liiketilan suojatulle sisäpuolelle ja avaa rullaovi puhelimella, jokaisella työntekijällä oma kulkuoikeus.",
+      "title": "Rullaoven ohjaus ei kuulu liikkeen ulkopuolelle.",
+      "heroLead": "Ulkona oleva tai työntekijältä toiselle kulkeva kytkin, avainkytkin tai kaukosäädin voi päätyä vääriin käsiin. Siirrä ohjaus liiketilan suojatulle sisäpuolelle ja avaa rullaovi puhelimella. Jokaisella työntekijällä on oma kulkuoikeutensa.",
       "highlights": [
         {
           "icon": "shutter",
@@ -85,7 +85,7 @@ export default {
         },
         {
           "icon": "phone",
-          "title": "Avaa seisomatta rullaoven edessä",
+          "title": "Avaus ilman oven edessä seisomista",
           "text": "Avaimella avatessa on seisottava aivan ohjauspisteen vieressä, kädet täynnä ja ilman kunnollista näkyvyyttä rullaoven alueelle. Puhelimella sen voi tehdä turvallisemman matkan päästä."
         }
       ],
@@ -124,7 +124,7 @@ export default {
     },
     "electric-gates": {
       "label": "Sähköportit ja pysäköintipuomit",
-      "title": "Portin avaamiseen ei pitäisi kuulua kuukausiveloitusta!",
+      "title": "Portin avaamisesta ei pidä maksaa kuukausittain.",
       "heroLead": "Puhelimella toimiviin porttiratkaisuihin liittyy usein kuukausitilaus, joka veloitetaan kuukaudesta toiseen. Siirry älykkääseen avaukseen ilman tilausmaksuja ja toistuvia veloituksia, henkilökohtaisilla kulkuoikeuksilla ja automaattisella avauksella vakituisille käyttäjille.",
       "highlights": [
         {
@@ -164,7 +164,7 @@ export default {
         },
         {
           "question": "Tarvitseeko portti SIM-kortin tai internetyhteyden?",
-          "answer": "Ei. Puhelin viestii suoraan WIFIGATE-laitteen kanssa, joten portti ei tarvitse SIM-korttia, internet-liittymää eikä ulkoista Wi-Fi-reititintä."
+          "answer": "Ei. Puhelin on suoraan yhteydessä WIFIGATE-laitteeseen, joten portti ei tarvitse SIM-korttia, internet-liittymää eikä ulkoista Wi-Fi-reititintä."
         },
         {
           "question": "Voinko jatkaa nykyisten kaukosäätimieni käyttöä?",
@@ -178,7 +178,7 @@ export default {
     },
     "garage-doors": {
       "label": "Autotallin ovet ja yksityinen pysäköinti",
-      "title": "Halpa RF-kaukosäädin voi olla helppo kopioida!",
+      "title": "Halvan RF-kaukosäätimen voi kopioida helposti.",
       "heroLead": "Yksinkertaiset RF-kaukosäätimet voivat olla helppoja kopioida, ja ne voivat päästää sisään henkilöitä, joille kulkuoikeutta ei ole koskaan annettu. WIFIGATE suojaa kulun kehittyneillä suojauskerroksilla, salatulla tallennuksella ja käyttäjien yksityisyyden suojalla.",
       "highlights": [
         {
@@ -193,7 +193,7 @@ export default {
         },
         {
           "icon": "phone",
-          "title": "Vähemmän riippuvuutta fyysisistä laitteista",
+          "title": "Vähemmän fyysisiä kulkuvälineitä",
           "text": "Sen sijaan, että jokaiselle autolle ja käyttäjälle olisi oma kaukosäädin, avaat puhelimella, joka on jo mukanasi. Vähemmän kaukosäätimiä ostettavaksi, koodattavaksi, luovutettavaksi ja hallittavaksi."
         }
       ],
@@ -232,18 +232,18 @@ export default {
     },
     "private-homes": {
       "label": "Yksityiskodit",
-      "title": "Yksityiskotien ei ole tarkoitus olla julkisia!",
-      "heroLead": "Lähetille, huoltomiehelle tai vieraalle antamasi ovipuhelimen koodi jää hänelle vielä kauan käynnin jälkeen ja kulkee eteenpäin sinun tietämättäsi. Anna jokaiselle henkilökohtainen, aikarajattu kulkuoikeus ja vähennä luvattomia sisäänpääsyjä ja varkausriskiä.",
+      "title": "Koti ei ole julkinen tila.",
+      "heroLead": "Lähetille, huoltomiehelle tai vieraalle antamasi ovikoodi jää hänelle vielä kauan käynnin jälkeen ja kulkee eteenpäin sinun tietämättäsi. Anna jokaiselle henkilökohtainen, aikarajattu kulkuoikeus ja vähennä luvattomia sisäänpääsyjä ja varkausriskiä.",
       "highlights": [
         {
           "icon": "keyless",
-          "title": "Ovipuhelimen koodi kiertää",
+          "title": "Ovikoodi kiertää käsistä käsiin",
           "text": "Koodi päätyy läheteille, huoltomiehille ja vieraille ja heiltä eteenpäin sinun tietämättäsi. Ja vuosien mittaan näppäimistön neljä kulunutta näppäintä paljastavat itse, mistä numeroista koodi koostuu."
         },
         {
           "icon": "clock",
           "title": "Itsestään päättyvä kulkuoikeus pienentää riskiä",
-          "text": "Viisi minuuttia tarvitseva lähetti saa viisi minuuttia. Kun kulkuoikeus päättyy itsestään, kenellekään, jonka ei enää pitäisi päästä sisään, ei jää tietä sisälle, ja juuri se vähentää luvattomia sisäänpääsyjä ja varkausriskiä."
+          "text": "Viisi minuuttia tarvitseva lähetti saa viisi minuuttia. Kun kulkuoikeus päättyy itsestään, sisäänpääsy ei jää kenellekään, jolle se ei enää kuulu. Juuri se vähentää luvattomia sisäänpääsyjä ja varkausriskiä."
         },
         {
           "icon": "roster",
@@ -286,7 +286,7 @@ export default {
     },
     "residential-buildings": {
       "label": "Asuinrakennukset",
-      "title": "Asuinrakennusten ei ole tarkoitus olla julkisia!",
+      "title": "Asuintalo ei ole julkinen tila.",
       "heroLead": "Lähettien, vieraiden ja huoltomiesten kesken kulkeva kiinteä koodi voi päätyä vääriin käsiin. Anna jokaiselle henkilökohtainen, aikarajattu kulkuoikeus ja vähennä luvattomia sisäänpääsyjä ja varkausriskiä.",
       "highlights": [
         {
@@ -340,12 +340,12 @@ export default {
     },
     "office-buildings": {
       "label": "Toimistorakennukset",
-      "title": "Toimistoon pääsyn ei pitäisi kulkea vastaanoton kautta!",
+      "title": "Toimistoon ei tarvitse kulkea vastaanoton kautta.",
       "heroLead": "Vierailijat, työnhakijat ja toimittajat odottavat, että joku tulee avaamaan, ja työntekijöille myönnetään kulkukortteja tai avaimia, jotka on kerättävä pois työsuhteen päättyessä. Anna jokaiselle henkilökohtainen kulkuoikeus: pysyvä työntekijöille, aikarajattu kaikille muille.",
       "highlights": [
         {
           "icon": "users",
-          "title": "Joku aloittaa, joku lähtee",
+          "title": "Uusi tulee, vanha lähtee",
           "text": "Työsuhteen alku ja loppu ovat yksi toimenpide listalla, eivät kierros kulkukortin myöntämistä, sen keräämistä ja lukon vaihtamista. Kulkuoikeus aukeaa ja sulkeutuu asettaminasi päivinä."
         },
         {
@@ -394,7 +394,7 @@ export default {
     },
     "entry-doors-magnetic-locks": {
       "label": "Yritysten sisäänkäyntiovet ja magneettilukot",
-      "title": "Yrityksesi ovikoodin ei pitäisi kulkea kädestä käteen!",
+      "title": "Yrityksen ovikoodi ei saa kulkea kädestä käteen.",
       "heroLead": "Työntekijöille, toimittajille ja asentajille annettu pysyvä koodi voi jäädä niille, joiden ei enää tarvitse päästä sisään. Anna jokaiselle henkilökohtainen, aikarajattu avausoikeus oveen jo asennetun sähkö- tai magneettilukon kautta.",
       "highlights": [
         {
@@ -448,7 +448,7 @@ export default {
     },
     "sports-facilities": {
       "label": "Urheilutilat",
-      "title": "Liikuntapaikan ovikoodin ei pitäisi kiertää WhatsApp-ryhmässä!",
+      "title": "Ovikoodin paikka ei ole WhatsApp-ryhmässä.",
       "heroLead": "Jäsenten, valmentajien ja vieraiden kesken kulkeva yhteinen koodi avaa oven silloinkin, kun sen ei enää pitäisi. Anna jokaiselle henkilökohtainen kulkuoikeus, joka vastaa aukioloaikoja ja jäsenyyden kestoa ja sulkeutuu, kun sitä ei enää tarvita.",
       "highlights": [
         {
@@ -467,7 +467,7 @@ export default {
           "text": "Kun kävijämäärät vaihtelevat päivän mittaan, kulkuloki tukee toimintaa, auttaa selvittämään sattuneita tilanteita ja vahvistaa, että paikat suljettiin päivän päätteeksi."
         }
       ],
-      "paragraph": "Urheilutilojen, padelkenttien, tenniskenttien, kuntosalien ja harjoituskeskusten on hallittava jäsenten, valmentajien, joukkueiden ja vieraiden kulkua aukioloaikojen, varausten ja tapahtumien mukaan. WIFIGATE antaa sinun myöntää väliaikaisia tai pysyviä kulkuoikeuksia puhelimella, vähentää riippuvuutta jaetusta avaimesta tai koodista ja parantaa käyttäjien sisäänpääsykokemusta, erityisesti kohteissa, joissa kävijämäärät vaihtelevat päivän mittaan.",
+      "paragraph": "Urheilutilojen, padelkenttien, tenniskenttien, kuntosalien ja harjoituskeskusten on hallittava jäsenten, valmentajien, joukkueiden ja vieraiden kulkua aukioloaikojen, varausten ja tapahtumien mukaan. WIFIGATElla myönnät väliaikaisia tai pysyviä kulkuoikeuksia puhelimella, vähennät riippuvuutta jaetusta avaimesta tai koodista ja parannat käyttäjien sisäänpääsykokemusta, erityisesti kohteissa, joissa kävijämäärät vaihtelevat päivän mittaan.",
       "bullets": [
         "Sopii padelkentille, tenniskentille, kuntosaleille ja harjoituskeskuksiin",
         "Kulku aukioloaikojen, varausten tai kulkuoikeuksien mukaan",
@@ -521,7 +521,7 @@ export default {
           "text": "Jokainen avaus kirjataan henkilön ja ajan kanssa, joten kysymykseen käynnistä vastataan historiasta eikä valvontakameran tallenteista."
         }
       ],
-      "paragraph": "Varastoalueet ja lokerohuoneet nojaavat yleensä jaettuihin koodeihin, koodilukkoihin ja fyysisiin avaimiin, joita kopioidaan, annetaan eteenpäin ja vaihdetaan harvoin. WIFIGATE siirtää kulun puhelimeen: jokaisella vuokralaisella on henkilökohtainen kulkuoikeus alueen porttiin, rakennuksen sisäänkäyntiin ja, jos asennettu, sähkölukolla varustettuun varastoyksikköön tai lokeroon. Kulkuoikeus on rajattu valitsemiisi tunteihin ja poistetaan heti, kun vuokrasuhde päättyy. Puhelin viestii suoraan paikan päällä olevan laitteen kanssa ilman SIM-korttia tai internetyhteyttä ovella, eikä tavallisessa käytössä ole kuukausitilausta.",
+      "paragraph": "Varastoalueet ja lokerohuoneet nojaavat yleensä jaettuihin koodeihin, koodilukkoihin ja fyysisiin avaimiin, joita kopioidaan, annetaan eteenpäin ja vaihdetaan harvoin. WIFIGATE siirtää kulun puhelimeen: jokaisella vuokralaisella on henkilökohtainen kulkuoikeus alueen porttiin, rakennuksen sisäänkäyntiin ja, jos asennettu, sähkölukolla varustettuun varastoyksikköön tai lokeroon. Kulkuoikeus on rajattu valitsemiisi tunteihin ja poistetaan heti, kun vuokrasuhde päättyy. Puhelin on suoraan yhteydessä paikan päällä olevaan laitteeseen ilman SIM-korttia tai internetyhteyttä ovella, eikä tavallisessa käytössä ole kuukausitilausta.",
       "bullets": [
         "Avaa alueen portti, rakennuksen ovi ja lokero puhelimella",
         "Henkilökohtainen kulkuoikeus jokaiselle vuokralaiselle",
@@ -550,7 +550,7 @@ export default {
         },
         {
           "question": "Tarvitaanko kohteessa internetyhteys ovella?",
-          "answer": "Ei. Puhelin viestii suoraan paikan päällä olevan laitteen kanssa, ilman SIM-korttia tai internetyhteyttä ovella."
+          "answer": "Ei. Puhelin on suoraan yhteydessä paikan päällä olevaan laitteeseen, ilman SIM-korttia tai internetyhteyttä ovella."
         }
       ]
     }
