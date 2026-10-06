@@ -2,91 +2,91 @@
 // The WIFIGATE Host page (/automation/) in Vietnamese: title, description and body.
 
 export default {
-  "metaTitle": "Quyền ra vào tự động cho khách sạn và nhà cho thuê | WIFIGATE",
-  "metaDescription": "Quyền truy cập tự động, có thời hạn vào cổng, cửa và gara cho mỗi lượt đặt phòng. Dành cho khách sạn, nhà cho thuê ngắn hạn, nhà khách và bãi đỗ xe cho thuê, không cần bàn giao chìa khóa.",
+  "metaTitle": "Khách ra vào tự động: khách sạn, căn hộ, bãi xe | WIFIGATE",
+  "metaDescription": "Quyền ra vào bảo mật, có thời hạn cho từng khách, tạo tự động cho mỗi lượt đặt phòng. Cho khách sạn, căn hộ nghỉ dưỡng, nhà khách, bãi xe và gara cho thuê.",
   "marketing": {
     "hero": {
       "eyebrow": "WIFIGATE Host",
-      "title": "Quyền truy cập cho khách, tự vận hành",
-      "lead": "Ngay khi đặt phòng được xác nhận, WIFIGATE tạo quyền truy cập an toàn, có thời hạn vào cổng, cửa hoặc gara của bạn, và quyền tự kết thúc khi trả phòng. Không bàn giao chìa khóa, không phải gửi mã, không ai phải chờ ở lối vào.",
+      "title": "Quyền ra vào cho khách, tự vận hành",
+      "lead": "Ngay khi lượt đặt phòng được xác nhận, WIFIGATE tạo quyền ra vào bảo mật, có thời hạn cho cổng, cửa hoặc bãi xe của bạn, và quyền này tự kết thúc khi trả phòng. Không bàn giao chìa khóa, không phải chạy theo mã số, không ai phải chờ ở lối vào.",
       "ctaPrimary": "Liên hệ với chúng tôi",
-      "note": "Dành cho khách sạn, nhà cho thuê ngắn hạn, nhà khách và bãi đỗ xe cho thuê."
+      "note": "Dành cho khách sạn, căn hộ nghỉ dưỡng, nhà khách, bãi xe và gara cho thuê."
     },
     "pricing": {
       "eyebrow": "Bảng giá",
-      "title": "Gói đơn giản cho tiện ích bổ sung WIFIGATE Host",
-      "subtitle": "Chỉ trả tiền cho phần tự động hóa. Bản thân thiết bị WIFIGATE không bao giờ có thuê bao.",
+      "title": "Các gói đơn giản cho tiện ích bổ sung WIFIGATE Host",
+      "subtitle": "Bạn chỉ trả phí cho phần tự động hóa. Bản thân thiết bị WIFIGATE không bao giờ có phí thuê bao.",
       "per": "/ tháng",
-      "starterDesc": "Cho một bất động sản hoặc một lối vào.",
-      "starterF1": "1 hệ thống",
-      "starterF2": "Tối đa 1,000 lời mời khách / tháng",
-      "starterF3": "Quyền truy cập có thời hạn tự động",
+      "starterDesc": "Cho một tài sản hoặc một lối vào.",
+      "starterF1": "Một hệ thống",
+      "starterF2": "Tối đa 1.000 lời mời khách mỗi tháng",
+      "starterF3": "Quyền ra vào tự động, có thời hạn",
       "planCta": "Liên hệ với chúng tôi",
-      "proDesc": "Cho công ty quản lý nhỏ.",
+      "proDesc": "Cho công ty quản lý vận hành nhỏ.",
       "proF1": "Tối đa 5 hệ thống",
-      "proF2": "1,000 lời mời cho mỗi hệ thống",
+      "proF2": "1.000 lời mời cho mỗi hệ thống",
       "proF3": "Hỗ trợ ưu tiên qua email",
       "hotelBadge": "Phổ biến nhất",
-      "hotelDesc": "Cho một khách sạn hoặc cả khu phức hợp.",
+      "hotelDesc": "Cho một khách sạn hoặc cả một khu lưu trú.",
       "hotelF1": "Tối đa 20 hệ thống",
       "hotelF2": "Báo cáo tập trung",
-      "hotelF3": "Hỗ trợ ưu đãi",
+      "hotelF3": "Hỗ trợ ưu tiên",
       "enterpriseAmount": "Tùy chỉnh",
-      "enterpriseDesc": "Cho PMS, channel manager và danh mục bất động sản lớn.",
+      "enterpriseDesc": "Cho PMS, Channel Manager và danh mục tài sản lớn.",
       "enterpriseF1": "Giá theo số lượng",
-      "enterpriseF2": "SLA và hỗ trợ triển khai",
-      "enterpriseF3": "Tích hợp tùy chỉnh",
-      "note": "Giá ra mắt cho tiện ích bổ sung WIFIGATE Host, thanh toán hằng tháng. Có thêm hệ thống bổ sung và gói theo năm, hãy hỏi chúng tôi để biết chi tiết."
+      "enterpriseF2": "SLA và triển khai",
+      "enterpriseF3": "Tích hợp theo yêu cầu",
+      "note": "Giá ra mắt cho tiện ích bổ sung WIFIGATE Host, thanh toán hằng tháng. Có thêm hệ thống bổ sung và gói theo năm, hãy liên hệ để biết chi tiết."
     },
     "audience": {
       "label": "Dành cho:",
       "hotels": "Khách sạn",
-      "rentals": "Airbnb và nhà cho thuê ngắn hạn",
+      "rentals": "Airbnb và căn hộ nghỉ dưỡng",
       "guesthouses": "Nhà khách",
-      "parking": "Bãi đỗ xe và gara cho thuê"
+      "parking": "Bãi xe và gara cho thuê"
     },
     "steps": {
       "eyebrow": "Cách hoạt động",
       "title": "Từ đặt phòng đến cổng mở, hoàn toàn tự động",
-      "subtitle": "Ba bước, sau đó hệ thống tự chạy cho mọi lượt đặt phòng.",
+      "subtitle": "Ba bước, sau đó mọi việc tự vận hành với từng lượt đặt phòng.",
       "s1t": "Có lượt đặt phòng mới",
-      "s1x": "Hệ thống đặt phòng hoặc quản lý bất động sản của bạn báo cho WIFIGATE rằng một lượt đặt phòng mới đã được xác nhận.",
-      "s2t": "Quyền truy cập được tạo tự động",
-      "s2x": "WIFIGATE cấp lời mời an toàn, có thời hạn cho đúng cổng, cửa hoặc gara, chỉ có hiệu lực trong kỳ lưu trú đó.",
-      "s3t": "Khách vào thẳng",
-      "s3x": "Khách mở lối vào bằng điện thoại của mình. Khi đến giờ trả phòng, quyền tự hết hạn, không cần thu hồi hay hủy gì."
+      "s1x": "Hệ thống đặt phòng hoặc quản lý của bạn thông báo cho WIFIGATE Host về một lượt đặt phòng mới vừa được xác nhận.",
+      "s2t": "Quyền ra vào được tạo tự động",
+      "s2x": "WIFIGATE Host cấp một lời mời bảo mật, có thời hạn cho đúng cổng, cửa hoặc bãi xe, chỉ có hiệu lực trong kỳ lưu trú đó.",
+      "s3t": "Khách chỉ việc bước vào",
+      "s3x": "Khách mở lối vào bằng điện thoại. Đến giờ trả phòng, quyền ra vào tự hết hạn, không có gì phải thu hồi hay hủy bỏ."
     },
     "benefits": {
       "eyebrow": "Vì sao chọn WIFIGATE Host",
-      "title": "Bớt việc lễ tân. Vận hành nhàn hơn.",
-      "subtitle": "Mọi thứ cần để biến lượt đặt phòng thành quyền truy cập, đã được xử lý cho bạn.",
+      "title": "Bớt việc lễ tân. Đón khách nhàn hơn.",
+      "subtitle": "Mọi thứ cần thiết để biến một lượt đặt phòng thành quyền ra vào, đều được xử lý thay bạn.",
       "b1t": "Không cần bàn giao chìa khóa",
-      "b1x": "Quên đi việc nhận chìa khóa, hộp khóa và mã bị sao chép. Quyền truy cập đến điện thoại của khách đúng lúc cần.",
-      "b2t": "Giới hạn thời gian ngay từ thiết kế",
-      "b2x": "Mỗi lời mời mở khi nhận phòng và hết hạn khi trả phòng, tự động, cho từng kỳ lưu trú.",
+      "b1x": "Quên đi việc nhận chìa khóa, hộp đựng chìa khóa và mã số bị sao chép. Quyền ra vào đến điện thoại của khách đúng lúc cần.",
+      "b2t": "Có thời hạn ngay từ thiết kế",
+      "b2x": "Mỗi lời mời tự động có hiệu lực khi nhận phòng và hết hạn khi trả phòng, với từng kỳ lưu trú.",
       "b3t": "Mã hóa và riêng tư",
-      "b3x": "Quyền truy cập được mã hóa và cổng hoạt động cục bộ. Bất động sản và khách của bạn luôn được bảo vệ.",
-      "b4t": "Hoạt động với các lối vào của bạn",
-      "b4x": "Cổng, cửa gara, barie và cửa ra vào, WIFIGATE điều khiển những gì bạn đã có.",
-      "b5t": "Mở rộng cho cả tòa nhà",
-      "b5x": "Từ một cổng đến cả khu phức hợp, một lời mời có thể bao gồm mọi lối vào khách cần.",
+      "b3x": "Quyền ra vào được mã hóa và chỉ giới hạn trong phạm vi đã cấp. Tài sản và khách của bạn luôn được bảo vệ.",
+      "b4t": "Hoạt động với các lối vào hiện có",
+      "b4x": "Cổng, cửa bãi xe, barie và cửa ra vào, WIFIGATE điều khiển chính những gì bạn đang có.",
+      "b5t": "Phù hợp cả với toàn bộ tòa nhà",
+      "b5x": "Từ một cổng đơn lẻ đến cả một khu lưu trú, một lời mời có thể bao gồm mọi lối vào mà khách cần.",
       "b6t": "Kết nối với hệ thống của bạn",
-      "b6x": "Kết nối WIFIGATE Host với quy trình đặt phòng, PMS hoặc channel manager của bạn và để hệ thống tự vận hành."
+      "b6x": "Kết nối WIFIGATE Host với quy trình đặt phòng, PMS hoặc Channel Manager của bạn và để mọi việc tự vận hành."
     },
     "secure": {
       "eyebrow": "Bảo mật",
-      "title": "Quyền truy cập bạn có thể yên tâm trao cho người lạ",
+      "title": "Quyền ra vào bạn có thể yên tâm trao cho cả người lạ",
       "subtitle": "Được xây dựng để bảo vệ tài sản phía sau mỗi cánh cổng.",
       "i1t": "Mã hóa đầu cuối",
-      "i1x": "Mỗi lời mời đều được mã hóa, nên thông tin truy cập không thể bị đọc hay sao chép trên đường truyền.",
-      "i2t": "Hoạt động tại cổng, không phụ thuộc đám mây",
-      "i2x": "Lối vào xác minh quyền truy cập cục bộ, nên vẫn hoạt động ngay cả khi không có kết nối.",
+      "i1x": "Mỗi lời mời đều được mã hóa, nên thông tin ra vào không thể bị đọc hay sao chép trên đường truyền.",
+      "i2t": "Ít vật dụng ra vào hơn, chăm sóc khách nhiều hơn",
+      "i2x": "Ra vào kỹ thuật số giảm bớt nhu cầu dùng chìa khóa, thẻ và remote, để đội ngũ của bạn tập trung vào khách và việc đón tiếp.",
       "i3t": "Bạn luôn nắm quyền kiểm soát",
-      "i3x": "Quyền truy cập gắn với từng kỳ lưu trú và từng khách, và bạn có thể tắt bất cứ khi nào cần."
+      "i3x": "Quyền ra vào gắn với từng kỳ lưu trú và từng khách, và bạn có thể dừng nó bất cứ lúc nào."
     },
     "cta": {
-      "title": "Sẵn sàng tự động hóa quyền truy cập cho khách?",
-      "text": "Hãy cho chúng tôi biết về các bất động sản của bạn, chúng tôi sẽ thiết lập WIFIGATE Host phù hợp với cách bạn vận hành.",
+      "title": "Sẵn sàng tự động hóa việc ra vào cho khách?",
+      "text": "Hãy cho chúng tôi biết về các tài sản của bạn, chúng tôi sẽ điều chỉnh WIFIGATE Host theo cách bạn đón khách.",
       "button": "Liên hệ với chúng tôi"
     }
   }

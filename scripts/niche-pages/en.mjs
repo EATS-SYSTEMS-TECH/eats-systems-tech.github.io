@@ -4,18 +4,18 @@
 export default {
   "home": {
     "seoTitle": "WIFIGATE | Smart Access Control for Gates, Doors, and Parking",
-    "seoDescription": "WIFIGATE (WiFi Gate) is smart access control for gates, buildings, parking entrances, and private homes. Secure, private, encrypted, and free of monthly fees.",
-    "keywords": "WIFIGATE, WiFi Gate, wifi gate, smart access control, gate access control, open gate from phone, door access control, parking access, no monthly fees"
+    "seoDescription": "WIFIGATE (WiFi Gate) is a smart access control system that opens gates, doors, parking, shutters, and garages from your phone. Secure, encrypted, and convenient, with no monthly subscription.",
+    "keywords": "WIFIGATE, WiFi Gate, wifi gate, smart access control, open gate from phone, electric gate, access control, no monthly subscription"
   },
   "where": {
-    "title": "Smart Access for Buildings, Businesses, and Hospitality",
-    "subtitle": "WIFIGATE makes access management simple, secure, and convenient for residential buildings, businesses, and hospitality properties, with flexible control for entrances, gates, shutters, and parking areas."
+    "title": "Where Can You Use WIFIGATE?",
+    "subtitle": "WIFIGATE suits a wide range of settings and delivers a smart, secure, and convenient way to manage access, from private homes to commercial and corporate environments."
   },
   "niches": {
     "hotels-airbnb": {
       "label": "Hotels, Airbnb, and Guest Apartments",
-      "title": "Smart Access for Hotels, Airbnb, and Guest Apartments",
-      "heroLead": "The guest receives a personal entry permission on their phone the moment the booking is confirmed. No key cards, no lockbox, no waiting at reception.",
+      "title": "A guest who has arrived shouldn't have to wait for someone to let them in!",
+      "heroLead": "A card to issue, a key to hand over, or a lockbox code passed from guest to guest turns every arrival into manual coordination. Give every guest a personal permission that opens at check-in and closes at check-out.",
       "highlights": [
         {
           "icon": "calendar",
@@ -24,8 +24,10 @@ export default {
         },
         {
           "icon": "invite",
-          "title": "The booking creates the access",
-          "text": "Through the WIFIGATE API your reservation system connects straight to access, so every confirmed booking issues the entry permission itself, with no manual step in between."
+          "title": "WIFIGATE Host connects the booking to the entrance",
+          "text": "With WIFIGATE Host, confirming a booking in your hotel or rental system automatically creates the guest's entry permission and sends it to them. No copying details, no card to issue, and no manual step along the way.",
+          "ctaLabel": "Explore WIFIGATE Host",
+          "ctaHref": "/automation/"
         },
         {
           "icon": "keyless",
@@ -33,19 +35,19 @@ export default {
           "text": "Nothing to program, nothing to hand over, no card left behind by a previous guest and no lockbox code passed along. The phone already in the guest's pocket is the only way in."
         }
       ],
-      "paragraph": "WIFIGATE lets guests receive convenient, secure digital access straight to their phone, with no physical keys, no cards, and no unnecessary coordination with the front desk or property owner. With the WIFIGATE API, the booking process can be connected to the access system, so the moment a reservation is confirmed the guest can automatically receive time-limited guest access. Access begins at check-in time, ends automatically at check-out, and significantly reduces the need to hand over keys, share codes, or handle each guest manually.",
+      "paragraph": "WIFIGATE lets hotels, guest apartments (Airbnb), and holiday complexes give guests a convenient, secure digital entry experience straight from their mobile phone.\nInstead of issuing magnetic key cards, handing over physical keys, or using lockboxes, access control becomes automatic.\nWith WIFIGATE Host, you can connect your booking system directly to the access system.\nThrough this connection, once a booking is confirmed, the guest receives a personal entry permission.\nThe permission activates exactly at check-in time and ends automatically at check-out, with no manual intervention, key handover, or coordination by the front desk or hosts.",
       "bullets": [
         "Automatic guest access created when a booking is confirmed",
-        "Full automation support through the WIFIGATE API",
+        "Full automation support through WIFIGATE Host",
         "Temporary access matched to the dates and hours of the stay",
-        "Less need for manual check-in, keys, cards, or codes",
+        "Less need to issue, hand over, and replace room key cards",
         "Permission management for staff, cleaners, maintenance, and vendors",
         "A smoother, more convenient arrival experience for guests",
         "Access ends automatically at check-out time",
         "Access history for transparency and control"
       ],
-      "seoTitle": "Access Control for Hotels, Airbnb, and Guest Apartments | WIFIGATE API",
-      "seoDescription": "WIFIGATE brings smart digital access to hotels, Airbnb, and guest apartments, including automated guest permissions through the WIFIGATE API, booking-based temporary access, fewer keys, and less manual check-in.",
+      "seoTitle": "WIFIGATE | Digital Guest Access for Hotels, Airbnb, and Holiday Complexes",
+      "seoDescription": "WIFIGATE lets hotels, Airbnb hosts, and holiday complexes manage digital, automatic guest access with WIFIGATE Host, with personal entry permissions for each booking and no physical keys, magnetic cards, or lockboxes.",
       "imageAlt": "Guests opening a hotel room door with a phone in a modern hallway",
       "faq": [
         {
@@ -54,7 +56,7 @@ export default {
         },
         {
           "question": "Can guest access be created automatically from bookings?",
-          "answer": "Yes. With WIFIGATE Host and the WIFIGATE API, a confirmed booking can create the guest's access automatically, matched to the dates and hours of the stay."
+          "answer": "Yes. With WIFIGATE Host and its API, a confirmed booking can create the guest's access automatically, matched to the dates and hours of the stay."
         },
         {
           "question": "Can cleaners and maintenance staff get their own access?",
@@ -68,8 +70,8 @@ export default {
     },
     "roller-shutters": {
       "label": "Roller Shutters for Businesses and Shops",
-      "title": "Smart, Safer Control of Roller Shutters for Businesses and Shops",
-      "heroLead": "The shutter opens from a phone, and control moves to the protected inner side of the business. Fewer remotes, fewer keys and fewer exposed entry points outside.",
+      "title": "Your shutter's control point shouldn't be exposed outside your business!",
+      "heroLead": "A switch, key box, or remote that sits outside or passes between employees can end up in the wrong hands. Move control to the protected inner side of your business, and open the shutter from your phone with a personal permission for each employee.",
       "highlights": [
         {
           "icon": "shutter",
@@ -122,8 +124,8 @@ export default {
     },
     "electric-gates": {
       "label": "Electric Gates and Parking Barriers",
-      "title": "Smart Opening for Electric Gates and Parking Barriers",
-      "heroLead": "Open the gate or barrier from your phone, send a temporary permission to a guest or supplier, and let daily users through automatically. Existing remotes keep working alongside it.",
+      "title": "Opening your gate shouldn't come with a standing order!",
+      "heroLead": "Systems for opening gates from a phone often come with a monthly subscription that keeps charging you every month. Switch to smart opening with no subscription fees and no standing order, with personal permissions and automatic opening for regular users.",
       "highlights": [
         {
           "icon": "handsfree",
@@ -133,12 +135,12 @@ export default {
         {
           "icon": "clock",
           "title": "Temporary access for a supplier or guest",
-          "text": "Instead of handing over a remote and hoping it comes back, send a permission valid only for the window in which it is actually needed, after which it closes itself."
+          "text": "Instead of taking calls asking you to open the gate at a bad time, send a permission valid only for the window in which it is actually needed, after which it closes on its own."
         },
         {
           "icon": "gate",
-          "title": "Existing remotes do not go in the bin",
-          "text": "WIFIGATE joins what is already installed on the gate. Whoever prefers a remote keeps using it, and whoever prefers a phone simply opens from the app."
+          "title": "Stability, reliability, and privacy",
+          "text": "Names and phone numbers are sensitive information, especially in the age of AI. With WIFIGATE, the user database is stored on the device itself, encrypted and shielded from internet exposure, on a stable, reliable system built for everyday opening."
         }
       ],
       "paragraph": "Electric gates and parking barriers serve residents, employees, guests, and vendors, but managing remotes, codes, and open-the-gate phone calls quickly becomes a burden. WIFIGATE lets you open the gate from the phone, share permanent or temporary access, use automatic opening for regular users, and set scheduled events as needed. The system is designed for secure, private, encrypted operation, with no monthly subscription or recurring payment, and you can keep using existing remotes alongside app control.",
@@ -176,8 +178,8 @@ export default {
     },
     "garage-doors": {
       "label": "Garage Doors and Private Parking",
-      "title": "Smart Opening for Garage Doors and Private Parking",
-      "heroLead": "The garage door opens from your phone, and access moves from a remote to a list you control. No remote to lose, and none left with someone who no longer needs it.",
+      "title": "A cheap RF remote can be easy to copy!",
+      "heroLead": "Basic RF remotes can be easy to copy and can give access to people who were never authorized. WIFIGATE protects access with advanced security layers, encrypted storage, and user privacy.",
       "highlights": [
         {
           "icon": "keyless",
@@ -186,13 +188,13 @@ export default {
         },
         {
           "icon": "users",
-          "title": "Access for the household and for tradespeople",
-          "text": "Everyone at home gets their own permission, and a tradesperson coming once can be given access that closes at the end of the day. Nothing left under the mat."
+          "title": "Know who opened and when",
+          "text": "When everyone uses the same remote, there is no way to know who came in. With WIFIGATE, every user opens with a personal permission, and the access history shows who opened and when."
         },
         {
           "icon": "phone",
-          "title": "Your phone is already with you",
-          "text": "No remote to move between cars and nothing to hunt for when somebody else is driving. What opens the door is the one thing you never leave without."
+          "title": "Less dependence on physical devices",
+          "text": "Instead of keeping a remote for every car and every user, open from the phone that is already with you. Fewer remotes to buy, code, hand over, and manage."
         }
       ],
       "paragraph": "Garage doors and private parking entrances are usually operated with physical remotes, which can get lost, stay with people who no longer need access, or be copied in certain situations. WIFIGATE moves control to digital access from the phone, lets you manage permissions for family members, employees, or guests, and share temporary access without handing over a remote or a code. The result is a more convenient, more private, and better organized experience, with less dependence on physical access devices.",
@@ -230,18 +232,18 @@ export default {
     },
     "private-homes": {
       "label": "Private Homes",
-      "title": "Smart, Secure Access for Private Homes",
-      "heroLead": "A fixed keypad code wears down, gets passed around and stays with people who no longer need it. Give each person their own permission, and a temporary one to anyone visiting once.",
+      "title": "Private homes aren't meant to be public!",
+      "heroLead": "The intercom code you gave a courier, a technician, or a guest stays with them long after the visit is over, and gets passed on without you knowing. Give everyone a personal, time-limited entry permission, and reduce unauthorized entries and the risk of theft.",
       "highlights": [
         {
-          "icon": "shield",
-          "title": "A keypad gives your code away",
-          "text": "After enough years, four worn keys say exactly which digits make up the code. A permission on a phone leaves no marks on the wall."
+          "icon": "keyless",
+          "title": "The intercom code keeps going around",
+          "text": "The code goes to couriers, technicians, and guests, and from them onward without you knowing. And after enough years, the four worn keys on the keypad give away its digits on their own."
         },
         {
           "icon": "clock",
-          "title": "Access for the delivery, not forever",
-          "text": "A code given to a courier, a technician or a guest is still with them a year later. A temporary permission closes itself the moment the visit is over."
+          "title": "Access that ends on its own reduces risk",
+          "text": "A courier who needs five minutes gets five minutes. When the permission expires by itself, no way in is left for anyone who should no longer enter, and that is what reduces unauthorized entries and the risk of theft."
         },
         {
           "icon": "roster",
@@ -284,7 +286,7 @@ export default {
     },
     "residential-buildings": {
       "label": "Residential Buildings",
-      "title": "Smart Access Management for Residential Buildings",
+      "title": "Residential buildings aren't meant to be public!",
       "heroLead": "A fixed code that travels between couriers, guests and service people can end up in the wrong hands. Give each person a personal, time-limited entry permission and cut unauthorised entries and the risk of theft.",
       "highlights": [
         {
@@ -303,16 +305,16 @@ export default {
           "text": "Auto Open recognises that you have arrived and opens the gate or door for you. No searching for a key and no taking out your phone, even when your hands are full of shopping, a pushchair or children."
         }
       ],
-      "paragraph": "In residential buildings, a shared entry code quickly spreads between residents, guests, couriers, vendors, and service providers. Over time it becomes hard to know who really holds access to the building, and when it is time to change a code or collect remotes. WIFIGATE lets residents and the building committee manage access in a more organized way, grant temporary guest permissions, reduce dependence on a shared code, and keep better control over entry to the building, lobby, gate, or parking.",
+      "paragraph": "In a residential building, access does not end at the lobby door: there is a gate, a parking entrance, storage room doors, and sometimes a side door. And it involves not only the residents, but also changing tenants, the building committee or management company, cleaners, maintenance staff, and regular vendors. When all of this runs on one code and a few remotes, every small change, a resident who moved out, a lost remote, or a new vendor, means changing the code and notifying everyone again. WIFIGATE replaces this approach with organized, building-level access management.",
       "bullets": [
-        "Convenient access for residents through the phone",
-        "Temporary guest invites without exposing a permanent code",
-        "Permission management for residents, vendors, and service providers",
+        "A personal permission for every resident, instead of one code for everyone",
+        "Add and remove residents without changing the code for the whole building",
+        "Separate permissions for cleaners, maintenance, and regular vendors",
         "Suitable for lobby doors, gates, and parking entrances",
         "Less dependence on keypads, keys, and remotes",
-        "Better transparency through access history",
-        "Simpler management for the building committee or management company",
-        "A more convenient entry experience for residents and guests"
+        "Access history for the building committee or management company",
+        "Manage all of the building's permissions from your phone",
+        "Access for new tenants from move-in day, with no key handover"
       ],
       "seoTitle": "Access Control for Residential Buildings | WIFIGATE",
       "seoDescription": "WIFIGATE brings smart access management to residential buildings, with phone-based entry, temporary guest permissions, less dependence on keypads, and better transparency.",
@@ -338,8 +340,8 @@ export default {
     },
     "office-buildings": {
       "label": "Office Buildings",
-      "title": "Smart Access for Office Buildings",
-      "heroLead": "Standing permissions for staff, temporary ones for visitors and suppliers. No queue at reception, no badges to issue and no keys to collect when somebody leaves.",
+      "title": "Getting into the office shouldn't go through reception!",
+      "heroLead": "Visitors, interviewees, and suppliers wait for someone to come down and let them in, and employees are issued badges or keys that have to be collected when they leave. Give everyone a personal permission: permanent for employees, time-limited for everyone else.",
       "highlights": [
         {
           "icon": "users",
@@ -348,8 +350,8 @@ export default {
         },
         {
           "icon": "invite",
-          "title": "The visitor arrives already holding the entry",
-          "text": "Instead of waiting at reception for somebody to come down, the visitor arrives with a permission sent to their phone, valid only for the time of the meeting."
+          "title": "Invite a job candidate in one tap",
+          "text": "Send a candidate a job interview invitation that gives them a verified, secure opening permission, complete with arrival directions and details."
         },
         {
           "icon": "history",
@@ -392,18 +394,18 @@ export default {
     },
     "entry-doors-magnetic-locks": {
       "label": "Entry Doors and Magnetic Locks for Businesses",
-      "title": "Smart Opening for Business Entry Doors and Magnetic Locks",
-      "heroLead": "Your business entrance opens from a phone, and permissions change without changing a code. It works with the electric or magnetic lock already fitted to the door.",
+      "title": "Your business entry code shouldn't pass from hand to hand!",
+      "heroLead": "A permanent code given to employees, suppliers, and technicians can stay with people who no longer need to get in. Give everyone a personal, time-limited opening permission through the electric or magnetic lock already fitted to the door.",
       "highlights": [
         {
           "icon": "keyless",
-          "title": "One code for everyone stops being a solution",
-          "text": "A code that travels between staff, suppliers and customers is no longer really closing the door. A personal permission for each person removes the need to change the code every time somebody moves on."
+          "title": "Reduce the risk of unauthorized entry",
+          "text": "Instead of a shared code that can end up in the wrong hands, every employee, supplier, or guest has a personal opening permission you can revoke at any moment. The access history shows who opened and when, and helps reduce unauthorized entries and the risk of theft."
         },
         {
           "icon": "clock",
           "title": "Temporary access for a supplier or technician",
-          "text": "For the cleaner who comes in the evening, the technician who comes once and the courier who needs five minutes: a permission valid for exactly that window, which then closes itself."
+          "text": "The supplier who comes in the morning to unload goods, the cleaners who come in the evening, a one-time technician, and a courier who needs five minutes: each gets a permission for their own time window, and it closes on its own. The owner does not need to come in specially or take a call to open the door."
         },
         {
           "icon": "phone",
@@ -446,8 +448,8 @@ export default {
     },
     "sports-facilities": {
       "label": "Sports Facilities",
-      "title": "Smart Access Control for Sports Facilities",
-      "heroLead": "Members, coaches and guests enter on their own permission and within opening hours. No shared key, and no code going around a WhatsApp group.",
+      "title": "Your facility's entry code shouldn't be going around the WhatsApp group!",
+      "heroLead": "A shared code passed between members, coaches, and guests keeps opening the door even when it no longer should. Give everyone a personal permission that matches opening hours and the membership period, and closes once it is no longer needed.",
       "highlights": [
         {
           "icon": "calendar",
