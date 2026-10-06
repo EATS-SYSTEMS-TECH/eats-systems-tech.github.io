@@ -32,6 +32,16 @@ const server = createServer(async (req, res) => {
   try { decoded = await auth.verifyIdToken(bearer[1]); record = await auth.getUser(decoded.uid); }
   catch { send(res, 401, { error: { code: "INVALID_ID_TOKEN" } }, origin); return; }
   const me = profile(decoded, record);
+  if (req.url === "/api/v1/platform/me" && req.method === "GET") {
+    let state = me.access.state === "active" ? "active" : me.access.state === "pending" ? "pending" : "no-plan";
+    if (state === "active" && me.mfa.required && (!me.mfa.enrolled || !me.mfa.verified)) state = "mfa-required";
+    send(res, 200, {
+      user: me.user,
+      mfa: { enrolled: me.mfa.enrolled, verified: me.mfa.verified },
+      products: { host: { state }, pay: { state: "no-plan" }, manager: { state: "no-plan" } },
+    }, origin);
+    return;
+  }
   if (req.url === "/api/v1/users/me" && ["PUT", "GET"].includes(req.method)) { send(res, 200, me, origin); return; }
   if (req.url === "/api/v1/admin/portal-access" && req.method === "POST") {
     if (me.role !== "admin" || me.access.state !== "active" || !me.mfa.verified) { send(res, 403, { error: { code: "MFA_REQUIRED" } }, origin); return; }
