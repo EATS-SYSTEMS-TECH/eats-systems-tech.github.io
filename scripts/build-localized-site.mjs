@@ -6,7 +6,7 @@ import { execFileSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 import { NICHE_CHROME } from "./niche-content.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
-import { SITE_NAVIGATION } from "./site-navigation.mjs";
+import { SITE_LOGIN_LABELS, SITE_NAVIGATION } from "./site-navigation.mjs";
 import { accessibilityLinkLabels } from "./legal/footer-labels.mjs";
 import { wifigateLinkLocales } from "./wifigate-link-locales.mjs";
 import { buildLlmsTxt } from "./llms-txt.mjs";
@@ -816,6 +816,9 @@ function applyHomepageCopy($, copy, locale) {
   setLocalizedLines($, "#where-title", copy.solutions.titleLines, locale);
   setLocalizedText($, "#where-subtitle", copy.solutions.subtitle, locale);
   $("#where-product-image").attr("alt", copy.solutions.imageAlt);
+  $("img[src*='private-access-arrival']").attr("alt", copy.privateAccess.imageAlt);
+  $("img[src*='one-tap-invite-map']").attr("alt", copy.oneTapInvite.imageAlt);
+  $("img.product-overview__image").attr("alt", copy.productGuide.imageAlt);
 
   setLocalizedText($, "#wifigate-automation .guest-invites__eyebrow", copy.automation.eyebrow, locale);
   setLocalizedLines($, "#guest-invites-title", copy.automation.titleLines, locale);
@@ -1053,11 +1056,14 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   $(".nav").attr("aria-label", copy.ariaLabel);
   $(".nav__logo-link").attr({ href: home + "#home", "aria-label": "WIFIGATE" });
   $(".nav__toggle").attr("aria-label", copy.toggleLabel);
+  const loginLabel = SITE_LOGIN_LABELS[locale];
+  if (!loginLabel) throw new Error(`No header login label for ${locale}`);
+  setLocalizedText($, $(".site-login__trigger"), loginLabel, locale);
   $("#language-button").attr("aria-label", copy.selectLanguageLabel);
   setLanguageSelector($, homeData.localeOptions, locale, pageKey);
   const prefix = buildAssetPrefix(locale, pageKey);
   $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20261006a">');
-  $("script[src*='js/navigation.js']").attr("src", prefix + "js/navigation.js?v=20260911a");
+  $("script[src*='js/navigation.js']").attr("src", prefix + "js/navigation.js?v=20261007a");
 }
 
 // JSON safe to embed in an inline <script>.

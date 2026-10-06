@@ -84,7 +84,7 @@
   <link rel="stylesheet" href="../css/home-en.css?v=20260910h">
   <script src="../js/utils.js?v=20260402a" defer=""></script>
 
-  <script src="../js/navigation.js?v=20260911a" defer=""></script>
+  <script src="../js/navigation.js?v=20261007a" defer=""></script>
   <script src="../js/hero.js?v=20261007a" defer=""></script>
 
   <script>window.accessibilityCopy = {"ja":{"skipLink":"メインコンテンツへスキップ","eyebrow":"アクセシビリティ","openButton":"アクセシビリティメニューを開く","closeButton":"アクセシビリティメニューを閉じる","title":"アクセシビリティメニュー","description":"読み方や操作方法に合わせてサイトを調整できます。設定はこのデバイスに保存されます。","reset":"すべてリセット","statusDefault":"標準のサイト表示","statusActive":"{count} 件の調整が有効","hideButton":"ページを再読み込みするまでアクセシビリティボタンを非表示にする","statementLink":"アクセシビリティ方針","textSize":{"label":"文字サイズ","description":"サイト全体の文字を拡大します。","decrease":"文字を小さく","increase":"文字を大きく","level":"文字サイズ {percent}%"},"options":{"highContrast":{"label":"ハイコントラスト","description":"明るい背景に濃い文字と、はっきりした枠線を表示します。"},"grayscale":{"label":"グレースケール","description":"サイトを色なしで表示します。"},"underlineLinks":{"label":"リンクを強調","description":"すべてのリンクに下線と目印を付けます。"},"readableFont":{"label":"読みやすいフォント","description":"シンプルで読みやすいフォントを使用します。"},"textSpacing":{"label":"文字間隔","description":"行・単語・文字の間隔を広げます。"},"highlightHeadings":{"label":"見出しを強調","description":"見出しに目印を付けてページの構造を示します。"},"bigCursor":{"label":"大きいカーソル","description":"マウスポインターを大きくします。"},"focusHighlight":{"label":"フォーカスを強調","description":"キーボードフォーカスのある要素を太い枠で囲みます。"},"reducedMotion":{"label":"アニメーションを停止","description":"アニメーション、トランジション、背景動画を停止します。"}}}};</script>
@@ -382,6 +382,7 @@
       <div class="nav__links-wrapper" id="primary-navigation">
         <div class="topbar-nav"><a class="nav-link nav__link" href="/ja/#how-it-works" dir="ltr">プラットフォーム</a><a class="nav-link nav__link" href="/ja/#use-cases" dir="ltr">ソリューション</a><a class="nav-link nav__link" href="/ja/#wifigate-automation" dir="ltr">WIFIGATE Host</a><a class="nav-link nav__link" href="/ja/#tutorial-videos" dir="ltr">製品ガイド</a><a class="nav-link nav__link nav__contact-link" href="/ja/#get-in-touch" dir="ltr">お問い合わせ</a></div>
       </div>
+      <a class="site-login__trigger" href="/login/" dir="ltr">ログイン</a>
       <div class="language-selector">
         <button type="button" class="language-selector__button" id="language-button" aria-label="言語を選択" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="language-selector__flag" id="selected-flag"><img src="../assets/img/flags/flag-jp.svg" alt="JP" width="50" height="33"></span>
@@ -774,7 +775,7 @@
         <div class="security-statement__copy">
           <p dir="ltr">インターホンの固定暗証番号を共有し続けるのはやめましょう。有効期限付きのアクセス権に切り替えることで、不正侵入を減らし、盗難リスクの低減につながります。</p>
         </div>
-        <img class="security-statement__media-image" src="../assets/img/private-access-arrival.webp" alt="A courier follows a dotted blue route to an apartment entrance while a resident holds the WIFIGATE app showing time-limited guest access." width="1536" height="1024" loading="lazy" decoding="async">
+        <img class="security-statement__media-image" src="../assets/img/private-access-arrival.webp" alt="配達員が青い点線のルートをたどってマンションのエントランスへ向かい、住人が期間限定のゲストアクセスを表示した WIFIGATE アプリを手にしています。" width="1536" height="1024" loading="lazy" decoding="async">
       </div>
     </section><section class="section section--alt" id="where" data-nav-target="use-cases" aria-labelledby="where-title" aria-describedby="where-subtitle">
       <div class="container" id="use-cases">
@@ -946,7 +947,7 @@
           <p dir="ltr">WIFIGATE なら到着時の案内、住所、階数、部屋番号、
 インターホン情報、有効期限付きアクセスをワンタップで共有できます。</p>
         </div>
-        <img class="security-statement__media-image" src="../assets/img/one-tap-invite-map.webp" alt="A dotted blue route leads from the street to a location pin at an apartment building entrance." width="1536" height="1024" loading="lazy" decoding="async">
+        <img class="security-statement__media-image" src="../assets/img/one-tap-invite-map.webp" alt="青い点線のルートが通りからマンションのエントランスにある位置ピンまで続いています。" width="1536" height="1024" loading="lazy" decoding="async">
       </div>
     </section><section class="section section--alt seo-faq" id="wifi-gate-faq" aria-labelledby="wifi-gate-faq-title">
       <div class="container seo-faq__layout">
@@ -1045,7 +1046,7 @@
     </section><section class="product-overview" id="system-overview">
       <div class="container">
         <figure class="product-overview__figure">
-          <img class="product-overview__image" src="../assets/img/wifigate-system-overview.webp" alt="WIFIGATE system overview: the IP67 device, the mobile app, and the control board with its terminal blocks, USB Type-C and 12-24V input, Wi-Fi 6, Bluetooth LE and a 433.92MHz receiver, alongside the platform features - 5,000 users, 100 admins, unlimited guest invites, an automated guest invites API, no SIM or router, stability, quick guest invite, 90-day history, auto open, up to 10 events, digital RF remote learning, security and privacy, and no subscription fees." width="1448" height="1086" loading="lazy" decoding="async">
+          <img class="product-overview__image" src="../assets/img/wifigate-system-overview.webp" alt="WIFIGATE システムの概要：IP67 機器、モバイルアプリ、端子台・USB Type-C・12-24V 入力・Wi-Fi 6・Bluetooth LE・433.92MHz 受信機を備えた制御基板と、プラットフォームの機能（ユーザー 5,000 人、管理者 100 人、無制限のゲスト招待、ゲスト招待を自動化する API、SIM やルーター不要、安定性、ゲストをすばやく招待、90 日間の履歴、自動オープン、最大 10 件のイベント、デジタル RF リモコンの学習、セキュリティとプライバシー、サブスクリプション料金なし）。" width="1448" height="1086" loading="lazy" decoding="async">
         </figure>
       </div>
     </section><section class="section section--alt" id="contact" data-nav-target="get-in-touch" aria-labelledby="contact-title" aria-describedby="contact-description">
