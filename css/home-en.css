@@ -614,11 +614,6 @@ html[lang="he"] body.home-en .hero__overlay {
   padding-bottom: 0;
 }
 
-.home-en .security-statement--why .security-statement__media-image {
-  width: min(100%, 62rem);
-  margin-top: clamp(2rem, 4.5vw, 3.5rem);
-}
-
 /* Entry points the product covers, shown under the "why" statement. Same icon
    component as .contact-option-card__icon - blue glyph, hairline, 4px radius -
    retuned for the black band, rather than the circular badges the reference
@@ -728,35 +723,6 @@ html[lang="he"] body.home-en .hero__overlay {
     max-width: 100%;
     margin-top: 0.75rem;
   }
-}
-
-.home-en .security-statement__link {
-  display: inline-flex;
-  gap: 0.55rem;
-  margin-top: 1.75rem;
-  padding-bottom: 0.35rem;
-  align-items: center;
-  color: #ffffff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.65);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.home-en .security-statement__link svg {
-  width: 1rem;
-  height: 1rem;
-  transition: transform 180ms ease;
-}
-
-.home-en .security-statement__link:hover,
-.home-en .security-statement__link:focus-visible {
-  color: #9cbfff;
-  border-color: #9cbfff;
-}
-
-.home-en .security-statement__link:hover svg,
-.home-en .security-statement__link:focus-visible svg {
-  transform: translateX(0.25rem);
 }
 
 .home-en #where .section__header {
@@ -1017,34 +983,6 @@ html[lang="he"] body.home-en #where .section__header {
   border-color: var(--home-blue);
   background: var(--home-blue);
   transform: none;
-}
-
-.home-en .guest-invites__console {
-  border: 1px solid #393939;
-  border-radius: 4px;
-  background: #121212;
-  box-shadow: none;
-}
-
-.home-en .guest-invites__console-bar,
-.home-en .guest-invites__console-caption {
-  border-color: #333333;
-  background: #181818;
-}
-
-.home-en .guest-invites__console-method,
-.home-en .giapi-tok-url {
-  color: #75aaff;
-  border-color: rgba(117, 170, 255, 0.35);
-  background: rgba(20, 107, 255, 0.12);
-}
-
-.home-en .giapi-tok-key {
-  color: #a8a8a8;
-}
-
-.home-en .giapi-tok-val {
-  color: #ffffff;
 }
 
 .home-en .tutorials-layout {
@@ -1563,11 +1501,6 @@ html[lang="he"] body.home-en #where .section__header {
     box-shadow: 0 12px 28px rgba(11, 99, 255, 0.3);
   }
 
-  .home-en .a11y-fab__icon-wrap {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-
   .home-en .a11y-fab__icon {
     width: 1.7rem;
     height: 1.7rem;
@@ -1578,11 +1511,6 @@ html[lang="he"] body.home-en #where .section__header {
   .home-en .guest-invites__cta {
     max-width: 100%;
     white-space: normal;
-  }
-
-  .home-en .guest-invites__console-body code {
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
   }
 
   .home-en .hero__eyebrow {

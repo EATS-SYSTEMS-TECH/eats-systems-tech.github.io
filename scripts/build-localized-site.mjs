@@ -21,7 +21,7 @@ const defaultLocale = "en";
 const nowDate = new Date().toISOString().slice(0, 10);
 const guestInvitesPageKey = "automation";
 const utilityPageKeys = ["wifigate-link", "wifigate-api"];
-const COOKIE_CONSENT_VERSION = "20261007a";
+const COOKIE_CONSENT_VERSION = "20261007c";
 
 const homeTemplatePath = path.join(repoRoot, "templates", "index.template.html");
 const homeCopyDirectory = path.join(repoRoot, "scripts", "homepage-copy");
@@ -886,7 +886,7 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   $("#language-button").attr("aria-label", copy.selectLanguageLabel);
   setLanguageSelector($, homeData.localeOptions, locale, pageKey);
   const prefix = buildAssetPrefix(locale, pageKey);
-  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20261006a">');
+  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20261007c">');
   $("script[src*='js/navigation.js']").attr("src", prefix + "js/navigation.js?v=20261007a");
 }
 

@@ -124,12 +124,6 @@ html[dir="rtl"] .wa-hero::after {
   text-align: start;
 }
 
-.wa-hero .wa-eyebrow {
-  margin-bottom: 1.35rem;
-  color: rgba(255, 255, 255, 0.82);
-  letter-spacing: 0;
-}
-
 .wa-hero__title {
   max-width: 18ch;
   margin: 0;
@@ -151,62 +145,11 @@ html[dir="rtl"] .wa-hero::after {
   line-height: 1.55;
 }
 
-.wa-hero__pricing {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  max-width: 58rem;
-  margin-top: clamp(1.5rem, 3vh, 2.25rem);
-  border-block: 1px solid rgba(255, 255, 255, 0.32);
-  background: rgba(10, 10, 10, 0.16);
-  backdrop-filter: blur(10px);
-}
-
-.wa-hero__price {
-  display: grid;
-  gap: 0.3rem;
-  min-width: 0;
-  padding: 1rem 1.15rem;
-  border-inline-end: 1px solid rgba(255, 255, 255, 0.22);
-}
-
-.wa-hero__price:last-child {
-  border-inline-end: 0;
-}
-
-.wa-hero__price-name {
-  color: rgba(255, 255, 255, 0.68);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.wa-hero__price-value {
-  color: #fff;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(1.15rem, 2vw, 1.55rem);
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.wa-hero__price-value small {
-  color: rgba(255, 255, 255, 0.7);
-  font-family: "Manrope", sans-serif;
-  font-size: 0.74rem;
-  font-weight: 500;
-}
-
 .wa-hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: clamp(1.25rem, 2.5vh, 1.75rem);
-}
-
-.wa-hero__note {
-  margin: 1.15rem 0 0;
-  color: rgba(255, 255, 255, 0.76);
-  font-size: 0.9rem;
 }
 
 .wa-hero__media {
@@ -673,18 +616,6 @@ html[dir="rtl"] .wa-hero::after {
   .wa-hero__media {
     max-width: none;
     margin: 0;
-  }
-
-  .wa-hero__pricing {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .wa-hero__price:nth-child(2) {
-    border-inline-end: 0;
-  }
-
-  .wa-hero__price:nth-child(-n + 2) {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
   }
 
   .wa-steps__grid,
