@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "Dostavljavec sledi modri pikčasti poti do vhoda v stanovanjski blok, medtem ko stanovalec drži aplikacijo WIFIGATE s časovno omejenim dostopom za goste.",
     eyebrow: "Zasebni dostop",
     title: "Stavbe in zasebne hiše niso javni prostori.",
     description: "Nehajte deliti trajne kode domofona. Namesto tega delite časovno omejen dostop, da zmanjšate nepooblaščen vstop in tveganje kraje.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "Pregled sistema WIFIGATE: naprava IP67, mobilna aplikacija in krmilna plošča s priključnimi sponkami, USB Type-C in vhodom 12-24V, Wi-Fi 6, Bluetooth LE ter sprejemnikom 433,92MHz, ob tem pa funkcije platforme – 5000 uporabnikov, 100 skrbnikov, neomejena povabila za goste, API za samodejna povabila, brez kartice SIM ali usmerjevalnika, stabilnost, hitro povabilo za gosta, 90-dnevna zgodovina, samodejno odpiranje, do 10 dogodkov, učenje digitalnih daljinskih upravljalnikov RF, varnost in zasebnost ter brez naročnine.",
     eyebrow: "Vodnik po izdelku",
     title: "Preprosto od prvega dne.",
     subtitle: "Jasna navodila za namestitev, vsakodnevni dostop in napredno konfiguracijo.",
@@ -113,6 +115,7 @@ const copy = {
     status: "Kmalu",
   },
   oneTapInvite: {
+    imageAlt: "Modra pikčasta pot vodi od ulice do oznake lokacije pri vhodu v stanovanjski blok.",
     eyebrow: "En dotik. Vse, kar potrebujejo.",
     title: "Nehajte ponavljati navodila.\nPošljite eno celovito povabilo.",
     description: "WIFIGATE vam omogoča, da z enim dotikom delite navodila za prihod, naslov, nadstropje, številko apartmaja,\npodatke za domofon in časovno omejen dostop.",

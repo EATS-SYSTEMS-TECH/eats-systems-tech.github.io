@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "Ein Kurier folgt einer blau gepunkteten Route zum Eingang eines Wohnhauses, während ein Bewohner die WIFIGATE-App mit einem zeitlich begrenzten Gastzugang in der Hand hält.",
     eyebrow: "Privater Zutritt",
     title: "Gebäude und Privathäuser sind keine öffentlichen Räume.",
     description: "Geben Sie keine dauerhaft gültigen Codes für die Türsprechanlage mehr weiter. Teilen Sie stattdessen zeitlich begrenzte Zutrittsberechtigungen, um unbefugten Zutritt und das Diebstahlrisiko zu verringern.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "WIFIGATE-Systemübersicht: das IP67-Gerät, die mobile App und die Steuerplatine mit Anschlussklemmen, USB Type-C und 12-24-V-Eingang, Wi-Fi 6, Bluetooth LE und einem 433,92-MHz-Empfänger, dazu die Plattformfunktionen – 5.000 Nutzer, 100 Admins, unbegrenzte Gasteinladungen, eine API für automatisierte Gasteinladungen, keine SIM-Karte und kein Router, Stabilität, schnelle Gasteinladung, 90-Tage-Verlauf, automatisches Öffnen, bis zu 10 Events, Anlernen digitaler RF-Fernbedienungen, Sicherheit und Datenschutz sowie keine Abogebühren.",
     eyebrow: "Produktleitfaden",
     title: "Von Anfang an unkompliziert.",
     subtitle: "Klare Anleitungen für Installation, täglichen Zutritt und erweiterte Konfiguration.",
@@ -113,6 +115,7 @@ const copy = {
     status: "Demnächst verfügbar",
   },
   oneTapInvite: {
+    imageAlt: "Eine blau gepunktete Route führt von der Straße zu einer Standortmarkierung am Eingang eines Wohnhauses.",
     eyebrow: "Ein Fingertipp. Alles, was Ihre Gäste brauchen.",
     title: "Erklären Sie den Weg nicht jedes Mal neu.\nSenden Sie eine vollständige Einladung.",
     description: "Mit WIFIGATE teilen Sie Ankunftshinweise, Adresse, Etage, Wohnungsnummer,\nAngaben zur Türsprechanlage und zeitlich begrenzten Zutritt mit nur einem Fingertipp.",

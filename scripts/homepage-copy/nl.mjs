@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "Een koerier volgt een blauwe stippellijnroute naar de ingang van een appartementencomplex terwijl een bewoner de WIFIGATE-app vasthoudt met tijdelijke gasttoegang.",
     eyebrow: "Privétoegang",
     title: "Gebouwen en particuliere woningen zijn geen openbare ruimtes.",
     description: "Deel geen permanent geldige intercomcodes meer. Deel in plaats daarvan tijdgebonden toegang om onbevoegde toegang en het risico op diefstal te beperken.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "Overzicht van het WIFIGATE-systeem: het IP67-apparaat, de mobiele app en de besturingsprint met aansluitklemmen, USB Type-C en 12-24V-ingang, Wi-Fi 6, Bluetooth LE en een 433,92MHz-ontvanger, naast de platformfuncties – 5.000 gebruikers, 100 beheerders, onbeperkte gastuitnodigingen, een API voor geautomatiseerde gastuitnodigingen, geen simkaart of router, stabiliteit, snelle gastuitnodiging, 90 dagen geschiedenis, automatisch openen, tot 10 evenementen, inleren van digitale RF-afstandsbedieningen, veiligheid en privacy, en geen abonnementskosten.",
     eyebrow: "Productgids",
     title: "Vanaf dag één helder.",
     subtitle: "Duidelijke begeleiding voor installatie, dagelijkse toegang en geavanceerde configuratie.",
@@ -113,6 +115,7 @@ const copy = {
     status: "Binnenkort beschikbaar",
   },
   oneTapInvite: {
+    imageAlt: "Een blauwe stippellijnroute loopt van de straat naar een locatiemarkering bij de ingang van een appartementencomplex.",
     eyebrow: "Eén tik. Alles wat uw gast nodig heeft.",
     title: "Geen aanwijzingen meer herhalen.\nStuur één complete uitnodiging.",
     description: "Met WIFIGATE deelt u aankomstinstructies, het adres, de verdieping, het appartementnummer,\nde intercomgegevens en tijdgebonden toegang met één tik.",

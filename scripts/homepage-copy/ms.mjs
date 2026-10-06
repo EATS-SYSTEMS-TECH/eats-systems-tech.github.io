@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "Seorang kurier mengikut laluan biru bertitik ke pintu masuk pangsapuri sementara seorang penghuni memegang aplikasi WIFIGATE yang memaparkan akses tetamu terhad masa.",
     eyebrow: "Akses peribadi",
     title: "Bangunan dan rumah persendirian bukan ruang awam.",
     description: "Berhenti berkongsi kod interkom kekal. Sebaliknya, berikan akses untuk tempoh terhad bagi mengurangkan kemasukan tanpa kebenaran dan risiko kecurian.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "Gambaran keseluruhan sistem WIFIGATE: peranti IP67, aplikasi mudah alih dan papan kawalan dengan blok terminal, USB Type-C dan input 12-24V, Wi-Fi 6, Bluetooth LE serta penerima 433.92MHz, bersama ciri platform - 5,000 pengguna, 100 pentadbir, jemputan tetamu tanpa had, API jemputan tetamu automatik, tanpa SIM atau penghala, kestabilan, jemputan tetamu pantas, sejarah 90 hari, buka automatik, sehingga 10 acara, pembelajaran alat kawalan jauh RF digital, keselamatan dan privasi, serta tiada yuran langganan.",
     eyebrow: "Panduan produk",
     title: "Mudah dari hari pertama.",
     subtitle: "Panduan yang jelas untuk pemasangan, akses harian, dan konfigurasi lanjutan.",
@@ -113,6 +115,7 @@ const copy = {
     status: "Akan datang",
   },
   oneTapInvite: {
+    imageAlt: "Laluan biru bertitik menghala dari jalan ke penanda lokasi di pintu masuk bangunan pangsapuri.",
     eyebrow: "Satu ketukan. Semua yang mereka perlukan.",
     title: "Tidak perlu mengulang arahan.\nHantar satu jemputan lengkap.",
     description: "WIFIGATE membolehkan anda berkongsi nota ketibaan, alamat, tingkat, unit/pangsapuri,\nbutiran interkom, dan akses terhad masa dalam satu ketukan.",

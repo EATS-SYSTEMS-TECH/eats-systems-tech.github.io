@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "Un livreur suit un itinéraire bleu en pointillés jusqu'à l'entrée d'un immeuble pendant qu'un résident tient l'application WIFIGATE affichant un accès invité limité dans le temps.",
     eyebrow: "Accès privé",
     title: "Les immeubles et les résidences privées ne sont pas des espaces publics.",
     description: "Cessez de partager des codes d'interphone permanents. Privilégiez les accès limités dans le temps pour réduire les entrées non autorisées et le risque de vol.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "Vue d'ensemble du système WIFIGATE : le boîtier IP67, l'application mobile et la carte de commande avec ses borniers, l'USB Type-C et l'entrée 12-24 V, le Wi-Fi 6, le Bluetooth LE et un récepteur 433,92 MHz, ainsi que les fonctionnalités de la plateforme : 5 000 utilisateurs, 100 administrateurs, invitations illimitées pour les invités, une API d'invitations automatisées, sans carte SIM ni routeur, stabilité, invitation rapide, historique de 90 jours, ouverture automatique, jusqu'à 10 événements, apprentissage des télécommandes RF numériques, sécurité et confidentialité, et aucun frais d'abonnement.",
     eyebrow: "Guide produit",
     title: "Simple dès le premier jour.",
     subtitle: "Conseils clairs pour l'installation, l'utilisation quotidienne et la configuration avancée.",
@@ -113,6 +115,7 @@ const copy = {
     status: "Prochainement",
   },
   oneTapInvite: {
+    imageAlt: "Un itinéraire bleu en pointillés mène de la rue à un repère de localisation à l'entrée d'un immeuble résidentiel.",
     eyebrow: "Un geste. Tout ce qu'il leur faut.",
     title: "Plus besoin de répéter les indications.\nEnvoyez une invitation complète.",
     description: "WIFIGATE vous permet de partager les notes d'arrivée, l'adresse, l'étage, l'appartement,\nles informations d'interphone et l'accès temporaire en un seul geste.",

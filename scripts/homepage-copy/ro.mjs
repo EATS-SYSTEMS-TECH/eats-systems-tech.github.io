@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "Un curier urmează un traseu albastru punctat spre intrarea unui bloc de locuințe, în timp ce un locatar ține aplicația WIFIGATE care afișează acces pentru oaspeți limitat în timp.",
     eyebrow: "Acces privat",
     title: "Clădirile și casele private nu sunt spații publice.",
     description: "Nu mai partajați coduri permanente de interfon. Oferiți în schimb acces limitat în timp pentru a reduce intrările neautorizate și riscul de furt.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "Prezentare generală a sistemului WIFIGATE: dispozitivul IP67, aplicația mobilă și placa de control cu blocuri de borne, USB Type-C și intrare de 12-24V, Wi-Fi 6, Bluetooth LE și un receptor de 433,92MHz, alături de funcțiile platformei – 5.000 de utilizatori, 100 de administratori, invitații nelimitate pentru oaspeți, un API pentru invitații automate, fără SIM sau router, stabilitate, invitație rapidă pentru oaspeți, istoric de 90 de zile, deschidere automată, până la 10 evenimente, învățarea telecomenzilor RF digitale, securitate și confidențialitate și fără taxe de abonament.",
     eyebrow: "Ghid de produs",
     title: "Clar încă din prima zi.",
     subtitle: "Instrucțiuni clare pentru instalare, acces de zi cu zi și configurare avansată.",
@@ -113,6 +115,7 @@ const copy = {
     status: "În curând",
   },
   oneTapInvite: {
+    imageAlt: "Un traseu albastru punctat duce de pe stradă până la un marcaj de locație la intrarea unui bloc de locuințe.",
     eyebrow: "O atingere. Tot ce au nevoie.",
     title: "Nu mai repetați indicațiile.\nTrimiteți o invitație completă.",
     description: "WIFIGATE vă permite să trimiteți dintr-o atingere notele de sosire, adresa, etajul, apartamentul,\ndetaliile de interfon și accesul limitat în timp.",

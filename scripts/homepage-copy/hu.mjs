@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "Egy futár kék pontozott útvonalon halad egy társasház bejárata felé, miközben egy lakó a WIFIGATE alkalmazást tartja, amely időkorlátos vendéghozzáférést mutat.",
     eyebrow: "Privát hozzáférés",
     title: "Az épületek és magánházak nem nyilvános terek.",
     description: "Ne osszon meg állandó kaputelefon-kódokat. Osszon inkább időben korlátozott hozzáférést, hogy csökkenjen az illetéktelen belépés és a lopás kockázata.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "A WIFIGATE rendszer áttekintése: az IP67 eszköz, a mobilalkalmazás és a vezérlőpanel sorkapcsokkal, USB Type-C és 12-24V bemenettel, Wi-Fi 6-tal, Bluetooth LE-vel és 433,92MHz-es vevővel, mellettük a platform funkciói – 5000 felhasználó, 100 adminisztrátor, korlátlan vendégmeghívás, API automatizált vendégmeghívásokhoz, nincs szükség SIM-kártyára vagy routerre, stabilitás, gyors vendégmeghívás, 90 napos előzmények, automatikus nyitás, legfeljebb 10 esemény, digitális RF-távirányítók betanítása, biztonság és adatvédelem, valamint előfizetési díjak nélkül.",
     eyebrow: "Termékútmutató",
     title: "Egyszerű már az első naptól.",
     subtitle: "Világos útmutatás a telepítéshez, a mindennapi hozzáféréshez és a haladó beállításokhoz.",
@@ -113,6 +115,7 @@ const copy = {
     status: "Hamarosan",
   },
   oneTapInvite: {
+    imageAlt: "Kék pontozott útvonal vezet az utcáról egy társasház bejáratánál lévő helyjelölőig.",
     eyebrow: "Egy érintés. Minden, amire szükségük van.",
     title: "Ne ismételgesse az útbaigazítást.\nKüldjön egy teljes meghívót.",
     description: "A WIFIGATE lehetővé teszi, hogy egyetlen érintéssel elküldje az érkezési tudnivalókat, a címet, az emeletet, a lakásszámot,\na kaputelefon adatait és az időkorlátozott hozzáférést.",

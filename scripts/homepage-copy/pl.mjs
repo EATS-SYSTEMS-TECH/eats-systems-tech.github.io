@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "Kurier podąża niebieską przerywaną trasą do wejścia do budynku mieszkalnego, a mieszkaniec trzyma telefon z aplikacją WIFIGATE pokazującą czasowy dostęp dla gościa.",
     eyebrow: "Dostęp prywatny",
     title: "Budynki i domy prywatne nie są przestrzeniami publicznymi.",
     description: "Przestań udostępniać stałe kody do domofonu. Zamiast nich przyznawaj dostęp ograniczony czasowo, aby ograniczyć nieuprawnione wejścia i zmniejszyć ryzyko kradzieży.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "Przegląd systemu WIFIGATE: urządzenie IP67, aplikacja mobilna i płyta sterująca z listwami zaciskowymi, USB Type-C i wejściem 12-24V, Wi-Fi 6, Bluetooth LE oraz odbiornikiem 433,92MHz, a obok funkcje platformy – 5000 użytkowników, 100 administratorów, nieograniczone zaproszenia dla gości, API do automatycznych zaproszeń, bez karty SIM i routera, stabilność, szybkie zaproszenie dla gościa, 90-dniowa historia, automatyczne otwieranie, do 10 wydarzeń, uczenie cyfrowych pilotów RF, bezpieczeństwo i prywatność oraz brak opłat abonamentowych.",
     eyebrow: "Przewodnik po produkcie",
     title: "Prostota od pierwszego dnia.",
     subtitle: "Jasne instrukcje dotyczące instalacji, codziennego dostępu i konfiguracji zaawansowanej.",
@@ -113,6 +115,7 @@ const copy = {
     status: "Wkrótce",
   },
   oneTapInvite: {
+    imageAlt: "Niebieska przerywana trasa prowadzi z ulicy do pinezki lokalizacji przy wejściu do budynku mieszkalnego.",
     eyebrow: "Jedno dotknięcie. Wszystko, czego potrzebują.",
     title: "Nie powtarzaj wskazówek.\nWyślij jedno kompletne zaproszenie.",
     description: "WIFIGATE pozwala jednym dotknięciem udostępnić wskazówki dotyczące przyjazdu, adres, piętro, numer mieszkania,\ndane domofonu i dostęp ograniczony czasowo.",

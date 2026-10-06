@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "快遞員沿著藍色虛線路線走向公寓入口，一位住戶手持顯示限時訪客通行權限的 WIFIGATE App。",
     eyebrow: "私人通行",
     title: "大樓和私人住宅，本來就不是公共空間。",
     description: "別再共用長期有效的對講門禁密碼。改用限時訪客權限，可減少未經授權的進入，並有助於降低失竊風險。",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "WIFIGATE 系統概覽：IP67 裝置、手機 App，以及配備接線端子、USB Type-C 與 12-24V 輸入、Wi-Fi 6、Bluetooth LE 和 433.92MHz 接收器的控制板，並列出平台功能：：5,000 名使用者、100 名管理員、無限訪客邀請、自動化訪客邀請 API、無需 SIM 卡或路由器、穩定可靠、快速訪客邀請、90 天歷史紀錄、自動開門、最多 10 個活動、數位 RF 遙控器學習、安全與隱私，以及免訂閱費用。",
     eyebrow: "產品指南",
     title: "從第一天起，就簡單好用。",
     subtitle: "從安裝、日常通行到進階設定，都有清楚指引。",
@@ -113,6 +115,7 @@ const copy = {
     status: "即將推出",
   },
   oneTapInvite: {
+    imageAlt: "一條藍色虛線路線從街道延伸到公寓大樓入口處的定位標記。",
     eyebrow: "一鍵傳送，資訊完整。",
     title: "不用再重複說明路線，\n一次送出完整邀請。",
     description: "WIFIGATE 可一鍵分享抵達說明、地址、樓層、房號、\n對講資訊與限時通行權限。",

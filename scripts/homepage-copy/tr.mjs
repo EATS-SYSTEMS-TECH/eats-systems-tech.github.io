@@ -62,6 +62,7 @@
     ],
   },
   privateAccess: {
+    imageAlt: "Bir kurye mavi noktalı bir rotayı izleyerek apartman girişine ilerlerken bir apartman sakini, süreli misafir erişimini gösteren WIFIGATE uygulamasını elinde tutuyor.",
     eyebrow: "Özel erişim",
     title: "Binalar ve özel evler kamusal alan değildir.",
     description: "Artık kalıcı interkom kodlarını paylaşmayın. Bunun yerine süreli erişim vererek yetkisiz girişleri ve hırsızlık riskini azaltın.",
@@ -99,6 +100,7 @@
     ],
   },
   productGuide: {
+    imageAlt: "WIFIGATE sistemine genel bakış: IP67 cihaz, mobil uygulama ve klemens blokları, USB Type-C ve 12-24V girişi, Wi-Fi 6, Bluetooth LE ile 433,92MHz alıcısı bulunan kontrol kartı; yanında platform özellikleri - 5.000 kullanıcı, 100 yönetici, sınırsız misafir daveti, otomatik misafir davetleri için API, SIM kart veya modem gerektirmeme, kararlılık, hızlı misafir daveti, 90 günlük geçmiş, otomatik açılma, en fazla 10 etkinlik, dijital RF kumanda tanıtma, güvenlik ve gizlilik ile abonelik ücreti olmaması.",
     eyebrow: "Ürün rehberi",
     title: "İlk günden net.",
     subtitle: "Kurulum, günlük kullanım ve gelişmiş yapılandırma için açık ve anlaşılır rehberlik.",
@@ -113,6 +115,7 @@
     status: "Yakında",
   },
   oneTapInvite: {
+    imageAlt: "Mavi noktalı bir rota, sokaktan bir apartman girişindeki konum işaretine uzanıyor.",
     eyebrow: "Tek dokunuş. İhtiyaç duydukları her şey.",
     title: "Yol tarifini tekrar tekrar anlatmayın.\nTek bir eksiksiz davet gönderin.",
     description: "WIFIGATE ile varış notlarını, adresi, katı, daireyi,\ninterkom bilgilerini ve zaman sınırlı erişimi tek dokunuşla paylaşın.",

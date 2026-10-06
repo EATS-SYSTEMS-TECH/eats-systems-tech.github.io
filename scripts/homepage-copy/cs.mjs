@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "Kurýr jde po modré tečkované trase ke vchodu do bytového domu, zatímco obyvatel drží aplikaci WIFIGATE s časově omezeným přístupem pro hosty.",
     eyebrow: "Soukromý přístup",
     title: "Budovy a soukromé domy nejsou veřejné prostory.",
     description: "Přestaňte sdílet trvalé domovní kódy. Sdílejte místo toho přístup s časovým omezením, abyste snížili neoprávněné vstupy a riziko krádeží.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "Přehled systému WIFIGATE: zařízení IP67, mobilní aplikace a řídicí deska se svorkovnicemi, USB Type-C a vstupem 12-24V, Wi-Fi 6, Bluetooth LE a přijímačem 433,92MHz, vedle funkcí platformy – 5 000 uživatelů, 100 správců, neomezené pozvánky pro hosty, API pro automatické pozvánky, bez SIM karty a routeru, stabilita, rychlá pozvánka pro hosty, 90denní historie, automatické otevírání, až 10 událostí, učení digitálních RF ovladačů, bezpečnost a soukromí a žádné poplatky za předplatné.",
     eyebrow: "Průvodce produktem",
     title: "Jednoduché od prvního dne.",
     subtitle: "Jasné pokyny pro instalaci, běžné používání a pokročilou konfiguraci.",
@@ -113,6 +115,7 @@ const copy = {
     status: "Již brzy",
   },
   oneTapInvite: {
+    imageAlt: "Modrá tečkovaná trasa vede z ulice ke špendlíku polohy u vchodu do bytového domu.",
     eyebrow: "Jeden dotyk. Vše, co potřebují.",
     title: "Přestaňte opakovat pokyny.\nPošlete jednu kompletní pozvánku.",
     description: "WIFIGATE vám umožní jediným dotykem sdílet pokyny k příjezdu, adresu, patro, číslo bytu,\núdaje interkomu a časově omezený přístup.",

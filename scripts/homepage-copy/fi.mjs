@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "Lähetti seuraa sinistä pisteviivareittiä kerrostalon sisäänkäynnille, kun asukas pitää kädessään WIFIGATE-sovellusta, jossa näkyy aikarajattu vieraspääsy.",
     eyebrow: "Yksityinen kulku",
     title: "Rakennukset ja yksityiskotit eivät ole julkisia tiloja.",
     description: "Lopeta pysyvien ovipuhelinkoodien jakaminen. Jaa sen sijaan ajallisesti rajattuja kulkuoikeuksia. Näin vähennät luvatonta sisäänpääsyä ja varkausriskiä.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "WIFIGATE-järjestelmän yleiskuva: IP67-laite, mobiilisovellus ja ohjauskortti liitinriveineen, USB Type-C- ja 12-24V-tuloineen, Wi-Fi 6:lla, Bluetooth LE:llä ja 433,92MHz:n vastaanottimella sekä alustan ominaisuudet – 5 000 käyttäjää, 100 ylläpitäjää, rajattomasti vieraskutsuja, API automaattisille vieraskutsuille, ei SIM-korttia tai reititintä, vakaus, nopea vieraskutsu, 90 päivän historia, automaattinen avaus, enintään 10 tapahtumaa, digitaalisten RF-kaukosäätimien opettaminen, turvallisuus ja yksityisyys sekä ei tilausmaksuja.",
     eyebrow: "Tuoteopas",
     title: "Selkeä heti ensimmäisestä päivästä.",
     subtitle: "Selkeät ohjeet asennukseen, päivittäiseen käyttöön ja edistyneisiin asetuksiin.",
@@ -113,6 +115,7 @@ const copy = {
     status: "Pian saatavilla",
   },
   oneTapInvite: {
+    imageAlt: "Sininen pisteviivareitti johtaa kadulta kerrostalon sisäänkäynnillä olevaan sijaintimerkkiin.",
     eyebrow: "Yksi napautus. Kaikki tarvittava.",
     title: "Lopeta saapumisohjeiden toistaminen.\nLähetä yksi kattava kutsu.",
     description: "WIFIGATE antaa sinun jakaa yhdellä napautuksella saapumisohjeet, osoitteen, kerroksen, huoneiston numeron,\novipuhelimen tiedot ja ajallisesti rajatun kulkuoikeuden.",

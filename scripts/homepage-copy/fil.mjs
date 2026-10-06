@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "Sinusundan ng isang courier ang may tuldok na asul na ruta papunta sa pasukan ng apartment habang hawak ng isang residente ang WIFIGATE app na nagpapakita ng access para sa bisita na may limitasyon sa oras.",
     eyebrow: "Pribadong access",
     title: "Ang mga gusali at pribadong tahanan ay hindi pampublikong espasyo.",
     description: "Huwag nang magbahagi ng mga permanenteng intercom code. Sa halip, magbigay ng access na may takdang oras upang mabawasan ang hindi awtorisadong pagpasok at panganib ng pagnanakaw.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "Pangkalahatang-ideya ng WIFIGATE system: ang IP67 device, ang mobile app, at ang control board na may terminal blocks, USB Type-C at 12-24V input, Wi-Fi 6, Bluetooth LE at 433.92MHz receiver, kasama ang mga feature ng platform - 5,000 user, 100 admin, walang limitasyong imbitasyon para sa bisita, API para sa awtomatikong imbitasyon ng bisita, walang SIM o router, katatagan, mabilis na imbitasyon para sa bisita, 90 araw na history, auto open, hanggang 10 event, pag-aaral ng digital RF remote, seguridad at privacy, at walang bayad sa subscription.",
     eyebrow: "Gabay sa produkto",
     title: "Malinaw at madali mula sa unang araw.",
     subtitle: "Malinaw na gabay para sa installation, pang-araw-araw na access, at advanced configuration.",
@@ -113,6 +115,7 @@ const copy = {
     status: "Malapit na",
   },
   oneTapInvite: {
+    imageAlt: "Isang may tuldok na asul na ruta ang humahantong mula sa kalye papunta sa location pin sa pasukan ng isang apartment building.",
     eyebrow: "Isang tap. Lahat ng kailangan nila.",
     title: "Huwag nang paulit-ulit magbigay ng direksyon.\nMagpadala ng isang kumpletong imbitasyon.",
     description: "Maaari mong ipadala sa isang tap ang tagubilin sa pagdating, address, palapag, apartment,\ndetalye ng intercom, at access na may takdang oras gamit ang WIFIGATE.",
