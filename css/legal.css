@@ -161,20 +161,6 @@
   line-height: 1.7;
 }
 
-.legal-footer {
-  padding: 2rem 0 2.5rem;
-  background: #020617;
-  color: rgba(226, 232, 240, 0.9);
-}
-
-.legal-footer__inner {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.75rem;
-  font-size: 0.92rem;
-}
-
 @media (max-width: 768px) {
   .legal-main {
     padding: 2.5rem 0 4rem;
@@ -197,11 +183,6 @@
 
   .legal-cta {
     grid-template-columns: 1fr;
-  }
-
-  .legal-footer__inner {
-    flex-direction: column;
-    align-items: flex-start;
   }
 }
 
