@@ -44,9 +44,6 @@ async function finishLogin(user) {
 function report(error) {
   status.textContent = authErrorMessage(error);
   document.querySelector("#redirect-options").hidden = error.code !== AuthErrors.POPUP_BLOCKED;
-  if (error.code === "HOST_API_UNAVAILABLE") {
-    document.querySelector("#retry-login").hidden = false;
-  }
 }
 async function start() {
   setBusy(true);
@@ -71,7 +68,6 @@ async function start() {
   } catch (error) {
     report(error);
     setBusy(false);
-    document.querySelector("#retry-login").hidden = false;
   }
 }
 buttons.forEach(
@@ -102,5 +98,4 @@ document.querySelector("#redirect-sign-in").addEventListener("click", async () =
     setBusy(false);
   }
 });
-document.querySelector("#retry-login").addEventListener("click", () => location.reload());
 void start();
