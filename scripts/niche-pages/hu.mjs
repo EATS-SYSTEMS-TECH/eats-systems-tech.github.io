@@ -9,13 +9,13 @@ export default {
   },
   "where": {
     "title": "Hol használható a WIFIGATE?",
-    "subtitle": "A WIFIGATE sokféle környezetbe illik, és okos, biztonságos, kényelmes hozzáférés-kezelést kínál a magánotthonoktól az üzleti és vállalati környezetekig."
+    "subtitle": "A WIFIGATE a magánotthonoktól az üzleti és vállalati telephelyekig sokféle helyen beválik, okos, biztonságos és kényelmes hozzáférés-kezeléssel."
   },
   "niches": {
     "hotels-airbnb": {
       "label": "Szállodák, Airbnb és vendégapartmanok",
-      "title": "A megérkezett vendégnek nem kell arra várnia, hogy valaki beengedje!",
-      "heroLead": "A kiadandó kártya, az átadandó kulcs vagy a vendégről vendégre öröklődő kulcsdoboz-kód minden érkezést kézi egyeztetéssé tesz. Adjon minden vendégnek személyes jogosultságot, amely check-inkor nyílik és check-outkor zárul.",
+      "title": "A vendégnek ne kelljen arra várnia, hogy valaki beengedje!",
+      "heroLead": "A kiadandó kártya, az átadandó kulcs vagy a vendégről vendégre öröklődő kulcsdoboz-kód miatt minden érkezést külön egyeztetni kell. Adjon minden vendégnek személyes jogosultságot, amely check-inkor nyílik és check-outkor zárul.",
       "highlights": [
         {
           "icon": "calendar",
@@ -70,7 +70,7 @@ export default {
     },
     "roller-shutters": {
       "label": "Redőnyök üzleteknek és vállalkozásoknak",
-      "title": "A redőny kapcsolójának nem kell kint, mindenki szeme előtt lennie!",
+      "title": "A redőnykapcsoló ne kint legyen, mindenki szeme előtt!",
       "heroLead": "A kint lévő vagy munkatársak között vándorló kapcsoló, kulcsdoboz vagy távirányító rossz kezekbe kerülhet. Helyezze a vezérlést az üzlet védett, belső oldalára, és nyissa a redőnyt telefonról, minden munkatársnak személyes jogosultsággal.",
       "highlights": [
         {
@@ -178,8 +178,8 @@ export default {
     },
     "garage-doors": {
       "label": "Garázskapuk és magánparkolók",
-      "title": "Egy olcsó RF-távirányító könnyen másolható lehet!",
-      "heroLead": "Az egyszerű RF-távirányítók könnyen másolhatók lehetnek, és olyanoknak is hozzáférést adhatnak, akik sosem kaptak rá engedélyt. A WIFIGATE fejlett biztonsági rétegekkel, titkosított tárolással és a felhasználók adatainak védelmével óvja a hozzáférést.",
+      "title": "Az olcsó RF-távirányítót könnyű lemásolni!",
+      "heroLead": "Az egyszerű RF-távirányítók könnyen lemásolhatók, és olyanoknak is hozzáférést adhatnak, akik sosem kaptak rá engedélyt. A WIFIGATE fejlett biztonsági rétegekkel, titkosított tárolással és a felhasználók adatainak védelmével óvja a hozzáférést.",
       "highlights": [
         {
           "icon": "keyless",
@@ -232,13 +232,13 @@ export default {
     },
     "private-homes": {
       "label": "Magánotthonok",
-      "title": "A magánotthonok nem nyilvános terek!",
+      "title": "Az otthona nem közterület!",
       "heroLead": "A futárnak, szerelőnek vagy vendégnek megadott kaputelefon-kód még sokáig náluk marad a látogatás után, és az Ön tudta nélkül tovább is adják. Adjon mindenkinek személyes, időkorlátos belépési jogosultságot, és csökkentse az illetéktelen belépések és a lopás kockázatát.",
       "highlights": [
         {
           "icon": "keyless",
           "title": "A kaputelefon-kód tovább kering",
-          "text": "A kód eljut futárokhoz, szerelőkhöz és vendégekhez, tőlük pedig tovább, az Ön tudta nélkül. Elég év után pedig a kódbillentyűzet négy kopott gombja magától elárulja, mely számjegyekből áll."
+          "text": "A kód eljut futárokhoz, szerelőkhöz és vendégekhez, tőlük pedig tovább, az Ön tudta nélkül. Néhány év után pedig a billentyűzet négy kopott gombja magától elárulja a kód számjegyeit."
         },
         {
           "icon": "clock",
@@ -248,7 +248,7 @@ export default {
         {
           "icon": "roster",
           "title": "Lista a találgatás helyett",
-          "text": "A közös kódnak nincs birtokosi listája. Helyette egy olyan lista áll rendelkezésre, ahol minden jogosultsághoz név tartozik, így bármikor egyértelmű, ki léphet be a házba."
+          "text": "A közös kódról senki sem tudja, kinél van. Helyette egy olyan lista áll rendelkezésre, ahol minden jogosultsághoz név tartozik, így bármikor egyértelmű, ki léphet be a házba."
         }
       ],
       "paragraph": "Magánotthonokban a kódbillentyűzetek, kulcsok és távirányítók gyenge ponttá válhatnak. Idővel kopás vagy nyomok jelennek meg a billentyűkön, a távirányítók elveszhetnek vagy kézről kézre járhatnak, a kódot pedig olykor futároknak, szolgáltatóknak vagy vendégeknek adják meg, akiknél akkor is megmarad, amikor már nincs rá szükségük. A WIFIGATE-tel telefonról kezelheti a bejáratot, állandó kód felfedése nélkül oszthat meg ideiglenes vendéghozzáférést, és zárak, kódok vagy távirányítók cseréje nélkül vonhatja vissza a jogosultságokat.",
@@ -286,13 +286,13 @@ export default {
     },
     "residential-buildings": {
       "label": "Lakóépületek",
-      "title": "A lakóépületek nem nyilvános terek!",
+      "title": "A lakóépület nem közterület!",
       "heroLead": "A futárok, vendégek és szolgáltatók között vándorló fix kód rossz kezekbe kerülhet. Adjon mindenkinek személyes, időkorlátos belépési jogosultságot, és csökkentse az illetéktelen belépéseket és a lopás kockázatát.",
       "highlights": [
         {
           "icon": "roster",
           "title": "Bármikor tudja, kinek van hozzáférése",
-          "text": "A közös kódnak nincs birtokosi listája. Nem tudható, kinél van, ki adta tovább, és mikor. Helyette egy naprakész lista áll rendelkezésre, ahol minden jogosultsághoz név tartozik, így bármikor világos, ki léphet be az épületbe."
+          "text": "A közös kódról senki sem tudja, kinél van, ki adta tovább és mikor. Helyette egy naprakész lista áll rendelkezésre, ahol minden jogosultsághoz név tartozik, így bármikor világos, ki léphet be az épületbe."
         },
         {
           "icon": "invite",
@@ -305,7 +305,7 @@ export default {
           "text": "Az Auto Open felismeri, hogy megérkezett, és kinyitja Önnek a kaput vagy az ajtót. Nem kell kulcsot keresni, sem a telefont elővenni, akkor sem, ha bevásárlószatyrok, babakocsi vagy gyerekek miatt tele a keze."
         }
       ],
-      "paragraph": "Egy lakóépületben a hozzáférés nem ér véget a lobby ajtajánál: van kapu, parkolóbejárat, tárolóajtók, és néha egy oldalajtó is. És nemcsak a lakók érintettek, hanem a cserélődő bérlők, a közös képviselet vagy a kezelő cég, a takarítók, a karbantartók és az állandó beszállítók is. Ha mindez egyetlen kóddal és néhány távirányítóval működik, minden apró változás, egy elköltözött lakó, egy elveszett távirányító vagy egy új beszállító, kódcserét és mindenki újbóli értesítését jelenti. A WIFIGATE ezt a módszert rendezett, épületszintű hozzáférés-kezelésre cseréli.",
+      "paragraph": "Egy lakóépületben a hozzáférés nem ér véget a lobby ajtajánál: van kapu, parkolóbejárat, tárolóajtók, és néha egy oldalajtó is. És nemcsak a lakók érintettek, hanem a cserélődő bérlők, a közös képviselet vagy a kezelő cég, a takarítók, a karbantartók és az állandó beszállítók is. Ha mindez egyetlen kóddal és néhány távirányítóval működik, minden apró változás (egy elköltözött lakó, egy elveszett távirányító vagy egy új beszállító) kódcserét és mindenki újbóli értesítését jelenti. A WIFIGATE ezt a módszert rendezett, épületszintű hozzáférés-kezelésre cseréli.",
       "bullets": [
         "Személyes jogosultság minden lakónak egyetlen közös kód helyett",
         "Lakók felvétele és törlése az egész épület kódjának cseréje nélkül",
@@ -334,7 +334,7 @@ export default {
         },
         {
           "question": "Kiváltja a WIFIGATE a közös belépőkódot?",
-          "answer": "Megszünteti egyetlen kód megosztásának szükségességét: minden lakónak személyes jogosultsága van, a vendégek pedig az épület kódja helyett ideiglenes hozzáférést kapnak."
+          "answer": "Nincs többé szükség egyetlen közös kód megosztására: minden lakónak személyes jogosultsága van, a vendégek pedig az épület kódja helyett ideiglenes hozzáférést kapnak."
         }
       ]
     },
@@ -400,7 +400,7 @@ export default {
         {
           "icon": "keyless",
           "title": "Kisebb az illetéktelen belépés kockázata",
-          "text": "A rossz kezekbe kerülhető közös kód helyett minden munkatárs, beszállító vagy vendég személyes nyitási jogosultságot kap, amelyet bármikor visszavonhat. Az előzményekből látható, ki és mikor nyitott, ami segít csökkenteni az illetéktelen belépéseket és a lopás kockázatát."
+          "text": "A közös kód könnyen rossz kezekbe kerülhet. Helyette minden munkatárs, beszállító vagy vendég személyes nyitási jogosultságot kap, amelyet bármikor visszavonhat. Az előzményekből látható, ki és mikor nyitott, ami segít csökkenteni az illetéktelen belépéseket és a lopás kockázatát."
         },
         {
           "icon": "clock",
@@ -434,11 +434,11 @@ export default {
         },
         {
           "question": "Adhatok ideiglenes hozzáférést egy szerelőnek vagy beszállítónak?",
-          "answer": "Igen. Ossza meg a látogatás idejére szóló ideiglenes jogosultságot az ajtókód kiadása helyett."
+          "answer": "Igen. Az ajtókód kiadása helyett küldjön neki a látogatás idejére szóló ideiglenes jogosultságot."
         },
         {
           "question": "Szükségem van bonyolult beléptetőrendszerre?",
-          "answer": "Nincs. A WIFIGATE egyszerű, modern megoldás azoknak a vállalkozásoknak, amelyek telefonos belépést szeretnének bonyolult beléptetőrendszer nélkül."
+          "answer": "Nem. A WIFIGATE egyszerű, modern megoldás azoknak a vállalkozásoknak, amelyek telefonos belépést szeretnének bonyolult beléptetőrendszer nélkül."
         },
         {
           "question": "Milyen vállalkozások használják?",
@@ -454,7 +454,7 @@ export default {
         {
           "icon": "calendar",
           "title": "A hozzáférés a foglalással nyílik",
-          "text": "Aki egy adott órára pályát foglalt, olyan jogosultságot kap, amely akkor nyílik, és az óra végén zárul. Senkinek sem kell a kapunál várnia, hogy beengedje őket."
+          "text": "Aki egy adott órára pályát foglalt, olyan jogosultságot kap, amely akkor nyílik, és az óra végén zárul. Senkinek sem kell a kapunál várnia, hogy beengedjék."
         },
         {
           "icon": "users",
@@ -501,8 +501,8 @@ export default {
       ]
     },
     "storage-lockers": {
-      "label": "Raktárak és zárható szekrények",
-      "title": "Okos hozzáférés raktárakhoz és zárható szekrényekhez",
+      "label": "Bérelhető tárolók és szekrények",
+      "title": "Okos hozzáférés bérelhető tárolókhoz és szekrényekhez",
       "heroLead": "Minden bérlő a telefonjáról nyitja a telephely kapuját, az épület ajtaját és a saját szekrényét, de csak az Ön által engedélyezett időszakban. Amikor a bérlet lejár, a hozzáférés is megszűnik: nincs kulcs, amit vissza kell szedni, és nincs kód, amit módosítani kell.",
       "highlights": [
         {
@@ -521,7 +521,7 @@ export default {
           "text": "Minden nyitás a személlyel és az időponttal együtt rögzül, így egy látogatással kapcsolatos kérdésre az előzmények adnak választ, nem a biztonsági kamerák felvételei."
         }
       ],
-      "paragraph": "A raktárak és szekrénytermek általában közös kódokra, kódbillentyűzetekre és fizikai kulcsokra támaszkodnak, amelyeket lemásolnak, továbbadnak és ritkán cserélnek. A WIFIGATE a hozzáférést a telefonra helyezi: minden bérlő személyes jogosultságot kap a telephely kapujához, az épület bejáratához és – ahol telepítve van – egy elektromos zárral ellátott tárolóegységhez vagy szekrényhez, az Ön által választott időszakra korlátozva, és a bérlet lejártának pillanatában visszavonva. A telefon közvetlenül kommunikál a helyszíni eszközzel, az ajtónál nincs szükség SIM-kártyára vagy internetkapcsolatra, és normál használathoz nincs havi előfizetés.",
+      "paragraph": "A bérelhető tárolók és szekrénytermek általában közös kódokra, kódbillentyűzetekre és fizikai kulcsokra támaszkodnak, amelyeket lemásolnak, továbbadnak és ritkán cserélnek. A WIFIGATE a hozzáférést a telefonra helyezi: minden bérlő személyes jogosultságot kap a telephely kapujához, az épület bejáratához és – ahol telepítve van – egy elektromos zárral ellátott tárolóegységhez vagy szekrényhez, az Ön által választott időszakra korlátozva, és a bérlet lejártának pillanatában visszavonva. A telefon közvetlenül kommunikál a helyszíni eszközzel, az ajtónál nincs szükség SIM-kártyára vagy internetkapcsolatra, és normál használathoz nincs havi előfizetés.",
       "bullets": [
         "A telephely kapujának, az épület ajtajának és a szekrénynek a nyitása telefonról",
         "Személyes jogosultság minden bérlőnek",
@@ -532,13 +532,13 @@ export default {
         "Nincs cserélendő közös kód, kódbillentyűzet vagy kulcs",
         "Nincs SIM-kártya vagy internetkapcsolat az ajtónál"
       ],
-      "seoTitle": "Okos beléptetés raktárakhoz és zárható szekrényekhez | WIFIGATE",
-      "seoDescription": "A WIFIGATE minden raktár- és szekrénybérlőnek személyes, telefonos hozzáférést ad a kapuhoz, az ajtókhoz és a saját szekrényéhez, nyitvatartási időre korlátozva, előzményekben rögzítve, és a bérlet lejártakor visszavonva.",
-      "imageAlt": "Nő telefonnal nyitja egy szekrényekkel és tárolóegységekkel felszerelt raktár ajtaját",
+      "seoTitle": "Okos beléptetés bérelhető tárolókhoz és szekrényekhez | WIFIGATE",
+      "seoDescription": "A WIFIGATE minden tároló- és szekrénybérlőnek személyes, telefonos hozzáférést ad a kapuhoz, az ajtókhoz és a saját szekrényéhez, nyitvatartási időre korlátozva, előzményekben rögzítve, és a bérlet lejártakor visszavonva.",
+      "imageAlt": "Nő telefonnal nyitja egy szekrényekkel és tárolóegységekkel felszerelt tárolóépület ajtaját",
       "faq": [
         {
           "question": "Hogyan nyitják a bérlők a kaput és a szekrényüket?",
-          "answer": "A telefonjukról, személyes jogosultsággal a telephely kapujához, az épület bejáratához és, ahol telepítve van, egy elektromos zárral ellátott raktárhelyiséghez vagy szekrényhez."
+          "answer": "A telefonjukról, személyes jogosultsággal a telephely kapujához, az épület bejáratához és, ahol telepítve van, egy elektromos zárral ellátott tárolóegységhez vagy szekrényhez."
         },
         {
           "question": "Korlátozható a hozzáférés a nyitvatartási időre?",
@@ -546,10 +546,10 @@ export default {
         },
         {
           "question": "Mi történik, ha egy bérlet lejár?",
-          "answer": "Azonnal visszavonja a bérlő hozzáférését. Nincs visszaszedendő kulcs és nincs módosítandó kód."
+          "answer": "A bérlő hozzáférését egy pillanat alatt visszavonhatja. Nincs visszaszedendő kulcs és nincs módosítandó kód."
         },
         {
-          "question": "Kell internet a telephelyen az ajtónál?",
+          "question": "Kell internet az ajtónál?",
           "answer": "Nem. A telefon közvetlenül a helyszíni eszközzel kommunikál, SIM-kártya vagy internetkapcsolat nélkül az ajtónál."
         }
       ]

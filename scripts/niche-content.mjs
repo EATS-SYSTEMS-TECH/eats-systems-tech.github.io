@@ -36,7 +36,7 @@ export const NICHE_CHROME = {
   "de": {
     "eyebrow": "WIFIGATE-Anwendungsfall",
     "benefitsTitle": "Wichtigste Vorteile",
-    "homeLabel": "Start",
+    "homeLabel": "Startseite",
     "relatedTitle": "Weitere Anwendungsfälle von WIFIGATE",
     "faqTitle": "Häufige Fragen"
   },
@@ -71,7 +71,7 @@ export const NICHE_CHROME = {
   "no": {
     "eyebrow": "WIFIGATE-bruksområde",
     "benefitsTitle": "Viktigste fordeler",
-    "homeLabel": "Hjem",
+    "homeLabel": "Forside",
     "relatedTitle": "Flere bruksområder for WIFIGATE",
     "faqTitle": "Ofte stilte spørsmål"
   },
@@ -125,7 +125,7 @@ export const NICHE_CHROME = {
     "faqTitle": "সচরাচর জিজ্ঞাসা"
   },
   "mr": {
-    "eyebrow": "WIFIGATE वापर परिस्थिती",
+    "eyebrow": "WIFIGATE चा वापर",
     "benefitsTitle": "मुख्य फायदे",
     "homeLabel": "मुख्यपृष्ठ",
     "relatedTitle": "WIFIGATE चे आणखी उपयोग",
@@ -142,14 +142,14 @@ export const NICHE_CHROME = {
     "eyebrow": "WIFIGATE 应用场景",
     "benefitsTitle": "核心优势",
     "homeLabel": "首页",
-    "relatedTitle": "WIFIGATE 的更多应用场景",
+    "relatedTitle": "更多 WIFIGATE 应用场景",
     "faqTitle": "常见问题"
   },
   "zh-Hant": {
     "eyebrow": "WIFIGATE 應用情境",
     "benefitsTitle": "核心優勢",
     "homeLabel": "首頁",
-    "relatedTitle": "WIFIGATE 的更多應用情境",
+    "relatedTitle": "更多 WIFIGATE 應用情境",
     "faqTitle": "常見問題"
   },
   "ja": {
@@ -161,22 +161,22 @@ export const NICHE_CHROME = {
   },
   "ko": {
     "eyebrow": "WIFIGATE 활용 사례",
-    "benefitsTitle": "핵심 이점",
+    "benefitsTitle": "주요 장점",
     "homeLabel": "홈",
-    "relatedTitle": "WIFIGATE의 다른 활용 사례",
+    "relatedTitle": "WIFIGATE 활용 사례 더 보기",
     "faqTitle": "자주 묻는 질문"
   },
   "da": {
     "eyebrow": "WIFIGATE-anvendelse",
     "benefitsTitle": "Vigtigste fordele",
-    "homeLabel": "Hjem",
+    "homeLabel": "Forside",
     "relatedTitle": "Flere anvendelser af WIFIGATE",
     "faqTitle": "Ofte stillede spørgsmål"
   },
   "sv": {
     "eyebrow": "WIFIGATE-användningsområde",
     "benefitsTitle": "Viktigaste fördelarna",
-    "homeLabel": "Hem",
+    "homeLabel": "Startsida",
     "relatedTitle": "Fler användningsområden för WIFIGATE",
     "faqTitle": "Vanliga frågor"
   },
@@ -223,10 +223,10 @@ export const NICHE_CHROME = {
     "faqTitle": "Често задавани въпроси"
   },
   "sr": {
-    "eyebrow": "Примена WIFIGATE система",
+    "eyebrow": "Примена система WIFIGATE",
     "benefitsTitle": "Кључне предности",
     "homeLabel": "Почетна",
-    "relatedTitle": "Друге примене WIFIGATE система",
+    "relatedTitle": "Друге примене система WIFIGATE",
     "faqTitle": "Честа питања"
   },
   "sk": {

@@ -3,9 +3,9 @@
 
 export default {
   "home": {
-    "seoTitle": "WIFIGATE | Chytrá kontrola přístupu: brány, dveře, parkování",
+    "seoTitle": "WIFIGATE | Chytrý přístupový systém pro brány, dveře a parkování",
     "seoDescription": "WIFIGATE je chytrý systém kontroly přístupu: brány, dveře, parkoviště, rolety i garáže otevřete z telefonu. Bezpečně, šifrovaně a pohodlně, bez měsíčního předplatného.",
-    "keywords": "WIFIGATE, WiFi Gate, wifi gate, chytrá kontrola přístupu, otevření brány z telefonu, elektrická brána, kontrola přístupu, bez měsíčního předplatného"
+    "keywords": "WIFIGATE, WiFi Gate, wifi gate, chytrý přístupový systém, otevírání brány mobilem, otevření brány z telefonu, elektrická brána, kontrola přístupu, bez měsíčního předplatného"
   },
   "where": {
     "title": "Kde všude se WIFIGATE hodí?",
@@ -14,8 +14,8 @@ export default {
   "niches": {
     "hotels-airbnb": {
       "label": "Hotely, Airbnb a apartmány pro hosty",
-      "title": "Host, který dorazil, by neměl čekat, až mu někdo otevře!",
-      "heroLead": "Karta, kterou je třeba vydat, klíč, který je třeba předat, nebo kód ke schránce na klíče, který přechází od hosta k hostovi: kvůli nim je každý příjezd ručním domlouváním. Dejte každému hostovi osobní oprávnění, které začne platit při check-inu a skončí při check-outu.",
+      "title": "Host u dveří nemá čekat, až mu někdo otevře!",
+      "heroLead": "Vydávání karet, předávání klíčů nebo kód ke schránce na klíče, který koluje od hosta k hostovi: každý příjezd pak znamená ruční domlouvání. Dejte každému hostovi osobní oprávnění, které začne platit při check-inu a skončí při check-outu.",
       "highlights": [
         {
           "icon": "calendar",
@@ -25,7 +25,7 @@ export default {
         {
           "icon": "invite",
           "title": "WIFIGATE Host propojí rezervaci se vstupem",
-          "text": "S WIFIGATE Host potvrzení rezervace v systému hotelu nebo apartmánu automaticky vytvoří oprávnění ke vstupu a pošle ho hostovi. Žádné přepisování údajů, žádné vydávání karet a žádný ruční krok mezi tím.",
+          "text": "S WIFIGATE Host potvrzení rezervace v systému hotelu nebo apartmánu automaticky vytvoří oprávnění ke vstupu a pošle ho hostovi. Žádné přepisování údajů, žádné vydávání karet a žádné ruční mezikroky.",
           "ctaLabel": "Objevte WIFIGATE Host",
           "ctaHref": "/cs/automation/"
         },
@@ -44,7 +44,7 @@ export default {
         "Správa oprávnění pro personál, úklid, údržbu i dodavatele",
         "Plynulejší a příjemnější příjezd pro hosty",
         "Přístup automaticky končí v čase check-outu",
-        "Historie přístupů pro přehled a kontrolu"
+        "Historie vstupů pro přehled a kontrolu"
       ],
       "seoTitle": "WIFIGATE | Přístup hostů pro hotely, Airbnb a rekreační areály",
       "seoDescription": "Hotely, Airbnb a rekreační areály spravují s WIFIGATE Host automatický digitální přístup hostů: osobní oprávnění ke každé rezervaci, bez klíčů, karet a schránek.",
@@ -60,7 +60,7 @@ export default {
         },
         {
           "question": "Může mít úklid a údržba vlastní přístup?",
-          "answer": "Ano. Personál, úklid, údržba i dodavatelé dostanou každý vlastní oprávnění a historie přístupů ukazuje, kdo a kdy otevřel."
+          "answer": "Ano. Personál, úklid, údržba i dodavatelé dostanou každý vlastní oprávnění a historie vstupů ukazuje, kdo a kdy otevřel."
         },
         {
           "question": "Je pro hotely a apartmány potřeba předplatné?",
@@ -85,7 +85,7 @@ export default {
         },
         {
           "icon": "phone",
-          "title": "Otevírejte, aniž byste stáli u rolety",
+          "title": "Otevírejte, aniž byste museli stát u rolety",
           "text": "Klíč vás nutí stát přímo u ovládacího místa, s plnýma rukama a se špatným výhledem na roletu. Z telefonu to zvládnete z bezpečnější vzdálenosti."
         }
       ],
@@ -124,8 +124,8 @@ export default {
     },
     "electric-gates": {
       "label": "Elektrické brány a parkovací závory",
-      "title": "Otevírání brány nemá být spojené s trvalým příkazem!",
-      "heroLead": "Systémy pro otevírání bran z telefonu často přicházejí s měsíčním předplatným, které vám každý měsíc znovu strhává peníze. Přejděte na chytré otevírání bez poplatků za předplatné a bez trvalého příkazu, s osobními oprávněními a automatickým otevíráním pro stálé uživatele.",
+      "title": "Otevírání brány nemá být další trvalý příkaz!",
+      "heroLead": "Systémy pro otevírání bran z telefonu často přicházejí s měsíčním předplatným, které vám pravidelně odchází z účtu. Přejděte na chytré otevírání bez poplatků za předplatné a bez trvalého příkazu, s osobními oprávněními a automatickým otevíráním pro stálé uživatele.",
       "highlights": [
         {
           "icon": "handsfree",
@@ -135,12 +135,12 @@ export default {
         {
           "icon": "clock",
           "title": "Dočasný přístup pro dodavatele nebo hosta",
-          "text": "Místo telefonátů s prosbou o otevření brány v nevhodnou chvíli pošlete oprávnění platné jen v časovém okně, kdy je skutečně potřeba. Pak se samo uzavře."
+          "text": "Místo telefonátů s prosbou o otevření brány v nevhodnou chvíli pošlete oprávnění platné jen v časovém okně, kdy je skutečně potřeba. Pak samo vyprší."
         },
         {
           "icon": "gate",
           "title": "Stabilita, spolehlivost a soukromí",
-          "text": "Jména a telefonní čísla jsou citlivé údaje, zvlášť v době AI. U WIFIGATE je databáze uživatelů uložená přímo v zařízení, šifrovaná a chráněná před vystavením na internetu, a to ve stabilním a spolehlivém systému pro každodenní otevírání."
+          "text": "Jména a telefonní čísla jsou citlivé údaje, zvlášť v době AI. U WIFIGATE je databáze uživatelů uložená přímo v zařízení, šifrovaná a oddělená od internetu. K tomu stabilní a spolehlivý systém pro každodenní otevírání."
         }
       ],
       "paragraph": "Elektrické brány a parkovací závory slouží obyvatelům, zaměstnancům, hostům i dodavatelům, jenže správa ovladačů, kódů a telefonátů s prosbou o otevření brány se rychle stává přítěží. WIFIGATE umožňuje otevírat bránu z telefonu, sdílet trvalý nebo dočasný přístup, využívat automatické otevírání pro stálé uživatele a podle potřeby nastavovat plánované události. Systém je navržen pro bezpečný, šifrovaný a soukromý provoz bez měsíčního předplatného či trvalého příkazu a vedle ovládání z aplikace můžete dál používat i stávající ovladače.",
@@ -183,7 +183,7 @@ export default {
       "highlights": [
         {
           "icon": "keyless",
-          "title": "Ztracený ovladač přestává být problém",
+          "title": "Ztracený ovladač už není problém",
           "text": "Ovladač, který vypadne z kapsy, dál otevírá garáž každému, kdo ho najde, a nelze ho zablokovat. Oprávnění v telefonu odeberete během chvilky, bez výměny pohonu a bez přeprogramování ovladačů."
         },
         {
@@ -193,7 +193,7 @@ export default {
         },
         {
           "icon": "phone",
-          "title": "Méně závislosti na fyzických prostředcích",
+          "title": "Nižší závislost na fyzických ovladačích",
           "text": "Místo ovladače pro každé auto a každého uživatele otevíráte telefonem, který máte stejně u sebe. Méně ovladačů ke koupi, programování, předávání a správě."
         }
       ],
@@ -204,7 +204,7 @@ export default {
         "Nižší riziko ztracených, předaných nebo zkopírovaných ovladačů",
         "Správa přístupu pro rodinu, zaměstnance a hosty",
         "Dočasný přístup bez předávání ovladače nebo kódu",
-        "Vhodné pro soukromá parkování, rodinné domy i byty s předzahrádkou",
+        "Vhodné pro soukromá parkování, rodinné domy i byty se zahrádkou",
         "Soukromější a bezpečnější správa přístupu",
         "Pohodlnější a bezpečnější každodenní ovládání"
       ],
@@ -226,18 +226,18 @@ export default {
         },
         {
           "question": "Kde lze WIFIGATE použít pro parkování?",
-          "answer": "V soukromých garážích, u vjezdů na soukromá parkoviště, u rodinných domů a bytů s předzahrádkou."
+          "answer": "V soukromých garážích, u vjezdů na soukromá parkoviště, u rodinných domů a bytů se zahrádkou."
         }
       ]
     },
     "private-homes": {
       "label": "Rodinné domy",
       "title": "Rodinný dům nemá být veřejně přístupný!",
-      "heroLead": "Kód od interkomu, který jste dali kurýrovi, technikovi nebo hostovi, mu zůstane ještě dlouho po návštěvě a putuje dál, aniž byste o tom věděli. Dejte každému osobní, časově omezené oprávnění ke vstupu a snižte riziko neoprávněných vstupů i krádeží.",
+      "heroLead": "Kód od vchodu, který jste dali kurýrovi, technikovi nebo hostovi, mu zůstane ještě dlouho po návštěvě a putuje dál, aniž byste o tom věděli. Dejte každému osobní, časově omezené oprávnění ke vstupu a snižte riziko neoprávněných vstupů i krádeží.",
       "highlights": [
         {
           "icon": "keyless",
-          "title": "Kód od interkomu stále koluje",
+          "title": "Kód od vchodu stále koluje",
           "text": "Kód se dostane ke kurýrům, technikům a hostům a od nich dál, aniž byste o tom věděli. A po několika letech čtyři ošoupaná tlačítka na klávesnici sama prozradí, z jakých číslic se skládá."
         },
         {
@@ -297,20 +297,20 @@ export default {
         {
           "icon": "invite",
           "title": "Pokyny k příjezdu jedním dotykem",
-          "text": "Adresa, patro, byt, kód k bráně a kód do vstupní haly. Tutéž posloupnost znovu diktujete každému hostovi, kurýrovi i řemeslníkovi. S WIFIGATE to celé pošlete jedním dotykem a návštěva si cestu ke dveřím najde sama."
+          "text": "Adresa, patro, byt, kód k bráně a kód od vchodu. Tutéž posloupnost znovu diktujete každému hostovi, kurýrovi i řemeslníkovi. S WIFIGATE to celé pošlete jedním dotykem a návštěva si cestu ke dveřím najde sama."
         },
         {
           "icon": "handsfree",
-          "title": "Vstup bez použití rukou",
+          "title": "Vstup s volnýma rukama",
           "text": "Automatické otevírání (Auto Open) pozná, že jste dorazili, a otevře vám bránu nebo dveře. Žádné hledání klíče ani vytahování telefonu, ani když máte ruce plné nákupu, kočárku nebo dětí."
         }
       ],
-      "paragraph": "V bytovém domě přístup nekončí u dveří vstupní haly: je tu brána, vjezd do garáží, dveře sklepních kójí a někdy i boční vchod. A netýká se jen obyvatel, ale i střídajících se nájemníků, výboru SVJ nebo správcovské firmy, úklidu, údržby a stálých dodavatelů. Když to všechno funguje na jeden kód a pár ovladačů, každá drobná změna, ať už odstěhovaný obyvatel, ztracený ovladač nebo nový dodavatel, znamená změnit kód a znovu informovat všechny. WIFIGATE tento způsob nahrazuje přehlednou správou přístupu na úrovni celého domu.",
+      "paragraph": "V bytovém domě přístup nekončí u hlavního vchodu: je tu brána, vjezd do garáží, dveře sklepních kójí a někdy i boční vchod. A netýká se jen obyvatel, ale i střídajících se nájemníků, výboru SVJ nebo správcovské firmy, úklidu, údržby a stálých dodavatelů. Když to všechno funguje na jeden kód a pár ovladačů, každá drobná změna, ať už odstěhovaný obyvatel, ztracený ovladač nebo nový dodavatel, znamená změnit kód a znovu informovat všechny. WIFIGATE tento způsob nahrazuje přehlednou správou přístupu na úrovni celého domu.",
       "bullets": [
         "Osobní oprávnění pro každého obyvatele místo jednoho kódu pro všechny",
         "Přidávání a odebírání obyvatel bez změny kódu pro celý dům",
         "Samostatná oprávnění pro úklid, údržbu a stálé dodavatele",
-        "Vhodné pro dveře vstupní haly, brány i vjezdy do garáží",
+        "Vhodné pro hlavní vchod, brány i vjezdy do garáží",
         "Menší závislost na kódových klávesnicích, klíčích a ovladačích",
         "Historie vstupů pro výbor SVJ nebo správcovskou firmu",
         "Správa všech oprávnění v domě z telefonu",
@@ -322,7 +322,7 @@ export default {
       "faq": [
         {
           "question": "Jak se obyvatelé dostanou do domu s WIFIGATE?",
-          "answer": "Obyvatelé otevírají dveře vstupní haly, bránu nebo vjezd na parkoviště z telefonu, každý se svým vlastním oprávněním."
+          "answer": "Obyvatelé otevírají hlavní vchod, bránu nebo vjezd na parkoviště z telefonu, každý se svým vlastním oprávněním."
         },
         {
           "question": "Jak se dostanou dovnitř hosté a kurýři?",
@@ -368,7 +368,7 @@ export default {
         "Přehledná správa uživatelů a oprávnění",
         "Menší závislost na klíčích, přístupových kartách a kódech",
         "Modernější a příjemnější image budovy",
-        "Historie přístupů pro kontrolu a přehled"
+        "Historie vstupů pro kontrolu a přehled"
       ],
       "seoTitle": "Kontrola přístupu pro kancelářské budovy | WIFIGATE",
       "seoDescription": "WIFIGATE umožňuje kancelářským budovám řídit vstup zaměstnanců, návštěv a dodavatelů z telefonu – s trvalými i dočasnými oprávněními a moderní správou přístupu.",
@@ -388,7 +388,7 @@ export default {
         },
         {
           "question": "Vede se záznam o vstupech?",
-          "answer": "Ano. Historie přístupů ukazuje, kdo a kdy otevřel, pro provoz i transparentnost."
+          "answer": "Ano. Historie vstupů ukazuje, kdo a kdy otevřel, pro provoz i přehled."
         }
       ]
     },
@@ -448,12 +448,12 @@ export default {
     },
     "sports-facilities": {
       "label": "Sportovní areály",
-      "title": "Vstupní kód do areálu nemá kolovat ve WhatsApp skupině!",
+      "title": "Vstupní kód do areálu nemá kolovat ve skupině na WhatsAppu!",
       "heroLead": "Sdílený kód, který koluje mezi členy, trenéry a hosty, otevírá dál, i když už by neměl. Dejte každému osobní oprávnění podle provozní doby a délky členství, které skončí, jakmile už není potřeba.",
       "highlights": [
         {
           "icon": "calendar",
-          "title": "Přístup se otevírá s rezervací",
+          "title": "Přístup podle rezervace",
           "text": "Kdo si zarezervuje kurt na určitou hodinu, dostane oprávnění, které se v tu dobu otevře a s jejím koncem zavře. Nikdo nemusí čekat u brány, aby ho pustil dovnitř."
         },
         {
@@ -464,10 +464,10 @@ export default {
         {
           "icon": "history",
           "title": "Víte, kdo byl v areálu a kdy",
-          "text": "Když se provoz během dne mění, záznam vstupů pomáhá provozu, vyjasní otázky kolem incidentů a potvrdí, že areál byl na konci dne zamčený."
+          "text": "Když se provoz během dne mění, záznam vstupů pomáhá provozu, usnadní vyjasnění případných incidentů a potvrdí, že areál byl na konci dne zamčený."
         }
       ],
-      "paragraph": "Sportovní areály, padelové kurty, tenisové kurty, posilovny a tréninková centra potřebují řídit přístup členů, trenérů, týmů i hostů podle provozní doby, rezervací a akcí. WIFIGATE umožňuje udělovat dočasný nebo trvalý přístup z telefonu, omezit závislost na sdíleném klíči či kódu a zlepšit zážitek ze vstupu, zvlášť v areálech, kde se provoz během dne mění.",
+      "paragraph": "Sportovní areály, padelové kurty, tenisové kurty, posilovny a tréninková centra potřebují řídit přístup členů, trenérů, týmů i hostů podle provozní doby, rezervací a akcí. WIFIGATE umožňuje udělovat dočasný nebo trvalý přístup z telefonu, omezit závislost na sdíleném klíči či kódu a zpříjemnit uživatelům vstup, zvlášť v areálech, kde se provoz během dne mění.",
       "bullets": [
         "Vhodné pro padelové a tenisové kurty, posilovny i tréninková centra",
         "Přístup podle provozní doby, rezervací nebo oprávnění",
@@ -476,7 +476,7 @@ export default {
         "Rychlý a pohodlný vstup z telefonu",
         "Vhodné pro areály s proměnlivou provozní dobou",
         "Dočasná oprávnění pro akce, lekce nebo tréninky",
-        "Historie přístupů pro kontrolu a provoz"
+        "Historie vstupů pro kontrolu a provoz"
       ],
       "seoTitle": "Kontrola přístupu pro sportovní areály a padelové kurty | WIFIGATE",
       "seoDescription": "WIFIGATE přináší chytrou kontrolu přístupu do sportovních areálů, na padelové kurty, do posiloven a tréninkových center: vstup z telefonu, dočasná i trvalá oprávnění.",
@@ -492,7 +492,7 @@ export default {
         },
         {
           "question": "Mohu vidět, kdo byl v areálu?",
-          "answer": "Ano. Historie přístupů ukazuje, kdo a kdy otevřel, což pomáhá provozu a potvrzuje, že byl areál na konci dne zavřený."
+          "answer": "Ano. Historie vstupů ukazuje, kdo a kdy otevřel, což pomáhá provozu a potvrzuje, že byl areál na konci dne zavřený."
         },
         {
           "question": "Pro které sportovní areály se WIFIGATE hodí?",
@@ -526,7 +526,7 @@ export default {
         "Otevření brány areálu, dveří budovy a skříňky z telefonu",
         "Osobní oprávnění pro každého nájemce",
         "Přístup omezený na provozní dobu nebo vlastní časové okno",
-        "Jednorázový přístup pro stěhováky a členy rodiny",
+        "Jednorázový přístup pro stěhovací firmy a členy rodiny",
         "Odebrání přístupu ve chvíli, kdy nájem skončí",
         "Historie, kdo otevřel a kdy",
         "Žádné sdílené kódy, klávesnice ani klíče k výměně",
@@ -542,7 +542,7 @@ export default {
         },
         {
           "question": "Lze přístup omezit na provozní dobu?",
-          "answer": "Ano. Povolte vstup jen v provozní době, nebo nájemci dejte širší časové okno; stěhováci a členové rodiny mohou dostat jednorázový přístup."
+          "answer": "Ano. Povolte vstup jen v provozní době, nebo nájemci dejte širší časové okno; stěhovací firmy a členové rodiny mohou dostat jednorázový přístup."
         },
         {
           "question": "Co se stane, když nájem skončí?",

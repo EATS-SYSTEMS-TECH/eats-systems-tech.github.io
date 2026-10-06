@@ -12,7 +12,7 @@ const copy = {
   hero: {
     media: {"replay":"Ponovno reproduciraj videozapis","mute":"Isključi zvuk videozapisa","unmute":"Uključi zvuk videozapisa","pause":"Pauziraj videozapis","play":"Reproduciraj videozapis"},
     titleLines: ["Jedna aplikacija.", "Svi vaši ulazi."],
-    subtitle: "Pametno rješenje za pristup i kontrolu u kućama, zgradama, tvrtkama i smještajnim objektima. Sve na jednoj platformi, jednostavno i bez truda.",
+    subtitle: "Pametno rješenje za pristup i kontrolu u kućama, zgradama, tvrtkama i smještajnim objektima. Sve na jednoj platformi, jednostavno i bez napora.",
     primaryCta: "Kako funkcionira",
     secondaryCta: "Razgovarajte s našim timom",
     proofLabel: "Prednosti platforme",
@@ -45,10 +45,10 @@ const copy = {
       },
       {
         title: "Do 50 zakazanih događaja",
-        text: "Izradite ponavljajuće rasporede i automatske radnje izravno u sustavu, prilagođene načinu na koji vaš objekt funkcionira, uključujući podršku za način rada za šabat.",
+        text: "Izradite ponavljajuće rasporede i automatske radnje izravno u sustavu, prilagođene načinu na koji vaš objekt funkcionira, uključujući podršku za šabatni način rada.",
       },
       {
-        title: "Digitalno učenje RF daljinskih upravljača",
+        title: "Digitalno uparivanje RF daljinskih upravljača",
         text: "Postavljajte RF daljinske upravljače i upravljajte njima putem platforme, umjesto da se oslanjate na ručno i zamorno programiranje.",
       },
       {
@@ -69,7 +69,7 @@ const copy = {
     description: "Prestanite dijeliti trajne kodove portafona. Jednim dodirom pošaljite vremenski ograničen pristup s uputama za dolazak i smanjite neovlaštene ulaske i rizik od krađe.",
   },
   solutions: {
-    eyebrow: "Za svaki ulaz",
+    eyebrow: "Prilagođeno svakom ulazu",
     titleLines: ["Jedan sustav.", "Za svaki ulaz."],
     subtitle: "Otvarate telefonom, dajete pristup onome kome treba i sami odlučujete kada on prestaje.",
     imageAlt: "Aplikacija WIFIGATE na telefonu s dvorišnim vratima kuće, radnim mjestom i vremenski ograničenim pristupom za gosta",
@@ -79,7 +79,7 @@ const copy = {
     titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Namijenjeno za",
     audiences: ["Hotele", "Airbnb", "Apartmane", "Smještajne objekte"],
-    promise: "Dočekajte goste. Neka se ulazak odvija automatski.",
+    promise: "Dočekajte goste, a ulazak prepustite automatici.",
     subtitle: "Od hotela do apartmana za odmor, povežite svaku rezervaciju sa sigurnim pristupom odgovarajućim dvorišnim vratima, ulaznim vratima ili garaži. Gosti ulaze telefonom, a pristup počinje vrijediti pri prijavi i automatski prestaje pri odjavi.",
     cta: "Upoznajte WIFIGATE Host",
     imageAlt: "Gosti telefonom ulaze u svoj smještaj",
@@ -102,7 +102,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Pregled sustava WIFIGATE: uređaj IP67, mobilna aplikacija i upravljačka pločica sa stezaljkama, USB Type-C i ulazom 12-24V, Wi-Fi 6, Bluetooth LE i prijamnikom 433,92MHz, uz mogućnosti platforme: 500 korisnika, 20 administratora, neograničene pozivnice za goste, API za automatske pozivnice za goste, bez SIM kartice i usmjerivača, stabilnost, brza pozivnica za goste, povijest od 90 dana, automatsko otvaranje, do 50 događaja, digitalno učenje RF daljinskih upravljača, sigurnost i privatnost te bez pretplate.",
+    imageAlt: "Pregled sustava WIFIGATE: uređaj IP67, mobilna aplikacija i upravljačka pločica sa stezaljkama, USB Type-C i ulazom 12-24V, Wi-Fi 6, Bluetooth LE i prijamnikom 433,92MHz, uz mogućnosti platforme: 500 korisnika, 20 administratora, neograničene pozivnice za goste, API za automatske pozivnice za goste, bez SIM kartice i usmjerivača, stabilnost, brza pozivnica za goste, povijest od 90 dana, automatsko otvaranje, do 50 događaja, digitalno uparivanje RF daljinskih upravljača, sigurnost i privatnost te bez pretplate.",
     eyebrow: "Video upute",
     title: "Jednostavno od prvog dana.",
     subtitle: "Jasne upute za instalaciju, svakodnevno korištenje i napredne postavke.",
@@ -111,7 +111,7 @@ const copy = {
       "Povezivanje QR kodom",
       "Pozivnica za gosta",
       "Otvaranje ulaza",
-      "Učenje RF daljinskog upravljača",
+      "Uparivanje RF daljinskog upravljača",
       "Postavljanje načina pristupa",
     ],
     status: "Uskoro",
@@ -147,7 +147,7 @@ const copy = {
   },
   why: {
     eyebrow: "Zašto WIFIGATE",
-    title: "Globalno IoT iskustvo za svaki ulaz.",
+    title: "Svjetsko IoT iskustvo, ugrađeno u svaki ulaz.",
     description: "Naš tim ima bogato iskustvo u razvoju i uvođenju IoT sustava diljem svijeta. To znanje primjenjujemo kako bi WIFIGATE bio siguran, pouzdan i jednostavan za instalaciju, upravljanje i korištenje.",
     points: ["Vrata", "Dvorišna vrata", "Parkirna rampa", "Samonosiva klizna vrata", "Elektromagnetska brava", "Električna roleta", "Rasvjeta", "Pumpa"],
     pointsNote: "I još mnogo toga, ovisno o tome čime želite upravljati.",

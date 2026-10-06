@@ -2,12 +2,12 @@
 // The WIFIGATE Host page (/automation/) in German: title, description and body.
 
 export default {
-  "metaTitle": "Gästezutritt automatisch: Hotels, Ferienwohnungen, Parken | WIFIGATE",
-  "metaDescription": "Sicherer, zeitlich begrenzter Gästezutritt, automatisch für jede Buchung erstellt. Für Hotels, Ferienwohnungen, Pensionen, Mietparkplätze und -garagen. Ohne Schlüsselübergabe.",
+  "metaTitle": "Automatischer Gastzugang: Hotel, Ferienwohnung, Parken | WIFIGATE",
+  "metaDescription": "Sicherer, zeitlich begrenzter Gastzugang, automatisch für jede Buchung erstellt. Für Hotels, Ferienwohnungen, Pensionen, Mietparkplätze und -garagen. Ohne Schlüsselübergabe.",
   "marketing": {
     "hero": {
       "eyebrow": "WIFIGATE Host",
-      "title": "Gästezutritt, der sich von selbst erledigt",
+      "title": "Gastzugang, der sich von selbst regelt",
       "lead": "Sobald eine Buchung bestätigt ist, erstellt WIFIGATE einen sicheren, zeitlich begrenzten Zutritt zu Ihrem Tor, Ihrer Tür oder Ihrem Parkplatz, und beim Check-out endet er von selbst. Keine Schlüsselübergabe, kein Hinterherlaufen wegen Codes, niemand, der am Eingang warten muss.",
       "ctaPrimary": "Sprechen Sie mit uns",
       "note": "Für Hotels, Ferienwohnungen, Pensionen sowie Mietparkplätze und -garagen."
@@ -53,16 +53,16 @@ export default {
       "s1x": "Ihr Buchungs- oder Property-Management-System meldet WIFIGATE Host eine neu bestätigte Reservierung.",
       "s2t": "Der Zutritt wird automatisch erstellt",
       "s2x": "WIFIGATE Host stellt eine sichere, zeitlich begrenzte Einladung für genau das richtige Tor, die richtige Tür oder den richtigen Parkplatz aus, gültig nur für diesen Aufenthalt.",
-      "s3t": "Ihr Gast geht direkt hinein",
+      "s3t": "Ihr Gast kommt direkt hinein",
       "s3x": "Er öffnet den Eingang mit seinem Smartphone. Beim Check-out läuft der Zutritt von selbst ab, es gibt nichts einzusammeln und nichts zu stornieren."
     },
     "benefits": {
       "eyebrow": "Warum WIFIGATE Host",
-      "title": "Weniger Rezeption. Mehr Gastgeben ohne Aufwand.",
+      "title": "Weniger Rezeption. Entspannter gastgeben.",
       "subtitle": "Alles, was aus einer Buchung einen Zutritt macht, erledigen wir für Sie.",
       "b1t": "Keine Schlüsselübergabe",
       "b1x": "Schluss mit Schlüsselabholung, Schlüsselboxen und kopierten Codes. Der Zutritt landet genau dann auf dem Smartphone Ihres Gastes, wenn er gebraucht wird.",
-      "b2t": "Zeitlich begrenzt, von Grund auf",
+      "b2t": "Von Haus aus zeitlich begrenzt",
       "b2x": "Jede Einladung öffnet beim Check-in und läuft beim Check-out ab, automatisch, bei jedem einzelnen Aufenthalt.",
       "b3t": "Verschlüsselt und privat",
       "b3x": "Der Zutritt ist verschlüsselt und auf die ausgestellte Berechtigung beschränkt. Ihre Immobilie und Ihre Gäste bleiben geschützt.",
@@ -71,7 +71,7 @@ export default {
       "b5t": "Skaliert bis zum ganzen Gebäude",
       "b5x": "Vom einzelnen Tor bis zur gesamten Anlage: Eine Einladung kann jeden Eingang abdecken, den ein Gast braucht.",
       "b6t": "Verbindet sich mit Ihren Systemen",
-      "b6x": "Binden Sie WIFIGATE Host in Ihren Buchungsablauf, Ihr PMS oder Ihren Channel-Manager ein und lassen Sie es laufen."
+      "b6x": "Binden Sie WIFIGATE Host in Ihren Buchungsablauf, Ihr PMS oder Ihren Channel-Manager ein, und alles läuft von selbst."
     },
     "secure": {
       "eyebrow": "Sicherheit",
@@ -85,8 +85,8 @@ export default {
       "i3x": "Der Zutritt ist an jeden Aufenthalt und jeden Gast gebunden, und Sie können ihn jederzeit sperren."
     },
     "cta": {
-      "title": "Bereit, den Gästezutritt zu automatisieren?",
-      "text": "Erzählen Sie uns von Ihren Unterkünften, und wir richten WIFIGATE Host passend zu Ihrer Art des Gastgebens ein.",
+      "title": "Bereit für den automatischen Gastzugang?",
+      "text": "Erzählen Sie uns von Ihren Unterkünften, und wir richten WIFIGATE Host so ein, wie es zu Ihrem Betrieb passt.",
       "button": "Sprechen Sie mit uns"
     }
   }

@@ -7,7 +7,7 @@ export default {
   "marketing": {
     "hero": {
       "eyebrow": "WIFIGATE Host",
-      "title": "Pristup za goste koji se brine sam za sebe",
+      "title": "Pristup za goste koji radi sam",
       "lead": "Čim je rezervacija potvrđena, WIFIGATE stvara siguran, vremenski ograničen pristup vašim dvorišnim vratima, ulaznim vratima ili parkiralištu, a on sam prestaje pri odjavi. Bez predaje ključeva, bez jurnjave za kodovima i bez čekanja na ulazu.",
       "ctaPrimary": "Razgovarajte s nama",
       "note": "Za hotele, apartmane za odmor, pansione te parkirna mjesta i garaže za najam."
@@ -26,7 +26,7 @@ export default {
       "proF1": "Do 5 sustava",
       "proF2": "1.000 pozivnica po sustavu",
       "proF3": "Prioritetna podrška e-poštom",
-      "hotelBadge": "Najpopularnije",
+      "hotelBadge": "Najpopularniji",
       "hotelDesc": "Za hotel ili cijeli kompleks.",
       "hotelF1": "Do 20 sustava",
       "hotelF2": "Objedinjena izvješća",
@@ -36,7 +36,7 @@ export default {
       "enterpriseF1": "Količinske cijene",
       "enterpriseF2": "SLA i uvođenje",
       "enterpriseF3": "Prilagođena integracija",
-      "note": "Promotivne cijene za dodatak WIFIGATE Host, uz mjesečnu naplatu. Dostupni su dodatni sustavi i godišnji paketi, javite nam se za pojedinosti."
+      "note": "Uvodne cijene za dodatak WIFIGATE Host, uz mjesečnu naplatu. Dostupni su dodatni sustavi i godišnji paketi, javite nam se za pojedinosti."
     },
     "audience": {
       "label": "Namijenjeno za:",
@@ -58,11 +58,11 @@ export default {
     },
     "benefits": {
       "eyebrow": "Zašto WIFIGATE Host",
-      "title": "Manje recepcije. Više ugošćivanja bez truda.",
+      "title": "Manje posla na recepciji. Ugošćivanje bez muke.",
       "subtitle": "Sve što je potrebno da rezervacija postane pristup, obavljeno je umjesto vas.",
       "b1t": "Bez predaje ključeva",
       "b1x": "Zaboravite preuzimanje ključeva, kutije za ključeve i kopirane kodove. Pristup stiže na gostov telefon točno kad je potreban.",
-      "b2t": "Vremenski ograničen od samog početka",
+      "b2t": "Vremenski ograničeno, bez iznimke",
       "b2x": "Svaka pozivnica počinje vrijediti pri prijavi i istječe pri odjavi, automatski, za svaki boravak.",
       "b3t": "Šifrirano i privatno",
       "b3x": "Pristup je šifriran i ograničen na izdanu dozvolu. Vaš objekt i vaši gosti ostaju zaštićeni.",
@@ -77,7 +77,7 @@ export default {
       "eyebrow": "Sigurnost",
       "title": "Pristup koji bez brige možete dati i nepoznatima",
       "subtitle": "Stvoreno za zaštitu objekta iza svakih vrata.",
-      "i1t": "Šifrirano s kraja na kraj",
+      "i1t": "Potpuno šifrirano",
       "i1x": "Svaka je pozivnica šifrirana, pa se podaci za pristup ne mogu pročitati ni kopirati tijekom prijenosa.",
       "i2t": "Manje fizičkih sredstava, više gostoprimstva",
       "i2x": "Digitalni pristup smanjuje potrebu za ključevima, karticama i daljinskim upravljačima, pa se vaše osoblje može posvetiti gostima.",

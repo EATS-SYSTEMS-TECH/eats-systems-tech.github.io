@@ -93,7 +93,7 @@
 
 
   <script src="../js/language-selector.js?v=20261006a" defer=""></script>
-  <script id="hero-locale-data" type="application/json">{"media":{"replay":"Toista video uudelleen","mute":"Mykistä video","unmute":"Laita ääni päälle","pause":"Keskeytä video","play":"Toista video"}}</script><script src="../js/main.js?v=20261007b" defer=""></script>
+  <script id="hero-locale-data" type="application/json">{"media":{"replay":"Toista video uudelleen","mute":"Mykistä video","unmute":"Poista mykistys","pause":"Keskeytä video","play":"Toista video"}}</script><script src="../js/main.js?v=20261007b" defer=""></script>
 
   <style>
     .contact-info__avatar {
@@ -286,7 +286,7 @@
       "url": "https://wifigate.io",
       "logo": "https://wifigate.io/logo-1024.png",
       "description": "WIFIGATE (WiFi Gate) avaa portit, ovet, pysäköinnin, rullaovet ja autotallit puhelimella. Turvallinen ja salattu kulunhallinta ilman kuukausitilausta.",
-      "slogan": "Ei avaimia. Ei kaukosäätimiä. Ei kortteja. Turvallinen digitaalinen kulku ilman, että sinun tarvitsee odottaa jonkun avaavan sinulle."
+      "slogan": "Ei avaimia. Ei kaukosäätimiä. Ei kortteja. Turvallinen digitaalinen kulku ilman odottelua, että joku tulee avaamaan."
     },
     {
       "@type": "WebSite",
@@ -346,7 +346,7 @@
           "name": "Tarvitseeko WIFIGATE SIM-kortin tai ulkoisen WiFi-reitittimen?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Ei. WIFIGATE viestii suoraan asennetun laitteen kanssa, joten kulkupisteessä ei tarvita SIM-korttia, internet-liittymää eikä ulkoista WiFi-reititintä."
+            "text": "Ei. WIFIGATE on suoraan yhteydessä asennettuun laitteeseen, joten kulkupisteessä ei tarvita SIM-korttia, internet-liittymää eikä ulkoista WiFi-reititintä."
           }
         },
         {
@@ -354,7 +354,7 @@
           "name": "Vaatiiko WIFIGATE kuukausitilauksen?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Ei. Maksat WIFIGATE-laitteesta ja asennuksesta vain kerran. Ei kuukausitilausta, määräaikaisia uusintoja eikä jatkuvia alustamaksuja. Ainoa poikkeus on WIFIGATE Hostin kaupallinen käyttö, joka edellyttää tilausta."
+            "text": "Ei. Maksat WIFIGATE-laitteesta ja asennuksesta vain kerran. Ei kuukausimaksuja, uusimismaksuja eikä jatkuvia alustamaksuja. Ainoa poikkeus on WIFIGATE Hostin kaupallinen käyttö, joka edellyttää tilausta."
           }
         },
         {
@@ -650,7 +650,7 @@
             <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" fill="currentColor"></path>
           </svg>
         </button>
-        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="Laita ääni päälle" title="Laita ääni päälle" aria-pressed="false" data-muted="true">
+        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="Poista mykistys" title="Poista mykistys" aria-pressed="false" data-muted="true">
           <svg class="hero__media-control-icon hero__media-control-icon--muted" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M14 4.12v15.76a1 1 0 0 1-1.68.73l-4.04-3.61H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.28l4.04-3.61A1 1 0 0 1 14 4.12Z" fill="currentColor"></path>
             <path d="m17 9 4 4m0-4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -677,7 +677,7 @@
 
           <div class="hero__actions">
             <a href="#how-it-works" class="btn btn--primary hero__btn-primary" dir="ltr">Näin se toimii</a>
-            <a href="#get-in-touch" class="btn btn--ghost hero__btn-secondary" dir="ltr">Keskustele tiimimme kanssa</a>
+            <a href="#get-in-touch" class="btn btn--ghost hero__btn-secondary" dir="ltr">Ota yhteyttä tiimiimme</a>
           </div>
 
           <ul class="hero__proof" aria-label="Alustan edut" dir="ltr">
@@ -692,7 +692,7 @@
       <div class="container" id="how-it-works">
         <header class="section__header js-reveal">
           <p class="section__eyebrow" dir="ltr">Mikä WIFIGATE on?</p>
-          <h2 class="section__title" id="features-title" data-i18n="features.title" dir="ltr">Kulku ilman tuttua vaivaa.</h2>
+          <h2 class="section__title" id="features-title" data-i18n="features.title" dir="ltr">Kulunhallintaa ilman turhaa säätöä.</h2>
           <p class="section__subtitle" data-i18n="features.subtitle" dir="ltr">WIFIGATE on salattu kulunhallintajärjestelmä, joka yhdistää WiFin ja Bluetoothin. Sillä avaat portit, ovet, pysäköintipuomit, autotallin ovet ja sähköiset rullaovet puhelimella. Se kokoaa päivittäisen kulun ja vieraiden kulun yhdelle turvalliselle alustalle.</p>
         </header>
 
@@ -702,7 +702,7 @@
               <img src="../assets/wifigate_features/no_sim_no_router.svg?v=20260707e" alt="" class="feature-card__image" loading="lazy">
             </figure>
             <h3 class="feature-card__title" data-i18n="features.items.noSimRouter.title" dir="ltr">Ei SIM-korttia eikä ulkoista reititintä</h3>
-            <p class="feature-card__text" data-i18n="features.items.noSimRouter.text" dir="ltr">WIFIGATE viestii suoraan asennetun laitteen kanssa, joten kulkupisteessä ei tarvita SIM-korttia, internet-liittymää eikä ulkoista WiFi-reititintä.</p>
+            <p class="feature-card__text" data-i18n="features.items.noSimRouter.text" dir="ltr">WIFIGATE on suoraan yhteydessä asennettuun laitteeseen, joten kulkupisteessä ei tarvita SIM-korttia, internet-liittymää eikä ulkoista WiFi-reititintä.</p>
           </article>
 
           <article class="feature-card feature-card--stability js-reveal">
@@ -726,7 +726,7 @@
               <img src="../assets/wifigate_features/history.svg?v=20260707p" alt="" class="feature-card__image" loading="lazy">
             </figure>
             <h3 class="feature-card__title" data-i18n="features.items.history30Day.title" dir="ltr">90 päivän kulkuhistoria</h3>
-            <p class="feature-card__text" data-i18n="features.items.history30Day.text" dir="ltr">Näe viimeisten 90 päivän kulkutapahtumat ja saat selkeän kuvan portin käytöstä ja viimeisimmistä sisäänkäynneistä.</p>
+            <p class="feature-card__text" data-i18n="features.items.history30Day.text" dir="ltr">Näet viimeisten 90 päivän kulkutapahtumat ja saat selkeän kuvan portin käytöstä ja viimeisimmistä kulkukerroista.</p>
           </article>
 
           <article class="feature-card feature-card--auto-open js-reveal">
@@ -734,7 +734,7 @@
               <img src="../assets/wifigate_features/auto_open.svg?v=20260707am" alt="" class="feature-card__image" loading="lazy">
             </figure>
             <h3 class="feature-card__title" data-i18n="features.items.autoOpen.title" dir="ltr">Automaattinen avaus</h3>
-            <p class="feature-card__text" data-i18n="features.items.autoOpen.text" dir="ltr">Anna valtuutettujen käyttäjien avata portti automaattisesti heidän saapuessaan. Sisäänkäynti on sujuva ja mukava, eikä mihinkään tarvitse koskea.</p>
+            <p class="feature-card__text" data-i18n="features.items.autoOpen.text" dir="ltr">Anna valtuutettujen käyttäjien avata portti automaattisesti saapuessaan. Sujuvaa ja kosketuksetonta.</p>
           </article>
 
           <article class="feature-card feature-card--events js-reveal">
@@ -742,15 +742,15 @@
               <img src="../assets/wifigate_features/up_to_50_events.svg?v=20260707t" alt="" class="feature-card__image" loading="lazy">
             </figure>
             <h3 class="feature-card__title" data-i18n="features.items.upTo50Events.title" dir="ltr">Jopa 50 ajastettua tapahtumaa</h3>
-            <p class="feature-card__text" data-i18n="features.items.upTo50Events.text" dir="ltr">Luo toistuvia aikatauluja ja automaattisia toimintoja suoraan järjestelmässä kohteesi toiminnan mukaan, myös sapattitilan tuella.</p>
+            <p class="feature-card__text" data-i18n="features.items.upTo50Events.text" dir="ltr">Luo toistuvia aikatauluja ja automaattisia toimintoja suoraan järjestelmään kohteesi rytmin mukaan. Mukana myös sapattitila.</p>
           </article>
 
           <article class="feature-card feature-card--rf-remote-learning js-reveal">
             <figure class="feature-card__media">
               <img src="../assets/wifigate_features/digital_rf_remote_learning.svg?v=20260707w" alt="" class="feature-card__image" loading="lazy">
             </figure>
-            <h3 class="feature-card__title" data-i18n="features.items.rfRemoteLearning.title" dir="ltr">RF-kaukosäätimien digitaalinen opetus</h3>
-            <p class="feature-card__text" data-i18n="features.items.rfRemoteLearning.text" dir="ltr">Määritä ja hallitse RF-kaukosäätimiä alustalla hankalan manuaalisen ohjelmoinnin sijaan.</p>
+            <h3 class="feature-card__title" data-i18n="features.items.rfRemoteLearning.title" dir="ltr">RF-kaukosäätimien digitaalinen ohjelmointi</h3>
+            <p class="feature-card__text" data-i18n="features.items.rfRemoteLearning.text" dir="ltr">Lisää ja hallitse RF-kaukosäätimiä alustalla ilman hankalaa käsin ohjelmointia.</p>
           </article>
 
           <article class="feature-card feature-card--security-privacy js-reveal">
@@ -758,7 +758,7 @@
               <img src="../assets/wifigate_features/security_privacy.svg?v=20260707ab" alt="" class="feature-card__image" loading="lazy">
             </figure>
             <h3 class="feature-card__title" data-i18n="features.items.securityPrivacy.title" dir="ltr">Turvallisuus ja yksityisyys</h3>
-            <p class="feature-card__text" data-i18n="features.items.securityPrivacy.text" dir="ltr">Tiedonsiirto laitteen kanssa ja tallennetut tiedot on salattu, joten kiinteistösi kulku ja sitä koskevat tiedot pysyvät yksityisinä.</p>
+            <p class="feature-card__text" data-i18n="features.items.securityPrivacy.text" dir="ltr">Tiedonsiirto laitteen kanssa ja tallennetut tiedot on salattu, joten kiinteistösi kulkuoikeudet ja niitä koskevat tiedot pysyvät yksityisinä.</p>
           </article>
 
           <article class="feature-card feature-card--no-subscription-fees js-reveal">
@@ -766,7 +766,7 @@
               <img src="../assets/wifigate_features/no_subscription_fees.svg?v=20260707af" alt="" class="feature-card__image" loading="lazy">
             </figure>
             <h3 class="feature-card__title" data-i18n="features.items.noSubscriptionFees.title" dir="ltr">Ei tilausmaksuja</h3>
-            <p class="feature-card__text" data-i18n="features.items.noSubscriptionFees.text" dir="ltr">Maksat WIFIGATE-laitteesta ja asennuksesta vain kerran. Ei kuukausitilausta, määräaikaisia uusintoja eikä jatkuvia alustamaksuja.</p>
+            <p class="feature-card__text" data-i18n="features.items.noSubscriptionFees.text" dir="ltr">Maksat WIFIGATE-laitteesta ja asennuksesta vain kerran. Ei kuukausimaksuja, uusimismaksuja eikä jatkuvia alustamaksuja.</p>
             <p class="feature-card__note" id="subscription-note" dir="ltr">* WIFIGATE Hostin kaupallinen käyttö edellyttää tilausta.</p>
           </article>
         </div>
@@ -776,7 +776,7 @@
         <p class="security-statement__eyebrow" dir="ltr">Yksityinen kulku</p>
         <h2 class="security-statement__title" id="private-access-title" dir="ltr">Rakennukset ja yksityiskodit eivät ole julkisia tiloja.</h2>
         <div class="security-statement__copy">
-          <p dir="ltr">Lopeta pysyvien ovipuhelinkoodien jakaminen. Lähetä yhdellä napautuksella aikarajattu kulkuoikeus saapumisohjeineen ja vähennä luvattomia sisäänpääsyjä ja varkausriskiä.</p>
+          <p dir="ltr">Lopeta pysyvien ovikoodien jakaminen. Lähetä yhdellä napautuksella aikarajattu kulkuoikeus saapumisohjeineen ja vähennä luvattomia sisäänpääsyjä ja varkausriskiä.</p>
         </div>
         <img class="security-statement__media-image" src="../assets/img/private-access-arrival.webp" alt="Lähetti kulkee sinistä pisteviivareittiä kerrostalon sisäänkäynnille, kun asukas pitää kädessään WIFIGATE-sovellusta, jossa näkyy aikarajattu vieraskulkuoikeus." width="1536" height="1024" loading="lazy" decoding="async">
       </div>
@@ -802,7 +802,7 @@
                   <a class="where-list__link" href="/fi/roller-shutters/" data-niche-key="roller-shutters">Yritysten ja liikkeiden rullaovet</a>
                 </li>
                 <li class="where-list__item">
-                  <a class="where-list__link" href="/fi/hotels-airbnb/" data-niche-key="hotels-airbnb">Hotellit, Airbnb ja vierashuoneistot</a>
+                  <a class="where-list__link" href="/fi/hotels-airbnb/" data-niche-key="hotels-airbnb">Hotellit, Airbnb ja loma-asunnot</a>
                 </li>
                 <li class="where-list__item">
                   <a class="where-list__link" href="/fi/electric-gates/" data-niche-key="electric-gates">Sähköportit ja pysäköintipuomit</a>
@@ -836,8 +836,8 @@
           <div class="guest-invites__copy">
             <p class="guest-invites__eyebrow" dir="ltr">Rakennettu majoitusalalle</p>
             <h2 class="guest-invites__title" id="guest-invites-title" dir="ltr">WIFIGATE<br>Host</h2>
-            <ul class="automation-audiences" aria-label="Kenelle" dir="ltr"><li>Hotellit</li><li>Airbnb</li><li>Vierashuoneistot</li><li>Majoituskohteet</li></ul>
-            <p class="automation-promise" dir="ltr">Toivota vieraat tervetulleiksi. Anna sisäänpääsyn hoitua automaattisesti.</p>
+            <ul class="automation-audiences" aria-label="Kenelle" dir="ltr"><li>Hotellit</li><li>Airbnb</li><li>Loma-asunnot</li><li>Majoituskohteet</li></ul>
+            <p class="automation-promise" dir="ltr">Sinä toivotat vieraat tervetulleiksi. Sisäänpääsy hoituu itsestään.</p>
             <p class="guest-invites__subtitle" dir="ltr">Hotelleista loma-asuntoihin: yhdistä jokainen varaus turvalliseen kulkuoikeuteen oikeaan porttiin, oveen tai autotalliin. Vieraat kulkevat puhelimellaan, ja kulkuoikeus alkaa sisäänkirjautumisesta ja päättyy automaattisesti uloskirjautumiseen.</p>
 
 
@@ -880,7 +880,7 @@
                 </span>
                 <span class="guest-invites__point-copy">
                   <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point2Title" dir="ltr">Automaattisesti aikarajattu</span>
-                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point2Text" dir="ltr">Jokainen kulkuoikeus tulee voimaan sisäänkirjautuessa ja päättyy uloskirjautuessa, automaattisesti.</span>
+                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point2Text" dir="ltr">Jokainen kulkuoikeus alkaa automaattisesti sisäänkirjautumisesta ja päättyy uloskirjautumiseen.</span>
                 </span>
               </li>
               <li class="guest-invites__point">
@@ -889,7 +889,7 @@
                 </span>
                 <span class="guest-invites__point-copy">
                   <span class="guest-invites__point-title" data-i18n="guestInvites.promo.point3Title" dir="ltr">Säästää työtunteja</span>
-                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point3Text" dir="ltr">Henkilökunta keskittyy vieraanvaraisuuteen eikä avainkorttien tai muiden fyysisten kulkuvälineiden logistiikkaan.</span>
+                  <span class="guest-invites__point-text" data-i18n="guestInvites.promo.point3Text" dir="ltr">Henkilökunnan aika menee vieraisiin eikä avainkorttien tai muiden fyysisten kulkuvälineiden pyörittämiseen.</span>
                 </span>
               </li>
             </ul>
@@ -900,7 +900,7 @@
         <div class="tutorials-layout">
           <header class="section__header js-reveal">
             <p class="section__eyebrow" dir="ltr">Opetusvideot</p>
-            <h2 class="section__title" id="tutorials-title" data-i18n="tutorials.title" dir="ltr">Helppoa ensimmäisestä päivästä alkaen.</h2>
+            <h2 class="section__title" id="tutorials-title" data-i18n="tutorials.title" dir="ltr">Helppoa heti ensimmäisestä päivästä.</h2>
             <p class="section__subtitle" dir="ltr">Selkeät ohjeet asennukseen, päivittäiseen käyttöön ja lisäasetuksiin.</p>
           </header>
 
@@ -927,7 +927,7 @@
             </article>
             <article class="tutorial-card">
               <span class="tutorial-card__number" aria-hidden="true">05</span>
-              <h3 class="tutorial-card__title" data-i18n="tutorials.items.learnRfRemote" dir="ltr">Opeta RF-kaukosäädin</h3>
+              <h3 class="tutorial-card__title" data-i18n="tutorials.items.learnRfRemote" dir="ltr">Ohjelmoi RF-kaukosäädin</h3>
               <p class="tutorial-card__status" data-i18n="tutorials.status" dir="ltr">Tulossa pian</p>
             </article>
             <article class="tutorial-card">
@@ -952,8 +952,8 @@ kerroksen, huoneiston numeron, lisätiedot ja aikarajatun kulkuoikeuden.</p>
     </section><section class="section section--alt seo-faq" id="wifi-gate-faq" aria-labelledby="wifi-gate-faq-title">
       <div class="container seo-faq__layout">
         <header class="section__header js-reveal">
-          <p class="section__eyebrow" dir="ltr">Kaikki, mitä WiFi-portista pitää tietää</p>
-          <h2 class="section__title" id="wifi-gate-faq-title" dir="ltr">WiFi-portin kulunhallinta ilman kysymysmerkkejä.</h2>
+          <p class="section__eyebrow" dir="ltr">Kaikki, mitä WiFi-portista tarvitsee tietää</p>
+          <h2 class="section__title" id="wifi-gate-faq-title" dir="ltr">WiFi-portin kulunhallinta ilman epäselvyyksiä.</h2>
           <p class="section__subtitle" dir="ltr">Selkeät vastaukset asennuksesta, yhteyksistä, kustannuksista ja vieraiden kulusta.</p>
         </header>
 
@@ -967,13 +967,13 @@ kerroksen, huoneiston numeron, lisätiedot ja aikarajatun kulkuoikeuden.</p>
           <details class="seo-faq__item">
             <summary dir="ltr">Tarvitseeko WIFIGATE SIM-kortin tai ulkoisen WiFi-reitittimen?</summary>
             <div class="seo-faq__answer">
-              <p dir="ltr">Ei. WIFIGATE viestii suoraan asennetun laitteen kanssa, joten kulkupisteessä ei tarvita SIM-korttia, internet-liittymää eikä ulkoista WiFi-reititintä.</p>
+              <p dir="ltr">Ei. WIFIGATE on suoraan yhteydessä asennettuun laitteeseen, joten kulkupisteessä ei tarvita SIM-korttia, internet-liittymää eikä ulkoista WiFi-reititintä.</p>
             </div>
           </details>
           <details class="seo-faq__item">
             <summary dir="ltr">Vaatiiko WIFIGATE kuukausitilauksen?</summary>
             <div class="seo-faq__answer">
-              <p dir="ltr">Ei. Maksat WIFIGATE-laitteesta ja asennuksesta vain kerran. Ei kuukausitilausta, määräaikaisia uusintoja eikä jatkuvia alustamaksuja. Ainoa poikkeus on WIFIGATE Hostin kaupallinen käyttö, joka edellyttää tilausta.</p>
+              <p dir="ltr">Ei. Maksat WIFIGATE-laitteesta ja asennuksesta vain kerran. Ei kuukausimaksuja, uusimismaksuja eikä jatkuvia alustamaksuja. Ainoa poikkeus on WIFIGATE Hostin kaupallinen käyttö, joka edellyttää tilausta.</p>
             </div>
           </details>
           <details class="seo-faq__item">
@@ -1041,12 +1041,12 @@ kerroksen, huoneiston numeron, lisätiedot ja aikarajatun kulkuoikeuden.</p>
             <span class="entry-point__label" data-entry-point="7" dir="ltr">Pumppu</span>
           </li>
         </ul>
-        <p class="entry-points__note" id="entry-points-note" dir="ltr">Ja paljon muuta, sen mukaan, mitä haluat ohjata.</p>
+        <p class="entry-points__note" id="entry-points-note" dir="ltr">Sekä paljon muuta tarpeidesi mukaan.</p>
       </div>
     </section><section class="product-overview" id="system-overview">
       <div class="container">
         <figure class="product-overview__figure">
-          <img class="product-overview__image" src="../assets/img/wifigate-system-overview.webp" alt="WIFIGATE-järjestelmän yleiskuva: IP67-laite, mobiilisovellus ja ohjauskortti liitinriveineen, USB Type-C- ja 12-24V-tuloineen, Wi-Fi 6:lla, Bluetooth LE:llä ja 433,92MHz:n vastaanottimella sekä alustan ominaisuudet: 500 käyttäjää, 20 ylläpitäjää, rajattomasti vieraskutsuja, API automaattisille vieraskutsuille, ei SIM-korttia eikä reititintä, vakaus, nopea vieraskutsu, 90 päivän historia, automaattinen avaus, jopa 50 tapahtumaa, RF-kaukosäätimien digitaalinen opetus, turvallisuus ja yksityisyys sekä ei tilausmaksuja." width="1448" height="1086" loading="lazy" decoding="async">
+          <img class="product-overview__image" src="../assets/img/wifigate-system-overview.webp" alt="WIFIGATE-järjestelmän yleiskuva: IP67-laite, mobiilisovellus ja ohjauskortti liitinriveineen, USB Type-C- ja 12-24V-tuloineen, Wi-Fi 6:lla, Bluetooth LE:llä ja 433,92MHz:n vastaanottimella sekä alustan ominaisuudet: 500 käyttäjää, 20 ylläpitäjää, rajattomasti vieraskutsuja, API automaattisille vieraskutsuille, ei SIM-korttia eikä reititintä, vakaus, nopea vieraskutsu, 90 päivän historia, automaattinen avaus, jopa 50 tapahtumaa, RF-kaukosäätimien digitaalinen ohjelmointi, turvallisuus ja yksityisyys sekä ei tilausmaksuja." width="1448" height="1086" loading="lazy" decoding="async">
         </figure>
       </div>
     </section><section class="section section--alt" id="contact" data-nav-target="get-in-touch" aria-labelledby="contact-title" aria-describedby="contact-description">
@@ -1069,7 +1069,7 @@ Tiimimme auttaa sinua löytämään sopivan ratkaisun.</p>
               </svg>
             </div>
             <h3 class="contact-option-card__title" data-i18n="contact.distributorTitle" dir="ltr">Jälleenmyyjäohjelma</h3>
-            <p class="contact-option-card__text" data-i18n="contact.distributorText" dir="ltr">Sinä tunnet markkinat ja asiakkaat, me tuomme tuotteen, koulutuksen ja tuen.</p>
+            <p class="contact-option-card__text" data-i18n="contact.distributorText" dir="ltr">Sinä tunnet markkinat ja asiakkaat. Me tuomme tuotteen, koulutuksen ja tuen.</p>
             <a href="https://wa.me/message/NZWNMX6V2XVHJ1" target="_blank" rel="noopener noreferrer" class="contact-option-card__button contact-option-card__button--muted" data-i18n="contact.distributorButton" dir="ltr">Ryhdy jälleenmyyjäksi</a>
           </article>
 
@@ -1117,7 +1117,7 @@ Tiimimme auttaa sinua löytämään sopivan ratkaisun.</p>
         <div class="site-footer__brand">
           <img src="../assets/img/wifigate-logo-footer.webp" alt="WIFIGATE" class="site-footer__logo" width="384" height="384" loading="lazy" decoding="async">
         </div>
-        <p class="site-footer__brand-copy" data-i18n="footer.tagline" dir="ltr">Ei avaimia. Ei kaukosäätimiä. Ei kortteja.<br>Turvallinen digitaalinen kulku ilman, että sinun tarvitsee odottaa jonkun avaavan sinulle.</p>
+        <p class="site-footer__brand-copy" data-i18n="footer.tagline" dir="ltr">Ei avaimia. Ei kaukosäätimiä. Ei kortteja.<br>Turvallinen digitaalinen kulku ilman odottelua, että joku tulee avaamaan.</p>
       </div>
       <nav class="site-footer__column" aria-label="Legal">
         <h2 class="site-footer__heading" data-i18n="footer.legalTitle" dir="ltr">Oikeudelliset tiedot</h2>

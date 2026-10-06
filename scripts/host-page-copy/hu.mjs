@@ -76,17 +76,17 @@ export default {
     "secure": {
       "eyebrow": "Biztonság",
       "title": "Hozzáférés, amelyet nyugodtan adhat egy idegennek",
-      "subtitle": "Úgy terveztük, hogy védje az ingatlant minden kapu mögött.",
+      "subtitle": "Arra terveztük, hogy minden kapu mögött védje az ingatlant.",
       "i1t": "Végponttól végpontig titkosítva",
       "i1x": "Minden meghívó titkosított, így a hozzáférési adatok továbbítás közben nem olvashatók és nem másolhatók.",
-      "i2t": "Kevesebb fizikai eszköz, több vendéglátás",
-      "i2x": "A digitális hozzáférés csökkenti a kulcsok, kártyák és távirányítók szükségességét, így a személyzet a vendégekre és a vendéglátásra koncentrálhat.",
+      "i2t": "Kevesebb fizikai belépőeszköz, több idő a vendégekre",
+      "i2x": "A digitális hozzáféréssel kevesebb kulcsra, kártyára és távirányítóra van szükség, így a személyzet a vendégekre és a vendéglátásra koncentrálhat.",
       "i3t": "Az irányítás Önnél marad",
       "i3x": "A hozzáférés minden tartózkodáshoz és minden vendéghez kötött, és bármikor leállíthatja."
     },
     "cta": {
-      "title": "Készen áll a vendéghozzáférés automatizálására?",
-      "text": "Meséljen az ingatlanairól, és a WIFIGATE Hostot az Ön vendéglátási módjához igazítjuk.",
+      "title": "Automatizálná a vendégek beléptetését?",
+      "text": "Meséljen az ingatlanairól, és a WIFIGATE Hostot pontosan az Ön működéséhez igazítjuk.",
       "button": "Beszéljünk"
     }
   }

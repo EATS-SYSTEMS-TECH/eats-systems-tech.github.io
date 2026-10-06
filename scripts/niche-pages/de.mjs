@@ -14,12 +14,12 @@ export default {
   "niches": {
     "hotels-airbnb": {
       "label": "Hotels, Airbnb und Ferienwohnungen",
-      "title": "Ein Gast, der angekommen ist, sollte nicht warten müssen, bis ihm jemand öffnet!",
-      "heroLead": "Eine Karte, die ausgestellt werden muss, ein Schlüssel, der übergeben werden muss, oder ein Schlüsselbox-Code, der von Gast zu Gast weitergereicht wird: So wird jede Ankunft zur manuellen Abstimmung. Geben Sie jedem Gast eine persönliche Berechtigung, die beim Check-in beginnt und beim Check-out endet.",
+      "title": "Wer angekommen ist, sollte nicht warten müssen, bis jemand öffnet",
+      "heroLead": "Eine Karte, die ausgestellt werden muss, ein Schlüssel, der übergeben werden muss, oder ein Schlüsselbox-Code, der von Gast zu Gast weitergereicht wird: So wird jede Ankunft zur Koordinationsaufgabe. Geben Sie jedem Gast eine persönliche Berechtigung, die beim Check-in beginnt und beim Check-out endet.",
       "highlights": [
         {
           "icon": "calendar",
-          "title": "Ab Check-in offen, ab Check-out geschlossen",
+          "title": "Öffnet zum Check-in, schließt zum Check-out",
           "text": "Niemand muss daran denken, den Zutritt zu entziehen. Die Berechtigung wird zur festgelegten Ankunftszeit aktiv und läuft bei der Abreise ab – auch wenn niemand vom Team vor Ort ist."
         },
         {
@@ -32,15 +32,15 @@ export default {
         {
           "icon": "keyless",
           "title": "Keine Karten ausgeben, keine Schlüsselbox teilen",
-          "text": "Nichts zu programmieren, nichts zu übergeben, keine vom Vorgast vergessene Karte und kein weitergegebener Schlüsselbox-Code. Das Smartphone, das der Gast ohnehin in der Tasche hat, ist der einzige Weg hinein."
+          "text": "Nichts zu programmieren, nichts zu übergeben, keine vom Vorgast vergessene Karte und kein weitergegebener Schlüsselbox-Code. Das Smartphone, das der Gast ohnehin in der Tasche hat, ist sein einziger Schlüssel."
         }
       ],
-      "paragraph": "Mit WIFIGATE bieten Hotels, Ferienwohnungen (Airbnb) und Ferienanlagen ihren Gästen einen bequemen und sicheren digitalen Zutritt, direkt über das Smartphone.\nStatt Magnetkarten auszustellen, physische Schlüssel zu übergeben oder Schlüsselboxen zu nutzen, läuft die Zutrittskontrolle automatisch.\nMit WIFIGATE Host verbinden Sie Ihr Buchungssystem direkt mit dem Zutrittssystem.\nDank dieser Verbindung erhält der Gast nach Bestätigung der Buchung eine persönliche Zutrittsberechtigung.\nDie Berechtigung wird genau zur Check-in-Zeit aktiv und endet automatisch beim Check-out, ohne manuelles Eingreifen, ohne Schlüsselübergabe und ohne Abstimmung mit Rezeption oder Gastgebern.",
+      "paragraph": "Mit WIFIGATE bieten Hotels, Ferienwohnungen (Airbnb) und Ferienanlagen ihren Gästen einen bequemen und sicheren digitalen Zutritt, direkt über das Smartphone.\nMagnetkarten, Schlüsselübergaben und Schlüsselboxen entfallen: Die Zutrittskontrolle läuft automatisch.\nMit WIFIGATE Host verbinden Sie Ihr Buchungssystem direkt mit dem Zutrittssystem.\nDank dieser Verbindung erhält der Gast nach Bestätigung der Buchung eine persönliche Zutrittsberechtigung.\nDie Berechtigung wird genau zur Check-in-Zeit aktiv und endet automatisch beim Check-out, ohne manuelles Eingreifen, ohne Schlüsselübergabe und ohne Abstimmung mit Rezeption oder Gastgebern.",
       "bullets": [
         "Automatischer Gastzugang, sobald eine Buchung bestätigt ist",
         "Volle Automatisierung über WIFIGATE Host",
-        "Zeitlich begrenzter Zutritt passend zu den Daten und Zeiten des Aufenthalts",
-        "Weniger Ausstellen, Übergeben und Ersetzen von Zimmerkarten",
+        "Zeitlich begrenzter Zutritt, abgestimmt auf Datum und Uhrzeit des Aufenthalts",
+        "Zimmerkarten müssen seltener ausgestellt, übergeben und ersetzt werden",
         "Berechtigungen für Personal, Reinigung, Wartung und Dienstleister",
         "Eine reibungslosere, angenehmere Ankunft für Ihre Gäste",
         "Zutritt endet automatisch zum Check-out",
@@ -56,10 +56,10 @@ export default {
         },
         {
           "question": "Kann der Gastzugang automatisch aus Buchungen erstellt werden?",
-          "answer": "Ja. Mit WIFIGATE Host und seiner API kann eine bestätigte Buchung den Zutritt des Gastes automatisch erstellen, passend zu den Daten und Uhrzeiten des Aufenthalts."
+          "answer": "Ja. Mit WIFIGATE Host und seiner API kann eine bestätigte Buchung den Zutritt des Gastes automatisch erstellen, abgestimmt auf Datum und Uhrzeit des Aufenthalts."
         },
         {
-          "question": "Können Reinigungs- und Wartungspersonal einen eigenen Zutritt bekommen?",
+          "question": "Können Reinigungskräfte und Hausmeister einen eigenen Zutritt bekommen?",
           "answer": "Ja. Personal, Reinigung, Wartung und Dienstleister erhalten jeweils ihre eigene Berechtigung, und die Zutrittshistorie zeigt, wer wann geöffnet hat."
         },
         {
@@ -70,13 +70,13 @@ export default {
     },
     "roller-shutters": {
       "label": "Rolltore für Gewerbe und Läden",
-      "title": "Die Bedienstelle Ihres Rolltors gehört nicht ungeschützt nach draußen!",
+      "title": "Die Bedienung Ihres Rolltors gehört nicht nach draußen",
       "heroLead": "Ein Schalter, ein Schlüsselkasten oder ein Handsender, der draußen angebracht ist oder unter Mitarbeitern weitergegeben wird, kann in falsche Hände geraten. Verlegen Sie die Steuerung auf die geschützte Innenseite Ihres Geschäfts und öffnen Sie das Rolltor per Smartphone, mit einer persönlichen Berechtigung für jeden Mitarbeiter.",
       "highlights": [
         {
           "icon": "shutter",
-          "title": "Die Steuerung wandert nach innen, außer Reichweite",
-          "text": "Ein Schalter oder Schlüsselkasten an der Außenwand ist für jeden Passanten erreichbar. Wenn per Smartphone geöffnet wird, kann die Bedienstelle innen im Laden sitzen."
+          "title": "Bedienung nach innen verlegt, außer Reichweite",
+          "text": "Ein Schalter oder Schlüsselkasten an der Außenwand ist für jeden Passanten erreichbar. Wird per Smartphone geöffnet, kann die Bedienstelle innen im Laden liegen."
         },
         {
           "icon": "users",
@@ -89,19 +89,19 @@ export default {
           "text": "Mit einem Schlüssel müssen Sie direkt an der Bedienstelle stehen, die Hände voll und mit schlechtem Blick auf das Tor. Per Smartphone geht das aus sichererer Entfernung."
         }
       ],
-      "paragraph": "Rolltore an Läden und Gewerbebetrieben werden oft mit Handsendern, Schlüsseln, einem außen angebrachten Schlüsselkasten oder Schaltern außerhalb des Gebäudes bedient. Solche Lösungen können verloren gehen, bei ehemaligen Mitarbeitern verbleiben, kopiert werden oder zum exponierten Zugangspunkt werden. Wer mit dem Schlüssel öffnet oder schließt, muss zudem direkt an der Bedienstelle stehen, den Schlüssel in der Hand halten und verliert dabei mitunter den freien Blick auf den Torbereich. WIFIGATE verlagert die Steuerung in die App und die Zutrittskontrolle auf die geschützte Innenseite: So öffnen und schließen Sie bequemer, verwalten Berechtigungen für Mitarbeiter und Dienstleister und verringern die Abhängigkeit von Schlüsseln, Handsendern und exponierten Zugangspunkten.",
+      "paragraph": "Rolltore an Läden und Gewerbebetrieben werden oft mit Handsendern, Schlüsseln, einem außen angebrachten Schlüsselkasten oder Schaltern außerhalb des Gebäudes bedient. Solche Lösungen können verloren gehen, bei ehemaligen Mitarbeitern verbleiben, kopiert werden oder zum ungeschützten Zugangspunkt werden. Wer mit dem Schlüssel öffnet oder schließt, muss zudem direkt an der Bedienstelle stehen, den Schlüssel in der Hand halten und verliert dabei mitunter den freien Blick auf den Torbereich. WIFIGATE verlagert die Steuerung in die App und die Zutrittskontrolle auf die geschützte Innenseite: So öffnen und schließen Sie bequemer, verwalten Berechtigungen für Mitarbeiter und Dienstleister und sind weniger abhängig von Schlüsseln, Handsendern und ungeschützten Zugangspunkten.",
       "bullets": [
         "Öffnen und Schließen per Smartphone – unabhängig vom Handsender",
         "Weniger Abhängigkeit von Schlüsseln, die kopiert werden oder verloren gehen können",
-        "Weniger exponierte Zugangspunkte außerhalb des Geschäfts",
+        "Weniger ungeschützte Zugangspunkte außerhalb des Geschäfts",
         "Bequemere Bedienung mit besserem Blick auf den Torbereich",
         "Berechtigungsverwaltung für Mitarbeiter, Führungskräfte und Dienstleister",
-        "Auf Wunsch zeitlich begrenzter Zutritt nach Bedarf",
+        "Optional: befristeter Zutritt nach Zeit oder Bedarf",
         "Geeignet für Läden, Lager, Lieferanteneingänge und Gewerbebetriebe",
         "Eine aufgeräumtere, besser geschützte Lösung für den täglichen Betrieb"
       ],
       "seoTitle": "Rolltore smart steuern für Gewerbe und Läden | WIFIGATE",
-      "seoDescription": "WIFIGATE steuert Rolltore von Läden und Betrieben per Smartphone: Berechtigungen verwalten, weniger Schlüssel und Handsender, weniger exponierte Zugangspunkte.",
+      "seoDescription": "WIFIGATE steuert Rolltore von Läden und Betrieben per Smartphone: Berechtigungen verwalten, weniger Schlüssel und Handsender, weniger ungeschützte Zugangspunkte.",
       "imageAlt": "Geschäftsinhaber öffnet das Rolltor seines Ladens mit dem Smartphone",
       "faq": [
         {
@@ -118,24 +118,24 @@ export default {
         },
         {
           "question": "Für welche Betriebe eignet sich das?",
-          "answer": "Für Läden, Lager, Lieferanteneingänge und jeden Betrieb mit elektrischem Rolltor, der weniger Schlüssel, Handsender und offen zugängliche Zugangspunkte möchte."
+          "answer": "Für Läden, Lager, Lieferanteneingänge und jeden Betrieb mit elektrischem Rolltor, der weniger Schlüssel, Handsender und ungeschützte Zugangspunkte möchte."
         }
       ]
     },
     "electric-gates": {
       "label": "Elektrische Tore und Parkschranken",
-      "title": "Zum Öffnen Ihres Tors braucht es keinen Dauerauftrag!",
-      "heroLead": "Systeme zum Öffnen von Toren per Smartphone kommen oft mit einem Monatsabo, das Monat für Monat abgebucht wird. Wechseln Sie zum smarten Öffnen ohne Abogebühren und ohne Dauerauftrag, mit persönlichen Berechtigungen und automatischem Öffnen für Stammnutzer.",
+      "title": "Ihr Tor öffnen, ohne monatliche Abbuchung",
+      "heroLead": "Viele Systeme, mit denen sich Tore per Smartphone öffnen lassen, kosten ein Abo, das Monat für Monat abgebucht wird. Wechseln Sie zum smarten Öffnen ohne Abogebühren und ohne monatliche Abbuchung, mit persönlichen Berechtigungen und automatischem Öffnen für Stammnutzer.",
       "highlights": [
         {
           "icon": "handsfree",
           "title": "Automatisches Öffnen bei der täglichen Einfahrt",
-          "text": "Auto Open erkennt, dass Sie angekommen sind, und öffnet das Tor für Sie. Kein Kramen im Handschuhfach und kein Fensteröffnen im Regen."
+          "text": "Das automatische Öffnen (Auto Open) erkennt, dass Sie angekommen sind, und öffnet das Tor für Sie. Kein Kramen nach dem Handsender im Handschuhfach, kein Hantieren mit dem Smartphone und kein Fensterrunterlassen im Regen."
         },
         {
           "icon": "clock",
           "title": "Temporärer Zutritt für Dienstleister oder Gäste",
-          "text": "Statt Anrufe zu bekommen, ob Sie gerade zu einem ungünstigen Zeitpunkt das Tor öffnen können, senden Sie eine Berechtigung, die nur in dem Zeitfenster gilt, in dem sie wirklich gebraucht wird, und danach von selbst erlischt."
+          "text": "Statt im ungünstigsten Moment angerufen zu werden, ob Sie das Tor öffnen können, senden Sie eine Berechtigung, die nur im tatsächlich benötigten Zeitfenster gilt und danach von selbst erlischt."
         },
         {
           "icon": "gate",
@@ -160,7 +160,7 @@ export default {
       "faq": [
         {
           "question": "Kann ich ein elektrisches Tor oder eine Parkschranke mit dem Smartphone öffnen?",
-          "answer": "Ja. WIFIGATE wird an das Tor oder die Schranke angeschlossen, und berechtigte Nutzer öffnen es über die WIFIGATE-App – mit dauerhaften oder temporären Berechtigungen."
+          "answer": "Ja. WIFIGATE wird an das Tor oder die Schranke angeschlossen, und berechtigte Nutzer öffnen über die WIFIGATE-App, mit dauerhaften oder temporären Berechtigungen."
         },
         {
           "question": "Braucht das Tor eine SIM-Karte oder eine Internetverbindung?",
@@ -178,8 +178,8 @@ export default {
     },
     "garage-doors": {
       "label": "Garagentore und private Stellplätze",
-      "title": "Ein billiger RF-Handsender lässt sich oft leicht kopieren!",
-      "heroLead": "Einfache RF-Handsender lassen sich mitunter leicht kopieren und verschaffen so Personen Zutritt, die nie dazu berechtigt waren. WIFIGATE schützt den Zutritt mit fortschrittlichen Sicherheitsebenen, verschlüsselter Speicherung und dem Schutz der Privatsphäre der Nutzer.",
+      "title": "Ein billiger Funk-Handsender lässt sich oft leicht kopieren",
+      "heroLead": "Einfache Funk-Handsender lassen sich mitunter leicht kopieren und verschaffen so Personen Zutritt, die nie dazu berechtigt waren. WIFIGATE schützt den Zutritt mit fortschrittlichen Sicherheitsebenen, verschlüsselter Speicherung und dem Schutz der Privatsphäre der Nutzer.",
       "highlights": [
         {
           "icon": "keyless",
@@ -197,18 +197,18 @@ export default {
           "text": "Statt für jedes Auto und jeden Nutzer einen Handsender bereitzuhalten, öffnen Sie mit dem Smartphone, das Sie ohnehin dabeihaben. Weniger Handsender, die gekauft, angelernt, übergeben und verwaltet werden müssen."
         }
       ],
-      "paragraph": "Garagentore und private Stellplatzzufahrten werden meist mit physischen Handsendern bedient. Diese können verloren gehen, bei Personen verbleiben, die keinen Zutritt mehr benötigen, oder in bestimmten Situationen kopiert werden. WIFIGATE verlagert die Steuerung auf digitalen Zutritt per Smartphone: Verwalten Sie Berechtigungen für Familienmitglieder, Mitarbeiter oder Gäste und teilen Sie zeitlich begrenzten Zutritt, ohne einen Handsender oder Code aus der Hand zu geben. Das Ergebnis ist ein komfortableres, privateres und besser organisiertes Erlebnis – mit weniger Abhängigkeit von physischen Zugangsmitteln.",
+      "paragraph": "Garagentore und private Stellplatzzufahrten werden meist mit physischen Handsendern bedient. Diese können verloren gehen, bei Personen verbleiben, die keinen Zutritt mehr benötigen, oder in bestimmten Situationen kopiert werden. WIFIGATE verlagert die Steuerung auf digitalen Zutritt per Smartphone: Verwalten Sie Berechtigungen für Familienmitglieder, Mitarbeiter oder Gäste und teilen Sie zeitlich begrenzten Zutritt, ohne einen Handsender oder Code aus der Hand zu geben. Das Ergebnis: mehr Komfort, mehr Privatsphäre und mehr Ordnung, mit weniger Abhängigkeit von physischen Zugangsmitteln.",
       "bullets": [
         "Garagentor per Smartphone öffnen",
         "Weniger Abhängigkeit von physischen Handsendern",
         "Geringeres Risiko durch verlorene, weitergegebene oder kopierte Handsender",
         "Zutrittsverwaltung für Familie, Mitarbeiter und Gäste",
         "Zeitlich begrenzter Zutritt, ohne Handsender oder Code weiterzugeben",
-        "Geeignet für private Stellplätze, Häuser und Gartenwohnungen",
+        "Geeignet für private Stellplätze, Häuser und Erdgeschosswohnungen mit Garten",
         "Eine privatere und sicherere Art, den Zutritt zu verwalten",
         "Komfortablere und sicherere Kontrolle im Alltag"
       ],
-      "seoTitle": "Garagentor per Smartphone öffnen, smarter Zutritt | WIFIGATE",
+      "seoTitle": "Smarter Zutritt für Garage und Stellplatz | WIFIGATE",
       "seoDescription": "WIFIGATE öffnet Garagentore und private Zufahrten per Smartphone – weniger Handsender, zeitlich begrenzte Berechtigungen und private, komfortable Zutrittsverwaltung.",
       "imageAlt": "Mann öffnet ein privates Garagentor mit dem Smartphone an einem modernen Haus",
       "faq": [
@@ -226,18 +226,18 @@ export default {
         },
         {
           "question": "Wo lässt sich WIFIGATE für Stellplätze einsetzen?",
-          "answer": "In privaten Garagen, an Zufahrten zu privaten Stellplätzen, an Häusern und Gartenwohnungen."
+          "answer": "In privaten Garagen, an Zufahrten zu privaten Stellplätzen, an Häusern und Erdgeschosswohnungen mit Garten."
         }
       ]
     },
     "private-homes": {
       "label": "Privathäuser",
-      "title": "Ein Privathaus ist kein öffentlicher Ort!",
-      "heroLead": "Der Code der Türsprechanlage, den Sie einem Paketboten, einem Techniker oder einem Gast gegeben haben, bleibt bei ihm, lange nachdem der Besuch vorbei ist, und wird weitergegeben, ohne dass Sie es merken. Geben Sie jedem eine persönliche, zeitlich begrenzte Zutrittsberechtigung und verringern Sie unbefugte Zutritte und das Diebstahlrisiko.",
+      "title": "Ihr Zuhause ist kein öffentlicher Ort",
+      "heroLead": "Der Türcode, den Sie einem Paketboten, einem Techniker oder einem Gast gegeben haben, bleibt bei ihm, lange nachdem der Besuch vorbei ist, und wird weitergegeben, ohne dass Sie es merken. Geben Sie jedem eine persönliche, zeitlich begrenzte Zutrittsberechtigung und verringern Sie unbefugte Zutritte und das Diebstahlrisiko.",
       "highlights": [
         {
           "icon": "keyless",
-          "title": "Der Code der Türsprechanlage macht die Runde",
+          "title": "Der Türcode macht die Runde",
           "text": "Der Code geht an Paketboten, Techniker und Gäste und von dort weiter, ohne dass Sie es merken. Und nach einigen Jahren verraten die vier abgenutzten Tasten am Tastenfeld ganz von selbst, aus welchen Ziffern er besteht."
         },
         {
@@ -251,7 +251,7 @@ export default {
           "text": "Ein gemeinsamer Code hat keine Liste seiner Inhaber. An seine Stelle tritt eine Liste, in der jede Berechtigung einen Namen trägt – so ist jederzeit klar, wer ins Haus kommt."
         }
       ],
-      "paragraph": "In Privathäusern können Codetastaturen, Schlüssel und Handsender zur Schwachstelle werden. Mit der Zeit zeigen sich Abnutzung oder Spuren auf den Tasten, Handsender gehen verloren oder wandern von Hand zu Hand, und der Code wird mitunter an Paketboten, Handwerker oder Gäste weitergegeben – und bleibt bei ihnen, auch wenn er längst nicht mehr gebraucht wird. Mit WIFIGATE verwalten Sie den Zugang vom Smartphone aus, teilen zeitlich begrenzten Gastzutritt, ohne einen festen Code preiszugeben, und entziehen Berechtigungen ganz einfach – ohne Schlösser, Codes oder Handsender auszutauschen.",
+      "paragraph": "In Privathäusern können Codetastaturen, Schlüssel und Handsender zur Schwachstelle werden. Mit der Zeit zeigen sich Abnutzung oder Spuren auf den Tasten, Handsender gehen verloren oder wandern von Hand zu Hand, und der Code wird mitunter an Paketboten, Handwerker oder Gäste weitergegeben – und bleibt bei ihnen, auch wenn er längst nicht mehr gebraucht wird. Mit WIFIGATE verwalten Sie den Zugang vom Smartphone aus, teilen zeitlich begrenzten Gastzugang, ohne einen festen Code preiszugeben, und entziehen Berechtigungen ganz einfach, ohne Schlösser, Codes oder Handsender auszutauschen.",
       "bullets": [
         "Weniger Abhängigkeit von Codetastatur, Schlüsseln und Handsendern",
         "Zeitlich begrenzter Zutritt für Paketboten, Gäste und Handwerker",
@@ -286,7 +286,7 @@ export default {
     },
     "residential-buildings": {
       "label": "Wohngebäude",
-      "title": "Ein Wohngebäude ist kein öffentlicher Ort!",
+      "title": "Ein Wohngebäude ist kein öffentlicher Ort",
       "heroLead": "Ein fester Code, der zwischen Paketboten, Gästen und Handwerkern die Runde macht, kann in falsche Hände geraten. Geben Sie jeder Person eine persönliche, zeitlich begrenzte Zutrittsberechtigung und reduzieren Sie unbefugte Zutritte und das Diebstahlrisiko.",
       "highlights": [
         {
@@ -302,10 +302,10 @@ export default {
         {
           "icon": "handsfree",
           "title": "Zutritt mit freien Händen",
-          "text": "Auto Open erkennt, dass Sie angekommen sind, und öffnet Tor oder Tür für Sie. Kein Schlüsselsuchen und kein Griff zum Smartphone – auch wenn Sie die Hände voller Einkäufe, Kinderwagen oder Kinder haben."
+          "text": "Das automatische Öffnen (Auto Open) erkennt, dass Sie angekommen sind, und öffnet Tor oder Tür für Sie. Kein Schlüsselsuchen und kein Griff zum Smartphone, auch wenn Sie Einkaufstüten tragen, den Kinderwagen schieben oder Kinder an der Hand haben."
         }
       ],
-      "paragraph": "In einem Wohngebäude endet der Zutritt nicht an der Haustür: Es gibt ein Tor, eine Parkplatzzufahrt, Türen zu Abstellräumen und manchmal eine Nebentür. Beteiligt sind nicht nur die Bewohner, sondern auch wechselnde Mieter, die Eigentümergemeinschaft oder die Hausverwaltung, Reinigungskräfte, Wartungspersonal und feste Dienstleister. Läuft all das über einen einzigen Code und ein paar Handsender, bedeutet jede kleine Änderung, ob ein Bewohner auszieht, ein Handsender verloren geht oder ein Dienstleister wechselt, dass der Code geändert und alle neu informiert werden müssen. WIFIGATE ersetzt dieses Vorgehen durch eine geordnete Zutrittsverwaltung auf Gebäudeebene.",
+      "paragraph": "In einem Wohngebäude endet der Zutritt nicht an der Haustür: Es gibt ein Tor, eine Parkplatzzufahrt, Türen zu den Kellerräumen und manchmal eine Nebentür. Beteiligt sind nicht nur die Bewohner, sondern auch wechselnde Mieter, die Eigentümergemeinschaft oder die Hausverwaltung, Reinigungskräfte, Wartungspersonal und feste Dienstleister. Läuft all das über einen einzigen Code und ein paar Handsender, bedeutet jede kleine Änderung, ob ein Bewohner auszieht, ein Handsender verloren geht oder ein Dienstleister wechselt, dass der Code geändert und alle neu informiert werden müssen. WIFIGATE ersetzt dieses Vorgehen durch eine geordnete Zutrittsverwaltung auf Gebäudeebene.",
       "bullets": [
         "Eine persönliche Berechtigung für jeden Bewohner statt eines Codes für alle",
         "Bewohner hinzufügen und entfernen, ohne den Code für das ganze Gebäude zu ändern",
@@ -340,7 +340,7 @@ export default {
     },
     "office-buildings": {
       "label": "Bürogebäude",
-      "title": "Der Weg ins Büro sollte nicht über den Empfang führen!",
+      "title": "Der Weg ins Büro sollte nicht über den Empfang führen",
       "heroLead": "Besucher, Bewerber und Lieferanten warten, bis jemand herunterkommt und öffnet, und Mitarbeiter bekommen Ausweise oder Schlüssel, die beim Ausscheiden wieder eingesammelt werden müssen. Geben Sie allen eine persönliche Berechtigung: dauerhaft für Mitarbeiter, zeitlich begrenzt für alle anderen.",
       "highlights": [
         {
@@ -394,7 +394,7 @@ export default {
     },
     "entry-doors-magnetic-locks": {
       "label": "Eingangstüren und Magnetschlösser für Unternehmen",
-      "title": "Der Code für Ihren Geschäftseingang sollte nicht von Hand zu Hand gehen!",
+      "title": "Der Code für Ihren Geschäftseingang sollte nicht von Hand zu Hand gehen",
       "heroLead": "Ein fester Code, den Mitarbeiter, Lieferanten und Techniker erhalten, bleibt womöglich bei Personen, die längst keinen Zutritt mehr brauchen. Geben Sie jedem eine persönliche, zeitlich begrenzte Öffnungsberechtigung, über den elektrischen Türöffner oder das Magnetschloss, das bereits an der Tür verbaut ist.",
       "highlights": [
         {
@@ -410,7 +410,7 @@ export default {
         {
           "icon": "phone",
           "title": "Kein komplexes Zutrittskontrollsystem",
-          "text": "Kein Schaltschrank, keine Verwaltungssoftware und kein Kartenleser zu montieren. Das vorhandene Schloss bleibt, wo es ist, und alles wird über die App verwaltet."
+          "text": "Kein Schaltschrank, keine Verwaltungssoftware, kein Kartenleser an der Wand. Das vorhandene Schloss bleibt, wo es ist, und alles wird über die App verwaltet."
         }
       ],
       "paragraph": "Kleine Unternehmen, Praxen, Studios, Lager und Büros setzen häufig auf eine Codetastatur, einen Schlüssel oder ein einfaches Magnetschloss. Die Probleme beginnen, wenn der Code unter Mitarbeitern, Dienstleistern und Gästen die Runde macht oder wenn temporärer Zutritt benötigt wird, ohne die Sicherheit zu schwächen. Mit WIFIGATE verwalten Sie die Eingangstür vom Smartphone aus, teilen temporäre Berechtigungen und reduzieren den Bedarf an festen Codes, physischen Schlüsseln oder manueller Abstimmung bei jedem Zutritt.",
@@ -448,12 +448,12 @@ export default {
     },
     "sports-facilities": {
       "label": "Sportanlagen",
-      "title": "Der Code zu Ihrer Anlage gehört nicht in die WhatsApp-Gruppe!",
+      "title": "Der Code zu Ihrer Anlage gehört nicht in die WhatsApp-Gruppe",
       "heroLead": "Ein gemeinsamer Code, der zwischen Mitgliedern, Trainern und Gästen weitergegeben wird, öffnet weiter, auch wenn er es längst nicht mehr sollte. Geben Sie jedem eine persönliche Berechtigung, die zu den Öffnungszeiten und zur Laufzeit der Mitgliedschaft passt und erlischt, sobald sie nicht mehr gebraucht wird.",
       "highlights": [
         {
           "icon": "calendar",
-          "title": "Der Zutritt öffnet mit der Buchung",
+          "title": "Mit der Buchung kommt der Zutritt",
           "text": "Wer einen Platz für eine bestimmte Stunde gebucht hat, erhält eine Berechtigung, die dann beginnt und am Ende der Stunde erlischt. Niemand muss am Tor warten, um aufzuschließen."
         },
         {
@@ -513,12 +513,12 @@ export default {
         {
           "icon": "clock",
           "title": "Zutrittszeiten, die Sie festlegen",
-          "text": "Erlauben Sie den Zutritt nur während der Öffnungszeiten der Anlage oder geben Sie einem Mieter ein größeres Zeitfenster. Ein Umzugsunternehmen oder ein Familienmitglied kann einen einmaligen Zutritt für einen einzigen Tag erhalten."
+          "text": "Erlauben Sie den Zutritt nur während der Öffnungszeiten der Anlage oder geben Sie einem Mieter ein größeres Zeitfenster. Umzugshelfer oder Familienmitglieder können einen einmaligen Zutritt für einen einzigen Tag erhalten."
         },
         {
           "icon": "history",
           "title": "Wissen, wer wann da war",
-          "text": "Jede Öffnung wird mit Person und Uhrzeit erfasst. So beantwortet die Zutrittshistorie eine Frage zu einem Besuch, nicht erst die Aufnahmen der Überwachungskamera."
+          "text": "Jede Öffnung wird mit Person und Uhrzeit erfasst. Fragen zu einem Besuch beantwortet so die Zutrittshistorie, nicht erst das Videomaterial der Überwachungskamera."
         }
       ],
       "paragraph": "Lageranlagen und Schließfachräume setzen meist auf gemeinsame Codes, Codetastaturen und physische Schlüssel, die kopiert, weitergegeben und selten geändert werden. WIFIGATE verlagert den Zutritt auf das Smartphone: Jeder Mieter hat eine persönliche Berechtigung für das Tor der Anlage, den Gebäudeeingang und, sofern vorhanden, ein elektrisch verriegeltes Lagerabteil oder Schließfach – beschränkt auf die von Ihnen gewählten Zeiten und entzogen, sobald die Miete endet. Das Smartphone kommuniziert direkt mit dem Gerät vor Ort, ohne SIM-Karte und ohne Internetverbindung an der Tür, und ohne monatliches Abo für die Standardnutzung.",
@@ -532,13 +532,13 @@ export default {
         "Keine gemeinsamen Codes, Tastaturen oder Schlüssel zum Austauschen",
         "Keine SIM-Karte und keine Internetverbindung an der Tür"
       ],
-      "seoTitle": "Smarte Zutrittskontrolle für Lagerräume und Schließfächer | WIFIGATE",
-      "seoDescription": "WIFIGATE gibt jedem Mieter eines Lagerraums oder Schließfachs persönlichen Zutritt per Smartphone zu Tor, Türen und seinem Schließfach – beschränkt auf die Öffnungszeiten, in der Historie erfasst und entzogen, wenn die Miete endet.",
+      "seoTitle": "Smarter Zutritt für Lagerräume und Schließfächer | WIFIGATE",
+      "seoDescription": "WIFIGATE gibt jedem Mieter von Lagerraum oder Schließfach persönlichen Zutritt per Smartphone: nur zu Öffnungszeiten, protokolliert und mit Mietende entzogen.",
       "imageAlt": "Frau öffnet mit dem Smartphone die Tür einer Lageranlage mit Schließfächern und Lagerabteilen",
       "faq": [
         {
           "question": "Wie öffnen Mieter das Tor und ihr Schließfach?",
-          "answer": "Mit dem Smartphone, über eine persönliche Berechtigung für das Tor der Anlage, den Gebäudeeingang und, wo installiert, einen elektrisch verriegelten Lagerraum oder ein Schließfach."
+          "answer": "Mit dem Smartphone, über eine persönliche Berechtigung für das Tor der Anlage, den Gebäudeeingang und, wo installiert, ein elektrisch verriegeltes Lagerabteil oder Schließfach."
         },
         {
           "question": "Lässt sich der Zutritt auf die Öffnungszeiten beschränken?",

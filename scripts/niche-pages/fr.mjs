@@ -4,7 +4,7 @@
 export default {
   "home": {
     "seoTitle": "WIFIGATE | Accès intelligent pour portails, portes et parkings",
-    "seoDescription": "WIFIGATE, le contrôle d'accès intelligent pour ouvrir portails, portes, parkings, volets et garages depuis votre téléphone. Sécurisé, chiffré, pratique et sans abonnement mensuel.",
+    "seoDescription": "WIFIGATE, le contrôle d'accès intelligent pour ouvrir portails, portes, parkings, volets roulants et garages depuis votre téléphone. Sécurisé, chiffré, pratique et sans abonnement mensuel.",
     "keywords": "WIFIGATE, WiFi Gate, wifi gate, contrôle d'accès intelligent, ouvrir un portail depuis le téléphone, portail électrique, contrôle d'accès, sans abonnement mensuel"
   },
   "where": {
@@ -14,13 +14,13 @@ export default {
   "niches": {
     "hotels-airbnb": {
       "label": "Hôtels, Airbnb et locations saisonnières",
-      "title": "Votre voyageur est arrivé : il n'a pas à attendre qu'on lui ouvre !",
-      "heroLead": "Une carte à émettre, une clé à remettre ou un code de boîte à clés qui passe d'un voyageur à l'autre : chaque arrivée devient une affaire de coordination manuelle. Donnez à chaque voyageur une autorisation personnelle qui s'ouvre à l'arrivée et se ferme au départ.",
+      "title": "Votre voyageur est arrivé ? Il n'a plus à attendre qu'on lui ouvre !",
+      "heroLead": "Une carte à émettre, une clé à remettre ou un code de boîte à clés qui passe d'un voyageur à l'autre : chaque arrivée devient une affaire de coordination manuelle. Donnez à chaque voyageur une autorisation personnelle, active de l'arrivée jusqu'au départ.",
       "highlights": [
         {
           "icon": "calendar",
-          "title": "Ouverte à l'arrivée, fermée au départ",
-          "text": "Personne n'a à penser à révoquer l'accès. L'autorisation prend effet à l'heure d'arrivée prévue et expire à l'heure de départ, même quand aucun membre de l'équipe n'est sur place."
+          "title": "Valable de l'arrivée au départ",
+          "text": "Plus personne n'a à penser à couper l'accès. L'autorisation s'active à l'heure d'arrivée prévue et expire à l'heure de départ, même quand aucun membre de l'équipe n'est sur place."
         },
         {
           "icon": "invite",
@@ -70,8 +70,8 @@ export default {
     },
     "roller-shutters": {
       "label": "Rideaux métalliques pour commerces et boutiques",
-      "title": "La commande de votre rideau n'a pas à être exposée à l'extérieur du commerce !",
-      "heroLead": "Un interrupteur, un contacteur à clé ou une télécommande qui se trouve dehors ou passe d'un employé à l'autre peut tomber entre de mauvaises mains. Placez la commande du côté intérieur et protégé du commerce, et ouvrez le rideau depuis votre téléphone avec une autorisation personnelle pour chaque employé.",
+      "title": "La commande de votre rideau n'a rien à faire dehors !",
+      "heroLead": "Un interrupteur, un contacteur à clé ou une télécommande qui se trouve dehors ou passe d'un employé à l'autre peut tomber entre de mauvaises mains. Ramenez la commande à l'intérieur, à l'abri, et ouvrez le rideau depuis votre téléphone avec une autorisation personnelle pour chaque employé.",
       "highlights": [
         {
           "icon": "shutter",
@@ -81,12 +81,12 @@ export default {
         {
           "icon": "users",
           "title": "Une autorisation distincte pour chaque employé",
-          "text": "Une clé ou une télécommande restée chez un ancien employé continue de fonctionner. Une autorisation personnelle s'ouvre le premier jour et se ferme le dernier, sans changer de serrure ni récupérer de matériel."
+          "text": "Une clé ou une télécommande restée chez un ancien employé continue de fonctionner. Une autorisation personnelle est active du premier au dernier jour, sans changer de serrure ni récupérer de matériel."
         },
         {
           "icon": "phone",
           "title": "Ouvrir sans se tenir devant le rideau",
-          "text": "Ouvrir avec une clé oblige à se tenir collé au point de commande, les mains prises et sans bonne visibilité sur la zone du rideau. Depuis le téléphone, l'ouverture se fait à une distance plus sûre."
+          "text": "Ouvrir avec une clé oblige à se tenir collé au point de commande, les mains prises et sans bonne visibilité sur la zone du rideau. Depuis le téléphone, vous ouvrez à bonne distance, en toute sécurité."
         }
       ],
       "paragraph": "Dans les commerces et les boutiques, les rideaux métalliques sont souvent commandés par des télécommandes, des clés, un contacteur à clé extérieur ou des interrupteurs installés à l'extérieur du local. Ces solutions peuvent se perdre, rester entre les mains d'anciens employés, être dupliquées ou devenir un point d'accès exposé. Ouvrir ou fermer avec une clé oblige aussi à se tenir tout près du point de commande, la clé à la main, parfois sans bonne visibilité sur la zone du rideau. WIFIGATE transfère la commande vers l'application et place le contrôle d'accès du côté intérieur, mieux protégé : vous ouvrez et fermez plus confortablement, gérez les autorisations de vos employés et prestataires, et réduisez la dépendance aux clés, aux télécommandes et aux points d'accès exposés.",
@@ -98,7 +98,7 @@ export default {
         "Gestion des autorisations pour employés, responsables et prestataires",
         "Accès temporaire possible selon l'horaire ou le besoin",
         "Convient aux boutiques, entrepôts, entrées de service et commerces",
-        "Une solution intérieure, ordonnée et plus sûre au quotidien"
+        "Une commande à l'intérieur, mieux organisée et plus sûre au quotidien"
       ],
       "seoTitle": "Rideau métallique connecté pour commerces et boutiques | WIFIGATE",
       "seoDescription": "WIFIGATE pilote les rideaux métalliques de votre commerce depuis le téléphone : gestion des autorisations, moins de clés et de télécommandes, accès exposés réduits.",
@@ -135,7 +135,7 @@ export default {
         {
           "icon": "clock",
           "title": "Accès temporaire pour un prestataire ou un invité",
-          "text": "Au lieu de recevoir des appels pour ouvrir le portail au mauvais moment, envoyez une autorisation valable uniquement pendant le créneau où elle est vraiment nécessaire, puis elle se ferme d'elle-même."
+          "text": "Au lieu de recevoir des appels pour ouvrir le portail au mauvais moment, envoyez une autorisation valable uniquement sur le créneau utile, qui expire ensuite d'elle-même."
         },
         {
           "icon": "gate",
@@ -178,8 +178,8 @@ export default {
     },
     "garage-doors": {
       "label": "Portes de garage et parkings privés",
-      "title": "Une télécommande RF bon marché peut être facile à copier !",
-      "heroLead": "Les télécommandes RF basiques peuvent être faciles à copier et donner accès à des personnes qui n'ont jamais été autorisées. WIFIGATE protège l'accès grâce à des couches de sécurité avancées, un stockage chiffré et le respect de la vie privée des utilisateurs.",
+      "title": "Une télécommande RF premier prix peut se copier facilement !",
+      "heroLead": "Les télécommandes RF d'entrée de gamme peuvent se copier facilement et ouvrir à des personnes qui n'ont jamais été autorisées. WIFIGATE protège l'accès grâce à des couches de sécurité avancées, un stockage chiffré et le respect de la vie privée des utilisateurs.",
       "highlights": [
         {
           "icon": "keyless",
@@ -193,7 +193,7 @@ export default {
         },
         {
           "icon": "phone",
-          "title": "Réduisez la dépendance aux supports physiques",
+          "title": "Moins de dépendance aux supports physiques",
           "text": "Au lieu d'avoir une télécommande par voiture et par utilisateur, ouvrez avec le téléphone que vous avez déjà sur vous. Moins de télécommandes à acheter, programmer, remettre et gérer."
         }
       ],
@@ -232,23 +232,23 @@ export default {
     },
     "private-homes": {
       "label": "Maisons individuelles",
-      "title": "Une maison privée n'a pas vocation à être publique !",
-      "heroLead": "Le code d'interphone que vous avez donné à un livreur, à un technicien ou à un invité reste en sa possession bien après la visite, et circule sans que vous le sachiez. Donnez à chacun une autorisation d'accès personnelle et limitée dans le temps, et réduisez les entrées non autorisées et le risque de vol.",
+      "title": "Votre maison n'est pas un lieu public !",
+      "heroLead": "Le code d'entrée que vous avez donné à un livreur, à un technicien ou à un invité reste en sa possession bien après la visite, et circule sans que vous le sachiez. Donnez à chacun une autorisation d'accès personnelle et limitée dans le temps, pour limiter les entrées non autorisées et le risque de vol.",
       "highlights": [
         {
           "icon": "keyless",
-          "title": "Le code d'interphone continue de circuler",
+          "title": "Votre code d'entrée circule sans vous",
           "text": "Le code passe aux livreurs, aux techniciens et aux invités, puis plus loin encore, sans que vous le sachiez. Et au bout de quelques années, les quatre touches usées du clavier révèlent à elles seules les chiffres qui le composent."
         },
         {
           "icon": "clock",
-          "title": "Une autorisation qui expire seule réduit le risque",
+          "title": "Un accès qui expire tout seul, c'est moins de risque",
           "text": "Un livreur qui a besoin de cinq minutes obtient cinq minutes. Quand l'autorisation expire d'elle-même, il ne reste aucun moyen d'entrer pour qui ne devrait plus entrer : c'est ce qui réduit les entrées non autorisées et le risque de vol."
         },
         {
           "icon": "roster",
           "title": "Une liste plutôt que des suppositions",
-          "text": "Un code partagé n'a pas de liste de détenteurs. À la place, une liste où chaque autorisation porte un nom : à tout moment, vous savez qui peut entrer dans la maison."
+          "text": "Un code partagé, personne ne sait qui le détient. À la place, une liste nominative : à tout moment, vous savez qui peut entrer chez vous."
         }
       ],
       "paragraph": "Dans une maison individuelle, digicodes, clés et télécommandes peuvent devenir un point faible. Avec le temps, l'usure ou des traces apparaissent sur les touches du digicode, les télécommandes se perdent ou passent de main en main, et le code est parfois communiqué à des livreurs, des techniciens ou des invités qui le conservent bien après en avoir eu besoin. WIFIGATE vous permet de gérer l'entrée depuis le téléphone, de partager un accès invité temporaire sans révéler de code permanent, et de révoquer facilement les autorisations sans remplacer serrures, codes ou télécommandes.",
@@ -286,13 +286,13 @@ export default {
     },
     "residential-buildings": {
       "label": "Immeubles résidentiels",
-      "title": "Un immeuble résidentiel n'a pas vocation à être public !",
-      "heroLead": "Un code fixe qui circule entre livreurs, invités et intervenants peut tomber entre de mauvaises mains. Donnez à chacun une autorisation d'accès personnelle et limitée dans le temps, et réduisez les entrées non autorisées et le risque de vol.",
+      "title": "Votre immeuble n'est pas un lieu public !",
+      "heroLead": "Un code fixe qui circule entre livreurs, invités et intervenants peut tomber entre de mauvaises mains. Donnez à chacun une autorisation d'accès personnelle et limitée dans le temps, pour limiter les entrées non autorisées et le risque de vol.",
       "highlights": [
         {
           "icon": "roster",
           "title": "Savoir à tout moment qui détient un accès",
-          "text": "Un code partagé n'a pas de liste de détenteurs. Impossible de savoir qui l'a, qui l'a transmis ni quand. À la place, une liste à jour où chaque autorisation porte un nom : vous avez à tout moment une vision claire des accès à l'immeuble."
+          "text": "Un code partagé, personne ne sait qui le détient. Impossible de savoir qui l'a, qui l'a transmis ni quand. À la place, une liste nominative toujours à jour : vous avez à tout moment une vision claire des accès à l'immeuble."
         },
         {
           "icon": "invite",
@@ -317,7 +317,7 @@ export default {
         "Accès des nouveaux locataires dès le jour de l'emménagement, sans remise de clés"
       ],
       "seoTitle": "Contrôle d'accès pour immeubles résidentiels | WIFIGATE",
-      "seoDescription": "WIFIGATE apporte une gestion d'accès intelligente aux immeubles résidentiels : ouverture depuis le téléphone, autorisations invité temporaires, moins de digicodes et plus de transparence.",
+      "seoDescription": "WIFIGATE apporte une gestion d'accès intelligente aux immeubles résidentiels : ouverture depuis le téléphone, accès invités temporaires, moins de digicodes et plus de transparence.",
       "imageAlt": "Une résidente ouvre l'entrée d'un immeuble résidentiel avec son téléphone",
       "faq": [
         {
@@ -326,7 +326,7 @@ export default {
         },
         {
           "question": "Comment les invités et les livreurs entrent-ils ?",
-          "answer": "Un résident envoie une invitation invité limitée dans le temps, avec les indications d'arrivée en un clic, sans révéler de code permanent."
+          "answer": "Un résident envoie une invitation limitée dans le temps, avec les indications d'arrivée en un clic, sans révéler de code permanent."
         },
         {
           "question": "Le conseil syndical peut-il voir qui a accès ?",
@@ -340,13 +340,13 @@ export default {
     },
     "office-buildings": {
       "label": "Immeubles de bureaux",
-      "title": "Entrer au bureau ne devrait pas passer par l'accueil !",
+      "title": "Pour entrer au bureau, plus besoin de passer par l'accueil !",
       "heroLead": "Visiteurs, candidats et fournisseurs attendent que quelqu'un descende leur ouvrir, et les employés reçoivent des badges ou des clés qu'il faut récupérer à leur départ. Donnez à chacun une autorisation personnelle : permanente pour les employés, limitée dans le temps pour tous les autres.",
       "highlights": [
         {
           "icon": "users",
-          "title": "Un employé arrive, un employé part",
-          "text": "L'arrivée et le départ d'un employé se résument à une action dans une liste, et non à un cycle d'émission de badge, de récupération de badge et de changement de serrure. L'autorisation s'ouvre et se ferme aux dates que vous fixez."
+          "title": "Arrivée ou départ d'un salarié : une seule action",
+          "text": "L'arrivée et le départ d'un salarié se règlent en une action dans une liste, sans le ballet habituel : badge à émettre, badge à récupérer, serrure à changer. L'autorisation s'active et expire aux dates que vous fixez."
         },
         {
           "icon": "invite",
@@ -418,7 +418,7 @@ export default {
         "Convient aux portes d'entrée à serrure électrique ou magnétique",
         "Ouverture depuis le téléphone pour employés et responsables",
         "Accès temporaire pour invités, fournisseurs et techniciens",
-        "Moins besoin d'un digicode ou d'un code permanent",
+        "Moins de dépendance au digicode et aux codes permanents",
         "Convient aux petites entreprises, cabinets, studios et bureaux",
         "Une gestion des autorisations plus simple et plus sûre",
         "Moins de clés physiques à gérer",
@@ -449,22 +449,22 @@ export default {
     "sports-facilities": {
       "label": "Installations sportives",
       "title": "Le code d'entrée de votre complexe n'a rien à faire dans le groupe WhatsApp !",
-      "heroLead": "Un code partagé qui circule entre abonnés, coachs et visiteurs continue d'ouvrir même quand il ne le devrait plus. Donnez à chacun une autorisation personnelle adaptée aux horaires d'ouverture et à la durée de l'abonnement, qui se ferme quand elle n'est plus utile.",
+      "heroLead": "Un code partagé qui circule entre abonnés, coachs et visiteurs continue d'ouvrir même quand il ne le devrait plus. Donnez à chacun une autorisation personnelle adaptée aux horaires d'ouverture et à la durée de l'abonnement, qui expire dès qu'elle n'est plus utile.",
       "highlights": [
         {
           "icon": "calendar",
-          "title": "L'accès s'ouvre selon la réservation",
-          "text": "Celui qui a réservé un terrain pour une heure donnée reçoit une autorisation qui s'ouvre à ce moment-là et se ferme à la fin du créneau. Personne n'a à attendre au portail pour lui ouvrir."
+          "title": "L'accès suit la réservation",
+          "text": "Celui qui a réservé un terrain pour une heure donnée reçoit une autorisation active à ce moment-là, qui expire à la fin du créneau. Personne n'a à attendre au portail pour lui ouvrir."
         },
         {
           "icon": "users",
-          "title": "Abonné, coach et visiteur : ce n'est pas la même chose",
+          "title": "Abonné, coach, visiteur : à chacun son accès",
           "text": "Chaque type d'utilisateur reçoit sa propre autorisation : l'abonné régulier, le coach qui vient certains jours et le visiteur occasionnel. Tous dans une seule liste, sans clé qui passe de main en main."
         },
         {
           "icon": "history",
           "title": "Savoir qui était sur place, et quand",
-          "text": "Quand la fréquentation varie au fil de la journée, l'historique des entrées aide l'exploitation, facilite l'examen des incidents et confirme que le site a bien été fermé en fin de journée."
+          "text": "Quand la fréquentation varie au fil de la journée, l'historique des entrées aide l'exploitation, aide à tirer au clair les incidents et confirme que le site a bien été fermé en fin de journée."
         }
       ],
       "paragraph": "Installations sportives, terrains de padel, courts de tennis, salles de sport et centres d'entraînement doivent gérer les accès des abonnés, coachs, équipes et visiteurs selon les horaires d'ouverture, les réservations et les événements. WIFIGATE permet d'accorder un accès temporaire ou permanent depuis le téléphone, de réduire la dépendance à une clé ou à un code partagé, et d'améliorer l'expérience d'entrée des utilisateurs, en particulier dans les complexes où la fréquentation varie au fil de la journée.",
@@ -501,14 +501,14 @@ export default {
       ]
     },
     "storage-lockers": {
-      "label": "Stockage et casiers",
+      "label": "Espaces de stockage et casiers",
       "title": "Accès intelligent pour espaces de stockage et casiers",
       "heroLead": "Chaque locataire ouvre le portail du site, la porte du bâtiment et son propre casier depuis son téléphone, uniquement aux horaires que vous autorisez. Quand la location prend fin, son accès aussi : aucune clé à récupérer, aucun code à changer.",
       "highlights": [
         {
           "icon": "users",
           "title": "Une autorisation personnelle pour chaque locataire",
-          "text": "Plus de code partagé dont les anciens locataires se souviennent encore. Chaque locataire dispose de son propre accès, et le retirer ne prend qu'un instant à la fin du contrat ou en cas d'impayé."
+          "text": "Fini le code partagé dont les anciens locataires se souviennent encore. Chaque locataire dispose de son propre accès, et le retirer ne prend qu'un instant à la fin du contrat ou en cas d'impayé."
         },
         {
           "icon": "clock",
@@ -533,7 +533,7 @@ export default {
         "Ni carte SIM ni connexion internet à la porte"
       ],
       "seoTitle": "Contrôle d'accès pour espaces de stockage et casiers | WIFIGATE",
-      "seoDescription": "WIFIGATE donne à chaque locataire d'un espace de stockage un accès personnel par téléphone au portail, aux portes et à son casier, limité aux horaires d'ouverture, enregistré dans l'historique et retiré à la fin de la location.",
+      "seoDescription": "WIFIGATE donne à chaque locataire un accès personnel par téléphone au portail, aux portes et à son casier, limité aux horaires d'ouverture et retiré en fin de location.",
       "imageAlt": "Une femme ouvre avec son téléphone la porte d'un site de stockage avec casiers et box",
       "faq": [
         {

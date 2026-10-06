@@ -8,7 +8,7 @@ window.WIFIGATE_COOKIE_COPY = {
     "settings": "Settings",
     "accept": "Accept All",
     "reject": "Reject All",
-    "save": "Save choice",
+    "save": "Save preferences",
     "necessary": "Necessary cookies",
     "necessaryHelp": "Needed for the site to work and remember your preferences. Always active.",
     "alwaysOn": "Always active",
@@ -16,7 +16,7 @@ window.WIFIGATE_COOKIE_COPY = {
     "analyticsHelp": "Google Analytics measures site usage only if you allow it.",
     "reopen": "Cookie settings",
     "close": "Close settings",
-    "banner": "We use cookies to analyse site traffic with Google Analytics. Analytics runs only if you agree. More information:"
+    "banner": "We use cookies to analyze site traffic with Google Analytics. Analytics runs only if you agree. More information:"
   },
   "he": {
     "title": "העדפות פרטיות ועוגיות",
@@ -44,7 +44,7 @@ window.WIFIGATE_COOKIE_COPY = {
     "settings": "Configuración",
     "accept": "Aceptar todo",
     "reject": "Rechazar todo",
-    "save": "Guardar elección",
+    "save": "Guardar selección",
     "necessary": "Cookies necesarias",
     "necessaryHelp": "Necesarias para que el sitio funcione y recuerde tus preferencias. Siempre activas.",
     "alwaysOn": "Siempre activas",
@@ -112,7 +112,7 @@ window.WIFIGATE_COOKIE_COPY = {
     "title": "Preferenze sulla privacy e sui cookie",
     "description": "Usiamo i cookie necessari per il funzionamento del sito. Con il tuo consenso usiamo anche Google Analytics per capire come viene usato il sito e migliorarlo. Puoi modificare la tua scelta in qualsiasi momento.",
     "privacy": "Informativa sulla privacy",
-    "cookies": "Politica sui cookie",
+    "cookies": "Informativa sui cookie",
     "settings": "Impostazioni",
     "accept": "Accetta tutto",
     "reject": "Rifiuta tutto",
@@ -134,7 +134,7 @@ window.WIFIGATE_COOKIE_COPY = {
     "settings": "Definições",
     "accept": "Aceitar tudo",
     "reject": "Rejeitar tudo",
-    "save": "Guardar escolha",
+    "save": "Guardar seleção",
     "necessary": "Cookies necessários",
     "necessaryHelp": "Necessários para o funcionamento do site e para guardar as suas preferências. Sempre ativos.",
     "alwaysOn": "Sempre ativo",
@@ -142,25 +142,25 @@ window.WIFIGATE_COOKIE_COPY = {
     "analyticsHelp": "O Google Analytics só mede a utilização do site se o permitir.",
     "reopen": "Definições de cookies",
     "close": "Fechar definições",
-    "banner": "Utilizamos cookies para analisar o tráfego do site com o Google Analytics. A medição só funciona com o seu consentimento. Mais informações:"
+    "banner": "Utilizamos cookies para analisar o tráfego do site com o Google Analytics. A análise só é ativada com o seu consentimento. Mais informações:"
   },
   "pl": {
     "title": "Prywatność i preferencje dotyczące plików cookie",
-    "description": "Do działania witryny używamy niezbędnych plików cookie. Za Twoją zgodą korzystamy też z Google Analytics, aby zrozumieć, jak używana jest witryna, i ją ulepszać. Możesz zmienić swój wybór w dowolnym momencie.",
+    "description": "Do działania strony używamy niezbędnych plików cookie. Za Twoją zgodą korzystamy też z Google Analytics, aby lepiej rozumieć, jak używasz strony, i ją ulepszać. Swój wybór możesz zmienić w dowolnym momencie.",
     "privacy": "Polityka prywatności",
     "cookies": "Polityka plików cookie",
     "settings": "Ustawienia",
-    "accept": "Zaakceptuj wszystko",
-    "reject": "Odrzuć wszystko",
+    "accept": "Akceptuj wszystkie",
+    "reject": "Odrzuć wszystkie",
     "save": "Zapisz wybór",
     "necessary": "Niezbędne pliki cookie",
     "necessaryHelp": "Potrzebne do działania strony i zapamiętywania Twoich preferencji. Zawsze aktywne.",
     "alwaysOn": "Zawsze aktywne",
     "analytics": "Analityczne pliki cookie",
-    "analyticsHelp": "Google Analytics mierzy wykorzystanie witryny tylko wtedy, gdy na to zezwolisz.",
+    "analyticsHelp": "Google Analytics mierzy ruch na stronie tylko wtedy, gdy na to zezwolisz.",
     "reopen": "Ustawienia plików cookie",
     "close": "Zamknij ustawienia",
-    "banner": "Używamy plików cookie do analizy ruchu w witrynie za pomocą Google Analytics. Pomiar działa tylko za Twoją zgodą. Więcej informacji:"
+    "banner": "Używamy plików cookie do analizy ruchu na stronie za pomocą Google Analytics. Pomiar działa tylko za Twoją zgodą. Więcej informacji:"
   },
   "no": {
     "title": "Personvern og informasjonskapsler",
@@ -240,8 +240,8 @@ window.WIFIGATE_COOKIE_COPY = {
     "privacy": "Gizlilik Politikası",
     "cookies": "Çerez Politikası",
     "settings": "Ayarlar",
-    "accept": "Tümünü Kabul Et",
-    "reject": "Tümünü Reddet",
+    "accept": "Tümünü kabul et",
+    "reject": "Tümünü reddet",
     "save": "Seçimi kaydet",
     "necessary": "Gerekli çerezler",
     "necessaryHelp": "Sitenin çalışması ve tercihlerinizi hatırlaması için gereklidir. Her zaman aktif.",
@@ -250,7 +250,7 @@ window.WIFIGATE_COOKIE_COPY = {
     "analyticsHelp": "Google Analytics, site kullanımını yalnızca siz izin verirseniz ölçer.",
     "reopen": "Çerez ayarları",
     "close": "Ayarları kapat",
-    "banner": "Site trafiğini Google Analytics ile analiz etmek için çerezler kullanıyoruz. Ölçüm yalnızca onay vermeniz halinde çalışır. Daha fazla bilgi:"
+    "banner": "Site trafiğini Google Analytics ile analiz etmek için çerezler kullanıyoruz. Ölçüm yalnızca onay vermeniz durumunda çalışır. Daha fazla bilgi:"
   },
   "ar": {
     "title": "تفضيلات الخصوصية وملفات تعريف الارتباط",
@@ -271,25 +271,25 @@ window.WIFIGATE_COOKIE_COPY = {
     "banner": "نستخدم ملفات تعريف الارتباط لتحليل حركة الزيارات على الموقع عبر Google Analytics. لا يعمل القياس إلا بموافقتك. لمزيد من المعلومات:"
   },
   "hi": {
-    "title": "गोपनीयता और कुकी प्राथमिकताएँ",
+    "title": "प्राइवेसी और कुकी सेटिंग्स",
     "description": "साइट चलाने के लिए हम ज़रूरी कुकीज़ का इस्तेमाल करते हैं। आपकी सहमति से हम Google Analytics का भी इस्तेमाल करेंगे, ताकि समझ सकें कि साइट कैसे इस्तेमाल होती है और उसे बेहतर बना सकें। आप अपनी पसंद कभी भी बदल सकते हैं।",
-    "privacy": "गोपनीयता नीति",
-    "cookies": "कुकी नीति",
+    "privacy": "प्राइवेसी पॉलिसी",
+    "cookies": "कुकी पॉलिसी",
     "settings": "सेटिंग्स",
     "accept": "सभी को स्वीकार करें",
     "reject": "सभी को अस्वीकार करें",
-    "save": "विकल्प सहेजें",
+    "save": "पसंद सेव करें",
     "necessary": "आवश्यक कुकीज़",
     "necessaryHelp": "साइट के काम करने और आपकी प्राथमिकताएँ याद रखने के लिए ज़रूरी हैं। हमेशा सक्रिय।",
     "alwaysOn": "हमेशा सक्रिय",
     "analytics": "एनालिटिक्स कुकीज़",
-    "analyticsHelp": "Google Analytics साइट उपयोग को केवल तभी मापता है जब आप इसकी अनुमति देते हैं।",
+    "analyticsHelp": "Google Analytics साइट के इस्तेमाल को सिर्फ़ तभी मापता है, जब आप इसकी अनुमति दें।",
     "reopen": "कुकी सेटिंग्स",
     "close": "सेटिंग्स बंद करें",
-    "banner": "हम Google Analytics के साथ साइट ट्रैफ़िक का विश्लेषण करने के लिए कुकीज़ का उपयोग करते हैं। यदि आप सहमत हैं तो ही एनालिटिक्स चलता है। अधिक जानकारी:"
+    "banner": "हम Google Analytics से साइट ट्रैफ़िक समझने के लिए कुकीज़ का इस्तेमाल करते हैं। एनालिटिक्स सिर्फ़ आपकी सहमति से चलता है। ज़्यादा जानकारी:"
   },
   "bn": {
-    "title": "গোপনীয়তা এবং কুকি পছন্দ",
+    "title": "গোপনীয়তা ও কুকি সেটিংস",
     "description": "সাইট চালানোর জন্য আমরা প্রয়োজনীয় কুকি ব্যবহার করি। আপনার সম্মতি থাকলে, সাইটটি কীভাবে ব্যবহার হয় তা বুঝতে ও সেটি আরও ভালো করতে আমরা Google Analytics-ও ব্যবহার করব। আপনি যেকোনো সময় আপনার পছন্দ বদলাতে পারেন।",
     "privacy": "গোপনীয়তা নীতি",
     "cookies": "কুকি নীতি",
@@ -299,15 +299,15 @@ window.WIFIGATE_COOKIE_COPY = {
     "save": "পছন্দ সংরক্ষণ করুন",
     "necessary": "প্রয়োজনীয় কুকি",
     "necessaryHelp": "সাইট চালু রাখতে ও আপনার পছন্দগুলো মনে রাখতে প্রয়োজন। সবসময় চালু থাকে।",
-    "alwaysOn": "সবসময় সক্রিয়",
+    "alwaysOn": "সবসময় চালু",
     "analytics": "অ্যানালিটিক্স কুকি",
     "analyticsHelp": "আপনি অনুমতি দিলেই Google Analytics সাইট ব্যবহার পরিমাপ করে।",
     "reopen": "কুকি সেটিংস",
     "close": "সেটিংস বন্ধ করুন",
-    "banner": "আমরা Google Analytics দিয়ে সাইটের ব্যবহার বিশ্লেষণ করতে কুকি ব্যবহার করি। আপনি সম্মতি দিলেই বিশ্লেষণ চালু হয়। আরও তথ্য:"
+    "banner": "সাইটের ব্যবহার বুঝতে আমরা Google Analytics-এর কুকি ব্যবহার করি। অ্যানালিটিক্স চলে শুধু আপনার সম্মতিতে। আরও তথ্য:"
   },
   "mr": {
-    "title": "गोपनीयता आणि कुकी प्राधान्ये",
+    "title": "गोपनीयता आणि कुकी सेटिंग्ज",
     "description": "साइट चालवण्यासाठी आम्ही आवश्यक कुकीज वापरतो. तुमच्या संमतीने, साइट कशी वापरली जाते हे समजून घेण्यासाठी आणि ती सुधारण्यासाठी आम्ही Google Analytics देखील वापरू. तुम्ही तुमची निवड कधीही बदलू शकता.",
     "privacy": "गोपनीयता धोरण",
     "cookies": "कुकी धोरण",
@@ -322,10 +322,10 @@ window.WIFIGATE_COOKIE_COPY = {
     "analyticsHelp": "तुम्ही परवानगी दिली तरच Google Analytics साइट वापर मोजते.",
     "reopen": "कुकी सेटिंग्ज",
     "close": "सेटिंग्ज बंद करा",
-    "banner": "आम्ही Google Analytics सह साइट रहदारीचे विश्लेषण करण्यासाठी कुकीज वापरतो. तुम्ही सहमत असाल तरच विश्लेषण चालते. अधिक माहिती:"
+    "banner": "साइटवरील रहदारी समजून घेण्यासाठी आम्ही Google Analytics च्या कुकीज वापरतो. तुमची संमती असेल तरच विश्लेषण चालते. अधिक माहिती:"
   },
   "te": {
-    "title": "గోప్యత మరియు కుక్కీ ప్రాధాన్యతలు",
+    "title": "గోప్యత, కుక్కీ సెట్టింగ్‌లు",
     "description": "సైట్ పనిచేయడానికి మేము అవసరమైన కుక్కీలను ఉపయోగిస్తాము. మీ సమ్మతితో, సైట్ ఎలా ఉపయోగించబడుతుందో అర్థం చేసుకుని దాన్ని మెరుగుపరచడానికి Google Analyticsను కూడా ఉపయోగిస్తాము. మీరు మీ ఎంపికను ఎప్పుడైనా మార్చుకోవచ్చు.",
     "privacy": "గోప్యతా విధానం",
     "cookies": "కుక్కీ విధానం",
@@ -334,10 +334,10 @@ window.WIFIGATE_COOKIE_COPY = {
     "reject": "అన్నింటినీ తిరస్కరించండి",
     "save": "ఎంపికను సేవ్ చేయండి",
     "necessary": "అవసరమైన కుక్కీలు",
-    "necessaryHelp": "సైట్ పని చేయడానికి మరియు మీ ప్రాధాన్యతలను గుర్తుంచుకోవడానికి అవసరం. ఎల్లప్పుడూ క్రియాశీలం.",
-    "alwaysOn": "ఎల్లప్పుడూ క్రియాశీలం",
+    "necessaryHelp": "సైట్ పని చేయడానికి, మీ ప్రాధాన్యతలను గుర్తుంచుకోవడానికి అవసరం. ఎప్పుడూ ఆన్‌లో ఉంటాయి.",
+    "alwaysOn": "ఎప్పుడూ ఆన్",
     "analytics": "అనలిటిక్స్ కుక్కీలు",
-    "analyticsHelp": "మీరు అనుమతించినట్లయితే మాత్రమే Google Analytics సైట్ వినియోగాన్ని కొలుస్తుంది.",
+    "analyticsHelp": "మీరు అనుమతిస్తేనే Google Analytics సైట్ వినియోగాన్ని కొలుస్తుంది.",
     "reopen": "కుక్కీ సెట్టింగ్‌లు",
     "close": "సెట్టింగ్‌లను మూసివేయండి",
     "banner": "Google Analytics ద్వారా సైట్ ట్రాఫిక్‌ను విశ్లేషించడానికి మేము కుక్కీలను ఉపయోగిస్తాము. మీరు అంగీకరిస్తేనే అనలిటిక్స్ పనిచేస్తుంది. మరింత సమాచారం:"
@@ -456,7 +456,7 @@ window.WIFIGATE_COOKIE_COPY = {
     "privacy": "Adatvédelmi szabályzat",
     "cookies": "Sütiszabályzat",
     "settings": "Beállítások",
-    "accept": "Az összes elfogadása",
+    "accept": "Összes elfogadása",
     "reject": "Összes elutasítása",
     "save": "Választás mentése",
     "necessary": "Szükséges sütik",
@@ -471,7 +471,7 @@ window.WIFIGATE_COOKIE_COPY = {
   "el": {
     "title": "Προτιμήσεις απορρήτου και cookies",
     "description": "Χρησιμοποιούμε απαραίτητα cookies για τη λειτουργία του ιστότοπου. Με τη συγκατάθεσή σας, χρησιμοποιούμε επίσης το Google Analytics για να κατανοούμε πώς χρησιμοποιείται ο ιστότοπος και να τον βελτιώνουμε. Μπορείτε να αλλάξετε την επιλογή σας ανά πάσα στιγμή.",
-    "privacy": "Πολιτική Απορρήτου",
+    "privacy": "Πολιτική απορρήτου",
     "cookies": "Πολιτική cookies",
     "settings": "Ρυθμίσεις",
     "accept": "Αποδοχή όλων",
@@ -481,7 +481,7 @@ window.WIFIGATE_COOKIE_COPY = {
     "necessaryHelp": "Απαιτούνται για τη λειτουργία του ιστότοπου και την αποθήκευση των προτιμήσεών σας. Πάντα ενεργά.",
     "alwaysOn": "Πάντα ενεργά",
     "analytics": "Cookies μέτρησης",
-    "analyticsHelp": "Το Google Analytics μετρά τη χρήση του ιστότοπου μόνο εάν το επιτρέπετε.",
+    "analyticsHelp": "Το Google Analytics μετρά τη χρήση του ιστότοπου μόνο αν το επιτρέψετε.",
     "reopen": "Ρυθμίσεις cookies",
     "close": "Κλείσιμο ρυθμίσεων",
     "banner": "Χρησιμοποιούμε cookies για να αναλύουμε την επισκεψιμότητα του ιστότοπου με το Google Analytics. Η μέτρηση γίνεται μόνο με τη συγκατάθεσή σας. Περισσότερες πληροφορίες:"
@@ -511,8 +511,8 @@ window.WIFIGATE_COOKIE_COPY = {
     "cookies": "Pravila o kolačićima",
     "settings": "Postavke",
     "accept": "Prihvati sve",
-    "reject": "Odbaci sve",
-    "save": "Spremi izbor",
+    "reject": "Odbij sve",
+    "save": "Spremi odabir",
     "necessary": "Nužni kolačići",
     "necessaryHelp": "Potrebni su za rad stranice i pamćenje vaših postavki. Uvijek aktivni.",
     "alwaysOn": "Uvijek aktivan",
@@ -570,21 +570,21 @@ window.WIFIGATE_COOKIE_COPY = {
     "necessary": "Неопходни колачићи",
     "necessaryHelp": "Потребни су за рад сајта и чување ваших подешавања. Увек активни.",
     "alwaysOn": "Увек активни",
-    "analytics": "Колачићи аналитике",
+    "analytics": "Аналитички колачићи",
     "analyticsHelp": "Google Analytics мери коришћење сајта само ако то дозволите.",
     "reopen": "Подешавања колачића",
     "close": "Затвори подешавања",
     "banner": "Користимо колачиће за анализу саобраћаја на сајту помоћу Google Analytics. Мерење ради само уз вашу сагласност. Више информација:"
   },
   "sk": {
-    "title": "Predvoľby ochrany osobných údajov a súborov cookie",
+    "title": "Nastavenia súkromia a súborov cookie",
     "description": "Na prevádzku webu používame nevyhnutné súbory cookie. S vaším súhlasom používame aj Google Analytics, aby sme pochopili, ako sa web používa, a mohli ho zlepšovať. Svoju voľbu môžete kedykoľvek zmeniť.",
     "privacy": "Zásady ochrany osobných údajov",
     "cookies": "Zásady používania súborov cookie",
     "settings": "Nastavenia",
     "accept": "Prijať všetko",
     "reject": "Odmietnuť všetko",
-    "save": "Uložiť voľbu",
+    "save": "Uložiť nastavenia",
     "necessary": "Nevyhnutné súbory cookie",
     "necessaryHelp": "Potrebné na fungovanie webu a zapamätanie vašich preferencií. Vždy aktívne.",
     "alwaysOn": "Vždy aktívne",
@@ -596,7 +596,7 @@ window.WIFIGATE_COOKIE_COPY = {
   },
   "sl": {
     "title": "Nastavitve zasebnosti in piškotkov",
-    "description": "Za delovanje spletnega mesta uporabljamo nujne piškotke. Z vašim soglasjem uporabljamo tudi Google Analytics, da razumemo, kako se spletno mesto uporablja, in ga izboljšamo. Svojo izbiro lahko kadar koli spremenite.",
+    "description": "Za delovanje spletnega mesta uporabljamo nujne piškotke. Z vašim soglasjem uporabljamo tudi Google Analytics, da bolje razumemo uporabo spletnega mesta in ga izboljšujemo. Svojo izbiro lahko kadar koli spremenite.",
     "privacy": "Politika zasebnosti",
     "cookies": "Politika piškotkov",
     "settings": "Nastavitve",
@@ -610,7 +610,7 @@ window.WIFIGATE_COOKIE_COPY = {
     "analyticsHelp": "Google Analytics meri uporabo spletnega mesta le, če to dovolite.",
     "reopen": "Nastavitve piškotkov",
     "close": "Zapri nastavitve",
-    "banner": "Piškotke uporabljamo za analizo prometa spletnega mesta s storitvijo Google Analytics. Analitika se izvaja samo, če se strinjate. Več informacij:"
+    "banner": "Piškotke uporabljamo za analizo obiska spletnega mesta s storitvijo Google Analytics. Analitika deluje samo z vašim soglasjem. Več informacij:"
   },
   "id": {
     "title": "Preferensi privasi dan cookie",
