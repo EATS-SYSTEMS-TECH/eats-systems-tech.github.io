@@ -34,10 +34,10 @@ export const NICHE_CHROME = {
     "faqTitle": "Questions fréquentes"
   },
   "de": {
-    "eyebrow": "WIFIGATE Anwendungsfall",
+    "eyebrow": "WIFIGATE-Anwendungsfall",
     "benefitsTitle": "Wichtigste Vorteile",
     "homeLabel": "Start",
-    "relatedTitle": "Weitere Einsatzbereiche von WIFIGATE",
+    "relatedTitle": "Weitere Anwendungsfälle von WIFIGATE",
     "faqTitle": "Häufige Fragen"
   },
   "nl": {
@@ -55,10 +55,10 @@ export const NICHE_CHROME = {
     "faqTitle": "Domande frequenti"
   },
   "pt": {
-    "eyebrow": "Caso de uso do WIFIGATE",
+    "eyebrow": "Caso de utilização da WIFIGATE",
     "benefitsTitle": "Principais benefícios",
     "homeLabel": "Início",
-    "relatedTitle": "Mais casos de utilização do WIFIGATE",
+    "relatedTitle": "Mais casos de utilização da WIFIGATE",
     "faqTitle": "Perguntas frequentes"
   },
   "pl": {
@@ -69,7 +69,7 @@ export const NICHE_CHROME = {
     "faqTitle": "Najczęściej zadawane pytania"
   },
   "no": {
-    "eyebrow": "WIFIGATE bruksområde",
+    "eyebrow": "WIFIGATE-bruksområde",
     "benefitsTitle": "Viktigste fordeler",
     "homeLabel": "Hjem",
     "relatedTitle": "Flere bruksområder for WIFIGATE",
@@ -77,7 +77,7 @@ export const NICHE_CHROME = {
   },
   "cs": {
     "eyebrow": "Využití WIFIGATE",
-    "benefitsTitle": "Klíčové přínosy",
+    "benefitsTitle": "Hlavní výhody",
     "homeLabel": "Domů",
     "relatedTitle": "Další využití WIFIGATE",
     "faqTitle": "Časté dotazy"
@@ -86,35 +86,35 @@ export const NICHE_CHROME = {
     "eyebrow": "Сценарий применения WIFIGATE",
     "benefitsTitle": "Ключевые преимущества",
     "homeLabel": "Главная",
-    "relatedTitle": "Другие сценарии использования WIFIGATE",
+    "relatedTitle": "Другие сценарии применения WIFIGATE",
     "faqTitle": "Частые вопросы"
   },
   "uk": {
     "eyebrow": "Сценарій застосування WIFIGATE",
     "benefitsTitle": "Ключові переваги",
     "homeLabel": "Головна",
-    "relatedTitle": "Інші сценарії використання WIFIGATE",
+    "relatedTitle": "Інші сценарії застосування WIFIGATE",
     "faqTitle": "Поширені запитання"
   },
   "tr": {
     "eyebrow": "WIFIGATE kullanım senaryosu",
     "benefitsTitle": "Temel avantajlar",
     "homeLabel": "Ana sayfa",
-    "relatedTitle": "WIFIGATE'in diğer kullanım alanları",
+    "relatedTitle": "Diğer WIFIGATE kullanım senaryoları",
     "faqTitle": "Sık sorulan sorular"
   },
   "ar": {
     "eyebrow": "حالة استخدام WIFIGATE",
     "benefitsTitle": "أهم المزايا",
     "homeLabel": "الرئيسية",
-    "relatedTitle": "استخدامات أخرى لـ WIFIGATE",
+    "relatedTitle": "حالات استخدام أخرى لـ WIFIGATE",
     "faqTitle": "الأسئلة الشائعة"
   },
   "hi": {
-    "eyebrow": "WIFIGATE उपयोग परिदृश्य",
+    "eyebrow": "WIFIGATE के इस्तेमाल का उदाहरण",
     "benefitsTitle": "मुख्य लाभ",
     "homeLabel": "होम",
-    "relatedTitle": "WIFIGATE के अन्य उपयोग",
+    "relatedTitle": "WIFIGATE के इस्तेमाल के और उदाहरण",
     "faqTitle": "अक्सर पूछे जाने वाले प्रश्न"
   },
   "bn": {
@@ -156,7 +156,7 @@ export const NICHE_CHROME = {
     "eyebrow": "WIFIGATE の活用シーン",
     "benefitsTitle": "主なメリット",
     "homeLabel": "ホーム",
-    "relatedTitle": "WIFIGATE のその他の活用例",
+    "relatedTitle": "WIFIGATE のその他の活用シーン",
     "faqTitle": "よくある質問"
   },
   "ko": {
@@ -181,7 +181,7 @@ export const NICHE_CHROME = {
     "faqTitle": "Vanliga frågor"
   },
   "hu": {
-    "eyebrow": "WIFIGATE felhasználási eset",
+    "eyebrow": "WIFIGATE felhasználási terület",
     "benefitsTitle": "Fő előnyök",
     "homeLabel": "Kezdőlap",
     "relatedTitle": "A WIFIGATE további felhasználási területei",
@@ -191,7 +191,7 @@ export const NICHE_CHROME = {
     "eyebrow": "Περίπτωση χρήσης WIFIGATE",
     "benefitsTitle": "Βασικά πλεονεκτήματα",
     "homeLabel": "Αρχική",
-    "relatedTitle": "Περισσότερες χρήσεις του WIFIGATE",
+    "relatedTitle": "Περισσότερες περιπτώσεις χρήσης του WIFIGATE",
     "faqTitle": "Συχνές ερωτήσεις"
   },
   "ro": {
@@ -216,24 +216,24 @@ export const NICHE_CHROME = {
     "faqTitle": "Usein kysytyt kysymykset"
   },
   "bg": {
-    "eyebrow": "Приложение на WIFIGATE",
+    "eyebrow": "Сценарий за употреба на WIFIGATE",
     "benefitsTitle": "Основни предимства",
     "homeLabel": "Начало",
-    "relatedTitle": "Още приложения на WIFIGATE",
+    "relatedTitle": "Още сценарии за употреба на WIFIGATE",
     "faqTitle": "Често задавани въпроси"
   },
   "sr": {
     "eyebrow": "Примена WIFIGATE система",
     "benefitsTitle": "Кључне предности",
     "homeLabel": "Почетна",
-    "relatedTitle": "Још примена за WIFIGATE",
+    "relatedTitle": "Друге примене WIFIGATE система",
     "faqTitle": "Честа питања"
   },
   "sk": {
     "eyebrow": "Využitie WIFIGATE",
     "benefitsTitle": "Hlavné výhody",
     "homeLabel": "Domov",
-    "relatedTitle": "Ďalšie využitie WIFIGATE",
+    "relatedTitle": "Ďalšie možnosti využitia WIFIGATE",
     "faqTitle": "Často kladené otázky"
   },
   "sl": {
@@ -247,21 +247,21 @@ export const NICHE_CHROME = {
     "eyebrow": "Contoh penggunaan WIFIGATE",
     "benefitsTitle": "Manfaat utama",
     "homeLabel": "Beranda",
-    "relatedTitle": "Penggunaan WIFIGATE lainnya",
+    "relatedTitle": "Contoh penggunaan WIFIGATE lainnya",
     "faqTitle": "Pertanyaan umum"
   },
   "th": {
     "eyebrow": "ตัวอย่างการใช้งาน WIFIGATE",
     "benefitsTitle": "ประโยชน์หลัก",
     "homeLabel": "หน้าแรก",
-    "relatedTitle": "การใช้งาน WIFIGATE อื่น ๆ",
+    "relatedTitle": "ตัวอย่างการใช้งาน WIFIGATE เพิ่มเติม",
     "faqTitle": "คำถามที่พบบ่อย"
   },
   "vi": {
-    "eyebrow": "Ứng dụng WIFIGATE",
+    "eyebrow": "Tình huống sử dụng WIFIGATE",
     "benefitsTitle": "Lợi ích chính",
     "homeLabel": "Trang chủ",
-    "relatedTitle": "Các ứng dụng khác của WIFIGATE",
+    "relatedTitle": "Các tình huống sử dụng WIFIGATE khác",
     "faqTitle": "Câu hỏi thường gặp"
   },
   "ms": {

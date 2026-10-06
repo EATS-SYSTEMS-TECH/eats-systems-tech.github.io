@@ -2,15 +2,15 @@
 // The WIFIGATE Host page (/automation/) in Swedish: title, description and body.
 
 export default {
-  "metaTitle": "Automatisk gäståtkomst för uthyrning och hotell | WIFIGATE",
-  "metaDescription": "Tidsbegränsad gäståtkomst till grindar, dörrar och garage, automatiskt för varje bokning. För hotell, korttidsuthyrning, pensionat och parkering, utan nycklar.",
+  "metaTitle": "Automatisk gäståtkomst för hotell, semesterboenden och parkering | WIFIGATE",
+  "metaDescription": "Säker, tidsbegränsad åtkomst för varje gäst, skapad automatiskt för varje bokning. För hotell, semesterboenden, pensionat och hyrparkering eller garage. Ingen nyckelöverlämning.",
   "marketing": {
     "hero": {
       "eyebrow": "WIFIGATE Host",
       "title": "Gäståtkomst som sköter sig själv",
-      "lead": "Så fort en bokning bekräftas skapar WIFIGATE säker, tidsbegränsad åtkomst till din grind, dörr eller ditt garage, och den upphör av sig själv vid utcheckning. Inga nycklar att lämna över, inga koder att jaga och ingen som väntar vid entrén.",
+      "lead": "Så fort en bokning bekräftas skapar WIFIGATE säker, tidsbegränsad åtkomst till din grind, dörr eller parkering, och den upphör av sig själv vid utcheckning. Inga nycklar att lämna över, inga koder att jaga och ingen som väntar vid entrén.",
       "ctaPrimary": "Kontakta oss",
-      "note": "För hotell, korttidsuthyrning, pensionat och hyrparkering."
+      "note": "För hotell, semesterboenden, pensionat och hyrparkering eller garage."
     },
     "pricing": {
       "eyebrow": "Priser",
@@ -41,7 +41,7 @@ export default {
     "audience": {
       "label": "Byggt för:",
       "hotels": "Hotell",
-      "rentals": "Airbnb och korttidsuthyrning",
+      "rentals": "Airbnb och semesterboenden",
       "guesthouses": "Pensionat",
       "parking": "Hyrparkering och garage"
     },
@@ -50,9 +50,9 @@ export default {
       "title": "Från bokning till öppen grind, automatiskt",
       "subtitle": "Tre steg, och sedan sköter det sig självt för varje bokning.",
       "s1t": "En bokning kommer in",
-      "s1x": "Ditt boknings- eller fastighetssystem meddelar WIFIGATE att en ny bokning är bekräftad.",
+      "s1x": "Ditt boknings- eller fastighetssystem meddelar WIFIGATE Host att en ny bokning har bekräftats.",
       "s2t": "Åtkomsten skapas automatiskt",
-      "s2x": "WIFIGATE utfärdar en säker, tidsbegränsad inbjudan till exakt rätt grind, dörr eller garage, giltig endast under just den vistelsen.",
+      "s2x": "WIFIGATE Host utfärdar en säker, tidsbegränsad inbjudan till exakt rätt grind, dörr eller parkering, giltig endast under just den vistelsen.",
       "s3t": "Gästen går rakt in",
       "s3x": "Gästen öppnar entrén från mobilen. När det är dags för utcheckning upphör åtkomsten av sig själv, inget att samla in eller avbryta."
     },
@@ -65,7 +65,7 @@ export default {
       "b2t": "Tidsbegränsad från början",
       "b2x": "Varje inbjudan öppnar vid incheckning och upphör vid utcheckning, automatiskt, för varje vistelse.",
       "b3t": "Krypterad och privat",
-      "b3x": "Åtkomsten är krypterad och grinden fungerar lokalt. Din fastighet och dina gäster förblir skyddade.",
+      "b3x": "Åtkomsten är krypterad och begränsad till den behörighet som har utfärdats. Din fastighet och dina gäster förblir skyddade.",
       "b4t": "Fungerar med dina entréer",
       "b4x": "Grindar, garageportar, bommar och entrédörrar: WIFIGATE styr det du redan har.",
       "b5t": "Skalar till hela byggnader",
@@ -79,8 +79,8 @@ export default {
       "subtitle": "Byggt för att skydda fastigheten bakom varje grind.",
       "i1t": "Krypterad hela vägen",
       "i1x": "Varje inbjudan är krypterad, så att åtkomstuppgifterna inte kan läsas eller kopieras under överföringen.",
-      "i2t": "Fungerar vid grinden, inte i molnet",
-      "i2x": "Entrén verifierar åtkomsten lokalt, så den fortsätter fungera även utan uppkoppling.",
+      "i2t": "Färre fysiska passermedel, mer gästfrihet",
+      "i2x": "Digital åtkomst minskar behovet av nycklar, kort och fjärrkontroller, så att personalen kan fokusera på gästerna och gästfriheten.",
       "i3t": "Du behåller kontrollen",
       "i3x": "Åtkomsten är kopplad till varje vistelse och varje gäst, och du kan stänga av den när du behöver."
     },
