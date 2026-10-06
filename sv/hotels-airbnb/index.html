@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../../css/styles.css?v=20261005b">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20261006b">
-  <link rel="stylesheet" href="../../css/niche.css?v=20261007a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20261007b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
   <script>window.accessibilityCopy = {"sv":{"skipLink":"Hoppa till huvudinnehållet","eyebrow":"Tillgänglighet","openButton":"Öppna tillgänglighetsmenyn","closeButton":"Stäng tillgänglighetsmenyn","title":"Tillgänglighetsmeny","description":"Anpassa webbplatsen efter hur du läser och navigerar. Dina val sparas på den här enheten.","reset":"Återställ allt","statusDefault":"Standardvisning av webbplatsen","statusActive":"{count} anpassningar aktiva","hideButton":"Dölj tillgänglighetsknappen tills sidan laddas om","statementLink":"Tillgänglighetsredogörelse","textSize":{"label":"Textstorlek","description":"Förstora texten på hela webbplatsen.","decrease":"Mindre text","increase":"Större text","level":"Textstorlek {percent} %"},"options":{"highContrast":{"label":"Hög kontrast","description":"Mörk text på ljus bakgrund med tydliga ramar."},"grayscale":{"label":"Gråskala","description":"Visa webbplatsen utan färger."},"underlineLinks":{"label":"Markera länkar","description":"Stryk under och markera alla länkar."},"readableFont":{"label":"Lättläst typsnitt","description":"Ett enkelt och mycket läsbart typsnitt."},"textSpacing":{"label":"Textavstånd","description":"Mer utrymme mellan rader, ord och bokstäver."},"highlightHeadings":{"label":"Markera rubriker","description":"Markera rubrikerna för att visa sidans struktur."},"bigCursor":{"label":"Stor markör","description":"En större muspekare."},"focusHighlight":{"label":"Tydligt fokus","description":"En tjock ram runt elementet med tangentbordsfokus."},"reducedMotion":{"label":"Stoppa animationer","description":"Stoppa animationer, övergångar och bakgrundsvideon."}}}};</script>
@@ -247,6 +247,48 @@
           "position": 2,
           "name": "Hotell, Airbnb och gästlägenheter",
           "item": "https://wifigate.io/sv/hotels-airbnb/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/sv/hotels-airbnb/#faq",
+      "inLanguage": "sv",
+      "isPartOf": {
+        "@id": "https://wifigate.io/sv/hotels-airbnb/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Hur öppnar gästerna grinden eller dörren med WIFIGATE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Varje gäst får en tidsbegränsad inbjudan i mobilen och öppnar grinden, dörren eller garaget från WIFIGATE-appen. Åtkomsten börjar vid incheckning och upphör automatiskt vid utcheckning, så inga nycklar, kort eller koder byter ägare."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan gäståtkomst skapas automatiskt utifrån bokningar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. Med WIFIGATE Host och WIFIGATE API kan en bekräftad bokning automatiskt skapa gästens åtkomst, anpassad till vistelsens datum och tider."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan städare och underhållspersonal få egen åtkomst?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. Personal, städare, underhåll och leverantörer får var sin egen behörighet, och åtkomsthistoriken visar vem som öppnade och när."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kräver WIFIGATE ett abonnemang för hotell och uthyrning?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WIFIGATE-enheten har inget månadsabonnemang. WIFIGATE Host, bokningsautomatiseringen för hotell och uthyrning, är den enda delen som erbjuds som abonnemang."
+          }
         }
       ]
     }
@@ -579,6 +621,15 @@
           <h2 class="niche-section__title" id="niche-benefits-title">Viktigaste fördelarna</h2>
         </div>
         <ul class="niche-benefits__grid" id="niche-benefits-list"><li class="niche-benefit">Automatisk gäståtkomst skapas när en bokning bekräftas</li><li class="niche-benefit">Full automatisering med stöd för WIFIGATE API</li><li class="niche-benefit">Tillfällig åtkomst anpassad till vistelsens datum och tider</li><li class="niche-benefit">Mindre behov av manuell incheckning, nycklar, kort eller koder</li><li class="niche-benefit niche-benefit--gap" aria-hidden="true"></li><li class="niche-benefit">Behörighetshantering för personal, städning, underhåll och leverantörer</li><li class="niche-benefit">En smidigare och mer bekväm ankomstupplevelse för gäster</li><li class="niche-benefit">Åtkomsten avslutas automatiskt vid utcheckning</li><li class="niche-benefit">Åtkomsthistorik för transparens och kontroll</li></ul>
+      </div>
+    </section>
+
+    <section class="niche-section niche-faq" id="niche-faq" aria-labelledby="niche-faq-title">
+      <div class="container">
+        <div class="niche-section__header">
+          <h2 class="niche-section__title" id="niche-faq-title">Vanliga frågor</h2>
+        </div>
+        <div class="niche-faq__list" id="niche-faq-list"><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Hur öppnar gästerna grinden eller dörren med WIFIGATE?</summary><p class="niche-faq__answer" dir="ltr">Varje gäst får en tidsbegränsad inbjudan i mobilen och öppnar grinden, dörren eller garaget från WIFIGATE-appen. Åtkomsten börjar vid incheckning och upphör automatiskt vid utcheckning, så inga nycklar, kort eller koder byter ägare.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Kan gäståtkomst skapas automatiskt utifrån bokningar?</summary><p class="niche-faq__answer" dir="ltr">Ja. Med WIFIGATE Host och WIFIGATE API kan en bekräftad bokning automatiskt skapa gästens åtkomst, anpassad till vistelsens datum och tider.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Kan städare och underhållspersonal få egen åtkomst?</summary><p class="niche-faq__answer" dir="ltr">Ja. Personal, städare, underhåll och leverantörer får var sin egen behörighet, och åtkomsthistoriken visar vem som öppnade och när.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Kräver WIFIGATE ett abonnemang för hotell och uthyrning?</summary><p class="niche-faq__answer" dir="ltr">WIFIGATE-enheten har inget månadsabonnemang. WIFIGATE Host, bokningsautomatiseringen för hotell och uthyrning, är den enda delen som erbjuds som abonnemang.</p></details></div>
       </div>
     </section>
 

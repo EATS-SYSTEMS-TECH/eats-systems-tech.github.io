@@ -1487,6 +1487,19 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
   $("#niche-benefits-title").text(chrome.benefitsTitle);
   setNicheBenefits($, content.bullets);
 
+  // The questions people ask about this use case, answered on the page and
+  // in its FAQPage data.
+  $("#niche-faq-title").text(chrome.faqTitle);
+  const faqList = $("#niche-faq-list").empty();
+  for (const item of content.faq) {
+    const entry = $("<details>").addClass("niche-faq__item");
+    const question = $("<summary>").addClass("niche-faq__question");
+    setLocalizedText($, question, item.question, locale);
+    const answer = $("<p>").addClass("niche-faq__answer");
+    setLocalizedText($, answer, item.answer, locale);
+    faqList.append(entry.append(question, answer));
+  }
+
   // Every other use case and WIFIGATE Host, so each page leads to the rest.
   $("#niche-related-title").text(chrome.relatedTitle);
   const related = $("#niche-related-list").empty();
@@ -1547,6 +1560,7 @@ function setNicheMeta($, ctx, niche, locale, localeOptions) {
     graph: [
       webPageNode({ url, title: content.seoTitle, description: content.seoDescription, locale, image, breadcrumbId: breadcrumb["@id"] }),
       breadcrumb,
+      faqNode(url, locale, content.faq),
     ],
   });
 }

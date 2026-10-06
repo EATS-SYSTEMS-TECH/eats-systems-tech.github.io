@@ -46,7 +46,25 @@ export default {
       ],
       "seoTitle": "Access Control for Hotels, Airbnb, and Guest Apartments | WIFIGATE API",
       "seoDescription": "WIFIGATE brings smart digital access to hotels, Airbnb, and guest apartments, including automated guest permissions through the WIFIGATE API, booking-based temporary access, fewer keys, and less manual check-in.",
-      "imageAlt": "Guests opening a hotel room door with a phone in a modern hallway"
+      "imageAlt": "Guests opening a hotel room door with a phone in a modern hallway",
+      "faq": [
+        {
+          "question": "How do guests open the gate or door with WIFIGATE?",
+          "answer": "Each guest receives a time-limited invitation on their phone and opens the gate, door or garage from the WIFIGATE app. Access starts at check-in and ends automatically at check-out, so no keys, cards or codes change hands."
+        },
+        {
+          "question": "Can guest access be created automatically from bookings?",
+          "answer": "Yes. With WIFIGATE Host and the WIFIGATE API, a confirmed booking can create the guest's access automatically, matched to the dates and hours of the stay."
+        },
+        {
+          "question": "Can cleaners and maintenance staff get their own access?",
+          "answer": "Yes. Staff, cleaners, maintenance and vendors each get their own permission, and the access history shows who opened and when."
+        },
+        {
+          "question": "Does WIFIGATE require a subscription for hotels and rentals?",
+          "answer": "The WIFIGATE device has no monthly subscription. WIFIGATE Host, the booking automation for hotels and rentals, is the only part offered by subscription."
+        }
+      ]
     },
     "roller-shutters": {
       "label": "Roller Shutters for Businesses and Shops",
@@ -82,7 +100,25 @@ export default {
       ],
       "seoTitle": "Smart Roller Shutter Control for Businesses and Shops | WIFIGATE",
       "seoDescription": "WIFIGATE gives businesses and shops smart phone-based control of roller shutters, with permission management, less dependence on keys and remotes, and fewer exposed access points outside the premises.",
-      "imageAlt": "Business owner opening a shop roller shutter with a phone"
+      "imageAlt": "Business owner opening a shop roller shutter with a phone",
+      "faq": [
+        {
+          "question": "How does WIFIGATE open a roller shutter?",
+          "answer": "WIFIGATE is connected to the shutter's control and lets authorized people open and close it from the WIFIGATE app. Control sits on the protected indoor side instead of an exposed key switch or remote."
+        },
+        {
+          "question": "Can every employee have separate access to the shutter?",
+          "answer": "Yes. Each employee, manager or vendor gets a personal permission that you can remove at any time, without collecting keys or remotes."
+        },
+        {
+          "question": "Can I give a vendor temporary access?",
+          "answer": "Yes. You can share access limited in time with a vendor or a temporary employee, and it stops working when the time is up."
+        },
+        {
+          "question": "Which businesses is it suitable for?",
+          "answer": "Shops, warehouses, service entrances and any business with an electric roller shutter that wants fewer keys, remotes and exposed access points."
+        }
+      ]
     },
     "electric-gates": {
       "label": "Electric Gates and Parking Barriers",
@@ -118,7 +154,25 @@ export default {
       ],
       "seoTitle": "Electric Gate and Parking Barrier Access with No Subscription | WIFIGATE",
       "seoDescription": "WIFIGATE opens electric gates and parking barriers from the phone, with Auto Open, scheduled events, support for existing remotes, permission management, and no monthly subscription or recurring payment.",
-      "imageAlt": "Driver opening a parking barrier and electric gate with a phone"
+      "imageAlt": "Driver opening a parking barrier and electric gate with a phone",
+      "faq": [
+        {
+          "question": "Can I open an electric gate or parking barrier from my phone?",
+          "answer": "Yes. WIFIGATE is connected to the gate or barrier and authorized users open it from the WIFIGATE app, with permanent or temporary permissions."
+        },
+        {
+          "question": "Does the gate need a SIM card or internet connection?",
+          "answer": "No. The phone communicates directly with the WIFIGATE device, so the gate needs no SIM card, internet plan or external Wi-Fi router."
+        },
+        {
+          "question": "Can I keep using my existing remotes?",
+          "answer": "Yes. Existing remotes keep working alongside app control, so nothing needs to be thrown away."
+        },
+        {
+          "question": "Is there a monthly fee?",
+          "answer": "No. You pay once for the device and installation, with no monthly subscription or recurring payment."
+        }
+      ]
     },
     "garage-doors": {
       "label": "Garage Doors and Private Parking",
@@ -154,7 +208,25 @@ export default {
       ],
       "seoTitle": "Smart Garage Door and Private Parking Access | WIFIGATE",
       "seoDescription": "WIFIGATE opens garage doors and private parking entrances from the phone, with less dependence on physical remotes, temporary permissions, and more convenient, private access management.",
-      "imageAlt": "Man opening a private garage door with a phone at a modern home"
+      "imageAlt": "Man opening a private garage door with a phone at a modern home",
+      "faq": [
+        {
+          "question": "How do I open my garage door with my phone?",
+          "answer": "WIFIGATE is connected to the garage door and you open it from the WIFIGATE app. Every member of the household gets their own permission on their own phone."
+        },
+        {
+          "question": "What happens when someone loses a remote?",
+          "answer": "A lost remote keeps working until the remotes are re-coded. A permission on a phone is removed from the app in a moment, with nothing to replace or re-code."
+        },
+        {
+          "question": "Can I let a tradesperson in without giving them a remote?",
+          "answer": "Yes. Send a temporary permission that ends when you choose, without handing over a remote or a code."
+        },
+        {
+          "question": "Where can WIFIGATE be used for parking?",
+          "answer": "Private garages, private parking entrances, houses and garden apartments."
+        }
+      ]
     },
     "private-homes": {
       "label": "Private Homes",
@@ -190,7 +262,25 @@ export default {
       ],
       "seoTitle": "Smart Home Access Without a Shared Keypad Code | WIFIGATE",
       "seoDescription": "WIFIGATE lets private homes manage access from the phone, share temporary permissions with guests and couriers, and reduce dependence on keypads, keys, and remotes.",
-      "imageAlt": "Woman opening the entrance gate of a private home with a phone instead of using a keypad"
+      "imageAlt": "Woman opening the entrance gate of a private home with a phone instead of using a keypad",
+      "faq": [
+        {
+          "question": "Why is WIFIGATE safer than a keypad code?",
+          "answer": "Every person gets their own permission on their phone, so there is no permanent code that wears marks into the buttons or spreads to couriers and guests, and any permission can be removed at once."
+        },
+        {
+          "question": "Can I give a courier or guest one-time access?",
+          "answer": "Yes. Send a time-limited invitation that works only for the time you choose, without exposing a permanent code."
+        },
+        {
+          "question": "What can WIFIGATE open at a private home?",
+          "answer": "Gates, entrance doors, parking and garage doors at the home, all from one app."
+        },
+        {
+          "question": "How do I remove someone's access?",
+          "answer": "From your phone, in a moment. There are no locks, codes or remotes to replace."
+        }
+      ]
     },
     "residential-buildings": {
       "label": "Residential Buildings",
@@ -226,7 +316,25 @@ export default {
       ],
       "seoTitle": "Access Control for Residential Buildings | WIFIGATE",
       "seoDescription": "WIFIGATE brings smart access management to residential buildings, with phone-based entry, temporary guest permissions, less dependence on keypads, and better transparency.",
-      "imageAlt": "Resident opening a residential building entrance with a phone"
+      "imageAlt": "Resident opening a residential building entrance with a phone",
+      "faq": [
+        {
+          "question": "How do residents enter the building with WIFIGATE?",
+          "answer": "Residents open the lobby door, gate or parking entrance from their phone with their own permission."
+        },
+        {
+          "question": "How do guests and couriers get in?",
+          "answer": "A resident sends a time-limited guest invitation, with the arrival details in one tap, without exposing a permanent code."
+        },
+        {
+          "question": "Can the building committee see who has access?",
+          "answer": "Yes. The committee or management company manages the list of permissions, and the access history shows entries for transparency."
+        },
+        {
+          "question": "Does WIFIGATE replace the shared entry code?",
+          "answer": "It removes the need to share one code: each resident has a personal permission, and guests get temporary access instead of the building code."
+        }
+      ]
     },
     "office-buildings": {
       "label": "Office Buildings",
@@ -262,7 +370,25 @@ export default {
       ],
       "seoTitle": "Access Control for Office Buildings | WIFIGATE",
       "seoDescription": "WIFIGATE lets office buildings manage entry for employees, visitors, and vendors from the phone, with temporary and permanent permissions and modern access management.",
-      "imageAlt": "Employee opening a glass door in a modern office with a phone"
+      "imageAlt": "Employee opening a glass door in a modern office with a phone",
+      "faq": [
+        {
+          "question": "How do employees get access to the office?",
+          "answer": "Employees receive a permanent permission on their phone, and it is removed in a moment when someone leaves."
+        },
+        {
+          "question": "How do visitors enter without waiting at reception?",
+          "answer": "Visitors receive temporary access before they arrive, so they enter with their phone and reception handles fewer arrivals."
+        },
+        {
+          "question": "What can WIFIGATE control in an office building?",
+          "answer": "Entrance doors, floors, rooms and parking entrances."
+        },
+        {
+          "question": "Is there a record of entries?",
+          "answer": "Yes. The access history shows who opened and when, for operations and transparency."
+        }
+      ]
     },
     "entry-doors-magnetic-locks": {
       "label": "Entry Doors and Magnetic Locks for Businesses",
@@ -298,7 +424,25 @@ export default {
       ],
       "seoTitle": "Entry Doors and Magnetic Locks for Businesses | WIFIGATE",
       "seoDescription": "WIFIGATE brings smart opening to business entry doors and magnetic locks, with phone-based permission management, temporary access, and less dependence on keypads and keys.",
-      "imageAlt": "Customer opening the entry door of a small business with a phone"
+      "imageAlt": "Customer opening the entry door of a small business with a phone",
+      "faq": [
+        {
+          "question": "Does WIFIGATE work with a magnetic lock?",
+          "answer": "Yes. WIFIGATE suits entry doors with an electric or magnetic lock and opens them from the phone."
+        },
+        {
+          "question": "Can I give a technician or supplier temporary access?",
+          "answer": "Yes. Share a temporary permission for the visit instead of giving out the door code."
+        },
+        {
+          "question": "Do I need a complex access control system?",
+          "answer": "No. WIFIGATE is a simple, modern option for businesses that want phone-based entry without a complex access control system."
+        },
+        {
+          "question": "Which businesses use it?",
+          "answer": "Small businesses, clinics, studios, offices and warehouses."
+        }
+      ]
     },
     "sports-facilities": {
       "label": "Sports Facilities",
@@ -334,7 +478,25 @@ export default {
       ],
       "seoTitle": "Access Control for Sports Facilities and Padel Courts | WIFIGATE",
       "seoDescription": "WIFIGATE brings smart access control to sports facilities, padel courts, gyms, and training complexes, with phone-based entry and temporary or permanent permissions.",
-      "imageAlt": "Padel player opening the entrance to a floodlit sports court with a phone"
+      "imageAlt": "Padel player opening the entrance to a floodlit sports court with a phone",
+      "faq": [
+        {
+          "question": "Can access follow opening hours or bookings?",
+          "answer": "Yes. Access can be granted by operating hours, bookings or permissions, and scheduled events can open by days and hours."
+        },
+        {
+          "question": "Can members, coaches and guests have different access?",
+          "answer": "Yes. Each type of user gets their own permission: a regular member, a coach on certain days or a one-time guest."
+        },
+        {
+          "question": "Can I see who was at the facility?",
+          "answer": "Yes. The access history shows who opened and when, which helps operations and confirms the site was closed at the end of the day."
+        },
+        {
+          "question": "Which sports facilities is WIFIGATE suitable for?",
+          "answer": "Padel courts, tennis courts, gyms and training complexes."
+        }
+      ]
     },
     "storage-lockers": {
       "label": "Storage Spaces and Lockers",
@@ -370,7 +532,25 @@ export default {
       ],
       "seoTitle": "Smart Access Control for Storage Spaces and Lockers | WIFIGATE",
       "seoDescription": "WIFIGATE gives every storage and locker renter personal phone access to the gate, the doors and their locker, limited to opening hours, recorded in a history and removed when the rental ends.",
-      "imageAlt": "Woman opening the door of a storage site with lockers and storage units using her phone"
+      "imageAlt": "Woman opening the door of a storage site with lockers and storage units using her phone",
+      "faq": [
+        {
+          "question": "How do renters open the gate and their locker?",
+          "answer": "From their phone, with a personal permission to the site gate, the building entrance and, where installed, an electrically locked storage unit or locker."
+        },
+        {
+          "question": "Can access be limited to opening hours?",
+          "answer": "Yes. Allow entry only during opening hours, or give a renter a wider window; movers and family members can get one-time access."
+        },
+        {
+          "question": "What happens when a rental ends?",
+          "answer": "You remove the renter's access at once. There are no keys to collect and no codes to change."
+        },
+        {
+          "question": "Does the site need internet at the door?",
+          "answer": "No. The phone communicates directly with the device on site, with no SIM card or internet connection at the door."
+        }
+      ]
     }
   }
 };

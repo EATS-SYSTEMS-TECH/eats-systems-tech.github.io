@@ -46,7 +46,25 @@ export default {
       ],
       "seoTitle": "Adgangskontrol til hoteller, Airbnb og gæstelejligheder | WIFIGATE API",
       "seoDescription": "WIFIGATE giver smart digital adgang til hoteller, Airbnb og gæstelejligheder med automatisering af gæsterettigheder via WIFIGATE API, midlertidig adgang efter booking og mindre manuel check-in.",
-      "imageAlt": "Gæster åbner døren til et hotelværelse med telefonen i en moderne gang"
+      "imageAlt": "Gæster åbner døren til et hotelværelse med telefonen i en moderne gang",
+      "faq": [
+        {
+          "question": "Hvordan åbner gæster porten eller døren med WIFIGATE?",
+          "answer": "Hver gæst modtager en tidsbegrænset invitation på telefonen og åbner porten, døren eller garagen fra WIFIGATE-appen. Adgangen starter ved check-in og slutter automatisk ved check-out, så ingen nøgler, kort eller koder skifter hænder."
+        },
+        {
+          "question": "Kan gæsteadgang oprettes automatisk ud fra bookinger?",
+          "answer": "Ja. Med WIFIGATE Host og WIFIGATE API kan en bekræftet booking automatisk oprette gæstens adgang, tilpasset opholdets datoer og tider."
+        },
+        {
+          "question": "Kan rengøring og vedligeholdelsespersonale få deres egen adgang?",
+          "answer": "Ja. Personale, rengøring, vedligehold og leverandører får hver deres egen rettighed, og adgangshistorikken viser, hvem der åbnede og hvornår."
+        },
+        {
+          "question": "Kræver WIFIGATE et abonnement for hoteller og udlejning?",
+          "answer": "WIFIGATE-enheden har intet månedligt abonnement. WIFIGATE Host, bookingautomatiseringen til hoteller og udlejning, er den eneste del, der tilbydes som abonnement."
+        }
+      ]
     },
     "roller-shutters": {
       "label": "Rulleporte til virksomheder og butikker",
@@ -82,7 +100,25 @@ export default {
       ],
       "seoTitle": "Smart styring af rulleporte til virksomheder og butikker | WIFIGATE",
       "seoDescription": "WIFIGATE gør det muligt at styre rulleporte i virksomheder og butikker fra telefonen med rettighedsstyring, mindre afhængighed af nøgler og fjernbetjeninger samt færre udsatte adgangspunkter.",
-      "imageAlt": "Butiksejer åbner en butiks rulleport med telefonen"
+      "imageAlt": "Butiksejer åbner en butiks rulleport med telefonen",
+      "faq": [
+        {
+          "question": "Hvordan åbner WIFIGATE en rulleport?",
+          "answer": "WIFIGATE tilsluttes rulleportens styring, så autoriserede personer kan åbne og lukke den fra WIFIGATE-appen. Betjeningen sidder på den beskyttede inderside i stedet for en udsat nøglekontakt eller fjernbetjening."
+        },
+        {
+          "question": "Kan hver medarbejder have separat adgang til rulleporten?",
+          "answer": "Ja. Hver medarbejder, leder eller leverandør får en personlig rettighed, som du kan fjerne når som helst, uden at skulle samle nøgler eller fjernbetjeninger ind."
+        },
+        {
+          "question": "Kan jeg give en leverandør midlertidig adgang?",
+          "answer": "Ja. Du kan dele tidsbegrænset adgang med en leverandør eller en midlertidig medarbejder, og den holder op med at virke, når tiden er gået."
+        },
+        {
+          "question": "Hvilke virksomheder passer det til?",
+          "answer": "Butikker, lagre, serviceindgange og alle virksomheder med en elektrisk rulleport, der ønsker færre nøgler, fjernbetjeninger og udsatte adgangspunkter."
+        }
+      ]
     },
     "electric-gates": {
       "label": "Elektriske porte og parkeringsbomme",
@@ -118,7 +154,25 @@ export default {
       ],
       "seoTitle": "Adgangskontrol til elektriske porte og parkeringsbomme uden abonnement | WIFIGATE",
       "seoDescription": "WIFIGATE giver smart åbning af elektriske porte og parkeringsbomme fra telefonen med Auto Open, planlagte hændelser, eksisterende fjernbetjeninger, rettighedsstyring og uden månedligt abonnement.",
-      "imageAlt": "Chauffør åbner en parkeringsbom og elektrisk port med telefonen"
+      "imageAlt": "Chauffør åbner en parkeringsbom og elektrisk port med telefonen",
+      "faq": [
+        {
+          "question": "Kan jeg åbne en elektrisk port eller parkeringsbom fra telefonen?",
+          "answer": "Ja. WIFIGATE tilsluttes porten eller bommen, og autoriserede brugere åbner den fra WIFIGATE-appen med faste eller midlertidige rettigheder."
+        },
+        {
+          "question": "Kræver porten et SIM-kort eller en internetforbindelse?",
+          "answer": "Nej. Telefonen kommunikerer direkte med WIFIGATE-enheden, så porten behøver hverken SIM-kort, internetabonnement eller en ekstern Wi-Fi-router."
+        },
+        {
+          "question": "Kan jeg fortsat bruge mine eksisterende fjernbetjeninger?",
+          "answer": "Ja. Eksisterende fjernbetjeninger virker fortsat side om side med appstyringen, så intet skal smides ud."
+        },
+        {
+          "question": "Er der et månedligt gebyr?",
+          "answer": "Nej. Du betaler én gang for enheden og installationen, uden månedligt abonnement eller løbende betaling."
+        }
+      ]
     },
     "garage-doors": {
       "label": "Garageporte og privat parkering",
@@ -154,7 +208,25 @@ export default {
       ],
       "seoTitle": "Smart åbning af garageporte og privat parkering | WIFIGATE",
       "seoDescription": "WIFIGATE gør det muligt at åbne garageporte og privat parkering fra telefonen med mindre afhængighed af fysiske fjernbetjeninger, midlertidige rettigheder og mere privat adgangsstyring.",
-      "imageAlt": "Mand åbner en privat garageport med telefonen ved et moderne hus"
+      "imageAlt": "Mand åbner en privat garageport med telefonen ved et moderne hus",
+      "faq": [
+        {
+          "question": "Hvordan åbner jeg min garageport med telefonen?",
+          "answer": "WIFIGATE tilsluttes garageporten, og du åbner den fra WIFIGATE-appen. Hvert medlem af husstanden får sin egen rettighed på sin egen telefon."
+        },
+        {
+          "question": "Hvad sker der, når nogen mister en fjernbetjening?",
+          "answer": "En mistet fjernbetjening virker fortsat, indtil fjernbetjeningerne bliver omkodet. En rettighed på en telefon fjernes fra appen på et øjeblik, uden noget at udskifte eller omkode."
+        },
+        {
+          "question": "Kan jeg lukke en håndværker ind uden at give vedkommende en fjernbetjening?",
+          "answer": "Ja. Send en midlertidig rettighed, der udløber, når du bestemmer det, uden at udlevere en fjernbetjening eller en kode."
+        },
+        {
+          "question": "Hvor kan WIFIGATE bruges til parkering?",
+          "answer": "Private garager, indkørsler til privat parkering, huse og havelejligheder."
+        }
+      ]
     },
     "private-homes": {
       "label": "Private hjem",
@@ -190,7 +262,25 @@ export default {
       ],
       "seoTitle": "Smart adgang til private hjem uden delt tastaturkode | WIFIGATE",
       "seoDescription": "WIFIGATE hjælper private hjem med at styre adgang fra telefonen, dele midlertidige rettigheder med gæster og bude og reducere afhængigheden af tastaturer, nøgler og fjernbetjeninger.",
-      "imageAlt": "Kvinde åbner indgangsporten til et privat hjem med telefonen i stedet for tastaturet"
+      "imageAlt": "Kvinde åbner indgangsporten til et privat hjem med telefonen i stedet for tastaturet",
+      "faq": [
+        {
+          "question": "Hvorfor er WIFIGATE mere sikkert end en tastaturkode?",
+          "answer": "Hver person får sin egen rettighed på telefonen, så der er ingen fast kode, der slider mærker i tasterne eller spreder sig til bude og gæster, og enhver rettighed kan fjernes med det samme."
+        },
+        {
+          "question": "Kan jeg give et bud eller en gæst engangsadgang?",
+          "answer": "Ja. Send en tidsbegrænset invitation, der kun virker i det tidsrum, du vælger, uden at afsløre en fast kode."
+        },
+        {
+          "question": "Hvad kan WIFIGATE åbne i et privat hjem?",
+          "answer": "Porte, indgangsdøre, parkering og garageporte ved hjemmet, alt sammen fra én app."
+        },
+        {
+          "question": "Hvordan fjerner jeg en persons adgang?",
+          "answer": "Fra din telefon, på et øjeblik. Der er ingen låse, koder eller fjernbetjeninger at udskifte."
+        }
+      ]
     },
     "residential-buildings": {
       "label": "Boligbygninger",
@@ -226,7 +316,25 @@ export default {
       ],
       "seoTitle": "Adgangskontrol til boligbygninger | WIFIGATE",
       "seoDescription": "WIFIGATE giver smart adgangsstyring til boligbygninger med åbning fra telefonen, midlertidige gæsterettigheder, mindre afhængighed af tastaturkoder og bedre gennemsigtighed.",
-      "imageAlt": "Beboer åbner indgangen til en boligbygning med telefonen"
+      "imageAlt": "Beboer åbner indgangen til en boligbygning med telefonen",
+      "faq": [
+        {
+          "question": "Hvordan kommer beboerne ind i bygningen med WIFIGATE?",
+          "answer": "Beboerne åbner lobbydøren, porten eller indkørslen til parkeringen fra telefonen med deres egen rettighed."
+        },
+        {
+          "question": "Hvordan kommer gæster og bude ind?",
+          "answer": "En beboer sender en tidsbegrænset gæsteinvitation med ankomstoplysningerne med ét tryk, uden at afsløre en fast kode."
+        },
+        {
+          "question": "Kan bestyrelsen se, hvem der har adgang?",
+          "answer": "Ja. Bestyrelsen eller ejendomsadministrationen styrer listen over rettigheder, og adgangshistorikken viser indgangene for gennemsigtighedens skyld."
+        },
+        {
+          "question": "Erstatter WIFIGATE den fælles adgangskode?",
+          "answer": "Det fjerner behovet for at dele én kode: hver beboer har en personlig rettighed, og gæster får midlertidig adgang i stedet for bygningens kode."
+        }
+      ]
     },
     "office-buildings": {
       "label": "Kontorbygninger",
@@ -262,7 +370,25 @@ export default {
       ],
       "seoTitle": "Adgangskontrol til kontorbygninger | WIFIGATE",
       "seoDescription": "WIFIGATE hjælper kontorbygninger med at styre adgang for medarbejdere, besøgende og leverandører via telefonen med midlertidige og faste rettigheder.",
-      "imageAlt": "Medarbejder åbner en glasdør i et moderne kontor med telefonen"
+      "imageAlt": "Medarbejder åbner en glasdør i et moderne kontor med telefonen",
+      "faq": [
+        {
+          "question": "Hvordan får medarbejdere adgang til kontoret?",
+          "answer": "Medarbejdere modtager en fast rettighed på telefonen, og den fjernes på et øjeblik, når nogen stopper."
+        },
+        {
+          "question": "Hvordan kommer besøgende ind uden at vente i receptionen?",
+          "answer": "Besøgende modtager midlertidig adgang, før de ankommer, så de går ind med telefonen, og receptionen skal håndtere færre ankomster."
+        },
+        {
+          "question": "Hvad kan WIFIGATE styre i en kontorbygning?",
+          "answer": "Indgangsdøre, etager, rum og indkørsler til parkering."
+        },
+        {
+          "question": "Bliver indgange registreret?",
+          "answer": "Ja. Adgangshistorikken viser, hvem der åbnede og hvornår, til drift og gennemsigtighed."
+        }
+      ]
     },
     "entry-doors-magnetic-locks": {
       "label": "Indgangsdøre og magnetlåse til virksomheder",
@@ -298,7 +424,25 @@ export default {
       ],
       "seoTitle": "Indgangsdøre og magnetlåse til virksomheder | WIFIGATE",
       "seoDescription": "WIFIGATE giver smart åbning af indgangsdøre og magnetlåse til virksomheder med rettighedsstyring fra telefonen, midlertidig adgang og mindre afhængighed af tastaturer og nøgler.",
-      "imageAlt": "Kunde åbner indgangsdøren til en lille virksomhed med telefonen"
+      "imageAlt": "Kunde åbner indgangsdøren til en lille virksomhed med telefonen",
+      "faq": [
+        {
+          "question": "Fungerer WIFIGATE med en magnetlås?",
+          "answer": "Ja. WIFIGATE passer til indgangsdøre med elektrisk lås eller magnetlås og åbner dem fra telefonen."
+        },
+        {
+          "question": "Kan jeg give en tekniker eller leverandør midlertidig adgang?",
+          "answer": "Ja. Del en midlertidig rettighed til besøget i stedet for at udlevere dørkoden."
+        },
+        {
+          "question": "Har jeg brug for et komplekst adgangskontrolsystem?",
+          "answer": "Nej. WIFIGATE er en enkel, moderne løsning til virksomheder, der ønsker adgang via telefonen uden et komplekst adgangskontrolsystem."
+        },
+        {
+          "question": "Hvilke virksomheder bruger det?",
+          "answer": "Små virksomheder, klinikker, studier, kontorer og lagre."
+        }
+      ]
     },
     "sports-facilities": {
       "label": "Sportsfaciliteter",
@@ -334,7 +478,25 @@ export default {
       ],
       "seoTitle": "Adgangskontrol til sportsfaciliteter og Padel-baner | WIFIGATE",
       "seoDescription": "WIFIGATE giver smart adgangskontrol til sportsfaciliteter, Padel-baner, fitnesscentre og træningsområder med adgang fra telefonen og midlertidige eller faste rettigheder.",
-      "imageAlt": "Padel-spiller åbner indgangen til en oplyst sportsbane med telefonen"
+      "imageAlt": "Padel-spiller åbner indgangen til en oplyst sportsbane med telefonen",
+      "faq": [
+        {
+          "question": "Kan adgangen følge åbningstider eller bookinger?",
+          "answer": "Ja. Adgang kan gives efter åbningstider, bookinger eller rettigheder, og planlagte begivenheder kan åbne efter dage og tider."
+        },
+        {
+          "question": "Kan medlemmer, trænere og gæster have forskellig adgang?",
+          "answer": "Ja. Hver brugertype får sin egen rettighed: et fast medlem, en træner på bestemte dage eller en gæst én gang."
+        },
+        {
+          "question": "Kan jeg se, hvem der har været i anlægget?",
+          "answer": "Ja. Adgangshistorikken viser, hvem der åbnede og hvornår, hvilket hjælper driften og bekræfter, at stedet var lukket ved dagens slutning."
+        },
+        {
+          "question": "Hvilke sportsfaciliteter passer WIFIGATE til?",
+          "answer": "Padel-baner, tennisbaner, fitnesscentre og træningsanlæg."
+        }
+      ]
     },
     "storage-lockers": {
       "label": "Depotrum og skabe",
@@ -370,7 +532,25 @@ export default {
       ],
       "seoTitle": "Smart adgangskontrol til depotrum og opbevaringsskabe | WIFIGATE",
       "seoDescription": "WIFIGATE giver hver lejer af et depotrum eller skab personlig adgang fra telefonen til porten, dørene og sit eget skab, begrænset til åbningstiderne, registreret i en historik og fjernet, når lejemålet slutter.",
-      "imageAlt": "Kvinde åbner døren til et depotanlæg med skabe og depotrum med telefonen"
+      "imageAlt": "Kvinde åbner døren til et depotanlæg med skabe og depotrum med telefonen",
+      "faq": [
+        {
+          "question": "Hvordan åbner lejere porten og deres skab?",
+          "answer": "Fra telefonen, med en personlig rettighed til anlæggets port, bygningens indgang og, hvor det er installeret, et elektrisk låst depotrum eller skab."
+        },
+        {
+          "question": "Kan adgangen begrænses til åbningstiderne?",
+          "answer": "Ja. Tillad kun adgang i åbningstiden, eller giv en lejer et bredere tidsrum; flyttefolk og familiemedlemmer kan få engangsadgang."
+        },
+        {
+          "question": "Hvad sker der, når et lejemål slutter?",
+          "answer": "Du fjerner lejerens adgang med det samme. Der er ingen nøgler at samle ind og ingen koder at skifte."
+        },
+        {
+          "question": "Kræver anlægget internet ved døren?",
+          "answer": "Nej. Telefonen kommunikerer direkte med enheden på stedet, uden SIM-kort eller internetforbindelse ved døren."
+        }
+      ]
     }
   }
 };

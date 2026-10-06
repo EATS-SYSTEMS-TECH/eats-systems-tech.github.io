@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../../css/styles.css?v=20261005b">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20261006b">
-  <link rel="stylesheet" href="../../css/niche.css?v=20261007a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20261007b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
   <script>window.accessibilityCopy = {"fr":{"skipLink":"Aller au contenu principal","eyebrow":"Accessibilité","openButton":"Ouvrir le menu d'accessibilité","closeButton":"Fermer le menu d'accessibilité","title":"Menu d'accessibilité","description":"Adaptez le site à votre façon de lire et de naviguer. Vos choix sont enregistrés sur cet appareil.","reset":"Tout réinitialiser","statusDefault":"Affichage standard du site","statusActive":"{count} réglages actifs","hideButton":"Masquer le bouton d'accessibilité jusqu'au rechargement de la page","statementLink":"Déclaration d'accessibilité","textSize":{"label":"Taille du texte","description":"Agrandir le texte sur tout le site.","decrease":"Texte plus petit","increase":"Texte plus grand","level":"Taille du texte {percent} %"},"options":{"highContrast":{"label":"Contraste élevé","description":"Texte foncé sur fond clair avec des bordures marquées."},"grayscale":{"label":"Niveaux de gris","description":"Afficher le site sans couleurs."},"underlineLinks":{"label":"Surligner les liens","description":"Souligner et signaler chaque lien."},"readableFont":{"label":"Police lisible","description":"Une police simple et très lisible."},"textSpacing":{"label":"Espacement du texte","description":"Plus d'espace entre les lignes, les mots et les lettres."},"highlightHeadings":{"label":"Surligner les titres","description":"Signaler les titres pour montrer la structure de la page."},"bigCursor":{"label":"Grand curseur","description":"Un pointeur de souris plus grand."},"focusHighlight":{"label":"Focus bien visible","description":"Un contour épais autour de l'élément qui a le focus clavier."},"reducedMotion":{"label":"Arrêter les animations","description":"Arrêter les animations, les transitions et la vidéo d'arrière-plan."}}}};</script>
@@ -247,6 +247,48 @@
           "position": 2,
           "name": "Hôtels, Airbnb et locations saisonnières",
           "item": "https://wifigate.io/fr/hotels-airbnb/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/fr/hotels-airbnb/#faq",
+      "inLanguage": "fr",
+      "isPartOf": {
+        "@id": "https://wifigate.io/fr/hotels-airbnb/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Comment les voyageurs ouvrent-ils le portail ou la porte avec WIFIGATE ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chaque voyageur reçoit sur son téléphone une invitation limitée dans le temps et ouvre le portail, la porte ou le garage depuis l'application WIFIGATE. L'accès démarre au check-in et prend fin automatiquement au check-out : aucune clé, carte ou code ne change de main."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "L'accès des voyageurs peut-il être créé automatiquement à partir des réservations ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui. Avec WIFIGATE Host et la WIFIGATE API, une réservation confirmée peut créer automatiquement l'accès du voyageur, calé sur les dates et les horaires du séjour."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Le personnel de ménage et de maintenance peut-il avoir son propre accès ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui. Le personnel, le ménage, la maintenance et les prestataires reçoivent chacun leur propre autorisation, et l'historique des accès indique qui a ouvert et quand."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "WIFIGATE nécessite-t-il un abonnement pour les hôtels et les locations saisonnières ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le boîtier WIFIGATE est sans abonnement mensuel. WIFIGATE Host, l'automatisation des réservations pour les hôtels et les locations saisonnières, est la seule partie proposée sur abonnement."
+          }
         }
       ]
     }
@@ -579,6 +621,15 @@
           <h2 class="niche-section__title" id="niche-benefits-title">Avantages clés</h2>
         </div>
         <ul class="niche-benefits__grid" id="niche-benefits-list"><li class="niche-benefit">Création automatique d'un accès invité dès la confirmation de la réservation</li><li class="niche-benefit">Automatisation complète possible grâce à la WIFIGATE API</li><li class="niche-benefit">Accès temporaire calé sur les dates et horaires du séjour</li><li class="niche-benefit">Moins de check-in manuel, de clés, de cartes et de codes</li><li class="niche-benefit niche-benefit--gap" aria-hidden="true"></li><li class="niche-benefit">Gestion des autorisations pour le personnel, le ménage, la maintenance et les prestataires</li><li class="niche-benefit">Une expérience d'arrivée plus fluide et plus agréable pour les voyageurs</li><li class="niche-benefit">Fin d'accès automatique à l'heure du check-out</li><li class="niche-benefit">Historique des accès pour plus de transparence et de contrôle</li></ul>
+      </div>
+    </section>
+
+    <section class="niche-section niche-faq" id="niche-faq" aria-labelledby="niche-faq-title">
+      <div class="container">
+        <div class="niche-section__header">
+          <h2 class="niche-section__title" id="niche-faq-title">Questions fréquentes</h2>
+        </div>
+        <div class="niche-faq__list" id="niche-faq-list"><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Comment les voyageurs ouvrent-ils le portail ou la porte avec WIFIGATE ?</summary><p class="niche-faq__answer" dir="ltr">Chaque voyageur reçoit sur son téléphone une invitation limitée dans le temps et ouvre le portail, la porte ou le garage depuis l'application WIFIGATE. L'accès démarre au check-in et prend fin automatiquement au check-out : aucune clé, carte ou code ne change de main.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">L'accès des voyageurs peut-il être créé automatiquement à partir des réservations ?</summary><p class="niche-faq__answer" dir="ltr">Oui. Avec WIFIGATE Host et la WIFIGATE API, une réservation confirmée peut créer automatiquement l'accès du voyageur, calé sur les dates et les horaires du séjour.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Le personnel de ménage et de maintenance peut-il avoir son propre accès ?</summary><p class="niche-faq__answer" dir="ltr">Oui. Le personnel, le ménage, la maintenance et les prestataires reçoivent chacun leur propre autorisation, et l'historique des accès indique qui a ouvert et quand.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">WIFIGATE nécessite-t-il un abonnement pour les hôtels et les locations saisonnières ?</summary><p class="niche-faq__answer" dir="ltr">Le boîtier WIFIGATE est sans abonnement mensuel. WIFIGATE Host, l'automatisation des réservations pour les hôtels et les locations saisonnières, est la seule partie proposée sur abonnement.</p></details></div>
       </div>
     </section>
 

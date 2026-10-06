@@ -46,7 +46,25 @@ export default {
       ],
       "seoTitle": "Kontrola pristupa za hotele i Airbnb | WIFIGATE",
       "seoDescription": "Kontrola pristupa za hotele, Airbnb i apartmane: automatske dozvole za goste putem WIFIGATE API-ja, privremeni pristup prema rezervaciji i manje ključeva.",
-      "imageAlt": "Gosti otvaraju vrata hotelske sobe telefonom u modernom hodniku"
+      "imageAlt": "Gosti otvaraju vrata hotelske sobe telefonom u modernom hodniku",
+      "faq": [
+        {
+          "question": "Kako gosti otvaraju dvorišna ili ulazna vrata s WIFIGATE-om?",
+          "answer": "Svaki gost dobiva vremenski ograničenu pozivnicu na telefon i otvara dvorišna vrata, ulazna vrata ili garažu iz aplikacije WIFIGATE. Pristup počinje pri prijavi i automatski završava pri odjavi, pa se ključevi, kartice ili kodovi ne predaju iz ruke u ruku."
+        },
+        {
+          "question": "Može li se pristup za goste automatski stvoriti iz rezervacija?",
+          "answer": "Da. Uz WIFIGATE Host i WIFIGATE API potvrđena rezervacija može automatski stvoriti pristup za gosta, usklađen s datumima i satima boravka."
+        },
+        {
+          "question": "Mogu li čistači i osoblje za održavanje dobiti vlastiti pristup?",
+          "answer": "Da. Osoblje, čistači, održavanje i dobavljači dobivaju svatko svoju dozvolu, a povijest pristupa pokazuje tko je otvarao i kada."
+        },
+        {
+          "question": "Zahtijeva li WIFIGATE pretplatu za hotele i iznajmljivanje?",
+          "answer": "Uređaj WIFIGATE nema mjesečnu pretplatu. WIFIGATE Host, automatizacija rezervacija za hotele i iznajmljivanje, jedini je dio koji se nudi uz pretplatu."
+        }
+      ]
     },
     "roller-shutters": {
       "label": "Rolete za tvrtke i trgovine",
@@ -82,7 +100,25 @@ export default {
       ],
       "seoTitle": "Pametno upravljanje roletama za trgovine | WIFIGATE",
       "seoDescription": "Pametno upravljanje električnim roletama telefonom za tvrtke i trgovine, uz upravljanje dozvolama i manje ključeva, daljinskih upravljača i izloženih točaka.",
-      "imageAlt": "Vlasnik tvrtke otvara roletu trgovine telefonom"
+      "imageAlt": "Vlasnik tvrtke otvara roletu trgovine telefonom",
+      "faq": [
+        {
+          "question": "Kako WIFIGATE otvara roletu?",
+          "answer": "WIFIGATE se spaja na upravljanje roletom i omogućuje ovlaštenim osobama da je otvaraju i zatvaraju iz aplikacije WIFIGATE. Upravljanje je na zaštićenoj unutarnjoj strani umjesto na izloženoj sklopki s ključem ili daljinskom upravljaču."
+        },
+        {
+          "question": "Može li svaki zaposlenik imati zaseban pristup roleti?",
+          "answer": "Da. Svaki zaposlenik, voditelj ili dobavljač dobiva osobnu dozvolu koju možete ukloniti u bilo kojem trenutku, bez prikupljanja ključeva ili daljinskih upravljača."
+        },
+        {
+          "question": "Mogu li dobavljaču dati privremeni pristup?",
+          "answer": "Da. Možete podijeliti vremenski ograničen pristup s dobavljačem ili privremenim zaposlenikom, a on prestaje raditi kad vrijeme istekne."
+        },
+        {
+          "question": "Za koje je tvrtke prikladno?",
+          "answer": "Za trgovine, skladišta, službene ulaze i svaku tvrtku s električnom roletom koja želi manje ključeva, daljinskih upravljača i izloženih pristupnih točaka."
+        }
+      ]
     },
     "electric-gates": {
       "label": "Električna vrata i parkirne rampe",
@@ -118,7 +154,25 @@ export default {
       ],
       "seoTitle": "Električna vrata i rampe bez pretplate | WIFIGATE",
       "seoDescription": "Aplikacija za otvaranje električnih vrata i parkirnih rampi telefonom, uz automatsko otvaranje, zakazane događaje, postojeće upravljače i bez pretplate.",
-      "imageAlt": "Vozač otvara parkirnu rampu i električna vrata telefonom"
+      "imageAlt": "Vozač otvara parkirnu rampu i električna vrata telefonom",
+      "faq": [
+        {
+          "question": "Mogu li telefonom otvoriti električna vrata ili parkirnu rampu?",
+          "answer": "Da. WIFIGATE se spaja na vrata ili rampu, a ovlašteni korisnici otvaraju ih iz aplikacije WIFIGATE, s trajnim ili privremenim dozvolama."
+        },
+        {
+          "question": "Trebaju li vrata SIM karticu ili internetsku vezu?",
+          "answer": "Ne. Telefon komunicira izravno s uređajem WIFIGATE, pa vratima ne treba SIM kartica, internetska tarifa ni vanjski Wi-Fi usmjerivač."
+        },
+        {
+          "question": "Mogu li i dalje koristiti postojeće daljinske upravljače?",
+          "answer": "Da. Postojeći daljinski upravljači i dalje rade uz upravljanje iz aplikacije, pa ništa ne treba bacati."
+        },
+        {
+          "question": "Postoji li mjesečna naknada?",
+          "answer": "Ne. Jednokratno plaćate uređaj i ugradnju, bez mjesečne pretplate ili ponavljajućih plaćanja."
+        }
+      ]
     },
     "garage-doors": {
       "label": "Garažna vrata i privatna parkirališta",
@@ -154,7 +208,25 @@ export default {
       ],
       "seoTitle": "Pametna garažna vrata i privatni parking | WIFIGATE",
       "seoDescription": "Otvarajte garažna vrata i ulaze na privatna parkirališta telefonom, uz privremene dozvole, manje daljinskih upravljača i privatno upravljanje pristupom.",
-      "imageAlt": "Muškarac otvara privatna garažna vrata telefonom kod moderne kuće"
+      "imageAlt": "Muškarac otvara privatna garažna vrata telefonom kod moderne kuće",
+      "faq": [
+        {
+          "question": "Kako telefonom otvoriti garažna vrata?",
+          "answer": "WIFIGATE se spaja na garažna vrata, a vi ih otvarate iz aplikacije WIFIGATE. Svaki član kućanstva dobiva vlastitu dozvolu na vlastitom telefonu."
+        },
+        {
+          "question": "Što se događa kad netko izgubi daljinski upravljač?",
+          "answer": "Izgubljeni daljinski upravljač radi sve dok se upravljači ne prekodiraju. Dozvola na telefonu uklanja se iz aplikacije u trenu, bez ičega što treba zamijeniti ili prekodirati."
+        },
+        {
+          "question": "Mogu li pustiti majstora unutra bez da mu dam daljinski upravljač?",
+          "answer": "Da. Pošaljite privremenu dozvolu koja istječe kad vi odlučite, bez predaje daljinskog upravljača ili koda."
+        },
+        {
+          "question": "Gdje se WIFIGATE može koristiti za parkiranje?",
+          "answer": "U privatnim garažama, na ulazima u privatna parkirališta, u kućama i prizemnim stanovima s vrtom."
+        }
+      ]
     },
     "private-homes": {
       "label": "Privatne kuće",
@@ -190,7 +262,25 @@ export default {
       ],
       "seoTitle": "Pametan pristup kući bez zajedničkog koda | WIFIGATE",
       "seoDescription": "Pametna kontrola pristupa za privatne kuće: upravljanje telefonom, privremene dozvole za goste i dostavljače te manje tipkovnica, ključeva i upravljača.",
-      "imageAlt": "Žena otvara ulazna dvorišna vrata privatne kuće telefonom umjesto tipkovnicom"
+      "imageAlt": "Žena otvara ulazna dvorišna vrata privatne kuće telefonom umjesto tipkovnicom",
+      "faq": [
+        {
+          "question": "Zašto je WIFIGATE sigurniji od koda na tipkovnici?",
+          "answer": "Svaka osoba dobiva vlastitu dozvolu na telefonu, pa nema trajnog koda koji ostavlja tragove trošenja na tipkama ili se širi među dostavljačima i gostima, a svaka se dozvola može odmah ukloniti."
+        },
+        {
+          "question": "Mogu li dostavljaču ili gostu dati jednokratni pristup?",
+          "answer": "Da. Pošaljite vremenski ograničenu pozivnicu koja radi samo u vremenu koje odaberete, bez otkrivanja trajnog koda."
+        },
+        {
+          "question": "Što WIFIGATE može otvarati u privatnoj kući?",
+          "answer": "Dvorišna vrata, ulazna vrata, parking i garažna vrata kuće, sve iz jedne aplikacije."
+        },
+        {
+          "question": "Kako ukloniti nečiji pristup?",
+          "answer": "Svojim telefonom, u trenu. Nema brava, kodova ni daljinskih upravljača koje treba mijenjati."
+        }
+      ]
     },
     "residential-buildings": {
       "label": "Stambene zgrade",
@@ -226,7 +316,25 @@ export default {
       ],
       "seoTitle": "Kontrola pristupa za stambene zgrade | WIFIGATE",
       "seoDescription": "Pametna kontrola pristupa za stambene zgrade, uz ulazak telefonom, privremene dozvole za goste, manju ovisnost o tipkovnicama i bolju transparentnost.",
-      "imageAlt": "Stanar otvara ulaz stambene zgrade telefonom"
+      "imageAlt": "Stanar otvara ulaz stambene zgrade telefonom",
+      "faq": [
+        {
+          "question": "Kako stanari ulaze u zgradu s WIFIGATE-om?",
+          "answer": "Stanari telefonom otvaraju ulazna vrata zgrade, dvorišna vrata ili ulaz u garažu, svojom vlastitom dozvolom."
+        },
+        {
+          "question": "Kako ulaze gosti i dostavljači?",
+          "answer": "Stanar šalje vremenski ograničenu pozivnicu za goste, s podacima o dolasku jednim dodirom, bez otkrivanja trajnog koda."
+        },
+        {
+          "question": "Može li predstavnik suvlasnika vidjeti tko ima pristup?",
+          "answer": "Da. Predstavnik suvlasnika ili upravitelj zgrade upravlja popisom dozvola, a povijest pristupa radi transparentnosti pokazuje ulaske."
+        },
+        {
+          "question": "Zamjenjuje li WIFIGATE zajednički kod za ulaz?",
+          "answer": "Uklanja potrebu za dijeljenjem jednog koda: svaki stanar ima osobnu dozvolu, a gosti dobivaju privremeni pristup umjesto koda zgrade."
+        }
+      ]
     },
     "office-buildings": {
       "label": "Poslovne zgrade",
@@ -262,7 +370,25 @@ export default {
       ],
       "seoTitle": "Kontrola pristupa za poslovne zgrade | WIFIGATE",
       "seoDescription": "Kontrola pristupa za poslovne zgrade: upravljajte telefonom ulaskom zaposlenika, posjetitelja i dobavljača uz privremene i trajne dozvole za ulaz.",
-      "imageAlt": "Zaposlenik otvara staklena vrata u modernom uredu telefonom"
+      "imageAlt": "Zaposlenik otvara staklena vrata u modernom uredu telefonom",
+      "faq": [
+        {
+          "question": "Kako zaposlenici dobivaju pristup uredu?",
+          "answer": "Zaposlenici dobivaju trajnu dozvolu na telefon, koja se u trenu uklanja kad netko ode."
+        },
+        {
+          "question": "Kako posjetitelji ulaze bez čekanja na recepciji?",
+          "answer": "Posjetitelji dobivaju privremeni pristup prije dolaska, pa ulaze telefonom, a recepcija obrađuje manje dolazaka."
+        },
+        {
+          "question": "Čime WIFIGATE može upravljati u poslovnoj zgradi?",
+          "answer": "Ulaznim vratima, katovima, prostorijama i ulazima u parkiralište."
+        },
+        {
+          "question": "Postoji li evidencija ulazaka?",
+          "answer": "Da. Povijest pristupa pokazuje tko je otvarao i kada, za rad i transparentnost."
+        }
+      ]
     },
     "entry-doors-magnetic-locks": {
       "label": "Ulazna vrata i magnetske brave za tvrtke",
@@ -298,7 +424,25 @@ export default {
       ],
       "seoTitle": "Ulazna vrata i magnetske brave za tvrtke | WIFIGATE",
       "seoDescription": "Kontrola pristupa za ulazna vrata tvrtki i magnetske brave: otvaranje telefonom, privremene dozvole i manja ovisnost o tipkovnicama i fizičkim ključevima.",
-      "imageAlt": "Kupac otvara ulazna vrata male tvrtke telefonom"
+      "imageAlt": "Kupac otvara ulazna vrata male tvrtke telefonom",
+      "faq": [
+        {
+          "question": "Radi li WIFIGATE s magnetskom bravom?",
+          "answer": "Da. WIFIGATE je prikladan za ulazna vrata s električnom ili magnetskom bravom i otvara ih telefonom."
+        },
+        {
+          "question": "Mogu li tehničaru ili dobavljaču dati privremeni pristup?",
+          "answer": "Da. Podijelite privremenu dozvolu za vrijeme posjeta umjesto da dajete kod vrata."
+        },
+        {
+          "question": "Trebam li složen sustav kontrole pristupa?",
+          "answer": "Ne. WIFIGATE je jednostavna, moderna opcija za tvrtke koje žele ulaz telefonom bez složenog sustava kontrole pristupa."
+        },
+        {
+          "question": "Koje ga tvrtke koriste?",
+          "answer": "Male tvrtke, ordinacije, studiji, uredi i skladišta."
+        }
+      ]
     },
     "sports-facilities": {
       "label": "Sportski objekti",
@@ -334,7 +478,25 @@ export default {
       ],
       "seoTitle": "Kontrola pristupa za sportske objekte i padel | WIFIGATE",
       "seoDescription": "Pametna kontrola pristupa za sportske objekte, padel terene, teretane i trening centre, uz ulazak telefonom te privremene ili trajne dozvole za korisnike.",
-      "imageAlt": "Igrač padela otvara telefonom ulaz na osvijetljeni sportski teren"
+      "imageAlt": "Igrač padela otvara telefonom ulaz na osvijetljeni sportski teren",
+      "faq": [
+        {
+          "question": "Može li pristup pratiti radno vrijeme ili rezervacije?",
+          "answer": "Da. Pristup se može odobriti prema radnom vremenu, rezervacijama ili dozvolama, a zakazani događaji mogu otvarati prema danima i satima."
+        },
+        {
+          "question": "Mogu li članovi, treneri i gosti imati različit pristup?",
+          "answer": "Da. Svaka vrsta korisnika dobiva vlastitu dozvolu: redoviti član, trener određenim danima ili jednokratni gost."
+        },
+        {
+          "question": "Mogu li vidjeti tko je bio u objektu?",
+          "answer": "Da. Povijest pristupa pokazuje tko je otvarao i kada, što pomaže u radu i potvrđuje da je objekt bio zatvoren na kraju dana."
+        },
+        {
+          "question": "Za koje je sportske objekte WIFIGATE prikladan?",
+          "answer": "Za padel terene, teniske terene, teretane i trening centre."
+        }
+      ]
     },
     "storage-lockers": {
       "label": "Skladišni prostori i ormarići",
@@ -370,7 +532,25 @@ export default {
       ],
       "seoTitle": "Kontrola pristupa za skladišta i ormariće | WIFIGATE",
       "seoDescription": "Kontrola pristupa za skladišne prostore i ormariće: svaki najmoprimac otvara telefonom, u radno vrijeme, uz povijest ulazaka i uklanjanje po isteku najma.",
-      "imageAlt": "Žena telefonom otvara vrata skladišnog prostora s ormarićima i skladišnim jedinicama"
+      "imageAlt": "Žena telefonom otvara vrata skladišnog prostora s ormarićima i skladišnim jedinicama",
+      "faq": [
+        {
+          "question": "Kako najmoprimci otvaraju vrata kompleksa i svoj ormarić?",
+          "answer": "Telefonom, s osobnom dozvolom za vrata kompleksa, ulaz u zgradu i, gdje je ugrađen, skladišni prostor ili ormarić s električnom bravom."
+        },
+        {
+          "question": "Može li se pristup ograničiti na radno vrijeme?",
+          "answer": "Da. Dopustite ulazak samo tijekom radnog vremena ili dajte najmoprimcu šire razdoblje; selidbene službe i članovi obitelji mogu dobiti jednokratni pristup."
+        },
+        {
+          "question": "Što se događa kad najam završi?",
+          "answer": "Odmah uklanjate pristup najmoprimca. Nema ključeva za prikupljanje ni kodova za mijenjanje."
+        },
+        {
+          "question": "Treba li kompleksu internet na vratima?",
+          "answer": "Ne. Telefon komunicira izravno s uređajem na lokaciji, bez SIM kartice ili internetske veze na vratima."
+        }
+      ]
     }
   }
 };

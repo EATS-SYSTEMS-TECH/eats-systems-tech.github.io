@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../../css/styles.css?v=20261005b">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20261006b">
-  <link rel="stylesheet" href="../../css/niche.css?v=20261007a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20261007b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
   <script>window.accessibilityCopy = {"ja":{"skipLink":"メインコンテンツへスキップ","eyebrow":"アクセシビリティ","openButton":"アクセシビリティメニューを開く","closeButton":"アクセシビリティメニューを閉じる","title":"アクセシビリティメニュー","description":"読み方や操作方法に合わせてサイトを調整できます。設定はこのデバイスに保存されます。","reset":"すべてリセット","statusDefault":"標準のサイト表示","statusActive":"{count} 件の調整が有効","hideButton":"ページを再読み込みするまでアクセシビリティボタンを非表示にする","statementLink":"アクセシビリティ方針","textSize":{"label":"文字サイズ","description":"サイト全体の文字を拡大します。","decrease":"文字を小さく","increase":"文字を大きく","level":"文字サイズ {percent}%"},"options":{"highContrast":{"label":"ハイコントラスト","description":"明るい背景に濃い文字と、はっきりした枠線を表示します。"},"grayscale":{"label":"グレースケール","description":"サイトを色なしで表示します。"},"underlineLinks":{"label":"リンクを強調","description":"すべてのリンクに下線と目印を付けます。"},"readableFont":{"label":"読みやすいフォント","description":"シンプルで読みやすいフォントを使用します。"},"textSpacing":{"label":"文字間隔","description":"行・単語・文字の間隔を広げます。"},"highlightHeadings":{"label":"見出しを強調","description":"見出しに目印を付けてページの構造を示します。"},"bigCursor":{"label":"大きいカーソル","description":"マウスポインターを大きくします。"},"focusHighlight":{"label":"フォーカスを強調","description":"キーボードフォーカスのある要素を太い枠で囲みます。"},"reducedMotion":{"label":"アニメーションを停止","description":"アニメーション、トランジション、背景動画を停止します。"}}}};</script>
@@ -247,6 +247,48 @@
           "position": 2,
           "name": "戸建て住宅",
           "item": "https://wifigate.io/ja/private-homes/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/ja/private-homes/#faq",
+      "inLanguage": "ja",
+      "isPartOf": {
+        "@id": "https://wifigate.io/ja/private-homes/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "WIFIGATE がキーパッドの暗証番号より安全なのはなぜですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "一人ひとりがスマートフォンで自分の権限を持つため、ボタンに摩耗跡を残したり配達員や来客に広まったりする固定の暗証番号がなく、どの権限もすぐに取り消せるからです。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "配達員や来客に一回限りのアクセスを渡せますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "はい。指定した時間だけ有効な期間限定の招待を送れるので、固定の暗証番号を教える必要はありません。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "戸建て住宅では WIFIGATE で何を開けられますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "住宅のゲート、玄関ドア、駐車場、ガレージドアを、すべて1つのアプリから開けられます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "誰かのアクセスを取り消すにはどうすればよいですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "スマートフォンからすぐに取り消せます。交換が必要な錠、暗証番号、リモコンはありません。"
+          }
         }
       ]
     }
@@ -579,6 +621,15 @@
           <h2 class="niche-section__title" id="niche-benefits-title">主なメリット</h2>
         </div>
         <ul class="niche-benefits__grid" id="niche-benefits-list"><li class="niche-benefit">キーパッド、鍵、リモコンへの依存を低減</li><li class="niche-benefit">配達員、来客、サービススタッフ向けの一時アクセス</li><li class="niche-benefit">スマートフォンから権限を簡単に取り消し</li><li class="niche-benefit">コード共有やリモコン譲渡によるリスクを低減</li><li class="niche-benefit niche-benefit--gap" aria-hidden="true"></li><li class="niche-benefit">戸建てのゲート、ドア、駐車場、ガレージに対応</li><li class="niche-benefit">家族や固定ユーザーの管理が簡単</li><li class="niche-benefit">日常の出入りをより便利に</li><li class="niche-benefit">誰が入れるかをよりよく管理し、プライバシーを向上</li></ul>
+      </div>
+    </section>
+
+    <section class="niche-section niche-faq" id="niche-faq" aria-labelledby="niche-faq-title">
+      <div class="container">
+        <div class="niche-section__header">
+          <h2 class="niche-section__title" id="niche-faq-title">よくある質問</h2>
+        </div>
+        <div class="niche-faq__list" id="niche-faq-list"><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">WIFIGATE がキーパッドの暗証番号より安全なのはなぜですか？</summary><p class="niche-faq__answer" dir="ltr">一人ひとりがスマートフォンで自分の権限を持つため、ボタンに摩耗跡を残したり配達員や来客に広まったりする固定の暗証番号がなく、どの権限もすぐに取り消せるからです。</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">配達員や来客に一回限りのアクセスを渡せますか？</summary><p class="niche-faq__answer" dir="ltr">はい。指定した時間だけ有効な期間限定の招待を送れるので、固定の暗証番号を教える必要はありません。</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">戸建て住宅では WIFIGATE で何を開けられますか？</summary><p class="niche-faq__answer" dir="ltr">住宅のゲート、玄関ドア、駐車場、ガレージドアを、すべて1つのアプリから開けられます。</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">誰かのアクセスを取り消すにはどうすればよいですか？</summary><p class="niche-faq__answer" dir="ltr">スマートフォンからすぐに取り消せます。交換が必要な錠、暗証番号、リモコンはありません。</p></details></div>
       </div>
     </section>
 

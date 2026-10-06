@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../../css/styles.css?v=20261005b">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20261006b">
-  <link rel="stylesheet" href="../../css/niche.css?v=20261007a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20261007b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
   <script>window.accessibilityCopy = {"hr":{"skipLink":"Prijeđi na glavni sadržaj","eyebrow":"Pristupačnost","openButton":"Otvori izbornik pristupačnosti","closeButton":"Zatvori izbornik pristupačnosti","title":"Izbornik pristupačnosti","description":"Prilagodite web-mjesto načinu na koji čitate i krećete se. Vaši se odabiri spremaju na ovom uređaju.","reset":"Poništi sve","statusDefault":"Standardni prikaz web-mjesta","statusActive":"Aktivne prilagodbe: {count}","hideButton":"Sakrij gumb pristupačnosti do ponovnog učitavanja stranice","statementLink":"Izjava o pristupačnosti","textSize":{"label":"Veličina teksta","description":"Povećaj tekst na cijelom web-mjestu.","decrease":"Manji tekst","increase":"Veći tekst","level":"Veličina teksta {percent} %"},"options":{"highContrast":{"label":"Visoki kontrast","description":"Tamni tekst na svijetloj pozadini s jasnim obrubima."},"grayscale":{"label":"Sivi tonovi","description":"Prikaži web-mjesto bez boja."},"underlineLinks":{"label":"Istakni poveznice","description":"Podcrtaj i označi svaku poveznicu."},"readableFont":{"label":"Čitljiv font","description":"Jednostavan, vrlo čitljiv font."},"textSpacing":{"label":"Razmak teksta","description":"Više prostora između redaka, riječi i slova."},"highlightHeadings":{"label":"Istakni naslove","description":"Označi naslove kako bi se vidjela struktura stranice."},"bigCursor":{"label":"Veliki pokazivač","description":"Veći pokazivač miša."},"focusHighlight":{"label":"Jasan fokus","description":"Debeli obrub oko elementa u fokusu tipkovnice."},"reducedMotion":{"label":"Zaustavi animacije","description":"Zaustavi animacije, prijelaze i pozadinski videozapis."}}}};</script>
@@ -247,6 +247,48 @@
           "position": 2,
           "name": "Hoteli, Airbnb i apartmani za goste",
           "item": "https://wifigate.io/hr/hotels-airbnb/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/hr/hotels-airbnb/#faq",
+      "inLanguage": "hr",
+      "isPartOf": {
+        "@id": "https://wifigate.io/hr/hotels-airbnb/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Kako gosti otvaraju dvorišna ili ulazna vrata s WIFIGATE-om?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Svaki gost dobiva vremenski ograničenu pozivnicu na telefon i otvara dvorišna vrata, ulazna vrata ili garažu iz aplikacije WIFIGATE. Pristup počinje pri prijavi i automatski završava pri odjavi, pa se ključevi, kartice ili kodovi ne predaju iz ruke u ruku."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Može li se pristup za goste automatski stvoriti iz rezervacija?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Da. Uz WIFIGATE Host i WIFIGATE API potvrđena rezervacija može automatski stvoriti pristup za gosta, usklađen s datumima i satima boravka."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Mogu li čistači i osoblje za održavanje dobiti vlastiti pristup?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Da. Osoblje, čistači, održavanje i dobavljači dobivaju svatko svoju dozvolu, a povijest pristupa pokazuje tko je otvarao i kada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Zahtijeva li WIFIGATE pretplatu za hotele i iznajmljivanje?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Uređaj WIFIGATE nema mjesečnu pretplatu. WIFIGATE Host, automatizacija rezervacija za hotele i iznajmljivanje, jedini je dio koji se nudi uz pretplatu."
+          }
         }
       ]
     }
@@ -579,6 +621,15 @@
           <h2 class="niche-section__title" id="niche-benefits-title">Ključne prednosti</h2>
         </div>
         <ul class="niche-benefits__grid" id="niche-benefits-list"><li class="niche-benefit">Automatski pristup za goste nakon potvrde rezervacije</li><li class="niche-benefit">Potpuna podrška za automatizaciju putem WIFIGATE API-ja</li><li class="niche-benefit">Privremeni pristup usklađen s datumima i satima boravka</li><li class="niche-benefit">Manja potreba za ručnom prijavom, ključevima, karticama ili kodovima</li><li class="niche-benefit niche-benefit--gap" aria-hidden="true"></li><li class="niche-benefit">Upravljanje dozvolama za osoblje, čistače, održavanje i dobavljače</li><li class="niche-benefit">Ugodniji i jednostavniji dolazak za goste</li><li class="niche-benefit">Pristup automatski završava u vrijeme odjave</li><li class="niche-benefit">Povijest pristupa za transparentnost i kontrolu</li></ul>
+      </div>
+    </section>
+
+    <section class="niche-section niche-faq" id="niche-faq" aria-labelledby="niche-faq-title">
+      <div class="container">
+        <div class="niche-section__header">
+          <h2 class="niche-section__title" id="niche-faq-title">Česta pitanja</h2>
+        </div>
+        <div class="niche-faq__list" id="niche-faq-list"><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Kako gosti otvaraju dvorišna ili ulazna vrata s WIFIGATE-om?</summary><p class="niche-faq__answer" dir="ltr">Svaki gost dobiva vremenski ograničenu pozivnicu na telefon i otvara dvorišna vrata, ulazna vrata ili garažu iz aplikacije WIFIGATE. Pristup počinje pri prijavi i automatski završava pri odjavi, pa se ključevi, kartice ili kodovi ne predaju iz ruke u ruku.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Može li se pristup za goste automatski stvoriti iz rezervacija?</summary><p class="niche-faq__answer" dir="ltr">Da. Uz WIFIGATE Host i WIFIGATE API potvrđena rezervacija može automatski stvoriti pristup za gosta, usklađen s datumima i satima boravka.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Mogu li čistači i osoblje za održavanje dobiti vlastiti pristup?</summary><p class="niche-faq__answer" dir="ltr">Da. Osoblje, čistači, održavanje i dobavljači dobivaju svatko svoju dozvolu, a povijest pristupa pokazuje tko je otvarao i kada.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Zahtijeva li WIFIGATE pretplatu za hotele i iznajmljivanje?</summary><p class="niche-faq__answer" dir="ltr">Uređaj WIFIGATE nema mjesečnu pretplatu. WIFIGATE Host, automatizacija rezervacija za hotele i iznajmljivanje, jedini je dio koji se nudi uz pretplatu.</p></details></div>
       </div>
     </section>
 

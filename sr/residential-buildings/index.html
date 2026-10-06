@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../css/fonts.css?v=20261004a">
   <link rel="stylesheet" href="../../css/styles.css?v=20261005b">
   <link rel="stylesheet" href="../../css/accessibility.css?v=20261006b">
-  <link rel="stylesheet" href="../../css/niche.css?v=20261007a">
+  <link rel="stylesheet" href="../../css/niche.css?v=20261007b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
   <script>window.accessibilityCopy = {"sr":{"skipLink":"Пређи на главни садржај","eyebrow":"Приступачност","openButton":"Отвори мени приступачности","closeButton":"Затвори мени приступачности","title":"Мени приступачности","description":"Прилагодите сајт начину на који читате и крећете се. Ваши избори се чувају на овом уређају.","reset":"Ресетуј све","statusDefault":"Стандардни приказ сајта","statusActive":"Активна прилагођавања: {count}","hideButton":"Сакриј дугме за приступачност до поновног учитавања странице","statementLink":"Изјава о приступачности","textSize":{"label":"Величина текста","description":"Увећај текст на целом сајту.","decrease":"Мањи текст","increase":"Већи текст","level":"Величина текста {percent}%"},"options":{"highContrast":{"label":"Висок контраст","description":"Тамни текст на светлој позадини са јасним ивицама."},"grayscale":{"label":"Нијансе сиве","description":"Прикажи сајт без боја."},"underlineLinks":{"label":"Истакни линкове","description":"Подвуци и означи сваки линк."},"readableFont":{"label":"Читљив фонт","description":"Једноставан, веома читљив фонт."},"textSpacing":{"label":"Размак текста","description":"Више простора између редова, речи и слова."},"highlightHeadings":{"label":"Истакни наслове","description":"Означи наслове да би се видела структура странице."},"bigCursor":{"label":"Велики курсор","description":"Већи показивач миша."},"focusHighlight":{"label":"Јасан фокус","description":"Дебео оквир око елемента у фокусу тастатуре."},"reducedMotion":{"label":"Заустави анимације","description":"Заустави анимације, прелазе и видео у позадини."}}}};</script>
@@ -247,6 +247,48 @@
           "position": 2,
           "name": "Стамбене зграде",
           "item": "https://wifigate.io/sr/residential-buildings/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wifigate.io/sr/residential-buildings/#faq",
+      "inLanguage": "sr",
+      "isPartOf": {
+        "@id": "https://wifigate.io/sr/residential-buildings/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Како станари улазе у зграду уз WIFIGATE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Станари отварају улазна врата зграде, капију или улаз у паркинг са свог телефона, уз сопствену дозволу."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Како улазе гости и курири?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Станар шаље временски ограничену позивницу за госта, са подацима за долазак у једном додиру, без откривања сталног кода."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Може ли стамбена заједница да види ко има приступ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Стамбена заједница или управник управља листом дозвола, а историја приступа приказује уласке ради транспарентности."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Да ли WIFIGATE замењује заједнички код за улаз?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Уклања потребу за дељењем једног кода: сваки станар има личну дозволу, а гости добијају привремени приступ уместо кода зграде."
+          }
         }
       ]
     }
@@ -579,6 +621,15 @@
           <h2 class="niche-section__title" id="niche-benefits-title">Кључне предности</h2>
         </div>
         <ul class="niche-benefits__grid" id="niche-benefits-list"><li class="niche-benefit">Практичан приступ за станаре преко телефона</li><li class="niche-benefit">Привремене позивнице за госте без откривања сталног кода</li><li class="niche-benefit">Управљање дозволама за станаре, добављаче и сервисере</li><li class="niche-benefit">Погодно за улазна врата зграде, капије и улазе у паркинг</li><li class="niche-benefit niche-benefit--gap" aria-hidden="true"></li><li class="niche-benefit">Мања зависност од тастатура са кодом, кључева и даљинских</li><li class="niche-benefit">Боља транспарентност кроз историју приступа</li><li class="niche-benefit">Једноставније управљање за стамбену заједницу или професионалног управника</li><li class="niche-benefit">Удобнији улазак за станаре и госте</li></ul>
+      </div>
+    </section>
+
+    <section class="niche-section niche-faq" id="niche-faq" aria-labelledby="niche-faq-title">
+      <div class="container">
+        <div class="niche-section__header">
+          <h2 class="niche-section__title" id="niche-faq-title">Честа питања</h2>
+        </div>
+        <div class="niche-faq__list" id="niche-faq-list"><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Како станари улазе у зграду уз WIFIGATE?</summary><p class="niche-faq__answer" dir="ltr">Станари отварају улазна врата зграде, капију или улаз у паркинг са свог телефона, уз сопствену дозволу.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Како улазе гости и курири?</summary><p class="niche-faq__answer" dir="ltr">Станар шаље временски ограничену позивницу за госта, са подацима за долазак у једном додиру, без откривања сталног кода.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Може ли стамбена заједница да види ко има приступ?</summary><p class="niche-faq__answer" dir="ltr">Да. Стамбена заједница или управник управља листом дозвола, а историја приступа приказује уласке ради транспарентности.</p></details><details class="niche-faq__item"><summary class="niche-faq__question" dir="ltr">Да ли WIFIGATE замењује заједнички код за улаз?</summary><p class="niche-faq__answer" dir="ltr">Уклања потребу за дељењем једног кода: сваки станар има личну дозволу, а гости добијају привремени приступ уместо кода зграде.</p></details></div>
       </div>
     </section>
 
