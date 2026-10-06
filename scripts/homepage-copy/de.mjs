@@ -100,7 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "WIFIGATE-Systemübersicht: das IP67-Gerät, die mobile App und die Steuerplatine mit Anschlussklemmen, USB Type-C und 12-24-V-Eingang, Wi-Fi 6, Bluetooth LE und einem 433,92-MHz-Empfänger, dazu die Plattformfunktionen – 5.000 Nutzer, 100 Admins, unbegrenzte Gasteinladungen, eine API für automatisierte Gasteinladungen, keine SIM-Karte und kein Router, Stabilität, schnelle Gasteinladung, 90-Tage-Verlauf, automatisches Öffnen, bis zu 50 Events, Anlernen digitaler RF-Fernbedienungen, Sicherheit und Datenschutz sowie keine Abogebühren.",
+    imageAlt: "WIFIGATE-Systemübersicht: das IP67-Gerät, die mobile App und die Steuerplatine mit Anschlussklemmen, USB Type-C und 12-24-V-Eingang, Wi-Fi 6, Bluetooth LE und einem 433,92-MHz-Empfänger, dazu die Plattformfunktionen – 500 Nutzer, 20 Admins, unbegrenzte Gasteinladungen, eine API für automatisierte Gasteinladungen, keine SIM-Karte und kein Router, Stabilität, schnelle Gasteinladung, 90-Tage-Verlauf, automatisches Öffnen, bis zu 50 Events, Anlernen digitaler RF-Fernbedienungen, Sicherheit und Datenschutz sowie keine Abogebühren.",
     eyebrow: "Produktleitfaden",
     title: "Von Anfang an unkompliziert.",
     subtitle: "Klare Anleitungen für Installation, täglichen Zutritt und erweiterte Konfiguration.",

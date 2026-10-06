@@ -100,7 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Vue d'ensemble du système WIFIGATE : le boîtier IP67, l'application mobile et la carte de commande avec ses borniers, l'USB Type-C et l'entrée 12-24 V, le Wi-Fi 6, le Bluetooth LE et un récepteur 433,92 MHz, ainsi que les fonctionnalités de la plateforme : 5 000 utilisateurs, 100 administrateurs, invitations illimitées pour les invités, une API d'invitations automatisées, sans carte SIM ni routeur, stabilité, invitation rapide, historique de 90 jours, ouverture automatique, jusqu'à 50 événements, apprentissage des télécommandes RF numériques, sécurité et confidentialité, et aucun frais d'abonnement.",
+    imageAlt: "Vue d'ensemble du système WIFIGATE : le boîtier IP67, l'application mobile et la carte de commande avec ses borniers, l'USB Type-C et l'entrée 12-24 V, le Wi-Fi 6, le Bluetooth LE et un récepteur 433,92 MHz, ainsi que les fonctionnalités de la plateforme : 500 utilisateurs, 20 administrateurs, invitations illimitées pour les invités, une API d'invitations automatisées, sans carte SIM ni routeur, stabilité, invitation rapide, historique de 90 jours, ouverture automatique, jusqu'à 50 événements, apprentissage des télécommandes RF numériques, sécurité et confidentialité, et aucun frais d'abonnement.",
     eyebrow: "Guide produit",
     title: "Simple dès le premier jour.",
     subtitle: "Conseils clairs pour l'installation, l'utilisation quotidienne et la configuration avancée.",
