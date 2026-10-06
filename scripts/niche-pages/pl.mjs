@@ -46,7 +46,25 @@ export default {
       ],
       "seoTitle": "Kontrola dostępu dla hoteli, Airbnb i apartamentów | WIFIGATE API",
       "seoDescription": "WIFIGATE zapewnia cyfrowy dostęp w hotelach, Airbnb i apartamentach na wynajem: automatyczne uprawnienia gości przez WIFIGATE API, dostęp na czas pobytu i mniej kluczy.",
-      "imageAlt": "Goście otwierający drzwi pokoju hotelowego telefonem w nowoczesnym korytarzu"
+      "imageAlt": "Goście otwierający drzwi pokoju hotelowego telefonem w nowoczesnym korytarzu",
+      "faq": [
+        {
+          "question": "Jak goście otwierają bramę lub drzwi z WIFIGATE?",
+          "answer": "Każdy gość dostaje na telefon zaproszenie ograniczone w czasie i otwiera bramę, drzwi lub garaż w aplikacji WIFIGATE. Dostęp zaczyna działać przy zameldowaniu i wygasa automatycznie przy wymeldowaniu, więc nikt nie przekazuje kluczy, kart ani kodów."
+        },
+        {
+          "question": "Czy dostęp dla gości może tworzyć się automatycznie na podstawie rezerwacji?",
+          "answer": "Tak. Dzięki WIFIGATE Host i WIFIGATE API potwierdzona rezerwacja może automatycznie utworzyć dostęp dla gościa, dopasowany do dat i godzin pobytu."
+        },
+        {
+          "question": "Czy ekipa sprzątająca i serwis mogą mieć własny dostęp?",
+          "answer": "Tak. Personel, ekipy sprzątające, serwis i dostawcy dostają każdy własne uprawnienie, a historia dostępu pokazuje, kto otworzył i kiedy."
+        },
+        {
+          "question": "Czy WIFIGATE wymaga abonamentu w hotelach i apartamentach na wynajem?",
+          "answer": "Urządzenie WIFIGATE nie ma miesięcznego abonamentu. WIFIGATE Host, czyli automatyzacja rezerwacji dla hoteli i apartamentów na wynajem, to jedyna część oferowana w abonamencie."
+        }
+      ]
     },
     "roller-shutters": {
       "label": "Rolety antywłamaniowe dla firm i sklepów",
@@ -82,7 +100,25 @@ export default {
       ],
       "seoTitle": "Inteligentne sterowanie roletami dla firm i sklepów | WIFIGATE",
       "seoDescription": "WIFIGATE daje firmom i sklepom sterowanie roletami z telefonu: zarządzanie uprawnieniami, mniejsza zależność od kluczy i pilotów, mniej odsłoniętych punktów dostępu.",
-      "imageAlt": "Właściciel firmy otwierający roletę sklepu telefonem"
+      "imageAlt": "Właściciel firmy otwierający roletę sklepu telefonem",
+      "faq": [
+        {
+          "question": "Jak WIFIGATE otwiera roletę antywłamaniową?",
+          "answer": "WIFIGATE podłącza się do sterowania rolety i pozwala upoważnionym osobom otwierać ją i zamykać w aplikacji WIFIGATE. Sterowanie znajduje się po chronionej, wewnętrznej stronie zamiast w odsłoniętym przełączniku na klucz czy pilocie."
+        },
+        {
+          "question": "Czy każdy pracownik może mieć osobny dostęp do rolety?",
+          "answer": "Tak. Każdy pracownik, kierownik czy dostawca dostaje osobiste uprawnienie, które możesz odebrać w dowolnej chwili, bez zbierania kluczy i pilotów."
+        },
+        {
+          "question": "Czy mogę dać dostawcy dostęp tymczasowy?",
+          "answer": "Tak. Możesz udostępnić dostęp ograniczony w czasie dostawcy lub pracownikowi tymczasowemu, a po upływie tego czasu przestaje on działać."
+        },
+        {
+          "question": "Dla jakich firm to rozwiązanie?",
+          "answer": "Dla sklepów, magazynów, wejść serwisowych i każdej firmy z elektryczną roletą antywłamaniową, która chce mieć mniej kluczy, pilotów i odsłoniętych punktów dostępu."
+        }
+      ]
     },
     "electric-gates": {
       "label": "Bramy automatyczne i szlabany parkingowe",
@@ -118,7 +154,25 @@ export default {
       ],
       "seoTitle": "Bramy automatyczne i szlabany bez abonamentu | WIFIGATE",
       "seoDescription": "WIFIGATE otwiera bramy automatyczne i szlabany parkingowe z telefonu: Auto Open, zaplanowane zdarzenia, obsługa dotychczasowych pilotów i zero abonamentu.",
-      "imageAlt": "Kierowca otwierający szlaban parkingowy i bramę automatyczną telefonem"
+      "imageAlt": "Kierowca otwierający szlaban parkingowy i bramę automatyczną telefonem",
+      "faq": [
+        {
+          "question": "Czy mogę otworzyć bramę automatyczną lub szlaban parkingowy z telefonu?",
+          "answer": "Tak. WIFIGATE podłącza się do bramy lub szlabanu, a upoważnieni użytkownicy otwierają je w aplikacji WIFIGATE, ze stałym lub tymczasowym uprawnieniem."
+        },
+        {
+          "question": "Czy brama potrzebuje karty SIM albo połączenia z internetem?",
+          "answer": "Nie. Telefon komunikuje się bezpośrednio z urządzeniem WIFIGATE, więc brama nie potrzebuje karty SIM, pakietu internetowego ani zewnętrznego routera Wi‑Fi."
+        },
+        {
+          "question": "Czy mogę dalej używać dotychczasowych pilotów?",
+          "answer": "Tak. Dotychczasowe piloty działają dalej równolegle ze sterowaniem z aplikacji, więc nic nie trzeba wyrzucać."
+        },
+        {
+          "question": "Czy jest jakaś opłata miesięczna?",
+          "answer": "Nie. Płacisz raz za urządzenie i montaż, bez miesięcznego abonamentu i opłat cyklicznych."
+        }
+      ]
     },
     "garage-doors": {
       "label": "Bramy garażowe i parkingi prywatne",
@@ -154,7 +208,25 @@ export default {
       ],
       "seoTitle": "Inteligentne otwieranie bram garażowych z telefonu | WIFIGATE",
       "seoDescription": "WIFIGATE otwiera bramy garażowe i parkingi prywatne z telefonu, mniejsza zależność od fizycznych pilotów, uprawnienia tymczasowe i prywatne zarządzanie dostępem.",
-      "imageAlt": "Mężczyzna otwierający prywatną bramę garażową telefonem przy nowoczesnym domu"
+      "imageAlt": "Mężczyzna otwierający prywatną bramę garażową telefonem przy nowoczesnym domu",
+      "faq": [
+        {
+          "question": "Jak otworzyć bramę garażową telefonem?",
+          "answer": "WIFIGATE podłącza się do bramy garażowej, a ty otwierasz ją w aplikacji WIFIGATE. Każdy domownik dostaje własne uprawnienie na swoim telefonie."
+        },
+        {
+          "question": "Co się dzieje, gdy ktoś zgubi pilota?",
+          "answer": "Zgubiony pilot działa dalej, dopóki piloty nie zostaną przeprogramowane. Uprawnienie w telefonie usuwasz w aplikacji w chwilę, bez wymiany czy przeprogramowywania czegokolwiek."
+        },
+        {
+          "question": "Czy mogę wpuścić fachowca bez dawania mu pilota?",
+          "answer": "Tak. Wyślij tymczasowe uprawnienie, które wygasa wtedy, kiedy zdecydujesz, bez przekazywania pilota czy kodu."
+        },
+        {
+          "question": "Gdzie można używać WIFIGATE do parkowania?",
+          "answer": "W prywatnych garażach, przy wjazdach na parkingi prywatne, w domach i mieszkaniach z ogródkiem."
+        }
+      ]
     },
     "private-homes": {
       "label": "Domy jednorodzinne",
@@ -190,7 +262,25 @@ export default {
       ],
       "seoTitle": "Inteligentny dostęp do domu bez wspólnego kodu | WIFIGATE",
       "seoDescription": "WIFIGATE pozwala zarządzać dostępem do domu z telefonu, udostępniać tymczasowe uprawnienia gościom i kurierom oraz mniej polegać na kodach, kluczach i pilotach.",
-      "imageAlt": "Kobieta otwierająca telefonem bramę wejściową domu jednorodzinnego zamiast wpisywać kod"
+      "imageAlt": "Kobieta otwierająca telefonem bramę wejściową domu jednorodzinnego zamiast wpisywać kod",
+      "faq": [
+        {
+          "question": "Dlaczego WIFIGATE jest bezpieczniejsze niż klawiatura kodowa?",
+          "answer": "Każdy ma własne uprawnienie w telefonie, więc nie ma stałego kodu, który zostawia ślady na przyciskach albo trafia do kurierów i gości, a każde uprawnienie można od razu cofnąć."
+        },
+        {
+          "question": "Czy mogę dać kurierowi lub gościowi jednorazowy dostęp?",
+          "answer": "Tak. Wyślij zaproszenie ograniczone w czasie, które działa tylko w wybranym przez ciebie czasie, bez ujawniania stałego kodu."
+        },
+        {
+          "question": "Co WIFIGATE może otwierać w domu jednorodzinnym?",
+          "answer": "Bramy, drzwi wejściowe, parking i bramy garażowe przy domu, wszystko z jednej aplikacji."
+        },
+        {
+          "question": "Jak odebrać komuś dostęp?",
+          "answer": "Z telefonu, w chwilę. Nie trzeba wymieniać zamków, kodów ani pilotów."
+        }
+      ]
     },
     "residential-buildings": {
       "label": "Budynki mieszkalne",
@@ -226,7 +316,25 @@ export default {
       ],
       "seoTitle": "Kontrola dostępu w budynkach mieszkalnych | WIFIGATE",
       "seoDescription": "WIFIGATE wprowadza inteligentne zarządzanie dostępem w budynkach mieszkalnych: otwieranie telefonem, tymczasowe uprawnienia dla gości i większa przejrzystość.",
-      "imageAlt": "Mieszkanka otwierająca telefonem wejście do budynku mieszkalnego"
+      "imageAlt": "Mieszkanka otwierająca telefonem wejście do budynku mieszkalnego",
+      "faq": [
+        {
+          "question": "Jak mieszkańcy wchodzą do budynku z WIFIGATE?",
+          "answer": "Mieszkańcy otwierają drzwi do klatki, bramę lub wjazd na parking z telefonu, każdy z własnym uprawnieniem."
+        },
+        {
+          "question": "Jak wchodzą goście i kurierzy?",
+          "answer": "Mieszkaniec wysyła zaproszenie dla gościa ograniczone w czasie, ze wskazówkami dojścia w jednym dotknięciu, bez ujawniania stałego kodu."
+        },
+        {
+          "question": "Czy wspólnota może sprawdzić, kto ma dostęp?",
+          "answer": "Tak. Wspólnota lub zarządca budynku zarządza listą uprawnień, a historia dostępu pokazuje wejścia dla przejrzystości."
+        },
+        {
+          "question": "Czy WIFIGATE zastępuje wspólny kod wejściowy?",
+          "answer": "Eliminuje potrzebę dzielenia się jednym kodem: każdy mieszkaniec ma osobiste uprawnienie, a goście dostają dostęp tymczasowy zamiast kodu do budynku."
+        }
+      ]
     },
     "office-buildings": {
       "label": "Biurowce",
@@ -262,7 +370,25 @@ export default {
       ],
       "seoTitle": "Kontrola dostępu do biurowców | WIFIGATE",
       "seoDescription": "WIFIGATE pozwala biurowcom zarządzać wejściem pracowników, gości i dostawców z telefonu, z tymczasowymi i stałymi uprawnieniami oraz nowoczesnym zarządzaniem dostępem.",
-      "imageAlt": "Pracownica otwierająca telefonem szklane drzwi w nowoczesnym biurze"
+      "imageAlt": "Pracownica otwierająca telefonem szklane drzwi w nowoczesnym biurze",
+      "faq": [
+        {
+          "question": "Jak pracownicy dostają dostęp do biura?",
+          "answer": "Pracownicy dostają na telefon stałe uprawnienie, które usuwa się w chwilę, gdy ktoś odchodzi."
+        },
+        {
+          "question": "Jak odwiedzający wchodzą bez czekania w recepcji?",
+          "answer": "Odwiedzający dostają dostęp tymczasowy przed przyjazdem, więc wchodzą z telefonem, a recepcja obsługuje mniej przyjść."
+        },
+        {
+          "question": "Czym WIFIGATE może sterować w biurowcu?",
+          "answer": "Drzwiami wejściowymi, piętrami, pomieszczeniami i wjazdami na parking."
+        },
+        {
+          "question": "Czy jest rejestr wejść?",
+          "answer": "Tak. Historia dostępu pokazuje, kto otworzył i kiedy, na potrzeby obsługi budynku i przejrzystości."
+        }
+      ]
     },
     "entry-doors-magnetic-locks": {
       "label": "Drzwi wejściowe i zamki magnetyczne dla firm",
@@ -298,7 +424,25 @@ export default {
       ],
       "seoTitle": "Drzwi wejściowe i zamki magnetyczne dla firm | WIFIGATE",
       "seoDescription": "WIFIGATE wprowadza inteligentne otwieranie drzwi wejściowych i zamków magnetycznych w firmach: uprawnienia z telefonu, dostęp tymczasowy, mniej kodów i kluczy.",
-      "imageAlt": "Klientka otwierająca telefonem drzwi wejściowe małej firmy"
+      "imageAlt": "Klientka otwierająca telefonem drzwi wejściowe małej firmy",
+      "faq": [
+        {
+          "question": "Czy WIFIGATE działa z zamkiem magnetycznym?",
+          "answer": "Tak. WIFIGATE sprawdza się przy drzwiach wejściowych z zamkiem elektrycznym lub magnetycznym i otwiera je z telefonu."
+        },
+        {
+          "question": "Czy mogę dać serwisantowi lub dostawcy dostęp tymczasowy?",
+          "answer": "Tak. Udostępnij tymczasowe uprawnienie na czas wizyty zamiast podawać kod do drzwi."
+        },
+        {
+          "question": "Czy potrzebuję skomplikowanego systemu kontroli dostępu?",
+          "answer": "Nie. WIFIGATE to prosta, nowoczesna opcja dla firm, które chcą wchodzić z telefonem bez skomplikowanego systemu kontroli dostępu."
+        },
+        {
+          "question": "Jakie firmy z tego korzystają?",
+          "answer": "Małe firmy, gabinety, studia, biura i magazyny."
+        }
+      ]
     },
     "sports-facilities": {
       "label": "Obiekty sportowe",
@@ -334,7 +478,25 @@ export default {
       ],
       "seoTitle": "Kontrola dostępu do obiektów sportowych i kortów do padla | WIFIGATE",
       "seoDescription": "WIFIGATE zapewnia inteligentną kontrolę dostępu do obiektów sportowych, kortów do padla, siłowni i stref treningowych, wejście z telefonu i elastyczne uprawnienia.",
-      "imageAlt": "Zawodniczka padla otwierająca telefonem wejście na oświetlony kort"
+      "imageAlt": "Zawodniczka padla otwierająca telefonem wejście na oświetlony kort",
+      "faq": [
+        {
+          "question": "Czy dostęp może zależeć od godzin otwarcia lub rezerwacji?",
+          "answer": "Tak. Dostęp można nadawać według godzin otwarcia, rezerwacji lub uprawnień, a zaplanowane zdarzenia mogą otwierać według dni i godzin."
+        },
+        {
+          "question": "Czy członkowie, trenerzy i goście mogą mieć różny dostęp?",
+          "answer": "Tak. Każdy typ użytkownika dostaje własne uprawnienie: stały członek, trener przychodzący w wybrane dni czy jednorazowy gość."
+        },
+        {
+          "question": "Czy mogę sprawdzić, kto był na obiekcie?",
+          "answer": "Tak. Historia dostępu pokazuje, kto otworzył i kiedy, co pomaga w obsłudze i potwierdza, że obiekt został zamknięty na koniec dnia."
+        },
+        {
+          "question": "Do jakich obiektów sportowych pasuje WIFIGATE?",
+          "answer": "Do kortów do padla, kortów tenisowych, siłowni i stref treningowych."
+        }
+      ]
     },
     "storage-lockers": {
       "label": "Magazyny i skrytki",
@@ -370,7 +532,25 @@ export default {
       ],
       "seoTitle": "Inteligentna kontrola dostępu do magazynów i skrytek | WIFIGATE",
       "seoDescription": "WIFIGATE daje każdemu najemcy magazynu lub skrytki osobisty dostęp z telefonu do bramy, drzwi i własnej skrytki, ograniczony do godzin otwarcia, zapisany w historii i odbierany po zakończeniu najmu.",
-      "imageAlt": "Kobieta otwiera telefonem drzwi magazynu ze skrytkami i boksami"
+      "imageAlt": "Kobieta otwiera telefonem drzwi magazynu ze skrytkami i boksami",
+      "faq": [
+        {
+          "question": "Jak najemcy otwierają bramę i swoją skrytkę?",
+          "answer": "Z telefonu, z osobistym uprawnieniem do bramy obiektu, wejścia do budynku oraz, tam gdzie jest zamontowany, boksu lub skrytki z zamkiem elektrycznym."
+        },
+        {
+          "question": "Czy można ograniczyć dostęp do godzin otwarcia?",
+          "answer": "Tak. Wpuszczaj tylko w godzinach otwarcia albo daj najemcy szersze okno czasowe; firmy przeprowadzkowe i członkowie rodziny mogą dostać jednorazowy dostęp."
+        },
+        {
+          "question": "Co się dzieje, gdy najem się kończy?",
+          "answer": "Od razu odbierasz najemcy dostęp. Nie trzeba zbierać kluczy ani zmieniać kodów."
+        },
+        {
+          "question": "Czy obiekt potrzebuje internetu przy drzwiach?",
+          "answer": "Nie. Telefon komunikuje się bezpośrednio z urządzeniem na miejscu, bez karty SIM i bez połączenia z internetem przy drzwiach."
+        }
+      ]
     }
   }
 };

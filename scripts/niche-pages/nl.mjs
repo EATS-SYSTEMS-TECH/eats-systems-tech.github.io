@@ -46,7 +46,25 @@ export default {
       ],
       "seoTitle": "Toegangscontrole voor hotels, Airbnb en vakantiewoningen | WIFIGATE API",
       "seoDescription": "WIFIGATE biedt slimme toegang voor hotels, Airbnb en vakantiewoningen: automatische gastrechten via de WIFIGATE API, tijdelijke toegang per boeking en minder sleutels.",
-      "imageAlt": "Gasten openen een hotelkamerdeur met de telefoon in een moderne gang"
+      "imageAlt": "Gasten openen een hotelkamerdeur met de telefoon in een moderne gang",
+      "faq": [
+        {
+          "question": "Hoe openen gasten de poort of deur met WIFIGATE?",
+          "answer": "Elke gast ontvangt een tijdelijke uitnodiging op zijn telefoon en opent de poort, deur of garage met de WIFIGATE-app. De toegang begint bij het inchecken en stopt automatisch bij het uitchecken, dus er gaan geen sleutels, pasjes of codes van hand tot hand."
+        },
+        {
+          "question": "Kan gasttoegang automatisch worden aangemaakt vanuit boekingen?",
+          "answer": "Ja. Met WIFIGATE Host en de WIFIGATE API kan een bevestigde boeking automatisch de toegang van de gast aanmaken, afgestemd op de data en tijden van het verblijf."
+        },
+        {
+          "question": "Kunnen schoonmakers en onderhoudspersoneel hun eigen toegang krijgen?",
+          "answer": "Ja. Personeel, schoonmakers, onderhoud en leveranciers krijgen elk een eigen recht, en de toegangsgeschiedenis laat zien wie wanneer heeft geopend."
+        },
+        {
+          "question": "Heeft WIFIGATE een abonnement nodig voor hotels en vakantiewoningen?",
+          "answer": "Het WIFIGATE-apparaat heeft geen maandelijks abonnement. WIFIGATE Host, de boekingsautomatisering voor hotels en vakantiewoningen, is het enige onderdeel dat als abonnement wordt aangeboden."
+        }
+      ]
     },
     "roller-shutters": {
       "label": "Rolluiken voor bedrijven en winkels",
@@ -82,7 +100,25 @@ export default {
       ],
       "seoTitle": "Slimme bediening van rolluiken voor bedrijven en winkels | WIFIGATE",
       "seoDescription": "Bedien rolluiken van winkels en bedrijven vanaf de telefoon met WIFIGATE: rechtenbeheer, minder sleutels en afstandsbedieningen, minder kwetsbare toegangspunten.",
-      "imageAlt": "Ondernemer opent het rolluik van een winkel met de telefoon"
+      "imageAlt": "Ondernemer opent het rolluik van een winkel met de telefoon",
+      "faq": [
+        {
+          "question": "Hoe opent WIFIGATE een rolluik?",
+          "answer": "WIFIGATE wordt aangesloten op de besturing van het rolluik en laat bevoegde personen het openen en sluiten met de WIFIGATE-app. De bediening zit aan de beschermde binnenkant in plaats van bij een kwetsbare sleutelschakelaar of afstandsbediening."
+        },
+        {
+          "question": "Kan elke medewerker aparte toegang tot het rolluik krijgen?",
+          "answer": "Ja. Elke medewerker, manager of leverancier krijgt een persoonlijk recht dat je op elk moment kunt intrekken, zonder sleutels of afstandsbedieningen in te nemen."
+        },
+        {
+          "question": "Kan ik een leverancier tijdelijke toegang geven?",
+          "answer": "Ja. Je kunt tijdgebonden toegang delen met een leverancier of tijdelijke medewerker, en die stopt met werken zodra de tijd om is."
+        },
+        {
+          "question": "Voor welke bedrijven is het geschikt?",
+          "answer": "Voor winkels, magazijnen, dienstingangen en elk bedrijf met een elektrisch rolluik dat minder sleutels, afstandsbedieningen en kwetsbare toegangspunten wil."
+        }
+      ]
     },
     "electric-gates": {
       "label": "Elektrische poorten en slagbomen",
@@ -118,7 +154,25 @@ export default {
       ],
       "seoTitle": "Elektrische poort en slagboom openen zonder abonnement | WIFIGATE",
       "seoDescription": "Open elektrische poorten en slagbomen met je telefoon via WIFIGATE: Auto Open, tijdschema's, bestaande afstandsbedieningen en geen maandelijks abonnement.",
-      "imageAlt": "Automobilist opent een slagboom en elektrische poort met de telefoon"
+      "imageAlt": "Automobilist opent een slagboom en elektrische poort met de telefoon",
+      "faq": [
+        {
+          "question": "Kan ik een elektrische poort of slagboom met mijn telefoon openen?",
+          "answer": "Ja. WIFIGATE wordt aangesloten op de poort of slagboom, en bevoegde gebruikers openen die met de WIFIGATE-app, met vaste of tijdelijke rechten."
+        },
+        {
+          "question": "Heeft de poort een SIM-kaart of internetverbinding nodig?",
+          "answer": "Nee. De telefoon communiceert rechtstreeks met het WIFIGATE-apparaat, dus de poort heeft geen SIM-kaart, internetabonnement of externe Wi‑Fi-router nodig."
+        },
+        {
+          "question": "Kan ik mijn bestaande afstandsbedieningen blijven gebruiken?",
+          "answer": "Ja. Bestaande afstandsbedieningen blijven gewoon werken naast de bediening via de app, dus er hoeft niets weg."
+        },
+        {
+          "question": "Zijn er maandelijkse kosten?",
+          "answer": "Nee. Je betaalt één keer voor het apparaat en de installatie, zonder maandelijks abonnement of doorlopende kosten."
+        }
+      ]
     },
     "garage-doors": {
       "label": "Garagedeuren en privéparkeerplaatsen",
@@ -154,7 +208,25 @@ export default {
       ],
       "seoTitle": "Garagedeuren en privéparkeerplaatsen slim openen | WIFIGATE",
       "seoDescription": "Open garagedeuren en privéparkeerplaatsen met je telefoon via WIFIGATE: minder fysieke afstandsbedieningen, tijdelijke rechten en privacyvriendelijk beheer.",
-      "imageAlt": "Man opent de deur van een privégarage met de telefoon bij een modern huis"
+      "imageAlt": "Man opent de deur van een privégarage met de telefoon bij een modern huis",
+      "faq": [
+        {
+          "question": "Hoe open ik mijn garagedeur met mijn telefoon?",
+          "answer": "WIFIGATE wordt aangesloten op de garagedeur en je opent die met de WIFIGATE-app. Iedereen in huis krijgt een eigen recht op zijn eigen telefoon."
+        },
+        {
+          "question": "Wat gebeurt er als iemand een afstandsbediening verliest?",
+          "answer": "Een verloren afstandsbediening blijft werken tot de afstandsbedieningen opnieuw worden geprogrammeerd. Een recht op een telefoon verwijder je in een oogwenk via de app, zonder iets te vervangen of opnieuw te programmeren."
+        },
+        {
+          "question": "Kan ik een vakman binnenlaten zonder hem een afstandsbediening te geven?",
+          "answer": "Ja. Stuur een tijdelijk recht dat stopt wanneer jij dat wilt, zonder een afstandsbediening of code af te geven."
+        },
+        {
+          "question": "Waar kun je WIFIGATE gebruiken om te parkeren?",
+          "answer": "Bij privégarages, toegangen tot privéparkeerplaatsen, woonhuizen en benedenwoningen met tuin."
+        }
+      ]
     },
     "private-homes": {
       "label": "Particuliere woningen",
@@ -190,7 +262,25 @@ export default {
       ],
       "seoTitle": "Slimme toegang voor woningen zonder gedeelde code | WIFIGATE",
       "seoDescription": "Beheer de toegang tot je woning vanaf je telefoon met WIFIGATE: tijdelijke rechten voor gasten en bezorgers, minder codesloten, sleutels en afstandsbedieningen.",
-      "imageAlt": "Vrouw opent het toegangshek van een woonhuis met de telefoon in plaats van een codeslot"
+      "imageAlt": "Vrouw opent het toegangshek van een woonhuis met de telefoon in plaats van een codeslot",
+      "faq": [
+        {
+          "question": "Waarom is WIFIGATE veiliger dan een codeslot?",
+          "answer": "Iedereen heeft een eigen recht op zijn telefoon, dus er is geen vaste code die sporen op de toetsen achterlaat of bij bezorgers en gasten terechtkomt, en elk recht kun je direct intrekken."
+        },
+        {
+          "question": "Kan ik een bezorger of gast eenmalige toegang geven?",
+          "answer": "Ja. Stuur een tijdelijke uitnodiging die alleen werkt in de tijd die jij kiest, zonder een vaste code prijs te geven."
+        },
+        {
+          "question": "Wat kan WIFIGATE openen bij een particuliere woning?",
+          "answer": "Poorten, voordeuren, parkeerplaatsen en garagedeuren bij het huis, allemaal vanuit één app."
+        },
+        {
+          "question": "Hoe trek ik iemands toegang in?",
+          "answer": "Vanaf je telefoon, in een oogwenk. Er zijn geen sloten, codes of afstandsbedieningen te vervangen."
+        }
+      ]
     },
     "residential-buildings": {
       "label": "Appartementencomplexen",
@@ -226,7 +316,25 @@ export default {
       ],
       "seoTitle": "Toegangscontrole voor appartementencomplexen | WIFIGATE",
       "seoDescription": "WIFIGATE brengt slim toegangsbeheer naar appartementencomplexen: openen met de telefoon, tijdelijke gastrechten, minder gedeelde codes en meer transparantie.",
-      "imageAlt": "Bewoonster opent de entree van een appartementencomplex met de telefoon"
+      "imageAlt": "Bewoonster opent de entree van een appartementencomplex met de telefoon",
+      "faq": [
+        {
+          "question": "Hoe komen bewoners met WIFIGATE het gebouw in?",
+          "answer": "Bewoners openen de deur van de hal, de poort of de ingang van de parkeergarage met hun telefoon, ieder met een eigen recht."
+        },
+        {
+          "question": "Hoe komen gasten en bezorgers binnen?",
+          "answer": "Een bewoner stuurt een tijdelijke gastuitnodiging, met de aankomstinstructies in één tik, zonder een vaste code prijs te geven."
+        },
+        {
+          "question": "Kan de VvE zien wie er toegang heeft?",
+          "answer": "Ja. De VvE of de beheerder beheert de lijst met rechten, en de toegangsgeschiedenis toont de binnenkomsten voor transparantie."
+        },
+        {
+          "question": "Vervangt WIFIGATE de gedeelde toegangscode?",
+          "answer": "Het maakt het delen van één code overbodig: elke bewoner heeft een persoonlijk recht, en gasten krijgen tijdelijke toegang in plaats van de code van het gebouw."
+        }
+      ]
     },
     "office-buildings": {
       "label": "Kantoorpanden",
@@ -262,7 +370,25 @@ export default {
       ],
       "seoTitle": "Toegangscontrole voor kantoorpanden | WIFIGATE",
       "seoDescription": "Regel met WIFIGATE de toegang van medewerkers, bezoekers en leveranciers tot je kantoorpand via de telefoon, met vaste en tijdelijke rechten en modern beheer.",
-      "imageAlt": "Medewerkster opent een glazen deur in een modern kantoor met de telefoon"
+      "imageAlt": "Medewerkster opent een glazen deur in een modern kantoor met de telefoon",
+      "faq": [
+        {
+          "question": "Hoe krijgen medewerkers toegang tot het kantoor?",
+          "answer": "Medewerkers krijgen een vast recht op hun telefoon, dat in een oogwenk wordt verwijderd als iemand vertrekt."
+        },
+        {
+          "question": "Hoe komen bezoekers binnen zonder bij de receptie te wachten?",
+          "answer": "Bezoekers krijgen tijdelijke toegang voordat ze aankomen, zodat ze met hun telefoon binnenkomen en de receptie minder aankomsten hoeft af te handelen."
+        },
+        {
+          "question": "Wat kan WIFIGATE bedienen in een kantoorpand?",
+          "answer": "Entreedeuren, verdiepingen, ruimtes en ingangen van parkeergarages."
+        },
+        {
+          "question": "Wordt er bijgehouden wie er binnenkomt?",
+          "answer": "Ja. De toegangsgeschiedenis laat zien wie wanneer heeft geopend, voor de bedrijfsvoering en voor transparantie."
+        }
+      ]
     },
     "entry-doors-magnetic-locks": {
       "label": "Toegangsdeuren en magneetsloten voor bedrijven",
@@ -298,7 +424,25 @@ export default {
       ],
       "seoTitle": "Toegangsdeuren en magneetsloten voor bedrijven | WIFIGATE",
       "seoDescription": "WIFIGATE maakt toegangsdeuren en magneetsloten van bedrijven slim: rechtenbeheer vanaf de telefoon, tijdelijke toegang en minder codes en sleutels.",
-      "imageAlt": "Klant opent de toegangsdeur van een klein bedrijf met de telefoon"
+      "imageAlt": "Klant opent de toegangsdeur van een klein bedrijf met de telefoon",
+      "faq": [
+        {
+          "question": "Werkt WIFIGATE met een magneetslot?",
+          "answer": "Ja. WIFIGATE is geschikt voor toegangsdeuren met een elektrisch slot of magneetslot en opent ze met de telefoon."
+        },
+        {
+          "question": "Kan ik een monteur of leverancier tijdelijke toegang geven?",
+          "answer": "Ja. Deel een tijdelijk recht voor het bezoek in plaats van de deurcode door te geven."
+        },
+        {
+          "question": "Heb ik een complex toegangscontrolesysteem nodig?",
+          "answer": "Nee. WIFIGATE is een eenvoudige, moderne optie voor bedrijven die met de telefoon naar binnen willen zonder complex toegangscontrolesysteem."
+        },
+        {
+          "question": "Welke bedrijven gebruiken het?",
+          "answer": "Kleine bedrijven, klinieken, studio's, kantoren en magazijnen."
+        }
+      ]
     },
     "sports-facilities": {
       "label": "Sportaccommodaties",
@@ -334,7 +478,25 @@ export default {
       ],
       "seoTitle": "Toegangscontrole voor sportaccommodaties en padelbanen | WIFIGATE",
       "seoDescription": "WIFIGATE brengt slimme toegangscontrole naar sportaccommodaties, padelbanen en sportscholen, met toegang via de telefoon en tijdelijke of vaste rechten.",
-      "imageAlt": "Padelspeelster opent de toegang tot een verlichte sportbaan met de telefoon"
+      "imageAlt": "Padelspeelster opent de toegang tot een verlichte sportbaan met de telefoon",
+      "faq": [
+        {
+          "question": "Kan de toegang de openingstijden of reserveringen volgen?",
+          "answer": "Ja. Toegang kan worden gegeven op basis van openingstijden, reserveringen of rechten, en tijdschema's kunnen openen op vaste dagen en tijden."
+        },
+        {
+          "question": "Kunnen leden, trainers en gasten verschillende toegang krijgen?",
+          "answer": "Ja. Elk type gebruiker krijgt een eigen recht: een vast lid, een trainer die op bepaalde dagen komt of een eenmalige gast."
+        },
+        {
+          "question": "Kan ik zien wie er op de locatie was?",
+          "answer": "Ja. De toegangsgeschiedenis laat zien wie wanneer heeft geopend. Dat helpt het beheer en bevestigt dat de locatie aan het eind van de dag was afgesloten."
+        },
+        {
+          "question": "Voor welke sportaccommodaties is WIFIGATE geschikt?",
+          "answer": "Voor padelbanen, tennisbanen, sportscholen en trainingscomplexen."
+        }
+      ]
     },
     "storage-lockers": {
       "label": "Opslagruimtes en lockers",
@@ -370,7 +532,25 @@ export default {
       ],
       "seoTitle": "Slimme toegangscontrole voor opslagruimtes en lockers | WIFIGATE",
       "seoDescription": "WIFIGATE geeft elke huurder van een opslagruimte of locker persoonlijke toegang via de telefoon tot de poort, de deuren en de eigen locker, beperkt tot openingstijden, vastgelegd in de geschiedenis en ingetrokken wanneer de huur stopt.",
-      "imageAlt": "Vrouw opent met haar telefoon de deur van een opslaglocatie met lockers en opslagboxen"
+      "imageAlt": "Vrouw opent met haar telefoon de deur van een opslaglocatie met lockers en opslagboxen",
+      "faq": [
+        {
+          "question": "Hoe openen huurders de poort en hun locker?",
+          "answer": "Met hun telefoon, met een persoonlijk toegangsrecht voor de poort van het terrein, de ingang van het gebouw en, waar geïnstalleerd, een elektrisch vergrendelde opslagbox of locker."
+        },
+        {
+          "question": "Kan de toegang worden beperkt tot de openingstijden?",
+          "answer": "Ja. Sta toegang alleen toe tijdens de openingstijden of geef een huurder een ruimer tijdvenster; verhuizers en familieleden kunnen eenmalige toegang krijgen."
+        },
+        {
+          "question": "Wat gebeurt er als de huur stopt?",
+          "answer": "Je trekt de toegang van de huurder direct in. Er zijn geen sleutels in te nemen en geen codes te wijzigen."
+        },
+        {
+          "question": "Heeft de locatie internet bij de deur nodig?",
+          "answer": "Nee. De telefoon communiceert rechtstreeks met het apparaat ter plaatse, zonder SIM-kaart of internetverbinding bij de deur."
+        }
+      ]
     }
   }
 };
