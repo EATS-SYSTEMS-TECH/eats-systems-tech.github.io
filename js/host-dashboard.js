@@ -55,8 +55,9 @@ function hideProtected(sessionEnded = false) {
   protectedElements.account.hidden = true;
   clearSecret();
 }
-function showStatus(title, message, retry = true) {
+function showStatus(title, message, retry = true, loading = false) {
   $("#access-panel").hidden = false;
+  $("#access-progress").hidden = !loading;
   $("#access-title").textContent = title;
   $("#dashboard-status").textContent = message;
   $("#refresh-access").hidden = !retry;
@@ -90,7 +91,7 @@ async function loadDashboard(user) {
   $("#account-name").textContent = user.email || "Signed-in account";
   $("#sidebar-account-name").textContent = user.email || "Signed-in account";
   $("#sign-out").disabled = false;
-  showStatus("Checking portal access", "Verifying your account...", false);
+  showStatus("Checking portal access", "Verifying your account...", false, true);
   try {
     const value = await getProfile(user);
     if (requestGeneration !== generation) {

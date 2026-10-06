@@ -117,6 +117,16 @@ html:has(body.app-login) { height: 100%; overscroll-behavior: none; }
 .app-login__provider--apple:hover:not(:disabled) { filter: brightness(1.25); }
 .app-login__provider:disabled { opacity: 0.55; cursor: progress; }
 .app-login__provider:focus-visible, .app-login__text-button:focus-visible, .app-login__legal a:focus-visible { outline: 3px solid #0b63ff; outline-offset: 2px; }
+/* Sign-in progress: an indeterminate bar from the provider tap until the
+   dashboard opens. */
+.app-login__progress { position: relative; height: 4px; margin: 16px 0 0; border-radius: 999px; background: #e6edf7; overflow: hidden; }
+.app-login__progress[hidden] { display: none; }
+.app-login__progress span { position: absolute; inset: 0 auto 0 0; width: 40%; border-radius: inherit; background: linear-gradient(90deg, #0b63ff, #5b9bff); animation: wg-login-progress 1.15s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+@keyframes wg-login-progress { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
+@media (prefers-reduced-motion: reduce) {
+  .app-login__progress span { width: 100%; animation: wg-login-pulse 1.6s ease-in-out infinite; }
+  @keyframes wg-login-pulse { 50% { opacity: 0.35; } }
+}
 .app-login__status { min-height: 1.25rem; margin: 14px 0 0; color: #64748b; font-size: 0.875rem; line-height: 1.5; text-align: center; }
 .app-login__status:empty { display: none; }
 .app-login__redirect { margin-top: 12px; color: #64748b; font-size: 0.875rem; text-align: center; }
