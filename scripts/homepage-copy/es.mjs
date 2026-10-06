@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "Un repartidor sigue una ruta azul punteada hasta la entrada de un edificio de viviendas mientras un residente sostiene la aplicación WIFIGATE con un acceso para huéspedes limitado en el tiempo.",
     eyebrow: "Acceso privado",
     title: "Los edificios y las viviendas particulares no son espacios públicos.",
     description: "Deja de compartir códigos permanentes de intercomunicador. Comparte en su lugar accesos temporales para reducir las entradas no autorizadas y el riesgo de robo.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "Vista general del sistema WIFIGATE: el dispositivo IP67, la aplicación móvil y la placa de control con sus bornes de conexión, USB Type-C y entrada de 12-24V, Wi-Fi 6, Bluetooth LE y un receptor de 433,92MHz, junto a las funciones de la plataforma: 5.000 usuarios, 100 administradores, invitaciones ilimitadas para huéspedes, una API de invitaciones automatizadas, sin SIM ni router, estabilidad, invitación rápida para huéspedes, historial de 90 días, apertura automática, hasta 10 eventos, aprendizaje de mandos RF digitales, seguridad y privacidad, y sin cuotas de suscripción.",
     eyebrow: "Guía del producto",
     title: "Fácil desde el primer día.",
     subtitle: "Instrucciones claras para la instalación, el acceso diario y la configuración avanzada.",
@@ -113,6 +115,7 @@ const copy = {
     status: "Próximamente",
   },
   oneTapInvite: {
+    imageAlt: "Una ruta azul punteada lleva desde la calle hasta un marcador de ubicación en la entrada de un edificio de viviendas.",
     eyebrow: "Un toque. Todo lo que necesitan.",
     title: "Deja de repetir indicaciones.\nEnvía una invitación completa.",
     description: "WIFIGATE te permite compartir las notas de llegada, la dirección, el piso, el apartamento,\nlos datos del intercomunicador y el acceso temporal con un solo toque.",

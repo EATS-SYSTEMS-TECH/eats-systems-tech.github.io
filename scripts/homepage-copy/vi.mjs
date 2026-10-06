@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "Một người giao hàng đi theo lộ trình chấm xanh đến lối vào chung cư, trong khi một cư dân cầm ứng dụng WIFIGATE hiển thị quyền truy cập cho khách có giới hạn thời gian.",
     eyebrow: "Kiểm soát lối vào riêng tư",
     title: "Tòa nhà và nhà riêng không phải không gian công cộng.",
     description: "Không còn chia sẻ mã hệ thống liên lạc nội bộ cố định. Thay vào đó, hãy cấp quyền ra vào có thời hạn để giảm tình trạng xâm nhập trái phép và nguy cơ mất cắp.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "Tổng quan hệ thống WIFIGATE: thiết bị IP67, ứng dụng di động và bo mạch điều khiển với các khối đấu dây, USB Type-C và đầu vào 12-24V, Wi-Fi 6, Bluetooth LE cùng bộ thu 433,92MHz, bên cạnh các tính năng của nền tảng - 5.000 người dùng, 100 quản trị viên, lời mời khách không giới hạn, API mời khách tự động, không cần SIM hay router, ổn định, mời khách nhanh, lịch sử 90 ngày, tự động mở, tối đa 10 sự kiện, học remote RF kỹ thuật số, bảo mật và quyền riêng tư, và không mất phí thuê bao.",
     eyebrow: "Hướng dẫn sản phẩm",
     title: "Đơn giản ngay từ ngày đầu.",
     subtitle: "Hướng dẫn rõ ràng về lắp đặt, truy cập hằng ngày và cấu hình nâng cao.",
@@ -113,6 +115,7 @@ const copy = {
     status: "Sắp ra mắt",
   },
   oneTapInvite: {
+    imageAlt: "Một lộ trình chấm xanh dẫn từ đường phố đến ghim vị trí tại lối vào tòa chung cư.",
     eyebrow: "Một lần chạm. Đủ mọi thông tin họ cần.",
     title: "Không cần lặp lại chỉ dẫn.\nGửi một lời mời đầy đủ.",
     description: "WIFIGATE giúp bạn chia sẻ hướng dẫn khi đến, địa chỉ, tầng, số căn hộ,\nthông tin liên lạc nội bộ và quyền truy cập có thời hạn chỉ bằng một lần chạm.",

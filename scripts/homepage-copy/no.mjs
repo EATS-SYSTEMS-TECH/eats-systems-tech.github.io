@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "Et bud følger en blå stiplet rute til inngangen til en boligblokk mens en beboer holder WIFIGATE-appen som viser tidsbegrenset gjestetilgang.",
     eyebrow: "Privat tilgang",
     title: "Bygninger og private boliger er ikke offentlige rom.",
     description: "Slutt å dele permanente dørtelefonkoder. Del tidsbegrenset tilgang i stedet, slik at du reduserer uautorisert adgang og bidrar til lavere tyveririsiko.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "Oversikt over WIFIGATE-systemet: IP67-enheten, mobilappen og styrekortet med rekkeklemmer, USB Type-C og 12-24V-inngang, Wi-Fi 6, Bluetooth LE og en 433,92MHz-mottaker, sammen med plattformfunksjonene – 5000 brukere, 100 administratorer, ubegrensede gjesteinvitasjoner, et API for automatiserte gjesteinvitasjoner, uten SIM-kort eller ruter, stabilitet, rask gjesteinvitasjon, 90 dagers historikk, automatisk åpning, opptil 10 arrangementer, innlæring av digitale RF-fjernkontroller, sikkerhet og personvern, og ingen abonnementsavgifter.",
     eyebrow: "Produktveiledning",
     title: "Enkelt fra første dag.",
     subtitle: "Klar veiledning for installasjon, daglig tilgang og avansert konfigurasjon.",
@@ -113,6 +115,7 @@ const copy = {
     status: "Kommer snart",
   },
   oneTapInvite: {
+    imageAlt: "En blå stiplet rute går fra gaten til en posisjonsnål ved inngangen til en boligblokk.",
     eyebrow: "Ett trykk. Alt de trenger.",
     title: "Slipp å gjenta veibeskrivelser.\nSend én komplett invitasjon.",
     description: "WIFIGATE lar deg dele ankomstnotater, adresse, etasje, leilighet,\ndørtelefoninformasjon og tidsbegrenset tilgang med ett trykk.",

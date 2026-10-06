@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "A courier follows a dotted blue route to an apartment entrance while a resident holds the WIFIGATE app showing time-limited guest access.",
     eyebrow: "Private access",
     title: "Buildings and private homes are not public spaces.",
     description: "Stop sharing permanent intercom codes. Share time-limited access instead to reduce unauthorized entry and help lower the risk of theft.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "WIFIGATE system overview: the IP67 device, the mobile app, and the control board with its terminal blocks, USB Type-C and 12-24V input, Wi-Fi 6, Bluetooth LE and a 433.92MHz receiver, alongside the platform features - 5,000 users, 100 admins, unlimited guest invites, an automated guest invites API, no SIM or router, stability, quick guest invite, 90-day history, auto open, up to 10 events, digital RF remote learning, security and privacy, and no subscription fees.",
     eyebrow: "Product guide",
     title: "Straightforward from day one.",
     subtitle: "Clear guidance for installation, everyday access, and advanced configuration.",
@@ -113,6 +115,7 @@ const copy = {
     status: "Coming soon",
   },
   oneTapInvite: {
+    imageAlt: "A dotted blue route leads from the street to a location pin at an apartment building entrance.",
     eyebrow: "One tap. Everything they need.",
     title: "Stop repeating directions.\nSend one complete invite.",
     description: "WIFIGATE lets you share arrival notes, the address, floor, apartment,\nintercom details, and time-limited access in one tap.",

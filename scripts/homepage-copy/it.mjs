@@ -62,6 +62,7 @@ const copy = {
     ],
   },
   privateAccess: {
+    imageAlt: "Un corriere segue un percorso blu tratteggiato fino all'ingresso di un condominio mentre un residente tiene in mano l'app WIFIGATE che mostra un accesso ospite a tempo limitato.",
     eyebrow: "Accesso privato",
     title: "Gli edifici e le case private non sono spazi pubblici.",
     description: "Smetti di condividere codici permanenti del citofono. Condividi invece accessi temporanei per ridurre gli ingressi non autorizzati e il rischio di furto.",
@@ -99,6 +100,7 @@ const copy = {
     ],
   },
   productGuide: {
+    imageAlt: "Panoramica del sistema WIFIGATE: il dispositivo IP67, l'app mobile e la scheda di controllo con morsettiere, USB Type-C e ingresso 12-24V, Wi-Fi 6, Bluetooth LE e un ricevitore a 433,92MHz, insieme alle funzioni della piattaforma: 5.000 utenti, 100 amministratori, inviti illimitati per gli ospiti, un'API per inviti automatizzati, nessuna SIM né router, stabilità, invito rapido per gli ospiti, cronologia di 90 giorni, apertura automatica, fino a 10 eventi, apprendimento di telecomandi RF digitali, sicurezza e privacy, e nessun costo di abbonamento.",
     eyebrow: "Guida del prodotto",
     title: "Semplice dal primo giorno.",
     subtitle: "Guida chiara per l'installazione, l'uso quotidiano e la configurazione avanzata.",
@@ -113,6 +115,7 @@ const copy = {
     status: "Prossimamente",
   },
   oneTapInvite: {
+    imageAlt: "Un percorso blu tratteggiato conduce dalla strada a un segnaposto all'ingresso di un condominio.",
     eyebrow: "Un tocco. Tutto quello che serve.",
     title: "Smetti di ripetere le indicazioni.\nInvia un invito completo.",
     description: "WIFIGATE ti permette di condividere le note d'arrivo, l'indirizzo, il piano, l'appartamento,\ni dettagli del citofono e l'accesso temporaneo con un solo tocco.",
