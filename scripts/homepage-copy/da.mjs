@@ -10,6 +10,7 @@ const copy = {
     contact: "Kontakt os",
   },
   hero: {
+    media: {"replay":"Afspil video igen","mute":"Slå video fra","unmute":"Slå video til","pause":"Sæt videoen på pause","play":"Afspil videoen"},
     titleLines: ["Én platform.", "Hver ejendom."],
     subtitle: "Smart adgangskontrol til boliger, erhvervsejendomme og overnatningssteder. Alt i én app. Helt enkelt.",
     primaryCta: "Udforsk platformen",

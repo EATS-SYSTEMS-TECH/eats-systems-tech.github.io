@@ -10,6 +10,7 @@ const copy = {
     contact: "聯絡我們",
   },
   hero: {
+    media: {"replay":"再次播放視頻","mute":"將影片靜音","unmute":"取消視訊靜音","pause":"暫停影片","play":"播放影片"},
     titleLines: ["一個平台。", "適用各類物業。"],
     subtitle: "住宅、商辦與旅宿場景的智慧出入管理，一個 App 全面掌握，操作直覺好上手。",
     primaryCta: "探索平台",

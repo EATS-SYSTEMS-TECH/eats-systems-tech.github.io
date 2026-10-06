@@ -1,11 +1,6 @@
 // /js/main.js
 // Version: 1.2.0
 
-function resolveStaticPageLanguage() {
-  const lang = document.documentElement.getAttribute("lang") || "en";
-  return typeof lang === "string" && lang.trim() ? lang.trim() : "en";
-}
-
 function setupRevealOnScroll() {
   const revealEls = $$(".js-reveal");
   if (!revealEls.length) return;
@@ -113,19 +108,8 @@ function setupTabNavigation() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const pageLang = resolveStaticPageLanguage();
-  const pageDir =
-    document.documentElement.getAttribute("dir") ||
-    (pageLang === "he" || pageLang === "ar" ? "rtl" : "ltr");
-
-  if (typeof changeLanguage === "function") {
-    changeLanguage(pageLang);
-  } else {
-    window.currentLanguage = pageLang;
-    document.documentElement.setAttribute("lang", pageLang);
-    document.documentElement.setAttribute("dir", pageDir);
-    document.body.classList.toggle("rtl", pageDir === "rtl");
-  }
+  // The page is generated in its language; only the body class follows dir.
+  document.body.classList.toggle("rtl", document.documentElement.getAttribute("dir") === "rtl");
 
   if (typeof setupAccessibilityWidget === "function") {
     setupAccessibilityWidget();

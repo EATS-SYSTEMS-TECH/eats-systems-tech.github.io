@@ -10,6 +10,7 @@ const copy = {
     contact: "Kontakt oss",
   },
   hero: {
+    media: {"replay":"Spill av video igjen","mute":"Demp video","unmute":"Slå på lyden for video","pause":"Sett videoen på pause","play":"Spill av videoen"},
     titleLines: ["Én plattform.", "Hver eiendom."],
     subtitle: "Smart adgangskontroll for boliger, næringseiendommer og overnattingssteder. Alt i én app. Enkelt og brukervennlig.",
     primaryCta: "Utforsk plattformen",

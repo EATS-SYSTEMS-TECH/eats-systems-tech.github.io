@@ -10,6 +10,7 @@ const copy = {
     contact: "Get in touch",
   },
   hero: {
+    media: {"replay":"Play Video Again","mute":"Mute video","unmute":"Unmute video","pause":"Pause video","play":"Play video"},
     titleLines: ["One platform.", "Every property."],
     subtitle: "Smart access and control for residential, commercial, and hospitality spaces. All in one app. Effortlessly simple.",
     primaryCta: "Explore the platform",

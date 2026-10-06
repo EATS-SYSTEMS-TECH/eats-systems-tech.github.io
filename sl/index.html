@@ -85,7 +85,7 @@
   <script src="../js/utils.js?v=20260402a" defer=""></script>
 
   <script src="../js/navigation.js?v=20261007a" defer=""></script>
-  <script src="../js/hero.js?v=20261007a" defer=""></script>
+  <script src="../js/hero.js?v=20261007b" defer=""></script>
 
   <script>window.accessibilityCopy = {"sl":{"skipLink":"Preskoči na glavno vsebino","eyebrow":"Dostopnost","openButton":"Odpri meni za dostopnost","closeButton":"Zapri meni za dostopnost","title":"Meni za dostopnost","description":"Prilagodite spletno mesto načinu, kako berete in se premikate po njem. Vaše izbire se shranijo v tej napravi.","reset":"Ponastavi vse","statusDefault":"Standardni prikaz spletnega mesta","statusActive":"Aktivne prilagoditve: {count}","hideButton":"Skrij gumb za dostopnost do ponovnega nalaganja strani","statementLink":"Izjava o dostopnosti","textSize":{"label":"Velikost besedila","description":"Povečaj besedilo na celotnem spletnem mestu.","decrease":"Manjše besedilo","increase":"Večje besedilo","level":"Velikost besedila {percent} %"},"options":{"highContrast":{"label":"Visok kontrast","description":"Temno besedilo na svetlem ozadju z izrazitimi obrobami."},"grayscale":{"label":"Sivine","description":"Prikaži spletno mesto brez barv."},"underlineLinks":{"label":"Poudari povezave","description":"Podčrtaj in označi vsako povezavo."},"readableFont":{"label":"Berljiva pisava","description":"Preprosta, zelo berljiva pisava."},"textSpacing":{"label":"Razmik besedila","description":"Več prostora med vrsticami, besedami in črkami."},"highlightHeadings":{"label":"Poudari naslove","description":"Označi naslove, da se vidi zgradba strani."},"bigCursor":{"label":"Velik kazalec","description":"Večji kazalec miške."},"focusHighlight":{"label":"Izrazit fokus","description":"Debela obroba okoli elementa s fokusom tipkovnice."},"reducedMotion":{"label":"Ustavi animacije","description":"Ustavi animacije, prehode in videoposnetek v ozadju."}}}};</script>
   <script src="../js/accessibility.js?v=20261007a" defer=""></script>
@@ -93,7 +93,7 @@
 
 
   <script src="../js/language-selector.js?v=20261006a" defer=""></script>
-  <script id="hero-locale-data" type="application/json">{"phrases":["Enostavna uporaba","Popolna zasebnost","Brez naročnin"],"media":{"replay":"Play Video Again","mute":"Mute video","unmute":"Unmute video"}}</script><script src="../js/main.js?v=20261007a" defer=""></script>
+  <script id="hero-locale-data" type="application/json">{"media":{"replay":"Znova predvajaj video","mute":"Izklopi zvok","unmute":"Vklopi zvok","pause":"Začasno ustavi video","play":"Predvajaj video"}}</script><script src="../js/main.js?v=20261007b" defer=""></script>
 
   <style>
     .contact-info__avatar {
@@ -641,7 +641,7 @@
           <source src="../assets/vid/wifigate-final-hero-720p.mp4?v=20261007" type="video/mp4">
         </video>
         <div class="hero__overlay"></div>
-        <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="Pause video" title="Pause video" aria-pressed="false" data-paused="false">
+        <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="Začasno ustavi video" title="Začasno ustavi video" aria-pressed="false" data-paused="false">
           <svg class="hero__media-control-icon hero__media-control-icon--pause" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
             <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
@@ -650,7 +650,7 @@
             <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" fill="currentColor"></path>
           </svg>
         </button>
-        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="Unmute video" title="Unmute video" aria-pressed="false" data-muted="true">
+        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="Vklopi zvok" title="Vklopi zvok" aria-pressed="false" data-muted="true">
           <svg class="hero__media-control-icon hero__media-control-icon--muted" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M14 4.12v15.76a1 1 0 0 1-1.68.73l-4.04-3.61H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.28l4.04-3.61A1 1 0 0 1 14 4.12Z" fill="currentColor"></path>
             <path d="m17 9 4 4m0-4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -661,12 +661,12 @@
             <path d="M19.75 7a8 8 0 0 1 0 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
         </button>
-        <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" hidden="" aria-label="Play Video Again" title="Play Video Again">
+        <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" hidden="" aria-label="Znova predvajaj video" title="Znova predvajaj video">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 5V2l-4 4 4 4V7a7 7 0 1 1-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
             <path d="m11 10 5 3-5 3z" fill="currentColor"></path>
           </svg>
-          <span>Play Video Again</span>
+          <span>Znova predvajaj video</span>
         </button>
       </div>
 
