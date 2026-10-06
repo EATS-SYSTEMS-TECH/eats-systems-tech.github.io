@@ -3,25 +3,25 @@ const copy = {
     ariaLabel: "Main navigation",
     toggleLabel: "Toggle navigation menu",
     selectLanguageLabel: "Select language",
-    platform: "Platform",
-    solutions: "Solutions",
+    platform: "How it works",
+    solutions: "Use cases",
     automation: "WIFIGATE Host",
-    productGuide: "Product Guide",
+    productGuide: "Tutorial videos",
     contact: "Get in touch",
   },
   hero: {
     media: {"replay":"Play Video Again","mute":"Mute video","unmute":"Unmute video","pause":"Pause video","play":"Play video"},
-    titleLines: ["One platform.", "Every property."],
-    subtitle: "Smart access and control for residential, commercial, and hospitality spaces. All in one app. Effortlessly simple.",
-    primaryCta: "Explore the platform",
+    titleLines: ["One app.", "All your entrances."],
+    subtitle: "Smart access and control for homes, buildings, businesses, and hospitality venues. All in one platform, simple and effortless.",
+    primaryCta: "How it works",
     secondaryCta: "Talk to our team",
     proofLabel: "Platform benefits",
-    proof: ["Complete privacy", "Easy to use", "No subscription for standard use", "Quick guest access"],
+    proof: ["Complete privacy", "Easy to use", "Arrival directions in one tap", "Time-limited guest access"],
   },
   platform: {
     eyebrow: "What is WIFIGATE?",
     title: "Access without the usual friction.",
-    subtitle: "WIFIGATE is a WiFi gate access control system for opening gates, doors, parking barriers, garage doors, and electric roller shutters from a phone. It brings everyday and guest access into one secure platform.",
+    subtitle: "WIFIGATE is an encrypted access control system that combines WiFi and Bluetooth to open gates, doors, parking barriers, garage doors, and electric roller shutters from your phone. It brings everyday access and guest access together in one secure platform.",
     features: [
       {
         title: "No SIM, No Router",
@@ -29,11 +29,11 @@ const copy = {
       },
       {
         title: "Stability",
-        text: "A streamlined architecture keeps access responsive and dependable while supporting secure, private, encrypted operation.",
+        text: "The direct connection to the device responds instantly and just as fast every time, with no remote-server delays and no dependence on network load or poor reception.",
       },
       {
         title: "Quick Guest Invite",
-        text: "Send a secure guest invitation in seconds so visitors can enter without calls, shared remotes, or manual coordination.",
+        text: "Send a secure entry invitation with arrival directions to a courier or guest in seconds, so visitors can get in without calls, shared remotes, or manual coordination.",
       },
       {
         title: "90-Day History",
@@ -45,7 +45,7 @@ const copy = {
       },
       {
         title: "Up to 50 Scheduled Events",
-        text: "Create recurring access schedules and automated actions directly in the system to match how your site operates.",
+        text: "Create recurring schedules and automated actions directly in the system to match how your site operates, including Shabbat mode support.",
       },
       {
         title: "Digital RF Remote Learning",
@@ -53,24 +53,25 @@ const copy = {
       },
       {
         title: "Security & Privacy",
-        text: "WIFIGATE is designed around secure handling, encrypted storage, and private operation.",
+        text: "Communication with the device and stored data are encrypted, so access to your property and the information about it stay private.",
       },
       {
         title: "No Subscription Fees",
-        text: "Pay once for the device and installation, with no monthly subscription, renewal cycle, or ongoing platform fee. Commercial use of WIFIGATE Host is the only exception and is subscription-based.",
+        text: "Pay once for the WIFIGATE device and installation, with no monthly subscription, renewal cycle, or ongoing platform fee.",
       },
     ],
+    subscriptionNote: "* Commercial use of WIFIGATE Host requires a subscription.",
   },
   privateAccess: {
     imageAlt: "A courier follows a dotted blue route to an apartment entrance while a resident holds the WIFIGATE app showing time-limited guest access.",
     eyebrow: "Private access",
     title: "Buildings and private homes are not public spaces.",
-    description: "Stop sharing permanent intercom codes. Share time-limited access instead to reduce unauthorized entry and help lower the risk of theft.",
+    description: "Stop sharing permanent intercom codes. Send a time-limited entry permission with arrival directions in one tap, and reduce unauthorized entry and the risk of theft.",
   },
   solutions: {
     eyebrow: "Built for every entrance",
     titleLines: ["One system.", "Every way in."],
-    subtitle: "From a private garage to a multi-property portfolio, manage every gate, door, barrier, and lock through one secure platform.",
+    subtitle: "Open from your phone, give access to whoever needs it, and decide when it ends.",
     imageAlt: "The WIFIGATE app on a phone, listing a home gate, a workplace, and a time-limited guest pass",
   },
   automation: {
@@ -82,7 +83,7 @@ const copy = {
     subtitle: "From hotel stays to holiday apartments, connect each booking to secure access for the right gate, door, or garage. Guests enter using their phone, with access that starts at check-in and ends automatically at checkout.",
     cta: "Explore WIFIGATE Host",
     imageAlt: "Guests using a phone to enter their accommodation",
-    stayCaption: "Every stay, taken care of",
+    stayCaption: "Every stay, from booking to checkout",
     staySteps: ["Booking received", "Access at check-in", "Expires at checkout"],
     points: [
       {
@@ -94,14 +95,15 @@ const copy = {
         text: "Every invitation starts at check-in and expires at checkout, for every stay.",
       },
       {
-        title: "Encrypted and private",
-        text: "Access is encrypted and works locally at the entrance, helping keep your property protected.",
+        icon: "team",
+        title: "Saves staff hours",
+        text: "Your team focuses on hosting instead of the logistics of key cards and other physical credentials.",
       },
     ],
   },
   productGuide: {
     imageAlt: "WIFIGATE system overview: the IP67 device, the mobile app, and the control board with its terminal blocks, USB Type-C and 12-24V input, Wi-Fi 6, Bluetooth LE and a 433.92MHz receiver, alongside the platform features - 500 users, 20 admins, unlimited guest invites, an automated guest invites API, no SIM or router, stability, quick guest invite, 90-day history, auto open, up to 50 events, digital RF remote learning, security and privacy, and no subscription fees.",
-    eyebrow: "Product guide",
+    eyebrow: "Tutorial videos",
     title: "Straightforward from day one.",
     subtitle: "Clear guidance for installation, everyday access, and advanced configuration.",
     items: [
@@ -118,7 +120,7 @@ const copy = {
     imageAlt: "A dotted blue route leads from the street to a location pin at an apartment building entrance.",
     eyebrow: "One tap. Everything they need.",
     title: "Stop repeating directions.\nSend one complete invite.",
-    description: "WIFIGATE lets you share arrival notes, the address, floor, apartment,\nintercom details, and time-limited access in one tap.",
+    description: "WIFIGATE lets you share arrival directions, the address, floor,\napartment number, extra details, and time-limited access in one tap.",
   },
   faq: {
     eyebrow: "WiFi gate explained",
@@ -135,7 +137,7 @@ const copy = {
       },
       {
         question: "Does WIFIGATE require a monthly subscription?",
-        answer: "No. You pay once for the WIFIGATE device and installation, with no monthly subscription, renewal cycle, or ongoing platform fee. WIFIGATE Host for commercial use is the only exception and is available by subscription.",
+        answer: "No. You pay once for the WIFIGATE device and installation, with no monthly subscription, renewal cycle, or ongoing platform fee. WIFIGATE Host for commercial use is the only exception and requires a subscription.",
       },
       {
         question: "Can WIFIGATE provide temporary guest access?",
@@ -153,18 +155,22 @@ const copy = {
   contact: {
     eyebrow: "Start a conversation",
     title: "Make every arrival simpler.",
-    subtitle: "Tell us what you want to open: a gate, door, or electric shutter. Our team will help you find the right approach.",
-    distributorTitle: "Build with us",
-    distributorText: "Bring secure digital access to your market through our international distributor program.",
+    subtitle: "Tell us what you want to open: a gate, a door, an electric shutter...\nOur team will help you find the right solution.",
+    distributorTitle: "Distributor program",
+    distributorText: "You know the market and the customers. We bring the product, the training, and the support.",
     distributorButton: "Become a distributor",
     supportTitle: "Product support",
     supportText: "Get practical help from a team that understands the product and your installation.",
-    interestTitle: "Plan your access",
+    interestTitle: "Plan your access solution with us",
     interestText: "Talk with us about your property, pricing, and the right setup for your needs.",
     whatsappButton: "Talk on WhatsApp",
   },
   footer: {
-    tagline: "No keys. No remotes. No cards.\nSecure digital access, without waiting for anyone to let you in.",
+    tagline: "No keys. No remotes. No cards. Secure digital access, without waiting for anyone to let you in.",
+    taglineLines: [
+      "No keys. No remotes. No cards.",
+      "Secure digital access, without waiting for anyone to let you in.",
+    ],
     legalTitle: "Legal",
     terms: "Terms & Conditions",
     privacy: "Privacy Policy",

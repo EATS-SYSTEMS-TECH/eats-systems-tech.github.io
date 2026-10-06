@@ -164,7 +164,7 @@ window.accessibilityCopy = {
       },
       "bigCursor": {
         "label": "Cursor grande",
-        "description": "Un puntero del ratón más grande."
+        "description": "Un puntero más grande."
       },
       "focusHighlight": {
         "label": "Foco bien visible",
@@ -172,7 +172,7 @@ window.accessibilityCopy = {
       },
       "reducedMotion": {
         "label": "Detener animaciones",
-        "description": "Detiene las animaciones, las transiciones y el vídeo de fondo."
+        "description": "Detiene las animaciones, las transiciones y el video de fondo."
       }
     }
   },
@@ -205,7 +205,7 @@ window.accessibilityCopy = {
         "description": "Afficher le site sans couleurs."
       },
       "underlineLinks": {
-        "label": "Surligner les liens",
+        "label": "Mettre en évidence les liens",
         "description": "Souligner et signaler chaque lien."
       },
       "readableFont": {
@@ -217,8 +217,8 @@ window.accessibilityCopy = {
         "description": "Plus d'espace entre les lignes, les mots et les lettres."
       },
       "highlightHeadings": {
-        "label": "Surligner les titres",
-        "description": "Signaler les titres pour montrer la structure de la page."
+        "label": "Mettre en évidence les titres",
+        "description": "Repérer les titres pour montrer la structure de la page."
       },
       "bigCursor": {
         "label": "Grand curseur",
@@ -805,7 +805,7 @@ window.accessibilityCopy = {
         "description": "Daha büyük bir fare işaretçisi."
       },
       "focusHighlight": {
-        "label": "Belirgin odak",
+        "label": "Belirgin odak göstergesi",
         "description": "Klavye odağındaki öğenin çevresinde kalın bir çerçeve."
       },
       "reducedMotion": {
@@ -863,11 +863,11 @@ window.accessibilityCopy = {
         "description": "مؤشر فأرة أكبر."
       },
       "focusHighlight": {
-        "label": "تركيز واضح",
+        "label": "إبراز موضع التركيز",
         "description": "إطار سميك حول العنصر الذي عليه تركيز لوحة المفاتيح."
       },
       "reducedMotion": {
-        "label": "إيقاف الحركة",
+        "label": "إيقاف الرسوم المتحركة",
         "description": "إيقاف الرسوم المتحركة والانتقالات وفيديو الخلفية."
       }
     }
@@ -1142,7 +1142,7 @@ window.accessibilityCopy = {
       },
       "textSpacing": {
         "label": "文字间距",
-        "description": "增加行、词和字母之间的间距。"
+        "description": "加大行距、词距和字间距。"
       },
       "highlightHeadings": {
         "label": "突出显示标题",
@@ -1200,7 +1200,7 @@ window.accessibilityCopy = {
       },
       "textSpacing": {
         "label": "文字間距",
-        "description": "加大行、字詞與字母之間的間距。"
+        "description": "加大行距與字距。"
       },
       "highlightHeadings": {
         "label": "醒目標示標題",
@@ -1559,7 +1559,7 @@ window.accessibilityCopy = {
         "description": "Μεγαλύτερος δείκτης ποντικιού."
       },
       "focusHighlight": {
-        "label": "Έντονη εστίαση",
+        "label": "Έντονη ένδειξη εστίασης",
         "description": "Παχύ περίγραμμα γύρω από το στοιχείο που έχει την εστίαση πληκτρολογίου."
       },
       "reducedMotion": {
@@ -1733,7 +1733,7 @@ window.accessibilityCopy = {
         "description": "Suurempi hiiren osoitin."
       },
       "focusHighlight": {
-        "label": "Selkeä kohdistus",
+        "label": "Korostettu kohdistus",
         "description": "Paksu reunus näppäimistön kohdistuksessa olevan elementin ympärillä."
       },
       "reducedMotion": {
@@ -2023,7 +2023,7 @@ window.accessibilityCopy = {
         "description": "Penunjuk mouse yang lebih besar."
       },
       "focusHighlight": {
-        "label": "Fokus jelas",
+        "label": "Penanda fokus yang jelas",
         "description": "Garis tepi tebal di sekitar elemen yang mendapat fokus keyboard."
       },
       "reducedMotion": {
@@ -2197,7 +2197,7 @@ window.accessibilityCopy = {
         "description": "Penuding tetikus yang lebih besar."
       },
       "focusHighlight": {
-        "label": "Fokus jelas",
+        "label": "Penanda fokus yang jelas",
         "description": "Garis luar tebal di sekeliling elemen yang mempunyai fokus papan kekunci."
       },
       "reducedMotion": {
@@ -2212,10 +2212,10 @@ window.accessibilityCopy = {
     "openButton": "Buksan ang menu ng accessibility",
     "closeButton": "Isara ang menu ng accessibility",
     "title": "Menu ng accessibility",
-    "description": "Iangkop ang site sa paraan ng iyong pagbasa at pag-navigate. Naka-save ang iyong mga pinili sa device na ito.",
+    "description": "Iangkop ang site sa paraan ng inyong pagbasa at pag-navigate. Naka-save ang inyong mga pinili sa device na ito.",
     "reset": "I-reset lahat",
     "statusDefault": "Karaniwang view ng site",
-    "statusActive": "{count} adjustment ang aktibo",
+    "statusActive": "Aktibo ang {count} adjustment",
     "hideButton": "Itago ang accessibility button hanggang i-reload ang page",
     "statementLink": "Pahayag sa accessibility",
     "textSize": {
@@ -2255,7 +2255,7 @@ window.accessibilityCopy = {
         "description": "Mas malaking mouse pointer."
       },
       "focusHighlight": {
-        "label": "Malinaw na focus",
+        "label": "Kapansin-pansing focus",
         "description": "Makapal na outline sa elementong naka-focus sa keyboard."
       },
       "reducedMotion": {

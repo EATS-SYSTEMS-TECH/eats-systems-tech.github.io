@@ -3,19 +3,19 @@
 
 export default {
   "home": {
-    "seoTitle": "WIFIGATE | Pametno upravljanje dostopa za vrata, zapornice in parkirišča",
-    "seoDescription": "Pametno in varno upravljanje dostopa za vrata, stavbe, parkirišča in zasebne domove.",
-    "keywords": "WIFIGATE, WiFi Gate, wifi gate, smart access control, gate access control, open gate from phone, door access control, parking access, no monthly fees"
+    "seoTitle": "WIFIGATE | Pametni nadzor dostopa za vrata in parkirišča",
+    "seoDescription": "WIFIGATE je pametni sistem za nadzor dostopa: s telefonom odprete vrata, parkirišča, rolete in garaže. Varno, šifrirano in priročno, brez mesečne naročnine.",
+    "keywords": "WIFIGATE, WiFi Gate, wifi gate, pametni nadzor dostopa, odpiranje vrat s telefonom, električna vrata, nadzor dostopa, brez mesečne naročnine"
   },
   "where": {
-    "title": "Kje je mogoče uporabljati WIFIGATE?",
-    "subtitle": "WIFIGATE zagotavlja pametno, varno in preprosto upravljanje dostopa za različne vrste objektov."
+    "title": "Kje je WIFIGATE primeren za uporabo?",
+    "subtitle": "WIFIGATE je primeren za najrazličnejša okolja in zagotavlja pametno, varno in priročno upravljanje dostopa, od zasebnih hiš do poslovnih objektov in podjetij."
   },
   "niches": {
     "hotels-airbnb": {
       "label": "Hoteli, Airbnb in apartmaji za goste",
-      "title": "Pameten dostop za hotele, Airbnb in apartmaje za goste",
-      "heroLead": "Gost prejme osebno dovoljenje za vstop na telefon v trenutku, ko je rezervacija potrjena. Brez ključnih kartic, brez omarice za ključe, brez čakanja na recepciji.",
+      "title": "Gost, ki je prispel, ne bi smel čakati, da mu kdo odpre!",
+      "heroLead": "Kartica, ki jo je treba izdati, ključ, ki ga je treba predati, ali koda skrinjice za ključe, ki prehaja od gosta do gosta, vsak prihod spremenijo v ročno usklajevanje. Vsakemu gostu dajte osebno dovoljenje, ki se odpre ob prijavi in zapre ob odjavi.",
       "highlights": [
         {
           "icon": "calendar",
@@ -24,52 +24,54 @@ export default {
         },
         {
           "icon": "invite",
-          "title": "Dostop ustvari rezervacija sama",
-          "text": "Prek WIFIGATE API se vaš rezervacijski sistem poveže neposredno z dostopom, zato vsaka potrjena rezervacija sama izda dovoljenje za vstop, brez kakršnega koli ročnega koraka vmes."
+          "title": "WIFIGATE Host poveže rezervacijo z vhodom",
+          "text": "Z WIFIGATE Host potrditev rezervacije v hotelskem sistemu ali sistemu nastanitve samodejno ustvari dovoljenje za vstop in ga pošlje gostu. Brez prepisovanja podatkov, brez izdajanja kartic in brez ročnih korakov vmes.",
+          "ctaLabel": "Spoznajte WIFIGATE Host",
+          "ctaHref": "/sl/automation/"
         },
         {
           "icon": "keyless",
-          "title": "Brez kartic za izdajo in omarice za deljenje",
-          "text": "Nič za programiranje, nič za predajo, nobene kartice, ki jo je pustil prejšnji gost, in nobene kode omarice, ki kroži naprej. Edina pot noter je telefon, ki ga ima gost že v žepu."
+          "title": "Brez kartic in brez skrinjice za ključe",
+          "text": "Nič za izdajo, nič za predajo, nobene kartice, ki je ostala pri prejšnjem gostu, in nobene kode skrinjice za ključe, ki kroži naprej. Telefon gosta je edini način vstopa."
         }
       ],
-      "paragraph": "WIFIGATE omogoča gostom, da priročen in varen digitalni dostop prejmejo neposredno na telefon, brez fizičnih ključev, brez kartic in brez nepotrebnega usklajevanja z recepcijo ali lastnikom nastanitve. Z WIFIGATE API lahko postopek rezervacije povežete s sistemom za dostop, tako da gost v trenutku potrditve rezervacije samodejno prejme časovno omejen dostop. Dostop se začne ob prijavi, samodejno konča ob odjavi in bistveno zmanjša potrebo po predaji ključev, deljenju kod ali ročnem urejanju vsakega gosta posebej.",
+      "paragraph": "WIFIGATE hotelom, apartmajem za goste (Airbnb) in počitniškim kompleksom omogoča, da gostom ponudijo priročen in varen digitalni vstop neposredno s telefona.\nNamesto izdajanja magnetnih kartic, predaje fizičnih ključev ali uporabe skrinjic za ključe (lockbox) nadzor dostopa poteka samodejno.\nZ WIFIGATE Host lahko svoj rezervacijski sistem povežete neposredno s sistemom za dostop.\nPo zaslugi te povezave gost po potrditvi rezervacije prejme osebno dovoljenje za vstop.\nDovoljenje se aktivira točno ob prijavi in samodejno poteče ob odjavi, brez ročnega posredovanja, predaje ključev ali usklajevanja z recepcijo in gostitelji.",
       "bullets": [
         "Samodejen dostop za gosta, ustvarjen ob potrditvi rezervacije",
-        "Polna podpora avtomatizaciji prek WIFIGATE API",
+        "Popolna avtomatizacija z WIFIGATE Host",
         "Začasen dostop, usklajen z datumi in urami bivanja",
-        "Manj potrebe po ročni prijavi, ključih, karticah ali kodah",
+        "Manj izdajanja, predajanja in menjave sobnih kartic",
         "Upravljanje dovoljenj za osebje, čistilce, vzdrževanje in dobavitelje",
         "Bolj tekoč in udoben prihod za goste",
         "Dostop se samodejno konča ob odjavi",
         "Zgodovina dostopov za preglednost in nadzor"
       ],
-      "seoTitle": "Nadzor dostopa za hotele in Airbnb | WIFIGATE",
-      "seoDescription": "WIFIGATE prinaša pameten nadzor dostopa za hotele, Airbnb in apartmaje: samodejna dovoljenja za goste prek API, začasen dostop po rezervaciji in manj ključev.",
+      "seoTitle": "WIFIGATE | Digitalni dostop za hotele, Airbnb in letovišča",
+      "seoDescription": "Z WIFIGATE Host hoteli, Airbnb in počitniški kompleksi gostom samodejno izdajo osebno digitalno dovoljenje za vsako rezervacijo, brez ključev, kartic ali skrinjic.",
       "imageAlt": "Gostje s telefonom odpirajo vrata hotelske sobe na sodobnem hodniku",
       "faq": [
         {
-          "question": "Kako gostje z WIFIGATE odprejo dvoriščna vrata ali vrata?",
-          "answer": "Vsak gost na telefon prejme časovno omejeno povabilo in dvoriščna vrata, vrata ali garažo odpre v aplikaciji WIFIGATE. Dostop se začne ob prijavi in se samodejno konča ob odjavi, zato ni predajanja ključev, kartic ali kod."
+          "question": "Kako gostje z WIFIGATE odprejo dvoriščna ali vhodna vrata?",
+          "answer": "Vsak gost na telefon prejme časovno omejeno povabilo in v aplikaciji WIFIGATE odpre dvoriščna vrata, vhodna vrata ali garažo. Dostop se začne ob prijavi in samodejno konča ob odjavi, brez predaje ključev, kartic ali kod."
         },
         {
           "question": "Ali je dostop za goste mogoče ustvariti samodejno iz rezervacij?",
-          "answer": "Da. Z WIFIGATE Host in WIFIGATE API lahko potrjena rezervacija samodejno ustvari dostop za gosta, usklajen z datumi in urami bivanja."
+          "answer": "Da. Z WIFIGATE Host in njegovim API lahko potrjena rezervacija samodejno ustvari dostop za gosta, usklajen z datumi in urami bivanja."
         },
         {
           "question": "Ali lahko čistilci in vzdrževalci dobijo lasten dostop?",
           "answer": "Da. Osebje, čistilci, vzdrževanje in dobavitelji dobijo vsak svoje dovoljenje, zgodovina dostopov pa pokaže, kdo je odprl in kdaj."
         },
         {
-          "question": "Ali WIFIGATE za hotele in najem zahteva naročnino?",
-          "answer": "Naprava WIFIGATE nima mesečne naročnine. WIFIGATE Host, avtomatizacija rezervacij za hotele in najem, je edini del, ki je na voljo z naročnino."
+          "question": "Ali je za hotele in apartmaje za goste potrebna naročnina?",
+          "answer": "Naprava WIFIGATE nima mesečne naročnine. WIFIGATE Host, avtomatizacija rezervacij za hotele in apartmaje za goste, je edini del, ki je na voljo z naročnino."
         }
       ]
     },
     "roller-shutters": {
       "label": "Rolete za podjetja in trgovine",
-      "title": "Pametno in varnejše upravljanje rolet za podjetja in trgovine",
-      "heroLead": "Roleta se odpre s telefonom, upravljanje pa se preseli na zaščiteno notranjo stran poslovnega prostora. Manj daljincev, manj ključev in manj izpostavljenih dostopnih točk zunaj.",
+      "title": "Upravljalna točka rolete ne bi smela biti izpostavljena zunaj poslovnega prostora!",
+      "heroLead": "Stikalo, ključno stikalo ali daljinec, ki so zunaj ali krožijo med zaposlenimi, lahko pridejo v napačne roke. Upravljanje preselite na zaščiteno notranjo stran poslovnega prostora in roleto odpirajte s telefonom, z osebnim dovoljenjem za vsakega zaposlenega.",
       "highlights": [
         {
           "icon": "shutter",
@@ -87,11 +89,11 @@ export default {
           "text": "Ključ vas prisili, da stojite tik ob upravljalni točki, s polnimi rokami in slabim pogledom na roleto. S telefonom to opravite z varnejše razdalje."
         }
       ],
-      "paragraph": "Rolete v podjetjih in trgovinah se pogosto upravljajo z daljinci, ključi, zunanjim ključnim stikalom ali stikali, nameščenimi zunaj prostorov. Takšne rešitve se lahko izgubijo, ostanejo nekdanjim zaposlenim, se podvojijo ali postanejo izpostavljena dostopna točka. Odpiranje ali zapiranje s ključem pomeni tudi, da stojite tik ob upravljalni točki s ključem v roki in včasih brez udobnega pogleda na območje rolete. WIFIGATE upravljanje preseli v aplikacijo in nadzor dostopa postavi na bolj zaščiteno notranjo stran, tako da lahko odpirate in zapirate udobneje, upravljate dovoljenja za zaposlene in dobavitelje ter zmanjšate odvisnost od ključev, daljincev in izpostavljenih dostopnih točk.",
+      "paragraph": "Rolete v podjetjih in trgovinah se pogosto upravljajo z daljinci, ključi, zunanjim ključnim stikalom ali stikali, nameščenimi zunaj prostorov. Takšne rešitve se lahko izgubijo, ostanejo nekdanjim zaposlenim, se podvojijo ali postanejo izpostavljena vstopna točka. Odpiranje ali zapiranje s ključem pomeni tudi, da stojite tik ob upravljalni točki s ključem v roki in včasih brez udobnega pogleda na območje rolete. WIFIGATE upravljanje preseli v aplikacijo in nadzor dostopa postavi na bolj zaščiteno notranjo stran, tako da lahko odpirate in zapirate udobneje, upravljate dovoljenja za zaposlene in dobavitelje ter zmanjšate odvisnost od ključev, daljincev in izpostavljenih vstopnih točk.",
       "bullets": [
         "Odpiranje in zapiranje s telefonom brez odvisnosti od daljincev",
         "Manjša odvisnost od ključev, ki jih je mogoče kopirati ali izgubiti",
-        "Manj izpostavljenih dostopnih točk zunaj poslovnega prostora",
+        "Manj izpostavljenih vstopnih točk zunaj poslovnega prostora",
         "Udobnejše upravljanje z boljšim pogledom na območje rolete",
         "Upravljanje dovoljenj za zaposlene, vodje in dobavitelje",
         "Neobvezen začasen dostop glede na čas ali potrebo",
@@ -99,7 +101,7 @@ export default {
         "Urejena in bolj zaščitena notranja rešitev za vsakodnevno delovanje"
       ],
       "seoTitle": "Pametno upravljanje rolet za podjetja | WIFIGATE",
-      "seoDescription": "WIFIGATE podjetjem in trgovinam omogoča upravljanje rolet s telefonom, upravljanje dovoljenj, manj ključev in daljincev ter manj izpostavljenih vhodov.",
+      "seoDescription": "WIFIGATE podjetjem in trgovinam omogoča pametno upravljanje rolet s telefonom, upravljanje dovoljenj, manj ključev in daljincev ter manj izpostavljenih vstopnih točk.",
       "imageAlt": "Lastnik podjetja s telefonom odpira roleto trgovine",
       "faq": [
         {
@@ -116,14 +118,14 @@ export default {
         },
         {
           "question": "Za katera podjetja je primeren?",
-          "answer": "Za trgovine, skladišča, službene vhode in vsako podjetje z električno roleto, ki želi manj ključev, daljincev in izpostavljenih dostopnih točk."
+          "answer": "Za trgovine, skladišča, službene vhode in vsako podjetje z električno roleto, ki želi manj ključev, daljincev in izpostavljenih vstopnih točk."
         }
       ]
     },
     "electric-gates": {
       "label": "Električna dvoriščna vrata in parkirne zapornice",
-      "title": "Pametno odpiranje električnih dvoriščnih vrat in parkirnih zapornic",
-      "heroLead": "Odprite dvoriščna vrata ali zapornico s telefonom, pošljite začasno dovoljenje gostu ali dobavitelju in redne uporabnike spustite skozi samodejno. Obstoječi daljinci ob tem še naprej delujejo.",
+      "title": "Odpiranje vrat ne bi smelo priti s trajnikom!",
+      "heroLead": "Sistemi za odpiranje vrat s telefonom pogosto prinesejo mesečno naročnino, ki vas bremeni vsak mesec znova. Preklopite na pametno odpiranje brez naročnine in brez trajnika, z osebnimi dovoljenji in samodejnim odpiranjem za redne uporabnike.",
       "highlights": [
         {
           "icon": "handsfree",
@@ -133,18 +135,18 @@ export default {
         {
           "icon": "clock",
           "title": "Začasen dostop za dobavitelja ali gosta",
-          "text": "Namesto da posodite daljinec in upate, da se vrne, pošljite dovoljenje, ki velja samo v času, ko je res potrebno, nato pa se samo zapre."
+          "text": "Namesto klicev s prošnjo, da odprete vrata ob nepravem času, pošljite dovoljenje, ki velja samo v času, ko je res potrebno, nato pa se samo zapre."
         },
         {
           "icon": "gate",
-          "title": "Obstoječi daljinci ne gredo v smeti",
-          "text": "WIFIGATE se pridruži temu, kar je na vratih že nameščeno. Kdor ima raje daljinec, ga uporablja naprej, kdor ima raje telefon, preprosto odpira iz aplikacije."
+          "title": "Stabilnost, zanesljivost in zasebnost",
+          "text": "Imena in telefonske številke so občutljivi podatki, še posebej v dobi umetne inteligence. Pri WIFIGATE je baza uporabnikov shranjena v sami napravi, šifrirana in zaščitena pred izpostavljenostjo internetu, v stabilnem in zanesljivem sistemu za vsakodnevno odpiranje."
         }
       ],
-      "paragraph": "Električna dvoriščna vrata in parkirne zapornice služijo stanovalcem, zaposlenim, gostom in dobaviteljem, vendar upravljanje daljincev, kod in klicev »odpri mi vrata« hitro postane breme. WIFIGATE vam omogoča odpiranje vrat s telefonom, deljenje trajnega ali začasnega dostopa, samodejno odpiranje za redne uporabnike in nastavitev načrtovanih dogodkov po potrebi. Sistem je zasnovan za lokalno, varno in zasebno delovanje, brez mesečne naročnine ali ponavljajočih se plačil, obstoječe daljince pa lahko ob upravljanju iz aplikacije uporabljate še naprej.",
+      "paragraph": "Električna dvoriščna vrata in parkirne zapornice uporabljajo stanovalci, zaposleni, gostje in dobavitelji, vendar upravljanje daljincev, kod in klicev »odpri mi vrata« hitro postane breme. WIFIGATE vam omogoča odpiranje vrat s telefonom, deljenje stalnega ali začasnega dostopa, samodejno odpiranje za redne uporabnike in nastavitev načrtovanih dogodkov po potrebi. Sistem je zasnovan za varno, šifrirano in zasebno delovanje, brez mesečne naročnine ali trajnika, obstoječe daljince pa lahko ob upravljanju iz aplikacije uporabljate še naprej.",
       "bullets": [
         "Odpiranje električnih dvoriščnih vrat ali parkirne zapornice s telefonom",
-        "Brez mesečne naročnine in brez ponavljajočih se plačil",
+        "Brez mesečne naročnine in brez trajnika",
         "Deljenje začasnega dostopa z gosti, dobavitelji in zaposlenimi",
         "Samodejno odpiranje za redne uporabnike ob vsakodnevnem prihodu",
         "Načrtovani dogodki, ki odpirajo po dnevih in urah",
@@ -153,7 +155,7 @@ export default {
         "Zgodovina odpiranj za nadzor in preglednost"
       ],
       "seoTitle": "Električna vrata in zapornice brez naročnine | WIFIGATE",
-      "seoDescription": "WIFIGATE odpira električna dvoriščna vrata in parkirne zapornice s telefonom, s samodejnim odpiranjem, načrtovanimi dogodki in brez mesečne naročnine.",
+      "seoDescription": "WIFIGATE s telefonom odpira električna vrata in parkirne zapornice, s samodejnim odpiranjem, načrtovanimi dogodki, obstoječimi daljinci in brez mesečne naročnine.",
       "imageAlt": "Voznik s telefonom odpira parkirno zapornico in električna dvoriščna vrata",
       "faq": [
         {
@@ -170,14 +172,14 @@ export default {
         },
         {
           "question": "Ali je treba plačevati mesečno?",
-          "answer": "Ne. Za napravo in namestitev plačate enkrat, brez mesečne naročnine ali ponavljajočih se plačil."
+          "answer": "Ne. Za napravo in namestitev plačate enkrat, brez mesečne naročnine in brez ponavljajočih se plačil."
         }
       ]
     },
     "garage-doors": {
       "label": "Garažna vrata in zasebno parkiranje",
-      "title": "Pametno odpiranje garažnih vrat in zasebnih parkirišč",
-      "heroLead": "Garažna vrata se odprejo s telefonom, dostop pa se iz daljinca preseli na seznam, ki ga nadzorujete vi. Ni daljinca, ki bi ga izgubili, in ne ostane nikomur, ki ga ne potrebuje več.",
+      "title": "Poceni RF-daljinec je lahko zelo preprosto kopirati!",
+      "heroLead": "Preproste RF-daljince je lahko enostavno kopirati, s tem pa dobijo dostop tudi tisti, ki dovoljenja nikoli niso prejeli. WIFIGATE varuje dostop z naprednimi plastmi zaščite, šifriranim shranjevanjem in varovanjem zasebnosti uporabnikov.",
       "highlights": [
         {
           "icon": "keyless",
@@ -186,13 +188,13 @@ export default {
         },
         {
           "icon": "users",
-          "title": "Dostop za gospodinjstvo in obrtnike",
-          "text": "Vsak v hiši dobi svoje dovoljenje, obrtnik, ki pride enkrat, pa lahko dobi dostop, ki se ob koncu dneva zapre. Nič skritega pod predpražnikom."
+          "title": "Veste, kdo je odprl in kdaj",
+          "text": "Ko vsi uporabljajo isti daljinec, ni mogoče vedeti, kdo je vstopil. Pri WIFIGATE vsak uporabnik odpira z osebnim dovoljenjem, zgodovina dostopov pa pokaže, kdo je odprl in kdaj."
         },
         {
           "icon": "phone",
-          "title": "Telefon imate že pri sebi",
-          "text": "Ni daljinca, ki bi ga prenašali med avtomobili, in nič za iskanje, ko vozi kdo drug. Vrata odpre edina stvar, brez katere nikoli ne odidete."
+          "title": "Manj odvisnosti od fizičnih sredstev",
+          "text": "Namesto daljinca za vsak avto in vsakega uporabnika odpirate s telefonom, ki ga že imate pri sebi. Manj daljincev za nakup, programiranje, predajo in upravljanje."
         }
       ],
       "paragraph": "Garažna vrata in uvozi na zasebna parkirišča se običajno upravljajo s fizičnimi daljinci, ki se lahko izgubijo, ostanejo ljudem, ki dostopa ne potrebujejo več, ali se v nekaterih primerih kopirajo. WIFIGATE upravljanje preseli na digitalni dostop s telefonom, omogoča upravljanje dovoljenj za družinske člane, zaposlene ali goste ter deljenje začasnega dostopa brez predaje daljinca ali kode. Rezultat je udobnejša, bolj zasebna in bolje urejena uporaba z manjšo odvisnostjo od fizičnih naprav za dostop.",
@@ -203,11 +205,11 @@ export default {
         "Upravljanje dostopa za družinske člane, zaposlene in goste",
         "Začasen dostop brez predaje daljinca ali kode",
         "Primerno za zasebna parkirišča, hiše in pritlična stanovanja z vrtom",
-        "Bolj lokalen in zaseben način upravljanja dostopa",
+        "Bolj zaseben in varen način upravljanja dostopa",
         "Udobnejše in varnejše vsakodnevno upravljanje"
       ],
       "seoTitle": "Pametno odpiranje garažnih vrat | WIFIGATE",
-      "seoDescription": "WIFIGATE odpira garažna vrata in uvoze na zasebna parkirišča s telefonom, z začasnimi dovoljenji in manjšo odvisnostjo od fizičnih daljincev.",
+      "seoDescription": "WIFIGATE s telefonom odpira garažna vrata in uvoze na zasebna parkirišča, z manj fizičnimi daljinci, začasnimi dovoljenji ter priročnim in zasebnim upravljanjem dostopa.",
       "imageAlt": "Moški s telefonom odpira zasebna garažna vrata pri sodobni hiši",
       "faq": [
         {
@@ -230,18 +232,18 @@ export default {
     },
     "private-homes": {
       "label": "Zasebne hiše",
-      "title": "Pameten in varen dostop za zasebne hiše",
-      "heroLead": "Stalna koda na tipkovnici se obrabi, kroži naprej in ostane ljudem, ki je ne potrebujejo več. Vsakomur dajte lastno dovoljenje, začasno pa vsakomur, ki pride le enkrat.",
+      "title": "Zasebne hiše niso namenjene javnosti!",
+      "heroLead": "Koda domofona, ki ste jo dali kurirju, serviserju ali gostu, mu ostane še dolgo po obisku in se brez vaše vednosti širi naprej. Vsakemu dajte osebno, časovno omejeno dovoljenje za vstop ter zmanjšajte nepooblaščene vstope in tveganje kraje.",
       "highlights": [
         {
-          "icon": "shield",
-          "title": "Tipkovnica izda vašo kodo",
-          "text": "Po dovolj letih štiri obrabljene tipke natančno pokažejo, iz katerih števk je sestavljena koda. Dovoljenje na telefonu na steni ne pusti nobenih sledi."
+          "icon": "keyless",
+          "title": "Koda domofona kroži naprej",
+          "text": "Koda pride do kurirjev, serviserjev in gostov, od njih pa naprej, ne da bi vi vedeli. Po dovolj letih pa štiri obrabljene tipke na tipkovnici same izdajo, iz katerih števk je sestavljena."
         },
         {
           "icon": "clock",
-          "title": "Dostop za dostavo, ne za vedno",
-          "text": "Koda, ki ste jo dali kurirju, serviserju ali gostu, jo imajo še leto pozneje. Začasno dovoljenje se samo zapre v trenutku, ko je obisk končan."
+          "title": "Dovoljenje, ki samo poteče, zmanjša tveganje",
+          "text": "Kurir, ki potrebuje pet minut, dobi pet minut. Ko dovoljenje samo poteče, nihče, ki ne bi smel več vstopiti, nima več poti noter, in prav to zmanjša nepooblaščene vstope in tveganje kraje."
         },
         {
           "icon": "roster",
@@ -284,7 +286,7 @@ export default {
     },
     "residential-buildings": {
       "label": "Stanovanjske stavbe",
-      "title": "Pametno upravljanje dostopa za stanovanjske stavbe",
+      "title": "Stanovanjske stavbe niso namenjene javnosti!",
       "heroLead": "Stalna koda, ki kroži med kurirji, gosti in serviserji, lahko konča v napačnih rokah. Vsakomur dajte osebno, časovno omejeno dovoljenje za vstop ter zmanjšajte nepooblaščene vstope in tveganje kraje.",
       "highlights": [
         {
@@ -303,20 +305,20 @@ export default {
           "text": "Samodejno odpiranje prepozna, da ste prispeli, in vam odpre dvoriščna ali vhodna vrata. Brez iskanja ključa in brez jemanja telefona iz žepa, tudi ko imate polne roke nakupov, voziček ali otroke."
         }
       ],
-      "paragraph": "V stanovanjskih stavbah se deljena vstopna koda hitro razširi med stanovalce, goste, kurirje, dobavitelje in ponudnike storitev. Sčasoma je težko vedeti, kdo ima v resnici dostop do stavbe in kdaj je čas za zamenjavo kode ali pobiranje daljincev. WIFIGATE stanovalcem in upravniku stavbe omogoča bolj urejeno upravljanje dostopa, podeljevanje začasnih dovoljenj za goste, manjšo odvisnost od deljene kode in boljši nadzor nad vstopom v stavbo, preddverje, skozi dvoriščna vrata ali na parkirišče.",
+      "paragraph": "V stanovanjski stavbi se dostop ne konča pri vratih preddverja: tu so še dvoriščna vrata, uvoz v garažo, vrata shramb in včasih stranski vhod. Vanj niso vključeni le stanovalci, temveč tudi najemniki, ki se menjajo, hišni svet ali upravnik, čistilci, vzdrževalci in stalni dobavitelji. Ko vse to temelji na eni kodi in nekaj daljincih, vsaka majhna sprememba, stanovalec, ki se je odselil, izgubljen daljinec ali nov dobavitelj, pomeni menjavo kode in ponovno obveščanje vseh. WIFIGATE ta način nadomesti z urejenim upravljanjem dostopa na ravni stavbe.",
       "bullets": [
-        "Priročen dostop za stanovalce prek telefona",
-        "Začasna povabila za goste brez razkritja trajne kode",
-        "Upravljanje dovoljenj za stanovalce, dobavitelje in ponudnike storitev",
+        "Osebno dovoljenje za vsakega stanovalca namesto ene kode za vse",
+        "Dodajanje in odstranjevanje stanovalcev brez menjave kode za vso stavbo",
+        "Ločena dovoljenja za čistilce, vzdrževalce in stalne dobavitelje",
         "Primerno za vrata preddverja, dvoriščna vrata in uvoze na parkirišča",
         "Manjša odvisnost od tipkovnic, ključev in daljincev",
-        "Boljša preglednost z zgodovino dostopov",
-        "Preprostejše upravljanje za hišni svet ali upravnika stavbe",
-        "Udobnejši vstop za stanovalce in goste"
+        "Zgodovina dostopov za hišni svet ali upravnika",
+        "Upravljanje vseh dovoljenj stavbe s telefonom",
+        "Dostop za nove najemnike od dneva vselitve, brez predaje ključev"
       ],
       "seoTitle": "Nadzor dostopa za stanovanjske stavbe | WIFIGATE",
-      "seoDescription": "WIFIGATE stanovanjskim stavbam prinaša pametno upravljanje dostopa: vstop s telefonom, začasna dovoljenja za goste in boljšo preglednost vstopov.",
-      "imageAlt": "Stanovalec s telefonom odpira vhod v stanovanjsko stavbo",
+      "seoDescription": "WIFIGATE stanovanjskim stavbam prinaša pametno upravljanje dostopa: vstop s telefonom, začasna dovoljenja za goste, manj odvisnosti od tipkovnic in boljšo preglednost.",
+      "imageAlt": "Stanovalka s telefonom odpira vhod v stanovanjsko stavbo",
       "faq": [
         {
           "question": "Kako stanovalci z WIFIGATE vstopajo v stavbo?",
@@ -338,8 +340,8 @@ export default {
     },
     "office-buildings": {
       "label": "Poslovne stavbe",
-      "title": "Pameten dostop za poslovne stavbe",
-      "heroLead": "Stalna dovoljenja za zaposlene, začasna za obiskovalce in dobavitelje. Brez vrste na recepciji, brez izdajanja priponk in brez pobiranja ključev, ko kdo odide.",
+      "title": "Vstop v pisarno ne bi smel voditi skozi recepcijo!",
+      "heroLead": "Obiskovalci, kandidati za zaposlitev in dobavitelji čakajo, da nekdo pride dol in jim odpre, zaposlenim pa izdajate priponke ali ključe, ki jih je treba ob odhodu pobrati. Vsakemu dajte osebno dovoljenje: stalno za zaposlene in časovno omejeno za vse druge.",
       "highlights": [
         {
           "icon": "users",
@@ -348,8 +350,8 @@ export default {
         },
         {
           "icon": "invite",
-          "title": "Obiskovalec pride že z vstopom v roki",
-          "text": "Namesto da čaka na recepciji, da ponj kdo pride, obiskovalec prispe z dovoljenjem, poslanim na telefon, ki velja le v času sestanka."
+          "title": "Vabilo kandidatu z enim dotikom",
+          "text": "Kandidatu pošljite vabilo na razgovor za službo, ki mu da preverjeno in varno dovoljenje za odpiranje, skupaj z navodili za prihod in podrobnostmi."
         },
         {
           "icon": "history",
@@ -364,13 +366,13 @@ export default {
         "Manjša obremenitev recepcije in operativnega osebja",
         "Primerno za vhodna vrata, nadstropja, prostore in parkirišča",
         "Urejeno upravljanje uporabnikov in dovoljenj",
-        "Manjša odvisnost od ključev, dostopnih kartic in kod",
+        "Manjša odvisnost od ključev, kartic za dostop in kod",
         "Sodobnejša in udobnejša podoba stavbe",
         "Zgodovina dostopov za nadzor in preglednost"
       ],
       "seoTitle": "Nadzor dostopa za poslovne stavbe | WIFIGATE",
-      "seoDescription": "WIFIGATE poslovnim stavbam omogoča upravljanje vstopa zaposlenih, obiskovalcev in dobaviteljev s telefonom, z začasnimi in stalnimi dovoljenji.",
-      "imageAlt": "Zaposleni s telefonom odpira steklena vrata v sodobni pisarni",
+      "seoDescription": "WIFIGATE poslovnim stavbam omogoča upravljanje vstopa zaposlenih, obiskovalcev in dobaviteljev s telefonom, z začasnimi in stalnimi dovoljenji ter sodobnim upravljanjem dostopa.",
+      "imageAlt": "Zaposlena s telefonom odpira steklena vrata v sodobni pisarni",
       "faq": [
         {
           "question": "Kako zaposleni dobijo dostop do pisarne?",
@@ -392,18 +394,18 @@ export default {
     },
     "entry-doors-magnetic-locks": {
       "label": "Vhodna vrata in magnetne ključavnice za podjetja",
-      "title": "Pametno odpiranje poslovnih vhodnih vrat in magnetnih ključavnic",
-      "heroLead": "Vhod v vaš poslovni prostor se odpre s telefonom, dovoljenja pa se spreminjajo brez menjave kode. Deluje z električno ali magnetno ključavnico, ki je na vratih že nameščena.",
+      "title": "Koda za vstop v vaš poslovni prostor ne bi smela krožiti iz rok v roke!",
+      "heroLead": "Trajna koda, ki jo dobijo zaposleni, dobavitelji in tehniki, lahko ostane pri ljudeh, ki ne bi smeli več vstopati. Vsakemu dajte osebno, časovno omejeno dovoljenje za odpiranje prek električne ali magnetne ključavnice, ki je na vratih že nameščena.",
       "highlights": [
         {
           "icon": "keyless",
-          "title": "Ena koda za vse ni več rešitev",
-          "text": "Koda, ki kroži med zaposlenimi, dobavitelji in strankami, vrat v resnici ne zapira več. Osebno dovoljenje za vsakogar odpravi potrebo po menjavi kode vsakič, ko kdo odide."
+          "title": "Manjše tveganje nepooblaščenih vstopov",
+          "text": "Namesto skupne kode, ki lahko pride v napačne roke, ima vsak zaposleni, dobavitelj ali gost osebno dovoljenje za odpiranje, ki ga lahko kadar koli prekličete. Zgodovina dostopov pokaže, kdo je odprl in kdaj, ter pomaga zmanjšati nepooblaščene vstope in tveganje kraje."
         },
         {
           "icon": "clock",
-          "title": "Začasen dostop za dobavitelja ali serviserja",
-          "text": "Za čistilko, ki pride zvečer, serviserja, ki pride enkrat, in kurirja, ki potrebuje pet minut: dovoljenje, ki velja točno v tem času in se nato samo zapre."
+          "title": "Začasen dostop za dobavitelja ali tehnika",
+          "text": "Dobavitelj, ki zjutraj pride raztovorit blago, čistilci, ki pridejo zvečer, enkratni tehnik in kurir, ki potrebuje pet minut: vsak dobi dovoljenje za svoje časovno okno, ki se nato samo zapre. Lastniku ni treba priti posebej ali sprejeti klica, da bi odprl vrata."
         },
         {
           "icon": "phone",
@@ -423,7 +425,7 @@ export default {
         "Priročna možnost za podjetja, ki želijo sodoben vstop brez zapletenega sistema"
       ],
       "seoTitle": "Vhodna vrata in magnetne ključavnice | WIFIGATE",
-      "seoDescription": "WIFIGATE odpira poslovna vhodna vrata in magnetne ključavnice s telefonom, z upravljanjem dovoljenj, začasnim dostopom in brez deljenih kod.",
+      "seoDescription": "WIFIGATE omogoča pametno odpiranje poslovnih vhodnih vrat in magnetnih ključavnic, z upravljanjem dovoljenj s telefonom, začasnim dostopom ter manj tipkovnicami in ključi.",
       "imageAlt": "Stranka s telefonom odpira vhodna vrata malega podjetja",
       "faq": [
         {
@@ -446,13 +448,13 @@ export default {
     },
     "sports-facilities": {
       "label": "Športni objekti",
-      "title": "Pameten nadzor dostopa za športne objekte",
-      "heroLead": "Člani, trenerji in gostje vstopajo z lastnim dovoljenjem in v času obratovanja. Brez skupnega ključa in brez kode, ki kroži po skupini na WhatsApp.",
+      "title": "Vstopna koda za objekt ne bi smela krožiti po skupini na WhatsAppu!",
+      "heroLead": "Skupna koda, ki kroži med člani, trenerji in gosti, odpira še naprej, tudi ko ne bi smela več. Vsakemu dajte osebno dovoljenje, prilagojeno obratovalnemu času in obdobju članstva, ki se zapre, ko ni več potrebno.",
       "highlights": [
         {
           "icon": "calendar",
           "title": "Dostop se odpre z rezervacijo",
-          "text": "Kdor je rezerviral igrišče za določeno uro, dobi dovoljenje, ki se takrat odpre in ob koncu ure zapre. Nihče ne rabi čakati pri vratih, da ga spusti noter."
+          "text": "Kdor je rezerviral igrišče za določeno uro, dobi dovoljenje, ki se takrat odpre in ob koncu ure zapre. Nikomur ni treba čakati pri vratih, da bi odprl."
         },
         {
           "icon": "users",
@@ -477,8 +479,8 @@ export default {
         "Zgodovina dostopov za nadzor in operativo"
       ],
       "seoTitle": "Nadzor dostopa za športne objekte in padel | WIFIGATE",
-      "seoDescription": "WIFIGATE prinaša pameten nadzor dostopa za športne objekte, igrišča za padel in fitnes centre, z vstopom s telefonom in začasnimi dovoljenji.",
-      "imageAlt": "Igralec padla s telefonom odpira vhod na osvetljeno športno igrišče",
+      "seoDescription": "WIFIGATE prinaša pameten nadzor dostopa za športne objekte, igrišča za padel, fitnes centre in vadbene komplekse, z vstopom s telefonom ter začasnimi ali stalnimi dovoljenji.",
+      "imageAlt": "Igralka padla s telefonom odpira vhod na osvetljeno športno igrišče",
       "faq": [
         {
           "question": "Ali lahko dostop sledi obratovalnemu času ali rezervacijam?",
@@ -506,7 +508,7 @@ export default {
         {
           "icon": "users",
           "title": "Osebno dovoljenje za vsakega najemnika",
-          "text": "Nobene skupne kode, ki si jo nekdanji najemniki še zapomnijo. Vsak najemnik ima svoj dostop, njegova odstranitev pa traja trenutek, ko se pogodba izteče ali plačilo zamuja."
+          "text": "Nobene skupne kode, ki jo nekdanji najemniki še vedno poznajo. Vsak najemnik ima svoj dostop, njegova odstranitev pa traja le trenutek, ko se pogodba izteče ali plačilo ni poravnano."
         },
         {
           "icon": "clock",
