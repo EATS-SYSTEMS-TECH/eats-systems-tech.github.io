@@ -7,7 +7,7 @@ const copy = {
     solutions: "Primeri uporabe",
     automation: "WIFIGATE Host",
     productGuide: "Video navodila",
-    contact: "Stopite v stik",
+    contact: "Kontakt",
   },
   hero: {
     media: {"replay":"Znova predvajaj video","mute":"Izklopi zvok videa","unmute":"Vklopi zvok videa","pause":"Začasno ustavi video","play":"Predvajaj video"},
@@ -21,7 +21,7 @@ const copy = {
   platform: {
     eyebrow: "Kaj je WIFIGATE?",
     title: "Dostop brez običajnih zapletov.",
-    subtitle: "WIFIGATE je šifriran sistem za nadzor dostopa, ki združuje WiFi in Bluetooth, da s telefonom odpirate dvoriščna vrata, vhodna vrata, parkirne zapornice, garažna vrata in električne rolete. Vsakodnevni dostop in dostop za goste združuje na eni varni platformi.",
+    subtitle: "WIFIGATE je šifriran sistem za nadzor dostopa, ki prek WiFi in Bluetooth povezave s telefonom odpira dvoriščna vrata, vhodna vrata, parkirne zapornice, garažna vrata in električne rolete. Vsakodnevni dostop in dostop za goste združuje na eni varni platformi.",
     features: [
       {
         title: "Brez kartice SIM in zunanjega usmerjevalnika",
@@ -29,7 +29,7 @@ const copy = {
       },
       {
         title: "Stabilnost",
-        text: "Neposredna povezava z napravo se odzove takoj in vsakič enako hitro, brez zamikov oddaljenega strežnika in brez odvisnosti od obremenjenosti omrežja ali slabega signala.",
+        text: "Neposredna povezava z napravo se odziva takoj in vsakič enako hitro, brez zakasnitev oddaljenega strežnika in ne glede na obremenjenost omrežja ali slab signal.",
       },
       {
         title: "Hitro povabilo za gosta",
@@ -37,15 +37,15 @@ const copy = {
       },
       {
         title: "90-dnevna zgodovina dostopov",
-        text: "Preglejte vstope v zadnjih 90 dneh in dobite jasno sliko o uporabi vrat in nedavnih vstopih.",
+        text: "Oglejte si vstope v zadnjih 90 dneh in imejte jasen pregled nad uporabo vrat in nedavnimi vstopi.",
       },
       {
         title: "Samodejno odpiranje",
-        text: "Pooblaščenim uporabnikom omogočite, da se vrata ob prihodu odprejo samodejno, za gladek in udoben vstop brez dotika.",
+        text: "Pooblaščenim uporabnikom omogočite, da se jim vrata ob prihodu odprejo samodejno, za tekoč in udoben prostoročni vstop.",
       },
       {
         title: "Do 50 načrtovanih dogodkov",
-        text: "Ustvarite ponavljajoče se urnike in samodejna dejanja neposredno v sistemu, prilagojena delovanju vašega objekta, vključno s podporo za šabatni način.",
+        text: "Neposredno v sistemu ustvarite ponavljajoče se urnike in samodejna dejanja, prilagojena delovanju vašega objekta, vključno s šabatnim načinom.",
       },
       {
         title: "Digitalno dodajanje RF-daljincev",
@@ -57,7 +57,7 @@ const copy = {
       },
       {
         title: "Brez naročnine",
-        text: "Napravo WIFIGATE in namestitev plačate enkrat, brez mesečne naročnine, rednih podaljšanj ali stalnih stroškov platforme.",
+        text: "Napravo WIFIGATE in namestitev plačate enkrat, brez mesečne naročnine, periodičnih podaljšanj ali tekočih stroškov platforme.",
       },
     ],
     subscriptionNote: "* Komercialna uporaba WIFIGATE Host zahteva naročnino.",
@@ -66,21 +66,21 @@ const copy = {
     imageAlt: "Kurir sledi modri pikčasti poti do vhoda v stanovanjski blok, stanovalec pa drži aplikacijo WIFIGATE s časovno omejenim dovoljenjem za gosta.",
     eyebrow: "Zasebni dostop",
     title: "Stavbe in zasebne hiše niso javni prostori.",
-    description: "Nehajte deliti trajne kode domofona. Z enim dotikom pošljite časovno omejeno dovoljenje za vstop z navodili za prihod ter zmanjšajte nepooblaščene vstope in tveganje kraje.",
+    description: "Ne delite več stalnih kod domofona. Z enim dotikom pošljite časovno omejeno dovoljenje za vstop z navodili za prihod ter zmanjšajte tveganje nepooblaščenih vstopov in kraje.",
   },
   solutions: {
     eyebrow: "Primerno za vsak vhod",
     titleLines: ["En sistem.", "Za vsako vstopno točko."],
-    subtitle: "Odpirate s telefonom, dostop daste tistim, ki ga potrebujejo, in sami določite, kdaj poteče.",
+    subtitle: "Odpirajte s telefonom, dostop podelite tistim, ki ga potrebujejo, in sami določite, kdaj poteče.",
     imageAlt: "Aplikacija WIFIGATE na telefonu z vrati doma, delovnim mestom in časovno omejenim dovoljenjem za gosta",
   },
   automation: {
-    eyebrow: "Ustvarjeno za turistične nastanitve",
+    eyebrow: "Zasnovano za turistične nastanitve",
     titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Namenjeno za",
     audiences: ["Hotele", "Airbnb", "Apartmaje za goste", "Nastanitvene objekte"],
-    promise: "Sprejmite goste. Vstop naj poteka samodejno.",
-    subtitle: "Od hotelov do počitniških apartmajev: vsako rezervacijo povežite z varnim dovoljenjem za vstop skozi prava dvoriščna vrata, vhodna vrata ali garažo. Gostje vstopijo s telefonom, dovoljenje pa začne veljati ob prijavi in samodejno poteče ob odjavi.",
+    promise: "Sprejmite goste, vstop pa prepustite avtomatiki.",
+    subtitle: "Od hotelov do počitniških apartmajev: vsako rezervacijo povežite z varnim dovoljenjem za vstop skozi ustrezna dvoriščna vrata, vhodna vrata ali garažo. Gostje vstopijo s telefonom, dovoljenje pa začne veljati ob prijavi in samodejno poteče ob odjavi.",
     cta: "Spoznajte WIFIGATE Host",
     imageAlt: "Gostje s telefonom vstopajo v svojo nastanitev",
     stayCaption: "Vsako bivanje, od rezervacije do odjave",
@@ -91,13 +91,13 @@ const copy = {
         text: "Dovoljenje za vstop prispe neposredno na telefon gosta, brez prevzemanja ključev, skrinjic za ključe ali deljenja kod.",
       },
       {
-        title: "Samodejno časovno omejen",
+        title: "Samodejna časovna omejitev",
         text: "Vsako dovoljenje začne veljati ob prijavi in poteče ob odjavi, povsem samodejno.",
       },
       {
         icon: "team",
-        title: "Prihrani ure dela",
-        text: "Osebje se posveti gostom namesto logistiki kartic in drugih fizičnih sredstev za vstop.",
+        title: "Prihranek delovnih ur",
+        text: "Osebje se lahko posveti gostom, ne logistiki kartic in drugih fizičnih sredstev za vstop.",
       },
     ],
   },
@@ -119,7 +119,7 @@ const copy = {
   oneTapInvite: {
     imageAlt: "Modra pikčasta pot vodi od ulice do oznake lokacije pri vhodu v stanovanjski blok.",
     eyebrow: "En dotik. Vse, kar gostje potrebujejo.",
-    title: "Nehajte ponavljati navodila.\nPošljite eno povabilo z vsemi podatki.",
+    title: "Nič več ponavljanja navodil za prihod.\nPošljite eno povabilo z vsemi podatki.",
     description: "WIFIGATE vam omogoča, da z enim dotikom delite navodila za prihod, naslov,\nnadstropje, številko stanovanja, dodatne podrobnosti in časovno omejeno dovoljenje za vstop.",
   },
   faq: {
@@ -137,7 +137,7 @@ const copy = {
       },
       {
         question: "Ali WIFIGATE zahteva mesečno naročnino?",
-        answer: "Ne. Napravo WIFIGATE in namestitev plačate enkrat, brez mesečne naročnine, rednih podaljšanj ali stalnih stroškov platforme. Edina izjema je WIFIGATE Host za komercialno uporabo, ki zahteva naročnino.",
+        answer: "Ne. Napravo WIFIGATE in namestitev plačate enkrat, brez mesečne naročnine, periodičnih podaljšanj ali tekočih stroškov platforme. Edina izjema je WIFIGATE Host za komercialno uporabo, ki zahteva naročnino.",
       },
       {
         question: "Ali lahko WIFIGATE omogoči začasen dostop za goste?",
@@ -147,9 +147,9 @@ const copy = {
   },
   why: {
     eyebrow: "Zakaj WIFIGATE",
-    title: "Globalne izkušnje z IoT za vsako vstopno točko.",
+    title: "Mednarodne izkušnje z IoT za vsako vstopno točko.",
     description: "Naša ekipa ima bogate izkušnje z razvojem in uvajanjem sistemov IoT po vsem svetu. To znanje uporabljamo, da je WIFIGATE varen, zanesljiv ter preprost za namestitev, upravljanje in uporabo.",
-    points: ["Vhodna vrata", "Dvoriščna vrata", "Parkirna zapornica", "Konzolna drsna vrata", "Elektromagnetna ključavnica", "Električna roleta", "Razsvetljava", "Črpalka"],
+    points: ["Vhodna vrata", "Dvoriščna vrata", "Parkirna zapornica", "Samonosna drsna vrata", "Elektromagnetna ključavnica", "Električna roleta", "Razsvetljava", "Črpalka"],
     pointsNote: "In še več, glede na to, kaj želite upravljati.",
   },
   contact: {
@@ -157,11 +157,11 @@ const copy = {
     title: "Poenostavite vsak prihod.",
     subtitle: "Povejte nam, kaj želite odpirati: dvoriščna vrata, vhodna vrata, električno roleto ...\nNaša ekipa vam bo pomagala najti pravo rešitev.",
     distributorTitle: "Program za distributerje",
-    distributorText: "Vi poznate trg in stranke, mi prinašamo izdelek, usposabljanje in podporo.",
+    distributorText: "Vi poznate trg in stranke, mi zagotovimo izdelek, usposabljanje in podporo.",
     distributorButton: "Postanite distributer",
     supportTitle: "Podpora za izdelek",
     supportText: "Praktična pomoč ekipe, ki pozna izdelek in razume vašo namestitev.",
-    interestTitle: "Z nami načrtujte svojo rešitev za vstop",
+    interestTitle: "Načrtujmo vašo rešitev za dostop",
     interestText: "Pogovorite se z nami o svoji nepremičnini, cenah in rešitvi, ki ustreza vašim potrebam.",
     whatsappButton: "Pišite nam na WhatsApp",
   },

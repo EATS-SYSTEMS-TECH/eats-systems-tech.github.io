@@ -2,7 +2,7 @@
 // The WIFIGATE Host page (/automation/) in Swedish: title, description and body.
 
 export default {
-  "metaTitle": "Automatisk gäståtkomst för hotell, semesterboenden och parkering | WIFIGATE",
+  "metaTitle": "Automatisk gäståtkomst: hotell, semesterboenden, parkering | WIFIGATE",
   "metaDescription": "Säker, tidsbegränsad åtkomst för varje gäst, skapad automatiskt för varje bokning. För hotell, semesterboenden, pensionat och hyrparkering eller garage. Ingen nyckelöverlämning.",
   "marketing": {
     "hero": {
@@ -14,7 +14,7 @@ export default {
     },
     "pricing": {
       "eyebrow": "Priser",
-      "title": "Enkla planer för tillägget WIFIGATE Host",
+      "title": "Enkla paket för tillägget WIFIGATE Host",
       "subtitle": "Betala bara för automatiseringen. Själva WIFIGATE-enheten har aldrig något abonnemang.",
       "per": "/ månad",
       "starterDesc": "För en enskild fastighet eller entré.",
@@ -36,7 +36,7 @@ export default {
       "enterpriseF1": "Volympriser",
       "enterpriseF2": "SLA och onboarding",
       "enterpriseF3": "Anpassad integration",
-      "note": "Lanseringspriser för tillägget WIFIGATE Host, debiteras månadsvis. Extra system och årsplaner finns också, fråga oss om detaljer."
+      "note": "Lanseringspriser för tillägget WIFIGATE Host, debiteras månadsvis. Extra system och årsavtal finns också, fråga oss om detaljer."
     },
     "audience": {
       "label": "Byggt för:",
@@ -58,7 +58,7 @@ export default {
     },
     "benefits": {
       "eyebrow": "Varför WIFIGATE Host",
-      "title": "Mindre reception. Mer bekymmersfritt värdskap.",
+      "title": "Mindre reception. Enklare värdskap.",
       "subtitle": "Allt som behövs för att en bokning ska bli åtkomst, skött åt dig.",
       "b1t": "Inga nycklar att lämna över",
       "b1x": "Glöm nyckelhämtning, nyckelboxar och kopierade koder. Åtkomsten landar i gästens mobil precis när den behövs.",
@@ -76,7 +76,7 @@ export default {
     "secure": {
       "eyebrow": "Säkerhet",
       "title": "Åtkomst du tryggt kan ge en främling",
-      "subtitle": "Byggt för att skydda fastigheten bakom varje grind.",
+      "subtitle": "Utvecklat för att skydda det som finns bakom varje grind.",
       "i1t": "Krypterad hela vägen",
       "i1x": "Varje inbjudan är krypterad, så att åtkomstuppgifterna inte kan läsas eller kopieras under överföringen.",
       "i2t": "Färre fysiska passermedel, mer gästfrihet",

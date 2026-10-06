@@ -16,7 +16,7 @@ const copy = {
     primaryCta: "Sådan virker det",
     secondaryCta: "Tal med vores team",
     proofLabel: "Platformens fordele",
-    proof: ["Fuldt privatliv", "Nem at bruge", "Vejvisning med ét tryk", "Tidsbegrænset gæsteadgang"],
+    proof: ["Fuldt privatliv", "Nem at bruge", "Vejbeskrivelse med ét tryk", "Tidsbegrænset gæsteadgang"],
   },
   platform: {
     eyebrow: "Hvad er WIFIGATE?",
@@ -29,27 +29,27 @@ const copy = {
       },
       {
         title: "Stabilitet",
-        text: "Den direkte forbindelse til enheden reagerer med det samme og lige hurtigt hver gang, uden forsinkelser fra en fjern server og uafhængigt af netbelastning eller dårlig dækning.",
+        text: "Takket være den direkte forbindelse til enheden reagerer systemet med det samme og lige hurtigt hver gang, uden forsinkelser fra en fjern server og uafhængigt af netbelastning eller dårlig dækning.",
       },
       {
         title: "Hurtig gæsteinvitation",
-        text: "Send en sikker adgangsinvitation med vejvisning til et bud eller en gæst på få sekunder, så besøgende kan komme ind uden opkald, delte fjernbetjeninger eller manuel koordinering.",
+        text: "Send en sikker adgangsinvitation med vejbeskrivelse til et bud eller en gæst på få sekunder, så de besøgende kan komme ind uden opkald, delte fjernbetjeninger eller frem-og-tilbage-koordinering.",
       },
       {
-        title: "Adgangshistorik for 90 dage",
-        text: "Se adgangsaktiviteten for de seneste 90 dage og få et klart overblik over brugen af porten og de seneste adgangshændelser.",
+        title: "90 dages adgangshistorik",
+        text: "Se adgangsaktiviteten for de seneste 90 dage, og få et klart overblik over, hvordan porten bruges, og hvem der senest er kommet ind.",
       },
       {
         title: "Automatisk åbning",
-        text: "Lad godkendte brugere åbne porten automatisk, når de ankommer, for en glidende og bekvem adgang helt uden at røre noget.",
+        text: "Lad godkendte brugere åbne porten automatisk, når de ankommer, så adgangen bliver glidende, bekvem og helt håndfri.",
       },
       {
         title: "Op til 50 planlagte hændelser",
-        text: "Opret tilbagevendende tidsplaner og automatiske handlinger direkte i systemet, så de passer til den måde, dit sted drives på, inklusive understøttelse af sabbat-tilstand.",
+        text: "Opret tilbagevendende tidsplaner og automatiske handlinger direkte i systemet, så de passer til den måde, dit sted drives på, inklusive sabbatfunktion.",
       },
       {
         title: "Digital indlæring af RF-fjernbetjeninger",
-        text: "Indlær og administrer RF-fjernbetjeninger digitalt via platformen i stedet for at være afhængig af besværlig manuel programmering.",
+        text: "Indlær og administrer RF-fjernbetjeninger digitalt via platformen, uden besværlig manuel programmering.",
       },
       {
         title: "Sikkerhed og privatliv",
@@ -66,7 +66,7 @@ const copy = {
     imageAlt: "Et bud følger en blå stiplet rute hen til indgangen til en boligejendom, mens en beboer holder WIFIGATE-appen, der viser tidsbegrænset gæsteadgang.",
     eyebrow: "Privat adgang",
     title: "Bygninger og private boliger er ikke offentlige rum.",
-    description: "Stop med at dele faste dørtelefonkoder. Send med ét tryk en tidsbegrænset adgangsrettighed med vejvisning, og mindsk uautoriseret adgang og risikoen for tyveri.",
+    description: "Stop med at dele faste dørkoder. Send med ét tryk en tidsbegrænset adgangsrettighed med vejbeskrivelse, og mindsk risikoen for uautoriseret adgang og tyveri.",
   },
   solutions: {
     eyebrow: "Skabt til enhver indgang",
@@ -119,8 +119,8 @@ const copy = {
   oneTapInvite: {
     imageAlt: "En blå stiplet rute fører fra gaden til en placeringsnål ved indgangen til en boligejendom.",
     eyebrow: "Ét tryk. Alt, hvad gæsterne har brug for.",
-    title: "Slip for at gentage vejbeskrivelsen.\nSend én invitation med alle detaljer.",
-    description: "Med WIFIGATE deler du vejvisning, adresse, etage,\nlejlighedsnummer, ekstra oplysninger og den tidsbegrænsede adgangsrettighed med ét tryk.",
+    title: "Slut med at forklare vejen.\nÉn invitation med alle detaljer.",
+    description: "Med WIFIGATE deler du vejbeskrivelse, adresse, etage,\nlejlighedsnummer, ekstra oplysninger og den tidsbegrænsede adgangsrettighed med ét tryk.",
   },
   faq: {
     eyebrow: "Alt om WiFi-porte",

@@ -14,7 +14,7 @@ export default {
   "niches": {
     "hotels-airbnb": {
       "label": "Khách sạn, Airbnb và căn hộ cho thuê",
-      "title": "Khách đã đến nơi thì không cần chờ ai mở cửa!",
+      "title": "Khách đã đến nơi thì không phải chờ ai mở cửa!",
       "heroLead": "Thẻ phòng phải cấp, chìa khóa phải bàn giao hay mã hộp chìa khóa truyền từ khách này sang khách khác đều biến mỗi lần khách đến thành một lần phối hợp thủ công. Hãy cấp cho mỗi khách một quyền ra vào cá nhân, mở khi nhận phòng và đóng khi trả phòng.",
       "highlights": [
         {
@@ -32,10 +32,10 @@ export default {
         {
           "icon": "keyless",
           "title": "Không thẻ, không hộp chìa khóa",
-          "text": "Không có gì phải cấp, không có gì phải bàn giao, không có thẻ nào nằm lại chỗ khách trước và không có mã hộp chìa khóa nào bị truyền tay. Điện thoại của khách là phương tiện ra vào duy nhất."
+          "text": "Không có gì phải cài đặt, không có gì phải bàn giao, không có thẻ nào nằm lại chỗ khách trước và không có mã hộp chìa khóa nào bị truyền tay. Chiếc điện thoại sẵn trong túi khách chính là chìa khóa duy nhất."
         }
       ],
-      "paragraph": "WIFIGATE giúp khách sạn, căn hộ cho thuê (Airbnb) và khu nghỉ dưỡng mang đến cho khách trải nghiệm ra vào kỹ thuật số tiện lợi, bảo mật ngay trên điện thoại di động.\nThay vì bận rộn cấp thẻ từ, bàn giao chìa khóa vật lý hay dùng hộp chìa khóa (Lockbox), việc kiểm soát ra vào trở nên tự động.\nVới WIFIGATE Host, bạn có thể kết nối hệ thống đặt phòng của mình trực tiếp với hệ thống ra vào.\nNhờ kết nối này, sau khi lượt đặt phòng được xác nhận, khách sẽ nhận được quyền ra vào cá nhân.\nQuyền này có hiệu lực đúng giờ nhận phòng và tự động kết thúc khi trả phòng, không cần can thiệp thủ công, bàn giao chìa khóa hay phối hợp từ lễ tân và chủ nhà.",
+      "paragraph": "WIFIGATE giúp khách sạn, căn hộ cho thuê (Airbnb) và khu nghỉ dưỡng mang đến cho khách trải nghiệm ra vào kỹ thuật số tiện lợi, bảo mật ngay trên điện thoại di động.\nThay vì bận rộn cấp thẻ từ, bàn giao chìa khóa vật lý hay dùng hộp chìa khóa (lockbox), việc kiểm soát ra vào trở nên tự động.\nVới WIFIGATE Host, bạn có thể kết nối hệ thống đặt phòng của mình trực tiếp với hệ thống ra vào.\nNhờ kết nối này, sau khi lượt đặt phòng được xác nhận, khách sẽ nhận được quyền ra vào cá nhân.\nQuyền này có hiệu lực đúng giờ nhận phòng và tự động kết thúc khi trả phòng, không cần can thiệp thủ công, bàn giao chìa khóa hay phối hợp từ lễ tân và chủ nhà.",
       "bullets": [
         "Tự động tạo quyền ra vào cho khách sau khi xác nhận đặt phòng",
         "Hỗ trợ tự động hóa hoàn toàn với WIFIGATE Host",
@@ -47,7 +47,7 @@ export default {
         "Lịch sử ra vào giúp minh bạch và dễ kiểm soát"
       ],
       "seoTitle": "WIFIGATE | Ra vào cho khách: khách sạn, Airbnb, khu nghỉ dưỡng",
-      "seoDescription": "WIFIGATE giúp khách sạn, Airbnb và khu nghỉ dưỡng tự động hóa ra vào cho khách với WIFIGATE Host: quyền riêng theo đặt phòng, không chìa khóa, thẻ từ hay Lockbox.",
+      "seoDescription": "WIFIGATE giúp khách sạn, Airbnb và khu nghỉ dưỡng tự động hóa ra vào cho khách với WIFIGATE Host: quyền riêng theo đặt phòng, không chìa khóa, thẻ từ hay lockbox.",
       "imageAlt": "Khách mở cửa phòng khách sạn bằng điện thoại trong hành lang hiện đại",
       "faq": [
         {
@@ -70,12 +70,12 @@ export default {
     },
     "roller-shutters": {
       "label": "Cửa cuốn cho doanh nghiệp và cửa hàng",
-      "title": "Điểm điều khiển cửa cuốn không nên lộ ra bên ngoài cửa hàng!",
+      "title": "Bộ điều khiển cửa cuốn không nên để lộ bên ngoài cửa hàng!",
       "heroLead": "Công tắc, hộp chìa khóa hay remote đặt bên ngoài hoặc được chuyền tay giữa các nhân viên có thể rơi vào tay kẻ xấu. Hãy chuyển điểm điều khiển vào phía trong an toàn của cửa hàng và mở cửa cuốn bằng điện thoại, với quyền riêng cho từng nhân viên.",
       "highlights": [
         {
           "icon": "shutter",
-          "title": "Điều khiển chuyển vào trong, ngoài tầm với",
+          "title": "Điều khiển ở bên trong, ngoài tầm với kẻ gian",
           "text": "Công tắc hay hộp chìa khóa trên tường ngoài lộ ra với mọi người qua lại. Khi mở cửa bằng điện thoại, điểm điều khiển có thể đặt ở phía trong cửa hàng."
         },
         {
@@ -124,13 +124,13 @@ export default {
     },
     "electric-gates": {
       "label": "Cổng điện và barie bãi xe",
-      "title": "Mở cổng không nên đi kèm khoản phí trừ tự động hằng tháng!",
+      "title": "Mở cổng đâu cần bị trừ tiền tự động mỗi tháng!",
       "heroLead": "Các hệ thống mở cổng bằng điện thoại thường đi kèm thuê bao hằng tháng, cứ thế bị trừ tiền mỗi tháng. Hãy chuyển sang giải pháp mở cổng thông minh không phí thuê bao, không trừ tiền tự động, với quyền cá nhân và tính năng tự động mở cho người dùng thường xuyên.",
       "highlights": [
         {
           "icon": "handsfree",
-          "title": "Tự động mở cho lối vào hằng ngày",
-          "text": "Tính năng Tự động mở (Auto Open) nhận biết khi bạn đến nơi và mở cổng cho bạn. Không phải lục tìm remote trong hộc xe, không phải loay hoay với điện thoại hay hạ kính xe giữa trời mưa."
+          "title": "Tự động mở cổng mỗi ngày khi bạn về",
+          "text": "Tính năng Tự động mở (Auto Open) nhận biết khi bạn đến nơi và mở cổng cho bạn. Không phải lục tìm remote trong hộc xe hay hạ kính xe giữa trời mưa."
         },
         {
           "icon": "clock",
@@ -233,11 +233,11 @@ export default {
     "private-homes": {
       "label": "Nhà riêng",
       "title": "Nhà riêng không phải là nơi công cộng!",
-      "heroLead": "Mã liên lạc nội bộ bạn đưa cho người giao hàng, thợ sửa chữa hay khách vẫn nằm trong tay họ rất lâu sau khi họ rời đi, và còn bị truyền tiếp mà bạn không hề biết. Hãy cấp cho mỗi người một quyền ra vào cá nhân có thời hạn, giúp hạn chế việc ra vào trái phép và nguy cơ mất trộm.",
+      "heroLead": "Mã cửa bạn đưa cho người giao hàng, thợ sửa chữa hay khách vẫn nằm trong tay họ rất lâu sau khi họ rời đi, và còn bị truyền tiếp mà bạn không hề biết. Hãy cấp cho mỗi người một quyền ra vào cá nhân có thời hạn, giúp hạn chế việc ra vào trái phép và nguy cơ mất trộm.",
       "highlights": [
         {
           "icon": "keyless",
-          "title": "Mã liên lạc nội bộ cứ thế lan truyền",
+          "title": "Mã cửa cứ thế bị truyền tay",
           "text": "Mã số được chuyển cho người giao hàng, thợ sửa chữa và khách, rồi từ đó truyền đi tiếp mà bạn không hay biết. Và sau đủ nhiều năm, bốn phím bị mòn trên bàn phím tự để lộ những chữ số tạo nên mã."
         },
         {
@@ -296,7 +296,7 @@ export default {
         },
         {
           "icon": "invite",
-          "title": "Chỉ dẫn đường đi chỉ với một chạm",
+          "title": "Gửi chỉ dẫn đường đi bằng một chạm",
           "text": "Địa chỉ, tầng, căn hộ, mã cổng và mã sảnh. Bạn phải đọc lại cả chuỗi đó cho từng vị khách, từng người giao hàng và từng người thợ. Với WIFIGATE, tất cả gói gọn trong một chạm, và khách tự tìm đến tận cửa."
         },
         {
@@ -326,7 +326,7 @@ export default {
         },
         {
           "question": "Khách và người giao hàng vào bằng cách nào?",
-          "answer": "Cư dân gửi lời mời khách có thời hạn, kèm chỉ dẫn đường đi chỉ với một chạm, không lộ mã cố định."
+          "answer": "Cư dân gửi lời mời khách có thời hạn, kèm chỉ dẫn đường đi, tất cả trong một chạm, không lộ mã cố định."
         },
         {
           "question": "Ban quản trị có xem được ai đang có quyền ra vào không?",
@@ -346,7 +346,7 @@ export default {
         {
           "icon": "users",
           "title": "Nhân viên vào làm, nhân viên nghỉ việc",
-          "text": "Tiếp nhận và cho nghỉ việc chỉ là một thao tác trong danh sách, không phải cả quy trình cấp thẻ, thu thẻ và thay khóa. Quyền mở và đóng vào đúng ngày bạn đặt."
+          "text": "Nhận người mới hay tiễn người nghỉ việc chỉ là một thao tác trong danh sách, không phải cả quy trình cấp thẻ, thu thẻ và thay khóa. Quyền mở và đóng vào đúng ngày bạn đặt."
         },
         {
           "icon": "invite",
@@ -448,7 +448,7 @@ export default {
     },
     "sports-facilities": {
       "label": "Cơ sở thể thao",
-      "title": "Mã vào cơ sở không nên lan truyền trong nhóm WhatsApp!",
+      "title": "Mã vào cơ sở không nên lan truyền trong nhóm chat!",
       "heroLead": "Mã dùng chung được chuyền giữa hội viên, huấn luyện viên và khách vẫn mở được cửa ngay cả khi không còn được phép. Hãy cấp cho mỗi người một quyền cá nhân phù hợp với giờ hoạt động và thời hạn hội viên, tự đóng lại khi không còn cần thiết.",
       "highlights": [
         {
@@ -467,9 +467,9 @@ export default {
           "text": "Khi lượng người ra vào thay đổi trong ngày, việc ghi nhận lượt vào hỗ trợ vận hành, giúp làm rõ sự việc và xác nhận cơ sở đã đóng cửa cuối ngày."
         }
       ],
-      "paragraph": "Cơ sở thể thao, sân Padel, sân tennis, phòng gym và khu tập luyện cần quản lý ra vào cho hội viên, huấn luyện viên, đội nhóm và khách theo giờ hoạt động, lượt đặt sân và sự kiện. WIFIGATE cho phép cấp quyền tạm thời hoặc cố định bằng điện thoại, giảm phụ thuộc vào chìa khóa hay mã dùng chung, và cải thiện trải nghiệm ra vào cho người dùng, nhất là ở những nơi có lượng người thay đổi trong ngày.",
+      "paragraph": "Cơ sở thể thao, sân padel, sân tennis, phòng gym và khu tập luyện cần quản lý ra vào cho hội viên, huấn luyện viên, đội nhóm và khách theo giờ hoạt động, lượt đặt sân và sự kiện. WIFIGATE cho phép cấp quyền tạm thời hoặc cố định bằng điện thoại, giảm phụ thuộc vào chìa khóa hay mã dùng chung, và cải thiện trải nghiệm ra vào cho người dùng, nhất là ở những nơi có lượng người thay đổi trong ngày.",
       "bullets": [
-        "Phù hợp với sân Padel, sân tennis, phòng gym và khu tập luyện",
+        "Phù hợp với sân padel, sân tennis, phòng gym và khu tập luyện",
         "Quyền ra vào theo giờ hoạt động, lượt đặt sân hoặc quyền được cấp",
         "Quản lý hội viên, huấn luyện viên, nhân viên và khách",
         "Bớt phụ thuộc vào chìa khóa và mã dùng chung",
@@ -478,9 +478,9 @@ export default {
         "Quyền tạm thời cho sự kiện, lớp học hoặc buổi tập",
         "Lịch sử ra vào phục vụ kiểm soát và vận hành"
       ],
-      "seoTitle": "Kiểm soát ra vào cho cơ sở thể thao và sân Padel | WIFIGATE",
-      "seoDescription": "WIFIGATE kiểm soát ra vào thông minh cho cơ sở thể thao, sân Padel, phòng gym và khu tập luyện, vào bằng điện thoại với quyền tạm thời hoặc cố định.",
-      "imageAlt": "Nữ vận động viên Padel mở lối vào sân thể thao có đèn chiếu sáng bằng điện thoại",
+      "seoTitle": "Kiểm soát ra vào cho cơ sở thể thao và sân padel | WIFIGATE",
+      "seoDescription": "WIFIGATE kiểm soát ra vào thông minh cho cơ sở thể thao, sân padel, phòng gym và khu tập luyện, vào bằng điện thoại với quyền tạm thời hoặc cố định.",
+      "imageAlt": "Nữ vận động viên padel mở lối vào sân thể thao có đèn chiếu sáng bằng điện thoại",
       "faq": [
         {
           "question": "Quyền ra vào có thể theo giờ hoạt động hoặc lượt đặt sân không?",
@@ -496,7 +496,7 @@ export default {
         },
         {
           "question": "WIFIGATE phù hợp với những cơ sở thể thao nào?",
-          "answer": "Sân Padel và tennis, phòng gym và khu tập luyện."
+          "answer": "Sân padel và tennis, phòng gym và khu tập luyện."
         }
       ]
     },
@@ -508,7 +508,7 @@ export default {
         {
           "icon": "users",
           "title": "Quyền cá nhân cho từng người thuê",
-          "text": "Không có mã dùng chung mà người thuê cũ vẫn còn nhớ. Mỗi người thuê có quyền riêng, và việc thu hồi chỉ mất một chút khi hợp đồng kết thúc hoặc khi chưa thanh toán."
+          "text": "Không có mã dùng chung mà người thuê cũ vẫn còn nhớ. Mỗi người thuê có quyền riêng, và việc thu hồi chỉ mất một chút khi hợp đồng kết thúc hoặc khi quá hạn thanh toán."
         },
         {
           "icon": "clock",
@@ -518,7 +518,7 @@ export default {
         {
           "icon": "history",
           "title": "Biết ai đã vào và vào lúc nào",
-          "text": "Mỗi lần mở đều được ghi lại kèm tên người dùng và thời gian, nên câu hỏi về một lần ghé thăm được trả lời bằng lịch sử ra vào chứ không phải bằng camera an ninh."
+          "text": "Mỗi lần mở đều được ghi lại kèm tên người dùng và thời gian, nên câu hỏi về một lần ghé thăm được trả lời bằng lịch sử ra vào chứ không phải ngồi xem lại camera."
         }
       ],
       "paragraph": "Kho lưu trữ và phòng tủ khóa thường dựa vào mã dùng chung, bàn phím và chìa khóa vật lý, vốn bị sao chép, chuyền tay và hiếm khi được thay. WIFIGATE chuyển quyền ra vào sang điện thoại: mỗi người thuê có quyền cá nhân cho cổng khu kho, lối vào tòa nhà, và ở nơi có lắp đặt, cho cả ô kho hoặc tủ khóa có khóa điện, giới hạn trong khung giờ bạn chọn và được thu hồi ngay khi hợp đồng thuê kết thúc. Điện thoại giao tiếp trực tiếp với thiết bị tại chỗ, không cần thẻ SIM, không cần internet ở cửa và không thuê bao hằng tháng cho nhu cầu sử dụng thông thường.",

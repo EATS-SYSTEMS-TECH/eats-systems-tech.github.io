@@ -3,12 +3,12 @@
 
 export default {
   "metaTitle": "Automaattinen vieraskulku majoitukseen ja pysäköintiin | WIFIGATE",
-  "metaDescription": "Turvallinen, aikarajattu kulkuoikeus jokaiselle vieraalle, automaattisesti joka varaukseen. Hotelleille, loma-asunnoille, majataloille ja vuokrapysäköintiin.",
+  "metaDescription": "Turvallinen, aikarajattu kulkuoikeus jokaiselle vieraalle automaattisesti joka varaukseen. Hotellit, loma-asunnot, majatalot ja vuokrapysäköinti. Ei avainten luovutusta.",
   "marketing": {
     "hero": {
       "eyebrow": "WIFIGATE Host",
       "title": "Vieraiden kulku, joka hoituu itsestään",
-      "lead": "Heti kun varaus vahvistetaan, WIFIGATE luo turvallisen, aikarajatun kulkuoikeuden porttiisi, oveesi tai pysäköintiin, ja se päättyy itsestään uloskirjautuessa. Ei avainten luovutusta, ei koodien perässä juoksemista eikä ketään odottamassa sisäänkäynnillä.",
+      "lead": "Heti kun varaus vahvistetaan, WIFIGATE luo turvallisen, aikarajatun kulkuoikeuden porttiisi, oveesi tai pysäköintialueellesi, ja se päättyy itsestään uloskirjautuessa. Ei avainten luovutusta, ei koodien perässä juoksemista, eikä kenenkään tarvitse odottaa ovella.",
       "ctaPrimary": "Ota yhteyttä",
       "note": "Hotelleille, loma-asunnoille, majataloille sekä vuokrattaville pysäköintipaikoille ja autotalleille."
     },
@@ -25,14 +25,14 @@ export default {
       "proDesc": "Pienelle kiinteistönhoitoyritykselle.",
       "proF1": "Jopa 5 järjestelmää",
       "proF2": "1 000 kutsua järjestelmää kohden",
-      "proF3": "Etusijainen sähköpostituki",
+      "proF3": "Ensisijainen sähköpostituki",
       "hotelBadge": "Suosituin",
       "hotelDesc": "Hotellille tai kokonaiselle kohteelle.",
       "hotelF1": "Jopa 20 järjestelmää",
       "hotelF2": "Keskitetty raportointi",
-      "hotelF3": "Etusijainen tuki",
+      "hotelF3": "Ensisijainen tuki",
       "enterpriseAmount": "Räätälöity",
-      "enterpriseDesc": "PMS-järjestelmille, kanavanhallintaan ja suurille kiinteistösalkuille.",
+      "enterpriseDesc": "PMS- ja kanavanhallintajärjestelmille sekä suurille kiinteistösalkuille.",
       "enterpriseF1": "Volyymihinnoittelu",
       "enterpriseF2": "SLA ja käyttöönotto",
       "enterpriseF3": "Räätälöity integraatio",
@@ -53,8 +53,8 @@ export default {
       "s1x": "Varaus- tai kiinteistönhallintajärjestelmäsi ilmoittaa WIFIGATE Hostille uudesta vahvistetusta varauksesta.",
       "s2t": "Kulkuoikeus luodaan automaattisesti",
       "s2x": "WIFIGATE Host luo turvallisen, aikarajatun kutsun juuri oikeaan porttiin, oveen tai pysäköintiin, ja se on voimassa vain kyseisen majoituksen ajan.",
-      "s3t": "Vieras kävelee suoraan sisään",
-      "s3x": "Vieras avaa sisäänkäynnin puhelimellaan. Kun uloskirjautumisen aika koittaa, kulkuoikeus päättyy itsestään, eikä mitään tarvitse kerätä tai perua."
+      "s3t": "Vieras pääsee suoraan sisään",
+      "s3x": "Vieras avaa sisäänkäynnin puhelimellaan. Kun on uloskirjautumisen aika, kulkuoikeus päättyy itsestään, eikä mitään tarvitse noutaa takaisin tai perua."
     },
     "benefits": {
       "eyebrow": "Miksi WIFIGATE Host",
@@ -62,15 +62,15 @@ export default {
       "subtitle": "Kaikki, mitä varauksen muuttaminen kulkuoikeudeksi vaatii, hoituu puolestasi.",
       "b1t": "Ei avainten luovutusta",
       "b1x": "Unohda avainten nouto, avainlaatikot ja kopioidut koodit. Kulkuoikeus tulee vieraan puhelimeen juuri silloin, kun sitä tarvitaan.",
-      "b2t": "Aikarajattu jo lähtökohtaisesti",
-      "b2x": "Jokainen kutsu aukeaa sisäänkirjautuessa ja päättyy uloskirjautuessa, automaattisesti, jokaisella majoituskerralla.",
+      "b2t": "Aina aikarajattu",
+      "b2x": "Jokainen kutsu aktivoituu sisäänkirjautuessa ja päättyy uloskirjautuessa automaattisesti, joka ikisellä majoituskerralla.",
       "b3t": "Salattu ja yksityinen",
       "b3x": "Kulkuoikeus on salattu ja rajattu myönnettyyn oikeuteen. Kiinteistösi ja vieraasi pysyvät suojattuina.",
       "b4t": "Toimii sisäänkäyntiesi kanssa",
       "b4x": "Portit, autotallin ovet, puomit ja ulko-ovet: WIFIGATE ohjaa sitä, mitä sinulla jo on.",
       "b5t": "Sopii myös kokonaisiin rakennuksiin",
       "b5x": "Yksittäisestä portista kokonaiseen kiinteistöön: yksi kutsu voi kattaa jokaisen sisäänkäynnin, jota vieras tarvitsee.",
-      "b6t": "Liittyy järjestelmiisi",
+      "b6t": "Integroituu järjestelmiisi",
       "b6x": "Kytke WIFIGATE Host varausprosessiisi, PMS-järjestelmääsi tai kanavanhallintaasi ja anna sen hoitaa loput."
     },
     "secure": {
@@ -82,7 +82,7 @@ export default {
       "i2t": "Vähemmän fyysisiä kulkuvälineitä, enemmän vieraanvaraisuutta",
       "i2x": "Digitaalinen kulku vähentää avainten, korttien ja kaukosäätimien tarvetta, joten henkilökunta voi keskittyä vieraisiin ja vieraanvaraisuuteen.",
       "i3t": "Hallinta pysyy sinulla",
-      "i3x": "Kulkuoikeus on sidottu jokaiseen majoitukseen ja jokaiseen vieraaseen, ja voit katkaista sen milloin tahansa."
+      "i3x": "Kulkuoikeus on sidottu jokaiseen majoitukseen ja jokaiseen vieraaseen, ja voit perua sen milloin tahansa."
     },
     "cta": {
       "title": "Valmis automatisoimaan vieraiden kulun?",

@@ -29,15 +29,15 @@ const copy = {
       },
       {
         title: "Stabilität",
-        text: "Die direkte Verbindung zum Gerät reagiert sofort und jedes Mal gleich schnell, ohne Verzögerungen durch einen entfernten Server und unabhängig von Netzauslastung oder schlechtem Empfang.",
+        text: "Dank der direkten Verbindung zum Gerät reagiert das System sofort und jedes Mal gleich schnell, ohne Verzögerung durch entfernte Server und unabhängig von Netzauslastung oder schlechtem Empfang.",
       },
       {
         title: "Schnelle Gasteinladung",
-        text: "Senden Sie einem Kurier oder Gast in Sekunden eine sichere Zutrittseinladung mit Anfahrtsbeschreibung, damit Besucher ohne Anrufe, gemeinsam genutzte Handsender oder manuelle Abstimmung hineinkommen.",
+        text: "Senden Sie einem Kurier oder Gast in Sekunden eine sichere Zutrittseinladung mit Anfahrtsbeschreibung. So kommen Besucher ohne Anrufe, geteilte Handsender oder lästiges Abstimmen hinein.",
       },
       {
-        title: "Zutrittshistorie für 90 Tage",
-        text: "Sehen Sie die Zutrittsaktivitäten der letzten 90 Tage ein und erhalten Sie einen klaren Überblick über die Nutzung des Tors und die jüngsten Zutrittsereignisse.",
+        title: "90 Tage Zutrittshistorie",
+        text: "Sehen Sie die Zutritte der letzten 90 Tage ein und behalten Sie die Nutzung des Tors und die jüngsten Zutritte jederzeit im Blick.",
       },
       {
         title: "Automatisches Öffnen",
@@ -45,18 +45,18 @@ const copy = {
       },
       {
         title: "Bis zu 50 geplante Ereignisse",
-        text: "Erstellen Sie direkt im System wiederkehrende Zeitpläne und automatische Aktionen, passend zu den Abläufen an Ihrem Standort, inklusive Unterstützung für den Schabbat-Modus.",
+        text: "Legen Sie direkt im System wiederkehrende Zeitpläne und automatische Aktionen an, passend zu den Abläufen an Ihrem Standort, inklusive Sabbat-Modus.",
       },
       {
-        title: "Digitales Einlernen von RF-Handsendern",
-        text: "Lernen Sie RF-Handsender digital über die Plattform ein und verwalten Sie sie dort, statt auf umständliche manuelle Programmierung angewiesen zu sein.",
+        title: "Funk-Handsender digital einlernen",
+        text: "Lernen Sie Funk-Handsender digital über die Plattform ein und verwalten Sie sie dort, statt sie umständlich von Hand zu programmieren.",
       },
       {
         title: "Sicherheit & Datenschutz",
         text: "Die Kommunikation mit dem Gerät und die gespeicherten Daten sind verschlüsselt. So bleiben der Zutritt zu Ihrer Immobilie und alle Informationen darüber privat.",
       },
       {
-        title: "Keine Abonnementgebühren",
+        title: "Keine Abogebühren",
         text: "Sie zahlen einmalig für das WIFIGATE-Gerät und die Installation, ohne Monatsabo, ohne regelmäßige Verlängerungen und ohne laufende Plattformgebühren.",
       },
     ],
@@ -66,25 +66,25 @@ const copy = {
     imageAlt: "Ein Kurier folgt einer blau gepunkteten Route zum Eingang eines Wohnhauses, während ein Bewohner die WIFIGATE-App mit einem zeitlich begrenzten Gastzugang in der Hand hält.",
     eyebrow: "Privater Zutritt",
     title: "Gebäude und Privathäuser sind keine öffentlichen Räume.",
-    description: "Schluss mit dauerhaften Codes für die Türsprechanlage. Senden Sie per Fingertipp eine zeitlich begrenzte Zutrittsberechtigung mit Anfahrtsbeschreibung und verringern Sie unbefugten Zutritt und das Diebstahlrisiko.",
+    description: "Schluss mit dauerhaften Türcodes. Senden Sie per Fingertipp eine zeitlich begrenzte Zutrittsberechtigung samt Anfahrtsbeschreibung. Das senkt das Risiko unbefugter Zutritte und Diebstähle.",
   },
   solutions: {
     eyebrow: "Für jeden Eingang entwickelt",
-    titleLines: ["Ein System.", "Jeder Zugang."],
+    titleLines: ["Ein System.", "Für jeden Zugang."],
     subtitle: "Per Smartphone öffnen, Zutritt an alle vergeben, die ihn brauchen, und selbst bestimmen, wann er endet.",
     imageAlt: "Die WIFIGATE-App auf einem Smartphone mit dem Tor zu Hause, dem Arbeitsplatz und einem zeitlich begrenzten Gastzugang",
   },
   automation: {
-    eyebrow: "Für das Gastgewerbe entwickelt",
+    eyebrow: "Für Gastgeber entwickelt",
     titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Entwickelt für",
     audiences: ["Hotels", "Airbnb", "Ferienwohnungen", "Unterkünfte"],
-    promise: "Heißen Sie Ihre Gäste willkommen. Der Zutritt läuft automatisch.",
+    promise: "Gäste willkommen heißen. Zutritt automatisch regeln.",
     subtitle: "Vom Hotel bis zur Ferienwohnung: Verknüpfen Sie jede Buchung mit einer sicheren Zutrittsberechtigung für das richtige Tor, die richtige Tür oder die richtige Garage. Gäste kommen mit ihrem Smartphone hinein, und die Berechtigung gilt ab dem Check-in und endet automatisch beim Check-out.",
     cta: "WIFIGATE Host entdecken",
     imageAlt: "Gäste betreten ihre Unterkunft mit dem Smartphone",
     stayCaption: "Jeder Aufenthalt, von der Buchung bis zur Abreise",
-    staySteps: ["Buchung eingegangen", "Zutritt ab Check-in", "Läuft beim Check-out ab"],
+    staySteps: ["Buchung eingegangen", "Zutritt ab Check-in", "Endet beim Check-out"],
     points: [
       {
         title: "Keine Übergabe von Schlüsseln oder Karten",
@@ -102,7 +102,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "WIFIGATE-Systemübersicht: das IP67-Gerät, die mobile App und die Steuerplatine mit Anschlussklemmen, USB Type-C und 12-24-V-Eingang, Wi-Fi 6, Bluetooth LE und einem 433,92-MHz-Empfänger, dazu die Plattformfunktionen – 500 Nutzer, 20 Admins, unbegrenzte Gasteinladungen, eine API für automatisierte Gasteinladungen, keine SIM-Karte und kein Router, Stabilität, schnelle Gasteinladung, 90-Tage-Historie, automatisches Öffnen, bis zu 50 Ereignisse, digitales Einlernen von RF-Handsendern, Sicherheit und Datenschutz sowie keine Abogebühren.",
+    imageAlt: "WIFIGATE-Systemübersicht: das IP67-Gerät, die mobile App und die Steuerplatine mit Anschlussklemmen, USB Type-C und 12-24-V-Eingang, Wi-Fi 6, Bluetooth LE und einem 433,92-MHz-Empfänger, dazu die Plattformfunktionen: 500 Nutzer, 20 Admins, unbegrenzte Gasteinladungen, eine API für automatisierte Gasteinladungen, keine SIM-Karte und kein Router, Stabilität, schnelle Gasteinladung, 90-Tage-Historie, automatisches Öffnen, bis zu 50 Ereignisse, digitales Einlernen von Funk-Handsendern, Sicherheit und Datenschutz sowie keine Abogebühren.",
     eyebrow: "Videoanleitungen",
     title: "Von Anfang an unkompliziert.",
     subtitle: "Klare Anleitungen für Installation, täglichen Zutritt und erweiterte Konfiguration.",
@@ -111,7 +111,7 @@ const copy = {
       "Mit QR-Code verbinden",
       "Gast einladen",
       "Eingang öffnen",
-      "RF-Handsender einlernen",
+      "Funk-Handsender einlernen",
       "Zutrittsmodi konfigurieren",
     ],
     status: "Demnächst verfügbar",
@@ -119,7 +119,7 @@ const copy = {
   oneTapInvite: {
     imageAlt: "Eine blau gepunktete Route führt von der Straße zu einer Standortmarkierung am Eingang eines Wohnhauses.",
     eyebrow: "Ein Fingertipp. Alles, was Ihre Gäste brauchen.",
-    title: "Erklären Sie den Weg nicht jedes Mal neu.\nSenden Sie eine Einladung mit allen Details.",
+    title: "Nie wieder den Weg erklären.\nEine Einladung mit allen Details.",
     description: "Mit WIFIGATE teilen Sie Anfahrtsbeschreibung, Adresse, Etage,\nWohnungsnummer, weitere Details und den zeitlich begrenzten Zutritt mit einem Fingertipp.",
   },
   faq: {
@@ -153,11 +153,11 @@ const copy = {
     pointsNote: "Und mehr, je nachdem, was Sie ansteuern möchten.",
   },
   contact: {
-    eyebrow: "Kommen Sie mit uns ins Gespräch",
-    title: "Machen Sie jede Ankunft einfacher.",
+    eyebrow: "Lassen Sie uns sprechen",
+    title: "Damit jede Ankunft leichter wird.",
     subtitle: "Sagen Sie uns, was Sie öffnen möchten: ein Tor, eine Tür, einen elektrischen Rollladen …\nUnser Team hilft Ihnen, die passende Lösung zu finden.",
     distributorTitle: "Vertriebspartnerprogramm",
-    distributorText: "Sie kennen den Markt und die Kunden. Wir bringen das Produkt, die Schulung und den Support.",
+    distributorText: "Sie kennen den Markt und die Kunden. Wir liefern Produkt, Schulung und Support.",
     distributorButton: "Vertriebspartner werden",
     supportTitle: "Produktsupport",
     supportText: "Erhalten Sie praktische Hilfe von einem Team, das das Produkt kennt und Ihre Installation versteht.",
@@ -166,10 +166,10 @@ const copy = {
     whatsappButton: "Auf WhatsApp schreiben",
   },
   footer: {
-    tagline: "Keine Schlüssel. Keine Handsender. Keine Karten. Sicherer digitaler Zutritt, ohne darauf zu warten, dass Ihnen jemand öffnet.",
+    tagline: "Keine Schlüssel. Keine Handsender. Keine Karten. Sicherer digitaler Zutritt, ohne zu warten, bis Ihnen jemand öffnet.",
     taglineLines: [
       "Keine Schlüssel. Keine Handsender. Keine Karten.",
-      "Sicherer digitaler Zutritt, ohne darauf zu warten, dass Ihnen jemand öffnet.",
+      "Sicherer digitaler Zutritt, ohne zu warten, bis Ihnen jemand öffnet.",
     ],
     legalTitle: "Rechtliches",
     terms: "Allgemeine Geschäftsbedingungen",

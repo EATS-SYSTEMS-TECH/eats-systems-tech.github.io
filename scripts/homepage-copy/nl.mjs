@@ -29,19 +29,19 @@ const copy = {
       },
       {
         title: "Stabiliteit",
-        text: "De directe verbinding met het apparaat reageert meteen en elke keer even snel, zonder vertraging door een externe server en los van netwerkdrukte of slechte ontvangst.",
+        text: "Dankzij de directe verbinding met het apparaat reageert het systeem meteen en elke keer even snel, zonder vertraging door een externe server en los van netwerkdrukte of slechte ontvangst.",
       },
       {
         title: "Snelle gastuitnodiging",
-        text: "Stuur een koerier of gast binnen enkele seconden een beveiligde toegangsuitnodiging met routebeschrijving, zodat bezoekers binnenkomen zonder telefoontjes, gedeelde afstandsbedieningen of handmatige afstemming.",
+        text: "Stuur een koerier of gast binnen enkele seconden een beveiligde toegangsuitnodiging met routebeschrijving. Zo komen bezoekers binnen zonder telefoontjes, gedeelde afstandsbedieningen of heen-en-weer geregel.",
       },
       {
-        title: "Toegangsgeschiedenis van 90 dagen",
+        title: "90 dagen toegangsgeschiedenis",
         text: "Bekijk de toegangsactiviteit van de afgelopen 90 dagen en krijg helder inzicht in het gebruik van de poort en de recente toegangsmomenten.",
       },
       {
         title: "Automatisch openen",
-        text: "Laat bevoegde gebruikers de poort bij aankomst automatisch openen, voor een soepele, comfortabele toegang zonder handen.",
+        text: "Laat bevoegde gebruikers de poort bij aankomst automatisch openen, voor soepele, comfortabele en handsfree toegang.",
       },
       {
         title: "Tot 50 geplande acties",
@@ -49,7 +49,7 @@ const copy = {
       },
       {
         title: "RF-afstandsbedieningen digitaal inleren",
-        text: "Leer RF-afstandsbedieningen digitaal in en beheer ze via het platform, in plaats van te vertrouwen op omslachtig handmatig programmeren.",
+        text: "Leer RF-afstandsbedieningen digitaal in en beheer ze via het platform, zonder omslachtig handmatig programmeren.",
       },
       {
         title: "Beveiliging en privacy",
@@ -66,7 +66,7 @@ const copy = {
     imageAlt: "Een koerier volgt een blauwe stippellijnroute naar de ingang van een appartementencomplex terwijl een bewoner de WIFIGATE-app vasthoudt met tijdgebonden gasttoegang.",
     eyebrow: "Privétoegang",
     title: "Gebouwen en particuliere woningen zijn geen openbare ruimtes.",
-    description: "Stop met het delen van vaste intercomcodes. Stuur met één tik een tijdgebonden toegangsrecht met routebeschrijving en beperk onbevoegde toegang en het risico op diefstal.",
+    description: "Stop met het delen van vaste deurcodes. Stuur met één tik een tijdgebonden toegangsrecht met routebeschrijving en verklein zo de kans op onbevoegde toegang en diefstal.",
   },
   solutions: {
     eyebrow: "Ontwikkeld voor elke ingang",
@@ -75,19 +75,19 @@ const copy = {
     imageAlt: "De WIFIGATE-app op een telefoon met de poort thuis, de werkplek en een tijdgebonden gastpas",
   },
   automation: {
-    eyebrow: "Ontwikkeld voor de gastvrijheidssector",
+    eyebrow: "Gemaakt voor gastvrijheid",
     titleLines: ["WIFIGATE", "Host"],
     audienceLabel: "Ontworpen voor",
     audiences: ["Hotels", "Airbnb", "Vakantieappartementen", "Verblijfsaccommodaties"],
-    promise: "Verwelkom je gasten. Laat de toegang automatisch verlopen.",
+    promise: "Jij ontvangt je gasten. De toegang regelt zichzelf.",
     subtitle: "Van hotels tot vakantieappartementen: koppel elke boeking aan een beveiligd toegangsrecht voor de juiste poort, deur of garage. Gasten gaan naar binnen met hun telefoon, en het toegangsrecht gaat in bij het inchecken en eindigt automatisch bij het uitchecken.",
     cta: "Ontdek WIFIGATE Host",
     imageAlt: "Gasten gebruiken hun telefoon om hun accommodatie binnen te gaan",
     stayCaption: "Elk verblijf, van boeking tot vertrek",
-    staySteps: ["Boeking ontvangen", "Toegang bij het inchecken", "Vervalt bij het uitchecken"],
+    staySteps: ["Boeking ontvangen", "Toegang bij het inchecken", "Stopt bij het uitchecken"],
     points: [
       {
-        title: "Geen sleutels of passen om over te dragen",
+        title: "Geen sleutels of passen overdragen",
         text: "Het toegangsrecht komt rechtstreeks op de telefoon van je gast. Geen sleutels ophalen, geen sleutelkluisjes en geen codes om te delen.",
       },
       {
@@ -96,8 +96,8 @@ const copy = {
       },
       {
         icon: "team",
-        title: "Bespaart werkuren",
-        text: "Jouw team richt zich op de gasten in plaats van op het geregel met sleutelkaarten en andere fysieke middelen.",
+        title: "Scheelt uren werk",
+        text: "Je team richt zich op de gasten in plaats van op het geregel met sleutelkaarten en andere fysieke toegangsmiddelen.",
       },
     ],
   },
@@ -119,7 +119,7 @@ const copy = {
   oneTapInvite: {
     imageAlt: "Een blauwe stippellijnroute loopt van de straat naar een locatiemarkering bij de ingang van een appartementencomplex.",
     eyebrow: "Eén tik. Alles wat je gasten nodig hebben.",
-    title: "Geen routebeschrijving meer herhalen.\nStuur één uitnodiging met alle details.",
+    title: "Nooit meer de weg uitleggen.\nEén uitnodiging met alle details.",
     description: "Met WIFIGATE deel je met één tik de routebeschrijving, het adres, de verdieping,\nhet appartementnummer, extra details en het tijdgebonden toegangsrecht.",
   },
   faq: {
@@ -154,7 +154,7 @@ const copy = {
   },
   contact: {
     eyebrow: "Laten we praten",
-    title: "Maak elke aankomst eenvoudiger.",
+    title: "Zodat elke aankomst soepeler verloopt.",
     subtitle: "Vertel ons wat je wilt openen: een poort, een deur, een elektrisch rolluik...\nOns team helpt je de juiste oplossing te vinden.",
     distributorTitle: "Distributeursprogramma",
     distributorText: "Je kent de markt en de klanten. Wij zorgen voor het product, de training en de ondersteuning.",
@@ -162,7 +162,7 @@ const copy = {
     supportTitle: "Productondersteuning",
     supportText: "Krijg praktische hulp van een team dat het product kent en je installatie begrijpt.",
     interestTitle: "Plan samen met ons je toegangsoplossing",
-    interestText: "Bespreek met ons je pand, de prijzen en de oplossing die bij je behoeften past.",
+    interestText: "Bespreek met ons je pand, de prijzen en de oplossing die bij je past.",
     whatsappButton: "Chat via WhatsApp",
   },
   footer: {

@@ -58,11 +58,11 @@ export default {
     },
     "benefits": {
       "eyebrow": "Waarom WIFIGATE Host",
-      "title": "Minder balie. Meer gastvrijheid zonder omkijken.",
+      "title": "Minder balie. Zorgeloos gasten ontvangen.",
       "subtitle": "Alles wat nodig is om van een boeking toegang te maken, voor je geregeld.",
       "b1t": "Geen sleutels om over te dragen",
       "b1x": "Vergeet sleutels ophalen, sleutelkluisjes en gekopieerde codes. De toegang staat op de telefoon van je gast op het moment dat die nodig is.",
-      "b2t": "Tijdgebonden als uitgangspunt",
+      "b2t": "Standaard tijdgebonden",
       "b2x": "Elke uitnodiging gaat open bij het inchecken en vervalt bij het uitchecken, automatisch, bij elk verblijf.",
       "b3t": "Versleuteld en privé",
       "b3x": "Toegang is versleuteld en beperkt tot het toegangsrecht dat is uitgegeven. Je pand en je gasten blijven beschermd.",
@@ -76,7 +76,7 @@ export default {
     "secure": {
       "eyebrow": "Beveiliging",
       "title": "Toegang die je gerust aan een vreemde kunt geven",
-      "subtitle": "Gebouwd om het eigendom achter elke poort te beschermen.",
+      "subtitle": "Ontwikkeld om te beschermen wat achter elke poort ligt.",
       "i1t": "End-to-end versleuteld",
       "i1x": "Elke uitnodiging is versleuteld, zodat toegangsgegevens onderweg niet kunnen worden gelezen of gekopieerd.",
       "i2t": "Minder fysieke middelen, meer gastvrijheid",

@@ -12,7 +12,7 @@ const copy = {
   hero: {
     media: {"replay":"Spill av videoen igjen","mute":"Slå av lyden","unmute":"Slå på lyden","pause":"Sett videoen på pause","play":"Spill av videoen"},
     titleLines: ["Én app.", "Alle inngangene dine."],
-    subtitle: "Smart tilgang og styring for hjem, bygg, bedrifter og overnattingssteder. Alt på én plattform, enkelt og uten anstrengelse.",
+    subtitle: "Smart tilgang og styring for hjem, bygg, bedrifter og overnattingssteder. Alt på én plattform, enkelt og problemfritt.",
     primaryCta: "Slik fungerer det",
     secondaryCta: "Snakk med teamet vårt",
     proofLabel: "Plattformens fordeler",
@@ -29,19 +29,19 @@ const copy = {
       },
       {
         title: "Stabilitet",
-        text: "Den direkte forbindelsen til enheten svarer umiddelbart og like raskt hver gang, uten forsinkelser fra en ekstern server og uavhengig av nettbelastning eller dårlig dekning.",
+        text: "Takket være den direkte forbindelsen til enheten reagerer systemet umiddelbart og like raskt hver gang, uten forsinkelser fra en ekstern server og uavhengig av nettbelastning eller dårlig dekning.",
       },
       {
         title: "Rask gjesteinvitasjon",
-        text: "Send en sikker invitasjon med veibeskrivelse til et bud eller en gjest på få sekunder, slik at besøkende kommer inn uten telefoner, delte fjernkontroller eller manuell koordinering.",
+        text: "Send en sikker invitasjon med veibeskrivelse til et bud eller en gjest på få sekunder, slik at besøkende kommer inn uten telefonsamtaler, delte fjernkontroller eller manuell koordinering.",
       },
       {
-        title: "Adgangshistorikk for 90 dager",
+        title: "90 dagers adgangshistorikk",
         text: "Se adgangsaktiviteten for de siste 90 dagene og få god oversikt over bruken av porten og de siste adgangshendelsene.",
       },
       {
         title: "Automatisk åpning",
-        text: "La godkjente brukere åpne porten automatisk når de kommer, for en smidig og behagelig adkomst helt uten å bruke hendene.",
+        text: "La godkjente brukere åpne porten automatisk når de kommer, for en smidig og behagelig adkomst, helt håndfritt.",
       },
       {
         title: "Opptil 50 planlagte hendelser",
@@ -49,7 +49,7 @@ const copy = {
       },
       {
         title: "Digital innlæring av RF-fjernkontroller",
-        text: "Lær inn og administrer RF-fjernkontroller digitalt via plattformen i stedet for å være avhengig av tungvint manuell programmering.",
+        text: "Lær inn og administrer RF-fjernkontroller digitalt via plattformen, uten tungvint manuell programmering.",
       },
       {
         title: "Sikkerhet og personvern",
@@ -66,7 +66,7 @@ const copy = {
     imageAlt: "Et bud følger en blå stiplet rute til inngangen til en boligblokk mens en beboer holder WIFIGATE-appen som viser tidsbegrenset gjestetilgang.",
     eyebrow: "Privat tilgang",
     title: "Bygninger og private boliger er ikke offentlige rom.",
-    description: "Slutt å dele faste dørtelefonkoder. Send en tidsbegrenset tilgang med veibeskrivelse med ett eneste trykk, og reduser uautorisert adgang og risikoen for tyveri.",
+    description: "Slutt å dele faste dørkoder. Send en tidsbegrenset tilgang med veibeskrivelse med ett eneste trykk, og reduser risikoen for uautorisert adgang og tyveri.",
   },
   solutions: {
     eyebrow: "Utviklet for hver inngang",
@@ -119,7 +119,7 @@ const copy = {
   oneTapInvite: {
     imageAlt: "En blå stiplet rute går fra gaten til en posisjonsnål ved inngangen til en boligblokk.",
     eyebrow: "Ett trykk. Alt gjestene trenger.",
-    title: "Slutt å gjenta veibeskrivelsen.\nSend én invitasjon med alle detaljene.",
+    title: "Slutt å forklare veien gang på gang.\nSend én invitasjon med alt som trengs.",
     description: "Med WIFIGATE deler du veibeskrivelse, adresse, etasje,\nleilighetsnummer, andre detaljer og den tidsbegrensede tilgangen med ett trykk.",
   },
   faq: {

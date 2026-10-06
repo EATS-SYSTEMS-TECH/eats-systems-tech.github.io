@@ -16,7 +16,7 @@ const copy = {
     primaryCta: "Cách hoạt động",
     secondaryCta: "Trao đổi với đội ngũ của chúng tôi",
     proofLabel: "Lợi ích của nền tảng",
-    proof: ["Riêng tư tuyệt đối", "Dễ sử dụng", "Gửi chỉ dẫn đường đi chỉ với một chạm", "Quyền ra vào cho khách có thời hạn"],
+    proof: ["Riêng tư tuyệt đối", "Dễ sử dụng", "Gửi chỉ dẫn đường đi bằng một chạm", "Quyền ra vào cho khách có thời hạn"],
   },
   platform: {
     eyebrow: "WIFIGATE là gì?",
@@ -48,8 +48,8 @@ const copy = {
         text: "Tạo lịch định kỳ và thao tác tự động ngay trong hệ thống, phù hợp với cách vận hành tại địa điểm của bạn, kèm hỗ trợ chế độ Shabbat.",
       },
       {
-        title: "Học remote RF kỹ thuật số",
-        text: "Cài đặt và quản lý remote RF ngay trên nền tảng, thay vì phụ thuộc vào quy trình lập trình thủ công rườm rà.",
+        title: "Học mã remote RF trên ứng dụng",
+        text: "Học mã và quản lý remote RF ngay trên nền tảng, thay vì phụ thuộc vào quy trình lập trình thủ công rườm rà.",
       },
       {
         title: "Bảo mật và quyền riêng tư",
@@ -66,7 +66,7 @@ const copy = {
     imageAlt: "Một người giao hàng đi theo lộ trình chấm xanh đến lối vào tòa chung cư, trong khi một cư dân cầm ứng dụng WIFIGATE hiển thị quyền ra vào cho khách có thời hạn.",
     eyebrow: "Ra vào riêng tư",
     title: "Tòa nhà và nhà riêng không phải là không gian công cộng.",
-    description: "Đừng chia sẻ mã liên lạc nội bộ cố định nữa. Chỉ với một chạm, hãy gửi quyền ra vào có thời hạn kèm chỉ dẫn đường đi, giúp hạn chế việc ra vào trái phép và nguy cơ mất trộm.",
+    description: "Đừng chia sẻ mã cửa cố định nữa. Chỉ với một chạm, hãy gửi quyền ra vào có thời hạn kèm chỉ dẫn đường đi, giúp hạn chế việc ra vào trái phép và nguy cơ mất trộm.",
   },
   solutions: {
     eyebrow: "Phù hợp với mọi lối vào",
@@ -102,7 +102,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Tổng quan hệ thống WIFIGATE: thiết bị IP67, ứng dụng di động và bo mạch điều khiển với các cầu đấu dây, cổng USB Type-C và đầu vào 12-24V, Wi-Fi 6, Bluetooth LE cùng bộ thu 433,92MHz, bên cạnh các tính năng của nền tảng - 500 người dùng, 20 quản trị viên, lời mời khách không giới hạn, API tự động cho lời mời khách, không cần SIM hay router, ổn định, mời khách nhanh chóng, lịch sử 90 ngày, tự động mở, tối đa 50 sự kiện, học remote RF kỹ thuật số, bảo mật và quyền riêng tư, không mất phí thuê bao.",
+    imageAlt: "Tổng quan hệ thống WIFIGATE: thiết bị IP67, ứng dụng di động và bo mạch điều khiển với các cầu đấu dây, cổng USB Type-C và đầu vào 12-24V, Wi-Fi 6, Bluetooth LE cùng bộ thu 433,92MHz, bên cạnh các tính năng của nền tảng - 500 người dùng, 20 quản trị viên, lời mời khách không giới hạn, API tự động cho lời mời khách, không cần SIM hay router, ổn định, mời khách nhanh chóng, lịch sử 90 ngày, tự động mở, tối đa 50 sự kiện, học mã remote RF trên ứng dụng, bảo mật và quyền riêng tư, không mất phí thuê bao.",
     eyebrow: "Video hướng dẫn",
     title: "Đơn giản ngay từ ngày đầu tiên.",
     subtitle: "Hướng dẫn rõ ràng về lắp đặt, sử dụng hằng ngày và cài đặt nâng cao.",
@@ -111,7 +111,7 @@ const copy = {
       "Kết nối bằng mã QR",
       "Mời khách",
       "Mở một điểm ra vào",
-      "Học remote RF",
+      "Học mã remote RF",
       "Cài đặt chế độ ra vào",
     ],
     status: "Sắp ra mắt",
@@ -119,11 +119,11 @@ const copy = {
   oneTapInvite: {
     imageAlt: "Một lộ trình chấm xanh dẫn từ đường phố đến ghim vị trí tại lối vào tòa chung cư.",
     eyebrow: "Một chạm. Đủ mọi thứ khách cần.",
-    title: "Đừng lặp lại chỉ dẫn đường đi nữa.\nHãy gửi một lời mời với đầy đủ thông tin.",
+    title: "Không cần chỉ đường hết lần này đến lần khác.\nMột lời mời, đủ mọi thông tin.",
     description: "WIFIGATE cho phép bạn chia sẻ chỉ với một chạm: chỉ dẫn đường đi, địa chỉ,\ntầng, số căn hộ, thông tin bổ sung và quyền ra vào có thời hạn.",
   },
   faq: {
-    eyebrow: "Tất cả những gì bạn cần biết về cổng WiFi",
+    eyebrow: "Tìm hiểu cổng WiFi",
     title: "Ra vào bằng cổng WiFi, không còn thắc mắc.",
     subtitle: "Giải đáp rõ ràng về lắp đặt, kết nối, chi phí và quyền ra vào cho khách.",
     items: [
@@ -153,8 +153,8 @@ const copy = {
     pointsNote: "Và nhiều thiết bị khác, tùy theo nhu cầu điều khiển của bạn.",
   },
   contact: {
-    eyebrow: "Hãy trò chuyện",
-    title: "Giúp mỗi lần đến nơi trở nên đơn giản hơn.",
+    eyebrow: "Cùng trao đổi",
+    title: "Để mỗi lần đến nơi đều đơn giản hơn.",
     subtitle: "Hãy cho chúng tôi biết bạn muốn mở gì: cổng, cửa ra vào, cửa cuốn điện...\nĐội ngũ của chúng tôi sẽ giúp bạn tìm ra giải pháp phù hợp.",
     distributorTitle: "Chương trình nhà phân phối",
     distributorText: "Bạn hiểu thị trường và khách hàng. Chúng tôi mang đến sản phẩm, đào tạo và hỗ trợ.",
