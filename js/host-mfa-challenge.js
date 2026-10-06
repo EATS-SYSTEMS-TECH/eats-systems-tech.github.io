@@ -49,7 +49,7 @@ export function requestMfaChallenge(resolver) {
       }
       verifying = true;
       submit.disabled = true;
-      status.textContent = "Verifying...";
+      status.textContent = document.documentElement.lang === "he" ? "מאמתים..." : "Verifying...";
       try {
         const result = await resolveTotp(
           resolver,

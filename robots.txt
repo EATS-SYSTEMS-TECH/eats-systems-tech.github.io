@@ -4,6 +4,7 @@
 User-agent: *
 Allow: /
 Disallow: /login/
+Disallow: /he/login/
 Disallow: /dashboard/
 
 # Search and answer engines, named so the intent is explicit.
@@ -28,6 +29,7 @@ User-agent: MistralAI-User
 User-agent: DuckAssistBot
 Allow: /
 Disallow: /login/
+Disallow: /he/login/
 Disallow: /dashboard/
 
 Sitemap: https://wifigate.io/sitemap.xml

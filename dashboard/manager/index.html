@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Manager | WIFIGATE</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/host-portal.css" />
+    <link rel="stylesheet" href="/css/platform.css" />
+    <script type="module" src="/js/platform-dashboard.js"></script>
+  </head>
+  <body data-product="manager">
+    <main class="platform-shell">
+      <header class="platform-header">
+        <a class="brand" href="/" aria-label="WIFIGATE home"
+          ><img src="/assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE"
+        /></a>
+        <div class="account-menu">
+          <span id="platform-account"></span
+          ><button
+            id="platform-sign-out"
+            type="button"
+            data-copy="signOut"
+            disabled
+          >
+            Sign out
+          </button>
+        </div>
+      </header>
+      <section class="platform-heading">
+        <h1 id="platform-title" data-copy="title">Choose your product</h1>
+        <p data-copy="subtitle">
+          Your access is checked separately for each WIFIGATE product.
+        </p>
+      </section>
+      <p id="platform-status" role="status" aria-live="polite"></p>
+      <button
+        id="platform-retry"
+        class="platform-button"
+        type="button"
+        data-copy="retry"
+        hidden
+      >
+        Try again
+      </button>
+      <section
+        id="product-grid"
+        class="product-grid"
+        aria-label="Products"
+        hidden
+      ></section>
+      <section id="product-workspace" class="portal-panel" hidden>
+        <div id="product-switcher" class="product-switcher"></div>
+        <h2 id="product-title"></h2>
+        <p data-copy="empty">
+          Your access is active. This product workspace is not available yet.
+        </p>
+      </section>
+      <section
+        id="platform-security"
+        class="platform-security portal-panel"
+        hidden
+      >
+        <h2 data-copy="security">Account security</h2>
+        <p id="security-description"></p>
+        <button id="start-enrollment" type="button" data-copy="setup">
+          Confirm identity and start setup
+        </button>
+        <button id="verify-session" type="button" data-copy="verify" hidden>
+          Verify authenticator
+        </button>
+        <div id="totp-setup" hidden>
+          <p data-mfa-copy="scan">
+            Scan this QR code in your authenticator app, or enter the setup key
+            manually.
+          </p>
+          <img
+            id="totp-qr"
+            alt="Authenticator setup QR code"
+            width="220"
+            height="220"
+          />
+          <label
+            ><span data-mfa-copy="key">Setup key</span
+            ><input
+              id="totp-secret"
+              readonly
+              autocomplete="off"
+              spellcheck="false"
+          /></label>
+          <form id="enrollment-form">
+            <label
+              ><span data-mfa-copy="code">Authenticator code</span
+              ><input
+                name="code"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                pattern="[0-9]{6}"
+                minlength="6"
+                maxlength="6"
+                required
+            /></label>
+            <button type="submit" data-mfa-copy="finish">
+              Verify and finish setup
+            </button>
+          </form>
+          <button id="cancel-enrollment" type="button" data-mfa-copy="cancel">
+            Cancel setup
+          </button>
+        </div>
+        <p id="enrollment-status" role="status" aria-live="polite"></p>
+        <p class="help-text" data-mfa-copy="recovery">
+          Lost your authenticator? Contact a platform owner for identity
+          verification and recovery.
+        </p>
+      </section>
+    </main>
+    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
+      <form>
+        <h2 id="challenge-title" data-mfa-copy="title">
+          Verify your authenticator
+        </h2>
+        <label
+          ><span data-mfa-copy="factor">Authenticator</span
+          ><select name="factor" required></select
+        ></label>
+        <label
+          ><span data-mfa-copy="code">Authenticator code</span
+          ><input
+            name="code"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            pattern="[0-9]{6}"
+            minlength="6"
+            maxlength="6"
+            required
+        /></label>
+        <p role="status" aria-live="polite"></p>
+        <div class="form-actions">
+          <button type="submit" data-mfa-copy="verify">Verify</button
+          ><button type="button" data-cancel data-mfa-copy="cancel">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
