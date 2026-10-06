@@ -1335,10 +1335,14 @@ html[lang="he"] body.home-en #where .section__header {
 @media (max-width: 768px) {
 
 
+  .home-en .site-header .nav__logo {
+    width: min(35vw, 9.25rem);
+  }
+
   .home-en .hero {
-    min-height: 560px;
-    height: calc(100svh - 6.5rem);
-    max-height: 780px;
+    min-height: calc(100svh - var(--nav-height));
+    height: auto;
+    max-height: none;
   }
 
   .home-en .hero__bg {
@@ -1362,7 +1366,9 @@ html[lang="he"] body.home-en #where .section__header {
   }
 
   .home-en .hero__content {
-    padding-block: 1.5rem;
+    height: auto;
+    min-height: calc(100svh - var(--nav-height));
+    padding-block: 4rem 7rem;
   }
 
   .home-en .hero__title {
@@ -1384,6 +1390,13 @@ html[lang="he"] body.home-en #where .section__header {
     gap: 0.55rem 1.1rem;
     margin-top: 1.5rem;
     padding-top: 0.9rem;
+  }
+
+  .home-en .hero__replay {
+    right: auto;
+    left: 50%;
+    bottom: 1rem;
+    transform: translateX(-50%);
   }
 
   .home-en .hero__media-control {
@@ -1508,6 +1521,25 @@ html[lang="he"] body.home-en #where .section__header {
 }
 
 @media (max-width: 480px) {
+  .home-en .where-showcase {
+    padding: 1rem;
+  }
+
+  .home-en .where-copy {
+    padding-inline: 0.75rem;
+  }
+
+  .home-en .where-list__link {
+    gap: 0.4rem;
+    padding-inline: 0 0.8rem;
+    overflow-wrap: anywhere;
+  }
+
+  .home-en .seo-faq__item summary {
+    gap: 0.75rem;
+    overflow-wrap: anywhere;
+  }
+
   .home-en .guest-invites__cta {
     max-width: 100%;
     white-space: normal;
@@ -1559,8 +1591,43 @@ html[lang="he"] body.home-en #where .section__header {
     font-size: 2.2rem;
   }
 
+  .home-en .hero__proof {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-en .site-header .nav {
+    gap: 0.25rem;
+    padding-inline: 0.5rem;
+  }
+
+  .home-en .site-header .nav__logo {
+    width: min(35vw, 6.9rem);
+  }
+
+  .home-en .site-header .site-login__trigger {
+    padding-inline: 0.4rem;
+    font-size: 0.78rem;
+  }
+
+  .home-en .site-header .language-selector__button {
+    padding-inline: 0.25rem;
+  }
+
+  .home-en .site-header .language-selector__arrow {
+    display: none;
+  }
+
+  .home-en .hero__replay {
+    min-width: 0;
+    max-width: calc(100% - 9rem);
+    padding-inline: 0.8rem;
+    font-size: 0.86rem;
+    white-space: normal;
+    text-align: center;
+  }
+
   .home-en #tutorials .section__title {
-    font-size: 2rem;
+    font-size: clamp(1.7rem, 8.5vw, 2rem);
   }
 }
 
