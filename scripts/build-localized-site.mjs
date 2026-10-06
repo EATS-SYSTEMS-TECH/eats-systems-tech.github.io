@@ -765,8 +765,18 @@ function splitHeroSubtitleLines(subtitle) {
 function applyHomepageCopy($, copy, locale) {
   const dir = isRtl(locale) ? "rtl" : "ltr";
 
-  setLocalizedText($, ".hero__eyebrow", copy.hero.eyebrow, locale);
-  setLocalizedLines($, "#hero-title", copy.hero.titleLines, locale);
+  // The h1 opens with the brand, both of its spellings and the category in
+  // the page language (the homepage SEO title), above the headline.
+  const category = getNichePageContent(locale).home.seoTitle.replace(/^WIFIGATE \| /, "");
+  // One inline run (the eyebrow is a flex row with its accent line); the Latin
+  // brand is isolated so it never reorders the words of a right-to-left line.
+  const brand = $("<bdi>").text("WIFIGATE (WiFi Gate)");
+  const words = $("<span>").text(category);
+  const line = $("<span>");
+  if (isRtl(locale)) line.append(words, " · ", brand);
+  else line.append(brand, " · ", words);
+  $("#hero-title .hero__eyebrow").empty().attr("dir", isRtl(locale) ? "rtl" : "ltr").append(line);
+  setLocalizedLines($, "#hero-title .hero__title-lines", copy.hero.titleLines, locale);
   setLocalizedLines($, "#hero-subtitle", splitHeroSubtitleLines(copy.hero.subtitle), locale);
   setLocalizedText($, ".hero__btn-primary", copy.hero.primaryCta, locale);
   setLocalizedText($, ".hero__btn-secondary", copy.hero.secondaryCta, locale);

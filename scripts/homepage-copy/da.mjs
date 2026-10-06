@@ -10,7 +10,6 @@ const copy = {
     contact: "Kontakt os",
   },
   hero: {
-    eyebrow: "Smart adgang. Skabt til hele verden.",
     titleLines: ["Én platform.", "Hver ejendom."],
     subtitle: "Smart adgangskontrol til boliger, erhvervsejendomme og overnatningssteder. Alt i én app. Helt enkelt.",
     primaryCta: "Udforsk platformen",
@@ -100,7 +99,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Oversigt over WIFIGATE-systemet: IP67-enheden, mobilappen og styrekortet med klemrækker, USB Type-C og 12-24V-indgang, Wi-Fi 6, Bluetooth LE og en 433,92MHz-modtager, sammen med platformens funktioner – 5.000 brugere, 100 administratorer, ubegrænsede gæsteinvitationer, et API til automatiserede gæsteinvitationer, intet SIM-kort eller router, stabilitet, hurtig gæsteinvitation, 90 dages historik, automatisk åbning, op til 10 begivenheder, indlæring af digitale RF-fjernbetjeninger, sikkerhed og privatliv samt ingen abonnementsgebyrer.",
+    imageAlt: "Oversigt over WIFIGATE-systemet: IP67-enheden, mobilappen og styrekortet med klemrækker, USB Type-C og 12-24V-indgang, Wi-Fi 6, Bluetooth LE og en 433,92MHz-modtager, sammen med platformens funktioner – 5.000 brugere, 100 administratorer, ubegrænsede gæsteinvitationer, et API til automatiserede gæsteinvitationer, intet SIM-kort eller router, stabilitet, hurtig gæsteinvitation, 90 dages historik, automatisk åbning, op til 50 begivenheder, indlæring af digitale RF-fjernbetjeninger, sikkerhed og privatliv samt ingen abonnementsgebyrer.",
     eyebrow: "Produktguide",
     title: "Ligetil fra første dag.",
     subtitle: "Klar vejledning til installation, daglig adgang og avanceret konfiguration.",

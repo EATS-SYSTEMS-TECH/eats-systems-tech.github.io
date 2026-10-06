@@ -10,7 +10,6 @@ const copy = {
     contact: "Neem contact op",
   },
   hero: {
-    eyebrow: "Slimme toegang. Ontwikkeld voor de hele wereld.",
     titleLines: ["Eén platform.", "Elk pand."],
     subtitle: "Slim toegangsbeheer voor woningen, bedrijfspanden en verblijfsaccommodaties. Alles in één app. Intuïtief en eenvoudig.",
     primaryCta: "Ontdek het platform",
@@ -100,7 +99,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Overzicht van het WIFIGATE-systeem: het IP67-apparaat, de mobiele app en de besturingsprint met aansluitklemmen, USB Type-C en 12-24V-ingang, Wi-Fi 6, Bluetooth LE en een 433,92MHz-ontvanger, naast de platformfuncties – 5.000 gebruikers, 100 beheerders, onbeperkte gastuitnodigingen, een API voor geautomatiseerde gastuitnodigingen, geen simkaart of router, stabiliteit, snelle gastuitnodiging, 90 dagen geschiedenis, automatisch openen, tot 10 evenementen, inleren van digitale RF-afstandsbedieningen, veiligheid en privacy, en geen abonnementskosten.",
+    imageAlt: "Overzicht van het WIFIGATE-systeem: het IP67-apparaat, de mobiele app en de besturingsprint met aansluitklemmen, USB Type-C en 12-24V-ingang, Wi-Fi 6, Bluetooth LE en een 433,92MHz-ontvanger, naast de platformfuncties – 5.000 gebruikers, 100 beheerders, onbeperkte gastuitnodigingen, een API voor geautomatiseerde gastuitnodigingen, geen simkaart of router, stabiliteit, snelle gastuitnodiging, 90 dagen geschiedenis, automatisch openen, tot 50 evenementen, inleren van digitale RF-afstandsbedieningen, veiligheid en privacy, en geen abonnementskosten.",
     eyebrow: "Productgids",
     title: "Vanaf dag één helder.",
     subtitle: "Duidelijke begeleiding voor installatie, dagelijkse toegang en geavanceerde configuratie.",
