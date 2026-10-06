@@ -24,7 +24,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .portal-panel { margin: 1rem 0; padding: clamp(1.25rem,3vw,2rem); border: 1px solid #dbe3ec; border-radius: 14px; background: white; }
 .portal-panel h1, .portal-panel h2 { margin: .5rem 0 1rem; }
 .portal-panel p, dialog p { line-height: 1.7; color: #637183; }
-.portal-panel button, .account-menu button, dialog button, #redirect-sign-in, #retry-login { padding: .75rem 1rem; border: 1px solid #244962; border-radius: 7px; background: #153855; color: #fff; font-weight: 700; }
+.portal-panel button, .account-menu button, dialog button, #redirect-sign-in { padding: .75rem 1rem; border: 1px solid #244962; border-radius: 7px; background: #153855; color: #fff; font-weight: 700; }
 .portal-panel button:hover, dialog button:hover { background: #244962; }
 label { display: grid; gap: .5rem; margin: 1rem 0; font-size: .9rem; font-weight: 600; }
 input, select { width: 100%; max-width: 32rem; padding: .8rem; border: 1px solid #b9c9d9; border-radius: 7px; background: #fff; color: #151b25; }
@@ -99,13 +99,17 @@ dialog::backdrop { background: rgb(7 24 39 / 65%); }
 /* Sign-in: the same design as the mobile app's login screen
    (app/auth/login.tsx, LoginProviderButtons, LoginBackdrop). */
 .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-.app-login { background: #ffffff url("../assets/img/login-backdrop.svg") center / cover no-repeat fixed; }
-.app-login__screen { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
-.app-login__card { width: 100%; max-width: 420px; box-sizing: border-box; padding: 22px; border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 28px; background: rgba(255, 255, 255, 0.97); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12); }
-.app-login__logo { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 280px; height: 190px; margin: 0 auto 28px; }
+/* The sign-in screen is exactly the visible screen: the page never scrolls,
+   and the logo, buttons and spacing shrink with the screen height so the card
+   fits on every phone, upright or sideways. */
+html:has(body.app-login) { height: 100%; overscroll-behavior: none; }
+.app-login { height: 100vh; height: 100dvh; min-height: 0; overflow: hidden; overscroll-behavior: none; background: #ffffff url("../assets/img/login-backdrop.svg") center / cover no-repeat; }
+.app-login__screen { height: 100%; display: flex; align-items: center; justify-content: center; padding: clamp(10px, 2.5dvh, 20px); box-sizing: border-box; overflow: hidden; }
+.app-login__card { width: 100%; max-width: 420px; max-height: 100%; box-sizing: border-box; padding: clamp(14px, 2.8dvh, 22px); border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 28px; background: rgba(255, 255, 255, 0.97); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12); }
+.app-login__logo { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 280px; height: clamp(64px, 24dvh, 190px); margin: 0 auto clamp(12px, 3.5dvh, 28px); }
 .app-login__logo img { width: 100%; height: 100%; object-fit: contain; }
-.app-login__actions { display: grid; gap: 12px; }
-.app-login__provider { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 58px; padding: 0 16px; border-radius: 16px; font: 700 1rem/1 "Manrope", system-ui, sans-serif; cursor: pointer; transition: filter 150ms ease, opacity 150ms ease; }
+.app-login__actions { display: grid; gap: clamp(8px, 1.5dvh, 12px); }
+.app-login__provider { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: clamp(46px, 7.5dvh, 58px); padding: 0 16px; border-radius: 16px; font: 700 1rem/1 "Manrope", system-ui, sans-serif; cursor: pointer; transition: filter 150ms ease, opacity 150ms ease; }
 .app-login__provider svg { width: 20px; height: 20px; flex: none; }
 .app-login__provider--google { border: 1px solid #d7e0e8; background: #ffffff; color: #0f172a; }
 .app-login__provider--apple { border: 1px solid #000000; background: #000000; color: #ffffff; }
@@ -120,15 +124,14 @@ dialog::backdrop { background: rgb(7 24 39 / 65%); }
 .app-login__redirect p { margin: 0 0 6px; }
 .app-login__text-button { display: block; margin: 10px auto 0; padding: 6px 10px; border: 0; background: none; color: #0b63ff; font: 700 0.9rem "Manrope", system-ui, sans-serif; cursor: pointer; }
 .app-login__text-button[hidden] { display: none; }
-.app-login__legal { margin: 18px 0 0; color: #64748b; font-size: 0.78rem; line-height: 1.6; text-align: center; }
+.app-login__legal { margin: clamp(10px, 2.2dvh, 18px) 0 0; color: #64748b; font-size: 0.78rem; line-height: 1.6; text-align: center; }
 .app-login__legal a { color: #475569; text-decoration: underline; text-underline-offset: 0.15em; }
 
 /* Phones: one line per message. The type scales with the screen width, and
    the screen and card margins are tighter, so the footnote and the status fit
    on a single line down to a 320 px screen. */
 @media (max-width: 480px) {
-  .app-login__screen { padding: 14px; }
-  .app-login__card { padding: 18px 16px; }
+  .app-login__card { padding-inline: 16px; }
   .app-login__status, .app-login__redirect p { white-space: nowrap; font-size: min(0.875rem, 3.3vw); }
   .app-login__legal { white-space: nowrap; font-size: min(0.78rem, 2.95vw); }
 }
