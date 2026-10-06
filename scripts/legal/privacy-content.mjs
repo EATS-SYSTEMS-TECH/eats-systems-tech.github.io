@@ -1,7 +1,6 @@
 // Privacy Policy — the single source for /privacy-policy/ in every locale.
 // English is the governing text; Hebrew mirrors it block for block.
-// Generated into templates/legal/privacy-policy.template.html and
-// js/legal/privacy-content.js by scripts/legal/build-legal-pages.mjs.
+// scripts/legal/legal-pages.mjs renders it.
 
 export const privacy = {
   en: {

@@ -1,17 +1,17 @@
-// scripts/legal/build-legal-pages.mjs
+// scripts/legal/legal-pages.mjs
 //
-// The three legal documents have one source each (privacy-content.mjs,
-// terms-content.mjs, cookies-content.mjs): English, which governs, and Hebrew,
-// block for block. This script writes from them
-//   - templates/legal/<page>.template.html  (the markup, data-i18n keys, English text)
-//   - js/legal/<page>-content.js            (translations[locale].legal for every locale)
+// The legal documents (privacy-content.mjs, terms-content.mjs, cookies-content.mjs,
+// accessibility-content.mjs) have one source each: English, which governs, and
+// Hebrew, block for block. scripts/build-localized-site.mjs renders every legal
+// page from them through this module:
+//   - renderLegalMain(page): the page body (data-i18n keys, English text)
+//   - legalBundles(page):    the localized strings for those keys, per locale
 // Every locale other than English and Hebrew gets the English text, a note in
 // its own language that the English version governs, and its localized CTAs.
-//
-// Run: node scripts/legal/build-legal-pages.mjs   (then npm run build:locales)
 
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { accessibility } from "./accessibility-content.mjs";
 import { company } from "./company.mjs";
 import { cookies } from "./cookies-content.mjs";
@@ -19,14 +19,13 @@ import { languageNotices } from "./locale-notices.mjs";
 import { privacy } from "./privacy-content.mjs";
 import { terms } from "./terms-content.mjs";
 
-const repoRoot = process.cwd();
+const legalDir = path.dirname(fileURLToPath(import.meta.url));
 const LOCALES = [
   "en", "es", "fr", "de", "he", "nl", "it", "pt", "pl", "no", "cs", "ru", "uk",
   "tr", "ar", "hi", "bn", "mr", "te", "zh-Hans", "zh-Hant", "ja", "ko", "da", "sv", "hu",
   "el", "ro", "hr", "fi", "bg", "sr", "sk", "sl", "id", "th", "vi", "ms", "fil",
 ];
 const FULL_TEXT_LOCALES = new Set(["en", "he"]);
-const CSS_VERSION = "20261005a";
 
 const DOCUMENTS = [
   { page: "privacy-policy", content: privacy, contentsLabel: { en: "Contents", he: "תוכן העניינים" } },
@@ -35,7 +34,7 @@ const DOCUMENTS = [
   { page: "accessibility", content: accessibility, contentsLabel: { en: "Contents", he: "תוכן העניינים" } },
 ];
 
-const localeCta = JSON.parse(await fs.readFile(path.join(repoRoot, "scripts", "legal", "locale-cta.json"), "utf8"));
+const localeCta = JSON.parse(await fs.readFile(path.join(legalDir, "locale-cta.json"), "utf8"));
 const DEFAULT_CTA = {
   eyebrow: { en: "Legal", he: "משפטי" },
   pricing: {
@@ -230,56 +229,36 @@ ${sections}
   </main>`;
 }
 
-async function writeTemplate(page, doc) {
-  const file = path.join(repoRoot, "templates", "legal", `${page}.template.html`);
-  let html = await fs.readFile(file, "utf8");
-  const start = html.indexOf('  <main class="legal-main"');
-  const end = html.indexOf("</main>", start) + "</main>".length;
-  if (start < 0 || end < start) throw new Error(`${page}: <main> not found`);
-  html = html.slice(0, start) + renderMain(page, doc) + html.slice(end);
-  html = html
-    .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(doc.metaTitle)}</title>`)
-    .replace(/<meta name="description"\s+content="[^"]*" \/>/, `<meta name="description"\n    content="${escapeHtml(doc.metaDescription)}" />`)
-    .replace(/\n\s*<script src="\.\.\/js\/(?:legal|privacy|cookies)-translations(?:-extra)?\.js[^"]*" defer><\/script>/g, "")
-    .replace(/legal\.css\?v=[^"]+/, `legal.css?v=${CSS_VERSION}`);
-  await fs.writeFile(file, html);
+export const LEGAL_PAGES = DOCUMENTS.map((document) => document.page);
+
+for (const { page, content } of DOCUMENTS) assertSameShape(page, content.en, content.he);
+
+function documentFor(page) {
+  const document = DOCUMENTS.find((entry) => entry.page === page);
+  if (!document) throw new Error(`Unknown legal page ${page}`);
+  return document;
 }
 
-async function writeData(page, doc, contentsLabel) {
+export function renderLegalMain(page) {
+  return renderMain(page, documentFor(page).content.en);
+}
+
+// translations[locale].legal for every locale.
+export function legalBundles(page) {
+  const { content: doc, contentsLabel } = documentFor(page);
   const bundles = {};
   for (const locale of LOCALES) {
     if (FULL_TEXT_LOCALES.has(locale)) {
       bundles[locale] = legalBundle(doc[locale], ctaFor(locale), { contents: contentsLabel[locale], companyLocale: locale });
     } else {
+      if (!languageNotices[locale]) throw new Error(`no language notice for ${locale}`);
       bundles[locale] = legalBundle(doc.en, ctaFor(locale), {
         eyebrow: localeCta[locale]?.eyebrow,
         contents: contentsLabel.en,
         contentLang: "en",
         languageNote: languageNotices[locale],
       });
-      if (!languageNotices[locale]) throw new Error(`no language notice for ${locale}`);
     }
   }
-  const js = `// /js/legal/${page}-content.js
-// Generated by scripts/legal/build-legal-pages.mjs from scripts/legal/*-content.mjs.
-// Do not edit by hand.
-(function () {
-  const legal = ${JSON.stringify(bundles, null, 2)};
-  Object.keys(legal).forEach((lang) => {
-    if (!translations[lang]) {
-      translations[lang] = {};
-    }
-    translations[lang].legal = legal[lang];
-  });
-})();
-`;
-  await fs.mkdir(path.join(repoRoot, "js", "legal"), { recursive: true });
-  await fs.writeFile(path.join(repoRoot, "js", "legal", `${page}-content.js`), js);
-}
-
-for (const { page, content, contentsLabel } of DOCUMENTS) {
-  assertSameShape(page, content.en, content.he);
-  await writeTemplate(page, content.en);
-  await writeData(page, content, contentsLabel);
-  console.log(`${page}: ${content.en.sections.length} sections, ${LOCALES.length} locales`);
+  return bundles;
 }
