@@ -10,6 +10,7 @@ const copy = {
     contact: "Makipag-ugnayan",
   },
   hero: {
+    media: {"replay":"I-play muli ang video","mute":"I-mute ang video","unmute":"I-unmute ang video","pause":"I-pause ang video","play":"I-play ang video"},
     titleLines: ["Isang platform.", "Para sa bawat ari-arian."],
     subtitle: "Matalinong pag-access at kontrol para sa mga tirahan, komersyal na gusali, hotel, at iba pang tuluyan. Lahat sa iisang app. Napakadaling gamitin.",
     primaryCta: "Tuklasin ang platform",

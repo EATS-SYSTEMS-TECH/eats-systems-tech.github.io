@@ -10,6 +10,7 @@ const copy = {
     contact: "Kontakta oss",
   },
   hero: {
+    media: {"replay":"Spela videon igen","mute":"Stäng av ljudet","unmute":"Sätt på ljudet","pause":"Pausa videon","play":"Spela upp videon"},
     titleLines: ["En plattform.", "Varje fastighet."],
     subtitle: "Smart passerkontroll för bostäder, kommersiella fastigheter och boendeanläggningar. Allt i en app. Enkelt och smidigt.",
     primaryCta: "Utforska plattformen",

@@ -10,6 +10,7 @@ const copy = {
     contact: "Kontaktujte nás",
   },
   hero: {
+    media: {"replay":"Přehrát video znovu","mute":"Ztlumit video","unmute":"Zapnout zvuk","pause":"Pozastavit video","play":"Přehrát video"},
     titleLines: ["Jedna platforma.", "Každá nemovitost."],
     subtitle: "Inteligentní přístup a ovládání pro rezidenční, komerční a ubytovací objekty. Vše v jedné aplikaci. Jednoduše a bez komplikací.",
     primaryCta: "Prozkoumejte platformu",

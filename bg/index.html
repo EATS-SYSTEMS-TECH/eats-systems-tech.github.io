@@ -85,7 +85,7 @@
   <script src="../js/utils.js?v=20260402a" defer=""></script>
 
   <script src="../js/navigation.js?v=20261007a" defer=""></script>
-  <script src="../js/hero.js?v=20261007a" defer=""></script>
+  <script src="../js/hero.js?v=20261007b" defer=""></script>
 
   <script>window.accessibilityCopy = {"bg":{"skipLink":"Към основното съдържание","eyebrow":"Достъпност","openButton":"Отваряне на менюто за достъпност","closeButton":"Затваряне на менюто за достъпност","title":"Меню за достъпност","description":"Настройте сайта според начина, по който четете и навигирате. Изборът ви се запазва на това устройство.","reset":"Нулиране на всичко","statusDefault":"Стандартен изглед на сайта","statusActive":"Активни настройки: {count}","hideButton":"Скриване на бутона за достъпност до презареждане на страницата","statementLink":"Декларация за достъпност","textSize":{"label":"Размер на текста","description":"Уголемяване на текста в целия сайт.","decrease":"По-малък текст","increase":"По-голям текст","level":"Размер на текста {percent}%"},"options":{"highContrast":{"label":"Висок контраст","description":"Тъмен текст на светъл фон с ясни рамки."},"grayscale":{"label":"Нюанси на сивото","description":"Показване на сайта без цветове."},"underlineLinks":{"label":"Открояване на връзките","description":"Подчертаване и маркиране на всяка връзка."},"readableFont":{"label":"Четим шрифт","description":"Прост, лесно четим шрифт."},"textSpacing":{"label":"Разстояние в текста","description":"Повече място между редовете, думите и буквите."},"highlightHeadings":{"label":"Открояване на заглавията","description":"Маркиране на заглавията, за да се вижда структурата на страницата."},"bigCursor":{"label":"Голям курсор","description":"По-голям показалец на мишката."},"focusHighlight":{"label":"Ясен фокус","description":"Дебела рамка около елемента на фокус от клавиатурата."},"reducedMotion":{"label":"Спиране на анимациите","description":"Спиране на анимациите, преходите и фоновото видео."}}}};</script>
   <script src="../js/accessibility.js?v=20261007a" defer=""></script>
@@ -93,7 +93,7 @@
 
 
   <script src="../js/language-selector.js?v=20261006a" defer=""></script>
-  <script id="hero-locale-data" type="application/json">{"phrases":["Лесно използване","Пълна поверителност","Без абонаменти"],"media":{"replay":"Play Video Again","mute":"Mute video","unmute":"Unmute video"}}</script><script src="../js/main.js?v=20261007a" defer=""></script>
+  <script id="hero-locale-data" type="application/json">{"media":{"replay":"Пусни видеото отново","mute":"Изключи звука","unmute":"Включи звука","pause":"Пауза на видеото","play":"Пусни видеото"}}</script><script src="../js/main.js?v=20261007b" defer=""></script>
 
   <style>
     .contact-info__avatar {
@@ -641,7 +641,7 @@
           <source src="../assets/vid/wifigate-final-hero-720p.mp4?v=20261007" type="video/mp4">
         </video>
         <div class="hero__overlay"></div>
-        <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="Pause video" title="Pause video" aria-pressed="false" data-paused="false">
+        <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="Пауза на видеото" title="Пауза на видеото" aria-pressed="false" data-paused="false">
           <svg class="hero__media-control-icon hero__media-control-icon--pause" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
             <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
@@ -650,7 +650,7 @@
             <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" fill="currentColor"></path>
           </svg>
         </button>
-        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="Unmute video" title="Unmute video" aria-pressed="false" data-muted="true">
+        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="Включи звука" title="Включи звука" aria-pressed="false" data-muted="true">
           <svg class="hero__media-control-icon hero__media-control-icon--muted" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M14 4.12v15.76a1 1 0 0 1-1.68.73l-4.04-3.61H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.28l4.04-3.61A1 1 0 0 1 14 4.12Z" fill="currentColor"></path>
             <path d="m17 9 4 4m0-4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -661,12 +661,12 @@
             <path d="M19.75 7a8 8 0 0 1 0 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
         </button>
-        <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" hidden="" aria-label="Play Video Again" title="Play Video Again">
+        <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" hidden="" aria-label="Пусни видеото отново" title="Пусни видеото отново">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 5V2l-4 4 4 4V7a7 7 0 1 1-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
             <path d="m11 10 5 3-5 3z" fill="currentColor"></path>
           </svg>
-          <span>Play Video Again</span>
+          <span>Пусни видеото отново</span>
         </button>
       </div>
 

@@ -10,6 +10,7 @@ const copy = {
     contact: "Stopite v stik",
   },
   hero: {
+    media: {"replay":"Znova predvajaj video","mute":"Izklopi zvok","unmute":"Vklopi zvok","pause":"Začasno ustavi video","play":"Predvajaj video"},
     titleLines: ["Ena platforma.", "Vsaka nepremičnina."],
     subtitle: "Pameten dostop in upravljanje za stanovanjske, poslovne in nastanitvene objekte. Vse v eni aplikaciji. Preprosto in brez zapletov.",
     primaryCta: "Raziščite platformo",

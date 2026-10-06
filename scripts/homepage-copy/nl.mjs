@@ -10,6 +10,7 @@ const copy = {
     contact: "Neem contact op",
   },
   hero: {
+    media: {"replay":"Video opnieuw afspelen","mute":"Video dempen","unmute":"Dempen van video opheffen","pause":"Video pauzeren","play":"Video afspelen"},
     titleLines: ["Eén platform.", "Elk pand."],
     subtitle: "Slim toegangsbeheer voor woningen, bedrijfspanden en verblijfsaccommodaties. Alles in één app. Intuïtief en eenvoudig.",
     primaryCta: "Ontdek het platform",

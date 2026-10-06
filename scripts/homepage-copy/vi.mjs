@@ -10,6 +10,7 @@ const copy = {
     contact: "Liên hệ với chúng tôi",
   },
   hero: {
+    media: {"replay":"Phát lại video","mute":"Tắt tiếng video","unmute":"Bật tiếng video","pause":"Tạm dừng video","play":"Phát video"},
     titleLines: ["Một nền tảng.", "Cho mọi bất động sản."],
     subtitle: "Kiểm soát ra vào thông minh cho nhà ở, không gian thương mại và cơ sở lưu trú. Tất cả trong một ứng dụng. Đơn giản và thuận tiện.",
     primaryCta: "Khám phá nền tảng",
