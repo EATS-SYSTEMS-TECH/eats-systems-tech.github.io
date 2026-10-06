@@ -1445,12 +1445,15 @@ ul {
 
 .site-footer__socials {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.72rem;
 }
 
+/* Icons keep their square size on every screen; when a row is short they wrap. */
 .site-footer__social-link {
   display: inline-grid;
+  flex: none;
   width: 2.35rem;
   height: 2.35rem;
   place-items: center;
@@ -2113,6 +2116,7 @@ html[dir="rtl"] .where-story-card__video-meta {
 
 .site-footer__brand-copy {
   max-width: none;
+  text-wrap: pretty;
 }
 
 .site-footer__logo {
@@ -2155,7 +2159,7 @@ html[dir="rtl"] .where-story-card__video-meta {
 
 @media (min-width: 1200px) {
   .site-footer__inner {
-    grid-template-columns: minmax(30rem, 1.8fr) minmax(8rem, 0.65fr) minmax(13rem, 0.9fr) minmax(7rem, 0.55fr);
+    grid-template-columns: minmax(24rem, 1.6fr) minmax(8rem, 0.65fr) minmax(13rem, 0.9fr) minmax(15rem, 0.75fr);
   }
 }
 
