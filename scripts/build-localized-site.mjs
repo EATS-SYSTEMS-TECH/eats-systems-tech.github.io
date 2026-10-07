@@ -1501,6 +1501,12 @@ async function buildGuestInvitesPages(homeData) {
     const outputFile = buildOutputFilePath(locale, guestInvitesPageKey);
     await writeOutputFile(outputFile, serialize($, homeData, locale, guestInvitesPageKey));
 
+    // Preserve the former public Host marketing URL discovered in Search Console.
+    await writeOutputFile(
+      buildOutputFilePath(locale, "Automated-Guest-Invites-API"),
+      buildRedirectPage(buildPagePath(locale, guestInvitesPageKey), buildPageUrl(locale, guestInvitesPageKey))
+    );
+
     sitemapEntries.push({
       loc: buildPageUrl(locale, guestInvitesPageKey),
       changefreq: "monthly",
