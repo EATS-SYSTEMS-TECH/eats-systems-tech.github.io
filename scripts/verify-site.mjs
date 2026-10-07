@@ -26,6 +26,7 @@ const localeOptions = [
 ];
 const rtlLocales = new Set(["he", "ar"]);
 const nicheKeys = NICHE_DEFINITIONS.map((n) => n.key);
+const legalPages = ["privacy-policy", "terms-and-conditions", "cookies", "accessibility"];
 const indexablePages = ["home", "automation", ...nicheKeys];
 const interactivePages = [
   "home",
@@ -145,7 +146,6 @@ async function main() {
       const title = $("title").text().trim();
       const description = $("meta[name='description']").attr("content")?.trim() || "";
       const canonical = $("link[rel='canonical']").attr("href") || "";
-      const robots = $("meta[name='robots']").attr("content") || "";
       const lang = $("html").attr("lang") || "";
       const dir = $("html").attr("dir") || "";
       const h1Count = $("h1").length;
@@ -156,7 +156,12 @@ async function main() {
       if (canonical !== `${siteOrigin}${pagePath(locale, pageKey)}`) {
         problems.push(`${rel}: canonical is "${canonical}", expected "${siteOrigin}${pagePath(locale, pageKey)}"`);
       }
-      if (!/^index/.test(robots)) problems.push(`${rel}: robots is "${robots}", expected index`);
+      for (const name of ["robots", "googlebot"]) {
+        const directives = $(`meta[name='${name}']`).map((_, element) => $(element).attr("content") || "").get();
+        if (directives.length !== 1 || directives[0] !== "index, follow") {
+          problems.push(`${rel}: ${name} must have exactly one index, follow directive`);
+        }
+      }
       if (lang !== locale) problems.push(`${rel}: html lang is "${lang}", expected "${locale}"`);
       const expectedDir = rtlLocales.has(locale) ? "rtl" : "ltr";
       if (dir !== expectedDir) problems.push(`${rel}: dir is "${dir}", expected "${expectedDir}"`);
@@ -227,6 +232,23 @@ async function main() {
         if (!($("#where-product-image").attr("alt") || "").trim()) {
           problems.push(`${rel}: homepage product image missing alt`);
         }
+      }
+    }
+
+    // Public legal pages in every locale must stay eligible for indexing.
+    for (const pageKey of legalPages) {
+      const filePath = pageFile(locale, pageKey);
+      const rel = path.relative(repoRoot, filePath);
+      const $ = cheerio.load(await fs.readFile(filePath, "utf8"));
+      for (const name of ["robots", "googlebot"]) {
+        const directives = $(`meta[name='${name}']`).map((_, element) => $(element).attr("content") || "").get();
+        if (directives.length !== 1 || directives[0] !== "index, follow") {
+          problems.push(`${rel}: ${name} must have exactly one index, follow directive`);
+        }
+      }
+      const canonicals = $("link[rel='canonical']");
+      if (canonicals.length !== 1 || canonicals.attr("href") !== `${siteOrigin}${pagePath(locale, pageKey)}`) {
+        problems.push(`${rel}: public legal page must have one self-referencing canonical`);
       }
     }
 
@@ -390,6 +412,7 @@ async function main() {
 
       // Legal hrefs and the logo src legitimately vary with page depth.
       const shape = footer
+        .replace(/\r\n/g, "\n")
         .replace(/href="[^"]*(?:terms-and-conditions|privacy-policy|cookies)\//g, 'href="LEGAL/')
         .replace(/src="[^"]*wifigate-logo-footer.webp"/g, 'src="LOGO"');
 
@@ -413,9 +436,9 @@ async function main() {
       expectedUrls.add(`${siteOrigin}${pagePath(locale, pageKey)}`);
     }
   }
-  // The legal pages are indexed in English and Hebrew; Contact Us in English.
-  for (const pageKey of ["privacy-policy", "terms-and-conditions", "cookies", "accessibility"]) {
-    for (const locale of ["en", "he"]) expectedUrls.add(`${siteOrigin}${pagePath(locale, pageKey)}`);
+  // Public legal pages are indexed in every locale; Contact Us in English.
+  for (const pageKey of legalPages) {
+    for (const locale of localeOptions) expectedUrls.add(`${siteOrigin}${pagePath(locale, pageKey)}`);
   }
   expectedUrls.add(`${siteOrigin}/contact-us/`);
   for (const url of sitemapUrls) {

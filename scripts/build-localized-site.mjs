@@ -460,17 +460,16 @@ function setHomeMeta($, locale, localeOptions, copy) {
   return meta;
 }
 
-// English and Hebrew carry the full legal text and form one hreflang
-// cluster; every other locale shows the English text, so it stays out of the
-// index.
-const LEGAL_INDEXED_LOCALES = ["en", "he"];
+// All public legal pages may be indexed. Only English and Hebrew have
+// translated legal text, so only those versions form a hreflang cluster.
+const LEGAL_TRANSLATED_LOCALES = ["en", "he"];
 
 function setLegalMeta($, locale, pageKey, localeOptions, legalBundle) {
   const metaTags = legalBundle.legal?.metaTags || {};
   const title = metaTags.title || "WIFIGATE";
   const description = metaTags.description || "";
   const url = buildPageUrl(locale, pageKey);
-  const indexed = LEGAL_INDEXED_LOCALES.includes(locale);
+  const translated = LEGAL_TRANSLATED_LOCALES.includes(locale);
   const types = { "privacy-policy": "WebPage", "terms-and-conditions": "WebPage", cookies: "WebPage", accessibility: "WebPage" };
 
   setPageMeta($, {
@@ -478,9 +477,9 @@ function setLegalMeta($, locale, pageKey, localeOptions, legalBundle) {
     url,
     title,
     description,
-    robots: indexed ? "index, follow" : "noindex, follow",
-    alternates: indexed
-      ? alternatesFor(localeOptions.filter((option) => LEGAL_INDEXED_LOCALES.includes(option.code)), pageKey)
+    robots: "index, follow",
+    alternates: translated
+      ? alternatesFor(localeOptions.filter((option) => LEGAL_TRANSLATED_LOCALES.includes(option.code)), pageKey)
       : [],
     ogType: "article",
     image: pageImages.legal,
@@ -1084,7 +1083,7 @@ async function buildLegalPages(homeData, legalCollections) {
     }
   }
   return LEGAL_PAGES.flatMap((pageKey) =>
-    LEGAL_INDEXED_LOCALES.map((locale) => ({ loc: buildPageUrl(locale, pageKey), changefreq: "yearly", priority: "0.3" }))
+    homeData.localeOptions.map(({ code: locale }) => ({ loc: buildPageUrl(locale, pageKey), changefreq: "yearly", priority: "0.3" }))
   );
 }
 
