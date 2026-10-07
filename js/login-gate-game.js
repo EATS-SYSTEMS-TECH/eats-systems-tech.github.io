@@ -11,27 +11,29 @@ const GATE_ZONE = 0.72;
 
 const COPY = {
   en: {
-    title: "Quick check",
-    instruction: "Drag the car into the open gate",
+    title: "I'm not a robot",
+    instruction: "To confirm, drag the car into the open gate",
+    footer: "Human check · WIFIGATE",
     keyboard: "Car in lane {lane} of 3. Arrow keys change lane, Enter drives.",
     gate: "Gate {n}, {state}",
     open: "open",
     closed: "closed",
     retry: "Not quite. Drive into the green gate.",
     locked: "Too many tries. Try again in {s} s.",
-    done: "Done!",
+    done: "Verified. You're not a robot.",
     close: "Close",
   },
   he: {
-    title: "בדיקה קצרה",
-    instruction: "גררו את המכונית לשער הפתוח",
+    title: "אני לא רובוט",
+    instruction: "כדי לאשר, גררו את המכונית לשער הפתוח",
+    footer: "בדיקת אנושיות · WIFIGATE",
     keyboard: "המכונית בנתיב {lane} מתוך 3. החיצים מחליפים נתיב, Enter נוסע.",
     gate: "שער {n}, {state}",
     open: "פתוח",
     closed: "סגור",
     retry: "לא בדיוק. היכנסו לשער הירוק.",
     locked: "יותר מדי ניסיונות. נסו שוב בעוד {s} שניות.",
-    done: "מעולה!",
+    done: "אומת. אתם לא רובוט.",
     close: "סגירה",
   },
 };
@@ -112,7 +114,7 @@ function buildDialog(copy) {
   dialog.setAttribute("aria-labelledby", "gate-game-title");
   dialog.innerHTML = `
     <div class="gate-game__head">
-      <h2 id="gate-game-title" class="gate-game__title">${copy.title}</h2>
+      <h2 id="gate-game-title" class="gate-game__title"><span class="gate-game__checkbox" aria-hidden="true"></span>${copy.title}</h2>
       <button type="button" class="gate-game__close" aria-label="${copy.close}">×</button>
     </div>
     <p class="gate-game__instruction">${copy.instruction}</p>
@@ -122,7 +124,8 @@ function buildDialog(copy) {
       <div class="gate-game__car" tabindex="0" role="button">${CAR_SVG}</div>
       <div class="gate-game__done" aria-hidden="true"><span>✓</span></div>
     </div>
-    <p class="gate-game__message" role="status" aria-live="polite"></p>`;
+    <p class="gate-game__message" role="status" aria-live="polite"></p>
+    <p class="gate-game__footer">${copy.footer}</p>`;
   const gates = dialog.querySelector(".gate-game__gates");
   for (let lane = 0; lane < LANES; lane += 1) {
     const gate = document.createElement("div");
@@ -203,6 +206,7 @@ export function requestHumanCheck(language = "en") {
 
   function succeed() {
     board.classList.add("gate-game__board--done");
+    dialog.classList.add("gate-game--verified");
     message.textContent = copy.done;
     placeCar(board.clientWidth + 20, laneY(openLane), true);
     setTimeout(() => finish(true), reducedMotion() ? 250 : 900);
