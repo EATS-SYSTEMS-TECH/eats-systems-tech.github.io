@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { chromium } from "playwright-core";
 import { join } from "node:path";
+import { passGateGame } from "./gate-game-helper.mjs";
 const origin = process.env.WIFIGATE_SITE_ORIGIN ?? "http://127.0.0.1:8100";
 const browser = await chromium.launch({ channel: process.env.WIFIGATE_BROWSER_CHANNEL ?? "chrome", headless: true });
 const active = { role: "user", access: { state: "active" }, mfa: { required: false, enrolled: false, verified: false } };
@@ -185,7 +186,7 @@ try {
   }
   for(const provider of ["google","apple"]) {
     const t=await scenario({signedIn:false,mfa:{required:false,enrolled:true,verified:false}});
-    await t.page.goto(origin+"/login/"); await t.page.locator('[data-provider="'+provider+'"]').click();
+    await t.page.goto(origin+"/login/"); await (await passGateGame(t.page, provider)).click();
     await t.page.locator('#mfa-challenge input[name="code"]').fill("123456"); await t.page.locator('#mfa-challenge button[type="submit"]').click();
     await t.page.waitForURL("**/dashboard/"); await t.page.locator("#product-grid").waitFor({state:"visible"});
     assert.ok(t.calls.some(call=>call.path==="/api/v1/platform/me"));

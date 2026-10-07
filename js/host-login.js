@@ -16,6 +16,7 @@ import { platformText } from "./platform-copy.js";
 import { watchSession } from "./platform-session.js";
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
 import { authErrorMessage } from "./host-auth-errors.js";
+import { requestHumanCheck } from "./login-gate-game.js";
 const status = document.querySelector("#login-status");
 const progress = document.querySelector("#login-progress");
 const buttons = [...document.querySelectorAll("[data-provider]")];
@@ -28,6 +29,8 @@ let loginAttempt;
 let restoredUser;
 let leaving = false;
 let session;
+let humanChecked = false;
+let humanCheckOpen = false;
 const language = location.pathname.startsWith("/he/") ? "he" : "en";
 const copy = platformText(language);
 const requestedPath = new URLSearchParams(location.search).get("next");
@@ -77,9 +80,6 @@ function report(error) {
     error.status >= 500 || error.code === "HOST_API_UNAVAILABLE"
       ? copy.accessUnavailable
       : authErrorMessage(error, language);
-  document.querySelector("#retry-login").hidden = !restoredUser;
-  document.querySelector("#redirect-options").hidden =
-    error.code !== AuthErrors.POPUP_BLOCKED;
 }
 async function start() {
   setBusy(true);
@@ -125,45 +125,54 @@ async function start() {
 }
 buttons.forEach((button) =>
   button.addEventListener("click", async () => {
-    if (busy) {
+    if (busy || humanCheckOpen) {
       return;
     }
+    if (!humanChecked) {
+      humanCheckOpen = true;
+      try {
+        humanChecked = await requestHumanCheck(language);
+      } finally {
+        humanCheckOpen = false;
+      }
+      if (humanChecked) {
+        status.textContent = copy.humanReady;
+        button.classList.add("app-login__provider--ready");
+        button.focus();
+      }
+      return;
+    }
+    buttons.forEach((item) =>
+      item.classList.remove("app-login__provider--ready"),
+    );
     providerName = button.dataset.provider;
     setBusy(true);
     showProgress(copy.signingIn);
-    document.querySelector("#redirect-options").hidden = true;
     try {
-      const credential = await signIn(providerName, requestMfaChallenge);
-      restoredUser = credential.user;
-      await finishLogin(credential.user);
+      // The page has only the two provider buttons: a signed-in user whose
+      // access check failed retries it, and a blocked window moves to the
+      // full-page flow on its own.
+      if (restoredUser) {
+        await finishLogin(restoredUser);
+      } else {
+        const credential = await signIn(providerName, requestMfaChallenge);
+        restoredUser = credential.user;
+        await finishLogin(credential.user);
+      }
     } catch (error) {
-      report(error);
+      if (error.code === AuthErrors.POPUP_BLOCKED) {
+        try {
+          await signInRedirect(providerName);
+          return;
+        } catch (redirectError) {
+          report(redirectError);
+        }
+      } else {
+        report(error);
+      }
     } finally {
       setBusy(false);
     }
   }),
 );
-document
-  .querySelector("#redirect-sign-in")
-  .addEventListener("click", async () => {
-    setBusy(true);
-    showProgress(copy.signingIn);
-    try {
-      await signInRedirect(providerName);
-    } catch (error) {
-      report(error);
-      setBusy(false);
-    }
-  });
-document.querySelector("#retry-login").addEventListener("click", async () => {
-  if (busy || !restoredUser) return;
-  setBusy(true);
-  try {
-    await finishLogin(restoredUser);
-  } catch (error) {
-    report(error);
-  } finally {
-    setBusy(false);
-  }
-});
 void start();
