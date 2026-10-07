@@ -320,6 +320,14 @@ async function main() {
     }
 
     // Legacy routes must redirect to the new locations.
+    {
+      const legacyFile = pageFile(locale, "Automated-Guest-Invites-API");
+      const html = await fs.readFile(legacyFile, "utf8");
+      const target = pagePath(locale, "automation");
+      if (html.includes("noindex") || !html.includes(`url=${target}`) || !html.includes(`rel="canonical" href="${siteOrigin}${target}"`)) {
+        problems.push(`${locale}/Automated-Guest-Invites-API: must redirect to ${target} without noindex`);
+      }
+    }
     for (const niche of NICHE_DEFINITIONS) {
       for (const legacyKey of niche.legacyKeys || []) {
         const redirectFile = pageFile(locale, legacyKey);
