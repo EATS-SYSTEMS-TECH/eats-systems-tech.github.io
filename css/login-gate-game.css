@@ -1,0 +1,120 @@
+/* "I'm not a robot" gate game on /login/ (js/login-gate-game.js). */
+.gate-game {
+  width: min(400px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  box-sizing: border-box;
+  padding: 18px 18px 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 28px;
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28);
+  font-family: "Manrope", system-ui, sans-serif;
+  overflow: hidden;
+}
+.gate-game[open] { animation: gate-game-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+.gate-game::backdrop { background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(4px); }
+.gate-game__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.gate-game__title { margin: 0; font-size: 1.25rem; font-weight: 800; letter-spacing: 0; }
+.gate-game__close { display: grid; place-items: center; flex: none; width: 36px; height: 36px; padding: 0 0 3px; border: 0; border-radius: 50%; background: #f1f5f9; color: #334155; font: 400 1.5rem/1 system-ui, sans-serif; cursor: pointer; }
+.gate-game__close:hover { background: #e2e8f0; }
+.gate-game__instruction { margin: 6px 0 14px; color: #475569; font-size: 0.95rem; }
+
+.gate-game__board {
+  --open-lane: 0;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #13203a 0%, #0b1426 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), inset 0 -30px 60px rgba(11, 99, 255, 0.12);
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.gate-game__road {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.35) 0 18px, transparent 18px 34px) 0 calc(100% / 3 - 1px) / 72% 2px no-repeat,
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.35) 0 18px, transparent 18px 34px) 0 calc(200% / 3 - 1px) / 72% 2px no-repeat;
+}
+.gate-game__road::after {
+  content: "";
+  position: absolute;
+  left: 72%;
+  right: 0;
+  top: calc(100% / 3 * var(--open-lane));
+  height: calc(100% / 3);
+  background: radial-gradient(ellipse at 30% 50%, rgba(34, 197, 94, 0.38), transparent 70%);
+  transition: top 300ms ease;
+}
+.gate-game__gates { position: absolute; top: 0; bottom: 0; left: 72%; width: 10%; display: grid; grid-template-rows: repeat(3, 1fr); }
+.gate-game__gate { position: relative; }
+.gate-game__gate svg { position: absolute; inset: 4% 0; width: 100%; height: 92%; overflow: visible; }
+.gate-game__light { fill: #ef4444; filter: drop-shadow(0 0 4px #ef4444); transition: fill 200ms ease; }
+.gate-game__gate--open .gate-game__light { fill: #22c55e; filter: drop-shadow(0 0 5px #22c55e); }
+.gate-game__arm { transform-box: fill-box; transform-origin: 50% 0; transition: transform 380ms cubic-bezier(0.3, 1.4, 0.5, 1); }
+.gate-game__gate--open .gate-game__arm { transform: rotate(-90deg) scaleY(0.35); }
+
+.gate-game__car {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 19%;
+  aspect-ratio: 72 / 40;
+  cursor: grab;
+  touch-action: none;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
+  outline: none;
+  z-index: 2;
+}
+.gate-game__car svg { display: block; width: 100%; height: 100%; }
+.gate-game__car::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 14px;
+  box-shadow: 0 0 0 3px rgba(91, 155, 255, 0.0);
+  transition: box-shadow 150ms ease;
+}
+.gate-game__car:focus-visible::before { box-shadow: 0 0 0 3px #5b9bff; }
+.gate-game__car--moving { transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+.gate-game__car--held { cursor: grabbing; filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.5)); }
+.gate-game__car--held svg { transform: scale(1.06); }
+.gate-game__car:not(.gate-game__car--held):not([aria-disabled]) svg { animation: gate-game-idle 1.8s ease-in-out infinite; }
+.gate-game__car[aria-disabled] { cursor: not-allowed; opacity: 0.5; }
+
+.gate-game__done {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(11, 20, 38, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease 300ms;
+  z-index: 3;
+}
+.gate-game__done span { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: #22c55e; color: #ffffff; font-size: 2rem; font-weight: 800; transform: scale(0.6); transition: transform 300ms cubic-bezier(0.3, 1.6, 0.5, 1) 300ms; box-shadow: 0 0 0 10px rgba(34, 197, 94, 0.25); }
+.gate-game__board--done .gate-game__done { opacity: 1; }
+.gate-game__board--done .gate-game__done span { transform: scale(1); }
+.gate-game__board--shake { animation: gate-game-shake 320ms ease; }
+.gate-game__board--locked { filter: grayscale(0.7) brightness(0.8); }
+
+.gate-game__message { min-height: 1.4em; margin: 10px 0 0; color: #475569; font-size: 0.9rem; text-align: center; }
+.gate-game__message:empty::after { content: "\00a0"; }
+
+.app-login__provider--ready { animation: gate-game-ready 1.4s ease-out 2; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.6); }
+
+@keyframes gate-game-in { from { opacity: 0; transform: translateY(12px) scale(0.98); } }
+@keyframes gate-game-idle { 50% { transform: translateY(-1.5px); } }
+@keyframes gate-game-shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+@keyframes gate-game-ready { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); } 100% { box-shadow: 0 0 0 12px rgba(34, 197, 94, 0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .gate-game[open], .gate-game__board--shake, .app-login__provider--ready, .gate-game__car svg { animation: none !important; }
+  .gate-game__car--moving, .gate-game__arm, .gate-game__road::after { transition: none; }
+  .gate-game__board--shake { outline: 2px solid #ef4444; outline-offset: 2px; }
+}
