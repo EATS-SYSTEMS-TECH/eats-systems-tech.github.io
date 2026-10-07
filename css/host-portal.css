@@ -24,7 +24,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .portal-panel { margin: 1rem 0; padding: clamp(1.25rem,3vw,2rem); border: 1px solid #dbe3ec; border-radius: 14px; background: white; }
 .portal-panel h1, .portal-panel h2 { margin: .5rem 0 1rem; }
 .portal-panel p, dialog p { line-height: 1.7; color: #637183; }
-.portal-panel button, .account-menu button, dialog button, #redirect-sign-in { padding: .75rem 1rem; border: 1px solid #244962; border-radius: 7px; background: #153855; color: #fff; font-weight: 700; }
+.portal-panel button, .account-menu button, dialog button { padding: .75rem 1rem; border: 1px solid #244962; border-radius: 7px; background: #153855; color: #fff; font-weight: 700; }
 .portal-panel button:hover, dialog button:hover { background: #244962; }
 label { display: grid; gap: .5rem; margin: 1rem 0; font-size: .9rem; font-weight: 600; }
 input, select { width: 100%; max-width: 32rem; padding: .8rem; border: 1px solid #b9c9d9; border-radius: 7px; background: #fff; color: #151b25; }
@@ -116,7 +116,7 @@ html:has(body.app-login) { height: 100%; overscroll-behavior: none; }
 .app-login__provider:hover:not(:disabled) { filter: brightness(0.96); }
 .app-login__provider--apple:hover:not(:disabled) { filter: brightness(1.25); }
 .app-login__provider:disabled { opacity: 0.55; cursor: progress; }
-.app-login__provider:focus-visible, .app-login__text-button:focus-visible, .app-login__legal a:focus-visible { outline: 3px solid #0b63ff; outline-offset: 2px; }
+.app-login__provider:focus-visible, .app-login__legal a:focus-visible { outline: 3px solid #0b63ff; outline-offset: 2px; }
 /* Sign-in progress: an indeterminate bar from the provider tap until the
    dashboard opens. */
 .app-login__progress { position: relative; height: 4px; margin: 16px 0 0; border-radius: 999px; background: #e6edf7; overflow: hidden; }
@@ -129,11 +129,6 @@ html:has(body.app-login) { height: 100%; overscroll-behavior: none; }
 }
 .app-login__status { min-height: 1.25rem; margin: 14px 0 0; color: #64748b; font-size: 0.875rem; line-height: 1.5; text-align: center; }
 .app-login__status:empty { display: none; }
-.app-login__redirect { margin-top: 12px; color: #64748b; font-size: 0.875rem; text-align: center; }
-.app-login__redirect[hidden] { display: none; }
-.app-login__redirect p { margin: 0 0 6px; }
-.app-login__text-button { display: block; margin: 10px auto 0; padding: 6px 10px; border: 0; background: none; color: #0b63ff; font: 700 0.9rem "Manrope", system-ui, sans-serif; cursor: pointer; }
-.app-login__text-button[hidden] { display: none; }
 .app-login__legal { margin: clamp(10px, 2.2dvh, 18px) 0 0; color: #64748b; font-size: 0.78rem; line-height: 1.6; text-align: center; }
 .app-login__legal a { color: #475569; text-decoration: underline; text-underline-offset: 0.15em; }
 
@@ -142,7 +137,7 @@ html:has(body.app-login) { height: 100%; overscroll-behavior: none; }
    on a single line down to a 320 px screen. */
 @media (max-width: 480px) {
   .app-login__card { padding-inline: 16px; }
-  .app-login__status, .app-login__redirect p { white-space: nowrap; font-size: min(0.875rem, 3.3vw); }
+  .app-login__status { white-space: nowrap; font-size: min(0.875rem, 3.3vw); }
   .app-login__legal { white-space: nowrap; font-size: min(0.78rem, 2.95vw); }
 }
 

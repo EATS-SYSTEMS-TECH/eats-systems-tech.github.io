@@ -5,6 +5,7 @@ import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright-core";
+import { passGateGame } from "./gate-game-helper.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 
@@ -201,7 +202,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
           manager: "unavailable",
         });
         await fixture.page.goto(origin + (mobile ? "/he/login/" : "/login/"));
-        await fixture.page.locator('[data-provider="google"]').click();
+        await (await passGateGame(fixture.page, "google")).click();
         await fixture.page.locator(".product-tile").first().waitFor();
         assert.deepEqual(
           await fixture.page
@@ -570,7 +571,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       await fixture.page.waitForURL((url) => url.pathname === "/login/");
       const next = new URL(fixture.page.url()).searchParams.get("next");
       assert.equal(next, "/dashboard/pay/?view=transactions#details");
-      await fixture.page.locator('[data-provider="google"]').click();
+      await (await passGateGame(fixture.page, "google")).click();
       await fixture.page.waitForURL(
         origin + "/dashboard/pay/?view=transactions#details",
       );
@@ -587,13 +588,19 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       const fixture = await scenario(browser, { unavailable: true });
       await fixture.page.clock.install();
       await fixture.page.goto(origin + "/login/");
-      await fixture.page.locator("#retry-login").waitFor({ state: "visible" });
+      await fixture.page
+        .locator("#login-status", { hasText: "Unable to check access" })
+        .waitFor();
       await fixture.page.evaluate(async () => {
         const { signOut } = await import("/js/site-auth.js");
         await signOut();
       });
-      await fixture.page.locator('[data-provider="google"]').click();
-      await fixture.page.locator("#retry-login").waitFor({ state: "visible" });
+      await (
+        await passGateGame(fixture.page, "google", { clock: true })
+      ).click();
+      await fixture.page
+        .locator("#login-status", { hasText: "Unable to check access" })
+        .waitFor();
       await fixture.page.clock.fastForward(30 * 60 * 1000 + 1);
       await fixture.page.waitForURL(origin + "/login/");
       await fixture.page.waitForFunction(
