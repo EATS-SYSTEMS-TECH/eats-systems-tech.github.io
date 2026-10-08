@@ -37,6 +37,18 @@ The dashboard contains administrator access management, account/security control
 
 The authentication contract and setup requirements are in [docs/host-portal-v1.md](docs/host-portal-v1.md). The backend implements authorization/MFA fields, access lifecycle, and tenant endpoints under `/api/v1/organizations`; its README is the complete endpoint registry. Missing authorization fields fail closed.
 
+### V1 administrator Overview
+
+Verified Host admins can enter Overview from the sidebar or `/dashboard/host/overview/?tab=admins|users|organizations`. It provides counts, paginated searchable directories, add admin/user with optional organization invitation, per-product membership details, owner-email organization creation and member invitations/removal. Role badges use fixed colors and keyboard-accessible explanations. Self access and the last active administrator are protected; the server also protects the last organization owner.
+
+New organizations remain pending until the designated owner accepts with an authenticator. Recipients can start enrollment from their invitation, then accept after fresh verification. Expired initial owner invitations can be renewed. These are dashboard invitations; no email is sent automatically.
+
+Remove organization archives it and retains history. The confirmation shows affected records and gates, requires the exact name and fresh MFA, and refuses archival until physical gates are released/transferred. Every mutation carries an idempotency key and the current version where required; stale views clear on account/access changes.
+
+During backend rollout, a 404 on `/api/v1/platform/me` permits a fallback to the authenticated Host profile API (with empty PUT profile synchronization if missing). Authorization failures and outages never trigger fallback. Other products remain unavailable in this mode. Full Overview functionality requires the matching backend's `/api/v1/admin/overview`, `/people`, `/organizations` and organization archive endpoints. Deploy the backend/indexes before this rebuilt frontend; the backend README and OpenAPI define the complete contracts.
+
+`npm run test:api` covers fallback authority and strict paths. `npm run test:platform` covers actual dashboard entry and admin desktop/mobile confirmation/MFA flows with isolated fixtures; the backend emulator suite verifies persistence, ownership and retained history. Real production providers and hardware still require release acceptance.
+
 ### Calendar workspace
 
 The reference image belongs to the specification; the dashboard renders interactive calendar elements instead of an image. Tenant management uses the authenticated API adapter in `api/host/portal-request.ts`; no product data is read directly from Firestore. The Host emulator suite exercises the actual portal against Firestore for organization, property, room and team lifecycle at desktop and mobile widths.

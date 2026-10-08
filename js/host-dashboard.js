@@ -1,5 +1,11 @@
 import "./host-dashboard-navigation.js";
 import {
+  loadAdminOverview,
+  clearAdminOverview,
+  adminActionInProgress,
+} from "./host-admin-overview.js";
+import { roleBadge } from "./host-role-badge.js";
+import {
   Roles,
   PortalStates,
   AuthErrors,
@@ -32,6 +38,7 @@ import {
   canEnroll,
 } from "./host-dashboard-model.js";
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
+import { membershipActionInProgress } from "./host-membership-invitations.js";
 import { authErrorMessage } from "./host-auth-errors.js";
 import { isLocalStaging } from "./firebase-config.js";
 import qrcode from "./vendor/qrcode-generator.js";
@@ -64,6 +71,7 @@ const protectedElements = {
   account: $("#account-details"),
 };
 function hideProtected(sessionEnded = false) {
+  clearAdminOverview();
   clearHostManagement({ sessionEnded });
   window.dispatchEvent(new CustomEvent("host:workspace-reset"));
   protectedElements.dashboard.hidden = true;
@@ -109,7 +117,7 @@ function renderProfile() {
     .join("")
     .toUpperCase();
   $("#profile-email").textContent = profile.email || "-";
-  $("#profile-role").textContent = identity.role || "No portal role";
+  $("#profile-role").replaceChildren(roleBadge(identity.role, true));
   $("#profile-access").textContent = identity.access.state;
   $("#profile-mfa").textContent = identity.mfa.verified
     ? "Enrolled - session verified"
@@ -209,6 +217,17 @@ async function loadDashboard(user) {
     $("#host-sidebar").hidden = false;
     $("#admin-approval").hidden = !canApproveEmail(identity);
     void loadHostManagement(user, identity);
+    void loadAdminOverview(user, identity).then(() => {
+      if (
+        requestGeneration === generation &&
+        location.pathname === "/dashboard/host/overview/" &&
+        identity?.role === Roles.ADMIN
+      ) {
+        window.dispatchEvent(
+          new CustomEvent("host:workspace-view", { detail: "Overview" }),
+        );
+      }
+    });
   } catch (error) {
     if (requestGeneration !== generation) {
       return;
@@ -483,14 +502,23 @@ function updateAccessAction() {
 }
 window.addEventListener("host:totp-required", () => {
   if (!currentUser || !identity || actionBusy) return;
-  if (!identity.mfa.enrolled) showEnrollment(false);
-  else $("#mfa-verification").hidden = false;
+  if (!identity.mfa.enrolled) {
+    showEnrollment(true);
+    $("#dashboard-content").hidden = true;
+    $("#host-sidebar").hidden = true;
+  } else $("#mfa-verification").hidden = false;
 });
 $("#approval-form")
   .elements.namedItem("action")
   .addEventListener("change", updateAccessAction);
 window.addEventListener("focus", () => {
-  if (currentUser && !actionBusy && !enrollmentSecret) {
+  if (
+    currentUser &&
+    !actionBusy &&
+    !enrollmentSecret &&
+    !adminActionInProgress() &&
+    !membershipActionInProgress()
+  ) {
     void loadDashboard(currentUser);
   }
 });
