@@ -1,4 +1,4 @@
-import { AuthErrors } from "./host-constants.js";
+import { AuthErrors, HttpStatus } from "./host-constants.js";
 import {
   initializeSiteAuth,
   signIn,
@@ -12,10 +12,8 @@ import {
   loginDestination,
   loginPath,
 } from "./platform-model.js";
-import { platformText } from "./platform-copy.js";
 import { watchSession } from "./platform-session.js";
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
-import { authErrorMessage } from "./host-auth-errors.js";
 import { requestHumanCheck } from "./login-gate-game.js";
 const status = document.querySelector("#login-status");
 const progress = document.querySelector("#login-progress");
@@ -31,13 +29,56 @@ let leaving = false;
 let session;
 let humanChecked = false;
 let humanCheckOpen = false;
-const language = location.pathname.startsWith("/he/") ? "he" : "en";
-const copy = platformText(language);
+// Each sign-in page is built in one language (scripts/login-pages.mjs) and
+// carries its runtime wording in #login-copy.
+const language = document.documentElement.lang;
+const copy = JSON.parse(document.querySelector("#login-copy").textContent);
 const requestedPath = new URLSearchParams(location.search).get("next");
-document.querySelector(".app-login__language a").href = loginPath(
-  requestedPath,
-  language === "he" ? "en" : "he",
-);
+const ERROR_COPY = {
+  [AuthErrors.POPUP_CANCELLED]: "errorCancelled",
+  [AuthErrors.POPUP_BLOCKED]: "errorPopupBlocked",
+  [AuthErrors.INVALID_CODE]: "errorInvalidCode",
+  [AuthErrors.MISSING_CODE]: "errorMissingCode",
+  [AuthErrors.NETWORK_FAILED]: "errorNetwork",
+  [AuthErrors.MFA_CANCELLED]: "errorMfaCancelled",
+  [AuthErrors.MFA_UNSUPPORTED]: "errorMfaUnsupported",
+  [AuthErrors.UNVERIFIED_EMAIL]: "errorUnverifiedEmail",
+  [AuthErrors.UNCONFIGURED]: "errorUnconfigured",
+  [AuthErrors.INCOMPLETE_CONTRACT]: "accessUnavailable",
+  HOST_API_UNAVAILABLE: "errorServer",
+};
+function errorMessage(error) {
+  const key = ERROR_COPY[error?.code || error?.message];
+  if (key) return copy[key];
+  if (error?.status === HttpStatus.UNAUTHORIZED) return copy.errorSessionExpired;
+  if (error?.status === HttpStatus.FORBIDDEN) return copy.errorForbidden;
+  return copy.errorGeneric;
+}
+const mfaChallenge = (resolver) =>
+  requestMfaChallenge(resolver, {
+    authenticatorN: copy.authenticatorN,
+    verifying: copy.verifying,
+    errorMessage,
+  });
+setupLanguagePicker();
+function setupLanguagePicker() {
+  const button = document.querySelector(".app-login__language");
+  const picker = document.querySelector("#language-picker");
+  // A language keeps the deep-link return path; the URL alone sets it.
+  picker.querySelectorAll("a[hreflang]").forEach((option) => {
+    option.href = loginPath(requestedPath, option.hreflang);
+  });
+  button.addEventListener("click", () => {
+    picker.showModal();
+    picker.querySelector('[aria-current="page"]')?.scrollIntoView({ block: "center" });
+  });
+  picker.querySelector("[data-close]").addEventListener("click", () => picker.close());
+  // The dialog box itself has no padding: a click on the dialog element is a
+  // click on the backdrop.
+  picker.addEventListener("click", (event) => {
+    if (event.target === picker) picker.close();
+  });
+}
 function showProgress(text) {
   progress.hidden = false;
   status.textContent = text;
@@ -79,12 +120,12 @@ function report(error) {
   status.textContent =
     error.status >= 500 || error.code === "HOST_API_UNAVAILABLE"
       ? copy.accessUnavailable
-      : authErrorMessage(error, language);
+      : errorMessage(error);
 }
 async function start() {
   setBusy(true);
   try {
-    await completeAuthCallback(requestMfaChallenge);
+    await completeAuthCallback(mfaChallenge);
     await initializeSiteAuth((user) => {
       restoredUser = user;
       if (user && !session) {
@@ -131,7 +172,7 @@ buttons.forEach((button) =>
     if (!humanChecked) {
       humanCheckOpen = true;
       try {
-        humanChecked = await requestHumanCheck(language);
+        humanChecked = await requestHumanCheck(copy);
       } finally {
         humanCheckOpen = false;
       }
@@ -155,7 +196,7 @@ buttons.forEach((button) =>
       if (restoredUser) {
         await finishLogin(restoredUser);
       } else {
-        const credential = await signIn(providerName, requestMfaChallenge);
+        const credential = await signIn(providerName, mfaChallenge);
         restoredUser = credential.user;
         await finishLogin(credential.user);
       }
