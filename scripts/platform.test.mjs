@@ -79,6 +79,12 @@ test("deep links reject external URLs, encoded separators and traversal", () => 
     "/dashboard/?lang=he",
   );
   assert.equal(loginPath("//outside.example", "he"), "/he/login/");
+  assert.equal(
+    loginPath("/dashboard/pay/", "zh-Hans"),
+    "/zh-hans/login/?next=%2Fdashboard%2Fpay%2F",
+  );
+  assert.equal(loginPath(null, "en"), "/login/");
+  assert.equal(loginPath(null, "../evil"), "/login/");
 });
 
 test("URL selects the interface language without browser storage", () => {

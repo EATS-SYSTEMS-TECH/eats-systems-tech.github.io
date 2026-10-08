@@ -1,7 +1,9 @@
 import { AuthProviders, AuthErrors } from "./host-constants.js";
 import { resolveTotp } from "./site-auth.js";
 import { authErrorMessage } from "./host-auth-errors.js";
-export function requestMfaChallenge(resolver) {
+// The sign-in page passes its own wording in `text`; the dashboards use the
+// English/Hebrew defaults.
+export function requestMfaChallenge(resolver, text = {}) {
   const dialog = document.querySelector("#mfa-challenge");
   const form = dialog.querySelector("form");
   const factors = resolver.hints.filter((factor) => factor.factorId === AuthProviders.TOTP);
@@ -13,7 +15,9 @@ export function requestMfaChallenge(resolver) {
     ...factors.map((factor, index) => {
       const option = document.createElement("option");
       option.value = factor.uid;
-      option.textContent = factor.displayName || "Authenticator " + (index + 1);
+      option.textContent =
+        factor.displayName ||
+        (text.authenticatorN ?? "Authenticator {n}").replace("{n}", index + 1);
       return option;
     })
   );
@@ -49,7 +53,9 @@ export function requestMfaChallenge(resolver) {
       }
       verifying = true;
       submit.disabled = true;
-      status.textContent = document.documentElement.lang === "he" ? "מאמתים..." : "Verifying...";
+      status.textContent =
+        text.verifying ??
+        (document.documentElement.lang === "he" ? "מאמתים..." : "Verifying...");
       try {
         const result = await resolveTotp(
           resolver,
@@ -59,7 +65,7 @@ export function requestMfaChallenge(resolver) {
         clean();
         resolve(result);
       } catch (error) {
-        status.textContent = authErrorMessage(error);
+        status.textContent = (text.errorMessage ?? authErrorMessage)(error);
         code.value = "";
         code.focus();
       } finally {
