@@ -74,8 +74,13 @@ export function pageLanguage(location = globalThis.location) {
     : "en";
 }
 
+// The sign-in page exists in every site language: /login/ for English and
+// /<code>/login/ (lower case) for the rest.
 export function loginPath(next, language = "en") {
-  const path = language === "he" ? "/he/login/" : "/login/";
+  const path =
+    language !== "en" && /^[a-z]{2,3}(-[A-Za-z]{4})?$/.test(language)
+      ? `/${language.toLowerCase()}/login/`
+      : "/login/";
   const safeNext = safeDashboardPath(next);
   return safeNext ? `${path}?next=${encodeURIComponent(safeNext)}` : path;
 }

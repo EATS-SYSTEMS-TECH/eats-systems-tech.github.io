@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="tr" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Giriş | WIFIGATE</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261008c" />
+    <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
+    <script type="module" src="/js/host-login.js?v=20261008c"></script>
+    <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
+  </head>
+  <body class="portal-login app-login">
+    <main class="app-login__screen">
+      <section class="app-login__card" aria-labelledby="login-title">
+        <h1 id="login-title" class="visually-hidden">WIFIGATE'e giriş yapın</h1>
+        <a class="app-login__logo" href="/tr/" aria-label="WIFIGATE ana sayfası"
+          ><img
+            src="/assets/img/wifigate-login-logo.png"
+            alt="WIFIGATE"
+            width="280"
+            height="190"
+        /></a>
+        <button
+          type="button"
+          class="app-login__language"
+          aria-haspopup="dialog"
+          aria-controls="language-picker"
+          aria-label="Dil seçin. Türkçe"
+        >
+          <img
+            src="/assets/img/flags/flag-tr.svg"
+            alt=""
+            width="33"
+            height="22"
+          />
+          <span>Türkçe</span>
+          <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+            <path
+              d="M5 7.5l5 5 5-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <div class="app-login__actions">
+          <button
+            type="button"
+            class="app-login__provider app-login__provider--google"
+            data-provider="google"
+            disabled
+          >
+            <svg viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+              <path
+                fill="currentColor"
+                d="M473.16 221.48l-2.26-9.59H262.46v88.22H387c-12.93 61.4-72.93 93.72-121.94 93.72-35.66 0-73.25-15-98.13-39.11a140.08 140.08 0 01-41.8-98.88c0-37.16 16.7-74.33 41-98.78s61-38.13 97.49-38.13c41.79 0 71.74 22.19 82.94 32.31l62.69-62.36C390.86 72.72 340.34 32 261.6 32c-60.75 0-119 23.27-161.58 65.71C58 139.5 36.25 199.93 36.25 256s20.58 113.48 61.3 155.6c43.51 44.92 105.13 68.4 168.58 68.4 57.73 0 112.45-22.62 151.45-63.66 38.34-40.4 58.17-96.3 58.17-154.9 0-24.67-2.48-39.32-2.59-39.96z"
+              />
+            </svg>
+            <span>Google ile devam et</span>
+          </button>
+          <button
+            type="button"
+            class="app-login__provider app-login__provider--apple"
+            data-provider="apple"
+            disabled
+          >
+            <svg viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+              <path
+                fill="currentColor"
+                d="M349.13 136.86c-40.32 0-57.36 19.24-85.44 19.24-28.79 0-50.75-19.1-85.69-19.1-34.2 0-70.67 20.88-93.83 56.45-32.52 50.16-27 144.63 25.67 225.11 18.84 28.81 44 61.12 77 61.47h.6c28.68 0 37.2-18.78 76.67-19h.6c38.88 0 46.68 18.89 75.24 18.89h.6c33-.35 59.51-36.15 78.35-64.85 13.56-20.64 18.6-31 29-54.35-76.19-28.92-88.43-136.93-13.08-178.34-23-28.8-55.32-45.48-85.79-45.48z"
+              />
+              <path
+                fill="currentColor"
+                d="M340.25 32c-24 1.63-52 16.91-68.4 36.86-14.88 18.08-27.12 44.9-22.32 70.91h1.92c25.56 0 51.72-15.39 67-35.11 14.72-19.01 25.88-45.95 21.8-72.66z"
+              />
+            </svg>
+            <span>Apple ile devam et</span>
+          </button>
+        </div>
+        <div
+          id="login-progress"
+          class="app-login__progress"
+          role="progressbar"
+          aria-label="Giriş yapılıyor"
+          hidden
+        >
+          <span></span>
+        </div>
+        <p
+          id="login-status"
+          class="app-login__status"
+          role="status"
+          aria-live="polite"
+        ></p>
+        <div class="staging-note" data-staging hidden>
+          <strong>Yerel test ortamı</strong>
+          <p>Sahte Google veya Apple hesapları kullanılır. Sağlayıcı şifresi gerekmez.</p>
+          <code>admin@wifigate.test</code><code>owner@grandplaza.test</code
+          ><code>pending@wifigate.test</code>
+        </div>
+        <p class="app-login__legal">Devam ederek <a href="/tr/terms-and-conditions/">Şartlar</a> ve <a href="/tr/privacy-policy/">Gizlilik Politikası</a> metinlerini kabul etmiş olursunuz.</p>
+      </section>
+    </main>
+    <dialog
+      id="language-picker"
+      class="language-picker"
+      aria-labelledby="language-picker-title"
+    >
+      <div class="language-picker__box">
+        <div class="language-picker__head">
+          <h2 id="language-picker-title">Dil seçin</h2>
+          <button
+            type="button"
+            class="language-picker__close"
+            aria-label="Kapat"
+            data-close
+          >
+            ×
+          </button>
+        </div>
+        <ul class="language-picker__list">
+          <li>
+            <a class="language-picker__option" href="/login/" hreflang="en">
+              <img src="/assets/img/flags/flag-us.webp" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="en" dir="ltr">English</span>
+                <span class="language-picker__local">(İngilizce)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/es/login/" hreflang="es">
+              <img src="/assets/img/flags/flag-es.webp" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="es" dir="ltr">Español</span>
+                <span class="language-picker__local">(İspanyolca)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/fr/login/" hreflang="fr">
+              <img src="/assets/img/flags/flag-fr.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="fr" dir="ltr">Français</span>
+                <span class="language-picker__local">(Fransızca)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/de/login/" hreflang="de">
+              <img src="/assets/img/flags/flag-de.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="de" dir="ltr">Deutsch</span>
+                <span class="language-picker__local">(Almanca)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/he/login/" hreflang="he">
+              <img src="/assets/img/flags/flag-il.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="he" dir="rtl">עברית</span>
+                <span class="language-picker__local">(İbranice)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/nl/login/" hreflang="nl">
+              <img src="/assets/img/flags/flag-nl.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="nl" dir="ltr">Nederlands</span>
+                <span class="language-picker__local">(Felemenkçe)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/it/login/" hreflang="it">
+              <img src="/assets/img/flags/flag-it.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="it" dir="ltr">Italiano</span>
+                <span class="language-picker__local">(İtalyanca)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/pt/login/" hreflang="pt">
+              <img src="/assets/img/flags/flag-pt.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="pt" dir="ltr">Português</span>
+                <span class="language-picker__local">(Portekizce)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/pl/login/" hreflang="pl">
+              <img src="/assets/img/flags/flag-pl.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="pl" dir="ltr">Polski</span>
+                <span class="language-picker__local">(Lehçe)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/no/login/" hreflang="no">
+              <img src="/assets/img/flags/flag-no.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="no" dir="ltr">Norsk</span>
+                <span class="language-picker__local">(Norveççe)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/cs/login/" hreflang="cs">
+              <img src="/assets/img/flags/flag-cz.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="cs" dir="ltr">Čeština</span>
+                <span class="language-picker__local">(Çekçe)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/ru/login/" hreflang="ru">
+              <img src="/assets/img/flags/flag-ru.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="ru" dir="ltr">Русский</span>
+                <span class="language-picker__local">(Rusça)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/uk/login/" hreflang="uk">
+              <img src="/assets/img/flags/flag-ua.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="uk" dir="ltr">Українська</span>
+                <span class="language-picker__local">(Ukraynaca)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/tr/login/" hreflang="tr" aria-current="page">
+              <img src="/assets/img/flags/flag-tr.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="tr" dir="ltr">Türkçe</span>
+                <span class="language-picker__local">(Türkçe)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/ar/login/" hreflang="ar">
+              <img src="/assets/img/flags/flag-ae.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="ar" dir="rtl">العربية</span>
+                <span class="language-picker__local">(Arapça)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/hi/login/" hreflang="hi">
+              <img src="/assets/img/flags/flag-in.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="hi" dir="ltr">हिन्दी</span>
+                <span class="language-picker__local">(Hintçe)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/bn/login/" hreflang="bn">
+              <img src="/assets/img/flags/flag-in.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="bn" dir="ltr">বাংলা</span>
+                <span class="language-picker__local">(Bengalce)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/mr/login/" hreflang="mr">
+              <img src="/assets/img/flags/flag-in.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="mr" dir="ltr">मराठी</span>
+                <span class="language-picker__local">(Marathi dili)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/te/login/" hreflang="te">
+              <img src="/assets/img/flags/flag-in.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="te" dir="ltr">తెలుగు</span>
+                <span class="language-picker__local">(Telugu dili)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/zh-hans/login/" hreflang="zh-Hans">
+              <img src="/assets/img/flags/flag-cn.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="zh-Hans" dir="ltr">简体中文</span>
+                <span class="language-picker__local">(Basitleştirilmiş Çince)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/zh-hant/login/" hreflang="zh-Hant">
+              <img src="/assets/img/flags/flag-tw.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="zh-Hant" dir="ltr">繁體中文</span>
+                <span class="language-picker__local">(Geleneksel Çince)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/ja/login/" hreflang="ja">
+              <img src="/assets/img/flags/flag-jp.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="ja" dir="ltr">日本語</span>
+                <span class="language-picker__local">(Japonca)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/ko/login/" hreflang="ko">
+              <img src="/assets/img/flags/flag-kr.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="ko" dir="ltr">한국어</span>
+                <span class="language-picker__local">(Korece)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/da/login/" hreflang="da">
+              <img src="/assets/img/flags/flag-dk.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="da" dir="ltr">Dansk</span>
+                <span class="language-picker__local">(Danca)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/sv/login/" hreflang="sv">
+              <img src="/assets/img/flags/flag-se.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="sv" dir="ltr">Svenska</span>
+                <span class="language-picker__local">(İsveççe)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/el/login/" hreflang="el">
+              <img src="/assets/img/flags/flag-gr.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="el" dir="ltr">Ελληνικά</span>
+                <span class="language-picker__local">(Yunanca)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/ro/login/" hreflang="ro">
+              <img src="/assets/img/flags/flag-ro.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="ro" dir="ltr">Română</span>
+                <span class="language-picker__local">(Rumence)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/hr/login/" hreflang="hr">
+              <img src="/assets/img/flags/flag-hr.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="hr" dir="ltr">Hrvatski</span>
+                <span class="language-picker__local">(Hırvatça)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/fi/login/" hreflang="fi">
+              <img src="/assets/img/flags/flag-fi.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="fi" dir="ltr">Suomi</span>
+                <span class="language-picker__local">(Fince)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/bg/login/" hreflang="bg">
+              <img src="/assets/img/flags/flag-bg.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="bg" dir="ltr">Български</span>
+                <span class="language-picker__local">(Bulgarca)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/sr/login/" hreflang="sr">
+              <img src="/assets/img/flags/flag-rs.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="sr" dir="ltr">Српски</span>
+                <span class="language-picker__local">(Sırpça)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/sk/login/" hreflang="sk">
+              <img src="/assets/img/flags/flag-sk.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="sk" dir="ltr">Slovenčina</span>
+                <span class="language-picker__local">(Slovakça)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/sl/login/" hreflang="sl">
+              <img src="/assets/img/flags/flag-si.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="sl" dir="ltr">Slovenščina</span>
+                <span class="language-picker__local">(Slovence)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/id/login/" hreflang="id">
+              <img src="/assets/img/flags/flag-id.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="id" dir="ltr">Bahasa Indonesia</span>
+                <span class="language-picker__local">(Endonezce)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/th/login/" hreflang="th">
+              <img src="/assets/img/flags/flag-th.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="th" dir="ltr">ไทย</span>
+                <span class="language-picker__local">(Tayca)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/vi/login/" hreflang="vi">
+              <img src="/assets/img/flags/flag-vn.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="vi" dir="ltr">Tiếng Việt</span>
+                <span class="language-picker__local">(Vietnamca)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/ms/login/" hreflang="ms">
+              <img src="/assets/img/flags/flag-my.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="ms" dir="ltr">Bahasa Melayu</span>
+                <span class="language-picker__local">(Malayca)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/fil/login/" hreflang="fil">
+              <img src="/assets/img/flags/flag-ph.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="fil" dir="ltr">Filipino</span>
+                <span class="language-picker__local">(Filipince)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+          <li>
+            <a class="language-picker__option" href="/hu/login/" hreflang="hu">
+              <img src="/assets/img/flags/flag-hu.svg" alt="" width="42" height="28" loading="lazy" decoding="async" />
+              <span class="language-picker__names">
+                <span class="language-picker__native" lang="hu" dir="ltr">Magyar</span>
+                <span class="language-picker__local">(Macarca)</span>
+              </span>
+              <span class="language-picker__check" aria-hidden="true">✓</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </dialog>
+    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
+      <form>
+        <h2 id="challenge-title">Kimlik doğrulama uygulamasıyla doğrulama</h2>
+        <p>Girişi tamamlamak için kimlik doğrulama uygulamanızdaki güncel kodu girin.</p>
+        <label>Kimlik doğrulama uygulaması<select name="factor" required></select></label>
+        <label
+          >Doğrulama kodu<input
+            name="code"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            pattern="[0-9]{6}"
+            minlength="6"
+            maxlength="6"
+            required
+        /></label>
+        <p role="status" aria-live="polite"></p>
+        <div class="form-actions">
+          <button type="submit">Doğrula</button
+          ><button type="button" data-cancel>İptal</button>
+        </div>
+        <p class="help-text">Erişiminizi mi kaybettiniz? Kimliğinizi doğrulamak ve doğrulama yönteminizi kurtarmak için platform yöneticisine başvurun.</p>
+      </form>
+    </dialog>
+    <script type="application/json" id="login-copy">{"close":"Kapat","authenticatorN":"Kimlik doğrulama uygulaması {n}","verifying":"Doğrulanıyor...","checking":"Erişiminiz kontrol ediliyor...","opening":"Kontrol paneli açılıyor...","signingIn":"Giriş yapılıyor...","humanReady":"Doğrulamayı geçtiniz. Şimdi Google veya Apple ile devam edin.","accessUnavailable":"Erişim şu anda kontrol edilemiyor. Lütfen tekrar deneyin.","gameTitle":"Ben robot değilim","gameInstruction":"Onaylamak için arabayı açık kapıya sürükleyin","gameFooter":"İnsan doğrulaması · WIFIGATE","gameKeyboard":"Araba 3 şeritten {lane}. şeritte. Ok tuşları şerit değiştirir, Enter ile sürülür.","gameGate":"Kapı {n}, {state}","gateOpen":"açık","gateClosed":"kapalı","gameRetry":"Tam olmadı. Yeşil kapıya girin.","gameLocked":"Çok fazla deneme yapıldı. {s} saniye sonra tekrar deneyin.","gameDone":"Doğrulandı. Robot değilsiniz.","errorCancelled":"Giriş iptal edildi.","errorPopupBlocked":"Tarayıcı giriş penceresini engelledi.","errorInvalidCode":"Kod hatalı veya süresi dolmuş.","errorMissingCode":"Kimlik doğrulama uygulamanızdaki kodu girin.","errorNetwork":"Bağlantı kurulamıyor. Ağ bağlantınızı kontrol edin.","errorMfaCancelled":"Hesap doğrulaması iptal edildi.","errorMfaUnsupported":"Bu hesapta desteklenen bir kimlik doğrulama uygulaması yok.","errorUnverifiedEmail":"Yöneticinizin onayladığı doğrulanmış e-posta adresini kullanın.","errorUnconfigured":"Giriş ayarları eksik. Lütfen destek ekibine başvurun.","errorServer":"WIFIGATE sunucusuna bağlanılamıyor. Lütfen tekrar deneyin.","errorSessionExpired":"Oturumunuzun süresi doldu. Tekrar giriş yapın.","errorForbidden":"Erişim izni yok. Sistem yöneticinize başvurun.","errorGeneric":"Bir sorun oluştu. Lütfen tekrar deneyin."}</script>
+    <script src="/js/cookie-consent-copy.js?v=20261007c" defer></script>
+    <script src="/js/cookie-consent.js?v=20261007c" defer></script>
+  </body>
+</html>

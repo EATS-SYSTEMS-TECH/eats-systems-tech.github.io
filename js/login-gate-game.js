@@ -5,38 +5,14 @@ const LANES = 3;
 const MIN_DRAG_MS = 600;
 const MAX_DRAG_MS = 60_000;
 const MIN_SAMPLES = 10;
-const MAX_FAILURES = 3;
+const MAX_FAILURES = 5;
 const LOCKOUT_MS = 60_000;
-const GATE_ZONE = 0.72;
 
-const COPY = {
-  en: {
-    title: "I'm not a robot",
-    instruction: "To confirm, drag the car into the open gate",
-    footer: "Human check · WIFIGATE",
-    keyboard: "Car in lane {lane} of 3. Arrow keys change lane, Enter drives.",
-    gate: "Gate {n}, {state}",
-    open: "open",
-    closed: "closed",
-    retry: "Not quite. Drive into the green gate.",
-    locked: "Too many tries. Try again in {s} s.",
-    done: "Verified. You're not a robot.",
-    close: "Close",
-  },
-  he: {
-    title: "אני לא רובוט",
-    instruction: "כדי לאשר, גררו את המכונית לשער הפתוח",
-    footer: "בדיקת אנושיות · WIFIGATE",
-    keyboard: "המכונית בנתיב {lane} מתוך 3. החיצים מחליפים נתיב, Enter נוסע.",
-    gate: "שער {n}, {state}",
-    open: "פתוח",
-    closed: "סגור",
-    retry: "לא בדיוק. היכנסו לשער הירוק.",
-    locked: "יותר מדי ניסיונות. נסו שוב בעוד {s} שניות.",
-    done: "אומת. אתם לא רובוט.",
-    close: "סגירה",
-  },
-};
+// Misses and the lockout belong to the page, not to one dialog: closing the
+// game and opening it again keeps both until the lockout ends.
+let failures = 0;
+let lockedUntil = 0;
+const GATE_ZONE = 0.72;
 
 const CAR_SVG = `<svg viewBox="0 0 72 40" aria-hidden="true" focusable="false">
   <defs>
@@ -138,11 +114,23 @@ function buildDialog(copy) {
 }
 
 /**
- * Opens the game in a modal dialog.
+ * Opens the game in a modal dialog, worded from the sign-in page copy.
  * Resolves true once the car reaches the open gate, false if the dialog is closed.
  */
-export function requestHumanCheck(language = "en") {
-  const copy = COPY[language] ?? COPY.en;
+export function requestHumanCheck(loginCopy) {
+  const copy = {
+    title: loginCopy.gameTitle,
+    instruction: loginCopy.gameInstruction,
+    footer: loginCopy.gameFooter,
+    keyboard: loginCopy.gameKeyboard,
+    gate: loginCopy.gameGate,
+    open: loginCopy.gateOpen,
+    closed: loginCopy.gateClosed,
+    retry: loginCopy.gameRetry,
+    locked: loginCopy.gameLocked,
+    done: loginCopy.gameDone,
+    close: loginCopy.close,
+  };
   const dialog = buildDialog(copy);
   document.body.append(dialog);
   const board = dialog.querySelector(".gate-game__board");
@@ -152,8 +140,6 @@ export function requestHumanCheck(language = "en") {
 
   let openLane = 0;
   let carLane = 0;
-  let failures = 0;
-  let lockedUntil = 0;
   let finished = false;
   let drag;
   let keyboard;
@@ -214,6 +200,10 @@ export function requestHumanCheck(language = "en") {
 
   function lock() {
     lockedUntil = Date.now() + LOCKOUT_MS;
+    showLock();
+  }
+
+  function showLock() {
     board.classList.add("gate-game__board--locked");
     car.setAttribute("aria-disabled", "true");
     const tick = () => {
@@ -221,6 +211,7 @@ export function requestHumanCheck(language = "en") {
       if (left <= 0) {
         clearInterval(countdown);
         failures = 0;
+        lockedUntil = 0;
         board.classList.remove("gate-game__board--locked");
         car.removeAttribute("aria-disabled");
         message.textContent = "";
@@ -340,6 +331,11 @@ export function requestHumanCheck(language = "en") {
   });
   dialog.showModal();
   newRound(false);
+  if (Date.now() < lockedUntil) showLock();
+  else if (lockedUntil) {
+    failures = 0;
+    lockedUntil = 0;
+  }
   car.focus({ preventScroll: true });
   return result;
 }
