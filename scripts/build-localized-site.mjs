@@ -513,11 +513,13 @@ function updateUtilityPageStaticUi($, copy) {
   $("#copy-link").text(copy.copyButton);
   $("#wifigate-link-copy").text(
     JSON.stringify({
-      statusOpening: copy.statusOpening,
+      headingFallback: copy.headingFallback || copy.openButton,
+      headingMissing: copy.headingMissing || copy.openButton,
       statusMissing: copy.statusMissing,
       statusFallback: copy.statusFallback,
       copyButton: copy.copyButton,
       copiedButton: copy.copiedButton,
+      copyError: copy.copyError || wifigateLinkLocales[defaultLocale].copyError,
     })
   );
 }

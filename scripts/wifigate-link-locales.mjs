@@ -3,13 +3,16 @@ export const wifigateLinkLocales = {
     pageTitle: "Open WiFiGate",
     socialTitle: "WiFiGate Invitation",
     description: "Open your WiFiGate invitation securely in the app.",
-    heading: "Opening WiFiGate",
-    statusOpening: "We are trying to open your invitation in the app.",
+    heading: "Opening WiFiGate…",
+    headingFallback: "Continue in WiFiGate",
+    headingMissing: "Unable to open WiFiGate",
+    statusOpening: "This should only take a moment.",
     statusMissing: "This invitation link is missing the access details. Ask the sender to share it again.",
-    statusFallback: "If WiFiGate did not open automatically, use the button below.",
-    openButton: "Open in WiFiGate",
-    copyButton: "Copy app link",
-    copiedButton: "Copied app link"
+    statusFallback: "Didn't open automatically? Tap below to try again.",
+    openButton: "Open WiFiGate",
+    copyButton: "Copy link",
+    copiedButton: "Link copied!",
+    copyError: "Couldn't copy link. Please try again."
   },
   he: {
     pageTitle: "פתח את WiFiGate",
