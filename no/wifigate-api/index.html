@@ -18,14 +18,14 @@
 
     <style>
         :root {
-            --bg: #f7f7f4;
-            --panel: rgba(255, 255, 255, 0.94);
-            --text: #10241d;
-            --muted: #5f6c67;
-            --accent: #0f766e;
-            --accent-strong: #115e59;
-            --border: rgba(16, 36, 29, 0.08);
-            --shadow: 0 18px 48px rgba(16, 36, 29, 0.12);
+            --bg: #edf2f8;
+            --panel: #ffffff;
+            --text: #152238;
+            --muted: #526176;
+            --accent: #0b63ff;
+            --accent-strong: #2563eb;
+            --border: #d9e2ee;
+            --shadow: 0 18px 48px rgba(25, 50, 90, 0.10);
         }
 
         * {
@@ -35,25 +35,22 @@
         body {
             margin: 0;
             min-height: 100vh;
+            min-height: 100dvh;
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             color: var(--text);
             background: var(--bg);
-            display: none;
-            place-items: center;
-            padding: 24px;
-        }
-
-        body.ready {
             display: grid;
+            place-items: center;
+            padding: 20px;
         }
 
         .card {
-            width: min(100%, 420px);
+            width: min(100%, 400px);
             background: var(--panel);
             border: 1px solid var(--border);
-            border-radius: 24px;
+            border-radius: 28px;
             box-shadow: var(--shadow);
-            padding: 28px 24px;
+            padding: 32px 28px;
             text-align: center;
         }
 
@@ -62,26 +59,44 @@
             height: 84px;
             border-radius: 24px;
             display: block;
-            margin: 0 auto 18px;
+            margin: 0 auto 24px;
         }
 
         h1 {
             margin: 0;
-            font-size: clamp(24px, 5vw, 32px);
-            line-height: 1.08;
+            font-size: clamp(24px, 6vw, 30px);
+            line-height: 1.18;
         }
 
         p {
-            margin: 14px 0 0;
+            margin: 12px 0 0;
             color: var(--muted);
-            font-size: 15px;
+            font-size: 16px;
             line-height: 1.55;
         }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            margin: 28px auto 0;
+            border: 3px solid #dce7f8;
+            border-top-color: var(--accent-strong);
+            border-radius: 50%;
+            animation: spin 850ms linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .spinner { animation: none; }
+        }
+
+        [hidden] { display: none !important; }
 
         .actions {
             display: grid;
             gap: 12px;
-            margin-top: 24px;
+            margin-top: 28px;
         }
 
         .button,
@@ -90,9 +105,10 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            min-height: 50px;
-            border-radius: 999px;
+            min-height: 52px;
+            border-radius: 14px;
             font-weight: 700;
+            font-size: 16px;
             text-decoration: none;
             transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
         }
@@ -100,28 +116,50 @@
         .button {
             background: linear-gradient(135deg, var(--accent), var(--accent-strong));
             color: #ffffff;
-            box-shadow: 0 10px 24px rgba(15, 118, 110, 0.22);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.20);
         }
 
         .secondary {
-            border: 1px solid rgba(16, 36, 29, 0.12);
+            border: 1px solid var(--border);
             color: var(--text);
-            background: rgba(255, 255, 255, 0.82);
+            background: #ffffff;
         }
 
         .button:hover,
         .secondary:hover {
             transform: translateY(-1px);
         }
+
+        .button:focus-visible,
+        .secondary:focus-visible {
+            outline: 3px solid #173d91;
+            outline-offset: 3px;
+        }
+
+        .feedback {
+            min-height: 24px;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        .feedback:empty { display: none; }
+
+        .feedback.error { color: #a32626; }
+
+        @media (max-width: 360px) {
+            body { padding: 14px; }
+            .card { padding: 28px 20px; }
+        }
     </style>
-    <script id="wifigate-link-copy" type="application/json">{"statusOpening":"Vi prøver å åpne invitasjonen din i appen.","statusMissing":"Denne invitasjonslenken mangler tilgangsdetaljene. Be avsenderen dele den på nytt.","statusFallback":"Hvis WiFiGate ikke åpnet automatisk, bruk knappen nedenfor.","copyButton":"Kopier app-lenke","copiedButton":"App-lenke kopiert"}</script>
+    <script id="wifigate-link-copy" type="application/json">{"headingFallback":"Åpne i WiFiGate","headingMissing":"Åpne i WiFiGate","statusMissing":"Denne invitasjonslenken mangler tilgangsdetaljene. Be avsenderen dele den på nytt.","statusFallback":"Hvis WiFiGate ikke åpnet automatisk, bruk knappen nedenfor.","copyButton":"Kopier app-lenke","copiedButton":"App-lenke kopiert","copyError":"Couldn't copy link. Please try again."}</script>
     <script>
         const WIFIGATE_LINK_DEFAULT_COPY = {
-            statusOpening: "We are trying to open your invitation in the app.",
+            headingFallback: "Continue in WiFiGate",
             statusMissing: "This invitation link is missing the access details. Ask the sender to share it again.",
-            statusFallback: "If WiFiGate did not open automatically, use the button below.",
-            copyButton: "Copy app link",
-            copiedButton: "Copied app link"
+            statusFallback: "Didn't open automatically? Tap below to try again.",
+            copyButton: "Copy link",
+            copiedButton: "Link copied!",
+            copyError: "Couldn't copy link. Please try again."
         };
 
         function getUtilityPageCopy() {
@@ -220,13 +258,18 @@
             return `wifigate://gate/${encodeURIComponent(routeId)}${query ? `?${query}` : ""}`;
         }
 
-        function revealFallback(deepLink, statusText) {
+        function revealFallback(deepLink) {
             const copy = getUtilityPageCopy();
+            const title = document.getElementById("page-title");
             const status = document.getElementById("status");
+            const spinner = document.getElementById("spinner");
             const openApp = document.getElementById("open-app");
             const copyLink = document.getElementById("copy-link");
+            const feedback = document.getElementById("feedback");
 
-            status.textContent = statusText || copy.statusOpening;
+            title.textContent = deepLink ? copy.headingFallback : copy.headingMissing;
+            status.textContent = deepLink ? copy.statusFallback : copy.statusMissing;
+            spinner.hidden = true;
             openApp.hidden = !deepLink;
             copyLink.hidden = !deepLink;
             openApp.href = deepLink || "#";
@@ -236,27 +279,35 @@
                     return;
                 }
 
+                feedback.textContent = "";
+                feedback.classList.remove("error");
                 try {
                     await navigator.clipboard.writeText(deepLink);
-                    copyLink.textContent = copy.copiedButton;
+                    feedback.textContent = copy.copiedButton;
                 } catch (error) {
-                    console.error("Failed to copy deep link", error);
+                    feedback.textContent = copy.copyError;
+                    feedback.classList.add("error");
                 }
             };
-
-            document.body.classList.add("ready");
         }
 
         function openImmediately(deepLink) {
-            const copy = getUtilityPageCopy();
-
             if (!deepLink) {
-                revealFallback("", copy.statusMissing);
+                revealFallback("");
                 return;
             }
 
             window.setTimeout(function () {
-                revealFallback(deepLink, copy.statusFallback);
+                if (document.visibilityState === "visible") {
+                    revealFallback(deepLink);
+                } else {
+                    document.addEventListener("visibilitychange", function showOnReturn() {
+                        if (document.visibilityState === "visible") {
+                            document.removeEventListener("visibilitychange", showOnReturn);
+                            revealFallback(deepLink);
+                        }
+                    });
+                }
             }, 900);
 
             window.setTimeout(function () {
@@ -386,11 +437,14 @@
         <img class="logo" src="../../logo-1024.png" alt="WiFiGate">
         <h1 id="page-title">Åpner WiFiGate</h1>
         <p id="status">Vi prøver å åpne invitasjonen din i appen.</p>
+        <div id="spinner" class="spinner" aria-hidden="true"></div>
         <div class="actions">
             <a id="open-app" class="button" href="#" hidden="">Åpne i WiFiGate</a>
             <button id="copy-link" class="secondary" type="button" hidden="">Kopier app-lenke</button>
         </div>
+        <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
     </main>
+
 
 
 <script>window.WIFIGATE_COOKIE_COPY = {"no":{"title":"Personvern og informasjonskapsler","description":"Vi bruker nødvendige informasjonskapsler for å drive nettstedet. Med ditt samtykke bruker vi også Google Analytics for å forstå hvordan nettstedet brukes, og for å forbedre det. Du kan endre valget ditt når som helst.","privacy":"Personvernerklæring","cookies":"Retningslinjer for informasjonskapsler","settings":"Innstillinger","accept":"Godta alle","reject":"Avvis alle","save":"Lagre valg","necessary":"Nødvendige informasjonskapsler","necessaryHelp":"Nødvendige for at nettstedet skal fungere og huske preferansene dine. Alltid aktive.","alwaysOn":"Alltid aktiv","analytics":"Analytics-informasjonskapsler","analyticsHelp":"Google Analytics måler bruken av nettstedet bare hvis du tillater det.","reopen":"Innstillinger for informasjonskapsler","close":"Lukk innstillingene","banner":"Vi bruker informasjonskapsler for å analysere trafikken på nettstedet med Google Analytics. Målingen kjører bare hvis du samtykker. Mer informasjon:"}};</script><script src="../../js/cookie-consent.js?v=20261007c" defer=""></script></body></html>
