@@ -1,6 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { getPlatformProfile, profileApi } from "../js/api/index.js";
+import {
+  getPlatformProfile,
+  profileApi,
+  adminRequest,
+} from "../js/api/index.js";
+import { AxiosError } from "axios";
 import {
   parsePlatformIdentity,
   safeDashboardPath,
@@ -71,6 +76,10 @@ test("deep links reject external URLs, encoded separators and traversal", () => 
   assert.equal(safeDashboardPath(requested), requested);
   assert.equal(loginDestination(profile(), requested), requested);
   assert.equal(
+    loginDestination(profile(), "/dashboard/host/overview/?tab=users"),
+    "/dashboard/host/overview/?tab=users",
+  );
+  assert.equal(
     loginDestination(profile(), "/dashboard/pay/transactions/1"),
     "/dashboard/",
   );
@@ -122,5 +131,110 @@ test("shared login reads platform access without creating a Host profile", async
     );
   } finally {
     profileApi.defaults.adapter = previous;
+  }
+});
+
+test("legacy dashboard entry uses only authenticated profile authority and creates a missing profile once", async () => {
+  const previous = profileApi.defaults.adapter;
+  const requests = [];
+  let exists = false;
+  const legacy = {
+    user: { uid: "test-user", email: "user@example.test", emailVerified: true },
+    role: "user",
+    access: { state: "active" },
+    mfa: { required: false, enrolled: false, verified: false },
+  };
+  profileApi.defaults.adapter = async (config) => {
+    requests.push(`${config.method} ${config.url}`);
+    assert.equal(config.headers.get("Authorization"), "Bearer test-token");
+    if (
+      config.url.endsWith("platform/me") ||
+      (!exists && config.method === "get")
+    ) {
+      throw new AxiosError("Missing", "ERR_BAD_REQUEST", config, null, {
+        status: 404,
+        data: { error: { code: "NOT_FOUND" } },
+        config,
+        headers: {},
+      });
+    }
+    exists = true;
+    return { status: 200, data: legacy, config, headers: {} };
+  };
+  try {
+    const user = { getIdToken: async () => "test-token" };
+    assert.equal(
+      (await getPlatformProfile(user)).products.host.state,
+      "active",
+    );
+    assert.deepEqual(requests, [
+      "get /api/v1/platform/me",
+      "get /api/v1/users/me",
+      "put /api/v1/users/me",
+      "get /api/v1/users/me",
+    ]);
+    legacy.role = null;
+    assert.equal(
+      (await getPlatformProfile(user)).products.host.state,
+      "blocked",
+    );
+    legacy.role = "admin";
+    assert.equal(
+      (await getPlatformProfile(user)).products.host.state,
+      "mfa-required",
+    );
+    legacy.mfa.enrolled = legacy.mfa.verified = true;
+    const result = await getPlatformProfile(user);
+    assert.equal(result.products.host.state, "active");
+    assert.equal(result.products.pay.state, "unavailable");
+    legacy.access.state = "pending";
+    assert.equal(
+      (await getPlatformProfile(user)).products.host.state,
+      "pending",
+    );
+  } finally {
+    profileApi.defaults.adapter = previous;
+  }
+});
+
+test("platform auth failures and outages never fall back to a different access endpoint", async () => {
+  const previous = profileApi.defaults.adapter;
+  try {
+    for (const status of [401, 403, 503]) {
+      let count = 0;
+      profileApi.defaults.adapter = async (config) => {
+        count++;
+        throw new AxiosError("Denied", "ERR_BAD_REQUEST", config, null, {
+          status,
+          data: { error: { code: "DENIED" } },
+          config,
+          headers: {},
+        });
+      };
+      await assert.rejects(
+        getPlatformProfile({ getIdToken: async () => "test-token" }),
+        { status },
+      );
+      assert.equal(count, 1);
+    }
+  } finally {
+    profileApi.defaults.adapter = previous;
+  }
+});
+
+test("admin transport refuses alternate origins and path traversal before disclosing the token", () => {
+  const user = {
+    getIdToken: () => {
+      throw new Error("token accessed");
+    },
+  };
+  for (const path of [
+    "https://elsewhere.example/api/v1/admin/people",
+    "/api/v1/admin/../people",
+    "/api/v1/admin/organizations/%2e%2e",
+    "/api/v1/admin/people#fragment",
+    "/api/v1/admin/people\\other",
+  ]) {
+    assert.throws(() => adminRequest(user, path), /invalid-request/);
   }
 });
