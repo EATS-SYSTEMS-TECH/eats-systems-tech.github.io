@@ -1,4 +1,3 @@
-import { renderServiceTargets } from "./host-slo.js";
 import { portalRequest, portalExport } from "./api/index.js";
 import { field, node, downloadHostCsv, downloadHostTextCsv } from "./host-ui.js";
 
@@ -20,7 +19,6 @@ export async function renderHostOperations({ container, user, organization, prop
     if (!attempts.has(signature)) attempts.set(signature, crypto.randomUUID());
     return portalRequest(user, `${root}/operations${path}`, "PUT", body, attempts.get(signature));
   }
-  renderServiceTargets({ section, user, root, current, run, status, owner: role === "owner" });
   const reliability = node("div"), reliabilityButton = node("button", "Measure last hour", { type: "button" });
   section.append(node("h3", "Operational observations"), node("p", "Observed authenticated API requests and jobs created in the selected hour. Service targets and physical gate availability require separate operational verification."), reliabilityButton, reliability);
   reliabilityButton.addEventListener("click", () => run(reliabilityButton, async () => {
