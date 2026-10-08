@@ -1,5 +1,8 @@
 name: dependency-audit
 
+permissions:
+  contents: read
+
 # The site bundles Axios for browser API calls. Cheerio, sharp, esbuild and
 # TypeScript are build-time only. This gate keeps dependencies free of high/critical
 # advisories. If a future accepted exception is needed, switch to the allow-list
@@ -23,10 +26,12 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "24"
       - run: npm ci --no-audit --no-fund
-      - name: npm audit (fail on high or critical)
-        run: npm audit --audit-level=high
+      - name: npm audit (fail on moderate, high or critical)
+        run: npm audit --audit-level=moderate
