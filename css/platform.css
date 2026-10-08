@@ -128,10 +128,6 @@ html[dir="rtl"] .product-tile {
 .platform-shell #totp-secret {
   direction: ltr;
 }
-.app-login__language {
-  margin: 0 0 1rem;
-  text-align: end;
-}
 @media (max-width: 650px) {
   .platform-header {
     margin-bottom: 1.5rem;

@@ -13,6 +13,7 @@ import { wifigateLinkLocales } from "./wifigate-link-locales.mjs";
 import { buildLlmsTxt } from "./llms-txt.mjs";
 import { LEGAL_PAGES, legalBundles, renderLegalMain } from "./legal/legal-pages.mjs";
 import { buildNotFoundPage } from "./not-found-page.mjs";
+import { buildLoginPages } from "./login-pages.mjs";
 import { BRAND_ID, ORGANIZATION_ID, SITE_ORIGIN, breadcrumbNode, faqNode, setPageMeta, webPageNode } from "./seo.mjs";
 
 const repoRoot = process.cwd();
@@ -1560,6 +1561,8 @@ async function main() {
   sitemapEntries.push(...(await buildNichePages(homeData)));
   sitemapEntries.push(...(await buildGuestInvitesPages(homeData)));
   sitemapEntries.push(...(await buildUtilityPages(homeData)));
+  // Sign-in pages are noindex, so they stay out of the sitemap.
+  await buildLoginPages(writeOutputFile);
   // Contact Us is written by hand (it serves the app too); it is dated by its
   // last commit.
   sitemapEntries.push({
