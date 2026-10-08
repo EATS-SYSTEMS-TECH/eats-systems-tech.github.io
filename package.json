@@ -12,14 +12,15 @@
         "build:locales": "node scripts/build-localized-site.mjs",
         "build:images": "node scripts/build-niche-images.mjs",
         "staging": "npm run build:api && node scripts/start-staging.mjs",
-        "test:staging": "npm run build:api && node scripts/run-staging-tests.mjs"
+        "test:staging": "npm run build:api && node scripts/run-staging-tests.mjs",
+        "test:health": "node --test scripts/host-service-health.test.mjs"
     },
     "devDependencies": {
         "cheerio": "^1.2.0",
         "esbuild": "^0.28.2",
         "firebase": "^12.19.0",
         "firebase-admin": "^13.10.0",
-        "firebase-tools": "^15.31.0",
+        "firebase-tools": "15.33.0",
         "playwright-core": "^1.63.0",
         "sharp": "^0.35.5",
         "typescript": "^7.0.2"
@@ -30,6 +31,10 @@
     "overrides": {
         "@grpc/grpc-js": "^1.13.6",
         "uuid@<11.1.1": "^11.1.1",
-        "basic-ftp": "^6.2.2"
+        "basic-ftp": "^6.2.2",
+        "firebase-tools": {
+            "chokidar": "4.0.3",
+            "@google-cloud/pubsub": "6.2.0"
+        }
     }
 }

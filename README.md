@@ -65,11 +65,12 @@ The canonical production API is `https://api.wifigate.io`. All local API clients
 
 ### Checks
 
-Dependency review updated the development Firebase Admin dependency and scoped vulnerable transitive versions. Production dependency audit reports no known advisories. Five development-tool advisories remain in the unpatched file-watcher and OpenTelemetry/PubSub chains; the detailed assessment is in backend `docs/decisions/0004-shared-platform-access.md`. These tools are not shipped in the browser bundles.
+V10 pins Firebase CLI 15.33.0 and scopes its Chokidar dependency to 4.0.3 and complete Pub/Sub dependency to 6.2.0. This removes the previously reported development watcher/OpenTelemetry advisory paths. Chokidar 4 supports explicit files/directories rather than glob expansion; this site's isolated Auth staging workflow is verified. These tools are not shipped in the browser bundles. Full `npm audit --audit-level=moderate` now gates CI; recheck at release. The compatibility decision is in backend `docs/decisions/0006-v10-operational-evidence.md`.
 
 - npm run test:api: TypeScript build and access/API unit tests.
 - npm run test:platform: isolated browser checks for bilingual login, product states, MFA, redirects, idle expiry and401/403 cleanup; no cloud credentials or production data.
 - npm run test:staging: Auth Emulator token/API tests, mock Google/Apple browser flows, and isolated browser fixtures for TOTP enrollment/challenges/approval.
+- npm run test:health: isolated desktop/mobile Service health, freshness/error states, role restrictions and late-response fencing.
 - node scripts/host-portal-browser.test.mjs: browser fixtures against an existing site on port 8100; no emulator required for this fixture suite.
 
 Staging is entirely local. Approved user fixtures: owner@grandplaza.test and member@grandplaza.test. admin@wifigate.test is an admin without TOTP and must remain in enrollment. pending@wifigate.test is pending; other emails are denied. These names are fixtures, not a production allowlist.

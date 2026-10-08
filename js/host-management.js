@@ -10,6 +10,7 @@ import { renderHostApiKeys } from "./host-api-keys.js";
 import { renderHostIntegrations } from "./host-integrations.js";
 import { renderHostAutomation } from "./host-automation.js";
 import { renderHostOperations } from "./host-operations.js";
+import { renderServiceHealth } from "./host-service-health.js";
 import { renderHostImportRequests } from "./host-import-requests.js";
 import {
   renderSupportDiagnostics,
@@ -848,6 +849,12 @@ export async function loadHostManagement(user, identity, preferredId) {
       isCurrent: () => epoch === generation,
     });
     if (epoch !== generation) return;
+    renderServiceHealth({
+      container: root,
+      user,
+      organization: org,
+      isCurrent: () => epoch === generation,
+    });
     await renderSupportOwner({
       container: root,
       user,

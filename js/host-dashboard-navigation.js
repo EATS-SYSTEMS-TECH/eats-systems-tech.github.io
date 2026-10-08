@@ -44,6 +44,12 @@ const entries = [
   ],
   ["Invoices", "[data-workspace-billing]", "file", "Billing"],
   [
+    "Service health",
+    'section[aria-label="Service health"]',
+    "bolt",
+    "Management",
+  ],
+  [
     "API integrations",
     'section[aria-label="API integrations"], section[aria-label="Reservation integrations"]',
     "key",
