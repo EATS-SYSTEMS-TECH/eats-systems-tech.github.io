@@ -131,6 +131,33 @@ html:has(body.app-login) { height: 100%; overscroll-behavior: none; }
 .app-login__status:empty { display: none; }
 .app-login__legal { margin: clamp(10px, 2.2dvh, 18px) 0 0; color: #64748b; font-size: 0.78rem; line-height: 1.6; text-align: center; }
 .app-login__legal a { color: #475569; text-decoration: underline; text-underline-offset: 0.15em; }
+/* Language button and picker: the app's AppLanguageSelector and
+   LanguagePickerModal. Each row links to that language's sign-in page. */
+.app-login__language { display: flex; align-items: center; gap: 10px; min-height: 42px; margin: 0 auto clamp(10px, 2.2dvh, 18px); padding: 0 14px; border: 1px solid #d8e4ea; border-radius: 999px; background: rgba(255, 255, 255, 0.9); box-shadow: 0 6px 12px rgba(15, 23, 42, 0.08); color: #0f172a; font: 700 0.875rem/1 "Manrope", system-ui, sans-serif; cursor: pointer; }
+.app-login__language img { width: 30px; height: 20px; border-radius: 3px; object-fit: cover; box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08); }
+.app-login__language svg { width: 16px; height: 16px; color: #475569; }
+.app-login__language:hover { background: #ffffff; }
+.app-login__language:focus-visible, .language-picker__close:focus-visible, .language-picker__option:focus-visible { outline: 3px solid #0b63ff; outline-offset: 2px; }
+.language-picker { width: min(420px, calc(100vw - 32px)); max-width: none; max-height: min(640px, calc(100dvh - 32px)); padding: 0; border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 28px; background: #ffffff; color: #0f172a; box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28); font-family: "Manrope", system-ui, sans-serif; overflow: hidden; }
+.language-picker[open] { display: flex; }
+.language-picker::backdrop { background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(4px); }
+.language-picker__box { display: flex; flex-direction: column; width: 100%; max-height: min(640px, calc(100dvh - 34px)); padding: 18px 18px 0; box-sizing: border-box; }
+.language-picker__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.language-picker__head h2 { margin: 0; font-size: 1.375rem; font-weight: 700; letter-spacing: 0; color: #0f172a; }
+.language-picker__close { display: grid; place-items: center; flex: none; width: 36px; height: 36px; padding: 0 0 3px; border: 0; border-radius: 50%; background: #f1f5f9; color: #334155; font: 400 1.5rem/1 system-ui, sans-serif; cursor: pointer; }
+.language-picker__close:hover { background: #e2e8f0; }
+.language-picker__list { display: grid; gap: 10px; min-height: 0; margin: 0; padding: 0 0 18px; list-style: none; overflow-y: auto; overscroll-behavior: contain; }
+.language-picker__option { display: flex; align-items: center; gap: 14px; padding: 12px 16px; border: 1px solid #e2e8f0; border-radius: 20px; background: #ffffff; color: inherit; text-decoration: none; }
+.language-picker__option:hover { border-color: #bfdbfe; }
+.language-picker__option[aria-current="page"] { border-color: #93c5fd; background: #eff6ff; }
+.language-picker__option img { flex: none; width: 42px; height: 28px; border-radius: 4px; object-fit: cover; box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08); }
+.language-picker__names { display: grid; flex: 1; min-width: 0; gap: 2px; }
+.language-picker__native, .language-picker__local { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.language-picker__native { font-size: 1.0625rem; font-weight: 700; }
+.language-picker__native[dir="rtl"] { text-align: right; }
+.language-picker__local { color: #64748b; font-size: 0.75rem; font-weight: 500; }
+.language-picker__check { display: grid; place-items: center; flex: none; width: 21px; height: 21px; border-radius: 50%; background: #2563eb; color: #ffffff; font-size: 0.75rem; font-weight: 800; visibility: hidden; }
+.language-picker__option[aria-current="page"] .language-picker__check { visibility: visible; }
 
 /* Phones: one line per message. The type scales with the screen width, and
    the screen and card margins are tighter, so the footnote and the status fit
