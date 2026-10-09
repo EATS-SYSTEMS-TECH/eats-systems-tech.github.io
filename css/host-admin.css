@@ -1,0 +1,211 @@
+body:not([data-host-view="Overview"]) #admin-overview,
+body[data-host-view="Overview"] #workspace-org-switcher,
+body[data-host-view="Overview"] #host-management {
+  display: none;
+}
+.admin-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+#admin-overview .admin-tiles button {
+  text-align: start;
+  padding: 20px;
+  border: 1px solid #dce4ef;
+  background: #fff;
+  color: #182d4b;
+  border-radius: 12px;
+}
+#admin-overview .admin-tiles button[aria-selected="true"] {
+  border: 2px solid #245fc6;
+  background: #eef5ff;
+}
+.admin-tiles strong {
+  display: block;
+  font-size: 32px;
+}
+.admin-toolbar {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.admin-toolbar label {
+  flex: 1;
+  min-width: 180px;
+}
+.admin-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid #dce4ef;
+  overflow-wrap: anywhere;
+}
+.admin-row p {
+  margin: 8px 0;
+}
+#admin-overview .admin-person-link {
+  color: #154995;
+  background: transparent;
+  padding: 0;
+  border: 0;
+  font-weight: 700;
+  text-align: start;
+}
+.admin-row-actions button {
+  display: block;
+  margin-top: 8px;
+}
+.admin-dialog {
+  width: min(620px, calc(100vw - 32px));
+  max-height: 90dvh;
+  overflow: auto;
+  border: 1px solid #dce4ef;
+  border-radius: 16px;
+  padding: 24px;
+}
+.admin-dialog::backdrop {
+  background: #07193299;
+}
+.admin-dialog form {
+  display: grid;
+  gap: 14px;
+}
+.admin-dialog h2,
+.admin-dialog h3 {
+  margin: 0;
+}
+.host-role-badge,
+.host-access-badge {
+  position: relative;
+  display: inline-block;
+  padding: 4px 9px;
+  margin: 3px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #f1f5f9;
+  color: #475569;
+}
+.host-role-badge[data-role="host-admin"] {
+  background: #f3e8ff;
+  color: #6d28d9;
+}
+.host-role-badge[data-role="host-user"] {
+  background: #e0ecff;
+  color: #0b4fd1;
+}
+.host-role-badge[data-role="owner"] {
+  background: #fef3c7;
+  color: #92400e;
+}
+.host-role-badge[data-role="admin"] {
+  background: #dcfce7;
+  color: #166534;
+}
+.host-role-badge[data-role="staff"] {
+  background: #cffafe;
+  color: #155e75;
+}
+.host-access-badge[data-status="active"] {
+  background: #dcfce7;
+  color: #166534;
+}
+.host-access-badge[data-status="pending"] {
+  background: #fff7ed;
+  color: #c2410c;
+}
+.host-access-badge[data-status="blocked"] {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+.host-role-explanation {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  inset-inline-start: 0;
+  top: 100%;
+  width: 220px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #172b46;
+  color: white;
+  white-space: normal;
+}
+.host-role-badge:hover .host-role-explanation,
+.host-role-badge:focus .host-role-explanation {
+  display: block;
+}
+.admin-tiles button:focus-visible,
+.admin-row button:focus-visible,
+.host-role-badge:focus-visible {
+  outline: 3px solid #245fc6;
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .admin-tiles {
+    gap: 8px;
+  }
+  .admin-tiles button {
+    padding: 12px;
+  }
+  .admin-tiles strong {
+    font-size: 24px;
+  }
+  .admin-tiles span {
+    font-size: 12px;
+  }
+  .admin-row {
+    flex-wrap: wrap;
+  }
+}
+html[dir="rtl"] .portal-dashboard:has(.host-sidebar:not([hidden])) {
+  padding-left: 0;
+  padding-right: 264px;
+}
+html[dir="rtl"] .host-sidebar {
+  left: auto;
+  right: 0;
+}
+@media (min-width: 761px) {
+  .host-sidebar {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .host-sidebar > :not(nav) {
+    flex-shrink: 0;
+  }
+  .host-sidebar nav {
+    flex: 1;
+    min-height: 0;
+    max-height: none;
+    overflow-y: auto;
+  }
+  .host-sidebar .sidebar-profile {
+    background: #192b3d;
+  }
+  html[dir="rtl"] .sidebar-profile {
+    left: auto;
+    right: 16px;
+  }
+  html[dir="rtl"]
+    .portal-dashboard:has(#host-sidebar:not([hidden]))
+    .account-menu {
+    left: auto;
+    right: 24px;
+  }
+}
+@media (min-width: 761px) and (max-width: 960px) {
+  html[dir="rtl"] .portal-dashboard:has(.host-sidebar:not([hidden])) {
+    padding-right: 210px;
+  }
+}
+@media (max-width: 760px) {
+  html[dir="rtl"] .portal-dashboard:has(.host-sidebar:not([hidden])) {
+    padding-right: 0;
+  }
+}

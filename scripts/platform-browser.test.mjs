@@ -118,8 +118,18 @@ async function scenario(browser, options = {}) {
   await context.route("**/api/v1/**", async (route) => {
     const request = route.request();
     const url = new URL(request.url());
-    calls.push({ method: request.method(), path: url.pathname });
+    calls.push({
+      method: request.method(),
+      path: url.pathname,
+      body: request.postDataJSON(),
+      key: request.headers()["idempotency-key"],
+    });
     if (url.pathname === "/api/v1/platform/me") {
+      if (state.legacy)
+        return route.fulfill({
+          status: 404,
+          json: { error: { code: "NOT_FOUND" } },
+        });
       if (state.unavailable)
         return route.fulfill({
           status: 503,
@@ -148,6 +158,107 @@ async function scenario(browser, options = {}) {
     }
     if (url.pathname === "/api/v1/organizations")
       return route.fulfill({ json: { organizations: [], nextCursor: null } });
+    if (url.pathname === "/api/v1/auth/invitations")
+      return route.fulfill({
+        json: {
+          items:
+            state.invited && !state.accepted
+              ? [
+                  {
+                    id: "owner-invite",
+                    clientId: "fixture-org",
+                    organizationName: "Invited Hotel",
+                    role: "owner",
+                    version: 1,
+                    expiresAt: "2026-10-15T10:00:00.000Z",
+                  },
+                ]
+              : [],
+          nextCursor: null,
+        },
+      });
+    if (url.pathname === "/api/v1/auth/invitations/owner-invite/accept") {
+      state.accepted = true;
+      return route.fulfill({ json: { member: { role: "owner" } } });
+    }
+    if (url.pathname === "/api/v1/admin/overview")
+      return route.fulfill({
+        json: {
+          admins: 1,
+          activeAdmins: 1,
+          users: 1,
+          organizations: state.archived ? 0 : 1,
+        },
+      });
+    if (url.pathname === "/api/v1/admin/people")
+      return route.fulfill({
+        json: {
+          items: [
+            {
+              uid: "fixture-user",
+              email: "fixture@example.test",
+              name: "Fixture User",
+              role: "admin",
+              status: "active",
+              mfaEnrolled: true,
+              lastSignInAt: null,
+              memberships: [],
+            },
+          ],
+          nextCursor: null,
+        },
+      });
+    if (
+      url.pathname === "/api/v1/admin/organizations" &&
+      request.method() === "GET"
+    )
+      return route.fulfill({
+        json: {
+          items: state.archived
+            ? []
+            : [
+                {
+                  id: "fixture-org",
+                  name: "Fixture Hotel",
+                  status: "active",
+                  owners: ["owner@example.test"],
+                  memberCount: 1,
+                  gateCount: state.gates ?? 0,
+                  products: ["host"],
+                },
+              ],
+          nextCursor: null,
+        },
+      });
+    if (url.pathname === "/api/v1/admin/organizations/fixture-org")
+      return route.fulfill({
+        json: {
+          organization: {
+            id: "fixture-org",
+            name: "Fixture Hotel",
+            status: "active",
+            version: 4,
+          },
+          members: [],
+          impact: {
+            members: 1,
+            properties: 2,
+            rooms: 3,
+            openReservations: 4,
+            gates: state.gates ?? 0,
+            systems: state.gates ? [{ name: "Front gate" }] : [],
+          },
+        },
+      });
+    if (
+      url.pathname === "/api/v1/organizations/fixture-org" &&
+      request.method() === "DELETE"
+    ) {
+      state.archived = true;
+      return route.fulfill({
+        json: { organization: { status: "archived" }, historyRetained: true },
+      });
+    }
     return route.fulfill({ json: { items: [], nextCursor: null } });
   });
   const page = await context.newPage();
@@ -184,7 +295,10 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
     }
   });
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
-  t.after(() => new Promise((resolve) => server.close(resolve)));
+  t.after(() => {
+    server.closeAllConnections();
+    return new Promise((resolve) => server.close(resolve));
+  });
   const browser = await chromium.launch({
     channel: process.env.WIFIGATE_BROWSER_CHANNEL ?? "chrome",
     headless: true,
@@ -488,7 +602,11 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         .getByText("This support approval is unavailable, expired or revoked.")
         .waitFor();
       assert.equal(await support.getByText(/jobs.*records 4/).count(), 0);
-      assert.equal(fixture.page.url(), origin + "/dashboard/host/");
+      assert.equal(new URL(fixture.page.url()).pathname, "/dashboard/host/");
+      assert.equal(
+        new URL(fixture.page.url()).searchParams.get("view"),
+        "support",
+      );
       assert.equal(
         await fixture.page.locator("#dashboard-content").isVisible(),
         true,
@@ -675,4 +793,259 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       await expired.context.close();
     },
   );
+
+  await t.test(
+    "legacy API dashboard entry preserves Host access and leaves other products unavailable",
+    async () => {
+      const fixture = await scenario(browser, { legacy: true });
+      await fixture.page.goto(origin + "/dashboard/");
+      await fixture.page
+        .locator('[data-product="host"][data-state="active"] a')
+        .click();
+      await fixture.page
+        .locator("#dashboard-content")
+        .waitFor({ state: "visible" });
+      assert.ok(fixture.calls.some((call) => call.path === "/api/v1/users/me"));
+      assert.equal(
+        await fixture.page.locator('[data-view="overview"]:visible').count(),
+        0,
+      );
+      assert.deepEqual(fixture.errors, []);
+      await fixture.context.close();
+    },
+  );
+
+  await t.test(
+    "owner invitation is reachable and accepts only after fresh authenticator verification",
+    async (t) => {
+      const fixture = await scenario(browser, {
+        invited: true,
+        enrolled: true,
+        verified: true,
+      });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      await page.goto(origin + "/dashboard/host/");
+      await page.locator("[data-cookie-reject]").click();
+      await page
+        .getByRole("button", { name: "Team invitations", exact: true })
+        .click();
+      await page
+        .getByRole("button", { name: "Accept team invitation" })
+        .click();
+      await page.locator("#mfa-challenge").waitFor({ state: "visible" });
+      assert.equal(fixture.state.accepted, undefined);
+      await page.evaluate(() => window.dispatchEvent(new Event("focus")));
+      await page.locator('#mfa-challenge input[name="code"]').fill("123456");
+      await page.locator('#mfa-challenge button[type="submit"]').click();
+      await page
+        .getByText("No pending team invitations.", { exact: true })
+        .waitFor();
+      assert.equal(fixture.state.accepted, true);
+      assert.deepEqual(fixture.errors, []);
+    },
+  );
+
+  await t.test(
+    "unenrolled invited owner can reach authenticator setup and return",
+    async (t) => {
+      const fixture = await scenario(browser, { invited: true });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      await page.goto(origin + "/dashboard/host/");
+      await page.locator("[data-cookie-reject]").click();
+      await page
+        .getByRole("button", { name: "Team invitations", exact: true })
+        .click();
+      await page
+        .getByRole("button", { name: "Accept team invitation" })
+        .click();
+      await page.locator("#mfa-enrollment").waitFor({ state: "visible" });
+      assert.equal(fixture.state.accepted, undefined);
+      await page.locator("#cancel-enrollment").click();
+      await page
+        .getByRole("button", { name: "Team invitations", exact: true })
+        .click();
+      await page
+        .getByRole("button", { name: "Accept team invitation" })
+        .waitFor();
+      assert.deepEqual(fixture.errors, []);
+    },
+  );
+
+  await t.test(
+    "Overview creates an owner-designated organization after fresh MFA",
+    async (t) => {
+      const fixture = await scenario(browser, {
+        admin: true,
+        enrolled: true,
+        verified: true,
+      });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      await page.goto(origin + "/dashboard/host/overview/?tab=organizations");
+      await page.locator("[data-cookie-reject]").click();
+      await page
+        .locator("#admin-overview")
+        .getByRole("button", { name: "Create organization", exact: true })
+        .click();
+      const modal = page.locator(".admin-dialog");
+      await modal.getByLabel("Organization name").fill("New Hotel");
+      await modal.getByLabel("Time zone").fill("UTC");
+      await modal.getByLabel("Owner email").fill("new-owner@example.test");
+      await modal
+        .getByRole("button", { name: "Create organization", exact: true })
+        .click();
+      await page.locator('#mfa-challenge input[name="code"]').fill("123456");
+      await page.locator('#mfa-challenge button[type="submit"]').click();
+      await modal.waitFor({ state: "detached" });
+      const created = fixture.calls.find(
+        (call) =>
+          call.method === "POST" && call.path === "/api/v1/admin/organizations",
+      );
+      assert.deepEqual(created.body, {
+        name: "New Hotel",
+        timezone: "UTC",
+        ownerEmail: "new-owner@example.test",
+      });
+      assert.ok(created.key);
+      assert.deepEqual(fixture.errors, []);
+    },
+  );
+
+  for (const mobile of [false, true])
+    await t.test(
+      `administrator Overview, fresh MFA and archive confirmation (${mobile ? "mobile" : "desktop"})`,
+      async (t) => {
+        const fixture = await scenario(browser, {
+          admin: true,
+          enrolled: true,
+          verified: true,
+          mobile,
+        });
+        t.after(() => fixture.context.close());
+        const page = fixture.page;
+        await page.goto(origin + "/dashboard/host/overview/?tab=admins");
+        await page.locator("[data-cookie-reject]").click();
+        await page
+          .locator("#admin-overview .admin-row")
+          .waitFor({ state: "visible" });
+        await page.getByText("Actions", { exact: true }).first().click();
+        assert.equal(
+          await page
+            .locator("#admin-overview")
+            .getByRole("button", { name: "Remove", exact: true })
+            .isDisabled(),
+          true,
+        );
+        await page.locator('[data-tab="organizations"]').click();
+        await page.locator('[data-tab="users"]').click();
+        await page.goBack();
+        await page.waitForFunction(
+          () =>
+            document
+              .querySelector('[data-tab="organizations"]')
+              .getAttribute("aria-selected") === "true",
+        );
+        await page.goBack();
+        await page.waitForFunction(
+          () =>
+            document
+              .querySelector('[data-tab="admins"]')
+              .getAttribute("aria-selected") === "true",
+        );
+        await page.goForward();
+        await page.waitForFunction(
+          () =>
+            document
+              .querySelector('[data-tab="organizations"]')
+              .getAttribute("aria-selected") === "true",
+        );
+        await page
+          .getByRole("button", { name: "Fixture Hotel", exact: true })
+          .waitFor();
+        if (process.env.WIFIGATE_SCREENSHOT_DIR)
+          await page.screenshot({
+            path: path.join(
+              process.env.WIFIGATE_SCREENSHOT_DIR,
+              `v1-overview-${mobile ? "mobile" : "desktop"}.png`,
+            ),
+            fullPage: true,
+          });
+        fixture.state.gates = 1;
+        await page
+          .locator("#admin-overview")
+          .getByRole("button", { name: "Archive organization" })
+          .click();
+        await page
+          .locator(".admin-dialog")
+          .getByLabel("Type the organization name")
+          .fill("Fixture Hotel");
+        assert.equal(
+          await page
+            .locator(".admin-dialog")
+            .getByRole("button", { name: "Archive organization", exact: true })
+            .isDisabled(),
+          true,
+        );
+        assert.match(
+          await page.locator(".admin-dialog").textContent(),
+          /Front gate/,
+        );
+        await page
+          .locator(".admin-dialog")
+          .getByRole("button", { name: "Cancel" })
+          .click();
+        fixture.state.gates = 0;
+        await page
+          .locator("#admin-overview")
+          .getByRole("button", { name: "Archive organization" })
+          .click();
+        await page
+          .locator(".admin-dialog")
+          .getByLabel("Type the organization name")
+          .fill("Wrong name");
+        assert.equal(
+          await page
+            .locator(".admin-dialog")
+            .getByRole("button", { name: "Archive organization", exact: true })
+            .isDisabled(),
+          true,
+        );
+        await page
+          .locator(".admin-dialog")
+          .getByLabel("Type the organization name")
+          .fill("Fixture Hotel");
+        await page
+          .locator(".admin-dialog")
+          .getByRole("button", { name: "Archive organization", exact: true })
+          .click();
+        await page.locator("#mfa-challenge").waitFor({ state: "visible" });
+        await page.evaluate(() => window.dispatchEvent(new Event("focus")));
+        await page.locator('#mfa-challenge input[name="code"]').fill("123456");
+        await page.locator('#mfa-challenge button[type="submit"]').click();
+        await page
+          .locator("#admin-overview")
+          .getByText("No matching records.", { exact: true })
+          .waitFor();
+        const archived = fixture.calls.find(
+          (call) =>
+            call.method === "DELETE" &&
+            call.path === "/api/v1/organizations/fixture-org",
+        );
+        assert.deepEqual(archived.body, {
+          confirmName: "Fixture Hotel",
+          version: 4,
+        });
+        assert.ok(archived.key);
+        assert.ok(fixture.calls.includes("reauth"));
+        assert.ok(
+          await page.evaluate(
+            () => document.documentElement.scrollWidth <= innerWidth,
+          ),
+        );
+        assert.deepEqual(fixture.errors, []);
+        await fixture.context.close();
+      },
+    );
 });
