@@ -103,6 +103,7 @@ test("workspace isolates feature failures, permissions, paging and browser histo
       return route.continue();
     });
     await page.goto(origin + "/dashboard/host/" + query);
+    await page.addStyleTag({ url: origin + "/css/host-interface.css" });
     await page.evaluate(() => window.workspaceReady);
     return { page, errors };
   }

@@ -8,19 +8,23 @@
     <title>Calendar | WIFIGATE Host</title>
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/css/host-portal.css?v=20261007b" />
-    <link
-      rel="stylesheet"
-      href="/css/host-workspace.css?v=20261009-workspace"
-    />
+    <link rel="stylesheet" href="/css/host-workspace.css?v=20261009-layout" />
     <link rel="stylesheet" href="/css/platform.css" />
     <script
       type="module"
-      src="/js/host-dashboard.bundle.js?v=20261009-workspace"
+      src="/js/host-dashboard.bundle.js?v=20261009-design"
     ></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
-    <link rel="stylesheet" href="/css/host-admin.css?v=20261009-workspace" />
+    <link rel="stylesheet" href="/css/host-admin.css?v=20261009-design" />
+    <link rel="stylesheet" href="/css/host-interface.css?v=20261009-design" />
   </head>
   <body class="portal-dashboard" data-host-view="Calendar" data-product="host">
+    <a
+      class="workspace-skip-link"
+      href="#workspace-main"
+      data-host-copy="Skip to workspace"
+      >Skip to workspace</a
+    >
     <aside
       id="host-sidebar"
       class="host-sidebar"
@@ -55,7 +59,7 @@
         ></span>
       </button>
     </aside>
-    <main class="portal-shell">
+    <main id="workspace-main" class="portal-shell" tabindex="-1">
       <header class="portal-header">
         <a
           class="brand"
@@ -64,6 +68,12 @@
           data-host-label="WIFIGATE home"
           ><img src="/assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE"
         /></a>
+        <div class="workspace-breadcrumb">
+          <span>WIFIGATE Host</span><span aria-hidden="true">/</span
+          ><strong id="workspace-current-view" data-host-copy="Calendar"
+            >Calendar</strong
+          >
+        </div>
         <div class="account-menu">
           <span id="account-name"></span
           ><button

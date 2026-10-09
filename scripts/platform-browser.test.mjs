@@ -307,6 +307,131 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
   const origin = `http://127.0.0.1:${server.address().port}`;
 
   await t.test(
+    "focus checks preserve the directory and detect access revocation",
+    async (t) => {
+      const fixture = await scenario(browser, {
+        admin: true,
+        enrolled: true,
+        verified: true,
+      });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      await page.goto(origin + "/dashboard/host/overview/?tab=organizations");
+      await page.locator("[data-cookie-reject]").click();
+      await page
+        .getByRole("button", { name: "Fixture Hotel", exact: true })
+        .waitFor();
+      await page.getByLabel("Search this directory").fill("Unsaved search");
+      const initialDirectoryCalls = fixture.calls.filter(
+        (call) => call.path === "/api/v1/admin/overview",
+      ).length;
+      const response = page.waitForResponse(
+        (res) => new URL(res.url()).pathname === "/api/v1/users/me",
+      );
+      await page.evaluate(() => {
+        window.directoryBeforeFocus =
+          document.querySelector("#admin-directory");
+        window.dispatchEvent(new Event("focus"));
+        window.dispatchEvent(new Event("focus"));
+      });
+      await response;
+      assert.equal(await page.locator("#access-panel").isVisible(), false);
+      assert.equal(
+        await page.getByLabel("Search this directory").inputValue(),
+        "Unsaved search",
+      );
+      assert.equal(
+        await page.evaluate(
+          () =>
+            window.directoryBeforeFocus ===
+            document.querySelector("#admin-directory"),
+        ),
+        true,
+      );
+      assert.equal(
+        fixture.calls.filter((call) => call.path === "/api/v1/admin/overview")
+          .length,
+        initialDirectoryCalls,
+      );
+
+      fixture.state.admin = false;
+      await page.evaluate(() => window.dispatchEvent(new Event("focus")));
+      await page.locator("#admin-overview").waitFor({ state: "hidden" });
+      await page.locator("#dashboard-content").waitFor({ state: "visible" });
+      assert.equal(
+        await page
+          .locator('#host-section-navigation [data-view-id="overview"]')
+          .isVisible(),
+        false,
+      );
+
+      fixture.state.host = "blocked";
+      await page.evaluate(() => window.dispatchEvent(new Event("focus")));
+      await page.waitForURL(origin + "/dashboard/");
+      assert.equal(await page.locator("#host-management").count(), 0);
+      assert.deepEqual(fixture.errors, []);
+    },
+  );
+
+  await t.test(
+    "dashboard navigation stays compact and scrollable",
+    async (t) => {
+      const fixture = await scenario(browser, {
+        admin: true,
+        enrolled: true,
+        verified: true,
+      });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      await page.goto(origin + "/dashboard/host/overview/");
+      await page.locator("[data-cookie-reject]").click();
+      await page.locator("#admin-overview .admin-row").waitFor();
+
+      const navigation = page.locator("#host-section-navigation");
+      const overview = navigation.locator('[data-view-id="overview"]');
+      const overviewBounds = await overview.boundingBox();
+      assert.ok(
+        overviewBounds.height <= 48,
+        "Sidebar tabs must not stretch to fill the screen",
+      );
+      const directoryTab = await page
+        .locator('[data-tab="admins"]')
+        .boundingBox();
+      assert.ok(
+        directoryTab.height <= 84,
+        "Directory tabs should stay compact",
+      );
+
+      await page.setViewportSize({ width: 1280, height: 420 });
+      await navigation.hover();
+      await page.mouse.wheel(0, 600);
+      await page.waitForFunction(
+        () => document.querySelector("#host-section-navigation").scrollTop > 0,
+      );
+      await overview.click();
+      const profile = await page.locator("#sidebar-profile").boundingBox();
+      const scrolledOverview = await overview.boundingBox();
+      assert.ok(
+        scrolledOverview.y + scrolledOverview.height <= profile.y,
+        "Profile must not cover navigation",
+      );
+
+      await page.setViewportSize({ width: 390, height: 420 });
+      await page.locator(".workspace-menu-toggle").click();
+      await overview.click();
+      await page.mouse.move(350, 350);
+      await page.mouse.wheel(0, 600);
+      await page.waitForFunction(() => window.scrollY > 0);
+      assert.ok(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+      );
+      assert.deepEqual(fixture.errors, []);
+    },
+  );
+
+  await t.test(
     "EN and Hebrew mobile picker keep Host, Pay, Manager order and use only platform GET",
     async () => {
       for (const mobile of [false, true]) {

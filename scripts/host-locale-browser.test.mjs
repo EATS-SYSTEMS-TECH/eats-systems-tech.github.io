@@ -232,6 +232,44 @@ test("selected Host language controls layout, translated forms and history while
         { exact: true },
       )
       .waitFor();
+    for (const view of [
+      "properties",
+      "systems",
+      "team",
+      "automation",
+      "integrations",
+      "billing",
+      "support",
+      "organization",
+    ]) {
+      await page.setViewportSize({ width: 1440, height: 1000 });
+      await page
+        .locator(`#host-section-navigation [data-view-id="${view}"]`)
+        .click();
+      await page
+        .locator(`[data-workspace-view="${view}"][data-loaded="true"]`)
+        .waitFor();
+      for (const width of [1440, 390, 320]) {
+        await page.setViewportSize({ width, height: 900 });
+        assert.ok(
+          await page.evaluate(
+            () => document.documentElement.scrollWidth <= innerWidth + 1,
+          ),
+          `${language} ${view} overflows at ${width}px`,
+        );
+        if (process.env.WIFIGATE_SCREENSHOT_DIR && width !== 320) {
+          await mkdir(process.env.WIFIGATE_SCREENSHOT_DIR, { recursive: true });
+          await page.screenshot({
+            path: path.join(
+              process.env.WIFIGATE_SCREENSHOT_DIR,
+              `host-${language}-${view}-${width}.png`,
+            ),
+            fullPage: true,
+          });
+        }
+      }
+    }
+    await page.setViewportSize({ width: 1440, height: 1000 });
     await page.locator('button[data-view="Calendar"]').click();
     for (const width of [1440, 768, 390, 320]) {
       await page.setViewportSize({ width, height: 1000 });
