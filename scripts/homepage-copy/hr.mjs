@@ -102,7 +102,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Pregled sustava WIFIGATE: uređaj IP67, mobilna aplikacija i upravljačka pločica sa stezaljkama, USB Type-C i ulazom 12-24V, Wi-Fi 6, Bluetooth LE i prijamnikom 433,92MHz, uz mogućnosti platforme: 500 korisnika, 20 administratora, neograničene pozivnice za goste, API za automatske pozivnice za goste, bez SIM kartice i usmjerivača, stabilnost, brza pozivnica za goste, povijest od 90 dana, automatsko otvaranje, do 50 događaja, digitalno uparivanje RF daljinskih upravljača, sigurnost i privatnost te bez pretplate.",
+    imageAlt: "Pregled sustava WIFIGATE: uređaj IP67, mobilna aplikacija i upravljačka pločica sa stezaljkama, USB Type-C i ulazom 12-24V, Wi-Fi 6, Bluetooth LE i prijamnikom 433,92MHz, uz mogućnosti platforme: do 5000 korisnika i 20 administratora, neograničene pozivnice za goste, API za automatske pozivnice za goste, bez SIM kartice i usmjerivača, stabilnost, brza pozivnica za goste, povijest od 90 dana, automatsko otvaranje, do 50 događaja, digitalno uparivanje RF daljinskih upravljača, sigurnost i privatnost te bez pretplate.",
     eyebrow: "Video upute",
     title: "Jednostavno od prvog dana.",
     subtitle: "Jasne upute za instalaciju, svakodnevno korištenje i napredne postavke.",

@@ -490,7 +490,7 @@ key   = direction-specific HKDF-SHA256 key bound to transcriptHash, sessionId an
       <li data-lang="he"><code>mode</code> הוא <code>MERGE</code> או <code>REPLACE</code>; ברירת המחדל MERGE. REPLACE דורש confirmation נוסף.</li><li data-lang="en"><code>mode</code> is <code>MERGE</code> or <code>REPLACE</code>; MERGE is the default. REPLACE requires extra confirmation.</li>
       <li data-lang="he">staging נכתב לקבצים זמניים. power loss לפני commit משאיר live collection ללא שינוי.</li><li data-lang="en">Staging writes temporary files. Power loss before commit leaves the live collection unchanged.</li>
       <li data-lang="he">שגיאות מוחזרות בעמודים עם row number, stable code ו־field. אין echo של PII ב־logs.</li><li data-lang="en">Errors are paginated with row number, stable code and field. Logs never echo PII.</li>
-      <li data-lang="he">ייבוא 5,000 משתמשים חייב להישאר bounded בזיכרון: parse וכתיבה streaming, ללא JSON document של כל הקובץ.</li><li data-lang="en">A 5,000-user import must remain memory-bounded: streaming parse and writes, never one whole-file JSON document.</li>
+      <li data-lang="he">ייבוא 5,000 משתמשים (לוח 16MB) חייב להישאר bounded בזיכרון: parse וכתיבה streaming, ללא JSON document של כל הקובץ.</li><li data-lang="en">A 5,000-user import (16MB board) must remain memory-bounded: streaming parse and writes, never one whole-file JSON document.</li>
     </ul>
 
     <h3 data-lang="he">QR ו־קבצים אחרים</h3><h3 data-lang="en">QR and other files</h3>
@@ -642,8 +642,8 @@ C:\WiFiGate\lib\WG_BLEAdminProtocol\
   "limits": {
     "maxControlLineBytes": 2048,
     "maxPageItems": 20,
-    "maxUsers": 500,
-    "maxAdmins": 100,
+    "maxUsers": 5000,
+    "maxAdmins": 20,
     "maxEvents": 10,
     "minBulkMtu": 185,
     "maxBulkCredits": 32
@@ -651,7 +651,7 @@ C:\WiFiGate\lib\WG_BLEAdminProtocol\
   "configRevision": 42
 }</pre></div>
 
-    <div class="callout"><p data-lang="he"><strong>8MB ו־16MB:</strong> capability ו־limits מגיעים מה־build בפועל. History יכול להיעדר ב־8MB. האפליקציה אינה מנחשת לפי version string או flash size בלבד.</p><p data-lang="en"><strong>8MB and 16MB:</strong> capabilities and limits come from the actual build. History may be absent on 8MB. The app never guesses from version string or flash size alone.</p></div>
+    <div class="callout"><p data-lang="he"><strong>8MB ו־16MB:</strong> capability ו־limits מגיעים מה־build בפועל: לוח 8MB מדווח <code>maxUsers</code> ‏500 ו־<code>maxAdmins</code> ‏20, לוח 16MB מדווח <code>maxUsers</code> ‏5000 ו־<code>maxAdmins</code> ‏20 (הדוגמה למעלה היא לוח 16MB). History יכול להיעדר ב־8MB. האפליקציה אינה מנחשת לפי version string או flash size בלבד.</p><p data-lang="en"><strong>8MB and 16MB:</strong> capabilities and limits come from the actual build: the 8MB board reports <code>maxUsers</code> 500 and <code>maxAdmins</code> 20, the 16MB board reports <code>maxUsers</code> 5000 and <code>maxAdmins</code> 20 (the example above is a 16MB board). History may be absent on 8MB. The app never guesses from version string or flash size alone.</p></div>
   </section>
 
   <section class="section" id="migration">
@@ -767,7 +767,7 @@ Allowed only in migration history / this specification:
     <div class="checklist">
       <div class="check"><span data-lang="he">100% משורות parity עברו Android ו־iOS על חומרה אמיתית.</span><span data-lang="en">100% of parity rows pass on real Android and iOS hardware.</span></div>
       <div class="check"><span data-lang="he">FOTA מלא, resume, manifest authentication פגום, anti-rollback ו־boot rollback עברו.</span><span data-lang="en">Full FOTA, resume, bad manifest authentication, anti-rollback and boot rollback pass.</span></div>
-      <div class="check"><span data-lang="he">500/5,000 users import/export round-trip ללא אובדן.</span><span data-lang="en">500/5,000-user import/export round-trip has no loss.</span></div>
+      <div class="check"><span data-lang="he">import/export round-trip של 500 users (לוח 8MB) ושל 5,000 users (לוח 16MB) ללא אובדן.</span><span data-lang="en">Import/export round-trip of 500 users (8MB board) and 5,000 users (16MB board) has no loss.</span></div>
       <div class="check"><span data-lang="he">פקודות P0 של release/close עומדות ב־latency בזמן bulk; OPEN מקבל BUSY עקבי.</span><span data-lang="en">P0 release/close commands meet latency while bulk runs; OPEN receives a consistent BUSY.</span></div>
       <div class="check"><span data-lang="he">72 שעות soak ללא memory growth, watchdog או stuck session.</span><span data-lang="en">72-hour soak with no memory growth, watchdog or stuck session.</span></div>
       <div class="check"><span data-lang="he">security review מאשר nonce, replay, authorization ו־destructive flow.</span><span data-lang="en">Security review approves nonce, replay, authorization and destructive flow.</span></div>
@@ -1052,7 +1052,7 @@ ProfileKeyV1 = {"countryCode":"972","localNumber":"509876543"}
 phone        = countryCode + localNumber // derived response/sort key; digits only</pre></div>
     <ul>
       <li data-lang="he">שינוי מספר אינו rename סמוי: הוא UPSERT למפתח החדש ואז DELETE למפתח הישן בתוך transaction מפורש של ה־UI. מספרים לעולם אינם JSON number.</li><li data-lang="en">Changing a phone number is not a hidden rename: the UI performs an UPSERT for the new key and then a DELETE for the old key in an explicit transaction. Phone components are never JSON numbers.</li>
-      <li data-lang="he">ברירת המחדל היא עד 500 Users ועד 100 Admins, אך <code>ADMIN_GET_CAPABILITIES</code> מחזיר את מגבלות ה־build. אסור למחוק את ה־Admin הפעיל או את ה־Admin האחרון.</li><li data-lang="en">Defaults are up to 500 Users and 100 Admins, but <code>ADMIN_GET_CAPABILITIES</code> reports build limits. The active Admin and final Admin cannot be deleted.</li>
+      <li data-lang="he">לוח 8MB מחזיק עד 500 Users ועד 20 Admins, ולוח 16MB עד 5,000 Users ועד 20 Admins; <code>ADMIN_GET_CAPABILITIES</code> מחזיר אותן ב־<code>data.limits.maxUsers</code> / <code>maxAdmins</code>, והאפליקציה לוקחת את הקיבולת משם. אסור למחוק את ה־Admin הפעיל או את ה־Admin האחרון.</li><li data-lang="en">The 8MB board holds up to 500 Users and 20 Admins, and the 16MB board up to 5,000 Users and 20 Admins; <code>ADMIN_GET_CAPABILITIES</code> reports them in <code>data.limits.maxUsers</code> / <code>maxAdmins</code>, and the app takes capacity from there. The active Admin and final Admin cannot be deleted.</li>
       <li data-lang="he"><code>SystemNameV1</code> הוא string לאחר trim של רווח ASCII, באורך 1–20 Unicode code points. ASCII מותר: אותיות, ספרות, space ו־<code>- _ . , ( ) ' " / \</code>; UTF-8 תקין שאינו control/format/private-use/noncharacter מותר לפי validator הקיים.</li><li data-lang="en"><code>SystemNameV1</code> is a string after trimming ASCII spaces, 1–20 Unicode code points long. Allowed ASCII is letters, digits, space and <code>- _ . , ( ) ' " / \</code>; valid UTF-8 outside control, format, private-use and noncharacter ranges follows the existing validator.</li>
     </ul>
 

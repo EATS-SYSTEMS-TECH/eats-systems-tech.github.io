@@ -102,7 +102,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Gambaran keseluruhan sistem WIFIGATE: peranti IP67, aplikasi mudah alih dan papan kawalan dengan blok terminal skru, USB Type-C dan input 12-24V, Wi-Fi 6, Bluetooth LE serta penerima 433.92MHz, bersama keupayaan platform - 500 pengguna, 20 pentadbir, jemputan tetamu tanpa had, API jemputan tetamu automatik, tanpa SIM atau penghala, kestabilan, jemputan tetamu pantas, sejarah 90 hari, buka automatik, sehingga 50 acara, pembelajaran digital alat kawalan jauh RF, keselamatan dan privasi, serta tiada yuran langganan.",
+    imageAlt: "Gambaran keseluruhan sistem WIFIGATE: peranti IP67, aplikasi mudah alih dan papan kawalan dengan blok terminal skru, USB Type-C dan input 12-24V, Wi-Fi 6, Bluetooth LE serta penerima 433.92MHz, bersama keupayaan platform - sehingga 5000 pengguna dan 20 pentadbir, jemputan tetamu tanpa had, API jemputan tetamu automatik, tanpa SIM atau penghala, kestabilan, jemputan tetamu pantas, sejarah 90 hari, buka automatik, sehingga 50 acara, pembelajaran digital alat kawalan jauh RF, keselamatan dan privasi, serta tiada yuran langganan.",
     eyebrow: "Video tutorial",
     title: "Mudah sejak hari pertama.",
     subtitle: "Panduan yang jelas untuk pemasangan, penggunaan harian dan tetapan lanjutan.",

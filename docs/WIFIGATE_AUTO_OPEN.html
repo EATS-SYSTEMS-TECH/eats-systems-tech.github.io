@@ -188,8 +188,8 @@ footer{margin-top:26px;padding:18px;color:var(--muted);border:1px solid var(--li
     </div>
 
     <div class="callout">
-      <p data-lang="he"><strong>ההתנגשות נתפסת רק בשער.</strong> שני טלפונים לעולם לא נפגשים, ו‑5000 דיירים שמגרילים 32 ביט מתנגשים על שער אחד בערך ב‑0.3%. השער הוא המקום היחיד שרואה את שניהם, ולכן הוא היחיד שיכול לסרב.</p>
-      <p data-lang="en"><strong>A clash can only be caught at the gate.</strong> Two phones never meet, and 5000 residents drawing 32 bits collide on one gate at roughly 0.3%. The gate is the only place that sees both, so it is the only place that can refuse.</p>
+      <p data-lang="he"><strong>ההתנגשות נתפסת רק בשער.</strong> שני טלפונים לעולם לא נפגשים, ו‑5,020 מפתחות Auto Open (לוח 16 MB: ‏5,000 users ו‑20 admins) שמגרילים 32 ביט מתנגשים על שער אחד בערך ב‑0.29% (בערך 1 ל‑340); בלוח 8 MB, ‏520 מפתחות, בערך ב‑0.003% (בערך 1 ל‑32,000). השער הוא המקום היחיד שרואה את שניהם, ולכן הוא היחיד שיכול לסרב.</p>
+      <p data-lang="en"><strong>A clash can only be caught at the gate.</strong> Two phones never meet, and 5,020 Auto Open keys (16 MB board: 5,000 users and 20 admins) drawing 32 bits collide on one gate at roughly 0.29% (about 1 in 340); on the 8 MB board, 520 keys, at roughly 0.003% (about 1 in 32,000). The gate is the only place that sees both, so it is the only place that can refuse.</p>
       <p data-lang="he">מזהה השער יצא מגזירת ה‑UUID בגלל זה. ערבובו היה מייצר פרסום שונה לכל שער — וטלפון יכול להריץ אחד.</p>
       <p data-lang="en">The gate id left the UUID derivation for the same reason. Mixing it in would produce a different advertisement per gate, and a phone can run one.</p>
     </div>
@@ -415,7 +415,7 @@ background   serviceUUIDs: none                       overflow: 16 bits   (110 p
       <dt><span data-lang="he">ביטים נדרשים</span><span data-lang="en">Bits required</span></dt><dd>≥ 12</dd>
       <dt><span data-lang="he">ביטים בפועל</span><span data-lang="en">Bits in practice</span></dt><dd>~15</dd>
       <dt><span data-lang="he">מרחב הקוד</span><span data-lang="en">Codespace</span></dt><dd>C(120,15) ≈ 4.7 × 10<sup>18</sup></dd>
-      <dt><span data-lang="he">דיירים לשער</span><span data-lang="en">Residents per gate</span></dt><dd><span data-lang="he">עד 5,000</span><span data-lang="en">up to 5,000</span></dd>
+      <dt><span data-lang="he">דיירים לשער</span><span data-lang="en">Residents per gate</span></dt><dd><span data-lang="he">עד 5,020 בלוח 16 MB ‏(5,000 users ו‑20 admins); עד 520 בלוח 8 MB</span><span data-lang="en">up to 5,020 on the 16 MB board (5,000 users and 20 admins); up to 520 on the 8 MB board</span></dd>
       <dt><span data-lang="he">זיהוי</span><span data-lang="en">Recognition</span></dt><dd><span data-lang="he">בדיקת הכלה, סריקה אחת</span><span data-lang="en">subset test, single scan</span></dd>
     </dl>
 
@@ -440,8 +440,8 @@ background   serviceUUIDs: none                       overflow: 16 bits   (110 p
     </table></div>
 
     <div class="callout bad">
-      <p data-lang="he"><strong>בגרסה שגזרה שנים‑עשר, 43.4% מהדיירים קיבלו פחות מ‑12 ביטים.</strong> זה מעולם לא שבר את הזיהוי — השער שומר את המסכה שמדד, והכלה עובדת על 11 ביטים בדיוק כמו על 12. מה שנשבר היה המרווח, בשקט: מול 5000 דיירים, הסיכוי של טלפון זר אחד להתאים הוא 6.1×10⁻¹² ב‑12 ביטים, אבל 3.4×10⁻¹⁰ ב‑11 ו‑1.2×10⁻⁸ ב‑10.</p>
-      <p data-lang="en"><strong>When twelve were derived, 43.4% of residents ended up with fewer than twelve bits.</strong> That never broke recognition — the gate stores the mask it measured, and containment works on eleven bits as well as on twelve. What it broke was the margin, silently: against 5000 residents, one foreign phone's chance of matching is 6.1×10⁻¹² at twelve bits, but 3.4×10⁻¹⁰ at eleven and 1.2×10⁻⁸ at ten.</p>
+      <p data-lang="he"><strong>בגרסה שגזרה שנים‑עשר, 43.4% מהדיירים קיבלו פחות מ‑12 ביטים.</strong> זה מעולם לא שבר את הזיהוי — השער שומר את המסכה שמדד, והכלה עובדת על 11 ביטים בדיוק כמו על 12. מה שנשבר היה המרווח, בשקט: מול 5,020 דיירים (לוח 16 MB), הסיכוי של טלפון זר אחד להתאים הוא 6.1×10⁻¹² ב‑12 ביטים, אבל 3.4×10⁻¹⁰ ב‑11 ו‑1.2×10⁻⁸ ב‑10.</p>
+      <p data-lang="en"><strong>When twelve were derived, 43.4% of residents ended up with fewer than twelve bits.</strong> That never broke recognition — the gate stores the mask it measured, and containment works on eleven bits as well as on twelve. What it broke was the margin, silently: against 5,020 residents (16 MB board), one foreign phone's chance of matching is 6.1×10⁻¹² at twelve bits, but 3.4×10⁻¹⁰ at eleven and 1.2×10⁻⁸ at ten.</p>
       <p data-lang="he">ובאופן מכריע, אף אחד לא היה יודע. מסכה של 11 ביטים נראית בדיוק כמו מסכה של 12 מכל מקום שאפשר לבדוק ממנו.</p>
       <p data-lang="en">And crucially, nobody would have known. An eleven-bit mask looks exactly like a twelve-bit one from every place you could check.</p>
     </div>
@@ -483,7 +483,7 @@ counter increments, repeated tails rejected, until 16 distinct UUIDs</pre></div>
       <thead><tr>
         <th class="num">W</th>
         <th><span data-lang="he">מרחב קוד</span><span data-lang="en">Codespace</span></th>
-        <th><span data-lang="he">סיכון מול 5000 דיירים</span><span data-lang="en">Risk against 5000 residents</span></th>
+        <th><span data-lang="he">סיכון מול 5,020 דיירים (לוח 16 MB)</span><span data-lang="en">Risk against 5,020 residents (16 MB board)</span></th>
         <th><span data-lang="he">הערה</span><span data-lang="en">Note</span></th>
       </tr></thead>
       <tbody>
@@ -909,8 +909,8 @@ if (!LittleFS.exists(path))
     <div class="callout bad">
       <p data-lang="he"><strong>למה זה קריטי דווקא כאן.</strong> הפונקציה הזו היא נתיב הזיהוי של Android, והיא רצה על <em>כל</em> beacon בפורמט WiFiGate שהשער שומע. דייר של מערכת WiFiGate <em>אחרת</em> נושא מפתח שהשער הזה לעולם לא יחזיק — ומאז שהמפתח שייך לדייר ולא לשער, הזר הזה הוא המקרה השכיח.</p>
       <p data-lang="en"><strong>Why it matters here in particular.</strong> This function is the Android recognition path, and it runs for <em>every</em> WiFiGate-format beacon the gate hears. A resident of a <em>different</em> WiFiGate carries a key this gate will never hold — and since the key became the resident's rather than the gate's, that stranger is the common case.</p>
-      <p data-lang="he">הייתה כאן נפילה לאחור שסרקה את כל הספרייה אחרי ש‑<code>exists()</code> נכשל, «למקרה שהאותיות התחלפו». היא לא יכלה למצוא דבר — <code>IsWellFormed</code> מקבל <code>[0-9A-F]</code> בלבד וכל רשומה נכתבת באותיות גדולות — אבל היא כן קראה עד 5000 קבצי JSON בכל פעם שזר עבר ליד השער. הוסרה.</p>
-      <p data-lang="en">There used to be a fallback here that walked the whole directory after <code>exists()</code> failed, "in case the casing drifted". It could never find anything — <code>IsWellFormed</code> accepts <code>[0-9A-F]</code> only and every record is written uppercase — but it did read up to 5000 JSON files every time a stranger walked past the gate. Removed.</p>
+      <p data-lang="he">הייתה כאן נפילה לאחור שסרקה את כל הספרייה אחרי ש‑<code>exists()</code> נכשל, «למקרה שהאותיות התחלפו». היא לא יכלה למצוא דבר — <code>IsWellFormed</code> מקבל <code>[0-9A-F]</code> בלבד וכל רשומה נכתבת באותיות גדולות — אבל היא כן קראה עד 5,020 קבצי JSON בכל פעם שזר עבר ליד השער. הוסרה.</p>
+      <p data-lang="en">There used to be a fallback here that walked the whole directory after <code>exists()</code> failed, "in case the casing drifted". It could never find anything — <code>IsWellFormed</code> accepts <code>[0-9A-F]</code> only and every record is written uppercase — but it did read up to 5,020 JSON files every time a stranger walked past the gate. Removed.</p>
     </div>
 
     <div class="table-wrap"><table>
@@ -961,17 +961,17 @@ exists("/autoopen/&lt;observed as hex&gt;.json")  ->  miss, every time</pre></di
 
     <div class="table-wrap"><table>
       <thead><tr>
-        <th><span data-lang="he">לכל beacon של אייפון, 5000 דיירים</span><span data-lang="en">Per iPhone beacon, 5,000 residents</span></th>
+        <th><span data-lang="he">לכל beacon של אייפון, 5,020 דיירים (לוח 16 MB)</span><span data-lang="en">Per iPhone beacon, 5,020 residents (16 MB board)</span></th>
         <th><span data-lang="he">היום</span><span data-lang="en">Today</span></th>
         <th><span data-lang="he">עם האינדקס</span><span data-lang="en">With the index</span></th>
       </tr></thead>
       <tbody>
         <tr><td><span data-lang="he">קריאות מ‑LittleFS</span><span data-lang="en">LittleFS reads</span></td>
-          <td class="num"><span data-lang="he">עד 5,000 רשומות</span><span data-lang="en">up to 5,000 records</span></td><td class="num">~17</td></tr>
+          <td class="num"><span data-lang="he">עד 5,020 רשומות</span><span data-lang="en">up to 5,020 records</span></td><td class="num">~17</td></tr>
         <tr><td><span data-lang="he">השוואות מסכה</span><span data-lang="en">Mask comparisons</span></td>
-          <td class="num">5,000</td><td class="num">~700</td></tr>
+          <td class="num">5,020</td><td class="num">~700</td></tr>
         <tr><td><span data-lang="he">פתיחת רשומה מלאה</span><span data-lang="en">Full record opens</span></td>
-          <td class="num">5,000</td><td class="num"><span data-lang="he">1, רק אחרי התאמה</span><span data-lang="en">1, only after a match</span></td></tr>
+          <td class="num">5,020</td><td class="num"><span data-lang="he">1, רק אחרי התאמה</span><span data-lang="en">1, only after a match</span></td></tr>
       </tbody>
     </table></div>
 
@@ -1305,8 +1305,8 @@ exists("/autoopen/&lt;observed as hex&gt;.json")  ->  miss, every time</pre></di
     <ul>
       <li><span data-lang="he"><strong>אינדקס הביטים</strong> — מתואר במלואו ב<a href="#firmware">קושחה</a>. נבנה רק אחרי שלולאת הסריקה קיימת, כי היא זו שקובעת מה הוא צריך לספק.</span>
           <span data-lang="en"><strong>The bit index</strong> — described in full under <a href="#firmware">firmware</a>. Built only after the scan loop exists, because it is the loop that decides what the index must provide.</span></li>
-      <li><span data-lang="he"><strong>הכלה בין דיירים ברישום.</strong> היום נבדק שלמסכה יש ≥12 ביטים, לא שהיא אינה מכילה מסכה של דייר אחר באותו שער. הסיכון ≈2×10⁻⁶ ב‑5,000 דיירים — נמוך, אבל התוצאה היא שער שנפתח לאדם הלא נכון, ולכן אין לוותר עליה בשקט. המחיר היום הוא סריקת ספרייה ברישום; עם אינדקס הביטים היא כמעט חינם, ולכן מקומה כאן ולא קודם.</span>
-          <span data-lang="en"><strong>Inter-resident containment at enrolment.</strong> Today a mask is checked for ≥12 bits, not for whether it contains another resident&#39;s mask on the same gate. The risk is ≈2×10⁻⁶ at 5,000 residents — low, but the outcome is a gate opening for the wrong person, so it should not be dropped quietly. The cost today is a directory walk at enrolment; with the bit index it is nearly free, which is why it belongs here rather than earlier.</span></li>
+      <li><span data-lang="he"><strong>הכלה בין דיירים ברישום.</strong> היום נבדק שלמסכה יש ≥12 ביטים, לא שהיא אינה מכילה מסכה של דייר אחר באותו שער. הסיכון ≈2×10⁻⁶ ב‑5,020 דיירים (לוח 16 MB) — נמוך, אבל התוצאה היא שער שנפתח לאדם הלא נכון, ולכן אין לוותר עליה בשקט. המחיר היום הוא סריקת ספרייה ברישום; עם אינדקס הביטים היא כמעט חינם, ולכן מקומה כאן ולא קודם.</span>
+          <span data-lang="en"><strong>Inter-resident containment at enrolment.</strong> Today a mask is checked for ≥12 bits, not for whether it contains another resident&#39;s mask on the same gate. The risk is ≈2×10⁻⁶ at 5,020 residents (16 MB board) — low, but the outcome is a gate opening for the wrong person, so it should not be dropped quietly. The cost today is a directory walk at enrolment; with the bit index it is nearly free, which is why it belongs here rather than earlier.</span></li>
     </ul>
 
     <h3 data-lang="he">שלב 4 · הכנה לייצור</h3><h3 data-lang="en">Stage 4 · Production readiness</h3>

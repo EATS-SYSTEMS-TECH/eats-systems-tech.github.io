@@ -102,7 +102,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Vista general del sistema WIFIGATE: el dispositivo IP67, la aplicación móvil y la placa de control con bornes de tornillo, USB Type-C y entrada de 12-24V, Wi-Fi 6, Bluetooth LE y receptor de 433,92MHz, junto a las funciones de la plataforma: 500 usuarios, 20 administradores, invitaciones ilimitadas, API automática para invitaciones, sin SIM ni router, estabilidad, invitación rápida, historial de 90 días, apertura automática, hasta 50 eventos, programación digital de controles remotos RF, seguridad y privacidad, y sin cuotas de suscripción.",
+    imageAlt: "Vista general del sistema WIFIGATE: el dispositivo IP67, la aplicación móvil y la placa de control con bornes de tornillo, USB Type-C y entrada de 12-24V, Wi-Fi 6, Bluetooth LE y receptor de 433,92MHz, junto a las funciones de la plataforma: hasta 5000 usuarios y 20 administradores, invitaciones ilimitadas, API automática para invitaciones, sin SIM ni router, estabilidad, invitación rápida, historial de 90 días, apertura automática, hasta 50 eventos, programación digital de controles remotos RF, seguridad y privacidad, y sin cuotas de suscripción.",
     eyebrow: "Videotutoriales",
     title: "Fácil desde el primer día.",
     subtitle: "Guías claras para la instalación, el uso diario y la configuración avanzada.",

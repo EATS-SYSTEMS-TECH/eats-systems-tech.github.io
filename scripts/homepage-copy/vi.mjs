@@ -102,7 +102,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Tổng quan hệ thống WIFIGATE: thiết bị IP67, ứng dụng di động và bo mạch điều khiển với các cầu đấu dây, cổng USB Type-C và đầu vào 12-24V, Wi-Fi 6, Bluetooth LE cùng bộ thu 433,92MHz, bên cạnh các tính năng của nền tảng - 500 người dùng, 20 quản trị viên, lời mời khách không giới hạn, API tự động cho lời mời khách, không cần SIM hay router, ổn định, mời khách nhanh chóng, lịch sử 90 ngày, tự động mở, tối đa 50 sự kiện, học mã remote RF trên ứng dụng, bảo mật và quyền riêng tư, không mất phí thuê bao.",
+    imageAlt: "Tổng quan hệ thống WIFIGATE: thiết bị IP67, ứng dụng di động và bo mạch điều khiển với các cầu đấu dây, cổng USB Type-C và đầu vào 12-24V, Wi-Fi 6, Bluetooth LE cùng bộ thu 433,92MHz, bên cạnh các tính năng của nền tảng - tối đa 5000 người dùng và 20 quản trị viên, lời mời khách không giới hạn, API tự động cho lời mời khách, không cần SIM hay router, ổn định, mời khách nhanh chóng, lịch sử 90 ngày, tự động mở, tối đa 50 sự kiện, học mã remote RF trên ứng dụng, bảo mật và quyền riêng tư, không mất phí thuê bao.",
     eyebrow: "Video hướng dẫn",
     title: "Đơn giản ngay từ ngày đầu tiên.",
     subtitle: "Hướng dẫn rõ ràng về lắp đặt, sử dụng hằng ngày và cài đặt nâng cao.",

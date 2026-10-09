@@ -102,7 +102,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Pregled sistema WIFIGATE: naprava IP67, mobilna aplikacija in krmilna plošča s priključnimi sponkami, USB Type-C in vhodom 12-24 V, Wi-Fi 6, Bluetooth LE ter sprejemnikom 433,92 MHz, ob tem pa zmožnosti platforme – 500 uporabnikov, 20 skrbnikov, neomejena povabila za goste, API za samodejna povabila za goste, brez kartice SIM ali usmerjevalnika, stabilnost, hitro povabilo za gosta, 90-dnevna zgodovina, samodejno odpiranje, do 50 dogodkov, digitalno dodajanje RF-daljincev, varnost in zasebnost ter brez naročnine.",
+    imageAlt: "Pregled sistema WIFIGATE: naprava IP67, mobilna aplikacija in krmilna plošča s priključnimi sponkami, USB Type-C in vhodom 12-24 V, Wi-Fi 6, Bluetooth LE ter sprejemnikom 433,92 MHz, ob tem pa zmožnosti platforme – do 5000 uporabnikov in 20 skrbnikov, neomejena povabila za goste, API za samodejna povabila za goste, brez kartice SIM ali usmerjevalnika, stabilnost, hitro povabilo za gosta, 90-dnevna zgodovina, samodejno odpiranje, do 50 dogodkov, digitalno dodajanje RF-daljincev, varnost in zasebnost ter brez naročnine.",
     eyebrow: "Video navodila",
     title: "Preprosto že od prvega dne.",
     subtitle: "Jasna navodila za namestitev, vsakodnevno uporabo in napredne nastavitve.",

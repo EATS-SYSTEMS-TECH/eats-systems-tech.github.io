@@ -102,7 +102,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "WIFIGATE-järjestelmän yleiskuva: IP67-laite, mobiilisovellus ja ohjauskortti liitinriveineen, USB Type-C- ja 12-24V-tuloineen, Wi-Fi 6:lla, Bluetooth LE:llä ja 433,92MHz:n vastaanottimella sekä alustan ominaisuudet: 500 käyttäjää, 20 ylläpitäjää, rajattomasti vieraskutsuja, API automaattisille vieraskutsuille, ei SIM-korttia eikä reititintä, vakaus, nopea vieraskutsu, 90 päivän historia, automaattinen avaus, jopa 50 tapahtumaa, RF-kaukosäätimien digitaalinen ohjelmointi, turvallisuus ja yksityisyys sekä ei tilausmaksuja.",
+    imageAlt: "WIFIGATE-järjestelmän yleiskuva: IP67-laite, mobiilisovellus ja ohjauskortti liitinriveineen, USB Type-C- ja 12-24V-tuloineen, Wi-Fi 6:lla, Bluetooth LE:llä ja 433,92MHz:n vastaanottimella sekä alustan ominaisuudet: jopa 5000 käyttäjää ja 20 ylläpitäjää, rajattomasti vieraskutsuja, API automaattisille vieraskutsuille, ei SIM-korttia eikä reititintä, vakaus, nopea vieraskutsu, 90 päivän historia, automaattinen avaus, jopa 50 tapahtumaa, RF-kaukosäätimien digitaalinen ohjelmointi, turvallisuus ja yksityisyys sekä ei tilausmaksuja.",
     eyebrow: "Opetusvideot",
     title: "Helppoa heti ensimmäisestä päivästä.",
     subtitle: "Selkeät ohjeet asennukseen, päivittäiseen käyttöön ja lisäasetuksiin.",
