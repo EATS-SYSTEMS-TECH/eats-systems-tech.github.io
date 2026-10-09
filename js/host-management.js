@@ -10,7 +10,6 @@ import { renderHostApiKeys } from "./host-api-keys.js";
 import { renderHostIntegrations } from "./host-integrations.js";
 import { renderHostAutomation } from "./host-automation.js";
 import { renderHostOperations } from "./host-operations.js";
-import { renderServiceHealth } from "./host-service-health.js";
 import { renderHostImportRequests } from "./host-import-requests.js";
 import {
   renderSupportDiagnostics,
@@ -18,6 +17,11 @@ import {
 } from "./host-support.js";
 import { node, field } from "./host-ui.js";
 import { renderHostCalendar, clearHostCalendar } from "./host-calendar.js";
+import {
+  allowedWorkspaceViews,
+  workspaceLocation,
+} from "./host-workspace-model.js";
+import { renderHostBilling } from "./host-billing.js";
 
 const root = document.querySelector("#host-management");
 const attempts = new Map();
@@ -28,6 +32,7 @@ let organizations = [];
 let selectedId;
 let preferredOrganizationId;
 let sessionUid;
+let navigateWorkspace;
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
 const path = (suffix = "") =>
   `/api/v1/organizations/${encodeURIComponent(selectedId)}${suffix}`;
@@ -46,6 +51,8 @@ const message = (error) =>
       "The approved user must sign in with their verified email first.",
     IDEMPOTENCY_CONFLICT:
       "This saved attempt has different data. Refresh and try again.",
+    SUBSCRIPTION_UNAVAILABLE:
+      "Service is unavailable. An owner can review the subscription in Billing statements.",
   })[error.code] || "The request could not be completed. You can retry.";
 function actionForm(
   container,
@@ -111,7 +118,9 @@ function actionForm(
   });
 }
 export function clearHostManagement({ sessionEnded = false } = {}) {
+  window.dispatchEvent(new CustomEvent("host:workspace-dispose"));
   clearHostCalendar();
+  navigateWorkspace = undefined;
   generation++;
   root.dataset.requestGeneration = String(generation);
   currentUser = undefined;
@@ -130,6 +139,34 @@ export function clearHostManagement({ sessionEnded = false } = {}) {
   const reference = document.querySelector(".calendar-reference");
   if (reference) reference.hidden = false;
 }
+window.addEventListener("host:workspace-navigate", (event) => {
+  void navigateWorkspace?.(event.detail);
+});
+window.addEventListener("host:operations-filter", async (event) => {
+  const filter = event.detail;
+  if (
+    filter?.workspaceApplied ||
+    filter?.orgId !== selectedId ||
+    !navigateWorkspace
+  )
+    return;
+  const epoch = generation;
+  window.dispatchEvent(
+    new CustomEvent("host:workspace-view", { detail: "Calendar" }),
+  );
+  await navigateWorkspace("calendar");
+  if (
+    epoch !== generation ||
+    root.querySelector('[data-workspace-view="calendar"]')?.dataset.loaded !==
+      "true"
+  )
+    return;
+  window.dispatchEvent(
+    new CustomEvent("host:operations-filter", {
+      detail: { ...filter, workspaceApplied: true },
+    }),
+  );
+});
 async function renderResources(
   container,
   kind,
@@ -201,6 +238,16 @@ async function renderResources(
   };
   for (const resource of values) {
     const item = node("li");
+    if (kind === "rooms") {
+      item.dataset.propertyId = resource.propertyId;
+      item.append(
+        node(
+          "p",
+          properties.find((property) => property.id === resource.propertyId)
+            ?.name ?? "Archived property",
+        ),
+      );
+    }
     item.append(
       node("strong", resource.name || resource.email),
       node(
@@ -251,6 +298,28 @@ async function renderResources(
     list.append(item);
   }
   section.append(list);
+  if (kind === "rooms" && properties.length) {
+    const filterForm = node("form");
+    const selectedProperty = field(
+      filterForm,
+      "Rooms in property",
+      "propertyFilter",
+      "",
+      "text",
+      [
+        ["", "All properties"],
+        ...properties.map((property) => [property.id, property.name]),
+      ],
+    );
+    filterForm.addEventListener("submit", (event) => event.preventDefault());
+    selectedProperty.addEventListener("change", () => {
+      for (const item of list.children)
+        item.hidden =
+          Boolean(selectedProperty.value) &&
+          item.dataset.propertyId !== selectedProperty.value;
+    });
+    section.insertBefore(filterForm, list);
+  }
   if (!values.length) section.append(node("p", "No records yet."));
   if (canWrite && (kind !== "rooms" || properties.length))
     actionForm(
@@ -638,72 +707,67 @@ function clearOrganizationSelector() {
 }
 let sessionTransfer;
 export async function loadHostManagement(user, identity, preferredId) {
+  window.dispatchEvent(new CustomEvent("host:workspace-dispose"));
   if (sessionUid !== user.uid) {
     attempts.clear();
     sessionTransfer = undefined;
     preferredOrganizationId = undefined;
     sessionUid = user.uid;
   }
+  clearHostCalendar();
+  navigateWorkspace = undefined;
   const epoch = ++generation;
+  const current = () => epoch === generation;
   root.dataset.requestGeneration = String(epoch);
   clearOrganizationSelector();
   root.dataset.loading = "true";
   currentUser = user;
   currentIdentity = identity;
+  root.dataset.platformRole = identity.role;
   root.replaceChildren(
-    node("h2", "Organizations"),
     node("p", "Loading your organizations…", { role: "status" }),
   );
   try {
     const result = await readHostPages(
       user,
       "/api/v1/organizations",
-      () => epoch === generation,
+      current,
       "organizations",
     );
-    if (epoch !== generation) return;
+    if (!current()) return;
     organizations = result.items;
-    root.replaceChildren(node("h2", "Organizations"));
-    renderSupportDiagnostics({
-      container: root,
-      user,
-      identity,
-      isCurrent: () => epoch === generation,
+    root.replaceChildren();
+    const inbox = node("div", undefined, {
+      "data-workspace-view": "invitations",
     });
-    if (identity.role === "admin")
-      actionForm(
-        root,
-        "Create organization",
-        "/api/v1/organizations",
-        "POST",
-        (form) => {
-          field(form, "Organization name", "name");
-          field(form, "IANA timezone", "timezone", timezone);
-        },
-        undefined,
-        (value) => {
-          selectedId = value.organization.id;
-        },
-      );
+    root.append(inbox);
     await renderPendingMembershipInvitations({
-      container: root,
+      container: inbox,
       user,
-      isCurrent: () => epoch === generation,
+      isCurrent: current,
       onAccepted: (id) =>
-        epoch === generation
-          ? loadHostManagement(user, identity, id)
-          : undefined,
+        current() ? loadHostManagement(user, identity, id) : undefined,
     });
-    if (epoch !== generation) return;
+    if (!current()) return;
     if (!organizations.length) {
-      root.append(
-        node(
-          "p",
-          "No active organization memberships. An owner can add your verified email.",
-        ),
-      );
-      renderEmptyHostCalendar(root);
-      root.dataset.loading = "false";
+      const empty = node("div", undefined, {
+        "data-workspace-view": "calendar",
+      });
+      root.append(empty);
+      renderEmptyHostCalendar(empty);
+      if (identity.role === "admin") {
+        const support = node("div", undefined, {
+          "data-workspace-view": "support",
+        });
+        root.append(support);
+        renderSupportDiagnostics({
+          container: support,
+          user,
+          identity,
+          isCurrent: current,
+        });
+      }
+      window.dispatchEvent(new CustomEvent("host:workspace-ready"));
       return;
     }
     const preferred = preferredId ?? preferredOrganizationId;
@@ -711,6 +775,12 @@ export async function loadHostManagement(user, identity, preferredId) {
       ? preferred
       : organizations[0].id;
     preferredOrganizationId = selectedId;
+    root.dataset.organizationId = selectedId;
+    const org = organizations.find((entry) => entry.id === selectedId);
+    const role = org.workspace?.role ?? org.membership.role;
+    const owner = role === "owner";
+    const manager = owner || role === "admin";
+    root.dataset.membershipRole = role;
     const selection = node("form");
     const select = field(
       selection,
@@ -718,167 +788,279 @@ export async function loadHostManagement(user, identity, preferredId) {
       "organization",
       selectedId,
       "text",
-      organizations.map((org) => [org.id, org.name]),
+      organizations.map((entry) => [entry.id, entry.name]),
     );
-    (document.getElementById("workspace-org-switcher") ?? root).append(
+    (document.getElementById("workspace-org-switcher") ?? root).replaceChildren(
       selection,
     );
-    const selectorHolder = document.getElementById("workspace-org-switcher");
-    if (selectorHolder) selectorHolder.replaceChildren(selection);
-    root.dataset.organizationId = selectedId;
     select.addEventListener("change", () => {
       window.dispatchEvent(
         new CustomEvent("host:workspace-view", { detail: "Calendar" }),
       );
       void loadHostManagement(user, identity, select.value);
     });
-    const org = organizations.find((entry) => entry.id === selectedId);
-    const owner = org.membership.role === "owner";
-    const manager = owner || org.membership.role === "admin";
-    root.append(
-      node("p", `${org.timezone} · Your role: ${org.membership.role}`),
-    );
-    root.append(node("p", `Organization ID: ${org.id}`));
-    if (sessionTransfer)
-      root.append(node("p", `Approved transfer ID: ${sessionTransfer}`));
-    if (owner)
-      actionForm(
-        root,
-        "Organization settings",
-        path(),
-        "PUT",
-        (form) => {
-          field(form, "Organization name", "name", org.name);
-          field(form, "IANA timezone", "timezone", org.timezone);
-        },
-        (data) => ({ ...data, version: org.version }),
+    if (org.workspace?.service?.available === false) {
+      root.append(
+        node(
+          "p",
+          "Service is unavailable. Existing records remain readable. An owner can review the subscription in Billing statements.",
+          {
+            role: "status",
+            "data-workspace-notice": "true",
+          },
+        ),
       );
-    const [properties, rooms, members] = await Promise.all([
-      readHostPages(user, path("/properties"), () => epoch === generation),
-      readHostPages(user, path("/rooms"), () => epoch === generation),
-      owner
-        ? portalRequest(user, path("/members?limit=100"))
-        : Promise.resolve({ items: [] }),
-    ]);
-    if (epoch !== generation) return;
-    await renderResources(
-      root,
-      "properties",
-      properties.items,
-      manager,
-      [],
-      properties.nextCursor,
-      epoch,
-    );
-    await renderResources(
-      root,
-      "rooms",
-      rooms.items,
-      manager,
-      properties.items,
-      rooms.nextCursor,
-      epoch,
-    );
-    if (owner)
-      await renderResources(
-        root,
-        "members",
-        members.items,
-        owner,
-        [],
-        members.nextCursor,
-        epoch,
-      );
-    await renderOwnerMembershipInvitations({
-      container: root,
-      user,
-      organization: org,
-      isCurrent: () => epoch === generation,
-    });
-    if (epoch !== generation) return;
-    await renderInventory(root, org, properties.items, rooms.items, epoch);
-    if (epoch !== generation) return;
-    if (!properties.items.length)
-      renderEmptyHostCalendar(root, {
-        organization: org,
-        reason: "properties",
+    }
+    const panels = new Map();
+    for (const view of allowedWorkspaceViews(role)) {
+      const panel = node("div", undefined, {
+        "data-workspace-view": view.id,
+        class: "workspace-view-panel",
       });
-    await renderHostCalendar({
-      container: root,
+      panel.append(
+        node("p", "Select this screen to load its data.", { role: "status" }),
+      );
+      panels.set(view.id, panel);
+      root.append(panel);
+    }
+    if (identity.role === "admin" && !panels.has("support")) {
+      const support = node("div", undefined, {
+        "data-workspace-view": "support",
+        class: "workspace-view-panel",
+      });
+      panels.set("support", support);
+      root.append(support);
+    }
+    let references;
+    const readReferences = () => {
+      references ??= Promise.all([
+        readHostPages(user, path("/properties"), current),
+        readHostPages(user, path("/rooms"), current),
+      ])
+        .then(([properties, rooms]) => ({ properties, rooms }))
+        .catch((error) => {
+          references = undefined;
+          throw error;
+        });
+      return references;
+    };
+    const options = (container) => ({
+      container,
       user,
       organization: org,
-      properties: properties.items,
-      rooms: rooms.items,
-      isCurrent: () => epoch === generation,
+      isCurrent: current,
     });
-    if (epoch !== generation) return;
-    const calendarSection = root.querySelector(".host-calendar"),
-      firstSection = root.querySelector("section");
-    if (calendarSection && firstSection !== calendarSection)
-      root.insertBefore(calendarSection, firstSection);
-    await renderHostApiKeys({
-      container: root,
-      user,
-      organization: org,
-      isCurrent: () => epoch === generation,
-    });
-    if (epoch !== generation) return;
-    await renderHostIntegrations({
-      container: root,
-      user,
-      organization: org,
-      properties: properties.items,
-      rooms: rooms.items,
-      isCurrent: () => epoch === generation,
-    });
-    if (epoch !== generation) return;
-    await renderHostAutomation({
-      container: root,
-      user,
-      organization: org,
-      properties: properties.items,
-      isCurrent: () => epoch === generation,
-    });
-    if (epoch !== generation) return;
-    await renderHostOperations({
-      container: root,
-      user,
-      organization: org,
-      properties: properties.items,
-      rooms: rooms.items,
-      isCurrent: () => epoch === generation,
-    });
-    if (epoch !== generation) return;
-    renderServiceHealth({
-      container: root,
-      user,
-      organization: org,
-      isCurrent: () => epoch === generation,
-    });
-    await renderSupportOwner({
-      container: root,
-      user,
-      organization: org,
-      isCurrent: () => epoch === generation,
-    });
-    if (epoch !== generation) return;
-    await renderHostImportRequests({
-      container: root,
-      user,
-      organization: org,
-      isCurrent: () => epoch === generation,
-      onConnected: () =>
-        epoch === generation
-          ? loadHostManagement(user, identity, org.id)
-          : undefined,
-    });
+    const loaders = {
+      calendar: async (panel, viewCurrent) => {
+        const { properties, rooms } = await readReferences();
+        if (!viewCurrent()) return;
+        if (!properties.items.length)
+          renderEmptyHostCalendar(panel, {
+            organization: org,
+            reason: "properties",
+          });
+        else
+          await renderHostCalendar({
+            ...options(panel),
+            isCurrent: viewCurrent,
+            properties: properties.items,
+            rooms: rooms.items,
+          });
+      },
+      reservations: async (panel, viewCurrent) => {
+        const { properties, rooms } = await readReferences();
+        if (!viewCurrent()) return;
+        if (!properties.items.length)
+          panel.append(
+            node("p", "Add a property and room before creating reservations."),
+          );
+        else
+          await renderHostCalendar({
+            ...options(panel),
+            isCurrent: viewCurrent,
+            properties: properties.items,
+            rooms: rooms.items,
+            mode: "reservations",
+          });
+      },
+      properties: async (panel) => {
+        const { properties, rooms } = await readReferences();
+        if (!current()) return;
+        await renderResources(
+          panel,
+          "properties",
+          properties.items,
+          manager,
+          [],
+          properties.nextCursor,
+          epoch,
+        );
+        await renderResources(
+          panel,
+          "rooms",
+          rooms.items,
+          manager,
+          properties.items,
+          rooms.nextCursor,
+          epoch,
+        );
+      },
+      systems: async (panel) => {
+        const { properties, rooms } = await readReferences();
+        if (!current()) return;
+        await renderInventory(panel, org, properties.items, rooms.items, epoch);
+        await renderHostImportRequests({
+          ...options(panel),
+          onConnected: () =>
+            current() ? loadHostManagement(user, identity, org.id) : undefined,
+        });
+      },
+      team: async (panel) => {
+        const members = await portalRequest(user, path("/members?limit=100"));
+        if (!current()) return;
+        await renderResources(
+          panel,
+          "members",
+          members.items,
+          owner,
+          [],
+          members.nextCursor,
+          epoch,
+        );
+        await renderOwnerMembershipInvitations(options(panel));
+      },
+      automation: async (panel) => {
+        const { properties } = await readReferences();
+        if (current())
+          await renderHostAutomation({
+            ...options(panel),
+            properties: properties.items,
+            includeJobs: false,
+          });
+      },
+      operations: async (panel) => {
+        const { properties, rooms } = await readReferences();
+        if (!current()) return;
+        await renderHostOperations({
+          ...options(panel),
+          properties: properties.items,
+          rooms: rooms.items,
+        });
+      },
+      integrations: async (panel) => {
+        const { properties, rooms } = await readReferences();
+        if (!current()) return;
+        await renderHostApiKeys(options(panel));
+        await renderHostIntegrations({
+          ...options(panel),
+          properties: properties.items,
+          rooms: rooms.items,
+          includeEvents: false,
+        });
+      },
+      billing: (panel) => renderHostBilling(options(panel)),
+      support: async (panel) => {
+        await renderSupportOwner(options(panel));
+        renderSupportDiagnostics({
+          container: panel,
+          user,
+          identity,
+          isCurrent: current,
+        });
+      },
+      organization: async (panel) => {
+        panel.append(
+          node("h2", "Organization settings"),
+          node("p", org.name),
+          node("p", "Timezone: " + org.timezone),
+          node("p", "Your organization role: " + role),
+        );
+        if (org.workspace?.service)
+          panel.append(
+            node("p", "Service state: " + org.workspace.service.state),
+          );
+        if (sessionTransfer)
+          panel.append(node("p", "Approved transfer ID: " + sessionTransfer));
+        if (owner)
+          actionForm(
+            panel,
+            "Organization settings",
+            path(),
+            "PUT",
+            (form) => {
+              field(form, "Organization name", "name", org.name);
+              field(form, "IANA timezone", "timezone", org.timezone);
+            },
+            (data) => ({ ...data, version: org.version }),
+          );
+      },
+    };
+    let bookingView;
+    const loads = new Map();
+    navigateWorkspace = async (id) => {
+      const panel = panels.get(id);
+      if (!panel || !current()) return;
+      if (["calendar", "reservations"].includes(id) && bookingView !== id) {
+        clearHostCalendar();
+        for (const previous of ["calendar", "reservations"]) {
+          const bookingPanel = panels.get(previous);
+          if (bookingPanel) {
+            for (const dialog of bookingPanel.querySelectorAll("dialog[open]"))
+              dialog.close();
+            bookingPanel.replaceChildren();
+            bookingPanel.dataset.loaded = "false";
+            bookingPanel.dataset.renderGeneration = String(
+              Number(bookingPanel.dataset.renderGeneration ?? 0) + 1,
+            );
+            loads.delete(previous);
+          }
+        }
+        bookingView = id;
+      }
+      if (panel.dataset.loaded === "true") return;
+      if (loads.has(id)) return loads.get(id);
+      const renderGeneration = panel.dataset.renderGeneration;
+      const viewCurrent = () =>
+        current() && panel.dataset.renderGeneration === renderGeneration;
+      const load = async () => {
+        panel.replaceChildren(
+          node("p", "Loading this screen…", { role: "status" }),
+        );
+        try {
+          panel.replaceChildren();
+          await loaders[id](panel, viewCurrent);
+          if (viewCurrent() && panel.isConnected) panel.dataset.loaded = "true";
+        } catch (error) {
+          if (!viewCurrent()) return;
+          panel.replaceChildren(node("p", message(error), { role: "status" }));
+          if (error.code === "TOTP_REQUIRED") {
+            const verify = node("button", "Verify authenticator", {
+              type: "button",
+            });
+            verify.addEventListener("click", () =>
+              window.dispatchEvent(new CustomEvent("host:totp-required")),
+            );
+            panel.append(verify);
+          }
+          const retry = node("button", "Retry this screen", { type: "button" });
+          retry.addEventListener("click", () => void navigateWorkspace?.(id));
+          panel.append(retry);
+        } finally {
+          if (viewCurrent()) loads.delete(id);
+        }
+      };
+      const promise = load();
+      loads.set(id, promise);
+      return promise;
+    };
+    window.dispatchEvent(new CustomEvent("host:workspace-ready"));
+    const requested = workspaceLocation(new URL(location.href));
+    if (!["account", "overview", "invitations"].includes(requested)) {
+      await navigateWorkspace(panels.has(requested) ? requested : "calendar");
+    }
   } catch (error) {
-    if (epoch !== generation) return;
-    root.dataset.loading = "false";
-    root.replaceChildren(
-      node("h2", "Organizations"),
-      node("p", message(error), { role: "status" }),
-    );
+    if (!current()) return;
+    root.replaceChildren(node("p", message(error), { role: "status" }));
     if (error.code === "TOTP_REQUIRED") {
       const verify = node("button", "Verify authenticator", { type: "button" });
       verify.addEventListener("click", () =>
@@ -893,6 +1075,6 @@ export async function loadHostManagement(user, identity, preferredId) {
     );
     root.append(retry);
   } finally {
-    if (epoch === generation) root.dataset.loading = "false";
+    if (current()) root.dataset.loading = "false";
   }
 }

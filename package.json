@@ -1,40 +1,40 @@
 {
-    "name": "wifigate-static-site",
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "dev": "npm run build:api && node scripts/serve.mjs",
-        "build:api": "node scripts/build-api.mjs && node scripts/build-dashboard.mjs",
-        "typecheck": "tsc --noEmit",
-        "test:dashboard": "node --test scripts/host-calendar-browser.test.mjs",
-        "test:api": "npm run build:api && npm run typecheck && node --test scripts/host-portal.test.mjs scripts/platform.test.mjs scripts/login-gate-game.test.mjs scripts/login-pages.test.mjs",
-        "test:platform": "npm run build:api && node --test scripts/platform-browser.test.mjs",
-        "build:locales": "node scripts/build-localized-site.mjs",
-        "build:images": "node scripts/build-niche-images.mjs",
-        "staging": "npm run build:api && node scripts/start-staging.mjs",
-        "test:staging": "npm run build:api && node scripts/run-staging-tests.mjs",
-        "test:health": "node --test scripts/host-service-health.test.mjs"
-    },
-    "devDependencies": {
-        "cheerio": "^1.2.0",
-        "esbuild": "^0.28.2",
-        "firebase": "^12.19.0",
-        "firebase-admin": "^13.10.0",
-        "firebase-tools": "15.33.0",
-        "playwright-core": "^1.63.0",
-        "sharp": "^0.35.5",
-        "typescript": "^7.0.2"
-    },
-    "dependencies": {
-        "axios": "^1.20.0"
-    },
-    "overrides": {
-        "@grpc/grpc-js": "^1.13.6",
-        "uuid@<11.1.1": "^11.1.1",
-        "basic-ftp": "^6.2.2",
-        "firebase-tools": {
-            "chokidar": "4.0.3",
-            "@google-cloud/pubsub": "6.2.0"
-        }
+  "name": "wifigate-static-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build:api && node scripts/serve.mjs",
+    "build:api": "node scripts/build-api.mjs && node scripts/build-dashboard.mjs",
+    "typecheck": "tsc --noEmit",
+    "test:dashboard": "node --test scripts/host-calendar-browser.test.mjs scripts/host-workspace-browser.test.mjs",
+    "test:api": "npm run build:api && npm run typecheck && node --test scripts/host-portal.test.mjs scripts/platform.test.mjs scripts/login-gate-game.test.mjs scripts/login-pages.test.mjs",
+    "test:platform": "npm run build:api && node --test scripts/platform-browser.test.mjs",
+    "build:locales": "node scripts/build-localized-site.mjs",
+    "build:images": "node scripts/build-niche-images.mjs",
+    "staging": "npm run build:api && node scripts/start-staging.mjs",
+    "test:staging": "npm run build:api && node scripts/run-staging-tests.mjs",
+    "test:health": "node --test scripts/host-service-health.test.mjs"
+  },
+  "devDependencies": {
+    "cheerio": "^1.2.0",
+    "esbuild": "^0.28.2",
+    "firebase": "^12.19.0",
+    "firebase-admin": "^13.10.0",
+    "firebase-tools": "15.33.0",
+    "playwright-core": "^1.63.0",
+    "sharp": "^0.35.5",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "axios": "^1.20.0"
+  },
+  "overrides": {
+    "@grpc/grpc-js": "^1.13.6",
+    "uuid@<11.1.1": "^11.1.1",
+    "basic-ftp": "^6.2.2",
+    "firebase-tools": {
+      "chokidar": "4.0.3",
+      "@google-cloud/pubsub": "6.2.0"
     }
+  }
 }

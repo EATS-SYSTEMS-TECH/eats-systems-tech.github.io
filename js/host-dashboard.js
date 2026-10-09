@@ -215,7 +215,7 @@ async function loadDashboard(user) {
     }
     $("#dashboard-content").hidden = false;
     $("#host-sidebar").hidden = false;
-    $("#admin-approval").hidden = !canApproveEmail(identity);
+    $("#admin-approval").hidden = true;
     void loadHostManagement(user, identity);
     void loadAdminOverview(user, identity).then(() => {
       if (
