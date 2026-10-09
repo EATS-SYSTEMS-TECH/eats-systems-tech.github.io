@@ -1,3 +1,4 @@
+import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
 import { field, node } from "./host-ui.js";
 export async function renderHostIntegrations({
@@ -16,16 +17,18 @@ export async function renderHostIntegrations({
   const section = node("section", undefined, {
       "aria-label": "Reservation integrations",
     }),
-    status = node("p", "Loading integration events…", {
+    status = node("p", hostText("Loading integration events…"), {
       role: "status",
       "aria-live": "polite",
     }),
     events = node("div");
   section.append(
-    node("h2", "Reservation integrations"),
+    node("h2", hostText("Reservation integrations")),
     node(
       "p",
-      "Signed provider events are validated and processed through canonical reservations. Accepted events can still need attention before access is issued or delivered.",
+      hostText(
+        "Signed provider events are validated and processed through canonical reservations. Accepted events can still need attention before access is issued or delivered.",
+      ),
     ),
     status,
   );
@@ -41,8 +44,9 @@ export async function renderHostIntegrations({
       await operation();
     } catch {
       if (current())
-        status.textContent =
-          "Integration operation failed. Check permissions and retry safely.";
+        status.textContent = hostText(
+          "Integration operation failed. Check permissions and retry safely.",
+        );
     } finally {
       busy = false;
       if (current()) button.disabled = false;
@@ -72,7 +76,7 @@ export async function renderHostIntegrations({
     );
     const room = field(form, "Integration room", "roomId", "", "text", []);
     const targets = node("fieldset"),
-      legend = node("legend", "Access targets");
+      legend = node("legend", hostText("Access targets"));
     targets.append(legend);
     form.append(targets);
     let systems = [],
@@ -106,12 +110,18 @@ export async function renderHostIntegrations({
     property.addEventListener("change", updateRooms);
     room.addEventListener("change", updateTargets);
     updateRooms();
-    const save = node("button", "Save provider room mapping", {
+    const save = node("button", hostText("Save provider room mapping"), {
         type: "submit",
       }),
-      load = node("button", "Load provider mappings", { type: "button" });
+      load = node("button", hostText("Load provider mappings"), {
+        type: "button",
+      });
     form.append(save, load);
-    section.append(node("h3", "Provider room mapping"), form, mappings);
+    section.append(
+      node("h3", hostText("Provider room mapping")),
+      form,
+      mappings,
+    );
     async function loadMappings(cursor, append = false) {
       if (!provider.reportValidity()) return;
       const response = await portalRequest(
@@ -123,9 +133,15 @@ export async function renderHostIntegrations({
       for (const mapping of response.items) {
         const row = node("article");
         row.append(
-          node("p", `${mapping.providerRoomId} · version ${mapping.version}`),
+          node(
+            "p",
+            hostText("{p0} · version {p1}", {
+              p0: mapping.providerRoomId,
+              p1: mapping.version,
+            }),
+          ),
         );
-        const edit = node("button", "Edit provider mapping", {
+        const edit = node("button", hostText("Edit provider mapping"), {
           type: "button",
         });
         edit.addEventListener("click", () => {
@@ -146,7 +162,7 @@ export async function renderHostIntegrations({
         mappings.append(row);
       }
       if (response.nextCursor) {
-        const more = node("button", "Load more provider mappings", {
+        const more = node("button", hostText("Load more provider mappings"), {
           type: "button",
         });
         more.addEventListener("click", () =>
@@ -158,8 +174,8 @@ export async function renderHostIntegrations({
         mappings.append(more);
       }
       status.textContent = response.items.length
-        ? "Provider mappings loaded."
-        : "No mappings for this provider.";
+        ? hostText("Provider mappings loaded.")
+        : hostText("No mappings for this provider.");
     }
     load.addEventListener("click", () => run(load, () => loadMappings()));
     form.addEventListener("submit", (event) => {
@@ -178,7 +194,9 @@ export async function renderHostIntegrations({
             : {}),
         };
         if (!body.targetIds.length) {
-          status.textContent = "Select at least one mapped access target.";
+          status.textContent = hostText(
+            "Select at least one mapped access target.",
+          );
           return;
         }
         const result = await mutate(
@@ -192,7 +210,7 @@ export async function renderHostIntegrations({
           version: result.mapping.version,
         };
         await loadMappings();
-        status.textContent = "Provider room mapping saved.";
+        status.textContent = hostText("Provider room mapping saved.");
       });
     });
     try {
@@ -204,15 +222,17 @@ export async function renderHostIntegrations({
       ).items;
       if (current()) updateTargets();
     } catch {
-      if (current()) status.textContent = "Access targets could not be loaded.";
+      if (current())
+        status.textContent = hostText("Access targets could not be loaded.");
     }
   }
   if (!includeEvents) {
-    status.textContent =
-      "Integration mappings loaded. Review provider events in Operations.";
+    status.textContent = hostText(
+      "Integration mappings loaded. Review provider events in Operations.",
+    );
     return;
   }
-  const refresh = node("button", "Refresh integration events", {
+  const refresh = node("button", hostText("Refresh integration events"), {
     type: "button",
   });
   section.append(refresh, events);
@@ -229,12 +249,21 @@ export async function renderHostIntegrations({
         node("h3", `${event.provider}: ${event.type}`),
         node(
           "p",
-          `${event.status} · attempts ${event.attempts} · provider revision ${event.revision}`,
+          hostText("{p0} · attempts {p1} · provider revision {p2}", {
+            p0: hostText(event.status),
+            p1: event.attempts,
+            p2: event.revision,
+          }),
         ),
-        node("p", `Correlation: ${event.requestId}`),
+        node("p", hostText("Correlation: {p0}", { p0: event.requestId })),
       );
       if (event.lastErrorCode)
-        row.append(node("p", `Action required: ${event.lastErrorCode}`));
+        row.append(
+          node(
+            "p",
+            hostText("Action required: {p0}", { p0: event.lastErrorCode }),
+          ),
+        );
       if (event.status === "dead_letter") {
         const form = node("form"),
           reason = field(
@@ -245,7 +274,7 @@ export async function renderHostIntegrations({
           );
         reason.minLength = 5;
         reason.maxLength = 200;
-        const replay = node("button", "Replay reviewed event", {
+        const replay = node("button", hostText("Replay reviewed event"), {
           type: "submit",
         });
         form.append(replay);
@@ -258,8 +287,9 @@ export async function renderHostIntegrations({
             );
             if (!current()) return;
             await loadEvents();
-            status.textContent =
-              "Reviewed event queued again. Processing permissions are rechecked.";
+            status.textContent = hostText(
+              "Reviewed event queued again. Processing permissions are rechecked.",
+            );
           });
         });
         row.append(form);
@@ -267,10 +297,10 @@ export async function renderHostIntegrations({
       events.append(row);
     }
     status.textContent = result.items.length
-      ? "Integration event status loaded."
-      : "No provider events received.";
+      ? hostText("Integration event status loaded.")
+      : hostText("No provider events received.");
     if (result.nextCursor) {
-      const more = node("button", "Load more integration events", {
+      const more = node("button", hostText("Load more integration events"), {
         type: "button",
       });
       more.addEventListener("click", () =>
@@ -287,7 +317,8 @@ export async function renderHostIntegrations({
     await loadEvents();
   } catch {
     if (current())
-      status.textContent =
-        "Integration events could not be loaded. Refresh to retry.";
+      status.textContent = hostText(
+        "Integration events could not be loaded. Refresh to retry.",
+      );
   }
 }

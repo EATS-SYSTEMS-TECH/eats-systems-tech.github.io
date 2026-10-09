@@ -1,3 +1,4 @@
+import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
 import { node } from "./host-ui.js";
 import { renderServiceTargets } from "./host-slo.js";
@@ -22,16 +23,18 @@ const labels = {
   unowned: "Owner unavailable",
 };
 const reasons = {
-  SUCCESS_BELOW_TARGET: "Success rate below target",
-  LATENCY_ABOVE_TARGET: "Latency above target",
-  PENDING_SCHEDULE_LATE: "Scheduled preparation overdue",
+  SUCCESS_BELOW_TARGET: hostText("Success rate below target"),
+  LATENCY_ABOVE_TARGET: hostText("Latency above target"),
+  PENDING_SCHEDULE_LATE: hostText("Scheduled preparation overdue"),
 };
 const timestamp = (value) =>
-  value ? new Date(value).toLocaleString() : "None yet";
+  value ? new Date(value).toLocaleString(hostLocale) : hostText("None yet");
 const percent = (value) =>
-  value === null ? "Unknown" : `${value.toFixed(2)}%`;
+  value === null ? hostText("Unknown") : `${value.toFixed(2)}%`;
 const latency = (value) =>
-  value === null ? "Unknown" : `${Math.round(value).toLocaleString()} ms`;
+  value === null
+    ? hostText("Unknown")
+    : hostText("{p0} ms", { p0: Math.round(value).toLocaleString(hostLocale) });
 
 export function renderServiceHealth({
   container,
@@ -48,15 +51,17 @@ export function renderServiceHealth({
   });
   const status = node(
     "p",
-    "Load scheduled monitoring evidence for this organization.",
+    hostText("Load scheduled monitoring evidence for this organization."),
     { role: "status", "aria-live": "polite" },
   );
-  const refresh = node("button", "Refresh service health", { type: "button" });
+  const refresh = node("button", hostText("Refresh service health"), {
+    type: "button",
+  });
   const content = node("div");
   const actions = node("div", undefined, { class: "health-actions" });
   actions.append(refresh);
   if (role === "owner") {
-    const verify = node("button", "Verify identity to edit targets", {
+    const verify = node("button", hostText("Verify identity to edit targets"), {
       type: "button",
     });
     verify.addEventListener(
@@ -72,8 +77,9 @@ export function renderServiceHealth({
           await reauthenticate(user, requestMfaChallenge);
           await user.getIdToken(true);
           if (current())
-            status.textContent =
-              "Identity verified. You can retry saving the reviewed service targets.";
+            status.textContent = hostText(
+              "Identity verified. You can retry saving the reviewed service targets.",
+            );
         }),
     );
     actions.append(verify);
@@ -82,7 +88,7 @@ export function renderServiceHealth({
     ["Review alerts and deliveries", "Jobs Calendar"],
     ...(role === "owner" ? [["Open support access", "Support"]] : []),
   ]) {
-    const button = node("button", title, { type: "button" });
+    const button = node("button", hostText(title), { type: "button" });
     button.addEventListener("click", () =>
       window.dispatchEvent(
         new CustomEvent("host:workspace-view", { detail: view }),
@@ -91,10 +97,12 @@ export function renderServiceHealth({
     actions.append(button);
   }
   section.append(
-    node("h2", "Service health"),
+    node("h2", hostText("Service health")),
     node(
       "p",
-      "Scheduled checks of authenticated invitation API requests, job preparation, and provider message acceptance. Physical gate availability and guest receipt require separate verification.",
+      hostText(
+        "Scheduled checks of authenticated invitation API requests, job preparation, and provider message acceptance. Physical gate availability and guest receipt require separate verification.",
+      ),
     ),
     actions,
     status,
@@ -113,14 +121,19 @@ export function renderServiceHealth({
       if (current())
         status.textContent =
           {
-            RECENT_REAUTH_REQUIRED:
+            RECENT_REAUTH_REQUIRED: hostText(
               "Choose Verify identity to edit targets, complete your authenticator sign-in, then retry saving.",
-            VERSION_CONFLICT:
+            ),
+            VERSION_CONFLICT: hostText(
               "Service targets changed. Load the current policy and review it before saving again.",
-            SLO_OWNER_UNAVAILABLE:
+            ),
+            SLO_OWNER_UNAVAILABLE: hostText(
               "Choose an active approved operations member. Owners and administrators must have an authenticator enrolled.",
+            ),
           }[error?.code] ??
-          "Unable to load or save service health. Refresh and verify your access; contact operations if this continues.";
+          hostText(
+            "Unable to load or save service health. Refresh and verify your access; contact operations if this continues.",
+          );
     } finally {
       busy = false;
       if (current()) button.disabled = false;
@@ -128,21 +141,35 @@ export function renderServiceHealth({
   }
   function display(value) {
     const state = value.monitoring.state;
-    status.textContent =
+    status.textContent = hostText(
       state === "current"
         ? (labels[value.assessment] ?? "Insufficient evidence")
-        : (explanations[state] ?? "Monitoring status is unknown.");
+        : (explanations[state] ?? "Monitoring status is unknown."),
+    );
     content.replaceChildren(
       node(
         "p",
-        `Checked ${timestamp(value.observedAt)} · latest window ends ${timestamp(value.monitoring.latestWindowEnd)}. Observations become overdue after ${value.monitoring.maximumAgeMs / 60000} minutes.`,
+        hostText(
+          "Checked {p0} · latest window ends {p1}. Observations become overdue after {p2} minutes.",
+          {
+            p0: timestamp(value.observedAt),
+            p1: timestamp(value.monitoring.latestWindowEnd),
+            p2: value.monitoring.maximumAgeMs / 60000,
+          },
+        ),
       ),
     );
     if (value.policy)
       content.append(
         node(
           "p",
-          `Policy revision ${value.policy.version} · responsible member ${value.policy.responsibleUid} · ${value.ownerActive ? "active" : "unavailable"}`,
+          hostText("Policy revision {p0} · responsible member {p1} · {p2}", {
+            p0: value.policy.version,
+            p1: value.policy.responsibleUid,
+            p2: value.ownerActive
+              ? hostText("active")
+              : hostText("unavailable"),
+          }),
         ),
       );
     const latest = value.items[0];
@@ -151,8 +178,8 @@ export function renderServiceHealth({
         node(
           "h3",
           state === "current"
-            ? "Latest observed window"
-            : "Historical results — not current health",
+            ? hostText("Latest observed window")
+            : hostText("Historical results — not current health"),
         ),
       );
       const cards = node("div", undefined, { class: "health-metrics" });
@@ -164,26 +191,33 @@ export function renderServiceHealth({
         const metric = latest.metrics[key];
         const card = node("article", undefined, { "aria-label": title });
         card.append(
-          node("h4", title),
-          node("p", labels[metric.state]),
+          node("h4", hostText(title)),
+          node("p", hostText(labels[metric.state])),
           node(
             "p",
-            `${percent(metric.successPercent)} success · p95 ${latency(metric.p95LatencyMs)}`,
+            hostText("{p0} success · p95 {p1}", {
+              p0: percent(metric.successPercent),
+              p1: latency(metric.p95LatencyMs),
+            }),
           ),
-          node("p", `${metric.samples} measured samples`),
+          node("p", hostText("{p0} measured samples", { p0: metric.samples })),
         );
         for (const reason of metric.reasons)
-          card.append(node("p", reasons[reason] ?? "Review service targets"));
+          card.append(
+            node("p", reasons[reason] ?? hostText("Review service targets")),
+          );
         cards.append(card);
       }
       content.append(cards);
     }
-    content.append(node("h3", "Recent scheduled observations"));
+    content.append(node("h3", hostText("Recent scheduled observations")));
     if (!value.items.length)
       content.append(
         node(
           "p",
-          "No retained observations yet. Refresh after the monitor runs.",
+          hostText(
+            "No retained observations yet. Refresh after the monitor runs.",
+          ),
         ),
       );
     else {
@@ -192,13 +226,22 @@ export function renderServiceHealth({
         list.append(
           node(
             "li",
-            `${timestamp(item.from)} – ${timestamp(item.to)} · revision ${item.policyVersion} · ${item.telemetryAvailable ? labels[item.state] : "Telemetry unavailable"}`,
+            hostText("{p0} – {p1} · revision {p2} · {p3}", {
+              p0: timestamp(item.from),
+              p1: timestamp(item.to),
+              p2: item.policyVersion,
+              p3: item.telemetryAvailable
+                ? labels[item.state]
+                : hostText("Telemetry unavailable"),
+            }),
           ),
         );
       content.append(
         node(
           "p",
-          "Latest 12 windows within the 90-day retention period. Each window covers one hour and may overlap the next; do not add their sample counts together.",
+          hostText(
+            "Latest 12 windows within the 90-day retention period. Each window covers one hour and may overlap the next; do not add their sample counts together.",
+          ),
         ),
         list,
       );
@@ -209,7 +252,7 @@ export function renderServiceHealth({
     () =>
       void run(refresh, async () => {
         content.replaceChildren();
-        status.textContent = "Loading service health…";
+        status.textContent = hostText("Loading service health…");
         const value = await portalRequest(
           user,
           `${root}/operations/service-health?limit=12`,
