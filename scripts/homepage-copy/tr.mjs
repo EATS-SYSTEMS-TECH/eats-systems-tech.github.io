@@ -102,7 +102,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "WIFIGATE sistemine genel bakış: IP67 cihaz, mobil uygulama ve vidalı klemensler, USB Type-C ve 12-24V girişi, Wi-Fi 6, Bluetooth LE ve 433,92MHz alıcı bulunan kontrol kartı; yanında platform özellikleri - 500 kullanıcı, 20 yönetici, sınırsız misafir daveti, misafir davetleri için otomatik API, SIM kart veya modem gerektirmemesi, kararlılık, hızlı misafir daveti, 90 günlük geçmiş, otomatik açılış, 50'ye kadar görev, dijital RF kumanda tanıtma, güvenlik ve gizlilik ve abonelik ücreti olmaması.",
+    imageAlt: "WIFIGATE sistemine genel bakış: IP67 cihaz, mobil uygulama ve vidalı klemensler, USB Type-C ve 12-24V girişi, Wi-Fi 6, Bluetooth LE ve 433,92MHz alıcı bulunan kontrol kartı; yanında platform özellikleri - 5000'e kadar kullanıcı ve 20 yönetici, sınırsız misafir daveti, misafir davetleri için otomatik API, SIM kart veya modem gerektirmemesi, kararlılık, hızlı misafir daveti, 90 günlük geçmiş, otomatik açılış, 50'ye kadar görev, dijital RF kumanda tanıtma, güvenlik ve gizlilik ve abonelik ücreti olmaması.",
     eyebrow: "Eğitim videoları",
     title: "İlk günden itibaren kolay.",
     subtitle: "Kurulum, günlük kullanım ve gelişmiş ayarlar için adım adım anlatım.",

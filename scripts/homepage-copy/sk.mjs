@@ -102,7 +102,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Prehľad systému WIFIGATE: zariadenie s krytím IP67, mobilná aplikácia a riadiaca doska so svorkovnicami, USB Type-C a vstupom 12–24 V, Wi-Fi 6, Bluetooth LE a prijímačom 433,92 MHz, spolu s funkciami platformy: 500 používateľov, 20 správcov, neobmedzené pozvánky pre hostí, API na automatické pozvánky pre hostí, bez SIM karty a routera, stabilita, rýchla pozvánka pre hosťa, história za 90 dní, automatické otvorenie, až 50 udalostí, digitálne pridávanie RF ovládačov, bezpečnosť a súkromie a žiadne poplatky za predplatné.",
+    imageAlt: "Prehľad systému WIFIGATE: zariadenie s krytím IP67, mobilná aplikácia a riadiaca doska so svorkovnicami, USB Type-C a vstupom 12–24 V, Wi-Fi 6, Bluetooth LE a prijímačom 433,92 MHz, spolu s funkciami platformy: až 5000 používateľov a 20 správcov, neobmedzené pozvánky pre hostí, API na automatické pozvánky pre hostí, bez SIM karty a routera, stabilita, rýchla pozvánka pre hosťa, história za 90 dní, automatické otvorenie, až 50 udalostí, digitálne pridávanie RF ovládačov, bezpečnosť a súkromie a žiadne poplatky za predplatné.",
     eyebrow: "Videonávody",
     title: "Jednoduché od prvého dňa.",
     subtitle: "Jasné pokyny na inštaláciu, každodenné používanie aj pokročilé nastavenia.",

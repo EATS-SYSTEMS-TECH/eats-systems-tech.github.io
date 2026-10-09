@@ -102,7 +102,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Pangkalahatang-ideya ng WIFIGATE system: ang IP67 device, ang mobile app, at ang control board na may mga terminal block, USB Type-C at 12-24V input, Wi-Fi 6, Bluetooth LE at 433.92MHz receiver, kasama ang mga kakayahan ng platform - 500 user, 20 admin, walang limitasyong imbitasyon sa bisita, API para sa awtomatikong imbitasyon sa bisita, walang SIM o router, katatagan, mabilis na imbitasyon sa bisita, 90 araw na kasaysayan, awtomatikong pagbukas, hanggang 50 event, digital na pagrehistro ng RF remote, seguridad at privacy, at walang bayad sa subscription.",
+    imageAlt: "Pangkalahatang-ideya ng WIFIGATE system: ang IP67 device, ang mobile app, at ang control board na may mga terminal block, USB Type-C at 12-24V input, Wi-Fi 6, Bluetooth LE at 433.92MHz receiver, kasama ang mga kakayahan ng platform - hanggang 5000 user at 20 admin, walang limitasyong imbitasyon sa bisita, API para sa awtomatikong imbitasyon sa bisita, walang SIM o router, katatagan, mabilis na imbitasyon sa bisita, 90 araw na kasaysayan, awtomatikong pagbukas, hanggang 50 event, digital na pagrehistro ng RF remote, seguridad at privacy, at walang bayad sa subscription.",
     eyebrow: "Mga tutorial video",
     title: "Simple mula sa unang araw.",
     subtitle: "Malinaw na gabay para sa installation, pang-araw-araw na paggamit, at mga advanced na setting.",
