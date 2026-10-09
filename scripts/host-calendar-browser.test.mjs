@@ -50,6 +50,9 @@ test("reference dashboard: authorized navigation, three-week spans, editor and m
     }),
   );
   await page.goto(`http://127.0.0.1:${server.address().port}/calendar-test`);
+  await page.addStyleTag({
+    url: `http://127.0.0.1:${server.address().port}/css/host-interface.css`,
+  });
   await page.evaluate(async () => {
     const { profileApi } = await import("/js/api/index.js");
     const start = new Date().toISOString().slice(0, 10);
@@ -103,6 +106,15 @@ test("reference dashboard: authorized navigation, three-week spans, editor and m
     });
   });
   await page.getByRole("button", { name: "Calendar", exact: true }).click();
+  const chipDetails = await page
+    .locator(".reservation-chip small")
+    .first()
+    .boundingBox();
+  const chip = await page.locator(".reservation-chip").first().boundingBox();
+  assert.ok(
+    chipDetails.y + chipDetails.height <= chip.y + chip.height,
+    "Reservation details must not be clipped",
+  );
   assert.equal(
     await page
       .getByRole("button", { name: "Calendar", exact: true })

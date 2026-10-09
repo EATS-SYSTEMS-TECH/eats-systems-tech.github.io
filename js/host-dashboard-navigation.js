@@ -157,6 +157,12 @@ function refresh() {
   if (selected === "account" && targets(selected).length)
     document.getElementById("account-details").open = true;
   document.body.dataset.hostView = workspaceView(selected)?.label ?? "Calendar";
+  const currentView = document.getElementById("workspace-current-view");
+  if (currentView) {
+    const view = workspaceView(selected);
+    currentView.textContent = hebrew ? view.he : view.label;
+    document.title = `${currentView.textContent} | WIFIGATE Host`;
+  }
   const selectedTargets = targets(selected);
   const badge = buttons
     .get("invitations")

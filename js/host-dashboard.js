@@ -57,6 +57,7 @@ let enrollmentSecret;
 let actionBusy = false;
 let approvalAttempt;
 let session;
+let accessCheckInProgress = false;
 const language = pageLanguage();
 initializeHostLocale();
 installHostLanguageSelector();
@@ -538,6 +539,55 @@ window.addEventListener("host:totp-required", () => {
 $("#approval-form")
   .elements.namedItem("action")
   .addEventListener("change", updateAccessAction);
+async function recheckDashboardAccess() {
+  if (accessCheckInProgress) return;
+  if (!identity || portalState(identity) !== PortalStates.APPROVED) {
+    await loadDashboard(currentUser);
+    return;
+  }
+  accessCheckInProgress = true;
+  const user = currentUser;
+  const requestGeneration = generation;
+  try {
+    const platform = parsePlatformIdentity(
+      await getPlatformProfile(user),
+      user.uid,
+    );
+    if (requestGeneration !== generation) return;
+    if (platform.products.host.state !== "active") {
+      hideProtected(true);
+      location.replace(
+        language === "he" ? "/dashboard/?lang=he" : "/dashboard/",
+      );
+      return;
+    }
+    const fresh = parseIdentity(await getProfile(user));
+    if (requestGeneration !== generation) return;
+    if (fresh.user.uid !== user.uid)
+      throw new Error(AuthErrors.INCOMPLETE_CONTRACT);
+    const accessChanged =
+      fresh.role !== identity.role ||
+      fresh.access.state !== identity.access.state ||
+      fresh.mfa.required !== identity.mfa.required ||
+      fresh.mfa.enrolled !== identity.mfa.enrolled ||
+      fresh.mfa.verified !== identity.mfa.verified ||
+      portalState(fresh) !== PortalStates.APPROVED;
+    if (accessChanged) {
+      await loadDashboard(user);
+      return;
+    }
+    identity = fresh;
+    renderProfile();
+    renderProductSwitcher($("#product-switcher"), platform, "host", language);
+  } catch (error) {
+    if (requestGeneration !== generation) return;
+    hideProtected();
+    identity = undefined;
+    showStatus(hostText("Unable to check access"), authErrorMessage(error));
+  } finally {
+    accessCheckInProgress = false;
+  }
+}
 window.addEventListener("focus", () => {
   if (
     currentUser &&
@@ -546,7 +596,7 @@ window.addEventListener("focus", () => {
     !adminActionInProgress() &&
     !membershipActionInProgress()
   ) {
-    void loadDashboard(currentUser);
+    void recheckDashboardAccess();
   }
 });
 window.addEventListener("pagehide", () => {

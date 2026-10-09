@@ -53,6 +53,8 @@
 }
 .host-sidebar nav {
   gap: 4px;
+  align-content: start;
+  grid-auto-rows: max-content;
 }
 .host-sidebar nav button {
   display: flex;
@@ -654,6 +656,10 @@ body:not([data-host-view="Calendar"]) #host-management > section > h3 {
   margin-block: 16px;
 }
 .portal-dashboard .portal-panel .workspace-tabs button {
+  min-height: 44px;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 20px;
   background: #e6f1ff;
   color: #15336e;
   border: 1px solid #aac5e8;
@@ -745,8 +751,19 @@ body:not([data-host-view="Calendar"]) #host-management > section > h3 {
 }
 
 @media (min-width: 761px) {
+  .host-sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    overflow: hidden;
+  }
+  .host-sidebar > :not(nav) {
+    flex-shrink: 0;
+  }
   .host-sidebar nav {
-    max-height: calc(100dvh - 230px);
+    flex: 1;
+    min-height: 0;
+    overflow-x: hidden;
     overflow-y: auto;
     scrollbar-width: thin;
   }

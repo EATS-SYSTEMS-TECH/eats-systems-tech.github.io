@@ -93,9 +93,15 @@ export async function loadAdminOverview(user, identity) {
   });
   const search = field(toolbar, "Search this directory", "query", "", "search");
   search.required = false;
-  const searchButton = node("button", hostText("Search"), { type: "submit" });
+  const searchButton = node("button", hostText("Search"), {
+    type: "submit",
+    class: "button-secondary",
+  });
   const add = node("button", hostText("Add admin"), { type: "button" });
-  const refresh = node("button", hostText("Refresh"), { type: "button" });
+  const refresh = node("button", hostText("Refresh"), {
+    type: "button",
+    class: "button-secondary",
+  });
   toolbar.append(searchButton, add, refresh);
   const status = node("p", hostText("Loading overview…"), {
     role: "status",
@@ -129,8 +135,8 @@ export async function loadAdminOverview(user, identity) {
       "data-tab": name,
     });
     button.append(
-      node("strong", hostText("—")),
       node("span", hostText(name[0].toUpperCase() + name.slice(1))),
+      node("strong", hostText("—")),
     );
     button.addEventListener("click", () => {
       if (!current()) return;
@@ -196,7 +202,10 @@ export async function loadAdminOverview(user, identity) {
     );
     build(form);
     const submit = node("button", submitLabel, { type: "submit" });
-    const close = node("button", hostText("Cancel"), { type: "button" });
+    const close = node("button", hostText("Cancel"), {
+      type: "button",
+      class: "button-secondary",
+    });
     close.addEventListener("click", () => modal.close());
     form.append(feedback, submit, close);
     modal.append(form);
@@ -338,7 +347,10 @@ export async function loadAdminOverview(user, identity) {
       person.status === "blocked" ? "Unblock" : "Block",
       "Remove",
     ]) {
-      const button = node("button", hostText(action), { type: "button" });
+      const button = node("button", hostText(action), {
+        type: "button",
+        class: action === "Unblock" ? "button-secondary" : "button-danger",
+      });
       const own =
         person.email === identity.user.email ||
         person.uid === identity.user.uid;
@@ -547,6 +559,7 @@ export async function loadAdminOverview(user, identity) {
     );
     const archive = node("button", hostText("Archive organization"), {
       type: "button",
+      class: "button-danger",
     });
     archive.addEventListener("click", () => void openOrganization(item, true));
     row.append(info, archive);

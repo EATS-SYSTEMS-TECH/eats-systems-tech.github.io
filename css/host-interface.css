@@ -1,0 +1,577 @@
+.portal-dashboard {
+  --host-blue: #185dcc;
+  --host-ink: #183149;
+  --host-line: #dce4ec;
+  --host-muted: #52677b;
+  --host-surface: #ffffff;
+  background: #f4f7fa;
+  font-family: "DM Sans", system-ui, "Arial", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  accent-color: var(--host-blue);
+}
+.portal-dashboard:has(.host-sidebar:not([hidden])) {
+  background: #f4f7fa;
+}
+.portal-dashboard .portal-shell {
+  max-width: 1600px;
+  padding: 0 32px 24px;
+}
+.portal-dashboard .portal-header {
+  min-height: 76px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--host-line);
+  flex-wrap: wrap;
+  padding-block: 14px;
+}
+.workspace-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--host-muted);
+  font-size: 13px;
+}
+.workspace-breadcrumb strong {
+  color: var(--host-ink);
+  font-weight: 600;
+}
+.portal-dashboard:not(:has(.host-sidebar:not([hidden]))) .workspace-breadcrumb {
+  display: none;
+}
+.portal-dashboard:has(#host-sidebar:not([hidden])) .account-menu {
+  position: static;
+  width: auto;
+  max-width: none;
+  margin-inline-start: auto;
+  gap: 12px;
+}
+.portal-dashboard:has(#host-sidebar:not([hidden])) #sign-out {
+  color: var(--host-muted);
+  padding: 8px 12px;
+  min-height: 40px;
+  border: 1px solid var(--host-line);
+  border-radius: 8px;
+  background: white;
+  font-size: 13px;
+}
+.portal-dashboard:has(#host-sidebar:not([hidden]))
+  .host-language-select
+  select {
+  background: white;
+  color: var(--host-ink);
+  border-color: var(--host-line);
+  min-height: 40px;
+  font-size: 13px;
+  padding: 8px;
+}
+.portal-dashboard .host-sidebar {
+  background: #112b40;
+  padding-bottom: 90px;
+}
+.portal-dashboard .host-sidebar .brand {
+  width: 168px;
+  margin: 0 12px 20px;
+}
+.portal-dashboard .host-sidebar nav {
+  padding: 4px;
+  scrollbar-gutter: stable;
+}
+.portal-dashboard .host-sidebar nav button {
+  min-height: 44px;
+  padding: 10px 12px;
+  border-radius: 7px;
+  font-weight: 500;
+  gap: 10px;
+}
+.portal-dashboard .host-sidebar nav button:hover:not(:disabled) {
+  background: #234359;
+}
+.portal-dashboard .host-sidebar nav button[aria-current] {
+  background: #e4f1ff;
+  color: #124886;
+  box-shadow: none;
+  font-weight: 700;
+}
+.portal-dashboard .host-sidebar nav button[aria-current]:hover {
+  background: #e4f1ff;
+}
+.portal-dashboard .sidebar-group {
+  color: #a3bacb;
+  margin: 20px 12px 6px;
+  font-size: 12px;
+}
+.portal-dashboard .sidebar-profile {
+  bottom: 16px;
+  background: #1a374d;
+  border: 1px solid #345065;
+}
+.portal-dashboard .sidebar-profile .profile-avatar {
+  background: #d3eaff;
+  color: #174c78;
+}
+.portal-dashboard .sidebar-profile small {
+  font-size: 11px;
+  color: #c0d0de;
+}
+.portal-dashboard .host-sidebar .product-switcher {
+  margin: 0 12px 16px;
+}
+.portal-dashboard .host-sidebar .product-switcher select {
+  background: #1a374d;
+  border-color: #345065;
+  min-height: 40px;
+}
+.portal-dashboard h1,
+.portal-dashboard h2,
+.portal-dashboard h3 {
+  color: var(--host-ink);
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.portal-dashboard h1 {
+  font-size: 28px;
+}
+.portal-dashboard h2 {
+  font-size: 22px;
+}
+.portal-dashboard h3 {
+  font-size: 17px;
+}
+.portal-dashboard .portal-panel p,
+.portal-dashboard dialog p {
+  color: var(--host-muted);
+  line-height: 1.6;
+}
+.portal-dashboard :where(input, select, textarea) {
+  min-width: 0;
+  min-height: 42px;
+  font: inherit;
+  padding: 9px 12px;
+  border: 1px solid #bdcbd8;
+  border-radius: 8px;
+}
+.portal-dashboard :where(input[type="checkbox"], input[type="radio"]) {
+  width: 18px;
+  min-height: 18px;
+  padding: 0;
+}
+.portal-dashboard label {
+  color: var(--host-muted);
+  font-size: 13px;
+  gap: 6px;
+}
+.portal-dashboard fieldset {
+  min-width: 0;
+  border: 1px solid var(--host-line);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 16px 0;
+  background: #f8fafc;
+}
+.portal-dashboard legend {
+  padding-inline: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--host-ink);
+}
+.portal-dashboard label:has(> input[type="checkbox"]),
+.portal-dashboard label:has(> input[type="radio"]) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-block: 10px;
+}
+.portal-dashboard label > input[type="checkbox"],
+.portal-dashboard label > input[type="radio"] {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  align-self: center;
+}
+.portal-dashboard .workspace-view-panel form:not(.calendar-controls) > button {
+  margin-inline-end: 8px;
+  margin-block-end: 8px;
+}
+.portal-dashboard
+  :where(button, input, select, textarea, a, summary):focus-visible {
+  outline: 3px solid #3680d7;
+  outline-offset: 3px;
+}
+.portal-dashboard .portal-panel button,
+.portal-dashboard dialog button {
+  min-height: 40px;
+  padding: 9px 14px;
+  background: var(--host-blue);
+  border: 1px solid var(--host-blue);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  box-shadow: none;
+}
+.portal-dashboard .portal-panel button:hover:not(:disabled),
+.portal-dashboard dialog button:hover:not(:disabled) {
+  background: #114ba9;
+}
+.portal-dashboard .portal-panel .button-secondary,
+.portal-dashboard dialog .button-secondary {
+  color: var(--host-ink);
+  background: white;
+  border-color: #bdcbd8;
+}
+.portal-dashboard .portal-panel .button-secondary:hover:not(:disabled),
+.portal-dashboard dialog .button-secondary:hover:not(:disabled) {
+  background: #edf3f8;
+}
+.portal-dashboard .portal-panel .button-danger,
+.portal-dashboard dialog .button-danger {
+  color: #a52b32;
+  background: white;
+  border-color: #e2b9bd;
+}
+.portal-dashboard .portal-panel .button-danger:hover:not(:disabled),
+.portal-dashboard dialog .button-danger:hover:not(:disabled) {
+  background: #fff0f1;
+}
+.portal-dashboard button:disabled {
+  cursor: not-allowed;
+}
+.portal-dashboard .workspace-view-panel > section,
+.portal-dashboard .workspace-view-panel > details,
+.portal-dashboard #admin-overview,
+.portal-dashboard #access-panel,
+.portal-dashboard #mfa-enrollment,
+.portal-dashboard #mfa-verification,
+.portal-dashboard[data-host-view="Settings"] #account-details:not([hidden]),
+.portal-dashboard [data-workspace-view="organization"] {
+  background: var(--host-surface);
+  border: 1px solid var(--host-line);
+  border-radius: 12px;
+  padding: 24px;
+  margin-block: 0 20px;
+  min-width: 0;
+}
+.portal-dashboard .workspace-view-panel > section > :is(h2, h3):first-child,
+.portal-dashboard #admin-overview > h1 {
+  margin-top: 0;
+}
+.portal-dashboard #host-management {
+  margin-top: 24px;
+  background: transparent;
+}
+.portal-dashboard #workspace-org-switcher {
+  display: inline-block;
+  vertical-align: middle;
+  width: min(100%, 280px);
+  margin: 0;
+}
+.portal-dashboard #workspace-org-switcher label {
+  color: var(--host-muted);
+}
+.portal-dashboard .workspace-inbox-button {
+  position: static;
+  display: inline-flex;
+  vertical-align: bottom;
+  margin: 0 0 0 12px;
+  margin-inline: 12px 0;
+  min-height: 44px;
+  border: 1px solid var(--host-line);
+  border-radius: 8px;
+  background: white;
+  color: var(--host-ink);
+  padding: 10px 14px;
+  font-size: 13px;
+}
+.portal-dashboard[data-host-view="Overview"] #workspace-org-switcher,
+.portal-dashboard[data-host-view="Settings"] #workspace-org-switcher {
+  display: none;
+}
+.portal-dashboard[data-host-view="Overview"] .workspace-inbox-button,
+.portal-dashboard[data-host-view="Settings"] .workspace-inbox-button {
+  margin-inline: 0;
+}
+.portal-dashboard #host-management .host-resource-list {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  margin-block: 16px;
+}
+.portal-dashboard .host-resource-list li {
+  padding: 18px 0;
+}
+.portal-dashboard .host-resource-list li > span {
+  margin-inline: 8px 16px;
+  color: var(--host-muted);
+}
+.portal-dashboard #host-management details {
+  border: 1px solid var(--host-line);
+  border-radius: 8px;
+  padding: 14px 16px;
+  background: #f8fafc;
+  margin-block: 16px;
+}
+.portal-dashboard
+  #host-management
+  .host-resource-list
+  li
+  > details:not([open]) {
+  display: inline-block;
+  padding: 8px 12px;
+  margin-inline-end: 8px;
+  margin-block: 12px 0;
+}
+.portal-dashboard summary {
+  color: var(--host-ink);
+  font-weight: 600;
+}
+.portal-dashboard details[open] > summary {
+  margin-bottom: 16px;
+}
+.portal-dashboard .calendar-heading {
+  margin: 0 0 20px;
+  padding-inline-start: 0;
+  min-height: 0;
+  align-items: center;
+}
+.portal-dashboard .calendar-heading h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+.portal-dashboard .calendar-heading p {
+  font-size: 13px;
+}
+.portal-dashboard .calendar-heading-actions {
+  flex-wrap: wrap;
+}
+.portal-dashboard .calendar-search input {
+  width: 200px;
+  font-size: 14px;
+}
+.portal-dashboard .calendar-toolbar {
+  background: #eef4fa;
+  flex-wrap: wrap;
+}
+.portal-dashboard .calendar-toolbar button {
+  min-height: 40px;
+  padding: 8px 12px;
+  font-size: 13px;
+  background: white;
+  color: var(--host-ink);
+  border-color: var(--host-line);
+}
+.portal-dashboard .calendar-toolbar button[aria-pressed="true"] {
+  background: var(--host-blue);
+  color: white;
+}
+.portal-dashboard .calendar-toolbar button:hover:not(:disabled) {
+  background: #e0ebf8;
+  color: #183149;
+}
+.portal-dashboard .calendar-toolbar button[aria-pressed="true"]:hover {
+  background: #114ba9;
+  color: white;
+}
+.portal-dashboard .calendar-controls {
+  padding: 16px;
+  gap: 12px;
+}
+.portal-dashboard .calendar-controls label {
+  font-size: 12px;
+  color: var(--host-muted);
+}
+.portal-dashboard .calendar-controls input,
+.portal-dashboard .calendar-controls select {
+  min-height: 40px;
+  height: auto;
+  font-size: 13px;
+}
+.portal-dashboard .calendar-scroll caption,
+.portal-dashboard .calendar-scroll thead th small {
+  color: var(--host-muted);
+  font-size: 12px;
+}
+.portal-dashboard .host-calendar .reservation-chip {
+  text-align: start;
+  border: 0;
+  margin: 4px;
+  padding: 6px 10px;
+  min-height: 54px;
+  line-height: 18px;
+}
+.portal-dashboard .host-calendar .calendar-property-group button {
+  background: transparent;
+  color: var(--host-ink);
+  border: 0;
+}
+.portal-dashboard .host-calendar .calendar-property-group button:hover {
+  background: #dce8f5;
+  color: var(--host-ink);
+}
+.portal-dashboard .host-calendar .reservation-chip:hover:not(:disabled) {
+  color: white;
+}
+.portal-dashboard .host-calendar .reservation-chip strong {
+  font-size: 13px;
+}
+.portal-dashboard .host-calendar .reservation-chip small {
+  font-size: 12px;
+}
+.portal-dashboard .calendar-onboarding {
+  max-width: 520px;
+}
+.portal-dashboard .calendar-onboarding p {
+  font-size: 14px;
+}
+.portal-dashboard .portal-panel .workspace-tabs {
+  gap: 6px;
+  border-bottom: 1px solid var(--host-line);
+  padding-bottom: 12px;
+}
+.portal-dashboard .portal-panel .workspace-tabs button {
+  background: white;
+  color: var(--host-muted);
+  border-color: var(--host-line);
+}
+.portal-dashboard .portal-panel .workspace-tabs button[aria-pressed="true"] {
+  background: #e7f0ff;
+  color: #174fa1;
+  border-color: #7fa7df;
+}
+.portal-dashboard .profile-grid {
+  gap: 0;
+  margin-block: 20px;
+}
+.portal-dashboard .profile-grid > div {
+  padding: 16px;
+  border-bottom: 1px solid var(--host-line);
+}
+.portal-dashboard dialog {
+  padding: 28px;
+  border-color: var(--host-line);
+  border-radius: 14px;
+  box-shadow: 0 24px 80px #112b4033;
+}
+.portal-dashboard dialog::backdrop {
+  background: #112b4077;
+}
+.portal-dashboard .portal-legal {
+  font-size: 12px;
+  color: var(--host-muted);
+  gap: 16px;
+  padding: 24px 0;
+}
+.workspace-skip-link {
+  position: fixed;
+  inset-block-start: -100px;
+  inset-inline-start: 16px;
+  z-index: 100;
+  padding: 12px 20px;
+  background: white;
+  color: #183149;
+  border: 2px solid #185dcc;
+  border-radius: 8px;
+}
+.workspace-skip-link:focus {
+  inset-block-start: 12px;
+}
+@media (max-width: 960px) {
+  .portal-dashboard .portal-shell {
+    padding-inline: 20px;
+  }
+  .portal-dashboard .host-sidebar .brand {
+    width: 154px;
+    margin-inline: 4px;
+  }
+}
+@media (max-width: 760px) {
+  .portal-dashboard .portal-shell {
+    padding-inline: 16px;
+  }
+  .portal-dashboard .host-sidebar {
+    padding: 16px;
+  }
+  .portal-dashboard .workspace-menu-toggle {
+    background: #234359;
+    border: 1px solid #506c81;
+    border-radius: 8px;
+    color: white;
+    padding: 10px 12px;
+  }
+  .portal-dashboard .host-sidebar .brand {
+    margin: 0 0 16px;
+  }
+  .portal-dashboard .sidebar-profile {
+    bottom: auto;
+    border: 0;
+    background: transparent;
+  }
+  .portal-dashboard .host-sidebar .product-switcher {
+    margin: 0 0 12px;
+  }
+  .portal-dashboard .portal-header {
+    gap: 12px;
+    min-height: 64px;
+    margin-bottom: 20px;
+  }
+  .workspace-breadcrumb {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .portal-dashboard .workspace-view-panel > section,
+  .portal-dashboard .workspace-view-panel > details,
+  .portal-dashboard #admin-overview,
+  .portal-dashboard #access-panel,
+  .portal-dashboard #mfa-enrollment,
+  .portal-dashboard #mfa-verification,
+  .portal-dashboard [data-workspace-view="organization"] {
+    padding: 16px;
+  }
+  .portal-dashboard #workspace-org-switcher {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  .portal-dashboard .workspace-inbox-button {
+    margin-inline: 0;
+  }
+  .portal-dashboard .calendar-heading {
+    display: grid;
+    gap: 16px;
+  }
+  .portal-dashboard .calendar-heading-actions {
+    justify-content: flex-start;
+    gap: 8px;
+  }
+  .portal-dashboard .calendar-search,
+  .portal-dashboard .calendar-search input {
+    width: 100%;
+  }
+  .portal-dashboard .calendar-toolbar {
+    gap: 10px;
+  }
+  .portal-dashboard .calendar-controls {
+    padding: 12px;
+  }
+  .portal-dashboard .calendar-controls label {
+    flex: 1 1 130px;
+    min-width: 0;
+  }
+  .portal-dashboard input,
+  .portal-dashboard select,
+  .portal-dashboard textarea {
+    font-size: 16px;
+  }
+  .portal-dashboard dialog {
+    padding: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portal-dashboard *,
+  .portal-dashboard *::before,
+  .portal-dashboard *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}

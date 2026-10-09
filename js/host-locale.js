@@ -46,6 +46,7 @@ const hebrew = {
   Optional: "לבחירה",
   "Set up an authenticator (optional)": "הגדרת מאמת (לבחירה)",
   "Checking portal access": "בודקים את הרשאות הגישה",
+  "Skip to workspace": "דילוג לסביבת העבודה",
   "Verifying your account...": "מאמתים את החשבון…",
   "Check again": "בדיקה חוזרת",
   Loading: "טוענים…",
