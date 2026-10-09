@@ -102,7 +102,7 @@ const copy = {
     ],
   },
   productGuide: {
-    imageAlt: "Gambaran umum sistem WIFIGATE: perangkat IP67, aplikasi seluler, dan papan kontrol dengan terminal sekrup, USB Type-C dan input 12-24V, Wi-Fi 6, Bluetooth LE, serta penerima 433,92MHz, beserta kemampuan platform - 500 pengguna, 20 admin, undangan tamu tanpa batas, API otomatis untuk undangan tamu, tanpa SIM atau router, stabilitas, undangan tamu cepat, riwayat 90 hari, buka otomatis, hingga 50 jadwal, pendaftaran remote RF digital, keamanan dan privasi, serta tanpa biaya langganan.",
+    imageAlt: "Gambaran umum sistem WIFIGATE: perangkat IP67, aplikasi seluler, dan papan kontrol dengan terminal sekrup, USB Type-C dan input 12-24V, Wi-Fi 6, Bluetooth LE, serta penerima 433,92MHz, beserta kemampuan platform - hingga 5000 pengguna dan 20 admin, undangan tamu tanpa batas, API otomatis untuk undangan tamu, tanpa SIM atau router, stabilitas, undangan tamu cepat, riwayat 90 hari, buka otomatis, hingga 50 jadwal, pendaftaran remote RF digital, keamanan dan privasi, serta tanpa biaya langganan.",
     eyebrow: "Video tutorial",
     title: "Mudah sejak hari pertama.",
     subtitle: "Panduan jelas untuk instalasi, penggunaan sehari-hari, dan pengaturan lanjutan.",
