@@ -103,6 +103,7 @@ for (const group of ["", "Management", "Billing", "Settings"]) {
   for (const [label, selector, icon] of items) {
     const button = document.createElement("button");
     button.type = "button";
+    button.disabled = true;
     button.dataset.view = label;
     button.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${icons[icon]}"/></svg>`;
     const text = document.createElement("span");
@@ -137,7 +138,13 @@ function updateLocation(label, push = false) {
     history[push ? "pushState" : "replaceState"](null, "", url);
 }
 function choose(label, focus = false, push = focus) {
-  if (!buttons.has(label) || !targets(label).length) return;
+  const button = buttons.get(label);
+  if (
+    !button ||
+    (!targets(label).length &&
+      !(root.dataset.loading === "true" && !button.disabled))
+  )
+    return;
   selected = label;
   updateLocation(label, push);
   refresh();
@@ -147,8 +154,10 @@ function choose(label, focus = false, push = focus) {
   }
   if (focus) {
     const target = targets(label)[0];
-    target.tabIndex = -1;
-    target.focus({ preventScroll: true });
+    if (target) {
+      target.tabIndex = -1;
+      target.focus({ preventScroll: true });
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
@@ -168,7 +177,12 @@ function refresh() {
   document.body.dataset.hostView = selected;
   const selectedTargets = targets(selected);
   for (const [label, button] of buttons) {
-    const available = targets(label).length > 0;
+    // A reload may replace the components between pointer down and up.
+    // Keep previously authorized navigation available until the new result
+    // determines which views are still authorized, without retaining records.
+    const available =
+      targets(label).length > 0 ||
+      (root.dataset.loading === "true" && !button.disabled);
     button.disabled = !available;
     if (label === "Overview") button.hidden = !available;
     button.title = available
@@ -232,7 +246,10 @@ window.addEventListener("host:workspace-view", (event) =>
 );
 window.addEventListener("host:workspace-reset", (event) => {
   selected = event.detail?.sessionEnded === false ? locationView() : "Calendar";
-  if (event.detail?.sessionEnded !== false) updateLocation(selected);
+  if (event.detail?.sessionEnded !== false) {
+    for (const button of buttons.values()) button.disabled = true;
+    updateLocation(selected);
+  }
   refresh();
 });
 window.addEventListener("popstate", () => {

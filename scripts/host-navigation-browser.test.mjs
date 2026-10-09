@@ -95,6 +95,58 @@ test("workspace preserves deep links, reloads and browser history without exposi
       .isVisible(),
     true,
   );
+  // An import approval can refresh the workspace between pointer down/up.
+  // Preserve the navigation intent while replacing authorized components.
+  await page.evaluate(() => {
+    const keys = document.createElement("section");
+    keys.setAttribute("aria-label", "WIFIGATE systems");
+    keys.textContent = "Original systems";
+    document.getElementById("host-management").append(keys);
+  });
+  const keysButton = navigation.locator('button[data-view="Access Keys"]');
+  await keysButton.hover();
+  await page.mouse.down();
+  await page.evaluate(() => {
+    const root = document.getElementById("host-management");
+    root.dataset.loading = "true";
+    root.innerHTML = '<p role="status">Refreshing authorized workspace</p>';
+  });
+  assert.equal(
+    await keysButton.isDisabled(),
+    false,
+    "a workspace refresh must not discard an in-progress navigation click",
+  );
+  await page.mouse.up();
+  await page.waitForFunction(
+    () => document.body.dataset.hostView === "Access Keys",
+  );
+  assert.equal(new URL(page.url()).searchParams.get("view"), "access-keys");
+  await page.evaluate(() => {
+    const root = document.getElementById("host-management");
+    root.innerHTML =
+      '<section class="host-calendar">Calendar content</section><section aria-label="WIFIGATE systems">Refreshed authorized systems</section>';
+    root.dataset.loading = "false";
+  });
+  await page
+    .getByText("Refreshed authorized systems", { exact: true })
+    .waitFor();
+  assert.equal(await keysButton.getAttribute("aria-current"), "page");
+  // A completed reload without the authorized section still revokes the view.
+  await page.evaluate(() => {
+    const root = document.getElementById("host-management");
+    root.dataset.loading = "true";
+    root.innerHTML = '<p role="status">Refreshing changed role</p>';
+  });
+  await page.evaluate(() => {
+    const root = document.getElementById("host-management");
+    root.innerHTML =
+      '<section class="host-calendar">Calendar content</section>';
+    root.dataset.loading = "false";
+  });
+  await page.waitForFunction(
+    () => document.body.dataset.hostView === "Calendar",
+  );
+  assert.equal(await keysButton.isDisabled(), true);
   await page.goto(origin + "/dashboard/host/?view=access-keys");
   await ready();
   await page.waitForFunction(
