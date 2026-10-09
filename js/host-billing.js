@@ -1,5 +1,6 @@
 import { portalRequest } from "./api/index.js";
 import { field, node, downloadHostCsv } from "./host-ui.js";
+import { hostText } from "./host-locale.js";
 
 export async function renderHostBilling({
   container,
@@ -15,7 +16,7 @@ export async function renderHostBilling({
     "data-workspace-billing": "",
   });
   const status = node("p", "", { role: "status", "aria-live": "polite" });
-  section.append(node("h2", "Billing statements"), status);
+  section.append(node("h2", hostText("Billing statements")), status);
   container.append(section);
   const current = () => isCurrent() && section.isConnected;
   const attempts = new Map();
@@ -28,8 +29,9 @@ export async function renderHostBilling({
       await operation();
     } catch {
       if (current())
-        status.textContent =
-          "Billing could not be updated. Refresh current data and verify permissions before retrying.";
+        status.textContent = hostText(
+          "Billing could not be updated. Refresh current data and verify permissions before retrying.",
+        );
     } finally {
       busy = false;
       if (current()) button.disabled = false;
@@ -55,27 +57,33 @@ export async function renderHostBilling({
         previousMonth,
         "month",
       ),
-      statementButton = node("button", "Generate monthly draft", {
+      statementButton = node("button", hostText("Generate monthly draft"), {
         type: "submit",
       }),
       statementRows = node("div");
     statementForm.append(statementButton);
     billing.append(
-      node("h3", "Monthly billing statements"),
+      node("h3", hostText("Monthly billing statements")),
       node(
         "p",
-        "Closed-month drafts use recorded physical system days. Pricing remains an internal proposal; generating a draft does not charge a payment.",
+        hostText(
+          "Closed-month drafts use recorded physical system days. Pricing remains an internal proposal; generating a draft does not charge a payment.",
+        ),
       ),
       statementForm,
       statementRows,
     );
-    const baselineButton = node("button", "Start verified billing history", {
-      type: "button",
-    });
+    const baselineButton = node(
+      "button",
+      hostText("Start verified billing history"),
+      { type: "button" },
+    );
     billing.append(
       node(
         "p",
-        "Older organizations can start a verified history baseline for future full months. Existing history is preserved and past use is never invented.",
+        hostText(
+          "Older organizations can start a verified history baseline for future full months. Existing history is preserved and past use is never invented.",
+        ),
       ),
       baselineButton,
     );
@@ -93,8 +101,11 @@ export async function renderHostBilling({
         );
         if (current())
           status.textContent = history.existing
-            ? "Existing billing history preserved."
-            : `Verified billing history started. First full month: ${history.firstFullMonth}. No past charges were created.`;
+            ? hostText("Existing billing history preserved.")
+            : hostText(
+                "Verified billing history started. First full month: {p0}. No past charges were created.",
+                { p0: history.firstFullMonth },
+              );
       }),
     );
     statementForm.addEventListener("submit", (event) => {
@@ -114,7 +125,7 @@ export async function renderHostBilling({
         if (!current()) return;
         const exportStatement = node(
           "button",
-          "Export statement daily breakdown",
+          hostText("Export statement daily breakdown"),
           { type: "button" },
         );
         exportStatement.addEventListener("click", () =>
@@ -127,12 +138,17 @@ export async function renderHostBilling({
         statementRows.replaceChildren(
           node(
             "p",
-            `Draft ${statement.month} · USD ${(statement.monthlyEstimateCents / 100).toFixed(2)} · ${statement.physicalSystemDays} physical system days`,
+            hostText("Draft {p0} · USD {p1} · {p2} physical system days", {
+              p0: statement.month,
+              p1: (statement.monthlyEstimateCents / 100).toFixed(2),
+              p2: statement.physicalSystemDays,
+            }),
           ),
           exportStatement,
         );
-        status.textContent =
-          "Canonical monthly draft generated. No payment was charged.";
+        status.textContent = hostText(
+          "Canonical monthly draft generated. No payment was charged.",
+        );
       });
     });
   }
@@ -146,28 +162,31 @@ export async function renderHostBilling({
         "activate",
         "text",
         [
-          ["start-trial", "Start trial"],
-          ["activate", "Activate / keep service"],
-          ["cancel", "Cancel with grace period"],
+          ["start-trial", hostText("Start trial")],
+          ["activate", hostText("Activate / keep service")],
+          ["cancel", hostText("Cancel with grace period")],
         ],
       ),
       reason = field(lifecycle, "Subscription change reason", "reason");
     reason.minLength = 5;
     reason.maxLength = 200;
-    const loadSubscription = node("button", "Load subscription", {
+    const loadSubscription = node("button", hostText("Load subscription"), {
         type: "button",
       }),
-      changeSubscription = node("button", "Apply subscription change", {
-        type: "submit",
-        disabled: "",
-      });
+      changeSubscription = node(
+        "button",
+        hostText("Apply subscription change"),
+        { type: "submit", disabled: "" },
+      );
     let subscription;
     lifecycle.append(loadSubscription, changeSubscription, lifecycleStatus);
     section.append(
-      node("h3", "Customer lifecycle"),
+      node("h3", hostText("Customer lifecycle")),
       node(
         "p",
-        "Internal pricing proposal. Subscription actions are audited and do not charge a payment method. Cancellation allows seven days of service; already imported offline passes remain valid until their expiry.",
+        hostText(
+          "Internal pricing proposal. Subscription actions are audited and do not charge a payment method. Cancellation allows seven days of service; already imported offline passes remain valid until their expiry.",
+        ),
       ),
       lifecycle,
     );
@@ -179,7 +198,23 @@ export async function renderHostBilling({
         );
         if (current()) {
           subscription = response.subscription;
-          lifecycleStatus.textContent = `${subscription.effectiveStatus ?? subscription.status} · revision ${subscription.version}${subscription.trialEndsAt ? ` · trial ends ${subscription.trialEndsAt}` : ""}${subscription.graceEndsAt ? ` · grace ends ${subscription.graceEndsAt}` : ""}`;
+          lifecycleStatus.textContent = hostText(
+            "{p0} · revision {p1}{p2}{p3}",
+            {
+              p0: subscription.effectiveStatus ?? subscription.status,
+              p1: subscription.version,
+              p2: subscription.trialEndsAt
+                ? hostText(" · trial ends {p0}", {
+                    p0: subscription.trialEndsAt,
+                  })
+                : "",
+              p3: subscription.graceEndsAt
+                ? hostText(" · grace ends {p0}", {
+                    p0: subscription.graceEndsAt,
+                  })
+                : "",
+            },
+          );
           changeSubscription.disabled = false;
         }
       }),
@@ -205,8 +240,13 @@ export async function renderHostBilling({
         );
         if (current()) {
           subscription = response.subscription;
-          lifecycleStatus.textContent = `${subscription.effectiveStatus ?? subscription.status} · revision ${subscription.version}`;
-          status.textContent = "Subscription change saved and audited.";
+          lifecycleStatus.textContent = hostText("{p0} · revision {p1}", {
+            p0: subscription.effectiveStatus ?? subscription.status,
+            p1: subscription.version,
+          });
+          status.textContent = hostText(
+            "Subscription change saved and audited.",
+          );
         }
       });
     });
@@ -218,14 +258,18 @@ export async function renderHostBilling({
         new Date().toISOString().slice(0, 7),
         "month",
       ),
-      preview = node("button", "Preview monthly pricing", { type: "submit" }),
+      preview = node("button", hostText("Preview monthly pricing"), {
+        type: "submit",
+      }),
       output = node("p");
     form.append(preview, output);
     section.append(
-      node("h3", "Internal pricing proposal"),
+      node("h3", hostText("Internal pricing proposal")),
       node(
         "p",
-        "This estimate does not issue an invoice or charge a payment method.",
+        hostText(
+          "This estimate does not issue an invoice or charge a payment method.",
+        ),
       ),
       form,
     );
@@ -238,8 +282,16 @@ export async function renderHostBilling({
           `${root}/billing/preview?${new URLSearchParams({ month: month.value })}`,
         );
         if (current()) {
-          output.textContent = `${value.plan} · ${value.activePhysicalSystems} verified physical gates · estimated USD ${(value.monthlyEstimateCents / 100).toFixed(2)} · unverified excluded ${value.unverifiedPhysicalSystems}`;
-          status.textContent = "Internal monthly estimate loaded.";
+          output.textContent = hostText(
+            "{p0} · {p1} verified physical gates · estimated USD {p2} · unverified excluded {p3}",
+            {
+              p0: value.plan,
+              p1: value.activePhysicalSystems,
+              p2: (value.monthlyEstimateCents / 100).toFixed(2),
+              p3: value.unverifiedPhysicalSystems,
+            },
+          );
+          status.textContent = hostText("Internal monthly estimate loaded.");
         }
       });
     });

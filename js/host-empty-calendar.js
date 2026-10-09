@@ -1,3 +1,4 @@
+import { hostText, hostLocale } from "./host-locale.js";
 import { node } from "./host-ui.js";
 // A real empty state: no invented properties, stays, counts or backend requests.
 export function renderEmptyHostCalendar(
@@ -12,11 +13,13 @@ export function renderEmptyHostCalendar(
     title = node("h2"),
     subtitle = node(
       "p",
-      organization ? "No properties configured" : "No organization selected",
+      organization
+        ? hostText("No properties configured")
+        : hostText("No organization selected"),
     );
   const text = node("div", undefined, { class: "calendar-heading-text" });
   text.append(title, subtitle);
-  const add = node("button", "Add Reservation", {
+  const add = node("button", hostText("Add Reservation"), {
     type: "button",
     disabled: "",
     "aria-label": "New reservation",
@@ -42,7 +45,7 @@ export function renderEmptyHostCalendar(
     ["3 Weeks", 21],
     ["1 Month", 0],
   ]) {
-    const button = node("button", label, {
+    const button = node("button", hostText(label), {
       type: "button",
       "aria-pressed": String(value === 14),
     });
@@ -58,7 +61,7 @@ export function renderEmptyHostCalendar(
     ["Today", 0],
     ["Next", 1],
   ]) {
-    const button = node("button", label, { type: "button" });
+    const button = node("button", hostText(label), { type: "button" });
     button.addEventListener("click", () => {
       if (!delta) {
         anchor = new Date();
@@ -86,26 +89,32 @@ export function renderEmptyHostCalendar(
     node(
       "span",
       reason === "organization"
-        ? "Start with your organization"
-        : "Your calendar is ready",
+        ? hostText("Start with your organization")
+        : hostText("Your calendar is ready"),
       { class: "eyebrow" },
     ),
     node(
       "h3",
       reason === "organization"
-        ? "No organization access"
-        : "Add your first property",
+        ? hostText("No organization access")
+        : hostText("Add your first property"),
     ),
     node(
       "p",
       reason === "organization"
-        ? "No active organization memberships. An owner can add your verified email."
-        : "Connect a property and its rooms to start managing real reservations.",
+        ? hostText(
+            "No active organization memberships. An owner can add your verified email.",
+          )
+        : hostText(
+            "Connect a property and its rooms to start managing real reservations.",
+          ),
     ),
   );
   const manage = node(
     "button",
-    reason === "organization" ? "View invitations" : "Manage properties",
+    reason === "organization"
+      ? hostText("View invitations")
+      : hostText("Manage properties"),
     { type: "button" },
   );
   manage.addEventListener("click", () =>
@@ -126,7 +135,7 @@ export function renderEmptyHostCalendar(
         new Date(anchor.getFullYear(), anchor.getMonth() + 1, 0).getDate(),
       end = new Date(anchor);
     end.setDate(end.getDate() + count - 1);
-    const format = new Intl.DateTimeFormat("en-US", {
+    const format = new Intl.DateTimeFormat(hostLocale, {
       month: "long",
       day: "numeric",
       year: "numeric",
@@ -136,7 +145,7 @@ export function renderEmptyHostCalendar(
       button.setAttribute("aria-pressed", String(days === value));
     const table = node("table"),
       row = node("tr");
-    row.append(node("th", "Property / Room", { scope: "col" }));
+    row.append(node("th", hostText("Property / Room"), { scope: "col" }));
     for (let i = 0; i < count; i++) {
       const day = new Date(anchor);
       day.setDate(day.getDate() + i);
@@ -144,7 +153,7 @@ export function renderEmptyHostCalendar(
       cell.append(
         node(
           "small",
-          new Intl.DateTimeFormat("en-US", { weekday: "short" }).format(day),
+          new Intl.DateTimeFormat(hostLocale, { weekday: "short" }).format(day),
         ),
         node("span", String(day.getDate())),
       );
