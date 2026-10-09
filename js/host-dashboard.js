@@ -1,4 +1,16 @@
+import {
+  hostText,
+  hostLocale,
+  initializeHostLocale,
+  installHostLanguageSelector,
+} from "./host-locale.js";
 import "./host-dashboard-navigation.js";
+import {
+  loadAdminOverview,
+  clearAdminOverview,
+  adminActionInProgress,
+} from "./host-admin-overview.js";
+import { roleBadge } from "./host-role-badge.js";
 import {
   Roles,
   PortalStates,
@@ -32,6 +44,7 @@ import {
   canEnroll,
 } from "./host-dashboard-model.js";
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
+import { membershipActionInProgress } from "./host-membership-invitations.js";
 import { authErrorMessage } from "./host-auth-errors.js";
 import { isLocalStaging } from "./firebase-config.js";
 import qrcode from "./vendor/qrcode-generator.js";
@@ -45,6 +58,8 @@ let actionBusy = false;
 let approvalAttempt;
 let session;
 const language = pageLanguage();
+initializeHostLocale();
+installHostLanguageSelector();
 if (isLocalStaging) {
   $("[data-staging]").hidden = false;
 }
@@ -64,8 +79,11 @@ const protectedElements = {
   account: $("#account-details"),
 };
 function hideProtected(sessionEnded = false) {
+  clearAdminOverview();
   clearHostManagement({ sessionEnded });
-  window.dispatchEvent(new CustomEvent("host:workspace-reset"));
+  window.dispatchEvent(
+    new CustomEvent("host:workspace-reset", { detail: { sessionEnded } }),
+  );
   protectedElements.dashboard.hidden = true;
   protectedElements.sidebar.hidden = true;
   protectedElements.approval.hidden = true;
@@ -89,15 +107,15 @@ function clearSession() {
 function showStatus(title, message, retry = true, loading = false) {
   $("#access-panel").hidden = false;
   $("#access-progress").hidden = !loading;
-  $("#access-title").textContent = title;
-  $("#dashboard-status").textContent = message;
+  $("#access-title").textContent = hostText(title);
+  $("#dashboard-status").textContent = hostText(message);
   $("#refresh-access").hidden = !retry;
 }
 function renderProfile() {
   const profile = identity.user;
-  $("#profile-name").textContent = profile.displayName || "-";
+  $("#profile-name").textContent = profile.displayName || hostText("-");
   $("#sidebar-profile-name").textContent =
-    profile.displayName || "WIFIGATE Host";
+    profile.displayName || hostText("WIFIGATE Host");
   $("#sidebar-avatar").textContent = (
     profile.displayName ||
     profile.email ||
@@ -108,18 +126,18 @@ function renderProfile() {
     .slice(0, 2)
     .join("")
     .toUpperCase();
-  $("#profile-email").textContent = profile.email || "-";
-  $("#profile-role").textContent = identity.role || "No portal role";
-  $("#profile-access").textContent = identity.access.state;
+  $("#profile-email").textContent = profile.email || hostText("-");
+  $("#profile-role").replaceChildren(roleBadge(identity.role, true));
+  $("#profile-access").textContent = hostText(identity.access.state);
   $("#profile-mfa").textContent = identity.mfa.verified
-    ? "Enrolled - session verified"
+    ? hostText("Enrolled - session verified")
     : identity.mfa.enrolled
-      ? "Enrolled - verification needed"
-      : "Not enrolled";
+      ? hostText("Enrolled - verification needed")
+      : hostText("Not enrolled");
   $("#profile-mfa-policy").textContent =
     identity.role === Roles.ADMIN || identity.mfa.required
-      ? "Required"
-      : "Optional";
+      ? hostText("Required")
+      : hostText("Optional");
   $("#account-details").hidden = false;
   $("#optional-enrollment").hidden =
     portalState(identity) !== PortalStates.APPROVED ||
@@ -129,8 +147,12 @@ function renderProfile() {
 function showEnrollment(optional) {
   $("#mfa-enrollment").hidden = false;
   $("#enrollment-description").textContent = optional
-    ? "Add an authenticator for extra account security. You can return to the calendar without enrolling."
-    : "Your account requires an authenticator before you can enter the portal.";
+    ? hostText(
+        "Add an authenticator for extra account security. You can return to the calendar without enrolling.",
+      )
+    : hostText(
+        "Your account requires an authenticator before you can enter the portal.",
+      );
   $("#cancel-enrollment").hidden = !optional;
   $("#enrollment-status").textContent = "";
   $("#start-enrollment").hidden = false;
@@ -141,12 +163,13 @@ async function loadDashboard(user) {
   currentUser = user;
   identity = undefined;
   hideProtected();
-  $("#account-name").textContent = user.email || "Signed-in account";
-  $("#sidebar-account-name").textContent = user.email || "Signed-in account";
+  $("#account-name").textContent = user.email || hostText("Signed-in account");
+  $("#sidebar-account-name").textContent =
+    user.email || hostText("Signed-in account");
   $("#sign-out").disabled = false;
   showStatus(
-    "Checking portal access",
-    "Verifying your account...",
+    hostText("Checking portal access"),
+    hostText("Verifying your account..."),
     false,
     true,
   );
@@ -183,16 +206,20 @@ async function loadDashboard(user) {
     if (state === PortalStates.PENDING) {
       clearHostManagement({ sessionEnded: true });
       showStatus(
-        "Approval pending",
-        "Your email is awaiting administrator approval. Check again after your admin approves it.",
+        hostText("Approval pending"),
+        hostText(
+          "Your email is awaiting administrator approval. Check again after your admin approves it.",
+        ),
       );
       return;
     }
     if (state === PortalStates.DENIED) {
       clearHostManagement({ sessionEnded: true });
       showStatus(
-        "Portal access denied",
-        "This verified email does not have active portal access. Contact your administrator. For Apple Hide My Email, provide your relay address.",
+        hostText("Portal access denied"),
+        hostText(
+          "This verified email does not have active portal access. Contact your administrator. For Apple Hide My Email, provide your relay address.",
+        ),
       );
       return;
     }
@@ -209,6 +236,17 @@ async function loadDashboard(user) {
     $("#host-sidebar").hidden = false;
     $("#admin-approval").hidden = !canApproveEmail(identity);
     void loadHostManagement(user, identity);
+    void loadAdminOverview(user, identity).then(() => {
+      if (
+        requestGeneration === generation &&
+        location.pathname === "/dashboard/host/overview/" &&
+        identity?.role === Roles.ADMIN
+      ) {
+        window.dispatchEvent(
+          new CustomEvent("host:workspace-view", { detail: "Overview" }),
+        );
+      }
+    });
   } catch (error) {
     if (requestGeneration !== generation) {
       return;
@@ -221,12 +259,14 @@ async function loadDashboard(user) {
     if (error.status === HttpStatus.FORBIDDEN) {
       showStatus(
         error.code === AuthErrors.ACCESS_PENDING
-          ? "Approval pending"
-          : "Portal access denied",
-        "Your account is signed in but the server has not granted portal access. Contact your administrator.",
+          ? hostText("Approval pending")
+          : hostText("Portal access denied"),
+        hostText(
+          "Your account is signed in but the server has not granted portal access. Contact your administrator.",
+        ),
       );
     } else {
-      showStatus("Unable to check access", authErrorMessage(error));
+      showStatus(hostText("Unable to check access"), authErrorMessage(error));
     }
   }
 }
@@ -247,7 +287,7 @@ initializeSiteAuth((user) => {
   session = watchSession({ clear: clearSession });
   void loadDashboard(user);
 }).catch((error) =>
-  showStatus("Unable to sign in", authErrorMessage(error), false),
+  showStatus(hostText("Unable to sign in"), authErrorMessage(error), false),
 );
 $("#sign-out").addEventListener("click", async () => {
   ++generation;
@@ -258,7 +298,7 @@ $("#sign-out").addEventListener("click", async () => {
     await session.endSession();
   } catch (error) {
     $("#sign-out").disabled = false;
-    showStatus("Unable to sign out", authErrorMessage(error));
+    showStatus(hostText("Unable to sign out"), authErrorMessage(error));
   }
 });
 $("#refresh-access").addEventListener("click", () => {
@@ -295,8 +335,9 @@ $("#start-enrollment").addEventListener("click", async () => {
   const user = currentUser;
   const requestGeneration = generation;
   $("#start-enrollment").disabled = true;
-  $("#enrollment-status").textContent =
-    "Confirm your identity in the provider window...";
+  $("#enrollment-status").textContent = hostText(
+    "Confirm your identity in the provider window...",
+  );
   try {
     await reauthenticate(user, requestMfaChallenge);
     if (requestGeneration !== generation) {
@@ -320,17 +361,19 @@ $("#start-enrollment").addEventListener("click", async () => {
     qr.make();
     $("#totp-qr").src = qr.createDataURL(5, 20);
     $("#totp-secret").value = enrollmentSecret.secretKey;
-    $("#totp-settings").textContent =
-      "Time-based code - " +
-      enrollmentSecret.codeLength +
-      " digits - " +
-      enrollmentSecret.codeIntervalSeconds +
-      " seconds - " +
-      enrollmentSecret.hashingAlgorithm;
+    $("#totp-settings").textContent = hostText(
+      "Time-based code - {digits} digits - {seconds} seconds - {algorithm}",
+      {
+        digits: enrollmentSecret.codeLength,
+        seconds: enrollmentSecret.codeIntervalSeconds,
+        algorithm: enrollmentSecret.hashingAlgorithm,
+      },
+    );
     $("#totp-setup").hidden = false;
     $("#start-enrollment").hidden = true;
-    $("#enrollment-status").textContent =
-      "Enter the current code to confirm setup.";
+    $("#enrollment-status").textContent = hostText(
+      "Enter the current code to confirm setup.",
+    );
     $("#enrollment-form input").focus();
   } catch (error) {
     if (requestGeneration === generation) {
@@ -352,7 +395,7 @@ $("#enrollment-form").addEventListener("submit", async (event) => {
   const button = event.currentTarget.querySelector("button");
   actionBusy = true;
   button.disabled = true;
-  $("#enrollment-status").textContent = "Verifying setup...";
+  $("#enrollment-status").textContent = hostText("Verifying setup...");
   try {
     await finishTotpEnrollment(
       user,
@@ -380,8 +423,9 @@ $("#verify-session").addEventListener("click", async () => {
   const user = currentUser;
   const requestGeneration = generation;
   $("#verify-session").disabled = true;
-  $("#verification-status").textContent =
-    "Confirm sign-in and enter your authenticator code...";
+  $("#verification-status").textContent = hostText(
+    "Confirm sign-in and enter your authenticator code...",
+  );
   try {
     await reauthenticate(user, requestMfaChallenge);
     await user.getIdToken(true);
@@ -419,7 +463,9 @@ $("#approval-form").addEventListener("submit", async (event) => {
   const button = form.querySelector("button");
   actionBusy = true;
   button.disabled = true;
-  $("#approval-status").textContent = "Checking administrator access...";
+  $("#approval-status").textContent = hostText(
+    "Checking administrator access...",
+  );
   try {
     const fresh = parseIdentity(await getProfile(user));
     if (requestGeneration !== generation) {
@@ -448,14 +494,14 @@ $("#approval-form").addEventListener("submit", async (event) => {
     if (requestGeneration !== generation) {
       return;
     }
-    $("#approval-status").textContent =
+    $("#approval-status").textContent = hostText(
       action === "delete"
-        ? "Portal access deleted for " + email + "."
+        ? "Portal access deleted for {email}."
         : action === "block"
-          ? "Portal access blocked for " + email + "."
-          : "Access approved for " +
-            email +
-            ". They can now sign in with that verified email.";
+          ? "Portal access blocked for {email}."
+          : "Access approved for {email}. They can now sign in with that verified email.",
+      { email },
+    );
     approvalAttempt = undefined;
     form.reset();
     updateAccessAction();
@@ -483,14 +529,23 @@ function updateAccessAction() {
 }
 window.addEventListener("host:totp-required", () => {
   if (!currentUser || !identity || actionBusy) return;
-  if (!identity.mfa.enrolled) showEnrollment(false);
-  else $("#mfa-verification").hidden = false;
+  if (!identity.mfa.enrolled) {
+    showEnrollment(true);
+    $("#dashboard-content").hidden = true;
+    $("#host-sidebar").hidden = true;
+  } else $("#mfa-verification").hidden = false;
 });
 $("#approval-form")
   .elements.namedItem("action")
   .addEventListener("change", updateAccessAction);
 window.addEventListener("focus", () => {
-  if (currentUser && !actionBusy && !enrollmentSecret) {
+  if (
+    currentUser &&
+    !actionBusy &&
+    !enrollmentSecret &&
+    !adminActionInProgress() &&
+    !membershipActionInProgress()
+  ) {
     void loadDashboard(currentUser);
   }
 });

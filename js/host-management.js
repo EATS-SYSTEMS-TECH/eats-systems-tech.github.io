@@ -1,13 +1,22 @@
+import { hostText, hostLocale } from "./host-locale.js";
+import { roleBadge, accessBadge } from "./host-role-badge.js";
 import { renderEmptyHostCalendar } from "./host-empty-calendar.js";
-import { renderPendingMembershipInvitations, renderOwnerMembershipInvitations } from "./host-membership-invitations.js";
+import {
+  renderPendingMembershipInvitations,
+  renderOwnerMembershipInvitations,
+} from "./host-membership-invitations.js";
 import { portalRequest } from "./api/index.js";
 import { readHostPages } from "./host-pages.js";
 import { renderHostApiKeys } from "./host-api-keys.js";
 import { renderHostIntegrations } from "./host-integrations.js";
 import { renderHostAutomation } from "./host-automation.js";
 import { renderHostOperations } from "./host-operations.js";
+import { renderServiceHealth } from "./host-service-health.js";
 import { renderHostImportRequests } from "./host-import-requests.js";
-import { renderSupportDiagnostics, renderSupportOwner } from "./host-support.js";
+import {
+  renderSupportDiagnostics,
+  renderSupportOwner,
+} from "./host-support.js";
 import { node, field } from "./host-ui.js";
 import { renderHostCalendar, clearHostCalendar } from "./host-calendar.js";
 
@@ -20,24 +29,57 @@ let organizations = [];
 let selectedId;
 let preferredOrganizationId;
 let sessionUid;
+const requestedOrganization = () =>
+  new URLSearchParams(location.search).get("org");
+function rememberOrganization(id) {
+  const url = new URL(location.href);
+  if (id) url.searchParams.set("org", id);
+  else url.searchParams.delete("org");
+  if (url.href !== location.href) history.replaceState(null, "", url);
+}
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
-const path = (suffix = "") => `/api/v1/organizations/${encodeURIComponent(selectedId)}${suffix}`;
-const message = (error) => ({
-  RESOURCE_CAPACITY_EXCEEDED: "This organization needs a capacity review before loading all resources. Contact support.",
-  TOTP_REQUIRED: "Verify your authenticator to manage this organization.",
-  TENANT_ACCESS_DENIED: "Your access to this organization is unavailable. Refresh your account.",
-  VERSION_CONFLICT: "This record changed. Refresh before saving again.",
-  RESOURCE_IN_USE: "This record is in use. Update its rooms or reservations first.",
-  LAST_OWNER_PROTECTED: "At least one active owner must remain.",
-  USER_NOT_FOUND: "The approved user must sign in with their verified email first.",
-  IDEMPOTENCY_CONFLICT: "This saved attempt has different data. Refresh and try again.",
-}[error.code] || "The request could not be completed. You can retry.");
-function actionForm(container, title, resourcePath, method, fields, transform = (values) => values, success) {
+const path = (suffix = "") =>
+  `/api/v1/organizations/${encodeURIComponent(selectedId)}${suffix}`;
+const message = (error) =>
+  ({
+    RESOURCE_CAPACITY_EXCEEDED: hostText(
+      "This organization needs a capacity review before loading all resources. Contact support.",
+    ),
+    TOTP_REQUIRED: hostText(
+      "Verify your authenticator to manage this organization.",
+    ),
+    TENANT_ACCESS_DENIED: hostText(
+      "Your access to this organization is unavailable. Refresh your account.",
+    ),
+    VERSION_CONFLICT: hostText(
+      "This record changed. Refresh before saving again.",
+    ),
+    RESOURCE_IN_USE: hostText(
+      "This record is in use. Update its rooms or reservations first.",
+    ),
+    LAST_OWNER_PROTECTED: hostText("At least one active owner must remain."),
+    USER_NOT_FOUND: hostText(
+      "The approved user must sign in with their verified email first.",
+    ),
+    IDEMPOTENCY_CONFLICT: hostText(
+      "This saved attempt has different data. Refresh and try again.",
+    ),
+  })[error.code] ||
+  hostText("The request could not be completed. You can retry.");
+function actionForm(
+  container,
+  title,
+  resourcePath,
+  method,
+  fields,
+  transform = (values) => values,
+  success,
+) {
   const section = node("details");
-  section.append(node("summary", title));
+  section.append(node("summary", hostText(title)));
   const form = node("form");
   fields(form);
-  const submit = node("button", title, { type: "submit" });
+  const submit = node("button", hostText(title), { type: "submit" });
   const status = node("p", "", { role: "status", "aria-live": "polite" });
   form.append(submit, status);
   section.append(form);
@@ -48,20 +90,43 @@ function actionForm(container, title, resourcePath, method, fields, transform = 
     const epoch = generation;
     const input = transform(Object.fromEntries(new FormData(form)));
     submit.disabled = true;
-    const fingerprint = [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(JSON.stringify([resourcePath, method, input]))))].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+    const fingerprint = [
+      ...new Uint8Array(
+        await crypto.subtle.digest(
+          "SHA-256",
+          new TextEncoder().encode(
+            JSON.stringify([resourcePath, method, input]),
+          ),
+        ),
+      ),
+    ]
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
     if (epoch !== generation) return;
     let key = attempts.get(fingerprint);
-    if (!key) { key = crypto.randomUUID(); attempts.set(fingerprint, key); }
+    if (!key) {
+      key = crypto.randomUUID();
+      attempts.set(fingerprint, key);
+    }
     submit.disabled = true;
-    status.textContent = "Saving…";
+    status.textContent = hostText("Saving…");
     try {
-      const result = await portalRequest(currentUser, resourcePath, method, input, key);
+      const result = await portalRequest(
+        currentUser,
+        resourcePath,
+        method,
+        input,
+        key,
+      );
       if (epoch !== generation) return;
       attempts.delete(fingerprint);
       if (success) success(result);
       await loadHostManagement(currentUser, currentIdentity, selectedId);
-    } catch (error) { if (epoch === generation) status.textContent = message(error); }
-    finally { if (epoch === generation) submit.disabled = false; }
+    } catch (error) {
+      if (epoch === generation) status.textContent = message(error);
+    } finally {
+      if (epoch === generation) submit.disabled = false;
+    }
   });
 }
 export function clearHostManagement({ sessionEnded = false } = {}) {
@@ -73,125 +138,420 @@ export function clearHostManagement({ sessionEnded = false } = {}) {
   if (selectedId) preferredOrganizationId = selectedId;
   selectedId = undefined;
   organizations = [];
-  if (sessionEnded) { attempts.clear(); sessionTransfer = undefined; sessionUid = undefined; preferredOrganizationId = undefined; }
+  if (sessionEnded) {
+    attempts.clear();
+    sessionTransfer = undefined;
+    sessionUid = undefined;
+    preferredOrganizationId = undefined;
+    rememberOrganization(undefined);
+  }
   root.replaceChildren();
   clearOrganizationSelector();
   const reference = document.querySelector(".calendar-reference");
   if (reference) reference.hidden = false;
 }
-async function renderResources(container, kind, values, canWrite, properties, cursor, epoch) {
+async function renderResources(
+  container,
+  kind,
+  values,
+  canWrite,
+  properties,
+  cursor,
+  epoch,
+) {
   const section = node("section", undefined, { "aria-label": kind });
-  section.append(node("h3", kind === "properties" ? "Properties" : kind === "rooms" ? "Rooms" : "Team"));
+  section.append(
+    node(
+      "h3",
+      kind === "properties"
+        ? hostText("Properties")
+        : kind === "rooms"
+          ? hostText("Rooms")
+          : hostText("Team"),
+    ),
+  );
   const list = node("ul", undefined, { class: "host-resource-list" });
   const inputs = (form, resource = {}) => {
     if (kind === "members") {
       field(form, "Verified email", "email", resource.email || "", "email");
-      field(form, "Role", "role", resource.role || "staff", "text", ["owner", "admin", "staff", "viewer"].map((id) => [id, id]));
-      field(form, "Access", "status", resource.status || "active", "text", [["active", "Active"], ["blocked", "Blocked"]]);
+      field(
+        form,
+        "Role",
+        "role",
+        resource.role || "staff",
+        "text",
+        ["owner", "admin", "staff", "viewer"].map((id) => [id, hostText(id)]),
+      );
+      field(form, "Access", "status", resource.status || "active", "text", [
+        ["active", hostText("Active")],
+        ["blocked", hostText("Blocked")],
+      ]);
     } else {
       field(form, "Name", "name", resource.name || "");
       if (kind === "properties") {
         field(form, "IANA timezone", "timezone", resource.timezone || timezone);
-        const address = field(form, "Address (optional)", "address", resource.address || ""); address.required = false; address.maxLength = 300;
+        const address = field(
+          form,
+          "Address (optional)",
+          "address",
+          resource.address || "",
+        );
+        address.required = false;
+        address.maxLength = 300;
       } else {
-        field(form, "Property", "propertyId", resource.propertyId || properties[0]?.id || "", "text", properties.map((property) => [property.id, property.name]));
-        const capacity = field(form, "Capacity", "capacity", resource.capacity || 2, "number"); capacity.min = "1"; capacity.max = "100";
+        field(
+          form,
+          "Property",
+          "propertyId",
+          resource.propertyId || properties[0]?.id || "",
+          "text",
+          properties.map((property) => [property.id, property.name]),
+        );
+        const capacity = field(
+          form,
+          "Capacity",
+          "capacity",
+          resource.capacity || 2,
+          "number",
+        );
+        capacity.min = "1";
+        capacity.max = "100";
       }
     }
   };
   for (const resource of values) {
     const item = node("li");
-    item.append(node("strong", resource.name || resource.email), node("span", ` ${kind === "members" ? `${resource.role} · ${resource.status}` : kind === "properties" ? resource.timezone : `Capacity ${resource.capacity}`}`));
+    item.append(
+      node("strong", resource.name || resource.email),
+      node(
+        "span",
+        ` ${kind === "members" ? `${resource.role} · ${resource.status}` : kind === "properties" ? resource.timezone : `Capacity ${resource.capacity}`}`,
+      ),
+    );
+    if (kind === "members") {
+      item
+        .querySelector("span")
+        .replaceChildren(
+          roleBadge(resource.role),
+          accessBadge(resource.status),
+        );
+    }
     if (canWrite) {
-      const updatePath = path(`/${kind}${kind === "members" ? "" : `/${encodeURIComponent(resource.id)}`}`);
-      actionForm(item, "Edit", updatePath, kind === "members" ? "POST" : "PUT", (form) => inputs(form, resource), (data) => kind === "members" ? data : { ...data, ...(kind === "rooms" ? { capacity: Number(data.capacity) } : {}), version: resource.version });
-      if (kind !== "members") actionForm(item, "Delete", updatePath, "DELETE", (form) => form.append(node("p", "This removes the record from active use.")), () => ({ version: resource.version }));
+      const updatePath = path(
+        `/${kind}${kind === "members" ? "" : `/${encodeURIComponent(resource.id)}`}`,
+      );
+      actionForm(
+        item,
+        hostText("Edit"),
+        updatePath,
+        kind === "members" ? "POST" : "PUT",
+        (form) => inputs(form, resource),
+        (data) =>
+          kind === "members"
+            ? data
+            : {
+                ...data,
+                ...(kind === "rooms"
+                  ? { capacity: Number(data.capacity) }
+                  : {}),
+                version: resource.version,
+              },
+      );
+      if (kind !== "members")
+        actionForm(
+          item,
+          hostText("Delete"),
+          updatePath,
+          "DELETE",
+          (form) =>
+            form.append(
+              node("p", hostText("This removes the record from active use.")),
+            ),
+          () => ({ version: resource.version }),
+        );
     }
     list.append(item);
   }
   section.append(list);
-  if (!values.length) section.append(node("p", "No records yet."));
-  if (canWrite && (kind !== "rooms" || properties.length)) actionForm(section, `Add ${kind === "properties" ? "property" : kind === "rooms" ? "room" : "team member"}`, path(`/${kind}`), "POST", (form) => inputs(form), (data) => kind === "rooms" ? { ...data, capacity: Number(data.capacity) } : data);
+  if (!values.length) section.append(node("p", hostText("No records yet.")));
+  if (canWrite && (kind !== "rooms" || properties.length))
+    actionForm(
+      section,
+      `Add ${kind === "properties" ? "property" : kind === "rooms" ? "room" : "team member"}`,
+      path(`/${kind}`),
+      "POST",
+      (form) => inputs(form),
+      (data) =>
+        kind === "rooms" ? { ...data, capacity: Number(data.capacity) } : data,
+    );
   if (cursor) {
-    const more = node("button", "Load more", { type: "button" });
+    const more = node("button", hostText("Load more"), { type: "button" });
     more.addEventListener("click", async () => {
       more.disabled = true;
       try {
-        const result = await portalRequest(currentUser, path(`/${kind}?limit=100&cursor=${encodeURIComponent(cursor)}`));
+        const result = await portalRequest(
+          currentUser,
+          path(`/${kind}?limit=100&cursor=${encodeURIComponent(cursor)}`),
+        );
         if (epoch !== generation) return;
         section.remove();
-        await renderResources(container, kind, [...values, ...result.items], canWrite, properties, result.nextCursor, epoch);
-      } catch (error) { if (epoch === generation) { more.disabled = false; more.textContent = message(error); } }
+        await renderResources(
+          container,
+          kind,
+          [...values, ...result.items],
+          canWrite,
+          properties,
+          result.nextCursor,
+          epoch,
+        );
+      } catch (error) {
+        if (epoch === generation) {
+          more.disabled = false;
+          more.textContent = message(error);
+        }
+      }
     });
     section.append(more);
   }
   container.append(section);
 }
-async function renderInventory(container, org, properties, rooms, epoch, loadedPage) {
-  const section = node("section", undefined, { "aria-label": "WIFIGATE systems" });
-  section.append(node("h3", "WIFIGATE systems"));
+async function renderInventory(
+  container,
+  org,
+  properties,
+  rooms,
+  epoch,
+  loadedPage,
+) {
+  const section = node("section", undefined, {
+    "aria-label": "WIFIGATE systems",
+  });
+  section.append(node("h3", hostText("WIFIGATE systems")));
   container.append(section);
   const manager = ["owner", "admin"].includes(org.membership.role);
   const mappingFields = (form, resource = {}) => {
-    const property = field(form, "Property", "propertyId", resource.propertyId || properties[0]?.id || "", "text", properties.map((item) => [item.id, item.name]));
-    const room = field(form, "Room (optional)", "roomId", resource.roomId || "", "text", [["", "Property access"], ...rooms.filter((item) => item.propertyId === property.value).map((item) => [item.id, item.name])]);
+    const property = field(
+      form,
+      "Property",
+      "propertyId",
+      resource.propertyId || properties[0]?.id || "",
+      "text",
+      properties.map((item) => [item.id, item.name]),
+    );
+    const room = field(
+      form,
+      "Room (optional)",
+      "roomId",
+      resource.roomId || "",
+      "text",
+      [
+        ["", hostText("Property access")],
+        ...rooms
+          .filter((item) => item.propertyId === property.value)
+          .map((item) => [item.id, item.name]),
+      ],
+    );
     room.required = false;
-    property.addEventListener("change", () => { room.replaceChildren(node("option", "Property access", { value: "" }), ...rooms.filter((item) => item.propertyId === property.value).map((item) => node("option", item.name, { value: item.id }))); });
+    property.addEventListener("change", () => {
+      room.replaceChildren(
+        node("option", hostText("Property access"), { value: "" }),
+        ...rooms
+          .filter((item) => item.propertyId === property.value)
+          .map((item) => node("option", item.name, { value: item.id })),
+      );
+    });
   };
   try {
-    const [page, catalog] = await Promise.all([loadedPage ? Promise.resolve(loadedPage) : portalRequest(currentUser, path("/systems?limit=100")), portalRequest(currentUser, path("/systems/icons"))]);
+    const [page, catalog] = await Promise.all([
+      loadedPage
+        ? Promise.resolve(loadedPage)
+        : portalRequest(currentUser, path("/systems?limit=100")),
+      portalRequest(currentUser, path("/systems/icons")),
+    ]);
     if (epoch !== generation) return;
     const list = node("ul", undefined, { class: "host-resource-list" });
     for (const system of page.items ?? []) {
       const row = node("li");
-      row.append(node("img", undefined, { src: `/assets/host-icons/${system.type}-${system.iconId}.svg`, alt: "", width: "48", height: "48" }), node("strong", system.name), node("p", `${system.type} · ${system.status} · ${system.systemIds.length} physical gates`), node("p", `Fingerprint: ${system.fingerprint}`));
+      row.append(
+        node("img", undefined, {
+          src: `/assets/host-icons/${system.type}-${system.iconId}.svg`,
+          alt: "",
+          width: "48",
+          height: "48",
+        }),
+        node("strong", system.name),
+        node(
+          "p",
+          hostText("{p0} · {p1} · {p2} physical gates", {
+            p0: system.type,
+            p1: hostText(system.status),
+            p2: system.systemIds.length,
+          }),
+        ),
+        node("p", hostText("Fingerprint: {p0}", { p0: system.fingerprint })),
+      );
       if (manager) {
-        actionForm(row, "System settings", path(`/systems/${system.id}`), "PUT", (form) => {
-          mappingFields(form, system);
-          field(form, "Icon", "iconId", system.iconId, "text", catalog.icons[system.type].map((id) => [id, id.replaceAll("-", " ")]));
-          field(form, "Status", "status", system.status, "text", [["active", "Active"], ["disabled", "Disabled"]]);
-        }, (data) => ({ ...data, roomId: data.roomId || null, version: system.version }));
-        actionForm(row, "Rotate Host key", path(`/systems/${system.id}/rotate`), "POST", (form) => { const secret = field(form, "New Host key", "encryptedKeyValue", "", "password"); secret.maxLength = 12288; secret.autocomplete = "off"; }, (data) => ({ encryptedKeyValue: data.encryptedKeyValue.trim(), version: system.version }));
-        if (org.membership.role === "owner" && system.status === "active") actionForm(row, "Approve organization transfer", path(`/systems/${system.id}/transfers`), "POST", (form) => { field(form, "Destination organization ID", "targetOrganizationId"); form.append(node("p", "The destination owner must accept this transfer with the same Host key. Acceptance disables every source target containing these gates.")); }, (data) => ({ ...data, version: system.version }), (value) => {
-          // Keep only the non-secret transfer reference for the owner to share.
-          sessionTransfer = value.transfer.id;
-        });
+        actionForm(
+          row,
+          hostText("System settings"),
+          path(`/systems/${system.id}`),
+          "PUT",
+          (form) => {
+            mappingFields(form, system);
+            field(
+              form,
+              "Icon",
+              "iconId",
+              system.iconId,
+              "text",
+              catalog.icons[system.type].map((id) => [
+                id,
+                id.replaceAll("-", " "),
+              ]),
+            );
+            field(form, "Status", "status", system.status, "text", [
+              ["active", hostText("Active")],
+              ["disabled", hostText("Disabled")],
+            ]);
+          },
+          (data) => ({
+            ...data,
+            roomId: data.roomId || null,
+            version: system.version,
+          }),
+        );
+        actionForm(
+          row,
+          hostText("Rotate Host key"),
+          path(`/systems/${system.id}/rotate`),
+          "POST",
+          (form) => {
+            const secret = field(
+              form,
+              "New Host key",
+              "encryptedKeyValue",
+              "",
+              "password",
+            );
+            secret.maxLength = 12288;
+            secret.autocomplete = "off";
+          },
+          (data) => ({
+            encryptedKeyValue: data.encryptedKeyValue.trim(),
+            version: system.version,
+          }),
+        );
+        if (org.membership.role === "owner" && system.status === "active")
+          actionForm(
+            row,
+            hostText("Approve organization transfer"),
+            path(`/systems/${system.id}/transfers`),
+            "POST",
+            (form) => {
+              field(
+                form,
+                "Destination organization ID",
+                "targetOrganizationId",
+              );
+              form.append(
+                node(
+                  "p",
+                  hostText(
+                    "The destination owner must accept this transfer with the same Host key. Acceptance disables every source target containing these gates.",
+                  ),
+                ),
+              );
+            },
+            (data) => ({ ...data, version: system.version }),
+            (value) => {
+              // Keep only the non-secret transfer reference for the owner to share.
+              sessionTransfer = value.transfer.id;
+            },
+          );
       }
       list.append(row);
     }
     section.append(list);
     if (org.membership.role === "owner") {
-      const transfers = await portalRequest(currentUser, path("/systems/transfers?limit=100"));
+      const transfers = await portalRequest(
+        currentUser,
+        path("/systems/transfers?limit=100"),
+      );
       if (epoch !== generation) return;
-      const history = node("details"); history.append(node("summary", "Organization transfers"));
+      const history = node("details");
+      history.append(node("summary", hostText("Organization transfers")));
       for (const transfer of transfers.items ?? []) {
         const item = node("div");
-        item.append(node("p", `Transfer ${transfer.id} · ${transfer.status} · Destination ${transfer.targetOrganizationId} · Expires ${new Date(transfer.expiresAt).toLocaleString()}`));
-        if (transfer.status === "pending") actionForm(item, "Cancel transfer", path(`/systems/transfers/${transfer.id}/cancel`), "POST", () => {}, () => ({}));
+        item.append(
+          node(
+            "p",
+            hostText("Transfer {p0} · {p1} · Destination {p2} · Expires {p3}", {
+              p0: transfer.id,
+              p1: hostText(transfer.status),
+              p2: transfer.targetOrganizationId,
+              p3: new Date(transfer.expiresAt).toLocaleString(),
+            }),
+          ),
+        );
+        if (transfer.status === "pending")
+          actionForm(
+            item,
+            hostText("Cancel transfer"),
+            path(`/systems/transfers/${transfer.id}/cancel`),
+            "POST",
+            () => {},
+            () => ({}),
+          );
         history.append(item);
       }
       section.append(history);
     }
-    if (!page.items?.length) section.append(node("p", "No connected systems yet."));
+    if (!page.items?.length)
+      section.append(node("p", hostText("No connected systems yet.")));
     if (page.nextCursor) {
-      const more = node("button", "Load more systems", { type: "button" });
+      const more = node("button", hostText("Load more systems"), {
+        type: "button",
+      });
       more.addEventListener("click", async () => {
         more.disabled = true;
         try {
-          const next = await portalRequest(currentUser, path(`/systems?limit=100&cursor=${encodeURIComponent(page.nextCursor)}`));
+          const next = await portalRequest(
+            currentUser,
+            path(
+              `/systems?limit=100&cursor=${encodeURIComponent(page.nextCursor)}`,
+            ),
+          );
           if (epoch !== generation) return;
           section.remove();
-          await renderInventory(container, org, properties, rooms, epoch, { items: [...page.items, ...next.items], nextCursor: next.nextCursor });
-        } catch (error) { if (epoch === generation) { more.disabled = false; more.textContent = message(error); } }
+          await renderInventory(container, org, properties, rooms, epoch, {
+            items: [...page.items, ...next.items],
+            nextCursor: next.nextCursor,
+          });
+        } catch (error) {
+          if (epoch === generation) {
+            more.disabled = false;
+            more.textContent = message(error);
+          }
+        }
       });
       section.append(more);
     }
     if (!manager || !properties.length) return;
     const details = node("details");
-    details.append(node("summary", "Connect WIFIGATE system"));
+    details.append(node("summary", hostText("Connect WIFIGATE system")));
     const previewForm = node("form");
-    const input = field(previewForm, "WIFIGATE Host key", "encryptedKeyValue", "", "password"); input.maxLength = 12288; input.autocomplete = "off";
-    const previewButton = node("button", "Validate key", { type: "submit" });
+    const input = field(
+      previewForm,
+      "WIFIGATE Host key",
+      "encryptedKeyValue",
+      "",
+      "password",
+    );
+    input.maxLength = 12288;
+    input.autocomplete = "off";
+    const previewButton = node("button", hostText("Validate key"), {
+      type: "submit",
+    });
     const status = node("p", "", { role: "status", "aria-live": "polite" });
     const candidate = node("div");
     previewForm.append(previewButton, status);
@@ -204,121 +564,458 @@ async function renderInventory(container, org, properties, rooms, epoch, loadedP
       candidate.replaceChildren();
       const encryptedKeyValue = input.value.trim();
       try {
-        const response = await portalRequest(currentUser, path("/systems/preview"), "POST", { encryptedKeyValue });
+        const response = await portalRequest(
+          currentUser,
+          path("/systems/preview"),
+          "POST",
+          { encryptedKeyValue },
+        );
         if (epoch !== generation) return;
         input.value = "";
         const preview = response.preview;
-        status.textContent = `${preview.name} · ${preview.type} · ${preview.systemCount} gates · Fingerprint ${preview.fingerprint}`;
+        status.textContent = hostText(
+          "{p0} · {p1} · {p2} gates · Fingerprint {p3}",
+          {
+            p0: preview.name,
+            p1: preview.type,
+            p2: preview.systemCount,
+            p3: preview.fingerprint,
+          },
+        );
         const connect = node("form");
         mappingFields(connect);
-        field(connect, "Icon", "iconId", preview.iconId, "text", catalog.icons[preview.type].map((id) => [id, id.replaceAll("-", " ")]));
+        field(
+          connect,
+          "Icon",
+          "iconId",
+          preview.iconId,
+          "text",
+          catalog.icons[preview.type].map((id) => [
+            id,
+            id.replaceAll("-", " "),
+          ]),
+        );
         if (!preview.available) {
-          if (org.membership.role !== "owner") { status.textContent += " · Already claimed. An owner must arrange a transfer."; return; }
+          if (org.membership.role !== "owner") {
+            status.textContent +=
+              " · Already claimed. An owner must arrange a transfer.";
+            return;
+          }
           field(connect, "Approved transfer ID", "transferId");
-          connect.append(node("p", "This key is already claimed. An approved transfer from its current owner is required."));
+          connect.append(
+            node(
+              "p",
+              hostText(
+                "This key is already claimed. An approved transfer from its current owner is required.",
+              ),
+            ),
+          );
         }
-        const submit = node("button", preview.available ? "Connect system" : "Accept transfer", { type: "submit" });
-        const resultStatus = node("p", "", { role: "status", "aria-live": "polite" });
-        connect.append(submit, resultStatus); candidate.append(connect);
+        const submit = node(
+          "button",
+          preview.available
+            ? hostText("Connect system")
+            : hostText("Accept transfer"),
+          { type: "submit" },
+        );
+        const resultStatus = node("p", "", {
+          role: "status",
+          "aria-live": "polite",
+        });
+        connect.append(submit, resultStatus);
+        candidate.append(connect);
         let attempt;
         connect.addEventListener("submit", async (e) => {
-          e.preventDefault(); if (submit.disabled) return;
+          e.preventDefault();
+          if (submit.disabled) return;
           const fields = Object.fromEntries(new FormData(connect));
-          const data = { ...fields, roomId: fields.roomId || null, encryptedKeyValue };
+          const data = {
+            ...fields,
+            roomId: fields.roomId || null,
+            encryptedKeyValue,
+          };
           const signature = JSON.stringify(fields);
-          if (!attempt || attempt.signature !== signature) attempt = { signature, key: crypto.randomUUID() };
+          if (!attempt || attempt.signature !== signature)
+            attempt = { signature, key: crypto.randomUUID() };
           submit.disabled = true;
           try {
-            await portalRequest(currentUser, path(preview.available ? "/systems" : "/systems/transfers/accept"), "POST", data, attempt.key);
-            if (epoch === generation) await loadHostManagement(currentUser, currentIdentity, selectedId);
-          } catch (error) { if (epoch === generation) resultStatus.textContent = message(error); }
-          finally { if (epoch === generation) submit.disabled = false; }
+            await portalRequest(
+              currentUser,
+              path(
+                preview.available ? "/systems" : "/systems/transfers/accept",
+              ),
+              "POST",
+              data,
+              attempt.key,
+            );
+            if (epoch === generation)
+              await loadHostManagement(
+                currentUser,
+                currentIdentity,
+                selectedId,
+              );
+          } catch (error) {
+            if (epoch === generation) resultStatus.textContent = message(error);
+          } finally {
+            if (epoch === generation) submit.disabled = false;
+          }
         });
-      } catch (error) { if (epoch === generation) status.textContent = message(error); }
-      finally { if (epoch === generation) previewButton.disabled = false; }
+      } catch (error) {
+        if (epoch === generation) status.textContent = message(error);
+      } finally {
+        if (epoch === generation) previewButton.disabled = false;
+      }
     });
-  } catch (error) { if (epoch === generation) section.append(node("p", message(error), { role: "status" })); }
+  } catch (error) {
+    if (epoch === generation)
+      section.append(node("p", message(error), { role: "status" }));
+  }
 }
 function clearOrganizationSelector() {
-  const holder=document.getElementById("workspace-org-switcher");
-  if(holder){const label=node("label","Organization"),select=node("select",undefined,{"aria-label":"Organization",disabled:""});select.append(node("option","No organization selected"));label.append(select);holder.replaceChildren(label);}
+  const holder = document.getElementById("workspace-org-switcher");
+  if (holder) {
+    const label = node("label", hostText("Organization")),
+      select = node("select", undefined, {
+        "aria-label": "Organization",
+        disabled: "",
+      });
+    select.append(node("option", hostText("No organization selected")));
+    label.append(select);
+    holder.replaceChildren(label);
+  }
   delete root.dataset.organizationId;
 }
 let sessionTransfer;
 export async function loadHostManagement(user, identity, preferredId) {
-  if (sessionUid !== user.uid) { attempts.clear(); sessionTransfer = undefined; preferredOrganizationId = undefined; sessionUid = user.uid; }
+  if (sessionUid !== user.uid) {
+    attempts.clear();
+    sessionTransfer = undefined;
+    preferredOrganizationId = undefined;
+    sessionUid = user.uid;
+  }
   const epoch = ++generation;
   root.dataset.requestGeneration = String(epoch);
   clearOrganizationSelector();
-  root.dataset.loading="true";
+  root.dataset.loading = "true";
   currentUser = user;
   currentIdentity = identity;
-  root.replaceChildren(node("h2", "Organizations"), node("p", "Loading your organizations…", { role: "status" }));
+  root.replaceChildren(
+    node("h2", hostText("Organizations")),
+    node("p", hostText("Loading your organizations…"), { role: "status" }),
+  );
+  // A failed secondary service must not erase the working calendar or forms.
+  // Authorization failures still reach the account-level recovery path.
+  async function renderSafely(label, render) {
+    const before = new Set(root.children);
+    try {
+      await render();
+    } catch (error) {
+      if (epoch !== generation) return;
+      if (error.status === 401 || error.status === 403) throw error;
+      for (const child of [...root.children])
+        if (!before.has(child)) child.remove();
+      const panel = node("section", undefined, { "aria-label": label });
+      const retry = node("button", hostText("Retry this section"), {
+        type: "button",
+      });
+      panel.append(
+        node("h3", hostText(label)),
+        node(
+          "p",
+          hostText(
+            "This section could not be loaded. Your other work remains available.",
+          ),
+          { role: "status" },
+        ),
+        retry,
+      );
+      root.append(panel);
+      retry.addEventListener("click", async () => {
+        if (retry.disabled || epoch !== generation) return;
+        retry.disabled = true;
+        panel.remove();
+        try {
+          await renderSafely(label, render);
+        } catch {
+          if (epoch === generation)
+            await loadHostManagement(user, identity, selectedId);
+        }
+      });
+    }
+  }
   try {
-    const result = await readHostPages(user, "/api/v1/organizations", () => epoch === generation, "organizations");
+    const result = await readHostPages(
+      user,
+      "/api/v1/organizations",
+      () => epoch === generation,
+      "organizations",
+    );
     if (epoch !== generation) return;
     organizations = result.items;
-    root.replaceChildren(node("h2", "Organizations"));
-    renderSupportDiagnostics({container: root, user, identity, isCurrent: () => epoch === generation});
-    if (identity.role === "admin") actionForm(root, "Create organization", "/api/v1/organizations", "POST", (form) => { field(form, "Organization name", "name"); field(form, "IANA timezone", "timezone", timezone); }, undefined, (value) => { selectedId = value.organization.id; });
-    await renderPendingMembershipInvitations({ container: root, user, isCurrent: () => epoch === generation, onAccepted: id => epoch === generation ? loadHostManagement(user, identity, id) : undefined });
+    root.replaceChildren(node("h2", hostText("Organizations")));
+    renderSupportDiagnostics({
+      container: root,
+      user,
+      identity,
+      isCurrent: () => epoch === generation,
+    });
+    if (identity.role === "admin")
+      actionForm(
+        root,
+        hostText("Create organization"),
+        "/api/v1/organizations",
+        "POST",
+        (form) => {
+          field(form, "Organization name", "name");
+          field(form, "IANA timezone", "timezone", timezone);
+        },
+        undefined,
+        (value) => {
+          selectedId = value.organization.id;
+        },
+      );
+    await renderPendingMembershipInvitations({
+      container: root,
+      user,
+      isCurrent: () => epoch === generation,
+      onAccepted: (id) =>
+        epoch === generation
+          ? loadHostManagement(user, identity, id)
+          : undefined,
+    });
     if (epoch !== generation) return;
-    if (!organizations.length) { root.append(node("p", "No active organization memberships. An owner can add your verified email.")); renderEmptyHostCalendar(root); root.dataset.loading="false"; return; }
-    const preferred = preferredId ?? preferredOrganizationId;
-    selectedId = organizations.some((org) => org.id === preferred) ? preferred : organizations[0].id;
+    if (!organizations.length) {
+      rememberOrganization(undefined);
+      root.append(
+        node(
+          "p",
+          hostText(
+            "No active organization memberships. An owner can add your verified email.",
+          ),
+        ),
+      );
+      renderEmptyHostCalendar(root);
+      root.dataset.loading = "false";
+      return;
+    }
+    // A URL is only a preference: the current server-authorized memberships
+    // decide which organization can load, including after a role is revoked.
+    const preferred =
+      preferredId ?? requestedOrganization() ?? preferredOrganizationId;
+    selectedId = organizations.some((org) => org.id === preferred)
+      ? preferred
+      : organizations[0].id;
     preferredOrganizationId = selectedId;
+    rememberOrganization(selectedId);
     const selection = node("form");
-    const select = field(selection, "Organization", "organization", selectedId, "text", organizations.map((org) => [org.id, org.name]));
-    (document.getElementById("workspace-org-switcher") ?? root).append(selection);
-    const selectorHolder=document.getElementById("workspace-org-switcher"); if(selectorHolder) selectorHolder.replaceChildren(selection);
-    root.dataset.organizationId=selectedId;
-    select.addEventListener("change", () => { window.dispatchEvent(new CustomEvent("host:workspace-view",{detail:"Calendar"})); void loadHostManagement(user, identity, select.value); });
+    const select = field(
+      selection,
+      "Organization",
+      "organization",
+      selectedId,
+      "text",
+      organizations.map((org) => [org.id, org.name]),
+    );
+    (document.getElementById("workspace-org-switcher") ?? root).append(
+      selection,
+    );
+    const selectorHolder = document.getElementById("workspace-org-switcher");
+    if (selectorHolder) selectorHolder.replaceChildren(selection);
+    root.dataset.organizationId = selectedId;
+    select.addEventListener("change", () => {
+      const url = new URL(location.href);
+      url.pathname = "/dashboard/host/";
+      url.searchParams.set("org", select.value);
+      url.searchParams.delete("view");
+      url.searchParams.delete("tab");
+      history.pushState(null, "", url);
+      window.dispatchEvent(
+        new CustomEvent("host:workspace-view", { detail: "Calendar" }),
+      );
+      void loadHostManagement(user, identity, select.value);
+    });
     const org = organizations.find((entry) => entry.id === selectedId);
     const owner = org.membership.role === "owner";
     const manager = owner || org.membership.role === "admin";
-    root.append(node("p", `${org.timezone} · Your role: ${org.membership.role}`));
-    root.append(node("p", `Organization ID: ${org.id}`));
-    if (sessionTransfer) root.append(node("p", `Approved transfer ID: ${sessionTransfer}`));
-    if (owner) actionForm(root, "Organization settings", path(), "PUT", (form) => { field(form, "Organization name", "name", org.name); field(form, "IANA timezone", "timezone", org.timezone); }, (data) => ({ ...data, version: org.version }));
+    root.append(
+      node(
+        "p",
+        hostText("{p0} · Your role: {p1}", {
+          p0: org.timezone,
+          p1: hostText(org.membership.role),
+        }),
+      ),
+    );
+    root.append(node("p", hostText("Organization ID: {p0}", { p0: org.id })));
+    if (sessionTransfer)
+      root.append(
+        node(
+          "p",
+          hostText("Approved transfer ID: {p0}", { p0: sessionTransfer }),
+        ),
+      );
+    if (owner)
+      actionForm(
+        root,
+        hostText("Organization settings"),
+        path(),
+        "PUT",
+        (form) => {
+          field(form, "Organization name", "name", org.name);
+          field(form, "IANA timezone", "timezone", org.timezone);
+        },
+        (data) => ({ ...data, version: org.version }),
+      );
     const [properties, rooms, members] = await Promise.all([
-      readHostPages(user, path("/properties"), () => epoch === generation), readHostPages(user, path("/rooms"), () => epoch === generation),
-      owner ? portalRequest(user, path("/members?limit=100")) : Promise.resolve({ items: [] }),
+      readHostPages(user, path("/properties"), () => epoch === generation),
+      readHostPages(user, path("/rooms"), () => epoch === generation),
+      owner
+        ? portalRequest(user, path("/members?limit=100"))
+        : Promise.resolve({ items: [] }),
     ]);
     if (epoch !== generation) return;
-    await renderResources(root, "properties", properties.items, manager, [], properties.nextCursor, epoch);
-    await renderResources(root, "rooms", rooms.items, manager, properties.items, rooms.nextCursor, epoch);
-    if (owner) await renderResources(root, "members", members.items, owner, [], members.nextCursor, epoch);
-    await renderOwnerMembershipInvitations({container:root,user,organization:org,isCurrent:()=>epoch===generation});
+    await renderResources(
+      root,
+      "properties",
+      properties.items,
+      manager,
+      [],
+      properties.nextCursor,
+      epoch,
+    );
+    await renderResources(
+      root,
+      "rooms",
+      rooms.items,
+      manager,
+      properties.items,
+      rooms.nextCursor,
+      epoch,
+    );
+    if (owner)
+      await renderResources(
+        root,
+        "members",
+        members.items,
+        owner,
+        [],
+        members.nextCursor,
+        epoch,
+      );
+    await renderOwnerMembershipInvitations({
+      container: root,
+      user,
+      organization: org,
+      isCurrent: () => epoch === generation,
+    });
     if (epoch !== generation) return;
     await renderInventory(root, org, properties.items, rooms.items, epoch);
     if (epoch !== generation) return;
-    if (!properties.items.length) renderEmptyHostCalendar(root, {organization:org,reason:"properties"});
-    await renderHostCalendar({ container: root, user, organization: org, properties: properties.items, rooms: rooms.items, isCurrent: () => epoch === generation });
+    if (!properties.items.length)
+      renderEmptyHostCalendar(root, {
+        organization: org,
+        reason: "properties",
+      });
+    await renderHostCalendar({
+      container: root,
+      user,
+      organization: org,
+      properties: properties.items,
+      rooms: rooms.items,
+      isCurrent: () => epoch === generation,
+    });
     if (epoch !== generation) return;
-    const calendarSection = root.querySelector(".host-calendar"), firstSection = root.querySelector("section");
-    if (calendarSection && firstSection !== calendarSection) root.insertBefore(calendarSection, firstSection);
-    await renderHostApiKeys({ container: root, user, organization: org, isCurrent: () => epoch === generation });
+    const calendarSection = root.querySelector(".host-calendar"),
+      firstSection = root.querySelector("section");
+    if (calendarSection && firstSection !== calendarSection)
+      root.insertBefore(calendarSection, firstSection);
+    await renderHostApiKeys({
+      container: root,
+      user,
+      organization: org,
+      isCurrent: () => epoch === generation,
+    });
     if (epoch !== generation) return;
-    await renderHostIntegrations({ container: root, user, organization: org, properties: properties.items, rooms: rooms.items, isCurrent: () => epoch === generation });
+    await renderHostIntegrations({
+      container: root,
+      user,
+      organization: org,
+      properties: properties.items,
+      rooms: rooms.items,
+      isCurrent: () => epoch === generation,
+    });
     if (epoch !== generation) return;
-    await renderHostAutomation({ container: root, user, organization: org, properties: properties.items, isCurrent: () => epoch === generation });
+    await renderHostAutomation({
+      container: root,
+      user,
+      organization: org,
+      properties: properties.items,
+      isCurrent: () => epoch === generation,
+    });
     if (epoch !== generation) return;
-    await renderHostOperations({ container: root, user, organization: org, properties: properties.items, rooms: rooms.items, isCurrent: () => epoch === generation });
+    await renderSafely("Host operations", () =>
+      renderHostOperations({
+        container: root,
+        user,
+        organization: org,
+        properties: properties.items,
+        rooms: rooms.items,
+        isCurrent: () => epoch === generation,
+      }),
+    );
     if (epoch !== generation) return;
-    await renderSupportOwner({container: root, user, organization: org, isCurrent: () => epoch === generation});
+    renderServiceHealth({
+      container: root,
+      user,
+      organization: org,
+      isCurrent: () => epoch === generation,
+    });
+    await renderSupportOwner({
+      container: root,
+      user,
+      organization: org,
+      isCurrent: () => epoch === generation,
+    });
     if (epoch !== generation) return;
-    await renderHostImportRequests({ container: root, user, organization: org, isCurrent: () => epoch === generation, onConnected: () => epoch === generation ? loadHostManagement(user, identity, org.id) : undefined });
+    await renderHostImportRequests({
+      container: root,
+      user,
+      organization: org,
+      isCurrent: () => epoch === generation,
+      onConnected: () =>
+        epoch === generation
+          ? loadHostManagement(user, identity, org.id)
+          : undefined,
+    });
   } catch (error) {
     if (epoch !== generation) return;
-    root.dataset.loading="false";
-    root.replaceChildren(node("h2", "Organizations"), node("p", message(error), { role: "status" }));
+    root.dataset.loading = "false";
+    root.replaceChildren(
+      node("h2", hostText("Organizations")),
+      node("p", message(error), { role: "status" }),
+    );
     if (error.code === "TOTP_REQUIRED") {
-      const verify = node("button", "Verify authenticator", { type: "button" });
-      verify.addEventListener("click", () => window.dispatchEvent(new CustomEvent("host:totp-required")));
+      const verify = node("button", hostText("Verify authenticator"), {
+        type: "button",
+      });
+      verify.addEventListener("click", () =>
+        window.dispatchEvent(new CustomEvent("host:totp-required")),
+      );
       root.append(verify);
     }
-    const retry = node("button", "Refresh organizations", { type: "button" });
-    retry.addEventListener("click", () => void loadHostManagement(user, identity, preferredId));
+    const retry = node("button", hostText("Refresh organizations"), {
+      type: "button",
+    });
+    retry.addEventListener(
+      "click",
+      () => void loadHostManagement(user, identity, preferredId),
+    );
     root.append(retry);
-  } finally { if(epoch===generation) root.dataset.loading="false"; }
+  } finally {
+    if (epoch === generation) root.dataset.loading = "false";
+  }
 }
+window.addEventListener("popstate", () => {
+  if (currentUser && currentIdentity && requestedOrganization() !== selectedId)
+    void loadHostManagement(currentUser, currentIdentity);
+});
