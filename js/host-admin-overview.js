@@ -1,3 +1,4 @@
+import { hostText, hostLocale } from "./host-locale.js";
 import {
   adminRequest,
   portalRequest,
@@ -11,14 +12,19 @@ import { roleBadge, accessBadge } from "./host-role-badge.js";
 
 const root = document.querySelector("#admin-overview");
 const tabs = ["admins", "users", "organizations"];
-const roles = ["owner", "admin", "staff", "viewer"].map((role) => [role, role]);
+const roles = ["owner", "admin", "staff", "viewer"].map((role) => [
+  role,
+  hostText(role),
+]);
 let generation = 0;
 let activeDialog;
 let actionBusy = false;
+let navigationAbort;
 export const adminActionInProgress = () => actionBusy;
 
 export function clearAdminOverview() {
   generation++;
+  navigationAbort?.abort();
   activeDialog?.close();
   activeDialog?.remove();
   activeDialog = undefined;
@@ -28,24 +34,35 @@ export function clearAdminOverview() {
 
 const message = (error) =>
   ({
-    GATES_CLAIMED:
+    GATES_CLAIMED: hostText(
       "Release or transfer the claimed gates before archiving this organization.",
-    LAST_OWNER_PROTECTED:
+    ),
+    LAST_OWNER_PROTECTED: hostText(
       "Invite another owner and wait for acceptance before removing the last owner.",
-    SELF_ACCESS_PROTECTED: "You cannot change your own Host access.",
-    LAST_ADMIN_PROTECTED: "At least one active Host administrator must remain.",
-    PORTAL_ACCESS_EXISTS:
+    ),
+    SELF_ACCESS_PROTECTED: hostText("You cannot change your own Host access."),
+    LAST_ADMIN_PROTECTED: hostText(
+      "At least one active Host administrator must remain.",
+    ),
+    PORTAL_ACCESS_EXISTS: hostText(
       "This email already has Host access. Find it in the people list.",
-    INVITATION_PENDING: "This person already has a pending invitation.",
-    MEMBERSHIP_EXISTS: "This person already has a Host membership.",
-    OWNER_ACCESS_BLOCKED:
+    ),
+    INVITATION_PENDING: hostText(
+      "This person already has a pending invitation.",
+    ),
+    MEMBERSHIP_EXISTS: hostText("This person already has a Host membership."),
+    OWNER_ACCESS_BLOCKED: hostText(
       "The owner's Host access is blocked. Unblock it explicitly first.",
-    VERSION_CONFLICT:
+    ),
+    VERSION_CONFLICT: hostText(
       "The record changed. Close this dialog and refresh before trying again.",
-    RECENT_REAUTH_REQUIRED:
+    ),
+    RECENT_REAUTH_REQUIRED: hostText(
       "Sign in again with your authenticator, then retry.",
-    DIRECTORY_CAPACITY_EXCEEDED:
+    ),
+    DIRECTORY_CAPACITY_EXCEEDED: hostText(
       "This directory needs a smaller page or an administrator review.",
+    ),
   })[error?.code] ??
   (error?.status === 404
     ? "This administration feature is awaiting the backend update. Your Calendar and Settings remain available."
@@ -57,6 +74,7 @@ export async function loadAdminOverview(user, identity) {
   root.hidden = false;
   const epoch = generation;
   const current = () => epoch === generation;
+  navigationAbort = new AbortController();
   const requested = new URLSearchParams(location.search).get("tab");
   let tab = tabs.includes(requested) ? requested : "admins";
   let query = "";
@@ -75,11 +93,11 @@ export async function loadAdminOverview(user, identity) {
   });
   const search = field(toolbar, "Search this directory", "query", "", "search");
   search.required = false;
-  const searchButton = node("button", "Search", { type: "submit" });
-  const add = node("button", "Add admin", { type: "button" });
-  const refresh = node("button", "Refresh", { type: "button" });
+  const searchButton = node("button", hostText("Search"), { type: "submit" });
+  const add = node("button", hostText("Add admin"), { type: "button" });
+  const refresh = node("button", hostText("Refresh"), { type: "button" });
   toolbar.append(searchButton, add, refresh);
-  const status = node("p", "Loading overview…", {
+  const status = node("p", hostText("Loading overview…"), {
     role: "status",
     "aria-live": "polite",
   });
@@ -88,10 +106,13 @@ export async function loadAdminOverview(user, identity) {
     role: "tabpanel",
     id: "admin-directory",
   });
-  const more = node("button", "Load more", { type: "button", hidden: "" });
+  const more = node("button", hostText("Load more"), {
+    type: "button",
+    hidden: "",
+  });
   root.append(
-    node("h1", "Overview"),
-    node("p", "Manage Host access, people and organizations."),
+    node("h1", hostText("Overview")),
+    node("p", hostText("Manage Host access, people and organizations.")),
     tiles,
     toolbar,
     status,
@@ -108,8 +129,8 @@ export async function loadAdminOverview(user, identity) {
       "data-tab": name,
     });
     button.append(
-      node("strong", "—"),
-      node("span", name[0].toUpperCase() + name.slice(1)),
+      node("strong", hostText("—")),
+      node("span", hostText(name[0].toUpperCase() + name.slice(1))),
     );
     button.addEventListener("click", () => {
       if (!current()) return;
@@ -119,7 +140,7 @@ export async function loadAdminOverview(user, identity) {
       const url = new URL(location.href);
       url.pathname = "/dashboard/host/overview/";
       url.searchParams.set("tab", tab);
-      history.replaceState(null, "", url);
+      if (url.href !== location.href) history.pushState(null, "", url);
       void read();
     });
     button.addEventListener("keydown", (event) => {
@@ -132,13 +153,32 @@ export async function loadAdminOverview(user, identity) {
           ? 0
           : event.key === "End"
             ? 2
-            : (index + (event.key === "ArrowRight" ? 1 : 2)) % 3;
+            : (index +
+                ((event.key === "ArrowRight") !== (hostLocale === "he-IL")
+                  ? 1
+                  : 2)) %
+              3;
       const target = tiles.querySelector(`[data-tab="${tabs[next]}"]`);
       target.focus();
       target.click();
     });
     tiles.append(button);
   }
+  window.addEventListener(
+    "popstate",
+    () => {
+      if (!current() || location.pathname !== "/dashboard/host/overview/")
+        return;
+      const requested = new URLSearchParams(location.search).get("tab");
+      const next = tabs.includes(requested) ? requested : "admins";
+      if (next === tab) return;
+      tab = next;
+      query = "";
+      search.value = "";
+      void read();
+    },
+    { signal: navigationAbort.signal },
+  );
 
   function dialog(title, description, build, submitLabel, execute) {
     activeDialog?.close();
@@ -156,7 +196,7 @@ export async function loadAdminOverview(user, identity) {
     );
     build(form);
     const submit = node("button", submitLabel, { type: "submit" });
-    const close = node("button", "Cancel", { type: "button" });
+    const close = node("button", hostText("Cancel"), { type: "button" });
     close.addEventListener("click", () => modal.close());
     form.append(feedback, submit, close);
     modal.append(form);
@@ -176,12 +216,14 @@ export async function loadAdminOverview(user, identity) {
       submit.disabled = true;
       close.disabled = true;
       actionBusy = true;
-      feedback.textContent = "Confirm your identity with your authenticator…";
+      feedback.textContent = hostText(
+        "Confirm your identity with your authenticator…",
+      );
       try {
         await reauthenticate(user, requestMfaChallenge);
         await user.getIdToken(true);
         if (!current() || !modal.isConnected) return;
-        feedback.textContent = "Saving…";
+        feedback.textContent = hostText("Saving…");
         await execute(values, attempts.get(signature));
         attempts.delete(signature);
         if (!current()) return;
@@ -215,10 +257,13 @@ export async function loadAdminOverview(user, identity) {
 
   function removeMembership(membership) {
     dialog(
-      "Remove Host membership",
-      `${membership.email} will lose Host access to ${membership.organizationName}. Other product roles and audit history remain.`,
+      hostText("Remove Host membership"),
+      hostText(
+        "{email} will lose Host access to {organization}. Other product roles and audit history remain.",
+        { email: membership.email, organization: membership.organizationName },
+      ),
       () => {},
-      "Remove membership",
+      hostText("Remove membership"),
       (_, key) =>
         adminRequest(
           user,
@@ -232,7 +277,7 @@ export async function loadAdminOverview(user, identity) {
 
   function personDetails(person) {
     const form = dialog(
-      "Person access",
+      hostText("Person access"),
       person.email,
       (form) => {
         form.append(roleBadge(person.role, true), accessBadge(person.status));
@@ -241,18 +286,18 @@ export async function loadAdminOverview(user, identity) {
           if (membership.products.host?.status !== "active") continue;
           const remove = node(
             "button",
-            `Remove from ${membership.organizationName}`,
+            hostText("Remove from {p0}", { p0: membership.organizationName }),
             { type: "button" },
           );
           remove.addEventListener("click", () => removeMembership(membership));
           form.append(remove);
         }
       },
-      "Close",
+      hostText("Close"),
       async () => {},
     );
     form.querySelector('[type="submit"]').remove();
-    form.querySelector("button:last-child").textContent = "Close";
+    form.querySelector("button:last-child").textContent = hostText("Close");
   }
 
   function personRow(person) {
@@ -273,17 +318,27 @@ export async function loadAdminOverview(user, identity) {
       information.append(
         node(
           "p",
-          `Authenticator: ${person.mfaEnrolled === null ? "Not registered" : person.mfaEnrolled ? "Enrolled" : "Not enrolled"} · Last sign-in: ${person.lastSignInAt ? new Date(person.lastSignInAt).toLocaleString() : "Not yet"}`,
+          hostText("Authenticator: {p0} · Last sign-in: {p1}", {
+            p0:
+              person.mfaEnrolled === null
+                ? hostText("Not registered")
+                : person.mfaEnrolled
+                  ? hostText("Enrolled")
+                  : hostText("Not enrolled"),
+            p1: person.lastSignInAt
+              ? new Date(person.lastSignInAt).toLocaleString()
+              : hostText("Not yet"),
+          }),
         ),
       );
     else membershipTags(information, person.memberships);
     const actions = node("details", undefined, { class: "admin-row-actions" });
-    actions.append(node("summary", "Actions"));
+    actions.append(node("summary", hostText("Actions")));
     for (const action of [
       person.status === "blocked" ? "Unblock" : "Block",
       "Remove",
     ]) {
-      const button = node("button", action, { type: "button" });
+      const button = node("button", hostText(action), { type: "button" });
       const own =
         person.email === identity.user.email ||
         person.uid === identity.user.uid;
@@ -294,14 +349,23 @@ export async function loadAdminOverview(user, identity) {
       button.disabled = own || last;
       if (button.disabled)
         button.title = own
-          ? "You cannot change your own Host access."
-          : "The last active Host admin is protected.";
+          ? hostText("You cannot change your own Host access.")
+          : hostText("The last active Host admin is protected.");
       button.addEventListener("click", () =>
         dialog(
-          `${action} Host access`,
-          `${person.email}: ${action === "Remove" ? "removes Host access and retains account and audit history" : action === "Block" ? "blocks Host access immediately" : "restores Host access"}.`,
+          hostText("{action} Host access", { action: hostText(action) }),
+          hostText("{email}: {effect}.", {
+            email: person.email,
+            effect: hostText(
+              action === "Remove"
+                ? "removes Host access and retains account and audit history"
+                : action === "Block"
+                  ? "blocks Host access immediately"
+                  : "restores Host access",
+            ),
+          }),
           () => {},
-          `${action} access`,
+          hostText("{action} access", { action: hostText(action) }),
           (_, key) =>
             action === "Remove"
               ? deletePortalAccess(user, person.email, key)
@@ -322,7 +386,7 @@ export async function loadAdminOverview(user, identity) {
   }
 
   async function openOrganization(item, archive = false) {
-    status.textContent = "Loading organization…";
+    status.textContent = hostText("Loading organization…");
     try {
       const result = await adminRequest(
         user,
@@ -331,12 +395,32 @@ export async function loadAdminOverview(user, identity) {
       if (!current()) return;
       const { organization, members, impact } = result;
       if (archive) {
-        const description = `${organization.name}: ${impact.members} members, ${impact.properties} properties, ${impact.rooms} rooms and ${impact.openReservations} open reservations will become inaccessible. History is retained. ${impact.gates ? `Release or transfer ${impact.gates} claimed gates first: ${impact.systems.map((system) => system.name).join(", ")}.` : "No gates are claimed."}`;
+        const description =
+          hostText(
+            "{name}: {members} members, {properties} properties, {rooms} rooms and {reservations} open reservations will become inaccessible. History is retained.",
+            {
+              name: organization.name,
+              members: impact.members,
+              properties: impact.properties,
+              rooms: impact.rooms,
+              reservations: impact.openReservations,
+            },
+          ) +
+          " " +
+          (impact.gates
+            ? hostText(
+                "Release or transfer {count} claimed gates first: {names}.",
+                {
+                  count: impact.gates,
+                  names: impact.systems.map((system) => system.name).join(", "),
+                },
+              )
+            : hostText("No gates are claimed."));
         const form = dialog(
-          "Archive organization",
+          hostText("Archive organization"),
           description,
           (form) => field(form, "Type the organization name", "confirmName"),
-          "Archive organization",
+          hostText("Archive organization"),
           (values, key) =>
             portalRequest(
               user,
@@ -359,16 +443,22 @@ export async function loadAdminOverview(user, identity) {
       } else {
         const form = dialog(
           organization.name,
-          "Organization members and their roles in each product. Invitations appear in the recipient's dashboard; no email is sent automatically.",
+          hostText(
+            "Organization members and their roles in each product. Invitations appear in the recipient's dashboard; no email is sent automatically.",
+          ),
           (form) => {
             for (const member of members) {
               const block = node("article");
               block.append(node("h3", member.email));
               membershipTags(block, [member]);
               if (member.products.host?.status === "active") {
-                const remove = node("button", "Remove Host membership", {
-                  type: "button",
-                });
+                const remove = node(
+                  "button",
+                  hostText("Remove Host membership"),
+                  {
+                    type: "button",
+                  },
+                );
                 remove.addEventListener("click", () =>
                   removeMembership(member),
                 );
@@ -379,7 +469,7 @@ export async function loadAdminOverview(user, identity) {
             field(form, "Invite email", "email", "", "email");
             field(form, "Organization role", "role", "staff", "text", roles);
           },
-          "Invite member",
+          hostText("Invite member"),
           (values, key) =>
             adminRequest(
               user,
@@ -403,17 +493,22 @@ export async function loadAdminOverview(user, identity) {
             ownerRole,
             node(
               "p",
-              "Waiting for the owner to accept. You can renew their invitation after its seven-day deadline.",
+              hostText(
+                "Waiting for the owner to accept. You can renew their invitation after its seven-day deadline.",
+              ),
             ),
           );
-          form.querySelector('[type="submit"]').textContent =
-            "Renew owner invitation";
+          form.querySelector('[type="submit"]').textContent = hostText(
+            "Renew owner invitation",
+          );
         } else if (organization.status !== "active") {
           form.querySelector('[type="submit"]').disabled = true;
           form.append(
             node(
               "p",
-              "Waiting for the initial owner to accept their invitation.",
+              hostText(
+                "Waiting for the initial owner to accept their invitation.",
+              ),
             ),
           );
         }
@@ -437,14 +532,22 @@ export async function loadAdminOverview(user, identity) {
       accessBadge(item.status),
       node(
         "p",
-        `Owner: ${item.owners.join(", ") || item.ownerEmail || "Needs review"}`,
+        hostText("Owner: {p0}", {
+          p0: item.owners.join(", ") || item.ownerEmail || "Needs review",
+        }),
       ),
       node(
         "p",
-        `${item.memberCount} members · ${item.gateCount} gates · ${item.products.join(" / ")}`,
+        hostText("{p0} members · {p1} gates · {p2}", {
+          p0: item.memberCount,
+          p1: item.gateCount,
+          p2: item.products.join(" / "),
+        }),
       ),
     );
-    const archive = node("button", "Archive organization", { type: "button" });
+    const archive = node("button", hostText("Archive organization"), {
+      type: "button",
+    });
     archive.addEventListener("click", () => void openOrganization(item, true));
     row.append(info, archive);
     return row;
@@ -454,14 +557,14 @@ export async function loadAdminOverview(user, identity) {
     if (!current()) return;
     const request = ++requestGeneration;
     const selected = tab;
-    status.textContent = "Loading directory…";
+    status.textContent = hostText("Loading directory…");
     more.disabled = true;
     add.textContent =
       selected === "organizations"
-        ? "Create organization"
+        ? hostText("Create organization")
         : selected === "admins"
-          ? "Add admin"
-          : "Add user";
+          ? hostText("Add admin")
+          : hostText("Add user");
     for (const button of tiles.children) {
       button.setAttribute(
         "aria-selected",
@@ -498,10 +601,10 @@ export async function loadAdminOverview(user, identity) {
       more.hidden = !nextCursor;
       more.disabled = false;
       status.textContent = result.items.length
-        ? "Directory loaded."
+        ? hostText("Directory loaded.")
         : nextCursor
-          ? "No matches on this page. Continue to the next page."
-          : "No matching records.";
+          ? hostText("No matches on this page. Continue to the next page.")
+          : hostText("No matching records.");
     } catch (error) {
       if (current() && request === requestGeneration) {
         status.textContent = message(error);
@@ -513,8 +616,10 @@ export async function loadAdminOverview(user, identity) {
   add.addEventListener("click", () => {
     if (tab === "organizations") {
       dialog(
-        "Create organization",
-        "The owner will receive an invitation in their dashboard. The organization becomes active after they accept with an authenticator. No email is sent automatically.",
+        hostText("Create organization"),
+        hostText(
+          "The owner will receive an invitation in their dashboard. The organization becomes active after they accept with an authenticator. No email is sent automatically.",
+        ),
         (form) => {
           field(form, "Organization name", "name");
           field(
@@ -525,7 +630,7 @@ export async function loadAdminOverview(user, identity) {
           );
           field(form, "Owner email", "ownerEmail", "", "email");
         },
-        "Create organization",
+        hostText("Create organization"),
         (values, key) =>
           adminRequest(
             user,
@@ -539,10 +644,12 @@ export async function loadAdminOverview(user, identity) {
     }
     const role = tab === "admins" ? "admin" : "user";
     const form = dialog(
-      `Add ${role}`,
-      "Approve this email for Host. They sign in with the same verified Google or Apple email.",
+      hostText("Add {role}", { role: hostText(role) }),
+      hostText(
+        "Approve this email for Host. They sign in with the same verified Google or Apple email.",
+      ),
       (form) => field(form, "Email", "email", "", "email"),
-      `Add ${role}`,
+      hostText("Add {role}", { role: hostText(role) }),
       (values, key) =>
         adminRequest(
           user,
@@ -572,7 +679,7 @@ export async function loadAdminOverview(user, identity) {
         "organization",
         "",
         "text",
-        [["", "Host access only"]],
+        [["", hostText("Host access only")]],
       );
       selector.required = false;
       field(
@@ -586,10 +693,14 @@ export async function loadAdminOverview(user, identity) {
       section.append(
         node(
           "p",
-          "Choosing an organization also creates an invitation. The user accepts it in their dashboard.",
+          hostText(
+            "Choosing an organization also creates an invitation. The user accepts it in their dashboard.",
+          ),
         ),
       );
-      const load = node("button", "Load organizations", { type: "button" });
+      const load = node("button", hostText("Load organizations"), {
+        type: "button",
+      });
       section.append(load);
       let cursor;
       load.addEventListener("click", async () => {
@@ -610,7 +721,7 @@ export async function loadAdminOverview(user, identity) {
             selector.append(node("option", org.name, { value: org.id }));
           cursor = result.nextCursor;
           load.hidden = !cursor;
-          load.textContent = "Load more organizations";
+          load.textContent = hostText("Load more organizations");
         } catch (error) {
           if (form.isConnected) load.textContent = message(error);
         } finally {
