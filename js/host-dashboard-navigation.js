@@ -1,4 +1,5 @@
 // Views reuse server-authorized components; no image or sample reservations are rendered.
+import { hostText } from "./host-locale.js";
 const nav = document.getElementById("host-section-navigation"),
   root = document.getElementById("host-management");
 const entries = [
@@ -96,7 +97,7 @@ for (const group of ["", "Management", "Billing", "Settings"]) {
   if (group) {
     const title = document.createElement("p");
     title.className = "sidebar-group";
-    title.textContent = group;
+    title.textContent = hostText(group);
     nav.append(title);
   }
   for (const [label, selector, icon] of items) {
@@ -105,7 +106,7 @@ for (const group of ["", "Management", "Billing", "Settings"]) {
     button.dataset.view = label;
     button.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${icons[icon]}"/></svg>`;
     const text = document.createElement("span");
-    text.textContent = label;
+    text.textContent = hostText(label);
     button.append(text);
     button.addEventListener("click", () => choose(label, true));
     buttons.set(label, button);
@@ -115,18 +116,25 @@ for (const group of ["", "Management", "Billing", "Settings"]) {
 function targets(label) {
   const entry = entries.find((item) => item[0] === label);
   return entry
-    ? [...document.querySelectorAll(entry[1])].filter(
-        (element) => !element.hidden,
-      )
+    ? [
+        ...document.querySelectorAll(
+          entry[1] +
+            ", " +
+            entry[1].replaceAll("aria-label=", "data-host-section="),
+        ),
+      ].filter((element) => !element.hidden)
     : [];
 }
 function updateLocation(label, push = false) {
   const url = new URL(location.href);
-  url.pathname = label === "Overview" ? "/dashboard/host/overview/" : "/dashboard/host/";
-  if (label === "Overview" || label === "Calendar") url.searchParams.delete("view");
+  url.pathname =
+    label === "Overview" ? "/dashboard/host/overview/" : "/dashboard/host/";
+  if (label === "Overview" || label === "Calendar")
+    url.searchParams.delete("view");
   else url.searchParams.set("view", viewSlug(label));
   if (label !== "Overview") url.searchParams.delete("tab");
-  if (url.href !== location.href) history[push ? "pushState" : "replaceState"](null, "", url);
+  if (url.href !== location.href)
+    history[push ? "pushState" : "replaceState"](null, "", url);
 }
 function choose(label, focus = false, push = focus) {
   if (!buttons.has(label) || !targets(label).length) return;
@@ -145,7 +153,11 @@ function choose(label, focus = false, push = focus) {
   }
 }
 function refresh() {
-  if (root.dataset.loading === "false" && selected !== "Calendar" && !targets(selected).length) {
+  if (
+    root.dataset.loading === "false" &&
+    selected !== "Calendar" &&
+    !targets(selected).length
+  ) {
     selected = "Calendar";
     updateLocation(selected);
   }
@@ -162,8 +174,8 @@ function refresh() {
     button.title = available
       ? ""
       : root.dataset.organizationId
-        ? "Unavailable for your current role"
-        : "Choose an authorized organization first";
+        ? hostText("Unavailable for your current role")
+        : hostText("Choose an authorized organization first");
     if (label === selected) button.setAttribute("aria-current", "page");
     else button.removeAttribute("aria-current");
   }
@@ -173,11 +185,7 @@ function refresh() {
       selectedTargets.some(
         (target) => child === target || child.contains(target),
       );
-    if (
-      root.dataset.loading === "true" &&
-      child.tagName === "P"
-    )
-      show = true;
+    if (root.dataset.loading === "true" && child.tagName === "P") show = true;
     if (
       selected === "Calendar" &&
       root.dataset.loading !== "true" &&
@@ -194,7 +202,7 @@ function refresh() {
   }
   // Billing is a real draft-statement view within the operations component.
   const operations = root.querySelector(
-    'section[aria-label="Host operations"]',
+    'section[data-host-section="Host operations"], section[aria-label="Host operations"]',
   );
   if (operations)
     for (const child of operations.children)

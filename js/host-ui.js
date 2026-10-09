@@ -1,10 +1,15 @@
 import { roleBadge } from "./host-role-badge.js";
+import { hostText } from "./host-locale.js";
 
 export const node = (tag, text, attrs = {}) => {
   const element = document.createElement(tag);
   if (text !== undefined) element.textContent = text;
-  for (const [key, value] of Object.entries(attrs))
-    element.setAttribute(key, value);
+  for (const [key, value] of Object.entries(attrs)) {
+    if (key === "aria-label") {
+      if (tag === "section") element.dataset.hostSection = value;
+      element.setAttribute(key, hostText(value));
+    } else element.setAttribute(key, value);
+  }
   return element;
 };
 export function downloadHostCsv(items, fields, filename) {
@@ -32,7 +37,7 @@ export function downloadHostTextCsv(csv, filename) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 export function field(form, label, name, value = "", type = "text", options) {
-  const wrapper = node("label", label);
+  const wrapper = node("label", hostText(label));
   const input = node(options ? "select" : "input", undefined, {
     name,
     "aria-label": label,

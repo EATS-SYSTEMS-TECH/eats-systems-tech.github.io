@@ -1,3 +1,4 @@
+import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
 import { field, node } from "./host-ui.js";
 
@@ -14,13 +15,18 @@ export function renderServiceTargets({
   const panel = node("section", undefined, {
     "aria-label": "Internal service targets",
   });
-  const summary = node("p", "Load the current service target policy."),
-    load = node("button", "Load service targets", { type: "button" });
+  const summary = node(
+      "p",
+      hostText("Load the current service target policy."),
+    ),
+    load = node("button", hostText("Load service targets"), { type: "button" });
   panel.append(
-    node("h3", "Internal service targets"),
+    node("h3", hostText("Internal service targets")),
     node(
       "p",
-      "Owner-approved internal thresholds. Missing evidence stays unknown. These settings do not publish a commercial SLA.",
+      hostText(
+        "Owner-approved internal thresholds. Missing evidence stays unknown. These settings do not publish a commercial SLA.",
+      ),
     ),
     load,
     summary,
@@ -33,7 +39,7 @@ export function renderServiceTargets({
       type: "checkbox",
       "aria-label": "Enable service targets",
     }),
-    toggle = node("label", "Enable service targets");
+    toggle = node("label", hostText("Enable service targets"));
   toggle.append(enabled);
   form.append(toggle);
   const responsible = field(
@@ -92,7 +98,7 @@ export function renderServiceTargets({
       return [name, input];
     }),
   );
-  const save = node("button", "Save service targets", {
+  const save = node("button", hostText("Save service targets"), {
     type: "submit",
     disabled: "",
   });
@@ -102,8 +108,15 @@ export function renderServiceTargets({
     policy = value.policy;
     loaded = true;
     summary.textContent = policy
-      ? `Targets ${policy.enabled ? "enabled" : "disabled"} · revision ${policy.version} · responsible member ${value.ownerActive === false ? "unavailable" : "active"}`
-      : "No service targets configured.";
+      ? hostText("Targets {p0} · revision {p1} · responsible member {p2}", {
+          p0: policy.enabled ? hostText("enabled") : hostText("disabled"),
+          p1: policy.version,
+          p2:
+            value.ownerActive === false
+              ? hostText("unavailable")
+              : hostText("active"),
+        })
+      : hostText("No service targets configured.");
     enabled.checked = policy?.enabled ?? false;
     responsible.value = policy?.responsibleUid ?? user.uid;
     for (const [name, input] of Object.entries(controls))
@@ -115,7 +128,7 @@ export function renderServiceTargets({
       const value = await portalRequest(user, `${root}/operations/slo-policy`);
       if (current()) {
         display(value);
-        status.textContent = "Service targets loaded.";
+        status.textContent = hostText("Service targets loaded.");
       }
     }),
   );
@@ -155,7 +168,7 @@ export function renderServiceTargets({
           display(value);
           delete form.dataset.intentBody;
           delete form.dataset.intentKey;
-          status.textContent = "Service targets saved and audited.";
+          status.textContent = hostText("Service targets saved and audited.");
           onSaved();
         }
       } finally {
