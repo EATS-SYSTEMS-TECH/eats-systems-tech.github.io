@@ -1,3 +1,4 @@
+import { hostText, hostLocale } from "./host-locale.js";
 import { roleBadge, accessBadge } from "./host-role-badge.js";
 import { renderEmptyHostCalendar } from "./host-empty-calendar.js";
 import {
@@ -33,27 +34,46 @@ let selectedId;
 let preferredOrganizationId;
 let sessionUid;
 let navigateWorkspace;
+const requestedOrganization = () =>
+  new URLSearchParams(location.search).get("org");
+function rememberOrganization(id) {
+  const url = new URL(location.href);
+  if (id) url.searchParams.set("org", id);
+  else url.searchParams.delete("org");
+  if (url.href !== location.href) history.replaceState(null, "", url);
+}
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
 const path = (suffix = "") =>
   `/api/v1/organizations/${encodeURIComponent(selectedId)}${suffix}`;
 const message = (error) =>
   ({
-    RESOURCE_CAPACITY_EXCEEDED:
+    RESOURCE_CAPACITY_EXCEEDED: hostText(
       "This organization needs a capacity review before loading all resources. Contact support.",
-    TOTP_REQUIRED: "Verify your authenticator to manage this organization.",
-    TENANT_ACCESS_DENIED:
+    ),
+    TOTP_REQUIRED: hostText(
+      "Verify your authenticator to manage this organization.",
+    ),
+    TENANT_ACCESS_DENIED: hostText(
       "Your access to this organization is unavailable. Refresh your account.",
-    VERSION_CONFLICT: "This record changed. Refresh before saving again.",
-    RESOURCE_IN_USE:
+    ),
+    VERSION_CONFLICT: hostText(
+      "This record changed. Refresh before saving again.",
+    ),
+    RESOURCE_IN_USE: hostText(
       "This record is in use. Update its rooms or reservations first.",
-    LAST_OWNER_PROTECTED: "At least one active owner must remain.",
-    USER_NOT_FOUND:
+    ),
+    LAST_OWNER_PROTECTED: hostText("At least one active owner must remain."),
+    USER_NOT_FOUND: hostText(
       "The approved user must sign in with their verified email first.",
-    IDEMPOTENCY_CONFLICT:
+    ),
+    IDEMPOTENCY_CONFLICT: hostText(
       "This saved attempt has different data. Refresh and try again.",
-    SUBSCRIPTION_UNAVAILABLE:
+    ),
+    SUBSCRIPTION_UNAVAILABLE: hostText(
       "Service is unavailable. An owner can review the subscription in Billing statements.",
-  })[error.code] || "The request could not be completed. You can retry.";
+    ),
+  })[error.code] ||
+  hostText("The request could not be completed. You can retry.");
 function actionForm(
   container,
   title,
@@ -64,10 +84,10 @@ function actionForm(
   success,
 ) {
   const section = node("details");
-  section.append(node("summary", title));
+  section.append(node("summary", hostText(title)));
   const form = node("form");
   fields(form);
-  const submit = node("button", title, { type: "submit" });
+  const submit = node("button", hostText(title), { type: "submit" });
   const status = node("p", "", { role: "status", "aria-live": "polite" });
   form.append(submit, status);
   section.append(form);
@@ -97,7 +117,7 @@ function actionForm(
       attempts.set(fingerprint, key);
     }
     submit.disabled = true;
-    status.textContent = "Saving…";
+    status.textContent = hostText("Saving…");
     try {
       const result = await portalRequest(
         currentUser,
@@ -133,6 +153,7 @@ export function clearHostManagement({ sessionEnded = false } = {}) {
     sessionTransfer = undefined;
     sessionUid = undefined;
     preferredOrganizationId = undefined;
+    rememberOrganization(undefined);
   }
   root.replaceChildren();
   clearOrganizationSelector();
@@ -181,10 +202,10 @@ async function renderResources(
     node(
       "h3",
       kind === "properties"
-        ? "Properties"
+        ? hostText("Properties")
         : kind === "rooms"
-          ? "Rooms"
-          : "Team",
+          ? hostText("Rooms")
+          : hostText("Team"),
     ),
   );
   const list = node("ul", undefined, { class: "host-resource-list" });
@@ -197,11 +218,11 @@ async function renderResources(
         "role",
         resource.role || "staff",
         "text",
-        ["owner", "admin", "staff", "viewer"].map((id) => [id, id]),
+        ["owner", "admin", "staff", "viewer"].map((id) => [id, hostText(id)]),
       );
       field(form, "Access", "status", resource.status || "active", "text", [
-        ["active", "Active"],
-        ["blocked", "Blocked"],
+        ["active", hostText("Active")],
+        ["blocked", hostText("Blocked")],
       ]);
     } else {
       field(form, "Name", "name", resource.name || "");
@@ -269,7 +290,7 @@ async function renderResources(
       );
       actionForm(
         item,
-        "Edit",
+        hostText("Edit"),
         updatePath,
         kind === "members" ? "POST" : "PUT",
         (form) => inputs(form, resource),
@@ -287,11 +308,13 @@ async function renderResources(
       if (kind !== "members")
         actionForm(
           item,
-          "Delete",
+          hostText("Delete"),
           updatePath,
           "DELETE",
           (form) =>
-            form.append(node("p", "This removes the record from active use.")),
+            form.append(
+              node("p", hostText("This removes the record from active use.")),
+            ),
           () => ({ version: resource.version }),
         );
     }
@@ -320,7 +343,7 @@ async function renderResources(
     });
     section.insertBefore(filterForm, list);
   }
-  if (!values.length) section.append(node("p", "No records yet."));
+  if (!values.length) section.append(node("p", hostText("No records yet.")));
   if (canWrite && (kind !== "rooms" || properties.length))
     actionForm(
       section,
@@ -332,7 +355,7 @@ async function renderResources(
         kind === "rooms" ? { ...data, capacity: Number(data.capacity) } : data,
     );
   if (cursor) {
-    const more = node("button", "Load more", { type: "button" });
+    const more = node("button", hostText("Load more"), { type: "button" });
     more.addEventListener("click", async () => {
       more.disabled = true;
       try {
@@ -373,7 +396,7 @@ async function renderInventory(
   const section = node("section", undefined, {
     "aria-label": "WIFIGATE systems",
   });
-  section.append(node("h3", "WIFIGATE systems"));
+  section.append(node("h3", hostText("WIFIGATE systems")));
   container.append(section);
   const manager = ["owner", "admin"].includes(org.membership.role);
   const mappingFields = (form, resource = {}) => {
@@ -392,7 +415,7 @@ async function renderInventory(
       resource.roomId || "",
       "text",
       [
-        ["", "Property access"],
+        ["", hostText("Property access")],
         ...rooms
           .filter((item) => item.propertyId === property.value)
           .map((item) => [item.id, item.name]),
@@ -401,7 +424,7 @@ async function renderInventory(
     room.required = false;
     property.addEventListener("change", () => {
       room.replaceChildren(
-        node("option", "Property access", { value: "" }),
+        node("option", hostText("Property access"), { value: "" }),
         ...rooms
           .filter((item) => item.propertyId === property.value)
           .map((item) => node("option", item.name, { value: item.id })),
@@ -429,14 +452,18 @@ async function renderInventory(
         node("strong", system.name),
         node(
           "p",
-          `${system.type} · ${system.status} · ${system.systemIds.length} physical gates`,
+          hostText("{p0} · {p1} · {p2} physical gates", {
+            p0: system.type,
+            p1: hostText(system.status),
+            p2: system.systemIds.length,
+          }),
         ),
-        node("p", `Fingerprint: ${system.fingerprint}`),
+        node("p", hostText("Fingerprint: {p0}", { p0: system.fingerprint })),
       );
       if (manager) {
         actionForm(
           row,
-          "System settings",
+          hostText("System settings"),
           path(`/systems/${system.id}`),
           "PUT",
           (form) => {
@@ -453,8 +480,8 @@ async function renderInventory(
               ]),
             );
             field(form, "Status", "status", system.status, "text", [
-              ["active", "Active"],
-              ["disabled", "Disabled"],
+              ["active", hostText("Active")],
+              ["disabled", hostText("Disabled")],
             ]);
           },
           (data) => ({
@@ -465,7 +492,7 @@ async function renderInventory(
         );
         actionForm(
           row,
-          "Rotate Host key",
+          hostText("Rotate Host key"),
           path(`/systems/${system.id}/rotate`),
           "POST",
           (form) => {
@@ -487,7 +514,7 @@ async function renderInventory(
         if (org.membership.role === "owner" && system.status === "active")
           actionForm(
             row,
-            "Approve organization transfer",
+            hostText("Approve organization transfer"),
             path(`/systems/${system.id}/transfers`),
             "POST",
             (form) => {
@@ -499,7 +526,9 @@ async function renderInventory(
               form.append(
                 node(
                   "p",
-                  "The destination owner must accept this transfer with the same Host key. Acceptance disables every source target containing these gates.",
+                  hostText(
+                    "The destination owner must accept this transfer with the same Host key. Acceptance disables every source target containing these gates.",
+                  ),
                 ),
               );
             },
@@ -520,19 +549,24 @@ async function renderInventory(
       );
       if (epoch !== generation) return;
       const history = node("details");
-      history.append(node("summary", "Organization transfers"));
+      history.append(node("summary", hostText("Organization transfers")));
       for (const transfer of transfers.items ?? []) {
         const item = node("div");
         item.append(
           node(
             "p",
-            `Transfer ${transfer.id} · ${transfer.status} · Destination ${transfer.targetOrganizationId} · Expires ${new Date(transfer.expiresAt).toLocaleString()}`,
+            hostText("Transfer {p0} · {p1} · Destination {p2} · Expires {p3}", {
+              p0: transfer.id,
+              p1: hostText(transfer.status),
+              p2: transfer.targetOrganizationId,
+              p3: new Date(transfer.expiresAt).toLocaleString(),
+            }),
           ),
         );
         if (transfer.status === "pending")
           actionForm(
             item,
-            "Cancel transfer",
+            hostText("Cancel transfer"),
             path(`/systems/transfers/${transfer.id}/cancel`),
             "POST",
             () => {},
@@ -543,9 +577,11 @@ async function renderInventory(
       section.append(history);
     }
     if (!page.items?.length)
-      section.append(node("p", "No connected systems yet."));
+      section.append(node("p", hostText("No connected systems yet.")));
     if (page.nextCursor) {
-      const more = node("button", "Load more systems", { type: "button" });
+      const more = node("button", hostText("Load more systems"), {
+        type: "button",
+      });
       more.addEventListener("click", async () => {
         more.disabled = true;
         try {
@@ -572,7 +608,7 @@ async function renderInventory(
     }
     if (!manager || !properties.length) return;
     const details = node("details");
-    details.append(node("summary", "Connect WIFIGATE system"));
+    details.append(node("summary", hostText("Connect WIFIGATE system")));
     const previewForm = node("form");
     const input = field(
       previewForm,
@@ -583,7 +619,9 @@ async function renderInventory(
     );
     input.maxLength = 12288;
     input.autocomplete = "off";
-    const previewButton = node("button", "Validate key", { type: "submit" });
+    const previewButton = node("button", hostText("Validate key"), {
+      type: "submit",
+    });
     const status = node("p", "", { role: "status", "aria-live": "polite" });
     const candidate = node("div");
     previewForm.append(previewButton, status);
@@ -605,7 +643,15 @@ async function renderInventory(
         if (epoch !== generation) return;
         input.value = "";
         const preview = response.preview;
-        status.textContent = `${preview.name} · ${preview.type} · ${preview.systemCount} gates · Fingerprint ${preview.fingerprint}`;
+        status.textContent = hostText(
+          "{p0} · {p1} · {p2} gates · Fingerprint {p3}",
+          {
+            p0: preview.name,
+            p1: preview.type,
+            p2: preview.systemCount,
+            p3: preview.fingerprint,
+          },
+        );
         const connect = node("form");
         mappingFields(connect);
         field(
@@ -629,13 +675,17 @@ async function renderInventory(
           connect.append(
             node(
               "p",
-              "This key is already claimed. An approved transfer from its current owner is required.",
+              hostText(
+                "This key is already claimed. An approved transfer from its current owner is required.",
+              ),
             ),
           );
         }
         const submit = node(
           "button",
-          preview.available ? "Connect system" : "Accept transfer",
+          preview.available
+            ? hostText("Connect system")
+            : hostText("Accept transfer"),
           { type: "submit" },
         );
         const resultStatus = node("p", "", {
@@ -694,12 +744,12 @@ async function renderInventory(
 function clearOrganizationSelector() {
   const holder = document.getElementById("workspace-org-switcher");
   if (holder) {
-    const label = node("label", "Organization"),
+    const label = node("label", hostText("Organization")),
       select = node("select", undefined, {
         "aria-label": "Organization",
         disabled: "",
       });
-    select.append(node("option", "No organization selected"));
+    select.append(node("option", hostText("No organization selected")));
     label.append(select);
     holder.replaceChildren(label);
   }
@@ -725,7 +775,7 @@ export async function loadHostManagement(user, identity, preferredId) {
   currentIdentity = identity;
   root.dataset.platformRole = identity.role;
   root.replaceChildren(
-    node("p", "Loading your organizations…", { role: "status" }),
+    node("p", hostText("Loading your organizations…"), { role: "status" }),
   );
   try {
     const result = await readHostPages(
@@ -750,6 +800,7 @@ export async function loadHostManagement(user, identity, preferredId) {
     });
     if (!current()) return;
     if (!organizations.length) {
+      rememberOrganization(undefined);
       const empty = node("div", undefined, {
         "data-workspace-view": "calendar",
       });
@@ -770,7 +821,10 @@ export async function loadHostManagement(user, identity, preferredId) {
       window.dispatchEvent(new CustomEvent("host:workspace-ready"));
       return;
     }
-    const preferred = preferredId ?? preferredOrganizationId;
+    // A URL is only a preference: the current server-authorized memberships
+    // decide which organization can load, including after a role is revoked.
+    const preferred =
+      preferredId ?? requestedOrganization() ?? preferredOrganizationId;
     selectedId = organizations.some((org) => org.id === preferred)
       ? preferred
       : organizations[0].id;
@@ -781,6 +835,7 @@ export async function loadHostManagement(user, identity, preferredId) {
     const owner = role === "owner";
     const manager = owner || role === "admin";
     root.dataset.membershipRole = role;
+    rememberOrganization(selectedId);
     const selection = node("form");
     const select = field(
       selection,
@@ -794,6 +849,12 @@ export async function loadHostManagement(user, identity, preferredId) {
       selection,
     );
     select.addEventListener("change", () => {
+      const url = new URL(location.href);
+      url.pathname = "/dashboard/host/";
+      url.searchParams.set("org", select.value);
+      url.searchParams.delete("view");
+      url.searchParams.delete("tab");
+      history.pushState(null, "", url);
       window.dispatchEvent(
         new CustomEvent("host:workspace-view", { detail: "Calendar" }),
       );
@@ -803,7 +864,9 @@ export async function loadHostManagement(user, identity, preferredId) {
       root.append(
         node(
           "p",
-          "Service is unavailable. Existing records remain readable. An owner can review the subscription in Billing statements.",
+          hostText(
+            "Service is unavailable. Existing records remain readable. An owner can review the subscription in Billing statements.",
+          ),
           {
             role: "status",
             "data-workspace-notice": "true",
@@ -818,7 +881,9 @@ export async function loadHostManagement(user, identity, preferredId) {
         class: "workspace-view-panel",
       });
       panel.append(
-        node("p", "Select this screen to load its data.", { role: "status" }),
+        node("p", hostText("Select this screen to load its data."), {
+          role: "status",
+        }),
       );
       panels.set(view.id, panel);
       root.append(panel);
@@ -872,7 +937,10 @@ export async function loadHostManagement(user, identity, preferredId) {
         if (!viewCurrent()) return;
         if (!properties.items.length)
           panel.append(
-            node("p", "Add a property and room before creating reservations."),
+            node(
+              "p",
+              hostText("Add a property and room before creating reservations."),
+            ),
           );
         else
           await renderHostCalendar({
@@ -970,7 +1038,7 @@ export async function loadHostManagement(user, identity, preferredId) {
       },
       organization: async (panel) => {
         panel.append(
-          node("h2", "Organization settings"),
+          node("h2", hostText("Organization settings")),
           node("p", org.name),
           node("p", "Timezone: " + org.timezone),
           node("p", "Your organization role: " + role),
@@ -1024,7 +1092,7 @@ export async function loadHostManagement(user, identity, preferredId) {
         current() && panel.dataset.renderGeneration === renderGeneration;
       const load = async () => {
         panel.replaceChildren(
-          node("p", "Loading this screen…", { role: "status" }),
+          node("p", hostText("Loading this screen…"), { role: "status" }),
         );
         try {
           panel.replaceChildren();
@@ -1034,7 +1102,7 @@ export async function loadHostManagement(user, identity, preferredId) {
           if (!viewCurrent()) return;
           panel.replaceChildren(node("p", message(error), { role: "status" }));
           if (error.code === "TOTP_REQUIRED") {
-            const verify = node("button", "Verify authenticator", {
+            const verify = node("button", hostText("Verify authenticator"), {
               type: "button",
             });
             verify.addEventListener("click", () =>
@@ -1042,7 +1110,9 @@ export async function loadHostManagement(user, identity, preferredId) {
             );
             panel.append(verify);
           }
-          const retry = node("button", "Retry this screen", { type: "button" });
+          const retry = node("button", hostText("Retry this screen"), {
+            type: "button",
+          });
           retry.addEventListener("click", () => void navigateWorkspace?.(id));
           panel.append(retry);
         } finally {
@@ -1062,13 +1132,17 @@ export async function loadHostManagement(user, identity, preferredId) {
     if (!current()) return;
     root.replaceChildren(node("p", message(error), { role: "status" }));
     if (error.code === "TOTP_REQUIRED") {
-      const verify = node("button", "Verify authenticator", { type: "button" });
+      const verify = node("button", hostText("Verify authenticator"), {
+        type: "button",
+      });
       verify.addEventListener("click", () =>
         window.dispatchEvent(new CustomEvent("host:totp-required")),
       );
       root.append(verify);
     }
-    const retry = node("button", "Refresh organizations", { type: "button" });
+    const retry = node("button", hostText("Refresh organizations"), {
+      type: "button",
+    });
     retry.addEventListener(
       "click",
       () => void loadHostManagement(user, identity, preferredId),
@@ -1078,3 +1152,7 @@ export async function loadHostManagement(user, identity, preferredId) {
     if (current()) root.dataset.loading = "false";
   }
 }
+window.addEventListener("popstate", () => {
+  if (currentUser && currentIdentity && requestedOrganization() !== selectedId)
+    void loadHostManagement(currentUser, currentIdentity);
+});

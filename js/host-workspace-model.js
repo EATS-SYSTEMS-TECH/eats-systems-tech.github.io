@@ -124,6 +124,16 @@ export const workspaceViews = [
 ];
 
 const aliases = {
+  settings: "account",
+  "access-keys": "systems",
+  "jobs-calendar": "operations",
+  "service-health": "operations",
+  "api-integrations": "integrations",
+  "system-import": "systems",
+  guests: "reservations",
+  staff: "team",
+  invoices: "billing",
+  organizations: "organization",
   Guests: "reservations",
   Staff: "team",
   "Access Keys": "systems",

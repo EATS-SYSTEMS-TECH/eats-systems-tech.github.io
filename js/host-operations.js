@@ -1,6 +1,7 @@
 import { renderHostAutomation } from "./host-automation.js";
 import { renderHostIntegrations } from "./host-integrations.js";
 import { renderServiceHealth } from "./host-service-health.js";
+import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest, portalExport } from "./api/index.js";
 import {
   field,
@@ -24,11 +25,11 @@ async function renderOperationsReview({
   const section = node("section", undefined, {
       "aria-label": "Host operations",
     }),
-    status = node("p", "Loading operations…", {
+    status = node("p", hostText("Loading operations…"), {
       role: "status",
       "aria-live": "polite",
     });
-  section.append(node("h2", "Operations"), status);
+  section.append(node("h2", hostText("Operations")), status);
   container.append(section);
   const current = () => isCurrent() && section.isConnected;
   const attempts = new Map();
@@ -41,8 +42,9 @@ async function renderOperationsReview({
       await operation();
     } catch {
       if (current())
-        status.textContent =
-          "Operation failed. Refresh current data and verify permissions before retrying.";
+        status.textContent = hostText(
+          "Operation failed. Refresh current data and verify permissions before retrying.",
+        );
     } finally {
       busy = false;
       if (current()) button.disabled = false;
@@ -60,12 +62,16 @@ async function renderOperationsReview({
     );
   }
   const reliability = node("div"),
-    reliabilityButton = node("button", "Measure last hour", { type: "button" });
+    reliabilityButton = node("button", hostText("Measure last hour"), {
+      type: "button",
+    });
   section.append(
-    node("h3", "Operational observations"),
+    node("h3", hostText("Operational observations")),
     node(
       "p",
-      "Observed authenticated API requests and jobs created in the selected hour. Service targets and physical gate availability require separate operational verification.",
+      hostText(
+        "Observed authenticated API requests and jobs created in the selected hour. Service targets and physical gate availability require separate operational verification.",
+      ),
     ),
     reliabilityButton,
     reliability,
@@ -81,11 +87,35 @@ async function renderOperationsReview({
       reliability.replaceChildren(
         node(
           "p",
-          `${value.api.observedRequests} observed API requests · ${value.api.serverFailures} server failures · availability ${value.api.availabilityPercent === null ? "Unknown (no observations)" : `${value.api.availabilityPercent.toFixed(2)}%`} · p95 ${value.api.p95LatencyMs === null ? "Unknown" : `${value.api.p95LatencyMs} ms`}`,
+          hostText(
+            "{p0} observed API requests · {p1} server failures · availability {p2} · p95 {p3}",
+            {
+              p0: value.api.observedRequests,
+              p1: value.api.serverFailures,
+              p2:
+                value.api.availabilityPercent === null
+                  ? hostText("Unknown (no observations)")
+                  : hostText("{p0}%", {
+                      p0: value.api.availabilityPercent.toFixed(2),
+                    }),
+              p3:
+                value.api.p95LatencyMs === null
+                  ? hostText("Unknown")
+                  : hostText("{p0} ms", { p0: value.api.p95LatencyMs }),
+            },
+          ),
         ),
         node(
           "p",
-          `${value.automation.observedJobs} observed jobs · ${value.automation.dueJobs} due · oldest due ${Math.round(value.automation.oldestDueMs / 1000)} s · ${value.delivery.acceptedReceipts} persisted accepted delivery receipts`,
+          hostText(
+            "{p0} observed jobs · {p1} due · oldest due {p2} s · {p3} persisted accepted delivery receipts",
+            {
+              p0: value.automation.observedJobs,
+              p1: value.automation.dueJobs,
+              p2: Math.round(value.automation.oldestDueMs / 1000),
+              p3: value.delivery.acceptedReceipts,
+            },
+          ),
         ),
       );
       const automation = value.automation.timeliness,
@@ -94,19 +124,63 @@ async function renderOperationsReview({
         reliability.append(
           node(
             "p",
-            `${automation.measuredJobs} completed jobs with timing · preparation ${automation.readinessPercent === null ? "Unknown" : `${automation.readinessPercent.toFixed(2)}%`} · p95 preparation ${automation.p95PreparationLatencyMs === null ? "Unknown" : `${automation.p95PreparationLatencyMs} ms`} · oldest pending schedule ${Math.round(automation.oldestPendingScheduledMs / 1000)} s · ${automation.unknownTimingJobs} completed jobs without timing evidence`,
+            hostText(
+              "{p0} completed jobs with timing · preparation {p1} · p95 preparation {p2} · oldest pending schedule {p3} s · {p4} completed jobs without timing evidence",
+              {
+                p0: automation.measuredJobs,
+                p1:
+                  automation.readinessPercent === null
+                    ? hostText("Unknown")
+                    : hostText("{p0}%", {
+                        p0: automation.readinessPercent.toFixed(2),
+                      }),
+                p2:
+                  automation.p95PreparationLatencyMs === null
+                    ? hostText("Unknown")
+                    : hostText("{p0} ms", {
+                        p0: automation.p95PreparationLatencyMs,
+                      }),
+                p3: Math.round(automation.oldestPendingScheduledMs / 1000),
+                p4: automation.unknownTimingJobs,
+              },
+            ),
           ),
         );
       if (delivery)
         reliability.append(
           node(
             "p",
-            `${delivery.requestedCompletedJobs} completed reservation message jobs · provider acceptance ${delivery.acceptancePercent === null ? "Unknown" : `${delivery.acceptancePercent.toFixed(2)}%`} · p95 acceptance ${delivery.p95AcceptanceLatencyMs === null ? "Unknown" : `${delivery.p95AcceptanceLatencyMs} ms`} · ${delivery.unknownRequirementJobs} completed jobs without delivery requirement evidence`,
+            hostText(
+              "{p0} completed reservation message jobs · provider acceptance {p1} · p95 acceptance {p2} · {p3} completed jobs without delivery requirement evidence",
+              {
+                p0: delivery.requestedCompletedJobs,
+                p1:
+                  delivery.acceptancePercent === null
+                    ? hostText("Unknown")
+                    : hostText("{p0}%", {
+                        p0: delivery.acceptancePercent.toFixed(2),
+                      }),
+                p2:
+                  delivery.p95AcceptanceLatencyMs === null
+                    ? hostText("Unknown")
+                    : hostText("{p0} ms", {
+                        p0: delivery.p95AcceptanceLatencyMs,
+                      }),
+                p3: delivery.unknownRequirementJobs,
+              },
+            ),
           ),
         );
       if (value.sloAssessment) {
         const assessment = value.sloAssessment;
-        reliability.append(node("p", `Service targets: ${assessment.state}`));
+        reliability.append(
+          node(
+            "p",
+            hostText("Service targets: {p0}", {
+              p0: hostText(assessment.state),
+            }),
+          ),
+        );
         for (const [dimension, result] of Object.entries(
           assessment.dimensions ?? {},
         ))
@@ -130,10 +204,12 @@ async function renderOperationsReview({
   readinessQuery.maxLength = 120;
   readinessForm.append(readinessButton);
   section.append(
-    node("h3", "System configuration"),
+    node("h3", hostText("System configuration")),
     node(
       "p",
-      "These checks cover Host permissions and configuration. Check the gate through BLE in the mobile app before relying on physical availability.",
+      hostText(
+        "These checks cover Host permissions and configuration. Check the gate through BLE in the mobile app before relying on physical availability.",
+      ),
     ),
     readinessForm,
     readinessRows,
@@ -149,11 +225,18 @@ async function renderOperationsReview({
       readinessRows.append(
         node(
           "p",
-          `${item.name} · ${item.configured ? "Configured" : item.reasons.join(", ")} · BLE: unknown`,
+          hostText("{p0} · {p1} · BLE: unknown", {
+            p0: item.name,
+            p1: item.configured
+              ? hostText("Configured")
+              : item.reasons.join(", "),
+          }),
         ),
       );
     if (response.nextCursor) {
-      const more = node("button", "Check more systems", { type: "button" });
+      const more = node("button", hostText("Check more systems"), {
+        type: "button",
+      });
       more.addEventListener("click", () =>
         run(more, async () => {
           await readReadiness(response.nextCursor, true);
@@ -167,11 +250,13 @@ async function renderOperationsReview({
         node(
           "p",
           response.nextCursor
-            ? "No matches on this page. Continue to check later systems."
-            : "No matching systems.",
+            ? hostText(
+                "No matches on this page. Continue to check later systems.",
+              )
+            : hostText("No matching systems."),
         ),
       );
-    status.textContent = "System configuration checked.";
+    status.textContent = hostText("System configuration checked.");
   }
   readinessForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -189,8 +274,8 @@ async function renderOperationsReview({
       preferences.locale,
       "text",
       [
-        ["en", "English"],
-        ["he", "עברית"],
+        ["en", hostText("English")],
+        ["he", hostText("עברית")],
       ],
     );
   const severity = field(
@@ -200,9 +285,9 @@ async function renderOperationsReview({
     preferences.alerts.minimumSeverity,
     "text",
     [
-      ["info", "Information"],
-      ["warning", "Warning"],
-      ["error", "Error"],
+      ["info", hostText("Information")],
+      ["warning", hostText("Warning")],
+      ["error", hostText("Error")],
     ],
   );
   const staffTemplate = field(
@@ -211,7 +296,7 @@ async function renderOperationsReview({
     "staffTemplateId",
     "",
     "text",
-    [["", "Default localized message"]],
+    [["", hostText("Default localized message")]],
   );
   staffTemplate.required = false;
   const staffTemplates = new Map();
@@ -219,7 +304,7 @@ async function renderOperationsReview({
     const selected =
       staffTemplate.value || preferences.alerts.staffTemplateId || "";
     staffTemplate.replaceChildren(
-      node("option", "Default localized message", { value: "" }),
+      node("option", hostText("Default localized message"), { value: "" }),
     );
     for (const item of staffTemplates.values())
       if (item.locale === locale.value)
@@ -230,7 +315,9 @@ async function renderOperationsReview({
       !staffTemplates.has(selected)
     )
       staffTemplate.append(
-        node("option", "Current staff alert message", { value: selected }),
+        node("option", hostText("Current staff alert message"), {
+          value: selected,
+        }),
       );
     if ([...staffTemplate.options].some((option) => option.value === selected))
       staffTemplate.value = selected;
@@ -266,7 +353,10 @@ async function renderOperationsReview({
     );
   const channels = {};
   for (const name of ["inApp", "email", "sms"]) {
-    const label = node("label", `Alert preference: ${name}`),
+    const label = node(
+        "label",
+        hostText("Alert preference: {p0}", { p0: name }),
+      ),
       input = node("input", undefined, { type: "checkbox", name });
     input.checked = preferences.alerts[name];
     label.prepend(input);
@@ -276,7 +366,9 @@ async function renderOperationsReview({
   settings.append(
     node(
       "p",
-      "Email and SMS preferences require a configured delivery provider. Saving preferences does not confirm delivery.",
+      hostText(
+        "Email and SMS preferences require a configured delivery provider. Saving preferences does not confirm delivery.",
+      ),
     ),
   );
   const filterName = field(settings, "Saved filter name", "filterName");
@@ -288,10 +380,13 @@ async function renderOperationsReview({
     "propertyId",
     "",
     "text",
-    [["", "All properties"], ...properties.map((p) => [p.id, p.name])],
+    [
+      ["", hostText("All properties")],
+      ...properties.map((p) => [p.id, p.name]),
+    ],
   );
   const room = field(settings, "Saved filter room", "roomId", "", "text", [
-    ["", "All rooms"],
+    ["", hostText("All rooms")],
     ...rooms.map((r) => [r.id, r.name]),
   ]);
   const filterStatus = field(
@@ -301,7 +396,7 @@ async function renderOperationsReview({
     "",
     "text",
     [
-      ["", "All statuses"],
+      ["", hostText("All statuses")],
       ...["draft", "confirmed", "changed", "cancelled", "completed"].map(
         (s) => [s, s],
       ),
@@ -315,14 +410,18 @@ async function renderOperationsReview({
             "p",
             `${filter.name} · ${filter.propertyId ?? "All properties"} · ${filter.roomId ?? "All rooms"} · ${filter.status ?? "All statuses"}`,
           ),
-          remove = node("button", "Remove saved filter", { type: "button" });
+          remove = node("button", hostText("Remove saved filter"), {
+            type: "button",
+          });
         remove.addEventListener("click", () => {
           preferences.savedFilters.splice(index, 1);
           drawFilters();
         });
         row.append(remove);
         filters.append(row);
-        const apply = node("button", "Apply saved filter", { type: "button" });
+        const apply = node("button", hostText("Apply saved filter"), {
+          type: "button",
+        });
         apply.addEventListener("click", () => {
           if (current())
             window.dispatchEvent(
@@ -336,7 +435,9 @@ async function renderOperationsReview({
     };
   drawFilters();
   settings.append(filters);
-  const save = node("button", "Save operation preferences", { type: "submit" });
+  const save = node("button", hostText("Save operation preferences"), {
+    type: "submit",
+  });
   settings.append(save);
   section.append(settings);
   settings.addEventListener("submit", (event) => {
@@ -372,15 +473,19 @@ async function renderOperationsReview({
         preferences = result.preferences;
         filterName.value = "";
         drawFilters();
-        status.textContent = "Operation preferences saved.";
+        status.textContent = hostText("Operation preferences saved.");
       }
     });
   });
-  const alertsButton = node("button", "Refresh operational alerts", {
+  const alertsButton = node("button", hostText("Refresh operational alerts"), {
       type: "button",
     }),
     alertRows = node("div", undefined, { "aria-live": "polite" });
-  section.append(node("h3", "Operational alerts"), alertsButton, alertRows);
+  section.append(
+    node("h3", hostText("Operational alerts")),
+    alertsButton,
+    alertRows,
+  );
   async function readAlerts(cursor, append = false) {
     const result = await portalRequest(
       user,
@@ -397,19 +502,21 @@ async function renderOperationsReview({
       );
     if (!result.enabled)
       alertRows.append(
-        node("p", "In-app alerts are disabled in your preferences."),
+        node("p", hostText("In-app alerts are disabled in your preferences.")),
       );
     else if (!result.items.length)
       alertRows.append(
         node(
           "p",
           result.nextCursor
-            ? "No matching alerts on this page. Continue to check earlier events."
-            : "No matching operational alerts.",
+            ? hostText(
+                "No matching alerts on this page. Continue to check earlier events.",
+              )
+            : hostText("No matching operational alerts."),
         ),
       );
     if (result.nextCursor) {
-      const more = node("button", "Load earlier operational alerts", {
+      const more = node("button", hostText("Load earlier operational alerts"), {
         type: "button",
       });
       more.addEventListener("click", () =>
@@ -424,12 +531,14 @@ async function renderOperationsReview({
   alertsButton.addEventListener("click", () =>
     run(alertsButton, () => readAlerts()),
   );
-  const deliveryButton = node("button", "Refresh staff delivery receipts", {
-      type: "button",
-    }),
+  const deliveryButton = node(
+      "button",
+      hostText("Refresh staff delivery receipts"),
+      { type: "button" },
+    ),
     deliveryRows = node("div", undefined, { "aria-live": "polite" });
   section.append(
-    node("h3", "Staff notification delivery"),
+    node("h3", hostText("Staff notification delivery")),
     deliveryButton,
     deliveryRows,
   );
@@ -451,8 +560,9 @@ async function renderOperationsReview({
       button.addEventListener("click", () =>
         run(button, async () => {
           if (!reason.value.trim() || !row.isConnected) {
-            status.textContent =
-              "Enter a reason before reviewing this notification.";
+            status.textContent = hostText(
+              "Enter a reason before reviewing this notification.",
+            );
             return;
           }
           const input = { ...body, reason: reason.value.trim() },
@@ -472,8 +582,10 @@ async function renderOperationsReview({
             if (current())
               status.textContent =
                 response.providerAcceptanceMayAlreadyHaveOccurred
-                  ? "Future delivery stopped. The provider may already have accepted the current attempt; check its receipt."
-                  : "Notification review saved.";
+                  ? hostText(
+                      "Future delivery stopped. The provider may already have accepted the current attempt; check its receipt.",
+                    )
+                  : hostText("Notification review saved.");
           } finally {
             if (current()) reason.disabled = false;
           }
@@ -487,7 +599,18 @@ async function renderOperationsReview({
       row.append(
         node(
           "p",
-          `${item.channel} · ${item.event} · ${item.status} · attempts ${item.attempts}${item.lastErrorCode ? ` · ${item.lastErrorCode}` : ""}${item.acceptedAfterCancellation ? " · Provider accepted after stop" : ""}`,
+          hostText("{p0} · {p1} · {p2} · attempts {p3}{p4}{p5}", {
+            p0: item.channel,
+            p1: item.event,
+            p2: hostText(item.status),
+            p3: item.attempts,
+            p4: item.lastErrorCode
+              ? hostText(" · {p0}", { p0: item.lastErrorCode })
+              : "",
+            p5: item.acceptedAfterCancellation
+              ? hostText(" · Provider accepted after stop")
+              : "",
+          }),
         ),
       );
       if (["queued", "retry", "processing", "failed"].includes(item.status))
@@ -506,7 +629,10 @@ async function renderOperationsReview({
       row.append(
         node(
           "p",
-          `Staff alert needs review · ${item.event} · ${item.lastErrorCode}`,
+          hostText("Staff alert needs review · {p0} · {p1}", {
+            p0: item.event,
+            p1: item.lastErrorCode,
+          }),
         ),
       );
       if (item.lastErrorCode === "NOTIFICATION_CAPACITY_EXCEEDED")
@@ -520,16 +646,18 @@ async function renderOperationsReview({
     }
     if (result.moreFailedEvents)
       deliveryRows.append(
-        node("p", "Additional staff alerts need operator review."),
+        node("p", hostText("Additional staff alerts need operator review.")),
       );
     if (!result.items.length)
       deliveryRows.append(
-        node("p", "No staff notification deliveries on this page."),
+        node("p", hostText("No staff notification deliveries on this page.")),
       );
     if (result.nextCursor) {
-      const more = node("button", "Load more staff delivery receipts", {
-        type: "button",
-      });
+      const more = node(
+        "button",
+        hostText("Load more staff delivery receipts"),
+        { type: "button" },
+      );
       more.addEventListener("click", () =>
         run(more, async () => {
           await readDelivery(result.nextCursor, true);
@@ -545,7 +673,7 @@ async function renderOperationsReview({
   const timelineForm = node("form"),
     target = field(timelineForm, "Timeline target ID", "targetId");
   target.required = false;
-  const loadTimeline = node("button", "Load activity timeline", {
+  const loadTimeline = node("button", hostText("Load activity timeline"), {
       type: "submit",
     }),
     timeline = node("div");
@@ -567,7 +695,7 @@ async function renderOperationsReview({
       timeline.append(
         node("p", `${item.createdAt} · ${item.type} · ${item.targetId ?? ""}`),
       );
-    const download = node("button", "Export current audit page", {
+    const download = node("button", hostText("Export current audit page"), {
       type: "button",
     });
     download.addEventListener("click", () =>
@@ -581,7 +709,7 @@ async function renderOperationsReview({
     );
     timeline.append(download);
     if (result.nextCursor) {
-      const more = node("button", "Load more timeline entries", {
+      const more = node("button", hostText("Load more timeline entries"), {
         type: "button",
       });
       more.addEventListener("click", () =>
@@ -593,15 +721,15 @@ async function renderOperationsReview({
       timeline.append(more);
     }
     status.textContent = result.items.length
-      ? "Activity timeline loaded."
-      : "No matching activity.";
+      ? hostText("Activity timeline loaded.")
+      : hostText("No matching activity.");
   }
   timelineForm.addEventListener("submit", (event) => {
     event.preventDefault();
     void run(loadTimeline, () => readTimeline());
   });
   const templateList = node("div");
-  section.append(node("h3", "Message templates"), templateList);
+  section.append(node("h3", hostText("Message templates")), templateList);
   let selectedTemplate;
   const templateForm = node("form"),
     templateId = field(templateForm, "Template ID", "id"),
@@ -613,8 +741,8 @@ async function renderOperationsReview({
       "en",
       "text",
       [
-        ["en", "English"],
-        ["he", "עברית"],
+        ["en", hostText("English")],
+        ["he", hostText("עברית")],
       ],
     ),
     audience = field(
@@ -624,11 +752,11 @@ async function renderOperationsReview({
       "guest",
       "text",
       [
-        ["guest", "Guest"],
-        ["staff", "Staff"],
+        ["guest", hostText("Guest")],
+        ["staff", hostText("Staff")],
       ],
     );
-  const label = node("label", "Template message"),
+  const label = node("label", hostText("Template message")),
     text = node("textarea", undefined, {
       name: "text",
       "aria-label": "Template message",
@@ -640,10 +768,12 @@ async function renderOperationsReview({
     label,
     node(
       "p",
-      "Placeholders: {{guestName}}, {{propertyName}}, {{roomName}}, {{startsAt}}, {{endsAt}}, {{inviteUrl}}, {{status}}. Preview uses a placeholder for the private link.",
+      hostText(
+        "Placeholders: {{guestName}}, {{propertyName}}, {{roomName}}, {{startsAt}}, {{endsAt}}, {{inviteUrl}}, {{status}}. Preview uses a placeholder for the private link.",
+      ),
     ),
   );
-  const saveTemplate = node("button", "Save message template", {
+  const saveTemplate = node("button", hostText("Save message template"), {
     type: "submit",
   });
   templateForm.append(saveTemplate);
@@ -666,7 +796,7 @@ async function renderOperationsReview({
       const row = node("article");
       row.append(node("p", `${item.name} · ${item.locale} · ${item.audience}`));
       if (manager) {
-        const edit = node("button", "Edit message template", {
+        const edit = node("button", hostText("Edit message template"), {
           type: "button",
         });
         edit.addEventListener("click", () => {
@@ -679,7 +809,7 @@ async function renderOperationsReview({
         });
         row.append(edit);
       }
-      const preview = node("button", "Preview message template", {
+      const preview = node("button", hostText("Preview message template"), {
           type: "button",
         }),
         output = node("p");
@@ -702,7 +832,7 @@ async function renderOperationsReview({
     }
     drawStaffTemplates();
     if (result.nextCursor) {
-      const more = node("button", "Load more message templates", {
+      const more = node("button", hostText("Load more message templates"), {
         type: "button",
       });
       more.addEventListener("click", () =>
@@ -731,7 +861,7 @@ async function renderOperationsReview({
       if (current()) {
         selectedTemplate = result.template;
         await readTemplates();
-        status.textContent = "Message template saved.";
+        status.textContent = hostText("Message template saved.");
       }
     });
   });
@@ -749,10 +879,10 @@ async function renderOperationsReview({
       to = field(usageForm, "Usage to date", "to", today, "date"),
       keyId = field(usageForm, "Usage API key ID", "apiKeyId");
     keyId.required = false;
-    const load = node("button", "Load API usage", { type: "submit" }),
+    const load = node("button", hostText("Load API usage"), { type: "submit" }),
       rows = node("div");
     usageForm.append(load);
-    section.append(node("h3", "API creation usage"), usageForm, rows);
+    section.append(node("h3", hostText("API creation usage")), usageForm, rows);
     async function readUsage(cursor, append = false) {
       const query = new URLSearchParams({
         from: from.value,
@@ -771,10 +901,21 @@ async function renderOperationsReview({
         rows.append(
           node(
             "p",
-            `${item.date} · ${item.apiKeyId} · total ${item.total} · created ${item.created} · replay ${item.replay ?? 0} · errors ${item.error ?? 0} · physical gate invitations ${item.physicalGateInvitations}`,
+            hostText(
+              "{p0} · {p1} · total {p2} · created {p3} · replay {p4} · errors {p5} · physical gate invitations {p6}",
+              {
+                p0: item.date,
+                p1: item.apiKeyId,
+                p2: item.total,
+                p3: item.created,
+                p4: item.replay ?? 0,
+                p5: item.error ?? 0,
+                p6: item.physicalGateInvitations,
+              },
+            ),
           ),
         );
-      const download = node("button", "Export current usage page", {
+      const download = node("button", hostText("Export current usage page"), {
         type: "button",
       });
       download.addEventListener("click", () =>
@@ -788,7 +929,9 @@ async function renderOperationsReview({
       );
       rows.append(download);
       if (result.nextCursor) {
-        const more = node("button", "Load more usage", { type: "button" });
+        const more = node("button", hostText("Load more usage"), {
+          type: "button",
+        });
         more.addEventListener("click", () =>
           run(more, async () => {
             await readUsage(result.nextCursor, true);
@@ -797,8 +940,9 @@ async function renderOperationsReview({
         );
         rows.append(more);
       }
-      status.textContent =
-        "API usage loaded. Each export contains one bounded page.";
+      status.textContent = hostText(
+        "API usage loaded. Each export contains one bounded page.",
+      );
     }
     usageForm.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -806,7 +950,7 @@ async function renderOperationsReview({
     });
   }
   if (current()) {
-    status.textContent = "Operations loaded.";
+    status.textContent = hostText("Operations loaded.");
     groupReviewSections(section);
   }
 }
@@ -825,8 +969,7 @@ function groupReviewSections(section) {
 }
 
 export async function renderHostOperations(options) {
-  const { container, user, organization, properties, rooms, isCurrent } =
-    options;
+  const { container, user, organization, isCurrent } = options;
   if (!["owner", "admin", "staff"].includes(organization.membership.role))
     return;
   const section = node("section", undefined, {
@@ -837,7 +980,7 @@ export async function renderHostOperations(options) {
     "aria-label": "Operations screens",
   });
   const body = node("div");
-  section.append(node("h2", "Operations"), tabs, body);
+  section.append(node("h2", hostText("Operations")), tabs, body);
   container.append(section);
   const current = () => isCurrent() && section.isConnected;
   const panels = new Map();
@@ -906,14 +1049,16 @@ export async function renderHostOperations(options) {
       }
     } catch {
       if (!current()) return;
-      const retry = node("button", "Retry operations screen", {
+      const retry = node("button", hostText("Retry this section"), {
         type: "button",
       });
       retry.addEventListener("click", () => void select(definition[0]));
       entry.panel.replaceChildren(
         node(
           "p",
-          "This operations screen could not be loaded. Other screens remain available.",
+          hostText(
+            "This section could not be loaded. Your other work remains available.",
+          ),
           { role: "status" },
         ),
         retry,
@@ -923,7 +1068,7 @@ export async function renderHostOperations(options) {
     }
   }
   for (const [id, label] of definitions) {
-    const button = node("button", label, {
+    const button = node("button", hostText(label), {
       type: "button",
       "aria-pressed": "false",
     });

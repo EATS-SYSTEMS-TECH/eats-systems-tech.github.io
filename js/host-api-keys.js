@@ -1,13 +1,19 @@
+import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
 import { field, node } from "./host-ui.js";
 
 const errors = {
-  RECENT_REAUTH_REQUIRED:
+  RECENT_REAUTH_REQUIRED: hostText(
     "Sign out and sign in again with your authenticator before revealing this key.",
-  OWNER_REQUIRED: "Only an organization owner can reveal a key.",
-  TOTP_REQUIRED: "Verify your authenticator before managing API keys.",
-  VERSION_CONFLICT: "The key changed. Refresh the list before retrying.",
-  KEY_INACTIVE: "This key is inactive and cannot be revealed.",
+  ),
+  OWNER_REQUIRED: hostText("Only an organization owner can reveal a key."),
+  TOTP_REQUIRED: hostText(
+    "Verify your authenticator before managing API keys.",
+  ),
+  VERSION_CONFLICT: hostText(
+    "The key changed. Refresh the list before retrying.",
+  ),
+  KEY_INACTIVE: hostText("This key is inactive and cannot be revealed."),
 };
 export async function renderHostApiKeys({
   container,
@@ -19,7 +25,7 @@ export async function renderHostApiKeys({
   const section = node("section", undefined, {
     "aria-label": "API integrations",
   });
-  const status = node("p", "Loading API keys…", {
+  const status = node("p", hostText("Loading API keys…"), {
     role: "status",
     "aria-live": "polite",
   });
@@ -34,10 +40,10 @@ export async function renderHostApiKeys({
   ];
   const scopes = node("fieldset"),
     types = node("fieldset");
-  scopes.append(node("legend", "Allowed API operations"));
-  types.append(node("legend", "Allowed target types"));
+  scopes.append(node("legend", hostText("Allowed API operations")));
+  types.append(node("legend", hostText("Allowed target types")));
   for (const [value, label] of scopeOptions) {
-    const wrapper = node("label", label),
+    const wrapper = node("label", hostText(label)),
       checkbox = node("input", undefined, {
         type: "checkbox",
         name: "scope",
@@ -58,13 +64,15 @@ export async function renderHostApiKeys({
     wrapper.prepend(checkbox);
     types.append(wrapper);
   }
-  const create = node("button", "Create API key", { type: "submit" });
+  const create = node("button", hostText("Create API key"), { type: "submit" });
   form.append(scopes, types, create);
   section.append(
-    node("h2", "API integrations"),
+    node("h2", hostText("API integrations")),
     node(
       "p",
-      "Create a separate key for each integration and limit its operations and target types. An owner can reveal a key after a recent sign-in with an authenticator. Share keys privately.",
+      hostText(
+        "Create a separate key for each integration and limit its operations and target types. An owner can reveal a key after a recent sign-in with an authenticator. Share keys privately.",
+      ),
     ),
     form,
     status,
@@ -103,7 +111,8 @@ export async function renderHostApiKeys({
     } catch (error) {
       if (current())
         status.textContent =
-          errors[error.code] || "API key operation failed. Retry safely.";
+          errors[error.code] ||
+          hostText("API key operation failed. Retry safely.");
     } finally {
       busy = false;
       if (current()) button.disabled = false;
@@ -134,19 +143,24 @@ export async function renderHostApiKeys({
         node("p", `${record.prefix} · ${record.status}`),
         node(
           "p",
-          `Operations: ${record.scopes.join(", ")} · Targets: ${record.targetTypes.join(", ")}`,
+          hostText("Operations: {p0} · Targets: {p1}", {
+            p0: record.scopes.join(", "),
+            p1: record.targetTypes.join(", "),
+          }),
         ),
       );
       if (record.overlapUntil)
         row.append(
           node(
             "p",
-            `Previous key expires: ${new Date(record.overlapUntil).toLocaleString()}`,
+            hostText("Previous key expires: {p0}", {
+              p0: new Date(record.overlapUntil).toLocaleString(),
+            }),
           ),
         );
       if (record.status === "active") {
         if (organization.membership.role === "owner") {
-          const reveal = node("button", "Reveal private API key", {
+          const reveal = node("button", hostText("Reveal private API key"), {
             type: "button",
           });
           reveal.addEventListener("click", () =>
@@ -163,17 +177,23 @@ export async function renderHostApiKeys({
                 "aria-label": "Private API key",
                 rows: "3",
               });
-              const hide = node("button", "Hide API key", { type: "button" });
+              const hide = node("button", hostText("Hide API key"), {
+                type: "button",
+              });
               hide.addEventListener("click", () =>
                 privateOutput.replaceChildren(),
               );
               privateOutput.replaceChildren(
-                node("p", "Copy this key privately to your integration."),
+                node(
+                  "p",
+                  hostText("Copy this key privately to your integration."),
+                ),
                 box,
                 hide,
               );
-              status.textContent =
-                "Private key revealed. Hide it after copying.";
+              status.textContent = hostText(
+                "Private key revealed. Hide it after copying.",
+              );
             }),
           );
           row.append(reveal);
@@ -190,7 +210,9 @@ export async function renderHostApiKeys({
           overlap.min = "0";
           overlap.max = "24";
           overlap.step = "1";
-          const rotate = node("button", "Rotate API key", { type: "submit" });
+          const rotate = node("button", hostText("Rotate API key"), {
+            type: "submit",
+          });
           rotation.append(rotate);
           rotation.addEventListener("submit", (event) => {
             event.preventDefault();
@@ -201,19 +223,24 @@ export async function renderHostApiKeys({
               });
               if (!current()) return;
               await load();
-              status.textContent =
-                "New key created. Reveal it and update the integration before the previous key expires.";
+              status.textContent = hostText(
+                "New key created. Reveal it and update the integration before the previous key expires.",
+              );
             });
           });
           row.append(rotation);
         }
-        const revoke = node("button", "Revoke API key", { type: "button" });
+        const revoke = node("button", hostText("Revoke API key"), {
+          type: "button",
+        });
         revoke.addEventListener("click", () =>
           perform(revoke, async () => {
             await action(record, "revoke", { version: record.version });
             if (!current()) return;
             await load();
-            status.textContent = "Key revoked. Requests using it are rejected.";
+            status.textContent = hostText(
+              "Key revoked. Requests using it are rejected.",
+            );
           }),
         );
         row.append(revoke);
@@ -221,10 +248,12 @@ export async function renderHostApiKeys({
       list.append(row);
     }
     status.textContent = response.items.length
-      ? "API keys loaded."
-      : "No API keys created.";
+      ? hostText("API keys loaded.")
+      : hostText("No API keys created.");
     if (response.nextCursor) {
-      const more = node("button", "Load more API keys", { type: "button" });
+      const more = node("button", hostText("Load more API keys"), {
+        type: "button",
+      });
       more.addEventListener("click", () =>
         perform(more, async () => {
           await load(response.nextCursor, true);
@@ -247,7 +276,9 @@ export async function renderHostApiKeys({
         ].map((item) => item.value),
       };
       if (!input.scopes.length || !input.targetTypes.length) {
-        status.textContent = "Select at least one operation and target type.";
+        status.textContent = hostText(
+          "Select at least one operation and target type.",
+        );
         return;
       }
       const signature = JSON.stringify(input);
@@ -258,14 +289,17 @@ export async function renderHostApiKeys({
       attempt = undefined;
       name.value = "";
       await load();
-      status.textContent = "API key created. An owner can reveal it privately.";
+      status.textContent = hostText(
+        "API key created. An owner can reveal it privately.",
+      );
     });
   });
   try {
     await load();
   } catch {
     if (current())
-      status.textContent =
-        "API keys could not be loaded. Refresh your organization to retry.";
+      status.textContent = hostText(
+        "API keys could not be loaded. Refresh your organization to retry.",
+      );
   }
 }

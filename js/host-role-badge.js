@@ -1,3 +1,4 @@
+import { hostText } from "./host-locale.js";
 const descriptions = {
   "host-admin": [
     "Host admin",
@@ -34,13 +35,16 @@ export function roleBadge(role, host = false) {
   const badge = document.createElement("span");
   badge.className = "host-role-badge";
   badge.dataset.role = key;
-  badge.textContent = label;
+  badge.textContent = hostText(label);
   badge.tabIndex = 0;
-  badge.title = description;
-  badge.setAttribute("aria-label", `${label}: ${description}`);
+  badge.title = hostText(description);
+  badge.setAttribute(
+    "aria-label",
+    `${hostText(label)}: ${hostText(description)}`,
+  );
   const explanation = document.createElement("span");
   explanation.className = "host-role-explanation";
-  explanation.textContent = description;
+  explanation.textContent = hostText(description);
   badge.append(explanation);
   return badge;
 }
@@ -49,12 +53,13 @@ export function accessBadge(status) {
   const badge = document.createElement("span");
   badge.className = "host-access-badge";
   badge.dataset.status = status;
-  badge.textContent =
+  badge.textContent = hostText(
     {
       active: "Active",
       pending: "Pending",
       blocked: "Blocked",
       archived: "Archived",
-    }[status] ?? "Unavailable";
+    }[status] ?? "Unavailable",
+  );
   return badge;
 }

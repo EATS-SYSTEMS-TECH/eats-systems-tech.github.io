@@ -3,6 +3,7 @@ import {
   workspaceView,
   workspaceLocation,
 } from "./host-workspace-model.js";
+import { hostText } from "./host-locale.js";
 
 const nav = document.getElementById("host-section-navigation");
 const root = document.getElementById("host-management");
@@ -51,6 +52,7 @@ for (const group of ["", "Management", "Advanced", "Account", "Platform"]) {
   for (const view of workspaceViews.filter((item) => item.group === group)) {
     const button = document.createElement("button");
     button.type = "button";
+    button.disabled = true;
     button.dataset.view = view.label;
     button.dataset.viewId = view.id;
     button.innerHTML =
@@ -83,14 +85,21 @@ function targets(id) {
   if (!view) return [];
   const panel = root.querySelector('[data-workspace-view="' + view.id + '"]');
   if (panel) return [panel];
-  return [...document.querySelectorAll(view.selector)].filter(
+  const selectors =
+    view.selector +
+    ", " +
+    view.selector.replaceAll("aria-label=", "data-host-section=");
+  return [...document.querySelectorAll(selectors)].filter(
     (element) => !element.hidden,
   );
 }
 
 function choose(value, { push = false, focus = false } = {}) {
   const view = workspaceView(value);
-  if (!view || !targets(view.id).length) return;
+  if (!view) return;
+  const authorizedDuringReload =
+    root.dataset.loading === "true" && !buttons.get(view.id).disabled;
+  if (!targets(view.id).length && !authorizedDuringReload) return;
   selected = view.id;
   for (const dialog of root.querySelectorAll("dialog[open]")) dialog.close();
   const url = new URL(location.href);
@@ -103,8 +112,8 @@ function choose(value, { push = false, focus = false } = {}) {
   if (selected !== "operations") url.searchParams.delete("section");
   if (value === "Jobs Calendar") url.searchParams.set("section", "jobs");
   if (value === "Service health") url.searchParams.set("section", "health");
-  if (push && url.href !== location.href) history.pushState(null, "", url);
-  else if (!push) history.replaceState(null, "", url);
+  if (url.href !== location.href)
+    history[push ? "pushState" : "replaceState"](null, "", url);
   toggle.setAttribute("aria-expanded", "false");
   nav.classList.remove("workspace-menu-open");
   refresh();
@@ -115,13 +124,38 @@ function choose(value, { push = false, focus = false } = {}) {
     document.getElementById("account-details").open = true;
   if (focus) {
     const target = targets(selected)[0];
-    target.tabIndex = -1;
-    target.focus({ preventScroll: true });
+    if (target) {
+      target.tabIndex = -1;
+      target.focus({ preventScroll: true });
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
 
 function refresh() {
+  const waitingForOverview =
+    selected === "overview" &&
+    root.dataset.platformRole === "admin" &&
+    document.getElementById("admin-overview")?.hidden;
+  if (
+    root.dataset.loading === "false" &&
+    selected !== "calendar" &&
+    !targets(selected).length &&
+    !waitingForOverview
+  ) {
+    selected = "calendar";
+    const url = new URL(location.href);
+    url.pathname = "/dashboard/host/";
+    url.searchParams.delete("view");
+    url.searchParams.delete("section");
+    url.searchParams.delete("tab");
+    if (url.href !== location.href) history.replaceState(null, "", url);
+    window.dispatchEvent(
+      new CustomEvent("host:workspace-navigate", { detail: selected }),
+    );
+  }
+  if (selected === "account" && targets(selected).length)
+    document.getElementById("account-details").open = true;
   document.body.dataset.hostView = workspaceView(selected)?.label ?? "Calendar";
   const selectedTargets = targets(selected);
   const badge = buttons
@@ -133,9 +167,18 @@ function refresh() {
   const countLabel = String(count);
   if (badge.textContent !== countLabel) badge.textContent = countLabel;
   for (const [id, button] of buttons) {
-    const available = targets(id).length > 0;
+    const available =
+      targets(id).length > 0 ||
+      (root.dataset.loading === "true" && !button.disabled);
     button.hidden = !available && id !== "calendar";
     button.disabled = !available;
+    button.title = available
+      ? ""
+      : hostText(
+          root.dataset.organizationId
+            ? "Unavailable for your current role"
+            : "Choose an authorized organization first",
+        );
     if (id === selected) button.setAttribute("aria-current", "page");
     else button.removeAttribute("aria-current");
   }
@@ -151,7 +194,8 @@ function refresh() {
       ) ||
       (child.dataset.workspaceNotice === "true" &&
         !["overview", "account"].includes(selected)) ||
-      (!selectedTargets.length && ["P", "BUTTON"].includes(child.tagName));
+      (!selectedTargets.length && ["P", "BUTTON"].includes(child.tagName)) ||
+      (root.dataset.loading === "true" && child.tagName === "P");
     child.classList.toggle("workspace-hidden", !show);
   }
 }
@@ -187,13 +231,27 @@ window.addEventListener("host:workspace-ready", () => {
   choose(targets(requested).length ? requested : "calendar");
   refresh();
 });
-window.addEventListener("host:workspace-reset", () => {
-  selected = "calendar";
+window.addEventListener("host:workspace-reset", (event) => {
+  selected =
+    event.detail?.sessionEnded === false
+      ? workspaceLocation(new URL(location.href))
+      : "calendar";
+  if (event.detail?.sessionEnded !== false) {
+    for (const button of buttons.values()) button.disabled = true;
+    const url = new URL(location.href);
+    url.pathname = "/dashboard/host/";
+    url.searchParams.delete("view");
+    url.searchParams.delete("section");
+    url.searchParams.delete("tab");
+    if (url.href !== location.href) history.replaceState(null, "", url);
+  }
   refresh();
 });
 window.addEventListener("popstate", () => {
   const requested = workspaceLocation(new URL(location.href));
-  choose(targets(requested).length ? requested : "calendar");
+  selected = requested;
+  if (root.dataset.loading === "true") refresh();
+  else choose(targets(requested).length ? requested : "calendar");
 });
 document
   .getElementById("sidebar-profile")

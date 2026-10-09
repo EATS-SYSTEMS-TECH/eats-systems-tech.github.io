@@ -126,7 +126,7 @@ test("workspace isolates feature failures, permissions, paging and browser histo
         .getByRole("button", { name: "Alerts and activity", exact: true })
         .click();
       await page
-        .getByRole("button", { name: "Retry operations screen", exact: true })
+        .getByRole("button", { name: "Retry this section", exact: true })
         .waitFor();
       assert.equal(await page.locator(".reservation-chip").count(), 1);
       await page.getByRole("button", { name: "Calendar", exact: true }).click();
@@ -323,9 +323,7 @@ test("workspace isolates feature failures, permissions, paging and browser histo
       assert.equal(await menu.getAttribute("aria-expanded"), "false");
       await menu.click();
       await page.getByRole("button", { name: "הזמנות", exact: true }).click();
-      await page
-        .getByRole("region", { name: "Reservations", exact: true })
-        .waitFor();
+      await page.getByRole("region", { name: "הזמנות", exact: true }).waitFor();
       assert.equal(await menu.getAttribute("aria-expanded"), "false");
       assert.equal(
         await page.evaluate(

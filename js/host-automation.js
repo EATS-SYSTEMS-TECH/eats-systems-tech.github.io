@@ -1,3 +1,4 @@
+import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
 import { field, node } from "./host-ui.js";
 export async function renderHostAutomation({
@@ -15,16 +16,18 @@ export async function renderHostAutomation({
   const section = node("section", undefined, {
       "aria-label": "Automatic guest access",
     }),
-    status = node("p", "Loading automatic access jobs…", {
+    status = node("p", hostText("Loading automatic access jobs…"), {
       role: "status",
       "aria-live": "polite",
     }),
     jobs = node("div");
   section.append(
-    node("h2", "Automatic guest access"),
+    node("h2", hostText("Automatic guest access")),
     node(
       "p",
-      "Automation requires an enabled property policy and a live administrator delegation for every gate. An imported offline pass remains valid until its effective expiry after cancellation.",
+      hostText(
+        "Automation requires an enabled property policy and a live administrator delegation for every gate. An imported offline pass remains valid until its effective expiry after cancellation.",
+      ),
     ),
     status,
   );
@@ -40,8 +43,9 @@ export async function renderHostAutomation({
       await operation();
     } catch {
       if (current())
-        status.textContent =
-          "Automatic access operation failed. Reload current settings and verify permissions before retrying.";
+        status.textContent = hostText(
+          "Automatic access operation failed. Reload current settings and verify permissions before retrying.",
+        );
     } finally {
       busy = false;
       if (current()) button.disabled = false;
@@ -62,7 +66,7 @@ export async function renderHostAutomation({
         "text",
         properties.map((entry) => [entry.id, entry.name]),
       );
-    const enabledLabel = node("label", "Enable automatic access"),
+    const enabledLabel = node("label", hostText("Enable automatic access")),
       enabled = node("input", undefined, { type: "checkbox", name: "enabled" });
     enabledLabel.prepend(enabled);
     form.append(enabledLabel);
@@ -92,8 +96,8 @@ export async function renderHostAutomation({
       "none",
       "text",
       [
-        ["none", "Generate only"],
-        ["partner-webhook", "Configured partner delivery"],
+        ["none", hostText("Generate only")],
+        ["partner-webhook", hostText("Configured partner delivery")],
       ],
     );
     const destination = field(form, "Delivery destination ID", "destinationId");
@@ -116,8 +120,10 @@ export async function renderHostAutomation({
     syncChannel();
     let version = 0,
       loadedProperty;
-    const load = node("button", "Load automation policy", { type: "button" }),
-      save = node("button", "Save automation policy", {
+    const load = node("button", hostText("Load automation policy"), {
+        type: "button",
+      }),
+      save = node("button", hostText("Save automation policy"), {
         type: "submit",
         disabled: "",
       });
@@ -146,7 +152,7 @@ export async function renderHostAutomation({
         template.value = policy.guestTemplateId ?? "";
         syncChannel();
         save.disabled = false;
-        status.textContent = "Automation policy loaded.";
+        status.textContent = hostText("Automation policy loaded.");
       }),
     );
     form.addEventListener("submit", (event) => {
@@ -176,8 +182,9 @@ export async function renderHostAutomation({
         );
         if (!current() || property.value !== id) return;
         version = response.policy.version;
-        status.textContent =
-          "Automation policy saved. Review paused jobs before retrying them.";
+        status.textContent = hostText(
+          "Automation policy saved. Review paused jobs before retrying them.",
+        );
       });
     });
   }
@@ -193,18 +200,25 @@ export async function renderHostAutomation({
       row.append(
         node(
           "p",
-          `${job.reservationId} · revision ${job.reservationVersion} · ${job.status} · attempts ${job.attempts}`,
+          hostText("{p0} · revision {p1} · {p2} · attempts {p3}", {
+            p0: job.reservationId,
+            p1: job.reservationVersion,
+            p2: hostText(job.status),
+            p3: job.attempts,
+          }),
         ),
       );
       if (job.lastErrorCode) row.append(node("p", job.lastErrorCode));
       if (job.deliveryId)
-        row.append(node("p", `Delivery receipt: ${job.deliveryId}`));
+        row.append(
+          node("p", hostText("Delivery receipt: {p0}", { p0: job.deliveryId })),
+        );
       if (!["delivered", "expired", "cancelled"].includes(job.status)) {
         const form = node("form"),
           reason = field(form, "Automatic access stop reason", "reason");
         reason.minLength = 5;
         reason.maxLength = 200;
-        const stop = node("button", "Stop automatic access", {
+        const stop = node("button", hostText("Stop automatic access"), {
           type: "submit",
         });
         form.append(stop);
@@ -219,8 +233,9 @@ export async function renderHostAutomation({
             );
             if (current()) {
               await loadJobs();
-              status.textContent =
-                "Automatic access stopped. An already imported offline pass remains valid until its expiry.";
+              status.textContent = hostText(
+                "Automatic access stopped. An already imported offline pass remains valid until its expiry.",
+              );
             }
           });
         });
@@ -231,7 +246,7 @@ export async function renderHostAutomation({
           reason = field(form, "Automatic access retry reason", "reason");
         reason.minLength = 5;
         reason.maxLength = 200;
-        const retry = node("button", "Retry automatic access", {
+        const retry = node("button", hostText("Retry automatic access"), {
           type: "submit",
         });
         form.append(retry);
@@ -245,8 +260,9 @@ export async function renderHostAutomation({
               { reason: reason.value },
             );
             if (current()) {
-              status.textContent =
-                "Automatic access job queued for a verified retry.";
+              status.textContent = hostText(
+                "Automatic access job queued for a verified retry.",
+              );
               await loadJobs();
             }
           });
@@ -256,7 +272,7 @@ export async function renderHostAutomation({
       jobs.append(row);
     }
     if (response.nextCursor) {
-      const more = node("button", "Load more automatic access jobs", {
+      const more = node("button", hostText("Load more automatic access jobs"), {
         type: "button",
       });
       more.addEventListener("click", () =>
@@ -268,15 +284,16 @@ export async function renderHostAutomation({
       jobs.append(more);
     }
     status.textContent = response.items.length
-      ? "Automatic access jobs loaded."
-      : "No automatic access jobs yet.";
+      ? hostText("Automatic access jobs loaded.")
+      : hostText("No automatic access jobs yet.");
   }
   if (!includeJobs) {
-    status.textContent =
-      "Load a property policy to review or change automation.";
+    status.textContent = hostText(
+      "Load a property policy to review or change automation.",
+    );
     return;
   }
-  const refresh = node("button", "Refresh automatic access jobs", {
+  const refresh = node("button", hostText("Refresh automatic access jobs"), {
     type: "button",
   });
   refresh.addEventListener("click", () => run(refresh, () => loadJobs()));

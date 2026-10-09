@@ -1,3 +1,4 @@
+import { hostText, hostLocale } from "./host-locale.js";
 import {
   portalRequest,
   pendingMembershipInvitations,
@@ -12,23 +13,34 @@ let accepting = false;
 export const membershipActionInProgress = () => accepting;
 const failure = (error) =>
   ({
-    TOTP_REQUIRED:
+    TOTP_REQUIRED: hostText(
       "Verify your authenticator before accepting a management role.",
-    RECENT_TOTP_REQUIRED:
+    ),
+    RECENT_TOTP_REQUIRED: hostText(
       "Set up your account authenticator and sign in again before accepting or changing a management invitation.",
-    INVITATION_EXPIRED:
+    ),
+    INVITATION_EXPIRED: hostText(
       "This invitation expired. Ask the owner for a new invitation.",
-    INVITATION_PENDING: "A pending invitation already exists for this email.",
-    MEMBERSHIP_EXISTS:
+    ),
+    INVITATION_PENDING: hostText(
+      "A pending invitation already exists for this email.",
+    ),
+    MEMBERSHIP_EXISTS: hostText(
       "Membership already exists. Review the current member access instead.",
-    INVITER_ACCESS_DENIED:
+    ),
+    INVITER_ACCESS_DENIED: hostText(
       "The inviting owner is unavailable. Ask an active owner to review this invitation.",
-    INVITATION_CAPACITY_EXCEEDED:
+    ),
+    INVITATION_CAPACITY_EXCEEDED: hostText(
       "Review or cancel pending invitations before adding more.",
-    VERSION_CONFLICT:
+    ),
+    VERSION_CONFLICT: hostText(
       "The invitation changed. Load the current invitations before retrying.",
+    ),
   })[error?.code] ??
-  "Invitation action failed. Refresh and verify your current access before retrying.";
+  hostText(
+    "Invitation action failed. Refresh and verify your current access before retrying.",
+  );
 
 export async function renderPendingMembershipInvitations({
   container,
@@ -39,13 +51,17 @@ export async function renderPendingMembershipInvitations({
   const section = node("section", undefined, {
       "aria-label": "Team invitations",
     }),
-    status = node("p", "Loading team invitations…", { role: "status" }),
+    status = node("p", hostText("Loading team invitations…"), {
+      role: "status",
+    }),
     rows = node("div");
   section.append(
-    node("h3", "Team invitations"),
+    node("h3", hostText("Team invitations")),
     node(
       "p",
-      "Only invitations for your verified approved email appear here. Management roles require a recent authenticator sign-in.",
+      hostText(
+        "Only invitations for your verified approved email appear here. Management roles require a recent authenticator sign-in.",
+      ),
     ),
     status,
     rows,
@@ -62,10 +78,16 @@ export async function renderPendingMembershipInvitations({
     for (const item of result.items) {
       const row = node("article", undefined, { "data-invitation-id": item.id });
       row.append(
-        node("p", `${item.organizationName} · expires ${item.expiresAt}`),
+        node(
+          "p",
+          hostText("{p0} · expires {p1}", {
+            p0: item.organizationName,
+            p1: item.expiresAt,
+          }),
+        ),
         roleBadge(item.role),
       );
-      const accept = node("button", "Accept team invitation", {
+      const accept = node("button", hostText("Accept team invitation"), {
         type: "button",
       });
       let intent;
@@ -80,8 +102,9 @@ export async function renderPendingMembershipInvitations({
             const profile = await getProfile(user);
             if (!current()) return;
             if (!profile.mfa.enrolled) {
-              status.textContent =
-                "Set up your authenticator, then return to accept this invitation.";
+              status.textContent = hostText(
+                "Set up your authenticator, then return to accept this invitation.",
+              );
               window.dispatchEvent(new CustomEvent("host:totp-required"));
               return;
             }
@@ -91,7 +114,7 @@ export async function renderPendingMembershipInvitations({
           }
           await acceptMembershipInvitation(user, item.id, item.version, intent);
           if (current()) {
-            status.textContent = "Team invitation accepted.";
+            status.textContent = hostText("Team invitation accepted.");
             await onAccepted(item.clientId);
           }
         } catch (error) {
@@ -106,7 +129,7 @@ export async function renderPendingMembershipInvitations({
       rows.append(row);
     }
     if (result.nextCursor) {
-      const more = node("button", "Load more team invitations", {
+      const more = node("button", hostText("Load more team invitations"), {
         type: "button",
       });
       more.addEventListener("click", async () => {
@@ -126,8 +149,8 @@ export async function renderPendingMembershipInvitations({
       rows.append(more);
     }
     status.textContent = rows.children.length
-      ? "Team invitations loaded."
-      : "No pending team invitations.";
+      ? hostText("Team invitations loaded.")
+      : hostText("No pending team invitations.");
   }
   try {
     await read();
@@ -146,7 +169,7 @@ export async function renderOwnerMembershipInvitations({
   const section = node("section", undefined, {
       "aria-label": "Invite team members",
     }),
-    status = node("p", "Loading invitations…", { role: "status" }),
+    status = node("p", hostText("Loading invitations…"), { role: "status" }),
     rows = node("div"),
     form = node("form");
   const email = field(form, "Invite verified email", "email", "", "email"),
@@ -156,15 +179,22 @@ export async function renderOwnerMembershipInvitations({
       "role",
       "staff",
       "text",
-      ["staff", "viewer", "admin", "owner"].map((value) => [value, value]),
+      ["staff", "viewer", "admin", "owner"].map((value) => [
+        value,
+        hostText(value),
+      ]),
     );
-  const submit = node("button", "Create team invitation", { type: "submit" });
+  const submit = node("button", hostText("Create team invitation"), {
+    type: "submit",
+  });
   form.append(submit);
   section.append(
-    node("h3", "Invite team members"),
+    node("h3", hostText("Invite team members")),
     node(
       "p",
-      "The recipient can sign in later and accept. Portal approval remains separate. No email is sent automatically.",
+      hostText(
+        "The recipient can sign in later and accept. Portal approval remains separate. No email is sent automatically.",
+      ),
     ),
     form,
     status,
@@ -195,7 +225,7 @@ export async function renderOwnerMembershipInvitations({
         ),
       );
       if (item.status === "pending") {
-        const cancel = node("button", "Cancel team invitation", {
+        const cancel = node("button", hostText("Cancel team invitation"), {
           type: "button",
         });
         cancel.addEventListener("click", async () => {
@@ -214,7 +244,7 @@ export async function renderOwnerMembershipInvitations({
             attempts.delete(signature);
             if (current()) {
               await read();
-              status.textContent = "Team invitation cancelled.";
+              status.textContent = hostText("Team invitation cancelled.");
             }
           } catch (error) {
             if (current()) status.textContent = failure(error);
@@ -228,7 +258,7 @@ export async function renderOwnerMembershipInvitations({
       rows.append(row);
     }
     if (result.nextCursor) {
-      const more = node("button", "Load more owner invitations", {
+      const more = node("button", hostText("Load more owner invitations"), {
         type: "button",
       });
       more.addEventListener("click", async () => {
@@ -247,7 +277,7 @@ export async function renderOwnerMembershipInvitations({
       });
       rows.append(more);
     }
-    status.textContent = "Owner invitations loaded.";
+    status.textContent = hostText("Owner invitations loaded.");
   }
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -263,8 +293,9 @@ export async function renderOwnerMembershipInvitations({
       attempts.delete(signature);
       if (current()) {
         await read();
-        status.textContent =
-          "Team invitation created. The approved recipient can accept after signing in.";
+        status.textContent = hostText(
+          "Team invitation created. The approved recipient can accept after signing in.",
+        );
       }
     } catch (error) {
       if (current()) status.textContent = failure(error);
