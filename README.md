@@ -37,6 +37,18 @@ The dashboard contains administrator access management, account/security control
 
 The authentication contract and setup requirements are in [docs/host-portal-v1.md](docs/host-portal-v1.md). The backend implements authorization/MFA fields, access lifecycle, and tenant endpoints under `/api/v1/organizations`; its README is the complete endpoint registry. Missing authorization fields fail closed.
 
+### V1 administrator Overview
+
+Verified Host admins can enter Overview from the sidebar or `/dashboard/host/overview/?tab=admins|users|organizations`. It provides counts, paginated searchable directories, add admin/user with optional organization invitation, per-product membership details, owner-email organization creation and member invitations/removal. Role badges use fixed colors and keyboard-accessible explanations. Self access and the last active administrator are protected; the server also protects the last organization owner.
+
+New organizations remain pending until the designated owner accepts with an authenticator. Recipients can start enrollment from their invitation, then accept after fresh verification. Expired initial owner invitations can be renewed. These are dashboard invitations; no email is sent automatically.
+
+Remove organization archives it and retains history. The confirmation shows affected records and gates, requires the exact name and fresh MFA, and refuses archival until physical gates are released/transferred. Every mutation carries an idempotency key and the current version where required; stale views clear on account/access changes.
+
+During backend rollout, a 404 on `/api/v1/platform/me` permits a fallback to the authenticated Host profile API (with empty PUT profile synchronization if missing). Authorization failures and outages never trigger fallback. Other products remain unavailable in this mode. Full Overview functionality requires the matching backend's `/api/v1/admin/overview`, `/people`, `/organizations` and organization archive endpoints. Deploy the backend/indexes before this rebuilt frontend; the backend README and OpenAPI define the complete contracts.
+
+`npm run test:api` covers fallback authority and strict paths. `npm run test:platform` covers actual dashboard entry and admin desktop/mobile confirmation/MFA flows with isolated fixtures; the backend emulator suite verifies persistence, ownership and retained history. Real production providers and hardware still require release acceptance.
+
 ### Calendar workspace
 
 The reference image belongs to the specification; the dashboard renders interactive calendar elements instead of an image. Tenant management uses the authenticated API adapter in `api/host/portal-request.ts`; no product data is read directly from Firestore. The Host emulator suite exercises the actual portal against Firestore for organization, property, room and team lifecycle at desktop and mobile widths.
@@ -53,11 +65,12 @@ The canonical production API is `https://api.wifigate.io`. All local API clients
 
 ### Checks
 
-Dependency review updated the development Firebase Admin dependency and scoped vulnerable transitive versions. Production dependency audit reports no known advisories. Five development-tool advisories remain in the unpatched file-watcher and OpenTelemetry/PubSub chains; the detailed assessment is in backend `docs/decisions/0004-shared-platform-access.md`. These tools are not shipped in the browser bundles.
+V10 pins Firebase CLI 15.33.0 and scopes its Chokidar dependency to 4.0.3 and complete Pub/Sub dependency to 6.2.0. This removes the previously reported development watcher/OpenTelemetry advisory paths. Chokidar 4 supports explicit files/directories rather than glob expansion; this site's isolated Auth staging workflow is verified. These tools are not shipped in the browser bundles. Full `npm audit --audit-level=moderate` now gates CI; recheck at release. The compatibility decision is in backend `docs/decisions/0006-v10-operational-evidence.md`.
 
 - npm run test:api: TypeScript build and access/API unit tests.
 - npm run test:platform: isolated browser checks for bilingual login, product states, MFA, redirects, idle expiry and401/403 cleanup; no cloud credentials or production data.
 - npm run test:staging: Auth Emulator token/API tests, mock Google/Apple browser flows, and isolated browser fixtures for TOTP enrollment/challenges/approval.
+- npm run test:health: isolated desktop/mobile Service health, freshness/error states, role restrictions and late-response fencing.
 - node scripts/host-portal-browser.test.mjs: browser fixtures against an existing site on port 8100; no emulator required for this fixture suite.
 
 Staging is entirely local. Approved user fixtures: owner@grandplaza.test and member@grandplaza.test. admin@wifigate.test is an admin without TOTP and must remain in enrollment. pending@wifigate.test is pending; other emails are denied. These names are fixtures, not a production allowlist.

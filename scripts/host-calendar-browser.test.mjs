@@ -46,7 +46,24 @@ test('reference dashboard: authorized navigation, three-week spans, editor and m
   assert.equal(await card.evaluate(element=>element.style.gridColumn),'2 / 5');
   await card.click();
   await page.getByRole('heading',{name:'Edit reservation'}).waitFor();
+  await page.evaluate(async()=>{
+    const {profileApi}=await import('/js/api/index.js');
+    const original=profileApi.defaults.adapter;
+    window.editorWrites=0;
+    profileApi.defaults.adapter=async config=>{
+      if(/\/reservations(?:\/[a-zA-Z0-9_-]+)?$/.test(config.url) && ['post','put'].includes(config.method)) window.editorWrites++;
+      if(config.url.includes('/time-zone/resolve') && JSON.parse(config.data).localTime.endsWith('T16:00')) await new Promise(resolve=>{window.releaseEditorTime=resolve;});
+      return original(config);
+    };
+  });
+  const arrival=page.getByLabel('Arrival (UTC)',{exact:true});
+  await arrival.fill((await arrival.inputValue()).slice(0,10)+'T16:00');
+  await page.getByRole('button',{name:'Save reservation',exact:true}).click();
+  await page.waitForFunction(()=>typeof window.releaseEditorTime==='function');
   await page.getByRole('button',{name:'Close reservation',exact:true}).click();
+  await page.evaluate(()=>window.releaseEditorTime());
+  await page.waitForTimeout(100);
+  assert.equal(await page.evaluate(()=>window.editorWrites),0,'closing during time resolution must cancel an unsent save');
   await page.getByRole('button',{name:'Settings',exact:true}).click();
   assert.equal(await page.locator('#account-details').evaluate(element=>element.open),true);
   await page.evaluate(()=>{for(const label of ['properties','rooms']){const section=document.createElement('section');section.setAttribute('aria-label',label);section.textContent=label;document.getElementById('host-management').append(section);}});

@@ -13,3 +13,4 @@ export {
   pendingMembershipInvitations,
   acceptMembershipInvitation,
 } from "./host/membership-invitations.js";
+export { adminRequest } from "./host/admin-request.js";

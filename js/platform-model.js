@@ -53,6 +53,7 @@ export function safeDashboardPath(value) {
     return null;
   const supported =
     path === "/dashboard/" ||
+    path === "/dashboard/host/overview/" ||
     productIds.some((id) => path === `/dashboard/${id}/`);
   if (!supported) return null;
   return value;
