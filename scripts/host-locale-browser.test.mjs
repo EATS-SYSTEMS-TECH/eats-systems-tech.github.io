@@ -60,9 +60,11 @@ test("selected Host language controls layout, translated forms and history while
       initializeHostLocale();installHostLanguageSelector();
       document.querySelector('#host-sidebar').hidden=false;document.querySelector('#dashboard-content').hidden=false;document.querySelector('#access-panel').hidden=true;document.querySelector('#account-details').hidden=false;
       const organization={id:'fixture-org',name:'Properties',timezone:'UTC',membership:{role:'owner'}};
+      window.fixtureRequests=[];
       profileApi.defaults.adapter=async config=>{
+        window.fixtureRequests.push(config.url);
         const url=config.url;let data;
-        if(url.startsWith('/api/v1/organizations?'))data={organizations:[organization],nextCursor:null};
+        if(url.startsWith('/api/v1/organizations?'))data={organizations:[organization,{...organization,id:'fixture-org-2',name:'Second organization'}],nextCursor:null};
         else if(url.includes('/properties?'))data={items:[{id:'property',name:'Calendar',timezone:'UTC'}],nextCursor:null};
         else if(url.includes('/rooms?'))data={items:[{id:'room',propertyId:'property',name:'Room',capacity:2}],nextCursor:null};
         else if(url.includes('/systems/icons'))data={icons:{}};
@@ -149,6 +151,38 @@ test("selected Host language controls layout, translated forms and history while
       .click();
     await page.locator('button[data-view="Reservations"]').click();
     await page
+      .locator("#workspace-org-switcher select")
+      .selectOption("fixture-org-2");
+    await page.waitForFunction(
+      () =>
+        document.querySelector("#host-management").dataset.organizationId ===
+          "fixture-org-2" &&
+        document.querySelector("#host-management").dataset.loading === "false",
+    );
+    assert.equal(new URL(page.url()).searchParams.get("org"), "fixture-org-2");
+    await page.goBack();
+    await page.waitForFunction(
+      () =>
+        document.querySelector("#host-management").dataset.organizationId ===
+          "fixture-org" &&
+        document.querySelector("#host-management").dataset.loading === "false",
+    );
+    assert.equal(new URL(page.url()).searchParams.get("view"), "reservations");
+    await page.goForward();
+    await page.waitForFunction(
+      () =>
+        document.querySelector("#host-management").dataset.organizationId ===
+          "fixture-org-2" &&
+        document.querySelector("#host-management").dataset.loading === "false",
+    );
+    await page.locator('button[data-view="Reservations"]').click();
+    await page.reload();
+    await page.locator('[data-host-section="Reservations"]').waitFor();
+    assert.equal(
+      await page.locator("#workspace-org-switcher select").inputValue(),
+      "fixture-org-2",
+    );
+    await page
       .locator('[data-host-section="Reservations"]')
       .getByRole("button", { name: "Staff", exact: true })
       .click();
@@ -225,8 +259,27 @@ test("selected Host language controls layout, translated forms and history while
     await page.locator('[data-host-section="Reservations"]').waitFor();
     assert.equal(new URL(page.url()).searchParams.get("view"), "reservations");
     assert.equal(
+      await page.locator("#workspace-org-switcher select").inputValue(),
+      "fixture-org-2",
+      "language changes preserve the authorized organization",
+    );
+    assert.equal(
       await page.locator("html").getAttribute("dir"),
       language === "he" ? "ltr" : "rtl",
+    );
+    const unauthorized = new URL(page.url());
+    unauthorized.searchParams.set("org", "foreign-organization");
+    await page.goto(unauthorized.href);
+    await page.locator('[data-host-section="Reservations"]').waitFor();
+    assert.equal(new URL(page.url()).searchParams.get("org"), "fixture-org");
+    assert.equal(
+      await page.evaluate(() =>
+        window.fixtureRequests.some((url) =>
+          url.includes("/organizations/foreign-organization"),
+        ),
+      ),
+      false,
+      "URL preferences never authorize another tenant",
     );
     assert.deepEqual(errors, []);
   }

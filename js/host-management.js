@@ -29,6 +29,14 @@ let organizations = [];
 let selectedId;
 let preferredOrganizationId;
 let sessionUid;
+const requestedOrganization = () =>
+  new URLSearchParams(location.search).get("org");
+function rememberOrganization(id) {
+  const url = new URL(location.href);
+  if (id) url.searchParams.set("org", id);
+  else url.searchParams.delete("org");
+  if (url.href !== location.href) history.replaceState(null, "", url);
+}
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
 const path = (suffix = "") =>
   `/api/v1/organizations/${encodeURIComponent(selectedId)}${suffix}`;
@@ -135,6 +143,7 @@ export function clearHostManagement({ sessionEnded = false } = {}) {
     sessionTransfer = undefined;
     sessionUid = undefined;
     preferredOrganizationId = undefined;
+    rememberOrganization(undefined);
   }
   root.replaceChildren();
   clearOrganizationSelector();
@@ -776,6 +785,7 @@ export async function loadHostManagement(user, identity, preferredId) {
     });
     if (epoch !== generation) return;
     if (!organizations.length) {
+      rememberOrganization(undefined);
       root.append(
         node(
           "p",
@@ -788,11 +798,15 @@ export async function loadHostManagement(user, identity, preferredId) {
       root.dataset.loading = "false";
       return;
     }
-    const preferred = preferredId ?? preferredOrganizationId;
+    // A URL is only a preference: the current server-authorized memberships
+    // decide which organization can load, including after a role is revoked.
+    const preferred =
+      preferredId ?? requestedOrganization() ?? preferredOrganizationId;
     selectedId = organizations.some((org) => org.id === preferred)
       ? preferred
       : organizations[0].id;
     preferredOrganizationId = selectedId;
+    rememberOrganization(selectedId);
     const selection = node("form");
     const select = field(
       selection,
@@ -809,6 +823,12 @@ export async function loadHostManagement(user, identity, preferredId) {
     if (selectorHolder) selectorHolder.replaceChildren(selection);
     root.dataset.organizationId = selectedId;
     select.addEventListener("change", () => {
+      const url = new URL(location.href);
+      url.pathname = "/dashboard/host/";
+      url.searchParams.set("org", select.value);
+      url.searchParams.delete("view");
+      url.searchParams.delete("tab");
+      history.pushState(null, "", url);
       window.dispatchEvent(
         new CustomEvent("host:workspace-view", { detail: "Calendar" }),
       );
@@ -995,3 +1015,7 @@ export async function loadHostManagement(user, identity, preferredId) {
     if (epoch === generation) root.dataset.loading = "false";
   }
 }
+window.addEventListener("popstate", () => {
+  if (currentUser && currentIdentity && requestedOrganization() !== selectedId)
+    void loadHostManagement(currentUser, currentIdentity);
+});
