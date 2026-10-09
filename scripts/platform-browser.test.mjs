@@ -602,7 +602,11 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         .getByText("This support approval is unavailable, expired or revoked.")
         .waitFor();
       assert.equal(await support.getByText(/jobs.*records 4/).count(), 0);
-      assert.equal(fixture.page.url(), origin + "/dashboard/host/");
+      assert.equal(new URL(fixture.page.url()).pathname, "/dashboard/host/");
+      assert.equal(
+        new URL(fixture.page.url()).searchParams.get("view"),
+        "support",
+      );
       assert.equal(
         await fixture.page.locator("#dashboard-content").isVisible(),
         true,
@@ -935,6 +939,28 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
           true,
         );
         await page.locator('[data-tab="organizations"]').click();
+        await page.locator('[data-tab="users"]').click();
+        await page.goBack();
+        await page.waitForFunction(
+          () =>
+            document
+              .querySelector('[data-tab="organizations"]')
+              .getAttribute("aria-selected") === "true",
+        );
+        await page.goBack();
+        await page.waitForFunction(
+          () =>
+            document
+              .querySelector('[data-tab="admins"]')
+              .getAttribute("aria-selected") === "true",
+        );
+        await page.goForward();
+        await page.waitForFunction(
+          () =>
+            document
+              .querySelector('[data-tab="organizations"]')
+              .getAttribute("aria-selected") === "true",
+        );
         await page
           .getByRole("button", { name: "Fixture Hotel", exact: true })
           .waitFor();
