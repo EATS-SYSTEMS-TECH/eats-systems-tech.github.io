@@ -1,75 +1,12 @@
-// Views reuse server-authorized components; no image or sample reservations are rendered.
-const nav = document.getElementById("host-section-navigation"),
-  root = document.getElementById("host-management");
-const entries = [
-  [
-    "Team invitations",
-    'section[aria-label="Team invitations"]',
-    "users",
-    "Management",
-  ],
-  ["Overview", "#admin-overview", "users", ""],
-  ["Calendar", ".host-calendar", "calendar", ""],
-  [
-    "Properties",
-    'section[aria-label="properties"], section[aria-label="rooms"]',
-    "home",
-    "",
-  ],
-  ["Reservations", 'section[aria-label="Reservations"]', "key", ""],
-  ["Guests", 'section[aria-label="Guests"]', "users", "Management"],
-  [
-    "Staff",
-    'section[aria-label="members"], section[aria-label="Invite team members"]',
-    "users",
-    "Management",
-  ],
-  [
-    "Access Keys",
-    'section[aria-label="WIFIGATE systems"]',
-    "key",
-    "Management",
-  ],
-  [
-    "Automation",
-    'section[aria-label="Automatic guest access"]',
-    "bolt",
-    "Management",
-  ],
-  [
-    "Jobs Calendar",
-    'section[aria-label="Host operations"]',
-    "calendar",
-    "Management",
-  ],
-  ["Invoices", "[data-workspace-billing]", "file", "Billing"],
-  [
-    "Service health",
-    'section[aria-label="Service health"]',
-    "bolt",
-    "Management",
-  ],
-  [
-    "API integrations",
-    'section[aria-label="API integrations"], section[aria-label="Reservation integrations"]',
-    "key",
-    "Management",
-  ],
-  [
-    "System Import",
-    'section[aria-label="System import approvals"]',
-    "home",
-    "Management",
-  ],
-  [
-    "Support",
-    'section[aria-label="Temporary support access"], section[aria-label="Approved support diagnostics"]',
-    "chat",
-    "Management",
-  ],
-  ["Settings", "#account-details, #admin-approval", "settings", "Settings"],
-  ["Organizations", "#host-management", "home", "Settings"],
-];
+import {
+  workspaceViews,
+  workspaceView,
+  workspaceLocation,
+} from "./host-workspace-model.js";
+
+const nav = document.getElementById("host-section-navigation");
+const root = document.getElementById("host-management");
+const hebrew = new URL(location.href).searchParams.get("lang") === "he";
 const icons = {
   calendar: "M4 6h16v15H4z M8 3v6 M16 3v6 M4 11h16",
   home: "M3 11 12 3l9 8 M6 10v11h12V10 M10 21v-7h4v7",
@@ -82,134 +19,185 @@ const icons = {
   settings:
     "M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8 M12 2v4 M12 18v4 M2 12h4 M18 12h4 M5 5l3 3 M16 16l3 3 M5 19l3-3 M16 8l3-3",
 };
-let selected = "Calendar";
+let selected = workspaceLocation(new URL(location.href));
 const buttons = new Map();
-for (const group of ["", "Management", "Billing", "Settings"]) {
-  const items = entries.filter((item) => item[3] === group);
-  if (!items.length) continue;
-  if (group) {
-    const title = document.createElement("p");
-    title.className = "sidebar-group";
-    title.textContent = group;
-    nav.append(title);
-  }
-  for (const [label, selector, icon] of items) {
+const groups = new Map();
+const toggle = document.createElement("button");
+toggle.type = "button";
+toggle.className = "workspace-menu-toggle";
+toggle.textContent = hebrew ? "תפריט" : "Menu";
+toggle.setAttribute("aria-controls", nav.id);
+toggle.setAttribute("aria-expanded", "false");
+nav.before(toggle);
+toggle.addEventListener("click", () => {
+  const expanded = toggle.getAttribute("aria-expanded") !== "true";
+  toggle.setAttribute("aria-expanded", String(expanded));
+  nav.classList.toggle("workspace-menu-open", expanded);
+});
+
+for (const group of ["", "Management", "Advanced", "Account", "Platform"]) {
+  const heading = document.createElement("p");
+  heading.className = "sidebar-group";
+  heading.textContent = hebrew
+    ? ({
+        Management: "ניהול",
+        Advanced: "מתקדם",
+        Account: "חשבון",
+        Platform: "פלטפורמה",
+      }[group] ?? "")
+    : group;
+  if (group) nav.append(heading);
+  groups.set(group, heading);
+  for (const view of workspaceViews.filter((item) => item.group === group)) {
     const button = document.createElement("button");
     button.type = "button";
-    button.dataset.view = label;
-    button.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${icons[icon]}"/></svg>`;
-    const text = document.createElement("span");
-    text.textContent = label;
-    button.append(text);
-    button.addEventListener("click", () => choose(label, true));
-    buttons.set(label, button);
-    nav.append(button);
+    button.dataset.view = view.label;
+    button.dataset.viewId = view.id;
+    button.innerHTML =
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' +
+      icons[view.icon] +
+      '"/></svg>';
+    const label = document.createElement("span");
+    label.textContent = hebrew ? view.he : view.label;
+    button.append(label);
+    button.addEventListener("click", () =>
+      choose(view.id, { push: true, focus: true }),
+    );
+    buttons.set(view.id, button);
+    if (view.id === "invitations") {
+      button.className = "workspace-inbox-button";
+      button.setAttribute("aria-label", hebrew ? view.he : view.label);
+      const badge = document.createElement("span");
+      badge.dataset.invitationCount = "true";
+      badge.setAttribute("aria-hidden", "true");
+      button.append(badge);
+      const switcher = document.getElementById("workspace-org-switcher");
+      if (switcher) switcher.after(button);
+      else nav.after(button);
+    } else nav.append(button);
   }
 }
-function targets(label) {
-  const entry = entries.find((item) => item[0] === label);
-  return entry
-    ? [...document.querySelectorAll(entry[1])].filter(
-        (element) => !element.hidden,
-      )
-    : [];
+
+function targets(id) {
+  const view = workspaceView(id);
+  if (!view) return [];
+  const panel = root.querySelector('[data-workspace-view="' + view.id + '"]');
+  if (panel) return [panel];
+  return [...document.querySelectorAll(view.selector)].filter(
+    (element) => !element.hidden,
+  );
 }
-function choose(label, focus = false) {
-  if (!buttons.has(label) || !targets(label).length) return;
-  selected = label;
+
+function choose(value, { push = false, focus = false } = {}) {
+  const view = workspaceView(value);
+  if (!view || !targets(view.id).length) return;
+  selected = view.id;
+  for (const dialog of root.querySelectorAll("dialog[open]")) dialog.close();
   const url = new URL(location.href);
   url.pathname =
-    label === "Overview" ? "/dashboard/host/overview/" : "/dashboard/host/";
-  if (label !== "Overview") url.searchParams.delete("tab");
-  history.replaceState(null, "", url);
+    selected === "overview" ? "/dashboard/host/overview/" : "/dashboard/host/";
+  if (selected === "overview" || selected === "calendar")
+    url.searchParams.delete("view");
+  else url.searchParams.set("view", selected);
+  if (selected !== "overview") url.searchParams.delete("tab");
+  if (selected !== "operations") url.searchParams.delete("section");
+  if (value === "Jobs Calendar") url.searchParams.set("section", "jobs");
+  if (value === "Service health") url.searchParams.set("section", "health");
+  if (push && url.href !== location.href) history.pushState(null, "", url);
+  else if (!push) history.replaceState(null, "", url);
+  toggle.setAttribute("aria-expanded", "false");
+  nav.classList.remove("workspace-menu-open");
   refresh();
-  if (label === "Settings") {
-    const details = document.getElementById("account-details");
-    if (details) details.open = true;
-  }
+  window.dispatchEvent(
+    new CustomEvent("host:workspace-navigate", { detail: selected }),
+  );
+  if (selected === "account")
+    document.getElementById("account-details").open = true;
   if (focus) {
-    const target = targets(label)[0];
+    const target = targets(selected)[0];
     target.tabIndex = -1;
     target.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
+
 function refresh() {
-  document.body.dataset.hostView = selected;
+  document.body.dataset.hostView = workspaceView(selected)?.label ?? "Calendar";
   const selectedTargets = targets(selected);
-  for (const [label, button] of buttons) {
-    const available = targets(label).length > 0;
+  const badge = buttons
+    .get("invitations")
+    .querySelector("[data-invitation-count]");
+  const inbox = root.querySelector('[data-workspace-view="invitations"]');
+  const count =
+    inbox?.querySelectorAll("article[data-invitation-id]").length ?? 0;
+  const countLabel = String(count);
+  if (badge.textContent !== countLabel) badge.textContent = countLabel;
+  for (const [id, button] of buttons) {
+    const available = targets(id).length > 0;
+    button.hidden = !available && id !== "calendar";
     button.disabled = !available;
-    if (label === "Overview") button.hidden = !available;
-    button.title = available
-      ? ""
-      : root.dataset.organizationId
-        ? "Unavailable for your current role"
-        : "Choose an authorized organization first";
-    if (label === selected) button.setAttribute("aria-current", "page");
+    if (id === selected) button.setAttribute("aria-current", "page");
     else button.removeAttribute("aria-current");
   }
+  for (const [group, heading] of groups) {
+    heading.hidden = !workspaceViews.some(
+      (view) => view.group === group && !buttons.get(view.id).hidden,
+    );
+  }
   for (const child of root.children) {
-    let show =
-      selected === "Organizations" ||
+    const show =
       selectedTargets.some(
         (target) => child === target || child.contains(target),
-      );
-    if (
-      selected === "Calendar" &&
-      root.dataset.loading === "true" &&
-      child.tagName === "P"
-    )
-      show = true;
-    if (
-      selected === "Calendar" &&
-      root.dataset.loading !== "true" &&
-      !selectedTargets.length &&
-      ["P", "BUTTON"].includes(child.tagName)
-    )
-      show = true;
-    if (
-      selected === "Organizations" &&
-      child.classList.contains("host-empty-calendar")
-    )
-      show = false;
+      ) ||
+      (child.dataset.workspaceNotice === "true" &&
+        !["overview", "account"].includes(selected)) ||
+      (!selectedTargets.length && ["P", "BUTTON"].includes(child.tagName));
     child.classList.toggle("workspace-hidden", !show);
   }
-  // Billing is a real draft-statement view within the operations component.
-  const operations = root.querySelector(
-    'section[aria-label="Host operations"]',
-  );
-  if (operations)
-    for (const child of operations.children)
-      child.classList.toggle(
-        "workspace-billing-hidden",
-        selected === "Invoices" && !child.matches("[data-workspace-billing]"),
-      );
 }
+
 new MutationObserver(refresh).observe(root, {
   childList: true,
   subtree: true,
   attributes: true,
   attributeFilter: ["data-loading"],
 });
-const overview = document.getElementById("admin-overview");
-if (overview)
-  new MutationObserver(refresh).observe(overview, {
-    attributes: true,
-    attributeFilter: ["hidden"],
-  });
-new MutationObserver(refresh).observe(
-  document.getElementById("account-details"),
-  { attributes: true, attributeFilter: ["hidden"] },
-);
+for (const id of ["admin-overview", "account-details"]) {
+  const element = document.getElementById(id);
+  if (element)
+    new MutationObserver(refresh).observe(element, {
+      attributes: true,
+      attributeFilter: ["hidden"],
+    });
+}
 window.addEventListener("host:workspace-view", (event) =>
-  choose(event.detail, true),
+  choose(event.detail, { push: true, focus: true }),
 );
-window.addEventListener("host:workspace-reset", () => {
-  selected = "Calendar";
+window.addEventListener("host:workspace-ready", () => {
+  const requested = workspaceLocation(new URL(location.href));
+  if (
+    requested === "overview" &&
+    root.dataset.platformRole === "admin" &&
+    !targets(requested).length
+  ) {
+    selected = requested;
+    refresh();
+    return;
+  }
+  choose(targets(requested).length ? requested : "calendar");
   refresh();
+});
+window.addEventListener("host:workspace-reset", () => {
+  selected = "calendar";
+  refresh();
+});
+window.addEventListener("popstate", () => {
+  const requested = workspaceLocation(new URL(location.href));
+  choose(targets(requested).length ? requested : "calendar");
 });
 document
   .getElementById("sidebar-profile")
-  ?.addEventListener("click", () => choose("Settings", true));
+  ?.addEventListener("click", () =>
+    choose("account", { push: true, focus: true }),
+  );
 refresh();

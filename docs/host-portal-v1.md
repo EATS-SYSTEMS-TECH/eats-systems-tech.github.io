@@ -8,9 +8,11 @@ Frontend contract aligned with the shared-login section of WIFIGATE_HOST.html, 6
 
 `/dashboard/` is the product picker. The visual order remains Host, Pay, Manager at desktop/mobile sizes and in both directions. Active products link to `/dashboard/host/`, `/dashboard/pay/` and `/dashboard/manager/`. Pay and Manager currently expose guarded empty workspaces, not payment or remote administration functions. An inactive product cannot be opened through a direct route. Host profile synchronization occurs only after entering the authorized Host workspace.
 
-The `next` parameter accepts the implemented `/dashboard/host/`, `/dashboard/pay/` and `/dashboard/manager/` pages, with their query and fragment preserved. Encoded path separators, traversal, external origins, malformed paths and unimplemented nested routes are rejected. A permitted path resumes only when its product is active; other return paths fall back to the picker. Arbitrary nested product screens in the target specification remain future work. The interface checks access on entry and focus; API401 signs out and access-denial403 clears product data and returns to the picker. Recent-authentication failures retain their recovery controls. Resource-specific rejections remain in their action view; expired or revoked support approval clears prior diagnostics without revoking unrelated portal access. A late organization-scoped denial is ignored after switching organizations. Firebase sessions remain per-tab with a 30-minute inactivity timeout. TOTP enrollment/verification is reachable from the shared picker without an admin API call.
+The `next` parameter accepts the implemented `/dashboard/host/`, `/dashboard/host/overview/`, `/dashboard/pay/` and `/dashboard/manager/` pages, with their query and fragment preserved. Encoded path separators, traversal, external origins, malformed paths and unimplemented nested routes are rejected. A permitted path resumes only when its product is active; other return paths fall back to the picker. Host Overview still requires the platform administrator role and verified TOTP. Arbitrary nested product screens in the target specification remain future work. The interface checks access on entry and focus; API401 signs out and access-denial403 clears product data and returns to the picker. Recent-authentication failures retain their recovery controls. Resource-specific rejections remain in their action view; expired or revoked support approval clears prior diagnostics without revoking unrelated portal access. A late organization-scoped denial is ignored after switching organizations. Firebase sessions remain per-tab with a 30-minute inactivity timeout. TOTP enrollment/verification is reachable from the shared picker without an admin API call.
 
 ## Identity and authorization
+
+The current workspace navigation and loading behavior are documented in [the dashboard build guide](dashboard-build.md). Organization list/detail responses now include an additive trusted `workspace:{role,permissions,service:{state,available}}` projection. The frontend remains compatible with the existing membership role when an older backend omits it. Every operation still requires live backend authorization; this projection is not a permission token.
 
 Every application API request uses Authorization: Bearer <Firebase ID token>. The frontend does not send provider OAuth tokens, trust client-supplied identity/roles, access Firestore, or contain an Admin SDK or service account. Firebase SDK session handling is separate from application API calls.
 
@@ -32,7 +34,7 @@ GET /api/v1/users/me must return:
 }
 ```
 
-- role: admin, user, or null. No client/organization roles in V1.
+- role: admin, user, or null. This is the global Host portal role, not an organization role. Organization APIs return separate owner/admin/staff/viewer membership roles.
 - access.state: active, pending, or denied. A pending/denied identity may have role null.
 - user.emailVerified: derived from Firebase, never the browser request body.
 - mfa.required: server policy; the frontend always requires MFA for admins, even if this flag is false.

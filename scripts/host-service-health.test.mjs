@@ -92,9 +92,7 @@ test("Service health explains missing and stale evidence, isolates roles and dis
     window.renderHealth("owner");
     await import("/js/host-dashboard-navigation.js");
   });
-  await page
-    .getByRole("button", { name: "Service health", exact: true })
-    .click();
+  await page.getByRole("button", { name: "Operations", exact: true }).click();
   const section = page.getByRole("region", {
     name: "Service health",
     exact: true,
@@ -312,9 +310,9 @@ test("Service health explains missing and stale evidence, isolates roles and dis
     0,
   );
   await page.evaluate(() => window.renderHealth("staff"));
-  await page
-    .getByRole("button", { name: "Service health", exact: true })
-    .click();
+  const menu = page.getByRole("button", { name: "Menu", exact: true });
+  if (await menu.isVisible()) await menu.click();
+  await page.getByRole("button", { name: "Operations", exact: true }).click();
   assert.equal(
     await section.getByRole("button", { name: "Save service targets" }).count(),
     0,

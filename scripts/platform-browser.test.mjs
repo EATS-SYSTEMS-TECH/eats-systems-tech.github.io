@@ -602,7 +602,10 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         .getByText("This support approval is unavailable, expired or revoked.")
         .waitFor();
       assert.equal(await support.getByText(/jobs.*records 4/).count(), 0);
-      assert.equal(fixture.page.url(), origin + "/dashboard/host/");
+      assert.equal(
+        fixture.page.url(),
+        origin + "/dashboard/host/?view=support",
+      );
       assert.equal(
         await fixture.page.locator("#dashboard-content").isVisible(),
         true,
