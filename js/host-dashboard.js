@@ -73,7 +73,7 @@ const protectedElements = {
 function hideProtected(sessionEnded = false) {
   clearAdminOverview();
   clearHostManagement({ sessionEnded });
-  window.dispatchEvent(new CustomEvent("host:workspace-reset"));
+  window.dispatchEvent(new CustomEvent("host:workspace-reset", { detail: { sessionEnded } }));
   protectedElements.dashboard.hidden = true;
   protectedElements.sidebar.hidden = true;
   protectedElements.approval.hidden = true;

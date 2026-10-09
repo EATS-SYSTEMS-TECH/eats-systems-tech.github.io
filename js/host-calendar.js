@@ -86,7 +86,8 @@ export async function renderHostCalendar({ container, user, organization, proper
     const heading = node("h3", record ? "Edit reservation" : "Create reservation");
     const form = node("form", undefined, { class: "reservation-form" });
     const editingPropertyId = record?.propertyId ?? propertySelect.value;
-    const zone = properties.find((item) => item.id === editingPropertyId).timezone;
+    const zone = properties.find((item) => item.id === editingPropertyId)?.timezone ?? record?.timezone ?? organization.timezone ?? "UTC";
+    const editorCurrent = () => current() && editEpoch === editorEpoch && editorDialog.open;
     const roomOptions = rooms.filter((item) => item.propertyId === editingPropertyId);
     if (record && !roomOptions.some((item) => item.id === record.roomId)) roomOptions.push({ id: record.roomId, name: `${record.roomName || record.roomId} (archived)` });
     if (!roomOptions.length) { const close=node("button","Close reservation",{type:"button"});close.addEventListener("click",clearEditor);editor.append(node("p", "Add a room to this property before creating a reservation."),close);editorDialog.showModal();return; }
@@ -143,8 +144,8 @@ export async function renderHostCalendar({ container, user, organization, proper
         } finally { if (current() && privacy.isConnected) { busy = false; approval.disabled = false; erase.disabled = !approval.checked; } }
       });
     }
-    if (record) void renderHostAccessGrants({ container: editor, user, organization, reservation: record, isCurrent: current });
     editorDialog.showModal();
+    if (record) void renderHostAccessGrants({ container: editor, user, organization, reservation: record, isCurrent: editorCurrent });
     heading.tabIndex = -1; heading.focus();
     let attempt;
     form.addEventListener("submit", async (event) => {
@@ -156,7 +157,7 @@ export async function renderHostCalendar({ container, user, organization, proper
           record && values.disambiguation === "reject" && values.startsAt === localAt(record.startsAt, zone) ? record.startsAt : resolve(values.startsAt, values.disambiguation, editingPropertyId),
           record && values.disambiguation === "reject" && values.endsAt === localAt(record.endsAt, zone) ? record.endsAt : resolve(values.endsAt, values.disambiguation, editingPropertyId),
         ]);
-        if (!current()) return;
+        if (!editorCurrent()) return;
         const input = { propertyId: editingPropertyId, roomId: values.roomId, targetIds: [...targets.selectedOptions].map((option) => option.value), guest: { ...(record?.guest ?? {}), name: values.name.trim(), phone: values.phone.trim(), ...(values.email.trim() ? { email: values.email.trim() } : {}) }, startsAt, endsAt, status: values.status, note: values.note.trim(), ...(values.externalReference.trim() ? { externalReference: values.externalReference.trim() } : {}), ...(record ? { version: record.version } : {}) };
         if (!values.email.trim()) delete input.guest.email;
         for (const name of ["floor", "apartment", "parking", "carNumber", "comment"]) { if (values[name].trim()) input.guest[name] = values[name].trim(); else delete input.guest[name]; }
@@ -166,8 +167,8 @@ export async function renderHostCalendar({ container, user, organization, proper
         if (!current()) return;
         if (editEpoch !== editorEpoch) { await load(); return; }
         clearEditor(); await load();
-      } catch (error) { if (current()) resultStatus.textContent = errors[error.code] || "The reservation could not be saved. You can retry safely."; }
-      finally { if (current()) save.disabled = false; }
+      } catch (error) { if (editorCurrent()) resultStatus.textContent = errors[error.code] || "The reservation could not be saved. You can retry safely."; }
+      finally { if (editorCurrent()) save.disabled = false; }
     });
   }
   function draw() {

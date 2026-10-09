@@ -82,7 +82,13 @@ const icons = {
   settings:
     "M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8 M12 2v4 M12 18v4 M2 12h4 M18 12h4 M5 5l3 3 M16 16l3 3 M5 19l3-3 M16 8l3-3",
 };
-let selected = "Calendar";
+const viewSlug = (label) => label.toLowerCase().replaceAll(" ", "-");
+function locationView() {
+  if (location.pathname === "/dashboard/host/overview/") return "Overview";
+  const view = new URLSearchParams(location.search).get("view");
+  return entries.find(([label]) => viewSlug(label) === view)?.[0] ?? "Calendar";
+}
+let selected = locationView();
 const buttons = new Map();
 for (const group of ["", "Management", "Billing", "Settings"]) {
   const items = entries.filter((item) => item[3] === group);
@@ -114,14 +120,18 @@ function targets(label) {
       )
     : [];
 }
-function choose(label, focus = false) {
+function updateLocation(label, push = false) {
+  const url = new URL(location.href);
+  url.pathname = label === "Overview" ? "/dashboard/host/overview/" : "/dashboard/host/";
+  if (label === "Overview" || label === "Calendar") url.searchParams.delete("view");
+  else url.searchParams.set("view", viewSlug(label));
+  if (label !== "Overview") url.searchParams.delete("tab");
+  if (url.href !== location.href) history[push ? "pushState" : "replaceState"](null, "", url);
+}
+function choose(label, focus = false, push = focus) {
   if (!buttons.has(label) || !targets(label).length) return;
   selected = label;
-  const url = new URL(location.href);
-  url.pathname =
-    label === "Overview" ? "/dashboard/host/overview/" : "/dashboard/host/";
-  if (label !== "Overview") url.searchParams.delete("tab");
-  history.replaceState(null, "", url);
+  updateLocation(label, push);
   refresh();
   if (label === "Settings") {
     const details = document.getElementById("account-details");
@@ -135,6 +145,14 @@ function choose(label, focus = false) {
   }
 }
 function refresh() {
+  if (root.dataset.loading === "false" && selected !== "Calendar" && !targets(selected).length) {
+    selected = "Calendar";
+    updateLocation(selected);
+  }
+  if (selected === "Settings") {
+    const details = document.getElementById("account-details");
+    if (details && !details.hidden) details.open = true;
+  }
   document.body.dataset.hostView = selected;
   const selectedTargets = targets(selected);
   for (const [label, button] of buttons) {
@@ -156,7 +174,6 @@ function refresh() {
         (target) => child === target || child.contains(target),
       );
     if (
-      selected === "Calendar" &&
       root.dataset.loading === "true" &&
       child.tagName === "P"
     )
@@ -205,8 +222,13 @@ new MutationObserver(refresh).observe(
 window.addEventListener("host:workspace-view", (event) =>
   choose(event.detail, true),
 );
-window.addEventListener("host:workspace-reset", () => {
-  selected = "Calendar";
+window.addEventListener("host:workspace-reset", (event) => {
+  selected = event.detail?.sessionEnded === false ? locationView() : "Calendar";
+  if (event.detail?.sessionEnded !== false) updateLocation(selected);
+  refresh();
+});
+window.addEventListener("popstate", () => {
+  selected = locationView();
   refresh();
 });
 document
