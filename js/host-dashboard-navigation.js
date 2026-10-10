@@ -94,7 +94,10 @@ function targets(id) {
   );
 }
 
-function choose(value, { push = false, focus = false } = {}) {
+function choose(
+  value,
+  { push = false, focus = false, closeMenu = push || focus } = {},
+) {
   const view = workspaceView(value);
   if (!view) return;
   const authorizedDuringReload =
@@ -114,8 +117,10 @@ function choose(value, { push = false, focus = false } = {}) {
   if (value === "Service health") url.searchParams.set("section", "health");
   if (url.href !== location.href)
     history[push ? "pushState" : "replaceState"](null, "", url);
-  toggle.setAttribute("aria-expanded", "false");
-  nav.classList.remove("workspace-menu-open");
+  if (closeMenu) {
+    toggle.setAttribute("aria-expanded", "false");
+    nav.classList.remove("workspace-menu-open");
+  }
   refresh();
   window.dispatchEvent(
     new CustomEvent("host:workspace-navigate", { detail: selected }),
@@ -243,6 +248,8 @@ window.addEventListener("host:workspace-reset", (event) => {
       ? workspaceLocation(new URL(location.href))
       : "calendar";
   if (event.detail?.sessionEnded !== false) {
+    toggle.setAttribute("aria-expanded", "false");
+    nav.classList.remove("workspace-menu-open");
     for (const button of buttons.values()) button.disabled = true;
     const url = new URL(location.href);
     url.pathname = "/dashboard/host/";
@@ -257,7 +264,10 @@ window.addEventListener("popstate", () => {
   const requested = workspaceLocation(new URL(location.href));
   selected = requested;
   if (root.dataset.loading === "true") refresh();
-  else choose(targets(requested).length ? requested : "calendar");
+  else
+    choose(targets(requested).length ? requested : "calendar", {
+      closeMenu: true,
+    });
 });
 document
   .getElementById("sidebar-profile")

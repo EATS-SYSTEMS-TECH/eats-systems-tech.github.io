@@ -75,6 +75,8 @@ function clearPrivate() {
   ++generation;
   identity = undefined;
   clearSecret();
+  setActionBusy(false);
+  $("#enrollment-status").textContent = "";
   $("#product-grid").replaceChildren();
   $("#product-grid").hidden = true;
   $("#product-workspace").hidden = true;
@@ -133,7 +135,7 @@ function setActionBusy(busy) {
   actionBusy = busy;
   $("#platform-security").setAttribute("aria-busy", String(busy));
   for (const button of document.querySelectorAll(
-    "#start-enrollment, #verify-session, #product-grid .platform-button",
+    "#start-enrollment, #verify-session, #product-grid .platform-button, #enrollment-form button, #cancel-enrollment",
   ))
     button.disabled = busy;
 }
@@ -321,7 +323,7 @@ async function securityAction(action) {
       $("#enrollment-status").textContent = authErrorMessage(error, language);
     return;
   } finally {
-    setActionBusy(false);
+    if (requestGeneration === generation) setActionBusy(false);
   }
   if (!enrollmentSecret) await refresh();
 }
@@ -343,22 +345,20 @@ $("#enrollment-form").addEventListener("submit", async (event) => {
   event.preventDefault();
   if (actionBusy || !enrollmentSecret) return;
   const requestGeneration = generation;
-  const button = event.currentTarget.querySelector("button");
   const code = event.currentTarget.elements.namedItem("code").value.trim();
-  actionBusy = true;
-  button.disabled = true;
+  setActionBusy(true);
   $("#enrollment-status").textContent = copy.verifySetup;
   let completed = false;
   try {
     await finishTotpEnrollment(currentUser, enrollmentSecret, code);
+    if (requestGeneration !== generation) return;
     completed = true;
     clearSecret();
   } catch (error) {
     if (requestGeneration === generation)
       $("#enrollment-status").textContent = authErrorMessage(error, language);
   } finally {
-    actionBusy = false;
-    button.disabled = false;
+    if (requestGeneration === generation) setActionBusy(false);
   }
   if (completed && requestGeneration === generation) {
     await refresh();
@@ -388,6 +388,7 @@ initializeSiteAuth((user) => {
     );
     return;
   }
+  if (currentUser?.uid !== user.uid) clearPrivate();
   currentUser = user;
   session?.stop();
   session = watchSession({ clear: clearPrivate });
