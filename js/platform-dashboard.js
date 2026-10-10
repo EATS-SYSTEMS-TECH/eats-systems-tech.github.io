@@ -35,6 +35,18 @@ document.title = `${copy.title} | WIFIGATE`;
 $("#product-grid").setAttribute("aria-label", copy.products);
 for (const node of document.querySelectorAll("[data-copy]"))
   node.textContent = copy[node.dataset.copy];
+const languageMenu = $("#platform-language");
+if (languageMenu) {
+  languageMenu.value = language;
+  languageMenu.setAttribute("aria-label", copy.interfaceLanguage);
+  languageMenu.addEventListener("change", () => {
+    const url = new URL(location.href);
+    if (languageMenu.value === "he") url.searchParams.set("lang", "he");
+    else url.searchParams.delete("lang");
+    location.assign(url.href);
+  });
+}
+if (language === "he") $(".platform-header .brand").href = "/he/";
 if (language === "he") {
   const translations = {
     scan: "סרקו את קוד ה־QR באפליקציית האימות, או הזינו את מפתח ההגדרה ידנית.",
@@ -103,6 +115,47 @@ function showSecurity() {
     : copy.optionalSecurity;
   $("#start-enrollment").hidden = identity.mfa.enrolled;
   $("#verify-session").hidden = !identity.mfa.enrolled || identity.mfa.verified;
+  updateSecurityStep(
+    enrollmentSecret ? "pair" : identity.mfa.enrolled ? "continue" : "identity",
+  );
+}
+
+function updateSecurityStep(step) {
+  $("#platform-security").dataset.step = step;
+  for (const item of document.querySelectorAll("[data-security-step]")) {
+    if (item.dataset.securityStep === step)
+      item.setAttribute("aria-current", "step");
+    else item.removeAttribute("aria-current");
+  }
+}
+
+function setActionBusy(busy) {
+  actionBusy = busy;
+  $("#platform-security").setAttribute("aria-busy", String(busy));
+  for (const button of document.querySelectorAll(
+    "#start-enrollment, #verify-session, #product-grid .platform-button",
+  ))
+    button.disabled = busy;
+}
+
+function productIcon(id) {
+  const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  icon.setAttribute("viewBox", "0 0 24 24");
+  icon.setAttribute("aria-hidden", "true");
+  const shape = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  shape.setAttribute(
+    "d",
+    {
+      host: "M8 2v4m8-4v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z M8 14h3m-3 4h6",
+      pay: "M3 8h18M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z M7 15h4",
+      manager: "M14 7a5 5 0 1 1-5 5L3 18v3h3v-3h3l3-3M17 6h.01",
+    }[id],
+  );
+  icon.append(shape);
+  const frame = document.createElement("div");
+  frame.className = "product-icon";
+  frame.append(icon);
+  return frame;
 }
 
 function renderProducts() {
@@ -112,6 +165,7 @@ function renderProducts() {
     tile.className = "product-tile";
     tile.dataset.product = id;
     tile.dataset.state = state;
+    const icon = productIcon(id);
     const title = document.createElement("h2");
     title.textContent = `WIFIGATE ${id[0].toUpperCase() + id.slice(1)}`;
     const description = document.createElement("p");
@@ -122,13 +176,28 @@ function renderProducts() {
     status.textContent = copy[state];
     const actions = document.createElement("div");
     actions.className = "product-actions";
+    const guidance = document.createElement("p");
+    guidance.className = "product-guidance";
+    guidance.textContent =
+      state === "mfa-required"
+        ? identity.mfa.enrolled
+          ? copy.verifyDetail
+          : copy.setupDetail
+        : ({
+            active: copy.readyDetail,
+            "no-plan": copy.planDetail,
+            pending: copy.pendingDetail,
+            blocked: copy.blockedDetail,
+            unavailable: copy.unavailableDetail,
+          }[state] ?? "");
     if (state === "active") actions.append(link(copy.open, productLink(id)));
     if (state === "no-plan") {
       const informationUrl =
         id === "host" ? "/automation/" : `/contact-us/?product=${id}`;
+      const prefix = language === "he" ? "/he" : "";
       actions.append(
-        link(copy.learn, informationUrl, true),
-        link(copy.contact, "/contact-us/", true),
+        link(copy.learn, prefix + informationUrl, true),
+        link(copy.contact, prefix + "/contact-us/", true),
       );
     }
     if (state === "unavailable")
@@ -144,10 +213,11 @@ function renderProducts() {
           $(
             identity.mfa.enrolled ? "#verify-session" : "#start-enrollment",
           ).focus();
+          void securityAction(identity.mfa.enrolled ? "verify" : "enroll");
         }),
       );
     }
-    tile.append(title, description, status, actions);
+    tile.append(icon, title, description, status, guidance, actions);
     return tile;
   });
   $("#product-grid").replaceChildren(...tiles);
@@ -209,11 +279,13 @@ async function refresh() {
 
 async function securityAction(action) {
   if (actionBusy || !currentUser || !identity) return;
+  if (enrollmentSecret) {
+    $("#enrollment-form input").focus();
+    return;
+  }
   const user = currentUser;
   const requestGeneration = generation;
-  actionBusy = true;
-  $("#start-enrollment").disabled = true;
-  $("#verify-session").disabled = true;
+  setActionBusy(true);
   $("#enrollment-status").textContent = copy.confirm;
   try {
     await reauthenticate(user, requestMfaChallenge);
@@ -240,6 +312,7 @@ async function securityAction(action) {
       $("#totp-secret").value = secret.secretKey;
       $("#totp-setup").hidden = false;
       $("#start-enrollment").hidden = true;
+      updateSecurityStep("pair");
       $("#enrollment-status").textContent = copy.setupCode;
       $("#enrollment-form input").focus();
     }
@@ -248,9 +321,7 @@ async function securityAction(action) {
       $("#enrollment-status").textContent = authErrorMessage(error, language);
     return;
   } finally {
-    actionBusy = false;
-    $("#start-enrollment").disabled = false;
-    $("#verify-session").disabled = false;
+    setActionBusy(false);
   }
   if (!enrollmentSecret) await refresh();
 }

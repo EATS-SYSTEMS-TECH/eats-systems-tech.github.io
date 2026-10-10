@@ -1,6 +1,33 @@
 const english = {
   title: "Choose your product",
   subtitle: "Your access is checked separately for each WIFIGATE product.",
+  eyebrow: "YOUR WIFIGATE WORKSPACE",
+  intro:
+    "Choose a workspace to continue. Your available products and the next step are shown below.",
+  securityIntro:
+    "Set up once, then use a short code from your authenticator when you sign in.",
+  stepIdentity: "Confirm your identity",
+  stepIdentityDetail:
+    "Continue with the Google or Apple account you used to sign in.",
+  stepPair: "Connect an authenticator",
+  stepPairDetail:
+    "Scan the QR code and enter the six-digit code from your app.",
+  stepContinue: "Open your workspace",
+  stepContinueDetail:
+    "Verify your sign-in to access the products available to you.",
+  readyDetail: "Your access is ready. Open this workspace to continue.",
+  setupDetail:
+    "Your access is approved. Complete authenticator setup to open this workspace.",
+  verifyDetail:
+    "Your authenticator is connected. Verify this sign-in to continue.",
+  planDetail:
+    "This product is not included in your account. Contact us to discuss access.",
+  pendingDetail:
+    "An administrator needs to approve your access before you can continue.",
+  blockedDetail: "Contact your platform administrator to review your access.",
+  unavailableDetail:
+    "We could not check this product. You can retry without leaving this page.",
+  interfaceLanguage: "Interface language",
   checking: "Checking your access...",
   opening: "Opening your dashboard...",
   signingIn: "Signing in...",
@@ -42,6 +69,25 @@ const english = {
 const hebrew = {
   title: "בחירת מוצר",
   subtitle: "הגישה נבדקת בנפרד לכל מוצר של WIFIGATE.",
+  eyebrow: "סביבת העבודה שלכם ב־WIFIGATE",
+  intro:
+    "בחרו סביבת עבודה כדי להמשיך. כאן מוצגים המוצרים הזמינים לכם והצעד הבא לכניסה.",
+  securityIntro:
+    "מגדירים פעם אחת, ולאחר מכן מאשרים כניסה באמצעות קוד קצר מאפליקציית האימות.",
+  stepIdentity: "אימות הזהות",
+  stepIdentityDetail: "ממשיכים עם חשבון Google או Apple ששימש להתחברות.",
+  stepPair: "חיבור אפליקציית אימות",
+  stepPairDetail: "סורקים את קוד ה־QR ומזינים את הקוד בן שש הספרות מהאפליקציה.",
+  stepContinue: "כניסה לסביבת העבודה",
+  stepContinueDetail: "מאמתים את ההתחברות ונכנסים למוצרים הזמינים לכם.",
+  readyDetail: "הגישה שלכם מוכנה. אפשר להיכנס לסביבת העבודה.",
+  setupDetail: "הגישה שלכם אושרה. נותר להגדיר אפליקציית אימות כדי להיכנס.",
+  verifyDetail: "אפליקציית האימות כבר מחוברת. יש לאמת את ההתחברות כדי להמשיך.",
+  planDetail: "המוצר אינו כלול בחשבון שלכם. פנו אלינו לבדיקת אפשרויות הגישה.",
+  pendingDetail: "מנהל הפלטפורמה צריך לאשר את הגישה לפני שתוכלו להמשיך.",
+  blockedDetail: "פנו למנהל הפלטפורמה לבדיקת הגישה שלכם.",
+  unavailableDetail: "לא הצלחנו לבדוק את הגישה למוצר. אפשר לנסות שוב כאן.",
+  interfaceLanguage: "שפת הממשק",
   checking: "בודקים את הגישה שלך...",
   opening: "פותחים את לוח הבקרה...",
   signingIn: "מתחברים...",

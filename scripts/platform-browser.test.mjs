@@ -92,6 +92,7 @@ async function scenario(browser, options = {}) {
       export const signOut = async () => { signedIn = false; await window.authFixtureEvent("signout"); observer?.(null); };
       export const reauthenticateWithPopup = async () => {
         await window.authFixtureEvent("reauth");
+        if (${JSON.stringify(state.reauthError ?? null)}) throw Object.assign(new Error(), {code:${JSON.stringify(state.reauthError ?? null)}});
         if (enrolled) throw Object.assign(new Error(), {code: "auth/multi-factor-auth-required"});
         return { user };
       };
@@ -110,7 +111,7 @@ async function scenario(browser, options = {}) {
       }});
       export const TotpMultiFactorGenerator = {
         assertionForSignIn: (_, code) => ({code}), assertionForEnrollment: (_, code) => ({code}),
-        generateSecret: async () => ({ secretKey: "JBSWY3DPEHPK3PXP", generateQrCodeUrl: () => "otpauth://totp/Fixture?secret=JBSWY3DPEHPK3PXP" })
+        generateSecret: async () => { await window.authFixtureEvent("begin-enroll"); return { secretKey: "JBSWY3DPEHPK3PXP", generateQrCodeUrl: () => "otpauth://totp/Fixture?secret=JBSWY3DPEHPK3PXP" }; }
       };
     `,
       }),
@@ -421,7 +422,37 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       await overview.click();
       await page.mouse.move(350, 350);
       await page.mouse.wheel(0, 600);
-      await page.waitForFunction(() => window.scrollY > 0);
+      await page
+        .waitForFunction(() => window.scrollY > 0, null, { timeout: 5000 })
+        .catch(async (error) => {
+          if (process.env.WIFIGATE_SCREENSHOT_DIR)
+            await page.screenshot({
+              path: path.join(
+                process.env.WIFIGATE_SCREENSHOT_DIR,
+                "navigation-scroll-failure.png",
+              ),
+            });
+          throw new Error(
+            JSON.stringify(
+              await page.evaluate(() => ({
+                scrollY,
+                height: innerHeight,
+                scrollHeight: document.documentElement.scrollHeight,
+                pointerTarget: document
+                  .elementFromPoint(350, 350)
+                  ?.outerHTML.slice(0, 600),
+                navOpen: document
+                  .querySelector(".workspace-menu-toggle")
+                  .getAttribute("aria-expanded"),
+                sidebar: document
+                  .querySelector("#host-sidebar")
+                  .getBoundingClientRect()
+                  .toJSON(),
+              })),
+            ),
+            { cause: error },
+          );
+        });
       assert.ok(
         await page.evaluate(
           () => document.documentElement.scrollWidth <= innerWidth,
@@ -452,9 +483,16 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         const positions = await fixture.page
           .locator(".product-tile")
           .evaluateAll((tiles) =>
-            tiles.map((tile) => tile.getBoundingClientRect().left),
+            tiles.map((tile) => ({
+              left: tile.getBoundingClientRect().left,
+              top: tile.getBoundingClientRect().top,
+            })),
           );
-        assert.ok(positions[0] < positions[1] && positions[1] < positions[2]);
+        const axis = mobile ? "top" : "left";
+        assert.ok(
+          positions[0][axis] < positions[1][axis] &&
+            positions[1][axis] < positions[2][axis],
+        );
         assert.equal(
           await fixture.page.locator("html").getAttribute("dir"),
           mobile ? "rtl" : "ltr",
@@ -579,8 +617,29 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         fixture.calls.some((call) => call.path === "/api/v1/users/me"),
         false,
       );
-      await fixture.page.locator("#start-enrollment").click();
+      await fixture.page
+        .locator('[data-product="host"] .platform-button')
+        .click();
       await fixture.page.locator("#totp-setup").waitFor({ state: "visible" });
+      assert.equal(fixture.calls.filter((call) => call === "reauth").length, 1);
+      assert.equal(
+        fixture.calls.filter((call) => call === "begin-enroll").length,
+        1,
+      );
+      await fixture.page
+        .locator('[data-product="host"] .platform-button')
+        .click();
+      assert.equal(
+        fixture.calls.filter((call) => call === "begin-enroll").length,
+        1,
+        "repeat clicks retain the displayed setup secret",
+      );
+      assert.equal(
+        await fixture.page
+          .locator('[data-security-step="pair"]')
+          .getAttribute("aria-current"),
+        "step",
+      );
       await fixture.page.locator("#enrollment-form input").fill("000000");
       await fixture.page.locator("#enrollment-form button").click();
       await fixture.page
@@ -608,6 +667,100 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         .waitFor({ state: "visible" });
       assert.deepEqual(fixture.errors, []);
       await fixture.context.close();
+    },
+  );
+
+  for (const language of ["en", "he"]) {
+    await t.test(
+      `product setup action is direct, localized and usable at 320px (${language})`,
+      async (t) => {
+        const fixture = await scenario(browser, { admin: true, mobile: true });
+        t.after(() => fixture.context.close());
+        const page = fixture.page;
+        await page.setViewportSize({ width: 320, height: 800 });
+        await page.goto(
+          origin + "/dashboard/" + (language === "he" ? "?lang=he" : ""),
+        );
+        const card = page.locator('[data-product="host"]');
+        await card.waitFor();
+        assert.equal(
+          await page.locator("html").getAttribute("dir"),
+          language === "he" ? "rtl" : "ltr",
+        );
+        assert.ok(
+          await page.evaluate(
+            () => document.documentElement.scrollWidth <= innerWidth + 1,
+          ),
+        );
+        assert.equal(
+          await page
+            .locator('[data-product="pay"] a')
+            .first()
+            .getAttribute("href"),
+          (language === "he" ? "/he" : "") + "/contact-us/?product=pay",
+        );
+        await card
+          .getByRole("button", {
+            name:
+              language === "he"
+                ? "הגדרת אפליקציית אימות"
+                : "Set up authenticator",
+            exact: true,
+          })
+          .click();
+        await page.locator("#totp-setup").waitFor({ state: "visible" });
+        assert.equal(fixture.calls.includes("reauth"), true);
+        assert.equal(
+          await page
+            .locator("#enrollment-form input")
+            .evaluate((el) => el === document.activeElement),
+          true,
+        );
+        assert.equal(
+          await page.locator("#platform-security").getAttribute("aria-busy"),
+          "false",
+        );
+        await page.locator("#cancel-enrollment").click();
+        await page.locator("#totp-setup").waitFor({ state: "hidden" });
+        assert.equal(await page.locator("#totp-secret").inputValue(), "");
+        assert.equal(await page.locator("#totp-qr").getAttribute("src"), null);
+        await page.locator('[data-product="host"] .platform-button').click();
+        await page.locator("#totp-setup").waitFor({ state: "visible" });
+        assert.equal(
+          fixture.calls.filter((call) => call === "begin-enroll").length,
+          2,
+        );
+        assert.deepEqual(fixture.errors, []);
+      },
+    );
+  }
+
+  await t.test(
+    "cancelled provider confirmation shows feedback and restores setup actions without generating a secret",
+    async (t) => {
+      const fixture = await scenario(browser, {
+        admin: true,
+        reauthError: "auth/popup-closed-by-user",
+      });
+      t.after(() => fixture.context.close());
+      await fixture.page.goto(origin + "/dashboard/");
+      const action = fixture.page.locator(
+        '[data-product="host"] .platform-button',
+      );
+      await action.click();
+      await fixture.page
+        .getByText("Sign-in was cancelled.", { exact: true })
+        .waitFor();
+      assert.equal(await action.isEnabled(), true);
+      assert.equal(
+        await fixture.page.locator("#start-enrollment").isEnabled(),
+        true,
+      );
+      assert.equal(fixture.calls.includes("begin-enroll"), false);
+      assert.equal(
+        await fixture.page.locator("#totp-setup").isVisible(),
+        false,
+      );
     },
   );
 

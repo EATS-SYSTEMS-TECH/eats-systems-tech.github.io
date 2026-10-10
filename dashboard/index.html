@@ -18,6 +18,10 @@
           ><img src="/assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE"
         /></a>
         <div class="account-menu">
+          <select id="platform-language" aria-label="Interface language">
+            <option value="en">English</option>
+            <option value="he">עברית</option>
+          </select>
           <span id="platform-account"></span
           ><button
             id="platform-sign-out"
@@ -30,9 +34,13 @@
         </div>
       </header>
       <section class="platform-heading">
+        <p class="platform-eyebrow" data-copy="eyebrow">
+          YOUR WIFIGATE WORKSPACE
+        </p>
         <h1 id="platform-title" data-copy="title">Choose your product</h1>
-        <p data-copy="subtitle">
-          Your access is checked separately for each WIFIGATE product.
+        <p data-copy="intro">
+          Choose a workspace to continue. Your available products and the next
+          step are shown below.
         </p>
       </section>
       <p id="platform-status" role="status" aria-live="polite"></p>
@@ -65,6 +73,39 @@
       >
         <h2 data-copy="security">Account security</h2>
         <p id="security-description"></p>
+        <p class="security-intro" data-copy="securityIntro">
+          Set up once, then use a short code from your authenticator when you
+          sign in.
+        </p>
+        <ol class="security-steps" aria-label="Authenticator setup">
+          <li data-security-step="identity">
+            <span class="security-step-number" aria-hidden="true">1</span>
+            <div>
+              <strong data-copy="stepIdentity">Confirm your identity</strong>
+              <p data-copy="stepIdentityDetail">
+                Continue with the Google or Apple account you used to sign in.
+              </p>
+            </div>
+          </li>
+          <li data-security-step="pair">
+            <span class="security-step-number" aria-hidden="true">2</span>
+            <div>
+              <strong data-copy="stepPair">Connect an authenticator</strong>
+              <p data-copy="stepPairDetail">
+                Scan the QR code and enter the six-digit code from your app.
+              </p>
+            </div>
+          </li>
+          <li data-security-step="continue">
+            <span class="security-step-number" aria-hidden="true">3</span>
+            <div>
+              <strong data-copy="stepContinue">Open your workspace</strong>
+              <p data-copy="stepContinueDetail">
+                Verify your sign-in to access the products available to you.
+              </p>
+            </div>
+          </li>
+        </ol>
         <button id="start-enrollment" type="button" data-copy="setup">
           Confirm identity and start setup
         </button>

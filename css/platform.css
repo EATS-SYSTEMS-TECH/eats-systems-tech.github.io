@@ -3,6 +3,169 @@
   margin: auto;
   padding: clamp(1rem, 4vw, 3rem);
 }
+.platform-shell {
+  color: #142b40;
+}
+.platform-header {
+  padding-block-end: 1.5rem;
+  border-bottom: 1px solid #dce5ed;
+}
+.platform-heading .platform-eyebrow {
+  margin: 0 0 0.8rem;
+  color: #1b65b6;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+}
+.platform-heading > p:last-child {
+  max-width: 42rem;
+}
+#platform-language {
+  width: auto;
+  max-width: 9rem;
+  padding: 0.65rem 0.7rem;
+  font-size: 0.8rem;
+}
+#platform-retry {
+  margin-block-end: 1rem;
+  background: transparent;
+  color: #34536c;
+  border-color: #c8d6e2;
+}
+#platform-status:empty {
+  display: none;
+}
+.product-icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 14px;
+  background: #edf4fc;
+  color: #2768b3;
+}
+.product-icon svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.product-tile[data-product="host"] {
+  border-color: #b8d2ee;
+  box-shadow: 0 8px 24px #173e6a0a;
+}
+.product-guidance {
+  margin: 0;
+  color: #5a6e81;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+.product-actions > :first-child:not(.secondary) {
+  width: 100%;
+  min-height: 44px;
+  background: #1164d8;
+  border-color: #1164d8;
+  border-radius: 10px;
+}
+.product-actions a:hover,
+.platform-button:hover:not(:disabled) {
+  filter: brightness(0.95);
+}
+.product-actions button:disabled {
+  cursor: progress;
+}
+.product-tile {
+  transition:
+    border-color 160ms,
+    box-shadow 160ms;
+}
+.product-tile:hover {
+  border-color: #8db5df;
+}
+.platform-security {
+  scroll-margin-block-start: 1rem;
+  border-color: #bdd3e8;
+}
+.security-intro {
+  max-width: 44rem;
+}
+.security-steps {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.security-steps li {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  padding: 1rem;
+  border: 1px solid #e2e9f0;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+.security-steps li[aria-current="step"] {
+  border-color: #92bbe8;
+  background: #eff6ff;
+}
+.security-step-number {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  background: #e3ebf4;
+  color: #4c6884;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+[aria-current="step"] .security-step-number {
+  background: #1164d8;
+  color: white;
+}
+.security-steps strong {
+  font-size: 0.86rem;
+}
+.security-steps p {
+  font-size: 0.77rem;
+  margin: 0.4rem 0 0;
+}
+#enrollment-status:empty {
+  display: none;
+}
+#enrollment-status:not(:empty) {
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  background: #f0f6fd;
+  color: #234c77;
+}
+#totp-setup {
+  margin-block-start: 1.5rem;
+  padding-block-start: 1rem;
+  border-top: 1px solid #dce5ed;
+}
+#totp-setup #totp-qr {
+  padding: 0.5rem;
+  border: 1px solid #dce5ed;
+  border-radius: 12px;
+  background: white;
+}
+#totp-setup input[name="code"] {
+  direction: ltr;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+@media (prefers-reduced-motion: reduce) {
+  .product-tile {
+    transition: none;
+  }
+}
 .platform-header {
   display: flex;
   justify-content: space-between;
@@ -134,29 +297,40 @@ html[dir="rtl"] .product-tile {
     flex-wrap: wrap;
   }
   .product-grid {
-    gap: 0.45rem;
+    gap: 1rem;
+    grid-template-columns: 1fr;
   }
   .product-tile {
-    padding: 0.75rem 0.5rem;
-    border-radius: 10px;
-    gap: 0.75rem;
+    padding: 1.25rem;
+    border-radius: 16px;
+    gap: 0.85rem;
   }
   .product-tile h2 {
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     overflow-wrap: anywhere;
   }
   .product-description {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
+    min-height: 0;
   }
   .product-state {
-    border-radius: 7px;
-    font-size: 0.7rem;
-    padding: 0.3rem;
+    border-radius: 30px;
+    font-size: 0.78rem;
+    padding: 0.35rem 0.65rem;
   }
   .product-actions a,
   .product-actions button {
-    font-size: 0.72rem;
-    padding: 0.6rem 0.4rem;
+    font-size: 0.88rem;
+    padding: 0.75rem 1rem;
     width: 100%;
+  }
+  .security-steps {
+    grid-template-columns: 1fr;
+  }
+  .security-steps li {
+    padding: 0.9rem;
+  }
+  .platform-header .brand {
+    width: 9.5rem;
   }
 }
