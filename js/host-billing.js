@@ -1,6 +1,7 @@
 import { portalRequest } from "./api/index.js";
 import { field, node, downloadHostCsv, hostDateTime } from "./host-ui.js";
 import { hostText } from "./host-locale.js";
+import { requestWithRecentIdentity } from "./host-recent-identity.js";
 
 export async function renderHostBilling({
   container,
@@ -19,6 +20,19 @@ export async function renderHostBilling({
   section.append(node("h2", hostText("Billing statements")), status);
   container.append(section);
   const current = () => isCurrent() && section.isConnected;
+  const write = (path, body, intent) =>
+    requestWithRecentIdentity({
+      user,
+      path,
+      body,
+      intent,
+      isCurrent: current,
+      onVerifying: () => {
+        status.textContent = hostText(
+          "Confirm your identity with your authenticator…",
+        );
+      },
+    });
   const attempts = new Map();
   let busy = false;
   const errorMessages = {
@@ -116,10 +130,8 @@ export async function renderHostBilling({
         const signature = "billing-history-baseline";
         if (!attempts.has(signature))
           attempts.set(signature, crypto.randomUUID());
-        const { history } = await portalRequest(
-          user,
+        const { history } = await write(
           `${root}/billing/history/baseline`,
-          "POST",
           {},
           attempts.get(signature),
         );
@@ -139,10 +151,8 @@ export async function renderHostBilling({
         const signature = `billing-statement:${statementMonth.value}`;
         if (!attempts.has(signature))
           attempts.set(signature, crypto.randomUUID());
-        const { statement } = await portalRequest(
-          user,
+        const { statement } = await write(
           `${root}/billing/statements`,
-          "POST",
           { month: statementMonth.value },
           attempts.get(signature),
         );
@@ -259,10 +269,8 @@ export async function renderHostBilling({
           signature = `subscription:${JSON.stringify(body)}`;
         if (!attempts.has(signature))
           attempts.set(signature, crypto.randomUUID());
-        const response = await portalRequest(
-          user,
+        const response = await write(
           `${root}/billing/subscription`,
-          "POST",
           body,
           attempts.get(signature),
         );
