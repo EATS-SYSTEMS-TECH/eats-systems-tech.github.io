@@ -69,6 +69,7 @@ test("selected Host language controls layout, translated forms and history while
         else if(url.includes('/rooms?'))data={items:[{id:'room',propertyId:'property',name:'Room',capacity:2}],nextCursor:null};
         else if(url.includes('/systems/icons'))data={icons:{}};
         else if(url.endsWith('/operations/preferences')){if(window.failOperations)throw Object.assign(new Error('simulated unavailable dependency'),{status:503});data={preferences:{locale:'en',alerts:{inApp:true,minimumSeverity:'info',events:[]},savedFilters:[]}};}
+        else if(url.includes('/operations/reliability?'))data={api:{observedRequests:3,serverFailures:0,availabilityPercent:100,p95LatencyMs:12},automation:{observedJobs:0,dueJobs:0,oldestDueMs:0},delivery:{acceptedReceipts:0}};
         else if(url.includes('/time-zone/resolve'))data={instant:JSON.parse(config.data).localTime+':00Z'};
         else if(url.includes('/reservations?')){const from=new URL(url,location.origin).searchParams.get('from');data={items:[{id:'reservation',propertyId:'property',roomId:'room',roomName:'Room',guest:{name:'Staff',phone:'+15555550123',email:'guest@example.test'},startsAt:new Date(Date.parse(from)+86400000).toISOString(),endsAt:new Date(Date.parse(from)+3*86400000).toISOString(),status:'confirmed',version:1,targetIds:[]}],nextCursor:null};}
         else data={items:[],nextCursor:null};
@@ -123,6 +124,28 @@ test("selected Host language controls layout, translated forms and history while
       "Staff",
     );
     await page.locator(".reservation-chip").click();
+    assert.deepEqual(
+      await page.locator("dialog .reservation-form legend").allTextContents(),
+      language === "he"
+        ? ["פרטי קשר של האורח", "פרטי השהייה ומצב ההזמנה", "מערכות גישה"]
+        : ["Guest contact", "Stay and booking status", "Access systems"],
+    );
+    await page
+      .getByText(
+        language === "he"
+          ? "בחירת מערכת אינה מאשרת מסירת הודעה, ייבוא אורח או פתיחה פיזית של שער."
+          : "Selecting a system does not confirm delivery, guest import or a physical gate opening.",
+        { exact: true },
+      )
+      .waitFor();
+    assert.equal(
+      await page
+        .locator("dialog .reservation-optional-fields summary")
+        .innerText(),
+      language === "he"
+        ? "פרטי אורח נוספים והערות"
+        : "Optional guest details and notes",
+    );
     assert.equal(
       await page
         .locator('dialog .reservation-form input[name="name"]')
@@ -232,6 +255,64 @@ test("selected Host language controls layout, translated forms and history while
         { exact: true },
       )
       .waitFor();
+    await page
+      .locator("summary")
+      .filter({
+        hasText: language === "he" ? "תצורת מערכות" : "System configuration",
+      })
+      .click();
+    await page
+      .getByRole("button", {
+        name:
+          language === "he"
+            ? "בדיקת תצורת מערכות"
+            : "Check system configuration",
+        exact: true,
+      })
+      .click();
+    await page
+      .getByText(
+        language === "he"
+          ? "תצורת המערכות נבדקה."
+          : "System configuration checked.",
+        { exact: true },
+      )
+      .waitFor();
+    await page
+      .locator("summary")
+      .filter({
+        hasText:
+          language === "he" ? "מדידות תפעול" : "Operational observations",
+      })
+      .click();
+    await page
+      .getByRole("button", {
+        name: language === "he" ? "מדידת השעה האחרונה" : "Measure last hour",
+        exact: true,
+      })
+      .click();
+    await page
+      .getByText(
+        language === "he"
+          ? "מדידות התפעול נטענו."
+          : "Operational observations loaded.",
+        { exact: true },
+      )
+      .waitFor({ timeout: 10000 })
+      .catch(async (error) => {
+        throw new Error(
+          JSON.stringify({
+            errors,
+            requests: await page.evaluate(() =>
+              window.fixtureRequests.slice(-10),
+            ),
+            body: await page
+              .locator('[data-operations-screen="review"]')
+              .innerText(),
+          }),
+          { cause: error },
+        );
+      });
     for (const view of [
       "properties",
       "systems",
