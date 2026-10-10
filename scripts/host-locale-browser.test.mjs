@@ -307,8 +307,14 @@ test("selected Host language controls layout, translated forms and history while
     await page
       .locator('[data-operations-screen="jobs"][data-loaded="true"]')
       .waitFor();
+    assert.deepEqual(
+      await page.locator('.workspace-tabs button').allTextContents(),
+      language === "he"
+        ? ["משימות גישה", "התרעות ופעילות", "אירועי אינטגרציה", "בריאות השירות"]
+        : ["Access jobs", "Alerts and activity", "Integration events", "Service health"],
+    );
     await page
-      .getByRole("button", { name: "Alerts and activity", exact: true })
+      .getByRole("button", { name: language === "he" ? "התרעות ופעילות" : "Alerts and activity", exact: true })
       .click();
     await page
       .getByText(
