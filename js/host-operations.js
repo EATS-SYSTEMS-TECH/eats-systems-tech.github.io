@@ -8,6 +8,7 @@ import {
   node,
   downloadHostCsv,
   downloadHostTextCsv,
+  hostDateTime,
 } from "./host-ui.js";
 
 async function renderOperationsReview({
@@ -497,7 +498,7 @@ async function renderOperationsReview({
       alertRows.append(
         node(
           "p",
-          `${item.severity} · ${item.title} · ${item.targetId} · ${new Date(item.createdAt).toLocaleString()}`,
+          `${item.severity} · ${item.title} · ${item.targetId} · ${hostDateTime(item.createdAt)}`,
         ),
       );
     if (!result.enabled)

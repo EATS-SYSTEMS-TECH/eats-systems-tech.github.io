@@ -1,6 +1,30 @@
 // Interface copy only. Record names, identifiers and user content are never
 // passed through this dictionary.
 export const hostHebrew = {
+  "Timezone: {p0}": "אזור זמן: {p0}",
+  "Your organization role: {p0}": "התפקיד שלכם בארגון: {p0}",
+  "Service state: {p0}": "מצב השירות: {p0}",
+  "Subscription loaded.": "מצב המנוי נטען.",
+  "trial-expired": "תקופת הניסיון הסתיימה",
+  cancelling: "ביטול בתום תקופת החסד",
+  "A complete verified usage history is required for this month. Choose a later closed month; past usage cannot be reconstructed.":
+    "נדרשת היסטוריית שימוש מאומתת מלאה לחודש הזה. בחרו חודש מאוחר יותר שהסתיים; לא ניתן לשחזר שימוש שלא תועד.",
+  "This month is still open. Choose a completed month for the draft.":
+    "החודש הזה עדיין לא הסתיים. בחרו חודש שהסתיים ליצירת הטיוטה.",
+  "Usage history changed. Refresh and review the month before trying again.":
+    "היסטוריית השימוש השתנתה. רעננו ובדקו את החודש לפני ניסיון נוסף.",
+  "This statement is outside the retained billing history.":
+    "הדוח הזה נמצא מחוץ לתקופת היסטוריית החיוב הנשמרת.",
+  "This month's usage needs an operator capacity review before a statement can be generated.":
+    "נדרשת בדיקת קיבולת תפעולית של השימוש בחודש הזה לפני יצירת דוח.",
+  "The subscription changed. Load it again before reviewing a new change.":
+    "המנוי השתנה. טענו אותו שוב לפני בדיקת שינוי חדש.",
+  "This action is unavailable for the current subscription. Load its current status and choose an appropriate action.":
+    "הפעולה אינה זמינה במצב המנוי הנוכחי. טענו את מצבו ובחרו פעולה מתאימה.",
+  "Sign in again with your authenticator before changing billing settings.":
+    "התחברו שוב עם המאמת לפני שינוי הגדרות החיוב.",
+  "Verify your authenticator before changing billing settings.":
+    "אמתו את החשבון באפליקציית האימות לפני שינוי הגדרות החיוב.",
   "Date unavailable": "התאריך אינו זמין",
   "Access jobs": "משימות גישה",
   "Alerts and activity": "התרעות ופעילות",
