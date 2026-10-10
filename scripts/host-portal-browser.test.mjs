@@ -18,6 +18,7 @@ async function scenario(options = {}) {
     signedIn: true,
     organizations: [],
     invitations: [],
+    ownerInvitations: [],
     people: [
       {
         uid: "fixture-user",
@@ -148,6 +149,27 @@ async function scenario(options = {}) {
         status: state.errorStatus,
         json: { error: { code: "DEPENDENCY_UNAVAILABLE" } },
       });
+      return;
+    }
+    if (requestPath.endsWith("/member-invitations") && request.method() === "GET") {
+      await route.fulfill({ json: { items: state.ownerInvitations, nextCursor: null } });
+      return;
+    }
+    if (request.method() === "POST" && /\/member-invitations(?:\/[^/]+\/cancel)?$/.test(requestPath)) {
+      const cancel = requestPath.endsWith("/cancel");
+      const expiry = cancel ? "expireOwnerCancelOnce" : "expireOwnerCreateOnce";
+      if (state[expiry]) {
+        state[expiry] = false;
+        await route.fulfill({ status: 403, json: { error: { code: "RECENT_TOTP_REQUIRED" } } });
+        return;
+      }
+      if (cancel) {
+        state.ownerInvitations[0].status = "cancelled";
+        state.ownerInvitations[0].version++;
+      } else {
+        state.ownerInvitations.push({ ...JSON.parse(request.postData()), id: "owned-invitation", status: "pending", version: 1, expiresAt: "2099-01-01T00:00:00.000Z" });
+      }
+      await route.fulfill({ status: cancel ? 200 : 201, json: { invitation: state.ownerInvitations[0] } });
       return;
     }
     if (requestPath === "/api/v1/platform/me") {
@@ -553,6 +575,62 @@ try {
     "reviewing and canceling access changes does not mutate accounts",
   );
   await hebrewAdmin.context.close();
+  const owner = await scenario({
+    role: "admin",
+    mfa: { required: true, enrolled: true, verified: true },
+    expireOwnerCreateOnce: true,
+    expireOwnerCancelOnce: true,
+  });
+  await openPortal(owner);
+  await owner.page.locator("#dashboard-content").waitFor({ state: "visible" });
+  await owner.page.evaluate(async () => {
+    const { getAuth } = await import("https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js");
+    const { initializeSiteAuth } = await import("/js/site-auth.js");
+    await initializeSiteAuth(() => {});
+    const { renderOwnerMembershipInvitations } = await import("/js/host-membership-invitations.js");
+    const container = document.createElement("div");
+    container.id = "owner-invitation-regression";
+    document.body.append(container);
+    window.ownerInvitationCurrent = true;
+    await renderOwnerMembershipInvitations({ container, user: getAuth().currentUser, organization: { id: "fixture-org", membership: { role: "owner" } }, isCurrent: () => window.ownerInvitationCurrent });
+  });
+  const ownerPanel = owner.page.locator("#owner-invitation-regression");
+  await ownerPanel.getByLabel("Invite verified email", { exact: true }).fill("staff@example.test");
+  await ownerPanel.getByRole("button", { name: "Create team invitation", exact: true }).click();
+  await owner.page.locator("#mfa-challenge").waitFor({ state: "visible" });
+  assert.equal(await ownerPanel.getByLabel("Invite verified email", { exact: true }).isDisabled(), true);
+  await owner.page.locator('#mfa-challenge input[name="code"]').fill("000000");
+  await owner.page.locator('#mfa-challenge button[type="submit"]').click();
+  await owner.page.locator('#mfa-challenge [role="status"]').getByText("That code is incorrect or expired.", { exact: false }).waitFor();
+  assert.equal(owner.state.ownerInvitations.length, 0);
+  await owner.page.locator('#mfa-challenge input[name="code"]').fill("123456");
+  await owner.page.locator('#mfa-challenge button[type="submit"]').click();
+  await ownerPanel.getByText("Team invitation created. The approved recipient can accept after signing in.", { exact: true }).waitFor();
+  const createAttempts = owner.calls.filter(call => call.method === "POST" && call.path?.endsWith("/member-invitations"));
+  assert.equal(createAttempts.length, 2);
+  assert.equal(createAttempts[0].headers["idempotency-key"], createAttempts[1].headers["idempotency-key"]);
+  assert.equal(createAttempts[0].body, createAttempts[1].body);
+  assert.equal(owner.state.ownerInvitations.length, 1);
+  await ownerPanel.getByRole("button", { name: "Cancel team invitation", exact: true }).click();
+  await owner.page.locator("#mfa-challenge").waitFor({ state: "visible" });
+  await owner.page.locator('#mfa-challenge input[name="code"]').fill("123456");
+  await owner.page.locator('#mfa-challenge button[type="submit"]').click();
+  await ownerPanel.getByText("Team invitation cancelled.", { exact: true }).waitFor();
+  const cancelAttempts = owner.calls.filter(call => call.method === "POST" && call.path?.endsWith("/cancel"));
+  assert.equal(cancelAttempts.length, 2);
+  assert.equal(cancelAttempts[0].headers["idempotency-key"], cancelAttempts[1].headers["idempotency-key"]);
+  assert.deepEqual(JSON.parse(cancelAttempts[1].body), { version: 1 });
+  assert.equal(owner.state.ownerInvitations[0].status, "cancelled");
+  owner.state.expireOwnerCreateOnce = true;
+  await ownerPanel.getByLabel("Invite verified email", { exact: true }).fill("viewer@example.test");
+  await ownerPanel.getByRole("button", { name: "Create team invitation", exact: true }).click();
+  await owner.page.locator("#mfa-challenge").waitFor({ state: "visible" });
+  await owner.page.evaluate(() => { window.ownerInvitationCurrent = false; });
+  await owner.page.locator('#mfa-challenge input[name="code"]').fill("123456");
+  await owner.page.locator('#mfa-challenge button[type="submit"]').click();
+  await owner.page.locator("#mfa-challenge").waitFor({ state: "hidden" });
+  assert.equal(owner.state.ownerInvitations.length, 1, "late authentication cannot invite into an abandoned organization view");
+  await owner.context.close();
   for (const mobile of [false, true]) {
     const regular = await scenario({
       mobile,
