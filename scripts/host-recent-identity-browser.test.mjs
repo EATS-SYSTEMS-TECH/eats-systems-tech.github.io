@@ -45,7 +45,7 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
         body: `export async function reauthenticate(user, challenge) { window.verifications++; window.verifiedUid = user.uid; await new Promise((resolve, reject) => { window.finishVerification = resolve; window.cancelVerification = () => reject(Object.assign(new Error('user canceled'), { code: 'auth/popup-closed-by-user' })); }); } export async function resolveTotp() { throw new Error('No live authenticator in isolated fixture'); }`,
       }),
     );
-    for (const module of ["keys", "support", "billing"]) {
+    for (const module of ["keys", "support", "billing", "rotation"]) {
       await page.goto(`${origin}/identity-fixture?lang=${language}`);
       await page.evaluate(async (module) => {
         const { initializeHostLocale } = await import("/js/host-locale.js");
@@ -77,12 +77,11 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
             });
             if (window.requests.length === 1)
               throw Object.assign(new Error("stale identity"), {
-                code:
-                  module === "keys"
-                    ? "RECENT_REAUTH_REQUIRED"
-                    : module === "support"
-                      ? "RECENT_AUTH_REQUIRED"
-                      : "RECENT_TOTP_REQUIRED",
+                code: ["keys", "rotation"].includes(module)
+                  ? "RECENT_REAUTH_REQUIRED"
+                  : module === "support"
+                    ? "RECENT_AUTH_REQUIRED"
+                    : "RECENT_TOTP_REQUIRED",
               });
           }
           return {
@@ -92,13 +91,15 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
             config,
             data: {
               items:
-                module === "keys" && window.requests.length === 2
+                module === "rotation" ||
+                (module === "keys" && window.requests.length === 2)
                   ? [
                       {
                         id: "owned-key",
                         name: "Reviewed original intent",
                         prefix: "public-prefix",
-                        status: "revoked",
+                        status:
+                          window.requests.length === 2 ? "revoked" : "active",
                         version: 1,
                         scopes: ["guest-invitations:create"],
                         targetTypes: ["gate"],
@@ -111,7 +112,7 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
             },
           };
         };
-        if (module === "keys")
+        if (["keys", "rotation"].includes(module))
           await (
             await import("/js/host-api-keys.js")
           ).renderHostApiKeys(options);
@@ -133,29 +134,37 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
           })
           .click();
       const field = page.locator(
-        module === "keys"
-          ? 'input[name="name"]'
-          : module === "support"
-            ? 'input[name="email"]'
-            : 'input[name="reason"]',
+        module === "rotation"
+          ? 'input[name="overlapHours"]'
+          : module === "keys"
+            ? 'input[name="name"]'
+            : module === "support"
+              ? 'input[name="email"]'
+              : 'input[name="reason"]',
       );
       await field.fill(
-        module === "support"
-          ? "qa-owner@wifigate.test"
-          : "Reviewed original intent",
+        module === "rotation"
+          ? "0"
+          : module === "support"
+            ? "qa-owner@wifigate.test"
+            : "Reviewed original intent",
       );
       const label =
-        module === "keys"
+        module === "rotation"
           ? he
-            ? "יצירת מפתח API"
-            : "Create API key"
-          : module === "support"
+            ? "החלפת מפתח API"
+            : "Rotate API key"
+          : module === "keys"
             ? he
-              ? "אישור תמיכה זמנית"
-              : "Approve temporary support"
-            : he
-              ? "החלת שינוי מנוי"
-              : "Apply subscription change";
+              ? "יצירת מפתח API"
+              : "Create API key"
+            : module === "support"
+              ? he
+                ? "אישור תמיכה זמנית"
+                : "Approve temporary support"
+              : he
+                ? "החלת שינוי מנוי"
+                : "Apply subscription change";
       const button = page.getByRole("button", { name: label, exact: true });
       await button.click();
       await page.waitForFunction(() => window.verifications === 1);
@@ -169,9 +178,11 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
       );
       assert.equal(await button.isDisabled(), true);
       await field.fill(
-        module === "support"
-          ? "different@wifigate.test"
-          : "Unreviewed changed intent",
+        module === "rotation"
+          ? "4"
+          : module === "support"
+            ? "different@wifigate.test"
+            : "Unreviewed changed intent",
       );
       await button.evaluate((element) => element.click());
       assert.equal(
@@ -222,6 +233,23 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
         assert.doesNotMatch(
           await page.locator("#main").innerText(),
           /guest-invitations:create/,
+        );
+      }
+      if (module === "rotation") {
+        assert.equal(JSON.parse(result.requests[1].body).overlapHours, 0);
+        assert.ok(
+          (await page.locator("#main").innerText()).includes(
+            he ? "המפתח הקודם בוטל מיד" : "previous key is revoked immediately",
+          ),
+        );
+        assert.equal(
+          await page
+            .getByRole("button", {
+              name: he ? "הצגת מפתח API פרטי" : "Reveal private API key",
+              exact: true,
+            })
+            .count(),
+          0,
         );
       }
     }
