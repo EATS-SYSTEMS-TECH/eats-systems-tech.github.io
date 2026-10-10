@@ -187,6 +187,21 @@ export async function loadAdminOverview(user, identity) {
     },
     { signal: navigationAbort.signal },
   );
+  let overviewVisible = location.pathname === "/dashboard/host/overview/";
+  window.addEventListener(
+    "host:workspace-navigate",
+    (event) => {
+      if (!current()) return;
+      if (event.detail !== "overview") {
+        overviewVisible = false;
+        return;
+      }
+      if (overviewVisible) return;
+      overviewVisible = true;
+      void read();
+    },
+    { signal: navigationAbort.signal },
+  );
 
   function dialog(title, description, build, submitLabel, execute) {
     activeDialog?.close();

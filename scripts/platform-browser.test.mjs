@@ -195,25 +195,27 @@ async function scenario(browser, options = {}) {
         json: {
           admins: 1,
           activeAdmins: 1,
-          users: 1,
+          users: state.directoryUsers ?? 1,
           organizations: state.archived ? 0 : 1,
         },
       });
     if (url.pathname === "/api/v1/admin/people")
       return route.fulfill({
         json: {
-          items: [
-            {
-              uid: "fixture-user",
-              email: "fixture@example.test",
-              name: "Fixture User",
-              role: "admin",
-              status: "active",
-              mfaEnrolled: true,
-              lastSignInAt: null,
-              memberships: [],
-            },
-          ],
+          items: state.emptyPeople
+            ? []
+            : [
+                {
+                  uid: "fixture-user",
+                  email: "fixture@example.test",
+                  name: "Fixture User",
+                  role: state.directoryPersonRole ?? "admin",
+                  status: "active",
+                  mfaEnrolled: true,
+                  lastSignInAt: null,
+                  memberships: state.directoryMemberships ?? [],
+                },
+              ],
           nextCursor: null,
         },
       });
@@ -314,6 +316,142 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
   });
   t.after(() => browser.close());
   const origin = `http://127.0.0.1:${server.address().port}`;
+
+  await t.test(
+    "returning to Overview refreshes changed memberships and removed Host users",
+    async (t) => {
+      const fixture = await scenario(browser, {
+        admin: true,
+        enrolled: true,
+        verified: true,
+        directoryPersonRole: "user",
+        directoryMemberships: [
+          {
+            organizationName: "QA Organization",
+            products: { host: { role: "viewer", status: "active" } },
+          },
+        ],
+      });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      page.setDefaultTimeout(7000);
+      await page.goto(origin + "/dashboard/host/overview/?tab=users");
+      await page.locator("[data-cookie-reject]").click();
+      await page.locator('#admin-directory [data-role="viewer"]').waitFor();
+      await page.getByLabel("Search this directory").fill("Fixture");
+      await page
+        .locator("#admin-overview")
+        .getByRole("button", { name: "Search", exact: true })
+        .click();
+      await page.locator("#admin-directory .admin-row").waitFor();
+      const navigation = page.locator("#host-section-navigation");
+      await navigation.locator('[data-view-id="account"]').click();
+      fixture.state.directoryMemberships[0].products.host = {
+        role: "admin",
+        status: "blocked",
+      };
+      await navigation.locator('[data-view-id="overview"]').click();
+      await page
+        .locator('#admin-directory [data-role="admin"]')
+        .waitFor({ timeout: 4000 });
+      assert.equal(
+        await page
+          .locator("#admin-directory")
+          .getByText("Blocked", { exact: true })
+          .count(),
+        1,
+      );
+      assert.equal(
+        await page.getByLabel("Search this directory").inputValue(),
+        "Fixture",
+      );
+      assert.equal(
+        await page.locator('[data-tab="users"]').getAttribute("aria-selected"),
+        "true",
+      );
+
+      await navigation.locator('[data-view-id="account"]').click();
+      fixture.state.emptyPeople = true;
+      fixture.state.directoryUsers = 0;
+      await navigation.locator('[data-view-id="overview"]').click();
+      await page
+        .locator("#admin-overview [role=status]", {
+          hasText: "No matching records.",
+        })
+        .waitFor({ timeout: 4000 });
+      assert.equal(
+        await page.locator("#admin-directory .admin-row").count(),
+        0,
+      );
+      assert.equal(
+        await page.locator('[data-tab="users"] strong').textContent(),
+        "0",
+      );
+
+      // A slower directory response from the previous visit cannot reinsert a removed user.
+      let releaseLate;
+      let observeLate;
+      const lateStarted = new Promise((resolve) => {
+        observeLate = resolve;
+      });
+      const lateReleased = new Promise((resolve) => {
+        releaseLate = resolve;
+      });
+      let delayed = false;
+      await page.route("**/api/v1/admin/people?**", async (route) => {
+        if (delayed) return route.fallback();
+        delayed = true;
+        observeLate();
+        await lateReleased;
+        return route.fulfill({
+          headers: { "x-fixture-delayed": "1" },
+          json: {
+            items: [
+              {
+                uid: "removed-qa-user",
+                email: "removed@example.test",
+                name: "Removed QA user",
+                role: "user",
+                status: "active",
+                memberships: [],
+              },
+            ],
+            nextCursor: null,
+          },
+        });
+      });
+      const lateResponse = page.waitForResponse(
+        (response) => response.headers()["x-fixture-delayed"] === "1",
+      );
+      await navigation.locator('[data-view-id="account"]').click();
+      await navigation.locator('[data-view-id="overview"]').click();
+      await lateStarted;
+      await navigation.locator('[data-view-id="account"]').click();
+      await navigation.locator('[data-view-id="overview"]').click();
+      await page
+        .locator("#admin-overview [role=status]", {
+          hasText: "No matching records.",
+        })
+        .waitFor();
+      releaseLate();
+      await (await lateResponse).finished();
+      await page.evaluate(
+        () =>
+          new Promise((resolve) =>
+            requestAnimationFrame(() => requestAnimationFrame(resolve)),
+          ),
+      );
+      assert.equal(
+        await page.locator("#admin-directory .admin-row").count(),
+        0,
+      );
+      assert.equal(
+        await page.locator('[data-tab="users"] strong').textContent(),
+        "0",
+      );
+      assert.deepEqual(fixture.errors, []);
+    },
+  );
 
   await t.test(
     "focus checks preserve the directory and detect access revocation",
