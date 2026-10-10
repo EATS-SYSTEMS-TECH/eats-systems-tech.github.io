@@ -45,6 +45,7 @@ import {
 } from "./host-dashboard-model.js";
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
 import { membershipActionInProgress } from "./host-membership-invitations.js";
+import { recentIdentityActionInProgress } from "./host-recent-identity.js";
 import { authErrorMessage } from "./host-auth-errors.js";
 import { isLocalStaging } from "./firebase-config.js";
 import qrcode from "./vendor/qrcode-generator.js";
@@ -604,7 +605,8 @@ window.addEventListener("focus", () => {
     !actionBusy &&
     !enrollmentSecret &&
     !adminActionInProgress() &&
-    !membershipActionInProgress()
+    !membershipActionInProgress() &&
+    !recentIdentityActionInProgress()
   ) {
     void recheckDashboardAccess();
   }

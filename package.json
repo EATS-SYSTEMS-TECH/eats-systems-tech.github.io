@@ -6,7 +6,7 @@
     "dev": "npm run build:api && node scripts/serve.mjs",
     "build:api": "node scripts/build-api.mjs && node scripts/build-dashboard.mjs",
     "typecheck": "tsc --noEmit",
-    "test:dashboard": "node --test scripts/host-calendar-browser.test.mjs scripts/host-workspace-browser.test.mjs scripts/host-navigation-browser.test.mjs scripts/host-locale-browser.test.mjs scripts/host-billing-browser.test.mjs",
+    "test:dashboard": "node --test scripts/host-calendar-browser.test.mjs scripts/host-workspace-browser.test.mjs scripts/host-navigation-browser.test.mjs scripts/host-locale-browser.test.mjs scripts/host-billing-browser.test.mjs scripts/host-recent-identity-browser.test.mjs",
     "test:api": "npm run build:api && npm run typecheck && node --test scripts/host-portal.test.mjs scripts/platform.test.mjs scripts/login-gate-game.test.mjs scripts/login-pages.test.mjs scripts/navigation-language.test.mjs",
     "test:platform": "npm run build:api && node --test scripts/platform-browser.test.mjs",
     "build:locales": "node scripts/build-localized-site.mjs",

@@ -1,6 +1,7 @@
 import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
 import { field, node, hostDateTime } from "./host-ui.js";
+import { requestWithRecentIdentity } from "./host-recent-identity.js";
 
 const errors = {
   RECENT_REAUTH_REQUIRED: hostText(
@@ -53,8 +54,13 @@ export async function renderHostApiKeys({
     wrapper.prepend(checkbox);
     scopes.append(wrapper);
   }
-  for (const value of ["gate", "dual-control", "group"]) {
-    const wrapper = node("label", value),
+  const targetLabels = {
+    gate: "Gate",
+    "dual-control": "Dual Control",
+    group: "Group",
+  };
+  for (const [value, label] of Object.entries(targetLabels)) {
+    const wrapper = node("label", hostText(label)),
       checkbox = node("input", undefined, {
         type: "checkbox",
         name: "targetType",
@@ -98,6 +104,19 @@ export async function renderHostApiKeys({
     { once: true, signal: listeners.signal },
   );
   const root = `/api/v1/organizations/${encodeURIComponent(organization.id)}/api-keys`;
+  const write = (path, body, intent) =>
+    requestWithRecentIdentity({
+      user,
+      path,
+      body,
+      intent,
+      isCurrent: current,
+      onVerifying: () => {
+        status.textContent = hostText(
+          "Confirm your identity with your authenticator…",
+        );
+      },
+    });
   let busy = false,
     attempt;
   const actionKeys = new Map();
@@ -121,10 +140,8 @@ export async function renderHostApiKeys({
   async function action(record, action, input) {
     const token = `${record.id}:${record.version}:${action}:${JSON.stringify(input)}`;
     if (!actionKeys.has(token)) actionKeys.set(token, crypto.randomUUID());
-    return portalRequest(
-      user,
+    return write(
       `${root}/${encodeURIComponent(record.id)}/${action}`,
-      "POST",
       input,
       actionKeys.get(token),
     );
@@ -144,8 +161,17 @@ export async function renderHostApiKeys({
         node(
           "p",
           hostText("Operations: {p0} · Targets: {p1}", {
-            p0: record.scopes.join(", "),
-            p1: record.targetTypes.join(", "),
+            p0: record.scopes
+              .map((scope) =>
+                hostText(
+                  scopeOptions.find(([value]) => value === scope)?.[1] ??
+                    "Unavailable",
+                ),
+              )
+              .join(", "),
+            p1: record.targetTypes
+              .map((type) => hostText(targetLabels[type] ?? "Unavailable"))
+              .join(", "),
           }),
         ),
       );
@@ -284,7 +310,7 @@ export async function renderHostApiKeys({
       const signature = JSON.stringify(input);
       if (attempt?.signature !== signature)
         attempt = { signature, key: crypto.randomUUID() };
-      await portalRequest(user, root, "POST", input, attempt.key);
+      await write(root, input, attempt.key);
       if (!current()) return;
       attempt = undefined;
       name.value = "";

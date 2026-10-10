@@ -1,6 +1,7 @@
 import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
 import { field, node, hostDateTime } from "./host-ui.js";
+import { requestWithRecentIdentity } from "./host-recent-identity.js";
 const messages = {
   RECENT_AUTH_REQUIRED: hostText(
     "Sign out and sign in again with your authenticator before using support access.",
@@ -184,7 +185,18 @@ export async function renderSupportOwner({
   const write = (path, body) => {
     const signature = JSON.stringify([path, body]);
     if (!keys.has(signature)) keys.set(signature, crypto.randomUUID());
-    return portalRequest(user, root + path, "POST", body, keys.get(signature));
+    return requestWithRecentIdentity({
+      user,
+      path: root + path,
+      body,
+      intent: keys.get(signature),
+      isCurrent: current,
+      onVerifying: () => {
+        status.textContent = hostText(
+          "Confirm your identity with your authenticator…",
+        );
+      },
+    });
   };
   async function load(cursor, append = false) {
     const result = await portalRequest(

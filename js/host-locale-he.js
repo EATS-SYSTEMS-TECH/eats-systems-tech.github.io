@@ -1,6 +1,9 @@
 // Interface copy only. Record names, identifiers and user content are never
 // passed through this dictionary.
 export const hostHebrew = {
+  Gate: "שער",
+  "Dual Control": "בקרה כפולה",
+  Group: "קבוצה",
   "Timezone: {p0}": "אזור זמן: {p0}",
   "Your organization role: {p0}": "התפקיד שלכם בארגון: {p0}",
   "Service state: {p0}": "מצב השירות: {p0}",
