@@ -14,13 +14,13 @@ async function ready() {
 }
 
 async function waitForReady(child) {
-  const deadline = Date.now() + 45000;
+  const deadline = Date.now() + 120000;
   while (Date.now() < deadline) {
     if (child.exitCode !== null) throw new Error("Local staging exited before it was ready");
     if (await ready()) return;
     await new Promise((resolve) => setTimeout(resolve, 400));
   }
-  throw new Error("Local staging did not become ready within 45 seconds");
+  throw new Error("Local staging did not become ready within 120 seconds");
 }
 
 function run(script) {

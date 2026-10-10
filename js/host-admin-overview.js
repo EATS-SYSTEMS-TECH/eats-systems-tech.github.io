@@ -64,9 +64,11 @@ const message = (error) =>
       "This directory needs a smaller page or an administrator review.",
     ),
   })[error?.code] ??
-  (error?.status === 404
-    ? "This administration feature is awaiting the backend update. Your Calendar and Settings remain available."
-    : "The request could not be completed. Please retry.");
+  hostText(
+    error?.status === 404
+      ? "This administration feature is awaiting the backend update. Your Calendar and Settings remain available."
+      : "The request could not be completed. Please retry.",
+  );
 
 export async function loadAdminOverview(user, identity) {
   clearAdminOverview();
