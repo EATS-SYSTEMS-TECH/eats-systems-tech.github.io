@@ -2,6 +2,11 @@
 // passed through this dictionary.
 export const hostHebrew = {
   "Date unavailable": "התאריך אינו זמין",
+  "Access jobs": "משימות גישה",
+  "Alerts and activity": "התרעות ופעילות",
+  "Integration events": "אירועי אינטגרציה",
+  "Operations workspace": "מרחב תפעול",
+  "Operations screens": "מסכי תפעול",
   "Remove access": "הסרת גישה",
   "Room unavailable": "החדר אינו זמין",
   "Guest details removed": "פרטי האורח נמחקו",
