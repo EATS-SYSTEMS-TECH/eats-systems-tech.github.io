@@ -240,6 +240,13 @@ export async function loadAdminOverview(user, identity) {
         if (!current()) return;
         modal.close();
         await read();
+        if (current()) {
+          window.dispatchEvent(
+            new CustomEvent("host:admin-updated", {
+              detail: { uid: user.uid },
+            }),
+          );
+        }
       } catch (error) {
         if (current() && modal.isConnected)
           feedback.textContent = message(error);
