@@ -1,6 +1,32 @@
 // Interface copy only. Record names, identifiers and user content are never
 // passed through this dictionary.
 export const hostHebrew = {
+  "Load a property policy to review or change automation.":
+    "טענו מדיניות של נכס כדי לצפות באוטומציה או לשנות אותה.",
+  "Billing could not be updated. Refresh current data and verify permissions before retrying.":
+    "לא ניתן לעדכן את החיוב. רעננו את הנתונים ובדקו את ההרשאות לפני ניסיון נוסף.",
+  "Service is unavailable. An owner can review the subscription in Billing statements.":
+    "השירות אינו זמין. בעלי הארגון יכולים לבדוק את המינוי במסך החיוב.",
+  "Guest contact": "פרטי קשר של האורח",
+  "Stay and booking status": "פרטי השהייה ומצב ההזמנה",
+  "Optional guest details and notes": "פרטי אורח נוספים והערות",
+  "Choose a date range between 1 and 62 days.":
+    "בחרו טווח תאריכים של יום אחד עד 62 ימים.",
+  "Reservations could not be loaded. Search or update the calendar to retry.":
+    "לא ניתן לטעון את ההזמנות. נסו שוב באמצעות חיפוש או עדכון לוח השנה.",
+  "Integration mappings loaded. Review provider events in Operations.":
+    "מיפויי האינטגרציה נטענו. אירועי הספק מופיעים במסך התפעול.",
+  "Service is unavailable. Existing records remain readable. An owner can review the subscription in Billing statements.":
+    "השירות אינו זמין. אפשר להמשיך לצפות ברשומות הקיימות. בעלי הארגון יכולים לבדוק את המינוי במסך החיוב.",
+  "Select this screen to load its data.": "בחרו במסך כדי לטעון את הנתונים שלו.",
+  "Add a property and room before creating reservations.":
+    "הוסיפו נכס וחדר לפני יצירת הזמנות.",
+  "Loading this screen…": "טוען את המסך…",
+  "Retry this screen": "ניסיון נוסף לטעינת המסך",
+  "Selecting a system does not confirm delivery, guest import or a physical gate opening.":
+    "בחירת מערכת אינה מאשרת מסירת הודעה, ייבוא אורח או פתיחה פיזית של שער.",
+  "1,000 records loaded. Narrow the date range or filters to continue.":
+    "נטענו 1,000 רשומות. צמצמו את טווח התאריכים או את המסננים כדי להמשיך.",
   "Approve organization transfer": "אישור העברה לארגון",
   "Cancel transfer": "ביטול העברה",
   Delete: "מחיקה",
