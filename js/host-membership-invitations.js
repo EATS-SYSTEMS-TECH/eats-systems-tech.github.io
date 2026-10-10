@@ -8,7 +8,7 @@ import {
 import { reauthenticate } from "./site-auth.js";
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
 import { roleBadge } from "./host-role-badge.js";
-import { node, field } from "./host-ui.js";
+import { node, field, hostDateTime } from "./host-ui.js";
 let accepting = false;
 export const membershipActionInProgress = () => accepting;
 const failure = (error) =>
@@ -82,7 +82,7 @@ export async function renderPendingMembershipInvitations({
           "p",
           hostText("{p0} · expires {p1}", {
             p0: item.organizationName,
-            p1: item.expiresAt,
+            p1: `${hostDateTime(item.expiresAt)} UTC`,
           }),
         ),
         roleBadge(item.role),
@@ -219,9 +219,18 @@ export async function renderOwnerMembershipInvitations({
     for (const item of result.items) {
       const row = node("article", undefined, { "data-invitation-id": item.id });
       row.append(
+        node("p", item.email),
+        roleBadge(item.role),
         node(
           "p",
-          `${item.email} · ${item.role} · ${item.status === "pending" && item.expired ? "expired" : item.status}`,
+          hostText("Invitation {status} · expires {expiry}", {
+            status: hostText(
+              item.status === "pending" && item.expired
+                ? "expired"
+                : item.status,
+            ),
+            expiry: `${hostDateTime(item.expiresAt)} UTC`,
+          }),
         ),
       );
       if (item.status === "pending") {
