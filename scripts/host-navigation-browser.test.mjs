@@ -169,5 +169,26 @@ test("workspace preserves deep links, reloads and browser history without exposi
     0,
   );
   assert.equal(new URL(page.url()).searchParams.has("view"), false);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await ready();
+  const menu = page.locator(".workspace-menu-toggle");
+  await menu.click();
+  await page.evaluate(() => {
+    window.dispatchEvent(new CustomEvent("host:workspace-ready"));
+  });
+  assert.equal(
+    await menu.getAttribute("aria-expanded"),
+    "true",
+    "background completion must preserve the mobile menu opened by the user",
+  );
+  assert.equal(await navigation.isVisible(), true);
+  await navigation.locator('button[data-view="Reservations"]').click();
+  assert.equal(await menu.getAttribute("aria-expanded"), "false");
+  assert.equal(new URL(page.url()).searchParams.get("view"), "reservations");
+  await menu.click();
+  await page.evaluate(() => {
+    window.dispatchEvent(new CustomEvent("host:workspace-reset"));
+  });
+  assert.equal(await menu.getAttribute("aria-expanded"), "false");
   assert.deepEqual(errors, []);
 });
