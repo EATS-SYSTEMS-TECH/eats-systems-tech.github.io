@@ -2,7 +2,7 @@ import { hostText, hostLocale } from "./host-locale.js";
 import { calendarSpans } from "./host-calendar-layout.js";
 import { portalRequest } from "./api/index.js";
 import { readHostPages } from "./host-pages.js";
-import { node, field } from "./host-ui.js";
+import { node, field, hostDateTime } from "./host-ui.js";
 import { renderHostAccessGrants } from "./host-access-grants.js";
 
 const states = ["draft", "confirmed", "changed", "cancelled", "completed"];
@@ -187,7 +187,7 @@ export async function renderHostCalendar({
       class: "reservation-editor",
       "aria-label": "Reservation details",
     }),
-    editor = node("div");
+    editor = node("div", undefined, { class: "reservation-editor-frame" });
   editorDialog.append(editor);
   let editorEpoch = 0;
   function clearEditor() {
@@ -312,7 +312,16 @@ export async function renderHostCalendar({
           ? hostText("Edit reservation")
           : hostText("Create reservation"),
     );
-    const form = node("form", undefined, { class: "reservation-form" });
+    const form = node("form", undefined, {
+      class: "reservation-form",
+      id: `reservation-form-${crypto.randomUUID()}`,
+    });
+    const editorContent = node("div", undefined, {
+      class: "reservation-editor-body",
+    });
+    const actions = node("div", undefined, {
+      class: "reservation-editor-actions",
+    });
     const editingPropertyId = record?.propertyId ?? propertySelect.value;
     const zone =
       properties.find((item) => item.id === editingPropertyId)?.timezone ??
@@ -513,9 +522,11 @@ export async function renderHostCalendar({
     });
     const save = node("button", hostText("Save reservation"), {
       type: "submit",
+      form: form.id,
     });
     const close = node("button", hostText("Close reservation"), {
       type: "button",
+      class: "button-secondary",
     });
     close.addEventListener("click", () => clearEditor());
     if (record)
@@ -532,10 +543,11 @@ export async function renderHostCalendar({
     if (readOnly) {
       for (const input of form.querySelectorAll("input,select"))
         input.disabled = true;
-      form.append(close);
-    } else form.append(save, close);
-    form.append(resultStatus);
-    editor.append(heading, form);
+      actions.append(close);
+    } else actions.append(save, close);
+    actions.append(resultStatus);
+    editorContent.append(form);
+    editor.append(heading, editorContent, actions);
     if (
       record &&
       ["cancelled", "completed"].includes(record.status) &&
@@ -567,7 +579,7 @@ export async function renderHostCalendar({
         erase,
         message,
       );
-      editor.append(privacy);
+      editorContent.append(privacy);
       let busy = false;
       const key = crypto.randomUUID();
       approval.addEventListener("change", () => {
@@ -608,7 +620,7 @@ export async function renderHostCalendar({
     editorDialog.showModal();
     if (record)
       void renderHostAccessGrants({
-        container: editor,
+        container: editorContent,
         user,
         organization,
         reservation: record,
@@ -812,10 +824,21 @@ export async function renderHostCalendar({
       );
       timeline.style.gridTemplateRows = `repeat(${lanes}, 64px)`;
       for (const { record: reservation, start, end, lane } of spans) {
+        const label = hostText(
+          "{name} · {status} · {room} · {start} — {end} ({zone})",
+          {
+            name: reservation.guest.name,
+            status: hostText(reservation.status),
+            room: room.name,
+            start: hostDateTime(reservation.startsAt, property().timezone),
+            end: hostDateTime(reservation.endsAt, property().timezone),
+            zone: property().timezone,
+          },
+        );
         const button = node("button", undefined, {
           type: "button",
           class: `reservation-chip reservation-${reservation.status}`,
-          "aria-label": `${reservation.guest.name}, ${reservation.status}, ${room.name}, ${reservation.startsAt} to ${reservation.endsAt}`,
+          "aria-label": label,
         });
         button.style.gridColumn = `${start + 1} / ${end + 1}`;
         button.style.gridRow = String(lane + 1);
@@ -823,10 +846,15 @@ export async function renderHostCalendar({
           node("strong", reservation.guest.name),
           node(
             "small",
-            `${reservation.guest.email || reservation.externalReference || ""} · ${hostText(reservation.status)}`,
+            [
+              reservation.guest.email || reservation.externalReference,
+              hostText(reservation.status),
+            ]
+              .filter(Boolean)
+              .join(" · "),
           ),
         );
-        button.title = `${reservation.guest.name} · ${hostText(reservation.status)} · ${localAt(reservation.startsAt, property().timezone)} — ${localAt(reservation.endsAt, property().timezone)}`;
+        button.title = label;
         button.addEventListener("click", () => openEditor(reservation));
         timeline.append(button);
       }
@@ -868,7 +896,7 @@ export async function renderHostCalendar({
       const row = node("li");
       const open = node(
         "button",
-        reservation.guest.name || "Guest details removed",
+        reservation.guest.name || hostText("Guest details removed"),
         { type: "button" },
       );
       open.addEventListener("click", () => {
@@ -884,9 +912,14 @@ export async function renderHostCalendar({
         ),
         node(
           "p",
-          `${reservation.roomName || reservation.roomId} · ${localAt(reservation.startsAt, zone)} — ${localAt(reservation.endsAt, zone)} · ${zone}`,
+          `${reservation.roomName || hostText("Room unavailable")} · ${hostDateTime(reservation.startsAt, zone)} — ${hostDateTime(reservation.endsAt, zone)} · ${zone}`,
         ),
-        node("p", `Booking: ${reservation.status}`),
+        node(
+          "p",
+          hostText("Booking: {status}", {
+            status: hostText(reservation.status),
+          }),
+        ),
       );
       list.append(row);
     }
@@ -895,9 +928,11 @@ export async function renderHostCalendar({
       grid.append(
         node(
           "p",
-          cursor
-            ? "No matches on this page. Continue to search later records."
-            : "No reservations match these filters.",
+          hostText(
+            cursor
+              ? "No matches on this page. Continue to search later records."
+              : "No reservations match these filters.",
+          ),
         ),
       );
     if (cursor && data.length < 1000) {
@@ -955,8 +990,9 @@ export async function renderHostCalendar({
         ]);
         if (!current() || request !== loading) return;
         if (Date.parse(to) - Date.parse(from) > 62 * 86400000) {
-          status.textContent =
-            "This range exceeds the 62-day limit across a clock change. Choose an earlier end date.";
+          status.textContent = hostText(
+            "This range exceeds the 62-day limit across a clock change. Choose an earlier end date.",
+          );
           grid.replaceChildren();
           return;
         }

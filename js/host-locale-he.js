@@ -1,6 +1,19 @@
 // Interface copy only. Record names, identifiers and user content are never
 // passed through this dictionary.
 export const hostHebrew = {
+  "Date unavailable": "התאריך אינו זמין",
+  "Room unavailable": "החדר אינו זמין",
+  "Guest details removed": "פרטי האורח נמחקו",
+  "{name} · {status} · {room} · {start} — {end} ({zone})":
+    "{name} · {status} · {room} · {start} — {end} ({zone})",
+  "Booking: {status}": "מצב ההזמנה: {status}",
+  "Invitation {status} · expires {expiry}": "הזמנה {status} · תוקף עד {expiry}",
+  "No matches on this page. Continue to search later records.":
+    "אין תוצאות בעמוד הזה. המשיכו לחפש ברשומות הבאות.",
+  "No reservations match these filters.":
+    "לא נמצאו הזמנות שמתאימות למסננים האלה.",
+  "This range exceeds the 62-day limit across a clock change. Choose an earlier end date.":
+    "הטווח חורג ממגבלת 62 הימים בגלל מעבר שעון. בחרו תאריך סיום מוקדם יותר.",
   "Load a property policy to review or change automation.":
     "טענו מדיניות של נכס כדי לצפות באוטומציה או לשנות אותה.",
   "Billing could not be updated. Refresh current data and verify permissions before retrying.":

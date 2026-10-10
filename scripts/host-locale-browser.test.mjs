@@ -123,6 +123,22 @@ test("selected Host language controls layout, translated forms and history while
       await page.locator(".reservation-chip strong").innerText(),
       "Staff",
     );
+    const accessibleReservation = await page
+      .locator(".reservation-chip")
+      .getAttribute("aria-label");
+    assert.ok(accessibleReservation.includes("Staff"));
+    assert.ok(accessibleReservation.includes("Room"));
+    assert.ok(
+      accessibleReservation.includes(
+        language === "he" ? "מאושרת" : "confirmed",
+      ),
+    );
+    assert.ok(accessibleReservation.includes("UTC"));
+    assert.doesNotMatch(accessibleReservation, /\d{4}-\d{2}-\d{2}T/);
+    assert.equal(
+      await page.locator(".reservation-chip").getAttribute("title"),
+      accessibleReservation,
+    );
     await page.locator(".reservation-chip").click();
     assert.deepEqual(
       await page.locator("dialog .reservation-form legend").allTextContents(),
@@ -166,6 +182,58 @@ test("selected Host language controls layout, translated forms and history while
         .innerText(),
       language === "he" ? "מאושרת" : "confirmed",
     );
+    for (const viewport of [
+      { width: 1440, height: 1000 },
+      { width: 390, height: 844 },
+      { width: 320, height: 568 },
+    ]) {
+      await page.setViewportSize(viewport);
+      await page
+        .locator("dialog .reservation-optional-fields")
+        .evaluate((element) => {
+          element.open = true;
+        });
+      for (const end of [false, true]) {
+        await page
+          .locator(".reservation-editor-body")
+          .evaluate((element, end) => {
+            element.scrollTop = end ? element.scrollHeight : 0;
+          }, end);
+        const geometry = await page
+          .locator(".reservation-editor-actions")
+          .evaluate((element) => ({
+            top: element.getBoundingClientRect().top,
+            bottom: element.getBoundingClientRect().bottom,
+            viewport: innerHeight,
+            buttons: [...element.querySelectorAll("button")].map((button) => ({
+              top: button.getBoundingClientRect().top,
+              bottom: button.getBoundingClientRect().bottom,
+              height: button.getBoundingClientRect().height,
+            })),
+            contentBottom: document
+              .querySelector(".reservation-editor-body")
+              .getBoundingClientRect().bottom,
+          }));
+        assert.ok(
+          geometry.top >= 0 && geometry.bottom <= geometry.viewport + 1,
+          `${language} drawer actions outside ${viewport.width}px viewport`,
+        );
+        assert.ok(
+          geometry.contentBottom <= geometry.top + 1,
+          "scrolling fields must not cover reservation actions",
+        );
+        assert.ok(
+          geometry.buttons.every(
+            (button) =>
+              button.height >= 44 &&
+              button.top >= 0 &&
+              button.bottom <= geometry.viewport + 1,
+          ),
+          `save and close must remain usable at both scroll boundaries: ${language} ${JSON.stringify(viewport)} ${JSON.stringify(geometry)}`,
+        );
+      }
+    }
+    await page.setViewportSize({ width: 1440, height: 1000 });
     await page
       .getByRole("button", {
         name: language === "he" ? "סגירת ההזמנה" : "Close reservation",
@@ -173,6 +241,17 @@ test("selected Host language controls layout, translated forms and history while
       })
       .click();
     await page.locator('button[data-view="Reservations"]').click();
+    await page
+      .locator(".host-resource-list")
+      .getByText(
+        language === "he" ? "מצב ההזמנה: מאושרת" : "Booking: confirmed",
+        { exact: true },
+      )
+      .waitFor();
+    assert.doesNotMatch(
+      await page.locator(".host-resource-list").innerText(),
+      /\d{4}-\d{2}-\d{2}T/,
+    );
     await page
       .locator("#workspace-org-switcher select")
       .selectOption("fixture-org-2");

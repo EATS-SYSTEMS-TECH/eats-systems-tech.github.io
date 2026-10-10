@@ -1,5 +1,16 @@
 import { roleBadge } from "./host-role-badge.js";
-import { hostText } from "./host-locale.js";
+import { hostText, hostLocale } from "./host-locale.js";
+
+export function hostDateTime(value, timeZone = "UTC") {
+  const instant = new Date(value);
+  return Number.isFinite(instant.getTime())
+    ? new Intl.DateTimeFormat(hostLocale, {
+        dateStyle: "medium",
+        timeStyle: "short",
+        timeZone,
+      }).format(instant)
+    : hostText("Date unavailable");
+}
 
 export const node = (tag, text, attrs = {}) => {
   const element = document.createElement(tag);

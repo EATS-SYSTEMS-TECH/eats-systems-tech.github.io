@@ -595,7 +595,39 @@ body:not([data-host-view="Calendar"]) #host-management > section > h3 {
   border-left: 1px solid var(--host-line);
   padding: 24px;
   box-shadow: -10px 0 40px #13223b20;
+  overflow: hidden;
+}
+.reservation-editor-frame {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+.reservation-editor-body {
+  flex: 1;
+  min-height: 0;
   overflow: auto;
+  scrollbar-gutter: stable;
+  padding-inline-end: 4px;
+}
+.reservation-editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  flex-shrink: 0;
+  border-top: 1px solid var(--host-line);
+  padding-block: 16px env(safe-area-inset-bottom, 0px);
+}
+.portal-dashboard dialog .reservation-editor-actions button {
+  flex: 1;
+  min-height: 44px;
+}
+.reservation-editor-actions [role="status"] {
+  flex-basis: 100%;
+  margin: 0;
+}
+.reservation-editor-actions [role="status"]:empty {
+  display: none;
 }
 .reservation-editor .reservation-form {
   border: 0;

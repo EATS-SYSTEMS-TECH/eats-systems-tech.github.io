@@ -491,21 +491,23 @@ try {
     .click();
   await modal.locator('input[name="name"]').fill("New test organization");
   await modal.locator('input[name="timezone"]').fill("Asia/Jerusalem");
-  await modal
-    .locator('input[name="ownerEmail"]')
-    .fill("approved@example.test");
+  await modal.locator('input[name="ownerEmail"]').fill("approved@example.test");
   await modal.locator('button[type="submit"]').click();
   await confirm();
   await modal.waitFor({ state: "hidden" });
   await admin.page
     .locator('#host-management [data-invitation-id="created-owner-invitation"]')
     .waitFor({ state: "attached" });
-  await admin.page
-    .getByRole("button", { name: /Team invitations/ })
-    .click();
+  await admin.page.getByRole("button", { name: /Team invitations/ }).click();
   await admin.page
     .getByRole("button", { name: "Accept team invitation", exact: true })
     .waitFor({ state: "visible" });
+  const visibleInvitation = await admin.page
+    .locator('[data-invitation-id="created-owner-invitation"]')
+    .innerText();
+  assert.match(visibleInvitation, /2099/);
+  assert.match(visibleInvitation, /UTC/);
+  assert.doesNotMatch(visibleInvitation, /2099-01-01T00:00:00/);
   assert.equal(admin.state.organizations.length, 1);
   assert.equal(admin.state.invitations.length, 1);
   admin.state.access.state = "denied";
