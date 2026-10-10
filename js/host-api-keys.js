@@ -243,14 +243,17 @@ export async function renderHostApiKeys({
           rotation.addEventListener("submit", (event) => {
             event.preventDefault();
             void perform(rotate, async () => {
+              const overlapHours = Number(overlap.value);
               await action(record, "rotate", {
                 version: record.version,
-                overlapHours: Number(overlap.value),
+                overlapHours,
               });
               if (!current()) return;
               await load();
               status.textContent = hostText(
-                "New key created. Reveal it and update the integration before the previous key expires.",
+                overlapHours === 0
+                  ? "New key created. The previous key is revoked immediately. Update the integration with the new key."
+                  : "New key created. Reveal it and update the integration before the previous key expires.",
               );
             });
           });

@@ -4,6 +4,8 @@ export const hostHebrew = {
   Gate: "שער",
   "Dual Control": "בקרה כפולה",
   Group: "קבוצה",
+  "New key created. The previous key is revoked immediately. Update the integration with the new key.":
+    "נוצר מפתח חדש. המפתח הקודם בוטל מיד. עדכנו את האינטגרציה במפתח החדש.",
   "Timezone: {p0}": "אזור זמן: {p0}",
   "Your organization role: {p0}": "התפקיד שלכם בארגון: {p0}",
   "Service state: {p0}": "מצב השירות: {p0}",
