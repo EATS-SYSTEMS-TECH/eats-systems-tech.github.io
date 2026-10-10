@@ -464,7 +464,9 @@ export async function renderHostCalendar({
       node("legend", hostText("Access systems")),
       node(
         "p",
-        "Selecting a system does not confirm delivery, guest import or a physical gate opening.",
+        hostText(
+          "Selecting a system does not confirm delivery, guest import or a physical gate opening.",
+        ),
       ),
     );
     const optionalFields = node("details", undefined, {
@@ -911,7 +913,9 @@ export async function renderHostCalendar({
       grid.append(
         node(
           "p",
-          "1,000 records loaded. Narrow the date range or filters to continue.",
+          hostText(
+            "1,000 records loaded. Narrow the date range or filters to continue.",
+          ),
         ),
       );
   }

@@ -191,12 +191,12 @@ async function renderOperationsReview({
             ),
           );
       }
-      status.textContent = "Operational observations loaded.";
+      status.textContent = hostText("Operational observations loaded.");
     }),
   );
   const readinessForm = node("form"),
     readinessQuery = field(readinessForm, "Search access systems", "q"),
-    readinessButton = node("button", "Check system configuration", {
+    readinessButton = node("button", hostText("Check system configuration"), {
       type: "submit",
     }),
     readinessRows = node("div");
