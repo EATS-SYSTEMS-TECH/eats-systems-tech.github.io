@@ -16,7 +16,7 @@ function fixtureProfile(state) {
       : state.host;
   return {
     user: {
-      uid: "fixture-user",
+      uid: state.uid ?? "fixture-user",
       email: "fixture@example.test",
       displayName: "Fixture User",
       emailVerified: true,
@@ -49,6 +49,11 @@ async function scenario(browser, options = {}) {
   const calls = [];
   const errors = [];
   await context.exposeBinding("authFixtureEvent", (_, event) => {
+    if (event?.type === "identity") {
+      state.uid = event.uid;
+      state.enrolled = false;
+      state.verified = false;
+    }
     if (event === "signin") state.signedIn = true;
     if (event === "signout") state.signedIn = false;
     if (event === "enroll") state.enrolled = true;
@@ -72,7 +77,7 @@ async function scenario(browser, options = {}) {
       let signedIn = ${JSON.stringify(state.signedIn)};
       let enrolled = ${JSON.stringify(state.enrolled)};
       let observer;
-      const user = { uid: "fixture-user", email: "fixture@example.test", emailVerified: true,
+      let user = { uid: "fixture-user", email: "fixture@example.test", emailVerified: true,
         getIdToken: async () => "isolated-token",
         getIdTokenResult: async () => ({claims: {firebase: {sign_in_provider: "google.com"}}}) };
       export const getAuth = () => ({});
@@ -80,6 +85,7 @@ async function scenario(browser, options = {}) {
       export const browserSessionPersistence = {};
       export const setPersistence = async () => {};
       export const onAuthStateChanged = (_, callback) => { observer = callback; setTimeout(() => callback(signedIn ? user : null), 0); return () => {}; };
+      window.fixtureChangeUser = async uid => { user = {...user, uid}; enrolled = false; await window.authFixtureEvent({type: "identity", uid}); observer?.(user); };
       export const GoogleAuthProvider = function () { this.setCustomParameters = () => {}; };
       export const OAuthProvider = function () { this.addScope = () => {}; };
       export const signInWithPopup = async () => {
@@ -105,9 +111,11 @@ async function scenario(browser, options = {}) {
           return { user };
         }
       });
-      export const multiFactor = () => ({getSession: async () => ({}), enroll: async ({code}) => {
+      export const multiFactor = account => ({getSession: async () => ({}), enroll: async ({code}) => {
         if (code !== "123456") throw Object.assign(new Error(), {code: "auth/invalid-verification-code"});
-        enrolled = true; await window.authFixtureEvent("enroll");
+        if (window.fixturePauseFinish) await new Promise(resolve => { window.fixtureReleaseFinish = resolve; });
+        if (account.uid === user.uid) { enrolled = true; await window.authFixtureEvent("enroll"); }
+        else await window.authFixtureEvent("stale-enroll");
       }});
       export const TotpMultiFactorGenerator = {
         assertionForSignIn: (_, code) => ({code}), assertionForEnrollment: (_, code) => ({code}),
@@ -667,6 +675,89 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         .waitFor({ state: "visible" });
       assert.deepEqual(fixture.errors, []);
       await fixture.context.close();
+    },
+  );
+
+  await t.test(
+    "switching identity clears an unfinished authenticator and permits fresh setup",
+    async (t) => {
+      const fixture = await scenario(browser, { admin: true });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      await page.goto(origin + "/dashboard/");
+      await page.locator('[data-product="host"] .platform-button').click();
+      await page.locator("#totp-setup").waitFor({ state: "visible" });
+      await page.locator("#enrollment-form input").fill("123");
+      await page.evaluate(() =>
+        window.fixtureChangeUser("another-fixture-user"),
+      );
+      await page.locator("#totp-setup").waitFor({ state: "hidden" });
+      await page.locator('[data-product="host"] .platform-button').waitFor();
+      assert.equal(await page.locator("#totp-secret").inputValue(), "");
+      assert.equal(await page.locator("#totp-qr").getAttribute("src"), null);
+      assert.equal(
+        await page.locator("#enrollment-form input").inputValue(),
+        "",
+      );
+      await page.locator('[data-product="host"] .platform-button').click();
+      await page.locator("#totp-setup").waitFor({ state: "visible" });
+      assert.equal(
+        fixture.calls.filter((call) => call === "begin-enroll").length,
+        2,
+      );
+      assert.deepEqual(fixture.errors, []);
+    },
+  );
+
+  await t.test(
+    "late enrollment completion cannot clear another identity's setup",
+    async (t) => {
+      const fixture = await scenario(browser, { admin: true });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      await page.goto(origin + "/dashboard/");
+      await page.locator('[data-product="host"] .platform-button').click();
+      await page.locator("#totp-setup").waitFor({ state: "visible" });
+      await page.evaluate(() => {
+        window.fixturePauseFinish = true;
+      });
+      await page.locator("#enrollment-form input").fill("123456");
+      await page.locator("#enrollment-form button").click();
+      await page.waitForFunction(
+        () => typeof window.fixtureReleaseFinish === "function",
+      );
+      assert.equal(
+        await page.locator("#platform-security").getAttribute("aria-busy"),
+        "true",
+      );
+      assert.equal(await page.locator("#cancel-enrollment").isEnabled(), false);
+      await page.evaluate(() =>
+        window.fixtureChangeUser("another-fixture-user"),
+      );
+      await page.locator('[data-product="host"] .platform-button').waitFor();
+      await page.locator('[data-product="host"] .platform-button').click();
+      await page.locator("#totp-setup").waitFor({ state: "visible" });
+      const secret = await page.locator("#totp-secret").inputValue();
+      const qr = await page.locator("#totp-qr").getAttribute("src");
+      await page.evaluate(async () => {
+        window.fixtureReleaseFinish();
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      });
+      assert.equal(await page.locator("#totp-setup").isVisible(), true);
+      assert.equal(await page.locator("#totp-secret").inputValue(), secret);
+      assert.equal(await page.locator("#totp-qr").getAttribute("src"), qr);
+      assert.equal(
+        await page
+          .locator('[data-security-step="pair"]')
+          .getAttribute("aria-current"),
+        "step",
+      );
+      assert.equal(
+        await page.locator("#enrollment-status").textContent(),
+        "Enter the current code to confirm setup.",
+      );
+      assert.ok(fixture.calls.includes("stale-enroll"));
+      assert.deepEqual(fixture.errors, []);
     },
   );
 
