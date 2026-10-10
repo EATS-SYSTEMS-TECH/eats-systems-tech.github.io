@@ -28,7 +28,10 @@ test("billing and access deadlines follow selected language; failed reloads and 
     }
   });
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
-  t.after(() => new Promise((resolve) => server.close(resolve)));
+  t.after(() => {
+    server.closeAllConnections();
+    return new Promise((resolve) => server.close(resolve));
+  });
   const browser = await chromium.launch({
     channel: process.env.WIFIGATE_BROWSER_CHANNEL ?? "chrome",
     headless: true,
