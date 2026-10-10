@@ -1,6 +1,6 @@
 import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
-import { field, node } from "./host-ui.js";
+import { field, node, hostDateTime } from "./host-ui.js";
 
 const errors = {
   RECENT_REAUTH_REQUIRED: hostText(
@@ -140,7 +140,7 @@ export async function renderHostApiKeys({
       const row = node("article");
       row.append(
         node("h3", record.name),
-        node("p", `${record.prefix} · ${record.status}`),
+        node("p", `${record.prefix} · ${hostText(record.status)}`),
         node(
           "p",
           hostText("Operations: {p0} · Targets: {p1}", {
@@ -154,7 +154,7 @@ export async function renderHostApiKeys({
           node(
             "p",
             hostText("Previous key expires: {p0}", {
-              p0: new Date(record.overlapUntil).toLocaleString(),
+              p0: hostDateTime(record.overlapUntil),
             }),
           ),
         );

@@ -2,6 +2,7 @@ import { roleBadge } from "./host-role-badge.js";
 import { hostText, hostLocale } from "./host-locale.js";
 
 export function hostDateTime(value, timeZone = "UTC") {
+  if (value == null || value === "") return hostText("Date unavailable");
   const instant = new Date(value);
   return Number.isFinite(instant.getTime())
     ? new Intl.DateTimeFormat(hostLocale, {

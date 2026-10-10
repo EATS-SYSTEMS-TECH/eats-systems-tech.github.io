@@ -1,6 +1,6 @@
 import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
-import { field, node } from "./host-ui.js";
+import { field, node, hostDateTime } from "./host-ui.js";
 const messages = {
   RECENT_AUTH_REQUIRED: hostText(
     "Sign out and sign in again with your authenticator before using support access.",
@@ -70,7 +70,7 @@ export function renderSupportDiagnostics({
           node(
             "p",
             hostText("Support approval expires: {p0}", {
-              p0: new Date(result.diagnostics.expiresAt).toLocaleString(),
+              p0: hostDateTime(result.diagnostics.expiresAt),
             }),
           ),
         );
@@ -86,7 +86,7 @@ export function renderSupportDiagnostics({
                 p2:
                   Object.entries(values.statuses)
                     .map(([status, count]) => `${status}: ${count}`)
-                    .join(" · ") || "No queued work",
+                    .join(" · ") || hostText("No queued work"),
               }),
             ),
           );
@@ -199,9 +199,16 @@ export async function renderSupportOwner({
         node(
           "p",
           hostText("{p0} · {p1} · expires {p2}", {
-            p0: item.purpose,
+            p0: hostText(
+              {
+                access: "Access",
+                delivery: "Delivery",
+                synchronization: "Synchronization",
+                capacity: "Capacity",
+              }[item.purpose] ?? "Unavailable",
+            ),
             p1: hostText(item.status),
-            p2: new Date(item.endsAt).toLocaleString(),
+            p2: hostDateTime(item.endsAt),
           }),
         ),
         node("p", hostText("Support approval ID: {p0}", { p0: item.id })),

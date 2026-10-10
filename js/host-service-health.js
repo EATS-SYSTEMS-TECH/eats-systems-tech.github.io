@@ -1,6 +1,6 @@
 import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
-import { node } from "./host-ui.js";
+import { node, hostDateTime } from "./host-ui.js";
 import { renderServiceTargets } from "./host-slo.js";
 
 const explanations = {
@@ -28,7 +28,7 @@ const reasons = {
   PENDING_SCHEDULE_LATE: hostText("Scheduled preparation overdue"),
 };
 const timestamp = (value) =>
-  value ? new Date(value).toLocaleString(hostLocale) : hostText("None yet");
+  value ? hostDateTime(value) : hostText("None yet");
 const percent = (value) =>
   value === null ? hostText("Unknown") : `${value.toFixed(2)}%`;
 const latency = (value) =>
@@ -231,7 +231,7 @@ export function renderServiceHealth({
               p1: timestamp(item.to),
               p2: item.policyVersion,
               p3: item.telemetryAvailable
-                ? labels[item.state]
+                ? hostText(labels[item.state])
                 : hostText("Telemetry unavailable"),
             }),
           ),

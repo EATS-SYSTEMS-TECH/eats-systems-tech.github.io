@@ -1,6 +1,6 @@
 import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
-import { node } from "./host-ui.js";
+import { node, hostDateTime } from "./host-ui.js";
 
 const messages = {
   GATE_DELEGATION_REQUIRED: hostText(
@@ -87,8 +87,8 @@ export async function renderHostAccessGrants({
         node(
           "p",
           hostText("Effective access: {p0} → {p1}", {
-            p0: new Date(grant.effectiveStartsAt).toLocaleString(),
-            p1: new Date(grant.effectiveEndsAt).toLocaleString(),
+            p0: hostDateTime(grant.effectiveStartsAt),
+            p1: hostDateTime(grant.effectiveEndsAt),
           }),
         ),
       );

@@ -1,5 +1,5 @@
 import { portalRequest } from "./api/index.js";
-import { field, node, downloadHostCsv } from "./host-ui.js";
+import { field, node, downloadHostCsv, hostDateTime } from "./host-ui.js";
 import { hostText } from "./host-locale.js";
 
 export async function renderHostBilling({
@@ -21,16 +21,40 @@ export async function renderHostBilling({
   const current = () => isCurrent() && section.isConnected;
   const attempts = new Map();
   let busy = false;
+  const errorMessages = {
+    BILLING_HISTORY_INCOMPLETE:
+      "A complete verified usage history is required for this month. Choose a later closed month; past usage cannot be reconstructed.",
+    BILLING_MONTH_OPEN:
+      "This month is still open. Choose a completed month for the draft.",
+    BILLING_HISTORY_CHANGED:
+      "Usage history changed. Refresh and review the month before trying again.",
+    BILLING_STATEMENT_EXPIRED:
+      "This statement is outside the retained billing history.",
+    BILLING_CAPACITY_EXCEEDED:
+      "This month's usage needs an operator capacity review before a statement can be generated.",
+    VERSION_CONFLICT:
+      "The subscription changed. Load it again before reviewing a new change.",
+    SUBSCRIPTION_TRANSITION_DENIED:
+      "This action is unavailable for the current subscription. Load its current status and choose an appropriate action.",
+    RECENT_AUTH_REQUIRED:
+      "Sign in again with your authenticator before changing billing settings.",
+    RECENT_TOTP_REQUIRED:
+      "Sign in again with your authenticator before changing billing settings.",
+    TOTP_REQUIRED:
+      "Verify your authenticator before changing billing settings.",
+  };
   async function run(button, operation) {
     if (busy || !current()) return;
     busy = true;
+    status.textContent = hostText("Loading");
     button.disabled = true;
     try {
       await operation();
-    } catch {
+    } catch (error) {
       if (current())
         status.textContent = hostText(
-          "Billing could not be updated. Refresh current data and verify permissions before retrying.",
+          errorMessages[error.code] ??
+            "Billing could not be updated. Refresh current data and verify permissions before retrying.",
         );
     } finally {
       busy = false;
@@ -179,6 +203,22 @@ export async function renderHostBilling({
         { type: "submit", disabled: "" },
       );
     let subscription;
+    const showSubscription = () => {
+      lifecycleStatus.textContent = hostText("{p0} · revision {p1}{p2}{p3}", {
+        p0: hostText(subscription.effectiveStatus ?? subscription.status),
+        p1: subscription.version,
+        p2: subscription.trialEndsAt
+          ? hostText(" · trial ends {p0}", {
+              p0: hostDateTime(subscription.trialEndsAt),
+            })
+          : "",
+        p3: subscription.graceEndsAt
+          ? hostText(" · grace ends {p0}", {
+              p0: hostDateTime(subscription.graceEndsAt),
+            })
+          : "",
+      });
+    };
     lifecycle.append(loadSubscription, changeSubscription, lifecycleStatus);
     section.append(
       node("h3", hostText("Customer lifecycle")),
@@ -192,30 +232,18 @@ export async function renderHostBilling({
     );
     loadSubscription.addEventListener("click", () =>
       run(loadSubscription, async () => {
+        subscription = undefined;
+        changeSubscription.disabled = true;
+        lifecycleStatus.textContent = "";
         const response = await portalRequest(
           user,
           `${root}/billing/subscription`,
         );
         if (current()) {
           subscription = response.subscription;
-          lifecycleStatus.textContent = hostText(
-            "{p0} · revision {p1}{p2}{p3}",
-            {
-              p0: subscription.effectiveStatus ?? subscription.status,
-              p1: subscription.version,
-              p2: subscription.trialEndsAt
-                ? hostText(" · trial ends {p0}", {
-                    p0: subscription.trialEndsAt,
-                  })
-                : "",
-              p3: subscription.graceEndsAt
-                ? hostText(" · grace ends {p0}", {
-                    p0: subscription.graceEndsAt,
-                  })
-                : "",
-            },
-          );
+          showSubscription();
           changeSubscription.disabled = false;
+          status.textContent = hostText("Subscription loaded.");
         }
       }),
     );
@@ -240,10 +268,7 @@ export async function renderHostBilling({
         );
         if (current()) {
           subscription = response.subscription;
-          lifecycleStatus.textContent = hostText("{p0} · revision {p1}", {
-            p0: subscription.effectiveStatus ?? subscription.status,
-            p1: subscription.version,
-          });
+          showSubscription();
           status.textContent = hostText(
             "Subscription change saved and audited.",
           );
@@ -285,7 +310,7 @@ export async function renderHostBilling({
           output.textContent = hostText(
             "{p0} · {p1} verified physical gates · estimated USD {p2} · unverified excluded {p3}",
             {
-              p0: value.plan,
+              p0: hostText(value.plan),
               p1: value.activePhysicalSystems,
               p2: (value.monthlyEstimateCents / 100).toFixed(2),
               p3: value.unverifiedPhysicalSystems,
