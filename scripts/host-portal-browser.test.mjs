@@ -26,6 +26,7 @@ async function scenario(options = {}) {
         role: "admin",
         status: "active",
         mfaEnrolled: true,
+        lastSignInAt: "2026-10-10T12:34:00.000Z",
         memberships: [],
       },
       {
@@ -41,6 +42,7 @@ async function scenario(options = {}) {
   };
   const calls = [];
   const context = await browser.newContext({
+    locale: options.browserLocale ?? "en-US",
     viewport: options.mobile
       ? { width: 390, height: 844 }
       : { width: 1440, height: 1000 },
@@ -349,6 +351,7 @@ try {
   }
   const admin = await scenario({
     role: "admin",
+    browserLocale: "he-IL",
     mfa: { required: true, enrolled: false, verified: false },
   });
   await openPortal(admin);
@@ -430,6 +433,8 @@ try {
   const own = admin.page.locator(".admin-row").filter({
     has: admin.page.getByText("approved@example.test", { exact: true }),
   });
+  assert.match(await own.innerText(), /Oct 10, 2026/);
+  assert.match(await own.innerText(), /UTC/);
   await own.locator("summary").click();
   assert.equal(
     await own.getByRole("button", { name: "Block", exact: true }).isDisabled(),
@@ -517,6 +522,37 @@ try {
     .waitFor();
   assert.equal(await admin.page.locator("#admin-overview").isVisible(), false);
   await admin.context.close();
+  const hebrewAdmin = await scenario({
+    role: "admin",
+    browserLocale: "en-US",
+    mfa: { required: true, enrolled: true, verified: true },
+  });
+  await hebrewAdmin.page.goto(origin + "/dashboard/host/overview/?lang=he");
+  await hebrewAdmin.page.locator("#admin-tab-users").click();
+  const hebrewTarget = hebrewAdmin.page.locator(".admin-row").filter({
+    has: hebrewAdmin.page.getByText("target@example.test", { exact: true }),
+  });
+  await hebrewTarget.locator("summary").click();
+  for (const [label, confirmation] of [
+    ["חסימה", "חסימת גישה"],
+    ["הסרה", "הסרת גישה"],
+  ]) {
+    await hebrewTarget.getByRole("button", { name: label, exact: true }).click();
+    await hebrewAdmin.page
+      .locator("dialog.admin-dialog[open]")
+      .getByRole("button", { name: confirmation, exact: true })
+      .waitFor();
+    await hebrewAdmin.page
+      .locator("dialog.admin-dialog[open]")
+      .getByRole("button", { name: "ביטול", exact: true })
+      .click();
+  }
+  assert.equal(
+    hebrewAdmin.calls.some((call) => ["POST", "DELETE"].includes(call.method)),
+    false,
+    "reviewing and canceling access changes does not mutate accounts",
+  );
+  await hebrewAdmin.context.close();
   for (const mobile of [false, true]) {
     const regular = await scenario({
       mobile,

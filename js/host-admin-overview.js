@@ -7,7 +7,7 @@ import {
 } from "./api/index.js";
 import { reauthenticate } from "./site-auth.js";
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
-import { node, field } from "./host-ui.js";
+import { node, field, hostDateTime } from "./host-ui.js";
 import { roleBadge, accessBadge } from "./host-role-badge.js";
 
 const root = document.querySelector("#admin-overview");
@@ -344,7 +344,7 @@ export async function loadAdminOverview(user, identity) {
                   ? hostText("Enrolled")
                   : hostText("Not enrolled"),
             p1: person.lastSignInAt
-              ? new Date(person.lastSignInAt).toLocaleString()
+              ? `${hostDateTime(person.lastSignInAt)} (UTC)`
               : hostText("Not yet"),
           }),
         ),
@@ -386,7 +386,7 @@ export async function loadAdminOverview(user, identity) {
             ),
           }),
           () => {},
-          hostText("{action} access", { action: hostText(action) }),
+          hostText(`${action} access`),
           (_, key) =>
             action === "Remove"
               ? deletePortalAccess(user, person.email, key)
