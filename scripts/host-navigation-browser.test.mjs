@@ -25,7 +25,10 @@ test("workspace preserves deep links, reloads and browser history without exposi
     }
   });
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
-  t.after(() => new Promise((resolve) => server.close(resolve)));
+  t.after(() => {
+    server.closeAllConnections();
+    return new Promise((resolve) => server.close(resolve));
+  });
   const browser = await chromium.launch({
     channel: process.env.WIFIGATE_BROWSER_CHANNEL ?? "chrome",
     headless: true,
