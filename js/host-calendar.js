@@ -6,6 +6,10 @@ import { node, field, hostDateTime } from "./host-ui.js";
 import { renderHostAccessGrants } from "./host-access-grants.js";
 
 const states = ["draft", "confirmed", "changed", "cancelled", "completed"];
+const reservationGuestName = (record) =>
+  record.guestRedactedAt
+    ? hostText("Guest details removed")
+    : record.guest.name || hostText("Guest details removed");
 let sessionGeneration = 0;
 let filterListener;
 export function clearHostCalendar() {
@@ -355,7 +359,7 @@ export async function renderHostCalendar({
       editorDialog.showModal();
       return;
     }
-    field(form, "Guest name", "name", record?.guest.name || "");
+    field(form, "Guest name", "name", record ? reservationGuestName(record) : "");
     field(
       form,
       "Guest phone (E.164)",
@@ -827,7 +831,7 @@ export async function renderHostCalendar({
         const label = hostText(
           "{name} · {status} · {room} · {start} — {end} ({zone})",
           {
-            name: reservation.guest.name,
+            name: reservationGuestName(reservation),
             status: hostText(reservation.status),
             room: room.name,
             start: hostDateTime(reservation.startsAt, property().timezone),
@@ -843,7 +847,7 @@ export async function renderHostCalendar({
         button.style.gridColumn = `${start + 1} / ${end + 1}`;
         button.style.gridRow = String(lane + 1);
         button.append(
-          node("strong", reservation.guest.name),
+          node("strong", reservationGuestName(reservation)),
           node(
             "small",
             [
@@ -896,7 +900,7 @@ export async function renderHostCalendar({
       const row = node("li");
       const open = node(
         "button",
-        reservation.guest.name || hostText("Guest details removed"),
+        reservationGuestName(reservation),
         { type: "button" },
       );
       open.addEventListener("click", () => {

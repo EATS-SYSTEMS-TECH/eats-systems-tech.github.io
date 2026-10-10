@@ -55,6 +55,8 @@ Verified Host admins can enter Overview from the sidebar or `/dashboard/host/ove
 
 New organizations remain pending until the designated owner accepts with an authenticator. Recipients can start enrollment from their invitation, then accept after fresh verification. Expired initial owner invitations can be renewed. These are dashboard invitations; no email is sent automatically.
 
+If an owner's team invitation creation or cancellation receives `RECENT_TOTP_REQUIRED`, the interface requests genuine provider/TOTP reauthentication and retries the same immutable request with its original idempotency key. Input remains locked during authentication; a changed organization or closed view prevents the deferred retry. Calendar and list entries for erased guest details display a localized privacy placeholder without translating user-entered guest names.
+
 Remove organization archives it and retains history. The confirmation shows affected records and gates, requires the exact name and fresh MFA, and refuses archival until physical gates are released/transferred. Every mutation carries an idempotency key and the current version where required; stale views clear on account/access changes.
 
 During backend rollout, a 404 on `/api/v1/platform/me` permits a fallback to the authenticated Host profile API (with empty PUT profile synchronization if missing). Authorization failures and outages never trigger fallback. Other products remain unavailable in this mode. Full Overview functionality requires the matching backend's `/api/v1/admin/overview`, `/people`, `/organizations` and organization archive endpoints. Deploy the backend/indexes before this rebuilt frontend; the backend README and OpenAPI define the complete contracts.

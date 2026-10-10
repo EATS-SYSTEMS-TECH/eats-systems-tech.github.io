@@ -71,7 +71,7 @@ test("selected Host language controls layout, translated forms and history while
         else if(url.endsWith('/operations/preferences')){if(window.failOperations)throw Object.assign(new Error('simulated unavailable dependency'),{status:503});data={preferences:{locale:'en',alerts:{inApp:true,minimumSeverity:'info',events:[]},savedFilters:[]}};}
         else if(url.includes('/operations/reliability?'))data={api:{observedRequests:3,serverFailures:0,availabilityPercent:100,p95LatencyMs:12},automation:{observedJobs:0,dueJobs:0,oldestDueMs:0},delivery:{acceptedReceipts:0}};
         else if(url.includes('/time-zone/resolve'))data={instant:JSON.parse(config.data).localTime+':00Z'};
-        else if(url.includes('/reservations?')){const from=new URL(url,location.origin).searchParams.get('from');data={items:[{id:'reservation',propertyId:'property',roomId:'room',roomName:'Room',guest:{name:'Staff',phone:'+15555550123',email:'guest@example.test'},startsAt:new Date(Date.parse(from)+86400000).toISOString(),endsAt:new Date(Date.parse(from)+3*86400000).toISOString(),status:'confirmed',version:1,targetIds:[]}],nextCursor:null};}
+        else if(url.includes('/reservations?')){const from=new URL(url,location.origin).searchParams.get('from');data={items:[{id:'reservation',propertyId:'property',roomId:'room',roomName:'Room',guest:{name:window.fixtureGuestRedacted?'Guest details deleted':'Staff',phone:window.fixtureGuestRedacted?'':'+15555550123',email:window.fixtureGuestRedacted?'':'guest@example.test'},guestRedactedAt:window.fixtureGuestRedacted?'2026-10-10T12:00:00.000Z':null,startsAt:new Date(Date.parse(from)+86400000).toISOString(),endsAt:new Date(Date.parse(from)+3*86400000).toISOString(),status:window.fixtureGuestRedacted?'cancelled':'confirmed',version:1,targetIds:[]}],nextCursor:null};}
         else data={items:[],nextCursor:null};
         return {status:200,statusText:'OK',headers:{},config,data};
       };
@@ -458,6 +458,21 @@ test("selected Host language controls layout, translated forms and history while
         fullPage: true,
       });
     }
+    await page.evaluate(async () => {
+      window.fixtureGuestRedacted = true;
+      const { loadHostManagement } = await import("/js/host-management.js");
+      await loadHostManagement(
+        { uid: "fixture-user", getIdToken: async () => "isolated-test" },
+        { role: "user" },
+      );
+    });
+    const removedName = language === "he" ? "פרטי האורח נמחקו" : "Guest details removed";
+    await page.locator(".reservation-chip strong").getByText(removedName, { exact: true }).waitFor();
+    assert.ok((await page.locator(".reservation-chip").getAttribute("aria-label")).startsWith(removedName));
+    await page.locator(".reservation-chip").click();
+    assert.equal(await page.getByLabel(language === "he" ? "שם האורח" : "Guest name", { exact: true }).inputValue(), removedName);
+    assert.equal(await page.locator('.reservation-editor-actions button[type="submit"]').count(), 0);
+    await page.keyboard.press("Escape");
     const menu = page.locator(".workspace-menu-toggle");
     if (await menu.isVisible()) await menu.click();
     await page.locator('button[data-view="Reservations"]').click();
