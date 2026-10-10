@@ -588,6 +588,16 @@ async function recheckDashboardAccess() {
     accessCheckInProgress = false;
   }
 }
+window.addEventListener("host:admin-updated", (event) => {
+  if (
+    currentUser?.uid === event.detail?.uid &&
+    identity?.user.uid === currentUser.uid &&
+    identity.role === Roles.ADMIN &&
+    portalState(identity) === PortalStates.APPROVED
+  ) {
+    void loadHostManagement(currentUser, identity);
+  }
+});
 window.addEventListener("focus", () => {
   if (
     currentUser &&

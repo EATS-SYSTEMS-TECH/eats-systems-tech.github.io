@@ -2,6 +2,17 @@
 // Version: 1.2.1
 
 function setupNav() {
+  // Published content pages predate localized login links. Keep their header
+  // destination in the page language while they are regenerated over time.
+  const locale = location.pathname.match(/^\/((?:[a-z]{2}|fil)(?:-[A-Za-z]{2,4})?)\//)?.[1];
+  const loginPath = locale && locale !== "en" ? `/${locale}/login/` : "/login/";
+  $$(".site-login__trigger[href]").forEach((link) => {
+    const url = new URL(link.href, location.href);
+    if (url.origin === location.origin && /\/(?:login)\/$/.test(url.pathname)) {
+      url.pathname = loginPath;
+      link.href = url.href;
+    }
+  });
   const toggle = $(".nav__toggle");
   const navWrapper = $(".nav__links-wrapper");
   if (!toggle || !navWrapper) return;

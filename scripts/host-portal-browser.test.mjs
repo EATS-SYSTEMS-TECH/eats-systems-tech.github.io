@@ -16,6 +16,8 @@ async function scenario(options = {}) {
   const state = {
     ...structuredClone(active),
     signedIn: true,
+    organizations: [],
+    invitations: [],
     people: [
       {
         uid: "fixture-user",
@@ -135,7 +137,7 @@ async function scenario(options = {}) {
     ) {
       await route.fulfill({
         status: 200,
-        json: { items: [], nextCursor: null },
+        json: { items: state.invitations, nextCursor: null },
       });
       return;
     }
@@ -210,6 +212,29 @@ async function scenario(options = {}) {
           status: "active",
           memberships: [],
         });
+      if (requestPath === "/api/v1/admin/organizations") {
+        const id = "created-organization";
+        state.organizations.push({
+          id,
+          name: input.name,
+          timezone: input.timezone,
+          status: "pending",
+          version: 1,
+          owners: [],
+          ownerEmail: input.ownerEmail,
+          memberCount: 0,
+          gateCount: 0,
+          products: ["host"],
+        });
+        state.invitations.push({
+          id: "created-owner-invitation",
+          clientId: id,
+          organizationName: input.name,
+          role: "owner",
+          version: 1,
+          expiresAt: "2099-01-01T00:00:00.000Z",
+        });
+      }
       if (requestPath === "/api/v1/admin/portal-access") {
         if (request.method() === "DELETE")
           state.people = state.people.filter(
@@ -228,7 +253,7 @@ async function scenario(options = {}) {
           admins: 2,
           activeAdmins: 2,
           users: state.people.filter((person) => person.role === "user").length,
-          organizations: 0,
+          organizations: state.organizations.length,
         },
       });
       return;
@@ -246,7 +271,9 @@ async function scenario(options = {}) {
       return;
     }
     if (requestPath === "/api/v1/admin/organizations") {
-      await route.fulfill({ json: { items: [], nextCursor: null } });
+      await route.fulfill({
+        json: { items: state.organizations, nextCursor: null },
+      });
       return;
     }
     await route.fulfill({
@@ -458,6 +485,29 @@ try {
     retryCalls[0].headers["idempotency-key"],
     retryCalls[1].headers["idempotency-key"],
   );
+  await admin.page.locator("#admin-tab-organizations").click();
+  await admin.page
+    .getByRole("button", { name: "Create organization", exact: true })
+    .click();
+  await modal.locator('input[name="name"]').fill("New test organization");
+  await modal.locator('input[name="timezone"]').fill("Asia/Jerusalem");
+  await modal
+    .locator('input[name="ownerEmail"]')
+    .fill("approved@example.test");
+  await modal.locator('button[type="submit"]').click();
+  await confirm();
+  await modal.waitFor({ state: "hidden" });
+  await admin.page
+    .locator('#host-management [data-invitation-id="created-owner-invitation"]')
+    .waitFor({ state: "attached" });
+  await admin.page
+    .getByRole("button", { name: /Team invitations/ })
+    .click();
+  await admin.page
+    .getByRole("button", { name: "Accept team invitation", exact: true })
+    .waitFor({ state: "visible" });
+  assert.equal(admin.state.organizations.length, 1);
+  assert.equal(admin.state.invitations.length, 1);
   admin.state.access.state = "denied";
   await admin.page.evaluate(() => window.dispatchEvent(new Event("focus")));
   await admin.page

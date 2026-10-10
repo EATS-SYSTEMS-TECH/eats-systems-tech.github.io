@@ -885,6 +885,7 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   const loginLabel = SITE_LOGIN_LABELS[locale];
   if (!loginLabel) throw new Error(`No header login label for ${locale}`);
   setLocalizedText($, $(".site-login__trigger"), loginLabel, locale);
+  $(".site-login__trigger").attr("href", buildPagePath(locale, "login"));
   $("#language-button").attr("aria-label", copy.selectLanguageLabel);
   setLanguageSelector($, homeData.localeOptions, locale, pageKey);
   const prefix = buildAssetPrefix(locale, pageKey);
