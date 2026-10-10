@@ -17,7 +17,7 @@ const failure = (error) =>
       "Verify your authenticator before accepting a management role.",
     ),
     RECENT_TOTP_REQUIRED: hostText(
-      "Set up your account authenticator and sign in again before accepting or changing a management invitation.",
+      "Sign in again with your authenticator, then retry.",
     ),
     INVITATION_EXPIRED: hostText(
       "This invitation expired. Ask the owner for a new invitation.",
@@ -209,6 +209,27 @@ export async function renderOwnerMembershipInvitations({
     if (!attempts.has(signature)) attempts.set(signature, crypto.randomUUID());
     return attempts.get(signature);
   };
+  async function writeWithRecentIdentity(path, body, intent) {
+    accepting = true;
+    try {
+      try {
+        await portalRequest(user, path, "POST", body, intent);
+      } catch (error) {
+        if (error?.code !== "RECENT_TOTP_REQUIRED") throw error;
+        if (!current()) return false;
+        status.textContent = hostText(
+          "Confirm your identity with your authenticator…",
+        );
+        await reauthenticate(user, requestMfaChallenge);
+        await user.getIdToken(true);
+        if (!current()) return false;
+        await portalRequest(user, path, "POST", body, intent);
+      }
+      return true;
+    } finally {
+      accepting = false;
+    }
+  }
   async function read(cursor, append = false) {
     const result = await portalRequest(
       user,
@@ -243,13 +264,12 @@ export async function renderOwnerMembershipInvitations({
           cancel.disabled = true;
           const signature = `cancel:${item.id}:${item.version}`;
           try {
-            await portalRequest(
-              user,
+            const saved = await writeWithRecentIdentity(
               `${root}/${encodeURIComponent(item.id)}/cancel`,
-              "POST",
               { version: item.version },
               key(signature),
             );
+            if (!saved) return;
             attempts.delete(signature);
             if (current()) {
               await read();
@@ -298,7 +318,8 @@ export async function renderOwnerMembershipInvitations({
       input.disabled = true;
     });
     try {
-      await portalRequest(user, root, "POST", body, key(signature));
+      const saved = await writeWithRecentIdentity(root, body, key(signature));
+      if (!saved) return;
       attempts.delete(signature);
       if (current()) {
         await read();
