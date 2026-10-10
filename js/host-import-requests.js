@@ -1,6 +1,7 @@
 import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
 import { field, node } from "./host-ui.js";
+import { requestWithRecentIdentity } from "./host-recent-identity.js";
 export async function renderHostImportRequests({
   container,
   user,
@@ -112,13 +113,18 @@ export async function renderHostImportRequests({
             if (!attempts.has(signature))
               attempts.set(signature, crypto.randomUUID());
             try {
-              await portalRequest(
+              await requestWithRecentIdentity({
                 user,
-                `${root}/${encodeURIComponent(item.id)}/${action}`,
-                "POST",
+                path: `${root}/${encodeURIComponent(item.id)}/${action}`,
                 body,
-                attempts.get(signature),
-              );
+                intent: attempts.get(signature),
+                isCurrent: current,
+                onVerifying: () => {
+                  status.textContent = hostText(
+                    "Confirm your identity with your authenticator…",
+                  );
+                },
+              });
               if (current()) {
                 await load();
                 status.textContent =
