@@ -31,7 +31,7 @@ if (process.env.STAGING_TEST_RUN === "1") {
   process.stdin.on("data", (value) => { if (value.includes("shutdown")) shutdown(); });
 }
 
-async function waitForPort(port, timeoutMs = 30000) {
+async function waitForPort(port, timeoutMs = 90000) {
   const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline && !shuttingDown) {
     const ready = await new Promise((resolve) => {
