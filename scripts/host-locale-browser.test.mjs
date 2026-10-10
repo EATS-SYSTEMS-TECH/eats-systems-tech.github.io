@@ -59,7 +59,7 @@ test("selected Host language controls layout, translated forms and history while
       import {loadHostManagement} from '/js/host-management.js';
       initializeHostLocale();installHostLanguageSelector();
       document.querySelector('#host-sidebar').hidden=false;document.querySelector('#dashboard-content').hidden=false;document.querySelector('#access-panel').hidden=true;document.querySelector('#account-details').hidden=false;
-      const organization={id:'fixture-org',name:'Properties',timezone:'UTC',membership:{role:'owner'}};
+      const organization={id:'fixture-org',name:'Properties',timezone:'UTC',membership:{role:'owner'},workspace:{service:{state:'legacy-active'}}};
       window.fixtureRequests=[];
       profileApi.defaults.adapter=async config=>{
         window.fixtureRequests.push(config.url);
@@ -308,13 +308,21 @@ test("selected Host language controls layout, translated forms and history while
       .locator('[data-operations-screen="jobs"][data-loaded="true"]')
       .waitFor();
     assert.deepEqual(
-      await page.locator('.workspace-tabs button').allTextContents(),
+      await page.locator(".workspace-tabs button").allTextContents(),
       language === "he"
         ? ["משימות גישה", "התרעות ופעילות", "אירועי אינטגרציה", "בריאות השירות"]
-        : ["Access jobs", "Alerts and activity", "Integration events", "Service health"],
+        : [
+            "Access jobs",
+            "Alerts and activity",
+            "Integration events",
+            "Service health",
+          ],
     );
     await page
-      .getByRole("button", { name: language === "he" ? "התרעות ופעילות" : "Alerts and activity", exact: true })
+      .getByRole("button", {
+        name: language === "he" ? "התרעות ופעילות" : "Alerts and activity",
+        exact: true,
+      })
       .click();
     await page
       .getByText(
@@ -415,6 +423,30 @@ test("selected Host language controls layout, translated forms and history while
       await page
         .locator(`[data-workspace-view="${view}"][data-loaded="true"]`)
         .waitFor();
+      if (view === "organization") {
+        const settings = await page
+          .locator('[data-workspace-view="organization"]')
+          .innerText();
+        assert.ok(
+          settings.includes(
+            language === "he" ? "אזור זמן: UTC" : "Timezone: UTC",
+          ),
+        );
+        assert.ok(
+          settings.includes(
+            language === "he"
+              ? "התפקיד שלכם בארגון: בעלים"
+              : "Your organization role: owner",
+          ),
+        );
+        assert.ok(
+          settings.includes(
+            language === "he"
+              ? "מצב השירות: פעיל ותיק"
+              : "Service state: legacy-active",
+          ),
+        );
+      }
       for (const width of [1440, 390, 320]) {
         await page.setViewportSize({ width, height: 900 });
         assert.ok(
@@ -466,12 +498,32 @@ test("selected Host language controls layout, translated forms and history while
         { role: "user" },
       );
     });
-    const removedName = language === "he" ? "פרטי האורח נמחקו" : "Guest details removed";
-    await page.locator(".reservation-chip strong").getByText(removedName, { exact: true }).waitFor();
-    assert.ok((await page.locator(".reservation-chip").getAttribute("aria-label")).startsWith(removedName));
+    const removedName =
+      language === "he" ? "פרטי האורח נמחקו" : "Guest details removed";
+    await page
+      .locator(".reservation-chip strong")
+      .getByText(removedName, { exact: true })
+      .waitFor();
+    assert.ok(
+      (
+        await page.locator(".reservation-chip").getAttribute("aria-label")
+      ).startsWith(removedName),
+    );
     await page.locator(".reservation-chip").click();
-    assert.equal(await page.getByLabel(language === "he" ? "שם האורח" : "Guest name", { exact: true }).inputValue(), removedName);
-    assert.equal(await page.locator('.reservation-editor-actions button[type="submit"]').count(), 0);
+    assert.equal(
+      await page
+        .getByLabel(language === "he" ? "שם האורח" : "Guest name", {
+          exact: true,
+        })
+        .inputValue(),
+      removedName,
+    );
+    assert.equal(
+      await page
+        .locator('.reservation-editor-actions button[type="submit"]')
+        .count(),
+      0,
+    );
     await page.keyboard.press("Escape");
     const menu = page.locator(".workspace-menu-toggle");
     if (await menu.isVisible()) await menu.click();

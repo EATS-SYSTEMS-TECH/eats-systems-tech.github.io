@@ -16,7 +16,7 @@ import {
   renderSupportDiagnostics,
   renderSupportOwner,
 } from "./host-support.js";
-import { node, field } from "./host-ui.js";
+import { node, field, hostDateTime } from "./host-ui.js";
 import { renderHostCalendar, clearHostCalendar } from "./host-calendar.js";
 import {
   allowedWorkspaceViews,
@@ -559,7 +559,7 @@ async function renderInventory(
               p0: transfer.id,
               p1: hostText(transfer.status),
               p2: transfer.targetOrganizationId,
-              p3: new Date(transfer.expiresAt).toLocaleString(),
+              p3: hostDateTime(transfer.expiresAt),
             }),
           ),
         );
@@ -1040,12 +1040,20 @@ export async function loadHostManagement(user, identity, preferredId) {
         panel.append(
           node("h2", hostText("Organization settings")),
           node("p", org.name),
-          node("p", "Timezone: " + org.timezone),
-          node("p", "Your organization role: " + role),
+          node("p", hostText("Timezone: {p0}", { p0: org.timezone })),
+          node(
+            "p",
+            hostText("Your organization role: {p0}", { p0: hostText(role) }),
+          ),
         );
         if (org.workspace?.service)
           panel.append(
-            node("p", "Service state: " + org.workspace.service.state),
+            node(
+              "p",
+              hostText("Service state: {p0}", {
+                p0: hostText(org.workspace.service.state),
+              }),
+            ),
           );
         if (sessionTransfer)
           panel.append(node("p", "Approved transfer ID: " + sessionTransfer));
