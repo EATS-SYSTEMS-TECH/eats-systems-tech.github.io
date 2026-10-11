@@ -144,6 +144,7 @@ function refresh() {
     document.getElementById("admin-overview")?.hidden;
   if (
     root.dataset.loading === "false" &&
+    root.dataset.workspaceReadFailed !== "true" &&
     selected !== "calendar" &&
     !targets(selected).length &&
     !waitingForOverview
