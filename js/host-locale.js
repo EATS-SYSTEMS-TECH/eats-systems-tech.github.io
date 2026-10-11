@@ -188,6 +188,10 @@ const hebrew = {
   "Organization name": "שם הארגון",
   "IANA timezone": "אזור זמן",
   "Organization settings": "הגדרות הארגון",
+  "Save organization details": "שמירת פרטי הארגון",
+  "Changes saved.": "השינויים נשמרו.",
+  "Changes saved. Refresh the screen to load the updated data.":
+    "השינויים נשמרו. רעננו את המסך כדי לטעון את הנתונים המעודכנים.",
   "Loading your organizations…": "טוענים את הארגונים שלכם…",
   "Verified email": "אימייל מאומת",
   Rooms: "חדרים",
