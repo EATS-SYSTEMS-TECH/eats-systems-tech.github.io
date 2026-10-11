@@ -171,7 +171,8 @@
     display: inline-flex;
   }
 
-  .site-header .nav__links-wrapper {
+  /* Override desktop RTL margins while the menu is collapsed on tablets. */
+  .site-header .nav .nav__links-wrapper {
     position: absolute;
     inset-inline: 0;
     top: var(--nav-height);
@@ -205,8 +206,10 @@
     font-size: 0.95rem;
   }
 
-  .site-header .nav__contact-link {
+  /* Keep the CTA full-width and centered even when RTL menu links align right. */
+  .site-header .topbar-nav .nav__contact-link {
     margin-top: 0.5rem;
+    align-self: stretch;
     text-align: center;
   }
 }
