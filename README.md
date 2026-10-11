@@ -25,7 +25,7 @@ preserved by the same pass-through behavior.
 
 ## WIFIGATE Host V1 portal
 
-See [the dashboard build guide](docs/dashboard-build.md) for implemented screens, permissions, local startup and click-through checks. The earlier [dashboard review](docs/dashboard-review.md) records the findings and design decisions behind this build.
+Product specifications, dashboard reviews and release notes are maintained outside this public website repository.
 
 The Host interface uses `css/host-interface.css` as its shared visual layer, loaded after the structural workspace and admin styles. Its palette is navigation navy (`#112b40`), ink (`#183149`), action blue (`#185dcc`), muted text (`#52677b`), canvas (`#f4f7fa`) and white surfaces. It reuses the self-hosted DM Sans font with system fallbacks. Keep controls, form spacing, focus states, responsive layouts and secondary/destructive button treatments consistent here; feature-specific layout remains in its own stylesheet. Navigation follows the selected language, including Hebrew RTL. Do not reduce permissions to simplify the interface.
 
@@ -49,7 +49,7 @@ Billing statuses, organization settings, support approvals and operational acces
 
 Host administrator sign-in dates also follow the selected interface language and explicitly identify UTC. Access-change confirmation buttons use complete translated phrases in Hebrew; opening and canceling these reviews does not change access.
 
-The authentication contract and setup requirements are in [docs/host-portal-v1.md](docs/host-portal-v1.md). The backend implements authorization/MFA fields, access lifecycle, and tenant endpoints under `/api/v1/organizations`; its README is the complete endpoint registry. Missing authorization fields fail closed.
+The private backend project maintains the authentication contract and setup requirements. The backend implements authorization/MFA fields, access lifecycle, and tenant endpoints under `/api/v1/organizations`; its README is the complete endpoint registry. Missing authorization fields fail closed.
 
 ### V1 administrator Overview
 
