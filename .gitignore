@@ -5,3 +5,5 @@ firebase-debug.*.log
 # Local Codex settings (per machine)
 /.codex/config.toml
 /.codex-artifacts/
+# Internal documentation belongs outside this public repository.
+/docs/

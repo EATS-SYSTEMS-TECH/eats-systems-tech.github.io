@@ -1,6 +1,6 @@
 # GitHub Pages (Jekyll) publishes the repository root. Only the website
-# itself goes out: sources, internal documents and tooling stay in the
-# repository and are never served on wifigate.io.
+# itself goes out: sources and tooling are excluded from wifigate.io.
+# Internal documentation belongs outside this public repository.
 exclude:
   - docs/
   - scripts/
