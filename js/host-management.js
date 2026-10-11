@@ -34,6 +34,7 @@ let selectedId;
 let preferredOrganizationId;
 let sessionUid;
 let navigateWorkspace;
+let managementRefreshPending = false;
 const requestedOrganization = () =>
   new URLSearchParams(location.search).get("org");
 function rememberOrganization(id) {
@@ -82,12 +83,13 @@ function actionForm(
   fields,
   transform = (values) => values,
   success,
+  { submitLabel = title } = {},
 ) {
   const section = node("details");
   section.append(node("summary", hostText(title)));
   const form = node("form");
   fields(form);
-  const submit = node("button", hostText(title), { type: "submit" });
+  const submit = node("button", hostText(submitLabel), { type: "submit" });
   const status = node("p", "", { role: "status", "aria-live": "polite" });
   form.append(submit, status);
   section.append(form);
@@ -96,29 +98,41 @@ function actionForm(
     event.preventDefault();
     if (submit.disabled) return;
     const epoch = generation;
-    const input = transform(Object.fromEntries(new FormData(form)));
-    submit.disabled = true;
-    const fingerprint = [
-      ...new Uint8Array(
-        await crypto.subtle.digest(
-          "SHA-256",
-          new TextEncoder().encode(
-            JSON.stringify([resourcePath, method, input]),
+    const view = container.closest("[data-workspace-view]");
+    const viewId = view?.dataset.workspaceView;
+    const orgId = selectedId;
+    const active = () =>
+      epoch === generation &&
+      section.isConnected &&
+      (!viewId || workspaceLocation(new URL(location.href)) === viewId);
+    const controls = Array.from(form.elements, (element) => [
+      element,
+      element.disabled,
+    ]);
+    try {
+      const input = transform(Object.fromEntries(new FormData(form)));
+      for (const [control] of controls) control.disabled = true;
+      for (const notice of root.querySelectorAll("[data-management-feedback]"))
+        notice.remove();
+      status.textContent = hostText("Saving…");
+      const fingerprint = [
+        ...new Uint8Array(
+          await crypto.subtle.digest(
+            "SHA-256",
+            new TextEncoder().encode(
+              JSON.stringify([resourcePath, method, input]),
+            ),
           ),
         ),
-      ),
-    ]
-      .map((byte) => byte.toString(16).padStart(2, "0"))
-      .join("");
-    if (epoch !== generation) return;
-    let key = attempts.get(fingerprint);
-    if (!key) {
-      key = crypto.randomUUID();
-      attempts.set(fingerprint, key);
-    }
-    submit.disabled = true;
-    status.textContent = hostText("Saving…");
-    try {
+      ]
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join("");
+      if (!active()) return;
+      let key = attempts.get(fingerprint);
+      if (!key) {
+        key = crypto.randomUUID();
+        attempts.set(fingerprint, key);
+      }
       const result = await portalRequest(
         currentUser,
         resourcePath,
@@ -129,11 +143,48 @@ function actionForm(
       if (epoch !== generation) return;
       attempts.delete(fingerprint);
       if (success) success(result);
-      await loadHostManagement(currentUser, currentIdentity, selectedId);
+      if (!active()) {
+        managementRefreshPending = true;
+        return;
+      }
+      const refresh = loadHostManagement(currentUser, currentIdentity, orgId);
+      const refreshEpoch = generation;
+      await refresh;
+      if (
+        refreshEpoch !== generation ||
+        (viewId && workspaceLocation(new URL(location.href)) !== viewId)
+      )
+        return;
+      const refreshedView = viewId
+        ? root.querySelector(`[data-workspace-view="${viewId}"]`)
+        : root;
+      if (refreshedView?.dataset.loaded === "true" || refreshedView === root)
+        refreshedView.prepend(
+          node("p", hostText("Changes saved."), {
+            role: "status",
+            "aria-live": "polite",
+            "data-management-feedback": "true",
+          }),
+        );
+      else
+        root.prepend(
+          node(
+            "p",
+            hostText(
+              "Changes saved. Refresh the screen to load the updated data.",
+            ),
+            {
+              role: "status",
+              "aria-live": "polite",
+              "data-management-feedback": "true",
+            },
+          ),
+        );
     } catch (error) {
       if (epoch === generation) status.textContent = message(error);
     } finally {
-      if (epoch === generation) submit.disabled = false;
+      if (epoch === generation)
+        for (const [control, disabled] of controls) control.disabled = disabled;
     }
   });
 }
@@ -141,6 +192,8 @@ export function clearHostManagement({ sessionEnded = false } = {}) {
   window.dispatchEvent(new CustomEvent("host:workspace-dispose"));
   clearHostCalendar();
   navigateWorkspace = undefined;
+  managementRefreshPending = false;
+  root.dataset.workspaceReadFailed = "false";
   generation++;
   root.dataset.requestGeneration = String(generation);
   currentUser = undefined;
@@ -161,6 +214,8 @@ export function clearHostManagement({ sessionEnded = false } = {}) {
   if (reference) reference.hidden = false;
 }
 window.addEventListener("host:workspace-navigate", (event) => {
+  for (const notice of root.querySelectorAll("[data-management-feedback]"))
+    notice.remove();
   void navigateWorkspace?.(event.detail);
 });
 window.addEventListener("host:operations-filter", async (event) => {
@@ -771,6 +826,8 @@ export async function loadHostManagement(user, identity, preferredId) {
   root.dataset.requestGeneration = String(epoch);
   clearOrganizationSelector();
   root.dataset.loading = "true";
+  managementRefreshPending = false;
+  root.dataset.workspaceReadFailed = "false";
   currentUser = user;
   currentIdentity = identity;
   root.dataset.platformRole = identity.role;
@@ -1068,6 +1125,8 @@ export async function loadHostManagement(user, identity, preferredId) {
               field(form, "IANA timezone", "timezone", org.timezone);
             },
             (data) => ({ ...data, version: org.version }),
+            undefined,
+            { submitLabel: "Save organization details" },
           );
       },
     };
@@ -1076,6 +1135,11 @@ export async function loadHostManagement(user, identity, preferredId) {
     navigateWorkspace = async (id) => {
       const panel = panels.get(id);
       if (!panel || !current()) return;
+      if (managementRefreshPending) {
+        managementRefreshPending = false;
+        await loadHostManagement(currentUser, currentIdentity, selectedId);
+        return;
+      }
       if (["calendar", "reservations"].includes(id) && bookingView !== id) {
         clearHostCalendar();
         for (const previous of ["calendar", "reservations"]) {
@@ -1138,6 +1202,7 @@ export async function loadHostManagement(user, identity, preferredId) {
     }
   } catch (error) {
     if (!current()) return;
+    root.dataset.workspaceReadFailed = "true";
     root.replaceChildren(node("p", message(error), { role: "status" }));
     if (error.code === "TOTP_REQUIRED") {
       const verify = node("button", hostText("Verify authenticator"), {

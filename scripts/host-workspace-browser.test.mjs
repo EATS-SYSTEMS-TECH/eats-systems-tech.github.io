@@ -17,6 +17,8 @@ function fixture(role, platformRole = "user") {
     import { loadHostManagement } from '/js/host-management.js';
     window.requests = [];
     const role = ${JSON.stringify(role)};
+    window.organization = {id:'org',name:'Test hotel',timezone:'UTC',version:1,membership:{role},workspace:{role,service:{state:'legacy-active',available:true}}};
+    window.organizationSaveKeys = [];
     const today = new Date().toISOString().slice(0, 10);
     const booking = id => ({id, propertyId:'property', roomId:'room', roomName:'Room 101',
       guest:{name:'Guest ' + id, email:id + '@example.test',phone:'+15555550123'},
@@ -26,10 +28,18 @@ function fixture(role, platformRole = "user") {
       window.requests.push(config.url);
       const url = new URL(config.url, location.origin);
       let data = {items:[],nextCursor:null};
-      if (url.pathname === '/api/v1/organizations') data = {organizations:[{
-        id:'org',name:'Test hotel',timezone:'UTC',membership:{role},
-        workspace:{role,service:{state:'legacy-active',available:true}}
-      }],nextCursor:null};
+      if (url.pathname === '/api/v1/organizations') {
+        if (window.rejectOrganizationReload && window.organizationSaveReturned) throw new Error('isolated reload failure');
+        data = {organizations:[window.organization],nextCursor:null};
+      }
+      else if (url.pathname === '/api/v1/organizations/org' && config.method === 'put') {
+        window.organizationSaveKeys.push(config.headers.get('idempotency-key'));
+        if (window.delayOrganizationSave) await new Promise(resolve => {window.releaseOrganizationSave=resolve;});
+        if (window.rejectOrganizationSave) throw new Error('isolated save failure');
+        window.organization = {...window.organization,...JSON.parse(config.data),version:window.organization.version+1};
+        window.organizationSaveReturned = true;
+        data = {organization:window.organization};
+      }
       else if (url.pathname.endsWith('/properties')) data = {items:[{id:'property',name:'Property',timezone:'UTC'}],nextCursor:null};
       else if (url.pathname.endsWith('/rooms')) data = {items:[{id:'room',name:'Room 101',propertyId:'property',capacity:2}],nextCursor:null};
       else if (url.pathname.endsWith('/time-zone/resolve')) data = {instant:JSON.parse(config.data).localTime+':00Z'};
@@ -311,6 +321,242 @@ test("workspace isolates feature failures, permissions, paging and browser histo
         );
         assert.deepEqual(errors, []);
       }
+    },
+  );
+
+  await t.test(
+    "organization save locks fields, reports success after refresh and offers a clear action",
+    async () => {
+      const { page, errors } = await scenario("owner", "?view=organization");
+      const panel = page.locator('[data-workspace-view="organization"]');
+      await panel.locator("summary").click();
+      await panel
+        .getByLabel("Organization name", { exact: true })
+        .fill("Renamed hotel");
+      await page.evaluate(() => {
+        window.delayOrganizationSave = true;
+      });
+      await panel.locator('form button[type="submit"]').click();
+      await page.waitForFunction(
+        () => typeof window.releaseOrganizationSave === "function",
+        null,
+        { timeout: 5000 },
+      );
+      assert.equal(
+        await panel
+          .getByLabel("Organization name", { exact: true })
+          .isDisabled(),
+        true,
+      );
+      assert.equal(
+        await panel.getByLabel("IANA timezone", { exact: true }).isDisabled(),
+        true,
+      );
+      await page.evaluate(() => window.releaseOrganizationSave());
+      await panel
+        .getByRole("status")
+        .filter({ hasText: "Changes saved." })
+        .waitFor({ timeout: 5000 });
+      assert.equal(
+        await page
+          .getByRole("combobox", { name: "Organization", exact: true })
+          .innerText()
+          .then((text) => text.includes("Renamed hotel")),
+        true,
+      );
+      await panel.locator("summary").click();
+      assert.equal(
+        await panel
+          .getByRole("button", {
+            name: "Save organization details",
+            exact: true,
+          })
+          .isEnabled(),
+        true,
+      );
+      assert.deepEqual(errors, []);
+    },
+  );
+
+  await t.test(
+    "a late organization save preserves another screen draft and refreshes on return",
+    async () => {
+      const { page, errors } = await scenario("owner", "?view=organization");
+      const settings = page.locator('[data-workspace-view="organization"]');
+      await settings.locator("summary").click();
+      await settings
+        .getByLabel("Organization name", { exact: true })
+        .fill("Renamed hotel");
+      await page.evaluate(() => {
+        window.delayOrganizationSave = true;
+      });
+      await settings.locator('form button[type="submit"]').click();
+      await page.waitForFunction(
+        () => typeof window.releaseOrganizationSave === "function",
+        null,
+        { timeout: 5000 },
+      );
+      await page
+        .getByRole("button", { name: "Properties", exact: true })
+        .click();
+      const properties = page.locator('[data-workspace-view="properties"]');
+      const addProperty = properties
+        .locator("details")
+        .filter({ hasText: "Add property" });
+      await addProperty.locator("summary").click();
+      const draft = addProperty.getByLabel("Name", { exact: true });
+      await draft.fill("Unsaved property draft");
+      await page.evaluate(() => window.releaseOrganizationSave());
+      await page.waitForFunction(
+        () => window.organizationSaveReturned === true,
+        null,
+        { timeout: 5000 },
+      );
+      await page.waitForTimeout(100);
+      assert.equal(await draft.inputValue(), "Unsaved property draft");
+      assert.equal(
+        await properties
+          .getByRole("status")
+          .filter({ hasText: "Changes saved." })
+          .count(),
+        0,
+      );
+      await page
+        .getByRole("button", { name: "Organization settings", exact: true })
+        .click();
+      await settings
+        .getByText("Renamed hotel", { exact: true })
+        .waitFor({ timeout: 5000 });
+      assert.deepEqual(errors, []);
+    },
+  );
+
+  await t.test(
+    "a failed save preserves the form and safely reuses the reviewed attempt",
+    async () => {
+      const { page, errors } = await scenario("owner", "?view=organization");
+      const panel = page.locator('[data-workspace-view="organization"]');
+      await panel.locator("summary").click();
+      await panel
+        .getByLabel("Organization name", { exact: true })
+        .fill("Retry hotel");
+      await page.evaluate(() => {
+        window.rejectOrganizationSave = true;
+      });
+      await panel.locator('form button[type="submit"]').click();
+      await panel
+        .getByRole("status")
+        .filter({
+          hasText: "The request could not be completed. You can retry.",
+        })
+        .waitFor({ timeout: 5000 });
+      assert.equal(
+        await panel
+          .getByLabel("Organization name", { exact: true })
+          .inputValue(),
+        "Retry hotel",
+      );
+      assert.equal(
+        await panel
+          .getByLabel("Organization name", { exact: true })
+          .isEnabled(),
+        true,
+      );
+      await page.evaluate(() => {
+        window.rejectOrganizationSave = false;
+      });
+      await panel.locator('form button[type="submit"]').click();
+      await panel
+        .getByRole("status")
+        .filter({ hasText: "Changes saved." })
+        .waitFor({ timeout: 5000 });
+      const keys = await page.evaluate(() => window.organizationSaveKeys);
+      assert.equal(keys.length, 2);
+      assert.equal(keys[0], keys[1]);
+      assert.ok(keys[0]);
+      assert.deepEqual(errors, []);
+    },
+  );
+
+  await t.test(
+    "a confirmed save stays confirmed when loading the updated screen fails",
+    async () => {
+      const { page, errors } = await scenario("owner", "?view=organization");
+      const panel = page.locator('[data-workspace-view="organization"]');
+      await panel.locator("summary").click();
+      await panel
+        .getByLabel("Organization name", { exact: true })
+        .fill("Saved before outage");
+      await page.evaluate(() => {
+        window.rejectOrganizationReload = true;
+      });
+      await panel.locator('form button[type="submit"]').click();
+      const workspace = page.locator("#host-management");
+      await workspace
+        .getByRole("status")
+        .filter({
+          hasText:
+            "Changes saved. Refresh the screen to load the updated data.",
+        })
+        .waitFor({ timeout: 5000 });
+      assert.equal(
+        await page.evaluate(() => window.organizationSaveKeys.length),
+        1,
+      );
+      assert.equal(
+        new URL(page.url()).searchParams.get("view"),
+        "organization",
+      );
+      await page.evaluate(() => {
+        window.rejectOrganizationReload = false;
+      });
+      await workspace
+        .getByRole("button", { name: "Refresh organizations", exact: true })
+        .click();
+      await panel
+        .getByText("Saved before outage", { exact: true })
+        .waitFor({ timeout: 5000 });
+      assert.equal(
+        await page.evaluate(() => window.organizationSaveKeys.length),
+        1,
+      );
+      assert.deepEqual(errors, []);
+    },
+  );
+
+  await t.test(
+    "failure preparing a save restores controls without an uncaught error",
+    async () => {
+      const { page, errors } = await scenario("owner", "?view=organization");
+      const panel = page.locator('[data-workspace-view="organization"]');
+      await panel.locator("summary").click();
+      await page.evaluate(() => {
+        crypto.subtle.digest = async () => {
+          throw new Error("isolated preparation failure");
+        };
+      });
+      await panel.locator('form button[type="submit"]').click();
+      await panel
+        .getByRole("status")
+        .filter({
+          hasText: "The request could not be completed. You can retry.",
+        })
+        .waitFor({ timeout: 5000 });
+      assert.equal(
+        await panel.locator('form button[type="submit"]').isEnabled(),
+        true,
+      );
+      assert.equal(
+        await panel
+          .getByLabel("Organization name", { exact: true })
+          .isEnabled(),
+        true,
+      );
+      assert.equal(
+        await page.evaluate(() => window.organizationSaveKeys.length),
+        0,
+      );
+      assert.deepEqual(errors, []);
     },
   );
 
