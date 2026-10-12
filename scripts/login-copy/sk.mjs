@@ -50,4 +50,5 @@ export default {
   errorSessionExpired: "Platnosť prihlásenia vypršala. Prihláste sa znova.",
   errorForbidden: "Prístup nie je povolený. Obráťte sa na správcu systému.",
   errorGeneric: "Niečo sa pokazilo. Skúste to znova.",
+  errorNoAccount: "Nemáte účet WIFIGATE. Obráťte sa na podporu: {email}",
 };

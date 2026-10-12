@@ -14,7 +14,7 @@ export function watchSession({
   const language = pageLanguage();
   const events = ["pointerdown", "keydown", "touchstart", "scroll"];
 
-  async function endSession() {
+  async function endSession(reason) {
     if (ended) return;
     ended = true;
     clear();
@@ -22,7 +22,7 @@ export function watchSession({
     try {
       await signOut();
     } finally {
-      location.replace(loginPath(null, language));
+      location.replace(loginPath(null, language, reason));
     }
   }
 

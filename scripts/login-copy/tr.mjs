@@ -50,4 +50,5 @@ export default {
   errorSessionExpired: "Oturumunuzun süresi doldu. Tekrar giriş yapın.",
   errorForbidden: "Erişim izni yok. Sistem yöneticinize başvurun.",
   errorGeneric: "Bir sorun oluştu. Lütfen tekrar deneyin.",
+  errorNoAccount: "WIFIGATE hesabınız yok. Lütfen destek ekibine başvurun: {email}",
 };

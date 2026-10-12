@@ -12,6 +12,7 @@ import {
   loginDestination,
   loginPath,
   pageLanguage,
+  signInRefusal,
 } from "../js/platform-model.js";
 
 function profile() {
@@ -94,6 +95,32 @@ test("deep links reject external URLs, encoded separators and traversal", () => 
   );
   assert.equal(loginPath(null, "en"), "/login/");
   assert.equal(loginPath(null, "../evil"), "/login/");
+  assert.equal(
+    loginPath(null, "he", "no-account"),
+    "/he/login/?reason=no-account",
+  );
+  assert.equal(
+    loginPath("/dashboard/pay/", "en", "unverified-email"),
+    "/login/?next=%2Fdashboard%2Fpay%2F&reason=unverified-email",
+  );
+  assert.equal(loginPath(null, "en", "<script>"), "/login/");
+});
+
+test("sign-in is refused only when every product has no plan", () => {
+  const noPlan = profile();
+  for (const id of ["host", "pay", "manager"])
+    noPlan.products[id] = { state: "no-plan" };
+  assert.equal(signInRefusal(noPlan), "no-account");
+  noPlan.user.emailVerified = false;
+  assert.equal(signInRefusal(noPlan), "unverified-email");
+  assert.equal(signInRefusal(profile()), null);
+  for (const state of ["pending", "blocked", "mfa-required", "unavailable"]) {
+    const other = profile();
+    for (const id of ["host", "pay", "manager"])
+      other.products[id] = { state: "no-plan" };
+    other.products.manager = { state };
+    assert.equal(signInRefusal(other), null, state);
+  }
 });
 
 test("URL selects the interface language without browser storage", () => {

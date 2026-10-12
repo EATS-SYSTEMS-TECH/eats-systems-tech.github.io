@@ -50,4 +50,5 @@ export default {
   errorSessionExpired: "เซสชันหมดอายุแล้ว โปรดลงชื่อเข้าใช้อีกครั้ง",
   errorForbidden: "ไม่ได้รับอนุญาตให้เข้าถึง โปรดติดต่อผู้ดูแลระบบ",
   errorGeneric: "เกิดข้อผิดพลาด โปรดลองอีกครั้ง",
+  errorNoAccount: "คุณไม่มีบัญชี WIFIGATE โปรดติดต่อฝ่ายสนับสนุน: {email}",
 };

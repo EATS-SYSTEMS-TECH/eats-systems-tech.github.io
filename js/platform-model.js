@@ -36,6 +36,17 @@ export function parsePlatformIdentity(value, expectedUid) {
   return { user, mfa, products };
 }
 
+// Sign-in is refused when no product is open to the account at all: every
+// product answers no-plan (an unverified email always does). The reason names
+// the message the sign-in page shows.
+export const signInRefusals = Object.freeze(["no-account", "unverified-email"]);
+
+export function signInRefusal(identity) {
+  if (!productIds.every((id) => identity.products[id].state === "no-plan"))
+    return null;
+  return identity.user.emailVerified ? "no-account" : "unverified-email";
+}
+
 export function safeDashboardPath(value) {
   if (
     typeof value !== "string" ||
@@ -76,12 +87,17 @@ export function pageLanguage(location = globalThis.location) {
 }
 
 // The sign-in page exists in every site language: /login/ for English and
-// /<code>/login/ (lower case) for the rest.
-export function loginPath(next, language = "en") {
+// /<code>/login/ (lower case) for the rest. A refused session goes back there
+// with ?reason= so the page can say why.
+export function loginPath(next, language = "en", reason) {
   const path =
     language !== "en" && /^[a-z]{2,3}(-[A-Za-z]{4})?$/.test(language)
       ? `/${language.toLowerCase()}/login/`
       : "/login/";
   const safeNext = safeDashboardPath(next);
-  return safeNext ? `${path}?next=${encodeURIComponent(safeNext)}` : path;
+  const query = [
+    safeNext && `next=${encodeURIComponent(safeNext)}`,
+    signInRefusals.includes(reason) && `reason=${reason}`,
+  ].filter(Boolean);
+  return query.length ? `${path}?${query.join("&")}` : path;
 }

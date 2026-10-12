@@ -2,6 +2,7 @@ import { AuthErrors, HttpStatus } from "./host-constants.js";
 import {
   initializeSiteAuth,
   signIn,
+  signOut,
   completeAuthCallback,
   signInRedirect,
 } from "./site-auth.js";
@@ -11,6 +12,8 @@ import {
   parsePlatformIdentity,
   loginDestination,
   loginPath,
+  signInRefusal,
+  signInRefusals,
 } from "./platform-model.js";
 import { watchSession } from "./platform-session.js";
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
@@ -29,12 +32,21 @@ let leaving = false;
 let session;
 let humanChecked = false;
 let humanCheckOpen = false;
+// Set while the page shows why an account was refused, so a sign-out does not
+// clear the message.
+let refused = false;
 // Each sign-in page is built in one language (scripts/login-pages.mjs) and
 // carries its runtime wording in #login-copy.
 const language = document.documentElement.lang;
 const copy = JSON.parse(document.querySelector("#login-copy").textContent);
-const requestedPath = new URLSearchParams(location.search).get("next");
+const query = new URLSearchParams(location.search);
+const requestedPath = query.get("next");
+const SUPPORT_EMAIL = "support@wifigate.io";
 const ERROR_COPY = {
+  // Sign-in refusals (platform-model.js signInRefusal); a dashboard that
+  // refuses a session sends the reason back as ?reason=.
+  "no-account": "errorNoAccount",
+  "unverified-email": "errorUnverifiedEmail",
   [AuthErrors.POPUP_CANCELLED]: "errorCancelled",
   [AuthErrors.POPUP_BLOCKED]: "errorPopupBlocked",
   [AuthErrors.INVALID_CODE]: "errorInvalidCode",
@@ -88,6 +100,23 @@ function hideProgress() {
     progress.hidden = true;
   }
 }
+// The no-account message carries {email}: the support address as a mail link.
+function showMessage(text) {
+  const [before, after] = text.split("{email}");
+  if (after === undefined) {
+    status.textContent = text;
+    return;
+  }
+  const link = document.createElement("a");
+  link.href = `mailto:${SUPPORT_EMAIL}`;
+  link.dir = "ltr";
+  link.textContent = SUPPORT_EMAIL;
+  status.replaceChildren(before, link, after);
+}
+if (signInRefusals.includes(query.get("reason"))) {
+  refused = true;
+  showMessage(copy[ERROR_COPY[query.get("reason")]]);
+}
 function setBusy(value) {
   busy = value;
   buttons.forEach((button) => {
@@ -99,8 +128,16 @@ async function finishLogin(user) {
     return loginAttempt.promise;
   }
   showProgress(copy.checking);
-  const promise = getPlatformProfile(user).then((value) => {
+  const promise = getPlatformProfile(user).then(async (value) => {
     const identity = parsePlatformIdentity(value, user.uid);
+    const refusal = signInRefusal(identity);
+    if (refusal) {
+      // No WIFIGATE product is open to this account: it does not stay signed
+      // in, and the page says why.
+      refused = true;
+      await signOut();
+      throw Object.assign(new Error(refusal), { code: refusal });
+    }
     leaving = true;
     showProgress(copy.opening);
     location.replace(loginDestination(identity, requestedPath, language));
@@ -117,10 +154,11 @@ async function finishLogin(user) {
 }
 function report(error) {
   hideProgress();
-  status.textContent =
+  showMessage(
     error.status >= 500 || error.code === "HOST_API_UNAVAILABLE"
       ? copy.accessUnavailable
-      : errorMessage(error);
+      : errorMessage(error),
+  );
 }
 async function start() {
   setBusy(true);
@@ -149,7 +187,7 @@ async function start() {
         void finishLogin(user)
           .catch(report)
           .finally(() => setBusy(false));
-      } else if (!user && !busy) {
+      } else if (!user && !busy && !refused) {
         status.textContent = "";
       }
     });
@@ -187,6 +225,7 @@ buttons.forEach((button) =>
       item.classList.remove("app-login__provider--ready"),
     );
     providerName = button.dataset.provider;
+    refused = false;
     setBusy(true);
     showProgress(copy.signingIn);
     try {

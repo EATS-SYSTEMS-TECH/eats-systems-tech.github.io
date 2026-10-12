@@ -50,4 +50,5 @@ export default {
   errorSessionExpired: "会话已过期，请重新登录。",
   errorForbidden: "无访问权限，请联系系统管理员。",
   errorGeneric: "出了点问题，请重试。",
+  errorNoAccount: "您没有 WIFIGATE 账户，请联系支持团队：{email}",
 };

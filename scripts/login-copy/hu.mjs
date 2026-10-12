@@ -50,4 +50,5 @@ export default {
   errorSessionExpired: "A bejelentkezés lejárt. Jelentkezz be újra.",
   errorForbidden: "A hozzáférés nem engedélyezett. Fordulj a rendszergazdához.",
   errorGeneric: "Hiba történt. Próbáld újra.",
+  errorNoAccount: "Nincs WIFIGATE-fiókod. Fordulj az ügyfélszolgálathoz: {email}",
 };

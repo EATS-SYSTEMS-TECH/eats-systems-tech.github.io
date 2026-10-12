@@ -50,4 +50,5 @@ export default {
   errorSessionExpired: "La session a expiré. Reconnectez-vous.",
   errorForbidden: "Accès non autorisé. Contactez l'administrateur du système.",
   errorGeneric: "Un problème est survenu. Veuillez réessayer.",
+  errorNoAccount: "Vous n'avez pas de compte WIFIGATE. Contactez l'assistance : {email}",
 };
