@@ -50,4 +50,5 @@ export default {
   errorSessionExpired: "Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại.",
   errorForbidden: "Không được phép truy cập. Hãy liên hệ quản trị viên hệ thống.",
   errorGeneric: "Đã xảy ra lỗi. Vui lòng thử lại.",
+  errorNoAccount: "Bạn không có tài khoản WIFIGATE. Vui lòng liên hệ bộ phận hỗ trợ: {email}",
 };

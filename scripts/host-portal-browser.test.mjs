@@ -348,18 +348,24 @@ async function enroll(t) {
   await page.locator("#enrollment-form button").click();
 }
 try {
-  for (const state of ["pending", "denied"]) {
-    const t = await scenario({ role: null, access: { state } });
+  {
+    const t = await scenario({ role: null, access: { state: "pending" } });
     await openPortal(t);
     await t.page
-      .locator(
-        '[data-product="host"][data-state="' +
-          (state === "pending" ? "pending" : "no-plan") +
-          '"]',
-      )
+      .locator('[data-product="host"][data-state="pending"]')
       .waitFor();
     assert.equal(await t.page.locator("#dashboard-content").isVisible(), false);
     assert.equal(await t.page.locator("#mfa-enrollment").isVisible(), false);
+    await t.context.close();
+  }
+  {
+    // Denied in Host and no plan in Pay or Manager: no WIFIGATE account.
+    const t = await scenario({ role: null, access: { state: "denied" } });
+    await openPortal(t);
+    await t.page.waitForURL(origin + "/login/?reason=no-account");
+    await t.page
+      .locator('#login-status a[href="mailto:support@wifigate.io"]')
+      .waitFor();
     await t.context.close();
   }
   for (const options of [{ incomplete: true }, { errorStatus: 503 }]) {
@@ -539,10 +545,8 @@ try {
   assert.equal(admin.state.invitations.length, 1);
   admin.state.access.state = "denied";
   await admin.page.evaluate(() => window.dispatchEvent(new Event("focus")));
-  await admin.page
-    .locator('[data-product="host"][data-state="no-plan"]')
-    .waitFor();
-  assert.equal(await admin.page.locator("#admin-overview").isVisible(), false);
+  await admin.page.waitForURL(origin + "/login/?reason=no-account");
+  assert.equal(await admin.page.locator("#admin-overview").count(), 0);
   await admin.context.close();
   const hebrewAdmin = await scenario({
     role: "admin",

@@ -19,7 +19,7 @@ function fixtureProfile(state) {
       uid: state.uid ?? "fixture-user",
       email: "fixture@example.test",
       displayName: "Fixture User",
-      emailVerified: true,
+      emailVerified: state.emailVerified ?? true,
     },
     mfa: { enrolled: state.enrolled, verified: state.verified },
     products: {
@@ -681,24 +681,83 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
   );
 
   await t.test(
-    "all no-plan tiles do not create access and platform failure retains authentication",
+    "an account with no plan in any product is signed out and sent to support",
     async () => {
-      const fixture = await scenario(browser, {
-        host: "no-plan",
-        pay: "no-plan",
-        manager: "no-plan",
+      const noPlan = { host: "no-plan", pay: "no-plan", manager: "no-plan" };
+      for (const [loginUrl, text] of [
+        ["/login/", "You don't have a WIFIGATE account. Please contact support: support@wifigate.io"],
+        ["/he/login/", "אין לך משתמש ב־WIFIGATE. נא לפנות לתמיכה: support@wifigate.io"],
+      ]) {
+        const fixture = await scenario(browser, { ...noPlan, signedIn: false });
+        await fixture.page.goto(origin + loginUrl);
+        await (await passGateGame(fixture.page, "google")).click();
+        const status = fixture.page.locator("#login-status", { hasText: text });
+        await status.waitFor();
+        assert.equal(await status.innerText(), text);
+        assert.equal(
+          await status
+            .locator('a[href="mailto:support@wifigate.io"]')
+            .getAttribute("dir"),
+          "ltr",
+        );
+        assert.ok(fixture.calls.includes("signout"));
+        assert.equal(new URL(fixture.page.url()).pathname, loginUrl);
+        assert.deepEqual(
+          fixture.calls
+            .filter((call) => call.path)
+            .map((call) => `${call.method} ${call.path}`),
+          ["GET /api/v1/platform/me"],
+        );
+        assert.equal(
+          await fixture.page
+            .locator('[data-provider="google"]')
+            .evaluate((button) => button.disabled),
+          false,
+        );
+        assert.deepEqual(fixture.errors, []);
+        await fixture.context.close();
+      }
+
+      const unverified = await scenario(browser, {
+        ...noPlan,
+        signedIn: false,
+        emailVerified: false,
       });
-      await fixture.page.goto(origin + "/dashboard/");
-      await fixture.page
-        .locator('.product-tile[data-state="no-plan"]')
-        .first()
+      await unverified.page.goto(origin + "/login/");
+      await (await passGateGame(unverified.page, "apple")).click();
+      await unverified.page
+        .locator("#login-status", {
+          hasText: "Use the verified email approved by your admin.",
+        })
         .waitFor();
-      assert.equal(
-        await fixture.page
-          .locator('.product-tile[data-state="no-plan"]')
-          .count(),
-        3,
-      );
+      assert.ok(unverified.calls.includes("signout"));
+      await unverified.context.close();
+
+      // A session whose last plan ends is closed by the dashboard and the
+      // sign-in page says why.
+      for (const [dashboardUrl, loginUrl] of [
+        ["/dashboard/pay/", "/login/?reason=no-account"],
+        ["/dashboard/host/", "/login/?reason=no-account"],
+        ["/dashboard/?lang=he", "/he/login/?reason=no-account"],
+      ]) {
+        const restored = await scenario(browser, noPlan);
+        await restored.page.goto(origin + dashboardUrl);
+        await restored.page.waitForURL(origin + loginUrl);
+        await restored.page
+          .locator('#login-status a[href="mailto:support@wifigate.io"]')
+          .waitFor();
+        assert.ok(restored.calls.includes("signout"));
+        await restored.context.close();
+      }
+    },
+  );
+
+  await t.test(
+    "platform failure retains authentication",
+    async () => {
+      const fixture = await scenario(browser);
+      await fixture.page.goto(origin + "/dashboard/");
+      await fixture.page.locator(".product-tile").first().waitFor();
       fixture.state.unavailable = true;
       await fixture.page.locator("#platform-retry").click();
       await fixture.page

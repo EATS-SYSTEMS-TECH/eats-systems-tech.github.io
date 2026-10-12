@@ -50,4 +50,5 @@ export default {
   errorSessionExpired: "Sesi log masuk telah tamat. Log masuk semula.",
   errorForbidden: "Akses tidak dibenarkan. Hubungi pentadbir sistem.",
   errorGeneric: "Ada sesuatu yang tidak kena. Sila cuba lagi.",
+  errorNoAccount: "Anda tiada akaun WIFIGATE. Hubungi sokongan: {email}",
 };

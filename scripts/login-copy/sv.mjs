@@ -50,4 +50,5 @@ export default {
   errorSessionExpired: "Inloggningen har gått ut. Logga in igen.",
   errorForbidden: "Åtkomst nekad. Kontakta systemadministratören.",
   errorGeneric: "Något gick fel. Försök igen.",
+  errorNoAccount: "Du har inget WIFIGATE-konto. Kontakta kundtjänst: {email}",
 };

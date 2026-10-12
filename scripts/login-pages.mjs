@@ -48,6 +48,7 @@ const RUNTIME_KEYS = [
   "errorSessionExpired",
   "errorForbidden",
   "errorGeneric",
+  "errorNoAccount",
 ];
 
 const segment = (code) => (code === "en" ? "" : `/${code.toLowerCase()}`);

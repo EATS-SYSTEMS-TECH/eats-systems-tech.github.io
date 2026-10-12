@@ -50,4 +50,5 @@ export default {
   errorSessionExpired: "सत्राची मुदत संपली आहे. पुन्हा साइन इन करा.",
   errorForbidden: "ॲक्सेसची परवानगी नाही. सिस्टम ॲडमिनशी संपर्क साधा.",
   errorGeneric: "काहीतरी चूक झाली. कृपया पुन्हा प्रयत्न करा.",
+  errorNoAccount: "तुमचे WIFIGATE खाते नाही. कृपया सपोर्टशी संपर्क साधा: {email}",
 };

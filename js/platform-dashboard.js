@@ -10,6 +10,7 @@ import {
   productIds,
   pageLanguage,
   loginPath,
+  signInRefusal,
 } from "./platform-model.js";
 import { platformText } from "./platform-copy.js";
 import { watchSession } from "./platform-session.js";
@@ -245,6 +246,11 @@ async function refresh() {
     const result = await getPlatformProfile(user);
     if (requestGeneration !== generation) return;
     identity = parsePlatformIdentity(result, user.uid);
+    const refusal = signInRefusal(identity);
+    if (refusal) {
+      void session?.endSession(refusal);
+      return;
+    }
     $("#platform-account").textContent =
       identity.user.displayName || identity.user.email || "WIFIGATE";
     $("#platform-status").textContent = identity.user.emailVerified

@@ -50,4 +50,5 @@ export default {
   errorSessionExpired: "Je sessie is verlopen. Log opnieuw in.",
   errorForbidden: "Toegang niet toegestaan. Neem contact op met de systeembeheerder.",
   errorGeneric: "Er is iets misgegaan. Probeer het opnieuw.",
+  errorNoAccount: "Je hebt geen WIFIGATE-account. Neem contact op met de klantenservice: {email}",
 };

@@ -50,4 +50,5 @@ export default {
   errorSessionExpired: "Сесија је истекла. Пријавите се поново.",
   errorForbidden: "Приступ није дозвољен. Обратите се администратору система.",
   errorGeneric: "Нешто није у реду. Покушајте поново.",
+  errorNoAccount: "Немате WIFIGATE налог. Обратите се подршци: {email}",
 };

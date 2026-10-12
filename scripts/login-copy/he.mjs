@@ -51,4 +51,5 @@ export default {
   errorSessionExpired: "פג תוקף ההתחברות. יש להתחבר שוב.",
   errorForbidden: "הגישה אינה מורשית. יש לפנות למנהל המערכת.",
   errorGeneric: "משהו השתבש. נא לנסות שוב.",
+  errorNoAccount: "אין לך משתמש ב־WIFIGATE. נא לפנות לתמיכה: {email}",
 };

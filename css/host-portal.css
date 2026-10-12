@@ -129,6 +129,7 @@ html:has(body.app-login) { height: 100%; overscroll-behavior: none; }
 }
 .app-login__status { min-height: 1.25rem; margin: 14px 0 0; color: #64748b; font-size: 0.875rem; line-height: 1.5; text-align: center; }
 .app-login__status:empty { display: none; }
+.app-login__status a { color: #0b63ff; font-weight: 600; white-space: nowrap; text-decoration: underline; text-underline-offset: 0.15em; }
 .app-login__legal { margin: clamp(10px, 2.2dvh, 18px) 0 0; color: #64748b; font-size: 0.78rem; line-height: 1.6; text-align: center; }
 .app-login__legal a { color: #475569; text-decoration: underline; text-underline-offset: 0.15em; }
 /* Language button and picker: the app's AppLanguageSelector and
@@ -161,10 +162,12 @@ html:has(body.app-login) { height: 100%; overscroll-behavior: none; }
 
 /* Phones: one line per message. The type scales with the screen width, and
    the screen and card margins are tighter, so the footnote and the status fit
-   on a single line down to a 320 px screen. */
+   on a single line down to a 320 px screen. The no-account message with the
+   support address wraps. */
 @media (max-width: 480px) {
   .app-login__card { padding-inline: 16px; }
   .app-login__status { white-space: nowrap; font-size: min(0.875rem, 3.3vw); }
+  .app-login__status:has(a) { white-space: normal; }
   .app-login__legal { white-space: nowrap; font-size: min(0.78rem, 2.95vw); }
 }
 

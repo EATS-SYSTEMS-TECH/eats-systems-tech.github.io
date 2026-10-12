@@ -50,4 +50,5 @@ export default {
   errorSessionExpired: "Deine Sitzung ist abgelaufen. Melde dich erneut an.",
   errorForbidden: "Zugriff nicht gestattet. Wende dich an den Systemadministrator.",
   errorGeneric: "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+  errorNoAccount: "Du hast kein WIFIGATE-Konto. Bitte wende dich an den Support: {email}",
 };

@@ -50,4 +50,5 @@ export default {
   errorSessionExpired: "Conectarea a expirat. Conectați-vă din nou.",
   errorForbidden: "Accesul nu este permis. Contactați administratorul de sistem.",
   errorGeneric: "A apărut o problemă. Încercați din nou.",
+  errorNoAccount: "Nu aveți un cont WIFIGATE. Contactați asistența: {email}",
 };
