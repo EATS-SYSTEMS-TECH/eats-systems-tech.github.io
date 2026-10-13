@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>Pumasok | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">Pagpapatunay gamit ang aplikasyong pampatunay</h2>
-        <p>Ilagay ang kasalukuyang kodigo mula sa aplikasyong pampatunay para matapos ang pagpasok.</p>
-        <label>Aplikasyong pampatunay<select name="factor" required></select></label>
-        <label
-          >Kodigo ng pagpapatunay<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">Pagpapatunay gamit ang aplikasyong pampatunay</h2>
+        <p id="challenge-text" class="mfa-dialog__text">Ilagay ang kasalukuyang kodigo mula sa aplikasyong pampatunay para matapos ang pagpasok.</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>Aplikasyong pampatunay</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>Kodigo ng pagpapatunay</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">Patunayan</button
-          ><button type="button" data-cancel>Kanselahin</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">Patunayan</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>Kanselahin</button>
         </div>
-        <p class="help-text">Hindi na makapasok? Makipag-ugnayan sa tagapangasiwa ng plataporma para mapatunayan ang iyong pagkakakilanlan at maibalik ang iyong paraan ng pagpapatunay.</p>
+        <p class="mfa-dialog__help">Hindi na makapasok? Makipag-ugnayan sa tagapangasiwa ng plataporma para mapatunayan ang iyong pagkakakilanlan at maibalik ang iyong paraan ng pagpapatunay.</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"Isara","authenticatorN":"Aplikasyong pampatunay {n}","verifying":"Pinapatunayan...","checking":"Sinusuri ang iyong pahintulot na makapasok...","opening":"Binubuksan ang iyong panel ng kontrol...","signingIn":"Pumapasok...","humanReady":"Pumasa ka. Magpatuloy na gamit ang Google o Apple.","accessUnavailable":"Hindi masuri ang pahintulot sa ngayon. Pakisubukang muli.","gameTitle":"Hindi ako robot","gameInstruction":"Para kumpirmahin, hilahin ang sasakyan papasok sa bukas na tarangkahan","gameFooter":"Pagsusuri kung tao · WIFIGATE","gameKeyboard":"Nasa linya {lane} sa 3 ang sasakyan. Palitan ang linya gamit ang mga palaso, pindutin ang Enter para umandar.","gameGate":"Tarangkahan {n}, {state}","gateOpen":"bukas","gateClosed":"sarado","gameRetry":"Hindi pa. Pumasok sa berdeng tarangkahan.","gameLocked":"Masyadong maraming pagsubok. Subukang muli pagkalipas ng {s} segundo.","gameDone":"Napatunayan. Hindi ka robot.","errorCancelled":"Kinansela ang pagpasok.","errorPopupBlocked":"Hinarang ng iyong pambasang-web ang bintana ng pagpasok.","errorInvalidCode":"Mali o paso na ang kodigo.","errorMissingCode":"Ilagay ang kodigo mula sa aplikasyong pampatunay.","errorNetwork":"Hindi makakonekta. Suriin ang iyong koneksyon.","errorMfaCancelled":"Kinansela ang pagpapatunay ng akawnt.","errorMfaUnsupported":"Walang suportadong aplikasyong pampatunay ang akawnt na ito.","errorUnverifiedEmail":"Gamitin ang napatunayang email na inaprubahan ng tagapangasiwa.","errorUnconfigured":"Kulang ang mga pagsasaayos ng pagpasok. Makipag-ugnayan sa suporta.","errorServer":"Hindi maabot ang serbidor ng WIFIGATE. Pakisubukang muli.","errorSessionExpired":"Natapos na ang iyong sesyon. Pumasok muli.","errorForbidden":"Hindi pinahintulutan ang pagpasok. Makipag-ugnayan sa tagapangasiwa ng sistema.","errorGeneric":"May nangyaring mali. Pakisubukang muli.","errorNoAccount":"Wala kang WIFIGATE account. Makipag-ugnayan sa suporta: {email}"}</script>

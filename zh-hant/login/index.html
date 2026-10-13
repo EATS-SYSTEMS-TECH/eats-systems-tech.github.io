@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>登入 | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">透過驗證器應用程式驗證</h2>
-        <p>請輸入驗證器應用程式中的目前驗證碼以完成登入。</p>
-        <label>驗證器應用程式<select name="factor" required></select></label>
-        <label
-          >驗證碼<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">透過驗證器應用程式驗證</h2>
+        <p id="challenge-text" class="mfa-dialog__text">請輸入驗證器應用程式中的目前驗證碼以完成登入。</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>驗證器應用程式</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>驗證碼</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">驗證</button
-          ><button type="button" data-cancel>取消</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">驗證</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>取消</button>
         </div>
-        <p class="help-text">無法存取？請聯絡平台管理員驗證身分並復原驗證方式。</p>
+        <p class="mfa-dialog__help">無法存取？請聯絡平台管理員驗證身分並復原驗證方式。</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"關閉","authenticatorN":"驗證器應用程式 {n}","verifying":"正在驗證...","checking":"正在檢查您的存取權限...","opening":"正在開啟控制面板...","signingIn":"正在登入...","humanReady":"驗證已通過。現在可以透過 Google 或 Apple 繼續。","accessUnavailable":"目前無法檢查存取權限，請再試一次。","gameTitle":"我不是機器人","gameInstruction":"請將汽車拖進開啟的閘門以確認","gameFooter":"真人驗證 · WIFIGATE","gameKeyboard":"汽車位於第 {lane} 車道（共 3 條）。方向鍵切換車道，按 Enter 行駛。","gameGate":"閘門 {n}，{state}","gateOpen":"已開啟","gateClosed":"已關閉","gameRetry":"差一點。請駛入綠色閘門。","gameLocked":"嘗試次數過多，請在 {s} 秒後再試一次。","gameDone":"驗證成功。您不是機器人。","errorCancelled":"登入已取消。","errorPopupBlocked":"瀏覽器封鎖了登入視窗。","errorInvalidCode":"驗證碼錯誤或已過期。","errorMissingCode":"請輸入驗證器應用程式中的驗證碼。","errorNetwork":"無法連線，請檢查網路連線。","errorMfaCancelled":"帳戶驗證已取消。","errorMfaUnsupported":"此帳戶沒有支援的驗證器應用程式。","errorUnverifiedEmail":"請使用經管理員核准的已驗證電子郵件地址。","errorUnconfigured":"缺少登入設定，請聯絡支援團隊。","errorServer":"無法連線到 WIFIGATE 伺服器，請再試一次。","errorSessionExpired":"工作階段已過期，請重新登入。","errorForbidden":"沒有存取權限，請聯絡系統管理員。","errorGeneric":"發生錯誤，請再試一次。","errorNoAccount":"您沒有 WIFIGATE 帳戶，請聯絡支援團隊：{email}"}</script>

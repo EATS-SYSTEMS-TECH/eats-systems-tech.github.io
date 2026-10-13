@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>Đăng nhập | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">Xác minh bằng ứng dụng xác thực</h2>
-        <p>Nhập mã hiện tại từ ứng dụng xác thực để hoàn tất đăng nhập.</p>
-        <label>Ứng dụng xác thực<select name="factor" required></select></label>
-        <label
-          >Mã xác minh<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">Xác minh bằng ứng dụng xác thực</h2>
+        <p id="challenge-text" class="mfa-dialog__text">Nhập mã hiện tại từ ứng dụng xác thực để hoàn tất đăng nhập.</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>Ứng dụng xác thực</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>Mã xác minh</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">Xác minh</button
-          ><button type="button" data-cancel>Hủy</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">Xác minh</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>Hủy</button>
         </div>
-        <p class="help-text">Mất quyền truy cập? Hãy liên hệ quản trị viên nền tảng để xác minh danh tính và khôi phục phương thức xác thực của bạn.</p>
+        <p class="mfa-dialog__help">Mất quyền truy cập? Hãy liên hệ quản trị viên nền tảng để xác minh danh tính và khôi phục phương thức xác thực của bạn.</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"Đóng","authenticatorN":"Ứng dụng xác thực {n}","verifying":"Đang xác minh...","checking":"Đang kiểm tra quyền truy cập của bạn...","opening":"Đang mở bảng điều khiển...","signingIn":"Đang đăng nhập...","humanReady":"Bạn đã vượt qua. Giờ hãy tiếp tục với Google hoặc Apple.","accessUnavailable":"Hiện không thể kiểm tra quyền truy cập. Vui lòng thử lại.","gameTitle":"Tôi không phải là người máy","gameInstruction":"Để xác nhận, hãy kéo xe vào cổng đang mở","gameFooter":"Xác minh người thật · WIFIGATE","gameKeyboard":"Xe ở làn {lane} trên 3. Phím mũi tên để đổi làn, Enter để chạy.","gameGate":"Cổng {n}, {state}","gateOpen":"đang mở","gateClosed":"đang đóng","gameRetry":"Chưa đúng. Hãy lái vào cổng màu xanh lá.","gameLocked":"Quá nhiều lần thử. Hãy thử lại sau {s} giây.","gameDone":"Đã xác minh. Bạn không phải là người máy.","errorCancelled":"Đã hủy đăng nhập.","errorPopupBlocked":"Trình duyệt đã chặn cửa sổ đăng nhập.","errorInvalidCode":"Mã không đúng hoặc đã hết hạn.","errorMissingCode":"Nhập mã từ ứng dụng xác thực.","errorNetwork":"Không thể kết nối. Hãy kiểm tra kết nối mạng.","errorMfaCancelled":"Đã hủy xác minh tài khoản.","errorMfaUnsupported":"Tài khoản này không có ứng dụng xác thực được hỗ trợ.","errorUnverifiedEmail":"Hãy dùng địa chỉ email đã xác minh được quản trị viên phê duyệt.","errorUnconfigured":"Thiếu cài đặt đăng nhập. Vui lòng liên hệ bộ phận hỗ trợ.","errorServer":"Không thể kết nối với máy chủ WIFIGATE. Vui lòng thử lại.","errorSessionExpired":"Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại.","errorForbidden":"Không được phép truy cập. Hãy liên hệ quản trị viên hệ thống.","errorGeneric":"Đã xảy ra lỗi. Vui lòng thử lại.","errorNoAccount":"Bạn không có tài khoản WIFIGATE. Vui lòng liên hệ bộ phận hỗ trợ: {email}"}</script>

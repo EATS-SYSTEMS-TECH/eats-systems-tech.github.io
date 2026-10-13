@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>Giriş | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">Kimlik doğrulama uygulamasıyla doğrulama</h2>
-        <p>Girişi tamamlamak için kimlik doğrulama uygulamanızdaki güncel kodu girin.</p>
-        <label>Kimlik doğrulama uygulaması<select name="factor" required></select></label>
-        <label
-          >Doğrulama kodu<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">Kimlik doğrulama uygulamasıyla doğrulama</h2>
+        <p id="challenge-text" class="mfa-dialog__text">Girişi tamamlamak için kimlik doğrulama uygulamanızdaki güncel kodu girin.</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>Kimlik doğrulama uygulaması</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>Doğrulama kodu</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">Doğrula</button
-          ><button type="button" data-cancel>İptal</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">Doğrula</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>İptal</button>
         </div>
-        <p class="help-text">Erişiminizi mi kaybettiniz? Kimliğinizi doğrulamak ve doğrulama yönteminizi kurtarmak için platform yöneticisine başvurun.</p>
+        <p class="mfa-dialog__help">Erişiminizi mi kaybettiniz? Kimliğinizi doğrulamak ve doğrulama yönteminizi kurtarmak için platform yöneticisine başvurun.</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"Kapat","authenticatorN":"Kimlik doğrulama uygulaması {n}","verifying":"Doğrulanıyor...","checking":"Erişiminiz kontrol ediliyor...","opening":"Kontrol paneli açılıyor...","signingIn":"Giriş yapılıyor...","humanReady":"Doğrulamayı geçtiniz. Şimdi Google veya Apple ile devam edin.","accessUnavailable":"Erişim şu anda kontrol edilemiyor. Lütfen tekrar deneyin.","gameTitle":"Ben robot değilim","gameInstruction":"Onaylamak için arabayı açık kapıya sürükleyin","gameFooter":"İnsan doğrulaması · WIFIGATE","gameKeyboard":"Araba 3 şeritten {lane}. şeritte. Ok tuşları şerit değiştirir, Enter ile sürülür.","gameGate":"Kapı {n}, {state}","gateOpen":"açık","gateClosed":"kapalı","gameRetry":"Tam olmadı. Yeşil kapıya girin.","gameLocked":"Çok fazla deneme yapıldı. {s} saniye sonra tekrar deneyin.","gameDone":"Doğrulandı. Robot değilsiniz.","errorCancelled":"Giriş iptal edildi.","errorPopupBlocked":"Tarayıcı giriş penceresini engelledi.","errorInvalidCode":"Kod hatalı veya süresi dolmuş.","errorMissingCode":"Kimlik doğrulama uygulamanızdaki kodu girin.","errorNetwork":"Bağlantı kurulamıyor. Ağ bağlantınızı kontrol edin.","errorMfaCancelled":"Hesap doğrulaması iptal edildi.","errorMfaUnsupported":"Bu hesapta desteklenen bir kimlik doğrulama uygulaması yok.","errorUnverifiedEmail":"Yöneticinizin onayladığı doğrulanmış e-posta adresini kullanın.","errorUnconfigured":"Giriş ayarları eksik. Lütfen destek ekibine başvurun.","errorServer":"WIFIGATE sunucusuna bağlanılamıyor. Lütfen tekrar deneyin.","errorSessionExpired":"Oturumunuzun süresi doldu. Tekrar giriş yapın.","errorForbidden":"Erişim izni yok. Sistem yöneticinize başvurun.","errorGeneric":"Bir sorun oluştu. Lütfen tekrar deneyin.","errorNoAccount":"WIFIGATE hesabınız yok. Lütfen destek ekibine başvurun: {email}"}</script>

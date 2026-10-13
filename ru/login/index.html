@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>Вход | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">Подтверждение через приложение-аутентификатор</h2>
-        <p>Введите текущий код из приложения-аутентификатора, чтобы завершить вход.</p>
-        <label>Приложение-аутентификатор<select name="factor" required></select></label>
-        <label
-          >Код подтверждения<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">Подтверждение через приложение-аутентификатор</h2>
+        <p id="challenge-text" class="mfa-dialog__text">Введите текущий код из приложения-аутентификатора, чтобы завершить вход.</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>Приложение-аутентификатор</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>Код подтверждения</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">Подтвердить</button
-          ><button type="button" data-cancel>Отмена</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">Подтвердить</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>Отмена</button>
         </div>
-        <p class="help-text">Потеряли доступ? Обратитесь к администратору платформы, чтобы подтвердить личность и восстановить способ проверки.</p>
+        <p class="mfa-dialog__help">Потеряли доступ? Обратитесь к администратору платформы, чтобы подтвердить личность и восстановить способ проверки.</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"Закрыть","authenticatorN":"Приложение-аутентификатор {n}","verifying":"Проверка...","checking":"Проверяем ваш доступ...","opening":"Открываем панель управления...","signingIn":"Выполняется вход...","humanReady":"Проверка пройдена. Теперь можно продолжить с Google или Apple.","accessUnavailable":"Сейчас не удаётся проверить доступ. Повторите попытку.","gameTitle":"Я не робот","gameInstruction":"Чтобы подтвердить, перетащите машину в открытые ворота","gameFooter":"Проверка на человека · WIFIGATE","gameKeyboard":"Машина в полосе {lane} из 3. Стрелки меняют полосу, Enter — движение.","gameGate":"Ворота {n}, {state}","gateOpen":"открыты","gateClosed":"закрыты","gameRetry":"Почти. Въезжайте в зелёные ворота.","gameLocked":"Слишком много попыток. Повторите через {s} с.","gameDone":"Проверено. Вы не робот.","errorCancelled":"Вход отменён.","errorPopupBlocked":"Браузер заблокировал окно входа.","errorInvalidCode":"Код неверный или устарел.","errorMissingCode":"Введите код из приложения-аутентификатора.","errorNetwork":"Не удаётся подключиться. Проверьте подключение к сети.","errorMfaCancelled":"Подтверждение аккаунта отменено.","errorMfaUnsupported":"В этом аккаунте нет поддерживаемого приложения-аутентификатора.","errorUnverifiedEmail":"Используйте подтверждённый адрес электронной почты, одобренный администратором.","errorUnconfigured":"Отсутствуют настройки входа. Обратитесь в службу поддержки.","errorServer":"Не удаётся связаться с сервером WIFIGATE. Повторите попытку.","errorSessionExpired":"Сеанс истёк. Войдите снова.","errorForbidden":"Доступ запрещён. Обратитесь к системному администратору.","errorGeneric":"Что-то пошло не так. Повторите попытку.","errorNoAccount":"У вас нет учётной записи WIFIGATE. Обратитесь в службу поддержки: {email}"}</script>

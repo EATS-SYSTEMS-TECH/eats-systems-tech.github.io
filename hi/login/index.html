@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>साइन इन | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">ऑथेंटिकेटर ऐप से सत्यापन</h2>
-        <p>साइन इन पूरा करने के लिए अपने ऑथेंटिकेटर ऐप का मौजूदा कोड डालें।</p>
-        <label>ऑथेंटिकेटर ऐप<select name="factor" required></select></label>
-        <label
-          >सत्यापन कोड<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">ऑथेंटिकेटर ऐप से सत्यापन</h2>
+        <p id="challenge-text" class="mfa-dialog__text">साइन इन पूरा करने के लिए अपने ऑथेंटिकेटर ऐप का मौजूदा कोड डालें।</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>ऑथेंटिकेटर ऐप</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>सत्यापन कोड</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">सत्यापित करें</button
-          ><button type="button" data-cancel>रद्द करें</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">सत्यापित करें</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>रद्द करें</button>
         </div>
-        <p class="help-text">ऐक्सेस खो दिया? पहचान सत्यापित करने और सत्यापन का तरीका वापस पाने के लिए प्लैटफ़ॉर्म एडमिन से संपर्क करें।</p>
+        <p class="mfa-dialog__help">ऐक्सेस खो दिया? पहचान सत्यापित करने और सत्यापन का तरीका वापस पाने के लिए प्लैटफ़ॉर्म एडमिन से संपर्क करें।</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"बंद करें","authenticatorN":"ऑथेंटिकेटर ऐप {n}","verifying":"सत्यापित किया जा रहा है...","checking":"आपका ऐक्सेस जांचा जा रहा है...","opening":"डैशबोर्ड खोला जा रहा है...","signingIn":"साइन इन हो रहा है...","humanReady":"आप पास हो गए। अब Google या Apple के साथ जारी रखें।","accessUnavailable":"अभी ऐक्सेस की जांच नहीं हो पा रही है। कृपया फिर से कोशिश करें।","gameTitle":"मैं रोबोट नहीं हूं","gameInstruction":"पुष्टि करने के लिए, कार को खुले गेट तक खींचें","gameFooter":"इंसान होने की जांच · WIFIGATE","gameKeyboard":"कार 3 में से लेन {lane} में है। तीर कुंजियां लेन बदलती हैं, Enter से कार चलती है।","gameGate":"गेट {n}, {state}","gateOpen":"खुला","gateClosed":"बंद","gameRetry":"थोड़ा चूक गए। हरे गेट में जाएं।","gameLocked":"बहुत ज़्यादा कोशिशें। {s} सेकंड बाद फिर से कोशिश करें।","gameDone":"सत्यापित। आप रोबोट नहीं हैं।","errorCancelled":"साइन इन रद्द कर दिया गया।","errorPopupBlocked":"ब्राउज़र ने साइन इन विंडो ब्लॉक कर दी।","errorInvalidCode":"कोड गलत है या उसकी समय-सीमा खत्म हो गई है।","errorMissingCode":"अपने ऑथेंटिकेटर ऐप का कोड डालें।","errorNetwork":"कनेक्ट नहीं हो पा रहा है। अपना नेटवर्क कनेक्शन जांचें।","errorMfaCancelled":"खाते का सत्यापन रद्द कर दिया गया।","errorMfaUnsupported":"इस खाते में कोई समर्थित ऑथेंटिकेटर ऐप नहीं है।","errorUnverifiedEmail":"एडमिन द्वारा स्वीकृत, सत्यापित ईमेल पते का उपयोग करें।","errorUnconfigured":"साइन इन सेटिंग मौजूद नहीं हैं। कृपया सहायता टीम से संपर्क करें।","errorServer":"WIFIGATE सर्वर से कनेक्ट नहीं हो पा रहा है। कृपया फिर से कोशिश करें।","errorSessionExpired":"आपके सेशन की समय-सीमा खत्म हो गई है। फिर से साइन इन करें।","errorForbidden":"ऐक्सेस की अनुमति नहीं है। सिस्टम एडमिन से संपर्क करें।","errorGeneric":"कुछ गड़बड़ हो गई। कृपया फिर से कोशिश करें।","errorNoAccount":"आपका कोई WIFIGATE खाता नहीं है। कृपया सहायता टीम से संपर्क करें: {email}"}</script>

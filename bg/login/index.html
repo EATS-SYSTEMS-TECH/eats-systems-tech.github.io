@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>Вход | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">Потвърждаване чрез приложение за удостоверяване</h2>
-        <p>Въведете текущия код от приложението за удостоверяване, за да завършите влизането.</p>
-        <label>Приложение за удостоверяване<select name="factor" required></select></label>
-        <label
-          >Код за потвърждение<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">Потвърждаване чрез приложение за удостоверяване</h2>
+        <p id="challenge-text" class="mfa-dialog__text">Въведете текущия код от приложението за удостоверяване, за да завършите влизането.</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>Приложение за удостоверяване</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>Код за потвърждение</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">Потвърждаване</button
-          ><button type="button" data-cancel>Отказ</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">Потвърждаване</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>Отказ</button>
         </div>
-        <p class="help-text">Загубихте достъп? Свържете се с администратора на платформата, за да потвърди самоличността ви и да възстанови метода за удостоверяване.</p>
+        <p class="mfa-dialog__help">Загубихте достъп? Свържете се с администратора на платформата, за да потвърди самоличността ви и да възстанови метода за удостоверяване.</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"Затваряне","authenticatorN":"Приложение за удостоверяване {n}","verifying":"Потвърждаване...","checking":"Проверяваме достъпа ви...","opening":"Отваряме таблото за управление...","signingIn":"Влизане...","humanReady":"Успяхте. Сега продължете с Google или Apple.","accessUnavailable":"В момента не можем да проверим достъпа. Опитайте отново.","gameTitle":"Не съм робот","gameInstruction":"За да потвърдите, плъзнете колата до отворената порта","gameFooter":"Проверка за човек · WIFIGATE","gameKeyboard":"Колата е в лента {lane} от 3. Стрелките сменят лентата, Enter потегля.","gameGate":"Порта {n}, {state}","gateOpen":"отворена","gateClosed":"затворена","gameRetry":"Не съвсем. Влезте в зелената порта.","gameLocked":"Твърде много опити. Опитайте отново след {s} сек.","gameDone":"Потвърдено. Не сте робот.","errorCancelled":"Влизането беше отменено.","errorPopupBlocked":"Браузърът блокира прозореца за вход.","errorInvalidCode":"Кодът е грешен или е изтекъл.","errorMissingCode":"Въведете кода от приложението за удостоверяване.","errorNetwork":"Няма връзка. Проверете мрежовата си връзка.","errorMfaCancelled":"Потвърждаването на акаунта беше отменено.","errorMfaUnsupported":"Този акаунт няма поддържано приложение за удостоверяване.","errorUnverifiedEmail":"Използвайте потвърдения имейл, одобрен от администратора.","errorUnconfigured":"Липсват настройки за вход. Свържете се с поддръжката.","errorServer":"Няма връзка със сървъра на WIFIGATE. Опитайте отново.","errorSessionExpired":"Сесията изтече. Влезте отново.","errorForbidden":"Достъпът не е разрешен. Свържете се с администратора на системата.","errorGeneric":"Нещо се обърка. Опитайте отново.","errorNoAccount":"Нямате акаунт в WIFIGATE. Свържете се с поддръжката: {email}"}</script>

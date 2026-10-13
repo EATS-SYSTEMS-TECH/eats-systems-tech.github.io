@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>ログイン | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">認証アプリで確認</h2>
-        <p>ログインを完了するには、認証アプリに表示されている現在のコードを入力してください。</p>
-        <label>認証アプリ<select name="factor" required></select></label>
-        <label
-          >確認コード<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">認証アプリで確認</h2>
+        <p id="challenge-text" class="mfa-dialog__text">ログインを完了するには、認証アプリに表示されている現在のコードを入力してください。</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>認証アプリ</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>確認コード</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">確認</button
-          ><button type="button" data-cancel>キャンセル</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">確認</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>キャンセル</button>
         </div>
-        <p class="help-text">アクセスできなくなった場合は、プラットフォーム管理者に連絡して本人確認と認証方法の復元を依頼してください。</p>
+        <p class="mfa-dialog__help">アクセスできなくなった場合は、プラットフォーム管理者に連絡して本人確認と認証方法の復元を依頼してください。</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"閉じる","authenticatorN":"認証アプリ {n}","verifying":"確認しています...","checking":"アクセス権を確認しています...","opening":"ダッシュボードを開いています...","signingIn":"ログインしています...","humanReady":"確認が完了しました。Google または Apple で続行してください。","accessUnavailable":"現在アクセスを確認できません。もう一度お試しください。","gameTitle":"私はロボットではありません","gameInstruction":"確認するには、車を開いているゲートまでドラッグしてください","gameFooter":"人間確認 · WIFIGATE","gameKeyboard":"車は3車線中の{lane}番目の車線にいます。矢印キーで車線を変更し、Enter で進みます。","gameGate":"ゲート {n}、{state}","gateOpen":"開いています","gateClosed":"閉じています","gameRetry":"もう少しです。緑のゲートに入ってください。","gameLocked":"試行回数が多すぎます。{s} 秒後にもう一度お試しください。","gameDone":"確認しました。あなたはロボットではありません。","errorCancelled":"ログインがキャンセルされました。","errorPopupBlocked":"ブラウザがログインウィンドウをブロックしました。","errorInvalidCode":"コードが正しくないか、有効期限が切れています。","errorMissingCode":"認証アプリのコードを入力してください。","errorNetwork":"接続できません。ネットワーク接続を確認してください。","errorMfaCancelled":"アカウントの確認がキャンセルされました。","errorMfaUnsupported":"このアカウントには対応する認証アプリがありません。","errorUnverifiedEmail":"管理者が承認した確認済みのメールアドレスを使用してください。","errorUnconfigured":"ログイン設定がありません。サポートにお問い合わせください。","errorServer":"WIFIGATE サーバーに接続できません。もう一度お試しください。","errorSessionExpired":"ログインの有効期限が切れました。もう一度ログインしてください。","errorForbidden":"アクセスが許可されていません。システム管理者にお問い合わせください。","errorGeneric":"問題が発生しました。もう一度お試しください。","errorNoAccount":"WIFIGATE アカウントがありません。サポートにお問い合わせください：{email}"}</script>

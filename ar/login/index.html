@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>تسجيل الدخول | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">التحقق باستخدام تطبيق المصادقة</h2>
-        <p>أدخل الرمز الحالي من تطبيق المصادقة لإكمال تسجيل الدخول.</p>
-        <label>تطبيق المصادقة<select name="factor" required></select></label>
-        <label
-          >رمز التحقق<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">التحقق باستخدام تطبيق المصادقة</h2>
+        <p id="challenge-text" class="mfa-dialog__text">أدخل الرمز الحالي من تطبيق المصادقة لإكمال تسجيل الدخول.</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>تطبيق المصادقة</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>رمز التحقق</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">تحقق</button
-          ><button type="button" data-cancel>إلغاء</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">تحقق</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>إلغاء</button>
         </div>
-        <p class="help-text">فقدت إمكانية الوصول؟ تواصل مع مسؤول المنصة للتحقق من هويتك واستعادة وسيلة المصادقة.</p>
+        <p class="mfa-dialog__help">فقدت إمكانية الوصول؟ تواصل مع مسؤول المنصة للتحقق من هويتك واستعادة وسيلة المصادقة.</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"إغلاق","authenticatorN":"تطبيق المصادقة {n}","verifying":"جارٍ التحقق...","checking":"جارٍ التحقق من صلاحية وصولك...","opening":"جارٍ فتح لوحة التحكم...","signingIn":"جارٍ تسجيل الدخول...","humanReady":"تم اجتياز التحقق. يمكنك الآن المتابعة باستخدام Google أو Apple.","accessUnavailable":"يتعذر التحقق من الوصول حاليًا. يُرجى المحاولة مرة أخرى.","gameTitle":"أنا لست برنامج روبوت","gameInstruction":"للتأكيد، اسحب السيارة إلى البوابة المفتوحة","gameFooter":"التحقق البشري · WIFIGATE","gameKeyboard":"السيارة في المسار {lane} من 3. تغيّر الأسهم المسار، ويقود Enter السيارة.","gameGate":"البوابة {n}، {state}","gateOpen":"مفتوحة","gateClosed":"مغلقة","gameRetry":"ليس تمامًا. ادخل البوابة الخضراء.","gameLocked":"محاولات كثيرة جدًا. حاول مرة أخرى بعد {s} ثانية.","gameDone":"تم التحقق. أنت لست روبوتًا.","errorCancelled":"تم إلغاء تسجيل الدخول.","errorPopupBlocked":"حظر المتصفح نافذة تسجيل الدخول.","errorInvalidCode":"الرمز غير صحيح أو انتهت صلاحيته.","errorMissingCode":"أدخل الرمز من تطبيق المصادقة.","errorNetwork":"يتعذر الاتصال. تحقق من اتصالك بالشبكة.","errorMfaCancelled":"تم إلغاء التحقق من الحساب.","errorMfaUnsupported":"لا يوجد تطبيق مصادقة مدعوم في هذا الحساب.","errorUnverifiedEmail":"استخدم البريد الإلكتروني الموثّق الذي وافق عليه المسؤول.","errorUnconfigured":"إعدادات تسجيل الدخول مفقودة. يُرجى التواصل مع الدعم.","errorServer":"يتعذر الاتصال بخادم WIFIGATE. يُرجى المحاولة مرة أخرى.","errorSessionExpired":"انتهت صلاحية الجلسة. سجّل الدخول مرة أخرى.","errorForbidden":"الوصول غير مسموح به. تواصل مع مسؤول النظام.","errorGeneric":"حدث خطأ ما. يُرجى المحاولة مرة أخرى.","errorNoAccount":"ليس لديك حساب في WIFIGATE. يُرجى التواصل مع الدعم: {email}"}</script>
