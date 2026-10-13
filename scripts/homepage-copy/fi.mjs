@@ -8,6 +8,12 @@ const copy = {
     automation: "WIFIGATE Host",
     productGuide: "Opetusvideot",
     contact: "Ota yhteyttä",
+    account: {
+      menu: "Tilivalikko",
+      signedInAs: "Kirjautuneena käyttäjänä",
+      dashboard: "Oma hallintapaneeli",
+      signOut: "Kirjaudu ulos",
+    },
   },
   hero: {
     media: {"replay":"Toista video uudelleen","mute":"Mykistä video","unmute":"Poista mykistys","pause":"Keskeytä video","play":"Toista video"},

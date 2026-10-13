@@ -8,6 +8,12 @@ const copy = {
     automation: "WIFIGATE Host",
     productGuide: "Mga tutorial video",
     contact: "Makipag-usap sa amin",
+    account: {
+      menu: "Menu ng account",
+      signedInAs: "Naka-sign in bilang",
+      dashboard: "Aking panel ng kontrol",
+      signOut: "Mag-sign out",
+    },
   },
   hero: {
     media: {"replay":"I-play muli ang video","mute":"I-mute ang video","unmute":"I-unmute ang video","pause":"I-pause ang video","play":"I-play ang video"},

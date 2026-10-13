@@ -8,6 +8,12 @@ const copy = {
     automation: "WIFIGATE Host",
     productGuide: "Eğitim videoları",
     contact: "Bize ulaşın",
+    account: {
+      menu: "Hesap menüsü",
+      signedInAs: "Oturum açılan hesap",
+      dashboard: "Kontrol panelim",
+      signOut: "Oturumu kapat",
+    },
   },
   hero: {
     media: {"replay":"Videoyu yeniden oynat","mute":"Videonun sesini kapat","unmute":"Videonun sesini aç","pause":"Videoyu duraklat","play":"Videoyu oynat"},

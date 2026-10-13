@@ -8,6 +8,12 @@
     automation: "WIFIGATE Host",
     productGuide: "Видеоинструкции",
     contact: "Связаться с нами",
+    account: {
+      menu: "Меню аккаунта",
+      signedInAs: "Вы вошли как",
+      dashboard: "Моя панель управления",
+      signOut: "Выйти",
+    },
   },
   hero: {
     media: {"replay":"Воспроизвести видео ещё раз","mute":"Выключить звук видео","unmute":"Включить звук видео","pause":"Приостановить видео","play":"Воспроизвести видео"},

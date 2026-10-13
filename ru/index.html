@@ -85,6 +85,7 @@
   <script src="../js/utils.js?v=20260402a" defer=""></script>
 
   <script src="../js/navigation.js?v=20261007a" defer=""></script>
+  <script src="../js/site-account.js?v=20261013a" defer=""></script>
   <script src="../js/hero.js?v=20261007b" defer=""></script>
 
   <script>window.accessibilityCopy = {"ru":{"skipLink":"Перейти к основному содержимому","eyebrow":"Доступность","openButton":"Открыть меню доступности","closeButton":"Закрыть меню доступности","title":"Меню доступности","description":"Настройте сайт так, как вам удобно читать и перемещаться по нему. Ваш выбор сохраняется на этом устройстве.","reset":"Сбросить всё","statusDefault":"Стандартный вид сайта","statusActive":"Активных настроек: {count}","hideButton":"Скрыть кнопку доступности до перезагрузки страницы","statementLink":"Заявление о доступности","textSize":{"label":"Размер текста","description":"Увеличить текст на всём сайте.","decrease":"Уменьшить текст","increase":"Увеличить текст","level":"Размер текста {percent}%"},"options":{"highContrast":{"label":"Высокий контраст","description":"Тёмный текст на светлом фоне с чёткими рамками."},"grayscale":{"label":"Оттенки серого","description":"Показать сайт без цветов."},"underlineLinks":{"label":"Выделить ссылки","description":"Подчеркнуть и выделить каждую ссылку."},"readableFont":{"label":"Удобочитаемый шрифт","description":"Простой, хорошо читаемый шрифт."},"textSpacing":{"label":"Интервалы текста","description":"Больше места между строками, словами и буквами."},"highlightHeadings":{"label":"Выделить заголовки","description":"Отметить заголовки, чтобы показать структуру страницы."},"bigCursor":{"label":"Большой курсор","description":"Увеличенный указатель мыши."},"focusHighlight":{"label":"Заметный фокус","description":"Толстая рамка вокруг элемента в фокусе клавиатуры."},"reducedMotion":{"label":"Остановить анимацию","description":"Остановить анимацию, переходы и фоновое видео."}}}};</script>
@@ -369,11 +370,12 @@
     }
   ]
 }
-  </script><link rel="stylesheet" href="../css/site-header.css?v=20261007c"><link rel="stylesheet" href="../css/cookie-consent.css?v=20261007c"></head>
+  </script><link rel="stylesheet" href="../css/site-header.css?v=20261013a"><link rel="stylesheet" href="../css/cookie-consent.css?v=20261007c"></head>
 
 <body class="home-en">
   <a class="skip-link" href="#main-content">Перейти к основному содержимому</a>
   <header class="site-header" id="top">
+    <script>try{for(var i=0;i<sessionStorage.length;i++)if(/^firebase:authUser:[^:]+:\[DEFAULT\]$/.test(sessionStorage.key(i))){document.getElementById("top").classList.add("site-header--account");break}}catch(e){}</script>
     <nav class="nav" aria-label="Основная навигация">
       <a href="/ru/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
         <img src="../assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" class="nav__logo" width="416" height="96">
@@ -386,7 +388,24 @@
       <div class="nav__links-wrapper" id="primary-navigation">
         <div class="topbar-nav"><a class="nav-link nav__link" href="/ru/#how-it-works" dir="ltr">Как это работает</a><a class="nav-link nav__link" href="/ru/#use-cases" dir="ltr">Применение</a><a class="nav-link nav__link" href="/ru/#wifigate-automation" dir="ltr">WIFIGATE Host</a><a class="nav-link nav__link" href="/ru/#tutorial-videos" dir="ltr">Видеоинструкции</a><a class="nav-link nav__link nav__contact-link" href="/ru/#get-in-touch" dir="ltr">Связаться с нами</a></div>
       </div>
-      <a class="site-login__trigger" href="/login/" dir="ltr">Войти</a>
+      <a class="site-login__trigger" href="/ru/login/" dir="ltr">Войти</a>
+      <div class="site-account">
+        <button type="button" class="site-account__button" id="account-button" aria-label="Меню аккаунта" aria-haspopup="menu" aria-expanded="false" aria-controls="account-menu">
+          <span class="site-account__avatar" aria-hidden="true"></span>
+          <span class="site-account__arrow" aria-hidden="true">▾</span>
+        </button>
+        <div class="site-account__panel" hidden="">
+          <div class="site-account__identity" dir="ltr">
+            <span class="site-account__label" dir="ltr">Вы вошли как</span>
+            <span class="site-account__name" dir="auto"></span>
+            <span class="site-account__email" dir="ltr"></span>
+          </div>
+          <div class="site-account__menu" id="account-menu" role="menu" aria-labelledby="account-button" dir="ltr">
+            <a class="site-account__item" role="menuitem" tabindex="-1" href="/dashboard/" data-account-dashboard="" dir="ltr">Моя панель управления</a>
+            <button type="button" class="site-account__item" role="menuitem" tabindex="-1" data-account-sign-out="" dir="ltr">Выйти</button>
+          </div>
+        </div>
+      </div>
       <div class="language-selector">
         <button type="button" class="language-selector__button" id="language-button" aria-label="Выберите язык" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="language-selector__flag" id="selected-flag"><img src="../assets/img/flags/flag-ru.svg" alt="RU" width="50" height="33"></span>

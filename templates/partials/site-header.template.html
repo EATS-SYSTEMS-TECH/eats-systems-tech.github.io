@@ -1,5 +1,6 @@
 <!-- Shared site navigation. Labels and URLs come from scripts/site-navigation.mjs. -->
 <header class="site-header" id="top">
+  <script>try{for(var i=0;i<sessionStorage.length;i++)if(/^firebase:authUser:[^:]+:\[DEFAULT\]$/.test(sessionStorage.key(i))){document.getElementById("top").classList.add("site-header--account");break}}catch(e){}</script>
   <nav class="nav" aria-label="Main navigation">
     <a href="/" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
       <img src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" class="nav__logo" width="416" height="96">
@@ -13,6 +14,23 @@
       <div class="topbar-nav"></div>
     </div>
     <a class="site-login__trigger" href="/login/">Log in</a>
+    <div class="site-account">
+      <button type="button" class="site-account__button" id="account-button" aria-label="Account menu" aria-haspopup="menu" aria-expanded="false" aria-controls="account-menu">
+        <span class="site-account__avatar" aria-hidden="true"></span>
+        <span class="site-account__arrow" aria-hidden="true">▾</span>
+      </button>
+      <div class="site-account__panel" hidden>
+        <div class="site-account__identity">
+          <span class="site-account__label">Signed in as</span>
+          <span class="site-account__name" dir="auto"></span>
+          <span class="site-account__email" dir="ltr"></span>
+        </div>
+        <div class="site-account__menu" id="account-menu" role="menu" aria-labelledby="account-button">
+          <a class="site-account__item" role="menuitem" tabindex="-1" href="/dashboard/" data-account-dashboard>My dashboard</a>
+          <button type="button" class="site-account__item" role="menuitem" tabindex="-1" data-account-sign-out>Sign out</button>
+        </div>
+      </div>
+    </div>
     <div class="language-selector">
       <button type="button" class="language-selector__button" id="language-button" aria-label="Select language">
         <span class="language-selector__flag" id="selected-flag"></span>

@@ -85,6 +85,7 @@
   <script src="../js/utils.js?v=20260402a" defer=""></script>
 
   <script src="../js/navigation.js?v=20261007a" defer=""></script>
+  <script src="../js/site-account.js?v=20261013a" defer=""></script>
   <script src="../js/hero.js?v=20261007b" defer=""></script>
 
   <script>window.accessibilityCopy = {"el":{"skipLink":"Μετάβαση στο κύριο περιεχόμενο","eyebrow":"Προσβασιμότητα","openButton":"Άνοιγμα μενού προσβασιμότητας","closeButton":"Κλείσιμο μενού προσβασιμότητας","title":"Μενού προσβασιμότητας","description":"Προσαρμόστε τον ιστότοπο στον τρόπο που διαβάζετε και περιηγείστε. Οι επιλογές σας αποθηκεύονται σε αυτή τη συσκευή.","reset":"Επαναφορά όλων","statusDefault":"Τυπική προβολή ιστότοπου","statusActive":"Ενεργές προσαρμογές: {count}","hideButton":"Απόκρυψη κουμπιού προσβασιμότητας έως την επαναφόρτωση της σελίδας","statementLink":"Δήλωση προσβασιμότητας","textSize":{"label":"Μέγεθος κειμένου","description":"Μεγέθυνση του κειμένου σε όλο τον ιστότοπο.","decrease":"Μικρότερο κείμενο","increase":"Μεγαλύτερο κείμενο","level":"Μέγεθος κειμένου {percent}%"},"options":{"highContrast":{"label":"Υψηλή αντίθεση","description":"Σκούρο κείμενο σε ανοιχτό φόντο με έντονα περιγράμματα."},"grayscale":{"label":"Κλίμακα του γκρι","description":"Προβολή του ιστότοπου χωρίς χρώματα."},"underlineLinks":{"label":"Επισήμανση συνδέσμων","description":"Υπογράμμιση και σήμανση κάθε συνδέσμου."},"readableFont":{"label":"Ευανάγνωστη γραμματοσειρά","description":"Απλή, πολύ ευανάγνωστη γραμματοσειρά."},"textSpacing":{"label":"Αποστάσεις κειμένου","description":"Περισσότερος χώρος ανάμεσα σε γραμμές, λέξεις και γράμματα."},"highlightHeadings":{"label":"Επισήμανση επικεφαλίδων","description":"Σήμανση των επικεφαλίδων ώστε να φαίνεται η δομή της σελίδας."},"bigCursor":{"label":"Μεγάλος δρομέας","description":"Μεγαλύτερος δείκτης ποντικιού."},"focusHighlight":{"label":"Έντονη ένδειξη εστίασης","description":"Παχύ περίγραμμα γύρω από το στοιχείο που έχει την εστίαση πληκτρολογίου."},"reducedMotion":{"label":"Διακοπή κινούμενων εικόνων","description":"Διακοπή κινούμενων εικόνων, μεταβάσεων και του βίντεο φόντου."}}}};</script>
@@ -369,11 +370,12 @@
     }
   ]
 }
-  </script><link rel="stylesheet" href="../css/site-header.css?v=20261007c"><link rel="stylesheet" href="../css/cookie-consent.css?v=20261007c"></head>
+  </script><link rel="stylesheet" href="../css/site-header.css?v=20261013a"><link rel="stylesheet" href="../css/cookie-consent.css?v=20261007c"></head>
 
 <body class="home-en">
   <a class="skip-link" href="#main-content">Μετάβαση στο κύριο περιεχόμενο</a>
   <header class="site-header" id="top">
+    <script>try{for(var i=0;i<sessionStorage.length;i++)if(/^firebase:authUser:[^:]+:\[DEFAULT\]$/.test(sessionStorage.key(i))){document.getElementById("top").classList.add("site-header--account");break}}catch(e){}</script>
     <nav class="nav" aria-label="Κύρια πλοήγηση">
       <a href="/el/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
         <img src="../assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" class="nav__logo" width="416" height="96">
@@ -386,7 +388,24 @@
       <div class="nav__links-wrapper" id="primary-navigation">
         <div class="topbar-nav"><a class="nav-link nav__link" href="/el/#how-it-works" dir="ltr">Πώς λειτουργεί</a><a class="nav-link nav__link" href="/el/#use-cases" dir="ltr">Περιπτώσεις χρήσης</a><a class="nav-link nav__link" href="/el/#wifigate-automation" dir="ltr">WIFIGATE Host</a><a class="nav-link nav__link" href="/el/#tutorial-videos" dir="ltr">Βίντεο εκμάθησης</a><a class="nav-link nav__link nav__contact-link" href="/el/#get-in-touch" dir="ltr">Μιλήστε μαζί μας</a></div>
       </div>
-      <a class="site-login__trigger" href="/login/" dir="ltr">Σύνδεση</a>
+      <a class="site-login__trigger" href="/el/login/" dir="ltr">Σύνδεση</a>
+      <div class="site-account">
+        <button type="button" class="site-account__button" id="account-button" aria-label="Μενού λογαριασμού" aria-haspopup="menu" aria-expanded="false" aria-controls="account-menu">
+          <span class="site-account__avatar" aria-hidden="true"></span>
+          <span class="site-account__arrow" aria-hidden="true">▾</span>
+        </button>
+        <div class="site-account__panel" hidden="">
+          <div class="site-account__identity" dir="ltr">
+            <span class="site-account__label" dir="ltr">Συνδεδεμένος λογαριασμός</span>
+            <span class="site-account__name" dir="auto"></span>
+            <span class="site-account__email" dir="ltr"></span>
+          </div>
+          <div class="site-account__menu" id="account-menu" role="menu" aria-labelledby="account-button" dir="ltr">
+            <a class="site-account__item" role="menuitem" tabindex="-1" href="/dashboard/" data-account-dashboard="" dir="ltr">Ο πίνακας ελέγχου μου</a>
+            <button type="button" class="site-account__item" role="menuitem" tabindex="-1" data-account-sign-out="" dir="ltr">Αποσύνδεση</button>
+          </div>
+        </div>
+      </div>
       <div class="language-selector">
         <button type="button" class="language-selector__button" id="language-button" aria-label="Επιλογή γλώσσας" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="language-selector__flag" id="selected-flag"><img src="../assets/img/flags/flag-gr.svg" alt="GR" width="50" height="33"></span>

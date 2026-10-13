@@ -152,6 +152,17 @@ async function loadHomeCopy(localeOptions) {
     }
   }
 
+  // The header's account menu keeps no English on a non-English page.
+  const englishAccount = reference.navigation.account;
+  for (const option of localeOptions) {
+    if (option.code === defaultLocale) continue;
+    for (const [key, value] of Object.entries(copies[option.code].navigation.account)) {
+      if (value.trim().toLowerCase() === englishAccount[key].trim().toLowerCase()) {
+        throw new Error(`Invalid homepage copy for ${option.code}: navigation.account.${key} is still English ("${value}")`);
+      }
+    }
+  }
+
   return copies;
 }
 
@@ -888,9 +899,23 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   $(".site-login__trigger").attr("href", buildPagePath(locale, "login"));
   $("#language-button").attr("aria-label", copy.selectLanguageLabel);
   setLanguageSelector($, homeData.localeOptions, locale, pageKey);
+  // The signed-in account menu (js/site-account.js). The dashboard speaks
+  // English and Hebrew; every other language opens it in English.
+  const account = copy.account;
+  $("#account-button").attr("aria-label", account.menu);
+  // The phone header keeps a left-to-right layout; the menu reads in the page
+  // language.
+  $(".site-account__identity, .site-account__menu").attr("dir", isRtl(locale) ? "rtl" : "ltr");
+  setLocalizedText($, $(".site-account__label"), account.signedInAs, locale);
+  setLocalizedText($, $("[data-account-dashboard]"), account.dashboard, locale);
+  $("[data-account-dashboard]").attr("href", locale === "he" ? "/dashboard/?lang=he" : "/dashboard/");
+  setLocalizedText($, $("[data-account-sign-out]"), account.signOut, locale);
   const prefix = buildAssetPrefix(locale, pageKey);
-  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20261007c">');
-  $("script[src*='js/navigation.js']").attr("src", prefix + "js/navigation.js?v=20261007a");
+  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20261013a">');
+  $("script[src*='js/site-account.js']").remove();
+  $("script[src*='js/navigation.js']")
+    .attr("src", prefix + "js/navigation.js?v=20261007a")
+    .after('\n  <script src="' + prefix + 'js/site-account.js?v=20261013a" defer></script>');
 }
 
 // JSON safe to embed in an inline <script>.

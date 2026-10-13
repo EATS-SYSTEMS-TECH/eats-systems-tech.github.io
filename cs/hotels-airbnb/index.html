@@ -38,6 +38,7 @@
   <link rel="stylesheet" href="../../css/niche.css?v=20261007b">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
+  <script src="../../js/site-account.js?v=20261013a" defer=""></script>
   <script>window.accessibilityCopy = {"cs":{"skipLink":"Přeskočit na hlavní obsah","eyebrow":"Přístupnost","openButton":"Otevřít nabídku přístupnosti","closeButton":"Zavřít nabídku přístupnosti","title":"Nabídka přístupnosti","description":"Přizpůsobte si web tomu, jak čtete a procházíte. Vaše volby se uloží v tomto zařízení.","reset":"Obnovit vše","statusDefault":"Standardní zobrazení webu","statusActive":"Aktivní úpravy: {count}","hideButton":"Skrýt tlačítko přístupnosti do opětovného načtení stránky","statementLink":"Prohlášení o přístupnosti","textSize":{"label":"Velikost textu","description":"Zvětšit text na celém webu.","decrease":"Menší text","increase":"Větší text","level":"Velikost textu {percent} %"},"options":{"highContrast":{"label":"Vysoký kontrast","description":"Tmavý text na světlém pozadí s výraznými okraji."},"grayscale":{"label":"Odstíny šedi","description":"Zobrazit web bez barev."},"underlineLinks":{"label":"Zvýraznit odkazy","description":"Podtrhnout a označit každý odkaz."},"readableFont":{"label":"Čitelné písmo","description":"Jednoduché, dobře čitelné písmo."},"textSpacing":{"label":"Rozestupy textu","description":"Více místa mezi řádky, slovy a písmeny."},"highlightHeadings":{"label":"Zvýraznit nadpisy","description":"Označit nadpisy, aby byla vidět struktura stránky."},"bigCursor":{"label":"Velký kurzor","description":"Větší ukazatel myši."},"focusHighlight":{"label":"Výrazný fokus","description":"Silný obrys kolem prvku, na kterém je fokus klávesnice."},"reducedMotion":{"label":"Zastavit animace","description":"Zastavit animace, přechody a video na pozadí."}}}};</script>
 
   <script src="../../js/language-selector.js?v=20261006a" defer=""></script><script src="../../js/accessibility.js?v=20261007a" defer=""></script>
@@ -298,12 +299,13 @@
     }
   ]
 }
-  </script><link rel="stylesheet" href="../../css/site-header.css?v=20261007c"><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261007c"></head>
+  </script><link rel="stylesheet" href="../../css/site-header.css?v=20261013a"><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261007c"></head>
 
 <body class="niche-page">
   <a class="skip-link" href="#main-content">Přeskočit na hlavní obsah</a>
 
   <header class="site-header" id="top">
+    <script>try{for(var i=0;i<sessionStorage.length;i++)if(/^firebase:authUser:[^:]+:\[DEFAULT\]$/.test(sessionStorage.key(i))){document.getElementById("top").classList.add("site-header--account");break}}catch(e){}</script>
     <nav class="nav" aria-label="Hlavní navigace">
       <a href="/cs/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
         <img src="../../assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" class="nav__logo" width="416" height="96">
@@ -316,7 +318,24 @@
       <div class="nav__links-wrapper" id="primary-navigation">
         <div class="topbar-nav"><a class="nav-link nav__link" href="/cs/#how-it-works" dir="ltr">Jak to funguje</a><a class="nav-link nav__link" href="/cs/#use-cases" dir="ltr">Využití</a><a class="nav-link nav__link" href="/cs/#wifigate-automation" dir="ltr">WIFIGATE Host</a><a class="nav-link nav__link" href="/cs/#tutorial-videos" dir="ltr">Výuková videa</a><a class="nav-link nav__link nav__contact-link" href="/cs/#get-in-touch" dir="ltr">Kontakt</a></div>
       </div>
-      <a class="site-login__trigger" href="/login/" dir="ltr">Přihlásit se</a>
+      <a class="site-login__trigger" href="/cs/login/" dir="ltr">Přihlásit se</a>
+      <div class="site-account">
+        <button type="button" class="site-account__button" id="account-button" aria-label="Nabídka účtu" aria-haspopup="menu" aria-expanded="false" aria-controls="account-menu">
+          <span class="site-account__avatar" aria-hidden="true"></span>
+          <span class="site-account__arrow" aria-hidden="true">▾</span>
+        </button>
+        <div class="site-account__panel" hidden="">
+          <div class="site-account__identity" dir="ltr">
+            <span class="site-account__label" dir="ltr">Přihlášený účet</span>
+            <span class="site-account__name" dir="auto"></span>
+            <span class="site-account__email" dir="ltr"></span>
+          </div>
+          <div class="site-account__menu" id="account-menu" role="menu" aria-labelledby="account-button" dir="ltr">
+            <a class="site-account__item" role="menuitem" tabindex="-1" href="/dashboard/" data-account-dashboard="" dir="ltr">Můj ovládací panel</a>
+            <button type="button" class="site-account__item" role="menuitem" tabindex="-1" data-account-sign-out="" dir="ltr">Odhlásit se</button>
+          </div>
+        </div>
+      </div>
       <div class="language-selector">
         <button type="button" class="language-selector__button" id="language-button" aria-label="Vybrat jazyk" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="language-selector__flag" id="selected-flag"><img src="../../assets/img/flags/flag-cz.svg" alt="CZ" width="50" height="33"></span>

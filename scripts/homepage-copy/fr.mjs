@@ -8,6 +8,12 @@ const copy = {
     automation: "WIFIGATE Host",
     productGuide: "Tutoriels vidéo",
     contact: "Nous contacter",
+    account: {
+      menu: "Menu du compte",
+      signedInAs: "Compte connecté",
+      dashboard: "Mon tableau de bord",
+      signOut: "Se déconnecter",
+    },
   },
   hero: {
     media: {"replay":"Revoir la vidéo","mute":"Couper le son de la vidéo","unmute":"Activer le son de la vidéo","pause":"Mettre la vidéo en pause","play":"Lire la vidéo"},
