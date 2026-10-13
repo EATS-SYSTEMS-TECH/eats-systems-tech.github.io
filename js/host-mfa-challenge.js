@@ -25,13 +25,20 @@ export function requestMfaChallenge(resolver, text = {}) {
   const status = dialog.querySelector("[role=status]");
   const submit = form.querySelector("button[type=submit]");
   status.textContent = "";
+  delete status.dataset.tone;
   code.value = "";
   dialog.showModal();
   code.focus();
   return new Promise((resolve, reject) => {
     let verifying = false;
+    // A pasted "123 456" or "123-456" becomes the six digits the field expects.
+    function digitsOnly() {
+      const digits = code.value.replace(/\D/g, "").slice(0, 6);
+      if (digits !== code.value) code.value = digits;
+    }
     function clean() {
       form.removeEventListener("submit", verify);
+      code.removeEventListener("input", digitsOnly);
       dialog.removeEventListener("cancel", cancel);
       dialog.querySelector("[data-cancel]").removeEventListener("click", cancel);
       dialog.close();
@@ -53,6 +60,7 @@ export function requestMfaChallenge(resolver, text = {}) {
       }
       verifying = true;
       submit.disabled = true;
+      status.dataset.tone = "info";
       status.textContent =
         text.verifying ??
         (document.documentElement.lang === "he" ? "מאמתים..." : "Verifying...");
@@ -65,6 +73,7 @@ export function requestMfaChallenge(resolver, text = {}) {
         clean();
         resolve(result);
       } catch (error) {
+        status.dataset.tone = "error";
         status.textContent = (text.errorMessage ?? authErrorMessage)(error);
         code.value = "";
         code.focus();
@@ -74,6 +83,7 @@ export function requestMfaChallenge(resolver, text = {}) {
       }
     }
     form.addEventListener("submit", verify);
+    code.addEventListener("input", digitsOnly);
     dialog.addEventListener("cancel", cancel);
     dialog.querySelector("[data-cancel]").addEventListener("click", cancel);
   });

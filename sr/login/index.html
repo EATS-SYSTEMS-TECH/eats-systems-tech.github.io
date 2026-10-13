@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>Пријава | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">Потврда помоћу апликације за аутентификацију</h2>
-        <p>Унесите тренутни код из апликације за аутентификацију да бисте довршили пријаву.</p>
-        <label>Апликација за аутентификацију<select name="factor" required></select></label>
-        <label
-          >Верификациони код<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">Потврда помоћу апликације за аутентификацију</h2>
+        <p id="challenge-text" class="mfa-dialog__text">Унесите тренутни код из апликације за аутентификацију да бисте довршили пријаву.</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>Апликација за аутентификацију</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>Верификациони код</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">Потврди</button
-          ><button type="button" data-cancel>Откажи</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">Потврди</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>Откажи</button>
         </div>
-        <p class="help-text">Изгубили сте приступ? Обратите се администратору платформе ради провере идентитета и враћања метода потврде.</p>
+        <p class="mfa-dialog__help">Изгубили сте приступ? Обратите се администратору платформе ради провере идентитета и враћања метода потврде.</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"Затвори","authenticatorN":"Апликација за аутентификацију {n}","verifying":"Потврђивање...","checking":"Проверавамо ваш приступ...","opening":"Отварамо контролну таблу...","signingIn":"Пријављивање...","humanReady":"Успели сте. Сада наставите уз Google или Apple.","accessUnavailable":"Тренутно није могуће проверити приступ. Покушајте поново.","gameTitle":"Нисам робот","gameInstruction":"Да бисте потврдили, превуците аутомобил до отворене капије","gameFooter":"Провера да сте човек · WIFIGATE","gameKeyboard":"Аутомобил је у траци {lane} од 3. Стрелице мењају траку, Enter покреће вожњу.","gameGate":"Капија {n}, {state}","gateOpen":"отворена","gateClosed":"затворена","gameRetry":"Не баш. Уђите у зелену капију.","gameLocked":"Превише покушаја. Покушајте поново за {s} с.","gameDone":"Потврђено. Нисте робот.","errorCancelled":"Пријава је отказана.","errorPopupBlocked":"Прегледач је блокирао прозор за пријаву.","errorInvalidCode":"Код је нетачан или је истекао.","errorMissingCode":"Унесите код из апликације за аутентификацију.","errorNetwork":"Повезивање није успело. Проверите мрежну везу.","errorMfaCancelled":"Потврда налога је отказана.","errorMfaUnsupported":"Овај налог нема подржану апликацију за аутентификацију.","errorUnverifiedEmail":"Користите потврђену имејл адресу коју је одобрио администратор.","errorUnconfigured":"Недостају подешавања за пријаву. Обратите се подршци.","errorServer":"Није могуће повезати се са WIFIGATE сервером. Покушајте поново.","errorSessionExpired":"Сесија је истекла. Пријавите се поново.","errorForbidden":"Приступ није дозвољен. Обратите се администратору система.","errorGeneric":"Нешто није у реду. Покушајте поново.","errorNoAccount":"Немате WIFIGATE налог. Обратите се подршци: {email}"}</script>

@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>כניסה | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">אימות באמצעות אפליקציית האימות</h2>
-        <p>יש להזין את הקוד הנוכחי מאפליקציית האימות כדי להשלים את ההתחברות.</p>
-        <label>אפליקציית אימות<select name="factor" required></select></label>
-        <label
-          >קוד אימות<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">אימות באמצעות אפליקציית האימות</h2>
+        <p id="challenge-text" class="mfa-dialog__text">יש להזין את הקוד הנוכחי מאפליקציית האימות כדי להשלים את ההתחברות.</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>אפליקציית אימות</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>קוד אימות</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">אימות</button
-          ><button type="button" data-cancel>ביטול</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">אימות</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>ביטול</button>
         </div>
-        <p class="help-text">איבדתם גישה? פנו למנהל הפלטפורמה לאימות זהות ושחזור אמצעי האימות.</p>
+        <p class="mfa-dialog__help">איבדתם גישה? פנו למנהל הפלטפורמה לאימות זהות ושחזור אמצעי האימות.</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"סגירה","authenticatorN":"אפליקציית אימות {n}","verifying":"מאמתים...","checking":"בודקים את הגישה שלך...","opening":"פותחים את לוח הבקרה...","signingIn":"מתחברים...","humanReady":"עברתם. עכשיו אפשר להמשיך עם Google או Apple.","accessUnavailable":"לא ניתן לבדוק גישה כרגע. נא לנסות שוב.","gameTitle":"אני לא רובוט","gameInstruction":"כדי לאשר, גררו את המכונית לשער הפתוח","gameFooter":"בדיקת אנושיות · WIFIGATE","gameKeyboard":"המכונית בנתיב {lane} מתוך 3. החיצים מחליפים נתיב, Enter נוסע.","gameGate":"שער {n}, {state}","gateOpen":"פתוח","gateClosed":"סגור","gameRetry":"לא בדיוק. היכנסו לשער הירוק.","gameLocked":"יותר מדי ניסיונות. נסו שוב בעוד {s} שניות.","gameDone":"אומת. אתם לא רובוט.","errorCancelled":"ההתחברות בוטלה.","errorPopupBlocked":"הדפדפן חסם את חלון ההתחברות.","errorInvalidCode":"הקוד שגוי או שפג תוקפו.","errorMissingCode":"יש להזין את הקוד מאפליקציית האימות.","errorNetwork":"לא ניתן להתחבר. יש לבדוק את החיבור לרשת.","errorMfaCancelled":"אימות החשבון בוטל.","errorMfaUnsupported":"אין בחשבון הזה אפליקציית אימות נתמכת.","errorUnverifiedEmail":"יש להשתמש באימייל המאומת שאושר על ידי המנהל.","errorUnconfigured":"הגדרות ההתחברות חסרות. נא לפנות לתמיכה.","errorServer":"לא ניתן להתחבר לשרת WIFIGATE. נא לנסות שוב.","errorSessionExpired":"פג תוקף ההתחברות. יש להתחבר שוב.","errorForbidden":"הגישה אינה מורשית. יש לפנות למנהל המערכת.","errorGeneric":"משהו השתבש. נא לנסות שוב.","errorNoAccount":"אין לך משתמש ב־WIFIGATE. נא לפנות לתמיכה: {email}"}</script>

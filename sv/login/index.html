@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>Logga in | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">Verifiera med autentiseringsappen</h2>
-        <p>Ange den aktuella koden från din autentiseringsapp för att slutföra inloggningen.</p>
-        <label>Autentiseringsapp<select name="factor" required></select></label>
-        <label
-          >Verifieringskod<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">Verifiera med autentiseringsappen</h2>
+        <p id="challenge-text" class="mfa-dialog__text">Ange den aktuella koden från din autentiseringsapp för att slutföra inloggningen.</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>Autentiseringsapp</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>Verifieringskod</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">Verifiera</button
-          ><button type="button" data-cancel>Avbryt</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">Verifiera</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>Avbryt</button>
         </div>
-        <p class="help-text">Har du förlorat åtkomsten? Kontakta plattformens administratör för att verifiera din identitet och återställa din autentiseringsmetod.</p>
+        <p class="mfa-dialog__help">Har du förlorat åtkomsten? Kontakta plattformens administratör för att verifiera din identitet och återställa din autentiseringsmetod.</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"Stäng","authenticatorN":"Autentiseringsapp {n}","verifying":"Verifierar...","checking":"Kontrollerar din åtkomst...","opening":"Öppnar kontrollpanelen...","signingIn":"Loggar in...","humanReady":"Godkänt! Fortsätt nu med Google eller Apple.","accessUnavailable":"Det går inte att kontrollera åtkomsten just nu. Försök igen.","gameTitle":"Jag är inte en robot","gameInstruction":"Bekräfta genom att dra bilen in i den öppna grinden","gameFooter":"Mänsklig kontroll · WIFIGATE","gameKeyboard":"Bilen är i fil {lane} av 3. Piltangenterna byter fil, Enter kör.","gameGate":"Grind {n}, {state}","gateOpen":"öppen","gateClosed":"stängd","gameRetry":"Inte riktigt. Kör in i den gröna grinden.","gameLocked":"För många försök. Försök igen om {s} sekunder.","gameDone":"Verifierad. Du är inte en robot.","errorCancelled":"Inloggningen avbröts.","errorPopupBlocked":"Webbläsaren blockerade inloggningsfönstret.","errorInvalidCode":"Koden är felaktig eller har gått ut.","errorMissingCode":"Ange koden från din autentiseringsapp.","errorNetwork":"Det går inte att ansluta. Kontrollera din nätverksanslutning.","errorMfaCancelled":"Verifieringen av kontot avbröts.","errorMfaUnsupported":"Det här kontot har ingen autentiseringsapp som stöds.","errorUnverifiedEmail":"Använd den verifierade e-postadressen som din administratör har godkänt.","errorUnconfigured":"Inloggningsinställningarna saknas. Kontakta kundtjänst.","errorServer":"Det går inte att nå WIFIGATE-servern. Försök igen.","errorSessionExpired":"Inloggningen har gått ut. Logga in igen.","errorForbidden":"Åtkomst nekad. Kontakta systemadministratören.","errorGeneric":"Något gick fel. Försök igen.","errorNoAccount":"Du har inget WIFIGATE-konto. Kontakta kundtjänst: {email}"}</script>

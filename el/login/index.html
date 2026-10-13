@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>Σύνδεση | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">Επαλήθευση με την εφαρμογή ελέγχου ταυτότητας</h2>
-        <p>Εισαγάγετε τον τρέχοντα κωδικό από την εφαρμογή ελέγχου ταυτότητας για να ολοκληρώσετε τη σύνδεση.</p>
-        <label>Εφαρμογή ελέγχου ταυτότητας<select name="factor" required></select></label>
-        <label
-          >Κωδικός επαλήθευσης<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">Επαλήθευση με την εφαρμογή ελέγχου ταυτότητας</h2>
+        <p id="challenge-text" class="mfa-dialog__text">Εισαγάγετε τον τρέχοντα κωδικό από την εφαρμογή ελέγχου ταυτότητας για να ολοκληρώσετε τη σύνδεση.</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>Εφαρμογή ελέγχου ταυτότητας</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>Κωδικός επαλήθευσης</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">Επαλήθευση</button
-          ><button type="button" data-cancel>Ακύρωση</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">Επαλήθευση</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>Ακύρωση</button>
         </div>
-        <p class="help-text">Χάσατε την πρόσβαση; Επικοινωνήστε με τον διαχειριστή της πλατφόρμας για επαλήθευση ταυτότητας και ανάκτηση της μεθόδου ελέγχου ταυτότητας.</p>
+        <p class="mfa-dialog__help">Χάσατε την πρόσβαση; Επικοινωνήστε με τον διαχειριστή της πλατφόρμας για επαλήθευση ταυτότητας και ανάκτηση της μεθόδου ελέγχου ταυτότητας.</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"Κλείσιμο","authenticatorN":"Εφαρμογή ελέγχου ταυτότητας {n}","verifying":"Επαλήθευση...","checking":"Έλεγχος της πρόσβασής σας...","opening":"Άνοιγμα του πίνακα ελέγχου...","signingIn":"Σύνδεση...","humanReady":"Περάσατε τον έλεγχο. Τώρα συνεχίστε με Google ή Apple.","accessUnavailable":"Δεν είναι δυνατός ο έλεγχος πρόσβασης αυτή τη στιγμή. Δοκιμάστε ξανά.","gameTitle":"Δεν είμαι ρομπότ","gameInstruction":"Για επιβεβαίωση, σύρετε το αυτοκίνητο στην ανοιχτή πύλη","gameFooter":"Έλεγχος ανθρώπου · WIFIGATE","gameKeyboard":"Το αυτοκίνητο βρίσκεται στη λωρίδα {lane} από 3. Τα βέλη αλλάζουν λωρίδα, το Enter το κινεί.","gameGate":"Πύλη {n}, {state}","gateOpen":"ανοιχτή","gateClosed":"κλειστή","gameRetry":"Όχι ακριβώς. Μπείτε στην πράσινη πύλη.","gameLocked":"Πάρα πολλές προσπάθειες. Δοκιμάστε ξανά σε {s} δευτερόλεπτα.","gameDone":"Επαληθεύτηκε. Δεν είστε ρομπότ.","errorCancelled":"Η σύνδεση ακυρώθηκε.","errorPopupBlocked":"Το πρόγραμμα περιήγησης απέκλεισε το παράθυρο σύνδεσης.","errorInvalidCode":"Ο κωδικός είναι λανθασμένος ή έχει λήξει.","errorMissingCode":"Εισαγάγετε τον κωδικό από την εφαρμογή ελέγχου ταυτότητας.","errorNetwork":"Δεν είναι δυνατή η σύνδεση. Ελέγξτε τη σύνδεση δικτύου.","errorMfaCancelled":"Η επαλήθευση του λογαριασμού ακυρώθηκε.","errorMfaUnsupported":"Αυτός ο λογαριασμός δεν έχει υποστηριζόμενη εφαρμογή ελέγχου ταυτότητας.","errorUnverifiedEmail":"Χρησιμοποιήστε την επαληθευμένη διεύθυνση ηλεκτρονικού ταχυδρομείου που έχει εγκρίνει ο διαχειριστής.","errorUnconfigured":"Λείπουν οι ρυθμίσεις σύνδεσης. Επικοινωνήστε με την υποστήριξη.","errorServer":"Δεν είναι δυνατή η σύνδεση με τον διακομιστή WIFIGATE. Δοκιμάστε ξανά.","errorSessionExpired":"Η σύνδεση έληξε. Συνδεθείτε ξανά.","errorForbidden":"Η πρόσβαση δεν επιτρέπεται. Επικοινωνήστε με τον διαχειριστή συστήματος.","errorGeneric":"Κάτι πήγε στραβά. Δοκιμάστε ξανά.","errorNoAccount":"Δεν έχετε λογαριασμό WIFIGATE. Επικοινωνήστε με την υποστήριξη: {email}"}</script>

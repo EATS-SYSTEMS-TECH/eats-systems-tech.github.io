@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>Iniciar sesión | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">Verificación con la app de autenticación</h2>
-        <p>Introduce el código actual de tu app de autenticación para completar el inicio de sesión.</p>
-        <label>App de autenticación<select name="factor" required></select></label>
-        <label
-          >Código de verificación<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">Verificación con la app de autenticación</h2>
+        <p id="challenge-text" class="mfa-dialog__text">Introduce el código actual de tu app de autenticación para completar el inicio de sesión.</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>App de autenticación</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>Código de verificación</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">Verificar</button
-          ><button type="button" data-cancel>Cancelar</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">Verificar</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>Cancelar</button>
         </div>
-        <p class="help-text">¿Perdiste el acceso? Contacta con el administrador de la plataforma para verificar tu identidad y recuperar tu método de verificación.</p>
+        <p class="mfa-dialog__help">¿Perdiste el acceso? Contacta con el administrador de la plataforma para verificar tu identidad y recuperar tu método de verificación.</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"Cerrar","authenticatorN":"App de autenticación {n}","verifying":"Verificando...","checking":"Comprobando tu acceso...","opening":"Abriendo el panel de control...","signingIn":"Iniciando sesión...","humanReady":"Superado. Ahora puedes continuar con Google o Apple.","accessUnavailable":"No se puede comprobar el acceso en este momento. Inténtalo de nuevo.","gameTitle":"No soy un robot","gameInstruction":"Para confirmar, arrastra el coche hasta la puerta abierta","gameFooter":"Verificación humana · WIFIGATE","gameKeyboard":"El coche está en el carril {lane} de 3. Las flechas cambian de carril y Enter avanza.","gameGate":"Puerta {n}, {state}","gateOpen":"abierta","gateClosed":"cerrada","gameRetry":"Casi. Entra por la puerta verde.","gameLocked":"Demasiados intentos. Vuelve a intentarlo en {s} segundos.","gameDone":"Verificado. No eres un robot.","errorCancelled":"Se canceló el inicio de sesión.","errorPopupBlocked":"El navegador bloqueó la ventana de inicio de sesión.","errorInvalidCode":"El código es incorrecto o ha caducado.","errorMissingCode":"Introduce el código de tu app de autenticación.","errorNetwork":"No se puede conectar. Comprueba tu conexión a la red.","errorMfaCancelled":"Se canceló la verificación de la cuenta.","errorMfaUnsupported":"Esta cuenta no tiene ninguna app de autenticación compatible.","errorUnverifiedEmail":"Usa el correo electrónico verificado que aprobó el administrador.","errorUnconfigured":"Falta la configuración de inicio de sesión. Contacta con el soporte.","errorServer":"No se puede conectar con el servidor de WIFIGATE. Inténtalo de nuevo.","errorSessionExpired":"La sesión ha caducado. Vuelve a iniciar sesión.","errorForbidden":"Acceso no autorizado. Contacta con el administrador del sistema.","errorGeneric":"Algo salió mal. Inténtalo de nuevo.","errorNoAccount":"No tienes una cuenta de WIFIGATE. Contacta con el soporte: {email}"}</script>

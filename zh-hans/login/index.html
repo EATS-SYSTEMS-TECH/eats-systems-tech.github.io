@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>登录 | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">通过身份验证器应用验证</h2>
-        <p>请输入身份验证器应用中的当前验证码以完成登录。</p>
-        <label>身份验证器应用<select name="factor" required></select></label>
-        <label
-          >验证码<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">通过身份验证器应用验证</h2>
+        <p id="challenge-text" class="mfa-dialog__text">请输入身份验证器应用中的当前验证码以完成登录。</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>身份验证器应用</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>验证码</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">验证</button
-          ><button type="button" data-cancel>取消</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">验证</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>取消</button>
         </div>
-        <p class="help-text">无法访问？请联系平台管理员验证身份并恢复验证方式。</p>
+        <p class="mfa-dialog__help">无法访问？请联系平台管理员验证身份并恢复验证方式。</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"关闭","authenticatorN":"身份验证器应用 {n}","verifying":"正在验证...","checking":"正在检查您的访问权限...","opening":"正在打开控制面板...","signingIn":"正在登录...","humanReady":"验证已通过。现在可以通过 Google 或 Apple 继续。","accessUnavailable":"暂时无法检查访问权限，请重试。","gameTitle":"我不是机器人","gameInstruction":"请将汽车拖入打开的闸门以确认","gameFooter":"人机验证 · WIFIGATE","gameKeyboard":"汽车位于第 {lane} 条车道（共 3 条）。方向键切换车道，按 Enter 行驶。","gameGate":"闸门 {n}，{state}","gateOpen":"已打开","gateClosed":"已关闭","gameRetry":"差一点。请驶入绿色闸门。","gameLocked":"尝试次数过多，请在 {s} 秒后重试。","gameDone":"验证成功。您不是机器人。","errorCancelled":"登录已取消。","errorPopupBlocked":"浏览器拦截了登录窗口。","errorInvalidCode":"验证码错误或已过期。","errorMissingCode":"请输入身份验证器应用中的验证码。","errorNetwork":"无法连接，请检查网络连接。","errorMfaCancelled":"账号验证已取消。","errorMfaUnsupported":"此账号没有受支持的身份验证器应用。","errorUnverifiedEmail":"请使用经管理员批准的已验证邮箱。","errorUnconfigured":"缺少登录设置，请联系支持团队。","errorServer":"无法连接到 WIFIGATE 服务器，请重试。","errorSessionExpired":"会话已过期，请重新登录。","errorForbidden":"无访问权限，请联系系统管理员。","errorGeneric":"出了点问题，请重试。","errorNoAccount":"您没有 WIFIGATE 账户，请联系支持团队：{email}"}</script>

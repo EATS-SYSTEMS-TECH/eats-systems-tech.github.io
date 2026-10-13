@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>Log masuk | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">Pengesahan dengan apl pengesah</h2>
-        <p>Masukkan kod semasa daripada apl pengesah untuk melengkapkan log masuk.</p>
-        <label>Apl pengesah<select name="factor" required></select></label>
-        <label
-          >Kod pengesahan<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">Pengesahan dengan apl pengesah</h2>
+        <p id="challenge-text" class="mfa-dialog__text">Masukkan kod semasa daripada apl pengesah untuk melengkapkan log masuk.</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>Apl pengesah</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>Kod pengesahan</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">Sahkan</button
-          ><button type="button" data-cancel>Batal</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">Sahkan</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>Batal</button>
         </div>
-        <p class="help-text">Hilang akses? Hubungi pentadbir platform untuk mengesahkan identiti dan memulihkan kaedah pengesahan anda.</p>
+        <p class="mfa-dialog__help">Hilang akses? Hubungi pentadbir platform untuk mengesahkan identiti dan memulihkan kaedah pengesahan anda.</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"Tutup","authenticatorN":"Apl pengesah {n}","verifying":"Mengesahkan...","checking":"Menyemak akses anda...","opening":"Membuka papan pemuka...","signingIn":"Sedang log masuk...","humanReady":"Berjaya. Sekarang teruskan dengan Google atau Apple.","accessUnavailable":"Akses tidak dapat disemak sekarang. Sila cuba lagi.","gameTitle":"Saya bukan robot","gameInstruction":"Untuk mengesahkan, seret kereta ke pintu pagar yang terbuka","gameFooter":"Semakan manusia · WIFIGATE","gameKeyboard":"Kereta di lorong {lane} daripada 3. Kekunci anak panah menukar lorong, Enter untuk memandu.","gameGate":"Pintu pagar {n}, {state}","gateOpen":"terbuka","gateClosed":"tertutup","gameRetry":"Hampir. Pandu masuk ke pintu pagar hijau.","gameLocked":"Terlalu banyak cubaan. Cuba lagi dalam {s} saat.","gameDone":"Disahkan. Anda bukan robot.","errorCancelled":"Log masuk dibatalkan.","errorPopupBlocked":"Pelayar menyekat tetingkap log masuk.","errorInvalidCode":"Kod tidak betul atau telah tamat tempoh.","errorMissingCode":"Masukkan kod daripada apl pengesah.","errorNetwork":"Tidak dapat menyambung. Semak sambungan rangkaian anda.","errorMfaCancelled":"Pengesahan akaun dibatalkan.","errorMfaUnsupported":"Akaun ini tiada apl pengesah yang disokong.","errorUnverifiedEmail":"Gunakan e-mel disahkan yang diluluskan oleh pentadbir.","errorUnconfigured":"Tetapan log masuk tiada. Hubungi sokongan.","errorServer":"Tidak dapat menghubungi pelayan WIFIGATE. Sila cuba lagi.","errorSessionExpired":"Sesi log masuk telah tamat. Log masuk semula.","errorForbidden":"Akses tidak dibenarkan. Hubungi pentadbir sistem.","errorGeneric":"Ada sesuatu yang tidak kena. Sila cuba lagi.","errorNoAccount":"Anda tiada akaun WIFIGATE. Hubungi sokongan: {email}"}</script>

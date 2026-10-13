@@ -7,9 +7,9 @@
     <meta name="referrer" content="no-referrer" />
     <title>Conectare | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013a" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261013b" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261013a"></script>
+    <script type="module" src="/js/host-login.js?v=20261013b"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -517,27 +517,40 @@
         </ul>
       </div>
     </dialog>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title">Verificare cu aplicația de autentificare</h2>
-        <p>Introduceți codul curent din aplicația de autentificare pentru a finaliza conectarea.</p>
-        <label>Aplicație de autentificare<select name="factor" required></select></label>
-        <label
-          >Cod de verificare<input
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title" aria-describedby="challenge-text">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2 id="challenge-title" class="mfa-dialog__title">Verificare cu aplicația de autentificare</h2>
+        <p id="challenge-text" class="mfa-dialog__text">Introduceți codul curent din aplicația de autentificare pentru a finaliza conectarea.</p>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span>Aplicație de autentificare</span><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span>Cod de verificare</span
+          ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit">Verificați</button
-          ><button type="button" data-cancel>Anulați</button>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary">Verificați</button
+          ><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel>Anulați</button>
         </div>
-        <p class="help-text">Ați pierdut accesul? Contactați administratorul platformei pentru verificarea identității și recuperarea metodei de autentificare.</p>
+        <p class="mfa-dialog__help">Ați pierdut accesul? Contactați administratorul platformei pentru verificarea identității și recuperarea metodei de autentificare.</p>
       </form>
     </dialog>
     <script type="application/json" id="login-copy">{"close":"Închideți","authenticatorN":"Aplicație de autentificare {n}","verifying":"Se verifică...","checking":"Se verifică accesul...","opening":"Se deschide panoul de control...","signingIn":"Se realizează conectarea...","humanReady":"Ați trecut verificarea. Acum continuați cu Google sau Apple.","accessUnavailable":"Accesul nu poate fi verificat acum. Încercați din nou.","gameTitle":"Nu sunt robot","gameInstruction":"Pentru confirmare, trageți mașina în poarta deschisă","gameFooter":"Verificare umană · WIFIGATE","gameKeyboard":"Mașina este pe banda {lane} din 3. Săgețile schimbă banda, Enter pornește.","gameGate":"Poarta {n}, {state}","gateOpen":"deschisă","gateClosed":"închisă","gameRetry":"Nu chiar. Intrați în poarta verde.","gameLocked":"Prea multe încercări. Încercați din nou peste {s} secunde.","gameDone":"Verificat. Nu sunteți robot.","errorCancelled":"Conectarea a fost anulată.","errorPopupBlocked":"Navigatorul web a blocat fereastra de conectare.","errorInvalidCode":"Codul este incorect sau a expirat.","errorMissingCode":"Introduceți codul din aplicația de autentificare.","errorNetwork":"Nu se poate realiza conexiunea. Verificați conexiunea la rețea.","errorMfaCancelled":"Verificarea contului a fost anulată.","errorMfaUnsupported":"Acest cont nu are o aplicație de autentificare acceptată.","errorUnverifiedEmail":"Folosiți adresa de e-mail verificată, aprobată de administrator.","errorUnconfigured":"Setările de conectare lipsesc. Contactați asistența.","errorServer":"Serverul WIFIGATE nu poate fi accesat. Încercați din nou.","errorSessionExpired":"Conectarea a expirat. Conectați-vă din nou.","errorForbidden":"Accesul nu este permis. Contactați administratorul de sistem.","errorGeneric":"A apărut o problemă. Încercați din nou.","errorNoAccount":"Nu aveți un cont WIFIGATE. Contactați asistența: {email}"}</script>
