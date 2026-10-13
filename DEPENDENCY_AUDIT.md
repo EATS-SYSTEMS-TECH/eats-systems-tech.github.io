@@ -14,12 +14,11 @@ The site is static HTML with a bundled Axios API client in `js/api/index.js`.
 
 The high-severity `sharp` advisory found during this update was addressed by
 upgrading `sharp` to `0.35.5`. The remaining moderate findings are in the
-development dependency tree; the CI gate continues to reject high/critical
+development dependency tree; the dependency check rejects high/critical
 findings.
 
-## CI gate
+## Dependency check
 
-`.github/workflows/dependency-audit.yml` runs `npm ci` and
-`npm audit --audit-level=high`, failing the build on any high or critical
-advisory. Because there are no accepted exceptions, no allow-list is needed; if
+Run locally before each release: `npm ci` and `npm audit --audit-level=high`.
+Any high or critical advisory blocks the release. Because there are no accepted exceptions, no allow-list is needed; if
 one is ever required, adopt the allow-list gate used by the mobile app.
