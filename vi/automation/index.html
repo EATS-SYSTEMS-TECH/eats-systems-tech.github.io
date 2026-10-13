@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="../../css/automation.css?v=20261007c">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261007a" defer=""></script>
+  <script src="../../js/site-account.js?v=20261013a" defer=""></script>
   <script>window.accessibilityCopy = {"vi":{"skipLink":"Chuyển đến nội dung chính","eyebrow":"Hỗ trợ tiếp cận","openButton":"Mở menu hỗ trợ tiếp cận","closeButton":"Đóng menu hỗ trợ tiếp cận","title":"Menu hỗ trợ tiếp cận","description":"Điều chỉnh trang web theo cách bạn đọc và điều hướng. Lựa chọn của bạn được lưu trên thiết bị này.","reset":"Đặt lại tất cả","statusDefault":"Chế độ xem chuẩn của trang","statusActive":"Đang bật {count} điều chỉnh","hideButton":"Ẩn nút hỗ trợ tiếp cận cho đến khi tải lại trang","statementLink":"Tuyên bố về hỗ trợ tiếp cận","textSize":{"label":"Cỡ chữ","description":"Phóng to chữ trên toàn bộ trang web.","decrease":"Chữ nhỏ hơn","increase":"Chữ lớn hơn","level":"Cỡ chữ {percent}%"},"options":{"highContrast":{"label":"Độ tương phản cao","description":"Chữ tối trên nền sáng với đường viền rõ nét."},"grayscale":{"label":"Thang độ xám","description":"Hiển thị trang web không có màu."},"underlineLinks":{"label":"Làm nổi bật liên kết","description":"Gạch chân và đánh dấu mọi liên kết."},"readableFont":{"label":"Phông chữ dễ đọc","description":"Phông chữ đơn giản, rất dễ đọc."},"textSpacing":{"label":"Giãn cách văn bản","description":"Thêm khoảng cách giữa các dòng, từ và chữ cái."},"highlightHeadings":{"label":"Làm nổi bật tiêu đề","description":"Đánh dấu tiêu đề để thể hiện cấu trúc trang."},"bigCursor":{"label":"Con trỏ lớn","description":"Con trỏ chuột lớn hơn."},"focusHighlight":{"label":"Tiêu điểm rõ ràng","description":"Đường viền dày quanh phần tử đang có tiêu điểm bàn phím."},"reducedMotion":{"label":"Dừng hoạt ảnh","description":"Dừng hoạt ảnh, hiệu ứng chuyển tiếp và video nền."}}}};</script>
 
   <script src="../../js/language-selector.js?v=20261006a" defer=""></script><script src="../../js/accessibility.js?v=20261007a" defer=""></script>
@@ -270,12 +271,13 @@
     }
   ]
 }
-  </script><link rel="stylesheet" href="../../css/site-header.css?v=20261007c"><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261007c"></head>
+  </script><link rel="stylesheet" href="../../css/site-header.css?v=20261013a"><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261007c"></head>
 
 <body class="niche-page wa-page">
   <a class="skip-link" href="#main-content">Chuyển đến nội dung chính</a>
 
   <header class="site-header" id="top">
+    <script>try{for(var i=0;i<sessionStorage.length;i++)if(/^firebase:authUser:[^:]+:\[DEFAULT\]$/.test(sessionStorage.key(i))){document.getElementById("top").classList.add("site-header--account");break}}catch(e){}</script>
     <nav class="nav" aria-label="Điều hướng chính">
       <a href="/vi/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
         <img src="../../assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" class="nav__logo" width="416" height="96">
@@ -288,7 +290,24 @@
       <div class="nav__links-wrapper" id="primary-navigation">
         <div class="topbar-nav"><a class="nav-link nav__link" href="/vi/#how-it-works" dir="ltr">Cách hoạt động</a><a class="nav-link nav__link" href="/vi/#use-cases" dir="ltr">Tình huống sử dụng</a><a class="nav-link nav__link" href="/vi/#wifigate-automation" dir="ltr">WIFIGATE Host</a><a class="nav-link nav__link" href="/vi/#tutorial-videos" dir="ltr">Video hướng dẫn</a><a class="nav-link nav__link nav__contact-link" href="/vi/#get-in-touch" dir="ltr">Liên hệ</a></div>
       </div>
-      <a class="site-login__trigger" href="/login/" dir="ltr">Đăng nhập</a>
+      <a class="site-login__trigger" href="/vi/login/" dir="ltr">Đăng nhập</a>
+      <div class="site-account">
+        <button type="button" class="site-account__button" id="account-button" aria-label="Menu tài khoản" aria-haspopup="menu" aria-expanded="false" aria-controls="account-menu">
+          <span class="site-account__avatar" aria-hidden="true"></span>
+          <span class="site-account__arrow" aria-hidden="true">▾</span>
+        </button>
+        <div class="site-account__panel" hidden="">
+          <div class="site-account__identity" dir="ltr">
+            <span class="site-account__label" dir="ltr">Đã đăng nhập bằng</span>
+            <span class="site-account__name" dir="auto"></span>
+            <span class="site-account__email" dir="ltr"></span>
+          </div>
+          <div class="site-account__menu" id="account-menu" role="menu" aria-labelledby="account-button" dir="ltr">
+            <a class="site-account__item" role="menuitem" tabindex="-1" href="/dashboard/" data-account-dashboard="" dir="ltr">Bảng điều khiển của tôi</a>
+            <button type="button" class="site-account__item" role="menuitem" tabindex="-1" data-account-sign-out="" dir="ltr">Đăng xuất</button>
+          </div>
+        </div>
+      </div>
       <div class="language-selector">
         <button type="button" class="language-selector__button" id="language-button" aria-label="Chọn ngôn ngữ" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="language-selector__flag" id="selected-flag"><img src="../../assets/img/flags/flag-vn.svg" alt="VN" width="50" height="33"></span>

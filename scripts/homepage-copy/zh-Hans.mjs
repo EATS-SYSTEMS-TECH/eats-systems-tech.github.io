@@ -8,6 +8,12 @@ const copy = {
     automation: "WIFIGATE Host",
     productGuide: "教程视频",
     contact: "联系我们",
+    account: {
+      menu: "账户菜单",
+      signedInAs: "当前登录账户",
+      dashboard: "我的控制面板",
+      signOut: "退出登录",
+    },
   },
   hero: {
     media: {"replay":"重新播放视频","mute":"视频静音","unmute":"取消视频静音","pause":"暂停视频","play":"播放视频"},

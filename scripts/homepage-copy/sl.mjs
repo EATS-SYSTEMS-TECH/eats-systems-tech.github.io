@@ -8,6 +8,12 @@ const copy = {
     automation: "WIFIGATE Host",
     productGuide: "Video navodila",
     contact: "Kontakt",
+    account: {
+      menu: "Meni računa",
+      signedInAs: "Prijavljeni ste kot",
+      dashboard: "Moja nadzorna plošča",
+      signOut: "Odjava",
+    },
   },
   hero: {
     media: {"replay":"Znova predvajaj video","mute":"Izklopi zvok videa","unmute":"Vklopi zvok videa","pause":"Začasno ustavi video","play":"Predvajaj video"},

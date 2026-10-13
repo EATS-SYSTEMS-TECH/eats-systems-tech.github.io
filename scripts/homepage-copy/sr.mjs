@@ -8,6 +8,12 @@
     automation: "WIFIGATE Host",
     productGuide: "Видео упутства",
     contact: "Контактирајте нас",
+    account: {
+      menu: "Мени налога",
+      signedInAs: "Пријављени сте као",
+      dashboard: "Моја контролна табла",
+      signOut: "Одјава",
+    },
   },
   hero: {
     media: {"replay":"Пусти видео поново","mute":"Искључи звук видеа","unmute":"Укључи звук видеа","pause":"Паузирај видео","play":"Пусти видео"},

@@ -8,6 +8,12 @@ const copy = {
     automation: "WIFIGATE Host",
     productGuide: "Oktatóvideók",
     contact: "Kapcsolat",
+    account: {
+      menu: "Fiókmenü",
+      signedInAs: "Bejelentkezett fiók",
+      dashboard: "Saját irányítópult",
+      signOut: "Kijelentkezés",
+    },
   },
   hero: {
     media: {"replay":"Videó újrajátszása","mute":"Videó némítása","unmute":"Videó hangjának bekapcsolása","pause":"Videó szüneteltetése","play":"Videó lejátszása"},

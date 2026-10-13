@@ -8,6 +8,12 @@ const copy = {
     automation: "WIFIGATE Host",
     productGuide: "チュートリアル動画",
     contact: "お問い合わせ",
+    account: {
+      menu: "アカウントメニュー",
+      signedInAs: "ログイン中のアカウント",
+      dashboard: "マイダッシュボード",
+      signOut: "ログアウト",
+    },
   },
   hero: {
     media: {"replay":"動画をもう一度再生","mute":"動画をミュート","unmute":"動画のミュートを解除","pause":"動画を一時停止","play":"動画を再生"},
