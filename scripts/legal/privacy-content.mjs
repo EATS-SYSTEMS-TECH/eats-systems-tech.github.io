@@ -11,7 +11,7 @@ export const privacy = {
     title: "Privacy Policy",
     subtitle:
       "This Privacy Policy explains what personal data WIFIGATE processes, why, with whom it is shared, how long it is kept, and the choices and rights you have.",
-    updated: "Effective date: October 6, 2026",
+    updated: "Effective date: October 13, 2026",
     owner: "Operator: EATS SYSTEMS TECH",
     sections: [
       {
@@ -32,7 +32,7 @@ export const privacy = {
               "The gate controller works over Bluetooth Low Energy and has no internet connection. The residents, guests and access history stored on a controller stay on that controller and are not sent to us.",
               "Personal data you keep in the app is stored on your phone in encrypted form.",
               "Our servers receive only what is needed to run your account, the web portal and firmware updates, and usage statistics that contain no advertising identifiers.",
-              "You can delete your account at any time in the app or by email, as described in section 11.",
+              "You can delete your account at any time in the app, on the website or by email, as described in section 11.",
             ],
           },
         ],
@@ -140,6 +140,7 @@ export const privacy = {
         title: "11. Deleting your account",
         blocks: [
           "In the app: open your profile and tap Delete account. You will be asked to sign in again to confirm. Your account is deleted from our authentication service, your Apple sign-in authorisation is revoked if you used Apple, and your profile, credentials and app data are erased from that phone.",
+          "On the website: sign in at wifigate.io, open your dashboard and choose Delete account. You type your email to confirm and may be asked to sign in again. Every subscription of an organization you alone own is cancelled automatically and that organization is closed; in an organization you share with other owners, only the products you alone own are cancelled. Your user is then removed from WIFIGATE systems: your memberships, portal access and profile are erased and your account is deleted from our authentication service.",
           "Without the app: email support@wifigate.io from the email address of your account with the subject \"Delete my WIFIGATE account\". We will delete your account and any portal data within 30 days and confirm by email.",
           "Account deletion does not remove you from gate controllers, because that data is held on the controllers. Ask the gate's administrator to delete you. Usage statistics are kept only for the retention period described in section 8, and we keep data where the law requires it.",
         ],
@@ -180,7 +181,7 @@ export const privacy = {
     title: "מדיניות פרטיות",
     subtitle:
       "מדיניות פרטיות זו מסבירה איזה מידע אישי WIFIGATE מעבדת, לשם מה, עם מי הוא משותף, כמה זמן הוא נשמר, ואילו בחירות וזכויות עומדות לרשותכם.",
-    updated: "תאריך תחילה: 6 באוקטובר 2026",
+    updated: "תאריך תחילה: 13 באוקטובר 2026",
     owner: "המפעילה: EATS SYSTEMS TECH",
     sections: [
       {
@@ -201,7 +202,7 @@ export const privacy = {
               "בקר השער פועל באמצעות Bluetooth Low Energy ואין לו חיבור לאינטרנט. הדיירים, האורחים והיסטוריית הכניסות השמורים בבקר נשארים בבקר ואינם נשלחים אלינו.",
               "מידע אישי שאתם שומרים באפליקציה נשמר בטלפון שלכם בצורה מוצפנת.",
               "השרתים שלנו מקבלים רק את מה שנדרש להפעלת החשבון, הפורטל ועדכוני הקושחה, וכן סטטיסטיקות שימוש שאינן כוללות מזהי פרסום.",
-              "תוכלו למחוק את החשבון בכל עת באפליקציה או בדוא\"ל, כמתואר בסעיף 11.",
+              "תוכלו למחוק את החשבון בכל עת באפליקציה, באתר או בדוא\"ל, כמתואר בסעיף 11.",
             ],
           },
         ],
@@ -309,6 +310,7 @@ export const privacy = {
         title: "11. מחיקת החשבון",
         blocks: [
           "באפליקציה: פתחו את הפרופיל והקישו על מחיקת חשבון. תתבקשו להיכנס שוב לאישור. החשבון יימחק משירות הזיהוי שלנו, הרשאת הכניסה של Apple תבוטל אם השתמשתם ב‑Apple, והפרופיל, האישורים ונתוני האפליקציה יימחקו מאותו טלפון.",
+          "באתר: התחברו ב‑wifigate.io, פתחו את לוח הבקרה ובחרו מחיקת חשבון. מקלידים את כתובת הדוא\"ל לאישור, וייתכן שתתבקשו להתחבר שוב. כל מנוי של ארגון שרק אתם הבעלים שלו מבוטל אוטומטית והארגון נסגר; בארגון שיש לו בעלים נוספים מבוטלים רק המוצרים שרק אתם הבעלים שלהם. לאחר מכן המשתמש שלכם מוסר ממערכות WIFIGATE: החברות בארגונים, הגישה לפורטל והפרופיל נמחקים, והחשבון נמחק משירות הזיהוי שלנו.",
           "ללא האפליקציה: שלחו דוא\"ל אל support@wifigate.io מכתובת הדוא\"ל של החשבון, עם הנושא \"Delete my WIFIGATE account\". נמחק את החשבון ואת נתוני הפורטל בתוך 30 יום ונאשר זאת בדוא\"ל.",
           "מחיקת החשבון אינה מסירה אתכם מבקרי שערים, משום שמידע זה שמור בבקרים עצמם. בקשו ממנהל השער למחוק אתכם. סטטיסטיקות שימוש נשמרות רק לתקופה המתוארת בסעיף 8, ואנו שומרים מידע כאשר הדין מחייב זאת.",
         ],

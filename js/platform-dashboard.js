@@ -1,9 +1,14 @@
-import { getPlatformProfile } from "./api/index.js";
+import {
+  getPlatformProfile,
+  getAccountDeletion,
+  deleteAccount,
+} from "./api/index.js";
 import {
   initializeSiteAuth,
   reauthenticate,
   beginTotpEnrollment,
   finishTotpEnrollment,
+  signOut,
 } from "./site-auth.js";
 import {
   parsePlatformIdentity,
@@ -29,6 +34,8 @@ let session;
 let generation = 0;
 let enrollmentSecret;
 let actionBusy = false;
+let accountDeleted = false;
+let deletionKey;
 
 document.documentElement.lang = language;
 document.documentElement.dir = language === "he" ? "rtl" : "ltr";
@@ -47,7 +54,11 @@ if (languageMenu) {
     location.assign(url.href);
   });
 }
-if (language === "he") $(".platform-header .brand").href = "/he/";
+if (language === "he") {
+  $(".platform-header .brand").href = "/he/";
+  const home = $("#account-deleted-home");
+  if (home) home.href = "/he/";
+}
 if (language === "he") {
   const translations = {
     scan: "סרקו את קוד ה־QR באפליקציית האימות, או הזינו את מפתח ההגדרה ידנית.",
@@ -84,6 +95,10 @@ function clearPrivate() {
   $("#product-switcher").replaceChildren();
   $("#platform-security").hidden = true;
   $("#platform-account").textContent = "";
+  const avatar = $("#platform-avatar");
+  if (avatar) avatar.textContent = "";
+  const panel = $("#platform-account-panel");
+  if (panel) panel.hidden = true;
 }
 
 function productLink(id) {
@@ -233,10 +248,12 @@ function renderProducts() {
       productIds.some((id) => identity.products[id].state === "mfa-required"))
   )
     showSecurity();
+  const panel = $("#platform-account-panel");
+  if (panel) panel.hidden = false;
 }
 
 async function refresh() {
-  if (!currentUser || actionBusy || enrollmentSecret) return;
+  if (!currentUser || actionBusy || enrollmentSecret || deletion?.open) return;
   clearPrivate();
   const requestGeneration = generation;
   const user = currentUser;
@@ -251,8 +268,7 @@ async function refresh() {
       void session?.endSession(refusal);
       return;
     }
-    $("#platform-account").textContent =
-      identity.user.displayName || identity.user.email || "WIFIGATE";
+    showIdentity();
     $("#platform-status").textContent = identity.user.emailVerified
       ? ""
       : copy.unverified;
@@ -334,6 +350,203 @@ async function securityAction(action) {
   if (!enrollmentSecret) await refresh();
 }
 
+function initial(text) {
+  return (Array.from(text.trim())[0] || "W").toLocaleUpperCase(language);
+}
+
+function showIdentity() {
+  const name = identity.user.displayName || identity.user.email || "WIFIGATE";
+  $("#platform-account").textContent = name;
+  const avatar = $("#platform-avatar");
+  if (avatar) avatar.textContent = initial(name);
+  if (!$("#platform-account-panel")) return;
+  $("#account-avatar").textContent = initial(name);
+  $("#account-name").textContent = name;
+  $("#account-email").textContent =
+    identity.user.displayName && identity.user.email ? identity.user.email : "";
+}
+
+// Account deletion: a preview of what is cancelled and closed, the account
+// email typed as confirmation, and a recent sign-in (plus the authenticator
+// when one is enrolled) on the server. One idempotency key per attempt, so a
+// retry after re-authentication or an incomplete deletion reuses it.
+const deletion = $("#account-delete");
+const productName = (id) => `WIFIGATE ${id[0].toUpperCase() + id.slice(1)}`;
+
+function deletionStatus(text, tone) {
+  const status = deletion.querySelector("[role=status]");
+  status.textContent = text;
+  if (tone) status.dataset.tone = tone;
+  else delete status.dataset.tone;
+}
+
+function deletionList(title, items) {
+  const block = document.createElement("div");
+  block.className = "account-delete__group";
+  const heading = document.createElement("strong");
+  heading.textContent = title;
+  const list = document.createElement("ul");
+  list.append(
+    ...items.map((text) => {
+      const item = document.createElement("li");
+      item.textContent = text;
+      return item;
+    }),
+  );
+  block.append(heading, list);
+  return block;
+}
+
+function deletionMessage(error) {
+  return (
+    {
+      PLATFORM_ADMIN_DELETION_FORBIDDEN: copy.deleteAdmin,
+      ACCOUNT_DELETION_REVIEW_REQUIRED: copy.deleteReview,
+      ACCOUNT_DELETION_INCOMPLETE: copy.deleteIncomplete,
+      CONFIRMATION_REQUIRED: copy.deleteConfirmMismatch,
+    }[error?.code] ??
+    (error?.code?.startsWith?.("auth/")
+      ? authErrorMessage(error, language)
+      : copy.deleteFailed)
+  );
+}
+
+function setDeletionBusy(busy) {
+  setActionBusy(busy);
+  for (const control of deletion.querySelectorAll("button, input"))
+    control.disabled = busy;
+}
+
+async function openDeletion() {
+  if (!deletion || actionBusy || !currentUser || !identity) return;
+  const user = currentUser;
+  const requestGeneration = generation;
+  deletionKey = crypto.randomUUID();
+  deletion.querySelector("form").reset();
+  $("#account-delete-plan").replaceChildren();
+  deletion.querySelector(".account-delete__confirm").disabled = true;
+  deletionStatus(copy.deleteChecking);
+  deletion.showModal();
+  try {
+    const plan = await getAccountDeletion(user);
+    if (requestGeneration !== generation || !deletion.open) return;
+    const groups = [];
+    if (plan.subscriptions.length)
+      groups.push(
+        deletionList(
+          copy.deleteCancels,
+          plan.subscriptions.map(
+            (entry) => `${entry.organization} · ${productName(entry.product)}`,
+          ),
+        ),
+      );
+    if (plan.closingOrganizations.length)
+      groups.push(
+        deletionList(
+          copy.deleteCloses,
+          plan.closingOrganizations.map((entry) =>
+            entry.otherMembers
+              ? `${entry.organization} · ${copy.deleteMembers.replace("{n}", entry.otherMembers)}`
+              : entry.organization,
+          ),
+        ),
+      );
+    if (!groups.length) {
+      const none = document.createElement("p");
+      none.textContent = copy.deleteNone;
+      groups.push(none);
+    }
+    $("#account-delete-plan").replaceChildren(...groups);
+    deletionStatus("");
+    deletion.querySelector(".account-delete__confirm").disabled = false;
+    deletion.querySelector("input[name=confirmEmail]").focus();
+  } catch (error) {
+    if (requestGeneration === generation)
+      deletionStatus(deletionMessage(error), "error");
+  }
+}
+
+function finishDeletion(result) {
+  accountDeleted = true;
+  session?.stop();
+  deletion.close();
+  clearPrivate();
+  currentUser = undefined;
+  for (const node of document.querySelectorAll(
+    ".platform-heading, #platform-status, #platform-retry, .platform-header .account-menu",
+  ))
+    node.hidden = true;
+  const cancelled = result.cancelledSubscriptions.map(
+    (entry) => `${entry.organization} · ${productName(entry.product)}`,
+  );
+  const list = $("#account-deleted-list");
+  list.querySelector("ul").replaceChildren(
+    ...cancelled.map((text) => {
+      const item = document.createElement("li");
+      item.textContent = text;
+      return item;
+    }),
+  );
+  list.hidden = !cancelled.length;
+  $("#account-deleted").hidden = false;
+  $("#account-deleted-home").focus();
+  // The Firebase user no longer exists; clear this tab's stored session.
+  void signOut().catch(() => {});
+}
+
+async function confirmDeletion(event) {
+  event.preventDefault();
+  if (actionBusy || !currentUser || !identity) return;
+  const typed = deletion
+    .querySelector("input[name=confirmEmail]")
+    .value.trim()
+    .toLowerCase();
+  if (!typed || typed !== (identity.user.email ?? "").toLowerCase()) {
+    deletionStatus(copy.deleteConfirmMismatch, "error");
+    deletion.querySelector("input[name=confirmEmail]").focus();
+    return;
+  }
+  const user = currentUser;
+  setDeletionBusy(true);
+  deletionStatus(copy.deleting);
+  try {
+    let result;
+    try {
+      result = await deleteAccount(user, typed, deletionKey);
+    } catch (error) {
+      if (
+        ![
+          "RECENT_REAUTH_REQUIRED",
+          "RECENT_AUTH_REQUIRED",
+          "RECENT_TOTP_REQUIRED",
+        ].includes(error?.code)
+      )
+        throw error;
+      deletionStatus(copy.confirm);
+      await reauthenticate(user, requestMfaChallenge);
+      await user.getIdToken(true);
+      deletionStatus(copy.deleting);
+      result = await deleteAccount(user, typed, deletionKey);
+    }
+    setDeletionBusy(false);
+    finishDeletion(result);
+  } catch (error) {
+    setDeletionBusy(false);
+    deletionStatus(deletionMessage(error), "error");
+  }
+}
+
+if (deletion) {
+  $("#delete-account").addEventListener("click", () => void openDeletion());
+  deletion.querySelector("form").addEventListener("submit", confirmDeletion);
+  deletion.querySelector("[data-cancel]").addEventListener("click", () => {
+    if (!actionBusy) deletion.close();
+  });
+  deletion.addEventListener("cancel", (event) => {
+    if (actionBusy) event.preventDefault();
+  });
+}
+
 $("#start-enrollment").addEventListener(
   "click",
   () => void securityAction("enroll"),
@@ -385,6 +598,7 @@ window.addEventListener("pageshow", (event) => {
 
 initializeSiteAuth((user) => {
   if (!user) {
+    if (accountDeleted) return;
     currentUser = undefined;
     clearPrivate();
     session?.stop();

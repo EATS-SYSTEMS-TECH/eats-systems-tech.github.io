@@ -46,7 +46,7 @@ const english = {
     "Your role requires an authenticator before you can open this product.",
   unverified: "Sign in with a verified email to access a product.",
   host: "Reservations, rooms and guest access",
-  pay: "Paid entry: single entry or timed access",
+  pay: "Paid entry: single entry, by time or timed access",
   manager: "Live management of the gates you administer",
   active: "Active",
   pending: "Waiting for approval",
@@ -64,6 +64,37 @@ const english = {
   empty: "Your access is active. This product workspace is not available yet.",
   loading: "Checking product access...",
   back: "Back to products",
+  account: "Your account",
+  accountDetail:
+    "You signed in with Google or Apple. Your products and security settings belong to this account.",
+  deleteAccount: "Delete account",
+  deleteAccountDetail:
+    "Cancels all your subscriptions and removes your user from WIFIGATE systems. This can't be undone.",
+  deleteTitle: "Delete your WIFIGATE account?",
+  deleteText:
+    "All your subscriptions will be cancelled automatically, and your user will be removed from WIFIGATE systems. This can't be undone.",
+  deleteChecking: "Checking your subscriptions...",
+  deleteCancels: "These subscriptions will be cancelled",
+  deleteCloses: "These organizations will close",
+  deleteMembers: "{n} other members lose access",
+  deleteNone: "You have no active subscriptions.",
+  deleteConfirmLabel: "To confirm, type your email",
+  deleteConfirmMismatch: "Type the email of this account exactly.",
+  deleteButton: "Delete my account",
+  deleting: "Deleting your account...",
+  deleteGateNote:
+    "Gate controllers keep their own user lists. To be removed from a gate, ask its administrator.",
+  deleteAdmin: "A WIFIGATE administrator account is removed by another administrator.",
+  deleteReview:
+    "This account can't be closed automatically. Contact support@wifigate.io.",
+  deleteIncomplete:
+    "Your data was removed. Try again to finish deleting your sign-in.",
+  deleteFailed: "We couldn't delete your account. Nothing was changed. Please try again.",
+  deletedTitle: "Your account was deleted",
+  deletedText:
+    "All your subscriptions were cancelled automatically, and your user was removed from WIFIGATE systems.",
+  deletedHome: "Go to wifigate.io",
+  cancelled: "Cancelled subscriptions",
 };
 
 const hebrew = {
@@ -105,7 +136,7 @@ const hebrew = {
   requiredSecurity: "התפקיד שלך מחייב אפליקציית אימות לפני פתיחת המוצר.",
   unverified: "יש להיכנס עם כתובת אימייל מאומתת כדי לגשת למוצר.",
   host: "הזמנות, חדרים וגישת אורחים",
-  pay: "תשלום על כניסה: כניסה אחת או גישה מתוזמנת",
+  pay: "תשלום על כניסה: כניסה אחת, לפי זמן שהייה או גישה בזמן",
   manager: "ניהול חי של השערים שאתם מנהלים",
   active: "פעיל",
   pending: "ממתין לאישור",
@@ -123,6 +154,35 @@ const hebrew = {
   empty: "הגישה שלך פעילה. סביבת העבודה של המוצר עדיין אינה זמינה.",
   loading: "בודקים את הגישה למוצר...",
   back: "חזרה למוצרים",
+  account: "החשבון שלך",
+  accountDetail:
+    "התחברת עם Google או Apple. המוצרים והגדרות האבטחה שלך שייכים לחשבון הזה.",
+  deleteAccount: "מחיקת החשבון",
+  deleteAccountDetail:
+    "מבטל את כל המנויים שלך ומסיר את המשתמש שלך ממערכות WIFIGATE. אי אפשר לבטל את הפעולה.",
+  deleteTitle: "למחוק את חשבון WIFIGATE שלך?",
+  deleteText:
+    "כל המנויים שלך יבוטלו אוטומטית, והמשתמש שלך יוסר ממערכות WIFIGATE. אי אפשר לבטל את הפעולה.",
+  deleteChecking: "בודקים את המנויים שלך...",
+  deleteCancels: "המנויים האלה יבוטלו",
+  deleteCloses: "הארגונים האלה ייסגרו",
+  deleteMembers: "{n} חברים נוספים יאבדו גישה",
+  deleteNone: "אין לך מנויים פעילים.",
+  deleteConfirmLabel: "לאישור, יש להקליד את כתובת האימייל שלך",
+  deleteConfirmMismatch: "יש להקליד בדיוק את כתובת האימייל של החשבון.",
+  deleteButton: "מחיקת החשבון שלי",
+  deleting: "מוחקים את החשבון...",
+  deleteGateNote:
+    "לבקרי השערים יש רשימת משתמשים משלהם. להסרה משער, פנו למנהל השער.",
+  deleteAdmin: "חשבון של מנהל WIFIGATE נמחק על ידי מנהל אחר.",
+  deleteReview: "אי אפשר לסגור את החשבון הזה אוטומטית. פנו אל support@wifigate.io.",
+  deleteIncomplete: "הנתונים שלך נמחקו. יש לנסות שוב כדי לסיים את מחיקת ההתחברות.",
+  deleteFailed: "לא הצלחנו למחוק את החשבון. שום דבר לא השתנה. נא לנסות שוב.",
+  deletedTitle: "החשבון שלך נמחק",
+  deletedText:
+    "כל המנויים שלך בוטלו אוטומטית, והמשתמש שלך הוסר ממערכות WIFIGATE.",
+  deletedHome: "למעבר ל־wifigate.io",
+  cancelled: "מנויים שבוטלו",
 };
 
 export function platformText(language = "en") {

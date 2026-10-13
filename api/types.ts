@@ -30,6 +30,19 @@ export type PlatformProfile = {
   products: Record<ProductId, ProductAccess>;
 };
 export type CreateProfileResponse = { user?: User };
+export type AccountSubscription = { organization: string; product: ProductId };
+export type AccountDeletionPreview = {
+  allowed: true;
+  subscriptions: AccountSubscription[];
+  closingOrganizations: { organization: string; otherMembers: number }[];
+  memberships: number;
+};
+export type AccountDeletionResult = {
+  deleted: true;
+  cancelledSubscriptions: AccountSubscription[];
+  archivedOrganizations: string[];
+  removedMemberships: number;
+};
 export type ApiErrorDetails = { message?: string; code?: string };
 export type ApiErrorResponse = { error?: ApiErrorDetails; code?: string };
 export type ApiErrorMetadata = { status?: number; code?: string };

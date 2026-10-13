@@ -70,7 +70,7 @@ export async function apiRequest<T>(
     const sessionExpired = apiError.status === 401;
     const productDenied =
       apiError.status === 403 &&
-      config.url !== "/api/v1/platform/me" &&
+      !config.url?.startsWith("/api/v1/platform/") &&
       !localRejectionCodes.has(apiError.code ?? "");
     if (typeof window !== "undefined" && (sessionExpired || productDenied)) {
       window.dispatchEvent(
