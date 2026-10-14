@@ -1,0 +1,70 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import { createHash } from "node:crypto";
+import { NICHE_DEFINITIONS } from "./niche-pages/index.mjs";
+
+const sceneKeys = new Set(["private-access", ...NICHE_DEFINITIONS.map(({ key }) => key)]);
+
+// Only a reviewed artifact and its matching poster may enter generated pages.
+export async function readSceneManifest(repoRoot) {
+  const file = path.join(repoRoot, "assets", "vid", "scene-manifest.json");
+  let document;
+  try { document = JSON.parse(await fs.readFile(file, "utf8")); }
+  catch (error) { if (error.code === "ENOENT") return new Map(); throw error; }
+  if (document.schemaVersion !== 1 || !Array.isArray(document.scenes)) throw new Error("Invalid scene media manifest");
+  const scenes = new Map();
+  for (const scene of document.scenes) {
+    if (!scene.accepted) continue;
+    if (!sceneKeys.has(scene.key) || scenes.has(scene.key)) throw new Error("Invalid or duplicate scene key");
+    for (const field of ["video", "poster"]) {
+      const asset = scene[field];
+      const expected = field === "video" ? /^assets\/vid\/(use-cases|home)\/[a-z-]+-720p\.mp4$/ : /^assets\/(wifigate_niche_pages|img)\/[a-z0-9-]+\.(webp|png)$/;
+      if (!asset || !expected.test(asset.path) || !/^[a-f0-9]{64}$/.test(asset.sha256)) throw new Error("Invalid scene artifact path/hash");
+      if (field === "video" && path.posix.basename(asset.path) !== `${scene.key}-720p.mp4`) throw new Error("Scene/video identity mismatch");
+      const bytes = await fs.readFile(path.join(repoRoot, ...asset.path.split("/")));
+      if (createHash("sha256").update(bytes).digest("hex") !== asset.sha256) throw new Error(`Scene artifact changed after acceptance: ${scene.key}`);
+      if (field === "video" && bytes.length > 2_000_000) throw new Error(`Scene clip exceeds 2MB: ${scene.key}`);
+    }
+    if (scene.width !== 1280 || scene.height !== 720 || Math.abs(scene.durationSeconds - 5) > 0.05
+      || scene.codec !== "h264" || scene.audioTracks !== 0 || !scene.fastStart
+      || !scene.motionReviewed || !scene.matchingFirstFrameReviewed) throw new Error(`Scene acceptance incomplete: ${scene.key}`);
+    scenes.set(scene.key, scene);
+  }
+  return scenes;
+}
+
+function attachScene($, { scene, assetPrefix, copy, image, container, media }) {
+  if (!["play", "pause", "replay"].every((key) => typeof copy?.[key] === "string" && copy[key].trim())) throw new Error("Missing localized scene controls");
+  image.attr("src", `${assetPrefix}${scene.poster.path}`).attr("data-scene-image", "");
+  container.attr("data-scene-video", "").attr("data-scene-state", "image");
+  const video = $("<video>")
+    .attr("data-video-src", `${assetPrefix}${scene.video.path}`)
+    .attr("poster", `${assetPrefix}${scene.poster.path}`)
+    .attr("preload", "none").attr("muted", "").attr("playsinline", "")
+    .attr("aria-hidden", "true").attr("width", "1280").attr("height", "720");
+  image.after(video);
+  const controls = $("<div>").addClass("scene-video-controls");
+  controls.append($("<button>").attr("type", "button").attr("data-scene-play", "").text(copy.play));
+  controls.append($("<button>").attr("type", "button").attr("data-scene-pause", "").attr("hidden", "").text(copy.pause));
+  // Controls stay above the tint overlay; the video remains under it with the image.
+  media.append(controls);
+  container.append($("<script>").attr("type", "application/json").attr("data-scene-copy", "").text(JSON.stringify(copy).replace(/</g, "\\u003c")));
+  $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261014a`));
+  $("head").append($("<script>").attr("src", `${assetPrefix}js/scene-video.js?v=20261014a`).attr("defer", ""));
+}
+
+export function applyNicheSceneMedia($, { scene, assetPrefix, copy }) {
+  if (!scene) return;
+  attachScene($, { scene, assetPrefix, copy, image: $("#niche-image"), container: $(".niche-hero"), media: $(".niche-hero__media") });
+}
+
+export function applyHomeSceneMedia($, { scene, assetPrefix, copy }) {
+  if (!scene) return;
+  // The hospitality/Host section is excluded from this consumer media work.
+  const image = $("#private-access img.security-statement__media-image");
+  if (image.length !== 1) throw new Error("Private access image is missing");
+  const media = $("<div>").addClass("security-statement__media-image");
+  image.before(media);
+  media.append(image.removeClass("security-statement__media-image").attr("width", "1280").attr("height", "720"));
+  attachScene($, { scene, assetPrefix, copy, image, container: media, media });
+}

@@ -15,6 +15,7 @@ import { LEGAL_PAGES, legalBundles, renderLegalMain } from "./legal/legal-pages.
 import { buildNotFoundPage } from "./not-found-page.mjs";
 import { buildLoginPages } from "./login-pages.mjs";
 import { BRAND_ID, ORGANIZATION_ID, SITE_ORIGIN, breadcrumbNode, faqNode, setPageMeta, webPageNode } from "./seo.mjs";
+import { readSceneManifest, applyNicheSceneMedia, applyHomeSceneMedia } from "./scene-media.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = SITE_ORIGIN;
@@ -1039,6 +1040,8 @@ async function buildHomePages(homeData) {
     rewriteHomeInternalLinks($, locale);
     updateHomeWhereLinks($, locale);
     applyHomepageCopy($, homepageCopies[locale], locale);
+    applyHomeSceneMedia($, { scene: homeData.sceneMedia.get("private-access"),
+      assetPrefix: buildAssetPrefix(locale, "home"), copy: homepageCopies[locale].hero.media });
     rewriteHomeGuestInvitesLink($, locale);
     reorderHomeSections($);
     setHomeMeta($, locale, homeData.localeOptions, homepageCopies[locale]);
@@ -1417,6 +1420,8 @@ async function buildNichePages(homeData) {
       rewriteStaticAssets($, locale, niche.key);
       appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, niche.key);
       updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle);
+      applyNicheSceneMedia($, { scene: homeData.sceneMedia.get(niche.key),
+        assetPrefix: buildAssetPrefix(locale, niche.key), copy: homeData.homepageCopies[locale].hero.media });
       updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer);
       rewriteNicheInternalLinks($, locale);
       setNicheMeta($, ctx, niche, locale, homeData.localeOptions);
@@ -1561,6 +1566,7 @@ async function main() {
   }
 
   const homeData = {
+    sceneMedia: await readSceneManifest(repoRoot),
     localeOptions: SITE_LANGUAGES,
     accessibilityCopy: await readWindowGlobal("accessibility-copy.js", "accessibilityCopy"),
     // Loaded once here so every page type shares the same footer wording.
@@ -1583,6 +1589,11 @@ async function main() {
 
   const sitemapEntries = [];
   sitemapEntries.push(...(await buildHomePages(homeData)));
+  // A consumer media iteration need not regenerate product portals or sign-in.
+  if (process.argv.includes("--scene-media-only")) {
+    await buildNichePages(homeData);
+    return;
+  }
   sitemapEntries.push(...(await buildLegalPages(homeData, legalCollections)));
   sitemapEntries.push(...(await buildNichePages(homeData)));
   sitemapEntries.push(...(await buildGuestInvitesPages(homeData)));
