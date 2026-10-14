@@ -6,6 +6,43 @@ const CONSENT_KEY = "wifigate-cookie-consent-v1";
 const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
 
 (() => {
+  // Only static consumer marketing pages are eligible. The same preference UI
+  // is also used by portal and invitation pages, which must never load GA.
+  const analyticsLocales = new Set([
+    "es", "fr", "de", "he", "nl", "it", "pt", "pl", "no", "cs", "ru", "uk",
+    "tr", "ar", "hi", "bn", "mr", "te", "zh-hans", "zh-hant", "ja", "ko",
+    "da", "sv", "hu", "el", "ro", "hr", "fi", "bg", "sr", "sk", "sl",
+    "id", "th", "vi", "ms", "fil",
+  ]);
+  const analyticsPages = new Set([
+    "", "automation", "hotels-airbnb", "roller-shutters", "electric-gates",
+    "garage-doors", "private-homes", "residential-buildings", "office-buildings",
+    "entry-doors-magnetic-locks", "sports-facilities", "storage-lockers",
+    "privacy-policy", "terms-and-conditions", "cookies", "accessibility", "contact-us",
+  ]);
+
+  function analyticsPage() {
+    if (!["https://wifigate.io", "https://www.wifigate.io"].includes(location.origin)) return null;
+    const pathname = location.pathname.replace(/\/index\.html$/, "/");
+    if (!pathname.startsWith("/") || /\/\//.test(pathname)) return null;
+    const parts = pathname.slice(1).replace(/\/$/, "").split("/");
+    const locale = analyticsLocales.has(parts[0]) ? parts.shift() : "en";
+    if (parts.length > 1 || !analyticsPages.has(parts[0] || "")) return null;
+    const page = parts[0] || "";
+    const canonicalPath = `${locale === "en" ? "/" : `/${locale}/`}${page ? `${page}/` : ""}`;
+    let referrer = "";
+    try {
+      const url = new URL(document.referrer);
+      if (["http:", "https:"].includes(url.protocol)) referrer = url.origin;
+    } catch (_) { /* No usable referrer. */ }
+    return {
+      page_location: `https://wifigate.io${canonicalPath}`,
+      page_referrer: referrer,
+      page_title: `WIFIGATE | ${page || "home"} | ${locale}`,
+    };
+  }
+
+  if (GA_MEASUREMENT_ID) window[`ga-disable-${GA_MEASUREMENT_ID}`] = true;
   const requestedLocale = document.documentElement.lang || "en";
   const copies = window.WIFIGATE_COOKIE_COPY;
   // A generated page embeds its own language only; the full file has them all.
@@ -34,7 +71,8 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
     try {
       const value = JSON.parse(localStorage.getItem(CONSENT_KEY) || "null");
       if (value?.version === 1 && typeof value.analytics === "boolean" &&
-          Number.isFinite(value.savedAt) && Date.now() - value.savedAt < CONSENT_MAX_AGE) {
+          Number.isFinite(value.savedAt) && value.savedAt >= 0 && value.savedAt <= Date.now() &&
+          Date.now() - value.savedAt < CONSENT_MAX_AGE) {
         return value;
       }
     } catch (_) { /* Storage can be unavailable in private browsing. */ }
@@ -60,13 +98,16 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
 
   function applyConsent(analytics) {
     if (!GA_MEASUREMENT_ID) return;
-    window[`ga-disable-${GA_MEASUREMENT_ID}`] = !analytics;
-    if (!analytics) removeAnalyticsCookies();
+    const page = analyticsPage();
+    const enabled = analytics && Boolean(page);
+    window[`ga-disable-${GA_MEASUREMENT_ID}`] = !enabled;
+    if (!enabled) removeAnalyticsCookies();
+    if (!page) return;
     if (analyticsLoaded) {
-      window.gtag("consent", "update", { analytics_storage: analytics ? "granted" : "denied" });
+      window.gtag("consent", "update", { analytics_storage: enabled ? "granted" : "denied" });
       return;
     }
-    if (!analytics) return;
+    if (!enabled) return;
     analyticsLoaded = true;
     window.dataLayer = window.dataLayer || [];
     window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
@@ -77,13 +118,19 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
       ad_personalization: "denied",
     });
     window.gtag("consent", "update", { analytics_storage: "granted" });
+    window.gtag("set", page);
     window.gtag("js", new Date());
     window.gtag("config", GA_MEASUREMENT_ID, {
+      ...page,
+      // Keep Enhanced Measurement (including history changes) OFF in the web
+      // stream before activation; send_page_view alone does not disable it.
+      send_page_view: false,
       cookie_expires: 180 * 24 * 60 * 60,
       cookie_update: false,
       allow_google_signals: false,
       allow_ad_personalization_signals: false,
     });
+    window.gtag("event", "page_view", page);
     const script = document.createElement("script");
     script.async = true;
     script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_MEASUREMENT_ID)}`;
