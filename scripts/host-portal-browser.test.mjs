@@ -134,6 +134,13 @@ async function scenario(options = {}) {
       });
       return;
     }
+    if (request.method() === "GET" && requestPath === "/api/v1/me/systems") {
+      await route.fulfill({
+        status: 200,
+        json: { items: [], nextCursor: null },
+      });
+      return;
+    }
     if (
       request.method() === "GET" &&
       requestPath === "/api/v1/auth/invitations"
@@ -198,7 +205,12 @@ async function scenario(options = {}) {
             ? {}
             : {
                 products: {
-                  host: { state: host },
+                  host: {
+                    state: host,
+                    ...(["active", "mfa-required"].includes(host)
+                      ? { role: state.role }
+                      : {}),
+                  },
                   pay: { state: "no-plan" },
                   manager: { state: "no-plan" },
                 },
@@ -321,7 +333,9 @@ async function openPortal(t) {
   await t.page.goto(origin + "/dashboard/host/");
 }
 async function openSettings(page) {
-  const settings = page.getByRole("button", { name: "Settings", exact: true });
+  const settings = page.locator(
+    '#host-section-navigation [data-view-id="settings"]',
+  );
   if (!(await settings.isVisible()))
     await page.getByRole("button", { name: "Menu", exact: true }).click();
   await settings.click();
@@ -349,13 +363,17 @@ async function enroll(t) {
 }
 try {
   {
+    // A pending invitation opens Host with only the join-organization view.
     const t = await scenario({ role: null, access: { state: "pending" } });
     await openPortal(t);
-    await t.page
-      .locator('[data-product="host"][data-state="pending"]')
-      .waitFor();
-    assert.equal(await t.page.locator("#dashboard-content").isVisible(), false);
-    assert.equal(await t.page.locator("#mfa-enrollment").isVisible(), false);
+    await t.page.locator("#dashboard-content").waitFor({ state: "visible" });
+    await t.page.waitForFunction(
+      () => document.body.dataset.hostViewId === "invitations",
+    );
+    assert.equal(
+      t.calls.some((call) => call.path === "/api/v1/organizations"),
+      false,
+    );
     await t.context.close();
   }
   {
@@ -408,9 +426,7 @@ try {
   await admin.page
     .locator('[data-product="host"][data-state="active"] a')
     .click();
-  await admin.page
-    .getByRole("button", { name: "Overview", exact: true })
-    .click();
+  await admin.page.locator('#host-sidebar [data-view-id="overview"]').click();
   await admin.page.locator("#admin-overview").waitFor({ state: "visible" });
   const modal = admin.page.locator("dialog.admin-dialog[open]");
   const confirm = async () => {
@@ -462,7 +478,8 @@ try {
     has: admin.page.getByText("approved@example.test", { exact: true }),
   });
   assert.match(await own.innerText(), /Oct 10, 2026/);
-  assert.match(await own.innerText(), /UTC/);
+  // The last sign-in reads in the viewer's own time, with no zone label.
+  assert.doesNotMatch(await own.innerText(), /UTC/);
   await own.locator("summary").click();
   assert.equal(
     await own.getByRole("button", { name: "Block", exact: true }).isDisabled(),
@@ -531,15 +548,14 @@ try {
   await admin.page
     .locator('#host-management [data-invitation-id="created-owner-invitation"]')
     .waitFor({ state: "attached" });
-  await admin.page.getByRole("button", { name: /Team invitations/ }).click();
+  await admin.page.locator("#join-organization").click();
   await admin.page
-    .getByRole("button", { name: "Accept team invitation", exact: true })
+    .getByRole("button", { name: "Join New test organization", exact: true })
     .waitFor({ state: "visible" });
   const visibleInvitation = await admin.page
     .locator('[data-invitation-id="created-owner-invitation"]')
     .innerText();
   assert.match(visibleInvitation, /2099/);
-  assert.match(visibleInvitation, /UTC/);
   assert.doesNotMatch(visibleInvitation, /2099-01-01T00:00:00/);
   assert.equal(admin.state.organizations.length, 1);
   assert.equal(admin.state.invitations.length, 1);
@@ -596,11 +612,22 @@ try {
     container.id = "owner-invitation-regression";
     document.body.append(container);
     window.ownerInvitationCurrent = true;
-    await renderOwnerMembershipInvitations({ container, user: getAuth().currentUser, organization: { id: "fixture-org", membership: { role: "owner" } }, isCurrent: () => window.ownerInvitationCurrent });
+    await renderOwnerMembershipInvitations({ container, user: getAuth().currentUser, organization: { id: "fixture-org", membership: { role: "owner" }, workspace: { role: "owner", permissions: ["members:write"] } }, isCurrent: () => window.ownerInvitationCurrent });
   });
+  assert.equal(
+    await owner.page.evaluate(async () => {
+      const { getAuth } = await import("https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js");
+      const { renderOwnerMembershipInvitations } = await import("/js/host-membership-invitations.js");
+      const container = document.createElement("div");
+      await renderOwnerMembershipInvitations({ container, user: getAuth().currentUser, organization: { id: "fixture-org", membership: { role: "owner" }, workspace: { role: "staff", permissions: [] } }, isCurrent: () => true });
+      return container.childElementCount;
+    }),
+    0,
+    "inviting follows workspace.permissions, not the membership role name",
+  );
   const ownerPanel = owner.page.locator("#owner-invitation-regression");
   await ownerPanel.getByLabel("Invite verified email", { exact: true }).fill("staff@example.test");
-  await ownerPanel.getByRole("button", { name: "Create team invitation", exact: true }).click();
+  await ownerPanel.getByRole("button", { name: "Invite", exact: true }).click();
   await owner.page.locator("#mfa-challenge").waitFor({ state: "visible" });
   assert.equal(await ownerPanel.getByLabel("Invite verified email", { exact: true }).isDisabled(), true);
   await owner.page.locator('#mfa-challenge input[name="code"]').fill("000000");
@@ -609,7 +636,9 @@ try {
   assert.equal(owner.state.ownerInvitations.length, 0);
   await owner.page.locator('#mfa-challenge input[name="code"]').fill("123456");
   await owner.page.locator('#mfa-challenge button[type="submit"]').click();
-  await ownerPanel.getByText("Team invitation created. The approved recipient can accept after signing in.", { exact: true }).waitFor();
+  const ownerRow = ownerPanel.locator('[data-invitation-id="owned-invitation"]');
+  await ownerRow.getByText("Invitation pending", { exact: false }).waitFor();
+  assert.equal(await ownerPanel.getByLabel("Invite verified email", { exact: true }).inputValue(), "", "a created invitation clears the email");
   const createAttempts = owner.calls.filter(call => call.method === "POST" && call.path?.endsWith("/member-invitations"));
   assert.equal(createAttempts.length, 2);
   assert.equal(createAttempts[0].headers["idempotency-key"], createAttempts[1].headers["idempotency-key"]);
@@ -619,7 +648,8 @@ try {
   await owner.page.locator("#mfa-challenge").waitFor({ state: "visible" });
   await owner.page.locator('#mfa-challenge input[name="code"]').fill("123456");
   await owner.page.locator('#mfa-challenge button[type="submit"]').click();
-  await ownerPanel.getByText("Team invitation cancelled.", { exact: true }).waitFor();
+  await ownerRow.getByText("Invitation cancelled", { exact: false }).waitFor();
+  assert.equal(await ownerRow.getByRole("button", { name: "Cancel team invitation", exact: true }).count(), 0, "a cancelled invitation offers no second cancel");
   const cancelAttempts = owner.calls.filter(call => call.method === "POST" && call.path?.endsWith("/cancel"));
   assert.equal(cancelAttempts.length, 2);
   assert.equal(cancelAttempts[0].headers["idempotency-key"], cancelAttempts[1].headers["idempotency-key"]);
@@ -627,7 +657,7 @@ try {
   assert.equal(owner.state.ownerInvitations[0].status, "cancelled");
   owner.state.expireOwnerCreateOnce = true;
   await ownerPanel.getByLabel("Invite verified email", { exact: true }).fill("viewer@example.test");
-  await ownerPanel.getByRole("button", { name: "Create team invitation", exact: true }).click();
+  await ownerPanel.getByRole("button", { name: "Invite", exact: true }).click();
   await owner.page.locator("#mfa-challenge").waitFor({ state: "visible" });
   await owner.page.evaluate(() => { window.ownerInvitationCurrent = false; });
   await owner.page.locator('#mfa-challenge input[name="code"]').fill("123456");
@@ -644,9 +674,9 @@ try {
     await regular.page
       .locator("#dashboard-content")
       .waitFor({ state: "visible" });
-    await regular.page
-      .getByRole("region", { name: "Reservation calendar", exact: true })
-      .waitFor();
+    await regular.page.waitForFunction(
+      () => document.body.dataset.hostViewId === "my-systems",
+    );
     assert.equal(await regular.page.locator("#calendar-image").count(), 0);
     assert.equal(
       await regular.page.locator("#account-details").isVisible(),
@@ -662,26 +692,31 @@ try {
       await regular.page.screenshot({
         path: join(
           process.env.WIFIGATE_SCREENSHOT_DIR,
-          `empty-calendar-${mobile ? "mobile" : "desktop"}.png`,
+          `my-systems-${mobile ? "mobile" : "desktop"}.png`,
         ),
         fullPage: true,
       });
+    // Optional authenticator setup lives on the products page, reached from
+    // Settings → Account.
     await openSettings(regular.page);
-    await regular.page.locator("#optional-enrollment").click();
-    await regular.page.locator("#cancel-enrollment").click();
     await regular.page
-      .locator("#dashboard-content")
+      .locator('[role="tab"][data-settings-tab="account"]')
+      .click();
+    await regular.page
+      .getByRole("link", { name: "Manage sign-in and security", exact: true })
+      .click();
+    await regular.page.waitForURL(origin + "/dashboard/");
+    await regular.page
+      .locator("#platform-security")
       .waitFor({ state: "visible" });
-    await openSettings(regular.page);
-    await regular.page.locator("#optional-enrollment").click();
     await enroll(regular);
     await regular.page
+      .locator('[data-product="host"][data-state="active"] a')
+      .click();
+    await regular.page
       .locator("#dashboard-content")
       .waitFor({ state: "visible" });
-    assert.equal(
-      await regular.page.locator("#admin-approval").isVisible(),
-      false,
-    );
+    await regular.page.locator("#account-button").click();
     await regular.page.locator("#sign-out").click();
     await regular.page.waitForURL("**/login/");
     await regular.page.goto(origin + "/dashboard/");
@@ -707,7 +742,7 @@ try {
     await t.context.close();
   }
   console.log(
-    "Portal browser fixtures passed: denial/errors, admin MFA enrollment/challenge/approval, revoked access, optional MFA, responsive calendar workspace, login and logout.",
+    "Portal browser fixtures passed: denial/errors, admin MFA enrollment/challenge/approval, revoked access, owner team invitations, optional MFA, responsive My systems workspace, login and logout.",
   );
 } finally {
   await browser.close();

@@ -1,7 +1,32 @@
 import { portalRequest } from "./api/index.js";
-import { field, node, downloadHostCsv, hostDateTime } from "./host-ui.js";
+import {
+  field,
+  node,
+  infoTip,
+  downloadHostCsv,
+  hostDateTime,
+} from "./host-ui.js";
 import { hostText } from "./host-locale.js";
 import { requestWithRecentIdentity } from "./host-recent-identity.js";
+import { can } from "./host-permissions.js";
+
+// Plan & statements speaks to the owner in plain words: where the plan
+// stands (never its id or revision), what a month used, and an estimate.
+// Nothing here charges a payment.
+const planStates = {
+  "legacy-active": "Active",
+  active: "Active",
+  trial: "Trial",
+  "trial-expired": "Trial ended",
+  cancelling: "Ends soon",
+  cancelled: "Plan cancelled",
+  suspended: "Plan paused",
+};
+export const planState = (subscription) =>
+  hostText(
+    planStates[subscription?.effectiveStatus ?? subscription?.status] ??
+      "Needs attention",
+  );
 
 export async function renderHostBilling({
   container,
@@ -9,16 +34,27 @@ export async function renderHostBilling({
   organization,
   isCurrent,
 }) {
-  const role = organization.membership.role;
-  if (role !== "owner") return;
+  // Plan & statements: the owner (billing:write).
+  const owner = can(organization, "billing:write");
+  if (!owner) return;
   const root = "/api/v1/organizations/" + encodeURIComponent(organization.id);
   const section = node("section", undefined, {
     "aria-label": "Billing statements",
     "data-workspace-billing": "",
   });
   const status = node("p", "", { role: "status", "aria-live": "polite" });
-  section.append(node("h2", hostText("Billing statements")), status);
+  section.append(status);
   container.append(section);
+  // One part of the tab: a heading whose ⓘ says what it is about (no hint
+  // paragraphs), then its form.
+  const part = (title, tip, ...content) => {
+    const block = node("div", undefined, { class: "settings-block" });
+    const heading = node("div", undefined, { class: "view-heading" });
+    heading.append(node("h3", hostText(title)), infoTip(hostText(tip)));
+    block.append(heading, ...content);
+    section.append(block);
+    return block;
+  };
   const current = () => isCurrent() && section.isConnected;
   const write = (path, body, intent) =>
     requestWithRecentIdentity({
@@ -37,19 +73,15 @@ export async function renderHostBilling({
   let busy = false;
   const errorMessages = {
     BILLING_HISTORY_INCOMPLETE:
-      "A complete verified usage history is required for this month. Choose a later closed month; past usage cannot be reconstructed.",
-    BILLING_MONTH_OPEN:
-      "This month is still open. Choose a completed month for the draft.",
-    BILLING_HISTORY_CHANGED:
-      "Usage history changed. Refresh and review the month before trying again.",
-    BILLING_STATEMENT_EXPIRED:
-      "This statement is outside the retained billing history.",
+      "There's no full record of this month. Choose a later month.",
+    BILLING_MONTH_OPEN: "This month isn't over yet. Choose a month that ended.",
+    BILLING_HISTORY_CHANGED: "This month's use changed. Try again.",
+    BILLING_STATEMENT_EXPIRED: "This month is too long ago to show.",
     BILLING_CAPACITY_EXCEEDED:
-      "This month's usage needs an operator capacity review before a statement can be generated.",
-    VERSION_CONFLICT:
-      "The subscription changed. Load it again before reviewing a new change.",
+      "WIFIGATE needs to check this month first. Contact support.",
+    VERSION_CONFLICT: "Your plan changed. Show its status again, then retry.",
     SUBSCRIPTION_TRANSITION_DENIED:
-      "This action is unavailable for the current subscription. Load its current status and choose an appropriate action.",
+      "This change isn't possible for your plan right now.",
     RECENT_AUTH_REQUIRED:
       "Sign in again with your authenticator before changing billing settings.",
     RECENT_TOTP_REQUIRED:
@@ -67,21 +99,15 @@ export async function renderHostBilling({
     } catch (error) {
       if (current())
         status.textContent = hostText(
-          errorMessages[error.code] ??
-            "Billing could not be updated. Refresh current data and verify permissions before retrying.",
+          errorMessages[error.code] ?? "That didn't work. Try again.",
         );
     } finally {
       busy = false;
       if (current()) button.disabled = false;
     }
   }
-  if (role === "owner") {
-    const billing = node("section", undefined, {
-      "aria-label": "Billing statements",
-      "data-workspace-billing": "",
-    });
-    section.append(billing);
-    const statementForm = node("form"),
+  if (owner) {
+    const statementForm = node("form", undefined, { class: "settings-form" }),
       today = new Date(),
       previousMonth = new Date(
         Date.UTC(today.getUTCFullYear(), today.getUTCMonth() - 1, 1),
@@ -90,40 +116,35 @@ export async function renderHostBilling({
         .slice(0, 7);
     const statementMonth = field(
         statementForm,
-        "Monthly statement period",
+        "Statement month",
         "month",
         previousMonth,
         "month",
       ),
-      statementButton = node("button", hostText("Generate monthly draft"), {
+      statementButton = node("button", hostText("Create statement"), {
         type: "submit",
       }),
       statementRows = node("div");
     statementForm.append(statementButton);
-    billing.append(
-      node("h3", hostText("Monthly billing statements")),
-      node(
-        "p",
+    const baselineButton = node("button", hostText("Start counting use"), {
+      type: "button",
+      class: "button-secondary",
+    });
+    const baselineRow = node("div", undefined, { class: "settings-actions" });
+    baselineRow.append(
+      baselineButton,
+      infoTip(
         hostText(
-          "Closed-month drafts use recorded physical system days. Pricing remains an internal proposal; generating a draft does not charge a payment.",
+          "For an organization from before use was counted: counting starts with the next full month. Past months stay as they are.",
         ),
       ),
+    );
+    part(
+      "Monthly statement",
+      "A month that ended: how many gates were in use each day. Nothing is charged.",
       statementForm,
       statementRows,
-    );
-    const baselineButton = node(
-      "button",
-      hostText("Start verified billing history"),
-      { type: "button" },
-    );
-    billing.append(
-      node(
-        "p",
-        hostText(
-          "Older organizations can start a verified history baseline for future full months. Existing history is preserved and past use is never invented.",
-        ),
-      ),
-      baselineButton,
+      baselineRow,
     );
     baselineButton.addEventListener("click", () =>
       run(baselineButton, async () => {
@@ -137,11 +158,10 @@ export async function renderHostBilling({
         );
         if (current())
           status.textContent = history.existing
-            ? hostText("Existing billing history preserved.")
-            : hostText(
-                "Verified billing history started. First full month: {p0}. No past charges were created.",
-                { p0: history.firstFullMonth },
-              );
+            ? hostText("Use is already counted.")
+            : hostText("Use is counted from {p0}.", {
+                p0: history.firstFullMonth,
+              });
       }),
     );
     statementForm.addEventListener("submit", (event) => {
@@ -159,20 +179,20 @@ export async function renderHostBilling({
         if (!current()) return;
         const exportStatement = node(
           "button",
-          hostText("Export statement daily breakdown"),
-          { type: "button" },
+          hostText("Download the daily breakdown"),
+          { type: "button", class: "button-secondary" },
         );
         exportStatement.addEventListener("click", () =>
           downloadHostCsv(
             statement.daily,
-            ["date", "activePhysicalSystems", "activeProperties", "plan"],
+            ["date", "activePhysicalSystems", "plan"],
             `wifigate-statement-${statement.month}.csv`,
           ),
         );
         statementRows.replaceChildren(
           node(
             "p",
-            hostText("Draft {p0} · USD {p1} · {p2} physical system days", {
+            hostText("{p0} · USD {p1} · {p2} days of gate use", {
               p0: statement.month,
               p1: (statement.monthlyEstimateCents / 100).toFixed(2),
               p2: statement.physicalSystemDays,
@@ -180,70 +200,69 @@ export async function renderHostBilling({
           ),
           exportStatement,
         );
-        status.textContent = hostText(
-          "Canonical monthly draft generated. No payment was charged.",
-        );
+        status.textContent = "";
       });
     });
   }
-  if (role === "owner") {
-    const lifecycle = node("form"),
+  if (owner) {
+    const lifecycle = node("form", undefined, { class: "settings-form" }),
       lifecycleStatus = node("p"),
-      action = field(
-        lifecycle,
-        "Subscription action",
-        "action",
-        "activate",
-        "text",
-        [
-          ["start-trial", hostText("Start trial")],
-          ["activate", hostText("Activate / keep service")],
-          ["cancel", hostText("Cancel with grace period")],
-        ],
-      ),
-      reason = field(lifecycle, "Subscription change reason", "reason");
+      action = field(lifecycle, "Plan change", "action", "activate", "text", [
+        ["start-trial", hostText("Start a trial")],
+        ["activate", hostText("Keep the service on")],
+        ["cancel", hostText("Cancel (7 more days of service)")],
+      ]),
+      reason = field(lifecycle, "Reason for the change", "reason");
     reason.minLength = 5;
     reason.maxLength = 200;
-    const loadSubscription = node("button", hostText("Load subscription"), {
+    const loadSubscription = node("button", hostText("Show plan status"), {
         type: "button",
+        class: "button-secondary",
       }),
-      changeSubscription = node(
-        "button",
-        hostText("Apply subscription change"),
-        { type: "submit", disabled: "" },
-      );
+      changeSubscription = node("button", hostText("Change plan"), {
+        type: "submit",
+        disabled: "",
+      });
+    // Until the plan's status shows, Change plan stays disabled and its ⓘ
+    // says why.
+    const changeBlocked = infoTip(hostText("Show the plan status first."));
+    const allowChange = (allowed) => {
+      changeSubscription.disabled = !allowed;
+      changeBlocked.hidden = allowed;
+    };
     let subscription;
     const showSubscription = () => {
-      lifecycleStatus.textContent = hostText("{p0} · revision {p1}{p2}{p3}", {
-        p0: hostText(subscription.effectiveStatus ?? subscription.status),
-        p1: subscription.version,
-        p2: subscription.trialEndsAt
+      lifecycleStatus.textContent =
+        planState(subscription) +
+        (subscription.trialEndsAt
           ? hostText(" · trial ends {p0}", {
               p0: hostDateTime(subscription.trialEndsAt),
             })
-          : "",
-        p3: subscription.graceEndsAt
-          ? hostText(" · grace ends {p0}", {
+          : "") +
+        (subscription.graceEndsAt
+          ? hostText(" · service ends {p0}", {
               p0: hostDateTime(subscription.graceEndsAt),
             })
-          : "",
-      });
+          : "");
     };
-    lifecycle.append(loadSubscription, changeSubscription, lifecycleStatus);
-    section.append(
-      node("h3", hostText("Customer lifecycle")),
-      node(
-        "p",
-        hostText(
-          "Internal pricing proposal. Subscription actions are audited and do not charge a payment method. Cancellation allows seven days of service; already imported offline passes remain valid until their expiry.",
-        ),
-      ),
+    const lifecycleActions = node("div", undefined, {
+      class: "settings-actions",
+    });
+    const changeHolder = node("span", undefined, {
+      class: "system-action-blocked",
+    });
+    changeHolder.append(changeSubscription, changeBlocked);
+    lifecycleActions.append(loadSubscription, changeHolder);
+    lifecycle.append(lifecycleActions, lifecycleStatus);
+    part(
+      "Your plan",
+      "Nothing is charged. After a cancellation the service keeps working for seven days, and guest passes already in the app work until they end.",
       lifecycle,
     );
     loadSubscription.addEventListener("click", () =>
       run(loadSubscription, async () => {
         subscription = undefined;
-        changeSubscription.disabled = true;
+        allowChange(false);
         lifecycleStatus.textContent = "";
         const response = await portalRequest(
           user,
@@ -252,8 +271,8 @@ export async function renderHostBilling({
         if (current()) {
           subscription = response.subscription;
           showSubscription();
-          changeSubscription.disabled = false;
-          status.textContent = hostText("Subscription loaded.");
+          allowChange(true);
+          status.textContent = "";
         }
       }),
     );
@@ -277,33 +296,27 @@ export async function renderHostBilling({
         if (current()) {
           subscription = response.subscription;
           showSubscription();
-          status.textContent = hostText(
-            "Subscription change saved and audited.",
-          );
+          status.textContent = "";
         }
       });
     });
-    const form = node("form"),
+    const form = node("form", undefined, { class: "settings-form" }),
       month = field(
         form,
-        "Pricing preview month",
+        "Estimate month",
         "month",
         new Date().toISOString().slice(0, 7),
         "month",
       ),
-      preview = node("button", hostText("Preview monthly pricing"), {
+      preview = node("button", hostText("Show estimate"), {
         type: "submit",
+        class: "button-secondary",
       }),
       output = node("p");
     form.append(preview, output);
-    section.append(
-      node("h3", hostText("Internal pricing proposal")),
-      node(
-        "p",
-        hostText(
-          "This estimate does not issue an invoice or charge a payment method.",
-        ),
-      ),
+    part(
+      "Price estimate",
+      "An estimate only. Nothing is charged and no invoice is sent.",
       form,
     );
     form.addEventListener("submit", (event) => {
@@ -315,16 +328,17 @@ export async function renderHostBilling({
           `${root}/billing/preview?${new URLSearchParams({ month: month.value })}`,
         );
         if (current()) {
-          output.textContent = hostText(
-            "{p0} · {p1} verified physical gates · estimated USD {p2} · unverified excluded {p3}",
-            {
-              p0: hostText(value.plan),
-              p1: value.activePhysicalSystems,
-              p2: (value.monthlyEstimateCents / 100).toFixed(2),
-              p3: value.unverifiedPhysicalSystems,
-            },
-          );
-          status.textContent = hostText("Internal monthly estimate loaded.");
+          output.textContent =
+            hostText("{p0} gates · about USD {p1}", {
+              p0: value.activePhysicalSystems,
+              p1: (value.monthlyEstimateCents / 100).toFixed(2),
+            }) +
+            (value.unverifiedPhysicalSystems
+              ? hostText(" · {p0} more not counted yet", {
+                  p0: value.unverifiedPhysicalSystems,
+                })
+              : "");
+          status.textContent = "";
         }
       });
     });

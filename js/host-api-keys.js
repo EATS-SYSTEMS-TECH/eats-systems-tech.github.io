@@ -1,13 +1,19 @@
-import { hostText, hostLocale } from "./host-locale.js";
+import { hostText } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
-import { field, node, hostDateTime } from "./host-ui.js";
+import { field, node, hostDateTime, infoTip } from "./host-ui.js";
 import { requestWithRecentIdentity } from "./host-recent-identity.js";
+import { can, ownerOnly } from "./host-permissions.js";
+
+// Connect → Your own software (API keys). Owners and admins (integrations:write) see the keys;
+// only the owner creates, rotates, revokes and reveals them. Keys, their
+// operations and the actions on them are for a developer: they sit in the
+// collapsed "For your developer" part of the card.
 
 const errors = {
   RECENT_REAUTH_REQUIRED: hostText(
     "Sign out and sign in again with your authenticator before revealing this key.",
   ),
-  OWNER_REQUIRED: hostText("Only an organization owner can reveal a key."),
+  OWNER_REQUIRED: hostText("Only the organization owner can manage API keys."),
   TOTP_REQUIRED: hostText(
     "Verify your authenticator before managing API keys.",
   ),
@@ -22,11 +28,13 @@ export async function renderHostApiKeys({
   organization,
   isCurrent,
 }) {
-  if (!["owner", "admin"].includes(organization.membership.role)) return;
+  if (!can(organization, "integrations:write")) return;
+  const manage = ownerOnly(organization);
   const section = node("section", undefined, {
-    "aria-label": "API integrations",
+    "aria-label": "Your own software",
+    class: "connect-card",
   });
-  const status = node("p", hostText("Loading API keys…"), {
+  const status = node("p", hostText("Loading…"), {
     role: "status",
     "aria-live": "polite",
   });
@@ -72,26 +80,34 @@ export async function renderHostApiKeys({
   }
   const create = node("button", hostText("Create API key"), { type: "submit" });
   form.append(scopes, types, create);
-  section.append(
-    node("h2", hostText("API integrations")),
-    node(
-      "p",
+  const heading = node("div", undefined, { class: "view-heading" });
+  heading.append(
+    node("h2", hostText("Your own software")),
+    infoTip(
       hostText(
-        "Create a separate key for each integration and limit its operations and target types. An owner can reveal a key after a recent sign-in with an authenticator. Share keys privately.",
+        manage
+          ? "Your developer connects your website or software to WIFIGATE with a key. Make a separate key for each connection and share it privately."
+          : "Your developer connects your website or software to WIFIGATE with a key. Only the owner can create, change or show keys.",
       ),
     ),
-    form,
-    status,
+  );
+  const developer = node("details", undefined, {
+    class: "connect-developer connect-keys",
+  });
+  developer.append(
+    node("summary", hostText("For your developer")),
+    ...(manage ? [form] : []),
     privateOutput,
     list,
   );
+  section.append(heading, status, developer);
   container.append(section);
   const current = () => isCurrent() && section.isConnected;
   const listeners = new AbortController();
   window.addEventListener(
     "host:workspace-navigate",
     (event) => {
-      if (event.detail !== "integrations") privateOutput.replaceChildren();
+      if (event.detail !== "connect") privateOutput.replaceChildren();
     },
     { signal: listeners.signal },
   );
@@ -154,7 +170,7 @@ export async function renderHostApiKeys({
     if (!current()) return;
     if (!append) list.replaceChildren();
     for (const record of response.items) {
-      const row = node("article");
+      const row = node("article", undefined, { class: "connect-key" });
       row.append(
         node("h3", record.name),
         node("p", `${record.prefix} · ${hostText(record.status)}`),
@@ -184,18 +200,21 @@ export async function renderHostApiKeys({
             }),
           ),
         );
-      if (record.status === "active") {
-        if (organization.membership.role === "owner") {
+      if (record.status === "active" && manage) {
+        // Reveal, rotate and revoke belong to the owner.
+        {
           const reveal = node("button", hostText("Reveal private API key"), {
             type: "button",
+            class: "button-secondary",
           });
           reveal.addEventListener("click", () =>
             perform(reveal, async () => {
               const result = await action(record, "reveal", {});
+              // Shown only while Connect is still on screen.
               if (
                 !current() ||
-                (document.body.dataset.hostView &&
-                  document.body.dataset.hostView !== "Integrations")
+                (document.body.dataset.hostViewId &&
+                  document.body.dataset.hostViewId !== "connect")
               )
                 return;
               const box = node("textarea", result.value, {
@@ -205,6 +224,7 @@ export async function renderHostApiKeys({
               });
               const hide = node("button", hostText("Hide API key"), {
                 type: "button",
+                class: "button-secondary",
               });
               hide.addEventListener("click", () =>
                 privateOutput.replaceChildren(),
@@ -217,9 +237,7 @@ export async function renderHostApiKeys({
                 box,
                 hide,
               );
-              status.textContent = hostText(
-                "Private key revealed. Hide it after copying.",
-              );
+              status.textContent = "";
             }),
           );
           row.append(reveal);
@@ -238,8 +256,16 @@ export async function renderHostApiKeys({
           overlap.step = "1";
           const rotate = node("button", hostText("Rotate API key"), {
             type: "submit",
+            class: "button-secondary",
           });
-          rotation.append(rotate);
+          rotation.append(
+            rotate,
+            infoTip(
+              hostText(
+                "A new key replaces this one. With 0 hours the old key stops at once; otherwise it keeps working for those hours. Update your integration with the new key.",
+              ),
+            ),
+          );
           rotation.addEventListener("submit", (event) => {
             event.preventDefault();
             void perform(rotate, async () => {
@@ -250,38 +276,33 @@ export async function renderHostApiKeys({
               });
               if (!current()) return;
               await load();
-              status.textContent = hostText(
-                overlapHours === 0
-                  ? "New key created. The previous key is revoked immediately. Update the integration with the new key."
-                  : "New key created. Reveal it and update the integration before the previous key expires.",
-              );
             });
           });
           row.append(rotation);
         }
         const revoke = node("button", hostText("Revoke API key"), {
           type: "button",
+          class: "button-danger",
         });
         revoke.addEventListener("click", () =>
           perform(revoke, async () => {
             await action(record, "revoke", { version: record.version });
             if (!current()) return;
             await load();
-            status.textContent = hostText(
-              "Key revoked. Requests using it are rejected.",
-            );
           }),
         );
-        row.append(revoke);
+        row.append(
+          revoke,
+          infoTip(hostText("Requests that use a revoked key are refused.")),
+        );
       }
       list.append(row);
     }
-    status.textContent = response.items.length
-      ? hostText("API keys loaded.")
-      : hostText("No API keys created.");
+    status.textContent = response.items.length ? "" : hostText("No keys yet.");
     if (response.nextCursor) {
       const more = node("button", hostText("Load more API keys"), {
         type: "button",
+        class: "button-secondary",
       });
       more.addEventListener("click", () =>
         perform(more, async () => {
@@ -318,9 +339,7 @@ export async function renderHostApiKeys({
       attempt = undefined;
       name.value = "";
       await load();
-      status.textContent = hostText(
-        "API key created. An owner can reveal it privately.",
-      );
+      status.textContent = "";
     });
   });
   try {

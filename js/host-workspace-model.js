@@ -1,166 +1,205 @@
-export const workspaceViews = [
+// The Host dashboard's views, in sidebar order. What a person sees comes from
+// the Host plan (My systems) and from the selected organization's
+// workspace.permissions — never from role names. A view that is never allowed
+// is not built at all, so its navigation item stays hidden.
+//   scope "plan":     Host plan holders only (role admin or user).
+//   scope "account":  everyone who reaches the dashboard.
+//   scope "platform": the WIFIGATE operator (Host admin) — built by the
+//                     administrator overview, not by the workspace.
+//   permission:       an organization permission from workspace.permissions.
+//   short:            the label in the phone tab bar, when it differs.
+export const workspaceViews = Object.freeze([
   {
-    id: "calendar",
-    label: "Calendar",
-    he: "לוח שנה",
-    icon: "calendar",
-    group: "",
-    selector: ".host-calendar",
-  },
-  {
-    id: "reservations",
-    label: "Reservations",
-    he: "הזמנות",
-    icon: "key",
-    group: "",
-    selector: 'section[aria-label="Reservations"]',
-  },
-  {
-    id: "properties",
-    label: "Properties",
-    he: "נכסים וחדרים",
-    icon: "home",
-    group: "",
-    selector: 'section[aria-label="properties"], section[aria-label="rooms"]',
+    id: "my-systems",
+    label: "My systems",
+    icon: "grid",
+    scope: "plan",
+    selector: '[data-workspace-view="my-systems"]',
   },
   {
     id: "systems",
-    label: "Systems",
-    he: "מערכות",
-    icon: "key",
-    group: "",
+    label: "Organization systems",
+    short: "Systems",
+    icon: "building",
+    permission: "read",
     selector: 'section[aria-label="WIFIGATE systems"]',
   },
   {
-    id: "team",
-    label: "Team",
-    he: "צוות",
-    icon: "users",
-    group: "Management",
-    roles: ["owner"],
-    selector:
-      'section[aria-label="members"], section[aria-label="Invite team members"]',
+    id: "calendar",
+    label: "Calendar",
+    icon: "calendar",
+    permission: "read",
+    selector: ".host-calendar",
   },
   {
-    id: "automation",
-    label: "Automation",
-    he: "אוטומציה",
-    icon: "bolt",
-    group: "Management",
-    roles: ["owner", "admin"],
-    selector: 'section[aria-label="Automatic guest access"]',
+    id: "bookings",
+    label: "Bookings",
+    icon: "list",
+    permission: "read",
+    selector: 'section[aria-label="Bookings"]',
   },
   {
-    id: "operations",
-    label: "Operations",
-    he: "תפעול",
+    id: "activity",
+    label: "Activity",
     icon: "bolt",
-    group: "Management",
-    roles: ["owner", "admin", "staff"],
+    permission: "operations:write",
     selector:
       'section[aria-label="Host operations"], section[aria-label="Service health"]',
   },
   {
-    id: "integrations",
-    label: "Integrations",
-    he: "אינטגרציות",
-    icon: "key",
-    group: "Advanced",
-    roles: ["owner", "admin"],
+    id: "connect",
+    label: "Connect",
+    icon: "plug",
+    permission: "integrations:write",
     selector:
-      'section[aria-label="API integrations"], section[aria-label="Reservation integrations"]',
+      'section[aria-label="Automatic guest links"], section[aria-label="Your booking system"], section[aria-label="API keys"]',
   },
   {
-    id: "billing",
-    label: "Billing statements",
-    he: "דוחות חיוב",
-    icon: "file",
-    group: "Advanced",
-    roles: ["owner"],
-    selector: "[data-workspace-billing]",
-  },
-  {
-    id: "support",
-    label: "Support",
-    he: "תמיכה",
-    icon: "chat",
-    group: "Advanced",
-    roles: ["owner"],
-    selector:
-      'section[aria-label="Temporary support access"], section[aria-label="Approved support diagnostics"]',
-  },
-  {
-    id: "organization",
-    label: "Organization settings",
-    he: "הגדרות ארגון",
-    icon: "home",
-    group: "Advanced",
-    selector: '[data-workspace-view="organization"]',
+    id: "settings",
+    label: "Settings",
+    icon: "settings",
+    scope: "account",
+    selector: '[data-workspace-view="settings"]',
   },
   {
     id: "invitations",
-    label: "Team invitations",
-    he: "הזמנות לצוות",
-    icon: "users",
-    group: "Account",
+    label: "Join an organization",
+    icon: "bell",
+    scope: "account",
+    placement: "bell",
     selector: 'section[aria-label="Team invitations"]',
   },
   {
-    id: "account",
-    label: "Settings",
-    he: "חשבון ואבטחה",
-    icon: "settings",
-    group: "Account",
-    selector: "#account-details",
-  },
-  {
     id: "overview",
-    label: "Overview",
-    he: "ניהול פלטפורמה",
-    icon: "users",
-    group: "Platform",
+    label: "Platform",
+    icon: "shield",
+    scope: "platform",
+    placement: "platform",
     selector: "#admin-overview",
   },
-];
+]);
 
+// Settings tabs, in order. Support is also open to the WIFIGATE operator, who
+// reads approved support diagnostics there.
+export const settingsTabs = Object.freeze([
+  { id: "organization", label: "Organization", permission: "read" },
+  { id: "team", label: "Team", permission: "members:write" },
+  { id: "billing", label: "Plan & statements", permission: "billing:write" },
+  { id: "support", label: "Support access", permission: "organization:write" },
+  { id: "account", label: "Account & security", scope: "account" },
+]);
+
+// Old view ids and labels keep working as deep links.
 const aliases = {
-  settings: "account",
+  reservations: "bookings",
+  Reservations: "bookings",
+  guests: "bookings",
+  Guests: "bookings",
+  operations: "activity",
+  Operations: "activity",
+  "jobs-calendar": "activity",
+  "Jobs Calendar": "activity",
+  "service-health": "activity",
+  "Service health": "activity",
+  integrations: "connect",
+  Integrations: "connect",
+  automation: "connect",
+  Automation: "connect",
+  "api-keys": "connect",
+  "api-integrations": "connect",
+  "API integrations": "connect",
+  properties: "systems",
+  Properties: "systems",
   "access-keys": "systems",
-  "jobs-calendar": "operations",
-  "service-health": "operations",
-  "api-integrations": "integrations",
-  "system-import": "systems",
-  guests: "reservations",
-  staff: "team",
-  invoices: "billing",
-  organizations: "organization",
-  Guests: "reservations",
-  Staff: "team",
   "Access Keys": "systems",
-  "Jobs Calendar": "operations",
-  "Service health": "operations",
-  "API integrations": "integrations",
-  Invoices: "billing",
+  "system-import": "systems",
   "System Import": "systems",
+  Systems: "systems",
+  "WIFIGATE systems": "systems",
+  "team-invitations": "invitations",
+  "Team invitations": "invitations",
+  "join-organization": "invitations",
+  Overview: "overview",
+};
+const tabAliases = {
+  organization: "organization",
+  organizations: "organization",
   Organizations: "organization",
+  "Organization settings": "organization",
+  team: "team",
+  Team: "team",
+  staff: "team",
+  Staff: "team",
+  billing: "billing",
+  invoices: "billing",
+  Invoices: "billing",
+  "Billing statements": "billing",
+  "Plan & statements": "billing",
+  support: "support",
+  Support: "support",
+  account: "account",
+  Account: "account",
 };
 
 export function workspaceView(value) {
+  if (typeof value !== "string") return undefined;
+  if (tabAliases[value]) return workspaceViews.find((v) => v.id === "settings");
   return (
     workspaceViews.find((view) => view.id === value || view.label === value) ??
     workspaceViews.find((view) => view.id === aliases[value])
   );
 }
 
-export function workspaceLocation(url) {
-  if (url.pathname === "/dashboard/host/overview/") return "overview";
-  return workspaceView(url.searchParams.get("view"))?.id ?? "calendar";
+// The Settings tab an old view id or label opens, if any.
+export function settingsTabFor(value) {
+  return tabAliases[value];
 }
 
-export function allowedWorkspaceViews(role) {
-  return workspaceViews.filter(
-    (view) =>
-      !["account", "overview", "invitations"].includes(view.id) &&
-      (!view.roles || view.roles.includes(role)),
+export function settingsTab(url) {
+  return tabAliases[url.searchParams.get("tab")] ?? undefined;
+}
+
+// The view a URL asks for, or `home` when it names none (or an unknown one).
+export function workspaceLocation(url, home) {
+  if (url.pathname === "/dashboard/host/overview/") return "overview";
+  return workspaceView(url.searchParams.get("view"))?.id ?? home;
+}
+
+export function homeView({ plan = false, pending = false } = {}) {
+  if (pending) return "invitations";
+  return plan ? "my-systems" : "systems";
+}
+
+// Views the workspace builds for this person. `organization` is the selected
+// organization's workspace.permissions, or undefined when there is none.
+export function allowedWorkspaceViews({
+  plan = false,
+  pending = false,
+  permissions,
+} = {}) {
+  if (pending)
+    return workspaceViews.filter((view) => view.id === "invitations");
+  const granted = new Set(Array.isArray(permissions) ? permissions : []);
+  return workspaceViews.filter((view) => {
+    if (view.scope === "platform") return false;
+    if (view.scope === "plan") return plan;
+    if (view.scope === "account") return true;
+    // An organization member without a plan always gets Organization systems,
+    // even before any organization loads, so the home screen exists.
+    if (view.id === "systems" && !plan && !permissions) return true;
+    return granted.has(view.permission);
+  });
+}
+
+export function allowedSettingsTabs({
+  permissions,
+  platformAdmin = false,
+} = {}) {
+  const granted = new Set(Array.isArray(permissions) ? permissions : []);
+  return settingsTabs.filter(
+    (tab) =>
+      tab.scope === "account" ||
+      granted.has(tab.permission) ||
+      (tab.id === "support" && platformAdmin),
   );
 }

@@ -1,8 +1,10 @@
 /* /dashboard/ — the product picker and the Pay/Manager pages. The sign-in
    card's language (Manrope, 24–28px radii, black primary, outlined
    secondary) on the dashboard backdrop; each product keeps its own colour:
-   Host blue, Pay green, Manager orange. */
-.platform-page {
+   Host blue, Pay green, Manager orange. The Host dashboard (.host-app in
+   css/host-dashboard.css) builds on the same tokens. */
+.platform-page,
+.host-app {
   --ink: #0f172a;
   --muted: #64748b;
   --line: rgba(15, 23, 42, 0.08);
@@ -19,6 +21,15 @@
   --manager: #f97316;
   --manager-strong: #c2410c;
   --manager-soft: #fff1e6;
+}
+/* Manrope has no Hebrew letters, and at 800 the system fallback (Segoe UI
+   Black on Windows) has none either, so Chrome would draw Hebrew headings in
+   a serif. Every heavy weight goes through --weight-heavy, which stops at 700
+   in Hebrew. */
+html[lang="he"] {
+  --weight-heavy: 700;
+}
+.platform-page {
   min-height: 100vh;
   min-height: 100dvh;
   background: #ffffff url("../assets/img/dashboard-backdrop.svg") center /
@@ -32,24 +43,43 @@
   color: var(--ink);
 }
 
-/* Header: a light glass bar. */
+/* Header: a light glass bar with the product pill at the top centre. The
+   blur sits on a pseudo-element: a backdrop-filter on the bar itself would
+   become the containing block of the pill's fixed popover. */
 .platform-header {
-  display: flex;
-  justify-content: space-between;
+  position: relative;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: 1rem;
   margin-bottom: clamp(1.75rem, 5vw, 3rem);
   padding: 0.7rem 0.9rem 0.7rem 1.1rem;
   border: 1px solid var(--line);
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.86);
   box-shadow: var(--card-shadow);
+}
+.platform-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.86);
   backdrop-filter: blur(14px);
 }
 .platform-header .brand {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
   width: 9.5rem;
+  min-height: 44px;
+}
+.platform-header .product-switcher {
+  justify-self: center;
 }
 .platform-header .account-menu {
+  justify-self: end;
   gap: 0.6rem;
   color: var(--ink);
   font-size: 0.85rem;
@@ -57,7 +87,7 @@
 #platform-language {
   width: auto;
   max-width: 8.5rem;
-  height: 40px;
+  height: 44px;
   padding: 0 0.85rem;
   border: 1px solid #d8e4ea;
   border-radius: 999px;
@@ -94,7 +124,7 @@
   background: #0a0a0a;
   color: #ffffff;
   font-size: 0.9rem;
-  font-weight: 800;
+  font-weight: var(--weight-heavy, 800);
   line-height: 1;
 }
 .platform-avatar:empty {
@@ -106,7 +136,7 @@
   font-size: 1.3rem;
 }
 .platform-header .platform-sign-out {
-  height: 40px;
+  height: 44px;
   padding: 0 1rem;
   border: 1px solid #d7e0e8;
   border-radius: 999px;
@@ -132,13 +162,13 @@
   background: #eef4ff;
   color: #0b63ff;
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: var(--weight-heavy, 800);
   letter-spacing: 0.08em;
 }
 .platform-heading h1 {
   margin: 0 0 0.6rem;
   font-size: clamp(1.9rem, 4.2vw, 2.9rem);
-  font-weight: 800;
+  font-weight: var(--weight-heavy, 800);
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
@@ -165,7 +195,10 @@
   font-weight: 700;
 }
 
-/* Product tiles. The order stays Host | Pay | Manager in both directions. */
+/* Product tiles. The order stays Host | Pay | Manager in both directions,
+   the order of the product pill in every product's top bar, so the products
+   sit in one order everywhere (and Tab follows it). Inside a tile everything
+   follows the page's direction. */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -238,8 +271,7 @@ html[dir="rtl"] .product-tile {
 .product-tile h2 {
   margin: 0;
   font-size: 1.3rem;
-  font-weight: 800;
-  direction: ltr;
+  font-weight: var(--weight-heavy, 800);
   text-align: start;
 }
 .product-description {
@@ -342,7 +374,7 @@ html[dir="rtl"] .product-tile {
 .platform-page .portal-panel h2 {
   margin: 0 0 0.5rem;
   font-size: 1.25rem;
-  font-weight: 800;
+  font-weight: var(--weight-heavy, 800);
 }
 .platform-page .portal-panel p {
   color: var(--muted);
@@ -397,7 +429,7 @@ html[dir="rtl"] .product-tile {
   background: #e2e8f0;
   color: #475569;
   font-size: 0.85rem;
-  font-weight: 800;
+  font-weight: var(--weight-heavy, 800);
 }
 [aria-current="step"] .security-step-number {
   background: #0b63ff;
@@ -588,7 +620,7 @@ dialog.account-delete .mfa-dialog__button.account-delete__confirm:hover:not(
 .account-deleted h1 {
   margin: 0 0 0.6rem;
   font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 800;
+  font-weight: var(--weight-heavy, 800);
 }
 .account-deleted p {
   margin: 0;
@@ -627,31 +659,223 @@ dialog.account-delete .mfa-dialog__button.account-delete__confirm:hover:not(
   outline-offset: 2px;
 }
 
-/* Product switcher (also inside the Host sidebar). */
+/* Product pill (top centre on the picker, Pay, Manager and Host): a button
+   and a listbox in the fixed order Host | Pay | Manager. */
 .product-switcher {
-  margin-block: 0.8rem 1.5rem;
+  min-width: 0;
 }
-.product-switcher label {
+.product-switcher__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 0 0.85rem 0 0.8rem;
+  border: 1px solid #d8e4ea;
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--ink, #0f172a);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: var(--weight-heavy, 800);
+  white-space: nowrap;
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
+  cursor: pointer;
+}
+.product-switcher__button:hover {
+  filter: brightness(0.97);
+}
+.product-switcher__button:focus-visible,
+.product-switcher__list:focus-visible,
+.product-switcher__all:focus-visible {
+  outline: 3px solid var(--focus, #0b63ff);
+  outline-offset: 2px;
+}
+.product-switcher__dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ink, #0f172a);
+}
+.product-switcher__button[data-current-product="host"] .product-switcher__dot {
+  background: var(--host, #0b63ff);
+}
+.product-switcher__button[data-current-product="pay"] .product-switcher__dot {
+  background: var(--pay, #16a34a);
+}
+.product-switcher__button[data-current-product="manager"] .product-switcher__dot {
+  background: var(--manager, #f97316);
+}
+.product-switcher__name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-switcher__chevron {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 150ms ease;
+}
+.product-switcher__button[aria-expanded="true"] .product-switcher__chevron {
+  transform: rotate(180deg);
+}
+.product-switcher__popover {
+  position: fixed;
+  z-index: 70;
+  width: min(320px, calc(100vw - 32px));
+  padding: 0.5rem;
+  overflow: auto;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 20px;
+  background: #ffffff;
+  color: var(--ink, #0f172a);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+  text-align: start;
+}
+.product-switcher__list {
+  display: grid;
+  gap: 2px;
   margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: none;
 }
-.product-switcher select {
+.product-switcher__option {
+  --accent: var(--host, #0b63ff);
+  --accent-soft: var(--host-soft, #eaf2ff);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 56px;
+  padding: 0.5rem 0.6rem;
+  border-radius: 14px;
+  cursor: pointer;
+}
+.product-switcher__option[data-product-option="pay"] {
+  --accent: var(--pay, #16a34a);
+  --accent-soft: var(--pay-soft, #e7f6ec);
+}
+.product-switcher__option[data-product-option="manager"] {
+  --accent: var(--manager, #f97316);
+  --accent-soft: var(--manager-soft, #fff1e6);
+}
+.product-switcher__option:hover,
+.product-switcher__option.is-active {
+  background: #f1f5f9;
+}
+.product-switcher__option[aria-selected="true"] {
+  background: var(--accent-soft);
+}
+.product-switcher__option[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+.product-switcher__option[aria-disabled="true"] .product-switcher__icon,
+.product-switcher__option[aria-disabled="true"] .product-switcher__label {
+  opacity: 0.6;
+}
+.product-switcher__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.product-switcher__icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.product-switcher__label {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  gap: 2px;
+}
+.product-switcher__label strong {
+  font-size: 0.92rem;
+  font-weight: var(--weight-heavy, 800);
+}
+/* dir="ltr" keeps a product name whole; it still lines up with its state
+   line, which follows the page direction. */
+html[dir="ltr"] .product-switcher__label strong {
+  text-align: left;
+}
+html[dir="rtl"] .product-switcher__label strong {
+  text-align: right;
+}
+.product-switcher__state {
+  color: var(--muted, #64748b);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.product-switcher__option[data-product-state="active"] .product-switcher__state {
+  color: #166534;
+}
+.product-switcher__tip {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  color: var(--muted, #64748b);
+  font-size: 0.95rem;
+}
+.product-switcher__reason {
+  position: absolute;
+  inset-inline: 0.5rem;
+  top: calc(100% - 2px);
+  z-index: 2;
+  display: none;
+  padding: 0.45rem 0.65rem;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.45;
+  pointer-events: none;
+}
+.product-switcher__option:hover .product-switcher__reason,
+.product-switcher__option.is-active .product-switcher__reason {
+  display: block;
+}
+.product-switcher__all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 0.35rem;
+  border-top: 1px solid #eef2f6;
+  color: var(--ink, #0f172a);
   font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
 }
-.host-sidebar .product-switcher {
-  margin-inline: 1rem;
-  color: #c9d2e2;
-}
-.host-sidebar .product-switcher select {
-  background: #202a3c;
-  color: white;
-  border-color: #43506a;
+.product-switcher__all[aria-current="page"] {
+  color: var(--muted, #64748b);
 }
 .platform-error {
   padding: 1rem 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .product-tile {
+  .product-tile,
+  .product-switcher__chevron {
     transition: none;
   }
   .product-tile:hover {
@@ -659,15 +883,24 @@ dialog.account-delete .mfa-dialog__button.account-delete__confirm:hover:not(
   }
 }
 @media (max-width: 650px) {
+  /* The pill stays at the top centre, where the Host page has it: equal
+     side columns, the logo shrinking into the start one, and the account
+     row underneath. */
   .platform-header {
-    flex-wrap: wrap;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 0.75rem 0.5rem;
     padding: 0.7rem 0.8rem;
   }
   .platform-header .brand {
     width: 8.5rem;
+    max-width: 100%;
+  }
+  .product-switcher__brand {
+    display: none;
   }
   .platform-header .account-menu {
-    flex: 1 1 100%;
+    grid-column: 1 / -1;
+    justify-self: stretch;
     flex-wrap: nowrap;
     justify-content: space-between;
     max-width: none;

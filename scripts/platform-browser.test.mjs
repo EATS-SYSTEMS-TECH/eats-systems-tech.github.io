@@ -1,321 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createServer } from "node:http";
-import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { chromium } from "playwright-core";
 import { passGateGame } from "./gate-game-helper.mjs";
-
-const root = fileURLToPath(new URL("../", import.meta.url));
-
-function fixtureProfile(state) {
-  const host =
-    state.host === "active" && state.admin && !state.verified
-      ? "mfa-required"
-      : state.host;
-  return {
-    user: {
-      uid: state.uid ?? "fixture-user",
-      email: "fixture@example.test",
-      displayName: "Fixture User",
-      emailVerified: state.emailVerified ?? true,
-    },
-    mfa: { enrolled: state.enrolled, verified: state.verified },
-    products: {
-      host: { state: host },
-      pay: { state: state.pay },
-      manager: { state: state.manager },
-    },
-  };
-}
-
-async function scenario(browser, options = {}) {
-  const state = {
-    signedIn: true,
-    enrolled: false,
-    verified: false,
-    admin: false,
-    host: "active",
-    pay: "no-plan",
-    manager: "pending",
-    ...options,
-  };
-  const context = await browser.newContext({
-    viewport: options.mobile
-      ? { width: 390, height: 844 }
-      : { width: 1440, height: 950 },
-  });
-  const calls = [];
-  const errors = [];
-  await context.exposeBinding("authFixtureEvent", (_, event) => {
-    if (event?.type === "identity") {
-      state.uid = event.uid;
-      state.enrolled = false;
-      state.verified = false;
-    }
-    if (event === "signin") state.signedIn = true;
-    if (event === "signout") state.signedIn = false;
-    if (event === "enroll") state.enrolled = true;
-    if (event === "verify") state.verified = true;
-    calls.push(event);
-  });
-  await context.route(
-    "https://www.gstatic.com/firebasejs/**/firebase-app.js",
-    (route) =>
-      route.fulfill({
-        contentType: "application/javascript",
-        body: "export const initializeApp = value => value;",
-      }),
-  );
-  await context.route(
-    "https://www.gstatic.com/firebasejs/**/firebase-auth.js",
-    (route) =>
-      route.fulfill({
-        contentType: "application/javascript",
-        body: `
-      let signedIn = ${JSON.stringify(state.signedIn)};
-      let enrolled = ${JSON.stringify(state.enrolled)};
-      let observer;
-      let user = { uid: "fixture-user", email: "fixture@example.test", emailVerified: true,
-        getIdToken: async () => "isolated-token",
-        getIdTokenResult: async () => ({claims: {firebase: {sign_in_provider: "google.com"}}}) };
-      export const getAuth = () => ({});
-      export const connectAuthEmulator = () => {};
-      export const browserSessionPersistence = {};
-      export const setPersistence = async () => {};
-      export const onAuthStateChanged = (_, callback) => { observer = callback; setTimeout(() => callback(signedIn ? user : null), 0); return () => {}; };
-      window.fixtureChangeUser = async uid => { user = {...user, uid}; enrolled = false; await window.authFixtureEvent({type: "identity", uid}); observer?.(user); };
-      export const GoogleAuthProvider = function () { this.setCustomParameters = () => {}; };
-      export const OAuthProvider = function () { this.addScope = () => {}; };
-      export const signInWithPopup = async () => {
-        if (${JSON.stringify(Boolean(state.popupBlocked))}) throw Object.assign(new Error(), {code: "auth/popup-blocked"});
-        if (enrolled) throw Object.assign(new Error(), {code: "auth/multi-factor-auth-required"});
-        signedIn = true; await window.authFixtureEvent("signin"); observer?.(user); return { user };
-      };
-      export const getRedirectResult = async () => null;
-      export const signInWithRedirect = async () => { await window.authFixtureEvent("redirect"); };
-      export const signOut = async () => { signedIn = false; await window.authFixtureEvent("signout"); observer?.(null); };
-      export const reauthenticateWithPopup = async () => {
-        await window.authFixtureEvent("reauth");
-        if (${JSON.stringify(state.reauthError ?? null)}) throw Object.assign(new Error(), {code:${JSON.stringify(state.reauthError ?? null)}});
-        if (enrolled) throw Object.assign(new Error(), {code: "auth/multi-factor-auth-required"});
-        return { user };
-      };
-      export const getMultiFactorResolver = () => ({
-        hints: [{factorId: "totp", uid: "test-factor", displayName: "Authenticator"}],
-        resolveSignIn: async ({code}) => {
-          if (code !== "123456") throw Object.assign(new Error(), {code: "auth/invalid-verification-code"});
-          await window.authFixtureEvent("verify");
-          if (!signedIn) { signedIn = true; await window.authFixtureEvent("signin"); observer?.(user); }
-          return { user };
-        }
-      });
-      export const multiFactor = account => ({getSession: async () => ({}), enroll: async ({code}) => {
-        if (code !== "123456") throw Object.assign(new Error(), {code: "auth/invalid-verification-code"});
-        if (window.fixturePauseFinish) await new Promise(resolve => { window.fixtureReleaseFinish = resolve; });
-        if (account.uid === user.uid) { enrolled = true; await window.authFixtureEvent("enroll"); }
-        else await window.authFixtureEvent("stale-enroll");
-      }});
-      export const TotpMultiFactorGenerator = {
-        assertionForSignIn: (_, code) => ({code}), assertionForEnrollment: (_, code) => ({code}),
-        generateSecret: async () => { await window.authFixtureEvent("begin-enroll"); return { secretKey: "JBSWY3DPEHPK3PXP", generateQrCodeUrl: () => "otpauth://totp/Fixture?secret=JBSWY3DPEHPK3PXP" }; }
-      };
-    `,
-      }),
-  );
-  await context.route("**/api/v1/**", async (route) => {
-    const request = route.request();
-    const url = new URL(request.url());
-    calls.push({
-      method: request.method(),
-      path: url.pathname,
-      body: request.postDataJSON(),
-      key: request.headers()["idempotency-key"],
-    });
-    if (url.pathname === "/api/v1/platform/me") {
-      if (state.legacy)
-        return route.fulfill({
-          status: 404,
-          json: { error: { code: "NOT_FOUND" } },
-        });
-      if (state.unavailable)
-        return route.fulfill({
-          status: 503,
-          json: { error: { code: "AUTH_UNAVAILABLE" } },
-        });
-      return route.fulfill({ json: fixtureProfile(state) });
-    }
-    if (state.deniedStatus)
-      return route.fulfill({
-        status: state.deniedStatus,
-        json: { error: { code: state.deniedCode ?? "PORTAL_ACCESS_DENIED" } },
-      });
-    if (url.pathname === "/api/v1/users/me") {
-      return route.fulfill({
-        json: {
-          user: fixtureProfile(state).user,
-          role: state.admin ? "admin" : "user",
-          access: { state: "active" },
-          mfa: {
-            required: state.admin,
-            enrolled: state.enrolled,
-            verified: state.verified,
-          },
-        },
-      });
-    }
-    if (url.pathname === "/api/v1/organizations")
-      return route.fulfill({ json: { organizations: [], nextCursor: null } });
-    if (url.pathname === "/api/v1/auth/invitations")
-      return route.fulfill({
-        json: {
-          items:
-            state.invited && !state.accepted
-              ? [
-                  {
-                    id: "owner-invite",
-                    clientId: "fixture-org",
-                    organizationName: "Invited Hotel",
-                    role: "owner",
-                    version: 1,
-                    expiresAt: "2026-10-15T10:00:00.000Z",
-                  },
-                ]
-              : [],
-          nextCursor: null,
-        },
-      });
-    if (url.pathname === "/api/v1/auth/invitations/owner-invite/accept") {
-      state.accepted = true;
-      return route.fulfill({ json: { member: { role: "owner" } } });
-    }
-    if (url.pathname === "/api/v1/admin/overview")
-      return route.fulfill({
-        json: {
-          admins: 1,
-          activeAdmins: 1,
-          users: state.directoryUsers ?? 1,
-          organizations: state.archived ? 0 : 1,
-        },
-      });
-    if (url.pathname === "/api/v1/admin/people")
-      return route.fulfill({
-        json: {
-          items: state.emptyPeople
-            ? []
-            : [
-                {
-                  uid: "fixture-user",
-                  email: "fixture@example.test",
-                  name: "Fixture User",
-                  role: state.directoryPersonRole ?? "admin",
-                  status: "active",
-                  mfaEnrolled: true,
-                  lastSignInAt: null,
-                  memberships: state.directoryMemberships ?? [],
-                },
-              ],
-          nextCursor: null,
-        },
-      });
-    if (
-      url.pathname === "/api/v1/admin/organizations" &&
-      request.method() === "GET"
-    )
-      return route.fulfill({
-        json: {
-          items: state.archived
-            ? []
-            : [
-                {
-                  id: "fixture-org",
-                  name: "Fixture Hotel",
-                  status: "active",
-                  owners: ["owner@example.test"],
-                  memberCount: 1,
-                  gateCount: state.gates ?? 0,
-                  products: ["host"],
-                },
-              ],
-          nextCursor: null,
-        },
-      });
-    if (url.pathname === "/api/v1/admin/organizations/fixture-org")
-      return route.fulfill({
-        json: {
-          organization: {
-            id: "fixture-org",
-            name: "Fixture Hotel",
-            status: "active",
-            version: 4,
-          },
-          members: [],
-          impact: {
-            members: 1,
-            properties: 2,
-            rooms: 3,
-            openReservations: 4,
-            gates: state.gates ?? 0,
-            systems: state.gates ? [{ name: "Front gate" }] : [],
-          },
-        },
-      });
-    if (
-      url.pathname === "/api/v1/organizations/fixture-org" &&
-      request.method() === "DELETE"
-    ) {
-      state.archived = true;
-      return route.fulfill({
-        json: { organization: { status: "archived" }, historyRetained: true },
-      });
-    }
-    return route.fulfill({ json: { items: [], nextCursor: null } });
-  });
-  const page = await context.newPage();
-  page.on("pageerror", (error) => errors.push(error.message));
-  return { state, context, page, calls, errors };
-}
+import { scenario, startSite } from "./platform-test-fixtures.mjs";
+import { workspaceFor } from "./host-test-shell.mjs";
 
 test("shared login, product isolation, MFA, safe redirects and session cleanup", async (t) => {
-  const server = createServer(async (request, response) => {
-    try {
-      let file = path.resolve(
-        root,
-        "." + new URL(request.url, "http://localhost").pathname,
-      );
-      if (!file.startsWith(root)) {
-        response.writeHead(403).end();
-        return;
-      }
-      if ((await stat(file)).isDirectory())
-        file = path.join(file, "index.html");
-      response.setHeader(
-        "Content-Type",
-        file.endsWith(".js")
-          ? "application/javascript"
-          : file.endsWith(".css")
-            ? "text/css"
-            : file.endsWith(".html")
-              ? "text/html; charset=utf-8"
-              : "application/octet-stream",
-      );
-      response.end(await readFile(file));
-    } catch {
-      response.writeHead(404).end();
-    }
-  });
-  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
-  t.after(() => {
-    server.closeAllConnections();
-    return new Promise((resolve) => server.close(resolve));
-  });
-  const browser = await chromium.launch({
-    channel: process.env.WIFIGATE_BROWSER_CHANNEL ?? "chrome",
-    headless: true,
-  });
-  t.after(() => browser.close());
-  const origin = `http://127.0.0.1:${server.address().port}`;
+  const { origin, browser } = await startSite(t);
 
   await t.test(
     "returning to Overview refreshes changed memberships and removed Host users",
@@ -344,8 +35,8 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         .getByRole("button", { name: "Search", exact: true })
         .click();
       await page.locator("#admin-directory .admin-row").waitFor();
-      const navigation = page.locator("#host-section-navigation");
-      await navigation.locator('[data-view-id="account"]').click();
+      const navigation = page.locator("#host-sidebar");
+      await navigation.locator('[data-view-id="settings"]').click();
       fixture.state.directoryMemberships[0].products.host = {
         role: "admin",
         status: "blocked",
@@ -370,7 +61,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         "true",
       );
 
-      await navigation.locator('[data-view-id="account"]').click();
+      await navigation.locator('[data-view-id="settings"]').click();
       fixture.state.emptyPeople = true;
       fixture.state.directoryUsers = 0;
       await navigation.locator('[data-view-id="overview"]').click();
@@ -423,10 +114,10 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       const lateResponse = page.waitForResponse(
         (response) => response.headers()["x-fixture-delayed"] === "1",
       );
-      await navigation.locator('[data-view-id="account"]').click();
+      await navigation.locator('[data-view-id="settings"]').click();
       await navigation.locator('[data-view-id="overview"]').click();
       await lateStarted;
-      await navigation.locator('[data-view-id="account"]').click();
+      await navigation.locator('[data-view-id="settings"]').click();
       await navigation.locator('[data-view-id="overview"]').click();
       await page
         .locator("#admin-overview [role=status]", {
@@ -473,7 +164,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         (call) => call.path === "/api/v1/admin/overview",
       ).length;
       const response = page.waitForResponse(
-        (res) => new URL(res.url()).pathname === "/api/v1/users/me",
+        (res) => new URL(res.url()).pathname === "/api/v1/platform/me",
       );
       await page.evaluate(() => {
         window.directoryBeforeFocus =
@@ -507,7 +198,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       await page.locator("#dashboard-content").waitFor({ state: "visible" });
       assert.equal(
         await page
-          .locator('#host-section-navigation [data-view-id="overview"]')
+          .locator('#host-sidebar [data-view-id="overview"]')
           .isVisible(),
         false,
       );
@@ -534,8 +225,8 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       await page.locator("[data-cookie-reject]").click();
       await page.locator("#admin-overview .admin-row").waitFor();
 
-      const navigation = page.locator("#host-section-navigation");
-      const overview = navigation.locator('[data-view-id="overview"]');
+      const sidebar = page.locator("#host-sidebar");
+      const overview = sidebar.locator('[data-view-id="overview"]');
       const overviewBounds = await overview.boundingBox();
       assert.ok(
         overviewBounds.height <= 48,
@@ -549,18 +240,18 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         "Directory tabs should stay compact",
       );
 
-      await page.setViewportSize({ width: 1280, height: 420 });
-      await navigation.hover();
+      await page.setViewportSize({ width: 1280, height: 240 });
+      await sidebar.hover();
       await page.mouse.wheel(0, 600);
       await page.waitForFunction(
-        () => document.querySelector("#host-section-navigation").scrollTop > 0,
+        () => document.querySelector("#host-sidebar").scrollTop > 0,
       );
       await overview.click();
-      const profile = await page.locator("#sidebar-profile").boundingBox();
       const scrolledOverview = await overview.boundingBox();
       assert.ok(
-        scrolledOverview.y + scrolledOverview.height <= profile.y,
-        "Profile must not cover navigation",
+        scrolledOverview.y >= 0 &&
+          scrolledOverview.y + scrolledOverview.height <= 240,
+        "A short screen scrolls the sidebar to every item",
       );
 
       await page.setViewportSize({ width: 390, height: 420 });
@@ -803,9 +494,45 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         .waitFor({ state: "visible" });
       assert.equal(
         await fixture.page
-          .locator('#product-switcher option[value="manager"]')
-          .evaluate((option) => option.disabled),
+          .locator('#product-switcher [data-product-option="manager"]')
+          .getAttribute("aria-disabled"),
+        "true",
+      );
+      // The pill is a listbox: arrow keys reach a disabled product, whose
+      // reason shows; Enter on it does nothing; Escape returns to the pill.
+      const pill = fixture.page.locator("#product-switcher-button");
+      await pill.click();
+      assert.equal(await pill.getAttribute("aria-expanded"), "true");
+      const manager = fixture.page.locator(
+        '#product-switcher [data-product-option="manager"]',
+      );
+      await fixture.page.keyboard.press("ArrowDown");
+      assert.equal(
+        await fixture.page
+          .locator("#product-switcher-list")
+          .getAttribute("aria-activedescendant"),
+        "product-option-manager",
+      );
+      await manager.locator("[role=tooltip]").waitFor();
+      assert.equal(
+        await manager.locator("[role=tooltip]").innerText(),
+        "A WIFIGATE administrator needs to approve your access first.",
+      );
+      await fixture.page.keyboard.press("Enter");
+      assert.equal(new URL(fixture.page.url()).pathname, "/dashboard/pay/");
+      await fixture.page.keyboard.press("Escape");
+      assert.equal(await pill.getAttribute("aria-expanded"), "false");
+      assert.equal(
+        await pill.evaluate((element) => element === document.activeElement),
         true,
+      );
+      assert.deepEqual(
+        await fixture.page
+          .locator("#product-switcher [role=option]")
+          .evaluateAll((options) =>
+            options.map((option) => option.dataset.productOption),
+          ),
+        ["host", "pay", "manager"],
       );
       assert.deepEqual(fixture.errors, []);
       await fixture.context.close();
@@ -1149,7 +876,10 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
           "support-org";
       });
       await fixture.page
-        .getByRole("button", { name: "Support", exact: true })
+        .locator('#host-section-navigation [data-view-id="settings"]')
+        .click();
+      await fixture.page
+        .getByRole("tab", { name: "Support access", exact: true })
         .click();
       const support = fixture.page.getByRole("region", {
         name: "Approved support diagnostics",
@@ -1171,6 +901,10 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       assert.equal(new URL(fixture.page.url()).pathname, "/dashboard/host/");
       assert.equal(
         new URL(fixture.page.url()).searchParams.get("view"),
+        "settings",
+      );
+      assert.equal(
+        new URL(fixture.page.url()).searchParams.get("tab"),
         "support",
       );
       assert.equal(
@@ -1197,7 +931,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         resolveRequest = resolve;
       });
       await fixture.context.route(
-        "**/api/v1/organizations/org-a/rooms",
+        "**/api/v1/organizations/org-a/systems",
         (route) => resolveRequest(route),
       );
       await fixture.page.evaluate(() => {
@@ -1208,7 +942,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
           .then(({ portalRequest }) => {
             return portalRequest(
               { getIdToken: async () => "isolated-token" },
-              "/api/v1/organizations/org-a/rooms",
+              "/api/v1/organizations/org-a/systems",
             );
           })
           .catch((error) => {
@@ -1361,20 +1095,24 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
   );
 
   await t.test(
-    "legacy API dashboard entry preserves Host access and leaves other products unavailable",
+    "a missing platform endpoint keeps Host closed without the old profile read",
     async () => {
       const fixture = await scenario(browser, { legacy: true });
-      await fixture.page.goto(origin + "/dashboard/");
+      await fixture.page.goto(origin + "/dashboard/host/");
       await fixture.page
-        .locator('[data-product="host"][data-state="active"] a')
-        .click();
-      await fixture.page
-        .locator("#dashboard-content")
-        .waitFor({ state: "visible" });
-      assert.ok(fixture.calls.some((call) => call.path === "/api/v1/users/me"));
+        .locator("#access-panel", { hasText: "Unable to check access" })
+        .waitFor();
       assert.equal(
-        await fixture.page.locator('[data-view="overview"]:visible').count(),
-        0,
+        await fixture.page.locator("#dashboard-content").isVisible(),
+        false,
+      );
+      assert.equal(
+        fixture.calls.some((call) => call.path === "/api/v1/users/me"),
+        false,
+      );
+      assert.equal(
+        fixture.calls.some((call) => call.path === "/api/v1/organizations"),
+        false,
       );
       assert.deepEqual(fixture.errors, []);
       await fixture.context.close();
@@ -1393,11 +1131,11 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       const page = fixture.page;
       await page.goto(origin + "/dashboard/host/");
       await page.locator("[data-cookie-reject]").click();
+      const bell = page.locator("#join-organization");
+      await bell.locator("[data-invitation-count]", { hasText: "1" }).waitFor();
+      await bell.click();
       await page
-        .getByRole("button", { name: "Team invitations", exact: true })
-        .click();
-      await page
-        .getByRole("button", { name: "Accept team invitation" })
+        .getByRole("button", { name: "Join Invited Hotel", exact: true })
         .click();
       await page.locator("#mfa-challenge").waitFor({ state: "visible" });
       assert.equal(fixture.state.accepted, undefined);
@@ -1405,8 +1143,14 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       await page.locator('#mfa-challenge input[name="code"]').fill("123456");
       await page.locator('#mfa-challenge button[type="submit"]').click();
       await page
-        .getByText("No pending team invitations.", { exact: true })
+        .getByText("No organization is waiting for you to join.", {
+          exact: true,
+        })
         .waitFor();
+      assert.equal(
+        await bell.locator("[data-invitation-count]").innerText(),
+        "",
+      );
       assert.equal(fixture.state.accepted, true);
       assert.deepEqual(fixture.errors, []);
     },
@@ -1420,22 +1164,833 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       const page = fixture.page;
       await page.goto(origin + "/dashboard/host/");
       await page.locator("[data-cookie-reject]").click();
+      await page.locator("#join-organization").click();
       await page
-        .getByRole("button", { name: "Team invitations", exact: true })
+        .getByRole("button", { name: "Join Invited Hotel", exact: true })
         .click();
-      await page
-        .getByRole("button", { name: "Accept team invitation" })
-        .click();
-      await page.locator("#mfa-enrollment").waitFor({ state: "visible" });
+      // Authenticator setup lives on the product picker, shared by every
+      // product; the Host page has no copy of it.
+      await page.waitForURL(origin + "/dashboard/");
+      await page.locator("#platform-security").waitFor({ state: "visible" });
       assert.equal(fixture.state.accepted, undefined);
-      await page.locator("#cancel-enrollment").click();
+      assert.equal(fixture.calls.includes("begin-enroll"), false);
+      await page.locator('[data-product="host"] a').click();
+      await page.waitForURL(origin + "/dashboard/host/");
+      await page.locator("#join-organization").click();
       await page
-        .getByRole("button", { name: "Team invitations", exact: true })
-        .click();
-      await page
-        .getByRole("button", { name: "Accept team invitation" })
+        .getByRole("button", { name: "Join Invited Hotel", exact: true })
         .waitFor();
       assert.deepEqual(fixture.errors, []);
+    },
+  );
+
+  await t.test(
+    "an organization member without a Host plan reaches Host without My systems",
+    async (t) => {
+      const fixture = await scenario(browser, {
+        hostRole: null,
+        organizations: [
+          {
+            id: "member-org",
+            name: "Member Hotel",
+            timezone: "UTC",
+            version: 1,
+            membership: { role: "staff" },
+            workspace: {
+              role: "staff",
+              permissions: [
+                "read",
+                "reservations:write",
+                "invitations:write",
+                "operations:write",
+              ],
+              service: { state: "legacy-active", available: true },
+            },
+          },
+        ],
+      });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      await page.goto(origin + "/dashboard/host/?view=my-systems");
+      await page.locator("#dashboard-content").waitFor({ state: "visible" });
+      await page.waitForFunction(
+        () => document.body.dataset.hostViewId === "systems",
+      );
+      assert.equal(
+        await page.locator('#host-sidebar [data-view-id="my-systems"]').isVisible(),
+        false,
+      );
+      assert.equal(await page.locator("#host-my-systems").isVisible(), false);
+      assert.equal(
+        await page.locator("#workspace-org-switcher .org-card__name").innerText(),
+        "Member Hotel",
+      );
+      assert.equal(
+        await page
+          .locator("#workspace-org-switcher .host-role-badge")
+          .getAttribute("data-role"),
+        "staff",
+      );
+      assert.equal(
+        await page.locator('#host-sidebar [data-view-id="connect"]').isVisible(),
+        false,
+        "staff has no integrations:write",
+      );
+      assert.equal(
+        fixture.calls.some((call) => call.path?.startsWith("/api/v1/me/")),
+        false,
+      );
+      assert.equal(await page.locator("#account-plan").innerText(), "");
+      // A My systems call refused for want of a plan stays a local refusal.
+      const refusal = await page.evaluate(async () => {
+        const { portalRequest } = await import("/js/api/index.js");
+        try {
+          await portalRequest(
+            { getIdToken: async () => "isolated-token" },
+            "/api/v1/me/systems",
+          );
+        } catch (error) {
+          return error.code;
+        }
+      });
+      assert.equal(refusal, "HOST_PLAN_REQUIRED");
+      await page.waitForTimeout(100);
+      assert.equal(new URL(page.url()).pathname, "/dashboard/host/");
+      assert.equal(await page.locator("#dashboard-content").isVisible(), true);
+      assert.equal(fixture.calls.includes("signout"), false);
+      assert.deepEqual(fixture.errors, []);
+    },
+  );
+
+  for (const mobile of [false, true])
+    await t.test(
+      `a pending invitation opens Host with only the join view (${mobile ? "phone, Hebrew" : "desktop"})`,
+      async (t) => {
+        const fixture = await scenario(browser, {
+          host: "pending",
+          hostRole: null,
+          invited: true,
+          mobile,
+        });
+        t.after(() => fixture.context.close());
+        const page = fixture.page;
+        await page.goto(origin + "/dashboard/" + (mobile ? "?lang=he" : ""));
+        const tile = page.locator('.product-tile[data-product="host"]');
+        await tile.waitFor();
+        assert.equal(await tile.getAttribute("data-state"), "pending");
+        await tile.locator("a").click();
+        await page.waitForURL(
+          origin + "/dashboard/host/" + (mobile ? "?lang=he" : ""),
+        );
+        await page.locator("#dashboard-content").waitFor({ state: "visible" });
+        await page.waitForFunction(
+          () => document.body.dataset.hostViewId === "invitations",
+        );
+        await page
+          .getByRole("button", {
+            name: mobile ? "הצטרפות ל־Invited Hotel" : "Join Invited Hotel",
+            exact: true,
+          })
+          .waitFor();
+        assert.equal(
+          await page.locator("body").evaluate((body) =>
+            body.classList.contains("host-menu-empty"),
+          ),
+          true,
+        );
+        assert.equal(await page.locator("#host-tabbar").isVisible(), false);
+        assert.equal(
+          fixture.calls.some((call) => call.path === "/api/v1/organizations"),
+          false,
+          "a pending account reads no organization data",
+        );
+        assert.ok(
+          await page.evaluate(
+            () => document.documentElement.scrollWidth <= innerWidth,
+          ),
+        );
+        assert.deepEqual(fixture.errors, []);
+      },
+    );
+
+  for (const [path, selected] of [
+    ["/dashboard/", ""],
+    ["/dashboard/pay/", "pay"],
+    ["/dashboard/manager/", "manager"],
+    ["/dashboard/host/", "host"],
+  ])
+    for (const width of [1440, 390, 320])
+      await t.test(
+        `the product pill sits at the top centre of ${path} at ${width}px`,
+        async (t) => {
+          const fixture = await scenario(browser, {
+            pay: "active",
+            manager: "active",
+          });
+          t.after(() => fixture.context.close());
+          const page = fixture.page;
+          await page.setViewportSize({ width, height: 900 });
+          await page.goto(origin + path + "?lang=he");
+          const pill = page.locator("#product-switcher-button");
+          await pill.waitFor();
+          assert.equal(
+            await pill.getAttribute("data-current-product"),
+            selected || "all",
+          );
+          const box = await pill.boundingBox();
+          const header = await page
+            .locator(".platform-header, .host-topbar")
+            .first()
+            .boundingBox();
+          assert.ok(
+            box.y >= header.y && box.y + box.height <= header.y + header.height,
+            "the pill is in the top bar",
+          );
+          // At the top centre on every page and width, so switching
+          // products never moves it sideways.
+          if (width === 1440)
+            assert.ok(
+              Math.abs(box.x + box.width / 2 - (header.x + header.width / 2)) < 40,
+              `the pill is centred: ${box.x + box.width / 2}`,
+            );
+          else
+            assert.ok(
+              Math.abs(box.x + box.width / 2 - width / 2) <= 4,
+              `the pill is centred on the phone: ${box.x + box.width / 2}`,
+            );
+          assert.ok(box.height >= 44, "touch target");
+          await pill.click();
+          const options = page.locator("#product-switcher [role=option]");
+          assert.deepEqual(
+            await options.evaluateAll((items) =>
+              items.map((item) => item.dataset.productOption),
+            ),
+            ["host", "pay", "manager"],
+          );
+          const tops = await options.evaluateAll((items) =>
+            items.map((item) => item.getBoundingClientRect().top),
+          );
+          assert.ok(tops[0] < tops[1] && tops[1] < tops[2], "fixed order");
+          const panel = await page
+            .locator(".product-switcher__popover")
+            .boundingBox();
+          assert.ok(
+            panel.x >= 0 && panel.x + panel.width <= width,
+            "the list stays on screen",
+          );
+          assert.ok(
+            await page.evaluate(
+              () => document.documentElement.scrollWidth <= innerWidth,
+            ),
+          );
+          await page.keyboard.press("Escape");
+          assert.deepEqual(fixture.errors, []);
+        },
+      );
+
+  // An organization the Host workspace can open, with the permissions the
+  // API returns for that role.
+  const organization = (name, role = "owner") => ({
+    id:
+      name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "") || "hebrew-org",
+    name,
+    timezone: "UTC",
+    version: 1,
+    membership: { role },
+    workspace: workspaceFor(role),
+  });
+  const settled = (page) =>
+    page.waitForFunction(
+      () =>
+        document.querySelector("#host-management")?.dataset.loading ===
+        "false",
+    );
+  const noSidewaysScroll = (page) =>
+    page.evaluate(() => document.documentElement.scrollWidth <= innerWidth);
+
+  // An ⓘ opens by hover, click or keyboard focus, stays inside the viewport
+  // in both directions (Hebrew included) and closes on Escape and when the
+  // pointer leaves; CSS alone never shows it.
+  async function checkInfoTip(page, tip, width) {
+    const button = tip.locator(".info-tip__button");
+    const bubble = tip.locator(".info-tip__bubble");
+    assert.equal(await bubble.isVisible(), false);
+    await button.hover();
+    await bubble.waitFor({ state: "visible" });
+    await button.click();
+    const box = await bubble.boundingBox();
+    assert.ok(
+      box.x >= 0 && box.x + box.width <= width,
+      `the bubble stays on screen: ${box.x}..${box.x + box.width} of ${width}`,
+    );
+    assert.ok(await noSidewaysScroll(page), "no sideways scroll");
+    await page.keyboard.press("Escape");
+    await bubble.waitFor({ state: "hidden" });
+    await button.click();
+    await bubble.waitFor({ state: "visible" });
+    await page.mouse.move(1, 1);
+    await bubble.waitFor({ state: "hidden" });
+    await button.focus();
+    await page.keyboard.press("Shift+Tab");
+    await page.keyboard.press("Tab");
+    await bubble.waitFor({ state: "visible" });
+    await page.keyboard.press("Escape");
+    await bubble.waitFor({ state: "hidden" });
+    assert.ok(await noSidewaysScroll(page));
+  }
+
+  for (const [language, width] of [
+    ["he", 320],
+    ["he", 390],
+    ["en", 390],
+  ])
+    await t.test(
+      `ⓘ bubbles stay on screen and close at ${width}px (${language})`,
+      async (t) => {
+        const query = language === "he" ? "?lang=he" : "";
+        const holder = await scenario(browser, {
+          viewport: { width, height: 844 },
+          organizations: [organization("Grand Hotel")],
+        });
+        t.after(() => holder.context.close());
+        await holder.page.goto(origin + "/dashboard/host/" + query);
+        await holder.page.locator("[data-cookie-reject]").click();
+        await holder.page.waitForFunction(
+          () => document.body.dataset.hostViewId === "my-systems",
+        );
+        await settled(holder.page);
+        await checkInfoTip(
+          holder.page,
+          holder.page
+            .locator('[data-workspace-view="my-systems"] .info-tip')
+            .first(),
+          width,
+        );
+        assert.deepEqual(holder.errors, []);
+
+        const pending = await scenario(browser, {
+          viewport: { width, height: 844 },
+          host: "pending",
+          hostRole: null,
+          invited: true,
+        });
+        t.after(() => pending.context.close());
+        await pending.page.goto(origin + "/dashboard/host/" + query);
+        await pending.page.locator("[data-cookie-reject]").click();
+        await pending.page.locator(".join-card").waitFor();
+        await checkInfoTip(
+          pending.page,
+          pending.page.locator(".join-view .view-heading .info-tip"),
+          width,
+        );
+        assert.deepEqual(pending.errors, []);
+      },
+    );
+
+  for (const mobile of [false, true])
+    await t.test(
+      `the account menu opens on its first action, not on the plan chip (${mobile ? "phone" : "desktop"}, Hebrew)`,
+      async (t) => {
+        const fixture = await scenario(browser, {
+          mobile,
+          organizations: [organization("Grand Hotel")],
+        });
+        t.after(() => fixture.context.close());
+        const page = fixture.page;
+        await page.goto(origin + "/dashboard/host/?lang=he");
+        await page.locator("[data-cookie-reject]").click();
+        await settled(page);
+        await page.locator("#account-button").click();
+        await page.locator("#account-menu").waitFor({ state: "visible" });
+        assert.equal(
+          await page.evaluate(() => document.activeElement?.id),
+          "account-security",
+        );
+        const chip = page.locator("#account-plan .host-role-badge");
+        assert.equal(await chip.getAttribute("data-role"), "host-user");
+        assert.equal(
+          await chip.locator(".host-role-explanation").isVisible(),
+          false,
+          "no tooltip covers the first action",
+        );
+        // The chip in the person's own menu speaks to them.
+        assert.match(await chip.getAttribute("aria-label"), /יש לכם מנוי Host/);
+        await page.keyboard.press("Escape");
+        await page.locator("#account-menu").waitFor({ state: "hidden" });
+        assert.equal(
+          await page.evaluate(() => document.activeElement?.id),
+          "account-button",
+        );
+        assert.deepEqual(fixture.errors, []);
+      },
+    );
+
+  await t.test(
+    "a pending account's menu opens on its first visible action (phone, Hebrew)",
+    async (t) => {
+      const fixture = await scenario(browser, {
+        mobile: true,
+        host: "pending",
+        hostRole: null,
+        invited: true,
+      });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      await page.goto(origin + "/dashboard/host/?lang=he");
+      await page.locator("[data-cookie-reject]").click();
+      await page.locator(".join-card").waitFor();
+      await page.locator("#account-button").click();
+      assert.equal(
+        await page.evaluate(() =>
+          document.activeElement?.classList.contains("host-account__language"),
+        ),
+        true,
+      );
+      assert.deepEqual(fixture.errors, []);
+    },
+  );
+
+  await t.test(
+    "the account menu is closed before the dashboard script runs",
+    async (t) => {
+      const fixture = await scenario(browser, { mobile: true });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      await fixture.context.route("**/js/host-dashboard.bundle.js*", (route) =>
+        route.abort(),
+      );
+      await page.goto(origin + "/dashboard/host/");
+      await page.locator("#access-panel").waitFor({ state: "visible" });
+      assert.equal(await page.locator("#account-menu").isVisible(), false);
+      assert.ok(await noSidewaysScroll(page));
+    },
+  );
+
+  await t.test(
+    "Hebrew text never asks for a weight its fonts don't have",
+    async (t) => {
+      const fixture = await scenario(browser, {
+        admin: true,
+        enrolled: true,
+        verified: true,
+        manager: "pending",
+        organizations: [
+          organization("מלון גרנד"),
+          organization("Beach House", "viewer"),
+        ],
+      });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      // Manrope has no Hebrew letters; above 700 the Windows fallback has
+      // none either and Chrome draws a serif.
+      const heavyHebrew = () => {
+        const found = new Set();
+        const walker = document.createTreeWalker(
+          document.body,
+          NodeFilter.SHOW_TEXT,
+        );
+        for (let text = walker.nextNode(); text; text = walker.nextNode()) {
+          const element = text.parentElement;
+          if (
+            /[֐-׿]/.test(text.data) &&
+            element.getClientRects().length &&
+            Number(getComputedStyle(element).fontWeight) > 700
+          )
+            found.add(`${element.className}: ${text.data.trim()}`);
+        }
+        return [...found];
+      };
+      const fonts = async (selector) => {
+        const cdp = await page.context().newCDPSession(page);
+        await cdp.send("DOM.enable");
+        await cdp.send("CSS.enable");
+        const { root } = await cdp.send("DOM.getDocument");
+        const { nodeId } = await cdp.send("DOM.querySelector", {
+          nodeId: root.nodeId,
+          selector,
+        });
+        const result = await cdp.send("CSS.getPlatformFontsForNode", {
+          nodeId,
+        });
+        await cdp.detach();
+        return result.fonts.map((font) => font.familyName).join(", ");
+      };
+      for (const view of [
+        "",
+        "&view=systems",
+        "&view=calendar",
+        "&view=bookings",
+        "&view=settings&tab=organization",
+        "&view=invitations",
+      ]) {
+        await page.goto(origin + "/dashboard/host/?lang=he" + view);
+        await settled(page);
+        await page.locator("#account-button").click();
+        assert.deepEqual(await page.evaluate(heavyHebrew), [], view || "home");
+        await page.keyboard.press("Escape");
+      }
+      assert.doesNotMatch(await fonts("#workspace-current-view"), /Times/);
+      assert.doesNotMatch(await fonts(".org-card__name"), /Times/);
+      await page.goto(origin + "/dashboard/?lang=he");
+      await page.locator("#product-switcher-button").click();
+      assert.deepEqual(await page.evaluate(heavyHebrew), [], "picker");
+      assert.doesNotMatch(
+        await fonts("#product-switcher-button .product-switcher__name"),
+        /Times/,
+      );
+      assert.deepEqual(fixture.errors, []);
+    },
+  );
+
+  await t.test(
+    "names keep their own direction but line up with the page",
+    async (t) => {
+      const fixture = await scenario(browser, {
+        mobile: true,
+        pay: "active",
+        organizations: [organization("Grand Hotel")],
+      });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      // How far the text of an element sits from its line's start or end.
+      const gaps = (selector) =>
+        page.locator(selector).first().evaluate((element) => {
+          const range = document.createRange();
+          range.selectNodeContents(element);
+          const text = range.getBoundingClientRect();
+          const box = element.getBoundingClientRect();
+          return {
+            right: Math.round(box.right - text.right),
+            left: Math.round(text.left - box.left),
+          };
+        });
+      await page.goto(origin + "/dashboard/host/?lang=he");
+      await settled(page);
+      for (const selector of [".org-card__name", "#account-name"]) {
+        if (selector === "#account-name")
+          await page.locator("#account-button").click();
+        assert.ok((await gaps(selector)).right <= 1, `${selector} on the right`);
+      }
+      await page.keyboard.press("Escape");
+      await page.locator("#product-switcher-button").click();
+      assert.ok(
+        (await gaps(".product-switcher__label strong")).right <= 1,
+        "product names on the right",
+      );
+      await page.keyboard.press("Escape");
+
+      const pending = await scenario(browser, {
+        mobile: true,
+        host: "pending",
+        hostRole: null,
+        invited: true,
+      });
+      t.after(() => pending.context.close());
+      await pending.page.goto(origin + "/dashboard/host/?lang=he");
+      await pending.page.locator(".join-card").waitFor();
+      const joinName = await pending.page
+        .locator(".join-card__details strong")
+        .evaluate((element) => {
+          const range = document.createRange();
+          range.selectNodeContents(element);
+          return Math.round(
+            element.getBoundingClientRect().right -
+              range.getBoundingClientRect().right,
+          );
+        });
+      assert.ok(joinName <= 1, "the organization name sits over its date");
+
+      const english = await scenario(browser, {
+        organizations: [organization("מלון גרנד")],
+      });
+      t.after(() => english.context.close());
+      await english.page.goto(origin + "/dashboard/host/");
+      await settled(english.page);
+      assert.equal(
+        await english.page.locator(".org-card__name").getAttribute("dir"),
+        "auto",
+      );
+      const left = await english.page
+        .locator(".org-card__name")
+        .evaluate((element) => {
+          const range = document.createRange();
+          range.selectNodeContents(element);
+          return Math.round(
+            range.getBoundingClientRect().left -
+              element.getBoundingClientRect().left,
+          );
+        });
+      assert.ok(left <= 1, "a Hebrew name on an English page sits on the left");
+      assert.deepEqual(
+        [...fixture.errors, ...pending.errors, ...english.errors],
+        [],
+      );
+    },
+  );
+
+  await t.test(
+    "the phone drawer is modal: Tab stays inside until it closes",
+    async (t) => {
+      const fixture = await scenario(browser, {
+        mobile: true,
+        organizations: [organization("Grand Hotel"), organization("Beach House")],
+      });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      await page.goto(origin + "/dashboard/host/?lang=he");
+      await page.locator("[data-cookie-reject]").click();
+      await settled(page);
+      await page.locator(".workspace-menu-toggle").click();
+      await page.locator("#host-sidebar.is-open").waitFor();
+      await page.waitForFunction(() =>
+        document.querySelector("#host-sidebar").contains(document.activeElement),
+      );
+      for (const selector of [
+        ".host-topbar",
+        "#workspace-main",
+        "#host-tabbar",
+        ".portal-legal",
+      ])
+        assert.equal(
+          await page.locator(selector).evaluate((element) => element.inert),
+          true,
+          `${selector} is inert behind the drawer`,
+        );
+      for (let step = 0; step < 14; step += 1) {
+        await page.keyboard.press("Tab");
+        assert.equal(
+          await page.evaluate(
+            () =>
+              document.activeElement === document.body ||
+              document
+                .querySelector("#host-sidebar")
+                .contains(document.activeElement),
+          ),
+          true,
+          `Tab ${step + 1} stays in the drawer`,
+        );
+      }
+      await page.keyboard.press("Escape");
+      await page.locator("#host-sidebar.is-open").waitFor({ state: "detached" });
+      assert.equal(
+        await page.locator("#workspace-main").evaluate((element) => element.inert),
+        false,
+      );
+      assert.equal(
+        await page.evaluate(() =>
+          document.activeElement?.classList.contains("workspace-menu-toggle"),
+        ),
+        true,
+      );
+      assert.deepEqual(fixture.errors, []);
+    },
+  );
+
+  for (const role of ["staff", "owner"])
+    await t.test(
+      `joining from a pending account opens the full workspace (${role})`,
+      async (t) => {
+        const fixture = await scenario(browser, {
+          mobile: true,
+          host: "pending",
+          hostRole: null,
+          invited: true,
+          inviteRole: role,
+          enrolled: role === "owner",
+          verified: role === "owner",
+          joinedOrganizations: [
+            { ...organization("Invited Hotel", role), id: "fixture-org" },
+          ],
+        });
+        t.after(() => fixture.context.close());
+        const page = fixture.page;
+        await page.goto(origin + "/dashboard/host/");
+        await page.locator("[data-cookie-reject]").click();
+        const join = page.getByRole("button", {
+          name: "Join Invited Hotel",
+          exact: true,
+        });
+        await join.waitFor();
+        assert.equal(
+          await page.evaluate(() =>
+            document.body.classList.contains("host-menu-empty"),
+          ),
+          true,
+        );
+        await join.click();
+        if (role === "owner") {
+          await page.locator('#mfa-challenge input[name="code"]').fill("123456");
+          await page.locator('#mfa-challenge button[type="submit"]').click();
+        }
+        await page.waitForFunction(
+          () => document.body.dataset.hostAccess === "member",
+        );
+        // The menu is back at once, also while the workspace still loads.
+        assert.equal(
+          await page.evaluate(() =>
+            document.body.classList.contains("host-menu-empty"),
+          ),
+          false,
+        );
+        await settled(page);
+        await page.waitForFunction(
+          () => document.body.dataset.hostViewId === "systems",
+        );
+        assert.equal(fixture.state.accepted, true);
+        assert.equal(await page.locator("#host-tabbar").isVisible(), true);
+        await page.locator(".workspace-menu-toggle").click();
+        await page.locator("#host-sidebar.is-open").waitFor();
+        const views = await page
+          .locator("#host-section-navigation button:not([hidden])")
+          .evaluateAll((items) => items.map((item) => item.dataset.viewId));
+        assert.ok(views.includes("systems") && views.includes("bookings"));
+        assert.equal(views.includes("my-systems"), false, "no My systems");
+        assert.equal(
+          views.includes("connect"),
+          role === "owner",
+          "Connect follows integrations:write",
+        );
+        assert.equal(
+          await page.locator(".org-card__name").innerText(),
+          "Invited Hotel",
+        );
+        assert.equal(
+          fixture.calls.some((call) => call.path?.startsWith("/api/v1/me/")),
+          false,
+        );
+        assert.deepEqual(fixture.errors, []);
+      },
+    );
+
+  await t.test(
+    "the join view speaks of joining in Hebrew and shows local time",
+    async (t) => {
+      const fixture = await scenario(browser, {
+        mobile: true,
+        host: "pending",
+        hostRole: null,
+        invited: true,
+        inviteRole: "staff",
+        timezoneId: "Asia/Jerusalem",
+        acceptError: { status: 410, code: "INVITATION_EXPIRED" },
+      });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      await page.goto(origin + "/dashboard/host/?lang=he");
+      const card = page.locator(".join-card");
+      await card.waitFor();
+      // 10:00 UTC is 13:00 in Jerusalem on 15 October.
+      const until = await card.locator("small").innerText();
+      assert.match(until, /13:00/);
+      assert.doesNotMatch(until, /10:00|UTC/);
+      await page
+        .getByRole("button", { name: "הצטרפות ל־Invited Hotel", exact: true })
+        .click();
+      const status = page.locator(".join-view__status");
+      await status
+        .getByText("הבקשה להצטרף לארגון פגה. בקשו מהבעלים לשלוח בקשה חדשה.", {
+          exact: true,
+        })
+        .waitFor();
+      assert.equal(
+        await page
+          .locator(".join-view")
+          .getByRole("button", { name: "בדיקה חוזרת", exact: true })
+          .isVisible(),
+        true,
+      );
+      // "הזמנות" means bookings: nothing in the join view uses the word.
+      assert.doesNotMatch(await page.locator(".join-view").innerText(), /הזמנ/);
+      assert.doesNotMatch(
+        await page.locator("#join-organization").getAttribute("aria-label"),
+        /הזמנ/,
+      );
+      assert.equal(fixture.state.accepted, undefined);
+      assert.deepEqual(fixture.errors, []);
+    },
+  );
+
+  await t.test(
+    "a request to join whose owner is no longer active says so and keeps the join view",
+    async (t) => {
+      const fixture = await scenario(browser, {
+        host: "pending",
+        hostRole: null,
+        invited: true,
+        inviteRole: "staff",
+        acceptError: { status: 403, code: "INVITER_ACCESS_DENIED" },
+      });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      await page.goto(origin + "/dashboard/host/");
+      await page.locator("[data-cookie-reject]").click();
+      await page
+        .getByRole("button", { name: "Join Invited Hotel", exact: true })
+        .click();
+      await page
+        .locator(".join-view__status")
+        .getByText(
+          "The owner who asked you to join is no longer active. Ask an active owner to send a new request.",
+          { exact: true },
+        )
+        .waitFor();
+      // The refusal never ends Host: no return to the product picker.
+      await page.waitForTimeout(300);
+      assert.equal(new URL(page.url()).pathname, "/dashboard/host/");
+      assert.equal(await page.locator(".join-card").count(), 1);
+      assert.equal(
+        await page
+          .locator(".join-view")
+          .getByRole("button", { name: "Check again", exact: true })
+          .isVisible(),
+        true,
+      );
+      assert.equal(
+        fixture.calls.filter(
+          (call) =>
+            call.path === "/api/v1/auth/invitations/owner-invite/accept",
+        ).length,
+        1,
+      );
+      assert.equal(fixture.state.accepted, undefined);
+      assert.deepEqual(fixture.errors, []);
+    },
+  );
+
+  await t.test(
+    "a disabled product's ⓘ says why, not only its state",
+    async (t) => {
+      for (const language of ["en", "he"]) {
+        const fixture = await scenario(browser, {
+          manager: "pending",
+          viewport: { width: 320, height: 800 },
+        });
+        t.after(() => fixture.context.close());
+        const page = fixture.page;
+        await page.goto(
+          origin + "/dashboard/" + (language === "he" ? "?lang=he" : ""),
+        );
+        await page.locator("#product-switcher-button").click();
+        const option = page.locator('[data-product-option="manager"]');
+        assert.equal(await option.getAttribute("aria-disabled"), "true");
+        const state = await option
+          .locator(".product-switcher__state")
+          .innerText();
+        const reason = await option
+          .locator(".product-switcher__reason")
+          .textContent();
+        assert.equal(
+          reason,
+          language === "he"
+            ? "מנהל WIFIGATE צריך לאשר קודם את הגישה שלכם."
+            : "A WIFIGATE administrator needs to approve your access first.",
+        );
+        assert.notEqual(reason.replace(/\.$/, ""), state);
+        assert.deepEqual(fixture.errors, []);
+      }
     },
   );
 
@@ -1554,14 +2109,54 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
             .isDisabled(),
           true,
         );
+        // The archive impact names systems, members and bookings only; it
+        // never counts systems.
         assert.match(
           await page.locator(".admin-dialog").textContent(),
-          /Front gate/,
+          /Fixture Hotel: its systems, 1 members and 4 open bookings will become inaccessible/,
+        );
+        assert.doesNotMatch(
+          await page.locator(".admin-dialog").textContent(),
+          /propert|room/i,
+        );
+        // Gates leave an organization only when its systems are removed:
+        // there is no transfer. Without a status per system a row may be a
+        // system that was already removed, so no system is named.
+        assert.match(
+          await page.locator(".admin-dialog").textContent(),
+          /Gates still held: 1\. Remove the systems that hold them first\./,
+        );
+        assert.doesNotMatch(
+          await page.locator(".admin-dialog").textContent(),
+          /transfer|Systems to remove|Front gate/i,
         );
         await page
           .locator(".admin-dialog")
           .getByRole("button", { name: "Cancel" })
           .click();
+        // With a status per system, only active systems are named, and a
+        // removed one is never asked to be removed again.
+        fixture.state.archiveSystems = [
+          { id: "front", name: "Front gate", status: "active" },
+          { id: "old", name: "Old gate", status: "disabled" },
+        ];
+        await page
+          .locator("#admin-overview")
+          .getByRole("button", { name: "Archive organization" })
+          .click();
+        await page
+          .locator(".admin-dialog")
+          .getByText("Systems to remove: Front gate.", { exact: false })
+          .waitFor();
+        assert.doesNotMatch(
+          await page.locator(".admin-dialog").textContent(),
+          /Old gate/,
+        );
+        await page
+          .locator(".admin-dialog")
+          .getByRole("button", { name: "Cancel" })
+          .click();
+        delete fixture.state.archiveSystems;
         fixture.state.gates = 0;
         await page
           .locator("#admin-overview")

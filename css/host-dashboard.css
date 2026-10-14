@@ -1,0 +1,3055 @@
+/* WIFIGATE Host dashboard (/dashboard/host/ and /dashboard/host/overview/).
+   One stylesheet on the website's tokens (css/platform.css: ink, muted, line,
+   card, Host blue) and Manrope (css/fonts.css through host-portal.css): a
+   glass top bar with the product pill at the top centre, a glass sidebar,
+   opaque white cards on the Host network backdrop. Below 960px the sidebar
+   is a drawer and a tab bar sits at the bottom. Logical properties only, so
+   Hebrew mirrors everything except the product order. */
+.host-app {
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+  --chip: #f1f5f9;
+  --border: #e2e8f0;
+  --field: #d7e0e8;
+  --label: #475569;
+  --danger: #b42318;
+  --danger-soft: #fef3f2;
+  --platform: #6d28d9;
+  --platform-soft: #f3e8ff;
+  --example: #7c3aed;
+  --radius-card: 20px;
+  --radius-control: 12px;
+  --sidebar-width: 288px;
+  --topbar-height: 64px;
+  --tabbar-height: 64px;
+  --host-blue: var(--host);
+  --host-ink: var(--ink);
+  --host-line: var(--border);
+  --host-muted: var(--muted);
+  --host-surface: var(--surface);
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  /* Its own stacking context, so the fixed backdrop paints above the page
+     background and below everything else. */
+  isolation: isolate;
+  background: #ffffff;
+  color: var(--ink);
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  accent-color: var(--host);
+}
+
+/* Backdrop: the picker's construction with Host wiring
+   (scripts/generate-host-backdrop.mjs), fixed behind everything and mirrored
+   in RTL so the globe stays opposite the sidebar. */
+.host-app::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url("../assets/img/host-backdrop.svg") center / cover no-repeat;
+}
+html[dir="rtl"] .host-app::before {
+  transform: scaleX(-1);
+}
+@media print, (forced-colors: active) {
+  .host-app::before {
+    display: none;
+  }
+}
+
+.host-app [hidden],
+.workspace-hidden {
+  display: none !important;
+}
+.host-app
+  :where(
+    button,
+    a,
+    input,
+    select,
+    textarea,
+    summary,
+    [tabindex]:not([tabindex="-1"])
+  ):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+/* A screen or card that takes focus after a view change (tabindex -1) is a
+   reading position, not a control: no ring around the whole panel. */
+.host-app [tabindex="-1"]:focus-visible {
+  outline: none;
+}
+.host-app button:disabled {
+  cursor: not-allowed;
+}
+.workspace-skip-link {
+  position: fixed;
+  inset-block-start: -100px;
+  inset-inline-start: 16px;
+  z-index: 100;
+  padding: 12px 20px;
+  border: 2px solid var(--host);
+  border-radius: var(--radius-control);
+  background: #ffffff;
+  color: var(--ink);
+  font-weight: 700;
+}
+.workspace-skip-link:focus {
+  inset-block-start: 12px;
+}
+
+/* Top bar: title (start), product pill (centre), bell, language and account
+   (end). The blur sits on a pseudo-element so the bar never becomes the
+   containing block of its fixed popovers. */
+.host-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  min-height: var(--topbar-height);
+  padding: 10px 24px;
+  border-bottom: 1px solid var(--border);
+}
+.host-topbar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(14px);
+}
+.host-topbar__start {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.host-topbar__title {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 1.2rem;
+  font-weight: var(--weight-heavy, 800);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.host-topbar__brand {
+  display: none;
+  align-items: center;
+  width: 132px;
+  min-height: 44px;
+}
+body:not(.host-ready) .host-topbar__brand {
+  display: inline-flex;
+}
+body:not(.host-ready) .host-topbar__title,
+body:not(.host-ready) .workspace-menu-toggle,
+body:not(.host-ready) #join-organization {
+  display: none;
+}
+.host-topbar .product-switcher {
+  justify-self: center;
+}
+/* Beside the sidebar (from 960px) the bar runs under it to the window's
+   edge, so the pill sits at the centre of the screen at every width, as on
+   the picker, Pay and Manager; the title still starts beside the sidebar.
+   Below 1280px the title has its own row under the pill's, so it never
+   squeezes under the pill. */
+@media (min-width: 960px) {
+  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
+    .host-topbar {
+    margin-inline-start: calc(-1 * var(--sidebar-width));
+    border-bottom: 0;
+  }
+  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
+    .host-topbar::before {
+    inset-inline-start: var(--sidebar-width);
+    border-bottom: 1px solid var(--border);
+  }
+  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
+    .host-topbar__start {
+    padding-inline-start: var(--sidebar-width);
+  }
+}
+@media (min-width: 960px) and (max-width: 1279px) {
+  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
+    .host-topbar {
+    grid-template-areas:
+      "start pill end"
+      "title title title";
+    row-gap: 2px;
+  }
+  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
+    .host-topbar__start {
+    display: contents;
+  }
+  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
+    .host-topbar__title {
+    grid-area: title;
+    margin-inline-start: var(--sidebar-width);
+  }
+  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
+    .host-topbar
+    .product-switcher {
+    grid-area: pill;
+  }
+  .host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden]))
+    .host-topbar__end {
+    grid-area: end;
+  }
+}
+.host-topbar__end {
+  justify-self: end;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+  max-width: none;
+  color: var(--ink);
+  font-size: 0.85rem;
+  overflow-wrap: normal;
+}
+.host-icon-button,
+.workspace-menu-toggle,
+.host-account__button {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #d8e4ea;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--ink);
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
+  cursor: pointer;
+}
+.host-icon-button svg,
+.workspace-menu-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.host-icon-button:hover,
+.workspace-menu-toggle:hover,
+.host-account__button:hover,
+.host-language:hover {
+  background: var(--surface-soft);
+}
+.workspace-menu-toggle {
+  display: none;
+}
+.host-bell__count:empty {
+  display: none;
+}
+.host-bell__count {
+  position: absolute;
+  inset-block-start: -4px;
+  inset-inline-end: -4px;
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  background: var(--host);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: var(--weight-heavy, 800);
+  line-height: 1;
+}
+.host-bell[aria-current="page"] {
+  border-color: var(--host);
+  background: var(--host-soft);
+  color: var(--host-strong);
+}
+.host-language {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid #d8e4ea;
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
+  cursor: pointer;
+}
+.host-account {
+  position: relative;
+}
+.host-account__button {
+  border-color: transparent;
+  background: #0a0a0a;
+  color: #ffffff;
+}
+.host-account__button:hover {
+  background: #0a0a0a;
+  filter: brightness(1.25);
+}
+.host-account__button .profile-avatar {
+  font-size: 0.95rem;
+  font-weight: var(--weight-heavy, 800);
+  line-height: 1;
+}
+.host-account__menu {
+  position: fixed;
+  z-index: 70;
+  display: grid;
+  width: min(300px, calc(100vw - 32px));
+  padding: 8px;
+  overflow: auto;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+}
+.host-account__who {
+  display: grid;
+  gap: 2px;
+  margin-bottom: 6px;
+  padding: 10px 12px 12px;
+  border-bottom: 1px solid #eef2f6;
+  overflow-wrap: anywhere;
+}
+.host-account__who strong {
+  font-size: 0.95rem;
+}
+.host-account__who span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.host-account__who span:empty {
+  display: none;
+}
+.host-account__who .host-role-badge {
+  justify-self: start;
+  margin: 6px 0 0;
+}
+.host-account__item {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+}
+.host-account__item:hover {
+  background: var(--chip);
+}
+.host-account__language {
+  display: none;
+}
+.host-account__sign-out {
+  color: var(--danger);
+}
+
+/* Sidebar: brand, organization card, navigation, My systems, Platform. */
+.host-sidebar {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: var(--sidebar-width);
+  padding: 20px 16px 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-inline-end: 1px solid var(--border);
+  scrollbar-width: thin;
+}
+.host-sidebar::before {
+  content: "";
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: 0;
+  z-index: -1;
+  width: var(--sidebar-width);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+}
+.host-sidebar__brand {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  min-height: 44px;
+  margin: 0 8px;
+}
+.host-ready:has(.host-sidebar:not([hidden])) {
+  padding-inline-start: var(--sidebar-width);
+}
+.org-switcher__box {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: 0 3px 9px rgba(15, 23, 42, 0.06);
+}
+.org-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 56px;
+  padding: 10px 12px 4px;
+  border: 0;
+  border-radius: 18px 18px 0 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: start;
+}
+button.org-card {
+  cursor: pointer;
+}
+button.org-card:hover {
+  background: var(--surface-soft);
+}
+.org-card__avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: var(--host-soft);
+  color: var(--host-strong);
+  font-size: 0.95rem;
+  font-weight: var(--weight-heavy, 800);
+}
+.org-card__text {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
+.org-card__label {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+/* A name keeps its own direction (dir="auto", an email dir="ltr") but lines
+   up with the page, not with itself: in Hebrew a Latin name sits on the
+   right like the labels next to it, in English a Hebrew name on the left. */
+html[dir="ltr"]
+  :is(
+    .org-card__name,
+    .org-switcher__label strong,
+    .join-card__details > *,
+    .host-account__who > *,
+    .account-card__who > *
+  ) {
+  text-align: left;
+}
+html[dir="rtl"]
+  :is(
+    .org-card__name,
+    .org-switcher__label strong,
+    .join-card__details > *,
+    .host-account__who > *,
+    .account-card__who > *
+  ) {
+  text-align: right;
+}
+.org-card__name {
+  overflow: hidden;
+  font-size: 0.95rem;
+  font-weight: var(--weight-heavy, 800);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.org-card__chevron {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.org-card[aria-expanded="true"] .org-card__chevron {
+  transform: rotate(180deg);
+}
+.org-card__role {
+  padding: 0 12px 10px 58px;
+}
+html[dir="rtl"] .org-card__role {
+  padding: 0 58px 10px 12px;
+}
+.org-card__role .host-role-badge {
+  margin: 0;
+}
+div.org-card {
+  padding-bottom: 4px;
+}
+.org-switcher__popover {
+  position: fixed;
+  z-index: 70;
+  width: min(256px, calc(100vw - 32px));
+  padding: 6px;
+  overflow: auto;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+}
+.org-switcher__list {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: none;
+}
+.org-switcher__option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 6px 10px;
+  border-radius: 14px;
+  cursor: pointer;
+}
+.org-switcher__option:hover,
+.org-switcher__option.is-active {
+  background: var(--chip);
+}
+.org-switcher__option[aria-selected="true"] {
+  background: var(--host-soft);
+}
+.org-switcher__label {
+  display: grid;
+  min-width: 0;
+}
+.org-switcher__label strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.org-switcher__label small {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+#host-section-navigation,
+.sidebar-platform {
+  display: grid;
+  gap: 4px;
+  align-content: start;
+}
+#host-section-navigation button,
+.sidebar-platform button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: #334155;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: start;
+  cursor: pointer;
+}
+#host-section-navigation button svg,
+.sidebar-platform button svg,
+.host-tabbar button svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+#host-section-navigation button:hover:not(:disabled),
+.sidebar-platform button:hover:not(:disabled) {
+  background: var(--chip);
+  color: var(--ink);
+}
+#host-section-navigation button[aria-current],
+.sidebar-platform button[aria-current] {
+  background: var(--host-soft);
+  color: var(--host-strong);
+}
+#host-section-navigation button[aria-current]::before,
+.sidebar-platform button[aria-current]::before {
+  content: "";
+  position: absolute;
+  inset-block: 10px;
+  inset-inline-start: 0;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--host);
+}
+.sidebar-platform:has(button:not([hidden])) {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.sidebar-platform button {
+  color: var(--platform);
+}
+.sidebar-platform button[aria-current] {
+  background: var(--platform-soft);
+  color: var(--platform);
+}
+.sidebar-platform button[aria-current]::before {
+  background: var(--platform);
+}
+.sidebar-systems h2 {
+  margin: 4px 14px 6px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: var(--weight-heavy, 800);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.sidebar-systems__list {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sidebar-systems__list:empty,
+.sidebar-systems:has(.sidebar-systems__list:empty) {
+  display: none;
+}
+.empty-state__text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Nothing to navigate (a pending account): no sidebar, menu or tab bar. */
+.host-menu-empty .host-sidebar,
+.host-menu-empty .workspace-menu-toggle,
+.host-menu-empty .host-tabbar {
+  display: none !important;
+}
+.host-ready.host-menu-empty:has(.host-sidebar:not([hidden])) {
+  padding-inline-start: 0;
+  padding-bottom: 0;
+}
+.host-menu-empty .host-topbar__brand {
+  display: inline-flex;
+}
+
+/* Main column. */
+.host-app .portal-shell {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px 32px 32px;
+  color: var(--ink);
+}
+.host-access {
+  max-width: 480px;
+  margin: clamp(2rem, 10vh, 6rem) auto 0;
+  text-align: center;
+}
+.host-app .portal-panel.host-access {
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--card);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+}
+.host-access h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+  font-weight: var(--weight-heavy, 800);
+}
+.host-access .app-login__progress {
+  margin: 18px auto 0;
+  max-width: 260px;
+}
+.host-access button {
+  margin-top: 16px;
+}
+.host-app #host-management,
+.host-app #admin-overview {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow-wrap: anywhere;
+}
+#host-management {
+  position: relative;
+}
+.host-app #host-management > [role="status"] {
+  margin: 0 0 16px;
+  color: var(--muted);
+}
+.workspace-view-panel {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.host-app .workspace-view-panel > section,
+.host-app .workspace-view-panel > details,
+.host-app .workspace-view-panel > .empty-state,
+.host-app .settings-body > [role="tabpanel"],
+.host-app #admin-overview {
+  min-width: 0;
+  margin: 0 0 20px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  box-shadow: var(--card-shadow);
+}
+.host-app .workspace-view-panel > section > :is(h2, h3):first-child,
+.host-app #admin-overview > h1 {
+  margin-top: 0;
+}
+.host-app .portal-panel h1,
+.host-app .portal-panel h2,
+.host-app .portal-panel h3 {
+  color: var(--ink);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.host-app .portal-panel h2 {
+  margin: 0 0 12px;
+  font-size: 1.35rem;
+  font-weight: var(--weight-heavy, 800);
+}
+.host-app .portal-panel h3 {
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+  font-weight: var(--weight-heavy, 800);
+}
+.host-app .portal-panel p,
+.host-app dialog p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+/* A title and its ⓘ: the ⓘ follows the title's last word, also when a
+   long title wraps on a phone. */
+.view-heading {
+  display: block;
+  margin-bottom: 12px;
+}
+.host-app .view-heading > :is(h2, h3) {
+  display: inline;
+  margin: 0;
+  vertical-align: middle;
+}
+.host-app .view-heading > .info-tip {
+  margin-inline-start: 8px;
+  vertical-align: middle;
+}
+.empty-state {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+}
+.host-app .empty-state p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+/* ⓘ: one plain line on hover, focus or tap, instead of hint text. */
+.info-tip {
+  position: relative;
+  display: inline-flex;
+}
+.host-app .info-tip .info-tip__button {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  min-height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: none;
+}
+.host-app .info-tip .info-tip__button::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+.host-app .info-tip .info-tip__button:hover:not(:disabled) {
+  background: var(--chip);
+  color: var(--ink);
+}
+/* The bubble is a floating panel: js/host-ui.js infoTip opens it (.is-open)
+   and js/popover.js placeFloating sets its left/top inside the viewport. No
+   hover or focus rule shows it, and no inline-start inset is set, so the
+   placement holds in Hebrew too. */
+.info-tip__bubble {
+  position: fixed;
+  inset: auto;
+  z-index: 50;
+  display: none;
+  width: max-content;
+  max-width: min(280px, calc(100vw - 32px));
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: start;
+  white-space: normal;
+}
+.info-tip.is-open .info-tip__bubble {
+  display: block;
+}
+
+/* Controls in panels and dialogs: Host blue primary, outlined secondary. */
+.host-app .portal-panel button,
+.host-app dialog:not(.mfa-dialog) button {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--host-strong);
+  border-radius: var(--radius-control);
+  background: var(--host-strong);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.2;
+  box-shadow: none;
+}
+.host-app .portal-panel button:hover:not(:disabled),
+.host-app dialog:not(.mfa-dialog) button:hover:not(:disabled) {
+  background: var(--host-strong);
+  filter: brightness(1.08);
+}
+.host-app .portal-panel .button-secondary,
+.host-app dialog .button-secondary {
+  border-color: var(--field);
+  background: #ffffff;
+  color: var(--ink);
+}
+.host-app .portal-panel .button-secondary:hover:not(:disabled),
+.host-app dialog .button-secondary:hover:not(:disabled) {
+  background: var(--surface-soft);
+  filter: none;
+}
+.host-app .portal-panel .button-danger,
+.host-app dialog .button-danger {
+  border-color: #f3b4ad;
+  background: #ffffff;
+  color: var(--danger);
+}
+.host-app .portal-panel .button-danger:hover:not(:disabled),
+.host-app dialog .button-danger:hover:not(:disabled) {
+  background: var(--danger-soft);
+  filter: none;
+}
+.host-app .button-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--field);
+  border-radius: var(--radius-control);
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.host-app .button-link:hover {
+  background: var(--surface-soft);
+}
+.host-app .portal-panel :where(input, select, textarea),
+.host-app dialog:not(.mfa-dialog) :where(input, select, textarea) {
+  min-width: 0;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 9px 12px;
+  border: 1px solid var(--field);
+  border-radius: var(--radius-control);
+  background: var(--surface-soft);
+  color: var(--ink);
+  font: inherit;
+}
+.host-app :where(input[type="checkbox"], input[type="radio"]) {
+  width: 18px;
+  min-height: 18px;
+  height: 18px;
+  padding: 0;
+}
+.host-app .portal-panel label,
+.host-app dialog:not(.mfa-dialog) label {
+  color: var(--label);
+  font-size: 0.85rem;
+  font-weight: 700;
+  gap: 6px;
+}
+.host-app label:has(> input[type="checkbox"]),
+.host-app label:has(> input[type="radio"]) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-block: 10px;
+}
+.host-app label > input[type="checkbox"],
+.host-app label > input[type="radio"] {
+  flex: none;
+  align-self: center;
+}
+.host-app fieldset {
+  min-width: 0;
+  margin: 16px 0;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--surface-soft);
+}
+.host-app legend {
+  padding-inline: 6px;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.host-app summary {
+  color: var(--ink);
+  font-weight: 700;
+}
+/* Every collapsed section reads as one: a 44px row with a chevron at its
+   end that turns when it opens, never a box that looks like a field. */
+.host-app details > summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  list-style: none;
+  cursor: pointer;
+}
+.host-app details > summary::-webkit-details-marker {
+  display: none;
+}
+.host-app details > summary::after {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-inline: auto 4px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 150ms ease;
+}
+.host-app details[open] > summary::after {
+  transform: translateY(2px) rotate(-135deg);
+}
+.host-app details[open] > summary {
+  margin-bottom: 16px;
+}
+.host-app #host-management details {
+  margin-block: 16px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--surface-soft);
+}
+.host-app #host-management form {
+  max-width: 36rem;
+}
+.host-app .workspace-view-panel form > button {
+  margin-inline-end: 8px;
+  margin-block-end: 8px;
+}
+.host-app input[type="email"],
+.host-app input[type="tel"],
+.host-app input[autocomplete="one-time-code"] {
+  direction: ltr;
+}
+/* Tabs: Settings and Activity. */
+.workspace-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-block: 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.host-app .portal-panel .workspace-tabs button {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--label);
+  font-size: 0.88rem;
+}
+.host-app .portal-panel .workspace-tabs button:hover:not(:disabled) {
+  background: var(--surface-soft);
+  filter: none;
+}
+.host-app .portal-panel .workspace-tabs button[aria-pressed="true"],
+.host-app .portal-panel .workspace-tabs button[aria-selected="true"] {
+  border-color: var(--host);
+  background: var(--host-soft);
+  color: var(--host-strong);
+}
+.settings-tabs {
+  margin-top: 4px;
+}
+.host-app .settings-body > [role="tabpanel"] {
+  margin: 0;
+}
+.host-app [data-workspace-view="settings"] > .view-heading {
+  margin-bottom: 12px;
+}
+.host-app #host-management details[open] {
+  padding-bottom: 14px;
+}
+.operations-detail {
+  margin-block: 12px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+}
+.operations-detail summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+/* Alert events: a checkbox each; the legend's ⓘ says what none means. */
+.host-app .operations-events {
+  margin-block: 4px 8px;
+}
+.host-app .operations-events legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--label);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* Settings → Account. */
+.account-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.account-card__avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #0a0a0a;
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: var(--weight-heavy, 800);
+}
+.account-card__who {
+  display: grid;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.account-card__who span {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.host-app .account-card__security {
+  margin: 16px 0;
+  color: var(--ink);
+}
+
+/* Join an organization (the bell). */
+.join-view__rows {
+  display: grid;
+  gap: 10px;
+}
+.join-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface-soft);
+}
+.join-card__details {
+  display: grid;
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+.join-card__details small {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.host-app .join-view__status:empty {
+  display: none;
+}
+.host-app .join-view__status {
+  margin: 12px 0 0;
+  color: var(--ink);
+}
+.join-view > button {
+  margin-top: 12px;
+}
+
+/* Calendar: one row per system, days across (the columns mirror in RTL);
+   below 480px an agenda, one list per day. */
+.host-calendar {
+  position: relative;
+  min-width: 0;
+}
+.calendar-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  margin: 0 0 16px;
+}
+.calendar-heading-text {
+  min-width: 0;
+}
+.host-app .portal-panel .calendar-heading h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+/* A date never breaks inside itself: the range wraps at its dash. */
+.calendar-heading__date,
+.team-invitation__date {
+  white-space: nowrap;
+}
+.host-app .calendar-heading__status {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+}
+.calendar-heading__status:empty {
+  display: none;
+}
+.calendar-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-bottom: 0;
+  border-radius: 14px 14px 0 0;
+  background: var(--surface-soft);
+}
+.calendar-navigation,
+.calendar-ranges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.host-app .portal-panel .calendar-toolbar button {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 0.82rem;
+}
+.host-app .portal-panel .calendar-toolbar button:hover:not(:disabled) {
+  background: var(--chip);
+  filter: none;
+}
+.host-app .portal-panel .calendar-toolbar button[aria-pressed="true"] {
+  border-color: var(--host-strong);
+  background: var(--host-strong);
+  color: #ffffff;
+}
+.calendar-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+  margin-inline-start: auto;
+}
+.host-app .portal-panel label.calendar-filter {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  margin: 0;
+  font-size: 0.75rem;
+}
+.host-app .portal-panel .calendar-filter select {
+  max-width: 14rem;
+  padding-block: 6px;
+  font-size: 0.85rem;
+}
+.calendar-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 0 0 14px 14px;
+  background: #ffffff;
+}
+.calendar-grid {
+  min-width: 100%;
+  border-collapse: collapse;
+}
+.calendar-grid th,
+.calendar-grid td {
+  padding: 0;
+  border: 1px solid var(--border);
+  vertical-align: top;
+}
+.calendar-grid thead th {
+  min-width: 56px;
+  height: 52px;
+  padding: 6px 4px;
+  background: #ffffff;
+  font-size: 0.8rem;
+  text-align: center;
+  vertical-align: middle;
+}
+.calendar-grid thead th:first-child {
+  min-width: 150px;
+  padding-inline: 12px;
+  text-align: start;
+}
+.calendar-grid thead th small {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.calendar-grid thead th span {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+}
+.calendar-grid .calendar-today {
+  background: #f5f9ff;
+  color: var(--host);
+}
+.calendar-grid .calendar-today span {
+  border-radius: 50%;
+  background: var(--host);
+  color: #ffffff;
+}
+.calendar-grid .calendar-today small {
+  color: var(--host);
+}
+.calendar-grid tbody th {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 2;
+  min-width: 150px;
+  max-width: 220px;
+  padding: 8px 12px;
+  background: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: start;
+  vertical-align: middle;
+}
+.calendar-system {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.calendar-system img {
+  flex: none;
+  width: 24px;
+  height: 24px;
+}
+/* height: 1px lets the timeline below fill the whole row (100%) when a
+   wrapped system name makes the row taller: its day lines and empty-day
+   targets then reach the bottom. */
+.calendar-grid td.calendar-system-timeline {
+  height: 1px;
+  padding: 0;
+}
+.calendar-timeline {
+  display: grid;
+  grid-template-columns: repeat(var(--calendar-days), minmax(56px, 1fr));
+  height: 100%;
+  min-height: 64px;
+  background: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(100% / var(--calendar-days) - 1px),
+    var(--border) calc(100% / var(--calendar-days) - 1px),
+    var(--border) calc(100% / var(--calendar-days))
+  );
+}
+/* An empty day: a quiet target that opens a new booking there. */
+.host-app .portal-panel .calendar-timeline .calendar-cell {
+  min-height: 56px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.host-app .portal-panel .calendar-timeline .calendar-cell:hover:not(:disabled) {
+  background: var(--host-soft);
+  filter: none;
+}
+.host-app .portal-panel .host-calendar .reservation-chip {
+  position: relative;
+  z-index: 1;
+  display: block;
+  min-width: 0;
+  min-height: 48px;
+  margin: 4px 3px;
+  padding: 6px 10px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 10px;
+  background: #d9eaff;
+  color: #15336e;
+  font-size: 0.8rem;
+  line-height: 1.25;
+  text-align: start;
+}
+.reservation-chip strong,
+.reservation-chip small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.reservation-chip small {
+  margin-top: 2px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.host-app .portal-panel .host-calendar .reservation-chip:hover:not(:disabled) {
+  filter: brightness(0.96);
+}
+.host-app .portal-panel .host-calendar .reservation-chip.reservation-draft {
+  background: #e8edf5;
+  color: #263546;
+}
+.host-app .portal-panel .host-calendar .reservation-chip.reservation-changed {
+  background: #fff0c6;
+  color: #603c00;
+}
+.host-app .portal-panel .host-calendar .reservation-chip.reservation-cancelled {
+  background: repeating-linear-gradient(
+    135deg,
+    #fce3e3 0,
+    #fce3e3 6px,
+    #f9d1d1 6px,
+    #f9d1d1 12px
+  );
+  color: #6b2222;
+}
+.host-app .portal-panel .host-calendar .reservation-chip.reservation-completed {
+  background: #e3f6ea;
+  color: #2a5a3c;
+}
+.host-calendar--empty > :not(.empty-state) {
+  display: none;
+}
+.calendar-agenda {
+  display: grid;
+  gap: 4px;
+  padding: 4px 12px 12px;
+}
+.host-app .portal-panel .calendar-agenda__day h3 {
+  margin: 12px 0 6px;
+  color: var(--label);
+  font-size: 0.9rem;
+}
+.calendar-agenda ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.host-app .portal-panel .agenda-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 8px;
+  width: 100%;
+  min-height: 56px;
+  padding: 8px 12px;
+  border: 0;
+  border-inline-start: 4px solid var(--host);
+  border-radius: 12px;
+  background: var(--surface-soft);
+  color: var(--ink);
+  font-weight: 600;
+  text-align: start;
+}
+.host-app .portal-panel .agenda-item:hover:not(:disabled) {
+  background: var(--chip);
+  filter: none;
+}
+.agenda-item strong {
+  grid-column: 1;
+  overflow-wrap: anywhere;
+}
+.agenda-item__system {
+  grid-column: 1;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.agenda-item__time {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-size: 0.8rem;
+}
+.agenda-item .booking-status {
+  grid-column: 1;
+  justify-self: start;
+  margin-top: 4px;
+}
+.host-app .portal-panel .agenda-item.reservation-draft {
+  border-inline-start-color: #94a3b8;
+}
+.host-app .portal-panel .agenda-item.reservation-changed {
+  border-inline-start-color: #d97706;
+}
+.host-app .portal-panel .agenda-item.reservation-cancelled {
+  border-inline-start-color: var(--danger);
+}
+.host-app .portal-panel .agenda-item.reservation-completed {
+  border-inline-start-color: #16a34a;
+}
+.host-app .calendar-agenda__empty,
+.host-app .calendar-truncated {
+  margin: 12px;
+  font-size: 0.88rem;
+}
+
+/* Bookings: four tabs, a search and one row per booking. */
+.bookings-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.host-app .bookings-tabs {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.bookings-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1 1 18rem;
+  justify-content: flex-end;
+}
+.host-app #host-management form.bookings-search {
+  flex: 1 1 14rem;
+  min-width: 0;
+  max-width: 24rem;
+  margin: 0;
+}
+.host-app .bookings-search input {
+  width: 100%;
+  box-sizing: border-box;
+}
+/* One system's bookings (after a removal refused for them): its name and a
+   way back to every system. */
+.bookings-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 0 0 12px;
+  padding-block: 8px;
+  padding-inline: 14px 8px;
+  border-radius: 14px;
+  background: var(--host-soft);
+}
+.host-app .portal-panel .bookings-filter__text {
+  flex: 1 1 10rem;
+  min-width: 0;
+  margin: 0;
+  color: var(--ink);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.host-app .bookings-status {
+  margin: 0 0 12px;
+}
+.bookings-status:empty {
+  display: none;
+}
+.booking-list {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+.host-app .portal-panel .booking-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px 16px;
+  width: 100%;
+  min-height: 64px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #ffffff;
+  color: var(--ink);
+  font-weight: 500;
+  text-align: start;
+}
+.host-app .portal-panel .booking-row:hover:not(:disabled) {
+  background: var(--surface-soft);
+  filter: none;
+}
+.booking-row__who {
+  display: grid;
+  min-width: 0;
+}
+.booking-row__who strong {
+  overflow-wrap: anywhere;
+}
+.booking-row__system {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.booking-row__stay {
+  min-width: 0;
+  color: var(--label);
+  font-size: 0.85rem;
+}
+.booking-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--chip);
+  color: var(--label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.booking-status--confirmed {
+  background: #dbeafe;
+  color: #1e40af;
+}
+.booking-status--changed {
+  background: #fef3c7;
+  color: #92400e;
+}
+.booking-status--cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.booking-status--completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* The booking sheet and a booking's details: a side sheet (the start side
+   mirrors in RTL), full screen on a phone. The buttons never scroll away. */
+.host-app dialog.booking-sheet {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(480px, 100vw);
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-inline-start: 1px solid var(--border);
+  border-radius: 0;
+  box-shadow: -10px 0 40px rgba(15, 23, 42, 0.12);
+}
+html[dir="rtl"] .host-app dialog.booking-sheet {
+  inset: 0 auto 0 0;
+  box-shadow: 10px 0 40px rgba(15, 23, 42, 0.12);
+}
+.booking-sheet__frame {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+.booking-sheet__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 24px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.host-app dialog.booking-sheet h2 {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.2rem;
+  font-weight: var(--weight-heavy, 800);
+  overflow-wrap: anywhere;
+}
+.host-app dialog .booking-sheet__close {
+  flex: none;
+  width: 44px;
+  padding: 0;
+  font-size: 1.4rem;
+}
+.booking-sheet__body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 16px 24px;
+}
+.host-app dialog .booking-sheet__status {
+  margin: 0;
+  padding: 10px 24px 0;
+  color: var(--ink);
+  font-weight: 600;
+}
+.booking-sheet__status:empty {
+  display: none;
+}
+.booking-sheet__actions {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  gap: 8px;
+  padding: 12px 24px calc(16px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--border);
+}
+.booking-sheet__actions > * {
+  flex: 1 1 auto;
+}
+.booking-form {
+  display: grid;
+  gap: 14px;
+}
+.host-app dialog .booking-form label {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+}
+.host-app dialog .booking-form :where(input, select) {
+  width: 100%;
+  box-sizing: border-box;
+}
+.host-app dialog .booking-form label.choice {
+  display: flex;
+}
+.host-app dialog .booking-form .choice input {
+  width: 18px;
+}
+.phone-field {
+  display: grid;
+  gap: 4px;
+}
+.host-app dialog .phone-field__label {
+  color: var(--label);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.phone-field__row {
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+}
+/* The country picker shows only its dial code when closed; the real select
+   lies over it, so a tap opens the list of countries by name. */
+.phone-field__picker {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+  min-width: 5.75rem;
+  min-height: 44px;
+  padding-inline: 12px 10px;
+  box-sizing: border-box;
+  border: 1px solid var(--field);
+  border-radius: var(--radius-control);
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 700;
+}
+.phone-field__picker::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin-inline-start: auto;
+  /* A down chevron in both directions. */
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: translateY(-2px) rotate(45deg);
+}
+.phone-field__picker:focus-within {
+  outline: 3px solid var(--host);
+  outline-offset: 2px;
+}
+.phone-field__code {
+  unicode-bidi: isolate;
+}
+.host-app dialog .booking-form .phone-field__country {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.host-app dialog .booking-form .phone-field__row input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.booking-form__times {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  min-width: 0;
+}
+.host-app #host-management .booking-form__more {
+  margin: 0;
+  padding: 0 14px;
+}
+.booking-form__more > summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  cursor: pointer;
+}
+.host-app #host-management .booking-form__more[open] {
+  padding-bottom: 14px;
+}
+.booking-form__more > label + label {
+  margin-top: 10px;
+}
+.host-app dialog .booking-sheet__summary,
+.host-app dialog .booking-facts p {
+  margin: 0;
+  color: var(--ink);
+}
+.booking-sheet__summary {
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.booking-sheet__body > .booking-sheet__summary {
+  margin-bottom: 12px;
+}
+.booking-facts {
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.host-app dialog .booking-facts__system {
+  font-weight: 700;
+}
+.booking-details {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  gap: 6px 16px;
+  margin: 0 0 16px;
+}
+.booking-details dt {
+  color: var(--label);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.booking-details dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.booking-links {
+  display: grid;
+  gap: 12px;
+}
+.host-app dialog .booking-links h3 {
+  margin: 8px 0 0;
+  font-size: 1rem;
+}
+.booking-links__list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.booking-links__list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.booking-privacy {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  background: var(--danger-soft);
+}
+.host-app dialog .link-card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* A choice with its ⓘ beside it (outside its label). */
+.choice-with-tip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+/* A label's text with its ⓘ on one line. */
+.field-caption {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* Connect: automatic guest links, your booking system, API keys. */
+.host-app .connect-card .view-heading h2 {
+  margin: 0;
+}
+.host-app #host-management form.connect-form,
+.host-app #host-management form.connect-room-form,
+.host-app #host-management form.settings-form {
+  display: grid;
+  gap: 12px;
+}
+.host-app .connect-form > label:not(.connect-switch),
+.host-app .connect-room-form > label,
+.host-app .connect-inline > label,
+.host-app .settings-form label {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+}
+.host-app
+  #host-management
+  :is(.connect-form, .connect-room-form, .settings-form)
+  > button {
+  justify-self: start;
+}
+.host-app .portal-panel label.connect-switch {
+  color: var(--ink);
+  font-size: 1rem;
+}
+.host-app #host-management form.connect-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 8px;
+  max-width: none;
+}
+.host-app .connect-inline > label {
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+.host-app .connect-inline .info-tip {
+  vertical-align: middle;
+}
+.connect-room-list,
+.connect-event-list {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0;
+  padding: 0;
+  list-style: none;
+}
+.connect-room-list > li,
+.connect-event-list > li {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow-wrap: anywhere;
+}
+.host-app .connect-room-list__line,
+.host-app .connect-event-list p {
+  margin: 0;
+  color: var(--ink);
+}
+.host-app #host-management .connect-room-change,
+.host-app #host-management .connect-developer {
+  margin-block: 8px 0;
+  padding-block: 0;
+}
+.connect-room-change > summary,
+.connect-developer > summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  cursor: pointer;
+}
+.host-app .connect-events {
+  margin-top: 24px;
+}
+.host-app .connect-events > h3 {
+  margin: 0 0 8px;
+}
+.host-app #host-management .connect-developer[open] {
+  padding-bottom: 14px;
+}
+.host-app #host-management .connect-key {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  margin-top: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--surface);
+}
+.host-app #host-management .connect-key > :is(h3, p, form) {
+  flex-basis: 100%;
+  margin: 0;
+}
+.host-app #host-management .connect-key > h3 {
+  font-size: 1rem;
+}
+.host-app #host-management .connect-key > form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 8px;
+  max-width: none;
+}
+.host-app #host-management .connect-key > form > label {
+  display: grid;
+  gap: 4px;
+  flex: 1 1 12rem;
+  margin: 0;
+}
+.host-app #host-management .connect-key button {
+  margin: 0;
+}
+.host-app .connect-code {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.78rem;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.host-app .connect-empty {
+  margin: 8px 0;
+  color: var(--muted);
+}
+
+/* Settings → Organization and Team. */
+.settings-facts {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  gap: 10px 16px;
+  margin: 0;
+}
+.settings-facts dt {
+  color: var(--label);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.settings-facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.host-app .settings-form :where(input, select) {
+  width: 100%;
+  box-sizing: border-box;
+}
+.host-app .settings-status:empty {
+  display: none;
+}
+.host-app .settings-status,
+.host-app .settings-notice {
+  margin: 0;
+  color: var(--ink);
+}
+.team-list {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 20px;
+  padding: 0;
+  list-style: none;
+}
+.team-member {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.team-member__who {
+  display: flex;
+  flex: 1 1 12rem;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.host-app .team-member__avatar {
+  width: 36px;
+  height: 36px;
+  font-size: 0.95rem;
+}
+.team-member__email {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.team-member__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+/* Change and Cancel line up at the row's end, whatever the badges' width. */
+.host-app .portal-panel .team-member > button {
+  margin-inline-start: auto;
+}
+/* Settings → Plan & statements and Support: parts with a heading and its
+   ⓘ, divided by a line; buttons in one row. */
+.host-app .settings-block + .settings-block {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.host-app .settings-block > .view-heading h3 {
+  margin: 0;
+}
+.host-app .settings-block > * + * {
+  margin-top: 12px;
+}
+.host-app .settings-block p:empty,
+.host-app .settings-block div:empty {
+  display: none;
+}
+.host-app .settings-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.host-app #host-management .settings-actions > button {
+  margin: 0;
+}
+.support-approvals {
+  display: grid;
+  gap: 8px;
+  margin-block: 12px;
+}
+.host-app .portal-panel .support-approval {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+}
+.host-app .portal-panel .support-approval > p,
+.host-app .portal-panel .support-approval details {
+  margin: 0;
+}
+.team-invitations {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+.host-app .portal-panel .team-invitation__state {
+  order: 1;
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
+  .host-app .portal-panel .booking-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .booking-row__stay {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .calendar-filters {
+    width: 100%;
+    margin-inline-start: 0;
+  }
+  .host-app .portal-panel label.calendar-filter {
+    flex: 1 1 8rem;
+  }
+  .host-app .portal-panel .calendar-filter select {
+    width: 100%;
+    max-width: none;
+  }
+  .bookings-actions {
+    justify-content: stretch;
+  }
+  .host-app #host-management form.bookings-search {
+    max-width: none;
+  }
+  .booking-sheet__header,
+  .booking-sheet__body,
+  .booking-sheet__actions {
+    padding-inline: 16px;
+  }
+  .host-app dialog .booking-sheet__status {
+    padding-inline: 16px;
+  }
+  .host-app dialog.booking-sheet {
+    width: 100vw;
+    border: 0;
+  }
+}
+@media (max-width: 400px) {
+  .booking-form__times {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .calendar-navigation,
+  .calendar-ranges {
+    flex: 1 1 100%;
+  }
+  .host-app .portal-panel .calendar-toolbar button {
+    flex: 1 1 auto;
+    padding-inline: 8px;
+  }
+}
+
+/* Service health (Activity). */
+.host-service-health {
+  overflow-wrap: anywhere;
+}
+.host-service-health .health-summary {
+  margin-block: 12px 16px;
+}
+.host-service-health .health-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-block: 1rem;
+}
+.host-service-health .health-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 1rem;
+  margin-block: 1.25rem;
+}
+.host-service-health .health-metrics article {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--surface-soft);
+}
+.host-service-health .health-metrics h4 {
+  margin: 0 0 0.75rem;
+}
+.host-service-health .health-history {
+  padding-inline-start: 1.25rem;
+}
+.host-service-health .health-history li {
+  margin-block: 0.8rem;
+}
+.host-service-health form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 1rem;
+}
+.host-service-health form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.host-service-health form input {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.host-service-health form input[type="checkbox"] {
+  width: auto;
+  align-self: start;
+}
+
+/* My systems and Organization systems: cards on the backdrop, like the
+   picker's tiles. An example has a dashed violet border and an Example pill;
+   a badge always carries words, never colour alone. */
+.host-app .workspace-view-panel > section.systems-view {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.systems-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.host-app .portal-panel .systems-toolbar__text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: var(--label);
+  font-weight: 700;
+}
+.systems-view > .empty-state {
+  margin-bottom: 20px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  box-shadow: var(--card-shadow);
+}
+.app-steps {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: app-step;
+}
+.app-steps li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  color: var(--ink);
+  font-weight: 600;
+  counter-increment: app-step;
+}
+.app-steps li::before {
+  content: counter(app-step);
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--host-soft);
+  color: var(--host-strong);
+  font-weight: var(--weight-heavy, 800);
+}
+.system-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.system-grid > li {
+  display: flex;
+  min-width: 0;
+}
+.system-card {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 56px minmax(0, 1fr);
+  align-content: start;
+  gap: 14px;
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  box-shadow: var(--card-shadow);
+}
+.system-card[data-example] {
+  border: 2px dashed #c4b5fd;
+}
+.system-card__icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface-soft);
+}
+.system-card__icon--dual-control {
+  border-color: transparent;
+  border-radius: 16px;
+  background: var(--chip);
+}
+.system-card__icon--group {
+  border-color: #99f6e4;
+  background: #f0fdfa;
+}
+.system-card__icon img {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+.system-card__body {
+  min-width: 0;
+}
+.host-app .portal-panel .system-card__name {
+  margin: 2px 0 0;
+  font-size: 1.02rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.host-app .portal-panel .system-card__kind {
+  margin: 2px 0 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+.host-app .portal-panel .system-card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 0;
+}
+.system-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  grid-column: 1 / -1;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.system-card__actions > * {
+  flex: 1 1 auto;
+}
+.system-action-blocked {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.system-action-blocked > button {
+  flex: 1;
+}
+.system-badge {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  min-height: 24px;
+  padding: 2px 10px;
+  /* A pill on one line; a long name that wraps keeps soft corners. */
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.system-badge--org {
+  background: var(--host-soft);
+  color: var(--host-strong);
+}
+.system-badge--none {
+  border: 1px dashed var(--field);
+  color: var(--muted);
+}
+.system-badge--example {
+  background: #f5f3ff;
+  color: var(--example);
+}
+.system-badge--source {
+  background: var(--chip);
+  color: var(--label);
+}
+.systems-group {
+  margin-top: 28px;
+}
+.host-app .portal-panel .systems-group__title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 12px;
+  font-size: 1rem;
+}
+.host-app .portal-panel .button-danger-solid,
+.host-app dialog .button-danger-solid {
+  border-color: var(--danger);
+  background: var(--danger);
+  color: #ffffff;
+}
+
+/* The sidebar's compact My systems list. */
+.sidebar-system {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.sidebar-system:hover {
+  background: var(--chip);
+}
+.sidebar-system__icon {
+  flex: none;
+  width: 28px;
+  height: 28px;
+}
+.sidebar-system__text {
+  display: grid;
+  justify-items: start;
+  gap: 2px;
+  min-width: 0;
+}
+.sidebar-system__name {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sidebar-system .system-badge {
+  display: block;
+  min-height: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Link, unlink, remove and icon dialogs; a danger dialog is the red
+   confirmation card. */
+.host-app dialog.system-dialog {
+  width: min(30rem, calc(100vw - 2rem));
+}
+.system-dialog__form {
+  display: grid;
+  gap: 12px;
+}
+.host-app dialog.system-dialog h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.2rem;
+  font-weight: var(--weight-heavy, 800);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.host-app dialog .system-dialog__text {
+  margin: 0;
+}
+.system-dialog__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fee2e2;
+  color: #dc2626;
+  font-size: 1.3rem;
+  font-weight: var(--weight-heavy, 800);
+}
+.host-app dialog .system-dialog__status {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 600;
+}
+.system-dialog__status:empty,
+.system-dialog__extra:empty {
+  display: none;
+}
+.system-dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.system-dialog__actions button {
+  flex: 1 1 auto;
+}
+.host-app fieldset.choice-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.host-app .choice-list legend {
+  margin-bottom: 8px;
+  padding: 0;
+}
+.host-app :is(dialog, .portal-panel) label.choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+.host-app :is(dialog, .portal-panel) label.choice:has(input:checked) {
+  border-color: var(--host);
+  background: var(--host-soft);
+}
+.choice__name {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+/* A choice that is closed for now: disabled, with its ⓘ beside it. */
+.choice-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.choice-row > .choice {
+  flex: 1;
+  min-width: 0;
+}
+.host-app :is(dialog, .portal-panel) label.choice:has(input:disabled) {
+  background: var(--surface-soft);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+.choice__detail {
+  color: var(--muted);
+  font-weight: 600;
+}
+.host-app fieldset.choice-list--icons {
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
+.choice-list--icons legend,
+.choice-list--icons [role="status"] {
+  grid-column: 1 / -1;
+}
+.host-app dialog label.choice--icon {
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.choice--icon .choice__name {
+  flex: none;
+}
+
+/* Try it: the simulator of an example, a sheet on a phone. */
+.host-app dialog.try-it:not(.mfa-dialog) {
+  width: min(760px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  overflow: auto;
+}
+.try-it__frame {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  padding: 24px;
+}
+.try-it__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.try-it__titles {
+  flex: 1;
+  min-width: 0;
+}
+.host-app dialog .try-it__eyebrow {
+  margin: 0;
+  color: var(--example);
+  font-size: 0.78rem;
+  font-weight: var(--weight-heavy, 800);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.host-app dialog.try-it h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.15rem;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.host-app dialog .try-it__close {
+  flex: none;
+  width: 44px;
+  padding: 0;
+  font-size: 1.4rem;
+}
+.host-app dialog .try-it__note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #f5f3ff;
+  color: #5b21b6;
+  font-weight: 600;
+}
+.host-app dialog .try-it__tracks {
+  margin: 0;
+}
+.try-it__track > div,
+.try-it__form {
+  display: grid;
+  gap: 12px;
+}
+.host-app #host-management form.try-it__form {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: none;
+}
+.try-it__form label {
+  display: grid;
+  min-width: 0;
+  margin: 0;
+}
+.try-it__form input {
+  width: 100%;
+  box-sizing: border-box;
+}
+.try-it__form .try-it__status,
+.try-it__form button {
+  grid-column: 1 / -1;
+}
+.host-app dialog .try-it__status {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 600;
+}
+.try-it__status:empty {
+  display: none;
+}
+.try-it__card {
+  display: grid;
+  gap: 4px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface-soft);
+}
+.host-app dialog .try-it__card p {
+  margin: 0;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.host-app dialog .try-it__card .try-it__card-title {
+  font-weight: var(--weight-heavy, 800);
+}
+.host-app dialog .try-it__card .try-it__mapping,
+.host-app dialog .try-it__card .try-it__muted {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.host-app dialog .try-it__card .try-it__price {
+  font-size: 1.1rem;
+  font-weight: var(--weight-heavy, 800);
+}
+.try-it__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.try-it__buttons > button {
+  flex: 1 1 auto;
+}
+.host-app .portal-panel .try-it__buttons > .try-it__chip {
+  flex: 0 1 auto;
+  border-style: dashed;
+  border-color: #f3b4ad;
+  border-radius: 999px;
+  color: var(--danger);
+}
+.try-it__steps {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.try-it__steps:empty {
+  display: none;
+}
+.try-it__steps li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-weight: 600;
+}
+.try-it__steps li::before {
+  content: "✓";
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #dcfce7;
+  color: #15803d;
+  font-weight: var(--weight-heavy, 800);
+}
+.link-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #bfdbfe;
+  border-radius: 16px;
+  background: var(--host-soft);
+}
+.link-card[data-failed] {
+  border-color: #fecaca;
+  background: var(--danger-soft);
+}
+.host-app .portal-panel .link-card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+.host-app dialog .link-card__url,
+.host-app dialog .link-card__failed {
+  margin: 0;
+  color: var(--ink);
+}
+.host-app dialog .link-card__url {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #ffffff;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.link-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.link-card__actions > * {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+.link-card__qr img {
+  display: block;
+  width: 200px;
+  height: 200px;
+  padding: 8px;
+  border-radius: 12px;
+  background: #ffffff;
+  image-rendering: pixelated;
+}
+.host-app #host-management .try-it__developer {
+  margin: 0;
+  padding-block: 0;
+}
+/* The one control that opens the developer section: a full 44px row. */
+.host-app .try-it__developer > summary {
+  box-sizing: border-box;
+  min-height: 44px;
+  padding-block: 11px;
+  cursor: pointer;
+}
+.host-app .try-it__developer[open] > summary {
+  margin-bottom: 4px;
+}
+.host-app #host-management .try-it__developer[open] {
+  padding-bottom: 14px;
+}
+.try-it__code {
+  max-height: 360px;
+  margin: 0;
+  padding: 14px;
+  overflow: auto;
+  border-radius: 12px;
+  background: var(--ink);
+  color: #e2e8f0;
+  font:
+    0.78rem/1.55 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+  text-align: left;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+/* A sentence in place of code: the page's direction and font. */
+.try-it__code--note {
+  font-family: inherit;
+  text-align: start;
+}
+@media (max-width: 600px) {
+  .host-app dialog.try-it:not(.mfa-dialog) {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+  }
+  .try-it__frame {
+    padding: 16px;
+  }
+  .host-app #host-management form.try-it__form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Legal links under the content. */
+.host-app .portal-legal {
+  gap: 8px 16px;
+  padding: 8px 16px 28px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* Phone tab bar (below 960px). */
+.host-tabbar {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .host-app .portal-shell {
+    padding-inline: 24px;
+  }
+}
+
+/* Below 960px: the sidebar becomes a drawer, a tab bar sits at the bottom,
+   and the page title moves under the top bar row. */
+@media (max-width: 959px) {
+  .host-ready:has(.host-sidebar:not([hidden])) {
+    padding-inline-start: 0;
+    padding-bottom: calc(
+      var(--tabbar-height) + env(safe-area-inset-bottom, 0px)
+    );
+  }
+  /* Equal side columns keep the pill at the centre of the screen, where
+     the picker, Pay and Manager have it too. */
+  .host-topbar {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-areas:
+      "start pill end"
+      "title title title";
+    gap: 4px 8px;
+    padding: 8px 12px 6px;
+  }
+  .host-topbar__start {
+    display: contents;
+  }
+  .workspace-menu-toggle {
+    grid-area: start;
+    justify-self: start;
+    display: inline-grid;
+  }
+  .host-topbar__brand {
+    grid-area: start;
+    justify-self: start;
+    max-width: 100%;
+  }
+  .host-topbar__title {
+    grid-area: title;
+    padding: 2px 4px 2px;
+    font-size: 1.1rem;
+  }
+  .host-topbar .product-switcher {
+    grid-area: pill;
+  }
+  .host-topbar__end {
+    grid-area: end;
+    gap: 6px;
+  }
+  .host-sidebar {
+    z-index: 60;
+    width: min(var(--sidebar-width), calc(100vw - 48px));
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    visibility: hidden;
+    transform: translateX(-105%);
+    transition:
+      transform 180ms ease,
+      visibility 0s linear 180ms;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+  }
+  html[dir="rtl"] .host-sidebar {
+    transform: translateX(105%);
+  }
+  .host-sidebar::before {
+    width: min(var(--sidebar-width), calc(100vw - 48px));
+    background: rgba(255, 255, 255, 0.97);
+  }
+  .host-sidebar.is-open,
+  html[dir="rtl"] .host-sidebar.is-open {
+    visibility: visible;
+    transform: none;
+    transition: transform 220ms ease;
+  }
+  .host-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: rgba(15, 23, 42, 0.45);
+  }
+  .host-ready .host-tabbar:not([hidden]) {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 35;
+    display: grid;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+    padding: 4px 6px env(safe-area-inset-bottom, 0px);
+    border-top: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 -6px 18px rgba(15, 23, 42, 0.06);
+  }
+  .host-tabbar button {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: 2px;
+    min-width: 0;
+    min-height: 56px;
+    padding: 4px 2px;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.2;
+    cursor: pointer;
+  }
+  .host-tabbar button span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .host-tabbar button[aria-current="page"],
+  .host-tabbar button[aria-expanded="true"] {
+    color: var(--host-strong);
+    background: var(--host-soft);
+  }
+  .host-app .portal-shell {
+    padding: 16px 16px 24px;
+  }
+  .host-app .workspace-view-panel > section,
+  .host-app .workspace-view-panel > details,
+  .host-app .workspace-view-panel > .empty-state,
+  .host-app .settings-body > [role="tabpanel"],
+  .host-app #admin-overview {
+    padding: 16px;
+    border-radius: 18px;
+  }
+}
+@media (max-width: 600px) {
+  .host-topbar__end > .host-language {
+    display: none;
+  }
+  .host-account__language {
+    display: flex;
+  }
+  .product-switcher__brand {
+    display: none;
+  }
+  .host-topbar .product-switcher__button {
+    padding-inline: 12px 10px;
+  }
+  .host-app .portal-panel :where(input, select, textarea) {
+    font-size: 16px;
+  }
+  .host-app dialog:not(.mfa-dialog) {
+    padding: 20px;
+  }
+  .host-app .portal-panel button {
+    max-width: 100%;
+    white-space: normal;
+  }
+}
+@media (max-width: 360px) {
+  .host-topbar {
+    padding-inline: 12px;
+  }
+  .host-topbar__end {
+    gap: 4px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .host-app *,
+  .host-app *::before,
+  .host-app *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media print {
+  .host-topbar,
+  .host-sidebar,
+  .host-tabbar,
+  .host-scrim {
+    display: none !important;
+  }
+  .host-ready:has(.host-sidebar:not([hidden])) {
+    padding: 0;
+  }
+}

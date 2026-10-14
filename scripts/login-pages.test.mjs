@@ -26,3 +26,20 @@ test("each sign-in page is in its own language with a picker of every language",
     if (code !== "en") assert.ok(!html.includes(copies.en.google));
   }
 });
+
+test("the sign-in page asks for the same host-portal.css as the dashboards", async () => {
+  // Both load one file; a new version on one side only leaves the other on
+  // an old cached copy.
+  const version = (html) => html.match(/\/css\/host-portal\.css\?v=([^"]+)"/)?.[1];
+  const loginVersion = version(template);
+  assert.ok(loginVersion);
+  for (const page of ["index.html", "host/index.html", "host/overview/index.html", "pay/index.html", "manager/index.html"]) {
+    const html = await fs.readFile(new URL(`../dashboard/${page}`, import.meta.url), "utf8");
+    assert.equal(version(html), loginVersion, page);
+  }
+  for (const { code } of SITE_LANGUAGES) {
+    const base = code === "en" ? "" : `${code.toLowerCase()}/`;
+    const html = await fs.readFile(new URL(`../${base}login/index.html`, import.meta.url), "utf8");
+    assert.equal(version(html), loginVersion, code);
+  }
+});

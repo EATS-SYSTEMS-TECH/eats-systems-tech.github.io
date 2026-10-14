@@ -24,10 +24,14 @@ export type ProductId = "host" | "pay" | "manager";
 export type ProductState =
   "active" | "pending" | "no-plan" | "blocked" | "mfa-required" | "unavailable";
 export type ProductAccess = { state: ProductState; organizations?: number };
+// The Host plan role: admin (WIFIGATE operator) or user (paying customer).
+// null (or absent) means no plan: an organization member without My systems.
+export type HostPlanRole = Role;
+export type HostAccess = ProductAccess & { role?: HostPlanRole };
 export type PlatformProfile = {
   user: User;
   mfa: { enrolled: boolean; verified: boolean };
-  products: Record<ProductId, ProductAccess>;
+  products: { host: HostAccess; pay: ProductAccess; manager: ProductAccess };
 };
 export type CreateProfileResponse = { user?: User };
 export type AccountSubscription = { organization: string; product: ProductId };
@@ -36,15 +40,26 @@ export type AccountDeletionPreview = {
   subscriptions: AccountSubscription[];
   closingOrganizations: { organization: string; otherMembers: number }[];
   memberships: number;
+  // My systems the deletion removes (a Host plan holder's own systems).
+  mySystems?: number;
 };
 export type AccountDeletionResult = {
   deleted: true;
   cancelledSubscriptions: AccountSubscription[];
   archivedOrganizations: string[];
   removedMemberships: number;
+  removedMySystems?: number;
 };
-export type ApiErrorDetails = { message?: string; code?: string };
+export type ApiErrorDetails = {
+  message?: string;
+  code?: string;
+  details?: JsonObject;
+};
 export type ApiErrorResponse = { error?: ApiErrorDetails; code?: string };
-export type ApiErrorMetadata = { status?: number; code?: string };
+export type ApiErrorMetadata = {
+  status?: number;
+  code?: string;
+  details?: JsonObject;
+};
 export type ApiError = Error & ApiErrorMetadata;
 export type RequestOptions = { signal?: AbortSignal };
