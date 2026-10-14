@@ -1,7 +1,7 @@
 // Website analytics stays unloaded until the visitor makes an affirmative choice.
 // Rejecting is as easy and as prominent as accepting: both buttons look the same.
 // Set this to the site's GA4 measurement ID (G-...) when the property is connected.
-const GA_MEASUREMENT_ID = "";
+const GA_MEASUREMENT_ID = "G-4GRM6RNH0C";
 const CONSENT_KEY = "wifigate-cookie-consent-v1";
 const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
 
