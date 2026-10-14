@@ -7,20 +7,21 @@
     <meta name="referrer" content="no-referrer" />
     <title>Products | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013c" />
-    <link rel="stylesheet" href="/css/platform.css?v=20261013c" />
-    <script type="module" src="/js/platform-dashboard.js?v=20261013c"></script>
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" />
+    <link rel="stylesheet" href="/css/platform.css?v=20261014w6" />
+    <script type="module" src="/js/platform-dashboard.bundle.js?v=20261014w7"></script>
   </head>
   <body data-product="" class="platform-page">
     <main class="platform-shell">
       <header class="platform-header">
-        <a class="brand" href="/" aria-label="WIFIGATE home"
+        <a class="brand" href="/" aria-label="WIFIGATE home" data-copy-label="home"
           ><img
             src="/assets/img/wifigate-horizontal-logo.webp"
             alt="WIFIGATE"
             width="416"
             height="96"
         /></a>
+        <div id="product-switcher" class="product-switcher"></div>
         <div class="account-menu">
           <select id="platform-language" aria-label="Interface language">
             <option value="en">English</option>
@@ -71,7 +72,6 @@
         hidden
       ></section>
       <section id="product-workspace" class="portal-panel" hidden>
-        <div id="product-switcher" class="product-switcher"></div>
         <h2 id="product-title"></h2>
         <p data-copy="empty">
           Your access is active. This product workspace is not available yet.
@@ -88,7 +88,7 @@
           Set up once, then use a short code from your authenticator when you
           sign in.
         </p>
-        <ol class="security-steps" aria-label="Authenticator setup">
+        <ol class="security-steps" aria-label="Authenticator setup" data-copy-label="setupSteps">
           <li data-security-step="identity">
             <span class="security-step-number" aria-hidden="true">1</span>
             <div>
@@ -131,6 +131,7 @@
           <img
             id="totp-qr"
             alt="Authenticator setup QR code"
+            data-copy-alt="setupQr"
             width="220"
             height="220"
           />
@@ -238,6 +239,10 @@
         </p>
         <div id="account-deleted-list" class="account-deleted__list" hidden>
           <strong data-copy="cancelled">Cancelled subscriptions</strong>
+          <ul></ul>
+        </div>
+        <div id="account-deleted-systems" class="account-deleted__list" hidden>
+          <strong data-copy="removedMySystems">Removed from My systems</strong>
           <ul></ul>
         </div>
         <a

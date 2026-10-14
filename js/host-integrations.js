@@ -1,324 +1,329 @@
-import { hostText, hostLocale } from "./host-locale.js";
+import { hostText } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
-import { field, node } from "./host-ui.js";
+import { field, node, infoTip, labelTip, hostDateTime } from "./host-ui.js";
+import { can } from "./host-permissions.js";
+import { noSystem } from "./host-booking-model.js";
+
+// Connect → Your booking system: the bookings it sent lately, with a second
+// try for one that failed, and (For your developer) its connections: which
+// WIFIGATE system each ID the booking system sends opens ({providerRoomId,
+// systemId}), found by the name the booking system sends. The words on
+// screen are "ID" and "connection"; providerRoomId stays only in the API.
+const messages = {
+  PROVIDER_MAPPING_REQUIRED:
+    "Connect this booking system ID to a system first.",
+  SYSTEM_UNAVAILABLE: "That system isn't available any more. Choose another.",
+  VERSION_CONFLICT:
+    "This connection changed. Show the connections again and retry.",
+  IDEMPOTENCY_CONFLICT:
+    "This connection changed. Show the connections again and retry.",
+  INVALID_REQUEST: "Check the booking system name and the ID.",
+  TOTP_REQUIRED: "Verify your authenticator first, then try again.",
+  HOST_API_UNAVAILABLE: "Can't reach WIFIGATE right now. Try again.",
+};
+// Saving a connection answers 404 when the chosen system was just removed: the
+// same as a system that is no longer available.
+const mappingMessages = {
+  ...messages,
+  RESOURCE_NOT_FOUND: messages.SYSTEM_UNAVAILABLE,
+};
+export const integrationMessage = (error, { mapping = false } = {}) =>
+  hostText(
+    (mapping ? mappingMessages : messages)[error?.code] ??
+      "That didn't work. Try again.",
+  );
+const failure = (error) => integrationMessage(error);
+const mappingFailure = (error) => integrationMessage(error, { mapping: true });
+const eventTypes = {
+  "reservation.created": "New booking",
+  "reservation.updated": "Booking changed",
+  "reservation.cancelled": "Booking cancelled",
+};
+// Every status the API gives a booking it received.
+const eventStates = {
+  received: "Received",
+  queued: "Waiting",
+  processing: "Working on it",
+  processed: "Done",
+  retry: "Trying again",
+  dead_letter: "Failed",
+  expired: "Expired",
+  redacted: "Guest details removed",
+};
+export const eventStateLabel = (status) =>
+  hostText(eventStates[status] ?? "Received");
+
+// context: {container, user, organization, systems (active), isCurrent}.
 export async function renderHostIntegrations({
   container,
   user,
   organization,
-  properties,
-  rooms,
+  systems,
   isCurrent,
-  includeMappings = true,
-  includeEvents = true,
 }) {
-  const manager = ["owner", "admin"].includes(organization.membership.role);
-  if (!manager && organization.membership.role !== "staff") return;
+  if (!can(organization, "integrations:write")) return;
   const root = `/api/v1/organizations/${encodeURIComponent(organization.id)}/integrations`;
+  const systemsById = new Map(systems.map((item) => [item.id, item]));
   const section = node("section", undefined, {
-      "aria-label": "Reservation integrations",
-    }),
-    status = node("p", hostText("Loading integration events…"), {
-      role: "status",
-      "aria-live": "polite",
-    }),
-    events = node("div");
-  section.append(
-    node("h2", hostText("Reservation integrations")),
-    node(
-      "p",
+    "aria-label": "Your booking system",
+    class: "connect-card",
+  });
+  const heading = node("div", undefined, { class: "view-heading" });
+  heading.append(
+    node("h2", hostText("Your booking system")),
+    infoTip(
       hostText(
-        "Signed provider events are validated and processed through canonical reservations. Accepted events can still need attention before access is issued or delivered.",
+        "Your booking system sends its bookings to WIFIGATE. Each booking in it opens one of your systems.",
       ),
     ),
-    status,
   );
+  const status = node("p", "", { role: "status", "aria-live": "polite" });
+  section.append(heading, status);
   container.append(section);
   const current = () => isCurrent() && section.isConnected;
   const attempts = new Map();
   let busy = false;
-  async function run(button, operation) {
+  async function run(button, operation, explain = failure) {
     if (busy || !current()) return;
     busy = true;
     button.disabled = true;
+    status.textContent = "";
     try {
       await operation();
-    } catch {
-      if (current())
-        status.textContent = hostText(
-          "Integration operation failed. Check permissions and retry safely.",
-        );
+    } catch (error) {
+      if (current()) status.textContent = explain(error);
     } finally {
       busy = false;
       if (current()) button.disabled = false;
     }
   }
-  async function mutate(path, body) {
+  const mutate = (path, body) => {
     const signature = `${path}:${JSON.stringify(body)}`;
     if (!attempts.has(signature)) attempts.set(signature, crypto.randomUUID());
-    return portalRequest(user, path, "POST", body, attempts.get(signature));
-  }
-  if (includeMappings && manager) {
-    const form = node("form"),
-      mappings = node("div");
-    const provider = field(form, "Provider ID", "provider", "sandbox-pms");
-    provider.pattern = "[A-Za-z0-9_-]+";
-    provider.maxLength = 100;
-    const providerRoom = field(form, "Provider room ID", "providerRoomId");
-    providerRoom.maxLength = 128;
-    providerRoom.pattern = "[A-Za-z0-9_.:-]+";
-    const property = field(
+    return portalRequest(
+      user,
+      path,
+      "POST",
+      body,
+      attempts.get(signature),
+    ).then((result) => {
+      attempts.delete(signature);
+      return result;
+    });
+  };
+
+  // Which booking system: its name as it sends it to WIFIGATE.
+  const providerForm = node("form", undefined, { class: "connect-inline" });
+  const provider = field(providerForm, "Booking system", "provider");
+  provider.pattern = "[A-Za-z0-9_-]+";
+  provider.maxLength = 100;
+  provider.dir = "ltr";
+  labelTip(
+    provider,
+    hostText(
+      "The name your booking system uses when it sends bookings to WIFIGATE. Your developer knows it.",
+    ),
+  );
+  const showRooms = node("button", hostText("Show connections"), {
+    type: "submit",
+    class: "button-secondary",
+  });
+  providerForm.append(showRooms);
+  const rooms = node("div", undefined, { class: "connect-rooms" });
+  // The booking system's own name and its connections are set up by a
+  // developer.
+  const setup = node("details", undefined, {
+    class: "connect-developer connect-setup",
+  });
+  setup.append(
+    node("summary", hostText("For your developer")),
+    providerForm,
+    rooms,
+  );
+
+  const systemSelect = (form, value) => {
+    const input = field(form, "Opens", "systemId", "", "text", [
+      ["", hostText("Choose a system")],
+      ...systems.map((item) => [item.id, item.name]),
+    ]);
+    input.required = true;
+    if (value && systemsById.has(value)) input.value = value;
+    return input;
+  };
+  function roomForm(mapping) {
+    const form = node("form", undefined, { class: "connect-room-form" });
+    const room = field(
       form,
-      "Integration property",
-      "propertyId",
-      "",
-      "text",
-      properties.map((entry) => [entry.id, entry.name]),
+      "ID in your booking system",
+      "providerRoomId",
+      mapping?.providerRoomId ?? "",
     );
-    const room = field(form, "Integration room", "roomId", "", "text", []);
-    const targets = node("fieldset"),
-      legend = node("legend", hostText("Access targets"));
-    targets.append(legend);
-    form.append(targets);
-    let systems = [],
-      mappingVersion;
-    const updateTargets = () => {
-      targets.replaceChildren(legend);
-      for (const system of systems.filter(
-        (entry) =>
-          entry.status === "active" &&
-          entry.propertyId === property.value &&
-          (!entry.roomId || entry.roomId === room.value),
-      )) {
-        const label = node("label", `${system.name} (${system.type})`),
-          check = node("input", undefined, {
-            type: "checkbox",
-            name: "targetId",
-            value: system.id,
-          });
-        label.prepend(check);
-        targets.append(label);
-      }
-    };
-    const updateRooms = () => {
-      room.replaceChildren(
-        ...rooms
-          .filter((entry) => entry.propertyId === property.value)
-          .map((entry) => node("option", entry.name, { value: entry.id })),
-      );
-      updateTargets();
-    };
-    property.addEventListener("change", updateRooms);
-    room.addEventListener("change", updateTargets);
-    updateRooms();
-    const save = node("button", hostText("Save provider room mapping"), {
-        type: "submit",
-      }),
-      load = node("button", hostText("Load provider mappings"), {
-        type: "button",
-      });
-    form.append(save, load);
-    section.append(
-      node("h3", hostText("Provider room mapping")),
-      form,
-      mappings,
-    );
-    async function loadMappings(cursor, append = false) {
-      if (!provider.reportValidity()) return;
-      const response = await portalRequest(
-        user,
-        `${root}/providers/${encodeURIComponent(provider.value)}/mappings?${new URLSearchParams({ limit: "50", ...(cursor ? { cursor } : {}) })}`,
-      );
-      if (!current()) return;
-      if (!append) mappings.replaceChildren();
-      for (const mapping of response.items) {
-        const row = node("article");
-        row.append(
-          node(
-            "p",
-            hostText("{p0} · version {p1}", {
-              p0: mapping.providerRoomId,
-              p1: mapping.version,
-            }),
-          ),
-        );
-        const edit = node("button", hostText("Edit provider mapping"), {
-          type: "button",
-        });
-        edit.addEventListener("click", () => {
-          mappingVersion = {
-            provider: provider.value,
-            room: mapping.providerRoomId,
-            version: mapping.version,
-          };
-          providerRoom.value = mapping.providerRoomId;
-          property.value = mapping.propertyId;
-          updateRooms();
-          room.value = mapping.roomId;
-          updateTargets();
-          for (const check of targets.querySelectorAll("input"))
-            check.checked = mapping.targetIds.includes(check.value);
-        });
-        row.append(edit);
-        mappings.append(row);
-      }
-      if (response.nextCursor) {
-        const more = node("button", hostText("Load more provider mappings"), {
-          type: "button",
-        });
-        more.addEventListener("click", () =>
-          run(more, async () => {
-            await loadMappings(response.nextCursor, true);
-            if (current()) more.remove();
-          }),
-        );
-        mappings.append(more);
-      }
-      status.textContent = response.items.length
-        ? hostText("Provider mappings loaded.")
-        : hostText("No mappings for this provider.");
-    }
-    load.addEventListener("click", () => run(load, () => loadMappings()));
+    room.maxLength = 128;
+    room.pattern = "[A-Za-z0-9_.:\\-]+";
+    room.dir = "ltr";
+    if (mapping) room.readOnly = true;
+    const target = systemSelect(form, mapping?.systemId);
+    const save = node("button", hostText(mapping ? "Save" : "Add connection"), {
+      type: "submit",
+    });
+    form.append(save);
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      void run(save, async () => {
-        const body = {
-          providerRoomId: providerRoom.value,
-          propertyId: property.value,
-          roomId: room.value,
-          targetIds: [...targets.querySelectorAll("input:checked")].map(
-            (entry) => entry.value,
-          ),
-          ...(mappingVersion?.provider === provider.value &&
-          mappingVersion?.room === providerRoom.value
-            ? { version: mappingVersion.version }
-            : {}),
-        };
-        if (!body.targetIds.length) {
-          status.textContent = hostText(
-            "Select at least one mapped access target.",
+      if (!form.reportValidity()) return;
+      const name = provider.value.trim();
+      void run(
+        save,
+        async () => {
+          await mutate(
+            `${root}/providers/${encodeURIComponent(name)}/mappings`,
+            {
+              providerRoomId: room.value.trim(),
+              systemId: target.value,
+              ...(mapping ? { version: mapping.version } : {}),
+            },
           );
-          return;
-        }
-        const result = await mutate(
-          `${root}/providers/${encodeURIComponent(provider.value)}/mappings`,
-          body,
-        );
-        if (!current()) return;
-        mappingVersion = {
-          provider: provider.value,
-          room: result.mapping.providerRoomId,
-          version: result.mapping.version,
-        };
-        await loadMappings();
-        status.textContent = hostText("Provider room mapping saved.");
-      });
+          if (current()) await loadRooms(name);
+        },
+        mappingFailure,
+      );
     });
-    try {
-      systems = (
-        await portalRequest(
-          user,
-          `/api/v1/organizations/${encodeURIComponent(organization.id)}/systems?limit=100`,
-        )
-      ).items;
-      if (current()) updateTargets();
-    } catch {
-      if (current())
-        status.textContent = hostText("Access targets could not be loaded.");
+    return form;
+  }
+  async function loadRooms(name) {
+    const items = [];
+    let cursor;
+    for (let page = 0; page < 10; page++) {
+      const result = await portalRequest(
+        user,
+        `${root}/providers/${encodeURIComponent(name)}/mappings?${new URLSearchParams({ limit: "50", ...(cursor ? { cursor } : {}) })}`,
+      );
+      if (!current() || provider.value.trim() !== name) return;
+      items.push(...(Array.isArray(result?.items) ? result.items : []));
+      cursor = result?.nextCursor;
+      if (!cursor) break;
     }
+    const list = node("ul", undefined, { class: "connect-room-list" });
+    for (const mapping of items) {
+      if (typeof mapping?.providerRoomId !== "string") continue;
+      const item = node("li", undefined, {
+        "data-provider-room": mapping.providerRoomId,
+      });
+      const line = node("p", undefined, { class: "connect-room-list__line" });
+      line.append(
+        node("bdi", mapping.providerRoomId, { dir: "ltr" }),
+        " → ",
+        node(
+          "bdi",
+          systemsById.get(mapping.systemId)?.name ??
+            (mapping.systemId ? hostText("A removed system") : noSystem),
+        ),
+      );
+      const change = node("details", undefined, {
+        class: "connect-room-change",
+      });
+      change.append(node("summary", hostText("Change")), roomForm(mapping));
+      item.append(line, change);
+      list.append(item);
+    }
+    rooms.replaceChildren();
+    if (list.childElementCount) rooms.append(list);
+    else
+      rooms.append(
+        node("p", hostText("No connections yet."), {
+          class: "connect-empty",
+        }),
+      );
+    rooms.append(node("h3", hostText("New connection")), roomForm());
   }
-  if (!includeEvents) {
-    status.textContent = hostText(
-      "Integration mappings loaded. Review provider events in Operations.",
-    );
-    return;
-  }
-  const refresh = node("button", hostText("Refresh integration events"), {
-    type: "button",
+  providerForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!providerForm.reportValidity()) return;
+    void run(showRooms, () => loadRooms(provider.value.trim()));
   });
-  section.append(refresh, events);
+
+  // What the booking system sent lately.
+  const eventsSection = node("div", undefined, { class: "connect-events" });
+  const eventsHeading = node("h3", hostText("Bookings it sent lately"));
+  const eventList = node("ul", undefined, { class: "connect-event-list" });
+  // One "Show more" at most: it lives here and every read replaces it.
+  const eventMore = node("div", undefined, { class: "connect-events__more" });
+  const eventEmpty = node("p", hostText("No bookings from it yet."), {
+    class: "connect-empty",
+    hidden: "",
+  });
+  eventsSection.append(eventsHeading, eventList, eventEmpty, eventMore);
+  section.append(eventsSection, setup);
   async function loadEvents(cursor, append = false) {
     const result = await portalRequest(
       user,
       `${root}/events?${new URLSearchParams({ limit: "50", ...(cursor ? { cursor } : {}) })}`,
     );
     if (!current()) return;
-    if (!append) events.replaceChildren();
-    for (const event of result.items) {
-      const row = node("article");
-      row.append(
-        node("h3", `${event.provider}: ${event.type}`),
-        node(
-          "p",
-          hostText("{p0} · attempts {p1} · provider revision {p2}", {
-            p0: hostText(event.status),
-            p1: event.attempts,
-            p2: event.revision,
-          }),
-        ),
-        node("p", hostText("Correlation: {p0}", { p0: event.requestId })),
+    eventMore.replaceChildren();
+    if (!append) eventList.replaceChildren();
+    for (const event of Array.isArray(result?.items) ? result.items : []) {
+      const item = node("li", undefined, { "data-event-status": event.status });
+      const line = node("p");
+      line.append(
+        node("strong", hostText(eventTypes[event.type] ?? "Booking update")),
+        ` · ${eventStateLabel(event.status)}`,
+        typeof event.createdAt === "string" &&
+          Number.isFinite(Date.parse(event.createdAt))
+          ? ` · ${hostDateTime(event.createdAt)}`
+          : "",
       );
-      if (event.lastErrorCode)
-        row.append(
-          node(
-            "p",
-            hostText("Action required: {p0}", { p0: event.lastErrorCode }),
-          ),
-        );
+      item.append(line);
+      // Codes stay with the developer.
+      const developer = node("details", undefined, {
+        class: "connect-developer",
+      });
+      developer.append(node("summary", hostText("For your developer")));
+      const facts = node("p", undefined, { dir: "ltr", class: "connect-code" });
+      facts.textContent = [
+        event.provider,
+        event.requestId,
+        event.lastErrorCode,
+        event.attempts !== undefined ? `attempts ${event.attempts}` : "",
+      ]
+        .filter(Boolean)
+        .join(" · ");
+      developer.append(facts);
+      item.append(developer);
       if (event.status === "dead_letter") {
-        const form = node("form"),
-          reason = field(
-            form,
-            "Replay reason",
-            "reason",
-            "Provider mapping corrected",
-          );
-        reason.minLength = 5;
-        reason.maxLength = 200;
-        const replay = node("button", hostText("Replay reviewed event"), {
-          type: "submit",
+        const again = node("button", hostText("Try again"), {
+          type: "button",
+          class: "button-secondary",
         });
-        form.append(replay);
-        form.addEventListener("submit", (submit) => {
-          submit.preventDefault();
-          void run(replay, async () => {
+        again.addEventListener("click", () =>
+          run(again, async () => {
             await mutate(
               `${root}/events/${encodeURIComponent(event.id)}/replay`,
-              { reason: reason.value },
+              {
+                reason: "Retried from the WIFIGATE dashboard",
+              },
             );
-            if (!current()) return;
-            await loadEvents();
-            status.textContent = hostText(
-              "Reviewed event queued again. Processing permissions are rechecked.",
-            );
-          });
-        });
-        row.append(form);
+            if (current()) await loadEvents();
+          }),
+        );
+        item.append(again);
       }
-      events.append(row);
+      eventList.append(item);
     }
-    status.textContent = result.items.length
-      ? hostText("Integration event status loaded.")
-      : hostText("No provider events received.");
-    if (result.nextCursor) {
-      const more = node("button", hostText("Load more integration events"), {
+    eventEmpty.hidden = eventList.childElementCount > 0;
+    if (result?.nextCursor) {
+      const more = node("button", hostText("Show more"), {
         type: "button",
+        class: "button-secondary",
       });
       more.addEventListener("click", () =>
-        run(more, async () => {
-          await loadEvents(result.nextCursor, true);
-          if (current()) more.remove();
-        }),
+        run(more, () => loadEvents(result.nextCursor, true)),
       );
-      events.append(more);
+      eventMore.append(more);
     }
   }
-  refresh.addEventListener("click", () => run(refresh, () => loadEvents()));
   try {
     await loadEvents();
-  } catch {
-    if (current())
-      status.textContent = hostText(
-        "Integration events could not be loaded. Refresh to retry.",
-      );
+  } catch (error) {
+    if (current()) status.textContent = failure(error);
   }
 }

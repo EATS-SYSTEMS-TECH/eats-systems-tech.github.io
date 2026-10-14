@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { chromium } from "playwright-core";
+import { demoGuestLink, readDemoToken } from "../js/host-demo-link.js";
 
 const pageUrl = new URL("../wifigate-link/index.html", import.meta.url);
 const appUrl = "https://example.test/open?ep=sample";
@@ -96,6 +97,97 @@ test("invitation handoff shows a stable fallback and copies its app link", async
     await missingPage.goto(pageUrl.href, { waitUntil: "domcontentloaded" });
     assert.equal(await missingPage.locator("#open-app").isVisible(), false);
     assert.equal(await missingPage.locator("#spinner").isVisible(), false);
+    await context.close();
+  } finally {
+    await browser.close();
+  }
+});
+
+// A demo guest link from the Host examples (ep=v1.demo_…) shows a preview
+// and never builds a wifigate:// link, on the API page and on every page made
+// from the same template.
+test("a demo guest link shows an example preview and never opens the app", async () => {
+  const startsAt = new Date(2026, 9, 14, 15, 0);
+  const endsAt = new Date(2026, 9, 15, 12, 0);
+  const link = demoGuestLink({ kind: "dual", startsAt, endsAt });
+  const ep = new URL(link).searchParams.get("ep");
+  const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? "msedge", headless: true });
+  try {
+    const context = await browser.newContext({ viewport: { width: 320, height: 640 }, isMobile: true });
+    await context.addInitScript(() => {
+      localStorage.setItem("wifigate-cookie-consent-v1", JSON.stringify({ version: 1, analytics: false, savedAt: Date.now() }));
+      window.autoAttempts = 0;
+      const schedule = window.setTimeout.bind(window);
+      window.setTimeout = (callback, delay, ...args) => {
+        if (delay === 40) {
+          window.autoAttempts += 1;
+          return 0;
+        }
+        return schedule(callback, delay, ...args);
+      };
+    });
+    const opened = [];
+    context.on("request", (request) => {
+      if (request.url().startsWith("wifigate:")) opened.push(request.url());
+    });
+    for (const [page, lang] of [
+      ["../wifigate-api/index.html", "en"],
+      ["../he/wifigate-api/index.html", "he"],
+      ["../wifigate-link/index.html", "en"],
+    ]) {
+      const tab = await context.newPage();
+      await tab.goto(`${new URL(page, import.meta.url).href}?ep=${encodeURIComponent(ep)}`, { waitUntil: "domcontentloaded" });
+      await tab.locator("#demo-banner").waitFor();
+      await tab.waitForTimeout(1100);
+      assert.equal(await tab.locator("#main-content").getAttribute("data-demo"), "true");
+      assert.equal(
+        await tab.locator("#demo-banner").innerText(),
+        lang === "he" ? "דוגמה: הקישור הזה לא פותח שער." : "Example: this link doesn't open a gate.",
+      );
+      assert.equal(await tab.locator(".demo-name").innerText(), "Example WIFIGATE Dual Control 212 🥂🍾");
+      if (lang === "he") {
+        // The Latin name keeps the Hebrew page's direction: it lines up on
+        // the right with the GUEST badge under it.
+        const [name, guest] = await tab.evaluate(() => {
+          const range = document.createRange();
+          range.selectNodeContents(document.querySelector(".demo-name"));
+          return [range.getBoundingClientRect().right, document.querySelector(".demo-guest").getBoundingClientRect().right];
+        });
+        assert.ok(Math.abs(name - guest) <= 1, `example name right edge ${name}, badge ${guest}`);
+      }
+      assert.match(await tab.locator(".demo-icon img").getAttribute("src"), /assets\/host-icons\/dual-control-barrier-gate-small\.svg$/);
+      const stay = await tab.locator("#demo-window").innerText();
+      assert.match(stay, lang === "he" ? /15:00 ← .*12:00/ : /03:00 PM → .*12:00 PM/);
+      assert.ok(
+        await tab.evaluate(() => document.querySelectorAll("#demo-window .demo-when").length === 2 && [...document.querySelectorAll("#demo-window .demo-when")].every((part) => new Set([...part.getClientRects()].map((box) => Math.round(box.top))).size === 1)),
+        "each end of the stay stays on one line; a narrow phone breaks at the arrow",
+      );
+      assert.equal(await tab.evaluate(() => window.autoAttempts), 0, "no automatic opening");
+      assert.equal(await tab.locator("#open-app").count(), 0);
+      assert.equal(
+        await tab.evaluate(() => [...document.querySelectorAll("[href]")].some((element) => element.getAttribute("href").startsWith("wifigate:"))),
+        false,
+        "no wifigate:// link anywhere",
+      );
+      assert.ok(await tab.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "fits a 320px phone");
+      if (process.env.WIFIGATE_SCREENSHOT && lang === "he") await tab.screenshot({ path: process.env.WIFIGATE_SCREENSHOT.replace(/\.png$/, "-demo.png") });
+    }
+    // A broken demo token is still a demo: an example message and no app.
+    const broken = await context.newPage();
+    await broken.goto(`${new URL("../wifigate-api/index.html", import.meta.url).href}?ep=v1.demo_not-json`, { waitUntil: "domcontentloaded" });
+    await broken.locator("#demo-banner").waitFor();
+    await broken.waitForTimeout(1100);
+    assert.equal(await broken.locator("#status").innerText(), "This example link is incomplete.");
+    assert.equal(await broken.evaluate(() => window.autoAttempts), 0);
+    // A demo token inside ?link= never becomes the app link either.
+    const direct = await context.newPage();
+    await direct.goto(`${new URL("../wifigate-api/index.html", import.meta.url).href}?link=${encodeURIComponent(`wifigate://gate/invite?ep=${ep}`)}`, { waitUntil: "domcontentloaded" });
+    await direct.locator("#demo-banner").waitFor();
+    await direct.waitForTimeout(1100);
+    assert.equal(await direct.evaluate(() => window.autoAttempts), 0);
+    assert.deepEqual(opened, []);
+    // The token carries the example and the stay only.
+    assert.deepEqual(readDemoToken(ep), { k: "dual", ss: startsAt.getTime(), se: endsAt.getTime() });
     await context.close();
   } finally {
     await browser.close();

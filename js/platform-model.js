@@ -8,6 +8,10 @@ const productStates = new Set([
   "unavailable",
 ]);
 
+// The Host plan role: admin (WIFIGATE operator) or user (paying customer).
+// null means no plan: an organization member, who never sees My systems.
+const hostPlanRoles = new Set(["admin", "user", null]);
+
 export function parsePlatformIdentity(value, expectedUid) {
   const { user, mfa, products } = value || {};
   if (
@@ -28,12 +32,35 @@ export function parsePlatformIdentity(value, expectedUid) {
       (product.organizations !== undefined &&
         (!Number.isSafeInteger(product.organizations) ||
           product.organizations < 0)) ||
-      (!user.emailVerified && product.state === "active")
+      (!user.emailVerified && product.state === "active") ||
+      (id === "host" && !hostPlanRoles.has(product.role ?? null))
     ) {
       throw new Error("portal-contract-incomplete");
     }
   }
-  return { user, mfa, products };
+  return {
+    user,
+    mfa,
+    products: {
+      ...products,
+      host: { ...products.host, role: products.host.role ?? null },
+    },
+  };
+}
+
+// A Host plan holder pays for Host and has My systems; anyone else in Host is
+// an organization member only.
+export function hasHostPlan(identity) {
+  const role = identity?.products?.host?.role;
+  return role === "admin" || role === "user";
+}
+
+// Whether a dashboard may open for this product. Host also opens while an
+// invitation is pending, with only the join-organization view, so the
+// invitation can be accepted there.
+export function canOpenProduct(identity, id) {
+  const state = identity?.products?.[id]?.state;
+  return state === "active" || (id === "host" && state === "pending");
 }
 
 // Sign-in is refused when no product is open to the account at all: every
@@ -73,8 +100,7 @@ export function safeDashboardPath(value) {
 export function loginDestination(identity, next, language = "en") {
   const safeNext = safeDashboardPath(next);
   const product = safeNext?.split(/[/?#]/)[2];
-  if (product && identity.products[product]?.state === "active")
-    return safeNext;
+  if (product && canOpenProduct(identity, product)) return safeNext;
   return language === "he" ? "/dashboard/?lang=he" : "/dashboard/";
 }
 

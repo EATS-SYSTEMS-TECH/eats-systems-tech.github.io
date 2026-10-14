@@ -7,20 +7,21 @@
     <meta name="referrer" content="no-referrer" />
     <title>Pay | WIFIGATE</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261013c" />
-    <link rel="stylesheet" href="/css/platform.css?v=20261013c" />
-    <script type="module" src="/js/platform-dashboard.js?v=20261013c"></script>
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" />
+    <link rel="stylesheet" href="/css/platform.css?v=20261014w6" />
+    <script type="module" src="/js/platform-dashboard.bundle.js?v=20261014w7"></script>
   </head>
   <body data-product="pay" class="platform-page">
     <main class="platform-shell">
       <header class="platform-header">
-        <a class="brand" href="/" aria-label="WIFIGATE home"
+        <a class="brand" href="/" aria-label="WIFIGATE home" data-copy-label="home"
           ><img
             src="/assets/img/wifigate-horizontal-logo.webp"
             alt="WIFIGATE"
             width="416"
             height="96"
         /></a>
+        <div id="product-switcher" class="product-switcher"></div>
         <div class="account-menu">
           <span class="platform-account-chip"
             ><span
@@ -63,7 +64,6 @@
         hidden
       ></section>
       <section id="product-workspace" class="portal-panel" hidden>
-        <div id="product-switcher" class="product-switcher"></div>
         <h2 id="product-title"></h2>
         <p data-copy="empty">
           Your access is active. This product workspace is not available yet.
@@ -90,6 +90,7 @@
           <img
             id="totp-qr"
             alt="Authenticator setup QR code"
+            data-copy-alt="setupQr"
             width="220"
             height="220"
           />

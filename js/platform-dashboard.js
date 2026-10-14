@@ -16,10 +16,15 @@ import {
   pageLanguage,
   loginPath,
   signInRefusal,
+  canOpenProduct,
 } from "./platform-model.js";
 import { platformText } from "./platform-copy.js";
 import { watchSession } from "./platform-session.js";
-import { renderProductSwitcher } from "./product-switcher.js";
+import {
+  renderProductSwitcher,
+  productIconPaths,
+  productLink,
+} from "./product-switcher.js";
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
 import { authErrorMessage } from "./host-auth-errors.js";
 import qrcode from "./vendor/qrcode-generator.js";
@@ -43,6 +48,11 @@ document.title = `${copy.title} | WIFIGATE`;
 $("#product-grid").setAttribute("aria-label", copy.products);
 for (const node of document.querySelectorAll("[data-copy]"))
   node.textContent = copy[node.dataset.copy];
+// Labels a screen reader speaks (and image text) follow the language too.
+for (const node of document.querySelectorAll("[data-copy-label]"))
+  node.setAttribute("aria-label", copy[node.dataset.copyLabel]);
+for (const node of document.querySelectorAll("[data-copy-alt]"))
+  node.setAttribute("alt", copy[node.dataset.copyAlt]);
 const languageMenu = $("#platform-language");
 if (languageMenu) {
   languageMenu.value = language;
@@ -101,10 +111,6 @@ function clearPrivate() {
   if (panel) panel.hidden = true;
 }
 
-function productLink(id) {
-  return `/dashboard/${id}/${language === "he" ? "?lang=he" : ""}`;
-}
-
 function actionButton(label, action) {
   const button = document.createElement("button");
   button.type = "button";
@@ -161,14 +167,7 @@ function productIcon(id) {
   icon.setAttribute("viewBox", "0 0 24 24");
   icon.setAttribute("aria-hidden", "true");
   const shape = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  shape.setAttribute(
-    "d",
-    {
-      host: "M8 2v4m8-4v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z M8 14h3m-3 4h6",
-      pay: "M3 8h18M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z M7 15h4",
-      manager: "M14 7a5 5 0 1 1-5 5L3 18v3h3v-3h3l3-3M17 6h.01",
-    }[id],
-  );
+  shape.setAttribute("d", productIconPaths[id]);
   icon.append(shape);
   const frame = document.createElement("div");
   frame.className = "product-icon";
@@ -184,14 +183,22 @@ function renderProducts() {
     tile.dataset.product = id;
     tile.dataset.state = state;
     const icon = productIcon(id);
+    // The product name keeps its Latin order inside Hebrew; the heading
+    // itself aligns with the rest of the tile.
     const title = document.createElement("h2");
-    title.textContent = `WIFIGATE ${id[0].toUpperCase() + id.slice(1)}`;
+    const name = document.createElement("bdi");
+    name.dir = "ltr";
+    name.textContent = `WIFIGATE ${id[0].toUpperCase() + id.slice(1)}`;
+    title.append(name);
     const description = document.createElement("p");
     description.className = "product-description";
     description.textContent = copy[id];
+    // Host opens while an invitation is pending: the join-organization view
+    // is where it is accepted.
+    const hostInvited = id === "host" && state === "pending";
     const status = document.createElement("span");
     status.className = "product-state";
-    status.textContent = copy[state];
+    status.textContent = hostInvited ? copy.hostPending : copy[state];
     const actions = document.createElement("div");
     actions.className = "product-actions";
     const guidance = document.createElement("p");
@@ -204,11 +211,12 @@ function renderProducts() {
         : ({
             active: copy.readyDetail,
             "no-plan": copy.planDetail,
-            pending: copy.pendingDetail,
+            pending: hostInvited ? copy.hostPendingDetail : copy.pendingDetail,
             blocked: copy.blockedDetail,
             unavailable: copy.unavailableDetail,
           }[state] ?? "");
-    if (state === "active") actions.append(link(copy.open, productLink(id)));
+    if (canOpenProduct(identity, id))
+      actions.append(link(copy.open, productLink(id, language)));
     if (state === "no-plan") {
       const informationUrl =
         id === "host" ? "/automation/" : `/contact-us/?product=${id}`;
@@ -272,8 +280,14 @@ async function refresh() {
     $("#platform-status").textContent = identity.user.emailVerified
       ? ""
       : copy.unverified;
+    renderProductSwitcher(
+      $("#product-switcher"),
+      identity,
+      selectedProduct || "",
+      language,
+    );
     if (selectedProduct) {
-      if (identity.products[selectedProduct]?.state !== "active") {
+      if (!canOpenProduct(identity, selectedProduct)) {
         location.replace(
           language === "he" ? "/dashboard/?lang=he" : "/dashboard/",
         );
@@ -282,12 +296,6 @@ async function refresh() {
       $("#product-title").textContent =
         `WIFIGATE ${selectedProduct[0].toUpperCase() + selectedProduct.slice(1)}`;
       $("#platform-title").textContent = $("#product-title").textContent;
-      renderProductSwitcher(
-        $("#product-switcher"),
-        identity,
-        selectedProduct,
-        language,
-      );
       $("#product-workspace").hidden = false;
     } else renderProducts();
   } catch (error) {
@@ -397,6 +405,14 @@ function deletionList(title, items) {
   return block;
 }
 
+// "1 system" or "{n} systems": how many My systems a deletion removes.
+const systemCount = (count) =>
+  count === 1
+    ? copy.deleteMySystemsOne
+    : copy.deleteMySystemsMany.replace("{n}", count);
+const countOf = (value) =>
+  Number.isSafeInteger(value) && value > 0 ? value : 0;
+
 function deletionMessage(error) {
   return (
     {
@@ -451,6 +467,16 @@ async function openDeletion() {
           ),
         ),
       );
+    // A Host plan holder's own systems go with the account; a system linked
+    // to an organization stays in it.
+    const mySystems = countOf(plan.mySystems);
+    if (mySystems)
+      groups.push(
+        deletionList(copy.deleteMySystems, [
+          systemCount(mySystems),
+          copy.deleteMySystemsLinked,
+        ]),
+      );
     if (!groups.length) {
       const none = document.createElement("p");
       none.textContent = copy.deleteNone;
@@ -488,6 +514,12 @@ function finishDeletion(result) {
     }),
   );
   list.hidden = !cancelled.length;
+  const removed = countOf(result.removedMySystems);
+  const systems = $("#account-deleted-systems");
+  const line = document.createElement("li");
+  line.textContent = systemCount(removed);
+  systems.querySelector("ul").replaceChildren(...(removed ? [line] : []));
+  systems.hidden = !removed;
   $("#account-deleted").hidden = false;
   $("#account-deleted-home").focus();
   // The Firebase user no longer exists; clear this tab's stored session.
