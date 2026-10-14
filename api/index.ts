@@ -7,8 +7,7 @@ export {
   changePortalAccess,
   deletePortalAccess,
 } from "./auth/approve-email.js";
-export { hostGet } from "./host/host-get.js";
-export { hostApi, profileApi } from "./api.js";
+export { profileApi } from "./api.js";
 export { portalRequest, portalExport } from "./host/portal-request.js";
 export {
   pendingMembershipInvitations,

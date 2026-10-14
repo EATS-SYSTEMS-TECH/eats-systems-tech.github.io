@@ -5,20 +5,19 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="robots" content="noindex,nofollow" />
     <meta name="referrer" content="no-referrer" />
-    <title>Calendar | WIFIGATE Host</title>
+    <title>WIFIGATE Host</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261007b" />
-    <link rel="stylesheet" href="/css/host-workspace.css?v=20261009-layout" />
-    <link rel="stylesheet" href="/css/platform.css" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" />
+    <link rel="stylesheet" href="/css/platform.css?v=20261014w6" />
+    <link rel="stylesheet" href="/css/host-dashboard.css?v=20261014w6" />
+    <link rel="stylesheet" href="/css/host-admin.css?v=20261014w6" />
+    <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
     <script
       type="module"
-      src="/js/host-dashboard.bundle.js?v=20261009-design"
+      src="/js/host-dashboard.bundle.js?v=20261014w8"
     ></script>
-    <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
-    <link rel="stylesheet" href="/css/host-admin.css?v=20261009-design" />
-    <link rel="stylesheet" href="/css/host-interface.css?v=20261009-design" />
   </head>
-  <body class="portal-dashboard" data-host-view="Calendar" data-product="host">
+  <body class="host-app portal-dashboard" data-product="host">
     <a
       class="workspace-skip-link"
       href="#workspace-main"
@@ -33,78 +32,159 @@
       data-host-label="Host navigation"
     >
       <a
-        class="brand"
+        class="brand host-sidebar__brand"
         href="/"
         aria-label="WIFIGATE home"
         data-host-label="WIFIGATE home"
-        ><img src="/assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE"
+        ><img
+          src="/assets/img/wifigate-horizontal-logo.webp"
+          alt="WIFIGATE"
+          width="416"
+          height="96"
       /></a>
-      <div id="product-switcher" class="product-switcher"></div>
+      <div id="workspace-org-switcher" class="org-switcher" hidden=""></div>
       <nav
         id="host-section-navigation"
         aria-label="Dashboard sections"
         data-host-label="Dashboard sections"
       ></nav>
-      <button
-        id="sidebar-profile"
-        class="sidebar-profile"
-        type="button"
-        aria-label="Account settings"
-        data-host-label="Account settings"
+      <section
+        id="host-my-systems"
+        class="sidebar-systems"
+        aria-labelledby="sidebar-systems-title"
+        hidden=""
       >
-        <span class="profile-avatar" id="sidebar-avatar">WG</span
-        ><span
-          ><strong id="sidebar-profile-name">WIFIGATE Host</strong
-          ><small id="sidebar-account-name"></small
-        ></span>
-      </button>
+        <h2 id="sidebar-systems-title" data-host-copy="My systems">
+          My systems
+        </h2>
+        <ul id="host-my-systems-list" class="sidebar-systems__list"></ul>
+      </section>
+      <div id="host-platform-navigation" class="sidebar-platform"></div>
     </aside>
-    <main id="workspace-main" class="portal-shell" tabindex="-1">
-      <header class="portal-header">
+    <header class="host-topbar">
+      <div class="host-topbar__start">
+        <button
+          class="workspace-menu-toggle"
+          type="button"
+          aria-controls="host-sidebar"
+          aria-expanded="false"
+          aria-label="Menu"
+          data-host-label="Menu"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
         <a
-          class="brand"
+          class="brand host-topbar__brand"
           href="/"
           aria-label="WIFIGATE home"
           data-host-label="WIFIGATE home"
-          ><img src="/assets/img/wifigate-horizontal-logo.png" alt="WIFIGATE"
+          ><img
+            src="/assets/img/wifigate-horizontal-logo.webp"
+            alt="WIFIGATE"
+            width="416"
+            height="96"
         /></a>
-        <div class="workspace-breadcrumb">
-          <span>WIFIGATE Host</span><span aria-hidden="true">/</span
-          ><strong id="workspace-current-view" data-host-copy="Calendar"
-            >Calendar</strong
-          >
-        </div>
-        <div class="account-menu">
-          <span id="account-name"></span
-          ><button
-            id="sign-out"
+        <h1 id="workspace-current-view" class="host-topbar__title">
+          WIFIGATE Host
+        </h1>
+      </div>
+      <div id="product-switcher" class="product-switcher"></div>
+      <div class="host-topbar__end">
+        <button
+          id="join-organization"
+          class="host-icon-button host-bell"
+          type="button"
+          aria-label="Join an organization"
+          data-host-label="Join an organization"
+          hidden
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0" />
+          </svg>
+          <span class="host-bell__count" data-invitation-count></span>
+        </button>
+        <button
+          id="host-language"
+          class="host-language"
+          type="button"
+          data-host-language
+        ></button>
+        <div class="host-account">
+          <button
+            id="account-button"
+            class="host-account__button"
             type="button"
-            disabled=""
-            data-host-copy="Sign out"
+            aria-haspopup="true"
+            aria-controls="account-menu"
+            aria-label="Account"
           >
-            Sign out
+            <span
+              class="profile-avatar"
+              id="account-avatar"
+              aria-hidden="true"
+            ></span>
           </button>
+          <div id="account-menu" class="host-account__menu" tabindex="-1" hidden="">
+            <div class="host-account__who">
+              <strong id="account-name" dir="auto"></strong>
+              <span id="account-email" dir="ltr"></span>
+              <span id="account-plan"></span>
+            </div>
+            <button
+              id="account-security"
+              class="host-account__item"
+              type="button"
+              data-host-copy="Account and security"
+            >
+              Account and security
+            </button>
+            <button
+              class="host-account__item host-account__language"
+              type="button"
+              data-host-language
+            >
+              <span data-host-language-name></span>
+            </button>
+            <a
+              class="host-account__item"
+              href="/dashboard/"
+              data-host-copy="All products"
+              data-products-link
+              >All products</a
+            >
+            <button
+              id="sign-out"
+              class="host-account__item host-account__sign-out"
+              type="button"
+              disabled=""
+              data-host-copy="Sign out"
+            >
+              Sign out
+            </button>
+          </div>
         </div>
-      </header>
+      </div>
+    </header>
+    <div class="host-scrim" hidden=""></div>
+    <main id="workspace-main" class="portal-shell" tabindex="-1">
       <span class="staging-badge" data-staging="" hidden="">LOCAL STAGING</span>
       <section
         id="access-panel"
-        class="portal-panel"
+        class="portal-panel host-access"
         aria-labelledby="access-title"
       >
-        <span class="eyebrow" data-host-copy="WIFIGATE HOST"
-          >WIFIGATE HOST</span
-        >
-        <h1 id="access-title" data-host-copy="Checking portal access">
-          Checking portal access
-        </h1>
+        <h2 id="access-title" data-host-copy="Opening WIFIGATE Host">
+          Opening WIFIGATE Host
+        </h2>
         <p
           id="dashboard-status"
           role="status"
           aria-live="polite"
-          data-host-copy="Verifying your account..."
+          data-host-copy="Checking your access…"
         >
-          Verifying your account...
+          Checking your access…
         </p>
         <div
           id="access-progress"
@@ -124,136 +204,6 @@
           Check again
         </button>
       </section>
-      <details id="account-details" class="portal-panel" hidden="">
-        <summary data-host-copy="Account and security">
-          Account and security
-        </summary>
-        <dl class="profile-grid">
-          <div>
-            <dt data-host-copy="Name">Name</dt>
-            <dd id="profile-name"></dd>
-          </div>
-          <div>
-            <dt data-host-copy="Email">Email</dt>
-            <dd id="profile-email"></dd>
-          </div>
-          <div>
-            <dt data-host-copy="Role">Role</dt>
-            <dd id="profile-role"></dd>
-          </div>
-          <div>
-            <dt data-host-copy="Access">Access</dt>
-            <dd id="profile-access"></dd>
-          </div>
-          <div>
-            <dt data-host-copy="Authenticator">Authenticator</dt>
-            <dd id="profile-mfa"></dd>
-          </div>
-          <div>
-            <dt data-host-copy="MFA policy">MFA policy</dt>
-            <dd id="profile-mfa-policy"></dd>
-          </div>
-        </dl>
-        <button
-          id="optional-enrollment"
-          type="button"
-          hidden=""
-          data-host-copy="Set up an authenticator (optional)"
-        >
-          Set up an authenticator (optional)
-        </button>
-      </details>
-      <section
-        id="mfa-enrollment"
-        class="portal-panel"
-        hidden=""
-        aria-labelledby="enrollment-title"
-      >
-        <h2 id="enrollment-title" data-host-copy="Set up your authenticator">
-          Set up your authenticator
-        </h2>
-        <p id="enrollment-description"></p>
-        <button
-          id="start-enrollment"
-          type="button"
-          data-host-copy="Confirm identity and start setup"
-        >
-          Confirm identity and start setup
-        </button>
-        <div id="totp-setup" hidden="">
-          <p
-            data-host-copy="Scan this QR code in your authenticator app, or enter the setup key manually."
-          >
-            Scan this QR code in your authenticator app, or enter the setup key
-            manually.
-          </p>
-          <img
-            id="totp-qr"
-            alt="Scan to add your WIFIGATE Host authenticator"
-            width="220"
-            height="220"
-          /><label
-            ><span data-host-copy="Setup key">Setup key</span
-            ><input
-              id="totp-secret"
-              readonly=""
-              autocomplete="off"
-              spellcheck="false"
-          /></label>
-          <p id="totp-settings" class="help-text"></p>
-          <form id="enrollment-form">
-            <label
-              ><span data-host-copy="Authenticator code"
-                >Authenticator code</span
-              ><input
-                name="code"
-                inputmode="numeric"
-                autocomplete="one-time-code"
-                pattern="[0-9]{6}"
-                minlength="6"
-                maxlength="6"
-                required="" /></label
-            ><button type="submit" data-host-copy="Verify and finish setup">
-              Verify and finish setup
-            </button>
-          </form>
-        </div>
-        <p id="enrollment-status" role="status" aria-live="polite"></p>
-        <button
-          id="cancel-enrollment"
-          type="button"
-          hidden=""
-          data-host-copy="Back to calendar"
-        >
-          Back to calendar
-        </button>
-        <p
-          class="help-text"
-          data-host-copy="Lost your authenticator? Contact a platform owner for identity verification and recovery."
-        >
-          Lost your authenticator? Contact a platform owner for identity
-          verification and recovery.
-        </p>
-      </section>
-      <section id="mfa-verification" class="portal-panel" hidden="">
-        <h2 data-host-copy="Verify your authenticator">
-          Verify your authenticator
-        </h2>
-        <p
-          data-host-copy="Administrative access requires a sign-in verified with your authenticator."
-        >
-          Administrative access requires a sign-in verified with your
-          authenticator.
-        </p>
-        <button
-          id="verify-session"
-          type="button"
-          data-host-copy="Sign in again and verify"
-        >
-          Sign in again and verify
-        </button>
-        <p id="verification-status" role="status" aria-live="polite"></p>
-      </section>
       <div id="dashboard-content" hidden="">
         <section
           id="admin-overview"
@@ -262,92 +212,12 @@
           hidden=""
           data-host-label="Administrator overview"
         ></section>
-        <div id="workspace-org-switcher">
-          <label
-            ><span data-host-copy="Organization">Organization</span
-            ><select
-              aria-label="Organization"
-              disabled=""
-              data-host-label="Organization"
-            >
-              <option data-host-copy="No organization selected">
-                No organization selected
-              </option>
-            </select></label
-          >
-        </div>
         <section
           id="host-management"
           class="portal-panel"
           aria-label="Organization management"
           data-host-label="Organization management"
         ></section>
-        <section
-          id="admin-approval"
-          class="portal-panel"
-          hidden=""
-          aria-labelledby="approval-title"
-        >
-          <h2 id="approval-title" data-host-copy="Manage portal access">
-            Manage portal access
-          </h2>
-          <p
-            data-host-copy="Add a user or administrator, block access temporarily, or remove portal access. They must sign in with that same verified email. Administrators require an authenticator."
-          >
-            Add a user or administrator, block access temporarily, or remove
-            portal access. They must sign in with that same verified email.
-            Administrators require an authenticator.
-          </p>
-          <form id="approval-form">
-            <label
-              ><span data-host-copy="Email address">Email address</span
-              ><input
-                name="email"
-                type="email"
-                autocomplete="email"
-                maxlength="254"
-                required="" /></label
-            ><label
-              ><span data-host-copy="Action">Action</span
-              ><select name="action">
-                <option value="approve" data-host-copy="Add or update access">
-                  Add or update access
-                </option>
-                <option value="block" data-host-copy="Block access">
-                  Block access
-                </option>
-                <option value="unblock" data-host-copy="Unblock access">
-                  Unblock access
-                </option>
-                <option value="delete" data-host-copy="Delete portal access">
-                  Delete portal access
-                </option>
-              </select></label
-            ><label id="access-role-label"
-              ><span data-host-copy="Role">Role</span
-              ><select name="role">
-                <option value="user" data-host-copy="User">User</option>
-                <option value="admin" data-host-copy="Administrator">
-                  Administrator
-                </option>
-              </select></label
-            >
-            <p
-              id="delete-access-note"
-              class="help-text"
-              hidden=""
-              data-host-copy="Deletion removes this email's portal access. It keeps their Firebase account and profile. You cannot change your own access or remove the last active administrator."
-            >
-              Deletion removes this email's portal access. It keeps their
-              Firebase account and profile. You cannot change your own access or
-              remove the last active administrator.
-            </p>
-            <button type="submit" data-host-copy="Save access">
-              Save access
-            </button>
-          </form>
-          <p id="approval-status" role="status" aria-live="polite"></p>
-        </section>
       </div>
     </main>
     <nav class="portal-legal" aria-label="Legal" data-host-label="Legal">
@@ -360,46 +230,81 @@
         >Accessibility Statement</a
       >
     </nav>
-    <dialog id="mfa-challenge" aria-labelledby="challenge-title">
-      <form>
-        <h2 id="challenge-title" data-host-copy="Verify your authenticator">
+    <nav
+      id="host-tabbar"
+      class="host-tabbar"
+      aria-label="Main sections"
+      data-host-label="Main sections"
+      hidden=""
+    ></nav>
+    <dialog
+      id="mfa-challenge"
+      class="mfa-dialog"
+      aria-labelledby="challenge-title"
+    >
+      <form class="mfa-dialog__form">
+        <img
+          class="mfa-dialog__logo"
+          src="/assets/img/wifigate-horizontal-logo.webp"
+          alt="WIFIGATE"
+          width="416"
+          height="96"
+        />
+        <span class="mfa-dialog__icon" aria-hidden="true"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 3 5 6v5c0 4.4 2.9 8.3 7 9.6 4.1-1.3 7-5.2 7-9.6V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" /></svg
+        ></span>
+        <h2
+          id="challenge-title"
+          class="mfa-dialog__title"
+          data-host-copy="Verify your authenticator"
+        >
           Verify your authenticator
         </h2>
-        <p
-          data-host-copy="Enter the current code from your authenticator app to finish signing in."
-        >
-          Enter the current code from your authenticator app to finish signing
-          in.
-        </p>
-        <label
+        <label class="mfa-dialog__field mfa-dialog__factor"
           ><span data-host-copy="Authenticator">Authenticator</span
           ><select name="factor" required=""></select
         ></label>
-        <label
+        <label class="mfa-dialog__field"
           ><span data-host-copy="Verification code">Verification code</span
           ><input
+            class="mfa-dialog__code"
             name="code"
+            dir="ltr"
             inputmode="numeric"
             autocomplete="one-time-code"
             pattern="[0-9]{6}"
             minlength="6"
             maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
             required=""
         /></label>
-        <p role="status" aria-live="polite"></p>
-        <div class="form-actions">
-          <button type="submit" data-host-copy="Verify">Verify</button
-          ><button type="button" data-cancel="" data-host-copy="Cancel">
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button
+            type="submit"
+            class="mfa-dialog__button mfa-dialog__button--primary"
+            data-host-copy="Verify"
+          >
+            Verify</button
+          ><button
+            type="button"
+            class="mfa-dialog__button mfa-dialog__button--secondary"
+            data-cancel=""
+            data-host-copy="Cancel"
+          >
             Cancel
           </button>
         </div>
-        <p
-          class="help-text"
-          data-host-copy="Lost access? Contact a platform owner to verify your identity and recover your factor."
-        >
-          Lost access? Contact a platform owner to verify your identity and
-          recover your factor.
-        </p>
       </form>
     </dialog>
     <script src="/js/cookie-consent-copy.js?v=20261007c" defer=""></script>

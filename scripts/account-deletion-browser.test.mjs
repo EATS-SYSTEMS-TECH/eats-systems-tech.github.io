@@ -53,11 +53,15 @@ async function scenario(browser, origin, options = {}) {
     if (url.pathname === "/api/v1/platform/account/deletion")
       return options.admin
         ? route.fulfill({ status: 403, json: { error: { code: "PLATFORM_ADMIN_DELETION_FORBIDDEN" } } })
-        : route.fulfill({ json: { allowed: true, subscriptions: [{ organization: "Sea View Hotel", product: "host" }], closingOrganizations: [{ organization: "Sea View Hotel", otherMembers: 2 }], memberships: 1 } });
+        : route.fulfill({ json: options.onlySystems
+          ? { allowed: true, subscriptions: [], closingOrganizations: [], memberships: 0, mySystems: options.mySystems }
+          : { allowed: true, subscriptions: [{ organization: "Sea View Hotel", product: "host" }], closingOrganizations: [{ organization: "Sea View Hotel", otherMembers: 2 }], memberships: 1, ...(options.mySystems !== undefined ? { mySystems: options.mySystems } : {}) } });
     if (url.pathname === "/api/v1/platform/account/delete") {
       if (calls.filter((call) => call.path === url.pathname).length === 1)
         return route.fulfill({ status: 403, json: { error: { code: "RECENT_REAUTH_REQUIRED" } } });
-      return route.fulfill({ json: { deleted: true, cancelledSubscriptions: [{ organization: "Sea View Hotel", product: "host" }], archivedOrganizations: ["Sea View Hotel"], removedMemberships: 1 } });
+      return route.fulfill({ json: options.onlySystems
+        ? { deleted: true, cancelledSubscriptions: [], archivedOrganizations: [], removedMemberships: 0, removedMySystems: options.mySystems }
+        : { deleted: true, cancelledSubscriptions: [{ organization: "Sea View Hotel", product: "host" }], archivedOrganizations: ["Sea View Hotel"], removedMemberships: 1, ...(options.mySystems !== undefined ? { removedMySystems: options.mySystems } : {}) } });
     }
     return route.fulfill({ status: 404, json: { error: { code: "NOT_FOUND" } } });
   });
@@ -128,6 +132,54 @@ test("account deletion from the dashboard", async (t) => {
     await context.close();
   });
 
+  await t.test("a Host plan holder sees the My systems that go with the account", async () => {
+    const { context, page, errors } = await scenario(browser, origin, { mySystems: 2, onlySystems: true });
+    await page.locator("#platform-account-panel").waitFor({ state: "visible" });
+    await page.click("#delete-account");
+    await page.locator("#account-delete .account-delete__group").first().waitFor();
+    const groups = await page.locator("#account-delete .account-delete__group").evaluateAll((items) =>
+      items.map((item) => [item.querySelector("strong").textContent, [...item.querySelectorAll("li")].map((line) => line.textContent)]));
+    assert.deepEqual(groups, [["These systems will be removed from My systems", ["2 systems", "Systems linked to an organization stay there."]]]);
+    assert.doesNotMatch(await page.textContent("#account-delete-plan"), /You have no active subscriptions/);
+    await page.fill("#account-delete input[name=confirmEmail]", "dana.levi@example.test");
+    await page.click("#account-delete .account-delete__confirm");
+    await page.locator("#account-deleted").waitFor({ state: "visible" });
+    assert.equal(await page.isVisible("#account-deleted-list"), false, "no subscriptions were cancelled");
+    assert.equal(await page.textContent("#account-deleted-systems strong"), "Removed from My systems");
+    assert.deepEqual(await page.locator("#account-deleted-systems li").allTextContents(), ["2 systems"]);
+    assert.deepEqual(errors, []);
+    await context.close();
+  });
+
+  await t.test("one My system in Hebrew; without My systems the group stays away", async () => {
+    const hebrew = await scenario(browser, origin, { path: "/dashboard/?lang=he", mySystems: 1 });
+    await hebrew.page.locator("#platform-account-panel").waitFor({ state: "visible" });
+    await hebrew.page.click("#delete-account");
+    await hebrew.page.locator("#account-delete .account-delete__group").first().waitFor();
+    const strong = await hebrew.page.locator("#account-delete .account-delete__group strong").allTextContents();
+    assert.ok(strong.includes("המערכות האלה יוסרו מהמערכות שלי"));
+    assert.ok((await hebrew.page.locator("#account-delete .account-delete__group li").allTextContents()).includes("מערכת אחת"));
+    await hebrew.page.fill("#account-delete input[name=confirmEmail]", "dana.levi@example.test");
+    await hebrew.page.click("#account-delete .account-delete__confirm");
+    await hebrew.page.locator("#account-deleted").waitFor({ state: "visible" });
+    assert.equal(await hebrew.page.textContent("#account-deleted-systems strong"), "הוסרו מהמערכות שלי");
+    assert.deepEqual(await hebrew.page.locator("#account-deleted-systems li").allTextContents(), ["מערכת אחת"]);
+    assert.deepEqual(hebrew.errors, []);
+    await hebrew.context.close();
+    // An older answer without the counts: nothing about My systems.
+    const plain = await scenario(browser, origin);
+    await plain.page.locator("#platform-account-panel").waitFor({ state: "visible" });
+    await plain.page.click("#delete-account");
+    await plain.page.locator("#account-delete .account-delete__group").first().waitFor();
+    assert.doesNotMatch(await plain.page.textContent("#account-delete-plan"), /My systems/);
+    await plain.page.fill("#account-delete input[name=confirmEmail]", "dana.levi@example.test");
+    await plain.page.click("#account-delete .account-delete__confirm");
+    await plain.page.locator("#account-deleted").waitFor({ state: "visible" });
+    assert.equal(await plain.page.isVisible("#account-deleted-systems"), false);
+    assert.deepEqual(plain.errors, []);
+    await plain.context.close();
+  });
+
   await t.test("a WIFIGATE administrator sees why the account cannot be deleted", async () => {
     const { context, page } = await scenario(browser, origin, { admin: true });
     await page.locator("#platform-account-panel").waitFor({ state: "visible" });
@@ -151,7 +203,7 @@ test("account deletion from the dashboard", async (t) => {
     await page.fill("#account-delete input[name=confirmEmail]", "dana.levi@example.test");
     await page.click("#account-delete .account-delete__confirm");
     await page.locator("#account-deleted").waitFor({ state: "visible" });
-    assert.equal(await page.textContent("#account-deleted h1"), "החשבון שלך נמחק");
+    assert.equal(await page.textContent("#account-deleted h1"), "החשבון שלכם נמחק");
     assert.equal(await page.getAttribute("#account-deleted-home", "href"), "/he/");
     assert.deepEqual(errors, []);
     await context.close();

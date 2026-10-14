@@ -3,12 +3,30 @@ import {
   portalRequest,
   pendingMembershipInvitations,
   acceptMembershipInvitation,
-  getProfile,
+  getPlatformProfile,
 } from "./api/index.js";
 import { reauthenticate } from "./site-auth.js";
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
-import { roleBadge } from "./host-role-badge.js";
-import { node, field, hostDateTime } from "./host-ui.js";
+import { roleBadge, roleLabel } from "./host-role-badge.js";
+import { can } from "./host-permissions.js";
+import {
+  node,
+  field,
+  hostDateTime,
+  infoTip,
+  viewerTimeZone,
+  isolatedText,
+} from "./host-ui.js";
+// A line with a date in it ("Open until {p0}"): the date stays whole on a
+// narrow screen.
+function dateLine(tag, message, date, attrs = {}) {
+  const line = node(tag, undefined, attrs);
+  line.append(
+    isolatedText(message, { p0: hostDateTime(date, viewerTimeZone()) }),
+  );
+  line.querySelector("bdi")?.classList.add("team-invitation__date");
+  return line;
+}
 let accepting = false;
 export const membershipActionInProgress = () => accepting;
 const failure = (error) =>
@@ -42,30 +60,62 @@ const failure = (error) =>
     "Invitation action failed. Refresh and verify your current access before retrying.",
   );
 
+// What went wrong while joining, for the person who was asked to join. In
+// Hebrew "הזמנות" means bookings, so these lines speak of joining.
+const joinFailure = (error) =>
+  ({
+    TOTP_REQUIRED: hostText(
+      "Verify your authenticator before joining with a management role.",
+    ),
+    RECENT_TOTP_REQUIRED: hostText(
+      "Sign in again with your authenticator, then retry.",
+    ),
+    INVITATION_EXPIRED: hostText(
+      "This request to join has expired. Ask the owner to send a new one.",
+    ),
+    MEMBERSHIP_EXISTS: hostText("You already belong to this organization."),
+    INVITER_ACCESS_DENIED: hostText(
+      "The owner who asked you to join is no longer active. Ask an active owner to send a new request.",
+    ),
+    VERSION_CONFLICT: hostText(
+      "This request to join changed. Choose Check again, then retry.",
+    ),
+  })[error?.code] ??
+  hostText("Joining didn't work. Choose Check again, then retry.");
+
 export async function renderPendingMembershipInvitations({
   container,
   user,
   isCurrent,
   onAccepted,
 }) {
+  // The join-organization view behind the bell: organizations that asked
+  // this verified email to join. Owner and admin roles ask for the
+  // authenticator before joining.
   const section = node("section", undefined, {
-      "aria-label": "Team invitations",
+      "aria-label": "Join an organization",
+      class: "join-view",
     }),
-    status = node("p", hostText("Loading team invitations…"), {
+    heading = node("div", undefined, { class: "view-heading" }),
+    status = node("p", hostText("Loading…"), {
       role: "status",
+      class: "join-view__status",
     }),
-    rows = node("div");
-  section.append(
-    node("h3", hostText("Team invitations")),
-    node(
-      "p",
+    again = node("button", hostText("Check again"), {
+      type: "button",
+      class: "button-secondary",
+      hidden: "",
+    }),
+    rows = node("div", undefined, { class: "join-view__rows" });
+  heading.append(
+    node("h2", hostText("Organizations waiting for you")),
+    infoTip(
       hostText(
-        "Only invitations for your verified approved email appear here. Management roles require a recent authenticator sign-in.",
+        "Organizations that asked your verified email to join appear here. Owner and admin roles ask for your authenticator.",
       ),
     ),
-    status,
-    rows,
   );
+  section.append(heading, rows, status, again);
   container.append(section);
   const current = () => isCurrent() && section.isConnected;
   let busy = false;
@@ -76,19 +126,20 @@ export async function renderPendingMembershipInvitations({
     if (!current()) return;
     if (!append) rows.replaceChildren();
     for (const item of result.items) {
-      const row = node("article", undefined, { "data-invitation-id": item.id });
-      row.append(
-        node(
-          "p",
-          hostText("{p0} · expires {p1}", {
-            p0: item.organizationName,
-            p1: `${hostDateTime(item.expiresAt)} UTC`,
-          }),
-        ),
-        roleBadge(item.role),
+      const row = node("article", undefined, {
+        "data-invitation-id": item.id,
+        class: "join-card",
+      });
+      const details = node("div", undefined, { class: "join-card__details" });
+      details.append(
+        node("strong", item.organizationName, { dir: "auto" }),
+        // When joining closes, in the reader's own time zone.
+        dateLine("small", "Open until {p0}", item.expiresAt),
       );
-      const accept = node("button", hostText("Accept team invitation"), {
+      row.append(details, roleBadge(item.role));
+      const accept = node("button", hostText("Join"), {
         type: "button",
+        "aria-label": hostText("Join {p0}", { p0: item.organizationName }),
       });
       let intent;
       accept.addEventListener("click", async () => {
@@ -99,11 +150,11 @@ export async function renderPendingMembershipInvitations({
         try {
           accepting = true;
           if (["owner", "admin"].includes(item.role)) {
-            const profile = await getProfile(user);
+            const profile = await getPlatformProfile(user);
             if (!current()) return;
             if (!profile.mfa.enrolled) {
               status.textContent = hostText(
-                "Set up your authenticator, then return to accept this invitation.",
+                "Set up your authenticator, then come back to join.",
               );
               window.dispatchEvent(new CustomEvent("host:totp-required"));
               return;
@@ -113,12 +164,12 @@ export async function renderPendingMembershipInvitations({
             if (!current()) return;
           }
           await acceptMembershipInvitation(user, item.id, item.version, intent);
-          if (current()) {
-            status.textContent = hostText("Team invitation accepted.");
-            await onAccepted(item.clientId);
-          }
+          if (current()) await onAccepted(item.clientId);
         } catch (error) {
-          if (current()) status.textContent = failure(error);
+          if (current()) {
+            status.textContent = joinFailure(error);
+            again.hidden = false;
+          }
         } finally {
           accepting = false;
           busy = false;
@@ -129,8 +180,9 @@ export async function renderPendingMembershipInvitations({
       rows.append(row);
     }
     if (result.nextCursor) {
-      const more = node("button", hostText("Load more team invitations"), {
+      const more = node("button", hostText("Show more"), {
         type: "button",
+        class: "button-secondary",
       });
       more.addEventListener("click", async () => {
         if (busy || !current()) return;
@@ -140,7 +192,7 @@ export async function renderPendingMembershipInvitations({
           await read(result.nextCursor, true);
           if (current()) more.remove();
         } catch (error) {
-          if (current()) status.textContent = failure(error);
+          if (current()) status.textContent = joinFailure(error);
         } finally {
           busy = false;
           if (current()) more.disabled = false;
@@ -149,15 +201,41 @@ export async function renderPendingMembershipInvitations({
       rows.append(more);
     }
     status.textContent = rows.children.length
-      ? hostText("Team invitations loaded.")
-      : hostText("No pending team invitations.");
+      ? ""
+      : hostText("No organization is waiting for you to join.");
+    again.hidden = Boolean(rows.children.length);
   }
+  again.addEventListener("click", async () => {
+    if (busy || !current()) return;
+    busy = true;
+    again.disabled = true;
+    status.textContent = hostText("Loading…");
+    try {
+      await read();
+    } catch (error) {
+      if (current()) status.textContent = joinFailure(error);
+    } finally {
+      busy = false;
+      if (current()) again.disabled = false;
+    }
+  });
   try {
     await read();
   } catch (error) {
-    if (current()) status.textContent = failure(error);
+    if (current()) {
+      status.textContent = joinFailure(error);
+      again.hidden = false;
+    }
   }
 }
+
+// Where a request to join stands, for the owner who sent it.
+const invitationStates = {
+  pending: "Invitation pending · open until {p0}",
+  expired: "Invitation expired",
+  cancelled: "Invitation cancelled",
+  accepted: "Invitation accepted",
+};
 
 export async function renderOwnerMembershipInvitations({
   container,
@@ -165,12 +243,16 @@ export async function renderOwnerMembershipInvitations({
   organization,
   isCurrent,
 }) {
-  if (organization.membership.role !== "owner") return;
+  // Inviting is the owner's (members:write).
+  if (!can(organization, "members:write")) return;
   const section = node("section", undefined, {
       "aria-label": "Invite team members",
     }),
-    status = node("p", hostText("Loading invitations…"), { role: "status" }),
-    rows = node("div"),
+    status = node("p", hostText("Loading…"), {
+      role: "status",
+      "aria-live": "polite",
+    }),
+    rows = node("div", undefined, { class: "team-invitations" }),
     form = node("form");
   const email = field(form, "Invite verified email", "email", "", "email"),
     role = field(
@@ -179,27 +261,26 @@ export async function renderOwnerMembershipInvitations({
       "role",
       "staff",
       "text",
+      // The role's name ("Staff"), never its id.
       ["staff", "viewer", "admin", "owner"].map((value) => [
         value,
-        hostText(value),
+        roleLabel(value),
       ]),
     );
-  const submit = node("button", hostText("Create team invitation"), {
+  const submit = node("button", hostText("Invite"), {
     type: "submit",
   });
   form.append(submit);
-  section.append(
+  const heading = node("div", undefined, { class: "view-heading" });
+  heading.append(
     node("h3", hostText("Invite team members")),
-    node(
-      "p",
+    infoTip(
       hostText(
-        "The recipient can sign in later and accept. Portal approval remains separate. No email is sent automatically.",
+        "No email is sent. Tell them to sign in at wifigate.io with this email and join from the bell.",
       ),
     ),
-    form,
-    status,
-    rows,
   );
+  section.append(heading, form, status, rows);
   container.append(section);
   const current = () => isCurrent() && section.isConnected,
     root = `/api/v1/organizations/${encodeURIComponent(organization.id)}/member-invitations`,
@@ -238,25 +319,34 @@ export async function renderOwnerMembershipInvitations({
     if (!current()) return;
     if (!append) rows.replaceChildren();
     for (const item of result.items) {
-      const row = node("article", undefined, { "data-invitation-id": item.id });
+      // A row like a team member's: who, the role, where the request to join
+      // stands (in the viewer's own time) and Cancel while it waits.
+      const row = node("article", undefined, {
+        "data-invitation-id": item.id,
+        class: "team-member team-invitation",
+      });
+      const who = node("span", undefined, { class: "team-member__who" });
+      who.append(
+        node("span", item.email, { dir: "ltr", class: "team-member__email" }),
+      );
+      const badges = node("span", undefined, { class: "team-member__badges" });
+      badges.append(roleBadge(item.role));
+      const state =
+        item.status === "pending" && item.expired ? "expired" : item.status;
       row.append(
-        node("p", item.email),
-        roleBadge(item.role),
-        node(
+        who,
+        badges,
+        dateLine(
           "p",
-          hostText("Invitation {status} · expires {expiry}", {
-            status: hostText(
-              item.status === "pending" && item.expired
-                ? "expired"
-                : item.status,
-            ),
-            expiry: `${hostDateTime(item.expiresAt)} UTC`,
-          }),
+          invitationStates[state] ?? invitationStates.pending,
+          item.expiresAt,
+          { class: "team-invitation__state" },
         ),
       );
       if (item.status === "pending") {
         const cancel = node("button", hostText("Cancel team invitation"), {
           type: "button",
+          class: "button-secondary",
         });
         cancel.addEventListener("click", async () => {
           if (busy || !current()) return;
@@ -271,10 +361,7 @@ export async function renderOwnerMembershipInvitations({
             );
             if (!saved) return;
             attempts.delete(signature);
-            if (current()) {
-              await read();
-              status.textContent = hostText("Team invitation cancelled.");
-            }
+            if (current()) await read();
           } catch (error) {
             if (current()) status.textContent = failure(error);
           } finally {
@@ -289,6 +376,7 @@ export async function renderOwnerMembershipInvitations({
     if (result.nextCursor) {
       const more = node("button", hostText("Load more owner invitations"), {
         type: "button",
+        class: "button-secondary",
       });
       more.addEventListener("click", async () => {
         if (busy || !current()) return;
@@ -306,7 +394,7 @@ export async function renderOwnerMembershipInvitations({
       });
       rows.append(more);
     }
-    status.textContent = hostText("Owner invitations loaded.");
+    status.textContent = "";
   }
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -322,10 +410,8 @@ export async function renderOwnerMembershipInvitations({
       if (!saved) return;
       attempts.delete(signature);
       if (current()) {
+        email.value = "";
         await read();
-        status.textContent = hostText(
-          "Team invitation created. The approved recipient can accept after signing in.",
-        );
       }
     } catch (error) {
       if (current()) status.textContent = failure(error);

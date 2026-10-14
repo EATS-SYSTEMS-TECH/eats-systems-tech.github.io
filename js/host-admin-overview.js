@@ -7,14 +7,18 @@ import {
 } from "./api/index.js";
 import { reauthenticate } from "./site-auth.js";
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
-import { node, field, hostDateTime } from "./host-ui.js";
-import { roleBadge, accessBadge } from "./host-role-badge.js";
+import { node, field, hostDateTime, viewerTimeZone } from "./host-ui.js";
+import { roleBadge, accessBadge, roleLabel } from "./host-role-badge.js";
 
 const root = document.querySelector("#admin-overview");
 const tabs = ["admins", "users", "organizations"];
+// Product ids from the API read as the product names (the same in every
+// language), never as the raw ids.
+export const productName = (id) =>
+  ({ host: "Host", pay: "Pay", manager: "Manager" })[id] ?? String(id);
 const roles = ["owner", "admin", "staff", "viewer"].map((role) => [
   role,
-  hostText(role),
+  roleLabel(role),
 ]);
 let generation = 0;
 let activeDialog;
@@ -35,7 +39,7 @@ export function clearAdminOverview() {
 const message = (error) =>
   ({
     GATES_CLAIMED: hostText(
-      "Release or transfer the claimed gates before archiving this organization.",
+      "Remove every system that holds a gate before archiving this organization.",
     ),
     LAST_OWNER_PROTECTED: hostText(
       "Invite another owner and wait for acceptance before removing the last owner.",
@@ -69,6 +73,32 @@ const message = (error) =>
       ? "This administration feature is awaiting the backend update. Your Calendar and Settings remain available."
       : "The request could not be completed. Please retry.",
   );
+
+// Held gates block archiving until the systems that hold them are removed.
+// Only active systems hold gates, so only they are named. A row without a
+// status cannot be told apart from a system that was already removed, so a
+// list without a status on every row names no system at all.
+function heldGates(impact) {
+  const systems = (Array.isArray(impact.systems) ? impact.systems : []).filter(
+    (system) => typeof system?.name === "string" && system.name,
+  );
+  const statusKnown = systems.every(
+    (system) => typeof system.status === "string",
+  );
+  const names = statusKnown
+    ? systems
+        .filter((system) => system.status === "active")
+        .map((system) => system.name)
+        .join(", ")
+    : "";
+  const line = hostText(
+    "Gates still held: {count}. Remove the systems that hold them first.",
+    { count: impact.gates },
+  );
+  return names
+    ? line + " " + hostText("Systems to remove: {names}.", { names })
+    : line;
+}
 
 export async function loadAdminOverview(user, identity) {
   clearAdminOverview();
@@ -279,7 +309,7 @@ export async function loadAdminOverview(user, identity) {
       const line = node("p", membership.organizationName);
       for (const [product, value] of Object.entries(membership.products)) {
         line.append(
-          node("span", ` ${product}: `),
+          node("span", ` ${productName(product)}: `),
           roleBadge(value.role),
           accessBadge(value.status),
         );
@@ -359,7 +389,7 @@ export async function loadAdminOverview(user, identity) {
                   ? hostText("Enrolled")
                   : hostText("Not enrolled"),
             p1: person.lastSignInAt
-              ? `${hostDateTime(person.lastSignInAt)} (UTC)`
+              ? hostDateTime(person.lastSignInAt, viewerTimeZone())
               : hostText("Not yet"),
           }),
         ),
@@ -431,26 +461,20 @@ export async function loadAdminOverview(user, identity) {
       if (!current()) return;
       const { organization, members, impact } = result;
       if (archive) {
+        // No count of systems: impact.systems is only filled while gates
+        // are held.
         const description =
           hostText(
-            "{name}: {members} members, {properties} properties, {rooms} rooms and {reservations} open reservations will become inaccessible. History is retained.",
+            "{name}: its systems, {members} members and {reservations} open bookings will become inaccessible. History is retained.",
             {
               name: organization.name,
               members: impact.members,
-              properties: impact.properties,
-              rooms: impact.rooms,
               reservations: impact.openReservations,
             },
           ) +
           " " +
           (impact.gates
-            ? hostText(
-                "Release or transfer {count} claimed gates first: {names}.",
-                {
-                  count: impact.gates,
-                  names: impact.systems.map((system) => system.name).join(", "),
-                },
-              )
+            ? heldGates(impact)
             : hostText("No gates are claimed."));
         const form = dialog(
           hostText("Archive organization"),
@@ -577,7 +601,7 @@ export async function loadAdminOverview(user, identity) {
         hostText("{p0} members · {p1} gates · {p2}", {
           p0: item.memberCount,
           p1: item.gateCount,
-          p2: item.products.join(" / "),
+          p2: item.products.map(productName).join(" / "),
         }),
       ),
     );
@@ -637,8 +661,9 @@ export async function loadAdminOverview(user, identity) {
       nextCursor = result.nextCursor;
       more.hidden = !nextCursor;
       more.disabled = false;
+      // The rows are the answer: no "loaded" line above them.
       status.textContent = result.items.length
-        ? hostText("Directory loaded.")
+        ? ""
         : nextCursor
           ? hostText("No matches on this page. Continue to the next page.")
           : hostText("No matching records.");

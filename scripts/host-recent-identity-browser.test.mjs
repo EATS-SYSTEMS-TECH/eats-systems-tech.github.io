@@ -48,14 +48,7 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
         body: `export async function reauthenticate(user, challenge) { window.verifications++; window.verifiedUid = user.uid; await new Promise((resolve, reject) => { window.finishVerification = resolve; window.cancelVerification = () => reject(Object.assign(new Error('user canceled'), { code: 'auth/popup-closed-by-user' })); }); } export async function resolveTotp() { throw new Error('No live authenticator in isolated fixture'); }`,
       }),
     );
-    for (const module of [
-      "keys",
-      "support",
-      "billing",
-      "rotation",
-      "approve",
-      "reject",
-    ]) {
+    for (const module of ["keys", "support", "billing", "rotation", "link"]) {
       await page.goto(`${origin}/identity-fixture?lang=${language}`);
       await page.evaluate(async (module) => {
         const { initializeHostLocale } = await import("/js/host-locale.js");
@@ -74,7 +67,24 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
               return "isolated-token";
             },
           },
-          organization: { id: "reviewed-org", membership: { role: "owner" } },
+          organization: {
+            id: "reviewed-org",
+            membership: { role: "owner" },
+            workspace: {
+              role: "owner",
+              permissions: [
+                "read",
+                "organization:write",
+                "members:write",
+                "systems:write",
+                "reservations:write",
+                "invitations:write",
+                "billing:write",
+                "integrations:write",
+                "operations:write",
+              ],
+            },
+          },
           isCurrent: () => window.current,
         };
         profileApi.defaults.adapter = async (config) => {
@@ -101,47 +111,34 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
             config,
             data: {
               items:
-                ["approve", "reject"].includes(module) &&
-                window.requests.length < 2
+                module === "rotation" ||
+                (module === "keys" && window.requests.length === 2)
                   ? [
                       {
-                        id: "reviewed-import",
-                        requesterUid: "test-requester",
-                        gateCount: 1,
-                        targetType: "gate",
-                        targetId: "gate-1",
-                        propertyId: "property-1",
-                        roomId: "room-1",
-                        status: "pending",
-                        version: 3,
-                        expiresAt: new Date(Date.now() + 300000).toISOString(),
+                        id: "owned-key",
+                        name: "Reviewed original intent",
+                        prefix: "public-prefix",
+                        status:
+                          window.requests.length === 2 ? "revoked" : "active",
+                        version: 1,
+                        scopes: ["guest-invitations:create"],
+                        targetTypes: ["gate"],
                       },
                     ]
-                  : module === "rotation" ||
-                      (module === "keys" && window.requests.length === 2)
-                    ? [
-                        {
-                          id: "owned-key",
-                          name: "Reviewed original intent",
-                          prefix: "public-prefix",
-                          status:
-                            window.requests.length === 2 ? "revoked" : "active",
-                          version: 1,
-                          scopes: ["guest-invitations:create"],
-                          targetTypes: ["gate"],
-                        },
-                      ]
-                    : [],
+                  : [],
               nextCursor: null,
               grant: { id: "owned-support" },
               subscription: { status: "active", version: 1 },
             },
           };
         };
-        if (["keys", "rotation"].includes(module))
+        if (["keys", "rotation"].includes(module)) {
           await (
             await import("/js/host-api-keys.js")
           ).renderHostApiKeys(options);
+          // The keys live in the card's "For your developer" part.
+          document.querySelector("details.connect-keys").open = true;
+        }
         if (module === "support")
           await (
             await import("/js/host-support.js")
@@ -150,59 +147,91 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
           await (
             await import("/js/host-billing.js")
           ).renderHostBilling(options);
-        if (["approve", "reject"].includes(module))
+        // My systems: linking a system to an organization keeps the reviewed
+        // organization through the authenticator retry.
+        if (module === "link")
           await (
-            await import("/js/host-import-requests.js")
-          ).renderHostImportRequests(options);
+            await import("/js/host-my-systems.js")
+          ).renderMySystems(options.container, {
+            user: options.user,
+            isCurrent: options.isCurrent,
+            organizations: ["reviewed-org", "other-org"].map((id) => ({
+              id,
+              name: id,
+              workspace: {
+                role: "owner",
+                permissions: ["read", "systems:write"],
+              },
+            })),
+            read: async () => [
+              {
+                id: "reviewed-system",
+                type: "gate",
+                iconId: "door-small",
+                name: "Reviewed room",
+                gates: 1,
+                status: "active",
+                version: 3,
+                linkedOrganization: null,
+                source: { kind: "organization" },
+              },
+            ],
+            onChanged: async () => {},
+            openBookings: () => {},
+          });
       }, module);
       const he = language === "he";
       if (module === "billing")
         await page
           .getByRole("button", {
-            name: he ? "טעינת מנוי" : "Load subscription",
+            name: he ? "הצגת מצב המנוי" : "Show plan status",
             exact: true,
           })
           .click();
+      if (module === "link")
+        await page
+          .locator('[data-system-id="reviewed-system"] [data-action="link"]')
+          .click();
       const field = page.locator(
-        module === "rotation"
-          ? 'input[name="overlapHours"]'
-          : module === "keys"
-            ? 'input[name="name"]'
+        module === "link"
+          ? 'input[name="organizationId"][value="reviewed-org"]'
+          : module === "rotation"
+            ? 'input[name="overlapHours"]'
+            : module === "keys"
+              ? 'input[name="name"]'
+              : module === "support"
+                ? 'input[name="email"]'
+                : 'input[name="reason"]',
+      );
+      if (module === "link") await field.check();
+      else
+        await field.fill(
+          module === "rotation"
+            ? "0"
             : module === "support"
-              ? 'input[name="email"]'
-              : 'input[name="reason"]',
-      );
-      await field.fill(
-        module === "rotation"
-          ? "0"
-          : module === "support"
-            ? "qa-owner@wifigate.test"
-            : "Reviewed original intent",
-      );
+              ? "qa-owner@wifigate.test"
+              : "Reviewed original intent",
+        );
       const label =
-        module === "approve"
+        module === "link"
           ? he
-            ? "אישור ייבוא מערכת"
-            : "Approve system import"
-          : module === "reject"
+            ? "שיוך"
+            : "Link"
+          : module === "rotation"
             ? he
-              ? "דחיית ייבוא מערכת"
-              : "Reject system import"
-            : module === "rotation"
+              ? "החלפת מפתח API"
+              : "Rotate API key"
+            : module === "keys"
               ? he
-                ? "החלפת מפתח API"
-                : "Rotate API key"
-              : module === "keys"
+                ? "יצירת מפתח API"
+                : "Create API key"
+              : module === "support"
                 ? he
-                  ? "יצירת מפתח API"
-                  : "Create API key"
-                : module === "support"
-                  ? he
-                    ? "אישור תמיכה זמנית"
-                    : "Approve temporary support"
-                  : he
-                    ? "החלת שינוי מנוי"
-                    : "Apply subscription change";
+                  ? "אישור תמיכה זמנית"
+                  : "Approve temporary support"
+                : he
+                  ? "שינוי המנוי"
+                  : "Change plan";
       const button = page.getByRole("button", { name: label, exact: true });
       await button.click();
       await page.waitForFunction(() => window.verifications === 1);
@@ -221,11 +250,13 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
           : module === "support"
             ? "different@wifigate.test"
             : "Unreviewed changed intent";
-      if (["approve", "reject"].includes(module)) {
+      if (module === "link") {
         assert.equal(await field.isDisabled(), true);
-        await field.evaluate((element, value) => {
-          element.value = value;
-        }, changedValue);
+        await page
+          .locator('input[name="organizationId"][value="other-org"]')
+          .evaluate((element) => {
+            element.checked = true;
+          });
       } else await field.fill(changedValue);
       await button.evaluate((element) => element.click());
       assert.equal(
@@ -280,10 +311,16 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
       }
       if (module === "rotation") {
         assert.equal(JSON.parse(result.requests[1].body).overlapHours, 0);
+        // The refreshed list is the confirmation (the old key, revoked at
+        // once); no "New key created" line is added.
         assert.ok(
           (await page.locator("#main").innerText()).includes(
-            he ? "המפתח הקודם בוטל מיד" : "previous key is revoked immediately",
+            he ? "public-prefix · בוטל" : "public-prefix · revoked",
           ),
+        );
+        assert.doesNotMatch(
+          await page.locator("#main").innerText(),
+          he ? /נוצר מפתח חדש/ : /New key created/,
         );
         assert.equal(
           await page

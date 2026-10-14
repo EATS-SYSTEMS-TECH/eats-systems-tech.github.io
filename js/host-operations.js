@@ -1,27 +1,71 @@
-import { renderHostAutomation } from "./host-automation.js";
-import { renderHostIntegrations } from "./host-integrations.js";
+import { renderAutomationJobs } from "./host-automation.js";
 import { renderServiceHealth } from "./host-service-health.js";
+import { can } from "./host-permissions.js";
+import { statuses, statusLabel } from "./host-booking-model.js";
 import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest, portalExport } from "./api/index.js";
 import {
   field,
   node,
+  infoTip,
+  labelTip,
   downloadHostCsv,
   downloadHostTextCsv,
   hostDateTime,
 } from "./host-ui.js";
 
+// What each alert event and channel means, in plain words (the ids stay in
+// the request only).
+const alertEvents = [
+  ["automation.failed", "An automatic guest link failed"],
+  ["automation.retry", "An automatic guest link is being retried"],
+  ["automation.paused", "Automatic guest links paused"],
+  ["automation.cancelled", "An automatic guest link was cancelled"],
+  ["automation.delivered", "An automatic guest link was sent"],
+  [
+    "integration.event.dead_letter",
+    "A booking from your booking system failed",
+  ],
+  [
+    "integration.event.retry",
+    "A booking from your booking system is being retried",
+  ],
+  ["operations.slo_api_breached", "WIFIGATE answered slowly"],
+  ["operations.slo_automation_breached", "Automatic guest links ran late"],
+  ["operations.slo_delivery_breached", "Guest links were delivered late"],
+  ["operations.slo_unowned", "A service check has no one assigned"],
+  ["operations.slo_unavailable", "Service checks are unavailable"],
+];
+const alertChannels = {
+  inApp: "Alerts in the dashboard",
+  email: "Alerts by email",
+  sms: "Alerts by SMS",
+};
+// Why a system is not ready, as the next step to take.
+const readinessReasons = {
+  SUBSCRIPTION_UNAVAILABLE: "Service is paused for this organization",
+  SYSTEM_DISABLED: "The system was removed",
+  SYSTEM_UNAVAILABLE: "Add the system again from the WIFIGATE app",
+  HOST_KEY_UNAVAILABLE: "Add the system again from the WIFIGATE app",
+  DEVICE_IDENTITY_UNVERIFIED: "Add the system again from the WIFIGATE app",
+  GATE_DELEGATION_REQUIRED: "Add the system again from the WIFIGATE app",
+  OWNERSHIP_UNAVAILABLE: "Another organization holds one of its gates",
+};
+// A message template's code name, made for it (letters, digits and a dash).
+const templateCode = () => `template-${crypto.randomUUID().slice(0, 8)}`;
+export const readinessReason = (code) =>
+  hostText(readinessReasons[code] ?? "Needs attention");
+
 async function renderOperationsReview({
   container,
   user,
   organization,
-  properties,
-  rooms,
+  systems = [],
   isCurrent,
 }) {
-  const role = organization.membership.role;
-  if (!["owner", "admin", "staff"].includes(role)) return;
-  const manager = role !== "staff",
+  if (!can(organization, "operations:write")) return;
+  // Templates and usage belong to owners and admins.
+  const manager = can(organization, "integrations:write"),
     root = `/api/v1/organizations/${encodeURIComponent(organization.id)}`;
   const section = node("section", undefined, {
       "aria-label": "Host operations",
@@ -30,7 +74,8 @@ async function renderOperationsReview({
       role: "status",
       "aria-live": "polite",
     });
-  section.append(node("h2", hostText("Operations")), status);
+  // The page title already names the screen: no second heading here.
+  section.append(status);
   container.append(section);
   const current = () => isCurrent() && section.isConnected;
   const attempts = new Map();
@@ -67,7 +112,7 @@ async function renderOperationsReview({
       type: "button",
     });
   section.append(
-    node("h3", hostText("Operational observations")),
+    node("h3", hostText("Operational observations"), { "data-developer": "" }),
     node(
       "p",
       hostText(
@@ -192,7 +237,7 @@ async function renderOperationsReview({
             ),
           );
       }
-      status.textContent = hostText("Operational observations loaded.");
+      status.textContent = "";
     }),
   );
   const readinessForm = node("form"),
@@ -204,14 +249,15 @@ async function renderOperationsReview({
   readinessQuery.required = false;
   readinessQuery.maxLength = 120;
   readinessForm.append(readinessButton);
-  section.append(
-    node("h3", hostText("System configuration")),
-    node(
-      "p",
+  readinessForm.append(
+    infoTip(
       hostText(
-        "These checks cover Host permissions and configuration. Check the gate through BLE in the mobile app before relying on physical availability.",
+        "These checks cover the system's settings in WIFIGATE. To be sure a gate opens, open it from the WIFIGATE app.",
       ),
     ),
+  );
+  section.append(
+    node("h3", hostText("System configuration"), { "data-developer": "" }),
     readinessForm,
     readinessRows,
   );
@@ -226,11 +272,11 @@ async function renderOperationsReview({
       readinessRows.append(
         node(
           "p",
-          hostText("{p0} · {p1} · BLE: unknown", {
+          hostText("{p0} · {p1}", {
             p0: item.name,
             p1: item.configured
               ? hostText("Configured")
-              : item.reasons.join(", "),
+              : [...new Set(item.reasons.map(readinessReason))].join(", "),
           }),
         ),
       );
@@ -257,7 +303,7 @@ async function renderOperationsReview({
             : hostText("No matching systems."),
         ),
       );
-    status.textContent = hostText("System configuration checked.");
+    status.textContent = "";
   }
   readinessForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -324,92 +370,93 @@ async function renderOperationsReview({
       staffTemplate.value = selected;
   };
   locale.addEventListener("change", drawStaffTemplates);
-  const eventTypes = field(
-    settings,
-    "Alert events (empty means all)",
-    "eventTypes",
-    "",
-    "text",
-    [
-      "automation.failed",
-      "automation.retry",
-      "automation.paused",
-      "automation.cancelled",
-      "automation.delivered",
-      "integration.event.dead_letter",
-      "integration.event.retry",
-      "operations.slo_api_breached",
-      "operations.slo_automation_breached",
-      "operations.slo_delivery_breached",
-      "operations.slo_unowned",
-      "operations.slo_unavailable",
-    ].map((value) => [value, value]),
+  const events = node("fieldset", undefined, {
+    class: "choice-list operations-events",
+  });
+  const eventsLegend = node("legend");
+  eventsLegend.append(
+    node("span", hostText("Alert me about")),
+    infoTip(hostText("With none ticked, you get alerts about all of them.")),
   );
-  eventTypes.multiple = true;
-  eventTypes.required = false;
-  eventTypes.size = 4;
-  for (const option of eventTypes.options)
-    option.selected = (preferences.alerts.eventTypes ?? []).includes(
-      option.value,
+  events.append(eventsLegend);
+  const eventTypes = alertEvents.map(([value, label]) => {
+    const choice = node("label", undefined, { class: "choice" });
+    const box = node("input", undefined, {
+      type: "checkbox",
+      name: "eventTypes",
+      value,
+    });
+    box.checked = (preferences.alerts.eventTypes ?? []).includes(value);
+    choice.append(
+      box,
+      node("span", hostText(label), { class: "choice__name" }),
     );
+    events.append(choice);
+    return box;
+  });
+  settings.append(events);
   const channels = {};
   for (const name of ["inApp", "email", "sms"]) {
-    const label = node(
-        "label",
-        hostText("Alert preference: {p0}", { p0: name }),
-      ),
+    const label = node("label", hostText(alertChannels[name])),
       input = node("input", undefined, { type: "checkbox", name });
     input.checked = preferences.alerts[name];
     label.prepend(input);
     settings.append(label);
     channels[name] = input;
   }
-  settings.append(
-    node(
-      "p",
+  // The ⓘ sits beside the SMS choice, outside its label, so the choice keeps
+  // its own name.
+  const smsRow = node("div", undefined, { class: "choice-with-tip" });
+  channels.sms.parentElement.replaceWith(smsRow);
+  smsRow.append(channels.sms.parentElement);
+  smsRow.append(
+    infoTip(
       hostText(
         "Email and SMS preferences require a configured delivery provider. Saving preferences does not confirm delivery.",
       ),
     ),
   );
-  const filterName = field(settings, "Saved filter name", "filterName");
+  const filterForm = node("form", undefined, { class: "operations-filters" });
+  const filterName = field(filterForm, "Saved filter name", "filterName");
   filterName.required = false;
   filterName.maxLength = 80;
-  const property = field(
-    settings,
-    "Saved filter property",
-    "propertyId",
+  // A saved filter names a system and a booking state; Apply opens the
+  // Calendar with them.
+  const systemsById = new Map(systems.map((item) => [item.id, item]));
+  const filterSystem = field(
+    filterForm,
+    "Saved filter system",
+    "systemId",
     "",
     "text",
     [
-      ["", hostText("All properties")],
-      ...properties.map((p) => [p.id, p.name]),
+      ["", hostText("All systems")],
+      ...systems.map((item) => [item.id, item.name]),
     ],
   );
-  const room = field(settings, "Saved filter room", "roomId", "", "text", [
-    ["", hostText("All rooms")],
-    ...rooms.map((r) => [r.id, r.name]),
-  ]);
   const filterStatus = field(
-    settings,
+    filterForm,
     "Saved filter status",
     "status",
     "",
     "text",
     [
-      ["", hostText("All statuses")],
-      ...["draft", "confirmed", "changed", "cancelled", "completed"].map(
-        (s) => [s, s],
-      ),
+      ["", hostText("All bookings")],
+      ...statuses.map((value) => [value, statusLabel(value)]),
     ],
   );
+  const filterSystemName = (filter) =>
+    filter.systemId
+      ? (systemsById.get(filter.systemId)?.name ?? hostText("A removed system"))
+      : hostText("All systems");
   const filters = node("div"),
     drawFilters = () => {
       filters.replaceChildren();
       for (const [index, filter] of preferences.savedFilters.entries()) {
         const row = node(
             "p",
-            `${filter.name} · ${filter.propertyId ?? "All properties"} · ${filter.roomId ?? "All rooms"} · ${filter.status ?? "All statuses"}`,
+            `${filter.name} · ${filterSystemName(filter)} · ${filter.status ? statusLabel(filter.status) : hostText("All bookings")}`,
+            { "data-saved-filter": filter.name },
           ),
           remove = node("button", hostText("Remove saved filter"), {
             type: "button",
@@ -435,22 +482,28 @@ async function renderOperationsReview({
       }
     };
   drawFilters();
-  settings.append(filters);
+  const saveFilter = node("button", hostText("Save filters"), {
+    type: "submit",
+  });
+  filterForm.append(saveFilter, filters);
   const save = node("button", hostText("Save operation preferences"), {
     type: "submit",
   });
   settings.append(save);
-  section.append(settings);
-  settings.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (!settings.reportValidity()) return;
-    void run(save, async () => {
+  section.append(
+    node("h3", hostText("Your preferences")),
+    settings,
+    node("h3", hostText("Saved calendar filters"), { "data-developer": "" }),
+    filterForm,
+  );
+  const savePreferences = (form, button) => {
+    if (!form.reportValidity()) return;
+    void run(button, async () => {
       const savedFilters = [...preferences.savedFilters];
       if (filterName.value.trim())
         savedFilters.push({
           name: filterName.value.trim(),
-          ...(property.value ? { propertyId: property.value } : {}),
-          ...(room.value ? { roomId: room.value } : {}),
+          ...(filterSystem.value ? { systemId: filterSystem.value } : {}),
           ...(filterStatus.value ? { status: filterStatus.value } : {}),
         });
       const result = await write("/preferences", {
@@ -463,9 +516,9 @@ async function renderOperationsReview({
           ...(staffTemplate.value
             ? { staffTemplateId: staffTemplate.value }
             : {}),
-          eventTypes: [...eventTypes.selectedOptions].map(
-            (option) => option.value,
-          ),
+          eventTypes: eventTypes
+            .filter((box) => box.checked)
+            .map((box) => box.value),
         },
         locale: locale.value,
         ...(preferences.version ? { version: preferences.version } : {}),
@@ -474,16 +527,30 @@ async function renderOperationsReview({
         preferences = result.preferences;
         filterName.value = "";
         drawFilters();
-        status.textContent = hostText("Operation preferences saved.");
+        status.textContent = "";
       }
     });
+  };
+  settings.addEventListener("submit", (event) => {
+    event.preventDefault();
+    savePreferences(settings, save);
   });
-  const alertsButton = node("button", hostText("Refresh operational alerts"), {
+  filterForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    savePreferences(filterForm, saveFilter);
+  });
+  const alertsButton = node("button", hostText("Show alerts"), {
       type: "button",
     }),
     alertRows = node("div", undefined, { "aria-live": "polite" });
   section.append(
     node("h3", hostText("Operational alerts")),
+    node(
+      "p",
+      hostText(
+        "Alerts about automatic guest links and your booking system show here.",
+      ),
+    ),
     alertsButton,
     alertRows,
   );
@@ -539,7 +606,9 @@ async function renderOperationsReview({
     ),
     deliveryRows = node("div", undefined, { "aria-live": "polite" });
   section.append(
-    node("h3", hostText("Staff notification delivery")),
+    node("h3", hostText("Staff notification delivery"), {
+      "data-developer": "",
+    }),
     deliveryButton,
     deliveryRows,
   );
@@ -586,7 +655,7 @@ async function renderOperationsReview({
                   ? hostText(
                       "Future delivery stopped. The provider may already have accepted the current attempt; check its receipt.",
                     )
-                  : hostText("Notification review saved.");
+                  : "";
           } finally {
             if (current()) reason.disabled = false;
           }
@@ -722,7 +791,7 @@ async function renderOperationsReview({
       timeline.append(more);
     }
     status.textContent = result.items.length
-      ? hostText("Activity timeline loaded.")
+      ? ""
       : hostText("No matching activity.");
   }
   timelineForm.addEventListener("submit", (event) => {
@@ -732,8 +801,8 @@ async function renderOperationsReview({
   const templateList = node("div");
   section.append(node("h3", hostText("Message templates")), templateList);
   let selectedTemplate;
+  let newTemplateId;
   const templateForm = node("form"),
-    templateId = field(templateForm, "Template ID", "id"),
     name = field(templateForm, "Template name", "name"),
     language = field(
       templateForm,
@@ -765,23 +834,37 @@ async function renderOperationsReview({
       maxlength: "2000",
     });
   label.append(text);
-  templateForm.append(
-    label,
-    node(
-      "p",
-      hostText(
-        "Placeholders: {{guestName}}, {{propertyName}}, {{roomName}}, {{startsAt}}, {{endsAt}}, {{inviteUrl}}, {{status}}. Preview uses a placeholder for the private link.",
-      ),
+  // The placeholders are explained in an ⓘ beside their label, not in
+  // hint text.
+  templateForm.append(label);
+  labelTip(
+    text,
+    hostText(
+      "Placeholders: {{guestName}}, {{systemName}}, {{organizationName}}, {{startsAt}}, {{endsAt}}, {{inviteUrl}}, {{status}}. Preview uses a placeholder for the private link.",
     ),
   );
   const saveTemplate = node("button", hostText("Save message template"), {
     type: "submit",
   });
-  templateForm.append(saveTemplate);
-  if (manager) section.append(templateForm);
-  templateId.addEventListener("input", () => {
-    selectedTemplate = undefined;
+  // Editing a template: "New template" empties the form for another one.
+  const newTemplate = node("button", hostText("New template"), {
+    type: "button",
+    class: "button-secondary",
+    hidden: "",
   });
+  const editing = (item) => {
+    selectedTemplate = item;
+    newTemplate.hidden = !item;
+  };
+  newTemplate.addEventListener("click", () => {
+    templateForm.reset();
+    editing(undefined);
+    name.focus();
+  });
+  const templateActions = node("div", undefined, { class: "settings-actions" });
+  templateActions.append(saveTemplate, newTemplate);
+  templateForm.append(templateActions);
+  if (manager) section.append(templateForm);
   async function readTemplates(cursor, append = false) {
     const result = await portalRequest(
       user,
@@ -795,14 +878,19 @@ async function renderOperationsReview({
     for (const item of result.items) {
       if (item.audience === "staff") staffTemplates.set(item.id, item);
       const row = node("article");
-      row.append(node("p", `${item.name} · ${item.locale} · ${item.audience}`));
+      // A template reads by its name, language and audience in words.
+      row.append(
+        node(
+          "p",
+          `${item.name} · ${item.locale === "he" ? "עברית" : hostText("English")} · ${hostText(item.audience === "staff" ? "Staff" : "Guest")}`,
+        ),
+      );
       if (manager) {
         const edit = node("button", hostText("Edit message template"), {
           type: "button",
         });
         edit.addEventListener("click", () => {
-          selectedTemplate = item;
-          templateId.value = item.id;
+          editing(item);
           name.value = item.name;
           language.value = item.locale;
           audience.value = item.audience;
@@ -848,21 +936,21 @@ async function renderOperationsReview({
   templateForm.addEventListener("submit", (event) => {
     event.preventDefault();
     if (!templateForm.reportValidity()) return;
+    // A new template gets its own code name once, kept for retries.
+    const id = selectedTemplate?.id ?? (newTemplateId ??= templateCode());
     void run(saveTemplate, async () => {
-      const result = await write(
-        `/templates/${encodeURIComponent(templateId.value)}`,
-        {
-          name: name.value,
-          locale: language.value,
-          audience: audience.value,
-          text: text.value,
-          ...(selectedTemplate ? { version: selectedTemplate.version } : {}),
-        },
-      );
+      const result = await write(`/templates/${encodeURIComponent(id)}`, {
+        name: name.value,
+        locale: language.value,
+        audience: audience.value,
+        text: text.value,
+        ...(selectedTemplate ? { version: selectedTemplate.version } : {}),
+      });
       if (current()) {
-        selectedTemplate = result.template;
+        newTemplateId = undefined;
+        editing(result.template);
         await readTemplates();
-        status.textContent = hostText("Message template saved.");
+        status.textContent = "";
       }
     });
   });
@@ -883,7 +971,11 @@ async function renderOperationsReview({
     const load = node("button", hostText("Load API usage"), { type: "submit" }),
       rows = node("div");
     usageForm.append(load);
-    section.append(node("h3", hostText("API creation usage")), usageForm, rows);
+    section.append(
+      node("h3", hostText("API creation usage"), { "data-developer": "" }),
+      usageForm,
+      rows,
+    );
     async function readUsage(cursor, append = false) {
       const query = new URLSearchParams({
         from: from.value,
@@ -941,9 +1033,7 @@ async function renderOperationsReview({
         );
         rows.append(more);
       }
-      status.textContent = hostText(
-        "API usage loaded. Each export contains one bounded page.",
-      );
+      status.textContent = "";
     }
     usageForm.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -951,28 +1041,41 @@ async function renderOperationsReview({
     });
   }
   if (current()) {
-    status.textContent = hostText("Operations loaded.");
+    status.textContent = "";
     groupReviewSections(section);
   }
 }
+// Each part of Alerts and activity folds under its title. Measurements,
+// delivery receipts and API usage speak in codes: they fold together under
+// one "For your developer" at the end.
 function groupReviewSections(section) {
   let group;
+  const developerGroups = [];
   for (const child of [...section.children]) {
     if (child.tagName === "H3") {
       group = node("details", undefined, { class: "operations-detail" });
       group.append(node("summary", child.textContent));
       section.insertBefore(group, child);
+      if (child.hasAttribute("data-developer")) developerGroups.push(group);
       child.remove();
     } else if (group) {
       group.append(child);
     }
   }
+  if (!developerGroups.length) return;
+  const developer = node("details", undefined, {
+    class: "operations-detail operations-developer",
+  });
+  developer.append(
+    node("summary", hostText("For your developer")),
+    ...developerGroups,
+  );
+  section.append(developer);
 }
 
 export async function renderHostOperations(options) {
   const { container, user, organization, isCurrent } = options;
-  if (!["owner", "admin", "staff"].includes(organization.membership.role))
-    return;
+  if (!can(organization, "operations:write")) return;
   const section = node("section", undefined, {
     "aria-label": "Operations workspace",
   });
@@ -981,35 +1084,20 @@ export async function renderHostOperations(options) {
     "aria-label": "Operations screens",
   });
   const body = node("div");
-  section.append(node("h2", hostText("Operations")), tabs, body);
+  section.append(tabs, body);
   container.append(section);
   const current = () => isCurrent() && section.isConnected;
   const panels = new Map();
   const definitions = [
     [
       "jobs",
-      "Access jobs",
-      (panel) =>
-        renderHostAutomation({
-          ...options,
-          container: panel,
-          includePolicy: false,
-        }),
+      "Automatic links",
+      (panel) => renderAutomationJobs({ ...options, container: panel }),
     ],
     [
       "review",
       "Alerts and activity",
       (panel) => renderOperationsReview({ ...options, container: panel }),
-    ],
-    [
-      "events",
-      "Integration events",
-      (panel) =>
-        renderHostIntegrations({
-          ...options,
-          container: panel,
-          includeMappings: false,
-        }),
     ],
     [
       "health",
@@ -1082,7 +1170,9 @@ export async function renderHostOperations(options) {
   const onHistory = () => {
     if (
       current() &&
-      new URL(location.href).searchParams.get("view") === "operations"
+      ["activity", "operations"].includes(
+        new URL(location.href).searchParams.get("view"),
+      )
     ) {
       void select(new URL(location.href).searchParams.get("section"));
     }

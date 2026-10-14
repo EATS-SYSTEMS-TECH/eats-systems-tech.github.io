@@ -93,6 +93,88 @@
 
         [hidden] { display: none !important; }
 
+        .demo-banner {
+            margin: 20px 0 0;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .demo-phone {
+            max-width: 300px;
+            margin: 20px auto 0;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            background: #f8fafc;
+        }
+
+        .demo-tile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 6px 16px rgba(25, 50, 90, 0.08);
+            text-align: start;
+        }
+
+        .demo-icon {
+            display: grid;
+            flex: none;
+            place-items: center;
+            width: 52px;
+            height: 52px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #f8fafc;
+        }
+
+        .demo-icon img {
+            width: 36px;
+            height: 36px;
+        }
+
+        .demo-tile div {
+            min-width: 0;
+        }
+
+        .demo-name {
+            margin: 0;
+            color: var(--text);
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.35;
+            overflow-wrap: anywhere;
+        }
+
+        .demo-guest {
+            display: inline-block;
+            margin-top: 4px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+        }
+
+        .demo-window {
+            margin: 12px 0 0;
+            color: #2563eb;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .demo-when {
+            white-space: nowrap;
+        }
+
         .actions {
             display: grid;
             gap: 12px;
@@ -190,6 +272,9 @@
         function buildDeepLink() {
             const currentUrl = new URL(window.location.href);
             const params = currentUrl.searchParams;
+            if (isDemoLink(params)) {
+                return "";
+            }
             const directLink = firstNonEmpty(params.get("link"));
             if (directLink) {
                 return directLink;
@@ -315,7 +400,136 @@
             }, 40);
         }
 
+        // A demo guest link from the WIFIGATE Host examples (ep=v1.demo_…)
+        // carries only which example and the stay window. It shows what a
+        // guest would see and never opens the app.
+        const WIFIGATE_DEMO_PREFIX = "v1.demo_";
+        const WIFIGATE_DEMO_SYSTEMS = {
+            room: { name: "Example WIFIGATE Room 212 🥂🍾", icon: "gate-bed-outline" },
+            dual: { name: "Example WIFIGATE Dual Control 212 🥂🍾", icon: "dual-control-barrier-gate-small" },
+            group: { name: "Example WIFIGATE Group 212 🥂🍾", icon: "group-hosting" }
+        };
+        const WIFIGATE_DEMO_COPY = {
+            en: {
+                title: "Example guest link",
+                banner: "Example: this link doesn't open a gate.",
+                guest: "GUEST",
+                incomplete: "This example link is incomplete.",
+                more: "About WIFIGATE"
+            },
+            he: {
+                title: "קישור לדוגמה לאורח",
+                banner: "דוגמה: הקישור הזה לא פותח שער.",
+                guest: "אורח",
+                incomplete: "קישור הדוגמה הזה לא שלם.",
+                more: "על WIFIGATE"
+            }
+        };
+
+        function isDemoLink(params) {
+            return params.getAll("ep").some(function (value) {
+                return value.indexOf(WIFIGATE_DEMO_PREFIX) === 0;
+            }) || params.getAll("link").some(function (value) {
+                return value.indexOf(WIFIGATE_DEMO_PREFIX) !== -1;
+            });
+        }
+
+        function readDemoToken(ep) {
+            try {
+                const encoded = ep.slice(WIFIGATE_DEMO_PREFIX.length).replace(/-/g, "+").replace(/_/g, "/");
+                const value = JSON.parse(atob(encoded + "===".slice((encoded.length + 3) % 4)));
+                const keys = Object.keys(value || {}).sort().join(",");
+                if (keys !== "k,se,ss" || !Object.prototype.hasOwnProperty.call(WIFIGATE_DEMO_SYSTEMS, value.k) ||
+                    !Number.isSafeInteger(value.ss) || !Number.isSafeInteger(value.se) || value.se <= value.ss) {
+                    return null;
+                }
+                return value;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function demoElement(tag, className, text) {
+            const element = document.createElement(tag);
+            if (className) {
+                element.className = className;
+            }
+            if (text !== undefined) {
+                element.textContent = text;
+            }
+            return element;
+        }
+
+        function showDemoPreview() {
+            const params = new URL(window.location.href).searchParams;
+            if (!isDemoLink(params)) {
+                return false;
+            }
+            const pageLanguage = (document.documentElement.lang || "en").slice(0, 2);
+            const language = pageLanguage === "he" ||
+                (pageLanguage === "en" && (navigator.language || "").slice(0, 2) === "he") ? "he" : "en";
+            const copy = WIFIGATE_DEMO_COPY[language];
+            const locale = language === "he" ? "he-IL" : "en-US";
+            const ep = params.getAll("ep").filter(function (value) {
+                return value.indexOf(WIFIGATE_DEMO_PREFIX) === 0;
+            })[0] || "";
+            const demo = readDemoToken(ep);
+            const main = document.getElementById("main-content");
+            const logo = main.querySelector(".logo");
+            const title = demoElement("h1", "", copy.title);
+            title.id = "page-title";
+            const banner = demoElement("p", "demo-banner", copy.banner);
+            banner.id = "demo-banner";
+            const parts = [title, banner];
+            if (demo) {
+                const system = WIFIGATE_DEMO_SYSTEMS[demo.k];
+                const format = new Intl.DateTimeFormat(locale, {
+                    weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"
+                });
+                const phone = demoElement("div", "demo-phone");
+                const tile = demoElement("div", "demo-tile");
+                const icon = demoElement("span", "demo-icon");
+                const image = document.createElement("img");
+                image.alt = "";
+                image.src = (logo ? logo.getAttribute("src") : "/logo-1024.png")
+                    .replace("logo-1024.png", "assets/host-icons/" + system.icon + ".svg");
+                icon.append(image);
+                const text = demoElement("div");
+                const name = demoElement("p", "demo-name");
+                name.append(demoElement("bdi", "", system.name));
+                text.append(name, demoElement("span", "demo-guest", copy.guest));
+                tile.append(icon, text);
+                // Each end of the stay stays on one line; a narrow screen breaks at the arrow.
+                const stay = demoElement("p", "demo-window");
+                stay.append(
+                    demoElement("span", "demo-when", format.format(new Date(demo.ss))),
+                    language === "he" ? " ← " : " → ",
+                    demoElement("span", "demo-when", format.format(new Date(demo.se))));
+                stay.id = "demo-window";
+                phone.append(tile, stay);
+                parts.push(phone);
+            } else {
+                const status = demoElement("p", "", copy.incomplete);
+                status.id = "status";
+                parts.push(status);
+            }
+            const more = demoElement("a", "secondary", copy.more);
+            more.href = language === "he" ? "/he/" : "/";
+            const actions = demoElement("div", "actions");
+            actions.append(more);
+            parts.push(actions);
+            document.title = copy.title;
+            document.documentElement.lang = language;
+            document.documentElement.dir = language === "he" ? "rtl" : "ltr";
+            main.dataset.demo = "true";
+            main.replaceChildren.apply(main, (logo ? [logo] : []).concat(parts));
+            return true;
+        }
+
         document.addEventListener("DOMContentLoaded", function () {
+            if (showDemoPreview()) {
+                return;
+            }
             openImmediately(buildDeepLink());
         });
     </script>

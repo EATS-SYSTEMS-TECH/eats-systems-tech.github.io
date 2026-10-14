@@ -2,41 +2,51 @@ import { hostText } from "./host-locale.js";
 const descriptions = {
   "host-admin": [
     "Host admin",
-    "Manages Host access and the administrator overview. Authenticator required.",
+    "Runs the WIFIGATE platform. Authenticator required.",
   ],
-  "host-user": [
-    "Host user",
-    "Accesses only their organizations, according to their role in each one.",
-  ],
+  "host-user": ["Host user", "Has a Host plan with My systems."],
   owner: [
-    "owner",
-    "Manages organization settings, members, billing and API keys, plus all operations.",
+    "Owner",
+    "Manages the organization, team, billing and connections, and everything else.",
   ],
   admin: [
-    "admin",
-    "Manages properties, rooms, gates, reservations, invitations and operations.",
+    "Admin",
+    "Manages systems, bookings, guest links, connections and activity.",
   ],
-  staff: [
-    "staff",
-    "Manages reservations, guest invitations and day-to-day operations.",
-  ],
+  staff: ["Staff", "Manages bookings, guest links and daily activity."],
   viewer: [
-    "viewer",
-    "Views the calendar, reservations and gates without making changes.",
+    "Viewer",
+    "Views the calendar, bookings and systems without making changes.",
   ],
 };
+// The Host plan chip in the signed-in person's own account menu and
+// Settings → Account speaks to them, not about them.
+const ownDescriptions = {
+  "host-admin": "You run the WIFIGATE platform. Authenticator required.",
+  "host-user": "You have a Host plan with My systems.",
+};
 
-export function roleBadge(role, host = false) {
+// The role's name alone, for lists that show many roles at once.
+export function roleLabel(role) {
+  return hostText(descriptions[role]?.[0] ?? "Unknown role");
+}
+
+// What a role may do, in one plain line (for an ⓘ beside a role choice).
+export function roleDescription(role) {
+  return hostText(descriptions[role]?.[1] ?? "Access needs review.");
+}
+
+export function roleBadge(role, host = false, { own = false } = {}) {
   const key = host ? `host-${role}` : role;
-  const [label, description] = descriptions[key] ?? [
+  const [label, generalDescription] = descriptions[key] ?? [
     "Unknown role",
     "Access needs review.",
   ];
+  const description = (own && ownDescriptions[key]) || generalDescription;
   const badge = document.createElement("span");
   badge.className = "host-role-badge";
   badge.dataset.role = key;
   badge.textContent = hostText(label);
-  badge.tabIndex = 0;
   badge.title = hostText(description);
   badge.setAttribute(
     "aria-label",
