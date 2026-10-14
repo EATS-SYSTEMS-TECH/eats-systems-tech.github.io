@@ -1,12 +1,45 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
+import { createServer } from "node:http";
 import { chromium } from "playwright-core";
 
 // This fixture uses the existing hero clip to qualify the media controller.
 // Scene content/motion and the eleven deliverable clips are audited separately.
-const browser = await chromium.launch({ channel: "chrome", headless: true });
-const style = await fs.readFile("css/scene-video.css", "utf8");
-const script = await fs.readFile("js/scene-video.js", "utf8");
+const style = await fs.readFile(new URL("../css/scene-video.css", import.meta.url), "utf8");
+const script = await fs.readFile(new URL("../js/scene-video.js", import.meta.url), "utf8");
+const fixtureAssets = new Map(await Promise.all([
+  ["/assets/img/wifigate_homepage.webp", "image/webp"],
+  ["/assets/vid/wifigate-final-hero-720p.mp4", "video/mp4"],
+].map(async ([pathname, contentType]) => {
+  const bytes = await fs.readFile(new URL(`..${pathname}`, import.meta.url));
+  assert.ok(bytes.length > 0, `Scene fixture asset is empty: ${pathname}`);
+  return [pathname, { contentType, bytes }];
+})));
+
+// Own only these public fixture assets and an OS-assigned loopback port. The
+// intercepted HTML used to hide an absent localhost:8000 media server until
+// the playback assertion timed out. Never depend on or stop a user's server.
+const server = createServer((request, response) => {
+  const pathname = new URL(request.url, "http://127.0.0.1").pathname;
+  const asset = fixtureAssets.get(pathname);
+  if (!asset || !["GET", "HEAD"].includes(request.method)) {
+    response.writeHead(404);
+    response.end("No fixture asset");
+    return;
+  }
+  response.writeHead(200, {
+    "Content-Type": asset.contentType,
+    "Content-Length": asset.bytes.length,
+    "Cache-Control": "no-store",
+  });
+  response.end(request.method === "HEAD" ? undefined : asset.bytes);
+});
+await new Promise((resolve, reject) => {
+  server.once("error", reject);
+  server.listen(0, "127.0.0.1", resolve);
+});
+const origin = `http://127.0.0.1:${server.address().port}`;
+let browser;
 let assertions = 0;
 const check = (value, expected, message) => { assert.equal(value, expected, message); assertions++; };
 
@@ -26,11 +59,19 @@ async function visit({ width = 1280, reducedMotion = "no-preference", connection
       <div class="scene-video-controls"><button data-scene-play>Play</button><button data-scene-pause hidden>Pause</button></div>
       <script type="application/json" data-scene-copy>{"play":"הפעלת הסרטון","pause":"השהיית הסרטון","replay":"נגן את הסרטון שוב"}</script>
     </section><script>${script}</script></html>` }));
-  await page.goto("http://127.0.0.1:8000/__scene-controller-test");
+  await page.goto(`${origin}/__scene-controller-test`);
   return { context, page, mediaRequests };
 }
 
 try {
+  for (const [pathname, asset] of fixtureAssets) {
+    const response = await fetch(`${origin}${pathname}`);
+    check(response.status, 200, `${pathname}: fixture HTTP status`);
+    check(response.headers.get("content-type"), asset.contentType, `${pathname}: fixture content type`);
+    assert.deepEqual(Buffer.from(await response.arrayBuffer()), asset.bytes, `${pathname}: fixture delivers the actual media bytes`);
+    assertions++;
+  }
+  browser = await chromium.launch({ channel: "chrome", headless: true });
   for (const [name, settings] of [
     ["phone", { width: 390 }], ["768px", { width: 768 }],
     ["reduced motion", { reducedMotion: "reduce" }],
@@ -77,4 +118,10 @@ try {
   check(await failed.page.locator("[data-scene-play]").isVisible(), true, "failed media retains manual control");
   await failed.context.close();
   console.log(`Scene controller: ${assertions} assertions passed; network policy, keyboard playback, pause, preference changes and error fallback. Deliverable scene motion remains separate.`);
-} finally { await browser.close(); }
+} finally {
+  try { await browser?.close(); }
+  finally {
+    server.closeAllConnections();
+    await new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve()));
+  }
+}
