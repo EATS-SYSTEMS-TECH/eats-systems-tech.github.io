@@ -18,7 +18,6 @@ export const AuthErrors = Object.freeze({
   USER_MISMATCH: "auth/user-mismatch",
   NETWORK_FAILED: "auth/network-request-failed",
   MFA_CANCELLED: "mfa-cancelled",
-  MFA_UNSUPPORTED: "mfa-unsupported",
-  ACCESS_PENDING: "PORTAL_ACCESS_PENDING"
+  MFA_UNSUPPORTED: "mfa-unsupported"
 });
 export const HttpStatus = Object.freeze({ UNAUTHORIZED: 401, FORBIDDEN: 403 });

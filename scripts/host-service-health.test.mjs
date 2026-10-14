@@ -48,7 +48,7 @@ test("Service health explains missing and stale evidence, isolates roles and dis
   await page.route("**/health-test", (route) =>
     route.fulfill({
       contentType: "text/html",
-      body: `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/host-workspace.css"></head><body class="portal-dashboard"><aside id="host-sidebar" class="host-sidebar"><nav id="host-section-navigation"></nav></aside><main class="portal-shell"><details id="account-details"><summary>Account</summary></details><section id="host-management" class="portal-panel" data-organization-id="org"></section></main></body></html>`,
+      body: `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/host-dashboard.css"></head><body class="host-app portal-dashboard host-ready"><aside id="host-sidebar" class="host-sidebar"><nav id="host-section-navigation"></nav></aside><main class="portal-shell"><section id="host-management" class="portal-panel" data-organization-id="org"></section></main></body></html>`,
     }),
   );
   await page.goto(`http://127.0.0.1:${server.address().port}/health-test`);
@@ -92,16 +92,42 @@ test("Service health explains missing and stale evidence, isolates roles and dis
     window.renderHealth("owner");
     await import("/js/host-dashboard-navigation.js");
   });
-  await page.getByRole("button", { name: "Operations", exact: true }).click();
+  await page.getByRole("button", { name: "Activity", exact: true }).click();
   const section = page.getByRole("region", {
     name: "Service health",
     exact: true,
   });
+  // One plain sentence and one action; rates, milliseconds and ids fold
+  // under "For your developer".
+  const summary = section.locator(".health-summary__text");
+  assert.equal(
+    await summary.textContent(),
+    "Check that guest links and messages go out on time.",
+  );
   const refresh = section.getByRole("button", {
-    name: "Refresh service health",
+    name: "Check now",
     exact: true,
   });
+  assert.equal(await refresh.isVisible(), true);
+  assert.equal(
+    await section
+      .getByRole("button", { name: "Refresh service health" })
+      .count(),
+    0,
+  );
+  assert.equal(
+    await section
+      .locator("details.operations-developer")
+      .evaluate((d) => d.open),
+    false,
+  );
+  await section.getByText("For your developer", { exact: true }).click();
   await refresh.click();
+  await page.waitForFunction(
+    () =>
+      document.querySelector(".health-summary__text")?.textContent ===
+      "Automatic checks aren't running right now. Details for your developer are below.",
+  );
   await section
     .getByText(
       "No retained observations yet. Refresh after the monitor runs.",
@@ -165,6 +191,10 @@ test("Service health explains missing and stale evidence, isolates roles and dis
     .getByRole("status")
     .getByText("Target breached", { exact: true })
     .waitFor();
+  assert.equal(
+    await summary.textContent(),
+    "Some guest links or messages were late or failed. Details for your developer are below.",
+  );
   assert.equal(await section.locator(".health-metrics article").count(), 3);
   await section
     .getByText("Success rate below target", { exact: true })
@@ -284,6 +314,10 @@ test("Service health explains missing and stale evidence, isolates roles and dis
     .getByRole("status")
     .getByText("Unable to load or save service health.", { exact: false })
     .waitFor();
+  assert.equal(
+    await summary.textContent(),
+    "Couldn't check right now. Try again.",
+  );
   assert.equal(await section.locator(".health-metrics article").count(), 0);
   await page.evaluate(() => {
     window.failHealth = false;
@@ -312,13 +346,15 @@ test("Service health explains missing and stale evidence, isolates roles and dis
   await page.evaluate(() => window.renderHealth("staff"));
   const menu = page.getByRole("button", { name: "Menu", exact: true });
   if (await menu.isVisible()) await menu.click();
-  await page.getByRole("button", { name: "Operations", exact: true }).click();
+  await page.getByRole("button", { name: "Activity", exact: true }).click();
   assert.equal(
-    await section.getByRole("button", { name: "Save service targets" }).count(),
+    await section
+      .locator("button", { hasText: "Save service targets" })
+      .count(),
     0,
   );
   assert.equal(
-    await section.getByRole("button", { name: "Open support access" }).count(),
+    await section.locator("button", { hasText: "Open support access" }).count(),
     0,
   );
   assert.deepEqual(errors, []);

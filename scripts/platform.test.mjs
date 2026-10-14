@@ -13,6 +13,8 @@ import {
   loginPath,
   pageLanguage,
   signInRefusal,
+  hasHostPlan,
+  canOpenProduct,
 } from "../js/platform-model.js";
 
 function profile() {
@@ -51,6 +53,39 @@ test("platform identity requires all server states and matches the signed-in acc
   const unverified = profile();
   unverified.user.emailVerified = false;
   assert.throws(() => parsePlatformIdentity(unverified), /contract-incomplete/);
+});
+
+test("the Host plan role parses as admin, user or null and nothing else", () => {
+  const parsed = parsePlatformIdentity(profile(), "test-user");
+  assert.equal(parsed.products.host.role, null, "an absent role means no plan");
+  assert.equal(hasHostPlan(parsed), false);
+  for (const role of ["admin", "user"]) {
+    const value = profile();
+    value.products.host.role = role;
+    const identity = parsePlatformIdentity(value);
+    assert.equal(identity.products.host.role, role);
+    assert.equal(hasHostPlan(identity), true);
+  }
+  const member = profile();
+  member.products.host.role = null;
+  assert.equal(parsePlatformIdentity(member).products.host.role, null);
+  for (const role of ["owner", "platform_admin", "", 1]) {
+    const forged = profile();
+    forged.products.host.role = role;
+    assert.throws(() => parsePlatformIdentity(forged), /contract-incomplete/, String(role));
+  }
+  const pending = profile();
+  pending.products.host = { state: "pending" };
+  const pendingIdentity = parsePlatformIdentity(pending);
+  assert.equal(canOpenProduct(pendingIdentity, "host"), true, "a pending invitation opens Host to accept it");
+  assert.equal(canOpenProduct(pendingIdentity, "pay"), false);
+  const payPending = profile();
+  payPending.products.pay = { state: "pending" };
+  assert.equal(canOpenProduct(parsePlatformIdentity(payPending), "pay"), false);
+  assert.equal(
+    loginDestination(pendingIdentity, "/dashboard/host/"),
+    "/dashboard/host/",
+  );
 });
 
 test("deep links reject external URLs, encoded separators and traversal", () => {
@@ -123,6 +158,17 @@ test("sign-in is refused only when every product has no plan", () => {
   }
 });
 
+test("the Hebrew picker speaks to the reader in the plural throughout", async () => {
+  const { platformText } = await import("../js/platform-copy.js");
+  const hebrew = platformText("he");
+  // "My account" in a button names the reader's own thing; every sentence
+  // addresses them as "you" in the plural.
+  for (const [key, value] of Object.entries(hebrew))
+    assert.doesNotMatch(value, /שלך(?![\u0590-\u05FF])|התחברת(?![\u0590-\u05FF])|אין לך(?![\u0590-\u05FF])/, key);
+  assert.equal(hebrew.account, "החשבון שלכם");
+  assert.match(hebrew.accountDetail, /^התחברתם /);
+});
+
 test("URL selects the interface language without browser storage", () => {
   assert.equal(pageLanguage({ pathname: "/he/login/", search: "" }), "he");
   assert.equal(pageLanguage({ pathname: "/login/", search: "" }), "en");
@@ -161,64 +207,24 @@ test("shared login reads platform access without creating a Host profile", async
   }
 });
 
-test("legacy dashboard entry uses only authenticated profile authority and creates a missing profile once", async () => {
+test("a missing platform endpoint stays closed and never falls back to the old profile read", async () => {
   const previous = profileApi.defaults.adapter;
   const requests = [];
-  let exists = false;
-  const legacy = {
-    user: { uid: "test-user", email: "user@example.test", emailVerified: true },
-    role: "user",
-    access: { state: "active" },
-    mfa: { required: false, enrolled: false, verified: false },
-  };
   profileApi.defaults.adapter = async (config) => {
     requests.push(`${config.method} ${config.url}`);
-    assert.equal(config.headers.get("Authorization"), "Bearer test-token");
-    if (
-      config.url.endsWith("platform/me") ||
-      (!exists && config.method === "get")
-    ) {
-      throw new AxiosError("Missing", "ERR_BAD_REQUEST", config, null, {
-        status: 404,
-        data: { error: { code: "NOT_FOUND" } },
-        config,
-        headers: {},
-      });
-    }
-    exists = true;
-    return { status: 200, data: legacy, config, headers: {} };
+    throw new AxiosError("Missing", "ERR_BAD_REQUEST", config, null, {
+      status: 404,
+      data: { error: { code: "NOT_FOUND" } },
+      config,
+      headers: {},
+    });
   };
   try {
-    const user = { getIdToken: async () => "test-token" };
-    assert.equal(
-      (await getPlatformProfile(user)).products.host.state,
-      "active",
+    await assert.rejects(
+      getPlatformProfile({ getIdToken: async () => "test-token" }),
+      { status: 404 },
     );
-    assert.deepEqual(requests, [
-      "get /api/v1/platform/me",
-      "get /api/v1/users/me",
-      "put /api/v1/users/me",
-      "get /api/v1/users/me",
-    ]);
-    legacy.role = null;
-    assert.equal(
-      (await getPlatformProfile(user)).products.host.state,
-      "blocked",
-    );
-    legacy.role = "admin";
-    assert.equal(
-      (await getPlatformProfile(user)).products.host.state,
-      "mfa-required",
-    );
-    legacy.mfa.enrolled = legacy.mfa.verified = true;
-    const result = await getPlatformProfile(user);
-    assert.equal(result.products.host.state, "active");
-    assert.equal(result.products.pay.state, "unavailable");
-    legacy.access.state = "pending";
-    assert.equal(
-      (await getPlatformProfile(user)).products.host.state,
-      "pending",
-    );
+    assert.deepEqual(requests, ["get /api/v1/platform/me"]);
   } finally {
     profileApi.defaults.adapter = previous;
   }

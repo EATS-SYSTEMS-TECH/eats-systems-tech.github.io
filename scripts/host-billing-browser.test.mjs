@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 import { chromium } from "playwright-core";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
-test("billing and access deadlines follow selected language; failed reloads and abandoned organizations cannot enable stale changes", async (t) => {
+test("billing, support and key dates follow the selected language; failed reloads and abandoned organizations cannot enable stale changes", async (t) => {
   const server = createServer(async (request, response) => {
     try {
       const file = path.resolve(
@@ -48,7 +48,7 @@ test("billing and access deadlines follow selected language; failed reloads and 
     await page.route("**/billing-test?**", (route) =>
       route.fulfill({
         contentType: "text/html",
-        body: '<!doctype html><html><head><meta charset="utf-8"></head><body><main id="billing"></main><section id="support"></section><section id="keys"></section><section id="access"></section></body></html>',
+        body: '<!doctype html><html><head><meta charset="utf-8"></head><body><main id="billing"></main><section id="support"></section><section id="keys"></section></body></html>',
       }),
     );
     await page.goto(
@@ -110,19 +110,6 @@ test("billing and access deadlines follow selected language; failed reloads and 
             ],
             nextCursor: null,
           };
-        } else if (config.url.includes("/access-grants?")) {
-          data = {
-            items: [
-              {
-                id: "owned-grant",
-                status: "expired",
-                reservationVersion: 1,
-                effectiveStartsAt: instant,
-                effectiveEndsAt: instant,
-              },
-            ],
-            nextCursor: null,
-          };
         } else data = { items: [], nextCursor: null };
         return { status: 200, statusText: "OK", headers: {}, config, data };
       };
@@ -131,14 +118,29 @@ test("billing and access deadlines follow selected language; failed reloads and 
           uid: "isolated-owner",
           getIdToken: async () => "isolated-test",
         },
-        organization: { id: "owned-org", membership: { role: "owner" } },
+        organization: {
+          id: "owned-org",
+          membership: { role: "owner" },
+          workspace: {
+            role: "owner",
+            permissions: [
+              "read",
+              "organization:write",
+              "members:write",
+              "systems:write",
+              "reservations:write",
+              "invitations:write",
+              "billing:write",
+              "integrations:write",
+              "operations:write",
+            ],
+          },
+        },
         isCurrent: () => window.currentOrganization,
       };
       const { renderHostBilling } = await import("/js/host-billing.js");
       const { renderSupportOwner } = await import("/js/host-support.js");
       const { renderHostApiKeys } = await import("/js/host-api-keys.js");
-      const { renderHostAccessGrants } =
-        await import("/js/host-access-grants.js");
       await renderHostBilling({
         ...options,
         container: document.getElementById("billing"),
@@ -151,24 +153,24 @@ test("billing and access deadlines follow selected language; failed reloads and 
         ...options,
         container: document.getElementById("keys"),
       });
-      await renderHostAccessGrants({
-        ...options,
-        container: document.getElementById("access"),
-        reservation: { id: "reservation", status: "cancelled" },
-      });
+      // The keys live in the card's "For your developer" part.
+      document.querySelector("#keys details.connect-keys").open = true;
     });
     const expected = new Intl.DateTimeFormat(
       language === "he" ? "he-IL" : "en-US",
       { dateStyle: "medium", timeStyle: "short", timeZone: "UTC" },
     ).format(new Date("2026-10-11T12:34:00.000Z"));
-    for (const id of ["support", "keys", "access"])
+    for (const id of ["support", "keys"])
       assert.ok(
         (await page.locator(`#${id}`).innerText()).includes(expected),
         `${id} must use selected language and UTC, independently of the browser`,
       );
+    // A support approval names its purpose by the problem, in words.
     assert.ok(
       (await page.locator("#support").innerText()).includes(
-        language === "he" ? "מסירה" : "Delivery",
+        language === "he"
+          ? "קישורים לאורחים לא מגיעים"
+          : "Guest links don't arrive",
       ),
     );
     assert.ok(
@@ -177,24 +179,62 @@ test("billing and access deadlines follow selected language; failed reloads and 
       ),
     );
     const load = page.getByRole("button", {
-      name: language === "he" ? "טעינת מנוי" : "Load subscription",
+      name: language === "he" ? "הצגת מצב המנוי" : "Show plan status",
       exact: true,
     });
     const apply = page.getByRole("button", {
-      name: language === "he" ? "החלת שינוי מנוי" : "Apply subscription change",
+      name: language === "he" ? "שינוי המנוי" : "Change plan",
       exact: true,
     });
+    // Plan & statements speaks to the owner: no operator words, and a
+    // disabled Change plan says why in its ⓘ.
+    const billingText = await page.locator("#billing").innerText();
+    for (const word of language === "he"
+      ? [
+          /מחזור חיי לקוח/,
+          /תמחור פנימית/,
+          /היסטוריית חיוב מאומתת/,
+          /טיוטה/,
+          /גרסה/,
+        ]
+      : [
+          /lifecycle/i,
+          /internal pricing/i,
+          /verified billing history/i,
+          /draft/i,
+          /revision/i,
+          /subscription/i,
+        ])
+      assert.doesNotMatch(billingText, word);
+    assert.equal(await apply.isDisabled(), true);
+    const why = page.locator("#billing .system-action-blocked .info-tip");
+    assert.equal(await why.isVisible(), true, "the disabled button has an ⓘ");
+    assert.equal(
+      await why.locator(".info-tip__bubble").textContent(),
+      language === "he"
+        ? "קודם מציגים את מצב המנוי."
+        : "Show the plan status first.",
+    );
+    // The loaded state shows itself; no "loaded" line is added.
+    const billingShows = (text) =>
+      page.waitForFunction(
+        (text) => document.getElementById("billing").innerText.includes(text),
+        text,
+      );
     await load.click();
-    await page
-      .getByText(
-        language === "he" ? "מצב המנוי נטען." : "Subscription loaded.",
-        { exact: true },
-      )
-      .waitFor();
-    assert.ok(
-      (await page.locator("#billing").innerText()).includes(
-        language === "he" ? "פעיל ותיק" : "legacy-active",
-      ),
+    // The plan's state is a word, never its id or revision.
+    await billingShows(language === "he" ? "פעיל" : "Active");
+    const state = await page.locator("#billing").innerText();
+    assert.doesNotMatch(state, /legacy|revision|גרסה|ותיק/);
+    assert.equal(await why.isVisible(), false, "an allowed change has no ⓘ");
+    assert.equal(
+      await page
+        .getByText(
+          language === "he" ? "מצב המנוי נטען." : "Subscription loaded.",
+          { exact: true },
+        )
+        .count(),
+      0,
     );
     assert.equal(await apply.isEnabled(), true);
     await page.evaluate(() => {
@@ -206,29 +246,22 @@ test("billing and access deadlines follow selected language; failed reloads and 
       };
     });
     await load.click();
-    await page
-      .getByText(
-        language === "he" ? "מצב המנוי נטען." : "Subscription loaded.",
-        { exact: true },
-      )
-      .waitFor();
-    assert.ok((await page.locator("#billing").innerText()).includes(expected));
+    await billingShows(expected);
     assert.doesNotMatch(
       await page.locator("#billing").innerText(),
       /2026-10-11T/,
     );
     await page
       .getByRole("button", {
-        name:
-          language === "he" ? "יצירת טיוטה חודשית" : "Generate monthly draft",
+        name: language === "he" ? "יצירת דוח" : "Create statement",
         exact: true,
       })
       .click();
     await page
       .getByText(
         language === "he"
-          ? "נדרשת היסטוריית שימוש מאומתת מלאה לחודש הזה. בחרו חודש מאוחר יותר שהסתיים; לא ניתן לשחזר שימוש שלא תועד."
-          : "A complete verified usage history is required for this month. Choose a later closed month; past usage cannot be reconstructed.",
+          ? "אין רישום מלא של החודש הזה. בחרו חודש מאוחר יותר."
+          : "There's no full record of this month. Choose a later month.",
         { exact: true },
       )
       .waitFor();
@@ -239,8 +272,8 @@ test("billing and access deadlines follow selected language; failed reloads and 
     await page
       .getByText(
         language === "he"
-          ? "לא ניתן לעדכן את החיוב. רעננו את הנתונים ובדקו את ההרשאות לפני ניסיון נוסף."
-          : "Billing could not be updated. Refresh current data and verify permissions before retrying.",
+          ? "זה לא הצליח. נסו שוב."
+          : "That didn't work. Try again.",
         { exact: true },
       )
       .waitFor();

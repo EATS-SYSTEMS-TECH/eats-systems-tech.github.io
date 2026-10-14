@@ -38,7 +38,8 @@ const server = createServer(async (req, res) => {
     send(res, 200, {
       user: me.user,
       mfa: { enrolled: me.mfa.enrolled, verified: me.mfa.verified },
-      products: { host: { state }, pay: { state: "no-plan" }, manager: { state: "no-plan" } },
+      // The Host plan role (admin, user, or null for an organization member).
+      products: { host: { state, ...(["active", "mfa-required"].includes(state) ? { role: me.role } : {}) }, pay: { state: "no-plan" }, manager: { state: "no-plan" } },
     }, origin);
     return;
   }

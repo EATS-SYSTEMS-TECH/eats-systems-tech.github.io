@@ -1,346 +1,377 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { createServer } from "node:http";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
-import { chromium } from "playwright-core";
+import {
+  startHostSite,
+  openWorkspace,
+  organization,
+  system,
+  booking,
+  day,
+  loaded,
+  requests,
+  fits,
+} from "./lib/host-booking-site.mjs";
 
-const root = path.resolve(
-  new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"),
-);
-const shell = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/host-workspace.css"></head><body class="portal-dashboard"><aside id="host-sidebar" class="host-sidebar"><nav id="host-section-navigation" aria-label="Dashboard sections"></nav></aside><main class="portal-shell"><details id="account-details"><summary>Account and security</summary></details><div id="workspace-org-switcher"></div><section id="host-management" class="portal-panel"></section></main><script type="module" src="/workspace-fixture.js"></script></body></html>`;
+// The organization workspace against the in-memory Host API: failures
+// stay inside one screen, Bookings pages and history, saved filters by
+// system, Settings (organization, team) without "saved" lines, Connect per
+// role, and the phone menu.
+const fixture = (role = "owner", extra = {}) => ({
+  plan: "user",
+  organizations: [organization("org", "Test hotel", role)],
+  systems: {
+    org: [system("s1", "Room 101"), system("s2", "Lobby door")],
+  },
+  reservations: {
+    org: [
+      booking("first", "s1", "Room 101", day(0), day(1), {
+        startsAt: new Date(Date.now() - 3600000).toISOString(),
+        status: "draft",
+      }),
+      booking("second", "s2", "Lobby door", day(0), day(1), {
+        startsAt: new Date(Date.now() - 1800000).toISOString(),
+      }),
+    ],
+  },
+  members: {
+    org: [
+      {
+        id: "m1",
+        email: "owner@example.test",
+        role: "owner",
+        status: "active",
+      },
+      {
+        id: "m2",
+        email: "front@example.test",
+        role: "staff",
+        status: "active",
+      },
+    ],
+  },
+  ...extra,
+});
+const nav = (page, id) =>
+  page.locator(`#host-section-navigation [data-view-id="${id}"]`);
+const tab = (page, id) =>
+  page.locator(`[role="tab"][data-settings-tab="${id}"]`);
+const calls = async (page, call) =>
+  (await requests(page)).filter((entry) => entry.call === call);
+const failNext = (page, call, failure) =>
+  page.evaluate(
+    ([call, failure]) => {
+      window.fixture.failures[call] = failure;
+    },
+    [call, failure],
+  );
 
-function fixture(role, platformRole = "user") {
-  return `
-    import { profileApi } from '/js/api/index.js';
-    import '/js/host-dashboard-navigation.js';
-    import { loadHostManagement } from '/js/host-management.js';
-    window.requests = [];
-    const role = ${JSON.stringify(role)};
-    window.organization = {id:'org',name:'Test hotel',timezone:'UTC',version:1,membership:{role},workspace:{role,service:{state:'legacy-active',available:true}}};
-    window.organizationSaveKeys = [];
-    const today = new Date().toISOString().slice(0, 10);
-    const booking = id => ({id, propertyId:'property', roomId:'room', roomName:'Room 101',
-      guest:{name:'Guest ' + id, email:id + '@example.test',phone:'+15555550123'},
-      startsAt:today+'T15:00:00Z',endsAt:new Date(Date.parse(today+'T00:00:00Z')+86400000).toISOString(),
-      status:'draft', version:1, targetIds:[]});
-    profileApi.defaults.adapter = async config => {
-      window.requests.push(config.url);
-      const url = new URL(config.url, location.origin);
-      let data = {items:[],nextCursor:null};
-      if (url.pathname === '/api/v1/organizations') {
-        if (window.rejectOrganizationReload && window.organizationSaveReturned) throw new Error('isolated reload failure');
-        data = {organizations:[window.organization],nextCursor:null};
-      }
-      else if (url.pathname === '/api/v1/organizations/org' && config.method === 'put') {
-        window.organizationSaveKeys.push(config.headers.get('idempotency-key'));
-        if (window.delayOrganizationSave) await new Promise(resolve => {window.releaseOrganizationSave=resolve;});
-        if (window.rejectOrganizationSave) throw new Error('isolated save failure');
-        window.organization = {...window.organization,...JSON.parse(config.data),version:window.organization.version+1};
-        window.organizationSaveReturned = true;
-        data = {organization:window.organization};
-      }
-      else if (url.pathname.endsWith('/properties')) data = {items:[{id:'property',name:'Property',timezone:'UTC'}],nextCursor:null};
-      else if (url.pathname.endsWith('/rooms')) data = {items:[{id:'room',name:'Room 101',propertyId:'property',capacity:2}],nextCursor:null};
-      else if (url.pathname.endsWith('/time-zone/resolve')) data = {instant:JSON.parse(config.data).localTime+':00Z'};
-      else if (url.pathname.endsWith('/reservations')) {
-        if (window.delayReservation) {
-          await new Promise(resolve => { window.releaseReservation = resolve; });
-          window.lateReservationReturned = true;
-        }
-        data = url.searchParams.has('cursor') ? {items:[booking('second')],nextCursor:null} : {items:[booking('first')],nextCursor:'next-page'};
-      }
-      else if (url.pathname.endsWith('/operations/preferences')) {
-        if (window.delayOperations) await new Promise(resolve => { window.releaseOperations = resolve; });
-        throw new Error('isolated dependency failure');
-      }
-      return {status:200,statusText:'OK',headers:{},config,data};
-    };
-    window.workspaceReady = loadHostManagement({uid:'fixture-user',getIdToken:async()=> 'isolated-token'}, {role:${JSON.stringify(platformRole)}});
-  `;
-}
-
-test("workspace isolates feature failures, permissions, paging and browser history", async (t) => {
-  const server = createServer(async (request, response) => {
-    try {
-      const file = path.resolve(
-        root,
-        "." + new URL(request.url, "http://localhost").pathname,
-      );
-      if (!file.startsWith(root + path.sep)) {
-        response.writeHead(403).end();
-        return;
-      }
-      response.setHeader(
-        "Content-Type",
-        file.endsWith(".js")
-          ? "application/javascript"
-          : file.endsWith(".css")
-            ? "text/css"
-            : "application/octet-stream",
-      );
-      response.end(await readFile(file));
-    } catch {
-      response.writeHead(404).end();
-    }
-  });
-  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
-  t.after(() => {
-    server.closeAllConnections();
-    return new Promise((resolve) => server.close(resolve));
-  });
-  const browser = await chromium.launch({
-    channel: process.env.WIFIGATE_BROWSER_CHANNEL ?? "chrome",
-    headless: true,
-  });
-  t.after(() => browser.close());
-  const origin = `http://127.0.0.1:${server.address().port}`;
-  async function scenario(role, query = "", platformRole = "user") {
-    const context = await browser.newContext({
-      viewport: { width: 1440, height: 1000 },
-    });
-    t.after(() => context.close());
-    const page = await context.newPage();
-    const errors = [];
-    page.on("pageerror", (error) => errors.push(error.message));
-    await page.route("**/*", (route) => {
-      const url = new URL(route.request().url());
-      if (url.origin !== origin) return route.abort();
-      if (url.pathname === "/workspace-fixture.js")
-        return route.fulfill({
-          contentType: "application/javascript",
-          body: fixture(role, platformRole),
-        });
-      if (url.pathname === "/dashboard/host/")
-        return route.fulfill({ contentType: "text/html", body: shell });
-      return route.continue();
-    });
-    await page.goto(origin + "/dashboard/host/" + query);
-    await page.addStyleTag({ url: origin + "/css/host-interface.css" });
-    await page.evaluate(() => window.workspaceReady);
-    return { page, errors };
-  }
+test("workspace isolates failures, follows permissions and keeps history", async (t) => {
+  const site = await startHostSite(t);
 
   await t.test(
-    "calendar survives an operations outage and billing has no operations dependency",
+    "the calendar survives an Activity outage and billing needs no Activity",
     async () => {
-      const { page, errors } = await scenario("owner");
-      assert.equal(await page.locator(".reservation-chip").count(), 1);
-      const initial = await page.evaluate(() => window.requests);
+      const { page, errors } = await openWorkspace(
+        t,
+        site,
+        fixture("owner", {
+          failures: {
+            "GET /api/v1/organizations/org/operations/preferences": {
+              status: 503,
+              code: "SERVICE_UNAVAILABLE",
+            },
+          },
+        }),
+        { query: "?view=calendar" },
+      );
+      await loaded(page, "calendar");
+      assert.equal(await page.locator(".reservation-chip").count(), 2);
       assert.equal(
-        initial.some((url) =>
-          /operations|api-keys|automation|billing|integrations/.test(url),
+        (await requests(page)).some((entry) =>
+          /operations|api-keys|automation|billing|integrations/.test(
+            entry.call,
+          ),
         ),
         false,
       );
-      await page
-        .getByRole("button", { name: "Operations", exact: true })
-        .click();
+      await nav(page, "activity").click();
       await page
         .getByRole("button", { name: "Alerts and activity", exact: true })
         .click();
       await page
         .getByRole("button", { name: "Retry this section", exact: true })
         .waitFor();
-      assert.equal(await page.locator(".reservation-chip").count(), 1);
-      await page.getByRole("button", { name: "Calendar", exact: true }).click();
-      assert.equal(await page.locator(".reservation-chip").isVisible(), true);
+      assert.deepEqual(
+        await page
+          .locator(".workspace-tabs button")
+          .evaluateAll((buttons) =>
+            buttons.map((button) => button.textContent),
+          ),
+        ["Automatic links", "Alerts and activity", "Service health"],
+      );
+      await nav(page, "calendar").click();
+      assert.equal(
+        await page.locator(".reservation-chip").first().isVisible(),
+        true,
+      );
+      await nav(page, "settings").click();
+      await tab(page, "billing").click();
+      assert.equal(new URL(page.url()).searchParams.get("tab"), "billing");
       await page
-        .getByRole("button", { name: "Billing statements", exact: true })
-        .click();
-      await page
-        .getByRole("button", { name: "Generate monthly draft", exact: true })
+        .getByRole("button", { name: "Create statement", exact: true })
         .waitFor();
       assert.equal(
-        (await page.evaluate(() => window.requests)).filter((url) =>
-          url.includes("operations/preferences"),
+        (
+          await calls(
+            page,
+            "GET /api/v1/organizations/org/operations/preferences",
+          )
         ).length,
         1,
       );
-      await page
-        .getByRole("button", { name: "Organization settings", exact: true })
-        .click();
-      await page
-        .getByRole("heading", { name: "Organization settings", exact: true })
-        .waitFor();
-      assert.equal(
-        await page
-          .getByRole("button", { name: "Generate monthly draft", exact: true })
-          .isVisible(),
-        false,
-      );
       assert.deepEqual(errors, []);
     },
   );
 
   await t.test(
-    "reservations own their filters, pages, readable buttons and refresh-safe URL",
+    "Bookings pages with Show more, opens read-only for a viewer and keeps its URL",
     async () => {
-      const { page, errors } = await scenario("viewer", "?view=reservations");
-      const reservations = page.getByRole("region", {
-        name: "Reservations",
-        exact: true,
-      });
-      assert.equal(await reservations.isVisible(), true);
+      const { page, errors } = await openWorkspace(
+        t,
+        site,
+        fixture("viewer", { pageSize: 1 }),
+        { query: "?view=reservations" },
+      );
+      await loaded(page, "bookings");
+      assert.equal(new URL(page.url()).searchParams.get("view"), "bookings");
       assert.equal(await page.locator(".host-calendar").count(), 0);
-      assert.equal(
-        await reservations
-          .getByLabel("Reservation property", { exact: true })
-          .inputValue(),
-        "",
-      );
-      await reservations
-        .getByRole("button", { name: "Load more reservations", exact: true })
-        .click();
-      await reservations
-        .getByRole("button", { name: "Guest second", exact: true })
-        .waitFor();
-      assert.equal(await reservations.locator("li").count(), 2);
-      const colors = await reservations
-        .getByRole("button", { name: "Guest first", exact: true })
-        .evaluate((element) => {
-          const style = getComputedStyle(element);
-          return { color: style.color, background: style.backgroundColor };
-        });
-      assert.equal(colors.color, "rgb(255, 255, 255)");
-      assert.equal(colors.background, "rgb(7, 91, 196)");
-      await reservations
-        .getByRole("button", { name: "Guest first", exact: true })
-        .click();
-      const dialog = page.getByRole("dialog", {
-        name: "Reservation details",
-        exact: true,
-      });
-      assert.equal(
-        await dialog.getByRole("button", { name: "Save reservation" }).count(),
-        0,
-      );
-      await page.keyboard.press("Escape");
+      assert.equal(await page.locator(".booking-row").count(), 1);
       await page
-        .getByRole("button", { name: "Properties", exact: true })
-        .click();
-      await page
-        .getByRole("heading", { name: "Properties", exact: true })
-        .waitFor();
-      await page.goBack();
-      await reservations.waitFor();
-      assert.equal(
-        new URL(page.url()).searchParams.get("view"),
-        "reservations",
-      );
-      await page.reload();
-      await page.evaluate(() => window.workspaceReady);
-      assert.equal(await reservations.isVisible(), true);
-      assert.deepEqual(errors, []);
-    },
-  );
-
-  await t.test(
-    "late booking-screen responses cannot overwrite Calendar, and saved filters load it lazily",
-    async () => {
-      const { page, errors } = await scenario("owner");
-      await page.evaluate(() => {
-        window.delayReservation = true;
-      });
-      await page
-        .getByRole("button", { name: "Reservations", exact: true })
+        .getByRole("button", { name: "Show more", exact: true })
         .click();
       await page.waitForFunction(
-        () => typeof window.releaseReservation === "function",
+        () => document.querySelectorAll(".booking-row").length === 2,
       );
+      await page.locator('.booking-row[data-booking-id="first"]').click();
+      const sheet = page.locator("dialog.booking-sheet[open]");
+      await sheet.waitFor();
+      assert.equal(await sheet.locator(".booking-status--draft").count(), 1);
+      assert.equal(await sheet.locator("[data-booking-edit]").count(), 0);
+      await page.keyboard.press("Escape");
+      await nav(page, "settings").click();
+      await page.locator('[data-settings-panel="organization"]').waitFor();
+      await page.goBack();
+      await loaded(page, "bookings");
+      assert.equal(new URL(page.url()).searchParams.get("view"), "bookings");
+      await page.reload();
+      await page.waitForFunction(() => window.workspaceStarted);
+      await loaded(page, "bookings");
+      assert.deepEqual(errors, []);
+    },
+  );
+
+  await t.test(
+    "a late Bookings answer cannot overwrite the Calendar",
+    async () => {
+      const { page, errors } = await openWorkspace(t, site, fixture("owner"));
+      await loaded(page, "my-systems");
       await page.evaluate(() => {
-        window.delayReservation = false;
+        window.fixture.delays["GET /api/v1/organizations/org/reservations"] =
+          true;
       });
-      await page.getByRole("button", { name: "Calendar", exact: true }).click();
-      await page.locator(".reservation-chip").waitFor();
-      await page.evaluate(() => window.releaseReservation());
-      await page.waitForFunction(() => window.lateReservationReturned === true);
+      await nav(page, "bookings").click();
+      await page.waitForFunction(
+        () =>
+          typeof window.release[
+            "GET /api/v1/organizations/org/reservations"
+          ] === "function",
+      );
+      await nav(page, "calendar").click();
+      await loaded(page, "calendar");
+      await page.evaluate(() =>
+        window.release["GET /api/v1/organizations/org/reservations"](),
+      );
+      await page.waitForTimeout(100);
       assert.equal(await page.locator(".host-calendar").isVisible(), true);
       assert.equal(
         await page
-          .locator(
-            '[data-workspace-view="reservations"] .host-reservations-view',
-          )
+          .locator('[data-workspace-view="bookings"] .booking-row')
           .count(),
         0,
       );
+      assert.deepEqual(errors, []);
+    },
+  );
+
+  await t.test(
+    "a saved filter names a system and opens the Calendar with it",
+    async () => {
+      const { page, errors } = await openWorkspace(t, site, fixture("staff"), {
+        query: "?view=activity",
+      });
       await page
-        .getByRole("button", { name: "Properties", exact: true })
+        .getByRole("button", { name: "Alerts and activity", exact: true })
         .click();
-      await page.evaluate(() =>
-        window.dispatchEvent(
-          new CustomEvent("host:operations-filter", {
-            detail: {
-              orgId: "org",
-              propertyId: "property",
-              roomId: "room",
-              status: "draft",
-            },
-          }),
-        ),
+      const review = page.locator('[data-operations-screen="review"]');
+      // Saved filters are a power tool: under For your developer.
+      await review.locator("details.operations-developer > summary").click();
+      await review
+        .locator("summary", { hasText: "Saved calendar filters" })
+        .click();
+      await review
+        .getByLabel("Saved filter name", { exact: true })
+        .fill("Lobby");
+      await review
+        .getByLabel("Saved filter system", { exact: true })
+        .selectOption("s2");
+      await review
+        .getByLabel("Saved filter status", { exact: true })
+        .selectOption("confirmed");
+      assert.equal(await review.locator("text=propert").count(), 0);
+      await review
+        .getByRole("button", { name: "Save filters", exact: true })
+        .click();
+      await review.locator('[data-saved-filter="Lobby"]').waitFor();
+      const [saved] = await calls(
+        page,
+        "PUT /api/v1/organizations/org/operations/preferences",
       );
+      assert.deepEqual(saved.body.savedFilters, [
+        { name: "Lobby", systemId: "s2", status: "confirmed" },
+      ]);
+      assert.equal(
+        await review
+          .locator('[data-saved-filter="Lobby"]')
+          .evaluate((row) => row.firstChild.textContent),
+        "Lobby · Lobby door · Confirmed",
+      );
+      await review
+        .locator('[data-saved-filter="Lobby"]')
+        .getByRole("button", { name: "Apply saved filter", exact: true })
+        .click();
       await page.waitForFunction(
         () =>
-          document.querySelector('.host-calendar [name="status"]')?.value ===
-          "draft",
+          document.querySelector('.host-calendar select[name="systemId"]')
+            ?.value === "s2",
       );
-      assert.equal(await page.locator(".host-calendar").isVisible(), true);
+      assert.equal(new URL(page.url()).searchParams.get("view"), "calendar");
+      await page.waitForFunction(() =>
+        window.fixture.requests.some(
+          (entry) =>
+            entry.query.systemId === "s2" && entry.query.status === "confirmed",
+        ),
+      );
+      assert.deepEqual(errors, []);
+    },
+  );
+
+  await t.test(
+    "navigation follows the Host plan and workspace.permissions for every role",
+    async () => {
+      for (const role of ["owner", "admin", "staff", "viewer"]) {
+        for (const plan of ["user", null]) {
+          const { page, errors } = await openWorkspace(
+            t,
+            site,
+            fixture(role, { plan }),
+          );
+          const visible = (id) => nav(page, id).isVisible();
+          assert.equal(
+            await visible("my-systems"),
+            plan !== null,
+            `${role} ${plan}`,
+          );
+          assert.equal(
+            await page.evaluate(() => document.body.dataset.hostViewId),
+            plan ? "my-systems" : "systems",
+          );
+          for (const id of ["systems", "calendar", "bookings", "settings"])
+            assert.equal(await visible(id), true, `${role} ${id}`);
+          assert.equal(
+            await visible("activity"),
+            role !== "viewer",
+            `${role} activity`,
+          );
+          assert.equal(
+            await visible("connect"),
+            ["owner", "admin"].includes(role),
+            `${role} connect`,
+          );
+          assert.equal(
+            await page.locator('[data-view-id="properties"]').count(),
+            0,
+          );
+          await nav(page, "settings").click();
+          await page.locator('[role="tab"]').first().waitFor();
+          assert.deepEqual(
+            await page
+              .locator('[role="tab"]')
+              .evaluateAll((tabs) =>
+                tabs.map((item) => item.dataset.settingsTab),
+              ),
+            role === "owner"
+              ? ["organization", "team", "billing", "support", "account"]
+              : ["organization", "account"],
+          );
+          assert.equal(
+            await page
+              .locator("#workspace-org-switcher .host-role-badge")
+              .getAttribute("data-role"),
+            role,
+          );
+          assert.deepEqual(errors, []);
+        }
+      }
+    },
+  );
+
+  await t.test(
+    "an organization member without a plan never reaches My systems through a link",
+    async () => {
+      const { page, errors } = await openWorkspace(
+        t,
+        site,
+        fixture("staff", { plan: null }),
+        { query: "?view=my-systems" },
+      );
+      assert.equal(
+        await page.evaluate(() => document.body.dataset.hostViewId),
+        "systems",
+      );
+      assert.equal(
+        await page.locator('[data-workspace-view="my-systems"]').count(),
+        0,
+      );
+      assert.equal(await page.locator("#host-my-systems").isVisible(), false);
       assert.equal(new URL(page.url()).searchParams.has("view"), false);
       assert.deepEqual(errors, []);
     },
   );
 
   await t.test(
-    "normal-user navigation reflects each tenant role, not disabled privileged links",
+    "the owner changes the organization: fields lock, no saved line, every screen follows",
     async () => {
-      for (const role of ["owner", "admin", "staff", "viewer"]) {
-        const { page, errors } = await scenario(role);
-        assert.equal(
-          await page
-            .getByRole("button", { name: "Team", exact: true })
-            .isVisible(),
-          role === "owner",
-        );
-        assert.equal(
-          await page
-            .getByRole("button", { name: "Automation", exact: true })
-            .isVisible(),
-          role === "owner" || role === "admin",
-        );
-        assert.equal(
-          await page
-            .getByRole("button", { name: "Operations", exact: true })
-            .isVisible(),
-          role !== "viewer",
-        );
-        assert.equal(
-          await page
-            .getByRole("button", { name: "Overview", exact: true })
-            .isVisible(),
-          false,
-        );
-        assert.deepEqual(errors, []);
-      }
-    },
-  );
-
-  await t.test(
-    "organization save locks fields, reports success after refresh and offers a clear action",
-    async () => {
-      const { page, errors } = await scenario("owner", "?view=organization");
-      const panel = page.locator('[data-workspace-view="organization"]');
-      await panel.locator("summary").click();
+      const { page, errors } = await openWorkspace(t, site, fixture("owner"), {
+        query: "?view=organization",
+      });
+      assert.equal(new URL(page.url()).searchParams.get("view"), "settings");
+      assert.equal(new URL(page.url()).searchParams.get("tab"), "organization");
+      const panel = page.locator('[data-settings-panel="organization"]');
       await panel
         .getByLabel("Organization name", { exact: true })
         .fill("Renamed hotel");
+      await panel
+        .getByLabel("Time zone", { exact: true })
+        .selectOption("Asia/Jerusalem");
       await page.evaluate(() => {
-        window.delayOrganizationSave = true;
+        window.fixture.delays["PUT /api/v1/organizations/org"] = true;
       });
-      await panel.locator('form button[type="submit"]').click();
+      await panel
+        .getByRole("button", { name: "Save organization details", exact: true })
+        .click();
       await page.waitForFunction(
-        () => typeof window.releaseOrganizationSave === "function",
-        null,
-        { timeout: 5000 },
+        () =>
+          typeof window.release["PUT /api/v1/organizations/org"] === "function",
       );
       assert.equal(
         await panel
@@ -349,175 +380,193 @@ test("workspace isolates feature failures, permissions, paging and browser histo
         true,
       );
       assert.equal(
-        await panel.getByLabel("IANA timezone", { exact: true }).isDisabled(),
+        await panel.getByLabel("Time zone", { exact: true }).isDisabled(),
         true,
       );
-      await page.evaluate(() => window.releaseOrganizationSave());
-      await panel
-        .getByRole("status")
-        .filter({ hasText: "Changes saved." })
-        .waitFor({ timeout: 5000 });
-      assert.equal(
-        await page
-          .getByRole("combobox", { name: "Organization", exact: true })
-          .innerText()
-          .then((text) => text.includes("Renamed hotel")),
-        true,
+      await page.evaluate(() =>
+        window.release["PUT /api/v1/organizations/org"](),
       );
-      await panel.locator("summary").click();
+      await page.waitForFunction(() =>
+        document
+          .querySelector("#workspace-org-switcher")
+          ?.textContent.includes("Renamed hotel"),
+      );
+      const [saved] = await calls(page, "PUT /api/v1/organizations/org");
+      assert.deepEqual(saved.body, {
+        name: "Renamed hotel",
+        timezone: "Asia/Jerusalem",
+        version: 1,
+      });
+      const refreshed = page.locator('[data-settings-panel="organization"]');
+      await refreshed.waitFor();
       assert.equal(
-        await panel
-          .getByRole("button", {
-            name: "Save organization details",
-            exact: true,
-          })
-          .isEnabled(),
-        true,
+        await refreshed
+          .getByLabel("Organization name", { exact: true })
+          .inputValue(),
+        "Renamed hotel",
+      );
+      assert.doesNotMatch(
+        await page.locator("#host-management").innerText(),
+        /saved/i,
       );
       assert.deepEqual(errors, []);
     },
   );
 
   await t.test(
-    "a late organization save preserves another screen draft and refreshes on return",
+    "anyone else reads the organization's name, time zone and role",
     async () => {
-      const { page, errors } = await scenario("owner", "?view=organization");
-      const settings = page.locator('[data-workspace-view="organization"]');
-      await settings.locator("summary").click();
-      await settings
+      const { page, errors } = await openWorkspace(t, site, fixture("admin"), {
+        query: "?view=settings&tab=organization",
+      });
+      const panel = page.locator('[data-settings-panel="organization"]');
+      await panel.locator(".settings-facts").waitFor();
+      assert.equal(await panel.locator("form").count(), 0);
+      const text = await panel.innerText();
+      assert.match(text, /Test hotel/);
+      assert.match(text, /UTC/);
+      assert.equal(
+        await panel.locator('.host-role-badge[data-role="admin"]').count(),
+        1,
+      );
+      assert.deepEqual(errors, []);
+    },
+  );
+
+  await t.test(
+    "a late organization change keeps another tab's draft and shows on return",
+    async () => {
+      const { page, errors } = await openWorkspace(t, site, fixture("owner"), {
+        query: "?view=organization",
+      });
+      const panel = page.locator('[data-settings-panel="organization"]');
+      await panel
         .getByLabel("Organization name", { exact: true })
         .fill("Renamed hotel");
       await page.evaluate(() => {
-        window.delayOrganizationSave = true;
+        window.fixture.delays["PUT /api/v1/organizations/org"] = true;
       });
-      await settings.locator('form button[type="submit"]').click();
-      await page.waitForFunction(
-        () => typeof window.releaseOrganizationSave === "function",
-        null,
-        { timeout: 5000 },
-      );
-      await page
-        .getByRole("button", { name: "Properties", exact: true })
+      await panel
+        .getByRole("button", { name: "Save organization details", exact: true })
         .click();
-      const properties = page.locator('[data-workspace-view="properties"]');
-      const addProperty = properties
-        .locator("details")
-        .filter({ hasText: "Add property" });
-      await addProperty.locator("summary").click();
-      const draft = addProperty.getByLabel("Name", { exact: true });
-      await draft.fill("Unsaved property draft");
-      await page.evaluate(() => window.releaseOrganizationSave());
       await page.waitForFunction(
-        () => window.organizationSaveReturned === true,
-        null,
-        { timeout: 5000 },
+        () =>
+          typeof window.release["PUT /api/v1/organizations/org"] === "function",
+      );
+      await tab(page, "team").click();
+      const team = page.locator('[data-settings-panel="team"]');
+      const draft = team.getByLabel("Invite verified email", { exact: true });
+      await draft.fill("draft@example.test");
+      await page.evaluate(() =>
+        window.release["PUT /api/v1/organizations/org"](),
+      );
+      await page.waitForFunction(
+        () => window.fixture.organizations[0].name === "Renamed hotel",
       );
       await page.waitForTimeout(100);
-      assert.equal(await draft.inputValue(), "Unsaved property draft");
-      assert.equal(
-        await properties
-          .getByRole("status")
-          .filter({ hasText: "Changes saved." })
-          .count(),
-        0,
+      assert.equal(await draft.inputValue(), "draft@example.test");
+      await tab(page, "organization").click();
+      await page.waitForFunction(
+        () =>
+          document.querySelector(
+            '[data-settings-panel="organization"] input[name="name"]',
+          )?.value === "Renamed hotel",
       );
-      await page
-        .getByRole("button", { name: "Organization settings", exact: true })
-        .click();
-      await settings
-        .getByText("Renamed hotel", { exact: true })
-        .waitFor({ timeout: 5000 });
       assert.deepEqual(errors, []);
     },
   );
 
   await t.test(
-    "a failed save preserves the form and safely reuses the reviewed attempt",
+    "a refused change keeps the form and retries with the same Idempotency-Key",
     async () => {
-      const { page, errors } = await scenario("owner", "?view=organization");
-      const panel = page.locator('[data-workspace-view="organization"]');
-      await panel.locator("summary").click();
+      const { page, errors } = await openWorkspace(t, site, fixture("owner"), {
+        query: "?view=organization",
+      });
+      const panel = page.locator('[data-settings-panel="organization"]');
       await panel
         .getByLabel("Organization name", { exact: true })
         .fill("Retry hotel");
-      await page.evaluate(() => {
-        window.rejectOrganizationSave = true;
+      await failNext(page, "PUT /api/v1/organizations/org", {
+        status: 503,
+        code: "SERVICE_UNAVAILABLE",
+        times: 1,
       });
-      await panel.locator('form button[type="submit"]').click();
+      const save = panel.getByRole("button", {
+        name: "Save organization details",
+        exact: true,
+      });
+      await save.click();
       await panel
-        .getByRole("status")
-        .filter({
-          hasText: "The request could not be completed. You can retry.",
+        .getByText("The request could not be completed. You can retry.", {
+          exact: true,
         })
-        .waitFor({ timeout: 5000 });
+        .waitFor();
       assert.equal(
         await panel
           .getByLabel("Organization name", { exact: true })
           .inputValue(),
         "Retry hotel",
       );
-      assert.equal(
-        await panel
-          .getByLabel("Organization name", { exact: true })
-          .isEnabled(),
-        true,
+      assert.equal(await save.isEnabled(), true);
+      await save.click();
+      await page.waitForFunction(() =>
+        document
+          .querySelector("#workspace-org-switcher")
+          ?.textContent.includes("Retry hotel"),
       );
-      await page.evaluate(() => {
-        window.rejectOrganizationSave = false;
-      });
-      await panel.locator('form button[type="submit"]').click();
-      await panel
-        .getByRole("status")
-        .filter({ hasText: "Changes saved." })
-        .waitFor({ timeout: 5000 });
-      const keys = await page.evaluate(() => window.organizationSaveKeys);
+      const keys = (await calls(page, "PUT /api/v1/organizations/org")).map(
+        (entry) => entry.key,
+      );
       assert.equal(keys.length, 2);
-      assert.equal(keys[0], keys[1]);
       assert.ok(keys[0]);
+      assert.equal(keys[0], keys[1]);
       assert.deepEqual(errors, []);
     },
   );
 
   await t.test(
-    "a confirmed save stays confirmed when loading the updated screen fails",
+    "a change that went through stays when the reload fails",
     async () => {
-      const { page, errors } = await scenario("owner", "?view=organization");
-      const panel = page.locator('[data-workspace-view="organization"]');
-      await panel.locator("summary").click();
+      const { page, errors } = await openWorkspace(t, site, fixture("owner"), {
+        query: "?view=organization",
+      });
+      const panel = page.locator('[data-settings-panel="organization"]');
       await panel
         .getByLabel("Organization name", { exact: true })
         .fill("Saved before outage");
-      await page.evaluate(() => {
-        window.rejectOrganizationReload = true;
+      await failNext(page, "GET /api/v1/organizations", {
+        status: 503,
+        code: "SERVICE_UNAVAILABLE",
+        times: 1,
       });
-      await panel.locator('form button[type="submit"]').click();
+      await panel
+        .getByRole("button", { name: "Save organization details", exact: true })
+        .click();
       const workspace = page.locator("#host-management");
       await workspace
-        .getByRole("status")
-        .filter({
-          hasText:
-            "Changes saved. Refresh the screen to load the updated data.",
-        })
-        .waitFor({ timeout: 5000 });
+        .getByText(
+          "Couldn't load the latest details. Refresh to see your change.",
+          {
+            exact: true,
+          },
+        )
+        .waitFor();
       assert.equal(
-        await page.evaluate(() => window.organizationSaveKeys.length),
+        (await calls(page, "PUT /api/v1/organizations/org")).length,
         1,
       );
-      assert.equal(
-        new URL(page.url()).searchParams.get("view"),
-        "organization",
-      );
-      await page.evaluate(() => {
-        window.rejectOrganizationReload = false;
-      });
+      assert.equal(new URL(page.url()).searchParams.get("tab"), "organization");
       await workspace
         .getByRole("button", { name: "Refresh organizations", exact: true })
         .click();
-      await panel
-        .getByText("Saved before outage", { exact: true })
-        .waitFor({ timeout: 5000 });
+      await page.waitForFunction(
+        () =>
+          document.querySelector(
+            '[data-settings-panel="organization"] input[name="name"]',
+          )?.value === "Saved before outage",
+      );
       assert.equal(
-        await page.evaluate(() => window.organizationSaveKeys.length),
+        (await calls(page, "PUT /api/v1/organizations/org")).length,
         1,
       );
       assert.deepEqual(errors, []);
@@ -525,62 +574,296 @@ test("workspace isolates feature failures, permissions, paging and browser histo
   );
 
   await t.test(
-    "failure preparing a save restores controls without an uncaught error",
+    "Team: people with their roles, a change for one, new people only by invitation",
     async () => {
-      const { page, errors } = await scenario("owner", "?view=organization");
-      const panel = page.locator('[data-workspace-view="organization"]');
-      await panel.locator("summary").click();
-      await page.evaluate(() => {
-        crypto.subtle.digest = async () => {
-          throw new Error("isolated preparation failure");
-        };
+      const { page, errors } = await openWorkspace(t, site, fixture("owner"), {
+        query: "?view=settings&tab=team",
       });
-      await panel.locator('form button[type="submit"]').click();
-      await panel
-        .getByRole("status")
-        .filter({
-          hasText: "The request could not be completed. You can retry.",
-        })
-        .waitFor({ timeout: 5000 });
+      const team = page.locator('[data-settings-panel="team"]');
+      await team.locator('[data-member-email="front@example.test"]').waitFor();
+      assert.equal(await team.getByText("Add team member").count(), 0);
       assert.equal(
-        await panel.locator('form button[type="submit"]').isEnabled(),
-        true,
+        await team.getByLabel("Invite verified email", { exact: true }).count(),
+        1,
       );
-      assert.equal(
-        await panel
-          .getByLabel("Organization name", { exact: true })
-          .isEnabled(),
-        true,
+      await team
+        .locator('[data-member-email="front@example.test"]')
+        .getByRole("button")
+        .click();
+      const dialog = page.locator("dialog.system-dialog[open]");
+      await dialog.locator('input[name="role"][value="admin"]').check();
+      await dialog.getByRole("button", { name: "Save", exact: true }).click();
+      await page.waitForFunction(() =>
+        window.fixture.requests.some(
+          (entry) => entry.call === "POST /api/v1/organizations/org/members",
+        ),
       );
-      assert.equal(
-        await page.evaluate(() => window.organizationSaveKeys.length),
-        0,
+      const [change] = await calls(
+        page,
+        "POST /api/v1/organizations/org/members",
       );
+      assert.deepEqual(change.body, {
+        email: "front@example.test",
+        role: "admin",
+        status: "active",
+      });
+      await page
+        .locator(
+          '[data-member-email="front@example.test"] .host-role-badge[data-role="admin"]',
+        )
+        .waitFor();
+      await team
+        .getByLabel("Invite verified email", { exact: true })
+        .fill("new@example.test");
+      await team.getByRole("button", { name: "Invite", exact: true }).click();
+      await team.locator('[data-invitation-id="invitation-1"]').waitFor();
+      assert.doesNotMatch(await team.innerText(), /created|saved|loaded/i);
       assert.deepEqual(errors, []);
     },
   );
 
   await t.test(
-    "mobile menu is discoverable and unknown view values cannot select arbitrary content",
+    "Connect: one policy per organization, booking-system rooms to systems, API keys for the owner",
     async () => {
-      const { page, errors } = await scenario(
-        "viewer",
-        "?view=not-a-screen&lang=he",
+      const { page, errors } = await openWorkspace(t, site, fixture("owner"), {
+        query: "?view=connect",
+      });
+      await loaded(page, "connect");
+      const policy = page.getByRole("region", {
+        name: "Automatic guest links",
+      });
+      await policy.getByLabel("Create guest links automatically").check();
+      await policy.getByRole("button", { name: "Save", exact: true }).click();
+      await page.waitForFunction(() =>
+        window.fixture.requests.some(
+          (entry) =>
+            entry.call === "PUT /api/v1/organizations/org/automation/policy",
+        ),
       );
-      assert.equal(await page.locator(".host-calendar").isVisible(), true);
-      await page.setViewportSize({ width: 390, height: 844 });
+      const [saved] = await calls(
+        page,
+        "PUT /api/v1/organizations/org/automation/policy",
+      );
+      assert.deepEqual(saved.body, {
+        enabled: true,
+        earlyAccessMinutes: 0,
+        lateExpiryMinutes: 0,
+        channel: "none",
+      });
+      const rooms = page.getByRole("region", { name: "Your booking system" });
+      await rooms.locator("details.connect-setup > summary").click();
+      await rooms.getByLabel("Booking system", { exact: true }).fill("pms");
+      await rooms
+        .getByRole("button", { name: "Show connections", exact: true })
+        .click();
+      await rooms
+        .getByLabel("ID in your booking system", { exact: true })
+        .fill("212");
+      await rooms.getByLabel("Opens", { exact: true }).selectOption("s1");
+      await rooms
+        .getByRole("button", { name: "Add connection", exact: true })
+        .click();
+      await rooms.locator('[data-provider-room="212"]').waitFor();
+      assert.match(
+        await rooms
+          .locator('[data-provider-room="212"] .connect-room-list__line')
+          .innerText(),
+        /212\s*→\s*Room 101/,
+      );
+      const [mapping] = await calls(
+        page,
+        "POST /api/v1/organizations/org/integrations/providers/pms/mappings",
+      );
+      assert.deepEqual(mapping.body, { providerRoomId: "212", systemId: "s1" });
+      assert.equal(
+        (await requests(page)).some((entry) =>
+          /propert|rooms?\b/.test(entry.call),
+        ),
+        false,
+      );
+      const keys = page.getByRole("region", { name: "Your own software" });
+      // Keys are for a developer: closed until "For your developer" opens.
+      assert.equal(
+        await keys
+          .getByRole("button", { name: "Create API key", exact: true })
+          .isVisible(),
+        false,
+      );
+      await keys.getByText("For your developer", { exact: true }).click();
+      await keys
+        .getByRole("button", { name: "Create API key", exact: true })
+        .waitFor();
+      assert.ok(await fits(page));
+      assert.deepEqual(errors, []);
+    },
+  );
+
+  await t.test(
+    "an owner reveals a key on Connect; an admin sees the keys but cannot change them",
+    async () => {
+      const keyList = {
+        org: [
+          {
+            id: "key-1",
+            name: "Booking engine",
+            prefix: "wfg_test",
+            status: "active",
+            version: 1,
+            scopes: ["guest-invitations:create"],
+            targetTypes: ["gate"],
+          },
+        ],
+      };
+      const owner = await openWorkspace(
+        t,
+        site,
+        fixture("owner", { apiKeys: keyList }),
+        { query: "?view=connect" },
+      );
+      await loaded(owner.page, "connect");
+      const ownerKeys = owner.page.getByRole("region", {
+        name: "Your own software",
+      });
+      await ownerKeys.getByText("For your developer", { exact: true }).click();
+      await ownerKeys
+        .getByRole("button", { name: "Reveal private API key", exact: true })
+        .click();
+      await ownerKeys.locator("textarea").waitFor();
+      assert.equal(
+        await ownerKeys.locator("textarea").inputValue(),
+        "wfg_test_private_value",
+      );
+      // The key on screen is the confirmation: no "revealed", "created" or
+      // "revoked" line; what matters sits in an ⓘ by the button.
+      const keyStatus = ownerKeys.locator('p[role="status"]');
+      assert.equal(await keyStatus.textContent(), "");
+      for (const [name, call] of [
+        ["Rotate API key", "rotate"],
+        ["Revoke API key", "revoke"],
+      ]) {
+        await ownerKeys.getByRole("button", { name, exact: true }).click();
+        await owner.page.waitForFunction(
+          (call) =>
+            window.fixture.requests.some(
+              (entry) =>
+                entry.call ===
+                `POST /api/v1/organizations/org/api-keys/key-1/${call}`,
+            ),
+          call,
+        );
+        await owner.page.waitForTimeout(100);
+        assert.equal(await keyStatus.textContent(), "", name);
+      }
+      assert.ok(
+        (
+          await ownerKeys.locator(".info-tip__bubble").allTextContents()
+        ).includes("Requests that use a revoked key are refused."),
+      );
+      assert.deepEqual(owner.errors, []);
+      const admin = await openWorkspace(
+        t,
+        site,
+        fixture("admin", { apiKeys: keyList }),
+        { query: "?view=connect" },
+      );
+      await loaded(admin.page, "connect");
+      const adminKeys = admin.page.getByRole("region", {
+        name: "Your own software",
+      });
+      await adminKeys.getByText("For your developer", { exact: true }).click();
+      await adminKeys.getByText("Booking engine", { exact: true }).waitFor();
+      for (const name of [
+        "Create API key",
+        "Reveal private API key",
+        "Rotate API key",
+        "Revoke API key",
+      ])
+        assert.equal(
+          await adminKeys.getByRole("button", { name, exact: true }).count(),
+          0,
+          name,
+        );
+      assert.equal(
+        await adminKeys.locator(".info-tip__bubble").textContent(),
+        "Your developer connects your website or software to WIFIGATE with a key. Only the owner can create, change or show keys.",
+      );
+      assert.equal(
+        await admin.page
+          .getByRole("region", { name: "Automatic guest links" })
+          .count(),
+        1,
+      );
+      assert.deepEqual(admin.errors, []);
+    },
+  );
+
+  await t.test(
+    "the phone menu is discoverable and unknown view values select nothing",
+    async () => {
+      const { page, errors } = await openWorkspace(t, site, fixture("viewer"), {
+        query: "?view=not-a-screen&lang=he",
+        viewport: { width: 390, height: 844 },
+      });
+      assert.equal(
+        await page.evaluate(() => document.body.dataset.hostViewId),
+        "my-systems",
+      );
+      assert.equal(new URL(page.url()).searchParams.has("view"), false);
       const menu = page.getByRole("button", { name: "תפריט", exact: true });
       assert.equal(await menu.getAttribute("aria-expanded"), "false");
       await menu.click();
-      await page.getByRole("button", { name: "הזמנות", exact: true }).click();
+      await nav(page, "bookings").click();
       await page.getByRole("region", { name: "הזמנות", exact: true }).waitFor();
       assert.equal(await menu.getAttribute("aria-expanded"), "false");
-      assert.equal(
-        await page.evaluate(
-          () => document.documentElement.scrollWidth <= innerWidth,
-        ),
-        true,
+      assert.ok(await fits(page));
+      assert.deepEqual(errors, []);
+    },
+  );
+  await t.test(
+    "booking system events: Try again reloads the list with one Show more",
+    async () => {
+      const event = (id, status) => ({
+        id,
+        type: "reservation.created",
+        status,
+        provider: "pms",
+        createdAt: "2026-10-14T09:00:00.000Z",
+      });
+      const { page, errors } = await openWorkspace(
+        t,
+        site,
+        fixture("owner", {
+          eventsPageSize: 1,
+          events: {
+            org: [event("e1", "dead_letter"), event("e2", "processed")],
+          },
+        }),
+        { query: "?view=connect" },
       );
+      await loaded(page, "connect");
+      const card = page.getByRole("region", { name: "Your booking system" });
+      const more = card.getByRole("button", { name: "Show more", exact: true });
+      assert.equal(await more.count(), 1);
+      await card
+        .getByRole("button", { name: "Try again", exact: true })
+        .click();
+      await page.waitForFunction(() =>
+        window.fixture.requests.some((entry) =>
+          entry.call.endsWith("/integrations/events/e1/replay"),
+        ),
+      );
+      await page.waitForFunction(
+        () =>
+          window.fixture.requests.filter((entry) =>
+            entry.call.endsWith("/integrations/events"),
+          ).length === 2,
+      );
+      await page.waitForTimeout(100);
+      assert.equal(await more.count(), 1, "one Show more after Try again");
+      await more.click();
+      await card.locator('[data-event-status="processed"]').waitFor();
+      assert.equal(await more.count(), 0);
+      assert.equal(await card.locator(".connect-event-list > li").count(), 2);
       assert.deepEqual(errors, []);
     },
   );

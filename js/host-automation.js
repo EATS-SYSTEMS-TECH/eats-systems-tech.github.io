@@ -1,36 +1,215 @@
-import { hostText, hostLocale } from "./host-locale.js";
+import { hostText } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
-import { field, node } from "./host-ui.js";
-export async function renderHostAutomation({
+import { field, node, infoTip, hostDateTime } from "./host-ui.js";
+import { can } from "./host-permissions.js";
+import { zoneOf } from "./host-booking-model.js";
+
+// Automatic guest links: one policy for the whole organization
+// (GET/PUT …/automation/policy) and, in Activity, the jobs it runs.
+const messages = {
+  DELIVERY_DESTINATION_UNAVAILABLE:
+    "That delivery destination isn't set up. Ask your developer.",
+  DELIVERY_TEMPLATE_UNAVAILABLE:
+    "That guest message template isn't set up. Ask your developer.",
+  VERSION_CONFLICT: "These settings changed. Refresh the page and try again.",
+  INVALID_REQUEST: "Check the numbers and the delivery details.",
+  TOTP_REQUIRED: "Verify your authenticator first, then try again.",
+  SUBSCRIPTION_UNAVAILABLE:
+    "Service is unavailable for this organization right now.",
+  HOST_API_UNAVAILABLE: "Can't reach WIFIGATE right now. Try again.",
+};
+export const automationMessage = (error) =>
+  hostText(messages[error?.code] ?? "That didn't work. Try again.");
+const failure = automationMessage;
+
+const minutesField = (form, label, name, value, tip) => {
+  const input = field(form, label, name, String(value ?? 0), "number");
+  input.min = "0";
+  input.max = "10080";
+  input.step = "1";
+  input.inputMode = "numeric";
+  if (tip) input.parentElement.append(infoTip(hostText(tip)));
+  return input;
+};
+
+// Connect → Automatic guest links (owner and admin: integrations:write).
+export async function renderAutomationPolicy({
   container,
   user,
   organization,
-  properties,
   isCurrent,
-  includePolicy = true,
-  includeJobs = true,
 }) {
-  const manager = ["owner", "admin"].includes(organization.membership.role);
-  if (!manager && organization.membership.role !== "staff") return;
-  const root = `/api/v1/organizations/${encodeURIComponent(organization.id)}/automation`;
+  if (!can(organization, "integrations:write")) return;
+  const path = `/api/v1/organizations/${encodeURIComponent(organization.id)}/automation/policy`;
   const section = node("section", undefined, {
-      "aria-label": "Automatic guest access",
-    }),
-    status = node("p", hostText("Loading automatic access jobs…"), {
-      role: "status",
-      "aria-live": "polite",
-    }),
-    jobs = node("div");
-  section.append(
-    node("h2", hostText("Automatic guest access")),
-    node(
-      "p",
+    "aria-label": "Automatic guest links",
+    class: "connect-card",
+  });
+  const heading = node("div", undefined, { class: "view-heading" });
+  heading.append(
+    node("h2", hostText("Automatic guest links")),
+    infoTip(
       hostText(
-        "Automation requires an enabled property policy and a live administrator delegation for every gate. An imported offline pass remains valid until its effective expiry after cancellation.",
+        "When this is on, every confirmed booking gets its guest link without anyone pressing a button.",
       ),
     ),
-    status,
   );
+  const status = node("p", "", { role: "status", "aria-live": "polite" });
+  section.append(heading, status);
+  container.append(section);
+  const current = () => isCurrent() && section.isConnected;
+  let policy;
+  try {
+    policy = (await portalRequest(user, path)).policy;
+  } catch (error) {
+    if (current()) status.textContent = failure(error);
+    return;
+  }
+  if (!current()) return;
+  const form = node("form", undefined, { class: "connect-form" });
+  const switchLabel = node(
+    "label",
+    hostText("Create guest links automatically"),
+    {
+      class: "connect-switch",
+    },
+  );
+  const enabled = node("input", undefined, {
+    type: "checkbox",
+    name: "enabled",
+    role: "switch",
+  });
+  enabled.checked = Boolean(policy.enabled);
+  switchLabel.prepend(enabled);
+  form.append(switchLabel);
+  const early = minutesField(
+    form,
+    "Minutes the link works before arrival",
+    "earlyAccessMinutes",
+    policy.earlyAccessMinutes,
+  );
+  const late = minutesField(
+    form,
+    "Minutes the link works after leaving",
+    "lateExpiryMinutes",
+    policy.lateExpiryMinutes,
+  );
+  const delivery = node("fieldset", undefined, { class: "choice-list" });
+  delivery.append(node("legend", hostText("Sending the link")));
+  for (const [value, label] of [
+    ["none", "Copy it from the booking"],
+    ["partner-webhook", "Send it through your booking system"],
+  ]) {
+    const choice = node("label", undefined, { class: "choice" });
+    const radio = node("input", undefined, {
+      type: "radio",
+      name: "channel",
+      value,
+    });
+    radio.checked = (policy.channel ?? "none") === value;
+    choice.append(
+      radio,
+      node("span", hostText(label), { class: "choice__name" }),
+    );
+    delivery.append(choice);
+  }
+  form.append(delivery);
+  // The delivery ids are for a developer.
+  const developer = node("details", undefined, {
+    class: "connect-developer",
+  });
+  developer.append(node("summary", hostText("For your developer")));
+  const destination = field(
+    developer,
+    "Delivery destination ID",
+    "destinationId",
+    policy.destinationId ?? "",
+  );
+  destination.pattern = "[A-Za-z0-9_-]+";
+  destination.maxLength = 100;
+  destination.dir = "ltr";
+  const template = field(
+    developer,
+    "Guest message template ID",
+    "guestTemplateId",
+    policy.guestTemplateId ?? "",
+  );
+  template.required = false;
+  template.pattern = "[A-Za-z0-9_-]+";
+  template.maxLength = 100;
+  template.dir = "ltr";
+  form.append(developer);
+  const channel = () =>
+    form.querySelector('input[name="channel"]:checked')?.value ?? "none";
+  const syncChannel = () => {
+    const webhook = channel() === "partner-webhook";
+    destination.required = webhook;
+    destination.disabled = template.disabled = !webhook;
+    if (webhook && !destination.value) developer.open = true;
+  };
+  delivery.addEventListener("change", syncChannel);
+  syncChannel();
+  const save = node("button", hostText("Save"), { type: "submit" });
+  form.append(save);
+  section.append(form);
+  let version = policy.version ?? 0;
+  let attempt;
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (save.disabled || !form.reportValidity()) return;
+    const body = {
+      enabled: enabled.checked,
+      earlyAccessMinutes: Number(early.value),
+      lateExpiryMinutes: Number(late.value),
+      channel: channel(),
+      ...(channel() === "partner-webhook"
+        ? {
+            destinationId: destination.value.trim(),
+            ...(template.value.trim()
+              ? { guestTemplateId: template.value.trim() }
+              : {}),
+          }
+        : {}),
+      ...(version ? { version } : {}),
+    };
+    const signature = JSON.stringify(body);
+    if (attempt?.signature !== signature)
+      attempt = { signature, key: crypto.randomUUID() };
+    save.disabled = true;
+    status.textContent = "";
+    try {
+      const result = await portalRequest(user, path, "PUT", body, attempt.key);
+      if (!current()) return;
+      attempt = undefined;
+      version = result?.policy?.version ?? version + 1;
+    } catch (error) {
+      if (current()) status.textContent = failure(error);
+    } finally {
+      if (current()) save.disabled = false;
+    }
+  });
+}
+
+// Activity → Automatic links: the automatic guest links waiting, failed or
+// paused. Each says where it stands in words; its booking id, attempts and
+// error code are for a developer.
+export async function renderAutomationJobs({
+  container,
+  user,
+  organization,
+  isCurrent,
+}) {
+  if (!can(organization, "operations:write")) return;
+  const root = `/api/v1/organizations/${encodeURIComponent(organization.id)}/automation`;
+  const section = node("section", undefined, {
+    "aria-label": "Automatic links",
+  });
+  const status = node("p", hostText("Loading…"), {
+    role: "status",
+    "aria-live": "polite",
+  });
+  const jobs = node("div");
+  section.append(node("h2", hostText("Automatic links")), status);
   container.append(section);
   const current = () => isCurrent() && section.isConnected;
   const attempts = new Map();
@@ -41,153 +220,38 @@ export async function renderHostAutomation({
     button.disabled = true;
     try {
       await operation();
-    } catch {
-      if (current())
-        status.textContent = hostText(
-          "Automatic access operation failed. Reload current settings and verify permissions before retrying.",
-        );
+    } catch (error) {
+      if (current()) status.textContent = failure(error);
     } finally {
       busy = false;
       if (current()) button.disabled = false;
     }
   }
-  async function mutate(path, method, body) {
-    const signature = `${method}:${path}:${JSON.stringify(body)}`;
+  async function mutate(path, body) {
+    const signature = `${path}:${JSON.stringify(body)}`;
     if (!attempts.has(signature)) attempts.set(signature, crypto.randomUUID());
-    return portalRequest(user, path, method, body, attempts.get(signature));
+    return portalRequest(user, path, "POST", body, attempts.get(signature));
   }
-  if (includePolicy && manager && properties.length) {
-    const form = node("form"),
-      property = field(
-        form,
-        "Automation property",
-        "propertyId",
-        "",
-        "text",
-        properties.map((entry) => [entry.id, entry.name]),
-      );
-    const enabledLabel = node("label", hostText("Enable automatic access")),
-      enabled = node("input", undefined, { type: "checkbox", name: "enabled" });
-    enabledLabel.prepend(enabled);
-    form.append(enabledLabel);
-    const early = field(
-        form,
-        "Early access minutes",
-        "earlyAccessMinutes",
-        "0",
-        "number",
-      ),
-      late = field(
-        form,
-        "Late expiry minutes",
-        "lateExpiryMinutes",
-        "0",
-        "number",
-      );
-    for (const input of [early, late]) {
-      input.min = "0";
-      input.max = "10080";
-      input.step = "1";
-    }
-    const channel = field(
-      form,
-      "Automatic delivery channel",
-      "channel",
-      "none",
-      "text",
-      [
-        ["none", hostText("Generate only")],
-        ["partner-webhook", hostText("Configured partner delivery")],
-      ],
-    );
-    const destination = field(form, "Delivery destination ID", "destinationId");
-    destination.maxLength = 100;
-    destination.pattern = "[A-Za-z0-9_-]+";
-    const template = field(
-      form,
-      "Guest message template ID (optional)",
-      "guestTemplateId",
-    );
-    template.required = false;
-    template.maxLength = 100;
-    template.pattern = "[A-Za-z0-9_-]+";
-    const syncChannel = () => {
-      destination.required = channel.value === "partner-webhook";
-      destination.disabled = !destination.required;
-      template.disabled = !destination.required;
-    };
-    channel.addEventListener("change", syncChannel);
-    syncChannel();
-    let version = 0,
-      loadedProperty;
-    const load = node("button", hostText("Load automation policy"), {
-        type: "button",
-      }),
-      save = node("button", hostText("Save automation policy"), {
-        type: "submit",
-        disabled: "",
-      });
-    form.append(load, save);
-    section.append(form);
-    property.addEventListener("change", () => {
-      loadedProperty = undefined;
-      save.disabled = true;
-    });
-    load.addEventListener("click", () =>
-      run(load, async () => {
-        const id = property.value,
-          response = await portalRequest(
-            user,
-            `${root}/properties/${encodeURIComponent(id)}/policy`,
-          );
-        if (!current() || property.value !== id) return;
-        const policy = response.policy;
-        loadedProperty = id;
-        version = policy.version;
-        enabled.checked = policy.enabled;
-        early.value = String(policy.earlyAccessMinutes);
-        late.value = String(policy.lateExpiryMinutes);
-        channel.value = policy.channel;
-        destination.value = policy.destinationId ?? "";
-        template.value = policy.guestTemplateId ?? "";
-        syncChannel();
-        save.disabled = false;
-        status.textContent = hostText("Automation policy loaded.");
-      }),
-    );
+  const reasonForm = (job, action, label, buttonLabel, tip) => {
+    const form = node("form");
+    const reason = field(form, label, "reason");
+    reason.minLength = 5;
+    reason.maxLength = 200;
+    const button = node("button", hostText(buttonLabel), { type: "submit" });
+    form.append(button);
+    if (tip) form.append(infoTip(hostText(tip)));
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      if (!form.reportValidity() || loadedProperty !== property.value) return;
-      void run(save, async () => {
-        const id = property.value,
-          body = {
-            enabled: enabled.checked,
-            earlyAccessMinutes: Number(early.value),
-            lateExpiryMinutes: Number(late.value),
-            channel: channel.value,
-            ...(channel.value === "partner-webhook"
-              ? {
-                  destinationId: destination.value,
-                  ...(template.value.trim()
-                    ? { guestTemplateId: template.value.trim() }
-                    : {}),
-                }
-              : {}),
-            ...(version ? { version } : {}),
-          };
-        const response = await mutate(
-          `${root}/properties/${encodeURIComponent(id)}/policy`,
-          "PUT",
-          body,
-        );
-        if (!current() || property.value !== id) return;
-        version = response.policy.version;
-        status.textContent = hostText(
-          "Automation policy saved. Review paused jobs before retrying them.",
-        );
+      if (!form.reportValidity()) return;
+      void run(button, async () => {
+        await mutate(`${root}/jobs/${encodeURIComponent(job.id)}/${action}`, {
+          reason: reason.value,
+        });
+        if (current()) await loadJobs();
       });
     });
-  }
+    return form;
+  };
   async function loadJobs(cursor, append = false) {
     const response = await portalRequest(
       user,
@@ -196,84 +260,59 @@ export async function renderHostAutomation({
     if (!current()) return;
     if (!append) jobs.replaceChildren();
     for (const job of response.items) {
-      const row = node("article");
-      row.append(
+      const row = node("article", undefined, { "data-job-id": job.id });
+      const line = node("p");
+      line.append(node("strong", hostText(job.status)));
+      if (job.availableAt)
+        line.append(
+          ` · ${hostDateTime(job.availableAt, zoneOf(organization))}`,
+        );
+      const developer = node("details", undefined, {
+        class: "connect-developer",
+      });
+      developer.append(
+        node("summary", hostText("For your developer")),
         node(
           "p",
-          hostText("{p0} · revision {p1} · {p2} · attempts {p3}", {
-            p0: job.reservationId,
-            p1: job.reservationVersion,
-            p2: hostText(job.status),
-            p3: job.attempts,
-          }),
+          [
+            job.reservationId,
+            Number.isInteger(job.reservationVersion)
+              ? `v${job.reservationVersion}`
+              : "",
+            Number.isInteger(job.attempts) ? `attempts ${job.attempts}` : "",
+            job.lastErrorCode,
+          ]
+            .filter(Boolean)
+            .join(" · "),
+          { dir: "ltr", class: "connect-code" },
         ),
       );
-      if (job.lastErrorCode) row.append(node("p", job.lastErrorCode));
-      if (job.deliveryId)
+      row.append(line, developer);
+      if (!["delivered", "expired", "cancelled"].includes(job.status))
         row.append(
-          node("p", hostText("Delivery receipt: {p0}", { p0: job.deliveryId })),
+          reasonForm(
+            job,
+            "stop",
+            "Automatic access stop reason",
+            "Stop automatic access",
+            "A pass the guest already has in the app keeps working until it ends.",
+          ),
         );
-      if (!["delivered", "expired", "cancelled"].includes(job.status)) {
-        const form = node("form"),
-          reason = field(form, "Automatic access stop reason", "reason");
-        reason.minLength = 5;
-        reason.maxLength = 200;
-        const stop = node("button", hostText("Stop automatic access"), {
-          type: "submit",
-        });
-        form.append(stop);
-        form.addEventListener("submit", (event) => {
-          event.preventDefault();
-          if (!form.reportValidity()) return;
-          void run(stop, async () => {
-            await mutate(
-              `${root}/jobs/${encodeURIComponent(job.id)}/stop`,
-              "POST",
-              { reason: reason.value },
-            );
-            if (current()) {
-              await loadJobs();
-              status.textContent = hostText(
-                "Automatic access stopped. An already imported offline pass remains valid until its expiry.",
-              );
-            }
-          });
-        });
-        row.append(form);
-      }
-      if (["failed", "paused"].includes(job.status)) {
-        const form = node("form"),
-          reason = field(form, "Automatic access retry reason", "reason");
-        reason.minLength = 5;
-        reason.maxLength = 200;
-        const retry = node("button", hostText("Retry automatic access"), {
-          type: "submit",
-        });
-        form.append(retry);
-        form.addEventListener("submit", (event) => {
-          event.preventDefault();
-          if (!form.reportValidity()) return;
-          void run(retry, async () => {
-            await mutate(
-              `${root}/jobs/${encodeURIComponent(job.id)}/retry`,
-              "POST",
-              { reason: reason.value },
-            );
-            if (current()) {
-              status.textContent = hostText(
-                "Automatic access job queued for a verified retry.",
-              );
-              await loadJobs();
-            }
-          });
-        });
-        row.append(form);
-      }
+      if (["failed", "paused"].includes(job.status))
+        row.append(
+          reasonForm(
+            job,
+            "retry",
+            "Automatic access retry reason",
+            "Retry automatic access",
+          ),
+        );
       jobs.append(row);
     }
     if (response.nextCursor) {
-      const more = node("button", hostText("Load more automatic access jobs"), {
+      const more = node("button", hostText("Show more"), {
         type: "button",
+        class: "button-secondary",
       });
       more.addEventListener("click", () =>
         run(more, async () => {
@@ -284,16 +323,10 @@ export async function renderHostAutomation({
       jobs.append(more);
     }
     status.textContent = response.items.length
-      ? hostText("Automatic access jobs loaded.")
-      : hostText("No automatic access jobs yet.");
+      ? ""
+      : hostText("No automatic links are waiting.");
   }
-  if (!includeJobs) {
-    status.textContent = hostText(
-      "Load a property policy to review or change automation.",
-    );
-    return;
-  }
-  const refresh = node("button", hostText("Refresh automatic access jobs"), {
+  const refresh = node("button", hostText("Refresh"), {
     type: "button",
   });
   refresh.addEventListener("click", () => run(refresh, () => loadJobs()));

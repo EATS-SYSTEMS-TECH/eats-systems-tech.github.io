@@ -1,7 +1,8 @@
 import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
-import { field, node, hostDateTime } from "./host-ui.js";
+import { field, node, infoTip, hostDateTime } from "./host-ui.js";
 import { requestWithRecentIdentity } from "./host-recent-identity.js";
+import { can } from "./host-permissions.js";
 const messages = {
   RECENT_AUTH_REQUIRED: hostText(
     "Sign out and sign in again with your authenticator before using support access.",
@@ -22,6 +23,20 @@ const messages = {
     "This organization needs an operator capacity review before loading diagnostics.",
   ),
 };
+// What a support approval is for, in the words of the problem it solves.
+const purposes = {
+  access: "Someone can't get in",
+  delivery: "Guest links don't arrive",
+  synchronization: "Bookings don't come through",
+  capacity: "Limits and usage",
+};
+// A title whose ⓘ explains it, in place of a hint paragraph.
+function heading(title, tip) {
+  const element = node("div", undefined, { class: "view-heading" });
+  element.append(node("h2", hostText(title)), infoTip(hostText(tip)));
+  return element;
+}
+
 export function renderSupportDiagnostics({
   container,
   user,
@@ -42,12 +57,9 @@ export function renderSupportDiagnostics({
   org.pattern = grant.pattern = "[A-Za-z0-9_-]{1,100}";
   form.append(load);
   section.append(
-    node("h2", hostText("Approved support diagnostics")),
-    node(
-      "p",
-      hostText(
-        "Read anonymous queue-state counts using an owner's temporary approval. This does not add membership or grant access to guest records, keys or system changes.",
-      ),
+    heading(
+      "Approved support diagnostics",
+      "Read anonymous queue-state counts using an owner's temporary approval. This does not add membership or grant access to guest records, keys or system changes.",
     ),
     form,
     output,
@@ -114,7 +126,8 @@ export async function renderSupportOwner({
   organization,
   isCurrent,
 }) {
-  if (organization.membership.role !== "owner") return;
+  // Support access: the owner (organization:write).
+  if (!can(organization, "organization:write")) return;
   const section = node("section", undefined, {
       "aria-label": "Temporary support access",
     }),
@@ -135,31 +148,32 @@ export async function renderSupportOwner({
         ["60", hostText("1 hour")],
       ],
     ),
-    purpose = field(form, "Support purpose", "purpose", "delivery", "text", [
-      ["access", hostText("Access")],
-      ["delivery", hostText("Delivery")],
-      ["synchronization", hostText("Synchronization")],
-      ["capacity", hostText("Capacity")],
-    ]),
+    purpose = field(
+      form,
+      "Support purpose",
+      "purpose",
+      "delivery",
+      "text",
+      Object.entries(purposes).map(([id, label]) => [id, hostText(label)]),
+    ),
     create = node("button", hostText("Approve temporary support"), {
       type: "submit",
     }),
     refresh = node("button", hostText("Refresh support approvals"), {
       type: "button",
+      class: "button-secondary",
     });
   form.append(create);
+  rows.className = "support-approvals";
   section.append(
-    node("h2", hostText("Temporary support access")),
-    node(
-      "p",
-      hostText(
-        "An approved administrator with an authenticator can view anonymous operational counts for the selected time. The approval expires automatically and can be revoked immediately.",
-      ),
+    heading(
+      "Temporary support access",
+      "An approved administrator with an authenticator can view anonymous operational counts for the selected time. The approval expires automatically and can be revoked immediately.",
     ),
     form,
-    refresh,
     status,
     rows,
+    refresh,
   );
   container.append(section);
   const root = `/api/v1/organizations/${encodeURIComponent(organization.id)}/support/grants`,
@@ -206,32 +220,35 @@ export async function renderSupportOwner({
     if (!current()) return;
     if (!append) rows.replaceChildren();
     for (const item of result.items) {
-      const row = node("article");
+      const row = node("article", undefined, { class: "support-approval" });
+      // The ids are what WIFIGATE support types in; they stay folded away.
+      const ids = node("details", undefined, { class: "connect-developer" });
+      ids.append(
+        node("summary", hostText("For WIFIGATE support")),
+        node("p", hostText("Support approval ID: {p0}", { p0: item.id }), {
+          dir: "auto",
+        }),
+        node(
+          "p",
+          hostText("Support organization ID: {p0}", { p0: organization.id }),
+          { dir: "auto" },
+        ),
+      );
       row.append(
         node(
           "p",
           hostText("{p0} · {p1} · expires {p2}", {
-            p0: hostText(
-              {
-                access: "Access",
-                delivery: "Delivery",
-                synchronization: "Synchronization",
-                capacity: "Capacity",
-              }[item.purpose] ?? "Unavailable",
-            ),
+            p0: hostText(purposes[item.purpose] ?? "Unavailable"),
             p1: hostText(item.status),
             p2: hostDateTime(item.endsAt),
           }),
         ),
-        node("p", hostText("Support approval ID: {p0}", { p0: item.id })),
-        node(
-          "p",
-          hostText("Support organization ID: {p0}", { p0: organization.id }),
-        ),
+        ids,
       );
       if (item.status === "active") {
         const revoke = node("button", hostText("Revoke support approval"), {
           type: "button",
+          class: "button-danger",
         });
         revoke.addEventListener("click", () =>
           run(revoke, async () => {
@@ -239,8 +256,6 @@ export async function renderSupportOwner({
               version: item.version,
             });
             await load();
-            if (current())
-              status.textContent = hostText("Support approval revoked.");
           }),
         );
         row.append(revoke);
@@ -248,10 +263,15 @@ export async function renderSupportOwner({
       rows.append(row);
     }
     if (!result.items.length)
-      rows.append(node("p", hostText("No support approvals on this page.")));
+      rows.append(
+        node("p", hostText("No support access is open."), {
+          class: "connect-empty",
+        }),
+      );
     if (result.nextCursor) {
       const more = node("button", hostText("Load more support approvals"), {
         type: "button",
+        class: "button-secondary",
       });
       more.addEventListener("click", () =>
         run(more, async () => {
@@ -272,12 +292,10 @@ export async function renderSupportOwner({
         durationMinutes: Number(duration.value),
         purpose: purpose.value,
       };
-      const result = await write("", body);
+      await write("", body);
       await load();
       if (current()) {
-        status.textContent = hostText("Support approval created: {p0}", {
-          p0: result.grant.id,
-        });
+        status.textContent = "";
         keys.delete(JSON.stringify(["", body]));
       }
     });

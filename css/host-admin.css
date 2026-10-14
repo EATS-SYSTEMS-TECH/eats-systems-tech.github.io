@@ -1,6 +1,7 @@
-body:not([data-host-view="Overview"]) #admin-overview,
-body[data-host-view="Overview"] #workspace-org-switcher,
-body[data-host-view="Overview"] #host-management {
+/* The administrator overview (Platform) shows alone in the workspace. */
+body:not([data-host-view-id="overview"]) #admin-overview,
+body[data-host-view-id="overview"] #workspace-org-switcher,
+body[data-host-view-id="overview"] #host-management {
   display: none;
 }
 .admin-tiles {
@@ -81,7 +82,7 @@ body[data-host-view="Overview"] #host-management {
   border: 0;
   font-weight: 700;
   text-align: start;
-  min-height: 32px;
+  min-height: 44px;
   font-size: 15px;
 }
 #admin-overview .admin-person-link:hover {
@@ -177,13 +178,11 @@ body[data-host-view="Overview"] #host-management {
   color: white;
   white-space: normal;
 }
-.host-role-badge:hover .host-role-explanation,
-.host-role-badge:focus .host-role-explanation {
+.host-role-badge:hover .host-role-explanation {
   display: block;
 }
 .admin-tiles button:focus-visible,
-.admin-row button:focus-visible,
-.host-role-badge:focus-visible {
+.admin-row button:focus-visible {
   outline: 3px solid #245fc6;
   outline-offset: 3px;
 }
@@ -199,38 +198,5 @@ body[data-host-view="Overview"] #host-management {
   }
   .admin-row {
     flex-wrap: wrap;
-  }
-}
-html[dir="rtl"] .portal-dashboard:has(.host-sidebar:not([hidden])) {
-  padding-left: 0;
-  padding-right: 264px;
-}
-html[dir="rtl"] .host-sidebar {
-  left: auto;
-  right: 0;
-}
-@media (min-width: 761px) {
-  .host-sidebar .sidebar-profile {
-    background: #192b3d;
-  }
-  html[dir="rtl"] .sidebar-profile {
-    left: auto;
-    right: 16px;
-  }
-  html[dir="rtl"]
-    .portal-dashboard:has(#host-sidebar:not([hidden]))
-    .account-menu {
-    left: auto;
-    right: 24px;
-  }
-}
-@media (min-width: 761px) and (max-width: 960px) {
-  html[dir="rtl"] .portal-dashboard:has(.host-sidebar:not([hidden])) {
-    padding-right: 210px;
-  }
-}
-@media (max-width: 760px) {
-  html[dir="rtl"] .portal-dashboard:has(.host-sidebar:not([hidden])) {
-    padding-right: 0;
   }
 }

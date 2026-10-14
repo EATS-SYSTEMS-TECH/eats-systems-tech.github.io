@@ -1,743 +1,285 @@
 import { hostText, hostLocale } from "./host-locale.js";
 import { calendarSpans } from "./host-calendar-layout.js";
 import { portalRequest } from "./api/index.js";
-import { readHostPages } from "./host-pages.js";
-import { node, field, hostDateTime } from "./host-ui.js";
-import { renderHostAccessGrants } from "./host-access-grants.js";
+import { node, infoTip, isolatedText } from "./host-ui.js";
+import { iconSrc, emptyState } from "./host-system-cards.js";
+import { can, servicePaused } from "./host-permissions.js";
+import {
+  zoneOf,
+  dateAt,
+  dayStart,
+  todayIn,
+  addDays,
+  readReservation,
+  guestName,
+  systemLabel,
+  statusLabel,
+  statusBadge,
+  statuses,
+  stayText,
+  timeText,
+  dayText,
+  bookingMessage,
+  noSystem,
+} from "./host-booking-model.js";
 
-const states = ["draft", "confirmed", "changed", "cancelled", "completed"];
-const reservationGuestName = (record) =>
-  record.guestRedactedAt
-    ? hostText("Guest details removed")
-    : record.guest.name || hostText("Guest details removed");
+// Calendar: one row per active system of the organization, days across, in
+// the organization's time zone. It starts with two weeks when they fit the
+// space it has, else one week, and where one week does not fit either (a
+// phone) it is an agenda (one list per day). An empty cell from today on
+// and "+ Booking" open the booking sheet; a booking opens its details.
 let sessionGeneration = 0;
-let filterListener;
+let listeners;
 export function clearHostCalendar() {
   sessionGeneration++;
-  filterListener?.abort();
-  filterListener = undefined;
+  listeners?.abort();
+  listeners = undefined;
 }
-const dateAt = (value, timezone) =>
-  new Intl.DateTimeFormat("en-CA", {
-    timeZone: timezone,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).format(new Date(value));
-const localAt = (value, timezone) => {
-  const parts = Object.fromEntries(
-    new Intl.DateTimeFormat("en-CA", {
-      timeZone: timezone,
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      hourCycle: "h23",
-    })
-      .formatToParts(new Date(value))
-      .map((item) => [item.type, item.value]),
-  );
-  return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
-};
-const addDays = (date, days) =>
-  new Date(Date.parse(`${date}T12:00:00Z`) + days * 86400000)
-    .toISOString()
-    .slice(0, 10);
-const errors = {
-  RESERVATION_OVERLAP: hostText(
-    "This room is already reserved during that window.",
-  ),
-  VERSION_CONFLICT: hostText(
-    "This reservation changed. Close this form and reload it before saving.",
-  ),
-  INVALID_TRANSITION: hostText(
-    "This state change is not allowed. Completed and cancelled reservations are final.",
-  ),
-  INVALID_LOCAL_TIME: hostText(
-    "That local time does not exist because of a clock change. Choose another time.",
-  ),
-  AMBIGUOUS_LOCAL_TIME: hostText(
-    "That local time occurs twice. Choose the earlier or later occurrence.",
-  ),
-  SYSTEM_UNAVAILABLE: hostText(
-    "Choose active access systems mapped to this room or property.",
-  ),
-  TENANT_ACCESS_DENIED: hostText(
-    "Your organization access has changed. Refresh your account.",
-  ),
-  INVALID_REQUEST: hostText(
-    "Check the guest phone, time window and selected systems.",
-  ),
-  RATE_LIMITED: hostText(
-    "Too many requests. Wait a moment and retry with the same form.",
-  ),
-  SUBSCRIPTION_UNAVAILABLE: hostText(
-    "Service is unavailable. An owner can review the subscription in Billing statements.",
-  ),
-};
-export async function renderHostCalendar({
-  container,
-  user,
-  organization,
-  properties,
-  rooms,
-  isCurrent,
-  mode = "calendar",
-}) {
-  clearHostCalendar();
-  if (!properties.length) return;
-  const epoch = sessionGeneration;
-  const current = () => epoch === sessionGeneration && isCurrent();
-  const path = (suffix = "") =>
-    `/api/v1/organizations/${encodeURIComponent(organization.id)}/reservations${suffix}`;
-  const canWrite =
-    ["owner", "admin", "staff"].includes(organization.membership.role) &&
-    organization.workspace?.service?.available !== false;
-  const listMode = mode === "reservations";
-  const section = node("section", undefined, {
-    "aria-label": listMode ? "Reservations" : "Reservation calendar",
-    class: listMode ? "host-reservations-view" : "host-calendar",
+const ranges = [
+  ["week", "Week"],
+  ["two-week", "2 weeks"],
+  ["month", "Month"],
+];
+const maxPages = 10;
+// The grid's widths (css/host-dashboard.css): the system column, then one
+// column of at least 56px (and its border) per day.
+const systemColumn = 152;
+const dayColumn = 57;
+const gridWidth = (days) => systemColumn + days * dayColumn;
+
+// The "+ Booking" button: blocked with an ⓘ while the service is paused.
+export function newBookingButton(organization, onClick) {
+  const button = node("button", hostText("+ Booking"), {
+    type: "button",
+    "aria-label": "New booking",
+    "data-new-booking": "",
   });
-  const rangeTitle = node(
-    "h2",
-    hostText(listMode ? "Reservations" : "Reservation calendar"),
-  );
-  const controls = node("form", undefined, {
-    class: "calendar-controls",
-    id: `calendar-filters-${crypto.randomUUID()}`,
-  });
-  const propertySelect = field(
-    controls,
-    listMode ? "Reservation property" : "Calendar property",
-    "propertyId",
-    listMode ? "" : properties[0].id,
-    "text",
-    [
-      ["", hostText("All properties")],
-      ...properties.map((item) => [item.id, item.name]),
-    ],
-  );
-  const roomFilter = field(
-    controls,
-    listMode ? "Reservation room filter" : "Calendar room",
-    "roomId",
-    "",
-    "text",
-    [["", hostText("All rooms")]],
-  );
-  const mapRooms = () => {
-    roomFilter.replaceChildren(
-      node("option", hostText("All rooms"), { value: "" }),
-      ...rooms
-        .filter(
-          (item) =>
-            !propertySelect.value || item.propertyId === propertySelect.value,
-        )
-        .map((item) => node("option", item.name, { value: item.id })),
-    );
-  };
-  mapRooms();
-  const view = field(controls, "Calendar view", "view", "two-week", "text", [
-    ["week", hostText("Week")],
-    ["two-week", hostText("Two weeks")],
-    ["three-week", hostText("Three weeks")],
-    ["month", hostText("Month")],
-  ]);
-  const date = field(
-    controls,
-    "Start date",
-    "date",
-    dateAt(Date.now(), properties[0].timezone),
-    "date",
-  );
-  const endDate = listMode
-    ? field(
-        controls,
-        "End date (exclusive)",
-        "endDate",
-        addDays(date.value, 30),
-        "date",
-      )
-    : undefined;
-  const search = field(controls, "Search guest or reference", "q");
-  search.required = false;
-  const filter = field(controls, "Reservation status", "status", "", "text", [
-    ["", hostText("All states")],
-    ...states.map((state) => [state, hostText(state)]),
-  ]);
-  filter.required = false;
-  controls.append(
-    node(
-      "button",
-      hostText(listMode ? "Search reservations" : "Update calendar"),
-      {
-        type: "submit",
-      },
+  button.addEventListener("click", () => onClick(button));
+  if (!servicePaused(organization)) return button;
+  button.disabled = true;
+  const holder = node("span", undefined, { class: "system-action-blocked" });
+  holder.append(
+    button,
+    infoTip(
+      hostText("Service is unavailable for this organization right now."),
     ),
   );
-  const navigation = node("div", undefined, { class: "calendar-navigation" });
+  return holder;
+}
+
+// The empty Calendar and Bookings: one sentence and one way to systems.
+export function noSystemsState(organization) {
+  const open = node("button", hostText("Organization systems"), {
+    type: "button",
+    class: "button-secondary",
+  });
+  open.addEventListener("click", () =>
+    window.dispatchEvent(
+      new CustomEvent("host:workspace-view", { detail: "systems" }),
+    ),
+  );
+  return emptyState(
+    hostText(
+      can(organization, "systems:write")
+        ? "Add a system from the WIFIGATE app to start taking bookings."
+        : "This organization has no systems yet.",
+    ),
+    { action: open },
+  );
+}
+
+const select = (label, name, options) => {
+  const wrapper = node("label", hostText(label), { class: "calendar-filter" });
+  const input = node("select", undefined, { name });
+  for (const [value, text] of options)
+    input.append(node("option", text, { value }));
+  wrapper.append(input);
+  return [wrapper, input];
+};
+
+// context: {container, user, organization, systems (active, sorted),
+// isCurrent, openBooking(record, trigger), newBooking({systemId, date,
+// trigger})}. Returns {reload}.
+export async function renderHostCalendar(context) {
+  clearHostCalendar();
+  const { container, user, organization, systems } = context;
+  const epoch = sessionGeneration;
+  listeners = new AbortController();
+  const signal = listeners.signal;
+  const section = node("section", undefined, {
+    "aria-label": "Calendar",
+    class: "host-calendar",
+  });
+  container.append(section);
+  const current = () =>
+    epoch === sessionGeneration && context.isCurrent() && section.isConnected;
+  // No active systems: the one sentence and its action. Bookings of removed
+  // systems still show below it when the dates hold any.
+  if (!systems.length) {
+    section.classList.add("host-calendar--empty");
+    section.append(noSystemsState(organization));
+  }
+  const zone = zoneOf(organization);
+  const base = `/api/v1/organizations/${encodeURIComponent(organization.id)}`;
+  const canBook =
+    can(organization, "reservations:write") && !servicePaused(organization);
+  const systemsById = new Map(systems.map((item) => [item.id, item]));
+
+  const heading = node("div", undefined, { class: "calendar-heading" });
+  const title = node("h2", "", { class: "calendar-heading__title" });
+  const status = node("p", "", {
+    class: "calendar-heading__status",
+    role: "status",
+    "aria-live": "polite",
+  });
+  const headingText = node("div", undefined, {
+    class: "calendar-heading-text",
+  });
+  headingText.append(title, status);
+  heading.append(headingText);
+  if (can(organization, "reservations:write") && systems.length)
+    heading.append(
+      newBookingButton(organization, (button) => {
+        // Today, or the first day shown when the dates shown are later
+        // (a new booking never starts on a day already gone).
+        const day = todayIn(zone);
+        context.newBooking({
+          systemId: systemFilter.value || undefined,
+          date: start > day ? start : day,
+          trigger: button,
+        });
+      }),
+    );
+
+  const toolbar = node("div", undefined, { class: "calendar-toolbar" });
+  const moves = node("div", undefined, { class: "calendar-navigation" });
   const previous = node("button", hostText("Previous"), { type: "button" });
   const today = node("button", hostText("Today"), { type: "button" });
   const next = node("button", hostText("Next"), { type: "button" });
-  navigation.append(previous, today, next);
-  const add = node("button", hostText("Add Reservation"), {
-    type: "button",
-    "aria-label": "New reservation",
+  moves.append(previous, today, next);
+  const rangeGroup = node("div", undefined, {
+    class: "calendar-ranges",
+    role: "group",
+    "aria-label": "Calendar range",
   });
-  const status = node("p", "", { role: "status", "aria-live": "polite" });
-  const refreshed = node("p", "", { class: "calendar-refreshed" });
-  const editorDialog = node("dialog", undefined, {
-      class: "reservation-editor",
-      "aria-label": "Reservation details",
-    }),
-    editor = node("div", undefined, { class: "reservation-editor-frame" });
-  editorDialog.append(editor);
-  let editorEpoch = 0;
-  function clearEditor() {
-    editorEpoch++;
-    editor.replaceChildren();
-    if (editorDialog.open) editorDialog.close();
-  }
-  editorDialog.addEventListener("cancel", () => {
-    editorEpoch++;
-    editor.replaceChildren();
+  // Until the person picks a range, it follows the space (fittingRange).
+  let range = "two-week";
+  let picked = false;
+  const rangeButtons = ranges.map(([value, label]) => {
+    const button = node("button", hostText(label), {
+      type: "button",
+      "data-range": value,
+      "aria-pressed": String(value === range),
+    });
+    button.addEventListener("click", () => {
+      picked = true;
+      setRange(value);
+      void load();
+    });
+    rangeGroup.append(button);
+    return button;
   });
-  editorDialog.addEventListener("close", () => {
-    if (editorDialog.open) return;
-    editorEpoch++;
-    editor.replaceChildren();
-  });
+  const filters = node("div", undefined, { class: "calendar-filters" });
+  const [systemLabelElement, systemFilter] = select("System", "systemId", [
+    ["", hostText("All systems")],
+    ...systems.map((item) => [item.id, item.name]),
+  ]);
+  const [statusLabelElement, statusFilter] = select("Status", "status", [
+    ["", hostText("All bookings")],
+    ...statuses.map((value) => [value, statusLabel(value)]),
+  ]);
+  filters.append(systemLabelElement, statusLabelElement);
+  toolbar.append(moves, rangeGroup, filters);
   const grid = node("div", undefined, {
     class: "calendar-scroll",
     tabindex: "0",
+    role: "region",
     "aria-label": "Calendar table",
   });
-  const heading = node("div", undefined, { class: "calendar-heading" }),
-    headingText = node("div", undefined, { class: "calendar-heading-text" }),
-    headingActions = node("div", undefined, {
-      class: "calendar-heading-actions",
-    });
-  headingText.append(rangeTitle, status, refreshed);
-  search.placeholder = hostText("Search");
-  search.setAttribute("form", controls.id);
-  search.parentElement.classList.add("calendar-search");
-  headingActions.append(search.parentElement, ...(canWrite ? [add] : []));
-  heading.append(headingText, headingActions);
-  const ranges = node("div", undefined, {
-      class: "calendar-ranges",
-      "aria-label": "Calendar range",
-    }),
-    rangeButtons = [];
-  for (const [label, value] of [
-    ["1 Week", "week"],
-    ["2 Weeks", "two-week"],
-    ["3 Weeks", "three-week"],
-    ["1 Month", "month"],
-  ]) {
-    const button = node("button", hostText(label), {
-      type: "button",
-      "aria-pressed": String(view.value === value),
-    });
-    button.addEventListener("click", () => {
-      view.value = value;
-      syncRange();
-      void load();
-    });
-    ranges.append(button);
-    rangeButtons.push([button, value]);
+  section.append(heading, toolbar, grid);
+  function setRange(value) {
+    range = value;
+    if (range === "month") start = `${start.slice(0, 7)}-01`;
+    for (const item of rangeButtons)
+      item.setAttribute("aria-pressed", String(item.dataset.range === range));
   }
-  function syncRange() {
-    for (const [button, value] of rangeButtons)
-      button.setAttribute("aria-pressed", String(view.value === value));
-  }
-  view.parentElement.hidden = true;
-  const toolbar = node("div", undefined, { class: "calendar-toolbar" });
-  toolbar.append(navigation, ranges);
-  toolbar.hidden = listMode;
-  section.append(heading, toolbar, controls, editorDialog, grid);
-  container.append(section);
-  const systemsPage = await readHostPages(
-    user,
-    `/api/v1/organizations/${encodeURIComponent(organization.id)}/systems`,
-    current,
-  );
-  if (!current()) return;
-  const systems = systemsPage.items ?? [];
+  // The space the calendar has: two weeks when they fit, else one week; an
+  // agenda where one week does not fit either. Going back up takes a little
+  // more room, so a scroll bar coming and going never flips it to and fro.
+  const room = 24;
+  let width = 0;
+  let agendaShown = false;
+  const space = () => grid.clientWidth || innerWidth;
+  const agenda = () => space() < gridWidth(7) + (agendaShown ? room : 0);
+  const fittingRange = () =>
+    space() >= gridWidth(14) + (range === "two-week" ? 0 : room)
+      ? "two-week"
+      : "week";
+
+  let start = todayIn(zone);
   let data = [];
-  let cursor;
-  let activeRange;
+  let truncated = false;
   let loading = 0;
-  const collapsedProperties = new Set();
-  const property = () =>
-    properties.find((item) => item.id === propertySelect.value) ?? {
-      name: "All properties",
-      timezone: organization.timezone ?? "UTC",
-    };
+  let loaded = 0;
   const duration = () =>
-    listMode
-      ? (Date.parse(endDate.value) - Date.parse(date.value)) / 86400000
-      : view.value === "week"
-        ? 7
-        : view.value === "two-week"
-          ? 14
-          : view.value === "three-week"
-            ? 21
-            : new Date(
-                Date.UTC(
-                  Number(date.value.slice(0, 4)),
-                  Number(date.value.slice(5, 7)),
-                  0,
-                ),
-              ).getUTCDate();
-  const resolve = async (
-    value,
-    disambiguation = "reject",
-    propertyId = propertySelect.value,
-  ) =>
-    (
-      await portalRequest(user, path("/time-zone/resolve"), "POST", {
-        ...(propertyId ? { propertyId } : {}),
-        localTime: value,
-        disambiguation,
-      })
-    ).instant;
-  function openEditor(record) {
-    clearEditor();
-    const editEpoch = editorEpoch;
-    const readOnly =
-      !canWrite ||
-      (record && ["cancelled", "completed"].includes(record.status));
-    const heading = node(
-      "h3",
-      readOnly
-        ? hostText("Reservation details")
-        : record
-          ? hostText("Edit reservation")
-          : hostText("Create reservation"),
-    );
-    const form = node("form", undefined, {
-      class: "reservation-form",
-      id: `reservation-form-${crypto.randomUUID()}`,
+    range === "week"
+      ? 7
+      : range === "two-week"
+        ? 14
+        : new Date(
+            Date.UTC(Number(start.slice(0, 4)), Number(start.slice(5, 7)), 0),
+          ).getUTCDate();
+  const titleFormat = new Intl.DateTimeFormat(hostLocale, {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+  const label = (record) =>
+    hostText("{p0} · {p1} · {p2} · {p3}", {
+      p0: guestName(record),
+      p1: statusLabel(record.status),
+      p2: systemLabel(record, systemsById),
+      p3: stayText(record, zone),
     });
-    const editorContent = node("div", undefined, {
-      class: "reservation-editor-body",
-    });
-    const actions = node("div", undefined, {
-      class: "reservation-editor-actions",
-    });
-    const editingPropertyId = record?.propertyId ?? propertySelect.value;
-    const zone =
-      properties.find((item) => item.id === editingPropertyId)?.timezone ??
-      record?.timezone ??
-      organization.timezone ??
-      "UTC";
-    const editorCurrent = () =>
-      current() && editEpoch === editorEpoch && editorDialog.open;
-    const roomOptions = rooms.filter(
-      (item) => item.propertyId === editingPropertyId,
-    );
-    if (record && !roomOptions.some((item) => item.id === record.roomId))
-      roomOptions.push({
-        id: record.roomId,
-        name: `${record.roomName || record.roomId} (archived)`,
-      });
-    if (!roomOptions.length) {
-      const close = node("button", hostText("Close reservation"), {
-        type: "button",
-      });
-      close.addEventListener("click", clearEditor);
-      editor.append(
-        node(
-          "p",
-          hostText(
-            "Add a room to this property before creating a reservation.",
-          ),
-        ),
-        close,
-      );
-      editorDialog.showModal();
-      return;
-    }
-    field(form, "Guest name", "name", record ? reservationGuestName(record) : "");
-    field(
-      form,
-      "Guest phone (E.164)",
-      "phone",
-      record?.guest.phone || "",
-      "tel",
-    );
-    const email = field(
-      form,
-      "Guest email (optional)",
-      "email",
-      record?.guest.email || "",
-      "email",
-    );
-    email.required = false;
-    for (const [name, label, max] of [
-      ["floor", "Guest floor (optional)", 50],
-      ["apartment", "Guest apartment (optional)", 80],
-      ["parking", "Guest parking (optional)", 80],
-      ["carNumber", "Guest car number (optional)", 50],
-      ["comment", "Guest comment (optional)", 100],
-    ]) {
-      const input = field(form, label, name, record?.guest[name] || "");
-      input.required = false;
-      input.maxLength = max;
-    }
-    const room = field(
-      form,
-      "Reservation room",
-      "roomId",
-      record?.roomId || roomOptions[0].id,
-      "text",
-      roomOptions.map((item) => [item.id, item.name]),
-    );
-    const targets = field(form, "Access systems", "targetIds", "", "text", []);
-    targets.multiple = true;
-    targets.size = 4;
-    targets.required = false;
-    function mapTargets() {
-      const available = systems.filter(
-        (item) =>
-          item.propertyId === editingPropertyId &&
-          (!item.roomId || item.roomId === room.value),
-      );
-      targets.replaceChildren(
-        ...available.map((item) => {
-          const option = node(
-            "option",
-            `${item.name}${item.status === "active" ? "" : " (disabled)"}`,
-            { value: item.id },
-          );
-          option.selected = record
-            ? record.targetIds.includes(item.id)
-            : item.status === "active";
-          return option;
-        }),
-      );
-    }
-    mapTargets();
-    room.addEventListener("change", mapTargets);
-    field(
-      form,
-      hostText("Arrival ({zone})", { zone }),
-      "startsAt",
-      record ? localAt(record.startsAt, zone) : `${date.value}T15:00`,
-      "datetime-local",
-    );
-    field(
-      form,
-      hostText("Departure ({zone})", { zone }),
-      "endsAt",
-      record ? localAt(record.endsAt, zone) : `${addDays(date.value, 1)}T10:00`,
-      "datetime-local",
-    );
-    field(form, "Clock change occurrence", "disambiguation", "reject", "text", [
-      ["reject", hostText("Ask me if the time occurs twice")],
-      ["earlier", hostText("Earlier occurrence")],
-      ["later", hostText("Later occurrence")],
-    ]);
-    const allowedStates = !record
-      ? ["draft", "confirmed"]
-      : record.status === "draft"
-        ? ["draft", "confirmed", "cancelled"]
-        : states;
-    field(
-      form,
-      "Booking state",
-      "status",
-      record?.status || "draft",
-      "text",
-      allowedStates.map((state) => [state, hostText(state)]),
-    );
-    const reference = field(
-      form,
-      "External reference (optional)",
-      "externalReference",
-      record?.externalReference || "",
-    );
-    reference.required = false;
-    reference.maxLength = 128;
-    const note = field(
-      form,
-      "Reservation note (optional)",
-      "note",
-      record?.note || "",
-    );
-    note.required = false;
-    note.maxLength = 1000;
-    const guestFields = node("fieldset"),
-      stayFields = node("fieldset"),
-      accessFields = node("fieldset");
-    guestFields.append(node("legend", hostText("Guest contact")));
-    stayFields.append(node("legend", hostText("Stay and booking status")));
-    accessFields.append(
-      node("legend", hostText("Access systems")),
-      node(
-        "p",
-        hostText(
-          "Selecting a system does not confirm delivery, guest import or a physical gate opening.",
-        ),
-      ),
-    );
-    const optionalFields = node("details", undefined, {
-      class: "reservation-optional-fields",
-    });
-    optionalFields.append(
-      node("summary", hostText("Optional guest details and notes")),
-    );
-    for (const name of ["name", "phone"])
-      guestFields.append(form.querySelector(`[name="${name}"]`).parentElement);
-    for (const name of [
-      "roomId",
-      "startsAt",
-      "endsAt",
-      "disambiguation",
-      "status",
-    ])
-      stayFields.append(form.querySelector(`[name="${name}"]`).parentElement);
-    accessFields.append(targets.parentElement);
-    for (const name of [
-      "email",
-      "floor",
-      "apartment",
-      "parking",
-      "carNumber",
-      "comment",
-      "externalReference",
-      "note",
-    ])
-      optionalFields.append(
-        form.querySelector(`[name="${name}"]`).parentElement,
-      );
-    optionalFields.addEventListener(
-      "invalid",
-      () => {
-        optionalFields.open = true;
-      },
-      true,
-    );
-    form.append(guestFields, stayFields, accessFields, optionalFields);
-    const resultStatus = node("p", "", {
-      role: "status",
-      "aria-live": "polite",
-    });
-    const save = node("button", hostText("Save reservation"), {
-      type: "submit",
-      form: form.id,
-    });
-    const close = node("button", hostText("Close reservation"), {
+  // The row a booking sits in: its system, or the one active system an
+  // older booking opens; "" for the rest ("—").
+  const rowOf = (record) =>
+    record.systemId ??
+    (systemsById.has(record.changeSystemId) ? record.changeSystemId : "");
+  // A name in the page's direction: a Latin name on a Hebrew page still
+  // starts at the start, isolated from the words around it.
+  const nameLine = (record) => {
+    const name = node("strong");
+    name.append(node("bdi", guestName(record)));
+    return name;
+  };
+  function chip(record, className) {
+    const button = node("button", undefined, {
       type: "button",
-      class: "button-secondary",
+      class: `${className} reservation-${record.status}`,
+      "aria-label": label(record),
+      title: label(record),
+      "data-booking-id": record.id,
     });
-    close.addEventListener("click", () => clearEditor());
-    if (record)
-      form.append(
-        node(
-          "p",
-          hostText("Version {version} · {status} · Timezone {zone}", {
-            version: record.version,
-            status: hostText(record.status),
-            zone: record.timezone,
-          }),
-        ),
-      );
-    if (readOnly) {
-      for (const input of form.querySelectorAll("input,select"))
-        input.disabled = true;
-      actions.append(close);
-    } else actions.append(save, close);
-    actions.append(resultStatus);
-    editorContent.append(form);
-    editor.append(heading, editorContent, actions);
-    if (
-      record &&
-      ["cancelled", "completed"].includes(record.status) &&
-      organization.membership.role === "owner" &&
-      !record.guestRedactedAt
-    ) {
-      const privacy = node("section", undefined, {
-        "aria-label": "Guest privacy",
-      });
-      const approval = node("input", undefined, { type: "checkbox" });
-      const label = node(
-        "label",
-        hostText("Permanently delete this closed reservation's guest details"),
-      );
-      label.prepend(approval);
-      const erase = node("button", hostText("Delete guest details"), {
-        type: "button",
-      });
-      erase.disabled = true;
-      const message = node("p", "", { role: "status" });
-      privacy.append(
-        node(
-          "p",
-          hostText(
-            "This deletes stored guest details and private delivery content. An offline pass already imported remains valid until its effective end.",
-          ),
-        ),
-        label,
-        erase,
-        message,
-      );
-      editorContent.append(privacy);
-      let busy = false;
-      const key = crypto.randomUUID();
-      approval.addEventListener("change", () => {
-        erase.disabled = busy || !approval.checked;
-      });
-      erase.addEventListener("click", async () => {
-        if (busy || !approval.checked) return;
-        busy = true;
-        erase.disabled = approval.disabled = true;
-        message.textContent = hostText("Deleting guest details…");
-        try {
-          await portalRequest(
-            user,
-            path(`/${encodeURIComponent(record.id)}/privacy/redact`),
-            "POST",
-            { version: record.version, confirm: "delete_guest_details" },
-            key,
-          );
-          if (!current() || !privacy.isConnected) return;
-          clearEditor();
-          await load();
-        } catch (error) {
-          if (!current() || !privacy.isConnected) return;
-          message.textContent =
-            errors[error.code] ||
-            (error.code === "RECENT_AUTH_REQUIRED"
-              ? "Sign in again with TOTP before deleting guest details."
-              : "Guest details could not be deleted. Refresh before retrying.");
-        } finally {
-          if (current() && privacy.isConnected) {
-            busy = false;
-            approval.disabled = false;
-            erase.disabled = !approval.checked;
-          }
-        }
-      });
-    }
-    editorDialog.showModal();
-    if (record)
-      void renderHostAccessGrants({
-        container: editorContent,
-        user,
-        organization,
-        reservation: record,
-        isCurrent: editorCurrent,
-      });
-    heading.tabIndex = -1;
-    heading.focus();
-    let attempt;
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      if (readOnly || save.disabled) return;
-      save.disabled = true;
-      resultStatus.textContent = hostText("Saving reservation…");
-      try {
-        const values = Object.fromEntries(new FormData(form));
-        const [startsAt, endsAt] = await Promise.all([
-          record &&
-          values.disambiguation === "reject" &&
-          values.startsAt === localAt(record.startsAt, zone)
-            ? record.startsAt
-            : resolve(
-                values.startsAt,
-                values.disambiguation,
-                editingPropertyId,
-              ),
-          record &&
-          values.disambiguation === "reject" &&
-          values.endsAt === localAt(record.endsAt, zone)
-            ? record.endsAt
-            : resolve(values.endsAt, values.disambiguation, editingPropertyId),
-        ]);
-        if (!editorCurrent()) return;
-        const input = {
-          propertyId: editingPropertyId,
-          roomId: values.roomId,
-          targetIds: [...targets.selectedOptions].map((option) => option.value),
-          guest: {
-            ...(record?.guest ?? {}),
-            name: values.name.trim(),
-            phone: values.phone.trim(),
-            ...(values.email.trim() ? { email: values.email.trim() } : {}),
-          },
-          startsAt,
-          endsAt,
-          status: values.status,
-          note: values.note.trim(),
-          ...(values.externalReference.trim()
-            ? { externalReference: values.externalReference.trim() }
-            : {}),
-          ...(record ? { version: record.version } : {}),
-        };
-        if (!values.email.trim()) delete input.guest.email;
-        for (const name of [
-          "floor",
-          "apartment",
-          "parking",
-          "carNumber",
-          "comment",
-        ]) {
-          if (values[name].trim()) input.guest[name] = values[name].trim();
-          else delete input.guest[name];
-        }
-        const signature = JSON.stringify(input);
-        if (!attempt || attempt.signature !== signature)
-          attempt = { signature, key: crypto.randomUUID() };
-        await portalRequest(
-          user,
-          path(record ? `/${encodeURIComponent(record.id)}` : ""),
-          record ? "PUT" : "POST",
-          input,
-          attempt.key,
-        );
-        if (!current()) return;
-        if (editEpoch !== editorEpoch) {
-          await load();
-          return;
-        }
-        clearEditor();
-        await load();
-      } catch (error) {
-        if (editorCurrent())
-          resultStatus.textContent =
-            errors[error.code] ||
-            hostText(
-              "The reservation could not be saved. You can retry safely.",
-            );
-      } finally {
-        if (editorCurrent()) save.disabled = false;
-      }
-    });
+    button.addEventListener("click", () => context.openBooking(record, button));
+    return button;
   }
-  function draw() {
-    const days = duration();
-    if (listMode) {
-      drawReservationList();
-      return;
-    }
-    const table = node("table");
-    table.append(
-      node(
-        "caption",
-        `${property().name} · ${property().timezone} · ${view.selectedOptions[0].textContent}`,
-      ),
-    );
+
+  function drawGrid(days) {
+    const table = node("table", undefined, { class: "calendar-grid" });
+    const head = node("thead");
     const header = node("tr");
-    header.append(node("th", hostText("Room"), { scope: "col" }));
+    header.append(node("th", hostText("System"), { scope: "col" }));
+    const todayDate = todayIn(zone);
     for (let index = 0; index < days; index++) {
-      const day = addDays(date.value, index),
-        cell = node("th", undefined, {
-          scope: "col",
-          "data-calendar-date": day,
-        });
-      const instant = new Date(day + "T12:00:00Z");
+      const day = addDays(start, index);
+      const instant = new Date(`${day}T12:00:00Z`);
+      const cell = node("th", undefined, {
+        scope: "col",
+        "data-calendar-date": day,
+        ...(day === todayDate ? { class: "calendar-today" } : {}),
+      });
       cell.append(
         node(
           "small",
@@ -750,319 +292,303 @@ export async function renderHostCalendar({
       );
       header.append(cell);
     }
-    for (const cell of header.children)
-      if (cell.dataset.calendarDate === dateAt(Date.now(), property().timezone))
-        cell.classList.add("calendar-today");
-    const head = node("thead");
     head.append(header);
-    table.append(head);
+    // Rows: the active systems (or the one filtered), then any booking of a
+    // system that is no longer active, then older bookings without one.
+    // A filtered calendar shows that system's row only.
+    const filter = systemFilter.value;
+    const rows = (
+      filter ? systems.filter((item) => item.id === filter) : systems
+    ).map((item) => ({ id: item.id, name: item.name, system: item }));
+    for (const record of data) {
+      const id = rowOf(record);
+      if (filter && id !== filter) continue;
+      if (!rows.some((row) => row.id === id))
+        rows.push({
+          id,
+          name: id ? (record.systemName ?? noSystem) : noSystem,
+        });
+    }
     const body = node("tbody");
-    const visibleRooms = rooms.filter(
-      (item) =>
-        (!propertySelect.value || item.propertyId === propertySelect.value) &&
-        (!roomFilter.value || item.id === roomFilter.value),
-    );
-    for (const booking of data)
-      if (!visibleRooms.some((item) => item.id === booking.roomId))
-        visibleRooms.push({
-          id: booking.roomId,
-          propertyId: booking.propertyId,
-          name: `${booking.roomName || booking.roomId} (archived)`,
-        });
-    visibleRooms.sort(
-      (a, b) =>
-        (a.propertyId ?? "").localeCompare(b.propertyId ?? "") ||
-        a.name.localeCompare(b.name),
-    );
-    let lastProperty;
-    for (const room of visibleRooms) {
-      const group = room.propertyId ?? "archived";
-      if (group !== lastProperty) {
-        lastProperty = group;
-        const groupRow = node("tr"),
-          groupCell = node("th", undefined, {
-            colspan: String(days + 1),
-            class: "calendar-property-group",
-          });
-        const toggle = node(
-          "button",
-          properties.find((item) => item.id === group)?.name ??
-            hostText("Archived property"),
-          {
-            type: "button",
-            "aria-expanded": String(!collapsedProperties.has(group)),
-          },
+    for (const row of rows) {
+      const tr = node("tr", undefined, { "data-calendar-system": row.id });
+      const name = node("th", undefined, { scope: "row" });
+      const nameBox = node("span", undefined, { class: "calendar-system" });
+      if (row.system)
+        nameBox.append(
+          node("img", undefined, {
+            src: iconSrc(row.system),
+            alt: "",
+            width: "24",
+            height: "24",
+          }),
         );
-        toggle.setAttribute("aria-label", toggle.textContent);
-        toggle.addEventListener("click", () => {
-          if (collapsedProperties.has(group)) collapsedProperties.delete(group);
-          else collapsedProperties.add(group);
-          toggle.setAttribute(
-            "aria-expanded",
-            String(!collapsedProperties.has(group)),
-          );
-          for (const item of body.children)
-            if (item.dataset.calendarProperty === group)
-              item.hidden = collapsedProperties.has(group);
-        });
-        groupCell.append(toggle);
-        groupRow.append(groupCell);
-        body.append(groupRow);
-      }
-      const row = node("tr");
-      row.dataset.calendarProperty = group;
-      row.hidden = collapsedProperties.has(group);
-      row.append(node("th", room.name, { scope: "row" }));
+      nameBox.append(node("bdi", row.name));
+      name.append(nameBox);
       const cell = node("td", undefined, {
         colspan: String(days),
-        class: "calendar-room-timeline",
+        class: "calendar-system-timeline",
       });
       const timeline = node("div", undefined, { class: "calendar-timeline" });
       timeline.style.setProperty("--calendar-days", String(days));
       const { spans, lanes } = calendarSpans(
-        data.filter((item) => item.roomId === room.id),
-        date.value,
+        data.filter((record) => rowOf(record) === row.id),
+        start,
         days,
         dateAt,
-        property().timezone,
+        zone,
       );
-      timeline.style.gridTemplateRows = `repeat(${lanes}, 64px)`;
-      for (const { record: reservation, start, end, lane } of spans) {
-        const label = hostText(
-          "{name} · {status} · {room} · {start} — {end} ({zone})",
-          {
-            name: reservationGuestName(reservation),
-            status: hostText(reservation.status),
-            room: room.name,
-            start: hostDateTime(reservation.startsAt, property().timezone),
-            end: hostDateTime(reservation.endsAt, property().timezone),
-            zone: property().timezone,
-          },
-        );
-        const button = node("button", undefined, {
-          type: "button",
-          class: `reservation-chip reservation-${reservation.status}`,
-          "aria-label": label,
-        });
-        button.style.gridColumn = `${start + 1} / ${end + 1}`;
+      timeline.style.gridTemplateRows = `repeat(${lanes}, minmax(56px, auto))`;
+      // An empty day of a system, from today on, opens a new booking there
+      // (the "+ Booking" button is the keyboard way to the same sheet).
+      if (canBook && row.system)
+        for (let index = 0; index < days; index++) {
+          const day = addDays(start, index);
+          if (day < todayDate) continue;
+          const add = node("button", undefined, {
+            type: "button",
+            class: "calendar-cell",
+            tabindex: "-1",
+            "aria-label": hostText("New booking: {p0}, {p1}", {
+              p0: row.name,
+              p1: dayText(day),
+            }),
+            "data-calendar-cell": day,
+          });
+          add.style.gridColumn = String(index + 1);
+          add.style.gridRow = "1 / -1";
+          add.addEventListener("click", () =>
+            context.newBooking({ systemId: row.id, date: day, trigger: add }),
+          );
+          timeline.append(add);
+        }
+      for (const { record, start: from, end, lane } of spans) {
+        const button = chip(record, "reservation-chip");
+        button.style.gridColumn = `${from + 1} / ${end + 1}`;
         button.style.gridRow = String(lane + 1);
         button.append(
-          node("strong", reservationGuestName(reservation)),
-          node(
-            "small",
-            [
-              reservation.guest.email || reservation.externalReference,
-              hostText(reservation.status),
-            ]
-              .filter(Boolean)
-              .join(" · "),
-          ),
+          nameLine(record),
+          node("small", statusLabel(record.status)),
         );
-        button.title = label;
-        button.addEventListener("click", () => openEditor(reservation));
         timeline.append(button);
       }
-      if (!spans.length)
-        timeline.append(
-          node("span", hostText("No reservations"), {
-            class: "calendar-empty-room",
-          }),
-        );
       cell.append(timeline);
-      row.append(cell);
-      body.append(row);
+      tr.append(name, cell);
+      body.append(tr);
     }
-    const format = new Intl.DateTimeFormat(hostLocale, {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-      timeZone: "UTC",
-    });
-    rangeTitle.textContent = `${format.format(new Date(date.value + "T12:00:00Z"))} – ${format.format(new Date(addDays(date.value, days - 1) + "T12:00:00Z"))}`;
-    table.append(body);
+    table.append(head, body);
     grid.replaceChildren(table);
-    const reference = document.querySelector(".calendar-reference");
-    if (reference) reference.hidden = true;
-    if (cursor) {
-      const more = node("button", hostText("Load more reservations"), {
-        type: "button",
-      });
-      more.addEventListener("click", () => void load(true));
-      grid.append(more);
-    }
   }
-  function drawReservationList() {
-    const list = node("ul", undefined, { class: "host-resource-list" });
-    for (const reservation of data) {
-      const zone =
-        properties.find((item) => item.id === reservation.propertyId)
-          ?.timezone ?? organization.timezone;
-      const row = node("li");
-      const open = node(
-        "button",
-        reservationGuestName(reservation),
-        { type: "button" },
+
+  function drawAgenda(days) {
+    const agenda = node("div", undefined, { class: "calendar-agenda" });
+    for (let index = 0; index < days; index++) {
+      const day = addDays(start, index);
+      // A cancelled stay is nobody's arrival, stay or departure: it shows
+      // once, on the first of its days on screen, as Cancelled only.
+      const bookings = data.filter(
+        (record) =>
+          (!systemFilter.value || rowOf(record) === systemFilter.value) &&
+          dateAt(record.startsAt, zone) <= day &&
+          dateAt(Date.parse(record.endsAt) - 1, zone) >= day &&
+          (record.status !== "cancelled" ||
+            day === [dateAt(record.startsAt, zone), start].sort().at(-1)),
       );
-      open.addEventListener("click", () => {
-        if (current()) openEditor(reservation);
+      if (!bookings.length) continue;
+      const group = node("section", undefined, {
+        class: "calendar-agenda__day",
+        "data-calendar-date": day,
       });
-      row.append(
-        open,
-        node(
-          "p",
-          [reservation.guest.email, reservation.guest.phone]
-            .filter(Boolean)
-            .join(" · "),
-        ),
-        node(
-          "p",
-          `${reservation.roomName || hostText("Room unavailable")} · ${hostDateTime(reservation.startsAt, zone)} — ${hostDateTime(reservation.endsAt, zone)} · ${zone}`,
-        ),
-        node(
-          "p",
-          hostText("Booking: {status}", {
-            status: hostText(reservation.status),
-          }),
-        ),
-      );
-      list.append(row);
+      group.append(node("h3", dayText(day)));
+      const list = node("ul");
+      for (const record of bookings) {
+        const item = node("li");
+        const button = chip(record, "agenda-item");
+        // What happens that day: arrival, departure, both, or a stay.
+        const arrives = dateAt(record.startsAt, zone) === day;
+        const leaves = dateAt(Date.parse(record.endsAt) - 1, zone) === day;
+        const times = node("span", undefined, { class: "agenda-item__time" });
+        if (arrives && leaves)
+          times.append(
+            node(
+              "bdi",
+              `${timeText(record.startsAt, zone)} – ${timeText(record.endsAt, zone)}`,
+            ),
+          );
+        else if (arrives)
+          times.append(
+            isolatedText("Arrives {p0}", {
+              p0: timeText(record.startsAt, zone),
+            }),
+          );
+        else if (leaves)
+          times.append(
+            isolatedText("Leaves {p0}", { p0: timeText(record.endsAt, zone) }),
+          );
+        else times.textContent = hostText("Staying");
+        const where = node("span", undefined, { class: "agenda-item__system" });
+        where.append(node("bdi", systemLabel(record, systemsById)));
+        button.append(
+          nameLine(record),
+          where,
+          ...(record.status === "cancelled" ? [] : [times]),
+        );
+        // Not only a colour: a booking that is not simply confirmed says
+        // what it is (Cancelled, Draft…).
+        if (record.status !== "confirmed")
+          button.append(statusBadge(record.status));
+        item.append(button);
+        list.append(item);
+      }
+      group.append(list);
+      agenda.append(group);
     }
-    grid.replaceChildren(list);
-    if (!data.length)
-      grid.append(
-        node(
-          "p",
-          hostText(
-            cursor
-              ? "No matches on this page. Continue to search later records."
-              : "No reservations match these filters.",
-          ),
-        ),
+    if (!agenda.childElementCount && systems.length)
+      agenda.append(
+        node("p", hostText("No bookings on these dates."), {
+          class: "calendar-agenda__empty",
+        }),
       );
-    if (cursor && data.length < 1000) {
-      const more = node("button", hostText("Load more reservations"), {
-        type: "button",
-      });
-      more.addEventListener("click", () => {
-        more.disabled = true;
-        void load(true);
-      });
-      grid.append(more);
-    } else if (cursor)
-      grid.append(
-        node(
-          "p",
-          hostText(
-            "1,000 records loaded. Narrow the date range or filters to continue.",
-          ),
-        ),
-      );
+    grid.replaceChildren(agenda);
   }
-  async function load(more = false) {
+
+  function draw() {
+    const days = duration();
+    // Each end of the range stays whole on a narrow screen ("14 Oct 2026"
+    // never leaves its year alone on the next line).
+    const edge = (date) =>
+      node("span", titleFormat.format(new Date(`${date}T12:00:00Z`)), {
+        class: "calendar-heading__date",
+      });
+    title.replaceChildren(edge(start), " – ", edge(addDays(start, days - 1)));
+    // Without systems, the calendar shows only when it holds bookings.
+    section.classList.toggle(
+      "host-calendar--empty",
+      !systems.length && !data.length,
+    );
+    width = space();
+    agendaShown = agenda();
+    if (agendaShown) drawAgenda(days);
+    else drawGrid(days);
+    // A long system name widens the first column: when the range chosen
+    // for the space no longer fits, it steps down to one week (and to the
+    // agenda when a week does not fit either).
     if (
-      listMode &&
-      (!Number.isInteger(duration()) || duration() < 1 || duration() > 62)
+      grid.scrollWidth > grid.clientWidth + 1 &&
+      grid.querySelector("table")
     ) {
-      status.textContent = hostText(
-        "Choose a date range between 1 and 62 days.",
-      );
-      return;
+      if (!picked && range === "two-week") {
+        setRange("week");
+        void load();
+        return;
+      }
+      if (range === "week") {
+        agendaShown = true;
+        drawAgenda(days);
+      }
     }
-    if (view.value === "month" && !more)
-      date.value = `${date.value.slice(0, 7)}-01`;
-    const request = ++loading;
-    const selection = {
-      propertyId: propertySelect.value,
-      roomId: roomFilter.value,
-      date: date.value,
-      days: duration(),
-      q: search.value.trim(),
-      status: filter.value,
-    };
-    status.textContent = hostText("Loading reservations…");
-    if (!more)
-      grid.replaceChildren(node("p", hostText("Loading reservations…")));
-    try {
-      if (!more) {
-        const [from, to] = await Promise.all([
-          resolve(`${selection.date}T00:00`, "earlier", selection.propertyId),
-          resolve(
-            `${addDays(selection.date, selection.days)}T00:00`,
-            "later",
-            selection.propertyId,
-          ),
-        ]);
-        if (!current() || request !== loading) return;
-        if (Date.parse(to) - Date.parse(from) > 62 * 86400000) {
-          status.textContent = hostText(
-            "This range exceeds the 62-day limit across a clock change. Choose an earlier end date.",
-          );
-          grid.replaceChildren();
-          return;
-        }
-        activeRange = { from, to };
-      }
-      const query = new URLSearchParams({
-        ...activeRange,
-        ...(selection.propertyId ? { propertyId: selection.propertyId } : {}),
-        ...(selection.roomId ? { roomId: selection.roomId } : {}),
-        limit: "100",
-        ...(selection.q ? { q: selection.q } : {}),
-        ...(selection.status ? { status: selection.status } : {}),
-        ...(more && cursor ? { cursor } : {}),
-      });
-      const response = await portalRequest(user, path(`?${query}`));
-      if (!current() || request !== loading) return;
-      data = [
-        ...new Map(
-          (more ? [...data, ...response.items] : response.items).map((item) => [
-            item.id,
-            item,
-          ]),
-        ).values(),
-      ];
-      cursor = response.nextCursor;
-      draw();
-      status.textContent = hostText(
-        data.length === 1 ? "{count} reservation" : "{count} reservations",
-        { count: data.length },
-      );
-      refreshed.textContent =
-        hostText("Refreshed {time}", {
-          time: new Date().toLocaleTimeString(hostLocale),
-        }) +
-        (cursor
-          ? " · " + hostText("More results available; count is partial")
-          : "");
-    } catch (error) {
-      if (current() && request === loading) {
-        status.textContent =
-          errors[error.code] ||
+    if (truncated)
+      grid.append(
+        node(
+          "p",
           hostText(
-            "Reservations could not be loaded. Search or update the calendar to retry.",
-          );
-        for (const button of grid.querySelectorAll("button"))
-          button.disabled = false;
-      }
+            "Showing the first 1,000 bookings. Choose fewer days or one system.",
+          ),
+          { class: "calendar-truncated" },
+        ),
+      );
+  }
+
+  async function load() {
+    const request = ++loading;
+    const days = duration();
+    const shown = start;
+    status.textContent = hostText("Loading…");
+    try {
+      // The range's edges in the organization's time zone, worked out here:
+      // a midnight the clocks skip still has a first minute.
+      const from = dayStart(shown, zone);
+      const to = dayStart(addDays(shown, days), zone);
+      const items = new Map();
+      let cursor;
+      let pages = 0;
+      do {
+        const query = new URLSearchParams({
+          from,
+          to,
+          limit: "100",
+          ...(systemFilter.value ? { systemId: systemFilter.value } : {}),
+          ...(statusFilter.value ? { status: statusFilter.value } : {}),
+          ...(cursor ? { cursor } : {}),
+        });
+        const result = await portalRequest(
+          user,
+          `${base}/reservations?${query}`,
+        );
+        if (!current() || request !== loading) return;
+        for (const raw of Array.isArray(result?.items) ? result.items : []) {
+          const record = readReservation(raw);
+          if (record) items.set(record.id, record);
+        }
+        cursor = result?.nextCursor;
+        pages++;
+      } while (cursor && pages < maxPages);
+      data = [...items.values()];
+      truncated = Boolean(cursor);
+      status.textContent = "";
+      loaded = request;
+      draw();
+    } catch (error) {
+      if (!current() || request !== loading) return;
+      loaded = request;
+      section.classList.remove("host-calendar--empty");
+      status.textContent = bookingMessage(error);
+      const retry = node("button", hostText("Try again"), { type: "button" });
+      retry.addEventListener("click", () => void load());
+      grid.replaceChildren(retry);
     }
   }
-  controls.addEventListener("submit", (event) => {
-    event.preventDefault();
-    clearEditor();
+
+  const move = (direction) => {
+    start =
+      range === "month"
+        ? new Date(
+            Date.UTC(
+              Number(start.slice(0, 4)),
+              Number(start.slice(5, 7)) - 1 + direction,
+              1,
+            ),
+          )
+            .toISOString()
+            .slice(0, 10)
+        : addDays(start, direction * duration());
+    void load();
+  };
+  previous.addEventListener("click", () => move(-1));
+  next.addEventListener("click", () => move(1));
+  today.addEventListener("click", () => {
+    start = todayIn(zone);
+    if (range === "month") start = `${start.slice(0, 7)}-01`;
     void load();
   });
-  propertySelect.addEventListener("change", () => {
-    clearEditor();
-    mapRooms();
-    date.value = dateAt(Date.now(), property().timezone);
-    if (listMode) endDate.value = addDays(date.value, 30);
-    void load();
+  systemFilter.addEventListener("change", () => void load());
+  statusFilter.addEventListener("change", () => void load());
+  // A phone turned sideways, a window resized or the sidebar opened: the
+  // range follows the space (until the person picks one) and the same
+  // bookings redraw as a grid or an agenda.
+  const resized = new ResizeObserver(() => {
+    if (!current()) return resized.disconnect();
+    if (!grid.clientWidth || grid.clientWidth === width || loading > loaded)
+      return;
+    width = grid.clientWidth;
+    if (!picked && fittingRange() !== range) {
+      setRange(fittingRange());
+      void load();
+    } else draw();
   });
-  roomFilter.addEventListener("change", () => {
-    clearEditor();
-    void load();
-  });
-  filterListener = new AbortController();
+  resized.observe(grid);
+  signal.addEventListener("abort", () => resized.disconnect());
+  // A saved filter from Activity: its system and state.
   window.addEventListener(
     "host:operations-filter",
     (event) => {
@@ -1074,63 +600,25 @@ export async function renderHostCalendar({
       )
         return;
       if (
-        (saved.propertyId &&
-          !properties.some((item) => item.id === saved.propertyId)) ||
-        (saved.roomId &&
-          !rooms.some(
-            (item) =>
-              item.id === saved.roomId &&
-              (!saved.propertyId || item.propertyId === saved.propertyId),
-          )) ||
-        (saved.status && !states.includes(saved.status))
+        (saved.systemId && !systemsById.has(saved.systemId)) ||
+        (saved.status && !statuses.includes(saved.status))
       ) {
         status.textContent = hostText(
-          "Saved filter resources are unavailable. Refresh the organization.",
+          "This saved filter's system is no longer here.",
         );
         return;
       }
-      propertySelect.value = saved.propertyId ?? "";
-      mapRooms();
-      roomFilter.value = saved.roomId ?? "";
-      filter.value = saved.status ?? "";
-      clearEditor();
+      systemFilter.value = saved.systemId ?? "";
+      statusFilter.value = saved.status ?? "";
       void load();
     },
-    { signal: filterListener.signal },
+    { signal },
   );
-  view.addEventListener("change", () => {
-    syncRange();
-    void load();
+  window.addEventListener("host:workspace-dispose", () => listeners?.abort(), {
+    once: true,
+    signal,
   });
-  const move = (direction) => {
-    date.value =
-      view.value === "month"
-        ? new Date(
-            Date.UTC(
-              Number(date.value.slice(0, 4)),
-              Number(date.value.slice(5, 7)) - 1 + direction,
-              1,
-            ),
-          )
-            .toISOString()
-            .slice(0, 10)
-        : addDays(date.value, direction * duration());
-    void load();
-  };
-  previous.addEventListener("click", () => move(-1));
-  next.addEventListener("click", () => move(1));
-  today.addEventListener("click", () => {
-    date.value = dateAt(Date.now(), property().timezone);
-    void load();
-  });
-  add.addEventListener("click", () => {
-    if (!propertySelect.value) {
-      status.textContent = hostText(
-        "Choose a specific property before creating a reservation.",
-      );
-      return;
-    }
-    openEditor();
-  });
+  setRange(fittingRange());
   await load();
+  return { reload: () => load() };
 }

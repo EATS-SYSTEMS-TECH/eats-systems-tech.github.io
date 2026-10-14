@@ -1,6 +1,6 @@
 import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest } from "./api/index.js";
-import { node, hostDateTime } from "./host-ui.js";
+import { node, infoTip, hostDateTime } from "./host-ui.js";
 import { renderServiceTargets } from "./host-slo.js";
 
 const explanations = {
@@ -27,6 +27,19 @@ const reasons = {
   LATENCY_ABOVE_TARGET: hostText("Latency above target"),
   PENDING_SCHEDULE_LATE: hostText("Scheduled preparation overdue"),
 };
+// The one line a non-technical person reads: is it working?
+const summaries = {
+  healthy: "Everything is working.",
+  breached:
+    "Some guest links or messages were late or failed. Details for your developer are below.",
+};
+const summaryOf = (value) =>
+  hostText(
+    value.monitoring.state !== "current"
+      ? "Automatic checks aren't running right now. Details for your developer are below."
+      : (summaries[value.assessment] ??
+          "There aren't enough checks yet to tell."),
+  );
 const timestamp = (value) =>
   value ? hostDateTime(value) : hostText("None yet");
 const percent = (value) =>
@@ -54,15 +67,25 @@ export function renderServiceHealth({
     hostText("Load scheduled monitoring evidence for this organization."),
     { role: "status", "aria-live": "polite" },
   );
-  const refresh = node("button", hostText("Refresh service health"), {
+  // One sentence and one action; what the checks measured folds under
+  // "For your developer".
+  const refresh = node("button", hostText("Check now"), {
     type: "button",
+    "data-health-check": "",
   });
+  const summary = node(
+    "p",
+    hostText("Check that guest links and messages go out on time."),
+    { class: "empty-state__text health-summary__text", "aria-live": "polite" },
+  );
+  const plain = node("div", undefined, { class: "empty-state health-summary" });
+  plain.append(summary, refresh);
   const content = node("div");
   const actions = node("div", undefined, { class: "health-actions" });
-  actions.append(refresh);
   if (role === "owner") {
     const verify = node("button", hostText("Verify identity to edit targets"), {
       type: "button",
+      class: "button-secondary",
     });
     verify.addEventListener(
       "click",
@@ -88,7 +111,10 @@ export function renderServiceHealth({
     ["Review alerts and deliveries", "Jobs Calendar"],
     ...(role === "owner" ? [["Open support access", "Support"]] : []),
   ]) {
-    const button = node("button", hostText(title), { type: "button" });
+    const button = node("button", hostText(title), {
+      type: "button",
+      class: "button-secondary",
+    });
     button.addEventListener("click", () =>
       window.dispatchEvent(
         new CustomEvent("host:workspace-view", { detail: view }),
@@ -96,18 +122,28 @@ export function renderServiceHealth({
     );
     actions.append(button);
   }
-  section.append(
+  // Measurements, targets and their evidence speak in rates, milliseconds
+  // and ids: they fold under "For your developer", below the title and the
+  // plain answer.
+  const heading = node("div", undefined, { class: "view-heading" });
+  heading.append(
     node("h2", hostText("Service health")),
-    node(
-      "p",
+    infoTip(
       hostText(
-        "Scheduled checks of authenticated invitation API requests, job preparation, and provider message acceptance. Physical gate availability and guest receipt require separate verification.",
+        "WIFIGATE checks every hour that guest links and messages go out on time. To be sure a gate opens, open it from the WIFIGATE app.",
       ),
     ),
+  );
+  const developer = node("details", undefined, {
+    class: "operations-detail operations-developer",
+  });
+  developer.append(
+    node("summary", hostText("For your developer")),
     actions,
     status,
     content,
   );
+  section.append(heading, plain, developer);
   container.append(section);
   const current = () => isCurrent() && section.isConnected;
   let busy = false;
@@ -118,6 +154,8 @@ export function renderServiceHealth({
     try {
       await operation();
     } catch (error) {
+      if (current() && button === refresh)
+        summary.textContent = hostText("Couldn't check right now. Try again.");
       if (current())
         status.textContent =
           {
@@ -141,6 +179,7 @@ export function renderServiceHealth({
   }
   function display(value) {
     const state = value.monitoring.state;
+    summary.textContent = summaryOf(value);
     status.textContent = hostText(
       state === "current"
         ? (labels[value.assessment] ?? "Insufficient evidence")
@@ -261,7 +300,7 @@ export function renderServiceHealth({
       }),
   );
   renderServiceTargets({
-    section,
+    section: developer,
     user,
     root,
     current,
