@@ -4,8 +4,14 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import vm from "node:vm";
 import { chromium } from "playwright-core";
+import { analyticsFixture, fixtureMeasurementId } from "./analytics-test-fixture.mjs";
 
 const browser = await chromium.launch({ channel: "chrome", headless: true });
+async function localContext(options) {
+  const context = await browser.newContext(options);
+  await context.route(/^https?:\/\//, (route) => route.abort("blockedbyclient"));
+  return context;
+}
 try {
   const sandbox = { window: {} };
   vm.runInNewContext(await readFile(path.resolve("js/cookie-consent-copy.js"), "utf8"), sandbox);
@@ -25,7 +31,7 @@ try {
   }
 
   for (const locale of ["en", "he"]) {
-    const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    const context = await localContext({ viewport: { width: 390, height: 844 } });
     const page = await context.newPage();
     const file = path.resolve(locale === "en" ? "index.html" : "he/index.html");
     await page.goto(pathToFileURL(file).href);
@@ -51,7 +57,7 @@ try {
     await context.close();
   }
   for (const locale of locales.filter((name) => name !== "en" && name !== "he")) {
-    const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    const context = await localContext({ viewport: { width: 390, height: 844 } });
     const page = await context.newPage();
     await page.goto(pathToFileURL(path.resolve(`${locale.toLowerCase()}/index.html`)).href, { waitUntil: "domcontentloaded" });
     const panel = page.getByRole("dialog", { name: copies[locale].title });
@@ -67,7 +73,7 @@ try {
     assert.equal(await panel.evaluate((element) => element.scrollWidth <= element.clientWidth + 1), true, `${locale}: horizontal overflow`);
     await context.close();
   }
-  const desktopContext = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const desktopContext = await localContext({ viewport: { width: 1440, height: 900 } });
   const desktopPage = await desktopContext.newPage();
   await desktopPage.goto(pathToFileURL(path.resolve("index.html")).href, { waitUntil: "domcontentloaded" });
   const desktopPanel = desktopPage.getByRole("dialog", { name: copies.en.title });
@@ -94,6 +100,8 @@ try {
   for (const file of pages) {
     const html = await readFile(file, "utf8");
     const name = path.relative(process.cwd(), file);
+    // Business product pages have their own UI and are outside consumer QA.
+    if (/^(?:dashboard|pay|manager)[\\/]/.test(name)) continue;
     assert.doesNotMatch(html, /locale-redirect\.js/, `${name}: no remembered-language redirect`);
     if (/http-equiv="refresh"/i.test(html)) continue;
     assert.equal(html.match(/cookie-consent\.js/g)?.length, 1, `${name}: cookie consent script`);
@@ -110,7 +118,7 @@ try {
     assert.doesNotMatch(source, /localStorage\.setItem\(\s*["']language["']/, `js/${file}: stores a language`);
   }
   {
-    const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    const context = await localContext({ viewport: { width: 390, height: 844 } });
     await context.addInitScript(() => {
       if (!sessionStorage.getItem("seeded")) {
         localStorage.setItem("language", "fr");
@@ -138,24 +146,15 @@ try {
     await context.close();
   }
 
-  const context = await browser.newContext();
-  const source = (await readFile(path.resolve("js/cookie-consent.js"), "utf8"))
-    .replace('const GA_MEASUREMENT_ID = "";', 'const GA_MEASUREMENT_ID = "G-TEST12345";');
-  let googleRequests = 0;
-  await context.route(/cookie-consent\.js/, (route) => route.fulfill({ body: source, contentType: "text/javascript" }));
-  await context.route("https://www.googletagmanager.com/**", (route) => {
-    googleRequests += 1;
-    return route.fulfill({ body: "", contentType: "text/javascript" });
-  });
-  const page = await context.newPage();
-  await page.goto(pathToFileURL(path.resolve("index.html")).href);
-  assert.equal(googleRequests, 0, "Analytics must not load before consent");
+  const fixture = await analyticsFixture(browser);
+  const { page, context } = fixture;
+  assert.equal(fixture.tagRequests.length, 0, "Analytics must not load before consent");
   await page.locator("[data-cookie-accept]").click();
-  assert.equal(googleRequests, 1, "Analytics loads after consent");
-  assert.equal(await page.evaluate(() => window["ga-disable-G-TEST12345"]), false);
+  assert.equal(fixture.tagRequests.length, 1, "Analytics loads after consent");
+  assert.equal(await page.evaluate((id) => window[`ga-disable-${id}`], fixtureMeasurementId), false);
   await page.locator("[data-cookie-settings]").click();
   await page.locator("[data-cookie-reject]").click();
-  assert.equal(await page.evaluate(() => window["ga-disable-G-TEST12345"]), true);
+  assert.equal(await page.evaluate((id) => window[`ga-disable-${id}`], fixtureMeasurementId), true);
   await context.close();
   console.log("Cookie consent localization, choice, persistence, reopening and analytics gating passed.");
 } finally {
