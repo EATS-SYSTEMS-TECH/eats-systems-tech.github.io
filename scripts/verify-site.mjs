@@ -3,7 +3,8 @@
 //   node scripts/verify-site.mjs
 // Exits non-zero and lists every problem found. Checks, per locale:
 //   - home + niche pages exist, have a single H1, unique title/description,
-//     correct canonical, full hreflang cluster, index robots, lang/dir
+//     correct canonical, full hreflang cluster of ISO 639-1 codes, index
+//     robots, lang/dir
 //   - internal links and image references resolve to files on disk
 //   - legacy niche routes exist and redirect to the right target
 //   - sitemap entries resolve to generated pages
@@ -26,6 +27,9 @@ const localeOptions = [
   "el", "ro", "hr", "fi", "bg", "sr", "sk", "sl", "id", "th", "vi", "ms", "fil",
 ];
 const rtlLocales = new Set(["he", "ar"]);
+// Google's hreflang: an ISO 639-1 language, optionally an ISO 15924 script and
+// an ISO 3166-1 Alpha 2 region; three-letter codes such as "fil" are ignored.
+const hreflangPattern = /^(x-default|[a-z]{2}(-[A-Z][a-z]{3})?(-[A-Z]{2})?)$/;
 const nicheKeys = NICHE_DEFINITIONS.map((n) => n.key);
 const legalPages = ["privacy-policy", "terms-and-conditions", "cookies", "accessibility"];
 const landingKeys = LANDING_PAGES.map((page) => page.key);
@@ -173,6 +177,11 @@ async function main() {
       if (hreflangCount !== localeOptions.length + 1) {
         problems.push(`${rel}: ${hreflangCount} hreflang links, expected ${localeOptions.length + 1}`);
       }
+      const hreflangs = $("link[rel='alternate'][hreflang]").map((_, element) => $(element).attr("hreflang")).get();
+      for (const hreflang of hreflangs) {
+        if (!hreflangPattern.test(hreflang)) problems.push(`${rel}: hreflang "${hreflang}" is not an ISO 639-1 code`);
+      }
+      if (new Set(hreflangs).size !== hreflangs.length) problems.push(`${rel}: repeated hreflang value`);
 
       const titleKey = `${locale}:${title}`;
       if (titlesByLocale.has(titleKey)) {
