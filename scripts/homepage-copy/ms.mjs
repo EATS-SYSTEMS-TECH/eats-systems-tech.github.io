@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Sehingga 50 Acara Berjadual",
-        text: "Cipta jadual berulang dan tindakan automatik terus dalam sistem, mengikut cara premis anda beroperasi, termasuk sokongan mod Sabat.",
+        text: "Cipta jadual berulang dan tindakan automatik terus dalam sistem, mengikut cara premis anda beroperasi.",
       },
       {
         title: "Daftar Alat Kawalan Jauh RF Secara Digital",

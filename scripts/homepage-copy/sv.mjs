@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Upp till 50 schemalagda händelser",
-        text: "Skapa återkommande scheman och automatiska åtgärder direkt i systemet, anpassade efter hur din anläggning drivs, inklusive stöd för sabbatsläge.",
+        text: "Skapa återkommande scheman och automatiska åtgärder direkt i systemet, anpassade efter hur din anläggning drivs.",
       },
       {
         title: "Digital inlärning av RF-fjärrkontroller",

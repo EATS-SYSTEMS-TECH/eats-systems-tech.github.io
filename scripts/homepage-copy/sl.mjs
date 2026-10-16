@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Do 50 načrtovanih dogodkov",
-        text: "Neposredno v sistemu ustvarite ponavljajoče se urnike in samodejna dejanja, prilagojena delovanju vašega objekta, vključno s šabatnim načinom.",
+        text: "Neposredno v sistemu ustvarite ponavljajoče se urnike in samodejna dejanja, prilagojena delovanju vašega objekta.",
       },
       {
         title: "Digitalno dodajanje RF-daljincev",

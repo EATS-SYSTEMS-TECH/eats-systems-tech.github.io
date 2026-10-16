@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Fino a 50 eventi programmati",
-        text: "Imposta orari ricorrenti e azioni automatiche direttamente nel sistema, in base alle esigenze della tua struttura, compresa la modalità Shabbat.",
+        text: "Imposta orari ricorrenti e azioni automatiche direttamente nel sistema, in base alle esigenze della tua struttura.",
       },
       {
         title: "Memorizzazione digitale dei telecomandi RF",

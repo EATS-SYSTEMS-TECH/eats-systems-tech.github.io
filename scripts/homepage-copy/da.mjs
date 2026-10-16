@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Op til 50 planlagte hændelser",
-        text: "Opret tilbagevendende tidsplaner og automatiske handlinger direkte i systemet, så de passer til den måde, dit sted drives på, inklusive sabbatfunktion.",
+        text: "Opret tilbagevendende tidsplaner og automatiske handlinger direkte i systemet, så de passer til den måde, dit sted drives på.",
       },
       {
         title: "Digital indlæring af RF-fjernbetjeninger",

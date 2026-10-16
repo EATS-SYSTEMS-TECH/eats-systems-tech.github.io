@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Hanggang 50 Naka-iskedyul na Event",
-        text: "Gumawa ng mga umuulit na iskedyul at awtomatikong pagkilos direkta sa system, ayon sa takbo ng inyong lugar, kasama ang suporta sa Shabbat mode.",
+        text: "Gumawa ng mga umuulit na iskedyul at awtomatikong pagkilos direkta sa system, ayon sa takbo ng inyong lugar.",
       },
       {
         title: "Digital na Pagrehistro ng RF Remote",

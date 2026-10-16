@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Până la 50 de evenimente programate",
-        text: "Creați programe recurente și acțiuni automate direct în sistem, adaptate felului în care funcționează proprietatea, inclusiv pentru modul Sabat.",
+        text: "Creați programe recurente și acțiuni automate direct în sistem, adaptate felului în care funcționează proprietatea.",
       },
       {
         title: "Învățare digitală a telecomenzilor RF",

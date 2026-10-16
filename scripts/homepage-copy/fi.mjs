@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Jopa 50 ajastettua tapahtumaa",
-        text: "Luo toistuvia aikatauluja ja automaattisia toimintoja suoraan järjestelmään kohteesi rytmin mukaan. Mukana myös sapattitila.",
+        text: "Luo toistuvia aikatauluja ja automaattisia toimintoja suoraan järjestelmään kohteesi rytmin mukaan.",
       },
       {
         title: "RF-kaukosäätimien digitaalinen ohjelmointi",

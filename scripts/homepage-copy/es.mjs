@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Hasta 50 eventos programados",
-        text: "Crea horarios recurrentes y acciones automáticas directamente en el sistema, según el funcionamiento de tu propiedad, con soporte para el modo Shabat.",
+        text: "Crea horarios recurrentes y acciones automáticas directamente en el sistema, según el funcionamiento de tu propiedad.",
       },
       {
         title: "Programación digital de controles remotos RF",

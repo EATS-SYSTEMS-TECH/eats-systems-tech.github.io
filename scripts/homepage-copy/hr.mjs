@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Do 50 zakazanih događaja",
-        text: "Izradite ponavljajuće rasporede i automatske radnje izravno u sustavu, prilagođene načinu na koji vaš objekt funkcionira, uključujući podršku za šabatni način rada.",
+        text: "Izradite ponavljajuće rasporede i automatske radnje izravno u sustavu, prilagođene načinu na koji vaš objekt funkcionira.",
       },
       {
         title: "Digitalno uparivanje RF daljinskih upravljača",

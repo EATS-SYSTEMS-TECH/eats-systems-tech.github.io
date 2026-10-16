@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Až 50 naplánovaných udalostí",
-        text: "Vytvárajte opakované harmonogramy a automatické akcie priamo v systéme podľa toho, ako funguje váš objekt, vrátane podpory šabatového režimu.",
+        text: "Vytvárajte opakované harmonogramy a automatické akcie priamo v systéme podľa toho, ako funguje váš objekt.",
       },
       {
         title: "Digitálne pridávanie RF ovládačov",

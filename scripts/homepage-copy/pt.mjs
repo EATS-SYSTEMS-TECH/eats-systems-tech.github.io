@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Até 50 eventos agendados",
-        text: "Crie horários recorrentes e ações automáticas diretamente no sistema, de acordo com o funcionamento do seu espaço, incluindo o modo Shabat.",
+        text: "Crie horários recorrentes e ações automáticas diretamente no sistema, de acordo com o funcionamento do seu espaço.",
       },
       {
         title: "Programação digital de comandos RF",
