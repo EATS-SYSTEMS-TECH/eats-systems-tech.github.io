@@ -4,6 +4,7 @@ export const SITE_NAVIGATION = [
   { key: "solutions", hash: "use-cases" },
   { key: "automation", hash: "wifigate-automation" },
   { key: "productGuide", hash: "tutorial-videos" },
+  { key: "shop", pageKey: "shop" },
   { key: "contact", hash: "get-in-touch" },
 ];
 

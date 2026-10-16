@@ -391,3 +391,38 @@ html.a11y-text-scaled .site-header .nav {
 @media (prefers-reduced-motion: reduce) {
   .site-header .site-account__arrow { transition: none; }
 }
+
+/* The home and shop headers are dark; their collapsed menu uses the same
+   surface. This selector also wins over the generic white mobile panel above. */
+@media (max-width: 1199px) {
+  :is(.home-en, .shop-page) .site-header .nav .nav__links-wrapper {
+    border-color: #333333;
+    background: #101010;
+    box-shadow: 0 22px 42px rgba(0, 0, 0, .35);
+  }
+  :is(.home-en, .shop-page) .site-header .topbar-nav {
+    padding-block: .35rem .65rem;
+  }
+  :is(.home-en, .shop-page) .site-header .topbar-nav .nav__link:not(.nav__contact-link) {
+    display: block;
+    padding-block: .68rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .12);
+    color: #f7f7f7;
+  }
+  :is(.home-en, .shop-page) .site-header .topbar-nav .nav__link:not(.nav__contact-link):hover,
+  :is(.home-en, .shop-page) .site-header .topbar-nav .nav__link:not(.nav__contact-link):focus-visible {
+    color: #b7d4ff;
+  }
+  :is(.home-en, .shop-page) .site-header .topbar-nav .nav__contact-link {
+    margin-top: .65rem;
+    border-color: #0b63ff;
+    background: #0b63ff;
+    color: #ffffff;
+  }
+  :is(.home-en, .shop-page) .site-header .topbar-nav .nav__contact-link:hover,
+  :is(.home-en, .shop-page) .site-header .topbar-nav .nav__contact-link:focus-visible {
+    border-color: #0542ad;
+    background: #0542ad;
+    color: #ffffff;
+  }
+}
