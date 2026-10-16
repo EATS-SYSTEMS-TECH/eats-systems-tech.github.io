@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Akár 50 ütemezett esemény",
-        text: "Hozzon létre ismétlődő ütemezéseket és automatikus műveleteket közvetlenül a rendszerben, a helyszín működéséhez igazítva, a szombati (sábesz) üzemmódot is beleértve.",
+        text: "Hozzon létre ismétlődő ütemezéseket és automatikus műveleteket közvetlenül a rendszerben, a helyszín működéséhez igazítva.",
       },
       {
         title: "RF-távirányítók digitális betanítása",

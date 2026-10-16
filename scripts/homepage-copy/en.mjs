@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Up to 50 Scheduled Events",
-        text: "Create recurring schedules and automated actions right in the system, to fit the way your property runs, including Sabbath mode.",
+        text: "Create recurring schedules and automated actions right in the system, to fit the way your property runs.",
       },
       {
         title: "Digital RF Remote Pairing",

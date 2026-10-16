@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Opptil 50 planlagte hendelser",
-        text: "Lag gjentakende tidsplaner og automatiske handlinger direkte i systemet, tilpasset måten stedet ditt drives på, inkludert støtte for sabbatsmodus.",
+        text: "Lag gjentakende tidsplaner og automatiske handlinger direkte i systemet, tilpasset måten stedet ditt drives på.",
       },
       {
         title: "Digital innlæring av RF-fjernkontroller",

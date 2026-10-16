@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Jusqu'à 50 événements programmés",
-        text: "Créez des plannings récurrents et des actions automatiques directement dans le système, au rythme de votre site, mode Shabbat compris.",
+        text: "Créez des plannings récurrents et des actions automatiques directement dans le système, au rythme de votre site.",
       },
       {
         title: "Apprentissage numérique des télécommandes RF",

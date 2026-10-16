@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Hingga 50 Jadwal Otomatis",
-        text: "Buat jadwal berulang dan tindakan otomatis langsung di sistem, sesuai cara properti Anda beroperasi, termasuk dukungan mode Sabat.",
+        text: "Buat jadwal berulang dan tindakan otomatis langsung di sistem, sesuai cara properti Anda beroperasi.",
       },
       {
         title: "Pendaftaran Remote RF Digital",

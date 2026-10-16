@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Do 50 zaplanowanych zdarzeń",
-        text: "Twórz cykliczne harmonogramy i automatyczne działania bezpośrednio w systemie, dopasowane do rytmu Twojego obiektu, w tym z obsługą trybu szabatowego.",
+        text: "Twórz cykliczne harmonogramy i automatyczne działania bezpośrednio w systemie, dopasowane do rytmu Twojego obiektu.",
       },
       {
         title: "Cyfrowe programowanie pilotów RF",

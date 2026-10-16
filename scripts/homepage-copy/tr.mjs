@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "50'ye kadar zamanlanmış görev",
-        text: "Tesisinizin işleyişine göre tekrarlanan programları ve otomatik işlemleri doğrudan sistemde oluşturun; Şabat modu desteği dahil.",
+        text: "Tesisinizin işleyişine göre tekrarlanan programları ve otomatik işlemleri doğrudan sistemde oluşturun.",
       },
       {
         title: "Dijital RF kumanda tanıtma",

@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Tối đa 50 sự kiện theo lịch",
-        text: "Tạo lịch định kỳ và thao tác tự động ngay trong hệ thống, phù hợp với cách vận hành tại địa điểm của bạn, kèm hỗ trợ chế độ Shabbat.",
+        text: "Tạo lịch định kỳ và thao tác tự động ngay trong hệ thống, phù hợp với cách vận hành tại địa điểm của bạn.",
       },
       {
         title: "Học mã remote RF trên ứng dụng",

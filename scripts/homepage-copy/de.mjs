@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Bis zu 50 geplante Ereignisse",
-        text: "Legen Sie direkt im System wiederkehrende Zeitpläne und automatische Aktionen an, passend zu den Abläufen an Ihrem Standort, inklusive Sabbat-Modus.",
+        text: "Legen Sie direkt im System wiederkehrende Zeitpläne und automatische Aktionen an, passend zu den Abläufen an Ihrem Standort.",
       },
       {
         title: "Funk-Handsender digital einlernen",

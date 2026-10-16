@@ -51,7 +51,7 @@ const copy = {
       },
       {
         title: "Tot 50 geplande acties",
-        text: "Maak terugkerende schema's en automatische acties rechtstreeks in het systeem aan, afgestemd op hoe je locatie werkt, inclusief ondersteuning voor de sabbatmodus.",
+        text: "Maak terugkerende schema's en automatische acties rechtstreeks in het systeem aan, afgestemd op hoe je locatie werkt.",
       },
       {
         title: "RF-afstandsbedieningen digitaal inleren",
