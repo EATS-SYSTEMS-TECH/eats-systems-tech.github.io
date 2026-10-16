@@ -6,6 +6,7 @@ import { execFileSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 import { NICHE_CHROME } from "./niche-content.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
+import { LANDING_PAGES } from "./landing-pages/index.mjs";
 import { SITE_LOGIN_LABELS, SITE_NAVIGATION } from "./site-navigation.mjs";
 import { RTL_LANGUAGES, SITE_LANGUAGES } from "./site-languages.mjs";
 import { accessibilityLinkLabels } from "./legal/footer-labels.mjs";
@@ -912,11 +913,25 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   $("[data-account-dashboard]").attr("href", locale === "he" ? "/dashboard/?lang=he" : "/dashboard/");
   setLocalizedText($, $("[data-account-sign-out]"), account.signOut, locale);
   const prefix = buildAssetPrefix(locale, pageKey);
-  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20261013a">');
+  $("head").append('<link rel="stylesheet" href="' + prefix + siteHeaderStylesheet + '">');
   $("script[src*='js/site-account.js']").remove();
   $("script[src*='js/navigation.js']")
     .attr("src", prefix + "js/navigation.js?v=20261007a")
     .after('\n  <script src="' + prefix + 'js/site-account.js?v=20261013a" defer></script>');
+}
+
+const siteHeaderStylesheet = "css/site-header.css?v=20261013a";
+
+// A landing page keeps the header's look and the logo, and nothing that leads
+// into the site: no menu, no logo link, no sign-in, account or language menu.
+function setStandaloneHeader($, locale, pageKey) {
+  $(".site-header script, .nav__toggle, .nav__links-wrapper, .site-login__trigger, .site-account, .language-selector").remove();
+  const logo = $(".nav__logo-link");
+  logo.replaceWith($("<span>").addClass(logo.attr("class")).append(logo.contents()));
+  const nav = $(".site-header .nav");
+  nav.replaceWith($("<div>").addClass(nav.attr("class")).append(nav.contents()));
+  $("script[src*='js/navigation.js'], script[src*='js/site-account.js']").remove();
+  $("head").append('<link rel="stylesheet" href="' + buildAssetPrefix(locale, pageKey) + siteHeaderStylesheet + '">');
 }
 
 // JSON safe to embed in an inline <script>.
@@ -924,8 +939,9 @@ function inlineJson(value) {
   return JSON.stringify(value).replace(/</g, "<");
 }
 
-function serialize($, homeData, locale, pageKey = "home") {
-  updateSharedHeader($, homeData, locale, pageKey);
+function serialize($, homeData, locale, pageKey = "home", { standalone = false } = {}) {
+  if (standalone) setStandaloneHeader($, locale, pageKey);
+  else updateSharedHeader($, homeData, locale, pageKey);
   // Every published page asks for cookie consent in its own language; the
   // footer's "Cookie settings" button reopens the choice.
   const settingsLabel = homeData.cookieCopy[locale].reopen;
@@ -1267,17 +1283,12 @@ function getCircularAdjacentNiches(currentKey) {
   };
 }
 
-function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
-  const { chrome, content } = ctx;
-  const localeNicheContent = getNichePageContent(locale);
-  const defaultNicheContent = getNichePageContent(defaultLocale);
-  const assetPrefix = buildAssetPrefix(locale, niche.key);
+// The hero, highlights, benefits and FAQ of the use-case design, shared by the
+// use-case pages and the landing pages (scripts/landing-pages/).
+function fillUseCaseBody($, { chrome, content, image, locale, pageKey, accessibilityBundle }) {
+  const assetPrefix = buildAssetPrefix(locale, pageKey);
 
-
-  $("#niche-breadcrumb-home").text(chrome.homeLabel);
-  $("#niche-breadcrumb-current").text(content.label);
-
-  $("#niche-eyebrow").text(chrome.eyebrow);
+  $("#niche-eyebrow").text(content.eyebrow || chrome.eyebrow);
   $("#niche-title").text(content.title);
 
   const heroLead = $("#niche-hero-lead");
@@ -1304,10 +1315,41 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
 
 
   $("#niche-image")
-    .attr("src", `${assetPrefix}${niche.image.hero}`)
+    .attr("src", `${assetPrefix}${image.hero}`)
     .attr("alt", content.imageAlt)
-    .attr("width", String(niche.image.heroWidth))
-    .attr("height", String(niche.image.heroHeight));
+    .attr("width", String(image.heroWidth))
+    .attr("height", String(image.heroHeight));
+
+  $("#niche-benefits-title").text(chrome.benefitsTitle);
+  setNicheBenefits($, content.bullets);
+
+  // The questions people ask about this use case, answered on the page and
+  // in its FAQPage data.
+  $("#niche-faq-title").text(chrome.faqTitle);
+  const faqList = $("#niche-faq-list").empty();
+  for (const item of content.faq) {
+    const entry = $("<details>").addClass("niche-faq__item");
+    const question = $("<summary>").addClass("niche-faq__question");
+    setLocalizedText($, question, item.question, locale);
+    const answer = $("<p>").addClass("niche-faq__answer");
+    setLocalizedText($, answer, item.answer, locale);
+    faqList.append(entry.append(question, answer));
+  }
+
+  $("#js-year").text(nowDate.slice(0, 4));
+
+  updateAccessibilityMarkup($, accessibilityBundle, locale);
+}
+
+function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
+  const { chrome, content } = ctx;
+  const localeNicheContent = getNichePageContent(locale);
+  const defaultNicheContent = getNichePageContent(defaultLocale);
+
+  fillUseCaseBody($, { chrome, content, image: niche.image, locale, pageKey: niche.key, accessibilityBundle });
+
+  $("#niche-breadcrumb-home").text(chrome.homeLabel);
+  $("#niche-breadcrumb-current").text(content.label);
 
   const adjacentNiches = getCircularAdjacentNiches(niche.key);
   if (adjacentNiches) {
@@ -1329,22 +1371,6 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
       .attr("title", nextLabel);
   }
 
-  $("#niche-benefits-title").text(chrome.benefitsTitle);
-  setNicheBenefits($, content.bullets);
-
-  // The questions people ask about this use case, answered on the page and
-  // in its FAQPage data.
-  $("#niche-faq-title").text(chrome.faqTitle);
-  const faqList = $("#niche-faq-list").empty();
-  for (const item of content.faq) {
-    const entry = $("<details>").addClass("niche-faq__item");
-    const question = $("<summary>").addClass("niche-faq__question");
-    setLocalizedText($, question, item.question, locale);
-    const answer = $("<p>").addClass("niche-faq__answer");
-    setLocalizedText($, answer, item.answer, locale);
-    faqList.append(entry.append(question, answer));
-  }
-
   // Every other use case and WIFIGATE Host, so each page leads to the rest.
   $("#niche-related-title").text(chrome.relatedTitle);
   const related = $("#niche-related-list").empty();
@@ -1357,10 +1383,6 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
   related.append($("<li>").append($("<a>").addClass("niche-related__link").attr("href", buildPagePath(locale, guestInvitesPageKey)).text("WIFIGATE Host")));
   // No closing CTA section: the hero already carries the WhatsApp action and
   // the shared footer carries support + WhatsApp Business.
-
-  $("#js-year").text(nowDate.slice(0, 4));
-
-  updateAccessibilityMarkup($, accessibilityBundle, locale);
 }
 
 function rewriteNicheInternalLinks($, locale) {
@@ -1443,6 +1465,55 @@ async function buildNichePages(homeData) {
         priority: "0.8",
       });
     }
+  }
+
+  return sitemapEntries;
+}
+
+// Landing pages (scripts/landing-pages/): the use-case design in one language,
+// without the breadcrumb, the use-case pager, the related links or the site
+// menu. The footer, the cookie banner and the accessibility menu stay, with
+// their legal pages.
+async function buildLandingPages(homeData) {
+  const template = await readHtmlTemplate(nicheTemplatePath);
+  const sitemapEntries = [];
+
+  for (const { key, locale, image, content } of LANDING_PAGES) {
+    const $ = cheerio.load(template, { decodeEntities: false });
+    const url = buildPageUrl(locale, key);
+
+    setBodyDirection($, locale);
+    rewriteStaticAssets($, locale, key);
+    fillUseCaseBody($, {
+      chrome: getNicheChrome(locale),
+      content,
+      image,
+      locale,
+      pageKey: key,
+      accessibilityBundle: getBundle(homeData.accessibilityCopy, locale),
+    });
+    // The emptied top bar stays: the hero spaces it from the copy, which keeps
+    // the copy at the bottom of the image as on the use-case pages.
+    $(".niche-breadcrumb, .niche-hero__pager, #niche-related").remove();
+    updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer);
+    rewriteFooterLegalLinks($, locale);
+
+    const ogImage = { url: `${siteOrigin}/${image.og}`, width: 1200, height: 630, alt: content.imageAlt };
+    setPageMeta($, {
+      locale,
+      url,
+      title: content.seoTitle,
+      description: content.seoDescription,
+      ogType: "article",
+      image: ogImage,
+      graph: [
+        webPageNode({ url, title: content.seoTitle, description: content.seoDescription, locale, image: ogImage }),
+        faqNode(url, locale, content.faq),
+      ],
+    });
+
+    await writeOutputFile(buildOutputFilePath(locale, key), serialize($, homeData, locale, key, { standalone: true }));
+    sitemapEntries.push({ loc: url, changefreq: "monthly", priority: "0.8" });
   }
 
   return sitemapEntries;
@@ -1596,6 +1667,7 @@ async function main() {
   }
   sitemapEntries.push(...(await buildLegalPages(homeData, legalCollections)));
   sitemapEntries.push(...(await buildNichePages(homeData)));
+  sitemapEntries.push(...(await buildLandingPages(homeData)));
   sitemapEntries.push(...(await buildGuestInvitesPages(homeData)));
   sitemapEntries.push(...(await buildUtilityPages(homeData)));
   // Sign-in pages are noindex, so they stay out of the sitemap.
