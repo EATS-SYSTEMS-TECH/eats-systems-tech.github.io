@@ -24,7 +24,7 @@ const defaultLocale = "en";
 const nowDate = new Date().toISOString().slice(0, 10);
 const guestInvitesPageKey = "automation";
 const utilityPageKeys = ["wifigate-link", "wifigate-api"];
-const COOKIE_CONSENT_VERSION = "20261015a";
+const COOKIE_CONSENT_VERSION = "20261016a";
 
 const homeTemplatePath = path.join(repoRoot, "templates", "index.template.html");
 const homeCopyDirectory = path.join(repoRoot, "scripts", "homepage-copy");
@@ -1668,6 +1668,13 @@ async function main() {
   sitemapEntries.push(...(await buildLegalPages(homeData, legalCollections)));
   sitemapEntries.push(...(await buildNichePages(homeData)));
   sitemapEntries.push(...(await buildLandingPages(homeData)));
+  // Consent-runtime delivery updates consumer assets without regenerating
+  // Business automation, invitation/API utilities or authentication pages.
+  if (process.argv.includes("--consumer-consent-only")) {
+    const niches = NICHE_DEFINITIONS.map((niche) => ({ key: niche.key, content: getNichePageContent(defaultLocale).niches[niche.key] }));
+    await writeOutputFile(path.join(repoRoot, "404.html"), buildNotFoundPage({ niches, pageUrl: buildPageUrl, cookieConsentVersion: COOKIE_CONSENT_VERSION }));
+    return;
+  }
   sitemapEntries.push(...(await buildGuestInvitesPages(homeData)));
   sitemapEntries.push(...(await buildUtilityPages(homeData)));
   // Sign-in pages are noindex, so they stay out of the sitemap.

@@ -16,6 +16,7 @@ test("unmodified production source follows the actual configured activation stat
   try {
     await fixture.page.locator("[data-cookie-accept]").click();
     assert.equal(fixture.tagRequests.length, configuredMeasurementId ? 1 : 0);
+    if (configuredMeasurementId) await fixture.page.waitForFunction(() => window.dataLayer?.some((command) => command[0] === "event"));
     assert.equal(events(await fixture.snapshot()).length, configuredMeasurementId ? 1 : 0);
   } finally { await fixture.context.close(); }
 });
@@ -67,6 +68,7 @@ test("consent loads one tag and one sanitized pageview with ads denied", async (
   });
   try {
     await fixture.page.locator("[data-cookie-accept]").click();
+    await fixture.page.waitForFunction(() => window.dataLayer?.some((command) => command[0] === "event"));
     const snapshot = await fixture.snapshot();
     assert.equal(fixture.tagRequests.length, 1);
     assert.equal(new URL(fixture.tagRequests[0]).searchParams.get("id"), fixtureMeasurementId);
@@ -116,6 +118,121 @@ test("withdrawal disables measurement and removes analytics cookies", async () =
     assert.deepEqual((await fixture.context.cookies()).map(({ name }) => name), ["necessary-test"]);
     await fixture.page.reload();
     assert.equal((await fixture.snapshot()).commands.length, 0);
+  } finally { await fixture.context.close(); }
+});
+
+test("withdrawal in another tab immediately denies an already accepted tab", async () => {
+  const fixture = await analyticsFixture(browser, { consent: accepted(), useUnmodifiedSource: true });
+  try {
+    await fixture.page.evaluate(() => window.addEventListener("storage", (event) => {
+      if (event.key === "wifigate-cookie-consent-v1") window.__consentStorageEvent = true;
+    }));
+    const other = await fixture.context.newPage();
+    await other.goto("https://wifigate.io/cookies/");
+    await other.locator("[data-cookie-settings]").click();
+    await other.locator("[data-cookie-reject]").click();
+    await fixture.page.waitForFunction(() => window.__consentStorageEvent === true);
+    const snapshot = await fixture.snapshot();
+    assert.equal(snapshot.disabled, true);
+    assert.deepEqual(snapshot.commands.at(-1), ["consent", "update", { analytics_storage: "denied" }]);
+    assert.equal(events(snapshot).length, 1);
+    await fixture.page.locator("[data-cookie-settings]").click();
+    assert.equal(await fixture.page.locator("[data-cookie-analytics]").isChecked(), false);
+  } finally { await fixture.context.close(); }
+});
+
+test("cleared or invalid shared consent revokes collection; unrelated storage does not", async () => {
+  for (const replacement of [null, "not-json", JSON.stringify({ version: 1, analytics: true, savedAt: Date.now() + 86400000 })]) {
+    const fixture = await analyticsFixture(browser, { consent: accepted(), useUnmodifiedSource: true });
+    try {
+      const other = await fixture.context.newPage();
+      await other.goto("https://wifigate.io/cookies/");
+      await fixture.page.evaluate(() => window.addEventListener("storage", () => { window.__consentStorageEvent = true; }));
+      await other.evaluate(() => localStorage.setItem("unrelated-setting", "synthetic"));
+      await fixture.page.waitForFunction(() => window.__consentStorageEvent === true);
+      assert.equal((await fixture.snapshot()).disabled, false);
+      await fixture.page.evaluate(() => { window.__consentStorageEvent = false; });
+      await other.evaluate((value) => {
+        if (value === null) localStorage.clear();
+        else localStorage.setItem("wifigate-cookie-consent-v1", value);
+      }, replacement);
+      await fixture.page.waitForFunction(() => window.__consentStorageEvent === true);
+      assert.equal((await fixture.snapshot()).disabled, true);
+      assert.deepEqual((await fixture.snapshot()).commands.at(-1), ["consent", "update", { analytics_storage: "denied" }]);
+    } finally { await fixture.context.close(); }
+  }
+});
+
+test("another tab cannot implicitly grant collection in a previously disabled document", async () => {
+  const fixture = await analyticsFixture(browser, { useUnmodifiedSource: true });
+  try {
+    await fixture.page.evaluate(() => window.addEventListener("storage", (event) => {
+      if (event.key === "wifigate-cookie-consent-v1") window.__consentStorageEvent = true;
+    }));
+    const other = await fixture.context.newPage();
+    await other.goto("https://wifigate.io/cookies/");
+    await other.locator("[data-cookie-accept]").click();
+    await fixture.page.waitForFunction(() => window.__consentStorageEvent === true);
+    assert.equal((await fixture.snapshot()).disabled, true);
+    assert.equal((await fixture.snapshot()).commands.length, 0);
+    assert.equal(fixture.tagRequests.length, 1);
+    await fixture.page.locator("[data-cookie-accept]").click();
+    await fixture.page.waitForFunction(() => window.dataLayer?.some((command) => command[0] === "event"));
+    assert.equal(events(await fixture.snapshot()).length, 1);
+    assert.equal(fixture.tagRequests.length, 2);
+  } finally { await fixture.context.close(); }
+});
+
+test("a failed tag download retries only after an explicit new acceptance", async () => {
+  const fixture = await analyticsFixture(browser, { useUnmodifiedSource: true });
+  let attempts = 0;
+  try {
+    await fixture.context.route("https://www.googletagmanager.com/gtag/js?*", (route) => {
+      attempts += 1;
+      return attempts === 1 ? route.abort("failed") : route.fulfill({ contentType: "text/javascript", body: "" });
+    });
+    const failed = fixture.page.waitForEvent("requestfailed", (request) => request.url().startsWith("https://www.googletagmanager.com/gtag/js"));
+    await fixture.page.locator("[data-cookie-accept]").click();
+    await failed;
+    await fixture.page.locator("[data-cookie-settings]").click();
+    await fixture.page.locator("[data-cookie-reject]").click();
+    assert.equal(attempts, 1);
+    assert.equal(events(await fixture.snapshot()).length, 0);
+    await fixture.page.locator("[data-cookie-settings]").click();
+    await fixture.page.locator("[data-cookie-analytics]").check();
+    await fixture.page.locator("[data-cookie-save]").click();
+    assert.equal(attempts, 2);
+    await fixture.page.waitForFunction(() => window.dataLayer?.some((command) => command[0] === "event"));
+    assert.equal(events(await fixture.snapshot()).length, 1);
+    assert.equal((await fixture.snapshot()).scriptCount, 1);
+    await fixture.page.locator("[data-cookie-settings]").click();
+    await fixture.page.locator("[data-cookie-save]").click();
+    assert.equal(attempts, 2);
+    assert.equal(events(await fixture.snapshot()).length, 1);
+  } finally { await fixture.context.close(); }
+});
+
+test("withdrawal during a pending tag download prevents late grant or pageview", async () => {
+  const fixture = await analyticsFixture(browser, { useUnmodifiedSource: true });
+  let pending;
+  try {
+    await fixture.context.route("https://www.googletagmanager.com/gtag/js?*", (route) => { pending = route; });
+    await fixture.page.locator("[data-cookie-accept]").click();
+    assert.ok(pending);
+    await fixture.page.locator("[data-cookie-settings]").click();
+    await fixture.page.locator("[data-cookie-reject]").click();
+    await pending.fulfill({ contentType: "text/javascript", body: "window.__ownedTagDownloadCompleted = true;" });
+    await fixture.page.waitForFunction(() => window.__ownedTagDownloadCompleted === true);
+    const snapshot = await fixture.snapshot();
+    assert.equal(snapshot.disabled, true);
+    assert.equal(snapshot.commands.filter(([command]) => command === "config").length, 0);
+    assert.equal(events(snapshot).length, 0);
+    assert.deepEqual(snapshot.commands.at(-1), ["consent", "update", { analytics_storage: "denied" }]);
+    await fixture.page.locator("[data-cookie-settings]").click();
+    await fixture.page.locator("[data-cookie-analytics]").check();
+    await fixture.page.locator("[data-cookie-save]").click();
+    assert.equal(events(await fixture.snapshot()).length, 1);
+    assert.equal((await fixture.snapshot()).scriptCount, 1);
   } finally { await fixture.context.close(); }
 });
 

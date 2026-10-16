@@ -56,7 +56,11 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
   const safe = Object.fromEntries(Object.entries(copy).map(([key, value]) => [key, escapeHtml(value)]));
   const consent = readConsent();
   let currentConsent = consent;
-  let analyticsLoaded = false;
+  let consentPersisted = consent !== null;
+  let analyticsLoadState = "idle";
+  let analyticsPrepared = false;
+  let analyticsConfigured = false;
+  let analyticsScript;
   let panel;
   let details;
   let analyticsInput;
@@ -67,21 +71,27 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
     document.body.style.setProperty("--cookie-banner-height", visible ? `${Math.ceil(panel.getBoundingClientRect().height)}px` : "0px");
   }
 
+  function validConsent(value) {
+    return value?.version === 1 && typeof value.analytics === "boolean" &&
+      Number.isFinite(value.savedAt) && value.savedAt >= 0 && value.savedAt <= Date.now() &&
+      Date.now() - value.savedAt < CONSENT_MAX_AGE;
+  }
+
   function readConsent() {
     try {
       const value = JSON.parse(localStorage.getItem(CONSENT_KEY) || "null");
-      if (value?.version === 1 && typeof value.analytics === "boolean" &&
-          Number.isFinite(value.savedAt) && value.savedAt >= 0 && value.savedAt <= Date.now() &&
-          Date.now() - value.savedAt < CONSENT_MAX_AGE) {
-        return value;
-      }
+      if (validConsent(value)) return value;
     } catch (_) { /* Storage can be unavailable in private browsing. */ }
     return null;
   }
 
   function writeConsent(analytics) {
     const value = { version: 1, analytics, savedAt: Date.now() };
-    try { localStorage.setItem(CONSENT_KEY, JSON.stringify(value)); } catch (_) { /* Keep this page's choice. */ }
+    consentPersisted = false;
+    try {
+      localStorage.setItem(CONSENT_KEY, JSON.stringify(value));
+      consentPersisted = true;
+    } catch (_) { /* Keep this page's choice. */ }
     currentConsent = value;
   }
 
@@ -96,45 +106,98 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
     }
   }
 
-  function applyConsent(analytics) {
+  function applyConsent(analytics, explicitChoice = false) {
     if (!GA_MEASUREMENT_ID) return;
     const page = analyticsPage();
-    const enabled = analytics && Boolean(page);
+    let enabled = analytics && Boolean(page) && validConsent(currentConsent) && currentConsent.analytics;
+    // A pending script can finish before another tab's storage event is handled.
+    // Recheck a persisted choice before granting; private-browsing page-only
+    // choices remain valid when their attempted storage write was unavailable.
+    if (enabled && consentPersisted) {
+      const stored = readConsent();
+      if (!stored?.analytics) {
+        currentConsent = stored;
+        enabled = false;
+      }
+    }
     window[`ga-disable-${GA_MEASUREMENT_ID}`] = !enabled;
     if (!enabled) removeAnalyticsCookies();
     if (!page) return;
-    if (analyticsLoaded) {
+    if (analyticsLoadState === "loaded") {
       window.gtag("consent", "update", { analytics_storage: enabled ? "granted" : "denied" });
+      if (enabled && !analyticsConfigured) {
+        analyticsConfigured = true;
+        window.gtag("set", page);
+        window.gtag("js", new Date());
+        window.gtag("config", GA_MEASUREMENT_ID, {
+          ...page,
+          // Enhanced Measurement, including history changes, must stay OFF
+          // in the web stream; send_page_view alone does not disable it.
+          send_page_view: false,
+          cookie_expires: 180 * 24 * 60 * 60,
+          cookie_update: false,
+          allow_google_signals: false,
+          allow_ad_personalization_signals: false,
+        });
+        window.gtag("event", "page_view", page);
+      }
       return;
     }
-    if (!enabled) return;
-    analyticsLoaded = true;
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
-    window.gtag("consent", "default", {
-      analytics_storage: "denied",
-      ad_storage: "denied",
-      ad_user_data: "denied",
-      ad_personalization: "denied",
-    });
-    window.gtag("consent", "update", { analytics_storage: "granted" });
-    window.gtag("set", page);
-    window.gtag("js", new Date());
-    window.gtag("config", GA_MEASUREMENT_ID, {
-      ...page,
-      // Keep Enhanced Measurement (including history changes) OFF in the web
-      // stream before activation; send_page_view alone does not disable it.
-      send_page_view: false,
-      cookie_expires: 180 * 24 * 60 * 60,
-      cookie_update: false,
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false,
-    });
-    window.gtag("event", "page_view", page);
+    if (!enabled) {
+      if (analyticsPrepared) window.gtag("consent", "update", { analytics_storage: "denied" });
+      return;
+    }
+    if (analyticsLoadState === "loading" || (analyticsLoadState === "failed" && !explicitChoice)) return;
+    if (!analyticsPrepared) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+      window.gtag("consent", "default", {
+        analytics_storage: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+      });
+      analyticsPrepared = true;
+    }
+    analyticsLoadState = "loading";
     const script = document.createElement("script");
+    analyticsScript = script;
     script.async = true;
     script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_MEASUREMENT_ID)}`;
+    script.onload = () => {
+      if (analyticsScript !== script) return;
+      script.onload = script.onerror = null;
+      analyticsLoadState = "loaded";
+      applyConsent(currentConsent?.analytics === true);
+    };
+    script.onerror = () => {
+      if (analyticsScript !== script) return;
+      script.onload = script.onerror = null;
+      analyticsScript = undefined;
+      analyticsLoadState = "failed";
+      script.remove();
+      window[`ga-disable-${GA_MEASUREMENT_ID}`] = true;
+      window.gtag("consent", "update", { analytics_storage: "denied" });
+    };
     document.head.append(script);
+  }
+
+  function sharedConsentChanged(event) {
+    if (event.key !== CONSENT_KEY && event.key !== null) return;
+    try { if (event.storageArea !== localStorage) return; } catch (_) { return; }
+    const stored = readConsent();
+    // Propagate revocation immediately. A different tab cannot implicitly
+    // enable a previously disabled document; its own accept or a normal reload
+    // may apply a valid affirmative saved choice.
+    if (stored?.analytics === true) return;
+    currentConsent = stored;
+    consentPersisted = stored !== null;
+    applyConsent(false);
+    if (analyticsInput) analyticsInput.checked = false;
+    if (panel) {
+      panel.querySelector("[data-cookie-close]").hidden = !currentConsent;
+      if (!currentConsent) openPanel();
+    }
   }
 
   function closePanel() {
@@ -148,7 +211,7 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
 
   function save(analytics) {
     writeConsent(analytics);
-    applyConsent(analytics);
+    applyConsent(analytics, true);
     panel.hidden = true;
     details.hidden = true;
     panel.classList.remove("is-customizing");
@@ -229,6 +292,7 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
     closeButton.hidden = !currentConsent;
     syncBannerOffset();
     window.addEventListener("resize", syncBannerOffset);
+    window.addEventListener("storage", sharedConsentChanged);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
