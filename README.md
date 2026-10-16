@@ -10,7 +10,7 @@ Static multilingual site structure:
 - Published localized pages are generated into `/`, `/he/`, `/es/`, `/fr/`, and the other language-code folders.
 - Use language codes for URLs, not country codes. Example: `/he/`, not `/il/`.
 - Niche/use-case page content (per locale) lives in `scripts/niche-pages/<locale>.mjs`; shared niche config (slugs, images, legacy redirects) is in `scripts/niche-pages/index.mjs`.
-- Landing pages (for example `/he/shabbat-clock-electric-gate/`) live in `scripts/landing-pages/<locale>.mjs`, Hebrew first: use-case pages in every language, with the site header and language menu, outside the use-case list. No page of the site links to them; `verify-site.mjs` checks that.
+- Landing pages (for example `/he/shabbat-clock-electric-gate/`) live in `scripts/landing-pages/<locale>.mjs`, Hebrew first: use-case pages in every language, with the site header and language menu, outside the use-case list, plus a definition, setup steps, a facts table and FAQ question headings (`fillLandingSections`, `css/landing.css`). The build checks every locale against the Hebrew, including title/description length, and the Hebrew and English for claims the product does not make. No page of the site links to them; `verify-site.mjs` checks that.
 - Rebuild all localized pages with `npm run build:locales`.
 - Regenerate optimized niche images (hero/card webp + og jpg) with `npm run build:images` after replacing a source PNG in `assets/wifigate_niche_pages/`.
 - Verify the generated site (SEO metadata, links, redirects, sitemap) with `node scripts/verify-site.mjs`.

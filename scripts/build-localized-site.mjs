@@ -1305,12 +1305,12 @@ function fillUseCaseBody($, { chrome, content, image, locale, pageKey, accessibi
     .attr("width", String(image.heroWidth))
     .attr("height", String(image.heroHeight));
 
-  $("#niche-benefits-title").text(chrome.benefitsTitle);
+  $("#niche-benefits-title").text(content.benefitsTitle || chrome.benefitsTitle);
   setNicheBenefits($, content.bullets);
 
   // The questions people ask about this use case, answered on the page and
   // in its FAQPage data.
-  $("#niche-faq-title").text(chrome.faqTitle);
+  $("#niche-faq-title").text(content.faqTitle || chrome.faqTitle);
   const faqList = $("#niche-faq-list").empty();
   for (const item of content.faq) {
     const entry = $("<details>").addClass("niche-faq__item");
@@ -1387,7 +1387,7 @@ function rewriteNicheInternalLinks($, locale) {
   rewriteFooterLegalLinks($, locale);
 }
 
-function setUseCaseMeta($, { pageKey, content, chrome, image: pageImage, locale, localeOptions }) {
+function setUseCaseMeta($, { pageKey, content, chrome, image: pageImage, locale, localeOptions, published, modified, about, mentions }) {
   const url = buildPageUrl(locale, pageKey);
   const image = {
     url: `${siteOrigin}/${pageImage.og}`,
@@ -1407,9 +1407,11 @@ function setUseCaseMeta($, { pageKey, content, chrome, image: pageImage, locale,
     description: content.seoDescription,
     alternates: alternatesFor(localeOptions, pageKey),
     ogType: "article",
+    published,
+    modified,
     image,
     graph: [
-      webPageNode({ url, title: content.seoTitle, description: content.seoDescription, locale, image, breadcrumbId: breadcrumb["@id"] }),
+      webPageNode({ url, title: content.seoTitle, description: content.seoDescription, locale, image, breadcrumbId: breadcrumb["@id"], about, mentions, datePublished: published, dateModified: modified }),
       breadcrumb,
       faqNode(url, locale, content.faq),
     ],
@@ -1461,29 +1463,112 @@ async function buildNichePages(homeData) {
 
 // Landing pages (scripts/landing-pages/): a use-case page in every language
 // that is not one of the use cases, so it has no place in the pager and no
-// page of the site links to it.
+// page of the site links to it. On top of the use-case sections it carries a
+// definition, numbered setup steps and a facts table, and its FAQ questions
+// are headings: short, self-contained passages that search and AI answers
+// can quote.
+function landingSection($, { id, title, background, locale }) {
+  const heading = $("<h2>").addClass("niche-section__title").attr("id", `${id}-title`);
+  setLocalizedText($, heading, title, locale);
+  const container = $("<div>").addClass("container")
+    .append($("<div>").addClass("niche-section__header").append(heading));
+  const section = $("<section>")
+    .addClass(`niche-section landing-section landing-section--${background}`)
+    .attr({ id, "aria-labelledby": `${id}-title` })
+    .append(container);
+  return { section, container };
+}
+
+function fillLandingSections($, { content, locale, modified }) {
+  const paragraph = (className, text) => {
+    const element = $("<p>").addClass(className);
+    setLocalizedText($, element, text, locale);
+    return element;
+  };
+
+  const intro = landingSection($, { id: "landing-intro", title: content.intro.title, background: "soft", locale });
+  // Gregorian year and ASCII digits, like every other number on the page.
+  const date = new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC", calendar: "gregory", numberingSystem: "latn" })
+    .format(new Date(`${modified}T00:00:00Z`));
+  const [before, after] = content.updatedLabel.split("{date}");
+  intro.container.append(
+    paragraph("landing-intro__text", content.intro.text),
+    $("<p>").addClass("landing-updated").append(
+      textSpan($, before), $("<time>").attr("datetime", modified).text(date), textSpan($, after)
+    )
+  );
+
+  const steps = landingSection($, { id: "landing-steps", title: content.steps.title, background: "light", locale });
+  const list = $("<ol>").addClass("landing-steps__list");
+  for (const item of content.steps.items) {
+    const step = $("<li>").addClass("landing-step");
+    setLocalizedText($, step, item, locale);
+    list.append(step);
+  }
+  steps.container.append(list, paragraph("landing-steps__note", content.steps.note));
+
+  const facts = landingSection($, { id: "landing-facts", title: content.facts.title, background: "light", locale });
+  const body = $("<tbody>");
+  for (const row of content.facts.rows) {
+    const label = $("<th>").attr("scope", "row");
+    const value = $("<td>");
+    setLocalizedText($, label, row.label, locale);
+    setLocalizedText($, value, row.value, locale);
+    body.append($("<tr>").append(label, value));
+  }
+  facts.container.append(
+    $("<table>").addClass("landing-facts__table").attr("aria-labelledby", "landing-facts-title").append(body)
+  );
+
+  // Highlights, definition, steps, benefits, facts, FAQ: bands alternate.
+  $("#niche-highlights").after(intro.section, steps.section);
+  $("#niche-benefits").after(facts.section);
+
+  // Each question is a heading inside its summary, with a stable anchor.
+  $("#niche-faq-list .niche-faq__question").each((index, element) => {
+    const question = $(element);
+    const heading = $("<h3>").addClass("landing-faq__heading").append(question.contents());
+    question.append(heading);
+    question.closest(".niche-faq__item").attr("id", `faq-${index + 1}`);
+  });
+}
+
+// Plain text around the date in the "updated" line.
+function textSpan($, text) {
+  return text ? $("<span>").text(text) : "";
+}
+
 async function buildLandingPages(homeData) {
   const template = await readHtmlTemplate(nicheTemplatePath);
   const sitemapEntries = [];
 
-  for (const { key, image } of LANDING_PAGES) {
+  for (const { key, image, published, modified, about, mentions } of LANDING_PAGES) {
     for (const { code: locale } of homeData.localeOptions) {
       const chrome = getNicheChrome(locale);
       const content = LANDING_PAGE_LOCALES[locale][key];
       const $ = cheerio.load(template, { decodeEntities: false });
+      const prefix = buildAssetPrefix(locale, key);
 
       setBodyDirection($, locale);
       rewriteStaticAssets($, locale, key);
       appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, key);
+      $("link[href*='css/niche.css']").after(`
+  <link rel="stylesheet" href="${prefix}css/landing.css?v=20261016a" />`);
       fillUseCaseBody($, { chrome, content, image, locale, pageKey: key, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
+      fillLandingSections($, { content, locale, modified });
       setUseCaseNavigation($, { chrome, content, locale, currentKey: key });
       $(".niche-hero__pager").remove();
       updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer);
       rewriteNicheInternalLinks($, locale);
-      setUseCaseMeta($, { pageKey: key, content, chrome, image, locale, localeOptions: homeData.localeOptions });
+      setUseCaseMeta($, {
+        pageKey: key, content, chrome, image, locale, localeOptions: homeData.localeOptions,
+        published, modified,
+        about: [{ "@type": "Thing", name: content.aboutName, sameAs: about }],
+        mentions: [{ "@type": "Thing", name: content.mentionsName, sameAs: mentions }],
+      });
 
       await writeOutputFile(buildOutputFilePath(locale, key), serialize($, homeData, locale, key));
-      sitemapEntries.push({ loc: buildPageUrl(locale, key), changefreq: "monthly", priority: "0.8" });
+      sitemapEntries.push({ loc: buildPageUrl(locale, key), lastmod: modified, changefreq: "monthly", priority: "0.8" });
     }
   }
 

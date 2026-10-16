@@ -92,7 +92,9 @@ export function websiteNode(locale) {
 }
 
 // A WebPage node tied to the site, the publisher and the brand it is about.
-export function webPageNode({ type = "WebPage", url, title, description, locale, image, breadcrumbId }) {
+// about: extra subjects beside the brand; mentions: other entities the page
+// talks about; datePublished/dateModified: YYYY-MM-DD.
+export function webPageNode({ type = "WebPage", url, title, description, locale, image, breadcrumbId, about = [], mentions = [], datePublished, dateModified }) {
   return {
     "@type": type,
     "@id": `${url}#webpage`,
@@ -102,7 +104,10 @@ export function webPageNode({ type = "WebPage", url, title, description, locale,
     inLanguage: locale,
     isPartOf: { "@id": WEBSITE_ID },
     publisher: { "@id": ORGANIZATION_ID },
-    about: { "@id": BRAND_ID },
+    about: about.length ? [{ "@id": BRAND_ID }, ...about] : { "@id": BRAND_ID },
+    ...(mentions.length ? { mentions } : {}),
+    ...(datePublished ? { datePublished } : {}),
+    ...(dateModified ? { dateModified } : {}),
     ...(image ? { primaryImageOfPage: { "@type": "ImageObject", url: image.url } } : {}),
     ...(breadcrumbId ? { breadcrumb: { "@id": breadcrumbId } } : {}),
   };
@@ -158,6 +163,8 @@ export function setPageMeta($, {
   image,
   brand = {},
   graph = [],
+  published,
+  modified,
 }) {
   $("title").text(title);
   setMeta($, "name", "description", description);
@@ -184,6 +191,9 @@ export function setPageMeta($, {
   setMeta($, "property", "og:url", url);
   setMeta($, "property", "og:title", title);
   setMeta($, "property", "og:description", description);
+  $("meta[property^='article:']").remove();
+  if (published) setMeta($, "property", "article:published_time", published);
+  if (modified) setMeta($, "property", "article:modified_time", modified);
   if (image) {
     setMeta($, "property", "og:image", image.url);
     setMeta($, "property", "og:image:width", image.width);
