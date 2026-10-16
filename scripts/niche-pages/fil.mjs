@@ -5,7 +5,7 @@ export default {
   "home": {
     "seoTitle": "WIFIGATE | Matalinong Access Control sa Gate, Pinto at Paradahan",
     "seoDescription": "Ang WIFIGATE ay matalinong access control system na nagbubukas ng gate, pinto, paradahan, shutter, at garahe gamit ang telepono. Ligtas, naka-encrypt, at maginhawa, walang buwanang subscription.",
-    "keywords": "WIFIGATE, WiFi Gate, wifi gate, matalinong access control, pagbukas ng gate gamit ang telepono, de-kuryenteng gate, kontrol sa pagpasok, walang buwanang subscription"
+    "keywords": "WIFIGATE, WiFi Gate, wifi gate, matalinong access control, pagbukas ng gate gamit ang telepono, awtomatikong gate, kontrol sa pagpasok, walang buwanang subscription"
   },
   "where": {
     "title": "Saan bagay gamitin ang WIFIGATE?",
@@ -123,7 +123,7 @@ export default {
       ]
     },
     "electric-gates": {
-      "label": "De-kuryenteng Gate at Harang sa Paradahan",
+      "label": "Awtomatikong Gate at Harang sa Paradahan",
       "title": "Hindi dapat may kasamang auto-debit ang pagbukas ng inyong gate!",
       "heroLead": "Ang mga system para sa pagbukas ng gate gamit ang telepono ay madalas may buwanang subscription na patuloy na sinisingil bawat buwan. Lumipat sa matalinong pagbukas na walang bayad sa subscription at walang auto-debit, na may personal na pahintulot at awtomatikong pagbukas para sa mga regular na user.",
       "highlights": [
@@ -143,9 +143,9 @@ export default {
           "text": "Sensitibong impormasyon ang mga pangalan at numero ng telepono, lalo na sa panahon ng AI. Sa WIFIGATE, naka-save ang listahan ng mga user sa mismong device, naka-encrypt at hindi nakalantad sa internet, sa isang matatag at maaasahang system para sa araw-araw na pagbukas."
         }
       ],
-      "paragraph": "Ginagamit ng mga residente, empleyado, bisita, at supplier ang mga de-kuryenteng gate at harang sa paradahan, pero mabilis na nagiging abala ang pamamahala ng mga remote, code, at tawag para ipabukas ang gate. Sa WIFIGATE, mabubuksan ang gate gamit ang telepono, maibabahagi ang permanente o pansamantalang access, magagamit ang awtomatikong pagbukas para sa mga regular na user, at maitatakda ang mga naka-iskedyul na event ayon sa pangangailangan. Dinisenyo ang system para sa ligtas, naka-encrypt, at pribadong operasyon, nang walang buwanang subscription o auto-debit, at puwede pa ring gamitin ang mga kasalukuyang remote kasabay ng kontrol mula sa app.",
+      "paragraph": "Ginagamit ng mga residente, empleyado, bisita, at supplier ang mga awtomatikong gate at harang sa paradahan, pero mabilis na nagiging abala ang pamamahala ng mga remote, code, at tawag para ipabukas ang gate. Sa WIFIGATE, mabubuksan ang gate gamit ang telepono, maibabahagi ang permanente o pansamantalang access, magagamit ang awtomatikong pagbukas para sa mga regular na user, at maitatakda ang mga naka-iskedyul na event ayon sa pangangailangan. Dinisenyo ang system para sa ligtas, naka-encrypt, at pribadong operasyon, nang walang buwanang subscription o auto-debit, at puwede pa ring gamitin ang mga kasalukuyang remote kasabay ng kontrol mula sa app.",
       "bullets": [
-        "Buksan ang de-kuryenteng gate o harang sa paradahan gamit ang telepono",
+        "Buksan ang awtomatikong gate o harang sa paradahan gamit ang telepono",
         "Walang buwanang subscription at walang auto-debit",
         "Magbahagi ng pansamantalang access sa mga bisita, supplier, at empleyado",
         "Auto Open para sa mga regular na user sa araw-araw na pagpasok",
@@ -154,12 +154,12 @@ export default {
         "Mas kaunting pamimigay ng pisikal na remote",
         "Kasaysayan ng pagbukas para sa kontrol at transparency"
       ],
-      "seoTitle": "Gate at Harang sa Paradahan, Walang Subscription | WIFIGATE",
-      "seoDescription": "Sa WIFIGATE, buksan ang gate at harang sa paradahan gamit ang telepono: Auto Open, naka-iskedyul na event, kasalukuyang remote, at walang buwanang subscription o auto-debit.",
-      "imageAlt": "Drayber na nagbubukas ng harang sa paradahan at de-kuryenteng gate gamit ang telepono",
+      "seoTitle": "Awtomatikong Gate at Harang, Walang Subscription | WIFIGATE",
+      "seoDescription": "Sa WIFIGATE, buksan ang awtomatikong gate at harang sa paradahan gamit ang telepono: Auto Open, naka-iskedyul na event, kasalukuyang remote, at walang buwanang subscription o auto-debit.",
+      "imageAlt": "Drayber na nagbubukas ng harang sa paradahan at awtomatikong gate gamit ang telepono",
       "faq": [
         {
-          "question": "Puwede bang buksan ang de-kuryenteng gate o harang sa paradahan gamit ang telepono?",
+          "question": "Puwede bang buksan ang awtomatikong gate o harang sa paradahan gamit ang telepono?",
           "answer": "Oo. Nakakonekta ang WIFIGATE sa gate o harang, at binubuksan ito ng mga awtorisadong user mula sa WIFIGATE app, gamit ang permanente o pansamantalang pahintulot."
         },
         {

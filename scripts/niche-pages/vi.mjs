@@ -5,7 +5,7 @@ export default {
   "home": {
     "seoTitle": "WIFIGATE | Kiểm soát ra vào thông minh cho cổng, cửa và bãi xe",
     "seoDescription": "WIFIGATE là hệ thống kiểm soát ra vào thông minh, mở cổng, cửa, bãi xe, cửa cuốn và gara bằng điện thoại. Bảo mật, mã hóa, tiện lợi, không thuê bao tháng.",
-    "keywords": "WIFIGATE, WiFi Gate, wifi gate, kiểm soát ra vào thông minh, mở cổng bằng điện thoại, cổng điện, kiểm soát ra vào, không thuê bao hằng tháng"
+    "keywords": "WIFIGATE, WiFi Gate, wifi gate, kiểm soát ra vào thông minh, mở cổng bằng điện thoại, cổng tự động, kiểm soát ra vào, không thuê bao hằng tháng"
   },
   "where": {
     "title": "WIFIGATE phù hợp với những nơi nào?",
@@ -123,7 +123,7 @@ export default {
       ]
     },
     "electric-gates": {
-      "label": "Cổng điện và barie bãi xe",
+      "label": "Cổng tự động và barie bãi xe",
       "title": "Mở cổng đâu cần bị trừ tiền tự động mỗi tháng!",
       "heroLead": "Các hệ thống mở cổng bằng điện thoại thường đi kèm thuê bao hằng tháng, cứ thế bị trừ tiền mỗi tháng. Hãy chuyển sang giải pháp mở cổng thông minh không phí thuê bao, không trừ tiền tự động, với quyền cá nhân và tính năng tự động mở cho người dùng thường xuyên.",
       "highlights": [
@@ -143,9 +143,9 @@ export default {
           "text": "Họ tên và số điện thoại là thông tin nhạy cảm, nhất là trong thời đại AI. Với WIFIGATE, danh sách người dùng được lưu ngay trên thiết bị, được mã hóa và tách biệt khỏi internet, cùng một hệ thống ổn định, đáng tin cậy cho việc mở cổng hằng ngày."
         }
       ],
-      "paragraph": "Cổng điện và barie bãi xe phục vụ cư dân, nhân viên, khách và nhà cung cấp, nhưng việc quản lý remote, mã số và các cuộc gọi nhờ mở cổng nhanh chóng trở nên rắc rối. WIFIGATE cho phép mở cổng bằng điện thoại, chia sẻ quyền ra vào cố định hoặc tạm thời, dùng tính năng tự động mở cho người dùng thường xuyên và thiết lập sự kiện theo lịch khi cần. Hệ thống được thiết kế để vận hành bảo mật, mã hóa và riêng tư, không cần thuê bao hằng tháng hay trừ tiền tự động, và bạn vẫn có thể tiếp tục dùng remote hiện có song song với điều khiển từ ứng dụng.",
+      "paragraph": "Cổng tự động và barie bãi xe phục vụ cư dân, nhân viên, khách và nhà cung cấp, nhưng việc quản lý remote, mã số và các cuộc gọi nhờ mở cổng nhanh chóng trở nên rắc rối. WIFIGATE cho phép mở cổng bằng điện thoại, chia sẻ quyền ra vào cố định hoặc tạm thời, dùng tính năng tự động mở cho người dùng thường xuyên và thiết lập sự kiện theo lịch khi cần. Hệ thống được thiết kế để vận hành bảo mật, mã hóa và riêng tư, không cần thuê bao hằng tháng hay trừ tiền tự động, và bạn vẫn có thể tiếp tục dùng remote hiện có song song với điều khiển từ ứng dụng.",
       "bullets": [
-        "Mở cổng điện hoặc barie bãi xe bằng điện thoại",
+        "Mở cổng tự động hoặc barie bãi xe bằng điện thoại",
         "Không thuê bao hằng tháng, không trừ tiền tự động",
         "Chia sẻ quyền tạm thời cho khách, nhà cung cấp và nhân viên",
         "Auto Open cho người dùng thường xuyên ở lối vào hằng ngày",
@@ -154,12 +154,12 @@ export default {
         "Bớt phải phát remote vật lý",
         "Lịch sử mở cổng giúp kiểm soát và minh bạch"
       ],
-      "seoTitle": "Kiểm soát ra vào cổng điện và barie không thuê bao | WIFIGATE",
-      "seoDescription": "WIFIGATE mở cổng điện và barie bãi xe bằng điện thoại, với Auto Open, sự kiện theo lịch, remote hiện có, quản lý quyền, không thuê bao hay trừ tiền tự động.",
-      "imageAlt": "Tài xế mở barie bãi xe và cổng điện bằng điện thoại",
+      "seoTitle": "Kiểm soát ra vào cổng tự động và barie không thuê bao | WIFIGATE",
+      "seoDescription": "WIFIGATE mở cổng tự động và barie bãi xe bằng điện thoại, với Auto Open, sự kiện theo lịch, remote hiện có, quản lý quyền, không thuê bao hay trừ tiền tự động.",
+      "imageAlt": "Tài xế mở barie bãi xe và cổng tự động bằng điện thoại",
       "faq": [
         {
-          "question": "Có thể mở cổng điện hoặc barie bãi xe bằng điện thoại không?",
+          "question": "Có thể mở cổng tự động hoặc barie bãi xe bằng điện thoại không?",
           "answer": "Có. WIFIGATE được kết nối với cổng hoặc barie, và người có quyền mở từ ứng dụng WIFIGATE, với quyền cố định hoặc tạm thời."
         },
         {
