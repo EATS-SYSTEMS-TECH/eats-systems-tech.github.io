@@ -28,11 +28,13 @@ const localeOptions = [
 const rtlLocales = new Set(["he", "ar"]);
 const nicheKeys = NICHE_DEFINITIONS.map((n) => n.key);
 const legalPages = ["privacy-policy", "terms-and-conditions", "cookies", "accessibility"];
-const indexablePages = ["home", "automation", ...nicheKeys];
+const landingKeys = LANDING_PAGES.map((page) => page.key);
+const indexablePages = ["home", "automation", ...nicheKeys, ...landingKeys];
 const interactivePages = [
   "home",
   "automation",
   ...nicheKeys,
+  ...landingKeys,
   "cookies",
   "privacy-policy",
   "terms-and-conditions",
@@ -195,7 +197,7 @@ async function main() {
       await checkResolvable($, filePath, "link[rel='stylesheet']", "href", "stylesheet");
       await checkResolvable($, filePath, "script[src]", "src", "script");
 
-      if (nicheKeys.includes(pageKey)) {
+      if (nicheKeys.includes(pageKey) || landingKeys.includes(pageKey)) {
         // The benefits grid is a 3x3 square: eight bullets plus one inert tile
         // in the middle cell. Any other count turns the square into a ragged
         // block, and the gap tile is what makes the hole deliberate.
@@ -435,53 +437,11 @@ async function main() {
     }
   }
 
-  // Landing pages: indexable, in one language, and cut off from the site in
-  // both directions. Their only site links are the legal pages; no other page
-  // links to them.
-  const landingPaths = new Set(LANDING_PAGES.map((page) => pagePath(page.locale, page.key)));
-  for (const page of LANDING_PAGES) {
-    const filePath = pageFile(page.locale, page.key);
-    const rel = path.relative(repoRoot, filePath);
-    if (!(await fileExists(filePath))) {
-      problems.push(`${page.locale}/${page.key}: landing page not generated (${rel})`);
-      continue;
-    }
-    const html = await fs.readFile(filePath, "utf8");
-    const $ = cheerio.load(html);
-    const url = `${siteOrigin}${pagePath(page.locale, page.key)}`;
-    if (!$("title").text().trim()) problems.push(`${rel}: empty <title>`);
-    if (!($("meta[name='description']").attr("content") || "").trim()) problems.push(`${rel}: empty meta description`);
-    if ($("link[rel='canonical']").attr("href") !== url) problems.push(`${rel}: canonical must be ${url}`);
-    if ($("link[rel='alternate'][hreflang]").length) problems.push(`${rel}: a one-language page has no hreflang links`);
-    for (const name of ["robots", "googlebot"]) {
-      const directives = $(`meta[name='${name}']`).map((_, element) => $(element).attr("content") || "").get();
-      if (directives.length !== 1 || directives[0] !== "index, follow") {
-        problems.push(`${rel}: ${name} must have exactly one index, follow directive`);
-      }
-    }
-    if ($("html").attr("lang") !== page.locale) problems.push(`${rel}: html lang must be ${page.locale}`);
-    if ($("html").attr("dir") !== (rtlLocales.has(page.locale) ? "rtl" : "ltr")) problems.push(`${rel}: wrong dir`);
-    if ($("h1").length !== 1) problems.push(`${rel}: has ${$("h1").length} <h1> elements, expected 1`);
-    if (html.includes("—")) problems.push(`${rel}: contains a disallowed em dash in visible site content`);
-    if ($("#niche-benefits-list li").not(".niche-benefit--gap").length !== 8) problems.push(`${rel}: expected 8 benefit bullets`);
-    if ($(".niche-highlight__icon svg").length !== 3) problems.push(`${rel}: expected 3 highlights with icons`);
-    if (!$("#niche-faq-list .niche-faq__item").length) problems.push(`${rel}: no FAQ`);
-    if (!($("#niche-image").attr("alt") || "").trim()) problems.push(`${rel}: hero image has empty alt`);
-    if ($("#a11y-fab").length !== 1 || $("#a11y-statement").attr("href") !== pagePath(page.locale, "accessibility")) {
-      problems.push(`${rel}: the accessibility menu and its statement link must be on the page`);
-    }
-    if (!$("script[src*='js/cookie-consent.js']").length) problems.push(`${rel}: no cookie banner`);
-    const legalPaths = new Set(legalPages.map((key) => pagePath(page.locale, key)));
-    $("a[href]").each((_, element) => {
-      const href = $(element).attr("href") || "";
-      if (href.startsWith("#") || /^(https?:|mailto:|tel:)/i.test(href) && !href.startsWith(siteOrigin)) return;
-      const target = href.replace(siteOrigin, "").split("#")[0].split("?")[0];
-      if (!legalPaths.has(target)) problems.push(`${rel}: links into the site ("${href}")`);
-    });
-    await checkResolvable($, filePath, "a[href]", "href", "link");
-    await checkResolvable($, filePath, "img[src]", "src", "image");
-    await checkResolvable($, filePath, "link[rel='stylesheet']", "href", "stylesheet");
-    await checkResolvable($, filePath, "script[src]", "src", "script");
+  // Landing pages: no page of the site links to them. Only the other
+  // language versions of a landing page do, through the language menu.
+  const landingPaths = new Map();
+  for (const key of landingKeys) {
+    for (const locale of localeOptions) landingPaths.set(pagePath(locale, key), key);
   }
   for (const locale of localeOptions) {
     for (const pageKey of [...indexablePages, ...legalPages]) {
@@ -494,7 +454,10 @@ async function main() {
       const $ = cheerio.load(html);
       $("a[href]").each((_, element) => {
         const target = ($(element).attr("href") || "").replace(siteOrigin, "").split("#")[0].split("?")[0];
-        if (landingPaths.has(target)) problems.push(`${locale}/${pageKey}: links to the landing page ${target}`);
+        const linked = landingPaths.get(target);
+        if (linked && !(linked === pageKey && $(element).closest(".language-selector").length)) {
+          problems.push(`${locale}/${pageKey}: links to the landing page ${target}`);
+        }
       });
     }
   }
@@ -514,7 +477,6 @@ async function main() {
     for (const locale of localeOptions) expectedUrls.add(`${siteOrigin}${pagePath(locale, pageKey)}`);
   }
   expectedUrls.add(`${siteOrigin}/contact-us/`);
-  for (const page of LANDING_PAGES) expectedUrls.add(`${siteOrigin}${pagePath(page.locale, page.key)}`);
   for (const url of sitemapUrls) {
     if (!expectedUrls.has(url)) problems.push(`sitemap.xml: unexpected URL ${url}`);
   }
