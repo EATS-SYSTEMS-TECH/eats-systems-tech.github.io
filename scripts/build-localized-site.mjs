@@ -15,7 +15,7 @@ import { buildLlmsTxt } from "./llms-txt.mjs";
 import { LEGAL_PAGES, legalBundles, renderLegalMain } from "./legal/legal-pages.mjs";
 import { buildNotFoundPage } from "./not-found-page.mjs";
 import { buildLoginPages } from "./login-pages.mjs";
-import { BRAND_ID, ORGANIZATION_ID, SITE_ORIGIN, breadcrumbNode, faqNode, setPageMeta, webPageNode } from "./seo.mjs";
+import { BRAND_ID, ORGANIZATION_ID, SITE_ORIGIN, breadcrumbNode, faqNode, hreflangCode, setPageMeta, webPageNode } from "./seo.mjs";
 import { readSceneManifest, applyNicheSceneMedia, applyHomeSceneMedia } from "./scene-media.mjs";
 
 const repoRoot = process.cwd();
@@ -337,7 +337,11 @@ function alternatesFor(localeOptions, pageKey) {
   if (!localeOptions.length) return [];
   return [
     { hreflang: "x-default", href: buildPageUrl(defaultLocale, pageKey) },
-    ...localeOptions.map((option) => ({ hreflang: option.code, href: buildPageUrl(option.code, pageKey) })),
+    ...localeOptions.map((option) => ({
+      hreflang: hreflangCode(option.code),
+      href: buildPageUrl(option.code, pageKey),
+      locale: option.code,
+    })),
   ];
 }
 

@@ -41,6 +41,15 @@ export function ogLocale(locale) {
   return value;
 }
 
+// Google's hreflang takes only ISO 639-1 language codes. Filipino has none, so
+// its pages are listed as "tl"; the URL (/fil/) and html lang stay "fil", the
+// registered BCP 47 subtag, which browsers treat as the same language as "tl".
+const HREFLANG_CODES = { fil: "tl" };
+
+export function hreflangCode(locale) {
+  return HREFLANG_CODES[locale] || locale;
+}
+
 export function organizationNode() {
   return {
     "@type": "Organization",
@@ -148,7 +157,8 @@ function setMeta($, attribute, key, content) {
 }
 
 // Writes the whole head metadata of a page.
-//   alternates: [{ hreflang, href }] (empty for pages outside a language cluster)
+//   alternates: [{ hreflang, href, locale }] (empty for pages outside a language
+//               cluster; x-default has no locale)
 //   image:      { url, width?, height?, alt? }
 //   graph:      page-specific JSON-LD nodes; Organization, WebSite and Brand
 //               are always added.
@@ -185,8 +195,8 @@ export function setPageMeta($, {
   setMeta($, "property", "og:site_name", "WIFIGATE");
   setMeta($, "property", "og:locale", ogLocale(locale));
   for (const alternate of alternates) {
-    if (alternate.hreflang === "x-default" || alternate.hreflang === locale) continue;
-    $("head").append(`\n  <meta property="og:locale:alternate" content="${ogLocale(alternate.hreflang)}" />`);
+    if (!alternate.locale || alternate.locale === locale) continue;
+    $("head").append(`\n  <meta property="og:locale:alternate" content="${ogLocale(alternate.locale)}" />`);
   }
   setMeta($, "property", "og:url", url);
   setMeta($, "property", "og:title", title);

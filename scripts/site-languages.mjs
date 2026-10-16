@@ -1,7 +1,7 @@
 // scripts/site-languages.mjs
-// The published website languages, in language-menu order: code (URL and
-// hreflang), native name and flag. One list for the build, the checks and
-// the language menu.
+// The published website languages, in language-menu order: code (URL, html
+// lang and, through hreflangCode in seo.mjs, hreflang), native name and flag.
+// One list for the build, the checks and the language menu.
 
 export const SITE_LANGUAGES = [
   {
