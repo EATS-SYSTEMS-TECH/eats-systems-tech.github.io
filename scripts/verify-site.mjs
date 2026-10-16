@@ -227,6 +227,23 @@ async function main() {
 
         const alt = $("#niche-image").attr("alt") || "";
         if (!alt.trim()) problems.push(`${rel}: niche hero image has empty alt`);
+
+        // A landing page adds the definition, the setup steps, the facts table
+        // and question headings in its FAQ.
+        if (landingKeys.includes(pageKey)) {
+          if (!$("#landing-intro .niche-section__title").text().trim() || !$(".landing-intro__text").text().trim()) {
+            problems.push(`${rel}: landing definition is missing`);
+          }
+          if (!$(".landing-updated time[datetime]").length) problems.push(`${rel}: landing page has no updated date`);
+          if ($("#landing-steps .landing-step").length < 3) problems.push(`${rel}: landing steps are missing`);
+          const factRows = $("#landing-facts tbody tr").length;
+          if (factRows < 4 || $("#landing-facts th[scope='row']").length !== factRows) {
+            problems.push(`${rel}: landing facts table needs a row header in each of at least 4 rows`);
+          }
+          if ($(".landing-faq__heading").length !== $("#niche-faq-list .niche-faq__item").length) {
+            problems.push(`${rel}: every landing FAQ question must be a heading`);
+          }
+        }
       } else if (pageKey === "home") {
         const links = $(".where-list__link[data-niche-key]").length;
         if (links !== nicheKeys.length) {
