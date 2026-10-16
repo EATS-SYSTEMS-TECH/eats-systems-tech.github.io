@@ -5,7 +5,7 @@ export default {
   "home": {
     "seoTitle": "WIFIGATE | Akses pintar pintu pagar, pintu & tempat letak kereta",
     "seoDescription": "WIFIGATE ialah kawalan akses pintar untuk membuka pintu pagar, pintu, tempat letak kereta, pintu gulung dan garaj melalui telefon. Selamat, disulitkan, mudah, tanpa langganan bulanan.",
-    "keywords": "WIFIGATE, WiFi Gate, wifi gate, kawalan akses pintar, buka pintu pagar dengan telefon, pintu pagar elektrik, kawalan kemasukan, tanpa langganan bulanan"
+    "keywords": "WIFIGATE, WiFi Gate, wifi gate, kawalan akses pintar, buka pintu pagar dengan telefon, pintu pagar automatik, kawalan kemasukan, tanpa langganan bulanan"
   },
   "where": {
     "title": "Di manakah WIFIGATE sesuai digunakan?",
@@ -123,7 +123,7 @@ export default {
       ]
     },
     "electric-gates": {
-      "label": "Pintu Pagar Elektrik dan Palang Letak Kereta",
+      "label": "Pintu Pagar Automatik dan Palang Letak Kereta",
       "title": "Membuka pintu pagar tidak sepatutnya dikenakan potongan bulanan!",
       "heroLead": "Sistem membuka pintu pagar melalui telefon sering datang dengan langganan yang terus memotong akaun anda setiap bulan. Beralih kepada pembukaan pintar tanpa yuran langganan dan tanpa potongan automatik, dengan kebenaran peribadi dan Buka Automatik untuk pengguna tetap.",
       "highlights": [
@@ -143,9 +143,9 @@ export default {
           "text": "Nama dan nombor telefon ialah maklumat sensitif, terutamanya dalam era AI. Dalam WIFIGATE, pangkalan data pengguna disimpan pada peranti itu sendiri, disulitkan dan terlindung daripada pendedahan internet, dalam sistem yang stabil dan boleh diharap untuk kegunaan harian."
         }
       ],
-      "paragraph": "Pintu pagar elektrik dan palang letak kereta digunakan oleh penghuni, pekerja, tetamu dan pembekal, tetapi mengurus alat kawalan jauh, kod dan panggilan telefon untuk membuka pintu pagar cepat menjadi rumit. WIFIGATE membolehkan anda membuka pintu pagar melalui telefon, berkongsi akses tetap atau sementara, menggunakan Buka Automatik untuk pengguna tetap dan menetapkan acara berjadual mengikut keperluan. Sistem ini direka untuk operasi yang selamat, disulitkan dan peribadi, tanpa langganan bulanan atau potongan automatik, dan alat kawalan jauh sedia ada boleh terus digunakan bersama kawalan melalui aplikasi.",
+      "paragraph": "Pintu pagar automatik dan palang letak kereta digunakan oleh penghuni, pekerja, tetamu dan pembekal, tetapi mengurus alat kawalan jauh, kod dan panggilan telefon untuk membuka pintu pagar cepat menjadi rumit. WIFIGATE membolehkan anda membuka pintu pagar melalui telefon, berkongsi akses tetap atau sementara, menggunakan Buka Automatik untuk pengguna tetap dan menetapkan acara berjadual mengikut keperluan. Sistem ini direka untuk operasi yang selamat, disulitkan dan peribadi, tanpa langganan bulanan atau potongan automatik, dan alat kawalan jauh sedia ada boleh terus digunakan bersama kawalan melalui aplikasi.",
       "bullets": [
-        "Buka pintu pagar elektrik atau palang letak kereta melalui telefon",
+        "Buka pintu pagar automatik atau palang letak kereta melalui telefon",
         "Tiada langganan bulanan dan tiada potongan automatik",
         "Kongsi akses sementara dengan tetamu, pembekal dan pekerja",
         "Buka Automatik (Auto Open) untuk pengguna tetap setiap hari",
@@ -154,12 +154,12 @@ export default {
         "Kurang keperluan untuk mengedarkan alat kawalan jauh fizikal",
         "Sejarah pembukaan untuk kawalan dan ketelusan"
       ],
-      "seoTitle": "Akses Pintu Pagar Elektrik & Palang Tanpa Langganan | WIFIGATE",
-      "seoDescription": "WIFIGATE membuka pintu pagar elektrik dan palang letak kereta melalui telefon: Buka Automatik, acara berjadual, alat kawalan jauh sedia ada, pengurusan kebenaran, tanpa langganan atau potongan bulanan.",
-      "imageAlt": "Pemandu membuka palang letak kereta dan pintu pagar elektrik dengan telefon",
+      "seoTitle": "Akses Pintu Pagar Automatik & Palang Tanpa Langganan | WIFIGATE",
+      "seoDescription": "WIFIGATE membuka pintu pagar automatik dan palang letak kereta melalui telefon: Buka Automatik, acara berjadual, alat kawalan jauh sedia ada, pengurusan kebenaran, tanpa langganan atau potongan bulanan.",
+      "imageAlt": "Pemandu membuka palang letak kereta dan pintu pagar automatik dengan telefon",
       "faq": [
         {
-          "question": "Bolehkah saya membuka pintu pagar elektrik atau palang letak kereta melalui telefon?",
+          "question": "Bolehkah saya membuka pintu pagar automatik atau palang letak kereta melalui telefon?",
           "answer": "Boleh. WIFIGATE disambungkan ke pintu pagar atau palang, dan pemegang kebenaran membukanya melalui aplikasi WIFIGATE, dengan kebenaran tetap atau sementara."
         },
         {
