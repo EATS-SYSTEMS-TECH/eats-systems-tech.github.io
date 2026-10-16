@@ -27,7 +27,7 @@
   font-size: 0.95rem;
 }
 
-/* Setup steps: numbered tiles drawn like the benefits grid. */
+/* Setup steps: numbered tiles on hairline rules. */
 .landing-steps__list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

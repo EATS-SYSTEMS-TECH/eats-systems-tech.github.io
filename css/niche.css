@@ -415,15 +415,76 @@ html[dir="rtl"] .niche-hero__nav-icon {
   text-wrap: balance;
 }
 
+/* Key benefits: a dark band of glass tiles, each with a blue success check.
+   The centre tile of the 3x3 grid (li.niche-benefit--gap, aria-hidden) is a
+   decorative check inside rings. The only motion is on hover (the lift and
+   the top line), for a pointer that hovers and when motion is allowed. */
+#niche-benefits {
+  --benefit-band: #07080b;
+  --benefit-tile: #0e1014;
+  --benefit-line: rgba(110, 160, 255, 0.62);
+  --benefit-text: #f4f6fa;
+  --benefit-muted: rgba(235, 240, 250, 0.6);
+  --benefit-blue: #146bff;
+  --benefit-blue-hi: #5a9bff;
+  --benefit-blue-lo: #0a4fd6;
+  --benefit-pad: clamp(1.4rem, 2.3vw, 2.1rem);
+  --benefit-badge: 2.6rem;
+  --benefit-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.2 12.6l4.4 4.4L18.8 7.6'/%3E%3C/svg%3E");
+
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  color: var(--benefit-text);
+  background:
+    radial-gradient(52rem 36rem at 50% 64%, rgba(20, 107, 255, 0.17), transparent 68%),
+    radial-gradient(38rem 26rem at 100% 0%, rgba(20, 107, 255, 0.09), transparent 72%),
+    var(--benefit-band);
+}
+
+/* A faint grid behind the tiles, fading out towards the edges. */
+#niche-benefits::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-position: center top;
+  background-size: 4rem 4rem;
+  -webkit-mask-image: radial-gradient(ellipse 72% 62% at 50% 38%, #000 18%, transparent 78%);
+  mask-image: radial-gradient(ellipse 72% 62% at 50% 38%, #000 18%, transparent 78%);
+}
+
+/* A short glowing rule above the title, like the hero eyebrow. */
+#niche-benefits .niche-section__header::before {
+  display: block;
+  width: 2.25rem;
+  height: 2px;
+  margin-block-end: 1.4rem;
+  content: "";
+  background: linear-gradient(90deg, var(--benefit-blue), var(--benefit-blue-hi));
+  box-shadow: 0 0 14px rgba(20, 107, 255, 0.7);
+}
+
+html[dir="rtl"] #niche-benefits .niche-section__header::before {
+  background: linear-gradient(270deg, var(--benefit-blue), var(--benefit-blue-hi));
+}
+
+#niche-benefits .niche-section__title {
+  color: #ffffff;
+}
+
 .niche-benefits__grid {
+  container: benefits / inline-size;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
+  gap: clamp(0.75rem, 1.3vw, 1.1rem);
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--home-line);
-  border-inline-start: 1px solid var(--home-line);
   counter-reset: benefit;
 }
 
@@ -431,67 +492,302 @@ html[dir="rtl"] .niche-hero__nav-icon {
   position: relative;
   display: flex;
   min-width: 0;
-  min-height: 12.5rem;
-  aspect-ratio: 1 / 1;
+  min-height: clamp(13.5rem, 19.5vw, 16.5rem);
   margin: 0;
-  padding: 3.25rem 2rem 1.9rem;
-  overflow: hidden;
+  padding: calc(var(--benefit-pad) + var(--benefit-badge) + 2.25rem) var(--benefit-pad) var(--benefit-pad);
+  overflow: clip;
   align-items: flex-end;
-  border: 0;
-  border-inline-end: 1px solid var(--home-line);
-  border-bottom: 1px solid var(--home-line);
-  border-radius: 0;
-  background: #ffffff;
-  box-shadow: none;
-  color: var(--home-ink);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--benefit-text);
+  /* Glass rim: a lighter top edge with a short blue light line on it. */
+  background:
+    linear-gradient(90deg, transparent, var(--benefit-line), transparent) center top / 46% 1px no-repeat border-box,
+    radial-gradient(120% 90% at 50% 0%, rgba(255, 255, 255, 0.05), transparent 60%) padding-box,
+    linear-gradient(var(--benefit-tile), var(--benefit-tile)) padding-box,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.07) 42%, rgba(255, 255, 255, 0.05)) border-box;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
   font-family: "Space Grotesk", "Manrope", sans-serif;
-  font-size: 1.12rem;
+  font-size: clamp(1.14rem, 1.6vw, 1.42rem);
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.3;
+  hyphens: auto;
   text-wrap: pretty;
   counter-increment: benefit;
-  transition: background-color 180ms ease;
+  transition: box-shadow 260ms ease;
 }
 
+/* A word longer than the tile breaks instead of being clipped (150% text,
+   long compounds); the id outranks the accessibility rule that sets
+   break-word on every element. */
+#niche-benefits .niche-benefit {
+  overflow-wrap: anywhere;
+}
+
+/* Scripts with stacked marks need taller lines. */
+.niche-benefit:is(:lang(bn), :lang(hi), :lang(mr), :lang(te), :lang(th)) {
+  line-height: 1.55;
+}
+
+/* Success check badge */
 .niche-benefit::before {
   position: absolute;
-  top: 1.35rem;
-  inset-inline-end: 1.5rem;
-  width: auto;
-  height: auto;
+  inset-block-start: var(--benefit-pad);
+  inset-inline-start: var(--benefit-pad);
+  width: var(--benefit-badge);
+  height: var(--benefit-badge);
   margin: 0;
-  border-radius: 0;
-  box-shadow: none;
-  color: #9a9a9a;
-  background: none;
-  content: counter(benefit, decimal-leading-zero);
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 0.72rem;
-  font-weight: 600;
+  border-radius: 50%;
+  content: "";
+  background:
+    var(--benefit-check) center / 46% no-repeat,
+    radial-gradient(circle at 32% 24%, var(--benefit-blue-hi), var(--benefit-blue) 52%, var(--benefit-blue-lo));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.22),
+    0 0 0 5px rgba(20, 107, 255, 0.13),
+    0 8px 26px -4px rgba(20, 107, 255, 0.7);
+  transition: box-shadow 260ms ease;
 }
 
+/* Index number at the top end, silent for screen readers. */
 .niche-benefit::after {
-  content: none;
+  position: absolute;
+  inset-block-start: calc(var(--benefit-pad) + (var(--benefit-badge) - 1.2em) / 2);
+  inset-inline-end: var(--benefit-pad);
+  content: counter(benefit, decimal-leading-zero);
+  content: counter(benefit, decimal-leading-zero) / "";
+  color: var(--benefit-muted);
+  font-family: "Space Grotesk", "Manrope", sans-serif;
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
 }
 
-.niche-benefit:hover,
-.niche-benefit:focus-within {
-  border-color: var(--home-line);
-  background: #f7f7f5;
-  box-shadow: none;
-  transform: none;
+/* Hover (a pointer that hovers only, so a tap leaves nothing behind): the rim
+   lights up, the top line runs the full width, the badge glows. */
+@media (hover: hover) {
+  .niche-benefit:not(.niche-benefit--gap):hover {
+    background:
+      linear-gradient(90deg, transparent, #a6c8ff, transparent) center top / 100% 1px no-repeat border-box,
+      radial-gradient(120% 90% at 50% 0%, rgba(20, 107, 255, 0.17), transparent 62%) padding-box,
+      linear-gradient(var(--benefit-tile), var(--benefit-tile)) padding-box,
+      linear-gradient(180deg, rgba(110, 160, 255, 0.78), rgba(20, 107, 255, 0.36) 48%, rgba(20, 107, 255, 0.22)) border-box;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 26px 50px -26px rgba(20, 107, 255, 0.75);
+  }
+
+  .niche-benefit:not(.niche-benefit--gap):hover::before {
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+      0 0 0 7px rgba(20, 107, 255, 0.2),
+      0 10px 34px -2px rgba(20, 107, 255, 0.9);
+  }
 }
 
-/* The deliberately empty centre tile: keeps the grid lines, drops the white
-   fill so the section colour shows through as a hole in the 3x3 grid. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  html:not(.a11y-reduced-motion) .niche-benefit {
+    transition:
+      background-size 420ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      box-shadow 260ms ease,
+      transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  html:not(.a11y-reduced-motion) .niche-benefit:not(.niche-benefit--gap):hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* The centre tile: a large glowing check inside concentric rings. */
 .niche-benefit--gap {
-  background: transparent;
+  --benefit-ring: 2.35rem;
+  border-color: rgba(20, 107, 255, 0.34);
+  background:
+    radial-gradient(circle closest-side at 50% 50%, transparent 0 52%, var(--benefit-tile) 128%),
+    repeating-radial-gradient(circle closest-side at 50% 50%,
+      transparent 0 calc(30% - 1px),
+      rgba(130, 176, 255, 0.42) calc(30% - 1px) 30%),
+    radial-gradient(circle at 50% 50%, rgba(20, 107, 255, 0.5), rgba(20, 107, 255, 0.1) 40%, transparent 68%),
+    var(--benefit-tile);
+  box-shadow: inset 0 0 80px rgba(20, 107, 255, 0.14);
   counter-increment: none;
   pointer-events: none;
 }
 
 .niche-benefit--gap::before {
+  inset: 0;
+  width: calc(var(--benefit-ring) * 2.2);
+  height: calc(var(--benefit-ring) * 2.2);
+  margin: auto;
+  background:
+    var(--benefit-check) center / 44% no-repeat,
+    radial-gradient(circle at 32% 24%, var(--benefit-blue-hi), var(--benefit-blue) 52%, var(--benefit-blue-lo));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 -10px 22px rgba(4, 30, 110, 0.35),
+    0 0 40px 4px rgba(20, 107, 255, 0.5),
+    0 0 96px 20px rgba(20, 107, 255, 0.18);
+}
+
+.niche-benefit--gap::after {
   content: none;
+}
+
+@media (max-width: 1024px) {
+  .niche-benefits__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* The centre tile only reads as intentional on the 3-column grid. */
+  .niche-benefit--gap {
+    display: none;
+  }
+
+  .niche-benefit {
+    min-height: clamp(11.5rem, 26vw, 13rem);
+  }
+}
+
+/* Phones: one column of rows, badge and number beside the text. */
+@media (max-width: 620px) {
+  #niche-benefits {
+    --benefit-pad: 1.15rem;
+    --benefit-badge: 2.25rem;
+  }
+
+  .niche-benefits__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.6rem;
+  }
+
+  .niche-benefit {
+    min-height: 0;
+    padding: var(--benefit-pad);
+    align-items: center;
+    gap: 0.95rem;
+    font-size: 1.04rem;
+    line-height: 1.38;
+  }
+
+  .niche-benefit::before,
+  .niche-benefit::after {
+    position: relative;
+    inset: auto;
+    flex: none;
+    align-self: flex-start;
+  }
+
+  .niche-benefit::after {
+    margin-inline-start: auto;
+    padding-block-start: calc((var(--benefit-badge) - 1.2em) / 2);
+  }
+}
+
+/* Narrow phones and enlarged text: the badge and number go above the text,
+   so long words get the full width. */
+@container benefits (max-width: 22em) {
+  .niche-benefit {
+    padding-block-start: calc(var(--benefit-pad) + var(--benefit-badge) + 0.9rem);
+    align-items: flex-start;
+  }
+
+  .niche-benefit::before {
+    position: absolute;
+    inset-block-start: var(--benefit-pad);
+    inset-inline-start: var(--benefit-pad);
+  }
+
+  .niche-benefit::after {
+    position: absolute;
+    inset-block-start: calc(var(--benefit-pad) + (var(--benefit-badge) - 1.2em) / 2);
+    inset-inline-end: var(--benefit-pad);
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* High contrast follows the site's light scheme. */
+html.a11y-high-contrast #niche-benefits {
+  --benefit-text: #020617;
+  --benefit-muted: #020617;
+  --benefit-tile: #ffffff;
+  color: #020617;
+  background: #ffffff;
+}
+
+html.a11y-high-contrast #niche-benefits::before {
+  content: none;
+}
+
+html.a11y-high-contrast #niche-benefits .niche-section__title {
+  color: #020617;
+}
+
+html.a11y-high-contrast #niche-benefits .niche-section__header::before {
+  background: #0542ad;
+  box-shadow: none;
+}
+
+html.a11y-high-contrast .niche-benefit,
+html.a11y-high-contrast .niche-benefit:not(.niche-benefit--gap):hover {
+  border: 2px solid #020617;
+  color: #020617;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+html.a11y-high-contrast .niche-benefit::before,
+html.a11y-high-contrast .niche-benefit:not(.niche-benefit--gap):hover::before,
+html.a11y-high-contrast .niche-benefit--gap::before {
+  background: var(--benefit-check) center / 46% no-repeat, #0542ad;
+  box-shadow: none;
+}
+
+@media (forced-colors: active) {
+  .niche-benefit {
+    border-color: CanvasText;
+  }
+
+  .niche-benefit::before {
+    border: 2px solid CanvasText;
+  }
+}
+
+@media print {
+  #niche-benefits {
+    color: #000000;
+    background: none;
+  }
+
+  #niche-benefits::before,
+  .niche-benefit--gap {
+    display: none;
+  }
+
+  #niche-benefits .niche-section__title,
+  .niche-benefit,
+  .niche-benefit::after {
+    color: #000000;
+  }
+
+  .niche-benefit {
+    border: 1px solid #999999;
+    background: none;
+    box-shadow: none;
+  }
+
+  /* The blue badge and its check print even without background graphics. */
+  .niche-benefit::before {
+    box-shadow: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  #niche-benefits .niche-section__header::before {
+    box-shadow: none;
+  }
 }
 
 /* Header/footer chrome: the footer skin is shared by every page type and
@@ -509,19 +805,9 @@ html[dir="rtl"] .niche-hero__nav-icon {
 }
 
 @media (max-width: 1024px) {
-  .niche-benefits__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  /* The centre hole only reads as intentional on the 3-column grid. */
-  .niche-benefit--gap {
-    display: none;
-  }
-
   .niche-highlights__grid {
     gap: 2rem;
   }
-
 }
 
 @media (max-width: 960px) {
@@ -564,15 +850,6 @@ html[dir="rtl"] .niche-hero__nav-icon {
 }
 
 @media (max-width: 620px) {
-  .niche-benefits__grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .niche-benefit {
-    min-height: 0;
-    padding: 3rem 1.35rem 1.6rem;
-  }
-
   .niche-hero__actions .btn {
     flex: 1 1 100%;
   }
