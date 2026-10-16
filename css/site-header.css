@@ -213,7 +213,6 @@
     text-align: center;
   }
 }
-@media (max-width: 360px) { .site-header .nav__logo { width: 7.75rem; } }
 
 .site-header .site-login__trigger {
   flex: none;
@@ -233,9 +232,15 @@
 }
 .site-header .site-login__trigger:hover,
 .site-header .site-login__trigger:focus-visible { background: #f3f3f3; }
+/* One row: logo | login | language | menu. The login column is as wide as its
+   label and the logo column takes what is left, so a long label (Arabic,
+   Hungarian) shrinks the logo, down to 6.25rem, instead of covering it. Only
+   past that does the label itself shorten, with an ellipsis. */
 @media (max-width: 1199px) {
-  .site-header .nav { grid-template-columns: auto 1fr auto auto; }
-  .site-header .site-login__trigger { grid-column: 2; grid-row: 1; justify-self: end; }
+  .site-header .nav { grid-template-columns: minmax(6.25rem, 1fr) auto auto auto; }
+  .site-header .nav__brand { min-width: 0; max-width: 100%; }
+  .site-header .nav__logo { max-width: 100%; }
+  .site-header .site-login__trigger { grid-column: 2; grid-row: 1; justify-self: stretch; min-width: 0; text-align: center; }
   .site-header .language-selector { grid-column: 3; }
   .site-header .nav__toggle { grid-column: 4; }
 }
@@ -243,6 +248,14 @@
   .site-header .nav { gap: .35rem; padding-inline: .65rem; }
   .site-header .site-login__trigger { padding-inline: .55rem; }
   .site-header .language-selector__button { padding-inline: .4rem; }
+}
+/* Narrowest phones: tighter spacing, a smaller label and the flag alone. */
+@media (max-width: 360px) {
+  .site-header .nav { gap: .25rem; padding-inline: .5rem; }
+  .site-header .nav__logo { width: 7.75rem; }
+  .site-header .site-login__trigger { padding-inline: .4rem; font-size: .78rem; }
+  .site-header .language-selector__button { padding-inline: .25rem; }
+  .site-header .language-selector__arrow { display: none; }
 }
 
 /* Signed-in account: takes the place of "Log in" while this tab holds a
