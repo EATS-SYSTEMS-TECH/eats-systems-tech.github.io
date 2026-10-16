@@ -14,6 +14,7 @@ import * as cheerio from "cheerio";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { NICHE_DEFINITIONS } from "./niche-pages/index.mjs";
+import { LANDING_PAGES } from "./landing-pages/index.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = "https://wifigate.io";
@@ -434,6 +435,70 @@ async function main() {
     }
   }
 
+  // Landing pages: indexable, in one language, and cut off from the site in
+  // both directions. Their only site links are the legal pages; no other page
+  // links to them.
+  const landingPaths = new Set(LANDING_PAGES.map((page) => pagePath(page.locale, page.key)));
+  for (const page of LANDING_PAGES) {
+    const filePath = pageFile(page.locale, page.key);
+    const rel = path.relative(repoRoot, filePath);
+    if (!(await fileExists(filePath))) {
+      problems.push(`${page.locale}/${page.key}: landing page not generated (${rel})`);
+      continue;
+    }
+    const html = await fs.readFile(filePath, "utf8");
+    const $ = cheerio.load(html);
+    const url = `${siteOrigin}${pagePath(page.locale, page.key)}`;
+    if (!$("title").text().trim()) problems.push(`${rel}: empty <title>`);
+    if (!($("meta[name='description']").attr("content") || "").trim()) problems.push(`${rel}: empty meta description`);
+    if ($("link[rel='canonical']").attr("href") !== url) problems.push(`${rel}: canonical must be ${url}`);
+    if ($("link[rel='alternate'][hreflang]").length) problems.push(`${rel}: a one-language page has no hreflang links`);
+    for (const name of ["robots", "googlebot"]) {
+      const directives = $(`meta[name='${name}']`).map((_, element) => $(element).attr("content") || "").get();
+      if (directives.length !== 1 || directives[0] !== "index, follow") {
+        problems.push(`${rel}: ${name} must have exactly one index, follow directive`);
+      }
+    }
+    if ($("html").attr("lang") !== page.locale) problems.push(`${rel}: html lang must be ${page.locale}`);
+    if ($("html").attr("dir") !== (rtlLocales.has(page.locale) ? "rtl" : "ltr")) problems.push(`${rel}: wrong dir`);
+    if ($("h1").length !== 1) problems.push(`${rel}: has ${$("h1").length} <h1> elements, expected 1`);
+    if (html.includes("—")) problems.push(`${rel}: contains a disallowed em dash in visible site content`);
+    if ($("#niche-benefits-list li").not(".niche-benefit--gap").length !== 8) problems.push(`${rel}: expected 8 benefit bullets`);
+    if ($(".niche-highlight__icon svg").length !== 3) problems.push(`${rel}: expected 3 highlights with icons`);
+    if (!$("#niche-faq-list .niche-faq__item").length) problems.push(`${rel}: no FAQ`);
+    if (!($("#niche-image").attr("alt") || "").trim()) problems.push(`${rel}: hero image has empty alt`);
+    if ($("#a11y-fab").length !== 1 || $("#a11y-statement").attr("href") !== pagePath(page.locale, "accessibility")) {
+      problems.push(`${rel}: the accessibility menu and its statement link must be on the page`);
+    }
+    if (!$("script[src*='js/cookie-consent.js']").length) problems.push(`${rel}: no cookie banner`);
+    const legalPaths = new Set(legalPages.map((key) => pagePath(page.locale, key)));
+    $("a[href]").each((_, element) => {
+      const href = $(element).attr("href") || "";
+      if (href.startsWith("#") || /^(https?:|mailto:|tel:)/i.test(href) && !href.startsWith(siteOrigin)) return;
+      const target = href.replace(siteOrigin, "").split("#")[0].split("?")[0];
+      if (!legalPaths.has(target)) problems.push(`${rel}: links into the site ("${href}")`);
+    });
+    await checkResolvable($, filePath, "a[href]", "href", "link");
+    await checkResolvable($, filePath, "img[src]", "src", "image");
+    await checkResolvable($, filePath, "link[rel='stylesheet']", "href", "stylesheet");
+    await checkResolvable($, filePath, "script[src]", "src", "script");
+  }
+  for (const locale of localeOptions) {
+    for (const pageKey of [...indexablePages, ...legalPages]) {
+      let html;
+      try {
+        html = await fs.readFile(pageFile(locale, pageKey), "utf8");
+      } catch {
+        continue; // Already reported above.
+      }
+      const $ = cheerio.load(html);
+      $("a[href]").each((_, element) => {
+        const target = ($(element).attr("href") || "").replace(siteOrigin, "").split("#")[0].split("?")[0];
+        if (landingPaths.has(target)) problems.push(`${locale}/${pageKey}: links to the landing page ${target}`);
+      });
+    }
+  }
+
   // Sitemap: every URL must resolve to a generated page, and every indexable
   // home/niche page must be listed.
   const sitemap = await fs.readFile(path.join(repoRoot, "sitemap.xml"), "utf8");
@@ -449,6 +514,7 @@ async function main() {
     for (const locale of localeOptions) expectedUrls.add(`${siteOrigin}${pagePath(locale, pageKey)}`);
   }
   expectedUrls.add(`${siteOrigin}/contact-us/`);
+  for (const page of LANDING_PAGES) expectedUrls.add(`${siteOrigin}${pagePath(page.locale, page.key)}`);
   for (const url of sitemapUrls) {
     if (!expectedUrls.has(url)) problems.push(`sitemap.xml: unexpected URL ${url}`);
   }
