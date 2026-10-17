@@ -18,6 +18,13 @@
   padding-inline: clamp(1rem, 3vw, 4rem);
 }
 
+/* Enlarged text zooms the header back by 1 / scale (accessibility.css), which
+   would shrink the 1440px cap with it: at 150% the menu row got 960px and the
+   longest menus (Bengali, Greek) ran past a 1280px window. */
+html.a11y-text-scaled .site-header .nav {
+  width: min(100%, calc(1440px * var(--a11y-text-scale, 1)));
+}
+
 .site-header .nav__logo {
   width: clamp(9rem, 10vw, 13rem);
   height: auto;
