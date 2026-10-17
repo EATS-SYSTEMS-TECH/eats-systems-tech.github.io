@@ -24,7 +24,7 @@
       animation?.cancel();
       item.open = open;
       item.classList.remove("is-closing");
-      item.style.overflow = "";
+      item.style.clipPath = "";
       animation = null;
     };
 
@@ -42,7 +42,10 @@
       const from = item.offsetHeight;
       window.clearTimeout(timer);
       animation?.cancel();
-      item.style.overflow = "hidden";
+      // Only the bottom edge hides the sliding answer. The "+" square turns
+      // into "x" with its corners past the side of the row, and the focus
+      // ring sits outside the row; clipping the sides cut both.
+      item.style.clipPath = "inset(-1rem -1rem 0)";
 
       if (closing) {
         item.classList.add("is-closing");
