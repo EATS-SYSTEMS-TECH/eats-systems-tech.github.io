@@ -37,7 +37,8 @@ html.a11y-text-scaled .site-header .nav {
   align-items: center;
 }
 
-/* Tight enough that the longest menu (Russian, German) fits from 1200px. */
+/* With the language button showing its flag alone up to 1279px (below), the
+   longest menus (Bengali, Filipino, Greek) fit from 1200px. */
 .site-header .topbar-nav {
   gap: clamp(0.75rem, 1.5vw, 2.25rem);
 }
@@ -108,6 +109,18 @@ html.a11y-text-scaled .site-header .nav {
 .site-header .nav__logo { margin: 0; }
 .site-header .nav__link { white-space: nowrap; }
 .site-header .language-selector { position: relative; inset: auto; transform: none; margin: 0; }
+/* 1200-1279px: the full menu row leaves no room for the language name, so the
+   button shows the flag and arrow alone, as in the collapsed header. */
+@media (min-width: 1200px) and (max-width: 1279px) {
+  .site-header .language-selector__button {
+    min-width: 0;
+    padding-inline: 0.65rem;
+  }
+
+  .site-header .language-selector__selected {
+    display: none;
+  }
+}
 @media (max-width: 1199px) {
   :root { --nav-height: 4.25rem; }
   .site-header .nav {
