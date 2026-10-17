@@ -918,7 +918,7 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   $("[data-account-dashboard]").attr("href", locale === "he" ? "/dashboard/?lang=he" : "/dashboard/");
   setLocalizedText($, $("[data-account-sign-out]"), account.signOut, locale);
   const prefix = buildAssetPrefix(locale, pageKey);
-  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20261016a">');
+  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20261017a">');
   $("script[src*='js/site-account.js']").remove();
   $("script[src*='js/navigation.js']")
     .attr("src", prefix + "js/navigation.js?v=20261007a")
