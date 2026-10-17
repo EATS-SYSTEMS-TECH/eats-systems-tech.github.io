@@ -415,75 +415,62 @@ html[dir="rtl"] .niche-hero__nav-icon {
   text-wrap: balance;
 }
 
-/* Key benefits: bento. A dark band with navy gradients and a faint grid; the
-   cards (ul.bento > li.bento-card, built by setNicheBenefits) sit on a
-   12-column grid: the lead card takes 7 columns and carries a small product
-   illustration, the second takes 5, the rest run in rows of three. Motion is
-   the hover lift only, for a pointer that hovers and when motion is allowed. */
+/* Key benefits: bento. A white band with a faint blue wash. White cards with
+   hairline borders and soft shadows (ul.bento > li.bento-card, built by
+   setNicheBenefits) sit on a 12-column grid: the lead card takes 7 columns,
+   has a pale blue wash and carries a small product illustration, the second
+   takes 5, the rest run in rows of three. Motion is the hover lift only, for
+   a pointer that hovers and when motion is allowed. */
 #niche-benefits {
-  --bento-band: #06080d;
-  --bento-card: rgba(15, 21, 34, 0.86);
-  --bento-card-hi: rgba(24, 33, 52, 0.78);
-  --bento-line: rgba(148, 170, 210, 0.16);
-  --bento-line-hi: rgba(96, 156, 255, 0.5);
-  --bento-text: #f3f6fb;
-  --bento-muted: #a6b3c8;
-  --bento-faint: #7d8aa1;
-  --bento-blue: #146bff;
-  --bento-blue-soft: #8ab6ff;
-  --bento-green: #4ade80;
-  --bento-radius: 16px;
+  --bento-navy: #0b1a3a;
+  --bento-text: #0b1a3a;
+  --bento-muted: #4a5670;
+  --bento-faint: #66738a;
+  --bento-line: #e3e9f3;
+  --bento-line-hi: #cddbf4;
+  --bento-blue: var(--home-blue);
+  --bento-blue-ink: #0b5ae0;
+  --bento-blue-wash: #eef4ff;
+  --bento-tag-line: #bdd2fa;
+  --bento-tag-fill: #f5f9ff;
+  --bento-row: #f8fafd;
+  --bento-green: #15803d;
+  --bento-green-dot: #22c55e;
+  --bento-radius: 18px;
   --bento-pad: clamp(1.35rem, 2.1vw, 2rem);
+  --bento-shadow: 0 1px 2px rgba(15, 30, 60, 0.04), 0 14px 34px -22px rgba(15, 30, 60, 0.2);
+  --bento-shadow-hi: 0 1px 2px rgba(15, 30, 60, 0.05), 0 24px 46px -26px rgba(20, 70, 160, 0.32);
 
   position: relative;
   isolation: isolate;
   overflow: clip;
   color: var(--bento-text);
   background:
-    radial-gradient(60rem 34rem at 15% 0%, rgba(20, 107, 255, 0.14), transparent 70%),
-    radial-gradient(44rem 30rem at 100% 100%, rgba(20, 70, 160, 0.16), transparent 72%),
-    linear-gradient(180deg, #070a12, var(--bento-band));
+    radial-gradient(56rem 30rem at 12% 0%, rgba(20, 107, 255, 0.06), transparent 70%),
+    radial-gradient(42rem 28rem at 100% 100%, rgba(20, 107, 255, 0.045), transparent 72%),
+    linear-gradient(180deg, #f6f9fd, #ffffff 60%);
 }
 
-/* A faint grid behind the cards, fading out towards the edges. */
-#niche-benefits::before {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  content: "";
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-position: center top;
-  background-size: 4rem 4rem;
-  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 20%, transparent 80%);
-  mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 20%, transparent 80%);
-}
-
-/* A short glowing rule above the title, like the hero eyebrow. */
+/* A short blue rule above the title, like the hero eyebrow. */
 #niche-benefits .niche-section__header::before {
   display: block;
-  width: 2.25rem;
-  height: 2px;
+  width: 2.5rem;
+  height: 3px;
   margin-block-end: 1.4rem;
+  border-radius: 2px;
   content: "";
-  background: linear-gradient(90deg, var(--bento-blue), var(--bento-blue-soft));
-  box-shadow: 0 0 14px rgba(20, 107, 255, 0.7);
-}
-
-html[dir="rtl"] #niche-benefits .niche-section__header::before {
-  background: linear-gradient(270deg, var(--bento-blue), var(--bento-blue-soft));
+  background: var(--bento-blue);
 }
 
 #niche-benefits .niche-section__title {
-  color: #ffffff;
+  color: var(--bento-navy);
+  font-weight: 700;
 }
 
 .bento {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: clamp(0.85rem, 1.3vw, 1.15rem);
+  gap: clamp(0.9rem, 1.4vw, 1.25rem);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -499,10 +486,8 @@ html[dir="rtl"] #niche-benefits .niche-section__header::before {
   gap: 1.5rem;
   border: 1px solid var(--bento-line);
   border-radius: var(--bento-radius);
-  background:
-    radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.035), transparent 60%),
-    linear-gradient(180deg, var(--bento-card-hi), var(--bento-card));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  background: #ffffff;
+  box-shadow: var(--bento-shadow);
   color: var(--bento-text);
   transition: border-color 220ms ease, box-shadow 220ms ease;
 }
@@ -513,16 +498,19 @@ html[dir="rtl"] #niche-benefits .niche-section__header::before {
 .bento-card--half { grid-column: span 6; }
 .bento-card--full { grid-column: span 12; }
 
-/* The lead card: navy blue, with its illustration beside the text. */
+/* The lead card: a pale blue wash that is strongest behind its illustration
+   (the inline end of the card). */
 .bento-card--lead {
+  --bento-glow-x: 100%;
   border-color: var(--bento-line-hi);
   background:
-    radial-gradient(90% 90% at 0% 0%, rgba(20, 107, 255, 0.26), transparent 62%),
-    radial-gradient(70% 70% at 100% 100%, rgba(20, 107, 255, 0.12), transparent 70%),
-    linear-gradient(160deg, #0f1d3b, #0a1224);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.07),
-    0 24px 60px -36px rgba(20, 107, 255, 0.55);
+    radial-gradient(60% 85% at var(--bento-glow-x) 45%, rgba(20, 107, 255, 0.1), transparent 70%),
+    linear-gradient(180deg, #f7faff, #ffffff);
+  box-shadow: var(--bento-shadow-hi);
+}
+
+html[dir="rtl"] .bento-card--lead {
+  --bento-glow-x: 0%;
 }
 
 .bento-card--with-visual {
@@ -539,6 +527,22 @@ html[dir="rtl"] #niche-benefits .niche-section__header::before {
 .bento-card--with-visual .bento-card__body { grid-area: body; }
 .bento-card--with-visual .bento-visual { grid-area: visual; }
 
+/* Enlarged text: the illustration goes under the text, as on phones, so
+   neither half is squeezed into a narrow column. */
+html.a11y-text-scaled .bento-card--with-visual {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "top"
+    "body"
+    "visual";
+  row-gap: 1.5rem;
+}
+
+html.a11y-text-scaled .bento-card--with-visual .bento-visual {
+  width: min(100%, 26rem);
+  justify-self: center;
+}
+
 .bento-card__top {
   display: flex;
   align-items: flex-start;
@@ -548,29 +552,28 @@ html[dir="rtl"] #niche-benefits .niche-section__header::before {
 
 .bento-card__icon {
   display: grid;
-  width: 2.9rem;
-  height: 2.9rem;
+  width: 3.5rem;
+  height: 3.5rem;
   flex: none;
   place-items: center;
-  border: 1px solid rgba(96, 156, 255, 0.36);
-  border-radius: 12px;
-  color: var(--bento-blue-soft);
-  background: linear-gradient(180deg, rgba(20, 107, 255, 0.2), rgba(20, 107, 255, 0.07));
-  box-shadow: 0 10px 24px -14px rgba(20, 107, 255, 0.9);
+  border: 1px solid #dfe8fb;
+  border-radius: 14px;
+  color: var(--bento-blue);
+  background: linear-gradient(180deg, #f3f7ff, #e7efff);
 }
 
 .bento-card__icon svg {
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.6rem;
+  height: 1.6rem;
 }
 
 .bento-card__count {
   color: var(--bento-faint);
   font-family: "Space Grotesk", "Manrope", sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-variant-numeric: tabular-nums;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   white-space: nowrap;
 }
 
@@ -584,30 +587,30 @@ html[dir="rtl"] #niche-benefits .niche-section__header::before {
 
 .bento-card__title {
   margin: 0;
-  color: var(--bento-text);
+  color: var(--bento-navy);
   font-family: "Space Grotesk", "Manrope", sans-serif;
   font-size: clamp(1.2rem, 1.55vw, 1.45rem);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.25;
   text-wrap: balance;
 }
 
 .bento-card--lead .bento-card__title {
-  font-size: clamp(1.45rem, 2.3vw, 2rem);
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
   line-height: 1.15;
 }
 
 .bento-card__text {
   margin: 0;
   color: var(--bento-muted);
-  font-size: 0.98rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.7;
   text-wrap: pretty;
 }
 
 /* Words longer than the card break instead of being clipped (150% text,
    long compounds); the id outranks the accessibility break-word rule. */
-#niche-benefits :is(.bento-card__title, .bento-card__text, .bento-tag, .bento-visual) {
+#niche-benefits :is(.bento-card__title, .bento-card__text, .bento-tag, .bento-visual, .bento-visual *) {
   overflow-wrap: anywhere;
   hyphens: auto;
 }
@@ -622,27 +625,27 @@ html[dir="rtl"] #niche-benefits .niche-section__header::before {
   word-break: auto-phrase;
 }
 
-/* Tags: plain labels, not controls. */
+/* Tags: plain labels with a blue outline, not controls. */
 .bento-card__tags {
   display: flex;
-  margin: 0.35rem 0 0;
+  margin: 0.45rem 0 0;
   padding: 0;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.5rem;
   list-style: none;
 }
 
 .bento-tag {
   display: inline-flex;
   min-width: 0;
-  padding: 0.32rem 0.7rem;
+  padding: 0.36rem 0.85rem;
   align-items: center;
   gap: 0.4rem;
-  border: 1px solid rgba(96, 156, 255, 0.32);
-  border-radius: 8px;
-  color: #b9d2ff;
-  background: rgba(20, 107, 255, 0.08);
-  font-size: 0.82rem;
+  border: 1px solid var(--bento-tag-line);
+  border-radius: 10px;
+  color: var(--bento-blue-ink);
+  background: var(--bento-tag-fill);
+  font-size: 0.84rem;
   font-weight: 600;
   line-height: 1.3;
 }
@@ -650,13 +653,13 @@ html[dir="rtl"] #niche-benefits .niche-section__header::before {
 /* ---------- Illustrations ---------- */
 .bento-visual {
   min-width: 0;
-  padding: 0.95rem;
-  border: 1px solid rgba(148, 170, 210, 0.2);
-  border-radius: 14px;
-  background: linear-gradient(180deg, rgba(10, 15, 27, 0.92), rgba(7, 10, 19, 0.96));
+  padding: 1rem;
+  border: 1px solid var(--bento-line);
+  border-radius: 16px;
+  background: #ffffff;
   box-shadow:
-    0 28px 50px -30px rgba(0, 0, 0, 0.9),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 2px 6px rgba(15, 30, 60, 0.05),
+    0 30px 60px -30px rgba(20, 70, 160, 0.36);
   font-size: 0.86rem;
   transform: rotate(-2deg);
 }
@@ -667,58 +670,58 @@ html[dir="rtl"] .bento-visual {
 
 .bento-visual__bar {
   display: flex;
-  margin-block-end: 0.55rem;
-  padding: 0.15rem 0.2rem 0.65rem;
+  margin-block-end: 0.7rem;
+  padding: 0.1rem 0.25rem 0.15rem;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  border-bottom: 1px solid rgba(148, 170, 210, 0.14);
 }
 
 .bento-visual__heading {
   min-width: 0;
   flex: 1 1 auto;
-  color: var(--bento-faint);
+  color: #3b4760;
   font-weight: 600;
 }
 
+/* The status takes its own line when the bar is too narrow, and wraps only
+   when that line is too narrow as well (Telugu at 320px with 150% text). */
 .bento-visual__status {
   display: inline-flex;
+  min-width: 0;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   color: var(--bento-green);
   font-weight: 600;
-  white-space: nowrap;
 }
 
 .bento-visual__status::before {
-  width: 0.45rem;
-  height: 0.45rem;
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
   border-radius: 50%;
   content: "";
-  background: var(--bento-green);
-  box-shadow: 0 0 10px rgba(74, 222, 128, 0.7);
+  background: var(--bento-green-dot);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18);
 }
 
 .bento-visual__rows {
   display: grid;
   margin: 0;
   padding: 0;
-  gap: 0.15rem;
+  gap: 0.5rem;
   list-style: none;
 }
 
 .bento-visual__row {
   display: flex;
   min-width: 0;
-  padding: 0.5rem 0.2rem;
+  padding: 0.55rem 0.7rem;
   align-items: center;
   gap: 0.65rem;
-  border-bottom: 1px solid rgba(148, 170, 210, 0.08);
-}
-
-.bento-visual__row:last-child {
-  border-bottom: 0;
+  border: 1px solid #e8edf5;
+  border-radius: 10px;
+  background: var(--bento-row);
 }
 
 .bento-visual__avatar {
@@ -728,8 +731,8 @@ html[dir="rtl"] .bento-visual {
   flex: none;
   place-items: center;
   border-radius: 8px;
-  color: #cfe0ff;
-  background: rgba(20, 107, 255, 0.22);
+  color: var(--bento-blue-ink);
+  background: var(--bento-blue-wash);
   font-weight: 700;
 }
 
@@ -737,12 +740,12 @@ html[dir="rtl"] .bento-visual {
 .bento-visual__detail {
   min-width: 0;
   flex: 1;
-  color: var(--bento-text);
+  color: var(--bento-navy);
   font-weight: 600;
 }
 
 .bento-visual__detail {
-  color: var(--bento-muted);
+  color: #3b4760;
   font-weight: 500;
 }
 
@@ -774,8 +777,8 @@ html[dir="rtl"] .bento-visual {
 .bento-visual--history .bento-visual__badge {
   padding: 0.15rem 0.5rem;
   border-radius: 6px;
-  color: #b9d2ff;
-  background: rgba(20, 107, 255, 0.14);
+  color: var(--bento-blue-ink);
+  background: var(--bento-blue-wash);
 }
 
 .bento-visual__time {
@@ -793,7 +796,7 @@ html[dir="rtl"] .bento-visual {
   height: 1.85rem;
   flex: none;
   place-items: center;
-  color: var(--bento-blue-soft);
+  color: var(--bento-blue);
 }
 
 .bento-visual__glyph svg {
@@ -806,7 +809,7 @@ html[dir="rtl"] .bento-visual {
 .bento-visual__day {
   width: 4.5rem;
   flex: none;
-  color: var(--bento-text);
+  color: var(--bento-navy);
   font-weight: 600;
 }
 
@@ -816,7 +819,7 @@ html[dir="rtl"] .bento-visual {
   min-width: 3rem;
   flex: 1;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
+  background: #e4eaf3;
   direction: ltr;
 }
 
@@ -826,17 +829,14 @@ html[dir="rtl"] .bento-visual {
   left: var(--from);
   width: calc(var(--to) - var(--from));
   border-radius: 999px;
-  background: linear-gradient(90deg, #22c55e, var(--bento-green));
-  box-shadow: 0 0 12px rgba(74, 222, 128, 0.45);
+  background: linear-gradient(90deg, var(--bento-green-dot), #16a34a);
 }
 
 /* ---------- Hover ---------- */
 @media (hover: hover) {
   .bento-card:hover {
-    border-color: rgba(96, 156, 255, 0.6);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.07),
-      0 24px 48px -30px rgba(20, 107, 255, 0.75);
+    border-color: var(--bento-line-hi);
+    box-shadow: var(--bento-shadow-hi);
   }
 }
 
@@ -876,18 +876,29 @@ html[dir="rtl"] .bento-visual {
 /* ---------- Phones: one column ---------- */
 @media (max-width: 620px) {
   #niche-benefits {
-    --bento-pad: 1.2rem;
+    --bento-pad: 1.25rem;
   }
 
   .bento {
     grid-template-columns: minmax(0, 1fr);
-    gap: 0.75rem;
+    gap: 0.8rem;
   }
 
   .bento-card,
   .bento-card:nth-child(n + 3):last-child:nth-child(odd) {
     grid-column: auto;
     gap: 1.1rem;
+  }
+
+  .bento-card__icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 12px;
+  }
+
+  .bento-card__icon svg {
+    width: 1.4rem;
+    height: 1.4rem;
   }
 
   .bento-card--with-visual {
@@ -901,12 +912,18 @@ html[dir="rtl"] .bento-visual {
 
   .bento-visual,
   html[dir="rtl"] .bento-visual {
+    padding: 0.75rem;
     transform: none;
+  }
+
+  .bento-visual__bar {
+    padding-inline: 0.1rem;
   }
 }
 
 /* ---------- Accessibility modes ---------- */
 html.a11y-high-contrast #niche-benefits {
+  --bento-navy: #020617;
   --bento-text: #020617;
   --bento-muted: #020617;
   --bento-faint: #020617;
@@ -915,17 +932,8 @@ html.a11y-high-contrast #niche-benefits {
   background: #ffffff;
 }
 
-html.a11y-high-contrast #niche-benefits::before {
-  content: none;
-}
-
-html.a11y-high-contrast #niche-benefits .niche-section__title {
-  color: #020617;
-}
-
 html.a11y-high-contrast #niche-benefits .niche-section__header::before {
   background: #0542ad;
-  box-shadow: none;
 }
 
 html.a11y-high-contrast .bento-card,
@@ -943,7 +951,13 @@ html.a11y-high-contrast :is(.bento-card__icon, .bento-tag, .bento-visual__avatar
   box-shadow: none;
 }
 
+html.a11y-high-contrast .bento-visual__row {
+  border-color: #020617;
+  background: #ffffff;
+}
+
 html.a11y-high-contrast .bento-visual__status::before {
+  background: var(--bento-green);
   box-shadow: none;
 }
 
@@ -953,12 +967,12 @@ html.a11y-high-contrast .bento-visual__track {
 
 html.a11y-high-contrast .bento-visual__span {
   background: #0f5132;
-  box-shadow: none;
 }
 
 @media (forced-colors: active) {
   .bento-card,
   .bento-visual,
+  .bento-visual__row,
   .bento-tag {
     border-color: CanvasText;
   }
@@ -968,10 +982,6 @@ html.a11y-high-contrast .bento-visual__span {
   #niche-benefits {
     color: #000000;
     background: none;
-  }
-
-  #niche-benefits::before {
-    display: none;
   }
 
   #niche-benefits .niche-section__title,
@@ -987,10 +997,6 @@ html.a11y-high-contrast .bento-visual__span {
     background: none;
     box-shadow: none;
     transform: none;
-  }
-
-  #niche-benefits .niche-section__header::before {
-    box-shadow: none;
   }
 }
 
