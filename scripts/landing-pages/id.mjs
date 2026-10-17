@@ -41,28 +41,136 @@ export default {
       "note": "Jam diatur dalam kelipatan 10 menit. Jika Sabat di tempat Anda berakhir setelah tengah malam, tambahkan juga acara pada hari Minggu mulai 00:00."
     },
     "benefitsTitle": "Yang termasuk dalam timer Sabat WIFIGATE untuk pagar otomatis",
-    "bullets": [
-      "Keluar masuk bebas saat Sabat, tanpa ada yang mengoperasikan gerbang",
-      "Jadwal mingguan yang cukup diatur sekali",
-      "Hari raya direncanakan jauh-jauh hari, hingga 90 hari ke depan",
-      "Ubah jam dari aplikasi, tanpa memanggil teknisi",
-      "Kunci gerbang pada jam tertentu, misalnya pada malam hari",
-      "Pada hari biasa: buka dari ponsel, remote, atau tombol",
-      "Terhubung ke unit kontrol gerbang atau palang yang sudah ada",
-      "Tanpa SIM, tanpa internet di gerbang, dan tanpa langganan bulanan"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Atur sekali. Berfungsi setiap Sabat.",
+        "text": "Tandai acara hijau “Gerbang terbuka” pada hari Jumat dan Sabtu, dan perangkat gerbang menjalankannya sendiri setiap minggu.",
+        "tags": [
+          "Hingga 50 acara",
+          "Kelipatan 10 menit"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Gerbang terbuka saat Sabat",
+          "status": "Mingguan",
+          "rows": [
+            {
+              "day": "Jumat",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Sabtu",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Keluar masuk saat Sabat. Tanpa menyentuh apa pun.",
+        "text": "Saat Sabat, gerbang tetap terbuka pada jam yang Anda atur, dan tidak ada yang perlu mengoperasikannya.",
+        "tags": [
+          "Tanpa remote",
+          "Tanpa ponsel",
+          "Tanpa tombol"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Hari raya direncanakan jauh-jauh hari",
+        "text": "Tambahkan acara satu kali untuk hari menjelang hari raya dan hari raya itu sendiri, hingga 90 hari ke depan, dan setiap acara terhapus sendiri setelah tanggalnya lewat.",
+        "tags": [
+          "Hingga 90 hari",
+          "Tahun Baru Yahudi",
+          "Paskah Yahudi"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Ubah jam di aplikasi. Tanpa teknisi.",
+        "text": "Saat musim berganti, perbarui jamnya di layar “Acara terjadwal”, lalu simpan.",
+        "tags": [
+          "Admin sistem",
+          "Di dekat gerbang"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Kunci gerbang pada jam tertentu, misalnya pada malam hari",
+        "text": "Acara merah “Gerbang tertutup” menahan gerbang tetap tertutup pada jam yang Anda atur, dan acara hijau menahannya tetap terbuka.",
+        "tags": [
+          "Acara merah",
+          "Acara hijau"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Pada hari biasa: ponsel, remote, atau tombol",
+        "text": "Di luar jam yang Anda atur, gerbang bekerja seperti biasa dan bisa dibuka dari ponsel, remote, atau tombol.",
+        "tags": [
+          "Di luar acara",
+          "Remote yang ada"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Terhubung ke gerbang atau palang yang sudah ada",
+        "text": "WIFIGATE terhubung ke unit kontrol gerbang atau palang yang sudah ada, jadi tidak perlu timer Sabat terpisah di panel listrik.",
+        "tags": [
+          "Gerbang otomatis",
+          "Palang parkir"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Tanpa SIM, tanpa internet di gerbang, dan tanpa langganan bulanan",
+        "text": "Gerbang hanya membutuhkan listrik, ponsel terhubung langsung ke perangkat, dan Anda membayar sekali untuk perangkat dan pemasangannya.",
+        "tags": [
+          "Hanya listrik",
+          "Sekali bayar"
+        ]
+      }
     ],
     "facts": {
       "title": "Sekilas jadwal Sabat gerbang otomatis WIFIGATE",
       "rows": [
-        { "label": "Acara", "value": "Hingga 50 secara keseluruhan, mingguan dan satu kali" },
-        { "label": "Kelipatan waktu", "value": "10 menit" },
-        { "label": "Hari raya", "value": "Acara satu kali pada hari menjelang hari raya dan pada hari raya, hingga 90 hari ke depan" },
-        { "label": "Terbuka atau tertutup", "value": "Acara hijau menahan gerbang tetap terbuka, acara merah menahannya tetap tertutup" },
-        { "label": "Lokasi jadwal", "value": "Disimpan dan berjalan di perangkat gerbang" },
-        { "label": "Kebutuhan di gerbang", "value": "Hanya listrik, tanpa SIM, tanpa router, dan tanpa internet" },
-        { "label": "Mengubah jam", "value": "Dari aplikasi, di dekat gerbang, tanpa teknisi" },
-        { "label": "Setelah listrik padam", "value": "Jadwal tetap tersimpan, dan acara kembali berjalan setelah ponsel mana pun terhubung ke gerbang" },
-        { "label": "Pembayaran", "value": "Sekali untuk perangkat dan pemasangan, tanpa langganan bulanan" }
+        {
+          "label": "Acara",
+          "value": "Hingga 50 secara keseluruhan, mingguan dan satu kali"
+        },
+        {
+          "label": "Kelipatan waktu",
+          "value": "10 menit"
+        },
+        {
+          "label": "Hari raya",
+          "value": "Acara satu kali pada hari menjelang hari raya dan pada hari raya, hingga 90 hari ke depan"
+        },
+        {
+          "label": "Terbuka atau tertutup",
+          "value": "Acara hijau menahan gerbang tetap terbuka, acara merah menahannya tetap tertutup"
+        },
+        {
+          "label": "Lokasi jadwal",
+          "value": "Disimpan dan berjalan di perangkat gerbang"
+        },
+        {
+          "label": "Kebutuhan di gerbang",
+          "value": "Hanya listrik, tanpa SIM, tanpa router, dan tanpa internet"
+        },
+        {
+          "label": "Mengubah jam",
+          "value": "Dari aplikasi, di dekat gerbang, tanpa teknisi"
+        },
+        {
+          "label": "Setelah listrik padam",
+          "value": "Jadwal tetap tersimpan, dan acara kembali berjalan setelah ponsel mana pun terhubung ke gerbang"
+        },
+        {
+          "label": "Pembayaran",
+          "value": "Sekali untuk perangkat dan pemasangan, tanpa langganan bulanan"
+        }
       ]
     },
     "updatedLabel": "Terakhir diperbarui: {date}",

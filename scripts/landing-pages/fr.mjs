@@ -41,28 +41,136 @@ export default {
       "note": "Les horaires se règlent par pas de 10 minutes. Si, chez vous, Shabbat se termine après minuit, ajoutez aussi un événement le dimanche à partir de 00:00."
     },
     "benefitsTitle": "Ce que comprend la minuterie de Shabbat pour portail de WIFIGATE",
-    "bullets": [
-      "Entrée et sortie libres pendant Shabbat, sans que personne n'actionne le portail",
-      "Un planning hebdomadaire réglé une seule fois",
-      "Les fêtes planifiées jusqu'à 90 jours à l'avance",
-      "Changement des horaires depuis l'application, sans appeler de technicien",
-      "Verrouillage du portail à heures fixes, par exemple la nuit",
-      "En semaine : ouverture depuis le téléphone, une télécommande ou un bouton",
-      "Se raccorde à la carte de commande du portail ou de la barrière existants",
-      "Sans SIM, sans internet au portail et sans abonnement mensuel"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Réglé une fois. Actif chaque Shabbat.",
+        "text": "Marquez des événements verts « Portail ouvert » le vendredi et le samedi, et le boîtier du portail les exécute tout seul chaque semaine.",
+        "tags": [
+          "Jusqu'à 50 événements",
+          "Tranches de 10 minutes"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Portail ouvert pendant Shabbat",
+          "status": "Hebdomadaire",
+          "rows": [
+            {
+              "day": "Vendredi",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Samedi",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Entrer et sortir pendant Shabbat. Sans rien toucher.",
+        "text": "Pendant Shabbat, le portail reste ouvert aux heures que vous avez fixées, et personne n'a besoin de l'actionner.",
+        "tags": [
+          "Sans télécommande",
+          "Sans téléphone",
+          "Sans bouton"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Les fêtes, planifiées à l'avance",
+        "text": "Ajoutez des événements ponctuels pour la veille et le jour de la fête, jusqu'à 90 jours à l'avance, et chacun s'efface tout seul une fois sa date passée.",
+        "tags": [
+          "Jusqu'à 90 jours",
+          "Roch Hachana",
+          "Pessah"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Changez les horaires dans l'application. Sans technicien.",
+        "text": "Au changement de saison, mettez à jour les horaires dans l'écran « Événements programmés », puis enregistrez.",
+        "tags": [
+          "Administrateur du système",
+          "Près du portail"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Verrouillez le portail à heures fixes, par exemple la nuit",
+        "text": "Un événement rouge « Portail fermé » maintient le portail fermé aux heures que vous avez fixées, et un événement vert le maintient ouvert.",
+        "tags": [
+          "Événement rouge",
+          "Événement vert"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "En semaine : téléphone, télécommande ou bouton",
+        "text": "En dehors des heures que vous avez fixées, le portail fonctionne normalement et s'ouvre depuis le téléphone, la télécommande ou le bouton.",
+        "tags": [
+          "Hors événements",
+          "Télécommandes existantes"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Se raccorde au portail ou à la barrière existants",
+        "text": "WIFIGATE se raccorde à la carte de commande du portail ou de la barrière existants : pas besoin de minuterie de Shabbat séparée dans le tableau électrique.",
+        "tags": [
+          "Portail électrique",
+          "Barrière de parking"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Sans SIM, sans internet au portail et sans abonnement mensuel",
+        "text": "Le portail n'a besoin que de l'électricité, le téléphone se connecte directement au boîtier, et vous payez une seule fois le boîtier et l'installation.",
+        "tags": [
+          "Électricité uniquement",
+          "Paiement unique"
+        ]
+      }
     ],
     "facts": {
       "title": "La minuterie de Shabbat de WIFIGATE en bref",
       "rows": [
-        { "label": "Événements", "value": "Jusqu'à 50 au total, hebdomadaires et ponctuels" },
-        { "label": "Pas de réglage", "value": "Tranches de 10 minutes" },
-        { "label": "Fêtes", "value": "Événements ponctuels la veille et le jour de la fête, jusqu'à 90 jours à l'avance" },
-        { "label": "Ouvert ou fermé", "value": "Un événement vert maintient le portail ouvert, un événement rouge le maintient fermé" },
-        { "label": "Où se trouve le planning", "value": "Enregistré et exécuté sur le boîtier du portail" },
-        { "label": "Ce dont le portail a besoin", "value": "Uniquement l'électricité, sans SIM, sans routeur et sans internet" },
-        { "label": "Changement des horaires", "value": "Depuis l'application, près du portail, sans technicien" },
-        { "label": "Après une coupure de courant", "value": "Le planning est conservé, et les événements reprennent dès qu'un téléphone se connecte au portail" },
-        { "label": "Paiement", "value": "Une seule fois, pour le boîtier et l'installation, sans abonnement mensuel" }
+        {
+          "label": "Événements",
+          "value": "Jusqu'à 50 au total, hebdomadaires et ponctuels"
+        },
+        {
+          "label": "Pas de réglage",
+          "value": "Tranches de 10 minutes"
+        },
+        {
+          "label": "Fêtes",
+          "value": "Événements ponctuels la veille et le jour de la fête, jusqu'à 90 jours à l'avance"
+        },
+        {
+          "label": "Ouvert ou fermé",
+          "value": "Un événement vert maintient le portail ouvert, un événement rouge le maintient fermé"
+        },
+        {
+          "label": "Où se trouve le planning",
+          "value": "Enregistré et exécuté sur le boîtier du portail"
+        },
+        {
+          "label": "Ce dont le portail a besoin",
+          "value": "Uniquement l'électricité, sans SIM, sans routeur et sans internet"
+        },
+        {
+          "label": "Changement des horaires",
+          "value": "Depuis l'application, près du portail, sans technicien"
+        },
+        {
+          "label": "Après une coupure de courant",
+          "value": "Le planning est conservé, et les événements reprennent dès qu'un téléphone se connecte au portail"
+        },
+        {
+          "label": "Paiement",
+          "value": "Une seule fois, pour le boîtier et l'installation, sans abonnement mensuel"
+        }
       ]
     },
     "updatedLabel": "Dernière mise à jour : {date}",

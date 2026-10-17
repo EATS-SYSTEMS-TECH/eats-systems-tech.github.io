@@ -41,28 +41,136 @@ export default {
       "note": "Hours are set in 10-minute steps. If Shabbat ends after midnight where you are, add an event on Sunday from 00:00 as well."
     },
     "benefitsTitle": "What WIFIGATE's Shabbat clock for gates includes",
-    "bullets": [
-      "People come and go freely on Shabbat, with nobody operating the gate",
-      "A weekly schedule you set once",
-      "Holidays planned in advance, up to 90 days ahead",
-      "Change the hours in the app, no technician needed",
-      "Keep the gate locked at set hours, for example at night",
-      "On weekdays: open from your phone, a remote or a button",
-      "Connects to your existing gate or barrier controller",
-      "No SIM, no internet at the gate, no monthly subscription"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Set it once. It works every Shabbat.",
+        "text": "Mark green \"Gate open\" events on Friday and Saturday, and the gate's device runs them on its own every week.",
+        "tags": [
+          "Up to 50 events",
+          "10-minute steps"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Gate open on Shabbat",
+          "status": "Weekly",
+          "rows": [
+            {
+              "day": "Friday",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Saturday",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Come and go on Shabbat. Nothing to touch.",
+        "text": "On Shabbat the gate stays open during the hours you set, and nobody needs to operate it.",
+        "tags": [
+          "No remote",
+          "No phone",
+          "No button"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Holidays, planned in advance",
+        "text": "Add one-time events for the eve and the holiday, up to 90 days ahead, and each clears itself once its date passes.",
+        "tags": [
+          "Up to 90 days",
+          "Rosh Hashanah",
+          "Passover"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Change the hours in the app. No technician.",
+        "text": "When the season changes, update the hours on the \"Scheduled events\" screen and save.",
+        "tags": [
+          "System admin",
+          "At the gate"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Lock the gate at set hours, like at night",
+        "text": "A red \"Gate closed\" event holds the gate closed during the hours you set, and a green event holds it open.",
+        "tags": [
+          "Red event",
+          "Green event"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "On weekdays: phone, remote or button",
+        "text": "Outside the hours you set, the gate works as usual and opens from your phone, a remote or the button.",
+        "tags": [
+          "Outside events",
+          "Existing remotes"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Works with your existing gate or barrier",
+        "text": "WIFIGATE connects to your existing gate or barrier controller, so no separate Shabbat timer is needed in the electrical panel.",
+        "tags": [
+          "Electric gate",
+          "Parking barrier"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "No SIM, no internet at the gate, no monthly fee",
+        "text": "The gate needs only power, your phone connects to the device directly, and you pay once for the device and installation.",
+        "tags": [
+          "Power only",
+          "One-time payment"
+        ]
+      }
     ],
     "facts": {
       "title": "WIFIGATE's Shabbat clock at a glance",
       "rows": [
-        { "label": "Events", "value": "Up to 50 in total, weekly and one-time" },
-        { "label": "Time steps", "value": "10 minutes" },
-        { "label": "Holidays", "value": "One-time events on the eve and on the holiday, up to 90 days ahead" },
-        { "label": "Open or closed", "value": "A green event holds the gate open, a red event holds it closed" },
-        { "label": "Where the schedule lives", "value": "Stored and run on the gate's device" },
-        { "label": "What the gate needs", "value": "Power only, no SIM, no router and no internet" },
-        { "label": "Changing the hours", "value": "From the app, at the gate, no technician" },
-        { "label": "After a power cut", "value": "The schedule is kept, and events run again once any phone connects to the gate" },
-        { "label": "Payment", "value": "Once, for the device and installation, no monthly subscription" }
+        {
+          "label": "Events",
+          "value": "Up to 50 in total, weekly and one-time"
+        },
+        {
+          "label": "Time steps",
+          "value": "10 minutes"
+        },
+        {
+          "label": "Holidays",
+          "value": "One-time events on the eve and on the holiday, up to 90 days ahead"
+        },
+        {
+          "label": "Open or closed",
+          "value": "A green event holds the gate open, a red event holds it closed"
+        },
+        {
+          "label": "Where the schedule lives",
+          "value": "Stored and run on the gate's device"
+        },
+        {
+          "label": "What the gate needs",
+          "value": "Power only, no SIM, no router and no internet"
+        },
+        {
+          "label": "Changing the hours",
+          "value": "From the app, at the gate, no technician"
+        },
+        {
+          "label": "After a power cut",
+          "value": "The schedule is kept, and events run again once any phone connects to the gate"
+        },
+        {
+          "label": "Payment",
+          "value": "Once, for the device and installation, no monthly subscription"
+        }
       ]
     },
     "updatedLabel": "Last updated: {date}",

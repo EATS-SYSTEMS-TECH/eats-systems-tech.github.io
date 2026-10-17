@@ -41,28 +41,136 @@ export default {
       "note": "Tiderna ställs in i steg om 10 minuter. Om shabbat går ut efter midnatt där du bor, lägger du även till en händelse på söndag från 00:00."
     },
     "benefitsTitle": "Det här ingår i WIFIGATE:s shabbat-timer för grindöppnare",
-    "bullets": [
-      "Fri in- och utpassering på shabbat, utan att någon manövrerar grinden",
-      "Ett veckoschema som du ställer in en gång",
-      "Högtider planerade i förväg, upp till 90 dagar framåt",
-      "Ändra tiderna i appen, utan att ringa en tekniker",
-      "Låst grind på fasta tider, till exempel på natten",
-      "På vardagar: öppna från mobilen, med fjärrkontroll eller knapp",
-      "Ansluts till styrenheten för den grind eller bom du redan har",
-      "Inget SIM, inget internet vid grinden och inget månadsabonnemang"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Ställ in en gång. Det fungerar varje shabbat.",
+        "text": "Markera gröna händelser för ”Öppen grind” på fredag och lördag, så kör grindens enhet dem på egen hand varje vecka.",
+        "tags": [
+          "Upp till 50 händelser",
+          "Steg om 10 minuter"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Öppen grind på shabbat",
+          "status": "Varje vecka",
+          "rows": [
+            {
+              "day": "Fredag",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Lördag",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "In och ut på shabbat. Utan att röra något.",
+        "text": "På shabbat står grinden öppen under de tider du har ställt in, och ingen behöver manövrera den.",
+        "tags": [
+          "Ingen fjärrkontroll",
+          "Ingen mobil",
+          "Ingen knapp"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Högtider planerade i förväg",
+        "text": "Lägg till engångshändelser för kvällen före högtiden och för själva högtidsdagen, upp till 90 dagar framåt, och varje händelse tas automatiskt bort när datumet har passerat.",
+        "tags": [
+          "Upp till 90 dagar",
+          "Rosh hashana",
+          "Pesach"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Ändra tiderna i appen. Utan tekniker.",
+        "text": "När årstiden skiftar uppdaterar du tiderna på skärmen ”Schemalagda händelser” och sparar.",
+        "tags": [
+          "Systemadministratör",
+          "Vid grinden"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Lås grinden på fasta tider, till exempel på natten",
+        "text": "En röd händelse för ”Stängd grind” håller grinden stängd under de tider du har ställt in, och en grön händelse håller den öppen.",
+        "tags": [
+          "Röd händelse",
+          "Grön händelse"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "På vardagar: mobil, fjärrkontroll eller knapp",
+        "text": "Utanför de tider du har ställt in fungerar grinden som vanligt och öppnas från mobilen, med fjärrkontrollen eller med knappen.",
+        "tags": [
+          "Utanför händelserna",
+          "Befintliga fjärrkontroller"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Ansluts till den grind eller bom du redan har",
+        "text": "WIFIGATE ansluts till den befintliga styrenheten för grinden eller bommen, så det behövs ingen separat shabbat-timer i elcentralen.",
+        "tags": [
+          "Elektrisk grind",
+          "Parkeringsbom"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Inget SIM, inget internet vid grinden och inget månadsabonnemang",
+        "text": "Grinden behöver bara ström, mobilen ansluter direkt till enheten, och du betalar en gång för enheten och installationen.",
+        "tags": [
+          "Bara ström",
+          "Engångsbetalning"
+        ]
+      }
     ],
     "facts": {
       "title": "WIFIGATE:s shabbat-timer i korthet",
       "rows": [
-        { "label": "Händelser", "value": "Upp till 50 totalt, veckohändelser och engångshändelser" },
-        { "label": "Tidssteg", "value": "10 minuter" },
-        { "label": "Högtider", "value": "Engångshändelser på kvällen före högtiden och på själva högtidsdagen, upp till 90 dagar framåt" },
-        { "label": "Öppen eller stängd", "value": "En grön händelse håller grinden öppen, en röd händelse håller den stängd" },
-        { "label": "Var schemat finns", "value": "Lagras och körs i grindens enhet" },
-        { "label": "Vad grinden behöver", "value": "Bara ström, inget SIM, ingen router och inget internet" },
-        { "label": "Ändra tiderna", "value": "Från appen, vid grinden, utan tekniker" },
-        { "label": "Efter strömavbrott", "value": "Schemat finns kvar, och händelserna körs igen när någon mobil ansluter till grinden" },
-        { "label": "Betalning", "value": "En gång för enheten och installationen, utan månadsabonnemang" }
+        {
+          "label": "Händelser",
+          "value": "Upp till 50 totalt, veckohändelser och engångshändelser"
+        },
+        {
+          "label": "Tidssteg",
+          "value": "10 minuter"
+        },
+        {
+          "label": "Högtider",
+          "value": "Engångshändelser på kvällen före högtiden och på själva högtidsdagen, upp till 90 dagar framåt"
+        },
+        {
+          "label": "Öppen eller stängd",
+          "value": "En grön händelse håller grinden öppen, en röd händelse håller den stängd"
+        },
+        {
+          "label": "Var schemat finns",
+          "value": "Lagras och körs i grindens enhet"
+        },
+        {
+          "label": "Vad grinden behöver",
+          "value": "Bara ström, inget SIM, ingen router och inget internet"
+        },
+        {
+          "label": "Ändra tiderna",
+          "value": "Från appen, vid grinden, utan tekniker"
+        },
+        {
+          "label": "Efter strömavbrott",
+          "value": "Schemat finns kvar, och händelserna körs igen när någon mobil ansluter till grinden"
+        },
+        {
+          "label": "Betalning",
+          "value": "En gång för enheten och installationen, utan månadsabonnemang"
+        }
       ]
     },
     "updatedLabel": "Senast uppdaterad: {date}",

@@ -36,15 +36,89 @@ export default {
         }
       ],
       "paragraph": "Sa WIFIGATE, makapagbibigay ang mga hotel, apartment para sa bisita (Airbnb), at bakasyunang resort ng maginhawa at ligtas na digital na pagpasok sa mga bisita, direkta mula sa kanilang mobile phone.\nSa halip na mag-issue ng magnetic key card, mag-abot ng pisikal na susi, o gumamit ng lockbox, nagiging awtomatiko ang kontrol sa access.\nSa WIFIGATE Host, maikokonekta ninyo ang inyong booking system direkta sa access system.\nDahil sa koneksyong ito, kapag nakumpirma ang booking, makakatanggap ang bisita ng personal na pahintulot sa pagpasok.\nNagiging aktibo ang pahintulot eksakto sa oras ng check-in at awtomatikong nagtatapos sa check-out, nang walang mano-manong pakikialam, abutan ng susi, o pakikipag-ayos ng front desk at ng mga host.",
-      "bullets": [
-        "Awtomatikong nalilikha ang access ng bisita kapag nakumpirma ang booking",
-        "Suporta sa buong automation sa pamamagitan ng WIFIGATE Host",
-        "Pansamantalang access ayon sa mga petsa at oras ng pananatili",
-        "Mas kaunting pag-issue, pag-abot, at pagpapalit ng key card ng kuwarto",
-        "Pamamahala ng pahintulot para sa staff, tagalinis, maintenance, at supplier",
-        "Mas maayos at mas maginhawang pagdating para sa mga bisita",
-        "Awtomatikong pagtatapos ng access sa oras ng check-out",
-        "Kasaysayan ng access para sa transparency at kontrol"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Kumpirmado ang booking. Parating na ang access.",
+          "text": "Sa WIFIGATE Host, kapag nakumpirma ang booking, awtomatikong nalilikha ang personal na pahintulot sa pagpasok at naipapadala ito sa bisita.",
+          "tags": [
+            "Mga hotel",
+            "Airbnb",
+            "Mga paupahang apartment"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Imbitasyon ng bisita",
+            "status": "Naipadala",
+            "guest": "Andrea Santos",
+            "when": "Biyernes 15:00 – Linggo 11:00",
+            "note": "May kasamang direksyon"
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Access ayon sa petsa ng pananatili.",
+          "text": "Bawat bisita ay tumatanggap sa telepono ng imbitasyong balido lamang sa mga petsa at oras ng kanyang pananatili.",
+          "tags": [
+            "Pag-check-in",
+            "Petsa at oras"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Check-out na. Kusang nagsasara ang access.",
+          "text": "Hindi na kailangang may makaalalang bawiin ang access: nag-e-expire ang pahintulot sa oras ng check-out, kahit walang staff sa lugar.",
+          "tags": [
+            "Kusang pagtatapos",
+            "Oras ng check-out"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Sariling pahintulot para sa bawat tauhan.",
+          "text": "Ang mga empleyado, tagalinis, taga-maintenance, at supplier ay may kanya-kanyang personal na pahintulot na ibinibigay at binabawi ninyo sa app.",
+          "tags": [
+            "Mga tagalinis",
+            "Mga taga-maintenance",
+            "Mga supplier"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Mas kaunting card. Walang lockbox.",
+          "text": "Mas kaunting key card ng kuwarto na ii-issue, iaabot, at papalitan, at walang lockbox code na ipinapasa mula sa isang bisita papunta sa susunod.",
+          "tags": [
+            "Key card ng kuwarto",
+            "Pisikal na susi"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Sino ang nagbukas at kailan. Malinaw ang lahat.",
+          "text": "Ipinapakita ng kasaysayan ng mga pagpasok kung sino ang nagbukas at kailan, para sa transparency at kontrol sa mga bisita, staff, at supplier.",
+          "tags": [
+            "Huling 90 araw"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Mas maayos na pagdating. Walang kailangang hintayin.",
+          "text": "Ang bisita mismo ang nagbubukas ng gate, pinto, o paradahan, direkta mula sa WIFIGATE app sa kanyang telepono.",
+          "tags": [
+            "Mga gate",
+            "Mga pinto",
+            "Mga paradahan"
+          ]
+        },
+        {
+          "icon": "zap",
+          "title": "Buong automation gamit ang WIFIGATE Host.",
+          "text": "Ikinokonekta ng WIFIGATE Host ang inyong booking system sa access system, nang walang kokopyahing detalye, walang card na ii-issue, at walang mano-manong hakbang.",
+          "tags": [
+            "Sistema ng booking",
+            "Koneksyon sa API"
+          ]
+        }
       ],
       "seoTitle": "WIFIGATE | Digital na Access ng Bisita sa Hotel, Airbnb at Resort",
       "seoDescription": "Sa WIFIGATE Host, awtomatiko at digital ang access ng bisita sa hotel, Airbnb, at resort: personal na pahintulot sa bawat booking, walang susi, key card, o lockbox.",
@@ -90,15 +164,95 @@ export default {
         }
       ],
       "paragraph": "Ang mga roller shutter sa mga negosyo at tindahan ay kadalasang pinapatakbo gamit ang remote, susi, panlabas na key box, o switch na nasa labas ng establisimyento. Ang ganitong mga solusyon ay maaaring mawala, maiwan sa dating empleyado, makopya, o maging nakalantad na access point. Bukod dito, ang pagbukas o pagsara gamit ang susi ay nangangailangan ng pagtayo malapit sa control point habang hawak ang susi, at kung minsan ay walang maayos na tanaw sa paligid ng shutter. Sa WIFIGATE, nalilipat ang kontrol sa app at nailalagay ang access control sa mas protektadong loob, kaya mas maginhawa ang pagbukas at pagsara, napapamahalaan ang pahintulot ng mga empleyado at supplier, at nababawasan ang pag-asa sa susi, remote, at nakalantad na access point.",
-      "bullets": [
-        "Magbukas at magsara gamit ang telepono nang hindi umaasa sa remote",
-        "Mas kaunting pag-asa sa mga susing maaaring makopya o mawala",
-        "Mas kaunting nakalantad na access point sa labas ng negosyo",
-        "Mas maginhawang kontrol na may mas malinaw na tanaw sa shutter",
-        "Pamamahala ng pahintulot para sa mga empleyado, manager, at supplier",
-        "Opsyonal na pansamantalang access ayon sa oras o pangangailangan",
-        "Angkop para sa mga tindahan, bodega, service entrance, at negosyo",
-        "Mas maayos at mas ligtas na solusyon sa loob para sa araw-araw na operasyon"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Personal na pahintulot. Para sa bawat empleyado, manager, at supplier.",
+          "text": "May sariling pahintulot sa app ang bawat isa, at puwede ninyo itong alisin anumang oras.",
+          "visual": {
+            "type": "roster",
+            "heading": "Access sa shutter",
+            "status": "Aktibo",
+            "rows": [
+              {
+                "name": "May-ari ng tindahan",
+                "badge": "Tagapamahala"
+              },
+              {
+                "name": "Empleyado sa shift",
+                "badge": "Awtorisado"
+              },
+              {
+                "name": "Supplier ng paninda",
+                "badge": "Pansamantala"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "shield-check",
+          "title": "Mas kaunting nakalantad na access point. Nasa loob na ang kontrol.",
+          "text": "Sa halip na switch o key box sa panlabas na pader, puwedeng ilagay ang control point sa protektadong loob ng negosyo.",
+          "tags": [
+            "Protektadong loob",
+            "Hindi abot-kamay"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Pagbukas at pagsara. Diretso mula sa telepono.",
+          "text": "Pinapatakbo ng mga awtorisadong user ang shutter mula sa WIFIGATE app, nang walang remote na hahanapin o ipapasa-pasa sa mga empleyado.",
+          "tags": [
+            "Malaya sa remote",
+            "Direktang koneksyon"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Mas kaunting susi na puwedeng makopya o mawala.",
+          "text": "Patuloy na gumagana ang susing naiwan sa dating empleyado, samantalang nagsasara ang pahintulot sa telepono sa huling araw niya.",
+          "tags": [
+            "Walang papalitang kandado",
+            "Walang babawiing gamit"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Pansamantalang access. Kapag kailangan lang.",
+          "text": "Magbahagi ng access na may takdang oras sa isang supplier o pansamantalang empleyado, at hihinto itong gumana kapag tapos na ang oras.",
+          "tags": [
+            "Mga supplier",
+            "Mga pansamantalang empleyado"
+          ]
+        },
+        {
+          "icon": "eye",
+          "title": "Mas maginhawang kontrol. Mas malinaw na tanaw.",
+          "text": "Patakbuhin ang shutter gamit ang telepono mula sa mas ligtas na distansya, sa halip na tumayo mismo sa control point nang may hawak na susi.",
+          "tags": [
+            "Mas ligtas na distansya",
+            "Walang hawak na susi"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "Araw-araw na operasyon. Mas maayos at mas ligtas.",
+          "text": "Ikinakabit ang WIFIGATE sa kasalukuyang kontrol ng shutter, at naka-save ang datos sa mismong device, naka-encrypt.",
+          "tags": [
+            "Solusyon sa loob",
+            "Naka-encrypt na datos"
+          ]
+        },
+        {
+          "icon": "store",
+          "title": "Para sa anumang negosyong may de-kuryenteng roller shutter.",
+          "text": "Saanman ninyo gustong magkaroon ng mas kaunting susi at remote na nagpapalipat-lipat ng kamay.",
+          "tags": [
+            "Mga tindahan",
+            "Mga bodega",
+            "Mga service entrance"
+          ]
+        }
       ],
       "seoTitle": "Matalinong Kontrol ng Roller Shutter sa Negosyo | WIFIGATE",
       "seoDescription": "Sa WIFIGATE, kontrolin ang roller shutter ng negosyo at tindahan gamit ang telepono, may pamamahala ng pahintulot, mas kaunting susi at remote, at mas kaunting nakalantad na access point.",
@@ -144,15 +298,103 @@ export default {
         }
       ],
       "paragraph": "Ginagamit ng mga residente, empleyado, bisita, at supplier ang mga awtomatikong gate at harang sa paradahan, pero mabilis na nagiging abala ang pamamahala ng mga remote, code, at tawag para ipabukas ang gate. Sa WIFIGATE, mabubuksan ang gate gamit ang telepono, maibabahagi ang permanente o pansamantalang access, magagamit ang awtomatikong pagbukas para sa mga regular na user, at maitatakda ang mga naka-iskedyul na event ayon sa pangangailangan. Dinisenyo ang system para sa ligtas, naka-encrypt, at pribadong operasyon, nang walang buwanang subscription o auto-debit, at puwede pa ring gamitin ang mga kasalukuyang remote kasabay ng kontrol mula sa app.",
-      "bullets": [
-        "Buksan ang awtomatikong gate o harang sa paradahan gamit ang telepono",
-        "Walang buwanang subscription at walang auto-debit",
-        "Magbahagi ng pansamantalang access sa mga bisita, supplier, at empleyado",
-        "Auto Open para sa mga regular na user sa araw-araw na pagpasok",
-        "Mga naka-iskedyul na event para magbukas ayon sa araw at oras",
-        "Kontrol mula sa app o gamit ang mga kasalukuyang remote",
-        "Mas kaunting pamimigay ng pisikal na remote",
-        "Kasaysayan ng pagbukas para sa kontrol at transparency"
+      "benefits": [
+        {
+          "icon": "smartphone",
+          "title": "Gate o harang sa paradahan. Diretso mula sa telepono.",
+          "text": "Ang sinumang binigyan ninyo ng pahintulot, permanente man o pansamantala, ay nagbubukas ng awtomatikong gate o harang sa paradahan mula sa WIFIGATE app.",
+          "tags": [
+            "Awtomatikong gate",
+            "Harang sa paradahan",
+            "Walang SIM"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Kasaysayan ng pagbukas",
+            "status": "Ngayon",
+            "rows": [
+              {
+                "time": "07:42",
+                "name": "Liza · Residente",
+                "event": "Binuksan"
+              },
+              {
+                "time": "08:15",
+                "name": "Jun · Empleyado",
+                "event": "Binuksan"
+              },
+              {
+                "time": "10:30",
+                "name": "Rey · Supplier",
+                "event": "Binuksan"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "card-off",
+          "title": "Walang subscription. Walang auto-debit.",
+          "text": "Isang beses lang ang bayad para sa device at pagkakabit, walang buwanang subscription at walang paulit-ulit na singil.",
+          "tags": [
+            "Isang beses na bayad",
+            "Device at pagkakabit"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "Pansamantalang access. Kusang nagsasara.",
+          "text": "Sa halip na tumanggap ng mga tawag para ipabukas ang gate, magpadala ng pahintulot na balido lamang sa oras na kailangan ito.",
+          "tags": [
+            "Mga bisita",
+            "Mga supplier",
+            "Mga empleyado"
+          ]
+        },
+        {
+          "icon": "hands-free",
+          "title": "Auto Open. Bumubukas ang gate pagdating ninyo.",
+          "text": "Para sa mga regular na user, nakikilala ng awtomatikong pagbukas na dumating na kayo at binubuksan nito ang gate, nang walang remote na hahanapin at walang bintanang ibababa habang umuulan.",
+          "tags": [
+            "Mga regular na user",
+            "Araw-araw na pagpasok"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Mga naka-iskedyul na event. Ayon sa araw at oras.",
+          "text": "Itakda nang maaga kung aling mga araw at oras mananatiling bukas ang gate, bilang lingguhan o isang beses na event.",
+          "tags": [
+            "Lingguhan",
+            "Isang beses"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "App o remote. Kayo ang pipili.",
+          "text": "Patuloy na gumagana ang mga kasalukuyang remote kasabay ng kontrol mula sa app, kaya walang kailangang itapon.",
+          "tags": [
+            "Mga kasalukuyang remote",
+            "Kontrol mula sa app"
+          ]
+        },
+        {
+          "icon": "user-plus",
+          "title": "Mas kaunting pisikal na remote na ipamimigay.",
+          "text": "Sa halip na mamigay ng remote sa bawat residente, empleyado, o supplier, bigyan ang bawat isa ng personal na pahintulot sa app.",
+          "tags": [
+            "Personal na pahintulot",
+            "Pamamahala sa app"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Kasaysayan ng pagbukas. Kontrol at transparency.",
+          "text": "Makikita ninyo kung sino ang nagbukas ng gate at kailan, sa huling 90 araw.",
+          "tags": [
+            "Nakaraang 90 araw",
+            "Sino at kailan"
+          ]
+        }
       ],
       "seoTitle": "Awtomatikong Gate at Harang, Walang Subscription | WIFIGATE",
       "seoDescription": "Sa WIFIGATE, buksan ang awtomatikong gate at harang sa paradahan gamit ang telepono: Auto Open, naka-iskedyul na event, kasalukuyang remote, at walang buwanang subscription o auto-debit.",
@@ -198,15 +440,101 @@ export default {
         }
       ],
       "paragraph": "Ang mga pinto ng garahe at pribadong paradahan ay karaniwang pinapatakbo gamit ang pisikal na remote, na maaaring mawala, maiwan sa mga taong hindi na nangangailangan ng access, o makopya sa ilang sitwasyon. Sa WIFIGATE, nalilipat ang kontrol sa digital na access gamit ang telepono, kaya mapapamahalaan ninyo ang pahintulot ng mga kapamilya, empleyado, o bisita, at makapagbabahagi ng pansamantalang access nang hindi nag-aabot ng remote o code. Ang resulta ay mas maginhawa, mas pribado, at mas maayos na karanasan, na may mas kaunting pag-asa sa mga pisikal na gamit sa pagpasok.",
-      "bullets": [
-        "Buksan ang pinto ng garahe gamit ang telepono",
-        "Mas kaunting pag-asa sa pisikal na remote",
-        "Mas mababang panganib mula sa nawala, naipasa, o nakopyang remote",
-        "Pamamahala ng access para sa mga kapamilya, empleyado, at bisita",
-        "Pansamantalang access nang hindi nag-aabot ng remote o code",
-        "Angkop para sa pribadong paradahan, bahay, at garden apartment",
-        "Mas pribado at mas ligtas na paraan ng pamamahala ng access",
-        "Mas maginhawa at mas ligtas na kontrol araw-araw"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Personal na pahintulot para sa bawat pumapasok.",
+          "text": "Magdagdag at mag-alis ng mga kapamilya, empleyado, at bisita sa app, at nagbubukas ang bawat isa gamit ang sariling pahintulot sa kanyang telepono.",
+          "tags": [
+            "Mga kapamilya",
+            "Mga empleyado",
+            "Mga bisita"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Access sa garahe",
+            "status": "Aktibo",
+            "rows": [
+              {
+                "name": "Nanay",
+                "badge": "Tagapamahala"
+              },
+              {
+                "name": "Miguel",
+                "badge": "Kapamilya"
+              },
+              {
+                "name": "Teknisyan",
+                "badge": "Pansamantala"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Mas mababang panganib mula sa nawala o nakopyang remote.",
+          "text": "Ang remote na nawala, naipasa, o nakopya ay maaaring patuloy na magbukas, samantalang ang pahintulot sa telepono ay naaalis mula sa app sa isang iglap.",
+          "tags": [
+            "Nawala",
+            "Naipasa",
+            "Nakopya"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Bumubukas ang pinto ng garahe mula sa telepono.",
+          "text": "Nakakonekta ang WIFIGATE sa pinto ng garahe, at binubuksan ninyo ito mula sa WIFIGATE app sa teleponong lagi na ninyong dala.",
+          "tags": [
+            "Direktang koneksyon",
+            "Walang SIM"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "Mas kaunting remote. Mas kaunting abala.",
+          "text": "Mas kaunting remote na bibilhin, ipo-program, iaabot, at pamamahalaan, sa halip na may remote para sa bawat sasakyan at bawat user.",
+          "tags": [
+            "Kasabay ng kasalukuyang remote"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Pansamantalang access. Walang remote na iaabot.",
+          "text": "Nakakatanggap ang teknisyan o bisita ng pansamantalang pahintulot na matatapos kung kailan ninyo gusto, nang hindi nag-aabot ng remote o code.",
+          "tags": [
+            "Mga teknisyan",
+            "Mga bisita"
+          ]
+        },
+        {
+          "icon": "garage",
+          "title": "Para sa pribadong paradahan, bahay, at garden apartment.",
+          "text": "Ikinakabit ang WIFIGATE sa kasalukuyang controller ng pinto ng garahe o ng pasukan ng paradahan, sa pribadong bahay o garden apartment.",
+          "tags": [
+            "Pribadong garahe",
+            "Pribadong paradahan",
+            "Mga garden apartment"
+          ]
+        },
+        {
+          "icon": "shield-check",
+          "title": "Mas pribado at mas ligtas na access.",
+          "text": "Pinoprotektahan ng WIFIGATE ang access sa pamamagitan ng mga advanced na layer ng seguridad at naka-encrypt na storage, at pinangangalagaan nito ang privacy ng mga user.",
+          "tags": [
+            "Naka-encrypt na storage",
+            "Mga layer ng seguridad",
+            "Pagkapribado"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Mas maginhawa at mas ligtas. Araw-araw.",
+          "text": "Sa kasaysayan ng mga pagpasok sa huling 90 araw, makikita kung sino ang nagbukas ng garahe at kailan.",
+          "tags": [
+            "Kasaysayan ng pagpasok",
+            "90 araw"
+          ]
+        }
       ],
       "seoTitle": "Matalinong Pagbukas ng Garahe at Pribadong Paradahan | WIFIGATE",
       "seoDescription": "Binubuksan ng WIFIGATE ang garahe at pribadong paradahan gamit ang telepono, may pansamantalang pahintulot, mas kaunting pisikal na remote, at mas pribadong pamamahala ng access.",
@@ -252,15 +580,84 @@ export default {
         }
       ],
       "paragraph": "Sa mga pribadong tahanan, maaaring maging mahinang punto ang keypad, susi, at remote. Sa paglipas ng panahon, napupudpod o nagkakamarka ang mga pindutan ng keypad, nawawala o naipapasa ang mga remote, at kung minsan ay ibinibigay ang code sa mga courier, service provider, o bisita at nananatili ito sa kanila kahit hindi na kailangan. Sa WIFIGATE, mapapamahalaan ninyo ang pasukan gamit ang telepono, makapagbabahagi ng pansamantalang access para sa bisita nang hindi inilalantad ang permanenteng code, at madaling mababawi ang mga pahintulot nang hindi nagpapalit ng kandado, code, o remote.",
-      "bullets": [
-        "Mas kaunting pag-asa sa keypad, susi, at remote",
-        "Pansamantalang access para sa mga courier, bisita, at service provider",
-        "Madaling bawiin ang pahintulot gamit ang telepono",
-        "Mas mababang panganib mula sa shared code o naipasang remote",
-        "Angkop para sa gate, pinto, paradahan, at garahe ng pribadong tahanan",
-        "Simpleng pamamahala para sa mga kapamilya at regular na user",
-        "Mas maginhawang pagpasok araw-araw",
-        "Mas mahusay na privacy at kontrol kung sino ang makakapasok"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Pansamantalang pahintulot. Para sa courier, bisita, at teknisyan.",
+          "text": "Magpadala ng imbitasyong may takdang oras na gumagana lamang sa oras na pinili ninyo, nang hindi inilalantad ang permanenteng code.",
+          "tags": [
+            "Mga courier",
+            "Mga bisita",
+            "Mga teknisyan"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Imbitasyon ng bisita",
+            "status": "Balido",
+            "guest": "Teknisyan",
+            "when": "Ngayon, 10:00–12:00",
+            "note": "Kusang mag-e-expire"
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Mas mababang panganib mula sa code at remote na ipinapasa-pasa.",
+          "text": "May personal na pahintulot sa telepono ang bawat isa, kaya hindi na kailangang bigyan ng permanenteng code o remote ang mga courier at bisita.",
+          "tags": [
+            "Personal na pahintulot",
+            "Walang permanenteng code"
+          ]
+        },
+        {
+          "icon": "user-minus",
+          "title": "Bawiin ang pahintulot. Sa isang iglap, mula sa telepono.",
+          "text": "Kapag may taong hindi na dapat pumasok, alisin agad ang kanyang access, nang hindi nagpapalit ng kandado, code, o remote.",
+          "tags": [
+            "Agarang pag-alis",
+            "Walang papalitang kandado"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "Mas pribado. Mas kontrolado.",
+          "text": "Hindi tulad ng shared code, may pangalan ang bawat pahintulot, kaya malinaw anumang oras kung sino ang makakapasok sa bahay.",
+          "tags": [
+            "Listahan ng pahintulot",
+            "Pahintulot na may pangalan"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Mas kaunting pag-asa sa keypad, susi, at remote.",
+          "text": "Pamahalaan ang pasukan gamit ang telepono, sa halip na umasa sa keypad, susi, at remote.",
+          "tags": [
+            "Pamamahala sa telepono"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Ang buong pamilya. Simple ang pamamahala.",
+          "text": "Magdagdag ng mga kapamilya at regular na user sa app, at may personal na pahintulot sa pagpasok ang bawat isa.",
+          "tags": [
+            "Mga kapamilya",
+            "Mga regular na user"
+          ]
+        },
+        {
+          "icon": "gate",
+          "title": "Mula sa gate hanggang sa garahe.",
+          "text": "Angkop ang WIFIGATE para sa gate, pinto sa pasukan, paradahan, at pinto ng garahe ng pribadong tahanan, at lahat ay nabubuksan mula sa iisang app.",
+          "tags": [
+            "Mga gate",
+            "Mga pinto",
+            "Mga garahe"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "Araw-araw na pagpasok. Mas maginhawa.",
+          "text": "Magbukas gamit ang teleponong nasa bulsa tuwing aalis at uuwi kayo, nang walang code na kailangang tandaan at walang remote na hahanapin."
+        }
       ],
       "seoTitle": "Matalinong Access sa Bahay, Walang Shared na Code | WIFIGATE",
       "seoDescription": "Sa WIFIGATE, pamahalaan ang access ng inyong bahay gamit ang telepono, magbahagi ng pansamantalang pahintulot sa bisita at courier, at bawasan ang pag-asa sa keypad, susi, at remote.",
@@ -306,15 +703,98 @@ export default {
         }
       ],
       "paragraph": "Sa isang residential na gusali, hindi natatapos sa pinto ng lobby ang access: may gate, pasukan ng paradahan, pinto ng mga bodega, at kung minsan ay pinto sa gilid. At hindi lang mga residente ang sangkot, kundi pati ang mga nagpapalit-palit na umuupa, ang asosasyon ng mga residente o management company, mga tagalinis, maintenance, at mga regular na supplier. Kapag iisang code at ilang remote lang ang gamit sa lahat ng ito, bawat maliit na pagbabago, gaya ng residenteng umalis, nawalang remote, o bagong supplier, ay nangangailangan ng pagpapalit ng code at muling pag-abiso sa lahat. Pinapalitan ng WIFIGATE ang ganitong paraan ng maayos na pamamahala ng access sa antas ng buong gusali.",
-      "bullets": [
-        "Personal na pahintulot para sa bawat residente, sa halip na iisang code para sa lahat",
-        "Magdagdag at mag-alis ng residente nang hindi pinapalitan ang code ng buong gusali",
-        "Hiwalay na pahintulot para sa mga tagalinis, maintenance, at regular na supplier",
-        "Angkop para sa pinto ng lobby, gate, at pasukan ng paradahan",
-        "Mas kaunting pag-asa sa keypad, susi, at remote",
-        "Kasaysayan ng mga pagpasok para sa asosasyon ng mga residente o management company",
-        "Pamahalaan ang lahat ng pahintulot sa gusali gamit ang telepono",
-        "Access para sa bagong umuupa mula sa araw ng paglipat, walang abutan ng susi"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Personal na pahintulot. Para sa bawat residente.",
+          "text": "Sa halip na iisang code na alam ng lahat at ipinapasa pa sa iba, may sariling pahintulot ang bawat residente.",
+          "tags": [
+            "Walang shared na code"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Access sa gusali",
+            "status": "Aktibo",
+            "rows": [
+              {
+                "name": "Maricel Cruz",
+                "badge": "Residente"
+              },
+              {
+                "name": "Paolo Reyes",
+                "badge": "Residente"
+              },
+              {
+                "name": "Carmela Bautista",
+                "badge": "Asosasyon"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-plus",
+          "title": "Nagpapalit-palit ang mga residente. Nananatili ang kontrol.",
+          "text": "Magdagdag at mag-alis ng residente nang hindi pinapalitan ang code ng gusali at nang hindi muling inaabisuhan ang lahat.",
+          "tags": [
+            "Pagdaragdag ng residente",
+            "Pagbawi ng pahintulot"
+          ]
+        },
+        {
+          "icon": "wrench",
+          "title": "Hiwalay na pahintulot para sa mga nagseserbisyo",
+          "text": "Ang mga tagalinis, taga-maintenance, at regular na supplier ay tumatanggap ng sariling pahintulot, sa halip na ang code ng gusali.",
+          "tags": [
+            "Mga tagalinis",
+            "Mga taga-maintenance",
+            "Mga supplier"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "Hindi lang ang pinto ng lobby",
+          "text": "Angkop para sa pinto ng lobby, gate ng gusali, at pasukan ng paradahan, at binubuksan ang mga ito ng bawat residente mula sa telepono gamit ang sariling pahintulot.",
+          "tags": [
+            "Pinto ng lobby",
+            "Gate ng gusali",
+            "Paradahan"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Mas kaunting code. Mas kaunting remote.",
+          "text": "Mas kaunting pag-asa sa keypad, susi, at remote: binubuksan ang pasukan ng gusali mula sa telepono.",
+          "tags": [
+            "Pagbukas sa telepono",
+            "Gumagana pa ang remote"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Mas malinaw ang lahat para sa asosasyon",
+          "text": "Nakikita ng asosasyon o ng kompanyang namamahala ng gusali sa kasaysayan ng mga pagpasok kung sino ang nagbukas at kailan.",
+          "tags": [
+            "Nakaraang 90 araw",
+            "Kompanyang namamahala"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Lahat ng pahintulot sa gusali, diretso mula sa telepono",
+          "text": "Pamahalaan mula sa telepono ang napapanahong listahan ng lahat ng pahintulot sa pagpasok sa gusali, at may pangalan ang bawat pahintulot.",
+          "tags": [
+            "Napapanahong listahan",
+            "Pahintulot na may pangalan"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "Bagong residente? May access na.",
+          "text": "Nakakatanggap ng access ang mga bagong umuupa mula sa araw ng paglipat, nang walang abutan ng susi na kailangang ayusin.",
+          "tags": [
+            "Mula sa unang araw"
+          ]
+        }
       ],
       "seoTitle": "Access Control para sa Residential na Gusali | WIFIGATE",
       "seoDescription": "Matalinong pamamahala ng access ng WIFIGATE para sa residential na gusali: pagbukas gamit ang telepono, pansamantalang pahintulot sa bisita, mas kaunting keypad, at mas malinaw na transparency.",
@@ -360,15 +840,95 @@ export default {
         }
       ],
       "paragraph": "Kailangan ng mga gusali ng opisina na bigyan ng maginhawang pagpasok ang mga empleyado, bisita, supplier, at operations team, nang hindi pinabibigatan ang reception at nang hindi mano-manong pinamamahalaan ang mga susi o card. Sa WIFIGATE, makapagbibigay kayo ng permanenteng pahintulot sa mga empleyado at pansamantalang pahintulot sa mga bisita, makokontrol ang access gamit ang telepono, at mapapamahalaan ang mga pagpasok sa paraang angkop sa moderno, malinis, at organisadong kapaligiran ng negosyo.",
-      "bullets": [
-        "Permanenteng pahintulot para sa mga empleyado at team",
-        "Pansamantalang access para sa mga bisita, supplier, at courier",
-        "Mas magaan na trabaho para sa reception at operations staff",
-        "Angkop para sa mga pasukan, palapag, kuwarto, at paradahan",
-        "Organisadong pamamahala ng user at pahintulot",
-        "Mas kaunting pag-asa sa susi, access badge, at code",
-        "Mas moderno at maginhawang imahe para sa gusali",
-        "Kasaysayan ng access para sa kontrol at transparency"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Permanenteng pahintulot. Para sa bawat empleyado.",
+          "text": "Nakakatanggap ang mga empleyado at team ng personal at permanenteng pahintulot sa telepono, simula sa petsang itinakda ninyo.",
+          "visual": {
+            "type": "roster",
+            "heading": "Tauhan ng opisina",
+            "status": "Aktibo",
+            "rows": [
+              {
+                "name": "Patricia Ramos",
+                "badge": "Permanente"
+              },
+              {
+                "name": "Mark Villanueva",
+                "badge": "Permanente"
+              },
+              {
+                "name": "Kristine Garcia",
+                "badge": "Permanente"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "send",
+          "title": "Access na may takdang oras. Para sa lahat ng iba pa.",
+          "text": "Nakakatanggap ang mga bisita ng imbitasyong may takdang oras bago pa sila dumating, na puwede ring may kasamang direksyon.",
+          "tags": [
+            "Mga aplikante",
+            "Mga supplier",
+            "Mga courier"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Mas magaan na trabaho sa reception at operasyon",
+          "text": "Pumapasok ang mga bisita gamit ang telepono nang hindi naghihintay na may bumaba para magbukas, at mas kaunting pagdating ang inaasikaso ng reception.",
+          "tags": [
+            "Tanggapan",
+            "Tauhan sa operasyon"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "Mula sa pasukan hanggang sa paradahan",
+          "text": "Angkop para sa mga pinto sa pasukan, palapag, kuwarto, at pasukan ng paradahan, at lahat ay nabubuksan mula sa telepono.",
+          "tags": [
+            "Pinto sa pasukan",
+            "Palapag at kuwarto",
+            "Paradahan"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "Mga user at pahintulot. Maayos ang lahat.",
+          "text": "Iisang aksyon lang sa listahan ang pagtanggap at pag-alis ng empleyado, at nagsasara ang pahintulot sa petsang itinakda ninyo.",
+          "tags": [
+            "Pagtanggap ng empleyado",
+            "Pag-alis ng empleyado"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Mas kaunting badge, susi, at code",
+          "text": "Mas kaunting badge na ii-issue at mas kaunting susi na babawiin kapag may umalis sa trabaho, dahil pumapasok ang bawat empleyado gamit ang sarili niyang telepono.",
+          "tags": [
+            "Pagpasok gamit ang telepono"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Moderno at maginhawang imahe para sa gusali",
+          "text": "Pumapasok ang mga empleyado at bisita gamit ang telepono, sa paraang angkop sa moderno, malinis, at organisadong kapaligiran ng negosyo.",
+          "tags": [
+            "Mga empleyado",
+            "Mga bisita"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "May pangalan at oras ang bawat pagbukas",
+          "text": "Masusuri ninyo pagkatapos kung sino ang pumasok sa isang palapag, bodega, o paradahan, para sa kontrol at transparency.",
+          "tags": [
+            "Huling 90 araw",
+            "Sino at kailan"
+          ]
+        }
       ],
       "seoTitle": "Access Control para sa Gusali ng Opisina | WIFIGATE",
       "seoDescription": "Sa WIFIGATE, pinamamahalaan ng gusali ng opisina ang pagpasok ng empleyado, bisita, at supplier gamit ang telepono, may pansamantala at permanenteng pahintulot at modernong pamamahala ng access.",
@@ -414,15 +974,102 @@ export default {
         }
       ],
       "paragraph": "Ang maliliit na negosyo, klinika, studio, bodega, at opisina ay kadalasang umaasa sa keypad, susi, o simpleng magnetic lock. Nagsisimula ang problema kapag ipinapasa ang code sa mga empleyado, supplier, at bisita, o kapag kailangan ng pansamantalang access nang hindi isinasakripisyo ang seguridad. Sa WIFIGATE, mapapamahalaan ninyo ang pasukan gamit ang telepono, makapagbabahagi ng pansamantalang pahintulot, at mababawasan ang pangangailangan sa permanenteng code, pisikal na susi, o mano-manong pakikipag-ayos sa bawat pagpasok.",
-      "bullets": [
-        "Angkop para sa mga pasukang may electric o magnetic lock",
-        "Pagbukas gamit ang telepono para sa mga empleyado at manager",
-        "Pansamantalang access para sa mga bisita, supplier, at service provider",
-        "Mas kaunting pangangailangan sa keypad o permanenteng code",
-        "Angkop para sa maliliit na negosyo, klinika, studio, at opisina",
-        "Mas simple at mas ligtas na pamamahala ng pahintulot",
-        "Mas kaunting pangangailangan sa pisikal na susi",
-        "Maginhawang opsyon para sa negosyong gusto ng modernong pagpasok nang walang komplikadong system"
+      "benefits": [
+        {
+          "icon": "shield-check",
+          "title": "Simpleng pamamahala ng pahintulot. At mas ligtas.",
+          "text": "May personal na pahintulot ang bawat empleyado, supplier, o bisita na puwedeng bawiin anumang oras, at ipinapakita ng kasaysayan ng mga pagpasok kung sino ang nagbukas at kailan.",
+          "tags": [
+            "Mababawi anumang oras",
+            "Kasaysayan ng pagpasok"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Kasaysayan ng pagpasok",
+            "status": "Ngayon",
+            "rows": [
+              {
+                "time": "07:40",
+                "name": "Supplier",
+                "event": "Binuksan"
+              },
+              {
+                "time": "08:50",
+                "name": "Joy, manager",
+                "event": "Binuksan"
+              },
+              {
+                "time": "19:30",
+                "name": "Mga tagalinis",
+                "event": "Binuksan"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Pansamantalang access na kusang nagsasara.",
+          "text": "Nakakatanggap ang mga bisita, supplier, at nagseserbisyo ng pahintulot para sa sarili nilang oras, kaya hindi na kailangang pumunta pa ang may-ari para lang magbukas.",
+          "tags": [
+            "Mga supplier",
+            "Mga teknisyan",
+            "Mga courier"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "Ang lock na nasa pinto na. Mabubuksan na sa telepono.",
+          "text": "Angkop ang WIFIGATE sa mga pasukang may de-kuryente o magnetikong lock at nabubuksan ang mga ito gamit ang telepono, habang nananatili sa lugar ang kasalukuyang lock.",
+          "tags": [
+            "De-kuryenteng lock",
+            "Magnetikong lock"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Nagbubukas ang mga empleyado at manager gamit ang telepono.",
+          "text": "Binubuksan ng bawat empleyado at manager ang pasukan mula sa app gamit ang personal na pahintulot, kaya mas kaunti ang pangangailangan sa mano-manong pakikipag-ayos sa bawat pagpasok.",
+          "tags": [
+            "Mga empleyado",
+            "Mga manager"
+          ]
+        },
+        {
+          "icon": "user-check",
+          "title": "Mas kaunting code na ipinapasa-pasa.",
+          "text": "Ang code na ibinigay sa lahat ay maaaring manatili sa mga taong hindi na kailangang pumasok, at binabawasan ng personal na pahintulot ang pangangailangan sa keypad at permanenteng code.",
+          "tags": [
+            "Mga keypad",
+            "Permanenteng code"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Mas kaunting susi sa bungkos.",
+          "text": "Nabubuksan ang pinto mula sa telepono, kaya mas kaunting pisikal na susi ang umiikot sa mga empleyado at manager.",
+          "tags": [
+            "Pisikal na susi"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Modernong pagpasok. Walang komplikadong system.",
+          "text": "Walang control cabinet, management software, o card reader na ikakabit, at lahat ng pamamahala ay ginagawa mula sa app.",
+          "tags": [
+            "Walang control cabinet",
+            "Walang card reader"
+          ]
+        },
+        {
+          "icon": "briefcase",
+          "title": "Para sa maliliit na negosyo, klinika, at opisina.",
+          "text": "Pinamamahalaan ng maliliit na negosyo, klinika, studio, at opisina ang kanilang pasukan gamit ang telepono at nagbabahagi sila ng pansamantalang pahintulot kapag kailangan.",
+          "tags": [
+            "Mga klinika",
+            "Mga opisina",
+            "Mga bodega"
+          ]
+        }
       ],
       "seoTitle": "Pasukan at Magnetic Lock para sa Negosyo | WIFIGATE",
       "seoDescription": "Matalinong pagbukas ng WIFIGATE para sa pasukan ng negosyo at magnetic lock: pamamahala ng pahintulot gamit ang telepono, pansamantalang access, at mas kaunting keypad at susi.",
@@ -468,15 +1115,91 @@ export default {
         }
       ],
       "paragraph": "Kailangan ng mga pasilidad sa sports, padel court, tennis court, gym, at training complex na pamahalaan ang access ng mga miyembro, coach, team, at bisita ayon sa oras ng operasyon, booking, at event. Sa WIFIGATE, makapagbibigay kayo ng pansamantala o permanenteng access gamit ang telepono, mababawasan ang pag-asa sa shared na susi o code, at mapapaganda ang karanasan ng mga user sa pagpasok, lalo na sa mga complex kung saan nagbabago ang dami ng tao sa buong araw.",
-      "bullets": [
-        "Angkop para sa padel court, tennis court, gym, at training complex",
-        "Access ayon sa oras ng operasyon, booking, o pahintulot",
-        "Pamamahala para sa mga miyembro, coach, empleyado, at bisita",
-        "Mas kaunting pag-asa sa shared na susi at code",
-        "Mabilis at maginhawang pagpasok gamit ang telepono",
-        "Angkop para sa mga complex na may pabago-bagong oras ng operasyon",
-        "Pansamantalang pahintulot para sa mga event, klase, o training session",
-        "Kasaysayan ng access para sa kontrol at operasyon"
+      "benefits": [
+        {
+          "icon": "calendar-check",
+          "title": "Mag-book ng court. Nagbubukas ang access ayon sa booking.",
+          "text": "Ang nag-book ng court sa isang partikular na oras ay nakakatanggap ng pahintulot na nagbubukas sa oras na iyon at nagsasara sa pagtatapos nito.",
+          "tags": [
+            "Oras ng operasyon",
+            "Mga booking",
+            "Mga pahintulot"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Imbitasyon sa pagpasok",
+            "status": "Balido",
+            "guest": "Bea, court 2",
+            "when": "Ngayon 18:00–19:30",
+            "note": "May kasamang direksyon"
+          }
+        },
+        {
+          "icon": "users",
+          "title": "Miyembro, coach, at bisita. May sariling pahintulot ang bawat isa.",
+          "text": "Sa iisang listahan pinamamahalaan ang mga regular na miyembro, ang mga coach na dumarating sa mga takdang araw, ang mga empleyado, at ang mga bisitang isang beses lang darating, nang walang susing nagpapalipat-lipat ng kamay.",
+          "tags": [
+            "Mga miyembro",
+            "Mga coach",
+            "Empleyado at bisita"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Mas kaunting susi. Mas kaunting shared code.",
+          "text": "Patuloy na nagbubukas ang shared code kahit hindi na dapat, samantalang nagsasara ang personal na pahintulot kapag hindi na ito kailangan.",
+          "tags": [
+            "Personal na pahintulot"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Klase, training, o event. Access sa mga oras na iyon lang.",
+          "text": "Nakakatanggap ang mga kalahok sa klase, training, o event ng pansamantalang pahintulot na balido lamang sa mga oras na itinakda ninyo.",
+          "tags": [
+            "Mga event",
+            "Mga klase",
+            "Mga training"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Alamin kung sino ang nasa pasilidad at kailan.",
+          "text": "Ipinapakita ng kasaysayan ng mga pagpasok kung sino ang nagbukas at kailan, na nakakatulong sa operasyon at nagpapatunay na nakasara ang pasilidad sa pagtatapos ng araw.",
+          "tags": [
+            "Kontrol",
+            "Operasyon",
+            "Huling 90 araw"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Pumasok gamit ang telepono. Mabilis at maginhawa.",
+          "text": "Ang bawat user mismo ang nagbubukas mula sa app, kaya walang kailangang maghintay sa gate para magbukas para sa kanya.",
+          "tags": [
+            "Direktang koneksyon",
+            "Walang SIM"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Nagbabago ang oras ng operasyon? Pati ang access.",
+          "text": "Puwedeng magbukas ang mga naka-iskedyul na event ayon sa araw at oras, kaya tugma ang access sa oras ng operasyon ng pasilidad.",
+          "tags": [
+            "Naka-iskedyul na event",
+            "Lingguhan o isang beses"
+          ]
+        },
+        {
+          "icon": "dumbbell",
+          "title": "Mula sa Padel court hanggang sa gym.",
+          "text": "Angkop para sa mga Padel at tenis court, gym, at training complex, lalo na kapag nagbabago ang dami ng tao sa buong araw.",
+          "tags": [
+            "Padel",
+            "Tenis",
+            "Mga gym"
+          ]
+        }
       ],
       "seoTitle": "Access Control para sa Sports at Padel Court | WIFIGATE",
       "seoDescription": "Matalinong access control ng WIFIGATE para sa sports facility, padel court, gym, at training complex, may pagpasok gamit ang telepono at pansamantala o permanenteng pahintulot.",
@@ -522,15 +1245,96 @@ export default {
         }
       ],
       "paragraph": "Ang mga storage facility at locker room ay kadalasang umaasa sa shared code, keypad, at pisikal na susi na nakokopya, naipapasa, at bihirang palitan. Inililipat ng WIFIGATE ang access sa telepono: may personal na pahintulot ang bawat umuupa sa gate ng pasilidad, sa pasukan ng gusali, at, kung naka-install, sa storage unit o locker na may electric lock, limitado sa mga oras na pipiliin ninyo at inaalis sa sandaling matapos ang upa. Direktang nakikipag-ugnayan ang telepono sa device sa lugar, nang walang SIM card o koneksyon sa internet sa pinto, at walang buwanang subscription para sa karaniwang paggamit.",
-      "bullets": [
-        "Buksan ang gate ng pasilidad, pinto ng gusali, at locker gamit ang telepono",
-        "Personal na pahintulot para sa bawat umuupa",
-        "Access na limitado sa oras ng operasyon o sa itinakdang oras",
-        "Isang beses na access para sa mga naglilipat ng gamit at kapamilya",
-        "Alisin ang access sa sandaling matapos ang upa",
-        "Kasaysayan kung sino ang nagbukas at kailan",
-        "Walang shared code, keypad, o susi na kailangang palitan",
-        "Walang SIM card o koneksyon sa internet sa pinto"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Personal na pahintulot. Para sa bawat umuupa.",
+          "text": "Sa halip na shared code na naaalala pa ng mga dating umuupa, may sariling access ang bawat umuupa.",
+          "visual": {
+            "type": "roster",
+            "heading": "Access sa pasilidad",
+            "status": "Aktibo",
+            "rows": [
+              {
+                "name": "Rowena Mendoza",
+                "badge": "Awtorisado"
+              },
+              {
+                "name": "Ramon Aquino",
+                "badge": "Awtorisado"
+              },
+              {
+                "name": "Joanna Castillo",
+                "badge": "Awtorisado"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-minus",
+          "title": "Natapos ang upa. Pati ang access.",
+          "text": "Alisin ang pahintulot sa sandaling matapos ang kontrata o kapag may hindi nabayaran, nang walang susing babawiin.",
+          "tags": [
+            "Pagtatapos ng kontrata",
+            "Hindi nabayaran"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Gate, pinto, at locker. Mula sa telepono.",
+          "text": "Binubuksan ng bawat umuupa ang gate ng pasilidad, ang pinto ng gusali, at, kung nakakabit, ang storage unit o locker na may de-kuryenteng lock.",
+          "tags": [
+            "Gate ng pasilidad",
+            "Pinto ng gusali",
+            "De-kuryenteng lock"
+          ]
+        },
+        {
+          "icon": "clock",
+          "title": "Mga oras ng access na kayo ang nagtatakda.",
+          "text": "Payagan ang pagpasok sa oras lamang ng operasyon ng pasilidad, o bigyan ang umuupa ng mas mahabang oras.",
+          "tags": [
+            "Oras ng operasyon",
+            "Pasadyang oras"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "Isang beses na access. Para sa naglilipat ng gamit at kapamilya.",
+          "text": "Puwedeng makakuha ng access para sa isang araw ang naglilipat ng gamit o kapamilya, nang walang shared code at walang susi.",
+          "tags": [
+            "Mga naglilipat",
+            "Mga kapamilya",
+            "Isang araw"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Alam ninyo kung sino ang pumasok at kailan.",
+          "text": "Bawat pagbukas ay nakatala kasama ang pangalan ng user at ang oras, kaya ang sagot sa tanong tungkol sa isang pagbisita ay nasa kasaysayan, hindi sa mga camera.",
+          "tags": [
+            "Nakaraang 90 araw",
+            "Pangalan at oras"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Walang shared code. Walang susing papalitan.",
+          "text": "Ang mga code, keypad, at susi na nakokopya at naipapasa ay napapalitan ng personal na access sa telepono.",
+          "tags": [
+            "Walang keypad",
+            "Walang susi"
+          ]
+        },
+        {
+          "icon": "sim-off",
+          "title": "Walang SIM. Walang internet sa pinto.",
+          "text": "Direktang nakikipag-ugnayan ang telepono sa device sa lugar, at walang buwanang subscription para sa karaniwang paggamit.",
+          "tags": [
+            "Direktang koneksyon",
+            "Walang buwanang subscription"
+          ]
+        }
       ],
       "seoTitle": "Matalinong Access Control sa Storage at Locker | WIFIGATE",
       "seoDescription": "Sa WIFIGATE, may personal na access sa telepono ang bawat umuupa ng storage at locker, limitado sa oras ng operasyon, nakatala sa kasaysayan, at inaalis kapag natapos ang upa.",

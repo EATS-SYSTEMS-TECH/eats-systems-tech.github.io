@@ -36,15 +36,89 @@ export default {
         }
       ],
       "paragraph": "WIFIGATE pozwala hotelom, apartamentom na wynajem (Airbnb) i ośrodkom wypoczynkowym zapewnić gościom wygodne i bezpieczne cyfrowe wejście prosto z telefonu.\nKontrola dostępu staje się automatyczna, bez wydawania kart magnetycznych, przekazywania fizycznych kluczy czy korzystania z sejfów na klucze (Lockbox).\nDzięki WIFIGATE Host możesz połączyć swój system rezerwacji bezpośrednio z systemem dostępu.\nDzięki temu po potwierdzeniu rezerwacji gość otrzymuje osobiste uprawnienie do wejścia.\nUprawnienie aktywuje się dokładnie o godzinie zameldowania i wygasa automatycznie przy wymeldowaniu, bez ręcznej obsługi, przekazywania kluczy i uzgodnień z recepcją czy gospodarzami.",
-      "bullets": [
-        "Automatyczne tworzenie dostępu dla gościa po potwierdzeniu rezerwacji",
-        "Pełna automatyzacja dzięki WIFIGATE Host",
-        "Dostęp tymczasowy zgodny z datami i godzinami pobytu",
-        "Mniej wydawania, przekazywania i wymiany kart do pokoi",
-        "Zarządzanie uprawnieniami personelu, ekip sprzątających, serwisu i dostawców",
-        "Płynniejszy i wygodniejszy przyjazd dla gości",
-        "Automatyczne wygaśnięcie dostępu przy wymeldowaniu",
-        "Historia dostępu dla przejrzystości i kontroli"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Rezerwacja potwierdzona. Dostęp już w drodze.",
+          "text": "Dzięki WIFIGATE Host potwierdzenie rezerwacji tworzy osobiste uprawnienie do wejścia i automatycznie wysyła je gościowi.",
+          "tags": [
+            "Hotele",
+            "Airbnb",
+            "Apartamenty na wynajem"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Zaproszenie dla gościa",
+            "status": "Wysłane",
+            "guest": "Anna Nowak",
+            "when": "Pt 15:00 – Nd 11:00",
+            "note": "Zawiera wskazówki dojazdu"
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Dostęp zgodny z terminem pobytu.",
+          "text": "Każdy gość dostaje na telefon zaproszenie ważne tylko w dniach i godzinach pobytu.",
+          "tags": [
+            "Zameldowanie",
+            "Daty i godziny"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Wymeldowanie. Dostęp wygasa sam.",
+          "text": "Nikt nie musi pamiętać o odebraniu dostępu: uprawnienie wygasa o godzinie wyjazdu, nawet gdy nikogo z zespołu nie ma na miejscu.",
+          "tags": [
+            "Automatyczne wygaśnięcie",
+            "Godzina wyjazdu"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Każdy w zespole z własnym uprawnieniem.",
+          "text": "Pracownicy, ekipa sprzątająca, serwis i dostawcy dostają każdy osobiste uprawnienie, które nadajesz i odbierasz w aplikacji.",
+          "tags": [
+            "Sprzątanie",
+            "Serwis",
+            "Dostawcy"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Mniej kart. Bez sejfu na klucze.",
+          "text": "Wydajesz, przekazujesz i wymieniasz mniej kart do pokoi, a żaden kod do sejfu na klucze nie krąży od gościa do gościa.",
+          "tags": [
+            "Karty do pokoi",
+            "Fizyczne klucze"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Kto otworzył i kiedy. Wszystko jak na dłoni.",
+          "text": "Historia wejść pokazuje, kto otworzył i kiedy, co zapewnia przejrzystość i kontrolę nad wejściami gości, personelu i dostawców.",
+          "tags": [
+            "Ostatnie 90 dni"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Płynniejszy przyjazd. Bez czekania na kogokolwiek.",
+          "text": "Gość sam otwiera bramę, drzwi lub parking, prosto z aplikacji WIFIGATE w telefonie.",
+          "tags": [
+            "Brama",
+            "Drzwi",
+            "Wjazd na parking"
+          ]
+        },
+        {
+          "icon": "zap",
+          "title": "Pełna automatyzacja z WIFIGATE Host.",
+          "text": "WIFIGATE Host łączy Twój system rezerwacji z systemem dostępu, bez przepisywania danych, bez wydawania kart i bez ręcznych kroków.",
+          "tags": [
+            "System rezerwacji",
+            "Połączenie API"
+          ]
+        }
       ],
       "seoTitle": "WIFIGATE | Cyfrowy dostęp gości: hotele, Airbnb, ośrodki",
       "seoDescription": "Hotele, Airbnb i ośrodki wypoczynkowe: automatyczny, cyfrowy dostęp gości z WIFIGATE Host. Osobiste uprawnienia dla każdej rezerwacji, bez kluczy, kart i sejfów na klucze.",
@@ -90,15 +164,95 @@ export default {
         }
       ],
       "paragraph": "Rolety antywłamaniowe w firmach i sklepach często obsługuje się pilotami, kluczami, zewnętrzną skrzynką na klucz lub przełącznikami umieszczonymi na zewnątrz lokalu. Takie rozwiązania mogą się zgubić, zostać u byłych pracowników, zostać skopiowane albo stać się odsłoniętym punktem dostępu. Ponadto otwieranie lub zamykanie kluczem wymaga stania blisko punktu sterowania, trzymania klucza w dłoni, a czasem także ograniczonej widoczności strefy rolety. WIFIGATE pozwala przenieść sterowanie do aplikacji i umieścić kontrolę dostępu po wewnętrznej, lepiej chronionej stronie, dzięki czemu wygodniej otwierasz i zamykasz, zarządzasz uprawnieniami pracowników i dostawców oraz ograniczasz zależność od kluczy, pilotów i odsłoniętych punktów dostępu.",
-      "bullets": [
-        "Otwieranie i zamykanie telefonem, bez polegania na pilotach",
-        "Mniejsza zależność od kluczy, które można skopiować lub zgubić",
-        "Mniej odsłoniętych punktów dostępu na zewnątrz lokalu",
-        "Wygodniejsze sterowanie z lepszym widokiem na strefę rolety",
-        "Zarządzanie uprawnieniami pracowników, kierowników i dostawców",
-        "Możliwość dostępu tymczasowego według czasu lub potrzeb",
-        "Sprawdza się w sklepach, magazynach, wejściach służbowych i firmach",
-        "Wewnętrzne, uporządkowane i bezpieczniejsze rozwiązanie na co dzień"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Osobiste uprawnienie. Dla każdego pracownika, kierownika i dostawcy.",
+          "text": "Każdy dostaje w aplikacji własne uprawnienie, które możesz usunąć w dowolnej chwili.",
+          "visual": {
+            "type": "roster",
+            "heading": "Uprawnienia do rolety",
+            "status": "Aktywne",
+            "rows": [
+              {
+                "name": "Właściciel sklepu",
+                "badge": "Administrator"
+              },
+              {
+                "name": "Pracownik zmianowy",
+                "badge": "Uprawniony"
+              },
+              {
+                "name": "Dostawca towaru",
+                "badge": "Tymczasowy"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "shield-check",
+          "title": "Mniej odsłoniętych punktów. Sterowanie przenosi się do środka.",
+          "text": "Zamiast przełącznika lub skrzynki na klucz na zewnętrznej ścianie punkt sterowania może znaleźć się po wewnętrznej, chronionej stronie lokalu.",
+          "tags": [
+            "Chronione wnętrze",
+            "Poza zasięgiem obcych"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Otwieranie i zamykanie. Prosto z telefonu.",
+          "text": "Uprawnione osoby sterują roletą w aplikacji WIFIGATE, bez szukania pilota i bez przekazywania go między pracownikami.",
+          "tags": [
+            "Niezależność od pilotów",
+            "Bezpośrednie połączenie"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Mniej kluczy do skopiowania lub zgubienia.",
+          "text": "Klucz, który został u byłego pracownika, nadal działa, a uprawnienie w telefonie wygasa w jego ostatnim dniu pracy.",
+          "tags": [
+            "Bez wymiany zamka",
+            "Bez odbierania sprzętu"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Dostęp tymczasowy. Tylko gdy trzeba.",
+          "text": "Udostępniasz dostawcy lub pracownikowi tymczasowemu dostęp ograniczony czasowo, który przestaje działać, gdy czas minie.",
+          "tags": [
+            "Dostawcy",
+            "Pracownicy tymczasowi"
+          ]
+        },
+        {
+          "icon": "eye",
+          "title": "Wygodniejsze sterowanie. Lepszy widok.",
+          "text": "Sterujesz roletą telefonem z bezpieczniejszej odległości, zamiast stać tuż przy punkcie sterowania z kluczem w dłoni.",
+          "tags": [
+            "Bezpieczniejsza odległość",
+            "Bez klucza w dłoni"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "Codzienna obsługa. Uporządkowana i bezpieczniejsza.",
+          "text": "WIFIGATE montuje się na istniejącym sterowniku rolety, a dane są przechowywane w zaszyfrowanej postaci w samym urządzeniu.",
+          "tags": [
+            "Montaż wewnątrz",
+            "Zaszyfrowane dane"
+          ]
+        },
+        {
+          "icon": "store",
+          "title": "Dla każdej firmy z elektryczną roletą.",
+          "text": "Wszędzie tam, gdzie chcesz mieć mniej kluczy i mniej pilotów przechodzących z rąk do rąk.",
+          "tags": [
+            "Sklepy",
+            "Magazyny",
+            "Wejścia służbowe"
+          ]
+        }
       ],
       "seoTitle": "Sterowanie roletami z telefonu dla firm i sklepów | WIFIGATE",
       "seoDescription": "WIFIGATE pozwala firmom i sklepom sterować roletami z telefonu: uprawnienia dla zespołu, mniej kluczy i pilotów oraz mniej odsłoniętych punktów dostępu.",
@@ -144,15 +298,103 @@ export default {
         }
       ],
       "paragraph": "Z bram automatycznych i szlabanów parkingowych korzystają mieszkańcy, pracownicy, goście i dostawcy, ale zarządzanie pilotami, kodami i telefonami z prośbą o otwarcie szybko staje się uciążliwe. WIFIGATE pozwala otwierać bramę telefonem, udostępniać dostęp stały lub tymczasowy, korzystać z automatycznego otwierania dla stałych użytkowników i ustawiać zaplanowane zdarzenia według potrzeb. System zapewnia bezpieczną, szyfrowaną i prywatną pracę bez miesięcznego abonamentu i płatności cyklicznych, a dotychczasowe piloty mogą dalej działać równolegle ze sterowaniem z aplikacji.",
-      "bullets": [
-        "Otwieranie bramy automatycznej lub szlabanu telefonem",
-        "Bez miesięcznego abonamentu i płatności cyklicznych",
-        "Udostępnianie dostępu tymczasowego gościom, dostawcom i pracownikom",
-        "Auto Open dla stałych użytkowników przy codziennym wjeździe",
-        "Zaplanowane zdarzenia otwierania według dni i godzin",
-        "Sterowanie z aplikacji lub dotychczasowymi pilotami",
-        "Mniej rozdawania fizycznych pilotów",
-        "Historia otwarć dla kontroli i przejrzystości"
+      "benefits": [
+        {
+          "icon": "smartphone",
+          "title": "Brama lub szlaban parkingowy. Prosto z telefonu.",
+          "text": "Każdy, kto dostał uprawnienie, stałe lub tymczasowe, otwiera bramę automatyczną lub szlaban parkingowy w aplikacji WIFIGATE.",
+          "tags": [
+            "Brama automatyczna",
+            "Szlaban parkingowy",
+            "Bez karty SIM"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Historia otwarć",
+            "status": "Dziś",
+            "rows": [
+              {
+                "time": "07:42",
+                "name": "Kasia · mieszkanka",
+                "event": "Otwarcie"
+              },
+              {
+                "time": "08:15",
+                "name": "Tomek · pracownik",
+                "event": "Otwarcie"
+              },
+              {
+                "time": "10:30",
+                "name": "Marek · dostawca",
+                "event": "Otwarcie"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "card-off",
+          "title": "Bez abonamentu. Bez płatności cyklicznych.",
+          "text": "Płacisz jednorazowo za urządzenie i instalację, bez miesięcznego abonamentu i bez płatności cyklicznych.",
+          "tags": [
+            "Płatność jednorazowa",
+            "Urządzenie i instalacja"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "Dostęp tymczasowy. Wygasa sam.",
+          "text": "Zamiast odbierać telefony z prośbą o otwarcie bramy, wysyłasz uprawnienie ważne tylko w przedziale czasu, w którym jest potrzebne.",
+          "tags": [
+            "Goście",
+            "Dostawcy",
+            "Pracownicy"
+          ]
+        },
+        {
+          "icon": "hands-free",
+          "title": "Auto Open. Brama otwiera się, gdy przyjeżdżasz.",
+          "text": "Dla stałych użytkowników automatyczne otwieranie rozpoznaje Twój przyjazd i otwiera bramę, bez szukania pilota i bez opuszczania szyby w deszczu.",
+          "tags": [
+            "Stali użytkownicy",
+            "Codzienny wjazd"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Zaplanowane zdarzenia. Według dni i godzin.",
+          "text": "Z wyprzedzeniem ustalasz, w jakie dni i w jakich godzinach brama pozostaje otwarta, w formie zdarzenia cotygodniowego lub jednorazowego.",
+          "tags": [
+            "Cotygodniowe",
+            "Jednorazowe"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "Aplikacja czy pilot? Ty wybierasz.",
+          "text": "Dotychczasowe piloty działają dalej równolegle ze sterowaniem z aplikacji, więc nic nie trzeba wyrzucać.",
+          "tags": [
+            "Dotychczasowe piloty",
+            "Sterowanie z aplikacji"
+          ]
+        },
+        {
+          "icon": "user-plus",
+          "title": "Mniej fizycznych pilotów do rozdania.",
+          "text": "Zamiast rozdawać piloty każdemu mieszkańcowi, pracownikowi czy dostawcy, nadajesz każdemu osobiste uprawnienie w aplikacji.",
+          "tags": [
+            "Osobiste uprawnienie",
+            "Zarządzanie w aplikacji"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Historia otwarć. Kontrola i przejrzystość.",
+          "text": "Widzisz, kto i kiedy otworzył bramę w ciągu ostatnich 90 dni.",
+          "tags": [
+            "90 dni wstecz",
+            "Kto i kiedy"
+          ]
+        }
       ],
       "seoTitle": "Bramy automatyczne i szlabany bez abonamentu | WIFIGATE",
       "seoDescription": "Otwieraj telefonem bramy automatyczne i szlabany z WIFIGATE: Auto Open, zaplanowane zdarzenia, dotychczasowe piloty i uprawnienia. Bez abonamentu i płatności cyklicznych.",
@@ -198,15 +440,101 @@ export default {
         }
       ],
       "paragraph": "Bramy garażowe i wjazdy na parkingi prywatne zwykle obsługuje się fizycznymi pilotami, które mogą się zgubić, zostać u osób niepotrzebujących już dostępu, a w pewnych sytuacjach zostać skopiowane. WIFIGATE zastępuje je cyfrowym dostępem z telefonu: możesz zarządzać uprawnieniami członków rodziny, pracowników i gości oraz udostępniać dostęp tymczasowy bez przekazywania pilota czy kodu. Efekt: wygodniejsze, bardziej prywatne i lepiej uporządkowane korzystanie na co dzień, z mniejszą zależnością od fizycznych urządzeń dostępowych.",
-      "bullets": [
-        "Otwieranie bramy garażowej telefonem",
-        "Mniejsza zależność od fizycznych pilotów",
-        "Mniejsze ryzyko związane ze zgubieniem, przekazaniem lub skopiowaniem pilotów",
-        "Zarządzanie dostępem dla rodziny, pracowników i gości",
-        "Dostęp tymczasowy bez przekazywania pilota czy kodu",
-        "Sprawdza się przy prywatnych parkingach, domach i mieszkaniach z ogródkiem",
-        "Bardziej prywatny i bezpieczny sposób zarządzania dostępem",
-        "Wygodniejsza i bezpieczniejsza codzienna obsługa"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Osobiste uprawnienie dla każdego, kto wchodzi.",
+          "text": "Dodajesz i usuwasz w aplikacji członków rodziny, pracowników i gości, a każdy otwiera ze swojego telefonu z własnym uprawnieniem.",
+          "tags": [
+            "Rodzina",
+            "Pracownicy",
+            "Goście"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Dostęp do garażu",
+            "status": "Aktywny",
+            "rows": [
+              {
+                "name": "Mama",
+                "badge": "Administratorka"
+              },
+              {
+                "name": "Kuba",
+                "badge": "Domownik"
+              },
+              {
+                "name": "Fachowiec",
+                "badge": "Dostęp tymczasowy"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Mniejsze ryzyko zgubionych i skopiowanych pilotów.",
+          "text": "Pilot, który zgubiono, przekazano dalej lub skopiowano, może nadal otwierać, a uprawnienie w telefonie usuwasz w aplikacji w chwilę.",
+          "tags": [
+            "Zgubienie",
+            "Przekazanie",
+            "Skopiowanie"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Brama garażowa otwiera się z telefonu.",
+          "text": "WIFIGATE podłącza się do bramy garażowej, a Ty otwierasz ją w aplikacji WIFIGATE na telefonie, który i tak masz przy sobie.",
+          "tags": [
+            "Bezpośrednie połączenie",
+            "Bez karty SIM"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "Mniej pilotów. Mniej zachodu.",
+          "text": "Mniej pilotów do kupowania, programowania, przekazywania i zarządzania, zamiast jednego dla każdego samochodu i każdego użytkownika.",
+          "tags": [
+            "Obok dotychczasowych pilotów"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Dostęp tymczasowy. Bez przekazywania pilota.",
+          "text": "Fachowiec lub gość dostaje tymczasowe uprawnienie, które wygasa wtedy, kiedy zdecydujesz, bez przekazywania pilota czy kodu.",
+          "tags": [
+            "Fachowcy",
+            "Goście"
+          ]
+        },
+        {
+          "icon": "garage",
+          "title": "Dla prywatnych parkingów, domów i mieszkań z ogródkiem.",
+          "text": "WIFIGATE montuje się na istniejącym sterowniku bramy garażowej lub wjazdu na parking, w domu prywatnym lub w mieszkaniu z ogródkiem.",
+          "tags": [
+            "Prywatne garaże",
+            "Prywatne parkingi",
+            "Mieszkania z ogródkiem"
+          ]
+        },
+        {
+          "icon": "shield-check",
+          "title": "Bardziej prywatny i bezpieczny dostęp.",
+          "text": "WIFIGATE chroni dostęp dzięki zaawansowanym warstwom zabezpieczeń i szyfrowanemu przechowywaniu danych oraz dba o prywatność użytkowników.",
+          "tags": [
+            "Szyfrowane przechowywanie",
+            "Warstwy zabezpieczeń",
+            "Prywatność"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Wygodniej i bezpieczniej. Każdego dnia.",
+          "text": "W historii wejść z ostatnich 90 dni widzisz, kto otworzył garaż i kiedy.",
+          "tags": [
+            "Historia wejść",
+            "90 dni"
+          ]
+        }
       ],
       "seoTitle": "Inteligentne otwieranie garaży i parkingów | WIFIGATE",
       "seoDescription": "WIFIGATE otwiera telefonem bramy garażowe i prywatne parkingi: mniej fizycznych pilotów, uprawnienia tymczasowe oraz wygodne i prywatne zarządzanie dostępem.",
@@ -252,15 +580,84 @@ export default {
         }
       ],
       "paragraph": "W domach prywatnych klawiatury kodowe, klucze i piloty mogą stać się słabym punktem. Z czasem na przyciskach klawiatury pojawiają się ślady zużycia, piloty giną albo przechodzą z rąk do rąk, a kod bywa przekazywany kurierom, serwisantom czy gościom i zostaje u nich długo po tym, gdy przestaje być potrzebny. WIFIGATE pozwala zarządzać wejściem z telefonu, udostępniać tymczasowy dostęp dla gościa bez ujawniania stałego kodu i łatwo cofać uprawnienia bez wymiany zamków, kodów czy pilotów.",
-      "bullets": [
-        "Mniejsza zależność od klawiatur kodowych, kluczy i pilotów",
-        "Dostęp tymczasowy dla kurierów, gości i serwisantów",
-        "Łatwe cofanie uprawnień z telefonu",
-        "Mniejsze ryzyko związane z udostępnianiem kodów i przekazywaniem pilotów",
-        "Sprawdza się przy bramach, drzwiach, parkingach i garażach domu",
-        "Proste zarządzanie dla rodziny i stałych użytkowników",
-        "Wygodniejsze codzienne wejście",
-        "Lepsza prywatność i kontrola nad tym, kto może wejść"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Uprawnienie tymczasowe. Dla kuriera, gościa i serwisanta.",
+          "text": "Wysyłasz zaproszenie ograniczone czasowo, które działa tylko w wybranym przez Ciebie czasie, bez ujawniania stałego kodu.",
+          "tags": [
+            "Kurierzy",
+            "Goście",
+            "Serwisanci"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Zaproszenie dla gościa",
+            "status": "Ważne",
+            "guest": "Serwisant",
+            "when": "Dziś, 10:00–12:00",
+            "note": "Wygasa samo"
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Mniejsze ryzyko kodów i pilotów krążących z rąk do rąk.",
+          "text": "Każdy ma osobiste uprawnienie w telefonie, więc nie musisz dawać kurierom i gościom stałego kodu ani pilota.",
+          "tags": [
+            "Osobiste uprawnienie",
+            "Bez stałego kodu"
+          ]
+        },
+        {
+          "icon": "user-minus",
+          "title": "Cofnięcie uprawnienia. W chwilę, z telefonu.",
+          "text": "Gdy ktoś nie powinien już wchodzić, od razu odbierasz mu dostęp, bez wymiany zamków, kodów czy pilotów.",
+          "tags": [
+            "Natychmiastowe cofnięcie",
+            "Bez wymiany zamków"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "Więcej prywatności. Więcej kontroli.",
+          "text": "W przeciwieństwie do wspólnego kodu każde uprawnienie jest imienne, więc w każdej chwili wiesz, kto może wejść do domu.",
+          "tags": [
+            "Lista uprawnień",
+            "Imienne uprawnienia"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Mniejsza zależność od klawiatury kodowej, kluczy i pilotów.",
+          "text": "Zarządzasz wejściem z telefonu, zamiast polegać na klawiaturze kodowej, kluczach i pilotach.",
+          "tags": [
+            "Zarządzanie z telefonu"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Cała rodzina. Proste zarządzanie.",
+          "text": "Dodajesz w aplikacji członków rodziny i stałych użytkowników, a każdy ma osobiste uprawnienie do wejścia.",
+          "tags": [
+            "Członkowie rodziny",
+            "Stali użytkownicy"
+          ]
+        },
+        {
+          "icon": "gate",
+          "title": "Od bramy po garaż.",
+          "text": "WIFIGATE sprawdza się przy bramach, drzwiach wejściowych, parkingach i bramach garażowych domu prywatnego, a wszystko otwierasz z jednej aplikacji.",
+          "tags": [
+            "Bramy",
+            "Drzwi",
+            "Garaże"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "Wygodniejsze codzienne wejście.",
+          "text": "Otwierasz telefonem z kieszeni przy każdym wyjściu i powrocie do domu, bez zapamiętywania kodu i bez szukania pilota."
+        }
       ],
       "seoTitle": "Inteligentny dostęp do domu bez wspólnego kodu | WIFIGATE",
       "seoDescription": "WIFIGATE pozwala zarządzać dostępem do domu z telefonu, udostępniać tymczasowe uprawnienia gościom i kurierom oraz mniej polegać na kodach, kluczach i pilotach.",
@@ -306,15 +703,98 @@ export default {
         }
       ],
       "paragraph": "W budynku mieszkalnym dostęp nie kończy się na drzwiach do klatki: jest brama, wjazd na parking, drzwi do komórek lokatorskich, a czasem także boczne wejście. Dotyczy on nie tylko mieszkańców, ale też zmieniających się najemców, zarządu wspólnoty lub zarządcy nieruchomości, ekip sprzątających, konserwatorów i stałych dostawców. Gdy wszystko opiera się na jednym kodzie i kilku pilotach, każda drobna zmiana, wyprowadzka mieszkańca, zgubiony pilot czy nowy dostawca, oznacza zmianę kodu i ponowne powiadomienie wszystkich. WIFIGATE zastępuje ten sposób uporządkowanym zarządzaniem dostępem na poziomie całego budynku.",
-      "bullets": [
-        "Osobiste uprawnienie dla każdego mieszkańca zamiast jednego kodu dla wszystkich",
-        "Dodawanie i usuwanie mieszkańców bez zmiany kodu w całym budynku",
-        "Osobne uprawnienia dla ekip sprzątających, konserwatorów i stałych dostawców",
-        "Sprawdza się przy drzwiach do klatki, bramie i wjeździe na parking",
-        "Mniejsza zależność od klawiatur kodowych, kluczy i pilotów",
-        "Historia wejść dla zarządu wspólnoty lub zarządcy",
-        "Zarządzanie wszystkimi uprawnieniami w budynku z telefonu",
-        "Dostęp dla nowych najemców od dnia przeprowadzki, bez przekazywania kluczy"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Osobiste uprawnienie. Dla każdego mieszkańca.",
+          "text": "Zamiast jednego kodu, który wszyscy znają i przekazują dalej, każdy mieszkaniec ma własne uprawnienie.",
+          "tags": [
+            "Bez wspólnego kodu"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Uprawnienia w budynku",
+            "status": "Aktywne",
+            "rows": [
+              {
+                "name": "Agnieszka Kowalska",
+                "badge": "Mieszkanka"
+              },
+              {
+                "name": "Piotr Wiśniewski",
+                "badge": "Mieszkaniec"
+              },
+              {
+                "name": "Magdalena Zielińska",
+                "badge": "Zarząd wspólnoty"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-plus",
+          "title": "Mieszkańcy się zmieniają. Kontrola zostaje.",
+          "text": "Dodajesz i usuwasz mieszkańców bez zmiany kodu do budynku i bez ponownego powiadamiania wszystkich.",
+          "tags": [
+            "Dodanie mieszkańca",
+            "Cofnięcie uprawnienia"
+          ]
+        },
+        {
+          "icon": "wrench",
+          "title": "Osobne uprawnienia dla usługodawców",
+          "text": "Ekipy sprzątające, konserwatorzy i stali dostawcy dostają własne uprawnienia zamiast kodu do budynku.",
+          "tags": [
+            "Sprzątanie",
+            "Konserwacja",
+            "Dostawcy"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "Nie tylko drzwi do klatki",
+          "text": "Sprawdza się przy drzwiach do klatki, bramie budynku i wjeździe na parking, a każdy mieszkaniec otwiera je telefonem z własnym uprawnieniem.",
+          "tags": [
+            "Drzwi do klatki",
+            "Brama",
+            "Wjazd na parking"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Mniej kodów. Mniej pilotów.",
+          "text": "Mniejsza zależność od klawiatur kodowych, kluczy i pilotów: wejście do budynku otwierasz telefonem.",
+          "tags": [
+            "Otwieranie telefonem",
+            "Piloty działają dalej"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Więcej przejrzystości dla zarządu wspólnoty",
+          "text": "Zarząd wspólnoty lub zarządca widzi w historii wejść, kto otworzył i kiedy.",
+          "tags": [
+            "90 dni wstecz",
+            "Zarządca nieruchomości"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Wszystkie uprawnienia w budynku, prosto z telefonu",
+          "text": "Z telefonu zarządzasz aktualną listą wszystkich uprawnień do wejścia do budynku, a każde z nich jest imienne.",
+          "tags": [
+            "Aktualna lista",
+            "Imienne uprawnienia"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "Nowy lokator? Dostęp już czeka.",
+          "text": "Nowi najemcy dostają dostęp od dnia przeprowadzki, bez umawiania przekazania kluczy.",
+          "tags": [
+            "Od pierwszego dnia"
+          ]
+        }
       ],
       "seoTitle": "Kontrola dostępu w budynkach mieszkalnych | WIFIGATE",
       "seoDescription": "WIFIGATE to inteligentny dostęp w budynkach mieszkalnych: otwieranie telefonem, tymczasowe uprawnienia dla gości, mniej klawiatur kodowych i więcej przejrzystości.",
@@ -360,15 +840,95 @@ export default {
         }
       ],
       "paragraph": "Biurowce muszą zapewniać wygodne wejście pracownikom, odwiedzającym, dostawcom i zespołom technicznym, bez obciążania recepcji i bez ręcznego zarządzania kluczami czy kartami. WIFIGATE pozwala nadawać stałe uprawnienia pracownikom i tymczasowe odwiedzającym, kontrolować dostęp z telefonu i zarządzać wejściami w sposób, który pasuje do nowoczesnej, dobrze zorganizowanej firmy.",
-      "bullets": [
-        "Stałe uprawnienia dla pracowników i zespołów",
-        "Dostęp tymczasowy dla odwiedzających, dostawców i kurierów",
-        "Mniejsze obciążenie recepcji i zespołu obsługi",
-        "Sprawdza się przy drzwiach wejściowych, piętrach, pomieszczeniach i parkingach",
-        "Uporządkowane zarządzanie użytkownikami i uprawnieniami",
-        "Mniejsza zależność od kluczy, kart dostępu i kodów",
-        "Nowocześniejszy i wygodniejszy wizerunek budynku",
-        "Historia dostępu dla kontroli i przejrzystości"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Stałe uprawnienie. Dla każdego pracownika.",
+          "text": "Pracownicy i zespoły dostają na telefon osobiste, stałe uprawnienie, ważne od ustalonej przez Ciebie daty.",
+          "visual": {
+            "type": "roster",
+            "heading": "Zespół biura",
+            "status": "Aktywny",
+            "rows": [
+              {
+                "name": "Ewa Mazur",
+                "badge": "Stały dostęp"
+              },
+              {
+                "name": "Paweł Wójcik",
+                "badge": "Stały dostęp"
+              },
+              {
+                "name": "Natalia Kaczmarek",
+                "badge": "Stały dostęp"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "send",
+          "title": "Dostęp ograniczony czasowo. Dla wszystkich pozostałych.",
+          "text": "Odwiedzający jeszcze przed przyjazdem dostają ograniczone czasowo zaproszenie, które może też zawierać wskazówki dojazdu.",
+          "tags": [
+            "Kandydaci",
+            "Dostawcy",
+            "Kurierzy"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Mniej pracy dla recepcji i obsługi",
+          "text": "Odwiedzający wchodzą z telefonem, nie czekając, aż ktoś zejdzie im otworzyć, a recepcja obsługuje mniej osób.",
+          "tags": [
+            "Recepcja",
+            "Zespół obsługi"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "Od drzwi wejściowych po parking",
+          "text": "Sprawdza się przy drzwiach wejściowych, piętrach, pomieszczeniach i wjazdach na parking, a wszystko otwiera się telefonem.",
+          "tags": [
+            "Drzwi wejściowe",
+            "Piętra i pomieszczenia",
+            "Wjazd na parking"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "Użytkownicy i uprawnienia. Wszystko uporządkowane.",
+          "text": "Przyjęcie i odejście pracownika to jedna zmiana na liście, a uprawnienie wygasa w ustalonym przez Ciebie dniu.",
+          "tags": [
+            "Przyjęcie do pracy",
+            "Odejście z pracy"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Mniej identyfikatorów, kluczy i kodów",
+          "text": "Mniej identyfikatorów do wydania i mniej kluczy do odebrania, gdy ktoś odchodzi z firmy, bo każdy pracownik wchodzi ze swoim telefonem.",
+          "tags": [
+            "Wejście z telefonem"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Nowoczesny, wygodny wizerunek budynku",
+          "text": "Pracownicy i odwiedzający wchodzą z telefonem, co pasuje do nowoczesnego, czystego i uporządkowanego otoczenia biznesowego.",
+          "tags": [
+            "Pracownicy",
+            "Odwiedzający"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Każde otwarcie ma przypisaną osobę i godzinę",
+          "text": "Możesz później sprawdzić, kto wszedł na piętro, do magazynu czy na parking, na potrzeby kontroli i przejrzystości.",
+          "tags": [
+            "Ostatnie 90 dni",
+            "Kto i kiedy"
+          ]
+        }
       ],
       "seoTitle": "Kontrola dostępu do biurowców | WIFIGATE",
       "seoDescription": "WIFIGATE pozwala biurowcom zarządzać z telefonu wejściem pracowników, odwiedzających i dostawców, z uprawnieniami stałymi i tymczasowymi. Nowoczesna kontrola dostępu.",
@@ -414,15 +974,102 @@ export default {
         }
       ],
       "paragraph": "Małe firmy, gabinety, studia, magazyny i biura często polegają na klawiaturze kodowej, kluczu lub prostym zamku magnetycznym. Problem zaczyna się, gdy kod krąży między pracownikami, dostawcami i gośćmi albo gdy trzeba dać komuś dostęp tymczasowy bez osłabiania bezpieczeństwa. WIFIGATE pozwala zarządzać drzwiami wejściowymi z telefonu, udostępniać tymczasowe uprawnienia i ograniczyć potrzebę stałych kodów, fizycznych kluczy czy ręcznych ustaleń przy każdym wejściu.",
-      "bullets": [
-        "Sprawdza się przy drzwiach z zamkiem elektrycznym lub magnetycznym",
-        "Otwieranie telefonem dla pracowników i kierowników",
-        "Dostęp tymczasowy dla gości, dostawców i serwisantów",
-        "Mniejsza zależność od klawiatury kodowej i stałego kodu",
-        "Sprawdza się w małych firmach, gabinetach, studiach i biurach",
-        "Prostsze i bezpieczniejsze zarządzanie uprawnieniami",
-        "Mniej fizycznych kluczy w obiegu",
-        "Wygodne rozwiązanie dla firm, które chcą nowoczesnego dostępu bez skomplikowanego systemu"
+      "benefits": [
+        {
+          "icon": "shield-check",
+          "title": "Proste zarządzanie uprawnieniami. I bezpieczniejsze.",
+          "text": "Każdy pracownik, dostawca czy gość ma osobiste uprawnienie, które możesz cofnąć w dowolnej chwili, a historia wejść pokazuje, kto otworzył i kiedy.",
+          "tags": [
+            "Cofanie w każdej chwili",
+            "Historia wejść"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Historia wejść",
+            "status": "Dziś",
+            "rows": [
+              {
+                "time": "07:40",
+                "name": "Dostawca",
+                "event": "Otwarcie"
+              },
+              {
+                "time": "08:50",
+                "name": "Monika, kierowniczka",
+                "event": "Otwarcie"
+              },
+              {
+                "time": "19:30",
+                "name": "Ekipa sprzątająca",
+                "event": "Otwarcie"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Dostęp tymczasowy, który wygasa sam.",
+          "text": "Goście, dostawcy i serwisanci dostają uprawnienie na swój przedział czasu, a właściciel nie musi specjalnie przyjeżdżać, żeby otworzyć.",
+          "tags": [
+            "Dostawcy",
+            "Technicy",
+            "Kurierzy"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "Zamek, który już jest w drzwiach. Otwierany telefonem.",
+          "text": "WIFIGATE sprawdza się przy drzwiach wejściowych z zamkiem elektrycznym lub magnetycznym i otwiera je telefonem, a dotychczasowy zamek zostaje na swoim miejscu.",
+          "tags": [
+            "Zamek elektryczny",
+            "Zamek magnetyczny"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Pracownicy i kierownicy otwierają telefonem.",
+          "text": "Każdy pracownik i kierownik otwiera drzwi wejściowe w aplikacji z osobistym uprawnieniem, więc przy każdym wejściu rzadziej trzeba coś ręcznie uzgadniać.",
+          "tags": [
+            "Pracownicy",
+            "Kierownicy"
+          ]
+        },
+        {
+          "icon": "user-check",
+          "title": "Mniej kodów krążących z rąk do rąk.",
+          "text": "Kod podany wszystkim może zostać u osób, które nie potrzebują już wchodzić, a osobiste uprawnienie zmniejsza potrzebę korzystania z klawiatury kodowej i stałego kodu.",
+          "tags": [
+            "Klawiatura kodowa",
+            "Stały kod"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Mniej kluczy w pęku.",
+          "text": "Drzwi otwierają się telefonem, więc między pracownikami i kierownikami krąży mniej fizycznych kluczy.",
+          "tags": [
+            "Fizyczne klucze"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Nowoczesne wejście. Bez skomplikowanego systemu.",
+          "text": "Nie instalujesz szafy sterowniczej, oprogramowania do zarządzania ani czytnika kart, a wszystkim zarządzasz z aplikacji.",
+          "tags": [
+            "Bez szafy sterowniczej",
+            "Bez czytnika kart"
+          ]
+        },
+        {
+          "icon": "briefcase",
+          "title": "Dla małej firmy, gabinetu i biura.",
+          "text": "Małe firmy, gabinety, studia i biura zarządzają drzwiami wejściowymi z telefonu i w razie potrzeby udostępniają tymczasowe uprawnienia.",
+          "tags": [
+            "Gabinety",
+            "Biura",
+            "Magazyny"
+          ]
+        }
       ],
       "seoTitle": "Drzwi wejściowe i zamki magnetyczne dla firm | WIFIGATE",
       "seoDescription": "WIFIGATE to inteligentne otwieranie drzwi wejściowych i zamków magnetycznych w firmach: uprawnienia z telefonu, dostęp tymczasowy, mniej klawiatur kodowych i kluczy.",
@@ -468,15 +1115,91 @@ export default {
         }
       ],
       "paragraph": "Obiekty sportowe, korty do padla, korty tenisowe, siłownie i strefy treningowe muszą zarządzać dostępem klubowiczów, trenerów, zespołów i gości zgodnie z godzinami otwarcia, rezerwacjami i wydarzeniami. WIFIGATE pozwala nadawać tymczasowy lub stały dostęp z telefonu, ograniczyć zależność od wspólnego klucza czy kodu i poprawić komfort wejścia, zwłaszcza w obiektach, w których ruch zmienia się w ciągu dnia.",
-      "bullets": [
-        "Sprawdza się na kortach do padla i tenisa, w siłowniach i strefach treningowych",
-        "Dostęp według godzin otwarcia, rezerwacji lub uprawnień",
-        "Zarządzanie klubowiczami, trenerami, pracownikami i gośćmi",
-        "Mniejsza zależność od wspólnych kluczy i kodów",
-        "Szybkie i wygodne wejście z telefonu",
-        "Sprawdza się w obiektach o zmiennych godzinach otwarcia",
-        "Tymczasowe uprawnienia na wydarzenia, zajęcia i treningi",
-        "Historia dostępu dla kontroli i sprawnej obsługi"
+      "benefits": [
+        {
+          "icon": "calendar-check",
+          "title": "Rezerwujesz kort. Dostęp działa zgodnie z rezerwacją.",
+          "text": "Kto zarezerwował kort na konkretną godzinę, dostaje uprawnienie, które zaczyna działać o tej godzinie i wygasa po jej zakończeniu.",
+          "tags": [
+            "Godziny otwarcia",
+            "Rezerwacje",
+            "Uprawnienia"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Zaproszenie do wejścia",
+            "status": "Ważne",
+            "guest": "Ola, kort 2",
+            "when": "Dziś 18:00–19:30",
+            "note": "Zawiera wskazówki dojazdu"
+          }
+        },
+        {
+          "icon": "users",
+          "title": "Klubowicz, trener i gość. Każdy z własnym uprawnieniem.",
+          "text": "Stałymi klubowiczami, trenerami przychodzącymi w wybrane dni, pracownikami i jednorazowymi gośćmi zarządzasz na jednej liście, bez klucza przechodzącego z rąk do rąk.",
+          "tags": [
+            "Klubowicze",
+            "Trenerzy",
+            "Pracownicy i goście"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Mniej kluczy. Mniej wspólnych kodów.",
+          "text": "Wspólny kod nadal otwiera, choć już nie powinien, a osobiste uprawnienie wygasa, gdy przestaje być potrzebne.",
+          "tags": [
+            "Osobiste uprawnienie"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Zajęcia, trening czy wydarzenie. Dostęp tylko na te godziny.",
+          "text": "Uczestnicy zajęć, treningu lub wydarzenia dostają tymczasowe uprawnienie ważne tylko w ustalonych przez Ciebie godzinach.",
+          "tags": [
+            "Wydarzenia",
+            "Zajęcia",
+            "Treningi"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Wiesz, kto był na obiekcie i kiedy.",
+          "text": "Historia wejść pokazuje, kto otworzył i kiedy, ułatwia obsługę i potwierdza, że obiekt został zamknięty na koniec dnia.",
+          "tags": [
+            "Kontrola",
+            "Obsługa obiektu",
+            "Ostatnie 90 dni"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Wejście z telefonu. Szybko i wygodnie.",
+          "text": "Każdy użytkownik sam otwiera w aplikacji, więc nikt nie musi czekać przy bramie, żeby go wpuścić.",
+          "tags": [
+            "Bezpośrednie połączenie",
+            "Bez karty SIM"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Godziny otwarcia się zmieniają? Dostęp też.",
+          "text": "Zaplanowane zdarzenia mogą otwierać według dni i godzin, więc dostęp pasuje do godzin otwarcia obiektu.",
+          "tags": [
+            "Zaplanowane zdarzenia",
+            "Cotygodniowe lub jednorazowe"
+          ]
+        },
+        {
+          "icon": "dumbbell",
+          "title": "Od kortu do padla po siłownię.",
+          "text": "Sprawdza się na kortach do padla i tenisa, w siłowniach i strefach treningowych, zwłaszcza gdy ruch zmienia się w ciągu dnia.",
+          "tags": [
+            "Padel",
+            "Tenis",
+            "Siłownie"
+          ]
+        }
       ],
       "seoTitle": "Kontrola dostępu do obiektów sportowych i padla | WIFIGATE",
       "seoDescription": "WIFIGATE to inteligentna kontrola dostępu do obiektów sportowych, kortów do padla, siłowni i stref treningowych: wejście z telefonu i uprawnienia tymczasowe lub stałe.",
@@ -522,15 +1245,96 @@ export default {
         }
       ],
       "paragraph": "Boksy magazynowe i pomieszczenia ze skrytkami zwykle opierają się na wspólnych kodach, klawiaturach i fizycznych kluczach, które są kopiowane, przekazywane dalej i rzadko zmieniane. WIFIGATE przenosi dostęp do telefonu: każdy najemca ma osobiste uprawnienie do bramy obiektu, wejścia do budynku oraz, tam gdzie jest zamontowany, boksu lub skrytki z zamkiem elektrycznym, ograniczone do wybranych przez Ciebie godzin i odbierane w chwili zakończenia najmu. Telefon komunikuje się bezpośrednio z urządzeniem na miejscu, bez karty SIM i bez połączenia z internetem przy drzwiach, a przy standardowym użytkowaniu nie ma miesięcznego abonamentu.",
-      "bullets": [
-        "Otwieranie bramy obiektu, drzwi budynku i skrytki telefonem",
-        "Osobiste uprawnienie dla każdego najemcy",
-        "Dostęp ograniczony do godzin otwarcia lub własnego okna czasowego",
-        "Jednorazowy dostęp dla firm przeprowadzkowych i członków rodziny",
-        "Odebranie dostępu w chwili zakończenia najmu",
-        "Historia: kto otworzył i kiedy",
-        "Bez wspólnych kodów, klawiatur i kluczy do wymiany",
-        "Bez karty SIM i internetu przy drzwiach"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Osobiste uprawnienie. Dla każdego najemcy.",
+          "text": "Zamiast wspólnego kodu, który byli najemcy wciąż pamiętają, każdy najemca ma własny dostęp.",
+          "visual": {
+            "type": "roster",
+            "heading": "Uprawnienia w obiekcie",
+            "status": "Aktywne",
+            "rows": [
+              {
+                "name": "Joanna Sikora",
+                "badge": "Uprawniona"
+              },
+              {
+                "name": "Tomasz Nowicki",
+                "badge": "Uprawniony"
+              },
+              {
+                "name": "Karolina Adamczyk",
+                "badge": "Uprawniona"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-minus",
+          "title": "Najem się kończy. Dostęp też.",
+          "text": "Odbierasz uprawnienie w chwili zakończenia umowy lub gdy płatność nie została uregulowana, bez zbierania kluczy.",
+          "tags": [
+            "Koniec umowy",
+            "Nieuregulowana płatność"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Brama, drzwi i skrytka. Z telefonu.",
+          "text": "Każdy najemca otwiera bramę obiektu, drzwi budynku oraz, tam gdzie jest zamontowany, boks lub skrytkę z zamkiem elektrycznym.",
+          "tags": [
+            "Brama obiektu",
+            "Drzwi budynku",
+            "Zamek elektryczny"
+          ]
+        },
+        {
+          "icon": "clock",
+          "title": "Godziny dostępu, które Ty ustalasz.",
+          "text": "Wpuszczasz tylko w godzinach otwarcia obiektu albo dajesz najemcy szersze okno czasowe.",
+          "tags": [
+            "Godziny otwarcia",
+            "Własne okno czasowe"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "Jednorazowy dostęp. Dla ekipy przeprowadzkowej i rodziny.",
+          "text": "Firma przeprowadzkowa lub członek rodziny może dostać dostęp na jeden dzień, bez wspólnego kodu i bez klucza.",
+          "tags": [
+            "Firmy przeprowadzkowe",
+            "Członkowie rodziny",
+            "Jeden dzień"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Wiesz, kto wszedł i kiedy.",
+          "text": "Każde otwarcie jest zapisywane z nazwą użytkownika i godziną, więc pytanie o wizytę rozstrzyga historia, a nie nagrania z kamer.",
+          "tags": [
+            "90 dni wstecz",
+            "Użytkownik i godzina"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Bez wspólnego kodu. Bez kluczy do wymiany.",
+          "text": "Kody, klawiatury i klucze, które są kopiowane i krążą z rąk do rąk, ustępują miejsca osobistemu dostępowi w telefonie.",
+          "tags": [
+            "Bez klawiatury",
+            "Bez kluczy"
+          ]
+        },
+        {
+          "icon": "sim-off",
+          "title": "Bez karty SIM. Bez internetu przy drzwiach.",
+          "text": "Telefon komunikuje się bezpośrednio z urządzeniem na miejscu, a przy standardowym użytkowaniu nie ma miesięcznego abonamentu.",
+          "tags": [
+            "Bezpośrednie połączenie",
+            "Bez miesięcznego abonamentu"
+          ]
+        }
       ],
       "seoTitle": "Inteligentna kontrola dostępu do boksów i skrytek | WIFIGATE",
       "seoDescription": "WIFIGATE daje każdemu najemcy boksu lub skrytki osobisty dostęp z telefonu do bramy, drzwi i własnej skrytki, w godzinach otwarcia, z historią i do końca najmu.",

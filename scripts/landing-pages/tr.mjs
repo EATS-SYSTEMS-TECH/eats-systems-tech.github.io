@@ -41,28 +41,136 @@ export default {
       "note": "Saatler 10 dakikalık adımlarla ayarlanır. Bulunduğunuz yerde Şabat gece yarısından sonra çıkıyorsa pazar günü için de 00:00'dan başlayan bir görev ekleyin."
     },
     "benefitsTitle": "Otomatik bahçe kapısı için WIFIGATE Şabat zamanlayıcısında neler var",
-    "bullets": [
-      "Şabat'ta, kimse kapıyı çalıştırmadan serbest giriş ve çıkış",
-      "Bir kez ayarlanan haftalık program",
-      "Önceden planlanan bayramlar, 90 gün ilerisine kadar",
-      "Teknisyen çağırmadan, saatleri uygulamadan değiştirme",
-      "Kapının belirli saatlerde kilitli tutulması, örneğin geceleri",
-      "Hafta içi: telefondan, kumandayla veya düğmeyle açma",
-      "Mevcut kapının veya bariyerin kontrol ünitesine bağlanır",
-      "SIM yok, kapıda internet yok, aylık abonelik yok"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Bir kez ayarlayın. Her Şabat çalışır.",
+        "text": "Cuma ve cumartesi günlerine yeşil “Kapı açık” görevleri işaretleyin; kapının cihazı bunları her hafta kendiliğinden çalıştırır.",
+        "tags": [
+          "En fazla 50 görev",
+          "10 dakikalık adımlar"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Şabat'ta kapı açık",
+          "status": "Haftalık",
+          "rows": [
+            {
+              "day": "Cuma",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Cumartesi",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Şabat'ta girip çıkın. Hiçbir şeye dokunmadan.",
+        "text": "Şabat'ta kapı belirlediğiniz saatlerde açık kalır ve kimsenin onu çalıştırması gerekmez.",
+        "tags": [
+          "Kumanda yok",
+          "Telefon yok",
+          "Düğme yok"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Bayramlar önceden planlanır",
+        "text": "Bayram arifesi ve bayram günü için 90 gün ilerisine kadar tek seferlik görevler ekleyin; her görev, tarihi geçince kendiliğinden silinir.",
+        "tags": [
+          "90 güne kadar",
+          "Roş Aşana",
+          "Pesah"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Saatleri uygulamadan değiştirin. Teknisyen gerekmez.",
+        "text": "Mevsim değiştiğinde saatleri “Zamanlanmış görevler” ekranında güncelleyip kaydedin.",
+        "tags": [
+          "Sistem yöneticisi",
+          "Kapının yanında"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Kapıyı belirli saatlerde kilitleyin, örneğin geceleri",
+        "text": "Kırmızı bir “Kapı kapalı” görevi kapıyı belirlediğiniz saatlerde kapalı tutar, yeşil bir görev ise açık tutar.",
+        "tags": [
+          "Kırmızı görev",
+          "Yeşil görev"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Hafta içi: telefon, kumanda veya düğme",
+        "text": "Belirlediğiniz saatlerin dışında kapı her zamanki gibi çalışır ve telefondan, kumandayla ya da düğmeyle açılır.",
+        "tags": [
+          "Görevlerin dışında",
+          "Mevcut kumandalar"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Mevcut kapıya veya bariyere bağlanır",
+        "text": "WIFIGATE mevcut kapının veya bariyerin kontrol ünitesine bağlanır; böylece elektrik panosunda ayrı bir Şabat zamanlayıcısına gerek kalmaz.",
+        "tags": [
+          "Otomatik kapı",
+          "Otopark bariyeri"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "SIM yok, kapıda internet yok, aylık abonelik yok",
+        "text": "Kapıda yalnızca elektrik gerekir, telefon cihaza doğrudan bağlanır ve cihaz ile kurulum için bir kez ödersiniz.",
+        "tags": [
+          "Yalnızca elektrik",
+          "Tek seferlik ödeme"
+        ]
+      }
     ],
     "facts": {
       "title": "Bir bakışta WIFIGATE Şabat zamanlayıcısı",
       "rows": [
-        { "label": "Görevler", "value": "Toplam en fazla 50, haftalık ve tek seferlik" },
-        { "label": "Zaman adımı", "value": "10 dakika" },
-        { "label": "Bayramlar", "value": "Bayram arifesinde ve bayram gününde tek seferlik görevler, 90 gün ilerisine kadar" },
-        { "label": "Açık veya kapalı", "value": "Yeşil görev kapıyı açık tutar, kırmızı görev kapalı tutar" },
-        { "label": "Program nerede", "value": "Kapının cihazında saklanır ve çalışır" },
-        { "label": "Kapıda ne gerekir", "value": "Yalnızca elektrik; SIM, modem ve internet gerekmez" },
-        { "label": "Saatleri değiştirme", "value": "Uygulamadan, kapının yanında, teknisyen olmadan" },
-        { "label": "Elektrik kesintisinden sonra", "value": "Program korunur ve herhangi bir telefon kapıya bağlandığında görevler yeniden çalışır" },
-        { "label": "Ödeme", "value": "Cihaz ve kurulum için tek seferlik, aylık abonelik yok" }
+        {
+          "label": "Görevler",
+          "value": "Toplam en fazla 50, haftalık ve tek seferlik"
+        },
+        {
+          "label": "Zaman adımı",
+          "value": "10 dakika"
+        },
+        {
+          "label": "Bayramlar",
+          "value": "Bayram arifesinde ve bayram gününde tek seferlik görevler, 90 gün ilerisine kadar"
+        },
+        {
+          "label": "Açık veya kapalı",
+          "value": "Yeşil görev kapıyı açık tutar, kırmızı görev kapalı tutar"
+        },
+        {
+          "label": "Program nerede",
+          "value": "Kapının cihazında saklanır ve çalışır"
+        },
+        {
+          "label": "Kapıda ne gerekir",
+          "value": "Yalnızca elektrik; SIM, modem ve internet gerekmez"
+        },
+        {
+          "label": "Saatleri değiştirme",
+          "value": "Uygulamadan, kapının yanında, teknisyen olmadan"
+        },
+        {
+          "label": "Elektrik kesintisinden sonra",
+          "value": "Program korunur ve herhangi bir telefon kapıya bağlandığında görevler yeniden çalışır"
+        },
+        {
+          "label": "Ödeme",
+          "value": "Cihaz ve kurulum için tek seferlik, aylık abonelik yok"
+        }
       ]
     },
     "updatedLabel": "Son güncelleme: {date}",

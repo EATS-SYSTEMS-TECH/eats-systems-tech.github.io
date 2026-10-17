@@ -207,13 +207,29 @@ async function main() {
       await checkResolvable($, filePath, "script[src]", "src", "script");
 
       if (nicheKeys.includes(pageKey) || landingKeys.includes(pageKey)) {
-        // The benefits grid is a 3x3 square: eight bullets plus one inert tile
-        // in the middle cell. Any other count turns the square into a ragged
-        // block, and the gap tile is what makes the hole deliberate.
-        const bullets = $("#niche-benefits-list li").not(".niche-benefit--gap").length;
-        if (bullets !== 8) problems.push(`${rel}: ${bullets} benefit bullets rendered, expected 8`);
-        const gaps = $("#niche-benefits-list .niche-benefit--gap").length;
-        if (gaps !== 1) problems.push(`${rel}: ${gaps} centre gap tiles, expected 1`);
+        // Key benefits: a bento grid of cards, each with its own icon, an h3
+        // title and a supporting line; the lead card carries an illustration.
+        const cards = $("#niche-benefits-list > .bento-card");
+        if (cards.length < 3) problems.push(`${rel}: ${cards.length} benefit cards, expected at least 3`);
+        const icons = new Set();
+        cards.each((i, card) => {
+          const $card = $(card);
+          if (!$card.find("h3.bento-card__title").text().trim()) problems.push(`${rel}: benefit card ${i + 1} has no title`);
+          if (!$card.find(".bento-card__text").text().trim()) problems.push(`${rel}: benefit card ${i + 1} has no text`);
+          const icon = $card.find(".bento-card__icon svg").html() || "";
+          if (!icon) problems.push(`${rel}: benefit card ${i + 1} has no icon`);
+          else if (icons.has(icon)) problems.push(`${rel}: benefit card ${i + 1} repeats an icon`);
+          icons.add(icon);
+        });
+        if (!cards.first().find(".bento-visual").length) problems.push(`${rel}: the lead benefit card has no illustration`);
+        if ($("#niche-related, .niche-related").length) problems.push(`${rel}: the related use cases section is back`);
+        const faqItems = $("#niche-faq-list > details.seo-faq__item");
+        if (faqItems.length < 3) problems.push(`${rel}: ${faqItems.length} FAQ questions, expected at least 3`);
+        faqItems.each((i, item) => {
+          if (!$(item).children("summary").text().trim() || !$(item).find(".seo-faq__answer p").text().trim()) {
+            problems.push(`${rel}: FAQ question ${i + 1} needs a question and an answer`);
+          }
+        });
 
         // Hero lead + exactly three icon highlights carry the page now that the
         // long overview paragraph is gone.
@@ -249,7 +265,7 @@ async function main() {
           if (factRows < 4 || $("#landing-facts th[scope='row']").length !== factRows) {
             problems.push(`${rel}: landing facts table needs a row header in each of at least 4 rows`);
           }
-          if ($(".landing-faq__heading").length !== $("#niche-faq-list .niche-faq__item").length) {
+          if ($(".landing-faq__heading").length !== $("#niche-faq-list .seo-faq__item").length) {
             problems.push(`${rel}: every landing FAQ question must be a heading`);
           }
         }

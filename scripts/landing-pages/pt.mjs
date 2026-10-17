@@ -41,28 +41,136 @@ export default {
       "note": "Os horários definem-se em intervalos de 10 minutos. Se, onde vive, o Shabat terminar depois da meia-noite, adicione também um evento no domingo a partir das 00:00."
     },
     "benefitsTitle": "O que inclui o temporizador de Shabat da WIFIGATE para portões",
-    "bullets": [
-      "Entrada e saída livres no Shabat, sem que ninguém acione o portão",
-      "Uma programação semanal que se configura uma só vez",
-      "Festas planeadas com até 90 dias de antecedência",
-      "Alteração de horários pela aplicação, sem chamar um técnico",
-      "Bloqueio do portão a horas fixas, por exemplo à noite",
-      "Durante a semana: abertura pelo telemóvel, por comando ou por botão",
-      "Liga-se à central do portão ou da barreira existente",
-      "Sem SIM, sem internet no portão e sem subscrição mensal"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Configura-se uma vez. Funciona em cada Shabat.",
+        "text": "Marque eventos verdes de «Portão aberto» na sexta-feira e no sábado, e o dispositivo do portão executa-os sozinho todas as semanas.",
+        "tags": [
+          "Até 50 eventos",
+          "Intervalos de 10 minutos"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Portão aberto no Shabat",
+          "status": "Semanal",
+          "rows": [
+            {
+              "day": "Sexta-feira",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Sábado",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Entrar e sair no Shabat. Sem tocar em nada.",
+        "text": "No Shabat, o portão fica aberto nas horas que definiu, e ninguém precisa de o acionar.",
+        "tags": [
+          "Sem comando",
+          "Sem telemóvel",
+          "Sem botão"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Festas planeadas com antecedência",
+        "text": "Adicione eventos pontuais para a véspera e o dia da festa, com até 90 dias de antecedência, e cada um apaga-se sozinho depois de a data passar.",
+        "tags": [
+          "Até 90 dias",
+          "Rosh Hashaná",
+          "Pessach"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Altere os horários na aplicação. Sem técnico.",
+        "text": "Quando muda a estação, atualize as horas no ecrã «Eventos agendados» e guarde.",
+        "tags": [
+          "Administrador do sistema",
+          "Junto ao portão"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Tranque o portão a horas fixas, por exemplo à noite",
+        "text": "Um evento vermelho de «Portão fechado» mantém o portão fechado nas horas que definiu, e um evento verde mantém-no aberto.",
+        "tags": [
+          "Evento vermelho",
+          "Evento verde"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Durante a semana: telemóvel, comando ou botão",
+        "text": "Fora das horas que definiu, o portão funciona normalmente e abre pelo telemóvel, pelo comando ou pelo botão.",
+        "tags": [
+          "Fora dos eventos",
+          "Comandos existentes"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Liga-se ao portão ou à barreira que já tem",
+        "text": "A WIFIGATE liga-se à central existente do portão ou da barreira, por isso não é preciso um temporizador de Shabat separado no quadro elétrico.",
+        "tags": [
+          "Portão elétrico",
+          "Barreira de estacionamento"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Sem SIM, sem internet no portão e sem subscrição mensal",
+        "text": "O portão só precisa de eletricidade, o telemóvel liga-se diretamente ao dispositivo, e paga uma única vez pelo dispositivo e pela instalação.",
+        "tags": [
+          "Só eletricidade",
+          "Pagamento único"
+        ]
+      }
     ],
     "facts": {
       "title": "O temporizador de Shabat da WIFIGATE em resumo",
       "rows": [
-        { "label": "Eventos", "value": "Até 50 no total, semanais e pontuais" },
-        { "label": "Intervalos de tempo", "value": "10 minutos" },
-        { "label": "Festas", "value": "Eventos pontuais na véspera e no dia da festa, com até 90 dias de antecedência" },
-        { "label": "Aberto ou fechado", "value": "Um evento verde mantém o portão aberto, um evento vermelho mantém-no fechado" },
-        { "label": "Onde fica a programação", "value": "Guardada e executada no dispositivo do portão" },
-        { "label": "De que precisa o portão", "value": "Apenas de eletricidade, sem SIM, sem router e sem internet" },
-        { "label": "Alteração de horários", "value": "Pela aplicação, junto ao portão, sem técnico" },
-        { "label": "Após uma falha de energia", "value": "A programação mantém-se, e os eventos voltam a funcionar quando qualquer telemóvel se liga ao portão" },
-        { "label": "Pagamento", "value": "Uma única vez, pelo dispositivo e pela instalação, sem subscrição mensal" }
+        {
+          "label": "Eventos",
+          "value": "Até 50 no total, semanais e pontuais"
+        },
+        {
+          "label": "Intervalos de tempo",
+          "value": "10 minutos"
+        },
+        {
+          "label": "Festas",
+          "value": "Eventos pontuais na véspera e no dia da festa, com até 90 dias de antecedência"
+        },
+        {
+          "label": "Aberto ou fechado",
+          "value": "Um evento verde mantém o portão aberto, um evento vermelho mantém-no fechado"
+        },
+        {
+          "label": "Onde fica a programação",
+          "value": "Guardada e executada no dispositivo do portão"
+        },
+        {
+          "label": "De que precisa o portão",
+          "value": "Apenas de eletricidade, sem SIM, sem router e sem internet"
+        },
+        {
+          "label": "Alteração de horários",
+          "value": "Pela aplicação, junto ao portão, sem técnico"
+        },
+        {
+          "label": "Após uma falha de energia",
+          "value": "A programação mantém-se, e os eventos voltam a funcionar quando qualquer telemóvel se liga ao portão"
+        },
+        {
+          "label": "Pagamento",
+          "value": "Uma única vez, pelo dispositivo e pela instalação, sem subscrição mensal"
+        }
       ]
     },
     "updatedLabel": "Última atualização: {date}",

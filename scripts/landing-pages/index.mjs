@@ -6,7 +6,8 @@
 //
 // One file per locale exporting { <key>: { label, eyebrow, title, heroLead,
 // highlights[3], intro { title, text }, steps { title, items[], note },
-// benefitsTitle, bullets[8], facts { title, rows[{ label, value }] },
+// benefitsTitle, benefits[8] (bento cards, see scripts/benefit-cards.mjs),
+// facts { title, rows[{ label, value }] },
 // updatedLabel ("...{date}"), faqTitle, seoTitle, seoDescription, imageAlt,
 // faq[] } }. he.mjs is the source: every other locale says what it says.
 // URLs: English /<key>/, others /<locale>/<key>/.
@@ -76,7 +77,7 @@ export const LANDING_PAGES = [
 ];
 
 // Brand names are the only text that may stay as it is in English.
-const BRAND_ONLY = /^(?:WIFIGATE|WhatsApp|[\d\s.,:%|+-])+$/;
+const BRAND_ONLY = /^(?:WIFIGATE|WhatsApp|SIM|[\d\s.,:%|+\-–·])+$/;
 const numbersOf = (text) => (text.match(/\d+/g) || []).sort().join(",");
 
 // Search results cut a title near 60 and a description near 160 characters;
@@ -121,7 +122,7 @@ export function validateLandingPageLocales(localeCodes) {
       const walk = (from, value, inEnglish, at) => {
         if (typeof from === "string") {
           if (typeof value !== "string" || !value.trim()) problems.push(`${locale}: ${at} is missing`);
-          else if (at.endsWith(".icon")) {
+          else if (at.endsWith(".icon") || at.endsWith(".type")) {
             if (value !== from) problems.push(`${locale}: ${at} must be "${from}"`);
           } else {
             if (numbersOf(value) !== numbersOf(from)) problems.push(`${locale}: ${at} numbers differ from Hebrew`);

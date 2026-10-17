@@ -41,28 +41,136 @@ export default {
       "note": "Sati se postavljaju u koracima od 10 minuta. Ako kod vas šabat završava nakon ponoći, dodajte događaj i u nedjelju od 00:00."
     },
     "benefitsTitle": "Što uključuje šabatni tajmer WIFIGATE za električna dvorišna vrata",
-    "bullets": [
-      "Slobodan ulazak i izlazak na šabat, a da nitko ne upravlja vratima",
-      "Tjedni raspored koji postavite jednom",
-      "Blagdani planirani do 90 dana unaprijed",
-      "Promjena sati u aplikaciji, bez pozivanja servisera",
-      "Zaključavanje vrata u stalnim terminima, primjerice noću",
-      "Radnim danima: otvaranje telefonom, daljinskim upravljačem ili tipkom",
-      "Spajanje na upravljačku jedinicu postojećih vrata ili rampe",
-      "Bez SIM kartice, bez interneta na vratima i bez mjesečne pretplate"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Postavite jednom. Radi svaki šabat.",
+        "text": "Označite zelene događaje „Otvorena vrata“ u petak i u subotu, a uređaj vrata svaki ih tjedan sam pokreće.",
+        "tags": [
+          "Do 50 događaja",
+          "Koraci od 10 minuta"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Otvorena vrata na šabat",
+          "status": "Tjedno",
+          "rows": [
+            {
+              "day": "Petak",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Subota",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Ulazite i izlazite na šabat. Ne dirate ništa.",
+        "text": "Na šabat vrata ostaju otvorena u satima koje ste odredili, a nitko njima ne mora upravljati.",
+        "tags": [
+          "Bez daljinskog upravljača",
+          "Bez telefona",
+          "Bez tipke"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Blagdani planirani unaprijed",
+        "text": "Dodajte jednokratne događaje uoči blagdana i za blagdanski dan, do 90 dana unaprijed, a svaki se događaj sam briše kad mu datum prođe.",
+        "tags": [
+          "Do 90 dana",
+          "Roš hašana",
+          "Pesah"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Sate mijenjate u aplikaciji. Bez servisera.",
+        "text": "Kad se promijeni godišnje doba, ažurirajte sate na zaslonu „Zakazani događaji“ i spremite.",
+        "tags": [
+          "Administrator sustava",
+          "Uz vrata"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Zaključajte vrata u stalnim terminima, primjerice noću",
+        "text": "Crveni događaj „Zatvorena vrata“ drži vrata zatvorenima u satima koje odredite, a zeleni ih događaj drži otvorenima.",
+        "tags": [
+          "Crveni događaj",
+          "Zeleni događaj"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Radnim danima: telefon, daljinski upravljač ili tipka",
+        "text": "Izvan sati koje ste odredili vrata rade kao i obično i otvaraju se telefonom, daljinskim upravljačem ili tipkom.",
+        "tags": [
+          "Izvan događaja",
+          "Postojeći upravljači"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Spaja se na postojeća vrata ili rampu",
+        "text": "WIFIGATE se spaja na postojeću upravljačku jedinicu vrata ili rampe, pa nije potreban zaseban šabatni tajmer u razvodnom ormaru.",
+        "tags": [
+          "Električna dvorišna vrata",
+          "Parkirna rampa"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Bez SIM kartice, bez interneta na vratima i bez mjesečne pretplate",
+        "text": "Vratima treba samo struja, telefon se izravno spaja na uređaj, a uređaj i ugradnju plaćate jednom.",
+        "tags": [
+          "Samo struja",
+          "Jednokratno plaćanje"
+        ]
+      }
     ],
     "facts": {
       "title": "Šabatni tajmer WIFIGATE ukratko",
       "rows": [
-        { "label": "Događaji", "value": "Ukupno do 50, tjedni i jednokratni" },
-        { "label": "Vremenski korak", "value": "10 minuta" },
-        { "label": "Blagdani", "value": "Jednokratni događaji uoči blagdana i na blagdanski dan, do 90 dana unaprijed" },
-        { "label": "Otvoreno ili zatvoreno", "value": "Zeleni događaj drži vrata otvorenima, crveni ih drži zatvorenima" },
-        { "label": "Gdje je raspored", "value": "Pohranjen je i izvodi se na uređaju vrata" },
-        { "label": "Što vratima treba", "value": "Samo struja, bez SIM kartice, usmjerivača i interneta" },
-        { "label": "Promjena sati", "value": "U aplikaciji, uz vrata, bez servisera" },
-        { "label": "Nakon nestanka struje", "value": "Raspored ostaje sačuvan, a događaji ponovno počinju raditi kad se bilo koji telefon spoji na vrata" },
-        { "label": "Plaćanje", "value": "Jednokratno, za uređaj i ugradnju, bez mjesečne pretplate" }
+        {
+          "label": "Događaji",
+          "value": "Ukupno do 50, tjedni i jednokratni"
+        },
+        {
+          "label": "Vremenski korak",
+          "value": "10 minuta"
+        },
+        {
+          "label": "Blagdani",
+          "value": "Jednokratni događaji uoči blagdana i na blagdanski dan, do 90 dana unaprijed"
+        },
+        {
+          "label": "Otvoreno ili zatvoreno",
+          "value": "Zeleni događaj drži vrata otvorenima, crveni ih drži zatvorenima"
+        },
+        {
+          "label": "Gdje je raspored",
+          "value": "Pohranjen je i izvodi se na uređaju vrata"
+        },
+        {
+          "label": "Što vratima treba",
+          "value": "Samo struja, bez SIM kartice, usmjerivača i interneta"
+        },
+        {
+          "label": "Promjena sati",
+          "value": "U aplikaciji, uz vrata, bez servisera"
+        },
+        {
+          "label": "Nakon nestanka struje",
+          "value": "Raspored ostaje sačuvan, a događaji ponovno počinju raditi kad se bilo koji telefon spoji na vrata"
+        },
+        {
+          "label": "Plaćanje",
+          "value": "Jednokratno, za uređaj i ugradnju, bez mjesečne pretplate"
+        }
       ]
     },
     "updatedLabel": "Posljednje ažuriranje: {date}",

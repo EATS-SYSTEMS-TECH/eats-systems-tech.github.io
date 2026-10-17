@@ -36,15 +36,89 @@ export default {
         }
       ],
       "paragraph": "WIFIGATE antaa hotelleille, loma-asunnoille (Airbnb) ja lomakylille mahdollisuuden tarjota vieraille kätevä ja turvallinen digitaalinen sisäänpääsy suoraan puhelimesta.\nMagneettisten avainkorttien myöntämisen, fyysisten avainten luovuttamisen tai avainlaatikoiden käytön sijaan kulunhallinta hoituu automaattisesti.\nWIFIGATE Hostin avulla voit yhdistää varausjärjestelmäsi suoraan kulunhallintajärjestelmään.\nTämän yhteyden ansiosta vieras saa henkilökohtaisen kulkuoikeuden heti, kun varaus on vahvistettu.\nKulkuoikeus aktivoituu täsmälleen sisäänkirjautumisaikaan ja päättyy automaattisesti uloskirjautuessa ilman käsin tehtäviä toimia, avainten luovutusta tai vastaanoton ja majoittajien koordinointia.",
-      "bullets": [
-        "Vieraan kulkuoikeus luodaan automaattisesti, kun varaus vahvistetaan",
-        "Täysi automaatiotuki WIFIGATE Hostin kautta",
-        "Väliaikainen kulkuoikeus majoituksen päivien ja kellonaikojen mukaan",
-        "Vähemmän huoneiden avainkorttien myöntämistä, luovuttamista ja vaihtamista",
-        "Kulkuoikeuksien hallinta henkilökunnalle, siivoojille, huollolle ja toimittajille",
-        "Sujuvampi ja mukavampi saapuminen vieraille",
-        "Kulkuoikeus päättyy automaattisesti uloskirjautumisaikaan",
-        "Kulkuhistoria läpinäkyvyyttä ja valvontaa varten"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Varaus vahvistettu. Kulkuoikeus on jo matkalla.",
+          "text": "WIFIGATE Hostin ansiosta varauksen vahvistaminen luo henkilökohtaisen kulkuoikeuden ja lähettää sen vieraalle automaattisesti.",
+          "tags": [
+            "Hotellit",
+            "Airbnb",
+            "Loma-asunnot"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Vieraskutsu",
+            "status": "Lähetetty",
+            "guest": "Aino Virtanen",
+            "when": "Pe 15:00 – su 11:00",
+            "note": "Sisältää saapumisohjeet"
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Kulkuoikeus majoituksen päivien mukaan.",
+          "text": "Jokainen vieras saa puhelimeensa kutsun, joka on voimassa vain majoituksen päivinä ja kellonaikoina.",
+          "tags": [
+            "Sisäänkirjautuminen",
+            "Päivät ja kellonajat"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Uloskirjautuminen. Kulkuoikeus päättyy itsestään.",
+          "text": "Kenenkään ei tarvitse muistaa perua kulkuoikeutta: se päättyy lähtöaikana, vaikka paikalla ei olisi ketään henkilökunnasta.",
+          "tags": [
+            "Automaattinen päättyminen",
+            "Lähtöaika"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Oma kulkuoikeus jokaiselle henkilökunnan jäsenelle.",
+          "text": "Työntekijät, siivoojat, huolto ja toimittajat saavat kukin henkilökohtaisen kulkuoikeuden, jonka myönnät ja perut sovelluksessa.",
+          "tags": [
+            "Siivous",
+            "Huolto",
+            "Toimittajat"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Vähemmän kortteja. Ei avainlaatikkoa.",
+          "text": "Vähemmän huoneiden avainkorttien myöntämistä, luovuttamista ja vaihtamista, eikä vieraalta toiselle kulkevaa avainlaatikon koodia.",
+          "tags": [
+            "Huoneiden avainkortit",
+            "Fyysiset avaimet"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Kuka avasi ja milloin. Kaikki näkyvillä.",
+          "text": "Kulkuhistoria näyttää, kuka avasi ja milloin, joten vieraiden, henkilökunnan ja toimittajien kulku on läpinäkyvää ja hallinnassa.",
+          "tags": [
+            "Viimeiset 90 päivää"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Sujuvampi saapuminen. Ketään ei tarvitse odottaa.",
+          "text": "Vieras avaa itse portin, oven tai pysäköinnin suoraan puhelimensa WIFIGATE-sovelluksesta.",
+          "tags": [
+            "Portti",
+            "Ovi",
+            "Pysäköinti"
+          ]
+        },
+        {
+          "icon": "zap",
+          "title": "Täysi automaatio WIFIGATE Hostilla.",
+          "text": "WIFIGATE Host yhdistää varausjärjestelmäsi kulunhallintajärjestelmään: ei tietojen kopiointia, ei korttien myöntämistä eikä käsin tehtäviä vaiheita.",
+          "tags": [
+            "Varausjärjestelmä",
+            "API-yhteys"
+          ]
+        }
       ],
       "seoTitle": "WIFIGATE | Digitaalinen vieraskulku hotelleille ja Airbnb:lle",
       "seoDescription": "WIFIGATE Host tuo hotelleihin, Airbnb-kohteisiin ja lomakyliin automaattisen vieraskulun: oma kulkuoikeus joka varaukseen, ei avaimia, kortteja tai avainlaatikoita.",
@@ -90,15 +164,95 @@ export default {
         }
       ],
       "paragraph": "Yritysten ja liikkeiden rullaovia ohjataan usein kaukosäätimillä, avaimilla, ulkoisella avainkytkimellä tai tilojen ulkopuolelle asennetuilla kytkimillä. Tällaiset ratkaisut voivat kadota, jäädä entisille työntekijöille, tulla kopioiduiksi tai muuttua alttiiksi kulkupisteeksi. Avaimella avaaminen tai sulkeminen tarkoittaa lisäksi seisomista aivan ohjauspisteen vieressä avain kädessä, joskus ilman kunnollista näkyvyyttä rullaoven alueelle. WIFIGATE siirtää ohjauksen sovellukseen ja kulunhallinnan suojatummalle sisäpuolelle, joten avaat ja suljet vaivattomammin, hallitset työntekijöiden ja toimittajien kulkuoikeuksia ja vähennät riippuvuutta avaimista, kaukosäätimistä ja alttiista kulkupisteistä.",
-      "bullets": [
-        "Avaa ja sulje puhelimella ilman riippuvuutta kaukosäätimistä",
-        "Vähemmän riippuvuutta avaimista, joita voi kopioida tai kadottaa",
-        "Vähemmän alttiita kulkupisteitä liiketilan ulkopuolella",
-        "Mukavampi ohjaus ja parempi näkyvyys rullaoven alueelle",
-        "Kulkuoikeuksien hallinta työntekijöille, esihenkilöille ja toimittajille",
-        "Mahdollisuus väliaikaiseen kulkuoikeuteen ajan tai tarpeen mukaan",
-        "Sopii liikkeisiin, varastoihin, huoltosisäänkäynteihin ja yrityksiin",
-        "Siistimpi ja turvallisempi sisäpuolinen ratkaisu päivittäiseen käyttöön"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Oma kulkuoikeus. Työntekijöille, esihenkilöille ja toimittajille.",
+          "text": "Jokainen saa sovellukseen oman kulkuoikeutensa, ja voit poistaa sen milloin tahansa.",
+          "visual": {
+            "type": "roster",
+            "heading": "Rullaoven kulkuoikeudet",
+            "status": "Aktiivinen",
+            "rows": [
+              {
+                "name": "Liikkeen omistaja",
+                "badge": "Ylläpitäjä"
+              },
+              {
+                "name": "Vuorotyöntekijä",
+                "badge": "Valtuutettu"
+              },
+              {
+                "name": "Tavarantoimittaja",
+                "badge": "Väliaikainen"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "shield-check",
+          "title": "Vähemmän alttiita kulkupisteitä. Ohjaus siirtyy sisälle.",
+          "text": "Ulkoseinällä olevan kytkimen tai avainkytkimen sijaan ohjauspisteen voi sijoittaa liiketilan suojatulle sisäpuolelle.",
+          "tags": [
+            "Suojattu sisäpuoli",
+            "Ulottumattomissa"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Avaa ja sulje. Suoraan puhelimesta.",
+          "text": "Valtuutetut käyttäjät ohjaavat rullaovea WIFIGATE-sovelluksesta, eikä kaukosäädintä tarvitse etsiä tai kierrättää työntekijältä toiselle.",
+          "tags": [
+            "Ilman kaukosäätimiä",
+            "Suora yhteys"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Vähemmän avaimia, joita voi kopioida tai kadottaa.",
+          "text": "Entiselle työntekijälle jäänyt avain toimii yhä, mutta puhelimessa oleva kulkuoikeus sulkeutuu hänen viimeisenä työpäivänään.",
+          "tags": [
+            "Ei lukon vaihtoa",
+            "Ei laitteiden keräämistä"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Väliaikainen kulkuoikeus. Vain tarvittaessa.",
+          "text": "Jaa toimittajalle tai määräaikaiselle työntekijälle aikarajattu kulkuoikeus, joka lakkaa toimimasta, kun aika umpeutuu.",
+          "tags": [
+            "Toimittajat",
+            "Määräaikaiset työntekijät"
+          ]
+        },
+        {
+          "icon": "eye",
+          "title": "Mukavampi ohjaus. Parempi näkyvyys.",
+          "text": "Ohjaa rullaovea puhelimella turvallisemman matkan päästä sen sijaan, että seisoisit aivan ohjauspisteen vieressä avain kädessä.",
+          "tags": [
+            "Turvallisemman matkan päästä",
+            "Ei avainta kädessä"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "Päivittäinen käyttö. Siistimpää ja turvallisempaa.",
+          "text": "WIFIGATE asennetaan rullaoven nykyiseen ohjaukseen, ja tiedot tallennetaan salattuina itse laitteeseen.",
+          "tags": [
+            "Sisäpuolinen ratkaisu",
+            "Salatut tiedot"
+          ]
+        },
+        {
+          "icon": "store",
+          "title": "Jokaiselle yritykselle, jolla on sähköinen rullaovi.",
+          "text": "Kaikkialle, missä halutaan vähemmän käsistä käsiin kulkevia avaimia ja kaukosäätimiä.",
+          "tags": [
+            "Liikkeet",
+            "Varastot",
+            "Huoltosisäänkäynnit"
+          ]
+        }
       ],
       "seoTitle": "Rullaovien älyohjaus yrityksille ja liikkeille | WIFIGATE",
       "seoDescription": "WIFIGATE ohjaa yritysten ja liikkeiden rullaovia puhelimella: kulkuoikeuksien hallinta, vähemmän avaimia ja kaukosäätimiä, vähemmän alttiita kulkupisteitä.",
@@ -144,15 +298,103 @@ export default {
         }
       ],
       "paragraph": "Sähköportteja ja pysäköintipuomeja käyttävät asukkaat, työntekijät, vieraat ja toimittajat, mutta kaukosäätimien, koodien ja ”avaatko portin” -puheluiden hallinnasta tulee nopeasti hankalaa. WIFIGATElla avaat portin puhelimella, jaat pysyviä tai väliaikaisia kulkuoikeuksia, käytät automaattista avausta vakituisille käyttäjille ja asetat ajastettuja tapahtumia tarpeen mukaan. Järjestelmä on suunniteltu turvalliseen, salattuun ja yksityiseen toimintaan ilman kuukausitilausta tai toistuvaa veloitusta, ja nykyiset kaukosäätimet toimivat edelleen sovellusohjauksen rinnalla.",
-      "bullets": [
-        "Avaa sähköportti tai pysäköintipuomi puhelimella",
-        "Ei kuukausitilausta eikä toistuvaa veloitusta",
-        "Jaa väliaikainen kulkuoikeus vieraille, toimittajille ja työntekijöille",
-        "Automaattinen avaus (Auto Open) vakituisille käyttäjille päivittäin saapuessa",
-        "Ajastetut tapahtumat, jotka avaavat päivien ja kellonaikojen mukaan",
-        "Ohjaus sovelluksesta tai nykyisillä kaukosäätimillä",
-        "Vähemmän tarvetta jakaa fyysisiä kaukosäätimiä",
-        "Avaushistoria valvontaa ja läpinäkyvyyttä varten"
+      "benefits": [
+        {
+          "icon": "smartphone",
+          "title": "Portti tai pysäköintipuomi. Suoraan puhelimesta.",
+          "text": "Jokainen, jolle on annettu pysyvä tai väliaikainen kulkuoikeus, avaa sähköportin tai pysäköintipuomin WIFIGATE-sovelluksesta.",
+          "tags": [
+            "Sähköportti",
+            "Pysäköintipuomi",
+            "Ei SIM-korttia"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Avaushistoria",
+            "status": "Tänään",
+            "rows": [
+              {
+                "time": "07:42",
+                "name": "Laura · asukas",
+                "event": "Avattu"
+              },
+              {
+                "time": "08:15",
+                "name": "Mikko · työntekijä",
+                "event": "Avattu"
+              },
+              {
+                "time": "10:30",
+                "name": "Juha · toimittaja",
+                "event": "Avattu"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "card-off",
+          "title": "Ei tilausta. Ei toistuvaa veloitusta.",
+          "text": "Maksat kerran laitteesta ja asennuksesta, ilman kuukausitilausta ja toistuvaa veloitusta.",
+          "tags": [
+            "Kertamaksu",
+            "Laite ja asennus"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "Väliaikainen kulkuoikeus. Sulkeutuu itsestään.",
+          "text": "Sen sijaan, että vastaisit puheluihin portin avaamisesta, lähetä kulkuoikeus, joka on voimassa vain sen ajan, kun sitä tarvitaan.",
+          "tags": [
+            "Vieraat",
+            "Toimittajat",
+            "Työntekijät"
+          ]
+        },
+        {
+          "icon": "hands-free",
+          "title": "Auto Open. Portti aukeaa, kun saavut.",
+          "text": "Automaattinen avaus tunnistaa vakituisen käyttäjän saapumisen ja avaa portin: ei kaukosäätimen etsimistä eikä ikkunan avaamista sateessa.",
+          "tags": [
+            "Vakituiset käyttäjät",
+            "Päivittäinen saapuminen"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Ajastetut tapahtumat. Päivien ja kellonaikojen mukaan.",
+          "text": "Määritä etukäteen, minä päivinä ja kellonaikoina portti pysyy auki, viikoittaisena tai kertaluonteisena tapahtumana.",
+          "tags": [
+            "Viikoittainen",
+            "Kertaluonteinen"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "Sovellus tai kaukosäädin. Sinä valitset.",
+          "text": "Nykyiset kaukosäätimet toimivat edelleen sovellusohjauksen rinnalla, joten mitään ei tarvitse heittää pois.",
+          "tags": [
+            "Nykyiset kaukosäätimet",
+            "Sovellusohjaus"
+          ]
+        },
+        {
+          "icon": "user-plus",
+          "title": "Vähemmän jaettavia fyysisiä kaukosäätimiä.",
+          "text": "Sen sijaan, että jakaisit kaukosäätimen jokaiselle asukkaalle, työntekijälle tai toimittajalle, anna kullekin henkilökohtainen kulkuoikeus sovelluksessa.",
+          "tags": [
+            "Henkilökohtainen kulkuoikeus",
+            "Hallinta sovelluksessa"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Avaushistoria. Valvontaa ja läpinäkyvyyttä.",
+          "text": "Näet, kuka avasi portin ja milloin, viimeisten 90 päivän ajalta.",
+          "tags": [
+            "90 päivää taaksepäin",
+            "Kuka ja milloin"
+          ]
+        }
       ],
       "seoTitle": "Sähköportit ja pysäköintipuomit ilman tilausta | WIFIGATE",
       "seoDescription": "WIFIGATE avaa sähköportit ja pysäköintipuomit puhelimella: automaattinen avaus, ajastukset, nykyiset kaukosäätimet ja kulkuoikeudet ilman kuukausitilausta.",
@@ -198,15 +440,101 @@ export default {
         }
       ],
       "paragraph": "Autotallin ovia ja yksityisten pysäköintipaikkojen sisäänajoja ohjataan yleensä fyysisillä kaukosäätimillä, jotka voivat kadota, jäädä henkilöille, jotka eivät enää tarvitse kulkuoikeutta, tai tulla tietyissä tilanteissa kopioiduiksi. WIFIGATElla siirrät ohjauksen digitaaliseen kulkuun puhelimella, hallitset perheenjäsenten, työntekijöiden tai vieraiden kulkuoikeuksia ja jaat väliaikaisen kulkuoikeuden luovuttamatta kaukosäädintä tai koodia. Tuloksena on kätevämpi, yksityisempi ja selkeämpi käyttökokemus, jossa riippuvuus fyysisistä kulkuvälineistä vähenee.",
-      "bullets": [
-        "Avaa autotallin ovi puhelimella",
-        "Vähemmän riippuvuutta fyysisistä kaukosäätimistä",
-        "Pienempi riski kadonneista, luovutetuista tai kopioiduista kaukosäätimistä",
-        "Kulkuoikeuksien hallinta perheenjäsenille, työntekijöille ja vieraille",
-        "Väliaikainen kulkuoikeus luovuttamatta kaukosäädintä tai koodia",
-        "Sopii yksityisiin pysäköintipaikkoihin, omakotitaloihin ja pihallisiin asuntoihin",
-        "Yksityisempi ja turvallisempi tapa hallita kulkua",
-        "Kätevämpi ja turvallisempi arjen ohjaus"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Oma kulkuoikeus jokaiselle tulijalle.",
+          "text": "Lisää ja poista sovelluksessa perheenjäseniä, työntekijöitä ja vieraita, ja jokainen avaa omasta puhelimestaan omalla kulkuoikeudellaan.",
+          "tags": [
+            "Perheenjäsenet",
+            "Työntekijät",
+            "Vieraat"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Autotallin kulkuoikeudet",
+            "status": "Aktiivinen",
+            "rows": [
+              {
+                "name": "Äiti",
+                "badge": "Ylläpitäjä"
+              },
+              {
+                "name": "Eetu",
+                "badge": "Perheenjäsen"
+              },
+              {
+                "name": "Asentaja",
+                "badge": "Väliaikainen"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Pienempi riski kadonneista tai kopioiduista kaukosäätimistä.",
+          "text": "Kadonnut, eteenpäin annettu tai kopioitu kaukosäädin voi avata yhä, mutta puhelimessa olevan kulkuoikeuden poistat sovelluksesta hetkessä.",
+          "tags": [
+            "Katoaminen",
+            "Luovutus",
+            "Kopiointi"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Autotallin ovi aukeaa puhelimella.",
+          "text": "WIFIGATE kytketään autotallin oveen, ja avaat sen WIFIGATE-sovelluksesta puhelimella, joka on jo mukanasi.",
+          "tags": [
+            "Suora yhteys",
+            "Ei SIM-korttia"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "Vähemmän kaukosäätimiä. Vähemmän vaivaa.",
+          "text": "Vähemmän kaukosäätimiä ostettavaksi, koodattavaksi, luovutettavaksi ja hallittavaksi, kun jokaiselle autolle ja käyttäjälle ei tarvita omaansa.",
+          "tags": [
+            "Nykyisten kaukosäätimien rinnalla"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Väliaikainen kulkuoikeus. Ilman kaukosäätimen luovutusta.",
+          "text": "Asentaja tai vieras saa väliaikaisen kulkuoikeuden, joka päättyy valitsemanasi hetkenä, eikä kaukosäädintä tai koodia tarvitse luovuttaa.",
+          "tags": [
+            "Asentajat",
+            "Vieraat"
+          ]
+        },
+        {
+          "icon": "garage",
+          "title": "Yksityiseen pysäköintiin, omakotitaloon ja pihalliseen asuntoon.",
+          "text": "WIFIGATE asennetaan autotallin oven tai pysäköinnin sisäänajon nykyiseen ohjaukseen, omakotitalossa tai pihallisessa asunnossa.",
+          "tags": [
+            "Yksityinen autotalli",
+            "Yksityinen pysäköinti",
+            "Pihalliset asunnot"
+          ]
+        },
+        {
+          "icon": "shield-check",
+          "title": "Yksityisempi ja turvallisempi kulku.",
+          "text": "WIFIGATE suojaa kulun kehittyneillä suojauskerroksilla ja salatulla tallennuksella sekä pitää käyttäjien yksityisyyden turvassa.",
+          "tags": [
+            "Salattu tallennus",
+            "Suojauskerrokset",
+            "Yksityisyys"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Kätevämpää ja turvallisempaa. Joka päivä.",
+          "text": "Viimeisten 90 päivän kulkuhistoriasta näet, kuka avasi autotallin ja milloin.",
+          "tags": [
+            "Kulkuhistoria",
+            "90 päivää"
+          ]
+        }
       ],
       "seoTitle": "Autotallin oven ja pysäköinnin älyavaus | WIFIGATE",
       "seoDescription": "WIFIGATE avaa autotallin ovet ja yksityisen pysäköinnin puhelimella: vähemmän kaukosäätimiä, väliaikaiset kulkuoikeudet ja yksityisempi kulunhallinta.",
@@ -252,15 +580,84 @@ export default {
         }
       ],
       "paragraph": "Yksityiskodeissa koodilukot, avaimet ja kaukosäätimet voivat muodostua heikoksi kohdaksi. Ajan myötä koodilukon näppäimiin tulee kulumaa tai jälkiä, kaukosäätimet katoavat tai kulkevat ihmiseltä toiselle, ja koodi annetaan joskus lähettien, huoltomiesten tai vieraiden käyttöön, joille se jää vielä pitkään tarpeen jälkeen. WIFIGATElla hallitset sisäänkäyntiä puhelimella, jaat väliaikaisen kulkuoikeuden vieraalle paljastamatta pysyvää koodia ja perut kulkuoikeudet helposti vaihtamatta lukkoja, koodeja tai kaukosäätimiä.",
-      "bullets": [
-        "Vähemmän riippuvuutta koodilukoista, avaimista ja kaukosäätimistä",
-        "Väliaikainen kulkuoikeus läheteille, vieraille ja huoltomiehille",
-        "Peru kulkuoikeudet helposti puhelimella",
-        "Pienempi riski jaetuista koodeista tai eteenpäin annetuista kaukosäätimistä",
-        "Sopii omakotitalon portteihin, oviin, pysäköintiin ja autotalleihin",
-        "Helppo hallinta perheenjäsenille ja vakituisille käyttäjille",
-        "Kätevämpi päivittäinen sisäänkulku",
-        "Parempi yksityisyys ja hallinta siitä, kuka pääsee sisään"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Väliaikainen kulkuoikeus. Lähetille, vieraalle ja huoltomiehelle.",
+          "text": "Lähetä aikarajattu kutsu, joka toimii vain valitsemanasi aikana, paljastamatta pysyvää koodia.",
+          "tags": [
+            "Lähetit",
+            "Vieraat",
+            "Huoltomiehet"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Vieraskutsu",
+            "status": "Voimassa",
+            "guest": "Huoltomies",
+            "when": "Tänään, 10:00–12:00",
+            "note": "Päättyy itsestään"
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Pienempi riski kiertävistä koodeista ja kaukosäätimistä.",
+          "text": "Jokaisella on henkilökohtainen kulkuoikeus puhelimessaan, joten läheteille ja vieraille ei tarvitse antaa pysyvää koodia tai kaukosäädintä.",
+          "tags": [
+            "Henkilökohtainen kulkuoikeus",
+            "Ei pysyvää koodia"
+          ]
+        },
+        {
+          "icon": "user-minus",
+          "title": "Kulkuoikeuden peruminen. Hetkessä, puhelimesta.",
+          "text": "Kun jonkun ei enää kuulu päästä sisään, poistat hänen kulkuoikeutensa heti vaihtamatta lukkoja, koodeja tai kaukosäätimiä.",
+          "tags": [
+            "Välitön peruminen",
+            "Ei lukkojen vaihtoa"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "Enemmän yksityisyyttä. Enemmän hallintaa.",
+          "text": "Toisin kuin jaetulla koodilla, jokaisella kulkuoikeudella on nimi, joten on aina selvää, kuka pääsee kotiin sisään.",
+          "tags": [
+            "Kulkuoikeuslista",
+            "Nimetyt kulkuoikeudet"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Vähemmän riippuvuutta koodilukoista, avaimista ja kaukosäätimistä.",
+          "text": "Hallitse sisäänkulkua puhelimella sen sijaan, että luottaisit koodilukkoon, avaimiin ja kaukosäätimiin.",
+          "tags": [
+            "Hallinta puhelimella"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Koko perhe. Helposti hallittuna.",
+          "text": "Lisää sovelluksessa perheenjäsenet ja vakituiset käyttäjät, ja jokaisella on henkilökohtainen kulkuoikeus.",
+          "tags": [
+            "Perheenjäsenet",
+            "Vakituiset käyttäjät"
+          ]
+        },
+        {
+          "icon": "gate",
+          "title": "Portilta autotalliin asti.",
+          "text": "WIFIGATE sopii omakotitalon portteihin, ulko-oviin, pysäköintiin ja autotallin oviin, ja kaikki avautuu yhdestä sovelluksesta.",
+          "tags": [
+            "Portit",
+            "Ovet",
+            "Autotallit"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "Päivittäinen sisäänkulku. Entistä kätevämpi.",
+          "text": "Avaa taskussasi olevalla puhelimella aina, kun lähdet ja palaat kotiin, ilman koodin muistamista tai kaukosäätimen etsimistä."
+        }
       ],
       "seoTitle": "Älykäs kulku kotiin ilman jaettua koodia | WIFIGATE",
       "seoDescription": "Hallitse kotisi kulkua puhelimella WIFIGATElla: väliaikaiset kulkuoikeudet vieraille ja läheteille, vähemmän koodilukkoja, avaimia ja kaukosäätimiä.",
@@ -306,15 +703,98 @@ export default {
         }
       ],
       "paragraph": "Asuinrakennuksessa kulku ei pääty aulan oveen: on portti, pysäköinnin sisäänajo, varastojen ovet ja joskus sivuovi. Mukana ovat paitsi asukkaat myös vaihtuvat vuokralaiset, taloyhtiön hallitus tai isännöitsijä, siivoojat, huoltohenkilöstö ja vakituiset toimittajat. Kun kaikki tämä hoidetaan yhdellä koodilla ja muutamalla kaukosäätimellä, jokainen pieni muutos, kuten poismuuttanut asukas, kadonnut kaukosäädin tai vaihtunut toimittaja, tarkoittaa koodin vaihtamista ja kaikille ilmoittamista uudelleen. WIFIGATE korvaa tämän järjestelmällisellä, koko rakennuksen kattavalla kulunhallinnalla.",
-      "bullets": [
-        "Oma kulkuoikeus jokaiselle asukkaalle yhden yhteisen koodin sijaan",
-        "Asukkaiden lisääminen ja poistaminen ilman koko rakennuksen koodin vaihtoa",
-        "Erilliset kulkuoikeudet siivoojille, huollolle ja vakituisille toimittajille",
-        "Sopii aulan oviin, portteihin ja pysäköinnin sisäänajoihin",
-        "Vähemmän riippuvuutta koodilukoista, avaimista ja kaukosäätimistä",
-        "Kulkuhistoria taloyhtiön hallitukselle tai isännöitsijälle",
-        "Kaikkien rakennuksen kulkuoikeuksien hallinta puhelimella",
-        "Kulkuoikeus uusille vuokralaisille muuttopäivästä alkaen ilman avainten luovutusta"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Henkilökohtainen kulkuoikeus. Jokaiselle asukkaalle.",
+          "text": "Yhden kaikkien tunteman ja eteenpäin kulkevan koodin sijaan jokaisella asukkaalla on oma kulkuoikeutensa.",
+          "tags": [
+            "Ei yhteistä koodia"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Rakennuksen kulkuoikeudet",
+            "status": "Aktiivinen",
+            "rows": [
+              {
+                "name": "Emma Korhonen",
+                "badge": "Asukas"
+              },
+              {
+                "name": "Mikko Nieminen",
+                "badge": "Asukas"
+              },
+              {
+                "name": "Laura Mäkinen",
+                "badge": "Hallitus"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-plus",
+          "title": "Asukkaat vaihtuvat. Hallinta säilyy.",
+          "text": "Lisää ja poista asukkaita vaihtamatta rakennuksen koodia ja ilmoittamatta kaikille uudelleen.",
+          "tags": [
+            "Asukkaan lisäys",
+            "Kulkuoikeuden peruminen"
+          ]
+        },
+        {
+          "icon": "wrench",
+          "title": "Erillinen kulkuoikeus palveluntarjoajille",
+          "text": "Siivoojat, huoltohenkilöstö ja vakituiset toimittajat saavat oman kulkuoikeutensa rakennuksen koodin sijaan.",
+          "tags": [
+            "Siivous",
+            "Huolto",
+            "Toimittajat"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "Muutakin kuin aulan ovi",
+          "text": "Sopii aulan oveen, rakennuksen porttiin ja pysäköintihallin sisäänajoon, ja jokainen asukas avaa ne puhelimella omalla kulkuoikeudellaan.",
+          "tags": [
+            "Aula",
+            "Portti",
+            "Pysäköintihalli"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Vähemmän koodeja. Vähemmän kaukosäätimiä.",
+          "text": "Vähemmän riippuvuutta koodilukoista, avaimista ja kaukosäätimistä: rakennuksen sisäänkäynti avataan puhelimella.",
+          "tags": [
+            "Avaus puhelimella",
+            "Kaukosäätimet toimivat yhä"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Enemmän läpinäkyvyyttä taloyhtiön hallitukselle",
+          "text": "Hallitus tai isännöintiyritys näkee kulkuhistoriasta, kuka avasi ja milloin.",
+          "tags": [
+            "90 päivää taaksepäin",
+            "Isännöintiyritys"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Kaikki rakennuksen kulkuoikeudet suoraan puhelimesta",
+          "text": "Hallitse puhelimella ajantasaista listaa rakennuksen kaikista kulkuoikeuksista, ja jokaisella kulkuoikeudella on nimi.",
+          "tags": [
+            "Ajantasainen lista",
+            "Nimetyt kulkuoikeudet"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "Uusi asukas? Kulkuoikeus on jo valmiina.",
+          "text": "Uudet vuokralaiset saavat kulkuoikeuden muuttopäivästä alkaen, eikä avainten luovutuksesta tarvitse sopia.",
+          "tags": [
+            "Ensimmäisestä päivästä"
+          ]
+        }
       ],
       "seoTitle": "Kulunhallinta asuinrakennuksiin | WIFIGATE",
       "seoDescription": "WIFIGATE tuo asuinrakennuksiin älykkään kulunhallinnan: avaus puhelimella, väliaikaiset kulkuoikeudet vieraille, vähemmän koodilukkoja ja parempi läpinäkyvyys.",
@@ -360,15 +840,95 @@ export default {
         }
       ],
       "paragraph": "Toimistorakennusten on tarjottava työntekijöille, vierailijoille, toimittajille ja kiinteistöhenkilöstölle kätevä sisäänpääsy kuormittamatta vastaanottoa ja hallitsematta avaimia tai kortteja käsin. WIFIGATElla myönnät pysyviä kulkuoikeuksia työntekijöille ja väliaikaisia vierailijoille, ohjaat kulkua puhelimella ja hallitset sisäänkulkua tavalla, joka sopii nykyaikaiseen, siistiin ja järjestelmälliseen liiketoimintaympäristöön.",
-      "bullets": [
-        "Pysyvät kulkuoikeudet työntekijöille ja tiimeille",
-        "Väliaikainen kulkuoikeus vierailijoille, toimittajille ja lähetteille",
-        "Vähemmän kuormitusta vastaanotolle ja kiinteistöhenkilöstölle",
-        "Sopii ulko-oviin, kerroksiin, huoneisiin ja pysäköintiin",
-        "Järjestelmällinen käyttäjien ja kulkuoikeuksien hallinta",
-        "Vähemmän riippuvuutta avaimista, kulkukorteista ja koodeista",
-        "Modernimpi ja kätevämpi imago rakennukselle",
-        "Kulkuhistoria valvontaa ja läpinäkyvyyttä varten"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Pysyvä kulkuoikeus. Jokaiselle työntekijälle.",
+          "text": "Työntekijät ja tiimit saavat puhelimeensa henkilökohtaisen ja pysyvän kulkuoikeuden asettamastasi päivästä alkaen.",
+          "visual": {
+            "type": "roster",
+            "heading": "Toimiston tiimi",
+            "status": "Aktiivinen",
+            "rows": [
+              {
+                "name": "Sanna Laine",
+                "badge": "Pysyvä"
+              },
+              {
+                "name": "Antti Heikkinen",
+                "badge": "Pysyvä"
+              },
+              {
+                "name": "Johanna Koskinen",
+                "badge": "Pysyvä"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "send",
+          "title": "Aikarajattu kulkuoikeus. Kaikille muille.",
+          "text": "Vierailijat saavat aikarajatun kutsun jo ennen saapumistaan, ja siihen voi sisältyä myös saapumisohjeet.",
+          "tags": [
+            "Työnhakijat",
+            "Toimittajat",
+            "Lähetit"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Vähemmän kuormitusta vastaanotolle ja kiinteistöhenkilöstölle",
+          "text": "Vierailijat kulkevat sisään puhelimellaan odottamatta, että joku tulee alas avaamaan, ja vastaanotto hoitaa vähemmän saapujia.",
+          "tags": [
+            "Vastaanotto",
+            "Kiinteistöhenkilöstö"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "Ulko-ovelta pysäköintihalliin asti",
+          "text": "Sopii ulko-oviin, kerroksiin, huoneisiin ja pysäköinnin sisäänajoihin, ja kaikki avautuu puhelimella.",
+          "tags": [
+            "Ulko-ovet",
+            "Kerrokset ja huoneet",
+            "Pysäköintihalli"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "Käyttäjät ja kulkuoikeudet. Kaikki järjestyksessä.",
+          "text": "Työsuhteen alku ja loppu ovat yksi toimenpide listalla, ja kulkuoikeus sulkeutuu asettamanasi päivänä.",
+          "tags": [
+            "Työsuhteen alku",
+            "Työsuhteen loppu"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Vähemmän kulkukortteja, avaimia ja koodeja",
+          "text": "Vähemmän myönnettäviä kulkukortteja ja kerättäviä avaimia työsuhteen päättyessä, koska jokainen työntekijä kulkee omalla puhelimellaan.",
+          "tags": [
+            "Sisäänkulku puhelimella"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Moderni ja kätevä imago rakennukselle",
+          "text": "Työntekijät ja vierailijat kulkevat sisään puhelimella tavalla, joka sopii nykyaikaiseen, siistiin ja järjestelmälliseen liiketoimintaympäristöön.",
+          "tags": [
+            "Työntekijät",
+            "Vierailijat"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Jokaisella avauksella on nimi ja aika",
+          "text": "Voit tarkistaa jälkikäteen, kuka kävi kerroksessa, varastossa tai pysäköintihallissa, valvonnan ja läpinäkyvyyden tueksi.",
+          "tags": [
+            "Viimeiset 90 päivää",
+            "Kuka ja milloin"
+          ]
+        }
       ],
       "seoTitle": "Kulunhallinta toimistorakennuksiin | WIFIGATE",
       "seoDescription": "WIFIGATElla toimistorakennukset hallitsevat työntekijöiden, vierailijoiden ja toimittajien kulkua puhelimella pysyvillä ja väliaikaisilla kulkuoikeuksilla.",
@@ -414,15 +974,102 @@ export default {
         }
       ],
       "paragraph": "Pienyritykset, klinikat, studiot, varastot ja toimistot luottavat usein koodilukkoon, avaimeen tai yksinkertaiseen magneettilukkoon. Ongelma alkaa, kun koodi leviää työntekijöiden, toimittajien ja vieraiden kesken tai kun tarvitaan väliaikainen kulkuoikeus heikentämättä turvallisuutta. WIFIGATElla hallitset sisäänkäyntiovea puhelimella, jaat väliaikaisia kulkuoikeuksia ja vähennät pysyvien koodien, fyysisten avainten ja jokaisen sisäänkulun käsin sopimisen tarvetta.",
-      "bullets": [
-        "Sopii sisäänkäyntioviin, joissa on sähkö- tai magneettilukko",
-        "Avaus puhelimella työntekijöille ja esihenkilöille",
-        "Väliaikainen kulkuoikeus vieraille, toimittajille ja huoltomiehille",
-        "Vähemmän tarvetta koodilukolle tai pysyvälle koodille",
-        "Sopii pienyrityksiin, klinikoille, studioihin ja toimistoihin",
-        "Yksinkertaisempi ja turvallisempi kulkuoikeuksien hallinta",
-        "Vähemmän tarvetta fyysisille avaimille",
-        "Kätevä vaihtoehto yrityksille, jotka haluavat modernin sisäänkulun ilman monimutkaista järjestelmää"
+      "benefits": [
+        {
+          "icon": "shield-check",
+          "title": "Helppo kulkuoikeuksien hallinta. Ja turvallisempi.",
+          "text": "Jokaisella työntekijällä, toimittajalla tai vieraalla on henkilökohtainen kulkuoikeus, jonka voit perua milloin tahansa, ja kulkuhistoria näyttää, kuka avasi ja milloin.",
+          "tags": [
+            "Peruttavissa milloin tahansa",
+            "Kulkuhistoria"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Kulkuhistoria",
+            "status": "Tänään",
+            "rows": [
+              {
+                "time": "07:40",
+                "name": "Toimittaja",
+                "event": "Avattu"
+              },
+              {
+                "time": "08:50",
+                "name": "Laura, esihenkilö",
+                "event": "Avattu"
+              },
+              {
+                "time": "19:30",
+                "name": "Siivoustiimi",
+                "event": "Avattu"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Väliaikainen kulkuoikeus, joka sulkeutuu itsestään.",
+          "text": "Vieraat, toimittajat ja huoltomiehet saavat kulkuoikeuden omaan aikaikkunaansa, eikä omistajan tarvitse tulla erikseen paikalle avaamaan.",
+          "tags": [
+            "Toimittajat",
+            "Asentajat",
+            "Lähetit"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "Ovessa jo oleva lukko. Nyt se aukeaa puhelimella.",
+          "text": "WIFIGATE sopii sähkö- tai magneettilukolla varustettuihin sisäänkäyntioviin ja avaa ne puhelimella nykyisen lukon pysyessä paikallaan.",
+          "tags": [
+            "Sähkölukko",
+            "Magneettilukko"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Työntekijät ja esihenkilöt avaavat puhelimella.",
+          "text": "Jokainen työntekijä ja esihenkilö avaa sisäänkäyntioven sovelluksesta henkilökohtaisella kulkuoikeudella, mikä vähentää sisäänkulkujen sopimista käsin.",
+          "tags": [
+            "Työntekijät",
+            "Esihenkilöt"
+          ]
+        },
+        {
+          "icon": "user-check",
+          "title": "Vähemmän käsistä käsiin kulkevia koodeja.",
+          "text": "Kaikille annettu koodi voi jäädä niille, joiden ei enää tarvitse päästä sisään, ja henkilökohtainen kulkuoikeus vähentää koodilukon ja pysyvän koodin tarvetta.",
+          "tags": [
+            "Koodilukko",
+            "Pysyvä koodi"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Vähemmän avaimia nipussa.",
+          "text": "Ovi aukeaa puhelimella, joten työntekijöiden ja esihenkilöiden kesken kiertää vähemmän fyysisiä avaimia.",
+          "tags": [
+            "Fyysiset avaimet"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Moderni sisäänkulku. Ilman monimutkaista järjestelmää.",
+          "text": "Ohjauskeskusta, hallintaohjelmistoa tai kortinlukijaa ei tarvitse asentaa, ja kaikkea hallitaan sovelluksesta.",
+          "tags": [
+            "Ei ohjauskeskusta",
+            "Ei kortinlukijaa"
+          ]
+        },
+        {
+          "icon": "briefcase",
+          "title": "Pienyritykselle, klinikalle ja toimistolle.",
+          "text": "Pienyritykset, klinikat, studiot ja toimistot hallitsevat sisäänkäyntiovea puhelimella ja jakavat väliaikaisia kulkuoikeuksia tarpeen mukaan.",
+          "tags": [
+            "Klinikat",
+            "Toimistot",
+            "Varastot"
+          ]
+        }
       ],
       "seoTitle": "Yritysten sisäänkäyntiovet ja magneettilukot | WIFIGATE",
       "seoDescription": "WIFIGATE avaa yritysten sisäänkäyntiovet ja magneettilukot puhelimella: kulkuoikeuksien hallinta, väliaikainen kulku, vähemmän koodeja ja avaimia.",
@@ -468,15 +1115,91 @@ export default {
         }
       ],
       "paragraph": "Urheilutilojen, padelkenttien, tenniskenttien, kuntosalien ja harjoituskeskusten on hallittava jäsenten, valmentajien, joukkueiden ja vieraiden kulkua aukioloaikojen, varausten ja tapahtumien mukaan. WIFIGATElla myönnät väliaikaisia tai pysyviä kulkuoikeuksia puhelimella, vähennät riippuvuutta jaetusta avaimesta tai koodista ja parannat käyttäjien sisäänpääsykokemusta, erityisesti kohteissa, joissa kävijämäärät vaihtelevat päivän mittaan.",
-      "bullets": [
-        "Sopii padelkentille, tenniskentille, kuntosaleille ja harjoituskeskuksiin",
-        "Kulku aukioloaikojen, varausten tai kulkuoikeuksien mukaan",
-        "Hallinta jäsenille, valmentajille, työntekijöille ja vieraille",
-        "Vähemmän riippuvuutta jaetuista avaimista ja koodeista",
-        "Nopea ja kätevä sisäänpääsy puhelimella",
-        "Sopii kohteisiin, joiden aukioloajat vaihtelevat",
-        "Väliaikaiset kulkuoikeudet tapahtumiin, tunneille ja harjoituksiin",
-        "Kulkuhistoria valvontaa ja toimintaa varten"
+      "benefits": [
+        {
+          "icon": "calendar-check",
+          "title": "Varaa kenttä. Kulkuoikeus aukeaa varauksen mukaan.",
+          "text": "Kentän tietyksi tunniksi varannut saa kulkuoikeuden, joka aukeaa varatun tunnin alkaessa ja sulkeutuu sen päättyessä.",
+          "tags": [
+            "Aukioloajat",
+            "Varaukset",
+            "Kulkuoikeudet"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Kulkukutsu",
+            "status": "Voimassa",
+            "guest": "Aino, kenttä 2",
+            "when": "Tänään 18:00–19:30",
+            "note": "Sisältää saapumisohjeet"
+          }
+        },
+        {
+          "icon": "users",
+          "title": "Jäsen, valmentaja ja vieras. Jokaisella oma kulkuoikeus.",
+          "text": "Vakituiset jäsenet, tiettyinä päivinä käyvät valmentajat, työntekijät ja kertavieraat hallitaan yhdellä listalla, eikä avain kulje kädestä käteen.",
+          "tags": [
+            "Jäsenet",
+            "Valmentajat",
+            "Työntekijät ja vieraat"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Vähemmän avaimia. Vähemmän yhteisiä koodeja.",
+          "text": "Yhteinen koodi avaa oven silloinkin, kun sen ei enää pitäisi, mutta henkilökohtainen kulkuoikeus sulkeutuu, kun sille ei ole tarvetta.",
+          "tags": [
+            "Henkilökohtainen kulkuoikeus"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Tunti, harjoitus tai tapahtuma. Kulku vain sen ajaksi.",
+          "text": "Tunnin, harjoituksen tai tapahtuman osallistujat saavat väliaikaisen kulkuoikeuden, joka on voimassa vain asettaminasi kellonaikoina.",
+          "tags": [
+            "Tapahtumat",
+            "Tunnit",
+            "Harjoitukset"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Tiedä, kuka oli paikalla ja milloin.",
+          "text": "Kulkuhistoria näyttää, kuka avasi ja milloin, tukee toimintaa ja vahvistaa, että paikat suljettiin päivän päätteeksi.",
+          "tags": [
+            "Valvonta",
+            "Toiminta",
+            "Viimeiset 90 päivää"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Sisään puhelimella. Nopeasti ja kätevästi.",
+          "text": "Jokainen käyttäjä avaa itse sovelluksesta, eikä kenenkään tarvitse odottaa portilla päästämässä häntä sisään.",
+          "tags": [
+            "Suora yhteys",
+            "Ei SIM-korttia"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Aukioloajat muuttuvat? Niin muuttuu kulkukin.",
+          "text": "Ajastetut tapahtumat voivat avata päivien ja kellonaikojen mukaan, joten kulku vastaa paikan aukioloaikoja.",
+          "tags": [
+            "Ajastetut tapahtumat",
+            "Viikoittainen tai kertaluonteinen"
+          ]
+        },
+        {
+          "icon": "dumbbell",
+          "title": "Padelkentältä kuntosaliin.",
+          "text": "Sopii padel- ja tenniskentille, kuntosaleille ja harjoituskeskuksiin, erityisesti kun kävijämäärät vaihtelevat päivän mittaan.",
+          "tags": [
+            "Padel",
+            "Tenniskentät",
+            "Kuntosalit"
+          ]
+        }
       ],
       "seoTitle": "Kulunhallinta urheilutiloihin ja padelkentille | WIFIGATE",
       "seoDescription": "WIFIGATE tuo kulunhallinnan urheilutiloihin, padelkentille ja kuntosaleille: sisäänpääsy puhelimella sekä väliaikaiset tai pysyvät kulkuoikeudet.",
@@ -522,15 +1245,96 @@ export default {
         }
       ],
       "paragraph": "Varastoalueet ja lokerohuoneet nojaavat yleensä jaettuihin koodeihin, koodilukkoihin ja fyysisiin avaimiin, joita kopioidaan, annetaan eteenpäin ja vaihdetaan harvoin. WIFIGATE siirtää kulun puhelimeen: jokaisella vuokralaisella on henkilökohtainen kulkuoikeus alueen porttiin, rakennuksen sisäänkäyntiin ja, jos asennettu, sähkölukolla varustettuun varastoyksikköön tai lokeroon. Kulkuoikeus on rajattu valitsemiisi tunteihin ja poistetaan heti, kun vuokrasuhde päättyy. Puhelin on suoraan yhteydessä paikan päällä olevaan laitteeseen ilman SIM-korttia tai internetyhteyttä ovella, eikä tavallisessa käytössä ole kuukausitilausta.",
-      "bullets": [
-        "Avaa alueen portti, rakennuksen ovi ja lokero puhelimella",
-        "Henkilökohtainen kulkuoikeus jokaiselle vuokralaiselle",
-        "Kulku rajattu aukioloaikoihin tai omaan aikaikkunaan",
-        "Kertakäyttöinen kulkuoikeus muuttomiehille ja perheenjäsenille",
-        "Poista kulkuoikeus heti, kun vuokrasuhde päättyy",
-        "Historia siitä, kuka avasi ja milloin",
-        "Ei jaettuja koodeja, koodilukkoja tai vaihdettavia avaimia",
-        "Ei SIM-korttia eikä internetyhteyttä ovella"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Henkilökohtainen kulkuoikeus. Jokaiselle vuokralaiselle.",
+          "text": "Ei jaettua koodia, jonka entiset vuokralaiset vielä muistavat: jokaisella vuokralaisella on oma kulkuoikeutensa.",
+          "visual": {
+            "type": "roster",
+            "heading": "Alueen kulkuoikeudet",
+            "status": "Aktiivinen",
+            "rows": [
+              {
+                "name": "Riikka Lehtonen",
+                "badge": "Valtuutettu"
+              },
+              {
+                "name": "Jari Salminen",
+                "badge": "Valtuutettu"
+              },
+              {
+                "name": "Minna Hämäläinen",
+                "badge": "Valtuutettu"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-minus",
+          "title": "Vuokrasuhde päättyy. Niin myös kulkuoikeus.",
+          "text": "Poista kulkuoikeus heti, kun sopimus päättyy tai maksu on myöhässä, ilman avainten keräämistä.",
+          "tags": [
+            "Sopimuksen päättyminen",
+            "Myöhässä oleva maksu"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Portti, ovi ja lokero. Puhelimella.",
+          "text": "Jokainen vuokralainen avaa alueen portin, rakennuksen oven ja, jos asennettu, myös sähkölukolla varustetun varastoyksikön tai lokeron.",
+          "tags": [
+            "Alueen portti",
+            "Rakennuksen ovi",
+            "Sähkölukko"
+          ]
+        },
+        {
+          "icon": "clock",
+          "title": "Asettamasi kulkuajat.",
+          "text": "Salli sisäänpääsy vain alueen aukioloaikoina tai anna vuokralaiselle laajempi aikaikkuna.",
+          "tags": [
+            "Aukioloajat",
+            "Oma aikaikkuna"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "Kertakäyttöinen kulkuoikeus. Muuttomiehille ja perheenjäsenille.",
+          "text": "Muuttomies tai perheenjäsen voi saada kulkuoikeuden yhdeksi päiväksi ilman jaettua koodia ja ilman avainta.",
+          "tags": [
+            "Muuttomiehet",
+            "Perheenjäsenet",
+            "Yksi päivä"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Tiedät, kuka tuli ja milloin.",
+          "text": "Jokainen avaus kirjataan käyttäjän nimellä ja kellonajalla, joten käyntejä koskeviin kysymyksiin vastaus löytyy historiasta eikä valvontakameroista.",
+          "tags": [
+            "90 päivää taaksepäin",
+            "Nimi ja aika"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Ei jaettua koodia. Ei vaihdettavia avaimia.",
+          "text": "Kopioitavat ja käsistä käsiin kulkevat koodit, koodilukot ja avaimet korvautuvat henkilökohtaisella kulkuoikeudella puhelimessa.",
+          "tags": [
+            "Ei koodilukkoa",
+            "Ei avaimia"
+          ]
+        },
+        {
+          "icon": "sim-off",
+          "title": "Ei SIM-korttia. Ei internetyhteyttä ovella.",
+          "text": "Puhelin on suoraan yhteydessä paikan päällä olevaan laitteeseen, eikä tavallisessa käytössä ole kuukausitilausta.",
+          "tags": [
+            "Suora yhteys",
+            "Ei kuukausitilausta"
+          ]
+        }
       ],
       "seoTitle": "Älykäs kulunhallinta varastoihin ja lokeroihin | WIFIGATE",
       "seoDescription": "WIFIGATE antaa jokaiselle vuokralaiselle oman kulkuoikeuden porttiin, oviin ja lokeroon: rajattu aukioloaikoihin, kirjattu historiaan, poistuu vuokran päättyessä.",

@@ -36,15 +36,89 @@ export default {
         }
       ],
       "paragraph": "A WIFIGATE lehetővé teszi, hogy a szállodák, a vendégapartmanok (Airbnb) és az üdülőkomplexumok kényelmes, biztonságos digitális belépést kínáljanak a vendégeknek, közvetlenül a mobiltelefonjukról.\nA mágneskártyák kiadása, a fizikai kulcsok átadása és a kulcsdobozok (lockbox) helyett a beléptetés automatikussá válik.\nA WIFIGATE Hosttal foglalási rendszerét közvetlenül összekapcsolhatja a beléptetőrendszerrel.\nEnnek köszönhetően a foglalás megerősítése után a vendég személyes belépési jogosultságot kap.\nA jogosultság pontosan a check-in időpontjában lép életbe, és check-outkor automatikusan megszűnik, kézi beavatkozás, kulcsátadás és a recepció vagy a házigazdák egyeztetése nélkül.",
-      "bullets": [
-        "Automatikus vendéghozzáférés a foglalás megerősítése után",
-        "Teljes automatizálás a WIFIGATE Hosttal",
-        "Ideiglenes hozzáférés a tartózkodás napjaihoz és időpontjaihoz igazítva",
-        "Kevesebb szobakártya-kiadás, -átadás és -csere",
-        "Jogosultságkezelés a személyzetnek, takarítóknak, karbantartóknak és beszállítóknak",
-        "Gördülékenyebb, kényelmesebb érkezés a vendégeknek",
-        "A hozzáférés automatikusan megszűnik check-outkor",
-        "Hozzáférési előzmények az átláthatóság és az ellenőrzés érdekében"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Foglalás megerősítve. A hozzáférés már úton van.",
+          "text": "A WIFIGATE Hosttal a foglalás megerősítése automatikusan létrehozza a személyes belépési jogosultságot, és elküldi a vendégnek.",
+          "tags": [
+            "Szállodák",
+            "Airbnb",
+            "Vendégapartmanok"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Vendégmeghívó",
+            "status": "Elküldve",
+            "guest": "Kiss Anna",
+            "when": "Péntek 15:00 – vasárnap 11:00",
+            "note": "Érkezési útmutatóval"
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Hozzáférés a tartózkodás napjaira.",
+          "text": "Minden vendég olyan meghívót kap a telefonjára, amely csak a tartózkodás napjain és időpontjaiban érvényes.",
+          "tags": [
+            "Bejelentkezés",
+            "Napok és időpontok"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Kijelentkezéskor a hozzáférés magától lezárul.",
+          "text": "Senkinek sem kell emlékeznie arra, hogy visszavonja a hozzáférést: a jogosultság a távozás időpontjában lejár, akkor is, ha a személyzetből senki sincs a helyszínen.",
+          "tags": [
+            "Automatikus lejárat",
+            "Távozási időpont"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Minden munkatársnak saját jogosultság.",
+          "text": "Minden munkatárs, takarító, karbantartó és beszállító személyes jogosultságot kap, amelyet Ön az alkalmazásban ad meg és von vissza.",
+          "tags": [
+            "Takarítás",
+            "Karbantartás",
+            "Beszállítók"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Kevesebb kártya. Nincs kulcsdoboz.",
+          "text": "Kevesebb szobakártyát kell kiadni, átadni és cserélni, és nincs vendégről vendégre öröklődő kulcsdoboz-kód.",
+          "tags": [
+            "Szobakártyák",
+            "Fizikai kulcsok"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Ki és mikor nyitott. Minden átlátható.",
+          "text": "A belépési előzményekből látható, ki és mikor nyitott, így a vendégek, a személyzet és a beszállítók belépése átlátható és ellenőrizhető.",
+          "tags": [
+            "Az elmúlt 90 nap"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Gördülékenyebb érkezés. Senkire sem kell várni.",
+          "text": "A vendég maga nyitja a kaput, az ajtót vagy a parkolót, közvetlenül a telefonján lévő WIFIGATE alkalmazásból.",
+          "tags": [
+            "Kapu",
+            "Ajtó",
+            "Parkoló"
+          ]
+        },
+        {
+          "icon": "zap",
+          "title": "Teljes automatizálás a WIFIGATE Hosttal.",
+          "text": "A WIFIGATE Host összeköti foglalási rendszerét a beléptetőrendszerrel, adatmásolás, kártyakiadás és kézi lépés nélkül.",
+          "tags": [
+            "Foglalási rendszer",
+            "API-kapcsolat"
+          ]
+        }
       ],
       "seoTitle": "WIFIGATE | Vendégbeléptetés szállodáknak, Airbnb-nek és üdülőknek",
       "seoDescription": "A WIFIGATE Hosttal a szállodák, Airbnb-szállások és üdülők automatikusan, foglalásonként adnak személyes belépési jogosultságot, kulcs, mágneskártya és kulcsdoboz nélkül.",
@@ -90,15 +164,95 @@ export default {
         }
       ],
       "paragraph": "Az üzletek és vállalkozások redőnyeit gyakran távirányítóval, kulccsal, külső kulcsdobozzal vagy az épületen kívül elhelyezett kapcsolóval működtetik. Ezek elveszhetnek, volt munkatársaknál maradhatnak, lemásolhatók, vagy kitett hozzáférési ponttá válhatnak. Ráadásul a kulcsos nyitás vagy zárás miatt közvetlenül a kezelőpont mellett kell állni, kulccsal a kézben, és néha a redőnyre sincs jó rálátás. A WIFIGATE az irányítást az alkalmazásba helyezi, a beléptetés vezérlését pedig egy védettebb, belső oldalra, így kényelmesebb a nyitás és a zárás, kezelhetők a munkatársak és beszállítók jogosultságai, és csökken a kulcsoktól, távirányítóktól és kitett hozzáférési pontoktól való függés.",
-      "bullets": [
-        "Nyitás és zárás telefonról, távirányítók nélkül",
-        "Kevesebb függés a másolható vagy elveszíthető kulcsoktól",
-        "Kevesebb kitett hozzáférési pont az üzlet külső oldalán",
-        "Kényelmesebb vezérlés, jobb rálátással a redőnyre",
-        "Jogosultságkezelés munkatársaknak, vezetőknek és beszállítóknak",
-        "Ideiglenes hozzáférés idő vagy igény alapján",
-        "Alkalmas üzletekhez, raktárakhoz, szervizbejáratokhoz és vállalkozásokhoz",
-        "Belső, rendezettebb és biztonságosabb megoldás a napi működéshez"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Személyes jogosultság. Minden munkatársnak, vezetőnek és beszállítónak.",
+          "text": "Mindenki saját jogosultságot kap az alkalmazásban, amely bármikor visszavonható.",
+          "visual": {
+            "type": "roster",
+            "heading": "Redőnyjogosultságok",
+            "status": "Aktív",
+            "rows": [
+              {
+                "name": "Üzlettulajdonos",
+                "badge": "Adminisztrátor"
+              },
+              {
+                "name": "Műszakos munkatárs",
+                "badge": "Jogosult"
+              },
+              {
+                "name": "Árubeszállító",
+                "badge": "Ideiglenes"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "shield-check",
+          "title": "Kevesebb kitett hozzáférési pont. A vezérlés beljebb kerül.",
+          "text": "A külső falon lévő kapcsoló vagy kulcsdoboz helyett a vezérlési pont az üzlet védett, belső oldalára kerülhet.",
+          "tags": [
+            "Védett belső oldal",
+            "Kívülről elérhetetlen"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Nyitás és zárás. Egyenesen a telefonról.",
+          "text": "A jogosultak a WIFIGATE alkalmazásból működtetik a redőnyt, anélkül hogy távirányítót kellene keresniük vagy a munkatársak között továbbadniuk.",
+          "tags": [
+            "Távirányítók nélkül",
+            "Közvetlen kapcsolat"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Kevesebb másolható vagy elveszíthető kulcs.",
+          "text": "A volt munkatársnál maradt kulcs tovább működik, a telefonos jogosultság viszont az utolsó munkanapján lezárul.",
+          "tags": [
+            "Zárcsere nélkül",
+            "Eszközök visszagyűjtése nélkül"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Ideiglenes hozzáférés. Csak amikor kell.",
+          "text": "Időkorlátos hozzáférést oszthat meg egy beszállítóval vagy ideiglenes munkatárssal, amely az idő lejártával megszűnik.",
+          "tags": [
+            "Beszállítók",
+            "Ideiglenes munkatársak"
+          ]
+        },
+        {
+          "icon": "eye",
+          "title": "Kényelmesebb vezérlés. Jobb rálátás.",
+          "text": "A redőnyt telefonról, biztonságosabb távolságból működteti, ahelyett hogy kulccsal a kézben közvetlenül a vezérlési pont mellett kellene állnia.",
+          "tags": [
+            "Biztonságosabb távolság",
+            "Kulcs nélkül"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "Napi működés. Rendezettebben és biztonságosabban.",
+          "text": "A WIFIGATE-et a meglévő redőnyvezérlőre telepítik, az adatok pedig titkosítva, magán az eszközön tárolódnak.",
+          "tags": [
+            "Belső megoldás",
+            "Titkosított adatok"
+          ]
+        },
+        {
+          "icon": "store",
+          "title": "Minden vállalkozásnak, amelynek elektromos redőnye van.",
+          "text": "Mindenhol, ahol kevesebb kulcsot és kevesebb kézről kézre járó távirányítót szeretnének.",
+          "tags": [
+            "Üzletek",
+            "Raktárak",
+            "Szervizbejáratok"
+          ]
+        }
       ],
       "seoTitle": "Okos redőnyvezérlés üzleteknek és vállalkozásoknak | WIFIGATE",
       "seoDescription": "A WIFIGATE telefonos redőnyvezérlést ad üzleteknek és vállalkozásoknak, jogosultságkezeléssel, kevesebb kulccsal és távirányítóval, és kevesebb kitett hozzáférési ponttal.",
@@ -144,15 +298,103 @@ export default {
         }
       ],
       "paragraph": "Az elektromos kapukat és parkolósorompókat lakók, munkatársak, vendégek és beszállítók használják, de a távirányítók, a kódok és a kapunyitást kérő telefonhívások kezelése gyorsan nehézkessé válik. A WIFIGATE-tel telefonról nyithatja a kaput, állandó vagy ideiglenes hozzáférést oszthat meg, automatikus nyitást használhat a rendszeres felhasználóknak, és igény szerint ütemezett eseményeket állíthat be. A rendszer biztonságos, titkosított és privát működésre készült, havi előfizetés és rendszeres terhelés nélkül, és a meglévő távirányítók az alkalmazásos vezérlés mellett is tovább használhatók.",
-      "bullets": [
-        "Elektromos kapu vagy parkolósorompó nyitása telefonról",
-        "Nincs havi előfizetés és rendszeres terhelés",
-        "Ideiglenes hozzáférés megosztása vendégekkel, beszállítókkal és munkatársakkal",
-        "Auto Open a rendszeres felhasználók mindennapi belépéséhez",
-        "Ütemezett nyitási események napok és időpontok szerint",
-        "Vezérlés az alkalmazásból vagy a meglévő távirányítókkal",
-        "Kevesebb fizikai távirányító kiosztása",
-        "Nyitási előzmények ellenőrzéshez és átláthatósághoz"
+      "benefits": [
+        {
+          "icon": "smartphone",
+          "title": "Kapu vagy parkolósorompó. Egyenesen a telefonról.",
+          "text": "Aki állandó vagy ideiglenes jogosultságot kapott, a WIFIGATE alkalmazásból nyitja az elektromos kaput vagy a parkolósorompót.",
+          "tags": [
+            "Elektromos kapu",
+            "Parkolósorompó",
+            "SIM nélkül"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Nyitási előzmények",
+            "status": "Ma",
+            "rows": [
+              {
+                "time": "07:42",
+                "name": "Dóra · lakó",
+                "event": "Nyitás"
+              },
+              {
+                "time": "08:15",
+                "name": "Ádám · munkatárs",
+                "event": "Nyitás"
+              },
+              {
+                "time": "10:30",
+                "name": "Bence · beszállító",
+                "event": "Nyitás"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "card-off",
+          "title": "Nincs előfizetés. Nincs rendszeres terhelés.",
+          "text": "Egyszer fizet az eszközért és a telepítésért, havi előfizetés és rendszeres terhelés nélkül.",
+          "tags": [
+            "Egyszeri fizetés",
+            "Eszköz és telepítés"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "Ideiglenes hozzáférés. Magától lezárul.",
+          "text": "Ahelyett, hogy telefonhívásokra kellene kaput nyitnia, küldjön olyan jogosultságot, amely csak abban az időablakban érvényes, amikor szükség van rá.",
+          "tags": [
+            "Vendégek",
+            "Beszállítók",
+            "Munkatársak"
+          ]
+        },
+        {
+          "icon": "hands-free",
+          "title": "Auto Open. A kapu kinyílik, amikor Ön megérkezik.",
+          "text": "A rendszeres felhasználók esetében az automatikus nyitás felismeri az érkezést, és kinyitja a kaput: nem kell távirányítót keresni, sem esőben lehúzni az ablakot.",
+          "tags": [
+            "Rendszeres felhasználók",
+            "Mindennapi belépés"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Ütemezett események. Napok és időpontok szerint.",
+          "text": "Előre beállíthatja, mely napokon és órákban maradjon nyitva a kapu, heti vagy egyszeri eseményként.",
+          "tags": [
+            "Heti",
+            "Egyszeri"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "Alkalmazás vagy távirányító. Ön választ.",
+          "text": "A meglévő távirányítók az alkalmazásos vezérlés mellett továbbra is működnek, így semmit sem kell kidobni.",
+          "tags": [
+            "Meglévő távirányítók",
+            "Alkalmazásos vezérlés"
+          ]
+        },
+        {
+          "icon": "user-plus",
+          "title": "Kevesebb fizikai távirányítót kell kiosztani.",
+          "text": "Ahelyett, hogy minden lakónak, munkatársnak vagy beszállítónak távirányítót osztana ki, adjon mindenkinek személyes jogosultságot az alkalmazásban.",
+          "tags": [
+            "Személyes jogosultság",
+            "Kezelés az alkalmazásban"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Nyitási előzmények. Ellenőrzés és átláthatóság.",
+          "text": "Láthatja, ki és mikor nyitotta a kaput az elmúlt 90 napban.",
+          "tags": [
+            "90 napra visszamenőleg",
+            "Ki és mikor"
+          ]
+        }
       ],
       "seoTitle": "Elektromos kapu és sorompó nyitása előfizetés nélkül | WIFIGATE",
       "seoDescription": "A WIFIGATE telefonról nyitja az elektromos kapukat és sorompókat: Auto Open, ütemezett események, meglévő távirányítók, jogosultságkezelés, havi előfizetés nélkül.",
@@ -198,15 +440,101 @@ export default {
         }
       ],
       "paragraph": "A garázskapukat és magánparkolókat általában fizikai távirányítókkal vezérlik, amelyek elveszhetnek, olyanoknál maradhatnak, akiknek már nincs szükségük hozzáférésre, vagy bizonyos helyzetekben lemásolhatók. A WIFIGATE digitális, telefonos hozzáférésre váltja a vezérlést, így kezelheti a családtagok, munkatársak vagy vendégek jogosultságait, és távirányító vagy kód átadása nélkül oszthat meg ideiglenes hozzáférést. Így a használat kényelmesebb, privátabb és rendezettebb, kevesebb fizikai belépőeszközzel.",
-      "bullets": [
-        "Garázskapu nyitása telefonról",
-        "Kevesebb függés fizikai távirányítóktól",
-        "A távirányító elvesztéséből, továbbadásából vagy másolásából eredő kockázat csökkentése",
-        "Hozzáférés kezelése családtagoknak, munkatársaknak és vendégeknek",
-        "Ideiglenes hozzáférés távirányító vagy kód átadása nélkül",
-        "Alkalmas magánparkolókhoz, házakhoz és kertkapcsolatos lakásokhoz",
-        "Privátabb és biztonságosabb hozzáférés-kezelés",
-        "Kényelmesebb és biztonságosabb mindennapi vezérlés"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Személyes jogosultság mindenkinek, aki belép.",
+          "text": "Az alkalmazásban családtagokat, munkatársakat és vendégeket vehet fel és törölhet, és mindenki a saját telefonjáról, saját jogosultsággal nyit.",
+          "tags": [
+            "Családtagok",
+            "Munkatársak",
+            "Vendégek"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Garázshozzáférés",
+            "status": "Aktív",
+            "rows": [
+              {
+                "name": "Anya",
+                "badge": "Adminisztrátor"
+              },
+              {
+                "name": "Máté",
+                "badge": "Családtag"
+              },
+              {
+                "name": "Szakember",
+                "badge": "Ideiglenes jogosultság"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Kisebb kockázat az elveszett vagy lemásolt távirányító miatt.",
+          "text": "Az elveszett, továbbadott vagy lemásolt távirányító továbbra is nyithat, a telefonos jogosultságot viszont egy pillanat alatt törölheti az alkalmazásból.",
+          "tags": [
+            "Elvesztés",
+            "Továbbadás",
+            "Másolás"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "A garázskapu a telefonról nyílik.",
+          "text": "A WIFIGATE a garázskapuhoz csatlakozik, Ön pedig a WIFIGATE alkalmazásból nyitja, azon a telefonon, amely úgyis Önnél van.",
+          "tags": [
+            "Közvetlen kapcsolat",
+            "SIM nélkül"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "Kevesebb távirányító. Kevesebb bajlódás.",
+          "text": "Kevesebb távirányítót kell megvenni, kódolni, átadni és kezelni, ahelyett hogy minden autóhoz és minden felhasználóhoz külön távirányító kellene.",
+          "tags": [
+            "Meglévő távirányítók mellett"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Ideiglenes hozzáférés. Távirányító átadása nélkül.",
+          "text": "A szakember vagy a vendég ideiglenes jogosultságot kap, amely akkor jár le, amikor Ön szeretné, távirányító vagy kód átadása nélkül.",
+          "tags": [
+            "Szakemberek",
+            "Vendégek"
+          ]
+        },
+        {
+          "icon": "garage",
+          "title": "Magánparkolóhoz, házhoz és kertkapcsolatos lakáshoz.",
+          "text": "A WIFIGATE-et a garázskapu vagy a parkolóbejárat meglévő vezérlőjére telepítik, családi háznál vagy kertkapcsolatos lakásnál.",
+          "tags": [
+            "Magángarázs",
+            "Magánparkoló",
+            "Kertkapcsolatos lakások"
+          ]
+        },
+        {
+          "icon": "shield-check",
+          "title": "Privátabb és biztonságosabb hozzáférés.",
+          "text": "A WIFIGATE fejlett biztonsági rétegekkel és titkosított tárolással védi a hozzáférést, és óvja a felhasználók magánszféráját.",
+          "tags": [
+            "Titkosított tárolás",
+            "Biztonsági rétegek",
+            "Adatvédelem"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Kényelmesebb és biztonságosabb. Minden nap.",
+          "text": "Az elmúlt 90 nap belépési előzményeiből látható, ki és mikor nyitotta a garázst.",
+          "tags": [
+            "Belépési előzmények",
+            "90 nap"
+          ]
+        }
       ],
       "seoTitle": "Okos nyitás garázskapukhoz és magánparkolókhoz | WIFIGATE",
       "seoDescription": "A WIFIGATE telefonról nyitja a garázskapukat és magánparkolókat, kevesebb fizikai távirányítóval, ideiglenes jogosultságokkal, kényelmesebb és privátabb hozzáférés-kezeléssel.",
@@ -252,15 +580,84 @@ export default {
         }
       ],
       "paragraph": "Magánotthonokban a kódbillentyűzetek, kulcsok és távirányítók gyenge ponttá válhatnak. Idővel kopás vagy nyomok jelennek meg a billentyűkön, a távirányítók elveszhetnek vagy kézről kézre járhatnak, a kódot pedig olykor futároknak, szolgáltatóknak vagy vendégeknek adják meg, akiknél akkor is megmarad, amikor már nincs rá szükségük. A WIFIGATE-tel telefonról kezelheti a bejáratot, állandó kód felfedése nélkül oszthat meg ideiglenes vendéghozzáférést, és zárak, kódok vagy távirányítók cseréje nélkül vonhatja vissza a jogosultságokat.",
-      "bullets": [
-        "Kevesebb függés kódbillentyűzettől, kulcsoktól és távirányítóktól",
-        "Ideiglenes hozzáférés futároknak, vendégeknek és szolgáltatóknak",
-        "Jogosultságok egyszerű visszavonása telefonról",
-        "A kódmegosztásból vagy távirányító-átadásból eredő kockázat csökkentése",
-        "Alkalmas kapukhoz, ajtókhoz, parkolókhoz és garázsokhoz magánotthonokban",
-        "Egyszerű kezelés családtagoknak és rendszeres felhasználóknak",
-        "Kényelmesebb mindennapi belépés",
-        "Jobb adatvédelem és jobb kontroll afelett, ki léphet be"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Ideiglenes jogosultság. Futárnak, vendégnek és szerelőnek.",
+          "text": "Küldjön időkorlátos meghívót, amely csak az Ön által választott ideig működik, állandó kód felfedése nélkül.",
+          "tags": [
+            "Futárok",
+            "Vendégek",
+            "Szerelők"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Vendégmeghívó",
+            "status": "Érvényes",
+            "guest": "Szerelő",
+            "when": "Ma, 10:00–12:00",
+            "note": "Magától lejár"
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Kisebb kockázat a kézről kézre járó kódok és távirányítók miatt.",
+          "text": "Mindenkinek személyes jogosultsága van a telefonján, így a futároknak és a vendégeknek nem kell állandó kódot vagy távirányítót adnia.",
+          "tags": [
+            "Személyes jogosultság",
+            "Nincs állandó kód"
+          ]
+        },
+        {
+          "icon": "user-minus",
+          "title": "Jogosultság visszavonása. Egy pillanat alatt, telefonról.",
+          "text": "Ha valakinek már nem kellene belépnie, azonnal visszavonhatja a hozzáférését, zárak, kódok vagy távirányítók cseréje nélkül.",
+          "tags": [
+            "Azonnali visszavonás",
+            "Zárcsere nélkül"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "Jobb adatvédelem. Jobb kontroll.",
+          "text": "A közös kóddal ellentétben minden jogosultsághoz név tartozik, így bármikor egyértelmű, ki léphet be a házba.",
+          "tags": [
+            "Jogosultságlista",
+            "Név minden jogosultsághoz"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Kevesebb függés kódbillentyűzettől, kulcsoktól és távirányítóktól.",
+          "text": "A bejáratot telefonról kezeli, ahelyett hogy kódbillentyűzetre, kulcsokra és távirányítókra hagyatkozna.",
+          "tags": [
+            "Kezelés telefonról"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Az egész család. Egyszerű kezeléssel.",
+          "text": "Az alkalmazásban családtagokat és rendszeres felhasználókat vehet fel, és mindenkinek személyes belépési jogosultsága van.",
+          "tags": [
+            "Családtagok",
+            "Rendszeres felhasználók"
+          ]
+        },
+        {
+          "icon": "gate",
+          "title": "A kaputól a garázsig.",
+          "text": "A WIFIGATE alkalmas a magánotthon kapuihoz, bejárati ajtóihoz, parkolójához és garázskapuihoz, és mindet egyetlen alkalmazásból nyithatja.",
+          "tags": [
+            "Kapuk",
+            "Ajtók",
+            "Garázsok"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "Mindennapi belépés. Kényelmesebben.",
+          "text": "Minden távozáskor és hazaérkezéskor a zsebében lévő telefonnal nyit, anélkül hogy kódot kellene megjegyeznie vagy távirányítót keresnie."
+        }
       ],
       "seoTitle": "Okos hozzáférés magánotthonokhoz közös kód nélkül | WIFIGATE",
       "seoDescription": "A WIFIGATE-tel magánotthonában telefonról kezelheti a hozzáférést, ideiglenes jogosultságot adhat vendégeknek és futároknak, és kevesebb kódra, kulcsra és távirányítóra lesz szüksége.",
@@ -306,15 +703,98 @@ export default {
         }
       ],
       "paragraph": "Egy lakóépületben a hozzáférés nem ér véget a lobby ajtajánál: van kapu, parkolóbejárat, tárolóajtók, és néha egy oldalajtó is. És nemcsak a lakók érintettek, hanem a cserélődő bérlők, a közös képviselet vagy a kezelő cég, a takarítók, a karbantartók és az állandó beszállítók is. Ha mindez egyetlen kóddal és néhány távirányítóval működik, minden apró változás (egy elköltözött lakó, egy elveszett távirányító vagy egy új beszállító) kódcserét és mindenki újbóli értesítését jelenti. A WIFIGATE ezt a módszert rendezett, épületszintű hozzáférés-kezelésre cseréli.",
-      "bullets": [
-        "Személyes jogosultság minden lakónak egyetlen közös kód helyett",
-        "Lakók felvétele és törlése az egész épület kódjának cseréje nélkül",
-        "Külön jogosultság a takarítóknak, a karbantartóknak és az állandó beszállítóknak",
-        "Alkalmas a lobbyajtóhoz, a kapuhoz és a parkoló bejáratához",
-        "Kevesebb függés a kódbillentyűzetektől, kulcsoktól és távirányítóktól",
-        "Belépési előzmények a közös képviseletnek vagy a kezelő cégnek",
-        "Az épület összes jogosultságának kezelése telefonról",
-        "Hozzáférés az új bérlőknek a beköltözés napjától, kulcsátadás nélkül"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Személyes jogosultság. Minden lakónak.",
+          "text": "Egyetlen, mindenki által ismert és továbbadott kód helyett minden lakónak saját jogosultsága van.",
+          "tags": [
+            "Nincs közös kód"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Jogosultságok az épületben",
+            "status": "Aktív",
+            "rows": [
+              {
+                "name": "Tóth Eszter",
+                "badge": "Lakó"
+              },
+              {
+                "name": "Kovács Dániel",
+                "badge": "Lakó"
+              },
+              {
+                "name": "Nagy Júlia",
+                "badge": "Közös képviselő"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-plus",
+          "title": "A lakók cserélődnek. A kontroll marad.",
+          "text": "Lakókat vehet fel és törölhet anélkül, hogy az épület kódját cserélni vagy mindenkit újra értesíteni kellene.",
+          "tags": [
+            "Lakó felvétele",
+            "Jogosultság visszavonása"
+          ]
+        },
+        {
+          "icon": "wrench",
+          "title": "Külön jogosultság a szolgáltatóknak",
+          "text": "A takarítók, a karbantartók és az állandó beszállítók saját jogosultságot kapnak, nem az épület kódját.",
+          "tags": [
+            "Takarítás",
+            "Karbantartás",
+            "Beszállítók"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "Nemcsak a lobbyajtó",
+          "text": "Alkalmas a lobbyajtóhoz, az épület kapujához és a parkoló bejáratához, és minden lakó a saját jogosultságával, telefonról nyitja őket.",
+          "tags": [
+            "Lobbyajtó",
+            "Kapu",
+            "Parkoló"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Kevesebb kód. Kevesebb távirányító.",
+          "text": "Kevesebb függés a kódbillentyűzetektől, kulcsoktól és távirányítóktól: az épület bejárata telefonról nyílik.",
+          "tags": [
+            "Nyitás telefonról",
+            "Távirányítók is működnek"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Nagyobb átláthatóság a közös képviseletnek",
+          "text": "A közös képviselet vagy a kezelő cég a belépési előzményekből látja, ki és mikor nyitott.",
+          "tags": [
+            "90 napra visszamenőleg",
+            "Kezelő cég"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Az épület összes jogosultsága, egyenesen a telefonról",
+          "text": "Telefonról kezelheti az épület összes belépési jogosultságának naprakész listáját, ahol minden jogosultsághoz név tartozik.",
+          "tags": [
+            "Naprakész lista",
+            "Név minden jogosultsághoz"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "Új lakó? A hozzáférés már megvan.",
+          "text": "Az új bérlők a beköltözés napjától hozzáférést kapnak, kulcsátadás egyeztetése nélkül.",
+          "tags": [
+            "Az első naptól"
+          ]
+        }
       ],
       "seoTitle": "Beléptetés lakóépületekhez | WIFIGATE",
       "seoDescription": "A WIFIGATE okos hozzáférés-kezelést ad lakóépületekhez: telefonos nyitás, ideiglenes vendégjogosultságok, kevesebb kódbillentyűzet és jobb átláthatóság.",
@@ -360,15 +840,95 @@ export default {
         }
       ],
       "paragraph": "Az irodaházaknak kényelmes belépést kell biztosítaniuk a munkatársaknak, látogatóknak, beszállítóknak és üzemeltetési csapatoknak, anélkül hogy túlterhelnék a recepciót, vagy kézzel kellene kulcsokat és kártyákat kezelni. A WIFIGATE-tel állandó jogosultságot adhat a munkatársaknak és ideigleneset a látogatóknak, telefonról vezérelheti a hozzáférést, és a modern, rendezett üzleti környezethez illő módon kezelheti a belépéseket.",
-      "bullets": [
-        "Állandó jogosultságok munkatársaknak és csapatoknak",
-        "Ideiglenes hozzáférés látogatóknak, beszállítóknak és futároknak",
-        "Kevesebb teher a recepción és az üzemeltetésen",
-        "Alkalmas bejárati ajtókhoz, szintekhez, helyiségekhez és parkolókhoz",
-        "Felhasználók és jogosultságok rendezett kezelése",
-        "Kevesebb függés kulcsoktól, belépőkártyáktól és kódoktól",
-        "Modernebb, kényelmesebb arculat az épületnek",
-        "Hozzáférési előzmények ellenőrzéshez és átláthatósághoz"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Állandó jogosultság. Minden munkatársnak.",
+          "text": "A munkatársak és a csapatok személyes, állandó jogosultságot kapnak a telefonjukra, az Ön által beállított dátumtól.",
+          "visual": {
+            "type": "roster",
+            "heading": "Irodai csapat",
+            "status": "Aktív",
+            "rows": [
+              {
+                "name": "Horváth Katalin",
+                "badge": "Állandó"
+              },
+              {
+                "name": "Varga Péter",
+                "badge": "Állandó"
+              },
+              {
+                "name": "Molnár Zsófia",
+                "badge": "Állandó"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "send",
+          "title": "Időkorlátos hozzáférés. Mindenki másnak.",
+          "text": "A látogatók már érkezésük előtt időkorlátos meghívót kapnak, amely érkezési útmutatót is tartalmazhat.",
+          "tags": [
+            "Állásjelöltek",
+            "Beszállítók",
+            "Futárok"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Kevesebb teher a recepción és az üzemeltetésen",
+          "text": "A látogatók a telefonjukkal lépnek be, nem kell megvárniuk, amíg valaki lejön ajtót nyitni, a recepciónak pedig kevesebb érkezőt kell kezelnie.",
+          "tags": [
+            "Recepció",
+            "Üzemeltetési csapat"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "A bejárati ajtótól a parkolóig",
+          "text": "Alkalmas bejárati ajtókhoz, szintekhez, helyiségekhez és parkolóbejáratokhoz, és mindegyik telefonról nyílik.",
+          "tags": [
+            "Bejárati ajtók",
+            "Szintek és helyiségek",
+            "Parkoló"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "Felhasználók és jogosultságok. Minden a helyén.",
+          "text": "A be- és kiléptetés egyetlen művelet a listán, a jogosultság pedig az Ön által beállított dátumon zárul.",
+          "tags": [
+            "Munkába állás",
+            "Munkaviszony vége"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Kevesebb belépőkártya, kulcs és kód",
+          "text": "Kevesebb belépőkártyát kell kiadni és kevesebb kulcsot visszaszedni a munkaviszony végén, mert minden munkatárs a saját telefonjával lép be.",
+          "tags": [
+            "Belépés telefonnal"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Modern, kényelmes arculat az épületnek",
+          "text": "A munkatársak és a látogatók a telefonjukkal lépnek be, a modern, tiszta és rendezett üzleti környezethez illő módon.",
+          "tags": [
+            "Munkatársak",
+            "Látogatók"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Minden nyitáshoz név és időpont tartozik",
+          "text": "Utólag megnézheti, ki lépett be egy emeletre, a raktárba vagy a parkolóba, az ellenőrzés és az átláthatóság érdekében.",
+          "tags": [
+            "Az elmúlt 90 nap",
+            "Ki és mikor"
+          ]
+        }
       ],
       "seoTitle": "Beléptetés irodaházakhoz | WIFIGATE",
       "seoDescription": "A WIFIGATE-tel az irodaházak telefonról kezelhetik a munkatársak, látogatók és beszállítók belépését, ideiglenes és állandó jogosultságokkal, modern hozzáférés-kezeléssel.",
@@ -414,15 +974,102 @@ export default {
         }
       ],
       "paragraph": "Kisvállalkozások, rendelők, stúdiók, raktárak és irodák gyakran kódbillentyűzetet, kulcsot vagy egyszerű mágneszárat használnak. A probléma akkor kezdődik, amikor a kód munkatársak, beszállítók és vendégek között terjed, vagy amikor a biztonság gyengítése nélkül kell ideiglenes hozzáférést adni. A WIFIGATE-tel telefonról kezelheti a bejárati ajtót, ideiglenes jogosultságot oszthat meg, és csökkentheti az állandó kódok, a fizikai kulcsok és a minden belépésnél szükséges kézi egyeztetés szerepét.",
-      "bullets": [
-        "Alkalmas elektromos zárral vagy mágneszárral működő bejárati ajtókhoz",
-        "Telefonos nyitás munkatársaknak és vezetőknek",
-        "Ideiglenes hozzáférés vendégeknek, beszállítóknak és szolgáltatóknak",
-        "Kevesebb szükség kódbillentyűzetre vagy állandó kódra",
-        "Alkalmas kisvállalkozásokhoz, rendelőkhöz, stúdiókhoz és irodákhoz",
-        "Egyszerűbb és biztonságosabb jogosultságkezelés",
-        "Kevesebb fizikai kulcs",
-        "Kényelmes megoldás modern belépéshez bonyolult rendszer nélkül"
+      "benefits": [
+        {
+          "icon": "shield-check",
+          "title": "Egyszerű jogosultságkezelés. És biztonságosabb.",
+          "text": "Minden munkatársnak, beszállítónak vagy vendégnek személyes jogosultsága van, amelyet bármikor visszavonhat, a belépési előzményekből pedig látható, ki és mikor nyitott.",
+          "tags": [
+            "Bármikor visszavonható",
+            "Belépési előzmények"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Belépési előzmények",
+            "status": "Ma",
+            "rows": [
+              {
+                "time": "07:40",
+                "name": "Beszállító",
+                "event": "Nyitás"
+              },
+              {
+                "time": "08:50",
+                "name": "Dóra, vezető",
+                "event": "Nyitás"
+              },
+              {
+                "time": "19:30",
+                "name": "Takarítók",
+                "event": "Nyitás"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Magától lezáruló ideiglenes hozzáférés.",
+          "text": "A vendégek, a beszállítók és a szolgáltatók a saját időablakukra kapnak jogosultságot, így a tulajdonosnak nem kell külön bemennie, hogy ajtót nyisson.",
+          "tags": [
+            "Beszállítók",
+            "Szerelők",
+            "Futárok"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "Az ajtón már meglévő zár. Telefonról nyílik.",
+          "text": "A WIFIGATE elektromos zárral vagy mágneszárral ellátott bejárati ajtókhoz alkalmas, és telefonról nyitja őket, a meglévő zár pedig a helyén marad.",
+          "tags": [
+            "Elektromos zár",
+            "Mágneszár"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "A munkatársak és a vezetők telefonról nyitnak.",
+          "text": "Minden munkatárs és vezető személyes jogosultsággal, az alkalmazásból nyitja a bejárati ajtót, így kevesebb kézi egyeztetésre van szükség minden belépésnél.",
+          "tags": [
+            "Munkatársak",
+            "Vezetők"
+          ]
+        },
+        {
+          "icon": "user-check",
+          "title": "Kevesebb kézről kézre járó kód.",
+          "text": "A mindenkinek kiadott kód olyanoknál is megmaradhat, akiknek már nem kell belépniük, a személyes jogosultság pedig csökkenti a kódbillentyűzet és az állandó kód szükségességét.",
+          "tags": [
+            "Kódbillentyűzet",
+            "Állandó kód"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Kevesebb kulcs a kulcscsomón.",
+          "text": "Az ajtó telefonról nyílik, így kevesebb fizikai kulcs kering a munkatársak és a vezetők között.",
+          "tags": [
+            "Fizikai kulcsok"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Modern belépés. Bonyolult rendszer nélkül.",
+          "text": "Nem kell vezérlőszekrényt, kezelőszoftvert vagy kártyaolvasót telepíteni, és minden az alkalmazásból kezelhető.",
+          "tags": [
+            "Vezérlőszekrény nélkül",
+            "Kártyaolvasó nélkül"
+          ]
+        },
+        {
+          "icon": "briefcase",
+          "title": "Kisvállalkozásnak, rendelőnek és irodának.",
+          "text": "Kisvállalkozások, rendelők, stúdiók és irodák telefonról kezelik a bejárati ajtót, és szükség szerint ideiglenes jogosultságot osztanak meg.",
+          "tags": [
+            "Rendelők",
+            "Irodák",
+            "Raktárak"
+          ]
+        }
       ],
       "seoTitle": "Bejárati ajtók és mágneszárak vállalkozásoknak | WIFIGATE",
       "seoDescription": "A WIFIGATE okos nyitást ad vállalkozások bejárati ajtóihoz és mágneszáraihoz, telefonos jogosultságkezeléssel, ideiglenes hozzáféréssel és kevesebb kód- vagy kulcsfüggéssel.",
@@ -468,15 +1115,91 @@ export default {
         }
       ],
       "paragraph": "A sportlétesítményeknek, padelpályáknak, teniszpályáknak, edzőtermeknek és edzőközpontoknak a nyitvatartás, a foglalások és az események szerint kell kezelniük a tagok, edzők, csapatok és vendégek hozzáférését. A WIFIGATE-tel telefonról adhat ideiglenes vagy állandó hozzáférést, csökkentheti a közös kulcstól vagy kódtól való függést, és javíthatja a felhasználók belépési élményét, különösen ott, ahol a forgalom napközben változik.",
-      "bullets": [
-        "Alkalmas padelpályákhoz, teniszpályákhoz, edzőtermekhez és edzőközpontokhoz",
-        "Hozzáférés nyitvatartás, foglalás vagy jogosultság szerint",
-        "Tagok, edzők, munkatársak és vendégek kezelése",
-        "Kevesebb függés közös kulcsoktól és kódoktól",
-        "Gyors és kényelmes belépés telefonról",
-        "Alkalmas változó nyitvatartású helyszínekhez",
-        "Ideiglenes jogosultságok eseményekhez, órákhoz vagy edzésekhez",
-        "Hozzáférési előzmények üzemeltetéshez és kontrollhoz"
+      "benefits": [
+        {
+          "icon": "calendar-check",
+          "title": "Pályafoglalás. A hozzáférés a foglalással nyílik.",
+          "text": "Aki egy adott órára pályát foglalt, olyan jogosultságot kap, amely akkor nyílik, és az óra végén zárul.",
+          "tags": [
+            "Nyitvatartás",
+            "Foglalások",
+            "Jogosultságok"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Belépési meghívó",
+            "status": "Érvényes",
+            "guest": "Anna, 2-es pálya",
+            "when": "Ma 18:00–19:30",
+            "note": "Érkezési útmutatóval"
+          }
+        },
+        {
+          "icon": "users",
+          "title": "Tag, edző és vendég. Mindenkinek saját jogosultság.",
+          "text": "Az állandó tagokat, a meghatározott napokon érkező edzőket, a munkatársakat és az egyszeri vendégeket egyetlen listán kezelheti, kézről kézre járó kulcs nélkül.",
+          "tags": [
+            "Tagok",
+            "Edzők",
+            "Munkatársak és vendégek"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Kevesebb kulcs. Kevesebb közös kód.",
+          "text": "A közös kód akkor is nyit, amikor már nem kellene, a személyes jogosultság viszont lezárul, amikor már nincs rá szükség.",
+          "tags": [
+            "Személyes jogosultság"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Foglalkozás, edzés vagy esemény. Hozzáférés csak arra az időre.",
+          "text": "A foglalkozás, az edzés vagy az esemény résztvevői ideiglenes jogosultságot kapnak, amely csak az Ön által beállított órákban érvényes.",
+          "tags": [
+            "Események",
+            "Foglalkozások",
+            "Edzések"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Tudja, ki és mikor volt a létesítményben.",
+          "text": "A belépési előzményekből látható, ki és mikor nyitott, ami segíti az üzemeltetést, és igazolja, hogy a létesítményt a nap végén bezárták.",
+          "tags": [
+            "Ellenőrzés",
+            "Üzemeltetés",
+            "Az elmúlt 90 nap"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Belépés telefonról. Gyorsan és kényelmesen.",
+          "text": "Minden felhasználó maga nyit az alkalmazásból, így senkinek sem kell a kapunál várnia, hogy beengedje.",
+          "tags": [
+            "Közvetlen kapcsolat",
+            "SIM nélkül"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Változik a nyitvatartás? A hozzáférés is.",
+          "text": "Az ütemezett események napok és időpontok szerint nyithatnak, így a hozzáférés igazodik a létesítmény nyitvatartásához.",
+          "tags": [
+            "Ütemezett események",
+            "Heti vagy egyszeri"
+          ]
+        },
+        {
+          "icon": "dumbbell",
+          "title": "A padelpályától az edzőteremig.",
+          "text": "Alkalmas padel- és teniszpályákhoz, edzőtermekhez és edzőközpontokhoz, különösen ott, ahol a forgalom napközben változik.",
+          "tags": [
+            "Padel",
+            "Tenisz",
+            "Edzőtermek"
+          ]
+        }
       ],
       "seoTitle": "Beléptetés sportlétesítményekhez és padelpályákhoz | WIFIGATE",
       "seoDescription": "A WIFIGATE okos beléptetést ad sportlétesítményekhez, padelpályákhoz, edzőtermekhez és edzőközpontokhoz, telefonos belépéssel, ideiglenes vagy állandó jogosultságokkal.",
@@ -522,15 +1245,96 @@ export default {
         }
       ],
       "paragraph": "A bérelhető tárolók és szekrénytermek általában közös kódokra, kódbillentyűzetekre és fizikai kulcsokra támaszkodnak, amelyeket lemásolnak, továbbadnak és ritkán cserélnek. A WIFIGATE a hozzáférést a telefonra helyezi: minden bérlő személyes jogosultságot kap a telephely kapujához, az épület bejáratához és – ahol telepítve van – egy elektromos zárral ellátott tárolóegységhez vagy szekrényhez, az Ön által választott időszakra korlátozva, és a bérlet lejártának pillanatában visszavonva. A telefon közvetlenül kommunikál a helyszíni eszközzel, az ajtónál nincs szükség SIM-kártyára vagy internetkapcsolatra, és normál használathoz nincs havi előfizetés.",
-      "bullets": [
-        "A telephely kapujának, az épület ajtajának és a szekrénynek a nyitása telefonról",
-        "Személyes jogosultság minden bérlőnek",
-        "Nyitvatartási időre vagy egyedi időablakra korlátozott hozzáférés",
-        "Egyszeri hozzáférés költöztetőknek és családtagoknak",
-        "A hozzáférés visszavonása a bérlet lejártának pillanatában",
-        "Előzmények arról, ki és mikor nyitott",
-        "Nincs cserélendő közös kód, kódbillentyűzet vagy kulcs",
-        "Nincs SIM-kártya vagy internetkapcsolat az ajtónál"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Személyes jogosultság. Minden bérlőnek.",
+          "text": "Olyan közös kód helyett, amelyre a korábbi bérlők még emlékeznek, minden bérlőnek saját hozzáférése van.",
+          "visual": {
+            "type": "roster",
+            "heading": "Jogosultságok a telephelyen",
+            "status": "Aktív",
+            "rows": [
+              {
+                "name": "Farkas Judit",
+                "badge": "Jogosult"
+              },
+              {
+                "name": "Balogh Gábor",
+                "badge": "Jogosult"
+              },
+              {
+                "name": "Lakatos Réka",
+                "badge": "Jogosult"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-minus",
+          "title": "Lejár a bérlet. A hozzáférés is.",
+          "text": "A jogosultságot visszavonhatja, amint a szerződés lejár vagy egy fizetés elmarad, kulcsok visszaszedése nélkül.",
+          "tags": [
+            "Szerződés vége",
+            "Elmaradt fizetés"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Kapu, ajtó és szekrény. Telefonról.",
+          "text": "Minden bérlő telefonról nyitja a telephely kapuját, az épület ajtaját, és ahol telepítve van, az elektromos zárral ellátott tárolóegységet vagy szekrényt is.",
+          "tags": [
+            "Telephely kapuja",
+            "Épület ajtaja",
+            "Elektromos zár"
+          ]
+        },
+        {
+          "icon": "clock",
+          "title": "Ön határozza meg a belépési időt.",
+          "text": "Engedélyezze a belépést csak a telephely nyitvatartási idejében, vagy adjon egy bérlőnek szélesebb időablakot.",
+          "tags": [
+            "Nyitvatartás",
+            "Egyedi időablak"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "Egyszeri hozzáférés. Költöztetőknek és családtagoknak.",
+          "text": "Egy költöztető vagy egy családtag egyetlen napra szóló hozzáférést kaphat, közös kód és kulcs nélkül.",
+          "tags": [
+            "Költöztetők",
+            "Családtagok",
+            "Egy nap"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Tudja, ki és mikor lépett be.",
+          "text": "Minden nyitás a felhasználó nevével és az időponttal rögzül, így a látogatásokkal kapcsolatos kérdésekre az előzmények adnak választ, nem a kamerafelvételek.",
+          "tags": [
+            "90 napra visszamenőleg",
+            "Név és időpont"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Nincs közös kód. Nincs cserélendő kulcs.",
+          "text": "A lemásolt, kézről kézre járó kódok, kódbillentyűzetek és kulcsok helyét a telefonos személyes hozzáférés veszi át.",
+          "tags": [
+            "Kódbillentyűzet nélkül",
+            "Kulcsok nélkül"
+          ]
+        },
+        {
+          "icon": "sim-off",
+          "title": "Nincs SIM. Nincs internet az ajtónál.",
+          "text": "A telefon közvetlenül a helyszíni eszközzel kommunikál, és normál használathoz nincs havi előfizetés.",
+          "tags": [
+            "Közvetlen kapcsolat",
+            "Nincs havi előfizetés"
+          ]
+        }
       ],
       "seoTitle": "Okos beléptetés bérelhető tárolókhoz és szekrényekhez | WIFIGATE",
       "seoDescription": "A WIFIGATE minden tároló- és szekrénybérlőnek személyes, telefonos hozzáférést ad a kapuhoz, az ajtókhoz és a saját szekrényéhez, nyitvatartási időre korlátozva, előzményekben rögzítve, és a bérlet lejártakor visszavonva.",

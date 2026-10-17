@@ -41,28 +41,136 @@ export default {
       "note": "Hodiny se nastavují v krocích po 10 minutách. Pokud u vás šabat končí po půlnoci, přidejte událost i na neděli od 00:00."
     },
     "benefitsTitle": "Co zahrnuje šabatový časovač brány od WIFIGATE",
-    "bullets": [
-      "Volný příchod i odchod o šabatu, aniž by kdokoli bránu ovládal",
-      "Týdenní rozvrh, který nastavíte jednou",
-      "Svátky naplánované předem, až 90 dní dopředu",
-      "Změna hodin v aplikaci, bez volání technika",
-      "Zamčení brány v pevně stanovených hodinách, například v noci",
-      "Ve všední dny: otevírání z telefonu, ovladačem nebo tlačítkem",
-      "Připojení k řídicí jednotce stávající brány nebo závory",
-      "Bez SIM karty, bez internetu u brány a bez měsíčního předplatného"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Nastavíte jednou. Funguje každý šabat.",
+        "text": "Na pátek a sobotu označíte zelené události „Otevřená brána“ a zařízení brány je každý týden spouští samo.",
+        "tags": [
+          "Až 50 událostí",
+          "Kroky po 10 minutách"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Otevřená brána o šabatu",
+          "status": "Týdně",
+          "rows": [
+            {
+              "day": "Pátek",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Sobota",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "O šabatu přicházíte i odcházíte. Ničeho se nedotýkáte.",
+        "text": "O šabatu zůstává brána otevřená v hodinách, které nastavíte, a nikdo ji nemusí ovládat.",
+        "tags": [
+          "Bez ovladače",
+          "Bez telefonu",
+          "Bez tlačítka"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Svátky naplánované předem",
+        "text": "Přidáte jednorázové události na předvečer svátku a na sváteční den, až 90 dní dopředu, a každá z nich po uplynutí svého data sama zmizí.",
+        "tags": [
+          "Až 90 dní",
+          "Roš ha-šana",
+          "Pesach"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Hodiny změníte v aplikaci. Bez technika.",
+        "text": "Když se mění roční období, upravíte hodiny na obrazovce „Plánované události“ a uložíte.",
+        "tags": [
+          "Správce systému",
+          "U brány"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Zamčení brány v pevně stanovených hodinách, například v noci",
+        "text": "Červená událost „Zavřená brána“ drží bránu zavřenou v hodinách, které nastavíte, a zelená událost ji drží otevřenou.",
+        "tags": [
+          "Červená událost",
+          "Zelená událost"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Ve všední dny: telefon, ovladač nebo tlačítko",
+        "text": "Mimo hodiny, které nastavíte, funguje brána jako obvykle a otevírá se z telefonu, ovladačem nebo tlačítkem.",
+        "tags": [
+          "Mimo události",
+          "Stávající ovladače"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Připojení ke stávající bráně nebo závoře",
+        "text": "WIFIGATE se připojuje k řídicí jednotce stávající brány nebo závory, takže v rozvaděči nepotřebujete samostatný šabatový časovač.",
+        "tags": [
+          "Elektrická brána",
+          "Parkovací závora"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Bez SIM karty, bez internetu u brány a bez měsíčního předplatného",
+        "text": "Brána potřebuje jen napájení, telefon se k zařízení připojuje přímo a za zařízení a instalaci zaplatíte jednou.",
+        "tags": [
+          "Jen napájení",
+          "Jednorázová platba"
+        ]
+      }
     ],
     "facts": {
       "title": "Šabatový časovač WIFIGATE v kostce",
       "rows": [
-        { "label": "Události", "value": "Celkem až 50, týdenní i jednorázové" },
-        { "label": "Časový krok", "value": "10 minut" },
-        { "label": "Svátky", "value": "Jednorázové události v předvečer svátku a ve sváteční den, až 90 dní dopředu" },
-        { "label": "Otevřeno, nebo zavřeno", "value": "Zelená událost drží bránu otevřenou, červená ji drží zavřenou" },
-        { "label": "Kde je rozvrh", "value": "Uložený a spouštěný v zařízení brány" },
-        { "label": "Co brána potřebuje", "value": "Jen napájení, bez SIM karty, routeru a internetu" },
-        { "label": "Změna hodin", "value": "Z aplikace, u brány, bez technika" },
-        { "label": "Po výpadku proudu", "value": "Rozvrh zůstane uložený a události znovu poběží, jakmile se k bráně připojí jakýkoli telefon" },
-        { "label": "Platba", "value": "Jednou za zařízení a instalaci, bez měsíčního předplatného" }
+        {
+          "label": "Události",
+          "value": "Celkem až 50, týdenní i jednorázové"
+        },
+        {
+          "label": "Časový krok",
+          "value": "10 minut"
+        },
+        {
+          "label": "Svátky",
+          "value": "Jednorázové události v předvečer svátku a ve sváteční den, až 90 dní dopředu"
+        },
+        {
+          "label": "Otevřeno, nebo zavřeno",
+          "value": "Zelená událost drží bránu otevřenou, červená ji drží zavřenou"
+        },
+        {
+          "label": "Kde je rozvrh",
+          "value": "Uložený a spouštěný v zařízení brány"
+        },
+        {
+          "label": "Co brána potřebuje",
+          "value": "Jen napájení, bez SIM karty, routeru a internetu"
+        },
+        {
+          "label": "Změna hodin",
+          "value": "Z aplikace, u brány, bez technika"
+        },
+        {
+          "label": "Po výpadku proudu",
+          "value": "Rozvrh zůstane uložený a události znovu poběží, jakmile se k bráně připojí jakýkoli telefon"
+        },
+        {
+          "label": "Platba",
+          "value": "Jednou za zařízení a instalaci, bez měsíčního předplatného"
+        }
       ]
     },
     "updatedLabel": "Poslední aktualizace: {date}",

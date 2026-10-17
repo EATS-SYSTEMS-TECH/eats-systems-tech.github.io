@@ -36,15 +36,89 @@ export default {
         }
       ],
       "paragraph": "WIFIGATE permet aux hôtels, aux locations saisonnières (Airbnb) et aux résidences de vacances d'offrir à leurs voyageurs une entrée numérique, pratique et sécurisée, directement depuis leur téléphone.\nFini l'émission de cartes magnétiques, la remise de clés physiques ou les boîtes à clés (lockbox) : le contrôle d'accès devient automatique.\nAvec WIFIGATE Host, vous pouvez relier directement votre système de réservation au système d'accès.\nGrâce à cette connexion, dès que la réservation est confirmée, le voyageur reçoit une autorisation d'accès personnelle.\nL'autorisation s'active précisément à l'heure d'arrivée et prend fin automatiquement au départ, sans intervention manuelle, remise de clés ni coordination de la part de la réception ou des hôtes.",
-      "bullets": [
-        "Création automatique de l'accès voyageur dès la confirmation de la réservation",
-        "Automatisation complète avec WIFIGATE Host",
-        "Accès temporaire calé sur les dates et les heures du séjour",
-        "Moins de cartes de chambre à émettre, remettre et remplacer",
-        "Gestion des autorisations pour le personnel, le ménage, la maintenance et les prestataires",
-        "Une arrivée plus fluide et plus agréable pour les voyageurs",
-        "Fin automatique de l'accès à l'heure du départ",
-        "Historique des accès pour plus de transparence et de contrôle"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Réservation confirmée. L'accès est déjà en route.",
+          "text": "Avec WIFIGATE Host, la confirmation de la réservation crée une autorisation d'accès personnelle et l'envoie automatiquement au voyageur.",
+          "tags": [
+            "Hôtels",
+            "Airbnb",
+            "Locations saisonnières"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Invitation voyageur",
+            "status": "Envoyée",
+            "guest": "Léa Martin",
+            "when": "Ven. 15:00 – Dim. 11:00",
+            "note": "Indications d'arrivée incluses"
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "L'accès suit les dates du séjour.",
+          "text": "Chaque voyageur reçoit sur son téléphone une invitation valable uniquement aux dates et aux heures de son séjour.",
+          "tags": [
+            "Arrivée",
+            "Dates et heures"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Départ. L'accès se ferme tout seul.",
+          "text": "Personne n'a à penser à couper l'accès : l'autorisation expire à l'heure du départ, même quand aucun membre de l'équipe n'est sur place.",
+          "tags": [
+            "Fin automatique",
+            "Heure de départ"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "À chaque membre de l'équipe son autorisation.",
+          "text": "Employés, équipes de ménage et d'entretien, prestataires : chacun reçoit une autorisation personnelle, accordée et retirée dans l'application.",
+          "tags": [
+            "Ménage",
+            "Entretien",
+            "Prestataires"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Moins de cartes. Pas de boîte à clés.",
+          "text": "Moins de cartes de chambre à émettre, remettre et remplacer, et plus aucun code de boîte à clés qui passe d'un voyageur à l'autre.",
+          "tags": [
+            "Cartes de chambre",
+            "Clés physiques"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Qui a ouvert et quand. En toute transparence.",
+          "text": "L'historique des accès indique qui a ouvert et quand, pour plus de transparence et de contrôle sur les voyageurs, le personnel et les prestataires.",
+          "tags": [
+            "90 derniers jours"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Une arrivée plus fluide. Sans attendre personne.",
+          "text": "Le voyageur ouvre lui-même le portail, la porte ou le parking, directement depuis l'application WIFIGATE sur son téléphone.",
+          "tags": [
+            "Portail",
+            "Porte",
+            "Accès parking"
+          ]
+        },
+        {
+          "icon": "zap",
+          "title": "Automatisation complète avec WIFIGATE Host.",
+          "text": "WIFIGATE Host relie votre système de réservation au système d'accès, sans recopier d'informations, sans émettre de cartes et sans aucune étape manuelle.",
+          "tags": [
+            "Système de réservation",
+            "Connexion API"
+          ]
+        }
       ],
       "seoTitle": "WIFIGATE | Accès voyageurs numérique pour hôtels, Airbnb et résidences",
       "seoDescription": "Hôtels, Airbnb et résidences de vacances : un accès voyageurs numérique et automatique avec WIFIGATE Host, une autorisation personnelle par réservation, sans clés, cartes ni boîte à clés.",
@@ -90,15 +164,95 @@ export default {
         }
       ],
       "paragraph": "Dans les commerces et les boutiques, les rideaux métalliques sont souvent commandés par des télécommandes, des clés, un contacteur à clé extérieur ou des interrupteurs installés à l'extérieur du local. Ces solutions peuvent se perdre, rester entre les mains d'anciens employés, être dupliquées ou devenir un point d'accès exposé. Ouvrir ou fermer avec une clé oblige aussi à se tenir tout près du point de commande, la clé à la main, parfois sans bonne visibilité sur la zone du rideau. WIFIGATE transfère la commande vers l'application et place le contrôle d'accès du côté intérieur, mieux protégé : vous ouvrez et fermez plus confortablement, gérez les autorisations de vos employés et prestataires, et réduisez la dépendance aux clés, aux télécommandes et aux points d'accès exposés.",
-      "bullets": [
-        "Ouverture et fermeture depuis le téléphone, sans dépendre des télécommandes",
-        "Moins de dépendance aux clés qui peuvent être copiées ou perdues",
-        "Moins de points d'accès exposés à l'extérieur du commerce",
-        "Commande plus confortable, avec une meilleure visibilité sur la zone du rideau",
-        "Gestion des autorisations pour employés, responsables et prestataires",
-        "Accès temporaire possible selon l'horaire ou le besoin",
-        "Convient aux boutiques, entrepôts, entrées de service et commerces",
-        "Une commande à l'intérieur, mieux organisée et plus sûre au quotidien"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Un accès personnel. Pour employés, responsables et prestataires.",
+          "text": "Chacun reçoit sa propre autorisation dans l'application, et vous pouvez la retirer à tout moment.",
+          "visual": {
+            "type": "roster",
+            "heading": "Accès au rideau",
+            "status": "Actif",
+            "rows": [
+              {
+                "name": "Propriétaire",
+                "badge": "Administrateur"
+              },
+              {
+                "name": "Employé de service",
+                "badge": "Autorisé"
+              },
+              {
+                "name": "Fournisseur",
+                "badge": "Temporaire"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "shield-check",
+          "title": "Moins de points exposés. La commande passe à l'intérieur.",
+          "text": "Au lieu d'un interrupteur ou d'un contacteur à clé sur un mur extérieur, le point de commande peut se trouver à l'intérieur du commerce, du côté protégé.",
+          "tags": [
+            "Côté intérieur protégé",
+            "Hors d'atteinte"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Ouvrir et fermer. Directement depuis le téléphone.",
+          "text": "Les personnes autorisées actionnent le rideau depuis l'application WIFIGATE, sans chercher de télécommande ni la faire passer d'un employé à l'autre.",
+          "tags": [
+            "Sans télécommande",
+            "Connexion directe"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Moins de clés qui se copient ou se perdent.",
+          "text": "Une clé restée chez un ancien employé continue de fonctionner, alors qu'une autorisation sur le téléphone prend fin à son dernier jour.",
+          "tags": [
+            "Serrure conservée",
+            "Rien à récupérer"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Accès temporaire. Seulement quand il le faut.",
+          "text": "Partagez avec un prestataire ou un employé temporaire un accès limité dans le temps, qui cesse de fonctionner à l'échéance.",
+          "tags": [
+            "Prestataires",
+            "Employés temporaires"
+          ]
+        },
+        {
+          "icon": "eye",
+          "title": "Une commande plus confortable. Une meilleure visibilité.",
+          "text": "Actionnez le rideau depuis le téléphone, à une distance plus sûre, au lieu de vous tenir collé au point de commande, la clé à la main.",
+          "tags": [
+            "Distance plus sûre",
+            "Sans clé"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "Au quotidien. Mieux organisé et plus sûr.",
+          "text": "WIFIGATE s'installe sur la commande existante du rideau, et les données sont chiffrées et enregistrées sur le boîtier lui-même.",
+          "tags": [
+            "Installation intérieure",
+            "Données chiffrées"
+          ]
+        },
+        {
+          "icon": "store",
+          "title": "Pour tout commerce équipé d'un rideau métallique électrique.",
+          "text": "Partout où l'on veut moins de clés et moins de télécommandes qui passent de main en main.",
+          "tags": [
+            "Boutiques",
+            "Entrepôts",
+            "Entrées de service"
+          ]
+        }
       ],
       "seoTitle": "Rideau métallique connecté pour commerces et boutiques | WIFIGATE",
       "seoDescription": "WIFIGATE pilote les rideaux métalliques de votre commerce depuis le téléphone : gestion des autorisations, moins de clés et de télécommandes, accès exposés réduits.",
@@ -144,15 +298,103 @@ export default {
         }
       ],
       "paragraph": "Les portails électriques et les barrières de parking servent aux résidents, employés, invités et prestataires, mais gérer les télécommandes, les codes et les appels pour ouvrir le portail devient vite pesant. WIFIGATE vous permet d'ouvrir le portail depuis le téléphone, de partager un accès permanent ou temporaire, d'utiliser l'ouverture automatique pour les utilisateurs réguliers et de définir des événements programmés selon vos besoins. Le système est conçu pour un fonctionnement sécurisé, chiffré et privé, sans abonnement mensuel ni prélèvement automatique, et vous pouvez continuer à utiliser vos télécommandes existantes en parallèle de l'application.",
-      "bullets": [
-        "Ouverture du portail électrique ou de la barrière de parking depuis le téléphone",
-        "Sans abonnement mensuel ni prélèvement automatique",
-        "Partage d'accès temporaire avec invités, prestataires et employés",
-        "Auto Open pour les utilisateurs réguliers, au quotidien",
-        "Événements programmés pour ouvrir selon les jours et les heures",
-        "Commande depuis l'application ou avec les télécommandes existantes",
-        "Moins de télécommandes physiques à distribuer",
-        "Historique des ouvertures pour le contrôle et la transparence"
+      "benefits": [
+        {
+          "icon": "smartphone",
+          "title": "Portail ou barrière de parking. Directement depuis le téléphone.",
+          "text": "Toute personne qui a reçu une autorisation, permanente ou temporaire, ouvre le portail électrique ou la barrière de parking depuis l'application WIFIGATE.",
+          "tags": [
+            "Portail électrique",
+            "Barrière de parking",
+            "Sans SIM"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Historique des ouvertures",
+            "status": "Aujourd'hui",
+            "rows": [
+              {
+                "time": "07:42",
+                "name": "Claire · Résidente",
+                "event": "Ouverture"
+              },
+              {
+                "time": "08:15",
+                "name": "Julien · Employé",
+                "event": "Ouverture"
+              },
+              {
+                "time": "10:30",
+                "name": "Marc · Prestataire",
+                "event": "Ouverture"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "card-off",
+          "title": "Sans abonnement. Sans prélèvement automatique.",
+          "text": "Vous payez une seule fois le boîtier et l'installation, sans abonnement mensuel ni paiement récurrent.",
+          "tags": [
+            "Paiement unique",
+            "Boîtier et installation"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "Accès temporaire. Il se ferme tout seul.",
+          "text": "Au lieu de recevoir des appels pour ouvrir le portail, envoyez une autorisation valable uniquement sur le créneau où elle est utile.",
+          "tags": [
+            "Invités",
+            "Prestataires",
+            "Employés"
+          ]
+        },
+        {
+          "icon": "hands-free",
+          "title": "Auto Open. Le portail s'ouvre à votre arrivée.",
+          "text": "Pour les utilisateurs réguliers, l'ouverture automatique détecte votre arrivée et ouvre le portail, sans avoir à chercher la télécommande ni à baisser la vitre sous la pluie.",
+          "tags": [
+            "Utilisateurs réguliers",
+            "Entrée quotidienne"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Événements programmés. Selon les jours et les heures.",
+          "text": "Définissez à l'avance les jours et les heures où le portail reste ouvert, avec un événement hebdomadaire ou ponctuel.",
+          "tags": [
+            "Hebdomadaire",
+            "Ponctuel"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "Application ou télécommande. À vous de choisir.",
+          "text": "Les télécommandes existantes continuent de fonctionner en parallèle de l'application : rien n'est à jeter.",
+          "tags": [
+            "Télécommandes existantes",
+            "Contrôle via l'application"
+          ]
+        },
+        {
+          "icon": "user-plus",
+          "title": "Moins de télécommandes physiques à distribuer.",
+          "text": "Au lieu de distribuer une télécommande à chaque résident, employé ou prestataire, donnez à chacun une autorisation personnelle dans l'application.",
+          "tags": [
+            "Autorisation personnelle",
+            "Gestion dans l'application"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Historique des ouvertures. Contrôle et transparence.",
+          "text": "Voyez qui a ouvert le portail et quand, sur les 90 derniers jours.",
+          "tags": [
+            "Sur 90 jours",
+            "Qui et quand"
+          ]
+        }
       ],
       "seoTitle": "Portail électrique et barrière de parking sans abonnement | WIFIGATE",
       "seoDescription": "Ouvrez portails électriques et barrières de parking depuis le téléphone avec WIFIGATE : Auto Open, événements programmés, télécommandes existantes, sans abonnement ni prélèvement.",
@@ -198,15 +440,101 @@ export default {
         }
       ],
       "paragraph": "Les portes de garage et les parkings privés sont généralement commandés par des télécommandes physiques, qui peuvent se perdre, rester chez des personnes qui n'ont plus besoin d'y accéder ou être copiées dans certaines situations. WIFIGATE fait passer la commande à un accès numérique depuis le téléphone : vous gérez les autorisations des membres de la famille, des employés ou des invités, et partagez un accès temporaire sans remettre de télécommande ni de code. Résultat : une expérience plus pratique, plus privée et mieux organisée, avec moins de dépendance aux supports d'accès physiques.",
-      "bullets": [
-        "Ouverture de la porte de garage depuis le téléphone",
-        "Moins de dépendance aux télécommandes physiques",
-        "Risque réduit en cas de télécommande perdue, transmise ou copiée",
-        "Gestion des accès pour la famille, les employés et les invités",
-        "Accès temporaire sans remettre de télécommande ni de code",
-        "Convient aux parkings privés, maisons et appartements en rez-de-jardin",
-        "Une gestion des accès plus privée et plus sécurisée",
-        "Un contrôle quotidien plus pratique et plus sûr"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Un accès personnel pour tous ceux qui entrent.",
+          "text": "Ajoutez et retirez dans l'application les membres de la famille, les employés et les invités : chacun ouvre depuis son propre téléphone, avec sa propre autorisation.",
+          "tags": [
+            "Famille",
+            "Employés",
+            "Invités"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Accès au garage",
+            "status": "Actif",
+            "rows": [
+              {
+                "name": "Maman",
+                "badge": "Administratrice"
+              },
+              {
+                "name": "Lucas",
+                "badge": "Famille"
+              },
+              {
+                "name": "Artisan",
+                "badge": "Accès temporaire"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Moins de risque en cas de télécommande perdue ou copiée.",
+          "text": "Une télécommande perdue, transmise ou copiée peut continuer d'ouvrir, alors qu'une autorisation sur le téléphone se retire de l'application en un instant.",
+          "tags": [
+            "Perte",
+            "Transmission",
+            "Copie"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "La porte de garage s'ouvre depuis le téléphone.",
+          "text": "WIFIGATE est relié à la porte de garage, et vous l'ouvrez depuis l'application WIFIGATE, sur le téléphone que vous avez déjà sur vous.",
+          "tags": [
+            "Connexion directe",
+            "Sans SIM"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "Moins de télécommandes. Moins de tracas.",
+          "text": "Moins de télécommandes à acheter, programmer, remettre et gérer, au lieu d'une par voiture et par utilisateur.",
+          "tags": [
+            "Avec vos télécommandes"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Accès temporaire. Sans remettre de télécommande.",
+          "text": "Un artisan ou un invité reçoit une autorisation temporaire qui prend fin quand vous le décidez, sans remise de télécommande ni de code.",
+          "tags": [
+            "Artisans",
+            "Invités"
+          ]
+        },
+        {
+          "icon": "garage",
+          "title": "Pour parkings privés, maisons et rez-de-jardin.",
+          "text": "WIFIGATE s'installe sur la commande existante de la porte de garage ou de l'accès au parking, dans une maison individuelle ou un appartement en rez-de-jardin.",
+          "tags": [
+            "Garage privé",
+            "Parking privé",
+            "Rez-de-jardin"
+          ]
+        },
+        {
+          "icon": "shield-check",
+          "title": "Un accès plus privé et plus sécurisé.",
+          "text": "WIFIGATE protège l'accès grâce à des couches de sécurité avancées et à un stockage chiffré, et préserve la vie privée des utilisateurs.",
+          "tags": [
+            "Stockage chiffré",
+            "Couches de sécurité",
+            "Vie privée"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Plus pratique et plus sûr. Chaque jour.",
+          "text": "L'historique des accès des 90 derniers jours montre qui a ouvert le garage et quand.",
+          "tags": [
+            "Historique des accès",
+            "90 jours"
+          ]
+        }
       ],
       "seoTitle": "Porte de garage connectée et parking privé | WIFIGATE",
       "seoDescription": "WIFIGATE ouvre portes de garage et parkings privés depuis le téléphone, avec moins de télécommandes, des autorisations temporaires et une gestion plus privée.",
@@ -252,15 +580,84 @@ export default {
         }
       ],
       "paragraph": "Dans une maison individuelle, digicodes, clés et télécommandes peuvent devenir un point faible. Avec le temps, l'usure ou des traces apparaissent sur les touches du digicode, les télécommandes se perdent ou passent de main en main, et le code est parfois communiqué à des livreurs, des techniciens ou des invités qui le conservent bien après en avoir eu besoin. WIFIGATE vous permet de gérer l'entrée depuis le téléphone, de partager un accès invité temporaire sans révéler de code permanent, et de révoquer facilement les autorisations sans remplacer serrures, codes ou télécommandes.",
-      "bullets": [
-        "Moins de dépendance au digicode, aux clés et aux télécommandes",
-        "Accès temporaire pour livreurs, invités et techniciens",
-        "Révocation facile des autorisations depuis le téléphone",
-        "Risque réduit lié aux codes partagés ou aux télécommandes transmises",
-        "Convient aux portails, portes, parkings et garages d'une maison individuelle",
-        "Gestion simple pour la famille et les utilisateurs réguliers",
-        "Une entrée quotidienne plus pratique",
-        "Plus de confidentialité et un meilleur contrôle sur qui peut entrer"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Accès temporaire. Pour le livreur, l'invité ou le technicien.",
+          "text": "Envoyez une invitation limitée dans le temps, valable uniquement pendant la période que vous choisissez, sans révéler de code permanent.",
+          "tags": [
+            "Livreurs",
+            "Invités",
+            "Techniciens"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Accès invité",
+            "status": "Valide",
+            "guest": "Technicien",
+            "when": "Aujourd'hui, 10:00–12:00",
+            "note": "Expire d'elle-même"
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Moins de risques liés aux codes et télécommandes qui circulent.",
+          "text": "Chacun a sa propre autorisation sur son téléphone : inutile de donner un code permanent ou une télécommande aux livreurs et aux invités.",
+          "tags": [
+            "Autorisation personnelle",
+            "Sans code permanent"
+          ]
+        },
+        {
+          "icon": "user-minus",
+          "title": "Retirer un accès. En un instant, depuis le téléphone.",
+          "text": "Quand quelqu'un ne doit plus entrer, retirez-lui l'accès immédiatement, sans changer de serrures, de codes ni de télécommandes.",
+          "tags": [
+            "Retrait immédiat",
+            "Serrures conservées"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "Plus de confidentialité. Plus de contrôle.",
+          "text": "Contrairement à un code partagé, chaque autorisation porte un nom : vous savez à tout moment qui peut entrer chez vous.",
+          "tags": [
+            "Liste des autorisations",
+            "Autorisations nominatives"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Moins de dépendance au digicode, aux clés et aux télécommandes.",
+          "text": "Gérez l'entrée depuis le téléphone, au lieu de compter sur un digicode, des clés et des télécommandes.",
+          "tags": [
+            "Gestion par téléphone"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Toute la famille. Une gestion simple.",
+          "text": "Ajoutez dans l'application les membres de la famille et les utilisateurs réguliers, chacun avec sa propre autorisation d'accès.",
+          "tags": [
+            "Membres de la famille",
+            "Utilisateurs réguliers"
+          ]
+        },
+        {
+          "icon": "gate",
+          "title": "Du portail au garage.",
+          "text": "WIFIGATE convient aux portails, portes d'entrée, parkings et portes de garage d'une maison individuelle, le tout ouvert depuis une seule application.",
+          "tags": [
+            "Portails",
+            "Portes",
+            "Portes de garage"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "L'entrée au quotidien. Plus pratique.",
+          "text": "Ouvrez avec le téléphone que vous avez en poche, à chaque départ et à chaque retour, sans code à retenir ni télécommande à chercher."
+        }
       ],
       "seoTitle": "Accès intelligent pour maison sans digicode partagé | WIFIGATE",
       "seoDescription": "Gérez les accès de votre maison depuis le téléphone avec WIFIGATE : autorisations temporaires pour invités et livreurs, moins de digicodes, de clés et de télécommandes.",
@@ -306,15 +703,98 @@ export default {
         }
       ],
       "paragraph": "Dans un immeuble résidentiel, l'accès ne s'arrête pas à la porte du hall : il y a aussi le portail, l'entrée du parking, les portes des caves et parfois une porte de service. Et il ne concerne pas seulement les résidents, mais aussi les locataires qui se succèdent, le conseil syndical ou le syndic, le personnel de ménage, les agents de maintenance et les prestataires réguliers. Quand tout cela repose sur un seul code et quelques télécommandes, le moindre changement (un résident qui part, une télécommande perdue, un prestataire remplacé) oblige à changer le code et à prévenir tout le monde à nouveau. WIFIGATE remplace cette méthode par une gestion des accès organisée à l'échelle de l'immeuble.",
-      "bullets": [
-        "Une autorisation personnelle pour chaque résident, au lieu d'un code unique pour tous",
-        "Ajout et retrait de résidents sans changer le code de tout l'immeuble",
-        "Des autorisations distinctes pour le ménage, la maintenance et les prestataires réguliers",
-        "Convient à la porte du hall, au portail et à l'entrée du parking",
-        "Moins de dépendance aux digicodes, aux clés et aux télécommandes",
-        "Historique des accès pour le conseil syndical ou le syndic",
-        "Gestion de toutes les autorisations de l'immeuble depuis le téléphone",
-        "Accès des nouveaux locataires dès le jour de l'emménagement, sans remise de clés"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Une autorisation personnelle. Pour chaque résident.",
+          "text": "Au lieu d'un code unique que tout le monde connaît et transmet, chaque résident a sa propre autorisation.",
+          "tags": [
+            "Sans code partagé"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Accès à l'immeuble",
+            "status": "Actif",
+            "rows": [
+              {
+                "name": "Chloé Lefebvre",
+                "badge": "Résidente"
+              },
+              {
+                "name": "Thomas Moreau",
+                "badge": "Résident"
+              },
+              {
+                "name": "Sophie Bernard",
+                "badge": "Conseil syndical"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-plus",
+          "title": "Les résidents changent. Le contrôle reste.",
+          "text": "Ajoutez et retirez des résidents sans changer le code de l'immeuble ni prévenir tout le monde à nouveau.",
+          "tags": [
+            "Ajout d'un résident",
+            "Retrait d'accès"
+          ]
+        },
+        {
+          "icon": "wrench",
+          "title": "Une autorisation distincte pour les intervenants",
+          "text": "Personnel de ménage, agents de maintenance et prestataires réguliers reçoivent leur propre autorisation, et non le code de l'immeuble.",
+          "tags": [
+            "Ménage",
+            "Entretien",
+            "Prestataires"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "Pas seulement la porte du hall",
+          "text": "WIFIGATE convient à la porte du hall, au portail de l'immeuble et à l'entrée du parking, que chaque résident ouvre depuis son téléphone avec sa propre autorisation.",
+          "tags": [
+            "Hall",
+            "Portail",
+            "Entrée du parking"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Moins de codes. Moins de télécommandes.",
+          "text": "Moins de dépendance aux digicodes, aux clés et aux télécommandes : l'entrée de l'immeuble s'ouvre depuis le téléphone.",
+          "tags": [
+            "Ouverture par téléphone",
+            "Télécommandes toujours actives"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Plus de transparence pour le conseil syndical",
+          "text": "Le conseil syndical ou le syndic voit dans l'historique des accès qui a ouvert et quand.",
+          "tags": [
+            "Sur 90 jours",
+            "Syndic"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Toutes les autorisations de l'immeuble, depuis le téléphone",
+          "text": "Gérez depuis le téléphone une liste à jour de toutes les autorisations d'accès à l'immeuble, chacune avec un nom.",
+          "tags": [
+            "Liste à jour",
+            "Autorisations nominatives"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "Nouveau résident ? L'accès est déjà prêt.",
+          "text": "Les nouveaux locataires reçoivent leur accès dès le jour de l'emménagement, sans remise de clés à organiser.",
+          "tags": [
+            "Dès le premier jour"
+          ]
+        }
       ],
       "seoTitle": "Contrôle d'accès pour immeubles résidentiels | WIFIGATE",
       "seoDescription": "WIFIGATE apporte une gestion d'accès intelligente aux immeubles résidentiels : ouverture depuis le téléphone, accès invités temporaires, moins de digicodes et plus de transparence.",
@@ -360,15 +840,95 @@ export default {
         }
       ],
       "paragraph": "Un immeuble de bureaux doit offrir une entrée fluide aux employés, visiteurs, fournisseurs et équipes d'exploitation, sans surcharger l'accueil et sans gérer manuellement clés ou badges. WIFIGATE permet d'accorder des autorisations permanentes aux employés et des autorisations temporaires aux visiteurs, de contrôler les accès depuis le téléphone et de gérer les entrées d'une manière adaptée à un environnement professionnel moderne, net et organisé.",
-      "bullets": [
-        "Autorisations permanentes pour les employés et les équipes",
-        "Accès temporaire pour visiteurs, fournisseurs et livreurs",
-        "Moins de charge pour l'accueil et les équipes d'exploitation",
-        "Convient aux portes d'entrée, étages, salles et parkings",
-        "Gestion ordonnée des utilisateurs et des autorisations",
-        "Moins de dépendance aux clés, badges d'accès et codes",
-        "Une image plus moderne et plus pratique pour l'immeuble",
-        "Historique des accès pour le contrôle et la transparence"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Une autorisation permanente. Pour chaque employé.",
+          "text": "Employés et équipes reçoivent sur leur téléphone une autorisation personnelle et permanente, à partir de la date que vous fixez.",
+          "visual": {
+            "type": "roster",
+            "heading": "Équipe du bureau",
+            "status": "Actif",
+            "rows": [
+              {
+                "name": "Julie Girard",
+                "badge": "Accès permanent"
+              },
+              {
+                "name": "Antoine Roux",
+                "badge": "Accès permanent"
+              },
+              {
+                "name": "Manon Fournier",
+                "badge": "Accès permanent"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "send",
+          "title": "Un accès limité dans le temps. Pour tous les autres.",
+          "text": "Les visiteurs reçoivent avant même leur arrivée une invitation limitée dans le temps, qui peut aussi inclure les indications d'arrivée.",
+          "tags": [
+            "Candidats",
+            "Fournisseurs",
+            "Livreurs"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Moins de charge pour l'accueil et l'exploitation",
+          "text": "Les visiteurs entrent avec leur téléphone sans attendre que quelqu'un descende leur ouvrir, et l'accueil gère moins d'arrivées.",
+          "tags": [
+            "Accueil",
+            "Équipe d'exploitation"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "De la porte d'entrée au parking",
+          "text": "WIFIGATE convient aux portes d'entrée, aux étages, aux salles et aux accès au parking, le tout ouvert depuis le téléphone.",
+          "tags": [
+            "Portes d'entrée",
+            "Étages et salles",
+            "Accès au parking"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "Utilisateurs et autorisations. Tout est en ordre.",
+          "text": "L'arrivée et le départ d'un salarié se règlent en une seule action dans la liste, et l'autorisation prend fin à la date que vous fixez.",
+          "tags": [
+            "Arrivée d'un salarié",
+            "Départ d'un salarié"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Moins de badges, de clés et de codes",
+          "text": "Moins de badges à émettre et moins de clés à récupérer au départ d'un salarié, puisque chaque employé entre avec son propre téléphone.",
+          "tags": [
+            "Entrée par téléphone"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Une image moderne et pratique pour l'immeuble",
+          "text": "Employés et visiteurs entrent avec leur téléphone, d'une manière adaptée à un environnement professionnel moderne, net et organisé.",
+          "tags": [
+            "Employés",
+            "Visiteurs"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Chaque ouverture porte un nom et une heure",
+          "text": "Vous pouvez vérifier après coup qui est entré à un étage, dans la réserve ou au parking, pour le contrôle et la transparence.",
+          "tags": [
+            "90 derniers jours",
+            "Qui et quand"
+          ]
+        }
       ],
       "seoTitle": "Contrôle d'accès pour immeubles de bureaux | WIFIGATE",
       "seoDescription": "WIFIGATE permet aux immeubles de bureaux de gérer l'entrée des employés, visiteurs et fournisseurs depuis le téléphone, avec autorisations temporaires ou permanentes.",
@@ -414,15 +974,102 @@ export default {
         }
       ],
       "paragraph": "Petites entreprises, cabinets, studios, entrepôts et bureaux s'appuient souvent sur un digicode, une clé ou une simple serrure magnétique. Les difficultés commencent quand le code circule entre employés, fournisseurs et invités, ou quand il faut donner un accès temporaire sans affaiblir la sécurité. WIFIGATE vous permet de gérer la porte d'entrée depuis le téléphone, de partager des autorisations temporaires et de réduire le besoin de codes permanents, de clés physiques ou de coordination manuelle à chaque entrée.",
-      "bullets": [
-        "Convient aux portes d'entrée à serrure électrique ou magnétique",
-        "Ouverture depuis le téléphone pour employés et responsables",
-        "Accès temporaire pour invités, fournisseurs et techniciens",
-        "Moins de dépendance au digicode et aux codes permanents",
-        "Convient aux petites entreprises, cabinets, studios et bureaux",
-        "Une gestion des autorisations plus simple et plus sûre",
-        "Moins de clés physiques à gérer",
-        "Une solution pratique pour une entrée moderne sans système complexe"
+      "benefits": [
+        {
+          "icon": "shield-check",
+          "title": "Une gestion des autorisations simple. Et plus sûre.",
+          "text": "Chaque employé, fournisseur ou invité dispose d'une autorisation personnelle révocable à tout moment, et l'historique des accès indique qui a ouvert et quand.",
+          "tags": [
+            "Révocable à tout moment",
+            "Historique des accès"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Historique des entrées",
+            "status": "Aujourd'hui",
+            "rows": [
+              {
+                "time": "07:40",
+                "name": "Fournisseur",
+                "event": "Ouverture"
+              },
+              {
+                "time": "08:50",
+                "name": "Claire, responsable",
+                "event": "Ouverture"
+              },
+              {
+                "time": "19:30",
+                "name": "Équipe de ménage",
+                "event": "Ouverture"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Un accès temporaire qui se ferme tout seul.",
+          "text": "Invités, fournisseurs et intervenants reçoivent une autorisation pour leur propre créneau, sans que le responsable des lieux ait à se déplacer exprès pour ouvrir.",
+          "tags": [
+            "Fournisseurs",
+            "Techniciens",
+            "Livreurs"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "La serrure déjà installée. Elle s'ouvre depuis le téléphone.",
+          "text": "WIFIGATE convient aux portes d'entrée équipées d'une serrure électrique ou magnétique et les ouvre depuis le téléphone, tandis que la serrure existante reste en place.",
+          "tags": [
+            "Serrure électrique",
+            "Serrure magnétique"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Employés et responsables ouvrent depuis le téléphone.",
+          "text": "Chaque employé et chaque responsable ouvre la porte d'entrée depuis l'application avec une autorisation personnelle, ce qui réduit le besoin de coordination manuelle à chaque entrée.",
+          "tags": [
+            "Employés",
+            "Responsables"
+          ]
+        },
+        {
+          "icon": "user-check",
+          "title": "Moins de codes qui passent de main en main.",
+          "text": "Un code donné à tout le monde peut rester entre les mains de personnes qui n'ont plus besoin d'entrer, alors qu'une autorisation personnelle réduit le besoin de digicode et de code permanent.",
+          "tags": [
+            "Digicode",
+            "Code permanent"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Moins de clés au trousseau.",
+          "text": "La porte s'ouvre depuis le téléphone, et moins de clés physiques circulent entre employés et responsables.",
+          "tags": [
+            "Clés physiques"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Une entrée moderne. Sans système complexe.",
+          "text": "Pas d'armoire de commande, de logiciel de gestion ni de lecteur de badges à installer : tout se gère depuis l'application.",
+          "tags": [
+            "Sans armoire de commande",
+            "Sans lecteur de badges"
+          ]
+        },
+        {
+          "icon": "briefcase",
+          "title": "Pour les petites entreprises, les cabinets et les bureaux.",
+          "text": "Petites entreprises, cabinets, studios et bureaux gèrent leur porte d'entrée depuis le téléphone et partagent une autorisation temporaire selon les besoins.",
+          "tags": [
+            "Cabinets",
+            "Bureaux",
+            "Entrepôts"
+          ]
+        }
       ],
       "seoTitle": "Portes d'entrée et serrures magnétiques pour entreprises | WIFIGATE",
       "seoDescription": "WIFIGATE gère les portes d'entrée et serrures magnétiques d'entreprise depuis le téléphone, avec autorisations temporaires et moins de digicodes et de clés.",
@@ -468,15 +1115,91 @@ export default {
         }
       ],
       "paragraph": "Installations sportives, terrains de padel, courts de tennis, salles de sport et centres d'entraînement doivent gérer les accès des abonnés, coachs, équipes et visiteurs selon les horaires d'ouverture, les réservations et les événements. WIFIGATE permet d'accorder un accès temporaire ou permanent depuis le téléphone, de réduire la dépendance à une clé ou à un code partagé, et d'améliorer l'expérience d'entrée des utilisateurs, en particulier dans les complexes où la fréquentation varie au fil de la journée.",
-      "bullets": [
-        "Convient aux terrains de padel, courts de tennis, salles de sport et centres d'entraînement",
-        "Accès selon les horaires d'ouverture, les réservations ou les autorisations",
-        "Gestion des abonnés, coachs, employés et visiteurs",
-        "Moins de dépendance aux clés et codes partagés",
-        "Entrée rapide et pratique depuis le téléphone",
-        "Convient aux sites dont les horaires varient",
-        "Autorisations temporaires pour événements, cours ou entraînements",
-        "Historique des accès pour le contrôle et l'exploitation"
+      "benefits": [
+        {
+          "icon": "calendar-check",
+          "title": "Réservez un terrain. L'accès s'ouvre avec la réservation.",
+          "text": "Celui qui a réservé un terrain pour une heure donnée reçoit une autorisation qui s'active à ce moment-là et expire à la fin du créneau.",
+          "tags": [
+            "Horaires d'ouverture",
+            "Réservations",
+            "Autorisations"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Invitation d'accès",
+            "status": "Valide",
+            "guest": "Camille, terrain 2",
+            "when": "Aujourd'hui 18:00–19:30",
+            "note": "Indications d'arrivée incluses"
+          }
+        },
+        {
+          "icon": "users",
+          "title": "Abonné, coach, visiteur. À chacun son accès.",
+          "text": "Abonnés réguliers, coachs qui viennent certains jours, employés et visiteurs occasionnels sont gérés dans une seule liste, sans clé qui passe de main en main.",
+          "tags": [
+            "Abonnés",
+            "Coachs",
+            "Employés et visiteurs"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Moins de clés. Moins de codes partagés.",
+          "text": "Un code partagé continue d'ouvrir même quand il ne le devrait plus, alors qu'une autorisation personnelle prend fin dès qu'elle n'est plus utile.",
+          "tags": [
+            "Autorisation personnelle"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Cours, entraînement ou événement. Accès limité à ces heures.",
+          "text": "Les participants à un cours, un entraînement ou un événement reçoivent une autorisation temporaire valable uniquement aux heures que vous avez fixées.",
+          "tags": [
+            "Événements",
+            "Cours",
+            "Entraînements"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Savoir qui était sur place, et quand.",
+          "text": "L'historique des accès indique qui a ouvert et quand, aide l'exploitation et confirme que le site a bien été fermé en fin de journée.",
+          "tags": [
+            "Contrôle",
+            "Exploitation",
+            "90 derniers jours"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Entrée par téléphone. Rapide et pratique.",
+          "text": "Chaque utilisateur ouvre lui-même depuis l'application, sans que personne ait à attendre au portail pour lui ouvrir.",
+          "tags": [
+            "Connexion directe",
+            "Sans SIM"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Les horaires changent ? L'accès aussi.",
+          "text": "Des événements programmés peuvent ouvrir selon les jours et les heures, pour que l'accès suive les horaires d'ouverture du site.",
+          "tags": [
+            "Événements programmés",
+            "Hebdomadaire ou ponctuel"
+          ]
+        },
+        {
+          "icon": "dumbbell",
+          "title": "Du terrain de padel à la salle de sport.",
+          "text": "WIFIGATE convient aux terrains de padel et aux courts de tennis, aux salles de sport et aux centres d'entraînement, surtout quand la fréquentation varie au fil de la journée.",
+          "tags": [
+            "Padel",
+            "Courts de tennis",
+            "Salles de sport"
+          ]
+        }
       ],
       "seoTitle": "Contrôle d'accès installations sportives et padel | WIFIGATE",
       "seoDescription": "WIFIGATE apporte un contrôle d'accès intelligent aux terrains de padel, salles de sport et centres d'entraînement : entrée par téléphone, autorisations temporaires ou permanentes.",
@@ -522,15 +1245,96 @@ export default {
         }
       ],
       "paragraph": "Les sites de stockage et les espaces de casiers reposent généralement sur des codes partagés, des claviers à code et des clés physiques qui sont copiés, transmis et rarement changés. WIFIGATE fait passer l'accès sur le téléphone : chaque locataire dispose d'une autorisation personnelle pour le portail du site, l'entrée du bâtiment et, lorsqu'il est installé, un box ou un casier à verrouillage électrique, limitée aux horaires que vous choisissez et retirée dès la fin de la location. Le téléphone communique directement avec le boîtier installé sur place, sans carte SIM ni connexion internet à la porte, et sans abonnement mensuel pour un usage standard.",
-      "bullets": [
-        "Ouverture du portail du site, de la porte du bâtiment et du casier depuis le téléphone",
-        "Une autorisation personnelle pour chaque locataire",
-        "Accès limité aux horaires d'ouverture ou à une plage sur mesure",
-        "Accès ponctuel pour les déménageurs et les proches",
-        "Retrait de l'accès dès la fin de la location",
-        "Historique de qui a ouvert et quand",
-        "Aucun code partagé, clavier ou clé à changer",
-        "Ni carte SIM ni connexion internet à la porte"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Une autorisation personnelle. Pour chaque locataire.",
+          "text": "Au lieu d'un code partagé dont les anciens locataires se souviennent encore, chaque locataire dispose de son propre accès.",
+          "visual": {
+            "type": "roster",
+            "heading": "Accès au site",
+            "status": "Actif",
+            "rows": [
+              {
+                "name": "Nathalie Garnier",
+                "badge": "Autorisée"
+              },
+              {
+                "name": "Pierre Lambert",
+                "badge": "Autorisé"
+              },
+              {
+                "name": "Émilie Rousseau",
+                "badge": "Autorisée"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-minus",
+          "title": "La location prend fin. L'accès aussi.",
+          "text": "Retirez l'autorisation dès la fin du contrat ou en cas d'impayé, sans clés à récupérer.",
+          "tags": [
+            "Fin de contrat",
+            "Impayé"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Portail, porte et casier. Depuis le téléphone.",
+          "text": "Chaque locataire ouvre le portail du site, la porte du bâtiment et, lorsqu'il est installé, un box ou un casier à verrouillage électrique.",
+          "tags": [
+            "Portail du site",
+            "Porte du bâtiment",
+            "Verrouillage électrique"
+          ]
+        },
+        {
+          "icon": "clock",
+          "title": "Des horaires d'accès que vous fixez.",
+          "text": "Autorisez l'entrée uniquement pendant les horaires d'ouverture du site, ou accordez à un locataire une plage plus large.",
+          "tags": [
+            "Horaires d'ouverture",
+            "Plage sur mesure"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "Accès ponctuel. Pour les déménageurs et les proches.",
+          "text": "Un déménageur ou un proche peut recevoir un accès valable une seule journée, sans code partagé ni clé.",
+          "tags": [
+            "Déménageurs",
+            "Proches",
+            "Une journée"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Savoir qui est entré et quand.",
+          "text": "Chaque ouverture est enregistrée avec le nom de l'utilisateur et l'heure : une question sur une visite trouve sa réponse dans l'historique, et non dans les images de vidéosurveillance.",
+          "tags": [
+            "Sur 90 jours",
+            "Nom et heure"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Aucun code partagé. Aucune clé à changer.",
+          "text": "Codes, claviers à code et clés qui se copient et passent de main en main cèdent la place à un accès personnel sur le téléphone.",
+          "tags": [
+            "Sans clavier",
+            "Sans clés"
+          ]
+        },
+        {
+          "icon": "sim-off",
+          "title": "Sans SIM. Sans internet à la porte.",
+          "text": "Le téléphone communique directement avec le boîtier installé sur place, et un usage standard ne demande aucun abonnement mensuel.",
+          "tags": [
+            "Connexion directe",
+            "Sans abonnement mensuel"
+          ]
+        }
       ],
       "seoTitle": "Contrôle d'accès pour espaces de stockage et casiers | WIFIGATE",
       "seoDescription": "WIFIGATE donne à chaque locataire un accès personnel par téléphone au portail, aux portes et à son casier, limité aux horaires d'ouverture et retiré en fin de location.",

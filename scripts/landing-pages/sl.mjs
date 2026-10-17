@@ -41,28 +41,136 @@ export default {
       "note": "Ure se nastavljajo v korakih po 10 minut. Če se pri vas šabat konča po polnoči, dodajte dogodek tudi za nedeljo od 00:00."
     },
     "benefitsTitle": "Kaj vključuje šabatni časovnik WIFIGATE za dvoriščna vrata",
-    "bullets": [
-      "Prost prihod in odhod ob šabatu, ne da bi kdor koli upravljal vrata",
-      "Tedenski urnik, ki ga nastavite enkrat",
-      "Prazniki, načrtovani do 90 dni vnaprej",
-      "Sprememba ur v aplikaciji, brez klicanja serviserja",
-      "Zaklepanje vrat ob stalnih urah, na primer ponoči",
-      "Ob delavnikih: odpiranje s telefonom, daljincem ali gumbom",
-      "Povezava s krmilnikom obstoječih dvoriščnih vrat ali zapornice",
-      "Brez kartice SIM, brez interneta pri vratih in brez mesečne naročnine"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Nastavite enkrat. Deluje vsak šabat.",
+        "text": "Za petek in soboto označite zelene dogodke »Odprta vrata«, naprava vrat pa jih vsak teden izvaja sama.",
+        "tags": [
+          "Do 50 dogodkov",
+          "Koraki po 10 minut"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Odprta vrata ob šabatu",
+          "status": "Tedensko",
+          "rows": [
+            {
+              "day": "Petek",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Sobota",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Prihod in odhod ob šabatu. Ničesar se ni treba dotakniti.",
+        "text": "Ob šabatu vrata ostanejo odprta ob urah, ki ste jih nastavili, in nikomur jih ni treba upravljati.",
+        "tags": [
+          "Brez daljinca",
+          "Brez telefona",
+          "Brez gumba"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Prazniki, načrtovani vnaprej",
+        "text": "Za predvečer praznika in za praznični dan dodate enkratne dogodke, do 90 dni vnaprej, vsak dogodek pa se po izteku datuma sam izbriše.",
+        "tags": [
+          "Do 90 dni",
+          "Roš hašana",
+          "Pesah"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Ure spremenite v aplikaciji. Brez serviserja.",
+        "text": "Ob menjavi letnega časa posodobite ure na zaslonu »Načrtovani dogodki« in shranite.",
+        "tags": [
+          "Skrbnik sistema",
+          "Ob vratih"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Zaklepanje vrat ob stalnih urah, na primer ponoči",
+        "text": "Rdeči dogodek »Zaprta vrata« drži vrata zaprta ob urah, ki ste jih nastavili, zeleni dogodek pa jih drži odprta.",
+        "tags": [
+          "Rdeči dogodek",
+          "Zeleni dogodek"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Ob delavnikih: telefon, daljinec ali gumb",
+        "text": "Zunaj ur, ki ste jih nastavili, vrata delujejo kot običajno in se odpirajo s telefonom, daljincem ali gumbom.",
+        "tags": [
+          "Zunaj dogodkov",
+          "Obstoječi daljinci"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Poveže se z obstoječimi vrati ali zapornico",
+        "text": "WIFIGATE se poveže z obstoječim krmilnikom vrat ali zapornice, zato v električni omarici ne potrebujete ločenega šabatnega časovnika.",
+        "tags": [
+          "Električna vrata",
+          "Parkirna zapornica"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Brez kartice SIM, brez interneta pri vratih in brez mesečne naročnine",
+        "text": "Vrata potrebujejo samo elektriko, telefon se z napravo poveže neposredno, za napravo in namestitev pa plačate enkrat.",
+        "tags": [
+          "Samo elektrika",
+          "Enkratno plačilo"
+        ]
+      }
     ],
     "facts": {
       "title": "Šabatni časovnik WIFIGATE na kratko",
       "rows": [
-        { "label": "Dogodki", "value": "Skupaj do 50, tedenski in enkratni" },
-        { "label": "Časovni korak", "value": "10 minut" },
-        { "label": "Prazniki", "value": "Enkratni dogodki na predvečer praznika in na praznični dan, do 90 dni vnaprej" },
-        { "label": "Odprto ali zaprto", "value": "Zeleni dogodek drži vrata odprta, rdeči jih drži zaprta" },
-        { "label": "Kje je urnik", "value": "Shranjen je in se izvaja v napravi vrat" },
-        { "label": "Kaj potrebujejo vrata", "value": "Samo elektriko, brez kartice SIM, usmerjevalnika in interneta" },
-        { "label": "Sprememba ur", "value": "V aplikaciji, ob vratih, brez serviserja" },
-        { "label": "Po izpadu elektrike", "value": "Urnik ostane shranjen, dogodki pa znova začnejo delovati, ko se z vrati poveže kateri koli telefon" },
-        { "label": "Plačilo", "value": "Enkrat za napravo in namestitev, brez mesečne naročnine" }
+        {
+          "label": "Dogodki",
+          "value": "Skupaj do 50, tedenski in enkratni"
+        },
+        {
+          "label": "Časovni korak",
+          "value": "10 minut"
+        },
+        {
+          "label": "Prazniki",
+          "value": "Enkratni dogodki na predvečer praznika in na praznični dan, do 90 dni vnaprej"
+        },
+        {
+          "label": "Odprto ali zaprto",
+          "value": "Zeleni dogodek drži vrata odprta, rdeči jih drži zaprta"
+        },
+        {
+          "label": "Kje je urnik",
+          "value": "Shranjen je in se izvaja v napravi vrat"
+        },
+        {
+          "label": "Kaj potrebujejo vrata",
+          "value": "Samo elektriko, brez kartice SIM, usmerjevalnika in interneta"
+        },
+        {
+          "label": "Sprememba ur",
+          "value": "V aplikaciji, ob vratih, brez serviserja"
+        },
+        {
+          "label": "Po izpadu elektrike",
+          "value": "Urnik ostane shranjen, dogodki pa znova začnejo delovati, ko se z vrati poveže kateri koli telefon"
+        },
+        {
+          "label": "Plačilo",
+          "value": "Enkrat za napravo in namestitev, brez mesečne naročnine"
+        }
       ]
     },
     "updatedLabel": "Zadnja posodobitev: {date}",

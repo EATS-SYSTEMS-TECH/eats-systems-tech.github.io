@@ -5,6 +5,7 @@ import vm from "node:vm";
 import { execFileSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 import { NICHE_CHROME } from "./niche-content.mjs";
+import { benefitIconSvg } from "./benefit-icons.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
 import { LANDING_PAGES, LANDING_PAGE_LOCALES, validateLandingPageLocales } from "./landing-pages/index.mjs";
 import { SITE_LOGIN_LABELS, SITE_NAVIGATION } from "./site-navigation.mjs";
@@ -1235,25 +1236,129 @@ function setNicheHighlights($, highlights) {
   });
 }
 
-// The benefits grid is a 3x3 square: eight bullets around an inert tile in
-// the middle cell, so the square reads as deliberately incomplete. Every niche
-// carries exactly eight bullets -- verify-site.mjs enforces that -- and any
-// other count simply renders as a plain grid instead of a broken square.
-function setNicheBenefits($, bullets) {
+// Key benefits as a bento grid (css/niche.css, "Key benefits: bento"). Each
+// page supplies its own cards: { icon, title, text, tags?, visual? }. The
+// first card leads (7 of 12 columns) and the second sits beside it (5 of 12);
+// the rest run in rows of three, and a last row of one or two widens to fill
+// the row, so no count leaves an empty cell.
+function benefitSpans(count) {
+  const spans = [];
+  for (let index = 0; index < count; index += 1) {
+    if (count >= 2 && index < 2) {
+      spans.push(index === 0 ? "lead" : "feature");
+      continue;
+    }
+    const rest = count - Math.min(count, 2);
+    const position = index - Math.min(count, 2);
+    const lastRow = rest % 3;
+    const inLastRow = lastRow && position >= rest - lastRow;
+    spans.push(count === 1 ? "full" : inLastRow ? (lastRow === 1 ? "full" : "half") : "third");
+  }
+  return spans;
+}
+
+const graphemes = new Intl.Segmenter("en", { granularity: "grapheme" });
+const firstGrapheme = (text) => graphemes.segment(text)[Symbol.iterator]().next().value?.segment || "";
+
+// Minutes of an "HH:MM" time, 24:00 included.
+const minutesOf = (time) => {
+  const [hours, minutes] = time.split(":").map(Number);
+  return hours * 60 + minutes;
+};
+
+// Small illustrations of the product inside a card. They repeat what the card
+// says, so they are hidden from assistive technology, and nothing in them is
+// interactive.
+function renderBenefitVisual($, visual, locale) {
+  const text = (className, value, tag = "span") => {
+    const element = $(`<${tag}>`).addClass(className);
+    setLocalizedText($, element, value, locale);
+    return element;
+  };
+  const box = $("<div>").addClass(`bento-visual bento-visual--${visual.type}`).attr("aria-hidden", "true");
+  const bar = $("<div>").addClass("bento-visual__bar").append(text("bento-visual__heading", visual.heading));
+  if (visual.status) bar.append(text("bento-visual__status", visual.status));
+  box.append(bar);
+
+  const rows = $("<ul>").addClass("bento-visual__rows");
+  if (visual.type === "roster") {
+    for (const row of visual.rows) {
+      rows.append($("<li>").addClass("bento-visual__row").append(
+        $("<span>").addClass("bento-visual__avatar").text(firstGrapheme(row.name)),
+        text("bento-visual__name", row.name),
+        text("bento-visual__badge", row.badge)
+      ));
+    }
+  } else if (visual.type === "history") {
+    for (const row of visual.rows) {
+      rows.append($("<li>").addClass("bento-visual__row").append(
+        $("<span>").addClass("bento-visual__time").attr("dir", "ltr").text(row.time),
+        text("bento-visual__name", row.name),
+        text("bento-visual__badge", row.event)
+      ));
+    }
+  } else if (visual.type === "invite") {
+    rows.append(
+      $("<li>").addClass("bento-visual__row bento-visual__row--guest").append(
+        $("<span>").addClass("bento-visual__avatar").text(firstGrapheme(visual.guest)),
+        text("bento-visual__name", visual.guest)
+      ),
+      $("<li>").addClass("bento-visual__row").append($("<span>").addClass("bento-visual__glyph").html(benefitIconSvg("clock")), text("bento-visual__detail", visual.when)),
+      $("<li>").addClass("bento-visual__row").append($("<span>").addClass("bento-visual__glyph").html(benefitIconSvg("map-pin")), text("bento-visual__detail", visual.note))
+    );
+  } else if (visual.type === "schedule") {
+    for (const row of visual.rows) {
+      const [from, to] = row.range.match(/\d{1,2}:\d{2}/g).map(minutesOf);
+      rows.append($("<li>").addClass("bento-visual__row").append(
+        text("bento-visual__day", row.day),
+        $("<span>").addClass("bento-visual__track").append(
+          $("<span>").addClass("bento-visual__span").attr("style", `--from: ${(from / 1440) * 100}%; --to: ${(to / 1440) * 100}%;`)
+        ),
+        $("<span>").addClass("bento-visual__time").attr("dir", "ltr").text(row.range)
+      ));
+    }
+  } else {
+    throw new Error(`Unknown benefit visual "${visual.type}"`);
+  }
+  return box.append(rows);
+}
+
+function setNicheBenefits($, benefits, locale) {
   const list = $("#niche-benefits-list");
   if (!list.length) {
     return;
   }
 
-  const items = Array.isArray(bullets) ? bullets : [];
-  const centerGap = items.length === 8;
-
-  list.empty();
-  items.forEach((item, index) => {
-    if (centerGap && index === 4) {
-      list.append($("<li>").addClass("niche-benefit niche-benefit--gap").attr("aria-hidden", "true"));
+  const spans = benefitSpans(benefits.length);
+  const total = String(benefits.length).padStart(2, "0");
+  list.empty().attr("data-count", String(benefits.length));
+  benefits.forEach((benefit, index) => {
+    const card = $("<li>").addClass(`bento-card bento-card--${spans[index]}`);
+    const top = $("<div>").addClass("bento-card__top").append(
+      $("<span>").addClass("bento-card__icon").attr("aria-hidden", "true").html(benefitIconSvg(benefit.icon)),
+      $("<span>").addClass("bento-card__count").attr({ "aria-hidden": "true", dir: "ltr" })
+        .text(`${String(index + 1).padStart(2, "0")} / ${total}`)
+    );
+    const title = $("<h3>").addClass("bento-card__title");
+    setLocalizedText($, title, benefit.title, locale);
+    const body = $("<div>").addClass("bento-card__body").append(title);
+    const text = $("<p>").addClass("bento-card__text");
+    setLocalizedText($, text, benefit.text, locale);
+    body.append(text);
+    if (benefit.tags?.length) {
+      const tags = $("<ul>").addClass("bento-card__tags");
+      for (const tag of benefit.tags) {
+        const item = $("<li>").addClass("bento-tag");
+        setLocalizedText($, item, tag, locale);
+        tags.append(item);
+      }
+      body.append(tags);
     }
-    list.append($("<li>").addClass("niche-benefit").text(item));
+    card.append(top, body);
+    if (benefit.visual) {
+      card.addClass("bento-card--with-visual").append(renderBenefitVisual($, benefit.visual, locale));
+    }
+    list.append(card);
   });
 }
 
@@ -1291,13 +1396,13 @@ function fillUseCaseBody($, { chrome, content, image, locale, pageKey, accessibi
   setNicheHighlights($, content.highlights);
 
   // The hero carries exactly one supporting line. Where the niche supplies a
-  // `heroLead` that is it, and the bullets appear only in the benefits grid;
-  // otherwise the first couple of bullets stand in as proof points, mirroring
+  // `heroLead` that is it, and the benefits appear only in their own section;
+  // otherwise the first couple of benefit titles stand in as proof points, mirroring
   // the homepage hero. Never both, so no copy is repeated on the page.
   if (content.heroLead) {
     $("#niche-hero-proof").remove();
   } else {
-    setNicheList($, "#niche-hero-proof", (content.bullets || []).slice(0, 2), "niche-hero__proof-item");
+    setNicheList($, "#niche-hero-proof", (content.benefits || []).slice(0, 2).map((benefit) => benefit.title), "niche-hero__proof-item");
   }
   $("#niche-hero-cta-label").text("WhatsApp @WIFIGATE");
   $("#niche-hero-benefits").text(chrome.benefitsTitle);
@@ -1310,19 +1415,19 @@ function fillUseCaseBody($, { chrome, content, image, locale, pageKey, accessibi
     .attr("height", String(image.heroHeight));
 
   $("#niche-benefits-title").text(content.benefitsTitle || chrome.benefitsTitle);
-  setNicheBenefits($, content.bullets);
+  setNicheBenefits($, content.benefits, locale);
 
   // The questions people ask about this use case, answered on the page and
   // in its FAQPage data.
   $("#niche-faq-title").text(content.faqTitle || chrome.faqTitle);
   const faqList = $("#niche-faq-list").empty();
   for (const item of content.faq) {
-    const entry = $("<details>").addClass("niche-faq__item");
-    const question = $("<summary>").addClass("niche-faq__question");
+    const entry = $("<details>").addClass("seo-faq__item");
+    const question = $("<summary>");
     setLocalizedText($, question, item.question, locale);
-    const answer = $("<p>").addClass("niche-faq__answer");
+    const answer = $("<p>");
     setLocalizedText($, answer, item.answer, locale);
-    faqList.append(entry.append(question, answer));
+    faqList.append(entry.append(question, $("<div>").addClass("seo-faq__answer").append(answer)));
   }
 
   $("#js-year").text(nowDate.slice(0, 4));
@@ -1330,24 +1435,10 @@ function fillUseCaseBody($, { chrome, content, image, locale, pageKey, accessibi
   updateAccessibilityMarkup($, accessibilityBundle, locale);
 }
 
-// The breadcrumb and the list of every use case (except `currentKey`) plus
-// WIFIGATE Host, so each page leads to the rest.
-function setUseCaseNavigation($, { chrome, content, locale, currentKey }) {
+// The breadcrumb: home, then this page.
+function setUseCaseNavigation($, { chrome, content }) {
   $("#niche-breadcrumb-home").text(chrome.homeLabel);
   $("#niche-breadcrumb-current").text(content.label);
-
-  const localeNicheContent = getNichePageContent(locale);
-  $("#niche-related-title").text(chrome.relatedTitle);
-  const related = $("#niche-related-list").empty();
-  for (const other of NICHE_DEFINITIONS) {
-    if (other.key === currentKey) continue;
-    const link = $("<a>").addClass("niche-related__link").attr("href", buildPagePath(locale, other.key));
-    setLocalizedText($, link, localeNicheContent.niches[other.key].label, locale);
-    related.append($("<li>").append(link));
-  }
-  related.append($("<li>").append($("<a>").addClass("niche-related__link").attr("href", buildPagePath(locale, guestInvitesPageKey)).text("WIFIGATE Host")));
-  // No closing CTA section: the hero already carries the WhatsApp action and
-  // the shared footer carries support + WhatsApp Business.
 }
 
 function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
@@ -1356,7 +1447,7 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
   const defaultNicheContent = getNichePageContent(defaultLocale);
 
   fillUseCaseBody($, { chrome, content, image: niche.image, locale, pageKey: niche.key, accessibilityBundle });
-  setUseCaseNavigation($, { chrome, content, locale, currentKey: niche.key });
+  setUseCaseNavigation($, { chrome, content });
 
   const adjacentNiches = getCircularAdjacentNiches(niche.key);
   if (adjacentNiches) {
@@ -1529,11 +1620,11 @@ function fillLandingSections($, { content, locale, modified }) {
   $("#niche-benefits").after(facts.section);
 
   // Each question is a heading inside its summary, with a stable anchor.
-  $("#niche-faq-list .niche-faq__question").each((index, element) => {
+  $("#niche-faq-list summary").each((index, element) => {
     const question = $(element);
     const heading = $("<h3>").addClass("landing-faq__heading").append(question.contents());
     question.append(heading);
-    question.closest(".niche-faq__item").attr("id", `faq-${index + 1}`);
+    question.closest(".seo-faq__item").attr("id", `faq-${index + 1}`);
   });
 }
 
@@ -1560,7 +1651,7 @@ async function buildLandingPages(homeData) {
   <link rel="stylesheet" href="${prefix}css/landing.css?v=20261016a" />`);
       fillUseCaseBody($, { chrome, content, image, locale, pageKey: key, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
       fillLandingSections($, { content, locale, modified });
-      setUseCaseNavigation($, { chrome, content, locale, currentKey: key });
+      setUseCaseNavigation($, { chrome, content });
       $(".niche-hero__pager").remove();
       updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer);
       rewriteNicheInternalLinks($, locale);

@@ -41,28 +41,136 @@ export default {
       "note": "Gli orari si impostano a intervalli di 10 minuti. Se da te lo Shabbat finisce dopo mezzanotte, aggiungi anche un evento la domenica dalle 00:00."
     },
     "benefitsTitle": "Cosa include il timer di Shabbat di WIFIGATE per cancelli",
-    "bullets": [
-      "Ingresso e uscita liberi di Shabbat, senza che nessuno azioni il cancello",
-      "Una programmazione settimanale che imposti una volta sola",
-      "Festività pianificate in anticipo, fino a 90 giorni prima",
-      "Orari modificabili dall'app, senza chiamare un tecnico",
-      "Cancello bloccato in orari fissi, per esempio di notte",
-      "Durante la settimana: apertura dal telefono, dal telecomando o dal pulsante",
-      "Si collega alla centralina del cancello o della barriera esistente",
-      "Senza SIM, senza internet al cancello e senza abbonamento mensile"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Imposti una volta. Funziona ogni Shabbat.",
+        "text": "Segni eventi verdi di «Cancello aperto» il venerdì e il sabato, e il dispositivo del cancello li esegue da solo ogni settimana.",
+        "tags": [
+          "Fino a 50 eventi",
+          "Intervalli di 10 minuti"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Cancello aperto di Shabbat",
+          "status": "Settimanale",
+          "rows": [
+            {
+              "day": "Venerdì",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Sabato",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Entri ed esci di Shabbat. Senza toccare nulla.",
+        "text": "Di Shabbat il cancello resta aperto negli orari che hai stabilito, e nessuno deve azionarlo.",
+        "tags": [
+          "Senza telecomando",
+          "Senza telefono",
+          "Senza pulsante"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Festività pianificate in anticipo",
+        "text": "Aggiungi eventi singoli per la vigilia e per il giorno della festività, fino a 90 giorni in anticipo, e ogni evento si cancella da solo quando la sua data è passata.",
+        "tags": [
+          "Fino a 90 giorni",
+          "Rosh haShanà",
+          "Pesach"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Cambi gli orari dall'app. Senza tecnico.",
+        "text": "Quando cambia la stagione, aggiorni gli orari nella schermata «Eventi programmati» e salvi.",
+        "tags": [
+          "Amministratore del sistema",
+          "Vicino al cancello"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Blocchi il cancello in orari fissi, per esempio di notte",
+        "text": "Un evento rosso di «Cancello chiuso» tiene il cancello chiuso negli orari che hai stabilito, e un evento verde lo tiene aperto.",
+        "tags": [
+          "Evento rosso",
+          "Evento verde"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Durante la settimana: telefono, telecomando o pulsante",
+        "text": "Fuori dagli orari che hai stabilito il cancello funziona come sempre, e si apre dal telefono, dal telecomando o dal pulsante.",
+        "tags": [
+          "Fuori dagli eventi",
+          "Telecomandi esistenti"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Si collega al cancello o alla barriera che hai già",
+        "text": "WIFIGATE si collega alla centralina esistente del cancello o della barriera, quindi non serve un timer di Shabbat separato nel quadro elettrico.",
+        "tags": [
+          "Cancello elettrico",
+          "Barriera per parcheggi"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Senza SIM, senza internet al cancello e senza abbonamento mensile",
+        "text": "Al cancello serve solo la corrente elettrica, il telefono si collega direttamente al dispositivo, e paghi una sola volta il dispositivo e l'installazione.",
+        "tags": [
+          "Solo corrente elettrica",
+          "Pagamento unico"
+        ]
+      }
     ],
     "facts": {
       "title": "Il timer di Shabbat di WIFIGATE in breve",
       "rows": [
-        { "label": "Eventi", "value": "Fino a 50 in totale, settimanali e singoli" },
-        { "label": "Intervalli", "value": "10 minuti" },
-        { "label": "Festività", "value": "Eventi singoli alla vigilia e nel giorno della festività, fino a 90 giorni in anticipo" },
-        { "label": "Aperto o chiuso", "value": "Un evento verde tiene il cancello aperto, un evento rosso lo tiene chiuso" },
-        { "label": "Dove si trova la programmazione", "value": "Salvata ed eseguita nel dispositivo del cancello" },
-        { "label": "Cosa serve al cancello", "value": "Solo la corrente elettrica, senza SIM, senza router e senza internet" },
-        { "label": "Modifica degli orari", "value": "Dall'app, vicino al cancello, senza tecnico" },
-        { "label": "Dopo un'interruzione di corrente", "value": "La programmazione resta salvata, e gli eventi tornano a funzionare quando un telefono qualsiasi si collega al cancello" },
-        { "label": "Pagamento", "value": "Una sola volta per il dispositivo e l'installazione, senza abbonamento mensile" }
+        {
+          "label": "Eventi",
+          "value": "Fino a 50 in totale, settimanali e singoli"
+        },
+        {
+          "label": "Intervalli",
+          "value": "10 minuti"
+        },
+        {
+          "label": "Festività",
+          "value": "Eventi singoli alla vigilia e nel giorno della festività, fino a 90 giorni in anticipo"
+        },
+        {
+          "label": "Aperto o chiuso",
+          "value": "Un evento verde tiene il cancello aperto, un evento rosso lo tiene chiuso"
+        },
+        {
+          "label": "Dove si trova la programmazione",
+          "value": "Salvata ed eseguita nel dispositivo del cancello"
+        },
+        {
+          "label": "Cosa serve al cancello",
+          "value": "Solo la corrente elettrica, senza SIM, senza router e senza internet"
+        },
+        {
+          "label": "Modifica degli orari",
+          "value": "Dall'app, vicino al cancello, senza tecnico"
+        },
+        {
+          "label": "Dopo un'interruzione di corrente",
+          "value": "La programmazione resta salvata, e gli eventi tornano a funzionare quando un telefono qualsiasi si collega al cancello"
+        },
+        {
+          "label": "Pagamento",
+          "value": "Una sola volta per il dispositivo e l'installazione, senza abbonamento mensile"
+        }
       ]
     },
     "updatedLabel": "Ultimo aggiornamento: {date}",
