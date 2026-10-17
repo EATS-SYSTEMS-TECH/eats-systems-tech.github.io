@@ -5,8 +5,9 @@
 // Each locale lives in its own file (en.mjs, he.mjs, ...) exporting:
 //   home:   { seoTitle, seoDescription, keywords? }   homepage SEO
 //   where:  { title, subtitle }                       homepage section header
-//   niches: { <key>: { label, title, paragraph, bullets[], seoTitle,
-//                      seoDescription, imageAlt } }   one entry per niche
+//   niches: { <key>: { label, title, paragraph, benefits[] (bento cards,
+//                      scripts/benefit-cards.mjs), seoTitle, seoDescription,
+//                      imageAlt } }   one entry per niche
 //
 // Slugs stay in English across every locale. URLs:
 //   English: /<key>/
@@ -15,6 +16,7 @@
 // legacyKeys are old routes that must keep working; the build writes a
 // redirect page for each of them in every locale.
 
+import { benefitCardProblems } from "../benefit-cards.mjs";
 import en from "./en.mjs";
 import he from "./he.mjs";
 import es from "./es.mjs";
@@ -125,9 +127,6 @@ export const NICHE_DEFINITIONS = [
   {
     key: "residential-buildings",
     legacyKeys: ["residential-complexes", "where-story-residential-complexes"],
-    // Deliberate design touch: leave the centre tile of the 3x3 benefits grid
-    // empty. Only takes effect when the niche has exactly 8 bullets, so the
-    // hole lands in the middle cell.
     image: {
       hero: "assets/wifigate_niche_pages/residential-buildings-app-hero.webp",
       card: "assets/wifigate_niche_pages/residential-buildings-app-card.webp",
@@ -241,7 +240,7 @@ const REQUIRED_NICHE_FIELDS = [
   "label",
   "title",
   "paragraph",
-  "bullets",
+  "benefits",
   "seoTitle",
   "seoDescription",
   "imageAlt",
@@ -255,12 +254,12 @@ function isNonEmptyString(value) {
 // fully covers the model. The build fails on any problem so a partially
 // translated locale can never silently fall back to English text.
 // A text left in English on a non-English page: anything but brand names.
-const BRAND_ONLY = /^(?:WIFIGATE(?: Host| API)?|Airbnb|SIM|API|WhatsApp|[ds.,:%|+-])+$/;
+const BRAND_ONLY = /^(?:WIFIGATE(?: Host| API)?|Airbnb|SIM|API|WhatsApp|Padel|[\d\s.,:%|+\-–·])+$/;
 function englishLeftovers(locale, content) {
   const leftovers = [];
   const walk = (value, english, at) => {
     if (typeof value === "string") {
-      if (value === english && !BRAND_ONLY.test(value) && !/(?:^|.)icon$/.test(at)) leftovers.push(at);
+      if (value === english && !BRAND_ONLY.test(value) && !/(?:^|.)(?:icon|type)$/.test(at)) leftovers.push(at);
     } else if (value && typeof value === "object") {
       for (const key of Object.keys(value)) walk(value[key], english?.[key], at ? `${at}.${key}` : key);
     }
@@ -311,10 +310,8 @@ export function validateNichePageLocales(localeCodes) {
           if (!Array.isArray(value) || value.length < 3 || !value.every((item) => isNonEmptyString(item?.question) && isNonEmptyString(item?.answer))) {
             problems.push(`${locale}: niches["${key}"].faq needs at least 3 questions with answers`);
           }
-        } else if (field === "bullets") {
-          if (!Array.isArray(value) || value.length === 0 || !value.every(isNonEmptyString)) {
-            problems.push(`${locale}: niches["${key}"].bullets must be a non-empty list of strings`);
-          }
+        } else if (field === "benefits") {
+          problems.push(...benefitCardProblems(`${locale}: niches["${key}"]`, value, NICHE_PAGE_LOCALES.he.niches[key].benefits));
         } else if (!isNonEmptyString(value)) {
           problems.push(`${locale}: niches["${key}"].${field} is missing`);
         }

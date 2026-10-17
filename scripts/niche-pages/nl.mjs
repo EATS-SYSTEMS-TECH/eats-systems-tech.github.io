@@ -36,15 +36,89 @@ export default {
         }
       ],
       "paragraph": "Met WIFIGATE bieden hotels, vakantiewoningen (Airbnb) en vakantieparken hun gasten een handige, veilige digitale toegang, rechtstreeks via hun telefoon.\nGeen magneetpassen aanmaken, geen sleutels overdragen en geen sleutelkluisjes meer: de toegangscontrole verloopt automatisch.\nMet WIFIGATE Host koppel je je boekingssysteem rechtstreeks aan het toegangssysteem.\nDankzij die koppeling ontvangt de gast na bevestiging van de boeking een persoonlijk toegangsrecht.\nHet toegangsrecht wordt precies op het incheckmoment actief en eindigt automatisch bij het uitchecken, zonder handmatige tussenkomst, sleuteloverdracht of afstemming met de receptie of de verhuurder.",
-      "bullets": [
-        "Automatische gasttoegang zodra een boeking is bevestigd",
-        "Volledige automatisering via WIFIGATE Host",
-        "Tijdelijke toegang, afgestemd op de data en tijden van het verblijf",
-        "Minder kamerpassen aanmaken, overdragen en vervangen",
-        "Beheer van toegangsrechten voor personeel, schoonmakers, onderhoud en leveranciers",
-        "Een soepelere en prettigere aankomst voor gasten",
-        "Toegang stopt automatisch op het moment van uitchecken",
-        "Toegangsgeschiedenis voor transparantie en controle"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Boeking bevestigd. De toegang is al onderweg.",
+          "text": "Met WIFIGATE Host maakt het bevestigen van een boeking automatisch een persoonlijk toegangsrecht aan en stuurt het naar de gast.",
+          "tags": [
+            "Hotel",
+            "Airbnb",
+            "Vakantiewoning"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Gastuitnodiging",
+            "status": "Verzonden",
+            "guest": "Sanne de Vries",
+            "when": "Vr 15:00 – zo 11:00",
+            "note": "Inclusief routebeschrijving"
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Toegang afgestemd op het verblijf.",
+          "text": "Elke gast krijgt een uitnodiging op zijn telefoon die alleen geldig is op de data en tijden van zijn verblijf.",
+          "tags": [
+            "Inchecken",
+            "Data en tijden"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Uitchecken. De toegang sluit vanzelf.",
+          "text": "Niemand hoeft eraan te denken de toegang in te trekken: het toegangsrecht vervalt op de vertrektijd, ook als er niemand van het team aanwezig is.",
+          "tags": [
+            "Verloopt automatisch",
+            "Vertrektijd"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Een eigen toegangsrecht voor elk teamlid.",
+          "text": "Medewerkers, schoonmakers, onderhoudspersoneel en leveranciers krijgen elk een persoonlijk toegangsrecht dat je in de app geeft en intrekt.",
+          "tags": [
+            "Schoonmaak",
+            "Onderhoud",
+            "Leveranciers"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Minder pasjes. Geen sleutelkluisje.",
+          "text": "Minder kamerpassen om aan te maken, over te dragen en te vervangen, en geen sleutelkluiscode die van gast naar gast gaat.",
+          "tags": [
+            "Kamerpassen",
+            "Fysieke sleutels"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Wie opende wanneer. Alles inzichtelijk.",
+          "text": "De toegangsgeschiedenis laat zien wie wanneer opende, zodat je overzicht en controle houdt over gasten, personeel en leveranciers.",
+          "tags": [
+            "Laatste 90 dagen"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Een soepelere aankomst. Zonder op iemand te wachten.",
+          "text": "De gast opent zelf de poort, de deur of de parkeerplaats, rechtstreeks vanuit de WIFIGATE-app op zijn telefoon.",
+          "tags": [
+            "Poort",
+            "Deur",
+            "Parkeerplaats"
+          ]
+        },
+        {
+          "icon": "zap",
+          "title": "Volledig automatisch met WIFIGATE Host.",
+          "text": "WIFIGATE Host koppelt je boekingssysteem aan het toegangssysteem, zonder gegevens over te typen, zonder pasjes aan te maken en zonder handmatige tussenstap.",
+          "tags": [
+            "Boekingssysteem",
+            "API-koppeling"
+          ]
+        }
       ],
       "seoTitle": "WIFIGATE | Digitale gasttoegang voor hotels, Airbnb en vakantieparken",
       "seoDescription": "Met WIFIGATE Host regelen hotels, Airbnb-verhuurders en vakantieparken gasttoegang digitaal en automatisch: een persoonlijk toegangsrecht per boeking, zonder sleutels, passen of sleutelkluis.",
@@ -90,15 +164,95 @@ export default {
         }
       ],
       "paragraph": "Rolluiken van bedrijven en winkels worden vaak bediend met afstandsbedieningen, sleutels, een sleutelkastje of schakelaars aan de buitenkant van het pand. Zulke oplossingen kunnen kwijtraken, bij oud-medewerkers achterblijven, gekopieerd worden of uitgroeien tot een kwetsbaar toegangspunt. Openen of sluiten met een sleutel betekent bovendien dat je vlak naast het bedieningspunt moet staan, met de sleutel in de hand, en soms zonder goed zicht op het rolluik zelf. WIFIGATE verplaatst de bediening naar de app en brengt de toegangscontrole naar de beschermde binnenkant van het pand. Zo open en sluit je comfortabeler, beheer je toegangsrechten voor medewerkers en leveranciers en ben je minder afhankelijk van sleutels, afstandsbedieningen en kwetsbare toegangspunten buiten.",
-      "bullets": [
-        "Openen en sluiten met de telefoon, zonder afstandsbediening",
-        "Minder afhankelijk van sleutels die gekopieerd of verloren kunnen worden",
-        "Minder kwetsbare toegangspunten aan de buitenkant van het pand",
-        "Comfortabeler bedienen met beter zicht op het rolluik",
-        "Beheer van toegangsrechten voor medewerkers, managers en leveranciers",
-        "Desgewenst tijdelijke toegang, per tijdslot of naar behoefte",
-        "Geschikt voor winkels, magazijnen, dienstingangen en bedrijven",
-        "Een nettere en beter beschermde oplossing voor dagelijks gebruik"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Persoonlijke toegang. Voor elke medewerker, manager en leverancier.",
+          "text": "Iedereen krijgt in de app een eigen toegangsrecht, en je kunt het op elk moment intrekken.",
+          "visual": {
+            "type": "roster",
+            "heading": "Toegang tot het rolluik",
+            "status": "Actief",
+            "rows": [
+              {
+                "name": "Winkeleigenaar",
+                "badge": "Beheerder"
+              },
+              {
+                "name": "Medewerker van dienst",
+                "badge": "Bevoegd"
+              },
+              {
+                "name": "Leverancier",
+                "badge": "Tijdelijk"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "shield-check",
+          "title": "Minder kwetsbare punten. De bediening gaat naar binnen.",
+          "text": "In plaats van een schakelaar of sleutelkastje aan een buitenmuur kan het bedieningspunt aan de beschermde binnenkant van de zaak zitten.",
+          "tags": [
+            "Beschermde binnenkant",
+            "Buiten bereik"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Openen en sluiten. Direct met je telefoon.",
+          "text": "Bevoegde gebruikers bedienen het rolluik met de WIFIGATE-app, zonder een afstandsbediening te zoeken of tussen medewerkers door te geven.",
+          "tags": [
+            "Geen afstandsbediening nodig",
+            "Directe verbinding"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Minder sleutels om te kopiëren of kwijt te raken.",
+          "text": "Een sleutel die bij een oud-medewerker achterblijft, werkt gewoon door, terwijl een toegangsrecht op de telefoon op zijn laatste werkdag sluit.",
+          "tags": [
+            "Geen nieuw slot",
+            "Geen apparatuur innemen"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Tijdelijke toegang. Alleen als het nodig is.",
+          "text": "Deel tijdgebonden toegang met een leverancier of tijdelijke medewerker, en die stopt met werken zodra de tijd om is.",
+          "tags": [
+            "Leveranciers",
+            "Tijdelijke medewerkers"
+          ]
+        },
+        {
+          "icon": "eye",
+          "title": "Makkelijker bedienen. Beter zicht.",
+          "text": "Bedien het rolluik met je telefoon vanaf een veiligere afstand, in plaats van pal bij het bedieningspunt te staan met een sleutel in de hand.",
+          "tags": [
+            "Veiligere afstand",
+            "Geen sleutel nodig"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "Dagelijks gebruik. Netter en veiliger.",
+          "text": "WIFIGATE wordt op de bestaande rolluikbesturing geïnstalleerd, en de gegevens worden versleuteld op het apparaat zelf opgeslagen.",
+          "tags": [
+            "Aan de binnenkant",
+            "Versleutelde gegevens"
+          ]
+        },
+        {
+          "icon": "store",
+          "title": "Voor elk bedrijf met een elektrisch rolluik.",
+          "text": "Overal waar je minder sleutels en minder afstandsbedieningen wilt die van hand tot hand gaan.",
+          "tags": [
+            "Winkels",
+            "Magazijnen",
+            "Dienstingangen"
+          ]
+        }
       ],
       "seoTitle": "Rolluiken slim bedienen voor winkels en bedrijven | WIFIGATE",
       "seoDescription": "Bedien rolluiken van winkels en bedrijven vanaf de telefoon met WIFIGATE: rechtenbeheer, minder sleutels en afstandsbedieningen, minder kwetsbare toegangspunten.",
@@ -144,15 +298,103 @@ export default {
         }
       ],
       "paragraph": "Elektrische poorten en slagbomen worden gebruikt door bewoners, medewerkers, gasten en leveranciers, maar het beheren van afstandsbedieningen, codes en telefoontjes om de poort te openen wordt al snel omslachtig. Met WIFIGATE open je de poort vanaf je telefoon, deel je vaste of tijdelijke toegang, gebruik je automatisch openen voor vaste gebruikers en stel je waar nodig geplande acties in. Het systeem werkt veilig, privé en versleuteld, zonder maandabonnement of doorlopende kosten, en bestaande afstandsbedieningen blijven gewoon bruikbaar naast de app.",
-      "bullets": [
-        "Open een elektrische poort of slagboom vanaf de telefoon",
-        "Geen maandelijks abonnement en geen doorlopende kosten",
-        "Deel tijdelijke toegang met gasten, leveranciers en medewerkers",
-        "Auto Open voor vaste gebruikers bij hun dagelijkse binnenkomst",
-        "Tijdschema's die de poort openen op vaste dagen en tijden",
-        "Bedienen via de app of met bestaande afstandsbedieningen",
-        "Minder fysieke afstandsbedieningen uitdelen",
-        "Toegangsgeschiedenis voor controle en transparantie"
+      "benefits": [
+        {
+          "icon": "smartphone",
+          "title": "Poort of slagboom. Direct met je telefoon.",
+          "text": "Iedereen met een toegangsrecht, vast of tijdelijk, opent de elektrische poort of de slagboom met de WIFIGATE-app.",
+          "tags": [
+            "Elektrische poort",
+            "Slagboom",
+            "Geen simkaart"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Toegangsgeschiedenis",
+            "status": "Vandaag",
+            "rows": [
+              {
+                "time": "07:42",
+                "name": "Lotte · Bewoonster",
+                "event": "Geopend"
+              },
+              {
+                "time": "08:15",
+                "name": "Bram · Medewerker",
+                "event": "Geopend"
+              },
+              {
+                "time": "10:30",
+                "name": "Tim · Leverancier",
+                "event": "Geopend"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "card-off",
+          "title": "Geen abonnement. Geen automatische incasso.",
+          "text": "Je betaalt één keer voor het apparaat en de installatie, zonder maandabonnement en zonder terugkerende betaling.",
+          "tags": [
+            "Eenmalige betaling",
+            "Apparaat en installatie"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "Tijdelijke toegang. Sluit vanzelf.",
+          "text": "In plaats van telefoontjes te krijgen om de poort te openen, stuur je een toegangsrecht dat alleen geldt in het tijdvak waarin het nodig is.",
+          "tags": [
+            "Gasten",
+            "Leveranciers",
+            "Medewerkers"
+          ]
+        },
+        {
+          "icon": "hands-free",
+          "title": "Auto Open. De poort gaat open als je aankomt.",
+          "text": "Voor vaste gebruikers herkent de functie automatisch openen dat je er bent en opent de poort voor je, zonder een afstandsbediening te zoeken en zonder in de regen het raampje omlaag te doen.",
+          "tags": [
+            "Vaste gebruikers",
+            "Dagelijkse binnenkomst"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Geplande acties. Op vaste dagen en tijden.",
+          "text": "Stel vooraf in op welke dagen en tijden de poort openblijft, met een wekelijkse of eenmalige actie.",
+          "tags": [
+            "Wekelijks",
+            "Eenmalig"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "App of afstandsbediening. Jij kiest.",
+          "text": "De bestaande afstandsbedieningen blijven werken naast de bediening via de app, dus er hoeft niets weg.",
+          "tags": [
+            "Bestaande afstandsbedieningen",
+            "Bediening via de app"
+          ]
+        },
+        {
+          "icon": "user-plus",
+          "title": "Minder fysieke afstandsbedieningen uitdelen.",
+          "text": "In plaats van elke bewoner, medewerker of leverancier een afstandsbediening te geven, krijgt iedereen een persoonlijk toegangsrecht in de app.",
+          "tags": [
+            "Persoonlijk toegangsrecht",
+            "Beheer in de app"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Toegangsgeschiedenis. Controle en transparantie.",
+          "text": "Bekijk wie de poort wanneer opende, over de afgelopen 90 dagen.",
+          "tags": [
+            "90 dagen terug",
+            "Wie en wanneer"
+          ]
+        }
       ],
       "seoTitle": "Elektrische poort of slagboom zonder abonnement | WIFIGATE",
       "seoDescription": "Open elektrische poorten en slagbomen met je telefoon via WIFIGATE: Auto Open, tijdschema's, bestaande afstandsbedieningen en geen maandelijks abonnement.",
@@ -198,15 +440,101 @@ export default {
         }
       ],
       "paragraph": "Garagedeuren en privéparkeerplaatsen worden meestal bediend met fysieke afstandsbedieningen, die kunnen kwijtraken, achterblijven bij mensen die geen toegang meer nodig hebben of in bepaalde situaties gekopieerd worden. WIFIGATE vervangt dit door digitale toegang vanaf de telefoon: je beheert toegangsrechten voor gezinsleden, medewerkers of gasten en deelt tijdelijke toegang zonder een afstandsbediening of code uit handen te geven. Het resultaat: meer gemak, meer privacy en meer overzicht, met minder afhankelijkheid van fysieke toegangsmiddelen.",
-      "bullets": [
-        "Open de garagedeur vanaf de telefoon",
-        "Minder afhankelijk van fysieke afstandsbedieningen",
-        "Minder risico door verloren, doorgegeven of gekopieerde afstandsbedieningen",
-        "Toegangsbeheer voor gezinsleden, medewerkers en gasten",
-        "Tijdelijke toegang zonder een afstandsbediening of code af te geven",
-        "Geschikt voor privéparkeerplaatsen, woonhuizen en benedenwoningen met tuin",
-        "Een veiligere manier om toegang te beheren, met meer privacy",
-        "Comfortabeler en veiliger in het dagelijks gebruik"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Een persoonlijk toegangsrecht voor iedereen die binnenkomt.",
+          "text": "Voeg in de app gezinsleden, medewerkers en gasten toe of verwijder ze, en iedereen opent met zijn eigen telefoon en zijn eigen toegangsrecht.",
+          "tags": [
+            "Gezinsleden",
+            "Medewerkers",
+            "Gasten"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Toegang tot de garage",
+            "status": "Actief",
+            "rows": [
+              {
+                "name": "Mama",
+                "badge": "Beheerder"
+              },
+              {
+                "name": "Daan",
+                "badge": "Gezinslid"
+              },
+              {
+                "name": "Vakman",
+                "badge": "Tijdelijke toegang"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Minder risico door een verloren of gekopieerde afstandsbediening.",
+          "text": "Een verloren, doorgegeven of gekopieerde afstandsbediening kan de garage blijven openen, terwijl je een toegangsrecht op de telefoon in een oogwenk via de app verwijdert.",
+          "tags": [
+            "Verloren",
+            "Doorgegeven",
+            "Gekopieerd"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "De garagedeur gaat open met je telefoon.",
+          "text": "WIFIGATE wordt aangesloten op de garagedeur, en je opent die met de WIFIGATE-app op de telefoon die je toch al bij je hebt.",
+          "tags": [
+            "Directe verbinding",
+            "Geen simkaart"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "Minder afstandsbedieningen. Minder gedoe.",
+          "text": "Minder afstandsbedieningen om te kopen, te programmeren, uit te delen en te beheren, in plaats van één voor elke auto en elke gebruiker.",
+          "tags": [
+            "Naast bestaande afstandsbedieningen"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Tijdelijke toegang. Zonder een afstandsbediening af te geven.",
+          "text": "Een vakman of gast krijgt een tijdelijk toegangsrecht dat stopt wanneer jij dat wilt, zonder een afstandsbediening of code af te geven.",
+          "tags": [
+            "Vakmensen",
+            "Gasten"
+          ]
+        },
+        {
+          "icon": "garage",
+          "title": "Voor privéparkeerplaatsen, woonhuizen en benedenwoningen.",
+          "text": "WIFIGATE wordt geïnstalleerd op de bestaande besturing van de garagedeur of de toegang tot de parkeerplaats, bij een woonhuis of een benedenwoning met tuin.",
+          "tags": [
+            "Privégarage",
+            "Privéparkeerplaats",
+            "Benedenwoning met tuin"
+          ]
+        },
+        {
+          "icon": "shield-check",
+          "title": "Toegang met meer privacy en betere beveiliging.",
+          "text": "WIFIGATE beschermt de toegang met geavanceerde beveiligingslagen en versleutelde opslag, en waarborgt de privacy van gebruikers.",
+          "tags": [
+            "Versleutelde opslag",
+            "Beveiligingslagen",
+            "Privacyvriendelijk"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Comfortabeler en veiliger. Elke dag.",
+          "text": "In de toegangsgeschiedenis van de laatste 90 dagen zie je wie de garage wanneer opende.",
+          "tags": [
+            "Toegangsgeschiedenis",
+            "90 dagen"
+          ]
+        }
       ],
       "seoTitle": "Garagedeuren en privéparkeerplaatsen slim openen | WIFIGATE",
       "seoDescription": "Open garagedeuren en privéparkeerplaatsen met je telefoon via WIFIGATE: minder fysieke afstandsbedieningen, tijdelijke toegangsrechten en privacyvriendelijk beheer.",
@@ -252,15 +580,84 @@ export default {
         }
       ],
       "paragraph": "Bij particuliere woningen kunnen codesloten, sleutels en afstandsbedieningen een zwakke plek worden. Na verloop van tijd ontstaan slijtage of zichtbare sporen op de toetsen van het codeslot, raken afstandsbedieningen kwijt of gaan ze van hand tot hand, en wordt de code soms gedeeld met bezorgers, monteurs of gasten die hem nog lang daarna kennen. Met WIFIGATE beheer je de toegang vanaf je telefoon, deel je tijdelijke gasttoegang zonder een vaste code prijs te geven en trek je toegangsrechten eenvoudig in zonder sloten, codes of afstandsbedieningen te vervangen.",
-      "bullets": [
-        "Minder afhankelijk van codesloten, sleutels en afstandsbedieningen",
-        "Tijdelijke toegang voor bezorgers, gasten en monteurs",
-        "Rechten eenvoudig intrekken vanaf de telefoon",
-        "Minder risico door gedeelde codes of doorgegeven afstandsbedieningen",
-        "Geschikt voor poorten, deuren, parkeerplaatsen en garages bij een woonhuis",
-        "Eenvoudig beheer voor gezinsleden en vaste gebruikers",
-        "Een comfortabelere manier om dagelijks binnen te komen",
-        "Meer privacy en betere controle over wie er binnenkomt"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Tijdelijke toegang. Voor bezorger, gast en monteur.",
+          "text": "Stuur een tijdgebonden uitnodiging die alleen werkt in de tijd die jij kiest, zonder een vaste code prijs te geven.",
+          "tags": [
+            "Bezorgers",
+            "Gasten",
+            "Monteurs"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Gastuitnodiging",
+            "status": "Geldig",
+            "guest": "Monteur",
+            "when": "Vandaag, 10:00–12:00",
+            "note": "Verloopt vanzelf"
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Minder risico door codes en afstandsbedieningen die rondgaan.",
+          "text": "Iedereen heeft een persoonlijk toegangsrecht op zijn telefoon, dus je hoeft bezorgers en gasten geen vaste code of afstandsbediening te geven.",
+          "tags": [
+            "Persoonlijk toegangsrecht",
+            "Geen vaste code"
+          ]
+        },
+        {
+          "icon": "user-minus",
+          "title": "Toegang intrekken. In een oogwenk, met je telefoon.",
+          "text": "Hoort iemand niet meer binnen te komen, dan verwijder je zijn toegang meteen, zonder sloten, codes of afstandsbedieningen te vervangen.",
+          "tags": [
+            "Direct ingetrokken",
+            "Geen nieuwe sloten"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "Meer privacy. Meer controle.",
+          "text": "Anders dan bij een gedeelde code heeft elk toegangsrecht een naam, zodat je op elk moment weet wie het huis in kan.",
+          "tags": [
+            "Toegangslijst",
+            "Naam per toegangsrecht"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Minder afhankelijk van codeslot, sleutels en afstandsbedieningen.",
+          "text": "Beheer de toegang vanaf je telefoon, in plaats van te vertrouwen op een codeslot, sleutels en afstandsbedieningen.",
+          "tags": [
+            "Beheer via je telefoon"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Het hele gezin. Eenvoudig beheerd.",
+          "text": "Voeg in de app gezinsleden en vaste gebruikers toe, en iedereen krijgt een persoonlijk toegangsrecht.",
+          "tags": [
+            "Gezinsleden",
+            "Vaste gebruikers"
+          ]
+        },
+        {
+          "icon": "gate",
+          "title": "Van poort tot garage.",
+          "text": "WIFIGATE is geschikt voor poorten, voordeuren, parkeerplaatsen en garagedeuren bij een woonhuis, en alles gaat open vanuit één app.",
+          "tags": [
+            "Poorten",
+            "Deuren",
+            "Garagedeuren"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "Elke dag binnenkomen. Een stuk makkelijker.",
+          "text": "Open met de telefoon in je zak, elke keer dat je weggaat of thuiskomt, zonder een code te onthouden of een afstandsbediening te zoeken."
+        }
       ],
       "seoTitle": "Slimme toegang voor woningen zonder gedeelde code | WIFIGATE",
       "seoDescription": "Beheer de toegang tot je woning vanaf je telefoon met WIFIGATE: tijdelijke toegangsrechten voor gasten en bezorgers, minder codesloten, sleutels en afstandsbedieningen.",
@@ -306,15 +703,98 @@ export default {
         }
       ],
       "paragraph": "In een appartementencomplex houdt toegang niet op bij de hoofdingang: er is een poort, een ingang van de parkeergarage, deuren van bergingen en soms een zijdeur. En het gaat niet alleen om de bewoners, maar ook om wisselende huurders, de VvE of de beheerder, schoonmakers, onderhoudsmedewerkers en vaste leveranciers. Als dat allemaal draait op één code en een paar afstandsbedieningen, betekent elke kleine wijziging, een bewoner die vertrekt, een kwijtgeraakte afstandsbediening of een nieuwe leverancier, dat de code moet worden gewijzigd en iedereen opnieuw moet worden ingelicht. WIFIGATE vervangt die aanpak door overzichtelijk toegangsbeheer op gebouwniveau.",
-      "bullets": [
-        "Een persoonlijk toegangsrecht voor elke bewoner, in plaats van één code voor iedereen",
-        "Bewoners toevoegen en verwijderen zonder de code van het hele gebouw te wijzigen",
-        "Aparte toegangsrechten voor schoonmakers, onderhoud en vaste leveranciers",
-        "Geschikt voor entreedeuren, poorten en parkeergarages",
-        "Minder afhankelijk van codesloten, sleutels en afstandsbedieningen",
-        "Toegangsgeschiedenis voor de VvE of de beheerder",
-        "Alle toegangsrechten van het gebouw beheren vanaf je telefoon",
-        "Toegang voor nieuwe huurders vanaf de verhuisdag, zonder sleuteloverdracht"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Persoonlijke toegang. Voor elke bewoner.",
+          "text": "In plaats van één code die iedereen kent en doorgeeft, heeft elke bewoner een eigen toegangsrecht.",
+          "tags": [
+            "Geen gedeelde code"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Toegang tot het gebouw",
+            "status": "Actief",
+            "rows": [
+              {
+                "name": "Emma de Jong",
+                "badge": "Bewoonster"
+              },
+              {
+                "name": "Jeroen Bakker",
+                "badge": "Bewoner"
+              },
+              {
+                "name": "Fleur Visser",
+                "badge": "VvE-bestuur"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-plus",
+          "title": "Bewoners wisselen. De controle blijft.",
+          "text": "Voeg bewoners toe en verwijder ze zonder de code van het gebouw te wijzigen en zonder iedereen opnieuw in te lichten.",
+          "tags": [
+            "Bewoner toegevoegd",
+            "Toegang ingetrokken"
+          ]
+        },
+        {
+          "icon": "wrench",
+          "title": "Aparte toegang voor dienstverleners",
+          "text": "Schoonmakers, onderhoudsmedewerkers en vaste leveranciers krijgen een eigen toegangsrecht, en niet de code van het gebouw.",
+          "tags": [
+            "Schoonmaak",
+            "Onderhoud",
+            "Leveranciers"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "Niet alleen de entreedeur",
+          "text": "Geschikt voor de entreedeur, de poort van het gebouw en de ingang van de parkeergarage, en elke bewoner opent ze met zijn telefoon en zijn eigen toegangsrecht.",
+          "tags": [
+            "Entree",
+            "Poort",
+            "Parkeergarage"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Minder codes. Minder afstandsbedieningen.",
+          "text": "Minder afhankelijk van codesloten, sleutels en afstandsbedieningen: de ingang van het gebouw open je met je telefoon.",
+          "tags": [
+            "Telefoon als sleutel",
+            "Afstandsbedieningen blijven werken"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Meer transparantie voor de VvE",
+          "text": "De VvE of de beheerder ziet in de toegangsgeschiedenis wie wanneer opende.",
+          "tags": [
+            "90 dagen terug",
+            "Beheerder"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Alle toegangsrechten van het gebouw, direct op je telefoon",
+          "text": "Beheer vanaf je telefoon een actuele lijst van alle toegangsrechten in het gebouw, elk met een eigen naam.",
+          "tags": [
+            "Actuele lijst",
+            "Naam per toegangsrecht"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "Nieuwe bewoner? De toegang staat al klaar.",
+          "text": "Nieuwe huurders krijgen toegang vanaf de verhuisdag, zonder een sleuteloverdracht te hoeven regelen.",
+          "tags": [
+            "Vanaf dag één"
+          ]
+        }
       ],
       "seoTitle": "Toegangscontrole voor appartementencomplexen | WIFIGATE",
       "seoDescription": "WIFIGATE brengt slim toegangsbeheer naar appartementencomplexen: openen met de telefoon, tijdelijke gastrechten, minder afhankelijk van codesloten en meer transparantie.",
@@ -360,15 +840,95 @@ export default {
         }
       ],
       "paragraph": "Kantoorpanden moeten medewerkers, bezoekers, leveranciers en facilitaire teams vlot binnenlaten, zonder de receptie te overbelasten en zonder sleutels of pasjes handmatig te beheren. Met WIFIGATE geef je medewerkers vaste toegangsrechten en bezoekers tijdelijke toegangsrechten, regel je de toegang vanaf de telefoon en beheer je de binnenkomst op een manier die past bij een moderne, nette en georganiseerde werkomgeving.",
-      "bullets": [
-        "Vaste toegangsrechten voor medewerkers en teams",
-        "Tijdelijke toegang voor bezoekers, leveranciers en bezorgers",
-        "Minder druk op de receptie en het facilitaire team",
-        "Geschikt voor entreedeuren, verdiepingen, ruimtes en parkeergarages",
-        "Overzichtelijk beheer van gebruikers en toegangsrechten",
-        "Minder afhankelijk van sleutels, toegangspassen en codes",
-        "Een modernere en professionelere uitstraling voor het pand",
-        "Toegangsgeschiedenis voor controle en transparantie"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Vaste toegang. Voor elke medewerker.",
+          "text": "Medewerkers en teams krijgen een persoonlijk, vast toegangsrecht op hun telefoon, vanaf de datum die jij instelt.",
+          "visual": {
+            "type": "roster",
+            "heading": "Kantoorteam",
+            "status": "Actief",
+            "rows": [
+              {
+                "name": "Anouk Janssen",
+                "badge": "Vaste toegang"
+              },
+              {
+                "name": "Thomas Mulder",
+                "badge": "Vaste toegang"
+              },
+              {
+                "name": "Lisa Smit",
+                "badge": "Vaste toegang"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "send",
+          "title": "Tijdgebonden toegang. Voor alle anderen.",
+          "text": "Bezoekers krijgen al vóór hun komst een tijdgebonden uitnodiging, die ook een routebeschrijving kan bevatten.",
+          "tags": [
+            "Sollicitanten",
+            "Leveranciers",
+            "Bezorgers"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Minder druk op receptie en facilitair team",
+          "text": "Bezoekers komen binnen met hun telefoon, zonder te wachten tot iemand naar beneden komt om open te doen, en de receptie handelt minder aankomsten af.",
+          "tags": [
+            "Receptie",
+            "Facilitair team"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "Van entreedeur tot parkeergarage",
+          "text": "Geschikt voor entreedeuren, verdiepingen, ruimtes en ingangen van parkeergarages, en alles gaat open met de telefoon.",
+          "tags": [
+            "Entreedeuren",
+            "Verdiepingen en ruimtes",
+            "Parkeergarage"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "Gebruikers en toegangsrechten. Alles overzichtelijk.",
+          "text": "In- en uitdiensttreding is één actie in de lijst, en het toegangsrecht sluit op de datum die jij instelt.",
+          "tags": [
+            "Indiensttreding",
+            "Uitdiensttreding"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Minder pasjes, sleutels en codes",
+          "text": "Minder pasjes om uit te geven en minder sleutels om in te nemen bij uitdiensttreding, want elke medewerker komt binnen met zijn eigen telefoon.",
+          "tags": [
+            "Toegang via de telefoon"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Een moderne en prettige uitstraling voor het pand",
+          "text": "Medewerkers en bezoekers komen binnen met hun telefoon, op een manier die past bij een moderne, nette en georganiseerde werkomgeving.",
+          "tags": [
+            "Medewerkers",
+            "Bezoekers"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Elke opening heeft een naam en een tijdstip",
+          "text": "Je kunt achteraf nagaan wie een verdieping, de opslagruimte of de parkeergarage binnenging, voor controle en transparantie.",
+          "tags": [
+            "Laatste 90 dagen",
+            "Wie en wanneer"
+          ]
+        }
       ],
       "seoTitle": "Toegangscontrole voor kantoorpanden | WIFIGATE",
       "seoDescription": "Regel met WIFIGATE de toegang van medewerkers, bezoekers en leveranciers tot je kantoorpand via de telefoon, met vaste en tijdelijke toegangsrechten en modern beheer.",
@@ -414,15 +974,102 @@ export default {
         }
       ],
       "paragraph": "Kleine bedrijven, klinieken, studio's, magazijnen en kantoren werken vaak met een codeslot, een sleutel of een eenvoudig magneetslot. De problemen beginnen zodra de code rondgaat onder medewerkers, leveranciers en gasten, of wanneer je tijdelijke toegang wilt geven zonder de beveiliging te verzwakken. Met WIFIGATE beheer je de toegangsdeur vanaf je telefoon, deel je tijdelijke toegangsrechten en verklein je de noodzaak van vaste codes, fysieke sleutels of handmatige afstemming bij elke binnenkomst.",
-      "bullets": [
-        "Geschikt voor toegangsdeuren met een elektrisch slot of magneetslot",
-        "Openen met de telefoon voor medewerkers en managers",
-        "Tijdelijke toegang voor gasten, leveranciers en monteurs",
-        "Minder behoefte aan een codeslot of vaste code",
-        "Geschikt voor kleine bedrijven, klinieken, studio's en kantoren",
-        "Eenvoudiger en veiliger rechtenbeheer",
-        "Minder fysieke sleutels nodig",
-        "Een prettige optie voor bedrijven die moderne toegang willen zonder complex systeem"
+      "benefits": [
+        {
+          "icon": "shield-check",
+          "title": "Eenvoudig rechtenbeheer. En veiliger.",
+          "text": "Elke medewerker, leverancier of gast heeft een persoonlijk toegangsrecht dat je op elk moment kunt intrekken, en de toegangsgeschiedenis laat zien wie wanneer opende.",
+          "tags": [
+            "Altijd intrekbaar",
+            "Toegangsgeschiedenis"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Toegangsgeschiedenis",
+            "status": "Vandaag",
+            "rows": [
+              {
+                "time": "07:40",
+                "name": "Leverancier",
+                "event": "Geopend"
+              },
+              {
+                "time": "08:50",
+                "name": "Lotte, leidinggevende",
+                "event": "Geopend"
+              },
+              {
+                "time": "19:30",
+                "name": "Schoonmaakploeg",
+                "event": "Geopend"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Tijdelijke toegang die vanzelf sluit.",
+          "text": "Gasten, leveranciers en dienstverleners krijgen een toegangsrecht voor hun eigen tijdvak, zonder dat de eigenaar speciaal langs hoeft te komen om open te doen.",
+          "tags": [
+            "Leveranciers",
+            "Monteurs",
+            "Bezorgers"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "Het slot dat al op de deur zit. Nu te openen met je telefoon.",
+          "text": "WIFIGATE is geschikt voor toegangsdeuren met een elektrisch slot of magneetslot en opent ze met de telefoon, terwijl het bestaande slot gewoon blijft zitten.",
+          "tags": [
+            "Elektrisch slot",
+            "Magneetslot"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Medewerkers en leidinggevenden openen met hun telefoon.",
+          "text": "Elke medewerker en leidinggevende opent de toegangsdeur vanuit de app met een persoonlijk toegangsrecht, zodat er bij elke binnenkomst minder handmatige afstemming nodig is.",
+          "tags": [
+            "Medewerkers",
+            "Leidinggevenden"
+          ]
+        },
+        {
+          "icon": "user-check",
+          "title": "Minder codes die van hand tot hand gaan.",
+          "text": "Een code die iedereen krijgt, kan blijven hangen bij wie niet meer naar binnen hoeft, en een persoonlijk toegangsrecht vermindert de behoefte aan een codeslot en een vaste code.",
+          "tags": [
+            "Codeslot",
+            "Vaste code"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Minder sleutels aan de bos.",
+          "text": "De deur gaat open met de telefoon, zodat er minder fysieke sleutels rondgaan tussen medewerkers en leidinggevenden.",
+          "tags": [
+            "Fysieke sleutels"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Moderne toegang. Zonder complex systeem.",
+          "text": "Geen besturingskast, beheersoftware of kaartlezer om te installeren, en alles wordt beheerd vanuit de app.",
+          "tags": [
+            "Geen besturingskast",
+            "Geen kaartlezer"
+          ]
+        },
+        {
+          "icon": "briefcase",
+          "title": "Voor de kleine zaak, de kliniek en het kantoor.",
+          "text": "Kleine bedrijven, klinieken, studio's en kantoren beheren hun toegangsdeur met de telefoon en delen tijdelijke toegang wanneer dat nodig is.",
+          "tags": [
+            "Klinieken",
+            "Kantoren",
+            "Magazijnen"
+          ]
+        }
       ],
       "seoTitle": "Toegangsdeuren en magneetsloten voor bedrijven | WIFIGATE",
       "seoDescription": "WIFIGATE maakt toegangsdeuren en magneetsloten van bedrijven slim: rechtenbeheer vanaf de telefoon, tijdelijke toegang en minder codes en sleutels.",
@@ -468,15 +1115,91 @@ export default {
         }
       ],
       "paragraph": "Sportaccommodaties, padelbanen, tennisbanen, sportscholen en trainingscomplexen moeten de toegang van leden, trainers, teams en gasten regelen op basis van openingstijden, reserveringen en evenementen. Met WIFIGATE geef je tijdelijke of vaste toegang vanaf de telefoon, verklein je de afhankelijkheid van een gedeelde sleutel of code en verbeter je de binnenkomst voor gebruikers, zeker op locaties waar de drukte gedurende de dag wisselt.",
-      "bullets": [
-        "Geschikt voor padelbanen, tennisbanen, sportscholen en trainingscomplexen",
-        "Toegang op basis van openingstijden, reserveringen of toegangsrechten",
-        "Beheer voor leden, trainers, medewerkers en gasten",
-        "Minder afhankelijk van gedeelde sleutels en codes",
-        "Snel en gemakkelijk naar binnen met de telefoon",
-        "Geschikt voor locaties met wisselende openingstijden",
-        "Tijdelijke toegangsrechten voor evenementen, lessen of trainingen",
-        "Toegangsgeschiedenis voor controle en beheer"
+      "benefits": [
+        {
+          "icon": "calendar-check",
+          "title": "Reserveer een baan. De toegang gaat open met de reservering.",
+          "text": "Wie een baan voor een bepaald uur reserveert, krijgt een toegangsrecht dat op dat uur opengaat en aan het einde ervan sluit.",
+          "tags": [
+            "Openingstijden",
+            "Reserveringen",
+            "Toegangsrechten"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Toegangsuitnodiging",
+            "status": "Geldig",
+            "guest": "Sanne, baan 2",
+            "when": "Vandaag 18:00–19:30",
+            "note": "Inclusief routebeschrijving"
+          }
+        },
+        {
+          "icon": "users",
+          "title": "Lid, trainer en gast. Ieder een eigen toegangsrecht.",
+          "text": "Vaste leden, trainers die op bepaalde dagen komen, medewerkers en eenmalige gasten worden in één lijst beheerd, zonder sleutels die van hand tot hand gaan.",
+          "tags": [
+            "Leden",
+            "Trainers",
+            "Medewerkers en gasten"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Minder sleutels. Minder gedeelde codes.",
+          "text": "Een gedeelde code blijft openen, ook als dat niet meer de bedoeling is, terwijl een persoonlijk toegangsrecht sluit zodra het niet meer nodig is.",
+          "tags": [
+            "Persoonlijk toegangsrecht"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Les, training of evenement. Toegang alleen tijdens die uren.",
+          "text": "Deelnemers aan een les, training of evenement krijgen een tijdelijk toegangsrecht dat alleen geldt op de tijden die jij instelt.",
+          "tags": [
+            "Evenementen",
+            "Lessen",
+            "Trainingen"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Weten wie er wanneer op de locatie was.",
+          "text": "De toegangsgeschiedenis laat zien wie wanneer opende, helpt het beheer en bevestigt dat de locatie aan het einde van de dag was afgesloten.",
+          "tags": [
+            "Controle",
+            "Beheer",
+            "Laatste 90 dagen"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Naar binnen met je telefoon. Snel en makkelijk.",
+          "text": "Elke gebruiker opent zelf vanuit de app, zonder dat iemand bij de poort hoeft te wachten om hem binnen te laten.",
+          "tags": [
+            "Directe verbinding",
+            "Geen simkaart"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Wisselende openingstijden? De toegang wisselt mee.",
+          "text": "Geplande acties kunnen openen op vaste dagen en tijden, zodat de toegang past bij de openingstijden van de locatie.",
+          "tags": [
+            "Geplande acties",
+            "Wekelijks of eenmalig"
+          ]
+        },
+        {
+          "icon": "dumbbell",
+          "title": "Van padelbaan tot sportschool.",
+          "text": "Geschikt voor padel- en tennisbanen, sportscholen en trainingscomplexen, vooral waar de drukte gedurende de dag wisselt.",
+          "tags": [
+            "Padelbanen",
+            "Tennisbanen",
+            "Sportscholen"
+          ]
+        }
       ],
       "seoTitle": "Toegang voor sportaccommodaties en padelbanen | WIFIGATE",
       "seoDescription": "WIFIGATE brengt slimme toegangscontrole naar sportaccommodaties, padelbanen en sportscholen, met toegang via de telefoon en tijdelijke of vaste toegangsrechten.",
@@ -522,15 +1245,96 @@ export default {
         }
       ],
       "paragraph": "Opslaglocaties en lockerruimtes werken meestal met gedeelde codes, codepanelen en fysieke sleutels die worden gekopieerd, doorgegeven en zelden worden gewijzigd. WIFIGATE brengt de toegang naar de telefoon: elke huurder heeft een persoonlijk toegangsrecht voor de poort van het terrein, de ingang van het gebouw en, waar geïnstalleerd, een elektrisch vergrendelde opslagbox of locker, beperkt tot de tijden die jij kiest en ingetrokken zodra de huur stopt. De telefoon communiceert rechtstreeks met het apparaat ter plaatse, zonder simkaart of internetverbinding bij de deur, en zonder maandelijks abonnement voor standaardgebruik.",
-      "bullets": [
-        "Open de poort van het terrein, de deur van het gebouw en de locker met de telefoon",
-        "Een persoonlijk toegangsrecht voor elke huurder",
-        "Toegang beperkt tot openingstijden of een eigen tijdvenster",
-        "Eenmalige toegang voor verhuizers en familieleden",
-        "Trek toegang in zodra de huur stopt",
-        "Geschiedenis van wie wanneer opende",
-        "Geen gedeelde codes, codepanelen of sleutels om te vervangen",
-        "Geen simkaart of internetverbinding bij de deur"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Persoonlijke toegang. Voor elke huurder.",
+          "text": "In plaats van een gedeelde code die oud-huurders nog kennen, heeft elke huurder een eigen toegangsrecht.",
+          "visual": {
+            "type": "roster",
+            "heading": "Toegang tot de locatie",
+            "status": "Actief",
+            "rows": [
+              {
+                "name": "Marieke de Boer",
+                "badge": "Bevoegd"
+              },
+              {
+                "name": "Bram Hendriks",
+                "badge": "Bevoegd"
+              },
+              {
+                "name": "Iris Dekker",
+                "badge": "Bevoegd"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-minus",
+          "title": "De huur stopt. De toegang ook.",
+          "text": "Trek het toegangsrecht in zodra het contract afloopt of een betaling achterstallig is, zonder sleutels in te nemen.",
+          "tags": [
+            "Einde contract",
+            "Achterstallige betaling"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Poort, deur en locker. Met je telefoon.",
+          "text": "Elke huurder opent de poort van het terrein, de deur van het gebouw en, waar geïnstalleerd, ook een opslagbox of locker met elektrische vergrendeling.",
+          "tags": [
+            "Terreinpoort",
+            "Gebouwingang",
+            "Elektrische vergrendeling"
+          ]
+        },
+        {
+          "icon": "clock",
+          "title": "Toegangstijden die jij bepaalt.",
+          "text": "Sta toegang alleen toe tijdens de openingstijden van de locatie, of geef een huurder een ruimer tijdvenster.",
+          "tags": [
+            "Openingstijden",
+            "Eigen tijdvenster"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "Eenmalige toegang. Voor verhuizers en familie.",
+          "text": "Een verhuizer of familielid kan toegang voor één dag krijgen, zonder gedeelde code en zonder sleutel.",
+          "tags": [
+            "Verhuizers",
+            "Familieleden",
+            "Eén dag"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Weet wie er binnenkwam en wanneer.",
+          "text": "Elke opening wordt vastgelegd met de naam van de gebruiker en het tijdstip, zodat je een vraag over een bezoek beantwoordt vanuit de geschiedenis en niet vanuit camerabeelden.",
+          "tags": [
+            "90 dagen terug",
+            "Naam en tijdstip"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Geen gedeelde code. Geen sleutels om te vervangen.",
+          "text": "Codes, codepanelen en sleutels die worden gekopieerd en doorgegeven, maken plaats voor persoonlijke toegang op de telefoon.",
+          "tags": [
+            "Geen codepaneel",
+            "Geen sleutels"
+          ]
+        },
+        {
+          "icon": "sim-off",
+          "title": "Geen simkaart. Geen internet bij de deur.",
+          "text": "De telefoon communiceert rechtstreeks met het apparaat ter plaatse, en voor standaardgebruik is er geen maandabonnement.",
+          "tags": [
+            "Directe verbinding",
+            "Geen maandabonnement"
+          ]
+        }
       ],
       "seoTitle": "Slimme toegang voor opslagruimtes en lockers | WIFIGATE",
       "seoDescription": "WIFIGATE geeft elke huurder van een opslagruimte of locker persoonlijke toegang via de telefoon: alleen tijdens openingstijden, vastgelegd en ingetrokken als de huur stopt.",

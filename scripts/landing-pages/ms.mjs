@@ -41,28 +41,136 @@ export default {
       "note": "Waktu ditetapkan dalam selang 10 minit. Jika Sabat di tempat anda berakhir selepas tengah malam, tambah juga acara pada hari Ahad mulai 00:00."
     },
     "benefitsTitle": "Apa yang termasuk dalam pemasa Sabat WIFIGATE untuk pagar automatik",
-    "bullets": [
-      "Keluar masuk bebas pada hari Sabat, tanpa sesiapa mengendalikan pintu pagar",
-      "Jadual mingguan yang ditetapkan sekali sahaja",
-      "Hari perayaan dirancang lebih awal, sehingga 90 hari ke hadapan",
-      "Tukar waktu melalui aplikasi, tanpa memanggil juruteknik",
-      "Kunci pintu pagar pada waktu tetap, contohnya pada waktu malam",
-      "Pada hari biasa: buka melalui telefon, alat kawalan jauh atau butang",
-      "Disambungkan ke pengawal pintu pagar atau palang sedia ada",
-      "Tanpa SIM, tanpa internet di pintu pagar dan tanpa langganan bulanan"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Tetapkan sekali. Berfungsi setiap Sabat.",
+        "text": "Tandakan acara hijau “Pintu pagar terbuka” pada hari Jumaat dan Sabtu, dan peranti pintu pagar menjalankannya dengan sendirinya setiap minggu.",
+        "tags": [
+          "Sehingga 50 acara",
+          "Selang 10 minit"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Pintu pagar terbuka pada hari Sabat",
+          "status": "Mingguan",
+          "rows": [
+            {
+              "day": "Jumaat",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Sabtu",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Keluar masuk pada hari Sabat. Tanpa menyentuh apa-apa.",
+        "text": "Pada hari Sabat, pintu pagar kekal terbuka pada waktu yang anda tetapkan, dan tiada sesiapa perlu mengendalikannya.",
+        "tags": [
+          "Tanpa alat kawalan jauh",
+          "Tanpa telefon",
+          "Tanpa butang"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Hari perayaan dirancang lebih awal",
+        "text": "Tambah acara sekali sahaja untuk hari sebelum hari perayaan dan hari perayaan itu sendiri, sehingga 90 hari ke hadapan, dan setiap acara dipadam dengan sendirinya selepas tarikhnya berlalu.",
+        "tags": [
+          "Sehingga 90 hari",
+          "Tahun Baru Yahudi",
+          "Paskah Yahudi"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Tukar waktu dalam aplikasi. Tanpa juruteknik.",
+        "text": "Apabila musim bertukar, kemas kini waktu pada skrin “Acara berjadual” dan simpan.",
+        "tags": [
+          "Pentadbir sistem",
+          "Di pintu pagar"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Kunci pintu pagar pada waktu tetap, contohnya pada waktu malam",
+        "text": "Acara merah “Pintu pagar tertutup” memastikan pintu pagar kekal tertutup pada waktu yang anda tetapkan, dan acara hijau memastikannya kekal terbuka.",
+        "tags": [
+          "Acara merah",
+          "Acara hijau"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Pada hari biasa: telefon, alat kawalan jauh atau butang",
+        "text": "Di luar waktu yang anda tetapkan, pintu pagar beroperasi seperti biasa dan dibuka melalui telefon, alat kawalan jauh atau butang.",
+        "tags": [
+          "Di luar acara",
+          "Kawalan jauh sedia ada"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Disambungkan ke pintu pagar atau palang sedia ada",
+        "text": "WIFIGATE disambungkan ke pengawal pintu pagar atau palang sedia ada, jadi pemasa Sabat berasingan dalam kotak suis elektrik tidak diperlukan.",
+        "tags": [
+          "Pintu pagar automatik",
+          "Palang letak kereta"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Tanpa SIM, tanpa internet di pintu pagar dan tanpa langganan bulanan",
+        "text": "Pintu pagar hanya memerlukan bekalan elektrik, telefon bersambung terus ke peranti, dan anda bayar sekali untuk peranti dan pemasangan.",
+        "tags": [
+          "Bekalan elektrik sahaja",
+          "Bayaran sekali"
+        ]
+      }
     ],
     "facts": {
       "title": "Jadual Sabat pintu pagar automatik WIFIGATE secara ringkas",
       "rows": [
-        { "label": "Acara", "value": "Sehingga 50 kesemuanya, mingguan dan sekali sahaja" },
-        { "label": "Selang masa", "value": "10 minit" },
-        { "label": "Hari perayaan", "value": "Acara sekali sahaja pada hari sebelum hari perayaan dan pada hari perayaan, sehingga 90 hari ke hadapan" },
-        { "label": "Terbuka atau tertutup", "value": "Acara hijau memastikan pintu pagar kekal terbuka, acara merah memastikannya kekal tertutup" },
-        { "label": "Lokasi jadual", "value": "Disimpan dan berjalan pada peranti pintu pagar" },
-        { "label": "Keperluan di pintu pagar", "value": "Bekalan elektrik sahaja, tanpa SIM, tanpa penghala dan tanpa internet" },
-        { "label": "Menukar waktu", "value": "Melalui aplikasi, di pintu pagar, tanpa juruteknik" },
-        { "label": "Selepas bekalan elektrik terputus", "value": "Jadual kekal tersimpan, dan acara berjalan semula apabila mana-mana telefon bersambung ke pintu pagar" },
-        { "label": "Bayaran", "value": "Sekali untuk peranti dan pemasangan, tanpa langganan bulanan" }
+        {
+          "label": "Acara",
+          "value": "Sehingga 50 kesemuanya, mingguan dan sekali sahaja"
+        },
+        {
+          "label": "Selang masa",
+          "value": "10 minit"
+        },
+        {
+          "label": "Hari perayaan",
+          "value": "Acara sekali sahaja pada hari sebelum hari perayaan dan pada hari perayaan, sehingga 90 hari ke hadapan"
+        },
+        {
+          "label": "Terbuka atau tertutup",
+          "value": "Acara hijau memastikan pintu pagar kekal terbuka, acara merah memastikannya kekal tertutup"
+        },
+        {
+          "label": "Lokasi jadual",
+          "value": "Disimpan dan berjalan pada peranti pintu pagar"
+        },
+        {
+          "label": "Keperluan di pintu pagar",
+          "value": "Bekalan elektrik sahaja, tanpa SIM, tanpa penghala dan tanpa internet"
+        },
+        {
+          "label": "Menukar waktu",
+          "value": "Melalui aplikasi, di pintu pagar, tanpa juruteknik"
+        },
+        {
+          "label": "Selepas bekalan elektrik terputus",
+          "value": "Jadual kekal tersimpan, dan acara berjalan semula apabila mana-mana telefon bersambung ke pintu pagar"
+        },
+        {
+          "label": "Bayaran",
+          "value": "Sekali untuk peranti dan pemasangan, tanpa langganan bulanan"
+        }
       ]
     },
     "updatedLabel": "Kemas kini terakhir: {date}",

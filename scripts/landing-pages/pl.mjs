@@ -41,28 +41,136 @@ export default {
       "note": "Godziny ustawia się w krokach co 10 minut. Jeśli u Ciebie szabat kończy się po północy, dodaj też zdarzenie w niedzielę od 00:00."
     },
     "benefitsTitle": "Co obejmuje programator czasowy WIFIGATE do bramy na szabat i święta",
-    "bullets": [
-      "Swobodne wejście i wyjście w szabat, bez obsługiwania bramy przez kogokolwiek",
-      "Tygodniowy harmonogram, który ustawiasz raz",
-      "Święta zaplanowane z wyprzedzeniem, do 90 dni naprzód",
-      "Zmiana godzin w aplikacji, bez wzywania technika",
-      "Blokada bramy w stałych godzinach, na przykład w nocy",
-      "W dni powszednie: otwieranie telefonem, pilotem lub przyciskiem",
-      "Podłączenie do sterownika istniejącej bramy lub szlabanu",
-      "Bez karty SIM, bez internetu przy bramie i bez miesięcznego abonamentu"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Ustawiasz raz. Działa w każdy szabat.",
+        "text": "Zaznaczasz w piątek i w sobotę zielone zdarzenia „Brama otwarta”, a urządzenie bramy samo wykonuje je co tydzień.",
+        "tags": [
+          "Do 50 zdarzeń",
+          "Kroki co 10 minut"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Brama otwarta w szabat",
+          "status": "Co tydzień",
+          "rows": [
+            {
+              "day": "Piątek",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Sobota",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Wchodzisz i wychodzisz w szabat. Niczego nie trzeba dotykać.",
+        "text": "W szabat brama pozostaje otwarta w ustalonych przez Ciebie godzinach i nikt nie musi jej obsługiwać.",
+        "tags": [
+          "Bez pilota",
+          "Bez telefonu",
+          "Bez przycisku"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Święta zaplanowane z wyprzedzeniem",
+        "text": "Dodajesz jednorazowe zdarzenia na wigilię święta i dzień święta, do 90 dni naprzód, a każde zdarzenie samo znika, gdy jego data minie.",
+        "tags": [
+          "Do 90 dni",
+          "Rosz ha-Szana",
+          "Pesach"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Zmieniasz godziny w aplikacji. Bez technika.",
+        "text": "Gdy zmienia się pora roku, aktualizujesz godziny na ekranie „Zaplanowane zdarzenia” i zapisujesz.",
+        "tags": [
+          "Administrator systemu",
+          "Przy bramie"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Blokujesz bramę w stałych godzinach, na przykład w nocy",
+        "text": "Czerwone zdarzenie „Brama zamknięta” utrzymuje bramę zamkniętą w ustalonych przez Ciebie godzinach, a zielone zdarzenie utrzymuje ją otwartą.",
+        "tags": [
+          "Czerwone zdarzenie",
+          "Zielone zdarzenie"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "W dni powszednie: telefon, pilot lub przycisk",
+        "text": "Poza ustalonymi przez Ciebie godzinami brama działa jak zwykle i otwiera się telefonem, pilotem lub przyciskiem.",
+        "tags": [
+          "Poza zdarzeniami",
+          "Dotychczasowe piloty"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Łączy się z istniejącą bramą lub szlabanem",
+        "text": "WIFIGATE podłącza się do sterownika istniejącej bramy lub szlabanu, więc nie potrzebujesz osobnego timera szabatowego w rozdzielnicy.",
+        "tags": [
+          "Brama automatyczna",
+          "Szlaban parkingowy"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Bez karty SIM, bez internetu przy bramie i bez miesięcznego abonamentu",
+        "text": "Przy bramie potrzebne jest tylko zasilanie, telefon łączy się z urządzeniem bezpośrednio, a za urządzenie i instalację płacisz jednorazowo.",
+        "tags": [
+          "Tylko zasilanie",
+          "Płatność jednorazowa"
+        ]
+      }
     ],
     "facts": {
       "title": "Timer szabatowy WIFIGATE w skrócie",
       "rows": [
-        { "label": "Zdarzenia", "value": "Łącznie do 50, cotygodniowe i jednorazowe" },
-        { "label": "Krok czasowy", "value": "10 minut" },
-        { "label": "Święta", "value": "Jednorazowe zdarzenia w wigilię święta i w dniu święta, do 90 dni naprzód" },
-        { "label": "Otwarta czy zamknięta", "value": "Zielone zdarzenie utrzymuje bramę otwartą, czerwone utrzymuje ją zamkniętą" },
-        { "label": "Gdzie jest harmonogram", "value": "Zapisany i wykonywany w urządzeniu bramy" },
-        { "label": "Co jest potrzebne przy bramie", "value": "Tylko zasilanie, bez karty SIM, routera i internetu" },
-        { "label": "Zmiana godzin", "value": "W aplikacji, przy bramie, bez technika" },
-        { "label": "Po przerwie w dostawie prądu", "value": "Harmonogram zostaje zachowany, a zdarzenia znów działają, gdy dowolny telefon połączy się z bramą" },
-        { "label": "Płatność", "value": "Jednorazowo za urządzenie i instalację, bez miesięcznego abonamentu" }
+        {
+          "label": "Zdarzenia",
+          "value": "Łącznie do 50, cotygodniowe i jednorazowe"
+        },
+        {
+          "label": "Krok czasowy",
+          "value": "10 minut"
+        },
+        {
+          "label": "Święta",
+          "value": "Jednorazowe zdarzenia w wigilię święta i w dniu święta, do 90 dni naprzód"
+        },
+        {
+          "label": "Otwarta czy zamknięta",
+          "value": "Zielone zdarzenie utrzymuje bramę otwartą, czerwone utrzymuje ją zamkniętą"
+        },
+        {
+          "label": "Gdzie jest harmonogram",
+          "value": "Zapisany i wykonywany w urządzeniu bramy"
+        },
+        {
+          "label": "Co jest potrzebne przy bramie",
+          "value": "Tylko zasilanie, bez karty SIM, routera i internetu"
+        },
+        {
+          "label": "Zmiana godzin",
+          "value": "W aplikacji, przy bramie, bez technika"
+        },
+        {
+          "label": "Po przerwie w dostawie prądu",
+          "value": "Harmonogram zostaje zachowany, a zdarzenia znów działają, gdy dowolny telefon połączy się z bramą"
+        },
+        {
+          "label": "Płatność",
+          "value": "Jednorazowo za urządzenie i instalację, bez miesięcznego abonamentu"
+        }
       ]
     },
     "updatedLabel": "Ostatnia aktualizacja: {date}",

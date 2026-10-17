@@ -41,28 +41,136 @@ export default {
       "note": "Die Zeiten werden in Schritten von 10 Minuten festgelegt. Endet der Schabbat bei Ihnen nach Mitternacht, fügen Sie zusätzlich am Sonntag ein Ereignis ab 00:00 Uhr hinzu."
     },
     "benefitsTitle": "Was die WIFIGATE-Zeitschaltuhr für den Torantrieb am Schabbat umfasst",
-    "bullets": [
-      "Freies Kommen und Gehen am Schabbat, ohne dass jemand das Tor bedient",
-      "Ein Wochenplan, den Sie nur einmal einstellen",
-      "Feiertage vorab planen, bis zu 90 Tage im Voraus",
-      "Zeiten in der App ändern, ohne einen Techniker zu rufen",
-      "Das Tor zu festen Zeiten verriegeln, zum Beispiel nachts",
-      "Unter der Woche: Öffnen per Smartphone, Handsender oder Taster",
-      "Wird an die vorhandene Steuerung von Tor oder Schranke angeschlossen",
-      "Ohne SIM, ohne Internet am Tor und ohne monatliches Abo"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Einmal einstellen. Jeden Schabbat aktiv.",
+        "text": "Sie markieren am Freitag und am Samstag grüne Ereignisse „Tor offen“, und das Gerät am Tor führt sie jede Woche von selbst aus.",
+        "tags": [
+          "Bis zu 50 Ereignisse",
+          "10-Minuten-Schritte"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Tor offen am Schabbat",
+          "status": "Wöchentlich",
+          "rows": [
+            {
+              "day": "Freitag",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Samstag",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Am Schabbat ein- und ausgehen. Ohne etwas zu berühren.",
+        "text": "Am Schabbat bleibt das Tor zu den von Ihnen festgelegten Zeiten offen, und niemand muss es bedienen.",
+        "tags": [
+          "Ohne Handsender",
+          "Ohne Smartphone",
+          "Ohne Taster"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Feiertage, im Voraus geplant",
+        "text": "Sie fügen einmalige Ereignisse für den Vorabend und den Feiertag hinzu, bis zu 90 Tage im Voraus, und jedes Ereignis wird von selbst gelöscht, sobald sein Datum vorbei ist.",
+        "tags": [
+          "Bis zu 90 Tage",
+          "Rosch ha-Schana",
+          "Pessach"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Zeiten in der App ändern. Ohne Techniker.",
+        "text": "Wenn die Jahreszeit wechselt, passen Sie die Zeiten in der Ansicht „Zeitgesteuerte Ereignisse“ an und speichern sie.",
+        "tags": [
+          "Systemadministrator",
+          "Am Tor"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Das Tor zu festen Zeiten verriegeln, zum Beispiel nachts",
+        "text": "Ein rotes Ereignis „Tor geschlossen“ hält das Tor zu den von Ihnen festgelegten Zeiten geschlossen, und ein grünes Ereignis hält es offen.",
+        "tags": [
+          "Rotes Ereignis",
+          "Grünes Ereignis"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Unter der Woche: Smartphone, Handsender oder Taster",
+        "text": "Außerhalb der von Ihnen festgelegten Zeiten arbeitet das Tor wie gewohnt und öffnet per Smartphone, Handsender oder Taster.",
+        "tags": [
+          "Außerhalb der Ereignisse",
+          "Vorhandene Handsender"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Anschluss an Ihr vorhandenes Tor oder Ihre Schranke",
+        "text": "WIFIGATE wird an die vorhandene Steuerung von Tor oder Schranke angeschlossen, sodass keine separate Schabbat-Zeitschaltuhr im Verteilerkasten nötig ist.",
+        "tags": [
+          "Elektrisches Tor",
+          "Parkschranke"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Ohne SIM, ohne Internet am Tor und ohne monatliches Abo",
+        "text": "Am Tor wird nur Strom benötigt, das Smartphone verbindet sich direkt mit dem Gerät, und Sie zahlen einmal für Gerät und Installation.",
+        "tags": [
+          "Nur Strom",
+          "Einmalzahlung"
+        ]
+      }
     ],
     "facts": {
       "title": "Die Schabbat-Zeitschaltuhr von WIFIGATE im Überblick",
       "rows": [
-        { "label": "Ereignisse", "value": "Bis zu 50 insgesamt, wöchentlich und einmalig" },
-        { "label": "Zeitschritte", "value": "10 Minuten" },
-        { "label": "Feiertage", "value": "Einmalige Ereignisse am Vorabend und am Feiertag selbst, bis zu 90 Tage im Voraus" },
-        { "label": "Offen oder geschlossen", "value": "Ein grünes Ereignis hält das Tor offen, ein rotes Ereignis hält es geschlossen" },
-        { "label": "Wo der Zeitplan liegt", "value": "Gespeichert und ausgeführt im Gerät am Tor" },
-        { "label": "Was das Tor braucht", "value": "Nur Strom, ohne SIM, ohne Router und ohne Internet" },
-        { "label": "Zeiten ändern", "value": "In der App, direkt am Tor, ohne Techniker" },
-        { "label": "Nach einem Stromausfall", "value": "Der Zeitplan bleibt erhalten, und die Ereignisse laufen wieder, sobald sich irgendein Smartphone mit dem Tor verbindet" },
-        { "label": "Bezahlung", "value": "Einmalig für Gerät und Installation, ohne monatliches Abo" }
+        {
+          "label": "Ereignisse",
+          "value": "Bis zu 50 insgesamt, wöchentlich und einmalig"
+        },
+        {
+          "label": "Zeitschritte",
+          "value": "10 Minuten"
+        },
+        {
+          "label": "Feiertage",
+          "value": "Einmalige Ereignisse am Vorabend und am Feiertag selbst, bis zu 90 Tage im Voraus"
+        },
+        {
+          "label": "Offen oder geschlossen",
+          "value": "Ein grünes Ereignis hält das Tor offen, ein rotes Ereignis hält es geschlossen"
+        },
+        {
+          "label": "Wo der Zeitplan liegt",
+          "value": "Gespeichert und ausgeführt im Gerät am Tor"
+        },
+        {
+          "label": "Was das Tor braucht",
+          "value": "Nur Strom, ohne SIM, ohne Router und ohne Internet"
+        },
+        {
+          "label": "Zeiten ändern",
+          "value": "In der App, direkt am Tor, ohne Techniker"
+        },
+        {
+          "label": "Nach einem Stromausfall",
+          "value": "Der Zeitplan bleibt erhalten, und die Ereignisse laufen wieder, sobald sich irgendein Smartphone mit dem Tor verbindet"
+        },
+        {
+          "label": "Bezahlung",
+          "value": "Einmalig für Gerät und Installation, ohne monatliches Abo"
+        }
       ]
     },
     "updatedLabel": "Zuletzt aktualisiert: {date}",

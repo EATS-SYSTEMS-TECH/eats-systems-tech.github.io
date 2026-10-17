@@ -415,34 +415,37 @@ html[dir="rtl"] .niche-hero__nav-icon {
   text-wrap: balance;
 }
 
-/* Key benefits: a dark band of glass tiles, each with a blue success check.
-   The centre tile of the 3x3 grid (li.niche-benefit--gap, aria-hidden) is a
-   decorative check inside rings. The only motion is on hover (the lift and
-   the top line), for a pointer that hovers and when motion is allowed. */
+/* Key benefits: bento. A dark band with navy gradients and a faint grid; the
+   cards (ul.bento > li.bento-card, built by setNicheBenefits) sit on a
+   12-column grid: the lead card takes 7 columns and carries a small product
+   illustration, the second takes 5, the rest run in rows of three. Motion is
+   the hover lift only, for a pointer that hovers and when motion is allowed. */
 #niche-benefits {
-  --benefit-band: #07080b;
-  --benefit-tile: #0e1014;
-  --benefit-line: rgba(110, 160, 255, 0.62);
-  --benefit-text: #f4f6fa;
-  --benefit-muted: rgba(235, 240, 250, 0.6);
-  --benefit-blue: #146bff;
-  --benefit-blue-hi: #5a9bff;
-  --benefit-blue-lo: #0a4fd6;
-  --benefit-pad: clamp(1.4rem, 2.3vw, 2.1rem);
-  --benefit-badge: 2.6rem;
-  --benefit-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.2 12.6l4.4 4.4L18.8 7.6'/%3E%3C/svg%3E");
+  --bento-band: #06080d;
+  --bento-card: rgba(15, 21, 34, 0.86);
+  --bento-card-hi: rgba(24, 33, 52, 0.78);
+  --bento-line: rgba(148, 170, 210, 0.16);
+  --bento-line-hi: rgba(96, 156, 255, 0.5);
+  --bento-text: #f3f6fb;
+  --bento-muted: #a6b3c8;
+  --bento-faint: #7d8aa1;
+  --bento-blue: #146bff;
+  --bento-blue-soft: #8ab6ff;
+  --bento-green: #4ade80;
+  --bento-radius: 16px;
+  --bento-pad: clamp(1.35rem, 2.1vw, 2rem);
 
   position: relative;
   isolation: isolate;
   overflow: clip;
-  color: var(--benefit-text);
+  color: var(--bento-text);
   background:
-    radial-gradient(52rem 36rem at 50% 64%, rgba(20, 107, 255, 0.17), transparent 68%),
-    radial-gradient(38rem 26rem at 100% 0%, rgba(20, 107, 255, 0.09), transparent 72%),
-    var(--benefit-band);
+    radial-gradient(60rem 34rem at 15% 0%, rgba(20, 107, 255, 0.14), transparent 70%),
+    radial-gradient(44rem 30rem at 100% 100%, rgba(20, 70, 160, 0.16), transparent 72%),
+    linear-gradient(180deg, #070a12, var(--bento-band));
 }
 
-/* A faint grid behind the tiles, fading out towards the edges. */
+/* A faint grid behind the cards, fading out towards the edges. */
 #niche-benefits::before {
   position: absolute;
   z-index: -1;
@@ -450,12 +453,12 @@ html[dir="rtl"] .niche-hero__nav-icon {
   content: "";
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-position: center top;
   background-size: 4rem 4rem;
-  -webkit-mask-image: radial-gradient(ellipse 72% 62% at 50% 38%, #000 18%, transparent 78%);
-  mask-image: radial-gradient(ellipse 72% 62% at 50% 38%, #000 18%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 20%, transparent 80%);
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 20%, transparent 80%);
 }
 
 /* A short glowing rule above the title, like the hero eyebrow. */
@@ -465,254 +468,449 @@ html[dir="rtl"] .niche-hero__nav-icon {
   height: 2px;
   margin-block-end: 1.4rem;
   content: "";
-  background: linear-gradient(90deg, var(--benefit-blue), var(--benefit-blue-hi));
+  background: linear-gradient(90deg, var(--bento-blue), var(--bento-blue-soft));
   box-shadow: 0 0 14px rgba(20, 107, 255, 0.7);
 }
 
 html[dir="rtl"] #niche-benefits .niche-section__header::before {
-  background: linear-gradient(270deg, var(--benefit-blue), var(--benefit-blue-hi));
+  background: linear-gradient(270deg, var(--bento-blue), var(--bento-blue-soft));
 }
 
 #niche-benefits .niche-section__title {
   color: #ffffff;
 }
 
-.niche-benefits__grid {
-  container: benefits / inline-size;
+.bento {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.75rem, 1.3vw, 1.1rem);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(0.85rem, 1.3vw, 1.15rem);
   margin: 0;
   padding: 0;
   list-style: none;
-  counter-reset: benefit;
 }
 
-.niche-benefit {
+.bento-card {
   position: relative;
   display: flex;
   min-width: 0;
-  min-height: clamp(13.5rem, 19.5vw, 16.5rem);
   margin: 0;
-  padding: calc(var(--benefit-pad) + var(--benefit-badge) + 2.25rem) var(--benefit-pad) var(--benefit-pad);
-  overflow: clip;
-  align-items: flex-end;
-  border: 1px solid transparent;
-  border-radius: 6px;
-  color: var(--benefit-text);
-  /* Glass rim: a lighter top edge with a short blue light line on it. */
+  padding: var(--bento-pad);
+  flex-direction: column;
+  gap: 1.5rem;
+  border: 1px solid var(--bento-line);
+  border-radius: var(--bento-radius);
   background:
-    linear-gradient(90deg, transparent, var(--benefit-line), transparent) center top / 46% 1px no-repeat border-box,
-    radial-gradient(120% 90% at 50% 0%, rgba(255, 255, 255, 0.05), transparent 60%) padding-box,
-    linear-gradient(var(--benefit-tile), var(--benefit-tile)) padding-box,
-    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.07) 42%, rgba(255, 255, 255, 0.05)) border-box;
+    radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.035), transparent 60%),
+    linear-gradient(180deg, var(--bento-card-hi), var(--bento-card));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  font-family: "Space Grotesk", "Manrope", sans-serif;
-  font-size: clamp(1.14rem, 1.6vw, 1.42rem);
-  font-weight: 500;
-  line-height: 1.3;
-  hyphens: auto;
-  text-wrap: pretty;
-  counter-increment: benefit;
-  transition: box-shadow 260ms ease;
+  color: var(--bento-text);
+  transition: border-color 220ms ease, box-shadow 220ms ease;
 }
 
-/* A word longer than the tile breaks instead of being clipped (150% text,
-   long compounds); the id outranks the accessibility rule that sets
-   break-word on every element. */
-#niche-benefits .niche-benefit {
-  overflow-wrap: anywhere;
-}
+.bento-card--lead { grid-column: span 7; }
+.bento-card--feature { grid-column: span 5; }
+.bento-card--third { grid-column: span 4; }
+.bento-card--half { grid-column: span 6; }
+.bento-card--full { grid-column: span 12; }
 
-/* Scripts with stacked marks need taller lines. */
-.niche-benefit:is(:lang(bn), :lang(hi), :lang(mr), :lang(te), :lang(th)) {
-  line-height: 1.55;
-}
-
-/* Success check badge */
-.niche-benefit::before {
-  position: absolute;
-  inset-block-start: var(--benefit-pad);
-  inset-inline-start: var(--benefit-pad);
-  width: var(--benefit-badge);
-  height: var(--benefit-badge);
-  margin: 0;
-  border-radius: 50%;
-  content: "";
+/* The lead card: navy blue, with its illustration beside the text. */
+.bento-card--lead {
+  border-color: var(--bento-line-hi);
   background:
-    var(--benefit-check) center / 46% no-repeat,
-    radial-gradient(circle at 32% 24%, var(--benefit-blue-hi), var(--benefit-blue) 52%, var(--benefit-blue-lo));
+    radial-gradient(90% 90% at 0% 0%, rgba(20, 107, 255, 0.26), transparent 62%),
+    radial-gradient(70% 70% at 100% 100%, rgba(20, 107, 255, 0.12), transparent 70%),
+    linear-gradient(160deg, #0f1d3b, #0a1224);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.22),
-    0 0 0 5px rgba(20, 107, 255, 0.13),
-    0 8px 26px -4px rgba(20, 107, 255, 0.7);
-  transition: box-shadow 260ms ease;
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 24px 60px -36px rgba(20, 107, 255, 0.55);
 }
 
-/* Index number at the top end, silent for screen readers. */
-.niche-benefit::after {
-  position: absolute;
-  inset-block-start: calc(var(--benefit-pad) + (var(--benefit-badge) - 1.2em) / 2);
-  inset-inline-end: var(--benefit-pad);
-  content: counter(benefit, decimal-leading-zero);
-  content: counter(benefit, decimal-leading-zero) / "";
-  color: var(--benefit-muted);
+.bento-card--with-visual {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    "top top"
+    "body visual";
+  align-items: end;
+  column-gap: clamp(1.25rem, 2.5vw, 2.25rem);
+}
+
+.bento-card--with-visual .bento-card__top { grid-area: top; }
+.bento-card--with-visual .bento-card__body { grid-area: body; }
+.bento-card--with-visual .bento-visual { grid-area: visual; }
+
+.bento-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.bento-card__icon {
+  display: grid;
+  width: 2.9rem;
+  height: 2.9rem;
+  flex: none;
+  place-items: center;
+  border: 1px solid rgba(96, 156, 255, 0.36);
+  border-radius: 12px;
+  color: var(--bento-blue-soft);
+  background: linear-gradient(180deg, rgba(20, 107, 255, 0.2), rgba(20, 107, 255, 0.07));
+  box-shadow: 0 10px 24px -14px rgba(20, 107, 255, 0.9);
+}
+
+.bento-card__icon svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.bento-card__count {
+  color: var(--bento-faint);
   font-family: "Space Grotesk", "Manrope", sans-serif;
   font-size: 0.78rem;
   font-variant-numeric: tabular-nums;
   font-weight: 600;
-  line-height: 1.2;
   letter-spacing: 0.08em;
+  white-space: nowrap;
 }
 
-/* Hover (a pointer that hovers only, so a tap leaves nothing behind): the rim
-   lights up, the top line runs the full width, the badge glows. */
-@media (hover: hover) {
-  .niche-benefit:not(.niche-benefit--gap):hover {
-    background:
-      linear-gradient(90deg, transparent, #a6c8ff, transparent) center top / 100% 1px no-repeat border-box,
-      radial-gradient(120% 90% at 50% 0%, rgba(20, 107, 255, 0.17), transparent 62%) padding-box,
-      linear-gradient(var(--benefit-tile), var(--benefit-tile)) padding-box,
-      linear-gradient(180deg, rgba(110, 160, 255, 0.78), rgba(20, 107, 255, 0.36) 48%, rgba(20, 107, 255, 0.22)) border-box;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      0 26px 50px -26px rgba(20, 107, 255, 0.75);
-  }
+.bento-card__body {
+  display: flex;
+  min-width: 0;
+  margin-block-start: auto;
+  flex-direction: column;
+  gap: 0.7rem;
+}
 
-  .niche-benefit:not(.niche-benefit--gap):hover::before {
+.bento-card__title {
+  margin: 0;
+  color: var(--bento-text);
+  font-family: "Space Grotesk", "Manrope", sans-serif;
+  font-size: clamp(1.2rem, 1.55vw, 1.45rem);
+  font-weight: 600;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.bento-card--lead .bento-card__title {
+  font-size: clamp(1.45rem, 2.3vw, 2rem);
+  line-height: 1.15;
+}
+
+.bento-card__text {
+  margin: 0;
+  color: var(--bento-muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* Words longer than the card break instead of being clipped (150% text,
+   long compounds); the id outranks the accessibility break-word rule. */
+#niche-benefits :is(.bento-card__title, .bento-card__text, .bento-tag, .bento-visual) {
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+/* Scripts with stacked marks need taller lines. */
+.bento-card:is(:lang(bn), :lang(hi), :lang(mr), :lang(te), :lang(th)) :is(.bento-card__title, .bento-card__text) {
+  line-height: 1.6;
+}
+
+/* Japanese titles break between phrases, not inside a word. */
+.bento-card__title:lang(ja) {
+  word-break: auto-phrase;
+}
+
+/* Tags: plain labels, not controls. */
+.bento-card__tags {
+  display: flex;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  list-style: none;
+}
+
+.bento-tag {
+  display: inline-flex;
+  min-width: 0;
+  padding: 0.32rem 0.7rem;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid rgba(96, 156, 255, 0.32);
+  border-radius: 8px;
+  color: #b9d2ff;
+  background: rgba(20, 107, 255, 0.08);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* ---------- Illustrations ---------- */
+.bento-visual {
+  min-width: 0;
+  padding: 0.95rem;
+  border: 1px solid rgba(148, 170, 210, 0.2);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(10, 15, 27, 0.92), rgba(7, 10, 19, 0.96));
+  box-shadow:
+    0 28px 50px -30px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  font-size: 0.86rem;
+  transform: rotate(-2deg);
+}
+
+html[dir="rtl"] .bento-visual {
+  transform: rotate(2deg);
+}
+
+.bento-visual__bar {
+  display: flex;
+  margin-block-end: 0.55rem;
+  padding: 0.15rem 0.2rem 0.65rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(148, 170, 210, 0.14);
+}
+
+.bento-visual__heading {
+  min-width: 0;
+  flex: 1 1 auto;
+  color: var(--bento-faint);
+  font-weight: 600;
+}
+
+.bento-visual__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--bento-green);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bento-visual__status::before {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  content: "";
+  background: var(--bento-green);
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.7);
+}
+
+.bento-visual__rows {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 0.15rem;
+  list-style: none;
+}
+
+.bento-visual__row {
+  display: flex;
+  min-width: 0;
+  padding: 0.5rem 0.2rem;
+  align-items: center;
+  gap: 0.65rem;
+  border-bottom: 1px solid rgba(148, 170, 210, 0.08);
+}
+
+.bento-visual__row:last-child {
+  border-bottom: 0;
+}
+
+.bento-visual__avatar {
+  display: grid;
+  width: 1.85rem;
+  height: 1.85rem;
+  flex: none;
+  place-items: center;
+  border-radius: 8px;
+  color: #cfe0ff;
+  background: rgba(20, 107, 255, 0.22);
+  font-weight: 700;
+}
+
+.bento-visual__name,
+.bento-visual__detail {
+  min-width: 0;
+  flex: 1;
+  color: var(--bento-text);
+  font-weight: 600;
+}
+
+.bento-visual__detail {
+  color: var(--bento-muted);
+  font-weight: 500;
+}
+
+.bento-visual__badge {
+  min-width: 0;
+  margin-inline-start: auto;
+  color: var(--bento-green);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: end;
+}
+
+/* Narrow phones and enlarged text: the badge drops under the name instead of
+   running past the frame. */
+.bento-visual__row,
+.bento-visual__bar {
+  flex-wrap: wrap;
+}
+
+.bento-visual__name,
+.bento-visual__detail {
+  flex-basis: 7rem;
+}
+
+.bento-visual--roster .bento-visual__badge::before {
+  content: "\2713\00a0";
+}
+
+.bento-visual--history .bento-visual__badge {
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  color: #b9d2ff;
+  background: rgba(20, 107, 255, 0.14);
+}
+
+.bento-visual__time {
+  flex: none;
+  color: var(--bento-faint);
+  font-family: "Space Grotesk", "Manrope", sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bento-visual__glyph {
+  display: grid;
+  width: 1.85rem;
+  height: 1.85rem;
+  flex: none;
+  place-items: center;
+  color: var(--bento-blue-soft);
+}
+
+.bento-visual__glyph svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Schedule: a day, its open hours on a 00:00-24:00 track (always left to
+   right, as in the app), and the hours. */
+.bento-visual__day {
+  width: 4.5rem;
+  flex: none;
+  color: var(--bento-text);
+  font-weight: 600;
+}
+
+.bento-visual__track {
+  position: relative;
+  height: 0.55rem;
+  min-width: 3rem;
+  flex: 1;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  direction: ltr;
+}
+
+.bento-visual__span {
+  position: absolute;
+  inset-block: 0;
+  left: var(--from);
+  width: calc(var(--to) - var(--from));
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22c55e, var(--bento-green));
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.45);
+}
+
+/* ---------- Hover ---------- */
+@media (hover: hover) {
+  .bento-card:hover {
+    border-color: rgba(96, 156, 255, 0.6);
     box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 0.3),
-      0 0 0 7px rgba(20, 107, 255, 0.2),
-      0 10px 34px -2px rgba(20, 107, 255, 0.9);
+      inset 0 1px 0 rgba(255, 255, 255, 0.07),
+      0 24px 48px -30px rgba(20, 107, 255, 0.75);
   }
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  html:not(.a11y-reduced-motion) .niche-benefit {
-    transition:
-      background-size 420ms cubic-bezier(0.2, 0.7, 0.2, 1),
-      box-shadow 260ms ease,
-      transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  html:not(.a11y-reduced-motion) .bento-card {
+    transition: border-color 220ms ease, box-shadow 220ms ease, transform 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
-  html:not(.a11y-reduced-motion) .niche-benefit:not(.niche-benefit--gap):hover {
+  html:not(.a11y-reduced-motion) .bento-card:hover {
     transform: translateY(-4px);
   }
 }
 
-/* The centre tile: a large glowing check inside concentric rings. */
-.niche-benefit--gap {
-  --benefit-ring: 2.35rem;
-  border-color: rgba(20, 107, 255, 0.34);
-  background:
-    radial-gradient(circle closest-side at 50% 50%, transparent 0 52%, var(--benefit-tile) 128%),
-    repeating-radial-gradient(circle closest-side at 50% 50%,
-      transparent 0 calc(30% - 1px),
-      rgba(130, 176, 255, 0.42) calc(30% - 1px) 30%),
-    radial-gradient(circle at 50% 50%, rgba(20, 107, 255, 0.5), rgba(20, 107, 255, 0.1) 40%, transparent 68%),
-    var(--benefit-tile);
-  box-shadow: inset 0 0 80px rgba(20, 107, 255, 0.14);
-  counter-increment: none;
-  pointer-events: none;
-}
-
-.niche-benefit--gap::before {
-  inset: 0;
-  width: calc(var(--benefit-ring) * 2.2);
-  height: calc(var(--benefit-ring) * 2.2);
-  margin: auto;
-  background:
-    var(--benefit-check) center / 44% no-repeat,
-    radial-gradient(circle at 32% 24%, var(--benefit-blue-hi), var(--benefit-blue) 52%, var(--benefit-blue-lo));
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.3),
-    inset 0 -10px 22px rgba(4, 30, 110, 0.35),
-    0 0 40px 4px rgba(20, 107, 255, 0.5),
-    0 0 96px 20px rgba(20, 107, 255, 0.18);
-}
-
-.niche-benefit--gap::after {
-  content: none;
-}
-
+/* ---------- Tablet: two columns ---------- */
 @media (max-width: 1024px) {
-  .niche-benefits__grid {
+  .bento {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  /* The centre tile only reads as intentional on the 3-column grid. */
-  .niche-benefit--gap {
-    display: none;
+  .bento-card--lead,
+  .bento-card--feature,
+  .bento-card--full {
+    grid-column: span 2;
   }
 
-  .niche-benefit {
-    min-height: clamp(11.5rem, 26vw, 13rem);
+  .bento-card--third,
+  .bento-card--half {
+    grid-column: span 1;
+  }
+
+  /* An odd card at the end takes the whole row. */
+  .bento-card:nth-child(n + 3):last-child:nth-child(odd) {
+    grid-column: span 2;
   }
 }
 
-/* Phones: one column of rows, badge and number beside the text. */
+/* ---------- Phones: one column ---------- */
 @media (max-width: 620px) {
   #niche-benefits {
-    --benefit-pad: 1.15rem;
-    --benefit-badge: 2.25rem;
+    --bento-pad: 1.2rem;
   }
 
-  .niche-benefits__grid {
+  .bento {
     grid-template-columns: minmax(0, 1fr);
-    gap: 0.6rem;
+    gap: 0.75rem;
   }
 
-  .niche-benefit {
-    min-height: 0;
-    padding: var(--benefit-pad);
-    align-items: center;
-    gap: 0.95rem;
-    font-size: 1.04rem;
-    line-height: 1.38;
+  .bento-card,
+  .bento-card:nth-child(n + 3):last-child:nth-child(odd) {
+    grid-column: auto;
+    gap: 1.1rem;
   }
 
-  .niche-benefit::before,
-  .niche-benefit::after {
-    position: relative;
-    inset: auto;
-    flex: none;
-    align-self: flex-start;
+  .bento-card--with-visual {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "top"
+      "body"
+      "visual";
+    row-gap: 1.25rem;
   }
 
-  .niche-benefit::after {
-    margin-inline-start: auto;
-    padding-block-start: calc((var(--benefit-badge) - 1.2em) / 2);
+  .bento-visual,
+  html[dir="rtl"] .bento-visual {
+    transform: none;
   }
 }
 
-/* Narrow phones and enlarged text: the badge and number go above the text,
-   so long words get the full width. */
-@container benefits (max-width: 22em) {
-  .niche-benefit {
-    padding-block-start: calc(var(--benefit-pad) + var(--benefit-badge) + 0.9rem);
-    align-items: flex-start;
-  }
-
-  .niche-benefit::before {
-    position: absolute;
-    inset-block-start: var(--benefit-pad);
-    inset-inline-start: var(--benefit-pad);
-  }
-
-  .niche-benefit::after {
-    position: absolute;
-    inset-block-start: calc(var(--benefit-pad) + (var(--benefit-badge) - 1.2em) / 2);
-    inset-inline-end: var(--benefit-pad);
-    margin: 0;
-    padding: 0;
-  }
-}
-
-/* High contrast follows the site's light scheme. */
+/* ---------- Accessibility modes ---------- */
 html.a11y-high-contrast #niche-benefits {
-  --benefit-text: #020617;
-  --benefit-muted: #020617;
-  --benefit-tile: #ffffff;
+  --bento-text: #020617;
+  --bento-muted: #020617;
+  --bento-faint: #020617;
+  --bento-green: #0f5132;
   color: #020617;
   background: #ffffff;
 }
@@ -730,28 +928,39 @@ html.a11y-high-contrast #niche-benefits .niche-section__header::before {
   box-shadow: none;
 }
 
-html.a11y-high-contrast .niche-benefit,
-html.a11y-high-contrast .niche-benefit:not(.niche-benefit--gap):hover {
+html.a11y-high-contrast .bento-card,
+html.a11y-high-contrast .bento-card:hover,
+html.a11y-high-contrast .bento-visual {
   border: 2px solid #020617;
-  color: #020617;
   background: #ffffff;
   box-shadow: none;
 }
 
-html.a11y-high-contrast .niche-benefit::before,
-html.a11y-high-contrast .niche-benefit:not(.niche-benefit--gap):hover::before,
-html.a11y-high-contrast .niche-benefit--gap::before {
-  background: var(--benefit-check) center / 46% no-repeat, #0542ad;
+html.a11y-high-contrast :is(.bento-card__icon, .bento-tag, .bento-visual__avatar, .bento-visual--history .bento-visual__badge) {
+  border: 2px solid #0542ad;
+  color: #0542ad;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+html.a11y-high-contrast .bento-visual__status::before {
+  box-shadow: none;
+}
+
+html.a11y-high-contrast .bento-visual__track {
+  background: #e2e8f0;
+}
+
+html.a11y-high-contrast .bento-visual__span {
+  background: #0f5132;
   box-shadow: none;
 }
 
 @media (forced-colors: active) {
-  .niche-benefit {
+  .bento-card,
+  .bento-visual,
+  .bento-tag {
     border-color: CanvasText;
-  }
-
-  .niche-benefit::before {
-    border: 2px solid CanvasText;
   }
 }
 
@@ -761,28 +970,23 @@ html.a11y-high-contrast .niche-benefit--gap::before {
     background: none;
   }
 
-  #niche-benefits::before,
-  .niche-benefit--gap {
+  #niche-benefits::before {
     display: none;
   }
 
   #niche-benefits .niche-section__title,
-  .niche-benefit,
-  .niche-benefit::after {
+  .bento-card__title,
+  .bento-card__text,
+  .bento-visual__name {
     color: #000000;
   }
 
-  .niche-benefit {
+  .bento-card,
+  .bento-visual {
     border: 1px solid #999999;
     background: none;
     box-shadow: none;
-  }
-
-  /* The blue badge and its check print even without background graphics. */
-  .niche-benefit::before {
-    box-shadow: none;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    transform: none;
   }
 
   #niche-benefits .niche-section__header::before {
@@ -853,88 +1057,4 @@ html.a11y-high-contrast .niche-benefit--gap::before {
   .niche-hero__actions .btn {
     flex: 1 1 100%;
   }
-}
-
-/* Links to every other use case and WIFIGATE Host. */
-.niche-related__list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
-  gap: 0 2.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.niche-related__link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.15rem 0.25rem;
-  border-bottom: 1px solid var(--home-line);
-  color: var(--home-black);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.niche-related__link::after {
-  content: "→";
-  color: var(--home-blue, #146bff);
-}
-
-[dir="rtl"] .niche-related__link::after {
-  content: "←";
-}
-
-.niche-related__link:hover,
-.niche-related__link:focus-visible {
-  color: var(--home-blue, #146bff);
-}
-
-/* Use-case FAQ: questions open in place; the answers are in the HTML. */
-.niche-faq__list {
-  border-top: 1px solid var(--home-line);
-}
-
-.niche-faq__item {
-  border-bottom: 1px solid var(--home-line);
-}
-
-.niche-faq__question {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.25rem;
-  padding: 1.35rem 0.25rem;
-  color: var(--home-black);
-  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
-  font-weight: 600;
-  line-height: 1.35;
-  cursor: pointer;
-  list-style: none;
-}
-
-.niche-faq__question::-webkit-details-marker {
-  display: none;
-}
-
-.niche-faq__question::after {
-  content: "+";
-  flex: none;
-  color: var(--home-blue, #146bff);
-  font-size: 1.5rem;
-  font-weight: 400;
-  line-height: 1;
-}
-
-.niche-faq__item[open] .niche-faq__question::after {
-  content: "−";
-}
-
-.niche-faq__answer {
-  max-width: 62rem;
-  margin: 0;
-  padding: 0 0.25rem 1.4rem;
-  color: var(--home-muted, #4b5563);
-  line-height: 1.65;
 }

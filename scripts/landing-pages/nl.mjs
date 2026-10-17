@@ -41,28 +41,136 @@ export default {
       "note": "De tijden stel je in met stappen van 10 minuten. Eindigt sjabbat bij jou na middernacht, voeg dan ook op zondag een actie toe vanaf 00:00."
     },
     "benefitsTitle": "Wat de sjabbat-tijdschakelaar van WIFIGATE voor de poort biedt",
-    "bullets": [
-      "Vrij in- en uitgaan op sjabbat, zonder dat iemand de poort bedient",
-      "Een weekschema dat je één keer instelt",
-      "Feestdagen vooraf gepland, tot 90 dagen vooruit",
-      "Tijden wijzigen in de app, zonder een monteur te bellen",
-      "De poort op vaste tijden vergrendelen, bijvoorbeeld 's nachts",
-      "Doordeweeks: openen met je telefoon, een afstandsbediening of een knop",
-      "Sluit aan op de besturing van de bestaande poort of slagboom",
-      "Geen simkaart, geen internet bij de poort en geen maandabonnement"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Eén keer instellen. Werkt elke sjabbat.",
+        "text": "Markeer op vrijdag en zaterdag groene ‘Poort open’-acties, en het apparaat van de poort voert ze elke week vanzelf uit.",
+        "tags": [
+          "Tot 50 acties",
+          "Stappen van 10 minuten"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Poort open op sjabbat",
+          "status": "Wekelijks",
+          "rows": [
+            {
+              "day": "Vrijdag",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Zaterdag",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "In en uit op sjabbat. Zonder iets aan te raken.",
+        "text": "Op sjabbat blijft de poort open op de tijden die jij instelt, en niemand hoeft hem te bedienen.",
+        "tags": [
+          "Geen afstandsbediening",
+          "Geen telefoon",
+          "Geen knop"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Feestdagen vooraf gepland",
+        "text": "Voeg eenmalige acties toe voor de vooravond en de feestdag zelf, tot 90 dagen vooruit, en elke actie verdwijnt vanzelf zodra de datum voorbij is.",
+        "tags": [
+          "Tot 90 dagen",
+          "Rosj Hasjana",
+          "Pesach"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Tijden wijzigen in de app. Zonder monteur.",
+        "text": "Wisselt het seizoen, dan pas je de tijden aan op het scherm ‘Geplande acties’ en sla je op.",
+        "tags": [
+          "Systeembeheerder",
+          "Bij de poort"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "De poort vergrendelen op vaste tijden, bijvoorbeeld 's nachts",
+        "text": "Een rode ‘Poort dicht’-actie houdt de poort dicht op de tijden die jij instelt, en een groene actie houdt hem open.",
+        "tags": [
+          "Rode actie",
+          "Groene actie"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Doordeweeks: telefoon, afstandsbediening of knop",
+        "text": "Buiten de tijden die jij instelt werkt de poort gewoon zoals altijd en gaat hij open met de telefoon, de afstandsbediening of de knop.",
+        "tags": [
+          "Buiten de acties",
+          "Bestaande afstandsbedieningen"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Sluit aan op je bestaande poort of slagboom",
+        "text": "WIFIGATE sluit aan op de besturing van de bestaande poort of slagboom, zodat je geen aparte sjabbatklok in de meterkast nodig hebt.",
+        "tags": [
+          "Elektrische poort",
+          "Slagboom"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Geen simkaart, geen internet bij de poort en geen maandabonnement",
+        "text": "De poort heeft alleen stroom nodig, de telefoon maakt rechtstreeks verbinding met het apparaat, en je betaalt één keer voor het apparaat en de installatie.",
+        "tags": [
+          "Alleen stroom",
+          "Eenmalige betaling"
+        ]
+      }
     ],
     "facts": {
       "title": "De sjabbatklok van WIFIGATE in het kort",
       "rows": [
-        { "label": "Acties", "value": "Tot 50 in totaal, wekelijks en eenmalig" },
-        { "label": "Tijdstappen", "value": "10 minuten" },
-        { "label": "Feestdagen", "value": "Eenmalige acties op de vooravond en op de feestdag zelf, tot 90 dagen vooruit" },
-        { "label": "Open of dicht", "value": "Een groene actie houdt de poort open, een rode actie houdt hem dicht" },
-        { "label": "Waar het schema staat", "value": "Opgeslagen en uitgevoerd op het apparaat van de poort" },
-        { "label": "Wat de poort nodig heeft", "value": "Alleen stroom, geen simkaart, geen router en geen internet" },
-        { "label": "Tijden wijzigen", "value": "In de app, bij de poort, zonder monteur" },
-        { "label": "Na een stroomstoring", "value": "Het schema blijft bewaard, en de acties werken weer zodra een willekeurige telefoon verbinding maakt met de poort" },
-        { "label": "Betaling", "value": "Eenmalig voor het apparaat en de installatie, zonder maandabonnement" }
+        {
+          "label": "Acties",
+          "value": "Tot 50 in totaal, wekelijks en eenmalig"
+        },
+        {
+          "label": "Tijdstappen",
+          "value": "10 minuten"
+        },
+        {
+          "label": "Feestdagen",
+          "value": "Eenmalige acties op de vooravond en op de feestdag zelf, tot 90 dagen vooruit"
+        },
+        {
+          "label": "Open of dicht",
+          "value": "Een groene actie houdt de poort open, een rode actie houdt hem dicht"
+        },
+        {
+          "label": "Waar het schema staat",
+          "value": "Opgeslagen en uitgevoerd op het apparaat van de poort"
+        },
+        {
+          "label": "Wat de poort nodig heeft",
+          "value": "Alleen stroom, geen simkaart, geen router en geen internet"
+        },
+        {
+          "label": "Tijden wijzigen",
+          "value": "In de app, bij de poort, zonder monteur"
+        },
+        {
+          "label": "Na een stroomstoring",
+          "value": "Het schema blijft bewaard, en de acties werken weer zodra een willekeurige telefoon verbinding maakt met de poort"
+        },
+        {
+          "label": "Betaling",
+          "value": "Eenmalig voor het apparaat en de installatie, zonder maandabonnement"
+        }
       ]
     },
     "updatedLabel": "Laatst bijgewerkt: {date}",

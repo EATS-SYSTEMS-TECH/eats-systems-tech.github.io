@@ -41,28 +41,136 @@ export default {
       "note": "Az órák 10 perces lépésekben állíthatók. Ha az Ön településén a sábesz éjfél után ér véget, vasárnapra is vegyen fel egy eseményt 00:00-tól."
     },
     "benefitsTitle": "A WIFIGATE sábesz időzítője elektromos kapunyitóhoz: ezt tartalmazza",
-    "bullets": [
-      "Szabad ki- és bejárás sábeszkor, anélkül hogy bárki működtetné a kaput",
-      "Heti ütemezés, amelyet egyszer kell beállítani",
-      "Előre megtervezett ünnepek, legfeljebb 90 nappal előre",
-      "Az órák módosítása az alkalmazásból, szerelő hívása nélkül",
-      "A kapu zárva tartása meghatározott órákban, például éjszaka",
-      "Hétköznapokon: nyitás telefonról, távirányítóval vagy gombbal",
-      "A meglévő kapu vagy sorompó vezérlőjéhez csatlakozik",
-      "Nincs SIM, nincs internet a kapunál és nincs havi előfizetés"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Egyszer beállítja. Minden sábeszkor működik.",
+        "text": "Jelöljön be péntekre és szombatra zöld „Kapu nyitva” eseményeket, és a kapu eszköze minden héten magától futtatja őket.",
+        "tags": [
+          "Legfeljebb 50 esemény",
+          "10 perces lépések"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Kapu nyitva sábeszkor",
+          "status": "Heti",
+          "rows": [
+            {
+              "day": "Péntek",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Szombat",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Ki- és bejárás sábeszkor. Semmihez sem kell nyúlni.",
+        "text": "Sábeszkor a kapu az Ön által beállított órákban nyitva marad, és senkinek sem kell működtetnie.",
+        "tags": [
+          "Távirányító nélkül",
+          "Telefon nélkül",
+          "Gomb nélkül"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Előre megtervezett ünnepek",
+        "text": "Adjon hozzá egyszeri eseményeket az ünnep előestéjére és az ünnepnapra, legfeljebb 90 nappal előre, és mindegyik magától törlődik, amint a dátuma elmúlt.",
+        "tags": [
+          "Legfeljebb 90 nap",
+          "Ros hásáná",
+          "Pészah"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Órák módosítása az alkalmazásban. Szerelő nélkül.",
+        "text": "Évszakváltáskor frissítse az órákat az „Ütemezett események” képernyőn, és mentse el.",
+        "tags": [
+          "Rendszeradminisztrátor",
+          "A kapu közelében"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "A kapu zárva tartása meghatározott órákban, például éjszaka",
+        "text": "A piros „Kapu zárva” esemény az Ön által beállított órákban zárva tartja a kaput, a zöld esemény pedig nyitva tartja.",
+        "tags": [
+          "Piros esemény",
+          "Zöld esemény"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Hétköznapokon: telefon, távirányító vagy gomb",
+        "text": "Az Ön által beállított órákon kívül a kapu a megszokott módon működik, és telefonról, távirányítóval vagy a gombbal nyitható.",
+        "tags": [
+          "Eseményeken kívül",
+          "Meglévő távirányítók"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "A meglévő kapuhoz vagy sorompóhoz csatlakozik",
+        "text": "A WIFIGATE a kapu vagy a sorompó meglévő vezérlőjéhez csatlakozik, így nincs szükség külön sábesz időzítőre az elosztószekrényben.",
+        "tags": [
+          "Elektromos kapu",
+          "Parkolósorompó"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Nincs SIM, nincs internet a kapunál és nincs havi előfizetés",
+        "text": "A kapunál csak áram kell, a telefon közvetlenül az eszközhöz csatlakozik, és egyszer fizet az eszközért és a telepítésért.",
+        "tags": [
+          "Csak áram",
+          "Egyszeri fizetés"
+        ]
+      }
     ],
     "facts": {
       "title": "A WIFIGATE sábesz időzítője röviden",
       "rows": [
-        { "label": "Események", "value": "Összesen legfeljebb 50, hetente ismétlődő és egyszeri" },
-        { "label": "Időlépés", "value": "10 perc" },
-        { "label": "Ünnepek", "value": "Egyszeri események az ünnep előestéjén és az ünnepnapon, legfeljebb 90 nappal előre" },
-        { "label": "Nyitva vagy zárva", "value": "A zöld esemény nyitva tartja a kaput, a piros esemény zárva tartja" },
-        { "label": "Hol fut az ütemezés", "value": "A kapu eszköze tárolja és futtatja" },
-        { "label": "Mi kell a kapunál", "value": "Csak áram, SIM, router és internet nélkül" },
-        { "label": "Az órák módosítása", "value": "Az alkalmazásból, a kapunál, szerelő nélkül" },
-        { "label": "Áramszünet után", "value": "Az ütemezés megmarad, és az események újra működnek, amint bármelyik telefon csatlakozik a kapuhoz" },
-        { "label": "Fizetés", "value": "Egyszer az eszközért és a telepítésért, havi előfizetés nélkül" }
+        {
+          "label": "Események",
+          "value": "Összesen legfeljebb 50, hetente ismétlődő és egyszeri"
+        },
+        {
+          "label": "Időlépés",
+          "value": "10 perc"
+        },
+        {
+          "label": "Ünnepek",
+          "value": "Egyszeri események az ünnep előestéjén és az ünnepnapon, legfeljebb 90 nappal előre"
+        },
+        {
+          "label": "Nyitva vagy zárva",
+          "value": "A zöld esemény nyitva tartja a kaput, a piros esemény zárva tartja"
+        },
+        {
+          "label": "Hol fut az ütemezés",
+          "value": "A kapu eszköze tárolja és futtatja"
+        },
+        {
+          "label": "Mi kell a kapunál",
+          "value": "Csak áram, SIM, router és internet nélkül"
+        },
+        {
+          "label": "Az órák módosítása",
+          "value": "Az alkalmazásból, a kapunál, szerelő nélkül"
+        },
+        {
+          "label": "Áramszünet után",
+          "value": "Az ütemezés megmarad, és az események újra működnek, amint bármelyik telefon csatlakozik a kapuhoz"
+        },
+        {
+          "label": "Fizetés",
+          "value": "Egyszer az eszközért és a telepítésért, havi előfizetés nélkül"
+        }
       ]
     },
     "updatedLabel": "Utolsó frissítés: {date}",

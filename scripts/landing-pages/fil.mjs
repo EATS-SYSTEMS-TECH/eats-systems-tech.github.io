@@ -41,28 +41,136 @@ export default {
       "note": "Itinatakda ang mga oras nang tig-10 minuto. Kung natatapos ang Shabbat pagkalipas ng hatinggabi sa inyong lugar, magdagdag din ng event sa Linggo mula 00:00."
     },
     "benefitsTitle": "Ano ang kasama sa Shabbat timer ng WIFIGATE para sa gate",
-    "bullets": [
-      "Malayang pagpasok at paglabas sa Shabbat, nang walang nagpapagana ng gate",
-      "Lingguhang iskedyul na isang beses lang itatakda",
-      "Mga pistang nakaplano na, hanggang 90 araw nang maaga",
-      "Pagbabago ng oras mula sa app, nang hindi tumatawag ng teknisyan",
-      "Nakakandado ang gate sa mga takdang oras, halimbawa sa gabi",
-      "Sa karaniwang araw: buksan gamit ang telepono, remote o pindutan",
-      "Kumokonekta sa controller ng kasalukuyang gate o harang",
-      "Walang SIM, walang internet sa gate at walang buwanang subscription"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Itakda nang isang beses. Gagana tuwing Shabbat.",
+        "text": "Markahan ang mga berdeng event na “Bukas ang gate” sa Biyernes at Sabado, at kusang pinapatakbo ng device ng gate ang mga ito bawat linggo.",
+        "tags": [
+          "Hanggang 50 event",
+          "Tig-10 minuto"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Bukas ang gate sa Shabbat",
+          "status": "Lingguhan",
+          "rows": [
+            {
+              "day": "Biyernes",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Sabado",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Pasok at labas sa Shabbat. Walang gagalawin.",
+        "text": "Sa Shabbat, nananatiling bukas ang gate sa mga oras na itinakda ninyo, at walang kailangang magpagana nito.",
+        "tags": [
+          "Walang remote",
+          "Walang telepono",
+          "Walang pindutan"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Mga pistang nakaplano nang maaga",
+        "text": "Magdagdag ng mga isang beses na event para sa bisperas ng pista at sa araw ng pista, hanggang 90 araw nang maaga, at kusang nabubura ang bawat event kapag lumipas na ang petsa nito.",
+        "tags": [
+          "Hanggang 90 araw",
+          "Pista ng Rosh Hashanah",
+          "Paskuwa"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Baguhin ang oras sa app. Walang teknisyan.",
+        "text": "Kapag nagbago ang panahon, i-update ang mga oras sa screen na “Mga naka-iskedyul na event” at i-save.",
+        "tags": [
+          "Admin ng system",
+          "Sa tabi ng gate"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Ikandado ang gate sa mga takdang oras, halimbawa sa gabi",
+        "text": "Ang pulang event na “Sarado ang gate” ay nagpapanatiling sarado sa gate sa mga oras na itinakda ninyo, at ang berdeng event ay nagpapanatiling bukas dito.",
+        "tags": [
+          "Pulang event",
+          "Berdeng event"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Sa karaniwang araw: telepono, remote, o pindutan",
+        "text": "Sa labas ng mga oras na itinakda ninyo, gumagana ang gate gaya ng dati at nabubuksan gamit ang telepono, remote, o pindutan.",
+        "tags": [
+          "Kapag walang event",
+          "Mga kasalukuyang remote"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Kumokonekta sa kasalukuyang gate o harang",
+        "text": "Kumokonekta ang WIFIGATE sa controller ng kasalukuyang gate o harang, kaya hindi na kailangan ng hiwalay na Shabbat timer sa panel ng kuryente.",
+        "tags": [
+          "Awtomatikong gate",
+          "Harang sa paradahan"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Walang SIM, walang internet sa gate at walang buwanang subscription",
+        "text": "Kuryente lang ang kailangan sa gate, direktang kumokonekta ang telepono sa device, at isang beses lang ang bayad para sa device at pagkakabit.",
+        "tags": [
+          "Kuryente lang",
+          "Isang beses na bayad"
+        ]
+      }
     ],
     "facts": {
       "title": "Ang Shabbat timer ng WIFIGATE sa madaling sabi",
       "rows": [
-        { "label": "Mga event", "value": "Hanggang 50 sa kabuuan, lingguhan at isang beses" },
-        { "label": "Hakbang ng oras", "value": "10 minuto" },
-        { "label": "Mga pista", "value": "Isang beses na event sa bisperas ng pista at isa pa sa araw ng pista, hanggang 90 araw nang maaga" },
-        { "label": "Bukas o sarado", "value": "Pinananatiling bukas ng berdeng event ang gate, at pinananatili itong sarado ng pulang event" },
-        { "label": "Nasaan ang iskedyul", "value": "Naka-save at tumatakbo sa device ng gate" },
-        { "label": "Kailangan sa gate", "value": "Kuryente lang, walang SIM, walang router at walang internet" },
-        { "label": "Pagbabago ng oras", "value": "Mula sa app, sa tabi ng gate, nang walang teknisyan" },
-        { "label": "Pagkatapos mawalan ng kuryente", "value": "Nananatili ang iskedyul, at muling tatakbo ang mga event kapag may teleponong kumonekta sa gate" },
-        { "label": "Bayad", "value": "Isang beses para sa device at pagkakabit, walang buwanang subscription" }
+        {
+          "label": "Mga event",
+          "value": "Hanggang 50 sa kabuuan, lingguhan at isang beses"
+        },
+        {
+          "label": "Hakbang ng oras",
+          "value": "10 minuto"
+        },
+        {
+          "label": "Mga pista",
+          "value": "Isang beses na event sa bisperas ng pista at isa pa sa araw ng pista, hanggang 90 araw nang maaga"
+        },
+        {
+          "label": "Bukas o sarado",
+          "value": "Pinananatiling bukas ng berdeng event ang gate, at pinananatili itong sarado ng pulang event"
+        },
+        {
+          "label": "Nasaan ang iskedyul",
+          "value": "Naka-save at tumatakbo sa device ng gate"
+        },
+        {
+          "label": "Kailangan sa gate",
+          "value": "Kuryente lang, walang SIM, walang router at walang internet"
+        },
+        {
+          "label": "Pagbabago ng oras",
+          "value": "Mula sa app, sa tabi ng gate, nang walang teknisyan"
+        },
+        {
+          "label": "Pagkatapos mawalan ng kuryente",
+          "value": "Nananatili ang iskedyul, at muling tatakbo ang mga event kapag may teleponong kumonekta sa gate"
+        },
+        {
+          "label": "Bayad",
+          "value": "Isang beses para sa device at pagkakabit, walang buwanang subscription"
+        }
       ]
     },
     "updatedLabel": "Huling na-update: {date}",

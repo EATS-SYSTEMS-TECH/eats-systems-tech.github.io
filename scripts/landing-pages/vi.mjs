@@ -41,28 +41,136 @@ export default {
       "note": "Giờ được đặt theo bước 10 phút. Nếu ở nơi bạn sống Shabbat kết thúc sau nửa đêm, hãy thêm cả một sự kiện vào Chủ nhật bắt đầu từ 00:00."
     },
     "benefitsTitle": "Bộ hẹn giờ ngày Sa-bát cho cổng tự động của WIFIGATE gồm những gì",
-    "bullets": [
-      "Ra vào tự do trong ngày Shabbat, không cần ai vận hành cổng",
-      "Lịch hằng tuần chỉ cần đặt một lần",
-      "Ngày lễ được lên lịch từ trước, tối đa 90 ngày",
-      "Đổi giờ ngay trong ứng dụng, không cần gọi kỹ thuật viên",
-      "Khóa cổng vào giờ cố định, ví dụ ban đêm",
-      "Ngày thường: mở bằng điện thoại, điều khiển từ xa hoặc nút bấm",
-      "Kết nối với bộ điều khiển của cổng hoặc barie hiện có",
-      "Không SIM, không internet ở cổng, không thuê bao hằng tháng"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Cài một lần. Hoạt động mỗi Shabbat.",
+        "text": "Đánh dấu các sự kiện “Mở cổng” màu xanh lá vào thứ Sáu và thứ Bảy, và thiết bị của cổng tự chạy chúng mỗi tuần.",
+        "tags": [
+          "Tối đa 50 sự kiện",
+          "Bước 10 phút"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Mở cổng ngày Shabbat",
+          "status": "Hằng tuần",
+          "rows": [
+            {
+              "day": "Thứ Sáu",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Thứ Bảy",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Ra vào trong ngày Shabbat. Không phải chạm vào gì.",
+        "text": "Trong ngày Shabbat, cổng được giữ mở trong những giờ bạn đã đặt, và không ai cần vận hành cổng.",
+        "tags": [
+          "Không điều khiển",
+          "Không điện thoại",
+          "Không nút bấm"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Ngày lễ, lên lịch từ trước",
+        "text": "Thêm sự kiện một lần vào ngày trước ngày lễ và vào ngày lễ, đặt trước tối đa 90 ngày, và mỗi sự kiện tự xóa khi đã qua ngày.",
+        "tags": [
+          "Tối đa 90 ngày",
+          "Năm mới Do Thái",
+          "Lễ Vượt Qua"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Đổi giờ trong ứng dụng. Không cần kỹ thuật viên.",
+        "text": "Khi chuyển mùa, bạn cập nhật giờ trên màn hình “Sự kiện theo lịch” rồi lưu lại.",
+        "tags": [
+          "Quản trị viên hệ thống",
+          "Tại cổng"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Khóa cổng vào giờ cố định, ví dụ ban đêm",
+        "text": "Sự kiện “Đóng cổng” màu đỏ giữ cổng đóng trong những giờ bạn đặt, còn sự kiện màu xanh lá giữ cổng mở.",
+        "tags": [
+          "Sự kiện màu đỏ",
+          "Sự kiện màu xanh lá"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Ngày thường: điện thoại, điều khiển hoặc nút bấm",
+        "text": "Ngoài những giờ bạn đã đặt, cổng hoạt động như bình thường và mở bằng điện thoại, điều khiển từ xa hoặc nút bấm.",
+        "tags": [
+          "Ngoài sự kiện",
+          "Điều khiển hiện có"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Kết nối với cổng hoặc barie hiện có",
+        "text": "WIFIGATE kết nối với bộ điều khiển hiện có của cổng hoặc barie, nên không cần bộ hẹn giờ Shabbat riêng trong tủ điện.",
+        "tags": [
+          "Cổng tự động",
+          "Barie bãi xe"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Không SIM, không cần mạng ở cổng, không thuê bao hằng tháng",
+        "text": "Cổng chỉ cần điện, điện thoại kết nối trực tiếp với thiết bị, và bạn thanh toán một lần cho thiết bị và lắp đặt.",
+        "tags": [
+          "Chỉ cần điện",
+          "Thanh toán một lần"
+        ]
+      }
     ],
     "facts": {
       "title": "Tóm tắt bộ hẹn giờ Shabbat của WIFIGATE",
       "rows": [
-        { "label": "Sự kiện", "value": "Tối đa 50 sự kiện tổng cộng, gồm sự kiện hằng tuần và sự kiện một lần" },
-        { "label": "Bước thời gian", "value": "10 phút" },
-        { "label": "Ngày lễ", "value": "Sự kiện một lần vào ngày trước ngày lễ và vào ngày lễ, đặt trước tối đa 90 ngày" },
-        { "label": "Mở hay đóng", "value": "Sự kiện màu xanh lá giữ cổng mở, sự kiện màu đỏ giữ cổng đóng" },
-        { "label": "Lịch nằm ở đâu", "value": "Được lưu và chạy trên thiết bị của cổng" },
-        { "label": "Cổng cần gì", "value": "Chỉ cần điện, không SIM, không bộ định tuyến và không internet" },
-        { "label": "Đổi giờ", "value": "Từ ứng dụng, tại cổng, không cần kỹ thuật viên" },
-        { "label": "Sau khi mất điện", "value": "Lịch vẫn được giữ, và các sự kiện chạy lại khi có điện thoại bất kỳ kết nối với cổng" },
-        { "label": "Thanh toán", "value": "Một lần cho thiết bị và lắp đặt, không thuê bao hằng tháng" }
+        {
+          "label": "Sự kiện",
+          "value": "Tối đa 50 sự kiện tổng cộng, gồm sự kiện hằng tuần và sự kiện một lần"
+        },
+        {
+          "label": "Bước thời gian",
+          "value": "10 phút"
+        },
+        {
+          "label": "Ngày lễ",
+          "value": "Sự kiện một lần vào ngày trước ngày lễ và vào ngày lễ, đặt trước tối đa 90 ngày"
+        },
+        {
+          "label": "Mở hay đóng",
+          "value": "Sự kiện màu xanh lá giữ cổng mở, sự kiện màu đỏ giữ cổng đóng"
+        },
+        {
+          "label": "Lịch nằm ở đâu",
+          "value": "Được lưu và chạy trên thiết bị của cổng"
+        },
+        {
+          "label": "Cổng cần gì",
+          "value": "Chỉ cần điện, không SIM, không bộ định tuyến và không internet"
+        },
+        {
+          "label": "Đổi giờ",
+          "value": "Từ ứng dụng, tại cổng, không cần kỹ thuật viên"
+        },
+        {
+          "label": "Sau khi mất điện",
+          "value": "Lịch vẫn được giữ, và các sự kiện chạy lại khi có điện thoại bất kỳ kết nối với cổng"
+        },
+        {
+          "label": "Thanh toán",
+          "value": "Một lần cho thiết bị và lắp đặt, không thuê bao hằng tháng"
+        }
       ]
     },
     "updatedLabel": "Cập nhật lần cuối: {date}",

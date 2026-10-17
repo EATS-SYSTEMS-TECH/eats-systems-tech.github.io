@@ -41,28 +41,136 @@ export default {
       "note": "Tidene stilles inn i trinn på 10 minutter. Hvis shabbat går ut etter midnatt der du bor, legger du også inn en hendelse på søndag fra 00:00."
     },
     "benefitsTitle": "Dette inngår i WIFIGATEs sabbatsur for elektrisk port",
-    "bullets": [
-      "Folk kommer og går fritt på shabbat, uten at noen betjener porten",
-      "En ukeplan du setter opp én gang",
-      "Høytider planlagt på forhånd, inntil 90 dager frem i tid",
-      "Endre tidene i appen, uten å tilkalle en tekniker",
-      "Låst port til faste tider, for eksempel om natten",
-      "På hverdager: åpne fra mobilen, med fjernkontroll eller knapp",
-      "Kobles til styringen på porten eller bommen du allerede har",
-      "Uten SIM, uten internett ved porten og uten månedsabonnement"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Sett det opp én gang. Det virker hver shabbat.",
+        "text": "Merk av grønne hendelser for «Åpen port» på fredag og lørdag, så kjører portens enhet dem av seg selv hver uke.",
+        "tags": [
+          "Inntil 50 hendelser",
+          "Trinn på 10 minutter"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Åpen port på shabbat",
+          "status": "Ukentlig",
+          "rows": [
+            {
+              "day": "Fredag",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Lørdag",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Kom og gå på shabbat. Uten å røre noe.",
+        "text": "På shabbat står porten åpen i tidene du har satt, og ingen trenger å betjene den.",
+        "tags": [
+          "Uten fjernkontroll",
+          "Uten mobil",
+          "Uten knapp"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Høytider, planlagt på forhånd",
+        "text": "Legg inn engangshendelser for kvelden før høytiden og selve høytidsdagen, inntil 90 dager frem i tid, og hver hendelse slettes av seg selv når datoen er passert.",
+        "tags": [
+          "Inntil 90 dager",
+          "Rosh hashana",
+          "Pesach"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Endre tidene i appen. Uten tekniker.",
+        "text": "Når årstiden skifter, oppdaterer du tidene på skjermen «Tidsstyrte hendelser» og lagrer.",
+        "tags": [
+          "Systemadministrator",
+          "Ved porten"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Lås porten til faste tider, for eksempel om natten",
+        "text": "En rød hendelse for «Lukket port» holder porten lukket i tidene du har satt, og en grønn hendelse holder den åpen.",
+        "tags": [
+          "Rød hendelse",
+          "Grønn hendelse"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "På hverdager: mobil, fjernkontroll eller knapp",
+        "text": "Utenfor tidene du har satt, fungerer porten som vanlig og åpnes fra mobilen, med fjernkontrollen eller med knappen.",
+        "tags": [
+          "Utenfor hendelsene",
+          "Eksisterende fjernkontroller"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Kobles til porten eller bommen du allerede har",
+        "text": "WIFIGATE kobles til den eksisterende styringen på porten eller bommen, så du trenger ikke et eget shabbat-tidsur i sikringsskapet.",
+        "tags": [
+          "Elektrisk port",
+          "Parkeringsbom"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Uten SIM, uten internett ved porten og uten månedsabonnement",
+        "text": "Porten trenger bare strøm, mobilen kobler seg direkte til enheten, og du betaler én gang for enheten og installasjonen.",
+        "tags": [
+          "Bare strøm",
+          "Engangsbetaling"
+        ]
+      }
     ],
     "facts": {
       "title": "WIFIGATEs shabbat-timer i korte trekk",
       "rows": [
-        { "label": "Hendelser", "value": "Inntil 50 til sammen, ukentlige og engangshendelser" },
-        { "label": "Tidstrinn", "value": "10 minutter" },
-        { "label": "Høytider", "value": "Engangshendelser på kvelden før høytiden og på selve høytidsdagen, inntil 90 dager frem i tid" },
-        { "label": "Åpen eller lukket", "value": "En grønn hendelse holder porten åpen, en rød hendelse holder den lukket" },
-        { "label": "Hvor planen ligger", "value": "Lagret og kjører på portens enhet" },
-        { "label": "Hva porten trenger", "value": "Bare strøm, uten SIM, uten ruter og uten internett" },
-        { "label": "Endre tidene", "value": "Fra appen, ved porten, uten tekniker" },
-        { "label": "Etter strømbrudd", "value": "Planen beholdes, og hendelsene kjører igjen når en hvilken som helst mobil kobler seg til porten" },
-        { "label": "Betaling", "value": "Én gang for enheten og installasjonen, uten månedsabonnement" }
+        {
+          "label": "Hendelser",
+          "value": "Inntil 50 til sammen, ukentlige og engangshendelser"
+        },
+        {
+          "label": "Tidstrinn",
+          "value": "10 minutter"
+        },
+        {
+          "label": "Høytider",
+          "value": "Engangshendelser på kvelden før høytiden og på selve høytidsdagen, inntil 90 dager frem i tid"
+        },
+        {
+          "label": "Åpen eller lukket",
+          "value": "En grønn hendelse holder porten åpen, en rød hendelse holder den lukket"
+        },
+        {
+          "label": "Hvor planen ligger",
+          "value": "Lagret og kjører på portens enhet"
+        },
+        {
+          "label": "Hva porten trenger",
+          "value": "Bare strøm, uten SIM, uten ruter og uten internett"
+        },
+        {
+          "label": "Endre tidene",
+          "value": "Fra appen, ved porten, uten tekniker"
+        },
+        {
+          "label": "Etter strømbrudd",
+          "value": "Planen beholdes, og hendelsene kjører igjen når en hvilken som helst mobil kobler seg til porten"
+        },
+        {
+          "label": "Betaling",
+          "value": "Én gang for enheten og installasjonen, uten månedsabonnement"
+        }
       ]
     },
     "updatedLabel": "Sist oppdatert: {date}",

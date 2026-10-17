@@ -41,28 +41,136 @@ export default {
       "note": "Orele se setează cu pas de 10 minute. Dacă la dumneavoastră Șabatul se încheie după miezul nopții, adăugați și duminică un eveniment de la 00:00."
     },
     "benefitsTitle": "Ce include ceasul de Șabat WIFIGATE pentru poarta automată",
-    "bullets": [
-      "Intrare și ieșire libere de Șabat, fără ca cineva să acționeze poarta",
-      "Un program săptămânal pe care îl setați o singură dată",
-      "Sărbători planificate din timp, cu până la 90 de zile înainte",
-      "Schimbarea orelor din aplicație, fără să chemați un tehnician",
-      "Blocarea porții la ore fixe, de exemplu noaptea",
-      "În restul săptămânii: deschidere din telefon, cu telecomanda sau de la buton",
-      "Se conectează la unitatea de comandă existentă a porții sau a barierei",
-      "Fără SIM, fără internet la poartă și fără abonament lunar"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Setați o dată. Funcționează în fiecare Șabat.",
+        "text": "Marcați vineri și sâmbătă evenimente verzi de „Poartă deschisă”, iar dispozitivul porții le rulează singur în fiecare săptămână.",
+        "tags": [
+          "Până la 50 de evenimente",
+          "Pas de 10 minute"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Poartă deschisă de Șabat",
+          "status": "Săptămânal",
+          "rows": [
+            {
+              "day": "Vineri",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Sâmbătă",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Intrați și ieșiți de Șabat. Fără să atingeți nimic.",
+        "text": "De Șabat, poarta rămâne deschisă în orele stabilite de dumneavoastră și nimeni nu trebuie să o acționeze.",
+        "tags": [
+          "Fără telecomandă",
+          "Fără telefon",
+          "Fără buton"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Sărbători planificate din timp",
+        "text": "Adăugați evenimente unice pentru ajunul și ziua sărbătorii, cu până la 90 de zile înainte, iar fiecare eveniment se șterge singur după ce data lui a trecut.",
+        "tags": [
+          "Până la 90 de zile",
+          "Roș Hașana",
+          "Pesah"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Schimbați orele din aplicație. Fără tehnician.",
+        "text": "Când se schimbă anotimpul, actualizați orele în ecranul „Evenimente programate” și salvați.",
+        "tags": [
+          "Administratorul sistemului",
+          "Lângă poartă"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Blocați poarta la ore fixe, de exemplu noaptea",
+        "text": "Un eveniment roșu de „Poartă închisă” ține poarta închisă în orele stabilite de dumneavoastră, iar un eveniment verde o ține deschisă.",
+        "tags": [
+          "Eveniment roșu",
+          "Eveniment verde"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "În restul săptămânii: telefon, telecomandă sau buton",
+        "text": "În afara orelor stabilite de dumneavoastră, poarta funcționează normal și se deschide din telefon, cu telecomanda sau de la buton.",
+        "tags": [
+          "În afara evenimentelor",
+          "Telecomenzi existente"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Se conectează la poarta sau bariera existentă",
+        "text": "WIFIGATE se conectează la unitatea de comandă existentă a porții sau a barierei, așa că nu aveți nevoie de un ceas programator de Șabat separat în tabloul electric.",
+        "tags": [
+          "Poartă electrică",
+          "Barieră de parcare"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Fără SIM, fără internet la poartă și fără abonament lunar",
+        "text": "Poarta are nevoie doar de curent electric, telefonul se conectează direct la dispozitiv, iar plata pentru dispozitiv și instalare se face o singură dată.",
+        "tags": [
+          "Doar curent electric",
+          "Plată unică"
+        ]
+      }
     ],
     "facts": {
       "title": "Ceasul de Șabat WIFIGATE pe scurt",
       "rows": [
-        { "label": "Evenimente", "value": "Până la 50 în total, săptămânale și unice" },
-        { "label": "Pas de setare", "value": "10 minute" },
-        { "label": "Sărbători", "value": "Evenimente unice în ajun și în ziua sărbătorii, cu până la 90 de zile înainte" },
-        { "label": "Deschis sau închis", "value": "Un eveniment verde ține poarta deschisă, un eveniment roșu o ține închisă" },
-        { "label": "Unde se află programul", "value": "Salvat și rulat pe dispozitivul porții" },
-        { "label": "De ce are nevoie poarta", "value": "Doar de curent electric, fără SIM, fără router și fără internet" },
-        { "label": "Schimbarea orelor", "value": "Din aplicație, lângă poartă, fără tehnician" },
-        { "label": "După o pană de curent", "value": "Programul se păstrează, iar evenimentele funcționează din nou când orice telefon se conectează la poartă" },
-        { "label": "Plată", "value": "O singură dată, pentru dispozitiv și instalare, fără abonament lunar" }
+        {
+          "label": "Evenimente",
+          "value": "Până la 50 în total, săptămânale și unice"
+        },
+        {
+          "label": "Pas de setare",
+          "value": "10 minute"
+        },
+        {
+          "label": "Sărbători",
+          "value": "Evenimente unice în ajun și în ziua sărbătorii, cu până la 90 de zile înainte"
+        },
+        {
+          "label": "Deschis sau închis",
+          "value": "Un eveniment verde ține poarta deschisă, un eveniment roșu o ține închisă"
+        },
+        {
+          "label": "Unde se află programul",
+          "value": "Salvat și rulat pe dispozitivul porții"
+        },
+        {
+          "label": "De ce are nevoie poarta",
+          "value": "Doar de curent electric, fără SIM, fără router și fără internet"
+        },
+        {
+          "label": "Schimbarea orelor",
+          "value": "Din aplicație, lângă poartă, fără tehnician"
+        },
+        {
+          "label": "După o pană de curent",
+          "value": "Programul se păstrează, iar evenimentele funcționează din nou când orice telefon se conectează la poartă"
+        },
+        {
+          "label": "Plată",
+          "value": "O singură dată, pentru dispozitiv și instalare, fără abonament lunar"
+        }
       ]
     },
     "updatedLabel": "Ultima actualizare: {date}",

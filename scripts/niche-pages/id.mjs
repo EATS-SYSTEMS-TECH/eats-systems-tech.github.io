@@ -36,15 +36,89 @@ export default {
         }
       ],
       "paragraph": "WIFIGATE memungkinkan hotel, apartemen sewa (Airbnb), dan resor memberikan pengalaman masuk digital yang praktis dan aman langsung dari ponsel tamu.\nAlih-alih repot menerbitkan kartu magnetik, menyerahkan kunci fisik, atau memakai kotak kunci (lockbox), kontrol akses berjalan otomatis.\nMelalui WIFIGATE Host, sistem pemesanan Anda dapat dihubungkan langsung ke sistem akses.\nBerkat koneksi ini, setelah pemesanan dikonfirmasi, tamu menerima izin masuk pribadi.\nIzin aktif tepat pada jam check-in dan berakhir otomatis saat check-out, tanpa campur tangan manual, serah terima kunci, atau koordinasi dari staf resepsionis maupun tuan rumah.",
-      "bullets": [
-        "Akses tamu dibuat otomatis setelah pemesanan dikonfirmasi",
-        "Dukungan otomatisasi penuh melalui WIFIGATE Host",
-        "Akses sementara sesuai tanggal dan jam menginap",
-        "Lebih sedikit kebutuhan menerbitkan, menyerahkan, dan mengganti kartu kamar",
-        "Pengelolaan izin untuk staf, petugas kebersihan, pemeliharaan, dan pemasok",
-        "Pengalaman kedatangan yang lebih lancar dan nyaman bagi tamu",
-        "Akses berakhir otomatis pada jam check-out",
-        "Riwayat akses untuk transparansi dan kontrol"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Pemesanan dikonfirmasi. Akses segera menyusul.",
+          "text": "Dengan WIFIGATE Host, konfirmasi pemesanan otomatis membuat izin masuk pribadi dan mengirimkannya ke tamu.",
+          "tags": [
+            "Hotel",
+            "Airbnb",
+            "Apartemen sewa"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Undangan tamu",
+            "status": "Terkirim",
+            "guest": "Rina Wijaya",
+            "when": "Jum 15:00 – Min 11:00",
+            "note": "Termasuk petunjuk arah"
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Akses sesuai tanggal menginap.",
+          "text": "Setiap tamu menerima undangan di ponselnya, dan undangan itu hanya berlaku pada tanggal dan jam menginapnya.",
+          "tags": [
+            "Check-in tamu",
+            "Tanggal dan jam"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Check-out. Akses berakhir dengan sendirinya.",
+          "text": "Tak ada yang perlu ingat untuk mencabut akses: izin berakhir pada jam keberangkatan, bahkan saat tidak ada staf di lokasi.",
+          "tags": [
+            "Berakhir otomatis",
+            "Jam keberangkatan"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Setiap anggota staf punya izinnya sendiri.",
+          "text": "Karyawan, petugas kebersihan dan pemeliharaan, serta pemasok masing-masing mendapat izin pribadi yang Anda berikan dan cabut di aplikasi.",
+          "tags": [
+            "Kebersihan",
+            "Pemeliharaan",
+            "Pemasok"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Lebih sedikit kartu. Tanpa kotak kunci.",
+          "text": "Lebih sedikit kartu kamar yang harus diterbitkan, diserahkan, dan diganti, serta tanpa kode kotak kunci yang berpindah dari tamu ke tamu.",
+          "tags": [
+            "Kartu kamar",
+            "Kunci fisik"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Siapa yang membuka dan kapan. Semuanya transparan.",
+          "text": "Riwayat akses menunjukkan siapa yang membuka dan kapan, sehingga Anda mendapat transparansi dan kontrol atas tamu, staf, dan pemasok.",
+          "tags": [
+            "90 hari terakhir"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Kedatangan lebih lancar. Tanpa menunggu siapa pun.",
+          "text": "Tamu membuka sendiri gerbang, pintu, atau parkir, langsung dari aplikasi WIFIGATE di ponselnya.",
+          "tags": [
+            "Gerbang",
+            "Pintu",
+            "Parkir"
+          ]
+        },
+        {
+          "icon": "zap",
+          "title": "Otomatisasi penuh dengan WIFIGATE Host.",
+          "text": "WIFIGATE Host menghubungkan sistem pemesanan Anda ke sistem akses, tanpa menyalin data, tanpa menerbitkan kartu, dan tanpa langkah manual.",
+          "tags": [
+            "Sistem pemesanan",
+            "Koneksi API"
+          ]
+        }
       ],
       "seoTitle": "WIFIGATE | Akses Tamu Digital untuk Hotel, Airbnb, dan Resor",
       "seoDescription": "WIFIGATE membantu hotel, Airbnb, dan resor mengelola akses tamu digital otomatis dengan WIFIGATE Host: izin pribadi per pemesanan, tanpa kunci, kartu, atau lockbox.",
@@ -90,15 +164,95 @@ export default {
         }
       ],
       "paragraph": "Rolling door di tempat usaha dan toko sering dioperasikan dengan remote, kunci, kotak kunci eksternal, atau sakelar yang berada di luar tempat usaha. Solusi seperti ini bisa hilang, tetap dipegang mantan karyawan, digandakan, atau menjadi titik akses yang rawan. Selain itu, membuka atau menutup dengan kunci berarti berdiri dekat titik kendali sambil memegang kunci, dan terkadang tanpa pandangan yang nyaman ke area rolling door. WIFIGATE memindahkan kendali ke aplikasi dan menempatkan kontrol akses di sisi dalam yang lebih terlindungi, sehingga Anda dapat membuka dan menutup dengan lebih nyaman, mengelola izin untuk karyawan dan pemasok, serta mengurangi ketergantungan pada kunci, remote, dan titik akses yang rawan.",
-      "bullets": [
-        "Buka dan tutup dari ponsel tanpa bergantung pada remote",
-        "Lebih sedikit ketergantungan pada kunci yang bisa digandakan atau hilang",
-        "Lebih sedikit titik akses yang rawan di luar tempat usaha",
-        "Kendali lebih nyaman dengan pandangan lebih baik ke area rolling door",
-        "Pengelolaan izin untuk karyawan, manajer, dan pemasok",
-        "Opsi akses sementara sesuai waktu atau kebutuhan",
-        "Cocok untuk toko, gudang, pintu servis, dan tempat usaha",
-        "Solusi di sisi dalam yang lebih rapi dan aman untuk operasional harian"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Izin pribadi. Untuk setiap karyawan, manajer, dan pemasok.",
+          "text": "Setiap orang mendapat izinnya sendiri di aplikasi, dan izin itu bisa dihapus kapan saja.",
+          "visual": {
+            "type": "roster",
+            "heading": "Izin rolling door",
+            "status": "Aktif",
+            "rows": [
+              {
+                "name": "Pemilik toko",
+                "badge": "Administrator"
+              },
+              {
+                "name": "Karyawan sif",
+                "badge": "Berizin"
+              },
+              {
+                "name": "Pemasok barang",
+                "badge": "Sementara"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "shield-check",
+          "title": "Lebih sedikit titik rawan. Kendali pindah ke dalam.",
+          "text": "Alih-alih sakelar atau kotak kunci di dinding luar, titik kendali bisa ditempatkan di sisi dalam tempat usaha yang terlindungi.",
+          "tags": [
+            "Sisi dalam terlindungi",
+            "Jauh dari jangkauan"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Buka dan tutup. Langsung dari ponsel.",
+          "text": "Pemegang izin mengoperasikan rolling door dari aplikasi WIFIGATE, tanpa mencari remote dan tanpa mengopernya dari satu karyawan ke karyawan lain.",
+          "tags": [
+            "Tanpa bergantung remote",
+            "Koneksi langsung"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Lebih sedikit kunci yang bisa digandakan atau hilang.",
+          "text": "Kunci yang masih dipegang mantan karyawan tetap berfungsi, sedangkan izin di ponsel berakhir pada hari terakhirnya bekerja.",
+          "tags": [
+            "Tanpa ganti kunci",
+            "Tanpa menarik perangkat"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Akses sementara. Hanya saat dibutuhkan.",
+          "text": "Bagikan akses berbatas waktu kepada pemasok atau pekerja sementara, dan akses itu berhenti berfungsi saat waktunya habis.",
+          "tags": [
+            "Pemasok",
+            "Pekerja sementara"
+          ]
+        },
+        {
+          "icon": "eye",
+          "title": "Kendali lebih nyaman. Pandangan lebih baik.",
+          "text": "Operasikan rolling door lewat ponsel dari jarak yang lebih aman, alih-alih berdiri tepat di titik kendali dengan kunci di tangan.",
+          "tags": [
+            "Jarak lebih aman",
+            "Tanpa kunci di tangan"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "Operasional harian. Lebih rapi dan aman.",
+          "text": "WIFIGATE dipasang pada kontrol rolling door yang sudah ada, dan data disimpan terenkripsi di perangkat itu sendiri.",
+          "tags": [
+            "Solusi di dalam",
+            "Data terenkripsi"
+          ]
+        },
+        {
+          "icon": "store",
+          "title": "Untuk setiap usaha dengan rolling door listrik.",
+          "text": "Di mana pun Anda ingin lebih sedikit kunci dan remote yang berpindah tangan.",
+          "tags": [
+            "Toko",
+            "Gudang",
+            "Pintu servis"
+          ]
+        }
       ],
       "seoTitle": "Kendali Rolling Door Cerdas untuk Usaha dan Toko | WIFIGATE",
       "seoDescription": "WIFIGATE menghadirkan kendali rolling door cerdas dari ponsel untuk usaha dan toko, dengan pengelolaan izin dan lebih sedikit kunci, remote, serta titik akses yang rawan.",
@@ -144,15 +298,103 @@ export default {
         }
       ],
       "paragraph": "Gerbang otomatis dan palang parkir digunakan oleh penghuni, karyawan, tamu, dan pemasok, tetapi mengelola remote, kode, dan telepon minta dibukakan gerbang cepat menjadi merepotkan. WIFIGATE memungkinkan Anda membuka gerbang dari ponsel, membagikan akses permanen atau sementara, menggunakan pembukaan otomatis untuk pengguna tetap, dan mengatur jadwal otomatis sesuai kebutuhan. Sistem ini dirancang untuk beroperasi secara aman, terenkripsi, dan privat, tanpa langganan bulanan atau tagihan rutin, dan remote yang sudah ada tetap dapat digunakan berdampingan dengan kendali dari aplikasi.",
-      "bullets": [
-        "Buka gerbang otomatis atau palang parkir dari ponsel",
-        "Tanpa langganan bulanan dan tanpa tagihan rutin",
-        "Bagikan akses sementara kepada tamu, pemasok, dan karyawan",
-        "Auto Open untuk pengguna tetap saat masuk setiap hari",
-        "Jadwal otomatis untuk membuka sesuai hari dan jam",
-        "Kendali dari aplikasi atau dengan remote yang sudah ada",
-        "Lebih sedikit kebutuhan membagikan remote fisik",
-        "Riwayat pembukaan untuk kontrol dan transparansi"
+      "benefits": [
+        {
+          "icon": "smartphone",
+          "title": "Gerbang atau palang parkir. Langsung dari ponsel.",
+          "text": "Siapa pun yang mendapat izin, permanen atau sementara, membuka gerbang otomatis atau palang parkir dari aplikasi WIFIGATE.",
+          "tags": [
+            "Gerbang otomatis",
+            "Palang parkir",
+            "Tanpa SIM"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Riwayat pembukaan",
+            "status": "Hari ini",
+            "rows": [
+              {
+                "time": "07:42",
+                "name": "Sari · Penghuni",
+                "event": "Dibuka"
+              },
+              {
+                "time": "08:15",
+                "name": "Budi · Karyawan",
+                "event": "Dibuka"
+              },
+              {
+                "time": "10:30",
+                "name": "Andi · Pemasok",
+                "event": "Dibuka"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "card-off",
+          "title": "Tanpa langganan. Tanpa tagihan rutin.",
+          "text": "Anda membayar sekali untuk perangkat dan instalasinya, tanpa langganan bulanan dan tanpa pembayaran berulang.",
+          "tags": [
+            "Sekali bayar",
+            "Perangkat dan instalasi"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "Akses sementara. Berakhir dengan sendirinya.",
+          "text": "Daripada menerima telepon yang meminta Anda membukakan gerbang, kirim izin yang hanya berlaku pada rentang waktu saat izin itu dibutuhkan.",
+          "tags": [
+            "Tamu",
+            "Pemasok",
+            "Karyawan"
+          ]
+        },
+        {
+          "icon": "hands-free",
+          "title": "Auto Open. Gerbang terbuka saat Anda tiba.",
+          "text": "Bagi pengguna tetap, pembukaan otomatis mengenali bahwa Anda sudah tiba dan membuka gerbang, tanpa mencari remote dan tanpa menurunkan kaca jendela saat hujan.",
+          "tags": [
+            "Pengguna tetap",
+            "Masuk setiap hari"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Acara terjadwal. Sesuai hari dan jam.",
+          "text": "Tentukan lebih dulu pada hari dan jam apa gerbang tetap terbuka, dengan acara mingguan atau satu kali.",
+          "tags": [
+            "Mingguan",
+            "Satu kali"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "Aplikasi atau remote. Anda yang memilih.",
+          "text": "Remote yang sudah ada tetap berfungsi berdampingan dengan kendali dari aplikasi, jadi tidak ada yang perlu dibuang.",
+          "tags": [
+            "Remote yang ada",
+            "Kendali dari aplikasi"
+          ]
+        },
+        {
+          "icon": "user-plus",
+          "title": "Lebih sedikit remote fisik yang harus dibagikan.",
+          "text": "Alih-alih membagikan remote kepada setiap penghuni, karyawan, atau pemasok, beri masing-masing izin pribadi di aplikasi.",
+          "tags": [
+            "Izin pribadi",
+            "Pengelolaan di aplikasi"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Riwayat pembukaan. Kontrol dan transparansi.",
+          "text": "Lihat siapa yang membuka gerbang dan kapan, dalam 90 hari terakhir.",
+          "tags": [
+            "90 hari ke belakang",
+            "Siapa dan kapan"
+          ]
+        }
       ],
       "seoTitle": "Gerbang Otomatis dan Palang Parkir Tanpa Langganan | WIFIGATE",
       "seoDescription": "WIFIGATE membuka gerbang otomatis dan palang parkir dari ponsel, dengan Auto Open, jadwal otomatis, remote yang ada, pengelolaan izin, tanpa langganan bulanan.",
@@ -198,15 +440,101 @@ export default {
         }
       ],
       "paragraph": "Pintu garasi dan parkir pribadi biasanya dioperasikan dengan remote fisik, yang bisa hilang, tetap dipegang orang yang sudah tidak membutuhkan akses, atau digandakan dalam situasi tertentu. WIFIGATE memindahkan kendali ke akses digital dari ponsel, memungkinkan Anda mengelola izin untuk anggota keluarga, karyawan, atau tamu, serta membagikan akses sementara tanpa menyerahkan remote atau kode. Hasilnya adalah pengalaman yang lebih nyaman, lebih privat, dan lebih teratur, dengan ketergantungan yang lebih kecil pada sarana akses fisik.",
-      "bullets": [
-        "Buka pintu garasi dari ponsel",
-        "Lebih sedikit ketergantungan pada remote fisik",
-        "Risiko lebih kecil dari remote yang hilang, dipindahtangankan, atau digandakan",
-        "Pengelolaan akses untuk anggota keluarga, karyawan, dan tamu",
-        "Akses sementara tanpa menyerahkan remote atau kode",
-        "Cocok untuk parkir pribadi, rumah tapak, dan apartemen lantai dasar bertaman",
-        "Cara mengelola akses yang lebih privat dan aman",
-        "Kendali sehari-hari yang lebih nyaman dan aman"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Izin pribadi untuk setiap orang yang masuk.",
+          "text": "Tambah dan hapus anggota keluarga, karyawan, dan tamu di aplikasi, dan masing-masing membuka dari ponselnya dengan izinnya sendiri.",
+          "tags": [
+            "Anggota keluarga",
+            "Karyawan",
+            "Tamu"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Akses garasi",
+            "status": "Aktif",
+            "rows": [
+              {
+                "name": "Ibu",
+                "badge": "Administrator"
+              },
+              {
+                "name": "Dimas",
+                "badge": "Anggota keluarga"
+              },
+              {
+                "name": "Tukang",
+                "badge": "Izin sementara"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Risiko lebih kecil dari remote yang hilang atau digandakan.",
+          "text": "Remote yang hilang, dipindahtangankan, atau digandakan bisa terus membuka, sedangkan izin di ponsel bisa dihapus dari aplikasi dalam sekejap.",
+          "tags": [
+            "Hilang",
+            "Dipindahtangankan",
+            "Digandakan"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Pintu garasi dibuka dari ponsel.",
+          "text": "WIFIGATE terhubung ke pintu garasi, dan Anda membukanya dari aplikasi WIFIGATE di ponsel yang sudah Anda bawa.",
+          "tags": [
+            "Koneksi langsung",
+            "Tanpa SIM"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "Lebih sedikit remote. Lebih sedikit kerepotan.",
+          "text": "Lebih sedikit remote yang harus dibeli, diprogram, diserahkan, dan dikelola, alih-alih satu remote untuk setiap mobil dan setiap pengguna.",
+          "tags": [
+            "Bersama remote yang ada"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Akses sementara. Tanpa menyerahkan remote.",
+          "text": "Tukang atau tamu mendapat izin sementara yang berakhir kapan pun Anda tentukan, tanpa menyerahkan remote atau kode.",
+          "tags": [
+            "Tukang",
+            "Tamu"
+          ]
+        },
+        {
+          "icon": "garage",
+          "title": "Untuk parkir pribadi, rumah tapak, dan apartemen bertaman.",
+          "text": "WIFIGATE dipasang pada unit kontrol pintu garasi atau pintu masuk parkir yang sudah ada, di rumah pribadi atau apartemen lantai dasar bertaman.",
+          "tags": [
+            "Garasi pribadi",
+            "Parkir pribadi",
+            "Apartemen bertaman"
+          ]
+        },
+        {
+          "icon": "shield-check",
+          "title": "Akses yang lebih privat dan aman.",
+          "text": "WIFIGATE melindungi akses dengan lapisan keamanan canggih dan penyimpanan terenkripsi, serta menjaga privasi pengguna.",
+          "tags": [
+            "Penyimpanan terenkripsi",
+            "Lapisan keamanan",
+            "Privasi"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Lebih nyaman dan aman. Setiap hari.",
+          "text": "Riwayat akses 90 hari terakhir menunjukkan siapa yang membuka garasi dan kapan.",
+          "tags": [
+            "Riwayat akses",
+            "90 hari"
+          ]
+        }
       ],
       "seoTitle": "Buka Pintu Garasi dan Parkir Pribadi dari Ponsel | WIFIGATE",
       "seoDescription": "WIFIGATE membuka pintu garasi dan parkir pribadi dari ponsel, dengan lebih sedikit remote fisik, izin sementara, dan pengelolaan akses yang praktis dan privat.",
@@ -252,15 +580,84 @@ export default {
         }
       ],
       "paragraph": "Di rumah pribadi, keypad, kunci, dan remote bisa menjadi titik lemah. Seiring waktu, tombol keypad menjadi aus atau meninggalkan bekas, remote bisa hilang atau berpindah tangan, dan kode terkadang diberikan kepada kurir, teknisi, atau tamu lalu tetap mereka simpan meski sudah tidak dibutuhkan. WIFIGATE memungkinkan Anda mengelola pintu masuk dari ponsel, membagikan akses tamu sementara tanpa membuka kode permanen, dan mencabut izin dengan mudah tanpa mengganti kunci, kode, atau remote.",
-      "bullets": [
-        "Lebih sedikit ketergantungan pada keypad, kunci, dan remote",
-        "Akses sementara untuk kurir, tamu, dan teknisi",
-        "Cabut izin dengan mudah dari ponsel",
-        "Risiko lebih kecil dari kode yang dibagikan atau remote yang berpindah tangan",
-        "Cocok untuk gerbang, pintu, parkir, dan garasi di rumah pribadi",
-        "Pengelolaan sederhana untuk anggota keluarga dan pengguna tetap",
-        "Pengalaman masuk sehari-hari yang lebih nyaman",
-        "Privasi dan kontrol lebih baik atas siapa yang boleh masuk"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Izin sementara. Untuk kurir, tamu, dan teknisi.",
+          "text": "Kirim undangan berbatas waktu yang hanya berlaku pada waktu yang Anda pilih, tanpa membuka kode permanen.",
+          "tags": [
+            "Kurir",
+            "Tamu",
+            "Teknisi"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Undangan tamu",
+            "status": "Berlaku",
+            "guest": "Teknisi",
+            "when": "Hari ini, 10:00–12:00",
+            "note": "Berakhir otomatis"
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Risiko lebih kecil dari kode dan remote yang berpindah tangan.",
+          "text": "Setiap orang punya izin pribadi di ponselnya, jadi kurir dan tamu tidak perlu diberi kode permanen atau remote.",
+          "tags": [
+            "Izin pribadi",
+            "Tanpa kode permanen"
+          ]
+        },
+        {
+          "icon": "user-minus",
+          "title": "Cabut izin. Seketika, dari ponsel.",
+          "text": "Saat seseorang tidak boleh masuk lagi, hapus aksesnya saat itu juga, tanpa mengganti kunci, kode, atau remote.",
+          "tags": [
+            "Pencabutan seketika",
+            "Tanpa ganti kunci"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "Lebih privat. Lebih terkendali.",
+          "text": "Berbeda dengan kode bersama, setiap izin memiliki nama, sehingga kapan pun jelas siapa yang bisa masuk ke rumah.",
+          "tags": [
+            "Daftar izin",
+            "Setiap izin bernama"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Lebih sedikit ketergantungan pada keypad, kunci, dan remote.",
+          "text": "Kelola pintu masuk dari ponsel, alih-alih mengandalkan keypad, kunci, dan remote.",
+          "tags": [
+            "Dikelola dari ponsel"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Seluruh keluarga. Dikelola dengan mudah.",
+          "text": "Tambahkan anggota keluarga dan pengguna tetap di aplikasi, dan masing-masing memiliki izin masuk pribadi.",
+          "tags": [
+            "Anggota keluarga",
+            "Pengguna tetap"
+          ]
+        },
+        {
+          "icon": "gate",
+          "title": "Dari gerbang hingga garasi.",
+          "text": "WIFIGATE cocok untuk gerbang, pintu masuk, parkir, dan pintu garasi di rumah pribadi, dan semuanya dibuka dari satu aplikasi.",
+          "tags": [
+            "Gerbang",
+            "Pintu",
+            "Garasi"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "Masuk sehari-hari. Lebih nyaman.",
+          "text": "Buka dengan ponsel di saku setiap kali keluar dan pulang ke rumah, tanpa mengingat kode dan tanpa mencari remote."
+        }
       ],
       "seoTitle": "Akses Rumah Cerdas Tanpa Kode Keypad Bersama | WIFIGATE",
       "seoDescription": "WIFIGATE membantu rumah pribadi mengelola akses dari ponsel, berbagi izin sementara dengan tamu dan kurir, serta mengurangi keypad, kunci, dan remote.",
@@ -306,15 +703,98 @@ export default {
         }
       ],
       "paragraph": "Di gedung hunian, akses tidak berhenti di pintu lobi: ada gerbang, pintu masuk parkir, pintu gudang, dan terkadang pintu samping. Yang terlibat bukan hanya penghuni, tetapi juga penyewa yang silih berganti, pengurus gedung atau perusahaan pengelola, petugas kebersihan, teknisi pemeliharaan, dan pemasok tetap. Jika semua ini diatur dengan satu kode dan beberapa remote, setiap perubahan kecil, seperti penghuni yang pindah, remote yang hilang, atau pemasok yang berganti, mengharuskan kode diganti dan semua orang diberi tahu lagi. WIFIGATE menggantikan cara ini dengan pengelolaan akses yang teratur di tingkat gedung.",
-      "bullets": [
-        "Izin pribadi untuk setiap penghuni, bukan satu kode untuk semua",
-        "Tambah dan hapus penghuni tanpa mengganti kode untuk seluruh gedung",
-        "Izin terpisah untuk petugas kebersihan, pemeliharaan, dan pemasok tetap",
-        "Cocok untuk pintu lobi, gerbang, dan pintu masuk parkir",
-        "Lebih sedikit ketergantungan pada keypad, kunci, dan remote",
-        "Riwayat akses untuk pengurus gedung atau perusahaan pengelola",
-        "Kelola semua izin gedung dari ponsel",
-        "Akses untuk penyewa baru sejak hari pindah, tanpa serah terima kunci"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Izin pribadi. Untuk setiap penghuni.",
+          "text": "Alih-alih satu kode yang diketahui dan diteruskan semua orang, setiap penghuni punya izinnya sendiri.",
+          "tags": [
+            "Tanpa kode bersama"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Izin gedung",
+            "status": "Aktif",
+            "rows": [
+              {
+                "name": "Ayu Lestari",
+                "badge": "Penghuni"
+              },
+              {
+                "name": "Rizky Pratama",
+                "badge": "Penghuni"
+              },
+              {
+                "name": "Dewi Kartika",
+                "badge": "Pengurus gedung"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-plus",
+          "title": "Penghuni berganti. Kendali tetap terjaga.",
+          "text": "Tambah dan hapus penghuni tanpa mengganti kode gedung dan tanpa memberi tahu semua orang lagi.",
+          "tags": [
+            "Penambahan penghuni",
+            "Pencabutan izin"
+          ]
+        },
+        {
+          "icon": "wrench",
+          "title": "Izin terpisah untuk petugas layanan",
+          "text": "Petugas kebersihan, teknisi pemeliharaan, dan pemasok rutin mendapat izinnya sendiri, bukan kode gedung.",
+          "tags": [
+            "Kebersihan",
+            "Pemeliharaan",
+            "Pemasok"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "Bukan hanya pintu lobi",
+          "text": "Cocok untuk pintu lobi, gerbang gedung, dan pintu masuk parkir, dan setiap penghuni membukanya dari ponsel dengan izinnya sendiri.",
+          "tags": [
+            "Lobi",
+            "Gerbang",
+            "Parkir"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Lebih sedikit kode. Lebih sedikit remote.",
+          "text": "Lebih sedikit ketergantungan pada keypad, kunci, dan remote: pintu masuk gedung dibuka dari ponsel.",
+          "tags": [
+            "Dibuka dari ponsel",
+            "Remote tetap berfungsi"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Transparansi lebih baik bagi pengurus gedung",
+          "text": "Pengurus gedung atau perusahaan pengelola melihat di riwayat akses siapa yang membuka dan kapan.",
+          "tags": [
+            "90 hari ke belakang",
+            "Perusahaan pengelola"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Semua izin gedung, langsung dari ponsel",
+          "text": "Kelola daftar terkini semua izin masuk gedung dari ponsel, dan setiap izin memiliki nama.",
+          "tags": [
+            "Daftar terkini",
+            "Setiap izin bernama"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "Penghuni baru? Akses sudah siap.",
+          "text": "Penyewa baru mendapat akses sejak hari pindah, tanpa perlu mengatur serah terima kunci.",
+          "tags": [
+            "Sejak hari pertama"
+          ]
+        }
       ],
       "seoTitle": "Kontrol Akses untuk Gedung Hunian | WIFIGATE",
       "seoDescription": "WIFIGATE menghadirkan pengelolaan akses cerdas untuk gedung hunian: masuk lewat ponsel, izin tamu sementara, lebih sedikit keypad, dan transparansi yang lebih baik.",
@@ -360,15 +840,95 @@ export default {
         }
       ],
       "paragraph": "Gedung perkantoran perlu memberi karyawan, pengunjung, pemasok, dan tim operasional akses masuk yang nyaman, tanpa membebani resepsionis dan tanpa mengelola kunci atau kartu secara manual. WIFIGATE memungkinkan Anda memberikan izin permanen kepada karyawan dan izin sementara kepada pengunjung, mengendalikan akses dari ponsel, dan mengelola akses masuk dengan cara yang sesuai untuk lingkungan bisnis yang modern, rapi, dan teratur.",
-      "bullets": [
-        "Izin permanen untuk karyawan dan tim",
-        "Akses sementara untuk pengunjung, pemasok, dan kurir",
-        "Beban lebih ringan bagi resepsionis dan staf operasional",
-        "Cocok untuk pintu masuk, lantai, ruangan, dan area parkir",
-        "Pengelolaan pengguna dan izin yang teratur",
-        "Lebih sedikit ketergantungan pada kunci, kartu akses, dan kode",
-        "Citra gedung yang lebih modern dan nyaman",
-        "Riwayat akses untuk kontrol dan transparansi"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Izin permanen. Untuk setiap karyawan.",
+          "text": "Karyawan dan tim mendapat izin pribadi yang permanen di ponsel, mulai dari tanggal yang Anda tetapkan.",
+          "visual": {
+            "type": "roster",
+            "heading": "Tim kantor",
+            "status": "Aktif",
+            "rows": [
+              {
+                "name": "Maya Putri",
+                "badge": "Izin permanen"
+              },
+              {
+                "name": "Arif Hidayat",
+                "badge": "Izin permanen"
+              },
+              {
+                "name": "Nadia Safitri",
+                "badge": "Izin permanen"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "send",
+          "title": "Akses berbatas waktu. Untuk yang lainnya.",
+          "text": "Pengunjung menerima undangan berbatas waktu bahkan sebelum tiba, yang juga bisa menyertakan petunjuk arah.",
+          "tags": [
+            "Kandidat wawancara",
+            "Pemasok",
+            "Kurir"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Beban lebih ringan bagi resepsionis dan operasional",
+          "text": "Pengunjung masuk dengan ponsel tanpa menunggu seseorang turun untuk membukakan pintu, dan resepsionis menangani lebih sedikit kedatangan.",
+          "tags": [
+            "Resepsionis",
+            "Staf operasional"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "Dari pintu masuk hingga area parkir",
+          "text": "Cocok untuk pintu masuk, lantai, ruangan, dan pintu masuk parkir, dan semuanya dibuka dari ponsel.",
+          "tags": [
+            "Pintu masuk",
+            "Lantai dan ruangan",
+            "Area parkir"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "Pengguna dan izin. Semuanya teratur.",
+          "text": "Menambah atau melepas karyawan cukup dengan satu tindakan di daftar, dan izin berakhir pada tanggal yang Anda tetapkan.",
+          "tags": [
+            "Karyawan baru",
+            "Akhir masa kerja"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Lebih sedikit kartu akses, kunci, dan kode",
+          "text": "Lebih sedikit kartu akses yang harus diterbitkan dan kunci yang harus ditarik saat karyawan keluar, karena setiap karyawan masuk dengan ponselnya sendiri.",
+          "tags": [
+            "Masuk dengan ponsel"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Citra gedung yang modern dan nyaman",
+          "text": "Karyawan dan pengunjung masuk dengan ponsel, cara yang pas untuk lingkungan bisnis yang modern, bersih, dan teratur.",
+          "tags": [
+            "Karyawan",
+            "Pengunjung"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Setiap pembukaan punya nama dan waktu",
+          "text": "Anda bisa memeriksa kemudian siapa yang masuk ke suatu lantai, gudang, atau area parkir, untuk kontrol dan transparansi.",
+          "tags": [
+            "90 hari terakhir",
+            "Siapa dan kapan"
+          ]
+        }
       ],
       "seoTitle": "Kontrol Akses untuk Gedung Perkantoran | WIFIGATE",
       "seoDescription": "WIFIGATE membantu gedung perkantoran mengelola akses karyawan, pengunjung, dan pemasok dari ponsel, dengan izin sementara dan permanen yang modern.",
@@ -414,15 +974,102 @@ export default {
         }
       ],
       "paragraph": "Usaha kecil, klinik, studio, gudang, dan kantor sering mengandalkan keypad, kunci, atau kunci magnetik sederhana. Masalah muncul saat kode berpindah di antara karyawan, pemasok, dan tamu, atau saat akses sementara dibutuhkan tanpa mengorbankan keamanan. WIFIGATE memungkinkan Anda mengelola pintu masuk dari ponsel, membagikan izin sementara, dan mengurangi kebutuhan akan kode permanen, kunci fisik, atau koordinasi manual setiap kali ada yang masuk.",
-      "bullets": [
-        "Cocok untuk pintu masuk dengan kunci elektrik atau magnetik",
-        "Pembukaan dari ponsel untuk karyawan dan manajer",
-        "Akses sementara untuk tamu, pemasok, dan teknisi",
-        "Lebih sedikit kebutuhan akan keypad atau kode permanen",
-        "Cocok untuk usaha kecil, klinik, studio, dan kantor",
-        "Pengelolaan izin yang lebih sederhana dan aman",
-        "Lebih sedikit kebutuhan akan kunci fisik",
-        "Solusi praktis bagi usaha yang menginginkan akses masuk modern tanpa sistem yang rumit"
+      "benefits": [
+        {
+          "icon": "shield-check",
+          "title": "Pengelolaan izin yang sederhana. Dan lebih aman.",
+          "text": "Setiap karyawan, pemasok, atau tamu memiliki izin pribadi yang bisa dicabut kapan saja, dan riwayat akses menunjukkan siapa yang membuka dan kapan.",
+          "tags": [
+            "Dicabut kapan saja",
+            "Riwayat akses"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Riwayat akses",
+            "status": "Hari ini",
+            "rows": [
+              {
+                "time": "07:40",
+                "name": "Pemasok",
+                "event": "Dibuka"
+              },
+              {
+                "time": "08:50",
+                "name": "Lina, manajer",
+                "event": "Dibuka"
+              },
+              {
+                "time": "19:30",
+                "name": "Tim kebersihan",
+                "event": "Dibuka"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Akses sementara yang berakhir dengan sendirinya.",
+          "text": "Tamu, pemasok, dan petugas layanan mendapat izin untuk rentang waktunya sendiri, tanpa pemilik tempat harus datang khusus untuk membukakan pintu.",
+          "tags": [
+            "Pemasok",
+            "Teknisi",
+            "Kurir"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "Kunci yang sudah ada di pintu. Dibuka dari ponsel.",
+          "text": "WIFIGATE cocok untuk pintu masuk dengan kunci elektrik atau magnetik dan membukanya dari ponsel, sementara kunci yang ada tetap di tempatnya.",
+          "tags": [
+            "Kunci elektrik",
+            "Kunci magnetik"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Karyawan dan manajer membuka dari ponsel.",
+          "text": "Setiap karyawan dan manajer membuka pintu masuk dari aplikasi dengan izin pribadi, sehingga kebutuhan koordinasi manual setiap kali ada yang masuk berkurang.",
+          "tags": [
+            "Karyawan",
+            "Manajer"
+          ]
+        },
+        {
+          "icon": "user-check",
+          "title": "Lebih sedikit kode yang berpindah tangan.",
+          "text": "Kode yang diberikan kepada semua orang bisa tetap dipegang orang yang sudah tidak perlu masuk, sedangkan izin pribadi mengurangi kebutuhan akan keypad dan kode permanen.",
+          "tags": [
+            "Keypad angka",
+            "Kode permanen"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Gantungan kunci jadi lebih ringan.",
+          "text": "Pintu dibuka dari ponsel, sehingga lebih sedikit kunci fisik yang beredar di antara karyawan dan manajer.",
+          "tags": [
+            "Kunci fisik"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Akses masuk modern. Tanpa sistem rumit.",
+          "text": "Tidak ada panel kontrol, perangkat lunak manajemen, atau pembaca kartu yang harus dipasang, dan semua pengelolaan dilakukan dari aplikasi.",
+          "tags": [
+            "Tanpa panel kontrol",
+            "Tanpa pembaca kartu"
+          ]
+        },
+        {
+          "icon": "briefcase",
+          "title": "Untuk usaha kecil, klinik, dan kantor.",
+          "text": "Usaha kecil, klinik, studio, dan kantor mengelola pintu masuk dari ponsel dan membagikan izin sementara sesuai kebutuhan.",
+          "tags": [
+            "Klinik",
+            "Kantor",
+            "Gudang"
+          ]
+        }
       ],
       "seoTitle": "Pintu Masuk dan Kunci Magnetik untuk Usaha | WIFIGATE",
       "seoDescription": "WIFIGATE membuka pintu masuk usaha dan kunci magnetik secara cerdas, dengan pengelolaan izin dari ponsel, akses sementara, dan lebih sedikit keypad serta kunci.",
@@ -468,15 +1115,91 @@ export default {
         }
       ],
       "paragraph": "Fasilitas olahraga, lapangan padel, lapangan tenis, pusat kebugaran, dan kompleks latihan perlu mengelola akses untuk anggota, pelatih, staf, dan tamu sesuai jam operasional, pemesanan, dan acara. WIFIGATE memungkinkan Anda memberikan akses sementara atau permanen dari ponsel, mengurangi ketergantungan pada kunci atau kode bersama, dan meningkatkan pengalaman masuk bagi pengguna, terutama di kompleks yang jumlah pengunjungnya berubah sepanjang hari.",
-      "bullets": [
-        "Cocok untuk lapangan padel, lapangan tenis, pusat kebugaran, dan kompleks latihan",
-        "Akses berdasarkan jam operasional, pemesanan, atau izin",
-        "Pengelolaan anggota, pelatih, karyawan, dan tamu",
-        "Lebih sedikit ketergantungan pada kunci dan kode bersama",
-        "Masuk cepat dan praktis dari ponsel",
-        "Cocok untuk kompleks dengan jam operasional yang berubah-ubah",
-        "Izin sementara untuk acara, kelas, atau sesi latihan",
-        "Riwayat akses untuk kontrol dan operasional"
+      "benefits": [
+        {
+          "icon": "calendar-check",
+          "title": "Pesan lapangan. Akses aktif sesuai pemesanan.",
+          "text": "Siapa pun yang memesan lapangan untuk jam tertentu mendapat izin yang aktif pada jam itu dan berakhir saat jam itu selesai.",
+          "tags": [
+            "Jam operasional",
+            "Pemesanan",
+            "Izin"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Undangan masuk",
+            "status": "Berlaku",
+            "guest": "Putri, lapangan 2",
+            "when": "Hari ini 18:00–19:30",
+            "note": "Termasuk petunjuk arah"
+          }
+        },
+        {
+          "icon": "users",
+          "title": "Anggota, pelatih, dan tamu. Masing-masing dengan izinnya sendiri.",
+          "text": "Anggota tetap, pelatih yang datang pada hari tertentu, staf, dan tamu sekali datang dikelola dalam satu daftar, tanpa kunci yang berpindah tangan.",
+          "tags": [
+            "Anggota",
+            "Pelatih",
+            "Staf dan tamu"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Lebih sedikit kunci. Lebih sedikit kode bersama.",
+          "text": "Kode bersama tetap bisa membuka meski seharusnya sudah tidak berlaku, sedangkan izin pribadi berakhir saat tidak dibutuhkan lagi.",
+          "tags": [
+            "Izin pribadi"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Kelas, latihan, atau acara. Akses hanya untuk jam itu.",
+          "text": "Peserta kelas, latihan, atau acara mendapat izin sementara yang hanya berlaku pada jam yang Anda tetapkan.",
+          "tags": [
+            "Acara",
+            "Kelas",
+            "Sesi latihan"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Tahu siapa yang berada di lokasi dan kapan.",
+          "text": "Riwayat akses menunjukkan siapa yang membuka dan kapan, membantu operasional, dan memastikan lokasi sudah terkunci di akhir hari.",
+          "tags": [
+            "Kontrol",
+            "Operasional",
+            "90 hari terakhir"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Masuk dari ponsel. Cepat dan praktis.",
+          "text": "Setiap pengguna membuka sendiri dari aplikasi, tanpa perlu ada orang yang menunggu di gerbang untuk membukakan pintu.",
+          "tags": [
+            "Koneksi langsung",
+            "Tanpa SIM"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Jam operasional berubah? Akses pun ikut.",
+          "text": "Acara terjadwal bisa membuka sesuai hari dan jam, sehingga akses mengikuti jam operasional fasilitas.",
+          "tags": [
+            "Acara terjadwal",
+            "Mingguan atau satu kali"
+          ]
+        },
+        {
+          "icon": "dumbbell",
+          "title": "Dari lapangan Padel hingga pusat kebugaran.",
+          "text": "Cocok untuk lapangan Padel dan tenis, pusat kebugaran, dan kompleks latihan, terutama saat jumlah pengunjung berubah sepanjang hari.",
+          "tags": [
+            "Padel",
+            "Tenis",
+            "Pusat kebugaran"
+          ]
+        }
       ],
       "seoTitle": "Kontrol Akses Fasilitas Olahraga dan Padel | WIFIGATE",
       "seoDescription": "WIFIGATE menghadirkan kontrol akses cerdas untuk fasilitas olahraga, lapangan padel, dan pusat kebugaran, dengan akses dari ponsel serta izin sementara atau tetap.",
@@ -522,15 +1245,96 @@ export default {
         }
       ],
       "paragraph": "Lokasi penyimpanan dan ruang loker biasanya mengandalkan kode bersama, keypad, dan kunci fisik yang digandakan, berpindah tangan, dan jarang diganti. WIFIGATE memindahkan akses ke ponsel: setiap penyewa memiliki izin pribadi ke gerbang lokasi, pintu masuk gedung, dan, jika terpasang, unit penyimpanan atau loker dengan kunci elektrik, terbatas pada jam yang Anda pilih dan dihapus begitu masa sewa berakhir. Ponsel berkomunikasi langsung dengan perangkat di lokasi, tanpa kartu SIM atau koneksi internet di pintu, dan tanpa langganan bulanan untuk penggunaan standar.",
-      "bullets": [
-        "Buka gerbang lokasi, pintu gedung, dan loker dari ponsel",
-        "Izin pribadi untuk setiap penyewa",
-        "Akses terbatas pada jam operasional atau rentang waktu khusus",
-        "Akses sekali pakai untuk jasa pindahan dan anggota keluarga",
-        "Hapus akses begitu masa sewa berakhir",
-        "Riwayat siapa yang membuka dan kapan",
-        "Tanpa kode bersama, keypad, atau kunci yang harus diganti",
-        "Tanpa kartu SIM atau koneksi internet di pintu"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Izin pribadi. Untuk setiap penyewa.",
+          "text": "Alih-alih kode bersama yang masih diingat penyewa sebelumnya, setiap penyewa punya aksesnya sendiri.",
+          "visual": {
+            "type": "roster",
+            "heading": "Izin lokasi",
+            "status": "Aktif",
+            "rows": [
+              {
+                "name": "Wulan Anggraini",
+                "badge": "Berizin"
+              },
+              {
+                "name": "Bayu Saputra",
+                "badge": "Berizin"
+              },
+              {
+                "name": "Indah Permata",
+                "badge": "Berizin"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-minus",
+          "title": "Masa sewa berakhir. Akses pun berakhir.",
+          "text": "Hapus izin begitu kontrak berakhir atau pembayaran menunggak, tanpa perlu menarik kunci.",
+          "tags": [
+            "Kontrak berakhir",
+            "Pembayaran menunggak"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Gerbang, pintu, dan loker. Dari ponsel.",
+          "text": "Setiap penyewa membuka gerbang lokasi, pintu gedung, dan, jika terpasang, unit penyimpanan atau loker dengan kunci elektrik.",
+          "tags": [
+            "Gerbang lokasi",
+            "Pintu gedung",
+            "Kunci elektrik"
+          ]
+        },
+        {
+          "icon": "clock",
+          "title": "Jam akses yang Anda tentukan.",
+          "text": "Izinkan masuk hanya selama jam operasional lokasi, atau beri penyewa rentang waktu yang lebih luas.",
+          "tags": [
+            "Jam operasional",
+            "Rentang waktu khusus"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "Akses sekali pakai. Untuk jasa pindahan dan keluarga.",
+          "text": "Jasa pindahan atau anggota keluarga bisa mendapat akses untuk satu hari, tanpa kode bersama dan tanpa kunci.",
+          "tags": [
+            "Jasa pindahan",
+            "Anggota keluarga",
+            "Satu hari"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Tahu siapa yang masuk dan kapan.",
+          "text": "Setiap pembukaan tercatat dengan nama pengguna dan waktunya, sehingga pertanyaan tentang suatu kunjungan terjawab dari riwayat, bukan dari rekaman kamera.",
+          "tags": [
+            "90 hari ke belakang",
+            "Nama dan waktu"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Tanpa kode bersama. Tanpa kunci yang harus diganti.",
+          "text": "Kode, keypad, dan kunci yang digandakan dan berpindah tangan digantikan oleh akses pribadi di ponsel.",
+          "tags": [
+            "Tanpa keypad",
+            "Tanpa kunci"
+          ]
+        },
+        {
+          "icon": "sim-off",
+          "title": "Tanpa SIM. Tanpa internet di pintu.",
+          "text": "Ponsel berkomunikasi langsung dengan perangkat di lokasi, dan tidak ada langganan bulanan untuk penggunaan standar.",
+          "tags": [
+            "Koneksi langsung",
+            "Tanpa langganan bulanan"
+          ]
+        }
       ],
       "seoTitle": "Akses Cerdas untuk Ruang Penyimpanan dan Loker | WIFIGATE",
       "seoDescription": "WIFIGATE memberi setiap penyewa gudang atau loker akses pribadi dari ponsel, terbatas pada jam operasional, tercatat di riwayat, dan dihapus saat sewa berakhir.",

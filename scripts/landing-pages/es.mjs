@@ -41,28 +41,136 @@ export default {
       "note": "Los horarios se fijan en intervalos de 10 minutos. Si donde vives Shabat termina después de la medianoche, agrega también un evento el domingo desde las 00:00."
     },
     "benefitsTitle": "Qué incluye el reloj de Shabat de WIFIGATE para portones",
-    "bullets": [
-      "Entrada y salida libres en Shabat, sin que nadie accione el portón",
-      "Un horario semanal que configuras una sola vez",
-      "Festividades planificadas con hasta 90 días de anticipación",
-      "Cambio de horarios desde la aplicación, sin llamar a un técnico",
-      "Bloqueo del portón en horarios fijos, por ejemplo de noche",
-      "Entre semana: apertura desde el teléfono, con un control remoto o con un botón",
-      "Se conecta al controlador del portón o de la barrera existente",
-      "Sin SIM, sin internet en el portón y sin suscripción mensual"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Lo configuras una vez. Funciona cada Shabat.",
+        "text": "Marcas eventos verdes de «Portón abierto» el viernes y el sábado, y el dispositivo del portón los ejecuta por sí solo cada semana.",
+        "tags": [
+          "Hasta 50 eventos",
+          "Intervalos de 10 minutos"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Portón abierto en Shabat",
+          "status": "Semanal",
+          "rows": [
+            {
+              "day": "Viernes",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Sábado",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Entras y sales en Shabat. Sin tocar nada.",
+        "text": "En Shabat el portón queda abierto en los horarios que definiste, y nadie tiene que accionarlo.",
+        "tags": [
+          "Sin control remoto",
+          "Sin teléfono",
+          "Sin botón"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Festividades planificadas con anticipación",
+        "text": "Agregas eventos únicos para la víspera y el día de la festividad, con hasta 90 días de anticipación, y cada evento se borra solo cuando pasa su fecha.",
+        "tags": [
+          "Hasta 90 días",
+          "Rosh Hashaná",
+          "Pésaj"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Cambias los horarios en la aplicación. Sin técnico.",
+        "text": "Cuando cambia la estación, actualizas los horarios en la pantalla «Eventos programados» y guardas.",
+        "tags": [
+          "Administrador del sistema",
+          "Junto al portón"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Bloqueas el portón en horarios fijos, por ejemplo de noche",
+        "text": "Un evento rojo de «Portón cerrado» mantiene el portón cerrado en los horarios que definas, y un evento verde lo mantiene abierto.",
+        "tags": [
+          "Evento rojo",
+          "Evento verde"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Entre semana: teléfono, control remoto o botón",
+        "text": "Fuera de los horarios que definiste, el portón funciona como siempre y se abre desde el teléfono, con el control remoto o con el botón.",
+        "tags": [
+          "Fuera de los eventos",
+          "Controles remotos existentes"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Se conecta al portón o a la barrera que ya tienes",
+        "text": "WIFIGATE se conecta al controlador del portón o de la barrera existente, así que no hace falta un reloj de Shabat aparte en el tablero eléctrico.",
+        "tags": [
+          "Portón eléctrico",
+          "Barrera vehicular"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Sin SIM, sin internet en el portón y sin suscripción mensual",
+        "text": "El portón solo necesita electricidad, el teléfono se conecta directamente al dispositivo y pagas una sola vez por el dispositivo y la instalación.",
+        "tags": [
+          "Solo electricidad",
+          "Pago único"
+        ]
+      }
     ],
     "facts": {
       "title": "El reloj de Shabat de WIFIGATE en resumen",
       "rows": [
-        { "label": "Eventos", "value": "Hasta 50 en total, semanales y únicos" },
-        { "label": "Intervalos de tiempo", "value": "10 minutos" },
-        { "label": "Festividades", "value": "Eventos únicos en la víspera y el día de la festividad, con hasta 90 días de anticipación" },
-        { "label": "Abierto o cerrado", "value": "Un evento verde mantiene el portón abierto, un evento rojo lo mantiene cerrado" },
-        { "label": "Dónde está el horario", "value": "Se guarda y se ejecuta en el dispositivo del portón" },
-        { "label": "Qué necesita el portón", "value": "Solo electricidad, sin SIM, sin router y sin internet" },
-        { "label": "Cambio de horarios", "value": "Desde la aplicación, junto al portón, sin técnico" },
-        { "label": "Tras un corte de luz", "value": "El horario se conserva, y los eventos vuelven a funcionar cuando cualquier teléfono se conecta al portón" },
-        { "label": "Pago", "value": "Una sola vez por el dispositivo y la instalación, sin suscripción mensual" }
+        {
+          "label": "Eventos",
+          "value": "Hasta 50 en total, semanales y únicos"
+        },
+        {
+          "label": "Intervalos de tiempo",
+          "value": "10 minutos"
+        },
+        {
+          "label": "Festividades",
+          "value": "Eventos únicos en la víspera y el día de la festividad, con hasta 90 días de anticipación"
+        },
+        {
+          "label": "Abierto o cerrado",
+          "value": "Un evento verde mantiene el portón abierto, un evento rojo lo mantiene cerrado"
+        },
+        {
+          "label": "Dónde está el horario",
+          "value": "Se guarda y se ejecuta en el dispositivo del portón"
+        },
+        {
+          "label": "Qué necesita el portón",
+          "value": "Solo electricidad, sin SIM, sin router y sin internet"
+        },
+        {
+          "label": "Cambio de horarios",
+          "value": "Desde la aplicación, junto al portón, sin técnico"
+        },
+        {
+          "label": "Tras un corte de luz",
+          "value": "El horario se conserva, y los eventos vuelven a funcionar cuando cualquier teléfono se conecta al portón"
+        },
+        {
+          "label": "Pago",
+          "value": "Una sola vez por el dispositivo y la instalación, sin suscripción mensual"
+        }
       ]
     },
     "updatedLabel": "Última actualización: {date}",

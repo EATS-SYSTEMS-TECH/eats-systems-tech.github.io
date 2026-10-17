@@ -41,28 +41,136 @@ export default {
       "note": "Ajat asetetaan 10 minuutin askelin. Jos sapatti päättyy paikkakunnallasi vasta keskiyön jälkeen, lisää tapahtuma myös sunnuntaille kello 00:00 alkaen."
     },
     "benefitsTitle": "Mitä WIFIGATEn sähköportin sapattiajastin sisältää",
-    "bullets": [
-      "Vapaa kulku sisään ja ulos sapattina, kenenkään käyttämättä porttia",
-      "Viikkoaikataulu, jonka määrität kerran",
-      "Juhlapyhät suunniteltuina etukäteen, enintään 90 päivää eteenpäin",
-      "Aikojen muutos sovelluksesta, ilman asentajan käyntiä",
-      "Portin lukitus kiinteinä aikoina, esimerkiksi yöksi",
-      "Arkisin: avaus puhelimella, kaukosäätimellä tai painikkeella",
-      "Kytketään nykyisen portin tai puomin ohjauskeskukseen",
-      "Ei SIM-korttia, ei internetyhteyttä portilla eikä kuukausitilausta"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Määritä kerran. Toimii joka sapatti.",
+        "text": "Merkitse perjantaille ja lauantaille vihreät ”Portti auki” -tapahtumat, ja portin laite suorittaa ne itse joka viikko.",
+        "tags": [
+          "Enintään 50 tapahtumaa",
+          "10 minuutin askelin"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Portti auki sapattina",
+          "status": "Viikoittain",
+          "rows": [
+            {
+              "day": "Perjantai",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Lauantai",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Sisään ja ulos sapattina. Mihinkään ei tarvitse koskea.",
+        "text": "Sapattina portti pysyy auki asettaminasi aikoina, eikä kenenkään tarvitse käyttää sitä.",
+        "tags": [
+          "Ei kaukosäädintä",
+          "Ei puhelinta",
+          "Ei painiketta"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Juhlapyhät suunniteltuina etukäteen",
+        "text": "Lisää kertaluonteiset tapahtumat juhlapyhän aatolle ja itse juhlapäivälle, enintään 90 päivää eteenpäin, ja jokainen tapahtuma poistuu itsestään, kun sen päivä on ohi.",
+        "tags": [
+          "Enintään 90 päivää",
+          "Roš hašana",
+          "Pesah"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Muuta aikoja sovelluksessa. Ilman asentajaa.",
+        "text": "Kun vuodenaika vaihtuu, päivitä ajat ”Ajastetut tapahtumat” -näkymässä ja tallenna.",
+        "tags": [
+          "Järjestelmän ylläpitäjä",
+          "Portin luona"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Lukitse portti kiinteinä aikoina, esimerkiksi yöksi",
+        "text": "Punainen ”Portti kiinni” -tapahtuma pitää portin kiinni asettaminasi aikoina, ja vihreä tapahtuma pitää sen auki.",
+        "tags": [
+          "Punainen tapahtuma",
+          "Vihreä tapahtuma"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Arkisin: puhelin, kaukosäädin tai painike",
+        "text": "Asettamiesi aikojen ulkopuolella portti toimii normaalisti ja aukeaa puhelimella, kaukosäätimellä tai painikkeella.",
+        "tags": [
+          "Tapahtumien ulkopuolella",
+          "Nykyiset kaukosäätimet"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Kytketään nykyiseen porttiin tai puomiin",
+        "text": "WIFIGATE kytketään portin tai puomin nykyiseen ohjauskeskukseen, joten erillistä sapattiajastinta sähkökeskukseen ei tarvita.",
+        "tags": [
+          "Sähköportti",
+          "Pysäköintipuomi"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Ei SIM-korttia, ei internetyhteyttä portilla eikä kuukausitilausta",
+        "text": "Portilla tarvitaan vain sähkö, puhelin muodostaa yhteyden suoraan laitteeseen, ja maksat laitteesta ja asennuksesta vain kerran.",
+        "tags": [
+          "Vain sähkö",
+          "Kertamaksu"
+        ]
+      }
     ],
     "facts": {
       "title": "WIFIGATEn sapattiajastin lyhyesti",
       "rows": [
-        { "label": "Tapahtumat", "value": "Enintään 50 yhteensä, viikoittaisia ja kertaluonteisia" },
-        { "label": "Aika-askel", "value": "10 minuuttia" },
-        { "label": "Juhlapyhät", "value": "Kertaluonteiset tapahtumat juhlapyhän aatolle ja itse juhlapäivälle, enintään 90 päivää eteenpäin" },
-        { "label": "Auki vai kiinni", "value": "Vihreä tapahtuma pitää portin auki, punainen tapahtuma pitää sen kiinni" },
-        { "label": "Missä aikataulu on", "value": "Tallennettu portin laitteeseen ja toimii siellä" },
-        { "label": "Mitä portilla tarvitaan", "value": "Vain sähkö, ei SIM-korttia, reititintä eikä internetyhteyttä" },
-        { "label": "Aikojen muutos", "value": "Sovelluksesta, portin luona, ilman asentajaa" },
-        { "label": "Sähkökatkon jälkeen", "value": "Aikataulu säilyy, ja tapahtumat toimivat taas, kun mikä tahansa puhelin muodostaa yhteyden porttiin" },
-        { "label": "Maksu", "value": "Kerran laitteesta ja asennuksesta, ei kuukausitilausta" }
+        {
+          "label": "Tapahtumat",
+          "value": "Enintään 50 yhteensä, viikoittaisia ja kertaluonteisia"
+        },
+        {
+          "label": "Aika-askel",
+          "value": "10 minuuttia"
+        },
+        {
+          "label": "Juhlapyhät",
+          "value": "Kertaluonteiset tapahtumat juhlapyhän aatolle ja itse juhlapäivälle, enintään 90 päivää eteenpäin"
+        },
+        {
+          "label": "Auki vai kiinni",
+          "value": "Vihreä tapahtuma pitää portin auki, punainen tapahtuma pitää sen kiinni"
+        },
+        {
+          "label": "Missä aikataulu on",
+          "value": "Tallennettu portin laitteeseen ja toimii siellä"
+        },
+        {
+          "label": "Mitä portilla tarvitaan",
+          "value": "Vain sähkö, ei SIM-korttia, reititintä eikä internetyhteyttä"
+        },
+        {
+          "label": "Aikojen muutos",
+          "value": "Sovelluksesta, portin luona, ilman asentajaa"
+        },
+        {
+          "label": "Sähkökatkon jälkeen",
+          "value": "Aikataulu säilyy, ja tapahtumat toimivat taas, kun mikä tahansa puhelin muodostaa yhteyden porttiin"
+        },
+        {
+          "label": "Maksu",
+          "value": "Kerran laitteesta ja asennuksesta, ei kuukausitilausta"
+        }
       ]
     },
     "updatedLabel": "Päivitetty viimeksi: {date}",

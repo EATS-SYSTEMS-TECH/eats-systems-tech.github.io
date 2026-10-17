@@ -41,28 +41,136 @@ export default {
       "note": "Hodiny sa nastavujú v krokoch po 10 minút. Ak u vás šabat končí po polnoci, pridajte udalosť aj na nedeľu od 00:00."
     },
     "benefitsTitle": "Čo zahŕňa šabatový časovač brány od WIFIGATE",
-    "bullets": [
-      "Voľný príchod aj odchod počas šabatu bez toho, aby niekto ovládal bránu",
-      "Týždenný rozvrh, ktorý nastavíte raz",
-      "Sviatky naplánované vopred, až 90 dní dopredu",
-      "Zmena hodín v aplikácii, bez volania technika",
-      "Zamknutie brány v pevne stanovených hodinách, napríklad v noci",
-      "Cez pracovné dni: otváranie z telefónu, ovládačom alebo tlačidlom",
-      "Pripojenie k riadiacej jednotke existujúcej brány alebo závory",
-      "Bez SIM karty, bez internetu pri bráne a bez mesačného predplatného"
+    "benefits": [
+      {
+        "icon": "calendar-clock",
+        "title": "Nastavíte raz. Funguje každý šabat.",
+        "text": "Na piatok a sobotu označíte zelené udalosti „Otvorená brána“ a zariadenie brány ich každý týždeň spustí samo.",
+        "tags": [
+          "Až 50 udalostí",
+          "Kroky po 10 minút"
+        ],
+        "visual": {
+          "type": "schedule",
+          "heading": "Brána otvorená cez šabat",
+          "status": "Týždenne",
+          "rows": [
+            {
+              "day": "Piatok",
+              "range": "16:00–24:00"
+            },
+            {
+              "day": "Sobota",
+              "range": "00:00–20:00"
+            }
+          ]
+        }
+      },
+      {
+        "icon": "lock-open",
+        "title": "Príchod aj odchod cez šabat. Ničoho sa nedotýkate.",
+        "text": "Počas šabatu zostáva brána otvorená v hodinách, ktoré ste nastavili, a nikto ju nemusí ovládať.",
+        "tags": [
+          "Bez ovládača",
+          "Bez telefónu",
+          "Bez tlačidla"
+        ]
+      },
+      {
+        "icon": "calendar-check",
+        "title": "Sviatky naplánované vopred",
+        "text": "Pridáte jednorazové udalosti na predvečer sviatku a na sviatočný deň, až 90 dní dopredu, a každá udalosť sa po uplynutí svojho dátumu sama vymaže.",
+        "tags": [
+          "Až 90 dní",
+          "Roš hašana",
+          "Pesach"
+        ]
+      },
+      {
+        "icon": "clock",
+        "title": "Hodiny zmeníte v aplikácii. Bez technika.",
+        "text": "Keď sa zmení ročné obdobie, upravíte hodiny na obrazovke „Naplánované udalosti“ a uložíte.",
+        "tags": [
+          "Správca systému",
+          "Pri bráne"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "Bránu zamknete v pevne stanovených hodinách, napríklad v noci",
+        "text": "Červená udalosť „Zatvorená brána“ drží bránu zatvorenú v hodinách, ktoré ste nastavili, a zelená udalosť ju drží otvorenú.",
+        "tags": [
+          "Červená udalosť",
+          "Zelená udalosť"
+        ]
+      },
+      {
+        "icon": "smartphone",
+        "title": "Cez pracovné dni: telefón, ovládač alebo tlačidlo",
+        "text": "Mimo hodín, ktoré ste nastavili, funguje brána ako zvyčajne a otvára sa z telefónu, ovládačom alebo tlačidlom.",
+        "tags": [
+          "Mimo udalostí",
+          "Existujúce ovládače"
+        ]
+      },
+      {
+        "icon": "gate",
+        "title": "Pripojí sa k existujúcej bráne alebo závore",
+        "text": "WIFIGATE sa pripojí k existujúcej riadiacej jednotke brány alebo závory, takže v rozvádzači nepotrebujete samostatný šabatový časovač.",
+        "tags": [
+          "Elektrická brána",
+          "Parkovacia závora"
+        ]
+      },
+      {
+        "icon": "sim-off",
+        "title": "Bez SIM karty, bez internetu pri bráne a bez mesačného predplatného",
+        "text": "Brána potrebuje len napájanie, telefón sa k zariadeniu pripája priamo a za zariadenie a inštaláciu zaplatíte raz.",
+        "tags": [
+          "Len napájanie",
+          "Jednorazová platba"
+        ]
+      }
     ],
     "facts": {
       "title": "Šabatový časovač WIFIGATE v skratke",
       "rows": [
-        { "label": "Udalosti", "value": "Spolu až 50, týždenné aj jednorazové" },
-        { "label": "Časový krok", "value": "10 minút" },
-        { "label": "Sviatky", "value": "Jednorazové udalosti v predvečer sviatku a vo sviatočný deň, až 90 dní dopredu" },
-        { "label": "Otvorená, alebo zatvorená", "value": "Zelená udalosť drží bránu otvorenú, červená ju drží zatvorenú" },
-        { "label": "Kde je rozvrh", "value": "Uložený a spúšťaný v zariadení brány" },
-        { "label": "Čo brána potrebuje", "value": "Len napájanie, bez SIM karty, routera a internetu" },
-        { "label": "Zmena hodín", "value": "Z aplikácie, pri bráne, bez technika" },
-        { "label": "Po výpadku prúdu", "value": "Rozvrh zostane uložený a udalosti sa znova spustia, keď sa k bráne pripojí akýkoľvek telefón" },
-        { "label": "Platba", "value": "Raz za zariadenie a inštaláciu, bez mesačného predplatného" }
+        {
+          "label": "Udalosti",
+          "value": "Spolu až 50, týždenné aj jednorazové"
+        },
+        {
+          "label": "Časový krok",
+          "value": "10 minút"
+        },
+        {
+          "label": "Sviatky",
+          "value": "Jednorazové udalosti v predvečer sviatku a vo sviatočný deň, až 90 dní dopredu"
+        },
+        {
+          "label": "Otvorená, alebo zatvorená",
+          "value": "Zelená udalosť drží bránu otvorenú, červená ju drží zatvorenú"
+        },
+        {
+          "label": "Kde je rozvrh",
+          "value": "Uložený a spúšťaný v zariadení brány"
+        },
+        {
+          "label": "Čo brána potrebuje",
+          "value": "Len napájanie, bez SIM karty, routera a internetu"
+        },
+        {
+          "label": "Zmena hodín",
+          "value": "Z aplikácie, pri bráne, bez technika"
+        },
+        {
+          "label": "Po výpadku prúdu",
+          "value": "Rozvrh zostane uložený a udalosti sa znova spustia, keď sa k bráne pripojí akýkoľvek telefón"
+        },
+        {
+          "label": "Platba",
+          "value": "Raz za zariadenie a inštaláciu, bez mesačného predplatného"
+        }
       ]
     },
     "updatedLabel": "Posledná aktualizácia: {date}",

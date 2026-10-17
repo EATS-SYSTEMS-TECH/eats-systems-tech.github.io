@@ -36,15 +36,89 @@ export default {
         }
       ],
       "paragraph": "WIFIGATE lets hotels, vacation rentals (Airbnb), and resorts give guests a convenient, secure digital entry experience right from their phone.\nInstead of issuing magnetic key cards, handing over physical keys, or using lockboxes, access control becomes automatic.\nWith WIFIGATE Host, you can connect your booking system directly to the access system.\nOnce a booking is confirmed, this connection sends the guest a personal access pass.\nAccess activates right at check-in and ends automatically at checkout, with no manual steps, key handovers, or coordination by the front desk or hosts.",
-      "bullets": [
-        "Guest access created automatically when a booking is confirmed",
-        "Full automation with WIFIGATE Host",
-        "Temporary access that matches the dates and times of the stay",
-        "Fewer room key cards to issue, hand over, and replace",
-        "Permissions for staff, housekeeping, maintenance, and vendors",
-        "A smoother, more convenient arrival for guests",
-        "Access ends automatically at checkout",
-        "Access history for transparency and oversight"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Booking confirmed. Access on its way.",
+          "text": "With WIFIGATE Host, confirming a booking automatically creates the guest's personal access and sends it to them.",
+          "tags": [
+            "Hotels",
+            "Airbnb",
+            "Vacation rentals"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Guest invite",
+            "status": "Sent",
+            "guest": "Emma Clarke",
+            "when": "Fri 15:00 – Sun 11:00",
+            "note": "Includes arrival directions"
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Access that matches the stay.",
+          "text": "Each guest gets an invite on their phone that's valid only for the dates and times of their stay.",
+          "tags": [
+            "Check-in",
+            "Dates and times"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Checkout. Access ends on its own.",
+          "text": "No one has to remember to revoke access: it expires at departure, even when no one from your team is on site.",
+          "tags": [
+            "Automatic expiry",
+            "Departure time"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Separate access for every team member.",
+          "text": "Staff, housekeeping, maintenance, and vendors each get personal access that you grant and revoke in the app.",
+          "tags": [
+            "Housekeeping",
+            "Maintenance",
+            "Vendors"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Fewer key cards. No lockbox.",
+          "text": "Fewer room key cards to issue, hand over, and replace, and no lockbox code passed from guest to guest.",
+          "tags": [
+            "Room key cards",
+            "Physical keys"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Who opened and when. All in view.",
+          "text": "Access history shows who opened and when, giving you transparency and oversight across guests, staff, and vendors.",
+          "tags": [
+            "Last 90 days"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "A smoother arrival. No waiting on anyone.",
+          "text": "Guests open the gate, door, or parking themselves, right from the WIFIGATE app on their phone.",
+          "tags": [
+            "Gate",
+            "Door",
+            "Parking"
+          ]
+        },
+        {
+          "icon": "zap",
+          "title": "Full automation with WIFIGATE Host.",
+          "text": "WIFIGATE Host connects your booking system to the access system: no copying details, no key cards to issue, no manual steps.",
+          "tags": [
+            "Booking system",
+            "API connection"
+          ]
+        }
       ],
       "seoTitle": "WIFIGATE | Digital Guest Access for Hotels, Airbnb & Resorts",
       "seoDescription": "With WIFIGATE Host, hotels, Airbnb hosts, and resorts automate digital guest access: a personal pass for each booking, with no keys, key cards, or lockboxes.",
@@ -90,15 +164,95 @@ export default {
         }
       ],
       "paragraph": "Roller shutters at shops and businesses are often operated with remotes, keys, an outdoor key box, or switches mounted outside the premises. These can get lost, stay with former employees, be copied, or become an exposed access point. Opening or closing with a key also means standing right at the control point, key in hand, sometimes without a clear view of the shutter. WIFIGATE moves control into the app and puts access control on the more protected inside, so you can open and close more comfortably, manage permissions for employees and vendors, and rely less on keys, remotes, and exposed access points.",
-      "bullets": [
-        "Open and close from your phone, no remote needed",
-        "Less reliance on keys that can be copied or lost",
-        "Fewer exposed access points outside the business",
-        "Easier control with a better view of the shutter",
-        "Permissions for employees, managers, and vendors",
-        "Optional temporary access by time or need",
-        "For shops, warehouses, service entrances, and other businesses",
-        "A tidier, more secure indoor setup for daily operation"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Personal access. For staff, managers and vendors.",
+          "text": "Everyone gets their own access in the app, and you can remove it at any time.",
+          "visual": {
+            "type": "roster",
+            "heading": "Shutter access",
+            "status": "Active",
+            "rows": [
+              {
+                "name": "Store owner",
+                "badge": "Admin"
+              },
+              {
+                "name": "Shift worker",
+                "badge": "Authorized"
+              },
+              {
+                "name": "Supplier",
+                "badge": "Temporary"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "shield-check",
+          "title": "Fewer exposed access points. Control moves inside.",
+          "text": "Instead of a switch or key box on an outside wall, the control point can sit on the protected inside.",
+          "tags": [
+            "Protected inside",
+            "Out of reach"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Open and close. Right from your phone.",
+          "text": "Authorized users operate the shutter from the WIFIGATE app, with no remote to find or pass between employees.",
+          "tags": [
+            "No remote needed",
+            "Direct connection"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Fewer keys to copy or lose.",
+          "text": "A key left with a former employee keeps working, while phone access ends on their last day.",
+          "tags": [
+            "No lock changes",
+            "No equipment to collect"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Temporary access. Only when needed.",
+          "text": "Share time-limited access with a vendor or temporary employee, and it stops working when the time is up.",
+          "tags": [
+            "Vendors",
+            "Temporary staff"
+          ]
+        },
+        {
+          "icon": "eye",
+          "title": "Easier control. A better view.",
+          "text": "Operate the shutter by phone from a safer distance, not at the control point with a key in hand.",
+          "tags": [
+            "Safer distance",
+            "No key in hand"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "Daily operation. Tidier and more secure.",
+          "text": "WIFIGATE installs on your existing shutter controller, and data is stored encrypted on the device itself.",
+          "tags": [
+            "Indoor setup",
+            "Encrypted data"
+          ]
+        },
+        {
+          "icon": "store",
+          "title": "For any business with an electric roller shutter.",
+          "text": "Wherever you want fewer keys and fewer remotes changing hands.",
+          "tags": [
+            "Shops",
+            "Warehouses",
+            "Service entrances"
+          ]
+        }
       ],
       "seoTitle": "Smart Roller Shutter Control for Shops & Businesses | WIFIGATE",
       "seoDescription": "WIFIGATE lets shops and businesses control roller shutters from a phone, with permission management, less reliance on keys and remotes, and fewer exposed access points.",
@@ -144,15 +298,103 @@ export default {
         }
       ],
       "paragraph": "Electric gates and parking barriers serve residents, employees, guests, and vendors, but juggling remotes, codes, and calls asking someone to open the gate quickly becomes a hassle. WIFIGATE lets you open the gate from your phone, share permanent or temporary access, use automatic opening for regular users, and set scheduled events as needed. The system is built for secure, private, encrypted operation with no monthly subscription or recurring charges, and your existing remotes keep working alongside the app.",
-      "bullets": [
-        "Open an electric gate or parking barrier from your phone",
-        "No monthly subscription, no recurring charges",
-        "Share temporary access with guests, vendors, and employees",
-        "Auto Open for regular users on their daily drive in",
-        "Scheduled events that open by day and time",
-        "Control from the app or with your existing remotes",
-        "Fewer physical remotes to hand out",
-        "Access history for oversight and transparency"
+      "benefits": [
+        {
+          "icon": "smartphone",
+          "title": "Gate or parking barrier. Straight from your phone.",
+          "text": "Anyone you've given access, permanent or temporary, opens the electric gate or parking barrier from the WIFIGATE app.",
+          "tags": [
+            "Electric gates",
+            "Parking barriers",
+            "No SIM"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Access history",
+            "status": "Today",
+            "rows": [
+              {
+                "time": "07:42",
+                "name": "Dana · Resident",
+                "event": "Opened"
+              },
+              {
+                "time": "08:15",
+                "name": "Avi · Employee",
+                "event": "Opened"
+              },
+              {
+                "time": "10:30",
+                "name": "Ron · Vendor",
+                "event": "Opened"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "card-off",
+          "title": "No subscription. No recurring charges.",
+          "text": "You pay once for the device and installation, with no monthly subscription or recurring charges.",
+          "tags": [
+            "One-time payment",
+            "Device and installation"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "Temporary access. Closes on its own.",
+          "text": "Instead of fielding calls to open the gate, send access that's valid only for the window when it's needed.",
+          "tags": [
+            "Guests",
+            "Vendors",
+            "Employees"
+          ]
+        },
+        {
+          "icon": "hands-free",
+          "title": "Auto Open. The gate opens as you arrive.",
+          "text": "For regular users, Auto Open detects your arrival and opens the gate: no remote to find, no window to roll down in the rain.",
+          "tags": [
+            "Regular users",
+            "Daily drive in"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Scheduled events. By day and time.",
+          "text": "Set in advance which days and hours the gate stays open, as a weekly or one-time event.",
+          "tags": [
+            "Weekly",
+            "One-time"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "App or remote. Your choice.",
+          "text": "Your existing remotes keep working alongside the app, so there's nothing to throw away.",
+          "tags": [
+            "Existing remotes",
+            "App control"
+          ]
+        },
+        {
+          "icon": "user-plus",
+          "title": "Fewer physical remotes to hand out.",
+          "text": "Instead of handing a remote to every resident, employee or vendor, give each one personal access in the app.",
+          "tags": [
+            "Personal access",
+            "In-app management"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Access history. Oversight and transparency.",
+          "text": "See who opened the gate and when, over the last 90 days.",
+          "tags": [
+            "90 days back",
+            "Who and when"
+          ]
+        }
       ],
       "seoTitle": "No-Subscription Electric Gate & Parking Barrier Access | WIFIGATE",
       "seoDescription": "WIFIGATE opens electric gates and parking barriers from your phone: Auto Open, scheduled events, existing remotes, permissions, and no subscription or recurring charges.",
@@ -198,15 +440,101 @@ export default {
         }
       ],
       "paragraph": "Garage doors and private parking entrances are usually operated with physical remotes, which can get lost, stay with people who no longer need access, or in some cases be cloned. WIFIGATE moves control to digital access from your phone, lets you manage permissions for family members, employees, or guests, and share temporary access without handing over a remote or code. The result is a more convenient, more private, and better organized experience, with less reliance on physical access devices.",
-      "bullets": [
-        "Open the garage door from your phone",
-        "Less reliance on physical remotes",
-        "Lower risk from lost, passed-on, or cloned remotes",
-        "Access management for family, employees, and guests",
-        "Temporary access without handing over a remote or code",
-        "For private parking, houses, and ground-floor apartments",
-        "A more private, secure way to manage access",
-        "More convenient, safer everyday control"
+      "benefits": [
+        {
+          "icon": "users",
+          "title": "Personal access for everyone you let in.",
+          "text": "Add and remove family members, employees, and guests in the app, and each one opens from their own phone.",
+          "tags": [
+            "Family",
+            "Employees",
+            "Guests"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Garage access",
+            "status": "Active",
+            "rows": [
+              {
+                "name": "Mom",
+                "badge": "Admin"
+              },
+              {
+                "name": "Yoav",
+                "badge": "Family"
+              },
+              {
+                "name": "Contractor",
+                "badge": "Temporary"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Less risk from lost or cloned remotes.",
+          "text": "A remote that's lost, passed on, or cloned can keep opening, while phone access is removed from the app in seconds.",
+          "tags": [
+            "Lost",
+            "Passed on",
+            "Cloned"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Your garage door opens from your phone.",
+          "text": "WIFIGATE connects to the garage door, and you open it from the WIFIGATE app on the phone you already carry.",
+          "tags": [
+            "Direct connection",
+            "No SIM"
+          ]
+        },
+        {
+          "icon": "remote",
+          "title": "Fewer remotes. Less hassle.",
+          "text": "Fewer remotes to buy, program, hand out, and manage, instead of one for every car and every user.",
+          "tags": [
+            "Alongside existing remotes"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Temporary access. No remote to hand over.",
+          "text": "A contractor or guest gets temporary access that ends whenever you choose, with no remote or code to hand over.",
+          "tags": [
+            "Contractors",
+            "Guests"
+          ]
+        },
+        {
+          "icon": "garage",
+          "title": "For private parking, houses, ground-floor apartments.",
+          "text": "WIFIGATE is installed on the existing garage door or parking entrance controller, at a house or a ground-floor apartment.",
+          "tags": [
+            "Private garages",
+            "Private parking",
+            "Ground-floor apartments"
+          ]
+        },
+        {
+          "icon": "shield-check",
+          "title": "More private, more secure access.",
+          "text": "WIFIGATE protects access with advanced security layers and encrypted storage, and keeps user privacy protected.",
+          "tags": [
+            "Encrypted storage",
+            "Security layers",
+            "Privacy"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Easier and safer. Every day.",
+          "text": "The entry history for the last 90 days shows who opened the garage and when.",
+          "tags": [
+            "Entry history",
+            "90 days"
+          ]
+        }
       ],
       "seoTitle": "Smart Garage Door and Private Parking Access | WIFIGATE",
       "seoDescription": "WIFIGATE opens garage doors and private parking entrances from your phone, with fewer physical remotes, temporary access, and convenient, private access management.",
@@ -252,15 +580,84 @@ export default {
         }
       ],
       "paragraph": "In private homes, keypads, keys, and remotes can become a weak spot. Over time, keypad buttons show wear and marks, remotes get lost or passed around, and the code often goes to couriers, service providers, or guests and stays with them long after it's needed. WIFIGATE lets you manage the entrance from your phone, share temporary guest access without exposing a permanent code, and revoke access easily without changing locks, codes, or remotes.",
-      "bullets": [
-        "Less reliance on keypads, keys, and remotes",
-        "Temporary access for couriers, guests, and service providers",
-        "Revoke access easily from your phone",
-        "Lower risk from shared codes or passed-on remotes",
-        "For gates, doors, parking, and garages at a private home",
-        "Simple management for family and regular users",
-        "A more convenient way in, every day",
-        "More privacy and control over who can enter"
+      "benefits": [
+        {
+          "icon": "send",
+          "title": "Temporary access. For couriers, guests, and technicians.",
+          "text": "Send a time-limited invite that works only during the time you choose, without exposing a permanent code.",
+          "tags": [
+            "Couriers",
+            "Guests",
+            "Technicians"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Guest invite",
+            "status": "Valid",
+            "guest": "Technician",
+            "when": "Today, 10:00–12:00",
+            "note": "Expires on its own"
+          }
+        },
+        {
+          "icon": "key-off",
+          "title": "Less risk from codes and remotes changing hands.",
+          "text": "Everyone has personal access on their phone, so you don't have to give couriers or guests a permanent code or remote.",
+          "tags": [
+            "Personal access",
+            "No permanent code"
+          ]
+        },
+        {
+          "icon": "user-minus",
+          "title": "Revoke access. In seconds, from your phone.",
+          "text": "When someone shouldn't come in anymore, remove their access instantly, without changing locks, codes, or remotes.",
+          "tags": [
+            "Instant removal",
+            "No lock changes"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "More privacy. More control.",
+          "text": "Unlike a shared code, every pass has a name, so you always know who can get into your home.",
+          "tags": [
+            "Access list",
+            "Named passes"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Less reliance on keypads, keys, and remotes.",
+          "text": "Manage entry from your phone instead of relying on a keypad, keys and remotes.",
+          "tags": [
+            "Managed by phone"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "The whole family. Simply managed.",
+          "text": "Add family members and regular users in the app, each with their own personal access.",
+          "tags": [
+            "Family members",
+            "Regular users"
+          ]
+        },
+        {
+          "icon": "gate",
+          "title": "From the gate to the garage.",
+          "text": "WIFIGATE works with gates, front doors, parking, and garage doors at a private home, all opened from one app.",
+          "tags": [
+            "Gates",
+            "Doors",
+            "Garages"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "Everyday entry. Made easier.",
+          "text": "Open with the phone in your pocket each time you come and go, with no code to remember or remote to find."
+        }
       ],
       "seoTitle": "Smart Home Access Without a Shared Keypad Code | WIFIGATE",
       "seoDescription": "WIFIGATE lets you manage home access from your phone, share temporary access with guests and couriers, and rely less on keypads, keys, and remotes.",
@@ -306,15 +703,98 @@ export default {
         }
       ],
       "paragraph": "In a residential building, access doesn't stop at the lobby door: there's a gate, a parking entrance, storage room doors, and sometimes a side door. And it involves more than residents: changing tenants, the HOA or management company, cleaners, maintenance staff, and regular vendors. When all of this runs on one code and a few remotes, every small change (a resident moving out, a lost remote, a new vendor) means changing the code and telling everyone again. WIFIGATE replaces that with organized, building-wide access management.",
-      "bullets": [
-        "Personal access for every resident, instead of one code for everyone",
-        "Add and remove residents without changing the code for the whole building",
-        "Separate permissions for cleaners, maintenance, and regular vendors",
-        "For lobby doors, gates, and parking entrances",
-        "Less reliance on keypads, keys, and remotes",
-        "Access history for the HOA or management company",
-        "Manage all of the building's permissions from your phone",
-        "Access for new tenants from move-in day, with no key handover"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Personal access. For every resident.",
+          "text": "Instead of one code everyone knows and passes on, each resident has access of their own.",
+          "tags": [
+            "No shared code"
+          ],
+          "visual": {
+            "type": "roster",
+            "heading": "Building access",
+            "status": "Active",
+            "rows": [
+              {
+                "name": "Emma Lewis",
+                "badge": "Resident"
+              },
+              {
+                "name": "Daniel Cohen",
+                "badge": "Resident"
+              },
+              {
+                "name": "Grace Miller",
+                "badge": "HOA board"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-plus",
+          "title": "Residents change. Control stays.",
+          "text": "Add and remove residents without changing the building code or telling everyone again.",
+          "tags": [
+            "Add resident",
+            "Revoke access"
+          ]
+        },
+        {
+          "icon": "wrench",
+          "title": "Separate access for service providers",
+          "text": "Cleaners, maintenance staff and regular vendors get access of their own, not the building code.",
+          "tags": [
+            "Cleaning",
+            "Maintenance",
+            "Vendors"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "Not just the lobby door",
+          "text": "Works with the lobby door, gate and parking entrance, and each resident opens them by phone with their own access.",
+          "tags": [
+            "Lobby",
+            "Gate",
+            "Parking"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Fewer codes. Fewer remotes.",
+          "text": "Less reliance on keypads, keys and remotes: the building entrance opens from your phone.",
+          "tags": [
+            "Opens by phone",
+            "Remotes still work"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "More transparency for the HOA",
+          "text": "The entry history shows the HOA or management company who opened and when.",
+          "tags": [
+            "Last 90 days",
+            "Management company"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "All building permissions, right from your phone",
+          "text": "From your phone, manage an up-to-date list of every entry permission in the building, each with a name.",
+          "tags": [
+            "Up-to-date list",
+            "Every pass named"
+          ]
+        },
+        {
+          "icon": "home",
+          "title": "New tenant? Access is ready.",
+          "text": "New tenants get access from move-in day, with no key handover to arrange.",
+          "tags": [
+            "From day one"
+          ]
+        }
       ],
       "seoTitle": "Access Control for Residential Buildings | WIFIGATE",
       "seoDescription": "WIFIGATE brings smart access management to residential buildings: phone-based entry, temporary guest access, less reliance on keypads, and better transparency.",
@@ -360,15 +840,95 @@ export default {
         }
       ],
       "paragraph": "Office buildings need easy entry for employees, visitors, vendors, and operations teams, without overloading reception or managing keys and cards by hand. WIFIGATE lets you give employees permanent access and visitors temporary access, control entry from your phone, and manage it all in a way that fits a modern, clean, and organized workplace.",
-      "bullets": [
-        "Permanent access for employees and teams",
-        "Temporary access for visitors, vendors, and couriers",
-        "Less load on reception and operations staff",
-        "For entrance doors, floors, rooms, and parking",
-        "Organized user and permission management",
-        "Less reliance on keys, access badges, and codes",
-        "A more modern, convenient image for the building",
-        "Access history for oversight and transparency"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Permanent access. For every employee.",
+          "text": "Employees and teams get personal, permanent access on their phone, starting on the date you set.",
+          "visual": {
+            "type": "roster",
+            "heading": "Office team",
+            "status": "Active",
+            "rows": [
+              {
+                "name": "Rachel Adams",
+                "badge": "Permanent"
+              },
+              {
+                "name": "Owen Parker",
+                "badge": "Permanent"
+              },
+              {
+                "name": "Sophie Allen",
+                "badge": "Permanent"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "send",
+          "title": "Time-limited access. For everyone else.",
+          "text": "Visitors get a time-limited invite before they arrive, which can also include arrival directions.",
+          "tags": [
+            "Candidates",
+            "Vendors",
+            "Couriers"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Less load on reception and operations",
+          "text": "Visitors walk in with their phone instead of waiting for someone to come down, and reception handles fewer arrivals.",
+          "tags": [
+            "Reception",
+            "Operations staff"
+          ]
+        },
+        {
+          "icon": "building",
+          "title": "From the front door to the parking garage",
+          "text": "For entrance doors, floors, rooms and parking entrances, all opened from the phone.",
+          "tags": [
+            "Entrance doors",
+            "Floors and rooms",
+            "Parking"
+          ]
+        },
+        {
+          "icon": "list-checks",
+          "title": "Users and permissions. All in order.",
+          "text": "Onboarding and offboarding take one action on the list, and access ends on the date you set.",
+          "tags": [
+            "Onboarding",
+            "Offboarding"
+          ]
+        },
+        {
+          "icon": "card-off",
+          "title": "Fewer badges, keys and codes",
+          "text": "Fewer badges to issue and fewer keys to collect when people leave, since each employee gets in with their own phone.",
+          "tags": [
+            "Phone entry"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "A modern, convenient image for the building",
+          "text": "Employees and visitors get in with their phone, in a way that fits a modern, clean and organized workplace.",
+          "tags": [
+            "Employees",
+            "Visitors"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Every opening has a name and a time",
+          "text": "You can check afterward who entered a floor, the storeroom or the parking garage, for oversight and transparency.",
+          "tags": [
+            "Last 90 days",
+            "Who and when"
+          ]
+        }
       ],
       "seoTitle": "Access Control for Office Buildings | WIFIGATE",
       "seoDescription": "WIFIGATE lets office buildings manage entry for employees, visitors, and vendors from a phone, with temporary and permanent access, managed the modern way.",
@@ -414,15 +974,102 @@ export default {
         }
       ],
       "paragraph": "Small businesses, clinics, studios, warehouses, and offices often rely on a keypad, a key, or a simple magnetic lock. The trouble starts when the code spreads among employees, vendors, and guests, or when temporary access is needed without compromising security. WIFIGATE lets you manage the entry door from your phone, share temporary access, and reduce the need for permanent codes, physical keys, or manual coordination for every entry.",
-      "bullets": [
-        "For entry doors with an electric or magnetic lock",
-        "Phone-based opening for employees and managers",
-        "Temporary access for guests, vendors, and service providers",
-        "Less need for a keypad or permanent code",
-        "For small businesses, clinics, studios, and offices",
-        "Simpler, safer permission management",
-        "Fewer physical keys",
-        "A convenient option for businesses that want modern entry without a complex system"
+      "benefits": [
+        {
+          "icon": "shield-check",
+          "title": "Simple permission management. And safer.",
+          "text": "Every employee, vendor or guest has personal access you can revoke at any moment, and the entry history shows who opened and when.",
+          "tags": [
+            "Revoke anytime",
+            "Entry history"
+          ],
+          "visual": {
+            "type": "history",
+            "heading": "Entry history",
+            "status": "Today",
+            "rows": [
+              {
+                "time": "07:40",
+                "name": "Vendor",
+                "event": "Opened"
+              },
+              {
+                "time": "08:50",
+                "name": "Dana, manager",
+                "event": "Opened"
+              },
+              {
+                "time": "19:30",
+                "name": "Cleaning crew",
+                "event": "Opened"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Temporary access that closes on its own.",
+          "text": "Guests, vendors and service providers get access for their own time window, so the owner doesn't have to come in specially to open up.",
+          "tags": [
+            "Vendors",
+            "Technicians",
+            "Couriers"
+          ]
+        },
+        {
+          "icon": "lock",
+          "title": "The lock already on your door. Now opens by phone.",
+          "text": "WIFIGATE works with entry doors that have an electric or magnetic lock and opens them from your phone, while the existing lock stays in place.",
+          "tags": [
+            "Electric lock",
+            "Magnetic lock"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Employees and managers open by phone.",
+          "text": "Every employee and manager opens the entry door from the app with personal access, so there's less need for manual coordination on each entry.",
+          "tags": [
+            "Employees",
+            "Managers"
+          ]
+        },
+        {
+          "icon": "user-check",
+          "title": "Fewer codes changing hands.",
+          "text": "A code given to everyone can stay with people who no longer need to get in, and personal access reduces the need for a keypad or permanent code.",
+          "tags": [
+            "Keypad",
+            "Permanent code"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Fewer keys on the ring.",
+          "text": "The door opens from the phone, so fewer physical keys circulate among employees and managers.",
+          "tags": [
+            "Physical keys"
+          ]
+        },
+        {
+          "icon": "door-open",
+          "title": "Modern entry. No complex system.",
+          "text": "No control cabinet, management software or card reader to install, with everything managed from the app.",
+          "tags": [
+            "No control cabinet",
+            "No card reader"
+          ]
+        },
+        {
+          "icon": "briefcase",
+          "title": "For small businesses, clinics and offices.",
+          "text": "Small businesses, clinics, studios and offices manage their entry door from the phone and share temporary access when needed.",
+          "tags": [
+            "Clinics",
+            "Offices",
+            "Warehouses"
+          ]
+        }
       ],
       "seoTitle": "Entry Doors and Magnetic Locks for Businesses | WIFIGATE",
       "seoDescription": "WIFIGATE brings smart opening to business entry doors and magnetic locks, with phone-based permission management, temporary access, and less reliance on keypads and keys.",
@@ -468,15 +1115,91 @@ export default {
         }
       ],
       "paragraph": "Sports facilities, padel courts, tennis courts, gyms, and training centers need to manage access for members, coaches, teams, and guests based on opening hours, bookings, and events. WIFIGATE lets you grant temporary or permanent access from your phone, rely less on a shared key or code, and improve the entry experience for users, especially at facilities where traffic shifts throughout the day.",
-      "bullets": [
-        "For padel courts, tennis courts, gyms, and training centers",
-        "Access by opening hours, bookings, or permissions",
-        "Management for members, coaches, staff, and guests",
-        "Less reliance on shared keys and codes",
-        "Fast, convenient entry from your phone",
-        "For facilities with changing opening hours",
-        "Temporary access for events, classes, or training sessions",
-        "Access history for oversight and operations"
+      "benefits": [
+        {
+          "icon": "calendar-check",
+          "title": "Book a court. Access opens with the booking.",
+          "text": "Whoever books a court for a given hour gets access that opens at that hour and closes when it ends.",
+          "tags": [
+            "Opening hours",
+            "Bookings",
+            "Permissions"
+          ],
+          "visual": {
+            "type": "invite",
+            "heading": "Entry invite",
+            "status": "Valid",
+            "guest": "Noa, court 2",
+            "when": "Today 18:00–19:30",
+            "note": "Includes arrival directions"
+          }
+        },
+        {
+          "icon": "users",
+          "title": "Member, coach, guest. Each with their own access.",
+          "text": "Members, coaches on set days, staff and one-time guests are managed on one list, with no keys changing hands.",
+          "tags": [
+            "Members",
+            "Coaches",
+            "Staff and guests"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "Fewer keys. Fewer shared codes.",
+          "text": "A shared code keeps opening the door even when it shouldn't, while personal access ends once it's no longer needed.",
+          "tags": [
+            "Personal access"
+          ]
+        },
+        {
+          "icon": "timer",
+          "title": "Class, training or event. Access for those hours only.",
+          "text": "Class, training and event participants get temporary access that's valid only for the hours you set.",
+          "tags": [
+            "Events",
+            "Classes",
+            "Training sessions"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Know who was on site and when.",
+          "text": "The access history shows who opened and when, helps operations and confirms the facility was locked up at day's end.",
+          "tags": [
+            "Oversight",
+            "Operations",
+            "Last 90 days"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Entry from your phone. Fast and easy.",
+          "text": "Every user opens from the app on their own, so no one has to wait at the gate to let them in.",
+          "tags": [
+            "Direct connection",
+            "No SIM"
+          ]
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Changing hours? So does access.",
+          "text": "Scheduled events can open by day and time, so access matches the facility's opening hours.",
+          "tags": [
+            "Scheduled events",
+            "Weekly or one-time"
+          ]
+        },
+        {
+          "icon": "dumbbell",
+          "title": "From padel courts to gyms.",
+          "text": "For padel and tennis courts, gyms and training centers, especially where traffic shifts throughout the day.",
+          "tags": [
+            "Padel",
+            "Tennis",
+            "Gyms"
+          ]
+        }
       ],
       "seoTitle": "Access Control for Sports Facilities and Padel Courts | WIFIGATE",
       "seoDescription": "WIFIGATE brings smart access control to sports facilities, padel courts, gyms, and training centers, with phone-based entry and temporary or permanent access.",
@@ -522,15 +1245,96 @@ export default {
         }
       ],
       "paragraph": "Storage facilities and locker rooms usually rely on shared codes, keypads, and physical keys that get copied, passed around, and rarely changed. WIFIGATE moves access to the phone: each renter gets personal access to the facility gate, the building entrance, and, where installed, an electrically locked storage unit or locker, limited to the hours you choose and removed the moment the rental ends. The phone communicates directly with the device on site, with no SIM card or internet connection at the door, and no monthly subscription for standard use.",
-      "bullets": [
-        "Open the facility gate, building door, and locker from your phone",
-        "Personal access for every renter",
-        "Access limited to opening hours or a custom window",
-        "One-time access for movers and family members",
-        "Remove access the moment a rental ends",
-        "A history of who opened and when",
-        "No shared codes, keypads, or keys to change",
-        "No SIM card or internet connection at the door"
+      "benefits": [
+        {
+          "icon": "user-check",
+          "title": "Personal access. For every renter.",
+          "text": "Instead of a shared code past renters still remember, each renter has access of their own.",
+          "visual": {
+            "type": "roster",
+            "heading": "Facility access",
+            "status": "Active",
+            "rows": [
+              {
+                "name": "Rachel Stone",
+                "badge": "Authorized"
+              },
+              {
+                "name": "Adam Hayes",
+                "badge": "Authorized"
+              },
+              {
+                "name": "Megan Ford",
+                "badge": "Authorized"
+              }
+            ]
+          }
+        },
+        {
+          "icon": "user-minus",
+          "title": "The rental ends. So does access.",
+          "text": "Remove access the moment the lease ends or a payment is overdue, with no keys to collect.",
+          "tags": [
+            "Lease end",
+            "Overdue payment"
+          ]
+        },
+        {
+          "icon": "smartphone",
+          "title": "Gate, door and locker. From the phone.",
+          "text": "Every renter opens the facility gate, the building door and, where installed, an electrically locked storage unit or locker.",
+          "tags": [
+            "Facility gate",
+            "Building door",
+            "Electric lock"
+          ]
+        },
+        {
+          "icon": "clock",
+          "title": "Access hours you set.",
+          "text": "Allow entry only during the facility's opening hours, or give a renter a wider window.",
+          "tags": [
+            "Opening hours",
+            "Custom window"
+          ]
+        },
+        {
+          "icon": "send",
+          "title": "One-time access. For movers and family.",
+          "text": "A mover or family member can get access for a single day, with no shared code and no key.",
+          "tags": [
+            "Movers",
+            "Family members",
+            "Single day"
+          ]
+        },
+        {
+          "icon": "history",
+          "title": "Know who came in and when.",
+          "text": "Every opening is logged with the user's name and the time, so visit questions are answered from the history, not the security footage.",
+          "tags": [
+            "90 days back",
+            "Name and time"
+          ]
+        },
+        {
+          "icon": "key-off",
+          "title": "No shared codes. No keys to change.",
+          "text": "Codes, keypads and keys that get copied and passed around give way to personal access on the phone.",
+          "tags": [
+            "No keypad",
+            "No keys"
+          ]
+        },
+        {
+          "icon": "sim-off",
+          "title": "No SIM. No internet at the door.",
+          "text": "The phone communicates directly with the device on site, with no monthly subscription for standard use.",
+          "tags": [
+            "Direct connection",
+            "No monthly subscription"
+          ]
+        }
       ],
       "seoTitle": "Smart Access Control for Storage Units and Lockers | WIFIGATE",
       "seoDescription": "WIFIGATE gives each storage or locker renter phone access to the gate, doors, and their locker, limited to opening hours, logged, and removed when the rental ends.",
