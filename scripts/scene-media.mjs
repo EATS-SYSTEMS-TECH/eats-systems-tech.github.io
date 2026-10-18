@@ -145,7 +145,7 @@ export function applyHomeSceneMedia($, { scene, hotelScene, assetPrefix, copy })
     const figure = $("#guest-invites-api .automation-stay");
     const image = figure.children("img");
     if (figure.length !== 1 || image.length !== 1) throw new Error("Hospitality scene image is missing");
-    const media = $("<div>").addClass("automation-stay__media media-watermark-image");
+    const media = $("<div>").addClass("automation-stay__media");
     image.before(media);
     media.append(image.attr("src", sceneAssetUrl(assetPrefix, hotelScene.poster)).attr("width", String(hotelScene.width || 1280)).attr("height", String(hotelScene.height || 720)));
     // The homepage Host card is a photo. Responsive poster selection needs no
