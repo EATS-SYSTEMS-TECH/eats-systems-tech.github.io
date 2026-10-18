@@ -38,6 +38,8 @@
   justify-content: space-between;
   color: var(--home-black);
   cursor: pointer;
+  /* Remove the mobile tap overlay; keep the keyboard focus ring below. */
+  -webkit-tap-highlight-color: transparent;
   font-size: 1.1rem;
   font-weight: 600;
   list-style: none;
