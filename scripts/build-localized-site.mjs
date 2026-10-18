@@ -8,6 +8,8 @@ import { NICHE_CHROME } from "./niche-content.mjs";
 import { benefitIconSvg } from "./benefit-icons.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
 import { LANDING_PAGES, LANDING_PAGE_LOCALES, validateLandingPageLocales } from "./landing-pages/index.mjs";
+import { AUTO_OPEN_PAGE_KEY, getAutoOpenPageContent, validateAutoOpenPageLocales } from "./auto-open-page.mjs";
+import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails } from "./host-marketing-page.mjs";
 import { SITE_LOGIN_LABELS, SITE_NAVIGATION } from "./site-navigation.mjs";
 import { RTL_LANGUAGES, SITE_LANGUAGES } from "./site-languages.mjs";
 import { accessibilityLinkLabels } from "./legal/footer-labels.mjs";
@@ -24,7 +26,7 @@ const repoRoot = process.cwd();
 const siteOrigin = SITE_ORIGIN;
 const defaultLocale = "en";
 const nowDate = new Date().toISOString().slice(0, 10);
-const guestInvitesPageKey = "automation";
+const guestInvitesPageKey = HOST_PAGE_KEY;
 const utilityPageKeys = ["wifigate-link", "wifigate-api"];
 const COOKIE_CONSENT_VERSION = "20261016a";
 
@@ -996,7 +998,8 @@ function serialize($, homeData, locale, pageKey = "home") {
   $("script[src*='js/accessibility-copy.js']").replaceWith(
     `<script>window.accessibilityCopy = ${inlineJson({ [locale]: homeData.accessibilityCopy[locale] })};</script>`
   );
-  $("body").append(`<script src="${prefix}js/cookie-consent.js?v=${COOKIE_CONSENT_VERSION}" defer></script>`);
+  const consentScriptVersion = pageKey === HOST_PAGE_KEY ? "20261018host1" : pageKey === AUTO_OPEN_PAGE_KEY ? "20261018ao1" : COOKIE_CONSENT_VERSION;
+  $("body").append(`<script src="${prefix}js/cookie-consent.js?v=${consentScriptVersion}" defer></script>`);
   const html = $.html({ decodeEntities: false }).replace(/[ \t]+(?=\r?\n|$)/g, "");
   return ensureTrailingNewline(html);
 }
@@ -1096,6 +1099,10 @@ async function buildHomePages(homeData) {
     rewriteHomeInternalLinks($, locale);
     updateHomeWhereLinks($, locale);
     applyHomepageCopy($, homepageCopies[locale], locale);
+    const autoOpenCard = $(".feature-card--auto-open");
+    const autoOpenTitle = autoOpenCard.find(".feature-card__title");
+    autoOpenCard.find(".feature-card__media").wrap($("<a>").attr({ href: buildPagePath(locale, AUTO_OPEN_PAGE_KEY), "aria-label": autoOpenTitle.text() }));
+    autoOpenTitle.wrapInner($("<a>").attr("href", buildPagePath(locale, AUTO_OPEN_PAGE_KEY)));
     applyHomeSceneMedia($, { scene: homeData.sceneMedia.get("homepage-montage"), hotelScene: homeData.sceneMedia.get("hotels-airbnb"),
       assetPrefix: buildAssetPrefix(locale, "home"), copy: homepageCopies[locale].hero.media });
     rewriteHomeGuestInvitesLink($, locale);
@@ -1555,14 +1562,19 @@ function rewriteNicheInternalLinks($, locale) {
     $(element).attr("href", `${home}${hash}`);
   });
   rewriteFooterLegalLinks($, locale);
+  // Existing localized hospitality copy may retain its former public URL.
+  $("a[href]").each((_, element) => {
+    const link = $(element), href = link.attr("href");
+    if (href === buildPagePath(locale, "automation")) link.attr("href", buildPagePath(locale, HOST_PAGE_KEY));
+  });
 }
 
-function setUseCaseMeta($, { pageKey, content, chrome, image: pageImage, locale, localeOptions, published, modified, about, mentions }) {
+function setUseCaseMeta($, { pageKey, content, chrome, image: pageImage, locale, localeOptions, published, modified, about, mentions, service }) {
   const url = buildPageUrl(locale, pageKey);
   const image = {
     url: `${siteOrigin}/${pageImage.og}`,
-    width: 1200,
-    height: 630,
+    width: pageImage.ogWidth || 1200,
+    height: pageImage.ogHeight || 630,
     alt: content.imageAlt,
   };
   const breadcrumb = breadcrumbNode(url, [
@@ -1583,7 +1595,8 @@ function setUseCaseMeta($, { pageKey, content, chrome, image: pageImage, locale,
     graph: [
       webPageNode({ url, title: content.seoTitle, description: content.seoDescription, locale, image, breadcrumbId: breadcrumb["@id"], about, mentions, datePublished: published, dateModified: modified }),
       breadcrumb,
-      faqNode(url, locale, content.faq),
+      ...(content.faq.length ? [faqNode(url, locale, content.faq)] : []),
+      ...(service ? [service] : []),
     ],
   });
 }
@@ -1745,6 +1758,34 @@ async function buildLandingPages(homeData) {
   return sitemapEntries;
 }
 
+async function buildAutoOpenPages(homeData) {
+  const template = await readHtmlTemplate(nicheTemplatePath);
+  const scene = homeData.sceneMedia.get("auto-open-futuristic");
+  if (!scene) throw new Error("Accepted Auto Open scene is required");
+  const image = { hero: scene.poster.path, og: scene.poster.path, heroWidth: scene.width, heroHeight: scene.height, ogWidth: scene.width, ogHeight: scene.height };
+  const sitemapEntries = [];
+  for (const { code: locale } of homeData.localeOptions) {
+    const content = getAutoOpenPageContent(locale, homeData.homepageCopies[locale]);
+    const chrome = getNicheChrome(locale);
+    const $ = cheerio.load(template, { decodeEntities: false });
+    setBodyDirection($, locale);
+    $("body").addClass("auto-open-page");
+    rewriteStaticAssets($, locale, AUTO_OPEN_PAGE_KEY);
+    appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, AUTO_OPEN_PAGE_KEY);
+    fillUseCaseBody($, { chrome, content, image, locale, pageKey: AUTO_OPEN_PAGE_KEY, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
+    $("#niche-benefits, #niche-faq, #niche-prev-link, #niche-next-link").remove();
+    $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
+    setUseCaseNavigation($, { chrome, content });
+    applyNicheSceneMedia($, { scene, assetPrefix: buildAssetPrefix(locale, AUTO_OPEN_PAGE_KEY), copy: homeData.homepageCopies[locale].hero.media });
+    updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer);
+    rewriteNicheInternalLinks($, locale);
+    setUseCaseMeta($, { pageKey: AUTO_OPEN_PAGE_KEY, content, chrome, image, locale, localeOptions: homeData.localeOptions });
+    await writeOutputFile(buildOutputFilePath(locale, AUTO_OPEN_PAGE_KEY), serialize($, homeData, locale, AUTO_OPEN_PAGE_KEY));
+    sitemapEntries.push({ loc: buildPageUrl(locale, AUTO_OPEN_PAGE_KEY), changefreq: "monthly", priority: "0.8" });
+  }
+  return sitemapEntries;
+}
+
 // The WIFIGATE Host page copy: scripts/host-page-copy/<locale>.mjs.
 const hostPageCopyCache = new Map();
 async function loadHostPageCopy(locale) {
@@ -1756,61 +1797,12 @@ async function loadHostPageCopy(locale) {
   return hostPageCopyCache.get(locale) || loadHostPageCopy(defaultLocale);
 }
 
-function rewriteGuestInvitesInternalLinks($, locale) {
-  const home = buildPagePath(locale, "home");
-
-  $("a[href^='../index.html']").each((_, element) => {
-    const href = $(element).attr("href") || "";
-    const hashIndex = href.indexOf("#");
-    const hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
-    $(element).attr("href", `${home}${hash}`);
-  });
-  rewriteFooterLegalLinks($, locale);
-}
-
-function reorderGuestInvitesSections($) {
-  const hero = $(".wa-hero");
-  const pricing = $(".wa-pricing");
-  if (hero.length && pricing.length) {
-    hero.after(pricing);
-  }
-}
-
-function setGuestInvitesMeta($, locale, localeOptions, strings) {
-  const url = buildPageUrl(locale, guestInvitesPageKey);
-  const breadcrumb = breadcrumbNode(url, [
-    { name: "WIFIGATE", url: buildPageUrl(locale, "home") },
-    { name: "WIFIGATE Host", url },
-  ]);
-
-  setPageMeta($, {
-    locale,
-    url,
-    title: strings.metaTitle,
-    description: strings.metaDescription,
-    alternates: alternatesFor(localeOptions, guestInvitesPageKey),
-    image: pageImages.guestInvites,
-    graph: [
-      webPageNode({ url, title: strings.metaTitle, description: strings.metaDescription, locale, image: pageImages.guestInvites, breadcrumbId: breadcrumb["@id"] }),
-      breadcrumb,
-      // WIFIGATE Host: the commercial service that turns bookings into
-      // time-limited guest access.
-      {
-        "@type": "Service",
-        "@id": `${siteOrigin}/automation/#service`,
-        name: "WIFIGATE Host",
-        serviceType: "Automated guest access for hospitality",
-        provider: { "@id": ORGANIZATION_ID },
-        brand: { "@id": BRAND_ID },
-        url: buildPageUrl(defaultLocale, guestInvitesPageKey),
-        description: strings.metaDescription,
-      },
-    ],
-  });
-}
-
 async function buildGuestInvitesPages(homeData) {
-  const template = await readHtmlTemplate(guestInvitesTemplatePath);
+  const template = await readHtmlTemplate(nicheTemplatePath);
+  const legacyTemplate = await readHtmlTemplate(guestInvitesTemplatePath);
+  const scene = homeData.sceneMedia.get("hotels-airbnb");
+  if (!scene) throw new Error("Accepted hospitality media is required for WIFIGATE Host");
+  const image = { hero: scene.poster.path, og: scene.poster.path, heroWidth: scene.width, heroHeight: scene.height, ogWidth: scene.width, ogHeight: scene.height };
   const sitemapEntries = [];
 
   for (const localeOption of homeData.localeOptions) {
@@ -1818,25 +1810,35 @@ async function buildGuestInvitesPages(homeData) {
     const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale);
     const hostCopy = await loadHostPageCopy(locale);
     const $ = cheerio.load(template, { decodeEntities: false });
+    const legacy = cheerio.load(legacyTemplate, { decodeEntities: false });
+    const content = getHostPageContent(hostCopy, homeData.homepageCopies[locale]);
+    const chrome = getNicheChrome(locale);
 
     setBodyDirection($, locale);
+    $("body").addClass("wifigate-host-page");
     rewriteStaticAssets($, locale, guestInvitesPageKey);
     appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, guestInvitesPageKey);
-    applyDataI18nTranslations($, { nav: { home: getNicheChrome(locale).homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
+    fillUseCaseBody($, { chrome, content, image, locale, pageKey: guestInvitesPageKey, accessibilityBundle });
+    $("#niche-faq, #niche-prev-link, #niche-next-link").remove();
+    $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
+    setUseCaseNavigation($, { chrome, content });
+    applyNicheSceneMedia($, { scene, assetPrefix: buildAssetPrefix(locale, guestInvitesPageKey), copy: homeData.homepageCopies[locale].hero.media });
+    rewriteStaticAssets(legacy, locale, guestInvitesPageKey);
+    applyDataI18nTranslations(legacy, { nav: { home: chrome.homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
+    appendHostMarketingDetails($, { legacyTemplate: legacy });
+    $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, guestInvitesPageKey)}css/automation.css?v=20261007c" />`);
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer);
-    updateAccessibilityMarkup($, accessibilityBundle, locale);
-    rewriteGuestInvitesInternalLinks($, locale);
-    reorderGuestInvitesSections($);
-    setGuestInvitesMeta($, locale, homeData.localeOptions, hostCopy);
+    rewriteNicheInternalLinks($, locale);
+    setUseCaseMeta($, { pageKey: guestInvitesPageKey, content, chrome, image, locale, localeOptions: homeData.localeOptions,
+      service: { "@type": "Service", "@id": `${siteOrigin}/${HOST_PAGE_KEY}/#service`, name: "WIFIGATE Host", serviceType: "Automated guest access for hospitality", provider: { "@id": ORGANIZATION_ID }, brand: { "@id": BRAND_ID }, url: buildPageUrl(defaultLocale, guestInvitesPageKey), description: hostCopy.metaDescription } });
 
     const outputFile = buildOutputFilePath(locale, guestInvitesPageKey);
     await writeOutputFile(outputFile, serialize($, homeData, locale, guestInvitesPageKey));
 
-    // Preserve the former public Host marketing URL discovered in Search Console.
-    await writeOutputFile(
-      buildOutputFilePath(locale, "Automated-Guest-Invites-API"),
-      buildRedirectPage(buildPagePath(locale, guestInvitesPageKey), buildPageUrl(locale, guestInvitesPageKey))
-    );
+    // Both historical marketing URLs go directly to the localized canonical.
+    for (const alias of ["automation", "Automated-Guest-Invites-API"]) {
+      await writeOutputFile(buildOutputFilePath(locale, alias), buildRedirectPage(buildPagePath(locale, guestInvitesPageKey), buildPageUrl(locale, guestInvitesPageKey)));
+    }
 
     sitemapEntries.push({
       loc: buildPageUrl(locale, guestInvitesPageKey),
@@ -1878,7 +1880,7 @@ async function main() {
   }
 
   const localeCodes = homeData.localeOptions.map((option) => option.code);
-  const contentProblems = [...validateNichePageLocales(localeCodes), ...validateLandingPageLocales(localeCodes)];
+  const contentProblems = [...validateNichePageLocales(localeCodes), ...validateLandingPageLocales(localeCodes), ...validateAutoOpenPageLocales(localeCodes, homeData.homepageCopies)];
   if (contentProblems.length) {
     throw new Error(
       `Niche page content validation failed (${contentProblems.length} problems):\n  ${contentProblems.join("\n  ")}`
@@ -1897,6 +1899,7 @@ async function main() {
   sitemapEntries.push(...(await buildLegalPages(homeData, legalCollections)));
   sitemapEntries.push(...(await buildNichePages(homeData)));
   sitemapEntries.push(...(await buildLandingPages(homeData)));
+  sitemapEntries.push(...(await buildAutoOpenPages(homeData)));
   // Consent-runtime delivery updates consumer assets without regenerating
   // Business automation, invitation/API utilities or authentication pages.
   if (process.argv.includes("--consumer-consent-only")) {

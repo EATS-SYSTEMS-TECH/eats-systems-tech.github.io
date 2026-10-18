@@ -60,8 +60,8 @@ test("media cache versions follow delivered artifact hashes across home, hotel a
   assert.equal($("#home img").attr("src"), imageUrl);
   assert.equal($("#hero-video").attr("data-video-src"), videoUrl);
   assert.equal($("#hero-video").attr("poster"), imageUrl);
-  assert.equal($("#guest-invites-api video").attr("data-video-src"), videoUrl);
-  assert.equal($("#guest-invites-api video").attr("poster"), $("#guest-invites-api img").attr("src"));
+  assert.equal($("#guest-invites-api video, #guest-invites-api [data-scene-video], #guest-invites-api button").length, 0, "homepage Host stays static");
+  assert.equal($("#guest-invites-api .automation-stay__media img").attr("src"), imageUrl);
   assert.equal($(".niche-hero video").attr("data-video-src"), "../" + videoUrl);
   assert.equal($(".niche-hero video").attr("poster"), $("#niche-image").attr("src"));
   assert.notEqual(sceneAssetUrl("../", { ...scene.video, sha256: hash("replacement video") }), videoUrl, "replacing bytes invalidates old video cache");
@@ -84,17 +84,27 @@ test("responsive renderer provides native selected posters and inert video varia
   assert.equal($("script[src*='media-runtime.js']").length, 1);
 });
 
-test("accepted desktop Auto Open replaces only its existing feature media and remains explicit mobile fallback", () => {
+test("the Auto Open video page uses the accepted desktop pair as its explicit mobile fallback", () => {
   const artifact = { accepted: true, video: { path: "assets/vid/home/desktop/auto-open-futuristic-1080p.mp4", sha256: hash("auto desktop") }, poster: { path: "assets/img/desktop/auto-open-futuristic-scene.webp", sha256: hash("auto first frame") }, width: 1920, height: 1080 };
-  const $ = cheerio.load('<html><head></head><body><article class="feature-card--auto-open"><figure class="feature-card__media"><img class="feature-card__image" src="auto_open.svg" alt="Auto Open"></figure><h3>Automatic arrival</h3><p>Keep both hands free.</p></article><article class="other"><img src="other.svg"><h3>Other feature</h3></article></body></html>');
-  const other = $(".other").toString();
-  applyHomeSceneMedia($, { autoOpenScene: { key: "auto-open-futuristic", ...artifact, variants: { desktop: artifact } }, assetPrefix: "../", copy: { play: "Play", pause: "Pause", replay: "Replay" } });
-  assert.equal($(".other").toString(), other);
-  assert.equal($("h3").first().text(), "Automatic arrival"); assert.equal($("p").text(), "Keep both hands free.");
-  assert.equal($("[data-scene-image]").attr("alt"), "Auto Open");
+  const $ = cheerio.load('<html><head></head><body class="niche-page"><section class="niche-hero"><div class="niche-hero__media"><img id="niche-image" alt="Automatic arrival"></div><h1>Keep both hands free.</h1><div class="niche-hero__actions"></div><div class="niche-hero__pager"></div></section></body></html>');
+  applyNicheSceneMedia($, { scene: { key: "auto-open-futuristic", ...artifact, variants: { desktop: artifact } }, assetPrefix: "../../", copy: { play: "Play", pause: "Pause", replay: "Replay" } });
+  assert.equal($("h1").text(), "Keep both hands free.");
+  assert.equal($("[data-scene-image]").attr("alt"), "Automatic arrival");
   const variants = JSON.parse($("video").attr("data-media-variants"));
   assert.deepEqual(variants.mobile, variants.desktop, "no invented mobile clip; both choices bind accepted desktop poster/video");
   assert.equal($("video").attr("src"), undefined);
+  assert.equal(variants.desktop.src, sceneAssetUrl("../../", artifact.video));
+  assert.equal(variants.mobile.poster, sceneAssetUrl("../../", artifact.poster));
+  assert.equal($(".niche-hero__actions [data-scene-replay]").length, 1);
+  assert.equal($(".niche-hero__pager [data-scene-pause]").length, 1);
+});
+
+test("homepage scene rendering preserves the Auto Open feature SVG and its navigation link", () => {
+  const $ = cheerio.load('<html><head></head><body><article class="feature-card--auto-open"><a href="/he/auto-open/"><figure class="feature-card__media"><img class="feature-card__image" src="auto_open.svg" alt="Auto Open"></figure><h3>Automatic arrival</h3></a><p>Keep both hands free.</p></article></body></html>');
+  const before = $(".feature-card--auto-open").toString();
+  applyHomeSceneMedia($, { assetPrefix: "../../", copy: { play: "Play", pause: "Pause", replay: "Replay" } });
+  assert.equal($(".feature-card--auto-open").toString(), before);
+  assert.equal($("video, [data-scene-video]").length, 0);
 });
 
 test("schema2 accepts reviewed1080p variants, ignores pending variants and protects legacy fallback", async () => {
@@ -171,7 +181,7 @@ test("only accepted, unchanged scene artifacts enter pages", async () => {
   }
 });
 
-test("homepage montage and reused hotel scene leave the courier static and retain localized content", () => {
+test("homepage montage keeps the Host poster and courier static and retains localized content", () => {
   const $ = cheerio.load(`<html><head></head><body><section id="home" class="hero"><div class="hero__media"><img class="hero__bg--image"><video id="hero-video" loop><source src="old.mp4"></video><button id="hero-mute-toggle"></button><button id="hero-pause-toggle"></button><button id="hero-replay" hidden></button></div><h1>One app.</h1></section>
     <section id="private-access"><img class="security-statement__media-image" src="courier.webp" alt="Arrival"></section>
     <section id="guest-invites-api"><h2>WIFIGATE Host</h2><figure class="automation-stay"><img alt="Guests enter"><figcaption>Booking received</figcaption></figure></section></body></html>`);
@@ -188,11 +198,11 @@ test("homepage montage and reused hotel scene leave the courier static and retai
   assert.equal($("#hero-video").attr("data-silent"), "true");
   assert.equal($("#hero-video").attr("poster"), $("#home img").attr("src"));
   assert.ok($("#hero-mute-toggle").is("[hidden]"));
-  assert.equal($("#guest-invites-api [data-scene-video]").length, 1);
+  assert.equal($("#guest-invites-api [data-scene-video], #guest-invites-api video, #guest-invites-api .scene-video-controls, #guest-invites-api [data-scene-copy]").length, 0);
   assert.equal($("#guest-invites-api h2").text(), "WIFIGATE Host");
   assert.equal($("#guest-invites-api figcaption").text(), "Booking received");
-  assert.equal($("#guest-invites-api video").attr("src"), undefined);
-  assert.equal($("#guest-invites-api [data-scene-image]").attr("alt"), "Guests enter");
+  assert.equal($("#guest-invites-api .automation-stay__media img").attr("src"), "../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp");
+  assert.equal($("#guest-invites-api img").attr("alt"), "Guests enter");
 });
 
 test("localized niche media preserves the image, has no automatic source, and stays out of absent scenes", () => {

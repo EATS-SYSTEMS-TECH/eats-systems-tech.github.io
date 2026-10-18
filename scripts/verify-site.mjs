@@ -16,6 +16,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { NICHE_DEFINITIONS } from "./niche-pages/index.mjs";
 import { LANDING_PAGES } from "./landing-pages/index.mjs";
+import { AUTO_OPEN_PAGE_KEY } from "./auto-open-page.mjs";
+import { HOST_PAGE_KEY } from "./host-marketing-page.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = "https://wifigate.io";
@@ -33,10 +35,11 @@ const hreflangPattern = /^(x-default|[a-z]{2}(-[A-Z][a-z]{3})?(-[A-Z]{2})?)$/;
 const nicheKeys = NICHE_DEFINITIONS.map((n) => n.key);
 const legalPages = ["privacy-policy", "terms-and-conditions", "cookies", "accessibility"];
 const landingKeys = LANDING_PAGES.map((page) => page.key);
-const indexablePages = ["home", "automation", ...nicheKeys, ...landingKeys];
+const indexablePages = ["home", HOST_PAGE_KEY, AUTO_OPEN_PAGE_KEY, ...nicheKeys, ...landingKeys];
 const interactivePages = [
   "home",
-  "automation",
+  HOST_PAGE_KEY,
+  AUTO_OPEN_PAGE_KEY,
   ...nicheKeys,
   ...landingKeys,
   "cookies",
@@ -269,7 +272,14 @@ async function main() {
             problems.push(`${rel}: every landing FAQ question must be a heading`);
           }
         }
+      } else if (pageKey === AUTO_OPEN_PAGE_KEY) {
+        if ($(".niche-highlight").length !== 3 || $(".niche-highlight__icon svg").length !== 3) problems.push(`${rel}: Auto Open needs three marketing highlights`);
+        if ($("#niche-benefits, #niche-faq, #niche-prev-link, #niche-next-link").length) problems.push(`${rel}: Auto Open has unrelated use-case sections or navigation`);
+        if ($(".niche-hero video[data-media-variants]").length !== 1 || $(".niche-hero [data-scene-replay]").length !== 1) problems.push(`${rel}: Auto Open video and replay are missing`);
       } else if (pageKey === "home") {
+        const autoOpenCard = $(".feature-card--auto-open");
+        if (autoOpenCard.find("video, picture, [data-scene-video], [data-media-watermark]").length || !autoOpenCard.find("img[src*='wifigate_features/auto_open.svg']").length) problems.push(`${rel}: Auto Open feature must display its original icon`);
+        if (autoOpenCard.find("a").length !== 2 || autoOpenCard.find("a").toArray().some(element => $(element).attr("href") !== pagePath(locale, AUTO_OPEN_PAGE_KEY))) problems.push(`${rel}: Auto Open feature links must use the localized page`);
         const links = $(".where-list__link[data-niche-key]").length;
         if (links !== nicheKeys.length) {
           problems.push(`${rel}: ${links} where-list links, expected ${nicheKeys.length}`);
@@ -365,12 +375,12 @@ async function main() {
     }
 
     // Legacy routes must redirect to the new locations.
-    {
-      const legacyFile = pageFile(locale, "Automated-Guest-Invites-API");
+    for (const alias of ["automation", "Automated-Guest-Invites-API"]) {
+      const legacyFile = pageFile(locale, alias);
       const html = await fs.readFile(legacyFile, "utf8");
-      const target = pagePath(locale, "automation");
+      const target = pagePath(locale, HOST_PAGE_KEY);
       if (html.includes("noindex") || !html.includes(`url=${target}`) || !html.includes(`rel="canonical" href="${siteOrigin}${target}"`)) {
-        problems.push(`${locale}/Automated-Guest-Invites-API: must redirect to ${target} without noindex`);
+        problems.push(`${locale}/${alias}: must redirect to ${target} without noindex`);
       }
     }
     for (const niche of NICHE_DEFINITIONS) {

@@ -4,6 +4,7 @@ import { chromium } from "playwright-core";
 import { analyticsFixture, configuredMeasurementId, fixtureMeasurementId } from "./analytics-test-fixture.mjs";
 import { NICHE_DEFINITIONS } from "./niche-pages/index.mjs";
 import { SITE_LANGUAGES } from "./site-languages.mjs";
+import { AUTO_OPEN_PAGE_KEY } from "./auto-open-page.mjs";
 
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 after(() => browser.close());
@@ -241,6 +242,8 @@ test("all published locales and consumer niche routes are eligible", async () =>
   const fixture = await analyticsFixture(browser, { consent: accepted() });
   try {
     const paths = [...locales.map((locale) => locale === "en" ? "/" : `/${locale}/`),
+      ...locales.map((locale) => `/${locale === "en" ? "" : `${locale}/`}${AUTO_OPEN_PAGE_KEY}/`),
+      ...locales.map((locale) => `/${locale === "en" ? "" : `${locale}/`}wifigate-host/`),
       ...NICHE_DEFINITIONS.map(({ key }) => `/${key}/`),
       "/automation/", "/cookies/", "/privacy-policy/", "/terms-and-conditions/", "/accessibility/", "/contact-us/", "/he/index.html"];
     for (const pathname of paths) {

@@ -124,7 +124,7 @@ export function applyNicheSceneMedia($, { scene, assetPrefix, copy }) {
   if (pager.length === 1) pager.prepend($(".niche-hero__media > .scene-video-controls"));
 }
 
-export function applyHomeSceneMedia($, { scene, hotelScene, autoOpenScene, assetPrefix, copy }) {
+export function applyHomeSceneMedia($, { scene, hotelScene, assetPrefix, copy }) {
   if (scene) {
     const hero = $("#home.hero");
     const image = hero.find("img.hero__bg--image");
@@ -145,15 +145,17 @@ export function applyHomeSceneMedia($, { scene, hotelScene, autoOpenScene, asset
     const figure = $("#guest-invites-api .automation-stay");
     const image = figure.children("img");
     if (figure.length !== 1 || image.length !== 1) throw new Error("Hospitality scene image is missing");
-    const media = $("<div>").addClass("automation-stay__media");
+    const media = $("<div>").addClass("automation-stay__media media-watermark-image");
     image.before(media);
-    media.append(image.attr("width", "1280").attr("height", "720"));
-    attachScene($, { scene: hotelScene, assetPrefix, copy, image, container: media, media });
-  }
-  if (autoOpenScene) {
-    const media = $(".feature-card--auto-open .feature-card__media");
-    const image = media.children("img");
-    if (media.length !== 1 || image.length !== 1) throw new Error("Auto Open feature media is missing");
-    attachScene($, { scene: autoOpenScene, assetPrefix, copy, image, container: media, media });
+    media.append(image.attr("src", sceneAssetUrl(assetPrefix, hotelScene.poster)).attr("width", String(hotelScene.width || 1280)).attr("height", String(hotelScene.height || 720)));
+    // The homepage Host card is a photo. Responsive poster selection needs no
+    // video element, playback data, controls or media-runtime registration.
+    if (Object.values(hotelScene.variants || {}).some(variant => variant?.accepted)) {
+      image.wrap($("<picture>"));
+      for (const [name, query] of [["desktop", "(min-width: 769px)"], ["mobile", "(max-width: 768px)"]]) {
+        const artifact = hotelScene.variants?.[name]?.accepted ? hotelScene.variants[name] : hotelScene;
+        image.before($("<source>").attr("media", query).attr("srcset", sceneAssetUrl(assetPrefix, artifact.poster)));
+      }
+    }
   }
 }

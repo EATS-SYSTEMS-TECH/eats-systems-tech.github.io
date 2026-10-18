@@ -11,7 +11,7 @@ The website is published in 39 languages; every page has a language version at /
 ## Product
 
 - [WIFIGATE home](https://wifigate.io/): what WIFIGATE is, how it works, use cases and FAQ.
-- [WIFIGATE Host](https://wifigate.io/automation/): From hotels to vacation rentals, link every booking to secure access for the right gate, door, or garage. Guests get in with their phone, and access starts at check-in and ends automatically at checkout.
+- [WIFIGATE Host](https://wifigate.io/wifigate-host/): From hotels to vacation rentals, link every booking to secure access for the right gate, door, or garage. Guests get in with their phone, and access starts at check-in and ends automatically at checkout.
 
 ## Use cases
 

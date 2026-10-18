@@ -286,7 +286,7 @@ test("signed-in account in the shared header", async (t) => {
   });
 
   await t.test("every page type with the shared header carries the account", async () => {
-    for (const route of ["/hotels-airbnb/", "/automation/", "/he/automation/", "/he/cookies/", "/accessibility/"]) {
+    for (const route of ["/hotels-airbnb/", "/wifigate-host/", "/he/wifigate-host/", "/he/cookies/", "/accessibility/"]) {
       const fixture = await scenario(browser, origin, { firebase: false });
       const { page } = fixture;
       await page.goto(origin + route);

@@ -15,7 +15,7 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
     "id", "th", "vi", "ms", "fil",
   ]);
   const analyticsPages = new Set([
-    "", "automation", "hotels-airbnb", "roller-shutters", "electric-gates",
+    "", "automation", "auto-open", "wifigate-host", "hotels-airbnb", "roller-shutters", "electric-gates",
     "garage-doors", "private-homes", "residential-buildings", "office-buildings",
     "entry-doors-magnetic-locks", "sports-facilities", "storage-lockers",
     "privacy-policy", "terms-and-conditions", "cookies", "accessibility", "contact-us",
