@@ -26,6 +26,12 @@
   height: auto;
   border-radius: inherit;
 }
+/* Use-case copy ends above at least 2rem of bottom padding. This compact mark
+   fits beneath sibling replay/contact actions without changing their layout. */
+.niche-hero__media > .media-watermark {
+  width: clamp(28px, 10%, 38px);
+  bottom: 8px;
+}
 /* Reserve the default accessibility button's corner on LTR heroes. In RTL the
    button occupies the left corner, so the brand keeps its physical right edge. */
 html:not([dir="rtl"]) :is(.hero__media, .niche-hero__media) > .media-watermark {

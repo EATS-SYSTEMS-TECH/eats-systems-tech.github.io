@@ -8,10 +8,16 @@ const screenshots = process.env.SCREENSHOT_DIR;
 const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL || "chrome", headless: true });
 const overlaps = (a, b) => a.x < b.right && a.right > b.x && a.y < b.bottom && a.bottom > b.y;
 let cases = 0;
+// Start with the accepted-review regression: RTL use-case actions are siblings
+// of the media layer, and can reach its lower-right corner on desktop.
+const scenarios = [];
+for (const locale of ["he/", ""]) for (const width of [1280, 390]) scenarios.push({ locale, route: "roller-shutters/", width, height: 900 });
+for (const locale of ["", "he/"]) for (const route of ["roller-shutters/", "shabbat-clock-electric-gate/"]) for (const width of [390, 1280]) for (const height of [700, 600]) scenarios.push({ locale, route, width, height });
+for (const locale of ["", "he/"]) for (const route of ["", "hotels-airbnb/", "shabbat-clock-electric-gate/", "automation/"]) for (const width of [320, 390, 1280]) scenarios.push({ locale, route, width, height: width < 769 ? 844 : 900 });
 try {
   if (screenshots) await fs.mkdir(screenshots, { recursive: true });
-  for (const locale of ["", "he/"]) for (const route of ["", "hotels-airbnb/", "shabbat-clock-electric-gate/", "automation/"]) for (const width of [320, 390, 1280]) {
-    const context = await browser.newContext({ viewport: { width, height: width < 769 ? 844 : 900 } });
+  for (const { locale, route, width, height } of scenarios) {
+    const context = await browser.newContext({ viewport: { width, height } });
     await context.addInitScript(() => {
       localStorage.setItem("wifigate-cookie-consent-v1", JSON.stringify({ version: 1, analytics: false, savedAt: Date.now() }));
       Object.defineProperty(navigator, "connection", { configurable: true, value: { saveData: true } });
@@ -37,25 +43,34 @@ try {
         const box = node => { const r = node.getBoundingClientRect(); return { x: r.x, y: r.y, right: r.right, bottom: r.bottom, width: r.width, height: r.height }; };
         const mark = element.querySelector(":scope > [data-media-watermark]");
         const style = getComputedStyle(mark), bounds = box(mark);
-        const controls = [...element.querySelectorAll("button,a,input")].filter(node => { const s = getComputedStyle(node); return s.display !== "none" && s.visibility !== "hidden"; }).map(box);
+        const heroElement = element.closest(".hero, .niche-hero");
+        const owner = heroElement || element;
+        const visible = node => { const s = getComputedStyle(node), r = node.getBoundingClientRect(); return s.display !== "none" && s.visibility !== "hidden" && r.width > 0 && r.height > 0; };
+        const namedBox = node => ({ ...box(node), name: (node.getAttribute("aria-label") || node.textContent || node.tagName).trim().slice(0, 80) });
+        // Primary hero actions live outside the media frame. Include all of
+        // them, plus copy blocks, rather than checking only video controls.
+        const controls = [...owner.querySelectorAll("button,a,input")].filter(visible).map(namedBox);
+        const text = heroElement ? [...heroElement.querySelectorAll("h1,h2,p,.hero__proof,.niche-hero__eyebrow,.niche-hero__breadcrumb")].filter(visible).map(namedBox) : [];
         const hit = document.elementFromPoint(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
         const hero = element.matches(".hero__media, .niche-hero__media");
         const rootSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
         const expectedRight = hero && document.documentElement.dir !== "rtl"
           ? Math.min(Math.max(rootSize, innerWidth * .02 + rootSize * .8), rootSize * 1.75) + rootSize * 3.75 + 12 : 12;
-        return { frame: box(element), mark: bounds, pointer: style.pointerEvents, opacity: Number(style.opacity), background: style.backgroundImage, ariaHidden: mark.getAttribute("aria-hidden"), markHit: hit === mark, controls, hero, expectedRight, accessibility: box(document.getElementById("a11y-fab")) };
+        const niche = element.matches(".niche-hero__media");
+        return { frame: box(element), mark: bounds, pointer: style.pointerEvents, opacity: Number(style.opacity), background: style.backgroundImage, ariaHidden: mark.getAttribute("aria-hidden"), markHit: hit === mark, controls, text, hero, niche, expectedRight, expectedBottom: niche ? 8 : 12, accessibility: box(document.getElementById("a11y-fab")) };
       });
-      const name = `${locale || "en"}/${route || "home"}/${width}/${index}`;
+      const name = `${locale || "en"}/${route || "home"}/${width}x${height}/${index}`;
       assert.equal(result.pointer, "none", `${name}: layer cannot intercept clicks`);
       assert.equal(result.ariaHidden, "true");
       assert.equal(result.markHit, false);
       assert.match(result.background, /wifigate-watermark\.png\?v=d4e6db34dc50/);
       assert.ok(result.opacity > 0 && result.opacity < 1);
-      assert.ok(result.mark.width >= 39.9 && result.mark.width <= 96.1);
+      for (const control of result.controls) assert.equal(overlaps(result.mark, control), false, `${name}: watermark clears the whole hero action: ${control.name}`);
+      for (const block of result.text) assert.equal(overlaps(result.mark, block), false, `${name}: watermark clears hero copy: ${block.name}`);
+      assert.ok(result.mark.width >= (result.niche ? 27.9 : 39.9) && result.mark.width <= (result.niche ? 38.1 : 96.1));
       assert.ok(Math.abs(result.frame.right - result.mark.right - result.expectedRight) < 1.1, `${name}: mark stays at physical right with the LTR hero's accessibility clearance`);
-      assert.ok(Math.abs(result.frame.bottom - result.mark.bottom - 12) < 1.1, `${name}: mark stays at bottom`);
+      assert.ok(Math.abs(result.frame.bottom - result.mark.bottom - result.expectedBottom) < 1.1, `${name}: mark stays at bottom`);
       assert.ok(result.mark.x >= result.frame.x && result.mark.y >= result.frame.y);
-      for (const control of result.controls) assert.equal(overlaps(result.mark, control), false, `${name}: watermark clears media actions`);
       if (result.hero) assert.equal(overlaps(result.mark, result.accessibility), false, `${name}: watermark clears the default floating accessibility button`);
     }
     await page.locator("main").scrollIntoViewIfNeeded();
@@ -77,7 +92,7 @@ try {
     for (let index = 0; index < geometry.original.length; index++) for (const key of ["x", "y", "width", "height"]) assert.ok(Math.abs(geometry.original[index][key] - geometry.withLayer[index][key]) < .6, `${locale}${route}/${width}: original layout ${index}/${key} is preserved`);
     if (screenshots) {
       await page.reload({ waitUntil: "networkidle" });
-      await page.screenshot({ path: path.join(screenshots, `${locale ? "he" : "en"}-${route.replace(/\/$/, "") || "home"}-${width}.png`), fullPage: !route });
+      await page.screenshot({ path: path.join(screenshots, `${locale ? "he" : "en"}-${route.replace(/\/$/, "") || "home"}-${width}x${height}.png`), fullPage: !route });
     }
     cases++;
     await context.close();
