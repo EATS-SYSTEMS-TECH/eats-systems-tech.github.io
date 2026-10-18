@@ -81,13 +81,17 @@ function setupHeroMedia() {
     if (!manual && (!inView || !heroVideoMayAutoplay() || pausedByVisitor || finished || document.hidden)) return;
     const current = ++generation;
     if (manual) pausedByVisitor = false;
+    await window.WifigateMedia?.prepare(video, image);
+    if (current !== generation) return;
     try { await image?.decode(); } catch { /* Explicit video playback can recover a failed poster. */ }
     if (current !== generation || (!manual && (!inView || !heroVideoMayAutoplay() || document.hidden))) return;
     if (!video.getAttribute("src") && video.dataset.videoSrc) video.setAttribute("src", video.dataset.videoSrc);
     if (restart) { finished = false; video.currentTime = 0; }
     try {
       await video.play();
-      if (current !== generation) { video.pause(); return; }
+      // Stop/policy handlers own pausing; a stale completion cannot cancel a
+      // newer visitor play/resume request.
+      if (current !== generation) return;
     } catch { if (current === generation) showHeroImageState(); }
     updateHeroMediaCopy();
   }

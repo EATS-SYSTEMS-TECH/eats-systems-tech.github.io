@@ -1,4 +1,5 @@
 [data-scene-video] { position: relative; }
+picture[data-scene-picture] { display: contents; }
 [data-scene-video] video[data-video-src] {
   position: absolute;
   inset: 0;
@@ -36,6 +37,27 @@
 /* Preserve the original hospitality image frame when it becomes a video. */
 .automation-stay__media { aspect-ratio: 1.1; overflow: hidden; }
 .automation-stay__media video[data-video-src] { object-position: 35% center; }
+/* The accepted Auto Open scene replaces only this feature's former icon. */
+.home-en .feature-card--auto-open .feature-card__media[data-scene-video] {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.home-en .feature-card--auto-open [data-scene-image] {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  filter: none;
+  transform: none;
+}
+.home-en .feature-card--auto-open .scene-video-controls { max-width: calc(100% - 2rem); }
+.home-en .feature-card--auto-open .scene-video-controls button { white-space: normal; }
 /* New clips use the original image hero, including its text overlay and crop. */
 .home-en .hero[data-hero-scene] .hero__bg--video { transform: none; }
 .home-en .hero[data-hero-scene][data-hero-media-state="video"] .hero__bg--video { display: block; }

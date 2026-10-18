@@ -9,6 +9,19 @@ import { readSceneManifest, applyNicheSceneMedia, applyHomeSceneMedia, sceneAsse
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
+test("existing scene styles and controllers receive the current asset version without duplicates", () => {
+  for (const existingController of [false, true]) {
+    const $ = cheerio.load(`<html><head><link rel="stylesheet" href="../css/scene-video.css?v=20261018b"><script src="../js/hero.js?v=20261018b" defer></script><script src="../js/media-runtime.js?v=old" defer></script>${existingController ? '<script src="../js/scene-video.js?v=20261018b" defer></script>' : ""}</head><body><section class="niche-hero"><div class="niche-hero__media"><img id="niche-image"></div></section></body></html>`);
+    applyNicheSceneMedia($, { scene: { poster: { path: "assets/img/scene.webp" }, video: { path: "assets/vid/use-cases/roller-shutters-720p.mp4" } }, assetPrefix: "../../", copy: { play: "Play", pause: "Pause", replay: "Replay" } });
+    assert.equal($("link[href*='scene-video.css']").length, 1);
+    assert.equal($("link[href*='scene-video.css']").attr("href"), "../../css/scene-video.css?v=20261018c");
+    for (const name of ["hero", "scene-video", "media-runtime"]) {
+      assert.equal($(`script[src*='js/${name}.js']`).length, 1);
+      assert.equal($(`script[src*='js/${name}.js']`).attr("src"), `../../js/${name}.js?v=20261018c`);
+    }
+  }
+});
+
 test("media cache versions follow delivered artifact hashes across home, hotel and niche renderers", () => {
   const scene = { key: "homepage-montage",
     video: { path: "assets/vid/home/homepage-montage-720p.mp4", sha256: hash("new video") },
@@ -29,6 +42,58 @@ test("media cache versions follow delivered artifact hashes across home, hotel a
   assert.notEqual(sceneAssetUrl("../", { ...scene.video, sha256: hash("replacement video") }), videoUrl, "replacing bytes invalidates old video cache");
   assert.notEqual(sceneAssetUrl("../", { ...scene.poster, sha256: hash("replacement poster") }), imageUrl, "poster has its own independent cache identity");
   assert.equal(scene.video.path.includes("?"), false, "manifest retains plain filesystem paths");
+});
+
+test("responsive renderer provides native selected posters and inert video variants", () => {
+  const mobile = { accepted: true, video: { path: "assets/vid/use-cases/roller-shutters-720p.mp4", sha256: hash("mobile") }, poster: { path: "assets/wifigate_niche_pages/roller-shutters-scene-hero.webp", sha256: hash("mobile poster") }, width: 1280, height: 720 };
+  const desktop = { ...mobile, video: { path: "assets/vid/use-cases/desktop/roller-shutters-1080p.mp4", sha256: hash("desktop") }, poster: { path: "assets/wifigate_niche_pages/desktop/roller-shutters-scene-hero.webp", sha256: hash("desktop poster") }, width: 1920, height: 1080 };
+  const $ = cheerio.load('<html><head></head><body><section class="niche-hero"><div class="niche-hero__media"><img id="niche-image" alt="Gate"></div></section></body></html>');
+  applyNicheSceneMedia($, { scene: { ...mobile, variants: { mobile, desktop } }, assetPrefix: "../../", copy: { play: "Play", pause: "Pause", replay: "Replay" } });
+  const variants = JSON.parse($("video").attr("data-media-variants"));
+  assert.equal($("video").attr("src"), undefined, "neither variant is downloaded before playback policy permits");
+  assert.equal($("video").attr("poster"), undefined, "video cannot preload the fallback poster before viewport selection");
+  assert.equal($("source[media='(min-width: 769px)']").attr("srcset"), variants.desktop.poster);
+  assert.equal($("source[media='(max-width: 768px)']").attr("srcset"), variants.mobile.poster);
+  assert.equal($("picture img").attr("alt"), "Gate");
+  assert.equal(variants.desktop.width, 1920);
+  assert.equal($("script[src*='media-runtime.js']").length, 1);
+});
+
+test("accepted desktop Auto Open replaces only its existing feature media and remains explicit mobile fallback", () => {
+  const artifact = { accepted: true, video: { path: "assets/vid/home/desktop/auto-open-futuristic-1080p.mp4", sha256: hash("auto desktop") }, poster: { path: "assets/img/desktop/auto-open-futuristic-scene.webp", sha256: hash("auto first frame") }, width: 1920, height: 1080 };
+  const $ = cheerio.load('<html><head></head><body><article class="feature-card--auto-open"><figure class="feature-card__media"><img class="feature-card__image" src="auto_open.svg" alt="Auto Open"></figure><h3>Automatic arrival</h3><p>Keep both hands free.</p></article><article class="other"><img src="other.svg"><h3>Other feature</h3></article></body></html>');
+  const other = $(".other").toString();
+  applyHomeSceneMedia($, { autoOpenScene: { key: "auto-open-futuristic", ...artifact, variants: { desktop: artifact } }, assetPrefix: "../", copy: { play: "Play", pause: "Pause", replay: "Replay" } });
+  assert.equal($(".other").toString(), other);
+  assert.equal($("h3").first().text(), "Automatic arrival"); assert.equal($("p").text(), "Keep both hands free.");
+  assert.equal($("[data-scene-image]").attr("alt"), "Auto Open");
+  const variants = JSON.parse($("video").attr("data-media-variants"));
+  assert.deepEqual(variants.mobile, variants.desktop, "no invented mobile clip; both choices bind accepted desktop poster/video");
+  assert.equal($("video").attr("src"), undefined);
+});
+
+test("schema2 accepts reviewed1080p variants, ignores pending variants and protects legacy fallback", async () => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), "wifigate-variant-manifest-"));
+  try {
+    const mobileBytes = Buffer.from("reviewed mobile"), desktopBytes = Buffer.from("reviewed desktop"), posterBytes = Buffer.from("first frame");
+    const make = (desktop) => ({ accepted: true, video: { path: `assets/vid/use-cases/${desktop ? "desktop/" : ""}roller-shutters-${desktop ? "1080p" : "720p"}.mp4`, sha256: hash(desktop ? desktopBytes : mobileBytes) }, poster: { path: `assets/wifigate_niche_pages/${desktop ? "desktop/" : ""}roller-shutters-scene-hero.webp`, sha256: hash(posterBytes) }, width: desktop ? 1920 : 1280, height: desktop ? 1080 : 720, durationSeconds: 10, codec: "h264", audioTracks: 0, fastStart: true, motionReviewed: true, matchingFirstFrameReviewed: true });
+    const mobile = make(false), desktop = make(true), scene = { ...mobile, key: "roller-shutters", variants: { mobile, desktop } };
+    for (const artifact of [mobile, desktop]) for (const field of ["video", "poster"]) {
+      const file = path.join(root, artifact[field].path); await fs.mkdir(path.dirname(file), { recursive: true }); await fs.writeFile(file, field === "poster" ? posterBytes : artifact === mobile ? mobileBytes : desktopBytes);
+    }
+    const save = (value, schemaVersion = 2) => fs.writeFile(path.join(root, "assets/vid/scene-manifest.json"), JSON.stringify({ schemaVersion, scenes: [value] }));
+    await save(scene); assert.equal((await readSceneManifest(root)).get(scene.key).variants.desktop.width, 1920);
+    await save({ ...scene, variants: { desktop: { ...desktop, width: 1918 } } }); assert.equal((await readSceneManifest(root)).get(scene.key).variants.desktop.width, 1918, "native near16:9 source pixels remain unpadded");
+    await save({ ...scene, variants: { desktop: { ...desktop, width: 1919 } } }); await assert.rejects(readSceneManifest(root), /acceptance incomplete/, "delivery must retain even native frame dimensions");
+    await save({ ...scene, variants: { desktop: { accepted: false } } }); assert.equal((await readSceneManifest(root)).size, 1, "pending variant does not invalidate existing accepted fallback");
+    await save({ ...scene, variants: { desktop: { ...desktop, matchingFirstFrameReviewed: false } } }); await assert.rejects(readSceneManifest(root), /acceptance incomplete/);
+    await save({ ...scene, variants: { mobile: desktop } }); await assert.rejects(readSceneManifest(root), /acceptance incomplete/);
+    await save({ ...scene, variants: { tablet: desktop } }); await assert.rejects(readSceneManifest(root), /Invalid scene variants/);
+    await save(scene, 1); await assert.rejects(readSceneManifest(root), /Invalid scene variants/);
+    await save({ ...scene, variants: { desktop } }); await fs.appendFile(path.join(root, desktop.video.path), "altered"); await assert.rejects(readSceneManifest(root), /changed after acceptance/);
+  } finally {
+    assert.equal(path.dirname(root), path.resolve(os.tmpdir())); assert.ok(path.basename(root).startsWith("wifigate-variant-manifest-")); await fs.rm(root, { recursive: true, force: true });
+  }
 });
 
 test("only accepted, unchanged scene artifacts enter pages", async () => {

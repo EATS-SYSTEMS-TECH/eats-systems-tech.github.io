@@ -10,7 +10,7 @@ export const cookies = {
     title: "Cookie Policy",
     subtitle:
       "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-    updated: "Effective date: October 6, 2026",
+    updated: "Effective date: October 18, 2026",
     owner: "Operator: EATS SYSTEMS TECH",
     sections: [
       {
@@ -24,7 +24,7 @@ export const cookies = {
         id: "what",
         title: "2. What cookies and similar technologies are",
         blocks: [
-          "Cookies are small text files that a website places in your browser. Similar technologies include the browser's local storage, session storage and IndexedDB, which let a website keep information on your device. In this policy, \"cookies\" refers to all of them.",
+          "Cookies are small text files that a website places in your browser. Similar technologies include the browser's local storage, session storage, IndexedDB and CacheStorage, which let a website keep information or files on your device. In this policy, \"cookies\" refers to all of them.",
         ],
       },
       {
@@ -38,6 +38,7 @@ export const cookies = {
                 ["wifigate-accessibility-settings-v2", "Local storage (first party)", "Remembers the accessibility adjustments you turned on, such as text size or high contrast.", "Until you clear it"],
                 ["wifigate-a11y-fab-position", "Local storage (first party)", "Remembers where you moved the accessibility button.", "Until you clear it"],
                 ["wifigate-cookie-consent-v1", "Local storage (first party)", "Remembers your analytics choice.", "Up to 180 days"],
+                ["Public media cache", "CacheStorage (first party)", "Reuses public videos and matching images already requested for your screen size. Stores media files, without account data or tracking identifiers, up to 96 MB and 48 files.", "Reused for up to 30 days; expired files are removed on later cache activity or when site data is cleared."],
                 ["_ga and _ga_*", "Analytics cookies (Google, only with consent)", "Measure visits and site usage.", "Up to 180 days"],
                 ["Firebase Authentication session", "Session storage (first party, web portal only)", "Keeps you signed in to the web portal while the browser tab is open.", "Until you sign out or close the tab"],
                 ["Firebase SDK data", "IndexedDB (first party, web portal only)", "Technical data the Firebase sign-in library needs in order to operate.", "Until you clear site data"],
@@ -45,6 +46,7 @@ export const cookies = {
             },
           },
           "The public pages set analytics cookies only after you allow them. Session storage and IndexedDB are used only on the portal sign-in and dashboard pages.",
+          "Media caching does not download both screen variants or preload every video. It does not store portal, sign-in, API or analytics responses. Browser settings, available space or clearing site data may prevent or remove cached files; playback can then download them again. This cache does not make the whole website available offline.",
         ],
       },
       {
@@ -99,7 +101,7 @@ export const cookies = {
     title: "מדיניות עוגיות",
     subtitle:
       "מדיניות עוגיות זו מסבירה באילו עוגיות וטכנולוגיות דומות נעשה שימוש באתר wifigate.io ובפורטל האינטרנט של WIFIGATE, לשם מה, וכיצד תוכלו לשלוט בהן.",
-    updated: "תאריך תחילה: 6 באוקטובר 2026",
+    updated: "תאריך תחילה: 18 באוקטובר 2026",
     owner: "המפעילה: EATS SYSTEMS TECH",
     sections: [
       {
@@ -113,7 +115,7 @@ export const cookies = {
         id: "what",
         title: "2. מהן עוגיות וטכנולוגיות דומות",
         blocks: [
-          "עוגיות הן קובצי טקסט קטנים שאתר שומר בדפדפן. טכנולוגיות דומות כוללות את האחסון המקומי, אחסון הסשן ו‑IndexedDB של הדפדפן, המאפשרים לאתר לשמור מידע במכשיר שלכם. במדיניות זו, \"עוגיות\" מתייחס לכולן.",
+          "עוגיות הן קובצי טקסט קטנים שאתר שומר בדפדפן. טכנולוגיות דומות כוללות את האחסון המקומי, אחסון הסשן, IndexedDB ו־CacheStorage של הדפדפן, המאפשרים לאתר לשמור מידע או קבצים במכשיר שלכם. במדיניות זו, \"עוגיות\" מתייחס לכולן.",
         ],
       },
       {
@@ -127,6 +129,7 @@ export const cookies = {
                 ["wifigate-accessibility-settings-v2", "אחסון מקומי (צד ראשון)", "זוכר את התאמות הנגישות שהפעלתם, כגון גודל טקסט או ניגודיות גבוהה.", "עד שתמחקו אותו"],
                 ["wifigate-a11y-fab-position", "אחסון מקומי (צד ראשון)", "זוכר לאן הזזתם את כפתור הנגישות.", "עד שתמחקו אותו"],
                 ["wifigate-cookie-consent-v1", "אחסון מקומי (צד ראשון)", "זוכר את בחירתכם לגבי מדידה.", "עד 180 ימים"],
+                ["מטמון מדיה ציבורית", "CacheStorage (צד ראשון)", "משתמש שוב בסרטונים ציבוריים ובתמונות תואמות שכבר התבקשו בהתאם לרוחב המסך. שומר קובצי מדיה ללא פרטי חשבון או מזהי מעקב, עד 96 מגה־בייט ו־48 קבצים.", "שימוש חוזר עד 30 ימים; קבצים שפג תוקפם נמחקים בפעילות מטמון מאוחרת יותר או במחיקת נתוני האתר."],
                 ["_ga ו־_ga_*", "עוגיות מדידה (Google, רק בהסכמה)", "מדידת ביקורים ושימוש באתר.", "עד 180 ימים"],
                 ["סשן Firebase Authentication", "אחסון סשן (צד ראשון, בפורטל בלבד)", "שומר על החיבור שלכם לפורטל כל עוד לשונית הדפדפן פתוחה.", "עד ההתנתקות או סגירת הלשונית"],
                 ["נתוני Firebase SDK", "IndexedDB (צד ראשון, בפורטל בלבד)", "נתונים טכניים שספריית הכניסה של Firebase צריכה כדי לפעול.", "עד שתמחקו את נתוני האתר"],
@@ -134,6 +137,7 @@ export const cookies = {
             },
           },
           "הדפים הציבוריים שומרים עוגיות מדידה רק לאחר אישורכם. אחסון סשן ו־IndexedDB משמשים רק בדפי הכניסה ולוח הבקרה של הפורטל.",
+          "שמירת המדיה אינה מורידה את שתי גרסאות המסך ואינה טוענת מראש את כל הסרטונים. היא אינה שומרת תשובות מהפורטל, מהכניסה לחשבון, מ־API או ממדידה. הגדרות הדפדפן, מקום פנוי או מחיקת נתוני האתר עלולים למנוע שמירה או לפנות קבצים; במקרה כזה הניגון עשוי להוריד אותם שוב. המטמון אינו מאפשר שימוש בכל האתר ללא חיבור לרשת.",
         ],
       },
       {

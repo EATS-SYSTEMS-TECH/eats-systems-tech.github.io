@@ -52,6 +52,8 @@
       if (!manual && (!inView || !mayAutoplay() || finished || pausedByVisitor || document.hidden)) return;
       const current = ++generation;
       if (manual) { userStarted = true; pausedByVisitor = false; }
+      await window.WifigateMedia?.prepare(video, image);
+      if (current !== generation) return;
       // Preserve the eager image as the initial paint, including on a warm cache.
       try { await image.decode(); } catch { /* A failed image must not block explicit playback. */ }
       if (current !== generation || (!manual && !mayAutoplay())) return;
@@ -59,7 +61,9 @@
       if (restart) { finished = false; video.currentTime = 0; }
       try {
         await video.play();
-        if (current !== generation) { video.pause(); return; }
+        // Stop/policy handlers already pause. An obsolete completion must not
+        // pause a newer explicit play request that superseded this one.
+        if (current !== generation) return;
       } catch { if (current === generation) imageState(); }
       labels();
     }

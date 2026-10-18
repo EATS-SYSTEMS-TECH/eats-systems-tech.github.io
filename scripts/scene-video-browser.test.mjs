@@ -43,9 +43,16 @@ let browser;
 let assertions = 0;
 const check = (value, expected, message) => { assert.equal(value, expected, message); assertions++; };
 
-async function visit({ width = 1280, reducedMotion = "no-preference", connection = {}, fail = false, offscreen = false } = {}) {
+async function visit({ width = 1280, reducedMotion = "no-preference", connection = {}, fail = false, offscreen = false, delayedFirstPlay = false } = {}) {
   const context = await browser.newContext({ viewport: { width, height: 800 }, reducedMotion });
   await context.addInitScript((value) => Object.defineProperty(navigator, "connection", { value, configurable: true }), connection);
+  if (delayedFirstPlay) await context.addInitScript(() => {
+    const play = HTMLMediaElement.prototype.play; let calls = 0;
+    HTMLMediaElement.prototype.play = function (...args) {
+      const result = play.apply(this, args); calls++;
+      return calls === 1 ? result.then(() => new Promise(resolve => setTimeout(resolve, 1000))) : result;
+    };
+  });
   const page = await context.newPage();
   const mediaRequests = [];
   page.on("request", (request) => { if (/\.mp4(?:\?|$)/.test(request.url())) mediaRequests.push(request.url()); });
@@ -111,6 +118,14 @@ try {
   await desktop.page.waitForFunction(() => document.querySelector("[data-scene-video]").dataset.sceneState === "image");
   check(await desktop.page.locator("video").evaluate((video) => video.paused), true, "changed motion preference stops playback");
   await desktop.context.close();
+
+  const superseded = await visit({ delayedFirstPlay: true });
+  await superseded.page.waitForFunction(() => document.querySelector("[data-scene-video]").dataset.sceneState === "video");
+  await superseded.page.locator("[data-scene-pause]").click();
+  await superseded.page.locator("[data-scene-pause]").click();
+  await superseded.page.waitForTimeout(1200);
+  check(await superseded.page.locator("video").evaluate(video => !video.paused && video.currentTime > 0), true, "older pending autoplay cannot pause the newer manual resume");
+  await superseded.context.close();
 
   const failed = await visit({ fail: true });
   await failed.page.waitForTimeout(600);

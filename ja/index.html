@@ -87,7 +87,7 @@
 
   <script src="../js/navigation.js?v=20261007a" defer=""></script>
   <script src="../js/site-account.js?v=20261013a" defer=""></script>
-  <script src="../js/hero.js?v=20261018b" defer=""></script>
+  <script src="../js/media-runtime.js?v=20261018c" defer=""></script><script src="../js/hero.js?v=20261018c" defer=""></script>
 
   <script>window.accessibilityCopy = {"ja":{"skipLink":"メインコンテンツへスキップ","eyebrow":"アクセシビリティ","openButton":"アクセシビリティメニューを開く","closeButton":"アクセシビリティメニューを閉じる","title":"アクセシビリティメニュー","description":"読み方や操作方法に合わせてサイトを調整できます。設定はこのデバイスに保存されます。","reset":"すべてリセット","statusDefault":"標準のサイト表示","statusActive":"{count} 件の調整が有効","hideButton":"ページを再読み込みするまでアクセシビリティボタンを非表示にする","statementLink":"アクセシビリティ方針","textSize":{"label":"文字サイズ","description":"サイト全体の文字を拡大します。","decrease":"文字を小さく","increase":"文字を大きく","level":"文字サイズ {percent}%"},"options":{"highContrast":{"label":"ハイコントラスト","description":"明るい背景に濃い文字と、はっきりした枠線を表示します。"},"grayscale":{"label":"グレースケール","description":"サイトを色なしで表示します。"},"underlineLinks":{"label":"リンクを強調","description":"すべてのリンクに下線と目印を付けます。"},"readableFont":{"label":"読みやすいフォント","description":"シンプルで読みやすいフォントを使用します。"},"textSpacing":{"label":"文字間隔","description":"行・単語・文字の間隔を広げます。"},"highlightHeadings":{"label":"見出しを強調","description":"見出しに目印を付けてページの構造を示します。"},"bigCursor":{"label":"大きいカーソル","description":"マウスポインターを大きくします。"},"focusHighlight":{"label":"フォーカスを強調","description":"キーボードフォーカスのある要素を太い枠で囲みます。"},"reducedMotion":{"label":"アニメーションを停止","description":"アニメーション、トランジション、背景動画を停止します。"}}}};</script>
   <script src="../js/accessibility.js?v=20261007a" defer=""></script>
@@ -134,7 +134,7 @@
 
 
 
-  <link rel="stylesheet" href="../css/scene-video.css?v=20261018b"><script src="../js/scene-video.js?v=20261018b" defer=""></script>
+  <link rel="stylesheet" href="../css/scene-video.css?v=20261018c"><script src="../js/scene-video.js?v=20261018c" defer=""></script>
   <meta name="keywords" content="WIFIGATE, WiFi Gate, wifi gate, スマート入退室管理, スマホでゲートを開ける, 電動ゲート, 入退室管理, 月額料金なし">
   <meta name="description" content="WIFIGATE は、ゲート、ドア、駐車場、シャッター、ガレージをスマートフォンで開けられるスマート入退室管理システム。安全で暗号化された便利なソリューションで、月額料金は不要です。">
   <meta name="robots" content="index, follow">
@@ -655,8 +655,8 @@
 
   <section class="hero" id="home" aria-labelledby="hero-title" aria-describedby="hero-subtitle" data-hero-media-state="image" data-hero-scene="homepage-montage">
       <div class="hero__media">
-        <img src="../assets/img/homepage-montage-scene.webp?v=1e09b4025347" alt="" class="hero__bg hero__bg--image" fetchpriority="high" width="1280" height="720">
-        <video id="hero-video" class="hero__bg hero__bg--video" muted="" playsinline="" preload="none" poster="../assets/img/homepage-montage-scene.webp?v=1e09b4025347" aria-hidden="true" data-video-src="../assets/vid/home/homepage-montage-720p.mp4?v=4a52f318f241" data-silent="true" width="1280" height="720"></video>
+        <picture data-scene-picture=""><source media="(min-width: 769px)" srcset="../assets/img/desktop/homepage-montage-scene.webp?v=5ece1e4acb5e"><source media="(max-width: 768px)" srcset="../assets/img/homepage-montage-scene.webp?v=1e09b4025347"><img src="../assets/img/homepage-montage-scene.webp?v=1e09b4025347" alt="" class="hero__bg hero__bg--image" fetchpriority="high" width="1280" height="720"></picture>
+        <video id="hero-video" class="hero__bg hero__bg--video" muted="" playsinline="" preload="none" aria-hidden="true" data-video-src="../assets/vid/home/homepage-montage-720p.mp4?v=4a52f318f241" data-silent="true" width="1280" height="720" data-media-variants="{&quot;mobile&quot;:{&quot;src&quot;:&quot;../assets/vid/home/homepage-montage-720p.mp4?v=4a52f318f241&quot;,&quot;poster&quot;:&quot;../assets/img/homepage-montage-scene.webp?v=1e09b4025347&quot;,&quot;width&quot;:1280,&quot;height&quot;:720},&quot;desktop&quot;:{&quot;src&quot;:&quot;../assets/vid/home/desktop/homepage-montage-1080p.mp4?v=32f0810e35a9&quot;,&quot;poster&quot;:&quot;../assets/img/desktop/homepage-montage-scene.webp?v=5ece1e4acb5e&quot;,&quot;width&quot;:1918,&quot;height&quot;:1080}}"></video>
         <div class="hero__overlay"></div>
         <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="動画を一時停止" title="動画を一時停止" aria-pressed="false" data-paused="false" hidden="">
           <svg class="hero__media-control-icon hero__media-control-icon--pause" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -747,9 +747,9 @@
           </article>
 
           <article class="feature-card feature-card--auto-open js-reveal">
-            <figure class="feature-card__media">
-              <img src="../assets/wifigate_features/auto_open.svg?v=20260707am" alt="" class="feature-card__image" loading="lazy">
-            </figure>
+            <figure class="feature-card__media" data-scene-video="" data-scene-state="image">
+              <picture data-scene-picture=""><source media="(min-width: 769px)" srcset="../assets/img/desktop/auto-open-futuristic-scene.webp?v=e3ecd82648ae"><source media="(max-width: 768px)" srcset="../assets/img/desktop/auto-open-futuristic-scene.webp?v=e3ecd82648ae"><img src="../assets/img/desktop/auto-open-futuristic-scene.webp?v=e3ecd82648ae" alt="" class="feature-card__image" loading="lazy" data-scene-image=""></picture><video data-video-src="../assets/vid/home/desktop/auto-open-futuristic-1080p.mp4?v=8731b9cdbc9b" preload="none" muted="" playsinline="" aria-hidden="true" width="1280" height="720" data-media-variants="{&quot;mobile&quot;:{&quot;src&quot;:&quot;../assets/vid/home/desktop/auto-open-futuristic-1080p.mp4?v=8731b9cdbc9b&quot;,&quot;poster&quot;:&quot;../assets/img/desktop/auto-open-futuristic-scene.webp?v=e3ecd82648ae&quot;,&quot;width&quot;:1918,&quot;height&quot;:1080},&quot;desktop&quot;:{&quot;src&quot;:&quot;../assets/vid/home/desktop/auto-open-futuristic-1080p.mp4?v=8731b9cdbc9b&quot;,&quot;poster&quot;:&quot;../assets/img/desktop/auto-open-futuristic-scene.webp?v=e3ecd82648ae&quot;,&quot;width&quot;:1918,&quot;height&quot;:1080}}"></video>
+            <div class="scene-video-controls"><button type="button" data-scene-play="">動画を再生</button><button type="button" data-scene-pause="" hidden="">動画を一時停止</button></div><script type="application/json" data-scene-copy="">{"replay":"動画をもう一度再生","mute":"動画をミュート","unmute":"動画のミュートを解除","pause":"動画を一時停止","play":"動画を再生"}</script></figure>
             <h3 class="feature-card__title" data-i18n="features.items.autoOpen.title" dir="ltr">自動オープン</h3>
             <p class="feature-card__text" data-i18n="features.items.autoOpen.text" dir="ltr">許可されたユーザーが到着するとゲートが自動で開くので、ハンズフリーでスムーズに入場できます。</p>
           </article>
@@ -869,7 +869,7 @@
           </div>
 
           <figure class="automation-stay">
-            <div class="automation-stay__media" data-scene-video="" data-scene-state="image"><img src="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281" alt="スマートフォンを使って宿泊施設に入るゲスト" width="1280" height="720" loading="lazy" data-scene-image=""><video data-video-src="../assets/vid/use-cases/hotels-airbnb-720p.mp4?v=6eb961062000" poster="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281" preload="none" muted="" playsinline="" aria-hidden="true" width="1280" height="720"></video><div class="scene-video-controls"><button type="button" data-scene-play="">動画を再生</button><button type="button" data-scene-pause="" hidden="">動画を一時停止</button></div><script type="application/json" data-scene-copy="">{"replay":"動画をもう一度再生","mute":"動画をミュート","unmute":"動画のミュートを解除","pause":"動画を一時停止","play":"動画を再生"}</script></div>
+            <div class="automation-stay__media" data-scene-video="" data-scene-state="image"><picture data-scene-picture=""><source media="(min-width: 769px)" srcset="../assets/wifigate_niche_pages/desktop/hotels-airbnb-scene-hero.webp?v=92017f25f78f"><source media="(max-width: 768px)" srcset="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281"><img src="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281" alt="スマートフォンを使って宿泊施設に入るゲスト" width="1280" height="720" loading="lazy" data-scene-image=""></picture><video data-video-src="../assets/vid/use-cases/hotels-airbnb-720p.mp4?v=6eb961062000" preload="none" muted="" playsinline="" aria-hidden="true" width="1280" height="720" data-media-variants="{&quot;mobile&quot;:{&quot;src&quot;:&quot;../assets/vid/use-cases/hotels-airbnb-720p.mp4?v=6eb961062000&quot;,&quot;poster&quot;:&quot;../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281&quot;,&quot;width&quot;:1280,&quot;height&quot;:720},&quot;desktop&quot;:{&quot;src&quot;:&quot;../assets/vid/use-cases/desktop/hotels-airbnb-1080p.mp4?v=3c0408c9acc0&quot;,&quot;poster&quot;:&quot;../assets/wifigate_niche_pages/desktop/hotels-airbnb-scene-hero.webp?v=92017f25f78f&quot;,&quot;width&quot;:1918,&quot;height&quot;:1080}}"></video><div class="scene-video-controls"><button type="button" data-scene-play="">動画を再生</button><button type="button" data-scene-pause="" hidden="">動画を一時停止</button></div><script type="application/json" data-scene-copy="">{"replay":"動画をもう一度再生","mute":"動画をミュート","unmute":"動画のミュートを解除","pause":"動画を一時停止","play":"動画を再生"}</script></div>
             <figcaption class="automation-stay__caption">
               <span class="automation-stay__label" dir="ltr">予約からチェックアウトまで、すべての滞在に</span>
               <ol class="automation-stay__steps"><li>予約を受付</li><li>チェックインで有効</li><li>チェックアウトで失効</li></ol>

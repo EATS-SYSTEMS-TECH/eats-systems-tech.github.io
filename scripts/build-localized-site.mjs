@@ -1046,7 +1046,7 @@ async function buildHomePages(homeData) {
     rewriteHomeInternalLinks($, locale);
     updateHomeWhereLinks($, locale);
     applyHomepageCopy($, homepageCopies[locale], locale);
-    applyHomeSceneMedia($, { scene: homeData.sceneMedia.get("homepage-montage"), hotelScene: homeData.sceneMedia.get("hotels-airbnb"),
+    applyHomeSceneMedia($, { scene: homeData.sceneMedia.get("homepage-montage"), hotelScene: homeData.sceneMedia.get("hotels-airbnb"), autoOpenScene: homeData.sceneMedia.get("auto-open-futuristic"),
       assetPrefix: buildAssetPrefix(locale, "home"), copy: homepageCopies[locale].hero.media });
     rewriteHomeGuestInvitesLink($, locale);
     reorderHomeSections($);

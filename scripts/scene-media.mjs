@@ -3,7 +3,7 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import { NICHE_DEFINITIONS } from "./niche-pages/index.mjs";
 
-const sceneKeys = new Set(["homepage-montage", "electric-gates-barrier", ...NICHE_DEFINITIONS.map(({ key }) => key)]);
+const sceneKeys = new Set(["homepage-montage", "electric-gates-barrier", "auto-open-futuristic", ...NICHE_DEFINITIONS.map(({ key }) => key)]);
 
 // Only a reviewed artifact and its matching poster may enter generated pages.
 export async function readSceneManifest(repoRoot) {
@@ -11,27 +11,37 @@ export async function readSceneManifest(repoRoot) {
   let document;
   try { document = JSON.parse(await fs.readFile(file, "utf8")); }
   catch (error) { if (error.code === "ENOENT") return new Map(); throw error; }
-  if (document.schemaVersion !== 1 || !Array.isArray(document.scenes)) throw new Error("Invalid scene media manifest");
+  if (![1, 2].includes(document.schemaVersion) || !Array.isArray(document.scenes)) throw new Error("Invalid scene media manifest");
   const scenes = new Map();
+  async function validateArtifact(scene, artifact, variant = "fallback") {
+    for (const field of ["video", "poster"]) {
+      const asset = artifact[field];
+      const expected = field === "video" ? /^assets\/vid\/(use-cases|home)\/(?:(?:mobile|desktop)\/)?[a-z-]+-(720p|1080p)\.mp4$/ : /^assets\/(wifigate_niche_pages|img)\/(?:(?:mobile|desktop)\/)?[a-z0-9-]+\.(webp|png)$/;
+      if (!asset || !expected.test(asset.path) || !/^[a-f0-9]{64}$/.test(asset.sha256)) throw new Error("Invalid scene artifact path/hash");
+      if (field === "video" && ![`${scene.key}-720p.mp4`, `${scene.key}-1080p.mp4`].includes(path.posix.basename(asset.path))) throw new Error("Scene/video identity mismatch");
+      const bytes = await fs.readFile(path.join(repoRoot, ...asset.path.split("/")));
+      if (createHash("sha256").update(bytes).digest("hex") !== asset.sha256) throw new Error(`Scene artifact changed after acceptance: ${scene.key}/${variant}`);
+      const desktop = variant === "desktop" || (variant === "fallback" && artifact.video.path.includes("/desktop/"));
+      const maxBytes = scene.key === "homepage-montage" ? (desktop ? 12_000_000 : 8_000_000) : (desktop ? 6_000_000 : 3_000_000);
+      if (field === "video" && bytes.length > maxBytes) throw new Error(`Scene clip exceeds delivery budget: ${scene.key}/${variant}`);
+    }
+    const validDuration = scene.key === "homepage-montage"
+      ? Math.abs(artifact.durationSeconds - 15) <= 0.05
+      : Number.isFinite(artifact.durationSeconds) && artifact.durationSeconds >= 4 && artifact.durationSeconds <= 12;
+    const desktop = variant === "desktop" || (variant === "fallback" && artifact.video.path.includes("/desktop/"));
+    const nativeDesktop = desktop && artifact.height === 1080 && Number.isInteger(artifact.width) && artifact.width % 2 === 0 && Math.abs(artifact.width / artifact.height - 16 / 9) <= 0.01;
+    const validSize = (artifact.width === 1280 && artifact.height === 720) || nativeDesktop;
+    if (!validSize || !validDuration || artifact.codec !== "h264" || artifact.audioTracks !== 0 || !artifact.fastStart
+      || !artifact.motionReviewed || !artifact.matchingFirstFrameReviewed) throw new Error(`Scene acceptance incomplete: ${scene.key}/${variant}`);
+  }
   for (const scene of document.scenes) {
     if (!scene.accepted) continue;
     if (!sceneKeys.has(scene.key) || scenes.has(scene.key)) throw new Error("Invalid or duplicate scene key");
-    for (const field of ["video", "poster"]) {
-      const asset = scene[field];
-      const expected = field === "video" ? /^assets\/vid\/(use-cases|home)\/[a-z-]+-720p\.mp4$/ : /^assets\/(wifigate_niche_pages|img)\/[a-z0-9-]+\.(webp|png)$/;
-      if (!asset || !expected.test(asset.path) || !/^[a-f0-9]{64}$/.test(asset.sha256)) throw new Error("Invalid scene artifact path/hash");
-      if (field === "video" && path.posix.basename(asset.path) !== `${scene.key}-720p.mp4`) throw new Error("Scene/video identity mismatch");
-      const bytes = await fs.readFile(path.join(repoRoot, ...asset.path.split("/")));
-      if (createHash("sha256").update(bytes).digest("hex") !== asset.sha256) throw new Error(`Scene artifact changed after acceptance: ${scene.key}`);
-      const maxBytes = scene.key === "homepage-montage" ? 8_000_000 : 3_000_000;
-      if (field === "video" && bytes.length > maxBytes) throw new Error(`Scene clip exceeds delivery budget: ${scene.key}`);
+    await validateArtifact(scene, scene);
+    if (scene.variants) {
+      if (document.schemaVersion !== 2 || typeof scene.variants !== "object" || Array.isArray(scene.variants) || Object.keys(scene.variants).some(key => !["mobile", "desktop"].includes(key))) throw new Error("Invalid scene variants");
+      for (const [variant, artifact] of Object.entries(scene.variants)) if (artifact?.accepted) await validateArtifact(scene, artifact, variant);
     }
-    const validDuration = scene.key === "homepage-montage"
-      ? Math.abs(scene.durationSeconds - 15) <= 0.05
-      : Number.isFinite(scene.durationSeconds) && scene.durationSeconds >= 4 && scene.durationSeconds <= 12;
-    if (scene.width !== 1280 || scene.height !== 720 || !validDuration
-      || scene.codec !== "h264" || scene.audioTracks !== 0 || !scene.fastStart
-      || !scene.motionReviewed || !scene.matchingFirstFrameReviewed) throw new Error(`Scene acceptance incomplete: ${scene.key}`);
     scenes.set(scene.key, scene);
   }
   return scenes;
@@ -45,10 +55,38 @@ export function sceneAssetUrl(assetPrefix, asset) {
 }
 
 function attachSceneAssets($, assetPrefix) {
-  if (!$("link[href*='scene-video.css']").length) {
-    $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261018b`));
-    $("head").append($("<script>").attr("src", `${assetPrefix}js/scene-video.js?v=20261018b`).attr("defer", ""));
+  if (!$("script[src*='js/media-runtime.js']").length) {
+    const runtime = $("<script>").attr("src", `${assetPrefix}js/media-runtime.js?v=20261018c`).attr("defer", "");
+    const heroScript = $("script[src*='js/hero.js']");
+    if (heroScript.length) heroScript.before(runtime);
+    else $("head").append(runtime);
   }
+  $("script[src*='js/media-runtime.js']").attr("src", `${assetPrefix}js/media-runtime.js?v=20261018c`);
+  $("script[src*='js/hero.js']").attr("src", `${assetPrefix}js/hero.js?v=20261018c`);
+  if (!$("link[href*='scene-video.css']").length) {
+    $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261018c`));
+  }
+  if (!$("script[src*='js/scene-video.js']").length) {
+    $("head").append($("<script>").attr("src", `${assetPrefix}js/scene-video.js?v=20261018c`).attr("defer", ""));
+  }
+  $("link[href*='scene-video.css']").attr("href", `${assetPrefix}css/scene-video.css?v=20261018c`);
+  $("script[src*='js/scene-video.js']").attr("src", `${assetPrefix}js/scene-video.js?v=20261018c`);
+}
+
+function attachResponsiveMedia($, { scene, assetPrefix, image, video }) {
+  if (!Object.values(scene.variants || {}).some(variant => variant?.accepted)) return;
+  const variants = {};
+  for (const name of ["mobile", "desktop"]) {
+    const artifact = scene.variants?.[name]?.accepted ? scene.variants[name] : scene;
+    variants[name] = { src: sceneAssetUrl(assetPrefix, artifact.video), poster: sceneAssetUrl(assetPrefix, artifact.poster), width: artifact.width, height: artifact.height };
+  }
+  // Picture performs initial poster selection before JavaScript. The runtime
+  // pins that same pair for this page; no other video URL is attached or fetched.
+  image.wrap($("<picture>").attr("data-scene-picture", ""));
+  image.before($("<source>").attr("media", "(min-width: 769px)").attr("srcset", variants.desktop.poster));
+  image.before($("<source>").attr("media", "(max-width: 768px)").attr("srcset", variants.mobile.poster));
+  image.attr("src", variants.mobile.poster);
+  video.removeAttr("poster").attr("data-media-variants", JSON.stringify(variants));
 }
 
 function attachScene($, { scene, assetPrefix, copy, image, container, media }) {
@@ -61,6 +99,7 @@ function attachScene($, { scene, assetPrefix, copy, image, container, media }) {
     .attr("preload", "none").attr("muted", "").attr("playsinline", "")
     .attr("aria-hidden", "true").attr("width", "1280").attr("height", "720");
   image.after(video);
+  attachResponsiveMedia($, { scene, assetPrefix, image, video });
   const controls = $("<div>").addClass("scene-video-controls");
   controls.append($("<button>").attr("type", "button").attr("data-scene-play", "").text(copy.play));
   controls.append($("<button>").attr("type", "button").attr("data-scene-pause", "").attr("hidden", "").text(copy.pause));
@@ -78,7 +117,7 @@ export function applyNicheSceneMedia($, { scene, assetPrefix, copy }) {
   if (pager.length === 1) pager.prepend($(".niche-hero__media > .scene-video-controls"));
 }
 
-export function applyHomeSceneMedia($, { scene, hotelScene, assetPrefix, copy }) {
+export function applyHomeSceneMedia($, { scene, hotelScene, autoOpenScene, assetPrefix, copy }) {
   if (scene) {
     const hero = $("#home.hero");
     const image = hero.find("img.hero__bg--image");
@@ -89,6 +128,7 @@ export function applyHomeSceneMedia($, { scene, hotelScene, assetPrefix, copy })
     video.empty().removeAttr("src loop").attr("data-video-src", sceneAssetUrl(assetPrefix, scene.video))
       .attr("data-silent", "true").attr("poster", image.attr("src"))
       .attr("width", "1280").attr("height", "720");
+    attachResponsiveMedia($, { scene, assetPrefix, image, video });
     hero.find("#hero-mute-toggle").attr("hidden", "");
     hero.find("#hero-pause-toggle").attr("hidden", "");
     hero.find("#hero-replay").removeAttr("hidden");
@@ -102,5 +142,11 @@ export function applyHomeSceneMedia($, { scene, hotelScene, assetPrefix, copy })
     image.before(media);
     media.append(image.attr("width", "1280").attr("height", "720"));
     attachScene($, { scene: hotelScene, assetPrefix, copy, image, container: media, media });
+  }
+  if (autoOpenScene) {
+    const media = $(".feature-card--auto-open .feature-card__media");
+    const image = media.children("img");
+    if (media.length !== 1 || image.length !== 1) throw new Error("Auto Open feature media is missing");
+    attachScene($, { scene: autoOpenScene, assetPrefix, copy, image, container: media, media });
   }
 }

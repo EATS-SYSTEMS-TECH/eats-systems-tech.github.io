@@ -87,7 +87,7 @@
 
   <script src="../js/navigation.js?v=20261007a" defer=""></script>
   <script src="../js/site-account.js?v=20261013a" defer=""></script>
-  <script src="../js/hero.js?v=20261018b" defer=""></script>
+  <script src="../js/media-runtime.js?v=20261018c" defer=""></script><script src="../js/hero.js?v=20261018c" defer=""></script>
 
   <script>window.accessibilityCopy = {"zh-Hans":{"skipLink":"跳到主要内容","eyebrow":"无障碍","openButton":"打开无障碍菜单","closeButton":"关闭无障碍菜单","title":"无障碍菜单","description":"按照您的阅读和浏览方式调整网站。您的选择会保存在此设备上。","reset":"全部重置","statusDefault":"网站默认显示","statusActive":"已启用 {count} 项调整","hideButton":"隐藏无障碍按钮，直到页面重新加载","statementLink":"无障碍声明","textSize":{"label":"文字大小","description":"放大整个网站的文字。","decrease":"缩小文字","increase":"放大文字","level":"文字大小 {percent}%"},"options":{"highContrast":{"label":"高对比度","description":"浅色背景上的深色文字，边框清晰。"},"grayscale":{"label":"灰度","description":"以无色彩方式显示网站。"},"underlineLinks":{"label":"突出显示链接","description":"为每个链接添加下划线和标记。"},"readableFont":{"label":"易读字体","description":"简洁、清晰易读的字体。"},"textSpacing":{"label":"文字间距","description":"加大行距、词距和字间距。"},"highlightHeadings":{"label":"突出显示标题","description":"标记标题以显示页面结构。"},"bigCursor":{"label":"大光标","description":"更大的鼠标指针。"},"focusHighlight":{"label":"突出显示焦点","description":"在键盘焦点所在元素周围显示粗边框。"},"reducedMotion":{"label":"停止动画","description":"停止动画、过渡效果和背景视频。"}}}};</script>
   <script src="../js/accessibility.js?v=20261007a" defer=""></script>
@@ -134,7 +134,7 @@
 
 
 
-  <link rel="stylesheet" href="../css/scene-video.css?v=20261018b"><script src="../js/scene-video.js?v=20261018b" defer=""></script>
+  <link rel="stylesheet" href="../css/scene-video.css?v=20261018c"><script src="../js/scene-video.js?v=20261018c" defer=""></script>
   <meta name="keywords" content="WIFIGATE, WiFi Gate, wifi gate, 智能门禁, 手机开门, 电动大门, 门禁系统, 免月费">
   <meta name="description" content="WIFIGATE 是一套智能门禁系统，用手机即可开启大门、各种门、停车道闸、卷帘门和车库门。安全加密，方便省心，免月费。">
   <meta name="robots" content="index, follow">
@@ -655,8 +655,8 @@
 
   <section class="hero" id="home" aria-labelledby="hero-title" aria-describedby="hero-subtitle" data-hero-media-state="image" data-hero-scene="homepage-montage">
       <div class="hero__media">
-        <img src="../assets/img/homepage-montage-scene.webp?v=1e09b4025347" alt="" class="hero__bg hero__bg--image" fetchpriority="high" width="1280" height="720">
-        <video id="hero-video" class="hero__bg hero__bg--video" muted="" playsinline="" preload="none" poster="../assets/img/homepage-montage-scene.webp?v=1e09b4025347" aria-hidden="true" data-video-src="../assets/vid/home/homepage-montage-720p.mp4?v=4a52f318f241" data-silent="true" width="1280" height="720"></video>
+        <picture data-scene-picture=""><source media="(min-width: 769px)" srcset="../assets/img/desktop/homepage-montage-scene.webp?v=5ece1e4acb5e"><source media="(max-width: 768px)" srcset="../assets/img/homepage-montage-scene.webp?v=1e09b4025347"><img src="../assets/img/homepage-montage-scene.webp?v=1e09b4025347" alt="" class="hero__bg hero__bg--image" fetchpriority="high" width="1280" height="720"></picture>
+        <video id="hero-video" class="hero__bg hero__bg--video" muted="" playsinline="" preload="none" aria-hidden="true" data-video-src="../assets/vid/home/homepage-montage-720p.mp4?v=4a52f318f241" data-silent="true" width="1280" height="720" data-media-variants="{&quot;mobile&quot;:{&quot;src&quot;:&quot;../assets/vid/home/homepage-montage-720p.mp4?v=4a52f318f241&quot;,&quot;poster&quot;:&quot;../assets/img/homepage-montage-scene.webp?v=1e09b4025347&quot;,&quot;width&quot;:1280,&quot;height&quot;:720},&quot;desktop&quot;:{&quot;src&quot;:&quot;../assets/vid/home/desktop/homepage-montage-1080p.mp4?v=32f0810e35a9&quot;,&quot;poster&quot;:&quot;../assets/img/desktop/homepage-montage-scene.webp?v=5ece1e4acb5e&quot;,&quot;width&quot;:1918,&quot;height&quot;:1080}}"></video>
         <div class="hero__overlay"></div>
         <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="暂停视频" title="暂停视频" aria-pressed="false" data-paused="false" hidden="">
           <svg class="hero__media-control-icon hero__media-control-icon--pause" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -747,9 +747,9 @@
           </article>
 
           <article class="feature-card feature-card--auto-open js-reveal">
-            <figure class="feature-card__media">
-              <img src="../assets/wifigate_features/auto_open.svg?v=20260707am" alt="" class="feature-card__image" loading="lazy">
-            </figure>
+            <figure class="feature-card__media" data-scene-video="" data-scene-state="image">
+              <picture data-scene-picture=""><source media="(min-width: 769px)" srcset="../assets/img/desktop/auto-open-futuristic-scene.webp?v=e3ecd82648ae"><source media="(max-width: 768px)" srcset="../assets/img/desktop/auto-open-futuristic-scene.webp?v=e3ecd82648ae"><img src="../assets/img/desktop/auto-open-futuristic-scene.webp?v=e3ecd82648ae" alt="" class="feature-card__image" loading="lazy" data-scene-image=""></picture><video data-video-src="../assets/vid/home/desktop/auto-open-futuristic-1080p.mp4?v=8731b9cdbc9b" preload="none" muted="" playsinline="" aria-hidden="true" width="1280" height="720" data-media-variants="{&quot;mobile&quot;:{&quot;src&quot;:&quot;../assets/vid/home/desktop/auto-open-futuristic-1080p.mp4?v=8731b9cdbc9b&quot;,&quot;poster&quot;:&quot;../assets/img/desktop/auto-open-futuristic-scene.webp?v=e3ecd82648ae&quot;,&quot;width&quot;:1918,&quot;height&quot;:1080},&quot;desktop&quot;:{&quot;src&quot;:&quot;../assets/vid/home/desktop/auto-open-futuristic-1080p.mp4?v=8731b9cdbc9b&quot;,&quot;poster&quot;:&quot;../assets/img/desktop/auto-open-futuristic-scene.webp?v=e3ecd82648ae&quot;,&quot;width&quot;:1918,&quot;height&quot;:1080}}"></video>
+            <div class="scene-video-controls"><button type="button" data-scene-play="">播放视频</button><button type="button" data-scene-pause="" hidden="">暂停视频</button></div><script type="application/json" data-scene-copy="">{"replay":"重新播放视频","mute":"视频静音","unmute":"取消视频静音","pause":"暂停视频","play":"播放视频"}</script></figure>
             <h3 class="feature-card__title" data-i18n="features.items.autoOpen.title" dir="ltr">自动开门</h3>
             <p class="feature-card__text" data-i18n="features.items.autoOpen.text" dir="ltr">授权用户一到，大门自动开启，享受顺畅便捷的无感通行。</p>
           </article>
@@ -869,7 +869,7 @@
           </div>
 
           <figure class="automation-stay">
-            <div class="automation-stay__media" data-scene-video="" data-scene-state="image"><img src="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281" alt="住客用手机进入住宿场所" width="1280" height="720" loading="lazy" data-scene-image=""><video data-video-src="../assets/vid/use-cases/hotels-airbnb-720p.mp4?v=6eb961062000" poster="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281" preload="none" muted="" playsinline="" aria-hidden="true" width="1280" height="720"></video><div class="scene-video-controls"><button type="button" data-scene-play="">播放视频</button><button type="button" data-scene-pause="" hidden="">暂停视频</button></div><script type="application/json" data-scene-copy="">{"replay":"重新播放视频","mute":"视频静音","unmute":"取消视频静音","pause":"暂停视频","play":"播放视频"}</script></div>
+            <div class="automation-stay__media" data-scene-video="" data-scene-state="image"><picture data-scene-picture=""><source media="(min-width: 769px)" srcset="../assets/wifigate_niche_pages/desktop/hotels-airbnb-scene-hero.webp?v=92017f25f78f"><source media="(max-width: 768px)" srcset="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281"><img src="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281" alt="住客用手机进入住宿场所" width="1280" height="720" loading="lazy" data-scene-image=""></picture><video data-video-src="../assets/vid/use-cases/hotels-airbnb-720p.mp4?v=6eb961062000" preload="none" muted="" playsinline="" aria-hidden="true" width="1280" height="720" data-media-variants="{&quot;mobile&quot;:{&quot;src&quot;:&quot;../assets/vid/use-cases/hotels-airbnb-720p.mp4?v=6eb961062000&quot;,&quot;poster&quot;:&quot;../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp?v=54fbaadf0281&quot;,&quot;width&quot;:1280,&quot;height&quot;:720},&quot;desktop&quot;:{&quot;src&quot;:&quot;../assets/vid/use-cases/desktop/hotels-airbnb-1080p.mp4?v=3c0408c9acc0&quot;,&quot;poster&quot;:&quot;../assets/wifigate_niche_pages/desktop/hotels-airbnb-scene-hero.webp?v=92017f25f78f&quot;,&quot;width&quot;:1918,&quot;height&quot;:1080}}"></video><div class="scene-video-controls"><button type="button" data-scene-play="">播放视频</button><button type="button" data-scene-pause="" hidden="">暂停视频</button></div><script type="application/json" data-scene-copy="">{"replay":"重新播放视频","mute":"视频静音","unmute":"取消视频静音","pause":"暂停视频","play":"播放视频"}</script></div>
             <figcaption class="automation-stay__caption">
               <span class="automation-stay__label" dir="ltr">每一次入住，从预订到退房</span>
               <ol class="automation-stay__steps"><li>收到预订</li><li>入住即可通行</li><li>退房自动失效</li></ol>
