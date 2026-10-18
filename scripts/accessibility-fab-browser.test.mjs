@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { chromium } from "playwright-core";
@@ -22,6 +23,46 @@ async function center(locator) {
 }
 
 try {
+  // Hold the real clip response until a long press is already active. A late
+  // playing event must not relocate the target underneath the visitor's hand.
+  const clip = await readFile(path.resolve("assets/vid/home/homepage-montage-720p.mp4"));
+  for (const file of ["index.html", "he/index.html"]) {
+    const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    await context.addInitScript((value) => localStorage.setItem("wifigate-cookie-consent-v1", value), consent);
+    const tab = await context.newPage();
+    let releaseVideo;
+    const allowVideo = new Promise((resolve) => { releaseVideo = resolve; });
+    await tab.route("**/assets/vid/home/homepage-montage-720p.mp4", async (route) => {
+      await allowVideo;
+      await route.fulfill({ contentType: "video/mp4", body: clip });
+    });
+    try {
+      const request = tab.waitForRequest((request) => request.url().includes("/assets/vid/home/homepage-montage-720p.mp4"));
+      await tab.goto(pathToFileURL(path.resolve(file)).href, { waitUntil: "domcontentloaded" });
+      await request;
+      assert.equal(await tab.locator(".hero").getAttribute("data-hero-media-state"), "image", `${file}: real clip remains pending`);
+      const fab = tab.locator("#a11y-fab");
+      const start = await center(fab);
+      await tab.mouse.move(start.x, start.y);
+      await tab.mouse.down();
+      await tab.waitForFunction(() => document.getElementById("a11y-fab").classList.contains("is-arranging"));
+      const before = await fab.boundingBox();
+      releaseVideo();
+      await tab.waitForFunction(() => document.querySelector(".hero").dataset.heroMediaState === "video" && document.getElementById("hero-video").currentTime > 0);
+      const after = await fab.boundingBox();
+      for (const key of ["x", "y", "width", "height"]) assert.ok(Math.abs(before[key] - after[key]) < .5, `${file}: ${key} stays stable when the clip starts during a long press`);
+      const target = { x: 640, y: 400 };
+      await tab.mouse.move(target.x, target.y, { steps: 12 });
+      await tab.mouse.up();
+      await tab.waitForTimeout(300);
+      const moved = await center(fab);
+      assert.ok(Math.abs(moved.x - target.x) < 4 && Math.abs(moved.y - target.y) < 4, `${file}: drag keeps the original grab point after playback starts`);
+    } finally {
+      releaseVideo();
+      await context.close();
+    }
+  }
+
   for (const page of ["index.html", "he/index.html", "he/cookies/index.html", "he/electric-gates/index.html"]) {
     const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
     await context.addInitScript((value) => localStorage.setItem("wifigate-cookie-consent-v1", value), consent);
@@ -66,7 +107,7 @@ try {
   await tab.touchscreen.tap(x, y);
   assert.equal(await tab.locator("#a11y-panel").getAttribute("aria-hidden"), "false", "a tap opens the panel");
   await context.close();
-  console.log("Accessibility button: center long press drags, X hides it until a reload, tap opens the panel.");
+  console.log("Accessibility button: stays stable when a real clip starts during a long press; center drag, X until reload and tap-to-open passed.");
 } finally {
   await browser.close();
 }

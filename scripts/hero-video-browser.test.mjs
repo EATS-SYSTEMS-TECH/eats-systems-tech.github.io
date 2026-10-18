@@ -9,7 +9,7 @@ import { chromium } from "playwright-core";
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const consent = JSON.stringify({ version: 1, analytics: false, savedAt: Date.now() });
 
-async function visit({ viewport, reducedMotion = "no-preference", saveData = false, effectiveType }) {
+async function visit({ viewport, reducedMotion = "no-preference", saveData = false, effectiveType, expectAutoplay = false }) {
   const context = await browser.newContext({ viewport, reducedMotion });
   await context.addInitScript((value) => localStorage.setItem("wifigate-cookie-consent-v1", value), consent);
   if (saveData || effectiveType) {
@@ -19,14 +19,22 @@ async function visit({ viewport, reducedMotion = "no-preference", saveData = fal
   const videoRequests = [];
   page.on("request", (request) => { if (/\.mp4/.test(request.url())) videoRequests.push(request.url()); });
   await page.goto(pathToFileURL(path.resolve("he/index.html")).href);
-  await page.waitForTimeout(1500);
+  if (expectAutoplay) {
+    await page.waitForFunction(() => {
+      const video = document.getElementById("hero-video");
+      return document.querySelector(".hero").dataset.heroMediaState === "video" && !video.paused && video.currentTime > 0;
+    }, undefined, { timeout: 8000 });
+  } else {
+    // Keep a real observation window for the zero-automatic-request cases.
+    await page.waitForTimeout(1500);
+  }
   const state = await page.locator(".hero").getAttribute("data-hero-media-state");
   const replayVisible = await page.locator("#hero-replay").isVisible();
   return { context, page, state, videoRequests, replayVisible };
 }
 
 try {
-  const desktop = await visit({ viewport: { width: 1280, height: 800 } });
+  const desktop = await visit({ viewport: { width: 1280, height: 800 }, expectAutoplay: true });
   assert.equal(desktop.state, "video", "desktop plays the video");
   assert.ok(desktop.videoRequests.length > 0, "desktop downloads the video");
   await desktop.page.locator("#hero-pause-toggle").click();
@@ -49,7 +57,10 @@ try {
     assert.equal(visitResult.videoRequests.length, 0, `${name}: the video is not downloaded`);
     assert.equal(visitResult.replayVisible, true, `${name}: a play button is offered`);
     await visitResult.page.locator("#hero-replay").click();
-    await visitResult.page.waitForTimeout(500);
+    await visitResult.page.waitForFunction(() => {
+      const video = document.getElementById("hero-video");
+      return document.querySelector(".hero").dataset.heroMediaState === "video" && !video.paused && video.currentTime > 0;
+    }, undefined, { timeout: 8000 });
     assert.equal(await visitResult.page.locator(".hero").getAttribute("data-hero-media-state"), "video", `${name}: the play button starts it`);
     assert.equal(await visitResult.page.locator("#hero-video").isVisible(), true, `${name}: explicit playback is visible`);
     const framing = await visitResult.page.locator(".hero__media").evaluate((element) => {
