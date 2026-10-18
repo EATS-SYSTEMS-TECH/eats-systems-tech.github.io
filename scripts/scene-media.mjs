@@ -39,8 +39,8 @@ export async function readSceneManifest(repoRoot) {
 
 function attachSceneAssets($, assetPrefix) {
   if (!$("link[href*='scene-video.css']").length) {
-    $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261018a`));
-    $("head").append($("<script>").attr("src", `${assetPrefix}js/scene-video.js?v=20261018a`).attr("defer", ""));
+    $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261018b`));
+    $("head").append($("<script>").attr("src", `${assetPrefix}js/scene-video.js?v=20261018b`).attr("defer", ""));
   }
 }
 
@@ -66,6 +66,9 @@ function attachScene($, { scene, assetPrefix, copy, image, container, media }) {
 export function applyNicheSceneMedia($, { scene, assetPrefix, copy }) {
   if (!scene) return;
   attachScene($, { scene, assetPrefix, copy, image: $("#niche-image"), container: $(".niche-hero"), media: $(".niche-hero__media") });
+  // Keep playback beside the existing previous/next actions in the overlay.
+  const pager = $(".niche-hero__pager");
+  if (pager.length === 1) pager.prepend($(".niche-hero__media > .scene-video-controls"));
 }
 
 export function applyHomeSceneMedia($, { scene, hotelScene, assetPrefix, copy }) {

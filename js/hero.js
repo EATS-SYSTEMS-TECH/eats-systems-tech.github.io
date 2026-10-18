@@ -39,8 +39,8 @@ function setupHeroMedia() {
   video.muted = video.defaultMuted = true;
 
   function syncHeroFloatingWidgetState() {
-    // Accepted scenes have a separate media panel; its playback must not move
-    // the accessibility button while a visitor is pressing or dragging it.
+    // Starting or ending an accepted scene must not move the accessibility
+    // button while a visitor is pressing or dragging it.
     document.body.classList.toggle("hero-video-visible", !hero.hasAttribute("data-hero-scene") && inView && desktop.matches && hero.dataset.heroMediaState === "video");
   }
   function updateHeroMediaCopy() {

@@ -65,13 +65,14 @@ try {
     assert.equal(await visitResult.page.locator("#hero-video").isVisible(), true, `${name}: explicit playback is visible`);
     const framing = await visitResult.page.locator(".hero__media").evaluate((element) => {
       const bounds = element.getBoundingClientRect();
+      const hero = element.closest(".hero").getBoundingClientRect();
       const image = element.querySelector(".hero__bg--image");
       const video = element.querySelector("video");
-      return { ratio: bounds.width / bounds.height,
+      return { fullHeroBackground: ["x", "y", "width", "height"].every((key) => Math.abs(bounds[key] - hero[key]) < .5),
         imagePosition: getComputedStyle(image).objectPosition, videoPosition: getComputedStyle(video).objectPosition,
         imageTransform: getComputedStyle(image).transform, videoTransform: getComputedStyle(video).transform };
     });
-    if (options.viewport.width <= 768) assert.ok(Math.abs(framing.ratio - 16 / 9) < .005, "phone keeps the complete action in its landscape frame");
+    assert.ok(framing.fullHeroBackground, `${name}: video keeps the original full-bleed image hero`);
     assert.equal(framing.imagePosition, framing.videoPosition, `${name}: image/video crop matches`);
     assert.equal(framing.imageTransform, framing.videoTransform, `${name}: image/video scale matches`);
     await visitResult.context.close();

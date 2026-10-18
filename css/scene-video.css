@@ -33,11 +33,14 @@
 .scene-video-controls button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 .security-statement__media-image[data-scene-video] { overflow: hidden; }
 .security-statement__media-image[data-scene-video] > img { display: block; width: 100%; height: auto; border-radius: inherit; }
-.automation-stay__media { aspect-ratio: 16 / 9; overflow: hidden; }
-.home-en .automation-stay__media > img { display: block; width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center center; }
-/* First-frame posters and the montage always share identical framing. */
-.home-en .hero[data-hero-scene] .hero__bg { object-position: center center; transform: none; }
+/* Preserve the original hospitality image frame when it becomes a video. */
+.automation-stay__media { aspect-ratio: 1.1; overflow: hidden; }
+.automation-stay__media video[data-video-src] { object-position: 35% center; }
+/* New clips use the original image hero, including its text overlay and crop. */
+.home-en .hero[data-hero-scene] .hero__bg--video { transform: none; }
 .home-en .hero[data-hero-scene][data-hero-media-state="video"] .hero__bg--video { display: block; }
+/* Keep controls above the copy without changing the image/content geometry. */
+.home-en .hero[data-hero-scene] .hero__media { z-index: auto; }
 .home-en .hero[data-hero-scene] .hero__media-control--pause {
   inset: auto;
   top: .75rem;
@@ -62,63 +65,33 @@
   background: #101820e6;
 }
 .home-en .hero[data-hero-scene] .hero__replay::before { width: 1.1rem; height: 1.1rem; font-size: .6rem; }
-.home-en .hero[data-hero-scene] .hero__overlay,
-.niche-hero[data-scene-video] .niche-hero__overlay { display: none; }
-@media (min-width: 769px) {
-  /* Copy and the complete action have independent space in both directions. */
-  .home-en .hero[data-hero-scene],
-  .niche-hero[data-scene-video] {
-    display: grid;
-    grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
-    align-items: center;
-    gap: clamp(1.5rem, 4vw, 4rem);
-    height: auto;
-    min-height: min(820px, calc(100svh - var(--nav-height)));
-    max-height: none;
-    padding: 3rem clamp(1.25rem, 4vw, 4rem);
-  }
-  .home-en .hero[data-hero-scene] .hero__media,
-  .niche-hero[data-scene-video] .niche-hero__media {
-    grid-column: 2;
-    grid-row: 1;
-    position: relative;
-    inset: auto;
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    aspect-ratio: 16 / 9;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .home-en .hero[data-hero-scene] .hero__content,
-  .niche-hero[data-scene-video] .niche-hero__content {
-    grid-column: 1;
-    grid-row: 1;
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    max-width: none;
-    margin: 0;
-    padding: 0;
-  }
-  .home-en .hero[data-hero-scene] .hero__title { max-width: 100%; font-size: clamp(2.25rem, 4vw, 4rem); }
-  .home-en .hero[data-hero-scene] .hero__subtitle { font-size: 1.1rem; }
-  .home-en .hero[data-hero-scene] .hero__proof { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-  .niche-hero[data-scene-video] .niche-hero__content { gap: 2rem; }
-  .niche-hero[data-scene-video] .niche-hero__title { font-size: clamp(2rem, 3.1vw, 3rem); }
+/* Playback is another action in the existing use-case pager, never over it. */
+.niche-hero[data-scene-video] .scene-video-controls { position: static; }
+.niche-hero[data-scene-video] .scene-video-controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 4px;
+  font-size: 0;
 }
-@media (max-width: 768px) {
-  /* Keep the complete action, including the desktop padel scene, in view. */
-  .niche-hero[data-scene-video] { min-height: 0; height: auto; max-height: none; }
-  .niche-hero[data-scene-video] .niche-hero__media { position: relative; height: auto; aspect-ratio: 16 / 9; }
-  .niche-hero[data-scene-video] .niche-hero__content { height: auto; min-height: 0; padding-block: 1.5rem 2rem; }
-  .niche-hero[data-scene-video] .niche-hero__overlay { background: linear-gradient(0deg, #05050550, transparent 45%); }
-  .niche-hero[data-scene-video] .niche-hero__text { margin-top: 2rem; }
-  .scene-video-controls { inset-inline-end: .5rem; top: .5rem; bottom: auto; }
-  .scene-video-controls button { padding: .5rem .8rem; font-size: .85rem; }
-  /* Full landscape action above the copy keeps every entrance readable. */
-  .home-en .hero[data-hero-scene] { min-height: 0; height: auto; }
-  .home-en .hero[data-hero-scene] .hero__media { position: relative; height: auto; aspect-ratio: 16 / 9; }
-  .home-en .hero[data-hero-scene] .hero__content { height: auto; min-height: 0; padding-block: 1.75rem 2rem; }
-  .home-en .hero[data-hero-scene] .hero__overlay { background: linear-gradient(0deg, #05050550, transparent 45%); }
+.niche-hero[data-scene-video] .scene-video-controls button[hidden] { display: none; }
+.niche-hero[data-scene-video] [data-scene-play]::before,
+.niche-hero[data-scene-video] [data-scene-pause][aria-pressed="true"]::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7px 0 7px 10px;
+  border-color: transparent transparent transparent currentColor;
+  margin-inline-start: 2px;
+}
+.niche-hero[data-scene-video] [data-scene-pause][aria-pressed="false"]::before {
+  content: "";
+  width: 10px;
+  height: 14px;
+  border-inline: 3px solid currentColor;
 }

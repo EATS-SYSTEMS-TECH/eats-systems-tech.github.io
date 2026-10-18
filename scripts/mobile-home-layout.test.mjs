@@ -35,13 +35,13 @@ try {
     assert.ok(box[".hero__subtitle"].y >= box[".hero__title"].bottom, `${label}: subtitle clears the headline`);
     assert.ok(box[".hero__actions"].y >= box[".hero__subtitle"].bottom, `${label}: actions clear the subtitle`);
     assert.ok(box[".hero__proof"].y >= box[".hero__actions"].bottom, `${label}: benefits clear the actions`);
-    // The complete landscape scene now precedes the copy on phones. Playback
-    // controls belong to that media area, independently of the text below it.
+    // Video fills the original image hero behind its overlaid copy. Playback
+    // remains accessible above the text without changing the hero footprint.
     const media = box[".hero__media"];
     const replay = box["#hero-replay"];
-    assert.ok(Math.abs((media.right - media.x) / (media.bottom - media.y) - 16 / 9) < .005, `${label}: full landscape action stays visible`);
+    for (const edge of ["x", "y", "right", "bottom"]) assert.ok(Math.abs(media[edge] - box[".hero"][edge]) < .5, `${label}: background ${edge} matches the original hero`);
     assert.ok(replay.x >= media.x && replay.right <= media.right && replay.y >= media.y && replay.bottom <= media.bottom, `${label}: video button remains inside its media`);
-    assert.ok(box[".hero__text"].y >= media.bottom, `${label}: text follows the media`);
+    assert.ok(overlaps(box[".hero__text"], media), `${label}: text remains overlaid on the background`);
     for (const text of [".hero__title", ".hero__subtitle", ".hero__actions", ".hero__proof"]) {
       assert.ok(!overlaps(replay, box[text]), `${label}: video button clears ${text}`);
     }
