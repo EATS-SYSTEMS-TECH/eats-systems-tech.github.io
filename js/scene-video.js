@@ -1,20 +1,20 @@
 // Short, silent access scenes. No media URL is attached until playback is allowed.
 (() => {
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const desktop = window.matchMedia("(min-width: 769px)");
   const connection = navigator.connection;
   const fallback = { play: "Play video", pause: "Pause video", replay: "Replay video" };
 
   function mayAutoplay() {
-    return desktop.matches && !reducedMotion.matches
+    return !reducedMotion.matches
       && !(typeof isReducedMotionRequested === "function" && isReducedMotionRequested())
-      && !connection?.saveData && !/^(slow-2g|2g|3g)$/.test(connection?.effectiveType || "");
+      && !connection?.saveData;
   }
 
   document.querySelectorAll("[data-scene-video]").forEach((scene) => {
     const video = scene.querySelector("video[data-video-src]");
     const image = scene.querySelector("[data-scene-image]");
-    const playButton = scene.querySelector("[data-scene-play]");
+    const replayButton = scene.querySelector("[data-scene-replay]");
+    const playButton = replayButton || scene.querySelector("[data-scene-play]");
     const pauseButton = scene.querySelector("[data-scene-pause]");
     if (!video || !image || !playButton || !pauseButton) return;
     let copy = fallback;
@@ -27,17 +27,19 @@
     let generation = 0;
     scene.dataset.sceneState = "image";
     video.muted = video.defaultMuted = true;
+    video.playsInline = true;
+    video.loop = false;
 
     function labels() {
       const paused = video.paused;
-      const playLabel = finished ? copy.replay : copy.play;
+      const playLabel = replayButton || finished ? copy.replay : copy.play;
       playButton.textContent = playLabel;
       playButton.setAttribute("aria-label", playLabel);
       pauseButton.textContent = paused ? copy.play : copy.pause;
       pauseButton.setAttribute("aria-label", paused ? copy.play : copy.pause);
       pauseButton.setAttribute("aria-pressed", String(paused));
       const visibleVideo = scene.dataset.sceneState === "video";
-      playButton.hidden = visibleVideo && !finished;
+      playButton.hidden = !replayButton && visibleVideo && !finished;
       pauseButton.hidden = !visibleVideo || finished;
     }
 
@@ -56,7 +58,7 @@
       if (current !== generation) return;
       // Preserve the eager image as the initial paint, including on a warm cache.
       try { await image.decode(); } catch { /* A failed image must not block explicit playback. */ }
-      if (current !== generation || (!manual && !mayAutoplay())) return;
+      if (current !== generation || (!manual && (!inView || !mayAutoplay() || document.hidden))) return;
       if (!video.getAttribute("src")) video.setAttribute("src", video.dataset.videoSrc);
       if (restart) { finished = false; video.currentTime = 0; }
       try {
@@ -68,10 +70,10 @@
       labels();
     }
 
-    playButton.addEventListener("click", () => play({ manual: true, restart: finished }));
+    playButton.addEventListener("click", () => play({ manual: true, restart: Boolean(replayButton) || finished }));
     pauseButton.addEventListener("click", () => {
       if (video.paused) play({ manual: true });
-      else { pausedByVisitor = true; video.pause(); labels(); }
+      else { generation += 1; pausedByVisitor = true; video.pause(); labels(); }
     });
     video.addEventListener("playing", () => { scene.dataset.sceneState = "video"; labels(); });
     video.addEventListener("pause", labels);
@@ -91,7 +93,6 @@
       else if (!userStarted) play();
     }
     reducedMotion.addEventListener("change", policyChanged);
-    desktop.addEventListener("change", policyChanged);
     connection?.addEventListener?.("change", policyChanged);
     document.addEventListener("site-accessibility-change", policyChanged);
     document.addEventListener("visibilitychange", () => {

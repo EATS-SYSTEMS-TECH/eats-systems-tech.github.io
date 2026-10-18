@@ -56,21 +56,21 @@ export function sceneAssetUrl(assetPrefix, asset) {
 
 function attachSceneAssets($, assetPrefix) {
   if (!$("script[src*='js/media-runtime.js']").length) {
-    const runtime = $("<script>").attr("src", `${assetPrefix}js/media-runtime.js?v=20261018c`).attr("defer", "");
+    const runtime = $("<script>").attr("src", `${assetPrefix}js/media-runtime.js?v=20261018d`).attr("defer", "");
     const heroScript = $("script[src*='js/hero.js']");
     if (heroScript.length) heroScript.before(runtime);
     else $("head").append(runtime);
   }
-  $("script[src*='js/media-runtime.js']").attr("src", `${assetPrefix}js/media-runtime.js?v=20261018c`);
-  $("script[src*='js/hero.js']").attr("src", `${assetPrefix}js/hero.js?v=20261018c`);
+  $("script[src*='js/media-runtime.js']").attr("src", `${assetPrefix}js/media-runtime.js?v=20261018d`);
+  $("script[src*='js/hero.js']").attr("src", `${assetPrefix}js/hero.js?v=20261018d`);
   if (!$("link[href*='scene-video.css']").length) {
-    $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261018c`));
+    $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261018d`));
   }
   if (!$("script[src*='js/scene-video.js']").length) {
-    $("head").append($("<script>").attr("src", `${assetPrefix}js/scene-video.js?v=20261018c`).attr("defer", ""));
+    $("head").append($("<script>").attr("src", `${assetPrefix}js/scene-video.js?v=20261018d`).attr("defer", ""));
   }
-  $("link[href*='scene-video.css']").attr("href", `${assetPrefix}css/scene-video.css?v=20261018c`);
-  $("script[src*='js/scene-video.js']").attr("src", `${assetPrefix}js/scene-video.js?v=20261018c`);
+  $("link[href*='scene-video.css']").attr("href", `${assetPrefix}css/scene-video.css?v=20261018d`);
+  $("script[src*='js/scene-video.js']").attr("src", `${assetPrefix}js/scene-video.js?v=20261018d`);
 }
 
 function attachResponsiveMedia($, { scene, assetPrefix, image, video }) {
@@ -112,7 +112,14 @@ function attachScene($, { scene, assetPrefix, copy, image, container, media }) {
 export function applyNicheSceneMedia($, { scene, assetPrefix, copy }) {
   if (!scene) return;
   attachScene($, { scene, assetPrefix, copy, image: $("#niche-image"), container: $(".niche-hero"), media: $(".niche-hero__media") });
-  // Keep playback beside the existing previous/next actions in the overlay.
+  const actions = $(".niche-hero__actions");
+  if (actions.length) actions.empty().append($("<button>").attr({ type: "button", id: "niche-hero-replay", "data-scene-replay": "" }).addClass("btn btn--primary niche-hero__btn-primary"));
+  const replay = actions.find("[data-scene-replay]");
+  if (replay.length) {
+    replay.text(copy.replay).attr({ "aria-label": copy.replay, title: copy.replay });
+    $(".niche-hero .scene-video-controls [data-scene-play]").remove();
+  }
+  // Pause/resume stays beside navigation; the single primary action restarts.
   const pager = $(".niche-hero__pager");
   if (pager.length === 1) pager.prepend($(".niche-hero__media > .scene-video-controls"));
 }

@@ -1,5 +1,5 @@
 // The homepage hero keeps its eager poster until an actual video frame plays.
-// Sources are attached only for eligible desktop autoplay or explicit playback.
+// Sources are attached only for in-view autoplay or explicit playback.
 const HERO_MEDIA_FALLBACK_COPY = {
   replay: "Play Video Again", mute: "Mute video", unmute: "Unmute video",
   pause: "Pause video", play: "Play video",
@@ -16,8 +16,7 @@ function heroVideoMayAutoplay() {
   if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return false;
   if (typeof isReducedMotionRequested === "function" && isReducedMotionRequested()) return false;
   const connection = navigator.connection || {};
-  return !connection.saveData && !/^(slow-2g|2g|3g)$/.test(connection.effectiveType || "")
-    && (!window.matchMedia || window.matchMedia("(min-width: 769px)").matches);
+  return !connection.saveData;
 }
 
 function setupHeroMedia() {
@@ -37,6 +36,8 @@ function setupHeroMedia() {
   let finished = false;
   let generation = 0;
   video.muted = video.defaultMuted = true;
+  video.playsInline = true;
+  video.loop = false;
 
   function syncHeroFloatingWidgetState() {
     // Starting or ending an accepted scene must not move the accessibility
@@ -59,7 +60,7 @@ function setupHeroMedia() {
       pauseButton.setAttribute("title", label);
       pauseButton.setAttribute("aria-pressed", String(video.paused));
     }
-    const label = finished ? copy.replay : copy.play;
+    const label = copy.replay;
     replayLabel.textContent = label;
     replayButton.setAttribute("aria-label", label);
     replayButton.setAttribute("title", label);
@@ -68,7 +69,7 @@ function setupHeroMedia() {
     hero.dataset.heroMediaState = state;
     if (muteButton) muteButton.hidden = silent || state !== "video";
     if (pauseButton) pauseButton.hidden = state !== "video";
-    replayButton.hidden = state !== "image";
+    replayButton.hidden = false;
     syncHeroFloatingWidgetState();
     updateHeroMediaCopy();
   }
@@ -96,7 +97,7 @@ function setupHeroMedia() {
     updateHeroMediaCopy();
   }
   muteButton?.addEventListener("click", () => { video.muted = !video.muted; updateHeroMediaCopy(); });
-  replayButton.addEventListener("click", () => playHeroVideo({ restart: finished, manual: true }));
+  replayButton.addEventListener("click", () => playHeroVideo({ restart: true, manual: true }));
   pauseButton?.addEventListener("click", () => {
     if (video.paused) playHeroVideo({ manual: true });
     else { generation += 1; pausedByVisitor = true; video.pause(); }

@@ -62,16 +62,17 @@ try{
  await desktopContext.close();
  for(const width of [393,1280]){
   const ctx=await browser.newContext({viewport:{width,height:851}}),start=requests.length;
-  try{const hero=await open(ctx,'/home-fixture/');if(width<=768){check(await hero.locator('video').getAttribute('src')===null,'hero mobile retains zero automatic video attachment');await hero.locator('#hero-replay').click();}await playing(hero);const variant=width<=768?'mobile':'desktop';check(await hero.locator('video').getAttribute('data-media-variant')===variant,'hero chooses '+variant);check((await hero.locator('video').getAttribute('poster'))===(await hero.locator('img').getAttribute('src')),'hero selected poster/image match');check(requests.slice(start).filter(req=>req.pathname.endsWith('.mp4')).every(req=>req.pathname.includes('/desktop/')===(variant==='desktop')),'hero fetches only chosen video variant');}finally{await ctx.close();}
+  try{const hero=await open(ctx,'/home-fixture/');await playing(hero);const variant=width<=768?'mobile':'desktop';check(await hero.locator('video').getAttribute('data-media-variant')===variant,'hero automatically plays chosen '+variant);check((await hero.locator('video').getAttribute('poster'))===(await hero.locator('img').getAttribute('src')),'hero selected poster/image match');check(requests.slice(start).filter(req=>req.pathname.endsWith('.mp4')).every(req=>req.pathname.includes('/desktop/')===(variant==='desktop')),'hero fetches only chosen video variant');}finally{await ctx.close();}
  }
  await browser.close();browser=null;
 
  context=await chromium.launchPersistentContext(profile,{channel:'chrome',headless:true,viewport:{width:768,height:851}});
  const mobileStart=requests.length,page=await open(context);await page.waitForTimeout(350);
  check(await page.locator('video').getAttribute('data-media-variant')==='mobile','768px selects mobile');
- check(requests.slice(mobileStart).every(req=>!req.pathname.endsWith('.mp4')),'mobile does not download video before manual play');
- await page.setViewportSize({width:393,height:851});await page.locator('[data-scene-play]').click();await playing(page);
- check((await page.locator('video').getAttribute('src')).includes('/use-cases/hotels-airbnb-720p.mp4'),'manual play attaches mobile only');
+ await playing(page);
+ check(requests.slice(mobileStart).some(req=>req.pathname.endsWith('.mp4')),'mobile automatically requests its selected video');
+ await page.setViewportSize({width:393,height:851});
+ check((await page.locator('video').getAttribute('src')).includes('/use-cases/hotels-airbnb-720p.mp4'),'autoplay attaches mobile only');
  await page.waitForFunction(async()=>{for(const name of await caches.keys())if(name.startsWith('wifigate-public-media-')){const keys=await(await caches.open(name)).keys();if(keys.filter(key=>/\.(mp4|webp)\?/.test(key.url)).length>=2)return true;}return false;},{},{timeout:10000});
  const mobileRequests=requests.slice(mobileStart).filter(req=>/\.(mp4|webp)$/.test(req.pathname));
  check(mobileRequests.every(req=>!req.pathname.includes('/desktop/')),'no desktop video OR poster requested on mobile');
@@ -82,13 +83,13 @@ try{
  // origin. Documents stay network-only; this does not promise an offline site.
  mediaUnavailable=true;const restartStart=requests.length;
  context=await chromium.launchPersistentContext(profile,{channel:'chrome',headless:true,viewport:{width:393,height:851}});
- const cachedPage=await open(context);await cachedPage.locator('[data-scene-play]').click();await playing(cachedPage);
+ const cachedPage=await open(context);await playing(cachedPage);
  check(requests.slice(restartStart).every(req=>!req.pathname.endsWith('.mp4')),'browser restart reuses disk-persisted video without a media network request');
  await cachedPage.locator('[data-scene-pause]').click();
  await cachedPage.locator('video').evaluate(video=>{video.currentTime=9;});
  await cachedPage.waitForFunction(()=>{const v=document.querySelector('video');return!v.seeking&&Math.abs(v.currentTime-9)<.05;},{},{timeout:5000});
  check(await cachedPage.locator('video').evaluate(v=>v.currentTime>=9),'real MP4 seek works with cached byte ranges');
- await cachedPage.reload();await cachedPage.locator('[data-scene-play]').click();await playing(cachedPage);
+ await cachedPage.reload();await playing(cachedPage);
  await context.setOffline(true);
  const target=origin+'/'+mobile.video.path+'?v='+mobile.video.sha256.slice(0,12);
  for(const[range,status,expected,contentRange]of [[null,200,mobileVideo,null],['bytes=5-17',206,mobileVideo.subarray(5,18),`bytes 5-17/${mobileVideo.length}`],['bytes=-8',206,mobileVideo.subarray(-8),`bytes ${mobileVideo.length-8}-${mobileVideo.length-1}/${mobileVideo.length}`],[`bytes=${mobileVideo.length}-`,416,Buffer.alloc(0),`bytes */${mobileVideo.length}`]]){

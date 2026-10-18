@@ -74,11 +74,11 @@ picture[data-scene-picture] { display: contents; }
 .home-en .hero[data-hero-scene] .hero__replay {
   inset: auto;
   top: .75rem;
-  inset-inline-end: .75rem;
+  inset-inline-end: 4.25rem;
   transform: none;
   width: auto;
   min-width: 0;
-  max-width: calc(100% - 1.5rem);
+  max-width: calc(100% - 5rem);
   min-height: 44px;
   padding: .45rem .7rem;
   gap: .35rem;
@@ -87,6 +87,7 @@ picture[data-scene-picture] { display: contents; }
   background: #101820e6;
 }
 .home-en .hero[data-hero-scene] .hero__replay::before { width: 1.1rem; height: 1.1rem; font-size: .6rem; }
+.niche-hero__actions [data-scene-replay] { min-height: 44px; cursor: pointer; font: inherit; }
 /* Playback is another action in the existing use-case pager, never over it. */
 .niche-hero[data-scene-video] .scene-video-controls { position: static; }
 .niche-hero[data-scene-video] .scene-video-controls button {

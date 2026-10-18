@@ -16,9 +16,16 @@ try {
     ["", 320, 568, 125], ["he/", 320, 568, 125],
   ]) {
     const context = await browser.newContext({ viewport: { width, height }, isMobile: true, deviceScaleFactor: 2 });
-    await context.addInitScript((value) => localStorage.setItem("wifigate-cookie-consent-v1", value), consent);
+    await context.addInitScript((value) => {
+      localStorage.setItem("wifigate-cookie-consent-v1", value);
+      // This check measures stable layout. Automatic native playback is tested
+      // separately; Save-Data holds the poster while text size is varied.
+      Object.defineProperty(navigator, "connection", { configurable: true, value: { saveData: true } });
+    }, consent);
     const page = await context.newPage();
-    await page.goto(`${process.env.SITE_URL ?? "http://127.0.0.1:8000"}/${locale}`, { waitUntil: "networkidle" });
+    await page.goto(`${process.env.SITE_URL ?? "http://127.0.0.1:8000"}/${locale}`, { waitUntil: "load" });
+    await page.evaluate(() => document.fonts.ready);
+    await page.waitForFunction(() => !document.querySelector("#hero-replay").hidden);
     if (textScale !== 100) await page.addStyleTag({ content: `html { font-size: ${textScale}%; }` });
     const result = await page.evaluate((items) => {
       const box = (selector) => {

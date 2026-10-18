@@ -3,13 +3,13 @@ import fs from "node:fs/promises";
 import { createServer } from "node:http";
 import { chromium } from "playwright-core";
 
-// This fixture uses the existing hero clip to qualify the media controller.
-// Scene content/motion and the eleven deliverable clips are audited separately.
+// This fixture uses the accepted short shutter clip to qualify the controller,
+// including natural completion. Scene content/motion is audited separately.
 const style = await fs.readFile(new URL("../css/scene-video.css", import.meta.url), "utf8");
 const script = await fs.readFile(new URL("../js/scene-video.js", import.meta.url), "utf8");
 const fixtureAssets = new Map(await Promise.all([
   ["/assets/img/wifigate_homepage.webp", "image/webp"],
-  ["/assets/vid/wifigate-final-hero-720p.mp4", "video/mp4"],
+  ["/assets/vid/use-cases/roller-shutters-720p.mp4", "video/mp4"],
 ].map(async ([pathname, contentType]) => {
   const bytes = await fs.readFile(new URL(`..${pathname}`, import.meta.url));
   assert.ok(bytes.length > 0, `Scene fixture asset is empty: ${pathname}`);
@@ -43,9 +43,16 @@ let browser;
 let assertions = 0;
 const check = (value, expected, message) => { assert.equal(value, expected, message); assertions++; };
 
-async function visit({ width = 1280, reducedMotion = "no-preference", connection = {}, fail = false, offscreen = false, delayedFirstPlay = false } = {}) {
+async function visit({ width = 1280, reducedMotion = "no-preference", connection = {}, fail = false, offscreen = false, delayedFirstPlay = false, rejectFirstPlay = false, niche = false, siteMotion = false } = {}) {
   const context = await browser.newContext({ viewport: { width, height: 800 }, reducedMotion });
   await context.addInitScript((value) => Object.defineProperty(navigator, "connection", { value, configurable: true }), connection);
+  if (siteMotion) await context.addInitScript(() => { window.isReducedMotionRequested = () => true; });
+  if (rejectFirstPlay) await context.addInitScript(() => {
+    const play = HTMLMediaElement.prototype.play; let calls = 0;
+    HTMLMediaElement.prototype.play = function (...args) {
+      return ++calls === 1 ? Promise.reject(new DOMException("Autoplay denied by fixture", "NotAllowedError")) : play.apply(this, args);
+    };
+  });
   if (delayedFirstPlay) await context.addInitScript(() => {
     const play = HTMLMediaElement.prototype.play; let calls = 0;
     HTMLMediaElement.prototype.play = function (...args) {
@@ -59,13 +66,14 @@ async function visit({ width = 1280, reducedMotion = "no-preference", connection
   if (fail) await page.route("**/*.mp4", (route) => route.fulfill({ status: 404, body: "fixture failure" }));
   await page.route("**/__scene-controller-test", (route) => route.fulfill({ contentType: "text/html", body: `
     <!doctype html><html lang="he" dir="rtl"><meta charset="utf-8"><title>Scene controller fixture</title>
-    <style>${style} body{margin:0}.fixture{width:min(640px,100%);aspect-ratio:16/9}img{width:100%;height:100%;object-fit:cover}#spacer{height:${offscreen ? 1200 : 0}px}</style>
+    <style>${style} body{margin:0}.fixture{width:min(640px,100%);aspect-ratio:16/9}img{width:100%;height:100%;object-fit:cover}#spacer{height:${offscreen ? 1200 : 0}px}.after{height:1400px}</style>
     <div id="spacer"></div><section class="fixture" data-scene-video>
       <img data-scene-image src="/assets/img/wifigate_homepage.webp" width="1280" height="720" alt="Fixture image" fetchpriority="high">
-      <video data-video-src="/assets/vid/wifigate-final-hero-720p.mp4" preload="none" muted playsinline aria-hidden="true" poster="/assets/img/wifigate_homepage.webp"></video>
-      <div class="scene-video-controls"><button data-scene-play>Play</button><button data-scene-pause hidden>Pause</button></div>
+      <video data-video-src="/assets/vid/use-cases/roller-shutters-720p.mp4" preload="none" muted playsinline aria-hidden="true" poster="/assets/img/wifigate_homepage.webp"></video>
+      ${niche ? '<div class="niche-hero__actions"><button data-scene-replay>Replay</button></div>' : ''}
+      <div class="scene-video-controls">${niche ? '' : '<button data-scene-play>Play</button>'}<button data-scene-pause hidden>Pause</button></div>
       <script type="application/json" data-scene-copy>{"play":"הפעלת הסרטון","pause":"השהיית הסרטון","replay":"נגן את הסרטון שוב"}</script>
-    </section><script>${script}</script></html>` }));
+    </section><div class="after"></div><script>${script}</script></html>` }));
   await page.goto(`${origin}/__scene-controller-test`);
   return { context, page, mediaRequests };
 }
@@ -80,12 +88,9 @@ try {
   }
   browser = await chromium.launch({ channel: "chrome", headless: true });
   for (const [name, settings] of [
-    ["phone", { width: 390 }], ["768px", { width: 768 }],
     ["reduced motion", { reducedMotion: "reduce" }],
+    ["site accessibility motion", { siteMotion: true }],
     ["Save-Data", { connection: { saveData: true } }],
-    ["slow-2g", { connection: { effectiveType: "slow-2g" } }],
-    ["2g", { connection: { effectiveType: "2g" } }],
-    ["3g", { connection: { effectiveType: "3g" } }],
     ["outside viewport", { offscreen: true }],
   ]) {
     const { context, page, mediaRequests } = await visit(settings);
@@ -98,9 +103,23 @@ try {
       await page.keyboard.press("Enter");
       await page.waitForFunction(() => document.querySelector("[data-scene-video]").dataset.sceneState === "video");
       check(mediaRequests.length > 0, true, `${name}: keyboard playback explicitly downloads`);
-      check(await page.locator("video").evaluate((video) => video.muted && video.defaultMuted && !video.loop), true, `${name}: silent single playback`);
+      check(await page.locator("video").evaluate((video) => video.muted && video.defaultMuted && video.playsInline && !video.loop), true, `${name}: silent inline single playback`);
       check(await page.locator("[data-scene-pause]").getAttribute("aria-label"), "השהיית הסרטון", `${name}: localized control`);
     }
+    await context.close();
+  }
+
+  for (const [name, settings] of [
+    ["phone", { width: 390 }], ["768px", { width: 768 }],
+    ["slow-2g", { connection: { effectiveType: "slow-2g" } }],
+    ["2g", { connection: { effectiveType: "2g" } }],
+    ["3g", { width: 390, connection: { effectiveType: "3g" } }],
+  ]) {
+    const { context, page, mediaRequests } = await visit(settings);
+    await page.waitForFunction(() => { const v = document.querySelector("video"); return !v.paused && v.currentTime > 0; });
+    check(mediaRequests.length > 0, true, `${name}: in-view autoplay starts without interaction`);
+    check(await page.locator("video").evaluate(video => video.muted && video.defaultMuted && video.playsInline && !video.loop), true, `${name}: muted inline one-pass autoplay`);
+    check(mediaRequests.every(url => url === `${origin}/assets/vid/use-cases/roller-shutters-720p.mp4`), true, `${name}: only the selected source loads`);
     await context.close();
   }
 
@@ -126,6 +145,38 @@ try {
   await superseded.page.waitForTimeout(1200);
   check(await superseded.page.locator("video").evaluate(video => !video.paused && video.currentTime > 0), true, "older pending autoplay cannot pause the newer manual resume");
   await superseded.context.close();
+
+  const primary = await visit({ width: 390, niche: true });
+  await primary.page.waitForFunction(() => { const v = document.querySelector("video"); return !v.paused && v.currentTime > .2; });
+  const replay = primary.page.locator("[data-scene-replay]");
+  check(await replay.isVisible(), true, "niche replay CTA stays visible during phone autoplay");
+  check(await replay.textContent(), "נגן את הסרטון שוב", "niche replay label remains localized during playback");
+  check(await primary.page.locator("[data-scene-play]").count(), 0, "niche does not duplicate the primary replay with a top play button");
+  for (const paused of [false, true]) {
+    await primary.page.locator("video").evaluate(video => { video.currentTime = Math.min(3, video.duration / 2); });
+    await primary.page.waitForFunction(() => document.querySelector("video").currentTime > 1.5);
+    if (paused) await primary.page.locator("[data-scene-pause]").click();
+    await replay.focus(); await primary.page.keyboard.press("Enter");
+    await primary.page.waitForFunction(() => { const v = document.querySelector("video"); return !v.paused && v.currentTime > 0 && v.currentTime < 1; });
+    check(await replay.isVisible(), true, `niche replay starts at zero from ${paused ? "paused" : "mid-play"} state`);
+  }
+  await primary.page.locator("video").evaluate(video => { video.currentTime = video.duration - .15; });
+  await primary.page.waitForFunction(() => document.querySelector("video").ended);
+  check(await replay.isVisible(), true, "niche replay remains available after natural completion");
+  check(await primary.page.locator("[data-scene-pause]").isVisible(), false, "niche compact pause hides after completion");
+  await primary.page.evaluate(() => window.scrollTo(0, 1300)); await primary.page.waitForTimeout(150);
+  await primary.page.evaluate(() => window.scrollTo(0, 0)); await primary.page.waitForTimeout(250);
+  check(await primary.page.locator("video").evaluate(video => video.ended && video.paused), true, "finished scene does not loop after viewport re-entry");
+  await primary.context.close();
+
+  const denied = await visit({ width: 390, niche: true, rejectFirstPlay: true });
+  await denied.page.waitForTimeout(500);
+  check(await denied.page.locator("[data-scene-video]").getAttribute("data-scene-state"), "image", "autoplay rejection keeps the poster");
+  check(await denied.page.locator("[data-scene-replay]").isVisible(), true, "autoplay rejection retains primary manual recovery");
+  await denied.page.locator("[data-scene-replay]").click();
+  await denied.page.waitForFunction(() => { const v = document.querySelector("video"); return !v.paused && v.currentTime > 0; });
+  check(await denied.page.locator("[data-scene-video]").getAttribute("data-scene-state"), "video", "explicit replay recovers rejected autoplay");
+  await denied.context.close();
 
   const failed = await visit({ fail: true });
   await failed.page.waitForTimeout(600);

@@ -23,11 +23,12 @@ try {
     const page = await context.newPage();
     await page.goto(`${origin}/${locale}${pageKey}`, { waitUntil: "networkidle" });
     const home = !pageKey;
+    if (!home) await page.locator("[data-scene-replay]").scrollIntoViewIfNeeded();
     const result = await page.evaluate((home) => {
       const hero = document.querySelector(home ? ".hero[data-hero-scene]" : ".niche-hero[data-scene-video]");
       const media = hero.querySelector(home ? ".hero__media" : ".niche-hero__media");
       const copy = hero.querySelector(home ? ".hero__content" : ".niche-hero__content");
-      const control = hero.querySelector(home ? "#hero-replay" : "[data-scene-play]");
+      const control = hero.querySelector(home ? "#hero-replay" : "[data-scene-replay]");
       const image = media.querySelector("img"), video = media.querySelector("video");
       const box = (element) => { const r = element.getBoundingClientRect(); return { x: r.x, y: r.y, right: r.right, bottom: r.bottom, width: r.width, height: r.height }; };
       const point = box(control);
@@ -54,6 +55,8 @@ try {
         navigation: [...hero.querySelectorAll(".niche-hero__nav-button")].map(box),
         controlHasName: Boolean(control.getAttribute("aria-label") || control.textContent.trim()),
         controlHitTarget: control === topElement || control.contains(topElement),
+        primaryActionButtons: hero.querySelectorAll(".niche-hero__actions button").length,
+        primaryActionLinks: hero.querySelectorAll(".niche-hero__actions a").length,
         scrollWidth: document.documentElement.scrollWidth, dir: document.documentElement.dir };
     }, home);
     const name = `${locale ? "he" : "en"}-${pageKey.replace(/\/$/, "") || "home"}-${width}`;
@@ -71,7 +74,11 @@ try {
     assert.ok(!overlaps(result.control, result.accessibility), `${name}: playback clears the floating accessibility control`);
     for (const navigation of result.navigation) assert.ok(!overlaps(result.control, navigation), `${name}: playback clears previous/next navigation`);
     assert.ok(result.controlHasName && result.control.height >= 43.9 && result.controlHitTarget, `${name}: named touch target is visible and unobstructed`);
-    assert.ok(result.control.bottom < result.media.y + result.media.height / 2, `${name}: control stays in the upper corner, clear of the central action`);
+    if (home) assert.ok(result.control.bottom < result.media.y + result.media.height / 2, `${name}: home control stays in the upper corner`);
+    else {
+      assert.equal(result.primaryActionButtons, 1, `${name}: one replay CTA`);
+      assert.equal(result.primaryActionLinks, 0, `${name}: former CTA links are absent`);
+    }
     for (const key of ["x", "y", "width", "height"]) assert.ok(Math.abs(result.image[key] - result.video[key]) < .5, `${name}: poster/video bounds match`);
     assert.deepEqual(result.videoFraming, result.imageFraming, `${name}: video and poster share the original image crop`);
     if (screenshotDirectory) await page.screenshot({ path: path.join(screenshotDirectory, `${name}.png`), fullPage: false });

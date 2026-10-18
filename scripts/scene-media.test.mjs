@@ -9,15 +9,40 @@ import { readSceneManifest, applyNicheSceneMedia, applyHomeSceneMedia, sceneAsse
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
+test("niche hero has one localized replay action and separate pause control", async () => {
+  const template = await fs.readFile(new URL("../templates/niche.template.html", import.meta.url), "utf8");
+  const $ = cheerio.load(template);
+  applyNicheSceneMedia($, { scene: { poster: { path: "assets/img/scene.webp" }, video: { path: "assets/vid/use-cases/roller-shutters-720p.mp4" } }, assetPrefix: "../../", copy: { play: "הפעלה", pause: "השהיה", replay: "הפעלה מחדש" } });
+  assert.equal($(".niche-hero__actions button").length, 1);
+  assert.equal($(".niche-hero__actions a").length, 0);
+  assert.equal($("[data-scene-replay]").text(), "הפעלה מחדש");
+  assert.equal($("[data-scene-replay]").attr("aria-label"), "הפעלה מחדש");
+  assert.equal($("[data-scene-play]").length, 0, "no duplicate primary play action");
+  assert.equal($(".niche-hero__pager [data-scene-pause]").length, 1);
+  assert.equal($("#niche-benefits").length, 1, "benefits content remains accessible by scrolling");
+});
+
+test("static landing pages keep their localized actions without a dead replay button", async () => {
+  const template = await fs.readFile(new URL("../templates/niche.template.html", import.meta.url), "utf8");
+  const $ = cheerio.load(template);
+  $("#niche-hero-cta-label").text("WhatsApp @WIFIGATE");
+  $("#niche-hero-benefits").text("יתרונות עיקריים");
+  const before = $(".niche-hero__actions").toString();
+  applyNicheSceneMedia($, { scene: undefined, assetPrefix: "../../", copy: { play: "הפעלה", pause: "השהיה", replay: "הפעלה מחדש" } });
+  assert.equal($(".niche-hero__actions").toString(), before);
+  assert.equal($("[data-scene-replay]").length, 0);
+  assert.equal($("video").length, 0);
+});
+
 test("existing scene styles and controllers receive the current asset version without duplicates", () => {
   for (const existingController of [false, true]) {
     const $ = cheerio.load(`<html><head><link rel="stylesheet" href="../css/scene-video.css?v=20261018b"><script src="../js/hero.js?v=20261018b" defer></script><script src="../js/media-runtime.js?v=old" defer></script>${existingController ? '<script src="../js/scene-video.js?v=20261018b" defer></script>' : ""}</head><body><section class="niche-hero"><div class="niche-hero__media"><img id="niche-image"></div></section></body></html>`);
     applyNicheSceneMedia($, { scene: { poster: { path: "assets/img/scene.webp" }, video: { path: "assets/vid/use-cases/roller-shutters-720p.mp4" } }, assetPrefix: "../../", copy: { play: "Play", pause: "Pause", replay: "Replay" } });
     assert.equal($("link[href*='scene-video.css']").length, 1);
-    assert.equal($("link[href*='scene-video.css']").attr("href"), "../../css/scene-video.css?v=20261018c");
+    assert.equal($("link[href*='scene-video.css']").attr("href"), "../../css/scene-video.css?v=20261018d");
     for (const name of ["hero", "scene-video", "media-runtime"]) {
       assert.equal($(`script[src*='js/${name}.js']`).length, 1);
-      assert.equal($(`script[src*='js/${name}.js']`).attr("src"), `../../js/${name}.js?v=20261018c`);
+      assert.equal($(`script[src*='js/${name}.js']`).attr("src"), `../../js/${name}.js?v=20261018d`);
     }
   }
 });
