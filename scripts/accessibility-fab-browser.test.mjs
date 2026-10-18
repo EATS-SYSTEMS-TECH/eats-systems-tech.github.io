@@ -25,21 +25,26 @@ async function center(locator) {
 try {
   // Hold the real clip response until a long press is already active. A late
   // playing event must not relocate the target underneath the visitor's hand.
-  const clip = await readFile(path.resolve("assets/vid/home/homepage-montage-720p.mp4"));
+  const mediaManifest = JSON.parse(await readFile(path.resolve("assets/vid/scene-manifest.json"), "utf8"));
+  const homeScene = mediaManifest.scenes.find((scene) => scene.key === "homepage-montage");
+  const desktopScene = homeScene.variants?.desktop?.accepted ? homeScene.variants.desktop : homeScene;
+  const clipPath = desktopScene.video.path;
+  const clip = await readFile(path.resolve(clipPath));
   for (const file of ["index.html", "he/index.html"]) {
     const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
     await context.addInitScript((value) => localStorage.setItem("wifigate-cookie-consent-v1", value), consent);
     const tab = await context.newPage();
     let releaseVideo;
     const allowVideo = new Promise((resolve) => { releaseVideo = resolve; });
-    await tab.route(/\/assets\/vid\/home\/homepage-montage-720p\.mp4(?:\?|$)/, async (route) => {
+    await tab.route((url) => url.pathname.endsWith(`/${clipPath}`), async (route) => {
       await allowVideo;
       await route.fulfill({ contentType: "video/mp4", body: clip });
     });
     try {
-      const request = tab.waitForRequest((request) => request.url().includes("/assets/vid/home/homepage-montage-720p.mp4"));
+      const request = tab.waitForRequest((request) => new URL(request.url()).pathname.endsWith(`/${clipPath}`));
       await tab.goto(pathToFileURL(path.resolve(file)).href, { waitUntil: "domcontentloaded" });
       await request;
+      assert.equal(await tab.locator("#hero-video").getAttribute("data-media-variant"), "desktop", `${file}: delayed clip is the actual desktop selection`);
       assert.equal(await tab.locator(".hero").getAttribute("data-hero-media-state"), "image", `${file}: real clip remains pending`);
       const fab = tab.locator("#a11y-fab");
       const start = await center(fab);
