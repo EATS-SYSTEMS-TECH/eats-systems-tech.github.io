@@ -32,7 +32,7 @@ try {
     const tab = await context.newPage();
     let releaseVideo;
     const allowVideo = new Promise((resolve) => { releaseVideo = resolve; });
-    await tab.route("**/assets/vid/home/homepage-montage-720p.mp4", async (route) => {
+    await tab.route(/\/assets\/vid\/home\/homepage-montage-720p\.mp4(?:\?|$)/, async (route) => {
       await allowVideo;
       await route.fulfill({ contentType: "video/mp4", body: clip });
     });

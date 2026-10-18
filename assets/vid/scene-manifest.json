@@ -6,15 +6,15 @@
       "accepted": true,
       "video": {
         "path": "assets/vid/use-cases/residential-buildings-720p.mp4",
-        "sha256": "4b285997662507919e18fc4fb531f131763cbd2d424ee95d1b1a6e6c1f64c65c"
+        "sha256": "713b24d36af6b70cf3139e76087493ffb300081af6026a0a1c72c9b16d83ec0f"
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/residential-buildings-scene-hero.webp",
-        "sha256": "d7e0919abcee011a89a771d8ca57b4d5f08fef8968ee132c63d1834e985c06b4"
+        "sha256": "721c124d6af1f7f371cb9adac4bbbdf7185d2aaf74dc1e9bbbdba611f305021d"
       },
       "width": 1280,
       "height": 720,
-      "durationSeconds": 5.042,
+      "durationSeconds": 10.042,
       "codec": "h264",
       "audioTracks": 0,
       "fastStart": true,
@@ -46,15 +46,15 @@
       "accepted": true,
       "video": {
         "path": "assets/vid/use-cases/hotels-airbnb-720p.mp4",
-        "sha256": "dba1b7210dbb13a0b891197203e5153a0798f05c731a7328fc6612c9efaeefb8"
+        "sha256": "6eb9610620006962b62fd17d6318b43c1d84f8c5d8a3e4bf894a1a6ebd9c5b38"
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp",
-        "sha256": "072be4b5fbf92923c129a0e91f078e70986d119018aefde176c6713488730ec9"
+        "sha256": "54fbaadf0281af471544d9b34f57933a810f185294151a5908432df538bfeade"
       },
       "width": 1280,
       "height": 720,
-      "durationSeconds": 6.042,
+      "durationSeconds": 10.042,
       "codec": "h264",
       "audioTracks": 0,
       "fastStart": true,
@@ -66,15 +66,15 @@
       "accepted": true,
       "video": {
         "path": "assets/vid/use-cases/private-homes-720p.mp4",
-        "sha256": "55797152c7d511076c52058ff7f8eb6c37d861b068b9f2b07a15b33b8571bb61"
+        "sha256": "a02c4bbd34df7b1a1184cfa584f7aefb2404373d9e47173a0ffe4acd57e458f9"
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/private-homes-scene-hero.webp",
-        "sha256": "45bc7c13f19c62b384a3d757537753189e4b55f0e2c2826d9974165c94c60f0e"
+        "sha256": "3889e7ebbcf90708f0115dd5b43b55b09753d94e04add2b6f30bc314a189fa77"
       },
       "width": 1280,
       "height": 720,
-      "durationSeconds": 5.042,
+      "durationSeconds": 10.042,
       "codec": "h264",
       "audioTracks": 0,
       "fastStart": true,
@@ -106,15 +106,15 @@
       "accepted": true,
       "video": {
         "path": "assets/vid/use-cases/entry-doors-magnetic-locks-720p.mp4",
-        "sha256": "504e68bb1a5a248077bc267ab940d2db56ab6cda68db366719d3d17d9c5541e5"
+        "sha256": "0b74f646b19a4de9870ca314b7a9de32733c63f7106c10d776d185fa994c5310"
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/entry-doors-magnetic-locks-scene-hero.webp",
-        "sha256": "0d033011bca03727dcc30be3fdea63211c556e0bb00c76c0bfbd8d4217a0fc21"
+        "sha256": "885fe746448e8ef245084a9e4c5c15aae34ccbb176e66247926d0ec8031826f8"
       },
       "width": 1280,
       "height": 720,
-      "durationSeconds": 6.042,
+      "durationSeconds": 10.042,
       "codec": "h264",
       "audioTracks": 0,
       "fastStart": true,
@@ -126,15 +126,15 @@
       "accepted": true,
       "video": {
         "path": "assets/vid/use-cases/garage-doors-720p.mp4",
-        "sha256": "9ec008609106771052e8d6d134e1eb9d9d616c3f4290bbf8e30bfc8f4797e731"
+        "sha256": "850b68f327b3df2a07844e985f7172c507187187b14d9789301d4f80c312aadb"
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/garage-doors-scene-hero.webp",
-        "sha256": "25ca8ae8a97a46b9b8aa618ced83ecd078f0550b115fb491f43312f904331d8c"
+        "sha256": "a7313ac06e82a239b6cfb9e2fe6bc89cfbc94ff792b91907421bc07dda897540"
       },
       "width": 1280,
       "height": 720,
-      "durationSeconds": 6.042,
+      "durationSeconds": 10.042,
       "codec": "h264",
       "audioTracks": 0,
       "fastStart": true,
@@ -146,15 +146,15 @@
       "accepted": true,
       "video": {
         "path": "assets/vid/use-cases/office-buildings-720p.mp4",
-        "sha256": "cbe25494ecee38fe89454a6bbf099092f95dbdf8a7c0d3ff216e788b47c28455"
+        "sha256": "80465024166fea2ddf216c0f27ec330bdcfb4163c97116e12e51734707d46b4d"
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/office-buildings-scene-hero.webp",
-        "sha256": "a11c31b310f25037859c8dc6422c84e4deabb275102ec2984bb416418a234347"
+        "sha256": "16afd5fa2889ad6edcea23a0bd3a603856586fcdf149117d3ec351ef9862cc62"
       },
       "width": 1280,
       "height": 720,
-      "durationSeconds": 5.042,
+      "durationSeconds": 10.042,
       "codec": "h264",
       "audioTracks": 0,
       "fastStart": true,
@@ -186,15 +186,15 @@
       "accepted": true,
       "video": {
         "path": "assets/vid/use-cases/storage-lockers-720p.mp4",
-        "sha256": "410cc2fb574f60d046fc3d605fbeaf1a175a97d169af1df800e6ddbe4b993f10"
+        "sha256": "a0d1fbc91b9885a1548e64c80fa1e80a293c5b4565f6c28a8707e46af3303933"
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/storage-lockers-scene-hero.webp",
-        "sha256": "f0dacc8280651c261f26339ba6bb2c43c8b2d0d4506c2d82b45a0cadf6c60c6d"
+        "sha256": "e1d43c05329acedcde824fcc44d317d8b392cb2950654811c3eb050d6fc7a568"
       },
       "width": 1280,
       "height": 720,
-      "durationSeconds": 8.042,
+      "durationSeconds": 10.042,
       "codec": "h264",
       "audioTracks": 0,
       "fastStart": true,
@@ -226,7 +226,7 @@
       "accepted": true,
       "video": {
         "path": "assets/vid/home/homepage-montage-720p.mp4",
-        "sha256": "3cd0efb71aa1941fcdfe59a6422082c0ac8e83627c513bbf60c9d710fb747927"
+        "sha256": "4a52f318f241a4e21ea59ef1b86562fd2c5c5aa835eb448b2fd536afa70f5e76"
       },
       "poster": {
         "path": "assets/img/homepage-montage-scene.webp",

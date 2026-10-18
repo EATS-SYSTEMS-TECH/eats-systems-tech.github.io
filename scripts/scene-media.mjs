@@ -37,6 +37,13 @@ export async function readSceneManifest(repoRoot) {
   return scenes;
 }
 
+// Validated production artifacts carry a SHA; small direct renderer fixtures may omit it.
+// Keep filesystem manifest paths plain and bind browser caches to delivered bytes.
+export function sceneAssetUrl(assetPrefix, asset) {
+  const version = /^[a-f0-9]{64}$/.test(asset.sha256 || "") ? "?v=" + asset.sha256.slice(0, 12) : "";
+  return assetPrefix + asset.path + version;
+}
+
 function attachSceneAssets($, assetPrefix) {
   if (!$("link[href*='scene-video.css']").length) {
     $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261018b`));
@@ -46,11 +53,11 @@ function attachSceneAssets($, assetPrefix) {
 
 function attachScene($, { scene, assetPrefix, copy, image, container, media }) {
   if (!["play", "pause", "replay"].every((key) => typeof copy?.[key] === "string" && copy[key].trim())) throw new Error("Missing localized scene controls");
-  image.attr("src", `${assetPrefix}${scene.poster.path}`).attr("data-scene-image", "");
+  image.attr("src", sceneAssetUrl(assetPrefix, scene.poster)).attr("data-scene-image", "");
   container.attr("data-scene-video", "").attr("data-scene-state", "image");
   const video = $("<video>")
-    .attr("data-video-src", `${assetPrefix}${scene.video.path}`)
-    .attr("poster", `${assetPrefix}${scene.poster.path}`)
+    .attr("data-video-src", sceneAssetUrl(assetPrefix, scene.video))
+    .attr("poster", sceneAssetUrl(assetPrefix, scene.poster))
     .attr("preload", "none").attr("muted", "").attr("playsinline", "")
     .attr("aria-hidden", "true").attr("width", "1280").attr("height", "720");
   image.after(video);
@@ -78,8 +85,8 @@ export function applyHomeSceneMedia($, { scene, hotelScene, assetPrefix, copy })
     const video = hero.find("#hero-video");
     if (hero.length !== 1 || image.length !== 1 || video.length !== 1) throw new Error("Homepage hero media is missing");
     hero.attr("data-hero-scene", scene.key).attr("data-hero-media-state", "image");
-    image.attr("src", `${assetPrefix}${scene.poster.path}`).attr("width", "1280").attr("height", "720");
-    video.empty().removeAttr("src loop").attr("data-video-src", `${assetPrefix}${scene.video.path}`)
+    image.attr("src", sceneAssetUrl(assetPrefix, scene.poster)).attr("width", "1280").attr("height", "720");
+    video.empty().removeAttr("src loop").attr("data-video-src", sceneAssetUrl(assetPrefix, scene.video))
       .attr("data-silent", "true").attr("poster", image.attr("src"))
       .attr("width", "1280").attr("height", "720");
     hero.find("#hero-mute-toggle").attr("hidden", "");

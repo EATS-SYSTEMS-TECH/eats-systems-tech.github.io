@@ -5,9 +5,31 @@ import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 import * as cheerio from "cheerio";
-import { readSceneManifest, applyNicheSceneMedia, applyHomeSceneMedia } from "./scene-media.mjs";
+import { readSceneManifest, applyNicheSceneMedia, applyHomeSceneMedia, sceneAssetUrl } from "./scene-media.mjs";
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
+
+test("media cache versions follow delivered artifact hashes across home, hotel and niche renderers", () => {
+  const scene = { key: "homepage-montage",
+    video: { path: "assets/vid/home/homepage-montage-720p.mp4", sha256: hash("new video") },
+    poster: { path: "assets/img/homepage-montage-scene.webp", sha256: hash("new first frame") } };
+  const $ = cheerio.load('<html><head></head><body><section id="home" class="hero"><img class="hero__bg--image"><video id="hero-video"></video></section><section id="guest-invites-api"><figure class="automation-stay"><img alt="Guests"></figure></section><section class="niche-hero"><div class="niche-hero__media"><img id="niche-image"></div></section></body></html>');
+  const copy = { play: "Play", pause: "Pause", replay: "Replay" };
+  applyHomeSceneMedia($, { scene, hotelScene: scene, assetPrefix: "../", copy });
+  applyNicheSceneMedia($, { scene, assetPrefix: "../../", copy });
+  const imageUrl = "../" + scene.poster.path + "?v=" + scene.poster.sha256.slice(0, 12);
+  const videoUrl = "../" + scene.video.path + "?v=" + scene.video.sha256.slice(0, 12);
+  assert.equal($("#home img").attr("src"), imageUrl);
+  assert.equal($("#hero-video").attr("data-video-src"), videoUrl);
+  assert.equal($("#hero-video").attr("poster"), imageUrl);
+  assert.equal($("#guest-invites-api video").attr("data-video-src"), videoUrl);
+  assert.equal($("#guest-invites-api video").attr("poster"), $("#guest-invites-api img").attr("src"));
+  assert.equal($(".niche-hero video").attr("data-video-src"), "../" + videoUrl);
+  assert.equal($(".niche-hero video").attr("poster"), $("#niche-image").attr("src"));
+  assert.notEqual(sceneAssetUrl("../", { ...scene.video, sha256: hash("replacement video") }), videoUrl, "replacing bytes invalidates old video cache");
+  assert.notEqual(sceneAssetUrl("../", { ...scene.poster, sha256: hash("replacement poster") }), imageUrl, "poster has its own independent cache identity");
+  assert.equal(scene.video.path.includes("?"), false, "manifest retains plain filesystem paths");
+});
 
 test("only accepted, unchanged scene artifacts enter pages", async () => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), "wifigate-scene-manifest-"));
