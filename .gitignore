@@ -1,6 +1,7 @@
 node_modules/
 firebase-debug.log
 firebase-debug.*.log
+dev-server*.log
 .firebase/
 # Local Codex settings (per machine)
 /.codex/config.toml
