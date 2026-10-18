@@ -1618,7 +1618,7 @@ html[lang="he"] body.home-en #where .section__header {
 @media (max-width: 768px) {
   .home-en .hero.hero--statement[data-hero-scene] .hero__replay {
     top: auto;
-    bottom: 1rem;
+    bottom: 5rem;
     inset-inline-start: 1rem;
     inset-inline-end: auto;
     transform: none;
