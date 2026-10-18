@@ -36,6 +36,7 @@ const utilityTemplatePath = path.join(repoRoot, "templates", "wifigate-link.temp
 const nicheTemplatePath = path.join(repoRoot, "templates", "niche.template.html");
 const guestInvitesTemplatePath = path.join(repoRoot, "templates", "guest-invites-api.template.html");
 const legalTemplatePath = path.join(repoRoot, "templates", "legal.template.html");
+const shopTemplatePath = path.join(repoRoot, "templates", "shop.template.html");
 
 
 const homeRuntimeScriptsToRemove = ["js/language-selector.js"];
@@ -80,6 +81,7 @@ function getBundle(collection, locale) {
 // renderer already treats these as optional (see updateHomeCopy), so the
 // validator must not reject a locale that supplies one.
 const OPTIONAL_COPY_KEYS = new Set([
+  "hero.statement",
   "footer.taglineLines",
   "platform.subscriptionNote",
   "why.pointsNote",
@@ -616,23 +618,31 @@ function splitHeroSubtitleLines(subtitle) {
 function applyHomepageCopy($, copy, locale) {
   const dir = isRtl(locale) ? "rtl" : "ltr";
 
-  // The h1 opens with the brand, both of its spellings and the category in
-  // the page language (the homepage SEO title), above the headline.
-  const category = getNichePageContent(locale).home.seoTitle.replace(/^WIFIGATE \| /, "");
-  // One inline run (the eyebrow is a flex row with its accent line); the Latin
-  // brand is isolated so it never reorders the words of a right-to-left line.
-  const brand = $("<bdi>").text("WIFIGATE (WiFi Gate)");
-  const words = $("<span>").text(category);
-  const line = $("<span>");
-  if (isRtl(locale)) line.append(words, " · ", brand);
-  else line.append(brand, " · ", words);
-  $("#hero-title .hero__eyebrow").empty().attr("dir", isRtl(locale) ? "rtl" : "ltr").append(line);
-  setLocalizedLines($, "#hero-title .hero__title-lines", copy.hero.titleLines, locale);
-  setLocalizedLines($, "#hero-subtitle", splitHeroSubtitleLines(copy.hero.subtitle), locale);
+  if (copy.hero.statement) {
+    $(".hero").addClass("hero--statement");
+    const title = $("#hero-title").empty().attr("dir", dir);
+    copy.hero.titleLines.forEach((line, index) => {
+      if (index) title.append(" ");
+      title.append($("<span>").addClass("hero__title-line").text(formatTextForLocaleDirection(line, locale)));
+    });
+    setLocalizedText($, "#hero-subtitle", copy.hero.statement, locale);
+    $(".hero__proof").remove();
+  } else {
+    // Other locales retain their existing headline and translated benefits.
+    const category = getNichePageContent(locale).home.seoTitle.replace(/^WIFIGATE \| /, "");
+    const brand = $("<bdi>").text("WIFIGATE (WiFi Gate)");
+    const words = $("<span>").text(category);
+    const line = $("<span>");
+    if (isRtl(locale)) line.append(words, " · ", brand);
+    else line.append(brand, " · ", words);
+    $("#hero-title .hero__eyebrow").empty().attr("dir", dir).append(line);
+    setLocalizedLines($, "#hero-title .hero__title-lines", copy.hero.titleLines, locale);
+    setLocalizedLines($, "#hero-subtitle", splitHeroSubtitleLines(copy.hero.subtitle), locale);
+    $(".hero__proof").attr("aria-label", copy.hero.proofLabel).attr("dir", dir);
+    $(".hero__proof li").each((index, element) => $(element).text(copy.hero.proof[index]));
+  }
   setLocalizedText($, ".hero__btn-primary", copy.hero.primaryCta, locale);
   setLocalizedText($, ".hero__btn-secondary", copy.hero.secondaryCta, locale);
-  $(".hero__proof").attr("aria-label", copy.hero.proofLabel).attr("dir", dir);
-  $(".hero__proof li").each((index, element) => $(element).text(copy.hero.proof[index]));
 
   setLocalizedText($, "#how-it-works .section__eyebrow", copy.platform.eyebrow, locale);
   setLocalizedText($, "#features-title", copy.platform.title, locale);
@@ -895,9 +905,10 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   const menu = $(".topbar-nav").empty();
   for (const item of SITE_NAVIGATION) {
     const link = $("<a>").addClass("nav-link nav__link")
-      .attr("href", home + "#" + item.hash);
+      .attr("href", item.pageKey ? buildPagePath(locale, item.pageKey) : home + "#" + item.hash);
     if (item.key === "contact") link.addClass("nav__contact-link");
-    setLocalizedText($, link, copy[item.key], locale);
+    setLocalizedText($, link, item.key === "shop" ? (locale === "he" ? "חנות" : "Shop") : copy[item.key], locale);
+    if (item.key === "shop" && locale !== "he") link.attr("lang", "en");
     menu.append(link);
   }
   $(".nav").attr("aria-label", copy.ariaLabel);
@@ -905,8 +916,8 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   $(".nav__toggle").attr("aria-label", copy.toggleLabel);
   const loginLabel = SITE_LOGIN_LABELS[locale];
   if (!loginLabel) throw new Error(`No header login label for ${locale}`);
-  setLocalizedText($, $(".site-login__trigger"), loginLabel, locale);
-  $(".site-login__trigger").attr("href", buildPagePath(locale, "login"));
+  setLocalizedText($, $(".site-login__label"), loginLabel, locale);
+  $(".site-login__trigger").attr({ href: buildPagePath(locale, "login"), "aria-label": loginLabel });
   $("#language-button").attr("aria-label", copy.selectLanguageLabel);
   setLanguageSelector($, homeData.localeOptions, locale, pageKey);
   // The signed-in account menu (js/site-account.js). The dashboard speaks
@@ -920,12 +931,49 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   setLocalizedText($, $("[data-account-dashboard]"), account.dashboard, locale);
   $("[data-account-dashboard]").attr("href", locale === "he" ? "/dashboard/?lang=he" : "/dashboard/");
   setLocalizedText($, $("[data-account-sign-out]"), account.signOut, locale);
+  const cartCopy = locale === "he" ? {
+    trigger: "סל קניות", title: "סל הקניות", close: "סגירת סל הקניות", empty: "סל הקניות ריק כרגע.",
+    subtotal: "סכום ביניים משוער", checkout: "התשלום יהיה זמין בקרוב", note: "הקנייה באתר תהיה זמינה בקרוב.",
+  } : {
+    trigger: "Shopping cart", title: "Your cart", close: "Close cart", empty: "Your cart is empty.",
+    subtotal: "Estimated subtotal", checkout: "Checkout coming soon", note: "Online shopping will be available soon.",
+  };
+  $(".site-cart__trigger").attr("aria-label", cartCopy.trigger);
+  $("#site-cart-title").text(cartCopy.title);
+  $(".site-cart__close").attr("aria-label", cartCopy.close);
+  $(".site-cart__empty").text(cartCopy.empty);
+  $(".site-cart__subtotal span").text(cartCopy.subtotal);
+  $(".site-cart__checkout").text(cartCopy.checkout);
+  $(".site-cart__note").text(cartCopy.note);
+  $(".site-cart__drawer").attr("data-cart-copy", JSON.stringify({
+    trigger: cartCopy.trigger,
+    remove: locale === "he" ? "הסרת פריט" : "Remove item",
+    decrease: locale === "he" ? "הפחתת כמות" : "Decrease quantity",
+    increase: locale === "he" ? "הגדלת כמות" : "Increase quantity",
+  }));
+  if (locale !== "he") $(".site-cart__drawer").attr("lang", "en");
   const prefix = buildAssetPrefix(locale, pageKey);
-  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-header.css?v=20261017b">');
+  $("head").append('<link rel="stylesheet" href="' + prefix + siteHeaderStylesheet + '">');
+  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-cart.css?v=20261018c">');
   $("script[src*='js/site-account.js']").remove();
   $("script[src*='js/navigation.js']")
     .attr("src", prefix + "js/navigation.js?v=20261007a")
     .after('\n  <script src="' + prefix + 'js/site-account.js?v=20261013a" defer></script>');
+  $("body").append('<script src="' + prefix + 'js/site-cart.js?v=20261016a" defer></script>');
+}
+
+const siteHeaderStylesheet = "css/site-header.css?v=20261018c";
+
+// A landing page keeps the header's look and the logo, and nothing that leads
+// into the site: no menu, no logo link, no sign-in, account or language menu.
+function setStandaloneHeader($, locale, pageKey) {
+  $(".site-header script, .nav__toggle, .nav__links-wrapper, .site-login__trigger, .site-account, .site-cart__trigger, .site-cart__backdrop, .site-cart__drawer, .language-selector").remove();
+  const logo = $(".nav__logo-link");
+  logo.replaceWith($("<span>").addClass(logo.attr("class")).append(logo.contents()));
+  const nav = $(".site-header .nav");
+  nav.replaceWith($("<div>").addClass(nav.attr("class")).append(nav.contents()));
+  $("script[src*='js/navigation.js'], script[src*='js/site-account.js']").remove();
+  $("head").append('<link rel="stylesheet" href="' + buildAssetPrefix(locale, pageKey) + siteHeaderStylesheet + '">');
 }
 
 // JSON safe to embed in an inline <script>.
@@ -1078,6 +1126,31 @@ async function buildHomePages(homeData) {
   }
 
   return sitemapEntries;
+}
+
+async function buildShopPages(homeData) {
+  const template = await readHtmlTemplate(shopTemplatePath);
+  for (const { code: locale } of homeData.localeOptions) {
+    const $ = cheerio.load(template, { decodeEntities: false });
+    setBodyDirection($, locale);
+    rewriteStaticAssets($, locale, "shop");
+    updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer);
+    updateAccessibilityMarkup($, getBundle(homeData.accessibilityCopy, locale), locale);
+    rewriteFooterLegalLinks($, locale);
+    const he = locale === "he";
+    const title = he ? "החנות של WIFIGATE — בקרוב" : "WIFIGATE Shop — Coming soon";
+    const description = he ? "החנות המקוונת של WIFIGATE תיפתח בקרוב." : "The WIFIGATE online shop is coming soon.";
+    $("title").text(title);
+    $("meta[name='description']").attr("content", description);
+    $("link[rel='canonical']").attr("href", buildPageUrl(locale, "shop"));
+    $(".shop-main__content").attr({ lang: he ? "he" : "en", dir: he ? "rtl" : "ltr" });
+    if (he) {
+      $(".shop-main h1").text("חנות WIFIGATE תיפתח בקרוב.");
+      $(".shop-main__link").text("חזרה ל־WIFIGATE");
+    }
+    $(".shop-main__link").attr("href", buildPagePath(locale, "home"));
+    await writeOutputFile(buildOutputFilePath(locale, "shop"), serialize($, homeData, locale, "shop"));
+  }
 }
 
 // English and Hebrew carry the full legal text. Every other locale shows the
@@ -1821,6 +1894,8 @@ async function main() {
     await buildNichePages(homeData);
     return;
   }
+  // The shop is a preview and intentionally stays out of the sitemap.
+  await buildShopPages(homeData);
   sitemapEntries.push(...(await buildLegalPages(homeData, legalCollections)));
   sitemapEntries.push(...(await buildNichePages(homeData)));
   sitemapEntries.push(...(await buildLandingPages(homeData)));

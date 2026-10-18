@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Replay video","mute":"Mute video","unmute":"Unmute video","pause":"Pause video","play":"Play video"},
+    statement: "WIFIGATE is a smart WiFi gate access system for opening and managing gates, doors, electric shutters, and parking barriers from your phone with a dedicated controller.",
     titleLines: ["One app.", "All your entrances."],
     subtitle: "Smart access and control for homes, buildings, businesses, and hospitality venues. All in one simple, effortless platform.",
     primaryCta: "How it works",

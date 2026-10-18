@@ -6,7 +6,7 @@
   z-index: 100;
   height: var(--nav-height);
   border-bottom: 1px solid rgba(10, 10, 10, 0.1);
-  background: rgba(255, 255, 255, 0.96);
+  background: #ffffff;
   box-shadow: none;
   backdrop-filter: blur(18px);
 }
@@ -51,8 +51,12 @@ html.a11y-text-scaled .site-header .nav {
 
 .site-header .nav__link::after {
   height: 1px;
-  background: #0a0a0a;
+  background: #0b63ff;
 }
+
+.site-header .nav__link:hover,
+.site-header .nav__link:focus-visible,
+.site-header .nav__link--active { color: #0b63ff; }
 
 .site-header .nav__contact-link {
   min-height: 2.5rem;
@@ -70,6 +74,7 @@ html.a11y-text-scaled .site-header .nav {
 .site-header .nav__contact-link:hover,
 .site-header .nav__contact-link:focus-visible {
   color: #ffffff;
+  border-color: #292929;
   background: #292929;
 }
 
@@ -78,8 +83,11 @@ html.a11y-text-scaled .site-header .nav {
   border: 0;
   border-radius: 4px;
   background: transparent;
+  color: #0a0a0a;
   box-shadow: none;
 }
+
+.site-header .language-selector__button:hover { background: #f3f3f3; }
 
 /* No frame around the selector; keyboard focus still shows clearly. */
 .site-header .language-selector__button:focus {
@@ -104,6 +112,8 @@ html.a11y-text-scaled .site-header .nav {
 .site-header .nav__toggle {
   border-radius: 4px;
 }
+.site-header .nav__toggle:hover { background: #f3f3f3; }
+.site-header .nav__toggle-bar { background: #111827; }
 
 .site-header { font-family: "Manrope", system-ui, sans-serif; letter-spacing: 0; }
 .site-header .nav__logo { margin: 0; }
@@ -163,9 +173,9 @@ html.a11y-text-scaled .site-header .nav {
   }
 
   .site-header .nav__links-wrapper {
-    border: 1px solid #dedede;
+    border: 1px solid #333333;
     border-radius: 4px;
-    background: #ffffff;
+    background: #101010;
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.14);
   }
 
@@ -201,7 +211,7 @@ html.a11y-text-scaled .site-header .nav {
     flex: none;
     margin: 0;
     justify-content: stretch;
-    background: #ffffff;
+    background: #101010;
     transform: translateY(-110%);
     opacity: 0;
     pointer-events: none;
@@ -240,7 +250,7 @@ html.a11y-text-scaled .site-header .nav {
   padding: 0.6rem 1rem;
   border: 1px solid #0a0a0a;
   border-radius: 4px;
-  background: #fff;
+  background: #ffffff;
   color: #0a0a0a;
   font: 600 0.84rem "Manrope", system-ui, sans-serif;
   cursor: pointer;
@@ -390,4 +400,38 @@ html.a11y-text-scaled .site-header .nav {
 }
 @media (prefers-reduced-motion: reduce) {
   .site-header .site-account__arrow { transition: none; }
+}
+
+/* The shared mobile menu keeps the same dark surface on every content page. */
+@media (max-width: 1199px) {
+  .site-header .nav .nav__links-wrapper {
+    border-color: #333333;
+    background: #101010;
+    box-shadow: 0 22px 42px rgba(0, 0, 0, .35);
+  }
+  .site-header .topbar-nav {
+    padding-block: .35rem .65rem;
+  }
+  .site-header .topbar-nav .nav__link:not(.nav__contact-link) {
+    display: block;
+    padding-block: .68rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .12);
+    color: #f7f7f7;
+  }
+  .site-header .topbar-nav .nav__link:not(.nav__contact-link):hover,
+  .site-header .topbar-nav .nav__link:not(.nav__contact-link):focus-visible {
+    color: #b7d4ff;
+  }
+  .site-header .topbar-nav .nav__contact-link {
+    margin-top: .65rem;
+    border-color: #0b63ff;
+    background: #0b63ff;
+    color: #ffffff;
+  }
+  .site-header .topbar-nav .nav__contact-link:hover,
+  .site-header .topbar-nav .nav__contact-link:focus-visible {
+    border-color: #0542ad;
+    background: #0542ad;
+    color: #ffffff;
+  }
 }

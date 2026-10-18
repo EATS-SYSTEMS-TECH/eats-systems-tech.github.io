@@ -71,7 +71,11 @@ for (const localeFile of localeFiles) {
   const navTargets = $(".topbar-nav .nav__link")
     .map((_, element) => $(element).attr("href"))
     .get();
-  const expectedNavTargets = expectedTargets.map((id) => `${homePath}#${id}`);
+  const expectedNavTargets = [
+    ...expectedTargets.slice(0, 4).map((id) => `${homePath}#${id}`),
+    `${homePath}shop/`,
+    `${homePath}#${expectedTargets[4]}`,
+  ];
   if (JSON.stringify(navTargets) !== JSON.stringify(expectedNavTargets)) {
     report(locale, `unexpected navigation targets: ${JSON.stringify(navTargets)}`);
   }
@@ -82,6 +86,7 @@ for (const localeFile of localeFiles) {
     copy.navigation.solutions,
     copy.navigation.automation,
     copy.navigation.productGuide,
+    locale === "he" ? "חנות" : "Shop",
     copy.navigation.contact,
   ].map(normalize);
   if (JSON.stringify(navLabels) !== JSON.stringify(expectedNavLabels)) report(locale, "navigation copy mismatch");
@@ -96,16 +101,36 @@ for (const localeFile of localeFiles) {
     report(locale, "Host CTA is not locale-aware");
   }
 
-  const heroSubtitle = $("#hero-subtitle");
-  const heroSubtitleLines = (heroSubtitle.html() || "")
-    .split(/<br\s*\/?>/iu)
-    .map((line) => normalize(cheerio.load(line, null, false).text()));
-  if (heroSubtitle.find("br").length !== 1 || heroSubtitleLines.length !== 2 || heroSubtitleLines.some((line) => !line)) {
-    report(locale, "hero subtitle must contain exactly two non-empty lines");
+  const autoOpenMedia = $(".feature-card--auto-open .feature-card__media");
+  if (autoOpenMedia.length !== 1 ||
+      !autoOpenMedia.find("img.feature-card__image").attr("src")?.includes("auto_open.svg") ||
+      autoOpenMedia.find("video, picture, .scene-video-controls").length !== 0 ||
+      autoOpenMedia.is("[data-scene-video]")) {
+    report(locale, "Auto Open card must retain its original icon");
   }
-  const compactHeroSubtitle = (value) => normalize(value).replace(/\s+/gu, "");
-  if (compactHeroSubtitle(heroSubtitleLines.join("")) !== compactHeroSubtitle(copy.hero.subtitle)) {
-    report(locale, "hero subtitle copy mismatch");
+
+  if (copy.hero.statement) {
+    if (normalize($("#hero-title").text()) !== normalize(copy.hero.titleLines.join(" "))) {
+      report(locale, "hero headline copy mismatch");
+    }
+    if (normalize($("#hero-subtitle").text()) !== normalize(copy.hero.statement)) {
+      report(locale, "hero statement copy mismatch");
+    }
+    if (!$(".hero").hasClass("hero--statement") || $(".hero__proof").length || $("#hero-subtitle").length !== 1) {
+      report(locale, "hero statement structure mismatch");
+    }
+  } else {
+    const heroSubtitle = $("#hero-subtitle");
+    const heroSubtitleLines = (heroSubtitle.html() || "")
+      .split(/<br\s*\/?>/iu)
+      .map((line) => normalize(cheerio.load(line, null, false).text()));
+    if (heroSubtitle.find("br").length !== 1 || heroSubtitleLines.length !== 2 || heroSubtitleLines.some((line) => !line)) {
+      report(locale, "hero subtitle must contain exactly two non-empty lines");
+    }
+    const compactHeroSubtitle = (value) => normalize(value).replace(/\s+/gu, "");
+    if (compactHeroSubtitle(heroSubtitleLines.join("")) !== compactHeroSubtitle(copy.hero.subtitle)) {
+      report(locale, "hero subtitle copy mismatch");
+    }
   }
 
   const visibleFaq = $("#wifi-gate-faq .seo-faq__item")

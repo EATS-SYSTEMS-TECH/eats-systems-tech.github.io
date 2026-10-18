@@ -143,7 +143,7 @@
     }
   ]
 }
-  </script><link rel="stylesheet" href="../../css/site-header.css?v=20261017b"><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261016a"></head>
+  </script><link rel="stylesheet" href="../../css/site-header.css?v=20261018c"><link rel="stylesheet" href="../../css/site-cart.css?v=20261018c"><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261016a"></head>
 
 <body class="legal-page">
   <a class="skip-link" href="#main-content">ప్రధాన కంటెంట్‌కు వెళ్లండి</a>
@@ -160,9 +160,9 @@
         <span class="nav__toggle-bar"></span>
       </button>
       <div class="nav__links-wrapper" id="primary-navigation">
-        <div class="topbar-nav"><a class="nav-link nav__link" href="/te/#how-it-works" dir="ltr">ఎలా పనిచేస్తుంది</a><a class="nav-link nav__link" href="/te/#use-cases" dir="ltr">ఉపయోగాలు</a><a class="nav-link nav__link" href="/te/#wifigate-automation" dir="ltr">WIFIGATE Host</a><a class="nav-link nav__link" href="/te/#tutorial-videos" dir="ltr">ట్యుటోరియల్ వీడియోలు</a><a class="nav-link nav__link nav__contact-link" href="/te/#get-in-touch" dir="ltr">మాతో మాట్లాడండి</a></div>
+        <div class="topbar-nav"><a class="nav-link nav__link" href="/te/#how-it-works" dir="ltr">ఎలా పనిచేస్తుంది</a><a class="nav-link nav__link" href="/te/#use-cases" dir="ltr">ఉపయోగాలు</a><a class="nav-link nav__link" href="/te/#wifigate-automation" dir="ltr">WIFIGATE Host</a><a class="nav-link nav__link" href="/te/#tutorial-videos" dir="ltr">ట్యుటోరియల్ వీడియోలు</a><a class="nav-link nav__link" href="/te/shop/" dir="ltr" lang="en">Shop</a><a class="nav-link nav__link nav__contact-link" href="/te/#get-in-touch" dir="ltr">మాతో మాట్లాడండి</a></div>
       </div>
-      <a class="site-login__trigger" href="/te/login/" dir="ltr">లాగిన్</a>
+      <a class="site-login__trigger" href="/te/login/" aria-label="లాగిన్"><span class="site-login__label" dir="ltr">లాగిన్</span><svg class="site-login__icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"></circle><path d="M4.5 20a7.5 7.5 0 0 1 15 0"></path></svg></a>
       <div class="site-account">
         <button type="button" class="site-account__button" id="account-button" aria-label="ఖాతా మెనూ" aria-haspopup="menu" aria-expanded="false" aria-controls="account-menu">
           <span class="site-account__avatar" aria-hidden="true"></span>
@@ -180,6 +180,13 @@
           </div>
         </div>
       </div>
+      <button class="site-cart__trigger" type="button" aria-label="Shopping cart" aria-controls="site-cart-drawer" aria-haspopup="dialog" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.5L21 8H6"></path>
+          <circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle>
+        </svg>
+        <span class="site-cart__count" aria-hidden="true" hidden=""></span>
+      </button>
       <div class="language-selector">
         <button type="button" class="language-selector__button" id="language-button" aria-label="భాషను ఎంచుకోండి" aria-controls="language-dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="language-selector__flag" id="selected-flag"><img src="../../assets/img/flags/flag-in.svg" alt="IN" width="50" height="33"></span>
@@ -424,6 +431,22 @@
       </div>
     </nav>
   </header>
+  <div class="site-cart__backdrop" hidden=""></div>
+  <aside class="site-cart__drawer" id="site-cart-drawer" role="dialog" aria-modal="true" aria-labelledby="site-cart-title" tabindex="-1" hidden="" data-cart-copy="{&quot;trigger&quot;:&quot;Shopping cart&quot;,&quot;remove&quot;:&quot;Remove item&quot;,&quot;decrease&quot;:&quot;Decrease quantity&quot;,&quot;increase&quot;:&quot;Increase quantity&quot;}" lang="en">
+    <div class="site-cart__heading">
+      <h2 id="site-cart-title">Your cart</h2>
+      <button class="site-cart__close" type="button" aria-label="Close cart">×</button>
+    </div>
+    <div class="site-cart__body">
+      <p class="site-cart__empty">Your cart is empty.</p>
+      <ul class="site-cart__items" aria-live="polite" hidden=""></ul>
+    </div>
+    <div class="site-cart__footer">
+      <div class="site-cart__subtotal"><span>Estimated subtotal</span><strong>—</strong></div>
+      <button class="site-cart__checkout" type="button" disabled="">Checkout coming soon</button>
+      <p class="site-cart__note">Online shopping will be available soon.</p>
+    </div>
+  </aside>
 
   <main class="legal-main" id="main-content">
     <div class="container">
@@ -889,4 +912,4 @@
 
 
 
-<script>window.WIFIGATE_COOKIE_COPY = {"te":{"title":"గోప్యత, కుక్కీ సెట్టింగ్‌లు","description":"సైట్ పనిచేయడానికి మేము అవసరమైన కుక్కీలను ఉపయోగిస్తాము. మీ సమ్మతితో, సైట్ ఎలా ఉపయోగించబడుతుందో అర్థం చేసుకుని దాన్ని మెరుగుపరచడానికి Google Analyticsను కూడా ఉపయోగిస్తాము. మీరు మీ ఎంపికను ఎప్పుడైనా మార్చుకోవచ్చు.","privacy":"గోప్యతా విధానం","cookies":"కుక్కీ విధానం","settings":"సెట్టింగ్‌లు","accept":"అన్నింటినీ అంగీకరించండి","reject":"అన్నింటినీ తిరస్కరించండి","save":"ఎంపికను సేవ్ చేయండి","necessary":"అవసరమైన కుక్కీలు","necessaryHelp":"సైట్ పని చేయడానికి, మీ ప్రాధాన్యతలను గుర్తుంచుకోవడానికి అవసరం. ఎప్పుడూ ఆన్‌లో ఉంటాయి.","alwaysOn":"ఎప్పుడూ ఆన్","analytics":"అనలిటిక్స్ కుక్కీలు","analyticsHelp":"మీరు అనుమతిస్తేనే Google Analytics సైట్ వినియోగాన్ని కొలుస్తుంది.","reopen":"కుక్కీ సెట్టింగ్‌లు","close":"సెట్టింగ్‌లను మూసివేయండి","banner":"Google Analytics ద్వారా సైట్ ట్రాఫిక్‌ను విశ్లేషించడానికి మేము కుక్కీలను ఉపయోగిస్తాము. మీరు అంగీకరిస్తేనే అనలిటిక్స్ పనిచేస్తుంది. మరింత సమాచారం:"}};</script><script src="../../js/cookie-consent.js?v=20261016a" defer=""></script></body></html>
+<script src="../../js/site-cart.js?v=20261016a" defer=""></script><script>window.WIFIGATE_COOKIE_COPY = {"te":{"title":"గోప్యత, కుక్కీ సెట్టింగ్‌లు","description":"సైట్ పనిచేయడానికి మేము అవసరమైన కుక్కీలను ఉపయోగిస్తాము. మీ సమ్మతితో, సైట్ ఎలా ఉపయోగించబడుతుందో అర్థం చేసుకుని దాన్ని మెరుగుపరచడానికి Google Analyticsను కూడా ఉపయోగిస్తాము. మీరు మీ ఎంపికను ఎప్పుడైనా మార్చుకోవచ్చు.","privacy":"గోప్యతా విధానం","cookies":"కుక్కీ విధానం","settings":"సెట్టింగ్‌లు","accept":"అన్నింటినీ అంగీకరించండి","reject":"అన్నింటినీ తిరస్కరించండి","save":"ఎంపికను సేవ్ చేయండి","necessary":"అవసరమైన కుక్కీలు","necessaryHelp":"సైట్ పని చేయడానికి, మీ ప్రాధాన్యతలను గుర్తుంచుకోవడానికి అవసరం. ఎప్పుడూ ఆన్‌లో ఉంటాయి.","alwaysOn":"ఎప్పుడూ ఆన్","analytics":"అనలిటిక్స్ కుక్కీలు","analyticsHelp":"మీరు అనుమతిస్తేనే Google Analytics సైట్ వినియోగాన్ని కొలుస్తుంది.","reopen":"కుక్కీ సెట్టింగ్‌లు","close":"సెట్టింగ్‌లను మూసివేయండి","banner":"Google Analytics ద్వారా సైట్ ట్రాఫిక్‌ను విశ్లేషించడానికి మేము కుక్కీలను ఉపయోగిస్తాము. మీరు అంగీకరిస్తేనే అనలిటిక్స్ పనిచేస్తుంది. మరింత సమాచారం:"}};</script><script src="../../js/cookie-consent.js?v=20261016a" defer=""></script></body></html>
