@@ -9,11 +9,11 @@ import { chromium } from "playwright-core";
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const consent = JSON.stringify({ version: 1, analytics: false, savedAt: Date.now() });
 
-async function visit({ viewport, reducedMotion = "no-preference", saveData = false }) {
+async function visit({ viewport, reducedMotion = "no-preference", saveData = false, effectiveType }) {
   const context = await browser.newContext({ viewport, reducedMotion });
   await context.addInitScript((value) => localStorage.setItem("wifigate-cookie-consent-v1", value), consent);
-  if (saveData) {
-    await context.addInitScript(() => Object.defineProperty(navigator, "connection", { value: { saveData: true }, configurable: true }));
+  if (saveData || effectiveType) {
+    await context.addInitScript((value) => Object.defineProperty(navigator, "connection", { value, configurable: true }), { saveData, effectiveType });
   }
   const page = await context.newPage();
   const videoRequests = [];
@@ -29,12 +29,20 @@ try {
   const desktop = await visit({ viewport: { width: 1280, height: 800 } });
   assert.equal(desktop.state, "video", "desktop plays the video");
   assert.ok(desktop.videoRequests.length > 0, "desktop downloads the video");
+  await desktop.page.locator("#hero-pause-toggle").click();
+  assert.equal(await desktop.page.locator("#hero-video").evaluate((video) => video.paused), true, "visitor can pause playback");
+  await desktop.page.setViewportSize({ width: 1400, height: 800 });
+  assert.equal(await desktop.page.locator("#hero-video").evaluate((video) => video.paused), true, "resize preserves the visitor pause");
+  await desktop.page.locator("#hero-pause-toggle").focus();
+  await desktop.page.keyboard.press("Enter");
+  await desktop.page.waitForFunction(() => !document.getElementById("hero-video").paused);
   await desktop.context.close();
 
   for (const [name, options] of [
     ["phone", { viewport: { width: 390, height: 844 } }],
     ["reduced motion", { viewport: { width: 1280, height: 800 }, reducedMotion: "reduce" }],
     ["Save-Data", { viewport: { width: 1280, height: 800 }, saveData: true }],
+    ["slow connection", { viewport: { width: 1280, height: 800 }, effectiveType: "3g" }],
   ]) {
     const visitResult = await visit(options);
     assert.equal(visitResult.state, "image", `${name}: poster only`);
@@ -43,9 +51,21 @@ try {
     await visitResult.page.locator("#hero-replay").click();
     await visitResult.page.waitForTimeout(500);
     assert.equal(await visitResult.page.locator(".hero").getAttribute("data-hero-media-state"), "video", `${name}: the play button starts it`);
+    assert.equal(await visitResult.page.locator("#hero-video").isVisible(), true, `${name}: explicit playback is visible`);
+    const framing = await visitResult.page.locator(".hero__media").evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      const image = element.querySelector(".hero__bg--image");
+      const video = element.querySelector("video");
+      return { ratio: bounds.width / bounds.height,
+        imagePosition: getComputedStyle(image).objectPosition, videoPosition: getComputedStyle(video).objectPosition,
+        imageTransform: getComputedStyle(image).transform, videoTransform: getComputedStyle(video).transform };
+    });
+    if (options.viewport.width <= 768) assert.ok(Math.abs(framing.ratio - 16 / 9) < .005, "phone keeps the complete action in its landscape frame");
+    assert.equal(framing.imagePosition, framing.videoPosition, `${name}: image/video crop matches`);
+    assert.equal(framing.imageTransform, framing.videoTransform, `${name}: image/video scale matches`);
     await visitResult.context.close();
   }
-  console.log("Hero video: plays on desktop; poster with a play button and no download on phones, reduced motion and Save-Data.");
+  console.log("Hero video: desktop playback and pause; poster with zero automatic downloads on phones, reduced motion, Save-Data and slow connections; visible keyboard/manual playback and matching poster crop.");
 } finally {
   await browser.close();
 }

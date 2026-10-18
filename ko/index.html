@@ -87,7 +87,7 @@
 
   <script src="../js/navigation.js?v=20261007a" defer=""></script>
   <script src="../js/site-account.js?v=20261013a" defer=""></script>
-  <script src="../js/hero.js?v=20261007b" defer=""></script>
+  <script src="../js/hero.js?v=20261018a" defer=""></script>
 
   <script>window.accessibilityCopy = {"ko":{"skipLink":"본문으로 건너뛰기","eyebrow":"접근성","openButton":"접근성 메뉴 열기","closeButton":"접근성 메뉴 닫기","title":"접근성 메뉴","description":"읽고 탐색하는 방식에 맞게 사이트를 조정하세요. 선택한 설정은 이 기기에 저장됩니다.","reset":"모두 초기화","statusDefault":"기본 사이트 보기","statusActive":"{count}개 항목 적용 중","hideButton":"페이지를 새로 고칠 때까지 접근성 버튼 숨기기","statementLink":"접근성 정책","textSize":{"label":"글자 크기","description":"사이트 전체의 글자를 확대합니다.","decrease":"글자 작게","increase":"글자 크게","level":"글자 크기 {percent}%"},"options":{"highContrast":{"label":"고대비","description":"밝은 배경에 어두운 글자와 뚜렷한 테두리를 표시합니다."},"grayscale":{"label":"회색조","description":"사이트를 색상 없이 표시합니다."},"underlineLinks":{"label":"링크 강조","description":"모든 링크에 밑줄과 표시를 추가합니다."},"readableFont":{"label":"읽기 쉬운 글꼴","description":"단순하고 읽기 쉬운 글꼴을 사용합니다."},"textSpacing":{"label":"텍스트 간격","description":"줄, 단어, 글자 사이 간격을 넓힙니다."},"highlightHeadings":{"label":"제목 강조","description":"제목을 표시해 페이지 구조를 보여 줍니다."},"bigCursor":{"label":"큰 커서","description":"마우스 포인터를 더 크게 표시합니다."},"focusHighlight":{"label":"포커스 강조","description":"키보드 포커스가 있는 요소 주위에 굵은 테두리를 표시합니다."},"reducedMotion":{"label":"애니메이션 중지","description":"애니메이션, 전환 효과, 배경 동영상을 중지합니다."}}}};</script>
   <script src="../js/accessibility.js?v=20261007a" defer=""></script>
@@ -134,7 +134,7 @@
 
 
 
-
+  <link rel="stylesheet" href="../css/scene-video.css?v=20261018a"><script src="../js/scene-video.js?v=20261018a" defer=""></script>
   <meta name="keywords" content="WIFIGATE, WiFi Gate, wifi gate, 스마트 출입 관리, 스마트폰으로 게이트 열기, 자동대문, 출입 통제, 월 구독료 없음">
   <meta name="description" content="WIFIGATE는 게이트, 출입문, 주차장, 셔터, 차고를 스마트폰으로 여는 스마트 출입 관리 시스템입니다. 암호화로 안전하고 편리하며, 월 구독료가 없습니다.">
   <meta name="robots" content="index, follow">
@@ -653,14 +653,12 @@
 
   <main id="main-content">
 
-  <section class="hero" id="home" aria-labelledby="hero-title" aria-describedby="hero-subtitle" data-hero-media-state="video">
+  <section class="hero" id="home" aria-labelledby="hero-title" aria-describedby="hero-subtitle" data-hero-media-state="image" data-hero-scene="homepage-montage">
       <div class="hero__media">
-        <img src="../assets/img/wifigate_homepage.webp" alt="" class="hero__bg hero__bg--image" fetchpriority="high">
-        <video id="hero-video" class="hero__bg hero__bg--video" muted="" loop="" playsinline="" preload="none" poster="../assets/img/wifigate_homepage.webp" aria-hidden="true">
-          <source src="../assets/vid/wifigate-final-hero-720p.mp4?v=20261007" type="video/mp4">
-        </video>
+        <img src="../assets/img/homepage-montage-scene.webp" alt="" class="hero__bg hero__bg--image" fetchpriority="high" width="1280" height="720">
+        <video id="hero-video" class="hero__bg hero__bg--video" muted="" playsinline="" preload="none" poster="../assets/img/homepage-montage-scene.webp" aria-hidden="true" data-video-src="../assets/vid/home/homepage-montage-720p.mp4" data-silent="true" width="1280" height="720"></video>
         <div class="hero__overlay"></div>
-        <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="영상 일시정지" title="영상 일시정지" aria-pressed="false" data-paused="false">
+        <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="영상 일시정지" title="영상 일시정지" aria-pressed="false" data-paused="false" hidden="">
           <svg class="hero__media-control-icon hero__media-control-icon--pause" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
             <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
@@ -669,7 +667,7 @@
             <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" fill="currentColor"></path>
           </svg>
         </button>
-        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="영상 음소거 해제" title="영상 음소거 해제" aria-pressed="false" data-muted="true">
+        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="영상 음소거 해제" title="영상 음소거 해제" aria-pressed="false" data-muted="true" hidden="">
           <svg class="hero__media-control-icon hero__media-control-icon--muted" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M14 4.12v15.76a1 1 0 0 1-1.68.73l-4.04-3.61H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.28l4.04-3.61A1 1 0 0 1 14 4.12Z" fill="currentColor"></path>
             <path d="m17 9 4 4m0-4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -680,7 +678,7 @@
             <path d="M19.75 7a8 8 0 0 1 0 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
         </button>
-        <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" hidden="" aria-label="영상 다시 재생" title="영상 다시 재생">
+        <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" aria-label="영상 다시 재생" title="영상 다시 재생">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 5V2l-4 4 4 4V7a7 7 0 1 1-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
             <path d="m11 10 5 3-5 3z" fill="currentColor"></path>
@@ -871,7 +869,7 @@
           </div>
 
           <figure class="automation-stay">
-            <img src="../assets/wifigate_niche_pages/hotels-airbnb-v2-app-hero.webp" alt="스마트폰으로 숙소에 들어가는 게스트" width="1280" height="720" loading="lazy">
+            <div class="automation-stay__media" data-scene-video="" data-scene-state="image"><img src="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp" alt="스마트폰으로 숙소에 들어가는 게스트" width="1280" height="720" loading="lazy" data-scene-image=""><video data-video-src="../assets/vid/use-cases/hotels-airbnb-720p.mp4" poster="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp" preload="none" muted="" playsinline="" aria-hidden="true" width="1280" height="720"></video><div class="scene-video-controls"><button type="button" data-scene-play="">영상 재생</button><button type="button" data-scene-pause="" hidden="">영상 일시정지</button></div><script type="application/json" data-scene-copy="">{"replay":"영상 다시 재생","mute":"영상 음소거","unmute":"영상 음소거 해제","pause":"영상 일시정지","play":"영상 재생"}</script></div>
             <figcaption class="automation-stay__caption">
               <span class="automation-stay__label" dir="ltr">예약부터 체크아웃까지, 모든 숙박에</span>
               <ol class="automation-stay__steps"><li>예약 접수</li><li>체크인 시 출입</li><li>체크아웃 시 만료</li></ol>

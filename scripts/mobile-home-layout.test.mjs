@@ -5,7 +5,7 @@ const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? 
 const consent = JSON.stringify({ version: 1, analytics: false, savedAt: Date.now() });
 const selectors = [
   ".site-header", ".nav__brand", ".site-login__trigger", ".language-selector__button", ".nav__toggle",
-  ".hero", ".hero__text", ".hero__title", ".hero__subtitle", ".hero__actions", ".hero__proof", "#hero-replay", ".a11y-fab",
+  ".hero", ".hero__media", ".hero__text", ".hero__title", ".hero__subtitle", ".hero__actions", ".hero__proof", "#hero-replay", ".a11y-fab",
 ];
 const overlaps = (a, b) => a.x < b.right && a.right > b.x && a.y < b.bottom && a.bottom > b.y;
 
@@ -35,7 +35,17 @@ try {
     assert.ok(box[".hero__subtitle"].y >= box[".hero__title"].bottom, `${label}: subtitle clears the headline`);
     assert.ok(box[".hero__actions"].y >= box[".hero__subtitle"].bottom, `${label}: actions clear the subtitle`);
     assert.ok(box[".hero__proof"].y >= box[".hero__actions"].bottom, `${label}: benefits clear the actions`);
-    assert.ok(box[".hero__proof"].bottom + 12 <= box["#hero-replay"].y, `${label}: video button clears the benefits`);
+    // The complete landscape scene now precedes the copy on phones. Playback
+    // controls belong to that media area, independently of the text below it.
+    const media = box[".hero__media"];
+    const replay = box["#hero-replay"];
+    assert.ok(Math.abs((media.right - media.x) / (media.bottom - media.y) - 16 / 9) < .005, `${label}: full landscape action stays visible`);
+    assert.ok(replay.x >= media.x && replay.right <= media.right && replay.y >= media.y && replay.bottom <= media.bottom, `${label}: video button remains inside its media`);
+    assert.ok(box[".hero__text"].y >= media.bottom, `${label}: text follows the media`);
+    for (const text of [".hero__title", ".hero__subtitle", ".hero__actions", ".hero__proof"]) {
+      assert.ok(!overlaps(replay, box[text]), `${label}: video button clears ${text}`);
+    }
+    assert.ok(!overlaps(replay, box[".a11y-fab"]), `${label}: video button clears the accessibility control`);
     assert.ok(box["#hero-replay"].bottom <= box[".hero"].bottom, `${label}: video button remains in the hero`);
     assert.ok(!overlaps(box[".hero__proof"], box[".a11y-fab"]), `${label}: accessibility button clears the benefits`);
     for (const first of [".nav__brand", ".site-login__trigger", ".language-selector__button"]) {

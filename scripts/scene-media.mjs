@@ -3,7 +3,7 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import { NICHE_DEFINITIONS } from "./niche-pages/index.mjs";
 
-const sceneKeys = new Set(["private-access", ...NICHE_DEFINITIONS.map(({ key }) => key)]);
+const sceneKeys = new Set(["homepage-montage", "electric-gates-barrier", ...NICHE_DEFINITIONS.map(({ key }) => key)]);
 
 // Only a reviewed artifact and its matching poster may enter generated pages.
 export async function readSceneManifest(repoRoot) {
@@ -23,14 +23,25 @@ export async function readSceneManifest(repoRoot) {
       if (field === "video" && path.posix.basename(asset.path) !== `${scene.key}-720p.mp4`) throw new Error("Scene/video identity mismatch");
       const bytes = await fs.readFile(path.join(repoRoot, ...asset.path.split("/")));
       if (createHash("sha256").update(bytes).digest("hex") !== asset.sha256) throw new Error(`Scene artifact changed after acceptance: ${scene.key}`);
-      if (field === "video" && bytes.length > 2_000_000) throw new Error(`Scene clip exceeds 2MB: ${scene.key}`);
+      const maxBytes = scene.key === "homepage-montage" ? 8_000_000 : 3_000_000;
+      if (field === "video" && bytes.length > maxBytes) throw new Error(`Scene clip exceeds delivery budget: ${scene.key}`);
     }
-    if (scene.width !== 1280 || scene.height !== 720 || Math.abs(scene.durationSeconds - 5) > 0.05
+    const validDuration = scene.key === "homepage-montage"
+      ? Math.abs(scene.durationSeconds - 15) <= 0.05
+      : Number.isFinite(scene.durationSeconds) && scene.durationSeconds >= 4 && scene.durationSeconds <= 12;
+    if (scene.width !== 1280 || scene.height !== 720 || !validDuration
       || scene.codec !== "h264" || scene.audioTracks !== 0 || !scene.fastStart
       || !scene.motionReviewed || !scene.matchingFirstFrameReviewed) throw new Error(`Scene acceptance incomplete: ${scene.key}`);
     scenes.set(scene.key, scene);
   }
   return scenes;
+}
+
+function attachSceneAssets($, assetPrefix) {
+  if (!$("link[href*='scene-video.css']").length) {
+    $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261018a`));
+    $("head").append($("<script>").attr("src", `${assetPrefix}js/scene-video.js?v=20261018a`).attr("defer", ""));
+  }
 }
 
 function attachScene($, { scene, assetPrefix, copy, image, container, media }) {
@@ -49,8 +60,7 @@ function attachScene($, { scene, assetPrefix, copy, image, container, media }) {
   // Controls stay above the tint overlay; the video remains under it with the image.
   media.append(controls);
   container.append($("<script>").attr("type", "application/json").attr("data-scene-copy", "").text(JSON.stringify(copy).replace(/</g, "\\u003c")));
-  $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261014a`));
-  $("head").append($("<script>").attr("src", `${assetPrefix}js/scene-video.js?v=20261014a`).attr("defer", ""));
+  attachSceneAssets($, assetPrefix);
 }
 
 export function applyNicheSceneMedia($, { scene, assetPrefix, copy }) {
@@ -58,13 +68,29 @@ export function applyNicheSceneMedia($, { scene, assetPrefix, copy }) {
   attachScene($, { scene, assetPrefix, copy, image: $("#niche-image"), container: $(".niche-hero"), media: $(".niche-hero__media") });
 }
 
-export function applyHomeSceneMedia($, { scene, assetPrefix, copy }) {
-  if (!scene) return;
-  // The hospitality/Host section is excluded from this consumer media work.
-  const image = $("#private-access img.security-statement__media-image");
-  if (image.length !== 1) throw new Error("Private access image is missing");
-  const media = $("<div>").addClass("security-statement__media-image");
-  image.before(media);
-  media.append(image.removeClass("security-statement__media-image").attr("width", "1280").attr("height", "720"));
-  attachScene($, { scene, assetPrefix, copy, image, container: media, media });
+export function applyHomeSceneMedia($, { scene, hotelScene, assetPrefix, copy }) {
+  if (scene) {
+    const hero = $("#home.hero");
+    const image = hero.find("img.hero__bg--image");
+    const video = hero.find("#hero-video");
+    if (hero.length !== 1 || image.length !== 1 || video.length !== 1) throw new Error("Homepage hero media is missing");
+    hero.attr("data-hero-scene", scene.key).attr("data-hero-media-state", "image");
+    image.attr("src", `${assetPrefix}${scene.poster.path}`).attr("width", "1280").attr("height", "720");
+    video.empty().removeAttr("src loop").attr("data-video-src", `${assetPrefix}${scene.video.path}`)
+      .attr("data-silent", "true").attr("poster", image.attr("src"))
+      .attr("width", "1280").attr("height", "720");
+    hero.find("#hero-mute-toggle").attr("hidden", "");
+    hero.find("#hero-pause-toggle").attr("hidden", "");
+    hero.find("#hero-replay").removeAttr("hidden");
+    attachSceneAssets($, assetPrefix);
+  }
+  if (hotelScene) {
+    const figure = $("#guest-invites-api .automation-stay");
+    const image = figure.children("img");
+    if (figure.length !== 1 || image.length !== 1) throw new Error("Hospitality scene image is missing");
+    const media = $("<div>").addClass("automation-stay__media");
+    image.before(media);
+    media.append(image.attr("width", "1280").attr("height", "720"));
+    attachScene($, { scene: hotelScene, assetPrefix, copy, image, container: media, media });
+  }
 }

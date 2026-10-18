@@ -5,6 +5,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   opacity: 0;
   pointer-events: none;
 }
@@ -12,7 +13,8 @@
 .scene-video-controls {
   position: absolute;
   inset-inline-end: 1rem;
-  bottom: 1rem;
+  top: .75rem;
+  bottom: auto;
   z-index: 4;
   display: flex;
   gap: .5rem;
@@ -31,3 +33,92 @@
 .scene-video-controls button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 .security-statement__media-image[data-scene-video] { overflow: hidden; }
 .security-statement__media-image[data-scene-video] > img { display: block; width: 100%; height: auto; border-radius: inherit; }
+.automation-stay__media { aspect-ratio: 16 / 9; overflow: hidden; }
+.home-en .automation-stay__media > img { display: block; width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center center; }
+/* First-frame posters and the montage always share identical framing. */
+.home-en .hero[data-hero-scene] .hero__bg { object-position: center center; transform: none; }
+.home-en .hero[data-hero-scene][data-hero-media-state="video"] .hero__bg--video { display: block; }
+.home-en .hero[data-hero-scene] .hero__media-control--pause {
+  inset: auto;
+  top: .75rem;
+  inset-inline-end: .75rem;
+  margin: 0;
+  width: 44px;
+  height: 44px;
+}
+.home-en .hero[data-hero-scene] .hero__replay {
+  inset: auto;
+  top: .75rem;
+  inset-inline-end: .75rem;
+  transform: none;
+  width: auto;
+  min-width: 0;
+  max-width: calc(100% - 1.5rem);
+  min-height: 44px;
+  padding: .45rem .7rem;
+  gap: .35rem;
+  font-size: .82rem;
+  white-space: normal;
+  background: #101820e6;
+}
+.home-en .hero[data-hero-scene] .hero__replay::before { width: 1.1rem; height: 1.1rem; font-size: .6rem; }
+.home-en .hero[data-hero-scene] .hero__overlay,
+.niche-hero[data-scene-video] .niche-hero__overlay { display: none; }
+@media (min-width: 769px) {
+  /* Copy and the complete action have independent space in both directions. */
+  .home-en .hero[data-hero-scene],
+  .niche-hero[data-scene-video] {
+    display: grid;
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    height: auto;
+    min-height: min(820px, calc(100svh - var(--nav-height)));
+    max-height: none;
+    padding: 3rem clamp(1.25rem, 4vw, 4rem);
+  }
+  .home-en .hero[data-hero-scene] .hero__media,
+  .niche-hero[data-scene-video] .niche-hero__media {
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .home-en .hero[data-hero-scene] .hero__content,
+  .niche-hero[data-scene-video] .niche-hero__content {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+  .home-en .hero[data-hero-scene] .hero__title { max-width: 100%; font-size: clamp(2.25rem, 4vw, 4rem); }
+  .home-en .hero[data-hero-scene] .hero__subtitle { font-size: 1.1rem; }
+  .home-en .hero[data-hero-scene] .hero__proof { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .niche-hero[data-scene-video] .niche-hero__content { gap: 2rem; }
+  .niche-hero[data-scene-video] .niche-hero__title { font-size: clamp(2rem, 3.1vw, 3rem); }
+}
+@media (max-width: 768px) {
+  /* Keep the complete action, including the desktop padel scene, in view. */
+  .niche-hero[data-scene-video] { min-height: 0; height: auto; max-height: none; }
+  .niche-hero[data-scene-video] .niche-hero__media { position: relative; height: auto; aspect-ratio: 16 / 9; }
+  .niche-hero[data-scene-video] .niche-hero__content { height: auto; min-height: 0; padding-block: 1.5rem 2rem; }
+  .niche-hero[data-scene-video] .niche-hero__overlay { background: linear-gradient(0deg, #05050550, transparent 45%); }
+  .niche-hero[data-scene-video] .niche-hero__text { margin-top: 2rem; }
+  .scene-video-controls { inset-inline-end: .5rem; top: .5rem; bottom: auto; }
+  .scene-video-controls button { padding: .5rem .8rem; font-size: .85rem; }
+  /* Full landscape action above the copy keeps every entrance readable. */
+  .home-en .hero[data-hero-scene] { min-height: 0; height: auto; }
+  .home-en .hero[data-hero-scene] .hero__media { position: relative; height: auto; aspect-ratio: 16 / 9; }
+  .home-en .hero[data-hero-scene] .hero__content { height: auto; min-height: 0; padding-block: 1.75rem 2rem; }
+  .home-en .hero[data-hero-scene] .hero__overlay { background: linear-gradient(0deg, #05050550, transparent 45%); }
+}

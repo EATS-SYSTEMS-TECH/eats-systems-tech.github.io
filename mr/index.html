@@ -87,7 +87,7 @@
 
   <script src="../js/navigation.js?v=20261007a" defer=""></script>
   <script src="../js/site-account.js?v=20261013a" defer=""></script>
-  <script src="../js/hero.js?v=20261007b" defer=""></script>
+  <script src="../js/hero.js?v=20261018a" defer=""></script>
 
   <script>window.accessibilityCopy = {"mr":{"skipLink":"मुख्य मजकुराकडे जा","eyebrow":"सुलभता","openButton":"सुलभता मेनू उघडा","closeButton":"सुलभता मेनू बंद करा","title":"सुलभता मेनू","description":"तुम्ही जसे वाचता आणि नेव्हिगेट करता त्यानुसार साइट जुळवून घ्या. तुमच्या निवडी या डिव्हाइसवर जतन केल्या जातात.","reset":"सर्व रीसेट करा","statusDefault":"साइटचे सामान्य दृश्य","statusActive":"{count} बदल सुरू","hideButton":"पेज पुन्हा लोड होईपर्यंत सुलभता बटण लपवा","statementLink":"सुलभता विधान","textSize":{"label":"मजकुराचा आकार","description":"संपूर्ण साइटवरील मजकूर मोठा करा.","decrease":"लहान मजकूर","increase":"मोठा मजकूर","level":"मजकुराचा आकार {percent}%"},"options":{"highContrast":{"label":"उच्च कॉन्ट्रास्ट","description":"फिकट पार्श्वभूमीवर गडद मजकूर आणि ठळक किनारी."},"grayscale":{"label":"ग्रेस्केल","description":"साइट रंगांशिवाय दाखवा."},"underlineLinks":{"label":"लिंक हायलाइट करा","description":"प्रत्येक लिंक अधोरेखित करून चिन्हांकित करा."},"readableFont":{"label":"वाचनीय फॉन्ट","description":"साधा, सहज वाचता येणारा फॉन्ट."},"textSpacing":{"label":"मजकुरातील अंतर","description":"ओळी, शब्द आणि अक्षरांमध्ये अधिक जागा."},"highlightHeadings":{"label":"शीर्षके हायलाइट करा","description":"पेजची रचना दाखवण्यासाठी शीर्षके चिन्हांकित करा."},"bigCursor":{"label":"मोठा कर्सर","description":"मोठा माउस पॉइंटर."},"focusHighlight":{"label":"ठळक फोकस","description":"कीबोर्ड फोकस असलेल्या घटकाभोवती जाड बाह्यरेषा."},"reducedMotion":{"label":"अ‍ॅनिमेशन थांबवा","description":"अ‍ॅनिमेशन, ट्रान्झिशन आणि पार्श्वभूमी व्हिडिओ थांबवा."}}}};</script>
   <script src="../js/accessibility.js?v=20261007a" defer=""></script>
@@ -134,7 +134,7 @@
 
 
 
-
+  <link rel="stylesheet" href="../css/scene-video.css?v=20261018a"><script src="../js/scene-video.js?v=20261018a" defer=""></script>
   <meta name="keywords" content="WIFIGATE, WiFi Gate, wifi gate, स्मार्ट ॲक्सेस कंट्रोल, फोनवरून गेट उघडा, इलेक्ट्रिक गेट, प्रवेश नियंत्रण, मासिक सबस्क्रिप्शनशिवाय">
   <meta name="description" content="WIFIGATE ही स्मार्ट ॲक्सेस कंट्रोल प्रणाली फोनवरून गेट, दरवाजे, पार्किंग, शटर आणि गॅरेज उघडते. सुरक्षित, एन्क्रिप्टेड आणि सोयीस्कर, मासिक सबस्क्रिप्शनशिवाय.">
   <meta name="robots" content="index, follow">
@@ -653,14 +653,12 @@
 
   <main id="main-content">
 
-  <section class="hero" id="home" aria-labelledby="hero-title" aria-describedby="hero-subtitle" data-hero-media-state="video">
+  <section class="hero" id="home" aria-labelledby="hero-title" aria-describedby="hero-subtitle" data-hero-media-state="image" data-hero-scene="homepage-montage">
       <div class="hero__media">
-        <img src="../assets/img/wifigate_homepage.webp" alt="" class="hero__bg hero__bg--image" fetchpriority="high">
-        <video id="hero-video" class="hero__bg hero__bg--video" muted="" loop="" playsinline="" preload="none" poster="../assets/img/wifigate_homepage.webp" aria-hidden="true">
-          <source src="../assets/vid/wifigate-final-hero-720p.mp4?v=20261007" type="video/mp4">
-        </video>
+        <img src="../assets/img/homepage-montage-scene.webp" alt="" class="hero__bg hero__bg--image" fetchpriority="high" width="1280" height="720">
+        <video id="hero-video" class="hero__bg hero__bg--video" muted="" playsinline="" preload="none" poster="../assets/img/homepage-montage-scene.webp" aria-hidden="true" data-video-src="../assets/vid/home/homepage-montage-720p.mp4" data-silent="true" width="1280" height="720"></video>
         <div class="hero__overlay"></div>
-        <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="व्हिडिओ थांबवा" title="व्हिडिओ थांबवा" aria-pressed="false" data-paused="false">
+        <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="व्हिडिओ थांबवा" title="व्हिडिओ थांबवा" aria-pressed="false" data-paused="false" hidden="">
           <svg class="hero__media-control-icon hero__media-control-icon--pause" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
             <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
@@ -669,7 +667,7 @@
             <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" fill="currentColor"></path>
           </svg>
         </button>
-        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="व्हिडिओचा आवाज चालू करा" title="व्हिडिओचा आवाज चालू करा" aria-pressed="false" data-muted="true">
+        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="व्हिडिओचा आवाज चालू करा" title="व्हिडिओचा आवाज चालू करा" aria-pressed="false" data-muted="true" hidden="">
           <svg class="hero__media-control-icon hero__media-control-icon--muted" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M14 4.12v15.76a1 1 0 0 1-1.68.73l-4.04-3.61H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.28l4.04-3.61A1 1 0 0 1 14 4.12Z" fill="currentColor"></path>
             <path d="m17 9 4 4m0-4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -680,7 +678,7 @@
             <path d="M19.75 7a8 8 0 0 1 0 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
         </button>
-        <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" hidden="" aria-label="व्हिडिओ पुन्हा चालवा" title="व्हिडिओ पुन्हा चालवा">
+        <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" aria-label="व्हिडिओ पुन्हा चालवा" title="व्हिडिओ पुन्हा चालवा">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 5V2l-4 4 4 4V7a7 7 0 1 1-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
             <path d="m11 10 5 3-5 3z" fill="currentColor"></path>
@@ -871,7 +869,7 @@
           </div>
 
           <figure class="automation-stay">
-            <img src="../assets/wifigate_niche_pages/hotels-airbnb-v2-app-hero.webp" alt="पाहुणे फोन वापरून आपल्या मुक्कामाच्या ठिकाणी प्रवेश करत आहेत" width="1280" height="720" loading="lazy">
+            <div class="automation-stay__media" data-scene-video="" data-scene-state="image"><img src="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp" alt="पाहुणे फोन वापरून आपल्या मुक्कामाच्या ठिकाणी प्रवेश करत आहेत" width="1280" height="720" loading="lazy" data-scene-image=""><video data-video-src="../assets/vid/use-cases/hotels-airbnb-720p.mp4" poster="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp" preload="none" muted="" playsinline="" aria-hidden="true" width="1280" height="720"></video><div class="scene-video-controls"><button type="button" data-scene-play="">व्हिडिओ चालवा</button><button type="button" data-scene-pause="" hidden="">व्हिडिओ थांबवा</button></div><script type="application/json" data-scene-copy="">{"replay":"व्हिडिओ पुन्हा चालवा","mute":"व्हिडिओचा आवाज बंद करा","unmute":"व्हिडिओचा आवाज चालू करा","pause":"व्हिडिओ थांबवा","play":"व्हिडिओ चालवा"}</script></div>
             <figcaption class="automation-stay__caption">
               <span class="automation-stay__label" dir="ltr">प्रत्येक मुक्काम, बुकिंगपासून चेक-आउटपर्यंत</span>
               <ol class="automation-stay__steps"><li>बुकिंग मिळाले</li><li>चेक-इनला ॲक्सेस</li><li>चेक-आउटला मुदत संपते</li></ol>

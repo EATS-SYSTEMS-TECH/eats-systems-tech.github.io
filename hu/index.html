@@ -87,7 +87,7 @@
 
   <script src="../js/navigation.js?v=20261007a" defer=""></script>
   <script src="../js/site-account.js?v=20261013a" defer=""></script>
-  <script src="../js/hero.js?v=20261007b" defer=""></script>
+  <script src="../js/hero.js?v=20261018a" defer=""></script>
 
   <script>window.accessibilityCopy = {"hu":{"skipLink":"Ugrás a fő tartalomhoz","eyebrow":"Akadálymentesség","openButton":"Akadálymentességi menü megnyitása","closeButton":"Akadálymentességi menü bezárása","title":"Akadálymentességi menü","description":"Szabja a webhelyet a saját olvasási és böngészési szokásaihoz. A beállításokat ez az eszköz tárolja.","reset":"Minden visszaállítása","statusDefault":"Normál webhelynézet","statusActive":"{count} beállítás aktív","hideButton":"Az akadálymentességi gomb elrejtése az oldal újratöltéséig","statementLink":"Akadálymentességi nyilatkozat","textSize":{"label":"Szövegméret","description":"A szöveg nagyítása a teljes webhelyen.","decrease":"Kisebb szöveg","increase":"Nagyobb szöveg","level":"Szövegméret: {percent}%"},"options":{"highContrast":{"label":"Nagy kontraszt","description":"Sötét szöveg világos háttéren, erős keretekkel."},"grayscale":{"label":"Szürkeárnyalat","description":"A webhely megjelenítése színek nélkül."},"underlineLinks":{"label":"Hivatkozások kiemelése","description":"Minden hivatkozás aláhúzása és megjelölése."},"readableFont":{"label":"Olvasható betűtípus","description":"Egyszerű, jól olvasható betűtípus."},"textSpacing":{"label":"Szövegtérköz","description":"Több hely a sorok, szavak és betűk között."},"highlightHeadings":{"label":"Címsorok kiemelése","description":"A címsorok megjelölése az oldal szerkezetének mutatásához."},"bigCursor":{"label":"Nagy kurzor","description":"Nagyobb egérmutató."},"focusHighlight":{"label":"Jól látható fókusz","description":"Vastag keret a billentyűzetfókuszban lévő elem körül."},"reducedMotion":{"label":"Animációk leállítása","description":"Az animációk, átmenetek és a háttérvideó leállítása."}}}};</script>
   <script src="../js/accessibility.js?v=20261007a" defer=""></script>
@@ -134,7 +134,7 @@
 
 
 
-
+  <link rel="stylesheet" href="../css/scene-video.css?v=20261018a"><script src="../js/scene-video.js?v=20261018a" defer=""></script>
   <meta name="keywords" content="WIFIGATE, WiFi Gate, wifi gate, okos beléptetés, kapunyitás telefonról, elektromos kapu, beléptetőrendszer, nincs havi előfizetés">
   <meta name="description" content="A WIFIGATE (WiFi Gate) okos beléptetőrendszer: kapuk, ajtók, parkolók, redőnyök és garázsok nyitása telefonról. Biztonságos, titkosított, kényelmes, havi díj nélkül.">
   <meta name="robots" content="index, follow">
@@ -653,14 +653,12 @@
 
   <main id="main-content">
 
-  <section class="hero" id="home" aria-labelledby="hero-title" aria-describedby="hero-subtitle" data-hero-media-state="video">
+  <section class="hero" id="home" aria-labelledby="hero-title" aria-describedby="hero-subtitle" data-hero-media-state="image" data-hero-scene="homepage-montage">
       <div class="hero__media">
-        <img src="../assets/img/wifigate_homepage.webp" alt="" class="hero__bg hero__bg--image" fetchpriority="high">
-        <video id="hero-video" class="hero__bg hero__bg--video" muted="" loop="" playsinline="" preload="none" poster="../assets/img/wifigate_homepage.webp" aria-hidden="true">
-          <source src="../assets/vid/wifigate-final-hero-720p.mp4?v=20261007" type="video/mp4">
-        </video>
+        <img src="../assets/img/homepage-montage-scene.webp" alt="" class="hero__bg hero__bg--image" fetchpriority="high" width="1280" height="720">
+        <video id="hero-video" class="hero__bg hero__bg--video" muted="" playsinline="" preload="none" poster="../assets/img/homepage-montage-scene.webp" aria-hidden="true" data-video-src="../assets/vid/home/homepage-montage-720p.mp4" data-silent="true" width="1280" height="720"></video>
         <div class="hero__overlay"></div>
-        <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="Videó szüneteltetése" title="Videó szüneteltetése" aria-pressed="false" data-paused="false">
+        <button class="hero__media-control hero__media-control--pause" id="hero-pause-toggle" type="button" aria-label="Videó szüneteltetése" title="Videó szüneteltetése" aria-pressed="false" data-paused="false" hidden="">
           <svg class="hero__media-control-icon hero__media-control-icon--pause" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
             <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"></rect>
@@ -669,7 +667,7 @@
             <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" fill="currentColor"></path>
           </svg>
         </button>
-        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="Videó hangjának bekapcsolása" title="Videó hangjának bekapcsolása" aria-pressed="false" data-muted="true">
+        <button class="hero__media-control hero__media-control--mute" id="hero-mute-toggle" type="button" aria-label="Videó hangjának bekapcsolása" title="Videó hangjának bekapcsolása" aria-pressed="false" data-muted="true" hidden="">
           <svg class="hero__media-control-icon hero__media-control-icon--muted" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M14 4.12v15.76a1 1 0 0 1-1.68.73l-4.04-3.61H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.28l4.04-3.61A1 1 0 0 1 14 4.12Z" fill="currentColor"></path>
             <path d="m17 9 4 4m0-4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -680,7 +678,7 @@
             <path d="M19.75 7a8 8 0 0 1 0 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
         </button>
-        <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" hidden="" aria-label="Videó újrajátszása" title="Videó újrajátszása">
+        <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" aria-label="Videó újrajátszása" title="Videó újrajátszása">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 5V2l-4 4 4 4V7a7 7 0 1 1-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
             <path d="m11 10 5 3-5 3z" fill="currentColor"></path>
@@ -871,7 +869,7 @@
           </div>
 
           <figure class="automation-stay">
-            <img src="../assets/wifigate_niche_pages/hotels-airbnb-v2-app-hero.webp" alt="Vendégek telefonnal lépnek be a szállásukra" width="1280" height="720" loading="lazy">
+            <div class="automation-stay__media" data-scene-video="" data-scene-state="image"><img src="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp" alt="Vendégek telefonnal lépnek be a szállásukra" width="1280" height="720" loading="lazy" data-scene-image=""><video data-video-src="../assets/vid/use-cases/hotels-airbnb-720p.mp4" poster="../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp" preload="none" muted="" playsinline="" aria-hidden="true" width="1280" height="720"></video><div class="scene-video-controls"><button type="button" data-scene-play="">Videó lejátszása</button><button type="button" data-scene-pause="" hidden="">Videó szüneteltetése</button></div><script type="application/json" data-scene-copy="">{"replay":"Videó újrajátszása","mute":"Videó némítása","unmute":"Videó hangjának bekapcsolása","pause":"Videó szüneteltetése","play":"Videó lejátszása"}</script></div>
             <figcaption class="automation-stay__caption">
               <span class="automation-stay__label" dir="ltr">Minden foglalásnál, a visszaigazolástól a távozásig</span>
               <ol class="automation-stay__steps"><li>Beérkezett a foglalás</li><li>Hozzáférés check-inkor</li><li>Check-outkor lejár</li></ol>

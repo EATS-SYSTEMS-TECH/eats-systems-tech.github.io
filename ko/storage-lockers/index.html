@@ -45,7 +45,7 @@
   <script src="../../js/language-selector.js?v=20261006a" defer=""></script><script src="../../js/accessibility.js?v=20261007a" defer=""></script>
   <script src="../../js/niche-page.js?v=20260708a" defer=""></script>
   <script src="../../js/faq.js?v=20261017b" defer=""></script>
-
+<link rel="stylesheet" href="../../css/scene-video.css?v=20261018a"><script src="../../js/scene-video.js?v=20261018a" defer=""></script>
   <meta name="description" content="WIFIGATE는 셀프 스토리지와 사물함 임차인에게 게이트, 출입문, 자신의 사물함에 대한 스마트폰 개인 출입을 제공합니다. 운영 시간으로 제한되고 기록에 남으며, 임대가 끝나면 삭제됩니다.">
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index, follow">
@@ -582,11 +582,11 @@
   </header>
 
   <main class="niche-main" id="main-content">
-    <section class="niche-hero" aria-labelledby="niche-title">
+    <section class="niche-hero" aria-labelledby="niche-title" data-scene-video="" data-scene-state="image">
       <div class="niche-hero__media">
-        <img src="../../assets/wifigate_niche_pages/storage-lockers-app-hero.webp" alt="사물함과 보관 유닛이 있는 셀프 스토리지 시설의 문을 스마트폰으로 여는 여성" class="niche-hero__bg" id="niche-image" loading="eager" fetchpriority="high" decoding="async" width="1280" height="720">
+        <img src="../../assets/wifigate_niche_pages/storage-lockers-scene-hero.webp" alt="사물함과 보관 유닛이 있는 셀프 스토리지 시설의 문을 스마트폰으로 여는 여성" class="niche-hero__bg" id="niche-image" loading="eager" fetchpriority="high" decoding="async" width="1280" height="720" data-scene-image=""><video data-video-src="../../assets/vid/use-cases/storage-lockers-720p.mp4" poster="../../assets/wifigate_niche_pages/storage-lockers-scene-hero.webp" preload="none" muted="" playsinline="" aria-hidden="true" width="1280" height="720"></video>
         <div class="niche-hero__overlay"></div>
-      </div>
+      <div class="scene-video-controls"><button type="button" data-scene-play="">영상 재생</button><button type="button" data-scene-pause="" hidden="">영상 일시정지</button></div></div>
 
       <div class="niche-hero__content container">
         <div class="niche-hero__topbar">
@@ -630,7 +630,7 @@
 
         </div>
       </div>
-    </section>
+    <script type="application/json" data-scene-copy="">{"replay":"영상 다시 재생","mute":"영상 음소거","unmute":"영상 음소거 해제","pause":"영상 일시정지","play":"영상 재생"}</script></section>
 
     <section class="niche-highlights" id="niche-highlights">
       <div class="container">

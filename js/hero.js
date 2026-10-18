@@ -1,186 +1,128 @@
-// /js/hero.js
-// The homepage hero video. It plays only where it costs the visitor little:
-// not with reduced motion, Save-Data, a slow connection or a phone-sized
-// screen. Everyone else sees the poster image and can start the video.
-
-// The labels of the video controls (pause/play, mute, replay) in the page
-// language; the build writes them into #hero-locale-data.
+// The homepage hero keeps its eager poster until an actual video frame plays.
+// Sources are attached only for eligible desktop autoplay or explicit playback.
 const HERO_MEDIA_FALLBACK_COPY = {
-  replay: "Play Video Again",
-  mute: "Mute video",
-  unmute: "Unmute video",
-  pause: "Pause video",
-  play: "Play video",
+  replay: "Play Video Again", mute: "Mute video", unmute: "Unmute video",
+  pause: "Pause video", play: "Play video",
 };
 
 function getHeroMediaCopy() {
   try {
     const media = JSON.parse(document.getElementById("hero-locale-data")?.textContent || "{}").media || {};
     return { ...HERO_MEDIA_FALLBACK_COPY, ...media };
-  } catch (error) {
-    return HERO_MEDIA_FALLBACK_COPY;
-  }
+  } catch { return HERO_MEDIA_FALLBACK_COPY; }
 }
 
-// Autoplay downloads the whole video; only a desktop-sized screen on a
-// connection that does not ask to save data gets it without a click.
 function heroVideoMayAutoplay() {
+  if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return false;
   if (typeof isReducedMotionRequested === "function" && isReducedMotionRequested()) return false;
   const connection = navigator.connection || {};
-  if (connection.saveData) return false;
-  if (/(^|-)2g$|^3g$/.test(connection.effectiveType || "")) return false;
-  return !window.matchMedia || window.matchMedia("(min-width: 769px)").matches;
+  return !connection.saveData && !/^(slow-2g|2g|3g)$/.test(connection.effectiveType || "")
+    && (!window.matchMedia || window.matchMedia("(min-width: 769px)").matches);
 }
 
 function setupHeroMedia() {
   const hero = document.querySelector(".hero");
   const video = document.getElementById("hero-video");
+  const image = hero?.querySelector(".hero__bg--image");
   const muteButton = document.getElementById("hero-mute-toggle");
   const replayButton = document.getElementById("hero-replay");
   const replayLabel = replayButton?.querySelector("span");
   const pauseButton = document.getElementById("hero-pause-toggle");
-  let heroIsInView = true;
-  // Set when the visitor pauses: nothing restarts the video until they press play.
+  if (!hero || !video || !replayButton || !replayLabel) return;
+  const silent = video.dataset.silent === "true";
+  const desktop = window.matchMedia("(min-width: 769px)");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let inView = !("IntersectionObserver" in window);
   let pausedByVisitor = false;
-
-  if (!hero || !video || !muteButton || !replayButton || !replayLabel) return;
-
-  video.muted = true;
-  video.defaultMuted = true;
+  let finished = false;
+  let generation = 0;
+  video.muted = video.defaultMuted = true;
 
   function syncHeroFloatingWidgetState() {
-    const shouldMoveAccessibilityFab =
-      heroIsInView &&
-      hero.dataset.heroMediaState === "video" &&
-      window.matchMedia &&
-      window.matchMedia("(min-width: 769px)").matches;
-
-    document.body.classList.toggle("hero-video-visible", shouldMoveAccessibilityFab);
+    document.body.classList.toggle("hero-video-visible", inView && desktop.matches && hero.dataset.heroMediaState === "video");
   }
-
   function updateHeroMediaCopy() {
     const copy = getHeroMediaCopy();
-    const muteLabel = video.muted ? copy.unmute : copy.mute;
-
-    muteButton.dataset.muted = String(video.muted);
-    muteButton.setAttribute("aria-label", muteLabel);
-    muteButton.setAttribute("title", muteLabel);
-    muteButton.setAttribute("aria-pressed", String(!video.muted));
-
-    if (pauseButton) {
-      const paused = video.paused;
-      const pauseLabel = paused ? copy.play : copy.pause;
-      pauseButton.dataset.paused = String(paused);
-      pauseButton.setAttribute("aria-label", pauseLabel);
-      pauseButton.setAttribute("title", pauseLabel);
-      pauseButton.setAttribute("aria-pressed", String(paused));
+    if (muteButton) {
+      const label = video.muted ? copy.unmute : copy.mute;
+      muteButton.dataset.muted = String(video.muted);
+      muteButton.setAttribute("aria-label", label);
+      muteButton.setAttribute("title", label);
+      muteButton.setAttribute("aria-pressed", String(!video.muted));
     }
-
-    replayLabel.textContent = copy.replay;
-    replayButton.setAttribute("aria-label", copy.replay);
-    replayButton.setAttribute("title", copy.replay);
+    if (pauseButton) {
+      const label = video.paused ? copy.play : copy.pause;
+      pauseButton.dataset.paused = String(video.paused);
+      pauseButton.setAttribute("aria-label", label);
+      pauseButton.setAttribute("title", label);
+      pauseButton.setAttribute("aria-pressed", String(video.paused));
+    }
+    const label = finished ? copy.replay : copy.play;
+    replayLabel.textContent = label;
+    replayButton.setAttribute("aria-label", label);
+    replayButton.setAttribute("title", label);
   }
-
   function setHeroMediaState(state) {
     hero.dataset.heroMediaState = state;
-    muteButton.hidden = state !== "video";
+    if (muteButton) muteButton.hidden = silent || state !== "video";
     if (pauseButton) pauseButton.hidden = state !== "video";
     replayButton.hidden = state !== "image";
     syncHeroFloatingWidgetState();
+    updateHeroMediaCopy();
   }
-
   function showHeroImageState() {
+    generation += 1;
     video.pause();
     setHeroMediaState("image");
+  }
+  async function playHeroVideo({ restart = false, manual = false } = {}) {
+    if (!manual && (!inView || !heroVideoMayAutoplay() || pausedByVisitor || finished || document.hidden)) return;
+    const current = ++generation;
+    if (manual) pausedByVisitor = false;
+    try { await image?.decode(); } catch { /* Explicit video playback can recover a failed poster. */ }
+    if (current !== generation || (!manual && (!inView || !heroVideoMayAutoplay() || document.hidden))) return;
+    if (!video.getAttribute("src") && video.dataset.videoSrc) video.setAttribute("src", video.dataset.videoSrc);
+    if (restart) { finished = false; video.currentTime = 0; }
+    try {
+      await video.play();
+      if (current !== generation) { video.pause(); return; }
+    } catch { if (current === generation) showHeroImageState(); }
     updateHeroMediaCopy();
   }
-
-  function playHeroVideo({ restart = false, userInitiated = false } = {}) {
-    if (!userInitiated && !heroVideoMayAutoplay()) {
-      showHeroImageState();
-      return;
-    }
-
-    setHeroMediaState("video");
-
-    if (restart) {
-      try {
-        video.currentTime = 0;
-      } catch (error) {
-        // Ignore seek failures while metadata is still loading.
-      }
-    }
-
-    updateHeroMediaCopy();
-
-    const playPromise = video.play();
-    if (playPromise && typeof playPromise.catch === "function") {
-      playPromise.catch(() => {
-        showHeroImageState();
-      });
-    }
-  }
-
-  muteButton.addEventListener("click", () => {
-    video.muted = !video.muted;
+  muteButton?.addEventListener("click", () => { video.muted = !video.muted; updateHeroMediaCopy(); });
+  replayButton.addEventListener("click", () => playHeroVideo({ restart: finished, manual: true }));
+  pauseButton?.addEventListener("click", () => {
+    if (video.paused) playHeroVideo({ manual: true });
+    else { generation += 1; pausedByVisitor = true; video.pause(); }
     updateHeroMediaCopy();
   });
-
-  replayButton.addEventListener("click", () => {
-    pausedByVisitor = false;
-    playHeroVideo({ restart: true, userInitiated: true });
-  });
-
-  if (pauseButton) {
-    pauseButton.addEventListener("click", () => {
-      if (video.paused) {
-        pausedByVisitor = false;
-        playHeroVideo({ userInitiated: true });
-      } else {
-        pausedByVisitor = true;
-        video.pause();
-      }
-      updateHeroMediaCopy();
-    });
-  }
-
-  video.addEventListener("ended", showHeroImageState);
-  video.addEventListener("play", () => {
-    setHeroMediaState("video");
-    updateHeroMediaCopy();
-  });
+  video.addEventListener("playing", () => setHeroMediaState("video"));
+  video.addEventListener("ended", () => { finished = true; showHeroImageState(); });
   video.addEventListener("pause", updateHeroMediaCopy);
   video.addEventListener("volumechange", updateHeroMediaCopy);
   video.addEventListener("error", showHeroImageState);
-
-  document.addEventListener("site-accessibility-change", () => {
-    if (typeof isReducedMotionRequested === "function" && isReducedMotionRequested()) {
-      showHeroImageState();
-      return;
-    }
-
-    if (hero.dataset.heroMediaState === "video" && !pausedByVisitor) {
-      playHeroVideo();
-      return;
-    }
-
-    updateHeroMediaCopy();
+  function policyChanged() {
+    if (!heroVideoMayAutoplay()) showHeroImageState();
+    else playHeroVideo();
+    syncHeroFloatingWidgetState();
+  }
+  desktop.addEventListener("change", policyChanged);
+  reducedMotion.addEventListener("change", policyChanged);
+  navigator.connection?.addEventListener?.("change", policyChanged);
+  document.addEventListener("site-accessibility-change", policyChanged);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) { generation += 1; video.pause(); }
+    else playHeroVideo();
   });
-
   if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        heroIsInView = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.35);
-        syncHeroFloatingWidgetState();
-      },
-      { threshold: [0, 0.35, 0.6] }
-    );
-
+    const observer = new IntersectionObserver((entries) => {
+      inView = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= .25);
+      if (!inView) { generation += 1; video.pause(); }
+      else playHeroVideo();
+      syncHeroFloatingWidgetState();
+    }, { threshold: [0, .25] });
     observer.observe(hero);
   }
-
-  window.addEventListener("resize", syncHeroFloatingWidgetState);
-
-  updateHeroMediaCopy();
-  playHeroVideo();
+  setHeroMediaState("image");
+  if (inView) playHeroVideo();
 }

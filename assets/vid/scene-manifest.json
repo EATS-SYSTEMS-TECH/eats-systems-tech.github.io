@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "scenes": [
+    {
+      "key": "residential-buildings",
+      "accepted": true,
+      "video": {
+        "path": "assets/vid/use-cases/residential-buildings-720p.mp4",
+        "sha256": "4b285997662507919e18fc4fb531f131763cbd2d424ee95d1b1a6e6c1f64c65c"
+      },
+      "poster": {
+        "path": "assets/wifigate_niche_pages/residential-buildings-scene-hero.webp",
+        "sha256": "d7e0919abcee011a89a771d8ca57b4d5f08fef8968ee132c63d1834e985c06b4"
+      },
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 5.042,
+      "codec": "h264",
+      "audioTracks": 0,
+      "fastStart": true,
+      "motionReviewed": true,
+      "matchingFirstFrameReviewed": true
+    },
+    {
+      "key": "roller-shutters",
+      "accepted": true,
+      "video": {
+        "path": "assets/vid/use-cases/roller-shutters-720p.mp4",
+        "sha256": "d9918dc30b26dc456e6be6c4c43db653c02712df573d5c3b7f07ef4328fcb8c0"
+      },
+      "poster": {
+        "path": "assets/wifigate_niche_pages/roller-shutters-scene-hero.webp",
+        "sha256": "d5a8a6b851b69ba50fd64bc8085a84d0c35d80163e5fca21344ad614cecd5e06"
+      },
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 5.042,
+      "codec": "h264",
+      "audioTracks": 0,
+      "fastStart": true,
+      "motionReviewed": true,
+      "matchingFirstFrameReviewed": true
+    },
+    {
+      "key": "hotels-airbnb",
+      "accepted": true,
+      "video": {
+        "path": "assets/vid/use-cases/hotels-airbnb-720p.mp4",
+        "sha256": "dba1b7210dbb13a0b891197203e5153a0798f05c731a7328fc6612c9efaeefb8"
+      },
+      "poster": {
+        "path": "assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp",
+        "sha256": "072be4b5fbf92923c129a0e91f078e70986d119018aefde176c6713488730ec9"
+      },
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 6.042,
+      "codec": "h264",
+      "audioTracks": 0,
+      "fastStart": true,
+      "motionReviewed": true,
+      "matchingFirstFrameReviewed": true
+    },
+    {
+      "key": "private-homes",
+      "accepted": true,
+      "video": {
+        "path": "assets/vid/use-cases/private-homes-720p.mp4",
+        "sha256": "55797152c7d511076c52058ff7f8eb6c37d861b068b9f2b07a15b33b8571bb61"
+      },
+      "poster": {
+        "path": "assets/wifigate_niche_pages/private-homes-scene-hero.webp",
+        "sha256": "45bc7c13f19c62b384a3d757537753189e4b55f0e2c2826d9974165c94c60f0e"
+      },
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 5.042,
+      "codec": "h264",
+      "audioTracks": 0,
+      "fastStart": true,
+      "motionReviewed": true,
+      "matchingFirstFrameReviewed": true
+    },
+    {
+      "key": "electric-gates",
+      "accepted": true,
+      "video": {
+        "path": "assets/vid/use-cases/electric-gates-720p.mp4",
+        "sha256": "cf62e0b20d896193e560827841ca1810286764f371c70cbbfa28480631dd6056"
+      },
+      "poster": {
+        "path": "assets/wifigate_niche_pages/electric-gates-scene-hero.webp",
+        "sha256": "0960a037df68c26970cd694affb1b304c99d57f56879ddb730aa8ff0671dbfbd"
+      },
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 6.042,
+      "codec": "h264",
+      "audioTracks": 0,
+      "fastStart": true,
+      "motionReviewed": true,
+      "matchingFirstFrameReviewed": true
+    },
+    {
+      "key": "entry-doors-magnetic-locks",
+      "accepted": true,
+      "video": {
+        "path": "assets/vid/use-cases/entry-doors-magnetic-locks-720p.mp4",
+        "sha256": "504e68bb1a5a248077bc267ab940d2db56ab6cda68db366719d3d17d9c5541e5"
+      },
+      "poster": {
+        "path": "assets/wifigate_niche_pages/entry-doors-magnetic-locks-scene-hero.webp",
+        "sha256": "0d033011bca03727dcc30be3fdea63211c556e0bb00c76c0bfbd8d4217a0fc21"
+      },
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 6.042,
+      "codec": "h264",
+      "audioTracks": 0,
+      "fastStart": true,
+      "motionReviewed": true,
+      "matchingFirstFrameReviewed": true
+    },
+    {
+      "key": "garage-doors",
+      "accepted": true,
+      "video": {
+        "path": "assets/vid/use-cases/garage-doors-720p.mp4",
+        "sha256": "9ec008609106771052e8d6d134e1eb9d9d616c3f4290bbf8e30bfc8f4797e731"
+      },
+      "poster": {
+        "path": "assets/wifigate_niche_pages/garage-doors-scene-hero.webp",
+        "sha256": "25ca8ae8a97a46b9b8aa618ced83ecd078f0550b115fb491f43312f904331d8c"
+      },
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 6.042,
+      "codec": "h264",
+      "audioTracks": 0,
+      "fastStart": true,
+      "motionReviewed": true,
+      "matchingFirstFrameReviewed": true
+    },
+    {
+      "key": "office-buildings",
+      "accepted": true,
+      "video": {
+        "path": "assets/vid/use-cases/office-buildings-720p.mp4",
+        "sha256": "cbe25494ecee38fe89454a6bbf099092f95dbdf8a7c0d3ff216e788b47c28455"
+      },
+      "poster": {
+        "path": "assets/wifigate_niche_pages/office-buildings-scene-hero.webp",
+        "sha256": "a11c31b310f25037859c8dc6422c84e4deabb275102ec2984bb416418a234347"
+      },
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 5.042,
+      "codec": "h264",
+      "audioTracks": 0,
+      "fastStart": true,
+      "motionReviewed": true,
+      "matchingFirstFrameReviewed": true
+    },
+    {
+      "key": "sports-facilities",
+      "accepted": true,
+      "video": {
+        "path": "assets/vid/use-cases/sports-facilities-720p.mp4",
+        "sha256": "2738ab5363d91cfd07ecb57499ac17fe87204e9992d12588533b63f669d478fc"
+      },
+      "poster": {
+        "path": "assets/wifigate_niche_pages/sports-facilities-scene-hero.webp",
+        "sha256": "1275ae5f9371ccf3d7a77eaa6c232d7d86b103962cfd15055228646e1d53524a"
+      },
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 8.042,
+      "codec": "h264",
+      "audioTracks": 0,
+      "fastStart": true,
+      "motionReviewed": true,
+      "matchingFirstFrameReviewed": true
+    },
+    {
+      "key": "storage-lockers",
+      "accepted": true,
+      "video": {
+        "path": "assets/vid/use-cases/storage-lockers-720p.mp4",
+        "sha256": "410cc2fb574f60d046fc3d605fbeaf1a175a97d169af1df800e6ddbe4b993f10"
+      },
+      "poster": {
+        "path": "assets/wifigate_niche_pages/storage-lockers-scene-hero.webp",
+        "sha256": "f0dacc8280651c261f26339ba6bb2c43c8b2d0d4506c2d82b45a0cadf6c60c6d"
+      },
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 8.042,
+      "codec": "h264",
+      "audioTracks": 0,
+      "fastStart": true,
+      "motionReviewed": true,
+      "matchingFirstFrameReviewed": true
+    },
+    {
+      "key": "electric-gates-barrier",
+      "accepted": true,
+      "video": {
+        "path": "assets/vid/home/electric-gates-barrier-720p.mp4",
+        "sha256": "a602645fef5db0a76faa853a0ad3d0b3cc0cef4587e25214d0f1daaa3af4f812"
+      },
+      "poster": {
+        "path": "assets/img/electric-gates-barrier-scene.webp",
+        "sha256": "f597725eb06303abbbf3c7ac81c2a0c5176cbda3dcd39ee2587e35d22bdac27c"
+      },
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 5.042,
+      "codec": "h264",
+      "audioTracks": 0,
+      "fastStart": true,
+      "motionReviewed": true,
+      "matchingFirstFrameReviewed": true
+    },
+    {
+      "key": "homepage-montage",
+      "accepted": true,
+      "video": {
+        "path": "assets/vid/home/homepage-montage-720p.mp4",
+        "sha256": "3cd0efb71aa1941fcdfe59a6422082c0ac8e83627c513bbf60c9d710fb747927"
+      },
+      "poster": {
+        "path": "assets/img/homepage-montage-scene.webp",
+        "sha256": "1e09b40253471dfa8ad520e30caeb75b561da4ea013e646455c9ab5418f7a5ac"
+      },
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 15,
+      "codec": "h264",
+      "audioTracks": 0,
+      "fastStart": true,
+      "motionReviewed": true,
+      "matchingFirstFrameReviewed": true
+    }
+  ]
+}

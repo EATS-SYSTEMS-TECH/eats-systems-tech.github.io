@@ -28,12 +28,24 @@ test("only accepted, unchanged scene artifacts enter pages", async () => {
     await fs.writeFile(path.join(root, scene.poster.path), poster);
     await save(scene);
     assert.equal((await readSceneManifest(root)).size, 1);
+    await save({ ...scene, durationSeconds: 8 });
+    assert.equal((await readSceneManifest(root)).get("roller-shutters").durationSeconds, 8, "natural longer action is accepted");
     for (const change of [{ audioTracks: 1 }, { motionReviewed: false }, { matchingFirstFrameReviewed: false }, { durationSeconds: 30 }, { fastStart: false }]) {
       await save({ ...scene, ...change });
       await assert.rejects(readSceneManifest(root), /acceptance incomplete/);
     }
     await save({ ...scene, video: { ...scene.video, path: "../owner-file.mp4" } });
     await assert.rejects(readSceneManifest(root), /artifact path/);
+    await save({ ...scene, key: "private-access" });
+    await assert.rejects(readSceneManifest(root), /scene key/, "courier is excluded from the current video selection");
+    await fs.mkdir(path.join(root, "assets", "vid", "home"), { recursive: true });
+    const montage = { ...scene, key: "homepage-montage", durationSeconds: 15,
+      video: { ...scene.video, path: "assets/vid/home/homepage-montage-720p.mp4" } };
+    await fs.writeFile(path.join(root, montage.video.path), video);
+    await save(montage);
+    assert.equal((await readSceneManifest(root)).get("homepage-montage").durationSeconds, 15);
+    await save({ ...montage, durationSeconds: 16 });
+    await assert.rejects(readSceneManifest(root), /acceptance incomplete/);
     await save(scene);
     await fs.appendFile(path.join(root, scene.video.path), "changed");
     await assert.rejects(readSceneManifest(root), /changed after acceptance/);
@@ -47,15 +59,28 @@ test("only accepted, unchanged scene artifacts enter pages", async () => {
   }
 });
 
-test("homepage private access media leaves the Host section byte-identical", () => {
-  const $ = cheerio.load('<html><head></head><body><section id="private-access"><div><img class="security-statement__media-image" alt="Arrival" width="1536" height="1024"></div></section><section id="guest-invites-api"><h2>WIFIGATE Host</h2><img src="original-host.webp"></section></body></html>');
-  const host = $("#guest-invites-api").toString();
-  applyHomeSceneMedia($, { scene: { poster: { path: "assets/img/private-access-scene.webp" }, video: { path: "assets/vid/home/private-access-720p.mp4" } },
+test("homepage montage and reused hotel scene leave the courier static and retain localized content", () => {
+  const $ = cheerio.load(`<html><head></head><body><section id="home" class="hero"><div class="hero__media"><img class="hero__bg--image"><video id="hero-video" loop><source src="old.mp4"></video><button id="hero-mute-toggle"></button><button id="hero-pause-toggle"></button><button id="hero-replay" hidden></button></div><h1>One app.</h1></section>
+    <section id="private-access"><img class="security-statement__media-image" src="courier.webp" alt="Arrival"></section>
+    <section id="guest-invites-api"><h2>WIFIGATE Host</h2><figure class="automation-stay"><img alt="Guests enter"><figcaption>Booking received</figcaption></figure></section></body></html>`);
+  const courier = $("#private-access").toString();
+  applyHomeSceneMedia($, { scene: { key: "homepage-montage", poster: { path: "assets/img/homepage-montage-scene.webp" }, video: { path: "assets/vid/home/homepage-montage-720p.mp4" } },
+    hotelScene: { poster: { path: "assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp" }, video: { path: "assets/vid/use-cases/hotels-airbnb-720p.mp4" } },
     assetPrefix: "../", copy: { play: "Play", pause: "Pause", replay: "Replay" } });
-  assert.equal($("#guest-invites-api").toString(), host);
-  assert.equal($("#private-access [data-scene-video]").length, 1);
-  assert.equal($("#private-access [data-scene-image]").attr("alt"), "Arrival");
-  assert.equal($("#private-access video").attr("src"), undefined);
+  assert.equal($("#private-access").toString(), courier);
+  assert.equal($("#home h1").text(), "One app.");
+  assert.equal($("#home").attr("data-hero-scene"), "homepage-montage");
+  assert.equal($("#hero-video").attr("src"), undefined);
+  assert.equal($("#hero-video source").length, 0);
+  assert.equal($("#hero-video").attr("loop"), undefined);
+  assert.equal($("#hero-video").attr("data-silent"), "true");
+  assert.equal($("#hero-video").attr("poster"), $("#home img").attr("src"));
+  assert.ok($("#hero-mute-toggle").is("[hidden]"));
+  assert.equal($("#guest-invites-api [data-scene-video]").length, 1);
+  assert.equal($("#guest-invites-api h2").text(), "WIFIGATE Host");
+  assert.equal($("#guest-invites-api figcaption").text(), "Booking received");
+  assert.equal($("#guest-invites-api video").attr("src"), undefined);
+  assert.equal($("#guest-invites-api [data-scene-image]").attr("alt"), "Guests enter");
 });
 
 test("localized niche media preserves the image, has no automatic source, and stays out of absent scenes", () => {
