@@ -18,6 +18,7 @@ import { buildNotFoundPage } from "./not-found-page.mjs";
 import { buildLoginPages } from "./login-pages.mjs";
 import { BRAND_ID, ORGANIZATION_ID, SITE_ORIGIN, breadcrumbNode, faqNode, hreflangCode, setPageMeta, webPageNode } from "./seo.mjs";
 import { readSceneManifest, applyNicheSceneMedia, applyHomeSceneMedia } from "./scene-media.mjs";
+import { applyMediaWatermarks } from "./media-watermark.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = SITE_ORIGIN;
@@ -932,6 +933,7 @@ function inlineJson(value) {
 
 function serialize($, homeData, locale, pageKey = "home") {
   updateSharedHeader($, homeData, locale, pageKey);
+  applyMediaWatermarks($, { assetPrefix: buildAssetPrefix(locale, pageKey) });
   // Every published page asks for cookie consent in its own language; the
   // footer's "Cookie settings" button reopens the choice.
   const settingsLabel = homeData.cookieCopy[locale].reopen;

@@ -1,0 +1,33 @@
+/* The exact supplied PNG is visually cropped to its alpha bounds. No media or
+   watermark bitmap is resampled, repainted or recompressed by this layer. */
+.media-watermark {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 3;
+  display: block;
+  width: clamp(40px, 12%, 96px);
+  aspect-ratio: 1032 / 641;
+  background-image: url("../assets/img/wifigate-watermark.png?v=d4e6db34dc50");
+  background-repeat: no-repeat;
+  background-size: 121.5116% auto;
+  background-position: 50% 56.4437%;
+  opacity: .75;
+  filter: drop-shadow(0 1px 2px #0009);
+  pointer-events: none;
+  user-select: none;
+}
+/* The hero frames already have absolute positioning; preserve that geometry. */
+.home-en :is(.where-media, .product-overview__figure),
+.media-watermark-image { position: relative; }
+.media-watermark-image__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
+}
+/* Reserve the default accessibility button's corner on LTR heroes. In RTL the
+   button occupies the left corner, so the brand keeps its physical right edge. */
+html:not([dir="rtl"]) :is(.hero__media, .niche-hero__media) > .media-watermark {
+  right: calc(clamp(1rem, 2vw + .8rem, 1.75rem) + 3.75rem + 12px);
+}
