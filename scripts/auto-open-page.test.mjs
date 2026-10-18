@@ -17,8 +17,9 @@ test("every supported locale has its own complete arrival-only page and preserve
     assert.equal(content.seoTitle, `${feature.title} | WIFIGATE`);
     assert.equal(content.seoDescription, feature.text);
     assert.equal(content.imageAlt, feature.text);
-    assert.deepEqual(content.highlights.map(item => item.icon), ["handsfree", "clock", "shield"]);
-    assert.deepEqual(content.benefits, []);
+    assert.deepEqual(content.highlights, []);
+    assert.deepEqual(content.benefits.map(item => item.icon), ["smartphone", "clock", "user-check"]);
+    assert.ok(content.benefits.every(item => item.title.trim() && item.text.trim()));
     assert.deepEqual(content.faq, []);
   }
 });
@@ -43,9 +44,9 @@ test("public hero, metadata and image descriptions reject implementation disclos
 
 test("returned page objects cannot mutate another locale or a later render", () => {
   const first = getAutoOpenPageContent("he", copies.he);
-  first.highlights[0].title = "changed";
+  first.benefits[0].title = "changed";
   first.faq.push({ question: "changed", answer: "changed" });
   const second = getAutoOpenPageContent("he", copies.he);
-  assert.notEqual(second.highlights[0].title, "changed");
+  assert.notEqual(second.benefits[0].title, "changed");
   assert.deepEqual(second.faq, []);
 });

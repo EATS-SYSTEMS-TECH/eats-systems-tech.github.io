@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {chromium} from 'playwright-core';
-import {AUTO_OPEN_PAGE_KEY} from './auto-open-page.mjs';
+import {AUTO_OPEN_PAGE_KEY,getAutoOpenPageContent} from './auto-open-page.mjs';
 
 // Real generated routes and their accepted media; never substitute a fixture
 // clip or own/stop the caller's server. Every Chrome context below is owned.
@@ -44,6 +44,20 @@ async function inspectLayout(page){
  for(const action of result.controls)assert.equal(overlaps(result.mark,action),false,'Watermark clears ALL hero actions including media siblings');for(const text of result.copy)assert.equal(overlaps(result.mark,text),false,'Watermark clears hero copy');
  return{textOverVideo:true,matchingMediaBounds:true,watermarkControlsClear:true,watermarkCopyClear:true};
 }
+async function inspectBenefits(page,locale){
+ const section=page.locator('#niche-benefits');await section.scrollIntoViewIfNeeded();
+ const copy=(await import(`./homepage-copy/${locale?'he':'en'}.mjs`)).default,expected=getAutoOpenPageContent(locale?'he':'en',copy).benefits;
+ const value=await section.evaluate(element=>{
+  const list=element.querySelector('#niche-benefits-list'),cards=[...list.children],box=element.getBoundingClientRect();
+  return{title:element.querySelector('h2').textContent.trim(),labelledBy:element.getAttribute('aria-labelledby'),sharedGrid:getComputedStyle(list).display==='grid',columns:getComputedStyle(list).gridTemplateColumns,count:cards.length,cards:cards.map(card=>({title:card.querySelector('h3').textContent.trim(),text:card.querySelector('.bento-card__text').textContent.trim(),icon:!!card.querySelector('.bento-card__icon svg'),sharedClass:card.classList.contains('bento-card'),visible:card.getBoundingClientRect().width>0&&card.getBoundingClientRect().height>0,right:card.getBoundingClientRect().right,left:card.getBoundingClientRect().left})),sectionHeight:box.height,viewportWidth:innerWidth,scrollWidth:document.documentElement.scrollWidth};
+ });
+ assert.equal(value.title,locale?'יתרונות עיקריים':'Key benefits');assert.equal(value.labelledBy,'niche-benefits-title');assert.equal(value.sharedGrid,true);assert.equal(value.count,3);assert.ok(value.sectionHeight>0);assert.ok(value.scrollWidth<=value.viewportWidth);
+ const visibleCopy=value=>value.replace(/[\u200e\u200f]/g,'').trim();
+ assert.deepEqual(value.cards.map(({title,text})=>({title:visibleCopy(title),text:visibleCopy(text)})),expected.map(({title,text})=>({title:visibleCopy(title),text:visibleCopy(text)})));
+ assert.ok(value.cards.every(card=>card.icon&&card.sharedClass&&card.visible&&card.left>=-.5&&card.right<=value.viewportWidth+.5));
+ assert.equal(await page.locator('.niche-highlight').count(),0,'Benefits appear once without duplicate highlight cards');
+ return{title:value.title,count:3,sharedGrid:true,sharedCards:true,iconsPresent:true,localizedCopyMatches:true,noDuplicateHighlights:true,noHorizontalOverflow:true,columns:value.columns};
+}
 try{
  if(screenshots){await fs.mkdir(screenshots,{recursive:true});const exists=await fs.stat(path.join(screenshots,'auto-open-browser-report.json')).then(()=>true,error=>{if(error.code==='ENOENT')return false;throw error;});assert.equal(exists,false,'Use fresh evidence directory for a new attempt');}
  for(const locale of['','he/'])for(const width of[320,390,1280]){
@@ -57,12 +71,12 @@ try{
    assert.match(await icon.getAttribute('src'),/\/auto_open\.svg(?:\?|$)/);assert.equal(await card.locator('video,[data-scene-video],[data-media-watermark]').count(),0,'Home feature keeps its ordinary icon');
    const link=page.locator('a.feature-card--auto-open[href],.feature-card--auto-open a[href]').first();assert.equal(new URL(await link.getAttribute('href'),page.url()).pathname,target,'Link opens this language video page');assert.equal(requests.length,0,'Home requests no Auto Open video or poster');
    result.homepage={svgIcon:true,localizedLink:target,inlineVideoAbsent:true,autoOpenRequests:0};await capture(page,'auto-open-'+label+'-home-icon',card);
-   await Promise.all([page.waitForURL(origin+target),link.click()]);await page.locator('.niche-hero h1').waitFor();assert.ok((await page.locator('.niche-hero h1').innerText()).trim());assert.equal(await page.locator('.niche-highlight').count(),3);assert.equal(await page.locator('#niche-benefits,#niche-faq,#niche-faq-list').count(),0);assert.equal(await page.locator('.niche-hero__pager a,.niche-hero__nav-button').count(),0,'No use-case previous/next links');assert.equal(await page.locator('.niche-hero__actions button[data-scene-replay]').count(),1);assert.equal(await page.locator('.niche-hero__actions a').count(),0);
+   await Promise.all([page.waitForURL(origin+target),link.click()]);await page.locator('.niche-hero h1').waitFor();assert.ok((await page.locator('.niche-hero h1').innerText()).trim());assert.equal(await page.locator('.niche-highlight').count(),0);assert.equal(await page.locator('#niche-benefits').count(),1);assert.equal(await page.locator('#niche-faq,#niche-faq-list').count(),0);assert.equal(await page.locator('.niche-hero__pager a,.niche-hero__nav-button').count(),0,'No use-case previous/next links');assert.equal(await page.locator('.niche-hero__actions button[data-scene-replay]').count(),1);assert.equal(await page.locator('.niche-hero__actions a').count(),0);
    await playing(page);result.selection=await actualSelection(page,width);result.autoplayBeforeMediaInput=true;result.layout=await inspectLayout(page);await capture(page,'auto-open-'+label+'-autoplay');
    const replay=page.locator('.niche-hero__actions [data-scene-replay]'),pause=page.locator('.niche-hero__pager [data-scene-pause]');
    await page.waitForFunction(()=>document.querySelector('.niche-hero video').currentTime>1.1);await replay.click();await page.waitForFunction(()=>{const v=document.querySelector('.niche-hero video');return!v.paused&&v.currentTime<1;});result.midPlayReplay=true;
    await page.waitForFunction(()=>document.querySelector('.niche-hero video').ended,{},{timeout:25000});const endedAt=await page.locator('.niche-hero video').evaluate(v=>v.currentTime);await page.waitForTimeout(400);assert.ok(await page.locator('.niche-hero video').evaluate((v,t)=>v.ended&&v.paused&&!v.loop&&Math.abs(v.currentTime-t)<.1,endedAt));result.naturalCompletionWithoutLoop=true;await capture(page,'auto-open-'+label+'-ended');
-   await replay.click();await page.waitForFunction(()=>{const v=document.querySelector('.niche-hero video');return!v.paused&&v.currentTime<1;});result.afterEndReplay=true;await pause.click();assert.equal(await page.locator('.niche-hero video').evaluate(v=>v.paused),true);assert.ok(requests.filter(item=>item.documentPath===target&&item.path.endsWith('.mp4')).every(item=>item.path===videoPath));result.status='PASS';
+   await replay.click();await page.waitForFunction(()=>{const v=document.querySelector('.niche-hero video');return!v.paused&&v.currentTime<1;});result.afterEndReplay=true;await pause.click();assert.equal(await page.locator('.niche-hero video').evaluate(v=>v.paused),true);assert.ok(requests.filter(item=>item.documentPath===target&&item.path.endsWith('.mp4')).every(item=>item.path===videoPath));result.benefits=await inspectBenefits(page,locale);await capture(page,'auto-open-'+label+'-benefits',page.locator('#niche-benefits'));result.status='PASS';
   }finally{await context.close();}
  }
  for(const policy of['reduced-motion','save-data']){

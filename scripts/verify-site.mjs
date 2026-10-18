@@ -273,8 +273,9 @@ async function main() {
           }
         }
       } else if (pageKey === AUTO_OPEN_PAGE_KEY) {
-        if ($(".niche-highlight").length !== 3 || $(".niche-highlight__icon svg").length !== 3) problems.push(`${rel}: Auto Open needs three marketing highlights`);
-        if ($("#niche-benefits, #niche-faq, #niche-prev-link, #niche-next-link").length) problems.push(`${rel}: Auto Open has unrelated use-case sections or navigation`);
+        const benefits = $("#niche-benefits-list > .bento-card");
+        if (benefits.length !== 3 || benefits.find(".bento-card__icon svg").length !== 3 || !$("#niche-benefits-title").text().trim()) problems.push(`${rel}: Auto Open needs a localized Key benefits section with three shared benefit cards`);
+        if ($(".niche-highlight, #niche-faq, #niche-prev-link, #niche-next-link").length) problems.push(`${rel}: Auto Open has duplicate highlights, unrelated sections or navigation`);
         if ($(".niche-hero video[data-media-variants]").length !== 1 || $(".niche-hero [data-scene-replay]").length !== 1) problems.push(`${rel}: Auto Open video and replay are missing`);
       } else if (pageKey === "home") {
         const autoOpenCard = $(".feature-card--auto-open");

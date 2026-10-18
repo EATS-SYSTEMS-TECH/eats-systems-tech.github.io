@@ -45,7 +45,7 @@ const COPY = {
   fil: ["Dumating. Pumasok. Ituloy ang araw mo.", "Malaya ang mga kamay", "Iwan ang telepono sa bulsa at panatilihing malaya ang mga kamay.", "Mas maginhawang pagdating", "Pumasok nang maginhawa at ipagpatuloy ang araw mo.", "Para sa mga awtorisadong gumagamit", "Awtomatikong pagpasok para sa mga taong may pahintulot na pumasok."],
 };
 
-const ICONS = ["handsfree", "clock", "shield"];
+const ICONS = ["smartphone", "clock", "user-check"];
 const NONEMPTY = value => typeof value === "string" && value.trim().length > 0;
 const BRAND_ONLY = /^(?:WIFIGATE|Auto Open|[\s·|.,:])+$/;
 // These words describe implementation, rather than the user's arrival.
@@ -61,8 +61,8 @@ export function getAutoOpenPageContent(locale, homepageCopy) {
     eyebrow: "WIFIGATE · Auto Open",
     title: local[0],
     heroLead: feature.text,
-    highlights: ICONS.map((icon, index) => ({ icon, title: local[1 + index * 2], text: local[2 + index * 2] })),
-    benefits: [],
+    highlights: [],
+    benefits: ICONS.map((icon, index) => ({ icon, title: local[1 + index * 2], text: local[2 + index * 2] })),
     faq: [],
     seoTitle: `${feature.title} | WIFIGATE`,
     seoDescription: feature.text,

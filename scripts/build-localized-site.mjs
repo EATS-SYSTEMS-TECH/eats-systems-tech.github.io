@@ -1773,7 +1773,7 @@ async function buildAutoOpenPages(homeData) {
     rewriteStaticAssets($, locale, AUTO_OPEN_PAGE_KEY);
     appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, AUTO_OPEN_PAGE_KEY);
     fillUseCaseBody($, { chrome, content, image, locale, pageKey: AUTO_OPEN_PAGE_KEY, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
-    $("#niche-benefits, #niche-faq, #niche-prev-link, #niche-next-link").remove();
+    $("#niche-faq, #niche-prev-link, #niche-next-link").remove();
     $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
     setUseCaseNavigation($, { chrome, content });
     applyNicheSceneMedia($, { scene, assetPrefix: buildAssetPrefix(locale, AUTO_OPEN_PAGE_KEY), copy: homeData.homepageCopies[locale].hero.media });
