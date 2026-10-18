@@ -33,58 +33,6 @@ body.home-en {
   padding-inline: clamp(1.25rem, 4vw, 4rem);
 }
 
-/* Dark navigation above the homepage video. Keep the existing logo artwork. */
-.home-en .site-header {
-  border-bottom-color: rgba(255, 255, 255, 0.16);
-  background: #080808;
-}
-
-.home-en .site-header .nav__logo {
-  filter: brightness(0) invert(1);
-}
-
-.home-en .site-header .nav__link,
-.home-en .site-header .language-selector__button,
-.home-en .site-header .site-account__button {
-  color: #ffffff;
-}
-
-.home-en .site-header .nav__link:hover,
-.home-en .site-header .nav__link:focus-visible {
-  color: #c6dcff;
-}
-
-.home-en .site-header .nav__link::after {
-  background: #c6dcff;
-}
-
-.home-en .site-header .nav__contact-link,
-.home-en .site-header .site-login__trigger {
-  color: #080808;
-  border-color: #ffffff;
-  background: #ffffff;
-}
-
-.home-en .site-header .nav__contact-link:hover,
-.home-en .site-header .nav__contact-link:focus-visible,
-.home-en .site-header .site-login__trigger:hover,
-.home-en .site-header .site-login__trigger:focus-visible {
-  color: #080808;
-  border-color: #e4e4e4;
-  background: #e4e4e4;
-}
-
-.home-en .site-header .language-selector__button:hover,
-.home-en .site-header .site-account__button:hover,
-.home-en .site-header .site-account.is-open .site-account__button,
-.home-en .site-header .nav__toggle:hover {
-  background: #262626;
-}
-
-.home-en .site-header .nav__toggle-bar {
-  background: #ffffff;
-}
-
 .home-en :is(#how-it-works, #use-cases, #wifigate-automation, #tutorial-videos, #get-in-touch) {
   scroll-margin-top: calc(var(--nav-height) + 1rem);
 }
@@ -242,28 +190,22 @@ html[lang="he"] body.home-en .hero__overlay {
 
 .home-en .hero--statement .hero__title {
   max-width: 44rem;
-  font-size: clamp(1.5rem, 2.2vw, 2.1rem);
-  font-weight: 550;
-  line-height: 1.36;
-}
-
-.home-en .hero--statement .hero__title-brand {
-  display: block;
-  margin-bottom: .7rem;
-  font-size: clamp(2.7rem, 4.2vw, 3.7rem);
+  font-size: clamp(2.7rem, 4.4vw, 4rem);
   font-weight: 700;
-  line-height: 1;
-  letter-spacing: -.045em;
+  line-height: 1.08;
+  letter-spacing: -.035em;
 }
 
-.home-en .hero--statement .hero__title-copy {
-  display: block;
-  max-width: 38ch;
+.home-en .hero--statement .hero__title-line { display: block; }
+
+.home-en .hero--statement .hero__subtitle {
+  max-width: 39rem;
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  line-height: 1.55;
 }
 
-html[lang="he"] body.home-en .hero--statement .hero__title {
-  line-height: 1.45;
-}
+html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.18; }
 
 .home-en .hero__subtitle {
   max-width: 66rem;
@@ -288,25 +230,21 @@ html[lang="he"] body.home-en .hero--statement .hero__title {
 }
 
 @media (max-width: 768px) {
-  .home-en .hero--statement .hero__title {
-    font-size: clamp(1.28rem, 3.3vw, 1.65rem);
-  }
-  .home-en .hero--statement .hero__title-brand {
-    font-size: clamp(2.25rem, 6vw, 3rem);
-  }
+  .home-en .hero--statement .hero__title { font-size: clamp(2rem, 6vw, 2.8rem); }
+  .home-en .hero--statement .hero__subtitle { font-size: .96rem; }
 }
 
 .home-en .hero .btn--primary {
-  color: #ffffff;
-  border: 1px solid #0b63ff;
-  background: #0b63ff;
+  color: #080808;
+  border: 1px solid #ffffff;
+  background: #ffffff;
 }
 
 .home-en .hero .btn--primary:hover,
 .home-en .hero .btn--primary:focus-visible {
-  color: #ffffff;
-  border-color: #0542ad;
-  background: #0542ad;
+  color: #080808;
+  border-color: #e4e4e4;
+  background: #e4e4e4;
   transform: none;
 }
 
@@ -1559,13 +1497,13 @@ html[lang="he"] body.home-en #where .section__header {
   }
 
   .home-en .hero--statement .hero__title {
-    font-size: 1.16rem;
-    line-height: 1.38;
+    font-size: 2rem;
+    line-height: 1.12;
   }
 
-  .home-en .hero--statement .hero__title-brand {
-    margin-bottom: .55rem;
-    font-size: 2.3rem;
+  .home-en .hero--statement .hero__subtitle {
+    margin-top: .85rem;
+    font-size: .94rem;
   }
 
   .home-en .hero--statement .hero__actions .btn {
@@ -1614,16 +1552,15 @@ html[lang="he"] body.home-en #where .section__header {
   }
 
   .home-en .hero--statement .hero__title {
-    font-size: 1.05rem;
-    line-height: 1.38;
+    font-size: 1.65rem;
+    line-height: 1.14;
   }
 
-  html[lang="he"] body.home-en .hero--statement .hero__title {
-    line-height: 1.45;
-  }
+  html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.2; }
 
-  .home-en .hero--statement .hero__title-brand {
-    font-size: 2rem;
+  .home-en .hero--statement .hero__subtitle {
+    font-size: .9rem;
+    line-height: 1.48;
   }
 
   .home-en .hero--statement .hero__actions {

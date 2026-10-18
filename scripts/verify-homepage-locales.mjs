@@ -101,12 +101,23 @@ for (const localeFile of localeFiles) {
     report(locale, "Automation CTA is not locale-aware");
   }
 
+  const autoOpenMedia = $(".feature-card--auto-open .feature-card__media");
+  if (autoOpenMedia.length !== 1 ||
+      !autoOpenMedia.find("img.feature-card__image").attr("src")?.includes("auto_open.svg") ||
+      autoOpenMedia.find("video, picture, .scene-video-controls").length !== 0 ||
+      autoOpenMedia.is("[data-scene-video]")) {
+    report(locale, "Auto Open card must retain its original icon");
+  }
+
   if (copy.hero.statement) {
-    if (normalize($("#hero-title").text()) !== normalize(copy.hero.statement)) {
+    if (normalize($("#hero-title").text()) !== normalize(copy.hero.titleLines.join(" "))) {
+      report(locale, "hero headline copy mismatch");
+    }
+    if (normalize($("#hero-subtitle").text()) !== normalize(copy.hero.statement)) {
       report(locale, "hero statement copy mismatch");
     }
-    if (!$(".hero").hasClass("hero--statement") || $("#hero-subtitle, .hero__proof").length) {
-      report(locale, "hero statement must appear without extra overlay copy");
+    if (!$(".hero").hasClass("hero--statement") || $(".hero__proof").length || $("#hero-subtitle").length !== 1) {
+      report(locale, "hero statement structure mismatch");
     }
   } else {
     const heroSubtitle = $("#hero-subtitle");

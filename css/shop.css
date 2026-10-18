@@ -1,35 +1,45 @@
-.shop-page { background: #080808; }
-.shop-page .site-header { border-bottom-color: rgba(255,255,255,.16); background: #080808; }
-.shop-page .site-header .nav__logo { filter: brightness(0) invert(1); }
-.shop-page .site-header .nav__link,
-.shop-page .site-header .language-selector__button,
-.shop-page .site-header .site-account__button,
-.shop-page .site-header .site-cart__trigger { color: #fff; }
-.shop-page .site-header .nav__contact-link,
-.shop-page .site-header .site-login__trigger { border-color: #fff; background: #fff; color: #080808; }
-.shop-page .site-header .nav__toggle-bar { background: #fff; }
-.shop-page .site-header .nav__toggle:hover,
-.shop-page .site-header .language-selector__button:hover,
-.shop-page .site-header .site-account__button:hover,
-.shop-page .site-header .site-cart__trigger:hover { background: #262626; }
+.shop-page { background: #ffffff; }
 .shop-main {
   display: grid;
   place-items: center;
   min-height: calc(100svh - var(--nav-height));
-  padding: clamp(5rem, 9vw, 8rem) 1.25rem;
-  background-image: linear-gradient(90deg, rgba(5, 5, 5, .84), rgba(5, 5, 5, .62)), url("../assets/img/wifigate_homepage.webp");
-  background-size: cover;
-  background-position: center;
+  padding: 3rem 1.25rem;
+  background: #ffffff;
   text-align: center;
 }
-.shop-main__content { max-width: 42rem; color: #fff; }
-.shop-main__eyebrow { margin: 0 0 1.15rem; color: #fff; font-size: .82rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
-.shop-main__eyebrow::before { display: inline-block; width: 1.6rem; height: 2px; margin-inline-end: .65rem; vertical-align: middle; background: #146bff; content: ""; }
-.shop-main h1 { margin: 0 0 1.25rem; color: #fff; font-family: "DM Sans", "Manrope", sans-serif; font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 600; line-height: 1.1; letter-spacing: -.035em; text-wrap: balance; }
-.shop-main__content > p:not(.shop-main__eyebrow) { max-width: 36rem; margin: 0 auto 2rem; color: rgba(255, 255, 255, .88); font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.65; }
-.shop-main__link { display: inline-flex; justify-content: center; align-items: center; min-height: 3rem; padding: .75rem 1.3rem; border: 1px solid #fff; border-radius: 4px; background: #fff; color: #080808; font-weight: 700; }
-.shop-main__link:hover, .shop-main__link:focus-visible { border-color: #e2e2e2; background: #e2e2e2; }
-@media (max-width: 600px) {
-  .shop-main { background-position: 64% center; }
-  .shop-main h1 { font-size: clamp(2rem, 10vw, 3rem); }
+.shop-main__content { max-width: 100%; }
+.shop-main h1 {
+  margin: 0 0 1.75rem;
+  color: #0a0a0a;
+  font-family: "DM Sans", "Manrope", sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+  animation: shop-message-enter 700ms ease-out both;
 }
+@media (min-width: 700px) {
+  .shop-main h1 { white-space: nowrap; }
+}
+@keyframes shop-message-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shop-main h1 { animation: none; }
+}
+.shop-main__link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 3rem;
+  padding: .75rem 1.3rem;
+  border: 1px solid #0a0a0a;
+  border-radius: 4px;
+  background: #0a0a0a;
+  color: #ffffff;
+  font-weight: 700;
+}
+.shop-main__link:hover,
+.shop-main__link:focus-visible { border-color: #292929; background: #292929; color: #ffffff; }

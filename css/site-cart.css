@@ -33,8 +33,6 @@
   line-height: 1;
 }
 .site-header .site-cart__count[hidden] { display: none; }
-.home-en .site-header .site-cart__trigger { color: #fff; }
-.home-en .site-header .site-cart__trigger:hover { background: #262626; }
 @media (max-width: 1199px) {
   .site-header .nav { grid-template-columns: auto minmax(0,1fr) auto auto auto auto; }
   .site-header .site-login__trigger, .site-header .site-account { grid-column: 3; grid-row: 1; }

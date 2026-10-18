@@ -617,19 +617,14 @@ function applyHomepageCopy($, copy, locale) {
   const dir = isRtl(locale) ? "rtl" : "ltr";
 
   if (copy.hero.statement) {
-    $(".hero").addClass("hero--statement").removeAttr("aria-describedby");
-    const statement = copy.hero.statement;
+    $(".hero").addClass("hero--statement");
     const title = $("#hero-title").empty().attr("dir", dir);
-    if (statement.startsWith("WIFIGATE ")) {
-      title.append(
-        $("<bdi>").addClass("hero__title-brand").attr("dir", "ltr").text("WIFIGATE"),
-        " ",
-        $("<span>").addClass("hero__title-copy").text(formatTextForLocaleDirection(statement.slice(9), locale))
-      );
-    } else {
-      title.text(formatTextForLocaleDirection(statement, locale));
-    }
-    $("#hero-subtitle, .hero__proof").remove();
+    copy.hero.titleLines.forEach((line, index) => {
+      if (index) title.append(" ");
+      title.append($("<span>").addClass("hero__title-line").text(formatTextForLocaleDirection(line, locale)));
+    });
+    setLocalizedText($, "#hero-subtitle", copy.hero.statement, locale);
+    $(".hero__proof").remove();
   } else {
     // Other locales retain their existing headline and translated benefits.
     const category = getNichePageContent(locale).home.seoTitle.replace(/^WIFIGATE \| /, "");
@@ -957,7 +952,7 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   if (locale !== "he") $(".site-cart__drawer").attr("lang", "en");
   const prefix = buildAssetPrefix(locale, pageKey);
   $("head").append('<link rel="stylesheet" href="' + prefix + siteHeaderStylesheet + '">');
-  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-cart.css?v=20261016a">');
+  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-cart.css?v=20261018c">');
   $("script[src*='js/site-account.js']").remove();
   $("script[src*='js/navigation.js']")
     .attr("src", prefix + "js/navigation.js?v=20261007a")
@@ -965,7 +960,7 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   $("body").append('<script src="' + prefix + 'js/site-cart.js?v=20261016a" defer></script>');
 }
 
-const siteHeaderStylesheet = "css/site-header.css?v=20261018a";
+const siteHeaderStylesheet = "css/site-header.css?v=20261018c";
 
 // A landing page keeps the header's look and the logo, and nothing that leads
 // into the site: no menu, no logo link, no sign-in, account or language menu.
@@ -1101,7 +1096,7 @@ async function buildHomePages(homeData) {
     rewriteHomeInternalLinks($, locale);
     updateHomeWhereLinks($, locale);
     applyHomepageCopy($, homepageCopies[locale], locale);
-    applyHomeSceneMedia($, { scene: homeData.sceneMedia.get("homepage-montage"), hotelScene: homeData.sceneMedia.get("hotels-airbnb"), autoOpenScene: homeData.sceneMedia.get("auto-open-futuristic"),
+    applyHomeSceneMedia($, { scene: homeData.sceneMedia.get("homepage-montage"), hotelScene: homeData.sceneMedia.get("hotels-airbnb"),
       assetPrefix: buildAssetPrefix(locale, "home"), copy: homepageCopies[locale].hero.media });
     rewriteHomeGuestInvitesLink($, locale);
     reorderHomeSections($);
@@ -1143,9 +1138,7 @@ async function buildShopPages(homeData) {
     $("link[rel='canonical']").attr("href", buildPageUrl(locale, "shop"));
     $(".shop-main__content").attr({ lang: he ? "he" : "en", dir: he ? "rtl" : "ltr" });
     if (he) {
-      $(".shop-main__eyebrow").text("WIFIGATE Shop");
-      $(".shop-main h1").text("משהו טוב נפתח בקרוב.");
-      $(".shop-main__content > p:not(.shop-main__eyebrow)").text("החנות המקוונת של WIFIGATE בדרך. בקרוב תוכלו לגלות את המוצרים שלנו ולהזמין כאן.");
+      $(".shop-main h1").text("חנות WIFIGATE תיפתח בקרוב.");
       $(".shop-main__link").text("חזרה ל־WIFIGATE");
     }
     $(".shop-main__link").attr("href", buildPagePath(locale, "home"));

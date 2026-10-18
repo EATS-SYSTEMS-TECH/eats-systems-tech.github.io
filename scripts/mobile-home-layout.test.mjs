@@ -5,7 +5,7 @@ const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? 
 const consent = JSON.stringify({ version: 1, analytics: false, savedAt: Date.now() });
 const selectors = [
   ".site-header", ".nav__brand", ".site-login__trigger", ".site-cart__trigger", ".language-selector__button", ".nav__toggle",
-  ".hero", ".hero__media", ".hero__text", ".hero__title", ".hero__actions", "#hero-replay", ".a11y-fab",
+  ".hero", ".hero__media", ".hero__text", ".hero__title", ".hero__subtitle", ".hero__actions", "#hero-replay", ".a11y-fab",
 ];
 const overlaps = (a, b) => a.x < b.right && a.right > b.x && a.y < b.bottom && a.bottom > b.y;
 
@@ -39,14 +39,15 @@ try {
     const box = result.boxes;
     assert.ok(result.scrollWidth <= width, `${label}: no horizontal page overflow`);
     assert.ok(box[".hero__title"].y >= box[".site-header"].bottom, `${label}: headline clears the header`);
-    assert.ok(box[".hero__actions"].y >= box[".hero__title"].bottom, `${label}: actions clear the headline`);
+    assert.ok(box[".hero__subtitle"].y >= box[".hero__title"].bottom, `${label}: explanation clears the headline`);
+    assert.ok(box[".hero__actions"].y >= box[".hero__subtitle"].bottom, `${label}: actions clear the explanation`);
     // The media and playback control remain inside the video hero, clear of its overlaid copy.
     const media = box[".hero__media"];
     const replay = box["#hero-replay"];
     for (const edge of ["x", "y", "right", "bottom"]) assert.ok(Math.abs(media[edge] - box[".hero"][edge]) < .5, `${label}: background ${edge} matches the original hero`);
     assert.ok(replay.x >= media.x && replay.right <= media.right && replay.y >= media.y && replay.bottom <= media.bottom, `${label}: video button remains inside its media`);
     assert.ok(overlaps(box[".hero__text"], media), `${label}: text remains overlaid on the background`);
-    for (const text of [".hero__title", ".hero__actions"]) {
+    for (const text of [".hero__title", ".hero__subtitle", ".hero__actions"]) {
       assert.ok(!overlaps(replay, box[text]), `${label}: video button clears ${text}`);
     }
     assert.ok(!overlaps(replay, box[".a11y-fab"]), `${label}: video button clears the accessibility control`);
