@@ -1530,7 +1530,7 @@ async function buildNichePages(homeData) {
       rewriteStaticAssets($, locale, niche.key);
       appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, niche.key);
       updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle);
-      applyNicheSceneMedia($, { scene: homeData.sceneMedia.get(niche.key),
+      applyNicheSceneMedia($, { scene: homeData.sceneMedia.get(niche.key === "electric-gates" ? "electric-gates-barrier" : niche.key),
         assetPrefix: buildAssetPrefix(locale, niche.key), copy: homeData.homepageCopies[locale].hero.media });
       updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer);
       rewriteNicheInternalLinks($, locale);
