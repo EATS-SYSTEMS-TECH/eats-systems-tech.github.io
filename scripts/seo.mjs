@@ -55,11 +55,9 @@ export function organizationNode() {
     "@type": "Organization",
     "@id": ORGANIZATION_ID,
     name: "EATS SYSTEMS TECH",
-    legalName: "Itay Nave – Engineering and Technology Solutions",
     url: SITE_ORIGIN,
     logo: { "@type": "ImageObject", url: LOGO_URL, width: 1024, height: 1024 },
     email: SUPPORT_EMAIL,
-    duns: "626518977",
     address: { "@type": "PostalAddress", addressCountry: "IL" },
     sameAs: SOCIAL_PROFILES,
     contactPoint: [
