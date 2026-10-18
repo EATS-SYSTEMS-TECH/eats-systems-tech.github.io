@@ -17,6 +17,7 @@ import path from "node:path";
 import { NICHE_DEFINITIONS } from "./niche-pages/index.mjs";
 import { LANDING_PAGES } from "./landing-pages/index.mjs";
 import { AUTO_OPEN_PAGE_KEY } from "./auto-open-page.mjs";
+import { HOST_PAGE_KEY } from "./host-marketing-page.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = "https://wifigate.io";
@@ -34,10 +35,10 @@ const hreflangPattern = /^(x-default|[a-z]{2}(-[A-Z][a-z]{3})?(-[A-Z]{2})?)$/;
 const nicheKeys = NICHE_DEFINITIONS.map((n) => n.key);
 const legalPages = ["privacy-policy", "terms-and-conditions", "cookies", "accessibility"];
 const landingKeys = LANDING_PAGES.map((page) => page.key);
-const indexablePages = ["home", "automation", AUTO_OPEN_PAGE_KEY, ...nicheKeys, ...landingKeys];
+const indexablePages = ["home", HOST_PAGE_KEY, AUTO_OPEN_PAGE_KEY, ...nicheKeys, ...landingKeys];
 const interactivePages = [
   "home",
-  "automation",
+  HOST_PAGE_KEY,
   AUTO_OPEN_PAGE_KEY,
   ...nicheKeys,
   ...landingKeys,
@@ -374,12 +375,12 @@ async function main() {
     }
 
     // Legacy routes must redirect to the new locations.
-    {
-      const legacyFile = pageFile(locale, "Automated-Guest-Invites-API");
+    for (const alias of ["automation", "Automated-Guest-Invites-API"]) {
+      const legacyFile = pageFile(locale, alias);
       const html = await fs.readFile(legacyFile, "utf8");
-      const target = pagePath(locale, "automation");
+      const target = pagePath(locale, HOST_PAGE_KEY);
       if (html.includes("noindex") || !html.includes(`url=${target}`) || !html.includes(`rel="canonical" href="${siteOrigin}${target}"`)) {
-        problems.push(`${locale}/Automated-Guest-Invites-API: must redirect to ${target} without noindex`);
+        problems.push(`${locale}/${alias}: must redirect to ${target} without noindex`);
       }
     }
     for (const niche of NICHE_DEFINITIONS) {

@@ -13,7 +13,7 @@ let cases = 0;
 const scenarios = [];
 for (const locale of ["he/", ""]) for (const width of [1280, 390]) scenarios.push({ locale, route: "roller-shutters/", width, height: 900 });
 for (const locale of ["", "he/"]) for (const route of ["roller-shutters/", "shabbat-clock-electric-gate/"]) for (const width of [390, 1280]) for (const height of [700, 600]) scenarios.push({ locale, route, width, height });
-for (const locale of ["", "he/"]) for (const route of ["", "hotels-airbnb/", "shabbat-clock-electric-gate/", "automation/", "auto-open/"]) for (const width of [320, 390, 1280]) scenarios.push({ locale, route, width, height: width < 769 ? 844 : 900 });
+for (const locale of ["", "he/"]) for (const route of ["", "hotels-airbnb/", "shabbat-clock-electric-gate/", "wifigate-host/", "auto-open/"]) for (const width of [320, 390, 1280]) scenarios.push({ locale, route, width, height: width < 769 ? 844 : 900 });
 try {
   if (screenshots) await fs.mkdir(screenshots, { recursive: true });
   for (const { locale, route, width, height } of scenarios) {

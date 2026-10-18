@@ -60,8 +60,8 @@ test("media cache versions follow delivered artifact hashes across home, hotel a
   assert.equal($("#home img").attr("src"), imageUrl);
   assert.equal($("#hero-video").attr("data-video-src"), videoUrl);
   assert.equal($("#hero-video").attr("poster"), imageUrl);
-  assert.equal($("#guest-invites-api video").attr("data-video-src"), videoUrl);
-  assert.equal($("#guest-invites-api video").attr("poster"), $("#guest-invites-api img").attr("src"));
+  assert.equal($("#guest-invites-api video, #guest-invites-api [data-scene-video], #guest-invites-api button").length, 0, "homepage Host stays static");
+  assert.equal($("#guest-invites-api .automation-stay__media img").attr("src"), imageUrl);
   assert.equal($(".niche-hero video").attr("data-video-src"), "../" + videoUrl);
   assert.equal($(".niche-hero video").attr("poster"), $("#niche-image").attr("src"));
   assert.notEqual(sceneAssetUrl("../", { ...scene.video, sha256: hash("replacement video") }), videoUrl, "replacing bytes invalidates old video cache");
@@ -181,7 +181,7 @@ test("only accepted, unchanged scene artifacts enter pages", async () => {
   }
 });
 
-test("homepage montage and reused hotel scene leave the courier static and retain localized content", () => {
+test("homepage montage keeps the Host poster and courier static and retains localized content", () => {
   const $ = cheerio.load(`<html><head></head><body><section id="home" class="hero"><div class="hero__media"><img class="hero__bg--image"><video id="hero-video" loop><source src="old.mp4"></video><button id="hero-mute-toggle"></button><button id="hero-pause-toggle"></button><button id="hero-replay" hidden></button></div><h1>One app.</h1></section>
     <section id="private-access"><img class="security-statement__media-image" src="courier.webp" alt="Arrival"></section>
     <section id="guest-invites-api"><h2>WIFIGATE Host</h2><figure class="automation-stay"><img alt="Guests enter"><figcaption>Booking received</figcaption></figure></section></body></html>`);
@@ -198,11 +198,11 @@ test("homepage montage and reused hotel scene leave the courier static and retai
   assert.equal($("#hero-video").attr("data-silent"), "true");
   assert.equal($("#hero-video").attr("poster"), $("#home img").attr("src"));
   assert.ok($("#hero-mute-toggle").is("[hidden]"));
-  assert.equal($("#guest-invites-api [data-scene-video]").length, 1);
+  assert.equal($("#guest-invites-api [data-scene-video], #guest-invites-api video, #guest-invites-api .scene-video-controls, #guest-invites-api [data-scene-copy]").length, 0);
   assert.equal($("#guest-invites-api h2").text(), "WIFIGATE Host");
   assert.equal($("#guest-invites-api figcaption").text(), "Booking received");
-  assert.equal($("#guest-invites-api video").attr("src"), undefined);
-  assert.equal($("#guest-invites-api [data-scene-image]").attr("alt"), "Guests enter");
+  assert.equal($("#guest-invites-api .automation-stay__media img").attr("src"), "../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp");
+  assert.equal($("#guest-invites-api img").attr("alt"), "Guests enter");
 });
 
 test("localized niche media preserves the image, has no automatic source, and stays out of absent scenes", () => {

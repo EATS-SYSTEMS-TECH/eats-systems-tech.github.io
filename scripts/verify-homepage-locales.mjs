@@ -92,8 +92,8 @@ for (const localeFile of localeFiles) {
   if ($("link[rel='alternate']").length !== localeFiles.length + 1) {
     report(locale, "hreflang cluster is incomplete");
   }
-  if ($(".guest-invites__cta").attr("href") !== `${homePath}automation/`) {
-    report(locale, "Automation CTA is not locale-aware");
+  if ($(".guest-invites__cta").attr("href") !== `${homePath}wifigate-host/`) {
+    report(locale, "Host CTA is not locale-aware");
   }
 
   const heroSubtitle = $("#hero-subtitle");

@@ -20,7 +20,7 @@ export function buildLlmsTxt({ homeCopy, homeSeo, niches, pageUrl }) {
     "## Product",
     "",
     `- [WIFIGATE home](${pageUrl("en", "home")}): what WIFIGATE is, how it works, use cases and FAQ.`,
-    `- [WIFIGATE Host](${pageUrl("en", "automation")}): ${homeCopy.automation.subtitle}`,
+    `- [WIFIGATE Host](${pageUrl("en", "wifigate-host")}): ${homeCopy.automation.subtitle}`,
     "",
     "## Use cases",
     "",

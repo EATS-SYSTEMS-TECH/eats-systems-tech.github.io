@@ -53,7 +53,7 @@ test("static Shabbat and public automation photos receive the same layer; utilit
 
 test("all 546 localized consumer and public marketing pages cover every displayed photo and video exactly once", async () => {
   let pages = 0, frames = 0;
-  const keys = ["", ...NICHE_DEFINITIONS.map(item => item.key), ...LANDING_PAGES.map(item => item.key), "automation", AUTO_OPEN_PAGE_KEY];
+  const keys = ["", ...NICHE_DEFINITIONS.map(item => item.key), ...LANDING_PAGES.map(item => item.key), "wifigate-host", AUTO_OPEN_PAGE_KEY];
   for (const { code } of SITE_LANGUAGES) for (const key of keys) {
     const relative = path.posix.join(code === "en" ? "" : code.toLowerCase(), key, "index.html");
     const $ = cheerio.load(await fs.readFile(new URL(relative, root), "utf8"));

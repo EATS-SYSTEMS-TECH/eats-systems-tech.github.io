@@ -243,6 +243,7 @@ test("all published locales and consumer niche routes are eligible", async () =>
   try {
     const paths = [...locales.map((locale) => locale === "en" ? "/" : `/${locale}/`),
       ...locales.map((locale) => `/${locale === "en" ? "" : `${locale}/`}${AUTO_OPEN_PAGE_KEY}/`),
+      ...locales.map((locale) => `/${locale === "en" ? "" : `${locale}/`}wifigate-host/`),
       ...NICHE_DEFINITIONS.map(({ key }) => `/${key}/`),
       "/automation/", "/cookies/", "/privacy-policy/", "/terms-and-conditions/", "/accessibility/", "/contact-us/", "/he/index.html"];
     for (const pathname of paths) {
