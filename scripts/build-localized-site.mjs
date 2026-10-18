@@ -8,6 +8,7 @@ import { NICHE_CHROME } from "./niche-content.mjs";
 import { benefitIconSvg } from "./benefit-icons.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
 import { LANDING_PAGES, LANDING_PAGE_LOCALES, validateLandingPageLocales } from "./landing-pages/index.mjs";
+import { AUTO_OPEN_PAGE_KEY, getAutoOpenPageContent, validateAutoOpenPageLocales } from "./auto-open-page.mjs";
 import { SITE_LOGIN_LABELS, SITE_NAVIGATION } from "./site-navigation.mjs";
 import { RTL_LANGUAGES, SITE_LANGUAGES } from "./site-languages.mjs";
 import { accessibilityLinkLabels } from "./legal/footer-labels.mjs";
@@ -948,7 +949,8 @@ function serialize($, homeData, locale, pageKey = "home") {
   $("script[src*='js/accessibility-copy.js']").replaceWith(
     `<script>window.accessibilityCopy = ${inlineJson({ [locale]: homeData.accessibilityCopy[locale] })};</script>`
   );
-  $("body").append(`<script src="${prefix}js/cookie-consent.js?v=${COOKIE_CONSENT_VERSION}" defer></script>`);
+  const consentScriptVersion = pageKey === AUTO_OPEN_PAGE_KEY ? "20261018ao1" : COOKIE_CONSENT_VERSION;
+  $("body").append(`<script src="${prefix}js/cookie-consent.js?v=${consentScriptVersion}" defer></script>`);
   const html = $.html({ decodeEntities: false }).replace(/[ \t]+(?=\r?\n|$)/g, "");
   return ensureTrailingNewline(html);
 }
@@ -1048,7 +1050,11 @@ async function buildHomePages(homeData) {
     rewriteHomeInternalLinks($, locale);
     updateHomeWhereLinks($, locale);
     applyHomepageCopy($, homepageCopies[locale], locale);
-    applyHomeSceneMedia($, { scene: homeData.sceneMedia.get("homepage-montage"), hotelScene: homeData.sceneMedia.get("hotels-airbnb"), autoOpenScene: homeData.sceneMedia.get("auto-open-futuristic"),
+    const autoOpenCard = $(".feature-card--auto-open");
+    const autoOpenTitle = autoOpenCard.find(".feature-card__title");
+    autoOpenCard.find(".feature-card__media").wrap($("<a>").attr({ href: buildPagePath(locale, AUTO_OPEN_PAGE_KEY), "aria-label": autoOpenTitle.text() }));
+    autoOpenTitle.wrapInner($("<a>").attr("href", buildPagePath(locale, AUTO_OPEN_PAGE_KEY)));
+    applyHomeSceneMedia($, { scene: homeData.sceneMedia.get("homepage-montage"), hotelScene: homeData.sceneMedia.get("hotels-airbnb"),
       assetPrefix: buildAssetPrefix(locale, "home"), copy: homepageCopies[locale].hero.media });
     rewriteHomeGuestInvitesLink($, locale);
     reorderHomeSections($);
@@ -1488,8 +1494,8 @@ function setUseCaseMeta($, { pageKey, content, chrome, image: pageImage, locale,
   const url = buildPageUrl(locale, pageKey);
   const image = {
     url: `${siteOrigin}/${pageImage.og}`,
-    width: 1200,
-    height: 630,
+    width: pageImage.ogWidth || 1200,
+    height: pageImage.ogHeight || 630,
     alt: content.imageAlt,
   };
   const breadcrumb = breadcrumbNode(url, [
@@ -1510,7 +1516,7 @@ function setUseCaseMeta($, { pageKey, content, chrome, image: pageImage, locale,
     graph: [
       webPageNode({ url, title: content.seoTitle, description: content.seoDescription, locale, image, breadcrumbId: breadcrumb["@id"], about, mentions, datePublished: published, dateModified: modified }),
       breadcrumb,
-      faqNode(url, locale, content.faq),
+      ...(content.faq.length ? [faqNode(url, locale, content.faq)] : []),
     ],
   });
 }
@@ -1672,6 +1678,34 @@ async function buildLandingPages(homeData) {
   return sitemapEntries;
 }
 
+async function buildAutoOpenPages(homeData) {
+  const template = await readHtmlTemplate(nicheTemplatePath);
+  const scene = homeData.sceneMedia.get("auto-open-futuristic");
+  if (!scene) throw new Error("Accepted Auto Open scene is required");
+  const image = { hero: scene.poster.path, og: scene.poster.path, heroWidth: scene.width, heroHeight: scene.height, ogWidth: scene.width, ogHeight: scene.height };
+  const sitemapEntries = [];
+  for (const { code: locale } of homeData.localeOptions) {
+    const content = getAutoOpenPageContent(locale, homeData.homepageCopies[locale]);
+    const chrome = getNicheChrome(locale);
+    const $ = cheerio.load(template, { decodeEntities: false });
+    setBodyDirection($, locale);
+    $("body").addClass("auto-open-page");
+    rewriteStaticAssets($, locale, AUTO_OPEN_PAGE_KEY);
+    appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, AUTO_OPEN_PAGE_KEY);
+    fillUseCaseBody($, { chrome, content, image, locale, pageKey: AUTO_OPEN_PAGE_KEY, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
+    $("#niche-benefits, #niche-faq, #niche-prev-link, #niche-next-link").remove();
+    $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
+    setUseCaseNavigation($, { chrome, content });
+    applyNicheSceneMedia($, { scene, assetPrefix: buildAssetPrefix(locale, AUTO_OPEN_PAGE_KEY), copy: homeData.homepageCopies[locale].hero.media });
+    updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer);
+    rewriteNicheInternalLinks($, locale);
+    setUseCaseMeta($, { pageKey: AUTO_OPEN_PAGE_KEY, content, chrome, image, locale, localeOptions: homeData.localeOptions });
+    await writeOutputFile(buildOutputFilePath(locale, AUTO_OPEN_PAGE_KEY), serialize($, homeData, locale, AUTO_OPEN_PAGE_KEY));
+    sitemapEntries.push({ loc: buildPageUrl(locale, AUTO_OPEN_PAGE_KEY), changefreq: "monthly", priority: "0.8" });
+  }
+  return sitemapEntries;
+}
+
 // The WIFIGATE Host page copy: scripts/host-page-copy/<locale>.mjs.
 const hostPageCopyCache = new Map();
 async function loadHostPageCopy(locale) {
@@ -1805,7 +1839,7 @@ async function main() {
   }
 
   const localeCodes = homeData.localeOptions.map((option) => option.code);
-  const contentProblems = [...validateNichePageLocales(localeCodes), ...validateLandingPageLocales(localeCodes)];
+  const contentProblems = [...validateNichePageLocales(localeCodes), ...validateLandingPageLocales(localeCodes), ...validateAutoOpenPageLocales(localeCodes, homeData.homepageCopies)];
   if (contentProblems.length) {
     throw new Error(
       `Niche page content validation failed (${contentProblems.length} problems):\n  ${contentProblems.join("\n  ")}`
@@ -1822,6 +1856,7 @@ async function main() {
   sitemapEntries.push(...(await buildLegalPages(homeData, legalCollections)));
   sitemapEntries.push(...(await buildNichePages(homeData)));
   sitemapEntries.push(...(await buildLandingPages(homeData)));
+  sitemapEntries.push(...(await buildAutoOpenPages(homeData)));
   // Consent-runtime delivery updates consumer assets without regenerating
   // Business automation, invitation/API utilities or authentication pages.
   if (process.argv.includes("--consumer-consent-only")) {

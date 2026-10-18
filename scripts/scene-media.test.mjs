@@ -84,17 +84,27 @@ test("responsive renderer provides native selected posters and inert video varia
   assert.equal($("script[src*='media-runtime.js']").length, 1);
 });
 
-test("accepted desktop Auto Open replaces only its existing feature media and remains explicit mobile fallback", () => {
+test("the Auto Open video page uses the accepted desktop pair as its explicit mobile fallback", () => {
   const artifact = { accepted: true, video: { path: "assets/vid/home/desktop/auto-open-futuristic-1080p.mp4", sha256: hash("auto desktop") }, poster: { path: "assets/img/desktop/auto-open-futuristic-scene.webp", sha256: hash("auto first frame") }, width: 1920, height: 1080 };
-  const $ = cheerio.load('<html><head></head><body><article class="feature-card--auto-open"><figure class="feature-card__media"><img class="feature-card__image" src="auto_open.svg" alt="Auto Open"></figure><h3>Automatic arrival</h3><p>Keep both hands free.</p></article><article class="other"><img src="other.svg"><h3>Other feature</h3></article></body></html>');
-  const other = $(".other").toString();
-  applyHomeSceneMedia($, { autoOpenScene: { key: "auto-open-futuristic", ...artifact, variants: { desktop: artifact } }, assetPrefix: "../", copy: { play: "Play", pause: "Pause", replay: "Replay" } });
-  assert.equal($(".other").toString(), other);
-  assert.equal($("h3").first().text(), "Automatic arrival"); assert.equal($("p").text(), "Keep both hands free.");
-  assert.equal($("[data-scene-image]").attr("alt"), "Auto Open");
+  const $ = cheerio.load('<html><head></head><body class="niche-page"><section class="niche-hero"><div class="niche-hero__media"><img id="niche-image" alt="Automatic arrival"></div><h1>Keep both hands free.</h1><div class="niche-hero__actions"></div><div class="niche-hero__pager"></div></section></body></html>');
+  applyNicheSceneMedia($, { scene: { key: "auto-open-futuristic", ...artifact, variants: { desktop: artifact } }, assetPrefix: "../../", copy: { play: "Play", pause: "Pause", replay: "Replay" } });
+  assert.equal($("h1").text(), "Keep both hands free.");
+  assert.equal($("[data-scene-image]").attr("alt"), "Automatic arrival");
   const variants = JSON.parse($("video").attr("data-media-variants"));
   assert.deepEqual(variants.mobile, variants.desktop, "no invented mobile clip; both choices bind accepted desktop poster/video");
   assert.equal($("video").attr("src"), undefined);
+  assert.equal(variants.desktop.src, sceneAssetUrl("../../", artifact.video));
+  assert.equal(variants.mobile.poster, sceneAssetUrl("../../", artifact.poster));
+  assert.equal($(".niche-hero__actions [data-scene-replay]").length, 1);
+  assert.equal($(".niche-hero__pager [data-scene-pause]").length, 1);
+});
+
+test("homepage scene rendering preserves the Auto Open feature SVG and its navigation link", () => {
+  const $ = cheerio.load('<html><head></head><body><article class="feature-card--auto-open"><a href="/he/auto-open/"><figure class="feature-card__media"><img class="feature-card__image" src="auto_open.svg" alt="Auto Open"></figure><h3>Automatic arrival</h3></a><p>Keep both hands free.</p></article></body></html>');
+  const before = $(".feature-card--auto-open").toString();
+  applyHomeSceneMedia($, { assetPrefix: "../../", copy: { play: "Play", pause: "Pause", replay: "Replay" } });
+  assert.equal($(".feature-card--auto-open").toString(), before);
+  assert.equal($("video, [data-scene-video]").length, 0);
 });
 
 test("schema2 accepts reviewed1080p variants, ignores pending variants and protects legacy fallback", async () => {

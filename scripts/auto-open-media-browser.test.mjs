@@ -1,22 +1,74 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import {createServer} from 'node:http';
-import {createHash} from 'node:crypto';
-import {fileURLToPath} from 'node:url';
 import path from 'node:path';
-import * as cheerio from 'cheerio';
+import {createHash} from 'node:crypto';
 import {chromium} from 'playwright-core';
-import {applyHomeSceneMedia} from './scene-media.mjs';
-const root=fileURLToPath(new URL('../',import.meta.url)),hash=bytes=>createHash('sha256').update(bytes).digest('hex');
-const manifest=JSON.parse(await fs.readFile(path.join(root,'assets/vid/scene-manifest.json'),'utf8')),hotel=manifest.scenes.find(scene=>scene.key==='hotels-airbnb');
-const video=await fs.readFile(path.join(root,hotel.video.path)),poster=await fs.readFile(path.join(root,hotel.poster.path));
-const artifact={accepted:true,width:1920,height:1080,video:{path:'assets/vid/home/desktop/auto-open-futuristic-1080p.mp4',sha256:hash(video)},poster:{path:'assets/img/desktop/auto-open-futuristic-scene.webp',sha256:hash(poster)}};
-const css=(await Promise.all(['styles.css','home-en.css','scene-video.css'].map(file=>fs.readFile(path.join(root,'css',file),'utf8')))).join('\n');
-const $=cheerio.load(`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>${css}.owned{width:calc(100% - 32px);max-width:400px;margin:16px}</style></head><body class="home-en"><div class="owned"><article class="feature-card feature-card--auto-open"><figure class="feature-card__media"><img class="feature-card__image" src="before.svg" alt="Auto Open"></figure><h3 class="feature-card__title">Auto Open</h3><p class="feature-card__text">Keep both hands free.</p></article><article class="feature-card other"><figure class="feature-card__media"><img class="feature-card__image" alt="Other" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'/%3E"></figure><h3>Other feature</h3></article></div></body></html>`);
-applyHomeSceneMedia($,{autoOpenScene:{key:'auto-open-futuristic',...artifact,variants:{desktop:artifact}},assetPrefix:'/',copy:{play:'Play video',pause:'Pause video',replay:'Replay video'}});
-const files=new Map([['/'+artifact.video.path,{type:'video/mp4',bytes:video}],['/'+artifact.poster.path,{type:'image/webp',bytes:poster}]]);
-for(const file of ['js/media-runtime.js','js/scene-video.js','js/media-cache-policy.mjs','media-cache-sw.js'])files.set('/'+file,{type:'text/javascript',bytes:await fs.readFile(path.join(root,file))});
-const server=createServer((req,res)=>{const url=new URL(req.url,'http://localhost');if(url.pathname==='/'){res.writeHead(200,{'content-type':'text/html','cache-control':'no-store'});res.end($.html());return;}const file=files.get(url.pathname);if(!file){res.writeHead(404);res.end();return;}res.writeHead(200,{'content-type':file.type,'content-length':file.bytes.length,'cache-control':'public,max-age=31536000'});res.end(file.bytes);});
-await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
-const browser=await chromium.launch({channel:'chrome',headless:true});let assertions=0;
-try{for(const width of [393,1280]){const context=await browser.newContext({viewport:{width,height:851}});try{const page=await context.newPage();await page.goto('http://127.0.0.1:'+server.address().port+'/');const media=page.locator('.feature-card--auto-open [data-scene-video]');if(await media.locator('[data-scene-play]').isVisible())await media.locator('[data-scene-play]').click();try{await page.waitForFunction(()=>{const v=document.querySelector('.feature-card--auto-open video');return!v.paused&&v.currentTime>0;},{},{timeout:10000});}catch(error){console.log(JSON.stringify({width,debug:await media.evaluate(e=>{const v=e.querySelector('video');return{state:e.dataset.sceneState,src:v.currentSrc,time:v.currentTime,paused:v.paused,ready:v.readyState,error:v.error?.message,box:e.getBoundingClientRect().toJSON(),html:e.outerHTML}})}));throw error;}const geometry=await media.evaluate(element=>{const r=element.getBoundingClientRect(),image=element.querySelector('img').getBoundingClientRect(),video=element.querySelector('video').getBoundingClientRect(),button=element.querySelector('[data-scene-pause]').getBoundingClientRect(),title=element.parentElement.querySelector('h3').getBoundingClientRect();return{width:r.width,height:r.height,image:{width:image.width,height:image.height},video:{width:video.width,height:video.height},button:{width:button.width,height:button.height,left:button.left,top:button.top,right:button.right,bottom:button.bottom},media:{left:r.left,top:r.top,right:r.right,bottom:r.bottom},titleTop:title.top,poster:element.querySelector('video').poster,imageSrc:element.querySelector('img').src};});assert.ok(geometry.width>250&&Math.abs(geometry.width/geometry.height-16/9)<.01,'accepted auto media is card-width16:9');assert.deepEqual(geometry.image,geometry.video,'poster and video share exact geometry');assert.equal(geometry.poster,geometry.imageSrc);assert.ok(geometry.button.width>=44&&geometry.button.height>=44&&geometry.button.left>=geometry.media.left&&geometry.button.right<=geometry.media.right&&geometry.button.top>=geometry.media.top&&geometry.button.bottom<=geometry.media.bottom,'controls remain fully usable within media');assert.ok(geometry.titleTop>=geometry.media.bottom,'existing title stays below media');assert.equal(await page.locator('.feature-card__text').textContent(),'Keep both hands free.');assert.equal(await page.locator('.other .feature-card__media').evaluate(e=>e.getBoundingClientRect().width),80,'other feature retains original icon size');assertions+=7;}finally{await context.close();}}console.log('PASS: '+assertions+' Auto Open component assertions;393/1280px,card-width16:9,matching crop,44px controls,unchanged copy/other feature');}finally{await browser.close();await new Promise(resolve=>server.close(resolve));}
+import {AUTO_OPEN_PAGE_KEY} from './auto-open-page.mjs';
+
+// Real generated routes and their accepted media; never substitute a fixture
+// clip or own/stop the caller's server. Every Chrome context below is owned.
+const origin=(process.env.SITE_URL||'http://127.0.0.1:8000').replace(/\/$/,''),screenshots=process.env.SCREENSHOT_DIR;
+const manifest=JSON.parse(await fs.readFile(new URL('../assets/vid/scene-manifest.json',import.meta.url),'utf8'));
+const scene=manifest.scenes.find(item=>item.key==='auto-open-futuristic'&&item.accepted);
+assert.ok(scene,'The reviewed Auto Open scene exists');
+const accepted=scene.variants?.desktop?.accepted?scene.variants.desktop:scene;
+const videoPath='/'+accepted.video.path,posterPath='/'+accepted.poster.path,videoVersion=accepted.video.sha256.slice(0,12),posterVersion=accepted.poster.sha256.slice(0,12);
+const overlaps=(a,b)=>a.x<b.right&&a.right>b.x&&a.y<b.bottom&&a.bottom>b.y;
+const report={schema:'wifigate.auto-open-page.browser-route-qa.v1',kind:'host_browser',status:'RUNNING',sceneId:scene.key,source:{videoPath,videoVersion,posterPath,posterVersion},cases:[],policyCases:[],captures:[]};
+const browser=await chromium.launch({channel:process.env.BROWSER_CHANNEL||'chrome',headless:true});
+const rejectAnalytics=()=>localStorage.setItem('wifigate-cookie-consent-v1',JSON.stringify({version:1,analytics:false,savedAt:Date.now()}));
+async function capture(page,name,locator){
+ if(!screenshots)return;const file=path.join(screenshots,name+'.png');
+ const exists=await fs.stat(file).then(()=>true,error=>{if(error.code==='ENOENT')return false;throw error;});
+ assert.equal(exists,false,'Preserve prior screenshot attempts: '+file);
+ if(locator)await locator.screenshot({path:file});else await page.screenshot({path:file});
+ const bytes=await fs.readFile(file);report.captures.push({file:path.basename(file),sha256:createHash('sha256').update(bytes).digest('hex'),bytes:bytes.length});
+}
+async function actualSelection(page,width){
+ const value=await page.locator('.niche-hero video').evaluate(video=>{const image=document.querySelector('#niche-image');return{src:video.currentSrc,poster:video.poster,image:image.currentSrc||image.src,variant:video.dataset.mediaVariant,width:video.videoWidth,height:video.videoHeight,muted:video.muted,loop:video.loop,duration:video.duration};});
+ const src=new URL(value.src),poster=new URL(value.poster);
+ assert.equal(src.pathname,videoPath,'Both viewport choices use the reviewed desktop fallback clip');assert.equal(src.searchParams.get('v'),videoVersion);
+ assert.equal(poster.pathname,posterPath);assert.equal(poster.searchParams.get('v'),posterVersion);assert.equal(value.poster,value.image,'Poster and image select the same fallback pair');
+ assert.equal(value.variant,width<=768?'mobile':'desktop');assert.equal(value.width,accepted.width);assert.equal(value.height,accepted.height);assert.ok(Math.abs(value.duration-accepted.durationSeconds)<.1);assert.equal(value.muted,true);assert.equal(value.loop,false);
+ return{selectedVariant:value.variant,videoPath:src.pathname,posterPath:poster.pathname,decodedWidth:value.width,decodedHeight:value.height,duration:value.duration};
+}
+async function playing(page){await page.waitForFunction(()=>{const v=document.querySelector('.niche-hero video');if(v?.error)throw Error('Accepted Auto Open decoder failed');return v&&!v.paused&&v.readyState>=2&&v.currentTime>.2;},{},{timeout:15000});}
+async function inspectLayout(page){
+ const result=await page.locator('.niche-hero').evaluate(hero=>{
+  const box=e=>{const r=e.getBoundingClientRect();return{x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height};};
+  const visible=e=>{const s=getComputedStyle(e),b=box(e);return b.width>0&&b.height>0&&s.display!=='none'&&s.visibility!=='hidden';};
+  const media=hero.querySelector('.niche-hero__media'),mark=media.querySelector('[data-media-watermark]'),image=media.querySelector('img'),video=media.querySelector('video');
+  return{media:box(media),headline:box(hero.querySelector('h1')),image:box(image),video:box(video),mark:box(mark),markPointer:getComputedStyle(mark).pointerEvents,markHidden:mark.getAttribute('aria-hidden'),controls:[...hero.querySelectorAll('button,a,input')].filter(visible).map(box),copy:[...hero.querySelectorAll('h1,h2,p,.niche-hero__eyebrow')].filter(visible).map(box),scrollWidth:document.documentElement.scrollWidth,viewportWidth:innerWidth};
+ });
+ assert.ok(result.scrollWidth<=result.viewportWidth,'No horizontal overflow');assert.ok(overlaps(result.headline,result.media),'Localized copy remains over video');assert.deepEqual(result.video,result.image,'Video/poster bounds match');assert.equal(result.markPointer,'none');assert.equal(result.markHidden,'true');
+ for(const action of result.controls)assert.equal(overlaps(result.mark,action),false,'Watermark clears ALL hero actions including media siblings');for(const text of result.copy)assert.equal(overlaps(result.mark,text),false,'Watermark clears hero copy');
+ return{textOverVideo:true,matchingMediaBounds:true,watermarkControlsClear:true,watermarkCopyClear:true};
+}
+try{
+ if(screenshots){await fs.mkdir(screenshots,{recursive:true});const exists=await fs.stat(path.join(screenshots,'auto-open-browser-report.json')).then(()=>true,error=>{if(error.code==='ENOENT')return false;throw error;});assert.equal(exists,false,'Use fresh evidence directory for a new attempt');}
+ for(const locale of['','he/'])for(const width of[320,390,1280]){
+  const height=width<769?844:900,label=(locale?'he':'en')+'-'+width,result={id:label,width,height,status:'RUNNING'};report.cases.push(result);
+  const context=await browser.newContext({viewport:{width,height}});
+  try{
+   await context.addInitScript(rejectAnalytics);const page=await context.newPage(),requests=[];
+   page.on('request',request=>{const url=new URL(request.url());if(url.pathname.includes('auto-open-futuristic'))requests.push({path:url.pathname,documentPath:new URL(page.url()).pathname});});
+   const target='/'+locale+AUTO_OPEN_PAGE_KEY+'/';await page.goto(origin+'/'+locale,{waitUntil:'load'});await page.evaluate(()=>document.fonts.ready);
+   const card=page.locator('.feature-card--auto-open');await card.scrollIntoViewIfNeeded();const icon=card.locator('img.feature-card__image');await icon.waitFor({state:'visible'});
+   assert.match(await icon.getAttribute('src'),/\/auto_open\.svg(?:\?|$)/);assert.equal(await card.locator('video,[data-scene-video],[data-media-watermark]').count(),0,'Home feature keeps its ordinary icon');
+   const link=page.locator('a.feature-card--auto-open[href],.feature-card--auto-open a[href]').first();assert.equal(new URL(await link.getAttribute('href'),page.url()).pathname,target,'Link opens this language video page');assert.equal(requests.length,0,'Home requests no Auto Open video or poster');
+   result.homepage={svgIcon:true,localizedLink:target,inlineVideoAbsent:true,autoOpenRequests:0};await capture(page,'auto-open-'+label+'-home-icon',card);
+   await Promise.all([page.waitForURL(origin+target),link.click()]);await page.locator('.niche-hero h1').waitFor();assert.ok((await page.locator('.niche-hero h1').innerText()).trim());assert.equal(await page.locator('.niche-highlight').count(),3);assert.equal(await page.locator('#niche-benefits,#niche-faq,#niche-faq-list').count(),0);assert.equal(await page.locator('.niche-hero__pager a,.niche-hero__nav-button').count(),0,'No use-case previous/next links');assert.equal(await page.locator('.niche-hero__actions button[data-scene-replay]').count(),1);assert.equal(await page.locator('.niche-hero__actions a').count(),0);
+   await playing(page);result.selection=await actualSelection(page,width);result.autoplayBeforeMediaInput=true;result.layout=await inspectLayout(page);await capture(page,'auto-open-'+label+'-autoplay');
+   const replay=page.locator('.niche-hero__actions [data-scene-replay]'),pause=page.locator('.niche-hero__pager [data-scene-pause]');
+   await page.waitForFunction(()=>document.querySelector('.niche-hero video').currentTime>1.1);await replay.click();await page.waitForFunction(()=>{const v=document.querySelector('.niche-hero video');return!v.paused&&v.currentTime<1;});result.midPlayReplay=true;
+   await page.waitForFunction(()=>document.querySelector('.niche-hero video').ended,{},{timeout:25000});const endedAt=await page.locator('.niche-hero video').evaluate(v=>v.currentTime);await page.waitForTimeout(400);assert.ok(await page.locator('.niche-hero video').evaluate((v,t)=>v.ended&&v.paused&&!v.loop&&Math.abs(v.currentTime-t)<.1,endedAt));result.naturalCompletionWithoutLoop=true;await capture(page,'auto-open-'+label+'-ended');
+   await replay.click();await page.waitForFunction(()=>{const v=document.querySelector('.niche-hero video');return!v.paused&&v.currentTime<1;});result.afterEndReplay=true;await pause.click();assert.equal(await page.locator('.niche-hero video').evaluate(v=>v.paused),true);assert.ok(requests.filter(item=>item.documentPath===target&&item.path.endsWith('.mp4')).every(item=>item.path===videoPath));result.status='PASS';
+  }finally{await context.close();}
+ }
+ for(const policy of['reduced-motion','save-data']){
+  const width=policy==='reduced-motion'?390:1280,locale=policy==='reduced-motion'?'he/':'';const context=await browser.newContext({viewport:{width,height:900},reducedMotion:policy==='reduced-motion'?'reduce':'no-preference'});
+  try{await context.addInitScript(rejectAnalytics);if(policy==='save-data')await context.addInitScript(()=>Object.defineProperty(navigator,'connection',{configurable:true,value:{saveData:true}}));const page=await context.newPage();await page.goto(origin+'/'+locale+AUTO_OPEN_PAGE_KEY+'/',{waitUntil:'load'});await page.waitForTimeout(300);assert.equal(await page.locator('.niche-hero').getAttribute('data-scene-state'),'image');assert.equal(await page.locator('.niche-hero video').getAttribute('src'),null);const pair=await page.locator('.niche-hero').evaluate(hero=>({poster:hero.querySelector('video').poster,image:hero.querySelector('img').currentSrc||hero.querySelector('img').src}));assert.equal(pair.poster,pair.image);assert.equal(new URL(pair.poster).pathname,posterPath);await page.locator('[data-scene-replay]').click();await playing(page);await actualSelection(page,width);await inspectLayout(page);report.policyCases.push({policy,status:'PASS',posterOnlyBeforeInput:true,explicitManualPlay:true,scope:'Owned browser context only; no OS/radio changes'});await capture(page,'auto-open-policy-'+policy);}finally{await context.close();}
+ }
+ report.status='PASS';console.log('PASS: '+report.cases.length+' Auto Open generated-route cases (HE/EN320/390/1280) and '+report.policyCases.length+' page-only preference cases; homepage SVG/localized link without video requests, accepted desktop fallback, autoplay, natural completion, replay and clear watermark.');
+}catch(error){report.status='FAIL';report.error=String(error.message||error);throw error;}
+finally{await browser.close();if(screenshots)await fs.writeFile(path.join(screenshots,'auto-open-browser-report.json'),JSON.stringify(report,null,2)+'\n',{flag:'wx'});}

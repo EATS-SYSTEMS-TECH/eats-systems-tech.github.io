@@ -124,7 +124,7 @@ export function applyNicheSceneMedia($, { scene, assetPrefix, copy }) {
   if (pager.length === 1) pager.prepend($(".niche-hero__media > .scene-video-controls"));
 }
 
-export function applyHomeSceneMedia($, { scene, hotelScene, autoOpenScene, assetPrefix, copy }) {
+export function applyHomeSceneMedia($, { scene, hotelScene, assetPrefix, copy }) {
   if (scene) {
     const hero = $("#home.hero");
     const image = hero.find("img.hero__bg--image");
@@ -149,11 +149,5 @@ export function applyHomeSceneMedia($, { scene, hotelScene, autoOpenScene, asset
     image.before(media);
     media.append(image.attr("width", "1280").attr("height", "720"));
     attachScene($, { scene: hotelScene, assetPrefix, copy, image, container: media, media });
-  }
-  if (autoOpenScene) {
-    const media = $(".feature-card--auto-open .feature-card__media");
-    const image = media.children("img");
-    if (media.length !== 1 || image.length !== 1) throw new Error("Auto Open feature media is missing");
-    attachScene($, { scene: autoOpenScene, assetPrefix, copy, image, container: media, media });
   }
 }

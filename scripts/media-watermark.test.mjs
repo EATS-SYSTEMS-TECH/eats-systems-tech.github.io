@@ -8,6 +8,7 @@ import { applyMediaWatermarks, WATERMARK_ASSET, WATERMARK_SHA256 } from "./media
 import { SITE_LANGUAGES } from "./site-languages.mjs";
 import { NICHE_DEFINITIONS } from "./niche-pages/index.mjs";
 import { LANDING_PAGES } from "./landing-pages/index.mjs";
+import { AUTO_OPEN_PAGE_KEY } from "./auto-open-page.mjs";
 
 const root = new URL("../", import.meta.url);
 const raster = /\.(?:webp|png|jpe?g|avif)(?:\?|$)/i;
@@ -50,25 +51,29 @@ test("static Shabbat and public automation photos receive the same layer; utilit
   assert.equal($.html(), original);
 });
 
-test("all 507 localized consumer and public marketing pages cover every displayed photo and video exactly once", async () => {
+test("all 546 localized consumer and public marketing pages cover every displayed photo and video exactly once", async () => {
   let pages = 0, frames = 0;
-  const keys = ["", ...NICHE_DEFINITIONS.map(item => item.key), ...LANDING_PAGES.map(item => item.key), "automation"];
+  const keys = ["", ...NICHE_DEFINITIONS.map(item => item.key), ...LANDING_PAGES.map(item => item.key), "automation", AUTO_OPEN_PAGE_KEY];
   for (const { code } of SITE_LANGUAGES) for (const key of keys) {
     const relative = path.posix.join(code === "en" ? "" : code.toLowerCase(), key, "index.html");
     const $ = cheerio.load(await fs.readFile(new URL(relative, root), "utf8"));
     const photos = $("main img").toArray().filter(node => raster.test($(node).attr("src") || ""));
-    assert.equal(photos.length, key ? 1 : 7, `${relative}: current photo inventory is explicit`);
+    assert.equal(photos.length, key ? 1 : 6, `${relative}: current photo inventory is explicit`);
     for (const element of [...photos, ...$("main video").toArray()]) {
       const frame = $(element).closest("[data-media-watermark-frame]");
       assert.equal(frame.length, 1, `${relative}: photo/video has one frame`);
       assert.equal(frame.children("[data-media-watermark][aria-hidden='true']").length, 1, `${relative}: one decorative layer per frame`);
     }
-    assert.equal($("[data-media-watermark]").length, key ? 1 : 7, `${relative}: no duplicate video/poster watermarks`);
+    assert.equal($("[data-media-watermark]").length, key ? 1 : 6, `${relative}: no duplicate video/poster watermarks`);
+    if (!key) {
+      assert.match($(".feature-card--auto-open img").attr("src"), /auto_open\.svg(?:\?|$)/);
+      assert.equal($(".feature-card--auto-open [data-media-watermark], .feature-card--auto-open video").length, 0, "the SVG link is an icon, not a watermarked video frame");
+    }
     assert.equal($("link[data-media-watermark-style]").length, 1);
     assert.equal($("header [data-media-watermark], footer [data-media-watermark]").length, 0);
     frames += $("[data-media-watermark]").length;
     pages++;
   }
-  assert.equal(pages, 507);
+  assert.equal(pages, 546);
   assert.equal(frames, 741);
 });
