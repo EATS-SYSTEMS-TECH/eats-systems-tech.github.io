@@ -516,6 +516,21 @@ html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.18; 
   line-height: 1.55;
 }
 
+@media (min-width: 769px) {
+  .home-en .feature-card__media {
+    flex: 0 0 5rem;
+    margin-bottom: 0;
+  }
+
+  .home-en .feature-card__title {
+    display: flex;
+    min-height: 2.5em;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .home-en .security-statement {
   padding: 7rem 0;
   color: #ffffff;
