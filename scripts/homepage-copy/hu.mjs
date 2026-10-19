@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Videó újrajátszása","mute":"Videó némítása","unmute":"Videó hangjának bekapcsolása","pause":"Videó szüneteltetése","play":"Videó lejátszása"},
+    statement: "A WIFIGATE egy intelligens beléptetőrendszer, amellyel egy dedikált vezérlőn keresztül telefonról nyithatja és kezelheti a kapukat, ajtókat, elektromos redőnyöket és parkolósorompókat.",
     titleLines: ["Egyetlen alkalmazás.", "Minden bejáratához."],
     subtitle: "Okos hozzáférés és vezérlés otthonokhoz, épületekhez, vállalkozásokhoz és szálláshelyekhez. Mindez egyetlen platformon, egyszerűen és könnyedén.",
     primaryCta: "Így működik",

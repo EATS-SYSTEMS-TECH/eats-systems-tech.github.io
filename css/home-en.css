@@ -232,19 +232,31 @@ html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.18; 
 @media (max-width: 768px) {
   .home-en .hero--statement .hero__title { font-size: clamp(2rem, 6vw, 2.8rem); }
   .home-en .hero--statement .hero__subtitle { font-size: .96rem; }
+  .home-en .hero__actions {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 13rem;
+    max-width: 100%;
+  }
+  .home-en .hero__actions .btn {
+    width: 100%;
+    flex: 0 0 auto;
+  }
+  .home-en .feature-card .feature-card__media { margin-inline: auto !important; }
+  html[dir="rtl"] body.home-en .hero__actions { align-items: flex-end; }
 }
 
 .home-en .hero .btn--primary {
-  color: #080808;
-  border: 1px solid #ffffff;
-  background: #ffffff;
+  color: #ffffff;
+  border: 1px solid var(--home-blue);
+  background: var(--home-blue);
 }
 
 .home-en .hero .btn--primary:hover,
 .home-en .hero .btn--primary:focus-visible {
-  color: #080808;
-  border-color: #e4e4e4;
-  background: #e4e4e4;
+  color: #ffffff;
+  border-color: #0757df;
+  background: #0757df;
   transform: none;
 }
 
@@ -404,7 +416,7 @@ html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.18; 
   padding: 2.25rem;
   overflow: hidden;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   border: 0;
   border-right: 1px solid var(--home-line);
   border-bottom: 1px solid var(--home-line);
@@ -445,7 +457,7 @@ html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.18; 
   width: 5rem;
   height: 5rem;
   min-height: 5rem;
-  margin: 0 0 auto;
+  margin: 0 auto auto;
   padding: 0;
   place-items: center;
   border: 0;
@@ -480,6 +492,7 @@ html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.18; 
 
 .home-en .feature-card__title {
   margin: 2.25rem 0 0.65rem;
+  text-align: center;
   color: var(--home-black);
   font-size: 1.25rem;
   font-weight: 600;
@@ -488,6 +501,7 @@ html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.18; 
 
 .home-en .feature-card__text {
   margin: 0;
+  text-align: center;
   color: var(--home-muted);
   font-size: 0.94rem;
   line-height: 1.7;
@@ -974,13 +988,25 @@ html[lang="he"] body.home-en #where .section__header {
 }
 
 .home-en .automation-stay__steps {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.75rem 1.75rem;
   padding-left: 1.1rem;
   margin: 0;
   color: #c5c5c5;
   font-size: 0.875rem;
+}
+
+html[lang="he"] body.home-en .automation-stay__steps {
+  padding-right: 1.1rem;
+  padding-left: 0;
+}
+
+@media (max-width: 600px) {
+  .home-en .automation-stay__steps {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
 }
 
 @media (max-width: 960px) {
@@ -1512,7 +1538,8 @@ html[lang="he"] body.home-en #where .section__header {
   }
 
   .home-en .hero__actions .btn {
-    flex: 1 1 calc(50% - 0.375rem);
+    width: 100%;
+    flex: 0 0 auto;
     min-width: 0;
     padding-inline: 0.5rem;
     font-size: 0.85rem;
@@ -1614,14 +1641,31 @@ html[lang="he"] body.home-en #where .section__header {
   }
 }
 
-/* Keep the scene replay action below the statement on narrow screens. */
+/* Use a single hero playback button and keep its icon, label, and position in sync. */
+.home-en .hero[data-hero-scene] .hero__media-control { display: none !important; }
+.home-en .hero[data-hero-scene] .hero__replay {
+  top: 1rem !important;
+  right: 1rem !important;
+  left: auto !important;
+  bottom: auto !important;
+  inset: 1rem 1rem auto auto !important;
+  transform: none !important;
+  background: rgba(10, 10, 10, 0.24) !important;
+  backdrop-filter: blur(8px);
+}
+html[dir="rtl"] .home-en .hero[data-hero-scene] .hero__replay {
+  right: auto !important;
+  left: 1rem !important;
+  inset: 1rem auto auto 1rem !important;
+}
+.home-en .hero__replay::before { display: none; }
+.home-en .hero__replay svg { display: block; width: 1.35rem; height: 1.35rem; flex: 0 0 auto; }
+.home-en .hero__replay .hero__replay-icon--pause { display: none; }
+.home-en .hero__replay[data-playing="true"] .hero__replay-icon--play { display: none; }
+.home-en .hero__replay[data-playing="true"] .hero__replay-icon--pause { display: block; }
+
 @media (max-width: 768px) {
   .home-en .hero.hero--statement[data-hero-scene] .hero__replay {
-    top: auto;
-    bottom: 5rem;
-    inset-inline-start: 1rem;
-    inset-inline-end: auto;
-    transform: none;
     max-width: calc(100% - 6rem);
   }
 }

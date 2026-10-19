@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Revoir la vidéo","mute":"Couper le son de la vidéo","unmute":"Activer le son de la vidéo","pause":"Mettre la vidéo en pause","play":"Lire la vidéo"},
+    statement: "WIFIGATE est un système d’accès intelligent qui permet d’ouvrir et de gérer depuis votre téléphone des portails, portes, volets électriques et barrières de parking, grâce à un contrôleur dédié.",
     titleLines: ["Une seule application.", "Toutes vos entrées."],
     subtitle: "Une solution intelligente d'accès et de contrôle pour les maisons, les immeubles, les entreprises et les lieux d'hébergement. Le tout réuni sur une seule plateforme, en toute simplicité.",
     primaryCta: "Comment ça marche",

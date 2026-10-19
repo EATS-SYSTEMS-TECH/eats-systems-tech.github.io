@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"I-play muli ang video","mute":"I-mute ang video","unmute":"I-unmute ang video","pause":"I-pause ang video","play":"I-play ang video"},
+    statement: "Ang WIFIGATE ay isang smart access system na nagbibigay-daan sa pagbukas at pamamahala ng mga gate, pinto, de-kuryenteng shutter, at harang sa paradahan mula sa telepono gamit ang nakalaang controller.",
     titleLines: ["Isang app.", "Lahat ng pasukan ninyo."],
     subtitle: "Matalinong solusyon sa access at kontrol para sa mga bahay, gusali, negosyo, at tuluyan ng mga bisita. Lahat sa iisang platform, simple at walang hirap.",
     primaryCta: "Paano ito gumagana",

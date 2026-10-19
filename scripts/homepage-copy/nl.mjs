@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Video opnieuw afspelen","mute":"Video dempen","unmute":"Dempen van video opheffen","pause":"Video pauzeren","play":"Video afspelen"},
+    statement: "WIFIGATE is een slim toegangssysteem waarmee u met een speciale controller poorten, deuren, elektrische rolluiken en slagbomen vanaf uw telefoon kunt openen en beheren.",
     titleLines: ["Eén app.", "Al je ingangen."],
     subtitle: "Slimme toegang en bediening voor woningen, gebouwen, bedrijven en verblijfsaccommodaties. Alles op één platform, eenvoudig en moeiteloos.",
     primaryCta: "Hoe het werkt",

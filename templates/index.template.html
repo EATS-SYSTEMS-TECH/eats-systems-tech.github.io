@@ -81,12 +81,12 @@
   <link rel="stylesheet" href="css/styles.css?v=20261007d">
   <link rel="stylesheet" href="css/accessibility.css?v=20261006b">
   <link rel="stylesheet" href="css/guest-invites.css?v=20261007c">
-  <link rel="stylesheet" href="css/home-en.css?v=20261018wm3">
+  <link rel="stylesheet" href="css/home-en.css?v=20261019q">
   <link rel="stylesheet" href="css/faq.css?v=20261018a">
   <script src="js/utils.js?v=20260402a" defer=""></script>
 
   <script src="js/navigation.js?v=20260910a" defer=""></script>
-  <script src="js/hero.js?v=20261018b" defer=""></script>
+  <script src="js/hero.js?v=20261019d" defer=""></script>
 
   <script src="js/accessibility-copy.js?v=20261007a" defer=""></script>
   <script src="js/accessibility.js?v=20261007a" defer=""></script>
@@ -250,9 +250,13 @@
           </svg>
         </button>
         <button class="hero__replay btn btn--ghost" id="hero-replay" type="button" hidden="" aria-label="Play Video Again" title="Play Video Again">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 5V2l-4 4 4 4V7a7 7 0 1 1-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-            <path d="m11 10 5 3-5 3z" fill="currentColor"></path>
+          <svg class="hero__replay-icon--play" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="white" fill-opacity=".24"></circle>
+            <path d="M9.5 6.9 17.4 12l-7.9 5.1V6.9Z" fill="white"></path>
+          </svg>
+          <svg class="hero__replay-icon--pause" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="7" y="6" width="3" height="12" rx=".5" fill="currentColor"></rect>
+            <rect x="14" y="6" width="3" height="12" rx=".5" fill="currentColor"></rect>
           </svg>
           <span>Play Video Again</span>
         </button>

@@ -60,7 +60,12 @@ function setupHeroMedia() {
       pauseButton.setAttribute("title", label);
       pauseButton.setAttribute("aria-pressed", String(video.paused));
     }
-    const label = copy.replay;
+    // The replay action doubles as the primary play/pause control. Keep its
+    // label and icon in sync with the actual media state so the same control
+    // behaves consistently on desktop and mobile.
+    const isPlaying = !video.paused && !video.ended && hero.dataset.heroMediaState === "video";
+    const label = isPlaying ? copy.pause : copy.replay;
+    replayButton.dataset.playing = String(isPlaying);
     replayLabel.textContent = label;
     replayButton.setAttribute("aria-label", label);
     replayButton.setAttribute("title", label);
@@ -97,7 +102,17 @@ function setupHeroMedia() {
     updateHeroMediaCopy();
   }
   muteButton?.addEventListener("click", () => { video.muted = !video.muted; updateHeroMediaCopy(); });
-  replayButton.addEventListener("click", () => playHeroVideo({ restart: true, manual: true }));
+  replayButton.addEventListener("click", () => {
+    if (!video.paused && !video.ended) {
+      generation += 1;
+      pausedByVisitor = true;
+      video.pause();
+      updateHeroMediaCopy();
+      return;
+    }
+    // Resume a visitor-paused video; restart only after the video finished.
+    playHeroVideo({ restart: finished || video.ended, manual: true });
+  });
   pauseButton?.addEventListener("click", () => {
     if (video.paused) playHeroVideo({ manual: true });
     else { generation += 1; pausedByVisitor = true; video.pause(); }

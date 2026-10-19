@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Prehrať video znova","mute":"Stlmiť zvuk videa","unmute":"Zapnúť zvuk videa","pause":"Pozastaviť video","play":"Prehrať video"},
+    statement: "WIFIGATE je inteligentný prístupový systém, ktorý vám pomocou samostatného ovládača umožní otvárať a spravovať brány, dvere, elektrické rolety a parkovacie závory z telefónu.",
     titleLines: ["Jedna aplikácia.", "Na všetky vaše vchody."],
     subtitle: "Inteligentné riešenie prístupu a ovládania pre domy, budovy, firmy aj ubytovacie zariadenia. Všetko na jednej platforme, jednoducho a bez námahy.",
     primaryCta: "Ako to funguje",

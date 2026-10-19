@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Redă din nou videoclipul","mute":"Dezactivează sunetul videoclipului","unmute":"Activează sunetul videoclipului","pause":"Întrerupe videoclipul","play":"Redă videoclipul"},
+    statement: "WIFIGATE este un sistem inteligent de acces care vă permite să deschideți și să gestionați porți, uși, obloane electrice și bariere de parcare de pe telefon, printr-un controler dedicat.",
     titleLines: ["O singură aplicație.", "Pentru toate intrările."],
     subtitle: "Acces și control inteligent pentru locuințe, clădiri, afaceri și unități de cazare. Totul într-o singură platformă, simplu și fără efort.",
     primaryCta: "Cum funcționează",

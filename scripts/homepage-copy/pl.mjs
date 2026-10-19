@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Odtwórz film ponownie","mute":"Wycisz film","unmute":"Włącz dźwięk filmu","pause":"Wstrzymaj film","play":"Odtwórz film"},
+    statement: "WIFIGATE to inteligentny system dostępu, który dzięki dedykowanemu sterownikowi pozwala otwierać i obsługiwać z telefonu bramy, drzwi, rolety elektryczne oraz szlabany parkingowe.",
     titleLines: ["Jedna aplikacja.", "Wszystkie Twoje wejścia."],
     subtitle: "Inteligentne sterowanie dostępem w domach, budynkach, firmach i obiektach noclegowych. Wszystko na jednej platformie: prosto i bez wysiłku.",
     primaryCta: "Jak to działa",

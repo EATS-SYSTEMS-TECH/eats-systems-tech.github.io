@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Ponovno reproduciraj videozapis","mute":"Isključi zvuk videozapisa","unmute":"Uključi zvuk videozapisa","pause":"Pauziraj videozapis","play":"Reproduciraj videozapis"},
+    statement: "WIFIGATE je pametni sustav kontrole pristupa koji vam putem namjenskog kontrolera omogućuje otvaranje i upravljanje vratima, ulazima, električnim roletama i parkirnim rampama s telefona.",
     titleLines: ["Jedna aplikacija.", "Svi vaši ulazi."],
     subtitle: "Pametno rješenje za pristup i kontrolu u kućama, zgradama, tvrtkama i smještajnim objektima. Sve na jednoj platformi, jednostavno i bez napora.",
     primaryCta: "Kako funkcionira",

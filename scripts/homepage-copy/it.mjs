@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Riproduci di nuovo il video","mute":"Disattiva l'audio del video","unmute":"Attiva l'audio del video","pause":"Metti in pausa il video","play":"Riproduci il video"},
+    statement: "WIFIGATE è un sistema di accesso intelligente che consente di aprire e gestire cancelli, porte, tapparelle elettriche e barriere di parcheggio dal telefono tramite un controller dedicato.",
     titleLines: ["Una sola app.", "Tutti i tuoi ingressi."],
     subtitle: "La soluzione smart per gestire e controllare gli accessi di case, edifici, aziende e strutture ricettive. Tutto in un'unica piattaforma, in modo semplice e immediato.",
     primaryCta: "Come funziona",

@@ -39,10 +39,10 @@ test("existing scene styles and controllers receive the current asset version wi
     const $ = cheerio.load(`<html><head><link rel="stylesheet" href="../css/scene-video.css?v=20261018b"><script src="../js/hero.js?v=20261018b" defer></script><script src="../js/media-runtime.js?v=old" defer></script>${existingController ? '<script src="../js/scene-video.js?v=20261018b" defer></script>' : ""}</head><body><section class="niche-hero"><div class="niche-hero__media"><img id="niche-image"></div></section></body></html>`);
     applyNicheSceneMedia($, { scene: { poster: { path: "assets/img/scene.webp" }, video: { path: "assets/vid/use-cases/roller-shutters-720p.mp4" } }, assetPrefix: "../../", copy: { play: "Play", pause: "Pause", replay: "Replay" } });
     assert.equal($("link[href*='scene-video.css']").length, 1);
-    assert.equal($("link[href*='scene-video.css']").attr("href"), "../../css/scene-video.css?v=20261018d");
+    assert.equal($("link[href*='scene-video.css']").attr("href"), "../../css/scene-video.css?v=20261019d");
     for (const name of ["hero", "scene-video", "media-runtime"]) {
       assert.equal($(`script[src*='js/${name}.js']`).length, 1);
-      assert.equal($(`script[src*='js/${name}.js']`).attr("src"), `../../js/${name}.js?v=20261018d`);
+      assert.equal($(`script[src*='js/${name}.js']`).attr("src"), `../../js/${name}.js?v=20261019d`);
     }
   }
 });

@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"重新播放视频","mute":"视频静音","unmute":"取消视频静音","pause":"暂停视频","play":"播放视频"},
+    statement: "WIFIGATE 是一套智能门禁系统，通过专用控制器即可用手机开启和管理大门、房门、电动卷帘门及停车道闸。",
     titleLines: ["一个 App，", "所有出入口一手掌控。"],
     subtitle: "为住宅、楼宇、企业和酒店民宿打造的智能门禁与控制方案。一个平台全搞定，简单省心。",
     primaryCta: "了解工作原理",

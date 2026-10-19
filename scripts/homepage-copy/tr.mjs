@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Videoyu yeniden oynat","mute":"Videonun sesini kapat","unmute":"Videonun sesini aç","pause":"Videoyu duraklat","play":"Videoyu oynat"},
+    statement: "WIFIGATE, özel bir kontrol ünitesiyle kapıları, girişleri, elektrikli panjurları ve otopark bariyerlerini telefonunuzdan açıp yönetmenizi sağlayan akıllı bir erişim sistemidir.",
     titleLines: ["Tek uygulama.", "Tüm girişleriniz."],
     subtitle: "Evler, binalar, işletmeler ve konaklama tesisleri için akıllı erişim ve kontrol çözümü. Hepsi tek platformda, basit ve zahmetsiz.",
     primaryCta: "Nasıl çalışır",

@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Main semula video","mute":"Senyapkan video","unmute":"Nyahsenyap video","pause":"Jeda video","play":"Main video"},
+    statement: "WIFIGATE ialah sistem akses pintar yang membolehkan anda membuka dan mengurus pagar, pintu, bidai elektrik dan penghadang parkir melalui telefon dengan pengawal khusus.",
     titleLines: ["Satu aplikasi.", "Semua pintu masuk anda."],
     subtitle: "Penyelesaian pintar untuk akses dan kawalan di rumah, bangunan, perniagaan dan premis penginapan. Semuanya dalam satu platform, ringkas dan mudah.",
     primaryCta: "Cara ia berfungsi",

@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Phát lại video","mute":"Tắt tiếng video","unmute":"Bật tiếng video","pause":"Tạm dừng video","play":"Phát video"},
+    statement: "WIFIGATE là hệ thống kiểm soát ra vào thông minh, cho phép bạn mở và quản lý cổng, cửa, cửa cuốn điện và thanh chắn bãi đỗ xe từ điện thoại thông qua bộ điều khiển chuyên dụng.",
     titleLines: ["Một ứng dụng.", "Mọi lối vào của bạn."],
     subtitle: "Giải pháp thông minh để kiểm soát ra vào cho nhà ở, tòa nhà, doanh nghiệp và cơ sở lưu trú. Tất cả trên một nền tảng, đơn giản và nhẹ nhàng.",
     primaryCta: "Cách hoạt động",

@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Spela videon igen","mute":"Stäng av ljudet","unmute":"Sätt på ljudet","pause":"Pausa videon","play":"Spela upp videon"},
+    statement: "WIFIGATE är ett smart passersystem som låter dig öppna och hantera grindar, dörrar, elektriska jalusier och parkeringsbommar från mobilen med en särskild styrenhet.",
     titleLines: ["En app.", "Alla dina ingångar."],
     subtitle: "Smart åtkomst och styrning för hem, byggnader, företag och boendeanläggningar. Allt på en plattform, enkelt och smidigt.",
     primaryCta: "Så fungerar det",

@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Znova predvajaj video","mute":"Izklopi zvok videa","unmute":"Vklopi zvok videa","pause":"Začasno ustavi video","play":"Predvajaj video"},
+    statement: "WIFIGATE je pametni sistem za nadzor dostopa, ki vam z namenskim krmilnikom omogoča odpiranje in upravljanje vrat, vratnih kril, električnih rolet in parkirnih zapornic s telefonom.",
     titleLines: ["Ena aplikacija.", "Vsi vaši vhodi."],
     subtitle: "Pametna rešitev za dostop in nadzor v hišah, stavbah, podjetjih in nastanitvenih objektih. Vse na eni platformi, preprosto in brez truda.",
     primaryCta: "Kako deluje",

@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Toista video uudelleen","mute":"Mykistä video","unmute":"Poista mykistys","pause":"Keskeytä video","play":"Toista video"},
+    statement: "WIFIGATE on älykäs kulunhallintajärjestelmä, jolla voit avata ja hallita portteja, ovia, sähköisiä rullakaihtimia ja pysäköintiesteitä puhelimellasi erillisen ohjaimen avulla.",
     titleLines: ["Yksi sovellus.", "Kaikki sisäänkäyntisi."],
     subtitle: "Älykäs kulunhallinta koteihin, rakennuksiin, yrityksiin ja majoituskohteisiin. Kaikki yhdellä alustalla, helposti ja vaivatta.",
     primaryCta: "Näin se toimii",

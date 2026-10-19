@@ -56,21 +56,21 @@ export function sceneAssetUrl(assetPrefix, asset) {
 
 function attachSceneAssets($, assetPrefix) {
   if (!$("script[src*='js/media-runtime.js']").length) {
-    const runtime = $("<script>").attr("src", `${assetPrefix}js/media-runtime.js?v=20261018d`).attr("defer", "");
+    const runtime = $("<script>").attr("src", `${assetPrefix}js/media-runtime.js?v=20261019d`).attr("defer", "");
     const heroScript = $("script[src*='js/hero.js']");
     if (heroScript.length) heroScript.before(runtime);
     else $("head").append(runtime);
   }
-  $("script[src*='js/media-runtime.js']").attr("src", `${assetPrefix}js/media-runtime.js?v=20261018d`);
-  $("script[src*='js/hero.js']").attr("src", `${assetPrefix}js/hero.js?v=20261018d`);
+  $("script[src*='js/media-runtime.js']").attr("src", `${assetPrefix}js/media-runtime.js?v=20261019d`);
+  $("script[src*='js/hero.js']").attr("src", `${assetPrefix}js/hero.js?v=20261019d`);
   if (!$("link[href*='scene-video.css']").length) {
-    $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261018d`));
+    $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261019d`));
   }
   if (!$("script[src*='js/scene-video.js']").length) {
-    $("head").append($("<script>").attr("src", `${assetPrefix}js/scene-video.js?v=20261018d`).attr("defer", ""));
+    $("head").append($("<script>").attr("src", `${assetPrefix}js/scene-video.js?v=20261019d`).attr("defer", ""));
   }
-  $("link[href*='scene-video.css']").attr("href", `${assetPrefix}css/scene-video.css?v=20261018d`);
-  $("script[src*='js/scene-video.js']").attr("src", `${assetPrefix}js/scene-video.js?v=20261018d`);
+  $("link[href*='scene-video.css']").attr("href", `${assetPrefix}css/scene-video.css?v=20261019d`);
+  $("script[src*='js/scene-video.js']").attr("src", `${assetPrefix}js/scene-video.js?v=20261019d`);
 }
 
 function attachResponsiveMedia($, { scene, assetPrefix, image, video }) {

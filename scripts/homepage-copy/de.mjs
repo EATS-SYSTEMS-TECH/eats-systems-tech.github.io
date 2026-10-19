@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Video erneut abspielen","mute":"Video stumm schalten","unmute":"Stummschaltung des Videos aufheben","pause":"Video anhalten","play":"Video abspielen"},
+    statement: "WIFIGATE ist ein smartes Zutrittssystem, mit dem Sie Tore, Türen, elektrische Rollläden und Parkplatzschranken über Ihr Smartphone und einen dedizierten Controller öffnen und verwalten können.",
     titleLines: ["Eine App.", "Alle Ihre Eingänge."],
     subtitle: "Die smarte Lösung für Zutritt und Steuerung in Privathäusern, Gebäuden, Unternehmen und Unterkünften. Alles auf einer Plattform, einfach und mühelos.",
     primaryCta: "So funktioniert's",

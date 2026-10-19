@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Reproduzir o vídeo novamente","mute":"Silenciar o vídeo","unmute":"Ativar o som do vídeo","pause":"Pausar o vídeo","play":"Reproduzir o vídeo"},
+    statement: "A WIFIGATE é um sistema inteligente de acesso que permite abrir e gerir portões, portas, estores elétricos e barreiras de estacionamento através do telemóvel, com um controlador dedicado.",
     titleLines: ["Uma só aplicação.", "Todas as suas entradas."],
     subtitle: "Acesso e controlo inteligentes para casas, edifícios, empresas e espaços de alojamento. Tudo numa só plataforma, simples e sem complicações.",
     primaryCta: "Como funciona",

@@ -17,6 +17,7 @@ const copy = {
   },
   hero: {
     media: {"replay":"Afspil video igen","mute":"Slå lyden fra","unmute":"Slå lyden til","pause":"Sæt videoen på pause","play":"Afspil videoen"},
+    statement: "WIFIGATE er et smart adgangssystem, der via en dedikeret controller giver dig mulighed for at åbne og styre porte, døre, elektriske skodder og parkeringsbomme fra telefonen.",
     titleLines: ["Én app.", "Alle dine indgange."],
     subtitle: "Smart adgang og styring til boliger, bygninger, virksomheder og overnatningssteder. Alt på én platform, enkelt og ubesværet.",
     primaryCta: "Sådan virker det",

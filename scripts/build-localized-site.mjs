@@ -962,7 +962,7 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   $("body").append('<script src="' + prefix + 'js/site-cart.js?v=20261016a" defer></script>');
 }
 
-const siteHeaderStylesheet = "css/site-header.css?v=20261018c";
+const siteHeaderStylesheet = "css/site-header.css?v=20261019a";
 
 // A landing page keeps the header's look and the logo, and nothing that leads
 // into the site: no menu, no logo link, no sign-in, account or language menu.
