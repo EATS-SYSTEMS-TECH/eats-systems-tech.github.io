@@ -42,4 +42,5 @@
   font-weight: 700;
 }
 .shop-main__link:hover,
-.shop-main__link:focus-visible { border-color: #292929; background: #292929; color: #ffffff; }
+.shop-main__link:focus-visible,
+.shop-main__link:active { border-color: var(--color-primary); background: var(--color-primary); color: #ffffff; }

@@ -642,6 +642,13 @@ html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.18; 
   background: transparent;
 }
 
+@media (min-width: 769px) {
+  .home-en .product-overview__figure > .media-watermark {
+    right: -52px;
+    bottom: -13px;
+  }
+}
+
 .home-en .product-overview__image {
   display: block;
   width: 100%;
