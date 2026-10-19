@@ -423,11 +423,11 @@ ul {
 .nav__toggle {
   display: none;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   background: none;
   border: none;
   padding: 0.5rem;
-  border-radius: 0.5rem;
+  border-radius: 4px;
   cursor: pointer;
 }
 
@@ -437,7 +437,7 @@ ul {
 
 .nav__toggle-bar {
   width: 22px;
-  height: 2.5px;
+  height: 2px;
   border-radius: 999px;
   background-color: #111827;
   display: block;

@@ -26,6 +26,24 @@ try {
       await page.evaluate(() => document.fonts.ready);
       await page.locator(".nav__toggle").tap();
       await page.waitForFunction(() => getComputedStyle(document.querySelector(".nav__links-wrapper")).opacity === "1");
+      const menuBounds = await page.locator(".nav__links-wrapper").evaluate((menu) => {
+        const rect = menu.getBoundingClientRect();
+        return { left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom };
+      });
+      if (process.env.PRINT_METRICS) console.log(`${locale} at ${width}px menu`, menuBounds);
+      assert.ok(Math.abs(menuBounds.left) <= 1, `${locale} at ${width}px: menu reaches left edge`);
+      assert.ok(Math.abs(menuBounds.right - width) <= 1, `${locale} at ${width}px: menu reaches right edge`);
+      assert.ok(Math.abs(menuBounds.top - 68) <= 1, `${locale} at ${width}px: menu begins below the header`);
+      assert.ok(menuBounds.bottom < 914, `${locale} at ${width}px: menu ends at content height, above the viewport bottom`);
+      assert.ok(Math.abs(menuBounds.bottom - menuBounds.top - 292) <= 4, `${locale} at ${width}px: menu matches the reference height`);
+      const toggle = page.locator(".nav__toggle");
+      const openIcon = await toggle.evaluate((button) => [...button.querySelectorAll(".nav__toggle-bar")].map((bar) => {
+        const style = getComputedStyle(bar);
+        return { transform: style.transform, opacity: style.opacity };
+      }));
+      assert.notEqual(openIcon[0].transform, "none", `${locale} at ${width}px: first bar rotates when open`);
+      assert.equal(openIcon[1].opacity, "0", `${locale} at ${width}px: middle bar disappears when open`);
+      assert.notEqual(openIcon[2].transform, "none", `${locale} at ${width}px: third bar rotates when open`);
       if (screenshotDir && ["en", "he", "ar"].includes(locale) && width === 412) {
         await page.screenshot({ path: `${screenshotDir}/${locale}-menu.png` });
       }
@@ -45,7 +63,7 @@ try {
       });
       const label = `${locale} at ${width}px`;
       if (process.env.PRINT_METRICS) console.log(label, state);
-      assert.equal(state.background, "rgb(11, 99, 255)", `${label}: blue contact button`);
+      assert.equal(state.background, "rgb(10, 10, 10)", `${label}: black contact button at rest`);
       assert.equal(state.color, "rgb(255, 255, 255)", `${label}: white contact label`);
       assert.equal(state.textAlign, "center", `${label}: centered label in either direction`);
       assert.equal(state.radius, "4px", `${label}: consistent corners`);
@@ -61,6 +79,7 @@ try {
       assert.equal(state.href, `${localePath}#get-in-touch`, `${label}: localized contact destination`);
       await page.locator(".nav__contact-link").tap();
       assert.equal(await page.locator(".nav__toggle").getAttribute("aria-expanded"), "false", `${label}: contact closes the menu`);
+      await page.waitForFunction(() => [...document.querySelectorAll(".nav__toggle-bar")].every((bar) => getComputedStyle(bar).transform === "none" && getComputedStyle(bar).opacity === "1"));
       assert.equal(new URL(page.url()).hash, "#get-in-touch", `${label}: contact navigation works`);
       checked++;
     }

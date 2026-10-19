@@ -74,8 +74,8 @@ html.a11y-text-scaled .site-header .nav {
 .site-header .nav__contact-link:hover,
 .site-header .nav__contact-link:focus-visible {
   color: #ffffff;
-  border-color: #292929;
-  background: #292929;
+  border-color: #0b63ff;
+  background: linear-gradient(135deg, #0b63ff, #2563eb);
 }
 
 .site-header .language-selector__button {
@@ -111,9 +111,32 @@ html.a11y-text-scaled .site-header .nav {
 
 .site-header .nav__toggle {
   border-radius: 4px;
+  background: transparent;
 }
-.site-header .nav__toggle:hover { background: #f3f3f3; }
-.site-header .nav__toggle-bar { background: #111827; }
+.site-header .nav__toggle:hover,
+.site-header .nav__toggle:active { background: transparent; }
+.site-header .nav__toggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.site-header .nav__toggle-bar {
+  background: #111827;
+  transform-origin: center;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 160ms ease;
+}
+.site-header .nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.site-header .nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+.site-header .nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header .nav__toggle-bar { transition: none; }
+}
 
 .site-header { font-family: "Manrope", system-ui, sans-serif; letter-spacing: 0; }
 .site-header .nav__logo { margin: 0; }
@@ -179,17 +202,18 @@ html.a11y-text-scaled .site-header .nav {
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.14);
   }
 
-  /* In the collapsed (mobile) menu the contact button is brand blue, not black. */
+  /* The collapsed menu keeps the contact CTA black until interaction. */
   .site-header .nav__contact-link {
     color: #ffffff;
-    border-color: #0b63ff;
-    background: #0b63ff;
+    border-color: #0a0a0a;
+    background: #0a0a0a;
   }
 
   .site-header .nav__contact-link:hover,
-  .site-header .nav__contact-link:focus-visible {
-    border-color: #0542ad;
-    background: #0542ad;
+  .site-header .nav__contact-link:focus-visible,
+  .site-header .nav__contact-link:active {
+    border-color: #0b63ff;
+    background: #0b63ff;
   }
 
 .site-header .nav__links-wrapper { visibility: hidden; }
@@ -204,24 +228,32 @@ html.a11y-text-scaled .site-header .nav {
   /* Override desktop RTL margins while the menu is collapsed on tablets. */
   .site-header .nav .nav__links-wrapper {
     position: absolute;
-    inset-inline: 0;
+    inset-inline-start: 50%;
+    inset-inline-end: auto;
     top: var(--nav-height);
+    height: auto;
+    max-height: calc(100vh - var(--nav-height));
+    max-height: calc(100dvh - var(--nav-height));
+    width: 100vw;
+    box-sizing: border-box;
     display: grid;
     grid-template-columns: 1fr;
     flex: none;
     margin: 0;
     justify-content: stretch;
     background: #ffffff;
-    transform: translateY(-110%);
+    transform: translateX(-50%);
     opacity: 0;
     pointer-events: none;
-    transition: transform 220ms ease-out, opacity 220ms ease-out;
+    transition: opacity 200ms ease, visibility 0s linear 200ms;
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .site-header .nav__links-wrapper.is-open {
-    transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
+    transition-delay: 0s;
   }
 
   .site-header .topbar-nav {
@@ -261,7 +293,11 @@ html.a11y-text-scaled .site-header .nav {
   text-decoration: none;
 }
 .site-header .site-login__trigger:hover,
-.site-header .site-login__trigger:focus-visible { background: #f3f3f3; }
+.site-header .site-login__trigger:focus-visible {
+  border-color: var(--color-primary);
+  background: linear-gradient(135deg, #0b63ff, #2563eb);
+  color: #ffffff;
+}
 /* One row: logo | login | language | menu. The login column is as wide as its
    label and the logo column takes what is left, so a long label (Arabic,
    Hungarian) shrinks the logo, down to 6.25rem, instead of covering it. Only
@@ -405,16 +441,17 @@ html.a11y-text-scaled .site-header .nav {
 /* The shared mobile menu keeps the same light surface on every content page. */
 @media (max-width: 1199px) {
   .site-header .nav .nav__links-wrapper {
-    border-color: #dddddd;
+    border: 0;
+    border-radius: 0;
     background: #ffffff;
-    box-shadow: 0 22px 42px rgba(0, 0, 0, .14);
+    box-shadow: none;
   }
   .site-header .topbar-nav {
-    padding-block: .35rem .65rem;
+    padding: .5rem 1.25rem 1rem;
   }
   .site-header .topbar-nav .nav__link:not(.nav__contact-link) {
     display: block;
-    padding-block: .68rem;
+    padding-block: .54rem;
     border-bottom: 1px solid rgba(10, 10, 10, .12);
     color: #242424;
   }
@@ -424,14 +461,15 @@ html.a11y-text-scaled .site-header .nav {
   }
   .site-header .topbar-nav .nav__contact-link {
     margin-top: .65rem;
-    border-color: #0b63ff;
-    background: #0b63ff;
+    border-color: #0a0a0a;
+    background: #0a0a0a;
     color: #ffffff;
   }
   .site-header .topbar-nav .nav__contact-link:hover,
-  .site-header .topbar-nav .nav__contact-link:focus-visible {
-    border-color: #0542ad;
-    background: #0542ad;
+  .site-header .topbar-nav .nav__contact-link:focus-visible,
+  .site-header .topbar-nav .nav__contact-link:active {
+    border-color: #0b63ff;
+    background: #0b63ff;
     color: #ffffff;
   }
 }
