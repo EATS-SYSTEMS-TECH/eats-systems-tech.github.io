@@ -645,7 +645,7 @@ html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.18; 
 @media (min-width: 769px) {
   .home-en .product-overview__figure > .media-watermark {
     right: -52px;
-    bottom: -13px;
+    bottom: -28px;
   }
 }
 
