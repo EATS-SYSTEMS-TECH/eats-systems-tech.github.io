@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "Bármilyen bejárathoz",
     titleLines: ["Egy rendszer.", "Minden bejárathoz."],
-    subtitle: "Nyisson a telefonjáról, adjon hozzáférést annak, akinek szüksége van rá, és döntse el, mikor jár le.",
+    subtitle: "Nyissa meg az alkalmazást, adjon hozzáférést annak, akinek szüksége van rá, és döntse el, mikor jár le.",
     imageAlt: "A WIFIGATE alkalmazás egy telefonon, rajta az otthoni kapu, a munkahely és egy időkorlátos vendéghozzáférés",
   },
   automation: {

@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "Phù hợp với mọi lối vào",
     titleLines: ["Một hệ thống.", "Cho mọi lối vào."],
-    subtitle: "Mở cửa bằng điện thoại, cấp quyền cho người cần và tự quyết định khi nào quyền đó kết thúc.",
+    subtitle: "Mở ứng dụng, cấp quyền cho người cần và tự quyết định khi nào quyền đó hết hạn.",
     imageAlt: "Ứng dụng WIFIGATE trên điện thoại, với cổng nhà, nơi làm việc và quyền ra vào cho khách có thời hạn",
   },
   automation: {

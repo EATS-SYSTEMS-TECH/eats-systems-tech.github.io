@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "Para cualquier entrada",
     titleLines: ["Un solo sistema.", "Para cada acceso."],
-    subtitle: "Abre desde el teléfono, da acceso a quien lo necesite y decide cuándo termina.",
+    subtitle: "Abre la aplicación, da acceso a quien lo necesite y decide cuándo caduca.",
     imageAlt: "La aplicación WIFIGATE en un teléfono, con el portón de casa, el lugar de trabajo y un permiso de invitado limitado en el tiempo",
   },
   automation: {

@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "Für jeden Eingang entwickelt",
     titleLines: ["Ein System.", "Für jeden Zugang."],
-    subtitle: "Per Smartphone öffnen, Zutritt an alle vergeben, die ihn brauchen, und selbst bestimmen, wann er endet.",
+    subtitle: "Öffnen Sie die App, geben Sie den Personen Zutritt, die ihn benötigen, und legen Sie fest, wann er endet.",
     imageAlt: "Die WIFIGATE-App auf einem Smartphone mit dem Tor zu Hause, dem Arbeitsplatz und einem zeitlich begrenzten Gastzugang",
   },
   automation: {

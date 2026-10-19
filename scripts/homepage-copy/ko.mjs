@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "어떤 출입구에도 딱 맞게",
     titleLines: ["하나의 시스템,", "모든 출입구에."],
-    subtitle: "스마트폰으로 열고, 필요한 사람에게 권한을 주고, 끝나는 시점도 직접 정하세요.",
+    subtitle: "앱을 열고 필요한 사람에게 권한을 부여한 뒤, 언제 만료될지도 정하세요.",
     imageAlt: "스마트폰의 WIFIGATE 앱에 집 게이트, 직장, 기간 제한 게스트 권한이 표시된 모습",
   },
   automation: {

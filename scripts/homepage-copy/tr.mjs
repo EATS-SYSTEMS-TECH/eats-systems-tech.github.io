@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "Her girişe uygun",
     titleLines: ["Tek sistem.", "Her giriş noktası için."],
-    subtitle: "Telefondan açın, ihtiyacı olana yetki verin ve ne zaman biteceğine siz karar verin.",
+    subtitle: "Uygulamayı açın, ihtiyacı olana erişim izni verin ve bu iznin ne zaman sona ereceğine karar verin.",
     imageAlt: "Telefonda WIFIGATE uygulaması: evin bahçe kapısı, işyeri ve süreli misafir yetkisi",
   },
   automation: {

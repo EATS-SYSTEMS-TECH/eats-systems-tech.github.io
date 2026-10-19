@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "Primerno za vsak vhod",
     titleLines: ["En sistem.", "Za vsako vstopno točko."],
-    subtitle: "Odpirajte s telefonom, dostop podelite tistim, ki ga potrebujejo, in sami določite, kdaj poteče.",
+    subtitle: "Odprite aplikacijo, omogočite dostop tistim, ki ga potrebujejo, in določite, kdaj poteče.",
     imageAlt: "Aplikacija WIFIGATE na telefonu z vrati doma, delovnim mestom in časovno omejenim dovoljenjem za gosta",
   },
   automation: {

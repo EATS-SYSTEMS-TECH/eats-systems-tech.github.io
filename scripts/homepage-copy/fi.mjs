@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "Sopii jokaiseen sisäänkäyntiin",
     titleLines: ["Yksi järjestelmä.", "Jokaiselle sisäänkäynnille."],
-    subtitle: "Avaat puhelimella, annat kulkuoikeuden sitä tarvitsevalle ja päätät, milloin se päättyy.",
+    subtitle: "Avaa sovellus, anna käyttöoikeus sitä tarvitsevalle ja päätä, milloin se päättyy.",
     imageAlt: "WIFIGATE-sovellus puhelimessa: kodin portti, työpaikka ja aikarajattu vieraskulkuoikeus",
   },
   automation: {

@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "Adatto a ogni ingresso",
     titleLines: ["Un solo sistema.", "Per ogni ingresso."],
-    subtitle: "Apri dallo smartphone, dai l'autorizzazione a chi ne ha bisogno e decidi tu quando scade.",
+    subtitle: "Apri l’app, dai l’autorizzazione a chi ne ha bisogno e decidi quando scade.",
     imageAlt: "L'app WIFIGATE sullo smartphone, con il cancello di casa, il luogo di lavoro e un'autorizzazione ospite a tempo limitato",
   },
   automation: {

@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "Hodí se na každý vstup",
     titleLines: ["Jeden systém.", "Pro všechny vstupy."],
-    subtitle: "Otevírejte telefonem, dejte přístup, komu potřebujete, a sami určete, kdy skončí.",
+    subtitle: "Otevřete aplikaci, udělte přístup tomu, kdo ho potřebuje, a určete, kdy vyprší.",
     imageAlt: "Aplikace WIFIGATE v telefonu s bránou domu, pracovištěm a časově omezeným přístupem pro hosta",
   },
   automation: {

@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "Built for every entrance",
     titleLines: ["One system.", "Every way in."],
-    subtitle: "Open from your phone, give access to whoever needs it, and decide when it ends.",
+    subtitle: "Open the app, give access to whoever needs it, and decide when it ends.",
     imageAlt: "The WIFIGATE app on a phone, listing a home gate, a workplace, and a time-limited guest pass",
   },
   automation: {

@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "適用每一個入口",
     titleLines: ["一套系統。", "涵蓋每個入口。"],
-    subtitle: "手機一按就開門，依需求授權，何時失效由您決定。",
+    subtitle: "開啟應用程式，授予有需要的人存取權限，並決定權限何時到期。",
     imageAlt: "手機上的 WIFIGATE App，顯示住家大門、工作場所與限時訪客權限",
   },
   automation: {

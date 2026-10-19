@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "Bagay sa bawat pasukan",
     titleLines: ["Isang system.", "Para sa bawat pasukan."],
-    subtitle: "Buksan mula sa telepono, bigyan ng access ang nangangailangan, at kayo ang magpapasya kung kailan ito matatapos.",
+    subtitle: "Buksan ang app, bigyan ng access ang nangangailangan nito, at kayo ang magpasya kung kailan ito matatapos.",
     imageAlt: "Ang WIFIGATE app sa telepono, kasama ang gate ng bahay, ang lugar ng trabaho, at isang pahintulot para sa bisita na may takdang oras",
   },
   automation: {

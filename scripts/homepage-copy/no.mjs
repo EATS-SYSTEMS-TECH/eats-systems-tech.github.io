@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "Utviklet for hver inngang",
     titleLines: ["Ett system.", "Alle veier inn."],
-    subtitle: "Åpne fra mobilen, gi tilgang til dem som trenger det, og bestem selv når den avsluttes.",
+    subtitle: "Åpne appen, gi tilgang til dem som trenger det, og bestem selv når den utløper.",
     imageAlt: "WIFIGATE-appen på en mobil med porten hjemme, arbeidsplassen og en tidsbegrenset gjestetilgang",
   },
   automation: {

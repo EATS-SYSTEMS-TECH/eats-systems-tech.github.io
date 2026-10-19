@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "Sesuai untuk setiap pintu masuk",
     titleLines: ["Satu sistem.", "Untuk setiap pintu masuk."],
-    subtitle: "Buka melalui telefon, beri akses kepada sesiapa yang memerlukannya dan tentukan bila ia tamat.",
+    subtitle: "Buka aplikasi, berikan akses kepada sesiapa yang memerlukannya dan tentukan bila akses itu tamat.",
     imageAlt: "Aplikasi WIFIGATE di telefon, dengan pintu pagar rumah, tempat kerja dan kebenaran tetamu terhad masa",
   },
   automation: {

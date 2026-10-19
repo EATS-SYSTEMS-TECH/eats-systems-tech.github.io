@@ -78,7 +78,7 @@ const copy = {
   solutions: {
     eyebrow: "Prilagođeno svakom ulazu",
     titleLines: ["Jedan sustav.", "Za svaki ulaz."],
-    subtitle: "Otvarate telefonom, dajete pristup onome kome treba i sami odlučujete kada on prestaje.",
+    subtitle: "Otvorite aplikaciju, dajte pristup kome je potreban i odlučite kada istječe.",
     imageAlt: "Aplikacija WIFIGATE na telefonu s dvorišnim vratima kuće, radnim mjestom i vremenski ograničenim pristupom za gosta",
   },
   automation: {
