@@ -49,7 +49,7 @@ async function waitPlaying(page, route) {
   });
 }
 async function inspectVideoLayer(page, route) {
-  const result = await page.locator(frameSelector).evaluate(element => {
+  const result = await page.locator(`${frameSelector}:has(> video)`).evaluate(element => {
     const box = node => { const r = node.getBoundingClientRect(); return { x: r.x, y: r.y, right: r.right, bottom: r.bottom, width: r.width, height: r.height }; };
     const mark = element.querySelector(":scope > [data-media-watermark]");
     const style = getComputedStyle(mark), bounds = box(mark);
@@ -78,16 +78,25 @@ async function inspectVideoLayer(page, route) {
   // Observe its position without avoiding or moving it.
   return { physicalRightPixels: 12, bottomPixels: route ? 8 : 12, opacity: result.opacity, pointerEvents: result.pointer, accessibilityOverlapAllowed: true, accessibilityOverlaps: result.accessibility ? overlaps(result.mark, result.accessibility) : false };
 }
-async function staticPhotosHaveNoLayer(page, route) {
+async function inspectStaticPhotoLayers(page, route) {
   const checks = await page.evaluate(() => {
     const extra = [...document.querySelectorAll("main [data-media-watermark-frame]")].filter(frame => !frame.querySelector("video"));
     const grid = [...document.querySelectorAll(".security-statement__media-image")];
     const host = document.querySelector(".home-en .automation-stay__media");
-    return { photoOnlyFrames: extra.length, gridImagesRetained: grid.every(item => item.tagName === "IMG"), staticHostMarks: host?.querySelectorAll("[data-media-watermark]").length || 0 };
+    return {
+      photoOnlyFrames: extra.length,
+      gridImagesRetained: grid.every(item => item.querySelector("img.media-watermark-image__image")),
+      staticHostMarks: host?.querySelectorAll("[data-media-watermark]").length || 0,
+      marksVisible: extra.every(frame => {
+        const mark = frame.querySelector(":scope > [data-media-watermark]");
+        return mark && getComputedStyle(mark).display === "block";
+      }),
+    };
   });
-  assert.equal(checks.photoOnlyFrames, 0);
+  assert.equal(checks.photoOnlyFrames, route ? 0 : 5);
   assert.equal(checks.gridImagesRetained, true);
-  assert.equal(checks.staticHostMarks, 0);
+  assert.equal(checks.staticHostMarks, route ? 0 : 1);
+  if (!route) assert.equal(checks.marksVisible, true, "Homepage image marks remain visible while the hero poster is shown");
   if (route === "shabbat-clock-electric-gate/") {
     assert.equal(await page.locator("[data-media-watermark],link[data-media-watermark-style]").count(), 0);
     assert.equal(await page.locator("main video").count(), 0);
@@ -107,9 +116,9 @@ try {
       const page = await context.newPage();
       await page.goto(`${origin}/${locale}${route}`, { waitUntil: "load" });
       await page.evaluate(() => document.fonts.ready);
-      await staticPhotosHaveNoLayer(page, route);
+      await inspectStaticPhotoLayers(page, route);
       const hasVideo = route !== "shabbat-clock-electric-gate/";
-      assert.equal(await page.locator(frameSelector).count(), hasVideo ? 1 : 0);
+      assert.equal(await page.locator(frameSelector).count(), (hasVideo ? 1 : 0) + (route ? 0 : 5));
       if (!hasVideo) {
         result.staticPhotoUnmarked = true;
         await capture(page, `video-watermark-${locale ? "he" : "en"}-shabbat-${width}-static`);
@@ -119,10 +128,11 @@ try {
         await playButton(page, route).click(); await waitPlaying(page, route);
         result.playing = await inspectVideoLayer(page, route);
         await capture(page, `video-watermark-${locale ? "he" : "en"}-${route.replace(/\/$/, "") || "home"}-${width}-playing`);
-        await pauseButton(page, route).click();
+        const pauseAction = route ? pauseButton(page, route) : playButton(page, route);
+        await pauseAction.click();
         assert.equal((await markState(page, route)).paused, true);
         assert.equal((await markState(page, route)).display, "block", "A paused visible video retains its watermark");
-        await pauseButton(page, route).click(); await waitPlaying(page, route);
+        await pauseAction.click(); await waitPlaying(page, route);
         await video(page, route).evaluate(v => { v.currentTime = Math.max(0, v.duration - .25); });
         await page.waitForFunction(selector => document.querySelector(selector)?.ended, route ? ".niche-hero video" : "#hero-video", { timeout: 10000 });
         const ended = await markState(page, route);
@@ -165,7 +175,7 @@ try {
     } finally { await context.close(); }
   }
   report.status = "PASS";
-  console.log(`Video-only watermark: ${report.cases.length} HE/EN 320/390/1280 route cases, ${report.policyCases.length} reduced-motion, ${report.failureCases.length} failure and ${report.noJavaScriptCases.length} no-JavaScript cases passed; unmarked photos/posters, opacity .3, physical bottom-right and existing playback states.`);
+  console.log(`Homepage media marks: ${report.cases.length} HE/EN 320/390/1280 route cases, ${report.policyCases.length} reduced-motion, ${report.failureCases.length} failure and ${report.noJavaScriptCases.length} no-JavaScript cases passed; homepage artwork marks stay visible, video marks follow playback state, opacity .3, physical bottom-right and existing controls.`);
 } catch (error) { report.status = "FAIL"; report.error = String(error.message || error); throw error; }
 finally {
   await browser.close();

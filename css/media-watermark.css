@@ -16,6 +16,24 @@
   pointer-events: none;
   user-select: none;
 }
+/* Static homepage media keeps the brand mark visible independently of video
+   playback. The selected frames are positioned so the mark stays contained. */
+.media-watermark-image,
+.home-en .where-media,
+.home-en .product-overview__figure {
+  position: relative;
+}
+.media-watermark-image__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
+}
+.media-watermark-image > .media-watermark {
+  display: block;
+  opacity: .75;
+  filter: drop-shadow(0 1px 2px #0009);
+}
 /* Follow the real displayed media state, including pause/end and error or
    preference fallback. A poster, failed video or disabled JS stays unbranded. */
 .hero[data-hero-media-state="video"] > .hero__media > .media-watermark,
@@ -27,4 +45,24 @@
 .niche-hero__media > .media-watermark {
   width: clamp(28px, 10%, 38px);
   bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .home-en .security-statement__inner .media-watermark-image > .media-watermark {
+    right: calc(100% - 100vw + 30px);
+    bottom: 0;
+  }
+
+  .home-en .security-statement__inner:has(img[src*="private-access-arrival"]) .media-watermark-image > .media-watermark {
+    bottom: -2.625rem;
+  }
+
+  html[dir="rtl"] .home-en .security-statement__inner .media-watermark-image > .media-watermark {
+    right: auto;
+    left: calc(100% - 100vw + 30px);
+  }
+
+  html[dir="rtl"] .home-en .security-statement__inner:has(img[src*="private-access-arrival"]) .media-watermark-image > .media-watermark {
+    bottom: -2.625rem;
+  }
 }
