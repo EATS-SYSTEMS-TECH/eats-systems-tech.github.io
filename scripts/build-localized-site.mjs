@@ -1146,7 +1146,7 @@ async function buildShopPages(homeData) {
     $(".shop-main__content").attr({ lang: he ? "he" : "en", dir: he ? "rtl" : "ltr" });
     if (he) {
       $(".shop-main h1").text("חנות WIFIGATE תיפתח בקרוב.");
-      $(".shop-main__link").text("חזרה ל־WIFIGATE");
+      $(".shop-main__link").text("חזרה ל WIFIGATE");
     }
     $(".shop-main__link").attr("href", buildPagePath(locale, "home"));
     await writeOutputFile(buildOutputFilePath(locale, "shop"), serialize($, homeData, locale, "shop"));
