@@ -649,6 +649,13 @@ html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.18; 
   }
 }
 
+@media (max-width: 768px) {
+  .home-en .product-overview__figure > .media-watermark {
+    right: 2px;
+    bottom: -38px;
+  }
+}
+
 .home-en .product-overview__image {
   display: block;
   width: 100%;
@@ -1073,9 +1080,12 @@ html[lang="he"] body.home-en .automation-stay__steps {
 }
 
 .home-en #tutorials .section__header {
-  position: sticky;
-  top: calc(var(--nav-height) + 2rem);
+  position: static;
   margin: 0;
+}
+
+.home-en #wifi-gate-faq .seo-faq__layout > :first-child {
+  position: static;
 }
 
 .home-en #tutorials .section__title {
@@ -1438,6 +1448,11 @@ html[lang="he"] body.home-en .automation-stay__steps {
   .home-en #contact .contact-options__header {
     display: block;
     margin-bottom: 2.75rem;
+  }
+
+  .home-en #contact .contact-options__header .section__title {
+    margin-inline: auto;
+    text-align: center;
   }
 
   .home-en .section__title,
