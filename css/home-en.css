@@ -1495,18 +1495,6 @@ html[lang="he"] body.home-en .automation-stay__steps {
     padding: 1.75rem 1.5rem;
   }
 
-  .home-en .a11y-fab {
-    width: 3.5rem;
-    height: 3.5rem;
-    inset-inline-end: 0.85rem;
-    inset-block-end: 0.85rem;
-    box-shadow: 0 12px 28px rgba(11, 99, 255, 0.3);
-  }
-
-  .home-en .a11y-fab__icon {
-    width: 1.7rem;
-    height: 1.7rem;
-  }
 }
 
 @media (max-width: 480px) {
