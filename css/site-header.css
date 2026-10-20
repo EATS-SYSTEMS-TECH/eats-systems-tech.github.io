@@ -228,8 +228,8 @@ html.a11y-text-scaled .site-header .nav {
   /* Override desktop RTL margins while the menu is collapsed on tablets. */
   .site-header .nav .nav__links-wrapper {
     position: absolute;
-    inset-inline-start: 50%;
-    inset-inline-end: auto;
+    left: 50%;
+    right: auto;
     top: var(--nav-height);
     height: auto;
     max-height: calc(100vh - var(--nav-height));
