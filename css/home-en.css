@@ -1331,9 +1331,6 @@ html[lang="he"] body.home-en .automation-stay__steps {
 @media (max-width: 768px) {
 
 
-  .home-en .site-header .nav__logo {
-    width: min(35vw, 9.25rem);
-  }
 
   .home-en .hero {
     min-height: calc(100svh - var(--nav-height));
@@ -1629,27 +1626,10 @@ html[lang="he"] body.home-en .automation-stay__steps {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .home-en .site-header .nav {
-    gap: 0.25rem;
-    padding-inline: 0.5rem;
-  }
 
-  .home-en .site-header .nav__logo {
-    width: min(35vw, 6.9rem);
-  }
 
-  .home-en .site-header .site-login__trigger {
-    padding-inline: 0.4rem;
-    font-size: 0.78rem;
-  }
 
-  .home-en .site-header .language-selector__button {
-    padding-inline: 0.25rem;
-  }
 
-  .home-en .site-header .language-selector__arrow {
-    display: none;
-  }
 
   .home-en .hero__replay {
     min-width: 0;

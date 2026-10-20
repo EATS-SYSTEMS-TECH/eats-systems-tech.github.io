@@ -15,7 +15,7 @@ try {
         buttonColor: getComputedStyle(document.querySelector(".hero__btn-primary")).backgroundColor,
       }));
       assert.ok(hero.headlineSize > hero.copySize * 1.5, "The slogan stands out from the smaller product explanation");
-      assert.equal(hero.buttonColor, "rgb(255, 255, 255)", "How it works uses white");
+      assert.equal(hero.buttonColor, "rgb(20, 107, 255)", "How it works uses brand blue");
     }
     if (path.endsWith("/shop/")) {
       const shop = await page.evaluate(() => {
@@ -73,11 +73,11 @@ try {
       };
     });
     assert.equal(result.links.length, 6);
-    assert.equal(result.background, "rgb(16, 16, 16)", `${path}: collapsed menu stays dark`);
-    assert.equal(result.contactBackground, "rgb(11, 99, 255)", `${path}: contact button uses brand blue`);
+    assert.equal(result.background, "rgb(255, 255, 255)", `${path}: collapsed menu matches the white homepage menu`);
+    assert.equal(result.contactBackground, "rgb(10, 10, 10)", `${path}: contact button is black at rest`);
     assert.equal(result.contactColor, "rgb(255, 255, 255)", `${path}: contact button text stays readable`);
     assert.ok(result.menu.height < 330, `${path}: menu is compact`);
-    result.links.slice(0, -1).forEach((link) => assert.equal(link.color, "rgb(247, 247, 247)", `${path}: ${link.text} is readable`));
+    result.links.slice(0, -1).forEach((link) => assert.equal(link.color, "rgb(36, 36, 36)", `${path}: ${link.text} is readable`));
     result.links.forEach((link) => assert.ok(link.box.y >= result.menu.y && link.box.y + link.box.height <= result.menu.y + result.menu.height, `${path}: ${link.text} remains inside menu`));
     if (path === "/" && width === 940) {
       await page.locator(".topbar-nav .nav__link").nth(1).click();

@@ -37,8 +37,8 @@ html.a11y-text-scaled .site-header .nav {
   align-items: center;
 }
 
-/* With the language button showing its flag alone up to 1279px (below), the
-   longest menus (Bengali, Filipino, Greek) fit from 1200px. */
+/* With the language button showing its flag alone up to 1599px (below), the
+   longest menus (Bengali, Filipino, Greek) fit from 1440px. */
 .site-header .topbar-nav {
   gap: clamp(0.75rem, 1.5vw, 2.25rem);
 }
@@ -142,9 +142,9 @@ html.a11y-text-scaled .site-header .nav {
 .site-header .nav__logo { margin: 0; }
 .site-header .nav__link { white-space: nowrap; }
 .site-header .language-selector { position: relative; inset: auto; transform: none; margin: 0; }
-/* 1200-1279px: the full menu row leaves no room for the language name, so the
+/* 1440-1599px: the full menu row leaves no room for the language name, so the
    button shows the flag and arrow alone, as in the collapsed header. */
-@media (min-width: 1200px) and (max-width: 1279px) {
+@media (min-width: 1440px) and (max-width: 1599px) {
   .site-header .language-selector__button {
     min-width: 0;
     padding-inline: 0.65rem;
@@ -154,7 +154,7 @@ html.a11y-text-scaled .site-header .nav {
     display: none;
   }
 }
-@media (max-width: 1199px) {
+@media (max-width: 1439px) {
   :root { --nav-height: 4.25rem; }
   .site-header .nav {
     display: grid;
@@ -302,7 +302,7 @@ html.a11y-text-scaled .site-header .nav {
    label and the logo column takes what is left, so a long label (Arabic,
    Hungarian) shrinks the logo, down to 6.25rem, instead of covering it. Only
    past that does the label itself shorten, with an ellipsis. */
-@media (max-width: 1199px) {
+@media (max-width: 1439px) {
   .site-header .nav { grid-template-columns: minmax(6.25rem, 1fr) auto auto auto; }
   .site-header .nav__brand { min-width: 0; max-width: 100%; }
   .site-header .nav__logo { max-width: 100%; }
@@ -416,7 +416,7 @@ html.a11y-text-scaled .site-header .nav {
 .site-header .site-account__item:focus-visible { background: #f5f5f5; }
 .site-header .site-account__item:focus-visible { outline: 2px solid #0b63ff; outline-offset: -2px; }
 .site-header .site-account__item[aria-disabled="true"] { cursor: progress; opacity: 0.6; }
-@media (max-width: 1199px) {
+@media (max-width: 1439px) {
   .site-header .site-account { grid-column: 2; grid-row: 1; justify-self: end; }
 }
 /* Phone width: the menu spans the header instead of hanging off one button. */
@@ -439,7 +439,7 @@ html.a11y-text-scaled .site-header .nav {
 }
 
 /* The shared mobile menu keeps the same light surface on every content page. */
-@media (max-width: 1199px) {
+@media (max-width: 1439px) {
   .site-header .nav .nav__links-wrapper {
     border: 0;
     border-radius: 0;
@@ -472,4 +472,97 @@ html.a11y-text-scaled .site-header .nav {
     background: #0b63ff;
     color: #ffffff;
   }
+}
+
+/* Shared account/cart controls and homepage header sizing on every page. */
+.site-header .site-login__icon { display: none; }
+.site-header .site-cart__trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: .3rem;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #0a0a0a;
+  cursor: pointer;
+}
+.site-header .site-cart__trigger:hover { background: #f3f3f3; }
+.site-header .site-cart__trigger:focus-visible { outline: 2px solid #0b63ff; outline-offset: 2px; }
+.site-header .site-cart__count {
+  position: absolute;
+  top: 0;
+  inset-inline-end: -.15rem;
+  display: grid;
+  place-items: center;
+  min-width: 1.13rem;
+  height: 1.13rem;
+  padding-inline: .18rem;
+  border-radius: 999px;
+  background: #0b63ff;
+  color: #fff;
+  font-size: .65rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.site-header .site-cart__count[hidden] { display: none; }
+@media (max-width: 1439px) {
+  .site-header .nav { grid-template-columns: auto minmax(0,1fr) auto auto auto auto; }
+  .site-header .site-login__trigger, .site-header .site-account { grid-column: 3; grid-row: 1; }
+  .site-header .site-cart__trigger { grid-column: 4; grid-row: 1; }
+  .site-header .language-selector { grid-column: 5; grid-row: 1; }
+  .site-header .nav__toggle { grid-column: 6; grid-row: 1; }
+  .site-header .nav__links-wrapper { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) {
+  .site-header .nav { gap: .25rem; padding-inline: .65rem; }
+  .site-header .nav__logo { width: min(31vw, 7rem); }
+  .site-header .site-login__trigger { display: inline-flex; align-items: center; justify-content: center; width: 2.5rem; min-height: 2.5rem; padding: 0; }
+  .site-header .site-login__label { display: none; }
+  .site-header .site-login__icon { display: block; }
+  .site-header .site-cart__trigger { width: 2.5rem; height: 2.5rem; }
+  .site-header .language-selector__button { padding-inline: .25rem; }
+  .site-header .language-selector__arrow { display: none; }
+}
+@media (max-width: 360px) {
+  .site-header .nav { gap: .1rem; padding-inline: .4rem; }
+  .site-header .nav__logo { width: min(30vw, 6rem); }
+}
+
+@media (max-width: 768px) {
+  .site-header .nav__logo {
+    width: min(35vw, 9.25rem);
+  }
+}
+@media (max-width: 360px) {
+  .site-header .nav {
+    gap: 0.25rem;
+    padding-inline: 0.5rem;
+  }
+
+  .site-header .nav__logo {
+    width: min(35vw, 6.9rem);
+  }
+
+  .site-header .site-login__trigger {
+    padding-inline: 0.4rem;
+    font-size: 0.78rem;
+  }
+
+  .site-header .language-selector__button {
+    padding-inline: 0.25rem;
+  }
+
+  .site-header .language-selector__arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 1439px) {
+  .site-header .nav .topbar-nav { align-items: stretch; text-align: start; }
+  .site-header .topbar-nav .nav__link { width: 100%; box-sizing: border-box; }
 }

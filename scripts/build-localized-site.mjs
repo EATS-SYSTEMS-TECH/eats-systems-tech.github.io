@@ -954,7 +954,7 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   if (locale !== "he") $(".site-cart__drawer").attr("lang", "en");
   const prefix = buildAssetPrefix(locale, pageKey);
   $("head").append('<link rel="stylesheet" href="' + prefix + siteHeaderStylesheet + '">');
-  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-cart.css?v=20261018c">');
+  $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-cart.css?v=20261020b">');
   $("script[src*='js/site-account.js']").remove();
   $("script[src*='js/navigation.js']")
     .attr("src", prefix + "js/navigation.js?v=20261007a")
@@ -962,7 +962,7 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   $("body").append('<script src="' + prefix + 'js/site-cart.js?v=20261016a" defer></script>');
 }
 
-const siteHeaderStylesheet = "css/site-header.css?v=20261020a";
+const siteHeaderStylesheet = "css/site-header.css?v=20261020b";
 
 // A landing page keeps the header's look and the logo, and nothing that leads
 // into the site: no menu, no logo link, no sign-in, account or language menu.
