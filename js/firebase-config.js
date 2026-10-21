@@ -5,6 +5,8 @@ const productionConfig = {
   authDomain: "eats-wifigate.firebaseapp.com",
   projectId: "eats-wifigate",
   appId: "1:759449834452:web:b0543c1bbcf4e1e86cfc41",
+  // Public reCAPTCHA Enterprise site key; provision before enabling Manager.
+  appCheckSiteKey: "",
 };
 
 export const isLocalStaging =

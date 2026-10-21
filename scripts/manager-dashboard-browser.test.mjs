@@ -1,0 +1,213 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { startSite } from "./platform-test-fixtures.mjs";
+
+test("Manager workspace supports English/Hebrew desktop/mobile, organizations and deliberate gate actions", async (t) => {
+  const { origin, browser } = await startSite(t);
+  for (const language of ["en", "he"]) {
+    for (const width of [1440, 390]) {
+      await t.test(`${language} at ${width}px`, async () => {
+        const context = await browser.newContext({
+          viewport: { width, height: 950 },
+        });
+        t.after(() => context.close());
+        const page = await context.newPage();
+        const failures = [];
+        page.on("pageerror", (e) => failures.push(e.message));
+        await page.route(origin + "/manager-ui-test", (route) =>
+          route.fulfill({
+            contentType: "text/html",
+            body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><head><link rel="stylesheet" href="/css/manager-dashboard.css"></head><body style="margin:20px;background:#f5f8f6;font-family:Arial"><div id="root"></div></body></html>`,
+          }),
+        );
+        await page.goto(origin + "/manager-ui-test");
+        await page.evaluate(async (language) => {
+          const { createManagerDashboard } =
+            await import("/js/manager-dashboard.js");
+          window.commands = [];
+          window.requests = [];
+          const system = {
+            id: "system-one",
+            name: language === "he" ? "שער חניון מרכזי" : "Central car park",
+            type: "gate",
+            systemIds: ["gate-1"],
+            status: "active",
+            version: 1,
+            orgId: null,
+          };
+          const api = async (path, method, body) => {
+            window.requests.push({ path, method, body });
+            if (path === "/me")
+              return {
+                role: "user",
+                account: { id: "account-one" },
+                organizations: [
+                  {
+                    id: "organization-one",
+                    name:
+                      language === "he" ? "בניין השקמה" : "Sycamore building",
+                  },
+                ],
+              };
+            if (
+              path.startsWith("/systems?") ||
+              path.startsWith("/organizations/organization-one/systems?")
+            )
+              return { items: [system], nextCursor: null };
+            if (path.startsWith("/invitations?"))
+              return { items: [], nextCursor: null };
+            if (path === "/organizations")
+              return { organization: { id: "new-org" } };
+            throw new Error("Unexpected fixture request " + path);
+          };
+          class Connection {
+            constructor({ onState }) {
+              this.onState = onState;
+            }
+            async open() {
+              this.onState("waiting");
+              this.session = {};
+              this.onState("active");
+            }
+            close() {
+              this.session = null;
+            }
+            async command(cmd, payload) {
+              window.commands.push({ cmd, payload });
+              if (cmd === "ADMIN_GET_OVERVIEW")
+                return {
+                  data: {
+                    systemId: "gate-1",
+                    users: 18,
+                    admins: 2,
+                    state: "OK",
+                  },
+                };
+              if (cmd === "ADMIN_GET_GATE_CONFIG")
+                return {
+                  data: {
+                    config: {
+                      command: "PULSE",
+                      pulseWidth1Millis: 1000,
+                      timeBetweenPulses1Seconds: 1,
+                      pulseWidth2Millis: 1000,
+                      timeBetweenPulses2Seconds: 1,
+                      pulseWidth3Millis: 1000,
+                    },
+                    revision: 7,
+                  },
+                };
+              if (cmd === "ADMIN_LIST_USERS")
+                return {
+                  data: {
+                    items: [
+                      {
+                        name: "Fixture Resident",
+                        countryCode: "972",
+                        localNumber: "500000000",
+                        email: "resident@example.test",
+                      },
+                    ],
+                    revision: 9,
+                    page: { nextCursor: null },
+                  },
+                };
+              return { data: { accepted: true } };
+            }
+          }
+          window.manager = createManagerDashboard({
+            root: document.querySelector("#root"),
+            user: { uid: "fixture" },
+            language,
+            api,
+            Connection,
+          });
+          await window.manager.ready;
+        }, language);
+        const he = language === "he";
+        await page
+          .getByRole("button", {
+            name: he ? "פתיחת סביבת ניהול" : "Open workspace",
+            exact: true,
+          })
+          .click();
+        await page
+          .getByRole("button", {
+            name: he ? "פתיחת שער" : "Open gate",
+            exact: true,
+          })
+          .waitFor();
+        assert.equal(
+          (await page.evaluate(() => window.commands)).some(
+            (c) => c.cmd === "ADMIN_REMOTE_OPEN",
+          ),
+          false,
+        );
+        page.once("dialog", (dialog) => dialog.dismiss());
+        await page
+          .getByRole("button", {
+            name: he ? "פתיחת שער" : "Open gate",
+            exact: true,
+          })
+          .click();
+        assert.equal(
+          (await page.evaluate(() => window.commands)).some(
+            (c) => c.cmd === "ADMIN_REMOTE_OPEN",
+          ),
+          false,
+        );
+        page.once("dialog", (dialog) => dialog.accept());
+        await page
+          .getByRole("button", {
+            name: he ? "פתיחת שער" : "Open gate",
+            exact: true,
+          })
+          .click();
+        await page.waitForFunction(() =>
+          window.commands.some((c) => c.cmd === "ADMIN_REMOTE_OPEN"),
+        );
+        await page
+          .getByRole("tab", { name: he ? "הגדרות" : "Settings", exact: true })
+          .click();
+        await page
+          .getByLabel(he ? "משך פולס ראשון (מילישניות)" : "First pulse (ms)", {
+            exact: true,
+          })
+          .fill("1500");
+        page.once("dialog", (dialog) => dialog.accept());
+        await page
+          .getByRole("button", {
+            name: he ? "שמירת הגדרות" : "Save settings",
+            exact: true,
+          })
+          .click();
+        await page.waitForFunction(() =>
+          window.commands.some((c) => c.cmd === "ADMIN_SET_GATE_CONFIG"),
+        );
+        const saved = (await page.evaluate(() => window.commands)).find(
+          (c) => c.cmd === "ADMIN_SET_GATE_CONFIG",
+        );
+        assert.equal(saved.payload.expectedRevision, 7);
+        assert.equal(saved.payload.pulseWidth1Millis, 1500);
+        await page
+          .getByRole("tab", { name: he ? "משתמשים" : "Users", exact: true })
+          .click();
+        await page.getByText("Fixture Resident", { exact: true }).waitFor();
+        assert.equal(
+          await page.evaluate(
+            () => document.documentElement.scrollWidth > innerWidth,
+          ),
+          false,
+        );
+        assert.deepEqual(failures, []);
+        if (process.env.MANAGER_SCREENSHOTS)
+          await page.screenshot({
+            path: `${process.env.MANAGER_SCREENSHOTS}/manager-${language}-${width}.png`,
+            fullPage: true,
+          });
+        await page.evaluate(() => window.manager.close());
+        assert.equal(await page.locator("#root").textContent(), "");
+      });
+    }
+  }
+});

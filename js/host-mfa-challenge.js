@@ -36,9 +36,18 @@ export function requestMfaChallenge(resolver, text = {}) {
       const digits = code.value.replace(/\D/g, "").slice(0, 6);
       if (digits !== code.value) code.value = digits;
     }
+    function pasteCode(event) {
+      const value = event.clipboardData?.getData("text");
+      if (!value) return;
+      // Normalize before the browser's maxlength can truncate a spaced code.
+      event.preventDefault();
+      code.value = value.replace(/\D/g, "").slice(0, 6);
+      code.dispatchEvent(new Event("input", { bubbles: true }));
+    }
     function clean() {
       form.removeEventListener("submit", verify);
       code.removeEventListener("input", digitsOnly);
+      code.removeEventListener("paste", pasteCode);
       dialog.removeEventListener("cancel", cancel);
       dialog.querySelector("[data-cancel]").removeEventListener("click", cancel);
       dialog.close();
@@ -84,6 +93,7 @@ export function requestMfaChallenge(resolver, text = {}) {
     }
     form.addEventListener("submit", verify);
     code.addEventListener("input", digitsOnly);
+    code.addEventListener("paste", pasteCode);
     dialog.addEventListener("cancel", cancel);
     dialog.querySelector("[data-cancel]").addEventListener("click", cancel);
   });

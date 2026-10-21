@@ -25,6 +25,15 @@ const publicHostConfig = (path) => ({
       path,
       external: true,
     }));
+    for (const config of ["firebase-config.js", "manager-api-config.js"]) {
+      builder.onResolve(
+        { filter: new RegExp(config.replaceAll(".", "\\.") + "$") },
+        () => ({
+          path: path.replace("host-api-config.js", config),
+          external: true,
+        }),
+      );
+    }
   },
 });
 

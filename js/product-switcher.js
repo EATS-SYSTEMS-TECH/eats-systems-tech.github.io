@@ -96,7 +96,7 @@ export function renderProductSwitcher(
     const title = element("strong", "", `WIFIGATE ${productName(id)}`);
     title.dir = "ltr";
     const stateLabel =
-      id === "host" && state === "pending" ? copy.hostPending : copy[state];
+      ["host", "manager"].includes(id) && state === "pending" ? copy[`${id}Pending`] : copy[state];
     label.append(title, element("span", "product-switcher__state", stateLabel));
     option.append(icon, label);
     if (!enabled) {

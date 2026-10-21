@@ -29,6 +29,20 @@ function profile() {
   };
 }
 
+test("Manager invitations open their workspace while blocked and unavailable access stay closed", () => {
+  const invited = profile();
+  invited.products.manager = { state: "pending" };
+  const identity = parsePlatformIdentity(invited, "test-user");
+  assert.equal(canOpenProduct(identity, "manager"), true);
+  assert.equal(loginDestination(identity, "/dashboard/manager/?lang=he"), "/dashboard/manager/?lang=he");
+  for (const state of ["blocked", "no-plan", "unavailable", "mfa-required"]) {
+    invited.products.manager = { state };
+    const refused = parsePlatformIdentity(invited, "test-user");
+    assert.equal(canOpenProduct(refused, "manager"), false);
+    assert.equal(loginDestination(refused, "/dashboard/manager/"), "/dashboard/");
+  }
+});
+
 test("platform identity requires all server states and matches the signed-in account", () => {
   assert.equal(
     parsePlatformIdentity(profile(), "test-user").products.manager.state,

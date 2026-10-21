@@ -28,12 +28,14 @@ import {
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
 import { authErrorMessage } from "./host-auth-errors.js";
 import qrcode from "./vendor/qrcode-generator.js";
+import { createManagerDashboard } from "./manager-dashboard.js";
 
 const $ = (selector) => document.querySelector(selector);
 const language = pageLanguage();
 const copy = platformText(language);
 const selectedProduct = document.body.dataset.product;
 let currentUser;
+let managerDashboard;
 let identity;
 let session;
 let generation = 0;
@@ -78,6 +80,7 @@ if (language === "he") {
     cancel: "ביטול",
     recovery: "איבדתם את אמצעי האימות? פנו למנהל הפלטפורמה לאימות זהות ושחזור.",
     title: "אימות באמצעות אפליקציית האימות",
+    description: "הזינו את הקוד העדכני מאפליקציית המאמת כדי להמשיך בבטחה.",
     factor: "אפליקציית אימות",
     verify: "אימות",
   };
@@ -94,6 +97,8 @@ function clearSecret() {
 }
 
 function clearPrivate() {
+  managerDashboard?.close();
+  managerDashboard = undefined;
   ++generation;
   identity = undefined;
   clearSecret();
@@ -195,10 +200,10 @@ function renderProducts() {
     description.textContent = copy[id];
     // Host opens while an invitation is pending: the join-organization view
     // is where it is accepted.
-    const hostInvited = id === "host" && state === "pending";
+    const invited = ["host", "manager"].includes(id) && state === "pending";
     const status = document.createElement("span");
     status.className = "product-state";
-    status.textContent = hostInvited ? copy.hostPending : copy[state];
+    status.textContent = invited ? copy[`${id}Pending`] : copy[state];
     const actions = document.createElement("div");
     actions.className = "product-actions";
     const guidance = document.createElement("p");
@@ -211,7 +216,7 @@ function renderProducts() {
         : ({
             active: copy.readyDetail,
             "no-plan": copy.planDetail,
-            pending: hostInvited ? copy.hostPendingDetail : copy.pendingDetail,
+            pending: invited ? copy[`${id}PendingDetail`] : copy.pendingDetail,
             blocked: copy.blockedDetail,
             unavailable: copy.unavailableDetail,
           }[state] ?? "");
@@ -297,6 +302,18 @@ async function refresh() {
         `WIFIGATE ${selectedProduct[0].toUpperCase() + selectedProduct.slice(1)}`;
       $("#platform-title").textContent = $("#product-title").textContent;
       $("#product-workspace").hidden = false;
+      if (selectedProduct === "manager") {
+        managerDashboard = createManagerDashboard({
+          root: $("#manager-root"), user, language,
+          ensureRecent: async () => {
+            const token = await user.getIdTokenResult();
+            if (Date.now() / 1000 - Number(token.claims.auth_time ?? 0) > 240) {
+              await reauthenticate(user, requestMfaChallenge);
+              await user.getIdToken(true);
+            }
+          },
+        });
+      }
     } else renderProducts();
   } catch (error) {
     if (requestGeneration !== generation) return;

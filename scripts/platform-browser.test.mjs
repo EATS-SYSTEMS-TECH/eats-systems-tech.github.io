@@ -471,7 +471,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
   await t.test(
     "deep links require active product and discard external next",
     async () => {
-      const fixture = await scenario(browser);
+      const fixture = await scenario(browser, { manager: "blocked" });
       await fixture.page.goto(
         origin + "/login/?next=https%3A%2F%2Foutside.example",
       );
@@ -516,7 +516,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       await manager.locator("[role=tooltip]").waitFor();
       assert.equal(
         await manager.locator("[role=tooltip]").innerText(),
-        "A WIFIGATE administrator needs to approve your access first.",
+        "Access is blocked. Contact your administrator.",
       );
       await fixture.page.keyboard.press("Enter");
       assert.equal(new URL(fixture.page.url()).pathname, "/dashboard/pay/");
@@ -1965,7 +1965,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
     async (t) => {
       for (const language of ["en", "he"]) {
         const fixture = await scenario(browser, {
-          manager: "pending",
+          manager: "blocked",
           viewport: { width: 320, height: 800 },
         });
         t.after(() => fixture.context.close());
@@ -1985,8 +1985,8 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         assert.equal(
           reason,
           language === "he"
-            ? "מנהל WIFIGATE צריך לאשר קודם את הגישה שלכם."
-            : "A WIFIGATE administrator needs to approve your access first.",
+            ? "הגישה חסומה. פנו למנהל."
+            : "Access is blocked. Contact your administrator.",
         );
         assert.notEqual(reason.replace(/\.$/, ""), state);
         assert.deepEqual(fixture.errors, []);

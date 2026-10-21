@@ -1,0 +1,107 @@
+{
+  "schema": "wifigate-auth-v4-vectors",
+  "version": 1,
+  "note": "Fixed test inputs only. Regenerate with wifigate_mobile scripts/generate-auth-v4-vectors.mjs; the firmware copy must stay byte-identical.",
+  "inputs": {
+    "systemId": "1234567890123456",
+    "keyId": "key-1",
+    "sessionId": "0011223344556677",
+    "clientNonce": "000102030405060708090a0b0c0d0e0f",
+    "deviceNonce": "f0e1d2c3b4a5968778695a4b3c2d1e0f",
+    "clientPrivateKey": "453ba92f98ba77fc8f79d6d0d1138171dbf10a0efdab412aff2f5ab64bd86bbf",
+    "devicePrivateKey": "b866374a3a8f1d97a99c51b7d9b327f47ae2d3c823fd5b1d2812ce25c229208a",
+    "kCred": "80bddd45a16f5a5f5a94b2375b3fd8ce527d20fe36a8e86e10b489793977e0b7",
+    "ownerBootstrapSecret": "62fe7a3f0f69e19e6b1f4e15009d750ea1028ec7a7e8da03de4d486bdc73d342",
+    "command": {
+      "seq": 1,
+      "canonicalJson": "{\"cmd\":\"OPEN\",\"freshnessMs\":15000,\"tz\":\"180\",\"utc\":1790683200}"
+    },
+    "residents": [
+      {
+        "name": "admin",
+        "role": "ADMIN",
+        "countryCode": "972",
+        "localNumber": "526996332",
+        "credentialNonce": "a1b2c3d4e5f6"
+      },
+      {
+        "name": "user",
+        "role": "USER",
+        "countryCode": "1",
+        "localNumber": "4155550123",
+        "credentialNonce": "0f1e2d3c4b5a"
+      }
+    ],
+    "clientPublicKey": "0239429f50beab8cedf97e07a72c311d6b926156db38578e77254134c123f959e6",
+    "devicePublicKey": "02fce3fea05653685cb4cff1ece237ae6be7384c4f60d3432e0c307bd1452fdf84"
+  },
+  "expected": {
+    "sharedSecret": "bf9ee67b453f5cec3227745a136829b6a57aa88426a21704a66211244dc6dba0",
+    "helloKey": "881499eea74e5f29cb63e17ba8b06fb9e3ab5583f6677440c92aa9e17a16ab41",
+    "helloNonce": "07ee1de1bed1f6bdf7fbf798",
+    "credKey": "09d6418c14067bab6d786d9024f9a1f07b7399762e8858bfa3f5bb244ab5bd50",
+    "credNonce": "de7d3ad3fd6c6bbaf2999a5f",
+    "credAad": "client_cred|1234567890123456|0011223344556677",
+    "clientWriteKey": "3f61d764f3dff960bc414e345b8bff495cb343532fb9238a14b29f964a0fd538",
+    "deviceWriteKey": "45045e91d14c7bc2bf99b918b72c3b729f9dd668e7da2a88f8645d292c798e68",
+    "clientNoncePrefix": "6c5aad47857869ec",
+    "deviceNoncePrefix": "a0a7fbab33e24661",
+    "kUid": "63f26ed9ae3933d69d28ceee513857b9f2e77140f4b37ed7ecde7dd78694771c",
+    "residentCredentials": [
+      {
+        "name": "admin",
+        "userSecretMaterial": "wg-user-secret-v1|1234567890123456|ADMIN|972526996332|a1b2c3d4e5f6",
+        "userSecret": "3ed66a98a912e3993ac6edaec5ba974d75937326a837d33ca5f9eeea9ccdc1e8",
+        "uidPlaintext": "1203972526996332ffffa1b2c3d4e5f6",
+        "uid": "d3d2d1a8560ec909a9cd33a319993e6f"
+      },
+      {
+        "name": "user",
+        "userSecretMaterial": "wg-user-secret-v1|1234567890123456|USER|14155550123|0f1e2d3c4b5a",
+        "userSecret": "5058eecee002256d3b40fe92af06e35f17e6829c70c6ac206188cb50802ce0e0",
+        "uidPlaintext": "110114155550123fffff0f1e2d3c4b5a",
+        "uid": "f2cffd5675700d834a7f7edee3314e19"
+      }
+    ],
+    "cases": [
+      {
+        "name": "resident-admin",
+        "resident": "admin",
+        "credBlob": "{\"k\":\"R\",\"uid\":\"d3d2d1a8560ec909a9cd33a319993e6f\"}",
+        "credCiphertext": "1DeG43rA74toelH+kdNXvgZJeXztopu0noqg3MfiFsfbLzMIPCSyKXfKE4XyZgDLlr6hJr1C7HBOgfFS5TAOBm1H",
+        "credBlobHash": "aee8bdad49c5fe38a07f06385a2640dc2951f729ad1d17afadbb3b2c4956155a",
+        "credSecret": "3ed66a98a912e3993ac6edaec5ba974d75937326a837d33ca5f9eeea9ccdc1e8",
+        "transcriptHash": "e325209d266605c59972c46ec4ad298c287e7d755f8f75aa9f61a24013b32f09",
+        "authKey": "12fcc657c25256c0c75dc2ca0987c97ca5b0059f09f9a358cb6dc220281dfdfe",
+        "credProof": "fdf968e9cc3946f8a9dfff1d67479766dde4129ebaa61591e0f681430576356b",
+        "commandHash": "fe9b6ad0c2dd5ab5f613cc8e440effe95debe6e2e6dcb07563edb5e6b902ddb0",
+        "authTag": "8284e0f175485820f74b0aed351d47da64d01fcc6c7aba7fb7aae3c7a63b89a9"
+      },
+      {
+        "name": "resident-user",
+        "resident": "user",
+        "credBlob": "{\"k\":\"R\",\"uid\":\"f2cffd5675700d834a7f7edee3314e19\"}",
+        "credCiphertext": "1DeG43rA74toelH+kdNXvgRIfijv98+6nImniZS/Hs2Od2cKOHK3fyPAGY31ZgeUlr5liwg28Yt9xUUCeTMb74HE",
+        "credBlobHash": "e175145f7c970119c52ab5672ca58690c1e8a1e2739d5b2f777a7575b84f216f",
+        "credSecret": "5058eecee002256d3b40fe92af06e35f17e6829c70c6ac206188cb50802ce0e0",
+        "transcriptHash": "5647edc2c0136e6833eacf3d7041cde6d0bc14f087ac97e4e056a719e037c31a",
+        "authKey": "a1183510a5b42bca9aebb0116b39fc87000a0a8562cc31bd40e4d99f764f9370",
+        "credProof": "b477d5af1e24d1827b5784a66cfa1b6e58dfe10afb0ba64a674ee14d4ed0c52d",
+        "commandHash": "fe9b6ad0c2dd5ab5f613cc8e440effe95debe6e2e6dcb07563edb5e6b902ddb0",
+        "authTag": "b7e2c669593aae4748508d2354947a7cc6eb085d9f8cae621cfcf0f1d9462cb7"
+      },
+      {
+        "name": "owner-bootstrap",
+        "credBlob": "{\"k\":\"O\"}",
+        "credCiphertext": "1DeG43rA8os5w8YH0SauKBThb4YG4LaiLQ==",
+        "credBlobHash": "2b100b03308530578ec7e88a9bb7a1ea0cbc60d118ae836e529e25a6179c8f89",
+        "credSecret": "62fe7a3f0f69e19e6b1f4e15009d750ea1028ec7a7e8da03de4d486bdc73d342",
+        "transcriptHash": "d7fedba60c721319ab07a080d5b45a4473b607337f5523b034ad76263b22a1ec",
+        "authKey": "e9989c59ed4d8d6cebda62094e6a14aa83b6b2c4d5fda9d83a593d6bf620ea22",
+        "credProof": "abb7b78b6cd358b113a70719c6789dc5742a89f57025f5df9d40ed308a7b0691",
+        "commandHash": "fe9b6ad0c2dd5ab5f613cc8e440effe95debe6e2e6dcb07563edb5e6b902ddb0",
+        "authTag": "d6bebefae12833f50788a2c4cc7b977a58d7dd6c597230e8efc37e7de445455f"
+      }
+    ]
+  }
+}

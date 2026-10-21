@@ -1,6 +1,7 @@
 export { createProfile } from "./auth/create-profile.js";
 export { getProfile } from "./auth/get-profile.js";
 export { getPlatformProfile } from "./auth/get-platform-profile.js";
+export { managerRequest } from "./manager.js";
 export { getAccountDeletion, deleteAccount } from "./auth/account-deletion.js";
 export {
   approveEmail,

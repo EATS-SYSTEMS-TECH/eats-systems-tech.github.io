@@ -45,6 +45,8 @@ const english = {
   allProducts: "All products",
   switchProduct: "Switch product",
   hostPending: "Invitation waiting",
+  managerPending: "Invitation waiting",
+  managerPendingDetail: "You're invited to join an organization. Open Manager to accept.",
   hostPendingDetail:
     "You're invited to join an organization. Open Host to accept.",
   reasonNoPlan: "Not in your account. Contact us to join.",
@@ -153,6 +155,8 @@ const hebrew = {
   allProducts: "כל המוצרים",
   switchProduct: "החלפת מוצר",
   hostPending: "מחכה לכם הצטרפות לארגון",
+  managerPending: "מחכה לכם הצטרפות לארגון",
+  managerPendingDetail: "ארגון ביקש לצרף אתכם. פתחו את Manager כדי לאשר.",
   hostPendingDetail: "ארגון ביקש לצרף אתכם. פתחו את Host כדי לאשר.",
   reasonNoPlan: "לא כלול בחשבון שלכם. צרו קשר כדי להצטרף.",
   reasonPending: "מנהל WIFIGATE צריך לאשר קודם את הגישה שלכם.",

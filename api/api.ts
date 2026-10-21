@@ -42,6 +42,9 @@ const localRejectionCodes = new Set([
   "GATE_PROOF_EXPIRED",
   "INVALID_FACTORY_IDENTITY",
   "HOST_IDENTITY_MISMATCH",
+  "MANAGER_ACCESS_DENIED",
+  "APP_CHECK_REQUIRED",
+  "TOTP_REQUIRED",
 ]);
 
 // On the signed-in person's own routes (My systems), an organization named in

@@ -60,7 +60,7 @@ export function hasHostPlan(identity) {
 // invitation can be accepted there.
 export function canOpenProduct(identity, id) {
   const state = identity?.products?.[id]?.state;
-  return state === "active" || (id === "host" && state === "pending");
+  return state === "active" || (["host", "manager"].includes(id) && state === "pending");
 }
 
 // Sign-in is refused when no product is open to the account at all: every

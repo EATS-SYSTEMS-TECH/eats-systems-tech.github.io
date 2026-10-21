@@ -218,7 +218,7 @@ function choose(
       target.tabIndex = -1;
       target.focus({ preventScroll: true });
     }
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (previous !== selected) window.scrollTo({ top: 0, behavior: "instant" });
   }
 }
 
