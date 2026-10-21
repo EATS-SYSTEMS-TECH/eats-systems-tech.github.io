@@ -2,6 +2,156 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { startSite } from "./platform-test-fixtures.mjs";
 
+test("closing during Manager connection setup never leaves late demand or an active socket", async (t) => {
+  const { origin, browser } = await startSite(t);
+  const page = await browser.newPage();
+  t.after(() => page.close());
+  await page.route(origin + "/manager-launch-test", (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: "<!doctype html><html><body></body></html>",
+    }),
+  );
+  await page.goto(origin + "/manager-launch-test");
+  const results = await page.evaluate(async () => {
+    const { ManagerConnection } = await import("/js/manager-connection.js");
+    const outcomes = [];
+    for (const phase of ["identity", "request"]) {
+      let release, entered;
+      const held = new Promise((r) => {
+        release = r;
+      });
+      const reached = new Promise((r) => {
+        entered = r;
+      });
+      const calls = [],
+        sockets = [];
+      const c = new ManagerConnection({
+        user: { uid: "synthetic-launch-test" },
+        WebSocketImpl: class {
+          constructor() {
+            sockets.push(true);
+          }
+        },
+        api: async (path) => {
+          calls.push(path);
+          if (path.endsWith("/identity")) {
+            if (phase === "identity") {
+              entered();
+              await held;
+            }
+            return { systemId: "gate" };
+          }
+          if (path === "/connection-requests") {
+            entered();
+            await held;
+            return { requestId: "late-request" };
+          }
+          if (path.endsWith("/cancel")) return { cancelled: true };
+          throw new Error("Unexpected request");
+        },
+      });
+      const opening = c.open("gate").catch((error) => error.message);
+      await reached;
+      const duplicate = await c.open("gate").catch((error) => error.message);
+      c.close();
+      release();
+      outcomes.push({
+        phase,
+        result: await opening,
+        duplicate,
+        calls,
+        sockets: sockets.length,
+        keyCleared: c.key === null,
+        closed: c.closed,
+      });
+    }
+    return outcomes;
+  });
+  for (const r of results) {
+    assert.equal(r.result, "CANCELLED");
+    assert.equal(r.duplicate, "BUSY");
+    assert.equal(r.sockets, 0);
+    assert.equal(r.keyCleared, true);
+    assert.equal(r.closed, true);
+    assert.equal(
+      r.calls.includes("/connection-requests/late-request/cancel"),
+      r.phase === "request",
+    );
+    assert.equal(
+      r.calls.includes("/connection-requests"),
+      r.phase === "request",
+    );
+  }
+});
+
+test("Manager handles repeated empty cursors and discards invitations loaded after navigating away", async (t) => {
+  const { origin, browser } = await startSite(t);
+  const page = await browser.newPage();
+  t.after(() => page.close());
+  await page.route(origin + "/manager-launch-test", (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: "<!doctype html><html><body></body></html>",
+    }),
+  );
+  await page.goto(origin + "/manager-launch-test");
+  await page.evaluate(async () => {
+    document.body.replaceChildren();
+    const root = document.createElement("main");
+    document.body.append(root);
+    const { createManagerDashboard } = await import("/js/manager-dashboard.js");
+    window.pageReads = 0;
+    window.dashboard = createManagerDashboard({
+      root,
+      user: { uid: "fixture" },
+      api: async (path) => {
+        if (path === "/me")
+          return {
+            role: "user",
+            account: { id: "account" },
+            organizations: [],
+          };
+        if (path.startsWith("/systems?")) {
+          window.pageReads++;
+          return { items: [], nextCursor: "repeated" };
+        }
+        if (path.startsWith("/invitations?"))
+          return new Promise((resolve) => {
+            window.finishInvitations = () =>
+              resolve({
+                items: [{ id: "late", email: "late@example.test" }],
+                nextCursor: null,
+              });
+          });
+        throw new Error("Unexpected request");
+      },
+    });
+    await window.dashboard.ready;
+  });
+  assert.equal(await page.evaluate(() => window.pageReads), 2);
+  await page
+    .getByRole("status")
+    .filter({ hasText: "Unable to complete" })
+    .waitFor();
+  await page.getByRole("button", { name: "Invitations", exact: true }).click();
+  await page.waitForFunction(
+    () => typeof window.finishInvitations === "function",
+  );
+  await page
+    .getByRole("button", { name: "Organizations", exact: true })
+    .click();
+  await page.evaluate(() => window.finishInvitations());
+  await page
+    .getByRole("heading", { name: "Organizations", exact: true })
+    .waitFor();
+  assert.equal(await page.getByText("late@example.test").count(), 0);
+  assert.equal(
+    await page.getByRole("button", { name: "Accept invitation" }).count(),
+    0,
+  );
+});
+
 test("Manager workspace supports English/Hebrew desktop/mobile, organizations and deliberate gate actions", async (t) => {
   const { origin, browser } = await startSite(t);
   for (const language of ["en", "he"]) {

@@ -125,7 +125,7 @@ export function createManagerDashboard({
     try {
       await action();
     } catch (error) {
-      if (error.message !== "CANCELLED") say(errorText(error), true);
+      if (!closed && error.message !== "CANCELLED") say(errorText(error), true);
     } finally {
       if (b) b.disabled = false;
     }
@@ -227,16 +227,25 @@ export function createManagerDashboard({
   }
   async function listAll(path) {
     const rows = [];
+    const epoch = generation,
+      seen = new Set();
     let next = null;
     do {
+      if (closed || epoch !== generation) throw new Error("CANCELLED");
       const r = await api(
         path +
           (path.includes("?") ? "&" : "?") +
           "limit=100" +
           (next ? "&cursor=" + encodeURIComponent(next) : ""),
-      );
+      ).catch((error) => {
+        if (closed || epoch !== generation) throw new Error("CANCELLED");
+        throw error;
+      });
+      if (closed || epoch !== generation) throw new Error("CANCELLED");
       rows.push(...r.items);
       next = r.nextCursor;
+      if (next && seen.has(next)) throw new Error("LIST_LIMIT");
+      if (next) seen.add(next);
       if (rows.length > 10000) throw new Error("LIST_LIMIT");
     } while (next);
     return rows;
@@ -398,6 +407,7 @@ export function createManagerDashboard({
     say("");
   }
   async function assignSystem(system) {
+    stop();
     view.replaceChildren(
       node("h3", t("שיוך מערכת לארגון", "Assign system to organization")),
     );

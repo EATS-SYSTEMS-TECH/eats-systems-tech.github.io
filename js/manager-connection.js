@@ -40,25 +40,56 @@ export class ManagerConnection {
     this.busy = false;
   }
   async open(systemId) {
+    if (this.closed || this.opening || this.session) throw new Error("BUSY");
+    this.opening = true;
+    try {
+      return await this.openSession(systemId);
+    } catch (error) {
+      this.close();
+      throw error;
+    } finally {
+      this.opening = false;
+    }
+  }
+  requireOpen() {
+    if (!this.closed) return;
+    eraseManagerSession(this.session);
+    this.session = null;
+    this.key = null;
+    throw new Error("CANCELLED");
+  }
+  async openSession(systemId) {
     this.onState("waiting");
     this.key = await managerKey(this.user.uid);
+    this.requireOpen();
     this.sessionId = randomHex(8);
     this.identity = await this.api(
       `/gates/${encodeURIComponent(systemId)}/identity`,
     );
+    this.requireOpen();
     const clientPublicKey = bytesHex(
       await crypto.subtle.exportKey("raw", this.key.publicKey),
     );
+    this.requireOpen();
     const request = await this.api("/connection-requests", "POST", {
       systemId,
       clientPublicKey,
       sessionId: this.sessionId,
     });
     this.requestId = request.requestId;
+    if (this.closed) {
+      await this.api(
+        `/connection-requests/${this.requestId}/cancel`,
+        "POST",
+        {},
+      ).catch(() => {});
+      this.requireOpen();
+    }
     const end = Date.now() + 90000;
     let state;
     while (!this.closed && Date.now() < end) {
       state = await this.api(`/connection-requests/${this.requestId}`);
+      this.requireOpen();
       if (state.state === "ready" && state.nonce && state.clientTicket) break;
       await sleep(1500, this.abort.signal);
     }
@@ -124,6 +155,7 @@ export class ManagerConnection {
         { once: true },
       );
     });
+    this.requireOpen();
     this.socket.send(
       JSON.stringify({
         type: "client_auth",
@@ -132,6 +164,7 @@ export class ManagerConnection {
       }),
     );
     await ready;
+    this.requireOpen();
     const grant = await this.authorize(state.nonce);
     const handshake = await managerHandshake({
       identity: this.identity,
@@ -139,6 +172,7 @@ export class ManagerConnection {
       sessionId: this.sessionId,
       grant,
     });
+    this.requireOpen();
     const response = this.next((v) =>
       ["device_hello", "hello_error", "server_busy"].includes(v.type),
     );
@@ -147,11 +181,13 @@ export class ManagerConnection {
       handshake.state,
       await response,
     );
+    this.requireOpen();
     this.onState("active");
     this.capabilities = await this.command("ADMIN_GET_CAPABILITIES", {
       clientAdminVersions: [1],
       clientBulkVersions: [1],
     });
+    this.requireOpen();
     this.heartbeat = setInterval(() => {
       if (!this.busy && !this.transfer)
         void this.command("ADMIN_PING", {}).catch((error) => this.fail(error));
@@ -184,6 +220,7 @@ export class ManagerConnection {
       "POST",
       { nonce },
     );
+    this.requireOpen();
     const response = this.next((v) => v.type === "manager_authorized");
     this.socket.send(JSON.stringify({ type: "manager_authorize", ...grant }));
     await response;
