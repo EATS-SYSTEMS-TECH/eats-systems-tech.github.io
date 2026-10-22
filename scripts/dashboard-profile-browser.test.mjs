@@ -161,10 +161,10 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               assert.equal(await card.locator(".profile-product-billing").count(), 1);
               assert.equal(await card.locator(".product-actions a").count(), 1);
             }
-            for (const count of await subscriptions
-              .locator('[data-subscription-value="active"]')
+            for (const status of await subscriptions
+              .locator('[data-subscription-value="status"]')
               .allTextContents())
-              assert.equal(count, "0");
+              assert.equal(status, language === "he" ? "כבוי" : "Inactive");
             for (const amount of await subscriptions
               .locator(
                 '[data-subscription-value="monthly"], #profile-subscription-total',

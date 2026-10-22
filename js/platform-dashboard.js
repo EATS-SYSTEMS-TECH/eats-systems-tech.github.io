@@ -528,9 +528,9 @@ function renderSubscriptionPreview() {
     list.className = "profile-product-billing";
     for (const [label, value, key] of [
       [
-        language === "he" ? "מנויים פעילים" : "Active subscriptions",
-        "0",
-        "active",
+        language === "he" ? "מנוי" : "Subscription",
+        language === "he" ? "כבוי" : "Inactive",
+        "status",
       ],
       [language === "he" ? "תשלום חודשי" : "Monthly payment", zero, "monthly"],
     ]) {
