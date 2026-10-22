@@ -206,8 +206,8 @@ export function createManagerExamples({
     container.append(message);
   }
   function renderCards(container, systems = managerExampleSystems) {
-    const section = el("section", undefined, "manager-examples"),
-      title = el("h3", t("דוגמאות", "Examples"));
+    const section = el("details", undefined, "manager-examples dashboard-examples"),
+      title = el("summary", t("דוגמאות", "Examples"));
     section.append(
       title,
       el(
@@ -269,11 +269,11 @@ export function createManagerExamples({
       grid.append(card);
     }
     section.append(grid);
-    container.append(section);
+    container.prepend(section);
   }
   function renderOrganizationCard(container) {
-    const section = el("section", undefined, "manager-examples");
-    section.append(el("h3", t("ארגון לדוגמה", "Example organization")));
+    const section = el("details", undefined, "manager-examples dashboard-examples");
+    section.append(el("summary", t("ארגון לדוגמה", "Example organization")));
     const card = el("article", undefined, "manager-card manager-example-card");
     card.dataset.exampleOrganization = "true";
     card.append(badge(), el("h4", managerExampleOrganization.name));
@@ -299,7 +299,7 @@ export function createManagerExamples({
       ),
     );
     section.append(card);
-    container.append(section);
+    container.prepend(section);
   }
   function renderBulk(container, systems = managerExampleSystems) {
     container.append(

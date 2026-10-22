@@ -1,5 +1,5 @@
 import { hostText } from "./host-locale.js";
-import { node, infoTip } from "./host-ui.js";
+import { node } from "./host-ui.js";
 import {
   exampleSystems,
   readExampleLinks,
@@ -30,26 +30,23 @@ export async function renderExampleGroup(
   { user, organizations = [], isCurrent },
 ) {
   const titleId = `examples-title-${++groups}`;
-  const group = node("section", undefined, {
-    class: "systems-group systems-group--examples",
+  const group = node("details", undefined, {
+    class: "systems-group systems-group--examples dashboard-examples",
     "aria-labelledby": titleId,
     "data-examples": "",
   });
-  const heading = node("h3", undefined, {
+  const heading = node("summary", undefined, {
     id: titleId,
     class: "systems-group__title",
   });
-  heading.append(
-    node("span", hostText("Examples")),
-    infoTip(
-      hostText(
-        "Examples always stay here so you can try things. They never open a gate.",
-      ),
-    ),
-  );
+  heading.append(node("span", hostText("Examples")));
   const holder = node("div");
-  group.append(heading, holder);
-  container.append(group);
+  group.append(
+    heading,
+    node("p", hostText("Examples always stay here so you can try things. They never open a gate.")),
+    holder,
+  );
+  container.prepend(group);
   let links = await readExampleLinks(user.uid);
   if (!isCurrent?.()) return;
   const known = (link) =>

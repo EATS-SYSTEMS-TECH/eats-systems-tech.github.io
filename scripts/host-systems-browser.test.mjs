@@ -365,7 +365,11 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
           ["Lobby and floors", "Not linked"],
         ],
       );
-      // The examples follow, with the Example pill and no remove.
+      // Examples lead the view inside a collapsed dropdown.
+      const dropdown = view.locator("details[data-examples]");
+      assert.equal(await dropdown.getAttribute("open"), null);
+      assert.equal(await dropdown.evaluate(el => el.parentElement.firstElementChild === el), true);
+      await dropdown.locator("summary").click();
       const examples = view.locator("[data-examples] .system-card");
       assert.deepEqual(
         await examples.evaluateAll((cards) =>
@@ -1400,6 +1404,8 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         const example = page.locator(
           '[data-workspace-view="systems"] [data-system-id="example-room-212"]',
         );
+        if (await example.locator("xpath=ancestor::details").getAttribute("open") === null)
+          await example.locator("xpath=ancestor::details/summary").click();
         await example.locator('[data-action="link"]').click();
         const dialog = page.locator("dialog.system-dialog[open]");
         await dialog.locator('input[value="grand"]').check();
@@ -1419,6 +1425,8 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
             ),
           ["try", "unlink"],
         );
+        if (await example.locator("xpath=ancestor::details").getAttribute("open") === null)
+          await example.locator("xpath=ancestor::details/summary").click();
         await example.locator('[data-action="unlink"]').click();
         await example.locator(".system-badge--none").waitFor();
         assert.equal((await requests(page)).length, before, "no API call");
@@ -1440,6 +1448,8 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         const example = page.locator(
           `[data-workspace-view="${view}"] [data-system-id="example-room-212"]`,
         );
+        if (await example.locator("xpath=ancestor::details").getAttribute("open") === null)
+          await example.locator("xpath=ancestor::details/summary").click();
         await example.locator('[data-action="link"]').click();
         const dialog = page.locator("dialog.system-dialog[open]");
         await dialog.locator('input[value="grand"]').check();
@@ -1476,6 +1486,8 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         await page.reload();
         await page.evaluate(() => window.workspaceReady);
         await loaded(page, view);
+        if (await example.locator("xpath=ancestor::details").getAttribute("open") === null)
+          await example.locator("xpath=ancestor::details/summary").click();
         await example.locator('[data-action="unlink"]').click();
         await example.locator(".system-badge--none").waitFor();
         assert.equal(
@@ -1508,6 +1520,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         network.push(request.resourceType() + " " + request.url());
       });
       const before = (await requests(page)).length;
+      await page.locator("details[data-examples] > summary").click();
       await page
         .locator('[data-system-id="example-room-212"] [data-action="try"]')
         .click();

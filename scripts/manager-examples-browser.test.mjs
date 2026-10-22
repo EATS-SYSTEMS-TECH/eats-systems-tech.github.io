@@ -52,6 +52,12 @@ test("Manager personal navigation and complete sample workspaces never request r
             name: he ? "הארגונים שלי" : "My organizations",
             exact: true,
           });
+        await page.locator(".dashboard-examples > summary").waitFor();
+        assert.equal(await page.locator(".dashboard-examples").getAttribute("open"), null);
+        assert.equal(await page.locator(".dashboard-examples").evaluate(el => el.parentElement.firstElementChild === el), true);
+        if (process.env.MANAGER_EXAMPLE_SCREENSHOTS)
+          await page.screenshot({ path: `${process.env.MANAGER_EXAMPLE_SCREENSHOTS}/manager-examples-dropdown-${language}-${width}.png`, fullPage: true });
+        await page.locator(".dashboard-examples > summary").click();
         await page.locator("[data-example-system]").last().waitFor();
         const reject = page.locator("[data-cookie-reject]");
         if (await reject.isVisible()) await reject.click();
@@ -245,6 +251,7 @@ test("Manager personal navigation and complete sample workspaces never request r
         );
         assert.equal(sockets, 0);
         await mySystems.click();
+        await page.locator(".dashboard-examples > summary").click();
         await page
           .locator('[data-example-system="example-manager-dual"]')
           .getByRole("button")
@@ -261,6 +268,7 @@ test("Manager personal navigation and complete sample workspaces never request r
           .selectOption("DEMO-24981");
         await content.getByText("438/1000", { exact: true }).waitFor();
         await myOrgs.click();
+        await page.locator(".dashboard-examples > summary").click();
         await page
           .locator("[data-example-organization]")
           .getByRole("button")
@@ -336,6 +344,7 @@ test("Manager users and organization administrators never receive platform navig
         .locator(".manager-nav")
         .getByRole("button", { name: "My organizations", exact: true })
         .click();
+      await fixture.page.locator(".dashboard-examples > summary").click();
       await fixture.page.locator("[data-example-organization]").waitFor();
       assert.equal(
         await fixture.page.locator(".manager-platform-nav").count(),
