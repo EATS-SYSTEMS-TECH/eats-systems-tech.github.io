@@ -957,7 +957,7 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   $("head").append('<link rel="stylesheet" href="' + prefix + 'css/site-cart.css?v=20261020b">');
   $("script[src*='js/site-account.js']").remove();
   $("script[src*='js/navigation.js']")
-    .attr("src", prefix + "js/navigation.js?v=20261007a")
+    .attr("src", prefix + "js/navigation.js?v=20261022outside1")
     .after('\n  <script src="' + prefix + 'js/site-account.js?v=20261013a" defer></script>');
   $("body").append('<script src="' + prefix + 'js/site-cart.js?v=20261016a" defer></script>');
 }

@@ -17,18 +17,33 @@ function setupNav() {
   const navWrapper = $(".nav__links-wrapper");
   if (!toggle || !navWrapper) return;
 
+  const closeMenu = () => {
+    navWrapper.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+  };
+
   toggle.addEventListener("click", () => {
     const isOpen = navWrapper.classList.toggle("is-open");
     toggle.setAttribute("aria-expanded", String(isOpen));
   });
 
+  document.addEventListener("pointerdown", (event) => {
+    if (
+      navWrapper.classList.contains("is-open") &&
+      !navWrapper.contains(event.target) &&
+      !toggle.contains(event.target)
+    ) closeMenu();
+  }, true);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && navWrapper.classList.contains("is-open")) {
+      closeMenu();
+      toggle.focus();
+    }
+  });
+
   $$(".nav__link", navWrapper).forEach((link) => {
-    link.addEventListener("click", () => {
-      if (navWrapper.classList.contains("is-open")) {
-        navWrapper.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-      }
-    });
+    link.addEventListener("click", closeMenu);
   });
 }
 
