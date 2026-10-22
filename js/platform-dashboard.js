@@ -72,8 +72,8 @@ if (!selectedProduct) {
   $(".platform-eyebrow").textContent = "MY WIFIGATE";
   $("[data-copy=intro]").textContent =
     language === "he"
-      ? "פרטי החשבון, אבטחה וסביבות העבודה שלכם — במקום אחד."
-      : "Your account, security and workspaces in one place.";
+      ? "פרטים אישיים, אבטחה, מנויים ותשלומים — במקום אחד."
+      : "Your personal details, security, subscriptions and payments in one place.";
 }
 renderPlatformLanguage(
   $("#platform-language"),
@@ -138,6 +138,8 @@ function clearPrivate() {
   if (avatar) avatar.textContent = "";
   const panel = $("#platform-account-panel");
   if (panel) panel.hidden = true;
+  const management = $(".profile-account-management");
+  if (management) management.hidden = true;
   $("#profile-details")?.replaceChildren();
   $("#profile-access")?.replaceChildren();
   $("#profile-subscription-plans")?.replaceChildren();
@@ -293,6 +295,8 @@ function renderProducts() {
     showSecurity();
   const panel = $("#platform-account-panel");
   if (panel) panel.hidden = false;
+  const management = $(".profile-account-management");
+  if (management) management.hidden = false;
 }
 
 async function refresh() {

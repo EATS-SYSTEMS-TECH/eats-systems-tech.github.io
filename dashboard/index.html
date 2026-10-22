@@ -9,8 +9,8 @@
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" />
     <link rel="stylesheet" href="/css/platform.css?v=20261022b" />
-    <link rel="stylesheet" href="/css/dashboard-header.css?v=20261022profile3" />
-    <script type="module" src="/js/platform-dashboard.bundle.js?v=20261022profile3"></script>
+    <link rel="stylesheet" href="/css/dashboard-header.css?v=20261022profile4" />
+    <script type="module" src="/js/platform-dashboard.bundle.js?v=20261022profile4"></script>
   </head>
   <body data-product="" class="platform-page">
     <main class="platform-shell">
@@ -61,8 +61,8 @@
             aria-hidden="true"
           ></span>
           <div>
-            <h2 id="platform-account-title" data-copy="account">
-              Your account
+            <h2 id="platform-account-title" data-profile-en="Personal details and security" data-profile-he="פרטים אישיים ואבטחה">
+              Personal details and security
             </h2>
             <p class="platform-account__identity">
               <strong id="account-name" dir="auto"></strong>
@@ -75,8 +75,6 @@
           settings belong to this account.
         </p>
         <dl id="profile-details" class="profile-details"></dl>
-        <h3 data-profile-en="Product access" data-profile-he="גישה למוצרים">Product access</h3>
-        <div id="profile-access" class="profile-access"></div>
         <section id="profile-subscriptions" class="profile-subscriptions" aria-labelledby="profile-subscriptions-title" data-billing-mode="preview">
           <div class="profile-subscriptions-heading">
             <h3 id="profile-subscriptions-title" data-profile-en="My subscriptions" data-profile-he="המנויים שלי">My subscriptions</h3>
@@ -89,25 +87,11 @@
             <strong id="profile-subscription-total" dir="auto"></strong>
           </div>
         </section>
-        <div class="platform-danger">
-          <div>
-            <strong data-copy="deleteAccount">Delete account</strong>
-            <p data-copy="deleteAccountDetail">
-              Cancels all your subscriptions and removes your user from WIFIGATE
-              systems. This can't be undone.
-            </p>
-          </div>
-          <button
-            id="delete-account"
-            class="platform-danger__button"
-            type="button"
-            data-copy="deleteAccount"
-          >
-            Delete account
-          </button>
-        </div>
+        <h3 data-profile-en="Product access" data-profile-he="גישה למוצרים">Product access</h3>
+        <div id="profile-access" class="profile-access"></div>
+
       </section>
-      <h2 class="profile-products-title" data-profile-en="My workspaces" data-profile-he="סביבות העבודה שלי">My workspaces</h2>
+      <h2 class="profile-products-title" data-profile-en="Open a workspace" data-profile-he="מעבר לסביבת עבודה">Open a workspace</h2>
       <section
         id="product-grid"
         class="product-grid"
@@ -211,6 +195,26 @@
           Lost your authenticator? Contact a platform owner for identity
           verification and recovery.
         </p>
+      </section>
+      <section class="portal-panel profile-account-management" aria-labelledby="profile-account-management-title" hidden>
+        <h2 id="profile-account-management-title" data-profile-en="Account management" data-profile-he="ניהול החשבון">Account management</h2>
+        <div class="platform-danger">
+          <div>
+            <strong data-copy="deleteAccount">Delete account</strong>
+            <p data-copy="deleteAccountDetail">
+              Cancels all your subscriptions and removes your user from WIFIGATE
+              systems. This can't be undone.
+            </p>
+          </div>
+          <button
+            id="delete-account"
+            class="platform-danger__button"
+            type="button"
+            data-copy="deleteAccount"
+          >
+            Delete account
+          </button>
+        </div>
       </section>
       <section
         id="account-deleted"

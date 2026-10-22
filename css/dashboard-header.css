@@ -370,6 +370,66 @@ body[data-product]
 .profile-products-title:has(+ #product-grid[hidden]) {
   display: none;
 }
+/* Product entry is secondary to the personal account and billing overview. */
+body[data-product=""] #product-grid {
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+body[data-product=""] .product-tile {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto minmax(120px, auto);
+  grid-template-areas: "icon name status actions" "icon guidance guidance actions";
+  align-items: center;
+  gap: 6px 14px;
+  padding: 16px;
+  border-radius: 6px;
+  box-shadow: none;
+  transform: none;
+}
+body[data-product=""] .product-tile::before {
+  display: none;
+}
+body[data-product=""] .product-icon {
+  grid-area: icon;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+}
+body[data-product=""] .product-icon svg {
+  width: 22px;
+  height: 22px;
+}
+body[data-product=""] .product-tile h2 {
+  grid-area: name;
+  font-size: 15px;
+}
+body[data-product=""] .product-description {
+  display: none;
+}
+body[data-product=""] .product-state {
+  grid-area: status;
+  justify-self: start;
+}
+body[data-product=""] .product-guidance {
+  grid-area: guidance;
+  font-size: 12px;
+}
+body[data-product=""] .product-actions {
+  grid-area: actions;
+  align-self: center;
+  margin: 0;
+  padding: 0;
+  max-width: 280px;
+}
+body[data-product=""] .product-actions :is(a, button) {
+  min-height: 44px;
+  border-radius: 6px;
+  padding-inline: 16px;
+  font-size: 13px;
+}
+body[data-product=""] .profile-account-management {
+  margin-top: 28px;
+}
 /* Host retains its drawer and invitation bell, with the same header controls. */
 body.host-app .host-topbar {
   z-index: 50;
@@ -429,6 +489,15 @@ body.host-app.host-menu-empty .host-topbar .workspace-menu-toggle {
   }
 }
 @media (max-width: 650px) {
+  body[data-product=""] .product-tile {
+    grid-template-columns: 40px minmax(0, 1fr);
+    grid-template-areas: "icon name" "status status" "guidance guidance" "actions actions";
+    gap: 10px;
+  }
+  body[data-product=""] .product-actions {
+    width: 100%;
+    max-width: none;
+  }
   body[data-product] :is(.platform-header, .host-topbar) {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 12px 8px;
