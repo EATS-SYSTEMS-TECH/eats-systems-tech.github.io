@@ -116,6 +116,7 @@ test("Manager handles repeated empty cursors and discards invitations loaded aft
           window.pageReads++;
           return { items: [], nextCursor: "repeated" };
         }
+        if(path.startsWith("/organizations?")) return {items:[],nextCursor:null};
         if (path.startsWith("/invitations?"))
           return new Promise((resolve) => {
             window.finishInvitations = () =>
@@ -143,7 +144,7 @@ test("Manager handles repeated empty cursors and discards invitations loaded aft
     .click();
   await page.evaluate(() => window.finishInvitations());
   await page
-    .getByRole("heading", { name: "Organizations", exact: true })
+    .getByRole("heading", { name: "Organization management", exact: true })
     .waitFor();
   assert.equal(await page.getByText("late@example.test").count(), 0);
   assert.equal(

@@ -82,6 +82,16 @@ Axios endpoints live in api/auth/ and share api/api.ts. After editing portal sou
 
 The canonical production API is `https://api.wifigate.io`. All local API clients use `http://127.0.0.1:8001` when the site runs on port 8000; staging 8100 uses API 8101. Configuration lives in `js/host-api-config.js`. CORS must allow the exact frontend origin and the required GET/PUT/POST/DELETE methods, with Authorization, Content-Type and Idempotency-Key headers. The application does not send a Cache-Control request header.
 
+### Manager workspace administration
+
+Manager displays the signed-in email and verified Manager role(s) in its account
+card. Platform Manager admins have an Overview and separate customer, platform
+admin, organization administrator and organization directories. Organizations are
+shown as columns with their owner, administrator appointments and active linked
+system count. Mutations use server authorization, recent authentication and
+confirmation for revocation/archive; archived organizations retain history and
+other product entitlements. The directory uses bounded pages.
+
 ### Manager deployment configuration
 
 All authenticated website API requests now attach App Check through the shared

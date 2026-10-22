@@ -28,6 +28,13 @@ test("platform Manager admin can browse customer metadata and deliberately disco
           const api = async (path, method, body) => {
             if (path === "/me")
               return { role: "admin", account: null, organizations: [] };
+            if (path === "/admin/overview")
+              return {
+                admins: 1,
+                users: 1,
+                organizationAdmins: 0,
+                organizations: 0,
+              };
             if (path.startsWith("/invitations?"))
               return { items: [], nextCursor: null };
             if (path.startsWith("/admin/accounts?"))
@@ -91,8 +98,12 @@ test("platform Manager admin can browse customer metadata and deliberately disco
           await window.dashboard.ready;
         }, language);
         const he = language === "he";
-        // An operator lands on customer administration without first
-        // navigating away from an irrelevant empty invitations screen.
+        // Platform administration opens on the overview; customer metadata
+        // remains available without opening a gate-management session.
+        await page
+          .locator(".manager-nav")
+          .getByRole("button", { name: "WIFIGATE Manager user", exact: true })
+          .click();
         await page
           .getByText("customer@example.test", { exact: true })
           .waitFor();

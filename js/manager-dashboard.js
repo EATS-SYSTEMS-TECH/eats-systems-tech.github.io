@@ -23,7 +23,7 @@ export function createManagerDashboard({
   root,
   user,
   language = "en",
-  ensureRecent = async () => {},
+  ensureRecent: verifyRecent = async () => {},
   api: customApi,
   Connection = ManagerConnection,
 }) {
@@ -44,7 +44,8 @@ export function createManagerDashboard({
     currentTab = "overview",
     currentRows = [],
     currentData,
-    cursor = null;
+    cursor = null,
+    currentView = "";
   const shell = node("div", undefined, "manager-shell"),
     nav = node("nav", undefined, "manager-nav"),
     main = node("div", undefined, "manager-main");
@@ -89,6 +90,22 @@ export function createManagerDashboard({
         "יש לאמת את הזהות מחדש לפני הפעולה.",
         "Verify your identity again before this action.",
       ),
+      ORGANIZATION_HAS_SYSTEMS: t(
+        "יש להסיר את שיוך המערכות לפני הסרת הארגון.",
+        "Unassign linked systems before removing the organization.",
+      ),
+      ORGANIZATION_HAS_MEMBERS: t(
+        "יש לבטל את מינויי מנהלי הארגון לפני הסרתו.",
+        "Revoke organization administrator appointments before removing the organization.",
+      ),
+      SELF_CHANGE_FORBIDDEN: t(
+        "לא ניתן לבטל את הרשאת המנהל של עצמכם.",
+        "You cannot revoke your own administrator access.",
+      ),
+      CONFLICT: t(
+        "הנתונים השתנו או שהחשבון מחזיק בתפקיד אחר. רעננו ובדקו לפני ניסיון נוסף.",
+        "Data changed or the account holds another role. Refresh and review before retrying.",
+      ),
       NO_COMMUNICATION: t(
         "אין תקשורת עם המערכת.",
         "No communication with the system.",
@@ -130,6 +147,11 @@ export function createManagerDashboard({
       if (b) b.disabled = false;
     }
   }
+  async function ensureRecent() {
+    const epoch = generation;
+    await verifyRecent();
+    if (closed || epoch !== generation) throw new Error("CANCELLED");
+  }
   function form(fields, label, submit) {
     const f = node("form", undefined, "manager-form"),
       inputs = {};
@@ -139,7 +161,8 @@ export function createManagerDashboard({
       if (type !== "textarea") input.type = type;
       input.name = key;
       input.required = true;
-      input.maxLength = type === "textarea" ? 50000 : 100;
+      input.maxLength =
+        type === "textarea" ? 50000 : type === "email" ? 254 : 100;
       l.append(input);
       f.append(l);
       inputs[key] = input;
@@ -162,6 +185,7 @@ export function createManagerDashboard({
     cursor = null;
   }
   function renderMetrics() {
+    metrics.hidden = profile?.role === "admin";
     metrics.replaceChildren();
     for (const [label, value] of [
       [
@@ -188,6 +212,26 @@ export function createManagerDashboard({
   }
   function renderNav() {
     nav.replaceChildren(title);
+    const identity = node("section", undefined, "manager-identity");
+    identity.setAttribute("aria-label", t("החשבון שלי", "My account"));
+    identity.append(
+      node(
+        "strong",
+        profile.user?.name || user.displayName || t("החשבון שלי", "My account"),
+      ),
+    );
+    const email = node(
+      "span",
+      profile.user?.email || user.email || "",
+      "manager-identity-email",
+    );
+    email.dir = "ltr";
+    identity.append(email);
+    for (const role of profile.roles?.length
+      ? profile.roles
+      : [profile.role].filter(Boolean))
+      identity.append(node("span", roleName(role), "manager-role-badge"));
+    nav.append(identity);
     if (profile.account) {
       const b = button(t("המערכות שלי", "My systems"), () => showSystems(null));
       if (!scope) b.setAttribute("aria-current", "page");
@@ -208,16 +252,239 @@ export function createManagerDashboard({
       });
       nav.append(select);
     }
-    nav.append(
-      button(t("ארגונים", "Organizations"), showOrganizations),
-      button(t("הזמנות", "Invitations"), showInvitations),
-    );
+    if (profile.role !== "admin")
+      nav.append(
+        button(t("ארגונים", "Organizations"), showOrganizations),
+        button(t("הזמנות", "Invitations"), showInvitations),
+      );
     if (scope)
       nav.append(
         button(t("מנהלי ארגון", "Organization administrators"), showMembers),
       );
-    if (profile.role === "admin")
-      nav.append(button(t("חשבונות לקוח", "Customer accounts"), showAccounts));
+    if (profile.role === "admin") {
+      nav.append(
+        node(
+          "p",
+          t("ניהול פלטפורמה", "Platform management"),
+          "manager-nav-group",
+        ),
+      );
+      for (const [key, label, action] of [
+        ["overview", t("מבט על", "Overview"), showOverview],
+        ["admin", "WIFIGATE Manager admin", () => showDirectory("admin")],
+        ["user", "WIFIGATE Manager user", () => showAccounts()],
+        [
+          "organization-admin",
+          "WIFIGATE Manager organization admin",
+          () => showDirectory("organization-admin"),
+        ],
+        ["organizations", t("ארגונים", "Organizations"), showOrganizations],
+      ]) {
+        const b = button(label, action);
+        if (currentView === key) b.setAttribute("aria-current", "page");
+        nav.append(b);
+      }
+    }
+  }
+  function roleName(role) {
+    return (
+      {
+        admin: "WIFIGATE Manager admin",
+        user: "WIFIGATE Manager user",
+        "organization-admin": "WIFIGATE Manager organization admin",
+      }[role] ?? t("ממתין להרשאה", "Access pending")
+    );
+  }
+  function beginView(key) {
+    stop();
+    scope = null;
+    currentView = key;
+    renderNav();
+    say("");
+    view.replaceChildren();
+  }
+  function orgPath(id) {
+    return `${profile.role === "admin" ? "/admin" : ""}/organizations/${encodeURIComponent(id)}`;
+  }
+  async function pagedView(path, container, render) {
+    const epoch = generation;
+    let next = null;
+    const more = button(t("הצגת עוד", "Show more"), load);
+    const seen = new Set();
+    async function load() {
+      const result = await api(
+        path +
+          (path.includes("?") ? "&" : "?") +
+          "limit=25" +
+          (next ? "&cursor=" + encodeURIComponent(next) : ""),
+      );
+      if (closed || epoch !== generation) return;
+      more.remove();
+      for (const row of result.items) container.append(render(row));
+      next = result.nextCursor;
+      if (next && seen.has(next)) throw new Error("LIST_LIMIT");
+      if (next) {
+        seen.add(next);
+        view.append(more);
+      }
+      if (!container.childElementCount)
+        say(t("אין רשומות להצגה.", "No records to display."));
+    }
+    await load();
+  }
+  async function showOverview() {
+    beginView("overview");
+    const epoch = generation;
+    view.append(
+      node("h3", t("מבט על · WIFIGATE Manager", "WIFIGATE Manager · Overview")),
+    );
+    const totals = await api("/admin/overview");
+    if (closed || epoch !== generation) return;
+    const grid = node("div", undefined, "manager-overview-grid");
+    for (const [key, label, action] of [
+      ["admins", "WIFIGATE Manager admin", () => showDirectory("admin")],
+      ["users", "WIFIGATE Manager user", () => showAccounts()],
+      [
+        "organizationAdmins",
+        "WIFIGATE Manager organization admin",
+        () => showDirectory("organization-admin"),
+      ],
+      ["organizations", t("ארגונים", "Organizations"), showOrganizations],
+    ]) {
+      const card = node(
+        "article",
+        undefined,
+        "manager-card manager-overview-card",
+      );
+      card.append(
+        node("span", label),
+        node("strong", String(totals[key] ?? 0)),
+        button(t("הצגה וניהול", "View and manage"), action),
+      );
+      grid.append(card);
+    }
+    view.append(
+      grid,
+      node(
+        "p",
+        t(
+          "הספירות מציגות רשומות פעילות. מנהלי ארגונים נספרים לפי מינויים לארגון; אותו אדם עשוי להחזיק יותר ממינוי אחד.",
+          "Counts show active records. Organization administrators are counted by organization appointments; one person may hold multiple appointments.",
+        ),
+        "manager-note",
+      ),
+    );
+  }
+  async function showDirectory(role, status = "active") {
+    beginView(role);
+    const epoch = generation;
+    view.append(node("h3", roleName(role)));
+    const filters = node("div", undefined, "manager-toolbar");
+    for (const state of ["active", "blocked"])
+      filters.append(
+        button(
+          state === "active"
+            ? t("פעילים", "Active")
+            : t("גישה שבוטלה", "Revoked access"),
+          () => showDirectory(role, state),
+        ),
+      );
+    view.append(filters);
+    const rows = node("div", undefined, "manager-directory");
+    view.append(rows);
+    await pagedView(
+      `/admin/directory?role=${role}&status=${status}`,
+      rows,
+      (row) => {
+        const card = node(
+          "article",
+          undefined,
+          "manager-card manager-directory-row",
+        );
+        const identity = node("div");
+        identity.append(
+          node("strong", row.email),
+          node("span", roleName(row.role), "manager-muted"),
+        );
+        if (row.organization)
+          identity.append(
+            node(
+              "span",
+              `${t("ארגון", "Organization")}: ${row.organization.name} · ${row.organization.status}`,
+              "manager-muted",
+            ),
+          );
+        card.append(identity);
+        if (role === "organization-admin")
+          card.append(
+            button(t("ניהול המינוי", "Manage appointment"), () => {
+              scope = row.organization.id;
+              renderNav();
+              return showMembers();
+            }),
+          );
+        else if (row.uid !== user.uid)
+          card.append(
+            button(
+              status === "active"
+                ? t("ביטול גישה", "Revoke access")
+                : t("הפעלת גישה", "Enable access"),
+              async () => {
+                if (
+                  !confirm(
+                    t(
+                      `לעדכן את הגישה של ${row.email}?`,
+                      `Change access for ${row.email}?`,
+                    ),
+                  )
+                )
+                  return;
+                await ensureRecent();
+                await api("/admin/access", "POST", {
+                  email: row.email,
+                  role: "admin",
+                  status: status === "active" ? "blocked" : "active",
+                });
+                await showDirectory(role, status);
+              },
+            ),
+          );
+        return card;
+      },
+    );
+    if (closed || epoch !== generation) return;
+    if (role === "admin")
+      view.append(
+        form(
+          [
+            [
+              "email",
+              t("אימייל מנהל מאומת", "Verified administrator email"),
+              "email",
+            ],
+          ],
+          t("הוספת Manager admin", "Add Manager admin"),
+          async (values) => {
+            await ensureRecent();
+            await api("/admin/access", "POST", {
+              ...values,
+              role: "admin",
+              status: "active",
+            });
+            await showDirectory(role);
+          },
+        ),
+      );
+    else
+      view.append(
+        button(
+          t(
+            "הוספת מנהל ארגון דרך ארגון",
+            "Add an administrator through an organization",
+          ),
+          showOrganizations,
+        ),
+      );
   }
   async function refreshProfile() {
     profile = await api("/me");
@@ -252,13 +519,16 @@ export function createManagerDashboard({
   }
   async function showSystems(orgId, operatorAccount = null) {
     stop();
+    currentView = "systems";
     scope = orgId;
     renderNav();
     say(t("טוען מערכות…", "Loading systems…"));
     const epoch = generation;
     const rows = await listAll(
       operatorAccount
-        ? `/admin/accounts/${encodeURIComponent(operatorAccount.id)}/systems`
+        ? operatorAccount.orgId
+          ? `/admin/organizations/${encodeURIComponent(operatorAccount.orgId)}/systems`
+          : `/admin/accounts/${encodeURIComponent(operatorAccount.id)}/systems`
         : scope
           ? `/organizations/${encodeURIComponent(scope)}/systems`
           : "/systems",
@@ -439,27 +709,152 @@ export function createManagerDashboard({
     view.append(f);
   }
   async function showOrganizations() {
-    stop();
-    view.replaceChildren(node("h3", t("ארגונים", "Organizations")));
-    for (const org of profile.organizations) {
-      const row = node("div", undefined, "manager-card manager-row");
-      row.append(
-        node("b", org.name),
-        button(t("פתיחת הארגון", "Open organization"), () =>
-          showSystems(org.id),
-        ),
-      );
-      view.append(row);
-    }
-    if (profile.account)
+    beginView("organizations");
+    const epoch = generation;
+    view.append(node("h3", t("ניהול ארגונים", "Organization management")));
+    const columns = node("div", undefined, "manager-org-columns");
+    view.append(columns);
+    const operator = profile.role === "admin";
+    await pagedView(
+      operator ? "/admin/organizations" : "/organizations",
+      columns,
+      (org) => {
+        const card = node(
+          "article",
+          undefined,
+          "manager-card manager-org-column",
+        );
+        card.dataset.organization = org.id;
+        card.append(node("h4", org.name));
+        const owner = node("section", undefined, "manager-org-owner");
+        owner.append(
+          node("small", t("בעל הארגון", "Organization owner")),
+          node("strong", org.owner?.email ?? t("לא זמין", "Unavailable")),
+          node("span", roleName(org.owner?.role), "manager-role-badge"),
+        );
+        card.append(owner);
+        const members = node(
+          "section",
+          undefined,
+          "manager-org-administrators",
+        );
+        members.append(
+          node("h5", t("מנהלי הארגון", "Organization administrators")),
+        );
+        if (!org.administrators.length)
+          members.append(
+            node(
+              "p",
+              t(
+                "אין מנהלי ארגון נוספים.",
+                "No additional organization administrators.",
+              ),
+              "manager-muted",
+            ),
+          );
+        for (const member of org.administrators)
+          members.append(node("p", member.email));
+        if (org.administratorNextCursor)
+          members.append(
+            node(
+              "p",
+              t(
+                "מנהלים נוספים מופיעים בניהול המינויים.",
+                "More administrators are available in appointment management.",
+              ),
+              "manager-note",
+            ),
+          );
+        card.append(members);
+        const count = node("p", undefined, "manager-org-count");
+        count.append(
+          node("b", String(org.linkedSystemCount)),
+          node("span", t("מערכות מקושרות", "Linked systems")),
+        );
+        card.append(count);
+        const actions = node("div", undefined, "manager-org-actions");
+        actions.append(
+          button(t("מערכות הארגון", "Organization systems"), () =>
+            showSystems(
+              org.id,
+              operator
+                ? { id: org.owner?.id, email: org.name, orgId: org.id }
+                : null,
+            ),
+          ),
+        );
+        actions.append(
+          button(
+            t("ניהול מנהלי הארגון", "Manage organization administrators"),
+            () => {
+              scope = org.id;
+              renderNav();
+              return showMembers();
+            },
+          ),
+        );
+        const owns = profile.organizations.some(
+          (o) =>
+            o.id === org.id &&
+            (o.role === "owner" || (profile.account && !o.role)),
+        );
+        if (operator || owns)
+          actions.append(
+            button(t("הסרת ארגון", "Remove organization"), async () => {
+              if (
+                !confirm(
+                  t(
+                    'להסיר את הארגון "' +
+                      org.name +
+                      '" מ־Manager? יש לנתק שיוכי מערכות ומינויי מנהלים תחילה. ההיסטוריה נשמרת.',
+                    'Remove organization "' +
+                      org.name +
+                      '" from Manager? Unassign systems and revoke administrator appointments first. History is retained.',
+                  ),
+                )
+              )
+                return;
+              await ensureRecent();
+              await api(orgPath(org.id) + "/archive", "POST", {
+                name: org.name,
+                expectedVersion: org.version,
+              });
+              await refreshProfile();
+              await showOrganizations();
+            }),
+          );
+        card.append(actions);
+        return card;
+      },
+    );
+    if (closed || epoch !== generation) return;
+    if (profile.account || operator)
       view.append(
         form(
-          [["name", t("שם ארגון חדש", "New organization name")]],
+          [
+            ["name", t("שם ארגון חדש", "New organization name")],
+            ...(operator
+              ? [
+                  [
+                    "email",
+                    t(
+                      "אימייל בעל הארגון · Manager user",
+                      "Organization owner email · Manager user",
+                    ),
+                    "email",
+                  ],
+                ]
+              : []),
+          ],
           t("יצירת ארגון", "Create organization"),
           async (values, f) => {
+            f.dataset.requestId ??= crypto.randomUUID();
             await ensureRecent();
-            await api("/organizations", "POST", values);
-            f.reset();
+            await api(
+              operator ? "/admin/organizations" : "/organizations",
+              "POST",
+              { ...values, requestId: f.dataset.requestId },
+            );
             await refreshProfile();
             await showOrganizations();
           },
@@ -504,11 +899,18 @@ export function createManagerDashboard({
     view.replaceChildren(
       node("h3", t("מנהלי הארגון", "Organization administrators")),
     );
-    const rows = await listAll(`/organizations/${scope}/members`);
+    const canManage =
+      profile.role === "admin" ||
+      profile.organizations.some(
+        (o) =>
+          o.id === scope &&
+          (o.role === "owner" || (profile.account && !o.role)),
+      );
+    const rows = await listAll(`${orgPath(scope)}/members`);
     for (const member of rows.filter((m) => m.status === "active")) {
       const row = node("div", undefined, "manager-card manager-row");
       row.append(node("span", member.email));
-      if (profile.account)
+      if (canManage)
         row.append(
           button(t("ביטול גישה", "Revoke access"), async () => {
             if (
@@ -519,7 +921,7 @@ export function createManagerDashboard({
               return;
             await ensureRecent();
             await api(
-              `/organizations/${scope}/members/${member.uid}/remove`,
+              `${orgPath(scope)}/members/${encodeURIComponent(member.uid)}/remove`,
               "POST",
               {},
             );
@@ -528,7 +930,7 @@ export function createManagerDashboard({
         );
       view.append(row);
     }
-    if (profile.account)
+    if (canManage)
       view.append(
         form(
           [
@@ -541,7 +943,7 @@ export function createManagerDashboard({
           t("יצירת הזמנה", "Create invitation"),
           async (v, f) => {
             await ensureRecent();
-            await api(`/organizations/${scope}/invitations`, "POST", v);
+            await api(`${orgPath(scope)}/invitations`, "POST", v);
             f.reset();
             say(
               t(
@@ -554,7 +956,7 @@ export function createManagerDashboard({
       );
   }
   async function showAccounts(status = "active") {
-    stop();
+    beginView("user");
     const epoch = generation;
     view.replaceChildren(
       node("h3", t("הפעלת חשבון לקוח", "Enable customer account")),
@@ -585,6 +987,31 @@ export function createManagerDashboard({
         node("h4", account.email),
         button(t("מערכות הלקוח", "Customer systems"), () =>
           showSystems(null, account),
+        ),
+      );
+      card.append(
+        node("span", "WIFIGATE Manager user", "manager-role-badge"),
+        button(
+          status === "active"
+            ? t("ביטול גישה", "Revoke access")
+            : t("הפעלת גישה", "Enable access"),
+          async () => {
+            if (
+              !confirm(
+                t(
+                  `לעדכן את הגישה של ${account.email}?`,
+                  `Change access for ${account.email}?`,
+                ),
+              )
+            )
+              return;
+            await ensureRecent();
+            await api("/admin/accounts", "POST", {
+              email: account.email,
+              status: status === "active" ? "blocked" : "active",
+            });
+            await showAccounts(status);
+          },
         ),
       );
       view.append(card);
@@ -1438,7 +1865,7 @@ export function createManagerDashboard({
   const ready = task(async () => {
     await refreshProfile();
     if (closed) return;
-    if (profile.role === "admin") await showAccounts();
+    if (profile.role === "admin") await showOverview();
     else if (profile.account) await showSystems(null);
     else if (profile.organizations.length)
       await showSystems(profile.organizations[0].id);

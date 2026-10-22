@@ -1,7 +1,147 @@
 .platform-page[data-product="manager"] {
+  --platform-shell-width: 1480px;
   color: var(--ink, #0f172a);
   --manager-accent: var(--manager, #f97316);
   --manager-line: var(--line, #e2e8f0);
+}
+
+/* Account identity and platform directory share the site's compact controls. */
+.manager-identity {
+  display: grid;
+  gap: 8px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--manager-line);
+  margin-bottom: 16px;
+  min-width: 0;
+}
+.manager-identity-email {
+  font-size: 12px;
+  overflow-wrap: anywhere;
+  text-align: start;
+}
+.manager-role-badge {
+  display: inline-block;
+  max-width: 100%;
+  padding: 5px 8px;
+  border: 1px solid var(--manager-line);
+  border-radius: 4px;
+  background: var(--manager-soft, #fff1e6);
+  color: var(--manager-strong, #c2410c);
+  font-size: 11px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.manager-nav-group {
+  margin: 22px 0 8px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--ink);
+}
+.manager-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.manager-overview-card {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 14px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.manager-overview-card strong {
+  font-size: 36px;
+  line-height: 1;
+}
+.manager-overview-card button {
+  margin-top: auto;
+}
+.manager-directory {
+  display: grid;
+  gap: 12px;
+}
+.manager-directory-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  justify-content: space-between;
+  min-width: 0;
+}
+.manager-directory-row > div {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.manager-org-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr));
+  gap: 16px;
+  align-items: start;
+}
+.manager-org-column {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-wrap: anywhere;
+}
+.manager-org-column h4 {
+  margin: 0;
+  font-size: 20px;
+}
+.manager-org-column h5 {
+  margin: 0 0 10px;
+  font-size: 13px;
+}
+.manager-org-column p {
+  margin: 0 0 8px;
+}
+.manager-org-owner {
+  display: grid;
+  gap: 8px;
+}
+.manager-org-owner small {
+  color: var(--muted);
+}
+.manager-org-owner strong {
+  font-size: 14px;
+}
+.manager-org-count {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid var(--manager-line);
+}
+.manager-org-count b {
+  font-size: 30px;
+}
+.manager-org-actions {
+  display: grid;
+  gap: 8px;
+}
+.manager-org-actions button {
+  width: 100%;
+}
+.manager-card:is(
+  .manager-overview-card,
+  .manager-org-column,
+  .manager-directory-row
+) {
+  border-radius: 8px;
+}
+@media (max-width: 850px) {
+  .manager-identity,
+  .manager-nav-group {
+    flex-basis: 100%;
+    width: 100%;
+  }
+  .manager-overview-grid {
+    grid-template-columns: 1fr;
+  }
 }
 [data-product="manager"] .platform-shell {
   max-width: 1440px;
@@ -360,7 +500,10 @@
 .manager-icon {
   font-family: system-ui;
 }
-.manager-icon svg { width: 24px; height: 24px; }
+.manager-icon svg {
+  width: 24px;
+  height: 24px;
+}
 @media (max-width: 850px) {
   .manager-shell {
     grid-template-columns: 1fr;
@@ -449,28 +592,100 @@
 }
 
 /* Shared portal interactions: keyboard focus, readable names and touch targets. */
-.manager-shell { --manager-line: var(--line, #e2e8f0); }
+.manager-shell {
+  --manager-line: var(--line, #e2e8f0);
+}
 .manager-shell button:focus-visible,
 .manager-shell input:focus-visible,
 .manager-shell select:focus-visible,
-.manager-shell textarea:focus-visible { outline: 3px solid var(--focus, #0b63ff); outline-offset: 3px; }
-.manager-shell .manager-nav button { min-height: 46px; overflow-wrap: anywhere; }
-.manager-shell select { font: inherit; }
-.manager-shell h2, .manager-shell h3, .manager-shell h4 { overflow-wrap: anywhere; }
-.manager-shell button.manager-button { transition: background-color 150ms ease, border-color 150ms ease; }
-.manager-shell button.manager-button:hover:not(:disabled) { background: #f8fafc; border-color: #94a3b8; }
-.manager-shell button.manager-button.primary:hover:not(:disabled) { background: #27364a; border-color: #27364a; }
-.manager-hero small { display: inline-block; padding: 6px 12px; background: var(--manager-soft, #fff1e6); border-radius: 999px; font-size: 12px; }
-.manager-metric, .manager-card { box-shadow: var(--card-shadow, 0 8px 18px rgba(15,23,42,.06)); }
-@media (max-width: 480px) {
-  .manager-hero { padding: 20px; }
-  .manager-metrics { grid-template-columns: 1fr; gap: 8px; }
-  .manager-metric { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .manager-metric b { margin: 0; }
-  .manager-card { padding: 16px; }
-  .manager-empty { padding: 24px 16px; }
-  .manager-form label { min-width: min(180px, 100%); }
-  .manager-shell .manager-nav button { flex: 1 1 130px; }
-  .manager-facts { grid-template-columns: minmax(85px, 1fr) minmax(0, 1fr); }
+.manager-shell textarea:focus-visible {
+  outline: 3px solid var(--focus, #0b63ff);
+  outline-offset: 3px;
 }
-@media (prefers-reduced-motion: reduce) { .manager-shell button.manager-button { transition: none; } }
+.manager-shell .manager-nav button {
+  min-height: 46px;
+  overflow-wrap: anywhere;
+}
+.manager-shell select {
+  font: inherit;
+}
+.manager-shell h2,
+.manager-shell h3,
+.manager-shell h4 {
+  overflow-wrap: anywhere;
+}
+.manager-shell button.manager-button {
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+.manager-shell button.manager-button:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+.manager-shell button.manager-button.primary:hover:not(:disabled) {
+  background: #27364a;
+  border-color: #27364a;
+}
+.manager-hero small {
+  display: inline-block;
+  padding: 6px 12px;
+  background: var(--manager-soft, #fff1e6);
+  border-radius: 999px;
+  font-size: 12px;
+}
+.manager-metric,
+.manager-card {
+  box-shadow: var(--card-shadow, 0 8px 18px rgba(15, 23, 42, 0.06));
+}
+@media (max-width: 480px) {
+  .manager-hero {
+    padding: 20px;
+  }
+  .manager-metrics {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .manager-metric {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .manager-metric b {
+    margin: 0;
+  }
+  .manager-card {
+    padding: 16px;
+  }
+  .manager-empty {
+    padding: 24px 16px;
+  }
+  .manager-form label {
+    min-width: min(180px, 100%);
+  }
+  .manager-shell .manager-nav button {
+    flex: 1 1 130px;
+  }
+  .manager-facts {
+    grid-template-columns: minmax(85px, 1fr) minmax(0, 1fr);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .manager-shell button.manager-button {
+    transition: none;
+  }
+}
+
+/* Compact site controls for Manager administration. */
+.manager-shell button.manager-button,
+.manager-shell .manager-nav button,
+.manager-form :is(input, select, textarea) {
+  border-radius: 6px;
+}
+.manager-nav {
+  border-radius: 8px;
+}
+.manager-hero {
+  border-radius: 12px;
+}
