@@ -116,13 +116,33 @@ body[data-product]
   cursor: pointer;
 }
 .platform-language__button img {
-  width: 26px;
-  height: 18px;
+  display: block;
+  width: 28px;
+  height: 20px;
+  object-fit: contain;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px #0f172a12;
 }
 body[data-product] :is(#platform-language, #host-language) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
   width: 44px;
   height: 44px;
+  min-width: 44px;
+  flex: none;
   padding: 0;
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+body[data-product] :is(#platform-language, #host-language):is(:hover, [aria-expanded="true"]) {
+  border-color: var(--dashboard-accent);
+  background: var(--dashboard-soft);
+}
+body[data-product] :is(#platform-language, #host-language):focus-visible {
+  outline: 2px solid var(--dashboard-accent);
+  outline-offset: 3px;
 }
 body[data-product] .dashboard-profile-panel {
   position: fixed;

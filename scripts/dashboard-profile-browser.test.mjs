@@ -60,6 +60,10 @@ test("every dashboard shares a flag selector and profile entry into My profile",
             const flag = header.locator(".platform-language__button");
             assert.equal(await flag.innerText(), "");
             assert.equal(await flag.locator("img").isVisible(), true);
+            const flagButtonBox = await flag.boundingBox();
+            const flagImageBox = await flag.locator("img").boundingBox();
+            assert.ok(Math.abs(flagButtonBox.x + flagButtonBox.width / 2 - flagImageBox.x - flagImageBox.width / 2) < 1);
+            assert.ok(Math.abs(flagButtonBox.y + flagButtonBox.height / 2 - flagImageBox.y - flagImageBox.height / 2) < 1);
             assert.match(
               await flag.getAttribute("aria-label"),
               language === "he" ? /עברית/ : /English/,
