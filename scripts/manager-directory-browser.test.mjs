@@ -4,7 +4,7 @@ import { startSite, scenario } from "./platform-test-fixtures.mjs";
 
 test("published Manager page wires the private profile into the header without duplicating account details", async (t) => {
   const { origin, browser } = await startSite(t);
-  for (const width of [390, 1440])
+  for (const width of [320, 390, 1440])
     await t.test(`${width}px`, async (t) => {
       const fixture = await scenario(browser, {
         manager: "active",
@@ -35,6 +35,23 @@ test("published Manager page wires the private profile into the header without d
       page.setDefaultTimeout(7000);
       await page.goto(origin + "/dashboard/manager/?lang=he");
       await page.locator(".manager-overview-card").last().waitFor();
+      assert.equal(await page.locator(".platform-heading").isVisible(), false);
+      assert.equal(await page.locator("#product-title").isVisible(), false);
+      const switcher = page.locator("#product-switcher-button");
+      assert.equal((await switcher.innerText()).trim(), "WIFIGATE Manager");
+      assert.equal(
+        await switcher.locator(".product-switcher__brand").isVisible(),
+        true,
+      );
+      assert.equal(
+        await switcher
+          .locator(".product-switcher__name")
+          .evaluate((el) => el.scrollWidth <= el.clientWidth),
+        true,
+      );
+      await switcher.click();
+      await page.locator("#product-switcher-list").waitFor();
+      await page.keyboard.press("Escape");
       const reject = page.locator("[data-cookie-reject]");
       if (await reject.isVisible()) await reject.click();
       const panel = page.locator("#manager-profile-panel");
@@ -60,6 +77,11 @@ test("published Manager page wires the private profile into the header without d
         });
       await page.keyboard.press("Escape");
       assert.equal(await panel.isVisible(), false);
+      if (process.env.MANAGER_DIRECTORY_SCREENSHOTS)
+        await page.screenshot({
+          path: `${process.env.MANAGER_DIRECTORY_SCREENSHOTS}/manager-header-he-${width}.png`,
+          fullPage: true,
+        });
       assert.deepEqual(fixture.errors, []);
     });
 });
