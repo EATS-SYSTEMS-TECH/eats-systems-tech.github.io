@@ -1,5 +1,6 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig } from "axios";
 import { profileApiBaseUrl } from "../js/host-api-config.js";
+import { siteIntegrityHeaders } from "../js/site-app-check.js";
 
 import type { FirebaseUser, ApiErrorResponse, ApiError } from "./types.js";
 export type { FirebaseUser, JsonValue, JsonObject } from "./types.js";
@@ -130,11 +131,12 @@ export async function authenticatedRequest<T>(
   }
   const scope = requestScope(config.url);
   const token = await user.getIdToken();
+  const integrity = await siteIntegrityHeaders();
   return apiRequest<T>(
     client,
     {
       ...config,
-      headers: { ...config.headers, Authorization: `Bearer ${token}` },
+      headers: { ...config.headers, ...integrity, Authorization: `Bearer ${token}` },
     },
     scope,
   );

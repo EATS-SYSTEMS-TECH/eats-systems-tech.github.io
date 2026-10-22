@@ -7,7 +7,7 @@ import {
   signInRedirect,
 } from "./site-auth.js";
 import { isLocalStaging } from "./firebase-config.js";
-import { getPlatformProfile } from "./api/index.js";
+import { getPlatformProfile } from "./api/index.js?v=20261022ac1";
 import {
   parsePlatformIdentity,
   loginDestination,

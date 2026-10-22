@@ -1,3 +1,4 @@
+import { installAppCheckFixture } from "./app-check-browser-fixture.mjs";
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createServer } from "node:http";
@@ -49,7 +50,8 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
       }),
     );
     for (const module of ["keys", "support", "billing", "rotation", "link"]) {
-      await page.goto(`${origin}/identity-fixture?lang=${language}`);
+      await installAppCheckFixture(page);
+  await page.goto(`${origin}/identity-fixture?lang=${language}`);
       await page.evaluate(async (module) => {
         const { initializeHostLocale } = await import("/js/host-locale.js");
         initializeHostLocale();
@@ -334,7 +336,8 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
       }
     }
     for (const failure of ["cancel", "abandon", "denied", "still-stale"]) {
-      await page.goto(`${origin}/identity-fixture?lang=${language}`);
+      await installAppCheckFixture(page);
+  await page.goto(`${origin}/identity-fixture?lang=${language}`);
       await page.evaluate(async (failure) => {
         const { profileApi } = await import("/js/api/index.js");
         const { requestWithRecentIdentity } =

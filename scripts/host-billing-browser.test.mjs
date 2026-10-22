@@ -1,3 +1,4 @@
+import { installAppCheckFixture } from "./app-check-browser-fixture.mjs";
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createServer } from "node:http";
@@ -51,7 +52,8 @@ test("billing, support and key dates follow the selected language; failed reload
         body: '<!doctype html><html><head><meta charset="utf-8"></head><body><main id="billing"></main><section id="support"></section><section id="keys"></section></body></html>',
       }),
     );
-    await page.goto(
+    await installAppCheckFixture(page);
+  await page.goto(
       `http://127.0.0.1:${server.address().port}/billing-test?lang=${language}`,
     );
     await page.evaluate(async () => {

@@ -1,3 +1,4 @@
+import { installAppCheckFixture } from "./app-check-browser-fixture.mjs";
 // The mocked platform shared by the dashboard browser tests: Firebase Auth and
 // the WIFIGATE API answered from one in-memory state, plus the static site
 // served from the repository.
@@ -116,12 +117,13 @@ export async function scenario(browser, options = {}) {
     if (event === "verify") state.verified = true;
     calls.push(event);
   });
+  await installAppCheckFixture(context);
   await context.route(
     "https://www.gstatic.com/firebasejs/**/firebase-app.js",
     (route) =>
       route.fulfill({
         contentType: "application/javascript",
-        body: "export const initializeApp = value => value;",
+        body: "export const initializeApp = value => value; export const getApp = () => ({});",
       }),
   );
   await context.route(

@@ -1,3 +1,4 @@
+import { installAppCheckFixture } from "./app-check-browser-fixture.mjs";
 import assert from "node:assert/strict";
 import { chromium } from "playwright-core";
 import { join } from "node:path";
@@ -62,12 +63,13 @@ async function scenario(options = {}) {
     if (event === "verified") state.mfa.verified = true;
     calls.push(event);
   });
+  await installAppCheckFixture(context);
   await context.route(
     "https://www.gstatic.com/firebasejs/**/firebase-app.js",
     (route) =>
       route.fulfill({
         contentType: "application/javascript",
-        body: "export const initializeApp = (config) => ({config});",
+        body: "export const initializeApp = (config) => ({config}); export const getApp = () => ({});",
       }),
   );
   await context.route(

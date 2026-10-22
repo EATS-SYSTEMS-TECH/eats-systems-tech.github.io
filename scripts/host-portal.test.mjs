@@ -1,3 +1,4 @@
+import "./app-check-test-hook.mjs";
 import { AxiosError } from "axios";
 import { authErrorMessage } from "../js/host-auth-errors.js";
 import test from "node:test";
@@ -288,7 +289,7 @@ async function withAdapter(run) {
   };
   try { await run(requests); } finally { profileApi.defaults.adapter = previous; }
 }
-test("GET profile sends only the Firebase ID token without cookies or caching", async () => {
+test("GET profile sends Firebase identity and App Check without cookies or caching", async () => {
   await withAdapter(async (requests) => {
     const result = await getProfile({ getIdToken: async () => "firebase-id-token" });
     assert.equal(result.role, "user");
@@ -296,6 +297,7 @@ test("GET profile sends only the Firebase ID token without cookies or caching", 
     assert.equal(request.url, "/api/v1/users/me");
     assert.equal(request.method, "get");
     assert.equal(request.headers.get("Authorization"), "Bearer firebase-id-token");
+    assert.equal(request.headers.get("X-Firebase-AppCheck"), "unit-app-check");
     // Only CORS headers the Host allows (Authorization, Content-Type, Idempotency-Key).
     assert.equal(request.headers.get("Cache-Control"), undefined);
     assert.equal(request.withCredentials, false);

@@ -1,3 +1,4 @@
+import { installAppCheckFixture } from "./app-check-browser-fixture.mjs";
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createServer } from "node:http";
@@ -221,7 +222,8 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         return route.fulfill({ contentType: "text/html", body: shell });
       return route.continue();
     });
-    await page.goto(origin + "/dashboard/host/" + query);
+    await installAppCheckFixture(page);
+  await page.goto(origin + "/dashboard/host/" + query);
     await page.evaluate(() => window.workspaceReady);
     return { page, errors };
   }

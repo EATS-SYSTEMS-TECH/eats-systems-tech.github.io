@@ -1,3 +1,4 @@
+import { installAppCheckFixture } from "../app-check-browser-fixture.mjs";
 // Node side of the Host dashboard browser tests that use the in-memory Host
 // API (scripts/lib/host-booking-api.js): serves the repository, launches
 // installed Chrome and opens /dashboard/host/ with a fixture state.
@@ -153,6 +154,7 @@ export async function openWorkspace(
     }
     return route.continue();
   });
+  await installAppCheckFixture(page);
   await page.goto(origin + "/dashboard/host/" + query);
   await page.waitForFunction(() => window.workspaceStarted);
   await page.evaluate(() => window.workspaceStarted);

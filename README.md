@@ -84,6 +84,14 @@ The canonical production API is `https://api.wifigate.io`. All local API clients
 
 ### Manager deployment configuration
 
+All authenticated website API requests now attach App Check through the shared
+`authenticatedRequest` boundary, including product identity, Host administration,
+organization operations, CSV exports, account deletion and Manager. Callers
+cannot substitute the integrity header. An absent configuration or malformed
+token fails before an API request is sent. The backend independently enforces
+integrity as well as identity, permissions and browser MFA. Publish this client
+before deploying the corresponding Host server enforcement.
+
 Manager requests use the dedicated API in `js/manager-api-config.js`; Host and
 shared account identity retain `js/host-api-config.js`. The currently deployed
 Manager API uses the isolated `wifigate-manager-staging` database documented in

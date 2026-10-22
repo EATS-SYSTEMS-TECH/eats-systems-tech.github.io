@@ -19,5 +19,8 @@ export async function siteIntegrityHeaders() {
   })().catch((error) => { initialization = undefined; throw error; });
   const { appCheck, getToken } = await initialization;
   const { token } = await getToken(appCheck, false);
+  if (typeof token !== "string" || !token.length || token.length > 8192 || /\s/.test(token)) {
+    throw Object.assign(new Error("App integrity verification failed"), { code: "APP_CHECK_REQUIRED" });
+  }
   return { "X-Firebase-AppCheck": token };
 }

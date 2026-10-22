@@ -1,3 +1,4 @@
+import { installAppCheckFixture } from "./app-check-browser-fixture.mjs";
 // Account deletion on /dashboard/: the preview, the typed email, a recent
 // sign-in retry with the same idempotency key, and the final message. Firebase
 // and the API are fixtures; no real account is used.
@@ -36,8 +37,9 @@ async function scenario(browser, origin, options = {}) {
   const calls = [];
   const errors = [];
   await context.exposeBinding("authFixtureEvent", (_, event) => events.push(event));
+  await installAppCheckFixture(context);
   await context.route("https://www.gstatic.com/firebasejs/**/firebase-app.js", (route) =>
-    route.fulfill({ contentType: "application/javascript", body: "export const initializeApp = value => value;" }));
+    route.fulfill({ contentType: "application/javascript", body: "export const initializeApp = value => value; export const getApp = () => ({});" }));
   await context.route("https://www.gstatic.com/firebasejs/**/firebase-auth.js", (route) =>
     route.fulfill({ contentType: "application/javascript", body: authModule }));
   await context.route("**/api/v1/**", (route) => {

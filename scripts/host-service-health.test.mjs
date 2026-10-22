@@ -1,3 +1,4 @@
+import { installAppCheckFixture } from "./app-check-browser-fixture.mjs";
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createServer } from "node:http";
@@ -51,6 +52,7 @@ test("Service health explains missing and stale evidence, isolates roles and dis
       body: `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/host-dashboard.css"></head><body class="host-app portal-dashboard host-ready"><aside id="host-sidebar" class="host-sidebar"><nav id="host-section-navigation"></nav></aside><main class="portal-shell"><section id="host-management" class="portal-panel" data-organization-id="org"></section></main></body></html>`,
     }),
   );
+  await installAppCheckFixture(page);
   await page.goto(`http://127.0.0.1:${server.address().port}/health-test`);
   await page.evaluate(async () => {
     const { profileApi } = await import("/js/api/index.js");
