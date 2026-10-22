@@ -1,5 +1,5 @@
 /* /dashboard/ — the product picker and the Pay/Manager pages. The sign-in
-   card's language (Manrope, 24–28px radii, black primary, outlined
+   card's language (Manrope, 8–14px radii, black primary, outlined
    secondary) on the dashboard backdrop; each product keeps its own colour:
    Host blue, Pay green, Manager orange. The Host dashboard (.host-app in
    css/host-dashboard.css) builds on the same tokens. */
@@ -56,7 +56,7 @@ html[lang="he"] {
   margin-bottom: clamp(1.75rem, 5vw, 3rem);
   padding: 0.7rem 0.9rem 0.7rem 1.1rem;
   border: 1px solid var(--line);
-  border-radius: 22px;
+  border-radius: 12px;
   box-shadow: var(--card-shadow);
 }
 .platform-header::before {
@@ -65,7 +65,7 @@ html[lang="he"] {
   inset: 0;
   z-index: -1;
   border-radius: inherit;
-  background: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.78);
   backdrop-filter: blur(14px);
 }
 .platform-header .brand {
@@ -90,13 +90,78 @@ html[lang="he"] {
   height: 44px;
   padding: 0 0.85rem;
   border: 1px solid #d8e4ea;
-  border-radius: 999px;
+  border-radius: 8px;
   background: #ffffff;
   color: var(--ink);
   font-size: 0.82rem;
   font-weight: 700;
   box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
   cursor: pointer;
+}
+.platform-language {
+  min-width: 0;
+}
+.platform-header #platform-language {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: none;
+  padding: 0 12px;
+  border-radius: 8px;
+  box-shadow: none;
+  font: 600 0.875rem/1 "Manrope", system-ui, sans-serif;
+}
+.platform-language img {
+  display: block;
+  width: 30px;
+  height: 20px;
+  flex: none;
+  object-fit: contain;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px #cbd5e1;
+}
+.platform-language__arrow {
+  margin-inline-start: auto;
+  color: #64748b;
+  transition: transform 150ms ease;
+}
+[aria-expanded="true"] .platform-language__arrow {
+  transform: rotate(180deg);
+}
+.platform-language__dropdown {
+  position: fixed;
+  z-index: 80;
+  width: min(200px, calc(100vw - 32px));
+  padding: 6px;
+  overflow-y: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.platform-language__dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: var(--ink);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+.platform-language__dropdown a:hover,
+.platform-header #platform-language:hover {
+  background: #f5f5f5;
+}
+.platform-language__dropdown a[aria-current="true"] {
+  background: #eef4ff;
+  color: #0b63ff;
+  font-weight: 700;
+}
+.platform-language__dropdown a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: -3px;
 }
 .platform-account-chip {
   display: inline-flex;
@@ -139,7 +204,7 @@ html[lang="he"] {
   height: 44px;
   padding: 0 1rem;
   border: 1px solid #d7e0e8;
-  border-radius: 999px;
+  border-radius: 8px;
   background: #ffffff;
   color: var(--ink);
   font-size: 0.82rem;
@@ -158,7 +223,7 @@ html[lang="he"] {
   display: inline-block;
   margin: 0 0 0.9rem;
   padding: 0.35rem 0.75rem;
-  border-radius: 999px;
+  border-radius: 8px;
   background: #eef4ff;
   color: #0b63ff;
   font-size: 0.72rem;
@@ -188,7 +253,7 @@ html[lang="he"] {
   margin-block-end: 1rem;
   padding: 0.55rem 1rem;
   border: 1px solid #d7e0e8;
-  border-radius: 999px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.9);
   color: #334155;
   font-size: 0.82rem;
@@ -217,7 +282,7 @@ html[lang="he"] {
   padding: clamp(1.25rem, 2.6vw, 1.75rem);
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: 10px;
   background: var(--card);
   box-shadow: var(--card-shadow);
   transition:
@@ -255,7 +320,7 @@ html[dir="rtl"] .product-tile {
   place-items: center;
   width: 52px;
   height: 52px;
-  border-radius: 16px;
+  border-radius: 10px;
   background: var(--accent-soft);
   color: var(--accent);
 }
@@ -283,7 +348,7 @@ html[dir="rtl"] .product-tile {
 .product-state {
   align-self: flex-start;
   padding: 0.35rem 0.7rem;
-  border-radius: 999px;
+  border-radius: 8px;
   background: #eef2f6;
   color: #475569;
   font-size: 0.78rem;
@@ -323,7 +388,7 @@ html[dir="rtl"] .product-tile {
   min-height: 46px;
   padding: 0 1.1rem;
   border: 1px solid var(--accent-strong, #0f172a);
-  border-radius: 14px;
+  border-radius: 10px;
   background: var(--accent-strong, #0f172a);
   color: #ffffff;
   font: inherit;
@@ -367,7 +432,7 @@ html[dir="rtl"] .product-tile {
   margin: 1.5rem 0 0;
   padding: clamp(1.25rem, 3vw, 2rem);
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: 10px;
   background: var(--card);
   box-shadow: var(--card-shadow);
 }
@@ -383,7 +448,7 @@ html[dir="rtl"] .product-tile {
   min-height: 46px;
   padding: 0 1.1rem;
   border: 1px solid #0a0a0a;
-  border-radius: 14px;
+  border-radius: 10px;
   background: #0a0a0a;
   color: #ffffff;
   font-weight: 700;
@@ -412,7 +477,7 @@ html[dir="rtl"] .product-tile {
   gap: 0.7rem;
   padding: 1rem;
   border: 1px solid #e2e8f0;
-  border-radius: 16px;
+  border-radius: 10px;
   background: #f8fafc;
 }
 .security-steps li[aria-current="step"] {
@@ -447,7 +512,7 @@ html[dir="rtl"] .product-tile {
 }
 #enrollment-status:not(:empty) {
   padding: 0.8rem 1rem;
-  border-radius: 14px;
+  border-radius: 10px;
   background: #eff6ff;
   color: #1e3a8a;
 }
@@ -459,7 +524,7 @@ html[dir="rtl"] .product-tile {
 #totp-setup #totp-qr {
   padding: 0.5rem;
   border: 1px solid #e2e8f0;
-  border-radius: 16px;
+  border-radius: 10px;
   background: #ffffff;
 }
 #totp-setup input[name="code"] {
@@ -473,7 +538,7 @@ html[dir="rtl"] .product-tile {
 .platform-page .portal-panel input,
 .platform-page .portal-panel select {
   border: 1px solid #d7e0e8;
-  border-radius: 14px;
+  border-radius: 10px;
   background: #f8fafc;
 }
 
@@ -548,7 +613,7 @@ dialog.account-delete .account-delete__icon {
   margin: 0;
   padding: 0.75rem 0.9rem;
   border: 1px solid #e2e8f0;
-  border-radius: 14px;
+  border-radius: 10px;
   background: #f8fafc;
   color: #334155;
   font-size: 0.85rem;
@@ -570,7 +635,7 @@ dialog.account-delete input.account-delete__email {
   height: 52px;
   padding: 0 14px;
   border: 1px solid #d7e0e8;
-  border-radius: 14px;
+  border-radius: 10px;
   background: #f8fafc;
   color: var(--ink);
   font-size: 1rem;
@@ -598,7 +663,7 @@ dialog.account-delete .mfa-dialog__button.account-delete__confirm:hover:not(
   margin: clamp(1rem, 6vh, 4rem) auto 0;
   padding: clamp(1.5rem, 4vw, 2.5rem);
   border: 1px solid var(--line);
-  border-radius: 28px;
+  border-radius: 10px;
   background: var(--card);
   box-shadow: 0 24px 60px rgba(15, 23, 42, 0.14);
   text-align: center;
@@ -609,7 +674,7 @@ dialog.account-delete .mfa-dialog__button.account-delete__confirm:hover:not(
   width: 64px;
   height: 64px;
   margin-bottom: 1rem;
-  border-radius: 20px;
+  border-radius: 12px;
   background: #dcfce7;
   color: #15803d;
 }
@@ -631,7 +696,7 @@ dialog.account-delete .mfa-dialog__button.account-delete__confirm:hover:not(
   margin: 1.25rem 0 0;
   padding: 0.9rem 1rem;
   border: 1px solid #e2e8f0;
-  border-radius: 16px;
+  border-radius: 10px;
   background: #f8fafc;
   color: #334155;
   font-size: 0.88rem;
@@ -648,7 +713,7 @@ dialog.account-delete .mfa-dialog__button.account-delete__confirm:hover:not(
   min-height: 52px;
   margin-top: 1.5rem;
   padding: 0 1.6rem;
-  border-radius: 16px;
+  border-radius: 10px;
   background: #0a0a0a;
   color: #ffffff;
   font-weight: 700;
@@ -672,7 +737,7 @@ dialog.account-delete .mfa-dialog__button.account-delete__confirm:hover:not(
   min-height: 44px;
   padding: 0 0.85rem 0 0.8rem;
   border: 1px solid #d8e4ea;
-  border-radius: 999px;
+  border-radius: 8px;
   background: #ffffff;
   color: var(--ink, #0f172a);
   font: inherit;
@@ -733,7 +798,7 @@ dialog.account-delete .mfa-dialog__button.account-delete__confirm:hover:not(
   padding: 0.5rem;
   overflow: auto;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 20px;
+  border-radius: 12px;
   background: #ffffff;
   color: var(--ink, #0f172a);
   box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
@@ -756,7 +821,7 @@ dialog.account-delete .mfa-dialog__button.account-delete__confirm:hover:not(
   gap: 0.75rem;
   min-height: 56px;
   padding: 0.5rem 0.6rem;
-  border-radius: 14px;
+  border-radius: 10px;
   cursor: pointer;
 }
 .product-switcher__option[data-product-option="pay"] {

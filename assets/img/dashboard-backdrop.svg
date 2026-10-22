@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
 <defs><clipPath id="dashboardGlobeClip"><circle cx="250" cy="700" r="330" /></clipPath></defs>
-<g fill="none" opacity="0.035" stroke="#111111">
+<g fill="none" opacity="0.12" stroke="#111111">
 <circle cx="250" cy="700" r="330" stroke-width="1.2" />
 <g clip-path="url(#dashboardGlobeClip)">
 <path d="M250 370C-26.2 518.5 -26.2 881.5 250 1030" />

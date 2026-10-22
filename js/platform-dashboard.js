@@ -29,6 +29,7 @@ import { requestMfaChallenge } from "./host-mfa-challenge.js";
 import { authErrorMessage } from "./host-auth-errors.js";
 import qrcode from "./vendor/qrcode-generator.js";
 import { createManagerDashboard } from "./manager-dashboard.js";
+import { renderPlatformLanguage } from "./platform-language.js";
 
 const $ = (selector) => document.querySelector(selector);
 const language = pageLanguage();
@@ -55,17 +56,7 @@ for (const node of document.querySelectorAll("[data-copy-label]"))
   node.setAttribute("aria-label", copy[node.dataset.copyLabel]);
 for (const node of document.querySelectorAll("[data-copy-alt]"))
   node.setAttribute("alt", copy[node.dataset.copyAlt]);
-const languageMenu = $("#platform-language");
-if (languageMenu) {
-  languageMenu.value = language;
-  languageMenu.setAttribute("aria-label", copy.interfaceLanguage);
-  languageMenu.addEventListener("change", () => {
-    const url = new URL(location.href);
-    if (languageMenu.value === "he") url.searchParams.set("lang", "he");
-    else url.searchParams.delete("lang");
-    location.assign(url.href);
-  });
-}
+renderPlatformLanguage($("#platform-language"), language, copy.interfaceLanguage);
 if (language === "he") {
   $(".platform-header .brand").href = "/he/";
   const home = $("#account-deleted-home");
