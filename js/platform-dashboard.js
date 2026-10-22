@@ -66,8 +66,17 @@ renderPlatformLanguage(
   language,
   copy.interfaceLanguage,
 );
+const dashboardHome = selectedProduct
+  ? productLink(selectedProduct, language)
+  : language === "he"
+    ? "/dashboard/?lang=he"
+    : "/dashboard/";
+$(".platform-header .brand").href = dashboardHome;
+$(".platform-header .brand").setAttribute(
+  "aria-label",
+  language === "he" ? "דף הבית של הדשבורד" : "Dashboard home",
+);
 if (language === "he") {
-  $(".platform-header .brand").href = "/he/";
   const home = $("#account-deleted-home");
   if (home) home.href = "/he/";
 }

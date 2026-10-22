@@ -117,9 +117,17 @@ export function initializeHostLocale() {
     element.textContent = hostText(element.dataset.hostCopy);
   for (const element of document.querySelectorAll("[data-host-label]"))
     element.setAttribute("aria-label", hostText(element.dataset.hostLabel));
-  for (const link of document.querySelectorAll(
-    '.brand[href="/"], .portal-legal a',
-  )) {
+  for (const link of document.querySelectorAll("a.brand")) {
+    link.href =
+      hostLanguage === "he" ? "/dashboard/host/?lang=he" : "/dashboard/host/";
+    link.setAttribute(
+      "aria-label",
+      hostLanguage === "he"
+        ? "דף הבית של WIFIGATE Host"
+        : "WIFIGATE Host dashboard home",
+    );
+  }
+  for (const link of document.querySelectorAll(".portal-legal a")) {
     if (hostLanguage === "he")
       link.setAttribute("href", "/he" + link.getAttribute("href"));
   }

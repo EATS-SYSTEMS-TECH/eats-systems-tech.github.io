@@ -5,6 +5,61 @@ import { passGateGame } from "./gate-game-helper.mjs";
 import { scenario, startSite } from "./platform-test-fixtures.mjs";
 import { workspaceFor } from "./host-test-shell.mjs";
 
+test("dashboard logos return to their own product home and retain the interface language", async (t) => {
+  const { origin, browser } = await startSite(t);
+  for (const language of ["en", "he"]) {
+    for (const [path, home] of [
+      ["/dashboard/", "/dashboard/"],
+      ["/dashboard/manager/", "/dashboard/manager/"],
+      ["/dashboard/pay/", "/dashboard/pay/"],
+      ["/dashboard/host/", "/dashboard/host/"],
+      ["/dashboard/host/overview/", "/dashboard/host/"],
+    ])
+      await t.test(`${language} ${path}`, async (t) => {
+        const fixture = await scenario(browser, {
+          admin: true,
+          enrolled: true,
+          verified: true,
+          manager: "active",
+          pay: "active",
+        });
+        t.after(() => fixture.context.close());
+        await fixture.context.route("**/api/v1/manager/**", (route) =>
+          route.fulfill({
+            json: new URL(route.request().url()).pathname.endsWith("/me")
+              ? {
+                  role: "admin",
+                  roles: ["admin"],
+                  organizations: [],
+                  account: null,
+                }
+              : {
+                  admins: 1,
+                  users: 1,
+                  organizationAdmins: 0,
+                  organizations: 0,
+                },
+          }),
+        );
+        const page = fixture.page;
+        page.setDefaultTimeout(7000);
+        const query = language === "he" ? "?lang=he" : "";
+        await page.goto(origin + path + query);
+        await page.locator("#product-switcher-button").waitFor();
+        const brands = page.locator("a.brand");
+        assert((await brands.count()) > 0);
+        for (const brand of await brands.all())
+          assert.equal(await brand.getAttribute("href"), home + query);
+        const visibleBrand = page.locator("a.brand:visible").first();
+        await visibleBrand.click();
+        await page.waitForURL(origin + home + query);
+        assert.equal(new URL(page.url()).pathname, home);
+        assert.equal(new URL(page.url()).search, query);
+        assert.deepEqual(fixture.errors, []);
+      });
+  }
+});
+
 test("shared login, product isolation, MFA, safe redirects and session cleanup", async (t) => {
   const { origin, browser } = await startSite(t);
 
