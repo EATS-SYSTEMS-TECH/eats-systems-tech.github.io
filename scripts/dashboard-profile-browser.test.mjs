@@ -159,7 +159,10 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               assert.equal(await card.locator(".product-state").count(), 1);
               assert.equal(await card.locator(".profile-product-role").count(), 1);
               assert.equal(await card.locator(".profile-product-billing").count(), 1);
-              assert.equal(await card.locator(".product-actions a").count(), 1);
+              assert.equal(await card.locator(".product-actions a").count(), 2);
+              assert.equal(await card.locator(".product-actions > *").count(), 3);
+              assert.equal(await card.locator(".product-actions > button").isDisabled(), true);
+              assert.equal(await card.locator(".product-actions > :first-child").textContent(), language === "he" ? "פתיחה" : "Open");
             }
             for (const status of await subscriptions
               .locator('[data-subscription-value="status"]')

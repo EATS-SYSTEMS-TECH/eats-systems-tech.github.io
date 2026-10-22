@@ -395,12 +395,8 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
           ),
           true,
         );
-        assert.equal(
-          await fixture.page
-            .locator('[data-product="host"] a')
-            .getAttribute("href"),
-          mobile ? "/dashboard/host/?lang=he" : "/dashboard/host/",
-        );
+        assert.equal(await fixture.page.locator('[data-product="host"] .product-open').isDisabled(), true);
+        assert.equal(await fixture.page.locator('[data-product="host"] .product-actions a').count(), 2);
         assert.equal(
           fixture.calls.filter((call) => call.path === "/api/v1/users/me")
             .length,
@@ -648,7 +644,8 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       await fixture.page
         .locator('[data-product="host"][data-state="active"]')
         .waitFor();
-      await fixture.page.locator('[data-product="host"] a').click();
+      await fixture.page.locator("#product-switcher-button").click();
+      await fixture.page.locator('[data-product-option="host"]').click();
       await fixture.page
         .locator("#dashboard-content")
         .waitFor({ state: "visible" });
@@ -1112,7 +1109,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         await fixture.page
           .locator('[data-product="pay"][data-state="active"] a')
           .count(),
-        1,
+        2,
       );
       assert.equal(await fixture.page.locator("#host-management").count(), 0);
       await fixture.context.close();
@@ -1229,7 +1226,8 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       await page.locator("#platform-security").waitFor({ state: "visible" });
       assert.equal(fixture.state.accepted, undefined);
       assert.equal(fixture.calls.includes("begin-enroll"), false);
-      await page.locator('[data-product="host"] a').click();
+      await page.locator("#product-switcher-button").click();
+      await page.locator('[data-product-option="host"]').click();
       await page.waitForURL(origin + "/dashboard/host/");
       await page.locator("#join-organization").click();
       await page
@@ -1333,7 +1331,9 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         const tile = page.locator('.product-tile[data-product="host"]');
         await tile.waitFor();
         assert.equal(await tile.getAttribute("data-state"), "pending");
-        await tile.locator("a").click();
+        assert.equal(await tile.locator(".product-actions > button").isDisabled(), true);
+        await page.locator("#product-switcher-button").click();
+        await page.locator('[data-product-option="host"]').click();
         await page.waitForURL(
           origin + "/dashboard/host/" + (mobile ? "?lang=he" : ""),
         );

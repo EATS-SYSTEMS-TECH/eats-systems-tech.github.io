@@ -36,6 +36,8 @@ const $ = (selector) => document.querySelector(selector);
 const language = pageLanguage();
 const copy = platformText(language);
 const selectedProduct = document.body.dataset.product;
+// Billing remains a preview until subscriptions are supplied by the billing service.
+const subscriptionActive = Object.freeze({ host: false, pay: false, manager: false });
 const managerProfile = createManagerProfile({
   root: $("#manager-profile"),
   language,
@@ -251,21 +253,28 @@ function renderProducts() {
             blocked: copy.blockedDetail,
             unavailable: copy.unavailableDetail,
           }[state] ?? "");
-    if (canOpenProduct(identity, id))
-      actions.append(link(copy.open, productLink(id, language)));
-    if (state === "no-plan") {
-      const informationUrl =
-        id === "host" ? "/automation/" : `/contact-us/?product=${id}`;
-      const prefix = language === "he" ? "/he" : "";
-      actions.append(
-        link(copy.learn, prefix + informationUrl, true),
-        link(copy.contact, "https://wifigate.io/#get-in-touch", true),
-      );
-    }
+    const open = subscriptionActive[id] && canOpenProduct(identity, id)
+      ? link(copy.open, productLink(id, language))
+      : Object.assign(document.createElement("button"), {
+          type: "button",
+          className: "product-open",
+          textContent: copy.open,
+          disabled: true,
+          title: language === "he" ? "המנוי כבוי" : "Subscription is inactive",
+        });
+    const informationUrl = id === "host" ? "/automation/" : `/contact-us/?product=${id}`;
+    const prefix = language === "he" ? "/he" : "";
+    actions.append(
+      open,
+      link(copy.learn, prefix + informationUrl, true),
+      link(language === "he" ? "צור קשר" : copy.contact, "https://wifigate.io/#get-in-touch", true),
+    );
+    const recovery = document.createElement("div");
+    recovery.className = "product-recovery";
     if (state === "unavailable")
-      actions.append(actionButton(copy.retry, () => void refresh()));
+      recovery.append(actionButton(copy.retry, () => void refresh()));
     if (state === "mfa-required") {
-      actions.append(
+      recovery.append(
         actionButton(identity.mfa.enrolled ? copy.verify : copy.enroll, () => {
           showSecurity();
           $("#platform-security").scrollIntoView({
@@ -286,7 +295,7 @@ function renderProducts() {
       role.textContent = `${productName(id)} ${accessRole === "organization-admin" ? "organization admin" : accessRole}`;
       role.dir = "ltr";
     }
-    tile.append(icon, title, description, status, role, guidance, actions);
+    tile.append(icon, title, description, status, role, guidance, recovery, actions);
     return tile;
   });
   $("#product-grid").replaceChildren(...tiles);
@@ -529,7 +538,9 @@ function renderSubscriptionPreview() {
     for (const [label, value, key] of [
       [
         language === "he" ? "מנוי" : "Subscription",
-        language === "he" ? "כבוי" : "Inactive",
+        subscriptionActive[id]
+          ? language === "he" ? "פעיל" : "Active"
+          : language === "he" ? "כבוי" : "Inactive",
         "status",
       ],
       [language === "he" ? "תשלום חודשי" : "Monthly payment", zero, "monthly"],

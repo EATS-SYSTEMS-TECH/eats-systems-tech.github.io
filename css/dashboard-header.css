@@ -423,12 +423,35 @@ body[data-product=""] .product-state {
   border-radius: 4px;
 }
 body[data-product=""] .product-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
   margin-top: auto;
+}
+body[data-product=""] .product-actions > :first-child {
+  grid-column: 1 / -1;
+}
+body[data-product=""] .product-actions > button:disabled {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
+  font: inherit;
+  font-weight: 700;
+  cursor: not-allowed;
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+  color: #64748b;
+  opacity: 1;
+}
+body[data-product=""] .product-recovery:empty {
+  display: none;
 }
 body[data-product=""] .product-actions :is(a, button) {
   min-height: 44px;
   border-radius: 6px;
-  padding-inline: 16px;
+  padding-inline: 8px;
   font-size: 13px;
 }
 body[data-product=""] .profile-account-management {
