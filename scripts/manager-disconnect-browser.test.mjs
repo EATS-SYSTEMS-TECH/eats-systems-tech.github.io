@@ -91,12 +91,8 @@ test("platform Manager admin can browse customer metadata and deliberately disco
           await window.dashboard.ready;
         }, language);
         const he = language === "he";
-        await page
-          .getByRole("button", {
-            name: he ? "חשבונות לקוח" : "Customer accounts",
-            exact: true,
-          })
-          .click();
+        // An operator lands on customer administration without first
+        // navigating away from an irrelevant empty invitations screen.
         await page
           .getByText("customer@example.test", { exact: true })
           .waitFor();

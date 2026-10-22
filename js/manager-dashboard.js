@@ -1438,7 +1438,8 @@ export function createManagerDashboard({
   const ready = task(async () => {
     await refreshProfile();
     if (closed) return;
-    if (profile.account) await showSystems(null);
+    if (profile.role === "admin") await showAccounts();
+    else if (profile.account) await showSystems(null);
     else if (profile.organizations.length)
       await showSystems(profile.organizations[0].id);
     else await showInvitations();
