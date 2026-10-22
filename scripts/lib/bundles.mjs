@@ -29,7 +29,11 @@ const publicHostConfig = (path) => ({
       builder.onResolve(
         { filter: new RegExp(config.replaceAll(".", "\\.") + "$") },
         () => ({
-          path: path.replace("host-api-config.js", config),
+          // A new App Check registration must reach existing browser sessions
+          // as soon as the versioned dashboard bundle is published.
+          path:
+            path.replace("host-api-config.js", config) +
+            (config === "firebase-config.js" ? "?v=20261022m2" : ""),
           external: true,
         }),
       );
