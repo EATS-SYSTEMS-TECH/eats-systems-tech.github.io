@@ -9,7 +9,8 @@
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" />
     <link rel="stylesheet" href="/css/platform.css?v=20261022b" />
-    <script type="module" src="/js/platform-dashboard.bundle.js?v=20261022m6"></script>
+    <link rel="stylesheet" href="/css/dashboard-header.css?v=20261022profile1" />
+    <script type="module" src="/js/platform-dashboard.bundle.js?v=20261022profile1"></script>
   </head>
   <body data-product="" class="platform-page">
     <main class="platform-shell">
@@ -22,27 +23,9 @@
             height="96"
         /></a>
         <div id="product-switcher" class="product-switcher"></div>
-        <div class="account-menu">
-          <select id="platform-language" aria-label="Interface language">
-            <option value="en">English</option>
-            <option value="he">עברית</option>
-          </select>
-          <span class="platform-account-chip"
-            ><span
-              class="platform-avatar"
-              id="platform-avatar"
-              aria-hidden="true"
-            ></span
-            ><span id="platform-account"></span></span
-          ><button
-            id="platform-sign-out"
-            class="platform-sign-out"
-            type="button"
-            data-copy="signOut"
-            disabled
-          >
-            Sign out
-          </button>
+        <div class="dashboard-header-actions">
+          <select id="platform-language" aria-label="Interface language"><option value="en">English</option><option value="he">עברית</option></select>
+          <div id="manager-profile" class="account-menu"></div>
         </div>
       </header>
       <section class="platform-heading">
@@ -65,6 +48,54 @@
       >
         Try again
       </button>
+      <section
+        id="platform-account-panel"
+        class="platform-account portal-panel"
+        aria-labelledby="platform-account-title"
+        hidden
+      >
+        <div class="platform-account__head">
+          <span
+            class="platform-avatar platform-avatar--large"
+            id="account-avatar"
+            aria-hidden="true"
+          ></span>
+          <div>
+            <h2 id="platform-account-title" data-copy="account">
+              Your account
+            </h2>
+            <p class="platform-account__identity">
+              <strong id="account-name" dir="auto"></strong>
+              <span id="account-email" dir="ltr"></span>
+            </p>
+          </div>
+        </div>
+        <p class="platform-account__detail" data-copy="accountDetail">
+          You signed in with Google or Apple. Your products and security
+          settings belong to this account.
+        </p>
+        <dl id="profile-details" class="profile-details"></dl>
+        <h3 data-profile-en="Product access" data-profile-he="גישה למוצרים">Product access</h3>
+        <div id="profile-access" class="profile-access"></div>
+        <div class="platform-danger">
+          <div>
+            <strong data-copy="deleteAccount">Delete account</strong>
+            <p data-copy="deleteAccountDetail">
+              Cancels all your subscriptions and removes your user from WIFIGATE
+              systems. This can't be undone.
+            </p>
+          </div>
+          <button
+            id="delete-account"
+            class="platform-danger__button"
+            type="button"
+            data-copy="deleteAccount"
+          >
+            Delete account
+          </button>
+        </div>
+      </section>
+      <h2 class="profile-products-title" data-profile-en="My workspaces" data-profile-he="סביבות העבודה שלי">My workspaces</h2>
       <section
         id="product-grid"
         class="product-grid"
@@ -168,50 +199,6 @@
           Lost your authenticator? Contact a platform owner for identity
           verification and recovery.
         </p>
-      </section>
-      <section
-        id="platform-account-panel"
-        class="platform-account portal-panel"
-        aria-labelledby="platform-account-title"
-        hidden
-      >
-        <div class="platform-account__head">
-          <span
-            class="platform-avatar platform-avatar--large"
-            id="account-avatar"
-            aria-hidden="true"
-          ></span>
-          <div>
-            <h2 id="platform-account-title" data-copy="account">
-              Your account
-            </h2>
-            <p class="platform-account__identity">
-              <strong id="account-name" dir="auto"></strong>
-              <span id="account-email" dir="ltr"></span>
-            </p>
-          </div>
-        </div>
-        <p class="platform-account__detail" data-copy="accountDetail">
-          You signed in with Google or Apple. Your products and security
-          settings belong to this account.
-        </p>
-        <div class="platform-danger">
-          <div>
-            <strong data-copy="deleteAccount">Delete account</strong>
-            <p data-copy="deleteAccountDetail">
-              Cancels all your subscriptions and removes your user from WIFIGATE
-              systems. This can't be undone.
-            </p>
-          </div>
-          <button
-            id="delete-account"
-            class="platform-danger__button"
-            type="button"
-            data-copy="deleteAccount"
-          >
-            Delete account
-          </button>
-        </div>
       </section>
       <section
         id="account-deleted"

@@ -1,5 +1,6 @@
 import { pageLanguage } from "./platform-model.js";
 import { hostHebrew } from "./host-locale-he.js";
+import { renderPlatformLanguage } from "./platform-language.js";
 
 export const hostLanguage = pageLanguage();
 export const hostLocale = hostLanguage === "he" ? "he-IL" : "en-US";
@@ -133,43 +134,12 @@ export function initializeHostLocale() {
   }
 }
 
-// The language button: one tap switches between Hebrew and English and keeps
-// the current screen. The URL decides the language; nothing is stored.
+// The shared flag menu keeps the current screen when switching language.
+// The URL decides the language; nothing is stored.
 export function installHostLanguageSelector() {
-  const buttons = [...document.querySelectorAll("[data-host-language]")];
-  if (!buttons.length) {
-    const menu = document.querySelector(".account-menu");
-    if (!menu || document.getElementById("host-language")) return;
-    const button = document.createElement("button");
-    button.type = "button";
-    button.id = "host-language";
-    button.dataset.hostLanguage = "";
-    menu.prepend(button);
-    buttons.push(button);
-  }
-  const target = hostLanguage === "he" ? "en" : "he";
-  const name = target === "he" ? "עברית" : "English";
-  for (const button of buttons) {
-    if (button.dataset.hostLanguageReady) continue;
-    button.dataset.hostLanguageReady = "true";
-    button.dataset.language = target;
-    let label = button.querySelector("[data-host-language-name]");
-    if (!label) {
-      label = document.createElement("span");
-      label.dataset.hostLanguageName = "";
-      button.replaceChildren(label);
-    }
-    label.textContent = name;
-    label.lang = target;
-    button.setAttribute(
-      "aria-label",
-      `${hostText("Interface language")}: ${name}`,
-    );
-    button.addEventListener("click", () => {
-      const url = new URL(location.href);
-      if (target === "he") url.searchParams.set("lang", "he");
-      else url.searchParams.delete("lang");
-      location.assign(url.href);
-    });
-  }
+  renderPlatformLanguage(
+    document.getElementById("host-language"),
+    hostLanguage,
+    hostText("Interface language"),
+  );
 }

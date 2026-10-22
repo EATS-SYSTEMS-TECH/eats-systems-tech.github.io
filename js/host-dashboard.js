@@ -58,7 +58,10 @@ if (isLocalStaging) {
 // Account and security).
 const accountMenu = attachPopover($("#account-button"), $("#account-menu"), {
   align: "end",
-  focus: () => firstFocusable($("#account-menu")),
+  focus: () =>
+    !$("#account-security").hidden
+      ? $("#account-security")
+      : firstFocusable($("#account-menu")),
 });
 
 function hideProtected(sessionEnded = false) {
@@ -102,10 +105,11 @@ function renderAccount(user) {
   const name = profile.displayName || profile.email || user?.email || "";
   $("#account-avatar").textContent = initial(name);
   $("#account-name").textContent = name;
-  $("#account-email").textContent =
-    profile.displayName && profile.email ? profile.email : "";
+  $("#account-email").textContent = profile.email || "";
   $("#account-plan").replaceChildren(
-    ...(identity?.hasPlan ? [roleBadge(identity.role, true, { own: true })] : []),
+    ...(identity?.hasPlan
+      ? [roleBadge(identity.role, true, { own: true })]
+      : []),
   );
   $("#account-button").setAttribute(
     "aria-label",
@@ -138,10 +142,7 @@ async function loadDashboard(user) {
     if (requestGeneration !== generation) return;
     const fresh = hostIdentity(platform);
     const state = portalState(fresh);
-    if (
-      state !== PortalStates.APPROVED &&
-      state !== PortalStates.PENDING
-    ) {
+    if (state !== PortalStates.APPROVED && state !== PortalStates.PENDING) {
       // No Host access here (no plan, blocked, authenticator to finish or
       // unavailable): the picker explains the state and offers the next step.
       toPicker();
@@ -155,7 +156,11 @@ async function loadDashboard(user) {
     $("#host-sidebar").hidden = false;
     document.body.classList.add("host-ready");
     document.body.dataset.hostAccess =
-      state === PortalStates.PENDING ? "pending" : identity.hasPlan ? "plan" : "member";
+      state === PortalStates.PENDING
+        ? "pending"
+        : identity.hasPlan
+          ? "plan"
+          : "member";
     // A pending account has nothing to navigate. Anyone else gets the menu
     // at once, also while the workspace loads right after joining from the
     // pending view (the navigation settles it once the panels exist).

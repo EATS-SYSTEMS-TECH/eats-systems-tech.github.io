@@ -60,7 +60,7 @@ export function renderProductSwitcher(
   button.setAttribute("aria-controls", "product-switcher-list");
   button.setAttribute(
     "aria-label",
-    `${copy.switchProduct}: ${selected ? `WIFIGATE ${productName(selected)}` : copy.products}`,
+    `${copy.switchProduct}: ${selected ? `WIFIGATE ${productName(selected)}` : language === "he" ? "הפרופיל שלי" : "My profile"}`,
   );
   const name = element("span", "product-switcher__name");
   if (selected) {
@@ -69,7 +69,7 @@ export function renderProductSwitcher(
       element("span", "product-switcher__brand", "WIFIGATE "),
       productName(selected),
     );
-  } else name.textContent = copy.products;
+  } else name.textContent = language === "he" ? "הפרופיל שלי" : "My profile";
   const dot = element("span", "product-switcher__dot");
   dot.setAttribute("aria-hidden", "true");
   button.append(dot, name, svg("m6 9 6 6 6-6", "product-switcher__chevron"));
@@ -96,7 +96,9 @@ export function renderProductSwitcher(
     const title = element("strong", "", `WIFIGATE ${productName(id)}`);
     title.dir = "ltr";
     const stateLabel =
-      ["host", "manager"].includes(id) && state === "pending" ? copy[`${id}Pending`] : copy[state];
+      ["host", "manager"].includes(id) && state === "pending"
+        ? copy[`${id}Pending`]
+        : copy[state];
     label.append(title, element("span", "product-switcher__state", stateLabel));
     option.append(icon, label);
     if (!enabled) {
@@ -115,7 +117,11 @@ export function renderProductSwitcher(
     return option;
   });
   list.append(...options);
-  const all = element("a", "product-switcher__all", copy.allProducts);
+  const all = element(
+    "a",
+    "product-switcher__all",
+    language === "he" ? "הפרופיל שלי" : "My profile",
+  );
   all.href = language === "he" ? "/dashboard/?lang=he" : "/dashboard/";
   if (!selected) all.setAttribute("aria-current", "page");
   popover.append(list, all);

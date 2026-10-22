@@ -1600,7 +1600,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       await page.locator("#account-button").click();
       assert.equal(
         await page.evaluate(() =>
-          document.activeElement?.classList.contains("host-account__language"),
+          document.activeElement?.id === "host-profile-link",
         ),
         true,
       );

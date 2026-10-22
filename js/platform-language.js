@@ -31,14 +31,9 @@ export function renderPlatformLanguage(select, language, label) {
     return image;
   }
   const selected = choices.find((choice) => choice.code === language);
-  const name = document.createElement("span");
-  name.textContent = selected.name;
-  name.lang = selected.code;
-  const arrow = document.createElement("span");
-  arrow.className = "platform-language__arrow";
-  arrow.textContent = "▾";
-  arrow.setAttribute("aria-hidden", "true");
-  button.append(flag(selected), name, arrow);
+  button.title = `${label}: ${selected.name}`;
+  button.setAttribute("aria-label", `${label}: ${selected.name}`);
+  button.append(flag(selected));
   for (const choice of choices) {
     const link = document.createElement("a");
     const url = new URL(location.href);
@@ -56,6 +51,16 @@ export function renderPlatformLanguage(select, language, label) {
   const popover = attachPopover(button, panel, {
     align: "end",
     focus: () => panel.querySelector('[aria-current="true"]'),
+    onOpen: () => {
+      // Host changes views with history.pushState, after this menu is mounted.
+      // Resolve the links when opened so switching language keeps that view.
+      for (const link of panel.querySelectorAll("a[lang]")) {
+        const url = new URL(location.href);
+        if (link.lang === "he") url.searchParams.set("lang", "he");
+        else url.searchParams.delete("lang");
+        link.href = url.href;
+      }
+    },
   });
   button.addEventListener("keydown", (event) => {
     if (event.key === "ArrowDown") {

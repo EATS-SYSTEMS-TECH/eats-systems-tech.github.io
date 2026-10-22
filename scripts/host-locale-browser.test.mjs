@@ -337,8 +337,9 @@ test("the URL's language sets direction, labels and layout while names stay as p
     await page
       .locator('#host-section-navigation [data-view-id="bookings"]')
       .click();
-    assert.equal(await page.locator("#host-language").innerText(), words.other);
+    assert.equal(await page.locator("#host-language").innerText(), "");
     await page.locator("#host-language").click();
+    await page.locator("#platform-language-options").getByText(words.other, {exact: true}).click();
     await page.waitForURL((url) =>
       language === "he"
         ? !url.searchParams.has("lang")

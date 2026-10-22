@@ -39,6 +39,7 @@ const selectedProduct = document.body.dataset.product;
 const managerProfile = createManagerProfile({
   root: $("#manager-profile"),
   language,
+  product: selectedProduct,
 });
 let currentUser;
 let managerDashboard;
@@ -61,6 +62,19 @@ for (const node of document.querySelectorAll("[data-copy-label]"))
   node.setAttribute("aria-label", copy[node.dataset.copyLabel]);
 for (const node of document.querySelectorAll("[data-copy-alt]"))
   node.setAttribute("alt", copy[node.dataset.copyAlt]);
+for (const node of document.querySelectorAll("[data-profile-en]"))
+  node.textContent =
+    language === "he" ? node.dataset.profileHe : node.dataset.profileEn;
+if (!selectedProduct) {
+  const title = language === "he" ? "הפרופיל שלי" : "My profile";
+  $("#platform-title").textContent = title;
+  document.title = `${title} | WIFIGATE`;
+  $(".platform-eyebrow").textContent = "MY WIFIGATE";
+  $("[data-copy=intro]").textContent =
+    language === "he"
+      ? "פרטי החשבון, אבטחה וסביבות העבודה שלכם — במקום אחד."
+      : "Your account, security and workspaces in one place.";
+}
 renderPlatformLanguage(
   $("#platform-language"),
   language,
@@ -124,6 +138,10 @@ function clearPrivate() {
   if (avatar) avatar.textContent = "";
   const panel = $("#platform-account-panel");
   if (panel) panel.hidden = true;
+  $("#profile-details")?.replaceChildren();
+  $("#profile-access")?.replaceChildren();
+  for (const selector of ["#account-name", "#account-email", "#account-avatar"])
+    $(selector)?.replaceChildren();
 }
 
 function actionButton(label, action) {
@@ -393,7 +411,11 @@ function initial(text) {
 }
 
 function showIdentity() {
-  managerProfile?.update({}, identity.user);
+  const product = identity.products[selectedProduct];
+  managerProfile?.update(
+    { role: product?.role, roles: product?.roles },
+    identity.user,
+  );
   const name = identity.user.displayName || identity.user.email || "WIFIGATE";
   $("#platform-account").textContent = name;
   const avatar = $("#platform-avatar");
@@ -401,8 +423,80 @@ function showIdentity() {
   if (!$("#platform-account-panel")) return;
   $("#account-avatar").textContent = initial(name);
   $("#account-name").textContent = name;
-  $("#account-email").textContent =
-    identity.user.displayName && identity.user.email ? identity.user.email : "";
+  $("#account-email").textContent = identity.user.email || "";
+  renderProfileDetails();
+}
+
+function renderProfileDetails() {
+  const details = $("#profile-details");
+  if (!details) return;
+  details.replaceChildren();
+  for (const [label, value] of [
+    [
+      language === "he" ? "כתובת אימייל" : "Email address",
+      identity.user.email || "—",
+    ],
+    [
+      language === "he" ? "אימות אימייל" : "Email verification",
+      identity.user.emailVerified
+        ? language === "he"
+          ? "מאומת"
+          : "Verified"
+        : language === "he"
+          ? "ממתין לאימות"
+          : "Not verified",
+    ],
+    [
+      language === "he" ? "אפליקציית אימות" : "Authenticator",
+      identity.mfa.enrolled
+        ? language === "he"
+          ? "מוגדרת"
+          : "Set up"
+        : language === "he"
+          ? "טרם הוגדרה"
+          : "Not set up",
+    ],
+    [
+      language === "he"
+        ? "אימות ההתחברות הנוכחית"
+        : "Current sign-in verification",
+      identity.mfa.verified
+        ? language === "he"
+          ? "אומת באפליקציית האימות"
+          : "Verified with authenticator"
+        : language === "he"
+          ? "טרם אומת באפליקציית האימות"
+          : "Not verified with authenticator",
+    ],
+  ]) {
+    const row = document.createElement("div");
+    const term = document.createElement("dt");
+    const description = document.createElement("dd");
+    term.textContent = label;
+    description.textContent = value;
+    description.dir = "auto";
+    row.append(term, description);
+    details.append(row);
+  }
+  const products = $("#profile-access");
+  products.replaceChildren();
+  for (const id of productIds) {
+    const access = identity.products[id];
+    const item = document.createElement("div");
+    const title = document.createElement("strong");
+    title.textContent = productName(id);
+    title.dir = "ltr";
+    const state = document.createElement("span");
+    state.textContent = copy[access.state];
+    item.append(title, state);
+    if (access.role) {
+      const role = document.createElement("span");
+      role.textContent = `${productName(id)} ${access.role === "organization-admin" ? "organization admin" : access.role}`;
+      role.dir = "ltr";
+      item.append(role);
+    }
+    products.append(item);
+  }
 }
 
 // Account deletion: a preview of what is cancelled and closed, the account
