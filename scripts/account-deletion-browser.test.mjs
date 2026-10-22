@@ -103,6 +103,13 @@ test("account deletion from the dashboard", async (t) => {
 
     await page.click("#delete-account");
     await page.locator("#account-delete .account-delete__group").first().waitFor();
+    assert.equal(await page.locator("#account-delete-title").innerText(), "Are you sure you want to delete your account?");
+    assert.equal(calls.filter((call) => call.method === "POST").length, 0);
+    await page.click("#account-delete [data-cancel]");
+    assert.equal(await page.locator("#account-delete").isVisible(), false);
+    assert.equal(calls.filter((call) => call.method === "POST").length, 0);
+    await page.click("#delete-account");
+    await page.locator("#account-delete .account-delete__group").first().waitFor();
     const plan = await page.locator("#account-delete .account-delete__group li").allTextContents();
     assert.deepEqual(plan, ["Sea View Hotel · WIFIGATE Host", "Sea View Hotel · 2 other members lose access"]);
     assert.equal(await page.isEnabled("#account-delete .account-delete__confirm"), true);

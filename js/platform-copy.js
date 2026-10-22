@@ -84,7 +84,7 @@ const english = {
   deleteAccount: "Delete account",
   deleteAccountDetail:
     "Cancels all your subscriptions and removes your user from WIFIGATE systems. This can't be undone.",
-  deleteTitle: "Delete your WIFIGATE account?",
+  deleteTitle: "Are you sure you want to delete your account?",
   deleteText:
     "All your subscriptions will be cancelled automatically, and your user will be removed from WIFIGATE systems. This can't be undone.",
   deleteChecking: "Checking your subscriptions...",
@@ -192,7 +192,7 @@ const hebrew = {
   deleteAccount: "מחיקת החשבון",
   deleteAccountDetail:
     "מבטל את כל המנויים שלכם ומסיר את המשתמש שלכם ממערכות WIFIGATE. אי אפשר לבטל את הפעולה.",
-  deleteTitle: "למחוק את חשבון WIFIGATE שלכם?",
+  deleteTitle: "האם אתם בטוחים שברצונכם למחוק את החשבון?",
   deleteText:
     "כל המנויים שלכם יבוטלו אוטומטית, והמשתמש שלכם יוסר ממערכות WIFIGATE. אי אפשר לבטל את הפעולה.",
   deleteChecking: "בודקים את המנויים שלכם...",
