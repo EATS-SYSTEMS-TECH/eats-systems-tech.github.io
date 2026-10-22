@@ -380,7 +380,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
               top: tile.getBoundingClientRect().top,
             })),
           );
-        const axis = "top";
+        const axis = mobile ? "top" : "left";
         assert.ok(
           positions[0][axis] < positions[1][axis] &&
             positions[1][axis] < positions[2][axis],

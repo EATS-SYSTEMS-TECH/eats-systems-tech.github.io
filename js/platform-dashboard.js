@@ -141,8 +141,7 @@ function clearPrivate() {
   const management = $(".profile-account-management");
   if (management) management.hidden = true;
   $("#profile-details")?.replaceChildren();
-  $("#profile-access")?.replaceChildren();
-  $("#profile-subscription-plans")?.replaceChildren();
+  if ($("#profile-subscriptions")) $("#profile-subscriptions").hidden = true;
   $("#profile-subscription-total")?.replaceChildren();
   for (const selector of ["#account-name", "#account-email", "#account-avatar"])
     $(selector)?.replaceChildren();
@@ -280,11 +279,20 @@ function renderProducts() {
         }),
       );
     }
-    tile.append(icon, title, description, status, guidance, actions);
+    const role = document.createElement("p");
+    role.className = "profile-product-role";
+    const accessRole = identity.products[id].role;
+    if (accessRole) {
+      role.textContent = `${productName(id)} ${accessRole === "organization-admin" ? "organization admin" : accessRole}`;
+      role.dir = "ltr";
+    }
+    tile.append(icon, title, description, status, role, guidance, actions);
     return tile;
   });
   $("#product-grid").replaceChildren(...tiles);
   $("#product-grid").hidden = false;
+  renderSubscriptionPreview();
+  if ($("#profile-subscriptions")) $("#profile-subscriptions").hidden = false;
   $("#platform-retry").hidden = false;
   $("#platform-retry").textContent = copy.refresh;
   if (
@@ -502,45 +510,22 @@ function renderProfileDetails() {
     row.append(term, description);
     details.append(row);
   }
-  const products = $("#profile-access");
-  products.replaceChildren();
-  for (const id of productIds) {
-    const access = identity.products[id];
-    const item = document.createElement("div");
-    const title = document.createElement("strong");
-    title.textContent = productName(id);
-    title.dir = "ltr";
-    const state = document.createElement("span");
-    state.textContent = copy[access.state];
-    item.append(title, state);
-    if (access.role) {
-      const role = document.createElement("span");
-      role.textContent = `${productName(id)} ${access.role === "organization-admin" ? "organization admin" : access.role}`;
-      role.dir = "ltr";
-      item.append(role);
-    }
-    products.append(item);
-  }
-  renderSubscriptionPreview();
 }
 
 function renderSubscriptionPreview() {
-  const plans = $("#profile-subscription-plans");
-  if (!plans) return;
+  if (!$("#profile-subscriptions")) return;
   const zero = new Intl.NumberFormat(language === "he" ? "he-IL" : "en-GB", {
     style: "currency",
     currency: "ILS",
     maximumFractionDigits: 0,
   }).format(0);
-  plans.replaceChildren();
   // Explicit preview data: product access is not evidence of a paid subscription.
   for (const id of productIds) {
-    const card = document.createElement("article");
+    const card = $(`#product-grid [data-product="${id}"]`);
+    if (!card) continue;
     card.dataset.subscription = id;
-    const heading = document.createElement("h4");
-    heading.dir = "ltr";
-    heading.textContent = productName(id);
     const list = document.createElement("dl");
+    list.className = "profile-product-billing";
     for (const [label, value, key] of [
       [
         language === "he" ? "מנויים פעילים" : "Active subscriptions",
@@ -559,8 +544,7 @@ function renderSubscriptionPreview() {
       row.append(term, description);
       list.append(row);
     }
-    card.append(heading, list);
-    plans.append(card);
+    card.insertBefore(list, card.querySelector(".product-guidance"));
   }
   $("#profile-subscription-total").textContent = zero;
 }

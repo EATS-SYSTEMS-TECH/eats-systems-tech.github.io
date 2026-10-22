@@ -9,8 +9,8 @@
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" />
     <link rel="stylesheet" href="/css/platform.css?v=20261022b" />
-    <link rel="stylesheet" href="/css/dashboard-header.css?v=20261022profile4" />
-    <script type="module" src="/js/platform-dashboard.bundle.js?v=20261022examples1"></script>
+    <link rel="stylesheet" href="/css/dashboard-header.css?v=20261022products1" />
+    <script type="module" src="/js/platform-dashboard.bundle.js?v=20261022products1"></script>
   </head>
   <body data-product="" class="platform-page">
     <main class="platform-shell">
@@ -75,29 +75,19 @@
           settings belong to this account.
         </p>
         <dl id="profile-details" class="profile-details"></dl>
-        <section id="profile-subscriptions" class="profile-subscriptions" aria-labelledby="profile-subscriptions-title" data-billing-mode="preview">
+      </section>
+        <section id="profile-subscriptions" class="profile-subscriptions portal-panel" aria-labelledby="profile-subscriptions-title" data-billing-mode="preview" hidden>
           <div class="profile-subscriptions-heading">
-            <h3 id="profile-subscriptions-title" data-profile-en="My subscriptions" data-profile-he="המנויים שלי">My subscriptions</h3>
+            <h2 id="profile-subscriptions-title" data-profile-en="My products and subscriptions" data-profile-he="המוצרים והמנויים שלי">My products and subscriptions</h2>
             <span class="profile-preview" data-profile-en="Preview" data-profile-he="בהכנה">Preview</span>
           </div>
           <p class="profile-subscriptions-note" data-profile-en="Subscription billing is not connected yet. All quantities and amounts below are temporary zeros." data-profile-he="מערכת החיוב עדיין לא מחוברת. כמויות המנויים והסכומים המוצגים כאן הם נתוני הכנה בערך 0.">Subscription billing is not connected yet. All quantities and amounts below are temporary zeros.</p>
-          <div id="profile-subscription-plans" class="profile-subscription-plans"></div>
+          <div id="product-grid" class="product-grid" hidden></div>
           <div class="profile-subscription-total">
             <span data-profile-en="Total monthly subscription payment" data-profile-he="סה״כ תשלום חודשי למנויים">Total monthly subscription payment</span>
             <strong id="profile-subscription-total" dir="auto"></strong>
           </div>
         </section>
-        <h3 data-profile-en="Product access" data-profile-he="גישה למוצרים">Product access</h3>
-        <div id="profile-access" class="profile-access"></div>
-
-      </section>
-      <h2 class="profile-products-title" data-profile-en="Open a workspace" data-profile-he="מעבר לסביבת עבודה">Open a workspace</h2>
-      <section
-        id="product-grid"
-        class="product-grid"
-        aria-label="Products"
-        hidden
-      ></section>
       <section id="product-workspace" class="portal-panel" hidden>
         <h2 id="product-title"></h2>
         <p data-copy="empty">

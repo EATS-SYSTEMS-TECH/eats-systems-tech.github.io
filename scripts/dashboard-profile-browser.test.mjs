@@ -132,7 +132,7 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               .getByText("fixture@example.test", { exact: true })
               .waitFor();
             assert.equal(
-              await page.locator("#profile-access > div").count(),
+              await page.locator("#profile-subscriptions .product-tile").count(),
               3,
             );
             const details = page.locator("#profile-details");
@@ -150,6 +150,13 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               await subscriptions.locator("[data-subscription]").count(),
               3,
             );
+            for (const productId of ["host", "pay", "manager"]) {
+              const card = subscriptions.locator(`[data-product="${productId}"]`);
+              assert.equal(await card.locator(".product-state").count(), 1);
+              assert.equal(await card.locator(".profile-product-role").count(), 1);
+              assert.equal(await card.locator(".profile-product-billing").count(), 1);
+              assert.equal(await card.locator(".product-actions a").count(), 1);
+            }
             for (const count of await subscriptions
               .locator('[data-subscription-value="active"]')
               .allTextContents())
