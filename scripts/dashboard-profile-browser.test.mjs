@@ -57,6 +57,15 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               product === "host" ? ".host-topbar" : ".platform-header",
             );
             assert.equal(await header.locator("a.brand").isVisible(), true);
+            if (!product && width >= 651) {
+              const switcher = header.locator("#product-switcher-button");
+              await switcher.click();
+              const switcherBox = await switcher.boundingBox();
+              const menuBox = await page.locator(".product-switcher__popover").boundingBox();
+              assert.equal(switcherBox.width, menuBox.width);
+              assert.ok(Math.abs(switcherBox.x - menuBox.x) < 1);
+              await page.keyboard.press("Escape");
+            }
             const flag = header.locator(".platform-language__button");
             assert.equal(await flag.innerText(), "");
             assert.equal(await flag.locator("img").isVisible(), true);

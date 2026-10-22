@@ -119,6 +119,12 @@ body[data-product] .product-switcher__brand {
 html[lang="he"] .product-switcher__name {
   font-weight: 700;
 }
+@media (min-width: 651px) {
+  body[data-product=""] #product-switcher-button {
+    width: min(320px, calc(100vw - 32px));
+    justify-content: center;
+  }
+}
 body[data-product]
   :is(.platform-header, .host-topbar)
   :is(.dashboard-profile-button, .host-icon-button, .workspace-menu-toggle) {
