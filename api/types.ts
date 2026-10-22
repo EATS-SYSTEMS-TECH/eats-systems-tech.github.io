@@ -24,7 +24,20 @@ export type ProductId = "host" | "pay" | "manager";
 export type ProductState =
   "active" | "pending" | "no-plan" | "blocked" | "mfa-required" | "unavailable";
 export type PersonalSummary = { gates: number | null; dualControls: number | null; groups: number | null; organizations: number };
-export type ProductAccess = { state: ProductState; organizations?: number; summary?: PersonalSummary | null };
+export type MonthlyEstimate = {
+  kind: "monthly-estimate";
+  currency: string;
+  pricingVersion: string;
+  taxIncluded: false;
+  invoiceIssued: false;
+  physicalGates: number;
+  unitCents: number;
+  minimumAdjustmentCents: number;
+  lines: Record<"gates" | "dualControls" | "groups" | "organizations", { amountCents: number; physicalGates?: number; quantity?: number; included?: number | null }>;
+  monthlyCents: number;
+};
+export type ProductFinancials = MonthlyEstimate | { kind: "revenue"; revenue: { currency: string; amountCents: number } | null };
+export type ProductAccess = { state: ProductState; organizations?: number; summary?: PersonalSummary | null; financials?: ProductFinancials | null };
 // The Host plan role: admin (WIFIGATE operator) or user (paying customer).
 // null (or absent) means no plan: an organization member without My systems.
 export type HostPlanRole = Role;

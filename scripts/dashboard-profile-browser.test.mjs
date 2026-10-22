@@ -2,6 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { startSite, scenario } from "./platform-test-fixtures.mjs";
 
+const estimate = (amounts) => ({kind: "monthly-estimate", currency: "USD", monthlyCents: amounts.reduce((a,b) => a+b,0), lines: Object.fromEntries(["gates", "dualControls", "groups", "organizations"].map((key,i) => [key,{amountCents: amounts[i]}]))});
+
 test("every dashboard shares a flag selector and profile entry into My profile", async (t) => {
   const { origin, browser } = await startSite(t);
   for (const language of ["he", "en"])
@@ -16,6 +18,11 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               verified: true,
               manager: "active",
               pay: "active",
+              productFinancials: {
+                host: estimate([3500, 2000, 4500, 0]),
+                manager: estimate([3190, 2320, 4350, 0]),
+                pay: {kind: "revenue", revenue: {currency: "ILS", amountCents: 12550}},
+              },
               personalSummaries: {
                 host: { gates: 7, dualControls: 2, groups: 3, organizations: 1 },
                 manager: { gates: 11, dualControls: 4, groups: 5, organizations: 2 },
@@ -189,23 +196,20 @@ test("every dashboard shares a flag selector and profile entry into My profile",
                 await card.locator("[data-personal-count]").allTextContents(),
                 productId === "host" ? ["7", "2", "3", "1"]
                   : productId === "manager" ? ["11", "4", "5", "2"]
-                  : ["—", "—", "—", "—"],
+                  : [],
               );
-              assert.equal(await card.locator(".product-actions a").count(), 2);
+              assert.equal(await card.locator(".product-actions a").count(), 3);
               assert.equal(await card.locator(".product-actions > *").count(), 3);
-              assert.equal(await card.locator(".product-actions > button").isDisabled(), true);
+              assert.equal(await card.locator(".product-actions > button").count(), 0);
+              assert.equal(await card.locator("[data-personal-cost]").count(), productId === "pay" ? 0 : 4);
               assert.equal(await card.locator(".product-actions > :first-child").textContent(), language === "he" ? "פתיחה" : "Open");
             }
             assert.equal(await subscriptions.locator('[data-subscription-value="status"]').count(), 0);
-            for (const amount of await subscriptions
-              .locator(
-                '[data-subscription-value="monthly"], #profile-subscription-total',
-              )
-              .allTextContents()) {
-              assert.match(amount, /0/);
-              assert.match(amount, /\$/);
-              assert.doesNotMatch(amount, /₪/);
-            }
+            assert.match(await subscriptions.locator('[data-product="host"] [data-subscription-value="monthly"]').innerText(), /100\.00/);
+            assert.match(await subscriptions.locator('[data-product="manager"] [data-subscription-value="monthly"]').innerText(), /98\.60/);
+            assert.equal(await subscriptions.locator('[data-product="pay"] [data-subscription-value="monthly"]').count(), 0);
+            assert.match(await subscriptions.locator('[data-subscription-value="revenue"]').innerText(), /125\.50/);
+            assert.match(await page.locator('#profile-subscription-total').innerText(), /198\.60/);
             if (process.env.DASHBOARD_PREVIEW_DIR)
               await page.screenshot({
                 path: `${process.env.DASHBOARD_PREVIEW_DIR}/profile-subscriptions-${language}-${width}.png`,

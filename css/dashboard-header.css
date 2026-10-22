@@ -374,21 +374,30 @@ body[data-product]
   font-size: 14px;
   font-weight: 700;
 }
-.profile-product-totals dl {
-  display: grid;
-  gap: 12px;
+.profile-product-totals table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+  border-collapse: collapse;
   margin: 12px 0 0;
-  padding-block: 14px;
   border-block: 1px solid var(--dashboard-line);
 }
-.profile-product-totals dl > div {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
+.profile-product-totals th,
+.profile-product-totals td {
+  padding: 10px 3px;
+  border: 0;
+  background: transparent;
+  text-align: end;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+  font-size: 13px;
 }
-.profile-product-totals dt { color: var(--muted); font-size: 13px; }
-.profile-product-totals dd { margin: 0; font-size: 18px; font-weight: 700; }
+.profile-product-totals th:first-child { width: 44%; text-align: start; }
+.profile-product-totals th:nth-child(2) { width: 18%; }
+.profile-product-totals thead th { color: var(--muted); font-size: 11px; font-weight: 500; }
+.profile-product-totals tbody th { color: var(--muted); font-weight: 400; }
+.profile-product-totals tbody td { font-weight: 700; font-variant-numeric: tabular-nums; }
+.profile-cost-basis { font-size: 11px; line-height: 1.6; color: var(--muted); margin: 8px 0; }
 .profile-product-totals + .profile-product-billing {
   padding-block: 0 14px;
   border-block-start: 0;

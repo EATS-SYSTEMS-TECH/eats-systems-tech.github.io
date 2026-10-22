@@ -31,13 +31,12 @@ import qrcode from "./vendor/qrcode-generator.js";
 import { createManagerDashboard } from "./manager-dashboard.js";
 import { createManagerProfile } from "./manager-profile.js";
 import { renderPlatformLanguage } from "./platform-language.js";
+import { monthlyEstimate, monthlyTotal, revenueTotal, formatMoney } from "./profile-financials.js";
 
 const $ = (selector) => document.querySelector(selector);
 const language = pageLanguage();
 const copy = platformText(language);
 const selectedProduct = document.body.dataset.product;
-// Billing remains a preview until subscriptions are supplied by the billing service.
-const subscriptionActive = Object.freeze({ host: false, pay: false, manager: false });
 const managerProfile = createManagerProfile({
   root: $("#manager-profile"),
   language,
@@ -253,14 +252,14 @@ function renderProducts() {
             blocked: copy.blockedDetail,
             unavailable: copy.unavailableDetail,
           }[state] ?? "");
-    const open = subscriptionActive[id] && canOpenProduct(identity, id)
+    const open = canOpenProduct(identity, id)
       ? link(copy.open, productLink(id, language))
       : Object.assign(document.createElement("button"), {
           type: "button",
           className: "product-open",
           textContent: copy.open,
           disabled: true,
-          title: language === "he" ? "המנוי כבוי" : "Subscription is inactive",
+          title: guidance.textContent,
         });
     const informationUrl = id === "host" ? "/automation/" : `/contact-us/?product=${id}`;
     const prefix = language === "he" ? "/he" : "";
@@ -523,47 +522,69 @@ function renderProfileDetails() {
 
 function renderSubscriptionPreview() {
   if (!$("#profile-subscriptions")) return;
-  const zero = new Intl.NumberFormat(language === "he" ? "he-IL" : "en-GB", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(0);
-  // Explicit preview data: product access is not evidence of a paid subscription.
+  // Server estimates use owned, deduplicated physical gates; Pay is revenue only.
   for (const id of productIds) {
     const card = $(`#product-grid [data-product="${id}"]`);
     if (!card) continue;
     card.dataset.subscription = id;
+    const estimate = monthlyEstimate(identity.products[id]);
     const summary = identity.products[id].summary;
-    const totals = document.createElement("section");
-    totals.className = "profile-product-totals";
-    const heading = document.createElement("h3");
-    heading.textContent = language === "he" ? "סה״כ" : "Totals";
-    totals.append(heading);
-    const counts = document.createElement("dl");
-    for (const [key, he, en] of [
-      ["gates", "שערים", "Gates"],
-      ["dualControls", "Dual Controls", "Dual Controls"],
-      ["groups", "קבוצות", "Groups"],
-      ["organizations", "ארגונים", "Organizations"],
-    ]) {
-      const row = document.createElement("div");
-      const term = document.createElement("dt");
-      term.textContent = language === "he" ? he : en;
-      const value = document.createElement("dd");
-      value.dataset.personalCount = key;
-      value.textContent = Number.isSafeInteger(summary?.[key]) && summary[key] >= 0
-        ? new Intl.NumberFormat(language === "he" ? "he-IL" : "en-GB").format(summary[key])
-        : "—";
-      if (value.textContent === "—") value.setAttribute("aria-label", language === "he" ? "לא זמין כרגע" : "Not available");
-      row.append(term, value);
-      counts.append(row);
+    if (id !== "pay") {
+      const totals = document.createElement("section");
+      totals.className = "profile-product-totals";
+      const heading = document.createElement("h3");
+      heading.textContent = language === "he" ? "סה״כ" : "Totals";
+      totals.append(heading);
+      const counts = document.createElement("table");
+      counts.setAttribute("aria-label", language === "he" ? "כמויות ועלויות חודשיות משוערות" : "Quantities and estimated monthly costs");
+      const head = counts.createTHead().insertRow();
+      for (const label of language === "he" ? ["סוג", "כמות", "עלות חודשית"] : ["Type", "Quantity", "Monthly cost"]) {
+        const cell = document.createElement("th");
+        cell.scope = "col";
+        cell.textContent = label;
+        head.append(cell);
+      }
+      const body = counts.createTBody();
+      for (const [key, he, en] of [
+        ["gates", "שערים", "Gates"],
+        ["dualControls", "Dual Controls", "Dual Controls"],
+        ["groups", "קבוצות", "Groups"],
+        ["organizations", "ארגונים", "Organizations"],
+      ]) {
+        const row = body.insertRow();
+        const term = document.createElement("th");
+        term.scope = "row";
+        term.textContent = language === "he" ? he : en;
+        const value = document.createElement("td");
+        value.dataset.personalCount = key;
+        value.textContent = Number.isSafeInteger(summary?.[key]) && summary[key] >= 0
+          ? new Intl.NumberFormat(language === "he" ? "he-IL" : "en-GB").format(summary[key])
+          : "—";
+        if (value.textContent === "—") value.setAttribute("aria-label", language === "he" ? "לא זמין כרגע" : "Not available");
+        const cost = document.createElement("td");
+        cost.dataset.personalCost = key;
+        cost.dir = "auto";
+        cost.textContent = formatMoney(estimate?.lines[key]?.amountCents, estimate?.currency, language);
+        row.append(term, value, cost);
+      }
+      totals.append(counts);
+      card.insertBefore(totals, card.querySelector(".product-guidance"));
+      const note = document.createElement("p");
+      note.className = "profile-cost-basis";
+      note.textContent = language === "he"
+        ? "אומדן לחודש מלא לפני מס. רק שערים פיזיים בבעלותך מחושבים, פעם אחת; שערים של זוגות וקבוצות כלולים בעלות שלהם."
+        : "Full-month estimate before tax. Only your owned physical gates are priced, once; pair and group costs include their gates.";
+      if (id === "manager") note.textContent += language === "he"
+        ? " שלושה ארגונים כלולים; מינימום שער אחד לחשבון לקוח פעיל."
+        : " Three organizations included; one-gate minimum for an active customer account.";
+      card.insertBefore(note, card.querySelector(".product-guidance"));
     }
-    totals.append(counts);
-    card.insertBefore(totals, card.querySelector(".product-guidance"));
     const list = document.createElement("dl");
     list.className = "profile-product-billing";
     for (const [label, value, key] of [
-      [language === "he" ? "תשלום חודשי" : "Monthly payment", zero, "monthly"],
+      [id === "pay" ? (language === "he" ? "סה״כ הכנסות" : "Total revenue") : (language === "he" ? "תשלום חודשי" : "Monthly payment"),
+       id === "pay" ? revenueTotal(identity.products[id], language) : formatMoney(estimate?.monthlyCents, estimate?.currency, language),
+       id === "pay" ? "revenue" : "monthly"],
     ]) {
       const row = document.createElement("div");
       const term = document.createElement("dt");
@@ -576,8 +597,14 @@ function renderSubscriptionPreview() {
       list.append(row);
     }
     card.insertBefore(list, card.querySelector(".product-guidance"));
+    if (id === "pay" && revenueTotal(identity.products[id], language) === "—") {
+      const note = document.createElement("p");
+      note.className = "profile-cost-basis";
+      note.textContent = language === "he" ? "נתוני הכנסות מאומתים עדיין אינם זמינים." : "Verified revenue data is not available yet.";
+      card.insertBefore(note, card.querySelector(".product-guidance"));
+    }
   }
-  $("#profile-subscription-total").textContent = zero;
+  $("#profile-subscription-total").textContent = monthlyTotal(identity.products, language);
 }
 
 // Account deletion: a preview of what is cancelled and closed, the account
