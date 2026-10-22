@@ -171,7 +171,8 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               )
               .allTextContents()) {
               assert.match(amount, /0/);
-              assert.match(amount, /₪/);
+              assert.match(amount, /\$/);
+              assert.doesNotMatch(amount, /₪/);
             }
             if (process.env.DASHBOARD_PREVIEW_DIR)
               await page.screenshot({

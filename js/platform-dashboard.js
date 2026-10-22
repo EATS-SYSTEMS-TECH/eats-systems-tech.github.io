@@ -516,7 +516,7 @@ function renderSubscriptionPreview() {
   if (!$("#profile-subscriptions")) return;
   const zero = new Intl.NumberFormat(language === "he" ? "he-IL" : "en-GB", {
     style: "currency",
-    currency: "ILS",
+    currency: "USD",
     maximumFractionDigits: 0,
   }).format(0);
   // Explicit preview data: product access is not evidence of a paid subscription.
