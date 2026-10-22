@@ -1,7 +1,7 @@
 import { signOut } from "./site-auth.js";
 import { loginPath, pageLanguage } from "./platform-model.js";
 
-export const idleTimeoutMs = 30 * 60 * 1000;
+export const idleTimeoutMs = 24 * 60 * 60 * 1000;
 
 export function watchSession({
   clear,

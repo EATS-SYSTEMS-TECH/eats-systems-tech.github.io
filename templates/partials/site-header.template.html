@@ -1,6 +1,6 @@
 <!-- Shared site navigation. Labels and URLs come from scripts/site-navigation.mjs. -->
 <header class="site-header" id="top">
-  <script>try{for(var i=0;i<sessionStorage.length;i++)if(/^firebase:authUser:[^:]+:\[DEFAULT\]$/.test(sessionStorage.key(i))){document.getElementById("top").classList.add("site-header--account");break}}catch(e){}</script>
+  <script>for(var stores=["localStorage","sessionStorage"],s=0;s<stores.length;s++)try{var storage=window[stores[s]];for(var i=0;i<storage.length;i++)if(/^firebase:authUser:[^:]+:\[DEFAULT\]$/.test(storage.key(i))){document.getElementById("top").classList.add("site-header--account");break}}catch(e){}</script>
   <nav class="nav" aria-label="Main navigation">
     <a href="/" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
       <img src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" class="nav__logo" width="416" height="96">

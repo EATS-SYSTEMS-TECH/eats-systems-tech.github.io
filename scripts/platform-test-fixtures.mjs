@@ -142,8 +142,8 @@ export async function scenario(browser, options = {}) {
         getIdTokenResult: async () => ({claims: {firebase: {sign_in_provider: "google.com"}}}) };
       export const getAuth = () => ({});
       export const connectAuthEmulator = () => {};
-      export const browserSessionPersistence = {};
-      export const setPersistence = async () => {};
+      export const browserLocalPersistence = {type: "local"};
+      export const setPersistence = async (_, persistence) => { await window.authFixtureEvent({type: "persistence", mode: persistence.type}); };
       export const onAuthStateChanged = (_, callback) => { observer = callback; setTimeout(() => callback(signedIn ? user : null), 0); return () => {}; };
       window.fixtureChangeUser = async uid => { user = {...user, uid}; enrolled = false; await window.authFixtureEvent({type: "identity", uid}); observer?.(user); };
       export const GoogleAuthProvider = function () { this.setCustomParameters = () => {}; };

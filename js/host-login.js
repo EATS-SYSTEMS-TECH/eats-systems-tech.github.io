@@ -5,7 +5,7 @@ import {
   signOut,
   completeAuthCallback,
   signInRedirect,
-} from "./site-auth.js";
+} from "./site-auth.js?v=20261022day1";
 import { isLocalStaging } from "./firebase-config.js";
 import { getPlatformProfile } from "./api/index.js?v=20261022ac1";
 import {
@@ -15,7 +15,7 @@ import {
   signInRefusal,
   signInRefusals,
 } from "./platform-model.js";
-import { watchSession } from "./platform-session.js";
+import { watchSession } from "./platform-session.js?v=20261022day1";
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
 import { requestHumanCheck } from "./login-gate-game.js";
 const status = document.querySelector("#login-status");

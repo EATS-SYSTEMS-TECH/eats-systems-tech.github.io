@@ -958,7 +958,7 @@ function updateSharedHeader($, homeData, locale, pageKey) {
   $("script[src*='js/site-account.js']").remove();
   $("script[src*='js/navigation.js']")
     .attr("src", prefix + "js/navigation.js?v=20261022outside1")
-    .after('\n  <script src="' + prefix + 'js/site-account.js?v=20261013a" defer></script>');
+    .after('\n  <script src="' + prefix + 'js/site-account.js?v=20261022day1" defer></script>');
   $("body").append('<script src="' + prefix + 'js/site-cart.js?v=20261016a" defer></script>');
 }
 

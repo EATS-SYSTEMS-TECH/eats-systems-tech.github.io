@@ -19,7 +19,7 @@ const authModule = `
     getIdToken: async () => "isolated-token",
     getIdTokenResult: async () => ({claims: {firebase: {sign_in_provider: "google.com"}}}) };
   export const getAuth = () => ({}); export const connectAuthEmulator = () => {};
-  export const browserSessionPersistence = {}; export const setPersistence = async () => {};
+  export const browserLocalPersistence = {}; export const setPersistence = async () => {};
   export const onAuthStateChanged = (_, callback) => { observer = callback; setTimeout(() => callback(signedIn ? user : null), 0); return () => {}; };
   export const GoogleAuthProvider = function () { this.setCustomParameters = () => {}; };
   export const OAuthProvider = function () { this.addScope = () => {}; };

@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="../../css/shop.css?v=20261019a">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261022outside1" defer=""></script>
-  <script src="../../js/site-account.js?v=20261013a" defer=""></script>
+  <script src="../../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../../js/shop-page.js?v=20261016a" defer=""></script>
   <script src="../../js/language-selector.js?v=20261006a" defer=""></script>
   <script>window.accessibilityCopy = {"fr":{"skipLink":"Aller au contenu principal","eyebrow":"Accessibilité","openButton":"Ouvrir le menu d'accessibilité","closeButton":"Fermer le menu d'accessibilité","title":"Menu d'accessibilité","description":"Adaptez le site à votre façon de lire et de naviguer. Vos choix sont enregistrés sur cet appareil.","reset":"Tout réinitialiser","statusDefault":"Affichage standard du site","statusActive":"{count} réglages actifs","hideButton":"Masquer le bouton d'accessibilité jusqu'au rechargement de la page","statementLink":"Déclaration d'accessibilité","textSize":{"label":"Taille du texte","description":"Agrandir le texte sur tout le site.","decrease":"Texte plus petit","increase":"Texte plus grand","level":"Taille du texte {percent} %"},"options":{"highContrast":{"label":"Contraste élevé","description":"Texte foncé sur fond clair avec des bordures marquées."},"grayscale":{"label":"Niveaux de gris","description":"Afficher le site sans couleurs."},"underlineLinks":{"label":"Mettre en évidence les liens","description":"Souligner et signaler chaque lien."},"readableFont":{"label":"Police lisible","description":"Une police simple et très lisible."},"textSpacing":{"label":"Espacement du texte","description":"Plus d'espace entre les lignes, les mots et les lettres."},"highlightHeadings":{"label":"Mettre en évidence les titres","description":"Repérer les titres pour montrer la structure de la page."},"bigCursor":{"label":"Grand curseur","description":"Un pointeur de souris plus grand."},"focusHighlight":{"label":"Focus bien visible","description":"Un contour épais autour de l'élément qui a le focus clavier."},"reducedMotion":{"label":"Arrêter les animations","description":"Arrêter les animations, les transitions et la vidéo d'arrière-plan."}}}};</script>
@@ -20,7 +20,7 @@
 <body class="shop-page">
   <a class="skip-link" href="#main-content">Aller au contenu principal</a>
   <header class="site-header" id="top">
-    <script>try{for(var i=0;i<sessionStorage.length;i++)if(/^firebase:authUser:[^:]+:\[DEFAULT\]$/.test(sessionStorage.key(i))){document.getElementById("top").classList.add("site-header--account");break}}catch(e){}</script>
+    <script>for(var stores=["localStorage","sessionStorage"],s=0;s<stores.length;s++)try{var storage=window[stores[s]];for(var i=0;i<storage.length;i++)if(/^firebase:authUser:[^:]+:\[DEFAULT\]$/.test(storage.key(i))){document.getElementById("top").classList.add("site-header--account");break}}catch(e){}</script>
     <nav class="nav" aria-label="Navigation principale">
       <a href="/fr/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
         <img src="../../assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" class="nav__logo" width="416" height="96">

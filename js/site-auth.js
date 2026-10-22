@@ -22,7 +22,7 @@ async function ready() {
           disableWarnings: true
         });
       }
-      await api.setPersistence(auth, api.browserSessionPersistence);
+      await api.setPersistence(auth, api.browserLocalPersistence);
     })().catch((error) => {
       initialization = undefined;
       throw error;

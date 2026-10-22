@@ -5,6 +5,25 @@ import { passGateGame } from "./gate-game-helper.mjs";
 import { scenario, startSite } from "./platform-test-fixtures.mjs";
 import { workspaceFor } from "./host-test-shell.mjs";
 
+test("web sign-in persists locally and activity renews a full idle day", async (t) => {
+  const { origin, browser } = await startSite(t);
+  const fixture = await scenario(browser);
+  t.after(() => fixture.context.close());
+  const { page, calls } = fixture;
+  await page.clock.install();
+  await page.goto(origin + "/dashboard/");
+  await page.locator("#product-switcher-button").waitFor();
+  assert.ok(calls.some(event => event?.type === "persistence" && event.mode === "local"));
+  await page.clock.fastForward(23 * 60 * 60 * 1000);
+  assert.equal(calls.includes("signout"), false);
+  await page.evaluate(() => window.dispatchEvent(new Event("pointerdown")));
+  await page.clock.fastForward(2 * 60 * 60 * 1000);
+  assert.equal(calls.includes("signout"), false, "activity extends the idle window");
+  await page.clock.fastForward(22 * 60 * 60 * 1000 + 1);
+  await page.waitForURL(origin + "/login/");
+  assert.ok(calls.includes("signout"));
+});
+
 test("returning to the dashboard preserves its view until a manual reload", async (t) => {
   const { origin, browser } = await startSite(t);
   for (const language of ["he", "en"]) {
@@ -1107,7 +1126,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
       await fixture.page
         .locator("#login-status", { hasText: "Unable to check access" })
         .waitFor();
-      await fixture.page.clock.fastForward(30 * 60 * 1000 + 1);
+      await fixture.page.clock.fastForward(24 * 60 * 60 * 1000 + 1);
       await fixture.page.waitForURL(origin + "/login/");
       await fixture.page.waitForFunction(
         () => !document.querySelector('[data-provider="google"]').disabled,
@@ -1153,13 +1172,15 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
   );
 
   await t.test(
-    "thirty idle minutes and401 both end the tab session",
+    "a full idle day and401 both end the session",
     async () => {
       const idle = await scenario(browser);
       await idle.page.clock.install();
       await idle.page.goto(origin + "/dashboard/");
       await idle.page.locator(".product-tile").first().waitFor();
-      await idle.page.clock.fastForward(30 * 60 * 1000 + 1);
+      await idle.page.clock.fastForward(23 * 60 * 60 * 1000);
+      assert.equal(idle.calls.includes("signout"), false);
+      await idle.page.clock.fastForward(60 * 60 * 1000 + 1);
       await idle.page.waitForURL(origin + "/login/");
       assert.ok(idle.calls.includes("signout"));
       await idle.context.close();

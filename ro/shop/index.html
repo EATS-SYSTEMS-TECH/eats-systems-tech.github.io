@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="../../css/shop.css?v=20261019a">
   <script src="../../js/utils.js?v=20260402a" defer=""></script>
   <script src="../../js/navigation.js?v=20261022outside1" defer=""></script>
-  <script src="../../js/site-account.js?v=20261013a" defer=""></script>
+  <script src="../../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../../js/shop-page.js?v=20261016a" defer=""></script>
   <script src="../../js/language-selector.js?v=20261006a" defer=""></script>
   <script>window.accessibilityCopy = {"ro":{"skipLink":"Salt la conținutul principal","eyebrow":"Accesibilitate","openButton":"Deschide meniul de accesibilitate","closeButton":"Închide meniul de accesibilitate","title":"Meniu de accesibilitate","description":"Adaptați site-ul la felul în care citiți și navigați. Alegerile dumneavoastră se păstrează pe acest dispozitiv.","reset":"Resetează tot","statusDefault":"Afișare standard a site-ului","statusActive":"Ajustări active: {count}","hideButton":"Ascunde butonul de accesibilitate până la reîncărcarea paginii","statementLink":"Declarație de accesibilitate","textSize":{"label":"Dimensiunea textului","description":"Mărește textul pe tot site-ul.","decrease":"Text mai mic","increase":"Text mai mare","level":"Dimensiunea textului {percent}%"},"options":{"highContrast":{"label":"Contrast ridicat","description":"Text închis la culoare pe fundal deschis, cu margini puternice."},"grayscale":{"label":"Tonuri de gri","description":"Afișează site-ul fără culori."},"underlineLinks":{"label":"Evidențiază linkurile","description":"Subliniază și marchează fiecare link."},"readableFont":{"label":"Font lizibil","description":"Un font simplu, foarte lizibil."},"textSpacing":{"label":"Spațiere text","description":"Mai mult spațiu între rânduri, cuvinte și litere."},"highlightHeadings":{"label":"Evidențiază titlurile","description":"Marchează titlurile pentru a arăta structura paginii."},"bigCursor":{"label":"Cursor mare","description":"Un indicator de mouse mai mare."},"focusHighlight":{"label":"Focalizare vizibilă","description":"Un contur gros în jurul elementului focalizat de la tastatură."},"reducedMotion":{"label":"Oprește animațiile","description":"Oprește animațiile, tranzițiile și videoclipul de fundal."}}}};</script>
@@ -20,7 +20,7 @@
 <body class="shop-page">
   <a class="skip-link" href="#main-content">Salt la conținutul principal</a>
   <header class="site-header" id="top">
-    <script>try{for(var i=0;i<sessionStorage.length;i++)if(/^firebase:authUser:[^:]+:\[DEFAULT\]$/.test(sessionStorage.key(i))){document.getElementById("top").classList.add("site-header--account");break}}catch(e){}</script>
+    <script>for(var stores=["localStorage","sessionStorage"],s=0;s<stores.length;s++)try{var storage=window[stores[s]];for(var i=0;i<storage.length;i++)if(/^firebase:authUser:[^:]+:\[DEFAULT\]$/.test(storage.key(i))){document.getElementById("top").classList.add("site-header--account");break}}catch(e){}</script>
     <nav class="nav" aria-label="Navigare principală">
       <a href="/ro/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
         <img src="../../assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" class="nav__logo" width="416" height="96">

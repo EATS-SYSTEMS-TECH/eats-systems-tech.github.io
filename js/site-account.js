@@ -1,7 +1,8 @@
 // /js/site-account.js
 // The signed-in account in the shared header. /login/ keeps its Firebase Auth
-// session in this tab's sessionStorage (js/site-auth.js,
-// browserSessionPersistence). A page without that entry shows "Log in" and
+// session in localStorage (js/site-auth.js, browserLocalPersistence).
+// Also recognize existing sessionStorage entries during the transition.
+// A page without an entry shows "Log in" and
 // does nothing more: no Firebase code loads. With it, the header shows the
 // account from the stored entry at once (the inline check in the header
 // partial hides "Log in" before the first paint), and js/site-auth.js loads
@@ -14,7 +15,7 @@
 
   const SESSION_KEY = /^firebase:authUser:[^:]+:\[DEFAULT\]$/;
   const SIGNED_IN = "site-header--account";
-  const authUrl = new URL("site-auth.js", document.currentScript.src).href;
+  const authUrl = new URL("site-auth.js?v=20261022day1", document.currentScript.src).href;
   const button = account.querySelector(".site-account__button");
   const panel = account.querySelector(".site-account__panel");
   const avatar = account.querySelector(".site-account__avatar");
@@ -30,21 +31,24 @@
 
   function sessionKeys() {
     const keys = [];
-    try {
-      for (let index = 0; index < sessionStorage.length; index += 1) {
-        const key = sessionStorage.key(index);
-        if (SESSION_KEY.test(key)) keys.push(key);
+    for (const name of ["localStorage", "sessionStorage"]) {
+      try {
+        const storage = window[name];
+        for (let index = 0; index < storage.length; index += 1) {
+          const key = storage.key(index);
+          if (SESSION_KEY.test(key)) keys.push({ storage, key });
+        }
+      } catch {
+        // One blocked storage mechanism must not hide the other.
       }
-    } catch {
-      // Storage blocked: no session can exist in this tab.
     }
     return keys;
   }
 
   function storedUser() {
-    for (const key of sessionKeys()) {
+    for (const { storage, key } of sessionKeys()) {
       try {
-        const user = JSON.parse(sessionStorage.getItem(key));
+        const user = JSON.parse(storage.getItem(key));
         if (user && typeof user.uid === "string" && user.uid) return user;
       } catch {
         // An unreadable entry is no session.
@@ -162,11 +166,10 @@
       const auth = await loadAuth();
       await auth.signOut();
     } catch {
-      // Firebase could not load: end the session in this tab the way its
-      // signOut does, by clearing the stored entry.
-      for (const key of sessionKeys()) {
+      // Firebase could not load: clear both persistent and older tab entries.
+      for (const { storage, key } of sessionKeys()) {
         try {
-          sessionStorage.removeItem(key);
+          storage.removeItem(key);
         } catch {
           // Nothing more to clear.
         }
@@ -232,6 +235,9 @@
   // A page restored from the back/forward cache shows the session of now.
   window.addEventListener("pageshow", (event) => {
     if (event.persisted) sync();
+  });
+  window.addEventListener("storage", (event) => {
+    if (event.key === null || SESSION_KEY.test(event.key)) sync();
   });
 
   sync();

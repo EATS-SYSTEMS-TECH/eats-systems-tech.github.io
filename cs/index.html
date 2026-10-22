@@ -86,7 +86,7 @@
   <script src="../js/utils.js?v=20260402a" defer=""></script>
 
   <script src="../js/navigation.js?v=20261022outside1" defer=""></script>
-  <script src="../js/site-account.js?v=20261013a" defer=""></script>
+  <script src="../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../js/media-runtime.js?v=20261019d" defer=""></script><script src="../js/hero.js?v=20261019d" defer=""></script>
 
   <script>window.accessibilityCopy = {"cs":{"skipLink":"Přeskočit na hlavní obsah","eyebrow":"Přístupnost","openButton":"Otevřít nabídku přístupnosti","closeButton":"Zavřít nabídku přístupnosti","title":"Nabídka přístupnosti","description":"Přizpůsobte si web tomu, jak čtete a procházíte. Vaše volby se uloží v tomto zařízení.","reset":"Obnovit vše","statusDefault":"Standardní zobrazení webu","statusActive":"Aktivní úpravy: {count}","hideButton":"Skrýt tlačítko přístupnosti do opětovného načtení stránky","statementLink":"Prohlášení o přístupnosti","textSize":{"label":"Velikost textu","description":"Zvětšit text na celém webu.","decrease":"Menší text","increase":"Větší text","level":"Velikost textu {percent} %"},"options":{"highContrast":{"label":"Vysoký kontrast","description":"Tmavý text na světlém pozadí s výraznými okraji."},"grayscale":{"label":"Odstíny šedi","description":"Zobrazit web bez barev."},"underlineLinks":{"label":"Zvýraznit odkazy","description":"Podtrhnout a označit každý odkaz."},"readableFont":{"label":"Čitelné písmo","description":"Jednoduché, dobře čitelné písmo."},"textSpacing":{"label":"Rozestupy textu","description":"Více místa mezi řádky, slovy a písmeny."},"highlightHeadings":{"label":"Zvýraznit nadpisy","description":"Označit nadpisy, aby byla vidět struktura stránky."},"bigCursor":{"label":"Velký kurzor","description":"Větší ukazatel myši."},"focusHighlight":{"label":"Výrazný fokus","description":"Silný obrys kolem prvku, na kterém je fokus klávesnice."},"reducedMotion":{"label":"Zastavit animace","description":"Zastavit animace, přechody a video na pozadí."}}}};</script>
@@ -375,7 +375,7 @@
 <body class="home-en">
   <a class="skip-link" href="#main-content">Přeskočit na hlavní obsah</a>
   <header class="site-header" id="top">
-    <script>try{for(var i=0;i<sessionStorage.length;i++)if(/^firebase:authUser:[^:]+:\[DEFAULT\]$/.test(sessionStorage.key(i))){document.getElementById("top").classList.add("site-header--account");break}}catch(e){}</script>
+    <script>for(var stores=["localStorage","sessionStorage"],s=0;s<stores.length;s++)try{var storage=window[stores[s]];for(var i=0;i<storage.length;i++)if(/^firebase:authUser:[^:]+:\[DEFAULT\]$/.test(storage.key(i))){document.getElementById("top").classList.add("site-header--account");break}}catch(e){}</script>
     <nav class="nav" aria-label="Hlavní navigace">
       <a href="/cs/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
         <img src="../assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" class="nav__logo" width="416" height="96">

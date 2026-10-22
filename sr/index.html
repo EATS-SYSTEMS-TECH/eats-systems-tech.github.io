@@ -86,7 +86,7 @@
   <script src="../js/utils.js?v=20260402a" defer=""></script>
 
   <script src="../js/navigation.js?v=20261022outside1" defer=""></script>
-  <script src="../js/site-account.js?v=20261013a" defer=""></script>
+  <script src="../js/site-account.js?v=20261022day1" defer=""></script>
   <script src="../js/media-runtime.js?v=20261019d" defer=""></script><script src="../js/hero.js?v=20261019d" defer=""></script>
 
   <script>window.accessibilityCopy = {"sr":{"skipLink":"Пређи на главни садржај","eyebrow":"Приступачност","openButton":"Отвори мени приступачности","closeButton":"Затвори мени приступачности","title":"Мени приступачности","description":"Прилагодите сајт начину на који читате и крећете се. Ваши избори се чувају на овом уређају.","reset":"Ресетуј све","statusDefault":"Стандардни приказ сајта","statusActive":"Активна прилагођавања: {count}","hideButton":"Сакриј дугме за приступачност до поновног учитавања странице","statementLink":"Изјава о приступачности","textSize":{"label":"Величина текста","description":"Увећај текст на целом сајту.","decrease":"Мањи текст","increase":"Већи текст","level":"Величина текста {percent}%"},"options":{"highContrast":{"label":"Висок контраст","description":"Тамни текст на светлој позадини са јасним ивицама."},"grayscale":{"label":"Нијансе сиве","description":"Прикажи сајт без боја."},"underlineLinks":{"label":"Истакни линкове","description":"Подвуци и означи сваки линк."},"readableFont":{"label":"Читљив фонт","description":"Једноставан, веома читљив фонт."},"textSpacing":{"label":"Размак текста","description":"Више простора између редова, речи и слова."},"highlightHeadings":{"label":"Истакни наслове","description":"Означи наслове да би се видела структура странице."},"bigCursor":{"label":"Велики курсор","description":"Већи показивач миша."},"focusHighlight":{"label":"Јасан фокус","description":"Дебео оквир око елемента у фокусу тастатуре."},"reducedMotion":{"label":"Заустави анимације","description":"Заустави анимације, прелазе и видео у позадини."}}}};</script>
@@ -375,7 +375,7 @@
 <body class="home-en">
   <a class="skip-link" href="#main-content">Пређи на главни садржај</a>
   <header class="site-header" id="top">
-    <script>try{for(var i=0;i<sessionStorage.length;i++)if(/^firebase:authUser:[^:]+:\[DEFAULT\]$/.test(sessionStorage.key(i))){document.getElementById("top").classList.add("site-header--account");break}}catch(e){}</script>
+    <script>for(var stores=["localStorage","sessionStorage"],s=0;s<stores.length;s++)try{var storage=window[stores[s]];for(var i=0;i<storage.length;i++)if(/^firebase:authUser:[^:]+:\[DEFAULT\]$/.test(storage.key(i))){document.getElementById("top").classList.add("site-header--account");break}}catch(e){}</script>
     <nav class="nav" aria-label="Главна навигација">
       <a href="/sr/#home" class="nav__logo-link nav__brand" aria-label="WIFIGATE">
         <img src="../assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" class="nav__logo" width="416" height="96">

@@ -36,23 +36,23 @@ function authStub(live) {
     const observers = [];
     export const getAuth = () => ({});
     export const connectAuthEmulator = () => {};
-    export const browserSessionPersistence = {};
+    export const browserLocalPersistence = {};
     export const setPersistence = async () => {};
     export const GoogleAuthProvider = function () {};
     export const OAuthProvider = function () {};
     export const onAuthStateChanged = (_, callback) => {
       observers.push(callback);
       setTimeout(() => {
-        const stored = sessionStorage.getItem(KEY);
+        const stored = localStorage.getItem(KEY) || sessionStorage.getItem(KEY);
         const live = ${JSON.stringify(live)};
-        if (stored && !live) sessionStorage.removeItem(KEY);
+        if (stored && !live) { localStorage.removeItem(KEY); sessionStorage.removeItem(KEY); }
         callback(stored && live ? live : null);
       }, 0);
       return () => {};
     };
     export const signOut = async () => {
       await window.authFixtureEvent("signout");
-      sessionStorage.removeItem(KEY);
+      localStorage.removeItem(KEY); sessionStorage.removeItem(KEY);
       observers.forEach((callback) => callback(null));
     };
   `;
@@ -65,16 +65,17 @@ async function scenario(browser, origin, options = {}) {
   const requests = [];
   await context.exposeBinding("authFixtureEvent", (_, event) => events.push(event));
   await context.addInitScript(
-    ({ consentValue, key, user }) => {
+    ({ consentValue, key, user, storageName }) => {
       localStorage.setItem("wifigate-cookie-consent-v1", consentValue);
       // Only the first document of the tab starts with a session, the way a
       // sign-in leaves it; later loads keep what the page did.
-      if (user && !sessionStorage.getItem("fixture-started")) {
-        sessionStorage.setItem("fixture-started", "1");
-        sessionStorage.setItem(key, JSON.stringify(user));
+      const storage = window[storageName];
+      if (user && !storage.getItem("fixture-started")) {
+        storage.setItem("fixture-started", "1");
+        storage.setItem(key, JSON.stringify(user));
       }
     },
-    { consentValue: consent, key: SESSION_KEY, user: signedIn ? fixtureUser : null },
+    { consentValue: consent, key: SESSION_KEY, user: signedIn ? fixtureUser : null, storageName: options.storageName ?? "sessionStorage" },
   );
   await context.route("https://www.gstatic.com/firebasejs/**", (route) => {
     if (!firebase) return route.abort();
@@ -165,8 +166,26 @@ test("signed-in account in the shared header", async (t) => {
     assert.equal(await page.locator(".site-account__avatar img").getAttribute("referrerpolicy"), "no-referrer");
     const size = await box(button);
     assert.ok(size.width >= 44 && size.height >= 44, "44px touch target");
-    assert.ok(fixture.requests.some((url) => url.endsWith("/js/site-auth.js")), "Firebase loads for a signed-in visitor");
+    assert.ok(fixture.requests.some((url) => new URL(url).pathname.endsWith("/js/site-auth.js")), "Firebase loads for a signed-in visitor");
     assert.deepEqual(fixture.errors, []);
+    await fixture.context.close();
+  });
+
+  await t.test("a persistent account survives reopening a tab and sign-out clears it", async () => {
+    const fixture = await scenario(browser, origin, { storageName: "localStorage", firebase: false });
+    await fixture.page.goto(origin + "/");
+    await signedInHeader(fixture.page);
+    await fixture.page.close();
+    const page = await fixture.context.newPage();
+    await page.goto(origin + "/he/");
+    await signedInHeader(page);
+    await page.locator("#account-button").click();
+    await page.locator("[data-account-sign-out]").click();
+    await page.locator(".site-login__trigger").waitFor({state: "visible"});
+    assert.equal(await page.evaluate(key => localStorage.getItem(key), SESSION_KEY), null);
+    const another = await fixture.context.newPage();
+    await another.goto(origin + "/");
+    assert.equal(await another.locator(".site-login__trigger").isVisible(), true);
     await fixture.context.close();
   });
 

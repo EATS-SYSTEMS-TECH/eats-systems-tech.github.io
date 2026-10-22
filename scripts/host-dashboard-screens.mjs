@@ -724,7 +724,7 @@ const firebaseAuth = (state) => `
     getIdTokenResult: async () => ({ claims: { firebase: { sign_in_provider: "google.com" } } }) };
   export const getAuth = () => ({});
   export const connectAuthEmulator = () => {};
-  export const browserSessionPersistence = {};
+  export const browserLocalPersistence = {};
   export const setPersistence = async () => {};
   export const onAuthStateChanged = (_, callback) => { setTimeout(() => callback(user), 0); return () => {}; };
   export const GoogleAuthProvider = function () { this.setCustomParameters = () => {}; };

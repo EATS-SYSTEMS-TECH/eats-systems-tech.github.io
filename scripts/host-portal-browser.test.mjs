@@ -87,7 +87,7 @@ async function scenario(options = {}) {
       getIdTokenResult: async () => ({claims:{firebase:{sign_in_provider:${JSON.stringify(state.provider ?? "google.com")}}}}) };
     export const getAuth = () => ({get currentUser(){return signedIn ? user : null;}});
     export const connectAuthEmulator = () => {};
-    export const browserSessionPersistence = {};
+    export const browserLocalPersistence = {};
     export const setPersistence = async () => {};
     export const onAuthStateChanged = (_, callback) => { observer=callback; setTimeout(()=>callback(signedIn ? user : null),0); return ()=>{}; };
     export const GoogleAuthProvider = function(){this.providerId="google.com";this.setCustomParameters=()=>{};};
