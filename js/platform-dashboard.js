@@ -219,7 +219,7 @@ function renderProducts() {
       const prefix = language === "he" ? "/he" : "";
       actions.append(
         link(copy.learn, prefix + informationUrl, true),
-        link(copy.contact, prefix + "/contact-us/", true),
+        link(copy.contact, "https://wifigate.io/#get-in-touch", true),
       );
     }
     if (state === "unavailable")
