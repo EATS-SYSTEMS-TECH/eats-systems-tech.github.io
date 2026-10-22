@@ -828,7 +828,6 @@ $("#platform-sign-out").addEventListener(
   () => void session?.endSession(),
 );
 window.addEventListener("platform:refresh", () => void refresh());
-window.addEventListener("focus", () => void refresh());
 window.addEventListener("pagehide", clearPrivate);
 window.addEventListener("pageshow", (event) => {
   if (event.persisted) void refresh();

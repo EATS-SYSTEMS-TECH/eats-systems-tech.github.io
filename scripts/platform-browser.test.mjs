@@ -5,6 +5,42 @@ import { passGateGame } from "./gate-game-helper.mjs";
 import { scenario, startSite } from "./platform-test-fixtures.mjs";
 import { workspaceFor } from "./host-test-shell.mjs";
 
+test("returning to the dashboard preserves its view until a manual reload", async (t) => {
+  const { origin, browser } = await startSite(t);
+  for (const language of ["he", "en"]) {
+    await t.test(language, async (t) => {
+      const { page, context, calls, errors } = await scenario(browser);
+      t.after(() => context.close());
+      const profileCalls = () =>
+        calls.filter((call) => call?.path === "/api/v1/platform/me").length;
+      await page.goto(origin + "/dashboard/" + (language === "he" ? "?lang=he" : ""));
+      await page.locator("#product-switcher-button").waitFor();
+      const initialCalls = profileCalls();
+      assert.ok(initialCalls > 0);
+      await page.evaluate(() => {
+        window.originalSwitcher = document.querySelector("#product-switcher-button");
+        for (let i = 0; i < 3; i++) {
+          window.dispatchEvent(new Event("blur"));
+          window.dispatchEvent(new Event("focus"));
+        }
+      });
+      await page.waitForTimeout(250);
+      assert.equal(profileCalls(), initialCalls, "focus does not refetch the profile");
+      assert.equal(
+        await page.evaluate(() =>
+          window.originalSwitcher === document.querySelector("#product-switcher-button"),
+        ),
+        true,
+        "the existing controls stay mounted",
+      );
+      await page.reload();
+      await page.locator("#product-switcher-button").waitFor();
+      assert.equal(profileCalls(), initialCalls + 1, "manual reload loads fresh data");
+      assert.deepEqual(errors, []);
+    });
+  }
+});
+
 test("dashboard logos return to their own product home and retain the interface language", async (t) => {
   const { origin, browser } = await startSite(t);
   for (const language of ["en", "he"]) {
