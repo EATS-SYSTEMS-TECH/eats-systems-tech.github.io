@@ -475,7 +475,24 @@ html.a11y-text-scaled .site-header .nav {
 }
 
 /* Shared account/cart controls and homepage header sizing on every page. */
-.site-header .site-login__icon { display: none; }
+.site-header .site-login__trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.site-header .site-login__trigger:hover,
+.site-header .site-login__trigger:focus-visible {
+  background: #f3f3f3;
+  color: #0a0a0a;
+}
+.site-header .site-login__trigger:focus-visible { outline: 2px solid #0b63ff; outline-offset: 2px; }
+.site-header .site-login__label { display: none; }
+.site-header .site-login__icon { display: block; flex: none; }
 .site-header .site-cart__trigger {
   position: relative;
   display: inline-flex;

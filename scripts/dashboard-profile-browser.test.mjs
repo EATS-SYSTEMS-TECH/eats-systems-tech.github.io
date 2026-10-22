@@ -16,6 +16,10 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               verified: true,
               manager: "active",
               pay: "active",
+              personalSummaries: {
+                host: { gates: 7, dualControls: 2, groups: 3, organizations: 1 },
+                manager: { gates: 11, dualControls: 4, groups: 5, organizations: 2 },
+              },
               viewport: { width, height: 1000 },
               userMetadata: {
                 creationTime: "Mon, 15 Jan 2024 12:00:00 GMT",
@@ -108,6 +112,11 @@ test("every dashboard shares a flag selector and profile entry into My profile",
             await panel
               .getByText("fixture@example.test", { exact: true })
               .waitFor();
+            assert.equal(
+              await panel.getByText("fixture@example.test", { exact: true })
+                .evaluate((el) => getComputedStyle(el).textAlign),
+              language === "he" ? "right" : "left",
+            );
             if (product === "manager")
               assert.equal(
                 await panel
@@ -149,6 +158,14 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               3,
             );
             const details = page.locator("#profile-details");
+            const email = details.getByText("fixture@example.test", { exact: true });
+            assert.deepEqual(
+              await email.evaluate((el) => ({
+                align: getComputedStyle(el).textAlign,
+                direction: getComputedStyle(el).direction,
+              })),
+              { align: language === "he" ? "right" : "left", direction: "ltr" },
+            );
             assert.match(await details.innerText(), /2024/);
             assert.match(
               await details.innerText(),
@@ -168,15 +185,18 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               assert.equal(await card.locator(".product-state").count(), 1);
               assert.equal(await card.locator(".profile-product-role").count(), 1);
               assert.equal(await card.locator(".profile-product-billing").count(), 1);
+              assert.deepEqual(
+                await card.locator("[data-personal-count]").allTextContents(),
+                productId === "host" ? ["7", "2", "3", "1"]
+                  : productId === "manager" ? ["11", "4", "5", "2"]
+                  : ["—", "—", "—", "—"],
+              );
               assert.equal(await card.locator(".product-actions a").count(), 2);
               assert.equal(await card.locator(".product-actions > *").count(), 3);
               assert.equal(await card.locator(".product-actions > button").isDisabled(), true);
               assert.equal(await card.locator(".product-actions > :first-child").textContent(), language === "he" ? "פתיחה" : "Open");
             }
-            for (const status of await subscriptions
-              .locator('[data-subscription-value="status"]')
-              .allTextContents())
-              assert.equal(status, language === "he" ? "כבוי" : "Inactive");
+            assert.equal(await subscriptions.locator('[data-subscription-value="status"]').count(), 0);
             for (const amount of await subscriptions
               .locator(
                 '[data-subscription-value="monthly"], #profile-subscription-total',

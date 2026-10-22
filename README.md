@@ -6,6 +6,8 @@ The Host portal now manages organizations, physical system ownership, reservatio
 
 Static multilingual site structure:
 
+The My profile product cards show personal totals instead of subscription on/off preview rows. Counts come from each active product's `summary` on authenticated `GET /api/v1/platform/me`: saved gates, Dual Controls, groups and associated organizations. These are personal assignments, including for platform administrators. Missing/null counts display `—` with an accessible unavailable label; the UI never substitutes global directory counts or fabricates zero. Monthly payment remains explicitly preview data. Live totals require the matching `wifigate_host` additive summary contract.
+
 - Source templates live under `templates/`.
 - Published localized pages are generated into `/`, `/he/`, `/es/`, `/fr/`, and the other language-code folders.
 - Use language codes for URLs, not country codes. Example: `/he/`, not `/il/`.

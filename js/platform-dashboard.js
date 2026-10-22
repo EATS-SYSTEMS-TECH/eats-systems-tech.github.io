@@ -533,16 +533,36 @@ function renderSubscriptionPreview() {
     const card = $(`#product-grid [data-product="${id}"]`);
     if (!card) continue;
     card.dataset.subscription = id;
+    const summary = identity.products[id].summary;
+    const totals = document.createElement("section");
+    totals.className = "profile-product-totals";
+    const heading = document.createElement("h3");
+    heading.textContent = language === "he" ? "סה״כ" : "Totals";
+    totals.append(heading);
+    const counts = document.createElement("dl");
+    for (const [key, he, en] of [
+      ["gates", "שערים", "Gates"],
+      ["dualControls", "Dual Controls", "Dual Controls"],
+      ["groups", "קבוצות", "Groups"],
+      ["organizations", "ארגונים", "Organizations"],
+    ]) {
+      const row = document.createElement("div");
+      const term = document.createElement("dt");
+      term.textContent = language === "he" ? he : en;
+      const value = document.createElement("dd");
+      value.dataset.personalCount = key;
+      value.textContent = Number.isSafeInteger(summary?.[key]) && summary[key] >= 0
+        ? new Intl.NumberFormat(language === "he" ? "he-IL" : "en-GB").format(summary[key])
+        : "—";
+      if (value.textContent === "—") value.setAttribute("aria-label", language === "he" ? "לא זמין כרגע" : "Not available");
+      row.append(term, value);
+      counts.append(row);
+    }
+    totals.append(counts);
+    card.insertBefore(totals, card.querySelector(".product-guidance"));
     const list = document.createElement("dl");
     list.className = "profile-product-billing";
     for (const [label, value, key] of [
-      [
-        language === "he" ? "מנוי" : "Subscription",
-        subscriptionActive[id]
-          ? language === "he" ? "פעיל" : "Active"
-          : language === "he" ? "כבוי" : "Inactive",
-        "status",
-      ],
       [language === "he" ? "תשלום חודשי" : "Monthly payment", zero, "monthly"],
     ]) {
       const row = document.createElement("div");

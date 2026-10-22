@@ -71,6 +71,7 @@ export function fixtureProfile(state) {
     products: {
       host: {
         state: host,
+        summary: state.personalSummaries?.host,
         role:
           state.hostRole !== undefined
             ? state.hostRole
@@ -78,8 +79,8 @@ export function fixtureProfile(state) {
               ? "admin"
               : "user",
       },
-      pay: { state: state.pay },
-      manager: { state: state.manager },
+      pay: { state: state.pay, summary: state.personalSummaries?.pay },
+      manager: { state: state.manager, summary: state.personalSummaries?.manager },
     },
   };
 }

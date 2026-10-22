@@ -233,11 +233,16 @@ body[data-product] a.dashboard-profile-identity:hover {
   font-size: 16px;
   overflow-wrap: anywhere;
 }
+/* Values keep their own writing direction while aligning with the page. */
+html[dir="rtl"] .profile-details dd,
+html[dir="rtl"] .platform-account__identity > [dir],
 html[dir="rtl"]
   .dashboard-profile-identity
   :is(strong, #account-email, #manager-profile-email) {
   text-align: right;
 }
+html[dir="ltr"] .profile-details dd,
+html[dir="ltr"] .platform-account__identity > [dir],
 html[dir="ltr"]
   .dashboard-profile-identity
   :is(strong, #account-email, #manager-profile-email) {
@@ -363,6 +368,30 @@ body[data-product]
   margin: 6px 0;
   padding-block: 18px;
   border-block: 1px solid var(--dashboard-line);
+}
+.profile-product-totals h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+.profile-product-totals dl {
+  display: grid;
+  gap: 12px;
+  margin: 12px 0 0;
+  padding-block: 14px;
+  border-block: 1px solid var(--dashboard-line);
+}
+.profile-product-totals dl > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.profile-product-totals dt { color: var(--muted); font-size: 13px; }
+.profile-product-totals dd { margin: 0; font-size: 18px; font-weight: 700; }
+.profile-product-totals + .profile-product-billing {
+  padding-block: 0 14px;
+  border-block-start: 0;
 }
 .profile-product-billing > div {
   display: flex;

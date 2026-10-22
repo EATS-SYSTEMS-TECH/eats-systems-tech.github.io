@@ -23,7 +23,8 @@ export type PortalProfile = {
 export type ProductId = "host" | "pay" | "manager";
 export type ProductState =
   "active" | "pending" | "no-plan" | "blocked" | "mfa-required" | "unavailable";
-export type ProductAccess = { state: ProductState; organizations?: number };
+export type PersonalSummary = { gates: number | null; dualControls: number | null; groups: number | null; organizations: number };
+export type ProductAccess = { state: ProductState; organizations?: number; summary?: PersonalSummary | null };
 // The Host plan role: admin (WIFIGATE operator) or user (paying customer).
 // null (or absent) means no plan: an organization member without My systems.
 export type HostPlanRole = Role;
