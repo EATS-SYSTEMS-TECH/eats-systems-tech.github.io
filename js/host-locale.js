@@ -5,6 +5,7 @@ import { renderPlatformLanguage } from "./platform-language.js";
 export const hostLanguage = pageLanguage();
 export const hostLocale = hostLanguage === "he" ? "he-IL" : "en-US";
 const hebrew = {
+  "My profile": "הפרופיל שלי",
   Calendar: "לוח שנה",
   Staff: "איש צוות",
   Overview: "סקירה",

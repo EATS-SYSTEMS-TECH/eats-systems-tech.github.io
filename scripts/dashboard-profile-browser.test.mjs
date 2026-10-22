@@ -80,6 +80,14 @@ test("every dashboard shares a flag selector and profile entry into My profile",
             );
             await profile.click();
             const panel = header.locator(".dashboard-profile-panel");
+            assert.equal(
+              await panel.locator(".dashboard-profile-eyebrow").count(),
+              0,
+            );
+            assert.equal(
+              await panel.getAttribute("aria-label"),
+              language === "he" ? "הפרופיל שלי" : "My profile",
+            );
             await panel
               .getByText("fixture@example.test", { exact: true })
               .waitFor();
