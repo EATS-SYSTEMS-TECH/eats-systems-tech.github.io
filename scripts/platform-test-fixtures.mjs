@@ -98,6 +98,7 @@ export async function scenario(browser, options = {}) {
     ...options,
   };
   const context = await browser.newContext({
+    hasTouch: options.hasTouch ?? false,
     viewport:
       options.viewport ??
       (options.mobile

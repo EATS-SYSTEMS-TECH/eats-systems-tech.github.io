@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { startSite, scenario } from "./platform-test-fixtures.mjs";
 
-const estimate = (amounts) => ({kind: "monthly-estimate", currency: "USD", monthlyCents: amounts.reduce((a,b) => a+b,0), lines: Object.fromEntries(["gates", "dualControls", "groups", "organizations"].map((key,i) => [key,{amountCents: amounts[i]}]))});
+const estimate = (amounts, quantities) => ({kind: "monthly-estimate", currency: "USD", monthlyCents: amounts.reduce((a,b) => a+b,0), lines: Object.fromEntries(["gates", "dualControls", "groups", "organizations"].map((key,i) => [key,{amountCents: amounts[i], quantity: quantities[i]}]))});
 
 test("every dashboard shares a flag selector and profile entry into My profile", async (t) => {
   const { origin, browser } = await startSite(t);
@@ -19,8 +19,8 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               manager: "active",
               pay: "active",
               productFinancials: {
-                host: estimate([3500, 2000, 4500, 0]),
-                manager: estimate([3190, 2320, 4350, 0]),
+                host: estimate([8000, 2000, 0, 0], [16,2,0,1]),
+                manager: estimate([7540, 2320, 0, 0], [26,4,0,2]),
                 pay: {kind: "revenue", revenue: {currency: "ILS", amountCents: 12550}},
               },
               personalSummaries: {
@@ -28,6 +28,7 @@ test("every dashboard shares a flag selector and profile entry into My profile",
                 manager: { gates: 11, dualControls: 4, groups: 5, organizations: 2 },
               },
               viewport: { width, height: 1000 },
+              hasTouch: width === 320,
               userMetadata: {
                 creationTime: "Mon, 15 Jan 2024 12:00:00 GMT",
                 lastSignInTime: "invalid",
@@ -194,14 +195,35 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               assert.equal(await card.locator(".profile-product-billing").count(), 1);
               assert.deepEqual(
                 await card.locator("[data-personal-count]").allTextContents(),
-                productId === "host" ? ["7", "2", "3", "1"]
-                  : productId === "manager" ? ["11", "4", "5", "2"]
+                productId === "host" ? ["16", "2", "1"]
+                  : productId === "manager" ? ["26", "4", "2"]
                   : [],
               );
+              assert.equal(await card.locator('[data-personal-count="groups"]').count(), 0);
+              if (productId !== "pay") {
+                const info = card.locator('.info-tip__button');
+                if (width === 320) await info.tap();
+                else await info.click();
+                assert.equal(await info.getAttribute('aria-expanded'), 'true');
+                const bubble = card.locator('[role="tooltip"]');
+                assert.equal(await bubble.isVisible(), true);
+                assert.match(await bubble.innerText(), productId === "host" ? /\$6/ : /\$2\.90/);
+                const box = await bubble.boundingBox();
+                assert.ok(box.x >= 0 && box.x + box.width <= width);
+                if (process.env.DASHBOARD_PREVIEW_DIR && !product) await page.screenshot({path:`${process.env.DASHBOARD_PREVIEW_DIR}/cost-tooltip-${productId}-${language}-${width}.png`});
+                if (width === 320) {
+                  await card.locator('.product-state').tap();
+                  assert.equal(await bubble.isVisible(), false);
+                  await info.tap();
+                  assert.equal(await bubble.isVisible(), true);
+                }
+                await page.keyboard.press('Escape');
+                assert.equal(await bubble.isVisible(), false);
+              }
               assert.equal(await card.locator(".product-actions a").count(), 3);
               assert.equal(await card.locator(".product-actions > *").count(), 3);
               assert.equal(await card.locator(".product-actions > button").count(), 0);
-              assert.equal(await card.locator("[data-personal-cost]").count(), productId === "pay" ? 0 : 4);
+              assert.equal(await card.locator("[data-personal-cost]").count(), productId === "pay" ? 0 : 3);
               assert.equal(await card.locator(".product-actions > :first-child").textContent(), language === "he" ? "פתיחה" : "Open");
             }
             assert.equal(await subscriptions.locator('[data-subscription-value="status"]').count(), 0);

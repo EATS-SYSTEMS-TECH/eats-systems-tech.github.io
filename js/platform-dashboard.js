@@ -30,6 +30,7 @@ import { authErrorMessage } from "./host-auth-errors.js";
 import qrcode from "./vendor/qrcode-generator.js";
 import { createManagerDashboard } from "./manager-dashboard.js";
 import { createManagerProfile } from "./manager-profile.js";
+import { infoTip } from "./host-ui.js";
 import { renderPlatformLanguage } from "./platform-language.js";
 import { monthlyEstimate, monthlyTotal, revenueTotal, formatMoney } from "./profile-financials.js";
 
@@ -528,12 +529,21 @@ function renderSubscriptionPreview() {
     if (!card) continue;
     card.dataset.subscription = id;
     const estimate = monthlyEstimate(identity.products[id]);
-    const summary = identity.products[id].summary;
     if (id !== "pay") {
       const totals = document.createElement("section");
       totals.className = "profile-product-totals";
       const heading = document.createElement("h3");
       heading.textContent = language === "he" ? "סה״כ" : "Totals";
+      const explanation = language === "he"
+        ? "קבוצות מפורקות לשערים ולזוגות מזוהים ואינן מחויבות בנפרד. כל שער פיזי בבעלותך נספר פעם אחת; Dual Control כולל שני שערים. כשאין פירוט של הזוגות, השערים נכללים ב־Gates. הכמויות בטבלה הן רכיבים בבעלותך שנכללים באומדן. " + (id === "host"
+          ? "Host: עד 14 שערים — $6 לשער; 15–49 — $5; 50 ומעלה — $4. התעריף חל על כל השערים בחשבון. ארגונים ללא תוספת."
+          : "Manager: $2.90 לשער פיזי לחודש, מינימום שער אחד ללקוח פעיל. שלושה ארגונים כלולים; $1 לכל ארגון פעיל נוסף. מנהלי ארגון ללא חשבון משלם אינם משלמים.") + " אומדן לחודש מלא בדולר, לפני מס; לא מתבצע כאן חיוב."
+        : "Groups expand into gates and recognized pairs with no separate group fee. Each owned physical gate is counted once; a Dual Control contains two gates. Without pair details, physical gates appear under Gates. Quantities show owned components included in this estimate. " + (id === "host"
+          ? "Host: 1–14 gates at $6 each; 15–49 at $5; 50+ at $4. The tier applies to every gate in the account. No organization surcharge."
+          : "Manager: $2.90 per physical gate/month, with a one-gate active-customer minimum. Three organizations included; $1 per additional active organization. Organization-only administrators pay no account fee.") + " Full-month estimate in USD before tax; no payment is collected here.";
+      const tip = infoTip(explanation);
+      tip.querySelector("button").setAttribute("aria-label", language === "he" ? "איך מחושבת העלות?" : "How is the cost calculated?");
+      heading.append(" ", tip);
       totals.append(heading);
       const counts = document.createElement("table");
       counts.setAttribute("aria-label", language === "he" ? "כמויות ועלויות חודשיות משוערות" : "Quantities and estimated monthly costs");
@@ -548,7 +558,6 @@ function renderSubscriptionPreview() {
       for (const [key, he, en] of [
         ["gates", "שערים", "Gates"],
         ["dualControls", "Dual Controls", "Dual Controls"],
-        ["groups", "קבוצות", "Groups"],
         ["organizations", "ארגונים", "Organizations"],
       ]) {
         const row = body.insertRow();
@@ -557,14 +566,16 @@ function renderSubscriptionPreview() {
         term.textContent = language === "he" ? he : en;
         const value = document.createElement("td");
         value.dataset.personalCount = key;
-        value.textContent = Number.isSafeInteger(summary?.[key]) && summary[key] >= 0
-          ? new Intl.NumberFormat(language === "he" ? "he-IL" : "en-GB").format(summary[key])
+        const quantity = estimate?.lines[key]?.quantity;
+        value.textContent = Number.isSafeInteger(quantity) && quantity >= 0
+          ? new Intl.NumberFormat(language === "he" ? "he-IL" : "en-GB").format(quantity)
           : "—";
         if (value.textContent === "—") value.setAttribute("aria-label", language === "he" ? "לא זמין כרגע" : "Not available");
         const cost = document.createElement("td");
         cost.dataset.personalCost = key;
         cost.dir = "auto";
-        cost.textContent = formatMoney(estimate?.lines[key]?.amountCents, estimate?.currency, language);
+        const amount = estimate ? estimate.lines[key].amountCents + (key === "gates" ? estimate.lines.groups.amountCents : 0) : undefined;
+        cost.textContent = formatMoney(amount, estimate?.currency, language);
         row.append(term, value, cost);
       }
       totals.append(counts);
@@ -572,11 +583,8 @@ function renderSubscriptionPreview() {
       const note = document.createElement("p");
       note.className = "profile-cost-basis";
       note.textContent = language === "he"
-        ? "אומדן לחודש מלא לפני מס. רק שערים פיזיים בבעלותך מחושבים, פעם אחת; שערים של זוגות וקבוצות כלולים בעלות שלהם."
-        : "Full-month estimate before tax. Only your owned physical gates are priced, once; pair and group costs include their gates.";
-      if (id === "manager") note.textContent += language === "he"
-        ? " שלושה ארגונים כלולים; מינימום שער אחד לחשבון לקוח פעיל."
-        : " Three organizations included; one-gate minimum for an active customer account.";
+        ? "רכיבים בבעלותך · אומדן לחודש מלא לפני מס."
+        : "Owned components · full-month estimate before tax.";
       card.insertBefore(note, card.querySelector(".product-guidance"));
     }
     const list = document.createElement("dl");

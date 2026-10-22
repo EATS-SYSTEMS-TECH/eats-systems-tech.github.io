@@ -98,6 +98,9 @@ export function infoTip(text) {
     event.stopPropagation();
     closeAll();
   };
+  const outside = (event) => {
+    if (!tip.contains(event.target)) closeAll();
+  };
   const update = () => {
     const open = reasons.size > 0 && tip.isConnected;
     if (open === tip.classList.contains("is-open")) {
@@ -111,10 +114,12 @@ export function infoTip(text) {
       window.addEventListener("resize", place);
       window.addEventListener("scroll", place, true);
       document.addEventListener("keydown", escape, true);
+      document.addEventListener("pointerdown", outside, true);
     } else {
       window.removeEventListener("resize", place);
       window.removeEventListener("scroll", place, true);
       document.removeEventListener("keydown", escape, true);
+      document.removeEventListener("pointerdown", outside, true);
     }
   };
   const set = (reason, on) => {
