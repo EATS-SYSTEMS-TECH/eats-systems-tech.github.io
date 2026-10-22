@@ -29,12 +29,17 @@ import { requestMfaChallenge } from "./host-mfa-challenge.js";
 import { authErrorMessage } from "./host-auth-errors.js";
 import qrcode from "./vendor/qrcode-generator.js";
 import { createManagerDashboard } from "./manager-dashboard.js";
+import { createManagerProfile } from "./manager-profile.js";
 import { renderPlatformLanguage } from "./platform-language.js";
 
 const $ = (selector) => document.querySelector(selector);
 const language = pageLanguage();
 const copy = platformText(language);
 const selectedProduct = document.body.dataset.product;
+const managerProfile = createManagerProfile({
+  root: $("#manager-profile"),
+  language,
+});
 let currentUser;
 let managerDashboard;
 let identity;
@@ -56,7 +61,11 @@ for (const node of document.querySelectorAll("[data-copy-label]"))
   node.setAttribute("aria-label", copy[node.dataset.copyLabel]);
 for (const node of document.querySelectorAll("[data-copy-alt]"))
   node.setAttribute("alt", copy[node.dataset.copyAlt]);
-renderPlatformLanguage($("#platform-language"), language, copy.interfaceLanguage);
+renderPlatformLanguage(
+  $("#platform-language"),
+  language,
+  copy.interfaceLanguage,
+);
 if (language === "he") {
   $(".platform-header .brand").href = "/he/";
   const home = $("#account-deleted-home");
@@ -88,6 +97,7 @@ function clearSecret() {
 }
 
 function clearPrivate() {
+  managerProfile?.clear();
   managerDashboard?.close();
   managerDashboard = undefined;
   ++generation;
@@ -295,7 +305,10 @@ async function refresh() {
       $("#product-workspace").hidden = false;
       if (selectedProduct === "manager") {
         managerDashboard = createManagerDashboard({
-          root: $("#manager-root"), user, language,
+          root: $("#manager-root"),
+          user,
+          language,
+          onProfile: (profile) => managerProfile?.update(profile, user),
           ensureRecent: async () => {
             const token = await user.getIdTokenResult();
             if (Date.now() / 1000 - Number(token.claims.auth_time ?? 0) > 240) {
@@ -371,6 +384,7 @@ function initial(text) {
 }
 
 function showIdentity() {
+  managerProfile?.update({}, identity.user);
   const name = identity.user.displayName || identity.user.email || "WIFIGATE";
   $("#platform-account").textContent = name;
   const avatar = $("#platform-avatar");

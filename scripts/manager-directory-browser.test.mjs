@@ -1,6 +1,68 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { startSite } from "./platform-test-fixtures.mjs";
+import { startSite, scenario } from "./platform-test-fixtures.mjs";
+
+test("published Manager page wires the private profile into the header without duplicating account details", async (t) => {
+  const { origin, browser } = await startSite(t);
+  for (const width of [390, 1440])
+    await t.test(`${width}px`, async (t) => {
+      const fixture = await scenario(browser, {
+        manager: "active",
+        enrolled: true,
+        verified: true,
+        viewport: { width, height: 1000 },
+      });
+      t.after(() => fixture.context.close());
+      await fixture.context.route("**/api/v1/manager/**", (route) => {
+        const path = new URL(route.request().url()).pathname;
+        return route.fulfill({
+          json: path.endsWith("/me")
+            ? {
+                user: {
+                  uid: "fixture-user",
+                  name: "Manager operator",
+                  email: "operator@example.test",
+                },
+                role: "admin",
+                roles: ["admin"],
+                account: null,
+                organizations: [],
+              }
+            : { admins: 1, users: 4, organizationAdmins: 2, organizations: 3 },
+        });
+      });
+      const page = fixture.page;
+      page.setDefaultTimeout(7000);
+      await page.goto(origin + "/dashboard/manager/?lang=he");
+      await page.locator(".manager-overview-card").last().waitFor();
+      const reject = page.locator("[data-cookie-reject]");
+      if (await reject.isVisible()) await reject.click();
+      const panel = page.locator("#manager-profile-panel");
+      assert.equal(await panel.isVisible(), false);
+      assert.equal(await page.locator(".manager-identity").count(), 0);
+      await page.locator("#manager-profile-button").click();
+      await panel.getByText("Manager operator", { exact: true }).waitFor();
+      await panel.getByText("operator@example.test", { exact: true }).waitFor();
+      await panel
+        .getByText("WIFIGATE Manager admin", { exact: true })
+        .waitFor();
+      assert.equal(await page.locator("#platform-sign-out").isEnabled(), true);
+      assert.equal(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth > innerWidth,
+        ),
+        false,
+      );
+      if (process.env.MANAGER_DIRECTORY_SCREENSHOTS)
+        await page.screenshot({
+          path: `${process.env.MANAGER_DIRECTORY_SCREENSHOTS}/manager-profile-he-${width}.png`,
+          fullPage: true,
+        });
+      await page.keyboard.press("Escape");
+      assert.equal(await panel.isVisible(), false);
+      assert.deepEqual(fixture.errors, []);
+    });
+});
 
 test("Manager identity, platform overview and organization columns support scoped administration in Hebrew and English", async (t) => {
   const { origin, browser } = await startSite(t);
@@ -16,13 +78,19 @@ test("Manager identity, platform overview and organization columns support scope
         await page.route(origin + "/manager-directory-fixture", (r) =>
           r.fulfill({
             contentType: "text/html",
-            body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><head><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"></head><body class="platform-page" data-product="manager"><main class="platform-shell"><header class="platform-header"><a class="brand"><img src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE"></a><strong>WIFIGATE Manager</strong></header><div id="root"></div></main></body></html>`,
+            body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><head><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"></head><body class="platform-page" data-product="manager"><main class="platform-shell"><header class="platform-header"><a class="brand"><img src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE"></a><strong>WIFIGATE Manager</strong><div id="manager-profile" class="account-menu"></div></header><div id="root"></div></main></body></html>`,
           }),
         );
         await page.goto(origin + "/manager-directory-fixture");
         await page.evaluate(async (language) => {
           const { createManagerDashboard } =
             await import("/js/manager-dashboard.js");
+          const { createManagerProfile } =
+            await import("/js/manager-profile.js");
+          window.profileMenu = createManagerProfile({
+            root: document.querySelector("#manager-profile"),
+            language,
+          });
           window.calls = [];
           window.recent = 0;
           window.mode = "admin";
@@ -146,12 +214,14 @@ test("Manager identity, platform overview and organization columns support scope
           };
           window.mount = async (role) => {
             window.dashboard?.close();
+            window.profileMenu.clear();
             window.mode = role;
             window.dashboard = createManagerDashboard({
               root: document.querySelector("#root"),
               user: { uid: "operator" },
               language,
               api,
+              onProfile: (profile) => window.profileMenu.update(profile),
               ensureRecent: async () => {
                 window.recent++;
               },
@@ -167,10 +237,39 @@ test("Manager identity, platform overview and organization columns support scope
           .last()
           .waitFor();
         assert.equal(await page.locator(".manager-overview-card").count(), 4);
+        const profileButton = page.locator("#manager-profile-button");
+        const profilePanel = page.locator("#manager-profile-panel");
+        assert.equal(await profilePanel.isVisible(), false);
+        assert.equal(await nav.locator(".manager-identity").count(), 0);
         await page
-          .locator(".manager-identity-email")
+          .getByRole("heading", {
+            name: "WIFIGATE Manager admin platform",
+            exact: true,
+          })
+          .waitFor();
+        await profileButton.click();
+        assert.equal(await profileButton.getAttribute("aria-expanded"), "true");
+        await profilePanel
+          .getByText("Manager operator", { exact: true })
+          .waitFor();
+        await page
+          .locator("#manager-profile-email")
           .getByText("operator@example.test", { exact: true })
           .waitFor();
+        await profilePanel
+          .getByText("WIFIGATE Manager admin", { exact: true })
+          .waitFor();
+        const panelBox = await profilePanel.boundingBox();
+        assert(panelBox.x >= 16 && panelBox.x + panelBox.width <= width - 15);
+        await page.keyboard.press("Escape");
+        assert.equal(await profilePanel.isVisible(), false);
+        assert.equal(
+          await profileButton.evaluate((el) => el === document.activeElement),
+          true,
+        );
+        await profileButton.click();
+        await page.mouse.click(1, 1);
+        assert.equal(await profilePanel.isVisible(), false);
         await nav
           .getByText(he ? "ניהול פלטפורמה" : "Platform management", {
             exact: true,
@@ -302,10 +401,12 @@ test("Manager identity, platform overview and organization columns support scope
         assert(calls.some((c) => c.path.endsWith("/members/delegate/remove")));
         assert((await page.evaluate(() => window.recent)) >= 4);
         await page.evaluate(() => window.mount("organization-admin"));
-        await nav
+        await profileButton.click();
+        await profilePanel
           .locator(".manager-role-badge")
           .getByText("WIFIGATE Manager organization admin", { exact: true })
           .waitFor();
+        await page.keyboard.press("Escape");
         assert.equal(
           await nav
             .getByText(he ? "ניהול פלטפורמה" : "Platform management", {

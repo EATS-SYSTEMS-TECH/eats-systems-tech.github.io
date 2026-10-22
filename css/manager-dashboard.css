@@ -5,19 +5,112 @@
   --manager-line: var(--line, #e2e8f0);
 }
 
-/* Account identity and platform directory share the site's compact controls. */
-.manager-identity {
+.platform-header .manager-profile-button {
   display: grid;
-  gap: 8px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid var(--manager-line);
-  margin-bottom: 16px;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--manager-line);
+  border-radius: 6px;
+  color: var(--ink);
+  background: #fff;
+  cursor: pointer;
+}
+.platform-header #manager-profile {
+  grid-column: 3;
+  justify-self: end;
+  justify-content: flex-end;
+}
+.platform-header .manager-profile-button:is(:hover, [aria-expanded="true"]) {
+  background: var(--manager-soft, #fff1e6);
+  border-color: var(--manager-accent);
+}
+.platform-header .manager-profile-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.platform-header .manager-profile-button:focus-visible,
+.manager-shell button:focus-visible {
+  outline: 2px solid var(--manager-accent);
+  outline-offset: 3px;
+}
+.manager-profile-panel {
+  position: fixed;
+  z-index: 100;
+  width: min(340px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 22px;
+  border: 1px solid var(--manager-line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 18px 48px #0f172a24;
+  text-align: start;
+}
+.manager-profile-eyebrow {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+}
+.manager-profile-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.manager-profile-identity > div {
+  display: grid;
+  gap: 5px;
   min-width: 0;
 }
-.manager-identity-email {
-  font-size: 12px;
+.manager-profile-panel #platform-account {
+  display: block;
+  max-width: none;
+  white-space: normal;
   overflow-wrap: anywhere;
-  text-align: start;
+  font-size: 16px;
+}
+#manager-profile-email {
+  font-size: 13px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.manager-profile-roles {
+  display: grid;
+  gap: 6px;
+  margin: 18px 0;
+}
+.manager-profile-panel .platform-sign-out {
+  width: 100%;
+  border-radius: 6px;
+}
+.manager-ready .platform-heading {
+  margin: 0 0 24px;
+}
+.manager-ready .platform-heading h1 {
+  font-size: 20px;
+  margin: 0;
+}
+.manager-ready .platform-heading p,
+.manager-ready #product-title {
+  display: none;
+}
+.manager-status:empty,
+.manager-ready #platform-status:empty {
+  display: none;
+}
+.manager-view > h3 {
+  font-size: clamp(22px, 2.5vw, 30px);
+  line-height: 1.3;
+  margin: 0 0 12px;
+}
+.manager-view-description {
+  color: var(--muted);
+  margin: 0 0 26px;
+  line-height: 1.7;
 }
 .manager-role-badge {
   display: inline-block;
@@ -35,20 +128,21 @@
   margin: 22px 0 8px;
   font-size: 12px;
   font-weight: 800;
-  color: var(--ink);
+  color: var(--muted);
 }
 .manager-overview-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
 }
-.manager-overview-card {
+.manager-card.manager-overview-card {
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 14px;
   min-width: 0;
   overflow-wrap: anywhere;
+  border-top: 3px solid var(--manager-accent);
 }
 .manager-overview-card strong {
   font-size: 36px;
@@ -134,7 +228,6 @@
   border-radius: 8px;
 }
 @media (max-width: 850px) {
-  .manager-identity,
   .manager-nav-group {
     flex-basis: 100%;
     width: 100%;
@@ -197,6 +290,17 @@
 .manager-shell .manager-nav button[aria-current="page"] {
   background: var(--manager-soft, #fff1e6);
   color: var(--manager-strong, #c2410c);
+  box-shadow: inset 3px 0 0 var(--manager-accent);
+}
+.manager-shell .manager-nav button:hover {
+  background: #f8fafc;
+  color: var(--ink);
+}
+.manager-shell .manager-nav button[aria-current="page"]:hover {
+  background: var(--manager-soft, #fff1e6);
+}
+[dir="rtl"] .manager-shell .manager-nav button[aria-current="page"] {
+  box-shadow: inset -3px 0 0 var(--manager-accent);
 }
 .manager-shell .manager-nav button:hover {
   background: #f8fafc;
@@ -678,6 +782,20 @@
 }
 
 /* Compact site controls for Manager administration. */
+.manager-shell .manager-nav button.manager-button {
+  border: 0;
+  background: transparent;
+}
+.manager-shell .manager-nav button.manager-button[aria-current="page"] {
+  background: var(--manager-soft, #fff1e6);
+  color: var(--manager-strong, #c2410c);
+}
+.manager-shell .manager-nav button.manager-button:hover:not(:disabled) {
+  background: #f8fafc;
+}
+.manager-shell .manager-nav button.manager-button[aria-current="page"]:hover {
+  background: var(--manager-soft, #fff1e6);
+}
 .manager-shell button.manager-button,
 .manager-shell .manager-nav button,
 .manager-form :is(input, select, textarea) {

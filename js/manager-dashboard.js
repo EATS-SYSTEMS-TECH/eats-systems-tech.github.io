@@ -26,6 +26,7 @@ export function createManagerDashboard({
   ensureRecent: verifyRecent = async () => {},
   api: customApi,
   Connection = ManagerConnection,
+  onProfile = () => {},
 }) {
   const he = language === "he",
     t = (h, e) => (he ? h : e);
@@ -50,7 +51,7 @@ export function createManagerDashboard({
     nav = node("nav", undefined, "manager-nav"),
     main = node("div", undefined, "manager-main");
   nav.setAttribute("aria-label", t("ניווט Manager", "Manager navigation"));
-  const title = node("p", "WIFIGATE MANAGER", "manager-nav-title"),
+  const title = node("p", t("סביבת עבודה", "Workspace"), "manager-nav-title"),
     status = node("p", "", "manager-status");
   status.setAttribute("role", "status");
   status.setAttribute("aria-live", "polite");
@@ -212,26 +213,6 @@ export function createManagerDashboard({
   }
   function renderNav() {
     nav.replaceChildren(title);
-    const identity = node("section", undefined, "manager-identity");
-    identity.setAttribute("aria-label", t("החשבון שלי", "My account"));
-    identity.append(
-      node(
-        "strong",
-        profile.user?.name || user.displayName || t("החשבון שלי", "My account"),
-      ),
-    );
-    const email = node(
-      "span",
-      profile.user?.email || user.email || "",
-      "manager-identity-email",
-    );
-    email.dir = "ltr";
-    identity.append(email);
-    for (const role of profile.roles?.length
-      ? profile.roles
-      : [profile.role].filter(Boolean))
-      identity.append(node("span", roleName(role), "manager-role-badge"));
-    nav.append(identity);
     if (profile.account) {
       const b = button(t("המערכות שלי", "My systems"), () => showSystems(null));
       if (!scope) b.setAttribute("aria-current", "page");
@@ -270,7 +251,7 @@ export function createManagerDashboard({
         ),
       );
       for (const [key, label, action] of [
-        ["overview", t("מבט על", "Overview"), showOverview],
+        ["overview", "WIFIGATE Manager admin platform", showOverview],
         ["admin", "WIFIGATE Manager admin", () => showDirectory("admin")],
         ["user", "WIFIGATE Manager user", () => showAccounts()],
         [
@@ -335,8 +316,16 @@ export function createManagerDashboard({
   async function showOverview() {
     beginView("overview");
     const epoch = generation;
+    view.append(node("h3", "WIFIGATE Manager admin platform"));
     view.append(
-      node("h3", t("מבט על · WIFIGATE Manager", "WIFIGATE Manager · Overview")),
+      node(
+        "p",
+        t(
+          "ניהול הרשאות, משתמשים וארגונים — במקום אחד.",
+          "Manage access, people and organizations in one place.",
+        ),
+        "manager-view-description",
+      ),
     );
     const totals = await api("/admin/overview");
     if (closed || epoch !== generation) return;
@@ -489,6 +478,8 @@ export function createManagerDashboard({
   async function refreshProfile() {
     profile = await api("/me");
     if (closed) return;
+    onProfile(profile);
+    hero.hidden = profile.role === "admin";
     renderNav();
     renderMetrics();
   }
