@@ -1,6 +1,7 @@
 import { parseManagerCsv, encodeManagerCsv } from "./manager-csv.js";
 import { managerRequest } from "./api/index.js";
 import { ManagerConnection } from "./manager-connection.js";
+import { createManagerExamples } from "./manager-examples.js";
 
 const BASE = "/api/v1/manager";
 const node = (tag, text, cls) => {
@@ -73,6 +74,11 @@ export function createManagerDashboard({
   nav.append(title);
   shell.append(nav, main);
   root.replaceChildren(shell);
+  const examples = createManagerExamples({
+    language,
+    onOpen: openExample,
+    onOpenOrganization: openExampleOrganization,
+  });
   const say = (text, error = false) => {
     status.textContent = text;
     status.dataset.state = error ? "error" : "ready";
@@ -178,6 +184,8 @@ export function createManagerDashboard({
     return f;
   }
   function stop() {
+    examples.closeView();
+    view.classList.remove("manager-example-workspace");
     generation++;
     connection?.close();
     connection = null;
@@ -213,11 +221,21 @@ export function createManagerDashboard({
   }
   function renderNav() {
     nav.replaceChildren(title);
-    if (profile.account) {
+    if (profile.account || profile.role === "admin") {
       const b = button(t("המערכות שלי", "My systems"), () => showSystems(null));
-      if (!scope) b.setAttribute("aria-current", "page");
+      if (!scope && ["systems", "example-system"].includes(currentView))
+        b.setAttribute("aria-current", "page");
       nav.append(b);
     }
+    const myOrganizations = button(t("הארגונים שלי", "My organizations"), () =>
+      showOrganizations(true),
+    );
+    if (
+      ["my-organizations", "example-organization"].includes(currentView) ||
+      (currentView === "systems" && scope)
+    )
+      myOrganizations.setAttribute("aria-current", "page");
+    nav.append(myOrganizations);
     if (profile.organizations?.length) {
       const select = node("select");
       select.setAttribute(
@@ -234,38 +252,66 @@ export function createManagerDashboard({
       nav.append(select);
     }
     if (profile.role !== "admin")
-      nav.append(
-        button(t("ארגונים", "Organizations"), showOrganizations),
-        button(t("הזמנות", "Invitations"), showInvitations),
-      );
+      nav.append(button(t("הזמנות", "Invitations"), showInvitations));
     if (scope)
       nav.append(
         button(t("מנהלי ארגון", "Organization administrators"), showMembers),
       );
     if (profile.role === "admin") {
-      nav.append(
-        node(
-          "p",
-          t("ניהול פלטפורמה", "Platform management"),
-          "manager-nav-group",
-        ),
+      const platform = node("section", undefined, "manager-platform-nav");
+      const platformViews = [
+        "overview",
+        "admin",
+        "user",
+        "organization-admin",
+        "organizations",
+        "platform-systems",
+      ];
+      const platformButton = button(
+        t("ניהול פלטפורמה", "Platform management"),
+        showOverview,
       );
-      for (const [key, label, action] of [
-        ["overview", "WIFIGATE Manager admin platform", showOverview],
-        ["admin", "WIFIGATE Manager admin", () => showDirectory("admin")],
-        ["user", "WIFIGATE Manager user", () => showAccounts()],
-        [
-          "organization-admin",
-          "WIFIGATE Manager organization admin",
-          () => showDirectory("organization-admin"),
-        ],
-        ["organizations", t("ארגונים", "Organizations"), showOrganizations],
-      ]) {
-        const b = button(label, action);
-        if (currentView === key) b.setAttribute("aria-current", "page");
-        nav.append(b);
-      }
+      if (platformViews.includes(currentView))
+        platformButton.setAttribute("aria-current", "page");
+      platform.append(platformButton);
+      if (platformViews.includes(currentView))
+        for (const [key, label, action] of [
+          ["overview", "WIFIGATE Manager admin platform", showOverview],
+          ["admin", "WIFIGATE Manager admin", () => showDirectory("admin")],
+          ["user", "WIFIGATE Manager user", () => showAccounts()],
+          [
+            "organization-admin",
+            "WIFIGATE Manager organization admin",
+            () => showDirectory("organization-admin"),
+          ],
+          ["organizations", t("ארגונים", "Organizations"), showOrganizations],
+        ]) {
+          const b = button(label, action);
+          if (currentView === key) b.setAttribute("aria-current", "page");
+          platform.append(b);
+        }
+      nav.append(platform);
     }
+  }
+  function openExample(system) {
+    stop();
+    scope = null;
+    currentView = "example-system";
+    renderNav();
+    say("");
+    examples.renderWorkspace(view, system, {
+      onBack: () => void task(() => showSystems(null)),
+    });
+  }
+  function openExampleOrganization() {
+    stop();
+    scope = null;
+    currentView = "example-organization";
+    renderNav();
+    say("");
+    examples.renderOrganization(view, {
+      onBack: () => void task(() => showOrganizations(true)),
+    });
   }
   function roleName(role) {
     return (
@@ -510,20 +556,23 @@ export function createManagerDashboard({
   }
   async function showSystems(orgId, operatorAccount = null) {
     stop();
-    currentView = "systems";
+    currentView = operatorAccount ? "platform-systems" : "systems";
     scope = orgId;
     renderNav();
     say(t("טוען מערכות…", "Loading systems…"));
     const epoch = generation;
-    const rows = await listAll(
-      operatorAccount
-        ? operatorAccount.orgId
-          ? `/admin/organizations/${encodeURIComponent(operatorAccount.orgId)}/systems`
-          : `/admin/accounts/${encodeURIComponent(operatorAccount.id)}/systems`
-        : scope
-          ? `/organizations/${encodeURIComponent(scope)}/systems`
-          : "/systems",
-    );
+    const rows =
+      !operatorAccount && !scope && !profile.account
+        ? []
+        : await listAll(
+            operatorAccount
+              ? operatorAccount.orgId
+                ? `/admin/organizations/${encodeURIComponent(operatorAccount.orgId)}/systems`
+                : `/admin/accounts/${encodeURIComponent(operatorAccount.id)}/systems`
+              : scope
+                ? `/organizations/${encodeURIComponent(scope)}/systems`
+                : "/systems",
+          );
     if (closed || epoch !== generation) return;
     systems = rows.filter((s) => s.status === "active");
     renderMetrics();
@@ -665,6 +714,7 @@ export function createManagerDashboard({
       grid.append(card);
     }
     view.append(grid);
+    if (!scope && !operatorAccount) examples.renderCards(view);
     say("");
   }
   async function assignSystem(system) {
@@ -699,13 +749,24 @@ export function createManagerDashboard({
     );
     view.append(f);
   }
-  async function showOrganizations() {
-    beginView("organizations");
+  async function showOrganizations(personal = false) {
+    beginView(
+      personal || profile.role !== "admin"
+        ? "my-organizations"
+        : "organizations",
+    );
     const epoch = generation;
-    view.append(node("h3", t("ניהול ארגונים", "Organization management")));
+    view.append(
+      node(
+        "h3",
+        personal || profile.role !== "admin"
+          ? t("הארגונים שלי", "My organizations")
+          : t("ניהול ארגונים", "Organization management"),
+      ),
+    );
     const columns = node("div", undefined, "manager-org-columns");
     view.append(columns);
-    const operator = profile.role === "admin";
+    const operator = profile.role === "admin" && !personal;
     await pagedView(
       operator ? "/admin/organizations" : "/organizations",
       columns,
@@ -811,7 +872,7 @@ export function createManagerDashboard({
                 expectedVersion: org.version,
               });
               await refreshProfile();
-              await showOrganizations();
+              await showOrganizations(personal);
             }),
           );
         card.append(actions);
@@ -819,6 +880,8 @@ export function createManagerDashboard({
       },
     );
     if (closed || epoch !== generation) return;
+    if (personal || profile.role !== "admin")
+      examples.renderOrganizationCard(view);
     if (profile.account || operator)
       view.append(
         form(
@@ -847,7 +910,7 @@ export function createManagerDashboard({
               { ...values, requestId: f.dataset.requestId },
             );
             await refreshProfile();
-            await showOrganizations();
+            await showOrganizations(personal);
           },
         ),
       );
@@ -1856,8 +1919,7 @@ export function createManagerDashboard({
   const ready = task(async () => {
     await refreshProfile();
     if (closed) return;
-    if (profile.role === "admin") await showOverview();
-    else if (profile.account) await showSystems(null);
+    if (profile.role === "admin" || profile.account) await showSystems(null);
     else if (profile.organizations.length)
       await showSystems(profile.organizations[0].id);
     else await showInvitations();
@@ -1867,6 +1929,7 @@ export function createManagerDashboard({
     close() {
       closed = true;
       stop();
+      examples.close();
       root.replaceChildren();
     },
   };

@@ -140,11 +140,11 @@ test("Manager handles repeated empty cursors and discards invitations loaded aft
     () => typeof window.finishInvitations === "function",
   );
   await page
-    .getByRole("button", { name: "Organizations", exact: true })
+    .getByRole("button", { name: "My organizations", exact: true })
     .click();
   await page.evaluate(() => window.finishInvitations());
   await page
-    .getByRole("heading", { name: "Organization management", exact: true })
+    .getByRole("heading", { name: "My organizations", exact: true })
     .waitFor();
   assert.equal(await page.getByText("late@example.test").count(), 0);
   assert.equal(

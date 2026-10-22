@@ -718,3 +718,193 @@
 .manager-hero {
   border-radius: 12px;
 }
+.manager-platform-nav {
+  margin-block-start: auto;
+  padding-block-start: 16px;
+  border-top: 1px solid var(--manager-line);
+}
+@media (min-width: 851px) {
+  .manager-nav {
+    display: flex;
+    flex-direction: column;
+    min-height: min(680px, calc(100dvh - 180px));
+    box-sizing: border-box;
+  }
+}
+@media (max-width: 850px) {
+  .manager-platform-nav {
+    flex-basis: 100%;
+    width: 100%;
+    margin-block-start: 12px;
+  }
+}
+.manager-examples {
+  margin-top: 28px;
+}
+.manager-examples > h3 {
+  font-size: 20px;
+}
+.manager-card.manager-example-card {
+  border: 1px dashed #a78bfa;
+  border-radius: 8px;
+  box-shadow: none;
+}
+.manager-example-card h4 {
+  margin: 16px 0 8px;
+  font-size: 18px;
+  overflow-wrap: anywhere;
+}
+.manager-example-card > .manager-icon {
+  display: inline-grid;
+  vertical-align: middle;
+  margin-inline-end: 12px;
+}
+.manager-example-card .manager-facts {
+  grid-template-columns: 1fr 1fr;
+  font-size: 12px;
+}
+.manager-example-badge {
+  display: inline-block;
+  width: fit-content;
+  padding: 4px 9px;
+  border-radius: 4px;
+  color: #6d28d9;
+  background: #f3e8ff;
+  font-size: 12px;
+  font-weight: 700;
+}
+.manager-example-workspace {
+  min-width: 0;
+}
+.manager-example-workspace .manager-note {
+  border-radius: 6px;
+}
+.manager-example-workspace .manager-workspace-head {
+  flex-wrap: wrap;
+}
+.manager-example-workspace > label {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.manager-example-workspace select {
+  max-width: 100%;
+  min-height: 44px;
+  padding: 8px;
+  border: 1px solid var(--manager-line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+.manager-example-content > button {
+  margin: 6px;
+}
+.manager-example-content > :is(input, label) {
+  margin-block: 12px;
+}
+.manager-example-content > input[type="search"] {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 10px;
+  border: 1px solid var(--manager-line);
+  border-radius: 6px;
+  font: inherit;
+}
+.manager-example-content .manager-table td {
+  vertical-align: top;
+}
+.manager-example-content .manager-table .manager-actions {
+  min-width: 170px;
+}
+.manager-example-content .manager-table p {
+  margin-top: 0;
+}
+.manager-example-content progress {
+  width: 100%;
+  height: 20px;
+  accent-color: var(--manager-accent);
+}
+.manager-example-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.manager-example-metrics .manager-card {
+  display: grid;
+  gap: 14px;
+  border-radius: 6px;
+  padding: 18px;
+  box-shadow: none;
+}
+.manager-example-metrics span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.manager-example-metrics strong {
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+.manager-example-selection {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--manager-line);
+  border-radius: 6px;
+}
+.manager-example-selection label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.manager-example-selection input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--manager-accent);
+}
+.manager-example-week {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+}
+.manager-example-week .manager-card {
+  border-radius: 6px;
+  padding: 12px;
+  box-shadow: none;
+}
+.manager-example-week h5 {
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+.manager-example-event {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-inline-start: 3px solid #16a34a;
+  background: #f0fdf4;
+  font-size: 12px;
+}
+.manager-example-event.is-closed {
+  border-color: #e11d48;
+  background: #fff1f2;
+}
+.manager-example-event button {
+  margin-top: 8px;
+}
+@media (max-width: 1000px) {
+  .manager-example-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 480px) {
+  .manager-example-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .manager-example-metrics strong {
+    font-size: 20px;
+  }
+  .manager-example-workspace .manager-facts {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}

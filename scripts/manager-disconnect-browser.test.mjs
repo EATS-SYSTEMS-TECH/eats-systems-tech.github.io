@@ -98,7 +98,11 @@ test("platform Manager admin can browse customer metadata and deliberately disco
           await window.dashboard.ready;
         }, language);
         const he = language === "he";
-        // Platform administration opens on the overview; customer metadata
+        await page
+          .locator(".manager-nav .manager-platform-nav > button")
+          .first()
+          .click();
+        // Platform administration is separate from personal systems; customer metadata
         // remains available without opening a gate-management session.
         await page
           .locator(".manager-nav")

@@ -355,7 +355,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
   );
 
   await t.test(
-    "EN and Hebrew mobile picker keep Host, Pay, Manager order and use only platform GET",
+    "English and Hebrew profile workspace lists keep Host, Pay, Manager order and use only platform GET",
     async () => {
       for (const mobile of [false, true]) {
         const fixture = await scenario(browser, {
@@ -380,7 +380,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
               top: tile.getBoundingClientRect().top,
             })),
           );
-        const axis = mobile ? "top" : "left";
+        const axis = "top";
         assert.ok(
           positions[0][axis] < positions[1][axis] &&
             positions[1][axis] < positions[2][axis],

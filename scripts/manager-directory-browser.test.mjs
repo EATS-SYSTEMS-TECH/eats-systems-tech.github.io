@@ -34,6 +34,10 @@ test("published Manager page wires the private profile into the header without d
       const page = fixture.page;
       page.setDefaultTimeout(7000);
       await page.goto(origin + "/dashboard/manager/?lang=he");
+      await page
+        .locator(".manager-nav .manager-platform-nav > button")
+        .first()
+        .click();
       await page.locator(".manager-overview-card").last().waitFor();
       assert.equal(await page.locator(".platform-heading").isVisible(), false);
       assert.equal(await page.locator("#product-title").isVisible(), false);
@@ -255,6 +259,10 @@ test("Manager identity, platform overview and organization columns support scope
         const he = language === "he",
           nav = page.locator(".manager-nav");
         await page
+          .locator(".manager-nav .manager-platform-nav > button")
+          .first()
+          .click();
+        await page
           .locator(".manager-overview-grid .manager-overview-card")
           .last()
           .waitFor();
@@ -439,7 +447,7 @@ test("Manager identity, platform overview and organization columns support scope
         );
         await nav
           .getByRole("button", {
-            name: he ? "ארגונים" : "Organizations",
+            name: he ? "הארגונים שלי" : "My organizations",
             exact: true,
           })
           .click();
