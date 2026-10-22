@@ -201,24 +201,34 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               );
               assert.equal(await card.locator('[data-personal-count="groups"]').count(), 0);
               if (productId !== "pay") {
-                const info = card.locator('.info-tip__button');
-                if (width === 320) await info.tap();
-                else await info.click();
-                assert.equal(await info.getAttribute('aria-expanded'), 'true');
-                const bubble = card.locator('[role="tooltip"]');
-                assert.equal(await bubble.isVisible(), true);
-                assert.match(await bubble.innerText(), productId === "host" ? /\$6/ : /\$2\.90/);
-                const box = await bubble.boundingBox();
-                assert.ok(box.x >= 0 && box.x + box.width <= width);
-                if (process.env.DASHBOARD_PREVIEW_DIR && !product) await page.screenshot({path:`${process.env.DASHBOARD_PREVIEW_DIR}/cost-tooltip-${productId}-${language}-${width}.png`});
-                if (width === 320) {
-                  await card.locator('.product-state').tap();
-                  assert.equal(await bubble.isVisible(), false);
-                  await info.tap();
+                assert.equal(await card.locator('.info-tip__button').count(), 3);
+                assert.equal(await card.locator('h3 .info-tip').count(), 0);
+                for (const key of ['gates', 'dualControls', 'organizations']) {
+                  const tip = card.locator(`[data-cost-info="${key}"]`);
+                  const info = tip.locator('button');
+                  assert.equal(await info.locator('svg').count(), 1);
+                  assert.equal(await info.innerText(), '');
+                  if (width === 320) await info.tap();
+                  else await info.click();
+                  assert.equal(await info.getAttribute('aria-expanded'), 'true');
+                  const bubble = tip.locator('[role="tooltip"]');
                   assert.equal(await bubble.isVisible(), true);
+                  const rate = productId === 'host'
+                    ? key === 'gates' ? /\$6/ : key === 'dualControls' ? /\$12/ : language === 'he' ? /אין תוספת/ : /no monthly organization surcharge/
+                    : key === 'gates' ? /\$2\.90/ : key === 'dualControls' ? /\$5\.80/ : /\$1/;
+                  assert.match(await bubble.innerText(), rate);
+                  const box = await bubble.boundingBox();
+                  assert.ok(box.x >= 0 && box.x + box.width <= width);
+                  if (process.env.DASHBOARD_PREVIEW_DIR && !product && key === 'dualControls') await page.screenshot({path:`${process.env.DASHBOARD_PREVIEW_DIR}/row-tooltip-${productId}-${language}-${width}.png`});
+                  if (width === 320) {
+                    await card.locator('.product-state').tap();
+                    assert.equal(await bubble.isVisible(), false);
+                    await info.tap();
+                    assert.equal(await bubble.isVisible(), true);
+                  }
+                  await page.keyboard.press('Escape');
+                  assert.equal(await bubble.isVisible(), false);
                 }
-                await page.keyboard.press('Escape');
-                assert.equal(await bubble.isVisible(), false);
               }
               assert.equal(await card.locator(".product-actions a").count(), 3);
               assert.equal(await card.locator(".product-actions > *").count(), 3);

@@ -521,6 +521,42 @@ function renderProfileDetails() {
   }
 }
 
+function pricingExplanation(product, category) {
+  const text = {
+    he: {
+      host: {
+        gates: "שערים פיזיים בבעלותך שאינם נכללים בזוג מזוהה, כולל רכיבי קבוצות. 1–14 שערים: $6 לשער לחודש; 15–49: $5; 50 ומעלה: $4. המדרגה נקבעת לפי כל השערים הפיזיים בחשבון וחלה על כולם.",
+        dualControls: "Dual Control כולל שני שערים פיזיים: $12 לזוג במדרגת 1–14 שערים, $10 במדרגת 15–49, או $8 במדרגת 50 ומעלה. זוגות שבתוך קבוצות נכללים כאן; שער שמופיע בכמה מקומות מחושב פעם אחת.",
+        organizations: "אין תוספת חודשית עבור ארגונים ב־WIFIGATE Host. העלות נקבעת לפי השערים הפיזיים הייחודיים בחשבון.",
+      },
+      manager: {
+        gates: "$2.90 לחודש לכל שער פיזי בבעלותך שנכלל ב־Manager, כולל רכיבי קבוצות שאינם משויכים לזוג מזוהה. לחשבון לקוח פעיל חל מינימום של שער אחד ($2.90); המינימום מופיע בשורה זו גם כשאין שער פעיל.",
+        dualControls: "Dual Control מלא כולל שני שערים פיזיים: $5.80 לחודש לזוג. זוגות שבתוך קבוצות נכללים כאן. מחושבים רק השערים הייחודיים שנכללים בשירות; חפיפה או זוג פעיל חלקית אינם יוצרים חיוב כפול.",
+        organizations: "שלושת הארגונים הפעילים הראשונים בבעלות החשבון כלולים. כל ארגון פעיל נוסף מוסיף $1 לחודש. מנהלי ארגון ללא חשבון לקוח משלם אינם משלמים על הארגון.",
+      },
+    },
+    en: {
+      host: {
+        gates: "Owned physical gates outside recognized pairs, including group components. 1–14 gates: $6 per gate/month; 15–49: $5; 50+: $4. The tier uses all unique physical gates in the account and applies to every gate.",
+        dualControls: "A Dual Control contains two physical gates: $12 per pair in the 1–14 gate tier, $10 in the 15–49 tier, or $8 in the 50+ tier. Pairs inside groups are included here; overlapping physical gates are counted once.",
+        organizations: "WIFIGATE Host has no monthly organization surcharge. Cost depends on the account's unique physical gates.",
+      },
+      manager: {
+        gates: "$2.90 per owned physical gate/month included in Manager, including group components outside recognized pairs. An active customer account has a one-gate minimum ($2.90), shown on this row even with no enabled gates.",
+        dualControls: "A complete Dual Control contains two physical gates: $5.80 per pair/month. Pairs inside groups are included here. Only unique enabled physical gates are priced; overlapping or partially enabled pairs never double-charge a gate.",
+        organizations: "The first three active account-owned organizations are included. Each additional active organization adds $1/month. Organization administrators without a paying customer account incur no organization fee.",
+      },
+    },
+  };
+  const detail = text[language === "he" ? "he" : "en"][product][category];
+  const explanation = language === "he"
+    ? detail.replace(/\$\d+(?:\.\d+)?|\d+–\d+/g, value => `\u2066${value}\u2069`)
+    : detail;
+  return explanation + (language === "he"
+    ? " אומדן לחודש מלא בדולר, לפני מס; ללא גבייה כאן."
+    : " Full-month estimate in USD before tax; no payment is collected here.");
+}
+
 function renderSubscriptionPreview() {
   if (!$("#profile-subscriptions")) return;
   // Server estimates use owned, deduplicated physical gates; Pay is revenue only.
@@ -534,16 +570,6 @@ function renderSubscriptionPreview() {
       totals.className = "profile-product-totals";
       const heading = document.createElement("h3");
       heading.textContent = language === "he" ? "סה״כ" : "Totals";
-      const explanation = language === "he"
-        ? "קבוצות מפורקות לשערים ולזוגות מזוהים ואינן מחויבות בנפרד. כל שער פיזי בבעלותך נספר פעם אחת; Dual Control כולל שני שערים. כשאין פירוט של הזוגות, השערים נכללים ב־Gates. הכמויות בטבלה הן רכיבים בבעלותך שנכללים באומדן. " + (id === "host"
-          ? "Host: עד 14 שערים — $6 לשער; 15–49 — $5; 50 ומעלה — $4. התעריף חל על כל השערים בחשבון. ארגונים ללא תוספת."
-          : "Manager: $2.90 לשער פיזי לחודש, מינימום שער אחד ללקוח פעיל. שלושה ארגונים כלולים; $1 לכל ארגון פעיל נוסף. מנהלי ארגון ללא חשבון משלם אינם משלמים.") + " אומדן לחודש מלא בדולר, לפני מס; לא מתבצע כאן חיוב."
-        : "Groups expand into gates and recognized pairs with no separate group fee. Each owned physical gate is counted once; a Dual Control contains two gates. Without pair details, physical gates appear under Gates. Quantities show owned components included in this estimate. " + (id === "host"
-          ? "Host: 1–14 gates at $6 each; 15–49 at $5; 50+ at $4. The tier applies to every gate in the account. No organization surcharge."
-          : "Manager: $2.90 per physical gate/month, with a one-gate active-customer minimum. Three organizations included; $1 per additional active organization. Organization-only administrators pay no account fee.") + " Full-month estimate in USD before tax; no payment is collected here.";
-      const tip = infoTip(explanation);
-      tip.querySelector("button").setAttribute("aria-label", language === "he" ? "איך מחושבת העלות?" : "How is the cost calculated?");
-      heading.append(" ", tip);
       totals.append(heading);
       const counts = document.createElement("table");
       counts.setAttribute("aria-label", language === "he" ? "כמויות ועלויות חודשיות משוערות" : "Quantities and estimated monthly costs");
@@ -563,7 +589,26 @@ function renderSubscriptionPreview() {
         const row = body.insertRow();
         const term = document.createElement("th");
         term.scope = "row";
-        term.textContent = language === "he" ? he : en;
+        const label = document.createElement("span");
+        label.className = "profile-cost-label";
+        const name = document.createElement("span");
+        name.textContent = language === "he" ? he : en;
+        const tip = infoTip(pricingExplanation(id, key));
+        tip.dataset.costInfo = key;
+        const infoButton = tip.querySelector("button");
+        infoButton.setAttribute("aria-label", language === "he" ? `תעריף ${he}` : `${en} pricing`);
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("viewBox", "0 0 16 16");
+        svg.setAttribute("aria-hidden", "true");
+        svg.setAttribute("focusable", "false");
+        for (const [tag, attrs] of [["circle", {cx:8,cy:8,r:6}], ["path", {d:"M8 7.2v3.4M8 5.2h.01"}]]) {
+          const part = document.createElementNS("http://www.w3.org/2000/svg", tag);
+          for (const [attribute, value] of Object.entries(attrs)) part.setAttribute(attribute, value);
+          svg.append(part);
+        }
+        infoButton.replaceChildren(svg);
+        label.append(name, tip);
+        term.append(label);
         const value = document.createElement("td");
         value.dataset.personalCount = key;
         const quantity = estimate?.lines[key]?.quantity;
