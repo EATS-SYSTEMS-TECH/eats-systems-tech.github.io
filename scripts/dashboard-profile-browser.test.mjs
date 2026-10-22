@@ -17,6 +17,10 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               manager: "active",
               pay: "active",
               viewport: { width, height: 1000 },
+              userMetadata: {
+                creationTime: "Mon, 15 Jan 2024 12:00:00 GMT",
+                lastSignInTime: "invalid",
+              },
             });
             t.after(() => fixture.context.close());
             const { page, context } = fixture;
@@ -131,6 +135,38 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               await page.locator("#profile-access > div").count(),
               3,
             );
+            const details = page.locator("#profile-details");
+            assert.match(await details.innerText(), /2024/);
+            assert.match(
+              await details.innerText(),
+              language === "he" ? /לא זמין כרגע/ : /Not available/,
+            );
+            const subscriptions = page.locator("#profile-subscriptions");
+            assert.equal(
+              await subscriptions.getAttribute("data-billing-mode"),
+              "preview",
+            );
+            assert.equal(
+              await subscriptions.locator("[data-subscription]").count(),
+              3,
+            );
+            for (const count of await subscriptions
+              .locator('[data-subscription-value="active"]')
+              .allTextContents())
+              assert.equal(count, "0");
+            for (const amount of await subscriptions
+              .locator(
+                '[data-subscription-value="monthly"], #profile-subscription-total',
+              )
+              .allTextContents()) {
+              assert.match(amount, /0/);
+              assert.match(amount, /₪/);
+            }
+            if (process.env.DASHBOARD_PREVIEW_DIR)
+              await page.screenshot({
+                path: `${process.env.DASHBOARD_PREVIEW_DIR}/profile-subscriptions-${language}-${width}.png`,
+                fullPage: true,
+              });
             assert.deepEqual(fixture.errors, []);
           },
         );

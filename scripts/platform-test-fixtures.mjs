@@ -136,6 +136,7 @@ export async function scenario(browser, options = {}) {
       let enrolled = ${JSON.stringify(state.enrolled)};
       let observer;
       let user = { uid: "fixture-user", email: "fixture@example.test", emailVerified: true,
+        metadata: ${JSON.stringify(state.userMetadata ?? {})},
         getIdToken: async () => "isolated-token",
         getIdTokenResult: async () => ({claims: {firebase: {sign_in_provider: "google.com"}}}) };
       export const getAuth = () => ({});

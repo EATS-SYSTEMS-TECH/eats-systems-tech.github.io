@@ -281,6 +281,92 @@ body[data-product]
   margin: 32px 0 18px;
   font-size: 22px;
 }
+.profile-subscriptions {
+  margin: 28px 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--dashboard-line);
+}
+.profile-subscriptions-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.profile-subscriptions-heading h3 {
+  margin: 0;
+}
+.profile-preview {
+  padding: 4px 9px;
+  border: 1px solid var(--dashboard-line);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--muted);
+  background: #f8fafc;
+}
+.profile-subscriptions-note {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 12px 0 18px;
+}
+.profile-subscription-plans {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.profile-subscription-plans article {
+  padding: 18px;
+  border: 1px solid var(--dashboard-line);
+  border-top: 3px solid var(--host);
+  border-radius: 6px;
+  min-width: 0;
+}
+.profile-subscription-plans [data-subscription="manager"] {
+  border-top-color: var(--manager);
+}
+.profile-subscription-plans [data-subscription="pay"] {
+  border-top-color: var(--pay);
+}
+.profile-subscription-plans h4 {
+  margin: 0 0 20px;
+  font-size: 14px;
+  text-align: start;
+}
+.profile-subscription-plans dl {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+}
+.profile-subscription-plans dl > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+}
+.profile-subscription-plans dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+.profile-subscription-plans dd {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+.profile-subscription-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px;
+  margin-top: 14px;
+  border: 1px solid var(--dashboard-line);
+  border-radius: 6px;
+  background: #f8fafc;
+}
+.profile-subscription-total strong {
+  flex: none;
+  font-size: 28px;
+}
 .profile-products-title:has(+ #product-grid[hidden]) {
   display: none;
 }
@@ -386,7 +472,8 @@ body.host-app.host-menu-empty .host-topbar .workspace-menu-toggle {
     grid-area: auto;
   }
   .profile-details,
-  .profile-access {
+  .profile-access,
+  .profile-subscription-plans {
     grid-template-columns: 1fr;
   }
 }

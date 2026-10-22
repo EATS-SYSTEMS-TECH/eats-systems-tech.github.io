@@ -140,6 +140,8 @@ function clearPrivate() {
   if (panel) panel.hidden = true;
   $("#profile-details")?.replaceChildren();
   $("#profile-access")?.replaceChildren();
+  $("#profile-subscription-plans")?.replaceChildren();
+  $("#profile-subscription-total")?.replaceChildren();
   for (const selector of ["#account-name", "#account-email", "#account-avatar"])
     $(selector)?.replaceChildren();
 }
@@ -431,6 +433,16 @@ function renderProfileDetails() {
   const details = $("#profile-details");
   if (!details) return;
   details.replaceChildren();
+  const accountDate = (value) => {
+    const timestamp = typeof value === "string" ? Date.parse(value) : NaN;
+    return Number.isFinite(timestamp)
+      ? new Intl.DateTimeFormat(language === "he" ? "he-IL" : "en-GB", {
+          dateStyle: "long",
+        }).format(timestamp)
+      : language === "he"
+        ? "לא זמין כרגע"
+        : "Not available";
+  };
   for (const [label, value] of [
     [
       language === "he" ? "כתובת אימייל" : "Email address",
@@ -445,6 +457,14 @@ function renderProfileDetails() {
         : language === "he"
           ? "ממתין לאימות"
           : "Not verified",
+    ],
+    [
+      language === "he" ? "תאריך הצטרפות" : "Joined on",
+      accountDate(currentUser?.metadata?.creationTime),
+    ],
+    [
+      language === "he" ? "התחברות אחרונה" : "Last sign-in",
+      accountDate(currentUser?.metadata?.lastSignInTime),
     ],
     [
       language === "he" ? "אפליקציית אימות" : "Authenticator",
@@ -497,6 +517,48 @@ function renderProfileDetails() {
     }
     products.append(item);
   }
+  renderSubscriptionPreview();
+}
+
+function renderSubscriptionPreview() {
+  const plans = $("#profile-subscription-plans");
+  if (!plans) return;
+  const zero = new Intl.NumberFormat(language === "he" ? "he-IL" : "en-GB", {
+    style: "currency",
+    currency: "ILS",
+    maximumFractionDigits: 0,
+  }).format(0);
+  plans.replaceChildren();
+  // Explicit preview data: product access is not evidence of a paid subscription.
+  for (const id of productIds) {
+    const card = document.createElement("article");
+    card.dataset.subscription = id;
+    const heading = document.createElement("h4");
+    heading.dir = "ltr";
+    heading.textContent = productName(id);
+    const list = document.createElement("dl");
+    for (const [label, value, key] of [
+      [
+        language === "he" ? "מנויים פעילים" : "Active subscriptions",
+        "0",
+        "active",
+      ],
+      [language === "he" ? "תשלום חודשי" : "Monthly payment", zero, "monthly"],
+    ]) {
+      const row = document.createElement("div");
+      const term = document.createElement("dt");
+      term.textContent = label;
+      const description = document.createElement("dd");
+      description.textContent = value;
+      description.dir = "auto";
+      description.dataset.subscriptionValue = key;
+      row.append(term, description);
+      list.append(row);
+    }
+    card.append(heading, list);
+    plans.append(card);
+  }
+  $("#profile-subscription-total").textContent = zero;
 }
 
 // Account deletion: a preview of what is cancelled and closed, the account
