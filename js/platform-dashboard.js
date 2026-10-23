@@ -574,6 +574,14 @@ function renderSubscriptionPreview() {
       const counts = document.createElement("table");
       counts.setAttribute("aria-label", language === "he" ? "כמויות ועלויות חודשיות משוערות" : "Quantities and estimated monthly costs");
       const head = counts.createTHead().insertRow();
+      const infoHeading = document.createElement("th");
+      infoHeading.scope = "col";
+      infoHeading.className = "profile-cost-info";
+      const infoTitle = document.createElement("span");
+      infoTitle.className = "visually-hidden";
+      infoTitle.textContent = language === "he" ? "מידע על התעריף" : "Pricing information";
+      infoHeading.append(infoTitle);
+      head.append(infoHeading);
       for (const label of language === "he" ? ["סוג", "כמות", "עלות חודשית"] : ["Type", "Quantity", "Monthly cost"]) {
         const cell = document.createElement("th");
         cell.scope = "col";
@@ -589,10 +597,9 @@ function renderSubscriptionPreview() {
         const row = body.insertRow();
         const term = document.createElement("th");
         term.scope = "row";
-        const label = document.createElement("span");
-        label.className = "profile-cost-label";
-        const name = document.createElement("span");
-        name.textContent = language === "he" ? he : en;
+        term.textContent = language === "he" ? he : en;
+        const infoCell = document.createElement("td");
+        infoCell.className = "profile-cost-info";
         const tip = infoTip(pricingExplanation(id, key));
         tip.dataset.costInfo = key;
         const infoButton = tip.querySelector("button");
@@ -607,8 +614,7 @@ function renderSubscriptionPreview() {
           svg.append(part);
         }
         infoButton.replaceChildren(svg);
-        label.append(name, tip);
-        term.append(label);
+        infoCell.append(tip);
         const value = document.createElement("td");
         value.dataset.personalCount = key;
         const quantity = estimate?.lines[key]?.quantity;
@@ -621,7 +627,7 @@ function renderSubscriptionPreview() {
         cost.dir = "auto";
         const amount = estimate ? estimate.lines[key].amountCents + (key === "gates" ? estimate.lines.groups.amountCents : 0) : undefined;
         cost.textContent = formatMoney(amount, estimate?.currency, language);
-        row.append(term, value, cost);
+        row.append(infoCell, term, value, cost);
       }
       totals.append(counts);
       card.insertBefore(totals, card.querySelector(".product-guidance"));

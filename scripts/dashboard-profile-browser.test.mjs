@@ -202,6 +202,12 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               assert.equal(await card.locator('[data-personal-count="groups"]').count(), 0);
               if (productId !== "pay") {
                 assert.equal(await card.locator('.info-tip__button').count(), 3);
+                const icons = await card.locator('.info-tip__button').evaluateAll(buttons => buttons.map(button => ({x:button.getBoundingClientRect().x, center:button.getBoundingClientRect().y + button.getBoundingClientRect().height / 2, rowCenter:button.closest('tr').getBoundingClientRect().y + button.closest('tr').getBoundingClientRect().height / 2})));
+                for (const icon of icons) {
+                  assert.ok(Math.abs(icon.x - icons[0].x) < 0.5);
+                  assert.ok(Math.abs(icon.center - icon.rowCenter) < 1);
+                }
+                assert.equal(await card.locator('thead th').count(), 4);
                 assert.equal(await card.locator('h3 .info-tip').count(), 0);
                 for (const key of ['gates', 'dualControls', 'organizations']) {
                   const tip = card.locator(`[data-cost-info="${key}"]`);
