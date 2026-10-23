@@ -601,9 +601,15 @@ ul {
     transform var(--transition-fast);
 }
 
-.hero__media-control:hover {
+/* Hover feedback shares contrast colors across both video control styles. */
+.hero__media-control:hover,
+.hero__replay:hover {
   background: rgba(30, 41, 59, 0.72);
   border-color: rgba(255, 255, 255, 0.34);
+}
+
+/* Only the compact control lifts; replay keeps its responsive positioning. */
+.hero__media-control:hover {
   transform: translateY(-1px);
 }
 
@@ -642,11 +648,6 @@ ul {
   background: rgba(15, 23, 42, 0.46);
   color: #ffffff;
   box-shadow: 0 18px 42px rgba(2, 6, 23, 0.28);
-}
-
-.hero__replay:hover {
-  border-color: rgba(255, 255, 255, 0.34);
-  background: rgba(30, 41, 59, 0.72);
 }
 
 .hero__replay::before {

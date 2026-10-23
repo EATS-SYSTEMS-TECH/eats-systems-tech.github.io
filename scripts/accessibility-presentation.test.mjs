@@ -61,3 +61,43 @@ test("high contrast retains surfaces, text, active indicators and focus in mobil
     }
   } finally { await browser.close(); }
 });
+
+test("hero controls preserve hover contrast, independent transforms and hidden state", async () => {
+  const browser = await chromium.launch({ channel: "chrome", headless: true });
+  try {
+    for (const width of [393, 1280]) for (const dir of ["ltr", "rtl"]) {
+      const page = await browser.newPage({ viewport: { width, height: 900 } });
+      try {
+        await page.route("**/*", (route) => route.abort());
+        await page.setContent(`<html dir="${dir}"><head><style>${styles}\n${accessibility}</style></head><body>
+          <section class="hero"><div class="hero__media"></div>
+          <button id="mute" class="hero__media-control">Mute</button>
+          <button id="replay" class="hero__replay">Replay</button></section></body></html>`);
+        for (const id of ["mute", "replay"]) {
+          const control = page.locator("#" + id);
+          await control.hover();
+          // Wait for the actual CSS transition, rather than comparing a frame
+          // sampled between its original and hovered colors.
+          await page.waitForFunction((target) => {
+            const css = getComputedStyle(document.getElementById(target));
+            return css.backgroundColor === "rgba(30, 41, 59, 0.72)"
+              && css.borderTopColor === "rgba(255, 255, 255, 0.34)"
+              && new DOMMatrix(css.transform).m42 === (target === "mute" ? -1 : 0);
+          }, id);
+          const state = await control.evaluate((el) => {
+            const css = getComputedStyle(el), matrix = new DOMMatrix(css.transform);
+            return { border: css.borderTopColor, y: matrix.m42, x: matrix.m41, width: el.getBoundingClientRect().width };
+          });
+          assert.equal(state.border, "rgba(255, 255, 255, 0.34)", `${width}/${dir}/${id}`);
+          assert.equal(state.y, id === "mute" ? -1 : 0);
+          if (id === "replay") {
+            if (width <= 768) assert.equal(state.x, 0);
+            else assert.ok(Math.abs(state.x + state.width / 2) < .01);
+          }
+          await control.evaluate((el) => { el.hidden = true; });
+          assert.equal(await control.evaluate((el) => getComputedStyle(el).display), "none");
+        }
+      } finally { await page.close(); }
+    }
+  } finally { await browser.close(); }
+});
