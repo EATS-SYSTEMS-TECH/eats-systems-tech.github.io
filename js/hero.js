@@ -78,9 +78,16 @@ function setupHeroMedia() {
     syncHeroFloatingWidgetState();
     updateHeroMediaCopy();
   }
-  function showHeroImageState() {
+  // Invalidate pending playback before pausing. Only an explicit visitor pause
+  // persists across automatic visibility and policy changes.
+  function stopHeroPlayback(visitor = false) {
     generation += 1;
+    if (visitor) pausedByVisitor = true;
     video.pause();
+  }
+  // Media failures and completion restore the poster after cancelling playback.
+  function showHeroImageState() {
+    stopHeroPlayback();
     setHeroMediaState("image");
   }
   async function playHeroVideo({ restart = false, manual = false } = {}) {
@@ -104,9 +111,8 @@ function setupHeroMedia() {
   muteButton?.addEventListener("click", () => { video.muted = !video.muted; updateHeroMediaCopy(); });
   replayButton.addEventListener("click", () => {
     if (!video.paused && !video.ended) {
-      generation += 1;
-      pausedByVisitor = true;
-      video.pause();
+      // Keep the visitor's pause distinct from temporary offscreen pauses.
+      stopHeroPlayback(true);
       updateHeroMediaCopy();
       return;
     }
@@ -114,8 +120,9 @@ function setupHeroMedia() {
     playHeroVideo({ restart: finished || video.ended, manual: true });
   });
   pauseButton?.addEventListener("click", () => {
+    // The dedicated control resumes in place or records an explicit pause.
     if (video.paused) playHeroVideo({ manual: true });
-    else { generation += 1; pausedByVisitor = true; video.pause(); }
+    else stopHeroPlayback(true);
     updateHeroMediaCopy();
   });
   video.addEventListener("playing", () => setHeroMediaState("video"));
@@ -133,13 +140,15 @@ function setupHeroMedia() {
   navigator.connection?.addEventListener?.("change", policyChanged);
   document.addEventListener("site-accessibility-change", policyChanged);
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden) { generation += 1; video.pause(); }
+    // Hidden documents cancel pending work without becoming visitor-paused.
+    if (document.hidden) stopHeroPlayback();
     else playHeroVideo();
   });
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver((entries) => {
+      // Pause outside the original threshold and resume under autoplay policy.
       inView = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= .25);
-      if (!inView) { generation += 1; video.pause(); }
+      if (!inView) stopHeroPlayback();
       else playHeroVideo();
       syncHeroFloatingWidgetState();
     }, { threshold: [0, .25] });
