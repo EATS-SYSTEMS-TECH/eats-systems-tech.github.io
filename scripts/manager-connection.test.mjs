@@ -11,6 +11,28 @@ const makeSession = () => ({
   clientWriteKey: new Uint8Array(32).fill(2),
   deviceWriteKey: new Uint8Array(32).fill(3),
 });
+
+test("closing a Manager channel exposes one cancellation barrier without reopening authentication", async () => {
+  let release;
+  const calls = [];
+  const connection = new ManagerConnection({
+    user: { uid: "fixture" },
+    WebSocketImpl: class {},
+    api: (path) => {
+      calls.push(path);
+      return new Promise((resolve) => {
+        release = resolve;
+      });
+    },
+  });
+  connection.requestId = "old-request";
+  const barrier = connection.close();
+  assert.equal(connection.closed, true);
+  assert.equal(connection.close(), barrier);
+  assert.deepEqual(calls, ["/connection-requests/old-request/cancel"]);
+  release({ cancelled: true });
+  await barrier;
+});
 function decodeClient(session, bytes) {
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.length),
     id = view.getUint32(4),

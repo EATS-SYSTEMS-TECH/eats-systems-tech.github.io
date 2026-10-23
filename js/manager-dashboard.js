@@ -284,15 +284,25 @@ export function createManagerDashboard({
       platform.append(platformButton);
       if (platformViews.includes(currentView)) {
         platformHeader.hidden = false;
-        platformHeader.append(node("span", t("ניהול פלטפורמה", "Platform management"), "manager-platform-eyebrow"));
+        platformHeader.append(
+          node(
+            "span",
+            t("ניהול פלטפורמה", "Platform management"),
+            "manager-platform-eyebrow",
+          ),
+        );
         const parentTitle = node("h2", undefined, "manager-platform-title");
         const parent = button("WIFIGATE Manager admin platform", showOverview);
         parent.classList.add("manager-platform-parent");
-        if (currentView === "overview") parent.setAttribute("aria-current", "page");
+        if (currentView === "overview")
+          parent.setAttribute("aria-current", "page");
         parentTitle.append(parent);
         platformHeader.append(parentTitle);
         const tabs = node("nav", undefined, "manager-platform-tabs");
-        tabs.setAttribute("aria-label", t("ניווט ניהול פלטפורמה", "Platform management navigation"));
+        tabs.setAttribute(
+          "aria-label",
+          t("ניווט ניהול פלטפורמה", "Platform management navigation"),
+        );
         for (const [key, label, action] of [
           ["admin", "WIFIGATE Manager admin", () => showDirectory("admin")],
           ["user", "WIFIGATE Manager user", () => showAccounts()],
@@ -1162,12 +1172,23 @@ export function createManagerDashboard({
     await ensureRecent();
     if (epoch === generation) await openGate(system.systemIds[0]);
   }
-  async function openGate(gate) {
-    connection?.close();
-    currentGate = gate;
-    currentRows = [];
-    cursor = null;
+  async function openGate(gate, preserveView = false) {
+    const previous = connection;
     const epoch = ++generation;
+    const existingContent = view.querySelector("#manager-content");
+    const existingTabs = view.querySelector("#manager-tabs");
+    if (preserveView) {
+      if (existingContent) existingContent.inert = true;
+      if (existingTabs) existingTabs.inert = true;
+    }
+    // Wait for the old demand to be cancelled before claiming the gate again.
+    await previous?.close();
+    if (closed || epoch !== generation) return;
+    currentGate = gate;
+    if (!preserveView) {
+      currentRows = [];
+      cursor = null;
+    }
     const candidate = new Connection({
       api,
       user,
@@ -1189,7 +1210,40 @@ export function createManagerDashboard({
           );
         else if (state === "active")
           say(t("מחובר · נתונים חיים מהשער", "Connected · live gate data"));
-        else {
+        else if (state === "SECURE_SESSION_EXPIRED") {
+          const readOnly =
+            /^(ADMIN_(GET_|LIST_).+|ADMIN_PING|ADMIN_RF_GET)$/.test(
+              candidate.pendingCommand ?? "",
+            );
+          const uncertain = candidate.transfer || (candidate.busy && !readOnly);
+          // Let fail() close the old socket first. Never replay an in-flight
+          // operation whose outcome may be unknown.
+          queueMicrotask(() => {
+            if (closed || epoch !== generation) return;
+            if (!uncertain) {
+              say(
+                t("מחדש את החיבור המאובטח…", "Renewing the secure connection…"),
+              );
+              void openGate(gate, true);
+            } else {
+              say(
+                t(
+                  "החיבור הסתיים במהלך פעולה. התחברו לשער ובדקו את התוצאה לפני ניסיון נוסף.",
+                  "The connection ended during an operation. Reconnect and check its result before retrying.",
+                ),
+                true,
+              );
+              view
+                .querySelector("#manager-content")
+                ?.replaceChildren(
+                  button(t("חיבור מחדש לשער", "Reconnect to gate"), () =>
+                    openGate(gate),
+                  ),
+                );
+              view.querySelector("#manager-tabs")?.replaceChildren();
+            }
+          });
+        } else {
           currentRows = [];
           currentData = undefined;
           view.querySelector("#manager-content")?.replaceChildren();
@@ -1206,11 +1260,17 @@ export function createManagerDashboard({
         return;
       }
       renderTabs();
-      await showTab("overview");
+      if (!preserveView) await showTab("overview");
+      else if (!existingContent?.childElementCount) await showTab(currentTab);
     } catch (error) {
       if (epoch === generation) {
         connection?.close();
         say(errorText(error), true);
+      }
+    } finally {
+      if (epoch === generation) {
+        if (existingContent) existingContent.inert = false;
+        if (existingTabs) existingTabs.inert = false;
       }
     }
   }

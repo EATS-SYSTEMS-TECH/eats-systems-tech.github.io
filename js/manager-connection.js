@@ -193,7 +193,7 @@ export class ManagerConnection {
         void this.command("ADMIN_PING", {}).catch((error) => this.fail(error));
     }, 10000);
     this.maximum = setTimeout(
-      () => this.fail(new Error("RECENT_REAUTH_REQUIRED")),
+      () => this.fail(new Error("SECURE_SESSION_EXPIRED")),
       280000,
     );
     return this.capabilities;
@@ -243,6 +243,7 @@ export class ManagerConnection {
       this.busy = false;
       throw new Error("BUSY");
     }
+    this.pendingCommand = cmd;
     try {
       const command = {
         cmd,
@@ -274,10 +275,11 @@ export class ManagerConnection {
       throw error;
     } finally {
       this.busy = false;
+      this.pendingCommand = null;
     }
   }
   fail(error) {
-    if (this.closed) return;
+    if (this.closed) return this.closing;
     this.onState(error.message);
     this.close();
   }
@@ -564,7 +566,7 @@ export class ManagerConnection {
     }
   }
   close() {
-    if (this.closed) return;
+    if (this.closed) return this.closing;
     this.closed = true;
     this.abort.abort();
     clearInterval(this.heartbeat);
@@ -579,10 +581,11 @@ export class ManagerConnection {
     this.session = null;
     this.key = null;
     if (this.requestId)
-      void this.api(
+      this.closing = this.api(
         `/connection-requests/${this.requestId}/cancel`,
         "POST",
         {},
       ).catch(() => {});
+    return this.closing;
   }
 }
