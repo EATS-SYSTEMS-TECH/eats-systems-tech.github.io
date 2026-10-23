@@ -16,7 +16,7 @@ import {
   signInRefusals,
 } from "./platform-model.js";
 import { watchSession } from "./platform-session.js?v=20261022day1";
-import { requestMfaChallenge } from "./host-mfa-challenge.js";
+import { requestMfaChallenge } from "./host-mfa-challenge.js?v=20261024mfa1";
 import { requestHumanCheck } from "./login-gate-game.js";
 const status = document.querySelector("#login-status");
 const progress = document.querySelector("#login-progress");
@@ -50,6 +50,8 @@ const ERROR_COPY = {
   [AuthErrors.POPUP_CANCELLED]: "errorCancelled",
   [AuthErrors.POPUP_BLOCKED]: "errorPopupBlocked",
   [AuthErrors.INVALID_CODE]: "errorInvalidCode",
+  "auth/invalid-multi-factor-session": "errorSessionExpired",
+  "auth/session-expired": "errorSessionExpired",
   [AuthErrors.MISSING_CODE]: "errorMissingCode",
   [AuthErrors.NETWORK_FAILED]: "errorNetwork",
   [AuthErrors.MFA_CANCELLED]: "errorMfaCancelled",

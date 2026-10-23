@@ -59,6 +59,9 @@ async function authenticate(action, onChallenge) {
   }
 }
 export async function resolveTotp(resolver, factorUid, code) {
+  // A cached/versioned sign-in entry point may use a different module instance
+  // from the challenge dialog. Initialize this instance before using the SDK.
+  await ready();
   return resolver.resolveSignIn(
     authApi.TotpMultiFactorGenerator.assertionForSignIn(factorUid, code)
   );

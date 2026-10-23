@@ -1,5 +1,5 @@
 import { AuthProviders, AuthErrors } from "./host-constants.js";
-import { resolveTotp } from "./site-auth.js";
+import { resolveTotp } from "./site-auth.js?v=20261024mfa1";
 import { authErrorMessage } from "./host-auth-errors.js";
 // The sign-in page passes its own wording in `text`; the dashboards use the
 // English/Hebrew defaults.

@@ -11,7 +11,7 @@ test("Manager authenticator keeps site styling, RTL, keyboard focus and formatte
     await t.test(`${language} ${width}px`, async () => {
       const page = await browser.newPage({ viewport: { width, height: 740 } });
       t.after(() => page.close());
-      await page.route(origin + "/js/site-auth.js", (route) => route.fulfill({
+      await page.route(origin + "/js/site-auth.js*", (route) => route.fulfill({
         contentType: "application/javascript",
         body: `export async function resolveTotp(resolver, factor, code) {
           window.verifications.push({factor,code});
