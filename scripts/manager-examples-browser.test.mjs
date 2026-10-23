@@ -103,8 +103,16 @@ test("Manager personal navigation and complete sample workspaces never request r
         const workspace = page.locator(".manager-example-workspace"),
           content = workspace.locator(".manager-example-content"),
           status = workspace.locator(".manager-status");
-        const tab = async (key) =>
-          workspace.locator(`[data-example-tab="${key}"]`).click();
+        const tab = async (key) => {
+          await workspace.locator(`[data-example-tab="${key}"]`).click();
+          const order = await content.evaluate(root => {
+            const panel = root.querySelector(':scope > .manager-action-panel');
+            const records = [...root.children].filter(child => child.matches('.manager-table-wrap, .manager-facts, .manager-example-metrics, .manager-example-week'));
+            return {unplaced: [...root.children].some(child => child.matches('form,input,label,button,.manager-actions')), aligned: !panel || records.every(child => panel.getBoundingClientRect().bottom <= child.getBoundingClientRect().top)};
+          });
+          assert.equal(order.unplaced, false, `all ${key} controls are above results`);
+          assert.equal(order.aligned, true, `${key} actions precede data`);
+        };
         await content.getByText("30/5000", { exact: true }).waitFor();
         await content.getByText("1/20", { exact: true }).waitFor();
         assert.equal(await workspace.locator("[data-example-tab]").count(), 10);

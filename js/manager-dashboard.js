@@ -1,3 +1,4 @@
+import { placeManagerActions } from "./manager-action-layout.js";
 import { parseManagerCsv, encodeManagerCsv } from "./manager-csv.js";
 import { managerRequest } from "./api/index.js";
 import { ManagerConnection } from "./manager-connection.js";
@@ -283,13 +284,16 @@ export function createManagerDashboard({
       platform.append(platformButton);
       if (platformViews.includes(currentView)) {
         platformHeader.hidden = false;
-        platformHeader.append(
-          node("h2", t("ניהול פלטפורמה", "Platform management"), "manager-platform-title"),
-        );
+        platformHeader.append(node("span", t("ניהול פלטפורמה", "Platform management"), "manager-platform-eyebrow"));
+        const parentTitle = node("h2", undefined, "manager-platform-title");
+        const parent = button("WIFIGATE Manager admin platform", showOverview);
+        parent.classList.add("manager-platform-parent");
+        if (currentView === "overview") parent.setAttribute("aria-current", "page");
+        parentTitle.append(parent);
+        platformHeader.append(parentTitle);
         const tabs = node("nav", undefined, "manager-platform-tabs");
         tabs.setAttribute("aria-label", t("ניווט ניהול פלטפורמה", "Platform management navigation"));
         for (const [key, label, action] of [
-          ["overview", "WIFIGATE Manager admin platform", showOverview],
           ["admin", "WIFIGATE Manager admin", () => showDirectory("admin")],
           ["user", "WIFIGATE Manager user", () => showAccounts()],
           [
@@ -392,7 +396,7 @@ export function createManagerDashboard({
   async function showOverview() {
     beginView("overview");
     const epoch = generation;
-    view.append(node("h3", "WIFIGATE Manager admin platform"));
+    view.append(node("h3", t("סקירת פלטפורמה", "Platform overview")));
     view.append(
       node(
         "p",
@@ -550,6 +554,7 @@ export function createManagerDashboard({
           showOrganizations,
         ),
       );
+    placeManagerActions(view, language);
   }
   async function refreshProfile() {
     profile = await api("/me");
@@ -944,6 +949,7 @@ export function createManagerDashboard({
           },
         ),
       );
+    placeManagerActions(view, language);
   }
   async function showInvitations() {
     stop();
@@ -1038,6 +1044,7 @@ export function createManagerDashboard({
           },
         ),
       );
+    placeManagerActions(view, language);
   }
   async function showAccounts(status = "active") {
     beginView("user");
@@ -1124,6 +1131,7 @@ export function createManagerDashboard({
         },
       ),
     );
+    placeManagerActions(view, language);
   }
   async function openSystem(system) {
     stop();
@@ -1252,6 +1260,7 @@ export function createManagerDashboard({
       currentData = r.data;
       renderFacts(content, r.data);
       content.append(button(t("פתיחת שער", "Open gate"), openGateAction, true));
+      placeManagerActions(content, language);
       return;
     }
     if (tab === "guests") {
@@ -1287,6 +1296,7 @@ export function createManagerDashboard({
     if (tab === "events") renderEventActions(content);
     if (tab === "rf") renderRfActions(content);
     if (tab === "auto") renderAutoActions(content);
+    placeManagerActions(content, language);
   }
   async function showRead(content, cmd, payload, key, more) {
     const source = connection,
@@ -1427,6 +1437,7 @@ export function createManagerDashboard({
       currentRows = [];
       renderFacts(content, r.data);
     }
+    placeManagerActions(content, language);
   }
   function renderFacts(content, value) {
     const grid = node("dl", undefined, "manager-facts");

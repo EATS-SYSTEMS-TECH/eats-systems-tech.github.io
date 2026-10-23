@@ -1,3 +1,4 @@
+import { placeManagerActions } from "./manager-action-layout.js";
 import {
   createManagerExampleData,
   managerExampleSystems,
@@ -583,6 +584,7 @@ export function createManagerExamples({
           rows,
         );
       }
+      placeManagerActions(body, language);
     };
     render("systems");
   }
@@ -907,7 +909,7 @@ export function createManagerExamples({
       });
       content.append(search, results);
       drawRows();
-      const editor = el("div");
+      const editor = el("div", undefined, "manager-record-editor");
       content.append(editor);
       function editPerson(person) {
         editor.replaceChildren(
@@ -1808,9 +1810,9 @@ export function createManagerExamples({
           }),
         ),
       );
-      content.append(
-        el("h4", t("פעולות מקומיות בלבד", "Local-only operations")),
-      );
+      const local = el("section", undefined, "manager-local-actions");
+      local.dataset.managerAction = "local-only";
+      local.append(el("h4", t("פעולות מקומיות בלבד", "Local-only operations")));
       for (const feature of localOnlyFeatures) {
         const b = button(feature, () => {});
         b.disabled = true;
@@ -1818,8 +1820,9 @@ export function createManagerExamples({
           "דורש ניהול מקומי ליד השער",
           "Requires local management at the gate",
         );
-        content.append(b);
+        local.append(b);
       }
+      content.append(local);
     }
     function render() {
       if (disposed || activeRoot !== container || !container.isConnected)
@@ -1861,6 +1864,7 @@ export function createManagerExamples({
         system: systemView,
         bulk: () => renderBulk(content, [system]),
       })[tab]();
+      placeManagerActions(content, language);
     }
     render();
   }

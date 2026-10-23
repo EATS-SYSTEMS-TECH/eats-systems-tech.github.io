@@ -111,6 +111,10 @@ test("platform Manager admin can browse customer metadata and deliberately disco
         await page
           .getByText("customer@example.test", { exact: true })
           .waitFor();
+        const actions = page.locator('.manager-view > .manager-action-panel');
+        const customerCard = page.locator('.manager-view > .manager-card').filter({hasText:'customer@example.test'});
+        const actionBox = await actions.boundingBox(), customerBox = await customerCard.boundingBox();
+        assert.ok(actionBox.y + actionBox.height <= customerBox.y, 'customer provisioning is above customer records');
         await page
           .getByRole("button", {
             name: he ? "לקוחות חסומים" : "Blocked customers",
