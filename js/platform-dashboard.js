@@ -379,7 +379,8 @@ async function refresh() {
           onProfile: (profile) => managerProfile?.update(profile, user),
           ensureRecent: async () => {
             const token = await user.getIdTokenResult();
-            if (Date.now() / 1000 - Number(token.claims.auth_time ?? 0) > 240) {
+            const age = Date.now() / 1000 - Number(token.claims.auth_time ?? 0);
+            if (!Number.isFinite(age) || age < 0 || age > 86400) {
               await reauthenticate(user, requestMfaChallenge);
               await user.getIdToken(true);
             }
