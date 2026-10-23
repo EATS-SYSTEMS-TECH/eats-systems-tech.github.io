@@ -23,6 +23,7 @@ import { readSceneManifest, applyNicheSceneMedia, applyHomeSceneMedia } from "./
 import { applyMediaWatermarks } from "./media-watermark.mjs";
 // Keep optional proof-list rendering independent from the page build pipeline.
 import { setNicheList } from "./niche-text-list.mjs";
+import { rewriteNicheHomeAnchors } from "./niche-links.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = SITE_ORIGIN;
@@ -1545,12 +1546,8 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
 function rewriteNicheInternalLinks($, locale) {
   const home = buildPagePath(locale, "home");
 
-  $("a[href^='../index.html']").each((_, element) => {
-    const href = $(element).attr("href") || "";
-    const hashIndex = href.indexOf("#");
-    const hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
-    $(element).attr("href", `${home}${hash}`);
-  });
+  // Localize home fragments before footer and legacy Host link adjustments.
+  rewriteNicheHomeAnchors($, home);
   rewriteFooterLegalLinks($, locale);
   // Existing localized hospitality copy may retain its former public URL.
   $("a[href]").each((_, element) => {
