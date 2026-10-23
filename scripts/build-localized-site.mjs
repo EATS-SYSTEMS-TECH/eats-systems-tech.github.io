@@ -21,6 +21,8 @@ import { buildLoginPages } from "./login-pages.mjs";
 import { BRAND_ID, ORGANIZATION_ID, SITE_ORIGIN, breadcrumbNode, faqNode, hreflangCode, setPageMeta, webPageNode } from "./seo.mjs";
 import { readSceneManifest, applyNicheSceneMedia, applyHomeSceneMedia } from "./scene-media.mjs";
 import { applyMediaWatermarks } from "./media-watermark.mjs";
+// Keep optional proof-list rendering independent from the page build pipeline.
+import { setNicheList } from "./niche-text-list.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = SITE_ORIGIN;
@@ -1241,18 +1243,6 @@ function buildNicheContext(homeData, niche, locale) {
     chrome: getNicheChrome(locale),
     content: getNichePageContent(locale).niches[niche.key],
   };
-}
-
-function setNicheList($, selector, items, className) {
-  const list = $(selector);
-  if (!list.length) {
-    return;
-  }
-
-  list.empty();
-  (items || []).forEach((item) => {
-    list.append($("<li>").addClass(className).text(item));
-  });
 }
 
 // Renders the optional three-message block above the overview. The section
