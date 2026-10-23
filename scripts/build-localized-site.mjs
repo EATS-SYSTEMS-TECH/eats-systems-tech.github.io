@@ -24,6 +24,7 @@ import { applyMediaWatermarks } from "./media-watermark.mjs";
 // Keep optional proof-list rendering independent from the page build pipeline.
 import { setNicheList } from "./niche-text-list.mjs";
 import { rewriteNicheHomeAnchors } from "./niche-links.mjs";
+import { buildRedirectPage } from "./redirect-page.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = SITE_ORIGIN;
@@ -1028,23 +1029,6 @@ async function writeOutputFile(filePath, content) {
       await new Promise((resolve) => setTimeout(resolve, 100 * 2 ** attempt));
     }
   }
-}
-
-function buildRedirectPage(targetPath, canonicalUrl) {
-  return ensureTrailingNewline(`<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Redirecting...</title>
-  <link rel="canonical" href="${canonicalUrl}" />
-  <meta http-equiv="refresh" content="0; url=${targetPath}" />
-  <script>window.location.replace(${JSON.stringify(targetPath)});</script>
-</head>
-<body>
-  <p>Redirecting to <a href="${targetPath}">${targetPath}</a>...</p>
-</body>
-</html>
-`);
 }
 
 // lastmod is the day a page's content last changed: today for a page this
