@@ -115,7 +115,9 @@
   color: #aab8d8;
 }
 
+/* The CTA supplies its directional feedback to both pointer and keyboard use. */
 .guest-invites__cta {
+  --guest-invites-arrow-hover: translateX(3px);
   gap: 0.55rem;
 }
 
@@ -125,9 +127,10 @@
   transition: transform var(--transition-fast);
 }
 
+/* Apply one interaction rule while retaining the original full transform. */
 .guest-invites__cta:hover .guest-invites__cta-arrow,
 .guest-invites__cta:focus-visible .guest-invites__cta-arrow {
-  transform: translateX(3px);
+  transform: var(--guest-invites-arrow-hover);
 }
 
 /* ===================================================================== */
@@ -146,9 +149,9 @@
   transform: scaleX(-1);
 }
 
-.rtl .guest-invites__cta:hover .guest-invites__cta-arrow,
-.rtl .guest-invites__cta:focus-visible .guest-invites__cta-arrow {
-  transform: scaleX(-1) translateX(3px);
+/* Mirror before translating so feedback still travels toward RTL navigation. */
+.rtl .guest-invites__cta {
+  --guest-invites-arrow-hover: scaleX(-1) translateX(3px);
 }
 
 /* ===================================================================== */

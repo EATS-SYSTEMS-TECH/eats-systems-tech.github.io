@@ -5,6 +5,7 @@ import { chromium } from "playwright-core";
 
 const styles = await readFile(new URL("../css/styles.css", import.meta.url), "utf8");
 const accessibility = await readFile(new URL("../css/accessibility.css", import.meta.url), "utf8");
+const guestInvites = await readFile(new URL("../css/guest-invites.css", import.meta.url), "utf8");
 const surface = ["site-header", "feature-card", "contact-cta", "where-showcase", "where-story-card",
   "where-story-card__item", "where-story-card__video-frame", "where-story-card__video-screen",
   "where-story-card__bullet", "where-story-card__win", "where-story-card__badge", "where-story-card__close",
@@ -96,6 +97,47 @@ test("hero controls preserve hover contrast, independent transforms and hidden s
           }
           await control.evaluate((el) => { el.hidden = true; });
           assert.equal(await control.evaluate((el) => getComputedStyle(el).display), "none");
+        }
+      } finally { await page.close(); }
+    }
+  } finally { await browser.close(); }
+});
+
+test("Host promo CTA preserves LTR/RTL hover and keyboard motion with reduced-motion support", async () => {
+  const browser = await chromium.launch({ channel: "chrome", headless: true });
+  try {
+    for (const width of [393, 1280]) for (const rtl of [false, true]) for (const reduced of [false, true]) {
+      const page = await browser.newPage({ viewport: { width, height: 900 } });
+      try {
+        await page.route("**/*", (route) => route.abort());
+        await page.emulateMedia({ reducedMotion: reduced ? "reduce" : "no-preference" });
+        await page.setContent(`<html dir="${rtl ? "rtl" : "ltr"}"><head><style>${styles}\n${guestInvites}</style></head>
+          <body class="${rtl ? "rtl" : ""}"><button id="before">Before</button><section class="guest-invites">
+          <div class="guest-invites__grid"><a id="cta" class="btn guest-invites__cta" href="#target">Explore Host
+          <svg class="guest-invites__cta-arrow" viewBox="0 0 24 24"><path d="M5 12h14" /></svg></a></div></section>
+          <code class="giapi-url">https://example.test/?fixture=1</code><svg class="giapi-copy__icon"></svg></body></html>`);
+        const arrow = page.locator(".guest-invites__cta-arrow");
+        const initial = await arrow.evaluate((el) => {
+          const css = getComputedStyle(el), matrix = new DOMMatrix(css.transform);
+          return { x: matrix.m41, scale: matrix.m11, duration: css.transitionDuration };
+        });
+        assert.equal(initial.x, 0);
+        assert.equal(initial.scale, rtl ? -1 : 1);
+        assert.equal(initial.duration, reduced ? "0s" : "0.16s");
+        assert.equal(await page.locator(".guest-invites__grid").evaluate((el) => getComputedStyle(el).gridTemplateColumns.split(" ").length), width <= 900 ? 1 : 2);
+        const waitForArrow = () => page.waitForFunction((direction) => {
+          const matrix = new DOMMatrix(getComputedStyle(document.querySelector(".guest-invites__cta-arrow")).transform);
+          return matrix.m41 === (direction ? -3 : 3) && matrix.m11 === (direction ? -1 : 1);
+        }, rtl);
+        await page.locator("#cta").hover(); await waitForArrow();
+        await page.mouse.move(width - 1, 899);
+        await page.locator("#before").focus(); await page.keyboard.press("Tab");
+        assert.equal(await page.locator("#cta").evaluate((el) => el.matches(":focus-visible")), true);
+        await waitForArrow();
+        assert.equal(await page.locator("#cta").getAttribute("href"), "#target");
+        if (rtl) {
+          assert.equal(await page.locator(".giapi-url").evaluate((el) => getComputedStyle(el).direction), "ltr");
+          assert.equal(await page.locator(".giapi-copy__icon").evaluate((el) => new DOMMatrix(getComputedStyle(el).transform).m11), -1);
         }
       } finally { await page.close(); }
     }
