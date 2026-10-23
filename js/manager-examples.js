@@ -219,7 +219,7 @@ export function createManagerExamples({
         "manager-muted",
       ),
     );
-    const grid = el("div", undefined, "manager-grid");
+    const grid = el("div", undefined, "manager-grid manager-example-grid");
     for (const system of systems) {
       const card = el(
         "article",
@@ -232,9 +232,10 @@ export function createManagerExamples({
         "dual-control": "Dual Control",
         group: "Group",
       }[system.type];
+      const heading = el("div", undefined, "manager-example-card-head");
+      heading.append(systemIcon(system.type), badge());
       card.append(
-        systemIcon(system.type),
-        badge(),
+        heading,
         el("h4", system.name),
         el(
           "p",

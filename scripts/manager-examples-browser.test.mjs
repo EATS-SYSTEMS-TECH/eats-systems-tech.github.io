@@ -74,6 +74,24 @@ test("Manager personal navigation and complete sample workspaces never request r
           he ? /ניהול פלטפורמה/ : /Platform management/,
         );
         assert.equal(await page.locator("[data-example-system]").count(), 3);
+        await page.evaluate(() => document.fonts.ready);
+        for (const layoutWidth of [320, 1024, 1440]) {
+          await page.setViewportSize({width: layoutWidth, height:1000});
+          const cards = await page.locator('.manager-example-grid > [data-example-system]').evaluateAll(elements => elements.map(card => ({
+            top: card.getBoundingClientRect().top,
+            height: card.getBoundingClientRect().height,
+            tracks: [...card.children].map(child => child.getBoundingClientRect().top),
+            facts: [...card.querySelectorAll('.manager-facts > *')].map(child => child.getBoundingClientRect().top),
+          })));
+          for (const card of cards) for (const other of cards.filter(other => Math.abs(other.top - card.top) < 1)) {
+            assert.ok(Math.abs(card.height - other.height) < 1, 'neighboring example cards have equal height');
+            card.tracks.forEach((y,i) => assert.ok(Math.abs(y - other.tracks[i]) < 1, `example content track ${i} aligns at ${layoutWidth}px`));
+            card.facts.forEach((y,i) => assert.ok(Math.abs(y - other.facts[i]) < 1, `example fact ${i} aligns at ${layoutWidth}px`));
+          }
+          assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth),false);
+          if (process.env.MANAGER_EXAMPLE_SCREENSHOTS && width === 1440) await page.screenshot({path:`${process.env.MANAGER_EXAMPLE_SCREENSHOTS}/aligned-example-cards-${language}-${layoutWidth}.png`,fullPage:true});
+        }
+        await page.setViewportSize({width,height:1000});
         assert.deepEqual(
           calls.map((c) => c.path),
           ["/api/v1/manager/me"],

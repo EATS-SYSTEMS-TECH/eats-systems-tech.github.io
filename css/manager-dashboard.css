@@ -928,3 +928,20 @@
 @media (max-width: 850px) {
   .manager-platform-tabs { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; scrollbar-width: thin; }
 }
+
+/* Share the same content tracks across neighboring sample cards. A wrapped
+   title grows that track for every card, keeping all details and actions aligned. */
+.manager-example-grid > [data-example-system] {
+  display: grid;
+  grid-row: span 6;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  align-items: start;
+}
+.manager-example-card-head { display: flex; align-items: center; gap: 12px; }
+.manager-example-card-head .manager-icon { display: inline-grid; place-items: center; }
+.manager-example-grid > [data-example-system] > button { width: 100%; align-self: end; }
+
+@media (min-width: 851px) {
+  .manager-example-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+}
