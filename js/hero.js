@@ -44,20 +44,25 @@ function setupHeroMedia() {
     // button while a visitor is pressing or dragging it.
     document.body.classList.toggle("hero-video-visible", !hero.hasAttribute("data-hero-scene") && inView && desktop.matches && hero.dataset.heroMediaState === "video");
   }
+  // Give visual tooltips and assistive technology the same localized action.
+  function labelHeroControl(control, label) {
+    control.setAttribute("aria-label", label);
+    control.setAttribute("title", label);
+  }
+  // Refresh labels and pressed datasets from current media state, including
+  // optional controls and the replay button's shared play/pause role.
   function updateHeroMediaCopy() {
     const copy = getHeroMediaCopy();
     if (muteButton) {
       const label = video.muted ? copy.unmute : copy.mute;
       muteButton.dataset.muted = String(video.muted);
-      muteButton.setAttribute("aria-label", label);
-      muteButton.setAttribute("title", label);
+      labelHeroControl(muteButton, label);
       muteButton.setAttribute("aria-pressed", String(!video.muted));
     }
     if (pauseButton) {
       const label = video.paused ? copy.play : copy.pause;
       pauseButton.dataset.paused = String(video.paused);
-      pauseButton.setAttribute("aria-label", label);
-      pauseButton.setAttribute("title", label);
+      labelHeroControl(pauseButton, label);
       pauseButton.setAttribute("aria-pressed", String(video.paused));
     }
     // The replay action doubles as the primary play/pause control. Keep its
@@ -67,8 +72,7 @@ function setupHeroMedia() {
     const label = isPlaying ? copy.pause : copy.replay;
     replayButton.dataset.playing = String(isPlaying);
     replayLabel.textContent = label;
-    replayButton.setAttribute("aria-label", label);
-    replayButton.setAttribute("title", label);
+    labelHeroControl(replayButton, label);
   }
   function setHeroMediaState(state) {
     hero.dataset.heroMediaState = state;

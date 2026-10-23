@@ -138,6 +138,25 @@ test("local labels, silent video and invalid locale fallback preserve accessible
   assert.equal(invalid.replay.getAttribute("title"), "Pause video");
 });
 
+test("optional controls and the dedicated pause button preserve playback and accessible state", async () => {
+  for (const missingId of ["hero-mute-toggle", "hero-pause-toggle"]) {
+    const optional = fixture({ missingId }); await settle();
+    assert.equal(optional.hero.dataset.heroMediaState, "video");
+    assert.equal(optional.replay.getAttribute("aria-label"), "Pause video");
+  }
+  const f = fixture(); await settle();
+  f.pause.emit("click");
+  assert.equal(f.pause.getAttribute("aria-label"), "Play video");
+  assert.equal(f.pause.getAttribute("title"), "Play video");
+  assert.equal(f.pause.getAttribute("aria-pressed"), "true");
+  f.connection.emit("change"); await settle();
+  assert.equal(f.video.playCalls, 1);
+  f.pause.emit("click"); await settle();
+  assert.equal(f.video.playCalls, 2);
+  assert.equal(f.video.currentTime, 19);
+  assert.equal(f.pause.getAttribute("title"), "Pause video");
+});
+
 test("policy and visibility changes pause media and update the floating widget", async () => {
   const f = fixture(); await settle();
   f.reduced.matches = true; f.reduced.emit("change");
