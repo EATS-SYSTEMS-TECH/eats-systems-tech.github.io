@@ -471,9 +471,18 @@ html.a11y-readable-font .a11y-option__description {
   line-height: 1.8;
 }
 
+/* Scope the shared reading palette to high contrast so normal themes retain
+   their own surfaces and text colors when the accessibility option is off. */
+html.a11y-high-contrast {
+  --a11y-contrast-surface: #ffffff;
+  --a11y-contrast-ink: #020617;
+  --a11y-contrast-secondary: #1e293b;
+}
+
+/* The page and raised panels share the same light contrast surface. */
 html.a11y-high-contrast body {
-  background: #ffffff;
-  color: #020617;
+  background: var(--a11y-contrast-surface);
+  color: var(--a11y-contrast-ink);
 }
 
 html.a11y-high-contrast .site-header,
@@ -492,7 +501,7 @@ html.a11y-high-contrast .language-selector__button,
 html.a11y-high-contrast .language-selector__dropdown,
 html.a11y-high-contrast .a11y-panel,
 html.a11y-high-contrast .a11y-option {
-  background: #ffffff;
+  background: var(--a11y-contrast-surface);
   border-color: rgba(15, 23, 42, 0.18);
   box-shadow: 0 18px 40px rgba(2, 6, 23, 0.14);
 }
@@ -507,6 +516,7 @@ html.a11y-high-contrast .hero__overlay {
     linear-gradient(180deg, rgba(2, 6, 23, 0.16) 0%, rgba(2, 6, 23, 0.4) 100%);
 }
 
+/* Supporting copy uses the quieter ink without changing the reading layout. */
 html.a11y-high-contrast .section__subtitle,
 html.a11y-high-contrast .feature-card__text,
 html.a11y-high-contrast .about__text,
@@ -519,9 +529,10 @@ html.a11y-high-contrast .where-story-card__win-text,
 html.a11y-high-contrast .where-list__item--static,
 html.a11y-high-contrast .a11y-option__description,
 html.a11y-high-contrast .a11y-panel__description {
-  color: #1e293b;
+  color: var(--a11y-contrast-secondary);
 }
 
+/* Labels and navigation actions keep the strongest contrast ink. */
 html.a11y-high-contrast .where-story-card__video-label,
 html.a11y-high-contrast .where-story-card__video-status,
 html.a11y-high-contrast .where-story-card__summary-label,
@@ -529,7 +540,7 @@ html.a11y-high-contrast .where-story-card__decision-title,
 html.a11y-high-contrast .where-story-card__bullet-label,
 html.a11y-high-contrast .where-story-card__win-label,
 html.a11y-high-contrast .where-story-card__badge {
-  color: #020617;
+  color: var(--a11y-contrast-ink);
 }
 
 html.a11y-high-contrast .where-story-card__video-frame::before,
@@ -538,27 +549,32 @@ html.a11y-high-contrast .where-story-card__video-screen::after {
   opacity: 0.08;
 }
 
+/* Story navigation links use primary ink even when not selected. */
 html.a11y-high-contrast .where-list__link {
-  color: #020617;
+  color: var(--a11y-contrast-ink);
 }
 
+/* Keep the story close action readable on its contrast surface. */
 html.a11y-high-contrast .where-story-card__close {
-  color: #020617;
+  color: var(--a11y-contrast-ink);
 }
 
+/* Preserve the active navigation indicator on its original directional edge. */
 html.a11y-high-contrast .where-list__link.is-active {
-  background: #ffffff;
-  box-shadow: inset 4px 0 0 #020617;
+  background: var(--a11y-contrast-surface);
+  box-shadow: inset 4px 0 0 var(--a11y-contrast-ink);
 }
 
+/* Mirror only the active edge in right-to-left layouts. */
 html[dir="rtl"].a11y-high-contrast .where-list__link.is-active {
-  box-shadow: inset -4px 0 0 #020617;
+  box-shadow: inset -4px 0 0 var(--a11y-contrast-ink);
 }
 
+/* Ghost actions retain their light surface, dark border and readable label. */
 html.a11y-high-contrast .btn--ghost {
-  background: #ffffff;
-  color: #020617;
-  border-color: #020617;
+  background: var(--a11y-contrast-surface);
+  color: var(--a11y-contrast-ink);
+  border-color: var(--a11y-contrast-ink);
 }
 
 html.a11y-high-contrast :focus-visible {
