@@ -70,7 +70,9 @@ export function createManagerDashboard({
   );
   const metrics = node("div", undefined, "manager-metrics"),
     view = node("section", undefined, "manager-view");
-  main.append(hero, metrics, status, view);
+  const platformHeader = node("section", undefined, "manager-platform-header");
+  platformHeader.hidden = true;
+  main.append(hero, metrics, status, platformHeader, view);
   nav.append(title);
   shell.append(nav, main);
   root.replaceChildren(shell);
@@ -221,6 +223,8 @@ export function createManagerDashboard({
   }
   function renderNav() {
     nav.replaceChildren(title);
+    platformHeader.replaceChildren();
+    platformHeader.hidden = true;
     if (profile.account || profile.role === "admin") {
       const b = button(t("המערכות שלי", "My systems"), () => showSystems(null));
       if (!scope && ["systems", "example-system"].includes(currentView))
@@ -271,10 +275,19 @@ export function createManagerDashboard({
         t("ניהול פלטפורמה", "Platform management"),
         showOverview,
       );
-      if (platformViews.includes(currentView))
-        platformButton.setAttribute("aria-current", "page");
+      platformButton.classList.add("manager-platform-entry");
+      platformButton.replaceChildren(
+        node("span", t("ניהול פלטפורמה", "Platform management")),
+        node("small", "WIFIGATE Manager admin"),
+      );
       platform.append(platformButton);
-      if (platformViews.includes(currentView))
+      if (platformViews.includes(currentView)) {
+        platformHeader.hidden = false;
+        platformHeader.append(
+          node("h2", t("ניהול פלטפורמה", "Platform management"), "manager-platform-title"),
+        );
+        const tabs = node("nav", undefined, "manager-platform-tabs");
+        tabs.setAttribute("aria-label", t("ניווט ניהול פלטפורמה", "Platform management navigation"));
         for (const [key, label, action] of [
           ["overview", "WIFIGATE Manager admin platform", showOverview],
           ["admin", "WIFIGATE Manager admin", () => showDirectory("admin")],
@@ -287,9 +300,26 @@ export function createManagerDashboard({
           ["organizations", t("ארגונים", "Organizations"), showOrganizations],
         ]) {
           const b = button(label, action);
-          if (currentView === key) b.setAttribute("aria-current", "page");
-          platform.append(b);
+          if (
+            currentView === key ||
+            (currentView === "platform-systems" && key === "user")
+          )
+            b.setAttribute("aria-current", "page");
+          tabs.append(b);
         }
+        platformHeader.append(tabs);
+        requestAnimationFrame(() => {
+          if (!tabs.isConnected) return;
+          const selected = tabs.querySelector('[aria-current="page"]');
+          if (!selected) return;
+          const bar = tabs.getBoundingClientRect(),
+            item = selected.getBoundingClientRect();
+          if (item.left < bar.left)
+            tabs.scrollBy({ left: item.left - bar.left - 6 });
+          else if (item.right > bar.right)
+            tabs.scrollBy({ left: item.right - bar.right + 6 });
+        });
+      }
       nav.append(platform);
     }
   }

@@ -908,3 +908,23 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 }
+
+/* The platform entry stays in the workspace menu; section navigation belongs
+   above the content, so opening it never expands or moves the menu footer. */
+.manager-shell .manager-nav button.manager-platform-entry {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  width: 100%;
+}
+.manager-platform-entry small { color: var(--muted, #64748b); font-size: 11px; font-weight: 400; line-height: 1.4; direction: ltr; }
+.manager-platform-header { min-width: 0; margin-bottom: 24px; }
+.manager-platform-header[hidden] { display: none; }
+.manager-platform-title { margin: 0 0 16px; font-size: clamp(24px, 3vw, 32px); line-height: 1.3; }
+.manager-platform-tabs { display: flex; flex-wrap: wrap; gap: 4px; padding: 6px; border: 1px solid var(--manager-line); border-radius: 8px; background: #fff; }
+.manager-shell .manager-platform-tabs button.manager-button { flex: 0 0 auto; min-height: 44px; border: 0; border-radius: 5px; padding: 10px 12px; background: transparent; color: var(--muted, #64748b); font-size: 12px; font-weight: 500; white-space: nowrap; }
+.manager-shell .manager-platform-tabs button.manager-button:hover:not(:disabled) { background: #f8fafc; color: var(--manager-strong, #c2410c); }
+.manager-shell .manager-platform-tabs button.manager-button[aria-current="page"] { color: var(--manager-strong, #c2410c); background: var(--manager-soft, #fff1e6); box-shadow: inset 0 -2px 0 var(--manager-accent); }
+@media (max-width: 850px) {
+  .manager-platform-tabs { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; scrollbar-width: thin; }
+}
