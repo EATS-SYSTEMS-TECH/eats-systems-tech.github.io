@@ -248,6 +248,8 @@ test("every dashboard shares a flag selector and profile entry into My profile",
             assert.equal(await subscriptions.locator('[data-product="pay"] [data-subscription-value="monthly"]').count(), 0);
             assert.match(await subscriptions.locator('[data-subscription-value="revenue"]').innerText(), /125\.50/);
             assert.match(await page.locator('#profile-subscription-total').innerText(), /198\.60/);
+            await page.mouse.move(0, 0);
+            await page.keyboard.press("Escape");
             if (process.env.DASHBOARD_PREVIEW_DIR)
               await page.screenshot({
                 path: `${process.env.DASHBOARD_PREVIEW_DIR}/profile-subscriptions-${language}-${width}.png`,
@@ -257,4 +259,29 @@ test("every dashboard shares a flag selector and profile entry into My profile",
           },
         );
     }
+});
+
+
+test("modern product cards preserve readable identities and inactive Pay access across phone, tablet and desktop", async (t) => {
+  const {origin,browser} = await startSite(t);
+  for (const language of ['he','en']) for (const width of [320,768,1440]) await t.test(`${language} ${width}px`,async(t) => {
+    const fixture = await scenario(browser, {admin:true,enrolled:true,verified:true,manager:'active',pay:'no-plan',viewport:{width,height:1000},productFinancials:{host:estimate([0,0,0,0],[0,0,0,0]),manager:estimate([0,0,0,0],[0,0,0,0])}});
+    t.after(()=>fixture.context.close());
+    const page = fixture.page;
+    await page.goto(origin + '/dashboard/' + (language === 'he' ? '?lang=he' : ''));
+    await page.locator('.profile-product-header').last().waitFor();
+    for (const id of ['host','pay','manager']) {
+      const card = page.locator(`#profile-subscriptions [data-product="${id}"]`);
+      await card.getByRole('heading',{name:`WIFIGATE ${id[0].toUpperCase()+id.slice(1)}`,exact:true}).waitFor();
+      assert.equal(await card.locator('.profile-product-identity .product-icon svg').count(),1);
+      assert.equal(await card.locator('.profile-product-header .product-state').isVisible(),true);
+      assert.equal(await card.evaluate(el=>el.scrollWidth <= el.clientWidth),true);
+    }
+    assert.equal(await page.locator('[data-product="pay"] .product-open').isDisabled(),true);
+    assert.equal(await page.locator('[data-product="host"] .product-actions a').count(),3);
+    assert.equal(await page.locator('[data-product="manager"] .product-actions a').count(),3);
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth),true);
+    if (process.env.DASHBOARD_PREVIEW_DIR) await page.screenshot({path:`${process.env.DASHBOARD_PREVIEW_DIR}/modern-products-${language}-${width}.png`,fullPage:true});
+    assert.deepEqual(fixture.errors,[]);
+  });
 });

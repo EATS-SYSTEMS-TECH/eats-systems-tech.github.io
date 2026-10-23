@@ -226,7 +226,17 @@ function renderProducts() {
     const title = document.createElement("h2");
     const name = document.createElement("bdi");
     name.dir = "ltr";
-    name.textContent = `WIFIGATE ${id[0].toUpperCase() + id.slice(1)}`;
+    const profileCard = Boolean($("#profile-subscriptions"));
+    const productLabel = id[0].toUpperCase() + id.slice(1);
+    if (profileCard) {
+      const brand = document.createElement("span");
+      brand.className = "profile-product-brand";
+      brand.textContent = "WIFIGATE";
+      const product = document.createElement("span");
+      product.className = "profile-product-name";
+      product.textContent = productLabel;
+      name.append(brand, " ", product);
+    } else name.textContent = `WIFIGATE ${productLabel}`;
     title.append(name);
     const description = document.createElement("p");
     description.className = "product-description";
@@ -295,7 +305,15 @@ function renderProducts() {
       role.textContent = `${productName(id)} ${accessRole === "organization-admin" ? "organization admin" : accessRole}`;
       role.dir = "ltr";
     }
-    tile.append(icon, title, description, status, role, guidance, recovery, actions);
+    if (profileCard) {
+      const header = document.createElement("header");
+      header.className = "profile-product-header";
+      const productIdentity = document.createElement("div");
+      productIdentity.className = "profile-product-identity";
+      productIdentity.append(icon, title);
+      header.append(productIdentity, status);
+      tile.append(header, description, role, guidance, recovery, actions);
+    } else tile.append(icon, title, description, status, role, guidance, recovery, actions);
     return tile;
   });
   $("#product-grid").replaceChildren(...tiles);
