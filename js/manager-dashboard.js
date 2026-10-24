@@ -988,14 +988,6 @@ export function createManagerDashboard({
     view.replaceChildren(
       node("h3", directoryLabel("user")),
       node("p", roleName("user"), "manager-view-description"),
-      node(
-        "p",
-        t(
-          "גישה ניתנת במפורש. אין דרישת תשלום או כרטיס בשלב זה.",
-          "Access is explicitly provisioned. No payment or card is required in this phase.",
-        ),
-        "manager-note",
-      ),
     );
     const filters = node("div", undefined, "manager-row");
     filters.append(
@@ -1055,19 +1047,27 @@ export function createManagerDashboard({
           "manager-muted",
         ),
       );
-    view.append(
-      form(
-        [["email", t("אימייל לקוח מאומת", "Verified customer email"), "email"]],
-        t("הפעלת גישה", "Enable access"),
-        async (v, f) => {
+    const create = button(t("הוספת לקוח", "Add customer"), async () => {
+      const created = await dialogs.form({
+        title: t("הוספת לקוח", "Add customer"),
+        message: t("הזינו כתובת אימייל מאומתת להפעלת חשבון WIFIGATE Manager user. אין דרישת תשלום או כרטיס בשלב זה.", "Enter a verified email address to enable a WIFIGATE Manager user account. No payment or card is required in this phase."),
+        fields: [["email", t("אימייל לקוח מאומת", "Verified customer email"), "email"]],
+        submitLabel: t("הוספת לקוח", "Add customer"),
+        errorText,
+        onSubmit: async (values) => {
           await ensureRecent();
-          await api("/admin/accounts", "POST", { ...v, status: "active" });
-          f.reset();
-          await showAccounts(status);
-          say(t("חשבון הלקוח הופעל.", "Customer account enabled."));
+          await api("/admin/accounts", "POST", { ...values, status: "active" });
         },
-      ),
-    );
+      });
+      if (created && !closed && epoch === generation) {
+        await showAccounts(status);
+        say(t("חשבון הלקוח הופעל.", "Customer account enabled."));
+      }
+    }, true);
+    const heading = view.querySelector("h3");
+    const bar = node("div", undefined, "manager-toolbar");
+    heading.replaceWith(bar);
+    bar.append(heading, create);
     placeManagerActions(view, language);
   }
   async function openSystem(system) {

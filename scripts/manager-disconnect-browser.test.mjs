@@ -111,7 +111,7 @@ test("platform Manager admin can browse customer metadata and deliberately disco
         await page
           .getByText("customer@example.test", { exact: true })
           .waitFor();
-        const actions = page.locator(".manager-view > .manager-action-panel");
+        const actions = page.getByRole("button", { name: he ? "הוספת לקוח" : "Add customer", exact: true });
         const customerCard = page
           .locator(".manager-view > .manager-card")
           .filter({ hasText: "customer@example.test" });

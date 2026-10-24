@@ -231,6 +231,8 @@ test("Manager identity, platform overview and organization columns support scope
                 organizationAdmins: 1,
                 organizations: organizations.length,
               };
+            if (path.startsWith("/admin/accounts?")) return { items: [], nextCursor: null };
+            if (path === "/admin/accounts" && method === "POST") return {account:{email:body.email,status:body.status}};
             if (path.startsWith("/admin/directory?"))
               return {
                 items: [
@@ -336,6 +338,27 @@ test("Manager identity, platform overview and organization columns support scope
         await page.locator(".manager-directory-row").last().waitFor();
         await page.locator(".manager-platform-tabs").getByRole("button",{name:he?"סקירה":"Overview",exact:true}).click();
         await page.locator("button.manager-overview-card").last().waitFor();
+
+        await page.locator('.manager-platform-tabs').getByRole('button',{name:he ? 'לקוחות' : 'Customers',exact:true}).click();
+        const addCustomer = page.getByRole('button',{name:he ? 'הוספת לקוח' : 'Add customer',exact:true});
+        await addCustomer.waitFor();
+        assert.equal(await page.locator('.manager-view form').count(),0);
+        assert.equal(await page.locator('.manager-action-panel').count(),0);
+        await addCustomer.click();
+        const customerDialog = page.getByRole('dialog',{name:he ? 'הוספת לקוח' : 'Add customer',exact:true});
+        await customerDialog.getByLabel(he ? 'אימייל לקוח מאומת' : 'Verified customer email',{exact:true}).fill('customer@example.test');
+        await page.keyboard.press('Escape');
+        assert.equal(await page.evaluate(()=>window.calls.some(call=>call.path==='/admin/accounts' && call.method==='POST')),false);
+        await addCustomer.click();
+        await customerDialog.getByLabel(he ? 'אימייל לקוח מאומת' : 'Verified customer email',{exact:true}).fill('customer@example.test');
+        if (process.env.MANAGER_DIRECTORY_SCREENSHOTS)
+          await page.screenshot({path:`${process.env.MANAGER_DIRECTORY_SCREENSHOTS}/manager-add-customer-${language}-${width}.png`,fullPage:true});
+        await customerDialog.getByRole('button',{name:he ? 'הוספת לקוח' : 'Add customer',exact:true}).click();
+        await customerDialog.waitFor({state:'hidden'});
+        await page.getByText(he ? 'חשבון הלקוח הופעל.' : 'Customer account enabled.',{exact:true}).waitFor();
+        assert.deepEqual(await page.evaluate(()=>window.calls.filter(call=>call.path==='/admin/accounts' && call.method==='POST').map(call=>call.body)),[{email:'customer@example.test',status:'active'}]);
+        await page.locator('.manager-platform-tabs').getByRole('button',{name:he ? 'סקירה' : 'Overview',exact:true}).click();
+        await page.locator('button.manager-overview-card').last().waitFor();
 
         const profileButton = page.locator("#manager-profile-button");
         const profilePanel = page.locator("#manager-profile-panel");
