@@ -46,6 +46,8 @@ test("published Manager page wires the private profile into the header without d
       assert.equal(await page.locator('.manager-platform-header').isVisible(), false);
       await platformEntry.click();
       await page.locator(".manager-overview-card").last().waitFor();
+      const infoStyle = await page.locator('.manager-count-info').evaluate(el => { const s=getComputedStyle(el); return {width:s.width,height:s.height,background:s.backgroundColor,radius:s.borderRadius}; });
+      assert.deepEqual(infoStyle, {width:'32px',height:'32px',background:'rgb(255, 255, 255)',radius:'50%'});
       assert.deepEqual(await page.locator('.manager-nav button').allTextContents(), originalMenu);
       assert.equal(await platformEntry.evaluate(el => el.offsetTop), originalOffset);
       assert.equal(await page.locator('.manager-platform-nav button').count(), 1);
