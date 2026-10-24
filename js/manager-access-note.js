@@ -2,6 +2,7 @@ const element = (tag, text, className) => {
   const node = document.createElement(tag);
   if (text !== undefined) node.textContent = text;
   if (className) node.className = className;
+  if (tag === "p" || tag === "dd") node.dir = "auto";
   return node;
 };
 export function accessNoteContent(note = {}, language = "en") {
