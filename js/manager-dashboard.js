@@ -1,4 +1,4 @@
-import { systemsEmptyCopy } from "./systems-empty-copy.js";
+import { systemsEmptyCopy, organizationsEmptyCopy } from "./systems-empty-copy.js";
 import { attachPopover } from "./popover.js";
 import { accessNoteContent } from "./manager-access-note.js";
 import { createSystemIcon } from "./wifigate-system-icons.js";
@@ -352,7 +352,7 @@ export function createManagerDashboard({
   function orgPath(id) {
     return `${profile.role === "admin" ? "/admin" : ""}/organizations/${encodeURIComponent(id)}`;
   }
-  async function pagedView(path, container, render) {
+  async function pagedView(path, container, render, { onEmpty } = {}) {
     const epoch = generation;
     let next = null;
     const more = button(t("הצגת עוד", "Show more"), load);
@@ -373,8 +373,10 @@ export function createManagerDashboard({
         seen.add(next);
         view.append(more);
       }
-      if (!container.childElementCount)
-        say(t("אין רשומות להצגה.", "No records to display."));
+      if (!container.childElementCount && !next) {
+        if (onEmpty) onEmpty();
+        else say(t("אין רשומות להצגה.", "No records to display."));
+      }
     }
     await load();
   }
@@ -843,6 +845,13 @@ export function createManagerDashboard({
         card.append(actions);
         return card;
       },
+      { onEmpty: () => {
+        const copy = organizationsEmptyCopy(he ? "he" : "en");
+        const empty = node("section", undefined, "manager-empty manager-empty-systems manager-empty-organizations");
+        empty.append(node("h4", copy.title));
+        if (!operator) empty.append(node("p", copy.description));
+        columns.append(empty);
+      } },
     );
     if (closed || epoch !== generation) return;
     if (personal || profile.role !== "admin")

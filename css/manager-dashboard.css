@@ -1129,3 +1129,5 @@
 
 .platform-page .portal-panel .manager-shell button.manager-count-info { display: inline-grid; place-items: center; width: 32px; height: 32px; min-height: 32px; padding: 0; border: 1px solid #dce4ee; border-radius: 50%; background: #fff; color: #64748b; }
 .platform-page .portal-panel .manager-shell button.manager-count-info:hover, .platform-page .portal-panel .manager-shell button.manager-count-info:focus { background: #fff8f2; color: #9a3412; border-color: #f2b17f; }
+
+.manager-empty-organizations { grid-column: 1 / -1; }

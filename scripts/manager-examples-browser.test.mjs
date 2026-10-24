@@ -305,6 +305,12 @@ test("Manager personal navigation and complete sample workspaces never request r
           .selectOption("DEMO-24981");
         await content.getByText("438/1000", { exact: true }).waitFor();
         await myOrgs.click();
+        await page.getByRole('heading', {name:he ? 'אין ארגונים להצגה כרגע.' : 'No organizations to display yet.',exact:true}).waitFor();
+        await page.getByText(he ? 'הארגונים המשויכים לחשבון שלכם יופיעו כאן.' : 'Organizations linked to your account will appear here.',{exact:true}).waitFor();
+        assert.equal(await page.locator('.manager-empty-organizations img, .manager-empty-organizations svg').count(),0);
+        if (process.env.MANAGER_EXAMPLE_SCREENSHOTS)
+          await page.screenshot({path:`${process.env.MANAGER_EXAMPLE_SCREENSHOTS}/empty-organizations-${language}-${width}.png`,fullPage:true});
+
         await page.locator(".dashboard-examples > summary").click();
         await page
           .locator("[data-example-organization]")

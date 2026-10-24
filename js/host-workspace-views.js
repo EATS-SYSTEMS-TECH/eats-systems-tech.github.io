@@ -1,3 +1,4 @@
+import { organizationsEmptyCopy } from "./systems-empty-copy.js";
 import { hostText } from "./host-locale.js";
 import { node } from "./host-ui.js";
 import { renderHostApiKeys } from "./host-api-keys.js";
@@ -230,11 +231,10 @@ async function renderNoOrganization(panel, { user, plan, isCurrent }) {
       new CustomEvent("host:workspace-view", { detail: "invitations" }),
     ),
   );
-  section.append(
-    emptyState(hostText("You're not part of an organization yet."), {
-      action: join,
-    }),
-  );
+  const copy = organizationsEmptyCopy(document.documentElement.lang);
+  const empty = node("section", undefined, { class: "empty-state systems-empty" });
+  empty.append(node("h4", copy.title), node("p", copy.description), join);
+  section.append(empty);
   panel.append(section);
   if (!plan)
     await renderExampleGroup(section, { user, organizations: [], isCurrent });

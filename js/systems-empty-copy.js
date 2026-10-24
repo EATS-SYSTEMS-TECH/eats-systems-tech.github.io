@@ -4,3 +4,9 @@ export function systemsEmptyCopy(language) {
     ? { title: "אין מערכות להצגה כרגע.", description: "הוסיפו מערכת מאפליקציית WIFIGATE כדי לנהל אותה כאן." }
     : { title: "No systems to display yet.", description: "Add a system from the WIFIGATE app to manage it here." };
 }
+
+export function organizationsEmptyCopy(language) {
+  return language === "he"
+    ? { title: "אין ארגונים להצגה כרגע.", description: "הארגונים המשויכים לחשבון שלכם יופיעו כאן." }
+    : { title: "No organizations to display yet.", description: "Organizations linked to your account will appear here." };
+}
