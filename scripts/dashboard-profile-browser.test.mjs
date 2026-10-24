@@ -133,7 +133,7 @@ test("every dashboard shares a flag selector and profile entry into My profile",
             const emailBox = await identityEmail.boundingBox(), roleBox = await globalRole.boundingBox();
             assert.ok(roleBox.y >= emailBox.y + emailBox.height);
 
-            if (product) {
+            if (product && product !== "manager") {
               const productName = {host:"WIFIGATE Host",pay:"WIFIGATE Pay",manager:"WIFIGATE Manager"}[product];
               assert.deepEqual(await panel.locator(".dashboard-profile-product-card").evaluate(element => [...element.children].map(child => child.textContent)), [productName, productName + " admin"]);
               assert.equal(await panel.locator(".dashboard-profile-product-card").evaluate(element => getComputedStyle(element).borderRadius), "12px");
@@ -155,13 +155,10 @@ test("every dashboard shares a flag selector and profile entry into My profile",
                 .evaluate((el) => getComputedStyle(el).textAlign),
               language === "he" ? "right" : "left",
             );
-            if (product === "manager")
-              assert.equal(
-                await panel
-                  .locator(".manager-role-badge")
-                  .evaluate((el) => getComputedStyle(el).textAlign),
-                "center",
-              );
+            if (product === "manager") {
+              assert.equal(await panel.locator('.dashboard-profile-product-card, .manager-role-badge').count(),0);
+              assert.equal(await page.locator('.manager-sidebar-roles').innerText(),'WIFIGATE Manager admin');
+            }
             assert.equal(
               await panel
                 .locator("a.dashboard-profile-identity")

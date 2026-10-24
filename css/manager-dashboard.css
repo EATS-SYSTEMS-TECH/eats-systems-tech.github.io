@@ -1131,3 +1131,7 @@
 .platform-page .portal-panel .manager-shell button.manager-count-info:hover, .platform-page .portal-panel .manager-shell button.manager-count-info:focus { background: #fff8f2; color: #9a3412; border-color: #f2b17f; }
 
 .manager-empty-organizations { grid-column: 1 / -1; }
+
+.manager-sidebar-roles { display: grid; gap: 6px; flex-basis: 100%; min-width: 0; padding: 0 10px 16px; margin-bottom: 8px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+html[dir="rtl"] .manager-sidebar-roles { text-align: right; }
+html[dir="ltr"] .manager-sidebar-roles { text-align: left; }

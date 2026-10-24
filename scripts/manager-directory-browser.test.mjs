@@ -42,7 +42,7 @@ test("published Manager page wires the private profile into the header without d
       await page.goto(origin + "/dashboard/manager/?lang=he");
       const platformEntry = page.locator(".manager-platform-entry");
       await platformEntry.waitFor();
-      assert.equal(await platformEntry.locator("small").innerText(), "WIFIGATE Manager admin");
+      assert.equal(await page.locator(".manager-sidebar-roles").innerText(), "WIFIGATE Manager admin");
       const originalMenu = await page.locator('.manager-nav button').allTextContents();
       const originalOffset = await platformEntry.evaluate(el => el.offsetTop);
       assert.equal(await page.locator('.manager-platform-header').isVisible(), false);
@@ -114,9 +114,7 @@ test("published Manager page wires the private profile into the header without d
       await page.locator("#manager-profile-button").click();
       await panel.getByText("Manager operator", { exact: true }).waitFor();
       await panel.getByText("operator@example.test", { exact: true }).waitFor();
-      await panel
-        .getByText("WIFIGATE Manager admin", { exact: true })
-        .waitFor();
+      assert.equal(await panel.getByText("WIFIGATE Manager admin", {exact:true}).count(),0);
       assert.equal(await page.locator("#platform-sign-out").isEnabled(), true);
       assert.equal(
         await page.evaluate(
@@ -380,9 +378,8 @@ test("Manager identity, platform overview and organization columns support scope
           .locator("#manager-profile-email")
           .getByText("operator@example.test", { exact: true })
           .waitFor();
-        await profilePanel
-          .getByText("WIFIGATE Manager admin", { exact: true })
-          .waitFor();
+        assert.equal(await profilePanel.getByText("WIFIGATE Manager admin", {exact:true}).count(),0);
+        await nav.locator('.manager-sidebar-roles').getByText('WIFIGATE Manager admin',{exact:true}).waitFor();
         const panelBox = await profilePanel.boundingBox();
         assert(panelBox.x >= 16 && panelBox.x + panelBox.width <= width - 15);
         await page.keyboard.press("Escape");
@@ -545,10 +542,8 @@ test("Manager identity, platform overview and organization columns support scope
         assert((await page.evaluate(() => window.recent)) >= 4);
         await page.evaluate(() => window.mount("organization-admin"));
         await profileButton.click();
-        await profilePanel
-          .locator(".manager-role-badge")
-          .getByText("WIFIGATE Manager organization admin", { exact: true })
-          .waitFor();
+        assert.equal(await profilePanel.locator('.manager-role-badge').count(),0);
+        await nav.locator('.manager-sidebar-roles').getByText('WIFIGATE Manager organization admin',{exact:true}).waitFor();
         await page.keyboard.press("Escape");
         assert.equal(
           await nav

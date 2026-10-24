@@ -13,7 +13,7 @@ export function renderProfileRoles(container, { platformRole, product, role, rol
   };
   if (platformRole === "admin") append("span", "WIFIGATE admin", "dashboard-global-role", identity ?? container);
   const name = { host: "WIFIGATE Host", pay: "WIFIGATE Pay", manager: "WIFIGATE Manager" }[product];
-  if (!name) return;
+  if (!name || product === "manager") return;
   const card = append("div", "", "dashboard-profile-product-card");
   append("strong", name, "dashboard-profile-product", card);
   for (const value of roles?.length ? roles : [role].filter(Boolean)) {

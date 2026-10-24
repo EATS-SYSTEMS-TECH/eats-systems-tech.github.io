@@ -197,6 +197,15 @@ export function createManagerDashboard({
   }
   function renderNav() {
     nav.replaceChildren(title);
+    const roleList = node("div", undefined, "manager-sidebar-roles");
+    for (const role of new Set(profile.roles?.length ? profile.roles : [profile.role])) {
+      if (!["admin", "user", "organization-admin"].includes(role)) continue;
+      const label = node("span", roleName(role));
+      label.dir = "ltr";
+      roleList.append(label);
+    }
+    if (roleList.childElementCount) nav.append(roleList);
+
     platformHeader.replaceChildren();
     platformHeader.hidden = true;
     if (profile.account || profile.role === "admin") {
@@ -252,7 +261,6 @@ export function createManagerDashboard({
       platformButton.classList.add("manager-platform-entry");
       platformButton.replaceChildren(
         node("span", t("ניהול פלטפורמה", "Platform management")),
-        node("small", "WIFIGATE Manager admin"),
       );
       platform.append(platformButton);
       if (platformViews.includes(currentView)) {
