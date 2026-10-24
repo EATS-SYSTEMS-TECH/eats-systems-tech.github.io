@@ -1081,3 +1081,5 @@
 /* Render the original multicolour WIFIGATE artwork without tinting or mirroring. */
 .manager-icon img, .manager-empty-symbol img { display: block; width: 40px; height: 40px; object-fit: contain; flex-shrink: 0; }
 .manager-example-card-head .manager-icon { width: 48px; height: 48px; }
+
+.manager-status:empty { display: none; }

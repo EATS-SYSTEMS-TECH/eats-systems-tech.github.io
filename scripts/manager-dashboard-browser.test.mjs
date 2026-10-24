@@ -280,6 +280,9 @@ test("Manager workspace supports English/Hebrew desktop/mobile, organizations an
           await window.manager.ready;
         }, language);
         const he = language === "he";
+        assert.equal(await page.locator(".manager-hero, .manager-metrics, .manager-workspace-head").count(), 0);
+        assert.deepEqual(await page.evaluate(() => window.commands), []);
+        assert.equal(await page.locator(".manager-status").isVisible(), false);
         const icon = page.locator(".manager-system .manager-icon img");
         assert.equal(await icon.getAttribute("src"), "/assets/host-icons/gate-cantilever-gate-small.svg");
         await icon.evaluate(image => image.decode());

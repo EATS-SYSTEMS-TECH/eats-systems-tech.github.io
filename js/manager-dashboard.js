@@ -61,23 +61,10 @@ export function createManagerDashboard({
     status = node("p", "", "manager-status");
   status.setAttribute("role", "status");
   status.setAttribute("aria-live", "polite");
-  const hero = node("section", undefined, "manager-hero");
-  hero.append(
-    node("small", t("ניהול מערכות וארגונים", "SYSTEMS & ORGANIZATIONS")),
-    node("h2", t("כל המערכות. מקום אחד.", "Your systems. One workspace.")),
-    node(
-      "p",
-      t(
-        "נתוני המערכת נשארים בשער. מתחברים לניהול רק כשצריך.",
-        "System data stays on the gate. Connect for management only when needed.",
-      ),
-    ),
-  );
-  const metrics = node("div", undefined, "manager-metrics"),
-    view = node("section", undefined, "manager-view");
+  const view = node("section", undefined, "manager-view");
   const platformHeader = node("section", undefined, "manager-platform-header");
   platformHeader.hidden = true;
-  main.append(hero, metrics, status, platformHeader, view);
+  main.append(status, platformHeader, view);
   nav.append(title);
   shell.append(nav, main);
   root.replaceChildren(shell);
@@ -195,37 +182,12 @@ export function createManagerDashboard({
     examples.closeView();
     view.classList.remove("manager-example-workspace");
     generation++;
+    say("");
     connection?.close();
     connection = null;
     currentRows = [];
     currentData = undefined;
     cursor = null;
-  }
-  function renderMetrics() {
-    metrics.hidden = profile?.role === "admin";
-    metrics.replaceChildren();
-    for (const [label, value] of [
-      [
-        t("מערכות מוצגות", "Systems shown"),
-        systems.filter((s) => s.status === "active").length,
-      ],
-      [
-        t("שערים פיזיים ייחודיים", "Unique physical gates"),
-        new Set(
-          systems
-            .filter((s) => s.status === "active")
-            .flatMap((s) => s.systemIds),
-        ).size,
-      ],
-      [
-        t("ארגונים מורשים", "Authorized organizations"),
-        profile?.organizations?.length ?? 0,
-      ],
-    ]) {
-      const box = node("div", undefined, "manager-metric");
-      box.append(node("span", label), node("b", String(value)));
-      metrics.append(box);
-    }
   }
   function renderNav() {
     nav.replaceChildren(title);
@@ -575,9 +537,7 @@ export function createManagerDashboard({
     profile = await api("/me");
     if (closed) return;
     onProfile(profile);
-    hero.hidden = profile.role === "admin";
     renderNav();
-    renderMetrics();
   }
   async function listAll(path) {
     const rows = [];
@@ -625,7 +585,6 @@ export function createManagerDashboard({
           );
     if (closed || epoch !== generation) return;
     systems = rows.filter((s) => s.status === "active");
-    renderMetrics();
     view.replaceChildren();
     const bar = node("div", undefined, "manager-toolbar");
     bar.append(
@@ -640,31 +599,14 @@ export function createManagerDashboard({
       button(t("רענון", "Refresh"), () => showSystems(scope, operatorAccount)),
     );
     view.append(bar);
-    const importHelp = t(
-      "להוספת מערכת: פתחו באפליקציה WIFIGATE For Business › WIFIGATE Manager וייבאו מערכת שאתם מנהלים בה.",
-      "To add a system, open WIFIGATE For Business › WIFIGATE Manager in the app and import a system you administer.",
-    );
     if (!systems.length) {
-      const empty = node(
-        "section",
-        undefined,
-        "manager-empty manager-empty-systems",
-      );
-      const symbol = createSystemIcon({ type: "gate" }, "manager-empty-symbol");
+      const empty = node("section", undefined, "manager-empty manager-empty-systems");
       empty.append(
-        symbol,
-        node("h4", t("המערכות יופיעו כאן", "Your systems start here")),
-        node(
-          "p",
-          t(
-            "אין מערכות להצגה באזור זה.",
-            "There are no systems in this area yet.",
-          ),
-        ),
-        node("p", importHelp),
+        createSystemIcon({ type: "gate" }, "manager-empty-symbol"),
+        node("h4", t("אין מערכות להצגה באזור זה.", "There are no systems in this area yet.")),
       );
       view.append(empty);
-    } else view.append(node("p", importHelp, "manager-note"));
+    }
     const grid = node("div", undefined, "manager-grid");
     for (const s of systems) {
       const card = node("article", undefined, "manager-card manager-system");
