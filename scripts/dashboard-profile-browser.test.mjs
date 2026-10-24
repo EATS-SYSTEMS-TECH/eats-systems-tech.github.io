@@ -124,8 +124,12 @@ test("every dashboard shares a flag selector and profile entry into My profile",
             if (product) {
               const productName = {host:"WIFIGATE Host",pay:"WIFIGATE Pay",manager:"WIFIGATE Manager"}[product];
               assert.deepEqual(await panel.locator(".dashboard-profile-roles").evaluate(element => [...element.children].map(child => ({tag:child.tagName,text:child.textContent}))), [
-                {tag:"SPAN",text:"WIFIGATE admin"}, {tag:"HR",text:""}, {tag:"STRONG",text:productName}, {tag:"SPAN",text:productName + " admin"},
+                {tag:"SPAN",text:"WIFIGATE admin"}, {tag:"STRONG",text:productName}, {tag:"SPAN",text:productName + " admin"},
               ]);
+              assert.deepEqual(await panel.locator(".dashboard-profile-product").evaluate(element => ["::before", "::after"].map(pseudo => {
+                const style = getComputedStyle(element, pseudo);
+                return { border: style.borderTopWidth, flex: style.flexGrow };
+              })), [{border:"1px",flex:"1"},{border:"1px",flex:"1"}]);
             }
 
             assert.equal(
