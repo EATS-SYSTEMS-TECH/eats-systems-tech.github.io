@@ -603,7 +603,6 @@ export function createManagerDashboard({
     if (!systems.length) {
       const empty = node("section", undefined, "manager-empty manager-empty-systems");
       empty.append(
-        createSystemIcon({ type: "gate" }, "manager-empty-symbol"),
         node("h4", t("אין מערכות להצגה באזור זה.", "There are no systems in this area yet.")),
       );
       view.append(empty);
