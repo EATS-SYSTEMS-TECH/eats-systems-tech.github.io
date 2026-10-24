@@ -639,27 +639,32 @@ export function createManagerDashboard({
       button(t("רענון", "Refresh"), () => showSystems(scope, operatorAccount)),
     );
     view.append(bar);
-    view.append(
-      node(
-        "p",
-        t(
-          "להוספת מערכת: פתחו באפליקציה For Business › WIFIGATE Manager וייבאו מערכת שאתם מנהלים בה.",
-          "To add a system, open For Business › WIFIGATE Manager in the app and import a system you administer.",
-        ),
-        "manager-note",
-      ),
+    const importHelp = t(
+      "להוספת מערכת: פתחו באפליקציה WIFIGATE For Business › WIFIGATE Manager וייבאו מערכת שאתם מנהלים בה.",
+      "To add a system, open WIFIGATE For Business › WIFIGATE Manager in the app and import a system you administer.",
     );
-    if (!systems.length)
-      view.append(
+    if (!systems.length) {
+      const empty = node(
+        "section",
+        undefined,
+        "manager-empty manager-empty-systems",
+      );
+      const symbol = node("span", undefined, "manager-empty-symbol");
+      symbol.setAttribute("aria-hidden", "true");
+      empty.append(
+        symbol,
+        node("h4", t("המערכות יופיעו כאן", "Your systems start here")),
         node(
-          "div",
+          "p",
           t(
             "אין מערכות להצגה באזור זה.",
             "There are no systems in this area yet.",
           ),
-          "manager-empty",
         ),
+        node("p", importHelp),
       );
+      view.append(empty);
+    } else view.append(node("p", importHelp, "manager-note"));
     const grid = node("div", undefined, "manager-grid");
     for (const s of systems) {
       const card = node("article", undefined, "manager-card manager-system");

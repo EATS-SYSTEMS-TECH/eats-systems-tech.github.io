@@ -120,7 +120,7 @@ html[lang="he"] .product-switcher__name {
   font-weight: 700;
 }
 @media (min-width: 651px) {
-  body[data-product=""] #product-switcher-button {
+  body[data-product] #product-switcher-button {
     width: min(320px, calc(100vw - 32px));
     justify-content: center;
   }
@@ -656,3 +656,25 @@ html[dir="rtl"] #profile-subscriptions .product-tile h2 bdi { text-align: right;
 #profile-subscriptions .product-actions :is(a, button) { border-radius: 10px; min-height: 44px; font-size: 12px; }
 #profile-subscriptions .product-actions a.secondary { color: #53677f; border-color: #e2e8f0; background: #fff; font-weight: 500; }
 #profile-subscriptions .profile-cost-basis { font-size: 10px; line-height: 1.6; }
+
+/* Stable chrome across profile, Host, Pay and Manager. Only product identity changes. */
+body[data-product] :is(.platform-header, .host-topbar) { width: 100%; max-width: 1080px; margin-inline: auto; }
+body[data-product] :is(.platform-header, .host-topbar) .product-switcher__button { border-color: #475569; background: #f8fafc; }
+body[data-product] .product-switcher__button:is(:hover, [aria-expanded="true"]) { border-color: #475569; background: #f8fafc; }
+
+body.host-app .host-topbar { width: min(1080px, calc(100vw - 2 * clamp(1rem, 3.5vw, 2.5rem))); }
+@media (min-width: 960px) {
+  body.host-app.host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden])) .host-topbar {
+    margin-inline-start: calc((100vw - min(1080px, calc(100vw - 2 * clamp(1rem, 3.5vw, 2.5rem)))) / 2 - var(--sidebar-width));
+    margin-inline-end: 0;
+  }
+}
+
+@media (min-width: 960px) {
+  body.host-app.host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden])) .host-topbar .product-switcher {
+    grid-area: auto; grid-column: 2; grid-row: 1;
+  }
+  body.host-app.host-ready:not(.host-menu-empty):has(.host-sidebar:not([hidden])) .host-topbar__end {
+    grid-area: auto; grid-column: 3; grid-row: 1;
+  }
+}

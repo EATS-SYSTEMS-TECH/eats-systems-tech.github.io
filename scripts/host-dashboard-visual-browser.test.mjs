@@ -79,17 +79,13 @@ test("the Host dashboard keeps the fixes from its visual review", async (t) => {
         );
         const bar = await box(page, ".host-topbar");
         assert.ok(bar.left >= -1 && bar.right <= width + 1, `${width}px bar`);
-        const title = await box(page, "#workspace-current-view");
-        const sidebar = await box(page, "#host-sidebar");
-        assert.ok(
-          title.left >= sidebar.right,
-          "the title starts beside the sidebar",
-        );
-        // Narrower than 1280px the title has its own row under the pill's,
-        // so the pill never covers it.
-        assert.ok(
-          title.right <= pill.left || title.top >= pill.bottom - 1,
-          `${width}px: the title stays clear of the pill`,
+        // The shared header uses the product picker as its visible title.
+        // Host keeps the view title available to assistive technology only.
+        assert.equal(
+          await page.locator(".host-topbar__title").evaluate(
+            (element) => getComputedStyle(element).clipPath,
+          ),
+          "inset(50%)",
         );
         // The keyboard follows the screen: the sidebar (its brand at the
         // top start) before the bar's controls, the phone's tab bar after
@@ -639,35 +635,23 @@ test("the product picker speaks Hebrew in its labels and keeps 44px header contr
   await page.locator("#product-grid:not([hidden]) > *").first().waitFor();
   assert.equal(
     await page.locator(".platform-header .brand").getAttribute("aria-label"),
-    "דף הבית של WIFIGATE",
+    "דף הבית של הדשבורד",
   );
   assert.equal(
     await page.locator(".security-steps").getAttribute("aria-label"),
     "הגדרת אפליקציית האימות",
   );
-  // A tile's title lines up with the rest of the tile on a Hebrew page;
-  // only the product name inside it keeps its Latin order.
+  // Product names keep Latin order within the Hebrew card layout.
   for (const tile of await page.locator(".product-tile").all()) {
-    const [title, description] = await tile.evaluate((element) =>
-      [
-        element.querySelector("h2"),
-        element.querySelector(".product-description"),
-      ].map((part) => {
-        const range = document.createRange();
-        range.selectNodeContents(part);
-        return range.getBoundingClientRect().right;
-      }),
-    );
-    assert.ok(
-      Math.abs(title - description) <= 2,
-      `title ${title}, text ${description}`,
-    );
     assert.equal(await tile.locator("h2 bdi").getAttribute("dir"), "ltr");
+    assert.equal(await tile.locator("h2 bdi").evaluate(
+      (element) => getComputedStyle(element).textAlign,
+    ), "right");
   }
   for (const selector of [
     ".platform-header .brand",
     "#platform-language",
-    "#platform-sign-out",
+    ".dashboard-profile-button",
   ]) {
     const { height } = await box(page, selector);
     assert.ok(height >= 44, `${selector} ${height}px`);

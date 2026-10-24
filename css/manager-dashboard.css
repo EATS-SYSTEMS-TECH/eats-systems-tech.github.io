@@ -1,5 +1,4 @@
 .platform-page[data-product="manager"] {
-  --platform-shell-width: 1480px;
   color: var(--ink, #0f172a);
   --manager-accent: var(--manager, #f97316);
   --manager-line: var(--line, #e2e8f0);
@@ -146,9 +145,6 @@
   .manager-overview-grid {
     grid-template-columns: 1fr;
   }
-}
-[data-product="manager"] .platform-shell {
-  max-width: 1440px;
 }
 [data-product="manager"] #product-workspace {
   padding: 0;
@@ -597,9 +593,6 @@
   font-weight: 600;
   color: var(--ink, #0f172a);
 }
-.platform-page:has(#manager-root) .platform-shell {
-  max-width: 1480px;
-}
 .platform-page:has(#manager-root) #product-workspace {
   padding: 0;
   border: 0;
@@ -1044,3 +1037,45 @@
   line-height: 1.7;
   color: #4c6078;
 }
+
+/* Manager uses the profile dashboard's quiet surfaces and product accents. */
+.manager-shell { grid-template-columns: 220px minmax(0, 1fr); gap: 24px; }
+.manager-nav { padding: 18px; border-radius: 18px; background: linear-gradient(160deg, #fff, #f8fafc); box-shadow: 0 5px 20px #182d4808; }
+.manager-nav-title { letter-spacing: .06em; font-size: 11px; padding-inline: 10px; }
+.manager-shell .manager-nav button.manager-button { border-radius: 10px; font-weight: 600; }
+.manager-shell .manager-nav button.manager-button[aria-current="page"] { color: #172b46; background: #fff1e6; }
+.manager-shell .manager-nav button.manager-button:hover:not(:disabled) { color: #172b46; }
+.manager-toolbar { gap: 16px; margin-block: 6px 22px; }
+.manager-toolbar h3, .manager-view > h3 { color: #172b46; font-size: clamp(23px, 2.4vw, 30px); letter-spacing: -.025em; }
+.manager-hero { border-radius: 18px; background: linear-gradient(150deg, #fff1e6, #fff 48%); padding: clamp(22px, 3vw, 32px); }
+.manager-hero p { line-height: 1.7; }
+.manager-metric, .manager-card { border-color: #e2e8f0; border-radius: 18px; box-shadow: 0 5px 20px #182d4808; }
+.manager-metric { background: linear-gradient(155deg, #f8fafc, #fff 70%); }
+.manager-metric b { color: #172b46; font-weight: var(--weight-heavy, 700); letter-spacing: -.035em; }
+.manager-card.manager-system { position: relative; padding: 24px; gap: 16px; background: linear-gradient(150deg, #fff1e6, #fff 42%); }
+.manager-system .manager-icon { width: 48px; height: 48px; border: 1px solid #ffeadb; background: #fff; box-shadow: 0 2px 6px #182d4807; }
+.manager-system h4 { font-size: 19px; color: #172b46; }
+.manager-system-actions { margin-top: auto; padding-top: 16px; border-top: 1px solid #edf1f6; }
+.manager-system-actions .manager-button { flex: 1 1 180px; }
+.manager-shell button.manager-button { border-radius: 10px; }
+.manager-shell .manager-form :is(input, select, textarea) { border-radius: 10px; border-color: #dce4ee; background: #fbfcfe; }
+.manager-form label { color: #53677f; line-height: 1.5; }
+.manager-note { border: 1px solid #e2e8f0; border-inline-start: 3px solid #f2b17f; border-radius: 12px; background: #fafbfd; line-height: 1.8; }
+.manager-empty { border: 1px solid #e2e8f0; border-radius: 18px; background: linear-gradient(155deg, #f8fafc, #fff 70%); }
+.manager-empty-systems { display: grid; justify-items: center; gap: 16px; padding: clamp(28px, 5vw, 56px) 24px; box-shadow: 0 5px 20px #182d4808; }
+.manager-empty-systems h4 { margin: 0; color: #172b46; font-size: 22px; }
+.manager-empty-systems p { margin: 0; max-width: 50ch; line-height: 1.8; font-size: 14px; }
+.manager-empty-symbol { display: grid; place-items: center; position: relative; width: 64px; height: 64px; border: 1px solid #ffe3cf; border-radius: 20px; background: #fff1e6; color: #c2410c; }
+.manager-empty-symbol::before { content: ""; width: 25px; height: 27px; border: 2px solid currentColor; border-radius: 3px; }
+.manager-empty-symbol::after { content: ""; position: absolute; width: 15px; height: 17px; border: 2px solid currentColor; border-bottom: 0; inset-block-end: 18px; background: repeating-linear-gradient(to bottom, transparent 0 5px, currentColor 5px 7px); }
+.manager-card.manager-example-card { border: 1px solid #e2e8f0; border-radius: 18px; background: linear-gradient(155deg, #f7f5ff, #fff 40%); box-shadow: 0 5px 20px #182d4808; padding: 22px; }
+.manager-example-badge, .manager-role-badge { border-radius: 999px; padding: 5px 10px; }
+.manager-card.manager-overview-card, .manager-card.manager-org-column, .manager-card.manager-directory-row { border-radius: 18px; }
+.manager-platform-header { border-radius: 18px; background: linear-gradient(150deg, #f1f5fa, #fff 58%); box-shadow: 0 5px 20px #182d4808; }
+.manager-platform-tabs { row-gap: 10px; }
+.manager-action-panel { border-radius: 16px; background: linear-gradient(150deg, #f8fafc, #fff 55%); box-shadow: 0 5px 20px #182d4806; }
+.manager-facts, .manager-table-wrap { border-radius: 12px; }
+.manager-tabs { gap: 8px; padding-block: 8px 14px; }
+.manager-tabs button[aria-selected="true"] { background: #fff1e6; color: #9a3412; border-color: #fed7aa; }
+@media (max-width: 850px) { .manager-shell { grid-template-columns: 1fr; gap: 20px; } .manager-nav { position: static; } }
+@media (max-width: 480px) { .manager-card.manager-system { padding: 20px; } .manager-empty-systems { padding: 28px 20px; } .manager-empty-systems h4 { font-size: 20px; } }

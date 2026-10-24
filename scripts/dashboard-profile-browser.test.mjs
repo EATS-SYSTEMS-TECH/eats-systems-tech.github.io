@@ -6,8 +6,9 @@ const estimate = (amounts, quantities) => ({kind: "monthly-estimate", currency: 
 
 test("every dashboard shares a flag selector and profile entry into My profile", async (t) => {
   const { origin, browser } = await startSite(t);
+  const chromeReference = new Map();
   for (const language of ["he", "en"])
-    for (const width of [320, 1440]) {
+    for (const width of [320, 768, 1440]) {
       for (const product of ["manager", "host", "pay", ""])
         await t.test(
           `${language} ${width}px ${product || "profile"}`,
@@ -69,6 +70,15 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               product === "host" ? ".host-topbar" : ".platform-header",
             );
             assert.equal(await header.locator("a.brand").isVisible(), true);
+            const chrome = await header.evaluate((el) => {
+              const style = getComputedStyle(el), box = el.getBoundingClientRect();
+              const pill = el.querySelector("#product-switcher-button"), pillStyle = getComputedStyle(pill), pillBox = pill.getBoundingClientRect();
+              return { width: Math.round(box.width), height: Math.round(box.height), radius: style.borderRadius, padding: style.padding, pillWidth: Math.round(pillBox.width), pillHeight: Math.round(pillBox.height), pillBackground: pillStyle.backgroundColor, pillBorder: pillStyle.borderColor };
+            });
+            const chromeKey = `${language}-${width}`;
+            if (!chromeReference.has(chromeKey)) chromeReference.set(chromeKey, chrome);
+            else assert.deepEqual(chrome, chromeReference.get(chromeKey), `${product || "profile"} shares dashboard chrome dimensions and styling`);
+
             if (!product && width >= 651) {
               const switcher = header.locator("#product-switcher-button");
               await switcher.click();
