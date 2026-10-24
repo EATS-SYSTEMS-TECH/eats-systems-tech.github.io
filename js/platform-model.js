@@ -41,6 +41,7 @@ export function parsePlatformIdentity(value, expectedUid) {
   return {
     user,
     mfa,
+    platformRole: value.platformRole === "admin" ? "admin" : null,
     products: {
       ...products,
       host: { ...products.host, role: products.host.role ?? null },

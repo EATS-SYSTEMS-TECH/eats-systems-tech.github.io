@@ -13,6 +13,7 @@ export function hostIdentity(platform) {
     host.role === Roles.ADMIN || host.role === Roles.USER ? host.role : null;
   return {
     user: platform.user,
+    platformRole: platform.platformRole,
     role,
     hasPlan: role !== null,
     access: {

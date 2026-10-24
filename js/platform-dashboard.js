@@ -376,7 +376,7 @@ async function refresh() {
           root: $("#manager-root"),
           user,
           language,
-          onProfile: (profile) => managerProfile?.update(profile, user),
+          onProfile: (profile) => managerProfile?.update({ ...profile, platformRole: "platformRole" in profile ? profile.platformRole : identity.platformRole }, user),
           ensureRecent: async () => {
             const token = await user.getIdTokenResult();
             const age = Date.now() / 1000 - Number(token.claims.auth_time ?? 0);
@@ -455,7 +455,7 @@ function initial(text) {
 function showIdentity() {
   const product = identity.products[selectedProduct];
   managerProfile?.update(
-    { role: product?.role, roles: product?.roles },
+    { role: product?.role, roles: product?.roles, platformRole: identity.platformRole },
     identity.user,
   );
   const name = identity.user.displayName || identity.user.email || "WIFIGATE";

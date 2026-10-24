@@ -678,3 +678,7 @@ body.host-app .host-topbar { width: min(1080px, calc(100vw - 2 * clamp(1rem, 3.5
     grid-area: auto; grid-column: 3; grid-row: 1;
   }
 }
+
+.dashboard-profile-roles .dashboard-global-role { font-size: 13px; font-weight: 700; color: #182d48; }
+.dashboard-profile-roles .dashboard-role-divider { width: 100%; margin: 8px 0; border: 0; border-top: 1px solid #e2e8f0; }
+.dashboard-profile-roles .dashboard-profile-product { font-size: 12px; color: #53677f; margin-bottom: 4px; }

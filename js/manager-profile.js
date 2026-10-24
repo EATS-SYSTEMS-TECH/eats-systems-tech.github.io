@@ -1,3 +1,4 @@
+import { renderProfileRoles } from "./profile-roles.js";
 import { attachPopover } from "./popover.js";
 
 // Mounted once per page so authentication refreshes never duplicate listeners.
@@ -42,20 +43,7 @@ export function createManagerProfile({
       find("#manager-profile-email").textContent =
         profile.user?.email || user.email || "";
       const roles = find("#manager-profile-roles");
-      roles.replaceChildren();
-      for (const role of profile.roles?.length
-        ? profile.roles
-        : [profile.role].filter(Boolean)) {
-        const badge = document.createElement("span");
-        badge.className = "manager-role-badge";
-        badge.textContent =
-          {
-            admin: `WIFIGATE ${product === "host" ? "Host" : product === "pay" ? "Pay" : "Manager"} admin`,
-            user: `WIFIGATE ${product === "host" ? "Host" : product === "pay" ? "Pay" : "Manager"} user`,
-            "organization-admin": `WIFIGATE ${product === "host" ? "Host" : "Manager"} organization admin`,
-          }[role] || (he ? "ממתין להרשאה" : "Access pending");
-        roles.append(badge);
-      }
+      renderProfileRoles(roles, { ...profile, product });
       button.disabled = false;
       if (product === "manager" && "role" in profile)
         document.body.classList.add("manager-ready");

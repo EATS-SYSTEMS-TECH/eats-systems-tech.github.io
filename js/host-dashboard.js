@@ -1,3 +1,4 @@
+import { renderProfileRoles } from "./profile-roles.js";
 import {
   hostText,
   hostLocale,
@@ -11,7 +12,6 @@ import {
   clearAdminOverview,
   adminActionInProgress,
 } from "./host-admin-overview.js";
-import { roleBadge } from "./host-role-badge.js";
 import { Roles, PortalStates, HttpStatus } from "./host-constants.js";
 import { initializeSiteAuth, reauthenticate } from "./site-auth.js";
 import { getPlatformProfile } from "./api/index.js";
@@ -106,11 +106,7 @@ function renderAccount(user) {
   $("#account-avatar").textContent = initial(name);
   $("#account-name").textContent = name;
   $("#account-email").textContent = profile.email || "";
-  $("#account-plan").replaceChildren(
-    ...(identity?.hasPlan
-      ? [roleBadge(identity.role, true, { own: true })]
-      : []),
-  );
+  renderProfileRoles($("#account-plan"), { platformRole: identity?.platformRole, product: "host", role: identity?.hasPlan ? identity.role : null });
   $("#account-button").setAttribute(
     "aria-label",
     hostText("Account: {p0}", { p0: name || hostText("Signed-in account") }),

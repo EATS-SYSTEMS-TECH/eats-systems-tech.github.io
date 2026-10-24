@@ -313,6 +313,7 @@ test("Manager identity, platform overview and organization columns support scope
           .waitFor();
         await profileButton.click();
         assert.equal(await profileButton.getAttribute("aria-expanded"), "true");
+        assert.equal(await profilePanel.locator(".dashboard-global-role").count(), 0, "product-only admin is not a global admin");
         await profilePanel
           .getByText("Manager operator", { exact: true })
           .waitFor();

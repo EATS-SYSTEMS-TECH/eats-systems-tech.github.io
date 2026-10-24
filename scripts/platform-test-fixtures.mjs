@@ -68,6 +68,7 @@ export function fixtureProfile(state) {
       emailVerified: state.emailVerified ?? true,
     },
     mfa: { enrolled: state.enrolled, verified: state.verified },
+    platformRole: state.platformRole ?? null,
     products: {
       host: {
         state: host,
@@ -80,8 +81,8 @@ export function fixtureProfile(state) {
               ? "admin"
               : "user",
       },
-      pay: { state: state.pay, summary: state.personalSummaries?.pay, financials: state.productFinancials?.pay },
-      manager: { state: state.manager, summary: state.personalSummaries?.manager, financials: state.productFinancials?.manager },
+      pay: { state: state.pay, ...(state.platformRole === "admin" ? { role: "admin" } : {}), summary: state.personalSummaries?.pay, financials: state.productFinancials?.pay },
+      manager: { state: state.manager, ...(state.platformRole === "admin" ? { role: "admin" } : {}), summary: state.personalSummaries?.manager, financials: state.productFinancials?.manager },
     },
   };
 }

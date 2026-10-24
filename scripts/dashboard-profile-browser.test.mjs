@@ -15,6 +15,7 @@ test("every dashboard shares a flag selector and profile entry into My profile",
           async (t) => {
             const fixture = await scenario(browser, {
               admin: true,
+              platformRole: "admin",
               enrolled: true,
               verified: true,
               manager: "active",
@@ -119,6 +120,14 @@ test("every dashboard shares a flag selector and profile entry into My profile",
             );
             await profile.click();
             const panel = header.locator(".dashboard-profile-panel");
+            assert.equal(await panel.locator(".dashboard-global-role").innerText(), "WIFIGATE admin");
+            if (product) {
+              const productName = {host:"WIFIGATE Host",pay:"WIFIGATE Pay",manager:"WIFIGATE Manager"}[product];
+              assert.deepEqual(await panel.locator(".dashboard-profile-roles").evaluate(element => [...element.children].map(child => ({tag:child.tagName,text:child.textContent}))), [
+                {tag:"SPAN",text:"WIFIGATE admin"}, {tag:"HR",text:""}, {tag:"STRONG",text:productName}, {tag:"SPAN",text:productName + " admin"},
+              ]);
+            }
+
             assert.equal(
               await panel.locator(".dashboard-profile-eyebrow").count(),
               0,
