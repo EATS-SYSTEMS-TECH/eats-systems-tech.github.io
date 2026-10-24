@@ -364,7 +364,7 @@ test("Manager identity, platform overview and organization columns support scope
           .click();
         await page.locator('[data-organization="org-b"]').waitFor();
         const first = page.locator('[data-organization="org-a"]');
-        const createForm = page.getByRole('button', { name: he ? 'ארגון חדש +' : 'New organization +', exact: true });
+        const createForm = page.getByRole('button', { name: he ? 'יצירת ארגון חדש' : 'Create new organization', exact: true });
         const formTop = await createForm.boundingBox(), listTop = await page.locator('.manager-org-columns').boundingBox();
         assert.ok(formTop.y + formTop.height <= listTop.y, 'new organization button precedes organization cards');
         assert.equal(
@@ -450,11 +450,11 @@ test("Manager identity, platform overview and organization columns support scope
           .locator('[data-organization="org-b"]')
           .waitFor({ state: "detached" });
         assert.equal(await page.getByLabel(he ? "שם ארגון חדש" : "New organization name", { exact: true }).count(), 0);
-        await page.getByRole("button", { name: he ? "ארגון חדש +" : "New organization +", exact: true }).click();
+        await page.getByRole("button", { name: he ? "יצירת ארגון חדש" : "Create new organization", exact: true }).click();
         assert.match(await page.getByRole("dialog").innerText(), /\$1/);
         await page.keyboard.press("Escape");
         assert.equal(await page.getByRole("dialog").count(), 0);
-        await page.getByRole("button", { name: he ? "ארגון חדש +" : "New organization +", exact: true }).click();
+        await page.getByRole("button", { name: he ? "יצירת ארגון חדש" : "Create new organization", exact: true }).click();
         await page
           .getByLabel(he ? "שם ארגון חדש" : "New organization name", {
             exact: true,
@@ -534,7 +534,7 @@ test("Manager identity, platform overview and organization columns support scope
         assert.equal(
           await page
             .getByRole("button", {
-              name: he ? "ארגון חדש +" : "New organization +",
+              name: he ? "יצירת ארגון חדש" : "Create new organization",
               exact: true,
             })
             .count(),

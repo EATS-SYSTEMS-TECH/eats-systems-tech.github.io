@@ -856,8 +856,9 @@ export function createManagerDashboard({
     if (closed || epoch !== generation) return;
     if (personal || profile.role !== "admin")
       examples.renderOrganizationCard(view);
-    if (profile.account || operator) {
-      const create = button(t("ארגון חדש +", "New organization +"), async () => {
+    if (profile.account || profile.role === "admin") {
+      const createForCustomer = operator || !profile.account;
+      const create = button(t("יצירת ארגון חדש", "Create new organization"), async () => {
         const requestId = crypto.randomUUID();
         const created = await dialogs.form({
           title: t("ארגון חדש", "New organization"),
@@ -867,13 +868,13 @@ export function createManagerDashboard({
           ),
           fields: [
             ["name", t("שם ארגון חדש", "New organization name")],
-            ...(operator ? [["email", t("אימייל בעל הארגון · Manager user", "Organization owner email · Manager user"), "email"]] : []),
+            ...(createForCustomer ? [["email", t("אימייל בעל הארגון · Manager user", "Organization owner email · Manager user"), "email"]] : []),
           ],
           submitLabel: t("יצירת ארגון", "Create organization"),
           errorText,
           onSubmit: async (values) => {
             await ensureRecent();
-            await api(operator ? "/admin/organizations" : "/organizations", "POST", { ...values, name: values.name.trim(), requestId });
+            await api(createForCustomer ? "/admin/organizations" : "/organizations", "POST", { ...values, name: values.name.trim(), requestId });
           },
         });
         if (created && !closed && epoch === generation) {

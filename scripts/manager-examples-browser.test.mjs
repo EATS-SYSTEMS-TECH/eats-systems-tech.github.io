@@ -308,6 +308,11 @@ test("Manager personal navigation and complete sample workspaces never request r
         await page.getByRole('heading', {name:he ? 'אין ארגונים להצגה כרגע.' : 'No organizations to display yet.',exact:true}).waitFor();
         await page.getByText(he ? 'הארגונים המשויכים לחשבון שלכם יופיעו כאן.' : 'Organizations linked to your account will appear here.',{exact:true}).waitFor();
         assert.equal(await page.locator('.manager-empty-organizations img, .manager-empty-organizations svg').count(),0);
+        await page.getByRole('button',{name:he ? 'יצירת ארגון חדש' : 'Create new organization',exact:true}).click();
+        await page.getByRole('dialog').getByLabel(he ? 'אימייל בעל הארגון · Manager user' : 'Organization owner email · Manager user',{exact:true}).waitFor();
+        await page.keyboard.press('Escape');
+        assert.equal(calls.some(call=>call.method==='POST'),false,'opening or cancelling organization creation performs no write');
+
         if (process.env.MANAGER_EXAMPLE_SCREENSHOTS)
           await page.screenshot({path:`${process.env.MANAGER_EXAMPLE_SCREENSHOTS}/empty-organizations-${language}-${width}.png`,fullPage:true});
 
