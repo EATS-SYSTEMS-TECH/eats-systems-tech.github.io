@@ -13,8 +13,10 @@ test("published Manager page wires the private profile into the header without d
         viewport: { width, height: 1000 },
       });
       t.after(() => fixture.context.close());
+      const grants = [];
       await fixture.context.route("**/api/v1/manager/**", (route) => {
         const path = new URL(route.request().url()).pathname;
+        if (path.endsWith('/admin/access') && route.request().method() === 'POST') grants.push(route.request().postDataJSON());
         return route.fulfill({
           json: path.endsWith("/me")
             ? {
@@ -59,10 +61,28 @@ test("published Manager page wires the private profile into the header without d
       await tabs.getByRole('button', {name:'מנהלי פלטפורמה',exact:true}).click();
       await page.locator('.manager-directory-row').last().waitFor();
       assert.equal(await tabs.locator('[aria-current="page"]').innerText(), 'מנהלי פלטפורמה');
-      const adminForm = page.locator('.manager-view .manager-action-panel form');
-      assert.equal(await adminForm.isVisible(), true);
-      const formBox = await adminForm.boundingBox(), recordsBox = await page.locator('.manager-directory').boundingBox();
-      assert.ok(formBox.y + formBox.height <= recordsBox.y, 'administrator creation precedes records');
+      const createAdmin = page.getByRole('button', {name:'הוספת Manager admin',exact:true});
+      assert.equal(await page.locator('.manager-view form').count(),0);
+      const formBox = await createAdmin.boundingBox(), recordsBox = await page.locator('.manager-directory').boundingBox();
+      assert.ok(formBox.y + formBox.height <= recordsBox.y, 'administrator creation button precedes records');
+      await createAdmin.click();
+      let grantDialog = page.getByRole('dialog',{name:'הוספת Manager admin',exact:true});
+      await grantDialog.getByLabel('אימייל מנהל מאומת',{exact:true}).waitFor();
+      await page.keyboard.press('Escape');
+      assert.deepEqual(grants,[]);
+      await createAdmin.click();
+      grantDialog = page.getByRole('dialog',{name:'הוספת Manager admin',exact:true});
+      await grantDialog.getByLabel('אימייל מנהל מאומת',{exact:true}).fill('new-admin@example.test');
+      if (process.env.MANAGER_DIRECTORY_SCREENSHOTS)
+        await page.screenshot({path:`${process.env.MANAGER_DIRECTORY_SCREENSHOTS}/manager-add-admin-${width}.png`,fullPage:true});
+      await grantDialog.getByRole('button',{name:'הוספת Manager admin',exact:true}).click();
+      // The isolated auth fixture has no auth_time, so exercise its normal step-up flow.
+      await page.locator('#mfa-challenge input[name="code"]').fill('123456');
+      await page.locator('#mfa-challenge button[type="submit"]').click();
+
+      await grantDialog.waitFor({state:'hidden'});
+      assert.deepEqual(grants,[{email:'new-admin@example.test',role:'admin',status:'active'}]);
+      await page.locator('.manager-directory-row').last().waitFor();
       assert.deepEqual(await page.locator('.manager-nav button').allTextContents(), originalMenu);
       assert.equal(await platformEntry.evaluate(el => el.offsetTop), originalOffset);
       await page.locator('.manager-nav').getByRole('button', {name:'הארגונים שלי',exact:true}).click();

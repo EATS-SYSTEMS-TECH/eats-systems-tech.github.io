@@ -491,28 +491,26 @@ export function createManagerDashboard({
       },
     );
     if (closed || epoch !== generation) return;
-    if (role === "admin")
-      view.append(
-        form(
-          [
-            [
-              "email",
-              t("אימייל מנהל מאומת", "Verified administrator email"),
-              "email",
-            ],
-          ],
-          t("הוספת Manager admin", "Add Manager admin"),
-          async (values) => {
+    if (role === "admin") {
+      const create = button(t("הוספת Manager admin", "Add Manager admin"), async () => {
+        const created = await dialogs.form({
+          title: t("הוספת Manager admin", "Add Manager admin"),
+          message: t("הזינו כתובת אימייל מאומתת של החשבון שיקבל הרשאת ניהול ב־WIFIGATE Manager.", "Enter the verified email address of the account receiving administrator access to WIFIGATE Manager."),
+          fields: [["email", t("אימייל מנהל מאומת", "Verified administrator email"), "email"]],
+          submitLabel: t("הוספת Manager admin", "Add Manager admin"),
+          errorText,
+          onSubmit: async (values) => {
             await ensureRecent();
-            await api("/admin/access", "POST", {
-              ...values,
-              role: "admin",
-              status: "active",
-            });
-            await showDirectory(role);
+            await api("/admin/access", "POST", { ...values, role: "admin", status: "active" });
           },
-        ),
-      );
+        });
+        if (created && !closed && epoch === generation) await showDirectory(role);
+      }, true);
+      const heading = view.querySelector("h3");
+      const bar = node("div", undefined, "manager-toolbar");
+      heading.replaceWith(bar);
+      bar.append(heading, create);
+    }
     else
       view.append(
         button(
