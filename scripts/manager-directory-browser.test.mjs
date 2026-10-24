@@ -51,14 +51,12 @@ test("published Manager page wires the private profile into the header without d
       assert.equal(await page.locator('.manager-platform-nav button').count(), 1);
       assert.equal(await platformEntry.getAttribute('aria-current'), null);
       const tabs = page.locator('.manager-platform-tabs');
-      assert.equal(await tabs.getByRole('button').count(), 4);
-      assert.equal(await tabs.locator('[aria-current="page"]').count(), 0);
-      assert.equal(await page.locator('.manager-platform-parent').getAttribute('aria-current'), 'page');
-      assert.equal(await page.locator('.manager-platform-title').innerText(), 'WIFIGATE Manager admin platform');
-      await tabs.getByRole('button', {name:'WIFIGATE Manager admin',exact:true}).click();
+      assert.equal(await tabs.getByRole('button').count(), 5);
+      assert.equal(await tabs.locator('[aria-current="page"]').innerText(), 'סקירה');
+      assert.equal(await page.locator('.manager-platform-title').innerText(), 'ניהול פלטפורמה');
+      await tabs.getByRole('button', {name:'מנהלי פלטפורמה',exact:true}).click();
       await page.locator('.manager-directory-row').last().waitFor();
-      assert.equal(await tabs.locator('[aria-current="page"]').innerText(), 'WIFIGATE Manager admin');
-      assert.equal(await page.locator('.manager-platform-parent').getAttribute('aria-current'), null);
+      assert.equal(await tabs.locator('[aria-current="page"]').innerText(), 'מנהלי פלטפורמה');
       const adminForm = page.locator('.manager-view .manager-action-panel form');
       assert.equal(await adminForm.isVisible(), true);
       const formBox = await adminForm.boundingBox(), recordsBox = await page.locator('.manager-directory').boundingBox();
@@ -301,13 +299,29 @@ test("Manager identity, platform overview and organization columns support scope
           .last()
           .waitFor();
         assert.equal(await page.locator(".manager-overview-card").count(), 4);
+        assert.equal(await page.locator("button.manager-overview-card").count(), 4);
+        const info = page.getByRole("button", {name: he ? "הסבר על הספירות" : "About these counts", exact:true});
+        await info.click();
+        const tooltip = page.getByRole("tooltip");
+        await tooltip.waitFor();
+        const tooltipBox = await tooltip.boundingBox();
+        assert.ok(tooltipBox.x >= 15 && tooltipBox.x + tooltipBox.width <= width - 15);
+        await page.keyboard.press("Escape");
+        assert.equal(await tooltip.isVisible(), false);
+        if (process.env.MANAGER_DIRECTORY_SCREENSHOTS)
+          await page.screenshot({path:`${process.env.MANAGER_DIRECTORY_SCREENSHOTS}/manager-platform-overview-${language}-${width}.png`,fullPage:true});
+        await page.locator("button.manager-overview-card").first().click();
+        await page.locator(".manager-directory-row").last().waitFor();
+        await page.locator(".manager-platform-tabs").getByRole("button",{name:he?"סקירה":"Overview",exact:true}).click();
+        await page.locator("button.manager-overview-card").last().waitFor();
+
         const profileButton = page.locator("#manager-profile-button");
         const profilePanel = page.locator("#manager-profile-panel");
         assert.equal(await profilePanel.isVisible(), false);
         assert.equal(await nav.locator(".manager-identity").count(), 0);
         await page
           .getByRole("heading", {
-            name: "WIFIGATE Manager admin platform",
+            name: he ? "ניהול פלטפורמה" : "Platform management",
             exact: true,
           })
           .waitFor();

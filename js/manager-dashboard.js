@@ -1,3 +1,4 @@
+import { attachPopover } from "./popover.js";
 import { accessNoteContent } from "./manager-access-note.js";
 import { createSystemIcon } from "./wifigate-system-icons.js";
 import { createManagerDialog } from "./manager-dialog.js";
@@ -53,7 +54,8 @@ export function createManagerDashboard({
     currentRows = [],
     currentData,
     cursor = null,
-    currentView = "";
+    currentView = "",
+    countsPopover;
   const shell = node("div", undefined, "manager-shell"),
     nav = node("nav", undefined, "manager-nav"),
     main = node("div", undefined, "manager-main");
@@ -179,6 +181,8 @@ export function createManagerDashboard({
     return f;
   }
   function stop() {
+    countsPopover?.close();
+    countsPopover = null;
     dialogs.cancel();
     examples.closeView();
     view.classList.remove("manager-example-workspace");
@@ -253,30 +257,21 @@ export function createManagerDashboard({
       if (platformViews.includes(currentView)) {
         platformHeader.hidden = false;
         platformHeader.append(
-          node(
-            "span",
-            t("ניהול פלטפורמה", "Platform management"),
-            "manager-platform-eyebrow",
-          ),
+          node("h2", t("ניהול פלטפורמה", "Platform management"), "manager-platform-title"),
+          node("p", t("משתמשים, הרשאות וארגונים של WIFIGATE Manager.", "People, access and organizations in WIFIGATE Manager."), "manager-platform-description"),
         );
-        const parentTitle = node("h2", undefined, "manager-platform-title");
-        const parent = button("WIFIGATE Manager admin platform", showOverview);
-        parent.classList.add("manager-platform-parent");
-        if (currentView === "overview")
-          parent.setAttribute("aria-current", "page");
-        parentTitle.append(parent);
-        platformHeader.append(parentTitle);
         const tabs = node("nav", undefined, "manager-platform-tabs");
         tabs.setAttribute(
           "aria-label",
           t("ניווט ניהול פלטפורמה", "Platform management navigation"),
         );
         for (const [key, label, action] of [
-          ["admin", "WIFIGATE Manager admin", () => showDirectory("admin")],
-          ["user", "WIFIGATE Manager user", () => showAccounts()],
+          ["overview", t("סקירה", "Overview"), showOverview],
+          ["admin", directoryLabel("admin"), () => showDirectory("admin")],
+          ["user", directoryLabel("user"), () => showAccounts()],
           [
             "organization-admin",
-            "WIFIGATE Manager organization admin",
+            directoryLabel("organization-admin"),
             () => showDirectory("organization-admin"),
           ],
           ["organizations", t("ארגונים", "Organizations"), showOrganizations],
@@ -324,6 +319,17 @@ export function createManagerDashboard({
     examples.renderOrganization(view, {
       onBack: () => void task(() => showOrganizations(true)),
     });
+  }
+  function directoryLabel(role) {
+    return { admin: t("מנהלי פלטפורמה", "Platform admins"), user: t("לקוחות", "Customers"), "organization-admin": t("מנהלי ארגונים", "Organization admins") }[role];
+  }
+  function overviewIcon(key) {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    for (const [attribute, value] of Object.entries({viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"1.7","stroke-linecap":"round","stroke-linejoin":"round","aria-hidden":"true"})) svg.setAttribute(attribute,value);
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", { admins:"M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Zm-4 9 3 3 5-6", users:"M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 21v-2a8 8 0 0 1 16 0v2", organizationAdmins:"M15 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6 21v-2a6 6 0 0 1 12 0v2M18 5a3 3 0 0 1 0 6M21 20v-2a5 5 0 0 0-3-4M6 5a3 3 0 0 0 0 6M3 20v-2a5 5 0 0 1 3-4", organizations:"M5 21V3h14v18M2 21h20M9 7h1m4 0h1M9 11h1m4 0h1M9 15h1m4 0h1M10 21v-3h4v3" }[key]);
+    svg.append(path);
+    return svg;
   }
   function roleName(role) {
     return (
@@ -374,58 +380,40 @@ export function createManagerDashboard({
   async function showOverview() {
     beginView("overview");
     const epoch = generation;
-    view.append(node("h3", t("סקירת פלטפורמה", "Platform overview")));
-    view.append(
-      node(
-        "p",
-        t(
-          "ניהול הרשאות, משתמשים וארגונים — במקום אחד.",
-          "Manage access, people and organizations in one place.",
-        ),
-        "manager-view-description",
-      ),
-    );
+    const heading = node("div", undefined, "manager-overview-heading");
+    const info = node("button", "i", "manager-count-info");
+    info.type = "button";
+    info.setAttribute("aria-label", t("הסבר על הספירות", "About these counts"));
+    info.setAttribute("aria-describedby", "manager-counts-help");
+    const help = node("p", t("הספירות מציגות רשומות פעילות. מנהלי ארגונים נספרים לפי מינויים לארגון; אותו אדם עשוי להחזיק יותר ממינוי אחד.", "Counts show active records. Organization administrators are counted by organization appointments; one person may hold multiple appointments."), "manager-count-help");
+    help.id = "manager-counts-help";
+    help.setAttribute("role", "tooltip");
+    help.tabIndex = -1;
+    heading.append(node("h3", t("סקירה", "Overview")), info, help);
+    view.append(heading);
+    countsPopover = attachPopover(info, help, { align: "end" });
     const totals = await api("/admin/overview");
     if (closed || epoch !== generation) return;
     const grid = node("div", undefined, "manager-overview-grid");
-    for (const [key, label, action] of [
-      ["admins", "WIFIGATE Manager admin", () => showDirectory("admin")],
-      ["users", "WIFIGATE Manager user", () => showAccounts()],
-      [
-        "organizationAdmins",
-        "WIFIGATE Manager organization admin",
-        () => showDirectory("organization-admin"),
-      ],
-      ["organizations", t("ארגונים", "Organizations"), showOrganizations],
+    for (const [key, label, cta, action] of [
+      ["admins", directoryLabel("admin"), t("ניהול מנהלים", "Manage admins"), () => showDirectory("admin")],
+      ["users", directoryLabel("user"), t("ניהול לקוחות", "Manage customers"), () => showAccounts()],
+      ["organizationAdmins", directoryLabel("organization-admin"), t("ניהול מינויים", "Manage appointments"), () => showDirectory("organization-admin")],
+      ["organizations", t("ארגונים", "Organizations"), t("ניהול ארגונים", "Manage organizations"), showOrganizations],
     ]) {
-      const card = node(
-        "article",
-        undefined,
-        "manager-card manager-overview-card",
-      );
-      card.append(
-        node("span", label),
-        node("strong", String(totals[key] ?? 0)),
-        button(t("הצגה וניהול", "View and manage"), action),
-      );
+      const card = button(label, action);
+      card.classList.add("manager-card", "manager-overview-card");
+      const icon = node("span", undefined, "manager-overview-icon");
+      icon.append(overviewIcon(key));
+      card.replaceChildren(icon, node("span", label, "manager-overview-label"), node("strong", String(totals[key] ?? 0)), node("span", cta + (he ? " ←" : " →"), "manager-overview-cta"));
       grid.append(card);
     }
-    view.append(
-      grid,
-      node(
-        "p",
-        t(
-          "הספירות מציגות רשומות פעילות. מנהלי ארגונים נספרים לפי מינויים לארגון; אותו אדם עשוי להחזיק יותר ממינוי אחד.",
-          "Counts show active records. Organization administrators are counted by organization appointments; one person may hold multiple appointments.",
-        ),
-        "manager-note",
-      ),
-    );
+    view.append(grid);
   }
   async function showDirectory(role, status = "active") {
     beginView(role);
     const epoch = generation;
-    view.append(node("h3", roleName(role)));
+    view.append(node("h3", directoryLabel(role)), node("p", roleName(role), "manager-view-description"));
     const filters = node("div", undefined, "manager-toolbar");
     for (const state of ["active", "blocked"])
       filters.append(
@@ -989,7 +977,8 @@ export function createManagerDashboard({
     beginView("user");
     const epoch = generation;
     view.replaceChildren(
-      node("h3", t("הפעלת חשבון לקוח", "Enable customer account")),
+      node("h3", directoryLabel("user")),
+      node("p", roleName("user"), "manager-view-description"),
       node(
         "p",
         t(

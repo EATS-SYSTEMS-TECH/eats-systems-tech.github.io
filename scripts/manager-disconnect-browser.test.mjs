@@ -106,7 +106,7 @@ test("platform Manager admin can browse customer metadata and deliberately disco
         // remains available without opening a gate-management session.
         await page
           .locator(".manager-platform-tabs")
-          .getByRole("button", { name: "WIFIGATE Manager user", exact: true })
+          .getByRole("button", { name: language === "he" ? "לקוחות" : "Customers", exact: true })
           .click();
         await page
           .getByText("customer@example.test", { exact: true })
