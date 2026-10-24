@@ -184,6 +184,7 @@ test("Manager workspace supports English/Hebrew desktop/mobile, organizations an
             id: "system-one",
             name: language === "he" ? "שער חניון מרכזי" : "Central car park",
             type: "gate",
+            iconId: "cantilever-gate-small",
             systemIds: ["gate-1"],
             status: "active",
             version: 1,
@@ -279,6 +280,10 @@ test("Manager workspace supports English/Hebrew desktop/mobile, organizations an
           await window.manager.ready;
         }, language);
         const he = language === "he";
+        const icon = page.locator(".manager-system .manager-icon img");
+        assert.equal(await icon.getAttribute("src"), "/assets/host-icons/gate-cantilever-gate-small.svg");
+        await icon.evaluate(image => image.decode());
+        assert.equal(await icon.getAttribute("alt"), "");
         await page
           .getByRole("button", {
             name: he ? "פתיחת סביבת ניהול" : "Open workspace",

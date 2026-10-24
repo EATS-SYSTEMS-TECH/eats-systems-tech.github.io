@@ -74,6 +74,14 @@ test("Manager personal navigation and complete sample workspaces never request r
           he ? /ניהול פלטפורמה/ : /Platform management/,
         );
         assert.equal(await page.locator("[data-example-system]").count(), 3);
+        const icons = page.locator("[data-example-system] .manager-icon img");
+        assert.deepEqual(await icons.evaluateAll(images => images.map(image => image.getAttribute("src"))), [
+          "/assets/host-icons/gate-door-small.svg",
+          "/assets/host-icons/dual-control-barrier-gate-small.svg",
+          "/assets/host-icons/group-folder.svg",
+        ]);
+        await icons.evaluateAll(images => Promise.all(images.map(image => image.decode())));
+
         await page.evaluate(() => document.fonts.ready);
         for (const layoutWidth of [320, 1024, 1440]) {
           await page.setViewportSize({width: layoutWidth, height:1000});

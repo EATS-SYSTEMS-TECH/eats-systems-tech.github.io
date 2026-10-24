@@ -1,3 +1,4 @@
+import { createSystemIcon } from "./wifigate-system-icons.js";
 import { placeManagerActions } from "./manager-action-layout.js";
 import {
   createManagerExampleData,
@@ -85,27 +86,6 @@ export function createManagerExamples({
   }
   function badge() {
     return el("span", t("דוגמה", "Example"), "manager-example-badge");
-  }
-  function systemIcon(type) {
-    const holder = el("span", undefined, "manager-icon");
-    holder.setAttribute("aria-hidden", "true");
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"),
-      path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    svg.setAttribute("viewBox", "0 0 24 24");
-    svg.setAttribute("fill", "none");
-    svg.setAttribute("stroke", "currentColor");
-    svg.setAttribute("stroke-width", "1.7");
-    path.setAttribute(
-      "d",
-      {
-        gate: "M4 21V4h16v17M8 21V9h8v12M8 13h8M8 17h8",
-        "dual-control": "m8 7-5 5 5 5M3 12h18m-5-5 5 5-5 5",
-        group: "M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z",
-      }[type],
-    );
-    svg.append(path);
-    holder.append(svg);
-    return holder;
   }
   function facts(container, rows) {
     const list = el("dl", undefined, "manager-facts");
@@ -234,7 +214,7 @@ export function createManagerExamples({
         group: "Group",
       }[system.type];
       const heading = el("div", undefined, "manager-example-card-head");
-      heading.append(systemIcon(system.type), badge());
+      heading.append(createSystemIcon(system), badge());
       card.append(
         heading,
         el("h4", system.name),

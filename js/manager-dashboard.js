@@ -1,3 +1,4 @@
+import { createSystemIcon } from "./wifigate-system-icons.js";
 import { createManagerDialog } from "./manager-dialog.js";
 import { placeManagerActions } from "./manager-action-layout.js";
 import { parseManagerCsv, encodeManagerCsv } from "./manager-csv.js";
@@ -649,8 +650,7 @@ export function createManagerDashboard({
         undefined,
         "manager-empty manager-empty-systems",
       );
-      const symbol = node("span", undefined, "manager-empty-symbol");
-      symbol.setAttribute("aria-hidden", "true");
+      const symbol = createSystemIcon({ type: "gate" }, "manager-empty-symbol");
       empty.append(
         symbol,
         node("h4", t("המערכות יופיעו כאן", "Your systems start here")),
@@ -668,32 +668,7 @@ export function createManagerDashboard({
     const grid = node("div", undefined, "manager-grid");
     for (const s of systems) {
       const card = node("article", undefined, "manager-card manager-system");
-      const icon = node("span", undefined, "manager-icon");
-      const drawing = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "svg",
-      );
-      drawing.setAttribute("viewBox", "0 0 24 24");
-      drawing.setAttribute("fill", "none");
-      drawing.setAttribute("stroke", "currentColor");
-      drawing.setAttribute("stroke-width", "1.7");
-      drawing.setAttribute("stroke-linecap", "round");
-      drawing.setAttribute("stroke-linejoin", "round");
-      const path = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "path",
-      );
-      path.setAttribute(
-        "d",
-        {
-          group: "M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z",
-          "dual-control": "m8 7-5 5 5 5M3 12h18m-5-5 5 5-5 5",
-          gate: "M4 21V4h16v17M8 21V9h8v12M8 13h8M8 17h8M2 21h20",
-        }[s.type] ?? "M4 21V4h16v17M2 21h20",
-      );
-      drawing.append(path);
-      icon.append(drawing);
-      icon.setAttribute("aria-hidden", "true");
+      const icon = createSystemIcon(s);
       const count = new Set(s.systemIds).size;
       const typeLabel =
         {
