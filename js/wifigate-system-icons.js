@@ -4,7 +4,7 @@ export const systemIconCatalog = Object.freeze({
   gate: Object.freeze([
     "barrier-gate-small", "swing-gate-small", "cantilever-gate-small",
     "garage-small", "door-small", "electromagnetic-lock-small", "pump-small",
-    "light-small", "home-outline", "business-outline", "bed-outline",
+    "light-small", "roller-shutter-small", "home-outline", "business-outline", "bed-outline",
   ]),
   "dual-control": Object.freeze([
     "door-small", "barrier-gate-small", "swing-gate-small",

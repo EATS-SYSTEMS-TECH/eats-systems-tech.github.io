@@ -1090,3 +1090,12 @@
 .manager-create-organization-form input:focus-visible { outline: 2px solid #dd7d27; outline-offset: 2px; }
 .manager-create-organization-form .manager-confirm-actions { margin-top: 4px; }
 .manager-create-organization-form .manager-dialog-error { color: #b42318; }
+
+.manager-access-note { display: grid; gap: 16px; margin-top: 16px; }
+.manager-access-note section, .manager-access-note > dl { margin: 0; padding: 16px; border: 1px solid #ffdec5; border-radius: 12px; background: #fff8f2; }
+.manager-access-note h3 { margin: 0 0 12px; font-size: 15px; color: #9a3412; }
+.manager-access-note dl { margin: 0; display: grid; gap: 12px; }
+.manager-access-note-row { display: grid; gap: 4px; }
+.manager-access-note dt { color: #64748b; font-size: 12px; }
+.manager-access-note dd { margin: 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+.manager-access-note p { white-space: pre-wrap; }

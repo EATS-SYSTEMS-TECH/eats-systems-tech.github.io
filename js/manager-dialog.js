@@ -44,9 +44,10 @@ export function createManagerDialog({
         actions.append(button);
         return button;
       };
-      const dismiss = add(t("ביטול", "Cancel"), null);
+      const dismiss = add(options.dismissLabel ?? t("ביטול", "Cancel"), null);
       for (const choice of choices) add(choice.label, choice.value, true);
       dialog.append(heading, body);
+      if (options.content) dialog.append(options.content);
       let form;
       if (options.fields) {
         form = document.createElement("form");
@@ -97,7 +98,7 @@ export function createManagerDialog({
       } else dialog.append(actions);
       dialog.addEventListener("keydown", (event) => {
         if (event.key !== "Tab") return;
-        const buttons = [...dialog.querySelectorAll("input,button")].filter(element => !element.disabled);
+        const buttons = [...dialog.querySelectorAll("input,button,a[href],select,textarea")].filter(element => !element.disabled);
         const first = buttons[0],
           last = buttons.at(-1);
         if (event.shiftKey && document.activeElement === first) {
@@ -137,6 +138,7 @@ export function createManagerDialog({
   }
   return {
     cancel,
+    info: (options) => ask("", [], { ...options, dismissLabel: t("סגירה", "Close") }),
     form: (options) => ask(options.message, [], options),
     confirm: async (message) =>
       (await ask(message, [{ label: t("אישור", "Confirm"), value: true }])) ===

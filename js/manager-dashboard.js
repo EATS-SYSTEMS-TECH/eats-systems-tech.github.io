@@ -1,3 +1,4 @@
+import { accessNoteContent } from "./manager-access-note.js";
 import { createSystemIcon } from "./wifigate-system-icons.js";
 import { createManagerDialog } from "./manager-dialog.js";
 import { placeManagerActions } from "./manager-action-layout.js";
@@ -628,6 +629,11 @@ export function createManagerDashboard({
         ),
       );
       const actions = node("div", undefined, "manager-system-actions");
+      if (s.accessNote) actions.append(button(t("פרטי גישה", "Access Note"), () => dialogs.info({
+        title: t("פרטי גישה", "Access Note") + " · " + s.name,
+        content: accessNoteContent(s.accessNote, language),
+      })));
+
       if (!operatorAccount)
         actions.append(
           button(

@@ -185,6 +185,7 @@ test("Manager workspace supports English/Hebrew desktop/mobile, organizations an
             name: language === "he" ? "שער חניון מרכזי" : "Central car park",
             type: "gate",
             iconId: "cantilever-gate-small",
+            accessNote: { note: "East entrance <script>bad()</script>", residentName: "Acme", floorNumber: "0", apartmentNumber: "12B", parkingNumber: "P-2", address: "Haifa", addressLatitude: 0, addressLongitude: 0 },
             systemIds: ["gate-1"],
             status: "active",
             version: 1,
@@ -287,6 +288,16 @@ test("Manager workspace supports English/Hebrew desktop/mobile, organizations an
         assert.equal(await icon.getAttribute("src"), "/assets/host-icons/gate-cantilever-gate-small.svg");
         await icon.evaluate(image => image.decode());
         assert.equal(await icon.getAttribute("alt"), "");
+        await page.getByRole("button", { name: he ? "פרטי גישה" : "Access Note", exact: true }).click();
+        const noteDialog = page.getByRole("dialog");
+        assert.match(await noteDialog.innerText(), /Acme/);
+        assert.match(await noteDialog.innerText(), /12B/);
+        assert.match(await noteDialog.innerText(), /P-2/);
+        assert.match(await noteDialog.innerText(), /East entrance <script>bad\(\)<\/script>/);
+        assert.equal(await noteDialog.locator("script").count(), 0);
+        assert.match(await noteDialog.locator("a").getAttribute("href"), /query=0%2C0$/);
+        await noteDialog.getByRole("button", { name: he ? "סגירה" : "Close", exact: true }).click();
+
         await page
           .getByRole("button", {
             name: he ? "פתיחת סביבת ניהול" : "Open workspace",
