@@ -1,3 +1,4 @@
+import { renderProfileAvatar } from "./profile-avatar.js";
 import { renderProfileRoles } from "./profile-roles.js";
 import {
   hostText,
@@ -103,7 +104,7 @@ function initial(text) {
 function renderAccount(user) {
   const profile = identity?.user ?? {};
   const name = profile.displayName || profile.email || user?.email || "";
-  $("#account-avatar").textContent = initial(name);
+  renderProfileAvatar($("#account-avatar"), name, user?.photoURL, language);
   $("#account-name").textContent = name;
   $("#account-email").textContent = profile.email || "";
   renderProfileRoles($("#account-plan"), { platformRole: identity?.platformRole, product: "host", role: identity?.hasPlan ? identity.role : null });

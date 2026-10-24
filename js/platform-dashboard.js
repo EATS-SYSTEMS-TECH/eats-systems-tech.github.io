@@ -456,12 +456,10 @@ function showIdentity() {
   const product = identity.products[selectedProduct];
   managerProfile?.update(
     { role: product?.role, roles: product?.roles, platformRole: identity.platformRole },
-    identity.user,
+    { ...identity.user, photoURL: currentUser?.photoURL },
   );
   const name = identity.user.displayName || identity.user.email || "WIFIGATE";
   $("#platform-account").textContent = name;
-  const avatar = $("#platform-avatar");
-  if (avatar) avatar.textContent = initial(name);
   if (!$("#platform-account-panel")) return;
   $("#account-avatar").textContent = initial(name);
   $("#account-name").textContent = name;

@@ -123,13 +123,8 @@ test("every dashboard shares a flag selector and profile entry into My profile",
             assert.equal(await panel.locator(".dashboard-global-role").innerText(), "WIFIGATE admin");
             if (product) {
               const productName = {host:"WIFIGATE Host",pay:"WIFIGATE Pay",manager:"WIFIGATE Manager"}[product];
-              assert.deepEqual(await panel.locator(".dashboard-profile-roles").evaluate(element => [...element.children].map(child => ({tag:child.tagName,text:child.textContent}))), [
-                {tag:"SPAN",text:"WIFIGATE admin"}, {tag:"STRONG",text:productName}, {tag:"SPAN",text:productName + " admin"},
-              ]);
-              assert.deepEqual(await panel.locator(".dashboard-profile-product").evaluate(element => ["::before", "::after"].map(pseudo => {
-                const style = getComputedStyle(element, pseudo);
-                return { border: style.borderTopWidth, flex: style.flexGrow };
-              })), [{border:"1px",flex:"1"},{border:"1px",flex:"1"}]);
+              assert.deepEqual(await panel.locator(".dashboard-profile-product-card").evaluate(element => [...element.children].map(child => child.textContent)), [productName, productName + " admin"]);
+              assert.equal(await panel.locator(".dashboard-profile-product-card").evaluate(element => getComputedStyle(element).borderRadius), "12px");
             }
 
             assert.equal(

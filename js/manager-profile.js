@@ -1,3 +1,4 @@
+import { renderProfileAvatar } from "./profile-avatar.js";
 import { renderProfileRoles } from "./profile-roles.js";
 import { attachPopover } from "./popover.js";
 
@@ -37,9 +38,7 @@ export function createManagerProfile({
         user.email ||
         "WIFIGATE";
       find("#platform-account").textContent = name;
-      find("#platform-avatar").textContent = [...name][0].toLocaleUpperCase(
-        language,
-      );
+      renderProfileAvatar(find("#platform-avatar"), name, user.photoURL, language);
       find("#manager-profile-email").textContent =
         profile.user?.email || user.email || "";
       const roles = find("#manager-profile-roles");
