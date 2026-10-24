@@ -146,9 +146,28 @@ test("secure session renewal preserves edits and daily identity without replayin
     false,
   );
 
+  // A network failure offers an explicit retry and does not replay writes.
+  await page.evaluate(() => {
+    window.connections[2].onState("DISCONNECTED");
+    window.connections[2].close();
+  });
+  await page.getByRole("heading", { name: "Connection interrupted" }).waitFor();
+  await page.getByRole("button", { name: "Reconnect to gate", exact: true }).click();
+  await page.waitForFunction(() => window.connections.length === 4);
+  await page.getByRole("tab", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Save settings", exact: true }).click();
+  await page.getByRole("dialog").waitFor();
+  // An idle channel renewal cancels a pending confirmation; it cannot apply
+  // that old draft against the replacement connection.
+  await page.evaluate(() => window.connections[3].expire());
+  await page.getByRole("dialog").waitFor({ state: "detached" });
+  await page.waitForFunction(() => window.connections.length === 5);
+  assert.equal(await page.evaluate(() => window.commands.some((cmd) => cmd.startsWith("ADMIN_SET"))), false);
+  assert.equal(await page.evaluate(() => window.identityChecks), 1);
+
   // Leaving while cancellation is pending must not open a background session.
   await page.evaluate(() => {
-    const c = window.connections[2];
+    const c = window.connections[4];
     c.holdCancellation = true;
     c.expire();
   });
@@ -157,6 +176,6 @@ test("secure session renewal preserves edits and daily identity without replayin
   await page
     .getByRole("button", { name: "Open workspace", exact: true })
     .waitFor();
-  assert.equal(await page.evaluate(() => window.connections.length), 3);
+  assert.equal(await page.evaluate(() => window.connections.length), 5);
   await page.evaluate(() => window.manager.close());
 });

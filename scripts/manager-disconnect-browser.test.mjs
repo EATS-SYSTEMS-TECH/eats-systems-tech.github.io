@@ -111,10 +111,16 @@ test("platform Manager admin can browse customer metadata and deliberately disco
         await page
           .getByText("customer@example.test", { exact: true })
           .waitFor();
-        const actions = page.locator('.manager-view > .manager-action-panel');
-        const customerCard = page.locator('.manager-view > .manager-card').filter({hasText:'customer@example.test'});
-        const actionBox = await actions.boundingBox(), customerBox = await customerCard.boundingBox();
-        assert.ok(actionBox.y + actionBox.height <= customerBox.y, 'customer provisioning is above customer records');
+        const actions = page.locator(".manager-view > .manager-action-panel");
+        const customerCard = page
+          .locator(".manager-view > .manager-card")
+          .filter({ hasText: "customer@example.test" });
+        const actionBox = await actions.boundingBox(),
+          customerBox = await customerCard.boundingBox();
+        assert.ok(
+          actionBox.y + actionBox.height <= customerBox.y,
+          "customer provisioning is above customer records",
+        );
         await page
           .getByRole("button", {
             name: he ? "לקוחות חסומים" : "Blocked customers",
@@ -155,14 +161,18 @@ test("platform Manager admin can browse customer metadata and deliberately disco
             .count(),
           0,
         );
-        page.once("dialog", (d) => d.dismiss());
         await disconnect.click();
+        await page
+          .getByRole("dialog")
+          .getByRole("button", { name: he ? "ביטול" : "Cancel", exact: true })
+          .click();
         assert.equal(await page.evaluate(() => window.removals.length), 0);
-        page.once("dialog", (d) => {
-          assert.match(d.message(), /Bluetooth/);
-          return d.accept();
-        });
         await disconnect.click();
+        assert.match(await page.getByRole("dialog").innerText(), /Bluetooth/);
+        await page
+          .getByRole("dialog")
+          .getByRole("button", { name: he ? "אישור" : "Confirm", exact: true })
+          .click();
         await page
           .getByRole("status")
           .getByText(he ? "בקשת הניתוק נשמרה." : "Disconnect request saved.", {

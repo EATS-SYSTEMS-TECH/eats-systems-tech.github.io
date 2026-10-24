@@ -1,3 +1,4 @@
+import { createManagerDialog } from "./manager-dialog.js";
 import { placeManagerActions } from "./manager-action-layout.js";
 import { parseManagerCsv, encodeManagerCsv } from "./manager-csv.js";
 import { managerRequest } from "./api/index.js";
@@ -36,6 +37,8 @@ export function createManagerDashboard({
     customApi ??
     ((path, method = "GET", body) =>
       managerRequest(user, BASE + path, method, body));
+  const dialogs = createManagerDialog({ language });
+  const confirmAction = dialogs.confirm;
   let generation = 0,
     closed = false,
     profile,
@@ -187,6 +190,7 @@ export function createManagerDashboard({
     return f;
   }
   function stop() {
+    dialogs.cancel();
     examples.closeView();
     view.classList.remove("manager-example-workspace");
     generation++;
@@ -510,12 +514,12 @@ export function createManagerDashboard({
                 : t("הפעלת גישה", "Enable access"),
               async () => {
                 if (
-                  !confirm(
+                  !(await confirmAction(
                     t(
                       `לעדכן את הגישה של ${row.email}?`,
                       `Change access for ${row.email}?`,
                     ),
-                  )
+                  ))
                 )
                   return;
                 await ensureRecent();
@@ -720,12 +724,12 @@ export function createManagerDashboard({
         actions.append(
           button(t("ניתוק מ־Manager", "Disconnect from Manager"), async () => {
             if (
-              !confirm(
+              !(await confirmAction(
                 t(
                   `לנתק את ${s.name} מ־Manager? הניהול המקומי ב־Bluetooth יישאר פעיל. שערים שמשויכים גם למערכות נוספות יישארו מחוברים דרכן.`,
                   `Disconnect ${s.name} from Manager? Local Bluetooth management stays available. Gates also used by other systems remain connected through them.`,
                 ),
-              )
+              ))
             )
               return;
             await ensureRecent();
@@ -899,7 +903,7 @@ export function createManagerDashboard({
           actions.append(
             button(t("הסרת ארגון", "Remove organization"), async () => {
               if (
-                !confirm(
+                !(await confirmAction(
                   t(
                     'להסיר את הארגון "' +
                       org.name +
@@ -908,7 +912,7 @@ export function createManagerDashboard({
                       org.name +
                       '" from Manager? Unassign systems and revoke administrator appointments first. History is retained.',
                   ),
-                )
+                ))
               )
                 return;
               await ensureRecent();
@@ -1014,9 +1018,9 @@ export function createManagerDashboard({
         row.append(
           button(t("ביטול גישה", "Revoke access"), async () => {
             if (
-              !confirm(
+              !(await confirmAction(
                 t("לבטל את הגישה לארגון?", "Revoke organization access?"),
-              )
+              ))
             )
               return;
             await ensureRecent();
@@ -1098,12 +1102,12 @@ export function createManagerDashboard({
             : t("הפעלת גישה", "Enable access"),
           async () => {
             if (
-              !confirm(
+              !(await confirmAction(
                 t(
                   `לעדכן את הגישה של ${account.email}?`,
                   `Change access for ${account.email}?`,
                 ),
-              )
+              ))
             )
               return;
             await ensureRecent();
@@ -1173,6 +1177,7 @@ export function createManagerDashboard({
     if (epoch === generation) await openGate(system.systemIds[0]);
   }
   async function openGate(gate, preserveView = false) {
+    dialogs.cancel();
     const previous = connection;
     const epoch = ++generation;
     const existingContent = view.querySelector("#manager-content");
@@ -1246,7 +1251,7 @@ export function createManagerDashboard({
         } else {
           currentRows = [];
           currentData = undefined;
-          view.querySelector("#manager-content")?.replaceChildren();
+          showConnectionRecovery(gate);
           view.querySelector("#manager-tabs")?.replaceChildren();
           say(errorText(new Error(state)), true);
         }
@@ -1265,6 +1270,7 @@ export function createManagerDashboard({
     } catch (error) {
       if (epoch === generation) {
         connection?.close();
+        showConnectionRecovery(gate);
         say(errorText(error), true);
       }
     } finally {
@@ -1273,6 +1279,25 @@ export function createManagerDashboard({
         if (existingTabs) existingTabs.inert = false;
       }
     }
+  }
+  function showConnectionRecovery(gate) {
+    const card = node("section", undefined, "manager-connection-recovery");
+    card.append(
+      node("h3", t("החיבור למערכת הופסק", "Connection interrupted")),
+      node(
+        "p",
+        t(
+          "אפשר להתחבר מחדש ולקרוא את המצב העדכני. אם שלחתם שינוי, בדקו אם הוא נשמר לפני שליחתו שוב.",
+          "Reconnect to read the current state. If you sent a change, check whether it was saved before sending it again.",
+        ),
+      ),
+      button(
+        t("חיבור מחדש לשער", "Reconnect to gate"),
+        () => openGate(gate),
+        true,
+      ),
+    );
+    view.querySelector("#manager-content")?.replaceChildren(card);
   }
   const tabNames = {
     overview: ["סקירה ופתיחה", "Overview & open"],
@@ -1502,6 +1527,29 @@ export function createManagerDashboard({
   function renderFacts(content, value) {
     const grid = node("dl", undefined, "manager-facts");
     const names = {
+      systemName: t("שם מערכת", "System name"),
+      firmwareVersion: t("גרסת קושחה", "Firmware version"),
+      flashVariantMb: t("נפח Flash (MB)", "Flash capacity (MB)"),
+      targetChip: t("דגם מעבד", "Processor"),
+      uptimeSec: t("זמן פעילות (שניות)", "Uptime (seconds)"),
+      counts: t("כמויות", "Counts"),
+      health: t("תקינות", "Health"),
+      historyAvailable: t("היסטוריה זמינה", "History available"),
+      events: t("אירועים", "Events"),
+      clock: t("שעון מערכת", "System clock"),
+      credentialReplicasHealthy: t(
+        "תקינות עותקי הרשאות",
+        "Credential replicas healthy",
+      ),
+      littleFs: t("אחסון פנימי", "Internal storage"),
+      sd: t("כרטיס זיכרון", "Memory card"),
+      history: t("היסטוריה", "History"),
+      mounted: t("מחובר", "Mounted"),
+      supported: t("נתמך", "Supported"),
+      writable: t("ניתן לכתיבה", "Writable"),
+      totalBytes: t("נפח כולל (בתים)", "Total capacity (bytes)"),
+      usedBytes: t("נפח בשימוש (בתים)", "Used capacity (bytes)"),
+      freeBytes: t("נפח פנוי (בתים)", "Free capacity (bytes)"),
       users: t("משתמשים", "Users"),
       admins: t("מנהלים", "Administrators"),
       firmware: t("קושחה", "Firmware"),
@@ -1602,12 +1650,12 @@ export function createManagerDashboard({
           }),
           button(t("מחיקה", "Delete"), async () => {
             if (
-              !confirm(
+              !(await confirmAction(
                 t(
                   `למחוק את ${r.name} מהשער?`,
                   `Delete ${r.name} from the gate?`,
                 ),
-              )
+              ))
             )
               return;
             await connection.command(
@@ -1683,16 +1731,16 @@ export function createManagerDashboard({
     let state;
     const expected = config.config.command;
     if (expected === "TOGGLE" || expected === 3) {
-      state = prompt(t("בחרו ON או OFF", "Enter ON or OFF"));
+      state = await dialogs.chooseState();
       if (!["ON", "OFF"].includes(state)) return;
     }
     if (
-      !confirm(
+      !(await confirmAction(
         t(
           `לפתוח את ${currentSystem.name} (${currentGate}) עכשיו?`,
           `Open ${currentSystem.name} (${currentGate}) now?`,
         ),
-      )
+      ))
     )
       return;
     await connection.command("ADMIN_REMOTE_OPEN", {
@@ -1736,12 +1784,12 @@ export function createManagerDashboard({
         const rows = parseManagerCsv(await file.text());
         if (
           mode.value === "REPLACE" &&
-          !confirm(
+          !(await confirmAction(
             t(
               "הייבוא יחליף את כל הרשומות בקבוצה זו. להמשיך לבדיקת הקובץ?",
               "Import will replace every record in this collection. Continue to validation?",
             ),
-          )
+          ))
         )
           return;
         const revision = (
@@ -1755,8 +1803,8 @@ export function createManagerDashboard({
           mode.value,
           rows,
           revision,
-          (v) =>
-            confirm(
+          async (v) =>
+            await confirmAction(
               t(
                 `השער אימת ${v.accepted} רשומות. לשמור כעת?`,
                 `The gate validated ${v.accepted} records. Commit now?`,
@@ -1788,7 +1836,8 @@ export function createManagerDashboard({
         ],
         t("הוספה / עדכון", "Add / update"),
         async (v) => {
-          if (!confirm(t("לשמור בשער?", "Save on the gate?"))) return;
+          if (!(await confirmAction(t("לשמור בשער?", "Save on the gate?"))))
+            return;
           await connection.command(
             tab === "users" ? "ADMIN_UPSERT_USER" : "ADMIN_UPSERT_ADMIN",
             {
@@ -1845,7 +1894,12 @@ export function createManagerDashboard({
       ],
     ];
     const f = form(fields, t("שמירת הגדרות", "Save settings"), async (v) => {
-      if (!confirm(t("לשנות את הגדרות השער?", "Change gate settings?"))) return;
+      if (
+        !(await confirmAction(
+          t("לשנות את הגדרות השער?", "Change gate settings?"),
+        ))
+      )
+        return;
       const payload = { command: v.command, expectedRevision: revision };
       for (const [key] of fields.slice(1)) payload[key] = Number(v[key]);
       await connection.command("ADMIN_SET_GATE_CONFIG", payload);
@@ -1893,7 +1947,10 @@ export function createManagerDashboard({
           `${days[event[0]]} · ${time(event[2])}–${time(event[3])} · ${event[1] === 0 ? t("פתוח", "Open") : t("סגור", "Closed")}${event.length === 5 ? " · " + t("חד־פעמי", "One time") : ""}`,
         ),
         button(t("מחיקת אירוע", "Delete event"), async () => {
-          if (!confirm(t("למחוק את האירוע?", "Delete this event?"))) return;
+          if (
+            !(await confirmAction(t("למחוק את האירוע?", "Delete this event?")))
+          )
+            return;
           await connection.command("ADMIN_SET_EVENTS", {
             today: snapshot.today,
             items: snapshot.items.filter((_, i) => i !== index),
@@ -1922,7 +1979,11 @@ export function createManagerDashboard({
           end = minutes(v.end) || 1440;
         if (start >= end || start % 10 || end % 10)
           throw new Error("INVALID_EVENT");
-        if (!confirm(t("לשמור את האירוע בשער?", "Save the event on the gate?")))
+        if (
+          !(await confirmAction(
+            t("לשמור את האירוע בשער?", "Save the event on the gate?"),
+          ))
+        )
           return;
         await connection.command("ADMIN_SET_EVENTS", {
           today: snapshot.today,
@@ -1969,12 +2030,12 @@ export function createManagerDashboard({
         button(label, async () => {
           if (
             cmd.endsWith("START") &&
-            !confirm(
+            !(await confirmAction(
               t(
                 "נדרש אדם ליד השער שילחץ על השלט. להתחיל?",
                 "A person at the gate must press the remote. Start?",
               ),
-            )
+            ))
           )
             return;
           if (cmd !== "ADMIN_RF_LEARN_START" && !operationId)

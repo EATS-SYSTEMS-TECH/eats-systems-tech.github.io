@@ -1,4 +1,6 @@
 import test from "node:test";
+import { mkdir } from "node:fs/promises";
+import path from "node:path";
 import assert from "node:assert/strict";
 import { startSite } from "./platform-test-fixtures.mjs";
 
@@ -116,7 +118,8 @@ test("Manager handles repeated empty cursors and discards invitations loaded aft
           window.pageReads++;
           return { items: [], nextCursor: "repeated" };
         }
-        if(path.startsWith("/organizations?")) return {items:[],nextCursor:null};
+        if (path.startsWith("/organizations?"))
+          return { items: [], nextCursor: null };
         if (path.startsWith("/invitations?"))
           return new Promise((resolve) => {
             window.finishInvitations = () =>
@@ -294,12 +297,15 @@ test("Manager workspace supports English/Hebrew desktop/mobile, organizations an
           ),
           false,
         );
-        page.once("dialog", (dialog) => dialog.dismiss());
         await page
           .getByRole("button", {
             name: he ? "פתיחת שער" : "Open gate",
             exact: true,
           })
+          .click();
+        await page
+          .getByRole("dialog")
+          .getByRole("button", { name: he ? "ביטול" : "Cancel", exact: true })
           .click();
         assert.equal(
           (await page.evaluate(() => window.commands)).some(
@@ -307,12 +313,15 @@ test("Manager workspace supports English/Hebrew desktop/mobile, organizations an
           ),
           false,
         );
-        page.once("dialog", (dialog) => dialog.accept());
         await page
           .getByRole("button", {
             name: he ? "פתיחת שער" : "Open gate",
             exact: true,
           })
+          .click();
+        await page
+          .getByRole("dialog")
+          .getByRole("button", { name: he ? "אישור" : "Confirm", exact: true })
           .click();
         await page.waitForFunction(() =>
           window.commands.some((c) => c.cmd === "ADMIN_REMOTE_OPEN"),
@@ -325,12 +334,27 @@ test("Manager workspace supports English/Hebrew desktop/mobile, organizations an
             exact: true,
           })
           .fill("1500");
-        page.once("dialog", (dialog) => dialog.accept());
         await page
           .getByRole("button", {
             name: he ? "שמירת הגדרות" : "Save settings",
             exact: true,
           })
+          .click();
+        if (process.env.WIFIGATE_MANAGER_UI_EVIDENCE) {
+          await mkdir(process.env.WIFIGATE_MANAGER_UI_EVIDENCE, {
+            recursive: true,
+          });
+          await page.screenshot({
+            path: path.join(
+              process.env.WIFIGATE_MANAGER_UI_EVIDENCE,
+              `manager-settings-${language}-${width}.png`,
+            ),
+            fullPage: false,
+          });
+        }
+        await page
+          .getByRole("dialog")
+          .getByRole("button", { name: he ? "אישור" : "Confirm", exact: true })
           .click();
         await page.waitForFunction(() =>
           window.commands.some((c) => c.cmd === "ADMIN_SET_GATE_CONFIG"),

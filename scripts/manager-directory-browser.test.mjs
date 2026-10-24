@@ -402,13 +402,13 @@ test("Manager identity, platform overview and organization columns support scope
             { exact: true },
           )
           .waitFor();
-        page.once("dialog", (d) => d.accept());
         await page
           .getByRole("button", {
             name: he ? "ביטול גישה" : "Revoke access",
             exact: true,
           })
           .click();
+        await page.getByRole("dialog").getByRole("button", { name: he ? "אישור" : "Confirm", exact: true }).click();
         await page
           .getByText("delegate@example.test", { exact: true })
           .waitFor({ state: "hidden" });
@@ -418,13 +418,13 @@ test("Manager identity, platform overview and organization columns support scope
             exact: true,
           })
           .click();
-        page.once("dialog", (d) => d.accept());
         await page
           .locator('[data-organization="org-b"]')
           .getByRole("button", {
             name: he ? "הסרת ארגון" : "Remove organization",
           })
           .click();
+        await page.getByRole("dialog").getByRole("button", { name: he ? "אישור" : "Confirm", exact: true }).click();
         await page
           .locator('[data-organization="org-b"]')
           .waitFor({ state: "detached" });
