@@ -1281,6 +1281,7 @@ export function createManagerDashboard({
     }
   }
   function showConnectionRecovery(gate) {
+    dialogs.cancel();
     const card = node("section", undefined, "manager-connection-recovery");
     card.append(
       node("h3", t("החיבור למערכת הופסק", "Connection interrupted")),
