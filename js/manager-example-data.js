@@ -5,6 +5,7 @@ export const managerExampleSystems = Object.freeze([
     type: "gate",
     systemIds: Object.freeze(["DEMO-24980"]),
     name: "Example WIFIGATE Gate",
+    iconId: "barrier-gate-small",
     example: true,
   }),
   Object.freeze({
@@ -12,6 +13,7 @@ export const managerExampleSystems = Object.freeze([
     type: "dual-control",
     systemIds: Object.freeze(["DEMO-24981", "DEMO-24982"]),
     name: "Example WIFIGATE Dual Control",
+    iconId: "garage-small",
     example: true,
   }),
   Object.freeze({
