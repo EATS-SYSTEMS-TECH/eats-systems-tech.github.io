@@ -9,7 +9,7 @@ export function createManagerDialog({
   function cancel() {
     active?.(null);
   }
-  function ask(message, choices) {
+  function ask(message, choices, options = {}) {
     cancel();
     return new Promise((resolve) => {
       const previous = document.activeElement;
@@ -20,7 +20,7 @@ export function createManagerDialog({
       dialog.setAttribute("aria-describedby", "manager-confirm-message");
       const heading = document.createElement("h2");
       heading.id = "manager-confirm-title";
-      heading.textContent = t("אישור פעולה", "Confirm action");
+      heading.textContent = options.title ?? t("אישור פעולה", "Confirm action");
       const body = document.createElement("p");
       body.id = "manager-confirm-message";
       body.textContent = message;
@@ -46,10 +46,58 @@ export function createManagerDialog({
       };
       const dismiss = add(t("ביטול", "Cancel"), null);
       for (const choice of choices) add(choice.label, choice.value, true);
-      dialog.append(heading, body, actions);
+      dialog.append(heading, body);
+      let form;
+      if (options.fields) {
+        form = document.createElement("form");
+        form.className = "manager-form manager-create-organization-form";
+        for (const [name, text, type = "text"] of options.fields) {
+          const label = document.createElement("label"), input = document.createElement("input");
+          label.textContent = text;
+          input.name = name;
+          input.type = type;
+          input.required = true;
+          input.maxLength = type === "email" ? 254 : 100;
+          label.append(input);
+          form.append(label);
+        }
+        const error = document.createElement("p");
+        error.setAttribute("role", "alert");
+        error.className = "manager-dialog-error";
+        error.hidden = true;
+        const submit = document.createElement("button");
+        submit.type = "submit";
+        submit.className = "manager-button primary";
+        submit.textContent = options.submitLabel;
+        actions.append(submit);
+        form.append(error, actions);
+        let pending = false;
+        form.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          if (pending || active !== finish) return;
+          pending = true;
+          submit.disabled = true;
+          error.hidden = true;
+          form.setAttribute("aria-busy", "true");
+          try {
+            await options.onSubmit(Object.fromEntries(new FormData(form)));
+            finish(true);
+          } catch (failure) {
+            if (active === finish) {
+              error.textContent = options.errorText(failure);
+              error.hidden = false;
+            }
+          } finally {
+            pending = false;
+            submit.disabled = false;
+            form.removeAttribute("aria-busy");
+          }
+        });
+        dialog.append(form);
+      } else dialog.append(actions);
       dialog.addEventListener("keydown", (event) => {
         if (event.key !== "Tab") return;
-        const buttons = [...actions.querySelectorAll("button")];
+        const buttons = [...dialog.querySelectorAll("input,button")].filter(element => !element.disabled);
         const first = buttons[0],
           last = buttons.at(-1);
         if (event.shiftKey && document.activeElement === first) {
@@ -83,11 +131,13 @@ export function createManagerDialog({
       host.append(dialog);
       dialog.showModal();
       // Default focus never selects the action that writes to a physical gate.
-      dismiss.focus();
+      if (form) form.querySelector("input").focus();
+      else dismiss.focus();
     });
   }
   return {
     cancel,
+    form: (options) => ask(options.message, [], options),
     confirm: async (message) =>
       (await ask(message, [{ label: t("אישור", "Confirm"), value: true }])) ===
       true,

@@ -853,38 +853,36 @@ export function createManagerDashboard({
     if (closed || epoch !== generation) return;
     if (personal || profile.role !== "admin")
       examples.renderOrganizationCard(view);
-    if (profile.account || operator)
-      view.append(
-        form(
-          [
+    if (profile.account || operator) {
+      const create = button(t("ארגון חדש +", "New organization +"), async () => {
+        const requestId = crypto.randomUUID();
+        const created = await dialogs.form({
+          title: t("ארגון חדש", "New organization"),
+          message: t(
+            "שלושת הארגונים הראשונים חינם. מהארגון הרביעי, כל ארגון נוסף עולה $1 לחודש. התעריף מחושב לפי הארגונים שבבעלות הלקוח.",
+            "Your first 3 organizations are free. From the fourth, each additional organization costs $1 per month. Pricing is based on the organizations owned by the customer.",
+          ),
+          fields: [
             ["name", t("שם ארגון חדש", "New organization name")],
-            ...(operator
-              ? [
-                  [
-                    "email",
-                    t(
-                      "אימייל בעל הארגון · Manager user",
-                      "Organization owner email · Manager user",
-                    ),
-                    "email",
-                  ],
-                ]
-              : []),
+            ...(operator ? [["email", t("אימייל בעל הארגון · Manager user", "Organization owner email · Manager user"), "email"]] : []),
           ],
-          t("יצירת ארגון", "Create organization"),
-          async (values, f) => {
-            f.dataset.requestId ??= crypto.randomUUID();
+          submitLabel: t("יצירת ארגון", "Create organization"),
+          errorText,
+          onSubmit: async (values) => {
             await ensureRecent();
-            await api(
-              operator ? "/admin/organizations" : "/organizations",
-              "POST",
-              { ...values, requestId: f.dataset.requestId },
-            );
-            await refreshProfile();
-            await showOrganizations(personal);
+            await api(operator ? "/admin/organizations" : "/organizations", "POST", { ...values, name: values.name.trim(), requestId });
           },
-        ),
-      );
+        });
+        if (created && !closed && epoch === generation) {
+          await refreshProfile();
+          await showOrganizations(personal);
+        }
+      }, true);
+      const heading = view.querySelector("h3");
+      const bar = node("div", undefined, "manager-toolbar");
+      heading.replaceWith(bar);
+      bar.append(heading, create);
+    }
     placeManagerActions(view, language);
   }
   async function showInvitations() {

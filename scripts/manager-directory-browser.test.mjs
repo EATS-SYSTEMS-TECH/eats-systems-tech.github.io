@@ -254,6 +254,10 @@ test("Manager identity, platform overview and organization columns support scope
               return { archived: true };
             }
             if (path === "/admin/organizations" && method === "POST") {
+              if (window.failOrganizationOnce) {
+                window.failOrganizationOnce = false;
+                throw new Error("NETWORK_ERROR");
+              }
               organizations.push({
                 id: "created",
                 name: body.name,
@@ -343,9 +347,9 @@ test("Manager identity, platform overview and organization columns support scope
           .click();
         await page.locator('[data-organization="org-b"]').waitFor();
         const first = page.locator('[data-organization="org-a"]');
-        const createForm = page.locator('.manager-view > .manager-action-panel form');
+        const createForm = page.getByRole('button', { name: he ? 'ארגון חדש +' : 'New organization +', exact: true });
         const formTop = await createForm.boundingBox(), listTop = await page.locator('.manager-org-columns').boundingBox();
-        assert.ok(formTop.y + formTop.height <= listTop.y, 'organization creation precedes organization cards');
+        assert.ok(formTop.y + formTop.height <= listTop.y, 'new organization button precedes organization cards');
         assert.equal(
           await first.locator(".manager-org-count b").innerText(),
           "3",
@@ -428,6 +432,12 @@ test("Manager identity, platform overview and organization columns support scope
         await page
           .locator('[data-organization="org-b"]')
           .waitFor({ state: "detached" });
+        assert.equal(await page.getByLabel(he ? "שם ארגון חדש" : "New organization name", { exact: true }).count(), 0);
+        await page.getByRole("button", { name: he ? "ארגון חדש +" : "New organization +", exact: true }).click();
+        assert.match(await page.getByRole("dialog").innerText(), /\$1/);
+        await page.keyboard.press("Escape");
+        assert.equal(await page.getByRole("dialog").count(), 0);
+        await page.getByRole("button", { name: he ? "ארגון חדש +" : "New organization +", exact: true }).click();
         await page
           .getByLabel(he ? "שם ארגון חדש" : "New organization name", {
             exact: true,
@@ -441,6 +451,12 @@ test("Manager identity, platform overview and organization columns support scope
             { exact: true },
           )
           .fill("owner@example.test");
+        if (process.env.MANAGER_DIRECTORY_SCREENSHOTS)
+          await page.screenshot({ path: `${process.env.MANAGER_DIRECTORY_SCREENSHOTS}/manager-new-organization-${language}-${width}.png`, fullPage: true });
+        await page.evaluate(() => { window.failOrganizationOnce = true; });
+        await page.getByRole("dialog").getByRole("button", { name: he ? "יצירת ארגון" : "Create organization", exact: true }).click();
+        await page.getByRole("dialog").getByRole("alert").waitFor();
+        assert.equal(await page.getByLabel(he ? "שם ארגון חדש" : "New organization name", { exact: true }).inputValue(), "New organization");
         await page
           .getByRole("button", {
             name: he ? "יצירת ארגון" : "Create organization",
@@ -449,6 +465,10 @@ test("Manager identity, platform overview and organization columns support scope
           .click();
         await page.locator('[data-organization="created"]').waitFor();
         const calls = await page.evaluate(() => window.calls);
+        const creates = calls.filter(call => call.path === "/admin/organizations" && call.method === "POST");
+        assert.equal(creates.length, 2);
+        assert.equal(creates[0].body.requestId, creates[1].body.requestId, "retry preserves idempotency key");
+
         assert(
           calls.some(
             (c) => c.path === "/admin/organizations" && c.body.requestId,
@@ -497,7 +517,7 @@ test("Manager identity, platform overview and organization columns support scope
         assert.equal(
           await page
             .getByRole("button", {
-              name: he ? "יצירת ארגון" : "Create organization",
+              name: he ? "ארגון חדש +" : "New organization +",
               exact: true,
             })
             .count(),
