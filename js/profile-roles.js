@@ -1,5 +1,7 @@
 // The same explicit hierarchy is rendered in every product's profile popover.
 export function renderProfileRoles(container, { platformRole, product, role, roles } = {}) {
+  const identity = container.closest(".dashboard-profile-panel")?.querySelector(".dashboard-profile-identity > div");
+  identity?.querySelector(".dashboard-global-role")?.remove();
   container.replaceChildren();
   const append = (tag, text, className, parent = container) => {
     const element = document.createElement(tag);
@@ -9,7 +11,7 @@ export function renderProfileRoles(container, { platformRole, product, role, rol
     parent.append(element);
     return element;
   };
-  if (platformRole === "admin") append("span", "WIFIGATE admin", "dashboard-global-role");
+  if (platformRole === "admin") append("span", "WIFIGATE admin", "dashboard-global-role", identity ?? container);
   const name = { host: "WIFIGATE Host", pay: "WIFIGATE Pay", manager: "WIFIGATE Manager" }[product];
   if (!name) return;
   const card = append("div", "", "dashboard-profile-product-card");

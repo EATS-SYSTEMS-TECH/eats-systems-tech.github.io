@@ -121,6 +121,18 @@ test("every dashboard shares a flag selector and profile entry into My profile",
             await profile.click();
             const panel = header.locator(".dashboard-profile-panel");
             assert.equal(await panel.locator(".dashboard-global-role").innerText(), "WIFIGATE admin");
+            const identity = panel.locator('.dashboard-profile-identity');
+            assert.equal(await identity.locator('.dashboard-global-role').count(), 1);
+            assert.equal(await panel.locator('.dashboard-profile-roles .dashboard-global-role').count(), 0);
+            const avatarBox = await identity.locator('.platform-avatar').boundingBox();
+            assert.equal(avatarBox.width, 56);
+            assert.equal(avatarBox.height, 56);
+            const identityEmail = identity.getByText('fixture@example.test', {exact:true});
+            const globalRole = identity.locator('.dashboard-global-role');
+            assert.deepEqual(await globalRole.evaluate(el => {const s=getComputedStyle(el);return [s.fontSize,s.color,s.fontWeight];}), await identityEmail.evaluate(el => {const s=getComputedStyle(el);return [s.fontSize,s.color,s.fontWeight];}));
+            const emailBox = await identityEmail.boundingBox(), roleBox = await globalRole.boundingBox();
+            assert.ok(roleBox.y >= emailBox.y + emailBox.height);
+
             if (product) {
               const productName = {host:"WIFIGATE Host",pay:"WIFIGATE Pay",manager:"WIFIGATE Manager"}[product];
               assert.deepEqual(await panel.locator(".dashboard-profile-product-card").evaluate(element => [...element.children].map(child => child.textContent)), [productName, productName + " admin"]);

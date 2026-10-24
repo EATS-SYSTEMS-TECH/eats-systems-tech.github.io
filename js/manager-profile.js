@@ -49,6 +49,7 @@ export function createManagerProfile({
       if (popover.isOpen) popover.place();
     },
     clear() {
+      renderProfileRoles(find("#manager-profile-roles"));
       popover.close();
       button.disabled = true;
       for (const selector of [

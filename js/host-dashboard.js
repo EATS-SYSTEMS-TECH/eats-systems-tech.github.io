@@ -80,6 +80,7 @@ function hideProtected(sessionEnded = false) {
 function clearSession() {
   ++generation;
   identity = undefined;
+  renderProfileRoles($("#account-plan"));
   hideProtected(true);
   $("#product-switcher").closeProductSwitcher?.();
   $("#product-switcher").replaceChildren();
