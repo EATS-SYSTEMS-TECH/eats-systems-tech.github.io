@@ -1354,16 +1354,11 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       const empty = await scenario({ mySystems: [] });
       await loaded(empty.page, "my-systems");
       await empty.page
-        .getByText("Add your first system from the app.", { exact: true })
+        .getByText("No systems to display yet.", { exact: true })
         .waitFor();
       await shot(empty.page, "my-systems-empty");
-      assert.equal(
-        await empty.page
-          .locator('[data-workspace-view="my-systems"] .app-steps li')
-          .nth(2)
-          .innerText(),
-        "Tap “Add to My systems” next to the system.",
-      );
+      assert.equal(await empty.page.locator('[data-workspace-view="my-systems"] .app-steps').count(), 0);
+      await empty.page.getByText("Add a system from the WIFIGATE app to manage it here.", {exact:true}).waitFor();
       assert.deepEqual(
         [...owner.errors, ...viewer.errors, ...empty.errors],
         [],

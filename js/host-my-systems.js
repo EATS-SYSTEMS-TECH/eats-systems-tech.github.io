@@ -1,3 +1,4 @@
+import { systemsEmptyCopy } from "./systems-empty-copy.js";
 import { hostText } from "./host-locale.js";
 import { node, nameBlock } from "./host-ui.js";
 import { readHostPages } from "./host-pages.js";
@@ -10,7 +11,6 @@ import {
   notLinkedBadge,
   iconSrc,
   action,
-  appSteps,
   emptyState,
   systemsToolbar,
   countText,
@@ -126,14 +126,12 @@ export async function renderMySystems(panel, context) {
   const tip = hostText(
     "Systems you add from the WIFIGATE app. Link one to an organization to use it there.",
   );
-  if (!systems.length)
-    section.append(
-      emptyState(hostText("Add your first system from the app."), {
-        tip,
-        steps: appSteps(),
-      }),
-    );
-  else
+  if (!systems.length) {
+    const copy = systemsEmptyCopy(document.documentElement.lang);
+    const empty = node("section", undefined, { class: "empty-state systems-empty" });
+    empty.append(node("h4", copy.title), node("p", copy.description));
+    section.append(empty);
+  } else
     section.append(
       systemsToolbar(countText(systems.length), tip),
       systemGrid(systems.map((system) => card(section, system, context))),

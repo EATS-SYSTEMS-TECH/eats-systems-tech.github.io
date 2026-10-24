@@ -54,7 +54,7 @@ test("Manager personal navigation and complete sample workspaces never request r
           });
         await page.locator(".dashboard-examples > summary").waitFor();
         assert.equal(await page.locator(".manager-hero, .manager-metrics, .manager-workspace-head").count(), 0);
-        await page.getByRole("heading", { name: he ? "אין מערכות להצגה באזור זה." : "There are no systems in this area yet.", exact: true }).waitFor();
+        await page.getByRole("heading", { name: he ? "אין מערכות להצגה כרגע." : "No systems to display yet.", exact: true }).waitFor();
 
         assert.equal(await page.locator(".dashboard-examples").getAttribute("open"), null);
         assert.equal(await page.locator(".dashboard-examples").evaluate(el => el.parentElement.firstElementChild === el), true);

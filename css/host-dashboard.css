@@ -3053,3 +3053,8 @@ html[dir="rtl"] .host-app dialog.booking-sheet {
     padding: 0;
   }
 }
+
+.host-app .systems-empty { display: grid; gap: 16px; padding: clamp(28px, 5vw, 56px) 24px; text-align: center; border: 1px solid #e2e8f0; border-radius: 18px; background: #fff; }
+.host-app .systems-empty h4 { margin: 0; color: #172b46; font-size: 22px; }
+.host-app .systems-empty p { margin: 0; color: #64748b; line-height: 1.8; font-size: 14px; }
+@media (max-width: 480px) { .host-app .systems-empty { padding: 28px 20px; } .host-app .systems-empty h4 { font-size: 20px; } }

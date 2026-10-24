@@ -1,3 +1,4 @@
+import { systemsEmptyCopy } from "./systems-empty-copy.js";
 import { attachPopover } from "./popover.js";
 import { accessNoteContent } from "./manager-access-note.js";
 import { createSystemIcon } from "./wifigate-system-icons.js";
@@ -590,9 +591,9 @@ export function createManagerDashboard({
     view.append(bar);
     if (!systems.length) {
       const empty = node("section", undefined, "manager-empty manager-empty-systems");
-      empty.append(
-        node("h4", t("אין מערכות להצגה באזור זה.", "There are no systems in this area yet.")),
-      );
+      const copy = systemsEmptyCopy(he ? "he" : "en");
+      empty.append(node("h4", copy.title));
+      if (!scope && !operatorAccount) empty.append(node("p", copy.description));
       view.append(empty);
     }
     const grid = node("div", undefined, "manager-grid");
