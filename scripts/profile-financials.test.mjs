@@ -7,9 +7,9 @@ const product = (values, currency = "USD") => ({ financials: {
   monthlyCents: values.reduce((a, b) => a + b, 0),
 }});
 test("monthly costs sum separately; Pay revenue is never a subscription cost", () => {
-  const products = {host: product([600, 1200, 600, 0]), manager: product([190, 380, 570, 100]), pay: {financials: {kind: "revenue", revenue: {currency: "ILS", amountCents: 12550}}}};
+  const products = {host: product([600, 1200, 600, 0]), manager: product([190, 380, 0, 100]), pay: {financials: {kind: "revenue", revenue: {currency: "ILS", amountCents: 12550}}}};
   assert.equal(monthlyEstimate(products.host).monthlyCents, 2400);
-  assert.equal(monthlyTotal(products, "en"), "US$36.40");
+  assert.equal(monthlyTotal(products, "en"), "US$30.70");
   assert.match(revenueTotal(products.pay, "en"), /125\.50/);
 });
 test("missing, inconsistent and negative data stays unavailable instead of zero", () => {

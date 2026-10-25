@@ -547,9 +547,9 @@ function pricingExplanation(product, category) {
         organizations: "אין תוספת חודשית עבור ארגונים ב־WIFIGATE Host. העלות נקבעת לפי השערים הפיזיים הייחודיים בחשבון.",
       },
       manager: {
-        gates: "$1.90 לחודש לכל מערכת Gate מיוצאת. סנכרון חוזר של אותה מערכת אינו מוסיף עלות. אין מינימום מערכות.",
-        dualControls: "$1.90 לחודש לכל מערכת Dual Control מיוצאת, ללא תלות בכמות השערים הפיזיים שבה. אותה מערכת נספרת פעם אחת.",
-        groups: "$1.90 לחודש לכל מערכת Group מיוצאת, ללא תלות בכמות הרכיבים. מערכות נוספות שיוצאו בנפרד נספרות בנפרד.",
+        gates: "$1.90 לחודש לכל Gate, כולל שערים בתוך קבוצות. אותו שער שמופיע בכמה קבוצות או גם בנפרד נספר פעם אחת. סנכרון חוזר אינו מוסיף עלות.",
+        dualControls: "$1.90 לחודש לכל Dual Control, כולל זוגות בתוך קבוצות. זוג הוא רכיב אחד גם כשיש בו שני שערים פיזיים; אותו זוג נספר פעם אחת.",
+        groups: "לקבוצה אין תעריף נפרד. הרכיבים שבתוכה מחושבים בשורות Gate ו־Dual Control.",
         organizations: "שלושת הארגונים הפעילים הראשונים בבעלות החשבון כלולים. כל ארגון פעיל נוסף מוסיף $1 לחודש. מנהלי ארגון ללא חשבון לקוח אינם משלמים.",
       },
     },
@@ -560,9 +560,9 @@ function pricingExplanation(product, category) {
         organizations: "WIFIGATE Host has no monthly organization surcharge. Cost depends on the account's unique physical gates.",
       },
       manager: {
-        gates: "$1.90/month for each exported Gate system. Syncing the same system adds no cost. There is no minimum system fee.",
-        dualControls: "$1.90/month per exported Dual Control system, regardless of its physical gate count. The same system is counted once.",
-        groups: "$1.90/month per exported Group system, regardless of its components. Additional independently exported systems count separately.",
+        gates: "$1.90/month per Gate, including Gates inside groups. The same Gate is counted once across groups and standalone exports. Syncing adds no cost.",
+        dualControls: "$1.90/month per Dual Control, including pairs inside groups. A pair is one object despite its two physical gates; the same pair is counted once.",
+        groups: "Groups have no separate fee. Their contents contribute to Gates and Dual Controls.",
         organizations: "The first three active account-owned organizations are included. Each additional organization adds $1/month. Organization administrators without a customer account do not pay.",
       },
     },
@@ -611,7 +611,6 @@ function renderSubscriptionPreview() {
       for (const [key, he, en] of [
         ["gates", "שערים", "Gates"],
         ["dualControls", "Dual Controls", "Dual Controls"],
-        ...(id === "manager" ? [["groups", "קבוצות", "Groups"]] : []),
         ["organizations", "ארגונים", "Organizations"],
       ]) {
         const row = body.insertRow();
