@@ -547,9 +547,10 @@ function pricingExplanation(product, category) {
         organizations: "אין תוספת חודשית עבור ארגונים ב־WIFIGATE Host. העלות נקבעת לפי השערים הפיזיים הייחודיים בחשבון.",
       },
       manager: {
-        gates: "$2.90 לחודש לכל שער פיזי בבעלותך שנכלל ב־Manager, כולל רכיבי קבוצות שאינם משויכים לזוג מזוהה. לחשבון לקוח פעיל חל מינימום של שער אחד ($2.90); המינימום מופיע בשורה זו גם כשאין שער פעיל.",
-        dualControls: "Dual Control מלא כולל שני שערים פיזיים: $5.80 לחודש לזוג. זוגות שבתוך קבוצות נכללים כאן. מחושבים רק השערים הייחודיים שנכללים בשירות; חפיפה או זוג פעיל חלקית אינם יוצרים חיוב כפול.",
-        organizations: "שלושת הארגונים הפעילים הראשונים בבעלות החשבון כלולים. כל ארגון פעיל נוסף מוסיף $1 לחודש. מנהלי ארגון ללא חשבון לקוח משלם אינם משלמים על הארגון.",
+        gates: "$1.90 לחודש לכל מערכת Gate מיוצאת. סנכרון חוזר של אותה מערכת אינו מוסיף עלות. אין מינימום מערכות.",
+        dualControls: "$1.90 לחודש לכל מערכת Dual Control מיוצאת, ללא תלות בכמות השערים הפיזיים שבה. אותה מערכת נספרת פעם אחת.",
+        groups: "$1.90 לחודש לכל מערכת Group מיוצאת, ללא תלות בכמות הרכיבים. מערכות נוספות שיוצאו בנפרד נספרות בנפרד.",
+        organizations: "שלושת הארגונים הפעילים הראשונים בבעלות החשבון כלולים. כל ארגון פעיל נוסף מוסיף $1 לחודש. מנהלי ארגון ללא חשבון לקוח אינם משלמים.",
       },
     },
     en: {
@@ -559,9 +560,10 @@ function pricingExplanation(product, category) {
         organizations: "WIFIGATE Host has no monthly organization surcharge. Cost depends on the account's unique physical gates.",
       },
       manager: {
-        gates: "$2.90 per owned physical gate/month included in Manager, including group components outside recognized pairs. An active customer account has a one-gate minimum ($2.90), shown on this row even with no enabled gates.",
-        dualControls: "A complete Dual Control contains two physical gates: $5.80 per pair/month. Pairs inside groups are included here. Only unique enabled physical gates are priced; overlapping or partially enabled pairs never double-charge a gate.",
-        organizations: "The first three active account-owned organizations are included. Each additional active organization adds $1/month. Organization administrators without a paying customer account incur no organization fee.",
+        gates: "$1.90/month for each exported Gate system. Syncing the same system adds no cost. There is no minimum system fee.",
+        dualControls: "$1.90/month per exported Dual Control system, regardless of its physical gate count. The same system is counted once.",
+        groups: "$1.90/month per exported Group system, regardless of its components. Additional independently exported systems count separately.",
+        organizations: "The first three active account-owned organizations are included. Each additional organization adds $1/month. Organization administrators without a customer account do not pay.",
       },
     },
   };
@@ -609,6 +611,7 @@ function renderSubscriptionPreview() {
       for (const [key, he, en] of [
         ["gates", "שערים", "Gates"],
         ["dualControls", "Dual Controls", "Dual Controls"],
+        ...(id === "manager" ? [["groups", "קבוצות", "Groups"]] : []),
         ["organizations", "ארגונים", "Organizations"],
       ]) {
         const row = body.insertRow();
@@ -642,7 +645,7 @@ function renderSubscriptionPreview() {
         const cost = document.createElement("td");
         cost.dataset.personalCost = key;
         cost.dir = "auto";
-        const amount = estimate ? estimate.lines[key].amountCents + (key === "gates" ? estimate.lines.groups.amountCents : 0) : undefined;
+        const amount = estimate ? estimate.lines[key].amountCents + (id === "host" && key === "gates" ? estimate.lines.groups.amountCents : 0) : undefined;
         cost.textContent = formatMoney(amount, estimate?.currency, language);
         row.append(infoCell, term, value, cost);
       }

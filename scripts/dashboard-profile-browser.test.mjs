@@ -22,7 +22,7 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               pay: "active",
               productFinancials: {
                 host: estimate([8000, 2000, 0, 0], [16,2,0,1]),
-                manager: estimate([7540, 2320, 0, 0], [26,4,0,2]),
+                manager: estimate([4940, 760, 950, 0], [26,4,5,2]),
                 pay: {kind: "revenue", revenue: {currency: "ILS", amountCents: 12550}},
               },
               personalSummaries: {
@@ -223,12 +223,12 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               assert.deepEqual(
                 await card.locator("[data-personal-count]").allTextContents(),
                 productId === "host" ? ["16", "2", "1"]
-                  : productId === "manager" ? ["26", "4", "2"]
+                  : productId === "manager" ? ["26", "4", "5", "2"]
                   : [],
               );
-              assert.equal(await card.locator('[data-personal-count="groups"]').count(), 0);
+              assert.equal(await card.locator('[data-personal-count="groups"]').count(), productId === "manager" ? 1 : 0);
               if (productId !== "pay") {
-                assert.equal(await card.locator('.info-tip__button').count(), 3);
+                assert.equal(await card.locator('.info-tip__button').count(), productId === 'manager' ? 4 : 3);
                 const icons = await card.locator('.info-tip__button').evaluateAll(buttons => buttons.map(button => ({x:button.getBoundingClientRect().x, center:button.getBoundingClientRect().y + button.getBoundingClientRect().height / 2, rowCenter:button.closest('tr').getBoundingClientRect().y + button.closest('tr').getBoundingClientRect().height / 2})));
                 for (const icon of icons) {
                   assert.ok(Math.abs(icon.x - icons[0].x) < 0.5);
@@ -236,7 +236,7 @@ test("every dashboard shares a flag selector and profile entry into My profile",
                 }
                 assert.equal(await card.locator('thead th').count(), 4);
                 assert.equal(await card.locator('h3 .info-tip').count(), 0);
-                for (const key of ['gates', 'dualControls', 'organizations']) {
+                for (const key of (productId === 'manager' ? ['gates', 'dualControls', 'groups', 'organizations'] : ['gates', 'dualControls', 'organizations'])) {
                   const tip = card.locator(`[data-cost-info="${key}"]`);
                   const info = tip.locator('button');
                   assert.equal(await info.locator('svg').count(), 1);
@@ -248,7 +248,7 @@ test("every dashboard shares a flag selector and profile entry into My profile",
                   assert.equal(await bubble.isVisible(), true);
                   const rate = productId === 'host'
                     ? key === 'gates' ? /\$6/ : key === 'dualControls' ? /\$12/ : language === 'he' ? /אין תוספת/ : /no monthly organization surcharge/
-                    : key === 'gates' ? /\$2\.90/ : key === 'dualControls' ? /\$5\.80/ : /\$1/;
+                    : key === 'organizations' ? /\$1/ : /\$1\.90/;
                   assert.match(await bubble.innerText(), rate);
                   const box = await bubble.boundingBox();
                   assert.ok(box.x >= 0 && box.x + box.width <= width);
@@ -266,15 +266,15 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               assert.equal(await card.locator(".product-actions a").count(), 3);
               assert.equal(await card.locator(".product-actions > *").count(), 3);
               assert.equal(await card.locator(".product-actions > button").count(), 0);
-              assert.equal(await card.locator("[data-personal-cost]").count(), productId === "pay" ? 0 : 3);
+              assert.equal(await card.locator("[data-personal-cost]").count(), productId === "pay" ? 0 : productId === "manager" ? 4 : 3);
               assert.equal(await card.locator(".product-actions > :first-child").textContent(), language === "he" ? "פתיחה" : "Open");
             }
             assert.equal(await subscriptions.locator('[data-subscription-value="status"]').count(), 0);
             assert.match(await subscriptions.locator('[data-product="host"] [data-subscription-value="monthly"]').innerText(), /100\.00/);
-            assert.match(await subscriptions.locator('[data-product="manager"] [data-subscription-value="monthly"]').innerText(), /98\.60/);
+            assert.match(await subscriptions.locator('[data-product="manager"] [data-subscription-value="monthly"]').innerText(), /66\.50/);
             assert.equal(await subscriptions.locator('[data-product="pay"] [data-subscription-value="monthly"]').count(), 0);
             assert.match(await subscriptions.locator('[data-subscription-value="revenue"]').innerText(), /125\.50/);
-            assert.match(await page.locator('#profile-subscription-total').innerText(), /198\.60/);
+            assert.match(await page.locator('#profile-subscription-total').innerText(), /166\.50/);
             await page.mouse.move(0, 0);
             await page.keyboard.press("Escape");
             if (process.env.DASHBOARD_PREVIEW_DIR)
