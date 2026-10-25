@@ -74,7 +74,7 @@ if (!selectedProduct) {
   $(".platform-eyebrow").textContent = "MY WIFIGATE";
   $("[data-copy=intro]").textContent =
     language === "he"
-      ? "פרטים אישיים, אבטחה, מנויים ותשלומים — במקום אחד."
+      ? "פרטים אישיים, אבטחה, מנויים ותשלומים במקום אחד."
       : "Your personal details, security, subscriptions and payments in one place.";
 }
 renderPlatformLanguage(
