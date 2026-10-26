@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Discuter sur WhatsApp",
   },
   footer: {
-    tagline: "Sans clés. Sans télécommandes. Sans cartes. Un accès numérique sécurisé, sans attendre qu'on vous ouvre.",
+    tagline: "Une seule application. Toutes vos entrées. Sécurisée, chiffrée et respectueuse de votre vie privée.",
     taglineLines: [
-      "Sans clés. Sans télécommandes. Sans cartes.",
-      "Un accès numérique sécurisé, sans attendre qu'on vous ouvre.",
+      "Une seule application. Toutes vos entrées.",
+      "Sécurisée, chiffrée et respectueuse de votre vie privée.",
     ],
     legalTitle: "Informations légales",
     terms: "Conditions générales",

@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Kausapin kami sa WhatsApp",
   },
   footer: {
-    tagline: "Walang susi. Walang remote. Walang card. Ligtas na digital access, nang hindi naghihintay na may magbukas para sa inyo.",
+    tagline: "Isang app. Lahat ng pasukan ninyo. Ligtas, naka-encrypt, at pinoprotektahan ang inyong privacy.",
     taglineLines: [
-      "Walang susi. Walang remote. Walang card.",
-      "Ligtas na digital access, nang hindi naghihintay na may magbukas para sa inyo.",
+      "Isang app. Lahat ng pasukan ninyo.",
+      "Ligtas, naka-encrypt, at pinoprotektahan ang inyong privacy.",
     ],
     legalTitle: "Legal na impormasyon",
     terms: "Mga Tuntunin at Kondisyon",

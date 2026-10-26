@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Írjon nekünk WhatsAppon",
   },
   footer: {
-    tagline: "Nincs kulcs. Nincs távirányító. Nincs kártya. Biztonságos digitális belépés, és nem kell várnia, hogy valaki beengedje.",
+    tagline: "Egyetlen alkalmazás. Minden bejáratához. Biztonságos, titkosított, és óvja a magánszféráját.",
     taglineLines: [
-      "Nincs kulcs. Nincs távirányító. Nincs kártya.",
-      "Biztonságos digitális belépés, és nem kell várnia, hogy valaki beengedje.",
+      "Egyetlen alkalmazás. Minden bejáratához.",
+      "Biztonságos, titkosított, és óvja a magánszféráját.",
     ],
     legalTitle: "Jogi információk",
     terms: "Általános szerződési feltételek",

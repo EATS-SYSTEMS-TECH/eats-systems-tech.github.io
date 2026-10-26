@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Chat on WhatsApp",
   },
   footer: {
-    tagline: "No keys. No remotes. No cards. Secure digital access, without waiting for anyone to let you in.",
+    tagline: "One app. All your entrances. Secure, encrypted and built to protect your privacy.",
     taglineLines: [
-      "No keys. No remotes. No cards.",
-      "Secure digital access, without waiting for anyone to let you in.",
+      "One app. All your entrances.",
+      "Secure, encrypted and built to protect your privacy.",
     ],
     legalTitle: "Legal",
     terms: "Terms & Conditions",

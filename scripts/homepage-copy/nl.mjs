@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Chat via WhatsApp",
   },
   footer: {
-    tagline: "Geen sleutels. Geen afstandsbedieningen. Geen passen. Veilige digitale toegang, zonder te wachten tot iemand je binnenlaat.",
+    tagline: "Eén app. Al je ingangen. Veilig, versleuteld en beschermt je privacy.",
     taglineLines: [
-      "Geen sleutels. Geen afstandsbedieningen. Geen passen.",
-      "Veilige digitale toegang, zonder te wachten tot iemand je binnenlaat.",
+      "Eén app. Al je ingangen.",
+      "Veilig, versleuteld en beschermt je privacy.",
     ],
     legalTitle: "Juridisch",
     terms: "Algemene voorwaarden",

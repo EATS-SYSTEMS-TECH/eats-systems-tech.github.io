@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Habla con nosotros por WhatsApp",
   },
   footer: {
-    tagline: "Sin llaves. Sin controles remotos. Sin tarjetas. Acceso digital seguro, sin esperar a que alguien te abra.",
+    tagline: "Una sola app. Todos tus accesos. Segura, cifrada y protege tu privacidad.",
     taglineLines: [
-      "Sin llaves. Sin controles remotos. Sin tarjetas.",
-      "Acceso digital seguro, sin esperar a que alguien te abra.",
+      "Una sola app. Todos tus accesos.",
+      "Segura, cifrada y protege tu privacidad.",
     ],
     legalTitle: "Información legal",
     terms: "Términos y condiciones",

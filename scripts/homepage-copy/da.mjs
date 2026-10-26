@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Skriv til os på WhatsApp",
   },
   footer: {
-    tagline: "Ingen nøgler. Ingen fjernbetjeninger. Ingen kort. Sikker digital adgang uden at vente på, at nogen lukker dig ind.",
+    tagline: "Én app. Alle dine indgange. Sikker, krypteret og beskytter dit privatliv.",
     taglineLines: [
-      "Ingen nøgler. Ingen fjernbetjeninger. Ingen kort.",
-      "Sikker digital adgang uden at vente på, at nogen lukker dig ind.",
+      "Én app. Alle dine indgange.",
+      "Sikker, krypteret og beskytter dit privatliv.",
     ],
     legalTitle: "Juridisk information",
     terms: "Vilkår og betingelser",

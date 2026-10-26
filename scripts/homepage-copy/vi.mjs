@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Nhắn tin qua WhatsApp",
   },
   footer: {
-    tagline: "Không chìa khóa. Không remote. Không thẻ. Ra vào kỹ thuật số bảo mật, không phải chờ ai mở cửa cho bạn.",
+    tagline: "Một ứng dụng. Mọi lối vào của bạn. An toàn, mã hóa và bảo vệ quyền riêng tư của bạn.",
     taglineLines: [
-      "Không chìa khóa. Không remote. Không thẻ.",
-      "Ra vào kỹ thuật số bảo mật, không phải chờ ai mở cửa cho bạn.",
+      "Một ứng dụng. Mọi lối vào của bạn.",
+      "An toàn, mã hóa và bảo vệ quyền riêng tư của bạn.",
     ],
     legalTitle: "Thông tin pháp lý",
     terms: "Điều khoản và điều kiện",

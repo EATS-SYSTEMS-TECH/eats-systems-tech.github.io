@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Hubungi kami di WhatsApp",
   },
   footer: {
-    tagline: "Tanpa kunci. Tanpa remote. Tanpa kartu. Akses digital yang aman, tanpa harus menunggu dibukakan pintu.",
+    tagline: "Satu aplikasi. Semua pintu masuk Anda. Aman, terenkripsi, dan menjaga privasi Anda.",
     taglineLines: [
-      "Tanpa kunci. Tanpa remote. Tanpa kartu.",
-      "Akses digital yang aman, tanpa harus menunggu dibukakan pintu.",
+      "Satu aplikasi. Semua pintu masuk Anda.",
+      "Aman, terenkripsi, dan menjaga privasi Anda.",
     ],
     legalTitle: "Informasi hukum",
     terms: "Syarat & Ketentuan",

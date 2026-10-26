@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Napisz do nas na WhatsApp",
   },
   footer: {
-    tagline: "Bez kluczy. Bez pilotów. Bez kart. Bezpieczny dostęp cyfrowy, bez czekania, aż ktoś Ci otworzy.",
+    tagline: "Jedna aplikacja. Wszystkie Twoje wejścia. Bezpieczna, szyfrowana i chroni Twoją prywatność.",
     taglineLines: [
-      "Bez kluczy. Bez pilotów. Bez kart.",
-      "Bezpieczny dostęp cyfrowy, bez czekania, aż ktoś Ci otworzy.",
+      "Jedna aplikacja. Wszystkie Twoje wejścia.",
+      "Bezpieczna, szyfrowana i chroni Twoją prywatność.",
     ],
     legalTitle: "Informacje prawne",
     terms: "Regulamin",

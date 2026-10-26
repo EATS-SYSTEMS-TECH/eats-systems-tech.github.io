@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Auf WhatsApp schreiben",
   },
   footer: {
-    tagline: "Keine Schlüssel. Keine Handsender. Keine Karten. Sicherer digitaler Zutritt, ohne zu warten, bis Ihnen jemand öffnet.",
+    tagline: "Eine App. Alle Ihre Eingänge. Sicher, verschlüsselt und schützt Ihre Privatsphäre.",
     taglineLines: [
-      "Keine Schlüssel. Keine Handsender. Keine Karten.",
-      "Sicherer digitaler Zutritt, ohne zu warten, bis Ihnen jemand öffnet.",
+      "Eine App. Alle Ihre Eingänge.",
+      "Sicher, verschlüsselt und schützt Ihre Privatsphäre.",
     ],
     legalTitle: "Rechtliches",
     terms: "Allgemeine Geschäftsbedingungen",

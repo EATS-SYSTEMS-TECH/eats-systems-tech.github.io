@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Scrieți-ne pe WhatsApp",
   },
   footer: {
-    tagline: "Fără chei. Fără telecomenzi. Fără carduri. Acces digital securizat, fără să așteptați să vă deschidă cineva.",
+    tagline: "O singură aplicație. Pentru toate intrările. Sigură, criptată și vă protejează confidențialitatea.",
     taglineLines: [
-      "Fără chei. Fără telecomenzi. Fără carduri.",
-      "Acces digital securizat, fără să așteptați să vă deschidă cineva.",
+      "O singură aplicație. Pentru toate intrările.",
+      "Sigură, criptată și vă protejează confidențialitatea.",
     ],
     legalTitle: "Informații juridice",
     terms: "Termeni și condiții",

@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Keskustele WhatsAppissa",
   },
   footer: {
-    tagline: "Ei avaimia. Ei kaukosäätimiä. Ei kortteja. Turvallinen digitaalinen kulku ilman odottelua, että joku tulee avaamaan.",
+    tagline: "Yksi sovellus. Kaikki sisäänkäyntisi. Turvallinen, salattu ja suojaa yksityisyytesi.",
     taglineLines: [
-      "Ei avaimia. Ei kaukosäätimiä. Ei kortteja.",
-      "Turvallinen digitaalinen kulku ilman odottelua, että joku tulee avaamaan.",
+      "Yksi sovellus. Kaikki sisäänkäyntisi.",
+      "Turvallinen, salattu ja suojaa yksityisyytesi.",
     ],
     legalTitle: "Oikeudelliset tiedot",
     terms: "Käyttöehdot",

@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Fale connosco no WhatsApp",
   },
   footer: {
-    tagline: "Sem chaves. Sem comandos. Sem cartões. Acesso digital seguro, sem esperar que alguém lhe abra a porta.",
+    tagline: "Uma só aplicação. Todas as suas entradas. Segura, encriptada e protege a sua privacidade.",
     taglineLines: [
-      "Sem chaves. Sem comandos. Sem cartões.",
-      "Acesso digital seguro, sem esperar que alguém lhe abra a porta.",
+      "Uma só aplicação. Todas as suas entradas.",
+      "Segura, encriptada e protege a sua privacidade.",
     ],
     legalTitle: "Informação legal",
     terms: "Termos e condições",

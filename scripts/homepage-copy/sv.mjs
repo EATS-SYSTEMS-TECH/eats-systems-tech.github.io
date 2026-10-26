@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Chatta med oss på WhatsApp",
   },
   footer: {
-    tagline: "Inga nycklar. Inga fjärrkontroller. Inga kort. Säker digital åtkomst utan att behöva vänta på att någon släpper in dig.",
+    tagline: "En app. Alla dina ingångar. Säker, krypterad och skyddar din integritet.",
     taglineLines: [
-      "Inga nycklar. Inga fjärrkontroller. Inga kort.",
-      "Säker digital åtkomst utan att behöva vänta på att någon släpper in dig.",
+      "En app. Alla dina ingångar.",
+      "Säker, krypterad och skyddar din integritet.",
     ],
     legalTitle: "Juridisk information",
     terms: "Allmänna villkor",

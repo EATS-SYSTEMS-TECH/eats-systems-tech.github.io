@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Napište nám na WhatsApp",
   },
   footer: {
-    tagline: "Žádné klíče. Žádné ovladače. Žádné karty. Bezpečný digitální přístup bez čekání, až vám někdo otevře.",
+    tagline: "Jedna aplikace. Všechny vaše vjezdy i vchody. Bezpečná, šifrovaná a chrání vaše soukromí.",
     taglineLines: [
-      "Žádné klíče. Žádné ovladače. Žádné karty.",
-      "Bezpečný digitální přístup bez čekání, až vám někdo otevře.",
+      "Jedna aplikace. Všechny vaše vjezdy i vchody.",
+      "Bezpečná, šifrovaná a chrání vaše soukromí.",
     ],
     legalTitle: "Právní informace",
     terms: "Smluvní podmínky",

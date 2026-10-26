@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Pišite nam na WhatsApp",
   },
   footer: {
-    tagline: "Bez ključeva. Bez daljinskih upravljača. Bez kartica. Siguran digitalni pristup, bez čekanja da vam netko otvori.",
+    tagline: "Jedna aplikacija. Svi vaši ulazi. Sigurna, šifrirana i čuva vašu privatnost.",
     taglineLines: [
-      "Bez ključeva. Bez daljinskih upravljača. Bez kartica.",
-      "Siguran digitalni pristup, bez čekanja da vam netko otvori.",
+      "Jedna aplikacija. Svi vaši ulazi.",
+      "Sigurna, šifrirana i čuva vašu privatnost.",
     ],
     legalTitle: "Pravne informacije",
     terms: "Uvjeti i odredbe",

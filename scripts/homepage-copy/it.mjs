@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "Scrivici su WhatsApp",
   },
   footer: {
-    tagline: "Niente chiavi. Niente telecomandi. Niente tessere. Accesso digitale sicuro, senza aspettare che qualcuno ti apra.",
+    tagline: "Una sola app. Tutti i tuoi ingressi. Sicura, crittografata e rispettosa della tua privacy.",
     taglineLines: [
-      "Niente chiavi. Niente telecomandi. Niente tessere.",
-      "Accesso digitale sicuro, senza aspettare che qualcuno ti apra.",
+      "Una sola app. Tutti i tuoi ingressi.",
+      "Sicura, crittografata e rispettosa della tua privacy.",
     ],
     legalTitle: "Note legali",
     terms: "Termini e condizioni",

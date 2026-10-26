@@ -173,10 +173,10 @@ const copy = {
     whatsappButton: "WhatsApp'tan bize ulaşın",
   },
   footer: {
-    tagline: "Anahtar yok. Kumanda yok. Kart yok. Kimsenin kapıyı açmasını beklemeden, güvenli dijital erişim.",
+    tagline: "Tek uygulama. Tüm girişleriniz. Güvenli, şifreli ve gizliliğinizi korur.",
     taglineLines: [
-      "Anahtar yok. Kumanda yok. Kart yok.",
-      "Kimsenin kapıyı açmasını beklemeden, güvenli dijital erişim.",
+      "Tek uygulama. Tüm girişleriniz.",
+      "Güvenli, şifreli ve gizliliğinizi korur.",
     ],
     legalTitle: "Yasal bilgiler",
     terms: "Şartlar ve Koşullar",
