@@ -1,103 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- Host detail source fragment, consumed by buildGuestInvitesPages.
+     Shared use-case templates own the document head,hero,steps,benefits and
+     site chrome. Only these four translated detail sections are appended. -->
 
-<head>
-  <meta charset="UTF-8" />
-  <title>Automated Guest Invites API | WIFIGATE</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description"
-    content="Build and preview a WIFIGATE guest invitation API request. Add the guest details, choose access dates and times, and copy the ready-to-use URL." />
-  <meta name="author" content="EATS SYSTEMS TECH" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://wifigate.io/automation/" />
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://wifigate.io/automation/" />
-  <meta property="og:title" content="Automated Guest Invites API | WIFIGATE" />
-  <meta property="og:description"
-    content="Build and preview a WIFIGATE guest invitation API request, then copy the ready-to-use URL." />
-  <meta property="og:image" content="https://wifigate.io/assets/img/wifigate_homepage.webp" />
-
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://wifigate.io/automation/" />
-  <meta property="twitter:title" content="Automated Guest Invites API | WIFIGATE" />
-  <meta property="twitter:description"
-    content="Build and preview a WIFIGATE guest invitation API request, then copy the ready-to-use URL." />
-  <meta property="twitter:image" content="https://wifigate.io/assets/img/wifigate_homepage.webp" />
-
-  <!-- Hreflang alternates are generated per locale by the build. -->
-  <link rel="alternate" hreflang="en" href="https://wifigate.io/automation/" />
-
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
-
-
-  <link rel="stylesheet" href="../css/fonts.css?v=20261004a" />
-  <link rel="stylesheet" href="../css/styles.css?v=20261007d" />
-  <link rel="stylesheet" href="../css/accessibility.css?v=20261006b" />
-  <link rel="stylesheet" href="../css/niche.css?v=20260911a" />
-  <link rel="stylesheet" href="../css/automation.css?v=20261007c" />
-  <script src="../js/utils.js?v=20260402a" defer></script>
-  <script src="../js/navigation.js?v=20260405a" defer></script>
-  <script src="../js/accessibility-copy.js?v=20261007a" defer></script>
-  <script src="../js/accessibility.js?v=20261007a" defer></script>
-</head>
-
-<body class="niche-page wa-page">
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-
-  <div data-partial="site-header"></div>
-
-  <main class="wa-main" id="main-content">
-    <!-- ============ HERO ============ -->
-    <section class="niche-hero wa-hero" aria-labelledby="wa-hero-title">
-      <div class="niche-hero__media wa-hero__media">
-        <img src="../assets/wifigate_niche_pages/hotels-airbnb-v2-app-hero.webp" width="1280" height="720"
-          alt="" class="niche-hero__bg" loading="eager" fetchpriority="high" decoding="async" />
-        <div class="niche-hero__overlay"></div>
-      </div>
-
-      <div class="niche-hero__content container wa-hero__grid">
-        <div class="niche-hero__topbar">
-          <nav class="niche-breadcrumb" aria-label="Breadcrumb">
-            <ol class="niche-breadcrumb__list">
-              <li class="niche-breadcrumb__item">
-                <a class="niche-breadcrumb__link" href="../index.html#home"
-                  data-i18n="nav.home">Home</a>
-              </li>
-              <li class="niche-breadcrumb__item" aria-current="page">WIFIGATE Host</li>
-            </ol>
-          </nav>
-        </div>
-
-        <div class="niche-hero__text wa-hero__copy">
-          <p class="niche-hero__eyebrow" data-i18n="guestInvites.marketing.hero.eyebrow">WIFIGATE Host</p>
-          <h1 class="niche-hero__title wa-hero__title" id="wa-hero-title"
-            data-i18n="guestInvites.marketing.hero.title">Guest access that takes care of itself</h1>
-          <p class="niche-hero__lead wa-hero__lead" data-i18n="guestInvites.marketing.hero.lead">The moment a booking
-            is confirmed, WIFIGATE creates secure, time-limited access to your gate, door or garage, and it ends on
-            its own at checkout. No keys to hand over, no codes to chase, no one waiting at the entrance.</p>
-          <div class="niche-hero__actions wa-hero__actions">
-            <a class="btn btn--primary btn--hero" href="../index.html#contact"
-              data-i18n="guestInvites.marketing.hero.ctaPrimary">Talk to us</a>
-            <a class="btn btn--ghost btn--hero" href="#wa-pricing"
-              data-i18n="guestInvites.marketing.pricing.eyebrow">Pricing</a>
-          </div>
-          <ul class="niche-hero__proof">
-            <li class="niche-hero__proof-item" data-i18n="guestInvites.marketing.hero.note">For hotels, short-term
-              rentals, guesthouses and rental parking.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ AUDIENCE ============ -->
+<!-- Audience labels are translated by the caller before these exact nodes are appended. -->
     <section class="wa-audience" aria-label="Who it is for">
       <div class="container wa-audience__row">
         <span class="wa-audience__label" data-i18n="guestInvites.marketing.audience.label">Built for:</span>
@@ -108,97 +13,7 @@
       </div>
     </section>
 
-    <!-- ============ HOW IT WORKS ============ -->
-    <section class="section wa-how" id="wa-how" aria-labelledby="wa-how-title">
-      <div class="container">
-        <div class="wa-head">
-          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.steps.eyebrow">How it works</span>
-          <h2 class="wa-h2" id="wa-how-title" data-i18n="guestInvites.marketing.steps.title">From booking to open gate,
-            automatically</h2>
-          <p class="wa-lead" data-i18n="guestInvites.marketing.steps.subtitle">Three steps, and then it runs on its own
-            for every reservation.</p>
-        </div>
-        <div class="wa-steps__grid">
-          <article class="wa-step">
-            <div class="wa-step__num" aria-hidden="true">1</div>
-            <h3 class="wa-step__title" data-i18n="guestInvites.marketing.steps.s1t">A booking comes in</h3>
-            <p class="wa-step__text" data-i18n="guestInvites.marketing.steps.s1x">Your booking or property-management
-              system tells WIFIGATE a new reservation is confirmed.</p>
-          </article>
-          <article class="wa-step">
-            <div class="wa-step__num" aria-hidden="true">2</div>
-            <h3 class="wa-step__title" data-i18n="guestInvites.marketing.steps.s2t">Access is created automatically</h3>
-            <p class="wa-step__text" data-i18n="guestInvites.marketing.steps.s2x">WIFIGATE issues a secure, time-limited
-              invitation for exactly the right gate, door or garage, valid only for that stay.</p>
-          </article>
-          <article class="wa-step">
-            <div class="wa-step__num" aria-hidden="true">3</div>
-            <h3 class="wa-step__title" data-i18n="guestInvites.marketing.steps.s3t">Your guest walks straight in</h3>
-            <p class="wa-step__text" data-i18n="guestInvites.marketing.steps.s3x">They open the entrance from their phone.
-              When checkout arrives, the access expires by itself, nothing to collect or cancel.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ BENEFITS ============ -->
-    <section class="section wa-benefits" aria-labelledby="wa-benefits-title">
-      <div class="container">
-        <div class="wa-head">
-          <span class="wa-eyebrow" data-i18n="guestInvites.marketing.benefits.eyebrow">Why WIFIGATE Host</span>
-          <h2 class="wa-h2" id="wa-benefits-title" data-i18n="guestInvites.marketing.benefits.title">Less front desk. More
-            hands-off hosting.</h2>
-          <p class="wa-lead" data-i18n="guestInvites.marketing.benefits.subtitle">Everything a booking needs to become
-            access, handled for you.</p>
-        </div>
-        <div class="wa-benefits__grid">
-          <article class="wa-benefit">
-            <span class="wa-benefit__icon"><img src="../assets/wifigate_features/quick_guest_invite.svg" alt=""
-                width="30" height="30" loading="lazy" decoding="async" /></span>
-            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b1t">No keys to hand over</h3>
-            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b1x">Forget key pickups, lockboxes and
-              copied codes. Access arrives on your guest's phone the moment it is needed.</p>
-          </article>
-          <article class="wa-benefit">
-            <span class="wa-benefit__icon"><img src="../assets/wifigate_features/history.svg" alt="" width="30"
-                height="30" loading="lazy" decoding="async" /></span>
-            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b2t">Time-limited by design</h3>
-            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b2x">Every invitation opens at
-              check-in and expires at checkout, automatically, for every single stay.</p>
-          </article>
-          <article class="wa-benefit">
-            <span class="wa-benefit__icon"><img src="../assets/wifigate_features/security_privacy.svg" alt="" width="30"
-                height="30" loading="lazy" decoding="async" /></span>
-            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b3t">Encrypted and private</h3>
-            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b3x">Access is encrypted and the gate
-              works locally. Your property and your guests stay protected.</p>
-          </article>
-          <article class="wa-benefit">
-            <span class="wa-benefit__icon"><img src="../assets/wifigate_features/auto_open.svg" alt="" width="30"
-                height="30" loading="lazy" decoding="async" /></span>
-            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b4t">Works with your entrances</h3>
-            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b4x">Gates, garage doors, barriers and
-              entrance doors, WIFIGATE controls what you already have.</p>
-          </article>
-          <article class="wa-benefit">
-            <span class="wa-benefit__icon"><img src="../assets/wifigate_features/stability.svg" alt="" width="30"
-                height="30" loading="lazy" decoding="async" /></span>
-            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b5t">Scales to whole buildings</h3>
-            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b5x">From a single gate to an entire
-              complex, one invitation can cover every entrance a guest needs.</p>
-          </article>
-          <article class="wa-benefit">
-            <span class="wa-benefit__icon"><img src="../assets/wifigate_features/digital_rf_remote_learning.svg" alt=""
-                width="30" height="30" loading="lazy" decoding="async" /></span>
-            <h3 class="wa-benefit__title" data-i18n="guestInvites.marketing.benefits.b6t">Connects to your systems</h3>
-            <p class="wa-benefit__text" data-i18n="guestInvites.marketing.benefits.b6x">Plug WIFIGATE Host into
-              your booking flow, PMS or channel manager and let it run.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ SECURITY ============ -->
+<!-- Security detail cards keep their existing copy keys and media within the scoped Host wrapper. -->
     <section class="section wa-secure" aria-labelledby="wa-secure-title">
       <div class="container">
         <div class="wa-head">
@@ -229,7 +44,7 @@
       </div>
     </section>
 
-    <!-- ============ PRICING ============ -->
+<!-- Commercial details preserve plan amounts,feature labels and contact links;this fragment performs no billing. -->
     <section class="section wa-pricing" id="wa-pricing" aria-labelledby="wa-pricing-title">
       <div class="container">
         <div class="wa-head">
@@ -356,7 +171,7 @@
       </div>
     </section>
 
-    <!-- ============ FINAL CTA ============ -->
+<!-- The final contact action keeps its source fragment URL for the existing locale link rewriter. -->
     <section class="section wa-cta" aria-labelledby="wa-cta-title">
       <div class="container">
         <div class="wa-cta__box">
@@ -369,12 +184,3 @@
         </div>
       </div>
     </section>
-  </main>
-
-  <!-- Shared footer: templates/partials/site-footer.template.html -->
-  <div data-partial="site-footer"></div>
-
-  <div data-partial="accessibility-widget"></div>
-</body>
-
-</html>
