@@ -1022,3 +1022,26 @@ html[dir="rtl"] .product-switcher__label strong {
     align-items: stretch;
   }
 }
+/* The global directory is visible only after server-backed admin verification. */
+.platform-admin-management { margin-block: 1.5rem; }
+.platform-admin-counts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-block: 1rem; }
+.platform-admin-counts > div { display: flex; flex-direction: column; gap: .5rem; padding: 1rem; border: 1px solid var(--line, #dce3ed); border-radius: 12px; }
+.platform-admin-counts strong { font-size: 1.7rem; }
+.platform-admin-filters, .platform-admin-business { display: flex; flex-wrap: wrap; gap: .75rem; margin-block: 1rem; }
+.platform-admin-business a { padding: .65rem 1rem; border: 1px solid var(--line, #dce3ed); border-radius: 10px; text-decoration: none; }
+.platform-admin-filters [aria-pressed="true"] { outline: 2px solid currentColor; outline-offset: 2px; }
+.platform-admin-person { border-block-start: 1px solid var(--line, #dce3ed); padding-block: 1rem; overflow-wrap: anywhere; }
+.platform-admin-table-wrap { overflow-x: auto; }
+.platform-admin-person table { width: 100%; border-collapse: collapse; min-width: 560px; }
+.platform-admin-person caption { text-align: start; padding-block: .5rem; }
+.platform-admin-person th, .platform-admin-person td { text-align: start; padding: .75rem; border-block-end: 1px solid var(--line, #dce3ed); }
+.platform-admin-footnote { font-size: .85rem; }
+@media (max-width: 600px) {
+  .platform-admin-counts { grid-template-columns: 1fr; }
+  .platform-admin-person table { min-width: 0; }
+  .platform-admin-person thead { display: none; }
+  .platform-admin-person tbody, .platform-admin-person tr { display: block; }
+  .platform-admin-person tbody tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-block: .75rem; border: 1px solid var(--line, #dce3ed); border-radius: 10px; overflow: hidden; }
+  .platform-admin-person tbody th, .platform-admin-access { grid-column: 1 / -1; }
+  .platform-admin-person td[data-label]::before { content: attr(data-label); display: block; font-size: .8rem; margin-block-end: .4rem; }
+}

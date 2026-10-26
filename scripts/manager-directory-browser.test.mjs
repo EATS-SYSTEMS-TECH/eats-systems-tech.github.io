@@ -57,7 +57,7 @@ test("published Manager page wires the private profile into the header without d
       const tabs = page.locator('.manager-platform-tabs');
       assert.equal(await tabs.getByRole('button').count(), 5);
       assert.equal(await tabs.locator('[aria-current="page"]').innerText(), 'סקירה');
-      assert.equal(await page.locator('.manager-platform-title').innerText(), 'ניהול פלטפורמה');
+      assert.equal(await page.locator('.manager-platform-title').innerText(), 'ניהול פלטפורמה · WIFIGATE Manager');
       await tabs.getByRole('button', {name:'מנהלי פלטפורמה',exact:true}).click();
       await page.locator('.manager-directory-row').last().waitFor();
       assert.equal(await tabs.locator('[aria-current="page"]').innerText(), 'מנהלי פלטפורמה');
@@ -364,7 +364,7 @@ test("Manager identity, platform overview and organization columns support scope
         assert.equal(await nav.locator(".manager-identity").count(), 0);
         await page
           .getByRole("heading", {
-            name: he ? "ניהול פלטפורמה" : "Platform management",
+            name: he ? "ניהול פלטפורמה · WIFIGATE Manager" : "Platform management · WIFIGATE Manager",
             exact: true,
           })
           .waitFor();

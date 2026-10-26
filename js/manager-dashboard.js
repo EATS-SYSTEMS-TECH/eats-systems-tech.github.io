@@ -8,6 +8,7 @@ import { parseManagerCsv, encodeManagerCsv } from "./manager-csv.js";
 import { managerRequest } from "./api/index.js";
 import { ManagerConnection } from "./manager-connection.js";
 import { createManagerExamples } from "./manager-examples.js";
+import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
 
 const BASE = "/api/v1/manager";
 const node = (tag, text, cls) => {
@@ -43,6 +44,7 @@ export function createManagerDashboard({
       managerRequest(user, BASE + path, method, body));
   const dialogs = createManagerDialog({ language });
   const confirmAction = dialogs.confirm;
+  let planDirectory;
   let generation = 0,
     closed = false,
     profile,
@@ -182,6 +184,8 @@ export function createManagerDashboard({
     return f;
   }
   function stop() {
+    planDirectory?.close();
+    planDirectory = undefined;
     countsPopover?.close();
     countsPopover = null;
     dialogs.cancel();
@@ -266,7 +270,7 @@ export function createManagerDashboard({
       if (platformViews.includes(currentView)) {
         platformHeader.hidden = false;
         platformHeader.append(
-          node("h2", t("ניהול פלטפורמה", "Platform management"), "manager-platform-title"),
+          node("h2", t("ניהול פלטפורמה · WIFIGATE Manager", "Platform management · WIFIGATE Manager"), "manager-platform-title"),
           node("p", t("משתמשים, הרשאות וארגונים של WIFIGATE Manager.", "People, access and organizations in WIFIGATE Manager."), "manager-platform-description"),
         );
         const tabs = node("nav", undefined, "manager-platform-tabs");
@@ -420,6 +424,14 @@ export function createManagerDashboard({
       grid.append(card);
     }
     view.append(grid);
+    const details = node("details", undefined, "platform-admin-management");
+    details.append(node("summary", t("תוכניות ועלויות משתמשי Manager", "Manager user plans and costs")));
+    const directoryRoot = node("section");
+    details.append(directoryRoot);
+    view.append(details);
+    details.addEventListener("toggle", () => {
+      if (details.open && !planDirectory && !closed && epoch === generation) planDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language, product: "manager" });
+    });
   }
   async function showDirectory(role, status = "active") {
     beginView(role);

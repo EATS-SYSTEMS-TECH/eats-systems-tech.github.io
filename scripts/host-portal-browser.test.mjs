@@ -181,7 +181,7 @@ async function scenario(options = {}) {
       await route.fulfill({ status: cancel ? 200 : 201, json: { invitation: state.ownerInvitations[0] } });
       return;
     }
-    if (requestPath === "/api/v1/platform/me") {
+    if (["/api/v1/platform/me", "/api/v1/platform/login"].includes(requestPath)) {
       let host =
         state.access.state === "active"
           ? "active"
@@ -194,8 +194,7 @@ async function scenario(options = {}) {
         (!state.mfa.enrolled || !state.mfa.verified)
       )
         host = "mfa-required";
-      await route.fulfill({
-        json: {
+      const identity = {
           user: {
             uid: "fixture-user",
             email: "approved@example.test",
@@ -217,8 +216,8 @@ async function scenario(options = {}) {
                   manager: { state: "no-plan" },
                 },
               }),
-        },
-      });
+      };
+      await route.fulfill({ json: requestPath.endsWith("/login") ? { identity, attempts: { failed: 0, limit: 5, resetAt: null, lockedUntil: null } } : identity });
       return;
     }
     if (["POST", "DELETE"].includes(request.method())) {
@@ -329,6 +328,7 @@ async function scenario(options = {}) {
     });
   });
   const page = await context.newPage();
+  page.setDefaultTimeout(15000);
   return { context, page, state, calls };
 }
 async function openPortal(t) {
@@ -426,7 +426,8 @@ try {
   await admin.page.locator('#mfa-challenge input[name="code"]').fill("123456");
   await admin.page.locator('#mfa-challenge button[type="submit"]').click();
   await admin.page
-    .locator('[data-product="host"][data-state="active"] a')
+    .locator('[data-product="host"][data-state="active"]')
+    .getByRole("link", { name: "Open", exact: true })
     .click();
   await admin.page.locator('#host-sidebar [data-view-id="overview"]').click();
   await admin.page.locator("#admin-overview").waitFor({ state: "visible" });
@@ -713,7 +714,8 @@ try {
       .waitFor({ state: "visible" });
     await enroll(regular);
     await regular.page
-      .locator('[data-product="host"][data-state="active"] a')
+      .locator('[data-product="host"][data-state="active"]')
+      .getByRole("link", { name: "Open", exact: true })
       .click();
     await regular.page
       .locator("#dashboard-content")

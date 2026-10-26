@@ -33,6 +33,7 @@ import { createManagerProfile } from "./manager-profile.js";
 import { infoTip } from "./host-ui.js";
 import { renderPlatformLanguage } from "./platform-language.js";
 import { monthlyEstimate, monthlyTotal, revenueTotal, formatMoney } from "./profile-financials.js";
+import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
 
 const $ = (selector) => document.querySelector(selector);
 const language = pageLanguage();
@@ -45,6 +46,12 @@ const managerProfile = createManagerProfile({
 });
 let currentUser;
 let managerDashboard;
+let platformDirectory;
+const directoryRoot = document.createElement("section");
+directoryRoot.id = "platform-admin-management";
+directoryRoot.className = "portal-panel platform-admin-management";
+directoryRoot.hidden = true;
+(selectedProduct ? $("#product-workspace") : $("#platform-account-panel") || $("#product-workspace")).before(directoryRoot);
 let identity;
 let session;
 let generation = 0;
@@ -122,6 +129,8 @@ function clearSecret() {
 }
 
 function clearPrivate() {
+  platformDirectory?.close();
+  platformDirectory = undefined;
   managerProfile?.clear();
   managerDashboard?.close();
   managerDashboard = undefined;
@@ -371,6 +380,9 @@ async function refresh() {
         `WIFIGATE ${selectedProduct[0].toUpperCase() + selectedProduct.slice(1)}`;
       $("#platform-title").textContent = $("#product-title").textContent;
       $("#product-workspace").hidden = false;
+      if (selectedProduct === "pay" && identity.platformRole === "admin" && identity.mfa.verified) {
+        platformDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language, product: "pay" });
+      }
       if (selectedProduct === "manager") {
         managerDashboard = createManagerDashboard({
           root: $("#manager-root"),
@@ -387,7 +399,12 @@ async function refresh() {
           },
         });
       }
-    } else renderProducts();
+    } else {
+      renderProducts();
+      if (identity.platformRole === "admin" && identity.mfa.verified) {
+        platformDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language });
+      }
+    }
   } catch (error) {
     if (requestGeneration !== generation) return;
     $("#platform-status").textContent =

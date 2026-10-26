@@ -9,6 +9,7 @@ import { reauthenticate } from "./site-auth.js";
 import { requestMfaChallenge } from "./host-mfa-challenge.js";
 import { node, field, hostDateTime, viewerTimeZone } from "./host-ui.js";
 import { roleBadge, accessBadge, roleLabel } from "./host-role-badge.js";
+import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
 
 const root = document.querySelector("#admin-overview");
 const tabs = ["admins", "users", "organizations"];
@@ -24,9 +25,12 @@ let generation = 0;
 let activeDialog;
 let actionBusy = false;
 let navigationAbort;
+let planDirectory;
 export const adminActionInProgress = () => actionBusy;
 
 export function clearAdminOverview() {
+  planDirectory?.close();
+  planDirectory = undefined;
   generation++;
   navigationAbort?.abort();
   activeDialog?.close();
@@ -149,7 +153,7 @@ export async function loadAdminOverview(user, identity) {
     hidden: "",
   });
   root.append(
-    node("h1", hostText("Overview")),
+    node("h1", hostLocale.startsWith("he") ? "ניהול פלטפורמה · WIFIGATE Host" : "Platform management · WIFIGATE Host"),
     node("p", hostText("Manage Host access, people and organizations.")),
     tiles,
     toolbar,
@@ -157,6 +161,14 @@ export async function loadAdminOverview(user, identity) {
     rows,
     more,
   );
+  const billingDetails = node("details", undefined, { class: "platform-admin-management" });
+  billingDetails.append(node("summary", hostLocale.startsWith("he") ? "תוכניות ועלויות משתמשי Host" : "Host user plans and costs"));
+  const billingRoot = node("section");
+  billingDetails.append(billingRoot);
+  root.append(billingDetails);
+  billingDetails.addEventListener("toggle", () => {
+    if (billingDetails.open && !planDirectory) planDirectory = createPlatformAdminDirectory({ root: billingRoot, user, language: hostLocale.startsWith("he") ? "he" : "en", product: "host" });
+  });
 
   for (const name of tabs) {
     const button = node("button", undefined, {
