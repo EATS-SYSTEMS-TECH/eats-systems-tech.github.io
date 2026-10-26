@@ -3,11 +3,15 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { chromium } from "playwright-core";
 import { load } from "cheerio";
+import { installHomeHostPointShells } from "./host-marketing-page.mjs";
 
 const styles = await readFile(new URL("../css/styles.css", import.meta.url), "utf8");
 const accessibility = await readFile(new URL("../css/accessibility.css", import.meta.url), "utf8");
 const guestInvites = await readFile(new URL("../css/guest-invites.css", import.meta.url), "utf8");
 const homeTemplate = load(await readFile(new URL("../templates/index.template.html", import.meta.url), "utf8"));
+// Compose the same Host cards as the locale builder before mounting this CSS
+// fixture; the raw source template intentionally contains only the list slot.
+installHomeHostPointShells(homeTemplate);
 const hostPromo = homeTemplate.html(homeTemplate("#guest-invites-api"));
 const surface = ["site-header", "feature-card", "contact-cta", "where-showcase", "where-story-card",
   "where-story-card__item", "where-story-card__video-frame", "where-story-card__video-screen",
