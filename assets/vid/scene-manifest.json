@@ -186,15 +186,15 @@
       "accepted": true,
       "video": {
         "path": "assets/vid/use-cases/private-homes-720p.mp4",
-        "sha256": "a02c4bbd34df7b1a1184cfa584f7aefb2404373d9e47173a0ffe4acd57e458f9"
+        "sha256": "98facd457143cae346871d5da7bd6fb9a7a05373ae8fba6ef9e428d1cf056182"
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/private-homes-scene-hero.webp",
-        "sha256": "3889e7ebbcf90708f0115dd5b43b55b09753d94e04add2b6f30bc314a189fa77"
+        "sha256": "0ebfcec6f6054a49110b25c80774eab3637f57be4002049daa061da9acf70631"
       },
       "width": 1280,
       "height": 720,
-      "durationSeconds": 10.042,
+      "durationSeconds": 10.041667,
       "codec": "h264",
       "audioTracks": 0,
       "fastStart": true,
@@ -205,15 +205,15 @@
           "accepted": true,
           "video": {
             "path": "assets/vid/use-cases/private-homes-720p.mp4",
-            "sha256": "a02c4bbd34df7b1a1184cfa584f7aefb2404373d9e47173a0ffe4acd57e458f9"
+            "sha256": "98facd457143cae346871d5da7bd6fb9a7a05373ae8fba6ef9e428d1cf056182"
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/private-homes-scene-hero.webp",
-            "sha256": "3889e7ebbcf90708f0115dd5b43b55b09753d94e04add2b6f30bc314a189fa77"
+            "sha256": "0ebfcec6f6054a49110b25c80774eab3637f57be4002049daa061da9acf70631"
           },
           "width": 1280,
           "height": 720,
-          "durationSeconds": 10.042,
+          "durationSeconds": 10.041667,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
