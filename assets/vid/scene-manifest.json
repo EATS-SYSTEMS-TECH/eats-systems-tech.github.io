@@ -164,15 +164,15 @@
           "accepted": true,
           "video": {
             "path": "assets/vid/use-cases/desktop/hotels-airbnb-1080p.mp4",
-            "sha256": "3c0408c9acc0686f662abfd7e749997d4c7d57df3b1c54eee22111b1cd6242b7"
+            "sha256": "14718e811a933755eb1b2f0f467d67832ad6344e0816b026537478a0e17550c5"
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/desktop/hotels-airbnb-scene-hero.webp",
-            "sha256": "92017f25f78fe0607eae32a44dea46f13775fe6ba4cfb842441bd673c5479792"
+            "sha256": "05868184f8162c647dfe1f510c34539a3ca95f9debac77e8ef55c7aef1e936de"
           },
           "width": 1918,
           "height": 1080,
-          "durationSeconds": 10.042,
+          "durationSeconds": 10.041667,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
