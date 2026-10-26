@@ -464,15 +464,15 @@
           "accepted": true,
           "video": {
             "path": "assets/vid/use-cases/desktop/office-buildings-1080p.mp4",
-            "sha256": "4489d55d01ac89893dc49f84a0dbcbbf7ed026b0fc812c34fa881494918a1c49"
+            "sha256": "842224d82e6aff126c0dbba227f9543ce67c2c5c3e4b936495949f02cc1d696b"
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/desktop/office-buildings-scene-hero.webp",
-            "sha256": "9c461d60db582fdafd4ff9188e93c6d8d0725fa6434857882d75deb130916564"
+            "sha256": "e596dc9455042495bda2127a0afc9eeb77a21a9323c75fc9a4f4eb363b9ac871"
           },
           "width": 1918,
           "height": 1080,
-          "durationSeconds": 8.042,
+          "durationSeconds": 10.041667,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
