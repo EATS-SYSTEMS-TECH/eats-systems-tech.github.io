@@ -36,8 +36,12 @@ function fixture(options = {}) {
     video.playCalls++;
     if (options.rejectPlay) throw new Error("Fixture autoplay rejection");
     video.paused = false; video.ended = false; video.emit("playing");
+    await options.playResult?.(video.playCalls);
   };
-  image.decode = async () => { if (options.rejectPoster) throw new Error("Fixture poster failure"); };
+  image.decode = async () => {
+    if (options.rejectPoster) throw new Error("Fixture poster failure");
+    await options.decode?.();
+  };
   locale.textContent = options.copy ?? "{}";
   const elements = { "hero-video": video, "hero-replay": replay,
     "hero-mute-toggle": mute, "hero-pause-toggle": pause, "hero-locale-data": locale };
@@ -188,4 +192,38 @@ test("playback rejection returns to poster while a failed poster does not block 
   assert.equal(rejected.video.paused, true);
   const recovered = fixture({ rejectPoster: true }); await settle();
   assert.equal(recovered.hero.dataset.heroMediaState, "video");
+});
+
+// A media promise can settle after a later visitor request. Its completion
+// must not replace that newer request's visibility or accessible action.
+test("an older play rejection cannot stop a newer manual resume", async () => {
+  let rejectFirst;
+  const pending = new Promise((_, reject) => { rejectFirst = reject; });
+  const f = fixture({ playResult: call => call === 1 ? pending : undefined });
+  await settle();
+  assert.equal(f.video.playCalls, 1);
+  f.pause.emit("click");
+  f.pause.emit("click");
+  await settle();
+  assert.equal(f.video.playCalls, 2);
+  rejectFirst(new Error("Earlier native play rejected after visitor resume"));
+  await settle();
+  assert.equal(f.video.paused, false);
+  assert.equal(f.hero.dataset.heroMediaState, "video");
+  assert.equal(f.replay.getAttribute("aria-label"), "Pause video");
+});
+
+// Poster decoding is a second asynchronous boundary after media preparation.
+test("hiding during poster decode cancels source attachment and playback", async () => {
+  let finishDecode;
+  const pending = new Promise(resolve => { finishDecode = resolve; });
+  const f = fixture({ decode: () => pending });
+  await settle();
+  f.document.hidden = true;
+  f.document.emit("visibilitychange");
+  finishDecode();
+  await settle();
+  assert.equal(f.video.getAttribute("src"), null);
+  assert.equal(f.video.playCalls, 0);
+  assert.equal(f.hero.dataset.heroMediaState, "image");
 });
