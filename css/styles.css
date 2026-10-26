@@ -697,6 +697,8 @@ ul {
   outline-offset: 3px;
 }
 
+/* The text layer passes empty-space taps to media; its descendants restore
+   interaction. Desktop stacking is raised later without changing hit testing. */
 .hero__content {
   position: relative;
   z-index: 2;
@@ -708,6 +710,7 @@ ul {
   pointer-events: none;
 }
 
+/* Limit readable copy width and keep translated text/actions in the hero font. */
 .hero__text {
   max-width: 42rem;
   font-family: "Day One", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -721,6 +724,7 @@ ul {
   pointer-events: auto;
 }
 
+/* Heading and supporting copy retain independent responsive type scales. */
 .hero__title {
   font-size: clamp(2.5rem, 4vw, 4rem);
   line-height: 1.05;
@@ -741,26 +745,15 @@ ul {
 }
 
 @media (max-width: 768px) {
-  .hero {
-    min-height: 100vh;
-    min-height: 100svh;
-    display: flex;
-    align-items: center;
-  }
-
+  /* Narrow screens use the base full-height hero and crop; only the poster
+     enlargement and media minimum differ from the shared desktop frame. */
   .hero__media {
-    position: absolute;
-    inset: 0;
     aspect-ratio: auto;
     min-height: 100%;
   }
 
   .hero__bg {
     transform: none;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
   }
 
   .hero__overlay {
@@ -769,10 +762,10 @@ ul {
       linear-gradient(180deg, rgba(2, 6, 23, 0.12) 0%, rgba(2, 6, 23, 0.3) 100%);
   }
 
+  /* Later phone rules own block padding and minimum height. Keep only the
+     inline inset here instead of earlier values that can never take effect. */
   .hero__content {
-    min-height: 100vh;
-    min-height: 100svh;
-    padding: 5.5rem 1rem 3rem;
+    padding-inline: 1rem;
     background: none;
   }
 
@@ -804,6 +797,8 @@ ul {
   }
 }
 
+/* Actions wrap independently from copy width; the later phone overrides
+   retain their original order and greater-specificity row exception. */
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
@@ -815,6 +810,7 @@ ul {
   backdrop-filter: blur(10px);
 }
 
+/* Accepted scene artwork alone receives input and rises above inactive art. */
 .hero-system.is-active {
   opacity: 1;
   transform: translate(-50%, -50%) translateX(0) scale(1);
@@ -831,6 +827,8 @@ ul {
   gap: 1.75rem;
 }
 
+/* A centered column owns the card frame. Media has a separate clipping box,
+   so hover elevation cannot change the image crop or the reading width. */
 .feature-card {
   background-color: var(--color-surface);
   border-radius: var(--radius-lg);
@@ -857,6 +855,7 @@ ul {
   background-color: #f9fbff;
 }
 
+/* Center intrinsic artwork inside a fixed-ratio, independently clipped panel. */
 .feature-card__media {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -872,9 +871,12 @@ ul {
   padding: 0.9rem;
 }
 
+/* One local size drives the default square; explicit variant widths/heights
+   below remain authoritative, including natural-height history screenshots. */
 .feature-card__image {
-  width: 88%;
-  height: 88%;
+  --feature-artwork-size: 88%;
+  width: var(--feature-artwork-size);
+  height: var(--feature-artwork-size);
   object-fit: contain;
   object-position: center;
   display: block;
@@ -883,6 +885,7 @@ ul {
   filter: drop-shadow(0 18px 34px rgba(20, 99, 255, 0.14));
 }
 
+/* Elevating the card also lifts/enlarges its artwork without reflow. */
 .feature-card:hover .feature-card__image {
   transform: translateY(-2px) scale(1.04);
   filter: drop-shadow(0 24px 40px rgba(20, 99, 255, 0.18));
@@ -998,10 +1001,16 @@ ul {
   }
 }
 
+/* Both reading roles are centered; heading balance and bounded body measure
+   remain separate so long translations keep the existing line breaks. */
+.feature-card__title,
+.feature-card__text {
+  text-align: center;
+}
+
 .feature-card__title {
   font-size: 1rem;
   margin: 0 0 0.45rem;
-  text-align: center;
   text-wrap: balance;
 }
 
@@ -1009,7 +1018,6 @@ ul {
   font-size: 0.93rem;
   line-height: 1.55;
   color: var(--color-text-muted);
-  text-align: center;
   margin: 0;
   max-width: 30ch;
 }
@@ -1061,6 +1069,7 @@ ul {
 }
 
 /* ================= CONTACT ================= */
+/* The contact band clips decorative overflow and supplies a dark reading surface. */
 .section#contact {
   overflow: hidden;
   position: relative;
@@ -1076,11 +1085,13 @@ ul {
   white-space: pre-line;
 }
 
+/* Keep contact content above decoration without changing its normal flow. */
 .section#contact .container {
   position: relative;
   z-index: 1;
 }
 
+/* Center the options heading while retaining the more-specific dark-band text colors. */
 .contact-options__header {
   text-align: center;
 }
@@ -1094,6 +1105,7 @@ ul {
   line-height: 1.6;
 }
 
+/* Contact choices use three equal columns and collapse at the original phone breakpoint. */
 .contact-options {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1101,6 +1113,7 @@ ul {
   margin-top: clamp(2rem, 4vw, 3.2rem);
 }
 
+/* Each contact choice stretches its content and leaves free space above the bottom action. */
 .contact-option-card {
   display: flex;
   min-height: 335px;
@@ -1115,20 +1128,23 @@ ul {
   text-align: start;
 }
 
+/* A single icon size keeps the glyph and its centered frame square. */
 .contact-option-card__icon {
+  --contact-icon-size: 3rem;
   display: grid;
-  width: 3rem;
-  height: 3rem;
+  width: var(--contact-icon-size);
+  height: var(--contact-icon-size);
   margin-inline: auto;
   place-items: center;
   color: var(--color-primary);
 }
 
 .contact-option-card__icon svg {
-  width: 3rem;
-  height: 3rem;
+  width: var(--contact-icon-size);
+  height: var(--contact-icon-size);
 }
 
+/* Choice headings balance against the quieter body copy without changing reading direction. */
 .contact-option-card__title {
   margin: 0;
   color: #1e293b;
@@ -1145,6 +1161,7 @@ ul {
   line-height: 1.6;
 }
 
+/* Email and button actions share geometry; only buttons animate and primary actions darken on hover. */
 .contact-option-card__button,
 .contact-option-card__email {
   display: inline-flex;
@@ -1190,6 +1207,7 @@ ul {
   color: var(--color-primary-dark);
 }
 
+/* The legacy form keeps an independent raised surface for pages that still render it. */
 .contact-form {
   background-color: var(--color-surface);
   border-radius: var(--radius-lg);
@@ -1224,6 +1242,7 @@ ul {
   }
 }
 
+/* Form feedback follows the form without inheriting the option-card action sizing. */
 .contact-form__status {
   margin-top: 0.6rem;
   font-size: 0.85rem;
@@ -1231,27 +1250,42 @@ ul {
 }
 
 /* ================= FOOTER ================= */
+/* One shared skin owns every page type. Consolidating formerly unconditional
+   end-of-file overrides here removes dead colors without changing the cascade. */
 .site-footer {
   border-top: 0;
-  padding: 3.3rem 0 1.7rem;
-  background: var(--color-footer-background);
+  padding: 5rem 0 2rem;
+  background: #0a0a0a;
   color: #ffffff;
   /* direction follows the page locale via the dir attribute set at build time */
 }
 
+/* Footer reading roles share muted ink; hover and headings keep their own
+   later declarations. Explicit class selectors retain original specificity. */
+.site-footer__brand-copy,
+.site-footer__link,
+.site-footer__support,
+/* Copyright spans the full grid width below a separate divider. */
+.site-footer__copy {
+  color: #a4a4a4;
+}
+
+/* Desktop columns shrink safely; later breakpoints retain their exact order. */
 .site-footer__inner {
   display: grid;
   grid-template-columns: minmax(14rem, 1.4fr) repeat(3, minmax(10rem, 1fr));
-  gap: clamp(1.5rem, 4vw, 3.5rem);
+  gap: 3.5rem 2rem;
   align-items: start;
   text-align: start;
 }
 
+/* Allow long localized column content to shrink within its grid track. */
 .site-footer__column {
   min-width: 0;
   align-self: start;
 }
 
+/* Keep brand artwork and introductory copy aligned with the page direction. */
 .site-footer__brand {
   display: flex;
   align-items: center;
@@ -1260,23 +1294,26 @@ ul {
   margin-bottom: 1.1rem;
 }
 
+/* The monochrome logo retains its intrinsic ratio and responsive width overrides. */
 .site-footer__logo {
   width: min(12rem, 72%);
   height: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1);
+  filter: grayscale(1) brightness(0) invert(1);
 }
 
+/* Brand copy uses the shared muted ink and preserves translated line breaks. */
 .site-footer__brand-copy {
-  max-width: 18rem;
+  max-width: none;
+  text-wrap: pretty;
   margin: 0;
-  color: rgba(226, 232, 240, 0.82);
   font-size: 0.96rem;
   font-weight: 400;
   line-height: 1.65;
   white-space: pre-line;
 }
 
+/* Footer section headings remain bright and stronger than their link lists. */
 .site-footer__heading {
   margin: 0 0 1.15rem;
   color: #ffffff;
@@ -1286,6 +1323,7 @@ ul {
   letter-spacing: 0;
 }
 
+/* Navigation links stack with a fixed reading rhythm; pointer feedback never reflows them. */
 .site-footer__links {
   display: flex;
   flex-direction: column;
@@ -1294,7 +1332,6 @@ ul {
 }
 
 .site-footer__link {
-  color: rgba(203, 213, 225, 0.86);
   font-size: 0.95rem;
   font-weight: 400;
   line-height: 1.45;
@@ -1309,6 +1346,7 @@ ul {
   transform: translateX(-1px);
 }
 
+/* Store badges wrap while retaining the fixed badge widths and compact icon spacing. */
 .site-footer__stores {
   display: flex;
   flex-wrap: wrap;
@@ -1317,6 +1355,7 @@ ul {
   margin-bottom: 1.05rem;
 }
 
+/* Store links share the final dark skin, border and hover state on every page. */
 .site-footer__store {
   display: inline-flex;
   align-items: center;
@@ -1326,12 +1365,12 @@ ul {
   gap: 0.5rem;
   min-height: 3rem;
   padding: 0.48rem 0.78rem;
-  border: 1px solid rgba(216, 232, 245, 0.28);
-  border-radius: 0.45rem;
-  background: rgba(15, 23, 42, 0.76);
+  border: 1px solid #383838;
+  border-radius: 4px;
+  background: #151515;
   color: #ffffff;
   text-decoration: none;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: none;
   transition:
     border-color var(--transition-fast),
     background-color var(--transition-fast),
@@ -1339,9 +1378,9 @@ ul {
 }
 
 .site-footer__store:hover {
-  border-color: rgba(255, 255, 255, 0.42);
-  background: rgba(30, 41, 59, 0.86);
-  transform: translateY(-1px);
+  border-color: #676767;
+  background: #222222;
+  transform: none;
 }
 
 .site-footer__store svg,
@@ -1350,6 +1389,7 @@ ul {
   flex: 0 0 auto;
 }
 
+/* Badge captions keep their compact two-line type hierarchy. */
 .site-footer__store-text {
   display: grid;
   gap: 0.05rem;
@@ -1368,11 +1408,11 @@ ul {
   font-weight: 750;
 }
 
+/* Support links keep their existing inline alignment and white hover feedback. */
 .site-footer__support {
   display: inline-flex;
   align-items: center;
   gap: 0.48rem;
-  color: rgba(203, 213, 225, 0.9);
   font-size: 0.95rem;
   font-weight: 400;
   line-height: 1.45;
@@ -1385,6 +1425,7 @@ ul {
 }
 
 
+/* Social actions wrap as square controls without stretching icons. */
 .site-footer__socials {
   display: flex;
   flex-wrap: wrap;
@@ -1399,10 +1440,11 @@ ul {
   width: 2.35rem;
   height: 2.35rem;
   place-items: center;
-  border: 1px solid rgba(216, 232, 245, 0.24);
-  border-radius: 999px;
+  border: 1px solid #383838;
+  border-radius: 4px;
   color: #ffffff;
-  background: rgba(15, 23, 42, 0.6);
+  background: #151515;
+  box-shadow: none;
   transition:
     background-color var(--transition-fast),
     border-color var(--transition-fast),
@@ -1410,9 +1452,9 @@ ul {
 }
 
 .site-footer__social-link:hover {
-  border-color: rgba(255, 255, 255, 0.58);
-  background: rgba(14, 165, 233, 0.18);
-  transform: translateY(-1px);
+  border-color: #676767;
+  background: #222222;
+  transform: none;
 }
 
 .site-footer__copy {
@@ -1420,7 +1462,6 @@ ul {
   margin: 0;
   padding-top: 1.45rem;
   border-top: 1px solid rgba(216, 232, 245, 0.18);
-  color: #ffffff;
   font-size: 0.9rem;
   font-weight: 650;
   text-align: center;
@@ -1868,26 +1909,15 @@ html[dir="rtl"] .where-story-card__video-meta {
 }
 
 @media (min-width: 769px) {
-  .hero {
-    min-height: 100vh;
-    min-height: 100svh;
-    display: flex;
-    align-items: center;
-  }
-
+  /* Base coverage/alignment already applies. Keep the desktop media minimum
+     and content geometry here so they override the earlier 960px rules. */
   .hero__media {
-    position: absolute;
-    inset: 0;
     min-height: 0;
     aspect-ratio: auto;
   }
 
   .hero__content {
-    position: relative;
     z-index: 4;
-    display: flex;
-    align-items: center;
-    width: 100%;
     min-height: 100vh;
     min-height: 100svh;
     max-width: var(--container-width);
@@ -1897,17 +1927,6 @@ html[dir="rtl"] .where-story-card__video-meta {
     background: none;
   }
 
-  .hero__text {
-    max-width: 42rem;
-  }
-
-  .hero__title {
-    font-size: clamp(2.5rem, 4vw, 4rem);
-  }
-
-  .hero__subtitle {
-    font-size: 1.15rem;
-  }
 }
 
 /* ================= RESPONSIVE SCALING ================= */
@@ -2052,10 +2071,6 @@ html[dir="rtl"] .where-story-card__video-meta {
 }
 
 @media (max-width: 480px) {
-  .site-footer {
-    padding-top: 2.6rem;
-  }
-
   .site-footer__inner {
     grid-template-columns: 1fr;
   }
@@ -2068,57 +2083,8 @@ html[dir="rtl"] .where-story-card__video-meta {
     width: min(11rem, 78%);
   }
 }
-/* ================= SHARED FOOTER SKIN =================
-   One skin for the shared footer partial on every page type: homepage,
-   use-case pages, WIFIGATE Host and the legal pages. Do NOT re-declare
-   these under a page-scoped class (.home-en, .niche-page, ...) - that is what
-   let the footer drift apart in the first place. */
-.site-footer {
-  padding: 5rem 0 2rem;
-  color: #ffffff;
-  background: #0a0a0a;
-}
-
-.site-footer__inner {
-  gap: 3.5rem 2rem;
-}
-
-.site-footer__brand-copy {
-  max-width: none;
-  text-wrap: pretty;
-}
-
-.site-footer__logo {
-  filter: grayscale(1) brightness(0) invert(1);
-}
-
-.site-footer__brand-copy,
-.site-footer__link,
-.site-footer__support,
-.site-footer__copy {
-  color: #a4a4a4;
-}
-
-.site-footer__heading {
-  color: #ffffff;
-  letter-spacing: 0;
-}
-
-.site-footer__store,
-.site-footer__social-link {
-  border-color: #383838;
-  border-radius: 4px;
-  background: #151515;
-  box-shadow: none;
-}
-
-.site-footer__store:hover,
-.site-footer__social-link:hover {
-  border-color: #676767;
-  background: #222222;
-  transform: none;
-}
-
+/* Shared footer geometry continues below; page-specific stylesheets keep
+   their existing later cascade position on home, use-case, Host and legal pages. */
 /* Second support row in the shared footer partial, on every page type. */
 .site-footer__whatsapp {
   display: flex;
