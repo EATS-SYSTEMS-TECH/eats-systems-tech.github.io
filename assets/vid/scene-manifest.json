@@ -306,15 +306,15 @@
       "accepted": true,
       "video": {
         "path": "assets/vid/use-cases/entry-doors-magnetic-locks-720p.mp4",
-        "sha256": "0b74f646b19a4de9870ca314b7a9de32733c63f7106c10d776d185fa994c5310"
+        "sha256": "57c13474dd156b6a2bc69c921c11464c34362ddddb55124f1339c1e2594208b4"
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/entry-doors-magnetic-locks-scene-hero.webp",
-        "sha256": "885fe746448e8ef245084a9e4c5c15aae34ccbb176e66247926d0ec8031826f8"
+        "sha256": "cdd97976045cd04a2af4268dcb0f26fdd22cfd9c68f921bf1e859656ac924cdf"
       },
       "width": 1280,
       "height": 720,
-      "durationSeconds": 10.042,
+      "durationSeconds": 8.041667,
       "codec": "h264",
       "audioTracks": 0,
       "fastStart": true,
@@ -325,15 +325,15 @@
           "accepted": true,
           "video": {
             "path": "assets/vid/use-cases/entry-doors-magnetic-locks-720p.mp4",
-            "sha256": "0b74f646b19a4de9870ca314b7a9de32733c63f7106c10d776d185fa994c5310"
+            "sha256": "57c13474dd156b6a2bc69c921c11464c34362ddddb55124f1339c1e2594208b4"
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/entry-doors-magnetic-locks-scene-hero.webp",
-            "sha256": "885fe746448e8ef245084a9e4c5c15aae34ccbb176e66247926d0ec8031826f8"
+            "sha256": "cdd97976045cd04a2af4268dcb0f26fdd22cfd9c68f921bf1e859656ac924cdf"
           },
           "width": 1280,
           "height": 720,
-          "durationSeconds": 10.042,
+          "durationSeconds": 8.041667,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
