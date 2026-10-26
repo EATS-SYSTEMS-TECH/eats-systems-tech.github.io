@@ -25,6 +25,7 @@ import { applyMediaWatermarks } from "./media-watermark.mjs";
 import { setNicheList } from "./niche-text-list.mjs";
 import { rewriteNicheHomeAnchors } from "./niche-links.mjs";
 import { buildRedirectPage } from "./redirect-page.mjs";
+import { previousSitemapDates, sitemapDocument } from "./sitemap.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = SITE_ORIGIN;
@@ -1035,36 +1036,12 @@ async function writeOutputFile(filePath, content) {
 // build rewrote, otherwise the date the previous sitemap gave it.
 async function readPreviousLastmods() {
   const previous = await fs.readFile(path.join(repoRoot, "sitemap.xml"), "utf8").catch(() => "");
-  return new Map([...previous.matchAll(/<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
-}
-
-function pageFileForUrl(url) {
-  return path.resolve(repoRoot, `.${new URL(url).pathname}`, "index.html");
+  return previousSitemapDates(previous);
 }
 
 function buildSitemap(urlEntries, previousLastmods) {
-  for (const entry of urlEntries) {
-    const changed = changedFiles.has(pageFileForUrl(entry.loc));
-    entry.lastmod = entry.lastmod || (!changed && previousLastmods.get(entry.loc)) || nowDate;
-  }
-  const lines = [
-    '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-    ...urlEntries.map(
-      (entry) => [
-        "  <url>",
-        `    <loc>${entry.loc}</loc>`,
-        `    <lastmod>${entry.lastmod}</lastmod>`,
-        `    <changefreq>${entry.changefreq}</changefreq>`,
-        `    <priority>${entry.priority}</priority>`,
-        "  </url>",
-      ].join("\n")
-    ),
-    "</urlset>",
-    "",
-  ];
-
-  return lines.join("\n");
+  // Bind the existing build snapshot without changing its write/date policy.
+  return sitemapDocument(urlEntries, previousLastmods, { repoRoot, changedFiles, nowDate });
 }
 
 async function buildHomePages(homeData) {
