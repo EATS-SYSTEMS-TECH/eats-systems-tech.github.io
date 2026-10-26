@@ -18,6 +18,7 @@ export function createPlatformAdminDirectory({
   user,
   language,
   product = "all",
+  standalone = false,
 }) {
   const t = (he, en) => (language === "he" ? he : en);
   let closed = false,
@@ -25,13 +26,16 @@ export function createPlatformAdminDirectory({
     selected = "all",
     next;
   root.hidden = false;
+  root.dataset.standalone = String(standalone);
   const productName =
     product === "all"
       ? "WIFIGATE"
       : `WIFIGATE ${product[0].toUpperCase() + product.slice(1)}`;
   const title = element(
     "h2",
-    t("ניהול פלטפורמה", "Platform management") +
+    (standalone
+      ? t("חשבונות והרשאות", "People and access")
+      : t("ניהול פלטפורמה", "Platform management")) +
       (product === "all" ? "" : ` · ${productName}`),
   );
   const note = element(
@@ -78,33 +82,88 @@ export function createPlatformAdminDirectory({
   const refresh = element("button", t("רענון", "Refresh"), "platform-button");
   refresh.type = "button";
   refresh.addEventListener("click", () => void load());
+  const header = element("div", null, "platform-admin-directory-heading");
+  const heading = element("div");
+  heading.append(title, note);
+  header.append(heading, refresh);
+  const products = element("section", null, "platform-admin-products");
+  products.append(businessTitle, business);
+  const listHeading = element("h3", t("משתמשי הפלטפורמה", "Platform accounts"));
+  const hint = element(
+    "p",
+    t(
+      "פתחו חשבון כדי לראות תוכניות ועלויות לפי מוצר.",
+      "Open an account to see plans and costs by product.",
+    ),
+    "platform-admin-list-hint",
+  );
+  const footnote = element(
+    "p",
+    t(
+      "הסכומים הם אומדנים לפני מס. — מציין נתון שאינו זמין; נתוני הכנסות Pay עדיין אינם מאומתים.",
+      "Amounts are estimates before tax. — means unavailable; Pay revenue data is not verified yet.",
+    ),
+    "platform-admin-footnote",
+  );
   root.replaceChildren(
-    title,
-    note,
+    header,
     counts,
-    businessTitle,
-    business,
+    products,
+    listHeading,
+    hint,
     filters,
-    refresh,
     status,
     rows,
     more,
+    footnote,
   );
 
   function personCard(person) {
-    const card = element("article", null, "platform-admin-person");
-    card.append(element("h3", person.name || person.email));
-    const email = element("p", person.email);
-    email.dir = "ltr";
-    card.append(
-      email,
-      element(
-        "p",
-        `${productName} ${person.role === "admin" ? "Admin" : "User"}`,
-      ),
+    const card = element("details", null, "platform-admin-person");
+    const summary = element("summary", null, "platform-admin-person-summary");
+    const avatar = element(
+      "span",
+      (person.name || person.email)
+        .trim()
+        .slice(0, 1)
+        .toLocaleUpperCase(language),
+      "platform-admin-avatar",
     );
+    avatar.setAttribute("aria-hidden", "true");
+    const identity = element("span", null, "platform-admin-person-identity");
+    identity.append(element("strong", person.name || person.email));
+    const email = element("span", person.email);
+    email.dir = "ltr";
+    identity.append(email);
+    const badge = element(
+      "span",
+      person.role === "admin" ? t("מנהל", "Admin") : t("משתמש", "User"),
+      "platform-admin-role",
+    );
+    badge.dataset.role = person.role;
+    const total =
+      product === "all"
+        ? monthlyTotal(person.products, language)
+        : formatMoney(
+            monthlyEstimate(person.products[product])?.monthlyCents,
+            monthlyEstimate(person.products[product])?.currency,
+            language,
+          );
+    const price = element("span", null, "platform-admin-person-price");
+    const value = element(
+      "strong",
+      person.identityStatus === "verified" ? total : "—",
+    );
+    value.dir = "auto";
+    price.append(element("small", t("אומדן לחודש", "Monthly estimate")), value);
+    const chevron = element("span", "⌄", "platform-admin-chevron");
+    chevron.setAttribute("aria-hidden", "true");
+    summary.append(avatar, identity, badge, price, chevron);
+    card.append(summary);
+    const content = element("div", null, "platform-admin-person-content");
+    card.append(content);
     if (person.identityStatus !== "verified") {
-      card.append(
+      content.append(
         element(
           "p",
           t(
@@ -184,30 +243,14 @@ export function createPlatformAdminDirectory({
       row.append(amount);
     }
     tableWrap.append(table);
-    card.append(tableWrap);
-    if (product === "all") {
-      card.append(
-        element(
-          "p",
-          `${t("סה״כ אומדן חודשי Host ו־Manager", "Total Host and Manager monthly estimate")}: ${monthlyTotal(person.products, language)}`,
-        ),
-      );
-    }
-    card.append(
-      element(
-        "p",
-        t(
-          "Pay: נתוני גבייה והכנסות מאומתים עדיין אינם זמינים. — פירושו שהנתון אינו זמין.",
-          "Pay: verified payment and revenue data is not available yet. — means unavailable.",
-        ),
-        "platform-admin-footnote",
-      ),
-    );
+    content.append(tableWrap);
     return card;
   }
 
   async function load(append = false) {
     const epoch = ++generation;
+    root.setAttribute("aria-busy", "true");
+    refresh.disabled = true;
     if (!append) {
       rows.replaceChildren();
       next = null;
@@ -264,6 +307,11 @@ export function createPlatformAdminDirectory({
                   "הנתונים אינם זמינים כרגע. אפשר לנסות לרענן.",
                   "Data is currently unavailable. Try refreshing.",
                 );
+      }
+    } finally {
+      if (!closed && epoch === generation) {
+        root.setAttribute("aria-busy", "false");
+        refresh.disabled = false;
       }
     }
   }

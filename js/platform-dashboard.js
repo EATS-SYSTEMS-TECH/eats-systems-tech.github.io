@@ -39,6 +39,7 @@ const $ = (selector) => document.querySelector(selector);
 const language = pageLanguage();
 const copy = platformText(language);
 const selectedProduct = document.body.dataset.product;
+const managementPage = document.body.dataset.platformView === "management";
 const managerProfile = createManagerProfile({
   root: $("#manager-profile"),
   language,
@@ -52,6 +53,21 @@ directoryRoot.id = "platform-admin-management";
 directoryRoot.className = "portal-panel platform-admin-management";
 directoryRoot.hidden = true;
 (selectedProduct ? $("#product-workspace") : $("#platform-account-panel") || $("#product-workspace")).before(directoryRoot);
+const managementEntry = document.createElement("a");
+managementEntry.id = "platform-management-entry";
+managementEntry.className = "platform-management-entry";
+managementEntry.href = language === "he" ? "/dashboard/platform/?lang=he" : "/dashboard/platform/";
+managementEntry.hidden = true;
+const entryIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+entryIcon.setAttribute("viewBox", "0 0 24 24");
+entryIcon.setAttribute("aria-hidden", "true");
+const entryShape = document.createElementNS("http://www.w3.org/2000/svg", "path");
+entryShape.setAttribute("d", "M12 3 20 6v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Zm-3 9 2 2 4-4");
+entryIcon.append(entryShape);
+const entryLabel = document.createElement("span");
+entryLabel.textContent = language === "he" ? "ניהול פלטפורמה" : "Platform management";
+managementEntry.append(entryIcon, entryLabel);
+document.body.append(managementEntry);
 let identity;
 let session;
 let generation = 0;
@@ -75,14 +91,26 @@ for (const node of document.querySelectorAll("[data-profile-en]"))
   node.textContent =
     language === "he" ? node.dataset.profileHe : node.dataset.profileEn;
 if (!selectedProduct) {
-  const title = language === "he" ? "הפרופיל שלי" : "My profile";
+  const title = managementPage
+    ? language === "he" ? "ניהול פלטפורמה" : "Platform management"
+    : language === "he" ? "הפרופיל שלי" : "My profile";
   $("#platform-title").textContent = title;
   document.title = `${title} | WIFIGATE`;
-  $(".platform-eyebrow").textContent = "MY WIFIGATE";
+  $(".platform-eyebrow").textContent = managementPage ? "WIFIGATE ADMIN" : "MY WIFIGATE";
   $("[data-copy=intro]").textContent =
-    language === "he"
+    managementPage
+      ? language === "he" ? "מבט על המשתמשים, ההרשאות והתוכניות שלכם." : "An overview of your people, access and plans."
+      : language === "he"
       ? "פרטים אישיים, אבטחה, מנויים ותשלומים במקום אחד."
       : "Your personal details, security, subscriptions and payments in one place.";
+}
+if (managementPage) {
+  document.body.classList.add("platform-management-page");
+  const back = document.createElement("a");
+  back.className = "platform-management-back";
+  back.href = language === "he" ? "/dashboard/?lang=he" : "/dashboard/";
+  back.textContent = language === "he" ? "חזרה לדשבורד" : "Back to dashboard";
+  $(".platform-heading").before(back);
 }
 renderPlatformLanguage(
   $("#platform-language"),
@@ -129,6 +157,7 @@ function clearSecret() {
 }
 
 function clearPrivate() {
+  managementEntry.hidden = true;
   platformDirectory?.close();
   platformDirectory = undefined;
   managerProfile?.clear();
@@ -368,8 +397,19 @@ async function refresh() {
       identity,
       selectedProduct || "",
       language,
+      managementPage ? "management" : "",
     );
-    if (selectedProduct) {
+    if (managementPage) {
+      if (identity.platformRole !== "admin") {
+        $("#platform-status").textContent = language === "he" ? "המסך זמין למנהלי WIFIGATE בלבד." : "This page is available to WIFIGATE administrators only.";
+        return;
+      }
+      if (!identity.mfa.verified) {
+        showSecurity();
+        return;
+      }
+      platformDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language, standalone: true });
+    } else if (selectedProduct) {
       if (!canOpenProduct(identity, selectedProduct)) {
         location.replace(
           language === "he" ? "/dashboard/?lang=he" : "/dashboard/",
@@ -402,7 +442,7 @@ async function refresh() {
     } else {
       renderProducts();
       if (identity.platformRole === "admin" && identity.mfa.verified) {
-        platformDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language });
+        managementEntry.hidden = false;
       }
     }
   } catch (error) {

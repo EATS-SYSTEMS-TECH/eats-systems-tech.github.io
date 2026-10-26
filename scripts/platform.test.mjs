@@ -44,6 +44,16 @@ test("Manager invitations open their workspace while blocked and unavailable acc
   }
 });
 
+test("management deep links survive sign-in only for global administrators", () => {
+  const path = "/dashboard/platform/?lang=he";
+  assert.equal(safeDashboardPath(path), path);
+  assert.match(loginPath(path, "he"), /next=%2Fdashboard%2Fplatform%2F/);
+  const member = parsePlatformIdentity(profile());
+  assert.equal(loginDestination(member, path, "he"), "/dashboard/?lang=he");
+  const admin = parsePlatformIdentity({ ...profile(), platformRole: "admin" });
+  assert.equal(loginDestination(admin, path, "he"), path);
+});
+
 test("platform identity requires all server states and matches the signed-in account", () => {
   assert.equal(
     parsePlatformIdentity(profile(), "test-user").products.manager.state,

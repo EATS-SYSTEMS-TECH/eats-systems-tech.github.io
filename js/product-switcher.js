@@ -49,18 +49,22 @@ export function renderProductSwitcher(
   identity,
   selected,
   language = "en",
+  context = "",
 ) {
   const copy = platformText(language);
   container.closeProductSwitcher?.();
   const button = element("button", "product-switcher__button");
   button.type = "button";
   button.id = "product-switcher-button";
-  button.dataset.currentProduct = selected || "all";
+  button.dataset.currentProduct = selected || context || "all";
+  const contextLabel = context === "management"
+    ? language === "he" ? "ניהול פלטפורמה" : "Platform management"
+    : language === "he" ? "הפרופיל שלי" : "My profile";
   button.setAttribute("aria-haspopup", "listbox");
   button.setAttribute("aria-controls", "product-switcher-list");
   button.setAttribute(
     "aria-label",
-    `${copy.switchProduct}: ${selected ? `WIFIGATE ${productName(selected)}` : language === "he" ? "הפרופיל שלי" : "My profile"}`,
+    `${copy.switchProduct}: ${selected ? `WIFIGATE ${productName(selected)}` : contextLabel}`,
   );
   const name = element("span", "product-switcher__name");
   if (selected) {
@@ -69,7 +73,7 @@ export function renderProductSwitcher(
       element("span", "product-switcher__brand", "WIFIGATE "),
       productName(selected),
     );
-  } else name.textContent = language === "he" ? "הפרופיל שלי" : "My profile";
+  } else name.textContent = contextLabel;
   const dot = element("span", "product-switcher__dot");
   dot.setAttribute("aria-hidden", "true");
   button.append(dot, name, svg("m6 9 6 6 6-6", "product-switcher__chevron"));
@@ -123,7 +127,7 @@ export function renderProductSwitcher(
     language === "he" ? "הפרופיל שלי" : "My profile",
   );
   all.href = language === "he" ? "/dashboard/?lang=he" : "/dashboard/";
-  if (!selected) all.setAttribute("aria-current", "page");
+  if (!selected && !context) all.setAttribute("aria-current", "page");
   popover.append(list, all);
 
   let active = -1;

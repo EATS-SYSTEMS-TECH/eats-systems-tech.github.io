@@ -58,9 +58,27 @@ test("global admins see unique counts, estimates, product links, filtering and p
   });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(origin + "/dashboard/?lang=he");
+  await page.locator("#platform-management-entry").waitFor();
+  assert.equal(requests.length, 0, "the profile does not load the directory");
+  assert.equal(
+    await page.locator("#platform-admin-management").isHidden(),
+    true,
+  );
+  await page.locator("#platform-management-entry").click();
+  await page.waitForURL(origin + "/dashboard/platform/?lang=he");
   const root = page.locator("#platform-admin-management");
   await root.locator(".platform-admin-person").waitFor();
-  assert.match(await root.textContent(), /ניהול פלטפורמה/);
+  await page
+    .getByRole("heading", { name: "ניהול פלטפורמה", exact: true })
+    .waitFor();
+  assert.equal(await page.locator("#platform-account-panel").isHidden(), true);
+  assert.equal(await page.locator("#profile-subscriptions").isHidden(), true);
+  assert.equal(
+    await root.locator(".platform-admin-person").getAttribute("open"),
+    null,
+  );
+  await root.locator(".platform-admin-person-summary").click();
+  await root.locator("tbody").waitFor();
   assert.match(await root.textContent(), /GROWTH/);
   assert.match(await root.textContent(), /80\.00/);
   assert.equal(
@@ -95,6 +113,115 @@ test("global admins see unique counts, estimates, product links, filtering and p
   await root.getByText("לא נמצאו חשבונות.", { exact: true }).waitFor();
   assert.equal(requests.at(-1).get("role"), "admin");
   assert.deepEqual(errors, []);
+});
+
+test("the management shortcut follows the interface direction and the admin page has a return link", async (t) => {
+  const { origin, browser } = await startSite(t);
+  for (const language of ["he", "en"])
+    for (const width of [390, 1440]) {
+      const fixture = await scenario(browser, {
+        platformRole: "admin",
+        admin: true,
+        enrolled: true,
+        verified: true,
+      });
+      t.after(() => fixture.context.close());
+      const { page, context } = fixture;
+      await page.setViewportSize({ width, height: 900 });
+      let requests = 0;
+      await context.route("**/api/v1/platform/directory?*", (route) => {
+        requests++;
+        return route.fulfill({
+          json: {
+            counts: { admins: 1, users: 1, total: 2 },
+            items: [person],
+            nextCursor: null,
+          },
+        });
+      });
+      const suffix = language === "he" ? "?lang=he" : "";
+      await page.goto(origin + "/dashboard/" + suffix);
+      const entry = page.locator("#platform-management-entry");
+      await entry.waitFor();
+      assert.equal(requests, 0);
+      const box = await entry.boundingBox();
+      assert.ok(box.y + box.height <= 900 && box.y >= 750);
+      assert.ok(language === "he" ? box.x > width / 2 : box.x < width / 2);
+      if (process.env.WIFIGATE_ADMIN_UX_SCREENSHOTS)
+        await page.screenshot({
+          path: `${process.env.WIFIGATE_ADMIN_UX_SCREENSHOTS}/dashboard-entry-${language}-${width}.png`,
+          fullPage: false,
+        });
+      await entry.click();
+      await page.waitForURL(origin + "/dashboard/platform/" + suffix);
+      await page.locator(".platform-admin-person-summary").waitFor();
+    assert.equal(await page.locator("#product-switcher-button .product-switcher__name").textContent(), language === "he" ? "ניהול פלטפורמה" : "Platform management");
+      assert.equal(requests, 1);
+      assert.equal(await entry.isHidden(), true);
+      const summary = page.locator(".platform-admin-person-summary");
+      await summary.focus();
+      await page.keyboard.press("Enter");
+      assert.equal(
+        await page.locator(".platform-admin-person").getAttribute("open"),
+        "",
+      );
+      assert.equal(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+        true,
+      );
+      if (process.env.WIFIGATE_ADMIN_UX_SCREENSHOTS)
+        await page.screenshot({
+          path: `${process.env.WIFIGATE_ADMIN_UX_SCREENSHOTS}/management-${language}-${width}.png`,
+          fullPage: true,
+        });
+      await page.locator(".platform-management-back").click();
+      await page.waitForURL(origin + "/dashboard/" + suffix);
+      await page.locator("#platform-management-entry").waitFor();
+      assert.equal(
+        requests,
+        1,
+        "returning to the profile does not reload the directory",
+      );
+    }
+});
+
+test("a direct management URL stays closed for members and unverified admin sessions", async (t) => {
+  const { origin, browser } = await startSite(t);
+  for (const options of [
+    {},
+    { platformRole: "admin", admin: true, enrolled: true, verified: false },
+  ]) {
+    const fixture = await scenario(browser, options);
+    t.after(() => fixture.context.close());
+    let requests = 0;
+    await fixture.context.route("**/api/v1/platform/directory?*", (route) => {
+      requests++;
+      return route.fulfill({ status: 403, json: {} });
+    });
+    await fixture.page.goto(origin + "/dashboard/platform/?lang=he");
+    await fixture.page.locator("#product-switcher-button").waitFor();
+    assert.equal(
+      await fixture.page.locator("#platform-admin-management").isHidden(),
+      true,
+    );
+    assert.equal(
+      await fixture.page.locator("#platform-management-entry").isHidden(),
+      true,
+    );
+    assert.equal(requests, 0);
+    if (options.platformRole)
+      assert.equal(
+        await fixture.page.locator("#platform-security").isVisible(),
+        true,
+      );
+    else
+      assert.match(
+        await fixture.page.locator("#platform-status").textContent(),
+        /מנהלי WIFIGATE/,
+      );
+  }
 });
 
 test("members and admins without verified MFA never load the directory", async (t) => {

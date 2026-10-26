@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Products | WIFIGATE</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" />
+    <link rel="stylesheet" href="/css/platform.css?v=20261027adminux1" />
+    <link rel="stylesheet" href="/css/dashboard-header.css?v=20261025centerexit1" />
+    <script type="module" src="/js/platform-dashboard.bundle.js?v=20261027adminux1"></script>
+  </head>
+  <body data-product="" data-platform-view="management" class="platform-page">
+    <main class="platform-shell">
+      <header class="platform-header">
+        <a class="brand" href="/dashboard/" aria-label="WIFIGATE home" data-copy-label="home"
+          ><img
+            src="/assets/img/wifigate-horizontal-logo.webp"
+            alt="WIFIGATE"
+            width="416"
+            height="96"
+        /></a>
+        <div id="product-switcher" class="product-switcher"></div>
+        <div class="dashboard-header-actions">
+          <select id="platform-language" aria-label="Interface language"><option value="en">English</option><option value="he">עברית</option></select>
+          <div id="manager-profile" class="account-menu"></div>
+        </div>
+      </header>
+      <section class="platform-heading">
+        <p class="platform-eyebrow" data-copy="eyebrow">
+          YOUR WIFIGATE WORKSPACE
+        </p>
+        <h1 id="platform-title" data-copy="title">Choose your product</h1>
+        <p data-copy="intro">
+          Choose a workspace to continue. Your available products and the next
+          step are shown below.
+        </p>
+      </section>
+      <p id="platform-status" role="status" aria-live="polite"></p>
+      <button
+        id="platform-retry"
+        class="platform-button"
+        type="button"
+        data-copy="retry"
+        hidden
+      >
+        Try again
+      </button>
+      <section
+        id="platform-account-panel"
+        class="platform-account portal-panel"
+        aria-labelledby="platform-account-title"
+        hidden
+      >
+        <div class="platform-account__head">
+          <span
+            class="platform-avatar platform-avatar--large"
+            id="account-avatar"
+            aria-hidden="true"
+          ></span>
+          <div>
+            <h2 id="platform-account-title" data-profile-en="Personal details and security" data-profile-he="פרטים אישיים ואבטחה">
+              Personal details and security
+            </h2>
+            <p class="platform-account__identity">
+              <strong id="account-name" dir="auto"></strong>
+              <span id="account-email" dir="ltr"></span>
+            </p>
+          </div>
+        </div>
+        <p class="platform-account__detail" data-copy="accountDetail">
+          You signed in with Google or Apple. Your products and security
+          settings belong to this account.
+        </p>
+        <dl id="profile-details" class="profile-details"></dl>
+      </section>
+        <section id="profile-subscriptions" class="profile-subscriptions portal-panel" aria-labelledby="profile-subscriptions-title" data-billing-mode="preview" hidden>
+          <div class="profile-subscriptions-heading">
+            <h2 id="profile-subscriptions-title" data-profile-en="WIFIGATE For Business plans" data-profile-he="מסלולי WIFIGATE For Business">WIFIGATE For Business plans</h2>
+            <span class="profile-preview" data-profile-en="Preview" data-profile-he="בהכנה">Preview</span>
+          </div>
+          <p class="profile-subscriptions-note" data-profile-en="Full-month estimates before tax; no payment is collected here. Pay revenue is shown separately when verified data is available." data-profile-he="אומדן לחודש מלא לפני מס; לא מתבצע כאן חיוב. הכנסות Pay מוצגות בנפרד כשיש נתונים מאומתים.">Full-month estimates before tax; no payment is collected here. Pay revenue is shown separately when verified data is available.</p>
+          <div id="product-grid" class="product-grid" hidden></div>
+          <div class="profile-subscription-total">
+            <span data-profile-en="Total monthly subscription payment" data-profile-he="סה״כ תשלום חודשי למנויים">Total monthly subscription payment</span>
+            <strong id="profile-subscription-total" dir="auto"></strong>
+          </div>
+        </section>
+      <section id="product-workspace" class="portal-panel" hidden>
+        <h2 id="product-title"></h2>
+        <p data-copy="empty">
+          Your access is active. This product workspace is not available yet.
+        </p>
+      </section>
+      <section
+        id="platform-security"
+        class="platform-security portal-panel"
+        hidden
+      >
+        <h2 data-copy="security">Account security</h2>
+        <p id="security-description"></p>
+        <p class="security-intro" data-copy="securityIntro">
+          Set up once, then use a short code from your authenticator when you
+          sign in.
+        </p>
+        <ol class="security-steps" aria-label="Authenticator setup" data-copy-label="setupSteps">
+          <li data-security-step="identity">
+            <span class="security-step-number" aria-hidden="true">1</span>
+            <div>
+              <strong data-copy="stepIdentity">Confirm your identity</strong>
+              <p data-copy="stepIdentityDetail">
+                Continue with the Google or Apple account you used to sign in.
+              </p>
+            </div>
+          </li>
+          <li data-security-step="pair">
+            <span class="security-step-number" aria-hidden="true">2</span>
+            <div>
+              <strong data-copy="stepPair">Connect an authenticator</strong>
+              <p data-copy="stepPairDetail">
+                Scan the QR code and enter the six-digit code from your app.
+              </p>
+            </div>
+          </li>
+          <li data-security-step="continue">
+            <span class="security-step-number" aria-hidden="true">3</span>
+            <div>
+              <strong data-copy="stepContinue">Open your workspace</strong>
+              <p data-copy="stepContinueDetail">
+                Verify your sign-in to access the products available to you.
+              </p>
+            </div>
+          </li>
+        </ol>
+        <button id="start-enrollment" type="button" data-copy="setup">
+          Confirm identity and start setup
+        </button>
+        <button id="verify-session" type="button" data-copy="verify" hidden>
+          Verify authenticator
+        </button>
+        <div id="totp-setup" hidden>
+          <p data-mfa-copy="scan">
+            Scan this QR code in your authenticator app, or enter the setup key
+            manually.
+          </p>
+          <img
+            id="totp-qr"
+            alt="Authenticator setup QR code"
+            data-copy-alt="setupQr"
+            width="220"
+            height="220"
+          />
+          <label
+            ><span data-mfa-copy="key">Setup key</span
+            ><input
+              id="totp-secret"
+              readonly
+              autocomplete="off"
+              spellcheck="false"
+          /></label>
+          <form id="enrollment-form">
+            <label
+              ><span data-mfa-copy="code">Authenticator code</span
+              ><input
+                name="code"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                pattern="[0-9]{6}"
+                minlength="6"
+                maxlength="6"
+                required
+            /></label>
+            <button type="submit" data-mfa-copy="finish">
+              Verify and finish setup
+            </button>
+          </form>
+          <button id="cancel-enrollment" type="button" data-mfa-copy="cancel">
+            Cancel setup
+          </button>
+        </div>
+        <p id="enrollment-status" role="status" aria-live="polite"></p>
+        <p class="help-text" data-mfa-copy="recovery">
+          Lost your authenticator? Contact a platform owner for identity
+          verification and recovery.
+        </p>
+      </section>
+      <section class="portal-panel profile-account-management" aria-labelledby="profile-account-management-title" hidden>
+        <h2 id="profile-account-management-title" data-profile-en="Account management" data-profile-he="ניהול החשבון">Account management</h2>
+        <div class="platform-danger">
+          <div>
+            <strong data-copy="deleteAccount">Delete account</strong>
+            <p data-copy="deleteAccountDetail">
+              Cancels all your subscriptions and removes your user from WIFIGATE
+              systems. This can't be undone.
+            </p>
+          </div>
+          <button
+            id="delete-account"
+            class="platform-danger__button"
+            type="button"
+            data-copy="deleteAccount"
+          >
+            Delete account
+          </button>
+        </div>
+      </section>
+      <section
+        id="account-deleted"
+        class="account-deleted"
+        aria-labelledby="account-deleted-title"
+        hidden
+      >
+        <span class="account-deleted__icon" aria-hidden="true"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 6 9 17l-5-5" /></svg
+        ></span>
+        <h1 id="account-deleted-title" data-copy="deletedTitle">
+          Your account was deleted
+        </h1>
+        <p data-copy="deletedText">
+          All your subscriptions were cancelled automatically, and your user was
+          removed from WIFIGATE systems.
+        </p>
+        <div id="account-deleted-list" class="account-deleted__list" hidden>
+          <strong data-copy="cancelled">Cancelled subscriptions</strong>
+          <ul></ul>
+        </div>
+        <div id="account-deleted-systems" class="account-deleted__list" hidden>
+          <strong data-copy="removedMySystems">Removed from My systems</strong>
+          <ul></ul>
+        </div>
+        <a
+          id="account-deleted-home"
+          class="account-deleted__home"
+          href="/"
+          data-copy="deletedHome"
+          >Go to wifigate.io</a
+        >
+      </section>
+    </main>
+    <dialog
+      id="mfa-challenge"
+      class="mfa-dialog"
+      aria-labelledby="challenge-title"
+    >
+      <form class="mfa-dialog__form">
+        <img
+          class="mfa-dialog__logo"
+          src="/assets/img/wifigate-horizontal-logo.webp"
+          alt="WIFIGATE"
+          width="416"
+          height="96"
+        />
+        <h2
+          id="challenge-title"
+          class="mfa-dialog__title"
+          data-mfa-copy="title"
+        >
+          Verify your authenticator
+        </h2>
+        <label class="mfa-dialog__field mfa-dialog__factor"
+          ><span data-mfa-copy="factor">Authenticator</span
+          ><select name="factor" required></select
+        ></label>
+        <label class="mfa-dialog__field"
+          ><span data-mfa-copy="code">Authenticator code</span
+          ><input
+            class="mfa-dialog__code"
+            name="code"
+            dir="ltr"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            pattern="[0-9]{6}"
+            minlength="6"
+            maxlength="6"
+            placeholder="••••••"
+            spellcheck="false"
+            required
+        /></label>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button
+            type="submit"
+            class="mfa-dialog__button mfa-dialog__button--primary"
+            data-mfa-copy="verify"
+          >
+            Verify</button
+          ><button
+            type="button"
+            class="mfa-dialog__button mfa-dialog__button--secondary"
+            data-cancel
+            data-mfa-copy="cancel"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <dialog
+      id="account-delete"
+      class="mfa-dialog account-delete"
+      aria-labelledby="account-delete-title"
+      aria-describedby="account-delete-text"
+    >
+      <form class="mfa-dialog__form" novalidate>
+        <img
+          class="mfa-dialog__logo"
+          src="/assets/img/wifigate-horizontal-logo.webp"
+          alt="WIFIGATE"
+          width="416"
+          height="96"
+        />
+        <h2
+          id="account-delete-title"
+          class="mfa-dialog__title"
+          data-copy="deleteTitle"
+        >
+          Are you sure you want to delete your account?
+        </h2>
+        <p
+          id="account-delete-text"
+          class="mfa-dialog__text"
+          data-copy="deleteText"
+        >
+          All your subscriptions will be cancelled automatically, and your user
+          will be removed from WIFIGATE systems. This can't be undone.
+        </p>
+        <div id="account-delete-plan" class="account-delete__plan"></div>
+        <label class="mfa-dialog__field"
+          ><span data-copy="deleteConfirmLabel">To confirm, type your email</span
+          ><input
+            class="account-delete__email"
+            name="confirmEmail"
+            type="email"
+            dir="ltr"
+            autocomplete="off"
+            spellcheck="false"
+            required
+        /></label>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button
+            type="submit"
+            class="mfa-dialog__button account-delete__confirm"
+            data-copy="deleteButton"
+          >
+            Delete my account</button
+          ><button
+            type="button"
+            class="mfa-dialog__button mfa-dialog__button--secondary"
+            data-cancel
+            data-mfa-copy="cancel"
+          >
+            Cancel
+          </button>
+        </div>
+        <p class="mfa-dialog__help" data-copy="deleteGateNote">
+          Gate controllers keep their own user lists. To be removed from a gate,
+          ask its administrator.
+        </p>
+      </form>
+    </dialog>
+  </body>
+</html>

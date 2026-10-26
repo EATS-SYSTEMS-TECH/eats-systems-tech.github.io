@@ -76,6 +76,7 @@ export const pickerPages = [
   "dashboard/index.html",
   "dashboard/pay/index.html",
   "dashboard/manager/index.html",
+  "dashboard/platform/index.html",
 ];
 
 // Static hosting needs a real document for the Platform deep link: the
