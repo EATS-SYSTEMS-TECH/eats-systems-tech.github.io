@@ -818,19 +818,18 @@ function rewriteHomeInternalLinks($, locale) {
 function rewriteLegalInternalLinks($, locale, pageKey) {
   const home = buildPagePath(locale, "home");
 
+  // Keep the exact-home pass first, then apply the shared literal-fragment
+  // policy before footer and body links. No URL/query normalization is added.
   $("a[href='../index.html']").attr("href", home);
-  $("a[href^='../index.html']").each((_, element) => {
-    const href = $(element).attr("href") || "";
-    const hashIndex = href.indexOf("#");
-    const hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
-    $(element).attr("href", `${home}${hash}`);
-  });
+  rewriteNicheHomeAnchors($, home);
   rewriteFooterLegalLinks($, locale);
-  // Legal pages also cross-link each other from inside the body copy.
-  $("a[href='../terms-and-conditions/']").attr("href", buildPagePath(locale, "terms-and-conditions"));
-  $("a[href='../privacy-policy/']").attr("href", buildPagePath(locale, "privacy-policy"));
-  $("a[href='../cookies/']").attr("href", buildPagePath(locale, "cookies"));
+  // Body cross-links follow source order. Resolve each destination immediately
+  // before its write, so a path failure retains only earlier completed changes.
+  for (const destination of ["terms-and-conditions", "privacy-policy", "cookies"]) {
+    $(`a[href='../${destination}/']`).attr("href", buildPagePath(locale, destination));
+  }
 
+  // Retain the final ghost-button pass after all legal destinations.
   $(".btn.btn--ghost").each((_, element) => {
     const href = $(element).attr("href");
     if (href === "../index.html") {
