@@ -12,11 +12,12 @@ test("five refused identities show the counter, disable both providers, persist 
   await page.clock.install();
   await page.goto(origin + "/he/login/");
   await page.locator('[data-provider="google"]:enabled').waitFor();
-  assert.equal(await page.locator("#login-attempt-count").innerText(), "0/5");
+  assert.equal(await page.locator("#login-attempts").isHidden(), true);
   const button = await passGateGame(page, "google");
   for (let count = 1; count <= 5; count++) {
     await button.click();
     await page.locator("#login-attempt-count", { hasText: `${count}/5` }).waitFor();
+    assert.equal(await page.locator("#login-attempts").isVisible(), true);
     if (count < 5) await page.locator('[data-provider="google"]:enabled').waitFor();
   }
   assert.equal(await page.locator('[data-provider="google"]').isDisabled(), true);
@@ -30,7 +31,7 @@ test("five refused identities show the counter, disable both providers, persist 
   assert.equal(await page.locator('[data-provider="google"]').isDisabled(), true);
   await page.clock.fastForward(15 * 60 * 1000 + 1000);
   await page.locator('[data-provider="google"]:enabled').waitFor();
-  assert.equal(await page.locator("#login-attempt-count").innerText(), "0/5");
+  assert.equal(await page.locator("#login-attempts").isHidden(), true);
   assert.equal(calls.filter(call => call?.path === "/api/v1/platform/login").length, 5);
   assert.deepEqual(fixture.errors, []);
 });

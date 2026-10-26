@@ -17,6 +17,7 @@ test("each sign-in page is in its own language with a picker of every language",
     const base = code === "en" ? "" : `/${code.toLowerCase()}`;
     assert.match(html, new RegExp(`<html lang="${code}" dir="${code === "he" || code === "ar" ? "rtl" : "ltr"}">`));
     assert.doesNotMatch(html, /\{\{|\{terms\}|\{privacy\}/);
+    assert.match(html, /<p\b[^>]*id="login-attempts"[^>]*\bhidden>/);
     assert.equal(html.match(/class="language-picker__option"/g).length, SITE_LANGUAGES.length);
     assert.equal(html.match(/aria-current="page"/g).length, 1);
     assert.match(html, new RegExp(`href="${base}/login/" hreflang="${code}" aria-current="page"`));

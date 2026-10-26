@@ -26,6 +26,7 @@ let attemptStorage;
 try { attemptStorage = localStorage; } catch { /* The server still enforces limits. */ }
 const attemptHint = createLoginAttemptHint({ storage: attemptStorage });
 const attemptCounter = document.querySelector("#login-attempt-count");
+const attemptStatus = document.querySelector("#login-attempts");
 if (isLocalStaging) {
   document.querySelector("[data-staging]").hidden = false;
 }
@@ -130,6 +131,7 @@ function setBusy(value) {
 }
 function updateAttempts() {
   const state = attemptHint.current();
+  if (attemptStatus) attemptStatus.hidden = state.failed === 0;
   if (attemptCounter && attemptCounter.textContent !== `${state.failed}/5`) attemptCounter.textContent = `${state.failed}/5`;
   const locked = Boolean(state.lockedUntil);
   buttons.forEach((button) => {
