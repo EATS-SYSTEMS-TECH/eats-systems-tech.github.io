@@ -12,10 +12,38 @@ const declaration = name => source.match(new RegExp(`^function ${name}\\([^\\n]*
 const imported = source.includes('from "./niche-navigation.mjs"') ? await import("./niche-navigation.mjs") : {};
 const template = await readFile(new URL("../templates/niche.template.html", import.meta.url), "utf8");
 
+test("pager shells preserve fallback routes, public IDs and accessible decorative arrows", () => {
+  const $ = load(template), breadcrumb = $(".niche-breadcrumb").toString();
+  imported.installUseCasePagerShells($);
+  const expected = [
+    ["prev", "../sports-facilities/", "Previous use case", "M14.5 5L8 12L14.5 19"],
+    ["next", "../roller-shutters/", "Next use case", "M9.5 5L16 12L9.5 19"],
+  ];
+  assert.equal($(".niche-hero__pager > a").length, 2);
+  for (const [direction, href, label, path] of expected) {
+    const anchor = $(`#niche-${direction}-link`), svg = anchor.find("svg");
+    assert.equal(anchor.attr("href"), href);
+    assert.equal(anchor.attr("class"), `niche-hero__nav-button niche-hero__nav-button--${direction}`);
+    assert.equal(anchor.attr("aria-label"), label); assert.equal(anchor.attr("title"), label);
+    assert.deepEqual({ ...svg.attr() }, { class: "niche-hero__nav-icon", viewBox: "0 0 24 24", "aria-hidden": "true", focusable: "false" });
+    assert.equal(svg.find("path").attr("d"), path);
+  }
+  assert.equal($(".niche-breadcrumb").toString(), breadcrumb);
+});
+
+test("invalid pager slots fail before any content replacement", () => {
+  for (const markup of ["<main>Other page</main>", '<main><div class="niche-hero__pager">First</div><div class="niche-hero__pager">Second</div></main>']) {
+    const $ = load(markup), original = $.html();
+    assert.throws(() => imported.installUseCasePagerShells($), /requires one pager/);
+    assert.equal($.html(), original);
+  }
+});
+
 // Exercise the original page orchestration with real Cheerio nodes and actual
 // locale data. Only the surrounding body renderer/path builder are boundaries.
 function fixture(definitions = NICHE_DEFINITIONS, options = {}) {
   const trace = [], $ = load(template);
+  imported.installUseCasePagerShells($);
   const pathFor = (locale, key) => `/${locale}/${key}/`;
   const functions = ["getCircularAdjacentNiches", "setUseCaseNavigation", "updateNicheStaticUi"].map(declaration).join("\n");
   const api = runInNewContext(functions + "\n({getCircularAdjacentNiches,updateNicheStaticUi});", {
@@ -84,7 +112,9 @@ test("copy errors precede body changes;next-path errors retain the already insta
 test("hero pager retains768px sizing, RTL icons and pointer/keyboard contrast", async () => {
   const styles = await readFile(new URL("../css/styles.css", import.meta.url), "utf8");
   const niche = await readFile(new URL("../css/niche.css", import.meta.url), "utf8");
-  const $ = load(template), topbar = $.html($(".niche-hero__topbar"));
+  const $ = load(template);
+  imported.installUseCasePagerShells($);
+  const topbar = $.html($(".niche-hero__topbar"));
   const browser = await chromium.launch({ channel: "chrome", headless: true });
   try {
     for (const width of [375, 768, 769, 1440]) for (const dir of ["ltr", "rtl"]) {

@@ -27,7 +27,7 @@ import { setNicheList } from "./niche-text-list.mjs";
 import { rewriteNicheHomeAnchors } from "./niche-links.mjs";
 import { buildRedirectPage } from "./redirect-page.mjs";
 import { previousSitemapDates, sitemapDocument } from "./sitemap.mjs";
-import { circularNiches, setNichePager } from "./niche-navigation.mjs";
+import { circularNiches, setNichePager, installUseCasePagerShells } from "./niche-navigation.mjs";
 import { publishNicheVariant } from "./niche-publication.mjs";
 
 const repoRoot = process.cwd();
@@ -1538,6 +1538,8 @@ function prepareUseCaseShell($, locale, pageKey, bodyClass = "") {
   if (bodyClass) $("body").addClass(bodyClass);
   rewriteStaticAssets($, locale, pageKey);
   appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, pageKey);
+  // Retain direction/assets/scripts order before composing localized pager slots.
+  installUseCasePagerShells($);
 }
 
 async function buildNichePages(homeData) {

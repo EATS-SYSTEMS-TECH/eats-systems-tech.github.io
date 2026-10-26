@@ -28,6 +28,7 @@ function fixture({ definitions = [{ key: "one", legacyKeys: ["old", "older"] }],
     getBundle: () => ({}), setBodyDirection($, locale) { operation("direction", locale); $.__locale = locale; },
     rewriteStaticAssets($, locale, key) { operation("assets", locale, key); },
     appendScripts($, scripts, anchor, locale, key) { operation("scripts", anchor, locale, key); },
+    installUseCasePagerShells() { operation("pager-shells"); },
     applyNicheSceneMedia() {}, updateFooterStaticUi() {}, rewriteNicheInternalLinks() {}, setUseCaseMeta() {},
     updateNicheStaticUi($, ctx, niche) { $.__key = niche.key; },
     fillUseCaseBody($, values) { $.__key = values.pageKey; }, setUseCaseNavigation() {},
@@ -60,16 +61,16 @@ test("use-case shell preserves direction, page class, asset and script ordering"
   const niche = fixture({ locales: ["en", "he"] }); await niche.niches();
   assert.deepEqual(niche.shell, ["en", "he"].flatMap(locale => [
     ["direction", locale], ["assets", locale, "one"],
-    ["scripts", "script[src*='js/accessibility.js']", locale, "one"],
+    ["scripts", "script[src*='js/accessibility.js']", locale, "one"], ["pager-shells"],
   ]));
   const host = fixture(); await host.host();
-  assert.deepEqual(host.shell.slice(0, 4), [["direction", "en"], ["class", "wifigate-host-page"],
-    ["assets", "en", HOST_PAGE_KEY], ["scripts", "script[src*='js/accessibility.js']", "en", HOST_PAGE_KEY]]);
-  assert.deepEqual(host.shell.slice(4), [["assets", "en", HOST_PAGE_KEY]]);
+  assert.deepEqual(host.shell.slice(0, 5), [["direction", "en"], ["class", "wifigate-host-page"],
+    ["assets", "en", HOST_PAGE_KEY], ["scripts", "script[src*='js/accessibility.js']", "en", HOST_PAGE_KEY], ["pager-shells"]]);
+  assert.deepEqual(host.shell.slice(5), [["assets", "en", HOST_PAGE_KEY]]);
 });
 
 test("shell initialization failures stop at their original boundary before publication", async () => {
-  for (const stage of ["direction", "class", "assets", "scripts"]) {
+  for (const stage of ["direction", "class", "assets", "scripts", "pager-shells"]) {
     const h = fixture({ shellFailureAt: stage });
     await assert.rejects(h.host(), new RegExp("shell " + stage));
     assert.equal(h.shell.at(-1)[0], stage); assert.deepEqual(h.writes, []);
