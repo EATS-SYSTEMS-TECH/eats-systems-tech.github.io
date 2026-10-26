@@ -26,6 +26,7 @@ import { setNicheList } from "./niche-text-list.mjs";
 import { rewriteNicheHomeAnchors } from "./niche-links.mjs";
 import { buildRedirectPage } from "./redirect-page.mjs";
 import { previousSitemapDates, sitemapDocument } from "./sitemap.mjs";
+import { circularNiches, setNichePager } from "./niche-navigation.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = SITE_ORIGIN;
@@ -1397,18 +1398,8 @@ function setNicheBenefits($, benefits, locale) {
 }
 
 function getCircularAdjacentNiches(currentKey) {
-  const index = NICHE_DEFINITIONS.findIndex((entry) => entry.key === currentKey);
-  if (index === -1) {
-    return null;
-  }
-
-  const prevIndex = (index - 1 + NICHE_DEFINITIONS.length) % NICHE_DEFINITIONS.length;
-  const nextIndex = (index + 1) % NICHE_DEFINITIONS.length;
-
-  return {
-    previous: NICHE_DEFINITIONS[prevIndex],
-    next: NICHE_DEFINITIONS[nextIndex],
-  };
+  // Read the current canonical order without caching or changing its records.
+  return circularNiches(NICHE_DEFINITIONS, currentKey);
 }
 
 // The hero, highlights, benefits and FAQ of the use-case design, shared by the
@@ -1483,25 +1474,10 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
   fillUseCaseBody($, { chrome, content, image: niche.image, locale, pageKey: niche.key, accessibilityBundle });
   setUseCaseNavigation($, { chrome, content });
 
+  // Body/breadcrumb installation retains its original position before pager
+  // writes;both locale sources were already read before any body mutation.
   const adjacentNiches = getCircularAdjacentNiches(niche.key);
-  if (adjacentNiches) {
-    const previousLabel = localeNicheContent?.niches?.[adjacentNiches.previous.key]?.label
-      || defaultNicheContent?.niches?.[adjacentNiches.previous.key]?.label
-      || adjacentNiches.previous.key;
-    const nextLabel = localeNicheContent?.niches?.[adjacentNiches.next.key]?.label
-      || defaultNicheContent?.niches?.[adjacentNiches.next.key]?.label
-      || adjacentNiches.next.key;
-
-    $("#niche-prev-link")
-      .attr("href", buildPagePath(locale, adjacentNiches.previous.key))
-      .attr("aria-label", previousLabel)
-      .attr("title", previousLabel);
-
-    $("#niche-next-link")
-      .attr("href", buildPagePath(locale, adjacentNiches.next.key))
-      .attr("aria-label", nextLabel)
-      .attr("title", nextLabel);
-  }
+  setNichePager($, adjacentNiches, { localeNicheContent, defaultNicheContent, locale, buildPagePath });
 }
 
 function rewriteNicheInternalLinks($, locale) {
