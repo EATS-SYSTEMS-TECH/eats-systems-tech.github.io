@@ -2,10 +2,13 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { chromium } from "playwright-core";
+import { load } from "cheerio";
 
 const styles = await readFile(new URL("../css/styles.css", import.meta.url), "utf8");
 const accessibility = await readFile(new URL("../css/accessibility.css", import.meta.url), "utf8");
 const guestInvites = await readFile(new URL("../css/guest-invites.css", import.meta.url), "utf8");
+const homeTemplate = load(await readFile(new URL("../templates/index.template.html", import.meta.url), "utf8"));
+const hostPromo = homeTemplate.html(homeTemplate("#guest-invites-api"));
 const surface = ["site-header", "feature-card", "contact-cta", "where-showcase", "where-story-card",
   "where-story-card__item", "where-story-card__video-frame", "where-story-card__video-screen",
   "where-story-card__bullet", "where-story-card__win", "where-story-card__badge", "where-story-card__close",
@@ -18,6 +21,42 @@ const ink = ["where-story-card__video-label", "where-story-card__video-status", 
   "where-story-card__decision-title", "where-story-card__bullet-label", "where-story-card__win-label",
   "where-story-card__badge", "where-list__link", "where-story-card__close"];
 const classes = [...new Set([...surface, ...subdued, ...ink])];
+
+test("Host promo preserves full band layout, icon/text sizing, overlay and the exact 900px breakpoint", async () => {
+  const browser = await chromium.launch({ channel: "chrome", headless: true });
+  try {
+    for (const width of [375, 900, 901, 1440]) for (const dir of ["ltr", "rtl"]) {
+      const page = await browser.newPage({ viewport: { width, height: 900 } });
+      try {
+        // Render the real source template with local presentation only. Network
+        // assets and product scripts do not participate in this style contract.
+        await page.route("**/*", route => route.abort());
+        await page.setContent(`<html dir="${dir}"><head><style>${styles}\n${guestInvites}</style></head>
+          <body class="${dir === "rtl" ? "rtl" : ""}">${hostPromo}</body></html>`);
+        const result = await page.evaluate(() => {
+          const css = selector => getComputedStyle(document.querySelector(selector));
+          const grid = css(".guest-invites__grid"), title = css(".guest-invites__title");
+          const points = css(".guest-invites__points"), icon = css(".guest-invites__point-icon");
+          const vector = css(".guest-invites__point-icon svg"), pointTitle = css(".guest-invites__point-title");
+          const overlay = getComputedStyle(document.querySelector(".guest-invites"), "::before");
+          return { columns: grid.gridTemplateColumns.split(" ").length, display: grid.display,
+            titleColor: title.color, lineBreaks: title.whiteSpace, pointsDisplay: points.display,
+            pointsGap: points.rowGap, icon: [icon.width, icon.height], vector: [vector.width, vector.height],
+            pointTitleColor: pointTitle.color, pointTitleWeight: pointTitle.fontWeight,
+            overlayPointer: overlay.pointerEvents, overlayGrid: overlay.backgroundSize, mask: overlay.maskImage };
+        });
+        assert.equal(result.columns, width <= 900 ? 1 : 2, `${width}/${dir}`);
+        assert.equal(result.display, "grid"); assert.equal(result.pointsDisplay, "grid");
+        assert.equal(result.titleColor, "rgb(255, 255, 255)"); assert.equal(result.lineBreaks, "pre-line");
+        assert.equal(result.pointsGap, "17.6px"); assert.deepEqual(result.icon, ["40px", "40px"]);
+        for (const dimension of result.vector) assert.ok(Math.abs(parseFloat(dimension) - 20.8) < .01);
+        assert.equal(result.pointTitleColor, "rgb(255, 255, 255)"); assert.equal(result.pointTitleWeight, "700");
+        assert.equal(result.overlayPointer, "none"); assert.equal(result.overlayGrid, "38px 38px, 38px 38px");
+        assert.notEqual(result.mask, "none");
+      } finally { await page.close(); }
+    }
+  } finally { await browser.close(); }
+});
 
 test("high contrast retains surfaces, text, active indicators and focus in mobile/desktop LTR/RTL", async () => {
   const browser = await chromium.launch({ channel: "chrome", headless: true });

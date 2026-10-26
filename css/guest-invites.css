@@ -1,11 +1,5 @@
-/* /css/guest-invites.css */
-/* Styles for the "Automated Guest Invites API" homepage promo band and the
-   dedicated interactive generator page. Reuses the design tokens from
-   styles.css and adds an isolated, developer-grade visual treatment. */
-
-/* ===================================================================== */
-/* Homepage promo band                                                   */
-/* ===================================================================== */
+/* Host promotion surface: contain the decorative light/grid layers while
+   retaining the site's existing tokens, public selectors and readable ink. */
 .guest-invites {
   position: relative;
   overflow: hidden;
@@ -16,6 +10,8 @@
     linear-gradient(135deg, #0b1220 0%, #0d1b34 55%, #0b1220 100%);
 }
 
+/* The two grid lines share a tile and radial mask. This overlay never captures
+   pointer input intended for the promo's navigation or content. */
 .guest-invites::before {
   content: "";
   position: absolute;
@@ -28,38 +24,67 @@
   pointer-events: none;
 }
 
+/* Share grid participation without changing spacing or selector specificity.
+   Only the outer grid owns the desktop column ratio. */
+.guest-invites__grid,
+.guest-invites__points,
+.guest-invites__point-icon {
+  display: grid;
+}
+
 .guest-invites__grid {
   position: relative;
-  display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: clamp(1.75rem, 4vw, 3.5rem);
   align-items: center;
 }
 
+/* Consolidate identical typography traits with explicit class lists. Their
+   original specificity leaves locale-specific stylesheets free to override. */
+.guest-invites__point-copy,
+.guest-invites__point-title,
+.guest-invites__point-text {
+  display: block;
+}
+
+.guest-invites__title,
+.guest-invites__point-title {
+  color: #ffffff;
+}
+
+.guest-invites__eyebrow,
+.guest-invites__point-title {
+  font-weight: 700;
+}
+
+.guest-invites__eyebrow,
+.guest-invites__title {
+  margin: 0 0 1rem;
+}
+
+/* The label remains an inline pill beside the heading's fluid typography. */
 .guest-invites__eyebrow {
   display: inline-flex;
   align-items: center;
-  margin: 0 0 1rem;
   padding: 0.35rem 0.85rem;
   border-radius: var(--radius-pill);
   background: rgba(56, 189, 248, 0.14);
   border: 1px solid rgba(56, 189, 248, 0.35);
   color: #7dd3fc;
   font-size: 0.78rem;
-  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
+/* Heading line breaks remain meaningful in every language. */
 .guest-invites__title {
-  margin: 0 0 1rem;
   font-size: clamp(2rem, 4vw, 3rem);
   line-height: 1.1;
   letter-spacing: -0.015em;
   white-space: pre-line;
-  color: #ffffff;
 }
 
+/* Introductory copy retains its own readable width and subdued contrast. */
 .guest-invites__subtitle {
   margin: 0 0 1.75rem;
   max-width: 38rem;
@@ -68,8 +93,9 @@
   color: #b9c6e4;
 }
 
+/* Feature rows keep independent icon/copy alignment. The list's grid spacing
+   remains constant when translated text wraps over multiple lines. */
 .guest-invites__points {
-  display: grid;
   gap: 1.1rem;
   margin: 0 0 2rem;
 }
@@ -80,12 +106,14 @@
   align-items: flex-start;
 }
 
+/* Each fixed icon plate shares one local size for both axes. The vector keeps
+   its own scale, and the plate cannot shrink beside long translated copy. */
 .guest-invites__point-icon {
+  --guest-invites-point-icon-size: 2.5rem;
   flex: 0 0 auto;
-  display: grid;
   place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: var(--guest-invites-point-icon-size);
+  height: var(--guest-invites-point-icon-size);
   border-radius: 0.8rem;
   background: rgba(59, 130, 246, 0.18);
   border: 1px solid rgba(96, 165, 250, 0.4);
@@ -97,19 +125,13 @@
   height: 1.3rem;
 }
 
-.guest-invites__point-copy {
-  display: block;
-}
-
+/* The feature heading keeps a separate bottom gap and brighter treatment;
+   explanatory text does not inherit that heading's weight or color. */
 .guest-invites__point-title {
-  display: block;
-  font-weight: 700;
-  color: #ffffff;
   margin-bottom: 0.15rem;
 }
 
 .guest-invites__point-text {
-  display: block;
   font-size: 0.96rem;
   line-height: 1.6;
   color: #aab8d8;
@@ -133,9 +155,8 @@
   transform: var(--guest-invites-arrow-hover);
 }
 
-/* ===================================================================== */
-/* RTL adjustments                                                       */
-/* ===================================================================== */
+/* Technical strings remain LTR inside RTL pages. Retain legacy tool selectors
+   so the shared stylesheet keeps its existing compatibility scope. */
 .rtl .guest-invites__console-body,
 .rtl .giapi-url,
 .rtl .giapi-format,
@@ -154,9 +175,8 @@
   --guest-invites-arrow-hover: scaleX(-1) translateX(3px);
 }
 
-/* ===================================================================== */
-/* Responsive                                                            */
-/* ===================================================================== */
+/* Promo and legacy tool grids collapse at the inclusive 900px boundary;
+   desktop ratios stay untouched above it. */
 @media (max-width: 900px) {
 
   .guest-invites__grid,
@@ -164,9 +184,7 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
-
-
-
+/* Honor reduced motion without removing pointer or keyboard feedback states. */
 @media (prefers-reduced-motion: reduce) {
   .guest-invites__cta-arrow {
     transition: none;
