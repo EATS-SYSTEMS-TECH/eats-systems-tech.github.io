@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import test from "node:test";
 import * as cheerio from "cheerio";
-import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails } from "./host-marketing-page.mjs";
+import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails, installHostPricingShells } from "./host-marketing-page.mjs";
 import { SITE_LANGUAGES } from "./site-languages.mjs";
 import { BENEFIT_ICONS } from "./benefit-icons.mjs";
 const { installHomeHostPointShells } = await import("./host-marketing-page.mjs");
@@ -58,6 +58,7 @@ test("missing localized copy fails instead of publishing a partial page or a fal
 
 test("Host details preserve translated sections, plan prices and actions inside their own style scope", async () => {
   const legacy = cheerio.load(await fs.readFile(new URL("../templates/guest-invites-api.template.html", import.meta.url), "utf8"));
+  installHostPricingShells(legacy);
   // The caller supplies the translated document; preserve those exact nodes.
   legacy(".wa-secure__text").first().text("פרטי האירוח המקומיים נשמרים בדיוק");
   legacy(".wa-pricing__note").text("Localized pricing note");
@@ -113,4 +114,46 @@ test("homepage Host points retain three ordered translation slots and their deco
 test("homepage point installation leaves documents without the Host list unchanged", () => {
   const $ = cheerio.load('<main><h1>Unrelated page</h1><ul class="guest-invites__points"><li>Other list</li></ul></main>');
   const original = $.html(); installHomeHostPointShells?.($); assert.equal($.html(), original);
+});
+
+test("Host pricing preserves ordered offers, localization slots, feature icons and contact actions", async () => {
+  const $ = cheerio.load(await fs.readFile(new URL("../templates/guest-invites-api.template.html", import.meta.url), "utf8"));
+  const otherSections = $("section:not(.wa-pricing)").toString();
+  const heading = $(".wa-pricing .wa-head").toString(), note = $(".wa-pricing__note").toString();
+  installHostPricingShells($);
+  const plans = $(".wa-pricing__grid > .wa-plan");
+  assert.deepEqual(plans.find(".wa-plan__name").map((_, node) => $(node).text()).get(), ["Starter", "Pro", "Hotel", "Enterprise"]);
+  assert.deepEqual(plans.find(".wa-plan__amount").map((_, node) => $(node).text()).get(), ["₪29", "₪99", "₪299", "Custom"]);
+  assert.equal(plans.filter(".wa-plan--featured").length, 1);
+  assert.equal(plans.eq(2).hasClass("wa-plan--featured"), true);
+  assert.equal(plans.find(".wa-plan__badge").attr("data-i18n"), "guestInvites.marketing.pricing.hotelBadge");
+  assert.equal(plans.find(".wa-plan__per").length, 3);
+  assert.equal(plans.eq(3).find(".wa-plan__per").length, 0);
+  assert.equal(plans.eq(3).find(".wa-plan__amount").attr("data-i18n"), "guestInvites.marketing.pricing.enterpriseAmount");
+  for (const [index, key] of ["starter", "pro", "hotel", "enterprise"].entries()) {
+    const plan = plans.eq(index);
+    assert.equal(plan.find(".wa-plan__desc").attr("data-i18n"), `guestInvites.marketing.pricing.${key}Desc`);
+    assert.deepEqual(plan.find(".wa-plan__feature span").map((_, node) => $(node).attr("data-i18n")).get(),
+      [1, 2, 3].map(number => `guestInvites.marketing.pricing.${key}F${number}`));
+    plan.find(".wa-plan__feature svg").each((_, node) => {
+      assert.deepEqual({ ...$(node).attr() }, { width: "16", height: "16", viewBox: "0 0 24 24", fill: "none",
+        stroke: "currentColor", "stroke-width": "2.5", "stroke-linecap": "round", "stroke-linejoin": "round", "aria-hidden": "true" });
+      assert.equal($(node).find("path").attr("d"), "m5 12 5 5L20 7");
+    });
+    const action = plan.find(".wa-plan__cta > a");
+    assert.equal(action.attr("href"), "../index.html#contact");
+    assert.equal(action.attr("class"), `btn btn--${index === 2 ? "primary" : "ghost"}`);
+    assert.equal(action.attr("data-i18n"), "guestInvites.marketing.pricing.planCta");
+  }
+  assert.equal($("section:not(.wa-pricing)").toString(), otherSections);
+  assert.equal($(".wa-pricing .wa-head").toString(), heading);
+  assert.equal($(".wa-pricing__note").toString(), note);
+});
+
+test("missing or ambiguous pricing slots fail before mutating the fragment", () => {
+  for (const markup of ["<main>Other content</main>", '<section class="wa-pricing"><div class="wa-pricing__grid">First</div><div class="wa-pricing__grid">Second</div></section>']) {
+    const $ = cheerio.load(markup), original = $.html();
+    assert.throws(() => installHostPricingShells($), /requires one plan grid/);
+    assert.equal($.html(), original);
+  }
 });

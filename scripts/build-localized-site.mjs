@@ -9,7 +9,7 @@ import { benefitIconSvg } from "./benefit-icons.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
 import { LANDING_PAGES, LANDING_PAGE_LOCALES, validateLandingPageLocales } from "./landing-pages/index.mjs";
 import { AUTO_OPEN_PAGE_KEY, getAutoOpenPageContent, validateAutoOpenPageLocales } from "./auto-open-page.mjs";
-import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails, installHomeHostPointShells } from "./host-marketing-page.mjs";
+import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails, installHomeHostPointShells, installHostPricingShells } from "./host-marketing-page.mjs";
 import { SITE_LOGIN_LABELS, SITE_NAVIGATION } from "./site-navigation.mjs";
 import { RTL_LANGUAGES, SITE_LANGUAGES } from "./site-languages.mjs";
 import { accessibilityLinkLabels } from "./legal/footer-labels.mjs";
@@ -1742,6 +1742,8 @@ async function buildGuestInvitesPages(homeData) {
     const hostCopy = await loadHostPageCopy(locale);
     const $ = cheerio.load(template, { decodeEntities: false });
     const legacy = cheerio.load(legacyTemplate, { decodeEntities: false });
+    // Populate the shared plan structure before existing translation and link handling.
+    installHostPricingShells(legacy);
     const content = getHostPageContent(hostCopy, homeData.homepageCopies[locale]);
     const chrome = getNicheChrome(locale);
 

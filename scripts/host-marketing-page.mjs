@@ -34,6 +34,59 @@ ${shapes.map(shape => `                    ${shape}`).join("\n")}
   $("#wifigate-automation .guest-invites__points").html(`\n${rows.join("\n")}\n            `);
 }
 
+// Plan identity, prices and existing translation keys are presentation data.
+// They describe the public contact offer only; this module never bills users.
+const HOST_PLANS = [
+  { key: "starter", name: "Starter", amount: "₪29", description: "For a single property or entrance.",
+    features: ["1 system", "Up to 1,000 guest invitations / month", "Automatic time-limited access"] },
+  { key: "pro", name: "Pro", amount: "₪99", description: "For a small management company.",
+    features: ["Up to 5 systems", "1,000 invitations per system", "Priority email support"] },
+  { key: "hotel", name: "Hotel", amount: "₪299", featured: true, description: "For a hotel or a whole complex.",
+    features: ["Up to 20 systems", "Centralized reporting", "Preferred support"] },
+  { key: "enterprise", name: "Enterprise", amount: "Custom", custom: true,
+    description: "For PMS, channel managers and large portfolios.",
+    features: ["Volume pricing", "SLA &amp; onboarding", "Custom integration"] },
+];
+
+// Every feature uses the same decorative checkmark and an existing copy slot.
+// Keep the SVG adjacent to its span so inline spacing and accessibility stay put.
+function hostPlanFeature(key, fallback) {
+  return `              <li class="wa-plan__feature"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="m5 12 5 5L20 7" />
+                </svg><span data-i18n="guestInvites.marketing.pricing.${key}">${fallback}</span></li>`;
+}
+
+// Compose all four plans from one card structure before the existing locale
+// translator runs. Only Hotel is featured; Enterprise has no monthly suffix.
+function hostPlanShell(plan) {
+  const prefix = "guestInvites.marketing.pricing";
+  const badge = plan.featured
+    ? `            <span class="wa-plan__badge" data-i18n="${prefix}.hotelBadge">Most popular</span>\n` : "";
+  const amountKey = plan.custom ? ` data-i18n="${prefix}.enterpriseAmount"` : "";
+  const period = plan.custom ? "" : `<span class="wa-plan__per" data-i18n="${prefix}.per">/ month</span>`;
+  const features = plan.features.map((copy, index) => hostPlanFeature(`${plan.key}F${index + 1}`, copy));
+  return `          <article class="wa-plan${plan.featured ? " wa-plan--featured" : ""}">
+${badge}            <h3 class="wa-plan__name">${plan.name}</h3>
+            <div class="wa-plan__price"><span class="wa-plan__amount"${amountKey}>${plan.amount}</span>${period}</div>
+            <p class="wa-plan__desc" data-i18n="${prefix}.${plan.key}Desc">${plan.description}</p>
+            <ul class="wa-plan__features">
+${features.join("\n")}
+            </ul>
+            <div class="wa-plan__cta"><a class="btn btn--${plan.featured ? "primary" : "ghost"}" href="../index.html#contact"
+                data-i18n="${prefix}.planCta">Talk to us</a></div>
+          </article>`;
+}
+
+// Replace only the dedicated pricing slot. Validate the fragment before any
+// mutation so a missing/ambiguous slot cannot publish a partial Host detail page.
+export function installHostPricingShells($) {
+  const slot = $("section.wa-pricing .wa-pricing__grid");
+  if (slot.length !== 1) throw new Error("Host pricing requires one plan grid");
+  slot.html(`\n${HOST_PLANS.map(hostPlanShell).join("\n\n")}\n        `);
+}
+
 function requiredText(value, field) {
   if (typeof value !== "string" || !value.trim()) {
     throw new Error(`Missing localized WIFIGATE Host copy: ${field}`);

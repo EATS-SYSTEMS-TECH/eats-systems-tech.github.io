@@ -33,7 +33,11 @@ function fixture({ definitions = [{ key: "one", legacyKeys: ["old", "older"] }],
     fillUseCaseBody($, values) { $.__key = values.pageKey; }, setUseCaseNavigation() {},
     buildAssetPrefix: () => "../", getNicheChrome: () => ({}),
     async loadHostPageCopy() { return { marketing: {}, metaDescription: "Host" }; },
-    getHostPageContent: () => ({}), applyDataI18nTranslations() {}, appendHostMarketingDetails() {},
+    // Observe composition before translation within the publication fixture's
+    // controlled DOM boundary; component checks cover the actual plan renderer.
+    installHostPricingShells() { trace.push(["pricing"]); },
+    getHostPageContent: () => ({}), applyDataI18nTranslations() { trace.push(["translation"]); },
+    appendHostMarketingDetails() { trace.push(["details"]); },
     buildOutputFilePath(locale, key) { trace.push(["output", locale, key]); return `${locale}/${key}.html`; },
     buildPagePath(locale, key) { trace.push(["path", locale, key]); return `/${locale}/${key}/`; },
     buildPageUrl(locale, key) { trace.push(["url", locale, key]); return `https://example.test/${locale}/${key}/`; },
@@ -115,6 +119,8 @@ test("render and write failures reject unchanged,retaining only already complete
 
 test("Host emits the two historical aliases directly to each localized canonical and excludes them from sitemap", async () => {
   const f = fixture({ locales: ["en", "he"] }), entries = await f.host();
+  assert.deepEqual(f.trace.filter(([kind]) => ["pricing", "translation", "details"].includes(kind)),
+    ["en", "he"].flatMap(() => [["pricing"], ["translation"], ["details"]]));
   const expected = [];
   for (const locale of ["en", "he"]) {
     expected.push([`${locale}/${HOST_PAGE_KEY}.html`, `page:${locale}/${HOST_PAGE_KEY}`]);
