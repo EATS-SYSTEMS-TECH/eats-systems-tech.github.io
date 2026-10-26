@@ -44,15 +44,15 @@
           "accepted": true,
           "video": {
             "path": "assets/vid/use-cases/desktop/residential-buildings-1080p.mp4",
-            "sha256": "d33b0787792ca9b3f40dc2434e72ebe81ad12ece8007af2d2f2a00d170bd7f1a"
+            "sha256": "16d15117fc9a5c6ae30c9aa9cd5f879adf4bde984c077989720bbacec0297db8"
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/desktop/residential-buildings-scene-hero.webp",
-            "sha256": "75974d75cd97e35652137574cf6c75b4cc54578ae10f96c621927205cc4a99ca"
+            "sha256": "af52ab42e70d7fdbd4d9a3d1d703f83d9c37a36af0a5f251ac432000551bd3e3"
           },
-          "width": 1918,
+          "width": 1916,
           "height": 1080,
-          "durationSeconds": 10.042,
+          "durationSeconds": 10.041667,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
