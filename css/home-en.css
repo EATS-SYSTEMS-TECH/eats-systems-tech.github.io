@@ -236,7 +236,9 @@ html[lang="he"] body.home-en .hero--statement .hero__title { line-height: 1.18; 
     flex-direction: column;
     align-items: flex-start;
     width: 13rem;
-    max-width: 100%;
+    /* Clear the fixed accessibility button: it ends at most 5.25rem from the
+       screen edge and the copy starts 1.25rem in. */
+    max-width: calc(100% - 4rem);
   }
   .home-en .hero__actions .btn {
     width: 100%;
@@ -1498,8 +1500,22 @@ html[lang="he"] body.home-en .automation-stay__steps {
 }
 
 @media (max-width: 480px) {
+  /* The playback button sits 1rem inside the hero's top corner. Centre the
+     copy as before, but keep it at least 4.5rem down, below the button. */
   .home-en .hero__content {
+    flex-direction: column;
+    align-items: stretch;
     padding-block: 1.5rem 7rem;
+  }
+
+  .home-en .hero__content::before,
+  .home-en .hero__content::after {
+    content: "";
+    flex: 1 1 0;
+  }
+
+  .home-en .hero__content::before {
+    min-height: 3rem;
   }
 
   .home-en .where-showcase {
