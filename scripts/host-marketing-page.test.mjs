@@ -5,6 +5,7 @@ import * as cheerio from "cheerio";
 import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails } from "./host-marketing-page.mjs";
 import { SITE_LANGUAGES } from "./site-languages.mjs";
 import { BENEFIT_ICONS } from "./benefit-icons.mjs";
+const { installHomeHostPointShells } = await import("./host-marketing-page.mjs");
 
 const copies = await Promise.all(SITE_LANGUAGES.map(async ({ code }) => ({
   locale: code,
@@ -85,4 +86,31 @@ test("missing detail sections fail before changing the shared page", () => {
   const original = $.html();
   assert.throws(() => appendHostMarketingDetails($, { legacyTemplate: legacy }), /\.wa-secure section/);
   assert.equal($.html(), original);
+});
+
+test("homepage Host points retain three ordered translation slots and their decorative SVGs", async () => {
+  const $ = cheerio.load(await fs.readFile(new URL("../templates/index.template.html", import.meta.url), "utf8"));
+  installHomeHostPointShells?.($);
+  const rows = $('#wifigate-automation .guest-invites__points > li');
+  assert.equal(rows.length, 3);
+  const shapes = [['rect', 'path'], ['circle', 'path'], ['rect', 'path']];
+  rows.each((index, node) => {
+    const row = $(node), icon = row.find('.guest-invites__point-icon'), svg = icon.find('svg');
+    assert.equal(row.attr('class'), 'guest-invites__point');
+    assert.equal(icon.attr('aria-hidden'), 'true');
+    assert.equal(svg.attr('viewBox'), '0 0 24 24');
+    assert.equal(svg.attr('fill'), 'none'); assert.equal(svg.attr('stroke'), 'currentColor');
+    assert.deepEqual(svg.children().toArray().map(shape => shape.tagName), shapes[index]);
+    for (const [selector, key] of [['title', 'Title'], ['text', 'Text']]) {
+      const text = row.find(`.guest-invites__point-${selector}`);
+      assert.equal(text.length, 1);
+      assert.equal(text.attr('data-i18n'), `guestInvites.promo.point${index + 1}${key}`);
+      assert.equal(text.attr('dir'), 'ltr');
+    }
+  });
+});
+
+test("homepage point installation leaves documents without the Host list unchanged", () => {
+  const $ = cheerio.load('<main><h1>Unrelated page</h1><ul class="guest-invites__points"><li>Other list</li></ul></main>');
+  const original = $.html(); installHomeHostPointShells?.($); assert.equal($.html(), original);
 });
