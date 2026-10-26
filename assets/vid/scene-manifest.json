@@ -426,11 +426,11 @@
       "accepted": true,
       "video": {
         "path": "assets/vid/use-cases/office-buildings-720p.mp4",
-        "sha256": "5a85e0a65389736dd336a2560e80715efdbbb3393377b3477021c70327860c0a"
+        "sha256": "2c32ba349329772a3cdcd2cc384633dbc37c15b97d70589b803e7d5524a010bf"
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/office-buildings-scene-hero.webp",
-        "sha256": "a54f48d4be10113bd7ffcad3140d57fb0d7ec5a01f2422bbb514337731613644"
+        "sha256": "6fe57b0226173f943c2747eb7eda73d029c802375b9510cd8f8e224643e2b494"
       },
       "width": 1280,
       "height": 720,
@@ -445,11 +445,11 @@
           "accepted": true,
           "video": {
             "path": "assets/vid/use-cases/office-buildings-720p.mp4",
-            "sha256": "5a85e0a65389736dd336a2560e80715efdbbb3393377b3477021c70327860c0a"
+            "sha256": "2c32ba349329772a3cdcd2cc384633dbc37c15b97d70589b803e7d5524a010bf"
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/office-buildings-scene-hero.webp",
-            "sha256": "a54f48d4be10113bd7ffcad3140d57fb0d7ec5a01f2422bbb514337731613644"
+            "sha256": "6fe57b0226173f943c2747eb7eda73d029c802375b9510cd8f8e224643e2b494"
           },
           "width": 1280,
           "height": 720,
