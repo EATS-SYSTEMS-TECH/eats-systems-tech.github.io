@@ -261,7 +261,9 @@ function placeAccessibilityFab(fab, left, top) {
   const maxTop = Math.max(A11Y_FAB_MARGIN, window.innerHeight - rect.height - A11Y_FAB_MARGIN)
   const x = Math.min(Math.max(A11Y_FAB_MARGIN, left), maxLeft)
   const y = Math.min(Math.max(A11Y_FAB_MARGIN, top), maxTop)
-  // Logical insets first: in RTL inset-inline-end is the same property as left.
+  // Logical insets first: in RTL inset-inline-start is the same property as right.
+  fab.classList.remove("a11y-fab--opposite")
+  fab.style.insetInlineStart = "auto"
   fab.style.insetInlineEnd = "auto"
   fab.style.insetBlockEnd = "auto"
   fab.style.right = "auto"
@@ -397,6 +399,51 @@ function setupAccessibilityFabArrange(fab) {
   applySavedPosition()
 }
 
+// The button sits in the reading-start corner, which it shares with the
+// homepage hero actions and the scene playback button. While it would cover
+// one of them it waits in the opposite corner, and returns as soon as they
+// scroll clear. A position the visitor arranged is left alone.
+const A11Y_FAB_CLEAR_OF = ".hero__actions, #hero-replay, [data-scene-replay]"
+
+function setupAccessibilityFabClearance(fab) {
+  const targets = Array.from(document.querySelectorAll(A11Y_FAB_CLEAR_OF))
+  if (!targets.length) return
+  let frame = 0
+
+  function update() {
+    frame = 0
+    const opposite = fab.classList.contains("a11y-fab--opposite")
+    if (fab.hidden || fab.style.left) {
+      if (opposite) fab.classList.remove("a11y-fab--opposite")
+      return
+    }
+    // Where the button sits on the reading side; the corners mirror each other.
+    const rect = fab.getBoundingClientRect()
+    const width = document.documentElement.clientWidth
+    const left = opposite ? width - rect.right : rect.left
+    const right = opposite ? width - rect.left : rect.right
+    const covers = targets.some((element) => {
+      const box = element.getBoundingClientRect()
+      return box.width > 0 && left < box.right + 4 && right > box.left - 4 && rect.top < box.bottom + 4 && rect.bottom > box.top - 4
+    })
+    if (covers !== opposite) fab.classList.toggle("a11y-fab--opposite", covers)
+  }
+
+  function schedule() {
+    if (!frame) frame = requestAnimationFrame(update)
+  }
+
+  window.addEventListener("scroll", update, { passive: true })
+  window.addEventListener("resize", schedule)
+  if (window.ResizeObserver) {
+    const observer = new ResizeObserver(schedule)
+    targets.forEach((element) => observer.observe(element))
+    observer.observe(document.documentElement)
+  }
+  document.addEventListener("site-accessibility-change", schedule)
+  update()
+}
+
 function setupAccessibilityWidget() {
   if (accessibilityRefs) return
   const byId = (id) => document.getElementById(id)
@@ -455,6 +502,7 @@ function setupAccessibilityWidget() {
   }
 
   setupAccessibilityFabArrange(refs.fab)
+  setupAccessibilityFabClearance(refs.fab)
   updateAccessibilityCopy()
   applyAccessibilitySettings()
 }

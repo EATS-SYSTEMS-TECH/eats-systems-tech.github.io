@@ -27,9 +27,10 @@
   transform: translateY(0);
 }
 
+/* The button and panel sit where reading starts: right in RTL, left in LTR. */
 .a11y-fab {
   position: fixed;
-  inset-inline-end: clamp(1rem, 2vw + 0.8rem, 1.75rem);
+  inset-inline-start: clamp(1rem, 2vw + 0.8rem, 1.75rem);
   inset-block-end: clamp(1rem, 2vw + 0.8rem, 1.75rem);
   width: 3.75rem;
   height: 3.75rem;
@@ -50,6 +51,12 @@
   transition:
     transform 180ms ease,
     box-shadow 180ms ease;
+}
+
+/* Set by accessibility.js while the button would cover hero actions or playback. */
+.a11y-fab.a11y-fab--opposite {
+  inset-inline-start: auto;
+  inset-inline-end: clamp(1rem, 2vw + 0.8rem, 1.75rem);
 }
 
 .a11y-fab[hidden] {
@@ -102,7 +109,7 @@
 
 .a11y-panel {
   position: fixed;
-  inset-inline-end: clamp(1rem, 2vw + 0.8rem, 1.75rem);
+  inset-inline-start: clamp(1rem, 2vw + 0.8rem, 1.75rem);
   inset-block-end: calc(clamp(1rem, 2vw + 0.8rem, 1.75rem) + 5.6rem);
   width: min(24rem, calc(100vw - 2rem));
   max-height: min(80vh, 42rem);

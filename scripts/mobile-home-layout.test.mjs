@@ -27,6 +27,8 @@ try {
     await page.evaluate(() => document.fonts.ready);
     await page.waitForFunction(() => !document.querySelector("#hero-replay").hidden);
     if (textScale !== 100) await page.addStyleTag({ content: `html { font-size: ${textScale}%; }` });
+    // The accessibility button reacts to the new layout on the next frames.
+    await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     const result = await page.evaluate((items) => {
       const box = (selector) => {
         const element = document.querySelector(selector);
