@@ -27,6 +27,7 @@ import { rewriteNicheHomeAnchors } from "./niche-links.mjs";
 import { buildRedirectPage } from "./redirect-page.mjs";
 import { previousSitemapDates, sitemapDocument } from "./sitemap.mjs";
 import { circularNiches, setNichePager } from "./niche-navigation.mjs";
+import { publishNicheVariant } from "./niche-publication.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = SITE_ORIGIN;
@@ -1526,6 +1527,7 @@ function setUseCaseMeta($, { pageKey, content, chrome, image: pageImage, locale,
 }
 
 async function buildNichePages(homeData) {
+  // Load the shared template once;each definition/locale gets a fresh DOM.
   const template = await readHtmlTemplate(nicheTemplatePath);
   const sitemapEntries = [];
 
@@ -1546,17 +1548,15 @@ async function buildNichePages(homeData) {
       rewriteNicheInternalLinks($, locale);
       setUseCaseMeta($, { pageKey: niche.key, content: ctx.content, chrome: ctx.chrome, image: niche.image, locale, localeOptions: homeData.localeOptions });
 
-      const outputFile = buildOutputFilePath(locale, niche.key);
-      await writeOutputFile(outputFile, serialize($, homeData, locale, niche.key));
+      // Finish this canonical and its ordered redirects before the next
+      // locale. Discover aliases only after the canonical write completes.
+      await publishNicheVariant({
+        locale, pageKey: niche.key,
+        render: () => serialize($, homeData, locale, niche.key),
+        legacyKeys: () => niche.legacyKeys || [],
+      }, { buildOutputFilePath, writeOutputFile, buildPagePath, buildPageUrl, buildRedirectPage });
 
-      for (const legacyKey of niche.legacyKeys || []) {
-        const redirectFile = buildOutputFilePath(locale, legacyKey);
-        await writeOutputFile(
-          redirectFile,
-          buildRedirectPage(buildPagePath(locale, niche.key), buildPageUrl(locale, niche.key))
-        );
-      }
-
+      // Redirects never appear in the sitemap;failed writes stop publication.
       sitemapEntries.push({
         loc: buildPageUrl(locale, niche.key),
         changefreq: "monthly",
@@ -1756,14 +1756,15 @@ async function buildGuestInvitesPages(homeData) {
     setUseCaseMeta($, { pageKey: guestInvitesPageKey, content, chrome, image, locale, localeOptions: homeData.localeOptions,
       service: { "@type": "Service", "@id": `${siteOrigin}/${HOST_PAGE_KEY}/#service`, name: "WIFIGATE Host", serviceType: "Automated guest access for hospitality", provider: { "@id": ORGANIZATION_ID }, brand: { "@id": BRAND_ID }, url: buildPageUrl(defaultLocale, guestInvitesPageKey), description: hostCopy.metaDescription } });
 
-    const outputFile = buildOutputFilePath(locale, guestInvitesPageKey);
-    await writeOutputFile(outputFile, serialize($, homeData, locale, guestInvitesPageKey));
+    // Both historical marketing URLs go directly to the localized canonical,
+    // after its completed write and before this locale's sitemap registration.
+    await publishNicheVariant({
+      locale, pageKey: guestInvitesPageKey,
+      render: () => serialize($, homeData, locale, guestInvitesPageKey),
+      legacyKeys: () => ["automation", "Automated-Guest-Invites-API"],
+    }, { buildOutputFilePath, writeOutputFile, buildPagePath, buildPageUrl, buildRedirectPage });
 
-    // Both historical marketing URLs go directly to the localized canonical.
-    for (const alias of ["automation", "Automated-Guest-Invites-API"]) {
-      await writeOutputFile(buildOutputFilePath(locale, alias), buildRedirectPage(buildPagePath(locale, guestInvitesPageKey), buildPageUrl(locale, guestInvitesPageKey)));
-    }
-
+    // Include the canonical Host URL with its existing monthly/0.9 policy.
     sitemapEntries.push({
       loc: buildPageUrl(locale, guestInvitesPageKey),
       changefreq: "monthly",
