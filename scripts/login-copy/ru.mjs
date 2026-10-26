@@ -51,4 +51,5 @@ export default {
   errorForbidden: "Доступ запрещён. Обратитесь к системному администратору.",
   errorGeneric: "Что-то пошло не так. Повторите попытку.",
   errorNoAccount: "У вас нет учётной записи WIFIGATE. Обратитесь в службу поддержки: {email}",
+  failedAttempts: "Неудачные попытки",
 };

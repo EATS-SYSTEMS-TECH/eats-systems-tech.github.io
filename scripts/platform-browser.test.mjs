@@ -410,7 +410,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
   );
 
   await t.test(
-    "English and Hebrew profile workspace lists keep Host, Pay, Manager order and use only platform GET",
+    "English and Hebrew profile workspace lists keep product order and use GET after the explicit login check",
     async () => {
       for (const mobile of [false, true]) {
         const fixture = await scenario(browser, {
@@ -458,7 +458,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
           0,
         );
         assert.equal(
-          fixture.calls.filter((call) => call.method && call.method !== "GET")
+          fixture.calls.filter((call) => call.method && call.method !== "GET" && call.path !== "/api/v1/platform/login")
             .length,
           0,
         );
@@ -503,7 +503,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
           fixture.calls
             .filter((call) => call.path)
             .map((call) => `${call.method} ${call.path}`),
-          ["GET /api/v1/platform/me"],
+          ["POST /api/v1/platform/login"],
         );
         assert.equal(
           await fixture.page

@@ -51,4 +51,5 @@ export default {
   errorForbidden: "액세스가 허용되지 않습니다. 시스템 관리자에게 문의하세요.",
   errorGeneric: "문제가 발생했습니다. 다시 시도하세요.",
   errorNoAccount: "WIFIGATE 계정이 없습니다. 고객지원에 문의하세요: {email}",
+  failedAttempts: "실패한 시도",
 };

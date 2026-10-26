@@ -51,4 +51,5 @@ export default {
   errorForbidden: "Accesul nu este permis. Contactați administratorul de sistem.",
   errorGeneric: "A apărut o problemă. Încercați din nou.",
   errorNoAccount: "Nu aveți un cont WIFIGATE. Contactați asistența: {email}",
+  failedAttempts: "Încercări nereușite",
 };

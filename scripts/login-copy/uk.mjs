@@ -51,4 +51,5 @@ export default {
   errorForbidden: "Доступ заборонено. Зверніться до адміністратора системи.",
   errorGeneric: "Щось пішло не так. Спробуйте ще раз.",
   errorNoAccount: "У вас немає облікового запису WIFIGATE. Зверніться до служби підтримки: {email}",
+  failedAttempts: "Невдалі спроби",
 };

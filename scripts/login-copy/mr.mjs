@@ -51,4 +51,5 @@ export default {
   errorForbidden: "ॲक्सेसची परवानगी नाही. सिस्टम ॲडमिनशी संपर्क साधा.",
   errorGeneric: "काहीतरी चूक झाली. कृपया पुन्हा प्रयत्न करा.",
   errorNoAccount: "तुमचे WIFIGATE खाते नाही. कृपया सपोर्टशी संपर्क साधा: {email}",
+  failedAttempts: "अयशस्वी प्रयत्न",
 };

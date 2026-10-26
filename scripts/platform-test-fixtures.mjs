@@ -196,7 +196,7 @@ export async function scenario(browser, options = {}) {
       body: request.postDataJSON(),
       key: request.headers()["idempotency-key"],
     });
-    if (url.pathname === "/api/v1/platform/me") {
+    if (["/api/v1/platform/me", "/api/v1/platform/login"].includes(url.pathname)) {
       if (state.legacy)
         return route.fulfill({
           status: 404,
@@ -207,6 +207,17 @@ export async function scenario(browser, options = {}) {
           status: 503,
           json: { error: { code: "AUTH_UNAVAILABLE" } },
         });
+      if (url.pathname.endsWith("/login")) {
+        const identity = fixtureProfile(state);
+        const denied = Object.values(identity.products).every(product => product.state === "no-plan");
+        if (denied) {
+          state.loginFailures = Math.min(5, (state.loginFailures ?? 0) + 1);
+          const until = new Date(Date.now() + 15 * 60 * 1000).toISOString();
+          if (state.loginFailures === 5) state.loginLockedUntil ??= until;
+          return route.fulfill({ status: state.loginFailures === 5 ? 429 : 403, json: { error: { code: state.loginFailures === 5 ? "PORTAL_LOGIN_LOCKED" : "PORTAL_LOGIN_DENIED", details: { reason: identity.user.emailVerified ? "no-account" : "unverified-email", attempts: { failed: state.loginFailures, limit: 5, resetAt: until, lockedUntil: state.loginLockedUntil ?? null } } } } });
+        }
+        return route.fulfill({ json: { identity, attempts: { failed: 0, limit: 5, resetAt: null, lockedUntil: null } } });
+      }
       return route.fulfill({ json: fixtureProfile(state) });
     }
     if (state.deniedStatus)

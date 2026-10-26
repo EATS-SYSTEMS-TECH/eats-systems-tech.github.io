@@ -52,4 +52,5 @@ export default {
   errorForbidden: "הגישה אינה מורשית. יש לפנות למנהל המערכת.",
   errorGeneric: "משהו השתבש. נא לנסות שוב.",
   errorNoAccount: "אין לך משתמש ב־WIFIGATE. נא לפנות לתמיכה: {email}",
+  failedAttempts: "ניסיונות כושלים",
 };

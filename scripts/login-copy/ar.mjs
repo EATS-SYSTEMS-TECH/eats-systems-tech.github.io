@@ -51,4 +51,5 @@ export default {
   errorForbidden: "الوصول غير مسموح به. تواصل مع مسؤول النظام.",
   errorGeneric: "حدث خطأ ما. يُرجى المحاولة مرة أخرى.",
   errorNoAccount: "ليس لديك حساب في WIFIGATE. يُرجى التواصل مع الدعم: {email}",
+  failedAttempts: "المحاولات الفاشلة",
 };

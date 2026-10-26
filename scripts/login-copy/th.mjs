@@ -51,4 +51,5 @@ export default {
   errorForbidden: "ไม่ได้รับอนุญาตให้เข้าถึง โปรดติดต่อผู้ดูแลระบบ",
   errorGeneric: "เกิดข้อผิดพลาด โปรดลองอีกครั้ง",
   errorNoAccount: "คุณไม่มีบัญชี WIFIGATE โปรดติดต่อฝ่ายสนับสนุน: {email}",
+  failedAttempts: "จำนวนครั้งที่ไม่สำเร็จ",
 };

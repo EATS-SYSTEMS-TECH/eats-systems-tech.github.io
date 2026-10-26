@@ -51,4 +51,5 @@ export default {
   errorForbidden: "Hindi pinahintulutan ang pagpasok. Makipag-ugnayan sa tagapangasiwa ng sistema.",
   errorGeneric: "May nangyaring mali. Pakisubukang muli.",
   errorNoAccount: "Wala kang WIFIGATE account. Makipag-ugnayan sa suporta: {email}",
+  failedAttempts: "Mga nabigong pagsubok",
 };

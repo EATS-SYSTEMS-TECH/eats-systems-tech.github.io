@@ -51,4 +51,5 @@ export default {
   errorForbidden: "アクセスが許可されていません。システム管理者にお問い合わせください。",
   errorGeneric: "問題が発生しました。もう一度お試しください。",
   errorNoAccount: "WIFIGATE アカウントがありません。サポートにお問い合わせください：{email}",
+  failedAttempts: "失敗した試行",
 };

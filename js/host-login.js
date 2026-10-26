@@ -7,7 +7,8 @@ import {
   signInRedirect,
 } from "./site-auth.js?v=20261022day1";
 import { isLocalStaging } from "./firebase-config.js";
-import { getPlatformProfile } from "./api/index.js?v=20261022ac1";
+import { portalLogin } from "./api/index.js?v=20261026login1";
+import { createLoginAttemptHint } from "./login-attempts.js?v=20261026login1";
 import {
   parsePlatformIdentity,
   loginDestination,
@@ -21,6 +22,10 @@ import { requestHumanCheck } from "./login-gate-game.js";
 const status = document.querySelector("#login-status");
 const progress = document.querySelector("#login-progress");
 const buttons = [...document.querySelectorAll("[data-provider]")];
+let attemptStorage;
+try { attemptStorage = localStorage; } catch { /* The server still enforces limits. */ }
+const attemptHint = createLoginAttemptHint({ storage: attemptStorage });
+const attemptCounter = document.querySelector("#login-attempt-count");
 if (isLocalStaging) {
   document.querySelector("[data-staging]").hidden = false;
 }
@@ -121,16 +126,36 @@ if (signInRefusals.includes(query.get("reason"))) {
 }
 function setBusy(value) {
   busy = value;
-  buttons.forEach((button) => {
-    button.disabled = value;
-  });
+  updateAttempts();
 }
+function updateAttempts() {
+  const state = attemptHint.current();
+  if (attemptCounter && attemptCounter.textContent !== `${state.failed}/5`) attemptCounter.textContent = `${state.failed}/5`;
+  const locked = Boolean(state.lockedUntil);
+  buttons.forEach((button) => {
+    button.disabled = busy || locked;
+  });
+  if (locked) {
+    hideProgress();
+    showMessage(copy.gameLocked.replace("{s}", String(Math.max(1, Math.ceil((Date.parse(state.lockedUntil) - Date.now()) / 1000)))));
+  }
+}
+let hadLock = Boolean(attemptHint.current().lockedUntil);
+setInterval(() => {
+  const locked = Boolean(attemptHint.current().lockedUntil);
+  if (hadLock && !locked) { status.textContent = ""; humanChecked = false; }
+  hadLock = locked;
+  updateAttempts();
+}, 1000);
+window.addEventListener("storage", () => { attemptHint.read(); updateAttempts(); });
 async function finishLogin(user) {
   if (loginAttempt?.uid === user.uid) {
     return loginAttempt.promise;
   }
   showProgress(copy.checking);
-  const promise = getPlatformProfile(user).then(async (value) => {
+  const promise = portalLogin(user).then(async ({ identity: value, attempts }) => {
+    attemptHint.set(attempts);
+    updateAttempts();
     const identity = parsePlatformIdentity(value, user.uid);
     const refusal = signInRefusal(identity);
     if (refusal) {
@@ -148,6 +173,15 @@ async function finishLogin(user) {
   try {
     await promise;
   } catch (error) {
+    if (["PORTAL_LOGIN_DENIED", "PORTAL_LOGIN_LOCKED"].includes(error.code)) {
+      attemptHint.set(error.details?.attempts);
+      hadLock = Boolean(attemptHint.current().lockedUntil);
+      refused = true;
+      restoredUser = undefined;
+      await signOut();
+      if (error.code === "PORTAL_LOGIN_DENIED") error.code = error.details?.reason === "unverified-email" ? "unverified-email" : "no-account";
+      updateAttempts();
+    }
     if (loginAttempt?.promise === promise) {
       loginAttempt = undefined;
     }
@@ -156,6 +190,7 @@ async function finishLogin(user) {
 }
 function report(error) {
   hideProgress();
+  if (attemptHint.current().lockedUntil) { updateAttempts(); return; }
   showMessage(
     error.status >= 500 || error.code === "HOST_API_UNAVAILABLE"
       ? copy.accessUnavailable
@@ -206,7 +241,7 @@ async function start() {
 }
 buttons.forEach((button) =>
   button.addEventListener("click", async () => {
-    if (busy || humanCheckOpen) {
+    if (busy || humanCheckOpen || attemptHint.current().lockedUntil) {
       return;
     }
     if (!humanChecked) {

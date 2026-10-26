@@ -51,4 +51,5 @@ export default {
   errorForbidden: "沒有存取權限，請聯絡系統管理員。",
   errorGeneric: "發生錯誤，請再試一次。",
   errorNoAccount: "您沒有 WIFIGATE 帳戶，請聯絡支援團隊：{email}",
+  failedAttempts: "失敗次數",
 };

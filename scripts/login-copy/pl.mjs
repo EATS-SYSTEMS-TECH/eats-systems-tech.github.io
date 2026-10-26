@@ -51,4 +51,5 @@ export default {
   errorForbidden: "Brak uprawnień dostępu. Skontaktuj się z administratorem systemu.",
   errorGeneric: "Coś poszło nie tak. Spróbuj ponownie.",
   errorNoAccount: "Nie masz konta WIFIGATE. Skontaktuj się z pomocą techniczną: {email}",
+  failedAttempts: "Nieudane próby",
 };

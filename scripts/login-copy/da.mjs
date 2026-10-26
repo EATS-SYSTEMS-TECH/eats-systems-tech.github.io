@@ -51,4 +51,5 @@ export default {
   errorForbidden: "Adgang nægtet. Kontakt systemadministratoren.",
   errorGeneric: "Noget gik galt. Prøv igen.",
   errorNoAccount: "Du har ikke en WIFIGATE-konto. Kontakt kundeservice: {email}",
+  failedAttempts: "Mislykkede forsøg",
 };

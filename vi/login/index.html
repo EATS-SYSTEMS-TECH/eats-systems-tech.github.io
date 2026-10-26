@@ -9,7 +9,7 @@
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" />
     <link rel="stylesheet" href="/css/login-gate-game.css?v=20261008b" />
-    <script type="module" src="/js/host-login.js?v=20261024mfa1"></script>
+    <script type="module" src="/js/host-login.js?v=20261026login1"></script>
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
   </head>
   <body class="portal-login app-login">
@@ -82,6 +82,7 @@
             <span>Tiếp tục với Apple</span>
           </button>
         </div>
+        <p class="app-login__status" id="login-attempts" role="status" aria-live="polite"><span>Lần thử thất bại</span> <bdi id="login-attempt-count" dir="ltr">0/5</bdi></p>
         <div
           id="login-progress"
           class="app-login__progress"

@@ -51,4 +51,5 @@ export default {
   errorForbidden: "Приступ није дозвољен. Обратите се администратору система.",
   errorGeneric: "Нешто није у реду. Покушајте поново.",
   errorNoAccount: "Немате WIFIGATE налог. Обратите се подршци: {email}",
+  failedAttempts: "Неуспели покушаји",
 };

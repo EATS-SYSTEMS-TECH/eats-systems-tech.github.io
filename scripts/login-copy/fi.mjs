@@ -51,4 +51,5 @@ export default {
   errorForbidden: "Käyttö ei ole sallittu. Ota yhteyttä järjestelmänvalvojaan.",
   errorGeneric: "Jokin meni vikaan. Yritä uudelleen.",
   errorNoAccount: "Sinulla ei ole WIFIGATE-tiliä. Ota yhteyttä tukeen: {email}",
+  failedAttempts: "Epäonnistuneet yritykset",
 };

@@ -51,4 +51,5 @@ export default {
   errorForbidden: "Akses tidak diizinkan. Hubungi pengelola sistem.",
   errorGeneric: "Terjadi kesalahan. Silakan coba lagi.",
   errorNoAccount: "Anda tidak memiliki akun WIFIGATE. Hubungi dukungan: {email}",
+  failedAttempts: "Percobaan gagal",
 };

@@ -51,4 +51,5 @@ export default {
   errorForbidden: "A hozzáférés nem engedélyezett. Fordulj a rendszergazdához.",
   errorGeneric: "Hiba történt. Próbáld újra.",
   errorNoAccount: "Nincs WIFIGATE-fiókod. Fordulj az ügyfélszolgálathoz: {email}",
+  failedAttempts: "Sikertelen próbálkozások",
 };

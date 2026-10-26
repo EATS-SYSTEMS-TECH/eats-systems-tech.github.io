@@ -51,4 +51,5 @@ export default {
   errorForbidden: "Přístup není povolen. Obraťte se na správce systému.",
   errorGeneric: "Něco se pokazilo. Zkuste to prosím znovu.",
   errorNoAccount: "Nemáte účet WIFIGATE. Obraťte se na podporu: {email}",
+  failedAttempts: "Neúspěšné pokusy",
 };

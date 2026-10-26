@@ -51,4 +51,5 @@ export default {
   errorForbidden: "Erişim izni yok. Sistem yöneticinize başvurun.",
   errorGeneric: "Bir sorun oluştu. Lütfen tekrar deneyin.",
   errorNoAccount: "WIFIGATE hesabınız yok. Lütfen destek ekibine başvurun: {email}",
+  failedAttempts: "Başarısız denemeler",
 };

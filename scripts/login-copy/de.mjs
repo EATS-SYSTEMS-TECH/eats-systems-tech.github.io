@@ -51,4 +51,5 @@ export default {
   errorForbidden: "Zugriff nicht gestattet. Wende dich an den Systemadministrator.",
   errorGeneric: "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
   errorNoAccount: "Du hast kein WIFIGATE-Konto. Bitte wende dich an den Support: {email}",
+  failedAttempts: "Fehlgeschlagene Versuche",
 };
