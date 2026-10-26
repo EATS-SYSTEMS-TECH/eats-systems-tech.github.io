@@ -888,29 +888,22 @@ ul {
   filter: drop-shadow(0 24px 40px rgba(20, 99, 255, 0.18));
 }
 
-.feature-card--no-subscription-fees .feature-card__image {
-  width: 78%;
-  height: 78%;
-}
-
-.feature-card--no-sim-router .feature-card__media {
-  padding: 0.65rem;
-}
-
-.feature-card--no-sim-router .feature-card__image {
-  width: 96%;
-  height: 96%;
-}
-
+/* Keep the two variants that originally precede history in their own group.
+   Explicit class lists retain specificity and combined-modifier source order. */
+.feature-card--no-sim-router .feature-card__media,
 .feature-card--quick-guest-invite .feature-card__media {
   padding: 0.65rem;
 }
 
+.feature-card--no-sim-router .feature-card__image,
 .feature-card--quick-guest-invite .feature-card__image {
   width: 96%;
   height: 96%;
 }
 
+/* History is a bounded screenshot with automatic height instead of equal
+   width/height percentages.
+   Its position between the variant groups is part of the existing cascade. */
 .feature-card--history-30-day .feature-card__media {
   padding: 0.35rem;
 }
@@ -922,61 +915,30 @@ ul {
   max-height: 96%;
 }
 
-.feature-card--auto-open .feature-card__media {
-  padding: 0.65rem;
-}
-
-.feature-card--auto-open .feature-card__image {
-  width: 96%;
-  height: 96%;
-}
-
-.feature-card--events .feature-card__media {
-  padding: 0.65rem;
-}
-
-.feature-card--events .feature-card__image {
-  width: 96%;
-  height: 96%;
-}
-
-.feature-card--no-subscription-fees .feature-card__media {
-  padding: 0.65rem;
-}
-
-.feature-card--no-subscription-fees .feature-card__image {
-  width: 96%;
-  height: 96%;
-}
-
-.feature-card--stability .feature-card__media {
-  padding: 0.65rem;
-}
-
-.feature-card--stability .feature-card__image {
-  width: 96%;
-  height: 96%;
-}
-
-.feature-card--rf-remote-learning .feature-card__media {
-  padding: 0.65rem;
-}
-
-.feature-card--rf-remote-learning .feature-card__image {
-  width: 96%;
-  height: 96%;
-}
-
+/* These six variants originally follow history. The no-subscription image's
+   earlier 78% rule was always overwritten here; retain the effective 96% size. */
+.feature-card--auto-open .feature-card__media,
+.feature-card--events .feature-card__media,
+.feature-card--no-subscription-fees .feature-card__media,
+.feature-card--stability .feature-card__media,
+.feature-card--rf-remote-learning .feature-card__media,
 .feature-card--security-privacy .feature-card__media {
   padding: 0.65rem;
 }
 
+.feature-card--auto-open .feature-card__image,
+.feature-card--events .feature-card__image,
+.feature-card--no-subscription-fees .feature-card__image,
+.feature-card--stability .feature-card__image,
+.feature-card--rf-remote-learning .feature-card__image,
 .feature-card--security-privacy .feature-card__image {
   width: 96%;
   height: 96%;
 }
 
 @media (max-width: 768px) {
+  /* Mobile defaults preserve the original frame ratio, padding and image size.
+     Modifier rules below stay explicit so later skins keep their precedence. */
   .feature-card {
     min-height: 200px;
   }
@@ -991,33 +953,21 @@ ul {
     height: 90%;
   }
 
-  .feature-card--no-subscription-fees .feature-card__media {
-    padding: 0.55rem;
-  }
-
-  .feature-card--no-subscription-fees .feature-card__image {
-    width: 90%;
-    height: 90%;
-  }
-
-  .feature-card--no-sim-router .feature-card__media {
-    padding: 0.55rem;
-  }
-
-  .feature-card--no-sim-router .feature-card__image {
-    width: 90%;
-    height: 90%;
-  }
-
+  /* Mobile order differs from desktop: no-subscription precedes history here. */
+  .feature-card--no-subscription-fees .feature-card__media,
+  .feature-card--no-sim-router .feature-card__media,
   .feature-card--quick-guest-invite .feature-card__media {
     padding: 0.55rem;
   }
 
+  .feature-card--no-subscription-fees .feature-card__image,
+  .feature-card--no-sim-router .feature-card__image,
   .feature-card--quick-guest-invite .feature-card__image {
     width: 90%;
     height: 90%;
   }
 
+  /* Keep history's automatic height and reduced maximum bounds at 768px. */
   .feature-card--history-30-day .feature-card__media {
     padding: 0.3rem;
   }
@@ -1029,46 +979,19 @@ ul {
     max-height: 90%;
   }
 
-  .feature-card--auto-open .feature-card__media {
-    padding: 0.55rem;
-  }
-
-  .feature-card--auto-open .feature-card__image {
-    width: 90%;
-    height: 90%;
-  }
-
-  .feature-card--events .feature-card__media {
-    padding: 0.55rem;
-  }
-
-  .feature-card--events .feature-card__image {
-    width: 90%;
-    height: 90%;
-  }
-
-  .feature-card--stability .feature-card__media {
-    padding: 0.55rem;
-  }
-
-  .feature-card--stability .feature-card__image {
-    width: 90%;
-    height: 90%;
-  }
-
-  .feature-card--rf-remote-learning .feature-card__media {
-    padding: 0.55rem;
-  }
-
-  .feature-card--rf-remote-learning .feature-card__image {
-    width: 90%;
-    height: 90%;
-  }
-
+  /* The five variants after history share one mobile frame/image treatment. */
+  .feature-card--auto-open .feature-card__media,
+  .feature-card--events .feature-card__media,
+  .feature-card--stability .feature-card__media,
+  .feature-card--rf-remote-learning .feature-card__media,
   .feature-card--security-privacy .feature-card__media {
     padding: 0.55rem;
   }
 
+  .feature-card--auto-open .feature-card__image,
+  .feature-card--events .feature-card__image,
+  .feature-card--stability .feature-card__image,
+  .feature-card--rf-remote-learning .feature-card__image,
   .feature-card--security-privacy .feature-card__image {
     width: 90%;
     height: 90%;
