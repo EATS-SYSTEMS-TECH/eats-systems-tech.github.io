@@ -344,15 +344,15 @@
           "accepted": true,
           "video": {
             "path": "assets/vid/use-cases/desktop/entry-doors-magnetic-locks-1080p.mp4",
-            "sha256": "a8fc88739d9e08d9b939169d6e5cf9ffbd53f0d5872d1ce9f61bd457480a294d"
+            "sha256": "391ce29de18ee8a3edf92cee646e3d1431b0c42302689576ce99a900e447dac2"
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/desktop/entry-doors-magnetic-locks-scene-hero.webp",
-            "sha256": "5a2bf616a30850eab85c5e5539a7a3fae2439b2d74b1aca566d3c5c3499a35c2"
+            "sha256": "9ea4a86b93bf6c06cc8d58f7d1e52f65c1da68cb191bd4c12faa6ed81f81c460"
           },
-          "width": 1918,
+          "width": 1916,
           "height": 1080,
-          "durationSeconds": 8.042,
+          "durationSeconds": 8.041667,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
