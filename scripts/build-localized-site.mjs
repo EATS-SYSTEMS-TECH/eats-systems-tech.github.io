@@ -9,6 +9,7 @@ import { benefitIconSvg } from "./benefit-icons.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
 import { LANDING_PAGES, LANDING_PAGE_LOCALES, validateLandingPageLocales } from "./landing-pages/index.mjs";
 import { AUTO_OPEN_PAGE_KEY, getAutoOpenPageContent, validateAutoOpenPageLocales } from "./auto-open-page.mjs";
+import { installHomeFeatureCards } from "./homepage-feature-grid.mjs";
 import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails, installHomeHostPointShells, installHostDetailShells } from "./host-marketing-page.mjs";
 import { SITE_LOGIN_LABELS, SITE_NAVIGATION } from "./site-navigation.mjs";
 import { RTL_LANGUAGES, SITE_LANGUAGES } from "./site-languages.mjs";
@@ -1055,6 +1056,8 @@ async function buildHomePages(homeData) {
     const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale);
     const $ = cheerio.load(template, { decodeEntities: false });
 
+    // Feature positions feed existing locale copy and Auto Open navigation.
+    installHomeFeatureCards($);
     // Install Host card shells before the existing translation and icon-override pipeline.
     installHomeHostPointShells($);
     setBodyDirection($, locale);
