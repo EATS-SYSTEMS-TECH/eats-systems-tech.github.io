@@ -1526,6 +1526,16 @@ function setUseCaseMeta($, { pageKey, content, chrome, image: pageImage, locale,
   });
 }
 
+// Every use-case-derived document follows this initialization sequence. An
+// optional page skin is applied after direction and before assets/scripts;
+// each failure leaves the same earlier mutations and prevents publication.
+function prepareUseCaseShell($, locale, pageKey, bodyClass = "") {
+  setBodyDirection($, locale);
+  if (bodyClass) $("body").addClass(bodyClass);
+  rewriteStaticAssets($, locale, pageKey);
+  appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, pageKey);
+}
+
 async function buildNichePages(homeData) {
   // Load the shared template once;each definition/locale gets a fresh DOM.
   const template = await readHtmlTemplate(nicheTemplatePath);
@@ -1538,9 +1548,8 @@ async function buildNichePages(homeData) {
       const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale);
       const $ = cheerio.load(template, { decodeEntities: false });
 
-      setBodyDirection($, locale);
-      rewriteStaticAssets($, locale, niche.key);
-      appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, niche.key);
+      // Initialize the shared document before localized body/media/metadata.
+      prepareUseCaseShell($, locale, niche.key);
       updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle);
       applyNicheSceneMedia($, { scene: homeData.sceneMedia.get(niche.key === "electric-gates" ? "electric-gates-barrier" : niche.key),
         assetPrefix: buildAssetPrefix(locale, niche.key), copy: homeData.homepageCopies[locale].hero.media });
@@ -1656,9 +1665,8 @@ async function buildLandingPages(homeData) {
       const $ = cheerio.load(template, { decodeEntities: false });
       const prefix = buildAssetPrefix(locale, key);
 
-      setBodyDirection($, locale);
-      rewriteStaticAssets($, locale, key);
-      appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, key);
+      // Landing content keeps its existing stylesheet/body additions after shell setup.
+      prepareUseCaseShell($, locale, key);
       $("link[href*='css/niche.css']").after(`
   <link rel="stylesheet" href="${prefix}css/landing.css?v=20261016a" />`);
       fillUseCaseBody($, { chrome, content, image, locale, pageKey: key, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
@@ -1692,10 +1700,8 @@ async function buildAutoOpenPages(homeData) {
     const content = getAutoOpenPageContent(locale, homeData.homepageCopies[locale]);
     const chrome = getNicheChrome(locale);
     const $ = cheerio.load(template, { decodeEntities: false });
-    setBodyDirection($, locale);
-    $("body").addClass("auto-open-page");
-    rewriteStaticAssets($, locale, AUTO_OPEN_PAGE_KEY);
-    appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, AUTO_OPEN_PAGE_KEY);
+    // This is the public marketing page shell, not app or native Auto Open logic.
+    prepareUseCaseShell($, locale, AUTO_OPEN_PAGE_KEY, "auto-open-page");
     fillUseCaseBody($, { chrome, content, image, locale, pageKey: AUTO_OPEN_PAGE_KEY, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
     $("#niche-faq, #niche-prev-link, #niche-next-link").remove();
     $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
@@ -1738,10 +1744,8 @@ async function buildGuestInvitesPages(homeData) {
     const content = getHostPageContent(hostCopy, homeData.homepageCopies[locale]);
     const chrome = getNicheChrome(locale);
 
-    setBodyDirection($, locale);
-    $("body").addClass("wifigate-host-page");
-    rewriteStaticAssets($, locale, guestInvitesPageKey);
-    appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, guestInvitesPageKey);
+    // Host details and legacy fragment translation follow the same shell boundary.
+    prepareUseCaseShell($, locale, guestInvitesPageKey, "wifigate-host-page");
     fillUseCaseBody($, { chrome, content, image, locale, pageKey: guestInvitesPageKey, accessibilityBundle });
     $("#niche-faq, #niche-prev-link, #niche-next-link").remove();
     $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();

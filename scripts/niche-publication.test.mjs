@@ -12,10 +12,11 @@ const imported = source.includes('from "./niche-publication.mjs"') ? await impor
 
 // Run the shipped page coordinators. Surrounding rendering is controlled here;
 // full private generation separately verifies the real renderer and outputs.
-function fixture({ definitions = [{ key: "one", legacyKeys: ["old", "older"] }], locales = ["en"], write, serializeError, scene = true } = {}) {
-  const trace = [], writes = [];
+function fixture({ definitions = [{ key: "one", legacyKeys: ["old", "older"] }], locales = ["en"], write, serializeError, scene = true, shellFailureAt } = {}) {
+  const trace = [], writes = [], shell = [];
+  const operation = (...entry) => { shell.push(entry); if (entry[0] === shellFailureAt) throw Error("shell " + shellFailureAt); };
   const dom = () => {
-    const $ = () => ({ addClass() { return this; }, remove() { return this; }, after() { return this; } });
+    const $ = () => ({ addClass(name) { operation("class", name); return this; }, remove() { return this; }, after() { return this; } });
     return $;
   };
   const boundary = {
@@ -24,8 +25,10 @@ function fixture({ definitions = [{ key: "one", legacyKeys: ["old", "older"] }],
     nicheRuntimeScriptsToAdd: [], cheerio: { load: dom },
     async readHtmlTemplate(name) { trace.push(["template", name]); return name; },
     buildNicheContext(data, niche, locale) { trace.push(["context", locale, niche.key]); return { content: {}, chrome: {} }; },
-    getBundle: () => ({}), setBodyDirection($, locale) { $.__locale = locale; },
-    rewriteStaticAssets() {}, appendScripts() {}, applyNicheSceneMedia() {}, updateFooterStaticUi() {}, rewriteNicheInternalLinks() {}, setUseCaseMeta() {},
+    getBundle: () => ({}), setBodyDirection($, locale) { operation("direction", locale); $.__locale = locale; },
+    rewriteStaticAssets($, locale, key) { operation("assets", locale, key); },
+    appendScripts($, scripts, anchor, locale, key) { operation("scripts", anchor, locale, key); },
+    applyNicheSceneMedia() {}, updateFooterStaticUi() {}, rewriteNicheInternalLinks() {}, setUseCaseMeta() {},
     updateNicheStaticUi($, ctx, niche) { $.__key = niche.key; },
     fillUseCaseBody($, values) { $.__key = values.pageKey; }, setUseCaseNavigation() {},
     buildAssetPrefix: () => "../", getNicheChrome: () => ({}),
@@ -41,10 +44,34 @@ function fixture({ definitions = [{ key: "one", legacyKeys: ["old", "older"] }],
       writes.push([file, content]); trace.push(["finish", file]);
     },
   };
-  const api = runInNewContext(["buildNichePages", "buildGuestInvitesPages"].map(declaration).join("\n") + "\n({buildNichePages,buildGuestInvitesPages});", boundary);
+  const sharedShell = source.match(/^function prepareUseCaseShell\([^\n]*\) \{[\s\S]*?^\}/m)?.[0] || "";
+  const api = runInNewContext(sharedShell + "\n" + ["buildNichePages", "buildGuestInvitesPages"].map(declaration).join("\n") + "\n({buildNichePages,buildGuestInvitesPages});", boundary);
   const homeData = { localeOptions: locales.map(code => ({ code })), accessibilityCopy: {}, sceneMedia: new Map(scene ? [["hotels-airbnb", { poster: { path: "poster.webp" }, width: 1200, height: 630 }]] : []), homepageCopies: Object.fromEntries(locales.map(code => [code, { hero: { media: {} }, footer: {} }])) };
-  return { trace, writes, niches: () => api.buildNichePages(homeData), host: () => api.buildGuestInvitesPages(homeData) };
+  return { trace, writes, shell, niches: () => api.buildNichePages(homeData), host: () => api.buildGuestInvitesPages(homeData) };
 }
+
+// Observe the real callers before and after consolidating their shared shell.
+// Direction precedes an optional page skin; assets precede script insertion.
+test("use-case shell preserves direction, page class, asset and script ordering", async () => {
+  const niche = fixture({ locales: ["en", "he"] }); await niche.niches();
+  assert.deepEqual(niche.shell, ["en", "he"].flatMap(locale => [
+    ["direction", locale], ["assets", locale, "one"],
+    ["scripts", "script[src*='js/accessibility.js']", locale, "one"],
+  ]));
+  const host = fixture(); await host.host();
+  assert.deepEqual(host.shell.slice(0, 4), [["direction", "en"], ["class", "wifigate-host-page"],
+    ["assets", "en", HOST_PAGE_KEY], ["scripts", "script[src*='js/accessibility.js']", "en", HOST_PAGE_KEY]]);
+  assert.deepEqual(host.shell.slice(4), [["assets", "en", HOST_PAGE_KEY]]);
+});
+
+test("shell initialization failures stop at their original boundary before publication", async () => {
+  for (const stage of ["direction", "class", "assets", "scripts"]) {
+    const h = fixture({ shellFailureAt: stage });
+    await assert.rejects(h.host(), new RegExp("shell " + stage));
+    assert.equal(h.shell.at(-1)[0], stage); assert.deepEqual(h.writes, []);
+    assert.equal(h.trace.some(([kind]) => kind === "serialize"), false);
+  }
+});
 
 test("canonical niche pages precede aliases in definition/locale order across39 locales", async () => {
   const locales = SITE_LANGUAGES.map(({ code }) => code), f = fixture({ definitions: NICHE_DEFINITIONS, locales });
