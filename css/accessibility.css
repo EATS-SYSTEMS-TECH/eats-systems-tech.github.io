@@ -124,6 +124,37 @@
   z-index: 70;
 }
 
+/* Thin scrollbar without arrows, kept clear of the rounded corners. */
+.a11y-panel::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+.a11y-panel::-webkit-scrollbar-button {
+  display: none;
+}
+
+.a11y-panel::-webkit-scrollbar-track {
+  margin-block: 1.25rem;
+  background: transparent;
+}
+
+.a11y-panel::-webkit-scrollbar-thumb {
+  border: 0.25rem solid transparent;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.22) padding-box;
+}
+
+.a11y-panel::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(15, 23, 42, 0.38);
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .a11y-panel {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(15, 23, 42, 0.28) transparent;
+  }
+}
+
 .a11y-panel.is-open {
   opacity: 1;
   pointer-events: auto;
