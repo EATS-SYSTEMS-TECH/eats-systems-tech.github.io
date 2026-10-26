@@ -4,13 +4,8 @@
 
 <!-- Audience labels are translated by the caller before these exact nodes are appended. -->
     <section class="wa-audience" aria-label="Who it is for">
-      <div class="container wa-audience__row">
-        <span class="wa-audience__label" data-i18n="guestInvites.marketing.audience.label">Built for:</span>
-        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.hotels">Hotels</span>
-        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.rentals">Airbnb &amp; short-term rentals</span>
-        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.guesthouses">Guesthouses</span>
-        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.parking">Rental parking &amp; garages</span>
-      </div>
+      <!-- Audience chips are composed before the existing locale translation pass. -->
+      <div class="container wa-audience__row"></div>
     </section>
 
 <!-- Security detail cards keep their existing copy keys and media within the scoped Host wrapper. -->
@@ -23,24 +18,8 @@
           <p class="wa-lead" data-i18n="guestInvites.marketing.secure.subtitle">Built to protect the property behind
             every gate.</p>
         </div>
-        <div class="wa-secure__grid">
-          <article class="wa-secure__item">
-            <h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i1t">Encrypted end to end</h3>
-            <p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i1x">Every invitation is encrypted, so
-              access details cannot be read or copied in transit.</p>
-          </article>
-          <article class="wa-secure__item">
-            <h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i2t">Works at the gate, not the
-              cloud</h3>
-            <p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i2x">The entrance verifies access
-              locally, so it keeps working even without a connection.</p>
-          </article>
-          <article class="wa-secure__item">
-            <h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i3t">You stay in control</h3>
-            <p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i3x">Access is tied to each stay and each
-              guest, and you can shut it down whenever you need to.</p>
-          </article>
-        </div>
+        <!-- Security cards share one title/body structure with the original translation keys. -->
+        <div class="wa-secure__grid"></div>
       </div>
     </section>
 

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import test from "node:test";
 import * as cheerio from "cheerio";
-import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails, installHostPricingShells } from "./host-marketing-page.mjs";
+import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails, installHostPricingShells, installHostDetailShells } from "./host-marketing-page.mjs";
 import { SITE_LANGUAGES } from "./site-languages.mjs";
 import { BENEFIT_ICONS } from "./benefit-icons.mjs";
 const { installHomeHostPointShells } = await import("./host-marketing-page.mjs");
@@ -58,7 +58,7 @@ test("missing localized copy fails instead of publishing a partial page or a fal
 
 test("Host details preserve translated sections, plan prices and actions inside their own style scope", async () => {
   const legacy = cheerio.load(await fs.readFile(new URL("../templates/guest-invites-api.template.html", import.meta.url), "utf8"));
-  installHostPricingShells(legacy);
+  installHostDetailShells(legacy);
   // The caller supplies the translated document; preserve those exact nodes.
   legacy(".wa-secure__text").first().text("פרטי האירוח המקומיים נשמרים בדיוק");
   legacy(".wa-pricing__note").text("Localized pricing note");
@@ -155,5 +155,37 @@ test("missing or ambiguous pricing slots fail before mutating the fragment", () 
     const $ = cheerio.load(markup), original = $.html();
     assert.throws(() => installHostPricingShells($), /requires one plan grid/);
     assert.equal($.html(), original);
+  }
+});
+
+test("Host detail composition retains ordered audience/security slots and the final contact section", async () => {
+  const $ = cheerio.load(await fs.readFile(new URL("../templates/guest-invites-api.template.html", import.meta.url), "utf8"));
+  const contact = $(".wa-cta").toString(), headings = $(".wa-head").toString();
+  installHostDetailShells($);
+  assert.deepEqual($(".wa-chip").map((_, node) => $(node).attr("data-i18n")).get(),
+    ["hotels", "rentals", "guesthouses", "parking"].map(key => `guestInvites.marketing.audience.${key}`));
+  assert.deepEqual($(".wa-chip").map((_, node) => $(node).text()).get(),
+    ["Hotels", "Airbnb & short-term rentals", "Guesthouses", "Rental parking & garages"]);
+  assert.equal($(".wa-audience__label").attr("data-i18n"), "guestInvites.marketing.audience.label");
+  assert.equal($(".wa-secure__item").length, 3);
+  $(".wa-secure__item").each((index, node) => {
+    assert.equal($(node).find("h3").attr("data-i18n"), `guestInvites.marketing.secure.i${index + 1}t`);
+    assert.equal($(node).find("p").attr("data-i18n"), `guestInvites.marketing.secure.i${index + 1}x`);
+  });
+  assert.equal($(".wa-plan").length, 4);
+  assert.equal($(".wa-cta").toString(), contact);
+  assert.equal($(".wa-head").toString(), headings);
+});
+
+test("all Host detail slots are checked before any list or pricing mutation", async () => {
+  const markup = await fs.readFile(new URL("../templates/guest-invites-api.template.html", import.meta.url), "utf8");
+  for (const selector of [".wa-audience__row", ".wa-secure__grid", ".wa-pricing__grid"]) {
+    for (const mode of ["missing", "duplicate"]) {
+      const $ = cheerio.load(markup), slot = $(selector);
+      if (mode === "missing") slot.remove(); else slot.after(slot.clone());
+      const original = $.html();
+      assert.throws(() => installHostDetailShells($), /Host details require one audience row/);
+      assert.equal($.html(), original, `${selector}/${mode}: no partial mutation`);
+    }
   }
 });

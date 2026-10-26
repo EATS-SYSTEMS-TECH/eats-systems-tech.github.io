@@ -87,6 +87,44 @@ export function installHostPricingShells($) {
   slot.html(`\n${HOST_PLANS.map(hostPlanShell).join("\n\n")}\n        `);
 }
 
+// The audience labels and security explanations retain their existing public
+// order and copy keys. Locale modules still own the final published wording.
+const HOST_AUDIENCES = [
+  ["hotels", "Hotels"], ["rentals", "Airbnb &amp; short-term rentals"],
+  ["guesthouses", "Guesthouses"], ["parking", "Rental parking &amp; garages"],
+];
+const HOST_SECURITY = [
+  ["Encrypted end to end", "Every invitation is encrypted, so access details cannot be read or copied in transit."],
+  ["Works at the gate, not the cloud", "The entrance verifies access locally, so it keeps working even without a connection."],
+  ["You stay in control", "Access is tied to each stay and each guest, and you can shut it down whenever you need to."],
+];
+
+// Compose the repeated detail lists and the existing pricing cards together.
+// Validate every required slot before changing any of them; section headings,
+// accessible labels and the final contact action remain in the source template.
+export function installHostDetailShells($) {
+  const audience = $("section.wa-audience .wa-audience__row");
+  const security = $("section.wa-secure .wa-secure__grid");
+  const pricing = $("section.wa-pricing .wa-pricing__grid");
+  if ([audience, security, pricing].some(slot => slot.length !== 1)) {
+    throw new Error("Host details require one audience row, security grid and plan grid");
+  }
+  // A single keyed span structure owns all four audience labels. Keep the lead
+  // label separate so translators and styles continue to identify it correctly.
+  const chips = HOST_AUDIENCES.map(([key, text]) =>
+    `        <span class="wa-chip" data-i18n="guestInvites.marketing.audience.${key}">${text}</span>`);
+  const audienceMarkup = `\n        <span class="wa-audience__label" data-i18n="guestInvites.marketing.audience.label">Built for:</span>\n${chips.join("\n")}\n      `;
+  // Security cards share one title/body shape and retain their original i1..i3
+  // translation slots. This is marketing presentation, not access enforcement.
+  const cards = HOST_SECURITY.map(([title, text], index) => `          <article class="wa-secure__item">
+            <h3 class="wa-secure__title" data-i18n="guestInvites.marketing.secure.i${index + 1}t">${title}</h3>
+            <p class="wa-secure__text" data-i18n="guestInvites.marketing.secure.i${index + 1}x">${text}</p>
+          </article>`);
+  audience.html(audienceMarkup);
+  security.html(`\n${cards.join("\n")}\n        `);
+  installHostPricingShells($);
+}
+
 function requiredText(value, field) {
   if (typeof value !== "string" || !value.trim()) {
     throw new Error(`Missing localized WIFIGATE Host copy: ${field}`);
