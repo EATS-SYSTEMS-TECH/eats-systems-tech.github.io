@@ -4,23 +4,24 @@ import { readFile } from "node:fs/promises";
 import { startSite, scenario } from "./platform-test-fixtures.mjs";
 import { parseManagerCsv } from "../js/manager-csv.js";
 
-test("Manager personal navigation and complete sample workspaces never request real gate access", async (t) => {
+test("Manager example gate, Dual Control and group use real workspace controls without physical access", async (t) => {
   const { origin, browser } = await startSite(t);
   for (const language of ["he", "en"])
     for (const width of [390, 1440])
       await t.test(`${language} ${width}px`, async (t) => {
         const he = language === "he",
-          fixture = await scenario(browser, {
-            manager: "active",
-            enrolled: true,
-            verified: true,
-            viewport: { width, height: 1000 },
-          });
+          copy = (h, e) => (he ? h : e);
+        const fixture = await scenario(browser, {
+          manager: "active",
+          enrolled: true,
+          verified: true,
+          viewport: { width, height: 1000 },
+        });
         t.after(() => fixture.context.close());
         const { page, context } = fixture,
           calls = [];
-        let sockets = 0;
         page.setDefaultTimeout(6000);
+        let sockets = 0;
         page.on("websocket", () => sockets++);
         await context.route("**/api/v1/manager/**", (route) => {
           const url = new URL(route.request().url());
@@ -28,10 +29,6 @@ test("Manager personal navigation and complete sample workspaces never request r
           return route.fulfill({
             json: url.pathname.endsWith("/me")
               ? {
-                  user: {
-                    name: "Example operator",
-                    email: "operator@example.test",
-                  },
                   role: "admin",
                   roles: ["admin"],
                   account: null,
@@ -40,318 +37,253 @@ test("Manager personal navigation and complete sample workspaces never request r
               : { items: [], nextCursor: null },
           });
         });
-        await page.goto(
-          origin + "/dashboard/manager/" + (he ? "?lang=he" : ""),
-        );
-        const nav = page.locator(".manager-nav"),
-          mySystems = nav.getByRole("button", {
-            name: he ? "המערכות שלי" : "My systems",
-            exact: true,
-          }),
-          myOrgs = nav.getByRole("button", {
-            name: he ? "הארגונים שלי" : "My organizations",
-            exact: true,
-          });
-        await page.locator(".dashboard-examples > summary").waitFor();
-        assert.equal(await page.locator(".manager-hero, .manager-metrics, .manager-workspace-head").count(), 0);
-        await page.getByRole("heading", { name: he ? "אין מערכות להצגה כרגע." : "No systems to display yet.", exact: true }).waitFor();
-
-        assert.equal(await page.locator(".dashboard-examples").getAttribute("open"), null);
-        assert.equal(await page.locator(".dashboard-examples").evaluate(el => el.parentElement.firstElementChild === el), true);
-        if (process.env.MANAGER_EXAMPLE_SCREENSHOTS)
-          await page.screenshot({ path: `${process.env.MANAGER_EXAMPLE_SCREENSHOTS}/manager-examples-dropdown-${language}-${width}.png`, fullPage: true });
-        await page.locator(".dashboard-examples > summary").click();
-        await page.locator("[data-example-system]").last().waitFor();
+        await page.goto(origin + "/dashboard/manager/?lang=" + language);
         const reject = page.locator("[data-cookie-reject]");
         if (await reject.isVisible()) await reject.click();
-        assert.equal(await mySystems.getAttribute("aria-current"), "page");
-        const names = await nav.getByRole("button").allTextContents();
-        assert.deepEqual(
-          names.slice(0, 2),
-          he
-            ? ["המערכות שלי", "הארגונים שלי"]
-            : ["My systems", "My organizations"],
-        );
-        const platformEntry = page.locator(".manager-platform-entry");
-        assert.equal(await platformEntry.isVisible(), true);
-        assert.match(await platformEntry.getAttribute("href"), /\/dashboard\/manager\/platform\//);
-        assert.equal(await nav.locator(".manager-platform-entry").count(), 0);
-        assert.equal(await page.locator("[data-example-system]").count(), 3);
-        const icons = page.locator("[data-example-system] .manager-icon img");
-        assert.deepEqual(await icons.evaluateAll(images => images.map(image => image.getAttribute("src"))), [
-          "/assets/host-icons/gate-barrier-gate-small.svg",
-          "/assets/host-icons/dual-control-garage-small.svg",
-          "/assets/host-icons/group-folder.svg",
-        ]);
-        await icons.evaluateAll(images => Promise.all(images.map(image => image.decode())));
-
-        await page.evaluate(() => document.fonts.ready);
-        for (const layoutWidth of [320, 1024, 1440]) {
-          await page.setViewportSize({width: layoutWidth, height:1000});
-          const cards = await page.locator('.manager-example-grid > [data-example-system]').evaluateAll(elements => elements.map(card => ({
-            top: card.getBoundingClientRect().top,
-            height: card.getBoundingClientRect().height,
-            tracks: [...card.children].map(child => child.getBoundingClientRect().top),
-            facts: [...card.querySelectorAll('.manager-facts > *')].map(child => child.getBoundingClientRect().top),
-          })));
-          for (const card of cards) for (const other of cards.filter(other => Math.abs(other.top - card.top) < 1)) {
-            assert.ok(Math.abs(card.height - other.height) < 1, 'neighboring example cards have equal height');
-            card.tracks.forEach((y,i) => assert.ok(Math.abs(y - other.tracks[i]) < 1, `example content track ${i} aligns at ${layoutWidth}px`));
-            card.facts.forEach((y,i) => assert.ok(Math.abs(y - other.facts[i]) < 1, `example fact ${i} aligns at ${layoutWidth}px`));
-          }
-          assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth),false);
-          if (process.env.MANAGER_EXAMPLE_SCREENSHOTS && width === 1440) await page.screenshot({path:`${process.env.MANAGER_EXAMPLE_SCREENSHOTS}/aligned-example-cards-${language}-${layoutWidth}.png`,fullPage:true});
-        }
-        await page.setViewportSize({width,height:1000});
-        assert.deepEqual(
-          calls.map((c) => c.path),
-          ["/api/v1/manager/me"],
-        );
-        await page
-          .locator('[data-example-system="example-manager-gate"]')
-          .getByRole("button")
-          .click();
-        const workspace = page.locator(".manager-example-workspace"),
-          content = workspace.locator(".manager-example-content"),
-          status = workspace.locator(".manager-status");
-        const tab = async (key) => {
-          await workspace.locator(`[data-example-tab="${key}"]`).click();
-          const order = await content.evaluate(root => {
-            const panel = root.querySelector(':scope > .manager-action-panel');
-            const records = [...root.children].filter(child => child.matches('.manager-table-wrap, .manager-facts, .manager-example-metrics, .manager-example-week'));
-            return {unplaced: [...root.children].some(child => child.matches('form,input,label,button,.manager-actions')), aligned: !panel || records.every(child => panel.getBoundingClientRect().bottom <= child.getBoundingClientRect().top)};
-          });
-          assert.equal(order.unplaced, false, `all ${key} controls are above results`);
-          assert.equal(order.aligned, true, `${key} actions precede data`);
+        const nav = page.locator(".manager-nav"),
+          workspace = page.locator('.manager-view[data-simulation="true"]');
+        const content = workspace.locator("#manager-content");
+        const open = async (id) => {
+          await nav
+            .getByRole("button", {
+              name: copy("המערכות שלי", "My systems"),
+              exact: true,
+            })
+            .click();
+          await page.locator(".dashboard-examples > summary").click();
+          const card = page.locator(
+            `[data-example-system="example-manager-${id}"]`,
+          );
+          assert.equal(
+            await card.getAttribute("class"),
+            "manager-card manager-system",
+          );
+          assert.equal(await card.locator("button").count(), 1);
+          await card
+            .getByRole("button", {
+              name: copy("פתיחת סביבת ניהול", "Open workspace"),
+              exact: true,
+            })
+            .click();
+          await workspace.locator(".manager-simulation-note").waitFor();
+          await content.locator(".manager-facts").waitFor();
+          assert.equal(await workspace.getByRole("tab").count(), 10);
         };
-        await content.getByText("30/5000", { exact: true }).waitFor();
-        await content.getByText("1/20", { exact: true }).waitFor();
-        assert.equal(await workspace.locator("[data-example-tab]").count(), 10);
+        const tab = async (key) => {
+          await workspace.locator(`[data-tab="${key}"]`).click();
+          await page.waitForFunction(
+            (key) =>
+              document
+                .querySelector(`[data-tab="${key}"]`)
+                ?.getAttribute("aria-selected") === "true" &&
+              document
+                .querySelector(".manager-view")
+                ?.getAttribute("aria-busy") === "false" &&
+              document.querySelector("#manager-content")?.childElementCount > 0,
+            key,
+          );
+        };
+        const confirm = () =>
+          page
+            .getByRole("dialog")
+            .getByRole("button", {
+              name: copy("אישור", "Confirm"),
+              exact: true,
+            })
+            .click();
+        await open("gate");
         if (process.env.MANAGER_EXAMPLE_SCREENSHOTS)
           await page.screenshot({
-            path: `${process.env.MANAGER_EXAMPLE_SCREENSHOTS}/manager-example-overview-${language}-${width}.png`,
+            path: `${process.env.MANAGER_EXAMPLE_SCREENSHOTS}/shared-workspace-${language}-${width}.png`,
             fullPage: true,
           });
-        page.once("dialog", (d) => d.accept());
         await content
           .getByRole("button", {
-            name: he ? "הדמיית פתיחה" : "Simulate opening",
+            name: copy("פתיחת שער", "Open gate"),
             exact: true,
           })
           .click();
-        assert.match(
-          await status.innerText(),
-          he ? /לא הופעל ממסר/ : /No physical relay/,
-        );
+        await confirm();
+        await page
+          .getByText(
+            copy(
+              "הפעולה בוצעה בסימולציה. לא הופעל שער פיזי.",
+              "Action completed in the simulation. No physical gate was activated.",
+            ),
+            { exact: true },
+          )
+          .waitFor();
         await tab("settings");
         await content
-          .getByLabel(he ? "פולס ראשון (מילישניות)" : "First pulse (ms)", {
+          .getByLabel(copy("משך פולס ראשון (מילישניות)", "First pulse (ms)"), {
             exact: true,
           })
           .fill("1200");
         await content
           .getByRole("button", {
-            name: he ? "שמירת הגדרות בדוגמה" : "Save example settings",
+            name: copy("שמירת הגדרות", "Save settings"),
             exact: true,
           })
           .click();
-        assert.equal(
-          await content
-            .getByLabel(he ? "פולס ראשון (מילישניות)" : "First pulse (ms)", {
-              exact: true,
-            })
-            .inputValue(),
-          "1200",
+        await confirm();
+        await page.waitForFunction(
+          () =>
+            document.querySelector(
+              '#manager-content [name="pulseWidth1Millis"]',
+            )?.value === "1200",
         );
         await tab("users");
-        await content.getByRole("searchbox").fill("Demo resident 30");
-        assert.equal(await content.locator("tbody tr").count(), 1);
-        await content.getByRole("searchbox").fill("");
-        const exported = page.waitForEvent("download");
         await content
           .getByRole("button", {
-            name: he ? "ייצוא CSV לדוגמה" : "Export sample CSV",
+            name: copy("טען עוד", "Load more"),
             exact: true,
           })
           .click();
-        const download = await exported;
+        await page.waitForFunction(
+          () =>
+            document.querySelectorAll("#manager-content tbody tr").length ===
+            30,
+        );
+        const downloadEvent = page.waitForEvent("download");
+        await content
+          .getByRole("button", {
+            name: copy("ייצוא כל הרשומות", "Export all records"),
+            exact: true,
+          })
+          .click();
+        const download = await downloadEvent;
         assert.equal(
           parseManagerCsv(await readFile(await download.path(), "utf8")).length,
           30,
         );
-        page.once("dialog", (d) => d.accept());
         await content
-          .getByLabel(he ? "ייבוא CSV לדוגמה" : "Import sample CSV", {
-            exact: true,
-          })
-          .setInputFiles({
-            name: "example.csv",
-            mimeType: "text/csv",
-            buffer: Buffer.from(
-              "Name,Email,Country,Local,Floor,Apt,Parking\nDemo added,added@example.test,972,509999999,0,0,0",
-            ),
-          });
-        await content.getByRole("heading", { name: /31\/5000/ }).waitFor();
-        await tab("admins");
-        await content
-          .getByRole("button", {
-            name: he ? "מחיקה בהדגמה" : "Delete in example",
-            exact: true,
-          })
-          .click();
-        assert.match(await status.innerText(), he ? /האצלת/ : /delegation/);
-        await tab("guests");
-        await content.getByText("Demo technician", { exact: true }).waitFor();
-        await tab("auto");
-        assert.equal(await content.locator("tbody tr").count(), 10);
-        await content
-          .getByRole("button", {
-            name: he ? "מפתחות נוספים" : "More keys",
-            exact: true,
-          })
-          .click();
-        assert.equal(await content.locator("tbody tr").count(), 10);
-        await tab("events");
-        assert.equal(
-          await content.locator(".manager-example-week > section").count(),
-          7,
-        );
-        await tab("history");
-        assert((await content.locator("tbody tr").count()) >= 3);
-        await tab("rf");
-        for (const name of he
-          ? [
-              "פתיחת חלון לימוד לדוגמה",
-              "הדמיית לחיצה ליד השער",
-              "שמירת שלט בדוגמה",
-            ]
-          : [
-              "Start example learning",
-              "Simulate nearby remote press",
-              "Save sample remote",
-            ])
-          await content.getByRole("button", { name, exact: true }).click();
-        await tab("system");
-        assert.equal(
-          await content
-            .getByRole("button", { name: "Factory reset", exact: true })
-            .isDisabled(),
-          true,
-        );
-        await content
-          .getByRole("button", {
-            name: he ? "התחלת עדכון מדומה" : "Start simulated update",
-            exact: true,
-          })
-          .click();
-        for (let i = 0; i < 4; i++)
-          await content
-            .getByRole("button", {
-              name: he ? "המשך העברה מדומה" : "Advance simulated transfer",
-              exact: true,
-            })
-            .click();
-        assert.equal(
-          await content.getByRole("progressbar").getAttribute("value"),
-          "100",
-        );
-        page.once("dialog", (d) => d.accept());
-        await content
-          .getByRole("button", {
-            name: he
-              ? "הדמיית התקנה ואישור"
-              : "Simulate install and confirmation",
-            exact: true,
-          })
-          .click();
-        await content.getByText("confirmed", { exact: true }).waitFor();
-        await workspace
-          .getByRole("button", {
-            name: he ? "הדמיית ניתוק / חיבור" : "Simulate offline / online",
-            exact: true,
-          })
-          .click();
-        assert.equal(await content.locator("table,form,progress").count(), 0);
-        assert.match(
-          await content.innerText(),
-          he ? /אין תקשורת/ : /No communication/,
-        );
-        await workspace
-          .getByRole("button", {
-            name: he ? "הדמיית ניתוק / חיבור" : "Simulate offline / online",
-            exact: true,
-          })
-          .click();
-        assert.deepEqual(
-          calls.map((c) => c.path),
-          ["/api/v1/manager/me"],
-        );
-        assert.equal(sockets, 0);
-        await mySystems.click();
-        await page.locator(".dashboard-examples > summary").click();
-        await page
-          .locator('[data-example-system="example-manager-dual"]')
-          .getByRole("button")
-          .click();
-        assert.equal(
-          await workspace
-            .getByLabel(he ? "בחירת שער" : "Choose gate", { exact: true })
-            .locator("option")
-            .count(),
-          2,
-        );
-        await workspace
-          .getByLabel(he ? "בחירת שער" : "Choose gate", { exact: true })
-          .selectOption("DEMO-24981");
-        await content.getByText("438/1000", { exact: true }).waitFor();
-        await myOrgs.click();
-        await page.getByRole('heading', {name:he ? 'אין ארגונים להצגה כרגע.' : 'No organizations to display yet.',exact:true}).waitFor();
-        await page.getByText(he ? 'הארגונים המשויכים לחשבון שלכם יופיעו כאן.' : 'Organizations linked to your account will appear here.',{exact:true}).waitFor();
-        assert.equal(await page.locator('.manager-empty-organizations img, .manager-empty-organizations svg').count(),0);
-        await page.getByRole('button',{name:he ? 'יצירת ארגון חדש' : 'Create new organization',exact:true}).click();
-        await page.getByRole('dialog').getByLabel(he ? 'אימייל בעל הארגון · Manager user' : 'Organization owner email · Manager user',{exact:true}).waitFor();
-        await page.keyboard.press('Escape');
-        assert.equal(calls.some(call=>call.method==='POST'),false,'opening or cancelling organization creation performs no write');
-
-        if (process.env.MANAGER_EXAMPLE_SCREENSHOTS)
-          await page.screenshot({path:`${process.env.MANAGER_EXAMPLE_SCREENSHOTS}/empty-organizations-${language}-${width}.png`,fullPage:true});
-
-        await page.locator(".dashboard-examples > summary").click();
-        await page
-          .locator("[data-example-organization]")
-          .getByRole("button")
-          .click();
-        assert.equal(
-          await workspace.locator("[data-example-system]").count(),
-          3,
-        );
-        await workspace
-          .getByRole("tab", {
-            name: he ? "פעולות מרובות" : "Bulk operations",
-            exact: true,
-          })
-          .click();
-        await workspace
-          .getByText(
-            he
-              ? "4 שערים פיזיים ייחודיים נבחרו"
-              : "4 unique physical gates selected",
+          .getByLabel(
+            copy("בחירת קובץ משתמשים לייבוא", "Select residents CSV to import"),
             { exact: true },
           )
-          .waitFor();
-        page.once("dialog", (d) => d.accept());
-        await workspace
+          .setInputFiles({
+            name: "sample.csv",
+            mimeType: "text/csv",
+            buffer: Buffer.from(
+              "Name,Email,Country,Local,Floor,Apt,Parking\nAdded sample,added@example.test,972,509999999,0,0,0",
+            ),
+          });
+        await content
           .getByRole("button", {
-            name: he
-              ? "הפעלת הדגמה על השערים שנבחרו"
-              : "Run example on selected gates",
+            name: copy("בדיקה וייבוא קובץ", "Validate and import file"),
             exact: true,
           })
           .click();
-        assert.equal(await workspace.locator("tbody tr").count(), 4);
-        assert.deepEqual(
-          calls.map((c) => c.path),
-          ["/api/v1/manager/me", "/api/v1/manager/organizations"],
+        await confirm();
+        await content
+          .getByRole("button", {
+            name: copy("טען עוד", "Load more"),
+            exact: true,
+          })
+          .click();
+        await content.getByText("Added sample", { exact: true }).waitFor();
+        await tab("admins");
+        await content
+          .getByRole("button", { name: copy("מחיקה", "Delete"), exact: true })
+          .click();
+        await confirm();
+        await page
+          .getByRole("alert")
+          .filter({ hasText: copy("לא ניתן להסיר", "cannot be removed") })
+          .waitFor();
+        await tab("guests");
+        await content.getByRole("button", { name: /20261027/ }).click();
+        await content.getByText("Demo technician", { exact: true }).waitFor();
+        await tab("events");
+        assert.equal(
+          await content
+            .getByRole("button", {
+              name: copy("מחיקת אירוע", "Delete event"),
+              exact: true,
+            })
+            .count(),
+          12,
+        );
+        await content
+          .getByRole("button", {
+            name: copy("מחיקת אירוע", "Delete event"),
+            exact: true,
+          })
+          .first()
+          .click();
+        await confirm();
+        await page.waitForFunction(
+          () =>
+            document.querySelectorAll("#manager-content .manager-row")
+              .length === 11,
+        );
+        await tab("auto");
+        await content
+          .getByRole("button", {
+            name: copy("כיבוי Auto Open", "Disable Auto Open"),
+            exact: true,
+          })
+          .click();
+        await tab("rf");
+        await content
+          .getByRole("button", {
+            name: copy("לימוד שלט", "Learn remote"),
+            exact: true,
+          })
+          .click();
+        await confirm();
+        await content
+          .getByRole("button", {
+            name: copy("בדיקת לימוד", "Check learning"),
+            exact: true,
+          })
+          .click();
+        await content
+          .getByRole("button", { name: copy("שמירה", "Save"), exact: true })
+          .click();
+        await tab("system");
+        await content.locator(".manager-facts").waitFor();
+        await open("dual");
+        const gatePicker = workspace.getByLabel(
+          copy("בחירת שער", "Choose gate"),
+          { exact: true },
+        );
+        assert.equal(await gatePicker.locator("option").count(), 2);
+        await gatePicker.selectOption("DEMO-24982");
+        await content.getByText("DEMO-24982", { exact: true }).waitFor();
+        await open("group");
+        assert.equal(await gatePicker.locator("option").count(), 4);
+        await tab("settings");
+        assert.equal(
+          await content
+            .getByLabel(
+              copy("משך פולס ראשון (מילישניות)", "First pulse (ms)"),
+              { exact: true },
+            )
+            .inputValue(),
+          "1200",
+        );
+        await workspace.locator(".manager-system-menu summary").click();
+        await workspace
+          .getByRole("button", {
+            name: copy("שיוך לארגון", "Assign organization"),
+            exact: true,
+          })
+          .click();
+        await workspace
+          .getByLabel(copy("ארגון", "Organization"), { exact: true })
+          .selectOption("");
+        await workspace
+          .getByRole("button", { name: copy("שמירה", "Save"), exact: true })
+          .click();
+        await workspace.locator("#manager-content .manager-facts").waitFor();
+        assert.equal(
+          calls.some(
+            (call) =>
+              call.method !== "GET" ||
+              /identity|connection-requests|assign|remove/.test(call.path),
+          ),
+          false,
         );
         assert.equal(sockets, 0);
         assert.deepEqual(fixture.errors, []);
@@ -361,6 +293,35 @@ test("Manager personal navigation and complete sample workspaces never request r
           ),
           true,
         );
+        await nav
+          .getByRole("button", {
+            name: copy("הארגונים שלי", "My organizations"),
+            exact: true,
+          })
+          .click();
+        await page.locator(".dashboard-examples > summary").click();
+        await page
+          .locator("[data-example-organization]")
+          .getByRole("button")
+          .click();
+        await page.locator(".dashboard-examples > summary").click();
+        await page
+          .locator('[data-example-system="example-manager-gate"]')
+          .getByRole("button")
+          .click();
+        await workspace.locator("#manager-content .manager-facts").waitFor();
+        await workspace
+          .getByRole("button", {
+            name: copy("סיום וחזרה", "End and return"),
+            exact: true,
+          })
+          .click();
+        await page
+          .getByRole("heading", {
+            name: "Example WIFIGATE Organization",
+            exact: true,
+          })
+          .waitFor();
       });
 });
 

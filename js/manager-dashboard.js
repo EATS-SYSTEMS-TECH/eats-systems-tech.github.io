@@ -12,6 +12,7 @@ import { parseManagerCsv, encodeManagerCsv } from "./manager-csv.js";
 import { managerRequest } from "./api/index.js";
 import { ManagerConnection } from "./manager-connection.js";
 import { createManagerExamples } from "./manager-examples.js";
+import { createManagerSystemCard } from "./manager-system-card.js";
 import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
 import { createManagerActivity } from "./manager-activity.js";
 
@@ -50,7 +51,12 @@ export function createManagerDashboard({
     ((path, method = "GET", body) =>
       managerRequest(user, BASE + path, method, body));
   const dialogs = createManagerDialog({ language });
-  const confirmAction = dialogs.confirm;
+  const confirmAction = (message) =>
+    dialogs.confirm(
+      view.dataset.simulation === "true"
+        ? `${t("סימולציה בלבד · מערכת לדוגמה", "Simulation only · example system")}\n${message}`
+        : message,
+    );
   let planDirectory;
   let managementMode = management;
   let successfulWrites = 0;
@@ -62,6 +68,7 @@ export function createManagerDashboard({
     systems = [],
     connection,
     currentSystem,
+    exampleBack,
     currentGate,
     currentTab = "overview",
     currentRows = [],
@@ -177,7 +184,7 @@ export function createManagerDashboard({
   root.append(platformEntry);
   const examples = createManagerExamples({
     language,
-    onOpen: openExample,
+    onOpen: (system) => task(() => openExample(system)),
     onOpenOrganization: openExampleOrganization,
   });
   const say = (text, error = false, state = "info") => {
@@ -269,6 +276,26 @@ export function createManagerDashboard({
         "המערכת לא השלימה את החיבור בזמן. אפשר לנסות להתחבר מחדש.",
         "The system did not connect in time. You can reconnect.",
       ),
+      EXAMPLE_CONFLICT: t(
+        "הנתונים בסימולציה השתנו. טענו את הלשונית מחדש.",
+        "Simulation data changed. Reload this tab.",
+      ),
+      EXAMPLE_DELEGATION_ADMIN: t(
+        "לא ניתן להסיר את המנהל שעליו נשענת הרשאת הניהול.",
+        "The administrator backing management access cannot be removed.",
+      ),
+      EXAMPLE_CAPACITY: t(
+        "הפעולה חורגת מקיבולת המערכת.",
+        "This exceeds the system capacity.",
+      ),
+      EXAMPLE_OFFLINE: t(
+        "מערכת הדוגמה אינה זמינה.",
+        "The example system is offline.",
+      ),
+      EXAMPLE_HELD_CLOSED: t(
+        "המערכת במצב סגור קבוע.",
+        "The system is held closed.",
+      ),
       LIST_LIMIT: t(
         "הרשימה אינה זמינה במלואה. רעננו או בחרו ארגון כדי לצמצם את התוצאות.",
         "The full list is unavailable. Refresh or choose an organization to narrow the results.",
@@ -324,6 +351,8 @@ export function createManagerDashboard({
     }
   }
   async function ensureRecent() {
+    if (examples.isSystem(currentSystem) && view.dataset.simulation === "true")
+      return;
     const epoch = generation;
     await activity.track(
       t("מאמת את הזהות…", "Verifying your identity…"),
@@ -382,6 +411,7 @@ export function createManagerDashboard({
     dialogs.cancel();
     examples.closeView();
     view.classList.remove("manager-example-workspace");
+    delete view.dataset.simulation;
     generation++;
     say("");
     connection?.close();
@@ -554,15 +584,16 @@ export function createManagerDashboard({
     else if (profile.organizations.length) await showOrganizations(true);
     else await showInvitations();
   }
-  function openExample(system) {
-    stop();
+  async function openExample(system) {
+    if (!examples.isSystem(system)) throw new Error("EXAMPLE_SYSTEM_NOT_FOUND");
+    const fromOrganization = currentView === "example-organization";
+    exampleBack = fromOrganization
+      ? openExampleOrganization
+      : () => showSystems(null);
     scope = null;
     currentView = "example-system";
     renderNav();
-    say("");
-    examples.renderWorkspace(view, system, {
-      onBack: () => void task(() => showSystems(null)),
-    });
+    await openSystem(system);
   }
   function openExampleOrganization() {
     stop();
@@ -987,29 +1018,14 @@ export function createManagerDashboard({
       view.append(empty);
     }
     const grid = node("div", undefined, "manager-grid");
-    for (const s of systems) {
-      const card = node("article", undefined, "manager-card manager-system");
-      const icon = createSystemIcon(s);
-      const count = new Set(s.systemIds).size;
-      const typeLabel =
-        {
-          gate: t("שער", "Gate"),
-          "dual-control": t("שליטה כפולה", "Dual Control"),
-          group: t("קבוצה", "Group"),
-        }[s.type] ?? t("מערכת", "System");
-      card.append(
-        icon,
-        node("h4", s.name),
-        node(
-          "span",
-          `${typeLabel} · ${count} ${count === 1 ? t("שער", "gate") : t("שערים", "gates")}`,
-          "manager-muted",
-        ),
+    for (const s of systems)
+      grid.append(
+        createManagerSystemCard({
+          system: s,
+          language,
+          actions: systemActions(s, operatorAccount),
+        }),
       );
-      const actions = systemActions(s, operatorAccount);
-      card.append(actions);
-      grid.append(card);
-    }
     view.append(grid);
     if (!scope && !operatorAccount) examples.renderCards(view);
     say("");
@@ -1056,11 +1072,11 @@ export function createManagerDashboard({
           true,
         ),
       );
-    if (profile.account && !operatorAccount)
+    if ((profile.account || examples.isSystem(s)) && !operatorAccount)
       secondary.append(
         button(t("שיוך לארגון", "Assign organization"), () => assignSystem(s)),
       );
-    if (profile.account || operatorAccount) {
+    if (profile.account || operatorAccount || examples.isSystem(s)) {
       secondary.append(
         Object.assign(
           button(t("ניתוק מ־Manager", "Disconnect from Manager"), async () => {
@@ -1073,6 +1089,17 @@ export function createManagerDashboard({
               ))
             )
               return;
+            if (examples.isSystem(s)) {
+              examples.disconnect(s);
+              await showSystems(null);
+              say(
+                t(
+                  "המערכת הוסרה מהסימולציה בלבד.",
+                  "System removed from the simulation only.",
+                ),
+              );
+              return;
+            }
             await ensureRecent();
             const result = await api(`/systems/${s.id}/remove`, "POST", {
               expectedVersion: s.version,
@@ -1135,15 +1162,32 @@ export function createManagerDashboard({
     const f = node("form", undefined, "manager-form"),
       label = node("label", t("ארגון", "Organization")),
       select = node("select");
+    select.setAttribute("aria-label", t("ארגון", "Organization"));
     select.append(new Option(t("המערכות שלי בלבד", "My systems only"), ""));
-    for (const org of profile.organizations)
+    const simulated = examples.isSystem(system);
+    if (simulated) appendSimulationNote();
+    for (const org of simulated
+      ? examples.organizations()
+      : profile.organizations)
       select.append(new Option(org.name, org.id));
-    select.value = system.orgId ?? "";
+    select.value =
+      (simulated ? examples.assignment(system) : system.orgId) ?? "";
     label.append(select);
     f.append(label);
     const b = button(
       t("שמירה", "Save"),
       async () => {
+        if (simulated) {
+          examples.assign(system, select.value || null);
+          await openSystem(system);
+          say(
+            t(
+              "השיוך נשמר בסימולציה בלבד.",
+              "Assignment saved in the simulation only.",
+            ),
+          );
+          return;
+        }
         await ensureRecent();
         await api(`/systems/${system.id}/assign`, "POST", {
           orgId: select.value || null,
@@ -1155,7 +1199,9 @@ export function createManagerDashboard({
     );
     f.append(
       b,
-      button(t("ביטול", "Cancel"), () => showSystems(scope)),
+      button(t("ביטול", "Cancel"), () =>
+        simulated ? openSystem(system) : showSystems(scope),
+      ),
     );
     view.append(f);
   }
@@ -1464,15 +1510,42 @@ export function createManagerDashboard({
     bar.append(heading, create);
     placeManagerActions(view, language);
   }
+  function appendSimulationNote() {
+    view.dataset.simulation = "true";
+    const note = node(
+      "section",
+      undefined,
+      "manager-note manager-simulation-note",
+    );
+    note.setAttribute("role", "note");
+    note.append(
+      node(
+        "strong",
+        t("סימולציה · מערכת לדוגמה", "Simulation · example system"),
+      ),
+      node(
+        "p",
+        t(
+          "זהו מסך הניהול של מערכת אמיתית, עם נתוני דוגמה. כל הפעולות והשינויים מתבצעים בסימולציה בזיכרון בלבד, ללא חיבור למערכת פיזית. הנתונים מתאפסים בסגירת הדשבורד.",
+          "This is the real system workspace with sample data. All actions and changes run in memory only, without a physical connection. Sample data resets when the dashboard closes.",
+        ),
+      ),
+    );
+    view.prepend(note);
+  }
   async function openSystem(system) {
     stop();
     currentSystem = system;
+    const simulated = examples.isSystem(system);
     const epoch = generation;
     view.replaceChildren();
+    if (simulated) appendSimulationNote();
     const head = node("div", undefined, "manager-workspace-head");
     head.append(
       node("h3", system.name),
-      button(t("סיום וחזרה", "End and return"), () => showSystems(scope)),
+      button(t("סיום וחזרה", "End and return"), () =>
+        simulated ? exampleBack() : showSystems(scope),
+      ),
     );
     head.append(systemActions(system, null, true));
     view.append(head);
@@ -1516,7 +1589,7 @@ export function createManagerDashboard({
       currentRows = [];
       cursor = null;
     }
-    const candidate = new Connection({
+    const options = {
       api,
       user,
       onState: (state) => {
@@ -1525,7 +1598,9 @@ export function createManagerDashboard({
           showConnectionState(state);
           if (state === "active")
             say(
-              t("מחובר · נתונים חיים מהשער", "Connected · live gate data"),
+              examples.isSystem(currentSystem)
+                ? t("מחובר · נתוני סימולציה", "Connected · simulation data")
+                : t("מחובר · נתונים חיים מהשער", "Connected · live gate data"),
               false,
               "success",
             );
@@ -1576,7 +1651,13 @@ export function createManagerDashboard({
           showConnectionState("error", errorText(new Error(state)));
         }
       },
-    });
+    };
+    const candidate = examples.isSystem(currentSystem)
+      ? examples.createConnection({
+          system: currentSystem,
+          onState: options.onState,
+        })
+      : new Connection(options);
     connection = candidate;
     let pendingOperations = 0;
     for (const method of ["command", "exportCollection", "importCollection"]) {
@@ -1652,6 +1733,7 @@ export function createManagerDashboard({
     }
   }
   function showConnectionState(state, detail) {
+    const simulated = examples.isSystem(currentSystem);
     let panel = view.querySelector(".manager-connection-panel");
     if (!panel) {
       panel = node("section", undefined, "manager-connection-panel");
@@ -1678,8 +1760,12 @@ export function createManagerDashboard({
       active: [
         t("המערכת מחוברת", "System connected"),
         t(
-          "החיבור המאובטח פעיל. הנתונים והפעולות מתקבלים מהמערכת עצמה.",
-          "The secure connection is active. Data and confirmations come from the system itself.",
+          simulated
+            ? "הסימולציה פעילה. הנתונים והפעולות הם לדוגמה בלבד."
+            : "החיבור המאובטח פעיל. הנתונים והפעולות מתקבלים מהמערכת עצמה.",
+          simulated
+            ? "Simulation is active. Data and confirmations are examples only."
+            : "The secure connection is active. Data and confirmations come from the system itself.",
         ),
       ],
       error: [
@@ -2186,7 +2272,14 @@ export function createManagerDashboard({
       ...(state ? { state } : {}),
       expectedGateCommand: expected,
     });
-    say(t("השער אישר את הפעולה.", "The gate confirmed the action."));
+    say(
+      examples.isSystem(currentSystem)
+        ? t(
+            "הפעולה בוצעה בסימולציה. לא הופעל שער פיזי.",
+            "Action completed in the simulation. No physical gate was activated.",
+          )
+        : t("השער אישר את הפעולה.", "The gate confirmed the action."),
+    );
   }
   function renderPeopleActions(content, tab) {
     const collection = tab === "users" ? "USERS" : "ADMINS";

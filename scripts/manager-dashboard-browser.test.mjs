@@ -284,12 +284,13 @@ test("Manager workspace supports English/Hebrew desktop/mobile, organizations an
         assert.equal(await page.locator(".manager-hero, .manager-metrics, .manager-workspace-head").count(), 0);
         assert.deepEqual(await page.evaluate(() => window.commands), []);
         assert.equal(await page.locator(".manager-status").isVisible(), false);
-        const icon = page.locator(".manager-system .manager-icon img");
+        const realSystem = page.locator(".manager-system:not([data-example-system])");
+        const icon = realSystem.locator(".manager-icon img");
         assert.equal(await icon.getAttribute("src"), "/assets/host-icons/gate-cantilever-gate-small.svg");
         await icon.evaluate(image => image.decode());
         assert.equal(await icon.getAttribute("alt"), "");
-        assert.equal(await page.locator(".manager-system .manager-system-actions button").count(), 1);
-        await page.getByRole("button", { name: he ? "פתיחת סביבת ניהול" : "Open workspace", exact: true }).click();
+        assert.equal(await realSystem.locator(".manager-system-actions button").count(), 1);
+        await realSystem.getByRole("button", { name: he ? "פתיחת סביבת ניהול" : "Open workspace", exact: true }).click();
         await page.locator(".manager-system-menu summary").click();
         await page.getByRole("button", { name: he ? "פרטי גישה" : "Access Note", exact: true }).click();
         const noteDialog = page.getByRole("dialog");

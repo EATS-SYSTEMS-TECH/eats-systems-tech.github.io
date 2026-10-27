@@ -172,6 +172,12 @@ export function createManagerExampleData() {
     { email: "organization-admin@example.test", status: "active" },
     { email: "maintenance@example.test", status: "active" },
   ];
+  const delegationAdmins = new Map(
+    [...gates].map(([id, value]) => [
+      id,
+      value.admins[0].countryCode + value.admins[0].localNumber,
+    ]),
+  );
   function requireGate(id) {
     const value = gates.get(id);
     if (!value) throw new Error("EXAMPLE_GATE_NOT_FOUND");
@@ -199,6 +205,8 @@ export function createManagerExampleData() {
     organization: managerExampleOrganization,
     members,
     gate: requireGate,
+    isDelegationAdmin: (id, person) =>
+      delegationAdmins.get(id) === person.countryCode + person.localNumber,
     log,
     available,
     uniqueGates(systems) {
@@ -250,10 +258,7 @@ export function createManagerExampleData() {
         (collection === "admins" ? value.maxAdmins : value.maxUsers)
       )
         throw new Error("EXAMPLE_CAPACITY");
-      if (
-        collection === "admins" &&
-        !combined.has(value.admins[0].countryCode + value.admins[0].localNumber)
-      )
+      if (collection === "admins" && !combined.has(delegationAdmins.get(id)))
         throw new Error("EXAMPLE_DELEGATION_ADMIN");
       value[collection] = [...combined.values()];
       log(id, `${mode} ${collection}: ${rows.length}`);
@@ -300,6 +305,7 @@ export function createManagerExampleData() {
     },
     clear() {
       gates.clear();
+      delegationAdmins.clear();
       assignments.clear();
       members.length = 0;
     },
