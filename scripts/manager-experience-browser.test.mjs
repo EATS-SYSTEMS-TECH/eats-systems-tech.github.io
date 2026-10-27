@@ -320,17 +320,17 @@ test("saving forms show pending state, block duplicate submits and retain input 
   ]);
 });
 
-async function gateFixture(t, browser, origin) {
-  const page = await browser.newPage({ viewport: { width: 390, height: 900 } });
+async function gateFixture(t, browser, origin, language = "he", width = 390) {
+  const page = await browser.newPage({ viewport: { width, height: 900 } });
   t.after(() => page.close());
   await page.route(origin + "/manager-feedback-fixture", (route) =>
     route.fulfill({
       contentType: "text/html",
-      body: '<!doctype html><html lang="he" dir="rtl"><head><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"></head><body class="platform-page" data-product="manager"><main class="platform-shell"><div id="root"></div></main></body></html>',
+      body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><head><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"></head><body class="platform-page" data-product="manager"><main class="platform-shell"><div id="root"></div></main></body></html>`,
     }),
   );
   await page.goto(origin + "/manager-feedback-fixture");
-  await page.evaluate(async () => {
+  await page.evaluate(async (language) => {
     const { createManagerDashboard } = await import("/js/manager-dashboard.js");
     window.connections = [];
     window.commands = [];
@@ -347,7 +347,7 @@ async function gateFixture(t, browser, origin) {
             this.onState("active");
             resolve();
           };
-          this.fail = (code = "NO_COMMUNICATION") => reject(new Error(code));
+          this.fail = (code = "NO_COMMUNICATION") => reject(typeof code === "object" ? Object.assign(new Error("Connection failed"), code) : new Error(code));
           this.cancel = () => reject(new Error("CANCELLED"));
         });
       }
@@ -391,12 +391,12 @@ async function gateFixture(t, browser, origin) {
     window.dashboard = createManagerDashboard({
       root: document.querySelector("#root"),
       user: { uid: "test" },
-      language: "he",
+      language,
       api,
       Connection,
     });
     await window.dashboard.ready;
-  });
+  }, language);
   return page;
 }
 
@@ -556,6 +556,12 @@ test("a revoked local Manager authorization explains the failure and keeps metad
   );
   await failure.waitFor();
   assert.match(await failure.innerText(), /השער דחה את הרשאת Manager/);
+  assert.match(await failure.innerText(), /ייתכן שאישור זמני פג/);
+  assert.match((await failure.locator(".manager-connection-dialog__recovery li").allTextContents())[0], /נסו תחילה חיבור נוסף/);
+  assert.match(await failure.innerText(), /כמנהל מקומי שהרשאתו עדיין תקפה/);
+  assert.match(await failure.innerText(), /תפריט החשבון דרך תמונת הפרופיל/);
+  assert.match(await failure.innerText(), /WIFIGATE Manager ולחצו ״סנכרון״ בכרטיס המערכת/);
+  assert.match(await failure.innerText(), /האתר אינו יכול לחדש אותה מרחוק/);
   await failure
     .getByRole("button", { name: "לפרטי המערכת", exact: true })
     .click();
@@ -573,4 +579,46 @@ test("a revoked local Manager authorization explains the failure and keeps metad
     null,
   );
   assert.deepEqual(await page.evaluate(() => window.commands), []);
+});
+
+test("connection errors give localized recovery steps and safe optional diagnostics without exposing backend details", async (t) => {
+  const { origin, browser } = await startSite(t);
+  for (const language of ["en", "he"]) {
+    const page = await gateFixture(t, browser, origin, language, language === "he" ? 390 : 1440);
+    await page.getByRole("button", { name: language === "he" ? "פתיחת סביבת ניהול" : "Open workspace", exact: true }).click();
+    const failure = page.locator('.manager-connection-dialog[data-state="error"]');
+    const cases = [
+      ["CREDENTIAL_REVOKED", language === "he" ? /ליד המערכת/ : /near the system/],
+      ["CREDENTIAL_UNKNOWN", language === "he" ? /שהרשאתו עדיין תקפה/ : /whose access is still valid/],
+      ["NO_COMMUNICATION", language === "he" ? /מופעלת ומחוברת לאינטרנט/ : /powered on and online/],
+      ["BUSY", language === "he" ? /חיבור ניהול אחר/ : /Another management session/],
+      ["STORAGE_BUSY", language === "he" ? /המתינו מעט/ : /Wait a moment/],
+      ["MANAGER_ACCESS_DENIED", language === "he" ? /מנהל הארגון/ : /organization administrator/],
+      ["RESPONSE_TIMEOUT", language === "he" ? /בדקו את המצב העדכני ואת ההיסטוריה/ : /check the current state and history/],
+      ["VERSION_UNSUPPORTED", language === "he" ? /לעדכן את קושחת המערכת/ : /update the system firmware/],
+      ["PRIVATE_UNKNOWN_FAILURE", language === "he" ? /מזהה המערכת והזמן/ : /system ID and the time/],
+    ];
+    for (const [index, [code, expected]] of cases.entries()) {
+      await page.waitForFunction((index) => typeof window.connections[index]?.fail === "function", index);
+      await page.evaluate(({ index, code }) => window.connections[index].fail({ code, message: "PRIVATE_BACKEND_MESSAGE token=SECRET_SAMPLE", reason: "PRIVATE_SERVER_REASON" }), { index, code });
+      await failure.waitFor();
+      const text = await failure.innerText();
+      assert.match(text, expected);
+      assert.doesNotMatch(text, /PRIVATE_BACKEND_MESSAGE|SECRET_SAMPLE|PRIVATE_SERVER_REASON|PRIVATE_UNKNOWN_FAILURE/);
+      assert.equal(await failure.locator(".manager-connection-dialog__recovery ol li").count() > 0, true);
+      const diagnostics = failure.locator(".manager-connection-dialog__diagnostics");
+      if (code === "PRIVATE_UNKNOWN_FAILURE") assert.equal(await diagnostics.count(), 0);
+      else {
+        assert.doesNotMatch(text, new RegExp(code), "technical code is collapsed by default");
+        await diagnostics.locator("summary").click();
+        assert.equal(await diagnostics.locator("code").innerText(), code);
+      }
+      assert.equal(await failure.evaluate((dialog) => dialog.scrollWidth <= dialog.clientWidth), true);
+      const dismiss = await failure.getByRole("button", { name: language === "he" ? "לפרטי המערכת" : "View system details", exact: true }).boundingBox();
+      assert.ok(dismiss && dismiss.y >= 0 && dismiss.y + dismiss.height <= 900 && dismiss.height >= 44, "recovery actions stay visible and touch sized");
+      if (index < cases.length - 1) await failure.getByRole("button", { name: language === "he" ? "ניסיון חיבור נוסף" : "Try connecting again", exact: true }).click();
+    }
+    assert.deepEqual(await page.evaluate(() => window.commands), []);
+    await page.evaluate(() => window.dashboard.close());
+  }
 });

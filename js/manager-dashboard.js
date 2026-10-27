@@ -20,6 +20,7 @@ import { createManagerSystemCard } from "./manager-system-card.js";
 import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
 import { createManagerActivity } from "./manager-activity.js";
 import { createManagerConnectionDialog } from "./manager-connection-dialog.js";
+import { managerConnectionError } from "./manager-connection-errors.js";
 
 const BASE = "/api/v1/manager";
 const node = (tag, text, cls) => {
@@ -204,20 +205,10 @@ export function createManagerDashboard({
     retry.hidden =
       !error || Boolean(connection) || currentView === "platform-systems";
   };
-  const errorText = (error) =>
-    ({
-      APP_CHECK_UNCONFIGURED: t(
-        "בדיקת תקינות האתר דורשת הגדרה לפני הפעלת Manager.",
-        "Site integrity must be configured before Manager can run.",
-      ),
-      TOTP_REQUIRED: t(
-        "נדרש אימות באפליקציית האימות.",
-        "Authenticator verification required.",
-      ),
-      RECENT_REAUTH_REQUIRED: t(
-        "יש לאמת את הזהות מחדש לפני הפעולה.",
-        "Verify your identity again before this action.",
-      ),
+  const errorText = (error) => {
+    const explanation = managerConnectionError(error, language);
+    if (explanation) return [explanation.message, ...explanation.steps].join(" ");
+    return ({
       ORGANIZATION_HAS_SYSTEMS: t(
         "יש להסיר את שיוך המערכות לפני הסרת הארגון.",
         "Unassign linked systems before removing the organization.",
@@ -234,57 +225,9 @@ export function createManagerDashboard({
         "הנתונים השתנו או שהחשבון מחזיק בתפקיד אחר. רעננו ובדקו לפני ניסיון נוסף.",
         "Data changed or the account holds another role. Refresh and review before retrying.",
       ),
-      NO_COMMUNICATION: t(
-        "אין תקשורת עם המערכת.",
-        "No communication with the system.",
-      ),
-      CREDENTIAL_REVOKED: t(
-        "השער דחה את הרשאת Manager השמורה בו. סנכרון פרטי המערכת אינו מחדש הרשאה זו. נדרש חידוש הקישור דרך מנהל מקומי באפליקציה ליד המערכת.",
-        "The gate rejected its saved Manager authorization. Syncing system details does not renew that authorization. A local administrator must renew the link in the app near the system.",
-      ),
-      CREDENTIAL_UNKNOWN: t(
-        "השער לא זיהה הרשאת Manager תקפה. נדרש חידוש הקישור באפליקציה ליד המערכת עם הרשאת מנהל מקומי.",
-        "The gate did not recognize a valid Manager authorization. Renew the link in the app near the system with local administrator access.",
-      ),
-      KEY_MISMATCH: t(
-        "הזהות המאובטחת של השער השתנתה. יש לאמת את המערכת מחדש באפליקציה ליד השער.",
-        "The gate's secure identity changed. Verify the system again in the app near the gate.",
-      ),
-      SYSTEM_MISMATCH: t(
-        "החיבור הגיע למערכת אחרת. בדקו את המערכת שיוצאה מהאפליקציה.",
-        "The connection reached a different system. Check which system was exported from the app.",
-      ),
-      VERSION_UNSUPPORTED: t(
-        "גרסת השער אינה תואמת לחיבור. יש לעדכן את האפליקציה ואת קושחת המערכת.",
-        "The gate version is incompatible. Update the app and system firmware.",
-      ),
-      GATE_AUTHENTICATION_FAILED: t(
-        "השער לא אישר את החיבור המאובטח. בדקו את הרשאת המנהל המקומי באפליקציה.",
-        "The gate did not approve the secure connection. Check local administrator access in the app.",
-      ),
       INVALID_ORGANIZATION_LOGO: t(
         "לא ניתן לעבד את הלוגו. בחרו תמונת PNG, JPG או WebP בגודל של עד 5 MB.",
         "This logo could not be processed. Choose a PNG, JPG or WebP image up to 5 MB.",
-      ),
-      BUSY: t(
-        "המערכת בשימוש. נסו שוב לאחר סיום הניהול הנוכחי.",
-        "The system is in use. Try after the current session ends.",
-      ),
-      DISCONNECTED: t(
-        "החיבור נותק. אם נשלחה פעולה, בדקו היסטוריה לפני ניסיון נוסף.",
-        "Disconnected. If an action was sent, check history before trying again.",
-      ),
-      RESPONSE_TIMEOUT: t(
-        "תוצאת הפעולה אינה ידועה. בדקו היסטוריה לפני ניסיון נוסף.",
-        "Outcome unknown. Check history before trying again.",
-      ),
-      CONNECTION_FAILED: t(
-        "החיבור למערכת נכשל. בדקו את החיבור לרשת ונסו להתחבר מחדש.",
-        "Connection failed. Check the network and reconnect.",
-      ),
-      CONNECTION_TIMEOUT: t(
-        "המערכת לא השלימה את החיבור בזמן. אפשר לנסות להתחבר מחדש.",
-        "The system did not connect in time. You can reconnect.",
       ),
       EXAMPLE_CONFLICT: t(
         "הנתונים בסימולציה השתנו. טענו את הלשונית מחדש.",
@@ -315,6 +258,7 @@ export function createManagerDashboard({
       "לא ניתן להשלים את הפעולה. בדקו את החיבור וההרשאות.",
       "Unable to complete this action. Check connection and permissions.",
     );
+  };
   const button = (label, action, primary = false) => {
     const b = node(
       "button",
@@ -1683,7 +1627,7 @@ export function createManagerDashboard({
           showConnectionRecovery(gate);
           view.querySelector("#manager-tabs")?.replaceChildren();
           say(errorText(new Error(state)), true);
-          showConnectionState("error", errorText(new Error(state)));
+          showConnectionState("error", managerConnectionError(new Error(state), language, true));
         }
       },
     };
@@ -1780,7 +1724,7 @@ export function createManagerDashboard({
         connection?.close();
         showConnectionRecovery(gate);
         say(errorText(error), true);
-        showConnectionState("error", errorText(error));
+        showConnectionState("error", managerConnectionError(error, language, true));
       }
     } finally {
       if (epoch === generation) {

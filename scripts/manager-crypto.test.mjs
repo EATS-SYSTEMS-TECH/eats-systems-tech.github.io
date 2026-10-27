@@ -25,6 +25,7 @@ import {
   managerBulkFrame,
   decryptManagerBulk,
 } from "../js/manager-crypto.js";
+import { managerConnectionError } from "../js/manager-connection-errors.js";
 
 const vectors = JSON.parse(
   await readFile(
@@ -42,6 +43,7 @@ test("Manager preserves gate refusal codes without accepting a handshake or untr
     [10, "VERSION_UNSUPPORTED"],
     [202, "CREDENTIAL_REVOKED"],
     [203, "CREDENTIAL_UNKNOWN"],
+    [333, "STORAGE_BUSY"],
     [999, "GATE_AUTHENTICATION_FAILED"],
   ]) {
     await assert.rejects(
@@ -51,10 +53,21 @@ test("Manager preserves gate refusal codes without accepting a handshake or untr
       ),
       { message: code },
     );
+    for (const language of ["he", "en"]) {
+      const explanation = managerConnectionError({ code, reason: "private credential text" }, language);
+      assert.equal(explanation.code, code);
+      assert.ok(explanation.message && explanation.steps.length, "every gate refusal has a cause and recovery steps");
+      assert.doesNotMatch(JSON.stringify(explanation), /private credential text|untrusted text/);
+    }
   }
   await assert.rejects(completeManagerHandshake({}, { type: "server_busy" }), {
     message: "BUSY",
   });
+  for (const language of ["he", "en"]) {
+    const storage = managerConnectionError(new Error("storage is busy - try again in a moment"), language);
+    assert.equal(storage.code, "STORAGE_BUSY");
+    assert.doesNotMatch(storage.steps.join(" "), /Sync|סנכרון|reset|איפוס|unbind/i, "transient storage problems do not prescribe destructive link changes");
+  }
 });
 test("Manager Bulk v1 header, nonce and authenticated metadata match independent Node crypto", async () => {
   const session = {

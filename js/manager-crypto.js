@@ -250,6 +250,7 @@ export async function completeManagerHandshake(state, envelope) {
       [10, "VERSION_UNSUPPORTED"],
       [202, "CREDENTIAL_REVOKED"],
       [203, "CREDENTIAL_UNKNOWN"],
+      [333, "STORAGE_BUSY"],
     ]).get(envelope.reason);
     throw new Error(code ?? "GATE_AUTHENTICATION_FAILED");
   }

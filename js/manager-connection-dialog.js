@@ -301,8 +301,27 @@ export function createManagerConnectionDialog({
       "החיבור לא הושלם",
       "Connection did not complete",
     );
-    title.textContent = t("פרטי החיבור", "Connection details");
-    detail.textContent = message;
+    const explanation = typeof message === "object" && message !== null ? message : null;
+    title.textContent = explanation?.title ?? t("פרטי החיבור", "Connection details");
+    detail.textContent = explanation?.message ?? String(message ?? "");
+    dialog.querySelector("[data-connection-error-actions]")?.remove();
+    if (explanation?.steps?.length) {
+      const recovery = el("section", undefined, "manager-connection-dialog__recovery");
+      recovery.dataset.connectionErrorActions = "true";
+      recovery.append(el("h3", t("מה כדאי לעשות עכשיו", "What to do next")));
+      const actions = el("ol");
+      for (const step of explanation.steps) actions.append(el("li", step));
+      recovery.append(actions);
+      if (explanation.code) {
+        const diagnostics = el("details", undefined, "manager-connection-dialog__diagnostics");
+        diagnostics.append(el("summary", t("פרטים טכניים לתמיכה", "Technical details for support")));
+        const code = el("code", explanation.code);
+        code.dir = "ltr";
+        diagnostics.append(code);
+        recovery.append(diagnostics);
+      }
+      timing.before(recovery);
+    }
     phase.textContent = t(
       `נעצר בשלב ${step + 1} מתוך 3`,
       `Stopped at step ${step + 1} of 3`,
