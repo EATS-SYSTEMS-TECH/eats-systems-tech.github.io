@@ -644,11 +644,11 @@
           "accepted": true,
           "video": {
             "path": "assets/vid/home/desktop/electric-gates-barrier-1080p.mp4",
-            "sha256": "82ca0e29fd9fa4b750460dc31f510c84261de1815b048c515ada1739f4c47760"
+            "sha256": "a049e76abe8ed0fc75beed60183e99877e58040217204c22e3711b6923f904b5"
           },
           "poster": {
             "path": "assets/img/desktop/electric-gates-barrier-scene.webp",
-            "sha256": "daa8eda640ea87fac230fbec21759625cc64b7db3af49025eb36d38bb82def8a"
+            "sha256": "dce686e6e8fb00f73623f3d4930bfb16b4fb26f20ea32dfe7207ead8b1488953"
           },
           "width": 1920,
           "height": 1080,
@@ -704,11 +704,11 @@
           "accepted": true,
           "video": {
             "path": "assets/vid/home/desktop/homepage-montage-1080p.mp4",
-            "sha256": "f46065360c5ef7b4493ffcef5888c5b25205cafe6cf1b1f691882fee4c8eb450"
+            "sha256": "2260e3e9e43215f64bef7d55bd196d18bf435a3102f8a89bd7502df3987ce9fa"
           },
           "poster": {
             "path": "assets/img/desktop/homepage-montage-scene.webp",
-            "sha256": "3aff887ac394cd09bf60b86663dfa98a230927e3003a6711810263fb4592a295"
+            "sha256": "bfa167754f0b85b65e750240ea4798e1d23fd70debcdff6ccec7ac1757ab467b"
           },
           "width": 1920,
           "height": 1080,
