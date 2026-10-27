@@ -48,15 +48,11 @@
   place-items: center;
   cursor: pointer;
   z-index: 80;
+  /* Set by accessibility.js while the button would cover hero actions or playback. */
+  translate: 0 calc(-1 * var(--a11y-fab-lift, 0px));
   transition:
     transform 180ms ease,
     box-shadow 180ms ease;
-}
-
-/* Set by accessibility.js while the button would cover hero actions or playback. */
-.a11y-fab.a11y-fab--opposite {
-  inset-inline-start: auto;
-  inset-inline-end: clamp(1rem, 2vw + 0.8rem, 1.75rem);
 }
 
 .a11y-fab[hidden] {

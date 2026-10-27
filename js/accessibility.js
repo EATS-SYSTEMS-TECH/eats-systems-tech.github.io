@@ -262,7 +262,7 @@ function placeAccessibilityFab(fab, left, top) {
   const x = Math.min(Math.max(A11Y_FAB_MARGIN, left), maxLeft)
   const y = Math.min(Math.max(A11Y_FAB_MARGIN, top), maxTop)
   // Logical insets first: in RTL inset-inline-start is the same property as right.
-  fab.classList.remove("a11y-fab--opposite")
+  fab.style.removeProperty("--a11y-fab-lift")
   fab.style.insetInlineStart = "auto"
   fab.style.insetInlineEnd = "auto"
   fab.style.insetBlockEnd = "auto"
@@ -399,34 +399,42 @@ function setupAccessibilityFabArrange(fab) {
   applySavedPosition()
 }
 
-// The button sits in the reading-start corner, which it shares with the
-// homepage hero actions and the scene playback button. While it would cover
-// one of them it waits in the opposite corner, and returns as soon as they
-// scroll clear. A position the visitor arranged is left alone.
+// The button always sits in the reading-start corner, which it shares with
+// the homepage hero actions and the scene playback button. While it would
+// cover one of them it rises just above it, and settles back once they scroll
+// clear. A position the visitor arranged, or an open panel, is left alone.
 const A11Y_FAB_CLEAR_OF = ".hero__actions, #hero-replay, [data-scene-replay]"
+const A11Y_FAB_CLEAR_GAP = 8
 
 function setupAccessibilityFabClearance(fab) {
   const targets = Array.from(document.querySelectorAll(A11Y_FAB_CLEAR_OF))
   if (!targets.length) return
   let frame = 0
 
+  function setLift(lift) {
+    if (lift > 0) fab.style.setProperty("--a11y-fab-lift", Math.round(lift) + "px")
+    else fab.style.removeProperty("--a11y-fab-lift")
+  }
+
   function update() {
     frame = 0
-    const opposite = fab.classList.contains("a11y-fab--opposite")
-    if (fab.hidden || fab.style.left) {
-      if (opposite) fab.classList.remove("a11y-fab--opposite")
+    if (fab.hidden || fab.style.left || document.body.classList.contains("a11y-panel-open")) {
+      setLift(0)
       return
     }
-    // Where the button sits on the reading side; the corners mirror each other.
+    // The resting place, without any lift already applied.
+    const current = parseFloat(fab.style.getPropertyValue("--a11y-fab-lift")) || 0
     const rect = fab.getBoundingClientRect()
-    const width = document.documentElement.clientWidth
-    const left = opposite ? width - rect.right : rect.left
-    const right = opposite ? width - rect.left : rect.right
-    const covers = targets.some((element) => {
-      const box = element.getBoundingClientRect()
-      return box.width > 0 && left < box.right + 4 && right > box.left - 4 && rect.top < box.bottom + 4 && rect.bottom > box.top - 4
-    })
-    if (covers !== opposite) fab.classList.toggle("a11y-fab--opposite", covers)
+    const left = rect.left, right = rect.right, height = rect.height
+    const restingBottom = rect.bottom + current
+    let bottom = restingBottom
+    // Rise above each control the button would cover, nearest first.
+    const boxes = targets.map((element) => element.getBoundingClientRect()).filter((box) => box.width > 0 && left < box.right + 4 && right > box.left - 4)
+    boxes.sort((a, b) => b.bottom - a.bottom)
+    for (const box of boxes) {
+      if (bottom - height < box.bottom + A11Y_FAB_CLEAR_GAP && bottom > box.top - A11Y_FAB_CLEAR_GAP) bottom = box.top - A11Y_FAB_CLEAR_GAP
+    }
+    setLift(Math.min(restingBottom - bottom, restingBottom - height - A11Y_FAB_MARGIN))
   }
 
   function schedule() {
@@ -440,6 +448,7 @@ function setupAccessibilityFabClearance(fab) {
     targets.forEach((element) => observer.observe(element))
     observer.observe(document.documentElement)
   }
+  if (window.MutationObserver) new MutationObserver(schedule).observe(document.body, { attributes: true, attributeFilter: ["class"] })
   document.addEventListener("site-accessibility-change", schedule)
   update()
 }
