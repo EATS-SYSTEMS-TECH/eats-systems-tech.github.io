@@ -1067,8 +1067,7 @@ html[dir="rtl"] .product-switcher__label strong {
 .platform-admin-products-heading h3 { margin: 0; }
 .platform-page .platform-admin-management .platform-admin-product-reset { background: #fff; color: var(--ink); border: 1px solid #dce3ed; border-radius: 999px; padding: .45rem .85rem; font: inherit; font-size: .8rem; cursor: pointer; }
 .platform-page .platform-admin-management .platform-admin-product-reset[aria-pressed="true"] { background: #eaf1ff; border-color: #a9c3ee; color: #234f93; }
-.platform-page .platform-admin-management .platform-admin-product-filter { display: grid; justify-items: start; gap: .65rem; min-width: 0; padding: 1rem; border: 1px solid #dce3ed; border-radius: 12px; background: #fff; color: var(--ink); font: inherit; text-align: start; cursor: pointer; transition: border-color .15s, background .15s; }
-.platform-page .platform-admin-management .platform-admin-product-filter:hover { border-color: #94a3b8; background: #f8fafc; }
+.platform-page .platform-admin-management .platform-admin-product-filter { display: grid; justify-items: start; gap: .65rem; min-width: 0; padding: 1rem; border: 1px solid #dce3ed; border-radius: 12px; background: #fff; color: var(--ink); font: inherit; text-align: start; cursor: pointer; transition: border-color .15s; }
 .platform-page .platform-admin-management .platform-admin-product-filter[aria-pressed="true"] { background: #edf4ff; border-color: #477ec9; box-shadow: inset 0 0 0 1px #477ec9; }
 .platform-admin-product-name { font-size: .9rem; font-weight: 650; overflow-wrap: anywhere; }
 .platform-admin-product-count { font-size: 1.7rem; font-variant-numeric: tabular-nums; }
@@ -1079,8 +1078,10 @@ html[dir="rtl"] .product-switcher__label strong {
 .platform-admin-list-hint { color: var(--muted); margin: -.35rem 0 1rem; font-size: .88rem; }
 .platform-admin-filters { gap: .4rem; padding: .3rem; width: fit-content; max-width: 100%; background: #f1f5f9; border-radius: 12px; }
 .platform-admin-management .platform-admin-filters .platform-button { border: 0; background: transparent; color: #526078; box-shadow: none; border-radius: 9px; padding: .65rem .95rem; font-size: .85rem; }
-.platform-admin-management .platform-admin-filters .platform-button:hover { background: #e2e8f0; color: var(--ink); }
 .platform-admin-management .platform-admin-filters .platform-button[aria-pressed="true"] { outline: 0; background: #fff; color: var(--ink); box-shadow: 0 1px 5px #0f172a12; }
+.platform-page .platform-admin-management :is(.platform-admin-product-filter, .platform-admin-product-reset, .platform-admin-filters .platform-button):is(:hover, :focus-visible):not(:disabled) { background: #0a0a0a; color: #fff; border-color: #0a0a0a; filter: none; }
+.platform-page .platform-admin-management .platform-admin-product-filter:is(:hover, :focus-visible):not(:disabled) :is(.platform-admin-product-name, .platform-admin-product-count, small) { color: inherit; }
+.platform-admin-management .platform-admin-filters .platform-button:focus-visible { outline: 3px solid #397cf3; outline-offset: 3px; }
 .platform-admin-people { display: grid; gap: .7rem; margin-block: 1rem; }
 .platform-admin-person { border: 1px solid #e3e9f1; border-radius: 14px; padding: 0; background: #fff; }
 .platform-admin-person[open] { border-color: #bacbe2; }
