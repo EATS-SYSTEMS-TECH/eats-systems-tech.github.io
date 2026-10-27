@@ -34,12 +34,20 @@ import { infoTip } from "./host-ui.js";
 import { renderPlatformLanguage } from "./platform-language.js";
 import { monthlyEstimate, monthlyTotal, revenueTotal, formatMoney, unavailableLabel } from "./profile-financials.js";
 import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
+import {
+  createReservationsAdmin,
+  createReservationsEntry,
+} from "./reservations-admin.js";
 
 const $ = (selector) => document.querySelector(selector);
 const language = pageLanguage();
 const copy = platformText(language);
 const selectedProduct = document.body.dataset.product;
 const managementPage = document.body.dataset.platformView === "management";
+// WIFIGATE Reservations: a WIFIGATE Admin page of its own, apart from the
+// Host | Pay | Manager products (For Business).
+const reservationsPage = document.body.dataset.platformView === "reservations";
+const adminPage = managementPage || reservationsPage;
 const managerTitle = enabled => enabled
   ? (language === "he" ? "ניהול פלטפורמה · Manager | WIFIGATE" : "Platform management · Manager | WIFIGATE")
   : "Manager | WIFIGATE";
@@ -56,6 +64,8 @@ const managerProfile = createManagerProfile({
 let currentUser;
 let managerDashboard;
 let platformDirectory;
+let reservationsAdmin;
+let reservationsEntry;
 const directoryRoot = document.createElement("section");
 directoryRoot.id = "platform-admin-management";
 directoryRoot.className = "portal-panel platform-admin-management";
@@ -99,25 +109,33 @@ for (const node of document.querySelectorAll("[data-profile-en]"))
   node.textContent =
     language === "he" ? node.dataset.profileHe : node.dataset.profileEn;
 if (!selectedProduct) {
-  const title = managementPage
+  const title = reservationsPage
+    ? "WIFIGATE Reservations"
+    : managementPage
     ? language === "he" ? "ניהול פלטפורמה" : "Platform management"
     : language === "he" ? "הפרופיל שלי" : "My profile";
   $("#platform-title").textContent = title;
   document.title = `${title} | WIFIGATE`;
-  $(".platform-eyebrow").textContent = managementPage ? "WIFIGATE ADMIN" : "MY WIFIGATE";
+  $(".platform-eyebrow").textContent = adminPage ? "WIFIGATE ADMIN" : "MY WIFIGATE";
   $("[data-copy=intro]").textContent =
-    managementPage
+    reservationsPage
+      ? language === "he" ? "הזמנות שנשלחו מחשבונות WIFIGATE, מהקבלה ועד המסירה." : "Reservations sent from WIFIGATE accounts, from receipt to delivery."
+      : managementPage
       ? language === "he" ? "מבט על המשתמשים, ההרשאות והתוכניות שלכם." : "An overview of your people, access and plans."
       : language === "he"
       ? "פרטים אישיים, אבטחה, מנויים ותשלומים במקום אחד."
       : "Your personal details, security, subscriptions and payments in one place.";
 }
-if (managementPage) {
+if (adminPage) {
   document.body.classList.add("platform-management-page");
   const back = document.createElement("a");
   back.className = "platform-management-back";
-  back.href = language === "he" ? "/dashboard/?lang=he" : "/dashboard/";
-  back.textContent = language === "he" ? "חזרה לדשבורד" : "Back to dashboard";
+  back.href = reservationsPage
+    ? language === "he" ? "/dashboard/platform/?lang=he" : "/dashboard/platform/"
+    : language === "he" ? "/dashboard/?lang=he" : "/dashboard/";
+  back.textContent = reservationsPage
+    ? language === "he" ? "חזרה לניהול הפלטפורמה" : "Back to platform management"
+    : language === "he" ? "חזרה לדשבורד" : "Back to dashboard";
   $(".platform-heading").before(back);
 }
 renderPlatformLanguage(
@@ -168,6 +186,10 @@ function clearPrivate() {
   managementEntry.hidden = true;
   platformDirectory?.close();
   platformDirectory = undefined;
+  reservationsAdmin?.close();
+  reservationsAdmin = undefined;
+  reservationsEntry?.close();
+  reservationsEntry = undefined;
   managerProfile?.clear();
   managerDashboard?.close();
   managerDashboard = undefined;
@@ -407,9 +429,9 @@ async function refresh() {
       identity,
       selectedProduct || "",
       language,
-      managementPage ? "management" : "",
+      adminPage ? "management" : "",
     );
-    if (managementPage) {
+    if (adminPage) {
       if (identity.platformRole !== "admin") {
         $("#platform-status").textContent = language === "he" ? "המסך זמין למנהלי WIFIGATE בלבד." : "This page is available to WIFIGATE administrators only.";
         return;
@@ -418,6 +440,11 @@ async function refresh() {
         showSecurity();
         return;
       }
+      if (reservationsPage) {
+        reservationsAdmin = createReservationsAdmin({ root: directoryRoot, user, language });
+        return;
+      }
+      reservationsEntry = createReservationsEntry({ before: directoryRoot, user, language });
       platformDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language, standalone: true,
         ensureRecent: async () => {
           const token = await user.getIdTokenResult();

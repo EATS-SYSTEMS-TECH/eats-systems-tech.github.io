@@ -41,6 +41,21 @@
   color: #ffffff;
   font-weight: 700;
 }
+.shop-main__reserve {
+  margin: 0 0 1.25rem;
+  color: #475569;
+  font-size: 1.05rem;
+}
+.shop-main__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .75rem;
+}
+.shop-main__link--secondary {
+  background: #ffffff;
+  color: #0a0a0a;
+}
 .shop-main__link:hover,
 .shop-main__link:focus-visible,
 .shop-main__link:active { border-color: var(--color-primary); background: var(--color-primary); color: #ffffff; }

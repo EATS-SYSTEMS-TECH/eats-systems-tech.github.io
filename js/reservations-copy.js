@@ -1,0 +1,307 @@
+// WIFIGATE Reservations wording, Hebrew first, for the customer page
+// (/reservations/) and the WIFIGATE Admin page (/dashboard/reservations/).
+// Product names stay in English in both languages.
+
+export const productLines = Object.freeze([
+  {
+    id: "wifigate",
+    name: "WIFIGATE",
+    image: "/assets/img/wifigate-product-v3.webp",
+    width: 1545,
+    height: 905,
+    he: "בקר חכם לשער חשמלי, לדלת חניה ולמחסום. פותחים מהאפליקציה של WIFIGATE, בלי שלט.",
+    en: "A smart controller for electric gates, garage doors and barriers. Open it from the WIFIGATE app, no remote needed.",
+  },
+  {
+    id: "wifigate-roller-shutter",
+    name: "WIFIGATE Roller shutter",
+    image: "/assets/wifigate_niche_pages/roller-shutters-app-card.webp",
+    width: 640,
+    height: 360,
+    he: "בקר חכם לתריס חשמלי. פותחים וסוגרים מהאפליקציה של WIFIGATE.",
+    en: "A smart controller for electric roller shutters. Open and close it from the WIFIGATE app.",
+  },
+]);
+
+export const statusOrder = Object.freeze([
+  "new",
+  "contacted",
+  "confirmed",
+  "shipped",
+  "delivered",
+]);
+
+const copy = {
+  he: {
+    pageTitle: "הזמנת מערכות",
+    eyebrow: "WIFIGATE RESERVATIONS",
+    intro:
+      "בחרו מוצרים וכמות, ונחזור אליכם לתאם מחיר, התקנה ומשלוח. אין תשלום בשלב הזה.",
+    signInTitle: "התחברות לחשבון WIFIGATE",
+    signInText:
+      "אפשר להזמין רק מחשבון WIFIGATE. התחברו עם חשבון Google או Apple שבו אתם משתמשים באפליקציה.",
+    google: "המשך עם Google",
+    apple: "המשך עם Apple",
+    signingIn: "מתחברים…",
+    signOut: "התנתקות",
+    language: "שפת הממשק",
+    tabNew: "הזמנה חדשה",
+    tabMine: "ההזמנות שלי",
+    products: "מוצרים",
+    quantity: "כמות מערכות",
+    less: "פחות",
+    more: "עוד",
+    contact: "פרטי קשר",
+    fullName: "שם מלא",
+    email: "אימייל",
+    emailHint: "האימייל של החשבון שלכם. נשתמש בו לעדכונים על ההזמנה.",
+    phone: "טלפון",
+    phoneHint: "עם קידומת מדינה, למשל ‎+972 50 123 4567. מספר ישראלי שמתחיל ב־0 יתוקן לבד.",
+    company: "חברה (לא חובה)",
+    address: "כתובת להתקנה ולמשלוח",
+    country: "מדינה",
+    city: "עיר",
+    street: "רחוב ומספר",
+    postalCode: "מיקוד (לא חובה)",
+    photos: "תמונות של המקום (לא חובה)",
+    photosHint:
+      "עד 3 תמונות של השער, הדלת או התריס. התמונות מוקטנות לפני השליחה.",
+    addPhotos: "הוספת תמונות",
+    removePhoto: "הסרת תמונה {n}",
+    notes: "הערות (לא חובה)",
+    notesHint: "למשל סוג המנוע, גובה השער או שעות נוחות ליצירת קשר.",
+    summary: "סיכום",
+    total: "סה״כ {n} מערכות",
+    noPayment:
+      "שליחת ההזמנה אינה חיוב. נחזור אליכם לאישור המחיר, ההתקנה ומועד המשלוח.",
+    privacy: "מדיניות הפרטיות",
+    privacyText: "הפרטים משמשים רק לטיפול בהזמנה. ",
+    submit: "שליחת ההזמנה",
+    sending: "שולחים…",
+    sent: "ההזמנה התקבלה",
+    sentText: "מספר ההזמנה {id}. נחזור אליכם בקרוב. אפשר לעקוב אחריה ב״ההזמנות שלי״.",
+    viewMine: "להזמנות שלי",
+    newAnother: "הזמנה נוספת",
+    errorChooseProduct: "בחרו לפחות מערכת אחת.",
+    errorName: "כתבו שם מלא.",
+    errorPhone: "כתבו מספר טלפון עם קידומת מדינה, למשל ‎+972 50 123 4567.",
+    errorCity: "כתבו עיר.",
+    errorStreet: "כתבו רחוב ומספר.",
+    errorPhotoType: "אפשר לצרף רק תמונות.",
+    errorPhotoRead: "לא הצלחנו לקרוא את התמונה {name}.",
+    errorPhotoCount: "אפשר לצרף עד 3 תמונות.",
+    errorLimit: "יש לכם כבר 5 הזמנות פתוחות. אפשר לבטל אחת מהן או לחכות שנחזור אליכם.",
+    errorPhoto: "אחת התמונות לא התקבלה. הסירו אותה ונסו שוב.",
+    errorTooLarge: "התמונות גדולות מדי. הסירו תמונה ונסו שוב.",
+    errorVerify: "צריך אימייל מאומת בחשבון. התחברו עם Google או Apple.",
+    errorSession: "פג תוקף ההתחברות. התחברו שוב.",
+    errorNetwork: "אין חיבור לשרת. בדקו את החיבור ונסו שוב.",
+    errorIntegrity: "לא הצלחנו לאמת את הדפדפן. רעננו את הדף ונסו שוב.",
+    errorConflict: "ההזמנה השתנתה בינתיים. הרשימה עודכנה.",
+    errorGeneric: "משהו השתבש. נסו שוב.",
+    loading: "טוענים…",
+    emptyMine: "עדיין אין הזמנות.",
+    retry: "ניסיון חוזר",
+    reservation: "הזמנה {id}",
+    created: "נשלחה ב־{date}",
+    trackingNumber: "מספר משלוח",
+    messageFromUs: "הודעה מ־WIFIGATE",
+    cancel: "ביטול ההזמנה",
+    cancelConfirm: "לבטל את ההזמנה?",
+    cancelYes: "כן, לבטל",
+    cancelNo: "לא",
+    cancelled: "ההזמנה בוטלה.",
+    statusNew: "התקבלה",
+    statusContacted: "יצרנו קשר",
+    statusConfirmed: "אושרה",
+    statusShipped: "נשלחה",
+    statusDelivered: "נמסרה",
+    statusCancelled: "בוטלה",
+    by_customer: "על ידכם",
+    by_admin: "על ידי WIFIGATE",
+    by_system: "אוטומטית",
+    // WIFIGATE Admin
+    adminTitle: "הזמנות",
+    adminNote:
+      "כל ההזמנות מחשבונות WIFIGATE. מעדכנים סטטוס, הודעה ללקוח, הערה פנימית ומספר משלוח.",
+    adminEntryText: "הזמנות מחשבונות WIFIGATE, מהקבלה ועד המסירה.",
+    adminEntryOpen: "פתיחה",
+    adminEntryCounts: "{new} חדשות · {open} פתוחות",
+    refresh: "רענון",
+    all: "הכול",
+    loadMore: "טעינת עוד",
+    truncated: "מוצגות 500 ההזמנות האחרונות בסטטוס הזה.",
+    adminEmpty: "אין הזמנות בסטטוס הזה.",
+    details: "פרטים",
+    customer: "לקוח",
+    items: "מוצרים",
+    history: "היסטוריה",
+    erased: "החשבון נמחק. הפרטים האישיים הוסרו.",
+    changeStatus: "עדכון",
+    newStatus: "סטטוס",
+    keepStatus: "{status} (ללא שינוי)",
+    customerNote: "הודעה ללקוח",
+    customerNoteHint: "הלקוח רואה את ההודעה ב״ההזמנות שלי״.",
+    adminNoteLabel: "הערה פנימית",
+    adminNoteHint: "רק מנהלי WIFIGATE רואים אותה.",
+    save: "שמירה",
+    saving: "שומרים…",
+    saved: "נשמר.",
+    adminDenied: "המסך זמין למנהלי WIFIGATE עם אימות דו־שלבי בלבד.",
+    openPhoto: "פתיחת תמונה {n}",
+    unitSuffix: "×{n}",
+  },
+  en: {
+    pageTitle: "Reserve systems",
+    eyebrow: "WIFIGATE RESERVATIONS",
+    intro:
+      "Choose products and quantities, and we'll get back to you to arrange price, installation and delivery. There is no payment at this stage.",
+    signInTitle: "Sign in to your WIFIGATE account",
+    signInText:
+      "Reservations are for WIFIGATE accounts only. Sign in with the Google or Apple account you use in the app.",
+    google: "Continue with Google",
+    apple: "Continue with Apple",
+    signingIn: "Signing in…",
+    signOut: "Sign out",
+    language: "Interface language",
+    tabNew: "New reservation",
+    tabMine: "My reservations",
+    products: "Products",
+    quantity: "Number of systems",
+    less: "Fewer",
+    more: "More",
+    contact: "Contact details",
+    fullName: "Full name",
+    email: "Email",
+    emailHint: "Your account's email. We'll use it for updates about the reservation.",
+    phone: "Phone",
+    phoneHint: "With the country code, for example +972 50 123 4567. An Israeli number starting with 0 is corrected for you.",
+    company: "Company (optional)",
+    address: "Installation and delivery address",
+    country: "Country",
+    city: "City",
+    street: "Street and number",
+    postalCode: "Postal code (optional)",
+    photos: "Photos of the site (optional)",
+    photosHint:
+      "Up to 3 photos of the gate, door or shutter. Photos are resized before they are sent.",
+    addPhotos: "Add photos",
+    removePhoto: "Remove photo {n}",
+    notes: "Notes (optional)",
+    notesHint: "For example the motor type, the gate's height or good times to call.",
+    summary: "Summary",
+    total: "{n} systems in total",
+    noPayment:
+      "Sending a reservation is not a charge. We'll get back to you to confirm the price, installation and delivery date.",
+    privacy: "Privacy policy",
+    privacyText: "Your details are used only to handle the reservation. ",
+    submit: "Send reservation",
+    sending: "Sending…",
+    sent: "Reservation received",
+    sentText: "Reservation number {id}. We'll be in touch soon. You can follow it under My reservations.",
+    viewMine: "My reservations",
+    newAnother: "Another reservation",
+    errorChooseProduct: "Choose at least one system.",
+    errorName: "Enter your full name.",
+    errorPhone: "Enter a phone number with the country code, for example +972 50 123 4567.",
+    errorCity: "Enter a city.",
+    errorStreet: "Enter a street and number.",
+    errorPhotoType: "Only images can be attached.",
+    errorPhotoRead: "We couldn't read the image {name}.",
+    errorPhotoCount: "You can attach up to 3 photos.",
+    errorLimit: "You already have 5 open reservations. Cancel one or wait until we get back to you.",
+    errorPhoto: "One of the photos wasn't accepted. Remove it and try again.",
+    errorTooLarge: "The photos are too large. Remove a photo and try again.",
+    errorVerify: "Your account needs a verified email. Sign in with Google or Apple.",
+    errorSession: "Your sign-in expired. Please sign in again.",
+    errorNetwork: "We can't reach the server. Check your connection and try again.",
+    errorIntegrity: "We couldn't verify this browser. Reload the page and try again.",
+    errorConflict: "The reservation changed in the meantime. The list was updated.",
+    errorGeneric: "Something went wrong. Please try again.",
+    loading: "Loading…",
+    emptyMine: "No reservations yet.",
+    retry: "Try again",
+    reservation: "Reservation {id}",
+    created: "Sent on {date}",
+    trackingNumber: "Tracking number",
+    messageFromUs: "Message from WIFIGATE",
+    cancel: "Cancel reservation",
+    cancelConfirm: "Cancel this reservation?",
+    cancelYes: "Yes, cancel",
+    cancelNo: "No",
+    cancelled: "The reservation was cancelled.",
+    statusNew: "Received",
+    statusContacted: "Contacted",
+    statusConfirmed: "Confirmed",
+    statusShipped: "Shipped",
+    statusDelivered: "Delivered",
+    statusCancelled: "Cancelled",
+    by_customer: "by you",
+    by_admin: "by WIFIGATE",
+    by_system: "automatically",
+    adminTitle: "Reservations",
+    adminNote:
+      "Every reservation from WIFIGATE accounts. Update the status, a message to the customer, an internal note and the tracking number.",
+    adminEntryText: "Reservations from WIFIGATE accounts, from receipt to delivery.",
+    adminEntryOpen: "Open",
+    adminEntryCounts: "{new} new · {open} open",
+    refresh: "Refresh",
+    all: "All",
+    loadMore: "Load more",
+    truncated: "Showing the latest 500 reservations in this status.",
+    adminEmpty: "No reservations in this status.",
+    details: "Details",
+    customer: "Customer",
+    items: "Products",
+    history: "History",
+    erased: "The account was deleted. Personal details were removed.",
+    changeStatus: "Update",
+    newStatus: "Status",
+    keepStatus: "{status} (no change)",
+    customerNote: "Message to the customer",
+    customerNoteHint: "The customer sees it under My reservations.",
+    adminNoteLabel: "Internal note",
+    adminNoteHint: "Only WIFIGATE Admins see it.",
+    save: "Save",
+    saving: "Saving…",
+    saved: "Saved.",
+    adminDenied: "This page is for WIFIGATE Admins with two-step verification only.",
+    openPhoto: "Open photo {n}",
+    unitSuffix: "×{n}",
+  },
+};
+
+export function reservationsText(language) {
+  const text = copy[language === "he" ? "he" : "en"];
+
+  return (key, values = {}) =>
+    text[key].replace(/\{(\w+)\}/g, (_, name) => String(values[name] ?? ""));
+}
+
+export const statusKey = (status) =>
+  `status${status[0].toUpperCase()}${status.slice(1)}`;
+
+export function productName(id) {
+  return productLines.find((line) => line.id === id)?.name ?? id;
+}
+
+export function countryName(code, language) {
+  try {
+    return (
+      new Intl.DisplayNames([language], { type: "region" }).of(code) ?? code
+    );
+  } catch {
+    return code;
+  }
+}
+
+export function formatDate(value, language) {
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) return "—";
+
+  return new Intl.DateTimeFormat(language === "he" ? "he-IL" : "en-GB", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(date);
+}

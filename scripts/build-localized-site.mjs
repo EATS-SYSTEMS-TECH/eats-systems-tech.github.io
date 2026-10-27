@@ -1146,9 +1146,13 @@ async function buildShopPages(homeData) {
     $(".shop-main__content").attr({ lang: he ? "he" : "en", dir: he ? "rtl" : "ltr" });
     if (he) {
       $(".shop-main h1").text("חנות WIFIGATE תיפתח בקרוב.");
-      $(".shop-main__link").text("חזרה ל WIFIGATE");
+      $(".shop-main__reserve").text("כבר עכשיו אפשר להזמין מערכות מחשבון WIFIGATE.");
+      $("[data-reservations]").text("להזמנת מערכות");
+      $("[data-home]").text("חזרה ל WIFIGATE");
     }
-    $(".shop-main__link").attr("href", buildPagePath(locale, "home"));
+    // WIFIGATE Reservations exists in Hebrew and English (?lang=he).
+    $("[data-reservations]").attr("href", he ? "/reservations/?lang=he" : "/reservations/");
+    $("[data-home]").attr("href", buildPagePath(locale, "home"));
     await writeOutputFile(buildOutputFilePath(locale, "shop"), serialize($, homeData, locale, "shop"));
   }
 }

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="description" content="Reserve WIFIGATE systems with your WIFIGATE account." />
+    <title>WIFIGATE Reservations</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" />
+    <link rel="stylesheet" href="/css/platform.css?v=20261027organization1" />
+    <link rel="stylesheet" href="/css/dashboard-header.css?v=20261025centerexit1" />
+    <link rel="stylesheet" href="/css/reservations.css?v=20261027reservations1" />
+    <script type="module" src="/js/reservations.bundle.js?v=20261027reservations1"></script>
+  </head>
+  <body class="platform-page reservations-page" data-session="loading">
+    <main class="platform-shell">
+      <header class="platform-header">
+        <a class="brand" href="/" aria-label="WIFIGATE"
+          ><img
+            src="/assets/img/wifigate-horizontal-logo.webp"
+            alt="WIFIGATE"
+            width="416"
+            height="96"
+        /></a>
+        <div class="dashboard-header-actions">
+          <select id="platform-language" aria-label="Interface language"><option value="en">English</option><option value="he">עברית</option></select>
+          <div id="reservations-account" class="reservations-account" hidden>
+            <span id="reservations-account-email" dir="ltr"></span>
+            <button id="reservations-sign-out" class="platform-button reservation-secondary" type="button" data-text="signOut">Sign out</button>
+          </div>
+        </div>
+      </header>
+
+      <section class="platform-heading reservations-heading">
+        <p class="platform-eyebrow" dir="ltr" data-text="eyebrow">WIFIGATE RESERVATIONS</p>
+        <h1 data-text="pageTitle">Reserve systems</h1>
+        <p data-text="intro">Choose products and quantities, and we'll get back to you to arrange price, installation and delivery. There is no payment at this stage.</p>
+      </section>
+
+      <section id="reservations-sign-in" class="reservations-sign-in portal-panel" aria-labelledby="sign-in-title" hidden>
+        <div>
+          <h2 id="sign-in-title" data-text="signInTitle">Sign in to your WIFIGATE account</h2>
+          <p data-text="signInText">Reservations are for WIFIGATE accounts only.</p>
+        </div>
+        <div class="reservations-providers">
+          <button class="platform-button" type="button" data-provider="google">Continue with Google</button>
+          <button class="platform-button reservation-secondary" type="button" data-provider="apple">Continue with Apple</button>
+        </div>
+        <p id="sign-in-status" class="reservation-status" role="status" aria-live="polite" hidden></p>
+      </section>
+
+      <div id="reservations-workspace" hidden>
+        <div class="reservations-tabs" role="tablist">
+          <button type="button" role="tab" id="tab-new" data-tab="new" aria-controls="panel-new" aria-selected="true" data-text="tabNew">New reservation</button>
+          <button type="button" role="tab" id="tab-mine" data-tab="mine" aria-controls="panel-mine" aria-selected="false" tabindex="-1"><span data-text="tabMine">My reservations</span> <span id="reservations-mine-count" class="reservations-count"></span></button>
+        </div>
+
+        <section id="panel-new" role="tabpanel" aria-labelledby="tab-new">
+          <form id="reservation-form" class="reservation-form" novalidate>
+            <fieldset class="portal-panel">
+              <legend data-text="products">Products</legend>
+              <div id="reservation-products-slot"></div>
+            </fieldset>
+
+            <fieldset class="portal-panel">
+              <legend data-text="contact">Contact details</legend>
+              <div class="reservation-grid">
+                <label><span data-text="fullName">Full name</span><input name="fullName" autocomplete="name" maxlength="80" required /></label>
+                <label><span data-text="email">Email</span><input name="email" type="email" dir="ltr" readonly aria-describedby="email-hint" /><small id="email-hint" data-text="emailHint"></small></label>
+                <label><span data-text="phone">Phone</span><input name="phone" type="tel" dir="ltr" autocomplete="tel" inputmode="tel" maxlength="24" required aria-describedby="phone-hint" /><small id="phone-hint" data-text="phoneHint"></small></label>
+                <label><span data-text="company">Company (optional)</span><input name="company" autocomplete="organization" maxlength="80" /></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="portal-panel">
+              <legend data-text="address">Installation and delivery address</legend>
+              <div class="reservation-grid">
+                <label><span data-text="country">Country</span><select id="reservation-country" name="country" autocomplete="country"></select></label>
+                <label><span data-text="city">City</span><input name="city" autocomplete="address-level2" maxlength="80" required /></label>
+                <label><span data-text="street">Street and number</span><input name="street" autocomplete="street-address" maxlength="120" required /></label>
+                <label><span data-text="postalCode">Postal code (optional)</span><input name="postalCode" autocomplete="postal-code" dir="ltr" maxlength="16" /></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="portal-panel">
+              <legend data-text="photos">Photos of the site (optional)</legend>
+              <p class="reservation-hint" data-text="photosHint"></p>
+              <ul id="reservation-photo-list" class="reservation-photos"></ul>
+              <label id="reservation-photos-add" class="platform-button reservation-secondary reservation-photos__add">
+                <span data-text="addPhotos">Add photos</span>
+                <input id="reservation-photos-input" type="file" accept="image/*" multiple />
+              </label>
+              <p id="reservation-photos-status" class="reservation-status" role="status" aria-live="polite" hidden></p>
+              <label class="reservation-notes"><span data-text="notes">Notes (optional)</span><textarea name="notes" rows="3" maxlength="1000" aria-describedby="notes-hint"></textarea><small id="notes-hint" data-text="notesHint"></small></label>
+            </fieldset>
+
+            <aside id="reservation-summary" class="reservation-summary portal-panel" data-empty="true" aria-labelledby="summary-title">
+              <h2 id="summary-title" data-text="summary">Summary</h2>
+              <ul id="reservation-summary-items"></ul>
+              <p id="reservation-summary-total" class="reservation-summary__total"></p>
+              <p class="reservation-hint" data-text="noPayment"></p>
+              <p class="reservation-hint"><span data-text="privacyText"></span><a href="/privacy-policy/" target="_blank" rel="noopener" data-text="privacy">Privacy policy</a></p>
+              <button id="reservation-submit" class="platform-button" type="submit" data-text="submit">Send reservation</button>
+              <p id="reservation-status" class="reservation-status" role="status" aria-live="polite" hidden></p>
+            </aside>
+          </form>
+
+          <section id="reservation-sent" class="reservation-sent portal-panel" tabindex="-1" hidden>
+            <h2 data-text="sent">Reservation received</h2>
+            <p id="reservation-sent-text"></p>
+            <div class="reservations-providers">
+              <button id="reservation-view-mine" class="platform-button" type="button" data-text="viewMine">My reservations</button>
+              <button id="reservation-new-another" class="platform-button reservation-secondary" type="button" data-text="newAnother">Another reservation</button>
+            </div>
+          </section>
+        </section>
+
+        <section id="panel-mine" role="tabpanel" aria-labelledby="tab-mine" hidden>
+          <p id="reservations-mine-status" class="reservation-status" role="status" aria-live="polite" hidden></p>
+          <button id="reservations-mine-retry" class="platform-button reservation-secondary" type="button" data-text="retry" hidden>Try again</button>
+          <div id="reservations-mine-list" class="reservations-list"></div>
+        </section>
+      </div>
+
+      <section class="reservations-catalog" aria-labelledby="products-title">
+        <h2 id="products-title" class="visually-hidden" data-text="products">Products</h2>
+        <div id="reservation-products" class="reservation-products"></div>
+      </section>
+    </main>
+    <dialog id="mfa-challenge" class="mfa-dialog" aria-labelledby="challenge-title">
+      <form class="mfa-dialog__form">
+        <img class="mfa-dialog__logo" src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE" width="416" height="96" />
+        <h2 id="challenge-title" class="mfa-dialog__title" data-mfa-copy="title">Verify your authenticator</h2>
+        <label class="mfa-dialog__field mfa-dialog__factor"><span data-mfa-copy="factor">Authenticator</span><select name="factor" required></select></label>
+        <label class="mfa-dialog__field"><span data-mfa-copy="code">Authenticator code</span><input class="mfa-dialog__code" name="code" dir="ltr" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" minlength="6" maxlength="6" placeholder="••••••" spellcheck="false" required /></label>
+        <p class="mfa-dialog__status" role="status" aria-live="polite"></p>
+        <div class="mfa-dialog__actions">
+          <button type="submit" class="mfa-dialog__button mfa-dialog__button--primary" data-mfa-copy="verify">Verify</button><button type="button" class="mfa-dialog__button mfa-dialog__button--secondary" data-cancel data-mfa-copy="cancel">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
