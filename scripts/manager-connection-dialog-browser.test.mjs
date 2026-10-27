@@ -43,7 +43,11 @@ test("connection popup has real stage progress, honest timing, keyboard cancella
           language === "he" ? "rtl" : "ltr",
         );
         assert.equal(await bar.getAttribute("aria-valuenow"), "0");
-        assert.match(await dialog.innerText(), /90/);
+        assert.doesNotMatch(await dialog.innerText(), /פעם בדקה|once a minute|90/);
+        assert.equal(
+          await dialog.locator(".manager-connection-dialog__timing").isVisible(),
+          false,
+        );
         assert.equal(
           await dialog.evaluate((node) =>
             node.contains(document.activeElement),

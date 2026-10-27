@@ -94,11 +94,9 @@ export function createManagerConnectionDialog({
             "חלפה יותר מדקה. ממשיכים להמתין במסגרת חלון החיבור; אפשר לבטל ולנסות שוב מאוחר יותר.",
             "Over a minute has passed. The connection request is still pending; you can cancel and try again later.",
           )
-        : t(
-            "המערכת בודקת בקשות בערך פעם בדקה. ההמתנה למענה עשויה להגיע לכ־90 שניות, ולאחריהן מתבצעים אימות וטעינה.",
-            "The system checks requests about once a minute. Waiting for a response may take around 90 seconds, followed by verification and loading.",
-          );
+        : "";
     if (timing.textContent !== message) timing.textContent = message;
+    timing.hidden = !message;
     dialog.dataset.extended = String(extended);
   }
   function setStage(stage) {
@@ -314,6 +312,7 @@ export function createManagerConnectionDialog({
     failed.removeAttribute("aria-current");
     failed.firstElementChild.textContent = "!";
     progress.setAttribute("aria-valuetext", title.textContent);
+    timing.hidden = false;
     timing.textContent = t(
       "לא נשלחה פקודת פתיחה. ניסיון נוסף מתחיל רק בלחיצה שלכם.",
       "No gate-opening command was sent. A new attempt starts only when you choose.",
