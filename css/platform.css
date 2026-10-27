@@ -1099,6 +1099,31 @@ html[dir="rtl"] .product-switcher__label strong {
 .platform-admin-person-content { padding: 0 1rem 1rem; border-block-start: 1px solid var(--line); }
 .platform-admin-person-content caption { padding-block: 1rem; color: var(--muted); font-size: .8rem; }
 .platform-admin-footnote { color: var(--muted); line-height: 1.8; margin-top: 1.2rem; }
+.platform-admin-list-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem; margin-block: 1.5rem 1rem; }
+.platform-admin-list-toolbar h3 { margin: 0; }
+.platform-admin-revenue { padding: 1.25rem 1.5rem; margin-block: 1rem 1.5rem; border: 1px solid #d6e5db; border-radius: 14px; background: #f4faf6; }
+.platform-admin-revenue h3 { margin: 0 0 .65rem; font-size: .9rem; color: #325541; }
+.platform-admin-revenue > strong { display: block; font-size: clamp(1.7rem, 4vw, 2.2rem); font-variant-numeric: tabular-nums; color: #183e28; }
+.platform-admin-revenue p { margin-bottom: 0; color: #4a6554; font-size: .8rem; line-height: 1.7; }
+.platform-admin-person-actions { display: flex; justify-content: flex-end; padding-top: .8rem; color: var(--muted); }
+.platform-page .platform-admin-remove { min-height: 40px; padding: .5rem .8rem; border: 1px solid #e1bcb7; border-radius: 9px; background: #fff; color: #a33127; font: inherit; font-size: .82rem; cursor: pointer; }
+.platform-page .platform-admin-remove:hover:not(:disabled) { background: #fff4f2; }
+.platform-access-dialog { width: min(480px, calc(100vw - 32px)); box-sizing: border-box; max-height: calc(100dvh - 32px); padding: clamp(20px, 4vw, 30px); border: 1px solid #dce3ed; border-radius: 18px; box-shadow: 0 24px 80px #0f172a38; color: #18243a; background: #fff; }
+.platform-access-dialog::backdrop { background: #101b3299; }
+.platform-access-dialog h2 { margin: 0; font-size: 1.3rem; }
+.platform-access-dialog p { font-size: .88rem; line-height: 1.8; color: #53637b; overflow-wrap: anywhere; }
+.platform-access-dialog label { display: grid; gap: .45rem; margin-block: 1rem; font-size: .85rem; font-weight: 600; }
+.platform-access-dialog [hidden] { display: none !important; }
+.platform-access-dialog input, .platform-access-dialog select { box-sizing: border-box; width: 100%; min-height: 46px; padding: .65rem .75rem; border: 1px solid #bcc9da; border-radius: 9px; background: #fff; color: #18243a; font: inherit; }
+.platform-access-dialog input[readonly] { background: #f8fafc; }
+.platform-access-dialog button { min-height: 44px; padding: .65rem 1rem; border: 1px solid #cbd5e1; border-radius: 9px; background: #fff; color: #25354e; font: inherit; cursor: pointer; }
+.platform-access-dialog .platform-access-submit { color: #fff; background: #234f93; border-color: #234f93; }
+.platform-access-dialog .platform-access-remove { color: #fff; background: #a33127; border-color: #a33127; }
+.platform-access-buttons { display: flex; justify-content: flex-end; gap: .65rem; margin-top: 1.2rem; }
+.platform-access-dialog :focus-visible { outline: 3px solid #397cf3; outline-offset: 3px; }
+.platform-access-dialog :disabled { opacity: .6; cursor: wait; }
+.platform-access-dialog .platform-access-scope { font-weight: 600; }
+.platform-access-scope button { margin-top: .65rem; }
 @media (prefers-reduced-motion: reduce) { .platform-management-entry, .platform-admin-chevron { transition: none; } }
 @media (max-width: 600px) {
   .platform-management-entry { inset-inline-start: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); padding: .8rem 1rem; font-size: .85rem; border-radius: 13px; }

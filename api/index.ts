@@ -2,7 +2,7 @@ export { createProfile } from "./auth/create-profile.js";
 export { getProfile } from "./auth/get-profile.js";
 export { getPlatformProfile } from "./auth/get-platform-profile.js";
 export { portalLogin } from "./auth/portal-login.js";
-export { getPlatformDirectory } from "./auth/platform-directory.js";
+export { getPlatformDirectory, getPlatformDirectoryFinancials, getPayAccessOrganizations, changePlatformProductAccess } from "./auth/platform-directory.js";
 export { managerRequest } from "./manager.js";
 export { getAccountDeletion, deleteAccount } from "./auth/account-deletion.js";
 export {

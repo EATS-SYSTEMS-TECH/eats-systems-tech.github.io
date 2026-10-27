@@ -1,10 +1,14 @@
-import { getPlatformDirectory } from "./api/index.js";
+import {
+  getPlatformDirectory,
+  getPlatformDirectoryFinancials,
+} from "./api/index.js";
 import {
   monthlyEstimate,
   monthlyTotal,
   formatMoney,
 } from "./profile-financials.js";
 import { productLink } from "./product-switcher.js";
+import { createPlatformAccountActions } from "./platform-account-actions.js";
 
 const element = (tag, text, className) => {
   const node = document.createElement(tag);
@@ -19,6 +23,7 @@ export function createPlatformAdminDirectory({
   language,
   product = "all",
   standalone = false,
+  ensureRecent,
 }) {
   const t = (he, en) => (language === "he" ? he : en);
   let closed = false,
@@ -26,6 +31,7 @@ export function createPlatformAdminDirectory({
     selected = "all",
     selectedProduct = product,
     productCounts = {},
+    financialGeneration = 0,
     next;
   root.hidden = false;
   root.classList.add("platform-admin-management");
@@ -121,6 +127,45 @@ export function createPlatformAdminDirectory({
   if (product === "all") productHeading.append(resetProduct);
   products.append(productHeading, business);
   const listHeading = element("h3", t("משתמשי הפלטפורמה", "Platform accounts"));
+  const listToolbar = element("div", null, "platform-admin-list-toolbar");
+  listToolbar.append(listHeading);
+  const actionStatus = element("p");
+  actionStatus.setAttribute("role", "status");
+  const actions =
+    standalone && product === "all"
+      ? createPlatformAccountActions({
+          user,
+          language,
+          ensureRecent,
+          onChanged: (message) => {
+            actionStatus.textContent = message;
+            productCounts = {};
+            void load();
+          },
+        })
+      : null;
+  if (actions) {
+    const invite = element(
+      "button",
+      t("הזמנת משתמש", "Invite a person"),
+      "platform-button platform-admin-invite",
+    );
+    invite.type = "button";
+    invite.addEventListener("click", () => actions.invite(selectedProduct));
+    listToolbar.append(invite);
+  }
+  const revenue = element("section", null, "platform-admin-revenue");
+  const revenueValue = element("strong", "—");
+  const revenueStatus = element("p");
+  revenueStatus.setAttribute("role", "status");
+  revenue.append(
+    element(
+      "h3",
+      t("סה״כ הכנסות חודשיות (אומדן)", "Total monthly revenue (estimate)"),
+    ),
+    revenueValue,
+    revenueStatus,
+  );
   const hint = element(
     "p",
     t(
@@ -141,10 +186,12 @@ export function createPlatformAdminDirectory({
     header,
     counts,
     products,
-    listHeading,
+    listToolbar,
+    ...(product === "all" ? [revenue] : []),
     hint,
     filters,
     status,
+    actionStatus,
     rows,
     more,
     footnote,
@@ -233,6 +280,34 @@ export function createPlatformAdminDirectory({
     card.append(summary);
     const content = element("div", null, "platform-admin-person-content");
     card.append(content);
+    if (actions) {
+      const controls = element("div", null, "platform-admin-person-actions");
+      if (person.role === "admin")
+        controls.append(
+          element(
+            "small",
+            t(
+              "הרשאות מנהלים מוגנות מפעולות למסלול יחיד.",
+              "Administrator roles are protected from single-product actions.",
+            ),
+          ),
+        );
+      else {
+        const remove = element(
+          "button",
+          t("הסרה ממסלול…", "Remove product access…"),
+          "platform-admin-remove",
+        );
+        remove.type = "button";
+        remove.disabled =
+          person.email.toLowerCase() === user.email?.toLowerCase();
+        remove.addEventListener("click", () =>
+          actions.remove(person, selectedProduct),
+        );
+        controls.append(remove);
+      }
+      content.append(controls);
+    }
     if (person.identityStatus !== "verified") {
       content.append(
         element(
@@ -314,7 +389,7 @@ export function createPlatformAdminDirectory({
       row.append(amount);
     }
     tableWrap.append(table);
-    content.append(tableWrap);
+    content.prepend(tableWrap);
     return card;
   }
 
@@ -335,6 +410,54 @@ export function createPlatformAdminDirectory({
     );
   }
 
+  async function loadFinancials() {
+    const epoch = ++financialGeneration;
+    revenue.setAttribute("aria-busy", "true");
+    revenueValue.textContent = "—";
+    revenueStatus.textContent = t(
+      "מחשב אומדן לכל החשבונות בסינון…",
+      "Calculating the estimate for every matching account…",
+    );
+    try {
+      const data = await getPlatformDirectoryFinancials(
+        user,
+        selectedProduct,
+        selected,
+      );
+      if (closed || epoch !== financialGeneration) return;
+      const total =
+        data.totals
+          .map((value) =>
+            formatMoney(value.amountCents, value.currency, language),
+          )
+          .join(" + ") || formatMoney(0, "USD", language);
+      revenueValue.textContent = data.complete ? total : "—";
+      revenueStatus.textContent = data.unknownAccounts
+        ? t(
+            `סכום ידוע: ${total}. חסרים נתונים עבור ${data.unknownAccounts} חשבונות.`,
+            `Known amount: ${total}. Data is missing for ${data.unknownAccounts} accounts.`,
+          )
+        : selectedProduct === "pay"
+          ? t(
+              "נתוני הכנסות Pay אינם זמינים כרגע.",
+              "Pay revenue data is currently unavailable.",
+            )
+          : t(
+              "אומדן לחודש מלא לפני מס עבור Host ו־Manager, לפי הסינון הנוכחי. הכנסות Pay וגבייה בפועל אינן כלולות.",
+              "Full-month estimate before tax for Host and Manager, matching the current filters. Pay revenue and collected payments are excluded.",
+            );
+    } catch {
+      if (!closed && epoch === financialGeneration)
+        revenueStatus.textContent = t(
+          "אומדן ההכנסות אינו זמין כרגע. אפשר לנסות לרענן.",
+          "The revenue estimate is currently unavailable. Try refreshing.",
+        );
+    } finally {
+      if (!closed && epoch === financialGeneration)
+        revenue.setAttribute("aria-busy", "false");
+    }
+  }
+
   async function load(append = false) {
     const epoch = ++generation;
     root.setAttribute("aria-busy", "true");
@@ -343,6 +466,7 @@ export function createPlatformAdminDirectory({
     if (!append) {
       rows.replaceChildren();
       renderCounts();
+      if (product === "all") void loadFinancials();
       next = null;
     }
     more.hidden = true;
@@ -404,6 +528,8 @@ export function createPlatformAdminDirectory({
     close() {
       closed = true;
       generation++;
+      financialGeneration++;
+      actions?.close();
       root.replaceChildren();
       root.hidden = true;
     },

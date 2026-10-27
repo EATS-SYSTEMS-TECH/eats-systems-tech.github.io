@@ -142,7 +142,7 @@ export async function scenario(browser, options = {}) {
       let user = { uid: "fixture-user", email: "fixture@example.test", emailVerified: true,
         metadata: ${JSON.stringify(state.userMetadata ?? {})},
         getIdToken: async () => "isolated-token",
-        getIdTokenResult: async () => ({claims: {firebase: {sign_in_provider: "google.com"}}}) };
+        getIdTokenResult: async () => ({claims: {auth_time: ${JSON.stringify(state.authTime ?? 0)}, firebase: {sign_in_provider: "google.com"}}}) };
       export const getAuth = () => ({});
       export const connectAuthEmulator = () => {};
       export const browserLocalPersistence = {type: "local"};
@@ -225,6 +225,8 @@ export async function scenario(browser, options = {}) {
         status: state.deniedStatus,
         json: { error: { code: state.deniedCode ?? "PORTAL_ACCESS_DENIED" } },
       });
+    if (url.pathname === "/api/v1/platform/directory/financials")
+      return route.fulfill({ json: { kind: "monthly-estimate", totals: [], accounts: 1, unknownAccounts: 1, complete: false, payRevenueAvailable: false } });
     if (url.pathname === "/api/v1/users/me") {
       return route.fulfill({
         json: {

@@ -28,3 +28,7 @@ test("a product without a plan adds no monthly fee, but an unavailable active es
   assert.match(monthlyTotal({host: product([600,0,0,0]),manager:{state:"no-plan"}}, "en"), /6\.00/);
   assert.equal(monthlyTotal({host: product([600,0,0,0]),manager:{state:"active"}}, "en"), "—");
 });
+
+test("blocked Host access does not hide an active Manager monthly estimate", () => {
+  assert.match(monthlyTotal({ host: { state: "blocked", financials: null }, manager: { ...product([190, 0, 0, 0]), state: "active" }, pay: { state: "no-plan" } }, "en"), /1\.90/);
+});

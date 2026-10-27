@@ -408,7 +408,17 @@ async function refresh() {
         showSecurity();
         return;
       }
-      platformDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language, standalone: true });
+      platformDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language, standalone: true,
+        ensureRecent: async () => {
+          const token = await user.getIdTokenResult();
+          const age = Date.now() / 1000 - Number(token.claims.auth_time ?? 0);
+          if (!Number.isFinite(age) || age < 0 || age > 240) {
+            await reauthenticate(user, requestMfaChallenge);
+            await user.getIdToken(true);
+          }
+          if (currentUser !== user || requestGeneration !== generation) throw new Error("session-changed");
+        },
+      });
     } else if (selectedProduct) {
       if (!canOpenProduct(identity, selectedProduct)) {
         location.replace(

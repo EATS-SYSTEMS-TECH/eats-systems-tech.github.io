@@ -20,7 +20,7 @@ export function formatMoney(amountCents, code, language) {
 
 export function monthlyTotal(products, language) {
   const estimates = [products.host, products.manager]
-    .filter(product => product?.state !== "no-plan")
+    .filter(product => !["no-plan", "blocked", "pending"].includes(product?.state))
     .map(monthlyEstimate);
   if (estimates.some(value => !value)) return "—";
   if (!estimates.length) return formatMoney(0, "USD", language);
