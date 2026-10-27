@@ -12,9 +12,11 @@ export const validOrganizationLogo = (value) =>
 export function createOrganizationLogo(org, language, className) {
   const artwork = node("div", undefined, className);
   if (validOrganizationLogo(org.logoDataUrl)) {
+    artwork.classList.add("has-logo");
     const image = node("img");
     image.src = org.logoDataUrl;
     image.alt = (language === "he" ? "לוגו של " : "Logo of ") + org.name;
+    image.decoding = "async";
     artwork.append(image);
   } else {
     artwork.textContent = org.name.trim().slice(0, 1).toUpperCase();

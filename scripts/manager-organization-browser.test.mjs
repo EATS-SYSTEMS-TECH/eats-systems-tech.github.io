@@ -76,6 +76,7 @@ async function fixture(t, browser, origin, language, width, viewer = false) {
                 id: "org-a",
                 name: "Harbor Residence",
                 version: 1,
+                logoDataUrl,
                 owner: { uid: "owner", email: "owner@example.test" },
                 administrators: [],
                 linkedSystemCount: 1,
@@ -286,6 +287,73 @@ test("selected organization contains branding, people and systems; invitation/re
           (await page.evaluate(() => window.writes[0])).body.expectedVersion,
           1,
         );
+        const backToList = () =>
+          page
+            .getByRole("button", {
+              name: he ? "כל הארגונים" : "All organizations",
+              exact: true,
+            })
+            .click();
+        const card = page.locator('[data-organization="org-a"]');
+        const enter = () =>
+          card
+            .getByRole("button", {
+              name: he ? "כניסה לארגון" : "Open organization",
+              exact: true,
+            })
+            .click();
+        await backToList();
+        const cardLogo = card.locator(".manager-org-avatar.has-logo img");
+        await cardLogo.waitFor();
+        assert.equal(
+          await cardLogo.evaluate((image) => getComputedStyle(image).objectFit),
+          "contain",
+        );
+        assert.equal(
+          await cardLogo.evaluate(async (image) => {
+            await image.decode();
+            return image.naturalWidth > 0;
+          }),
+          true,
+        );
+        if (process.env.MANAGER_ORG_SCREENSHOTS)
+          await page.screenshot({
+            path: path.join(
+              process.env.MANAGER_ORG_SCREENSHOTS,
+              `organization-card-logo-${language}-${width}.png`,
+            ),
+            fullPage: true,
+          });
+        const writesBeforeList = await page.evaluate(
+          () => window.writes.length,
+        );
+        assert.equal(
+          writesBeforeList,
+          1,
+          "returning to the directory is read-only",
+        );
+        await enter();
+        await page
+          .getByRole("button", {
+            name: he ? "הסרת לוגו" : "Remove logo",
+            exact: true,
+          })
+          .click();
+        await page
+          .getByRole("dialog")
+          .getByRole("button", { name: he ? "אישור" : "Confirm", exact: true })
+          .click();
+        await page
+          .locator(".manager-organization-logo img")
+          .waitFor({ state: "detached" });
+        await backToList();
+        await card.waitFor();
+        assert.equal(await card.locator(".manager-org-avatar img").count(), 0);
+        assert.equal(
+          await card.locator(".manager-org-avatar").innerText(),
+          "H",
+        );
+        await enter();
         await page
           .getByRole("button", {
             name: he ? "הוספת משתמש" : "Add user",

@@ -1399,3 +1399,11 @@ body:has(.manager-connection-dialog[open]) .manager-shell .manager-button.is-loa
 .manager-organization-person{padding-block:16px;gap:12px}.manager-organization-person-avatar{width:37px;flex-basis:37px;height:37px;background:#f0f4f9}.manager-organization-person-column>.manager-muted{margin-top:16px;padding:22px 12px;border-radius:12px;background:#f8fafc;font-size:12px;line-height:1.7;text-align:center}.manager-organization-person[hidden],.manager-organization-search-empty[hidden]{display:none}
 .manager-organization-pending{background:#fffcf8;border-color:#f3e4d6}.manager-organization-workspace [data-organization-section],.manager-toolbar[data-organization-section]{scroll-margin-top:24px}
 @media(max-width:700px){.manager-organization-header{padding:20px;gap:14px}.manager-organization-brand-actions{grid-template-columns:minmax(0,1fr) auto}.manager-shell button.manager-organization-metric{padding:15px 12px}.manager-organization-metric::after{display:none}.manager-organization-metrics strong{font-size:27px}.manager-organization-metrics span{font-size:11px}.manager-organization-person-column{padding:18px}.manager-organization-search input{width:100%}.manager-org-identity{gap:10px;grid-template-columns:44px minmax(0,1fr) auto}.manager-org-avatar{width:44px;height:44px}.manager-org-name h4{font-size:17px}}
+
+/* Branded organization cards: preserve uploaded artwork without cropping. */
+.manager-org-identity{grid-template-columns:72px minmax(0,1fr) auto;gap:16px;align-items:center}
+.manager-org-avatar{width:72px;height:72px;border-radius:18px;font-size:28px}
+.manager-org-avatar.has-logo{background:#fff;border-color:#e1e7ef;box-shadow:0 3px 12px #182d4806}
+.manager-org-avatar img{display:block;width:100%;height:100%;padding:8px;object-fit:contain;box-sizing:border-box}
+.manager-org-name h4{margin:0;overflow-wrap:anywhere}.manager-org-column:hover,.manager-org-column:focus-within{border-color:#d2dce8;box-shadow:0 7px 24px #182d480a}
+@media(max-width:700px){.manager-org-identity{grid-template-columns:60px minmax(0,1fr) auto;gap:12px}.manager-org-avatar{width:60px;height:60px;border-radius:16px;font-size:25px}.manager-org-avatar img{padding:6px}}
