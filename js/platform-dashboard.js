@@ -626,12 +626,12 @@ function pricingExplanation(product, category) {
   const text = {
     he: {
       host: {
-        gates: "שערים פיזיים בבעלותך שאינם נכללים בזוג מזוהה, כולל רכיבי קבוצות. 1–14 שערים: $6 לשער לחודש; 15–49: $5; 50 ומעלה: $4. המדרגה נקבעת לפי כל השערים הפיזיים בחשבון וחלה על כולם.",
-        dualControls: "Dual Control כולל שני שערים פיזיים: $12 לזוג במדרגת 1–14 שערים, $10 במדרגת 15–49, או $8 במדרגת 50 ומעלה. זוגות שבתוך קבוצות נכללים כאן; שער שמופיע בכמה מקומות מחושב פעם אחת.",
+        gates: "שערים פיזיים בבעלותך שאינם נכללים בזוג מזוהה, כולל רכיבי קבוצות. המחיר מדרגה על מדרגה: שערים 1–14 עולים $6 כל אחד לחודש, שערים 15–49 עולים $5, ומהשער ה־50 $4. המינימום לחשבון הוא $6 לחודש, גם בלי שערים.",
+        dualControls: "Dual Control כולל שני שערים פיזיים, וכל אחד מהם מחושב במדרגה שלו אחרי השערים הבודדים: $6, $5 או $4 לשער. זוגות שבתוך קבוצות נכללים כאן; שער שמופיע בכמה מקומות מחושב פעם אחת.",
         organizations: "אין תוספת חודשית עבור ארגונים ב־WIFIGATE Host. העלות נקבעת לפי השערים הפיזיים הייחודיים בחשבון.",
       },
       manager: {
-        gates: "$1.90 לחודש לכל Gate, כולל שערים בתוך קבוצות. אותו שער שמופיע בכמה קבוצות או גם בנפרד נספר פעם אחת. סנכרון חוזר אינו מוסיף עלות.",
+        gates: "$1.90 לחודש לכל Gate, כולל שערים בתוך קבוצות. אותו שער שמופיע בכמה קבוצות או גם בנפרד נספר פעם אחת. סנכרון חוזר אינו מוסיף עלות. המינימום לחשבון הוא $1.90 לחודש, והוא נכלל בשורה זו.",
         dualControls: "$1.90 לחודש לכל Dual Control, כולל זוגות בתוך קבוצות. זוג הוא רכיב אחד גם כשיש בו שני שערים פיזיים; אותו זוג נספר פעם אחת.",
         groups: "לקבוצה אין תעריף נפרד. הרכיבים שבתוכה מחושבים בשורות Gate ו־Dual Control.",
         organizations: "שלושת הארגונים הפעילים הראשונים בבעלות החשבון כלולים. כל ארגון פעיל נוסף מוסיף $1 לחודש. מנהלי ארגון ללא חשבון לקוח אינם משלמים.",
@@ -639,12 +639,12 @@ function pricingExplanation(product, category) {
     },
     en: {
       host: {
-        gates: "Owned physical gates outside recognized pairs, including group components. 1–14 gates: $6 per gate/month; 15–49: $5; 50+: $4. The tier uses all unique physical gates in the account and applies to every gate.",
-        dualControls: "A Dual Control contains two physical gates: $12 per pair in the 1–14 gate tier, $10 in the 15–49 tier, or $8 in the 50+ tier. Pairs inside groups are included here; overlapping physical gates are counted once.",
+        gates: "Owned physical gates outside recognized pairs, including group components. Priced band by band: gates 1–14 cost $6 each per month, gates 15–49 $5, and from gate 50 $4. The account minimum is $6/month, even with no gates.",
+        dualControls: "A Dual Control contains two physical gates, each priced in its band after the standalone gates: $6, $5 or $4 per gate. Pairs inside groups are included here; overlapping physical gates are counted once.",
         organizations: "WIFIGATE Host has no monthly organization surcharge. Cost depends on the account's unique physical gates.",
       },
       manager: {
-        gates: "$1.90/month per Gate, including Gates inside groups. The same Gate is counted once across groups and standalone exports. Syncing adds no cost.",
+        gates: "$1.90/month per Gate, including Gates inside groups. The same Gate is counted once across groups and standalone exports. Syncing adds no cost. The account minimum is $1.90/month and is included in this line.",
         dualControls: "$1.90/month per Dual Control, including pairs inside groups. A pair is one object despite its two physical gates; the same pair is counted once.",
         groups: "Groups have no separate fee. Their contents contribute to Gates and Dual Controls.",
         organizations: "The first three active account-owned organizations are included. Each additional organization adds $1/month. Organization administrators without a customer account do not pay.",

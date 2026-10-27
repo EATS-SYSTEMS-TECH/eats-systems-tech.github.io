@@ -247,7 +247,7 @@ test("every dashboard shares a flag selector and profile entry into My profile",
                   const bubble = tip.locator('[role="tooltip"]');
                   assert.equal(await bubble.isVisible(), true);
                   const rate = productId === 'host'
-                    ? key === 'gates' ? /\$6/ : key === 'dualControls' ? /\$12/ : language === 'he' ? /אין תוספת/ : /no monthly organization surcharge/
+                    ? key === 'gates' ? /\$6/ : key === 'dualControls' ? /\$5/ : language === 'he' ? /אין תוספת/ : /no monthly organization surcharge/
                     : key === 'organizations' ? /\$1/ : /\$1\.90/;
                   assert.match(await bubble.innerText(), rate);
                   const box = await bubble.boundingBox();
