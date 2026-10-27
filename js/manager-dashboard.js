@@ -1,3 +1,4 @@
+import { renderManagerOrganization } from "./manager-organization.js";
 import {
   systemsEmptyCopy,
   organizationsEmptyCopy,
@@ -57,6 +58,7 @@ export function createManagerDashboard({
     closed = false,
     profile,
     scope = null,
+    organizationDetail = null,
     systems = [],
     connection,
     currentSystem,
@@ -242,6 +244,10 @@ export function createManagerDashboard({
       GATE_AUTHENTICATION_FAILED: t(
         "השער לא אישר את החיבור המאובטח. בדקו את הרשאת המנהל המקומי באפליקציה.",
         "The gate did not approve the secure connection. Check local administrator access in the app.",
+      ),
+      INVALID_ORGANIZATION_LOGO: t(
+        "לא ניתן לעבד את הלוגו. בחרו תמונת PNG, JPG או WebP בגודל של עד 5 MB.",
+        "This logo could not be processed. Choose a PNG, JPG or WebP image up to 5 MB.",
       ),
       BUSY: t(
         "המערכת בשימוש. נסו שוב לאחר סיום הניהול הנוכחי.",
@@ -435,10 +441,6 @@ export function createManagerDashboard({
     }
     if (profile.role !== "admin")
       nav.append(button(t("הזמנות", "Invitations"), showInvitations));
-    if (scope)
-      nav.append(
-        button(t("מנהלי ארגון", "Organization administrators"), showMembers),
-      );
     if (profile.role === "admin") {
       const platformViews = [
         "overview",
@@ -549,8 +551,7 @@ export function createManagerDashboard({
       await showOverview();
     } else if (profile.role === "admin" || profile.account)
       await showSystems(null);
-    else if (profile.organizations.length)
-      await showSystems(profile.organizations[0].id);
+    else if (profile.organizations.length) await showOrganizations(true);
     else await showInvitations();
   }
   function openExample(system) {
@@ -918,6 +919,7 @@ export function createManagerDashboard({
     stop();
     currentView = operatorAccount ? "platform-systems" : "systems";
     scope = orgId;
+    organizationDetail = null;
     renderNav();
     view.replaceChildren();
     say(t("טוען מערכות…", "Loading systems…"));
@@ -937,6 +939,28 @@ export function createManagerDashboard({
     if (closed || epoch !== generation) return;
     systems = rows.filter((s) => s.status === "active");
     view.replaceChildren();
+    if (scope) {
+      const path =
+        (operatorAccount?.orgId ? "/admin" : "") +
+        "/organizations/" +
+        encodeURIComponent(scope);
+      organizationDetail = await renderManagerOrganization({
+        root: view,
+        path,
+        api,
+        language,
+        user,
+        dialogs,
+        ensureRecent,
+        run: task,
+        onRefresh: () => showSystems(orgId, operatorAccount),
+        onBack: () => showOrganizations(!operatorAccount),
+        errorText,
+        isCurrent: () => !closed && epoch === generation,
+      });
+      if (closed || epoch !== generation) return;
+    }
+
     const bar = node("div", undefined, "manager-toolbar");
     bar.append(
       node(
@@ -944,7 +968,7 @@ export function createManagerDashboard({
         operatorAccount
           ? operatorAccount.email
           : scope
-            ? profile.organizations.find((o) => o.id === scope)?.name
+            ? t("מערכות הארגון", "Organization systems")
             : t("המערכות שלי", "My systems"),
       ),
       button(t("רענון", "Refresh"), () => showSystems(scope, operatorAccount)),
@@ -993,6 +1017,27 @@ export function createManagerDashboard({
   function systemActions(s, operatorAccount = null, workspace = false) {
     const actions = node("div", undefined, "manager-system-actions");
     const secondary = node("div", undefined, "manager-system-options");
+    if (
+      scope &&
+      organizationDetail?.permissions.openWorkspace === false &&
+      !operatorAccount
+    ) {
+      if (s.accessNote)
+        actions.append(
+          button(t("פרטי גישה", "Access Note"), () =>
+            dialogs.info({
+              title: t("פרטי גישה", "Access Note") + " · " + s.name,
+              content: accessNoteContent(s.accessNote, language),
+            }),
+          ),
+        );
+      else
+        actions.append(
+          node("span", t("צפייה בלבד", "View only"), "manager-muted"),
+        );
+      return actions;
+    }
+
     if (s.accessNote)
       secondary.append(
         button(t("פרטי גישה", "Access Note"), () =>
@@ -1150,39 +1195,6 @@ export function createManagerDashboard({
           node("span", roleName(org.owner?.role), "manager-role-badge"),
         );
         card.append(owner);
-        const members = node(
-          "section",
-          undefined,
-          "manager-org-administrators",
-        );
-        members.append(
-          node("h5", t("מנהלי הארגון", "Organization administrators")),
-        );
-        if (!org.administrators.length)
-          members.append(
-            node(
-              "p",
-              t(
-                "אין מנהלי ארגון נוספים.",
-                "No additional organization administrators.",
-              ),
-              "manager-muted",
-            ),
-          );
-        for (const member of org.administrators)
-          members.append(node("p", member.email));
-        if (org.administratorNextCursor)
-          members.append(
-            node(
-              "p",
-              t(
-                "מנהלים נוספים מופיעים בניהול המינויים.",
-                "More administrators are available in appointment management.",
-              ),
-              "manager-note",
-            ),
-          );
-        card.append(members);
         const count = node("p", undefined, "manager-org-count");
         count.append(
           node("b", String(org.linkedSystemCount)),
@@ -1191,23 +1203,13 @@ export function createManagerDashboard({
         card.append(count);
         const actions = node("div", undefined, "manager-org-actions");
         actions.append(
-          button(t("מערכות הארגון", "Organization systems"), () =>
+          button(t("כניסה לארגון", "Open organization"), () =>
             showSystems(
               org.id,
               operator
                 ? { id: org.owner?.id, email: org.name, orgId: org.id }
                 : null,
             ),
-          ),
-        );
-        actions.append(
-          button(
-            t("ניהול מנהלי הארגון", "Manage organization administrators"),
-            () => {
-              scope = org.id;
-              renderNav();
-              return showMembers();
-            },
           ),
         );
         const owns = profile.organizations.some(
@@ -1346,66 +1348,17 @@ export function createManagerDashboard({
   }
   async function showMembers() {
     if (!scope) return;
-    stop();
-    view.replaceChildren(
-      node("h3", t("מנהלי הארגון", "Organization administrators")),
+    return showSystems(
+      scope,
+      managementMode && profile.role === "admin"
+        ? {
+            orgId: scope,
+            email:
+              profile.organizations.find((o) => o.id === scope)?.name ??
+              t("ארגון", "Organization"),
+          }
+        : null,
     );
-    const canManage =
-      profile.role === "admin" ||
-      profile.organizations.some(
-        (o) =>
-          o.id === scope &&
-          (o.role === "owner" || (profile.account && !o.role)),
-      );
-    const rows = await listAll(`${orgPath(scope)}/members`);
-    for (const member of rows.filter((m) => m.status === "active")) {
-      const row = node("div", undefined, "manager-card manager-row");
-      row.append(node("span", member.email));
-      if (canManage)
-        row.append(
-          button(t("ביטול גישה", "Revoke access"), async () => {
-            if (
-              !(await confirmAction(
-                t("לבטל את הגישה לארגון?", "Revoke organization access?"),
-              ))
-            )
-              return;
-            await ensureRecent();
-            await api(
-              `${orgPath(scope)}/members/${encodeURIComponent(member.uid)}/remove`,
-              "POST",
-              {},
-            );
-            await showMembers();
-          }),
-        );
-      view.append(row);
-    }
-    if (canManage)
-      view.append(
-        form(
-          [
-            [
-              "email",
-              t("אימייל מנהל הארגון", "Organization administrator email"),
-              "email",
-            ],
-          ],
-          t("יצירת הזמנה", "Create invitation"),
-          async (v, f) => {
-            await ensureRecent();
-            await api(`${orgPath(scope)}/invitations`, "POST", v);
-            f.reset();
-            say(
-              t(
-                "ההזמנה ממתינה בחשבון של כתובת האימייל שהוזנה.",
-                "The invitation is waiting in the invited email account.",
-              ),
-            );
-          },
-        ),
-      );
-    placeManagerActions(view, language);
   }
   async function showAccounts(status = "active") {
     beginView("user");

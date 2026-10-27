@@ -153,8 +153,7 @@ export function createManagerDialog({
       host.append(dialog);
       dialog.showModal();
       // Default focus never selects the action that writes to a physical gate.
-      if (form) form.querySelector("input").focus();
-      else dismiss.focus();
+      (form?.querySelector("input") ?? dismiss).focus();
     });
   }
   return {

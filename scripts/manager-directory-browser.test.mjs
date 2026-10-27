@@ -259,10 +259,13 @@ test("Manager identity, platform overview and organization columns support scope
                     : organizations.slice(0, 1),
                 nextCursor: null,
               };
+            if (/^\/(admin\/)?organizations\/org-a$/.test(path)) return {organization:{id:'org-a',name:'Harbor Hotel',version:1,logoDataUrl:null},owner:{uid:'owner',email:'owner@example.test'},counts:{administrators:1+organizations[0].administrators.length,users:0,systems:3},permissions:{managePeople:true,manageLogo:true,openWorkspace:!path.startsWith('/admin')}};
+            if (path.includes('/invitations?')) return {items:[],nextCursor:null};
             if (path.endsWith("/members?limit=100"))
               return {
                 items: organizations[0].administrators.map((m) => ({
                   ...m,
+                  role: "organization-admin",
                   status: "active",
                 })),
                 nextCursor: null,
@@ -292,7 +295,7 @@ test("Manager identity, platform overview and organization columns support scope
               });
               return { organization: organizations.at(-1) };
             }
-            if (path.startsWith("/organizations/org-a/systems?"))
+            if (path.startsWith("/organizations/org-a/systems?") || path.startsWith("/admin/organizations/org-a/systems?"))
               return { items: [], nextCursor: null };
             throw new Error("Unexpected request " + path);
           };
@@ -412,9 +415,7 @@ test("Manager identity, platform overview and organization columns support scope
           "3",
         );
         await first.getByText("owner@example.test", { exact: true }).waitFor();
-        await first
-          .getByText("delegate@example.test", { exact: true })
-          .waitFor();
+        assert.equal(await first.getByText("delegate@example.test", {exact:true}).count(),0);
         if (width === 1440) {
           const boxes = await page
             .locator(".manager-org-column")
@@ -435,41 +436,14 @@ test("Manager identity, platform overview and organization columns support scope
             path: `${process.env.MANAGER_DIRECTORY_SCREENSHOTS}/manager-organizations-${language}-${width}.png`,
             fullPage: true,
           });
-        await first
-          .getByRole("button", {
-            name: he
-              ? "ניהול מנהלי הארגון"
-              : "Manage organization administrators",
-          })
-          .click();
-        await page
-          .getByLabel(
-            he ? "אימייל מנהל הארגון" : "Organization administrator email",
-            { exact: true },
-          )
-          .fill("new@example.test");
-        await page
-          .getByRole("button", {
-            name: he ? "יצירת הזמנה" : "Create invitation",
-            exact: true,
-          })
-          .click();
-        await page
-          .locator(".manager-status")
-          .getByText(
-            he
-              ? "ההזמנה ממתינה בחשבון של כתובת האימייל שהוזנה."
-              : "The invitation is waiting in the invited email account.",
-            { exact: true },
-          )
-          .waitFor();
-        await page
-          .getByRole("button", {
-            name: he ? "ביטול גישה" : "Revoke access",
-            exact: true,
-          })
-          .click();
-        await page.getByRole("dialog").getByRole("button", { name: he ? "אישור" : "Confirm", exact: true }).click();
+        await first.getByRole('button',{name:he?'כניסה לארגון':'Open organization',exact:true}).click();
+        await page.locator('.manager-organization-header h2').waitFor();
+        await page.getByRole('button',{name:he?'הוספת מנהל':'Add admin',exact:true}).click();
+        await page.getByRole('dialog').getByLabel(he?'כתובת אימייל':'Email address',{exact:true}).fill('new@example.test');
+        await page.getByRole('dialog').getByRole('button',{name:he?'יצירת הזמנה':'Create invitation',exact:true}).click();
+        await page.getByRole('dialog').waitFor({state:'hidden'});
+        await page.getByRole('button',{name:he?'הסרת delegate@example.test':'Remove delegate@example.test',exact:true}).click();
+        await page.getByRole('dialog').getByRole('button',{name:he?'אישור':'Confirm',exact:true}).click();
         await page
           .getByText("delegate@example.test", { exact: true })
           .waitFor({ state: "hidden" });
