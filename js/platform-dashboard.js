@@ -40,6 +40,14 @@ const language = pageLanguage();
 const copy = platformText(language);
 const selectedProduct = document.body.dataset.product;
 const managementPage = document.body.dataset.platformView === "management";
+const managerTitle = enabled => enabled
+  ? (language === "he" ? "ניהול פלטפורמה · Manager | WIFIGATE" : "Platform management · Manager | WIFIGATE")
+  : "Manager | WIFIGATE";
+if (selectedProduct === "manager") window.addEventListener("popstate", () => {
+  const enabled = location.pathname === "/dashboard/manager/platform/";
+  document.title = managerTitle(enabled);
+  void managerDashboard?.setManagement(enabled);
+});
 const managerProfile = createManagerProfile({
   root: $("#manager-profile"),
   language,
@@ -78,7 +86,7 @@ let deletionKey;
 
 document.documentElement.lang = language;
 document.documentElement.dir = language === "he" ? "rtl" : "ltr";
-document.title = `${copy.title} | WIFIGATE`;
+document.title = selectedProduct === "manager" ? managerTitle(location.pathname === "/dashboard/manager/platform/") : `${copy.title} | WIFIGATE`;
 $("#product-grid").setAttribute("aria-label", copy.products);
 for (const node of document.querySelectorAll("[data-copy]"))
   node.textContent = copy[node.dataset.copy];
@@ -378,6 +386,7 @@ async function refresh() {
   const requestGeneration = generation;
   const user = currentUser;
   $("#platform-status").textContent = copy.checking;
+  $("#platform-status").dataset.state = "loading";
   $("#platform-retry").hidden = true;
   try {
     const result = await getPlatformProfile(user);
@@ -392,6 +401,7 @@ async function refresh() {
     $("#platform-status").textContent = identity.user.emailVerified
       ? ""
       : copy.unverified;
+    $("#platform-status").dataset.state = "ready";
     renderProductSwitcher(
       $("#product-switcher"),
       identity,
@@ -438,6 +448,12 @@ async function refresh() {
           root: $("#manager-root"),
           user,
           language,
+          management: location.pathname === "/dashboard/manager/platform/",
+          onManagementChange: enabled => {
+            const next = "/dashboard/manager/" + (enabled ? "platform/" : "") + (language === "he" ? "?lang=he" : "");
+            if (location.pathname + location.search !== next) history.pushState({}, "", next);
+            document.title = managerTitle(enabled);
+          },
           onProfile: (profile) => managerProfile?.update({ ...profile, platformRole: "platformRole" in profile ? profile.platformRole : identity.platformRole }, user),
           ensureRecent: async () => {
             const token = await user.getIdTokenResult();
@@ -457,6 +473,7 @@ async function refresh() {
     }
   } catch (error) {
     if (requestGeneration !== generation) return;
+    $("#platform-status").dataset.state = "error";
     $("#platform-status").textContent =
       error.status === 401
         ? authErrorMessage(error, language)

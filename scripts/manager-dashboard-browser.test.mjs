@@ -135,8 +135,8 @@ test("Manager handles repeated empty cursors and discards invitations loaded aft
   });
   assert.equal(await page.evaluate(() => window.pageReads), 2);
   await page
-    .getByRole("status")
-    .filter({ hasText: "Unable to complete" })
+    .getByRole("alert")
+    .filter({ hasText: "full list is unavailable" })
     .waitFor();
   await page.getByRole("button", { name: "Invitations", exact: true }).click();
   await page.waitForFunction(

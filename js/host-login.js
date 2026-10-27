@@ -15,7 +15,7 @@ import {
   loginPath,
   signInRefusal,
   signInRefusals,
-} from "./platform-model.js";
+} from "./platform-model.js?v=20261027managerux1";
 import { watchSession } from "./platform-session.js?v=20261022day1";
 import { requestMfaChallenge } from "./host-mfa-challenge.js?v=20261024mfa1";
 import { requestHumanCheck } from "./login-gate-game.js";

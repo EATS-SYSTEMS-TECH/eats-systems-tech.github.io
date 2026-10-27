@@ -99,7 +99,7 @@ test("platform Manager admin can browse customer metadata and deliberately disco
         }, language);
         const he = language === "he";
         await page
-          .locator(".manager-nav .manager-platform-nav > button")
+          .locator(".manager-platform-entry")
           .first()
           .click();
         // Platform administration is separate from personal systems; customer metadata

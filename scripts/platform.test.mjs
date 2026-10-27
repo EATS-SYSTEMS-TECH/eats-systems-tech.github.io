@@ -36,6 +36,7 @@ test("Manager invitations open their workspace while blocked and unavailable acc
   const identity = parsePlatformIdentity(invited, "test-user");
   assert.equal(canOpenProduct(identity, "manager"), true);
   assert.equal(loginDestination(identity, "/dashboard/manager/?lang=he"), "/dashboard/manager/?lang=he");
+  assert.equal(loginDestination(identity, "/dashboard/manager/platform/?lang=he"), "/dashboard/manager/platform/?lang=he");
   for (const state of ["blocked", "no-plan", "unavailable", "mfa-required"]) {
     invited.products.manager = { state };
     const refused = parsePlatformIdentity(invited, "test-user");

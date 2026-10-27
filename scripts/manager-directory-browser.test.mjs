@@ -44,20 +44,23 @@ test("published Manager page wires the private profile into the header without d
       await platformEntry.waitFor();
       assert.equal(await page.locator(".manager-sidebar-roles").innerText(), "WIFIGATE Manager admin");
       const originalMenu = await page.locator('.manager-nav button').allTextContents();
-      const originalOffset = await platformEntry.evaluate(el => el.offsetTop);
+      const entryBox = await platformEntry.boundingBox();
+      assert.ok(entryBox.x + entryBox.width > width - 30, "Hebrew management entry is at the bottom right");
       assert.equal(await page.locator('.manager-platform-header').isVisible(), false);
       await platformEntry.click();
       await page.locator(".manager-overview-card").last().waitFor();
       const infoStyle = await page.locator('.manager-count-info').evaluate(el => { const s=getComputedStyle(el); return {width:s.width,height:s.height,background:s.backgroundColor,radius:s.borderRadius}; });
       assert.deepEqual(infoStyle, {width:'32px',height:'32px',background:'rgb(255, 255, 255)',radius:'50%'});
       assert.deepEqual(await page.locator('.manager-nav button').allTextContents(), originalMenu);
-      assert.equal(await platformEntry.evaluate(el => el.offsetTop), originalOffset);
-      assert.equal(await page.locator('.manager-platform-nav button').count(), 1);
+      assert.equal(await platformEntry.isHidden(), true);
+      assert.match(page.url(), /\/dashboard\/manager\/platform\/\?lang=he$/);
+      assert.equal(await page.locator('.manager-nav').isHidden(), true);
       assert.equal(await platformEntry.getAttribute('aria-current'), null);
       const tabs = page.locator('.manager-platform-tabs');
-      assert.equal(await tabs.getByRole('button').count(), 5);
+      assert.equal(await tabs.getByRole('button').count(), 4);
+      assert.equal(await tabs.getByText('מנהלי ארגונים',{exact:true}).count(), 0);
       assert.equal(await tabs.locator('[aria-current="page"]').innerText(), 'סקירה');
-      assert.equal(await page.locator('.manager-platform-title').innerText(), 'ניהול פלטפורמה · WIFIGATE Manager');
+      assert.equal(await page.locator('.manager-platform-title').innerText(), 'ניהול פלטפורמה');
       await tabs.getByRole('button', {name:'מנהלי פלטפורמה',exact:true}).click();
       await page.locator('.manager-directory-row').last().waitFor();
       assert.equal(await tabs.locator('[aria-current="page"]').innerText(), 'מנהלי פלטפורמה');
@@ -84,7 +87,8 @@ test("published Manager page wires the private profile into the header without d
       assert.deepEqual(grants,[{email:'new-admin@example.test',role:'admin',status:'active'}]);
       await page.locator('.manager-directory-row').last().waitFor();
       assert.deepEqual(await page.locator('.manager-nav button').allTextContents(), originalMenu);
-      assert.equal(await platformEntry.evaluate(el => el.offsetTop), originalOffset);
+      assert.equal(await platformEntry.isHidden(), true);
+      await page.locator('.manager-workspace-back').click();
       await page.locator('.manager-nav').getByRole('button', {name:'הארגונים שלי',exact:true}).click();
       assert.equal(await page.locator('.manager-platform-header').isVisible(), false);
       await platformEntry.click();
@@ -313,15 +317,15 @@ test("Manager identity, platform overview and organization columns support scope
         const he = language === "he",
           nav = page.locator(".manager-nav");
         await page
-          .locator(".manager-nav .manager-platform-nav > button")
+          .locator(".manager-platform-entry")
           .first()
           .click();
         await page
           .locator(".manager-overview-grid .manager-overview-card")
           .last()
           .waitFor();
-        assert.equal(await page.locator(".manager-overview-card").count(), 4);
-        assert.equal(await page.locator("button.manager-overview-card").count(), 4);
+        assert.equal(await page.locator(".manager-overview-card").count(), 3);
+        assert.equal(await page.locator("button.manager-overview-card").count(), 3);
         const info = page.getByRole("button", {name: he ? "הסבר על הספירות" : "About these counts", exact:true});
         await info.click();
         const tooltip = page.getByRole("tooltip");
@@ -364,7 +368,7 @@ test("Manager identity, platform overview and organization columns support scope
         assert.equal(await nav.locator(".manager-identity").count(), 0);
         await page
           .getByRole("heading", {
-            name: he ? "ניהול פלטפורמה · WIFIGATE Manager" : "Platform management · WIFIGATE Manager",
+            name: he ? "ניהול פלטפורמה" : "Platform management",
             exact: true,
           })
           .waitFor();
@@ -379,7 +383,7 @@ test("Manager identity, platform overview and organization columns support scope
           .getByText("operator@example.test", { exact: true })
           .waitFor();
         assert.equal(await profilePanel.getByText("WIFIGATE Manager admin", {exact:true}).count(),0);
-        await nav.locator('.manager-sidebar-roles').getByText('WIFIGATE Manager admin',{exact:true}).waitFor();
+        await page.locator('.manager-platform-header > .manager-role-badge').getByText('WIFIGATE Manager admin',{exact:true}).waitFor();
         const panelBox = await profilePanel.boundingBox();
         assert(panelBox.x >= 16 && panelBox.x + panelBox.width <= width - 15);
         await page.keyboard.press("Escape");
@@ -391,11 +395,7 @@ test("Manager identity, platform overview and organization columns support scope
         await profileButton.click();
         await page.mouse.click(1, 1);
         assert.equal(await profilePanel.isVisible(), false);
-        await nav
-          .getByText(he ? "ניהול פלטפורמה" : "Platform management", {
-            exact: true,
-          })
-          .waitFor();
+        await page.locator('.manager-workspace-back').waitFor();
         await page.locator(".manager-platform-tabs")
           .getByRole("button", {
             name: he ? "ארגונים" : "Organizations",

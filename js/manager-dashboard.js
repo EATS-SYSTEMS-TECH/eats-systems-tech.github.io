@@ -1,4 +1,7 @@
-import { systemsEmptyCopy, organizationsEmptyCopy } from "./systems-empty-copy.js";
+import {
+  systemsEmptyCopy,
+  organizationsEmptyCopy,
+} from "./systems-empty-copy.js";
 import { attachPopover } from "./popover.js";
 import { accessNoteContent } from "./manager-access-note.js";
 import { createSystemIcon } from "./wifigate-system-icons.js";
@@ -9,6 +12,7 @@ import { managerRequest } from "./api/index.js";
 import { ManagerConnection } from "./manager-connection.js";
 import { createManagerExamples } from "./manager-examples.js";
 import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
+import { createManagerActivity } from "./manager-activity.js";
 
 const BASE = "/api/v1/manager";
 const node = (tag, text, cls) => {
@@ -35,16 +39,20 @@ export function createManagerDashboard({
   api: customApi,
   Connection = ManagerConnection,
   onProfile = () => {},
+  management = false,
+  onManagementChange = () => {},
 }) {
   const he = language === "he",
     t = (h, e) => (he ? h : e);
-  const api =
+  const request =
     customApi ??
     ((path, method = "GET", body) =>
       managerRequest(user, BASE + path, method, body));
   const dialogs = createManagerDialog({ language });
   const confirmAction = dialogs.confirm;
   let planDirectory;
+  let managementMode = management;
+  let successfulWrites = 0;
   let generation = 0,
     closed = false,
     profile,
@@ -67,21 +75,115 @@ export function createManagerDashboard({
     status = node("p", "", "manager-status");
   status.setAttribute("role", "status");
   status.setAttribute("aria-live", "polite");
+  const retry = node(
+    "button",
+    t("טעינה מחדש", "Reload data"),
+    "manager-button manager-retry",
+  );
+  retry.type = "button";
+  retry.hidden = true;
+  retry.addEventListener(
+    "click",
+    () =>
+      void task(async () => {
+        retry.hidden = true;
+        if (!profile) {
+          await refreshProfile();
+          return changeManagement(managementMode, false);
+        }
+        if (currentView === "overview") return showOverview();
+        if (currentView === "admin") return showDirectory("admin");
+        if (currentView === "user") return showAccounts();
+        if (
+          currentView === "organizations" ||
+          currentView === "my-organizations"
+        )
+          return showOrganizations(currentView === "my-organizations");
+        if (currentView === "invitations") return showInvitations();
+        return showSystems(scope);
+      }, retry),
+  );
   const view = node("section", undefined, "manager-view");
   const platformHeader = node("section", undefined, "manager-platform-header");
   platformHeader.hidden = true;
-  main.append(status, platformHeader, view);
+  main.append(status, retry, platformHeader, view);
   nav.append(title);
   shell.append(nav, main);
   root.replaceChildren(shell);
+  const activity = createManagerActivity({ main, view, language });
+  const requestLabel = (path, method) =>
+    method !== "GET"
+      ? t("מעדכן את הנתונים…", "Updating data…")
+      : path === "/me"
+        ? t("טוען את סביבת העבודה…", "Loading your workspace…")
+        : path.includes("overview")
+          ? t("טוען את תמונת המצב…", "Loading the overview…")
+          : path.includes("systems")
+            ? t("טוען מערכות…", "Loading systems…")
+            : path.includes("members") ||
+                path.includes("directory") ||
+                path.includes("accounts")
+              ? t("טוען משתמשים והרשאות…", "Loading people and access…")
+              : path.includes("organizations")
+                ? t("טוען ארגונים…", "Loading organizations…")
+                : path.includes("invitations")
+                  ? t("טוען הזמנות…", "Loading invitations…")
+                  : t("מתקשר עם המערכת…", "Communicating with the system…");
+  const api = (path, method = "GET", body) => {
+    const epoch = generation;
+    return activity.track(requestLabel(path, method), async () => {
+      try {
+        const result = await request(path, method, body);
+        if (closed || epoch !== generation) throw new Error("CANCELLED");
+        if (
+          method !== "GET" &&
+          /^\/(admin\/)?(accounts|access|organizations|systems|invitations)(\/|$)/.test(
+            path,
+          )
+        )
+          successfulWrites++;
+        return result;
+      } catch (error) {
+        if (closed || epoch !== generation) throw new Error("CANCELLED");
+        throw error;
+      }
+    });
+  };
+  const platformEntry = node(
+    "a",
+    undefined,
+    "platform-management-entry manager-platform-entry",
+  );
+  platformEntry.href = "/dashboard/manager/platform/" + (he ? "?lang=he" : "");
+  platformEntry.append(
+    overviewIcon("admins"),
+    node("span", t("ניהול פלטפורמה", "Platform management")),
+  );
+  platformEntry.hidden = true;
+  platformEntry.addEventListener("click", (event) => {
+    if (
+      event.button ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    )
+      return;
+    event.preventDefault();
+    void task(() => changeManagement(true));
+  });
+  root.append(platformEntry);
   const examples = createManagerExamples({
     language,
     onOpen: openExample,
     onOpenOrganization: openExampleOrganization,
   });
-  const say = (text, error = false) => {
+  const say = (text, error = false, state = "info") => {
     status.textContent = text;
-    status.dataset.state = error ? "error" : "ready";
+    status.dataset.state = error ? "error" : state;
+    status.setAttribute("role", error ? "alert" : "status");
+    retry.hidden =
+      !error || Boolean(connection) || currentView === "platform-systems";
   };
   const errorText = (error) =>
     ({
@@ -129,6 +231,18 @@ export function createManagerDashboard({
         "תוצאת הפעולה אינה ידועה. בדקו היסטוריה לפני ניסיון נוסף.",
         "Outcome unknown. Check history before trying again.",
       ),
+      CONNECTION_FAILED: t(
+        "החיבור למערכת נכשל. בדקו את החיבור לרשת ונסו להתחבר מחדש.",
+        "Connection failed. Check the network and reconnect.",
+      ),
+      CONNECTION_TIMEOUT: t(
+        "המערכת לא השלימה את החיבור בזמן. אפשר לנסות להתחבר מחדש.",
+        "The system did not connect in time. You can reconnect.",
+      ),
+      LIST_LIMIT: t(
+        "הרשימה אינה זמינה במלואה. רעננו או בחרו ארגון כדי לצמצם את התוצאות.",
+        "The full list is unavailable. Refresh or choose an organization to narrow the results.",
+      ),
     })[error.code ?? error.message] ??
     t(
       "לא ניתן להשלים את הפעולה. בדקו את החיבור וההרשאות.",
@@ -145,18 +259,46 @@ export function createManagerDashboard({
     return b;
   };
   async function task(action, b) {
-    if (b) b.disabled = true;
+    if (b?.disabled) return;
+    if (b) {
+      b.disabled = true;
+      b.setAttribute("aria-busy", "true");
+      b.classList.add("is-loading");
+    }
+    const writesBefore = successfulWrites;
     try {
       await action();
+      if (!closed && successfulWrites > writesBefore && !status.textContent)
+        say(
+          t("השינויים נשמרו בהצלחה.", "Changes saved successfully."),
+          false,
+          "success",
+        );
     } catch (error) {
-      if (!closed && error.message !== "CANCELLED") say(errorText(error), true);
+      if (!closed && error.message !== "CANCELLED")
+        say(
+          successfulWrites > writesBefore
+            ? t(
+                "הפעולה נשמרה, אבל רענון התצוגה נכשל. טענו את הנתונים מחדש.",
+                "The change was saved, but the view could not refresh. Reload the data.",
+              )
+            : errorText(error),
+          true,
+        );
     } finally {
-      if (b) b.disabled = false;
+      if (b) {
+        b.disabled = false;
+        b.removeAttribute("aria-busy");
+        b.classList.remove("is-loading");
+      }
     }
   }
   async function ensureRecent() {
     const epoch = generation;
-    await verifyRecent();
+    await activity.track(
+      t("מאמת את הזהות…", "Verifying your identity…"),
+      verifyRecent,
+    );
     if (closed || epoch !== generation) throw new Error("CANCELLED");
   }
   function form(fields, label, submit) {
@@ -179,11 +321,30 @@ export function createManagerDashboard({
     f.append(b);
     f.addEventListener("submit", (event) => {
       event.preventDefault();
-      void task(() => submit(Object.fromEntries(new FormData(f)), f), b);
+      if (b.disabled) return;
+      const values = Object.fromEntries(new FormData(f));
+      void task(async () => {
+        const fields = [...f.querySelectorAll("input,select,textarea")].map(
+          (field) => [field, field.disabled],
+        );
+        fields.forEach(([field]) => {
+          field.disabled = true;
+        });
+        f.setAttribute("aria-busy", "true");
+        try {
+          await submit(values, f);
+        } finally {
+          fields.forEach(([field, disabled]) => {
+            field.disabled = disabled;
+          });
+          f.removeAttribute("aria-busy");
+        }
+      }, b);
     });
     return f;
   }
   function stop() {
+    activity.reset();
     planDirectory?.close();
     planDirectory = undefined;
     countsPopover?.close();
@@ -200,9 +361,15 @@ export function createManagerDashboard({
     cursor = null;
   }
   function renderNav() {
+    root.dataset.management = String(managementMode);
+    shell.dataset.mode = managementMode ? "management" : "workspace";
+    nav.hidden = managementMode;
+    platformEntry.hidden = managementMode || profile.role !== "admin";
     nav.replaceChildren(title);
     const roleList = node("div", undefined, "manager-sidebar-roles");
-    for (const role of new Set(profile.roles?.length ? profile.roles : [profile.role])) {
+    for (const role of new Set(
+      profile.roles?.length ? profile.roles : [profile.role],
+    )) {
       if (!["admin", "user", "organization-admin"].includes(role)) continue;
       const label = node("span", roleName(role));
       label.dir = "ltr";
@@ -249,29 +416,49 @@ export function createManagerDashboard({
         button(t("מנהלי ארגון", "Organization administrators"), showMembers),
       );
     if (profile.role === "admin") {
-      const platform = node("section", undefined, "manager-platform-nav");
       const platformViews = [
         "overview",
         "admin",
         "user",
-        "organization-admin",
         "organizations",
         "platform-systems",
       ];
-      const platformButton = button(
-        t("ניהול פלטפורמה", "Platform management"),
-        showOverview,
-      );
-      platformButton.classList.add("manager-platform-entry");
-      platformButton.replaceChildren(
-        node("span", t("ניהול פלטפורמה", "Platform management")),
-      );
-      platform.append(platformButton);
-      if (platformViews.includes(currentView)) {
+      if (managementMode && platformViews.includes(currentView)) {
         platformHeader.hidden = false;
+        const back = node(
+          "a",
+          t("חזרה לסביבת העבודה", "Back to workspace"),
+          "manager-workspace-back",
+        );
+        back.href = "/dashboard/manager/" + (he ? "?lang=he" : "");
+        back.addEventListener("click", (event) => {
+          if (
+            event.button ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey
+          )
+            return;
+          event.preventDefault();
+          void task(() => changeManagement(false));
+        });
         platformHeader.append(
-          node("h2", t("ניהול פלטפורמה · WIFIGATE Manager", "Platform management · WIFIGATE Manager"), "manager-platform-title"),
-          node("p", t("משתמשים, הרשאות וארגונים של WIFIGATE Manager.", "People, access and organizations in WIFIGATE Manager."), "manager-platform-description"),
+          back,
+          node("span", "WIFIGATE Manager admin", "manager-role-badge"),
+          node(
+            "h2",
+            t("ניהול פלטפורמה", "Platform management"),
+            "manager-platform-title",
+          ),
+          node(
+            "p",
+            t(
+              "משתמשים, הרשאות וארגונים של WIFIGATE Manager.",
+              "People, access and organizations in WIFIGATE Manager.",
+            ),
+            "manager-platform-description",
+          ),
         );
         const tabs = node("nav", undefined, "manager-platform-tabs");
         tabs.setAttribute(
@@ -282,11 +469,6 @@ export function createManagerDashboard({
           ["overview", t("סקירה", "Overview"), showOverview],
           ["admin", directoryLabel("admin"), () => showDirectory("admin")],
           ["user", directoryLabel("user"), () => showAccounts()],
-          [
-            "organization-admin",
-            directoryLabel("organization-admin"),
-            () => showDirectory("organization-admin"),
-          ],
           ["organizations", t("ארגונים", "Organizations"), showOrganizations],
         ]) {
           const b = button(label, action);
@@ -310,8 +492,42 @@ export function createManagerDashboard({
             tabs.scrollBy({ left: item.right - bar.right + 6 });
         });
       }
-      nav.append(platform);
     }
+  }
+  async function changeManagement(enabled, notify = true) {
+    managementMode = enabled;
+    if (notify) onManagementChange(enabled);
+    if (enabled) {
+      if (profile.role !== "admin") {
+        beginView("restricted");
+        view.append(
+          node(
+            "h3",
+            t(
+              "המסך זמין למנהלי Manager בלבד",
+              "This page is for Manager administrators",
+            ),
+          ),
+        );
+        const back = node(
+          "a",
+          t("חזרה לסביבת העבודה", "Back to workspace"),
+          "manager-workspace-back",
+        );
+        back.href = "/dashboard/manager/" + (he ? "?lang=he" : "");
+        back.addEventListener("click", (event) => {
+          event.preventDefault();
+          void task(() => changeManagement(false));
+        });
+        view.append(back);
+        return;
+      }
+      await showOverview();
+    } else if (profile.role === "admin" || profile.account)
+      await showSystems(null);
+    else if (profile.organizations.length)
+      await showSystems(profile.organizations[0].id);
+    else await showInvitations();
   }
   function openExample(system) {
     stop();
@@ -334,13 +550,36 @@ export function createManagerDashboard({
     });
   }
   function directoryLabel(role) {
-    return { admin: t("מנהלי פלטפורמה", "Platform admins"), user: t("לקוחות", "Customers"), "organization-admin": t("מנהלי ארגונים", "Organization admins") }[role];
+    return {
+      admin: t("מנהלי פלטפורמה", "Platform admins"),
+      user: t("לקוחות", "Customers"),
+      "organization-admin": t("מנהלי ארגונים", "Organization admins"),
+    }[role];
   }
   function overviewIcon(key) {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    for (const [attribute, value] of Object.entries({viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"1.7","stroke-linecap":"round","stroke-linejoin":"round","aria-hidden":"true"})) svg.setAttribute(attribute,value);
+    for (const [attribute, value] of Object.entries({
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      "stroke-width": "1.7",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "aria-hidden": "true",
+    }))
+      svg.setAttribute(attribute, value);
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("d", { admins:"M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Zm-4 9 3 3 5-6", users:"M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 21v-2a8 8 0 0 1 16 0v2", organizationAdmins:"M15 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6 21v-2a6 6 0 0 1 12 0v2M18 5a3 3 0 0 1 0 6M21 20v-2a5 5 0 0 0-3-4M6 5a3 3 0 0 0 0 6M3 20v-2a5 5 0 0 1 3-4", organizations:"M5 21V3h14v18M2 21h20M9 7h1m4 0h1M9 11h1m4 0h1M9 15h1m4 0h1M10 21v-3h4v3" }[key]);
+    path.setAttribute(
+      "d",
+      {
+        admins: "M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Zm-4 9 3 3 5-6",
+        users: "M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 21v-2a8 8 0 0 1 16 0v2",
+        organizationAdmins:
+          "M15 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6 21v-2a6 6 0 0 1 12 0v2M18 5a3 3 0 0 1 0 6M21 20v-2a5 5 0 0 0-3-4M6 5a3 3 0 0 0 0 6M3 20v-2a5 5 0 0 1 3-4",
+        organizations:
+          "M5 21V3h14v18M2 21h20M9 7h1m4 0h1M9 11h1m4 0h1M9 15h1m4 0h1M10 21v-3h4v3",
+      }[key],
+    );
     svg.append(path);
     return svg;
   }
@@ -360,6 +599,23 @@ export function createManagerDashboard({
     renderNav();
     say("");
     view.replaceChildren();
+    focusView();
+  }
+  function focusView() {
+    const epoch = generation;
+    requestAnimationFrame(() => {
+      if (
+        closed ||
+        epoch !== generation ||
+        document.activeElement !== document.body
+      )
+        return;
+      const heading = view.querySelector("h3");
+      if (heading) {
+        heading.tabIndex = -1;
+        heading.focus();
+      }
+    });
   }
   function orgPath(id) {
     return `${profile.role === "admin" ? "/admin" : ""}/organizations/${encodeURIComponent(id)}`;
@@ -400,7 +656,14 @@ export function createManagerDashboard({
     info.type = "button";
     info.setAttribute("aria-label", t("הסבר על הספירות", "About these counts"));
     info.setAttribute("aria-describedby", "manager-counts-help");
-    const help = node("p", t("הספירות מציגות רשומות פעילות. מנהלי ארגונים נספרים לפי מינויים לארגון; אותו אדם עשוי להחזיק יותר ממינוי אחד.", "Counts show active records. Organization administrators are counted by organization appointments; one person may hold multiple appointments."), "manager-count-help");
+    const help = node(
+      "p",
+      t(
+        "תמונת מצב של מנהלי פלטפורמה, לקוחות וארגונים פעילים ב־Manager.",
+        "Active platform administrators, customers and organizations in Manager.",
+      ),
+      "manager-count-help",
+    );
     help.id = "manager-counts-help";
     help.setAttribute("role", "tooltip");
     help.tabIndex = -1;
@@ -411,32 +674,68 @@ export function createManagerDashboard({
     if (closed || epoch !== generation) return;
     const grid = node("div", undefined, "manager-overview-grid");
     for (const [key, label, cta, action] of [
-      ["admins", directoryLabel("admin"), t("ניהול מנהלים", "Manage admins"), () => showDirectory("admin")],
-      ["users", directoryLabel("user"), t("ניהול לקוחות", "Manage customers"), () => showAccounts()],
-      ["organizationAdmins", directoryLabel("organization-admin"), t("ניהול מינויים", "Manage appointments"), () => showDirectory("organization-admin")],
-      ["organizations", t("ארגונים", "Organizations"), t("ניהול ארגונים", "Manage organizations"), showOrganizations],
+      [
+        "admins",
+        directoryLabel("admin"),
+        t("ניהול מנהלים", "Manage admins"),
+        () => showDirectory("admin"),
+      ],
+      [
+        "users",
+        directoryLabel("user"),
+        t("ניהול לקוחות", "Manage customers"),
+        () => showAccounts(),
+      ],
+      [
+        "organizations",
+        t("ארגונים", "Organizations"),
+        t("ניהול ארגונים", "Manage organizations"),
+        showOrganizations,
+      ],
     ]) {
       const card = button(label, action);
       card.classList.add("manager-card", "manager-overview-card");
       const icon = node("span", undefined, "manager-overview-icon");
       icon.append(overviewIcon(key));
-      card.replaceChildren(icon, node("span", label, "manager-overview-label"), node("strong", String(totals[key] ?? 0)), node("span", cta + (he ? " ←" : " →"), "manager-overview-cta"));
+      card.replaceChildren(
+        icon,
+        node("span", label, "manager-overview-label"),
+        node(
+          "strong",
+          Number.isInteger(totals[key]) ? String(totals[key]) : "—",
+        ),
+        node("span", cta + (he ? " ←" : " →"), "manager-overview-cta"),
+      );
       grid.append(card);
     }
     view.append(grid);
     const details = node("details", undefined, "platform-admin-management");
-    details.append(node("summary", t("תוכניות ועלויות משתמשי Manager", "Manager user plans and costs")));
+    details.append(
+      node(
+        "summary",
+        t("תוכניות ועלויות משתמשי Manager", "Manager user plans and costs"),
+      ),
+    );
     const directoryRoot = node("section");
     details.append(directoryRoot);
     view.append(details);
     details.addEventListener("toggle", () => {
-      if (details.open && !planDirectory && !closed && epoch === generation) planDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language, product: "manager" });
+      if (details.open && !planDirectory && !closed && epoch === generation)
+        planDirectory = createPlatformAdminDirectory({
+          root: directoryRoot,
+          user,
+          language,
+          product: "manager",
+        });
     });
   }
   async function showDirectory(role, status = "active") {
     beginView(role);
     const epoch = generation;
-    view.append(node("h3", directoryLabel(role)), node("p", roleName(role), "manager-view-description"));
+    view.append(
+      node("h3", directoryLabel(role)),
+      node("p", roleName(role), "manager-view-description"),
+    );
     const filters = node("div", undefined, "manager-toolbar");
     for (const state of ["active", "blocked"])
       filters.append(
@@ -512,26 +811,43 @@ export function createManagerDashboard({
     );
     if (closed || epoch !== generation) return;
     if (role === "admin") {
-      const create = button(t("הוספת Manager admin", "Add Manager admin"), async () => {
-        const created = await dialogs.form({
-          title: t("הוספת Manager admin", "Add Manager admin"),
-          message: t("הזינו כתובת אימייל מאומתת של החשבון שיקבל הרשאת ניהול ב־WIFIGATE Manager.", "Enter the verified email address of the account receiving administrator access to WIFIGATE Manager."),
-          fields: [["email", t("אימייל מנהל מאומת", "Verified administrator email"), "email"]],
-          submitLabel: t("הוספת Manager admin", "Add Manager admin"),
-          errorText,
-          onSubmit: async (values) => {
-            await ensureRecent();
-            await api("/admin/access", "POST", { ...values, role: "admin", status: "active" });
-          },
-        });
-        if (created && !closed && epoch === generation) await showDirectory(role);
-      }, true);
+      const create = button(
+        t("הוספת Manager admin", "Add Manager admin"),
+        async () => {
+          const created = await dialogs.form({
+            title: t("הוספת Manager admin", "Add Manager admin"),
+            message: t(
+              "הזינו כתובת אימייל מאומתת של החשבון שיקבל הרשאת ניהול ב־WIFIGATE Manager.",
+              "Enter the verified email address of the account receiving administrator access to WIFIGATE Manager.",
+            ),
+            fields: [
+              [
+                "email",
+                t("אימייל מנהל מאומת", "Verified administrator email"),
+                "email",
+              ],
+            ],
+            submitLabel: t("הוספת Manager admin", "Add Manager admin"),
+            errorText,
+            onSubmit: async (values) => {
+              await ensureRecent();
+              await api("/admin/access", "POST", {
+                ...values,
+                role: "admin",
+                status: "active",
+              });
+            },
+          });
+          if (created && !closed && epoch === generation)
+            await showDirectory(role);
+        },
+        true,
+      );
       const heading = view.querySelector("h3");
       const bar = node("div", undefined, "manager-toolbar");
       heading.replaceWith(bar);
       bar.append(heading, create);
-    }
-    else
+    } else
       view.append(
         button(
           t(
@@ -579,6 +895,7 @@ export function createManagerDashboard({
     currentView = operatorAccount ? "platform-systems" : "systems";
     scope = orgId;
     renderNav();
+    view.replaceChildren();
     say(t("טוען מערכות…", "Loading systems…"));
     const epoch = generation;
     const rows =
@@ -609,8 +926,13 @@ export function createManagerDashboard({
       button(t("רענון", "Refresh"), () => showSystems(scope, operatorAccount)),
     );
     view.append(bar);
+    focusView();
     if (!systems.length) {
-      const empty = node("section", undefined, "manager-empty manager-empty-systems");
+      const empty = node(
+        "section",
+        undefined,
+        "manager-empty manager-empty-systems",
+      );
       const copy = systemsEmptyCopy(he ? "he" : "en");
       empty.append(node("h4", copy.title));
       if (!scope && !operatorAccount) empty.append(node("p", copy.description));
@@ -637,10 +959,15 @@ export function createManagerDashboard({
         ),
       );
       const actions = node("div", undefined, "manager-system-actions");
-      if (s.accessNote) actions.append(button(t("פרטי גישה", "Access Note"), () => dialogs.info({
-        title: t("פרטי גישה", "Access Note") + " · " + s.name,
-        content: accessNoteContent(s.accessNote, language),
-      })));
+      if (s.accessNote)
+        actions.append(
+          button(t("פרטי גישה", "Access Note"), () =>
+            dialogs.info({
+              title: t("פרטי גישה", "Access Note") + " · " + s.name,
+              content: accessNoteContent(s.accessNote, language),
+            }),
+          ),
+        );
 
       if (!operatorAccount)
         actions.append(
@@ -863,43 +1190,68 @@ export function createManagerDashboard({
         card.append(actions);
         return card;
       },
-      { onEmpty: () => {
-        const copy = organizationsEmptyCopy(he ? "he" : "en");
-        const empty = node("section", undefined, "manager-empty manager-empty-systems manager-empty-organizations");
-        empty.append(node("h4", copy.title));
-        if (!operator) empty.append(node("p", copy.description));
-        columns.append(empty);
-      } },
+      {
+        onEmpty: () => {
+          const copy = organizationsEmptyCopy(he ? "he" : "en");
+          const empty = node(
+            "section",
+            undefined,
+            "manager-empty manager-empty-systems manager-empty-organizations",
+          );
+          empty.append(node("h4", copy.title));
+          if (!operator) empty.append(node("p", copy.description));
+          columns.append(empty);
+        },
+      },
     );
     if (closed || epoch !== generation) return;
     if (personal || profile.role !== "admin")
       examples.renderOrganizationCard(view);
     if (profile.account || profile.role === "admin") {
       const createForCustomer = operator || !profile.account;
-      const create = button(t("יצירת ארגון חדש", "Create new organization"), async () => {
-        const requestId = crypto.randomUUID();
-        const created = await dialogs.form({
-          title: t("ארגון חדש", "New organization"),
-          message: t(
-            "שלושת הארגונים הראשונים חינם. מהארגון הרביעי, כל ארגון נוסף עולה $1 לחודש. התעריף מחושב לפי הארגונים שבבעלות הלקוח.",
-            "Your first 3 organizations are free. From the fourth, each additional organization costs $1 per month. Pricing is based on the organizations owned by the customer.",
-          ),
-          fields: [
-            ["name", t("שם ארגון חדש", "New organization name")],
-            ...(createForCustomer ? [["email", t("אימייל בעל הארגון · Manager user", "Organization owner email · Manager user"), "email"]] : []),
-          ],
-          submitLabel: t("יצירת ארגון", "Create organization"),
-          errorText,
-          onSubmit: async (values) => {
-            await ensureRecent();
-            await api(createForCustomer ? "/admin/organizations" : "/organizations", "POST", { ...values, name: values.name.trim(), requestId });
-          },
-        });
-        if (created && !closed && epoch === generation) {
-          await refreshProfile();
-          await showOrganizations(personal);
-        }
-      }, true);
+      const create = button(
+        t("יצירת ארגון חדש", "Create new organization"),
+        async () => {
+          const requestId = crypto.randomUUID();
+          const created = await dialogs.form({
+            title: t("ארגון חדש", "New organization"),
+            message: t(
+              "שלושת הארגונים הראשונים חינם. מהארגון הרביעי, כל ארגון נוסף עולה $1 לחודש. התעריף מחושב לפי הארגונים שבבעלות הלקוח.",
+              "Your first 3 organizations are free. From the fourth, each additional organization costs $1 per month. Pricing is based on the organizations owned by the customer.",
+            ),
+            fields: [
+              ["name", t("שם ארגון חדש", "New organization name")],
+              ...(createForCustomer
+                ? [
+                    [
+                      "email",
+                      t(
+                        "אימייל בעל הארגון · Manager user",
+                        "Organization owner email · Manager user",
+                      ),
+                      "email",
+                    ],
+                  ]
+                : []),
+            ],
+            submitLabel: t("יצירת ארגון", "Create organization"),
+            errorText,
+            onSubmit: async (values) => {
+              await ensureRecent();
+              await api(
+                createForCustomer ? "/admin/organizations" : "/organizations",
+                "POST",
+                { ...values, name: values.name.trim(), requestId },
+              );
+            },
+          });
+          if (created && !closed && epoch === generation) {
+            await refreshProfile();
+            await showOrganizations(personal);
+          }
+        },
+        true,
+      );
       const heading = view.querySelector("h3");
       const bar = node("div", undefined, "manager-toolbar");
       heading.replaceWith(bar);
@@ -908,7 +1260,7 @@ export function createManagerDashboard({
     placeManagerActions(view, language);
   }
   async function showInvitations() {
-    stop();
+    beginView("invitations");
     view.replaceChildren(
       node("h3", t("הזמנות לארגונים", "Organization invitations")),
     );
@@ -1067,23 +1419,39 @@ export function createManagerDashboard({
           "manager-muted",
         ),
       );
-    const create = button(t("הוספת לקוח", "Add customer"), async () => {
-      const created = await dialogs.form({
-        title: t("הוספת לקוח", "Add customer"),
-        message: t("הזינו כתובת אימייל מאומתת להפעלת חשבון WIFIGATE Manager user. אין דרישת תשלום או כרטיס בשלב זה.", "Enter a verified email address to enable a WIFIGATE Manager user account. No payment or card is required in this phase."),
-        fields: [["email", t("אימייל לקוח מאומת", "Verified customer email"), "email"]],
-        submitLabel: t("הוספת לקוח", "Add customer"),
-        errorText,
-        onSubmit: async (values) => {
-          await ensureRecent();
-          await api("/admin/accounts", "POST", { ...values, status: "active" });
-        },
-      });
-      if (created && !closed && epoch === generation) {
-        await showAccounts(status);
-        say(t("חשבון הלקוח הופעל.", "Customer account enabled."));
-      }
-    }, true);
+    const create = button(
+      t("הוספת לקוח", "Add customer"),
+      async () => {
+        const created = await dialogs.form({
+          title: t("הוספת לקוח", "Add customer"),
+          message: t(
+            "הזינו כתובת אימייל מאומתת להפעלת חשבון WIFIGATE Manager user. אין דרישת תשלום או כרטיס בשלב זה.",
+            "Enter a verified email address to enable a WIFIGATE Manager user account. No payment or card is required in this phase.",
+          ),
+          fields: [
+            [
+              "email",
+              t("אימייל לקוח מאומת", "Verified customer email"),
+              "email",
+            ],
+          ],
+          submitLabel: t("הוספת לקוח", "Add customer"),
+          errorText,
+          onSubmit: async (values) => {
+            await ensureRecent();
+            await api("/admin/accounts", "POST", {
+              ...values,
+              status: "active",
+            });
+          },
+        });
+        if (created && !closed && epoch === generation) {
+          await showAccounts(status);
+          say(t("חשבון הלקוח הופעל.", "Customer account enabled."));
+        }
+      },
+      true,
+    );
     const heading = view.querySelector("h3");
     const bar = node("div", undefined, "manager-toolbar");
     heading.replaceWith(bar);
@@ -1101,6 +1469,7 @@ export function createManagerDashboard({
       button(t("סיום וחזרה", "End and return"), () => showSystems(scope)),
     );
     view.append(head);
+    focusView();
     if (system.systemIds.length > 1) {
       const select = node("select", undefined, "manager-button");
       select.setAttribute("aria-label", t("בחירת שער", "Choose gate"));
@@ -1123,6 +1492,9 @@ export function createManagerDashboard({
     dialogs.cancel();
     const previous = connection;
     const epoch = ++generation;
+    activity.reset();
+    say("");
+    showConnectionState("waiting");
     const existingContent = view.querySelector("#manager-content");
     const existingTabs = view.querySelector("#manager-tabs");
     if (preserveView) {
@@ -1142,23 +1514,15 @@ export function createManagerDashboard({
       user,
       onState: (state) => {
         if (epoch !== generation) return;
-        if (state === "waiting")
-          say(
-            t(
-              "ממתין לחיבור המערכת — עד כדקה ובנוסף זמן הקמת חיבור. אפשר לבטל.",
-              "Waiting for the system — up to about a minute plus connection setup. You can cancel.",
-            ),
-          );
-        else if (state === "connecting")
-          say(
-            t(
-              "מקים ערוץ ניהול מאובטח…",
-              "Establishing a secure management channel…",
-            ),
-          );
-        else if (state === "active")
-          say(t("מחובר · נתונים חיים מהשער", "Connected · live gate data"));
-        else if (state === "SECURE_SESSION_EXPIRED") {
+        if (["waiting", "connecting", "active"].includes(state)) {
+          showConnectionState(state);
+          if (state === "active")
+            say(
+              t("מחובר · נתונים חיים מהשער", "Connected · live gate data"),
+              false,
+              "success",
+            );
+        } else if (state === "SECURE_SESSION_EXPIRED") {
           const readOnly =
             /^(ADMIN_(GET_|LIST_).+|ADMIN_PING|ADMIN_RF_GET)$/.test(
               candidate.pendingCommand ?? "",
@@ -1169,9 +1533,7 @@ export function createManagerDashboard({
           queueMicrotask(() => {
             if (closed || epoch !== generation) return;
             if (!uncertain) {
-              say(
-                t("מחדש את החיבור המאובטח…", "Renewing the secure connection…"),
-              );
+              showConnectionState("connecting");
               void openGate(gate, true);
             } else {
               say(
@@ -1180,6 +1542,13 @@ export function createManagerDashboard({
                   "The connection ended during an operation. Reconnect and check its result before retrying.",
                 ),
                 true,
+              );
+              showConnectionState(
+                "error",
+                t(
+                  "החיבור הסתיים במהלך פעולה. בדקו את התוצאה לפני ניסיון נוסף.",
+                  "The connection ended during an operation. Check its result before retrying.",
+                ),
               );
               view
                 .querySelector("#manager-content")
@@ -1197,12 +1566,63 @@ export function createManagerDashboard({
           showConnectionRecovery(gate);
           view.querySelector("#manager-tabs")?.replaceChildren();
           say(errorText(new Error(state)), true);
+          showConnectionState("error", errorText(new Error(state)));
         }
       },
     });
     connection = candidate;
+    let pendingOperations = 0;
+    for (const method of ["command", "exportCollection", "importCollection"]) {
+      if (typeof candidate[method] !== "function") continue;
+      const run = candidate[method].bind(candidate);
+      candidate[method] = (...args) =>
+        activity.track(
+          method === "exportCollection"
+            ? t("מייצא נתונים מהמערכת…", "Exporting system data…")
+            : method === "importCollection"
+              ? t("מייבא ומאמת נתונים…", "Importing and verifying data…")
+              : /^(ADMIN_(GET_|LIST_).+|ADMIN_PING|ADMIN_RF_GET)$/.test(args[0])
+                ? t("טוען נתונים מהמערכת…", "Loading system data…")
+                : t(
+                    "שולח פעולה וממתין לאישור המערכת…",
+                    "Sending the action and waiting for system confirmation…",
+                  ),
+          async () => {
+            pendingOperations++;
+            const contents = [
+              view.querySelector("#manager-content"),
+              view.querySelector("#manager-tabs"),
+            ];
+            contents.forEach((element) => {
+              if (element) element.inert = true;
+            });
+            try {
+              const result = await run(...args);
+              if (closed || epoch !== generation || connection !== candidate)
+                throw new Error("CANCELLED");
+              return result;
+            } catch (error) {
+              if (closed || epoch !== generation || connection !== candidate)
+                throw new Error("CANCELLED");
+              throw error;
+            } finally {
+              pendingOperations--;
+              if (epoch === generation && connection === candidate)
+                contents.forEach((element) => {
+                  if (element) element.inert = pendingOperations > 0;
+                });
+            }
+          },
+        );
+    }
     try {
-      await candidate.open(gate);
+      await activity.track(
+        t(
+          "מתחבר למערכת… אפשר לסיים ולחזור בכל רגע.",
+          "Connecting to the system… You can end and return at any time.",
+        ),
+        () => candidate.open(gate),
+      );
       if (epoch !== generation) {
         candidate.close();
         return;
@@ -1215,6 +1635,7 @@ export function createManagerDashboard({
         connection?.close();
         showConnectionRecovery(gate);
         say(errorText(error), true);
+        showConnectionState("error", errorText(error));
       }
     } finally {
       if (epoch === generation) {
@@ -1222,6 +1643,72 @@ export function createManagerDashboard({
         if (existingTabs) existingTabs.inert = false;
       }
     }
+  }
+  function showConnectionState(state, detail) {
+    let panel = view.querySelector(".manager-connection-panel");
+    if (!panel) {
+      panel = node("section", undefined, "manager-connection-panel");
+      panel.setAttribute("role", "status");
+      panel.setAttribute("aria-live", "polite");
+      view.insertBefore(panel, view.querySelector("#manager-tabs"));
+    }
+    panel.dataset.state = state;
+    const labels = {
+      waiting: [
+        t("ממתינים למערכת", "Waiting for the system"),
+        t(
+          "ממתינים לזמינות המערכת. ההמתנה עשויה להימשך עד כדקה וחצי, בהתאם לתקשורת. אפשר לסיים ולחזור.",
+          "Waiting for the system to become available. This can take up to about 90 seconds, depending on connectivity. You can end and return.",
+        ),
+      ],
+      connecting: [
+        t("מקימים חיבור מאובטח", "Establishing a secure connection"),
+        t(
+          "המערכת זמינה. מאמתים את החיבור לפני טעינת הנתונים.",
+          "The system is available. Verifying the connection before loading data.",
+        ),
+      ],
+      active: [
+        t("המערכת מחוברת", "System connected"),
+        t(
+          "החיבור המאובטח פעיל. הנתונים והפעולות מתקבלים מהמערכת עצמה.",
+          "The secure connection is active. Data and confirmations come from the system itself.",
+        ),
+      ],
+      error: [
+        t("לא ניתן להשלים את החיבור", "Connection could not complete"),
+        detail,
+      ],
+    };
+    const [label, description] = labels[state];
+    const marker = node(
+      "span",
+      state === "active" ? "✓" : state === "error" ? "!" : "",
+      state === "active" || state === "error"
+        ? "manager-connection-marker"
+        : "manager-spinner",
+    );
+    marker.setAttribute("aria-hidden", "true");
+    const copy = node("div");
+    copy.append(node("strong", label), node("p", description));
+    const steps = node("ol", undefined, "manager-connection-steps");
+    for (const [index, text] of [
+      t("המתנה", "Waiting"),
+      t("אימות חיבור", "Verification"),
+      t("מחובר", "Connected"),
+    ].entries()) {
+      const step = node("li", text);
+      const current = ["waiting", "connecting", "active"].indexOf(state);
+      step.dataset.state =
+        current > index
+          ? "complete"
+          : current === index
+            ? "current"
+            : "pending";
+      if (current === index) step.setAttribute("aria-current", "step");
+      steps.append(step);
+    }
+    panel.replaceChildren(marker, copy, steps);
   }
   function showConnectionRecovery(gate) {
     dialogs.cancel();
@@ -2025,16 +2512,21 @@ export function createManagerDashboard({
   const ready = task(async () => {
     await refreshProfile();
     if (closed) return;
-    if (profile.role === "admin" || profile.account) await showSystems(null);
-    else if (profile.organizations.length)
-      await showSystems(profile.organizations[0].id);
-    else await showInvitations();
+    await changeManagement(managementMode, false);
   });
   return {
     ready,
+    setManagement: (enabled) => {
+      if (!profile) {
+        managementMode = enabled;
+        return Promise.resolve();
+      }
+      return task(() => changeManagement(enabled, false));
+    },
     close() {
       closed = true;
       stop();
+      activity.close();
       examples.close();
       root.replaceChildren();
     },

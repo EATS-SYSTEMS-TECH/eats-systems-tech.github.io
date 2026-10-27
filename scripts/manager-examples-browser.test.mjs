@@ -72,10 +72,10 @@ test("Manager personal navigation and complete sample workspaces never request r
             ? ["המערכות שלי", "הארגונים שלי"]
             : ["My systems", "My organizations"],
         );
-        assert.match(
-          names.at(-1),
-          he ? /ניהול פלטפורמה/ : /Platform management/,
-        );
+        const platformEntry = page.locator(".manager-platform-entry");
+        assert.equal(await platformEntry.isVisible(), true);
+        assert.match(await platformEntry.getAttribute("href"), /\/dashboard\/manager\/platform\//);
+        assert.equal(await nav.locator(".manager-platform-entry").count(), 0);
         assert.equal(await page.locator("[data-example-system]").count(), 3);
         const icons = page.locator("[data-example-system] .manager-icon img");
         assert.deepEqual(await icons.evaluateAll(images => images.map(image => image.getAttribute("src"))), [

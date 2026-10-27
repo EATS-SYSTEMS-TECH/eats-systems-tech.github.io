@@ -28,3 +28,19 @@ await writeFile(
     'data-product="" data-platform-view="management"',
   ),
 );
+const managerManagementPage = path.join(
+  root,
+  "dashboard/manager/platform/index.html",
+);
+await mkdir(path.dirname(managerManagementPage), { recursive: true });
+const managerPage = await readFile(
+  path.join(root, "dashboard/manager/index.html"),
+  "utf8",
+);
+await writeFile(
+  managerManagementPage,
+  managerPage.replace(
+    'data-product="manager"',
+    'data-product="manager" data-manager-view="management"',
+  ),
+);

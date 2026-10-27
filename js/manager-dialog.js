@@ -26,6 +26,7 @@ export function createManagerDialog({
       body.textContent = message;
       const actions = document.createElement("div");
       actions.className = "manager-confirm-actions";
+      let pending = false;
       const finish = (value) => {
         if (active !== finish) return;
         active = undefined;
@@ -53,7 +54,8 @@ export function createManagerDialog({
         form = document.createElement("form");
         form.className = "manager-form manager-create-organization-form";
         for (const [name, text, type = "text"] of options.fields) {
-          const label = document.createElement("label"), input = document.createElement("input");
+          const label = document.createElement("label"),
+            input = document.createElement("input");
           label.textContent = text;
           input.name = name;
           input.type = type;
@@ -66,22 +68,33 @@ export function createManagerDialog({
         error.setAttribute("role", "alert");
         error.className = "manager-dialog-error";
         error.hidden = true;
+        const progress = document.createElement("p");
+        progress.className = "manager-dialog-progress";
+        progress.setAttribute("role", "status");
+        progress.textContent = t("שומר את השינויים…", "Saving changes…");
+        progress.hidden = true;
         const submit = document.createElement("button");
         submit.type = "submit";
         submit.className = "manager-button primary";
         submit.textContent = options.submitLabel;
         actions.append(submit);
-        form.append(error, actions);
-        let pending = false;
+        form.append(error, progress, actions);
         form.addEventListener("submit", async (event) => {
           event.preventDefault();
           if (pending || active !== finish) return;
           pending = true;
           submit.disabled = true;
+          dismiss.disabled = true;
+          submit.classList.add("is-loading");
+          submit.setAttribute("aria-busy", "true");
+          progress.hidden = false;
           error.hidden = true;
           form.setAttribute("aria-busy", "true");
+          const values = Object.fromEntries(new FormData(form));
+          for (const input of form.querySelectorAll("input"))
+            input.disabled = true;
           try {
-            await options.onSubmit(Object.fromEntries(new FormData(form)));
+            await options.onSubmit(values);
             finish(true);
           } catch (failure) {
             if (active === finish) {
@@ -91,6 +104,12 @@ export function createManagerDialog({
           } finally {
             pending = false;
             submit.disabled = false;
+            dismiss.disabled = false;
+            submit.classList.remove("is-loading");
+            submit.removeAttribute("aria-busy");
+            progress.hidden = true;
+            for (const input of form.querySelectorAll("input"))
+              input.disabled = false;
             form.removeAttribute("aria-busy");
           }
         });
@@ -98,7 +117,9 @@ export function createManagerDialog({
       } else dialog.append(actions);
       dialog.addEventListener("keydown", (event) => {
         if (event.key !== "Tab") return;
-        const buttons = [...dialog.querySelectorAll("input,button,a[href],select,textarea")].filter(element => !element.disabled);
+        const buttons = [
+          ...dialog.querySelectorAll("input,button,a[href],select,textarea"),
+        ].filter((element) => !element.disabled);
         const first = buttons[0],
           last = buttons.at(-1);
         if (event.shiftKey && document.activeElement === first) {
@@ -111,7 +132,7 @@ export function createManagerDialog({
       });
       dialog.addEventListener("cancel", (event) => {
         event.preventDefault();
-        finish(null);
+        if (!pending) finish(null);
       });
       const outside = (event) => {
         const rect = dialog.getBoundingClientRect();
@@ -127,7 +148,7 @@ export function createManagerDialog({
         startedOutside = outside(event);
       });
       dialog.addEventListener("click", (event) => {
-        if (startedOutside && outside(event)) finish(null);
+        if (!pending && startedOutside && outside(event)) finish(null);
       });
       host.append(dialog);
       dialog.showModal();
@@ -138,7 +159,8 @@ export function createManagerDialog({
   }
   return {
     cancel,
-    info: (options) => ask("", [], { ...options, dismissLabel: t("סגירה", "Close") }),
+    info: (options) =>
+      ask("", [], { ...options, dismissLabel: t("סגירה", "Close") }),
     form: (options) => ask(options.message, [], options),
     confirm: async (message) =>
       (await ask(message, [{ label: t("אישור", "Confirm"), value: true }])) ===

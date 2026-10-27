@@ -76,6 +76,7 @@ export const pickerPages = [
   "dashboard/index.html",
   "dashboard/pay/index.html",
   "dashboard/manager/index.html",
+  "dashboard/manager/platform/index.html",
   "dashboard/platform/index.html",
 ];
 

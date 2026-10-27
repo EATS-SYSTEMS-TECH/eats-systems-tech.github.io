@@ -403,6 +403,10 @@ test("For Business cards filter in place, retain the role and reset pagination",
         path: `${process.env.WIFIGATE_ADMIN_UX_SCREENSHOTS}/product-filter-selected-${language}-390.png`,
         fullPage: true,
       });
+    await page.waitForFunction(() => {
+      const selected = document.querySelector('.platform-admin-business [data-product="host"]');
+      return selected && getComputedStyle(selected).backgroundColor !== "rgb(255, 255, 255)";
+    });
     assert.notEqual(
       await host.evaluate((node) => getComputedStyle(node).backgroundColor),
       "rgb(255, 255, 255)",
