@@ -1,4 +1,5 @@
 import { renderManagerOrganization } from "./manager-organization.js";
+import { createPersonalOrganizationPage } from "./manager-organization-list.js";
 import {
   systemsEmptyCopy,
   organizationsEmptyCopy,
@@ -640,13 +641,13 @@ export function createManagerDashboard({
   function orgPath(id) {
     return `${profile.role === "admin" ? "/admin" : ""}/organizations/${encodeURIComponent(id)}`;
   }
-  async function pagedView(path, container, render, { onEmpty } = {}) {
+  async function pagedView(path, container, render, { onEmpty, loadPage = api } = {}) {
     const epoch = generation;
     let next = null;
     const more = button(t("הצגת עוד", "Show more"), load);
     const seen = new Set();
     async function load() {
-      const result = await api(
+      const result = await loadPage(
         path +
           (path.includes("?") ? "&" : "?") +
           "limit=25" +
@@ -1176,6 +1177,8 @@ export function createManagerDashboard({
         : "organizations",
     );
     const epoch = generation;
+    if (personal || profile.role !== "admin") await refreshProfile();
+    if (closed || epoch !== generation) return;
     view.append(
       node(
         "h3",
@@ -1256,6 +1259,12 @@ export function createManagerDashboard({
         return card;
       },
       {
+        loadPage: operator ? api : createPersonalOrganizationPage({
+          request: api,
+          organizations: profile.organizations,
+          hasAccount: Boolean(profile.account),
+          isCurrent: () => !closed && epoch === generation,
+        }),
         onEmpty: () => {
           const copy = organizationsEmptyCopy(he ? "he" : "en");
           const empty = node(
