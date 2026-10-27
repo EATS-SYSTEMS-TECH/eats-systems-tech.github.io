@@ -156,25 +156,15 @@ test("Manager example gate, Dual Control and group use real workspace controls w
           parseManagerCsv(await readFile(await download.path(), "utf8")).length,
           30,
         );
-        await content
-          .getByLabel(
-            copy("בחירת קובץ משתמשים לייבוא", "Select residents CSV to import"),
-            { exact: true },
-          )
-          .setInputFiles({
-            name: "sample.csv",
-            mimeType: "text/csv",
-            buffer: Buffer.from(
-              "Name,Email,Country,Local,Floor,Apt,Parking\nAdded sample,added@example.test,972,509999999,0,0,0",
-            ),
-          });
-        await content
-          .getByRole("button", {
-            name: copy("בדיקה וייבוא קובץ", "Validate and import file"),
-            exact: true,
-          })
-          .click();
-        await confirm();
+        await content.getByRole("button", {name: copy("ייבוא CSV", "Import CSV"), exact:true}).click();
+        const csvPopup = page.getByRole("dialog");
+        await csvPopup.getByLabel(copy("בחירת קובץ CSV", "Choose CSV file"), {exact:true}).setInputFiles({
+          name:"sample.csv", mimeType:"text/csv", buffer:Buffer.from("Name,Email,Country,Local,Floor,Apt,Parking\nAdded sample,added@example.test,972,509999999,0,0,0"),
+        });
+        await csvPopup.getByRole("button", {name:copy("בדיקה והכנה לייבוא", "Validate and prepare import"),exact:true}).click();
+        await csvPopup.getByRole("button", {name:copy("שמירה במערכת", "Save to system"),exact:true}).click();
+        await csvPopup.getByRole("heading", {name:copy("הייבוא הושלם בהצלחה", "Import completed"),exact:true}).waitFor();
+        await csvPopup.getByRole("button", {name:copy("סגירה", "Close"),exact:true}).click();
         await content
           .getByRole("button", {
             name: copy("טען עוד", "Load more"),
@@ -195,28 +185,13 @@ test("Manager example gate, Dual Control and group use real workspace controls w
         await content.getByRole("button", { name: /20261027/ }).click();
         await content.getByText("Demo technician", { exact: true }).waitFor();
         await tab("events");
-        assert.equal(
-          await content
-            .getByRole("button", {
-              name: copy("מחיקת אירוע", "Delete event"),
-              exact: true,
-            })
-            .count(),
-          12,
-        );
-        await content
-          .getByRole("button", {
-            name: copy("מחיקת אירוע", "Delete event"),
-            exact: true,
-          })
-          .first()
-          .click();
-        await confirm();
-        await page.waitForFunction(
-          () =>
-            document.querySelectorAll("#manager-content .manager-row")
-              .length === 11,
-        );
+        assert.equal(await content.locator(".manager-event-edit").count(),7);
+        await content.locator(".manager-event-edit").first().click();
+        await page.locator("dialog .manager-event-block").first().press("Enter");
+        await page.getByRole("dialog").getByRole("button",{name:copy("מחיקת האירוע", "Delete event"),exact:true}).click();
+        await page.locator("[data-event-save]").click();
+        await page.waitForFunction(() => !document.querySelector("dialog[open]"));
+        assert.match(await content.locator(".manager-event-count").innerText(), /11.*50/);
         await tab("auto");
         await content
           .getByRole("button", {
@@ -225,24 +200,10 @@ test("Manager example gate, Dual Control and group use real workspace controls w
           })
           .click();
         await tab("rf");
-        await content
-          .getByRole("button", {
-            name: copy("לימוד שלט", "Learn remote"),
-            exact: true,
-          })
-          .click();
-        await confirm();
-        await content
-          .getByRole("button", {
-            name: copy("בדיקת לימוד", "Check learning"),
-            exact: true,
-          })
-          .click();
-        await content
-          .getByRole("button", { name: copy("שמירה", "Save"), exact: true })
-          .click();
+        assert.equal(await content.getByRole("button",{name:copy("לימוד שלט", "Learn remote"),exact:true}).count(),0);
+        await content.getByText(/0x0*A1B2C3/,{exact:true}).waitFor();
         await tab("system");
-        await content.locator(".manager-facts").waitFor();
+        await content.locator(".manager-device-card").waitFor();
         await open("dual");
         const gatePicker = workspace.getByLabel(
           copy("בחירת שער", "Choose gate"),

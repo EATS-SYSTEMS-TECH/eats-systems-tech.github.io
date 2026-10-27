@@ -1,0 +1,401 @@
+{
+  "name": "WIFIGATE_EVENTS v1",
+  "note": "Shared by the firmware (test/test_events_v1_vectors.py) and the app (tests/events-model.test.mjs). Table row [day, action, start, end] (weekly) or [day, action, start, end, date] (one-time, date = gate-local days since 1970-01-01, a Thursday); action 0 = OPEN, 1 = CLOSE; day 0 = Sunday .. 6 = Saturday; [start, end) in minutes. ADMIN_SET_EVENTS carries the whole table as wire rows, [day, action, start, end] or [day, action, start, end, inDays] with date = today + inDays (wire). replaceAll: the table the gate keeps for items, or why it refuses them; items \"full\" is fullTable, plus any \"plus\" rows. today 0 = the clock is not set. 20730 is a Sunday; 20734 and 20741 are Thursdays.",
+  "maxEvents": 50,
+  "minuteStep": 10,
+  "minutesPerDay": 1440,
+  "oneTimeMaxDaysAhead": 90,
+  "items": [
+    {
+      "item": [0, 600, 1080],
+      "valid": true
+    },
+    {
+      "item": [1, 0, 1440],
+      "valid": true
+    },
+    {
+      "item": [1, 0, 10],
+      "valid": true
+    },
+    {
+      "item": [0, 1430, 1440],
+      "valid": true
+    },
+    {
+      "item": [0, 600, 600],
+      "valid": false,
+      "why": "empty"
+    },
+    {
+      "item": [0, 700, 600],
+      "valid": false,
+      "why": "ends before it starts"
+    },
+    {
+      "item": [0, 1380, 1450],
+      "valid": false,
+      "why": "past midnight"
+    },
+    {
+      "item": [0, 605, 700],
+      "valid": false,
+      "why": "off the 10-minute step"
+    },
+    {
+      "item": [0, 600, 695],
+      "valid": false,
+      "why": "off the 10-minute step"
+    },
+    {
+      "item": [2, 600, 700],
+      "valid": false,
+      "why": "unknown action"
+    }
+  ],
+  "replaceAll": [
+    {
+      "name": "an empty table",
+      "items": [],
+      "today": 20730,
+      "result": "Ok",
+      "after": []
+    },
+    {
+      "name": "rows in any order come back sorted; touching is allowed",
+      "items": [
+        [6, 0, 600, 1080],
+        [6, 1, 0, 600],
+        [4, 1, 0, 420]
+      ],
+      "today": 20730,
+      "result": "Ok",
+      "after": [
+        [4, 1, 0, 420],
+        [6, 1, 0, 600],
+        [6, 0, 600, 1080]
+      ]
+    },
+    {
+      "name": "green and red may not overlap",
+      "items": [
+        [2, 0, 600, 720],
+        [2, 1, 700, 800]
+      ],
+      "today": 20730,
+      "result": "Overlap"
+    },
+    {
+      "name": "two blocks of one color may not overlap",
+      "items": [
+        [2, 0, 600, 720],
+        [2, 0, 600, 660]
+      ],
+      "today": 20730,
+      "result": "Overlap"
+    },
+    {
+      "name": "events on different days never overlap",
+      "items": [
+        [2, 0, 600, 720],
+        [3, 0, 600, 720]
+      ],
+      "today": 20730,
+      "result": "Ok",
+      "after": [
+        [2, 0, 600, 720],
+        [3, 0, 600, 720]
+      ]
+    },
+    {
+      "name": "an invalid row rejects the whole table",
+      "items": [
+        [2, 0, 0, 60],
+        [2, 0, 800, 805]
+      ],
+      "today": 20730,
+      "result": "Invalid"
+    },
+    {
+      "name": "day out of range",
+      "items": [
+        [7, 0, 600, 720]
+      ],
+      "today": 20730,
+      "result": "Invalid"
+    },
+    {
+      "name": "the full table fits exactly",
+      "items": "full",
+      "today": 20730,
+      "result": "Ok"
+    },
+    {
+      "name": "the 51st event is refused",
+      "items": "full",
+      "plus": [
+        [6, 0, 1430, 1440]
+      ],
+      "today": 20730,
+      "result": "Full"
+    },
+    {
+      "name": "a one-time event on a free time of its day",
+      "items": [
+        [4, 0, 600, 700],
+        [4, 1, 0, 300, 20734]
+      ],
+      "today": 20730,
+      "result": "Ok",
+      "after": [
+        [4, 1, 0, 300, 20734],
+        [4, 0, 600, 700]
+      ]
+    },
+    {
+      "name": "a one-time event may not overlap a weekly event of its day",
+      "items": [
+        [4, 0, 600, 700],
+        [4, 1, 650, 800, 20734]
+      ],
+      "today": 20730,
+      "result": "Overlap"
+    },
+    {
+      "name": "a weekly event may not overlap any one-time event of its day",
+      "items": [
+        [4, 0, 600, 700, 20741],
+        [4, 1, 650, 800]
+      ],
+      "today": 20730,
+      "result": "Overlap"
+    },
+    {
+      "name": "one-time events on different dates may share hours",
+      "items": [
+        [4, 0, 600, 700, 20741],
+        [4, 0, 600, 700, 20734]
+      ],
+      "today": 20730,
+      "result": "Ok",
+      "after": [
+        [4, 0, 600, 700, 20734],
+        [4, 0, 600, 700, 20741]
+      ]
+    },
+    {
+      "name": "a one-time event already over is left out",
+      "items": [
+        [4, 0, 600, 700, 20727],
+        [5, 0, 0, 60]
+      ],
+      "today": 20730,
+      "result": "Ok",
+      "after": [
+        [5, 0, 0, 60]
+      ]
+    },
+    {
+      "name": "today itself still runs",
+      "items": [
+        [0, 1, 0, 60, 20730]
+      ],
+      "today": 20730,
+      "result": "Ok",
+      "after": [
+        [0, 1, 0, 60, 20730]
+      ]
+    },
+    {
+      "name": "exactly 90 days ahead is fine",
+      "items": [
+        [6, 0, 0, 60, 20820]
+      ],
+      "today": 20730,
+      "result": "Ok",
+      "after": [
+        [6, 0, 0, 60, 20820]
+      ]
+    },
+    {
+      "name": "a date that is not on the day",
+      "items": [
+        [4, 0, 600, 700, 20735]
+      ],
+      "today": 20730,
+      "result": "Invalid"
+    },
+    {
+      "name": "more than 90 days ahead",
+      "items": [
+        [4, 0, 600, 700, 20825]
+      ],
+      "today": 20730,
+      "result": "DateOutOfRange"
+    },
+    {
+      "name": "no one-time event while the clock is not set",
+      "items": [
+        [4, 0, 600, 700, 20734]
+      ],
+      "today": 0,
+      "result": "DateOutOfRange"
+    },
+    {
+      "name": "weekly events need no clock",
+      "items": [
+        [4, 0, 600, 700]
+      ],
+      "today": 0,
+      "result": "Ok",
+      "after": [
+        [4, 0, 600, 700]
+      ]
+    }
+  ],
+  "wire": [
+    {
+      "name": "weekly rows travel as they are; a one-time row carries its days from today",
+      "today": 20730,
+      "table": [
+        [4, 1, 0, 300, 20734],
+        [4, 0, 600, 700],
+        [6, 0, 0, 60, 20820]
+      ],
+      "wire": [
+        [4, 1, 0, 300, 4],
+        [4, 0, 600, 700],
+        [6, 0, 0, 60, 90]
+      ]
+    },
+    {
+      "name": "today itself is 0 days ahead",
+      "today": 20730,
+      "table": [
+        [0, 1, 0, 60, 20730]
+      ],
+      "wire": [
+        [0, 1, 0, 60, 0]
+      ]
+    }
+  ],
+  "fullTable": "Sunday..Saturday get 8, 7, 7, 7, 7, 7, 7 events: event k of a day is [day, k % 2, k * 60, k * 60 + 30]",
+  "active": [
+    {
+      "name": "a past one-time event still in the file is not counted in the slot",
+      "table": [
+        [0, 0, 420, 480, 20723],
+        [1, 0, 540, 600]
+      ],
+      "swapContacts": false,
+      "day": 1,
+      "minute": 560,
+      "today": 20731,
+      "mode": "NO",
+      "slot": 0
+    },
+    {
+      "table": [
+        [5, 0, 1080, 1440]
+      ],
+      "swapContacts": false,
+      "day": 5,
+      "minute": 1080,
+      "mode": "NO",
+      "slot": 0
+    },
+    {
+      "table": [
+        [5, 0, 1080, 1440]
+      ],
+      "swapContacts": false,
+      "day": 5,
+      "minute": 1439,
+      "mode": "NO",
+      "slot": 0
+    },
+    {
+      "table": [
+        [5, 0, 1080, 1440]
+      ],
+      "swapContacts": false,
+      "day": 6,
+      "minute": 0,
+      "mode": null
+    },
+    {
+      "table": [
+        [5, 0, 1080, 1440]
+      ],
+      "swapContacts": false,
+      "day": 5,
+      "minute": 1079,
+      "mode": null
+    },
+    {
+      "table": [
+        [4, 1, 0, 420],
+        [4, 0, 420, 480]
+      ],
+      "swapContacts": false,
+      "day": 4,
+      "minute": 419,
+      "mode": "NC",
+      "slot": 0
+    },
+    {
+      "table": [
+        [4, 1, 0, 420],
+        [4, 0, 420, 480]
+      ],
+      "swapContacts": false,
+      "day": 4,
+      "minute": 420,
+      "mode": "NO",
+      "slot": 1
+    },
+    {
+      "table": [
+        [4, 1, 0, 420],
+        [4, 0, 420, 480]
+      ],
+      "swapContacts": true,
+      "day": 4,
+      "minute": 420,
+      "mode": "NC",
+      "slot": 1
+    },
+    {
+      "table": [
+        [4, 1, 0, 420],
+        [4, 0, 420, 480]
+      ],
+      "swapContacts": true,
+      "day": 4,
+      "minute": 0,
+      "mode": "NO",
+      "slot": 0
+    },
+    {
+      "table": [
+        [4, 0, 600, 700, 20734]
+      ],
+      "swapContacts": false,
+      "day": 4,
+      "minute": 650,
+      "today": 20734,
+      "mode": "NO",
+      "slot": 0
+    },
+    {
+      "table": [
+        [4, 0, 600, 700, 20734]
+      ],
+      "swapContacts": false,
+      "day": 4,
+      "minute": 650,
+      "today": 20741,
+      "mode": null
+    }
+  ]
+}

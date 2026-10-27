@@ -114,6 +114,8 @@ function gate(id, index) {
       open: n % 2 === 0,
       once: false,
     })),
+    eventToday: Math.floor(Date.UTC(2026, 9, 27) / 86400000),
+    swapContacts: false,
     guests: [
       {
         id: "guest-1",
@@ -146,7 +148,7 @@ function gate(id, index) {
         result: "Demo",
       },
     ],
-    remote: { saved: true, learning: false, detected: false },
+    remote: { saved: true, learning: false, detected: false, codeHex: "0000000000A1B2C3" },
     networks: [
       { ssid: "Example-Office", rssi: -58, priority: 1 },
       { ssid: "Example-Backup", rssi: -67, priority: 2 },
@@ -225,6 +227,9 @@ export function createManagerExampleData() {
         !["MERGE", "REPLACE"].includes(mode)
       )
         throw new Error("INVALID_IMPORT");
+      const previous = new Map(value[collection].map((p) => [
+        p.countryCode + p.localNumber, p,
+      ]));
       const combined = new Map(
         (mode === "MERGE" ? value[collection] : []).map((p) => [
           p.countryCode + p.localNumber,
@@ -242,6 +247,9 @@ export function createManagerExampleData() {
       ] of rows) {
         const key = countryCode + localNumber;
         combined.set(key, {
+          // The real importer retains AK/enrollment/permissions for a phone
+          // present in REPLACE too; CSV edits only the seven profile fields.
+          ...previous.get(key),
           ...combined.get(key),
           id: `${collection}-${key}`,
           countryCode,

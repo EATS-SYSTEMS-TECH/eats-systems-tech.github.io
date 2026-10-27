@@ -257,6 +257,57 @@ test("events, Auto Open, RF learning and history respond through the actual work
   );
 });
 
+test("demo Auto Open lists enrolled residents rather than every eligible account and redacts beacon material", async () => {
+  const { connection, data } = await fixture();
+  const gate = data.gate("DEMO-24980");
+  assert.equal(gate.users.filter((p) => p.allowAutoOpen).length, 30);
+  gate.users[0].allowAutoOpen = false;
+  const rows = [];
+  let cursor = null;
+  do {
+    const result = (await connection.command("ADMIN_LIST_AUTO_OPEN_USERS", {
+      page: { cursor, limit: 10 },
+    })).data;
+    rows.push(...result.items);
+    cursor = result.page.nextCursor;
+  } while (cursor);
+  assert.equal(rows.length, 24);
+  assert.equal(rows[0].allowed, false);
+  assert.ok(rows.every((p) => Object.keys(p).sort().join(",") === "allowed,countryCode,localNumber,name"));
+  assert.equal(rows.some((p) => p.name === "Demo resident 30"), false);
+  const storage = (await connection.command("ADMIN_GET_STORAGE_HEALTH")).data;
+  assert.equal(storage.sd.capacityBytes, 32 * 1024 ** 3);
+  assert.ok(storage.sd.totalBytes > storage.sd.usedBytes);
+  assert.equal(storage.sd.formatCompatible, true);
+  const remote = (await connection.command("ADMIN_RF_GET")).data;
+  assert.equal(remote.rfCode.present, true);
+  assert.equal(remote.rfCode.codeHex, gate.remote.codeHex);
+});
+
+test("demo events keep mobile epoch-day/relative-date protocol and return full tables after mutations", async () => {
+  const { connection } = await fixture();
+  const initial = (await connection.command("ADMIN_LIST_EVENTS")).data;
+  assert.equal(initial.today, 20753);
+  assert.equal(initial.swapContacts, false);
+  const changed = (await connection.command("ADMIN_SET_EVENTS", {
+    today: initial.today, items: [[2, 0, 600, 660, 0]], expectedRevision: initial.revision,
+  })).data;
+  assert.deepEqual(changed.items, [[2, 0, 600, 660, 0]]);
+  await assert.rejects(connection.command("ADMIN_SET_EVENTS", {
+    today: changed.today, items: [[1, 0, 600, 660, 0]], expectedRevision: changed.revision,
+  }), /INVALID_EVENT/);
+  const options = (await connection.command("ADMIN_SET_EVENT_OPTIONS", {
+    swapContacts: true, expectedRevision: changed.revision,
+  })).data;
+  assert.equal(options.swapContacts, true);
+  assert.deepEqual(options.items, changed.items);
+  const cleared = (await connection.command("ADMIN_CLEAR_EVENTS", {
+    expectedRevision: options.revision,
+  })).data;
+  assert.deepEqual(cleared.items, []);
+  assert.ok(cleared.revision > options.revision);
+});
+
 test("reordering administrator CSV rows never changes the protected delegation identity", async () => {
   const { connection, data } = await fixture();
   const gate = data.gate("DEMO-24980"),

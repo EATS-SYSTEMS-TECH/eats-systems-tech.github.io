@@ -1,7 +1,43 @@
+@import url("./manager-events.css?v=20261027systemux1");
+
 .platform-page[data-product="manager"] {
   color: var(--ink, #0f172a);
   --manager-accent: var(--manager, #f97316);
   --manager-line: var(--line, #e2e8f0);
+}
+.manager-settings-form [hidden] { display: none !important; }
+.manager-form.manager-settings-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+.manager-supporting-copy { margin: 0 0 12px; color: #60718a; font-size: 14px; line-height: 1.7; }
+.manager-settings-card, .manager-device-card {
+  min-width: 0; padding: clamp(18px, 3vw, 26px); border: 1px solid #e0e7ef;
+  border-radius: 18px; background: linear-gradient(130deg, #fff 55%, #fff7ef);
+}
+.manager-settings-card h3, .manager-device-card h3 { margin: 0 0 10px; font-size: 18px; }
+.manager-settings-card select { width: 100%; max-width: 480px; margin-block: 8px; }
+.manager-timing-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.manager-timing-fields input { width: 100%; min-width: 0; }
+.manager-device-card { margin-block: 0 20px; }
+.manager-device-facts { display: grid; grid-template-columns: minmax(140px, 1fr) minmax(0, 1fr); margin: 18px 0 0; }
+.manager-device-facts dt, .manager-device-facts dd { margin: 0; padding-block: 13px; border-bottom: 1px solid #e8edf3; }
+.manager-device-facts dt { color: #60718a; font-size: 14px; }
+.manager-device-facts dd { font-weight: 750; overflow-wrap: anywhere; text-align: end; font-variant-numeric: tabular-nums; }
+.manager-device-facts dd[dir="ltr"] { unicode-bidi: isolate; text-align: start; }
+.manager-storage-more { padding: 18px; border: 1px solid #e0e7ef; border-radius: 14px; }
+.manager-storage-more summary { cursor: pointer; font-weight: 700; }
+.manager-storage-more .manager-facts { margin-block-start: 18px; }
+.manager-auto-user-list { display: grid; gap: 10px; }
+.manager-auto-user { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 14px; padding: 14px; border: 1px solid #e4eaf1; border-radius: 12px; background: #fff; }
+.manager-auto-user > span:not(.manager-auto-user-badge) { direction: ltr; text-align: start; font-size: 13px; color: #60718a; grid-column: 1; }
+.manager-auto-user-badge { align-self: center; grid-column: 2; grid-row: 1 / 3; padding: 5px 8px; border-radius: 8px; background: #edf8f1; color: #23633e; font-size: 11px; }
+.manager-auto-user-badge.is-disabled { background: #f1f3f6; color: #566579; }
+.manager-auto-users > .manager-button { margin-block-start: 14px; }
+@media (max-width: 540px) {
+  .manager-timing-fields { grid-template-columns: minmax(0, 1fr); }
+  .manager-device-facts { grid-template-columns: minmax(0, 1fr); }
+  .manager-device-facts dt { border: 0; padding-block-end: 3px; }
+  .manager-device-facts dd { text-align: start; padding-block-start: 0; }
+  .manager-auto-user { grid-template-columns: minmax(0, 1fr); }
+  .manager-auto-user-badge { grid-column: 1; grid-row: auto; justify-self: start; }
 }
 
 .platform-page[data-product="manager"] .platform-heading,

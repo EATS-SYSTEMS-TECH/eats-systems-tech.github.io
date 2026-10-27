@@ -69,3 +69,24 @@ test("sample configuration respects revisions, idle state and Auto Open compatib
   assert.equal(gate.auto.enabled, false);
   assert.equal(gate.history[0].action, "Gate configuration changed");
 });
+
+test("CSV replacement preserves enrollment and permissions for retained phones and removes omitted identities", () => {
+  const data = createManagerExampleData(), gate = data.gate("DEMO-24980");
+  const resident = gate.users[0];
+  resident.allowAutoOpen = false;
+  resident.allowGuests = false;
+  resident.guestGeneration = 7;
+  data.importPeople(gate.id, "users", [
+    [resident.countryCode, resident.localNumber, "Updated retained resident", "updated@example.test", 5, 8, 10],
+    ["972", "509999999", "New resident", "new@example.test", 0, 0, 0],
+  ], "REPLACE");
+  assert.equal(gate.users.length, 2);
+  const kept = gate.users.find((p) => p.localNumber === resident.localNumber);
+  assert.equal(kept.name, "Updated retained resident");
+  assert.equal(kept.enrolled, true);
+  assert.equal(kept.autoKey, true);
+  assert.equal(kept.allowAutoOpen, false);
+  assert.equal(kept.allowGuests, false);
+  assert.equal(kept.guestGeneration, 7);
+  assert.equal(gate.users.find((p) => p.name === "New resident").autoKey, undefined);
+});

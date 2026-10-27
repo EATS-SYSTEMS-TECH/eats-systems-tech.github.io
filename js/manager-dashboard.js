@@ -8,7 +8,11 @@ import { accessNoteContent } from "./manager-access-note.js";
 import { createSystemIcon } from "./wifigate-system-icons.js";
 import { createManagerDialog } from "./manager-dialog.js";
 import { placeManagerActions } from "./manager-action-layout.js";
-import { parseManagerCsv, encodeManagerCsv } from "./manager-csv.js";
+import { encodeManagerCsv } from "./manager-csv.js";
+import { createManagerCsvDialog } from "./manager-csv-dialog.js";
+import { renderManagerSettings } from "./manager-settings.js";
+import { createManagerEvents } from "./manager-events.js";
+import { formatManagerBytes, managerRfDetails, managerSdDetails, managerMaximumUsers } from "./manager-device-details.js";
 import { managerRequest } from "./api/index.js";
 import { ManagerConnection } from "./manager-connection.js";
 import { createManagerExamples } from "./manager-examples.js";
@@ -77,6 +81,7 @@ export function createManagerDashboard({
     cursor = null,
     currentView = "",
     countsPopover;
+  let workspacePanel, workspacePanelContext, tabGeneration = 0, systemOverview;
   const shell = node("div", undefined, "manager-shell"),
     nav = node("nav", undefined, "manager-nav"),
     main = node("div", undefined, "manager-main");
@@ -320,6 +325,7 @@ export function createManagerDashboard({
     b.addEventListener("click", () => void task(action, b));
     return b;
   };
+  const csvDialog = createManagerCsvDialog({ language, errorText });
   async function task(action, b) {
     if (b?.disabled) return;
     if (b) {
@@ -408,6 +414,12 @@ export function createManagerDashboard({
     return f;
   }
   function stop() {
+    workspacePanel?.dispose();
+    workspacePanel = undefined;
+    workspacePanelContext = undefined;
+    csvDialog.cancel();
+    systemOverview = undefined;
+    tabGeneration++;
     connectionDialog.close();
     activity.reset();
     planDirectory?.close();
@@ -1576,6 +1588,7 @@ export function createManagerDashboard({
   }
   async function openGate(gate, preserveView = false) {
     dialogs.cancel();
+    csvDialog.cancel();
     const previous = connection;
     const epoch = ++generation;
     activity.reset();
@@ -1636,6 +1649,10 @@ export function createManagerDashboard({
               showConnectionState("connecting");
               void openGate(gate, true);
             } else {
+              workspacePanel?.dispose();
+              workspacePanel = undefined;
+              workspacePanelContext = undefined;
+              csvDialog.cancel();
               say(
                 t(
                   "החיבור הסתיים במהלך פעולה. התחברו לשער ובדקו את התוצאה לפני ניסיון נוסף.",
@@ -1733,9 +1750,17 @@ export function createManagerDashboard({
         candidate.close();
         return;
       }
+      // Read-only channel renewal keeps the current draft, but every new
+      // operation must use the replacement authenticated transport. Pending
+      // confirmations were cancelled above; uncertain writes are never retried.
+      if (preserveView && workspacePanelContext) {
+        workspacePanelContext.source = candidate;
+        workspacePanelContext.epoch = epoch;
+      }
       renderTabs();
       if (!preserveView) await showTab("overview");
       else if (!existingContent?.childElementCount) await showTab(currentTab);
+      else if (currentTab === "auto") await showTab("auto");
       if (
         epoch === generation &&
         connection === candidate &&
@@ -1769,6 +1794,10 @@ export function createManagerDashboard({
     else connectionDialog.setStage(state === "active" ? "loading" : state);
   }
   function showConnectionRecovery(gate) {
+    workspacePanel?.dispose();
+    workspacePanel = undefined;
+    workspacePanelContext = undefined;
+    csvDialog.cancel();
     dialogs.cancel();
     const card = node("section", undefined, "manager-connection-recovery");
     card.append(
@@ -1815,6 +1844,11 @@ export function createManagerDashboard({
   }
   async function showTab(tab, more = false) {
     if (!connection?.session) throw new Error("DISCONNECTED");
+    workspacePanel?.dispose();
+    workspacePanel = undefined;
+    workspacePanelContext = undefined;
+    csvDialog.cancel();
+    const panelEpoch = ++tabGeneration;
     currentTab = tab;
     renderTabs();
     const content = view.querySelector("#manager-content");
@@ -1827,12 +1861,15 @@ export function createManagerDashboard({
       if (
         connection !== source ||
         generation !== epoch ||
+        tabGeneration !== panelEpoch ||
         currentTab !== tab ||
         !source.session
       )
         throw new Error("CANCELLED");
       currentData = r.data;
-      renderFacts(content, r.data);
+      systemOverview = r.data;
+      const maximum = managerMaximumUsers(source.capabilities?.data, r.data);
+      renderFacts(content, { ...r.data, ...(maximum !== null && maximum !== undefined ? { maxUsers: maximum } : {}) });
       content.append(button(t("פתיחת שער", "Open gate"), openGateAction, true));
       placeManagerActions(content, language);
       return;
@@ -1868,30 +1905,41 @@ export function createManagerDashboard({
     if (tab === "users" || tab === "admins") renderPeopleActions(content, tab);
     if (tab === "settings") renderSettings(content);
     if (tab === "events") renderEventActions(content);
-    if (tab === "rf") renderRfActions(content);
-    if (tab === "auto") renderAutoActions(content);
+    if (tab === "auto") {
+      renderAutoActions(content);
+      await renderAutoUsers(content);
+    }
     placeManagerActions(content, language);
   }
   async function showRead(content, cmd, payload, key, more) {
     const source = connection,
       epoch = generation,
+      panelEpoch = tabGeneration,
       tab = currentTab;
     const r = await source.command(cmd, payload);
     if (
       connection !== source ||
       generation !== epoch ||
+      tabGeneration !== panelEpoch ||
       currentTab !== tab ||
       !source.session
     )
       throw new Error("CANCELLED");
     currentData = r.data;
+    if (cmd === "ADMIN_GET_GATE_CONFIG") return;
+    if (cmd === "ADMIN_GET_AUTO_OPEN_CONFIG") {
+      renderFacts(content, { enabled: r.data?.config?.enabled });
+      return;
+    }
+    if (cmd === "ADMIN_GET_STORAGE_HEALTH") {
+      renderStorageDetails(content, r.data);
+      return;
+    }
+    if (cmd === "ADMIN_RF_GET") {
+      renderRemoteDetails(content, r.data);
+      return;
+    }
     if (cmd === "ADMIN_LIST_EVENTS") {
-      content.append(
-        node(
-          "p",
-          `${r.data.items.length} ${t("אירועים מתוזמנים", "scheduled events")}`,
-        ),
-      );
       return;
     }
     if (cmd === "ADMIN_LIST_HISTORY" && Array.isArray(r.data.days)) {
@@ -2018,7 +2066,7 @@ export function createManagerDashboard({
     const names = {
       systemName: t("שם מערכת", "System name"),
       firmwareVersion: t("גרסת קושחה", "Firmware version"),
-      flashVariantMb: t("נפח Flash (MB)", "Flash capacity (MB)"),
+      maxUsers: t("מספר משתמשים מרבי", "Maximum users"),
       targetChip: t("דגם מעבד", "Processor"),
       uptimeSec: t("זמן פעילות (שניות)", "Uptime (seconds)"),
       counts: t("כמויות", "Counts"),
@@ -2036,9 +2084,9 @@ export function createManagerDashboard({
       mounted: t("מחובר", "Mounted"),
       supported: t("נתמך", "Supported"),
       writable: t("ניתן לכתיבה", "Writable"),
-      totalBytes: t("נפח כולל (בתים)", "Total capacity (bytes)"),
-      usedBytes: t("נפח בשימוש (בתים)", "Used capacity (bytes)"),
-      freeBytes: t("נפח פנוי (בתים)", "Free capacity (bytes)"),
+      totalBytes: t("נפח כולל", "Total capacity"),
+      usedBytes: t("נפח בשימוש", "Used capacity"),
+      freeBytes: t("נפח פנוי", "Free capacity"),
       users: t("משתמשים", "Users"),
       admins: t("מנהלים", "Administrators"),
       firmware: t("קושחה", "Firmware"),
@@ -2053,7 +2101,7 @@ export function createManagerDashboard({
     };
     function add(o, prefix = "") {
       for (const [key, v] of Object.entries(o ?? {})) {
-        if (/secret|credential|private|password|passphrase/i.test(key))
+        if (/secret|credential|private|password|passphrase|flashVariantMb|boardMb/i.test(key))
           continue;
         if (v && typeof v === "object" && !Array.isArray(v)) {
           add(v, prefix + (names[key] ?? key) + " · ");
@@ -2063,13 +2111,15 @@ export function createManagerDashboard({
           node("dt", prefix + (names[key] ?? key)),
           node(
             "dd",
-            typeof v === "boolean"
+            /Bytes$/.test(key) && typeof v === "number"
+              ? formatManagerBytes(v, language)
+              : typeof v === "boolean"
               ? v
                 ? t("כן", "Yes")
                 : t("לא", "No")
               : Array.isArray(v)
                 ? v.length
-                : String(v ?? "—"),
+                : String(v ?? t("לא זמין", "Unavailable")),
           ),
         );
       }
@@ -2257,68 +2307,24 @@ export function createManagerDashboard({
         say(t("הייצוא אומת מול השער.", "Export verified against the gate."));
       }),
     );
-    const upload = node("input");
-    upload.type = "file";
-    upload.accept = ".csv,text/csv";
-    upload.setAttribute(
-      "aria-label",
-      t("בחירת קובץ משתמשים לייבוא", "Select residents CSV to import"),
-    );
-    const mode = node("select");
-    mode.setAttribute("aria-label", t("אופן ייבוא", "Import mode"));
-    mode.append(
-      new Option(t("מיזוג", "Merge"), "MERGE"),
-      new Option(t("החלפת כל הרשומות", "Replace all records"), "REPLACE"),
-    );
-    content.append(
-      upload,
-      mode,
-      button(t("בדיקה וייבוא קובץ", "Validate and import file"), async () => {
-        const file = upload.files?.[0];
-        if (!file || file.size > 4 * 1024 * 1024)
-          throw new Error("INVALID_CSV");
-        const rows = parseManagerCsv(await file.text());
-        if (
-          mode.value === "REPLACE" &&
-          !(await confirmAction(
-            t(
-              "הייבוא יחליף את כל הרשומות בקבוצה זו. להמשיך לבדיקת הקובץ?",
-              "Import will replace every record in this collection. Continue to validation?",
-            ),
-          ))
-        )
-          return;
-        const revision = (
-          await connection.command(
-            tab === "users" ? "ADMIN_LIST_USERS" : "ADMIN_LIST_ADMINS",
-            { page: { cursor: null, limit: 1 }, query: "" },
-          )
-        ).data.revision;
-        const result = await connection.importCollection(
-          collection,
-          mode.value,
-          rows,
-          revision,
-          async (v) =>
-            await confirmAction(
-              t(
-                `השער אימת ${v.accepted} רשומות. לשמור כעת?`,
-                `The gate validated ${v.accepted} records. Commit now?`,
-              ),
-            ),
-          (done, total) =>
-            say(
-              t(
-                `מעלה לשער ${Math.round((done / total) * 100)}%`,
-                `Uploading to gate ${Math.round((done / total) * 100)}%`,
-              ),
-            ),
-        );
-        if (!result.cancelled) await showTab(tab);
-        else
-          say(t("הייבוא בוטל לפני שמירה.", "Import cancelled before commit."));
-      }),
-    );
+    content.append(button(t("ייבוא CSV", "Import CSV"), async () => {
+      const source = connection, epoch = generation, panel = tabGeneration;
+      const alive = () => source === connection && epoch === generation && panel === tabGeneration && source.session && !closed;
+      const result = await csvDialog.open({
+        collection,
+        capacity: source.capabilities?.data?.limits?.[tab === "users" ? "maxUsers" : "maxAdmins"],
+        systemName: currentSystem.name,
+        onImport: async ({ mode, rows, confirmCommit, onProgress }) => {
+          if (!alive()) throw new Error("CANCELLED");
+          const revision = (await source.command(tab === "users" ? "ADMIN_LIST_USERS" : "ADMIN_LIST_ADMINS", { page: { cursor: null, limit: 1 }, query: "" })).data.revision;
+          if (!alive()) throw new Error("CANCELLED");
+          return source.importCollection(collection, mode, rows, revision,
+            value => alive() ? confirmCommit(value) : false, onProgress);
+        },
+      });
+      if (!alive()) return;
+      if (!result.cancelled) await showTab(tab);
+    }));
     content.append(
       form(
         [
@@ -2359,199 +2365,121 @@ export function createManagerDashboard({
     }
   }
   function renderSettings(content) {
-    const config = currentData.config,
-      revision = currentData.revision;
-    const fields = [
-      ["command", t("אופן פתיחה", "Opening method")],
-      [
-        "pulseWidth1Millis",
-        t("משך פולס ראשון (מילישניות)", "First pulse (ms)"),
-        "number",
-      ],
-      [
-        "timeBetweenPulses1Seconds",
-        t("השהיה ראשונה (שניות)", "First delay (seconds)"),
-        "number",
-      ],
-      [
-        "pulseWidth2Millis",
-        t("משך פולס שני (מילישניות)", "Second pulse (ms)"),
-        "number",
-      ],
-      [
-        "timeBetweenPulses2Seconds",
-        t("השהיה שנייה (שניות)", "Second delay (seconds)"),
-        "number",
-      ],
-      [
-        "pulseWidth3Millis",
-        t("משך פולס שלישי (מילישניות)", "Third pulse (ms)"),
-        "number",
-      ],
-    ];
-    const f = form(fields, t("שמירת הגדרות", "Save settings"), async (v) => {
-      if (
-        !(await confirmAction(
-          t("לשנות את הגדרות השער?", "Change gate settings?"),
-        ))
-      )
-        return;
-      const payload = { command: v.command, expectedRevision: revision };
-      for (const [key] of fields.slice(1)) payload[key] = Number(v[key]);
-      await connection.command("ADMIN_SET_GATE_CONFIG", payload);
-      await showTab("settings");
+    const context = { source: connection, epoch: generation, panel: tabGeneration };
+    workspacePanelContext = context;
+    const alive = () => context === workspacePanelContext && context.source === connection && context.epoch === generation && context.panel === tabGeneration && context.source.session && !closed;
+    workspacePanel = renderManagerSettings({
+      root: content, language, config: currentData.config, revision: currentData.revision,
+      commandLocked: currentSystem.type === "dual-control", confirm: confirmAction, errorText, isCurrent: alive,
+      onSave: async payload => {
+        if (!alive()) throw new Error("CANCELLED");
+        const source = context.source;
+        await source.command("ADMIN_SET_GATE_CONFIG", payload);
+        if (alive() && source === context.source) { await showTab("settings"); say(t("ההגדרות נשמרו בשער.", "Settings saved on the gate."), false, "success"); }
+      },
     });
-    for (const [key] of fields) f.elements[key].value = config[key];
-    const old = f.elements.command,
-      select = node("select");
-    select.name = "command";
-    for (const method of [
-      "PULSE",
-      "PULSE_AFTER_PULSE",
-      "PULSE_AFTER_PULSE_AFTER_PULSE",
-      "TOGGLE",
-      "PUSH_BUTTON",
-    ])
-      select.append(new Option(method.replaceAll("_", " "), method));
-    select.value = config.command;
-    old.replaceWith(select);
-    content.append(f);
   }
   function renderEventActions(content) {
-    const snapshot = currentData,
-      days = he
-        ? ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"]
-        : [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-          ];
-    const time = (n) =>
-      String(Math.floor(n / 60)).padStart(2, "0") +
-      ":" +
-      String(n % 60).padStart(2, "0");
-    const list = node("div");
-    for (const [index, event] of snapshot.items.entries()) {
-      const row = node("div", undefined, "manager-card manager-row");
-      row.append(
-        node(
-          "span",
-          `${days[event[0]]} · ${time(event[2])}–${time(event[3])} · ${event[1] === 0 ? t("פתוח", "Open") : t("סגור", "Closed")}${event.length === 5 ? " · " + t("חד־פעמי", "One time") : ""}`,
-        ),
-        button(t("מחיקת אירוע", "Delete event"), async () => {
-          if (
-            !(await confirmAction(t("למחוק את האירוע?", "Delete this event?")))
-          )
-            return;
-          await connection.command("ADMIN_SET_EVENTS", {
-            today: snapshot.today,
-            items: snapshot.items.filter((_, i) => i !== index),
-            expectedRevision: snapshot.revision,
-          });
-          await showTab("events");
-        }),
-      );
-      list.append(row);
-    }
-    content.append(list);
-    const f = form(
-      [
-        ["day", t("יום בשבוע", "Weekday")],
-        ["action", t("מצב בזמן האירוע", "State during event")],
-        ["start", t("תחילת האירוע", "Start time"), "time"],
-        ["end", t("סיום האירוע", "End time"), "time"],
-      ],
-      t("הוספת אירוע שבועי", "Add weekly event"),
-      async (v) => {
-        const minutes = (value) => {
-          const [h, m] = value.split(":").map(Number);
-          return h * 60 + m;
-        };
-        const start = minutes(v.start),
-          end = minutes(v.end) || 1440;
-        if (start >= end || start % 10 || end % 10)
-          throw new Error("INVALID_EVENT");
-        if (
-          !(await confirmAction(
-            t("לשמור את האירוע בשער?", "Save the event on the gate?"),
-          ))
-        )
-          return;
-        await connection.command("ADMIN_SET_EVENTS", {
-          today: snapshot.today,
-          items: [
-            ...snapshot.items,
-            [Number(v.day), Number(v.action), start, end],
-          ],
-          expectedRevision: snapshot.revision,
-        });
-        await showTab("events");
+    const context = { source: connection, epoch: generation, panel: tabGeneration };
+    workspacePanelContext = context;
+    const alive = () => context === workspacePanelContext && context.source === connection && context.epoch === generation && context.panel === tabGeneration && context.source.session && !closed;
+    workspacePanel = createManagerEvents({
+      root: content, language, table: currentData, maxEvents: connection.capabilities?.data?.limits?.maxEvents,
+      clock: systemOverview?.clock, confirm: confirmAction, errorText, isCurrent: alive,
+      command: async (name, payload) => {
+        if (!alive()) throw new Error("CANCELLED");
+        const source = context.source;
+        const result = await source.command(name, payload);
+        if (!alive() || source !== context.source) throw new Error("CANCELLED");
+        return result;
       },
-    );
-    for (const [name, options] of [
-      ["day", days.map((d, i) => [d, String(i)])],
-      [
-        "action",
-        [
-          [t("פתוח", "Open"), "0"],
-          [t("סגור", "Closed"), "1"],
-        ],
-      ],
-    ]) {
-      const select = node("select");
-      select.name = name;
-      for (const [label, value] of options)
-        select.append(new Option(label, value));
-      f.elements[name].replaceWith(select);
-    }
-    f.elements.start.step = "600";
-    f.elements.end.step = "600";
-    content.append(f);
+      onTableChanged: table => { if (alive()) currentData = table; },
+    });
   }
-  function renderRfActions(content) {
-    const revision = currentData.revision;
-    let operationId;
-    const actions = node("div", undefined, "manager-actions");
-    for (const [label, cmd] of [
-      [t("לימוד שלט", "Learn remote"), "ADMIN_RF_LEARN_START"],
-      [t("בדיקת לימוד", "Check learning"), "ADMIN_RF_LEARN_STATUS"],
-      [t("שמירה", "Save"), "ADMIN_RF_LEARN_SAVE"],
-      [t("ביטול לימוד", "Cancel learning"), "ADMIN_RF_LEARN_CANCEL"],
-    ])
-      actions.append(
-        button(label, async () => {
-          if (
-            cmd.endsWith("START") &&
-            !(await confirmAction(
-              t(
-                "נדרש אדם ליד השער שילחץ על השלט. להתחיל?",
-                "A person at the gate must press the remote. Start?",
-              ),
-            ))
-          )
-            return;
-          if (cmd !== "ADMIN_RF_LEARN_START" && !operationId)
-            throw new Error("NO_RF_OPERATION");
-          const r = await connection.command(
-            cmd,
-            cmd === "ADMIN_RF_LEARN_START"
-              ? {}
-              : {
-                  operationId,
-                  ...(cmd === "ADMIN_RF_LEARN_SAVE"
-                    ? { expectedRevision: revision }
-                    : {}),
-                },
-          );
-          if (cmd === "ADMIN_RF_LEARN_START") operationId = r.data.operationId;
-          renderFacts(content, r.data);
-        }),
-      );
-    content.append(actions);
+  function detailCard(title, description, facts) {
+    const card = node("section", undefined, "manager-device-card");
+    card.append(node("h3", title));
+    if (description) card.append(node("p", description, "manager-supporting-copy"));
+    const list = node("dl", undefined, "manager-device-facts");
+    for (const [label, value] of facts) {
+      const term = node("dd", value ?? t("לא דווח על ידי המערכת", "Not reported by the system"));
+      if (typeof value === "string" && /^(?:0x|[\d.,]+ (?:B|KB|MB|GB|TB)$)/.test(value)) term.dir = "ltr";
+      list.append(node("dt", label), term);
+    }
+    card.append(list); return card;
+  }
+  function renderRemoteDetails(content, data) {
+    const remote = managerRfDetails(data);
+    content.append(detailCard(t("השלט השמור במערכת", "Saved remote"),
+      t("לימוד שלט מתבצע באפליקציה ליד המערכת.", "Learn a remote in the app near the system."), [
+        [t("מצב השלט", "Remote status"), remote.present === true ? t("קיים שלט שמור", "Remote saved") : remote.present === false ? t("לא נשמר שלט", "No remote saved") : t("המצב אינו זמין", "Status unavailable")],
+        ...(remote.present === true ? [[t("הקוד שנלמד", "Learned code"), remote.code]] : []),
+      ]));
+    content.dataset.remoteReadOnly = "true";
+  }
+  function renderStorageDetails(content, data) {
+    const sd = managerSdDetails(data, language);
+    const state = sd.supported === false ? t("כרטיס SD אינו נתמך במערכת זו", "SD cards are not supported by this system")
+      : sd.mounted === true ? t("כרטיס מחובר וזמין", "Card mounted and available")
+      : sd.mounted === false ? t("כרטיס SD אינו זמין", "SD card unavailable") : t("מצב הכרטיס לא דווח", "Card status not reported");
+    const facts = [[t("מצב הכרטיס", "Card status"), state]];
+    if (sd.supported !== false) facts.push(
+      [t("תקינות הפורמט", "Format compatibility"), sd.format === "compatible" ? t("פורמט תואם למערכת", "Compatible with the system") : sd.format === "incompatible" ? t("פורמט אינו תואם", "Incompatible format") : t("לא ניתן לאמת את הפורמט", "Format could not be verified")],
+      [t("נפח כרטיס SD", "SD card capacity"), sd.capacity],
+      [t("נפח זמין לקבצים", "Filesystem capacity"), sd.total],
+      [t("בשימוש", "Used"), sd.used], [t("פנוי", "Free"), sd.free]);
+    content.append(detailCard("SD Card", t("נתוני הכרטיס נפרדים מהאחסון הפנימי של המערכת.", "Card information is separate from the system's internal storage."), facts));
+    const { sd: ignored, ...internal } = data ?? {};
+    const other = node("details", undefined, "manager-storage-more");
+    other.append(node("summary", t("נתוני מערכת נוספים", "More system information")));
+    renderFacts(other, internal); content.append(other);
+  }
+  async function renderAutoUsers(content) {
+    const source = connection, epoch = generation, panel = tabGeneration;
+    const alive = () => source === connection && epoch === generation && panel === tabGeneration && source.session && !closed;
+    const section = node("section", undefined, "manager-device-card manager-auto-users");
+    section.append(node("h3", t("משתמשי Auto Open", "Auto Open users")));
+    content.append(section);
+    if (!source.capabilities?.data?.features?.includes("AUTO_OPEN_USERS")) {
+      section.append(node("p", t("הצגת המשתמשים הרשומים דורשת קושחה שתומכת ברשימת Auto Open. הרשאות רגילות אינן מעידות על רישום ל־Auto Open.", "Displaying enrolled users requires firmware with Auto Open list support. Regular access does not imply Auto Open enrollment."), "manager-supporting-copy"));
+      return;
+    }
+    section.append(node("p", t("משתמשים שנרשמו בפועל לפתיחה אוטומטית במערכת זו.", "Users actually enrolled for automatic opening on this system."), "manager-supporting-copy"));
+    const list = node("div", undefined, "manager-auto-user-list"), state = node("p", "", "manager-supporting-copy");
+    state.setAttribute("role", "status");
+    const seen = new Set(); let next = null, loaded = 0;
+    const more = button(t("משתמשים נוספים", "More users"), () => load(next));
+    section.append(state, list, more); more.hidden = true;
+    async function load(after) {
+      if (!alive()) return;
+      state.textContent = t("טוען משתמשי Auto Open…", "Loading Auto Open users…");
+      more.disabled = true;
+      try {
+        const result = await source.command("ADMIN_LIST_AUTO_OPEN_USERS", { page: { cursor: after, limit: 10 } });
+        if (!alive()) return;
+        if (!Array.isArray(result.data?.items)) throw new Error("INVALID_RESPONSE");
+        for (const person of result.data.items) {
+          const row = node("article", undefined, "manager-auto-user");
+          row.append(node("strong", person.name || t("משתמש רשום", "Enrolled user")), node("span", `+${person.countryCode ?? ""}${person.localNumber ?? ""}`));
+          row.append(node("span", person.allowed === false ? t("הרשאת Auto Open כבויה", "Auto Open permission disabled") : t("רשום ל־Auto Open", "Enrolled for Auto Open"), "manager-auto-user-badge" + (person.allowed === false ? " is-disabled" : "")));
+          list.append(row); loaded++;
+        }
+        next = result.data.page?.nextCursor ?? null;
+        if (next && seen.has(next)) throw new Error("LIST_LIMIT");
+        if (next) seen.add(next);
+        more.hidden = !next;
+        state.textContent = loaded ? t(`${loaded} משתמשים מוצגים`, `${loaded} users shown`) : next ? t("אפשר להמשיך לטעון את הרשימה.", "Continue loading the list.") : t("אין משתמשים הרשומים ל־Auto Open במערכת זו.", "No users are enrolled for Auto Open on this system.");
+      } catch (error) {
+        if (!alive()) return;
+        if ((error.code ?? error.message) === "STALE_CURSOR") {
+          list.replaceChildren(); loaded = 0; next = null; seen.clear();
+          state.textContent = t("רשימת Auto Open השתנתה במערכת. טענו אותה מחדש.", "Auto Open enrollment changed on the system. Reload the list.");
+        } else state.textContent = errorText(error);
+        state.setAttribute("role", "alert");
+        more.hidden = false; more.textContent = t("ניסיון נוסף", "Try again");
+      } finally { more.disabled = false; }
+    }
+    await load(null);
   }
   function renderAutoActions(content) {
     const data = currentData;

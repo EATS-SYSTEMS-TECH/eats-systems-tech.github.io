@@ -62,7 +62,7 @@ test("secure session renewal preserves edits and daily identity without replayin
             data: {
               revision: 1,
               config: {
-                command: "PUSH_BUTTON",
+                command: "PULSE",
                 pulseWidth1Millis: 1000,
                 pulseWidth2Millis: 1000,
                 pulseWidth3Millis: 1000,

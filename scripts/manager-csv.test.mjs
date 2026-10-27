@@ -1,6 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { parseManagerCsv, encodeManagerCsv } from "../js/manager-csv.js";
+import {
+  parseManagerCsv,
+  encodeManagerCsv,
+  managerCsvTemplate,
+  managerCsvExampleRows,
+  validateManagerCsvImport,
+} from "../js/manager-csv.js";
 test("Manager CSV preserves international text, quoted commas and typed profile fields", () => {
   const row = [
     "972",
@@ -39,4 +45,32 @@ test("Manager CSV preserves international text, quoted commas and typed profile 
       ),
     /INVALID_CSV/,
   );
+});
+
+test("Manager CSV template is a valid import for users and administrators", () => {
+  assert.deepEqual(parseManagerCsv(managerCsvTemplate()), managerCsvExampleRows);
+  assert.deepEqual(validateManagerCsvImport(managerCsvTemplate(), 20), managerCsvExampleRows);
+  assert.throws(() => validateManagerCsvImport(managerCsvTemplate(), 1), /CSV_CAPACITY_EXCEEDED/);
+  assert.deepEqual(validateManagerCsvImport(managerCsvTemplate()), managerCsvExampleRows);
+  for (const capacity of [0, -1, 5001, null, 1.5])
+    assert.throws(() => validateManagerCsvImport(managerCsvTemplate(), capacity), /INVALID_CAPABILITIES/);
+});
+
+test("Manager CSV errors identify invalid record rows without changing the wire schema", () => {
+  const [first, second] = managerCsvExampleRows;
+  assert.throws(() => parseManagerCsv(encodeManagerCsv([first, first])), (error) => {
+    assert.equal(error.message, "DUPLICATE_PHONE");
+    assert.equal(error.row, 3);
+    assert.equal(error.field, "Local");
+    return true;
+  });
+  const invalid = [...second];
+  invalid[4] = 65536;
+  assert.throws(() => parseManagerCsv(encodeManagerCsv([first, invalid])), (error) => {
+    assert.equal(error.message, "INVALID_CSV");
+    assert.equal(error.row, 3);
+    assert.equal(error.field, "Floor");
+    return true;
+  });
+  assert.throws(() => parseManagerCsv("Country,Local,Name,Email,Floor,Apt,Parking\n972,501234567,Dana,dana@example.com,0,0,0"), /INVALID_CSV/);
 });

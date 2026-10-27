@@ -61,7 +61,13 @@ export class ManagerExampleConnection {
     this.onState("connecting");
     this.gateId = gateId;
     this.session = { simulation: true };
+    const gate = this.data.gate(gateId);
+    this.capabilities = { data: {
+      features: ["USERS", "ADMINS", "EVENTS", "AUTO_OPEN", "AUTO_OPEN_USERS", "STORAGE_HEALTH"],
+      limits: { maxUsers: gate.maxUsers, maxAdmins: gate.maxAdmins, maxEvents: gate.maxEvents, maxPageItems: 20 },
+    } };
     this.onState("active");
+    return clone(this.capabilities);
   }
   gate(expectedRevision) {
     if (this.closed || !this.session) throw new Error("DISCONNECTED");
@@ -80,11 +86,8 @@ export class ManagerExampleConnection {
           systemName: gate.name,
           firmwareVersion: gate.firmware,
           flashVariantMb: gate.boardMb,
-          users: gate.users.length,
-          admins: gate.admins.length,
-          events: gate.events.length,
-          state: "OK",
-          historyAvailable: true,
+          counts: { users: gate.users.length, admins: gate.admins.length, events: gate.events.length },
+          health: { state: "OK", historyAvailable: gate.boardMb === 16 },
         };
         break;
       case "ADMIN_GET_GATE_CONFIG":
@@ -160,25 +163,16 @@ export class ManagerExampleConnection {
         break;
       }
       case "ADMIN_LIST_EVENTS":
-        value = {
-          today: "2026-10-27",
-          revision: gate.revision,
-          items: gate.events.map((event) => [
-            event.day,
-            event.open ? 0 : 1,
-            event.start,
-            event.end,
-            ...(event.once ? ["2026-10-27"] : []),
-          ]),
-        };
+        value = this.events(gate);
         break;
       case "ADMIN_SET_EVENTS":
         if (
+          !Number.isInteger(payload.today) || payload.today < 0 || payload.today > 65535 ||
           !Array.isArray(payload.items) ||
           payload.items.length > gate.maxEvents ||
           payload.items.some(
             (e) =>
-              !Array.isArray(e) ||
+              !Array.isArray(e) || ![4, 5].includes(e.length) ||
               !Number.isInteger(e[0]) ||
               e[0] < 0 ||
               e[0] > 6 ||
@@ -188,11 +182,18 @@ export class ManagerExampleConnection {
               e[2] < 0 ||
               e[3] > 1440 ||
               e[2] >= e[3] ||
-              e[2] % 10 ||
-              e[3] % 10,
+              e[2] % 10 || e[3] % 10 ||
+              (e.length === 5 && (!payload.today || !Number.isInteger(e[4]) || e[4] < 0 || e[4] > 90 ||
+                (payload.today + e[4] + 4) % 7 !== e[0])),
           )
         )
           throw new Error("INVALID_EVENT");
+        for (let i = 0; i < payload.items.length; i++)
+          for (let j = 0; j < i; j++) {
+            const a = payload.items[i], b = payload.items[j];
+            if (a[0] === b[0] && (a.length === 4 || b.length === 4 || a[4] === b[4]) &&
+              a[2] < b[3] && b[2] < a[3]) throw new Error("EVENT_OVERLAP");
+          }
         gate.events = payload.items.map((e, index) => ({
           id: `event-${index}`,
           day: e[0],
@@ -200,10 +201,22 @@ export class ManagerExampleConnection {
           start: e[2],
           end: e[3],
           once: e.length === 5,
+          date: e.length === 5 ? payload.today + e[4] : 0,
         }));
         gate.revision++;
         this.data.log(gate.id, "Events changed");
-        value = { revision: gate.revision };
+        value = this.events(gate);
+        break;
+      case "ADMIN_SET_EVENT_OPTIONS":
+        if (typeof payload.swapContacts !== "boolean") throw new Error("INVALID_EVENT");
+        gate.swapContacts = payload.swapContacts;
+        gate.revision++;
+        value = this.events(gate);
+        break;
+      case "ADMIN_CLEAR_EVENTS":
+        gate.events = [];
+        gate.revision++;
+        value = this.events(gate);
         break;
       case "ADMIN_LIST_HISTORY": {
         const day = "20261027";
@@ -253,8 +266,12 @@ export class ManagerExampleConnection {
         break;
       case "ADMIN_RF_GET":
         value = {
-          saved: gate.remote.saved,
-          learning: gate.remote.learning,
+          rfCode: {
+            present: gate.remote.saved,
+            codeHex: gate.remote.saved ? gate.remote.codeHex : "",
+            bits: gate.remote.saved ? 24 : 0,
+            protocol: gate.remote.saved ? 1 : 0,
+          },
           revision: gate.revision,
         };
         break;
@@ -298,14 +315,44 @@ export class ManagerExampleConnection {
             totalBytes: 2097152,
             usedBytes: 327680,
           },
-          sd: { supported: gate.boardMb === 16, mounted: gate.boardMb === 16 },
-          history: { available: true },
+          sd: gate.boardMb === 16 ? {
+            supported: true, mounted: true, writable: true, formatCompatible: true,
+            capacityBytes: 32 * 1024 ** 3, totalBytes: Math.floor(31.8 * 1024 ** 3),
+            usedBytes: 128 * 1024 ** 2, freeBytes: Math.floor(31.8 * 1024 ** 3) - 128 * 1024 ** 2,
+          } : { supported: false, mounted: false, writable: false },
+          history: { available: gate.boardMb === 16 },
         };
         break;
+      case "ADMIN_LIST_AUTO_OPEN_USERS": {
+        const rows = [...gate.users, ...gate.admins].filter((p) => p.autoKey);
+        const seen = new Set();
+        const unique = rows.filter((p) => {
+          const phone = p.countryCode + p.localNumber;
+          if (seen.has(phone)) return false;
+          seen.add(phone); return true;
+        });
+        const start = this.cursor(payload.page?.cursor), limit = payload.page?.limit ?? 10;
+        if (!Number.isInteger(limit) || limit < 1 || limit > 10) throw new Error("INVALID_LIMIT");
+        value = { items: unique.slice(start, start + limit).map((p) => ({
+          name: p.name, countryCode: p.countryCode, localNumber: p.localNumber,
+          allowed: p.allowAutoOpen !== false,
+        })), revision: gate.revision,
+        page: { nextCursor: start + limit < unique.length ? String(start + limit) : null } };
+        break;
+      }
       default:
         throw new Error("EXAMPLE_UNSUPPORTED_COMMAND");
     }
     return { data: clone(value) };
+  }
+  events(gate) {
+    return {
+      today: gate.eventToday, swapContacts: gate.swapContacts, revision: gate.revision,
+      items: gate.events.filter((e) => !e.once || (gate.eventToday && (e.date ?? gate.eventToday) >= gate.eventToday))
+        .map((e) => [e.day, e.open ? 0 : 1, e.start, e.end,
+          ...(e.once ? [(e.date ?? gate.eventToday) - gate.eventToday] : [])])
+        .sort((a, b) => a[0] - b[0] || a[2] - b[2]),
+    };
   }
   cursor(value) {
     if (value === null || value === undefined) return 0;
