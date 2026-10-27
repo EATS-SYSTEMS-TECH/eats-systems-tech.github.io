@@ -1,12 +1,14 @@
 import { createManagerSystemCard } from "./manager-system-card.js";
 import { ManagerExampleConnection } from "./manager-example-connection.js";
-import { placeManagerActions } from "./manager-action-layout.js";
 import {
   createManagerExampleData,
   managerExampleSystems,
   managerExampleOrganization,
 } from "./manager-example-data.js";
-import { parseManagerCsv } from "./manager-csv.js";
+import { createManagerOrganizationCard } from "./manager-organization-card.js";
+import { renderManagerOrganization } from "./manager-organization.js";
+import { createManagerDialog } from "./manager-dialog.js";
+import { createExampleOrganization } from "./manager-example-organization.js";
 
 const el = (tag, text, cls) => {
   const value = document.createElement(tag);
@@ -17,12 +19,15 @@ const el = (tag, text, cls) => {
 // No API, Auth, WebSocket, storage or relay dependency belongs in this module.
 export function createManagerExamples({
   language = "en",
+  dialogs = createManagerDialog({ language }),
   onOpen,
   onOpenOrganization,
 }) {
   const he = language === "he",
     t = (h, e) => (he ? h : e);
   const data = createManagerExampleData();
+  const organization = createExampleOrganization(data);
+  let viewGeneration = 0;
   const removed = new Set();
   let activeRoot,
     message,
@@ -64,11 +69,28 @@ export function createManagerExamples({
   function say(value) {
     if (message?.isConnected && !disposed) message.textContent = value;
   }
-  async function run(action) {
+  async function run(action, control) {
+    if (control?.disabled) return;
+    if (control) {
+      control.disabled = true;
+      control.setAttribute("aria-busy", "true");
+    }
     try {
       await action();
     } catch (error) {
-      say(errors[error.message] || error.message);
+      if (error.message !== "CANCELLED")
+        say(
+          errors[error.message] ||
+            t(
+              "לא ניתן להשלים את הפעולה בדוגמה.",
+              "Unable to complete this example action.",
+            ),
+        );
+    } finally {
+      if (control) {
+        control.disabled = false;
+        control.removeAttribute("aria-busy");
+      }
     }
   }
   function button(label, action, primary = false) {
@@ -96,83 +118,10 @@ export function createManagerExamples({
   function note(text) {
     return el("p", text, "manager-note");
   }
-  function badge() {
-    return el("span", t("דוגמה", "Example"), "manager-example-badge");
-  }
-  function facts(container, rows) {
-    const list = el("dl", undefined, "manager-facts");
-    for (const [label, value] of rows)
-      list.append(el("dt", label), el("dd", String(value)));
-    container.append(list);
-  }
-  function form(fields, label, action) {
-    const f = el("form", undefined, "manager-form manager-example-form");
-    for (const field of fields) {
-      const l = el("label", field.label),
-        input = el(
-          field.options
-            ? "select"
-            : field.type === "textarea"
-              ? "textarea"
-              : "input",
-        );
-      input.name = field.name;
-      input.setAttribute("aria-label", field.label);
-      if (field.options)
-        for (const [name, value] of field.options)
-          input.append(new Option(name, String(value)));
-      else if (field.type !== "textarea") input.type = field.type || "text";
-      input.required = field.required !== false;
-      if (field.type === "number") {
-        input.min = field.min ?? 0;
-        input.max = field.max ?? 65535;
-        input.step = field.step ?? 1;
-      }
-      if (field.type === "time") input.step = "600";
-      if (field.type === "email") input.maxLength = 254;
-      else if (!field.options && !["number", "time"].includes(field.type))
-        input.maxLength = field.maxLength || 100;
-      input.value = field.value ?? field.options?.[0]?.[1] ?? "";
-      l.append(input);
-      f.append(l);
-    }
-    const submit = el("button", label, "manager-button primary");
-    submit.type = "submit";
-    f.append(submit);
-    f.addEventListener("submit", (event) => {
-      event.preventDefault();
-      run(() => action(Object.fromEntries(new FormData(f)), f));
-    });
-    return f;
-  }
-  function table(container, headers, rows) {
-    const wrapper = el("div", undefined, "manager-table-wrap"),
-      grid = el("table", undefined, "manager-table"),
-      thead = el("thead"),
-      tr = el("tr"),
-      tbody = el("tbody");
-    for (const title of headers) {
-      const th = el("th", title);
-      th.scope = "col";
-      tr.append(th);
-    }
-    thead.append(tr);
-    for (const cells of rows) {
-      const row = el("tr");
-      for (const cell of cells) {
-        const td = el("td");
-        if (cell instanceof Node) td.append(cell);
-        else td.textContent = String(cell);
-        row.append(td);
-      }
-      tbody.append(row);
-    }
-    grid.append(thead, tbody);
-    wrapper.append(grid);
-    container.append(wrapper);
-  }
   function mount(container) {
+    viewGeneration++;
     activeRoot = container;
+    container.dataset.simulation = "true";
     container.replaceChildren();
     container.classList.add("manager-example-workspace");
     container.append(
@@ -188,24 +137,31 @@ export function createManagerExamples({
     message.setAttribute("aria-live", "polite");
     container.append(message);
   }
-  function renderCards(container, systems = managerExampleSystems) {
+  function renderCards(
+    container,
+    systems = managerExampleSystems,
+    { collapsible = true } = {},
+  ) {
     const section = el(
-        "details",
+        collapsible ? "details" : "section",
         undefined,
-        "manager-examples dashboard-examples",
+        collapsible
+          ? "manager-examples dashboard-examples"
+          : "manager-organization-systems",
       ),
       title = el("summary", t("דוגמאות", "Examples"));
-    section.append(
-      title,
-      el(
-        "p",
-        t(
-          "אפשר לנסות את כל מסכי הניהול על נתוני דוגמה, ללא חיבור למערכת פיזית.",
-          "Explore the management screens using sample data, without connecting to a physical gate.",
+    if (collapsible)
+      section.append(
+        title,
+        el(
+          "p",
+          t(
+            "אפשר לנסות את כל מסכי הניהול על נתוני דוגמה, ללא חיבור למערכת פיזית.",
+            "Explore the management screens using sample data, without connecting to a physical gate.",
+          ),
+          "manager-muted",
         ),
-        "manager-muted",
-      ),
-    );
+      );
     const grid = el("div", undefined, "manager-grid manager-example-grid");
     for (const system of systems) {
       if (removed.has(system.id)) continue;
@@ -222,326 +178,84 @@ export function createManagerExamples({
       );
     }
     section.append(grid);
-    container.prepend(section);
+    if (collapsible) container.prepend(section);
+    else container.append(section);
   }
   function renderOrganizationCard(container) {
     const section = el(
       "details",
       undefined,
-      "manager-examples dashboard-examples",
+      "manager-examples dashboard-examples manager-organization-examples",
     );
     section.append(el("summary", t("ארגון לדוגמה", "Example organization")));
-    const card = el("article", undefined, "manager-card manager-example-card");
-    card.dataset.exampleOrganization = "true";
-    card.append(badge(), el("h4", managerExampleOrganization.name));
-    facts(card, [
-      [t("בעל הארגון", "Owner"), "owner@example.test · WIFIGATE Manager user"],
-      [
-        t("מנהלי ארגון", "Organization administrators"),
-        data.members.filter((m) => m.status === "active").length,
-      ],
-      [t("מערכות מקושרות", "Linked systems"), data.assignments.size],
-      [
-        t("שערים פיזיים ייחודיים", "Unique physical gates"),
-        data.uniqueGates(
-          managerExampleSystems.filter((s) => data.assignments.has(s.id)),
-        ).length,
-      ],
-    ]);
-    card.append(
-      button(
-        t("כניסה לארגון לדוגמה", "Open example organization"),
-        onOpenOrganization,
-        true,
-      ),
+    const grid = el("div", undefined, "manager-org-columns");
+    const actions = el("div", undefined, "manager-org-actions");
+    actions.append(
+      button(t("כניסה לארגון", "Open organization"), onOpenOrganization, true),
     );
-    section.append(card);
-    container.prepend(section);
+    grid.append(
+      createManagerOrganizationCard({
+        organization: organization.summary(),
+        language,
+        actions,
+        example: true,
+      }),
+    );
+    section.append(grid);
+    container.append(section);
   }
-  function renderBulk(container, systems = managerExampleSystems) {
-    container.append(
-      el("h4", t("פעולות מרובות", "Bulk operations")),
-      note(
-        t(
-          "שער משותף נספר ומטופל פעם אחת. אין הרצה אוטומטית ואין שליחת פקודות לשער מנותק.",
-          "A shared physical gate is counted and processed once. No automatic execution or command queue for offline gates.",
-        ),
-      ),
-    );
-    const fields = el("div", undefined, "manager-example-selection");
-    for (const system of systems) {
-      const label = el("label"),
-        input = el("input");
-      input.type = "checkbox";
-      input.value = system.id;
-      input.checked = true;
-      label.append(input, document.createTextNode(system.name));
-      fields.append(label);
-    }
-    const count = el("p"),
-      results = el("div");
-    const selected = () =>
-      systems.filter((s) =>
-        [...fields.querySelectorAll("input:checked")].some(
-          (i) => i.value === s.id,
-        ),
-      );
-    const update = () =>
-      (count.textContent = `${data.uniqueGates(selected()).length} ${t("שערים פיזיים ייחודיים נבחרו", "unique physical gates selected")}`);
-    fields.addEventListener("change", update);
-    update();
-    const options = [
-      [t("כיבוי Auto Open", "Disable Auto Open"), "auto"],
-      [t("פתיחה לפי שיטת השער", "Open using each gate's method"), "open"],
-      [t("הדמיית עדכון קושחה", "Simulate firmware update"), "firmware"],
-      [t("ייבוא משתמשים לדוגמה", "Import sample users"), "import"],
-    ];
-    const f = form(
-      [
-        { name: "action", label: t("הפעולה", "Operation"), options },
-        {
-          name: "mode",
-          label: t("מצב ייבוא", "Import mode"),
-          value: "MERGE",
-          options: [
-            ["MERGE", "MERGE"],
-            ["REPLACE", "REPLACE"],
-          ],
-        },
-        {
-          name: "csv",
-          type: "textarea",
-          label: t("CSV לדוגמת ייבוא מרובה", "CSV for sample bulk import"),
-          required: false,
-          maxLength: 50000,
-          value:
-            "Name,Email,Country,Local,Floor,Apt,Parking\nDemo import,bulk@example.test,972,509999999,0,0,0",
-        },
-      ],
-      t("הפעלת הדגמה על השערים שנבחרו", "Run example on selected gates"),
-      (values) => {
-        const ids = data.uniqueGates(selected());
-        if (!ids.length) return;
-        const imported =
-          values.action === "import" ? parseManagerCsv(values.csv) : null;
-        if (
-          !confirm(
-            t(
-              `להדגים את הפעולה על ${ids.length} שערים פיזיים ייחודיים?`,
-              `Simulate this operation on ${ids.length} unique physical gates?`,
-            ),
-          )
-        )
-          return;
-        const rows = ids.map((id) => {
-          try {
-            const gate = data.available(id);
-            if (values.action === "auto") gate.auto.enabled = false;
-            if (values.action === "firmware") gate.firmware = gate.ota.target;
-            if (values.action === "import")
-              data.importPeople(id, "users", imported, values.mode);
-            data.log(id, `Bulk ${values.action}`);
-            return [id, t("בוצע בהדגמה", "Completed in example")];
-          } catch (error) {
-            return [id, errors[error.message] || error.message];
-          }
-        });
-        results.replaceChildren();
-        table(
-          results,
-          [t("שער", "Gate"), t("תוצאה לכל שער", "Per-gate result")],
-          rows,
-        );
-        say(
-          t(
-            "הדגמה הושלמה. אין ניסיון חוזר אוטומטי על שער שנכשל.",
-            "Example finished. Failed gates are not retried automatically.",
-          ),
-        );
-      },
-    );
-    container.append(fields, count, f, results);
-  }
-  function renderOrganization(container, { onBack }) {
+  async function renderOrganization(container, { onBack }) {
     mount(container);
-    const head = el("div", undefined, "manager-toolbar");
-    head.append(
-      el("h3", managerExampleOrganization.name),
-      badge(),
-      button(t("חזרה לארגונים שלי", "Back to my organizations"), onBack),
+    const epoch = viewGeneration;
+    const isCurrent = () =>
+      !disposed && activeRoot === container && epoch === viewGeneration;
+    const simulation = t(
+      "סימולציה בלבד · ארגון לדוגמה. השינויים נשמרים בדוגמה בלבד.",
+      "Simulation only · example organization. Changes stay in the example only.",
     );
-    container.append(head);
-    const tabs = el("div", undefined, "manager-tabs"),
-      body = el("div");
-    tabs.setAttribute("role", "tablist");
-    container.append(tabs, body);
-    const views = [
-      ["systems", t("מערכות הארגון", "Organization systems")],
-      ["members", t("מנהלי ארגון", "Organization administrators")],
-      ["bulk", t("פעולות מרובות", "Bulk operations")],
-      ["activity", t("פעילות", "Activity")],
-    ];
-    const render = (selected) => {
-      body.replaceChildren();
-      tabs.replaceChildren();
-      for (const [key, label] of views) {
-        const b = button(label, () => render(key));
-        b.setAttribute("role", "tab");
-        b.setAttribute("aria-selected", String(key === selected));
-        tabs.append(b);
-      }
-      if (selected === "systems") {
-        const assigned = managerExampleSystems.filter((s) =>
-          data.assignments.has(s.id),
-        );
-        facts(body, [
-          [
-            t("בעל הארגון", "Organization owner"),
-            "owner@example.test · WIFIGATE Manager user",
-          ],
-          [t("מערכות", "Systems"), assigned.length],
-          [
-            t("שערים פיזיים ייחודיים", "Unique physical gates"),
-            data.uniqueGates(assigned).length,
-          ],
-        ]);
-        renderCards(body, assigned);
-        body.append(
-          form(
-            [
-              {
-                name: "system",
-                label: t("מערכת לדוגמה לשיוך", "Example system assignment"),
-                options: managerExampleSystems.map((s) => [s.name, s.id]),
-              },
-              {
-                name: "assignment",
-                label: t("פעולת שיוך", "Assignment action"),
-                options: [
-                  [
-                    t("שיוך לארגון לדוגמה", "Assign to example organization"),
-                    "assign",
-                  ],
-                  [
-                    t(
-                      "הסרת שיוך מהארגון לדוגמה",
-                      "Unassign from example organization",
-                    ),
-                    "unassign",
-                  ],
-                ],
-              },
-            ],
-            t("עדכון שיוך בדוגמה", "Update example assignment"),
-            (values) => {
-              if (!managerExampleSystems.some((s) => s.id === values.system))
-                return;
-              if (values.assignment === "assign")
-                data.assignments.add(values.system);
-              else data.assignments.delete(values.system);
-              render("systems");
-              say(
-                t(
-                  "השיוך השתנה בדוגמה בלבד.",
-                  "Assignment changed only in the example.",
-                ),
-              );
-            },
-          ),
-        );
-      }
-      if (selected === "members") {
-        table(
-          body,
-          [
-            t("אימייל", "Email"),
-            t("תפקיד", "Role"),
-            t("מצב", "Status"),
-            t("פעולות", "Actions"),
-          ],
-          data.members.map((member) => [
-            member.email,
-            "WIFIGATE Manager organization admin",
-            member.status,
-            button(t("הסרה בהדגמה", "Remove in example"), () => {
-              if (
-                !confirm(
-                  t(
-                    "להסיר את המינוי לדוגמה?",
-                    "Remove the sample appointment?",
-                  ),
-                )
-              )
-                return;
-              data.members.splice(data.members.indexOf(member), 1);
-              render("members");
-            }),
-          ]),
-        );
-        body.append(
-          form(
-            [
-              {
-                name: "email",
-                type: "email",
-                label: t("אימייל להזמנה לדוגמה", "Sample invitation email"),
-              },
-            ],
-            t("יצירת הזמנה לדוגמה", "Create sample invitation"),
-            (values) => {
-              if (
-                data.members.some((m) => m.email === values.email.toLowerCase())
-              )
-                return;
-              data.members.push({
-                email: values.email.toLowerCase(),
-                status: "pending",
-              });
-              render("members");
-              say(
-                t(
-                  "נוצרה הזמנה בדוגמה בלבד. לא נשלח אימייל.",
-                  "Sample invitation created. No email was sent.",
-                ),
-              );
-            },
-          ),
-        );
-      }
-      if (selected === "bulk")
-        renderBulk(
-          body,
-          managerExampleSystems.filter((s) => data.assignments.has(s.id)),
-        );
-      if (selected === "activity") {
-        const rows = data
-          .uniqueGates(managerExampleSystems)
-          .flatMap((id) =>
-            data
-              .gate(id)
-              .history.map((item) => [
-                id,
-                item.time,
-                item.actor,
-                item.action,
-                item.result,
-              ]),
-          );
-        table(
-          body,
-          [
-            t("שער", "Gate"),
-            t("שעה", "Time"),
-            t("מפעיל", "Operator"),
-            t("פעולה", "Action"),
-            t("תוצאה", "Result"),
-          ],
-          rows,
-        );
-      }
-      placeManagerActions(body, language);
-    };
-    render("systems");
+    await renderManagerOrganization({
+      root: container,
+      path: organization.path,
+      language,
+      user: organization.owner,
+      api: (...args) => {
+        if (!isCurrent()) throw new Error("CANCELLED");
+        return organization.request(...args);
+      },
+      dialogs: {
+        form: (options) =>
+          dialogs.form({
+            ...options,
+            message: simulation + "\n" + options.message,
+          }),
+        confirm: (text) => dialogs.confirm(simulation + "\n" + text),
+      },
+      ensureRecent: async () => {},
+      run,
+      onBack,
+      onRefresh: () => renderOrganization(container, { onBack }),
+      errorText: (error) =>
+        errors[error.code ?? error.message] ||
+        t(
+          "לא ניתן לשמור. בדקו את הפרטים ונסו שוב.",
+          "Unable to save. Check the details and retry.",
+        ),
+      isCurrent,
+    });
+    if (!isCurrent()) return;
+    const assigned = managerExampleSystems.filter(
+      (system) => data.assignments.has(system.id) && !removed.has(system.id),
+    );
+    const toolbar = el("div", undefined, "manager-toolbar");
+    toolbar.dataset.organizationSection = "systems";
+    toolbar.append(
+      el("h3", t("מערכות הארגון", "Organization systems")),
+      button(t("רענון", "Refresh"), () =>
+        renderOrganization(container, { onBack }),
+      ),
+    );
+    container.append(toolbar);
+    renderCards(container, assigned, { collapsible: false });
   }
 
   return {
@@ -573,11 +287,16 @@ export function createManagerExamples({
       data.assignments.delete(system.id);
     },
     closeView() {
+      viewGeneration++;
+      dialogs.cancel();
       activeRoot = undefined;
       message = undefined;
     },
     close() {
       disposed = true;
+      viewGeneration++;
+      dialogs.cancel();
+      organization.clear();
       activeRoot = undefined;
       message = undefined;
       data.clear();

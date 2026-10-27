@@ -1,4 +1,5 @@
 import { renderManagerOrganization } from "./manager-organization.js";
+import { createManagerOrganizationCard } from "./manager-organization-card.js";
 import { createPersonalOrganizationPage } from "./manager-organization-list.js";
 import {
   systemsEmptyCopy,
@@ -197,6 +198,7 @@ export function createManagerDashboard({
   root.append(platformEntry);
   const examples = createManagerExamples({
     language,
+    dialogs,
     onOpen: (system) => task(() => openExample(system)),
     onOpenOrganization: openExampleOrganization,
   });
@@ -560,13 +562,13 @@ export function createManagerDashboard({
     renderNav();
     await openSystem(system);
   }
-  function openExampleOrganization() {
+  async function openExampleOrganization() {
     stop();
     scope = null;
     currentView = "example-organization";
     renderNav();
     say("");
-    examples.renderOrganization(view, {
+    await examples.renderOrganization(view, {
       onBack: () => void task(() => showOrganizations(true)),
     });
   }
@@ -958,6 +960,7 @@ export function createManagerDashboard({
     }
 
     const bar = node("div", undefined, "manager-toolbar");
+    if (scope) bar.dataset.organizationSection = "systems";
     bar.append(
       node(
         "h3",
@@ -1194,26 +1197,6 @@ export function createManagerDashboard({
       operator ? "/admin/organizations" : "/organizations",
       columns,
       (org) => {
-        const card = node(
-          "article",
-          undefined,
-          "manager-card manager-org-column",
-        );
-        card.dataset.organization = org.id;
-        card.append(node("h4", org.name));
-        const owner = node("section", undefined, "manager-org-owner");
-        owner.append(
-          node("small", t("בעל הארגון", "Organization owner")),
-          node("strong", org.owner?.email ?? t("לא זמין", "Unavailable")),
-          node("span", roleName(org.owner?.role), "manager-role-badge"),
-        );
-        card.append(owner);
-        const count = node("p", undefined, "manager-org-count");
-        count.append(
-          node("b", String(org.linkedSystemCount)),
-          node("span", t("מערכות מקושרות", "Linked systems")),
-        );
-        card.append(count);
         const actions = node("div", undefined, "manager-org-actions");
         actions.append(
           button(t("כניסה לארגון", "Open organization"), () =>
@@ -1255,8 +1238,7 @@ export function createManagerDashboard({
               await showOrganizations(personal);
             }),
           );
-        card.append(actions);
-        return card;
+        return createManagerOrganizationCard({ organization: org, language, actions });
       },
       {
         loadPage: operator ? api : createPersonalOrganizationPage({
