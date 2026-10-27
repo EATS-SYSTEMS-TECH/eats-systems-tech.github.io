@@ -20,28 +20,18 @@ try {
     if (path.endsWith("/shop/")) {
       const shop = await page.evaluate(() => {
         const main = document.querySelector(".shop-main");
-        const button = main.querySelector(".shop-main__link");
         return {
-          background: getComputedStyle(main).backgroundColor,
-          backgroundImage: getComputedStyle(main).backgroundImage,
-          headingColor: getComputedStyle(main.querySelector("h1")).color,
           headingText: main.querySelector("h1").textContent.trim(),
-          headingLines: main.querySelector("h1").getBoundingClientRect().height / parseFloat(getComputedStyle(main.querySelector("h1")).lineHeight),
-          headingAnimation: getComputedStyle(main.querySelector("h1")).animationName,
-          paragraphs: main.querySelectorAll("p").length,
-          buttonBackground: getComputedStyle(button).backgroundColor,
-          buttonColor: getComputedStyle(button).color,
+          cards: main.querySelectorAll(".shop-product-card").length,
+          unavailable: [...main.querySelectorAll(".shop-purchase")].every((button) => button.disabled),
+          stock: [...main.querySelectorAll(".shop-stock")].map((element) => element.textContent.trim()),
         };
       });
-      assert.equal(shop.background, "rgb(255, 255, 255)", "Shop has a white background");
-      assert.equal(shop.backgroundImage, "none", "Shop has no background image");
-      assert.equal(shop.headingColor, "rgb(10, 10, 10)", "Shop message is black");
-      assert.equal(shop.headingText, path.startsWith("/he/") ? "חנות WIFIGATE תיפתח בקרוב." : "WIFIGATE Shop is coming soon.");
-      if (width >= 700) assert.ok(shop.headingLines < 1.2, "Shop message stays on one line on desktop");
-      assert.equal(shop.headingAnimation, "shop-message-enter", "Shop message has an entrance animation");
-      assert.equal(shop.paragraphs, 0, "Shop has one short message");
-      assert.equal(shop.buttonBackground, "rgb(10, 10, 10)", "Back button is black");
-      assert.equal(shop.buttonColor, "rgb(255, 255, 255)", "Back button text is white");
+      assert.ok(shop.headingText, "Shop has a clear catalog heading");
+      assert.equal(shop.cards, 2, "Shop presents the two WIFIGATE products");
+      assert.equal(shop.unavailable, true, "Unavailable products cannot be purchased");
+      assert.ok(shop.stock.length >= 2);
+      shop.stock.forEach((status) => assert.match(status, path.startsWith("/he/") ? /אזל מהמלאי/ : /Out of stock/i));
     }
     const header = await page.evaluate(() => {
       const nav = document.querySelector(".site-header");

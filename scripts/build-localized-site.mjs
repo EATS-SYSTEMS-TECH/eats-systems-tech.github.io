@@ -21,6 +21,7 @@ import { buildLoginPages } from "./login-pages.mjs";
 import { BRAND_ID, ORGANIZATION_ID, SITE_ORIGIN, breadcrumbNode, faqNode, hreflangCode, setPageMeta, webPageNode } from "./seo.mjs";
 import { readSceneManifest, applyNicheSceneMedia, applyHomeSceneMedia } from "./scene-media.mjs";
 import { applyMediaWatermarks } from "./media-watermark.mjs";
+import { SHOP_PAGE_KEYS, getShopPageContent } from "./shop-pages.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = SITE_ORIGIN;
@@ -190,7 +191,7 @@ function getOutputSegments(locale, pageKey = "home") {
   }
 
   if (pageKey !== "home") {
-    segments.push(pageKey);
+    segments.push(...pageKey.split("/"));
   }
 
   return segments;
@@ -1131,29 +1132,28 @@ async function buildHomePages(homeData) {
 async function buildShopPages(homeData) {
   const template = await readHtmlTemplate(shopTemplatePath);
   for (const { code: locale } of homeData.localeOptions) {
-    const $ = cheerio.load(template, { decodeEntities: false });
-    setBodyDirection($, locale);
-    rewriteStaticAssets($, locale, "shop");
-    updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer);
-    updateAccessibilityMarkup($, getBundle(homeData.accessibilityCopy, locale), locale);
-    rewriteFooterLegalLinks($, locale);
-    const he = locale === "he";
-    const title = he ? "החנות של WIFIGATE — בקרוב" : "WIFIGATE Shop — Coming soon";
-    const description = he ? "החנות המקוונת של WIFIGATE תיפתח בקרוב." : "The WIFIGATE online shop is coming soon.";
-    $("title").text(title);
-    $("meta[name='description']").attr("content", description);
-    $("link[rel='canonical']").attr("href", buildPageUrl(locale, "shop"));
-    $(".shop-main__content").attr({ lang: he ? "he" : "en", dir: he ? "rtl" : "ltr" });
-    if (he) {
-      $(".shop-main h1").text("חנות WIFIGATE תיפתח בקרוב.");
-      $(".shop-main__reserve").text("כבר עכשיו אפשר להזמין מערכות מחשבון WIFIGATE.");
-      $("[data-reservations]").text("להזמנת מערכות");
-      $("[data-home]").text("חזרה ל WIFIGATE");
+    for (const pageKey of SHOP_PAGE_KEYS) {
+      const $ = cheerio.load(template, { decodeEntities: false });
+      const productId = pageKey.startsWith("shop/") ? pageKey.slice("shop/".length) : null;
+      const content = getShopPageContent(locale, productId);
+      $(".shop-main__content").attr({ lang: content.contentLang, dir: content.contentLang === "he" ? "rtl" : "ltr" }).html(content.main);
+      $(".shop-main, .shop-product-detail").attr({ lang: content.contentLang, dir: content.contentLang === "he" ? "rtl" : "ltr" });
+      setBodyDirection($, locale);
+      rewriteStaticAssets($, locale, pageKey);
+      updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer);
+      updateAccessibilityMarkup($, getBundle(homeData.accessibilityCopy, locale), locale);
+      rewriteFooterLegalLinks($, locale);
+      const url = buildPageUrl(locale, pageKey);
+      const crumbs = [{ name: locale === "he" ? "בית" : "Home", url: buildPageUrl(locale, "home") }, { name: locale === "he" ? "חנות" : "Shop", url: buildPageUrl(locale, "shop") }];
+      if (content.product) crumbs.push({ name: content.product.name, url });
+      const image = content.product?.image ? { url: `${siteOrigin}${content.product.image}`, width: 1254, height: 1254, alt: content.product.name } : undefined;
+      setPageMeta($, {
+        url, title: content.title, description: content.description, locale,
+        robots: "noindex, follow", alternates: alternatesFor(homeData.localeOptions, pageKey), image,
+        graph: [webPageNode({ url, title: content.title, description: content.description, locale: content.contentLang, image, breadcrumbId: `${url}#breadcrumb` }), breadcrumbNode(url, crumbs)],
+      });
+      await writeOutputFile(buildOutputFilePath(locale, pageKey), serialize($, homeData, locale, pageKey));
     }
-    // WIFIGATE Reservations exists in Hebrew and English (?lang=he).
-    $("[data-reservations]").attr("href", he ? "/reservations/?lang=he" : "/reservations/");
-    $("[data-home]").attr("href", buildPagePath(locale, "home"));
-    await writeOutputFile(buildOutputFilePath(locale, "shop"), serialize($, homeData, locale, "shop"));
   }
 }
 
