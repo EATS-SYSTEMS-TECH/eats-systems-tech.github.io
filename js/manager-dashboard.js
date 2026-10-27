@@ -219,6 +219,30 @@ export function createManagerDashboard({
         "אין תקשורת עם המערכת.",
         "No communication with the system.",
       ),
+      CREDENTIAL_REVOKED: t(
+        "השער דחה את הרשאת Manager השמורה בו. סנכרון פרטי המערכת אינו מחדש הרשאה זו. נדרש חידוש הקישור דרך מנהל מקומי באפליקציה ליד המערכת.",
+        "The gate rejected its saved Manager authorization. Syncing system details does not renew that authorization. A local administrator must renew the link in the app near the system.",
+      ),
+      CREDENTIAL_UNKNOWN: t(
+        "השער לא זיהה הרשאת Manager תקפה. נדרש חידוש הקישור באפליקציה ליד המערכת עם הרשאת מנהל מקומי.",
+        "The gate did not recognize a valid Manager authorization. Renew the link in the app near the system with local administrator access.",
+      ),
+      KEY_MISMATCH: t(
+        "הזהות המאובטחת של השער השתנתה. יש לאמת את המערכת מחדש באפליקציה ליד השער.",
+        "The gate's secure identity changed. Verify the system again in the app near the gate.",
+      ),
+      SYSTEM_MISMATCH: t(
+        "החיבור הגיע למערכת אחרת. בדקו את המערכת שיוצאה מהאפליקציה.",
+        "The connection reached a different system. Check which system was exported from the app.",
+      ),
+      VERSION_UNSUPPORTED: t(
+        "גרסת השער אינה תואמת לחיבור. יש לעדכן את האפליקציה ואת קושחת המערכת.",
+        "The gate version is incompatible. Update the app and system firmware.",
+      ),
+      GATE_AUTHENTICATION_FAILED: t(
+        "השער לא אישר את החיבור המאובטח. בדקו את הרשאת המנהל המקומי באפליקציה.",
+        "The gate did not approve the secure connection. Check local administrator access in the app.",
+      ),
       BUSY: t(
         "המערכת בשימוש. נסו שוב לאחר סיום הניהול הנוכחי.",
         "The system is in use. Try after the current session ends.",
@@ -958,33 +982,42 @@ export function createManagerDashboard({
           "manager-muted",
         ),
       );
-      const actions = node("div", undefined, "manager-system-actions");
-      if (s.accessNote)
-        actions.append(
-          button(t("פרטי גישה", "Access Note"), () =>
-            dialogs.info({
-              title: t("פרטי גישה", "Access Note") + " · " + s.name,
-              content: accessNoteContent(s.accessNote, language),
-            }),
-          ),
-        );
+      const actions = systemActions(s, operatorAccount);
+      card.append(actions);
+      grid.append(card);
+    }
+    view.append(grid);
+    if (!scope && !operatorAccount) examples.renderCards(view);
+    say("");
+  }
+  function systemActions(s, operatorAccount = null, workspace = false) {
+    const actions = node("div", undefined, "manager-system-actions");
+    const secondary = node("div", undefined, "manager-system-options");
+    if (s.accessNote)
+      secondary.append(
+        button(t("פרטי גישה", "Access Note"), () =>
+          dialogs.info({
+            title: t("פרטי גישה", "Access Note") + " · " + s.name,
+            content: accessNoteContent(s.accessNote, language),
+          }),
+        ),
+      );
 
-      if (!operatorAccount)
-        actions.append(
-          button(
-            t("פתיחת סביבת ניהול", "Open workspace"),
-            () => openSystem(s),
-            true,
-          ),
-        );
-      if (profile.account)
-        actions.append(
-          button(t("שיוך לארגון", "Assign organization"), () =>
-            assignSystem(s),
-          ),
-        );
-      if (profile.account || operatorAccount) {
-        actions.append(
+    if (!operatorAccount && !workspace)
+      actions.append(
+        button(
+          t("פתיחת סביבת ניהול", "Open workspace"),
+          () => openSystem(s),
+          true,
+        ),
+      );
+    if (profile.account && !operatorAccount)
+      secondary.append(
+        button(t("שיוך לארגון", "Assign organization"), () => assignSystem(s)),
+      );
+    if (profile.account || operatorAccount) {
+      secondary.append(
+        Object.assign(
           button(t("ניתוק מ־Manager", "Disconnect from Manager"), async () => {
             if (
               !(await confirmAction(
@@ -1020,14 +1053,34 @@ export function createManagerDashboard({
               );
             say(messages.join(" "));
           }),
-        );
-      }
-      card.append(actions);
-      grid.append(card);
+          { className: "manager-button manager-button-danger" },
+        ),
+      );
     }
-    view.append(grid);
-    if (!scope && !operatorAccount) examples.renderCards(view);
-    say("");
+    if ((workspace || operatorAccount) && secondary.childElementCount) {
+      const menu = node("details", undefined, "manager-system-menu");
+      menu.name = "manager-system-options";
+      const trigger = node("summary");
+      trigger.setAttribute(
+        "aria-label",
+        t("פעולות מערכת", "System actions") + " · " + s.name,
+      );
+      trigger.title = t("פעולות מערכת", "System actions");
+      trigger.innerHTML =
+        '<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>';
+      secondary.addEventListener("click", (event) => {
+        if (event.target.closest("button")) menu.open = false;
+      });
+      menu.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          menu.open = false;
+          trigger.focus();
+        }
+      });
+      menu.append(trigger, secondary);
+      actions.append(menu);
+    }
+    return actions;
   }
   async function assignSystem(system) {
     stop();
@@ -1468,6 +1521,7 @@ export function createManagerDashboard({
       node("h3", system.name),
       button(t("סיום וחזרה", "End and return"), () => showSystems(scope)),
     );
+    head.append(systemActions(system, null, true));
     view.append(head);
     focusView();
     if (system.systemIds.length > 1) {

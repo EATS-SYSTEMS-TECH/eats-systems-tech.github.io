@@ -1091,7 +1091,7 @@
 .manager-create-organization-form .manager-confirm-actions { margin-top: 4px; }
 .manager-create-organization-form .manager-dialog-error { color: #b42318; }
 
-.manager-access-note { display: grid; gap: 16px; margin-top: 16px; }
+.manager-access-note { display: grid; gap: 16px; margin-top: 18px; min-width: 0; }
 .manager-access-note section, .manager-access-note > dl { margin: 0; padding: 16px; border: 1px solid #ffdec5; border-radius: 12px; background: #fff8f2; }
 .manager-access-note h3 { margin: 0 0 12px; font-size: 15px; color: #9a3412; }
 .manager-access-note dl { margin: 0; display: grid; gap: 12px; }
@@ -1099,6 +1099,32 @@
 .manager-access-note dt { color: #64748b; font-size: 12px; }
 .manager-access-note dd { margin: 0; overflow-wrap: anywhere; white-space: pre-wrap; }
 .manager-access-note p { white-space: pre-wrap; }
+.manager-access-note section { border-color: #e3e9f0; background: #fff; border-radius: 18px; padding: 20px; }
+.manager-access-provider { display: flex; align-items: center; gap: 14px; background: linear-gradient(120deg, #fff6ee, #fff) !important; }
+.manager-access-avatar { flex: 0 0 46px; width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; background: #ffeadb; color: #a53d11; font-size: 20px; font-weight: 700; }
+.manager-access-provider > div { display: grid; gap: 5px; min-width: 0; }
+.manager-access-provider span:not(.manager-access-avatar), .manager-access-address > span { color: #62748b; font-size: 12px; }
+.manager-access-provider strong { color: #182d48; font-size: 19px; overflow-wrap: anywhere; }
+.manager-access-note .manager-access-instructions h3, .manager-access-note .manager-access-arrival h3 { color: #182d48; font-size: 15px; margin-bottom: 16px; }
+.manager-access-instructions p { margin: 0; color: #334963; font-size: 16px; line-height: 1.9; overflow-wrap: anywhere; }
+.manager-access-address { display: grid; gap: 6px; margin-bottom: 18px; }
+.manager-access-address p { margin: 0; font-size: 15px; color: #182d48; line-height: 1.7; overflow-wrap: anywhere; }
+.manager-access-note .manager-access-metrics { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
+.manager-access-metrics .manager-access-note-row { padding: 12px 8px; border: 1px solid #e6ebf2; background: #f8fafc; border-radius: 12px; text-align: center; align-content: start; }
+.manager-access-metrics dd { color: #182d48; font-size: 20px; font-weight: 700; }
+.manager-access-navigation { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.manager-access-navigation a { display: inline-flex; flex: 1 1 130px; align-items: center; justify-content: center; gap: 9px; min-height: 48px; padding: 10px 12px; box-sizing: border-box; border: 1px solid #dce5ef; border-radius: 12px; background: #fff; color: #182d48; text-decoration: none; font-weight: 600; font-size: 13px; }
+.manager-access-navigation a:hover { background: #f1f5f9; border-color: #9caec5; }
+.manager-access-navigation a:focus-visible { outline: 3px solid #ed8b41; outline-offset: 3px; }
+.manager-system-menu { position: relative; margin-inline-start: auto; }
+.manager-system-menu summary { list-style: none; display: grid; place-items: center; min-width: 44px; min-height: 44px; color: #526781; background: #fff; border: 1px solid #dce5ef; border-radius: 11px; cursor: pointer; }
+.manager-system-menu summary::-webkit-details-marker { display: none; }
+.manager-system-menu summary:hover, .manager-system-menu[open] summary { color: #a53d11; background: #fff1e6; border-color: #f0c6a4; }
+.manager-system-menu summary:focus-visible { outline: 3px solid #ed8b41; outline-offset: 3px; }
+.manager-system-options { position: absolute; inset-inline-end: 0; top: calc(100% + 8px); display: grid; gap: 5px; min-width: min(240px,calc(100vw - 64px)); padding: 8px; border: 1px solid #dce5ef; border-radius: 14px; background: #fff; box-shadow: 0 14px 40px #182d4826; z-index: 30; }
+.manager-system-options .manager-button { width: 100%; margin: 0; text-align: start; background: #fff; color: #243b58; justify-content: start; }
+.manager-workspace-head .manager-system-actions { padding: 0; margin: 0; border: 0; }
+.manager-system-options .manager-button-danger { color: #b42318; }
 
 /* One platform area, five short navigation entries and four actionable summaries. */
 .manager-platform-header { padding: 24px; background: #fff; box-shadow: 0 4px 20px #182d4806; }

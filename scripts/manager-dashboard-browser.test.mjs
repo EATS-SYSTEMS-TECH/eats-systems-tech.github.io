@@ -288,6 +288,9 @@ test("Manager workspace supports English/Hebrew desktop/mobile, organizations an
         assert.equal(await icon.getAttribute("src"), "/assets/host-icons/gate-cantilever-gate-small.svg");
         await icon.evaluate(image => image.decode());
         assert.equal(await icon.getAttribute("alt"), "");
+        assert.equal(await page.locator(".manager-system .manager-system-actions button").count(), 1);
+        await page.getByRole("button", { name: he ? "פתיחת סביבת ניהול" : "Open workspace", exact: true }).click();
+        await page.locator(".manager-system-menu summary").click();
         await page.getByRole("button", { name: he ? "פרטי גישה" : "Access Note", exact: true }).click();
         const noteDialog = page.getByRole("dialog");
         assert.match(await noteDialog.innerText(), /Acme/);
@@ -295,15 +298,10 @@ test("Manager workspace supports English/Hebrew desktop/mobile, organizations an
         assert.match(await noteDialog.innerText(), /P-2/);
         assert.match(await noteDialog.innerText(), /East entrance <script>bad\(\)<\/script>/);
         assert.equal(await noteDialog.locator("script").count(), 0);
-        assert.match(await noteDialog.locator("a").getAttribute("href"), /query=0%2C0$/);
+        assert.match(await noteDialog.locator("a").first().getAttribute("href"), /query=0%2C0$/);
+        assert.equal(await noteDialog.locator(".manager-access-navigation img").count(), 2);
         await noteDialog.getByRole("button", { name: he ? "סגירה" : "Close", exact: true }).click();
 
-        await page
-          .getByRole("button", {
-            name: he ? "פתיחת סביבת ניהול" : "Open workspace",
-            exact: true,
-          })
-          .click();
         await page
           .getByRole("button", {
             name: he ? "פתיחת שער" : "Open gate",

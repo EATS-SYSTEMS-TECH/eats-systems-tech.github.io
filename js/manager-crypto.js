@@ -240,6 +240,19 @@ export async function managerHandshake({
 }
 
 export async function completeManagerHandshake(state, envelope) {
+  // Refusals are plaintext gate-message numbers, never a successful handshake.
+  // Preserve only known public codes so the UI can explain how to recover.
+  if (envelope?.type === "server_busy") throw new Error("BUSY");
+  if (envelope?.type === "hello_error") {
+    const code = new Map([
+      [6, "KEY_MISMATCH"],
+      [8, "SYSTEM_MISMATCH"],
+      [10, "VERSION_UNSUPPORTED"],
+      [202, "CREDENTIAL_REVOKED"],
+      [203, "CREDENTIAL_UNKNOWN"],
+    ]).get(envelope.reason);
+    throw new Error(code ?? "GATE_AUTHENTICATION_FAILED");
+  }
   const {
     identity,
     sessionId,

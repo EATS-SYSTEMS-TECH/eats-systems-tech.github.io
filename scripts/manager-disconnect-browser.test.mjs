@@ -27,7 +27,7 @@ test("platform Manager admin can browse customer metadata and deliberately disco
             await import("/js/manager-dashboard.js");
           const api = async (path, method, body) => {
             if (path === "/me")
-              return { role: "admin", account: null, organizations: [] };
+              return { role: "admin", account: {id:"operator-personal"}, organizations: [] };
             if (path === "/admin/overview")
               return {
                 admins: 1,
@@ -151,7 +151,11 @@ test("platform Manager admin can browse customer metadata and deliberately disco
           name: he ? "ניתוק מ־Manager" : "Disconnect from Manager",
           exact: true,
         });
+        await page.locator(".manager-system-menu summary").click();
         await disconnect.waitFor();
+        assert.equal(await page.getByRole("button", {name:he ? "שיוך לארגון" : "Assign organization",exact:true}).count(),0);
+        const menu = await page.locator(".manager-system-options").boundingBox();
+        assert.ok(menu.x >= 0 && menu.x + menu.width <= width, "open actions menu stays in the viewport");
         assert.equal(
           await page
             .getByRole("button", {
@@ -167,6 +171,7 @@ test("platform Manager admin can browse customer metadata and deliberately disco
           .getByRole("button", { name: he ? "ביטול" : "Cancel", exact: true })
           .click();
         assert.equal(await page.evaluate(() => window.removals.length), 0);
+        await page.locator(".manager-system-menu summary").click();
         await disconnect.click();
         assert.match(await page.getByRole("dialog").innerText(), /Bluetooth/);
         await page

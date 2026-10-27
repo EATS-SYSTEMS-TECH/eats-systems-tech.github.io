@@ -35,6 +35,27 @@ const vectors = JSON.parse(
 const { inputs: i, expected: e } = vectors;
 const b = (v) => Buffer.from(v, "hex");
 const info = (label) => `${label}-v4|${i.systemId}|${i.sessionId}|${i.keyId}`;
+test("Manager preserves gate refusal codes without accepting a handshake or untrusted error text", async () => {
+  for (const [reason, code] of [
+    [6, "KEY_MISMATCH"],
+    [8, "SYSTEM_MISMATCH"],
+    [10, "VERSION_UNSUPPORTED"],
+    [202, "CREDENTIAL_REVOKED"],
+    [203, "CREDENTIAL_UNKNOWN"],
+    [999, "GATE_AUTHENTICATION_FAILED"],
+  ]) {
+    await assert.rejects(
+      completeManagerHandshake(
+        {},
+        { type: "hello_error", reason, message: "untrusted text" },
+      ),
+      { message: code },
+    );
+  }
+  await assert.rejects(completeManagerHandshake({}, { type: "server_busy" }), {
+    message: "BUSY",
+  });
+});
 test("Manager Bulk v1 header, nonce and authenticated metadata match independent Node crypto", async () => {
   const session = {
     systemId: i.systemId,

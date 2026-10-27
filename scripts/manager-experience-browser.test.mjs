@@ -347,7 +347,7 @@ async function gateFixture(t, browser, origin) {
             this.onState("active");
             resolve();
           };
-          this.fail = () => reject(new Error("NO_COMMUNICATION"));
+          this.fail = (code = "NO_COMMUNICATION") => reject(new Error(code));
           this.cancel = () => reject(new Error("CANCELLED"));
         });
       }
@@ -377,6 +377,7 @@ async function gateFixture(t, browser, origin) {
                 systemIds: ["synthetic-gate"],
                 status: "active",
                 version: 1,
+                accessNote: {residentName:"Example Resident",note:"Have a good day ;)",address:"123 Example Avenue, Example City",floorNumber:"0"},
               },
             ],
             nextCursor: null,
@@ -464,4 +465,22 @@ test("failed and cancelled connections stop their spinners and offer recovery wi
   assert.equal(await page.locator(".manager-progress").isHidden(), true);
   assert.equal(await page.locator(".manager-connection-panel").count(), 0);
   assert.deepEqual(await page.evaluate(() => window.commands), []);
+});
+
+test("a revoked local Manager authorization explains the failure and keeps metadata actions available without a live gate", async t=>{
+  const {origin,browser}=await startSite(t);
+  const page=await gateFixture(t,browser,origin);
+  await page.getByRole('button',{name:'פתיחת סביבת ניהול',exact:true}).click();
+  await page.locator('.manager-connection-panel[data-state="waiting"]').waitFor();
+  await page.evaluate(()=>window.connections[0].fail('CREDENTIAL_REVOKED'));
+  const failure=page.locator('.manager-connection-panel[data-state="error"]');await failure.waitFor();
+  assert.match(await failure.innerText(),/השער דחה את הרשאת Manager/);
+  await page.locator('.manager-system-menu summary').click();
+  await page.getByRole('button',{name:'פרטי גישה',exact:true}).click();
+  assert.match(await page.getByRole('dialog').innerText(),/Example Resident/);
+  await page.getByRole('dialog').getByRole('button',{name:'סגירה',exact:true}).click();
+  await page.locator('.manager-system-menu summary').click();
+  await page.locator('.manager-system-menu summary').press('Escape');
+  assert.equal(await page.locator('.manager-system-menu').getAttribute('open'),null);
+  assert.deepEqual(await page.evaluate(()=>window.commands),[]);
 });

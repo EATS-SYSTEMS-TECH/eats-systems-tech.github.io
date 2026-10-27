@@ -15,7 +15,7 @@
     "test:staging": "npm run build:api && node scripts/run-staging-tests.mjs",
     "test:health": "node --test scripts/host-service-health.test.mjs",
     "test:login": "node scripts/build-api.mjs && node --test scripts/login-attempts.test.mjs scripts/login-attempts-browser.test.mjs scripts/login-pages.test.mjs scripts/site-auth-mfa-browser.test.mjs",
-    "test:manager": "node --test scripts/manager-icons.test.mjs scripts/manager-deployment.test.mjs scripts/manager-dialog-browser.test.mjs scripts/manager-crypto.test.mjs scripts/manager-connection.test.mjs scripts/manager-session-renewal-browser.test.mjs scripts/manager-csv.test.mjs scripts/manager-dashboard-browser.test.mjs scripts/manager-directory-browser.test.mjs scripts/manager-auth-browser.test.mjs scripts/manager-disconnect-browser.test.mjs scripts/manager-example-data.test.mjs scripts/manager-examples-browser.test.mjs scripts/manager-experience-browser.test.mjs"
+    "test:manager": "node --test scripts/manager-icons.test.mjs scripts/manager-deployment.test.mjs scripts/manager-dialog-browser.test.mjs scripts/manager-crypto.test.mjs scripts/manager-connection.test.mjs scripts/manager-session-renewal-browser.test.mjs scripts/manager-csv.test.mjs scripts/manager-dashboard-browser.test.mjs scripts/manager-directory-browser.test.mjs scripts/manager-auth-browser.test.mjs scripts/manager-disconnect-browser.test.mjs scripts/manager-example-data.test.mjs scripts/manager-examples-browser.test.mjs scripts/manager-experience-browser.test.mjs scripts/manager-access-note-browser.test.mjs"
   },
   "devDependencies": {
     "cheerio": "^1.2.0",
