@@ -8,6 +8,7 @@ import {
   formatMoney,
 } from "./profile-financials.js";
 import { productLink } from "./product-switcher.js";
+import { createPlatformAccountDeletion } from "./platform-account-deletion.js";
 import { createPlatformAccountActions } from "./platform-account-actions.js";
 
 const element = (tag, text, className) => {
@@ -87,7 +88,7 @@ export function createPlatformAdminDirectory({
       button.dataset.product = id;
       const label = element("span", nameFor(id), "platform-admin-product-name");
       label.dir = "ltr";
-      const count = element("strong", "—", "platform-admin-product-count");
+      const count = element("strong", t("לא זמין", "Unavailable"), "platform-admin-product-count");
       button.append(
         label,
         count,
@@ -131,6 +132,13 @@ export function createPlatformAdminDirectory({
   listToolbar.append(listHeading);
   const actionStatus = element("p");
   actionStatus.setAttribute("role", "status");
+  const changed = message => {
+    actionStatus.textContent = message;
+    productCounts = {};
+    void load();
+  };
+  const deletions = standalone && product === "all" && ensureRecent
+    ? createPlatformAccountDeletion({user,language,ensureRecent,onChanged:changed}) : null;
   const actions =
     standalone && product === "all"
       ? createPlatformAccountActions({
@@ -155,7 +163,7 @@ export function createPlatformAdminDirectory({
     listToolbar.append(invite);
   }
   const revenue = element("section", null, "platform-admin-revenue");
-  const revenueValue = element("strong", "—");
+  const revenueValue = element("strong", t("לא זמין", "Unavailable"));
   const revenueStatus = element("p");
   revenueStatus.setAttribute("role", "status");
   revenue.append(
@@ -177,8 +185,8 @@ export function createPlatformAdminDirectory({
   const footnote = element(
     "p",
     t(
-      "הסכומים הם אומדנים לפני מס. — מציין נתון שאינו זמין; נתוני הכנסות Pay עדיין אינם מאומתים.",
-      "Amounts are estimates before tax. — means unavailable; Pay revenue data is not verified yet.",
+      "הסכומים הם אומדנים לפני מס. כשחסרים נתונים מוצג ״לא זמין״. נתוני הכנסות Pay עדיין אינם מאומתים.",
+      "Amounts are estimates before tax. Missing data is marked Unavailable. Pay revenue data is not verified yet.",
     ),
     "platform-admin-footnote",
   );
@@ -214,10 +222,11 @@ export function createPlatformAdminDirectory({
       const value = productCounts[id];
       button.querySelector("strong").textContent = Number.isInteger(value)
         ? String(value)
-        : "—";
+        : t("לא זמין", "Unavailable");
+      button.querySelector("strong").classList.toggle("platform-admin-unavailable", !Number.isInteger(value));
       button.setAttribute(
         "aria-label",
-        `${nameFor(id)} · ${Number.isInteger(value) ? value : "—"} ${t("חשבונות עם גישה", "provisioned accounts")}`,
+        `${nameFor(id)} · ${Number.isInteger(value) ? value : t("לא זמין", "Unavailable")} ${t("חשבונות עם גישה", "provisioned accounts")}`,
       );
     }
     if (selectedProduct === "all") {
@@ -270,13 +279,25 @@ export function createPlatformAdminDirectory({
     const price = element("span", null, "platform-admin-person-price");
     const value = element(
       "strong",
-      person.identityStatus === "verified" ? total : "—",
+      person.identityStatus === "verified" ? total : t("לא זמין", "Unavailable"),
     );
     value.dir = "auto";
     price.append(element("small", t("אומדן לחודש", "Monthly estimate")), value);
     const chevron = element("span", "⌄", "platform-admin-chevron");
     chevron.setAttribute("aria-hidden", "true");
-    summary.append(avatar, identity, badge, price, chevron);
+    summary.append(avatar, identity, badge, price);
+    if (deletions) {
+      const remove = element("button", null, "platform-admin-delete");
+      remove.type = "button";
+      const self = person.email.toLowerCase() === user.email?.toLowerCase();
+      remove.disabled = self;
+      remove.setAttribute("aria-label", t("מחיקת חשבון לצמיתות: ", "Permanently delete account: ") + person.email);
+      remove.title = self ? t("אי אפשר למחוק את החשבון שממנו אתם מנהלים", "You cannot delete your own administrator account here") : t("מחיקת חשבון לצמיתות", "Permanently delete account");
+      remove.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M9 6V4h6v2M5 6l1 15h12l1-15M10 10v7m4-7v7"/></svg>';
+      remove.addEventListener("click", event => {event.preventDefault();event.stopPropagation();if (!self) deletions.open(person);});
+      summary.append(remove);
+    }
+    summary.append(chevron);
     card.append(summary);
     const content = element("div", null, "platform-admin-person-content");
     card.append(content);
@@ -376,7 +397,7 @@ export function createPlatformAdminDirectory({
       row.append(accessCell);
       const quantity = element(
         "td",
-        estimate ? String(estimate.physicalGates) : "—",
+        estimate ? String(estimate.physicalGates) : t("לא זמין", "Unavailable"),
       );
       quantity.dataset.label = t("שערים לחיוב", "Billable physical gates");
       row.append(quantity);
@@ -403,7 +424,7 @@ export function createPlatformAdminDirectory({
         const tile = element("div");
         tile.append(
           element("span", label),
-          element("strong", String(count ?? "—")),
+          element("strong", String(count ?? t("לא זמין", "Unavailable")), count == null ? "platform-admin-unavailable" : null),
         );
         return tile;
       }),
@@ -413,7 +434,8 @@ export function createPlatformAdminDirectory({
   async function loadFinancials() {
     const epoch = ++financialGeneration;
     revenue.setAttribute("aria-busy", "true");
-    revenueValue.textContent = "—";
+    revenueValue.textContent = t("לא זמין", "Unavailable");
+    revenueValue.classList.add("platform-admin-unavailable");
     revenueStatus.textContent = t(
       "מחשב אומדן לכל החשבונות בסינון…",
       "Calculating the estimate for every matching account…",
@@ -431,7 +453,8 @@ export function createPlatformAdminDirectory({
             formatMoney(value.amountCents, value.currency, language),
           )
           .join(" + ") || formatMoney(0, "USD", language);
-      revenueValue.textContent = data.complete ? total : "—";
+      revenueValue.textContent = data.complete ? total : t("לא זמין", "Unavailable");
+      revenueValue.classList.toggle("platform-admin-unavailable", !data.complete);
       revenueStatus.textContent = data.unknownAccounts
         ? t(
             `סכום ידוע: ${total}. חסרים נתונים עבור ${data.unknownAccounts} חשבונות.`,
@@ -530,6 +553,7 @@ export function createPlatformAdminDirectory({
       generation++;
       financialGeneration++;
       actions?.close();
+      deletions?.close();
       root.replaceChildren();
       root.hidden = true;
     },

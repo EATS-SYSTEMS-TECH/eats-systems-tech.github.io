@@ -338,7 +338,7 @@ test("incomplete revenue is never shown as a full total and retry keeps the same
   await page.locator('.platform-admin-revenue[aria-busy="false"]').waitFor();
   assert.equal(
     await page.locator(".platform-admin-revenue > strong").textContent(),
-    "—",
+    "Unavailable",
   );
   assert.match(
     await page.locator(".platform-admin-revenue p").textContent(),

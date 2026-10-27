@@ -1072,6 +1072,8 @@ html[dir="rtl"] .product-switcher__label strong {
 .platform-page .platform-admin-management .platform-admin-product-filter[aria-pressed="true"] { background: #edf4ff; border-color: #477ec9; box-shadow: inset 0 0 0 1px #477ec9; }
 .platform-admin-product-name { font-size: .9rem; font-weight: 650; overflow-wrap: anywhere; }
 .platform-admin-product-count { font-size: 1.7rem; font-variant-numeric: tabular-nums; }
+.platform-admin-counts strong, .platform-admin-product-count, .platform-admin-revenue > strong { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+.platform-admin-management .platform-admin-unavailable { font-size: 1rem; font-weight: 600; line-height: 1.5; }
 .platform-admin-product-filter small { color: var(--muted); font-size: .78rem; }
 .platform-admin-product-filter:focus-visible, .platform-admin-product-reset:focus-visible { outline: 3px solid #397cf3; outline-offset: 4px; }
 .platform-admin-list-hint { color: var(--muted); margin: -.35rem 0 1rem; font-size: .88rem; }
@@ -1082,9 +1084,19 @@ html[dir="rtl"] .product-switcher__label strong {
 .platform-admin-people { display: grid; gap: .7rem; margin-block: 1rem; }
 .platform-admin-person { border: 1px solid #e3e9f1; border-radius: 14px; padding: 0; background: #fff; }
 .platform-admin-person[open] { border-color: #bacbe2; }
-.platform-admin-person-summary { list-style: none; display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto auto; align-items: center; gap: 1rem; padding: 1.05rem; cursor: pointer; border-radius: 14px; }
+.platform-admin-person-summary { list-style: none; display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto auto auto; align-items: center; gap: 1rem; padding: 1.05rem; cursor: pointer; border-radius: 14px; }
 .platform-admin-person-summary::-webkit-details-marker { display: none; }
-.platform-admin-person-summary:hover { background: #f8fafc; }
+.platform-admin-person-summary:is(:hover, :focus-visible, :focus-within) { background: #111827; color: #fff; }
+.platform-admin-person-summary:is(:hover, :focus-visible, :focus-within) :is(strong, .platform-admin-person-identity > span, .platform-admin-person-price small, .platform-admin-chevron) { color: #fff; }
+.platform-admin-person-summary:not(:has(.platform-admin-delete)) { grid-template-columns: auto minmax(0, 1fr) auto auto auto; }
+.platform-admin-person-summary:is(:hover, :focus-visible, :focus-within) :is(.platform-admin-role, .platform-admin-avatar) { color: #fff; background: #ffffff21; }
+.platform-page .portal-panel .platform-admin-person-summary .platform-admin-delete { display: grid; place-items: center; min-height: 44px; min-width: 44px; padding: .5rem; border: 1px solid #f2c8c6; border-radius: 10px; color: #b42318; background: #fff5f4; cursor: pointer; }
+.platform-page .portal-panel .platform-admin-person-summary .platform-admin-delete:hover:not(:disabled) { color: #fff; background: #b42318; border-color: #b42318; filter: none; }
+.platform-admin-delete:focus-visible { outline: 3px solid #ef635c; outline-offset: 3px; }
+.platform-admin-delete:disabled { opacity: .4; cursor: not-allowed; }
+.platform-account-delete-dialog .platform-delete-warning { color: #98251b; background: #fff3f1; border: 1px solid #f0c4bf; border-radius: 10px; padding: .9rem; }
+.platform-account-delete-dialog .platform-delete-target { color: #18243a; font-weight: 700; }
+.platform-account-delete-dialog .platform-access-buttons { flex-wrap: wrap; }
 .platform-admin-avatar { width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; color: #45618b; background: #edf3fb; font-size: 1rem; font-weight: 700; }
 .platform-admin-person-identity { display: grid; gap: .25rem; min-width: 0; }
 .platform-admin-person-identity strong { font-size: .94rem; font-weight: 650; }
@@ -1136,9 +1148,11 @@ html[dir="rtl"] .product-switcher__label strong {
   .platform-admin-product-count { font-size: 1.5rem; }
   .platform-admin-product-filter small { font-size: .7rem; }
   .platform-admin-person-summary { grid-template-columns: auto minmax(0, 1fr) auto; gap: .65rem; padding: .9rem; }
+  .platform-admin-person-summary:not(:has(.platform-admin-delete)) { grid-template-columns: auto minmax(0, 1fr) auto; }
   .platform-admin-role { grid-column: 2; grid-row: 2; justify-self: start; }
   .platform-admin-person-price { grid-column: 2; grid-row: 3; text-align: start; min-width: 0; display: flex; align-items: center; gap: .6rem; }
-  .platform-admin-person-summary > .platform-admin-chevron { grid-column: 3; grid-row: 1 / 4; }
+  .platform-admin-person-summary > .platform-admin-chevron { grid-column: 3; grid-row: 3; }
+  .platform-admin-person-summary > .platform-admin-delete { grid-column: 3; grid-row: 1 / 3; align-self: start; }
   .platform-admin-person-summary > .platform-admin-avatar { grid-row: 1 / 4; align-self: start; }
   .platform-admin-filters { width: 100%; }
   .platform-admin-management .platform-admin-filters .platform-button { flex: 1; padding-inline: .4rem; font-size: .74rem; }

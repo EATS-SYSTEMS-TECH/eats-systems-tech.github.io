@@ -282,7 +282,7 @@ test("Pay management requests only Pay and shows unavailable billing without a f
   await root.locator(".platform-admin-person").waitFor();
   assert.equal(product, "pay");
   assert.equal(await root.locator("tbody tr").count(), 1);
-  assert.match(await root.locator("tbody").textContent(), /—/);
+  assert.match(await root.locator("tbody").textContent(), /Unavailable/);
   assert.doesNotMatch(await root.locator("tbody").textContent(), /0\.00/);
 });
 
@@ -563,7 +563,7 @@ test("a failed product filter shows unavailable counts and can return to the ove
   await page.locator(".platform-admin-person").waitFor();
   assert.deepEqual(
     await page.locator(".platform-admin-product-count").allTextContents(),
-    ["—", "—", "—"],
+    ["Unavailable", "Unavailable", "Unavailable"],
     "missing product totals are never shown as zero",
   );
   await page.locator('.platform-admin-business [data-product="host"]').click();
@@ -574,7 +574,7 @@ test("a failed product filter shows unavailable counts and can return to the ove
     .waitFor();
   assert.deepEqual(
     await page.locator(".platform-admin-counts strong").allTextContents(),
-    ["—", "—", "—"],
+    ["Unavailable", "Unavailable", "Unavailable"],
   );
   assert.equal(await page.locator(".platform-admin-person").count(), 0);
   await page.getByRole("button", { name: "All plans", exact: true }).click();

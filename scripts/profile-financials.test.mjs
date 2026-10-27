@@ -17,8 +17,8 @@ test("missing, inconsistent and negative data stays unavailable instead of zero"
   const invalid = product([1, 2, 3, 4]); invalid.financials.monthlyCents++;
   assert.equal(monthlyEstimate(invalid), null);
   assert.equal(monthlyEstimate(product([-1, 0, 0, 0])), null);
-  assert.equal(monthlyTotal({host: product([0, 0, 0, 0]), manager: {}}, "en"), "—");
-  assert.equal(revenueTotal({}, "he"), "—");
+  assert.equal(monthlyTotal({host: product([0, 0, 0, 0]), manager: {}}, "en"), "Unavailable");
+  assert.equal(revenueTotal({}, "he"), "לא זמין");
 });
 test("different currencies are displayed separately, never numerically combined", () => {
   assert.match(monthlyTotal({host: product([100, 0, 0, 0]), manager: product([200, 0, 0, 0], "ILS")}, "en"), /1\.00.*\+.*2\.00/);
@@ -26,7 +26,7 @@ test("different currencies are displayed separately, never numerically combined"
 
 test("a product without a plan adds no monthly fee, but an unavailable active estimate stays unknown", () => {
   assert.match(monthlyTotal({host: product([600,0,0,0]),manager:{state:"no-plan"}}, "en"), /6\.00/);
-  assert.equal(monthlyTotal({host: product([600,0,0,0]),manager:{state:"active"}}, "en"), "—");
+  assert.equal(monthlyTotal({host: product([600,0,0,0]),manager:{state:"active"}}, "en"), "Unavailable");
 });
 
 test("blocked Host access does not hide an active Manager monthly estimate", () => {

@@ -5,6 +5,7 @@ export { portalLogin } from "./auth/portal-login.js";
 export { getPlatformDirectory, getPlatformDirectoryFinancials, getPayAccessOrganizations, changePlatformProductAccess } from "./auth/platform-directory.js";
 export { managerRequest } from "./manager.js";
 export { getAccountDeletion, deleteAccount } from "./auth/account-deletion.js";
+export { previewPlatformAccountDeletion, deletePlatformAccount } from "./auth/admin-account-deletion.js";
 export {
   approveEmail,
   changePortalAccess,

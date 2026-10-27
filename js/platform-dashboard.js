@@ -32,7 +32,7 @@ import { createManagerDashboard } from "./manager-dashboard.js";
 import { createManagerProfile } from "./manager-profile.js";
 import { infoTip } from "./host-ui.js";
 import { renderPlatformLanguage } from "./platform-language.js";
-import { monthlyEstimate, monthlyTotal, revenueTotal, formatMoney } from "./profile-financials.js";
+import { monthlyEstimate, monthlyTotal, revenueTotal, formatMoney, unavailableLabel } from "./profile-financials.js";
 import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
 
 const $ = (selector) => document.querySelector(selector);
@@ -568,7 +568,7 @@ function renderProfileDetails() {
   for (const [label, value] of [
     [
       language === "he" ? "כתובת אימייל" : "Email address",
-      identity.user.email || "—",
+      identity.user.email || unavailableLabel(language),
     ],
     [
       language === "he" ? "אימות אימייל" : "Email verification",
@@ -723,8 +723,8 @@ function renderSubscriptionPreview() {
         const quantity = estimate?.lines[key]?.quantity;
         value.textContent = Number.isSafeInteger(quantity) && quantity >= 0
           ? new Intl.NumberFormat(language === "he" ? "he-IL" : "en-GB").format(quantity)
-          : "—";
-        if (value.textContent === "—") value.setAttribute("aria-label", language === "he" ? "לא זמין כרגע" : "Not available");
+          : unavailableLabel(language);
+        if (value.textContent === unavailableLabel(language)) value.setAttribute("aria-label", language === "he" ? "לא זמין כרגע" : "Not available");
         const cost = document.createElement("td");
         cost.dataset.personalCost = key;
         cost.dir = "auto";
@@ -759,7 +759,7 @@ function renderSubscriptionPreview() {
       list.append(row);
     }
     card.insertBefore(list, card.querySelector(".product-guidance"));
-    if (id === "pay" && revenueTotal(identity.products[id], language) === "—") {
+    if (id === "pay" && revenueTotal(identity.products[id], language) === unavailableLabel(language)) {
       const note = document.createElement("p");
       note.className = "profile-cost-basis";
       note.textContent = language === "he" ? "נתוני הכנסות מאומתים עדיין אינם זמינים." : "Verified revenue data is not available yet.";
