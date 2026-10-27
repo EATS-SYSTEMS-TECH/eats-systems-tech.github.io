@@ -644,11 +644,11 @@
           "accepted": true,
           "video": {
             "path": "assets/vid/home/desktop/electric-gates-barrier-1080p.mp4",
-            "sha256": "a049e76abe8ed0fc75beed60183e99877e58040217204c22e3711b6923f904b5"
+            "sha256": "2e23ebd470455c4f8dd1942cf61663c8cf76c40dd60b9d6fc30c761d22b9280d"
           },
           "poster": {
             "path": "assets/img/desktop/electric-gates-barrier-scene.webp",
-            "sha256": "dce686e6e8fb00f73623f3d4930bfb16b4fb26f20ea32dfe7207ead8b1488953"
+            "sha256": "eca7baa96ba6b3b6432fa3951da3d54e100e1ca6c6dec49554acdebbd708bd8e"
           },
           "width": 1920,
           "height": 1080,
