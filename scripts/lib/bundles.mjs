@@ -71,6 +71,15 @@ export const pickerBundle = {
   logOverride: { "commonjs-variable-in-esm": "silent" },
 };
 
+// js/reservations.bundle.js: the WIFIGATE Reservations page (/reservations/),
+// open to every signed-in WIFIGATE account.
+export const reservationsBundle = {
+  ...common,
+  entryPoints: ["js/reservations-page.js"],
+  outfile: "js/reservations.bundle.js",
+  plugins: [publicHostConfig("./host-api-config.js")],
+};
+
 // The pages that load the picker bundle.
 export const pickerPages = [
   "dashboard/index.html",
@@ -78,6 +87,7 @@ export const pickerPages = [
   "dashboard/manager/index.html",
   "dashboard/manager/platform/index.html",
   "dashboard/platform/index.html",
+  "dashboard/reservations/index.html",
 ];
 
 // Static hosting needs a real document for the Platform deep link: the

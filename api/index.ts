@@ -18,3 +18,12 @@ export {
   acceptMembershipInvitation,
 } from "./host/membership-invitations.js";
 export { adminRequest } from "./host/admin-request.js";
+export {
+  listMyReservations,
+  createReservation,
+  cancelReservation,
+  reservationPhoto,
+  adminListReservations,
+  adminGetReservation,
+  adminChangeReservationStatus,
+} from "./reservations/product-reservations.js";
