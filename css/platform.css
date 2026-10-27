@@ -1063,6 +1063,17 @@ html[dir="rtl"] .product-switcher__label strong {
 .platform-admin-business a:nth-child(2)::before { background: var(--pay); }
 .platform-admin-business a:nth-child(3)::before { background: var(--manager); }
 .platform-admin-business a:hover { border-color: #94a3b8; background: #f8fafc; }
+.platform-admin-products-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: .85rem; }
+.platform-admin-products-heading h3 { margin: 0; }
+.platform-page .platform-admin-management .platform-admin-product-reset { background: #fff; color: var(--ink); border: 1px solid #dce3ed; border-radius: 999px; padding: .45rem .85rem; font: inherit; font-size: .8rem; cursor: pointer; }
+.platform-page .platform-admin-management .platform-admin-product-reset[aria-pressed="true"] { background: #eaf1ff; border-color: #a9c3ee; color: #234f93; }
+.platform-page .platform-admin-management .platform-admin-product-filter { display: grid; justify-items: start; gap: .65rem; min-width: 0; padding: 1rem; border: 1px solid #dce3ed; border-radius: 12px; background: #fff; color: var(--ink); font: inherit; text-align: start; cursor: pointer; transition: border-color .15s, background .15s; }
+.platform-page .platform-admin-management .platform-admin-product-filter:hover { border-color: #94a3b8; background: #f8fafc; }
+.platform-page .platform-admin-management .platform-admin-product-filter[aria-pressed="true"] { background: #edf4ff; border-color: #477ec9; box-shadow: inset 0 0 0 1px #477ec9; }
+.platform-admin-product-name { font-size: .9rem; font-weight: 650; overflow-wrap: anywhere; }
+.platform-admin-product-count { font-size: 1.7rem; font-variant-numeric: tabular-nums; }
+.platform-admin-product-filter small { color: var(--muted); font-size: .78rem; }
+.platform-admin-product-filter:focus-visible, .platform-admin-product-reset:focus-visible { outline: 3px solid #397cf3; outline-offset: 4px; }
 .platform-admin-list-hint { color: var(--muted); margin: -.35rem 0 1rem; font-size: .88rem; }
 .platform-admin-filters { gap: .4rem; padding: .3rem; width: fit-content; max-width: 100%; background: #f1f5f9; border-radius: 12px; }
 .platform-admin-management .platform-admin-filters .platform-button { border: 0; background: transparent; color: #526078; box-shadow: none; border-radius: 9px; padding: .65rem .95rem; font-size: .85rem; }
@@ -1095,6 +1106,10 @@ html[dir="rtl"] .product-switcher__label strong {
   .platform-admin-business { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; }
   .platform-admin-business a { display: grid; gap: .55rem; justify-items: start; padding: .8rem .7rem; font-size: .75rem; }
   .platform-admin-business a::before { width: 9px; }
+  .platform-page .platform-admin-management .platform-admin-product-filter { padding: .8rem .65rem; gap: .5rem; }
+  .platform-admin-product-name { font-size: .75rem; }
+  .platform-admin-product-count { font-size: 1.5rem; }
+  .platform-admin-product-filter small { font-size: .7rem; }
   .platform-admin-person-summary { grid-template-columns: auto minmax(0, 1fr) auto; gap: .65rem; padding: .9rem; }
   .platform-admin-role { grid-column: 2; grid-row: 2; justify-self: start; }
   .platform-admin-person-price { grid-column: 2; grid-row: 3; text-align: start; min-width: 0; display: flex; align-items: center; gap: .6rem; }

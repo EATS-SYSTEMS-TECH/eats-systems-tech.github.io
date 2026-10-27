@@ -3,6 +3,7 @@ import type { ProductAccess, ProductId } from "../types.js";
 
 export type PlatformDirectory = {
   counts: { admins: number; users: number; total: number };
+  productCounts?: Partial<Record<ProductId, number>>;
   items: {
     email: string;
     name: string | null;

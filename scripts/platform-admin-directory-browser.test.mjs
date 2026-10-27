@@ -31,7 +31,7 @@ const person = {
   },
 };
 
-test("global admins see unique counts, estimates, product links, filtering and pagination in Hebrew", async (t) => {
+test("global admins see unique counts, estimates, product filters and pagination in Hebrew", async (t) => {
   const { origin, browser } = await startSite(t);
   const { page, context, errors } = await scenario(browser, {
     platformRole: "admin",
@@ -50,6 +50,7 @@ test("global admins see unique counts, estimates, product links, filtering and p
     return route.fulfill({
       json: {
         counts: { admins: 2, users: 11, total: 13 },
+        productCounts: { host: 12, pay: 3, manager: 8 },
         items: admin ? [] : [person],
         nextCursor:
           url.searchParams.has("after") || admin ? null : person.email,
@@ -90,9 +91,14 @@ test("global admins see unique counts, estimates, product links, filtering and p
   );
   assert.deepEqual(
     await root
-      .locator(".platform-admin-business a")
-      .evaluateAll((nodes) => nodes.map((node) => new URL(node.href).pathname)),
-    ["/dashboard/host/", "/dashboard/pay/", "/dashboard/manager/"],
+      .locator(".platform-admin-business button")
+      .evaluateAll((nodes) => nodes.map((node) => node.dataset.product)),
+    ["host", "pay", "manager"],
+  );
+  assert.equal(await root.locator(".platform-admin-business a").count(), 0);
+  assert.deepEqual(
+    await root.locator(".platform-admin-product-count").allTextContents(),
+    ["12", "3", "8"],
   );
   assert.equal(
     await page.evaluate(
@@ -155,7 +161,12 @@ test("the management shortcut follows the interface direction and the admin page
       await entry.click();
       await page.waitForURL(origin + "/dashboard/platform/" + suffix);
       await page.locator(".platform-admin-person-summary").waitFor();
-    assert.equal(await page.locator("#product-switcher-button .product-switcher__name").textContent(), language === "he" ? "ניהול פלטפורמה" : "Platform management");
+      assert.equal(
+        await page
+          .locator("#product-switcher-button .product-switcher__name")
+          .textContent(),
+        language === "he" ? "ניהול פלטפורמה" : "Platform management",
+      );
       assert.equal(requests, 1);
       assert.equal(await entry.isHidden(), true);
       const summary = page.locator(".platform-admin-person-summary");
@@ -316,5 +327,256 @@ test("Host administration loads product plans only when its costs section is ope
   assert.match(
     await root.locator(".platform-admin-person").textContent(),
     /80\.00/,
+  );
+});
+
+test("For Business cards filter in place, retain the role and reset pagination", async (t) => {
+  const { origin, browser } = await startSite(t);
+  for (const language of ["he", "en"]) {
+    const { page, context, errors } = await scenario(browser, {
+      platformRole: "admin",
+      admin: true,
+      enrolled: true,
+      verified: true,
+    });
+    t.after(() => context.close());
+    await page.setViewportSize({ width: 390, height: 900 });
+    const requests = [];
+    await context.route("**/api/v1/platform/directory?*", (route) => {
+      const query = new URL(route.request().url()).searchParams;
+      requests.push(query);
+      const product = query.get("product");
+      return route.fulfill({
+        json: {
+          counts: {
+            admins: 2,
+            users: product === "host" ? 19 : product === "manager" ? 5 : 25,
+            total: product === "host" ? 21 : product === "manager" ? 7 : 27,
+          },
+          ...(product === "all"
+            ? { productCounts: { host: 21, pay: 0, manager: 7 } }
+            : {}),
+          items:
+            product === "pay"
+              ? []
+              : [{ ...person, name: product + " customer" }],
+          nextCursor: query.has("after") ? null : person.email,
+        },
+      });
+    });
+    const url = origin + "/dashboard/platform/?lang=" + language;
+    await page.goto(url);
+    const root = page.locator("#platform-admin-management");
+    await root.locator(".platform-admin-person").waitFor();
+    assert.equal(
+      await root
+        .locator('[data-product="host"]')
+        .evaluate((node) => getComputedStyle(node).backgroundColor),
+      "rgb(255, 255, 255)",
+    );
+    assert.equal(
+      requests.length,
+      1,
+      "overview totals use the single initial request",
+    );
+    assert.deepEqual(
+      await root.locator(".platform-admin-product-count").allTextContents(),
+      ["21", "0", "7"],
+    );
+    await root
+      .getByRole("button", {
+        name: language === "he" ? "טען עוד" : "Load more",
+        exact: true,
+      })
+      .click();
+    await page.waitForFunction(
+      () => document.querySelectorAll(".platform-admin-person").length === 2,
+    );
+    const host = root.locator('[data-product="host"]');
+    await host.focus();
+    await page.keyboard.press("Enter");
+    await root.getByText("host customer", { exact: true }).waitFor();
+    assert.equal(page.url(), url);
+    assert.equal(await host.getAttribute("aria-pressed"), "true");
+    if (process.env.WIFIGATE_ADMIN_UX_SCREENSHOTS)
+      await page.screenshot({
+        path: `${process.env.WIFIGATE_ADMIN_UX_SCREENSHOTS}/product-filter-selected-${language}-390.png`,
+        fullPage: true,
+      });
+    assert.notEqual(
+      await host.evaluate((node) => getComputedStyle(node).backgroundColor),
+      "rgb(255, 255, 255)",
+    );
+    assert.equal(requests.at(-1).get("product"), "host");
+    assert.equal(requests.at(-1).has("after"), false);
+    assert.equal(await root.locator(".platform-admin-person").count(), 1);
+    assert.equal(
+      await root.locator(".platform-admin-counts strong").last().textContent(),
+      "21",
+    );
+    await root
+      .getByRole("button", { name: "WIFIGATE Host Users", exact: true })
+      .click();
+    await page.waitForFunction(() =>
+      document.querySelector('#platform-admin-management[aria-busy="false"]'),
+    );
+    await root.locator('[data-product="manager"]').click();
+    await root.getByText("manager customer", { exact: true }).waitFor();
+    assert.equal(requests.at(-1).get("role"), "user");
+    assert.equal(requests.at(-1).get("product"), "manager");
+    await root.locator('[data-product="pay"]').click();
+    await root
+      .getByText(
+        language === "he" ? "לא נמצאו חשבונות." : "No accounts found.",
+        { exact: true },
+      )
+      .waitFor();
+    assert.equal(requests.at(-1).get("role"), "user");
+    assert.equal(
+      await root.locator('[data-product="pay"]').getAttribute("aria-pressed"),
+      "true",
+    );
+    assert.deepEqual(
+      await root.locator(".platform-admin-product-count").allTextContents(),
+      ["21", "0", "7"],
+    );
+    await root
+      .getByRole("button", {
+        name: language === "he" ? "כל המסלולים" : "All plans",
+        exact: true,
+      })
+      .click();
+    await root.getByText("all customer", { exact: true }).waitFor();
+    assert.equal(requests.at(-1).get("product"), "all");
+    assert.equal(requests.at(-1).has("after"), false);
+    assert.equal(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+      true,
+    );
+    if (process.env.WIFIGATE_ADMIN_UX_SCREENSHOTS) {
+      for (const width of [390, 1440]) {
+        await page.setViewportSize({ width, height: 900 });
+        await page.screenshot({
+          path: `${process.env.WIFIGATE_ADMIN_UX_SCREENSHOTS}/product-filters-${language}-${width}.png`,
+          fullPage: true,
+        });
+      }
+    }
+    assert.deepEqual(errors, []);
+  }
+});
+
+test("a late product response cannot replace the latest filter or its counts", async (t) => {
+  const { origin, browser } = await startSite(t);
+  const { page, context } = await scenario(browser, {
+    platformRole: "admin",
+    admin: true,
+    enrolled: true,
+    verified: true,
+  });
+  t.after(() => context.close());
+  let releaseHost;
+  await context.route("**/api/v1/platform/directory?*", async (route) => {
+    const product = new URL(route.request().url()).searchParams.get("product");
+    if (product === "host")
+      await new Promise((resolve) => {
+        releaseHost = resolve;
+      });
+    return route.fulfill({
+      json: {
+        counts: {
+          admins: 1,
+          users: product === "host" ? 98 : 6,
+          total: product === "host" ? 99 : 7,
+        },
+        ...(product === "all"
+          ? { productCounts: { host: 99, pay: 0, manager: 7 } }
+          : {}),
+        items: [{ ...person, name: product + " customer" }],
+        nextCursor: null,
+      },
+    });
+  });
+  await page.goto(origin + "/dashboard/platform/");
+  await page.getByText("all customer", { exact: true }).waitFor();
+  const hostRequest = page.waitForRequest((request) =>
+    request.url().includes("product=host"),
+  );
+  await page.locator('.platform-admin-business [data-product="host"]').click();
+  await hostRequest;
+  await page
+    .locator('.platform-admin-business [data-product="manager"]')
+    .click();
+  await page.getByText("manager customer", { exact: true }).waitFor();
+  assert.ok(releaseHost);
+  const oldResponse = page.waitForResponse((response) =>
+    response.url().includes("product=host"),
+  );
+  releaseHost();
+  await oldResponse;
+  assert.equal(
+    await page.locator(".platform-admin-person-identity strong").textContent(),
+    "manager customer",
+  );
+  assert.equal(
+    await page
+      .locator('.platform-admin-business [aria-pressed="true"]')
+      .getAttribute("data-product"),
+    "manager",
+  );
+  assert.equal(
+    await page.locator(".platform-admin-counts strong").last().textContent(),
+    "7",
+  );
+});
+
+test("a failed product filter shows unavailable counts and can return to the overview", async (t) => {
+  const { origin, browser } = await startSite(t);
+  const { page, context } = await scenario(browser, {
+    platformRole: "admin",
+    admin: true,
+    enrolled: true,
+    verified: true,
+  });
+  t.after(() => context.close());
+  await context.route("**/api/v1/platform/directory?*", (route) => {
+    const product = new URL(route.request().url()).searchParams.get("product");
+    return route.fulfill(
+      product === "host"
+        ? { status: 503, json: {} }
+        : {
+            json: {
+              counts: { admins: 1, users: 2, total: 3 },
+              items: [person],
+              nextCursor: null,
+            },
+          },
+    );
+  });
+  await page.goto(origin + "/dashboard/platform/");
+  await page.locator(".platform-admin-person").waitFor();
+  assert.deepEqual(
+    await page.locator(".platform-admin-product-count").allTextContents(),
+    ["—", "—", "—"],
+    "missing product totals are never shown as zero",
+  );
+  await page.locator('.platform-admin-business [data-product="host"]').click();
+  await page
+    .getByText("Data is currently unavailable. Try refreshing.", {
+      exact: true,
+    })
+    .waitFor();
+  assert.deepEqual(
+    await page.locator(".platform-admin-counts strong").allTextContents(),
+    ["—", "—", "—"],
+  );
+  assert.equal(await page.locator(".platform-admin-person").count(), 0);
+  await page.getByRole("button", { name: "All plans", exact: true }).click();
+  await page.locator(".platform-admin-person").waitFor();
+  assert.equal(
+    await page.locator(".platform-admin-counts strong").last().textContent(),
+    "3",
   );
 });

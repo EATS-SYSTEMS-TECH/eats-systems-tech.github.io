@@ -24,13 +24,15 @@ export function createPlatformAdminDirectory({
   let closed = false,
     generation = 0,
     selected = "all",
+    selectedProduct = product,
+    productCounts = {},
     next;
   root.hidden = false;
+  root.classList.add("platform-admin-management");
   root.dataset.standalone = String(standalone);
-  const productName =
-    product === "all"
-      ? "WIFIGATE"
-      : `WIFIGATE ${product[0].toUpperCase() + product.slice(1)}`;
+  const nameFor = (id) =>
+    id === "all" ? "WIFIGATE" : `WIFIGATE ${id[0].toUpperCase() + id.slice(1)}`;
+  const productName = nameFor(product);
   const title = element(
     "h2",
     (standalone
@@ -63,9 +65,32 @@ export function createPlatformAdminDirectory({
     filters.append(button);
   }
   const businessTitle = element("h3", "For Business");
+  const resetProduct = element(
+    "button",
+    t("כל המסלולים", "All plans"),
+    "platform-admin-product-reset",
+  );
+  resetProduct.type = "button";
+  resetProduct.addEventListener("click", () => selectProduct("all"));
   const business = element("nav", null, "platform-admin-business");
-  business.setAttribute("aria-label", "For Business");
+  business.setAttribute("aria-label", t("סינון לפי מסלול", "Filter by plan"));
   for (const id of ["host", "pay", "manager"]) {
+    if (product === "all") {
+      const button = element("button", null, "platform-admin-product-filter");
+      button.type = "button";
+      button.dataset.product = id;
+      const label = element("span", nameFor(id), "platform-admin-product-name");
+      label.dir = "ltr";
+      const count = element("strong", "—", "platform-admin-product-count");
+      button.append(
+        label,
+        count,
+        element("small", t("חשבונות עם גישה", "Provisioned accounts")),
+      );
+      button.addEventListener("click", () => selectProduct(id));
+      business.append(button);
+      continue;
+    }
     const link = element("a", `WIFIGATE ${id[0].toUpperCase() + id.slice(1)}`);
     link.href = productLink(id, language);
     if (id === product) link.setAttribute("aria-current", "page");
@@ -87,7 +112,14 @@ export function createPlatformAdminDirectory({
   heading.append(title, note);
   header.append(heading, refresh);
   const products = element("section", null, "platform-admin-products");
-  products.append(businessTitle, business);
+  const productHeading = element(
+    "div",
+    null,
+    "platform-admin-products-heading",
+  );
+  productHeading.append(businessTitle);
+  if (product === "all") productHeading.append(resetProduct);
+  products.append(productHeading, business);
   const listHeading = element("h3", t("משתמשי הפלטפורמה", "Platform accounts"));
   const hint = element(
     "p",
@@ -118,6 +150,45 @@ export function createPlatformAdminDirectory({
     footnote,
   );
 
+  function selectProduct(id) {
+    if (selectedProduct === id) return;
+    selectedProduct = id;
+    void load();
+  }
+
+  function renderProductFilters() {
+    resetProduct.setAttribute(
+      "aria-pressed",
+      String(selectedProduct === "all"),
+    );
+    for (const button of business.querySelectorAll("button[data-product]")) {
+      const id = button.dataset.product;
+      button.setAttribute("aria-pressed", String(id === selectedProduct));
+      const value = productCounts[id];
+      button.querySelector("strong").textContent = Number.isInteger(value)
+        ? String(value)
+        : "—";
+      button.setAttribute(
+        "aria-label",
+        `${nameFor(id)} · ${Number.isInteger(value) ? value : "—"} ${t("חשבונות עם גישה", "provisioned accounts")}`,
+      );
+    }
+    if (selectedProduct === "all") {
+      listHeading.textContent = t("משתמשי הפלטפורמה", "Platform accounts");
+    } else {
+      const name = element("bdi", nameFor(selectedProduct));
+      name.dir = "ltr";
+      listHeading.replaceChildren(
+        document.createTextNode(t("חשבונות", "Accounts") + " · "),
+        name,
+      );
+    }
+    for (const button of filters.children) {
+      if (button.dataset.role !== "all")
+        button.textContent = `${nameFor(selectedProduct)} ${button.dataset.role === "admin" ? "Admins" : "Users"}`;
+    }
+  }
+
   function personCard(person) {
     const card = element("details", null, "platform-admin-person");
     const summary = element("summary", null, "platform-admin-person-summary");
@@ -142,11 +213,11 @@ export function createPlatformAdminDirectory({
     );
     badge.dataset.role = person.role;
     const total =
-      product === "all"
+      selectedProduct === "all"
         ? monthlyTotal(person.products, language)
         : formatMoney(
-            monthlyEstimate(person.products[product])?.monthlyCents,
-            monthlyEstimate(person.products[product])?.currency,
+            monthlyEstimate(person.products[selectedProduct])?.monthlyCents,
+            monthlyEstimate(person.products[selectedProduct])?.currency,
             language,
           );
     const price = element("span", null, "platform-admin-person-price");
@@ -201,9 +272,9 @@ export function createPlatformAdminDirectory({
       unavailable: t("לא זמין", "Unavailable"),
       "mfa-required": t("נדרש אימות", "Verification required"),
     };
-    for (const id of product === "all"
+    for (const id of selectedProduct === "all"
       ? ["host", "pay", "manager"]
-      : [product]) {
+      : [selectedProduct]) {
       const plan = person.products[id];
       const estimate = monthlyEstimate(plan);
       const row = body.insertRow();
@@ -247,12 +318,31 @@ export function createPlatformAdminDirectory({
     return card;
   }
 
+  function renderCounts(values = {}) {
+    counts.replaceChildren(
+      ...[
+        [`${nameFor(selectedProduct)} Admins`, values.admins],
+        [`${nameFor(selectedProduct)} Users`, values.users],
+        [t("סה״כ חשבונות", "Total accounts"), values.total],
+      ].map(([label, count]) => {
+        const tile = element("div");
+        tile.append(
+          element("span", label),
+          element("strong", String(count ?? "—")),
+        );
+        return tile;
+      }),
+    );
+  }
+
   async function load(append = false) {
     const epoch = ++generation;
     root.setAttribute("aria-busy", "true");
+    renderProductFilters();
     refresh.disabled = true;
     if (!append) {
       rows.replaceChildren();
+      renderCounts();
       next = null;
     }
     more.hidden = true;
@@ -270,20 +360,14 @@ export function createPlatformAdminDirectory({
         user,
         selected,
         append ? next : undefined,
-        product,
+        selectedProduct,
       );
       if (closed || epoch !== generation) return;
-      counts.replaceChildren(
-        ...[
-          [`${productName} Admins`, data.counts.admins],
-          [`${productName} Users`, data.counts.users],
-          [t("סה״כ חשבונות", "Total accounts"), data.counts.total],
-        ].map(([label, count]) => {
-          const tile = element("div");
-          tile.append(element("span", label), element("strong", String(count)));
-          return tile;
-        }),
-      );
+      if (data.productCounts) {
+        productCounts = data.productCounts;
+        renderProductFilters();
+      }
+      renderCounts(data.counts);
       rows.append(...data.items.map(personCard));
       next = data.nextCursor;
       more.hidden = !next;
