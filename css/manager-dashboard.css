@@ -1263,3 +1263,76 @@ body[data-product="manager"] #platform-status[data-state="loading"]:not(:empty):
 @media (prefers-reduced-motion: reduce) {
   .manager-spinner, .manager-button.is-loading::before, .manager-dialog-progress::before, .manager-loading-panel span, body[data-product="manager"] #platform-status[data-state="loading"]::before { animation: none; }
 }
+
+/* One connection journey, with progress tied to completed connection stages. */
+html:has(.manager-connection-dialog[open]) { overflow: hidden; scrollbar-gutter: stable; }
+.manager-connection-dialog { --connection-accent: #b84a19; width: min(540px, calc(100vw - 32px)); max-width: none; max-height: calc(100dvh - 32px); padding: 0; border: 1px solid #e1e7ee; border-radius: 24px; color: #172b46; background: #fff; box-shadow: 0 28px 100px #081a3b40; overflow: auto; font: inherit; }
+.manager-connection-dialog::backdrop { background: #0d1b2f80; backdrop-filter: blur(8px); }
+.manager-connection-dialog[open] { display: flex; flex-direction: column; }
+.manager-connection-dialog__header { position: relative; flex: 0 0 auto; display: grid; justify-items: center; gap: 10px; padding: 28px 48px 24px; text-align: center; background: radial-gradient(ellipse at 50% 0, #ffe7ce 0, transparent 72%), #fffbf7; border-bottom: 1px solid #f1e8df; }
+.manager-connection-dialog__icon { display: grid; place-items: center; width: 54px; height: 54px; margin-bottom: 4px; border: 1px solid #f5cfac; border-radius: 16px; background: #ffffffb8; color: var(--connection-accent); box-shadow: 0 5px 20px #b84a1910; }
+.manager-connection-dialog__icon svg { width: 32px; height: 32px; }
+.manager-connection-dialog__brand { color: #8b6448; font-size: 10px; font-weight: 750; letter-spacing: .15em; }
+.manager-connection-dialog h2 { margin: 0; color: #172b46; font-size: clamp(21px, 4vw, 26px); line-height: 1.35; letter-spacing: -.02em; }
+.manager-connection-dialog__identity { margin: 0; color: #617287; font-size: 13px; overflow-wrap: anywhere; }
+.manager-connection-dialog__close { position: absolute; inset-inline-end: 12px; inset-block-start: 12px; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid transparent; border-radius: 50%; background: transparent; color: #64748b; font: 26px/1 sans-serif; cursor: pointer; }
+.manager-connection-dialog__close:hover { background: #fff; border-color: #e7ddd4; color: #172b46; }
+.manager-connection-dialog__body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 24px 28px; }
+.manager-connection-dialog__live { min-height: 88px; }
+.manager-connection-dialog h3 { margin: 0 0 8px; color: #172b46; font-size: 17px; }
+.manager-connection-dialog__live p { margin: 0; color: #617287; font-size: 14px; line-height: 1.75; }
+.manager-connection-dialog__meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 14px 0 10px; font-size: 12px; color: #66788c; font-variant-numeric: tabular-nums; }
+.manager-connection-dialog__meta > :first-child { color: var(--connection-accent); font-weight: 750; }
+.manager-connection-dialog__rail { position: relative; height: 10px; overflow: hidden; border-radius: 99px; background: #edf1f6; box-shadow: inset 0 1px 3px #10243b0b; }
+.manager-connection-dialog__fill { display: block; height: 100%; margin-inline-end: auto; border-radius: inherit; background: linear-gradient(90deg, #a6370c, #ed8036, #ffc98f); box-shadow: 0 0 14px #ed803660; transition: width .3s ease; }
+.manager-connection-dialog[data-state="pending"] .manager-connection-dialog__rail::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, transparent 5%, #f7ad6370 40%, #fff0ce 50%, #f7ad6370 60%, transparent 95%); animation: manager-connection-scan 2.4s ease-in-out -1.2s infinite; }
+.manager-connection-dialog[dir="rtl"] .manager-connection-dialog__rail::after { animation-direction: reverse; }
+.manager-connection-dialog__steps { display: grid; gap: 12px; margin: 24px 0; padding: 0; list-style: none; }
+.manager-connection-dialog__steps li { display: flex; align-items: center; gap: 12px; color: #78879a; font-size: 13px; }
+.manager-connection-dialog__step { display: grid; place-items: center; flex: 0 0 30px; width: 30px; height: 30px; border: 1px solid #e2e8ef; border-radius: 10px; background: #f7f9fc; color: #738297; font-size: 12px; font-weight: 750; }
+.manager-connection-dialog__steps [data-state="current"] { color: #172b46; font-weight: 750; }
+.manager-connection-dialog__steps [data-state="current"] .manager-connection-dialog__step { border-color: #efbd95; color: #a43d12; background: #fff0e3; box-shadow: 0 0 0 4px #fff8f1; }
+.manager-connection-dialog__steps [data-state="complete"] .manager-connection-dialog__step { color: #18704c; border-color: #c6e7d7; background: #eff9f3; }
+.manager-connection-dialog__timing { margin: 0; padding: 12px 14px; border: 1px solid #e7edf4; border-radius: 12px; background: #f8fafc; color: #62758c; font-size: 12px; line-height: 1.7; }
+.manager-connection-dialog[data-extended="true"] .manager-connection-dialog__timing { background: #fffbf3; border-color: #f1dfba; color: #855d1d; }
+.manager-connection-dialog__actions { flex: 0 0 auto; display: flex; gap: 10px; padding: 0 28px 28px; background: #fff; }
+.manager-connection-dialog__actions .manager-button { flex: 1; min-height: 46px; padding: 10px 16px; border: 1px solid #dce4ee; border-radius: 12px; background: #fff; color: #223b57; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+.manager-connection-dialog__actions .manager-button.primary { color: #fff; border-color: #a53d11; background: #a53d11; }
+.manager-connection-dialog__actions .manager-button:hover { color: #fff; border-color: #13263c; background: #13263c; }
+.manager-connection-dialog__actions [hidden] { display: none !important; }
+.manager-connection-dialog :focus-visible { outline: 3px solid #c95d25; outline-offset: 3px; }
+.manager-connection-dialog__simulation { margin: 0 0 16px; color: #7042b1; font-size: 12px; font-weight: 750; }
+.manager-connection-dialog[data-state="complete"] { --connection-accent: #18704c; }
+.manager-connection-dialog[data-state="complete"] .manager-connection-dialog__fill { background: #299b69; box-shadow: 0 0 14px #299b6940; }
+.manager-connection-dialog[data-state="error"] h3 { color: #a13329; }
+.manager-connection-dialog__steps [data-state="error"] { color: #a13329; }
+.manager-connection-dialog__steps [data-state="error"] .manager-connection-dialog__step { color: #a13329; border-color: #ecc7bf; background: #fff2ef; }
+.manager-connection-dialog[data-state="error"] .manager-connection-dialog__fill { background: #c56c5d; box-shadow: none; }
+body:has(.manager-connection-dialog[open]) .manager-shell .manager-button.is-loading::before { display: none; }
+@keyframes manager-connection-scan { from { transform: translateX(-110%); } to { transform: translateX(110%); } }
+@media (max-width: 480px) {
+  .manager-connection-dialog { border-radius: 20px; }
+  .manager-connection-dialog__header { padding: 22px 38px 20px; }
+  .manager-connection-dialog__body { padding: 20px; }
+  .manager-connection-dialog__live { min-height: 96px; }
+  .manager-connection-dialog__actions { flex-direction: column; padding: 0 20px 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .manager-connection-dialog__rail::after { animation: none !important; opacity: .25; }
+  .manager-connection-dialog__fill { transition: none; }
+}
+@media (max-height: 700px) {
+  .manager-connection-dialog__header { padding: 16px 42px 14px; gap: 6px; }
+  .manager-connection-dialog__icon { width: 38px; height: 38px; margin: 0; border-radius: 12px; }
+  .manager-connection-dialog__icon svg { width: 26px; height: 26px; }
+  .manager-connection-dialog__brand { display: none; }
+  .manager-connection-dialog h2 { font-size: 20px; line-height: 1.25; }
+  .manager-connection-dialog__identity { font-size: 11px; }
+  .manager-connection-dialog__body { padding: 16px 20px; }
+  .manager-connection-dialog__live { min-height: 76px; }
+  .manager-connection-dialog__meta { margin: 10px 0 8px; }
+  .manager-connection-dialog__steps { gap: 8px; margin: 16px 0; }
+  .manager-connection-dialog__step { width: 26px; height: 26px; flex-basis: 26px; border-radius: 8px; }
+  .manager-connection-dialog__timing { padding: 9px 10px; font-size: 11px; line-height: 1.6; }
+  .manager-connection-dialog__actions { padding: 0 20px 16px; }
+}

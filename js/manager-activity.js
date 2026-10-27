@@ -18,17 +18,22 @@ export function createManagerActivity({ main, view, language }) {
   for (let i = 0; i < 3; i++)
     placeholder.append(document.createElement("span"));
   const pending = new Map();
-  let revision = 0;
+  let revision = 0,
+    paused = false;
   function render() {
-    progress.hidden = pending.size === 0;
+    progress.hidden = paused || pending.size === 0;
     view.setAttribute("aria-busy", String(pending.size > 0));
-    if (pending.size) {
+    if (pending.size && !paused) {
       const text = [...pending.values()].at(-1);
       if (label.textContent !== text) label.textContent = text;
       if (!view.contains(placeholder)) view.append(placeholder);
     } else placeholder.remove();
   }
   return {
+    pause(value) {
+      paused = value;
+      render();
+    },
     async track(text, run) {
       const token = {},
         epoch = revision;
@@ -45,6 +50,7 @@ export function createManagerActivity({ main, view, language }) {
     },
     reset() {
       revision++;
+      paused = false;
       pending.clear();
       render();
     },

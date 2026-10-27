@@ -358,7 +358,8 @@ async function gateFixture(t, browser, origin) {
       async command(cmd) {
         window.commands.push(cmd);
         if (cmd === "ADMIN_GET_OVERVIEW")
-          return new Promise((resolve) => {
+          return new Promise((resolve, reject) => {
+            this.failRead = () => reject(new Error("NO_COMMUNICATION"));
             this.finishRead = () =>
               resolve({ data: { users: 12, admins: 1, state: "OK" } });
           });
@@ -377,7 +378,12 @@ async function gateFixture(t, browser, origin) {
                 systemIds: ["synthetic-gate"],
                 status: "active",
                 version: 1,
-                accessNote: {residentName:"Example Resident",note:"Have a good day ;)",address:"123 Example Avenue, Example City",floorNumber:"0"},
+                accessNote: {
+                  residentName: "Example Resident",
+                  note: "Have a good day ;)",
+                  address: "123 Example Avenue, Example City",
+                  floorNumber: "0",
+                },
               },
             ],
             nextCursor: null,
@@ -401,32 +407,40 @@ test("gate connection exposes waiting, verification, success and live-data loadi
     .getByRole("button", { name: "פתיחת סביבת ניהול", exact: true })
     .click();
   await page
-    .locator('.manager-connection-panel[data-state="waiting"]')
+    .locator('.manager-connection-dialog[data-stage="waiting"]')
     .waitFor();
   assert.equal(
     await page
-      .getByRole("button", { name: "סיום וחזרה", exact: true })
+      .getByRole("button", { name: "ביטול וחזרה", exact: true })
       .isEnabled(),
     true,
   );
   await screenshot(page, "manager-connection-waiting-he-390");
   await page.evaluate(() => window.connections[0].onState("connecting"));
   await page
-    .locator('.manager-connection-panel[data-state="connecting"]')
+    .locator('.manager-connection-dialog[data-stage="connecting"]')
     .waitFor();
   await page.evaluate(() => window.connections[0].finish());
   await page
-    .locator('.manager-connection-panel[data-state="active"]')
+    .locator('.manager-connection-dialog[data-stage="loading"]')
     .waitFor();
   await page.waitForFunction(
     () => typeof window.connections[0].finishRead === "function",
   );
-  assert.equal(await page.locator(".manager-progress").isVisible(), true);
+  assert.equal(await page.locator(".manager-progress").isHidden(), true);
+  assert.equal(await page.locator(".manager-loading-panel").count(), 0);
+  assert.equal(
+    await page.getByRole("progressbar").getAttribute("aria-valuenow"),
+    "2",
+  );
   assert.equal(
     await page.locator("#manager-content").evaluate((el) => el.inert),
     true,
   );
   await page.evaluate(() => window.connections[0].finishRead());
+  await page
+    .locator(".manager-connection-dialog")
+    .waitFor({ state: "detached" });
   await page.getByRole("button", { name: "פתיחת שער", exact: true }).waitFor();
   assert.equal(await page.locator(".manager-progress").isHidden(), true);
   assert.equal(
@@ -446,41 +460,117 @@ test("failed and cancelled connections stop their spinners and offer recovery wi
     .getByRole("button", { name: "פתיחת סביבת ניהול", exact: true })
     .click();
   await page
-    .locator('.manager-connection-panel[data-state="waiting"]')
+    .locator('.manager-connection-dialog[data-stage="waiting"]')
     .waitFor();
   await page.evaluate(() => window.connections[0].fail());
-  await page.locator('.manager-connection-panel[data-state="error"]').waitFor();
+  await page
+    .locator('.manager-connection-dialog[data-state="error"]')
+    .waitFor();
   assert.equal(await page.locator(".manager-progress").isHidden(), true);
   await screenshot(page, "manager-connection-failure-he-390");
   await page
-    .getByRole("button", { name: "חיבור מחדש לשער", exact: true })
+    .getByRole("button", { name: "ניסיון חיבור נוסף", exact: true })
     .click();
   await page
-    .locator('.manager-connection-panel[data-state="waiting"]')
+    .locator('.manager-connection-dialog[data-stage="waiting"]')
     .waitFor();
-  await page.getByRole("button", { name: "סיום וחזרה", exact: true }).click();
+  await page.getByRole("button", { name: "ביטול וחזרה", exact: true }).click();
   await page
     .getByRole("heading", { name: "המערכות שלי", exact: true })
     .waitFor();
   assert.equal(await page.locator(".manager-progress").isHidden(), true);
-  assert.equal(await page.locator(".manager-connection-panel").count(), 0);
+  assert.equal(await page.locator(".manager-connection-dialog").count(), 0);
   assert.deepEqual(await page.evaluate(() => window.commands), []);
 });
 
-test("a revoked local Manager authorization explains the failure and keeps metadata actions available without a live gate", async t=>{
-  const {origin,browser}=await startSite(t);
-  const page=await gateFixture(t,browser,origin);
-  await page.getByRole('button',{name:'פתיחת סביבת ניהול',exact:true}).click();
-  await page.locator('.manager-connection-panel[data-state="waiting"]').waitFor();
-  await page.evaluate(()=>window.connections[0].fail('CREDENTIAL_REVOKED'));
-  const failure=page.locator('.manager-connection-panel[data-state="error"]');await failure.waitFor();
-  assert.match(await failure.innerText(),/השער דחה את הרשאת Manager/);
-  await page.locator('.manager-system-menu summary').click();
-  await page.getByRole('button',{name:'פרטי גישה',exact:true}).click();
-  assert.match(await page.getByRole('dialog').innerText(),/Example Resident/);
-  await page.getByRole('dialog').getByRole('button',{name:'סגירה',exact:true}).click();
-  await page.locator('.manager-system-menu summary').click();
-  await page.locator('.manager-system-menu summary').press('Escape');
-  assert.equal(await page.locator('.manager-system-menu').getAttribute('open'),null);
-  assert.deepEqual(await page.evaluate(()=>window.commands),[]);
+test("first data failure stays in the connection popup and never reports a ready workspace", async (t) => {
+  const { origin, browser } = await startSite(t);
+  const page = await gateFixture(t, browser, origin);
+  await page
+    .getByRole("button", { name: "פתיחת סביבת ניהול", exact: true })
+    .click();
+  await page.evaluate(() => window.connections[0].finish());
+  await page.waitForFunction(
+    () => typeof window.connections[0].failRead === "function",
+  );
+  await page.evaluate(() => window.connections[0].failRead());
+  const failure = page.locator(
+    '.manager-connection-dialog[data-state="error"]',
+  );
+  await failure.waitFor();
+  assert.equal(
+    await failure.getByRole("progressbar").getAttribute("aria-valuenow"),
+    "2",
+  );
+  assert.equal(
+    await page
+      .locator('.manager-connection-dialog[data-state="complete"]')
+      .count(),
+    0,
+  );
+  assert.equal(await page.locator(".manager-progress").isHidden(), true);
+  assert.deepEqual(await page.evaluate(() => window.commands), [
+    "ADMIN_GET_OVERVIEW",
+  ]);
+  await page.evaluate(() => window.dashboard.close());
+  assert.equal(await page.locator(".manager-connection-dialog").count(), 0);
+});
+
+test("cancelling during initial data loading fences late reads and removes the modal", async (t) => {
+  const { origin, browser } = await startSite(t);
+  const page = await gateFixture(t, browser, origin);
+  await page
+    .getByRole("button", { name: "פתיחת סביבת ניהול", exact: true })
+    .click();
+  await page.evaluate(() => window.connections[0].finish());
+  await page.waitForFunction(
+    () => typeof window.connections[0].finishRead === "function",
+  );
+  await page.keyboard.press("Escape");
+  await page
+    .getByRole("heading", { name: "המערכות שלי", exact: true })
+    .waitFor();
+  await page.evaluate(() => window.connections[0].finishRead());
+  assert.equal(
+    await page.locator(".manager-connection-dialog, #manager-content").count(),
+    0,
+  );
+  assert.equal(await page.locator(".manager-progress").isHidden(), true);
+  assert.deepEqual(await page.evaluate(() => window.commands), [
+    "ADMIN_GET_OVERVIEW",
+  ]);
+});
+
+test("a revoked local Manager authorization explains the failure and keeps metadata actions available without a live gate", async (t) => {
+  const { origin, browser } = await startSite(t);
+  const page = await gateFixture(t, browser, origin);
+  await page
+    .getByRole("button", { name: "פתיחת סביבת ניהול", exact: true })
+    .click();
+  await page
+    .locator('.manager-connection-dialog[data-stage="waiting"]')
+    .waitFor();
+  await page.evaluate(() => window.connections[0].fail("CREDENTIAL_REVOKED"));
+  const failure = page.locator(
+    '.manager-connection-dialog[data-state="error"]',
+  );
+  await failure.waitFor();
+  assert.match(await failure.innerText(), /השער דחה את הרשאת Manager/);
+  await failure
+    .getByRole("button", { name: "לפרטי המערכת", exact: true })
+    .click();
+  await page.locator(".manager-system-menu summary").click();
+  await page.getByRole("button", { name: "פרטי גישה", exact: true }).click();
+  assert.match(await page.getByRole("dialog").innerText(), /Example Resident/);
+  await page
+    .getByRole("dialog")
+    .getByRole("button", { name: "סגירה", exact: true })
+    .click();
+  await page.locator(".manager-system-menu summary").click();
+  await page.locator(".manager-system-menu summary").press("Escape");
+  assert.equal(
+    await page.locator(".manager-system-menu").getAttribute("open"),
+    null,
+  );
+  assert.deepEqual(await page.evaluate(() => window.commands), []);
 });

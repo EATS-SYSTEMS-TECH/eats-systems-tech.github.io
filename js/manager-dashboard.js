@@ -15,6 +15,7 @@ import { createManagerExamples } from "./manager-examples.js";
 import { createManagerSystemCard } from "./manager-system-card.js";
 import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
 import { createManagerActivity } from "./manager-activity.js";
+import { createManagerConnectionDialog } from "./manager-connection-dialog.js";
 
 const BASE = "/api/v1/manager";
 const node = (tag, text, cls) => {
@@ -120,6 +121,10 @@ export function createManagerDashboard({
   shell.append(nav, main);
   root.replaceChildren(shell);
   const activity = createManagerActivity({ main, view, language });
+  const connectionDialog = createManagerConnectionDialog({
+    language,
+    onClose: () => activity.pause(false),
+  });
   const requestLabel = (path, method) =>
     method !== "GET"
       ? t("מעדכן את הנתונים…", "Updating data…")
@@ -403,6 +408,7 @@ export function createManagerDashboard({
     return f;
   }
   function stop() {
+    connectionDialog.close();
     activity.reset();
     planDirectory?.close();
     planDirectory = undefined;
@@ -1574,6 +1580,26 @@ export function createManagerDashboard({
     const epoch = ++generation;
     activity.reset();
     say("");
+    const returnFocus = view.querySelector(".manager-workspace-head h3");
+    if (returnFocus) returnFocus.tabIndex = -1;
+    connectionDialog.open({
+      systemName: currentSystem.name,
+      gate,
+      simulation: examples.isSystem(currentSystem),
+      returnFocus,
+      onCancel: () => {
+        if (epoch === generation)
+          void task(() =>
+            examples.isSystem(currentSystem)
+              ? exampleBack()
+              : showSystems(scope),
+          );
+      },
+      onRetry: () => {
+        if (epoch === generation) void task(() => openGate(gate, preserveView));
+      },
+    });
+    activity.pause(true);
     showConnectionState("waiting");
     const existingContent = view.querySelector("#manager-content");
     const existingTabs = view.querySelector("#manager-tabs");
@@ -1596,14 +1622,6 @@ export function createManagerDashboard({
         if (epoch !== generation) return;
         if (["waiting", "connecting", "active"].includes(state)) {
           showConnectionState(state);
-          if (state === "active")
-            say(
-              examples.isSystem(currentSystem)
-                ? t("מחובר · נתוני סימולציה", "Connected · simulation data")
-                : t("מחובר · נתונים חיים מהשער", "Connected · live gate data"),
-              false,
-              "success",
-            );
         } else if (state === "SECURE_SESSION_EXPIRED") {
           const readOnly =
             /^(ADMIN_(GET_|LIST_).+|ADMIN_PING|ADMIN_RF_GET)$/.test(
@@ -1718,6 +1736,20 @@ export function createManagerDashboard({
       renderTabs();
       if (!preserveView) await showTab("overview");
       else if (!existingContent?.childElementCount) await showTab(currentTab);
+      if (
+        epoch === generation &&
+        connection === candidate &&
+        candidate.session
+      ) {
+        connectionDialog.complete();
+        say(
+          examples.isSystem(currentSystem)
+            ? t("מחובר · נתוני סימולציה", "Connected · simulation data")
+            : t("מחובר · נתונים חיים מהשער", "Connected · live gate data"),
+          false,
+          "success",
+        );
+      }
     } catch (error) {
       if (epoch === generation) {
         connection?.close();
@@ -1733,75 +1765,8 @@ export function createManagerDashboard({
     }
   }
   function showConnectionState(state, detail) {
-    const simulated = examples.isSystem(currentSystem);
-    let panel = view.querySelector(".manager-connection-panel");
-    if (!panel) {
-      panel = node("section", undefined, "manager-connection-panel");
-      panel.setAttribute("role", "status");
-      panel.setAttribute("aria-live", "polite");
-      view.insertBefore(panel, view.querySelector("#manager-tabs"));
-    }
-    panel.dataset.state = state;
-    const labels = {
-      waiting: [
-        t("ממתינים למערכת", "Waiting for the system"),
-        t(
-          "ממתינים לזמינות המערכת. ההמתנה עשויה להימשך עד כדקה וחצי, בהתאם לתקשורת. אפשר לסיים ולחזור.",
-          "Waiting for the system to become available. This can take up to about 90 seconds, depending on connectivity. You can end and return.",
-        ),
-      ],
-      connecting: [
-        t("מקימים חיבור מאובטח", "Establishing a secure connection"),
-        t(
-          "המערכת זמינה. מאמתים את החיבור לפני טעינת הנתונים.",
-          "The system is available. Verifying the connection before loading data.",
-        ),
-      ],
-      active: [
-        t("המערכת מחוברת", "System connected"),
-        t(
-          simulated
-            ? "הסימולציה פעילה. הנתונים והפעולות הם לדוגמה בלבד."
-            : "החיבור המאובטח פעיל. הנתונים והפעולות מתקבלים מהמערכת עצמה.",
-          simulated
-            ? "Simulation is active. Data and confirmations are examples only."
-            : "The secure connection is active. Data and confirmations come from the system itself.",
-        ),
-      ],
-      error: [
-        t("לא ניתן להשלים את החיבור", "Connection could not complete"),
-        detail,
-      ],
-    };
-    const [label, description] = labels[state];
-    const marker = node(
-      "span",
-      state === "active" ? "✓" : state === "error" ? "!" : "",
-      state === "active" || state === "error"
-        ? "manager-connection-marker"
-        : "manager-spinner",
-    );
-    marker.setAttribute("aria-hidden", "true");
-    const copy = node("div");
-    copy.append(node("strong", label), node("p", description));
-    const steps = node("ol", undefined, "manager-connection-steps");
-    for (const [index, text] of [
-      t("המתנה", "Waiting"),
-      t("אימות חיבור", "Verification"),
-      t("מחובר", "Connected"),
-    ].entries()) {
-      const step = node("li", text);
-      const current = ["waiting", "connecting", "active"].indexOf(state);
-      step.dataset.state =
-        current > index
-          ? "complete"
-          : current === index
-            ? "current"
-            : "pending";
-      if (current === index) step.setAttribute("aria-current", "step");
-      steps.append(step);
-    }
-    panel.replaceChildren(marker, copy, steps);
+    if (state === "error") connectionDialog.fail(detail);
+    else connectionDialog.setStage(state === "active" ? "loading" : state);
   }
   function showConnectionRecovery(gate) {
     dialogs.cancel();
