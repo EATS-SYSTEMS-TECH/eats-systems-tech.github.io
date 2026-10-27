@@ -6,15 +6,15 @@
       "accepted": true,
       "video": {
         "path": "assets/vid/use-cases/residential-buildings-720p.mp4",
-        "sha256": "2f9b8683013d27b93294406bd5e0a41f653e1e2afda5e41bd88b08c6fe4f58ca"
+        "sha256": "6c97b60dca35b74a2fc56fb702493f0085a17e6601ee8d8d7610b5fe57680583"
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/residential-buildings-scene-hero.webp",
-        "sha256": "3db39a54c42de88954718b3e1ee0b0d1a3d402ae644003562067d2f669dd1545"
+        "sha256": "e50f77166a866e34ac465e481531d8fa616b582728a7bbdf48dcd76a9e981ed7"
       },
       "width": 1280,
       "height": 720,
-      "durationSeconds": 10.041667,
+      "durationSeconds": 8.0,
       "codec": "h264",
       "audioTracks": 0,
       "fastStart": true,
@@ -25,15 +25,15 @@
           "accepted": true,
           "video": {
             "path": "assets/vid/use-cases/residential-buildings-720p.mp4",
-            "sha256": "2f9b8683013d27b93294406bd5e0a41f653e1e2afda5e41bd88b08c6fe4f58ca"
+            "sha256": "6c97b60dca35b74a2fc56fb702493f0085a17e6601ee8d8d7610b5fe57680583"
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/residential-buildings-scene-hero.webp",
-            "sha256": "3db39a54c42de88954718b3e1ee0b0d1a3d402ae644003562067d2f669dd1545"
+            "sha256": "e50f77166a866e34ac465e481531d8fa616b582728a7bbdf48dcd76a9e981ed7"
           },
           "width": 1280,
           "height": 720,
-          "durationSeconds": 10.041667,
+          "durationSeconds": 8.0,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
@@ -44,15 +44,15 @@
           "accepted": true,
           "video": {
             "path": "assets/vid/use-cases/desktop/residential-buildings-1080p.mp4",
-            "sha256": "16d15117fc9a5c6ae30c9aa9cd5f879adf4bde984c077989720bbacec0297db8"
+            "sha256": "f2cca663f289f1c5b0de15f78545f6cefcbe4e60e4cbb82bef9046ec7cc9bc30"
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/desktop/residential-buildings-scene-hero.webp",
-            "sha256": "af52ab42e70d7fdbd4d9a3d1d703f83d9c37a36af0a5f251ac432000551bd3e3"
+            "sha256": "c4e253b2e43f7f815c758893bb64158b3a53bef02c9730234cee026c9c358106"
           },
-          "width": 1916,
+          "width": 1920,
           "height": 1080,
-          "durationSeconds": 10.041667,
+          "durationSeconds": 8.0,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
@@ -644,15 +644,15 @@
           "accepted": true,
           "video": {
             "path": "assets/vid/home/desktop/electric-gates-barrier-1080p.mp4",
-            "sha256": "411dcd5f477412c2e2d1f6c3e92342ddebc3c194e087fc7ca511c947ce2f10a9"
+            "sha256": "82ca0e29fd9fa4b750460dc31f510c84261de1815b048c515ada1739f4c47760"
           },
           "poster": {
             "path": "assets/img/desktop/electric-gates-barrier-scene.webp",
-            "sha256": "cadf4818cf15db7294dd99be6a61ab0d1c6fd66398a6346e4693a1ca5bb8c6ed"
+            "sha256": "daa8eda640ea87fac230fbec21759625cc64b7db3af49025eb36d38bb82def8a"
           },
-          "width": 1918,
+          "width": 1920,
           "height": 1080,
-          "durationSeconds": 5.042,
+          "durationSeconds": 5.0,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
@@ -666,15 +666,15 @@
       "accepted": true,
       "video": {
         "path": "assets/vid/home/homepage-montage-720p.mp4",
-        "sha256": "4a52f318f241a4e21ea59ef1b86562fd2c5c5aa835eb448b2fd536afa70f5e76"
+        "sha256": "7b51fcdc7ddc91516fa78c3fe20c079c7870488c978cb5fa4a91c645107f353f"
       },
       "poster": {
         "path": "assets/img/homepage-montage-scene.webp",
-        "sha256": "1e09b40253471dfa8ad520e30caeb75b561da4ea013e646455c9ab5418f7a5ac"
+        "sha256": "f4a51419f6bd3662897222a5bca22dd018a874dc70102dae8aa3a6a6d5a51895"
       },
       "width": 1280,
       "height": 720,
-      "durationSeconds": 15,
+      "durationSeconds": 15.0,
       "codec": "h264",
       "audioTracks": 0,
       "fastStart": true,
@@ -685,15 +685,15 @@
           "accepted": true,
           "video": {
             "path": "assets/vid/home/homepage-montage-720p.mp4",
-            "sha256": "4a52f318f241a4e21ea59ef1b86562fd2c5c5aa835eb448b2fd536afa70f5e76"
+            "sha256": "7b51fcdc7ddc91516fa78c3fe20c079c7870488c978cb5fa4a91c645107f353f"
           },
           "poster": {
             "path": "assets/img/homepage-montage-scene.webp",
-            "sha256": "1e09b40253471dfa8ad520e30caeb75b561da4ea013e646455c9ab5418f7a5ac"
+            "sha256": "f4a51419f6bd3662897222a5bca22dd018a874dc70102dae8aa3a6a6d5a51895"
           },
           "width": 1280,
           "height": 720,
-          "durationSeconds": 15,
+          "durationSeconds": 15.0,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
@@ -704,15 +704,15 @@
           "accepted": true,
           "video": {
             "path": "assets/vid/home/desktop/homepage-montage-1080p.mp4",
-            "sha256": "32f0810e35a974bd66eadfd356f3dcce623c50f259662ab368786cda66d2ce60"
+            "sha256": "f46065360c5ef7b4493ffcef5888c5b25205cafe6cf1b1f691882fee4c8eb450"
           },
           "poster": {
             "path": "assets/img/desktop/homepage-montage-scene.webp",
-            "sha256": "5ece1e4acb5e48ff38fbf604fc9607a75b12e763192b3346dda3f10e55c5a00e"
+            "sha256": "3aff887ac394cd09bf60b86663dfa98a230927e3003a6711810263fb4592a295"
           },
-          "width": 1918,
+          "width": 1920,
           "height": 1080,
-          "durationSeconds": 15,
+          "durationSeconds": 15.0,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
