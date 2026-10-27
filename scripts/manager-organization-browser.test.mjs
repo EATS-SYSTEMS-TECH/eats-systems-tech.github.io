@@ -25,6 +25,10 @@ async function fixture(t, browser, origin, language, width, viewer = false) {
     async ({ language, viewer }) => {
       const { createManagerDashboard } =
         await import("/js/manager-dashboard.js");
+      const { ManagerExampleConnection } =
+        await import("/js/manager-example-connection.js");
+      const { createManagerExampleData, managerExampleSystems } =
+        await import("/js/manager-example-data.js");
       window.writes = [];
       window.connections = 0;
       window.members = [
@@ -100,7 +104,7 @@ async function fixture(t, browser, origin, language, width, viewer = false) {
             permissions: {
               managePeople: !viewer,
               manageLogo: !viewer,
-              openWorkspace: !viewer,
+              openWorkspace: true,
             },
           };
         if (p.startsWith("/organizations/org-a/systems?"))
@@ -154,10 +158,19 @@ async function fixture(t, browser, origin, language, width, viewer = false) {
         language,
         user: { uid: "current" },
         api,
-        Connection: class {
-          constructor() {
+        Connection: class extends ManagerExampleConnection {
+          constructor(options) {
+            super({
+              data: createManagerExampleData(),
+              system: managerExampleSystems[0],
+              onState: options.onState,
+            });
             window.connections++;
-            throw new Error("No hardware operation in metadata tests");
+            if (!viewer)
+              throw new Error("No hardware operation in metadata tests");
+          }
+          open() {
+            return super.open("DEMO-24980");
           }
         },
       });
@@ -360,7 +373,7 @@ test("selected organization contains branding, people and systems; invitation/re
       });
 });
 
-test("organization users see the overview but no branding, invitation, removal or hardware controls", async (t) => {
+test("organization users can open system workspaces without organization people or branding controls", async (t) => {
   const { origin, browser } = await startSite(t);
   const page = await fixture(t, browser, origin, "he", 390, true);
   await page.getByLabel("בחירת ארגון", { exact: true }).selectOption("org-a");
@@ -377,10 +390,20 @@ test("organization users see the overview but no branding, invitation, removal o
     await page
       .getByRole("button", { name: "פתיחת סביבת ניהול", exact: true })
       .count(),
+    1,
+  );
+  assert.equal(
+    await page.getByText("משתמש · צפייה בלבד", { exact: true }).count(),
     0,
   );
-  await page.getByRole("button", { name: "פרטי גישה", exact: true }).click();
-  await page.getByRole("dialog").waitFor();
   assert.deepEqual(await page.evaluate(() => window.writes), []);
   assert.equal(await page.evaluate(() => window.connections), 0);
+  await page
+    .getByRole("button", { name: "פתיחת סביבת ניהול", exact: true })
+    .click();
+  await page.locator("#manager-content .manager-facts").waitFor();
+  assert.equal(await page.evaluate(() => window.connections), 1);
+  assert.equal(await page.getByRole("tab").count(), 10);
+  assert.deepEqual(await page.evaluate(() => window.writes), []);
+  await page.evaluate(() => window.dashboard.close());
 });

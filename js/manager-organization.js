@@ -122,8 +122,8 @@ export async function renderManagerOrganization({
             "Manage your organization’s people and systems",
           )
         : t(
-            "צפייה באנשים ובמערכות של הארגון",
-            "View your organization’s people and systems",
+            "גישה למערכות הארגון ולסביבת הניהול שלהן",
+            "Access your organization’s systems and their workspaces",
           ),
     ),
   );
@@ -280,8 +280,8 @@ export async function renderManagerOrganization({
               "An admin can manage people, branding and systems in this organization only. The invitation waits for acceptance in their account.",
             )
           : t(
-              "המשתמש יוכל לצפות באנשי הארגון ובפרטי המערכות. לא תינתן הרשאת ניהול שער.",
-              "The user can view organization members and system details. Hardware management is not granted.",
+              "המשתמש יוכל לפתוח את סביבת הניהול של מערכות הארגון. הוספה והסרה של מנהלים ומשתמשים זמינות למנהלי הארגון בלבד.",
+              "The user can open workspaces for the organization’s systems. Adding and removing organization admins and users remains restricted to organization administrators.",
             ),
       fields: [["email", t("כתובת אימייל", "Email address"), "email"]],
       submitLabel: t("יצירת הזמנה", "Create invitation"),
@@ -363,7 +363,7 @@ export async function renderManagerOrganization({
             ? t("בעל הארגון", "Organization owner")
             : role === "organization-admin"
               ? t("מנהל ארגון", "Organization admin")
-              : t("משתמש · צפייה בלבד", "User · View only"),
+              : t("משתמש ארגון", "Organization user"),
         ),
       );
       row.append(avatar, text);
