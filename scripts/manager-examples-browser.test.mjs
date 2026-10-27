@@ -265,7 +265,7 @@ test("Manager example gate, Dual Control and group use real workspace controls w
           .locator("[data-example-organization]")
           .getByRole("button")
           .click();
-        await page.locator(".dashboard-examples > summary").click();
+        await page.locator(".manager-organization-header h2").waitFor();
         await page
           .locator('[data-example-system="example-manager-gate"]')
           .getByRole("button")

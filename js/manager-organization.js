@@ -1,3 +1,8 @@
+import {
+  createOrganizationLogo,
+  validOrganizationLogo,
+} from "./manager-organization-card.js";
+
 const node = (tag, text, className) => {
   const el = document.createElement(tag);
   if (text !== undefined) el.textContent = text;
@@ -95,20 +100,12 @@ export async function renderManagerOrganization({
     ),
   );
   const header = node("div", undefined, "manager-organization-header");
-  const artwork = node("div", undefined, "manager-organization-logo");
-  const validLogo =
-    typeof org.logoDataUrl === "string" &&
-    org.logoDataUrl.length <= 32022 &&
-    /^data:image\/png;base64,[A-Za-z0-9+/]+=*$/.test(org.logoDataUrl);
-  if (validLogo) {
-    const image = node("img");
-    image.src = org.logoDataUrl;
-    image.alt = t("לוגו של ", "Logo of ") + org.name;
-    artwork.append(image);
-  } else {
-    artwork.textContent = org.name.trim().slice(0, 1);
-    artwork.setAttribute("aria-hidden", "true");
-  }
+  const artwork = createOrganizationLogo(
+    org,
+    language,
+    "manager-organization-logo",
+  );
+  const validLogo = validOrganizationLogo(org.logoDataUrl);
   const identity = node("div", undefined, "manager-organization-identity");
   identity.append(
     node(
@@ -130,6 +127,14 @@ export async function renderManagerOrganization({
           ),
     ),
   );
+  const ownerLine = node("p", undefined, "manager-organization-owner-line");
+  const ownerEmail = node("span", owner.email);
+  ownerEmail.dir = "ltr";
+  ownerLine.append(
+    node("span", t("בעל הארגון", "Organization owner")),
+    ownerEmail,
+  );
+  identity.append(ownerLine);
   header.append(artwork, identity);
   if (permissions.manageLogo) {
     const tools = node("div", undefined, "manager-organization-brand-actions");
@@ -216,7 +221,23 @@ export async function renderManagerOrganization({
     ["users", t("משתמשי ארגון", "Organization users")],
     ["systems", t("מערכות", "Systems")],
   ]) {
-    const tile = node("div");
+    const tile = button(
+      "",
+      () => {
+        const target =
+          key === "systems"
+            ? root.querySelector('[data-organization-section="systems"]')
+            : section.querySelector(
+                `[data-organization-role="organization-${key === "users" ? "user" : "admin"}"]`,
+              );
+        if (target) {
+          target.tabIndex = -1;
+          target.focus({ preventScroll: true });
+          target.scrollIntoView({ block: "start", behavior: "auto" });
+        }
+      },
+      "manager-organization-metric",
+    );
     tile.append(
       node(
         "strong",
@@ -229,6 +250,22 @@ export async function renderManagerOrganization({
     metrics.append(tile);
   }
   section.append(metrics);
+  const search = node("label", undefined, "manager-organization-search");
+  search.append(
+    node("span", t("חיפוש באנשי הארגון", "Search organization people")),
+  );
+  const searchInput = node("input");
+  searchInput.type = "search";
+  searchInput.placeholder = t("חיפוש לפי אימייל", "Search by email");
+  searchInput.setAttribute(
+    "aria-label",
+    t("חיפוש באנשי הארגון", "Search organization people"),
+  );
+  search.append(searchInput);
+  const searchStatus = node("p", "", "manager-organization-search-status");
+  searchStatus.setAttribute("role", "status");
+  searchStatus.setAttribute("aria-live", "polite");
+  section.append(search, searchStatus);
   const people = node("div", undefined, "manager-organization-people");
   const invite = async (role) => {
     const saved = await dialogs.form({
@@ -269,7 +306,19 @@ export async function renderManagerOrganization({
         "manager-organization-person-column",
       ),
       heading = node("div", undefined, "manager-organization-people-head");
-    heading.append(node("h3", label));
+    column.dataset.organizationRole = role;
+    const title = node("div", undefined, "manager-organization-people-title");
+    title.append(
+      node("h3", label),
+      node(
+        "span",
+        String(
+          counts[role === "organization-admin" ? "administrators" : "users"],
+        ),
+        "manager-organization-people-count",
+      ),
+    );
+    heading.append(title);
     if (permissions.managePeople)
       heading.append(
         button(
@@ -301,6 +350,7 @@ export async function renderManagerOrganization({
           person.email?.slice(0, 1).toUpperCase(),
           "manager-organization-person-avatar",
         );
+      row.dataset.organizationEmail = person.email?.toLowerCase() ?? "";
       avatar.setAttribute("aria-hidden", "true");
       const text = node("div");
       const email = node("strong", person.email);
@@ -350,9 +400,41 @@ export async function renderManagerOrganization({
       }
       column.append(row);
     }
+    const noMatches = node(
+      "p",
+      t("לא נמצאו אנשים מתאימים", "No matching people"),
+      "manager-muted manager-organization-search-empty",
+    );
+    noMatches.hidden = true;
+    column.append(noMatches);
     people.append(column);
   }
   section.append(people);
+  searchInput.addEventListener("input", () => {
+    const term = searchInput.value.trim().toLowerCase();
+    const rows = [...people.querySelectorAll("[data-organization-email]")];
+    rows.forEach((row) => {
+      row.hidden = !row.dataset.organizationEmail.includes(term);
+    });
+    for (const column of people.children) {
+      const visible = [
+        ...column.querySelectorAll("[data-organization-email]"),
+      ].some((row) => !row.hidden);
+      column.querySelector(".manager-organization-search-empty").hidden =
+        !term || visible;
+      const empty = column.querySelector(
+        ".manager-muted:not(.manager-organization-search-empty)",
+      );
+      if (empty) empty.hidden = Boolean(term);
+    }
+    const shown = rows.filter((row) => !row.hidden).length;
+    searchStatus.textContent = term
+      ? t(
+          `מוצגים ${shown} מתוך ${rows.length} אנשים`,
+          `Showing ${shown} of ${rows.length} people`,
+        )
+      : "";
+  });
   if (invitations.length) {
     const pending = node("section", undefined, "manager-organization-pending");
     pending.append(node("h3", t("הזמנות ממתינות", "Pending invitations")));
