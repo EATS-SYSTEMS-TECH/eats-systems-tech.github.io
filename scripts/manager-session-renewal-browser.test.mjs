@@ -2,6 +2,26 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { startSite } from "./platform-test-fixtures.mjs";
 
+async function assertPopupOnlyFailure(page) {
+  const popup = page.locator('.manager-connection-dialog[data-state="error"]');
+  await popup.waitFor();
+  assert.equal(await page.locator(".manager-status").innerText(), "");
+  assert.notEqual(await page.locator(".manager-status").getAttribute("data-state"), "error");
+  assert.equal(await page.locator(".manager-connection-recovery h3, .manager-connection-recovery p").count(), 0);
+  return popup;
+}
+
+async function dismissFailureToMetadata(page, popup) {
+  await popup.getByRole("button", { name: "View system details", exact: true }).click();
+  await page.getByRole("button", { name: "Reconnect to gate", exact: true }).waitFor();
+  assert.equal(await page.locator(".manager-connection-dialog").count(), 0);
+  assert.equal(await page.locator(".manager-status").innerText(), "");
+  assert.equal(await page.locator(".manager-connection-recovery h3, .manager-connection-recovery p").count(), 0);
+  assert.equal(await page.locator(".manager-system-menu summary").isVisible(), true);
+  assert.equal(await page.locator(".manager-progress").isHidden(), true);
+  assert.equal(await page.locator(".manager-loading-panel").count(), 0);
+}
+
 test("secure session renewal preserves edits and daily identity without replaying uncertain operations", async (t) => {
   const { origin, browser } = await startSite(t);
   const page = await browser.newPage();
@@ -130,10 +150,14 @@ test("secure session renewal preserves edits and daily identity without replayin
     c.busy = true;
     c.expire();
   });
-  await page
-    .getByRole("button", { name: "Reconnect to gate", exact: true })
-    .waitFor();
+  const uncertain = await assertPopupOnlyFailure(page);
+  assert.match(await uncertain.innerText(), /result|history|whether.+completed/i, "uncertain writes require readback guidance in the popup");
   assert.equal(await page.evaluate(() => window.connections.length), 2);
+  assert.equal(await page.evaluate(() => window.commands.some(cmd => cmd.startsWith("ADMIN_SET"))), false);
+  await dismissFailureToMetadata(page, uncertain);
+  assert.doesNotMatch(await page.locator(".manager-shell").innerText(), /SECURE_SESSION_EXPIRED|connection ended during an operation|check its result before retrying/i);
+  await page.evaluate(() => window.connections[1].onState("SECURE_SESSION_EXPIRED"));
+  assert.equal(await page.locator(".manager-connection-dialog").count(), 0, "a duplicate expiry cannot resurrect dismissed guidance");
   await page
     .getByRole("button", { name: "Reconnect to gate", exact: true })
     .click();
@@ -151,7 +175,11 @@ test("secure session renewal preserves edits and daily identity without replayin
     window.connections[2].onState("DISCONNECTED");
     window.connections[2].close();
   });
-  await page.getByRole("heading", { name: "Connection interrupted" }).waitFor();
+  const disconnected = await assertPopupOnlyFailure(page);
+  assert.match(await disconnected.innerText(), /connection ended|disconnected/i);
+  await dismissFailureToMetadata(page, disconnected);
+  await page.evaluate(() => window.connections[2].onState("DISCONNECTED"));
+  assert.equal(await page.locator(".manager-connection-dialog").count(), 0);
   await page
     .getByRole("button", { name: "Reconnect to gate", exact: true })
     .click();

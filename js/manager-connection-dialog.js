@@ -349,5 +349,8 @@ export function createManagerConnectionDialog({
     get active() {
       return Boolean(dialog);
     },
+    get state() {
+      return dialog?.dataset.state;
+    },
   };
 }

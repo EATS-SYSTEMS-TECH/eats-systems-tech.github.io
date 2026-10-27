@@ -83,6 +83,7 @@ export function createManagerDashboard({
     currentView = "",
     countsPopover;
   let workspacePanel, workspacePanelContext, tabGeneration = 0, systemOverview;
+  let connectionFailureVersion = 0;
   const shell = node("div", undefined, "manager-shell"),
     nav = node("nav", undefined, "manager-nav"),
     main = node("div", undefined, "manager-main");
@@ -278,16 +279,17 @@ export function createManagerDashboard({
       b.classList.add("is-loading");
     }
     const writesBefore = successfulWrites;
+    const failureBefore = connectionFailureVersion;
     try {
       await action();
-      if (!closed && successfulWrites > writesBefore && !status.textContent)
+      if (!closed && failureBefore === connectionFailureVersion && successfulWrites > writesBefore && !status.textContent)
         say(
           t("השינויים נשמרו בהצלחה.", "Changes saved successfully."),
           false,
           "success",
         );
     } catch (error) {
-      if (!closed && error.message !== "CANCELLED")
+      if (!closed && error.message !== "CANCELLED" && failureBefore === connectionFailureVersion)
         say(
           successfulWrites > writesBefore
             ? t(
@@ -1539,24 +1541,46 @@ export function createManagerDashboard({
     say("");
     const returnFocus = view.querySelector(".manager-workspace-head h3");
     if (returnFocus) returnFocus.tabIndex = -1;
-    connectionDialog.open({
-      systemName: currentSystem.name,
-      gate,
-      simulation: examples.isSystem(currentSystem),
-      returnFocus,
-      onCancel: () => {
-        if (epoch === generation)
-          void task(() =>
-            examples.isSystem(currentSystem)
-              ? exampleBack()
-              : showSystems(scope),
-          );
-      },
-      onRetry: () => {
-        if (epoch === generation) void task(() => openGate(gate, preserveView));
-      },
-    });
-    activity.pause(true);
+    const openConnectionDialog = () => {
+      connectionDialog.open({
+        systemName: currentSystem.name,
+        gate,
+        simulation: examples.isSystem(currentSystem),
+        returnFocus,
+        onCancel: () => {
+          if (epoch === generation)
+            void task(() =>
+              examples.isSystem(currentSystem)
+                ? exampleBack()
+                : showSystems(scope),
+            );
+        },
+        onRetry: () => {
+          if (epoch === generation) void task(() => openGate(gate, preserveView));
+        },
+      });
+      activity.pause(true);
+    };
+    let failureShown = false, workspaceReady = false;
+    const failConnection = (error) => {
+      if (closed || epoch !== generation || failureShown) return;
+      failureShown = true;
+      connectionFailureVersion++;
+      currentRows = [];
+      currentData = undefined;
+      showConnectionRecovery(gate);
+      view.querySelector("#manager-tabs")?.replaceChildren();
+      say("");
+      // Established sessions can fail after the success dialog has closed.
+      // Reopen the same connection UI, while reporting each attempt only once.
+      if (!connectionDialog.active || connectionDialog.state === "complete") {
+        connectionDialog.close();
+        openConnectionDialog();
+        connectionDialog.setStage(workspaceReady ? "loading" : "connecting");
+      }
+      showConnectionState("error", managerConnectionError(error, language, true));
+    };
+    openConnectionDialog();
     showConnectionState("waiting");
     const existingContent = view.querySelector("#manager-content");
     const existingTabs = view.querySelector("#manager-tabs");
@@ -1565,7 +1589,12 @@ export function createManagerDashboard({
       if (existingTabs) existingTabs.inert = true;
     }
     // Wait for the old demand to be cancelled before claiming the gate again.
-    await previous?.close();
+    try {
+      await previous?.close();
+    } catch (error) {
+      failConnection(error);
+      return;
+    }
     if (closed || epoch !== generation) return;
     currentGate = gate;
     if (!preserveView) {
@@ -1576,7 +1605,7 @@ export function createManagerDashboard({
       api,
       user,
       onState: (state) => {
-        if (epoch !== generation) return;
+        if (closed || epoch !== generation || failureShown) return;
         if (["waiting", "connecting", "active"].includes(state)) {
           showConnectionState(state);
         } else if (state === "SECURE_SESSION_EXPIRED") {
@@ -1588,46 +1617,16 @@ export function createManagerDashboard({
           // Let fail() close the old socket first. Never replay an in-flight
           // operation whose outcome may be unknown.
           queueMicrotask(() => {
-            if (closed || epoch !== generation) return;
+            if (closed || epoch !== generation || failureShown) return;
             if (!uncertain) {
               showConnectionState("connecting");
               void openGate(gate, true);
             } else {
-              workspacePanel?.dispose();
-              workspacePanel = undefined;
-              workspacePanelContext = undefined;
-              csvDialog.cancel();
-              say(
-                t(
-                  "החיבור הסתיים במהלך פעולה. התחברו לשער ובדקו את התוצאה לפני ניסיון נוסף.",
-                  "The connection ended during an operation. Reconnect and check its result before retrying.",
-                ),
-                true,
-              );
-              showConnectionState(
-                "error",
-                t(
-                  "החיבור הסתיים במהלך פעולה. בדקו את התוצאה לפני ניסיון נוסף.",
-                  "The connection ended during an operation. Check its result before retrying.",
-                ),
-              );
-              view
-                .querySelector("#manager-content")
-                ?.replaceChildren(
-                  button(t("חיבור מחדש לשער", "Reconnect to gate"), () =>
-                    openGate(gate),
-                  ),
-                );
-              view.querySelector("#manager-tabs")?.replaceChildren();
+              failConnection(new Error(state));
             }
           });
         } else {
-          currentRows = [];
-          currentData = undefined;
-          showConnectionRecovery(gate);
-          view.querySelector("#manager-tabs")?.replaceChildren();
-          say(errorText(new Error(state)), true);
-          showConnectionState("error", managerConnectionError(new Error(state), language, true));
+          failConnection(new Error(state));
         }
       },
     };
@@ -1665,7 +1664,7 @@ export function createManagerDashboard({
             });
             try {
               const result = await run(...args);
-              if (closed || epoch !== generation || connection !== candidate)
+              if (closed || epoch !== generation || connection !== candidate || failureShown)
                 throw new Error("CANCELLED");
               return result;
             } catch (error) {
@@ -1690,7 +1689,7 @@ export function createManagerDashboard({
         ),
         () => candidate.open(gate),
       );
-      if (epoch !== generation) {
+      if (epoch !== generation || failureShown) {
         candidate.close();
         return;
       }
@@ -1710,6 +1709,7 @@ export function createManagerDashboard({
         connection === candidate &&
         candidate.session
       ) {
+        workspaceReady = true;
         connectionDialog.complete();
         say(
           examples.isSystem(currentSystem)
@@ -1722,9 +1722,7 @@ export function createManagerDashboard({
     } catch (error) {
       if (epoch === generation) {
         connection?.close();
-        showConnectionRecovery(gate);
-        say(errorText(error), true);
-        showConnectionState("error", managerConnectionError(error, language, true));
+        failConnection(error);
       }
     } finally {
       if (epoch === generation) {
@@ -1745,14 +1743,6 @@ export function createManagerDashboard({
     dialogs.cancel();
     const card = node("section", undefined, "manager-connection-recovery");
     card.append(
-      node("h3", t("החיבור למערכת הופסק", "Connection interrupted")),
-      node(
-        "p",
-        t(
-          "אפשר להתחבר מחדש ולקרוא את המצב העדכני. אם שלחתם שינוי, בדקו אם הוא נשמר לפני שליחתו שוב.",
-          "Reconnect to read the current state. If you sent a change, check whether it was saved before sending it again.",
-        ),
-      ),
       button(
         t("חיבור מחדש לשער", "Reconnect to gate"),
         () => openGate(gate),
