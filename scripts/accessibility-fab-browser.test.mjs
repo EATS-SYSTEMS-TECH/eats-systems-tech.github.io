@@ -102,6 +102,44 @@ try {
     await context.close();
   }
 
+  // A dragged spot belongs to the reading side: near the right edge in Hebrew,
+  // mirrored near the left edge in English, and an old physical spot is dropped.
+  {
+    const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    await context.addInitScript((value) => localStorage.setItem("wifigate-cookie-consent-v1", value), consent);
+    const he = await openPage(context, "he/index.html");
+    const fab = he.locator("#a11y-fab");
+    const start = await center(fab);
+    await he.mouse.move(start.x, start.y);
+    await he.mouse.down();
+    await he.waitForTimeout(750);
+    await he.mouse.move(1100, 300, { steps: 12 });
+    await he.mouse.up();
+    await he.waitForTimeout(300);
+    const heBox = await fab.evaluate((button) => ({ x: parseFloat(button.style.left), y: parseFloat(button.style.top), width: button.offsetWidth }));
+    const en = await openPage(context, "index.html");
+    const enBox = await en.locator("#a11y-fab").evaluate((button) => ({ x: parseFloat(button.style.left), y: parseFloat(button.style.top) }));
+    assert.ok(Math.abs(enBox.x - (1280 - heBox.x - heBox.width)) < 2 && Math.abs(enBox.y - heBox.y) < 2, `saved spot mirrors with the language ${JSON.stringify({ heBox, enBox })}`);
+    await en.evaluate(() => document.documentElement.setAttribute("dir", "rtl"));
+    await en.waitForTimeout(100);
+    const flipped = await en.locator("#a11y-fab").evaluate((button) => ({ x: parseFloat(button.style.left) }));
+    assert.ok(Math.abs(flipped.x - heBox.x) < 2, "a direction change in place moves the button at once");
+    await context.close();
+
+    const legacy = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    await legacy.addInitScript((value) => {
+      localStorage.setItem("wifigate-cookie-consent-v1", value);
+      if (!sessionStorage.getItem("seeded")) {
+        sessionStorage.setItem("seeded", "1");
+        localStorage.setItem("wifigate-a11y-fab-position", JSON.stringify({ x: 0.9, y: 0.4 }));
+      }
+    }, consent);
+    const tab = await openPage(legacy, "index.html");
+    assert.ok((await tab.locator("#a11y-fab").boundingBox()).x < 100, "an old physical spot no longer pins the button to the right");
+    assert.equal(await tab.evaluate(() => localStorage.getItem("wifigate-a11y-fab-position")), null);
+    await legacy.close();
+  }
+
   // A plain press opens the panel.
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
   await context.addInitScript((value) => localStorage.setItem("wifigate-cookie-consent-v1", value), consent);
@@ -112,7 +150,7 @@ try {
   await tab.touchscreen.tap(x, y);
   assert.equal(await tab.locator("#a11y-panel").getAttribute("aria-hidden"), "false", "a tap opens the panel");
   await context.close();
-  console.log("Accessibility button: stays stable when a real clip starts during a long press; center drag, X until reload and tap-to-open passed.");
+  console.log("Accessibility button: stays stable when a real clip starts during a long press; center drag, mirrored saved spot, X until reload and tap-to-open passed.");
 } finally {
   await browser.close();
 }

@@ -251,7 +251,13 @@ function resetAccessibilitySettings() {
 // Long press on the accessibility button lets the visitor drag it to another
 // place (remembered on this device) or hide it with the X; a hidden button is
 // back as soon as the page is loaded again.
-const A11Y_FAB_POSITION_KEY = "wifigate-a11y-fab-position"
+// The saved spot is measured from the reading-start edge, so it mirrors with the language.
+const A11Y_FAB_POSITION_KEY = "wifigate-a11y-fab-position-v2"
+const A11Y_FAB_OLD_POSITION_KEY = "wifigate-a11y-fab-position"
+
+function accessibilityFabRtl() {
+  return getComputedStyle(document.documentElement).direction === "rtl"
+}
 const A11Y_FAB_LONG_PRESS_MS = 550
 const A11Y_FAB_MARGIN = 8
 
@@ -276,9 +282,13 @@ function placeAccessibilityFab(fab, left, top) {
 function setupAccessibilityFabArrange(fab) {
   function applySavedPosition() {
     try {
+      localStorage.removeItem(A11Y_FAB_OLD_POSITION_KEY)
       const saved = JSON.parse(localStorage.getItem(A11Y_FAB_POSITION_KEY) || "null")
-      if (saved && typeof saved.x === "number" && typeof saved.y === "number") {
-        placeAccessibilityFab(fab, saved.x * window.innerWidth, saved.y * window.innerHeight)
+      if (saved && typeof saved.start === "number" && typeof saved.y === "number") {
+        const width = document.documentElement.clientWidth
+        const start = saved.start * width
+        const left = accessibilityFabRtl() ? width - start - fab.getBoundingClientRect().width : start
+        placeAccessibilityFab(fab, left, saved.y * window.innerHeight)
       }
     } catch (error) {
       // Ignore a missing or malformed saved position.
@@ -363,9 +373,13 @@ function setupAccessibilityFabArrange(fab) {
     fab.classList.remove("is-arranging")
     fab.dataset.suppressClick = "true"
     if (moved) {
-      const rect = fab.getBoundingClientRect()
+      // The placed spot, not the box: the drag scale may still be easing back.
+      const left = parseFloat(fab.style.left)
+      const top = parseFloat(fab.style.top)
       try {
-        localStorage.setItem(A11Y_FAB_POSITION_KEY, JSON.stringify({ x: rect.left / window.innerWidth, y: rect.top / window.innerHeight }))
+        const width = document.documentElement.clientWidth
+        const start = accessibilityFabRtl() ? width - left - fab.offsetWidth : left
+        localStorage.setItem(A11Y_FAB_POSITION_KEY, JSON.stringify({ start: start / width, y: top / window.innerHeight }))
       } catch (error) {
         // The new position still applies for this page.
       }
@@ -397,6 +411,11 @@ function setupAccessibilityFabArrange(fab) {
   })
 
   applySavedPosition()
+  // A language switch in place flips the direction; follow it at once.
+  new MutationObserver(() => {
+    if (fab.style.left) applySavedPosition()
+    if (!dismiss.hidden) positionDismiss()
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ["dir"] })
 }
 
 // The button always sits in the reading-start corner, which it shares with
