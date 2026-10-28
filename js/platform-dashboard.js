@@ -36,7 +36,6 @@ import { monthlyEstimate, monthlyTotal, revenueTotal, formatMoney, unavailableLa
 import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
 import {
   createReservationsAdmin,
-  createReservationsEntry,
 } from "./reservations-admin.js";
 
 const $ = (selector) => document.querySelector(selector);
@@ -65,7 +64,6 @@ let currentUser;
 let managerDashboard;
 let platformDirectory;
 let reservationsAdmin;
-let reservationsEntry;
 const directoryRoot = document.createElement("section");
 directoryRoot.id = "platform-admin-management";
 directoryRoot.className = "portal-panel platform-admin-management";
@@ -85,7 +83,26 @@ entryIcon.append(entryShape);
 const entryLabel = document.createElement("span");
 entryLabel.textContent = language === "he" ? "ניהול פלטפורמה" : "Platform management";
 managementEntry.append(entryIcon, entryLabel);
-document.body.append(managementEntry);
+const adminTools = document.createElement("nav");
+adminTools.className = "platform-admin-tools";
+adminTools.hidden = true;
+adminTools.setAttribute("aria-labelledby", "platform-admin-tools-title");
+const adminToolsTitle = document.createElement("h2");
+adminToolsTitle.id = "platform-admin-tools-title";
+adminToolsTitle.dir = "ltr";
+adminToolsTitle.textContent = "WIFIGATE Admins only";
+const reservationsLink = document.createElement("a");
+reservationsLink.id = "platform-reservations-entry";
+reservationsLink.className = "platform-management-entry";
+reservationsLink.href = "/dashboard/reservations/" + (language === "he" ? "?lang=he" : "");
+const reservationsIcon = entryIcon.cloneNode(true);
+reservationsIcon.querySelector("path").setAttribute("d", "M8 3v4m8-4v4M4 10h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Zm3 9h3m-3 3h6");
+const reservationsLabel = document.createElement("span");
+reservationsLabel.dir = "ltr";
+reservationsLabel.textContent = "WIFIGATE Reservations";
+reservationsLink.append(reservationsIcon, reservationsLabel);
+adminTools.append(adminToolsTitle, reservationsLink, managementEntry);
+document.body.append(adminTools);
 let identity;
 let session;
 let generation = 0;
@@ -183,13 +200,12 @@ function clearSecret() {
 }
 
 function clearPrivate() {
+  adminTools.hidden = true;
   managementEntry.hidden = true;
   platformDirectory?.close();
   platformDirectory = undefined;
   reservationsAdmin?.close();
   reservationsAdmin = undefined;
-  reservationsEntry?.close();
-  reservationsEntry = undefined;
   managerProfile?.clear();
   managerDashboard?.close();
   managerDashboard = undefined;
@@ -444,7 +460,6 @@ async function refresh() {
         reservationsAdmin = createReservationsAdmin({ root: directoryRoot, user, language });
         return;
       }
-      reservationsEntry = createReservationsEntry({ before: directoryRoot, user, language });
       platformDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language, standalone: true,
         ensureRecent: async () => {
           const token = await user.getIdTokenResult();
@@ -495,6 +510,7 @@ async function refresh() {
     } else {
       renderProducts();
       if (identity.platformRole === "admin" && identity.mfa.verified) {
+        adminTools.hidden = false;
         managementEntry.hidden = false;
       }
     }

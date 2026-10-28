@@ -201,7 +201,7 @@ test("the open-reservations limit and a lost response keep the same Idempotency-
   assert.equal(keys.length, 2);
 });
 
-test("WIFIGATE Admin opens Reservations from Platform management and moves one", async (t) => {
+test("WIFIGATE Admin opens Reservations from the separate admin tools and moves one", async (t) => {
   const { origin, browser } = await startSite(t);
   const { page, context } = await scenario(browser, {
     platformRole: "admin",
@@ -228,7 +228,9 @@ test("WIFIGATE Admin opens Reservations from Platform management and moves one",
     nextStatuses: ["contacted", "confirmed", "cancelled"],
     history: [{ status: "new", at: "2026-10-27T10:00:00.000Z", by: "customer", actorEmail: null }],
   });
+  let adminRequests = 0;
   await context.route("**/api/v1/product-reservations/admin**", async (route) => {
+    adminRequests++;
     const request = route.request();
     const url = new URL(request.url());
     if (url.pathname === "/api/v1/product-reservations/admin")
@@ -272,24 +274,19 @@ test("WIFIGATE Admin opens Reservations from Platform management and moves one",
     return route.fulfill({ json: { reservation: current } });
   });
 
-  await page.goto(origin + "/dashboard/platform/");
-  const entry = page.locator(".reservations-entry");
+  await page.goto(origin + "/dashboard/");
+  const tools = page.getByRole("navigation", { name: "WIFIGATE Admins only" });
+  const entry = tools.locator("#platform-reservations-entry");
   await entry.getByText("WIFIGATE Reservations").waitFor();
-  await entry.locator("strong").first().waitFor();
-  assert.equal(await entry.locator("strong").first().textContent(), "2");
-  assert.equal(await entry.locator("strong").nth(1).textContent(), "4");
+  assert.equal(await page.locator(".reservations-entry").count(), 0);
+  assert.deepEqual(await tools.locator("a").allTextContents(), ["WIFIGATE Reservations", "Platform management"]);
+  await tools.locator("#platform-management-entry").click();
   await page.locator("#platform-admin-management").waitFor();
-  assert.ok(
-    await page.evaluate(
-      () =>
-        document.querySelector(".reservations-entry").compareDocumentPosition(
-          document.querySelector("#platform-admin-management"),
-        ) & Node.DOCUMENT_POSITION_FOLLOWING,
-    ),
-    "the Reservations card stands apart, before the directory and its For Business section",
-  );
-
-  await entry.getByRole("link", { name: "Open" }).click();
+  assert.equal(await page.locator(".reservations-entry").count(), 0);
+  assert.equal(await tools.isHidden(), true);
+  assert.equal(adminRequests, 0, "profile and platform management never preload reservations");
+  await page.goto(origin + "/dashboard/");
+  await entry.click();
   await page.waitForURL(origin + "/dashboard/reservations/");
   await page.getByRole("heading", { name: "WIFIGATE Reservations", level: 1 }).waitFor();
   const row = page.locator(".reservations-admin-row");
@@ -335,4 +332,5 @@ test("a signed-in account that is not a WIFIGATE Admin never loads reservations 
   await page.goto(origin + "/dashboard/?lang=he");
   await page.locator("#product-grid").waitFor();
   assert.equal(await page.locator(".reservations-entry").count(), 0);
+  assert.equal(await page.locator(".platform-admin-tools").isHidden(), true);
 });

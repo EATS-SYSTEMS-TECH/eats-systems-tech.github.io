@@ -1,5 +1,5 @@
-// WIFIGATE Reservations in WIFIGATE Admin: an entry card on Platform
-// management and the reservations page (/dashboard/reservations/), apart
+// WIFIGATE Reservations in WIFIGATE Admin: the dedicated reservations
+// page (/dashboard/reservations/), apart
 // from the For Business products. The backend requires the global WIFIGATE
 // Admin with TOTP on every request.
 import {
@@ -17,7 +17,6 @@ import {
 } from "./reservations-copy.js";
 
 const statuses = ["new", "contacted", "confirmed", "shipped", "delivered", "cancelled"];
-const openStatuses = ["new", "contacted", "confirmed", "shipped"];
 
 const element = (tag, attributes = {}, ...children) => {
   const node = document.createElement(tag);
@@ -48,57 +47,9 @@ function errorText(t, error) {
 // Field labels come from the customer form; the admin view drops "(optional)".
 const bare = (label) => label.replace(/\s*\((?:לא חובה|optional)\)$/, "");
 
-const pageLink = (language) =>
-  language === "he" ? "/dashboard/reservations/?lang=he" : "/dashboard/reservations/";
 
 const itemsText = (t, items) =>
   items.map(({ productLine, quantity }) => `${productName(productLine)} ${t("unitSuffix", { n: quantity })}`).join(" · ");
-
-// The card on /dashboard/platform/: new and open counts and a link.
-export function createReservationsEntry({ before, user, language }) {
-  const t = reservationsText(language);
-  const counts = element("p", { text: t("loading") });
-  const card = element(
-    "section",
-    { className: "reservations-entry portal-panel", "aria-labelledby": "reservations-entry-title" },
-    element(
-      "div",
-      {},
-      element("h2", { id: "reservations-entry-title", dir: "ltr", text: "WIFIGATE Reservations" }),
-      element("p", { text: t("adminEntryText") }),
-      counts,
-    ),
-    element("a", { className: "platform-button", href: pageLink(language), text: t("adminEntryOpen") }),
-  );
-  let closed = false;
-
-  before.before(card);
-
-  void adminListReservations(user, { status: "new" })
-    .then(({ counts: totals }) => {
-      if (closed) return;
-      const values = {
-        "{new}": totals.new,
-        "{open}": openStatuses.reduce((sum, status) => sum + totals[status], 0),
-      };
-      // The template keeps its placeholders; each number becomes bold.
-      counts.replaceChildren(
-        ...t("adminEntryCounts", { new: "{new}", open: "{open}" })
-          .split(/(\{new\}|\{open\})/)
-          .map((part) => (part in values ? element("strong", { text: String(values[part]) }) : part)),
-      );
-    })
-    .catch((error) => {
-      if (!closed) counts.textContent = errorText(t, error);
-    });
-
-  return {
-    close() {
-      closed = true;
-      card.remove();
-    },
-  };
-}
 
 // The reservations page itself.
 export function createReservationsAdmin({ root, user, language }) {

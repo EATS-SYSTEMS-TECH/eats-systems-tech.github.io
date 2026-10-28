@@ -1040,7 +1040,14 @@ html[dir="rtl"] .product-switcher__label strong {
 .platform-management-entry svg { width: 23px; height: 23px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .platform-management-entry:hover { background: #243655; box-shadow: 0 10px 28px #15213b38; }
 .platform-management-entry:focus-visible, .platform-admin-person-summary:focus-visible { outline: 3px solid #397cf3; outline-offset: 4px; }
-.platform-page:has(.platform-management-entry:not([hidden])) { padding-bottom: 110px; }
+.platform-admin-tools { position: fixed; z-index: 40; inset-inline-start: max(24px, env(safe-area-inset-left)); bottom: calc(24px + env(safe-area-inset-bottom)); display: grid; gap: 8px; width: min(264px, calc(100vw - 32px)); padding: 12px; border: 1px solid #dce3ed; border-radius: 20px; background: #fff; box-shadow: 0 8px 28px #15213b26; }
+.platform-admin-tools[hidden] { display: none; }
+.platform-admin-tools h2 { margin: 0 0 3px; padding-inline: 4px; font-size: .75rem; font-weight: 650; color: #586680; text-align: start; }
+.platform-admin-tools .platform-management-entry { position: static; width: 100%; box-sizing: border-box; min-height: 48px; padding: .75rem .85rem; border-radius: 12px; box-shadow: none; font-size: .85rem; }
+.platform-admin-tools .platform-management-entry:hover { background: #000; color: #fff; }
+.platform-admin-tools .platform-management-entry svg { flex: 0 0 22px; }
+.platform-page:has(.platform-admin-tools:not([hidden])) { padding-bottom: 205px; }
+@media (max-width: 600px) { .platform-admin-tools { inset-inline-start: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); } }
 .platform-management-back { display: inline-flex; gap: .5rem; align-items: center; width: fit-content; margin-block: 1.4rem 0; color: var(--muted); font-size: .9rem; text-decoration: none; }
 .platform-management-back::before { content: "←"; font-size: 1.2rem; }
 [dir="rtl"] .platform-management-back::before { content: "→"; }

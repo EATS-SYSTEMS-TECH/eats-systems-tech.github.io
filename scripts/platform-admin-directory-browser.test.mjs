@@ -152,7 +152,12 @@ test("the management shortcut follows the interface direction and the admin page
       assert.equal(requests, 0);
       const box = await entry.boundingBox();
       assert.ok(box.y + box.height <= 900 && box.y >= 750);
-      assert.ok(language === "he" ? box.x > width / 2 : box.x < width / 2);
+      assert.ok(language === "he" ? box.x + box.width > width - 48 : box.x < 48);
+      const tools = page.getByRole("navigation", { name: "WIFIGATE Admins only" });
+      const reservations = tools.locator("#platform-reservations-entry");
+      assert.equal(await reservations.getAttribute("href"), "/dashboard/reservations/" + suffix);
+      assert.ok((await reservations.boundingBox()).y < box.y);
+      assert.equal(await page.locator(".reservations-entry").count(), 0);
       if (process.env.WIFIGATE_ADMIN_UX_SCREENSHOTS)
         await page.screenshot({
           path: `${process.env.WIFIGATE_ADMIN_UX_SCREENSHOTS}/dashboard-entry-${language}-${width}.png`,
@@ -213,6 +218,7 @@ test("a direct management URL stays closed for members and unverified admin sess
     });
     await fixture.page.goto(origin + "/dashboard/platform/?lang=he");
     await fixture.page.locator("#product-switcher-button").waitFor();
+    assert.equal(await fixture.page.locator(".platform-admin-tools").isHidden(), true);
     assert.equal(
       await fixture.page.locator("#platform-admin-management").isHidden(),
       true,
@@ -245,6 +251,7 @@ test("members and admins without verified MFA never load the directory", async (
     t.after(() => fixture.context.close());
     await fixture.page.goto(origin + "/dashboard/");
     await fixture.page.locator("#product-switcher-button").waitFor();
+    assert.equal(await fixture.page.locator(".platform-admin-tools").isHidden(), true);
     assert.equal(
       await fixture.page.locator("#platform-admin-management").isHidden(),
       true,
