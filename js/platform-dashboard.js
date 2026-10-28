@@ -507,9 +507,14 @@ async function refresh() {
             onProfile: profile => managerProfile?.update({ ...profile, platformRole: identity.platformRole }, user),
           });
           if (identity.platformRole === "admin" && identity.mfa.verified) {
-            const entry = document.createElement("a"); entry.className = "pay-button primary pay-management-entry";
+            const entry = document.createElement("a"); entry.className = "platform-management-entry manager-platform-entry pay-management-entry";
             entry.href = "/dashboard/pay/platform/" + suffix;
-            entry.textContent = language === "he" ? "ניהול פלטפורמה · Pay" : "Platform management · Pay";
+            entry.title = language === "he" ? "ניהול פלטפורמה" : "Platform management";
+            const label = document.createElement("span"); label.textContent = entry.title;
+            const icon = entryIcon.cloneNode(true);
+            for (const [name, value] of Object.entries({ fill: "none", stroke: "currentColor", "stroke-width": "1.7", "stroke-linecap": "round", "stroke-linejoin": "round" })) icon.setAttribute(name, value);
+            icon.querySelector("path").setAttribute("d", "M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Zm-4 9 3 3 5-6");
+            entry.append(icon, label);
             $("#pay-root").append(entry);
           }
         }

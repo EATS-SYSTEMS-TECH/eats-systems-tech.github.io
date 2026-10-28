@@ -98,10 +98,18 @@ test("Pay real workspace saves versioned metadata, rejects conflicts and shows Q
   await page.locator('[data-pay-tab="preview"]').click();
   const inactive = page.locator('[data-pay-tab="overview"]');
   await inactive.hover();
-  await page.waitForFunction(() => getComputedStyle(document.querySelector('[data-pay-tab="overview"]')).backgroundColor === "rgb(17, 23, 20)");
-  const hover = await inactive.evaluate(node => ({ background: getComputedStyle(node).backgroundColor, color: getComputedStyle(node).color }));
-  assert.equal(hover.background, "rgb(17, 23, 20)");
-  assert.equal(hover.color, "rgb(255, 255, 255)");
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('[data-pay-tab="overview"]')).backgroundColor === "rgb(248, 250, 252)");
+  const hover = await inactive.evaluate(node => {
+    const style = getComputedStyle(node);
+    const luminance = color => {
+      const values = color.match(/[\d.]+/g).slice(0, 3).map(Number).map(value => { value /= 255; return value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4; });
+      return values[0] * .2126 + values[1] * .7152 + values[2] * .0722;
+    };
+    const foreground = luminance(style.color), background = luminance(style.backgroundColor);
+    return { background: style.backgroundColor, color: style.color, contrast: (Math.max(foreground, background) + .05) / (Math.min(foreground, background) + .05) };
+  });
+  assert.equal(hover.background, "rgb(248, 250, 252)", "inactive workspace tabs use the shared Manager hover surface");
+  assert.ok(hover.contrast >= 4.5, "hover text remains readable on the shared surface");
   await page.mouse.move(0, 0);
   await page.locator(".pay-sharing img").waitFor();
   assert.match(await page.getByRole("link", { name: "Open preview" }).getAttribute("href"), new RegExp(`/pay/point/\\?id=${PUBLIC}$`));
@@ -172,9 +180,9 @@ test("Pay organization scope uses live membership context and keeps staff and vi
     state.organizationItems = [state.system];
     await enter(page, origin);
     await page.getByRole("button", { name: "My organizations", exact: true }).click();
-    await page.locator(".pay-system-card").filter({ hasText: "Harbour organization" }).getByRole("button", { name: "Open organization" }).click();
+    await page.locator(".pay-organization-card").filter({ hasText: "Harbour organization" }).getByRole("button", { name: "Open organization" }).click();
     await page.locator(`[data-system-id="${ID}"] button`).waitFor();
-    assert.equal(await page.locator(".pay-content h1").textContent(), "Harbour organization");
+    assert.equal(await page.locator(".pay-organization-header h2").textContent(), "Harbour organization");
     assert.equal(state.calls.some(call => call.path === "/api/v1/pay/systems" && call.query.includes("organizationId=fixture-org")), true);
     await page.locator(`[data-system-id="${ID}"] button`).click();
     await page.locator('[data-pay-tab="settings"]').click();
@@ -220,7 +228,7 @@ test("Pay respects server payment modes and displays tariff amount with the corr
   state.system.config.accessMode = "metered";
   await enter(page, origin);
   const card = page.locator(`[data-system-id="${ID}"]`);
-  assert.match(await card.locator(".pay-card-facts strong").textContent(), /8\.00.*per hour/);
+  assert.equal(await card.locator(".pay-card-facts").count(), 0, "inventory cards share Manager layout; tariff details stay in the workspace");
   await card.getByRole("button").click();
   assert.match(await page.locator(".pay-overview-card").nth(1).textContent(), /8\.00.*per hour/);
   await page.locator('[data-pay-tab="settings"]').click();
@@ -288,10 +296,12 @@ test("Pay paginates systems and filters the loaded list without inventing an acc
   const { page, state } = await setup(t, browser);
   state.next = true;
   await enter(page, origin);
-  assert.equal(await page.locator(".pay-count").textContent(), "1+");
+  assert.equal(await page.locator(".pay-system-grid:not(details *) .pay-system-card").count(), 1);
   await page.getByRole("button", { name: "Load more systems", exact: true }).click();
   await page.locator(`[data-system-id="${OTHER}"]`).waitFor();
-  assert.equal(await page.locator(".pay-count").textContent(), "2");
+  assert.equal(await page.locator(".pay-system-grid:not(details *) .pay-system-card").count(), 2);
+  assert.equal(await page.locator(".pay-count").count(), 0, "the shared inventory does not imply a complete account total");
+  assert.equal(state.calls.some(call => call.path === "/api/v1/pay/systems" && call.query.includes("cursor=fixture-cursor")), true);
   await page.getByRole("searchbox", { name: "Search loaded systems" }).fill("Second");
   assert.equal(await page.locator(`.pay-system-grid:not(details *) .pay-system-card`).count(), 1);
   assert.equal(await page.locator(`[data-system-id="${OTHER}"]`).isVisible(), true);
