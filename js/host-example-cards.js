@@ -1,4 +1,4 @@
-import { hostText } from "./host-locale.js";
+import { hostText, hostLanguage } from "./host-locale.js";
 import { node } from "./host-ui.js";
 import {
   exampleSystems,
@@ -17,8 +17,8 @@ import {
 } from "./host-system-cards.js";
 import { openTryIt } from "./host-try-it.js";
 
-// The "Examples" group: the three example systems with a dashed violet
-// border and an Example pill. They cannot be removed. "Try it" opens the
+// The "Examples" group uses the same system cards as Manager and real Host
+// systems. They cannot be removed. "Open workspace" opens the
 // simulator. For everyone who reaches it, with or without a Host plan,
 // each example carries its link badge ("Not linked" or an organization) and
 // "Link to organization" / "Unlink", which only change that badge in this
@@ -31,7 +31,7 @@ export async function renderExampleGroup(
 ) {
   const titleId = `examples-title-${++groups}`;
   const group = node("details", undefined, {
-    class: "systems-group systems-group--examples dashboard-examples",
+    class: "manager-examples systems-group systems-group--examples dashboard-examples",
     "aria-labelledby": titleId,
     "data-examples": "",
   });
@@ -40,10 +40,11 @@ export async function renderExampleGroup(
     class: "systems-group__title",
   });
   heading.append(node("span", hostText("Examples")));
-  const holder = node("div");
+  const holder = systemGrid([]);
+  holder.classList.add("manager-example-grid");
   group.append(
     heading,
-    node("p", hostText("Examples always stay here so you can try things. They never open a gate.")),
+    node("p", hostText("Examples always stay here so you can try things. They never open a gate."), { class: "manager-muted" }),
     holder,
   );
   container.prepend(group);
@@ -54,17 +55,9 @@ export async function renderExampleGroup(
 
   const render = (focus) => {
     holder.replaceChildren(
-      systemGrid(
-        exampleSystems.map((example) => {
+      ...exampleSystems.map((example) => {
           const linked = known(links[example.id]);
-          const tryIt = action(
-            "Try it",
-            (button) =>
-              openTryIt(example, { container: group, trigger: button }),
-            { name: "try" },
-          );
           const actions = [
-            tryIt,
             linked
               ? action(
                   "Unlink",
@@ -92,14 +85,40 @@ export async function renderExampleGroup(
               linked ? organizationBadge(linked.name) : notLinkedBadge(),
             ],
             actions,
+            onOpenWorkspace(trigger, controls, badges) {
+              const dialog = openTryIt(example, { container: group, trigger });
+              const menu = node("details", undefined, {
+                class: "manager-system-menu host-example-options",
+              });
+              const summary = node("summary", "⋯", {
+                "aria-label": hostLanguage === "he" ? "פעולות מערכת" : "System actions",
+              });
+              const options = node("div", undefined, {
+                class: "manager-system-options",
+              });
+              options.append(...controls);
+              for (const button of options.querySelectorAll("button"))
+                button.workspaceTrigger = trigger;
+              options.addEventListener("click", (event) => {
+                if (event.target.closest("button[data-action]:not(:disabled)"))
+                  dialog.close();
+              }, true);
+              menu.append(summary, options);
+              const badgeRow = node("p", undefined, {
+                class: "system-card__badges host-example-link",
+              });
+              // The simulator already identifies itself as an example.
+              badgeRow.append(...badges.filter((badge) => !badge.classList.contains("system-badge--example")));
+              dialog.querySelector(".try-it__header").insertBefore(menu, dialog.querySelector(".try-it__close"));
+              dialog.querySelector(".try-it__note").after(badgeRow);
+            },
           });
         }),
-      ),
     );
     if (focus)
       holder
         .querySelector(
-          `[data-system-id="${focus.id}"] [data-action="${focus.action}"]`,
+          `[data-system-id="${focus.id}"] [data-action="workspace"]`,
         )
         ?.focus();
   };

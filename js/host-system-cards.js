@@ -1,8 +1,9 @@
-import { hostText } from "./host-locale.js";
+import { hostText, hostLanguage } from "./host-locale.js";
 import { node, infoTip, isolatedText, nameBlock } from "./host-ui.js";
 import { authErrorMessage } from "./host-auth-errors.js";
 import { roleLabel } from "./host-role-badge.js";
 import { requestWithRecentIdentity } from "./host-recent-identity.js";
+import { createManagerSystemCard } from "./manager-system-card.js";
 
 // Shared pieces of My systems, Organization systems and the examples: the
 // system card (icon, name, kind line, badges, actions), the app steps for
@@ -94,51 +95,105 @@ export const organizationBadge = (name) => badge(name, "org");
 export const notLinkedBadge = () => badge(hostText("Not linked"), "none");
 export const examplePill = () => badge(hostText("Example"), "example");
 
-// One system as a card. Actions sit in the footer; the name is the card's
-// focus target after a change. The same system can be on two screens (My
-// systems and its organization), so element ids are never made from its id.
+const workspaceText = (he, en) => (hostLanguage === "he" ? he : en);
+
+// The same Manager card component renders Host's real systems and examples.
+// Host actions remain in its workspace, with their original authority checks
+// and callbacks. The list itself has one consistent primary action.
 let cards = 0;
-export function systemCard(system, { badges = [], actions = [] } = {}) {
+export function systemCard(
+  system,
+  { badges = [], actions = [], onOpenWorkspace } = {},
+) {
   const nameId = `system-name-${++cards}`;
-  const card = node("article", undefined, {
-    class: "system-card",
-    "data-system-id": system.id,
-    "aria-labelledby": nameId,
+  const footer = node("div", undefined, { class: "manager-system-actions" });
+  const open = node(
+    "button",
+    workspaceText("פתיחת סביבת ניהול", "Open workspace"),
+    {
+      class: "manager-button primary",
+      type: "button",
+      "data-action": "workspace",
+    },
+  );
+  footer.append(open);
+  const card = createManagerSystemCard({
+    system: {
+      ...system,
+      systemIds: Array.from(
+        { length: Math.max(1, Number(system.gates) || 1) },
+        (_, index) => `${system.id}-${index}`,
+      ),
+    },
+    language: hostLanguage,
+    actions: footer,
+    example: system.example === true,
   });
+  card.classList.add("system-card");
+  card.dataset.systemId = system.id;
+  card.setAttribute("aria-labelledby", nameId);
   if (system.example) card.dataset.example = "true";
-  const icon = node("span", undefined, {
-    class: `system-card__icon system-card__icon--${system.type}`,
+  const heading = card.querySelector("h4");
+  heading.id = nameId;
+  heading.classList.add("system-card__name");
+  heading.tabIndex = -1;
+  card.querySelector(".manager-muted").classList.add("system-card__kind");
+  open.addEventListener("click", () => {
+    if (onOpenWorkspace) {
+      onOpenWorkspace(open, actions, badges);
+      return;
+    }
+    openSystemWorkspace(card, system, { trigger: open, actions, badges });
   });
-  icon.append(
-    node("img", undefined, {
-      src: iconSrc(system),
-      alt: "",
-      width: "40",
-      height: "40",
-      decoding: "async",
-    }),
-  );
-  const body = node("div", undefined, { class: "system-card__body" });
-  body.append(
-    nameBlock("h3", system.name, {
-      id: nameId,
-      class: "system-card__name",
-      tabindex: "-1",
-    }),
-    kindLine(system),
-  );
+  return card;
+}
+
+function openSystemWorkspace(card, system, { trigger, actions, badges }) {
+  for (const current of document.querySelectorAll("dialog.system-workspace-dialog[open]"))
+    current.close();
+  const dialog = node("dialog", undefined, {
+    class: "manager-confirm-dialog system-workspace-dialog",
+    "aria-labelledby": `${trigger.closest("article").getAttribute("aria-labelledby")}-workspace`,
+  });
+  dialog.workspaceTrigger = trigger;
+  const heading = nameBlock("h3", system.name, {
+    id: dialog.getAttribute("aria-labelledby"),
+  });
+  const details = node("div", undefined, { class: "manager-note" });
+  details.append(kindLine(system));
   if (badges.length) {
     const row = node("p", undefined, { class: "system-card__badges" });
     row.append(...badges);
-    body.append(row);
+    details.append(row);
   }
-  card.append(icon, body);
-  if (actions.length) {
-    const footer = node("div", undefined, { class: "system-card__actions" });
-    footer.append(...actions);
-    card.append(footer);
-  }
-  return card;
+  const controls = node("div", undefined, {
+    class: "manager-confirm-actions system-workspace-actions",
+  });
+  controls.append(...actions);
+  for (const button of controls.querySelectorAll("button"))
+    button.workspaceTrigger = trigger;
+  controls.addEventListener("click", (event) => {
+    if (event.target.closest("button[data-action]:not(:disabled)")) dialog.close();
+  }, true);
+  const close = node("button", workspaceText("סיום וחזרה", "End and return"), {
+    type: "button",
+    class: "manager-button",
+    "data-action": "close-workspace",
+  });
+  close.addEventListener("click", () => dialog.close());
+  const footer = node("div", undefined, { class: "manager-confirm-actions" });
+  footer.append(close);
+  dialog.append(heading, details, controls, footer);
+  dialog.addEventListener("close", () => {
+    dialog.remove();
+    queueMicrotask(() => {
+      if (trigger.isConnected && !document.querySelector("dialog[open]"))
+        trigger.focus();
+    });
+  });
+  card.append(dialog);
+  dialog.showModal();
+  (controls.querySelector("button:not(:disabled)") ?? close).focus();
 }
 
 // A card action. A temporarily blocked action stays visible, disabled, with
@@ -146,7 +201,7 @@ export function systemCard(system, { badges = [], actions = [] } = {}) {
 export function action(label, onClick, { variant, blocked, name } = {}) {
   const button = node("button", hostText(label), {
     type: "button",
-    ...(variant ? { class: `button-${variant}` } : {}),
+    class: `manager-button${variant ? ` button-${variant}` : ""}${variant === "danger" ? " manager-button-danger" : ""}`,
     ...(name ? { "data-action": name } : {}),
   });
   button.addEventListener("click", () => onClick(button));
@@ -158,22 +213,21 @@ export function action(label, onClick, { variant, blocked, name } = {}) {
 }
 
 export function systemGrid(cards) {
-  const list = node("ul", undefined, { class: "system-grid" });
-  for (const card of cards) {
-    const item = node("li");
-    item.append(card);
-    list.append(item);
-  }
+  const list = node("div", undefined, { class: "manager-grid system-grid" });
+  list.append(...cards);
   return list;
 }
 
 // The way to add a system: three steps in the WIFIGATE app. `organization`
 // names the organization to add to; without it the steps add to My systems.
 export function appSteps(organization) {
-  const list = node("ol", undefined, { class: "app-steps" });
+  const list = node("ol", undefined, { class: "manager-setup-steps app-steps" });
   for (const text of [
     hostText("In the WIFIGATE app, open your profile."),
-    hostText("Tap WIFIGATE Host."),
+    workspaceText(
+      "בחרו WIFIGATE For Business ואז WIFIGATE Host.",
+      "Choose WIFIGATE For Business, then WIFIGATE Host.",
+    ),
     organization
       ? hostText("Choose {p0} and tap “Add to {p0}” next to the system.", {
           p0: organization,
@@ -187,21 +241,36 @@ export function appSteps(organization) {
   return list;
 }
 
+export function systemSetupGuide(organization) {
+  const guide = node("details", undefined, {
+    class: "manager-setup-guide dashboard-examples",
+  });
+  guide.append(
+    node("summary", workspaceText("איך מוסיפים מערכת?", "How do I add a system?")),
+    node("p", hostText("Systems you add from the WIFIGATE app. Link one to an organization to use it there.")),
+    appSteps(organization),
+  );
+  return guide;
+}
+
 // One sentence, an optional ⓘ and an optional set of steps or one action.
 export function emptyState(text, { tip, steps, action: button } = {}) {
-  const empty = node("div", undefined, { class: "empty-state" });
+  const empty = node("div", undefined, { class: "manager-empty empty-state" });
   const line = node("p", undefined, { class: "empty-state__text" });
   line.append(node("span", text));
   if (tip) line.append(infoTip(tip));
   empty.append(line);
   if (steps) empty.append(steps);
-  if (button) empty.append(button);
+  if (button) {
+    button.classList.add("manager-button");
+    empty.append(button);
+  }
   return empty;
 }
 
 // The line above a list: how many systems, and an ⓘ.
 export function systemsToolbar(text, tip) {
-  const bar = node("div", undefined, { class: "systems-toolbar" });
+  const bar = node("div", undefined, { class: "manager-toolbar systems-toolbar" });
   const line = node("p", undefined, { class: "systems-toolbar__text" });
   line.append(node("span", text));
   if (tip) line.append(infoTip(tip));
@@ -330,7 +399,7 @@ export function bookingsRefusal(
   if (reachable) {
     open = node("button", hostText("Open bookings"), {
       type: "button",
-      class: "button-secondary",
+      class: "manager-button button-secondary",
       "data-open-bookings": "",
     });
     open.addEventListener("click", () => {
@@ -381,20 +450,14 @@ export function openSystemDialog({
   for (const open of document.querySelectorAll("dialog.system-dialog[open]"))
     open.close();
   const id = `system-dialog-${++dialogs}`;
+  const returnFocus = trigger?.workspaceTrigger ?? trigger;
   const dialog = node("dialog", undefined, {
-    class: `system-dialog${danger ? " system-dialog--danger" : ""}`,
+    class: `manager-confirm-dialog system-dialog${danger ? " system-dialog--danger" : ""}`,
     "aria-labelledby": `${id}-title`,
     ...(text ? { "aria-describedby": `${id}-text` } : {}),
   });
-  const form = node("form", undefined, { class: "system-dialog__form" });
-  if (danger)
-    form.append(
-      node("span", "!", {
-        class: "system-dialog__icon",
-        "aria-hidden": "true",
-      }),
-    );
-  const heading = node("h2", title, { id: `${id}-title`, dir: "auto" });
+  const form = node("form", undefined, { class: "manager-form system-dialog__form" });
+  const heading = node("h3", title, { id: `${id}-title`, dir: "auto" });
   const description = text
     ? node("p", text, {
         id: `${id}-text`,
@@ -411,14 +474,14 @@ export function openSystemDialog({
     "aria-live": "polite",
   });
   const extra = node("div", undefined, { class: "system-dialog__extra" });
-  const actions = node("div", undefined, { class: "system-dialog__actions" });
+  const actions = node("div", undefined, { class: "manager-confirm-actions system-dialog__actions" });
   const confirm = node("button", submitLabel, {
     type: "submit",
-    ...(danger ? { class: "button-danger-solid" } : {}),
+    class: danger ? "manager-button manager-button-danger button-danger-solid" : "manager-button primary",
   });
   const cancel = node("button", hostText("Cancel"), {
     type: "button",
-    class: "button-secondary",
+    class: "manager-button button-secondary",
   });
   actions.append(confirm, cancel);
   form.append(status, extra, actions);
@@ -440,6 +503,7 @@ export function openSystemDialog({
     }
     if (next) {
       next.classList.remove("button-secondary");
+      next.classList.add("primary");
       actions.prepend(next);
     }
     focusAfter = next ?? cancel;
@@ -450,7 +514,7 @@ export function openSystemDialog({
   });
   dialog.addEventListener("close", () => {
     dialog.remove();
-    if (trigger?.isConnected) trigger.focus();
+    if (returnFocus?.isConnected) returnFocus.focus();
     onClosed?.();
   });
   form.addEventListener("submit", async (event) => {
@@ -491,7 +555,7 @@ export function openSystemDialog({
     ? cancel
     : (form.querySelector("input:checked") ??
       form.querySelector("input:not(:disabled), select") ??
-      confirm)
+      cancel)
   ).focus();
   return dialog;
 }

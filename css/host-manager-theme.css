@@ -1,0 +1,253 @@
+/* Host shares Manager's workspace components; only its product accents differ.
+   The scoped resets below detach the shared shell from Host's fixed drawer.
+   Calendar, reservations, team, access and settings keep their Host layouts. */
+@import url("./manager-dashboard.css?v=20261028managertimingv2");
+
+body.host-app.host-manager-workspace[data-product="host"] {
+  padding: 0;
+  font-size: 16px;
+  line-height: normal;
+  --radius-card: 14px;
+  --radius-control: 10px;
+  --manager-accent: var(--host, #0b63ff);
+  --manager-strong: var(--host-strong, #0a55d9);
+  --manager-soft: var(--host-soft, #eaf2ff);
+  --manager-line: var(--line, #e2e8f0);
+  --host-tint-line: #cfe0ff;
+  --dashboard-accent: var(--host, #0b63ff);
+  --dashboard-soft: var(--host-soft, #eaf2ff);
+  background-color: #fff;
+  background-image: linear-gradient(90deg,
+    transparent calc(50% - var(--platform-content-half) - 40px),
+    rgba(255, 255, 255, .9) calc(50% - var(--platform-content-half)),
+    rgba(255, 255, 255, .96) 50%,
+    rgba(255, 255, 255, .9) calc(50% + var(--platform-content-half)),
+    transparent calc(50% + var(--platform-content-half) + 40px)),
+    url("../assets/img/dashboard-backdrop.svg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+.host-manager-workspace::before { display: none; }
+.host-manager-workspace .host-manager-shell { --manager-accent: var(--host); }
+.host-manager-workspace .host-manager-page { min-width: 0; }
+
+/* Header, page width and inline navigation follow the shared dashboard shell. */
+body.host-app.host-manager-workspace .host-manager-page:has(> #host-workspace-shell) > header.host-topbar {
+  position: relative;
+  top: auto;
+  z-index: 20;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto clamp(1.75rem, 5vw, 3rem);
+  grid-template-areas: none;
+}
+body.host-app.host-manager-workspace[data-product="host"] .host-topbar::before {
+  inset: 0;
+  border: 0;
+  border-radius: inherit;
+}
+.host-manager-workspace .host-topbar .workspace-menu-toggle,
+.host-manager-workspace .host-scrim,
+.host-manager-workspace #host-tabbar,
+.host-manager-workspace #host-sidebar > .host-sidebar__brand,
+.host-manager-workspace #host-my-systems { display: none !important; }
+.host-manager-workspace #workspace-main.manager-main {
+  width: auto;
+  max-width: none;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+.host-manager-workspace #host-sidebar.manager-nav {
+  position: sticky;
+  inset: auto;
+  top: 20px;
+  z-index: auto;
+  width: auto;
+  min-width: 0;
+  height: max-content;
+  min-height: 0;
+  gap: normal;
+  padding: 18px;
+  overflow: visible;
+  visibility: visible;
+  transform: none;
+  transition: none;
+  border: 1px solid var(--manager-line);
+  border-radius: 16px;
+  background: linear-gradient(160deg, #fff, #f8fafc);
+  box-shadow: 0 3px 14px #17243a05;
+}
+.host-manager-workspace #host-sidebar::before { display: none; }
+.host-manager-workspace #host-sidebar .manager-nav-title { line-height: 1.7; }
+body.host-manager-workspace .host-topbar__start .brand { width: 152px; }
+.host-manager-workspace #host-section-navigation { display: contents; }
+.host-manager-workspace #host-section-navigation button.manager-button {
+  position: static;
+  gap: 10px;
+  padding: 10px 16px;
+  margin: 4px 0;
+  min-height: 46px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted, #64748b);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;
+}
+.host-manager-workspace #host-section-navigation button.manager-button:hover:not(:disabled) {
+  background: #f8fafc;
+  color: #172b46;
+}
+.host-manager-workspace #host-section-navigation button.manager-button[aria-current="page"],
+.host-manager-workspace #host-section-navigation button.manager-button[aria-current="page"]:hover {
+  background: var(--host-soft);
+  color: #172b46;
+}
+.host-manager-workspace #host-section-navigation button::before { display: none; }
+
+/* The authorized shortcut uses the actual shared floating entry component. */
+.host-manager-workspace #host-platform-navigation { display: contents; }
+.host-manager-workspace #host-platform-navigation button.host-platform-entry {
+  background: var(--host-strong);
+  border-color: var(--host-strong);
+  color: #fff;
+  text-align: start;
+  box-shadow: 0 8px 24px #0a55d926;
+}
+.host-manager-workspace #host-platform-navigation button.host-platform-entry:hover:not(:disabled) {
+  background: #0848bb;
+  border-color: #0848bb;
+  color: #fff;
+  box-shadow: 0 10px 28px #15213b38;
+}
+
+/* The same Manager controls can appear under Host's existing panel roots. */
+.host-manager-workspace #host-management .manager-button,
+.host-manager-workspace .manager-confirm-dialog button.manager-button {
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--manager-line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink, #0f172a);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: normal;
+  filter: none;
+}
+.host-manager-workspace #host-management .manager-button:hover:not(:disabled),
+.host-manager-workspace .manager-confirm-dialog button.manager-button:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  filter: none;
+}
+.host-manager-workspace #host-management .manager-button.primary,
+.host-manager-workspace .manager-confirm-dialog button.manager-button.primary {
+  background: var(--host-strong);
+  border-color: var(--host-strong);
+  color: #fff;
+}
+.host-manager-workspace #host-management .manager-button.primary:hover:not(:disabled),
+.host-manager-workspace .manager-confirm-dialog button.manager-button.primary:hover:not(:disabled) {
+  background: #0848bb;
+  border-color: #0848bb;
+  color: #fff;
+}
+.host-manager-workspace #host-management .manager-button.danger,
+.host-manager-workspace .manager-confirm-dialog button.manager-button.danger { color: #b42318; border-color: #efd3d6; }
+.host-manager-workspace #host-management .manager-button:disabled,
+.host-manager-workspace .manager-confirm-dialog button.manager-button:disabled { opacity: 0.5; cursor: default; }
+.host-manager-workspace #host-management .manager-toolbar h3 {
+  margin: 0;
+  color: #172b46;
+  font-size: clamp(23px, 2.4vw, 30px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -.025em;
+}
+.host-manager-workspace #host-management .manager-card.manager-system { grid-template-columns: none; background: linear-gradient(150deg, var(--host-soft), #fff 42%); }
+.host-manager-workspace #host-management .manager-system.system-card[data-example] { border: 1px solid var(--manager-line); }
+.host-manager-workspace #host-management .manager-system h4.system-card__name { margin: 0; font-size: 19px; line-height: 1.5; }
+.host-manager-workspace #host-management .manager-system .system-card__kind { margin: 0; font-size: 13px; line-height: inherit; }
+.host-manager-workspace .manager-shell .manager-system .manager-icon { background: var(--host-soft); border-color: var(--host-tint-line); color: var(--host-strong); }
+.host-manager-workspace .manager-note { border-inline-start-color: #9cbfff; }
+.host-manager-workspace .manager-eyebrow { color: var(--host-strong); }
+.host-manager-workspace .manager-empty-symbol { color: var(--host-strong); background: var(--host-soft); border-color: var(--host-tint-line); }
+.host-manager-workspace .manager-settings-card,
+.host-manager-workspace .manager-device-card { background: linear-gradient(130deg, #fff 55%, var(--host-soft)); }
+.host-manager-workspace .manager-hero { background: linear-gradient(150deg, var(--host-soft), #fff 48%); }
+.host-manager-workspace .manager-tabs button[aria-selected="true"] { background: var(--host-soft); color: var(--host-strong); border-color: var(--host-tint-line); }
+
+/* Shared disclosures override only the older Host chevron and open padding. */
+.host-manager-workspace #host-management details.dashboard-examples,
+.host-manager-workspace #host-management details.dashboard-examples[open] {
+  margin: 0 0 24px;
+  padding: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 3px 14px #182d4805;
+}
+.host-manager-workspace #host-management .dashboard-examples > summary { margin: 0; gap: 12px; font-size: 14px; }
+.host-manager-workspace #host-management .dashboard-examples > summary::after {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  margin-inline: auto 0;
+  border: 1px solid #e8edf4;
+  transform: rotate(0);
+}
+.host-manager-workspace #host-management .dashboard-examples[open] > summary::after { transform: rotate(180deg); }
+.host-manager-workspace .manager-setup-steps > li::before { background: var(--host-soft); color: var(--host-strong); }
+.host-manager-workspace .manager-setup-guide > .manager-setup-update { background: #f5f9ff; border-color: var(--host-tint-line); }
+body.host-manager-workspace[data-product="host"] .manager-setup-guide > summary::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a55d9' stroke-width='1.7' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M9.5 9a2.5 2.5 0 0 1 5 .5c0 1.6-2.5 2-2.5 3.5'/%3E%3Cpath d='M12 16h.01'/%3E%3C/svg%3E"); }
+
+/* Organization picker portals live outside the shell, with the same theme. */
+.host-manager-workspace .manager-org-avatar,
+.host-manager-workspace .manager-organization-logo,
+.host-manager-workspace .manager-organization-picker-logo { background: var(--host-soft); border-color: var(--host-tint-line); color: var(--host-strong); }
+.host-manager-workspace .manager-org-avatar.has-logo,
+.host-manager-workspace .manager-organization-picker-logo.has-logo { background: #fff; border-color: #e1e7ef; }
+.host-manager-workspace .manager-organization-header { background: linear-gradient(120deg, #f5f9ff, #fff 65%); }
+.host-manager-workspace .manager-organization-picker-heading > span,
+.host-manager-workspace .manager-organization-option[aria-current="true"] { background: var(--host-soft); border-color: var(--host-tint-line); color: var(--host-strong); }
+.host-manager-workspace .manager-organization-picker-check { color: var(--host); }
+.host-manager-workspace .manager-organization-picker-trigger:focus-visible,
+.host-manager-workspace .manager-organization-option:focus-visible,
+.host-manager-workspace .manager-organization-picker-search:focus-visible { outline-color: var(--host); }
+.host-manager-workspace .manager-shell .manager-nav .manager-organization-picker-trigger:hover,
+.host-manager-workspace .manager-shell .manager-nav .manager-organization-picker-trigger[aria-expanded="true"] { background: #f5f9ff; border-color: #a9c7ff; }
+.host-manager-workspace .manager-system-menu summary:hover,
+.host-manager-workspace .manager-system-menu[open] summary { color: var(--host-strong); background: var(--host-soft); border-color: var(--host-tint-line); }
+.host-manager-workspace .manager-progress { background: #f5f9ff; border-color: var(--host-tint-line); color: var(--host-strong); }
+.host-manager-workspace .manager-dialog-progress { color: var(--host-strong); }
+.host-manager-workspace .manager-confirm-actions .manager-button:focus-visible,
+.host-manager-workspace .manager-system-menu summary:focus-visible { outline-color: var(--host); }
+.host-manager-workspace dialog.manager-confirm-dialog { padding: 28px; }
+.host-manager-workspace .system-dialog__form.manager-form { display: block; margin: 0; }
+.host-manager-workspace dialog.manager-confirm-dialog p { line-height: 1.7; }
+.host-manager-workspace dialog.manager-confirm-dialog :is(h2, h3) { margin: 0 0 12px; color: #182d48; font-size: 1.25rem; font-weight: 700; line-height: normal; }
+.host-manager-workspace .manager-confirm-dialog button.manager-button-danger { background: #b42318; border-color: #b42318; color: #fff; }
+.host-manager-workspace .manager-confirm-dialog button.manager-button-danger:hover:not(:disabled) { background: #8e2018; border-color: #8e2018; color: #fff; }
+.host-manager-workspace .system-dialog__actions.manager-confirm-actions { gap: 12px; }
+.host-manager-workspace .system-dialog__actions.manager-confirm-actions .manager-button { flex: 0 1 auto; }
+
+@media (min-width: 851px) {
+  .host-manager-workspace #host-sidebar.manager-nav { display: flex; flex-direction: column; }
+}
+@media (max-width: 850px) {
+  .host-manager-workspace #host-sidebar.manager-nav { position: static; display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 5px; }
+  .host-manager-workspace #host-section-navigation button.manager-button { width: auto; margin: 0; }
+}
+@media (max-width: 650px) {
+  body.host-app.host-manager-workspace .host-manager-page:has(> #host-workspace-shell) > header.host-topbar { grid-template-columns: minmax(0, 1fr) auto; gap: 12px 8px; padding: 12px; }
+  body.host-manager-workspace .host-topbar__start .brand { width: 136px; }
+}
+@media (max-width: 480px) {
+  .host-manager-workspace dialog.manager-confirm-dialog { padding: 24px; }
+  .host-manager-workspace .system-dialog__actions.manager-confirm-actions .manager-button { flex: 1; }
+}

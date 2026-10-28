@@ -208,6 +208,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
     });
     t.after(() => context.close());
     const page = await context.newPage();
+    page.setDefaultTimeout(Number(process.env.WIFIGATE_FIXTURE_TIMEOUT || 30000));
     const errors = [];
     page.on("pageerror", (error) => errors.push(error.message));
     await page.route("**/*", (route) => {
@@ -236,6 +237,33 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       .waitFor();
   const card = (page, id) =>
     page.locator(`#host-management [data-system-id="${id}"]`);
+  // Inventory cards use one workspace action. Exercise each original Host
+  // action through that workspace, keeping the same request/role assertions.
+  const cardAction = async (page, id, name) => {
+    const selected = card(page, id);
+    const target = selected.locator(`[data-action="${name}"]`);
+    if (!(await target.isVisible())) {
+      const existing = page.locator("dialog.system-workspace-dialog[open]");
+      if (await existing.count()) await page.keyboard.press("Escape");
+      await selected.locator('[data-action="workspace"]').click();
+    }
+    return target;
+  };
+  const exampleWorkspace = async (page, example) => {
+    const details = example.locator("xpath=ancestor::details");
+    if (await details.getAttribute("open") === null) await details.locator(":scope > summary").click();
+    const active = page.locator("dialog.try-it[open]");
+    if (await active.count()) await page.keyboard.press("Escape");
+    await example.locator('[data-action="workspace"]').click();
+    const dialog = page.locator("dialog.try-it[open]");
+    await dialog.waitFor();
+    return dialog;
+  };
+  const exampleAction = async (page, example, name) => {
+    const workspace = await exampleWorkspace(page, example);
+    await workspace.locator(".host-example-options > summary").click();
+    return workspace.locator(`[data-action="${name}"]`);
+  };
   const noSidewaysScroll = (page) =>
     page.evaluate(() => document.documentElement.scrollWidth <= innerWidth);
   // Every visible button, summary and link under `selector` that a finger
@@ -303,13 +331,11 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       );
       const view = page.locator('[data-workspace-view="my-systems"]');
       await shot(page, "my-systems-desktop");
-      assert.equal(
-        await view.locator(".systems-toolbar__text > span").first().innerText(),
-        "3 systems",
-      );
+      assert.equal(await view.locator(".my-systems > .system-grid > .system-card").count(), 3);
+      assert.equal(await view.locator(".manager-toolbar h3").innerText(), "My systems");
       assert.equal(
         await card(page, "room-1").locator(".system-card__kind").innerText(),
-        "Gate",
+        "Gate · 1 gate",
       );
       assert.equal(
         await card(page, "parking").locator(".system-card__kind").innerText(),
@@ -319,37 +345,22 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         await card(page, "lobby").locator(".system-card__kind").innerText(),
         "Group · 3 gates",
       );
-      assert.equal(
-        await card(page, "room-1").locator("img").getAttribute("src"),
-        "/assets/host-icons/gate-door-small.svg",
-      );
-      assert.equal(
-        await card(page, "room-1").locator(".system-badge").innerText(),
-        "Not linked",
-      );
-      assert.equal(
-        await card(page, "parking").locator(".system-badge").innerText(),
-        "Grand Hotel",
-      );
-      // Linked: only Unlink. Not linked: Link and Remove.
-      assert.deepEqual(
-        await card(page, "parking")
-          .locator("[data-action]")
-          .evaluateAll((items) => items.map((item) => item.dataset.action)),
-        ["unlink"],
-      );
-      assert.deepEqual(
-        await card(page, "room-1")
-          .locator("[data-action]")
-          .evaluateAll((items) => items.map((item) => item.dataset.action)),
-        ["link", "remove"],
-      );
+      assert.equal(await card(page, "room-1").locator(".manager-icon img").getAttribute("src"), "/assets/host-icons/gate-door-small.svg");
+      for (const id of ["room-1", "parking", "lobby"])
+        assert.deepEqual(await card(page, id).locator(":scope > .manager-system-actions [data-action]").evaluateAll(items => items.map(item => item.dataset.action)), ["workspace"]);
+      await cardAction(page, "room-1", "link");
+      assert.equal(await card(page, "room-1").locator(".system-badge").innerText(), "Not linked");
+      assert.deepEqual(await card(page, "room-1").locator(".system-workspace-actions [data-action]").evaluateAll(items => items.map(item => item.dataset.action)), ["link", "remove"]);
+      await cardAction(page, "parking", "unlink");
+      assert.equal(await card(page, "parking").locator(".system-badge").innerText(), "Grand Hotel");
+      assert.deepEqual(await card(page, "parking").locator(".system-workspace-actions [data-action]").evaluateAll(items => items.map(item => item.dataset.action)), ["unlink"]);
+      await page.keyboard.press("Escape");
       // No ids, keys or fingerprints in the normal view.
       const text = await view.innerText();
       assert.doesNotMatch(text, /room-1|target|fingerprint|wgk_|wfg_/i);
       // The sidebar lists every system with its badge.
       const sidebar = page.locator("#host-my-systems");
-      assert.equal(await sidebar.isVisible(), true);
+      assert.equal(await sidebar.isVisible(), false, "Manager-style sidebar uses its shared navigation instead of a duplicate inventory");
       assert.deepEqual(
         await sidebar
           .locator(".sidebar-system")
@@ -388,7 +399,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         assert.equal(await example.getAttribute("data-example"), "true");
         assert.match(
           await example
-            .locator(".system-badges, .system-card__badges")
+            .locator(".manager-system-example-badge")
             .innerText(),
           /Example/,
         );
@@ -400,21 +411,15 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
           await example.evaluate(
             (item) => getComputedStyle(item).borderTopStyle,
           ),
-          "dashed",
+          "solid",
         );
       }
-      // A sidebar row opens My systems on that card.
-      await page
-        .locator('#host-section-navigation [data-view-id="systems"]')
-        .click();
+      // Shared navigation restores the personal list after organization systems.
+      await page.locator('#host-section-navigation [data-view-id="systems"]').click();
       await loaded(page, "systems");
-      await sidebar.locator('[data-system-id="lobby"]').click();
-      await page.waitForFunction(
-        () =>
-          document.body.dataset.hostViewId === "my-systems" &&
-          document.activeElement?.closest("[data-system-id]")?.dataset
-            .systemId === "lobby",
-      );
+      await page.locator('#host-section-navigation [data-view-id="my-systems"]').click();
+      await loaded(page, "my-systems");
+      assert.equal(await card(page, "lobby").isVisible(), true);
       // My systems are never mixed into the organization's list.
       assert.equal(
         (await requests(page)).filter((entry) =>
@@ -432,7 +437,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
     async () => {
       const { page, errors } = await scenario();
       await loaded(page, "my-systems");
-      await card(page, "room-1").locator('[data-action="link"]').click();
+      await (await cardAction(page, "room-1", "link")).click();
       const dialog = page.locator("dialog.system-dialog[open]");
       await dialog.waitFor();
       assert.deepEqual(
@@ -446,12 +451,9 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       await dialog.locator('input[value="seaside"]').check();
       await dialog.getByRole("button", { name: "Link", exact: true }).click();
       await dialog.waitFor({ state: "detached" });
-      await page.waitForFunction(
-        () =>
-          document.querySelector(
-            '#host-management [data-system-id="room-1"] .system-badge',
-          )?.textContent === "Seaside Rooms",
-      );
+      await cardAction(page, "room-1", "unlink");
+      assert.equal(await card(page, "room-1").locator(".system-badge").innerText(), "Seaside Rooms");
+      await page.keyboard.press("Escape");
       const [linkCall] = await writes(page);
       assert.equal(linkCall.call, "POST /api/v1/me/systems/room-1/link");
       assert.deepEqual(linkCall.body, {
@@ -462,7 +464,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       assert.equal(
         await page
           .locator('#host-my-systems [data-system-id="room-1"] .system-badge')
-          .innerText(),
+          .textContent(),
         "Seaside Rooms",
         "the sidebar follows",
       );
@@ -506,7 +508,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
           window.fixture.failures["POST /api/v1/me/systems/room-1/link"] =
             failure;
         }, failure);
-        await card(page, "room-1").locator('[data-action="link"]').click();
+        await (await cardAction(page, "room-1", "link")).click();
         await dialog.getByRole("button", { name: "Link", exact: true }).click();
         await dialog.getByText(text, { exact: true }).waitFor();
         await dialog
@@ -533,7 +535,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         organizations: [organization("city", "City Stay", "staff")],
       });
       await loaded(page, "my-systems");
-      const link = card(page, "room-1").locator('[data-action="link"]');
+      const link = (await cardAction(page, "room-1", "link"));
       assert.equal(await link.isDisabled(), true);
       assert.equal(
         await card(page, "room-1")
@@ -556,7 +558,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         ],
       });
       await loaded(page, "my-systems");
-      await card(page, "room-1").locator('[data-action="link"]').click();
+      await (await cardAction(page, "room-1", "link")).click();
       const dialog = page.locator("dialog.system-dialog[open]");
       await dialog.waitFor();
       assert.deepEqual(
@@ -589,8 +591,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       });
       await loaded(paused.page, "my-systems");
       assert.equal(
-        await card(paused.page, "room-1")
-          .locator('[data-action="link"]')
+        await (await cardAction(paused.page, "room-1", "link"))
           .isDisabled(),
         true,
       );
@@ -618,8 +619,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       await loaded(page, "systems");
       for (const name of ["guest-link", "icon"])
         assert.equal(
-          await card(page, "side")
-            .locator(`[data-action="${name}"]`)
+          await (await cardAction(page, "side", name))
             .isDisabled(),
           true,
           `${name} is disabled`,
@@ -634,7 +634,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       );
       // The backend lets a paused organization remove a system, so its gates
       // never stay held: Remove has no ⓘ and sends the removal.
-      const removeButton = card(page, "side").locator('[data-action="remove"]');
+      const removeButton = (await cardAction(page, "side", "remove"));
       assert.equal(await removeButton.isDisabled(), false, "remove is enabled");
       assert.equal(
         await removeButton
@@ -676,7 +676,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         },
       });
       await loaded(late.page, "systems");
-      await card(late.page, "side").locator('[data-action="icon"]').click();
+      await (await cardAction(late.page, "side", "icon")).click();
       const dialog = late.page.locator("dialog.system-dialog[open]");
       await dialog.locator('input[value="bed-outline"]').check();
       await dialog
@@ -706,11 +706,11 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         },
       });
       await loaded(page, "my-systems");
-      await card(page, "parking").locator('[data-action="unlink"]').click();
+      await (await cardAction(page, "parking", "unlink")).click();
       const dialog = page.locator("dialog.system-dialog--danger[open]");
       await dialog.waitFor();
       assert.equal(
-        await dialog.locator("h2").innerText(),
+        await dialog.getByRole("heading").innerText(),
         "Unlink Parking from Grand Hotel?",
       );
       assert.equal(
@@ -750,7 +750,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       assert.equal(new URL(page.url()).searchParams.get("org"), "grand");
       assert.equal(
         await page
-          .locator("#workspace-org-switcher .org-card")
+          .locator("#workspace-org-switcher .manager-organization-picker-trigger")
           .getAttribute("data-organization-id"),
         "grand",
       );
@@ -782,7 +782,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         },
       });
       await loaded(page, "my-systems");
-      await card(page, "parking").locator('[data-action="unlink"]').click();
+      await (await cardAction(page, "parking", "unlink")).click();
       const dialog = page.locator("dialog.system-dialog--danger[open]");
       await dialog.getByRole("button", { name: "Unlink", exact: true }).click();
       const status = dialog.locator(".system-dialog__status");
@@ -810,8 +810,8 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       await dialog.waitFor({ state: "detached" });
       assert.equal(
         await page.evaluate(() => document.activeElement?.dataset.action),
-        "unlink",
-        "focus returns to Unlink",
+        "workspace",
+        "focus returns to the visible workspace action",
       );
       assert.equal((await writes(page)).length, 1);
       assert.equal(
@@ -837,7 +837,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         "?org=seaside",
       );
       await loaded(page, "my-systems");
-      await card(page, "parking").locator('[data-action="unlink"]').click();
+      await (await cardAction(page, "parking", "unlink")).click();
       const dialog = page.locator("dialog.system-dialog--danger[open]");
       await dialog.getByRole("button", { name: "Unlink", exact: true }).click();
       await dialog
@@ -851,7 +851,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       await page.waitForFunction(
         () =>
           document.body.dataset.hostViewId === "bookings" &&
-          document.querySelector("#workspace-org-switcher .org-card")?.dataset
+          document.querySelector("#workspace-org-switcher .manager-organization-picker-trigger")?.dataset
             .organizationId === "grand",
       );
       assert.equal(new URL(page.url()).searchParams.get("org"), "grand");
@@ -921,13 +921,13 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         "?org=seaside",
       );
       await loaded(page, "my-systems");
-      await card(page, "my-parking").locator('[data-action="unlink"]').click();
+      await (await cardAction(page, "my-parking", "unlink")).click();
       let dialog = page.locator("dialog.system-dialog--danger[open]");
       await dialog.getByRole("button", { name: "Unlink", exact: true }).click();
       await dialog.locator("[data-open-bookings]").waitFor();
       // The refused dialog stops asking.
       assert.equal(
-        await dialog.locator("h2").textContent(),
+        await dialog.getByRole("heading").textContent(),
         "Can't unlink Parking yet",
       );
       assert.equal(await dialog.locator(".system-dialog__text").count(), 0);
@@ -986,7 +986,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         ),
       );
       await loaded(page, "systems");
-      await card(page, "side").locator('[data-action="remove"]').click();
+      await (await cardAction(page, "side", "remove")).click();
       dialog = page.locator("dialog.system-dialog--danger[open]");
       await dialog.getByRole("button", { name: "Remove", exact: true }).click();
       await dialog.locator("[data-open-bookings]").click();
@@ -1016,24 +1016,22 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         },
       });
       await loaded(page, "my-systems");
-      await card(page, "parking").locator('[data-action="unlink"]').click();
+      await (await cardAction(page, "parking", "unlink")).click();
       let dialog = page.locator("dialog.system-dialog--danger[open]");
       await dialog.getByRole("button", { name: "Unlink", exact: true }).click();
-      await page.waitForFunction(
-        () =>
-          document.querySelector(
-            '#host-management [data-system-id="parking"] .system-badge',
-          )?.textContent === "Not linked",
-      );
-      await card(page, "room-1").locator('[data-action="remove"]').click();
+      await dialog.waitFor({ state: "detached" });
+      await cardAction(page, "parking", "link");
+      assert.equal(await card(page, "parking").locator(".system-badge").innerText(), "Not linked");
+      await page.keyboard.press("Escape");
+      await (await cardAction(page, "room-1", "remove")).click();
       dialog = page.locator("dialog.system-dialog--danger[open]");
       assert.equal(
-        await dialog.locator("h2").innerText(),
+        await dialog.getByRole("heading").innerText(),
         "Remove Room 101 from My systems?",
       );
       await dialog.getByRole("button", { name: "Remove", exact: true }).click();
       await card(page, "room-1").waitFor({ state: "detached" });
-      await card(page, "lobby").locator('[data-action="remove"]').click();
+      await (await cardAction(page, "lobby", "remove")).click();
       await dialog.getByRole("button", { name: "Remove", exact: true }).click();
       await dialog
         .getByText("Unlink it from its organization first.")
@@ -1114,7 +1112,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
             '[data-workspace-view="my-systems"] .system-card:not([data-example])',
           ).length === 3,
       );
-      await page.locator("#host-my-systems .sidebar-system").nth(2).waitFor();
+      await page.locator("#host-my-systems .sidebar-system").nth(2).waitFor({ state: "attached" });
       assert.equal(
         await view.locator("[data-examples]").count(),
         1,
@@ -1131,23 +1129,23 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       const { page, errors } = await scenario({}, "?view=systems");
       await loaded(page, "systems");
       const view = page.locator('[data-workspace-view="systems"]');
-      assert.equal(
-        await view.locator(".systems-toolbar__text > span").first().innerText(),
-        "3 systems",
-      );
+      assert.equal(await view.locator(".system-grid > .system-card").count(), 3);
       assert.equal(
         await card(page, "old").count(),
         0,
         "disabled systems stay hidden",
       );
+      await cardAction(page, "parking", "guest-link");
       assert.equal(
         await card(page, "parking").locator(".system-badge").innerText(),
         "Linked from your My systems",
       );
+      await cardAction(page, "front", "guest-link");
       assert.equal(
         await card(page, "front").locator(".system-badge").innerText(),
         "Linked by manager@example.test",
       );
+      await cardAction(page, "side", "guest-link");
       assert.equal(
         await card(page, "side").locator(".system-badge").innerText(),
         "Added in the app",
@@ -1157,9 +1155,10 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         0,
         "a plan holder's examples live in My systems",
       );
+      await page.keyboard.press("Escape");
       await shot(page, "organization-systems-owner");
       // Change icon: only the icon and the version.
-      await card(page, "side").locator('[data-action="icon"]').click();
+      await (await cardAction(page, "side", "icon")).click();
       const dialog = page.locator("dialog.system-dialog[open]");
       await dialog.locator('input[value="bed-outline"]').check();
       await dialog
@@ -1172,7 +1171,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
             ?.getAttribute("src") === "/assets/host-icons/gate-bed-outline.svg",
       );
       // Remove a linked system: it goes back to its owner's My systems.
-      await card(page, "front").locator('[data-action="remove"]').click();
+      await (await cardAction(page, "front", "remove")).click();
       const danger = page.locator("dialog.system-dialog--danger[open]");
       assert.match(
         await danger.locator(".system-dialog__text").innerText(),
@@ -1215,7 +1214,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         },
       });
       await loaded(page, "systems");
-      await card(page, "side").locator('[data-action="remove"]').click();
+      await (await cardAction(page, "side", "remove")).click();
       const dialog = page.locator("dialog.system-dialog--danger[open]");
       assert.match(
         await dialog.locator(".system-dialog__text").innerText(),
@@ -1292,9 +1291,10 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         await loaded(page, "systems");
         const view = page.locator('[data-workspace-view="systems"]');
         // Staff book (Create guest link); neither changes a system.
+        await card(page, "side").locator('[data-action="workspace"]').click();
         assert.deepEqual(
           await view
-            .locator('[data-system-id="side"] [data-action]')
+            .locator('[data-system-id="side"] .system-workspace-actions [data-action]')
             .evaluateAll((buttons) =>
               buttons.map((button) => button.dataset.action),
             ),
@@ -1357,7 +1357,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         .getByText("No systems to display yet.", { exact: true })
         .waitFor();
       await shot(empty.page, "my-systems-empty");
-      assert.equal(await empty.page.locator('[data-workspace-view="my-systems"] .app-steps').count(), 0);
+      assert.equal(await empty.page.locator('[data-workspace-view="my-systems"] .manager-setup-guide:not([open]) .app-steps').count(), 1);
       await empty.page.getByText("Add a system from the WIFIGATE app to manage it here.", {exact:true}).waitFor();
       assert.deepEqual(
         [...owner.errors, ...viewer.errors, ...empty.errors],
@@ -1367,67 +1367,33 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
   );
 
   for (const role of ["owner", "admin", "staff", "viewer"])
-    await t.test(
-      `examples for ${role === "admin" ? "an" : "a"} ${role} without a plan: Try it, a link badge and a local link`,
-      async () => {
-        const { page, errors } = await scenario({
-          plan: null,
-          organizations: [organization("grand", "Grand Hotel", role)],
-        });
-        await loaded(page, "systems");
-        const examples = page.locator(
-          '[data-workspace-view="systems"] [data-examples] .system-card',
-        );
-        assert.equal(await examples.count(), 3);
-        for (const index of [0, 1, 2]) {
-          const example = examples.nth(index);
-          assert.deepEqual(
-            await example
-              .locator("[data-action]")
-              .evaluateAll((buttons) =>
-                buttons.map((button) => button.dataset.action),
-              ),
-            ["try", "link"],
-          );
-          assert.deepEqual(
-            await example.locator(".system-badge").allTextContents(),
-            ["Example", "Not linked"],
-          );
-        }
-        // Linking only changes the example's own badge, in this browser.
-        const before = (await requests(page)).length;
-        const example = page.locator(
-          '[data-workspace-view="systems"] [data-system-id="example-room-212"]',
-        );
-        if (await example.locator("xpath=ancestor::details").getAttribute("open") === null)
-          await example.locator("xpath=ancestor::details/summary").click();
-        await example.locator('[data-action="link"]').click();
-        const dialog = page.locator("dialog.system-dialog[open]");
-        await dialog.locator('input[value="grand"]').check();
-        await dialog.getByRole("button", { name: "Link", exact: true }).click();
-        await example
-          .locator(".system-badge--org", { hasText: "Grand Hotel" })
-          .waitFor();
-        assert.deepEqual(
-          await example.locator(".system-badge").allTextContents(),
-          ["Example", "Grand Hotel"],
-        );
-        assert.deepEqual(
-          await example
-            .locator("[data-action]")
-            .evaluateAll((buttons) =>
-              buttons.map((button) => button.dataset.action),
-            ),
-          ["try", "unlink"],
-        );
-        if (await example.locator("xpath=ancestor::details").getAttribute("open") === null)
-          await example.locator("xpath=ancestor::details/summary").click();
-        await example.locator('[data-action="unlink"]').click();
-        await example.locator(".system-badge--none").waitFor();
-        assert.equal((await requests(page)).length, before, "no API call");
-        assert.deepEqual(errors, []);
-      },
-    );
+    await t.test(`examples for ${role} without a plan keep one workspace action and safe local links`, async () => {
+      const { page, errors } = await scenario({ plan: null, organizations: [organization("grand", "Grand Hotel", role)] });
+      await loaded(page, "systems");
+      const examples = page.locator('[data-workspace-view="systems"] [data-examples] .system-card');
+      assert.equal(await examples.count(), 3);
+      for (const example of await examples.all()) {
+        assert.deepEqual(await example.locator("[data-action]").evaluateAll(buttons => buttons.map(button => button.dataset.action)), ["workspace"]);
+        assert.equal(await example.locator(".manager-system-example-badge").textContent(), "Example");
+      }
+      const before = (await requests(page)).length, example = examples.first();
+      let workspace = await exampleWorkspace(page, example);
+      assert.equal(await workspace.locator(".host-example-link .system-badge").innerText(), "Not linked");
+      await page.keyboard.press("Escape");
+      await (await exampleAction(page, example, "link")).click();
+      const dialog = page.locator("dialog.system-dialog[open]");
+      await dialog.locator('input[value="grand"]').check();
+      await dialog.getByRole("button", { name: "Link", exact: true }).click();
+      await dialog.waitFor({ state: "detached" });
+      workspace = await exampleWorkspace(page, example);
+      assert.equal(await workspace.locator(".host-example-link .system-badge--org").innerText(), "Grand Hotel");
+      await page.keyboard.press("Escape");
+      await (await exampleAction(page, example, "unlink")).click();
+      workspace = await exampleWorkspace(page, example);
+      assert.equal(await workspace.locator(".host-example-link .system-badge--none").innerText(), "Not linked");
+      assert.equal((await requests(page)).length, before, "simulation link/unlink makes no API call for every organization role");
+      assert.deepEqual(errors, []);
+    });
 
   for (const [label, overrides] of [
     ["a Host user", {}],
@@ -1445,17 +1411,14 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         );
         if (await example.locator("xpath=ancestor::details").getAttribute("open") === null)
           await example.locator("xpath=ancestor::details/summary").click();
-        await example.locator('[data-action="link"]').click();
+        await (await exampleAction(page, example, "link")).click();
         const dialog = page.locator("dialog.system-dialog[open]");
         await dialog.locator('input[value="grand"]').check();
         await dialog.getByRole("button", { name: "Link", exact: true }).click();
-        await page.waitForFunction(
-          (view) =>
-            document.querySelector(
-              `[data-workspace-view="${view}"] [data-system-id="example-room-212"] .system-badge--org`,
-            )?.textContent === "Grand Hotel",
-          view,
-        );
+        await dialog.waitFor({ state: "detached" });
+        let workspace = await exampleWorkspace(page, example);
+        assert.equal(await workspace.locator(".host-example-link .system-badge--org").innerText(), "Grand Hotel");
+        await page.keyboard.press("Escape");
         assert.equal((await requests(page)).length, before, "no API call");
         const stored = await page.evaluate(async (uid) => {
           const digest = await crypto.subtle.digest(
@@ -1483,8 +1446,9 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         await loaded(page, view);
         if (await example.locator("xpath=ancestor::details").getAttribute("open") === null)
           await example.locator("xpath=ancestor::details/summary").click();
-        await example.locator('[data-action="unlink"]').click();
-        await example.locator(".system-badge--none").waitFor();
+        await (await exampleAction(page, example, "unlink")).click();
+        workspace = await exampleWorkspace(page, example);
+        assert.equal(await workspace.locator(".host-example-link .system-badge--none").innerText(), "Not linked");
         assert.equal(
           (await requests(page)).some((entry) =>
             /example|calendar|reservations/.test(entry.call),
@@ -1517,7 +1481,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       const before = (await requests(page)).length;
       await page.locator("details[data-examples] > summary").click();
       await page
-        .locator('[data-system-id="example-room-212"] [data-action="try"]')
+        .locator('[data-system-id="example-room-212"] [data-action="workspace"]')
         .click();
       const dialog = page.locator("dialog.try-it[open]");
       await dialog.waitFor();
@@ -1704,8 +1668,8 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       await dialog.waitFor({ state: "detached" });
       assert.equal(
         await page.evaluate(() => document.activeElement?.dataset.action),
-        "try",
-        "focus returns to Try it",
+        "workspace",
+        "focus returns to the workspace action",
       );
       assert.deepEqual(network, [], "the simulator made no request");
       assert.equal((await requests(page)).length, before, "and no API call");
@@ -1746,24 +1710,9 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
           );
         }
         const kind = card(page, "parking").locator(".system-card__kind");
-        assert.equal(await kind.textContent(), "Dual Control · 2 שערים");
-        const order = await kind.evaluate((line) => {
-          const [label, count] = [...line.querySelectorAll("bdi")].map((bdi) =>
-            bdi.getBoundingClientRect(),
-          );
-          const range = document.createRange();
-          range.selectNodeContents(line.lastChild);
-          const words = range.getBoundingClientRect();
-          return { label, count, words };
-        });
-        assert.ok(
-          order.label.left >= order.count.right - 1 &&
-            order.count.left >= order.words.right - 1,
-          `kind line order ${JSON.stringify(order)}`,
-        );
-        await page
-          .locator('[data-system-id="room-1"] [data-action="link"]')
-          .click();
+        assert.equal(await kind.textContent(), "שליטה כפולה · 2 שערים");
+        assert.equal(await kind.evaluate(line => getComputedStyle(line).direction), "rtl", "shared Hebrew type line follows the page direction");
+        await (await cardAction(page, "room-1", "link")).click();
         const dialog = page.locator("dialog.system-dialog[open]");
         await dialog.waitFor();
         assert.ok(
@@ -1803,7 +1752,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         // Someone else's linked system names who linked it, in one short
         // badge that fits a phone card.
         assert.equal(
-          await card(page, "front").locator(".system-badge").textContent(),
+          await (async () => { await cardAction(page, "front", "guest-link"); return card(page, "front").locator(".system-badge").textContent(); })(),
           "שויכה על ידי manager@example.test",
         );
         assert.deepEqual(

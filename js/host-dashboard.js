@@ -74,6 +74,7 @@ function hideProtected(sessionEnded = false) {
   $("#dashboard-content").hidden = true;
   $("#host-sidebar").hidden = true;
   $("#host-tabbar").hidden = true;
+  $("#host-platform-navigation").hidden = true;
   document.body.classList.remove("host-ready");
   accountMenu.close();
 }
@@ -89,6 +90,7 @@ function clearSession() {
   ))
     element.replaceChildren();
   $("#account-avatar").textContent = "";
+  $("#host-workspace-roles")?.replaceChildren();
 }
 function showStatus(title, message, retry = true, loading = false) {
   $("#access-panel").hidden = false;
@@ -109,6 +111,17 @@ function renderAccount(user) {
   $("#account-name").textContent = name;
   $("#account-email").textContent = profile.email || "";
   renderProfileRoles($("#account-plan"), { platformRole: identity?.platformRole, product: "host", role: identity?.hasPlan ? identity.role : null });
+  const workspaceRoles = $("#host-workspace-roles");
+  if (workspaceRoles) {
+    workspaceRoles.replaceChildren();
+    workspaceRoles.hidden = !identity?.hasPlan;
+    if (identity?.hasPlan) {
+      const role = document.createElement("span");
+      role.dir = "ltr";
+      role.textContent = identity.role === Roles.ADMIN ? "WIFIGATE Host admin" : "WIFIGATE Host user";
+      workspaceRoles.append(role);
+    }
+  }
   $("#account-button").setAttribute(
     "aria-label",
     hostText("Account: {p0}", { p0: name || hostText("Signed-in account") }),
@@ -152,6 +165,7 @@ async function loadDashboard(user) {
     $("#access-panel").hidden = true;
     $("#dashboard-content").hidden = false;
     $("#host-sidebar").hidden = false;
+    $("#host-platform-navigation").hidden = state !== PortalStates.APPROVED || identity.role !== Roles.ADMIN;
     document.body.classList.add("host-ready");
     document.body.dataset.hostAccess =
       state === PortalStates.PENDING

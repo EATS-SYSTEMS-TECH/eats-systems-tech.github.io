@@ -1,4 +1,5 @@
-import { hostText } from "./host-locale.js";
+import { hostText, hostLanguage } from "./host-locale.js";
+import { createManagerActivity } from "./manager-activity.js";
 import { renderPendingMembershipInvitations } from "./host-membership-invitations.js";
 import { portalRequest } from "./api/index.js";
 import { readHostPages } from "./host-pages.js";
@@ -37,6 +38,7 @@ let preferredOrganizationId;
 let sessionUid;
 let navigateWorkspace;
 let managementRefreshPending = false;
+let activity;
 // The system whose upcoming bookings Bookings opens on next (after a
 // removal refused for bookings), kept while the organization switches:
 // {organizationId, id, type, targetId}.
@@ -142,6 +144,7 @@ async function submitChange({
 }
 
 export function clearHostManagement({ sessionEnded = false } = {}) {
+  activity?.reset();
   window.dispatchEvent(new CustomEvent("host:workspace-dispose"));
   clearHostCalendar();
   navigateWorkspace = undefined;
@@ -208,7 +211,16 @@ function renderSidebarSystems(plan) {
   if (list && !plan) list.replaceChildren();
 }
 
-export async function loadHostManagement(user, identity, preferredId) {
+export function loadHostManagement(user, identity, preferredId) {
+  if (document.body.classList.contains("host-manager-workspace")) {
+    activity ??= createManagerActivity({ main: document.getElementById("workspace-main"), view: root, language: hostLanguage });
+    activity.reset();
+    return activity.track(hostText("Loading your workspace…"), () => loadWorkspace(user, identity, preferredId));
+  }
+  return loadWorkspace(user, identity, preferredId);
+}
+
+async function loadWorkspace(user, identity, preferredId) {
   window.dispatchEvent(new CustomEvent("host:workspace-dispose"));
   if (sessionUid !== user.uid) {
     attempts.clear();
@@ -554,7 +566,7 @@ export async function loadHostManagement(user, identity, preferredId) {
           if (viewCurrent()) loads.delete(id);
         }
       };
-      const promise = load();
+      const promise = activity ? activity.track(hostText("Loading this view…"), load) : load();
       loads.set(id, promise);
       return promise;
     };

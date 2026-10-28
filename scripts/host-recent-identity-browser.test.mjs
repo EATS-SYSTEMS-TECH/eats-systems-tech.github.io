@@ -1,3 +1,4 @@
+import { openSystemAction } from "./lib/host-booking-site.mjs";
 import { installAppCheckFixture } from "./app-check-browser-fixture.mjs";
 import assert from "node:assert/strict";
 import { test } from "node:test";
@@ -190,10 +191,7 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
             exact: true,
           })
           .click();
-      if (module === "link")
-        await page
-          .locator('[data-system-id="reviewed-system"] [data-action="link"]')
-          .click();
+      if (module === "link") await (await openSystemAction(page, "reviewed-system", "link")).click();
       const field = page.locator(
         module === "link"
           ? 'input[name="organizationId"][value="reviewed-org"]'

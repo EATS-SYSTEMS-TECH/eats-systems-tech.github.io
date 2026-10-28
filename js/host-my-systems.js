@@ -12,8 +12,7 @@ import {
   iconSrc,
   action,
   emptyState,
-  systemsToolbar,
-  countText,
+  systemSetupGuide,
   openSystemDialog,
   bookingsRefusal,
   changeTracker,
@@ -105,6 +104,19 @@ export async function renderMySystems(panel, context) {
     class: "systems-view my-systems",
   });
   panel.append(section);
+  const toolbar = node("div", undefined, { class: "manager-toolbar" });
+  const refresh = action("Refresh", async (button) => {
+    button.disabled = true;
+    button.setAttribute("aria-busy", "true");
+    try {
+      await context.retry();
+    } finally {
+      button.disabled = false;
+      button.removeAttribute("aria-busy");
+    }
+  }, { name: "refresh" });
+  toolbar.append(node("h3", hostText("My systems")), refresh);
+  section.append(systemSetupGuide(), toolbar);
   const examples = () =>
     renderExampleGroup(section, {
       user: context.user,
@@ -123,19 +135,13 @@ export async function renderMySystems(panel, context) {
     return;
   }
   if (!context.isCurrent()) return;
-  const tip = hostText(
-    "Systems you add from the WIFIGATE app. Link one to an organization to use it there.",
-  );
   if (!systems.length) {
     const copy = systemsEmptyCopy(document.documentElement.lang);
-    const empty = node("section", undefined, { class: "empty-state systems-empty" });
+    const empty = node("section", undefined, { class: "manager-empty manager-empty-systems empty-state systems-empty" });
     empty.append(node("h4", copy.title), node("p", copy.description));
     section.append(empty);
   } else
-    section.append(
-      systemsToolbar(countText(systems.length), tip),
-      systemGrid(systems.map((system) => card(section, system, context))),
-    );
+    section.append(systemGrid(systems.map((system) => card(section, system, context))));
   await examples();
 }
 

@@ -313,12 +313,9 @@ test("workspace isolates failures, follows permissions and keeps history", async
               ? ["organization", "team", "billing", "support", "account"]
               : ["organization", "account"],
           );
-          assert.equal(
-            await page
-              .locator("#workspace-org-switcher .host-role-badge")
-              .getAttribute("data-role"),
-            role,
-          );
+          await page.locator("#workspace-org-switcher .manager-organization-picker-trigger").click();
+          assert.equal(await page.locator('.manager-organization-option[data-organization-id="org"] .manager-organization-picker-identity small').innerText(), { owner: "Owner", admin: "Admin", staff: "Staff", viewer: "Viewer" }[role], "shared picker preserves each original Host role");
+          await page.keyboard.press("Escape");
           assert.deepEqual(errors, []);
         }
       }
@@ -798,7 +795,7 @@ test("workspace isolates failures, follows permissions and keeps history", async
   );
 
   await t.test(
-    "the phone menu is discoverable and unknown view values select nothing",
+    "phone navigation stays inline and unknown view values return home",
     async () => {
       const { page, errors } = await openWorkspace(t, site, fixture("viewer"), {
         query: "?view=not-a-screen&lang=he",
@@ -809,12 +806,11 @@ test("workspace isolates failures, follows permissions and keeps history", async
         "my-systems",
       );
       assert.equal(new URL(page.url()).searchParams.has("view"), false);
-      const menu = page.getByRole("button", { name: "תפריט", exact: true });
-      assert.equal(await menu.getAttribute("aria-expanded"), "false");
-      await menu.click();
+      assert.equal(await page.locator("#host-section-navigation").isVisible(), true);
+      assert.equal(await page.locator(".workspace-menu-toggle").isVisible(), false);
       await nav(page, "bookings").click();
       await page.getByRole("region", { name: "הזמנות", exact: true }).waitFor();
-      assert.equal(await menu.getAttribute("aria-expanded"), "false");
+      assert.equal(await page.locator("#workspace-main").evaluate(node => node.inert), false);
       assert.ok(await fits(page));
       assert.deepEqual(errors, []);
     },

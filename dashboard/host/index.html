@@ -13,56 +13,22 @@
     <link rel="stylesheet" href="/css/host-admin.css?v=20261014w6" />
     <link rel="stylesheet" href="/css/cookie-consent.css?v=20261007c" />
     <link rel="stylesheet" href="/css/dashboard-header.css?v=20261028payworkspace1" />
+    <link rel="stylesheet" href="/css/host-manager-theme.css?v=20261028hostmanagerparity1" />
     <script
       type="module"
-      src="/js/host-dashboard.bundle.js?v=20261027accountdelete1"
+      src="/js/host-dashboard.bundle.js?v=20261028hostmanagerparity1"
     ></script>
   </head>
-  <body class="host-app portal-dashboard" data-product="host">
+  <body class="host-app portal-dashboard platform-page host-manager-workspace" data-product="host">
     <a
       class="workspace-skip-link"
       href="#workspace-main"
       data-host-copy="Skip to workspace"
       >Skip to workspace</a
     >
-    <aside
-      id="host-sidebar"
-      class="host-sidebar"
-      hidden=""
-      aria-label="Host navigation"
-      data-host-label="Host navigation"
-    >
-      <a
-        class="brand host-sidebar__brand"
-        href="/dashboard/host/"
-        aria-label="WIFIGATE home"
-        data-host-label="WIFIGATE home"
-        ><img
-          src="/assets/img/wifigate-horizontal-logo.webp"
-          alt="WIFIGATE"
-          width="416"
-          height="96"
-      /></a>
-      <div id="workspace-org-switcher" class="org-switcher" hidden=""></div>
-      <nav
-        id="host-section-navigation"
-        aria-label="Dashboard sections"
-        data-host-label="Dashboard sections"
-      ></nav>
-      <section
-        id="host-my-systems"
-        class="sidebar-systems"
-        aria-labelledby="sidebar-systems-title"
-        hidden=""
-      >
-        <h2 id="sidebar-systems-title" data-host-copy="My systems">
-          My systems
-        </h2>
-        <ul id="host-my-systems-list" class="sidebar-systems__list"></ul>
-      </section>
-      <div id="host-platform-navigation" class="sidebar-platform"></div>
-    </aside>
-    <header class="host-topbar">
+
+    <div class="platform-shell host-manager-page">
+    <header class="host-topbar platform-header">
       <div class="host-topbar__start">
         <button
           class="workspace-menu-toggle"
@@ -151,7 +117,46 @@
       </div>
     </header>
     <div class="host-scrim" hidden=""></div>
-    <main id="workspace-main" class="portal-shell" tabindex="-1">
+    <div id="host-workspace-shell" class="manager-shell host-manager-shell" data-mode="workspace">
+    <aside
+      id="host-sidebar"
+      class="host-sidebar manager-nav"
+      hidden=""
+      aria-label="Host navigation"
+      data-host-label="Host navigation"
+    >
+      <a
+        class="brand host-sidebar__brand"
+        href="/dashboard/host/"
+        aria-label="WIFIGATE home"
+        data-host-label="WIFIGATE home"
+        ><img
+          src="/assets/img/wifigate-horizontal-logo.webp"
+          alt="WIFIGATE"
+          width="416"
+          height="96"
+      /></a>
+      <p class="manager-nav-title" data-host-copy="Workspace">Workspace</p>
+      <div id="host-workspace-roles" class="manager-sidebar-roles" hidden></div>
+      <nav
+        id="host-section-navigation"
+        aria-label="Dashboard sections"
+        data-host-label="Dashboard sections"
+      ></nav>
+      <div id="workspace-org-switcher" class="org-switcher" hidden=""></div>
+      <section
+        id="host-my-systems"
+        class="sidebar-systems"
+        aria-labelledby="sidebar-systems-title"
+        hidden=""
+      >
+        <h2 id="sidebar-systems-title" data-host-copy="My systems">
+          My systems
+        </h2>
+        <ul id="host-my-systems-list" class="sidebar-systems__list"></ul>
+      </section>
+    </aside>
+    <main id="workspace-main" class="portal-shell manager-main" tabindex="-1">
       <span class="staging-badge" data-staging="" hidden="">LOCAL STAGING</span>
       <section
         id="access-panel"
@@ -187,7 +192,7 @@
           Check again
         </button>
       </section>
-      <div id="dashboard-content" hidden="">
+      <div id="dashboard-content" class="manager-view" hidden="">
         <section
           id="admin-overview"
           class="portal-panel"
@@ -203,6 +208,8 @@
         ></section>
       </div>
     </main>
+    </div>
+    <div id="host-platform-navigation" class="host-platform-tools"></div>
     <nav class="portal-legal" aria-label="Legal" data-host-label="Legal">
       <a href="/terms-and-conditions/" data-host-copy="Terms &amp; Conditions"
         >Terms &amp; Conditions</a
@@ -213,6 +220,7 @@
         >Accessibility Statement</a
       >
     </nav>
+    </div>
     <nav
       id="host-tabbar"
       class="host-tabbar"

@@ -5,11 +5,12 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright-core";
+import { hostShell } from "./host-test-shell.mjs";
 
 const root = path.resolve(fileURLToPath(new URL("../", import.meta.url)));
-const shell = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/host-dashboard.css"></head><body class="host-app host-ready"><header class="host-topbar"><div class="host-topbar__start"><button class="workspace-menu-toggle" type="button"><svg viewBox="0 0 24 24"></svg></button><h1 id="workspace-current-view"></h1></div><div id="product-switcher" class="product-switcher"></div><div class="host-topbar__end"><button id="join-organization" class="host-icon-button host-bell" type="button"><span class="host-bell__count" data-invitation-count></span></button></div></header><aside id="host-sidebar" class="host-sidebar"><nav id="host-section-navigation" aria-label="Dashboard sections"></nav><div id="host-platform-navigation" class="sidebar-platform"></div></aside><div class="host-scrim" hidden></div><main class="portal-shell"><section id="admin-overview" hidden></section><section id="host-management" data-loading="true"></section></main><nav id="host-tabbar" class="host-tabbar" hidden></nav><script type="module" src="/js/host-dashboard-navigation.js"></script></body></html>`;
+const shell = hostShell("/js/host-dashboard-navigation.js");
 
-test("Host navigation keeps deep links, aliases, history, the bell and the phone drawer on authorized views only", async (t) => {
+test("Host navigation keeps deep links, aliases, history, the bell and inline phone navigation on authorized views only", async (t) => {
   const server = createServer(async (req, res) => {
     try {
       const file = path.resolve(
@@ -185,48 +186,29 @@ test("Host navigation keeps deep links, aliases, history, the bell and the phone
   });
   assert.equal(query("view"), null);
 
-  // Phone: the sidebar is a drawer and a tab bar holds home, Calendar,
-  // Bookings and More. Background completion keeps a drawer the user opened.
+  // The shared Manager phone layout keeps authorized navigation inline.
+  // A view change and background completion preserve the selected URL;
+  // no overlay makes page content inert or traps focus behind a drawer.
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(origin + "/dashboard/host/");
   await ready();
   const tabbar = page.locator("#host-tabbar");
-  await tabbar.waitFor();
-  assert.deepEqual(
-    await tabbar
-      .locator("button:visible")
-      .evaluateAll((items) => items.map((item) => item.dataset.tabView ?? item.dataset.tab)),
-    ["my-systems", "calendar", "bookings", "more"],
-  );
   const menu = page.locator(".workspace-menu-toggle");
-  assert.equal(await navigation.isVisible(), false);
-  await menu.click();
-  await page.evaluate(() =>
-    window.dispatchEvent(new CustomEvent("host:workspace-ready")),
-  );
-  assert.equal(await menu.getAttribute("aria-expanded"), "true");
-  await navigation.locator('button[data-view-id="settings"]').waitFor();
+  assert.equal(await navigation.isVisible(), true);
+  assert.equal(await tabbar.isVisible(), false);
+  assert.equal(await menu.isVisible(), false);
   await navigation.locator('button[data-view-id="settings"]').click();
-  assert.equal(await menu.getAttribute("aria-expanded"), "false");
   assert.equal(query("view"), "settings");
-  await tabbar.locator('[data-tab="more"]').click();
-  assert.equal(await menu.getAttribute("aria-expanded"), "true");
-  await page.keyboard.press("Escape");
-  assert.equal(await menu.getAttribute("aria-expanded"), "false");
-  await menu.click();
-  await page.locator(".host-scrim").click({ position: { x: 370, y: 400 } });
-  assert.equal(await menu.getAttribute("aria-expanded"), "false");
-  await tabbar.locator('[data-tab-view="calendar"]').click();
+  await page.evaluate(() => window.dispatchEvent(new CustomEvent("host:workspace-ready")));
+  assert.equal(query("view"), "settings");
+  assert.equal(await navigation.isVisible(), true);
+  await navigation.locator('button[data-view-id="calendar"]').focus();
+  await page.keyboard.press("Enter");
   assert.equal(query("view"), "calendar");
-  assert.equal(
-    await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
-    true,
-  );
-  await menu.click();
-  await page.evaluate(() =>
-    window.dispatchEvent(new CustomEvent("host:workspace-reset")),
-  );
-  assert.equal(await menu.getAttribute("aria-expanded"), "false");
+  assert.equal(await page.locator("#workspace-main").evaluate(node => node.inert), false);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  await page.evaluate(() => window.dispatchEvent(new CustomEvent("host:workspace-reset")));
+  assert.equal(query("view"), null);
 
   // A pending account has only the join view: no drawer, menu or tab bar.
   await page.goto(origin + "/dashboard/host/");

@@ -17,6 +17,7 @@ const platformNav = document.getElementById("host-platform-navigation");
 const tabbar = document.getElementById("host-tabbar");
 const bell = document.getElementById("join-organization");
 const scrim = document.querySelector(".host-scrim");
+const sharedLayout = document.body.classList.contains("host-manager-workspace");
 const icons = {
   grid: "M4 4h7v7H4z M13 4h7v7h-7z M4 13h7v7H4z M13 13h7v7h-7z",
   building:
@@ -73,10 +74,11 @@ function setMenu(open) {
   if (scrim) scrim.hidden = !open;
   document.body.classList.toggle("host-menu-open", open);
   tabs.get("more")?.setAttribute("aria-expanded", String(open));
-  const modal = open && mobile.matches && Boolean(sidebar);
+  const modal = !sharedLayout && open && mobile.matches && Boolean(sidebar);
   for (const element of behindDrawer()) element.inert = modal;
 }
 function toggleMenu() {
+  if (sharedLayout) return;
   const open = toggle.getAttribute("aria-expanded") !== "true";
   setMenu(open);
   // The drawer takes focus on a phone, so the keyboard lands inside it.
@@ -104,11 +106,16 @@ function viewButton(view, className) {
   button.hidden = true;
   button.dataset.view = view.label;
   button.dataset.viewId = view.id;
-  if (className) button.className = className;
-  button.innerHTML = svg(view.icon);
+  button.className = [className, sharedLayout ? "manager-button" : ""].filter(Boolean).join(" ");
+  if (!sharedLayout || view.placement === "platform") button.innerHTML = svg(view.icon);
   const label = document.createElement("span");
   label.textContent = hostText(view.label);
   button.append(label);
+  if (sharedLayout && view.placement === "platform") {
+    button.classList.add("platform-management-entry", "manager-platform-entry", "host-platform-entry");
+    label.textContent = hostText("Platform management");
+    button.title = label.textContent;
+  }
   button.addEventListener("click", () =>
     choose(view.id, { push: true, focus: true }),
   );
@@ -120,6 +127,13 @@ for (const view of workspaceViews) {
     // The bell in the top bar; without one (a reduced page) it is a nav item.
     const button = bell ?? viewButton(view);
     if (bell) {
+      if (sharedLayout) {
+        button.className = "manager-button";
+        const label = document.createElement("span");
+        label.textContent = hostText(view.label);
+        button.replaceChildren(label);
+        nav.append(button);
+      }
       button.dataset.view = view.label;
       button.dataset.viewId = view.id;
       button.setAttribute("aria-label", hostText(view.label));
@@ -315,7 +329,7 @@ function refresh() {
       else button.removeAttribute("aria-current");
     });
     tabbar.hidden =
-      !ids.length || Boolean(document.getElementById("host-sidebar")?.hidden);
+      sharedLayout || !ids.length || Boolean(document.getElementById("host-sidebar")?.hidden);
   }
   // With nothing to navigate to (a pending account sees only the
   // join-organization view) the sidebar, menu button and tab bar go away.

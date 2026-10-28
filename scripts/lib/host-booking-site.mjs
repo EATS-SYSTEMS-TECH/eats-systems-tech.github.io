@@ -117,6 +117,7 @@ export async function openWorkspace(
   });
   t.after(() => context.close());
   const page = await context.newPage();
+  page.setDefaultTimeout(Number(process.env.WIFIGATE_FIXTURE_TIMEOUT || 30000));
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   const start = `import { startWorkspace } from '/scripts/lib/host-booking-api.js'; window.workspaceStarted = startWorkspace(${JSON.stringify(state)}, { locale: ${real} });`;
@@ -171,3 +172,16 @@ export const loaded = (page, view) =>
 // True when the page has no horizontal scroll.
 export const fits = (page) =>
   page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1);
+
+// Follow the production inventory's single workspace CTA before exercising
+// the original Host command. No request/role/version assertion is bypassed.
+export async function openSystemAction(page, id, name) {
+  const selected = page.locator(`.system-card[data-system-id="${id}"]`).first();
+  const action = selected.locator(`[data-action="${name}"]`);
+  if (!(await action.isVisible())) {
+    const open = page.locator("dialog.system-workspace-dialog[open]");
+    if (await open.count()) await page.keyboard.press("Escape");
+    await selected.locator('[data-action="workspace"]').click();
+  }
+  return action;
+}

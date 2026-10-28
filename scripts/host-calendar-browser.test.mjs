@@ -1,3 +1,4 @@
+import { openSystemAction } from "./lib/host-booking-site.mjs";
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
@@ -72,11 +73,11 @@ test("Calendar and Bookings: systems as rows, the booking sheet and guest links"
           .evaluateAll((cells) => cells.map((cell) => cell.textContent.trim())),
         ["Lobby door", "Parking", "Room 101", "—"],
       );
-      // Two weeks on a computer.
-      assert.equal(await page.locator(".calendar-grid thead th").count(), 15);
+      // The shared Manager content column starts with one readable week.
+      assert.equal(await page.locator(".calendar-grid thead th").count(), 8);
       assert.equal(
         await page
-          .locator('[data-range="two-week"]')
+          .locator('[data-range="week"]')
           .getAttribute("aria-pressed"),
         "true",
       );
@@ -143,7 +144,7 @@ test("Calendar and Bookings: systems as rows, the booking sheet and guest links"
         [768, "week", false],
         [1024, "week", false],
         [1280, "week", false],
-        [1440, "two-week", false],
+        [1440, "week", false],
       ]) {
         const { page, errors } = await openWorkspace(t, site, fixture(), {
           query: "?view=calendar",
@@ -566,6 +567,7 @@ test("Calendar and Bookings: systems as rows, the booking sheet and guest links"
           .isVisible(),
         true,
       );
+      await openSystemAction(page, "s2", "guest-link");
       await page
         .locator('[data-system-id="s2"] [data-action="guest-link"]')
         .click();
@@ -683,7 +685,7 @@ test("Calendar and Bookings: systems as rows, the booking sheet and guest links"
       );
       const [read] = await calls(page, `GET ${reservationsPath}`);
       assert.equal(read.query.from, `${day(0)}T00:00:00.000Z`);
-      assert.equal(read.query.to, `${day(14)}T00:00:00.000Z`);
+      assert.equal(read.query.to, `${day(7)}T00:00:00.000Z`);
       assert.deepEqual(errors, []);
     },
   );

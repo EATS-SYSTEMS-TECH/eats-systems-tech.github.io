@@ -1,3 +1,4 @@
+import { openSystemAction } from "./lib/host-booking-site.mjs";
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
@@ -100,8 +101,8 @@ test("the Host dashboard keeps the fixes from its visual review", async (t) => {
                 Node.DOCUMENT_POSITION_FOLLOWING,
               );
             return [
-              after("#host-sidebar", ".host-topbar"),
-              after(".portal-legal", "#host-tabbar"),
+              after(".host-topbar", "#host-sidebar"),
+              after("#host-sidebar", "#workspace-main"),
               [...document.querySelectorAll(".host-role-badge")].filter(
                 (chip) => chip.tabIndex >= 0,
               ).length,
@@ -460,6 +461,7 @@ test("the Host dashboard keeps the fixes from its visual review", async (t) => {
         { query: "?view=systems" },
       );
       await loaded(page, "systems");
+      await openSystemAction(page, "s1", "remove");
       await page
         .locator(
           '[data-workspace-view="systems"] [data-system-id="s1"] [data-action="remove"]',
@@ -474,7 +476,7 @@ test("the Host dashboard keeps the fixes from its visual review", async (t) => {
       // The dialog stops asking: its title says it can't be done yet and
       // the question's explanation is gone.
       assert.equal(
-        await dialog.locator("h2").textContent(),
+        await dialog.getByRole("heading").textContent(),
         "Can't remove Room 101 yet",
       );
       assert.equal(await dialog.locator(".system-dialog__text").count(), 0);
@@ -489,8 +491,8 @@ test("the Host dashboard keeps the fixes from its visual review", async (t) => {
             buttons.map((button) => [button.textContent, button.className]),
           ),
         [
-          ["Open bookings", ""],
-          ["Close", "button-secondary"],
+          ["Open bookings", "manager-button primary"],
+          ["Close", "manager-button button-secondary"],
         ],
       );
       assert.deepEqual(errors, []);

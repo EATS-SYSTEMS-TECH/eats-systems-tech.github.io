@@ -106,7 +106,7 @@ test("the URL's language sets direction, labels and layout while names stay as p
       words.calendar,
     );
     assert.equal(
-      await page.locator("#workspace-org-switcher .org-card__name").innerText(),
+      await page.locator("#workspace-org-switcher .manager-organization-picker-identity strong").innerText(),
       "Calendar",
       "an organization name is never translated",
     );
@@ -324,9 +324,9 @@ test("the URL's language sets direction, labels and layout while names stay as p
       .locator('#host-section-navigation [data-view-id="bookings"]')
       .click();
     await loaded(page, "bookings");
-    await page.locator("#workspace-org-switcher .org-card").click();
+    await page.locator("#workspace-org-switcher .manager-organization-picker-trigger").click();
     await page
-      .locator('#org-switcher-list [data-organization-id="fixture-org-2"]')
+      .locator('.manager-organization-picker-options [data-organization-id="fixture-org-2"]')
       .click();
     await page.waitForFunction(
       () =>
@@ -350,7 +350,7 @@ test("the URL's language sets direction, labels and layout while names stay as p
     assert.equal(new URL(page.url()).searchParams.get("view"), "bookings");
     assert.equal(
       await page
-        .locator("#workspace-org-switcher .org-card")
+        .locator("#workspace-org-switcher .manager-organization-picker-trigger")
         .getAttribute("data-organization-id"),
       "fixture-org-2",
     );

@@ -1,3 +1,4 @@
+import { openSystemAction } from "./lib/host-booking-site.mjs";
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
@@ -151,6 +152,7 @@ test("booking sheet, details and the Bookings list", async (t) => {
         .locator('#host-section-navigation [data-view-id="systems"]')
         .click();
       await loaded(page, "systems");
+      await openSystemAction(page, "s1", "guest-link");
       assert.equal(
         await page
           .locator('[data-system-id="s1"] [data-action="guest-link"]')
