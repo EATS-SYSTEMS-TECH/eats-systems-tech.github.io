@@ -80,8 +80,11 @@ test("Manager has a directional orange shortcut and a dedicated three-count admi
       assert.equal(await entry.isHidden(), true);
       assert.equal(
         await page.locator(".manager-platform-tabs button").count(),
-        4,
+        3,
       );
+      assert.equal(await page.locator('.manager-platform-tabs [aria-current="page"]').count(), 0);
+      assert.equal(await page.locator('.manager-platform-home').getAttribute('aria-current'), 'page');
+      assert.equal(await page.getByText(language === 'he' ? 'תוכניות ועלויות משתמשי Manager' : 'Manager user plans and costs', {exact:true}).count(), 0);
       assert.deepEqual(
         await page.locator(".manager-overview-card strong").allTextContents(),
         ["2", "12", "4"],

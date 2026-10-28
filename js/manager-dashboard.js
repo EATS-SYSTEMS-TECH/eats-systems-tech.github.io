@@ -21,7 +21,6 @@ import { managerRequest } from "./api/index.js";
 import { ManagerConnection } from "./manager-connection.js";
 import { createManagerExamples } from "./manager-examples.js";
 import { createManagerSystemCard } from "./manager-system-card.js";
-import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
 import { createManagerActivity } from "./manager-activity.js";
 import { createManagerConnectionDialog } from "./manager-connection-dialog.js";
 import { managerConnectionError } from "./manager-connection-errors.js";
@@ -67,7 +66,6 @@ export function createManagerDashboard({
         ? `${t("סימולציה בלבד · מערכת לדוגמה", "Simulation only · example system")}\n${message}`
         : message,
     );
-  let planDirectory;
   let organizationPicker;
   const organizationIdentities = new Map();
   let managementMode = management;
@@ -375,8 +373,6 @@ export function createManagerDashboard({
     tabGeneration++;
     connectionDialog.close();
     activity.reset();
-    planDirectory?.close();
-    planDirectory = undefined;
     countsPopover?.close();
     countsPopover = null;
     dialogs.cancel();
@@ -466,14 +462,28 @@ export function createManagerDashboard({
           event.preventDefault();
           void task(() => changeManagement(false));
         });
+        const home = node("a", undefined, "manager-platform-home");
+        home.href = "/dashboard/manager/platform/" + (he ? "?lang=he" : "");
+        home.setAttribute("aria-label", t("ניהול פלטפורמה", "Platform management"));
+        home.title = t("מעבר לסקירה הכללית", "Open the platform overview");
+        if (currentView === "overview") home.setAttribute("aria-current", "page");
+        const homeIcon = node("span", undefined, "manager-platform-home-icon");
+        homeIcon.append(overviewIcon("overview"));
+        const homeText = node("div", undefined, "manager-platform-home-text");
+        homeText.append(
+          node("h2", t("ניהול פלטפורמה", "Platform management"), "manager-platform-title"),
+          node("span", currentView === "overview" ? t("סקירה כללית", "Platform overview") : t("חזרה לסקירה הכללית", "Back to platform overview"), "manager-platform-home-caption"),
+        );
+        home.append(homeIcon, homeText);
+        home.addEventListener("click", event => {
+          if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          event.preventDefault();
+          void task(showOverview);
+        });
         platformHeader.append(
           back,
           node("span", "WIFIGATE Manager admin", "manager-role-badge"),
-          node(
-            "h2",
-            t("ניהול פלטפורמה", "Platform management"),
-            "manager-platform-title",
-          ),
+          home,
           node(
             "p",
             t(
@@ -489,15 +499,17 @@ export function createManagerDashboard({
           t("ניווט ניהול פלטפורמה", "Platform management navigation"),
         );
         for (const [key, label, action] of [
-          ["overview", t("סקירה", "Overview"), showOverview],
           ["admin", directoryLabel("admin"), () => showDirectory("admin")],
           ["user", directoryLabel("user"), () => showAccounts()],
           ["organizations", t("ארגונים", "Organizations"), showOrganizations],
         ]) {
           const b = button(label, action);
+          const icon = node("span", undefined, "manager-platform-section-icon");
+          icon.append(overviewIcon(key === "admin" ? "admins" : key === "user" ? "users" : "organizations"));
+          b.replaceChildren(icon, node("span", label));
           if (
             currentView === key ||
-            (currentView === "platform-systems" && key === "user")
+            (currentView === "platform-systems" && key === (scope ? "organizations" : "user"))
           )
             b.setAttribute("aria-current", "page");
           tabs.append(b);
@@ -596,6 +608,7 @@ export function createManagerDashboard({
     path.setAttribute(
       "d",
       {
+        overview: "M3 10 12 3l9 7M5 9v12h14V9M9 21v-7h6v7",
         admins: "M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Zm-4 9 3 3 5-6",
         users: "M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 21v-2a8 8 0 0 1 16 0v2",
         organizationAdmins:
@@ -692,7 +705,7 @@ export function createManagerDashboard({
     help.id = "manager-counts-help";
     help.setAttribute("role", "tooltip");
     help.tabIndex = -1;
-    heading.append(node("h3", t("סקירה", "Overview")), info, help);
+    heading.append(node("h3", t("תמונת מצב", "At a glance")), info, help);
     view.append(heading);
     countsPopover = attachPopover(info, help, { align: "end" });
     const totals = await api("/admin/overview");
@@ -727,32 +740,13 @@ export function createManagerDashboard({
         node("span", label, "manager-overview-label"),
         node(
           "strong",
-          Number.isInteger(totals[key]) ? String(totals[key]) : "—",
+          Number.isSafeInteger(totals[key]) && totals[key] >= 0 ? String(totals[key]) : t("לא זמין", "Unavailable"),
         ),
         node("span", cta + (he ? " ←" : " →"), "manager-overview-cta"),
       );
       grid.append(card);
     }
     view.append(grid);
-    const details = node("details", undefined, "platform-admin-management");
-    details.append(
-      node(
-        "summary",
-        t("תוכניות ועלויות משתמשי Manager", "Manager user plans and costs"),
-      ),
-    );
-    const directoryRoot = node("section");
-    details.append(directoryRoot);
-    view.append(details);
-    details.addEventListener("toggle", () => {
-      if (details.open && !planDirectory && !closed && epoch === generation)
-        planDirectory = createPlatformAdminDirectory({
-          root: directoryRoot,
-          user,
-          language,
-          product: "manager",
-        });
-    });
   }
   async function showDirectory(role, status = "active") {
     beginView(role);

@@ -57,13 +57,28 @@ test("published Manager page wires the private profile into the header without d
       assert.equal(await page.locator('.manager-nav').isHidden(), true);
       assert.equal(await platformEntry.getAttribute('aria-current'), null);
       const tabs = page.locator('.manager-platform-tabs');
-      assert.equal(await tabs.getByRole('button').count(), 4);
+      assert.equal(await tabs.getByRole('button').count(), 3);
       assert.equal(await tabs.getByText('מנהלי ארגונים',{exact:true}).count(), 0);
-      assert.equal(await tabs.locator('[aria-current="page"]').innerText(), 'סקירה');
+      assert.equal(await tabs.locator('[aria-current="page"]').count(), 0);
+      assert.equal(await page.locator('.manager-platform-home').getAttribute('aria-current'), 'page');
       assert.equal(await page.locator('.manager-platform-title').innerText(), 'ניהול פלטפורמה');
+      assert.equal(await tabs.getByRole('button', {name:'סקירה',exact:true}).count(), 0);
+      assert.equal(await page.getByText('תוכניות ועלויות משתמשי Manager',{exact:true}).count(), 0);
+      await page.locator('.manager-overview-card').first().hover();
+      assert.equal(await page.locator('.manager-overview-card').first().locator('strong').evaluate(el => getComputedStyle(el).color), 'rgb(255, 255, 255)');
       await tabs.getByRole('button', {name:'מנהלי פלטפורמה',exact:true}).click();
       await page.locator('.manager-directory-row').last().waitFor();
       assert.equal(await tabs.locator('[aria-current="page"]').innerText(), 'מנהלי פלטפורמה');
+      assert.equal(await tabs.locator('[aria-current="page"]').evaluate(el => getComputedStyle(el).backgroundColor), 'rgb(23, 27, 33)');
+      assert.equal(await tabs.locator('[aria-current="page"]').evaluate(el => getComputedStyle(el).color), 'rgb(255, 255, 255)');
+      assert.equal(await page.locator('.manager-platform-home').getAttribute('aria-current'), null);
+      await page.locator('.manager-platform-home').focus();
+      await page.keyboard.press('Enter');
+      await page.locator('.manager-overview-card').last().waitFor();
+      assert.equal(await tabs.locator('[aria-current="page"]').count(), 0);
+      assert.equal(await page.locator('.manager-platform-home').getAttribute('aria-current'), 'page');
+      await tabs.getByRole('button', {name:'מנהלי פלטפורמה',exact:true}).click();
+      await page.locator('.manager-directory-row').last().waitFor();
       const createAdmin = page.getByRole('button', {name:'הוספת Manager admin',exact:true});
       assert.equal(await page.locator('.manager-view form').count(),0);
       const formBox = await createAdmin.boundingBox(), recordsBox = await page.locator('.manager-directory').boundingBox();
@@ -156,7 +171,7 @@ test("Manager identity, platform overview and organization columns support scope
         await page.route(origin + "/manager-directory-fixture", (r) =>
           r.fulfill({
             contentType: "text/html",
-            body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><head><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"><link rel="stylesheet" href="/css/dashboard-header.css"></head><body class="platform-page" data-product="manager"><main class="platform-shell"><header class="platform-header"><a class="brand"><img src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE"></a><strong>WIFIGATE Manager</strong><div id="manager-profile" class="account-menu"></div></header><div id="root"></div></main></body></html>`,
+            body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"><link rel="stylesheet" href="/css/dashboard-header.css"></head><body class="platform-page" data-product="manager"><main class="platform-shell"><header class="platform-header"><a class="brand"><img src="/assets/img/wifigate-horizontal-logo.webp" alt="WIFIGATE"></a><strong>WIFIGATE Manager</strong><div id="manager-profile" class="account-menu"></div></header><div class="portal-panel"><div id="root"></div></div></main></body></html>`,
           }),
         );
         await page.goto(origin + "/manager-directory-fixture");
@@ -341,7 +356,7 @@ test("Manager identity, platform overview and organization columns support scope
           await page.screenshot({path:`${process.env.MANAGER_DIRECTORY_SCREENSHOTS}/manager-platform-overview-${language}-${width}.png`,fullPage:true});
         await page.locator("button.manager-overview-card").first().click();
         await page.locator(".manager-directory-row").last().waitFor();
-        await page.locator(".manager-platform-tabs").getByRole("button",{name:he?"סקירה":"Overview",exact:true}).click();
+        await page.locator(".manager-platform-home").click();
         await page.locator("button.manager-overview-card").last().waitFor();
 
         await page.locator('.manager-platform-tabs').getByRole('button',{name:he ? 'לקוחות' : 'Customers',exact:true}).click();
@@ -362,7 +377,7 @@ test("Manager identity, platform overview and organization columns support scope
         await customerDialog.waitFor({state:'hidden'});
         await page.getByText(he ? 'חשבון הלקוח הופעל.' : 'Customer account enabled.',{exact:true}).waitFor();
         assert.deepEqual(await page.evaluate(()=>window.calls.filter(call=>call.path==='/admin/accounts' && call.method==='POST').map(call=>call.body)),[{email:'customer@example.test',status:'active'}]);
-        await page.locator('.manager-platform-tabs').getByRole('button',{name:he ? 'סקירה' : 'Overview',exact:true}).click();
+        await page.locator('.manager-platform-home').click();
         await page.locator('button.manager-overview-card').last().waitFor();
 
         const profileButton = page.locator("#manager-profile-button");
@@ -438,6 +453,7 @@ test("Manager identity, platform overview and organization columns support scope
           });
         await first.getByRole('button',{name:he?'כניסה לארגון':'Open organization',exact:true}).click();
         await page.locator('.manager-organization-header h2').waitFor();
+        assert.equal(await page.locator('.manager-platform-tabs [aria-current="page"]').innerText(), he ? 'ארגונים' : 'Organizations');
         await page.locator('[data-organization-disclosure="people"] > summary').click();
         await page.getByRole('button',{name:he?'הוספת מנהל':'Add admin',exact:true}).click();
         await page.getByRole('dialog').getByLabel(he?'כתובת אימייל':'Email address',{exact:true}).fill('new@example.test');
