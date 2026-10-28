@@ -18,7 +18,7 @@ import { buildLlmsTxt } from "./llms-txt.mjs";
 import { LEGAL_PAGES, legalBundles, renderLegalMain } from "./legal/legal-pages.mjs";
 import { buildNotFoundPage } from "./not-found-page.mjs";
 import { buildLoginPages } from "./login-pages.mjs";
-import { BRAND_ID, ORGANIZATION_ID, SITE_ORIGIN, breadcrumbNode, faqNode, hreflangCode, setPageMeta, webPageNode } from "./seo.mjs";
+import { BRAND_ID, ORGANIZATION_ID, SHARE_IMAGE, SITE_ORIGIN, breadcrumbNode, faqNode, hreflangCode, setPageMeta, webPageNode } from "./seo.mjs";
 import { readSceneManifest, applyNicheSceneMedia, applyHomeSceneMedia } from "./scene-media.mjs";
 import { applyMediaWatermarks } from "./media-watermark.mjs";
 import { SHOP_PAGE_KEYS, getShopPageContent } from "./shop-pages.mjs";
@@ -55,13 +55,12 @@ const nicheRuntimeScriptsToAdd = [
   "/js/language-selector.js?v=20261006a",
 ];
 
-// Social share images (Open Graph / Twitter), at the sizes the platforms crop to.
-const shareImage = { url: `${SITE_ORIGIN}/assets/img/wifigate-share.jpg`, width: 1200, height: 630, alt: "WIFIGATE" };
+// JSON-LD page images; Open Graph / Twitter always use the logo (seo.mjs SHARE_IMAGE).
 const pageImages = {
-  home: shareImage,
-  legal: shareImage,
-  utility: { url: `${SITE_ORIGIN}/logo-1024.png`, width: 1024, height: 1024, alt: "WIFIGATE" },
-  guestInvites: shareImage,
+  home: SHARE_IMAGE,
+  legal: SHARE_IMAGE,
+  utility: SHARE_IMAGE,
+  guestInvites: SHARE_IMAGE,
 };
 
 function getNestedValue(source, keyPath) {

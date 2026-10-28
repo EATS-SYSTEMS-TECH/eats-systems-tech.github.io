@@ -10,6 +10,8 @@ export const ORGANIZATION_ID = `${SITE_ORIGIN}/#organization`;
 export const WEBSITE_ID = `${SITE_ORIGIN}/#website`;
 export const BRAND_ID = `${SITE_ORIGIN}/#brand`;
 export const LOGO_URL = `${SITE_ORIGIN}/logo-1024.png`;
+// Every shared link (WhatsApp, Facebook, X, ...) shows the WIFIGATE logo only.
+export const SHARE_IMAGE = { url: `${SITE_ORIGIN}/assets/img/wifigate-logo-share.png`, width: 1200, height: 630, alt: "WIFIGATE" };
 // Every way people write the brand; search and answer engines match them all
 // to the same WIFIGATE entity.
 export const BRAND_ALTERNATE_NAMES = ["WiFi Gate", "Wi-Fi Gate", "Wifigate", "WiFiGate"];
@@ -202,16 +204,15 @@ export function setPageMeta($, {
   $("meta[property^='article:']").remove();
   if (published) setMeta($, "property", "article:published_time", published);
   if (modified) setMeta($, "property", "article:modified_time", modified);
-  if (image) {
-    setMeta($, "property", "og:image", image.url);
-    setMeta($, "property", "og:image:width", image.width);
-    setMeta($, "property", "og:image:height", image.height);
-    setMeta($, "property", "og:image:alt", image.alt);
-  }
+  setMeta($, "property", "og:image", SHARE_IMAGE.url);
+  setMeta($, "property", "og:image:type", "image/png");
+  setMeta($, "property", "og:image:width", SHARE_IMAGE.width);
+  setMeta($, "property", "og:image:height", SHARE_IMAGE.height);
+  setMeta($, "property", "og:image:alt", SHARE_IMAGE.alt);
   setMeta($, "name", "twitter:card", "summary_large_image");
   setMeta($, "name", "twitter:title", title);
   setMeta($, "name", "twitter:description", description);
-  if (image) setMeta($, "name", "twitter:image", image.url);
+  setMeta($, "name", "twitter:image", SHARE_IMAGE.url);
 
   $("script[type='application/ld+json']").remove();
   const data = {
