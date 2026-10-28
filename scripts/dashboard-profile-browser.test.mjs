@@ -4,6 +4,34 @@ import { startSite, scenario } from "./platform-test-fixtures.mjs";
 
 const estimate = (amounts, quantities) => ({kind: "monthly-estimate", currency: "USD", monthlyCents: amounts.reduce((a,b) => a+b,0), lines: Object.fromEntries(["gates", "dualControls", "groups", "organizations"].map((key,i) => [key,{amountCents: amounts[i], quantity: quantities[i]}]))});
 
+test("For Business access displays WIFIGATE User without granting global administrator status", async (t) => {
+  const { origin, browser } = await startSite(t);
+  for (const language of ["he", "en"]) for (const product of ["host", "pay", "manager"]) {
+    await t.test(`${language} ${product}`, async (t) => {
+      const fixture = await scenario(browser, {
+        platformRole: null,
+        // A product administrator is still a regular WIFIGATE platform user.
+        admin: product === "host",
+        host: "no-plan", pay: "no-plan", manager: "no-plan",
+        [product]: "active", enrolled: true, verified: true,
+        viewport: { width: language === "he" ? 390 : 1440, height: 1000 },
+      });
+      t.after(() => fixture.context.close());
+      const page = fixture.page;
+      await page.goto(origin + "/dashboard/" + (language === "he" ? "?lang=he" : ""));
+      const details = page.locator("#profile-details");
+      await details.getByText("WIFIGATE User", { exact: true }).waitFor();
+      assert.equal(await details.getByText("WIFIGATE Admin", { exact: true }).count(), 0);
+      assert.equal(await details.locator("dt").first().textContent(), language === "he" ? "תפקיד בחשבון WIFIGATE" : "WIFIGATE account role");
+      assert.equal(await details.getByText("WIFIGATE User", { exact: true }).getAttribute("dir"), "auto");
+      assert.equal(await page.locator(".platform-management-entry:visible").count(), 0);
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+      if (process.env.DASHBOARD_PREVIEW_DIR) await page.screenshot({ path: `${process.env.DASHBOARD_PREVIEW_DIR}/account-role-${language}-${product}.png`, fullPage: true });
+      assert.deepEqual(fixture.errors, []);
+    });
+  }
+});
+
 test("every dashboard shares a flag selector and profile entry into My profile", async (t) => {
   const { origin, browser } = await startSite(t);
   const chromeReference = new Map();
@@ -193,6 +221,8 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               3,
             );
             const details = page.locator("#profile-details");
+            assert.equal(await details.getByText("WIFIGATE Admin", { exact: true }).count(), 1);
+            assert.equal(await details.getByText("WIFIGATE User", { exact: true }).count(), 0);
             const email = details.getByText("fixture@example.test", { exact: true });
             assert.deepEqual(
               await email.evaluate((el) => ({

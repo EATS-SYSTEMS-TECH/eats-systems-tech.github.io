@@ -594,6 +594,10 @@ function renderProfileDetails() {
   };
   for (const [label, value] of [
     [
+      language === "he" ? "תפקיד בחשבון WIFIGATE" : "WIFIGATE account role",
+      identity.platformRole === "admin" ? "WIFIGATE Admin" : "WIFIGATE User",
+    ],
+    [
       language === "he" ? "כתובת אימייל" : "Email address",
       identity.user.email || unavailableLabel(language),
     ],
