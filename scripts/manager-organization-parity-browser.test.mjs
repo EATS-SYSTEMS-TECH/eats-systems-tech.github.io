@@ -146,6 +146,18 @@ test("organization example shares the real card and organization workspace with 
             })
             .click();
           await page.locator(".manager-organization-header h2").waitFor();
+          assert.equal(
+            await page
+              .locator(".manager-organization-disclosure[open]")
+              .count(),
+            0,
+          );
+          await page
+            .locator('[data-organization-disclosure="branding"] > summary')
+            .click();
+          await page
+            .locator('[data-organization-disclosure="people"] > summary')
+            .click();
           assert.deepEqual(
             await page
               .locator(".manager-organization-metrics strong")
@@ -290,6 +302,16 @@ test("organization example shares the real card and organization workspace with 
               .allTextContents(),
             ["3", "1", "0"],
           );
+          assert.equal(
+            await page
+              .locator('[data-organization-disclosure="people"]')
+              .getAttribute("open"),
+            null,
+            "another organization has its own disclosure state",
+          );
+          await page
+            .locator('[data-organization-disclosure="branding"] > summary')
+            .click();
           assert.equal(
             await page.locator(".manager-organization-logo img").count(),
             1,

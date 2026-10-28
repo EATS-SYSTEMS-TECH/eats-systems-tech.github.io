@@ -438,6 +438,7 @@ test("Manager identity, platform overview and organization columns support scope
           });
         await first.getByRole('button',{name:he?'כניסה לארגון':'Open organization',exact:true}).click();
         await page.locator('.manager-organization-header h2').waitFor();
+        await page.locator('[data-organization-disclosure="people"] > summary').click();
         await page.getByRole('button',{name:he?'הוספת מנהל':'Add admin',exact:true}).click();
         await page.getByRole('dialog').getByLabel(he?'כתובת אימייל':'Email address',{exact:true}).fill('new@example.test');
         await page.getByRole('dialog').getByRole('button',{name:he?'יצירת הזמנה':'Create invitation',exact:true}).click();

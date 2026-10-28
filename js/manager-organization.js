@@ -11,6 +11,9 @@ const node = (tag, text, className) => {
 };
 const trash =
   '<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"/></svg>';
+// Scoped to the mounted dashboard and organization, never shared across accounts
+// or persisted to browser storage. Refreshing after an edit preserves context.
+const disclosureStates = new WeakMap();
 
 /** Normalize locally before transmission: no metadata, external image URL or active format. */
 export async function prepareOrganizationLogo(file) {
@@ -86,18 +89,64 @@ export async function renderManagerOrganization({
   ]);
   if (!isCurrent()) return null;
   const section = node("section", undefined, "manager-organization-workspace");
+  if (!disclosureStates.has(root)) disclosureStates.set(root, new Map());
+  const states = disclosureStates.get(root);
+  const stateKey = user.uid + ":" + path + ":" + org.id;
+  if (!states.has(stateKey)) states.set(stateKey, {});
+  const state = states.get(stateKey);
+  const disclosure = (key, title, open = false) => {
+    const details = node(
+      "details",
+      undefined,
+      "dashboard-examples manager-organization-disclosure",
+    );
+    details.dataset.organizationDisclosure = key;
+    details.open = state[key] ?? open;
+    details.append(node("summary", title));
+    details.addEventListener("toggle", () => {
+      state[key] = details.open;
+    });
+    return details;
+  };
+  const branding = disclosure(
+    "branding",
+    t("פרטי הארגון והלוגו", "Organization details and logo"),
+  );
+  const brandingBody = node(
+    "div",
+    undefined,
+    "manager-organization-branding-body",
+  );
+  branding.append(brandingBody);
+  const peopleDisclosure = disclosure(
+    "people",
+    t("אנשי הארגון", "Organization people"),
+  );
+  if (
+    Number.isSafeInteger(counts.administrators) &&
+    Number.isSafeInteger(counts.users)
+  )
+    peopleDisclosure
+      .querySelector("summary")
+      .append(
+        node(
+          "span",
+          String(counts.administrators + counts.users),
+          "manager-organization-people-count",
+        ),
+      );
+  const peopleBody = node("div", undefined, "manager-organization-people-body");
+  peopleDisclosure.append(peopleBody);
   const button = (text, action, cls = "") => {
     const b = node("button", text, "manager-button " + cls);
     b.type = "button";
     b.addEventListener("click", () => void run(action, b));
     return b;
   };
-  section.append(
-    button(
-      t("כל הארגונים", "All organizations"),
-      onBack,
-      "manager-organization-back",
-    ),
+  const back = button(
+    t("כל הארגונים", "All organizations"),
+    onBack,
+    "manager-organization-back",
   );
   const header = node("div", undefined, "manager-organization-header");
   const artwork = createOrganizationLogo(
@@ -134,8 +183,8 @@ export async function renderManagerOrganization({
     node("span", t("בעל הארגון", "Organization owner")),
     ownerEmail,
   );
-  identity.append(ownerLine);
-  header.append(artwork, identity);
+  brandingBody.append(ownerLine);
+  header.append(artwork, identity, back);
   if (permissions.manageLogo) {
     const tools = node("div", undefined, "manager-organization-brand-actions");
     const input = node("input");
@@ -212,7 +261,7 @@ export async function renderManagerOrganization({
           await onRefresh();
         }),
       );
-    header.append(tools);
+    brandingBody.append(tools);
   }
   section.append(header);
   const metrics = node("div", undefined, "manager-organization-metrics");
@@ -231,6 +280,11 @@ export async function renderManagerOrganization({
                 `[data-organization-role="organization-${key === "users" ? "user" : "admin"}"]`,
               );
         if (target) {
+          const fold = target.closest("details");
+          if (fold) {
+            fold.open = true;
+            state[fold.dataset.organizationDisclosure] = true;
+          }
           target.tabIndex = -1;
           target.focus({ preventScroll: true });
           target.scrollIntoView({ block: "start", behavior: "auto" });
@@ -265,7 +319,7 @@ export async function renderManagerOrganization({
   const searchStatus = node("p", "", "manager-organization-search-status");
   searchStatus.setAttribute("role", "status");
   searchStatus.setAttribute("aria-live", "polite");
-  section.append(search, searchStatus);
+  peopleBody.append(search, searchStatus);
   const people = node("div", undefined, "manager-organization-people");
   const invite = async (role) => {
     const saved = await dialogs.form({
@@ -409,7 +463,7 @@ export async function renderManagerOrganization({
     column.append(noMatches);
     people.append(column);
   }
-  section.append(people);
+  peopleBody.append(people);
   searchInput.addEventListener("input", () => {
     const term = searchInput.value.trim().toLowerCase();
     const rows = [...people.querySelectorAll("[data-organization-email]")];
@@ -435,9 +489,29 @@ export async function renderManagerOrganization({
         )
       : "";
   });
+  section.append(branding, peopleDisclosure);
   if (invitations.length) {
-    const pending = node("section", undefined, "manager-organization-pending");
-    pending.append(node("h3", t("הזמנות ממתינות", "Pending invitations")));
+    const pending = disclosure(
+      "pending",
+      t("הזמנות ממתינות", "Pending invitations"),
+      true,
+    );
+    pending.classList.add("manager-organization-pending");
+    const pendingBody = node(
+      "div",
+      undefined,
+      "manager-organization-pending-body",
+    );
+    pending.append(pendingBody);
+    pending
+      .querySelector("summary")
+      .append(
+        node(
+          "span",
+          String(invitations.length),
+          "manager-organization-people-count",
+        ),
+      );
     for (const inv of invitations) {
       const row = node("div", undefined, "manager-organization-person");
       const email = node("strong", inv.email);
@@ -469,7 +543,7 @@ export async function renderManagerOrganization({
           await onRefresh();
         }),
       );
-      pending.append(row);
+      pendingBody.append(row);
     }
     section.append(pending);
   }

@@ -17,7 +17,7 @@ async function fixture(t, browser, origin, language, width, viewer = false) {
   await page.route(origin + "/organization-fixture", (route) =>
     route.fulfill({
       contentType: "text/html; charset=utf-8",
-      body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"></head><body class="platform-page" data-product="manager"><main class="platform-shell"><div class="portal-panel"><div id="root"></div></div></main></body></html>`,
+      body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"><link rel="stylesheet" href="/css/dashboard-header.css"></head><body class="platform-page" data-product="manager"><main class="platform-shell"><div class="portal-panel"><div id="root"></div></div></main></body></html>`,
     }),
   );
   await page.goto(origin + "/organization-fixture");
@@ -209,6 +209,43 @@ test("selected organization contains branding, people and systems; invitation/re
           })
           .selectOption("org-a");
         await page.locator(".manager-organization-header h2").waitFor();
+        assert.equal(
+          await page.locator(".manager-organization-disclosure[open]").count(),
+          0,
+        );
+        assert.equal(
+          await page
+            .locator(".manager-system")
+            .first()
+            .evaluate((el) => Boolean(el.closest("details"))),
+          false,
+        );
+        const logoWidth = await page
+          .locator(".manager-organization-header .manager-organization-logo")
+          .evaluate((el) => el.getBoundingClientRect().width);
+        assert.equal(logoWidth, width > 700 ? 132 : 88);
+        // Overview tiles reveal the right section rather than scrolling to hidden content.
+        await page.locator(".manager-organization-metric").first().click();
+        assert.equal(
+          await page
+            .locator('[data-organization-disclosure="people"]')
+            .getAttribute("open"),
+          "",
+        );
+        await page
+          .locator('[data-organization-disclosure="people"] > summary')
+          .focus();
+        await page.keyboard.press("Enter");
+        assert.equal(
+          await page
+            .locator('[data-organization-disclosure="people"]')
+            .getAttribute("open"),
+          null,
+        );
+        await page.keyboard.press("Enter");
+        await page
+          .locator('[data-organization-disclosure="branding"] > summary')
+          .click();
         assert.deepEqual(
           await page
             .locator(".manager-organization-metrics strong")
@@ -287,6 +324,16 @@ test("selected organization contains branding, people and systems; invitation/re
           (await page.evaluate(() => window.writes[0])).body.expectedVersion,
           1,
         );
+        if (process.env.MANAGER_ORG_SCREENSHOTS) {
+          for (const key of ["branding", "people"])
+            await page.locator(`[data-organization-disclosure="${key}"] > summary`).click();
+          await page.screenshot({
+            path: path.join(process.env.MANAGER_ORG_SCREENSHOTS, `organization-overview-${language}-${width}.png`),
+            fullPage: true,
+          });
+          for (const key of ["branding", "people"])
+            await page.locator(`[data-organization-disclosure="${key}"] > summary`).click();
+        }
         const backToList = () =>
           page
             .getByRole("button", {
