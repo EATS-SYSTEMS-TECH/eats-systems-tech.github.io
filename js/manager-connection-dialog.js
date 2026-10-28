@@ -76,8 +76,12 @@ export function createManagerConnectionDialog({
     if (restoreFocus && focus?.isConnected) focus.focus();
   }
   function cancel() {
-    const action =
-      dialog?.dataset.state === "pending" ? options?.onCancel : undefined;
+    const state = dialog?.dataset.state;
+    const action = state === "pending"
+      ? options?.onCancel
+      : state === "error"
+        ? options?.onDismiss
+        : undefined;
     close(!action);
     action?.();
   }
@@ -347,7 +351,7 @@ export function createManagerConnectionDialog({
       "Connecting does not send a gate-opening command. A new attempt starts only when you choose.",
     );
     retry.hidden = false;
-    dismiss.textContent = t("לפרטי המערכת", "View system details");
+    dismiss.textContent = t("סגירה וחזרה", "Close and return");
     dismiss.focus();
   }
   return {

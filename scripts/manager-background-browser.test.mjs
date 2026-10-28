@@ -73,6 +73,10 @@ test("pagehide during identity verification fences the later callback before a c
   await page.evaluate(() => window.dispatchEvent(new Event("pageshow")));
   await page.locator('.manager-connection-dialog[data-state="error"]').waitFor();
   assert.equal(await page.evaluate(() => window.connections.length), 0);
+  await page.getByRole("button", { name: "Close and return", exact: true }).click();
+  await page.getByRole("heading", { name: "My systems", exact: true }).waitFor();
+  assert.equal(await page.locator(".manager-workspace-head,#manager-content,.manager-connection-recovery").count(), 0);
+  assert.equal(await page.evaluate(() => window.connections.length), 0, "dismissing a background failure never creates a connection");
   await page.evaluate(() => window.manager.close());
 });
 
@@ -89,6 +93,7 @@ test("the dashboard preserves a late demand creation receipt solely to cancel it
   assert.equal(await page.evaluate(() => window.calls.filter(call => call.path.endsWith("/cancel")).length), 1);
   assert.equal(await page.evaluate(() => window.relayAttempts), 0);
   assert.equal(await page.locator("#manager-content").count(), 0);
+  assert.equal(await page.locator(".manager-workspace-head,.manager-connection-recovery").count(), 0);
   assert.equal(await page.locator(".manager-connection-dialog").count(), 0);
   await page.evaluate(() => window.manager.close());
 });

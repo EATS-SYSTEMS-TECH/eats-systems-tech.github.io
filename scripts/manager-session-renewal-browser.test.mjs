@@ -11,13 +11,15 @@ async function assertPopupOnlyFailure(page) {
   return popup;
 }
 
-async function dismissFailureToMetadata(page, popup) {
-  await popup.getByRole("button", { name: "View system details", exact: true }).click();
-  await page.getByRole("button", { name: "Reconnect to gate", exact: true }).waitFor();
+async function dismissFailureToSystems(page, popup) {
+  await popup.getByRole("button", { name: "Close and return", exact: true }).click();
+  await page.getByRole("heading", { name: "My systems", exact: true }).waitFor();
+  await page.waitForFunction(() => document.querySelector(".manager-view")?.getAttribute("aria-busy") === "false");
   assert.equal(await page.locator(".manager-connection-dialog").count(), 0);
   assert.equal(await page.locator(".manager-status").innerText(), "");
   assert.equal(await page.locator(".manager-connection-recovery h3, .manager-connection-recovery p").count(), 0);
-  assert.equal(await page.locator(".manager-system-menu summary").isVisible(), true);
+  assert.equal(await page.locator(".manager-workspace-head,#manager-content,#manager-tabs,.manager-connection-recovery").count(), 0);
+  assert.equal(await page.getByRole("button", { name: "Open workspace", exact: true }).count() > 0, true);
   assert.equal(await page.locator(".manager-progress").isHidden(), true);
   assert.equal(await page.locator(".manager-loading-panel").count(), 0);
 }
@@ -154,15 +156,15 @@ test("secure session renewal preserves edits and daily identity without replayin
   assert.match(await uncertain.innerText(), /result|history|whether.+completed/i, "uncertain writes require readback guidance in the popup");
   assert.equal(await page.evaluate(() => window.connections.length), 2);
   assert.equal(await page.evaluate(() => window.commands.some(cmd => cmd.startsWith("ADMIN_SET"))), false);
-  await dismissFailureToMetadata(page, uncertain);
+  await dismissFailureToSystems(page, uncertain);
   assert.doesNotMatch(await page.locator(".manager-shell").innerText(), /SECURE_SESSION_EXPIRED|connection ended during an operation|check its result before retrying/i);
   await page.evaluate(() => window.connections[1].onState("SECURE_SESSION_EXPIRED"));
   assert.equal(await page.locator(".manager-connection-dialog").count(), 0, "a duplicate expiry cannot resurrect dismissed guidance");
   await page
-    .getByRole("button", { name: "Reconnect to gate", exact: true })
+    .getByRole("button", { name: "Open workspace", exact: true })
     .click();
   await page.waitForFunction(() => window.connections.length === 3);
-  assert.equal(await page.evaluate(() => window.identityChecks), 1);
+  assert.equal(await page.evaluate(() => window.identityChecks), 2, "explicitly opening a card rechecks identity; automatic renewal above did not");
   assert.equal(
     await page.evaluate(() =>
       window.commands.some((cmd) => cmd.startsWith("ADMIN_SET")),
@@ -177,13 +179,14 @@ test("secure session renewal preserves edits and daily identity without replayin
   });
   const disconnected = await assertPopupOnlyFailure(page);
   assert.match(await disconnected.innerText(), /connection ended|disconnected/i);
-  await dismissFailureToMetadata(page, disconnected);
+  await dismissFailureToSystems(page, disconnected);
   await page.evaluate(() => window.connections[2].onState("DISCONNECTED"));
   assert.equal(await page.locator(".manager-connection-dialog").count(), 0);
   await page
-    .getByRole("button", { name: "Reconnect to gate", exact: true })
+    .getByRole("button", { name: "Open workspace", exact: true })
     .click();
   await page.waitForFunction(() => window.connections.length === 4);
+  assert.equal(await page.evaluate(() => window.identityChecks), 3, "the second explicit entry rechecks identity");
   await page.getByRole("tab", { name: "Settings", exact: true }).click();
   await page
     .getByRole("button", { name: "Save settings", exact: true })
@@ -200,7 +203,7 @@ test("secure session renewal preserves edits and daily identity without replayin
     ),
     false,
   );
-  assert.equal(await page.evaluate(() => window.identityChecks), 1);
+  assert.equal(await page.evaluate(() => window.identityChecks), 3, "idle renewal does not add another identity check");
 
   // Leaving while cancellation is pending must not open a background session.
   await page.evaluate(() => {

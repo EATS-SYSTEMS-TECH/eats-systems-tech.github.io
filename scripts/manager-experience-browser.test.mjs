@@ -403,13 +403,17 @@ async function gateFixture(t, browser, origin, language = "he", width = 390) {
   return page;
 }
 
-async function assertCleanConnectionPage(page, { readyToReconnect = false } = {}) {
+async function assertCleanConnectionPage(page, { returnedToSystems = false } = {}) {
+  if (returnedToSystems) {
+    await page.getByRole("heading", { name: /^(?:המערכות שלי|My systems)$/ }).waitFor();
+    await page.waitForFunction(() => document.querySelector(".manager-view")?.getAttribute("aria-busy") === "false");
+  }
   assert.equal(await page.locator(".manager-status").innerText(), "", "the page does not repeat a connection error or stale connected status");
   assert.notEqual(await page.locator(".manager-status").getAttribute("data-state"), "error");
   assert.equal(await page.locator(".manager-connection-recovery h3, .manager-connection-recovery p").count(), 0, "recovery keeps controls without a second explanation");
-  if (readyToReconnect) {
-    await page.getByRole("button", { name: /^(?:חיבור מחדש לשער|Reconnect to gate)$/ }).waitFor();
-    assert.equal(await page.locator(".manager-system-menu summary").isVisible(), true);
+  if (returnedToSystems) {
+    assert.equal(await page.locator(".manager-workspace-head, #manager-content, #manager-tabs, .manager-connection-recovery").count(), 0, "dismissal returns directly to system cards without a system-details intermediary");
+    assert.equal(await page.getByRole("button", { name: /^(?:פתיחת סביבת ניהול|Open workspace)$/, exact: true }).count() > 0, true);
     assert.equal(await page.locator(".manager-progress").isHidden(), true);
     assert.equal(await page.locator(".manager-loading-panel").count(), 0);
     assert.equal(await page.locator(".manager-view").getAttribute("aria-busy"), "false");
@@ -558,7 +562,7 @@ test("cancelling during initial data loading fences late reads and removes the m
   ]);
 });
 
-test("a revoked local Manager authorization explains the failure and keeps metadata actions available without a live gate", async (t) => {
+test("a revoked local Manager authorization explains the failure and dismissal returns directly to system cards", async (t) => {
   const { origin, browser } = await startSite(t);
   const page = await gateFixture(t, browser, origin);
   await page
@@ -581,23 +585,11 @@ test("a revoked local Manager authorization explains the failure and keeps metad
   assert.match(await failure.innerText(), /האתר אינו יכול לחדש אותה מרחוק/);
   await assertCleanConnectionPage(page);
   await failure
-    .getByRole("button", { name: "לפרטי המערכת", exact: true })
+    .getByRole("button", { name: "סגירה וחזרה", exact: true })
     .click();
-  await assertCleanConnectionPage(page, { readyToReconnect: true });
+  await assertCleanConnectionPage(page, { returnedToSystems: true });
   assert.doesNotMatch(await page.locator(".manager-shell").innerText(), /השער דחה את הרשאת Manager|כמנהל מקומי שהרשאתו עדיין תקפה|CREDENTIAL_REVOKED/);
-  await page.locator(".manager-system-menu summary").click();
-  await page.getByRole("button", { name: "פרטי גישה", exact: true }).click();
-  assert.match(await page.getByRole("dialog").innerText(), /Example Resident/);
-  await page
-    .getByRole("dialog")
-    .getByRole("button", { name: "סגירה", exact: true })
-    .click();
-  await page.locator(".manager-system-menu summary").click();
-  await page.locator(".manager-system-menu summary").press("Escape");
-  assert.equal(
-    await page.locator(".manager-system-menu").getAttribute("open"),
-    null,
-  );
+  assert.equal(await page.locator(".manager-workspace-head").count(), 0);
   assert.deepEqual(await page.evaluate(() => window.commands), []);
 });
 
@@ -635,24 +627,24 @@ test("connection errors give localized recovery steps and safe optional diagnost
         assert.equal(await diagnostics.locator("code").innerText(), code);
       }
       assert.equal(await failure.evaluate((dialog) => dialog.scrollWidth <= dialog.clientWidth), true);
-      const dismiss = await failure.getByRole("button", { name: language === "he" ? "לפרטי המערכת" : "View system details", exact: true }).boundingBox();
+      const dismiss = await failure.getByRole("button", { name: language === "he" ? "סגירה וחזרה" : "Close and return", exact: true }).boundingBox();
       assert.ok(dismiss && dismiss.y >= 0 && dismiss.y + dismiss.height <= 900 && dismiss.height >= 44, "recovery actions stay visible and touch sized");
-      await failure.getByRole("button", { name: language === "he" ? "לפרטי המערכת" : "View system details", exact: true }).click();
-      await assertCleanConnectionPage(page, { readyToReconnect: true });
+      await failure.getByRole("button", { name: language === "he" ? "סגירה וחזרה" : "Close and return", exact: true }).click();
+      await assertCleanConnectionPage(page, { returnedToSystems: true });
       assert.equal(await failure.count(), 0);
       assert.doesNotMatch(await page.locator(".manager-shell").innerText(), expected, "dismissed recovery guidance does not remain on the page");
       assert.doesNotMatch(await page.locator(".manager-shell").innerText(), new RegExp(code));
       await page.evaluate(({ index, code }) => window.connections[index].onState(code), { index, code });
       assert.equal(await failure.count(), 0, "a repeated failure notification cannot reopen a dismissed error");
-      await assertCleanConnectionPage(page, { readyToReconnect: true });
-      if (index < cases.length - 1) await page.getByRole("button", { name: language === "he" ? "חיבור מחדש לשער" : "Reconnect to gate", exact: true }).click();
+      await assertCleanConnectionPage(page, { returnedToSystems: true });
+      if (index < cases.length - 1) await page.getByRole("button", { name: language === "he" ? "פתיחת סביבת ניהול" : "Open workspace", exact: true }).click();
     }
     assert.deepEqual(await page.evaluate(() => window.commands), []);
     await page.evaluate(() => window.dashboard.close());
   }
 });
 
-test("disconnects during completion or after a ready workspace show one popup and dismiss to clean metadata", async (t) => {
+test("disconnects during completion or after a ready workspace show one popup and return to system cards after dismissal", async (t) => {
   const { origin, browser } = await startSite(t);
   for (const completionFinished of [false, true]) {
     const page = await gateFixture(t, browser, origin, "en");
@@ -673,8 +665,8 @@ test("disconnects during completion or after a ready workspace show one popup an
     await assertCleanConnectionPage(page);
     await page.clock.fastForward(1000);
     assert.equal(await failure.count(), 1, "the old completion timer cannot remove the failure popup");
-    await failure.getByRole("button", { name: "View system details", exact: true }).click();
-    await assertCleanConnectionPage(page, { readyToReconnect: true });
+    await failure.getByRole("button", { name: "Close and return", exact: true }).click();
+    await assertCleanConnectionPage(page, { returnedToSystems: true });
     await page.evaluate(() => window.connections[0].onState("DISCONNECTED"));
     assert.equal(await failure.count(), 0);
     assert.deepEqual(await page.evaluate(() => window.commands), ["ADMIN_GET_OVERVIEW"]);
@@ -692,10 +684,10 @@ test("a late open rejection after error dismissal cannot repeat the popup or pag
   await failure.waitFor();
   assert.match(await failure.innerText(), /system did not respond/i);
   await assertCleanConnectionPage(page);
-  await failure.getByRole("button", { name: "View system details", exact: true }).click();
+  await failure.getByRole("button", { name: "Close and return", exact: true }).click();
   await page.evaluate(() => window.connections[0].fail("NO_COMMUNICATION"));
   await page.waitForFunction(() => document.querySelector(".manager-view").getAttribute("aria-busy") === "false");
-  await assertCleanConnectionPage(page, { readyToReconnect: true });
+  await assertCleanConnectionPage(page, { returnedToSystems: true });
   assert.equal(await failure.count(), 0, "the still-pending open catch is fenced by the first failure");
   await page.evaluate(() => window.connections[0].onState("NO_COMMUNICATION"));
   assert.equal(await failure.count(), 0);

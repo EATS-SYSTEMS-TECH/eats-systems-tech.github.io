@@ -21,6 +21,7 @@ test("connection popup has real stage progress, honest timing, keyboard cancella
           const { createManagerConnectionDialog } =
             await import("/js/manager-connection-dialog.js");
           window.cancelled = 0;
+          window.dismissed = 0;
           window.retried = 0;
           window.popup = createManagerConnectionDialog({ language });
           window.show = () =>
@@ -29,6 +30,7 @@ test("connection popup has real stage progress, honest timing, keyboard cancella
               gate: "72488",
               returnFocus: document.querySelector("#return"),
               onCancel: () => window.cancelled++,
+              onDismiss: () => window.dismissed++,
               onRetry: () => {
                 window.retried++;
                 window.show();
@@ -125,6 +127,7 @@ test("connection popup has real stage progress, honest timing, keyboard cancella
           "entering a completed workspace never cancels the connection",
         );
         assert.equal(await dialog.count(), 0);
+        assert.equal(await page.evaluate(() => window.dismissed), 0, "success does not navigate to the origin list");
         await page.evaluate(() => window.show());
         await page.keyboard.press("Escape");
         assert.equal(await page.evaluate(() => window.cancelled), 1);
@@ -142,6 +145,7 @@ test("connection popup has real stage progress, honest timing, keyboard cancella
           })
           .click();
         assert.equal(await page.evaluate(() => window.retried), 1);
+        assert.equal(await page.evaluate(() => window.dismissed), 0, "retry does not dismiss to the origin list");
         assert.equal(await dialog.getAttribute("data-state"), "pending");
         await page.evaluate(() =>
           window.popup.fail("Example connection failure"),
@@ -152,15 +156,16 @@ test("connection popup has real stage progress, honest timing, keyboard cancella
           });
         await dialog
           .getByRole("button", {
-            name: language === "he" ? "לפרטי המערכת" : "View system details",
+            name: language === "he" ? "סגירה וחזרה" : "Close and return",
             exact: true,
           })
           .click();
         assert.equal(
           await page.evaluate(() => window.cancelled),
           1,
-          "closing an error keeps metadata access available",
+          "error dismissal is separate from pending cancellation",
         );
+        assert.equal(await page.evaluate(() => window.dismissed), 1, "the error footer returns to its origin");
         await page.evaluate(() => {
           window.show();
           window.popup.complete();
@@ -180,6 +185,8 @@ test("connection popup has real stage progress, honest timing, keyboard cancella
           "none",
         );
         await page.evaluate(() => window.popup.close());
+        assert.equal(await page.evaluate(() => window.cancelled), 1, "programmatic close does not cancel or navigate");
+        assert.equal(await page.evaluate(() => window.dismissed), 1, "replacing a popup and programmatic close do not dismiss to origin");
         await page.clock.fastForward(120000);
         assert.equal(await dialog.count(), 0);
       } finally {

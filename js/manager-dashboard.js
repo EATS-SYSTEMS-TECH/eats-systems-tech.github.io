@@ -87,7 +87,7 @@ export function createManagerDashboard({
     cursor = null,
     currentView = "",
     countsPopover;
-  let cancellationBarrier, interruptedConnection;
+  let cancellationBarrier, interruptedConnection, workspaceReturn;
   let workspacePanel, workspacePanelContext, tabGeneration = 0, systemOverview;
   let connectionFailureVersion = 0;
   const shell = node("div", undefined, "manager-shell"),
@@ -1500,18 +1500,21 @@ export function createManagerDashboard({
     view.prepend(note);
   }
   async function openSystem(system) {
-    stop();
-    currentSystem = system;
     const simulated = examples.isSystem(system);
+    const originScope = scope;
+    const returnToOrigin = simulated && exampleBack
+      ? exampleBack
+      : () => showSystems(originScope);
+    stop();
+    workspaceReturn = returnToOrigin;
+    currentSystem = system;
     const epoch = generation;
     view.replaceChildren();
     if (simulated) appendSimulationNote();
     const head = node("div", undefined, "manager-workspace-head");
     head.append(
       node("h3", system.name),
-      button(t("סיום וחזרה", "End and return"), () =>
-        simulated ? exampleBack() : showSystems(scope),
-      ),
+      button(t("סיום וחזרה", "End and return"), returnToOrigin),
     );
     head.append(systemActions(system, null, true));
     view.append(head);
@@ -1544,20 +1547,18 @@ export function createManagerDashboard({
     say("");
     const returnFocus = view.querySelector(".manager-workspace-head h3");
     if (returnFocus) returnFocus.tabIndex = -1;
+    const returnToOrigin = workspaceReturn;
+    const returnFromConnection = () => {
+      if (!closed && epoch === generation) void task(returnToOrigin);
+    };
     const openConnectionDialog = () => {
       connectionDialog.open({
         systemName: currentSystem.name,
         gate,
         simulation: examples.isSystem(currentSystem),
         returnFocus,
-        onCancel: () => {
-          if (epoch === generation)
-            void task(() =>
-              examples.isSystem(currentSystem)
-                ? exampleBack()
-                : showSystems(scope),
-            );
-        },
+        onCancel: returnFromConnection,
+        onDismiss: returnFromConnection,
         onRetry: () => {
           if (epoch === generation) void task(() => openGate(gate, preserveView));
         },
@@ -2459,10 +2460,15 @@ export function createManagerDashboard({
     const interruption = interruptedConnection;
     interruptedConnection = undefined;
     if (interruption.epoch !== generation || interruption.system !== currentSystem || !view.querySelector("#manager-content")) return;
+    const returnFromInterruption = () => {
+      if (!closed && interruption.epoch === generation) void task(workspaceReturn);
+    };
     connectionDialog.open({
       systemName: currentSystem.name,
       gate: interruption.gate,
       returnFocus: view.querySelector(".manager-workspace-head h3"),
+      onCancel: returnFromInterruption,
+      onDismiss: returnFromInterruption,
       onRetry: () => { if (!closed && interruption.epoch === generation) void task(() => openGate(interruption.gate)); },
     });
     activity.pause(true);
