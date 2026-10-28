@@ -11,6 +11,7 @@ import {
   decryptManagerBulk,
   sha,
 } from "./manager-crypto.js";
+import { managerDemandTiming } from "./manager-connection-timing.js";
 
 const sleep = (ms, signal) =>
   new Promise((resolve, reject) => {
@@ -29,10 +30,12 @@ const sleep = (ms, signal) =>
     signal.addEventListener("abort", aborted, { once: true });
   });
 export class ManagerConnection {
-  constructor({ api, user, onState = () => {}, WebSocketImpl = WebSocket }) {
+  constructor({ api, user, onState = () => {}, onTiming = () => {}, timingVersion = 1, WebSocketImpl = WebSocket }) {
     this.api = api;
     this.user = user;
     this.onState = onState;
+    this.onTiming = onTiming;
+    this.timingVersion = timingVersion === 2 ? 2 : 1;
     this.WebSocketImpl = WebSocketImpl;
     this.waiters = [];
     this.abort = new AbortController();
@@ -46,7 +49,7 @@ export class ManagerConnection {
       return await this.openSession(systemId);
     } catch (error) {
       this.close();
-      throw error;
+      throw this.failure || error;
     } finally {
       this.opening = false;
     }
@@ -56,7 +59,7 @@ export class ManagerConnection {
     eraseManagerSession(this.session);
     this.session = null;
     this.key = null;
-    throw new Error("CANCELLED");
+    throw this.failure || new Error("CANCELLED");
   }
   async openSession(systemId) {
     this.onState("waiting");
@@ -71,27 +74,39 @@ export class ManagerConnection {
       await crypto.subtle.exportKey("raw", this.key.publicKey),
     );
     this.requireOpen();
-    const request = await this.api("/connection-requests", "POST", {
+    const requestedAt = Date.now();
+    this.creation = this.api("/connection-requests", "POST", {
       systemId,
       clientPublicKey,
       sessionId: this.sessionId,
+      ...(this.timingVersion === 2 ? { timingVersion: 2 } : {}),
     });
+    const request = await this.creation;
     this.requestId = request.requestId;
     if (this.closed) {
-      await this.api(
-        `/connection-requests/${this.requestId}/cancel`,
-        "POST",
-        {},
-      ).catch(() => {});
+      await this.cancelDemand();
       this.requireOpen();
     }
-    const end = Date.now() + 90000;
+    this.demandTiming = managerDemandTiming(request, this.timingVersion, requestedAt);
+    this.onTiming(this.demandTiming);
+    const shortenDeadline = (expiresAt) => {
+      clearTimeout(this.initialDeadline);
+      this.initialDeadline = setTimeout(() => this.fail(new Error("NO_COMMUNICATION")), Math.max(0, expiresAt - Date.now()));
+    };
+    let end = this.demandTiming.expiresAt;
+    shortenDeadline(end);
     let state;
     while (!this.closed && Date.now() < end) {
       state = await this.api(`/connection-requests/${this.requestId}`);
       this.requireOpen();
+      if (state.timingVersion !== undefined || state.expiresAt !== undefined) {
+        const actual = managerDemandTiming(state, this.timingVersion, requestedAt);
+        if (actual.timingVersion !== this.demandTiming.timingVersion) throw new Error("INVALID_CONNECTION_TIMING");
+        if (actual.expiresAt < end) { end = actual.expiresAt; shortenDeadline(end); }
+      }
+      if (Date.now() >= end) throw new Error("NO_COMMUNICATION");
       if (state.state === "ready" && state.nonce && state.clientTicket) break;
-      await sleep(1500, this.abort.signal);
+      await sleep(Math.min(1500, Math.max(0, end - Date.now())), this.abort.signal);
     }
     if (this.closed || state?.state !== "ready")
       throw new Error("NO_COMMUNICATION");
@@ -138,19 +153,19 @@ export class ManagerConnection {
     this.socket.onclose = () => this.fail(new Error("DISCONNECTED"));
     this.socket.onerror = () => this.fail(new Error("CONNECTION_FAILED"));
     await new Promise((resolve, reject) => {
-      const timer = setTimeout(
-        () => reject(new Error("CONNECTION_TIMEOUT")),
-        10000,
-      );
-      this.socket.onopen = () => {
+      const finish = (error) => {
         clearTimeout(timer);
-        resolve();
+        this.abort.signal.removeEventListener("abort", aborted);
+        error ? reject(error) : resolve();
       };
+      const aborted = () => finish(this.failure || new Error("CANCELLED"));
+      const timer = setTimeout(() => finish(new Error("CONNECTION_TIMEOUT")), 10000);
+      this.abort.signal.addEventListener("abort", aborted, { once: true });
+      this.socket.onopen = () => finish();
       this.socket.addEventListener(
         "error",
         () => {
-          clearTimeout(timer);
-          reject(new Error("CONNECTION_FAILED"));
+          finish(new Error("CONNECTION_FAILED"));
         },
         { once: true },
       );
@@ -182,6 +197,7 @@ export class ManagerConnection {
       await response,
     );
     this.requireOpen();
+    clearTimeout(this.initialDeadline);
     this.onState("active");
     this.capabilities = await this.command("ADMIN_GET_CAPABILITIES", {
       clientAdminVersions: [1],
@@ -280,6 +296,7 @@ export class ManagerConnection {
   }
   fail(error) {
     if (this.closed) return this.closing;
+    this.failure = error;
     this.onState(error.message);
     this.close();
   }
@@ -571,6 +588,7 @@ export class ManagerConnection {
     this.abort.abort();
     clearInterval(this.heartbeat);
     clearTimeout(this.maximum);
+    clearTimeout(this.initialDeadline);
     for (const w of this.waiters) {
       clearTimeout(w.timer);
       w.reject(new Error("CANCELLED"));
@@ -580,12 +598,17 @@ export class ManagerConnection {
     eraseManagerSession(this.session);
     this.session = null;
     this.key = null;
-    if (this.requestId)
-      this.closing = this.api(
-        `/connection-requests/${this.requestId}/cancel`,
-        "POST",
-        {},
-      ).catch(() => {});
+    if (this.requestId) this.closing = this.cancelDemand();
+    else if (this.creation) this.closing = this.creation.then(request => {
+      this.requestId = request.requestId;
+      return this.cancelDemand();
+    }).catch(() => {});
     return this.closing;
+  }
+  cancelDemand() {
+    if (this.requestId && !this.cancellingDemand) this.cancellingDemand = this.api(
+      `/connection-requests/${this.requestId}/cancel`, "POST", {},
+    ).catch(() => {});
+    return this.cancellingDemand;
   }
 }

@@ -37,6 +37,7 @@ export function createManagerConnectionDialog({
   ];
   let dialog,
     timer,
+    softWaitTimer,
     completionTimer,
     options,
     previousFocus,
@@ -54,8 +55,9 @@ export function createManagerConnectionDialog({
     steps;
   function clearTimers() {
     clearInterval(timer);
+    clearTimeout(softWaitTimer);
     clearTimeout(completionTimer);
-    timer = completionTimer = undefined;
+    timer = completionTimer = softWaitTimer = undefined;
   }
   function close(restoreFocus = false) {
     clearTimers();
@@ -83,7 +85,8 @@ export function createManagerConnectionDialog({
     if (!dialog) return;
     const seconds = Math.max(0, Math.floor((Date.now() - startedAt) / 1000));
     elapsed.textContent = t(`חלפו ${seconds} שניות`, `${seconds}s elapsed`);
-    const extended = seconds >= 60;
+    const softWaitMs = options.softWaitMs === 120000 ? 120000 : 60000;
+    const extended = Date.now() - startedAt >= softWaitMs;
     const message = options.simulation
       ? t(
           "סימולציה בלבד. אין חיבור למערכת פיזית.",
@@ -91,13 +94,19 @@ export function createManagerConnectionDialog({
         )
       : extended
         ? t(
-            "חלפה יותר מדקה. ממשיכים להמתין במסגרת חלון החיבור; אפשר לבטל ולנסות שוב מאוחר יותר.",
-            "Over a minute has passed. The connection request is still pending; you can cancel and try again later.",
+            "זה לוקח יותר זמן מהרגיל. ממשיכים להמתין למערכת; אפשר לבטל ולנסות שוב מאוחר יותר.",
+            "This is taking longer than usual. We are still waiting for your system; you can cancel and try again later.",
           )
         : "";
     if (timing.textContent !== message) timing.textContent = message;
     timing.hidden = !message;
     dialog.dataset.extended = String(extended);
+  }
+  function scheduleSoftWait() {
+    clearTimeout(softWaitTimer);
+    if (!dialog || dialog.dataset.state !== "pending") return;
+    const softWaitMs = options.softWaitMs === 120000 ? 120000 : 60000;
+    softWaitTimer = setTimeout(tick, Math.max(0, startedAt + softWaitMs - Date.now()));
   }
   function setStage(stage) {
     if (!dialog || dialog.dataset.state !== "pending") return;
@@ -254,6 +263,7 @@ export function createManagerConnectionDialog({
     setStage("waiting");
     tick();
     timer = setInterval(tick, 1000);
+    scheduleSoftWait();
     dialog.showModal();
     dismiss.focus();
   }
@@ -333,8 +343,8 @@ export function createManagerConnectionDialog({
     progress.setAttribute("aria-valuetext", title.textContent);
     timing.hidden = false;
     timing.textContent = t(
-      "לא נשלחה פקודת פתיחה. ניסיון נוסף מתחיל רק בלחיצה שלכם.",
-      "No gate-opening command was sent. A new attempt starts only when you choose.",
+      "תהליך החיבור אינו שולח פקודת פתיחה. ניסיון נוסף מתחיל רק בלחיצה שלכם.",
+      "Connecting does not send a gate-opening command. A new attempt starts only when you choose.",
     );
     retry.hidden = false;
     dismiss.textContent = t("לפרטי המערכת", "View system details");
@@ -342,6 +352,12 @@ export function createManagerConnectionDialog({
   }
   return {
     open,
+    setTiming(value) {
+      if (!dialog || dialog.dataset.state !== "pending") return;
+      options.softWaitMs = value?.timingVersion === 2 && value?.softWaitMs === 120000 ? 120000 : 60000;
+      tick();
+      scheduleSoftWait();
+    },
     setStage,
     complete,
     fail,

@@ -1,0 +1,58 @@
+{
+  "schema": "wifigate-manager-timing-v2-vectors",
+  "note": "Synthetic public test fixture. No deployment or real gate keys. Timing does not extend grant or rekey authority.",
+  "devicePublicKey": "02fce3fea05653685cb4cff1ece237ae6be7384c4f60d3432e0c307bd1452fdf84",
+  "poll": {
+    "systemId": "1234567890123456",
+    "keyId": "key-1",
+    "challengeId": "9a41e16c-2b82-4df0-b499-3c50905c1a22",
+    "challengeNonce": "7777777777777777777777777777777777777777777777777777777777777777",
+    "networkNonce": "8888888888888888888888888888888888888888888888888888888888888888",
+    "networkScope": "3333333333333333333333333333333333333333333333333333333333333333",
+    "timingVersion": 2
+  },
+  "payload": "wg-manager-poll-network-v2|1234567890123456|key-1|9a41e16c-2b82-4df0-b499-3c50905c1a22|7777777777777777777777777777777777777777777777777777777777777777|8888888888888888888888888888888888888888888888888888888888888888|3333333333333333333333333333333333333333333333333333333333333333|2",
+  "signature": "d6b809f0ff7f9e359e77fb313a4d6b8fe1d02924fbe3d2531ebfa243927e893e5bf8759aa209a0fb5ff737da41063777840907f9f695e5d29bb393490b39bcdd",
+  "timing": {
+    "v1": {
+      "timingVersion": 1,
+      "pollIntervalMs": 60000,
+      "demandLifetimeMs": 90000
+    },
+    "v2": {
+      "timingVersion": 2,
+      "pollIntervalMs": 90000,
+      "idleMinimumMs": 81000,
+      "idleMaximumMs": 99000,
+      "demandLifetimeMs": 180000
+    },
+    "initialPhaseMinimumMs": 0,
+    "initialPhaseMaximumMs": 59999,
+    "grantMaximumMs": 60000,
+    "renewChallengeIntervalMs": 30000,
+    "httpChallengeLifetimeMs": 30000,
+    "reconnectMaximumMs": 300000
+  },
+  "idleSamples": [
+    {
+      "entropy": 0,
+      "delayMs": 81000
+    },
+    {
+      "entropy": 1,
+      "delayMs": 81001
+    },
+    {
+      "entropy": 18000,
+      "delayMs": 99000
+    },
+    {
+      "entropy": 18001,
+      "delayMs": 81000
+    },
+    {
+      "entropy": 4294967295,
+      "delayMs": 81699
+    }
+  ]
+}

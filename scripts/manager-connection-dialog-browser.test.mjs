@@ -99,7 +99,7 @@ test("connection popup has real stage progress, honest timing, keyboard cancella
           await dialog
             .locator(".manager-connection-dialog__timing")
             .innerText(),
-          language === "he" ? /דקה/ : /minute/,
+          language === "he" ? /יותר זמן מהרגיל/ : /longer than usual/,
         );
         await page.evaluate(() => window.popup.setStage("connecting"));
         assert.equal(await bar.getAttribute("aria-valuenow"), "1");

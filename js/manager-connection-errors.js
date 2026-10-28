@@ -33,6 +33,8 @@ export function managerConnectionError(error, language = "en", fallback = false)
     t("כשהחיבור תקין, לחצו על ״ניסיון חיבור נוסף״. אם המערכת נשארת לא זמינה, בדקו אותה באפליקציה כשאתם לידה.", "When the connection is available, choose Try connecting again. If the system stays unavailable, check it in the app while nearby."),
   ];
   const messages = {
+    CONNECTION_PAUSED: [t("החיבור הופסק כשיצאתם מהעמוד", "Connection paused when you left the page"), t("החיבור נסגר כדי שלא תיפתח סביבת ניהול ברקע. אפשר להתחבר שוב כשאתם מוכנים.", "The connection was closed so a workspace cannot open in the background. You can connect again when you are ready."), [t("לחצו על ניסיון חיבור נוסף כדי להתחיל בקשה חדשה.", "Choose Try connecting again to start a new request."), t("אם שלחתם שינוי לפני היציאה, בדקו את מצב המערכת לפני שליחה חוזרת.", "If you sent a change before leaving, check the system state before repeating it.")]],
+    INVALID_CONNECTION_TIMING: [t("לא ניתן לאמת את חלון החיבור", "The connection window could not be verified"), t("פרטי חלון החיבור אינם תואמים לגרסה הנתמכת. הבקשה נעצרה.", "The connection window does not match a supported version. The request was stopped."), [t("רעננו את האתר ונסו שוב. אם הבעיה נמשכת, פנו לתמיכה עם קוד השגיאה.", "Refresh the website and try again. If this continues, contact support with the error code.")]],
     CREDENTIAL_REVOKED: [
       t("צריך לחדש את קישור Manager", "Renew the Manager link"),
       t("השער דחה את הרשאת Manager שהוצגה בחיבור הזה. ייתכן שאישור זמני פג, שהקישור זקוק לחידוש או שהרשאת המנהל המקומי השתנתה.", "The gate rejected the Manager authorization presented for this connection. A temporary approval may have expired, the link may need renewal, or local administrator access may have changed."),

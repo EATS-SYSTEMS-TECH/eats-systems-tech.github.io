@@ -24,6 +24,7 @@ import { createManagerSystemCard } from "./manager-system-card.js";
 import { createManagerActivity } from "./manager-activity.js";
 import { createManagerConnectionDialog } from "./manager-connection-dialog.js";
 import { managerConnectionError } from "./manager-connection-errors.js";
+import { managerRequestedTiming } from "./manager-connection-timing.js";
 
 const BASE = "/api/v1/manager";
 const node = (tag, text, cls) => {
@@ -86,6 +87,7 @@ export function createManagerDashboard({
     cursor = null,
     currentView = "",
     countsPopover;
+  let cancellationBarrier, interruptedConnection;
   let workspacePanel, workspacePanelContext, tabGeneration = 0, systemOverview;
   let connectionFailureVersion = 0;
   const shell = node("div", undefined, "manager-shell"),
@@ -159,7 +161,9 @@ export function createManagerDashboard({
     return activity.track(requestLabel(path, method), async () => {
       try {
         const result = await request(path, method, body);
-        if (closed || epoch !== generation) throw new Error("CANCELLED");
+        // A cancelled creator still needs its requestId to cancel server-side
+        // demand. ManagerConnection fences the response before any relay use.
+        if ((closed || epoch !== generation) && !(path === "/connection-requests" && method === "POST")) throw new Error("CANCELLED");
         if (
           method !== "GET" &&
           /^\/(admin\/)?(accounts|access|organizations|systems|invitations)(\/|$)/.test(
@@ -180,6 +184,7 @@ export function createManagerDashboard({
     "platform-management-entry manager-platform-entry",
   );
   platformEntry.href = "/dashboard/manager/platform/" + (he ? "?lang=he" : "");
+  platformEntry.title = t("ניהול פלטפורמה", "Platform management");
   platformEntry.append(
     overviewIcon("admins"),
     node("span", t("ניהול פלטפורמה", "Platform management")),
@@ -365,6 +370,7 @@ export function createManagerDashboard({
     return f;
   }
   function stop() {
+    interruptedConnection = undefined;
     workspacePanel?.dispose();
     workspacePanel = undefined;
     workspacePanelContext = undefined;
@@ -381,7 +387,7 @@ export function createManagerDashboard({
     delete view.dataset.simulation;
     generation++;
     say("");
-    connection?.close();
+    if (connection) cancellationBarrier = Promise.resolve(connection.close()).catch(() => {});
     connection = null;
     currentRows = [];
     currentData = undefined;
@@ -1529,6 +1535,7 @@ export function createManagerDashboard({
     if (epoch === generation) await openGate(system.systemIds[0]);
   }
   async function openGate(gate, preserveView = false) {
+    interruptedConnection = undefined;
     dialogs.cancel();
     csvDialog.cancel();
     const previous = connection;
@@ -1587,6 +1594,7 @@ export function createManagerDashboard({
     // Wait for the old demand to be cancelled before claiming the gate again.
     try {
       await previous?.close();
+      await cancellationBarrier;
     } catch (error) {
       failConnection(error);
       return;
@@ -1600,6 +1608,11 @@ export function createManagerDashboard({
     const options = {
       api,
       user,
+      timingVersion: managerRequestedTiming(profile),
+      onTiming: timing => {
+        if (closed || epoch !== generation || failureShown) return;
+        connectionDialog.setTiming(timing);
+      },
       onState: (state) => {
         if (closed || epoch !== generation || failureShown) return;
         if (["waiting", "connecting", "active"].includes(state)) {
@@ -2432,6 +2445,33 @@ export function createManagerDashboard({
       );
     content.append(actions);
   }
+  function pauseForBackground() {
+    if (closed || !currentSystem || !view.querySelector("#manager-content")) return;
+    const system = currentSystem;
+    const gate = system.systemIds.includes(currentGate) ? currentGate : system.systemIds[0];
+    stop();
+    view.querySelector("#manager-tabs")?.replaceChildren();
+    showConnectionRecovery(gate);
+    interruptedConnection = { system, gate, epoch: generation };
+  }
+  function resumeFromBackground() {
+    if (document.hidden || closed || !interruptedConnection) return;
+    const interruption = interruptedConnection;
+    interruptedConnection = undefined;
+    if (interruption.epoch !== generation || interruption.system !== currentSystem || !view.querySelector("#manager-content")) return;
+    connectionDialog.open({
+      systemName: currentSystem.name,
+      gate: interruption.gate,
+      returnFocus: view.querySelector(".manager-workspace-head h3"),
+      onRetry: () => { if (!closed && interruption.epoch === generation) void task(() => openGate(interruption.gate)); },
+    });
+    activity.pause(true);
+    connectionDialog.fail(managerConnectionError("CONNECTION_PAUSED", language, true));
+  }
+  const visibilityChanged = () => document.hidden ? pauseForBackground() : resumeFromBackground();
+  document.addEventListener("visibilitychange", visibilityChanged);
+  window.addEventListener("pagehide", pauseForBackground);
+  window.addEventListener("pageshow", resumeFromBackground);
   const ready = task(async () => {
     await refreshProfile();
     if (closed) return;
@@ -2448,6 +2488,9 @@ export function createManagerDashboard({
     },
     close() {
       closed = true;
+      document.removeEventListener("visibilitychange", visibilityChanged);
+      window.removeEventListener("pagehide", pauseForBackground);
+      window.removeEventListener("pageshow", resumeFromBackground);
       organizationPicker?.destroy();
       organizationIdentities.clear();
       stop();
