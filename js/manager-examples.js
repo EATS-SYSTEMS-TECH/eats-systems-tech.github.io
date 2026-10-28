@@ -8,6 +8,7 @@ import {
 } from "./manager-example-data.js";
 import { createManagerOrganizationCard } from "./manager-organization-card.js";
 import { renderManagerOrganization } from "./manager-organization.js";
+import { createManagerOrganizationGuide } from "./manager-organization-guide.js";
 import { createManagerDialog } from "./manager-dialog.js";
 import { createExampleOrganization } from "./manager-example-organization.js";
 
@@ -227,7 +228,7 @@ export function createManagerExamples({
       );
     }
     section.append(grid);
-    container.prepend(section);
+    container.prepend(section, createManagerOrganizationGuide(language));
   }
   async function renderOrganization(
     container,
