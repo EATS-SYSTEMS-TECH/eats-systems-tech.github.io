@@ -1,4 +1,5 @@
 import { renderManagerOrganization } from "./manager-organization.js";
+import { createManagerSetupGuide } from "./manager-setup-guide.js";
 import { createManagerOrganizationCard } from "./manager-organization-card.js";
 import { createPersonalOrganizationPage } from "./manager-organization-list.js";
 import {
@@ -996,7 +997,10 @@ export function createManagerDashboard({
         }),
       );
     view.append(grid);
-    if (!scope && !operatorAccount) examples.renderCards(view);
+    if (!scope && !operatorAccount) {
+      view.prepend(createManagerSetupGuide(language));
+      examples.renderCards(view);
+    }
     say("");
   }
   function systemActions(s, operatorAccount = null, workspace = false) {

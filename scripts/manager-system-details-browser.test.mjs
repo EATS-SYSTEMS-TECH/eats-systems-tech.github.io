@@ -107,7 +107,7 @@ test("real and example Manager share nontechnical system facts, dynamic opening 
         { cursor: null, limit: 10 }, { cursor: "10", limit: 10 }, { cursor: "20", limit: 10 },
       ]);
       await page.getByRole("button", { name: language === "he" ? "סיום וחזרה" : "End and return", exact: true }).click();
-      await page.locator(".dashboard-examples > summary").click();
+      await page.locator(".manager-examples > summary").click();
       await page.locator('[data-example-system="example-manager-gate"]').getByRole("button").click();
       await page.locator(".manager-simulation-note").waitFor();
       await page.locator("#manager-content .manager-facts").waitFor();

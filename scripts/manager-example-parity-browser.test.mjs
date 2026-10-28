@@ -76,7 +76,7 @@ test("real and simulated Manager systems render identical cards and all ten work
         const example = page.locator(
           '[data-example-system="example-manager-gate"]',
         );
-        await page.locator(".dashboard-examples > summary").click();
+        await page.locator(".manager-examples > summary").click();
         const normalizeCard = (node) => {
           const clone = node.cloneNode(true);
           clone.querySelector(".manager-example-badge")?.remove();
@@ -139,7 +139,7 @@ test("real and simulated Manager systems render identical cards and all ten work
             exact: true,
           })
           .click();
-        await page.locator(".dashboard-examples > summary").click();
+        await page.locator(".manager-examples > summary").click();
         await example.getByRole("button").click();
         await page.locator(".manager-simulation-note").waitFor();
         await page.locator("#manager-content .manager-facts").waitFor();

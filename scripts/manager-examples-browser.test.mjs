@@ -50,7 +50,7 @@ test("Manager example gate, Dual Control and group use real workspace controls w
               exact: true,
             })
             .click();
-          await page.locator(".dashboard-examples > summary").click();
+          await page.locator(".manager-examples > summary").click();
           const card = page.locator(
             `[data-example-system="example-manager-${id}"]`,
           );
@@ -312,7 +312,7 @@ test("Manager example gate, Dual Control and group use real workspace controls w
             exact: true,
           })
           .click();
-        await page.locator(".dashboard-examples > summary").click();
+        await page.locator(".manager-examples > summary").click();
         await page
           .locator("[data-example-organization]")
           .first()
@@ -403,7 +403,7 @@ test("Manager users and organization administrators never receive platform navig
         .locator(".manager-nav")
         .getByRole("button", { name: "My organizations", exact: true })
         .click();
-      await fixture.page.locator(".dashboard-examples > summary").click();
+      await fixture.page.locator(".manager-examples > summary").click();
       await fixture.page
         .locator("[data-example-organization]")
         .first()
