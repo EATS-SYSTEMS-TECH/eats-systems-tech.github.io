@@ -126,7 +126,9 @@ test("older firmware exposes unavailable Auto Open/SD facts without inventing en
       await page.locator(".manager-view > .manager-grid .manager-system").getByRole("button").click();
       await page.locator("#manager-content .manager-facts").waitFor();
       const content = page.locator("#manager-content");
-      assert.doesNotMatch(await content.textContent(), /Maximum users|מספר משתמשים מרבי|5000|Flash/);
+      assert.equal(await content.locator('[data-metric="maxUsers"] dd').innerText(), language === "he" ? "לא זמין" : "Unavailable", "unknown capacity is explicit rather than estimated");
+      assert.equal(await content.locator(".manager-overview-metrics progress").count(), 0, "unknown capacity cannot become a usage ratio");
+      assert.doesNotMatch(await content.textContent(), /5000|5,000|Flash/);
       await tab(page, "auto");
       assert.match(await content.locator(".manager-auto-users").textContent(), language === "he" ? /דורשת קושחה/ : /requires firmware/);
       assert.equal(await content.locator(".manager-auto-user").count(), 0);

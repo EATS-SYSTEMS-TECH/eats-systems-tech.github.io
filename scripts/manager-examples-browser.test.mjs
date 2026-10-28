@@ -263,7 +263,9 @@ test("Manager example gate, Dual Control and group use real workspace controls w
         );
         assert.equal(await gatePicker.locator("option").count(), 2);
         await gatePicker.selectOption("DEMO-24982");
-        await content.getByText("DEMO-24982", { exact: true }).waitFor();
+        await content.locator(".manager-primary-control h4").getByText("Exit gate", { exact: true }).waitFor();
+        assert.equal(await gatePicker.inputValue(), "DEMO-24982");
+        assert.equal(await content.locator(".manager-detail-facts").getByText("DEMO-24982", { exact: true }).count(), 1, "selected-gate metadata remains available inside system details");
         await open("group");
         assert.equal(await gatePicker.locator("option").count(), 4);
         await tab("settings");

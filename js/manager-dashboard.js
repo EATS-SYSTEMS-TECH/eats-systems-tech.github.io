@@ -25,6 +25,7 @@ import { createManagerActivity } from "./manager-activity.js";
 import { createManagerConnectionDialog } from "./manager-connection-dialog.js";
 import { managerConnectionError } from "./manager-connection-errors.js";
 import { managerRequestedTiming } from "./manager-connection-timing.js";
+import { createManagerControlHeader, createManagerGatePicker, setManagerControlState, updateManagerSelectedGate, renderManagerControlOverview } from "./manager-control-workspace.js";
 
 const BASE = "/api/v1/manager";
 const node = (tag, text, cls) => {
@@ -283,6 +284,7 @@ export function createManagerDashboard({
   const csvDialog = createManagerCsvDialog({ language, errorText });
   async function task(action, b) {
     if (b?.disabled) return;
+    const restoreFocus = b && document.activeElement === b;
     if (b) {
       b.disabled = true;
       b.setAttribute("aria-busy", "true");
@@ -314,6 +316,8 @@ export function createManagerDashboard({
         b.disabled = false;
         b.removeAttribute("aria-busy");
         b.classList.remove("is-loading");
+        if (restoreFocus && b.isConnected && !document.querySelector("dialog[open]") &&
+          [document.body, b].includes(document.activeElement)) b.focus({ preventScroll: true });
       }
     }
   }
@@ -383,7 +387,9 @@ export function createManagerDashboard({
     countsPopover = null;
     dialogs.cancel();
     examples.closeView();
-    view.classList.remove("manager-example-workspace");
+    view.classList.remove("manager-example-workspace", "manager-control-workspace");
+    delete view.dataset.systemType;
+    if (status.parentNode !== main) main.insertBefore(status, retry);
     delete view.dataset.simulation;
     generation++;
     say("");
@@ -1484,6 +1490,14 @@ export function createManagerDashboard({
       "manager-note manager-simulation-note",
     );
     note.setAttribute("role", "note");
+    const explanation = node("details", undefined, "manager-simulation-explanation");
+    explanation.append(
+      node("summary", t("איך הסימולציה עובדת?", "How does the simulation work?")),
+      node("p", t(
+        "זהו מסך הניהול של מערכת אמיתית, עם נתוני דוגמה. כל הפעולות והשינויים מתבצעים בסימולציה בזיכרון בלבד, ללא חיבור למערכת פיזית. הנתונים מתאפסים בסגירת הדשבורד.",
+        "This is the real system workspace with sample data. All actions and changes run in memory only, without a physical connection. Sample data resets when the dashboard closes.",
+      )),
+    );
     note.append(
       node(
         "strong",
@@ -1492,10 +1506,11 @@ export function createManagerDashboard({
       node(
         "p",
         t(
-          "זהו מסך הניהול של מערכת אמיתית, עם נתוני דוגמה. כל הפעולות והשינויים מתבצעים בסימולציה בזיכרון בלבד, ללא חיבור למערכת פיזית. הנתונים מתאפסים בסגירת הדשבורד.",
-          "This is the real system workspace with sample data. All actions and changes run in memory only, without a physical connection. Sample data resets when the dashboard closes.",
+          "אפשר להתנסות בכלי הניהול. הפעולות כאן אינן מפעילות שער פיזי.",
+          "Explore the management tools. Actions here do not operate a physical gate.",
         ),
       ),
+      explanation,
     );
     view.prepend(note);
   }
@@ -1510,29 +1525,27 @@ export function createManagerDashboard({
     currentSystem = system;
     const epoch = generation;
     view.replaceChildren();
+    view.classList.add("manager-control-workspace");
+    view.dataset.systemType = system.type;
     if (simulated) appendSimulationNote();
-    const head = node("div", undefined, "manager-workspace-head");
-    head.append(
-      node("h3", system.name),
-      button(t("סיום וחזרה", "End and return"), returnToOrigin),
-    );
-    head.append(systemActions(system, null, true));
-    view.append(head);
+    const head = createManagerControlHeader({ system, language,
+      returnButton: button(t("סיום וחזרה", "End and return"), returnToOrigin),
+      actions: systemActions(system, null, true),
+    });
+    head.querySelector(".manager-workspace-heading").append(status);
+    view.prepend(head);
     focusView();
     if (system.systemIds.length > 1) {
-      const select = node("select", undefined, "manager-button");
-      select.setAttribute("aria-label", t("בחירת שער", "Choose gate"));
-      for (const id of system.systemIds) select.append(new Option(id, id));
-      select.addEventListener(
-        "change",
-        () => void task(() => openGate(select.value)),
-      );
-      view.append(select);
+      view.append(createManagerGatePicker({ system, language,
+        onChange: gate => void task(() => openGate(gate)),
+      }));
     }
     const tabs = node("div", undefined, "manager-tabs"),
       content = node("div");
     tabs.id = "manager-tabs";
     content.id = "manager-content";
+    content.setAttribute("role", "tabpanel");
+    content.tabIndex = 0;
     view.append(tabs, content);
     await ensureRecent();
     if (epoch === generation) await openGate(system.systemIds[0]);
@@ -1602,6 +1615,7 @@ export function createManagerDashboard({
     }
     if (closed || epoch !== generation) return;
     currentGate = gate;
+    updateManagerSelectedGate(view, gate, null, language);
     if (!preserveView) {
       currentRows = [];
       cursor = null;
@@ -1721,13 +1735,8 @@ export function createManagerDashboard({
       ) {
         workspaceReady = true;
         connectionDialog.complete();
-        say(
-          examples.isSystem(currentSystem)
-            ? t("מחובר · נתוני סימולציה", "Connected · simulation data")
-            : t("מחובר · נתונים חיים מהשער", "Connected · live gate data"),
-          false,
-          "success",
-        );
+        setManagerControlState(view, examples.isSystem(currentSystem) ? "simulation" : "connected", language);
+        say("");
       }
     } catch (error) {
       if (epoch === generation) {
@@ -1742,6 +1751,7 @@ export function createManagerDashboard({
     }
   }
   function showConnectionState(state, detail) {
+    setManagerControlState(view, state === "active" ? "loading" : state, language);
     if (state === "error") connectionDialog.fail(detail);
     else connectionDialog.setStage(state === "active" ? "loading" : state);
   }
@@ -1779,12 +1789,34 @@ export function createManagerDashboard({
     tabs.replaceChildren();
     tabs.setAttribute("role", "tablist");
     for (const [id, label] of Object.entries(tabNames)) {
-      const b = button(t(...label), () => showTab(id));
+      const b = button(t(...label), async () => {
+        await showTab(id);
+        const active = view.querySelector(`#manager-tab-${id}`);
+        if (currentTab === id && active && !active.inert) {
+          active.focus({ preventScroll: true });
+          active.scrollIntoView({ block: "nearest", inline: "nearest" });
+        }
+      });
+      b.id = `manager-tab-${id}`;
       b.setAttribute("role", "tab");
       b.setAttribute("aria-selected", String(id === currentTab));
+      b.setAttribute("aria-controls", "manager-content");
+      b.tabIndex = id === currentTab ? 0 : -1;
       b.dataset.tab = id;
+      b.addEventListener("keydown", event => {
+        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+        event.preventDefault();
+        const entries = [...tabs.querySelectorAll('[role="tab"]')];
+        const index = entries.indexOf(b);
+        const direction = (event.key === "ArrowRight" ? 1 : -1) * (he ? -1 : 1);
+        const next = event.key === "Home" ? entries[0] : event.key === "End" ? entries.at(-1) : entries[(index + direction + entries.length) % entries.length];
+        entries.forEach(entry => entry.tabIndex = entry === next ? 0 : -1);
+        next.focus({ preventScroll: true });
+        next.scrollIntoView({ block: "nearest", inline: "nearest" });
+      });
       tabs.append(b);
     }
+    view.querySelector("#manager-content")?.setAttribute("aria-labelledby", `manager-tab-${currentTab}`);
   }
   async function showTab(tab, more = false) {
     if (!connection?.session) throw new Error("DISCONNECTED");
@@ -1813,9 +1845,12 @@ export function createManagerDashboard({
       currentData = r.data;
       systemOverview = r.data;
       const maximum = managerMaximumUsers(source.capabilities?.data, r.data);
-      renderFacts(content, { ...r.data, ...(maximum !== null && maximum !== undefined ? { maxUsers: maximum } : {}) });
-      content.append(button(t("פתיחת שער", "Open gate"), openGateAction, true));
-      placeManagerActions(content, language);
+      updateManagerSelectedGate(view, currentGate, r.data?.systemName, language);
+      const details = renderManagerControlOverview({ content, system: currentSystem, overview: r.data, maximum, language,
+        openButton: button(t("פתיחת שער", "Open gate"), openGateAction, true),
+      });
+      renderFacts(details, { ...r.data, ...(maximum !== null && maximum !== undefined ? { maxUsers: maximum } : {}) });
+      details.querySelector(".manager-facts").className = "manager-detail-facts";
       return;
     }
     if (tab === "guests") {
