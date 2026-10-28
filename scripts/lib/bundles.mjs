@@ -80,10 +80,19 @@ export const reservationsBundle = {
   plugins: [publicHostConfig("./host-api-config.js")],
 };
 
+export const payPointBundle = {
+  ...common,
+  entryPoints: ["js/pay-point.js"],
+  outfile: "js/pay-point.bundle.js",
+  plugins: [publicHostConfig("./host-api-config.js")],
+  logOverride: { "commonjs-variable-in-esm": "silent" },
+};
+
 // The pages that load the picker bundle.
 export const pickerPages = [
   "dashboard/index.html",
   "dashboard/pay/index.html",
+  "dashboard/pay/platform/index.html",
   "dashboard/manager/index.html",
   "dashboard/manager/platform/index.html",
   "dashboard/platform/index.html",

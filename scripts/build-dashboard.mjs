@@ -5,6 +5,7 @@ import {
   dashboardBundle,
   pickerBundle,
   reservationsBundle,
+  payPointBundle,
   hostPage,
   overviewPage,
   root,
@@ -14,6 +15,7 @@ await Promise.all([
   build(dashboardBundle),
   build(pickerBundle),
   build(reservationsBundle),
+  build(payPointBundle),
 ]);
 
 // Static hosting needs a real document for the Platform deep link.
@@ -64,3 +66,7 @@ await writeFile(
     'data-product="manager" data-manager-view="management"',
   ),
 );
+const payManagementPage = path.join(root, "dashboard/pay/platform/index.html");
+await mkdir(path.dirname(payManagementPage), { recursive: true });
+const payPage = await readFile(path.join(root, "dashboard/pay/index.html"), "utf8");
+await writeFile(payManagementPage, payPage.replace('data-product="pay"', 'data-product="pay" data-pay-view="management"'));

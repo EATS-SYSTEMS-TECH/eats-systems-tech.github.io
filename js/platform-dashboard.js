@@ -29,6 +29,7 @@ import { requestMfaChallenge } from "./host-mfa-challenge.js";
 import { authErrorMessage } from "./host-auth-errors.js";
 import qrcode from "./vendor/qrcode-generator.js";
 import { createManagerDashboard } from "./manager-dashboard.js";
+import { createPayDashboard } from "./pay-dashboard.js";
 import { createManagerProfile } from "./manager-profile.js";
 import { infoTip } from "./host-ui.js";
 import { renderPlatformLanguage } from "./platform-language.js";
@@ -43,6 +44,7 @@ const language = pageLanguage();
 const copy = platformText(language);
 const selectedProduct = document.body.dataset.product;
 const managementPage = document.body.dataset.platformView === "management";
+const payManagementPage = selectedProduct === "pay" && document.body.dataset.payView === "management";
 // WIFIGATE Reservations: a WIFIGATE Admin page of its own, apart from the
 // Host | Pay | Manager products (For Business).
 const reservationsPage = document.body.dataset.platformView === "reservations";
@@ -62,6 +64,7 @@ const managerProfile = createManagerProfile({
 });
 let currentUser;
 let managerDashboard;
+let payDashboard;
 let platformDirectory;
 let reservationsAdmin;
 const directoryRoot = document.createElement("section");
@@ -209,6 +212,9 @@ function clearPrivate() {
   managerProfile?.clear();
   managerDashboard?.close();
   managerDashboard = undefined;
+  payDashboard?.close();
+  payDashboard = undefined;
+  document.querySelectorAll(".pay-management-back").forEach(node => node.remove());
   ++generation;
   identity = undefined;
   clearSecret();
@@ -482,8 +488,31 @@ async function refresh() {
         `WIFIGATE ${selectedProduct[0].toUpperCase() + selectedProduct.slice(1)}`;
       $("#platform-title").textContent = $("#product-title").textContent;
       $("#product-workspace").hidden = false;
-      if (selectedProduct === "pay" && identity.platformRole === "admin" && identity.mfa.verified) {
-        platformDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language, product: "pay" });
+      if (selectedProduct === "pay") {
+        const suffix = language === "he" ? "?lang=he" : "";
+        if (payManagementPage) {
+          $("#product-workspace").hidden = true;
+          if (identity.platformRole !== "admin" || !identity.mfa.verified) {
+            $("#platform-status").textContent = language === "he" ? "המסך זמין למנהלי WIFIGATE לאחר אימות אבטחה." : "This page requires a verified WIFIGATE administrator.";
+            if (identity.platformRole === "admin") showSecurity();
+            return;
+          }
+          const back = document.createElement("a"); back.className = "pay-management-back";
+          back.href = "/dashboard/pay/" + suffix;
+          back.textContent = language === "he" ? "חזרה לסביבת העבודה" : "Back to workspace";
+          directoryRoot.before(back);
+          platformDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language, product: "pay" });
+        } else {
+          payDashboard = createPayDashboard({ root: $("#pay-root"), user, language,
+            onProfile: profile => managerProfile?.update({ ...profile, platformRole: identity.platformRole }, user),
+          });
+          if (identity.platformRole === "admin" && identity.mfa.verified) {
+            const entry = document.createElement("a"); entry.className = "pay-button primary pay-management-entry";
+            entry.href = "/dashboard/pay/platform/" + suffix;
+            entry.textContent = language === "he" ? "ניהול פלטפורמה · Pay" : "Platform management · Pay";
+            $("#pay-root").append(entry);
+          }
+        }
       }
       if (selectedProduct === "manager") {
         managerDashboard = createManagerDashboard({

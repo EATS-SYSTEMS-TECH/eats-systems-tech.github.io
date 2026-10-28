@@ -1350,7 +1350,8 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         fixture.calls.some((call) => call.path?.startsWith("/api/v1/me/")),
         false,
       );
-      assert.equal(await page.locator("#account-plan").innerText(), "");
+      assert.equal(await page.locator("#account-plan .dashboard-profile-product").innerText(), "WIFIGATE Host");
+      assert.equal(await page.locator("#account-plan .manager-role-badge").count(), 0, "the product identity does not grant a Host plan role");
       // A My systems call refused for want of a plan stays a local refusal.
       const refusal = await page.evaluate(async () => {
         const { portalRequest } = await import("/js/api/index.js");
@@ -1566,6 +1567,9 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
         const holder = await scenario(browser, {
           viewport: { width, height: 844 },
           organizations: [organization("Grand Hotel")],
+          // The list toolbar explains a populated list. An empty list has
+          // its own inline instructions instead of a toolbar tooltip.
+          mySystems: [{ id: "fixture-tip-system", version: 1, type: "gate", name: "Fixture gate", systemIds: ["fixture-gate"] }],
         });
         t.after(() => holder.context.close());
         await holder.page.goto(origin + "/dashboard/host/" + query);
@@ -1621,15 +1625,15 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
           await page.evaluate(() => document.activeElement?.id),
           "account-security",
         );
-        const chip = page.locator("#account-plan .host-role-badge");
-        assert.equal(await chip.getAttribute("data-role"), "host-user");
+        const chip = page.locator("#account-plan .manager-role-badge");
+        assert.equal(await chip.innerText(), "WIFIGATE Host user");
         assert.equal(
-          await chip.locator(".host-role-explanation").isVisible(),
-          false,
+          await chip.locator("[role=tooltip], .host-role-explanation").count(),
+          0,
           "no tooltip covers the first action",
         );
-        // The chip in the person's own menu speaks to them.
-        assert.match(await chip.getAttribute("aria-label"), /יש לכם מנוי Host/);
+        assert.equal(await chip.evaluate(node => node.tagName), "SPAN", "a product role is information, not a menu action");
+        assert.equal(await page.locator("#account-plan .dashboard-profile-product").innerText(), "WIFIGATE Host");
         await page.keyboard.press("Escape");
         await page.locator("#account-menu").waitFor({ state: "hidden" });
         assert.equal(

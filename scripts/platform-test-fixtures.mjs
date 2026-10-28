@@ -251,7 +251,7 @@ export async function scenario(browser, options = {}) {
             status: 403,
             json: { error: { code: "HOST_PLAN_REQUIRED" } },
           })
-        : route.fulfill({ json: { items: [], nextCursor: null } });
+        : route.fulfill({ json: { items: state.mySystems ?? [], nextCursor: null } });
     if (url.pathname === "/api/v1/auth/invitations")
       return route.fulfill({
         json: {

@@ -9,8 +9,9 @@
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" />
     <link rel="stylesheet" href="/css/platform.css?v=20261028admintools1" />
-    <link rel="stylesheet" href="/css/dashboard-header.css?v=20261025centerexit1" />
-    <script type="module" src="/js/platform-dashboard.bundle.js?v=20261028admintools1"></script>
+    <link rel="stylesheet" href="/css/pay-dashboard.css?v=20261028payworkspace1" />
+    <link rel="stylesheet" href="/css/dashboard-header.css?v=20261028payworkspace1" />
+    <script type="module" src="/js/platform-dashboard.bundle.js?v=20261028payworkspace1"></script>
   </head>
   <body data-product="pay" class="platform-page">
     <main class="platform-shell">
@@ -52,9 +53,7 @@
       ></section>
       <section id="product-workspace" class="portal-panel" hidden>
         <h2 id="product-title"></h2>
-        <p data-copy="empty">
-          Your access is active. This product workspace is not available yet.
-        </p>
+        <div id="pay-root"></div>
       </section>
       <section
         id="platform-security"

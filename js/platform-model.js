@@ -95,6 +95,7 @@ export function safeDashboardPath(value) {
     path === "/dashboard/platform/" ||
     path === "/dashboard/reservations/" ||
     path === "/dashboard/manager/platform/" ||
+    path === "/dashboard/pay/platform/" ||
     path === "/dashboard/host/overview/" ||
     productIds.some((id) => path === `/dashboard/${id}/`);
   if (!supported) return null;

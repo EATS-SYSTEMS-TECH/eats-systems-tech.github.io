@@ -438,6 +438,7 @@ body[data-product]
 }
 .profile-subscription-total {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
@@ -449,6 +450,9 @@ body[data-product]
 }
 .profile-subscription-total strong {
   flex: none;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   font-size: 28px;
 }
 /* One product column combines access, billing and workspace entry. */
