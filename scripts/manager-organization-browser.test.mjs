@@ -203,11 +203,8 @@ test("selected organization contains branding, people and systems; invitation/re
             .count(),
           0,
         );
-        await page
-          .getByLabel(he ? "בחירת ארגון" : "Choose organization", {
-            exact: true,
-          })
-          .selectOption("org-a");
+        await page.getByRole("button", {name:he ? "בחירת ארגון" : "Choose organization",exact:true}).click();
+        await page.locator('.manager-organization-option[data-organization-id="org-a"]').click();
         await page.locator(".manager-organization-header h2").waitFor();
         assert.equal(
           await page.locator(".manager-organization-disclosure[open]").count(),
@@ -491,7 +488,8 @@ test("selected organization contains branding, people and systems; invitation/re
 test("organization users can open system workspaces without organization people or branding controls", async (t) => {
   const { origin, browser } = await startSite(t);
   const page = await fixture(t, browser, origin, "he", 390, true);
-  await page.getByLabel("בחירת ארגון", { exact: true }).selectOption("org-a");
+  await page.getByRole("button", {name:"בחירת ארגון",exact:true}).click();
+  await page.locator('.manager-organization-option[data-organization-id="org-a"]').click();
   await page.locator(".manager-organization-header h2").waitFor();
   assert.equal(
     await page

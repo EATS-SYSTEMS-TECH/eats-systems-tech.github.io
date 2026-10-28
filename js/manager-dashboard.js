@@ -1,4 +1,5 @@
 import { renderManagerOrganization } from "./manager-organization.js";
+import { createManagerOrganizationPicker } from "./manager-organization-picker.js";
 import { createManagerSetupGuide } from "./manager-setup-guide.js";
 import { createManagerOrganizationCard } from "./manager-organization-card.js";
 import { createPersonalOrganizationPage } from "./manager-organization-list.js";
@@ -67,6 +68,8 @@ export function createManagerDashboard({
         : message,
     );
   let planDirectory;
+  let organizationPicker;
+  const organizationIdentities = new Map();
   let managementMode = management;
   let successfulWrites = 0;
   let generation = 0,
@@ -389,6 +392,8 @@ export function createManagerDashboard({
     cursor = null;
   }
   function renderNav() {
+    organizationPicker?.destroy();
+    organizationPicker = undefined;
     root.dataset.management = String(managementMode);
     shell.dataset.mode = managementMode ? "management" : "workspace";
     nav.hidden = managementMode;
@@ -423,19 +428,13 @@ export function createManagerDashboard({
       myOrganizations.setAttribute("aria-current", "page");
     nav.append(myOrganizations);
     if (profile.organizations?.length) {
-      const select = node("select");
-      select.setAttribute(
-        "aria-label",
-        t("בחירת ארגון", "Choose organization"),
-      );
-      select.append(new Option(t("בחרו ארגון", "Choose organization"), ""));
-      for (const org of profile.organizations)
-        select.append(new Option(org.name, org.id));
-      select.value = scope ?? "";
-      select.addEventListener("change", () => {
-        if (select.value) void task(() => showSystems(select.value));
+      organizationPicker = createManagerOrganizationPicker({
+        organizations: profile.organizations.map(org => ({ ...org, ...organizationIdentities.get(org.id), role: org.role })),
+        selectedId: scope,
+        language,
+        onSelect: id => task(() => showSystems(id)),
       });
-      nav.append(select);
+      nav.append(organizationPicker.root);
     }
     if (profile.role !== "admin")
       nav.append(button(t("הזמנות", "Invitations"), showInvitations));
@@ -645,7 +644,7 @@ export function createManagerDashboard({
   function orgPath(id) {
     return `${profile.role === "admin" ? "/admin" : ""}/organizations/${encodeURIComponent(id)}`;
   }
-  async function pagedView(path, container, render, { onEmpty, loadPage = api } = {}) {
+  async function pagedView(path, container, render, { onEmpty, onPage, loadPage = api } = {}) {
     const epoch = generation;
     let next = null;
     const more = button(t("הצגת עוד", "Show more"), load);
@@ -660,6 +659,7 @@ export function createManagerDashboard({
       if (closed || epoch !== generation) return;
       more.remove();
       for (const row of result.items) container.append(render(row));
+      onPage?.();
       next = result.nextCursor;
       if (next && seen.has(next)) throw new Error("LIST_LIMIT");
       if (next) {
@@ -959,6 +959,10 @@ export function createManagerDashboard({
         isCurrent: () => !closed && epoch === generation,
       });
       if (closed || epoch !== generation) return;
+      if (organizationDetail?.organization && !operatorAccount) {
+        organizationIdentities.set(scope, organizationDetail.organization);
+        renderNav();
+      }
     }
 
     const bar = node("div", undefined, "manager-toolbar");
@@ -1202,6 +1206,7 @@ export function createManagerDashboard({
       operator ? "/admin/organizations" : "/organizations",
       columns,
       (org) => {
+        if (!operator) organizationIdentities.set(org.id, org);
         const actions = node("div", undefined, "manager-org-actions");
         actions.append(
           button(t("כניסה לארגון", "Open organization"), () =>
@@ -1246,6 +1251,7 @@ export function createManagerDashboard({
         return createManagerOrganizationCard({ organization: org, language, actions });
       },
       {
+        onPage: renderNav,
         loadPage: operator ? api : createPersonalOrganizationPage({
           request: api,
           organizations: profile.organizations,
@@ -2448,6 +2454,8 @@ export function createManagerDashboard({
     },
     close() {
       closed = true;
+      organizationPicker?.destroy();
+      organizationIdentities.clear();
       stop();
       activity.close();
       examples.close();

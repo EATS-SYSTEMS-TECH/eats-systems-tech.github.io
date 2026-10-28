@@ -166,13 +166,13 @@ test("entering My organizations refreshes ownership added since the dashboard pr
   const { page, errors, organizations } = await fixture(t, browser, origin, {
     profileOrganizations: [{ id: "member", name: member.name, role: "organization-admin" }],
   });
-  assert.equal(await page.getByLabel("בחירת ארגון", { exact: true }).locator('option[value="owned"]').count(), 0);
+  assert.equal(await page.locator('.manager-organization-option[data-organization-id="owned"]').count(), 0);
   await page.evaluate((owner) => {
     window.config.profileOrganizations = [...window.config.profileOrganizations, owner];
   }, profileOwner);
   await organizations();
   await page.locator('[data-organization="owned"]').waitFor();
-  assert.equal(await page.getByLabel("בחירת ארגון", { exact: true }).locator('option[value="owned"]').count(), 1);
+  assert.equal(await page.locator('.manager-organization-option[data-organization-id="owned"]').count(), 1);
   assert.equal(await page.evaluate(() => window.calls.filter((call) => call.path === "/me").length), 2);
   await assertSafe(page, errors);
 });
