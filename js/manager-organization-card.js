@@ -8,13 +8,20 @@ export const validOrganizationLogo = (value) =>
   typeof value === "string" &&
   value.length <= 32022 &&
   /^data:image\/png;base64,[A-Za-z0-9+/]+=*$/.test(value);
+const exampleLogo = (org) =>
+  org.example === true &&
+  org.logoAsset === "/assets/img/manager/example-organization-logo.png";
+export const hasOrganizationLogo = (org) =>
+  validOrganizationLogo(org.logoDataUrl) || exampleLogo(org);
 
 export function createOrganizationLogo(org, language, className) {
   const artwork = node("div", undefined, className);
-  if (validOrganizationLogo(org.logoDataUrl)) {
+  if (hasOrganizationLogo(org)) {
     artwork.classList.add("has-logo");
     const image = node("img");
-    image.src = org.logoDataUrl;
+    image.src = validOrganizationLogo(org.logoDataUrl)
+      ? org.logoDataUrl
+      : org.logoAsset;
     image.alt = (language === "he" ? "לוגו של " : "Logo of ") + org.name;
     image.decoding = "async";
     artwork.append(image);

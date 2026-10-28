@@ -562,13 +562,14 @@ export function createManagerDashboard({
     renderNav();
     await openSystem(system);
   }
-  async function openExampleOrganization() {
+  async function openExampleOrganization(organizationId) {
     stop();
     scope = null;
     currentView = "example-organization";
     renderNav();
     say("");
     await examples.renderOrganization(view, {
+      organizationId,
       onBack: () => void task(() => showOrganizations(true)),
     });
   }

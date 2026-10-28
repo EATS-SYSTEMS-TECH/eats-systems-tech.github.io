@@ -4,6 +4,7 @@ import {
   createManagerExampleData,
   managerExampleSystems,
   managerExampleOrganization,
+  managerExampleOrganizations,
 } from "./manager-example-data.js";
 import { createManagerOrganizationCard } from "./manager-organization-card.js";
 import { renderManagerOrganization } from "./manager-organization.js";
@@ -26,7 +27,15 @@ export function createManagerExamples({
   const he = language === "he",
     t = (h, e) => (he ? h : e);
   const data = createManagerExampleData();
-  const organization = createExampleOrganization(data);
+  const organizations = managerExampleOrganizations.map((definition, index) => {
+    const assignments = index === 0 ? data.assignments : new Set();
+    return {
+      definition,
+      assignments,
+      adapter: createExampleOrganization({ ...data, assignments }, definition),
+    };
+  });
+  let activeOrganizationId = managerExampleOrganization.id;
   let viewGeneration = 0;
   const removed = new Set();
   let activeRoot,
@@ -187,24 +196,49 @@ export function createManagerExamples({
       undefined,
       "manager-examples dashboard-examples manager-organization-examples",
     );
-    section.append(el("summary", t("ארגון לדוגמה", "Example organization")));
+    section.append(el("summary", t("דוגמאות", "Examples")));
+    section.append(
+      el(
+        "p",
+        t(
+          "אפשר להכיר את ניהול הארגון על נתוני דוגמה, ללא שינוי בארגונים שלכם.",
+          "Explore organization management with sample data, without changing your organizations.",
+        ),
+        "manager-muted",
+      ),
+    );
     const grid = el("div", undefined, "manager-org-columns");
-    const actions = el("div", undefined, "manager-org-actions");
-    actions.append(
-      button(t("כניסה לארגון", "Open organization"), onOpenOrganization, true),
-    );
-    grid.append(
-      createManagerOrganizationCard({
-        organization: organization.summary(),
-        language,
-        actions,
-        example: true,
-      }),
-    );
+    for (const organization of organizations) {
+      const actions = el("div", undefined, "manager-org-actions");
+      actions.append(
+        button(
+          t("כניסה לארגון", "Open organization"),
+          () => onOpenOrganization(organization.definition.id),
+          true,
+        ),
+      );
+      grid.append(
+        createManagerOrganizationCard({
+          organization: organization.adapter.summary(),
+          language,
+          actions,
+          example: true,
+        }),
+      );
+    }
     section.append(grid);
-    container.append(section);
+    container.prepend(section);
   }
-  async function renderOrganization(container, { onBack }) {
+  async function renderOrganization(
+    container,
+    { onBack, organizationId = activeOrganizationId },
+  ) {
+    const selected = organizations.find(
+      (org) => org.definition.id === organizationId,
+    );
+    if (!selected || disposed) throw new Error("EXAMPLE_SYSTEM_NOT_FOUND");
+    activeOrganizationId = organizationId;
+    const organization = selected.adapter;
     mount(container);
     const epoch = viewGeneration;
     const isCurrent = () =>
@@ -244,7 +278,8 @@ export function createManagerExamples({
     });
     if (!isCurrent()) return;
     const assigned = managerExampleSystems.filter(
-      (system) => data.assignments.has(system.id) && !removed.has(system.id),
+      (system) =>
+        selected.assignments.has(system.id) && !removed.has(system.id),
     );
     const toolbar = el("div", undefined, "manager-toolbar");
     toolbar.dataset.organizationSection = "systems";
@@ -255,6 +290,14 @@ export function createManagerExamples({
       ),
     );
     container.append(toolbar);
+    if (!assigned.length)
+      container.append(
+        el(
+          "p",
+          t("אין מערכות להצגה כרגע.", "No systems to display yet."),
+          "manager-empty manager-empty-systems",
+        ),
+      );
     renderCards(container, assigned, { collapsible: false });
   }
 
@@ -268,23 +311,28 @@ export function createManagerExamples({
         throw new Error("EXAMPLE_SYSTEM_NOT_FOUND");
       return new ManagerExampleConnection({ ...options, data });
     },
-    organizations: () => [managerExampleOrganization],
+    organizations: () => managerExampleOrganizations,
     assignment: (system) =>
-      data.assignments.has(system.id) ? managerExampleOrganization.id : null,
+      organizations.find((org) => org.assignments.has(system.id))?.definition
+        .id ?? null,
     assign: (system, orgId) => {
       if (
         !managerExampleSystems.includes(system) ||
-        (orgId !== null && orgId !== managerExampleOrganization.id)
+        (orgId !== null &&
+          !organizations.some((org) => org.definition.id === orgId))
       )
         throw new Error("EXAMPLE_SYSTEM_NOT_FOUND");
-      if (orgId) data.assignments.add(system.id);
-      else data.assignments.delete(system.id);
+      for (const org of organizations) org.assignments.delete(system.id);
+      if (orgId)
+        organizations
+          .find((org) => org.definition.id === orgId)
+          .assignments.add(system.id);
     },
     disconnect: (system) => {
       if (!managerExampleSystems.includes(system))
         throw new Error("EXAMPLE_SYSTEM_NOT_FOUND");
       removed.add(system.id);
-      data.assignments.delete(system.id);
+      for (const org of organizations) org.assignments.delete(system.id);
     },
     closeView() {
       viewGeneration++;
@@ -296,7 +344,10 @@ export function createManagerExamples({
       disposed = true;
       viewGeneration++;
       dialogs.cancel();
-      organization.clear();
+      for (const org of organizations) {
+        org.adapter.clear();
+        org.assignments.clear();
+      }
       activeRoot = undefined;
       message = undefined;
       data.clear();

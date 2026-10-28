@@ -1401,6 +1401,10 @@ body:has(.manager-connection-dialog[open]) .manager-shell .manager-button.is-loa
 @media(max-width:700px){.manager-organization-header{padding:20px;gap:14px}.manager-organization-brand-actions{grid-template-columns:minmax(0,1fr) auto}.manager-shell button.manager-organization-metric{padding:15px 12px}.manager-organization-metric::after{display:none}.manager-organization-metrics strong{font-size:27px}.manager-organization-metrics span{font-size:11px}.manager-organization-person-column{padding:18px}.manager-organization-search input{width:100%}.manager-org-identity{gap:10px;grid-template-columns:44px minmax(0,1fr) auto}.manager-org-avatar{width:44px;height:44px}.manager-org-name h4{font-size:17px}}
 
 /* Branded organization cards: preserve uploaded artwork without cropping. */
+.manager-organization-examples .manager-org-identity{grid-template-columns:72px minmax(0,1fr)}
+.manager-organization-examples .manager-org-identity>.manager-example-badge{grid-column:2;justify-self:start}
+body[data-product] .manager-organization-examples>.manager-org-columns{padding:0;margin:18px}
+@media(max-width:700px){.manager-organization-examples .manager-org-identity{grid-template-columns:60px minmax(0,1fr)}body[data-product] .manager-organization-examples>.manager-org-columns{margin:14px}.manager-organization-examples .manager-org-column{padding:18px}}
 .manager-org-identity{grid-template-columns:72px minmax(0,1fr) auto;gap:16px;align-items:center}
 .manager-org-avatar{width:72px;height:72px;border-radius:18px;font-size:28px}
 .manager-org-avatar.has-logo{background:#fff;border-color:#e1e7ef;box-shadow:0 3px 12px #182d4806}

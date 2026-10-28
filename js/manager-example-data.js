@@ -32,7 +32,18 @@ export const managerExampleSystems = Object.freeze([
 export const managerExampleOrganization = Object.freeze({
   id: "example-manager-organization",
   name: "Example WIFIGATE Organization",
+  example: true,
+  logoAsset: "/assets/img/manager/example-organization-logo.png",
 });
+export const managerExampleOrganizations = Object.freeze([
+  managerExampleOrganization,
+  Object.freeze({
+    id: "example-manager-office",
+    name: "Example WIFIGATE Office",
+    example: true,
+    logoAsset: "/assets/img/manager/example-organization-logo.png",
+  }),
+]);
 export const openingMethods = Object.freeze([
   "PULSE",
   "PULSE_AFTER_PULSE",

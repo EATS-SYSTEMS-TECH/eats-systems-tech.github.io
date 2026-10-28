@@ -1,6 +1,6 @@
 import {
   createOrganizationLogo,
-  validOrganizationLogo,
+  hasOrganizationLogo,
 } from "./manager-organization-card.js";
 
 const node = (tag, text, className) => {
@@ -105,7 +105,7 @@ export async function renderManagerOrganization({
     language,
     "manager-organization-logo",
   );
-  const validLogo = validOrganizationLogo(org.logoDataUrl);
+  const validLogo = hasOrganizationLogo(org);
   const identity = node("div", undefined, "manager-organization-identity");
   identity.append(
     node(

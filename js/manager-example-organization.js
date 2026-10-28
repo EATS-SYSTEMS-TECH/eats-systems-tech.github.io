@@ -3,10 +3,14 @@ import { validOrganizationLogo } from "./manager-organization-card.js";
 
 // This adapter has no transport or authentication dependency. All mutations are
 // per-dashboard memory, through the same UI contract used by a real organization.
-export function createExampleOrganization(data) {
-  const path = "/example-organizations/" + managerExampleOrganization.id;
+export function createExampleOrganization(
+  data,
+  definition = managerExampleOrganization,
+) {
+  const path = "/example-organizations/" + definition.id;
   const owner = { uid: "demo-organization-owner", email: "owner@example.test" };
   let logoDataUrl = null,
+    logoChanged = false,
     version = 1,
     sequence = 0;
   const members = data.members.map((person, index) => ({
@@ -25,7 +29,8 @@ export function createExampleOrganization(data) {
     throw Object.assign(new Error(code), { code });
   };
   const organization = () => ({
-    ...managerExampleOrganization,
+    ...definition,
+    logoAsset: logoChanged ? undefined : definition.logoAsset,
     version,
     logoDataUrl,
   });
@@ -77,6 +82,7 @@ export function createExampleOrganization(data) {
         )
           fail("INVALID_ORGANIZATION_LOGO");
         logoDataUrl = body.logoDataUrl;
+        logoChanged = true;
         version++;
         return { organization: organization() };
       }
@@ -124,6 +130,7 @@ export function createExampleOrganization(data) {
     },
     clear() {
       logoDataUrl = null;
+      logoChanged = true;
       members.length = 0;
       invitations.length = 0;
     },
