@@ -2350,11 +2350,26 @@ export function createManagerDashboard({
   }
   function renderRemoteDetails(content, data) {
     const remote = managerRfDetails(data);
-    content.append(detailCard(t("השלט השמור במערכת", "Saved remote"),
-      t("לימוד שלט מתבצע באפליקציה ליד המערכת.", "Learn a remote in the app near the system."), [
-        [t("מצב השלט", "Remote status"), remote.present === true ? t("קיים שלט שמור", "Remote saved") : remote.present === false ? t("לא נשמר שלט", "No remote saved") : t("המצב אינו זמין", "Status unavailable")],
-        ...(remote.present === true ? [[t("הקוד שנלמד", "Learned code"), remote.code]] : []),
-      ]));
+    const card = node("section", undefined, "manager-device-card manager-remote-card");
+    card.dataset.remoteState = remote.present === true ? "saved" : remote.present === false ? "empty" : "unknown";
+    const illustration = node("div", undefined, "manager-remote-illustration");
+    const icon = node("img"); icon.src = "/assets/wifigate_features/digital_rf_remote_learning.svg";
+    icon.alt = ""; icon.width = 128; icon.height = 128;
+    illustration.setAttribute("aria-hidden", "true"); illustration.append(icon);
+    const body = node("div", undefined, "manager-remote-body");
+    body.append(node("h3", t("השלט השמור במערכת", "Saved remote")));
+    const facts = node("dl", undefined, "manager-remote-facts");
+    facts.append(node("dt", t("מצב השלט", "Remote status")), node("dd",
+      remote.present === true ? t("קיים שלט שמור", "Remote saved") : remote.present === false ? t("לא נשמר שלט", "No remote saved") : t("המצב אינו זמין", "Status unavailable"), "manager-remote-status"));
+    if (remote.present === true) {
+      const code = node("dd", undefined, "manager-remote-code");
+      if (remote.code) {
+        const value = node("code", remote.code); value.dir = "ltr"; code.append(value);
+      } else code.append(node("span", t("לא דווח על ידי המערכת", "Not reported by the system")));
+      facts.append(node("dt", t("הקוד שנלמד", "Learned code")), code);
+    }
+    body.append(facts, node("p", t("לימוד שלט מתבצע באפליקציה ליד המערכת.", "Learn a remote in the app near the system."), "manager-remote-hint"));
+    card.append(illustration, body); content.append(card);
     content.dataset.remoteReadOnly = "true";
   }
   function renderStorageDetails(content, data) {

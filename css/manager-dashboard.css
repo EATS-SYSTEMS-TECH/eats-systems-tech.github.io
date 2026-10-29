@@ -1497,3 +1497,17 @@ body[data-product] .manager-organization-workspace>.manager-organization-pending
 [dir=rtl] .manager-settings-form .manager-method-dropdown select{background-position:left 16px center}
 .manager-settings-form .manager-method-dropdown select:focus-visible{outline:3px solid #c6672f44;outline-offset:3px;border-color:#aa461a}
 .manager-settings-form .manager-method-dropdown select:disabled{opacity:.6;cursor:not-allowed;background-color:#f3f6fa}
+
+/* Read-only RF summary: shared by physical systems and examples. */
+.manager-control-workspace .manager-remote-card{display:grid;grid-template-columns:176px minmax(0,1fr);gap:32px;align-items:center;padding:32px;border:1px solid #dce5ef;border-radius:22px;background:linear-gradient(120deg,#f6f9ff,#fff 65%);box-shadow:0 8px 28px #182d4806}
+.manager-remote-illustration{display:grid;place-items:center;align-self:stretch;min-height:200px;border:1px solid #dbe6fc;border-radius:20px;background:radial-gradient(ellipse at center,#fff 20%,#eaf1ff 100%)}
+.manager-remote-illustration img{display:block;width:128px;height:128px;max-width:100%;filter:drop-shadow(0 8px 12px #1463ff18)}
+.manager-remote-body{min-width:0}.manager-control-workspace .manager-remote-body h3{margin:0 0 24px;font-size:21px;line-height:1.5;color:#18324f}
+.manager-remote-facts{display:grid;gap:10px;margin:0}.manager-remote-facts dt{font-size:12px;font-weight:600;color:#54677e}.manager-remote-facts dd{margin:0}
+.manager-remote-status{display:flex;align-items:center;gap:9px;width:fit-content;padding:8px 12px;border-radius:999px;background:#e9f6ee;color:#17643b;font-size:13px;font-weight:700;margin-block-end:12px!important}
+.manager-remote-status:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;flex-shrink:0}
+[data-remote-state=empty] .manager-remote-status,[data-remote-state=unknown] .manager-remote-status{background:#edf1f6;color:#4b6079}
+.manager-remote-code{padding:16px 18px;border:1px solid #dde6f1;border-radius:12px;background:#fff;color:#18324f;overflow-wrap:anywhere}
+.manager-remote-code code{display:block;text-align:start;unicode-bidi:isolate;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:clamp(14px,2vw,20px);font-weight:650;letter-spacing:.04em;user-select:all}
+.manager-remote-hint{margin:20px 0 0;padding-block-start:16px;border-block-start:1px solid #e1e8f1;color:#54677e;font-size:13px;line-height:1.8}
+@media(max-width:600px){.manager-control-workspace .manager-remote-card{grid-template-columns:minmax(0,1fr);gap:22px;padding:20px;border-radius:18px}.manager-remote-illustration{min-height:148px}.manager-remote-illustration img{width:100px;height:100px}.manager-control-workspace .manager-remote-body h3{font-size:19px;margin-block-end:20px}}
