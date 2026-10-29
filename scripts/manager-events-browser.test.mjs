@@ -8,7 +8,7 @@ async function setup(browser, origin, { language = "en", width = 1440, maxEvents
   const page = await browser.newPage({ viewport: { width, height: 1000 } });
   const errors = []; page.on("pageerror", (error) => errors.push(error.message));
   await page.route(origin + "/events-fixture", (route) => route.fulfill({
-    contentType: "text/html", body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><head><link rel="stylesheet" href="/css/manager-events.css"></head><body><main id="root"></main></body></html>`,
+    contentType: "text/html", body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><head><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-events.css"></head><body class="platform-page"><div class="manager-shell"><main id="root" class="portal-panel"></main></div></body></html>`,
   }));
   await page.goto(origin + "/events-fixture");
   await page.evaluate(async ({ language, maxEvents }) => {
@@ -114,6 +114,7 @@ test("Event overview keeps readable controls and destructive confirmation on nar
   for (const language of ["he", "en"]) for (const width of [320, 768, 1440]) {
     const { page, errors } = await setup(browser, origin, { language, width });
     try {
+      assert.equal(await page.locator(".manager-event-day-track").first().evaluate(node => getComputedStyle(node).backgroundColor), "rgba(0, 0, 0, 0)");
       const meter = page.getByRole("meter");
       assert.equal(await meter.getAttribute("max"), "50");
       assert.equal(await meter.getAttribute("value"), "2");

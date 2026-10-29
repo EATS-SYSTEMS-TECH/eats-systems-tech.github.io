@@ -1,5 +1,5 @@
-@import url("./manager-events.css?v=20261029eventsux1");
-@import url("./manager-control-workspace.css?v=20261029eventsux1");
+@import url("./manager-events.css?v=20261029eventsux2");
+@import url("./manager-control-workspace.css?v=20261029eventsux2");
 
 .platform-page[data-product="manager"] {
   color: var(--ink, #0f172a);

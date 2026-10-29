@@ -118,3 +118,18 @@
   .manager-event-footer { bottom:-18px;margin-block-end:-18px }
 }
 @media(prefers-reduced-motion:reduce) { .manager-events *, .manager-events-dialog * { transition:none!important;scroll-behavior:auto!important } }
+
+/* Keep portal-wide button themes out of the planner and its native dialog. */
+:is(.manager-shell .manager-events,.manager-events-dialog) .manager-event-button { background:#fff;color:#0f172a;border-color:#dce4ef }
+:is(.manager-shell .manager-events,.manager-events-dialog) .manager-event-button:hover:not(:disabled) { background:#0b0b0c;color:#fff;border-color:#0b0b0c }
+.manager-shell .manager-events .manager-event-day-track,.manager-shell .manager-events .manager-event-day-track:hover:not(:disabled) { background:transparent;border:0;padding:7px 0 }
+.manager-shell .manager-events .manager-event-edit { display:grid;place-items:center;padding:0;color:#475569;background:#fff }
+:is(.manager-shell .manager-events,.manager-events-dialog) .manager-event-button.is-danger { color:#b91c1c;border-color:#fecaca }
+:is(.manager-shell .manager-events,.manager-events-dialog) .manager-event-button.is-danger:hover:not(:disabled) { color:#fff;background:#991b1b;border-color:#991b1b }
+.manager-events-dialog .manager-event-modes [aria-pressed="true"] { background:#0f172a;color:#fff;border-color:#0f172a }
+.manager-events-dialog .manager-event-palette .is-open { background:#dcfce7;color:#15803d;border-color:#86efac }
+.manager-events-dialog .manager-event-palette .is-close { background:#fee2e2;color:#b91c1c;border-color:#fca5a5 }
+.manager-events-dialog .manager-event-palette .is-open[aria-pressed="true"] { background:#16a34a;color:#fff }
+.manager-events-dialog .manager-event-palette .is-close[aria-pressed="true"] { background:#dc2626;color:#fff }
+.manager-events-dialog .manager-event-button.is-primary { background:#a63b10;color:#fff;border-color:#a63b10 }
+.manager-events-dialog .manager-event-stepper-controls button { background:#f1f5f9 }
