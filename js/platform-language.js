@@ -4,6 +4,8 @@ import { attachPopover } from "./popover.js";
 // retaining the current dashboard route, query parameters and fragment.
 export function renderPlatformLanguage(select, language, label) {
   if (!select) return;
+  const website = select.closest("header")?.querySelector(".dashboard-website-link");
+  if (website) website.href = language === "he" ? "/he/" : "/";
   const choices = [
     { code: "en", name: "English", flag: "flag-us.webp" },
     { code: "he", name: "עברית", flag: "flag-il.svg" },

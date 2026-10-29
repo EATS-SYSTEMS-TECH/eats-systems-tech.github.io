@@ -125,6 +125,18 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               return { width: Math.round(box.width), height: Math.round(box.height), radius: style.borderRadius, padding: style.padding, pillWidth: Math.round(pillBox.width), pillHeight: Math.round(pillBox.height), pillBackground: pillStyle.backgroundColor, pillBorder: pillStyle.borderColor };
             });
             const chromeKey = `${language}-${width}`;
+            const website = header.getByRole("link", {name:"WIFIGATE Website",exact:true});
+            assert.equal(await website.count(),1);
+            assert.equal(await website.getAttribute("href"),language === "he" ? "/he/" : "/");
+            assert.equal(await website.isVisible(),true);
+            const websiteBox = await website.boundingBox();
+            assert.ok(websiteBox.width >= 44 && websiteBox.height >= 44);
+            const headerControls = [website,header.locator('.platform-language__button'),header.locator('.dashboard-profile-button')];
+            const controlBoxes = await Promise.all(headerControls.map(control=>control.boundingBox()));
+            for(let i=0;i<controlBoxes.length;i++)for(let j=i+1;j<controlBoxes.length;j++){
+              const a=controlBoxes[i],b=controlBoxes[j];
+              assert.ok(a.x+a.width<=b.x+1 || b.x+b.width<=a.x+1 || a.y+a.height<=b.y+1 || b.y+b.height<=a.y+1,'website, language and profile controls do not overlap');
+            }
             if (!chromeReference.has(chromeKey)) chromeReference.set(chromeKey, chrome);
             else assert.deepEqual(chrome, chromeReference.get(chromeKey), `${product || "profile"} shares dashboard chrome dimensions and styling`);
 
