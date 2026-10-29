@@ -1,5 +1,5 @@
 /* Pay uses the real Manager components and geometry, with green accents. */
-@import url("./manager-dashboard.css?v=20261029orgmanage1");
+@import url("./manager-dashboard.css?v=20261030workspace1");
 
 body[data-product="pay"] .platform-heading,
 body[data-product="pay"] #product-title { display: none; }
@@ -14,6 +14,7 @@ body[data-product="pay"], .pay-dashboard, .pay-dialog {
 .pay-dashboard .manager-shell { --manager-accent: var(--pay-accent); }
 .pay-dashboard [hidden], .pay-dialog [hidden], .pay-public [hidden] { display: none !important; }
 .pay-live:empty, .pay-form-message:empty { display: none; }
+.pay-empty > svg { width: 48px; height: 48px; }
 .pay-dashboard .manager-shell .manager-nav button.manager-button[aria-current="page"],
 .pay-dashboard .manager-shell .manager-nav button.manager-button[aria-current="page"]:hover { background: var(--pay-soft); color: #172b46; }
 .pay-dashboard .manager-card.manager-system { background: linear-gradient(150deg, var(--pay-soft), #fff 42%); }

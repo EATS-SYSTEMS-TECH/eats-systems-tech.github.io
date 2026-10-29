@@ -1,7 +1,7 @@
 /* Host shares Manager's workspace components; only its product accents differ.
    The scoped resets below detach the shared shell from Host's fixed drawer.
    Calendar, reservations, team, access and settings keep their Host layouts. */
-@import url("./manager-dashboard.css?v=20261029orgmanage1");
+@import url("./manager-dashboard.css?v=20261030workspace1");
 
 body.host-app.host-manager-workspace[data-product="host"] {
   padding: 0;

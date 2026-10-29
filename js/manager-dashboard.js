@@ -99,7 +99,7 @@ export function createManagerDashboard({
     nav = node("nav", undefined, "manager-nav"),
     main = node("div", undefined, "manager-main");
   nav.setAttribute("aria-label", t("ניווט Manager", "Manager navigation"));
-  const title = node("p", t("סביבת עבודה", "Workspace"), "manager-nav-title"),
+  const title = node("p", t("סביבת עבודה אישית", "Personal workspace"), "manager-nav-title"),
     status = node("p", "", "manager-status");
   status.setAttribute("role", "status");
   status.setAttribute("aria-live", "polite");
@@ -413,7 +413,11 @@ export function createManagerDashboard({
     shell.dataset.mode = managementMode ? "management" : "workspace";
     nav.hidden = managementMode;
     platformEntry.hidden = true;
-    nav.replaceChildren(title);
+    nav.replaceChildren();
+    const personalNavigation = node("section", undefined, "manager-personal-navigation");
+    personalNavigation.setAttribute("aria-label", t("סביבת עבודה אישית", "Personal workspace"));
+    personalNavigation.append(title);
+    nav.append(personalNavigation);
     const roleList = node("div", undefined, "manager-sidebar-roles");
     for (const role of new Set(
       profile.roles?.length ? profile.roles : [profile.role],
@@ -423,7 +427,7 @@ export function createManagerDashboard({
       label.dir = "ltr";
       roleList.append(label);
     }
-    if (roleList.childElementCount) nav.append(roleList);
+    if (roleList.childElementCount) personalNavigation.append(roleList);
 
     platformHeader.replaceChildren();
     platformHeader.hidden = true;
@@ -431,17 +435,16 @@ export function createManagerDashboard({
       const b = button(t("המערכות שלי", "My systems"), () => showSystems(null));
       if (!scope && ["systems", "example-system"].includes(currentView))
         b.setAttribute("aria-current", "page");
-      nav.append(b);
+      personalNavigation.append(b);
     }
     const myOrganizations = button(t("הארגונים שלי", "My organizations"), () =>
       showOrganizations(true),
     );
     if (
-      ["my-organizations", "example-organization"].includes(currentView) ||
-      (currentView === "systems" && scope)
+      ["my-organizations", "example-organization"].includes(currentView)
     )
       myOrganizations.setAttribute("aria-current", "page");
-    nav.append(myOrganizations);
+    personalNavigation.append(myOrganizations);
     if (profile.organizations?.length) {
       organizationPicker = createManagerOrganizationPicker({
         organizations: profile.organizations.map(org => ({ ...org, ...organizationIdentities.get(org.id), role: org.role })),
@@ -450,6 +453,12 @@ export function createManagerDashboard({
         onSelect: id => task(() => showSystems(id)),
       });
       nav.append(organizationPicker.root);
+      if (scope && profile.organizations.some(org => org.id === scope)) {
+        const organizationSystems = button(t("מערכות הארגון", "Organization systems"), () => task(() => showSystems(scope)));
+        organizationSystems.dataset.organizationView = "systems";
+        if (currentView === "systems") organizationSystems.setAttribute("aria-current", "page");
+        nav.append(organizationSystems);
+      }
     }
     if (profile.role !== "admin")
       nav.append(button(t("הזמנות", "Invitations"), showInvitations));

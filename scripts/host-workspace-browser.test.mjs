@@ -283,7 +283,7 @@ test("workspace isolates failures, follows permissions and keeps history", async
           );
           assert.equal(
             await page.evaluate(() => document.body.dataset.hostViewId),
-            plan ? "my-systems" : "systems",
+            plan ? "my-systems" : "my-organizations",
           );
           for (const id of ["systems", "calendar", "bookings", "settings"])
             assert.equal(await visible(id), true, `${role} ${id}`);
@@ -333,7 +333,7 @@ test("workspace isolates failures, follows permissions and keeps history", async
       );
       assert.equal(
         await page.evaluate(() => document.body.dataset.hostViewId),
-        "systems",
+        "my-organizations",
       );
       assert.equal(
         await page.locator('[data-workspace-view="my-systems"]').count(),

@@ -1,6 +1,11 @@
 // Interface copy only. Record names, identifiers and user content are never
 // passed through this dictionary.
 export const hostHebrew = {
+  "My organizations": "הארגונים שלי",
+  "Personal workspace": "סביבת עבודה אישית",
+  "Open organization": "כניסה לארגון",
+  "Organization calendar": "יומן הארגון",
+  "Guest invitation automation API": "אוטומציית הזמנת אורחים API",
   Gate: "שער",
   // The product name stays in English, as in the WIFIGATE app and site.
   "Dual Control": "Dual Control",

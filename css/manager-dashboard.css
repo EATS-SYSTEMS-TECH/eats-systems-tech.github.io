@@ -1063,7 +1063,7 @@
 }
 
 /* Manager uses the profile dashboard's quiet surfaces and product accents. */
-.manager-shell { grid-template-columns: 220px minmax(0, 1fr); gap: 24px; }
+.manager-shell { grid-template-columns: 312px minmax(0, 1fr); gap: 24px; }
 .manager-nav { padding: 18px; border-radius: 18px; background: linear-gradient(160deg, #fff, #f8fafc); box-shadow: 0 5px 20px #182d4808; }
 .manager-nav-title { letter-spacing: .06em; font-size: 11px; padding-inline: 10px; }
 .manager-shell .manager-nav button.manager-button { border-radius: 10px; font-weight: 600; }
@@ -1511,3 +1511,19 @@ body[data-product] .manager-organization-workspace>.manager-organization-pending
 .manager-remote-code code{display:block;text-align:start;unicode-bidi:isolate;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:clamp(14px,2vw,20px);font-weight:650;letter-spacing:.04em;user-select:all}
 .manager-remote-hint{margin:20px 0 0;padding-block-start:16px;border-block-start:1px solid #e1e8f1;color:#54677e;font-size:13px;line-height:1.8}
 @media(max-width:600px){.manager-control-workspace .manager-remote-card{grid-template-columns:minmax(0,1fr);gap:22px;padding:20px;border-radius:18px}.manager-remote-illustration{min-height:148px}.manager-remote-illustration img{width:100px;height:100px}.manager-control-workspace .manager-remote-body h3{font-size:19px;margin-block-end:20px}}
+
+/* Account navigation and selected-organization navigation share one hierarchy. */
+.manager-personal-navigation { box-sizing: border-box; width: 100%; min-width: 0; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--manager-line, #e2e8f0); }
+.manager-personal-navigation .manager-sidebar-roles { padding-bottom: 10px; margin-bottom: 4px; border-bottom: 0; font-size: 12px; }
+.manager-organization-navigation { width: 100%; min-width: 0; }
+.manager-organization-navigation[hidden] { display: none !important; }
+.manager-shell .manager-nav .manager-organization-picker-trigger { min-height: 80px; padding: 14px; gap: 12px; }
+.manager-organization-picker-identity strong { font-size: 14px; white-space: normal; overflow-wrap: anywhere; }
+.manager-organization-picker-identity small { font-size: 11px; }
+.manager-organization-picker-logo { flex-basis: 42px; width: 42px; height: 42px; }
+@media (max-width: 850px) {
+  .manager-personal-navigation { padding-bottom: 12px; margin-bottom: 8px; }
+  .manager-personal-navigation .manager-button { margin-inline-end: 6px; }
+  .manager-organization-navigation { display: flex; flex-wrap: wrap; gap: 6px; }
+  .manager-nav > .manager-organization-picker, .manager-nav > .org-switcher { width: 100%; flex-basis: 100%; }
+}
