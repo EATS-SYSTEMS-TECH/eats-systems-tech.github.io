@@ -226,6 +226,8 @@ export function createManagerDashboard({
     const explanation = managerConnectionError(error, language);
     if (explanation) return [explanation.message, ...explanation.steps].join(" ");
     return ({
+      STORAGE_IO: t("לא ניתן לקרוא כעת את ההיסטוריה מכרטיס ה־SD. ודאו שהוא מחובר כראוי ופתחו שוב את ההיסטוריה.", "History storage is unavailable. Check that the gate's SD card is connected, then reopen History to retry."),
+      STORAGE_RECOVERY_REQUIRED: t("ההיסטוריה מושהית כדי לשמור על נתוני התאוששות קיימים. נדרש שחזור מאומת לפני המשך הקריאה.", "History is paused to preserve existing recovery data. Verified recovery is required before reading can resume."),
       ORGANIZATION_HAS_SYSTEMS: t(
         "יש להסיר את שיוך המערכות לפני הסרת הארגון.",
         "Unassign linked systems before removing the organization.",

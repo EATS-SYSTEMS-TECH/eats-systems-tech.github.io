@@ -250,3 +250,16 @@ test("Manager verifies the complete encrypted export before returning any rows",
   assert.deepEqual(await c.exportCollection("USERS"), rows);
   assert.equal(c.transfer, false);
 });
+
+
+test("history allows a slow safe SD remount without changing other command waits", async () => {
+  for (const [cmd, explicit, expected] of [["ADMIN_LIST_HISTORY", undefined, 35000], ["ADMIN_GET_STORAGE_HEALTH", undefined, 15000], ["ADMIN_GET_OVERVIEW", undefined, 15000], ["ADMIN_LIST_HISTORY", 2500, 2500]]) {
+    const connection = new ManagerConnection({user: {}, WebSocketImpl: class {}, api: async () => ({})});
+    connection.session = {...makeSession(), seq: 1, authKey: new Uint8Array(32), clientNoncePrefix: new Uint8Array(8)};
+    let observed;
+    connection.next = (_match, timeout) => {observed=timeout;throw new Error("FIXTURE_STOP");};
+    await assert.rejects(connection.command(cmd, {}, explicit), /FIXTURE_STOP/);
+    assert.equal(observed, expected, cmd);
+    assert.equal(connection.busy, false);
+  }
+});
