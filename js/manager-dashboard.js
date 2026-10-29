@@ -1,5 +1,6 @@
 import { renderManagerOrganization } from "./manager-organization.js";
 import { createManagerOrganizationPicker } from "./manager-organization-picker.js";
+import { organizeManagerPeople } from "./manager-people-workspace.js";
 import { createManagerSetupGuide } from "./manager-setup-guide.js";
 import { createManagerOrganizationCard } from "./manager-organization-card.js";
 import { createPersonalOrganizationPage } from "./manager-organization-list.js";
@@ -1884,7 +1885,10 @@ export function createManagerDashboard({
         ...(tab === "history" ? { dayKey: null } : { query: "" }),
       };
     await showRead(content, cmd, payload, items, more);
-    if (tab === "users" || tab === "admins") renderPeopleActions(content, tab);
+    if (tab === "users" || tab === "admins") {
+      renderPeopleActions(content, tab);
+      return;
+    }
     if (tab === "settings") renderSettings(content);
     if (tab === "events") renderEventActions(content);
     if (tab === "auto") {
@@ -2018,9 +2022,8 @@ export function createManagerDashboard({
             })),
         );
       } else renderTable(content, currentRows);
-      if (cursor)
-        content.append(
-          button(t("טען עוד", "Load more"), () =>
+      if (cursor) {
+        const loadMore = button(t("טען עוד", "Load more"), () =>
             cmd === "ADMIN_LIST_HISTORY"
               ? showRead(
                   content,
@@ -2030,13 +2033,15 @@ export function createManagerDashboard({
                   true,
                 )
               : showTab(currentTab, true),
-          ),
-        );
-      content.append(
-        button(t("ייצוא הנתונים המוצגים", "Export displayed data"), () =>
+          );
+        loadMore.dataset.peopleAction = "more";
+        content.append(loadMore);
+      }
+      const displayed = button(t("ייצוא הנתונים המוצגים", "Export displayed data"), () =>
           exportRows(currentRows),
-        ),
-      );
+        );
+      displayed.dataset.peopleAction = "displayed";
+      content.append(displayed);
     } else {
       currentRows = [];
       renderFacts(content, r.data);
@@ -2167,6 +2172,13 @@ export function createManagerDashboard({
               f.elements[key].value =
                 r[key] ??
                 (key.endsWith("Number") && key !== "localNumber" ? 0 : "");
+            const details = f.closest(".manager-people-editor");
+            if (details) {
+              details.open = true;
+              details.querySelector("summary").textContent = currentTab === "users"
+                ? t("עריכת משתמש", "Edit user") : t("עריכת מנהל", "Edit administrator");
+            }
+            f.elements.name.focus({ preventScroll: true });
             f.scrollIntoView({ block: "nearest" });
           }),
           button(t("מחיקה", "Delete"), async () => {
@@ -2289,6 +2301,7 @@ export function createManagerDashboard({
         say(t("הייצוא אומת מול השער.", "Export verified against the gate."));
       }),
     );
+    content.lastElementChild.dataset.peopleAction = "all";
     content.append(button(t("ייבוא CSV", "Import CSV"), async () => {
       const source = connection, epoch = generation, panel = tabGeneration;
       const alive = () => source === connection && epoch === generation && panel === tabGeneration && source.session && !closed;
@@ -2307,6 +2320,7 @@ export function createManagerDashboard({
       if (!alive()) return;
       if (!result.cancelled) await showTab(tab);
     }));
+    content.lastElementChild.dataset.peopleAction = "import";
     content.append(
       form(
         [
@@ -2341,10 +2355,20 @@ export function createManagerDashboard({
     editor.elements.email.required = true;
     for (const key of ["floorNumber", "apartmentNumber", "parkingNumber"]) {
       editor.elements[key].value = "0";
+      editor.elements[key].defaultValue = "0";
       editor.elements[key].min = "0";
       editor.elements[key].max =
         key === "parkingNumber" ? "4294967295" : "65535";
     }
+    for (const key of ["countryCode", "localNumber"]) {
+      editor.elements[key].type = "tel";
+      editor.elements[key].inputMode = "numeric";
+      editor.elements[key].dir = "ltr";
+    }
+    editor.elements.countryCode.placeholder = "972";
+    editor.elements.localNumber.placeholder = "501234567";
+    editor.elements.email.dir = "ltr";
+    organizeManagerPeople(content, { language, tab, rows: currentRows, editor });
   }
   function renderSettings(content) {
     const context = { source: connection, epoch: generation, panel: tabGeneration };

@@ -145,6 +145,7 @@ test("Manager example gate, Dual Control and group use real workspace controls w
             30,
         );
         const downloadEvent = page.waitForEvent("download");
+        await content.locator(".manager-people-exports > summary").click();
         await content
           .getByRole("button", {
             name: copy("ייצוא כל הרשומות", "Export all records"),

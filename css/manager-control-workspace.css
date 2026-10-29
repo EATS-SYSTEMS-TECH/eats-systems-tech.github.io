@@ -725,3 +725,71 @@
     padding: 18px;
   }
 }
+
+/* People lists share the same controls and device contracts in live/demo views. */
+.manager-control-workspace .manager-people-workspace { min-width:0; display:grid; gap:20px; }
+.manager-control-workspace .manager-people-header { display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:18px; }
+.manager-control-workspace .manager-people-header h4 { margin:0 0 7px; font-size:22px; color:#162e49; }
+.manager-control-workspace .manager-people-header p { margin:0; color:#66788e; font-size:13px; line-height:1.7; }
+.manager-control-workspace .manager-people-tools { display:flex; gap:8px; align-items:flex-start; flex-wrap:wrap; }
+.manager-control-workspace .manager-people-exports { position:relative; }
+.manager-control-workspace .manager-people-exports > summary { list-style:none; cursor:pointer; min-height:44px; box-sizing:border-box; display:flex; align-items:center; gap:9px; }
+.manager-control-workspace .manager-people-exports > summary::after { content:'\2304'; }
+.manager-control-workspace .manager-people-exports > summary::-webkit-details-marker { display:none; }
+.manager-control-workspace .manager-people-export-options { position:absolute; z-index:5; inset-inline-end:0; top:calc(100% + 8px); padding:8px; display:grid; gap:4px; width:220px; max-width:calc(100vw - 72px); background:white; border:1px solid #dce4ee; border-radius:14px; box-shadow:0 12px 32px #182d4820; }
+.manager-control-workspace .manager-people-export-options .manager-button { text-align:start; white-space:normal; }
+.manager-control-workspace .manager-people-editor { border:1px solid #eed8c7; border-radius:16px; background:#fffaf6; overflow:hidden; }
+.manager-control-workspace .manager-people-editor:not([open]) { display:none; }
+.manager-control-workspace .manager-people-editor > summary { padding:19px 22px; cursor:pointer; font-size:16px; font-weight:700; color:#87310d; }
+.manager-control-workspace .manager-people-editor > p { margin:0; padding:0 22px 18px; color:#66788e; font-size:13px; line-height:1.7; }
+.manager-control-workspace .manager-people-editor .manager-form { margin:0; padding:0 22px 22px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; border:0; background:transparent; box-shadow:none; }
+.manager-control-workspace .manager-people-editor fieldset { grid-column:1/-1; min-width:0; border:0; padding:0; margin:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.manager-control-workspace .manager-people-editor fieldset legend { padding:0; margin-block-end:14px; color:#263e58; font-size:13px; font-weight:700; }
+.manager-control-workspace .manager-people-editor .manager-people-location-fields { grid-template-columns:repeat(3,minmax(0,1fr)); padding-block-start:4px; }
+.manager-control-workspace .manager-people-editor .manager-form label { min-width:0; }
+.manager-control-workspace .manager-people-editor .manager-form input { box-sizing:border-box; width:100%; background:#fff; }
+.manager-control-workspace .manager-people-editor .manager-form button { align-self:end; }
+.manager-control-workspace .manager-people-filter { display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:14px; padding:18px; background:#f7f9fc; border:1px solid #e5ebf2; border-radius:16px; }
+.manager-control-workspace .manager-people-filter label { display:grid; gap:8px; font-size:12px; color:#53677e; flex:1 1 260px; max-width:480px; }
+.manager-control-workspace .manager-people-filter input { box-sizing:border-box; width:100%; min-height:46px; padding:11px 14px; border:1px solid #d8e1ec; border-radius:10px; background:#fff; font:inherit; font-size:14px; color:#162e49; }
+.manager-control-workspace .manager-people-count { margin:0 0 12px; color:#61758b; font-size:12px; }
+.manager-control-workspace .manager-people-table { width:100%; min-width:0; table-layout:fixed; }
+.manager-control-workspace .manager-people-table th:nth-child(1) { width:31%; }
+.manager-control-workspace .manager-people-table th:nth-child(2) { width:21%; }
+.manager-control-workspace .manager-people-table th:nth-child(3) { width:27%; }
+.manager-control-workspace .manager-people-table th:nth-child(4) { width:21%; }
+.manager-control-workspace .manager-people-table :is(th,td) { padding:15px 12px; overflow-wrap:anywhere; }
+.manager-control-workspace .manager-people-person > div { display:inline-grid; gap:4px; vertical-align:middle; max-width:100%; }
+.manager-control-workspace .manager-people-person strong { font-size:14px; color:#182d48; }
+.manager-control-workspace .manager-people-person div > span { color:#6b7f94; font-size:12px; text-align:start; }
+.manager-control-workspace .manager-people-avatar { display:inline-grid; place-items:center; width:34px; height:34px; margin-inline-end:10px; margin-block-end:6px; border-radius:11px; background:#fff0e5; color:#a33c10; font-size:14px; font-weight:700; }
+.manager-control-workspace .manager-people-phone { font-size:13px; font-variant-numeric:tabular-nums; }
+.manager-control-workspace .manager-people-location > span { display:inline-block; padding:4px 7px; margin:3px; background:#f1f5f9; border-radius:6px; color:#61748a; font-size:11px; white-space:normal; }
+.manager-control-workspace .manager-people-row-actions .manager-button { min-width:44px; min-height:44px; margin:3px; padding:9px 10px; font-size:12px; }
+.manager-control-workspace .manager-people-row-actions .manager-people-delete { color:#b42334; border-color:#f0d7dc; background:#fff; }
+.manager-control-workspace .manager-people-row-actions .manager-people-delete:hover { background:#b42334; color:#fff; border-color:#b42334; }
+.manager-control-workspace .manager-people-table tr[hidden] { display:none !important; }
+.manager-control-workspace .manager-people-no-matches,.manager-control-workspace .manager-people-empty { padding:28px; margin:0; border:1px dashed #dae3ed; border-radius:14px; text-align:center; font-size:14px; color:#61748a; line-height:1.8; }
+.manager-control-workspace .manager-people-footer { display:flex; align-items:center; justify-content:space-between; gap:16px; font-size:12px; color:#66788e; }
+.manager-control-workspace .manager-people-workspace summary:focus-visible { outline:3px solid #c95d25; outline-offset:3px; }
+@media(max-width:1000px) {
+  .manager-control-workspace .manager-people-header { flex-direction:column; }
+  .manager-control-workspace .manager-people-table th:nth-child(1) { width:34%; }
+  .manager-control-workspace .manager-people-table th:nth-child(2) { width:22%; }
+  .manager-control-workspace .manager-people-table th:nth-child(3) { width:22%; }
+  .manager-control-workspace .manager-people-table th:nth-child(4) { width:22%; }
+}
+@media(max-width:700px) {
+  .manager-control-workspace .manager-people-tools { width:100%; }
+  .manager-control-workspace .manager-people-tools > .primary { flex-basis:100%; }
+  .manager-control-workspace .manager-people-editor .manager-form { grid-template-columns:repeat(2,minmax(0,1fr)); padding:0 16px 18px; gap:12px; }
+  .manager-control-workspace .manager-people-editor .manager-form label:has([name="name"]),.manager-control-workspace .manager-people-editor .manager-form label:has([name="email"]) { grid-column:1/-1; }
+  .manager-control-workspace .manager-people-table,.manager-control-workspace .manager-people-table tbody { display:block; }
+  .manager-control-workspace .manager-people-table thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+  .manager-control-workspace .manager-people-table tbody tr { display:grid; gap:5px; padding:17px; border-bottom:1px solid #e4ebf2; }
+  .manager-control-workspace .manager-people-table tbody td { display:block; padding:3px 0; border:0; }
+  .manager-control-workspace .manager-people-row-actions { display:flex !important; gap:8px; margin-block-start:10px; }
+  .manager-control-workspace .manager-people-row-actions .manager-button { flex:1; margin:0; }
+  .manager-control-workspace .manager-people-footer { flex-direction:column; align-items:stretch; text-align:center; }
+  .manager-control-workspace .manager-people-count { margin:0; }
+}
