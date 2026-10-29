@@ -1,6 +1,16 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { monthlyEstimate, monthlyTotal, revenueTotal } from "../js/profile-financials.js";
+
+test("explicit administrator exemption zeros subscription amounts without changing quantities or Pay revenue",()=>{
+ const original={kind:'monthly-estimate',currency:'USD',monthlyCents:190,lines:Object.fromEntries(['gates','dualControls','groups','organizations'].map((key,i)=>[key,{amountCents:i===0?190:0,quantity:2}]))};
+ const result=monthlyEstimate({financials:original,billingExempt:true});
+ assert.equal(result.monthlyCents,0);
+ assert.equal(result.lines.gates.quantity,2);
+ assert.equal(result.lines.gates.amountCents,0);
+ assert.equal(original.monthlyCents,190);
+ assert.equal(monthlyEstimate({financials:original}).monthlyCents,190);
+});
 const product = (values, currency = "USD") => ({ financials: {
   kind: "monthly-estimate", currency,
   lines: Object.fromEntries(["gates", "dualControls", "groups", "organizations"].map((key, i) => [key, {amountCents: values[i]}])),

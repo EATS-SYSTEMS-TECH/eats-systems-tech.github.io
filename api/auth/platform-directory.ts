@@ -9,6 +9,7 @@ export type PlatformDirectory = {
     name: string | null;
     role: "admin" | "user";
     identityStatus: "verified" | "unavailable";
+    billingExempt?: boolean;
     products: Partial<
       Record<
         ProductId,
@@ -35,6 +36,7 @@ export function getPlatformDirectory(
 }
 
 export type PlatformDirectoryFinancials = {
+  billingPolicy?: "platform-admin-exempt-v1";
   kind: "monthly-estimate";
   totals: { currency: string; amountCents: number }[];
   accounts: number;

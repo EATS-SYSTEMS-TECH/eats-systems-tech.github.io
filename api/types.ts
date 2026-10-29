@@ -25,6 +25,8 @@ export type ProductState =
   "active" | "pending" | "no-plan" | "blocked" | "mfa-required" | "unavailable";
 export type PersonalSummary = { gates: number | null; dualControls: number | null; groups: number | null; organizations: number };
 export type MonthlyEstimate = {
+  billingExempt?: boolean;
+  exemptionReason?: "platform-admin";
   kind: "monthly-estimate";
   currency: string;
   pricingVersion: string;

@@ -735,6 +735,9 @@ function renderProfileDetails() {
 }
 
 function pricingExplanation(product, category) {
+  if (identity.platformRole === "admin") return language === "he"
+    ? "חשבונות WIFIGATE Admin פטורים מדמי מנוי, כולל דמי מינימום ותוספות ארגונים."
+    : "WIFIGATE Admin accounts have no subscription fees, including minimums and organization surcharges.";
   const text = {
     he: {
       host: {
@@ -779,7 +782,8 @@ function renderSubscriptionPreview() {
     const card = $(`#product-grid [data-product="${id}"]`);
     if (!card) continue;
     card.dataset.subscription = id;
-    const estimate = monthlyEstimate(identity.products[id]);
+    const exempt = identity.platformRole === "admin";
+    const estimate = monthlyEstimate({ ...identity.products[id], billingExempt: exempt });
     if (id !== "pay") {
       const totals = document.createElement("section");
       totals.className = "profile-product-totals";
@@ -849,15 +853,15 @@ function renderSubscriptionPreview() {
       const note = document.createElement("p");
       note.className = "profile-cost-basis";
       note.textContent = language === "he"
-        ? "רכיבים בבעלותך · אומדן לחודש מלא לפני מס."
-        : "Owned components · full-month estimate before tax.";
+        ? exempt ? "ניהול ללא עלות למנהלי WIFIGATE. הכמויות מוצגות לצורכי ניהול בלבד." : "רכיבים בבעלותך · אומדן לחודש מלא לפני מס."
+        : exempt ? "Free for WIFIGATE administrators. Quantities are shown for management only." : "Owned components · full-month estimate before tax.";
       card.insertBefore(note, card.querySelector(".product-guidance"));
     }
     const list = document.createElement("dl");
     list.className = "profile-product-billing";
     for (const [label, value, key] of [
       [id === "pay" ? (language === "he" ? "סה״כ הכנסות" : "Total revenue") : (language === "he" ? "תשלום חודשי" : "Monthly payment"),
-       id === "pay" ? revenueTotal(identity.products[id], language) : formatMoney(estimate?.monthlyCents, estimate?.currency, language),
+       id === "pay" ? revenueTotal(identity.products[id], language) : exempt ? (language === "he" ? "ללא עלות · WIFIGATE Admin" : "Free · WIFIGATE Admin") : formatMoney(estimate?.monthlyCents, estimate?.currency, language),
        id === "pay" ? "revenue" : "monthly"],
     ]) {
       const row = document.createElement("div");
@@ -878,7 +882,9 @@ function renderSubscriptionPreview() {
       card.insertBefore(note, card.querySelector(".product-guidance"));
     }
   }
-  $("#profile-subscription-total").textContent = monthlyTotal(identity.products, language);
+  $("#profile-subscription-total").textContent = identity.platformRole === "admin"
+    ? (language === "he" ? "ללא עלות · WIFIGATE Admin" : "Free · WIFIGATE Admin")
+    : monthlyTotal(identity.products, language);
 }
 
 // Account deletion: a preview of what is cancelled and closed, the account

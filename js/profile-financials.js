@@ -9,6 +9,10 @@ export function monthlyEstimate(product) {
   if (!costCategories.every(key => money(value.lines?.[key]?.amountCents))) return null;
   const total = costCategories.reduce((sum, key) => sum + value.lines[key].amountCents, 0);
   if (!money(total) || total !== value.monthlyCents) return null;
+  if (product.billingExempt === true || value.billingExempt === true) return {
+    ...value, billingExempt: true, exemptionReason: "platform-admin", monthlyCents: 0,
+    lines: Object.fromEntries(costCategories.map(key=>[key,{...value.lines[key],amountCents:0}])),
+  };
   return value;
 }
 

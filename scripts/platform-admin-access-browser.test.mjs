@@ -33,6 +33,20 @@ const admin = {
   authTime: Math.floor(Date.now() / 1000),
 };
 
+test("explicit global admin exemption is free even in Manager filtering, while legacy revenue is withheld",async t=>{
+ const {origin,browser}=await startSite(t);const f=await scenario(browser,admin);t.after(()=>f.context.close());
+ await f.context.route('**/api/v1/platform/directory?*',r=>r.fulfill({json:{counts:{admins:1,users:0,total:1},productCounts:{host:1,pay:1,manager:1},items:[{...customer,role:'admin',billingExempt:true}],nextCursor:null}}));
+ await f.context.route('**/api/v1/platform/directory/financials?*',r=>r.fulfill({json:{complete:true,totals:[{currency:'USD',amountCents:190}],unknownAccounts:0}}));
+ await f.page.goto(origin+'/dashboard/platform/?product=manager&lang=he');
+ await f.page.locator('.platform-admin-person-summary').waitFor();
+ assert.match(await f.page.locator('.platform-admin-person-price').innerText(),/ללא עלות/);
+ await f.page.locator('.platform-admin-person-summary').click();
+ assert.match(await f.page.locator('tbody').innerText(),/ללא עלות/);
+ await f.page.locator('.platform-admin-revenue[aria-busy="false"]').waitFor();
+ assert.match(await f.page.locator('.platform-admin-revenue').innerText(),/ממתין לעדכון/);
+ assert.deepEqual(f.errors,[]);
+});
+
 test("fresh TOTP is required before a mutation and cancelling reauthentication sends no change", async (t) => {
   const { origin, browser } = await startSite(t);
   const { page, context, calls } = await scenario(browser, {
@@ -92,7 +106,7 @@ test("a delayed revenue response cannot overwrite the newest product filter", as
             { currency: "USD", amountCents: product === "host" ? 9000 : 190 },
           ],
           complete: true,
-          unknownAccounts: 0,
+          billingPolicy: "platform-admin-exempt-v1", unknownAccounts: 0,
         },
       });
     },
@@ -156,7 +170,7 @@ test("the closed user card shows Manager 1.90 and revenue covers all matching pa
           },
         ],
         accounts: 12,
-        unknownAccounts: 0,
+        billingPolicy: "platform-admin-exempt-v1", unknownAccounts: 0,
         complete: true,
         payRevenueAvailable: false,
       },
@@ -320,7 +334,7 @@ test("incomplete revenue is never shown as a full total and retry keeps the same
     route.fulfill({
       json: {
         totals: [{ currency: "USD", amountCents: 190 }],
-        unknownAccounts: 1,
+        billingPolicy: "platform-admin-exempt-v1", unknownAccounts: 1,
         complete: false,
       },
     }),

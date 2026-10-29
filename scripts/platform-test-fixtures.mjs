@@ -226,7 +226,7 @@ export async function scenario(browser, options = {}) {
         json: { error: { code: state.deniedCode ?? "PORTAL_ACCESS_DENIED" } },
       });
     if (url.pathname === "/api/v1/platform/directory/financials")
-      return route.fulfill({ json: { kind: "monthly-estimate", totals: [], accounts: 1, unknownAccounts: 1, complete: false, payRevenueAvailable: false } });
+      return route.fulfill({ json: { kind: "monthly-estimate", totals: [], accounts: 1, billingPolicy: "platform-admin-exempt-v1", unknownAccounts: 1, complete: false, payRevenueAvailable: false } });
     if (url.pathname === "/api/v1/users/me") {
       return route.fulfill({
         json: {

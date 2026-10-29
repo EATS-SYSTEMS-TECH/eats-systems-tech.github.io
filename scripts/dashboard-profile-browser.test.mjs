@@ -308,9 +308,7 @@ test("every dashboard shares a flag selector and profile entry into My profile",
                   assert.equal(await info.getAttribute('aria-expanded'), 'true');
                   const bubble = tip.locator('[role="tooltip"]');
                   assert.equal(await bubble.isVisible(), true);
-                  const rate = productId === 'host'
-                    ? key === 'gates' ? /\$6/ : key === 'dualControls' ? /\$5/ : language === 'he' ? /אין תוספת/ : /no monthly organization surcharge/
-                    : key === 'organizations' ? /\$1/ : /\$1\.90/;
+                  const rate = language === 'he' ? /פטורים מדמי מנוי/ : /no subscription fees/;
                   assert.match(await bubble.innerText(), rate);
                   const box = await bubble.boundingBox();
                   assert.ok(box.x >= 0 && box.x + box.width <= width);
@@ -332,11 +330,11 @@ test("every dashboard shares a flag selector and profile entry into My profile",
               assert.equal(await card.locator(".product-actions > :first-child").textContent(), language === "he" ? "פתיחה" : "Open");
             }
             assert.equal(await subscriptions.locator('[data-subscription-value="status"]').count(), 0);
-            assert.match(await subscriptions.locator('[data-product="host"] [data-subscription-value="monthly"]').innerText(), /100\.00/);
-            assert.match(await subscriptions.locator('[data-product="manager"] [data-subscription-value="monthly"]').innerText(), /57\.00/);
+            assert.match(await subscriptions.locator('[data-product="host"] [data-subscription-value="monthly"]').innerText(), /WIFIGATE Admin/);
+            assert.match(await subscriptions.locator('[data-product="manager"] [data-subscription-value="monthly"]').innerText(), /WIFIGATE Admin/);
             assert.equal(await subscriptions.locator('[data-product="pay"] [data-subscription-value="monthly"]').count(), 0);
             assert.match(await subscriptions.locator('[data-subscription-value="revenue"]').innerText(), /125\.50/);
-            assert.match(await page.locator('#profile-subscription-total').innerText(), /157\.00/);
+            assert.match(await page.locator('#profile-subscription-total').innerText(), /WIFIGATE Admin/);
             await page.mouse.move(0, 0);
             await page.keyboard.press("Escape");
             if (process.env.DASHBOARD_PREVIEW_DIR)

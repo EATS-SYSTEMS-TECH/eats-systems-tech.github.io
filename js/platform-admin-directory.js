@@ -286,7 +286,8 @@ export function createPlatformAdminDirectory({
       "platform-admin-role",
     );
     badge.dataset.role = person.role;
-    const total =
+    const exempt = person.billingExempt === true || (person.products.host?.role === "admin" && person.products.host?.state === "active");
+    const total = exempt ? t("ללא עלות · WIFIGATE Admin", "Free · WIFIGATE Admin") :
       selectedProduct === "all"
         ? monthlyTotal(person.products, language)
         : formatMoney(
@@ -390,7 +391,7 @@ export function createPlatformAdminDirectory({
       ? ["host", "pay", "manager"]
       : [selectedProduct]) {
       const plan = person.products[id];
-      const estimate = monthlyEstimate(plan);
+      const estimate = monthlyEstimate({ ...plan, billingExempt: exempt });
       const row = body.insertRow();
       const name = element(
         "th",
@@ -421,7 +422,7 @@ export function createPlatformAdminDirectory({
       row.append(quantity);
       const amount = element(
         "td",
-        formatMoney(estimate?.monthlyCents, estimate?.currency, language),
+        exempt ? t("ללא עלות", "Free") : formatMoney(estimate?.monthlyCents, estimate?.currency, language),
       );
       amount.dataset.label = t("אומדן חודשי", "Monthly estimate");
       amount.dir = "auto";
@@ -471,9 +472,12 @@ export function createPlatformAdminDirectory({
             formatMoney(value.amountCents, value.currency, language),
           )
           .join(" + ") || formatMoney(0, "USD", language);
-      revenueValue.textContent = data.complete ? total : t("לא זמין", "Unavailable");
-      revenueValue.classList.toggle("platform-admin-unavailable", !data.complete);
-      revenueStatus.textContent = data.unknownAccounts
+      const policyReady = data.billingPolicy === "platform-admin-exempt-v1";
+      revenueValue.textContent = data.complete && policyReady ? total : t("לא זמין", "Unavailable");
+      revenueValue.classList.toggle("platform-admin-unavailable", !data.complete || !policyReady);
+      revenueStatus.textContent = !policyReady
+        ? t("אומדן ההכנסות ממתין לעדכון חישוב הפטור למנהלי WIFIGATE בשרת.", "The revenue estimate awaits the server update excluding WIFIGATE administrator subscriptions.")
+        : data.unknownAccounts
         ? t(
             `סכום ידוע: ${total}. חסרים נתונים עבור ${data.unknownAccounts} חשבונות.`,
             `Known amount: ${total}. Data is missing for ${data.unknownAccounts} accounts.`,
