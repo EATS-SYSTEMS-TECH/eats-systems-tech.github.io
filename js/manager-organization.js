@@ -212,7 +212,21 @@ export async function renderManagerOrganization({
     ownerEmail,
   );
   brandingBody.append(ownerLine);
-  header.append(artwork, identity, back);
+  const headerActions = node("div", undefined, "manager-organization-header-actions");
+  headerActions.append(back);
+  if (permissions.managePeople === true) {
+    const manage = button(t("ניהול ארגון", "Manage organization"), () => {
+      if (!isCurrent()) return;
+      for (const fold of [branding, peopleDisclosure]) {
+        fold.open = true;
+        state[fold.dataset.organizationDisclosure] = true;
+      }
+      peopleDisclosure.querySelector("summary").focus({ preventScroll: true });
+      peopleDisclosure.scrollIntoView({ block: "start", behavior: "auto" });
+    }, "primary manager-organization-manage");
+    headerActions.append(manage);
+  }
+  header.append(artwork, identity, headerActions);
   if (permissions.manageLogo) {
     const tools = node("div", undefined, "manager-organization-brand-actions");
     const input = node("input");

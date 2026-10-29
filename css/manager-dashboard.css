@@ -1,5 +1,5 @@
-@import url("./manager-events.css?v=20261029unified3");
-@import url("./manager-control-workspace.css?v=20261029unified3");
+@import url("./manager-events.css?v=20261029orgmanage1");
+@import url("./manager-control-workspace.css?v=20261029orgmanage1");
 
 .platform-page[data-product="manager"] {
   color: var(--ink, #0f172a);
@@ -1423,6 +1423,8 @@ body[data-product] .manager-organization-examples>.manager-org-columns{padding:0
 .manager-organization-header .manager-organization-logo{width:132px;height:132px;flex-basis:132px;border-radius:24px;font-size:48px;box-shadow:0 8px 26px #a53d110a}
 .manager-organization-header .manager-organization-logo img{padding:12px}
 .manager-organization-header .manager-organization-back{align-self:start;min-height:40px;font-size:12px}
+.manager-organization-header-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:10px;align-self:start}
+@media(max-width:700px){.manager-organization-header-actions{grid-column:1/-1;width:100%}}
 .manager-organization-identity h2{font-size:clamp(25px,3vw,38px);margin:9px 0;line-height:1.25}
 body[data-product] .manager-organization-workspace>.manager-organization-disclosure{margin:0;min-width:0}
 .manager-organization-disclosure>summary{gap:10px}

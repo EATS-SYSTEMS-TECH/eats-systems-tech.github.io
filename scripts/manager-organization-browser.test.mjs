@@ -216,6 +216,11 @@ test("selected organization contains branding, people and systems; invitation/re
           await page.locator(".manager-organization-disclosure[open]").count(),
           0,
         );
+        const manageOrganization = page.getByRole("button", { name: he ? "ניהול ארגון" : "Manage organization", exact: true });
+        assert.equal(await manageOrganization.count(), 1);
+        await manageOrganization.click();
+        assert.equal(await page.locator(".manager-organization-disclosure[open]").count(), 2);
+        for (const key of ["branding", "people"]) await page.locator(`[data-organization-disclosure="${key}"] > summary`).click();
         assert.equal(
           await page
             .locator(".manager-system")
@@ -497,6 +502,7 @@ test("organization users can open system workspaces without organization people 
   await page.getByRole("button", {name:"בחירת ארגון",exact:true}).click();
   await page.locator('.manager-organization-option[data-organization-id="org-a"]').click();
   await page.locator(".manager-organization-header h2").waitFor();
+  assert.equal(await page.getByRole("button", { name: "ניהול ארגון", exact: true }).count(), 0);
   assert.equal(
     await page
       .locator(
