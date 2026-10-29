@@ -46,6 +46,7 @@ test("connection popup has real stage progress, honest timing, keyboard cancella
         );
         assert.equal(await bar.getAttribute("aria-valuenow"), "0");
         assert.doesNotMatch(await dialog.innerText(), /פעם בדקה|once a minute|90/);
+        assert.match(await dialog.innerText(), language === "he" ? /עד כשתי דקות/ : /up to about two minutes/);
         assert.equal(
           await dialog.locator(".manager-connection-dialog__timing").isVisible(),
           false,

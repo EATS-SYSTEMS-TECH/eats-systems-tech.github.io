@@ -16,8 +16,8 @@ export function createManagerConnectionDialog({
     [
       t("ממתינים למערכת", "Waiting for your system"),
       t(
-        "ממתינים לבדיקת בקשות החיבור הבאה של המערכת.",
-        "Waiting for the system to check for a connection request.",
+        "החיבור למערכת עשוי להימשך עד כשתי דקות. תודה על הסבלנות, נכין עבורכם את סביבת הניהול ברגע שהחיבור יושלם.",
+        "Connecting to your system may take up to about two minutes. Thank you for your patience. We’ll prepare your workspace as soon as the connection is complete.",
       ),
     ],
     [
