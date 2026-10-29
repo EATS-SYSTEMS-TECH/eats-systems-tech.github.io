@@ -9,12 +9,13 @@ test('central management puts selectable products first and shows organizations 
  for(const language of ['he','en']) for(const width of [390,1440]) await t.test(`${language}/${width}`,async t=>{
   const f=await scenario(browser,{...admin,viewport:{width,height:1000}});t.after(()=>f.context.close());
   const requests=[];
-  await f.context.route('**/api/v1/platform/directory?*',r=>r.fulfill({json:{counts:{admins:1,users:1,total:2},productCounts:{host:2,pay:1,manager:2},items:[],nextCursor:null}}));
+  await f.context.route('**/api/v1/platform/directory?*',r=>r.fulfill({json:{counts:{admins:1,users:1,total:2},...(new URL(r.request().url()).searchParams.get('product')==='all'?{productCounts:{host:2,pay:1,manager:2}}:{}),items:[],nextCursor:null}}));
   await f.context.route('**/api/v1/platform/directory/organization-overview?*',r=>{const product=new URL(r.request().url()).searchParams.get('product');requests.push(product);return r.fulfill({json:{items:[{id:product+'-org',name:'Example '+product,status:'active',products:{[product]:'active'}}],complete:true,basis:'provisioned-organizations'}});});
   await f.page.goto(origin+'/dashboard/platform/?product=manager'+(language==='he'?'&lang=he':''));
   const root=f.page.locator('#platform-admin-management');await root.locator('.platform-admin-counts strong').first().waitFor();
   assert.equal(await root.locator(':scope > :first-child').getAttribute('class'),'platform-admin-products');
   assert.equal(await root.locator('[data-product="manager"]').getAttribute('aria-pressed'),'true');
+  assert.deepEqual(await root.locator('.platform-admin-product-count').allTextContents(),['2','1','2']);
   await root.locator('[data-role="organizations"]').click();
   await root.getByRole('heading',{name:'Example manager',exact:true}).waitFor();
   assert.equal(await root.locator('.platform-admin-revenue').isVisible(),false);

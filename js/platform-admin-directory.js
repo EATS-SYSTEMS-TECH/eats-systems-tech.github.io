@@ -534,6 +534,12 @@ export function createPlatformAdminDirectory({
         productCounts = data.productCounts;
         renderProductFilters();
       }
+      if (!Object.keys(productCounts).length && selectedProduct !== "all") {
+        const overview = await getPlatformDirectory(user, "all", undefined, "all");
+        if (closed || epoch !== generation) return;
+        productCounts = overview.productCounts ?? {};
+        renderProductFilters();
+      }
       renderCounts(data.counts);
       if (selected === "organizations") {
         const organizations = await getPlatformOrganizationOverview(user, selectedProduct);
