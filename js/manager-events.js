@@ -239,41 +239,57 @@ export function createManagerEvents({
     }
     const card = el("div", undefined, "manager-event-card");
     const head = el("div", undefined, "manager-event-header");
-    head.append(el("h3", copy.title), el("span", countLabel(table.items.length), "manager-event-count"));
+    const heading = el("div", undefined, "manager-event-heading");
+    heading.append(el("span", lang === "he" ? "תכנון שבועי" : "Weekly planner", "manager-event-eyebrow"), el("h3", copy.title));
+    const capacity = el("div", undefined, "manager-event-capacity");
+    const meter = el("meter"); meter.min = 0; meter.max = limit; meter.value = table.items.length;
+    meter.setAttribute("aria-label", countLabel(table.items.length));
+    capacity.append(el("span", countLabel(table.items.length), "manager-event-count"), meter);
+    head.append(heading, capacity);
     card.append(head, el("p", copy.help, "manager-event-help"));
     const legend = el("div", undefined, "manager-event-legend");
     for (const [type, label] of [["open", copy.open], ["close", copy.close]]) legend.append(el("span", label, `is-${type}`));
+    const once = el("span", copy.once, "is-once"); legend.append(once);
     card.append(legend);
     const week = decodeEventWeek(rows().filter((row) => row.length < 5 || row[4] < table.today + 7));
     const chart = el("div", undefined, "manager-event-week");
     const axisRow = el("div", undefined, "manager-event-day"); axisRow.append(el("span"), axis(), el("span")); chart.append(axisRow);
     week.forEach((blocks, day) => {
       const row = el("div", undefined, "manager-event-day");
-      const dayLabel = el("span", copy.short[day], "manager-event-day-label");
+      const dayLabel = el("span", undefined, "manager-event-day-label");
+      dayLabel.append(el("span", copy.short[day], "manager-event-day-short"), el("span", copy.days[day], "manager-event-day-full"));
       const open = action("", () => openEditor(day), "manager-event-day-track");
       open.dataset.eventFocus = `day-track-${day}`;
       open.setAttribute("aria-label", `${copy.edit} ${copy.days[day]}${blocks.length ? ": " + blocks.map(describe).join(", ") : ". " + copy.empty}`);
       open.append(timeline(blocks, { day })); open.disabled = busy;
-      const edit = action("✎", () => openEditor(day), "manager-event-edit");
+      const edit = action("", () => openEditor(day), "manager-event-edit");
+      const pencil = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      pencil.setAttribute("viewBox", "0 0 24 24"); pencil.setAttribute("width", "18"); pencil.setAttribute("height", "18");
+      pencil.setAttribute("fill", "none"); pencil.setAttribute("stroke", "currentColor"); pencil.setAttribute("stroke-width", "1.7"); pencil.setAttribute("aria-hidden", "true");
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path"); path.setAttribute("d", "m15 5 4 4M4 20l4-1L20 7a2.8 2.8 0 0 0-4-4L4 15z"); pencil.append(path); edit.append(pencil);
       edit.dataset.eventFocus = `day-edit-${day}`;
       edit.setAttribute("aria-label", `${copy.edit} ${copy.days[day]}`); edit.disabled = busy;
       row.append(dayLabel, open, edit); chart.append(row);
     });
     card.append(chart); section.append(card);
+    const controls = el("div", undefined, "manager-event-global-actions");
+    controls.append(el("h4", lang === "he" ? "הגדרות לכל האירועים" : "All-event settings"));
     if (typeof table.swapContacts === "boolean") {
-      const options = el("label", undefined, "manager-event-options manager-event-card");
+      const options = el("label", undefined, "manager-event-options");
       const text = el("span"); text.append(el("strong", copy.swap), el("small", copy.swapHelp));
       const toggle = el("input"); toggle.type = "checkbox"; toggle.checked = table.swapContacts;
       toggle.dataset.eventFocus = "options";
       toggle.disabled = busy; toggle.addEventListener("change", () => void mutate("ADMIN_SET_EVENT_OPTIONS", { swapContacts: toggle.checked }));
-      options.append(text, toggle); section.append(options);
+      options.append(text, toggle); controls.append(options);
     }
     const clear = action(copy.clear, async () => {
       if (!busy && await confirm(copy.clearConfirm) && alive()) await mutate("ADMIN_CLEAR_EVENTS", {});
     }, "is-danger");
     clear.disabled = busy || table.items.length === 0;
     clear.dataset.eventFocus = "clear";
-    section.append(clear); renderNotice(section);
+    const danger = el("div", undefined, "manager-event-clear-row");
+    danger.append(el("p", lang === "he" ? "מחיקה מסירה את כל האירועים השמורים. נבקש אישור לפני ביצוע." : "Remove every saved event. Confirmation is required before deletion.", "manager-event-help"), clear);
+    controls.append(danger); section.append(controls); renderNotice(section);
     if (focus) section.querySelector(`[data-event-focus='${focus}']`)?.focus();
   }
 

@@ -1,17 +1,18 @@
 /* The mobile event planner's green/red timelines, adapted to keyboard and web. */
-.manager-events { display:grid;gap:16px;color:#0f172a;min-width:0 }
-.manager-event-card { display:grid;gap:18px;padding:22px;border:1px solid #e2e8f0;border-radius:22px;background:#fff;min-width:0 }
+.manager-events { display:grid;gap:20px;color:#0f172a;min-width:0 }
+.manager-event-card { display:grid;gap:22px;padding:28px;border:1px solid #e1e7ef;border-radius:24px;background:linear-gradient(160deg,#fff 65%,#fafbfe);min-width:0;box-shadow:0 8px 32px #16264405 }
 .manager-event-header { display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap }
-.manager-event-header h3 { margin:0;font-size:1.15rem }
-.manager-event-count { background:#eff6ff;color:#1d4ed8;padding:6px 12px;border-radius:99px;font-size:.8rem;font-variant-numeric:tabular-nums }
+.manager-event-header h3 { margin:0;font-size:1.3rem;letter-spacing:-.02em }
+.manager-event-count { background:#fff4ec;color:#943a13;padding:7px 12px;border-radius:99px;font-size:.8rem;font-variant-numeric:tabular-nums }
 .manager-event-help { margin:0;color:#64748b;font-size:.85rem;line-height:1.65 }
 .manager-event-legend { display:flex;gap:20px;flex-wrap:wrap;font-size:.85rem }
 .manager-event-legend span { display:flex;align-items:center;gap:8px }
 .manager-event-legend span:before { content:"";width:13px;height:13px;border-radius:4px;background:#16a34a }
 .manager-event-legend .is-close:before { background:#dc2626 }
-.manager-event-week { display:grid;gap:10px;min-width:0 }
-.manager-event-day { display:grid;grid-template-columns:44px minmax(0,1fr) 38px;gap:10px;align-items:center;min-width:0 }
-.manager-event-day-label { font-size:.83rem;font-weight:650 }
+.manager-event-week { display:grid;gap:4px;min-width:0;padding-block-start:12px;border-top:1px solid #edf0f5 }
+.manager-event-day { display:grid;grid-template-columns:90px minmax(0,1fr) 44px;gap:14px;align-items:center;min-width:0 }
+.manager-event-day-label { font-size:.83rem;font-weight:650;color:#44546b }
+.manager-event-day-short { display:none }
 .manager-event-button { min-height:44px;border:1px solid #dce4ef;border-radius:13px;background:#fff;color:#0f172a;cursor:pointer;font:inherit;padding:9px 15px;line-height:1.35;transition:background .15s,color .15s,border-color .15s }
 .manager-event-button:hover { background:#0b0b0c;color:white;border-color:#0b0b0c }
 .manager-event-button:focus-visible,.manager-event-block:focus-visible { outline:3px solid #2563eb;outline-offset:3px }
@@ -19,12 +20,12 @@
 .manager-event-button:disabled:hover { background:#fff;color:#0f172a;border-color:#dce4ef }
 .manager-event-day-track { border:0;background:transparent;padding:7px 0;min-height:44px;min-width:0 }
 .manager-event-day-track:hover { background:transparent }
-.manager-event-edit { width:38px;min-height:38px;padding:0;color:#2563eb;background:#eff6ff;border-color:transparent }
+.manager-event-edit { display:grid;place-items:center;width:44px;min-height:44px;padding:0;color:#475569;background:#fff;border-color:#e2e8f0 }
 .manager-event-axis { height:19px;position:relative;direction:ltr;font-size:.65rem;color:#64748b;font-variant-numeric:tabular-nums }
 .manager-event-axis span { position:absolute;transform:translateX(-50%);top:1px }
 .manager-event-axis span:first-child { transform:none }
 .manager-event-axis span:last-child { transform:translateX(-100%) }
-.manager-event-track { position:relative;direction:ltr;height:28px;border:1px solid #e2e8f0;border-radius:10px;background:#f1f5f9;isolation:isolate }
+.manager-event-track { position:relative;direction:ltr;height:30px;border:1px solid #e2e8f0;border-radius:9px;background:#f4f6fa;isolation:isolate }
 .manager-event-track.is-editor { height:74px;touch-action:none;margin-block:10px }
 .manager-event-grid { position:absolute;top:0;bottom:0;width:1px;background:#dce3ec;pointer-events:none }
 .manager-event-block { position:absolute;top:0;bottom:0;border-radius:8px;background:#16a34a;min-width:1px;z-index:1 }
@@ -38,10 +39,10 @@
 .manager-event-track.is-editor .manager-event-block:before { left:4px }
 .manager-event-track.is-editor .manager-event-block:after { right:4px }
 .manager-event-now { position:absolute;top:-5px;bottom:-5px;left:0;width:2px;border-radius:2px;background:#2563eb;pointer-events:none;z-index:3 }
-.manager-event-options { display:flex;align-items:center;justify-content:space-between;gap:20px }
+.manager-event-options { display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px;background:#f8fafc;border:1px solid #e8edf4;border-radius:16px;cursor:pointer;min-height:76px;box-sizing:border-box }
 .manager-event-options span { display:grid;gap:5px }
 .manager-event-options small { color:#64748b;line-height:1.5 }
-.manager-event-options input { width:22px;height:22px;accent-color:#2563eb;flex-shrink:0 }
+.manager-event-options input { width:24px;height:24px;accent-color:#a63b10;flex-shrink:0 }
 .manager-event-button.is-danger { color:#b91c1c;border-color:#fecaca }
 .manager-event-button.is-danger:hover { color:#fff;background:#991b1b;border-color:#991b1b }
 .manager-event-trash { display:grid;place-items:center;width:44px;padding:0 }
@@ -52,9 +53,9 @@
 .manager-events-dialog { width:min(740px,calc(100% - 32px));max-width:none;max-height:calc(100dvh - 40px);overflow:auto;padding:0;border:1px solid #e2e8f0;border-radius:25px;background:#fff;color:#0f172a;box-shadow:0 32px 100px #0f172a35 }
 .manager-events-dialog::backdrop { background:#0f172a70;backdrop-filter:blur(5px) }
 .manager-event-editor { display:grid;gap:18px;padding:26px;min-width:0 }
-.manager-event-modes { display:flex;gap:8px;overflow-x:auto;padding:3px 3px 8px;scrollbar-width:thin }
-.manager-event-modes .manager-event-button { flex-shrink:0;min-height:36px;font-size:.8rem;border-radius:99px }
-.manager-event-modes [aria-pressed="true"] { background:#2563eb;color:#fff;border-color:#2563eb }
+.manager-event-modes { display:flex;gap:8px;overflow-x:auto;padding:6px 6px 10px;background:#f7f9fc;border-radius:16px;scrollbar-width:thin }
+.manager-event-modes .manager-event-button { flex-shrink:0;min-height:44px;font-size:.8rem;border-radius:99px }
+.manager-event-modes [aria-pressed="true"] { background:#0f172a;color:#fff;border-color:#0f172a }
 .manager-event-palette { display:flex;gap:12px }
 .manager-event-palette .manager-event-button { flex:1;min-height:52px;font-weight:700 }
 .manager-event-palette .is-open { background:#dcfce7;color:#15803d;border-color:#86efac }
@@ -72,15 +73,41 @@
 .manager-event-copy { min-width:0;margin:0;padding:15px;border:1px solid #e2e8f0;border-radius:18px;display:grid;gap:12px }
 .manager-event-copy legend { font-weight:700;padding-inline:5px;font-size:.9rem }
 .manager-event-copy-days { display:flex;flex-wrap:wrap;gap:8px }
-.manager-event-copy-days label { display:flex;align-items:center;gap:6px;min-height:40px;padding:6px 10px;border:1px solid #e2e8f0;border-radius:12px;cursor:pointer;font-size:.8rem }
+.manager-event-copy-days label { display:flex;align-items:center;gap:6px;min-height:44px;padding:6px 10px;border:1px solid #e2e8f0;border-radius:12px;cursor:pointer;font-size:.8rem }
 .manager-event-copy-days input { width:18px;height:18px;accent-color:#2563eb }
 .manager-event-footer { display:flex;gap:12px;position:sticky;bottom:-26px;background:#fffffff5;backdrop-filter:blur(10px);padding-block:14px;margin-block:-5px -26px }
 .manager-event-footer button { flex:1 }
+
+.manager-event-heading { display:grid;gap:7px }
+.manager-event-eyebrow { color:#9b451e;font-size:.72rem;font-weight:700;letter-spacing:.03em }
+.manager-event-capacity { display:grid;gap:7px;min-width:120px;text-align:center }
+.manager-event-capacity meter { width:100%;height:6px;border:0;border-radius:99px;background:#eceff5;appearance:none }
+.manager-event-capacity meter::-webkit-meter-bar { background:#eceff5;border:0;border-radius:99px }
+.manager-event-capacity meter::-webkit-meter-optimum-value { background:#a63b10;border-radius:99px }
+.manager-event-capacity meter::-moz-meter-bar { background:#a63b10;border-radius:99px }
+.manager-event-legend { gap:10px 18px }
+.manager-event-legend span { padding:6px 10px;border-radius:9px;background:#f8fafc;font-size:.78rem;color:#475569 }
+.manager-event-legend .is-once:before { border:2px dashed #64748b;background:transparent;box-sizing:border-box }
+.manager-event-day:has(.manager-event-day-track):hover { background:#f5f7fb;border-radius:12px }
+.manager-event-day-track:hover .manager-event-track { border-color:#94a3b8 }
+.manager-event-global-actions { display:grid;gap:16px;padding:22px;border:1px solid #e2e8f0;border-radius:22px;background:#fff }
+.manager-event-global-actions h4 { margin:0;font-size:.92rem }
+.manager-event-clear-row { display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid #edf0f5;padding-block-start:18px }
+.manager-event-clear-row button { flex-shrink:0 }
+.manager-event-editor > .manager-event-header { padding-block-end:16px;border-bottom:1px solid #edf0f5 }
+.manager-event-copy-days label:has(input:checked) { background:#fff4ec;border-color:#e8b597;color:#943a13 }
+.manager-event-copy-days label:has(input:focus-visible) { outline:3px solid #2563eb;outline-offset:2px }
+.manager-event-copy-days label:has(input:disabled) { cursor:default;opacity:.6 }
+
 @media(max-width:520px) {
-  .manager-event-card { padding:16px;gap:15px;border-radius:18px }
-  .manager-event-day { grid-template-columns:30px minmax(0,1fr) 34px;gap:6px }
+  .manager-event-card { padding:16px;gap:18px;border-radius:20px }
+  .manager-event-day { grid-template-columns:28px minmax(0,1fr) 44px;gap:8px }
   .manager-event-day-label { font-size:.72rem }
-  .manager-event-edit { width:34px;min-height:36px }
+  .manager-event-day-short { display:inline }
+  .manager-event-day-full { display:none }
+  .manager-event-global-actions { padding:16px }
+  .manager-event-clear-row { align-items:stretch;flex-direction:column }
+  .manager-event-capacity { min-width:104px }
   .manager-events-dialog { width:calc(100% - 16px);max-height:calc(100dvh - 20px);border-radius:21px }
   .manager-event-editor { padding:18px;gap:15px }
   .manager-event-selected { padding:12px }

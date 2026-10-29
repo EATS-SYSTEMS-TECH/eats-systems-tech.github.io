@@ -108,3 +108,36 @@ test("Manager event editor prevents overlap writes, handles stale revisions, and
     assert.deepEqual(errors, []);
   } finally { await page.close(); }
 });
+
+test("Event overview keeps readable controls and destructive confirmation on narrow and wide screens", async (t) => {
+  const { origin, browser } = await startSite(t);
+  for (const language of ["he", "en"]) for (const width of [320, 768, 1440]) {
+    const { page, errors } = await setup(browser, origin, { language, width });
+    try {
+      const meter = page.getByRole("meter");
+      assert.equal(await meter.getAttribute("max"), "50");
+      assert.equal(await meter.getAttribute("value"), "2");
+      const edit = page.locator(".manager-event-edit").first();
+      const bounds = await edit.boundingBox();
+      assert.ok(bounds.width >= 44 && bounds.height >= 44, "day editing meets 44px target size");
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
+      if (process.env.WIFIGATE_REVIEW_DIR) await page.screenshot({ path: path.join(process.env.WIFIGATE_REVIEW_DIR, `manager-events-overview-${language}-${width}.png`), fullPage: true });
+      await page.evaluate(() => { window.events.dispose(); });
+      // Recreate with a cancelled destructive confirmation: no command may be sent.
+      await page.evaluate(async ({ language }) => {
+        const { createManagerEvents } = await import("/js/manager-events.js");
+        window.events = createManagerEvents({ root: document.querySelector("#root"), language, table: window.eventTable,
+          confirm: async () => false, command: async (...args) => { window.eventCalls.push(args); } });
+      }, { language });
+      await page.locator("[data-event-focus='clear']").click();
+      assert.deepEqual(await page.evaluate(() => window.eventCalls), []);
+      assert.equal(await page.locator(".manager-event-day-track").count(), 7);
+      await page.locator(".manager-event-day-track").first().press("Enter");
+      await page.locator("dialog[open]").waitFor();
+      await page.keyboard.press("Escape");
+      assert.equal(await page.locator("dialog").count(), 0);
+      assert.equal(await page.locator(".manager-event-day-track").first().evaluate(node => node === document.activeElement), true);
+      assert.deepEqual(errors, []);
+    } finally { await page.close(); }
+  }
+});
