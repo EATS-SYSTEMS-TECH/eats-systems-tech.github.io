@@ -152,7 +152,7 @@ for (const view of workspaceViews) {
   }
   const button = viewButton(view);
   buttons.set(view.id, button);
-  (view.placement === "platform" ? (platformNav ?? nav) : nav).append(button);
+  if (view.placement !== "platform") nav.append(button);
 }
 
 if (tabbar) {
@@ -422,3 +422,9 @@ mobile.addEventListener?.("change", (event) => {
   if (!event.matches) setMenu(false);
 });
 refresh();
+
+if (workspaceLocation(new URL(location.href), "home") === "overview") {
+ const query = new URLSearchParams({ product: "host" });
+ if (new URLSearchParams(location.search).get("lang") === "he") query.set("lang", "he");
+ location.replace("/dashboard/platform/?" + query);
+}

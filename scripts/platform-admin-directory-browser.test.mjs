@@ -284,57 +284,22 @@ test("Pay management requests only Pay and shows unavailable billing without a f
       },
     });
   });
-  await fixture.page.goto(origin + "/dashboard/pay/");
+  await fixture.page.goto(origin + "/dashboard/platform/?product=pay");
   const root = fixture.page.locator("#platform-admin-management");
   await root.locator(".platform-admin-person").waitFor();
   assert.equal(product, "pay");
+  await root.locator(".platform-admin-person-summary").click();
   assert.equal(await root.locator("tbody tr").count(), 1);
   assert.match(await root.locator("tbody").textContent(), /Unavailable/);
   assert.doesNotMatch(await root.locator("tbody").textContent(), /0\.00/);
 });
 
-test("Host administration loads product plans only when its costs section is opened", async (t) => {
-  const { origin, browser } = await startSite(t);
-  const fixture = await scenario(browser, {
-    admin: true,
-    enrolled: true,
-    verified: true,
-  });
-  t.after(() => fixture.context.close());
-  const requests = [];
-  await fixture.context.route("**/api/v1/platform/directory?*", (route) => {
-    requests.push(new URL(route.request().url()).searchParams.get("product"));
-    return route.fulfill({
-      json: {
-        counts: { admins: 1, users: 1, total: 2 },
-        items: [{ ...person, products: { host: person.products.host } }],
-        nextCursor: null,
-      },
-    });
-  });
-  await fixture.page.goto(origin + "/dashboard/host/overview/?lang=he");
-  const root = fixture.page.locator("#admin-overview");
-  await root
-    .getByRole("heading", {
-      name: "ניהול פלטפורמה · WIFIGATE Host",
-      exact: true,
-    })
-    .waitFor();
-  assert.equal(requests.length, 0);
-  await root
-    .locator("summary")
-    .filter({ hasText: "תוכניות ועלויות משתמשי Host" })
-    .click();
-  await root.locator(".platform-admin-person").waitFor();
-  assert.deepEqual(requests, ["host"]);
-  assert.equal(
-    await root.locator(".platform-admin-person tbody tr").count(),
-    1,
-  );
-  assert.match(
-    await root.locator(".platform-admin-person").textContent(),
-    /80\.00/,
-  );
+test("Host administration uses the central directory with Host selected", async (t) => {
+ const {origin,browser}=await startSite(t);const f=await scenario(browser,{platformRole:"admin",admin:true,enrolled:true,verified:true});t.after(()=>f.context.close());
+ const products=[];await f.context.route("**/api/v1/platform/directory?*",r=>{products.push(new URL(r.request().url()).searchParams.get("product"));return r.fulfill({json:{counts:{admins:1,users:1,total:2},items:[{...person,products:{host:person.products.host}}],nextCursor:null}});});
+ await f.page.goto(origin+"/dashboard/host/overview/?lang=he");await f.page.locator(".platform-admin-person").waitFor();
+ assert.deepEqual(products,["host"]);assert.equal(new URL(f.page.url()).pathname,"/dashboard/platform/");
+ await f.page.locator(".platform-admin-person-summary").click();assert.match(await f.page.locator("tbody").innerText(),/80\.00/);
 });
 
 test("For Business cards filter in place, retain the role and reset pagination", async (t) => {

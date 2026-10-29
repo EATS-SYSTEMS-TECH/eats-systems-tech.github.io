@@ -349,14 +349,16 @@ test("Pay platform entry requires global WIFIGATE admin plus verified MFA and ha
       const { page, errors } = await setup(t, browser, options);
       await enter(page, origin);
       const allowed = options.platformRole === "admin" && options.verified;
-      assert.equal(await page.locator(".pay-management-entry").count(), allowed ? 1 : 0);
+      assert.equal(await page.locator(".pay-management-entry").count(), 0);
       assert.equal(await page.locator("#platform-admin-management").isVisible(), false);
       await page.goto(origin + "/dashboard/pay/platform/");
       if (allowed) {
         await page.locator("#platform-admin-management h2").waitFor();
-        assert.equal(await page.locator(".pay-management-back").getAttribute("href"), "/dashboard/pay/");
+        assert.equal(new URL(page.url()).pathname, "/dashboard/platform/");
+        assert.equal(new URL(page.url()).searchParams.get("product"), "pay");
       } else {
-        await page.getByText("This page requires a verified WIFIGATE administrator.").waitFor();
+        if (options.platformRole !== "admin") await page.getByText("This page is available to WIFIGATE administrators only.").waitFor();
+        else await page.locator("#platform-security").waitFor();
         assert.equal(await page.locator("#platform-admin-management").isVisible(), false);
       }
       assert.deepEqual(errors, []);

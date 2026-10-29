@@ -1,5 +1,6 @@
 import {
   getPlatformDirectory,
+  getPlatformOrganizationOverview,
   getPlatformDirectoryFinancials,
 } from "./api/index.js";
 import {
@@ -30,7 +31,7 @@ export function createPlatformAdminDirectory({
   let closed = false,
     generation = 0,
     selected = "all",
-    selectedProduct = product,
+    selectedProduct = product === "all" && ["host","pay","manager"].includes(new URLSearchParams(location.search).get("product")) ? new URLSearchParams(location.search).get("product") : product,
     productCounts = {},
     financialGeneration = 0,
     next;
@@ -61,6 +62,7 @@ export function createPlatformAdminDirectory({
     ["all", t("כל החשבונות", "All accounts")],
     ["admin", `${productName} Admins`],
     ["user", `${productName} Users`],
+    ["organizations", t("ארגונים", "Organizations")],
   ]) {
     const button = element("button", label, "platform-button");
     button.type = "button";
@@ -71,7 +73,7 @@ export function createPlatformAdminDirectory({
     });
     filters.append(button);
   }
-  const businessTitle = element("h3", "For Business");
+  const businessTitle = element("h3", t("בחרו מסלול לניהול", "Choose a product to manage"));
   const resetProduct = element(
     "button",
     t("כל המסלולים", "All plans"),
@@ -93,6 +95,7 @@ export function createPlatformAdminDirectory({
         label,
         count,
         element("small", t("חשבונות עם גישה", "Provisioned accounts")),
+        element("span", t("בחירת מסלול ←", "Select product →"), "platform-admin-product-select"),
       );
       button.addEventListener("click", () => selectProduct(id));
       business.append(button);
@@ -126,7 +129,7 @@ export function createPlatformAdminDirectory({
   );
   productHeading.append(businessTitle);
   if (product === "all") productHeading.append(resetProduct);
-  products.append(productHeading, business);
+  products.append(element("span", "For Business", "platform-admin-products-eyebrow"), productHeading, element("p", t("בחרו מסלול כדי להציג את החשבונות והארגונים שלו. אפשר להחליף מסלול בכל רגע.", "Select a product to view its accounts and organizations. You can switch at any time."), "platform-admin-products-help"), business);
   const listHeading = element("h3", t("משתמשי הפלטפורמה", "Platform accounts"));
   const listToolbar = element("div", null, "platform-admin-list-toolbar");
   listToolbar.append(listHeading);
@@ -191,9 +194,9 @@ export function createPlatformAdminDirectory({
     "platform-admin-footnote",
   );
   root.replaceChildren(
+    products,
     header,
     counts,
-    products,
     listToolbar,
     ...(product === "all" ? [revenue] : []),
     hint,
@@ -229,7 +232,9 @@ export function createPlatformAdminDirectory({
         `${nameFor(id)} · ${Number.isInteger(value) ? value : t("לא זמין", "Unavailable")} ${t("חשבונות עם גישה", "provisioned accounts")}`,
       );
     }
-    if (selectedProduct === "all") {
+    if (selected === "organizations") {
+      listHeading.textContent = t("ארגוני הפלטפורמה", "Platform organizations") + (selectedProduct === "all" ? "" : " · " + nameFor(selectedProduct));
+    } else if (selectedProduct === "all") {
       listHeading.textContent = t("משתמשי הפלטפורמה", "Platform accounts");
     } else {
       const name = element("bdi", nameFor(selectedProduct));
@@ -240,9 +245,22 @@ export function createPlatformAdminDirectory({
       );
     }
     for (const button of filters.children) {
-      if (button.dataset.role !== "all")
+      if (!["all", "organizations"].includes(button.dataset.role))
         button.textContent = `${nameFor(selectedProduct)} ${button.dataset.role === "admin" ? "Admins" : "Users"}`;
     }
+  }
+
+  function organizationCard(organization) {
+    const card = element("article", null, "platform-admin-organization");
+    const artwork = element("span", "", "platform-admin-organization-icon");
+    artwork.setAttribute("aria-hidden", "true");
+    artwork.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21V4h10v17M14 10h6v11M2 21h20M7 8h4M7 12h4M7 16h4M17 14h1M17 18h1"/></svg>';
+    const identity=element("div");identity.append(element("h4",organization.name),element("small",t("ארגון", "Organization")));
+    const products=element("div",null,"platform-admin-organization-products");
+    const state = value => ({active:t("פעיל","Active"),pending:t("ממתין","Pending"),blocked:t("חסום","Blocked"),expired:t("פג תוקף","Expired")})[value] || t("לא זמין","Unavailable");
+    for(const [id,value] of Object.entries(organization.products)) products.append(element("span", `${nameFor(id)} · ${state(value)}`));
+    card.append(artwork,identity,element("span",state(organization.status),"platform-admin-organization-status"),products);
+    return card;
   }
 
   function personCard(person) {
@@ -489,7 +507,12 @@ export function createPlatformAdminDirectory({
     if (!append) {
       rows.replaceChildren();
       renderCounts();
-      if (product === "all") void loadFinancials();
+      revenue.hidden = selected === "organizations";
+      hint.hidden = selected === "organizations";
+      footnote.hidden = selected === "organizations";
+      listToolbar.querySelector(".platform-admin-invite")?.toggleAttribute("hidden", selected === "organizations");
+      if (product === "all" && selected !== "organizations") void loadFinancials();
+      else financialGeneration++;
       next = null;
     }
     more.hidden = true;
@@ -505,7 +528,7 @@ export function createPlatformAdminDirectory({
     try {
       const data = await getPlatformDirectory(
         user,
-        selected,
+        selected === "organizations" ? "all" : selected,
         append ? next : undefined,
         selectedProduct,
       );
@@ -515,6 +538,14 @@ export function createPlatformAdminDirectory({
         renderProductFilters();
       }
       renderCounts(data.counts);
+      if (selected === "organizations") {
+        const organizations = await getPlatformOrganizationOverview(user, selectedProduct);
+        if (closed || epoch !== generation) return;
+        rows.append(...organizations.items.map(organizationCard));
+        more.hidden = true;
+        status.textContent = organizations.items.length ? t(`${organizations.items.length} ארגונים בסינון הנבחר`, `${organizations.items.length} organizations in this selection`) : t("לא נמצאו ארגונים במסלול שנבחר.", "No organizations found for this product.");
+        return;
+      }
       rows.append(...data.items.map(personCard));
       next = data.nextCursor;
       more.hidden = !next;

@@ -207,7 +207,7 @@ export function createManagerDashboard({
     event.preventDefault();
     void task(() => changeManagement(true));
   });
-  root.append(platformEntry);
+  // Global platform management is available from the main WIFIGATE dashboard.
   const examples = createManagerExamples({
     language,
     dialogs,
@@ -409,7 +409,7 @@ export function createManagerDashboard({
     root.dataset.management = String(managementMode);
     shell.dataset.mode = managementMode ? "management" : "workspace";
     nav.hidden = managementMode;
-    platformEntry.hidden = managementMode || profile.role !== "admin";
+    platformEntry.hidden = true;
     nav.replaceChildren(title);
     const roleList = node("div", undefined, "manager-sidebar-roles");
     for (const role of new Set(

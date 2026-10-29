@@ -2,159 +2,19 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { startSite, scenario } from "./platform-test-fixtures.mjs";
 
-test("published Manager page wires the private profile into the header without duplicating account details", async (t) => {
-  const { origin, browser } = await startSite(t);
-  for (const width of [320, 390, 1440])
-    await t.test(`${width}px`, async (t) => {
-      const fixture = await scenario(browser, {
-        manager: "active",
-        enrolled: true,
-        verified: true,
-        viewport: { width, height: 1000 },
-      });
-      t.after(() => fixture.context.close());
-      const grants = [];
-      await fixture.context.route("**/api/v1/manager/**", (route) => {
-        const path = new URL(route.request().url()).pathname;
-        if (path.endsWith('/admin/access') && route.request().method() === 'POST') grants.push(route.request().postDataJSON());
-        return route.fulfill({
-          json: path.endsWith("/me")
-            ? {
-                user: {
-                  uid: "fixture-user",
-                  name: "Manager operator",
-                  email: "operator@example.test",
-                },
-                role: "admin",
-                roles: ["admin"],
-                account: null,
-                organizations: [],
-              }
-            : path.includes('/admin/directory')
-              ? {items:[{id:'fixture-user',uid:'fixture-user',email:'operator@example.test',role:'admin',status:'active'}],nextCursor:null}
-              : path.endsWith('/overview')
-                ? { admins: 1, users: 4, organizationAdmins: 2, organizations: 3 }
-                : {items:[],nextCursor:null},
-        });
-      });
-      const page = fixture.page;
-      page.setDefaultTimeout(7000);
-      await page.goto(origin + "/dashboard/manager/?lang=he");
-      const platformEntry = page.locator(".manager-platform-entry");
-      await platformEntry.waitFor();
-      assert.equal(await page.locator(".manager-sidebar-roles").innerText(), "WIFIGATE Manager admin");
-      const originalMenu = await page.locator('.manager-nav button').allTextContents();
-      const entryBox = await platformEntry.boundingBox();
-      assert.ok(entryBox.x + entryBox.width > width - 30, "Hebrew management entry is at the bottom right");
-      assert.equal(await page.locator('.manager-platform-header').isVisible(), false);
-      await platformEntry.click();
-      await page.locator(".manager-overview-card").last().waitFor();
-      const infoStyle = await page.locator('.manager-count-info').evaluate(el => { const s=getComputedStyle(el); return {width:s.width,height:s.height,background:s.backgroundColor,radius:s.borderRadius}; });
-      assert.deepEqual(infoStyle, {width:'32px',height:'32px',background:'rgb(255, 255, 255)',radius:'50%'});
-      assert.deepEqual(await page.locator('.manager-nav button').allTextContents(), originalMenu);
-      assert.equal(await platformEntry.isHidden(), true);
-      assert.match(page.url(), /\/dashboard\/manager\/platform\/\?lang=he$/);
-      assert.equal(await page.locator('.manager-nav').isHidden(), true);
-      assert.equal(await platformEntry.getAttribute('aria-current'), null);
-      const tabs = page.locator('.manager-platform-tabs');
-      assert.equal(await tabs.getByRole('button').count(), 3);
-      assert.equal(await tabs.getByText('מנהלי ארגונים',{exact:true}).count(), 0);
-      assert.equal(await tabs.locator('[aria-current="page"]').count(), 0);
-      assert.equal(await page.locator('.manager-platform-home').getAttribute('aria-current'), 'page');
-      assert.equal(await page.locator('.manager-platform-title').innerText(), 'ניהול פלטפורמה');
-      assert.equal(await tabs.getByRole('button', {name:'סקירה',exact:true}).count(), 0);
-      assert.equal(await page.getByText('תוכניות ועלויות משתמשי Manager',{exact:true}).count(), 0);
-      await page.locator('.manager-overview-card').first().hover();
-      assert.equal(await page.locator('.manager-overview-card').first().locator('strong').evaluate(el => getComputedStyle(el).color), 'rgb(255, 255, 255)');
-      await tabs.getByRole('button', {name:'מנהלי פלטפורמה',exact:true}).click();
-      await page.locator('.manager-directory-row').last().waitFor();
-      assert.equal(await tabs.locator('[aria-current="page"]').innerText(), 'מנהלי פלטפורמה');
-      assert.equal(await tabs.locator('[aria-current="page"]').evaluate(el => getComputedStyle(el).backgroundColor), 'rgb(23, 27, 33)');
-      assert.equal(await tabs.locator('[aria-current="page"]').evaluate(el => getComputedStyle(el).color), 'rgb(255, 255, 255)');
-      assert.equal(await page.locator('.manager-platform-home').getAttribute('aria-current'), null);
-      await page.locator('.manager-platform-home').focus();
-      await page.keyboard.press('Enter');
-      await page.locator('.manager-overview-card').last().waitFor();
-      assert.equal(await tabs.locator('[aria-current="page"]').count(), 0);
-      assert.equal(await page.locator('.manager-platform-home').getAttribute('aria-current'), 'page');
-      await tabs.getByRole('button', {name:'מנהלי פלטפורמה',exact:true}).click();
-      await page.locator('.manager-directory-row').last().waitFor();
-      const createAdmin = page.getByRole('button', {name:'הוספת Manager admin',exact:true});
-      assert.equal(await page.locator('.manager-view form').count(),0);
-      const formBox = await createAdmin.boundingBox(), recordsBox = await page.locator('.manager-directory').boundingBox();
-      assert.ok(formBox.y + formBox.height <= recordsBox.y, 'administrator creation button precedes records');
-      await createAdmin.click();
-      let grantDialog = page.getByRole('dialog',{name:'הוספת Manager admin',exact:true});
-      await grantDialog.getByLabel('אימייל מנהל מאומת',{exact:true}).waitFor();
-      await page.keyboard.press('Escape');
-      assert.deepEqual(grants,[]);
-      await createAdmin.click();
-      grantDialog = page.getByRole('dialog',{name:'הוספת Manager admin',exact:true});
-      await grantDialog.getByLabel('אימייל מנהל מאומת',{exact:true}).fill('new-admin@example.test');
-      if (process.env.MANAGER_DIRECTORY_SCREENSHOTS)
-        await page.screenshot({path:`${process.env.MANAGER_DIRECTORY_SCREENSHOTS}/manager-add-admin-${width}.png`,fullPage:true});
-      await grantDialog.getByRole('button',{name:'הוספת Manager admin',exact:true}).click();
-      // The isolated auth fixture has no auth_time, so exercise its normal step-up flow.
-      await page.locator('#mfa-challenge input[name="code"]').fill('123456');
-      await page.locator('#mfa-challenge button[type="submit"]').click();
-
-      await grantDialog.waitFor({state:'hidden'});
-      assert.deepEqual(grants,[{email:'new-admin@example.test',role:'admin',status:'active'}]);
-      await page.locator('.manager-directory-row').last().waitFor();
-      assert.deepEqual(await page.locator('.manager-nav button').allTextContents(), originalMenu);
-      assert.equal(await platformEntry.isHidden(), true);
-      await page.locator('.manager-workspace-back').click();
-      await page.locator('.manager-nav').getByRole('button', {name:'הארגונים שלי',exact:true}).click();
-      assert.equal(await page.locator('.manager-platform-header').isVisible(), false);
-      await platformEntry.click();
-      await page.locator('.manager-overview-card').last().waitFor();
-      assert.equal(await page.locator(".platform-heading").isVisible(), false);
-      assert.equal(await page.locator("#product-title").isVisible(), false);
-      const switcher = page.locator("#product-switcher-button");
-      assert.equal((await switcher.innerText()).trim(), "WIFIGATE Manager");
-      assert.equal(
-        await switcher.locator(".product-switcher__brand").isVisible(),
-        true,
-      );
-      assert.equal(
-        await switcher
-          .locator(".product-switcher__name")
-          .evaluate((el) => el.scrollWidth <= el.clientWidth),
-        true,
-      );
-      await switcher.click();
-      await page.locator("#product-switcher-list").waitFor();
-      await page.keyboard.press("Escape");
-      const reject = page.locator("[data-cookie-reject]");
-      if (await reject.isVisible()) await reject.click();
-      const panel = page.locator("#manager-profile-panel");
-      assert.equal(await panel.isVisible(), false);
-      assert.equal(await page.locator(".manager-identity").count(), 0);
-      await page.locator("#manager-profile-button").click();
-      await panel.getByText("Manager operator", { exact: true }).waitFor();
-      await panel.getByText("operator@example.test", { exact: true }).waitFor();
-      assert.equal(await panel.getByText("WIFIGATE Manager admin", {exact:true}).count(),0);
-      assert.equal(await page.locator("#platform-sign-out").isEnabled(), true);
-      assert.equal(
-        await page.evaluate(
-          () => document.documentElement.scrollWidth > innerWidth,
-        ),
-        false,
-      );
-      if (process.env.MANAGER_DIRECTORY_SCREENSHOTS)
-        await page.screenshot({
-          path: `${process.env.MANAGER_DIRECTORY_SCREENSHOTS}/manager-profile-he-${width}.png`,
-          fullPage: true,
-        });
-      await page.keyboard.press("Escape");
-      assert.equal(await panel.isVisible(), false);
-      if (process.env.MANAGER_DIRECTORY_SCREENSHOTS)
-        await page.screenshot({
-          path: `${process.env.MANAGER_DIRECTORY_SCREENSHOTS}/manager-header-he-${width}.png`,
-          fullPage: true,
-        });
-      assert.deepEqual(fixture.errors, []);
-    });
+test("Manager keeps its private profile and workspace without a separate platform-management entry",async t=>{
+ const {origin,browser}=await startSite(t);
+ for(const width of [320,390,1440]) await t.test(`${width}px`,async t=>{
+  const f=await scenario(browser,{manager:"active",enrolled:true,verified:true,viewport:{width,height:1000}});t.after(()=>f.context.close());
+  await f.context.route("**/api/v1/manager/**",r=>r.fulfill({json:new URL(r.request().url()).pathname.endsWith("/me")?{user:{uid:"fixture-user",email:"operator@example.test",name:"Manager operator"},role:"admin",roles:["admin"],account:null,organizations:[]}:{items:[],nextCursor:null}}));
+  await f.page.goto(origin+"/dashboard/manager/?lang=he");
+  await f.page.locator(".manager-sidebar-roles").waitFor();
+  assert.equal(await f.page.locator(".manager-platform-entry").count(),0);
+  assert.equal(await f.page.locator(".manager-platform-header").isVisible(),false);
+  await f.page.locator("#manager-profile-button").click();await f.page.locator("#manager-profile-panel").waitFor();
+  assert.equal(await f.page.locator(".manager-nav .manager-identity").count(),0);
+  assert.deepEqual(f.errors,[]);
+ });
 });
 
 test("Manager identity, platform overview and organization columns support scoped administration in Hebrew and English", async (t) => {
@@ -321,6 +181,7 @@ test("Manager identity, platform overview and organization columns support scope
             window.dashboard = createManagerDashboard({
               root: document.querySelector("#root"),
               user: { uid: "operator" },
+              management: role === "admin",
               language,
               api,
               onProfile: (profile) => window.profileMenu.update(profile),
@@ -334,10 +195,6 @@ test("Manager identity, platform overview and organization columns support scope
         }, language);
         const he = language === "he",
           nav = page.locator(".manager-nav");
-        await page
-          .locator(".manager-platform-entry")
-          .first()
-          .click();
         await page
           .locator(".manager-overview-grid .manager-overview-card")
           .last()

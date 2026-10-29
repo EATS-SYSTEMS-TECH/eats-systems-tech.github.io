@@ -84,3 +84,7 @@ export function changePlatformProductAccess(
     headers: { "Idempotency-Key": key },
   });
 }
+
+export function getPlatformOrganizationOverview(user: FirebaseUser, product = "all"): Promise<{items:{id:string;name:string;status:string;products:Partial<Record<ProductId,string>>}[];complete:true;basis:"provisioned-organizations"}> {
+ return authenticatedRequest(profileApi,user,{method:"GET",url:`/api/v1/platform/directory/organization-overview?${new URLSearchParams({product})}`});
+}
