@@ -143,6 +143,7 @@ test("My organizations explains purpose and team permissions directly below Exam
         await guide.locator("summary").focus();
         await page.keyboard.press("Enter");
         assert.equal(await guide.locator("ul > li:visible").count(), 3);
+        assert.equal(await guide.locator("li .manager-organization-benefit-icon svg[aria-hidden=true]").count(), 3);
         assert.match(
           await guide.innerText(),
           language === "he" ? /מהחשבון שלו/ : /their own account/,

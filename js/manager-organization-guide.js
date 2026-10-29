@@ -5,6 +5,18 @@ const node = (tag, text, className) => {
   return element;
 };
 
+const benefitIcon = (kind) => {
+  const ns = "http://www.w3.org/2000/svg", svg = document.createElementNS(ns, "svg");
+  for (const [name, value] of Object.entries({ viewBox:"0 0 24 24", width:"26", height:"26", fill:"none", stroke:"currentColor", "stroke-width":"1.65", "stroke-linecap":"round", "stroke-linejoin":"round", "aria-hidden":"true", focusable:"false" })) svg.setAttribute(name, value);
+  const shapes = {
+    systems: ["M4 3h6v6H4zM14 15h6v6h-6zM4 15h6v6H4zM14 3h6v6h-6z", "M7 9v6M17 9v6M10 6h4M10 18h4"],
+    team: ["M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M22 21v-2a4 4 0 0 0-3-3.87", "M16 3.13a4 4 0 0 1 0 7.75", "M13 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0"],
+    roles: ["M12 2 3 6v6c0 5 9 10 9 10s9-5 9-10V6z", "m8 12 3 3 5-6"],
+  };
+  for (const d of shapes[kind]) { const path = document.createElementNS(ns,"path"); path.setAttribute("d",d); svg.append(path); }
+  const wrap = node("span",undefined,"manager-organization-benefit-icon"); wrap.append(svg); return wrap;
+};
+
 /** Read-only introduction to the existing organization and membership model. */
 export function createManagerOrganizationGuide(language = "en") {
   const t = (he, en) => (language === "he" ? he : en);
@@ -26,8 +38,9 @@ export function createManagerOrganizationGuide(language = "en") {
     ),
   );
   const benefits = node("ul", undefined, "manager-organization-benefits");
-  for (const [title, description] of [
+  for (const [kind, title, description] of [
     [
+      "systems",
       t("כל המערכות במקום אחד", "Systems in one place"),
       t(
         "משייכים לארגון מערכות קיימות ורואים אותן יחד, למשל שער חניה ודלת כניסה של אותו בניין.",
@@ -35,6 +48,7 @@ export function createManagerOrganizationGuide(language = "en") {
       ),
     ],
     [
+      "team",
       t("ניהול משותף לצוות", "Shared team management"),
       t(
         "מזמינים אנשים לארגון כדי שיוכלו לפתוח את סביבת הניהול של המערכות המשויכות אליו, כל אחד מהחשבון שלו.",
@@ -42,6 +56,7 @@ export function createManagerOrganizationGuide(language = "en") {
       ),
     ],
     [
+      "roles",
       t("תפקידים ברורים", "Clear responsibilities"),
       t(
         "מנהלי הארגון יכולים להוסיף ולהסיר מנהלים ומשתמשים. משתמשי הארגון יכולים להיכנס לסביבות הניהול, ללא ניהול אנשי הארגון.",
@@ -50,7 +65,7 @@ export function createManagerOrganizationGuide(language = "en") {
     ],
   ]) {
     const item = node("li");
-    item.append(node("strong", title), node("p", description));
+    item.append(benefitIcon(kind), node("strong", title), node("p", description));
     benefits.append(item);
   }
   guide.append(benefits);
