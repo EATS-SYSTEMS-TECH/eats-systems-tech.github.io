@@ -4,6 +4,7 @@ const node = (tag, text, className) => {
   if (className) value.className = className;
   return value;
 };
+export const managerDefaultTimings = Object.freeze({pulseWidth1Millis:5000,timeBetweenPulses1Seconds:5,pulseWidth2Millis:5000,timeBetweenPulses2Seconds:5,pulseWidth3Millis:5000});
 export const managerOpeningMethods = Object.freeze([
   "PULSE", "PULSE_AFTER_PULSE", "PULSE_AFTER_PULSE_AFTER_PULSE", "TOGGLE", "PUSH_BUTTON",
 ]);
@@ -24,12 +25,12 @@ export function managerSettingsPayload(saved, draft, revision) {
   return payload;
 }
 export function renderManagerSettings({ root, language = "en", config, revision, onSave, confirm, errorText, isCurrent = () => true, commandLocked = false }) {
+  config = {command:"PULSE",...managerDefaultTimings,...config};
   const he = language === "he", t = (h, e) => he ? h : e;
   const form = node("form", undefined, "manager-form manager-settings-form");
   const methodCard = node("section", undefined, "manager-settings-card");
   const heading = node("h3", t("אופן פתיחה", "Opening method"));
-  const picker = node("fieldset", undefined, "manager-method-picker");
-  picker.append(node("legend", t("בחירת אופן פתיחה", "Choose an opening method")));
+  const picker = node("label", t("בחירת אופן פתיחה", "Choose an opening method"), "manager-method-dropdown");
   const choices = {
     PULSE: [t("פולס אחד", "Single pulse"), t("פולס יחיד להפעלת המערכת.", "A single pulse activates the system.")],
     PULSE_AFTER_PULSE: [t("שני פולסים", "Two pulses"), t("שני פולסים עם השהיה ביניהם.", "Two pulses with a delay between them.")],
@@ -37,21 +38,13 @@ export function renderManagerSettings({ root, language = "en", config, revision,
     TOGGLE: ["Toggle", t("מעבר בין מצב פעיל לכבוי. אין צורך בהגדרת פולסים.", "Switch between on and off. No pulse timings are needed.")],
     PUSH_BUTTON: ["Push button", t("הפעלה במשך הלחיצה ושחרור בסיומה. אין צורך בהגדרת פולסים.", "Activate while pressed and release afterwards. No pulse timings are needed.")],
   };
-  const radios = [];
-  for (const [index, method] of managerOpeningMethods.entries()) {
-    const option = node("label", undefined, "manager-method-option");
-    const radio = node("input");
-    radio.type = "radio"; radio.name = "command"; radio.value = method;
-    radio.checked = config.command === method; radio.disabled = commandLocked;
-    radio.setAttribute("aria-label", choices[method][0]);
-    const mark = node("span", index < 3 ? String(index + 1) : method === "TOGGLE" ? "ON/OFF" : "PRESS", "manager-method-mark");
-    mark.dir = "ltr";
-    mark.setAttribute("aria-hidden", "true");
-    option.append(radio, mark, node("strong", choices[method][0]), node("span", choices[method][1], "manager-method-description"));
-    picker.append(option); radios.push(radio);
-  }
-  const selectedMethod = () => radios.find(radio => radio.checked)?.value ?? "";
+  const select = node("select");select.name="command";select.disabled=commandLocked;select.setAttribute("aria-label",t("בחירת אופן פתיחה","Choose an opening method"));
+  for(const method of managerOpeningMethods){const option=node("option",choices[method][0]);option.value=method;select.append(option);}
+  select.value=config.command;picker.append(select);
+  const selectedMethod=()=>select.value;
   const description = node("p", "", "manager-supporting-copy");
+  description.id="manager-opening-method-description";
+  select.setAttribute("aria-describedby",description.id);
   description.setAttribute("aria-live", "polite");
   methodCard.append(heading, node("p", t("בחרו כיצד המערכת מגיבה לפקודת פתיחה.", "Choose how the system responds to an opening command."), "manager-supporting-copy"), picker, description);
   if (commandLocked) methodCard.append(node("p", t("במערכת Dual Control אופן הפתיחה נקבע לפי ההגדרה המשותפת.", "In Dual Control, the opening method follows the shared configuration."), "manager-supporting-copy"));
@@ -97,10 +90,9 @@ export function renderManagerSettings({ root, language = "en", config, revision,
   let busy = false, disposed = false;
   function sync() {
     const method = selectedMethod(), active = managerTimingFields(method);
-    description.textContent = !choices[method] ? t("אופן הפתיחה לא זמין.", "Opening method unavailable.") : "";
-    description.hidden = Boolean(choices[method]);
+    description.textContent = choices[method]?.[1] ?? t("אופן הפתיחה לא זמין.", "Opening method unavailable.");
     card.hidden = active.length === 0;
-    radios.forEach(radio => { radio.disabled = busy || commandLocked; });
+    select.disabled = busy || commandLocked;
     for (const key of timing) {
       const input = form.elements[key];
       input.closest(".manager-timing-step").hidden = !active.includes(key);
@@ -116,10 +108,10 @@ export function renderManagerSettings({ root, language = "en", config, revision,
   form.addEventListener("change", sync);
   reset.addEventListener("click", () => {
     if (busy || disposed || !isCurrent()) return;
-    radios.forEach(radio => { radio.checked = radio.value === config.command; });
+    select.value = config.command;
     timing.forEach(key => { form.elements[key].value = config[key]; });
     feedback.hidden = true; sync();
-    (radios.find(radio => radio.checked && !radio.disabled) ?? form.querySelector('.manager-timing-fields input:not(:disabled)'))?.focus();
+    (!select.disabled ? select : form.querySelector('.manager-timing-fields input:not(:disabled)'))?.focus();
   });
   sync();
   form.addEventListener("submit", async event => {

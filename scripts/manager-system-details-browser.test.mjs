@@ -59,7 +59,7 @@ async function assertDetails(page, language) {
   assert.doesNotMatch(await content.textContent(), /Flash|flashVariantMb|נפח Flash/);
   await tab(page, "settings");
   for (const [method, count] of [["PULSE", 1], ["PULSE_AFTER_PULSE", 3], ["PULSE_AFTER_PULSE_AFTER_PULSE", 5], ["TOGGLE", 0], ["PUSH_BUTTON", 0]]) {
-    await content.locator(`input[name="command"][value="${method}"]`).check();
+    await content.locator('select[name="command"]').selectOption(method);
     assert.equal(await content.locator(".manager-timing-fields input:visible").count(), count, method);
     assert.equal(await content.locator(".manager-timing-fields input:not(:disabled)").count(), count, `${method} inactive timing fields cannot be submitted`);
   }
@@ -100,7 +100,7 @@ test("real and example Manager share nontechnical system facts, dynamic opening 
   for (const language of ["he", "en"]) for (const width of [390, 1440]) {
     const { page, errors } = await workspace(browser, origin, language, width);
     try {
-      await page.locator(".manager-view > .manager-grid .manager-system").getByRole("button").click();
+      await page.locator(".manager-view > .manager-grid .manager-system").getByRole("button",{name:language==="he"?"פתיחת סביבת ניהול":"Open workspace",exact:true}).click();
       await page.locator("#manager-content .manager-facts").waitFor();
       await assertDetails(page, language);
       assert.deepEqual(await page.evaluate(() => window.managerDetailCommands.filter((call) => call.name === "ADMIN_LIST_AUTO_OPEN_USERS").map((call) => call.payload.page)), [
@@ -108,7 +108,7 @@ test("real and example Manager share nontechnical system facts, dynamic opening 
       ]);
       await page.getByRole("button", { name: language === "he" ? "סיום וחזרה" : "End and return", exact: true }).click();
       await page.locator(".manager-examples > summary").click();
-      await page.locator('[data-example-system="example-manager-gate"]').getByRole("button").click();
+      await page.locator('[data-example-system="example-manager-gate"]').getByRole("button",{name:language==="he"?"פתיחת סביבת ניהול":"Open workspace",exact:true}).click();
       await page.locator(".manager-simulation-note").waitFor();
       await page.locator("#manager-content .manager-facts").waitFor();
       await assertDetails(page, language);
@@ -123,7 +123,7 @@ test("older firmware exposes unavailable Auto Open/SD facts without inventing en
   for (const language of ["he", "en"]) {
     const { page, errors } = await workspace(browser, origin, language, 390, true);
     try {
-      await page.locator(".manager-view > .manager-grid .manager-system").getByRole("button").click();
+      await page.locator(".manager-view > .manager-grid .manager-system").getByRole("button",{name:language==="he"?"פתיחת סביבת ניהול":"Open workspace",exact:true}).click();
       await page.locator("#manager-content .manager-facts").waitFor();
       const content = page.locator("#manager-content");
       assert.equal(await content.locator('[data-metric="maxUsers"] dd').innerText(), language === "he" ? "לא זמין" : "Unavailable", "unknown capacity is explicit rather than estimated");
