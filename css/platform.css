@@ -30,8 +30,8 @@ html[lang="he"] {
   --weight-heavy: 700;
 }
 .platform-page {
-  --platform-shell-width: 1160px;
-  --platform-shell-gutter: clamp(1rem, 3.5vw, 2.5rem);
+  --platform-shell-width: 100vw;
+  --platform-shell-gutter: clamp(12px, 1.5vw, 24px);
   --platform-content-half: calc(
     min(100vw, var(--platform-shell-width)) / 2 - var(--platform-shell-gutter)
   );
@@ -57,7 +57,9 @@ html[lang="he"] {
   color: var(--ink);
 }
 .platform-shell {
-  max-width: var(--platform-shell-width);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
   margin: auto;
   padding: var(--platform-shell-gutter);
   color: var(--ink);

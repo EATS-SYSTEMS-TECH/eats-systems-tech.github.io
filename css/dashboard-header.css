@@ -670,7 +670,7 @@ html[dir="rtl"] #profile-subscriptions .product-tile h2 bdi { text-align: right;
 #profile-subscriptions .profile-cost-basis { font-size: 10px; line-height: 1.6; }
 
 /* Stable chrome across profile, Host, Pay and Manager. Only product identity changes. */
-body[data-product] :is(.platform-header, .host-topbar) { width: 100%; max-width: 1080px; margin-inline: auto; }
+body[data-product] :is(.platform-header, .host-topbar) { width: 100%; max-width: none; margin-inline: auto; }
 body[data-product] :is(.platform-header, .host-topbar) .product-switcher__button { border-color: #475569; background: #f8fafc; }
 body[data-product] .product-switcher__button:is(:hover, [aria-expanded="true"]) { border-color: #475569; background: #f8fafc; }
 
