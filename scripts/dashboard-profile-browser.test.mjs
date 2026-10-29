@@ -4,6 +4,24 @@ import { startSite, scenario } from "./platform-test-fixtures.mjs";
 
 const estimate = (amounts, quantities) => ({kind: "monthly-estimate", currency: "USD", monthlyCents: amounts.reduce((a,b) => a+b,0), lines: Object.fromEntries(["gates", "dualControls", "groups", "organizations"].map((key,i) => [key,{amountCents: amounts[i], quantity: quantities[i]}]))});
 
+test("active subscriptions summary reflects product access rather than pending or blocked plans", async t => {
+  const {origin,browser}=await startSite(t);
+  for(const language of ['he','en']) for(const item of [
+    {host:'active',pay:'active',manager:'active',expected:'Host, Pay, Manager'},
+    {host:'mfa-required',pay:'blocked',manager:'pending',expected:'Host'},
+    {host:'blocked',pay:'no-plan',manager:'pending',expected:language==='he'?'אין מנויים פעילים':'No active subscriptions'},
+  ]) {
+    const f=await scenario(browser,{...item,enrolled:true,verified:true,viewport:{width:390,height:1000}});t.after(()=>f.context.close());
+    await f.page.goto(origin+'/dashboard/?lang='+language);
+    const row=f.page.locator('#profile-details > div').filter({has:f.page.getByText(language==='he'?'מנויים פעילים':'Active subscriptions',{exact:true})});
+    await row.waitFor();
+    assert.equal(await row.locator('dd').innerText(),item.expected);
+    assert.equal(await f.page.locator('#profile-details > div').count(),8);
+    assert.equal(await f.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+    assert.deepEqual(f.errors,[]);
+  }
+});
+
 test("For Business access displays WIFIGATE User without granting global administrator status", async (t) => {
   const { origin, browser } = await startSite(t);
   for (const language of ["he", "en"]) for (const product of ["host", "pay", "manager"]) {
@@ -24,6 +42,8 @@ test("For Business access displays WIFIGATE User without granting global adminis
       assert.equal(await details.getByText("WIFIGATE Admin", { exact: true }).count(), 0);
       assert.equal(await details.locator("dt").first().textContent(), language === "he" ? "תפקיד בחשבון WIFIGATE" : "WIFIGATE account role");
       assert.equal(await details.getByText("WIFIGATE User", { exact: true }).getAttribute("dir"), "auto");
+      const subscriptions = details.locator('div').filter({has:page.getByText(language === "he" ? "מנויים פעילים" : "Active subscriptions",{exact:true})});
+      assert.equal(await subscriptions.locator('dd').innerText(), {host:'Host',pay:'Pay',manager:'Manager'}[product]);
       assert.equal(await page.locator(".platform-management-entry:visible").count(), 0);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
       if (process.env.DASHBOARD_PREVIEW_DIR) await page.screenshot({ path: `${process.env.DASHBOARD_PREVIEW_DIR}/account-role-${language}-${product}.png`, fullPage: true });

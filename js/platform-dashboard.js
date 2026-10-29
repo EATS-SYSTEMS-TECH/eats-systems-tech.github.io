@@ -622,6 +622,9 @@ function renderProfileDetails() {
   const details = $("#profile-details");
   if (!details) return;
   details.replaceChildren();
+  const activeSubscriptions = productIds
+    .filter((id) => ["active", "mfa-required"].includes(identity.products[id].state))
+    .map((id) => ({ host: "Host", pay: "Pay", manager: "Manager" })[id]);
   const accountDate = (value) => {
     const timestamp = typeof value === "string" ? Date.parse(value) : NaN;
     return Number.isFinite(timestamp)
@@ -680,6 +683,14 @@ function renderProfileDetails() {
         : language === "he"
           ? "טרם אומת באפליקציית האימות"
           : "Not verified with authenticator",
+    ],
+    [
+      language === "he" ? "מנויים פעילים" : "Active subscriptions",
+      activeSubscriptions.length
+        ? activeSubscriptions.join(", ")
+        : productIds.some((id) => identity.products[id].state === "unavailable")
+          ? unavailableLabel(language)
+          : language === "he" ? "אין מנויים פעילים" : "No active subscriptions",
     ],
   ]) {
     const row = document.createElement("div");
