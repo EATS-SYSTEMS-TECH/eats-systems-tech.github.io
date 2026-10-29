@@ -104,7 +104,37 @@ const reservationsLabel = document.createElement("span");
 reservationsLabel.dir = "ltr";
 reservationsLabel.textContent = "WIFIGATE Reservations";
 reservationsLink.append(reservationsIcon, reservationsLabel);
-adminTools.append(adminToolsTitle, reservationsLink, managementEntry);
+const adminToolsHeader = document.createElement("div");
+adminToolsHeader.className = "platform-admin-tools-header";
+const adminToolsToggle = document.createElement("button");
+adminToolsToggle.type = "button";
+adminToolsToggle.className = "platform-admin-tools-toggle";
+adminToolsToggle.setAttribute("aria-controls", "platform-admin-tools-content");
+const adminToolsContent = document.createElement("div");
+adminToolsContent.id = "platform-admin-tools-content";
+adminToolsContent.className = "platform-admin-tools-content";
+adminToolsContent.append(reservationsLink, managementEntry);
+const adminToolsPreference = "wifigate-admin-tools-collapsed";
+function setAdminToolsCollapsed(collapsed) {
+  adminTools.dataset.collapsed = String(collapsed);
+  adminToolsContent.hidden = collapsed;
+  adminToolsToggle.setAttribute("aria-expanded", String(!collapsed));
+  adminToolsToggle.setAttribute("aria-label", language === "he"
+    ? collapsed ? "פתיחת כלי ניהול WIFIGATE" : "מזעור כלי ניהול WIFIGATE"
+    : collapsed ? "Expand WIFIGATE admin tools" : "Minimize WIFIGATE admin tools");
+  adminToolsToggle.title = adminToolsToggle.getAttribute("aria-label");
+  adminToolsToggle.innerHTML = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${collapsed ? "m6 15 6-6 6 6" : "M6 12h12"}"/></svg>`;
+}
+let adminToolsCollapsed = false;
+try { adminToolsCollapsed = sessionStorage.getItem(adminToolsPreference) === "true"; } catch { /* Layout remains usable when storage is disabled. */ }
+setAdminToolsCollapsed(adminToolsCollapsed);
+adminToolsToggle.addEventListener("click", () => {
+  const collapsed = adminTools.dataset.collapsed !== "true";
+  setAdminToolsCollapsed(collapsed);
+  try { sessionStorage.setItem(adminToolsPreference, String(collapsed)); } catch { /* Retain the current page preference in memory. */ }
+});
+adminToolsHeader.append(adminToolsTitle, adminToolsToggle);
+adminTools.append(adminToolsHeader, adminToolsContent);
 document.body.append(adminTools);
 let identity;
 let session;

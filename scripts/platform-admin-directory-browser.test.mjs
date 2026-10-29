@@ -158,6 +158,23 @@ test("the management shortcut follows the interface direction and the admin page
       assert.equal(await reservations.getAttribute("href"), "/dashboard/reservations/" + suffix);
       assert.ok((await reservations.boundingBox()).y < box.y);
       assert.equal(await page.locator(".reservations-entry").count(), 0);
+      const toggle = tools.locator('.platform-admin-tools-toggle');
+      const expandedHeight = (await tools.boundingBox()).height;
+      assert.equal(await toggle.getAttribute('aria-expanded'),'true');
+      await toggle.focus();
+      await toggle.press('Enter');
+      assert.equal(await toggle.getAttribute('aria-expanded'),'false');
+      assert.equal(await entry.isVisible(),false);
+      assert.equal(await reservations.isVisible(),false);
+      assert.ok((await tools.boundingBox()).height < expandedHeight - 70,'minimizing frees screen space');
+      await page.reload();
+      await tools.waitFor();
+      assert.equal(await toggle.getAttribute('aria-expanded'),'false','minimized state survives navigation in the tab');
+      await toggle.click();
+      assert.equal(await toggle.getAttribute('aria-expanded'),'true');
+      assert.equal(await entry.isVisible(),true);
+      assert.equal(await reservations.isVisible(),true);
+      assert.equal(requests,0,'layout changes do not request admin directory data');
       if (process.env.WIFIGATE_ADMIN_UX_SCREENSHOTS)
         await page.screenshot({
           path: `${process.env.WIFIGATE_ADMIN_UX_SCREENSHOTS}/dashboard-entry-${language}-${width}.png`,
