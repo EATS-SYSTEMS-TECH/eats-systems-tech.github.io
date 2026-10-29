@@ -2,6 +2,7 @@ import { renderManagerOrganization } from "./manager-organization.js";
 import { createManagerOrganizationPicker } from "./manager-organization-picker.js";
 import { organizeManagerPeople } from "./manager-people-workspace.js";
 import { renderManagerHistoryDays, renderManagerHistoryRecords } from "./manager-history-workspace.js";
+import { createManagerAutoStatus, createManagerAutoPerson } from "./manager-auto-workspace.js";
 import { createManagerSetupGuide } from "./manager-setup-guide.js";
 import { createManagerOrganizationCard } from "./manager-organization-card.js";
 import { createPersonalOrganizationPage } from "./manager-organization-list.js";
@@ -1893,8 +1894,9 @@ export function createManagerDashboard({
     if (tab === "settings") renderSettings(content);
     if (tab === "events") renderEventActions(content);
     if (tab === "auto") {
-      renderAutoActions(content);
-      await renderAutoUsers(content);
+      const area = renderAutoActions(content);
+      await renderAutoUsers(area);
+      return;
     }
     placeManagerActions(content, language);
   }
@@ -1915,7 +1917,6 @@ export function createManagerDashboard({
     currentData = r.data;
     if (cmd === "ADMIN_GET_GATE_CONFIG") return;
     if (cmd === "ADMIN_GET_AUTO_OPEN_CONFIG") {
-      renderFacts(content, { enabled: r.data?.config?.enabled });
       return;
     }
     if (cmd === "ADMIN_GET_STORAGE_HEALTH") {
@@ -2382,34 +2383,52 @@ export function createManagerDashboard({
       return;
     }
     section.append(node("p", t("משתמשים שנרשמו בפועל לפתיחה אוטומטית במערכת זו.", "Users actually enrolled for automatic opening on this system."), "manager-supporting-copy"));
-    const list = node("div", undefined, "manager-auto-user-list"), state = node("p", "", "manager-supporting-copy");
+    const filter = node("div", undefined, "manager-auto-filter");
+    const label = node("label", t("חיפוש במשתמשים שנטענו", "Search loaded users"));
+    const search = node("input"); search.type = "search"; search.placeholder = t("שם או טלפון", "Name or phone"); search.autocomplete = "off";
+    label.append(search);
+    const count = node("p", "", "manager-auto-count"); count.setAttribute("role", "status");
+    filter.append(label, count);
+    const list = node("div", undefined, "manager-auto-user-list"), state = node("p", "", "manager-supporting-copy manager-auto-load-state");
     state.setAttribute("role", "status");
-    const seen = new Set(); let next = null, loaded = 0;
+    const empty = node("p", t("אין התאמות במשתמשים שנטענו. נסו שם או טלפון אחר.", "No matches in the loaded users. Try another name or phone."), "manager-auto-no-matches"); empty.hidden = true;
+    const seen = new Set(), identities = new Set(); let next = null, loaded = 0;
     const more = button(t("משתמשים נוספים", "More users"), () => load(next));
-    section.append(state, list, more); more.hidden = true;
+    more.classList.add("manager-auto-more");
+    section.append(filter, state, list, empty, more); more.hidden = true;
+    function filterUsers() {
+      const query = search.value.trim().toLocaleLowerCase(); let visible = 0;
+      for (const row of list.children) { row.hidden = !row.dataset.search.includes(query); if (!row.hidden) visible++; }
+      count.textContent = query ? t(`${visible} מתוך ${loaded} משתמשים שנטענו`, `${visible} of ${loaded} loaded users`) : loaded === 1 ? t("משתמש אחד נטען", "1 user loaded") : t(`${loaded} משתמשים שנטענו`, `${loaded} users loaded`);
+      empty.hidden = !query || visible > 0;
+    }
+    search.addEventListener("input", filterUsers);
     async function load(after) {
       if (!alive()) return;
       state.textContent = t("טוען משתמשי Auto Open…", "Loading Auto Open users…");
+      state.setAttribute("role", "status");
       more.disabled = true;
       try {
         const result = await source.command("ADMIN_LIST_AUTO_OPEN_USERS", { page: { cursor: after, limit: 10 } });
         if (!alive()) return;
         if (!Array.isArray(result.data?.items)) throw new Error("INVALID_RESPONSE");
         for (const person of result.data.items) {
-          const row = node("article", undefined, "manager-auto-user");
-          row.append(node("strong", person.name || t("משתמש רשום", "Enrolled user")), node("span", `+${person.countryCode ?? ""}${person.localNumber ?? ""}`));
-          row.append(node("span", person.allowed === false ? t("הרשאת Auto Open כבויה", "Auto Open permission disabled") : t("רשום ל־Auto Open", "Enrolled for Auto Open"), "manager-auto-user-badge" + (person.allowed === false ? " is-disabled" : "")));
-          list.append(row); loaded++;
+          const identity = person.countryCode && person.localNumber ? `${person.countryCode}:${person.localNumber}` : null;
+          if (identity && identities.has(identity)) continue;
+          if (identity) identities.add(identity);
+          list.append(createManagerAutoPerson(person, language)); loaded++;
         }
         next = result.data.page?.nextCursor ?? null;
         if (next && seen.has(next)) throw new Error("LIST_LIMIT");
         if (next) seen.add(next);
         more.hidden = !next;
-        state.textContent = loaded ? t(`${loaded} משתמשים מוצגים`, `${loaded} users shown`) : next ? t("אפשר להמשיך לטעון את הרשימה.", "Continue loading the list.") : t("אין משתמשים הרשומים ל־Auto Open במערכת זו.", "No users are enrolled for Auto Open on this system.");
+        more.textContent = t("משתמשים נוספים", "More users");
+        filterUsers();
+        state.textContent = loaded ? "" : next ? t("אפשר להמשיך לטעון את הרשימה.", "Continue loading the list.") : t("אין משתמשים הרשומים ל־Auto Open במערכת זו.", "No users are enrolled for Auto Open on this system.");
       } catch (error) {
         if (!alive()) return;
         if ((error.code ?? error.message) === "STALE_CURSOR") {
-          list.replaceChildren(); loaded = 0; next = null; seen.clear();
+          list.replaceChildren(); loaded = 0; next = null; seen.clear(); identities.clear(); filterUsers();
           state.textContent = t("רשימת Auto Open השתנתה במערכת. טענו אותה מחדש.", "Auto Open enrollment changed on the system. Reload the list.");
         } else state.textContent = errorText(error);
         state.setAttribute("role", "alert");
@@ -2420,24 +2439,15 @@ export function createManagerDashboard({
   }
   function renderAutoActions(content) {
     const data = currentData;
-    const actions = node("div", undefined, "manager-actions");
-    for (const enabled of [true, false])
-      actions.append(
-        button(
-          enabled
-            ? t("הפעלת Auto Open", "Enable Auto Open")
-            : t("כיבוי Auto Open", "Disable Auto Open"),
-          async () => {
-            await connection.command("ADMIN_SET_AUTO_OPEN_CONFIG", {
-              ...data.config,
-              enabled,
-              expectedRevision: data.revision,
-            });
-            await showTab("auto");
-          },
-        ),
-      );
-    content.append(actions);
+    const area = node("section", undefined, "manager-auto-workspace");
+    const enabled = data?.config?.enabled;
+    const action = typeof enabled === "boolean" ? button(enabled ? t("כיבוי Auto Open", "Disable Auto Open") : t("הפעלת Auto Open", "Enable Auto Open"), async () => {
+      await connection.command("ADMIN_SET_AUTO_OPEN_CONFIG", { ...data.config, enabled: !enabled, expectedRevision: data.revision });
+      await showTab("auto");
+    }, !enabled) : undefined;
+    area.append(createManagerAutoStatus({ config: data?.config, language, action }));
+    content.append(area);
+    return area;
   }
   function pauseForBackground() {
     if (closed || !currentSystem || !view.querySelector("#manager-content")) return;
