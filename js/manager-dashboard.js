@@ -71,6 +71,7 @@ export function createManagerDashboard({
   let organizationPicker;
   const organizationIdentities = new Map();
   let managementMode = management;
+  let initializing = true;
   let successfulWrites = 0;
   let generation = 0,
     closed = false,
@@ -651,6 +652,8 @@ export function createManagerDashboard({
     focusView();
   }
   function focusView() {
+    // Keep the initial page load neutral; move focus only on later view changes.
+    if (initializing) return;
     const epoch = generation;
     requestAnimationFrame(() => {
       if (
@@ -2514,9 +2517,13 @@ export function createManagerDashboard({
   window.addEventListener("pagehide", pauseForBackground);
   window.addEventListener("pageshow", resumeFromBackground);
   const ready = task(async () => {
-    await refreshProfile();
-    if (closed) return;
-    await changeManagement(managementMode, false);
+    try {
+      await refreshProfile();
+      if (closed) return;
+      await changeManagement(managementMode, false);
+    } finally {
+      initializing = false;
+    }
   });
   return {
     ready,
