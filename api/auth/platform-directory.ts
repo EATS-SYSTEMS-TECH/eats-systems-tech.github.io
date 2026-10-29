@@ -93,6 +93,8 @@ export function changePlatformProductAccess(
   });
 }
 
-export function getPlatformOrganizationOverview(user: FirebaseUser, product = "all"): Promise<{items:{id:string;name:string;status:string;products:Partial<Record<ProductId,string>>}[];complete:true;basis:"provisioned-organizations"}> {
+export function getPlatformOrganizationOverview(user: FirebaseUser, product = "all"): Promise<{items:{id:string;name:string;status:string;version?:number;products:Partial<Record<ProductId,string>>}[];complete:true;basis:"provisioned-organizations"}> {
  return authenticatedRequest(profileApi,user,{method:"GET",url:`/api/v1/platform/directory/organization-overview?${new URLSearchParams({product})}`});
 }
+
+export function deletePlatformOrganization(user:FirebaseUser,id:string,input:{confirmName:string;expectedVersion:number},key:string):Promise<{id:string;archived:true}>{return authenticatedRequest(profileApi,user,{method:"POST",url:`/api/v1/platform/directory/organizations/${encodeURIComponent(id)}/delete`,data:input,headers:{"Idempotency-Key":key}});}

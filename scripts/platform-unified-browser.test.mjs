@@ -15,6 +15,7 @@ test('central management puts selectable products first and shows organizations 
   const root=f.page.locator('#platform-admin-management');await root.locator('.platform-admin-counts strong').first().waitFor();
   assert.equal(await root.locator(':scope > :first-child').getAttribute('class'),'platform-admin-products');
   assert.equal(await root.locator('[data-product="manager"]').getAttribute('aria-pressed'),'true');
+  await f.page.waitForFunction(()=>[...document.querySelectorAll('.platform-admin-product-count')].map(n=>n.textContent).join(',')==='2,1,2');
   assert.deepEqual(await root.locator('.platform-admin-product-count').allTextContents(),['2','1','2']);
   if(width>600){
    const boxes=await Promise.all(['host','pay','manager'].map(id=>root.locator(`button[data-product="${id}"]`).boundingBox()));

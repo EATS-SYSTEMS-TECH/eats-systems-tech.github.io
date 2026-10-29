@@ -11,6 +11,7 @@ import {
 import { productLink } from "./product-switcher.js";
 import { createPlatformAccountDeletion } from "./platform-account-deletion.js";
 import { createPlatformAccountActions } from "./platform-account-actions.js";
+import { createPlatformOrganizationDeletion } from "./platform-organization-deletion.js";
 import { createPlatformOrganizationActions } from "./platform-organization-actions.js";
 import { createDirectorySearchLoader } from "./platform-directory-search.js";
 
@@ -162,6 +163,7 @@ export function createPlatformAdminDirectory({
     productCounts = {};
     void load();
   };
+  const organizationDeletion = standalone && product === "all" && ensureRecent ? createPlatformOrganizationDeletion({user,language,ensureRecent,onChanged:changed}) : null;
   const deletions = standalone && product === "all" && ensureRecent
     ? createPlatformAccountDeletion({user,language,ensureRecent,onChanged:changed}) : null;
   const actions =
@@ -284,6 +286,12 @@ export function createPlatformAdminDirectory({
     const state = value => ({active:t("פעיל","Active"),pending:t("ממתין","Pending"),blocked:t("חסום","Blocked"),expired:t("פג תוקף","Expired")})[value] || t("לא זמין","Unavailable");
     for(const [id,value] of Object.entries(organization.products)) products.append(element("span", `${nameFor(id)} · ${state(value)}`));
     card.append(artwork,identity,element("span",state(organization.status),"platform-admin-organization-status"),products);
+    if(organizationDeletion){
+      const remove=element("button",null,"platform-admin-organization-delete platform-admin-delete");remove.type="button";
+      remove.setAttribute("aria-label",t("מחיקת ארגון: ","Delete organization: ")+organization.name);remove.title=t("מחיקת ארגון","Delete organization");
+      remove.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7"/></svg>';
+      remove.addEventListener("click",()=>organizationDeletion.open(organization));card.append(remove);
+    }
     return card;
   }
   function renderOrganizations() {
@@ -627,7 +635,7 @@ export function createPlatformAdminDirectory({
   return {
     close() {
       closed = true;
-      clearTimeout(searchTimer);directorySearch.clear();organizationActions?.destroy();
+      clearTimeout(searchTimer);directorySearch.clear();organizationActions?.destroy();organizationDeletion?.destroy();
       generation++;
       financialGeneration++;
       actions?.close();
