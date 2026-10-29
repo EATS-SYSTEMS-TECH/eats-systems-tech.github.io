@@ -1,5 +1,5 @@
 /* Pay uses the real Manager components and geometry, with green accents. */
-@import url("./manager-dashboard.css?v=20261030workspace1");
+@import url("./manager-dashboard.css?v=20261030workspace2");
 
 body[data-product="pay"] .platform-heading,
 body[data-product="pay"] #product-title { display: none; }

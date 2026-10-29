@@ -47,9 +47,18 @@ for (const element of sidebar?.querySelectorAll(".manager-nav-title, #host-works
 const organizationNavigation = document.createElement("div");
 organizationNavigation.className = "manager-organization-navigation";
 nav.append(personalNavigation);
+const organizationArea = document.createElement("section");
+organizationArea.className = "manager-organization-area";
+organizationArea.hidden = true;
+organizationArea.setAttribute("aria-label", hostText("Organization workspace"));
+const organizationTitle = document.createElement("p");
+organizationTitle.className = "manager-nav-title";
+organizationTitle.textContent = hostText("Organization workspace");
+organizationArea.append(organizationTitle);
+nav.append(organizationArea);
 const organizationPicker = document.getElementById("workspace-org-switcher");
-if (organizationPicker) nav.append(organizationPicker);
-nav.append(organizationNavigation);
+if (organizationPicker) organizationArea.append(organizationPicker);
+organizationArea.append(organizationNavigation);
 
 let toggle = document.querySelector(".workspace-menu-toggle");
 if (!toggle) {
@@ -323,6 +332,7 @@ function refresh() {
     else button.removeAttribute("aria-current");
   }
   organizationNavigation.hidden = !root.dataset.organizationId;
+  organizationArea.hidden = Boolean(organizationPicker?.hidden) && !root.dataset.organizationId;
   if (tabbar) {
     // Phone tab bar: home, Calendar and Bookings when they exist, then More.
     const order = [home, "calendar", "bookings", "systems", "my-systems"];

@@ -446,18 +446,22 @@ export function createManagerDashboard({
       myOrganizations.setAttribute("aria-current", "page");
     personalNavigation.append(myOrganizations);
     if (profile.organizations?.length) {
+      const organizationArea = node("section", undefined, "manager-organization-area");
+      organizationArea.setAttribute("aria-label", t("סביבת הארגון", "Organization workspace"));
+      organizationArea.append(node("p", t("סביבת הארגון", "Organization workspace"), "manager-nav-title"));
+      nav.append(organizationArea);
       organizationPicker = createManagerOrganizationPicker({
         organizations: profile.organizations.map(org => ({ ...org, ...organizationIdentities.get(org.id), role: org.role })),
         selectedId: scope,
         language,
         onSelect: id => task(() => showSystems(id)),
       });
-      nav.append(organizationPicker.root);
+      organizationArea.append(organizationPicker.root);
       if (scope && profile.organizations.some(org => org.id === scope)) {
         const organizationSystems = button(t("מערכות הארגון", "Organization systems"), () => task(() => showSystems(scope)));
         organizationSystems.dataset.organizationView = "systems";
         if (currentView === "systems") organizationSystems.setAttribute("aria-current", "page");
-        nav.append(organizationSystems);
+        organizationArea.append(organizationSystems);
       }
     }
     if (profile.role !== "admin")

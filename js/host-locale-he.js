@@ -3,6 +3,7 @@
 export const hostHebrew = {
   "My organizations": "הארגונים שלי",
   "Personal workspace": "סביבת עבודה אישית",
+  "Organization workspace": "סביבת הארגון",
   "Open organization": "כניסה לארגון",
   "Organization calendar": "יומן הארגון",
   "Guest invitation automation API": "אוטומציית הזמנת אורחים API",

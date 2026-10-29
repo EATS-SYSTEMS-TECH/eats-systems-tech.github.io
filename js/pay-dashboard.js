@@ -154,18 +154,22 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
     if (!organizationId) (listView === "organizations" ? organizations : personal).setAttribute("aria-current", "page");
     personalNavigation.append(personal, organizations);
     if (profile.organizations?.length) {
+      const organizationArea = el("section", undefined, "manager-organization-area");
+      organizationArea.setAttribute("aria-label", t("סביבת הארגון", "Organization workspace"));
+      organizationArea.append(el("p", t("סביבת הארגון", "Organization workspace"), "manager-nav-title"));
+      navigation.append(organizationArea);
       organizationPicker = createManagerOrganizationPicker({
         organizations: profile.organizations.map(org => ({ ...org, name: org.name || t("ארגון", "Organization"), role: org.role === "admin" ? "organization-admin" : org.role === "viewer" ? "organization-user" : org.role })),
         selectedId: organizationId,
         language,
         onSelect: id => { organizationId = id; listView = "systems"; void load(); },
       });
-      navigation.append(organizationPicker.root);
+      organizationArea.append(organizationPicker.root);
       if (organizationId && profile.organizations.some(org => org.id === organizationId)) {
         const organizationSystems = button(t("מערכות הארגון", "Organization systems"), () => { listView = "systems"; void load(); });
         organizationSystems.dataset.organizationView = "systems";
         organizationSystems.setAttribute("aria-current", "page");
-        navigation.append(organizationSystems);
+        organizationArea.append(organizationSystems);
       }
     }
   }

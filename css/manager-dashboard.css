@@ -1513,8 +1513,60 @@ body[data-product] .manager-organization-workspace>.manager-organization-pending
 @media(max-width:600px){.manager-control-workspace .manager-remote-card{grid-template-columns:minmax(0,1fr);gap:22px;padding:20px;border-radius:18px}.manager-remote-illustration{min-height:148px}.manager-remote-illustration img{width:100px;height:100px}.manager-control-workspace .manager-remote-body h3{font-size:19px;margin-block-end:20px}}
 
 /* Account navigation and selected-organization navigation share one hierarchy. */
-.manager-personal-navigation { box-sizing: border-box; width: 100%; min-width: 0; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--manager-line, #e2e8f0); }
-.manager-personal-navigation .manager-sidebar-roles { padding-bottom: 10px; margin-bottom: 4px; border-bottom: 0; font-size: 12px; }
+.manager-personal-navigation,
+.manager-organization-area {
+  box-sizing: border-box;
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  padding: 14px 12px;
+  border: 1px solid var(--manager-line, #e2e8f0);
+  border-top: 4px solid #94a3b8;
+  border-radius: 14px;
+  background: #f8fafc;
+}
+.manager-personal-navigation { margin-bottom: 20px; }
+.manager-organization-area {
+  border-color: var(--manager-line, #e2e8f0);
+  border-top-color: var(--manager-accent, #f97316);
+  background: var(--manager-soft, #fff1e6);
+}
+.manager-organization-area[hidden] { display: none !important; }
+.manager-shell .manager-nav :is(.manager-personal-navigation, .manager-organization-area) > .manager-nav-title {
+  margin: 0 0 8px;
+  padding: 0 4px;
+  color: #243a54;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.7;
+  letter-spacing: 0;
+}
+.manager-shell .manager-nav .manager-organization-area > .manager-nav-title { color: var(--manager-strong, #c2410c); }
+.manager-personal-navigation .manager-sidebar-roles {
+  display: grid;
+  justify-items: start;
+  gap: 7px;
+  margin: 0 0 10px;
+  padding: 0 4px 12px;
+  border-bottom: 1px solid #dce4ee;
+  font-size: 11px;
+}
+.manager-personal-navigation .manager-sidebar-roles[hidden] { display: none !important; }
+.manager-personal-navigation .manager-sidebar-roles > span {
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+  padding: 4px 8px;
+  border: 1px solid #dce4ee;
+  border-radius: 6px;
+  background: #fff;
+  color: #475569;
+  line-height: 1.6;
+}
+.manager-shell .manager-nav .manager-personal-navigation > button,
+.manager-shell .manager-nav .manager-organization-area > button { width: 100%; margin: 0; }
+.manager-organization-area .manager-organization-picker { margin: 0 0 6px; }
 .manager-organization-navigation { width: 100%; min-width: 0; }
 .manager-organization-navigation[hidden] { display: none !important; }
 .manager-shell .manager-nav .manager-organization-picker-trigger { min-height: 80px; padding: 14px; gap: 12px; }
@@ -1522,8 +1574,7 @@ body[data-product] .manager-organization-workspace>.manager-organization-pending
 .manager-organization-picker-identity small { font-size: 11px; }
 .manager-organization-picker-logo { flex-basis: 42px; width: 42px; height: 42px; }
 @media (max-width: 850px) {
-  .manager-personal-navigation { padding-bottom: 12px; margin-bottom: 8px; }
-  .manager-personal-navigation .manager-button { margin-inline-end: 6px; }
+  .manager-personal-navigation { margin-bottom: 16px; }
   .manager-organization-navigation { display: flex; flex-wrap: wrap; gap: 6px; }
   .manager-nav > .manager-organization-picker, .manager-nav > .org-switcher { width: 100%; flex-basis: 100%; }
 }

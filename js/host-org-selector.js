@@ -17,6 +17,8 @@ export function clearOrganizationSelector() {
   element.closeOrganizationMenu = undefined;
   element.replaceChildren();
   element.hidden = true;
+  const area = element.closest(".manager-organization-area");
+  if (area) area.hidden = true;
 }
 
 // The picker displays only metadata the Host workspace has already authorized.
@@ -53,4 +55,6 @@ export function renderOrganizationSelector(org, organizations, onChoose) {
   element.closeOrganizationMenu = () => picker.destroy();
   element.replaceChildren(picker.root);
   element.hidden = false;
+  const area = element.closest(".manager-organization-area");
+  if (area) area.hidden = false;
 }
