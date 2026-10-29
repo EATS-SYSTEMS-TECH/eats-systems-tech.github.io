@@ -55,6 +55,12 @@ test("invitation handoff shows a stable fallback and copies its app link", async
       }),
     }));
     assert.ok(layout.scrollWidth <= 320, "no horizontal overflow on a narrow phone");
+    // The rewritten utility-page skin keeps the same square logo and corner radius.
+    const logo = await page.locator(".logo").evaluate(element => {
+      const style = getComputedStyle(element);
+      return { width: element.getBoundingClientRect().width, height: element.getBoundingClientRect().height, radius: style.borderTopLeftRadius };
+    });
+    assert.deepEqual(logo, { width: 84, height: 84, radius: "24px" });
     for (const button of layout.buttons) {
       assert.ok(button.height >= 48 && button.width >= 200 && button.right <= 320, "touch targets fit the viewport");
     }
@@ -97,6 +103,34 @@ test("invitation handoff shows a stable fallback and copies its app link", async
     await missingPage.goto(pageUrl.href, { waitUntil: "domcontentloaded" });
     assert.equal(await missingPage.locator("#open-app").isVisible(), false);
     assert.equal(await missingPage.locator("#spinner").isVisible(), false);
+    await context.close();
+  } finally {
+    await browser.close();
+  }
+});
+
+// Freeze URL priority and query preservation before replacing the invitation mapper.
+test("invitation routes preserve public aliases and opaque query parameters", async () => {
+  const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? "msedge", headless: true });
+  try {
+    const context = await browser.newContext();
+    await context.addInitScript(() => {
+      const schedule = window.setTimeout.bind(window);
+      window.setTimeout = (callback, delay, ...args) => delay === 40 ? 0 : schedule(callback, delay, ...args);
+    });
+    const page = await context.newPage();
+    const cases = [
+      ["?link=wifigate%3A%2F%2Fgate%2Fdirect&gid=group", "wifigate://gate/direct"],
+      ["?dcid=dual+one&gid=group&ep=opaque", "wifigate://dual-control/dual%20one?dcid=dual+one&gid=group&ep=opaque&id=dual+one"],
+      ["?groupId=group+one&ep=opaque", "wifigate://group/group%20one?groupId=group+one&ep=opaque&gid=group+one&id=group+one"],
+      ["?i=first&id=second&chip=third&ep=opaque", "wifigate://gate/first?i=first&id=second&chip=third&ep=opaque"],
+      ["?ep=opaque", "wifigate://gate/invite?ep=opaque&id=invite"],
+    ];
+    for (const [query, expected] of cases) {
+      await page.goto(`${pageUrl.href}${query}`, { waitUntil: "domcontentloaded" });
+      await page.waitForTimeout(950);
+      assert.equal(await page.locator("#open-app").getAttribute("href"), expected, query);
+    }
     await context.close();
   } finally {
     await browser.close();

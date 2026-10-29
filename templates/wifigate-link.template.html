@@ -41,7 +41,7 @@
             min-height: 100dvh;
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             color: var(--text);
-            background: var(--bg);
+            background-color: var(--bg);
             display: grid;
             place-items: center;
             padding: 20px;
@@ -58,9 +58,10 @@
         }
 
         .logo {
-            width: 84px;
-            height: 84px;
-            border-radius: 24px;
+            --logo-edge: 84px;
+            inline-size: var(--logo-edge);
+            block-size: var(--logo-edge);
+            border-radius: calc(var(--logo-edge) * 2 / 7);
             display: block;
             margin: 0 auto 24px;
         }
@@ -264,87 +265,46 @@
             }
         }
 
-        function firstNonEmpty() {
-            for (const value of arguments) {
-                if (typeof value === "string" && value.trim()) {
-                    return value.trim();
-                }
-            }
-            return "";
+        // Choose the first meaningful alias while retaining the original query's order.
+        function firstRouteValue(values) {
+            return values.find((value) => typeof value === "string" && value.trim())?.trim() || "";
         }
 
+        // Resolve an invitation target from the public parameter and path aliases.
+        function invitationTarget(url) {
+            const query = url.searchParams;
+            const segments = url.pathname.split("/").filter(Boolean).map(decodeURIComponent);
+            const choices = [
+                { route: "dual-control", aliases: ["dcid", "dualControlId"], canonical: "dcid" },
+                { route: "group", aliases: ["gid", "groupId"], canonical: "gid" },
+                { route: "gate", aliases: ["i", "id", "chip"], canonical: null }
+            ];
+
+            for (const choice of choices) {
+                const pathId = segments[0] === choice.route ? segments[1] : "";
+                const id = firstRouteValue([...choice.aliases.map((key) => query.get(key)), pathId]);
+                if (id) return { ...choice, id };
+            }
+            return query.get("ep") ? { ...choices[2], id: "invite" } : null;
+        }
+
+        // Direct links win; otherwise build the app route without discarding opaque parameters.
         function buildDeepLink() {
-            const currentUrl = new URL(window.location.href);
-            const params = currentUrl.searchParams;
-            if (isDemoLink(params)) {
-                return "";
-            }
-            const directLink = firstNonEmpty(params.get("link"));
-            if (directLink) {
-                return directLink;
-            }
+            const url = new URL(window.location.href);
+            const query = url.searchParams;
+            if (isDemoLink(query)) return "";
 
-            const pathSegments = currentUrl.pathname
-                .split("/")
-                .filter(Boolean)
-                .map((segment) => decodeURIComponent(segment));
+            const direct = firstRouteValue([query.get("link")]);
+            if (direct) return direct;
 
-            const groupId = firstNonEmpty(
-                params.get("gid"),
-                params.get("groupId"),
-                pathSegments[0] === "group" ? pathSegments[1] : ""
-            );
+            const target = invitationTarget(url);
+            if (!target) return "";
 
-            const dualControlId = firstNonEmpty(
-                params.get("dcid"),
-                params.get("dualControlId"),
-                pathSegments[0] === "dual-control" ? pathSegments[1] : ""
-            );
-
-            if (dualControlId) {
-                params.delete("link");
-                if (!params.has("dcid")) {
-                    params.set("dcid", dualControlId);
-                }
-                if (!params.has("id")) {
-                    params.set("id", dualControlId);
-                }
-
-                const query = params.toString();
-                return `wifigate://dual-control/${encodeURIComponent(dualControlId)}${query ? `?${query}` : ""}`;
-            }
-
-            if (groupId) {
-                params.delete("link");
-                if (!params.has("gid")) {
-                    params.set("gid", groupId);
-                }
-                if (!params.has("id")) {
-                    params.set("id", groupId);
-                }
-
-                const query = params.toString();
-                return `wifigate://group/${encodeURIComponent(groupId)}${query ? `?${query}` : ""}`;
-            }
-
-            const gateId = firstNonEmpty(
-                params.get("i"),
-                params.get("id"),
-                params.get("chip")
-            );
-
-            const routeId = gateId || (params.get("ep") ? "invite" : "");
-            if (!routeId) {
-                return "";
-            }
-
-            params.delete("link");
-            if (!params.has("id")) {
-                params.set("id", routeId);
-            }
-
-            const query = params.toString();
-            return `wifigate://gate/${encodeURIComponent(routeId)}${query ? `?${query}` : ""}`;
+            query.delete("link");
+            if (target.canonical && !query.has(target.canonical)) query.set(target.canonical, target.id);
+            if (!query.has("id")) query.set("id", target.id);
+            const suffix = query.toString();
+            return `wifigate://${target.route}/${encodeURIComponent(target.id)}${suffix ? "?" + suffix : ""}`;
         }
 
         function revealFallback(deepLink) {
@@ -359,9 +319,9 @@
             title.textContent = deepLink ? copy.headingFallback : copy.headingMissing;
             status.textContent = deepLink ? copy.statusFallback : copy.statusMissing;
             spinner.hidden = true;
-            openApp.hidden = !deepLink;
-            copyLink.hidden = !deepLink;
-            openApp.href = deepLink || "#";
+            // Both recovery actions appear together only when a usable route exists.
+            for (const action of [openApp, copyLink]) action.hidden = !deepLink;
+            openApp.setAttribute("href", deepLink || "#");
             copyLink.textContent = copy.copyButton;
             copyLink.onclick = async function () {
                 if (!deepLink) {
@@ -386,7 +346,8 @@
                 return;
             }
 
-            window.setTimeout(function () {
+            // Restore the manual recovery actions after the operating system handoff.
+            const showRecovery = () => {
                 if (document.visibilityState === "visible") {
                     revealFallback(deepLink);
                 } else {
@@ -397,11 +358,11 @@
                         }
                     });
                 }
-            }, 900);
+            };
+            window.setTimeout(showRecovery, 900);
 
-            window.setTimeout(function () {
-                window.location.replace(deepLink);
-            }, 40);
+            // Keep the immediate opening attempt separate from the recovery timer.
+            window.setTimeout(() => window.location.replace(deepLink), 40);
         }
 
         // A demo guest link from the WIFIGATE Host examples (ep=v1.demo_…)

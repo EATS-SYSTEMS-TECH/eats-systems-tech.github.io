@@ -103,14 +103,12 @@ async function main() {
     "wifigate-link.template.html",
   );
   const invitationTemplate = await fs.readFile(invitationTemplatePath, "utf8");
-  const queryPassThroughCount = (
-    invitationTemplate.match(/const query = params\.toString\(\);/g) || []
-  ).length;
-
-  if (queryPassThroughCount !== 3) {
-    problems.push(
-      `templates/wifigate-link.template.html: found ${queryPassThroughCount} query pass-through routes, expected 3`,
-    );
+  // The route table retains all three public targets and serializes their
+  // original query once; browser contracts verify the exact alias outcomes.
+  const routeKinds = ["dual-control", "group", "gate"];
+  const keepsRoutes = routeKinds.every((route) => invitationTemplate.includes(`route: "${route}"`));
+  if (!keepsRoutes || !invitationTemplate.includes("query.toString()")) {
+    problems.push("templates/wifigate-link.template.html: invitation routes must preserve query parameters");
   }
   if (/params\.delete\(["'](?:ep|ao)["']\)/.test(invitationTemplate)) {
     problems.push(
