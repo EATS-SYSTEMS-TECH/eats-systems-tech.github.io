@@ -42,8 +42,9 @@
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             color: var(--text);
             background-color: var(--bg);
-            display: grid;
-            place-items: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
         }
 
@@ -289,7 +290,7 @@
         }
 
         // Direct links win; otherwise build the app route without discarding opaque parameters.
-        function buildDeepLink() {
+        const buildDeepLink = () => {
             const url = new URL(window.location.href);
             const query = url.searchParams;
             if (isDemoLink(query)) return "";
@@ -305,7 +306,7 @@
             if (!query.has("id")) query.set("id", target.id);
             const suffix = query.toString();
             return `wifigate://${target.route}/${encodeURIComponent(target.id)}${suffix ? "?" + suffix : ""}`;
-        }
+        };
 
         function revealFallback(deepLink) {
             const copy = getUtilityPageCopy();
@@ -340,11 +341,8 @@
             };
         }
 
-        function openImmediately(deepLink) {
-            if (!deepLink) {
-                revealFallback("");
-                return;
-            }
+        const scheduleAppOpen = (deepLink) => {
+            if (!deepLink) return revealFallback("");
 
             // Restore the manual recovery actions after the operating system handoff.
             const showRecovery = () => {
@@ -363,7 +361,7 @@
 
             // Keep the immediate opening attempt separate from the recovery timer.
             window.setTimeout(() => window.location.replace(deepLink), 40);
-        }
+        };
 
         // A demo guest link from the WIFIGATE Host examples (ep=v1.demo_…)
         // carries only which example and the stay window. It shows what a
@@ -495,7 +493,7 @@
             if (showDemoPreview()) {
                 return;
             }
-            openImmediately(buildDeepLink());
+            scheduleAppOpen(buildDeepLink());
         });
     </script>
 </head>
