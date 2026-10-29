@@ -213,7 +213,7 @@ test("Manager example gate, Dual Control and group use real workspace controls w
           .filter({ hasText: copy("לא ניתן להסיר", "cannot be removed") })
           .waitFor();
         await tab("guests");
-        await content.getByRole("button", { name: /20261027/ }).click();
+        await content.locator('[data-history-day="20261027"]').click();
         await content.getByText("Demo technician", { exact: true }).waitFor();
         await tab("events");
         assert.equal(await content.locator(".manager-event-edit").count(), 7);

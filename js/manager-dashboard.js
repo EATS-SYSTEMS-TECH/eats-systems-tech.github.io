@@ -1,6 +1,7 @@
 import { renderManagerOrganization } from "./manager-organization.js";
 import { createManagerOrganizationPicker } from "./manager-organization-picker.js";
 import { organizeManagerPeople } from "./manager-people-workspace.js";
+import { renderManagerHistoryDays, renderManagerHistoryRecords } from "./manager-history-workspace.js";
 import { createManagerSetupGuide } from "./manager-setup-guide.js";
 import { createManagerOrganizationCard } from "./manager-organization-card.js";
 import { createPersonalOrganizationPage } from "./manager-organization-list.js";
@@ -1929,46 +1930,12 @@ export function createManagerDashboard({
       return;
     }
     if (cmd === "ADMIN_LIST_HISTORY" && Array.isArray(r.data.days)) {
-      for (const [day, count] of r.data.days)
-        content.append(
-          button(`${day} · ${count}`, async () => {
-            content.replaceChildren();
-            content.append(
-              button(t("חזרה לימים", "Back to days"), () =>
-                showTab(currentTab),
-              ),
-            );
-            await showRead(
-              content,
-              cmd,
-              { dayKey: day, page: { limit: 20, cursor: null } },
-              "items",
-              false,
-            );
-          }),
-        );
-      if (!r.data.days.length)
-        content.append(
-          node(
-            "p",
-            t("אין היסטוריה זמינה בשער.", "No history available on the gate."),
-          ),
-        );
-      if (r.data.page?.nextCursor)
-        content.append(
-          button(t("ימים נוספים", "More days"), async () => {
-            await showRead(
-              content,
-              cmd,
-              {
-                dayKey: null,
-                page: { limit: 20, cursor: r.data.page.nextCursor },
-              },
-              "items",
-              true,
-            );
-          }),
-        );
+      renderManagerHistoryDays(content, {
+        days: r.data.days, language, guests: tab === "guests", more, createButton: button,
+        onDay: day => showRead(content, cmd, { dayKey: day, page: { limit: 20, cursor: null } }, "items", false),
+        moreButton: r.data.page?.nextCursor ? button(t("ימים נוספים", "More days"), () =>
+          showRead(content, cmd, { dayKey: null, page: { limit: 20, cursor: r.data.page.nextCursor } }, "items", true)) : undefined,
+      });
       return;
     }
     const rows = key ? r.data?.[key] : null;
@@ -1976,51 +1943,15 @@ export function createManagerDashboard({
       currentRows = more ? [...currentRows, ...rows] : rows;
       cursor = r.data.page?.nextCursor ?? r.data.page?.cursor ?? null;
       if (cmd === "ADMIN_LIST_HISTORY") {
-        const events = he
-          ? [
-              "",
-              "פתיחה",
-              "הפעלה",
-              "כיבוי",
-              "החזקה",
-              "שחרור",
-              "פתוח מאולץ",
-              "סגור מאולץ",
-              "רגיל",
-              "הפעלה מחדש",
-              "היסטוריה נוקתה",
-            ]
-          : [
-              "",
-              "Open",
-              "On",
-              "Off",
-              "Hold",
-              "Release",
-              "Held open",
-              "Held closed",
-              "Normal",
-              "Restart",
-              "History cleared",
-            ];
-        renderTable(
-          content,
-          currentRows
-            .filter((row) => currentTab !== "guests" || row[7] === 3)
-            .map((row) => ({
-              time: row[1]
-                ? new Date((row[1] + row[2] * 60) * 1000)
-                    .toISOString()
-                    .replace("T", " ")
-                    .slice(0, 19)
-                : t("זמן לא ידוע", "Time unknown"),
-              action: events[row[5]] ?? row[5],
-              source: row[6] === 9 ? "WIFIGATE Manager" : row[6],
-              name: row[13],
-              phone: row[14],
-              result: row[8] === 0 ? t("בוצע", "Done") : t("סורב", "Refused"),
-            })),
-        );
+        const visibleRows = currentRows.filter(row => tab !== "guests" || row[7] === 3);
+        renderManagerHistoryRecords(content, {
+          rows: visibleRows, language, guests: tab === "guests", day: payload.dayKey,
+          backButton: button(t("חזרה לימים", "Back to days"), () => showTab(tab)),
+          exportButton: button(t("ייצוא הנתונים המוצגים", "Export displayed data"), () => exportRows(visibleRows)),
+          moreButton: cursor ? button(t("טען עוד", "Load more"), () =>
+            showRead(content, cmd, { ...payload, page: { ...payload.page, cursor } }, key, true)) : undefined,
+        });
+        return;
       } else renderTable(content, currentRows);
       if (cursor) {
         const loadMore = button(t("טען עוד", "Load more"), () =>
