@@ -66,3 +66,13 @@ test("example organization mutations stay isolated and preserve pending invitati
     0,
   );
 });
+
+
+test("example organization rename is versioned, validated and isolated", async()=>{
+ const a=createExampleOrganization(createManagerExampleData()),b=createExampleOrganization(createManagerExampleData());
+ const old=b.summary().name;
+ await a.request(a.path+"/name","POST",{name:" Renamed demo ",expectedVersion:1});
+ assert.equal(a.summary().name,"Renamed demo");assert.equal(a.summary().version,2);assert.equal(b.summary().name,old);
+ await assert.rejects(a.request(a.path+"/name","POST",{name:"Stale",expectedVersion:1}),/CONFLICT/);
+ await assert.rejects(a.request(a.path+"/name","POST",{name:" ",expectedVersion:2}),/INVALID_REQUEST/);
+});

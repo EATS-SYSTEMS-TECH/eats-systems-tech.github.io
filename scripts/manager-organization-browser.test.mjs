@@ -51,7 +51,8 @@ async function fixture(t, browser, origin, language, width, viewer = false) {
           status: "active",
         },
       ];
-      let version = 1,
+      let organizationName = language === "he" ? "כיכר החוף" : "Harbor Residence",
+        version = 1,
         logoDataUrl = null,
         pending = [];
       const api = async (p, method = "GET", body) => {
@@ -90,7 +91,7 @@ async function fixture(t, browser, origin, language, width, viewer = false) {
           return {
             organization: {
               id: "org-a",
-              name: language === "he" ? "כיכר החוף" : "Harbor Residence",
+              name: organizationName,
               version,
               logoDataUrl,
             },
@@ -131,6 +132,11 @@ async function fixture(t, browser, origin, language, width, viewer = false) {
           return { items: window.members, nextCursor: null };
         if (p.startsWith("/organizations/org-a/invitations?"))
           return { items: pending, nextCursor: null };
+        if (p === "/organizations/org-a/name") {
+          if (body.expectedVersion !== version) throw new Error("CONFLICT");
+          organizationName = body.name; version++;
+          return { organization: { name: organizationName, version, logoDataUrl } };
+        }
         if (p === "/organizations/org-a/logo") {
           logoDataUrl = body.logoDataUrl;
           version++;
@@ -494,7 +500,7 @@ test("organization users can open system workspaces without organization people 
   assert.equal(
     await page
       .locator(
-        "input[type=file], .manager-organization-remove, .manager-organization-people-head button",
+        "input[type=file], .manager-organization-remove, .manager-organization-people-head button, .manager-organization-rename",
       )
       .count(),
     0,
@@ -519,4 +525,26 @@ test("organization users can open system workspaces without organization people 
   assert.equal(await page.getByRole("tab").count(), 10);
   assert.deepEqual(await page.evaluate(() => window.writes), []);
   await page.evaluate(() => window.dashboard.close());
+});
+
+
+test("organization pencil opens prefilled rename dialog; cancel is local and save updates header", async (t) => {
+ const {origin,browser}=await startSite(t);
+ for (const language of ["he","en"]) for (const width of [390,1440]) {
+  const page=await fixture(t,browser,origin,language,width), he=language==="he";
+  await page.getByRole("button",{name:he?"בחירת ארגון":"Choose organization",exact:true}).click();
+  await page.locator('.manager-organization-option[data-organization-id="org-a"]').click();
+  const edit=page.getByRole("button",{name:he?"שינוי שם הארגון":"Rename organization",exact:true});
+  await edit.click();
+  const input=page.locator('dialog input[name="name"]');
+  assert.equal(await input.inputValue(),he?"כיכר החוף":"Harbor Residence");
+  await page.keyboard.press("Escape");
+  assert.deepEqual(await page.evaluate(()=>window.writes),[]);
+  await edit.click();
+  await input.fill("  New organization  ");
+  await page.getByRole("button",{name:he?"שמירת השם":"Save name",exact:true}).click();
+  await page.getByRole("heading",{name:"New organization",exact:true}).waitFor();
+  assert.deepEqual(await page.evaluate(()=>window.writes),[{path:"/organizations/org-a/name",body:{name:"New organization",expectedVersion:1}}]);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+ }
 });

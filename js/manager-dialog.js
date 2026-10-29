@@ -59,6 +59,7 @@ export function createManagerDialog({
           label.textContent = text;
           input.name = name;
           input.type = type;
+          input.value = options.initialValues?.[name] ?? "";
           input.required = true;
           input.maxLength = type === "email" ? 254 : 100;
           label.append(input);

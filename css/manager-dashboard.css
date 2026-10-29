@@ -1,5 +1,5 @@
-@import url("./manager-events.css?v=20261029orgicons1");
-@import url("./manager-control-workspace.css?v=20261029orgicons1");
+@import url("./manager-events.css?v=20261029orgrename1");
+@import url("./manager-control-workspace.css?v=20261029orgrename1");
 
 .platform-page[data-product="manager"] {
   color: var(--ink, #0f172a);
@@ -1481,3 +1481,8 @@ body[data-product] .manager-organization-workspace>.manager-organization-pending
  .manager-organization-guide .manager-organization-benefits strong { align-self:center }
  .manager-organization-guide .manager-organization-benefits p { grid-column:2;margin:2px 0 0 }
 }
+
+.manager-organization-name-row { display:flex;align-items:center;gap:12px;min-width:0 }
+.manager-organization-name-row h2 { min-width:0;overflow-wrap:anywhere }
+.manager-shell .manager-organization-name-row .manager-organization-rename { display:grid;place-items:center;flex-shrink:0;width:44px;min-height:44px;padding:0;border:1px solid #ead9cb;background:#fff5ec;color:#a13c12;border-radius:13px }
+.manager-shell .manager-organization-name-row .manager-organization-rename:hover:not(:disabled) { background:#0b0b0c;color:#fff;border-color:#0b0b0c }

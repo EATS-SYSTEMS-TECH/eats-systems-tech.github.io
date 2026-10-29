@@ -176,6 +176,34 @@ export async function renderManagerOrganization({
           ),
     ),
   );
+  const organizationTitle = identity.querySelector("h2");
+  const nameRow = node("div", undefined, "manager-organization-name-row");
+  organizationTitle.replaceWith(nameRow); nameRow.append(organizationTitle);
+  if (permissions.manageLogo) {
+    const editName = button("", async () => {
+      const saved = await dialogs.form({
+        title: t("שינוי שם הארגון", "Rename organization"),
+        message: t("השם המעודכן יופיע לכל אנשי הארגון ובכל רשימות הארגונים.", "The updated name will appear for all organization members and in organization lists."),
+        fields: [["name", t("שם הארגון", "Organization name")]],
+        initialValues: { name: org.name },
+        submitLabel: t("שמירת השם", "Save name"), errorText,
+        onSubmit: async (values) => {
+          if (!isCurrent()) throw new Error("CANCELLED");
+          const name = values.name.trim();
+          if (!name || name.length > 100) throw new Error("INVALID_REQUEST");
+          if (name === org.name) return;
+          await ensureRecent();
+          if (!isCurrent()) throw new Error("CANCELLED");
+          await api(path + "/name", "POST", { name, expectedVersion: org.version });
+        },
+      });
+      if (saved && isCurrent()) await onRefresh();
+    }, "manager-organization-rename");
+    editName.setAttribute("aria-label", t("שינוי שם הארגון", "Rename organization"));
+    editName.title = t("שינוי שם הארגון", "Rename organization");
+    editName.innerHTML = '<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5 4 4M4 20l4-1L20 7a2.8 2.8 0 0 0-4-4L4 15z"/></svg>';
+    nameRow.append(editName);
+  }
   const ownerLine = node("p", undefined, "manager-organization-owner-line");
   const ownerEmail = node("span", owner.email);
   ownerEmail.dir = "ltr";

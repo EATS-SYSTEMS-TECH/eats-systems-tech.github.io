@@ -9,7 +9,8 @@ export function createExampleOrganization(
 ) {
   const path = "/example-organizations/" + definition.id;
   const owner = { uid: "demo-organization-owner", email: "owner@example.test" };
-  let logoDataUrl = null,
+  let organizationName = definition.name,
+    logoDataUrl = null,
     logoChanged = false,
     version = 1,
     sequence = 0;
@@ -30,6 +31,7 @@ export function createExampleOrganization(
   };
   const organization = () => ({
     ...definition,
+    name: organizationName,
     logoAsset: logoChanged ? undefined : definition.logoAsset,
     version,
     logoDataUrl,
@@ -74,6 +76,13 @@ export function createExampleOrganization(
           ),
           nextCursor: null,
         };
+      if (url === path + "/name" && method === "POST") {
+        if (body.expectedVersion !== version) fail("CONFLICT");
+        const name = String(body.name ?? "").trim();
+        if (!name || name.length > 100) fail("INVALID_REQUEST");
+        organizationName = name; version++;
+        return { organization: organization() };
+      }
       if (url === path + "/logo" && method === "POST") {
         if (body.expectedVersion !== version) fail("CONFLICT");
         if (
