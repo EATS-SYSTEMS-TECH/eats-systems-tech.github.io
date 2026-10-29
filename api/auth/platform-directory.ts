@@ -26,13 +26,19 @@ export function getPlatformDirectory(
   role = "all",
   after?: string,
   product = "all",
+  q?: string,
 ): Promise<PlatformDirectory> {
   const query = new URLSearchParams({ role, product });
   if (after) query.set("after", after);
+  if (q) query.set("q", q);
   return authenticatedRequest(profileApi, user, {
     method: "GET",
     url: `/api/v1/platform/directory?${query}`,
   });
+}
+
+export function createPlatformOrganization(user: FirebaseUser, input: {product: "host" | "pay"; name: string; timezone: string}, key: string): Promise<{organization:{id:string;name:string}}> {
+  return authenticatedRequest(profileApi,user,{method:"POST",url:input.product === "host" ? "/api/v1/organizations" : "/api/v1/platform/directory/organizations",data:input.product === "host" ? {name:input.name,timezone:input.timezone} : input,headers:{"Idempotency-Key":key}});
 }
 
 export type PlatformDirectoryFinancials = {

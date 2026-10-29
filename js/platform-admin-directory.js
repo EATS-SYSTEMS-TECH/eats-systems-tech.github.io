@@ -11,6 +11,8 @@ import {
 import { productLink } from "./product-switcher.js";
 import { createPlatformAccountDeletion } from "./platform-account-deletion.js";
 import { createPlatformAccountActions } from "./platform-account-actions.js";
+import { createPlatformOrganizationActions } from "./platform-organization-actions.js";
+import { createDirectorySearchLoader } from "./platform-directory-search.js";
 
 const element = (tag, text, className) => {
   const node = document.createElement(tag);
@@ -28,6 +30,8 @@ export function createPlatformAdminDirectory({
   ensureRecent,
 }) {
   const t = (he, en) => (language === "he" ? he : en);
+  const directorySearch = createDirectorySearchLoader(user);
+  let searchTimer, organizationId = "", organizationItems = [];
   let closed = false,
     generation = 0,
     selected = "all",
@@ -69,6 +73,7 @@ export function createPlatformAdminDirectory({
     button.dataset.role = role;
     button.addEventListener("click", () => {
       selected = role;
+      clearTimeout(searchTimer);search.value="";organizationId="";
       void load();
     });
     filters.append(button);
@@ -116,7 +121,7 @@ export function createPlatformAdminDirectory({
   more.addEventListener("click", () => void load(true));
   const refresh = element("button", t("רענון", "Refresh"), "platform-button");
   refresh.type = "button";
-  refresh.addEventListener("click", () => void load());
+  refresh.addEventListener("click", () => {directorySearch.clear();void load();});
   const header = element("div", null, "platform-admin-directory-heading");
   const heading = element("div");
   heading.append(title, note);
@@ -133,10 +138,27 @@ export function createPlatformAdminDirectory({
   const listHeading = element("h3", t("משתמשי הפלטפורמה", "Platform accounts"));
   const listToolbar = element("div", null, "platform-admin-list-toolbar");
   listToolbar.append(listHeading);
+  const organizationActions = standalone && product === "all" && ensureRecent ? createPlatformOrganizationActions({user,language,ensureRecent,onChanged:async created=>{
+    selected="organizations";selectedProduct=created.product;organizationId=created.id??"";search.value="";directorySearch.clear();productCounts={};await load();
+    actionStatus.textContent=t("הארגון נוצר בהצלחה.","Organization created successfully.");
+  }}) : null;
+  const createOrganization = element("button",t("יצירת ארגון חדש","Create organization"),"platform-button platform-admin-create-organization");
+  createOrganization.type="button";createOrganization.hidden=true;
+  createOrganization.addEventListener("click",()=>organizationActions?.open(selectedProduct));
+  if(organizationActions)listToolbar.append(createOrganization);
+  const searchTools=element("div",null,"platform-admin-search-tools");
+  const searchLabel=element("label",t("חיפוש חשבון","Search accounts"));
+  const search=element("input");search.type="search";search.maxLength=254;search.autocomplete="off";search.placeholder=t("שם או כתובת אימייל","Name or email address");searchLabel.append(search);
+  const organizationLabel=element("label",t("בחירת ארגון","Choose organization"));
+  const organizationSelect=element("select");organizationLabel.hidden=true;organizationLabel.append(organizationSelect);
+  searchTools.append(searchLabel,organizationLabel);
+  organizationSelect.addEventListener("change",()=>{organizationId=organizationSelect.value;renderOrganizations();});
+  search.addEventListener("input",()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{if(selected==="organizations")renderOrganizations();else void load();},350);});
   const actionStatus = element("p");
   actionStatus.setAttribute("role", "status");
   const changed = message => {
     actionStatus.textContent = message;
+    directorySearch.clear();
     productCounts = {};
     void load();
   };
@@ -201,6 +223,7 @@ export function createPlatformAdminDirectory({
     ...(product === "all" ? [revenue] : []),
     hint,
     filters,
+    searchTools,
     status,
     actionStatus,
     rows,
@@ -211,6 +234,7 @@ export function createPlatformAdminDirectory({
   function selectProduct(id) {
     if (selectedProduct === id) return;
     selectedProduct = id;
+    organizationId="";search.value="";clearTimeout(searchTimer);
     void load();
   }
 
@@ -261,6 +285,12 @@ export function createPlatformAdminDirectory({
     for(const [id,value] of Object.entries(organization.products)) products.append(element("span", `${nameFor(id)} · ${state(value)}`));
     card.append(artwork,identity,element("span",state(organization.status),"platform-admin-organization-status"),products);
     return card;
+  }
+  function renderOrganizations() {
+    const q=search.value.trim().normalize("NFKC").toLowerCase();
+    const matches=organizationItems.filter(org=>(!organizationId||org.id===organizationId)&&`${org.name} ${org.id}`.normalize("NFKC").toLowerCase().includes(q));
+    rows.replaceChildren(...matches.map(organizationCard));
+    status.textContent=matches.length?t(`${matches.length} ארגונים מוצגים`,`${matches.length} organizations shown`):t("לא נמצאו ארגונים תואמים.","No matching organizations found.");
   }
 
   function personCard(person) {
@@ -507,6 +537,11 @@ export function createPlatformAdminDirectory({
     const epoch = ++generation;
     root.setAttribute("aria-busy", "true");
     renderProductFilters();
+    organizationLabel.hidden=selected!=="organizations";
+    createOrganization.hidden=selected!=="organizations";
+    searchLabel.firstChild.textContent=selected==="organizations"?t("חיפוש ארגון","Search organizations"):t("חיפוש חשבון","Search accounts");
+    search.placeholder=selected==="organizations"?t("שם ארגון","Organization name"):t("שם או כתובת אימייל","Name or email address");
+    hint.textContent=search.value.trim()?t("החיפוש מסנן את הרשימה בלבד; סיכום ההכנסות נשאר לפי המסלול והתפקיד שנבחרו.","Search filters the list only; revenue totals still follow the selected product and role."):t("פתחו חשבון כדי לראות תוכניות ועלויות לפי מוצר.","Open an account to see plans and costs by product.");
     refresh.disabled = true;
     if (!append) {
       rows.replaceChildren();
@@ -527,11 +562,11 @@ export function createPlatformAdminDirectory({
         String(button.dataset.role === selected),
       );
     try {
-      const data = await getPlatformDirectory(
-        user,
+      const data = await directorySearch.get(
         selected === "organizations" ? "all" : selected,
         append ? next : undefined,
         selectedProduct,
+        selected === "organizations" ? "" : search.value.trim(),
       );
       if (closed || epoch !== generation) return;
       if (data.productCounts) {
@@ -548,9 +583,13 @@ export function createPlatformAdminDirectory({
       if (selected === "organizations") {
         const organizations = await getPlatformOrganizationOverview(user, selectedProduct);
         if (closed || epoch !== generation) return;
-        rows.append(...organizations.items.map(organizationCard));
+        organizationItems=organizations.items;
+        organizationSelect.replaceChildren(element("option",t("כל הארגונים","All organizations")),...organizationItems.map(org=>{const option=element("option",org.name);option.value=org.id;return option;}));
+        organizationSelect.options[0].value="";
+        if(!organizationItems.some(org=>org.id===organizationId))organizationId="";
+        organizationSelect.value=organizationId;
+        renderOrganizations();
         more.hidden = true;
-        status.textContent = organizations.items.length ? (organizations.items.length === 1 ? t("ארגון אחד בסינון הנבחר", "1 organization in this selection") : t(`${organizations.items.length} ארגונים בסינון הנבחר`, `${organizations.items.length} organizations in this selection`)) : t("לא נמצאו ארגונים במסלול שנבחר.", "No organizations found for this product.");
         return;
       }
       rows.append(...data.items.map(personCard));
@@ -588,6 +627,7 @@ export function createPlatformAdminDirectory({
   return {
     close() {
       closed = true;
+      clearTimeout(searchTimer);directorySearch.clear();organizationActions?.destroy();
       generation++;
       financialGeneration++;
       actions?.close();
