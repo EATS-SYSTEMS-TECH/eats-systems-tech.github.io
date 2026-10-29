@@ -45,11 +45,11 @@ try {
   const desktop = await visit({ viewport: { width: 1280, height: 800 }, expectAutoplay: true });
   assert.equal(desktop.state, "video", "desktop plays the video");
   assert.ok(desktop.videoRequests.length > 0, "desktop downloads the video");
-  await desktop.page.locator("#hero-pause-toggle").click();
+  await desktop.page.locator("#hero-replay").click();
   assert.equal(await desktop.page.locator("#hero-video").evaluate((video) => video.paused), true, "visitor can pause playback");
   await desktop.page.setViewportSize({ width: 1400, height: 800 });
   assert.equal(await desktop.page.locator("#hero-video").evaluate((video) => video.paused), true, "resize preserves the visitor pause");
-  await desktop.page.locator("#hero-pause-toggle").focus();
+  await desktop.page.locator("#hero-replay").focus();
   await desktop.page.keyboard.press("Enter");
   await desktop.page.waitForFunction(() => !document.getElementById("hero-video").paused);
   await desktop.context.close();
@@ -64,18 +64,23 @@ try {
     assert.equal(result.state, "video", `${name}: autoplay starts before input`);
     assert.equal(await video.evaluate(v => v.muted && v.defaultMuted && v.playsInline && !v.loop), true, `${name}: muted inline single playback`);
     assert.equal(await replay.isVisible(), true, `${name}: replay remains visible during playback`);
-    const controls = await result.page.evaluate(() => ["hero-replay", "hero-pause-toggle"].map(id => {
+    const controls = await result.page.evaluate(() => ["hero-replay"].map(id => {
       const e = document.getElementById(id), r = e.getBoundingClientRect(); return { id, width: r.width, height: r.height, hit: e.contains(document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2)) };
     }));
-    assert.ok(controls.every(control => control.hit && control.height >= 44), `${name}: replay and compact pause have unobstructed touch targets`);
-    for (const paused of [false, true]) {
-      await video.evaluate(v => { v.currentTime = 3; });
-      await result.page.waitForFunction(() => document.getElementById("hero-video").currentTime > 2);
-      if (paused) await result.page.locator("#hero-pause-toggle").click();
-      await replay.focus(); await result.page.keyboard.press("Enter");
-      await result.page.waitForFunction(() => { const v = document.getElementById("hero-video"); return !v.paused && v.currentTime > 0 && v.currentTime < 1; });
-      assert.equal(await replay.isVisible(), true, `${name}: replay restarts at zero while ${paused ? "paused" : "playing"}`);
-    }
+    assert.ok(controls.every(control => control.hit && control.height >= 44), `${name}: primary playback control has an unobstructed touch target`);
+    // The accepted 516964142 change made this the single play/pause action.
+    // A visitor pause resumes at the same point; only an ended clip restarts.
+    await video.evaluate(v => { v.currentTime = 3; });
+    await result.page.waitForFunction(() => document.getElementById("hero-video").currentTime > 2);
+    await replay.click();
+    assert.equal(await video.evaluate(v => v.paused), true, `${name}: primary action pauses`);
+    const pausedAt = await video.evaluate(v => v.currentTime);
+    assert.equal(await replay.getAttribute("data-playing"), "false");
+    await replay.focus(); await result.page.keyboard.press("Enter");
+    await result.page.waitForFunction(() => !document.getElementById("hero-video").paused);
+    assert.ok(await video.evaluate((v, value) => v.currentTime >= value, pausedAt), `${name}: manual resume preserves position`);
+    await result.page.waitForFunction(() => document.getElementById("hero-replay").dataset.playing === "true");
+    assert.equal(await replay.getAttribute("data-playing"), "true");
     if (name === "phone") {
       // Observe the actual complete15s clip after replay, without faking an
       // ended event. Viewport re-entry must not start a completed clip again.
@@ -92,8 +97,8 @@ try {
   }
 
   const superseded = await visit({ viewport: { width: 390, height: 844 }, expectAutoplay: true, delayedFirstPlay: true });
-  await superseded.page.locator("#hero-pause-toggle").click();
-  await superseded.page.locator("#hero-pause-toggle").click();
+  await superseded.page.locator("#hero-replay").click();
+  await superseded.page.locator("#hero-replay").click();
   await superseded.page.waitForTimeout(1200);
   assert.equal(await superseded.page.locator("#hero-video").evaluate(v => !v.paused && v.currentTime > 0), true, "older pending autoplay cannot pause the newer manual resume");
   await superseded.context.close();
@@ -135,7 +140,7 @@ try {
     assert.equal(framing.imageTransform, framing.videoTransform, `${name}: image/video scale matches`);
     await visitResult.context.close();
   }
-  console.log("Hero video: phone/desktop autoplay, in-play and paused replay from zero, usable replay/pause controls, stale-play and rejection recovery; explicit motion/SaveData zero-download preferences and matching poster crop.");
+  console.log("Hero video: phone/desktop autoplay, single primary pause/resume control, position retained on resume, stale-play and rejection recovery; explicit motion/SaveData zero-download preferences and matching poster crop.");
 } finally {
   await browser.close();
 }
