@@ -923,3 +923,58 @@
   background: var(--reservation-danger);
   filter: brightness(1.15);
 }
+
+/* Administrative reservation workspace; customer reservation pages keep their own layout. */
+.reservations-admin .reservation-admin-icon{display:inline-grid;place-items:center;flex:none;width:24px;height:24px;color:inherit}
+.reservations-admin .reservation-admin-icon svg{display:block;width:100%;height:100%}
+.reservations-admin .reservations-workspace-label{display:block;font-size:11px;font-weight:750;letter-spacing:.08em;color:#6b7890;margin-bottom:8px}
+.reservations-admin .reservations-admin__heading h2{font-size:clamp(22px,2vw,30px);letter-spacing:-.025em;color:#12243b}
+.reservations-admin .reservations-admin__heading .platform-button{display:flex;align-items:center;justify-content:center;gap:8px;flex:none;min-height:44px}
+.reservations-admin .reservations-overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:8px 0 10px}
+.reservations-admin .reservations-overview-card{display:flex;align-items:center;gap:14px;padding:22px;border:1px solid #e1e8f1;border-radius:18px;background:linear-gradient(130deg,#fff,#f7faff)}
+.reservations-admin .reservations-overview-card>.reservation-admin-icon{width:48px;height:48px;padding:12px;border-radius:14px;background:#eaf1ff;color:#315fad}
+.reservations-admin .reservations-overview-card:nth-child(2)>.reservation-admin-icon{background:#f1ecff;color:#7554b0}
+.reservations-admin .reservations-overview-card:nth-child(3)>.reservation-admin-icon{background:#e7f6ef;color:#247855}
+.reservations-admin .reservations-overview-card div{display:grid;gap:6px;min-width:0}
+.reservations-admin .reservations-overview-card span:not(.reservation-admin-icon){font-size:13px;color:#5c6c81}
+.reservations-admin .reservations-overview-card strong{font-size:30px;line-height:1.15;color:#12243b;font-variant-numeric:tabular-nums}
+.reservations-admin .reservations-flow-help{margin:0;font-size:13px;color:#5c6c81}
+.reservations-admin .reservations-filters{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
+.platform-page .portal-panel.reservations-admin .reservations-filters button{display:grid;grid-template-columns:1fr auto;align-content:start;gap:12px 6px;padding:16px;min-height:108px;border-radius:14px;text-align:start;color:#53647b;background:#fff;min-width:0;transition:border-color .16s}
+.platform-page .portal-panel.reservations-admin .reservations-filters button>.reservation-admin-icon{grid-column:1;grid-row:1;width:22px;height:22px}
+.platform-page .portal-panel.reservations-admin .reservations-filters button>span:not(.reservation-admin-icon){grid-column:1/-1;grid-row:2;font-size:13px}
+.platform-page .portal-panel.reservations-admin .reservations-filters button>b{grid-column:2;grid-row:1;font-size:18px;line-height:24px}
+.platform-page .portal-panel.reservations-admin .reservations-filters button[aria-pressed="true"]{color:#fff;background:#14283f;border-color:#14283f;box-shadow:0 5px 14px #14283f14}
+.platform-page .portal-panel.reservations-admin .reservations-filters button:hover:not(:disabled){color:#fff;background:#14283f;border-color:#14283f;filter:none}
+.reservations-admin .reservations-filters button:focus-visible{outline:3px solid #5688d8;outline-offset:3px}
+.reservations-admin .reservations-admin-empty{display:grid;justify-items:center;text-align:center;padding:50px 24px;border:1px dashed #d4dfec;border-radius:20px;background:radial-gradient(ellipse at top,#f1f6fe,#fff 65%);margin:4px 0 8px}
+.reservations-admin .reservations-admin-empty[hidden]{display:none}
+.reservations-admin .reservations-admin-empty>.reservation-admin-icon{width:68px;height:68px;padding:18px;border-radius:22px;background:#e9f0fb;color:#4b6d9c;margin-bottom:18px}
+.reservations-admin .reservations-admin-empty h3{margin:0 0 10px;font-size:21px;color:#152b44}
+.reservations-admin .reservations-admin-empty p{max-width:54ch;margin:0;font-size:14px;line-height:1.8;color:#64758b}
+.reservations-admin .reservations-list{display:grid;gap:12px}
+.reservations-admin .reservations-admin-row{border-radius:18px;box-shadow:0 3px 12px #14283f04;overflow:hidden}
+.reservations-admin .reservations-admin-row summary{min-height:88px;padding:20px;gap:18px}
+.reservations-admin .reservations-admin-row summary>bdi,.reservations-admin .reservations-admin-row summary span>bdi{font-weight:650;color:#18304c}
+.reservations-admin .reservations-admin-row summary small{margin-top:5px}
+.reservations-admin .reservations-admin-row[open] summary{background:#f5f8fc;border-bottom:1px solid #e3eaf3;border-radius:0}
+.reservations-admin .reservations-admin-detail{padding:20px;gap:18px}
+.reservations-admin .reservations-admin-detail>div{padding:18px;border:1px solid #e4eaf3;border-radius:14px;background:#fff;min-width:0}
+.reservations-admin .reservations-admin-detail h4{display:flex;align-items:center;gap:8px;font-size:14px;color:#1a314d;margin:0 0 16px}
+.reservations-admin .reservations-admin-detail h4>.reservation-admin-icon{width:19px;height:19px;color:#607fa8}
+.reservations-admin .reservations-admin-detail dl{gap:12px 18px;font-size:13px;line-height:1.6}
+.reservations-admin .reservations-admin-detail ol{display:grid;gap:14px;font-size:13px;line-height:1.8;color:#55677e}
+.reservations-admin .reservations-admin-form{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;padding:22px;gap:18px;background:#f6f9fd;border:1px solid #e0e8f2;border-radius:16px}
+.reservations-admin .reservations-admin-form>.reservations-form-title,.reservations-admin .reservations-admin-form>.reservation-status{grid-column:1/-1}
+.reservations-admin .reservations-admin-form h4{margin:0}
+.reservations-admin .reservations-admin-form label{gap:8px;min-width:0;align-content:start;color:#233c58}
+.reservations-admin .reservations-admin-form small{font-size:12px;line-height:1.6;color:#62758c}
+.reservations-admin .reservations-admin-form :is(select,input,textarea){min-height:48px;border-color:#ccd9e8;line-height:1.6}
+.reservations-admin .reservations-admin-form textarea{min-height:102px;resize:vertical}
+.reservations-admin .reservations-admin-form :is(select,input,textarea):focus-visible{outline:3px solid #a9c6f0;outline-offset:2px;border-color:#5389d3}
+.reservations-admin[aria-busy="true"]>.reservation-status:not(:empty){display:flex;align-items:center;gap:10px;color:#526d91}
+.reservations-admin[aria-busy="true"]>.reservation-status:not(:empty)::before{content:"";width:16px;height:16px;border:2px solid #d4e1f4;border-top-color:#426b9f;border-radius:50%;animation:reservation-admin-spin .8s linear infinite}
+@keyframes reservation-admin-spin{to{transform:rotate(360deg)}}
+@media(max-width:1100px){.reservations-admin .reservations-filters{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:640px){.reservations-admin .reservations-overview{grid-template-columns:1fr;gap:8px}.reservations-admin .reservations-overview-card{padding:14px 16px}.reservations-admin .reservations-overview-card div{display:flex;flex:1;align-items:center;justify-content:space-between;gap:8px}.reservations-admin .reservations-overview-card strong{font-size:24px}.reservations-admin .reservations-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.platform-page .portal-panel.reservations-admin .reservations-filters button{padding:14px;min-height:94px}.platform-page .portal-panel.reservations-admin .reservations-filters button[data-stage="all"]{grid-column:1/-1;grid-template-columns:auto 1fr auto;min-height:52px;align-items:center;align-content:center}.platform-page .portal-panel.reservations-admin .reservations-filters button[data-stage="all"]>span:not(.reservation-admin-icon){grid-column:2;grid-row:1}.platform-page .portal-panel.reservations-admin .reservations-filters button[data-stage="all"]>b{grid-column:3}.reservations-admin .reservations-admin-form{grid-template-columns:1fr;padding:16px}.reservations-admin .reservations-admin-detail{padding:12px}.reservations-admin .reservations-admin__heading{flex-wrap:wrap}.reservations-admin .reservations-admin-row summary{gap:12px;padding:16px}.reservations-admin .reservations-admin-empty{padding:32px 18px}}
+@media(prefers-reduced-motion:reduce){.reservations-admin .reservations-filters button{transition:none}.reservations-admin[aria-busy="true"]>.reservation-status:not(:empty)::before{animation:none}}
