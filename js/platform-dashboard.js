@@ -746,7 +746,7 @@ function pricingExplanation(product, category) {
         organizations: "אין תוספת חודשית עבור ארגונים ב־WIFIGATE Host. העלות נקבעת לפי השערים הפיזיים הייחודיים בחשבון.",
       },
       manager: {
-        gates: "$1.90 לחודש לכל Gate, כולל שערים בתוך קבוצות. אותו שער שמופיע בכמה קבוצות או גם בנפרד נספר פעם אחת. סנכרון חוזר אינו מוסיף עלות. המינימום לחשבון הוא $1.90 לחודש, והוא נכלל בשורה זו.",
+        gates: "$1.90 לחודש לכל Gate, כולל שערים בתוך קבוצות. אותו שער שמופיע בכמה קבוצות או גם בנפרד נספר פעם אחת. סנכרון חוזר אינו מוסיף עלות. כשאין רכיבים פעילים, חיוב המערכות הוא אפס.",
         dualControls: "$1.90 לחודש לכל Dual Control, כולל זוגות בתוך קבוצות. זוג הוא רכיב אחד גם כשיש בו שני שערים פיזיים; אותו זוג נספר פעם אחת.",
         groups: "לקבוצה אין תעריף נפרד. הרכיבים שבתוכה מחושבים בשורות Gate ו־Dual Control.",
         organizations: "שלושת הארגונים הפעילים הראשונים בבעלות החשבון כלולים. כל ארגון פעיל נוסף מוסיף $1 לחודש. מנהלי ארגון ללא חשבון לקוח אינם משלמים.",
@@ -759,7 +759,7 @@ function pricingExplanation(product, category) {
         organizations: "WIFIGATE Host has no monthly organization surcharge. Cost depends on the account's unique physical gates.",
       },
       manager: {
-        gates: "$1.90/month per Gate, including Gates inside groups. The same Gate is counted once across groups and standalone exports. Syncing adds no cost. The account minimum is $1.90/month and is included in this line.",
+        gates: "$1.90/month per Gate, including Gates inside groups. The same Gate is counted once across groups and standalone exports. Syncing adds no cost. With no active objects, system subscription charges are zero.",
         dualControls: "$1.90/month per Dual Control, including pairs inside groups. A pair is one object despite its two physical gates; the same pair is counted once.",
         groups: "Groups have no separate fee. Their contents contribute to Gates and Dual Controls.",
         organizations: "The first three active account-owned organizations are included. Each additional organization adds $1/month. Organization administrators without a customer account do not pay.",

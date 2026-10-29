@@ -1488,3 +1488,6 @@ body[data-product] .manager-organization-workspace>.manager-organization-pending
 .manager-organization-name-row h2 { min-width:0;overflow-wrap:anywhere }
 .manager-shell .manager-organization-name-row .manager-organization-rename { display:grid;place-items:center;flex-shrink:0;width:44px;min-height:44px;padding:0;border:1px solid #ead9cb;background:#fff5ec;color:#a13c12;border-radius:13px }
 .manager-shell .manager-organization-name-row .manager-organization-rename:hover:not(:disabled) { background:#0b0b0c;color:#fff;border-color:#0b0b0c }
+
+.platform-page .manager-system-actions .manager-button.manager-system-remove { background:#fff5f4;color:#b42318;border:1px solid #efcbc7;min-height:44px }
+.platform-page .manager-system-actions .manager-button.manager-system-remove:hover:not(:disabled){background:#b42318;color:#fff;border-color:#b42318}

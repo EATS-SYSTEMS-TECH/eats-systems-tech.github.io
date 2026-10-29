@@ -98,10 +98,8 @@ test("platform Manager admin can browse customer metadata and deliberately disco
           await window.dashboard.ready;
         }, language);
         const he = language === "he";
-        await page
-          .locator(".manager-platform-entry")
-          .first()
-          .click();
+        // Exercise the retained operator component directly; its former product entry is not a live route.
+        await page.evaluate(()=>window.dashboard.setManagement(true));
         // Platform administration is separate from personal systems; customer metadata
         // remains available without opening a gate-management session.
         await page

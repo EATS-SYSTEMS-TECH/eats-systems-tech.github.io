@@ -213,6 +213,7 @@ export function createManagerDashboard({
     dialogs,
     onOpen: (system) => task(() => openExample(system)),
     onOpenOrganization: openExampleOrganization,
+    renderSystemActions: system => systemActions(system,null,false,openExample),
   });
   const say = (text, error = false, state = "info") => {
     status.textContent = text;
@@ -1019,7 +1020,7 @@ export function createManagerDashboard({
     }
     say("");
   }
-  function systemActions(s, operatorAccount = null, workspace = false) {
+  function systemActions(s, operatorAccount = null, workspace = false, onOpen = openSystem) {
     const actions = node("div", undefined, "manager-system-actions");
     const secondary = node("div", undefined, "manager-system-options");
     if (
@@ -1057,7 +1058,7 @@ export function createManagerDashboard({
       actions.append(
         button(
           t("פתיחת סביבת ניהול", "Open workspace"),
-          () => openSystem(s),
+          () => onOpen(s),
           true,
         ),
       );
@@ -1066,14 +1067,12 @@ export function createManagerDashboard({
         button(t("שיוך לארגון", "Assign organization"), () => assignSystem(s)),
       );
     if (profile.account || operatorAccount || examples.isSystem(s)) {
-      secondary.append(
-        Object.assign(
-          button(t("ניתוק מ־Manager", "Disconnect from Manager"), async () => {
+      const removeButton = button(workspace || operatorAccount ? t("ניתוק מ־Manager", "Disconnect from Manager") : t("הסרת מערכת", "Remove system"), async () => {
             if (
               !(await confirmAction(
                 t(
-                  `לנתק את ${s.name} מ־Manager? הניהול המקומי ב־Bluetooth יישאר פעיל. שערים שמשויכים גם למערכות נוספות יישארו מחוברים דרכן.`,
-                  `Disconnect ${s.name} from Manager? Local Bluetooth management stays available. Gates also used by other systems remain connected through them.`,
+                  `להסיר את ${s.name} מ־Manager ולבטל את החיוב עבורה? אם זו המערכת האחרונה, חיוב המערכות יתאפס. רכיבים שמופיעים גם במערכות אחרות ותוספות ארגון ימשיכו להיות מחושבים בנפרד. הניהול המקומי ב־Bluetooth יישאר פעיל.`,
+                  `Remove ${s.name} from Manager and stop its system subscription charge? Removing the last system leaves no system subscription charge. Components still represented in other systems and organization extras remain billed separately. Local Bluetooth management stays available.`,
                 ),
               ))
             )
@@ -1113,10 +1112,10 @@ export function createManagerDashboard({
                 ),
               );
             say(messages.join(" "));
-          }),
-          { className: "manager-button manager-button-danger" },
-        ),
-      );
+});
+      removeButton.classList.add("manager-button-danger");
+      if(workspace || operatorAccount)secondary.append(removeButton);
+      else if(!scope) {removeButton.classList.add("manager-system-remove");removeButton.setAttribute("aria-label",t("הסרת מערכת: ","Remove system: ")+s.name);actions.append(removeButton);}
     }
     if ((workspace || operatorAccount) && secondary.childElementCount) {
       const menu = node("details", undefined, "manager-system-menu");
