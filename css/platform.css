@@ -1073,7 +1073,8 @@ html[dir="rtl"] .product-switcher__label strong {
 .platform-admin-counts strong { color: var(--ink); font-size: 2rem; font-variant-numeric: tabular-nums; }
 .platform-admin-products { border-block: 1px solid var(--line); margin-block: 1.6rem; padding-block: 1.2rem; }
 .platform-admin-products h3 { margin: 0 0 .85rem; font-size: .9rem; color: var(--muted); font-weight: 600; }
-.platform-admin-business { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.platform-admin-business { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); direction: ltr; }
+html[dir="rtl"] .platform-admin-business > * { direction: rtl; }
 .platform-admin-business a { display: flex; align-items: center; gap: .7rem; padding: 1rem; color: var(--ink); background: #fff; border-color: #e2e8f0; font-size: .9rem; transition: border-color .15s, background .15s; }
 .platform-admin-business a::before { content: ""; flex: 0 0 9px; height: 9px; border-radius: 50%; background: var(--host); }
 .platform-admin-business a:nth-child(2)::before { background: var(--pay); }

@@ -16,6 +16,10 @@ test('central management puts selectable products first and shows organizations 
   assert.equal(await root.locator(':scope > :first-child').getAttribute('class'),'platform-admin-products');
   assert.equal(await root.locator('[data-product="manager"]').getAttribute('aria-pressed'),'true');
   assert.deepEqual(await root.locator('.platform-admin-product-count').allTextContents(),['2','1','2']);
+  if(width>600){
+   const boxes=await Promise.all(['host','pay','manager'].map(id=>root.locator(`button[data-product="${id}"]`).boundingBox()));
+   assert.ok(boxes[0].x<boxes[1].x && boxes[1].x<boxes[2].x,'Host stays left, Pay center and Manager right in both languages');
+  }
   await root.locator('[data-role="organizations"]').click();
   await root.getByRole('heading',{name:'Example manager',exact:true}).waitFor();
   assert.equal(await root.locator('.platform-admin-revenue').isVisible(),false);
