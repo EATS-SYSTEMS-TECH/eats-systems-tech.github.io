@@ -18,6 +18,7 @@ The My profile product cards show personal totals instead of subscription on/off
 - Rebuild all localized pages with `npm run build:locales`.
 - Regenerate optimized niche images (hero/card webp + og jpg) with `npm run build:images` after replacing a source PNG in `assets/wifigate_niche_pages/`.
 - Verify the generated site (SEO metadata, links, redirects, sitemap) with `node scripts/verify-site.mjs`.
+- Run local hero playback, accessibility presentation and niche rendering/link contracts with `npm run test:presentation`. These use deterministic fixtures and headless Chrome; they do not deploy or validate physical mobile devices.
 
 ## WiFiGate Invitation Redirect Contract
 

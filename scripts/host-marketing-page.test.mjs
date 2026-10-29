@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import test from "node:test";
 import * as cheerio from "cheerio";
-import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails } from "./host-marketing-page.mjs";
+import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails, installHostPricingShells, installHostDetailShells } from "./host-marketing-page.mjs";
 import { SITE_LANGUAGES } from "./site-languages.mjs";
 import { BENEFIT_ICONS } from "./benefit-icons.mjs";
+const { installHomeHostPointShells } = await import("./host-marketing-page.mjs");
 
 const copies = await Promise.all(SITE_LANGUAGES.map(async ({ code }) => ({
   locale: code,
@@ -57,6 +58,7 @@ test("missing localized copy fails instead of publishing a partial page or a fal
 
 test("Host details preserve translated sections, plan prices and actions inside their own style scope", async () => {
   const legacy = cheerio.load(await fs.readFile(new URL("../templates/guest-invites-api.template.html", import.meta.url), "utf8"));
+  installHostDetailShells(legacy);
   // The caller supplies the translated document; preserve those exact nodes.
   legacy(".wa-secure__text").first().text("פרטי האירוח המקומיים נשמרים בדיוק");
   legacy(".wa-pricing__note").text("Localized pricing note");
@@ -85,4 +87,105 @@ test("missing detail sections fail before changing the shared page", () => {
   const original = $.html();
   assert.throws(() => appendHostMarketingDetails($, { legacyTemplate: legacy }), /\.wa-secure section/);
   assert.equal($.html(), original);
+});
+
+test("homepage Host points retain three ordered translation slots and their decorative SVGs", async () => {
+  const $ = cheerio.load(await fs.readFile(new URL("../templates/index.template.html", import.meta.url), "utf8"));
+  installHomeHostPointShells?.($);
+  const rows = $('#wifigate-automation .guest-invites__points > li');
+  assert.equal(rows.length, 3);
+  const shapes = [['rect', 'path'], ['circle', 'path'], ['rect', 'path']];
+  rows.each((index, node) => {
+    const row = $(node), icon = row.find('.guest-invites__point-icon'), svg = icon.find('svg');
+    assert.equal(row.attr('class'), 'guest-invites__point');
+    assert.equal(icon.attr('aria-hidden'), 'true');
+    assert.equal(svg.attr('viewBox'), '0 0 24 24');
+    assert.equal(svg.attr('fill'), 'none'); assert.equal(svg.attr('stroke'), 'currentColor');
+    assert.deepEqual(svg.children().toArray().map(shape => shape.tagName), shapes[index]);
+    for (const [selector, key] of [['title', 'Title'], ['text', 'Text']]) {
+      const text = row.find(`.guest-invites__point-${selector}`);
+      assert.equal(text.length, 1);
+      assert.equal(text.attr('data-i18n'), `guestInvites.promo.point${index + 1}${key}`);
+      assert.equal(text.attr('dir'), 'ltr');
+    }
+  });
+});
+
+test("homepage point installation leaves documents without the Host list unchanged", () => {
+  const $ = cheerio.load('<main><h1>Unrelated page</h1><ul class="guest-invites__points"><li>Other list</li></ul></main>');
+  const original = $.html(); installHomeHostPointShells?.($); assert.equal($.html(), original);
+});
+
+test("Host pricing preserves ordered offers, localization slots, feature icons and contact actions", async () => {
+  const $ = cheerio.load(await fs.readFile(new URL("../templates/guest-invites-api.template.html", import.meta.url), "utf8"));
+  const otherSections = $("section:not(.wa-pricing)").toString();
+  const heading = $(".wa-pricing .wa-head").toString(), note = $(".wa-pricing__note").toString();
+  installHostPricingShells($);
+  const plans = $(".wa-pricing__grid > .wa-plan");
+  assert.deepEqual(plans.find(".wa-plan__name").map((_, node) => $(node).text()).get(), ["Starter", "Pro", "Hotel", "Enterprise"]);
+  assert.deepEqual(plans.find(".wa-plan__amount").map((_, node) => $(node).text()).get(), ["₪29", "₪99", "₪299", "Custom"]);
+  assert.equal(plans.filter(".wa-plan--featured").length, 1);
+  assert.equal(plans.eq(2).hasClass("wa-plan--featured"), true);
+  assert.equal(plans.find(".wa-plan__badge").attr("data-i18n"), "guestInvites.marketing.pricing.hotelBadge");
+  assert.equal(plans.find(".wa-plan__per").length, 3);
+  assert.equal(plans.eq(3).find(".wa-plan__per").length, 0);
+  assert.equal(plans.eq(3).find(".wa-plan__amount").attr("data-i18n"), "guestInvites.marketing.pricing.enterpriseAmount");
+  for (const [index, key] of ["starter", "pro", "hotel", "enterprise"].entries()) {
+    const plan = plans.eq(index);
+    assert.equal(plan.find(".wa-plan__desc").attr("data-i18n"), `guestInvites.marketing.pricing.${key}Desc`);
+    assert.deepEqual(plan.find(".wa-plan__feature span").map((_, node) => $(node).attr("data-i18n")).get(),
+      [1, 2, 3].map(number => `guestInvites.marketing.pricing.${key}F${number}`));
+    plan.find(".wa-plan__feature svg").each((_, node) => {
+      assert.deepEqual({ ...$(node).attr() }, { width: "16", height: "16", viewBox: "0 0 24 24", fill: "none",
+        stroke: "currentColor", "stroke-width": "2.5", "stroke-linecap": "round", "stroke-linejoin": "round", "aria-hidden": "true" });
+      assert.equal($(node).find("path").attr("d"), "m5 12 5 5L20 7");
+    });
+    const action = plan.find(".wa-plan__cta > a");
+    assert.equal(action.attr("href"), "../index.html#contact");
+    assert.equal(action.attr("class"), `btn btn--${index === 2 ? "primary" : "ghost"}`);
+    assert.equal(action.attr("data-i18n"), "guestInvites.marketing.pricing.planCta");
+  }
+  assert.equal($("section:not(.wa-pricing)").toString(), otherSections);
+  assert.equal($(".wa-pricing .wa-head").toString(), heading);
+  assert.equal($(".wa-pricing__note").toString(), note);
+});
+
+test("missing or ambiguous pricing slots fail before mutating the fragment", () => {
+  for (const markup of ["<main>Other content</main>", '<section class="wa-pricing"><div class="wa-pricing__grid">First</div><div class="wa-pricing__grid">Second</div></section>']) {
+    const $ = cheerio.load(markup), original = $.html();
+    assert.throws(() => installHostPricingShells($), /requires one plan grid/);
+    assert.equal($.html(), original);
+  }
+});
+
+test("Host detail composition retains ordered audience/security slots and the final contact section", async () => {
+  const $ = cheerio.load(await fs.readFile(new URL("../templates/guest-invites-api.template.html", import.meta.url), "utf8"));
+  const contact = $(".wa-cta").toString(), headings = $(".wa-head").toString();
+  installHostDetailShells($);
+  assert.deepEqual($(".wa-chip").map((_, node) => $(node).attr("data-i18n")).get(),
+    ["hotels", "rentals", "guesthouses", "parking"].map(key => `guestInvites.marketing.audience.${key}`));
+  assert.deepEqual($(".wa-chip").map((_, node) => $(node).text()).get(),
+    ["Hotels", "Airbnb & short-term rentals", "Guesthouses", "Rental parking & garages"]);
+  assert.equal($(".wa-audience__label").attr("data-i18n"), "guestInvites.marketing.audience.label");
+  assert.equal($(".wa-secure__item").length, 3);
+  $(".wa-secure__item").each((index, node) => {
+    assert.equal($(node).find("h3").attr("data-i18n"), `guestInvites.marketing.secure.i${index + 1}t`);
+    assert.equal($(node).find("p").attr("data-i18n"), `guestInvites.marketing.secure.i${index + 1}x`);
+  });
+  assert.equal($(".wa-plan").length, 4);
+  assert.equal($(".wa-cta").toString(), contact);
+  assert.equal($(".wa-head").toString(), headings);
+});
+
+test("all Host detail slots are checked before any list or pricing mutation", async () => {
+  const markup = await fs.readFile(new URL("../templates/guest-invites-api.template.html", import.meta.url), "utf8");
+  for (const selector of [".wa-audience__row", ".wa-secure__grid", ".wa-pricing__grid"]) {
+    for (const mode of ["missing", "duplicate"]) {
+      const $ = cheerio.load(markup), slot = $(selector);
+      if (mode === "missing") slot.remove(); else slot.after(slot.clone());
+      const original = $.html();
+      assert.throws(() => installHostDetailShells($), /Host details require one audience row/);
+      assert.equal($.html(), original, `${selector}/${mode}: no partial mutation`);
+    }
+  }
 });

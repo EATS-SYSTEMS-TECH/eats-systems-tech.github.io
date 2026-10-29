@@ -5,6 +5,7 @@ const HERO_MEDIA_FALLBACK_COPY = {
   pause: "Pause video", play: "Play video",
 };
 
+// Invalid locale payloads retain the established fallback action labels.
 function getHeroMediaCopy() {
   try {
     const media = JSON.parse(document.getElementById("hero-locale-data")?.textContent || "{}").media || {};
@@ -12,6 +13,7 @@ function getHeroMediaCopy() {
   } catch { return HERO_MEDIA_FALLBACK_COPY; }
 }
 
+// Automatic playback honors both motion preferences and data-saving policy.
 function heroVideoMayAutoplay() {
   if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return false;
   if (typeof isReducedMotionRequested === "function" && isReducedMotionRequested()) return false;
@@ -19,6 +21,50 @@ function heroVideoMayAutoplay() {
   return !connection.saveData;
 }
 
+// The view owns labels, glyph datasets and control visibility only. Playback,
+// cancellation and visitor intent stay in the controller below.
+function createHeroMediaView(nodes) {
+  const { hero, video, muteButton, pauseButton, replayButton, replayLabel, silent } = nodes;
+
+  // Tooltips and assistive names describe the same current action.
+  function name(control, text) {
+    control.setAttribute("aria-label", text);
+    control.setAttribute("title", text);
+  }
+
+  // Optional compact controls expose their media flag and pressed state in the
+  // original mute-then-pause order. The replay action has its own playing flag.
+  function compact(control, flag, enabled, text, pressed) {
+    if (!control) return;
+    control.dataset[flag] = String(enabled);
+    name(control, text);
+    control.setAttribute("aria-pressed", String(pressed));
+  }
+
+  function refresh() {
+    const copy = getHeroMediaCopy();
+    compact(muteButton, "muted", video.muted,
+      video.muted ? copy.unmute : copy.mute, !video.muted);
+    compact(pauseButton, "paused", video.paused,
+      video.paused ? copy.play : copy.pause, video.paused);
+    const playing = !video.paused && !video.ended && hero.dataset.heroMediaState === "video";
+    const text = playing ? copy.pause : copy.replay;
+    replayButton.dataset.playing = String(playing);
+    replayLabel.textContent = text;
+    name(replayButton, text);
+  }
+
+  // Replay remains available on the poster and during playback; silent clips
+  // never expose mute. Native paused/ended state still controls their labels.
+  function setVisibility(mode) {
+    if (muteButton) muteButton.hidden = silent || mode !== "video";
+    if (pauseButton) pauseButton.hidden = mode !== "video";
+    replayButton.hidden = false;
+  }
+  return { refresh, setVisibility };
+}
+
+// Bind one hero instance to its existing public IDs and media policy events.
 function setupHeroMedia() {
   const hero = document.querySelector(".hero");
   const video = document.getElementById("hero-video");
@@ -31,10 +77,10 @@ function setupHeroMedia() {
   const silent = video.dataset.silent === "true";
   const desktop = window.matchMedia("(min-width: 769px)");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  let inView = !("IntersectionObserver" in window);
-  let pausedByVisitor = false;
-  let finished = false;
-  let generation = 0;
+  // Keep automatic eligibility, explicit visitor intent and asynchronous
+  // cancellation together; a later request must supersede pending preparation.
+  const session = { inView: !("IntersectionObserver" in window),
+    pausedByVisitor: false, finished: false, generation: 0 };
   video.muted = video.defaultMuted = true;
   video.playsInline = true;
   video.loop = false;
@@ -42,87 +88,80 @@ function setupHeroMedia() {
   function syncHeroFloatingWidgetState() {
     // Starting or ending an accepted scene must not move the accessibility
     // button while a visitor is pressing or dragging it.
-    document.body.classList.toggle("hero-video-visible", !hero.hasAttribute("data-hero-scene") && inView && desktop.matches && hero.dataset.heroMediaState === "video");
+    document.body.classList.toggle("hero-video-visible", !hero.hasAttribute("data-hero-scene") && session.inView && desktop.matches && hero.dataset.heroMediaState === "video");
   }
-  function updateHeroMediaCopy() {
-    const copy = getHeroMediaCopy();
-    if (muteButton) {
-      const label = video.muted ? copy.unmute : copy.mute;
-      muteButton.dataset.muted = String(video.muted);
-      muteButton.setAttribute("aria-label", label);
-      muteButton.setAttribute("title", label);
-      muteButton.setAttribute("aria-pressed", String(!video.muted));
-    }
-    if (pauseButton) {
-      const label = video.paused ? copy.play : copy.pause;
-      pauseButton.dataset.paused = String(video.paused);
-      pauseButton.setAttribute("aria-label", label);
-      pauseButton.setAttribute("title", label);
-      pauseButton.setAttribute("aria-pressed", String(video.paused));
-    }
-    // The replay action doubles as the primary play/pause control. Keep its
-    // label and icon in sync with the actual media state so the same control
-    // behaves consistently on desktop and mobile.
-    const isPlaying = !video.paused && !video.ended && hero.dataset.heroMediaState === "video";
-    const label = isPlaying ? copy.pause : copy.replay;
-    replayButton.dataset.playing = String(isPlaying);
-    replayLabel.textContent = label;
-    replayButton.setAttribute("aria-label", label);
-    replayButton.setAttribute("title", label);
-  }
-  function setHeroMediaState(state) {
-    hero.dataset.heroMediaState = state;
-    if (muteButton) muteButton.hidden = silent || state !== "video";
-    if (pauseButton) pauseButton.hidden = state !== "video";
-    replayButton.hidden = false;
+  // State publication keeps the original ordering: DOM visibility first,
+  // floating-widget placement second, localized control labels last.
+  const view = createHeroMediaView({ hero, video, muteButton, pauseButton,
+    replayButton, replayLabel, silent });
+  const updateHeroMediaCopy = view.refresh;
+  function setHeroMediaState(mode) {
+    hero.dataset.heroMediaState = mode;
+    view.setVisibility(mode);
     syncHeroFloatingWidgetState();
     updateHeroMediaCopy();
   }
-  function showHeroImageState() {
-    generation += 1;
+  // Invalidate pending playback before pausing. Only an explicit visitor pause
+  // persists across automatic visibility and policy changes.
+  function stopHeroPlayback(visitor = false) {
+    session.generation += 1;
+    if (visitor) session.pausedByVisitor = true;
     video.pause();
+  }
+  // Media failures and completion restore the poster after cancelling playback.
+  function showHeroImageState() {
+    stopHeroPlayback();
     setHeroMediaState("image");
   }
+  // Preparation and poster decoding may outlive a pause or newer request.
+  // Check the generation at both boundaries and leave manual playback eligible.
   async function playHeroVideo({ restart = false, manual = false } = {}) {
-    if (!manual && (!inView || !heroVideoMayAutoplay() || pausedByVisitor || finished || document.hidden)) return;
-    const current = ++generation;
-    if (manual) pausedByVisitor = false;
+    if (!manual && (!session.inView || !heroVideoMayAutoplay() || session.pausedByVisitor || session.finished || document.hidden)) return;
+    const current = ++session.generation;
+    if (manual) session.pausedByVisitor = false;
     await window.WifigateMedia?.prepare(video, image);
-    if (current !== generation) return;
+    if (current !== session.generation) return;
     try { await image?.decode(); } catch { /* Explicit video playback can recover a failed poster. */ }
-    if (current !== generation || (!manual && (!inView || !heroVideoMayAutoplay() || document.hidden))) return;
+    if (current !== session.generation || (!manual && (!session.inView || !heroVideoMayAutoplay() || document.hidden))) return;
     if (!video.getAttribute("src") && video.dataset.videoSrc) video.setAttribute("src", video.dataset.videoSrc);
-    if (restart) { finished = false; video.currentTime = 0; }
+    if (restart) { session.finished = false; video.currentTime = 0; }
     try {
       await video.play();
       // Stop/policy handlers own pausing; a stale completion cannot cancel a
       // newer visitor play/resume request.
-      if (current !== generation) return;
-    } catch { if (current === generation) showHeroImageState(); }
+      if (current !== session.generation) return;
+    } catch { if (current === session.generation) showHeroImageState(); }
     updateHeroMediaCopy();
   }
+  // Visitor actions preserve resume-in-place and restart-after-completion.
   muteButton?.addEventListener("click", () => { video.muted = !video.muted; updateHeroMediaCopy(); });
   replayButton.addEventListener("click", () => {
     if (!video.paused && !video.ended) {
-      generation += 1;
-      pausedByVisitor = true;
-      video.pause();
+      // Keep the visitor's pause distinct from temporary offscreen pauses.
+      stopHeroPlayback(true);
       updateHeroMediaCopy();
       return;
     }
     // Resume a visitor-paused video; restart only after the video finished.
-    playHeroVideo({ restart: finished || video.ended, manual: true });
+    playHeroVideo({ restart: session.finished || video.ended, manual: true });
   });
   pauseButton?.addEventListener("click", () => {
+    // The dedicated control resumes in place or records an explicit pause.
     if (video.paused) playHeroVideo({ manual: true });
-    else { generation += 1; pausedByVisitor = true; video.pause(); }
+    else stopHeroPlayback(true);
     updateHeroMediaCopy();
   });
-  video.addEventListener("playing", () => setHeroMediaState("video"));
-  video.addEventListener("ended", () => { finished = true; showHeroImageState(); });
-  video.addEventListener("pause", updateHeroMediaCopy);
-  video.addEventListener("volumechange", updateHeroMediaCopy);
-  video.addEventListener("error", showHeroImageState);
+  // Register native media events in their original order. Completion is marked
+  // before restoring the poster, so viewport re-entry cannot loop the clip.
+  for (const [event, handler] of [
+    ["playing", () => setHeroMediaState("video")],
+    ["ended", () => { session.finished = true; showHeroImageState(); }],
+    ["pause", updateHeroMediaCopy],
+    ["volumechange", updateHeroMediaCopy],
+    ["error", showHeroImageState],
+  ]) video.addEventListener(event, handler);
+  // Policy changes restore the poster or attempt eligible automatic playback;
+  // document visibility and viewport exits cancel without recording a visitor pause.
   function policyChanged() {
     if (!heroVideoMayAutoplay()) showHeroImageState();
     else playHeroVideo();
@@ -133,18 +172,22 @@ function setupHeroMedia() {
   navigator.connection?.addEventListener?.("change", policyChanged);
   document.addEventListener("site-accessibility-change", policyChanged);
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden) { generation += 1; video.pause(); }
+    // Hidden documents cancel pending work without becoming visitor-paused.
+    if (document.hidden) stopHeroPlayback();
     else playHeroVideo();
   });
+  // The original quarter-visible threshold owns automatic viewport eligibility.
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver((entries) => {
-      inView = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= .25);
-      if (!inView) { generation += 1; video.pause(); }
+      // Pause outside the original threshold and resume under autoplay policy.
+      session.inView = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= .25);
+      if (!session.inView) stopHeroPlayback();
       else playHeroVideo();
       syncHeroFloatingWidgetState();
     }, { threshold: [0, .25] });
     observer.observe(hero);
   }
+  // Initialize the eager poster before attempting any eligible video download.
   setHeroMediaState("image");
-  if (inView) playHeroVideo();
+  if (session.inView) playHeroVideo();
 }
