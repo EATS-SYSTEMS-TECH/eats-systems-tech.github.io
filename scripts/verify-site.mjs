@@ -14,6 +14,7 @@
 import * as cheerio from "cheerio";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { runInNewContext } from "node:vm";
 import { NICHE_DEFINITIONS } from "./niche-pages/index.mjs";
 import { LANDING_PAGES } from "./landing-pages/index.mjs";
 import { AUTO_OPEN_PAGE_KEY } from "./auto-open-page.mjs";
@@ -103,19 +104,22 @@ async function main() {
     "wifigate-link.template.html",
   );
   const invitationTemplate = await fs.readFile(invitationTemplatePath, "utf8");
-  const queryPassThroughCount = (
-    invitationTemplate.match(/const query = params\.toString\(\);/g) || []
-  ).length;
-
-  if (queryPassThroughCount !== 3) {
-    problems.push(
-      `templates/wifigate-link.template.html: found ${queryPassThroughCount} query pass-through routes, expected 3`,
-    );
-  }
-  if (/params\.delete\(["'](?:ep|ao)["']\)/.test(invitationTemplate)) {
-    problems.push(
-      "templates/wifigate-link.template.html: invitation protocol fields ep/ao must pass through unchanged",
-    );
+  // Execute each real routing family instead of depending on three duplicated serializer statements.
+  // Opaque payloads and duplicate protocol entries must reach the app unchanged.
+  const invitationController = [...invitationTemplate.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)]
+    .map(match => match[1]).find(script => script.includes("function buildDeepLink("));
+  if (!invitationController) problems.push("Invitation template is missing its handoff controller");
+  else for (const [kind, field] of [["gate", "i"], ["group", "gid"], ["dual-control", "dcid"]]) {
+    try {
+      const href = `https://wifigate.io/wifigate-link/?${field}=synthetic&ep=opaque%2Bpayload&ep=second&ao=1&ao=0`;
+      const actual = runInNewContext(invitationController + "\nbuildDeepLink();", {
+        URL, URLSearchParams, atob, window: { location: { href } }, document: { addEventListener() {} },
+      }, { timeout: 1000 });
+      const expected = `wifigate://${kind}/synthetic?${field}=synthetic&ep=opaque%2Bpayload&ep=second&ao=1&ao=0&id=synthetic`;
+      if (actual !== expected) problems.push(`Invitation ${kind} route failed opaque parameter preservation`);
+    } catch (error) {
+      problems.push(`Invitation ${kind} controller failed: ${error.message}`);
+    }
   }
 
   for (const locale of localeOptions) {

@@ -26,6 +26,8 @@ const cases = [
   ["blank existing id is preserved", "/wifigate-link/?ep=opaque&id=", "wifigate://gate/invite?ep=opaque&id="],
   ["demo wins over explicit link", "/wifigate-link/?ep=v1.demo_synthetic&link=https%3A%2F%2Fexample.test", ""],
   ["embedded demo never opens", "/wifigate-link/?link=https%3A%2F%2Fexample.test%2F%3Fep%3Dv1.demo_synthetic", ""],
+  ["malformed path without details", "/group/%E0%A4%A", ""],
+  ["malformed path with valid query identity", "/group/%E0%A4%A?gid=retained&ep=opaque&ao=1", "wifigate://group/retained?gid=retained&ep=opaque&ao=1&id=retained"],
 ];
 
 for (const [name, relative, expected] of cases) {
@@ -38,3 +40,20 @@ for (const [name, relative, expected] of cases) {
     assert.equal(result, expected);
   });
 }
+
+test("missing or damaged locale JSON retains every English fallback field", () => {
+  for (const dictionary of [null, { textContent: "{damaged" }]) {
+    const result = runInNewContext(controller + "\nJSON.stringify(getUtilityPageCopy());", {
+      URL, URLSearchParams, atob,
+      window: { location: { href: "https://wifigate.io/wifigate-link/" } },
+      document: { addEventListener() {}, getElementById: () => dictionary },
+    });
+    const copy = JSON.parse(result);
+    assert.equal(copy.headingMissing, "Unable to open WiFiGate");
+    assert.equal(copy.headingFallback, "Continue in WiFiGate");
+    assert.equal(copy.copyButton, "Copy link");
+    assert.equal(copy.copiedButton, "Link copied!");
+    assert.equal(copy.copyError, "Couldn't copy link. Please try again.");
+    assert.ok(copy.statusMissing && copy.statusFallback);
+  }
+});
