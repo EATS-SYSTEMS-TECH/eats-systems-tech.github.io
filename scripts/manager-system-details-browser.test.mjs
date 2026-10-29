@@ -59,7 +59,7 @@ async function assertDetails(page, language) {
   assert.doesNotMatch(await content.textContent(), /Flash|flashVariantMb|נפח Flash/);
   await tab(page, "settings");
   for (const [method, count] of [["PULSE", 1], ["PULSE_AFTER_PULSE", 3], ["PULSE_AFTER_PULSE_AFTER_PULSE", 5], ["TOGGLE", 0], ["PUSH_BUTTON", 0]]) {
-    await content.locator("select[name='command']").selectOption(method);
+    await content.locator(`input[name="command"][value="${method}"]`).check();
     assert.equal(await content.locator(".manager-timing-fields input:visible").count(), count, method);
     assert.equal(await content.locator(".manager-timing-fields input:not(:disabled)").count(), count, `${method} inactive timing fields cannot be submitted`);
   }

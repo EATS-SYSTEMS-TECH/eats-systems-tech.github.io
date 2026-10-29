@@ -1891,7 +1891,10 @@ export function createManagerDashboard({
       renderPeopleActions(content, tab);
       return;
     }
-    if (tab === "settings") renderSettings(content);
+    if (tab === "settings") {
+      renderSettings(content);
+      return;
+    }
     if (tab === "events") renderEventActions(content);
     if (tab === "auto") {
       const area = renderAutoActions(content);
