@@ -69,6 +69,7 @@ test("organization deletion confirms the exact target, preserves failures and re
             "Test organization",
           exact: true,
         });
+        assert.equal(await remove.evaluate(el=>getComputedStyle(el).color), "rgb(180, 35, 24)");
         await remove.click();
         let dialog = f.page.locator("dialog[open]");
         const submit = dialog.locator('button[type="submit"]');
