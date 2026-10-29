@@ -1053,8 +1053,8 @@ html[dir="rtl"] .product-switcher__label strong {
 .platform-admin-tools-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .platform-admin-tools-content { display: grid; gap: 8px; }
 .platform-admin-tools-content[hidden] { display: none; }
-.platform-admin-tools-toggle { display: inline-grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; padding: 0; border: 1px solid #e2e8f0; border-radius: 10px; background: #f8fafc; color: #334155; cursor: pointer; }
-.platform-admin-tools-toggle:hover { background: #111; color: #fff; border-color: #111; }
+.platform-admin-tools-toggle { display: inline-grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 10px; background: transparent; box-shadow: none; color: #334155; cursor: pointer; }
+.platform-admin-tools-toggle:hover { background: transparent; color: #111; box-shadow: none; }
 .platform-admin-tools-toggle:focus-visible { outline: 2px solid #0b63ff; outline-offset: 3px; }
 .platform-admin-tools h2 { margin: 0 0 3px; padding-inline: 4px; font-size: .75rem; font-weight: 650; color: #586680; text-align: start; }
 .platform-admin-tools .platform-management-entry { position: static; width: 100%; box-sizing: border-box; min-height: 48px; padding: .75rem .85rem; border-radius: 12px; box-shadow: none; font-size: .85rem; }
