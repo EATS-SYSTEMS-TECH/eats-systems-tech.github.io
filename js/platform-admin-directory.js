@@ -516,10 +516,7 @@ export function createPlatformAdminDirectory({
       next = null;
     }
     more.hidden = true;
-    status.textContent = t(
-      "טוען משתמשים ותוכניות…",
-      "Loading people and plans…",
-    );
+    status.textContent = selected === "organizations" ? t("טוען ארגונים…", "Loading organizations…") : t("טוען משתמשים ותוכניות…", "Loading people and plans…");
     for (const button of filters.children)
       button.setAttribute(
         "aria-pressed",
@@ -543,7 +540,7 @@ export function createPlatformAdminDirectory({
         if (closed || epoch !== generation) return;
         rows.append(...organizations.items.map(organizationCard));
         more.hidden = true;
-        status.textContent = organizations.items.length ? t(`${organizations.items.length} ארגונים בסינון הנבחר`, `${organizations.items.length} organizations in this selection`) : t("לא נמצאו ארגונים במסלול שנבחר.", "No organizations found for this product.");
+        status.textContent = organizations.items.length ? (organizations.items.length === 1 ? t("ארגון אחד בסינון הנבחר", "1 organization in this selection") : t(`${organizations.items.length} ארגונים בסינון הנבחר`, `${organizations.items.length} organizations in this selection`)) : t("לא נמצאו ארגונים במסלול שנבחר.", "No organizations found for this product.");
         return;
       }
       rows.append(...data.items.map(personCard));
