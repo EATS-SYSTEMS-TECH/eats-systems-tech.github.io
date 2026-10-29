@@ -280,7 +280,7 @@ test("members and admins without verified MFA never load the directory", async (
   }
 });
 
-test("Pay management requests only Pay and shows unavailable billing without a false zero", async (t) => {
+test("Pay management keeps Pay account rows while loading overview counts and shows unavailable billing without a false zero", async (t) => {
   const { origin, browser } = await startSite(t);
   const fixture = await scenario(browser, {
     platformRole: "admin",
@@ -290,9 +290,9 @@ test("Pay management requests only Pay and shows unavailable billing without a f
     pay: "active",
   });
   t.after(() => fixture.context.close());
-  let product;
+  const products = [];
   await fixture.context.route("**/api/v1/platform/directory?*", (route) => {
-    product = new URL(route.request().url()).searchParams.get("product");
+    products.push(new URL(route.request().url()).searchParams.get("product"));
     return route.fulfill({
       json: {
         counts: { admins: 1, users: 1, total: 2 },
@@ -304,7 +304,7 @@ test("Pay management requests only Pay and shows unavailable billing without a f
   await fixture.page.goto(origin + "/dashboard/platform/?product=pay");
   const root = fixture.page.locator("#platform-admin-management");
   await root.locator(".platform-admin-person").waitFor();
-  assert.equal(product, "pay");
+  assert.deepEqual(products, ["pay", "all"]);
   await root.locator(".platform-admin-person-summary").click();
   assert.equal(await root.locator("tbody tr").count(), 1);
   assert.match(await root.locator("tbody").textContent(), /Unavailable/);
@@ -315,7 +315,7 @@ test("Host administration uses the central directory with Host selected", async 
  const {origin,browser}=await startSite(t);const f=await scenario(browser,{platformRole:"admin",admin:true,enrolled:true,verified:true});t.after(()=>f.context.close());
  const products=[];await f.context.route("**/api/v1/platform/directory?*",r=>{products.push(new URL(r.request().url()).searchParams.get("product"));return r.fulfill({json:{counts:{admins:1,users:1,total:2},items:[{...person,products:{host:person.products.host}}],nextCursor:null}});});
  await f.page.goto(origin+"/dashboard/host/overview/?lang=he");await f.page.locator(".platform-admin-person").waitFor();
- assert.deepEqual(products,["host"]);assert.equal(new URL(f.page.url()).pathname,"/dashboard/platform/");
+ assert.deepEqual(products,["host","all"]);assert.equal(new URL(f.page.url()).pathname,"/dashboard/platform/");
  await f.page.locator(".platform-admin-person-summary").click();assert.match(await f.page.locator("tbody").innerText(),/80\.00/);
 });
 
