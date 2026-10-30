@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "area": "W3",
+  "sourceCommit": "11abefff2d343d310cd8a26ba0625116d2a2676a",
+  "review": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/15",
+  "status": "PASS_INDEPENDENT_WHOLE_LOCALIZED_BUILDER_RECONSTRUCTION",
+  "at": "2026-10-30T07:39:49.987575+00:00",
+  "specification": "maintenance/IP_LOCALIZED_BUILDER_BEHAVIOR.md",
+  "specificationCommits": [
+    "a1976ca04",
+    "d2f83d6d6",
+    "af0cad27a"
+  ],
+  "deletionCommit": "bcacd445c",
+  "additionCommit": "11abefff2",
+  "change": "Entire1884line prior builder removed,then independently reconstructed as CLI/document/content responsibility modules with English comments;dead uncalled standalone/subtitle wrappers not carried forward",
+  "validation": {
+    "original": {
+      "source": "b33c038d0048f6851b8059376810db12587ba26d",
+      "sourceBytes": 85084,
+      "sourceSha256": "53494e714ebd5dad2ac7afc2430ef47f9dd2ab24e66e3065278ae25aca5b7893",
+      "existingContracts": "63/63PASS;includes280actualChrome cases",
+      "frozenEdges": "14/14PASS",
+      "fullCli": "PASS;1485outputs from575frozeninputs/180verifiedreadonlyassets"
+    },
+    "replacement": {
+      "focused": "43/43PASS;0skips",
+      "presentation": "77/77PASS;0skips;includes280actualChrome cases",
+      "fullCli": "PASS;1485outputs from578frozeninputs/180verifiedreadonlyassets",
+      "generatedPaths": 1485,
+      "meaningfulDomAttributesTextJsonAndLlms": "All1485fullmodels exact;0missing/unexpected/mismatch",
+      "rawByteDifferences": 819,
+      "rawDifferenceScope": "Markup whitespace/attribute serialization only;fullmeaningfulmodels exact",
+      "verifySite": "PASS original and replacement;39locales\u00d714pages,663interactive,703sitemapURLs,redirects",
+      "verifyHomepages": "PASS39locales"
+    },
+    "sourceAttribution": {
+      "ref": "11abefff2d343d310cd8a26ba0625116d2a2676a",
+      "files": 7,
+      "complete": true,
+      "zero": true,
+      "summary": {
+        "eiloncohen": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        },
+        "OdeliaTorjman": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        }
+      }
+    },
+    "allOtherTrackedFiles": {
+      "base": "b33c038d0048f6851b8059376810db12587ba26d",
+      "files": 2333,
+      "blobsAndModesExact": true,
+      "dependenciesAndProductConfigurationExact": true,
+      "packageOnlyDifference": "Registered14frozen builder edge contracts in existing test:presentation command"
+    },
+    "completeSelectedFrontendCensus": "RUNNING exact11abefff2;previous completed563scope576Eilonlines/6files,0Odelia remains the latest completed count"
+  },
+  "retainedAttempts": [
+    "Initial36/41focused checks:five sitemap isolation failures due to quote-sensitive import discovery;recognized import spelling restores43/43without weakening assertions",
+    "Initial original and replacement verify-site eachfailed on the exactsame546missing dashboard links because isolated extraction omitted the real frozen dashboard/index.html;actual unchanged14824byteGit blob copied to both environments,then bothPASS",
+    "First environment-repair guard required literal /dashboard/ and stopped on Hebrew ?lang=he;no copy before corrected exact problem-multiset/URL-path check;diagnostic label correction retained"
+  ],
+  "limits": [
+    "Remaining576Eilonlines in6other frontend files stillOPEN;new complete selected census pending",
+    "Full parsed models and actual Chrome are source/browser evidence;no physical phone/BLE acceptance inferred",
+    "All primary/current generated outputs,main andhosting untouched",
+    "No production approval/publication or legal ownership determination"
+  ],
+  "productionDelivery": false
+}

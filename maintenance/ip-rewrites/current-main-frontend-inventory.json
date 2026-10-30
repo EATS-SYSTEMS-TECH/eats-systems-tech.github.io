@@ -62,18 +62,28 @@
     }
   ],
   "status": "COMPLETE_SELECTED_FRONTEND_INVENTORY_INDEPENDENT_REWRITE_AND_FINAL_GATES_OPEN",
-  "nonAttributionRemaining": [
+  "nonAttributionRemaining": [],
+  "limits": [
+    "Frozen7c7349f90 selected563files;576Eilonlines/6files and0Odelia is the latest completed census",
+    "Whole builder independently reconstructed at11abefff2;7sourcepaths0,77contractsPASS,all1485models exact;new selected census running",
+    "Remaining source/final-main/legal acceptance OPEN",
+    "Primary/main/hosting untouched"
+  ],
+  "independentReconstructions": [
     {
       "path": "scripts/build-localized-site.mjs",
-      "status": "OPEN_INDEPENDENT_WHOLE_BUILDER_REWRITE",
-      "reason": "The narrowly bounded script-data bug fix used separate deletion/addition while deliberately preserving unrelated builder bytes. The new Git attribution is zero for this file;that metadata change does not establish an independent whole-file rewrite."
+      "previousStatus": "OPEN_INDEPENDENT_WHOLE_BUILDER_REWRITE",
+      "status": "PASS_INDEPENDENT_WHOLE_LOCALIZED_BUILDER_RECONSTRUCTION",
+      "source": "11abefff2d343d310cd8a26ba0625116d2a2676a",
+      "review": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/15",
+      "evidence": "maintenance/ip-rewrites/whole-localized-builder.json"
     }
   ],
-  "limits": [
-    "Frozen7c7349f90 selected563files under css/js/scripts/templates;not whole website/assets/backend",
-    "576Eilon lines remain in6files;0Odelia in selected scope",
-    "Whole builder independent rewrite remains OPEN despite0Git attribution after the narrow script-data fix",
-    "No legal ownership or final acceptance inferred",
-    "Primary/main/hosting untouched"
-  ]
+  "latestIndependentWork": {
+    "source": "11abefff2d343d310cd8a26ba0625116d2a2676a",
+    "wholeBuilder": "PASS",
+    "paths": 7,
+    "attributionZero": true,
+    "fullSelectedCensus": "RUNNING;previous complete counts retained"
+  }
 }
