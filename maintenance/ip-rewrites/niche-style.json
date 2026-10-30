@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "area": "W3",
+  "sourceCommit": "b343652c35c890ff7dafcac778d120be9653956f",
+  "review": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/13",
+  "specification": "maintenance/IP_NICHE_STYLE_BEHAVIOR.md",
+  "specificationCommit": "684360e2410035b84fa10b0df9fadbd88649d395",
+  "deletionCommit": "8d6e0c133",
+  "change": "Independent page tokens/shared structural,reading and control roles;existing public palette,selector strength,RTL/type/media/benefit/responsive/accessibility facts preserved",
+  "validation": {
+    "originalSourceSha256": "d72b3bb739675369ee4c5175ee24e600724f42e45acfb729ecf92f99ccdc6a7f",
+    "originalBrowserCases": 280,
+    "originalSelfCheck": "PASS all280 facts identical across two completed original measurement transports;frozen before deletion",
+    "replacementBrowserCases": "PASS280/280;no fingerprint refresh",
+    "scope": "Actual Chromium;ten widths,two directions,fourteen preference/input/media/language states;all standard computed properties including pseudo-elements and dimensions",
+    "combinedPresentation": "63/63PASS;0skips",
+    "testWiring": {
+      "status": "PASS_ONLY_NICHE_PRESENTATION_CONTRACT_ADDED",
+      "originalTestsRetained": true,
+      "allOtherFieldsExact": true,
+      "dependencyAndLockChanged": false
+    },
+    "fullCli": "PASS independent frozen575inputs/180verified read-only assets",
+    "generatedOutput": {
+      "files": 1485,
+      "rawByteDifferences": 0,
+      "missing": [],
+      "unexpected": [],
+      "modelMismatches": []
+    },
+    "attribution": {
+      "ref": "b343652c35c890ff7dafcac778d120be9653956f",
+      "files": 6,
+      "complete": true,
+      "zero": true,
+      "summary": {
+        "eiloncohen": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        },
+        "OdeliaTorjman": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        }
+      }
+    },
+    "retainedAttempts": "Initial slow pair-transport original run completed;full280facts match the optimized transport exactly. A guarded stop attempt found the process already exited and performed no termination. All records retained privately."
+  },
+  "limits": [
+    "Six changed paths only;no whole-website zero claim",
+    "Earlier complete555file frontend inventory734Eilon lines/10files remains separately frozen;later full census running",
+    "Remaining styles/templates/copy/builder/final-main/legal acceptance OPEN",
+    "Primary/main and hosting untouched;no phone acceptance inferred"
+  ],
+  "productionDelivery": false
+}
