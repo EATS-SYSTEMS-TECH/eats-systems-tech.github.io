@@ -422,7 +422,7 @@ export function createManagerDashboard({
     for (const role of new Set(
       profile.roles?.length ? profile.roles : [profile.role],
     )) {
-      if (!["admin", "user", "organization-admin", "organization-user"].includes(role)) continue;
+      if (!["admin", "user", "organization-admin", "organization-user", "organization-staff", "organization-viewer"].includes(role)) continue;
       const label = node("span", roleName(role));
       label.dir = "ltr";
       roleList.append(label);
@@ -514,7 +514,7 @@ export function createManagerDashboard({
         });
         platformHeader.append(
           back,
-          node("span", "WIFIGATE Manager admin", "manager-role-badge"),
+          node("span", "WIFIGATE Manager Admin", "manager-role-badge"),
           home,
           node(
             "p",
@@ -655,16 +655,19 @@ export function createManagerDashboard({
   function roleName(role) {
     return (
       {
-        admin: "WIFIGATE Manager admin",
-        user: "WIFIGATE Manager user",
-        "organization-admin": "WIFIGATE Manager organization admin",
-        "organization-user": "WIFIGATE Manager organization user",
+        admin: "WIFIGATE Manager Admin",
+        user: "WIFIGATE Manager User",
+        "organization-admin": "WIFIGATE Manager Organization Admin",
+        "organization-user": "WIFIGATE Manager Organization Staff",
+        "organization-staff": "WIFIGATE Manager Organization Staff",
+        "organization-viewer": "WIFIGATE Manager Organization Viewer",
       }[role] ?? t("ממתין להרשאה", "Access pending")
     );
   }
   function beginView(key) {
     stop();
     scope = null;
+    delete document.body.dataset.organizationRole;
     currentView = key;
     renderNav();
     say("");
@@ -1320,8 +1323,8 @@ export function createManagerDashboard({
                     [
                       "email",
                       t(
-                        "אימייל בעל הארגון · Manager user",
-                        "Organization owner email · Manager user",
+                        "אימייל בעל הארגון · Manager User",
+                        "Organization owner email · Manager User",
                       ),
                       "email",
                     ],
@@ -1427,7 +1430,7 @@ export function createManagerDashboard({
         ),
       );
       card.append(
-        node("span", "WIFIGATE Manager user", "manager-role-badge"),
+        node("span", "WIFIGATE Manager User", "manager-role-badge"),
         button(
           status === "active"
             ? t("ביטול גישה", "Revoke access")
@@ -1470,8 +1473,8 @@ export function createManagerDashboard({
         const created = await dialogs.form({
           title: t("הוספת לקוח", "Add customer"),
           message: t(
-            "הזינו כתובת אימייל מאומתת להפעלת חשבון WIFIGATE Manager user. אין דרישת תשלום או כרטיס בשלב זה.",
-            "Enter a verified email address to enable a WIFIGATE Manager user account. No payment or card is required in this phase.",
+            "הזינו כתובת אימייל מאומתת להפעלת חשבון WIFIGATE Manager User. אין דרישת תשלום או כרטיס בשלב זה.",
+            "Enter a verified email address to enable a WIFIGATE Manager User account. No payment or card is required in this phase.",
           ),
           fields: [
             [

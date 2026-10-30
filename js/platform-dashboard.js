@@ -35,6 +35,7 @@ import { infoTip } from "./host-ui.js";
 import { renderPlatformLanguage } from "./platform-language.js";
 import { monthlyEstimate, monthlyTotal, revenueTotal, formatMoney, unavailableLabel } from "./profile-financials.js";
 import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
+import { createPlatformManagementGuide, mountRoleGuideButton, openRoleGuide } from "./role-guide.js";
 import {
   createReservationsAdmin,
 } from "./reservations-admin.js";
@@ -472,6 +473,11 @@ async function refresh() {
       return;
     }
     showIdentity();
+    mountRoleGuideButton({ product: selectedProduct || "host", language, context: () => {
+      const product = selectedProduct || new URLSearchParams(location.search).get("product") || "host";
+      const role = identity?.products?.[product]?.role;
+      return { product, plan: identity?.platformRole === "admin" ? "admin" : ["admin", "user"].includes(role) ? role : null, organizationRole: document.body.dataset.organizationRole };
+    } });
     $("#platform-status").textContent = identity.user.emailVerified
       ? ""
       : copy.unverified;
@@ -496,6 +502,8 @@ async function refresh() {
         reservationsAdmin = createReservationsAdmin({ root: directoryRoot, user, language });
         return;
       }
+      if (!document.querySelector(".role-guide-management"))
+        directoryRoot.before(createPlatformManagementGuide({ language, onOpenRoles: () => openRoleGuide({ product: new URLSearchParams(location.search).get("product") ?? "host", language, current: {} }) }));
       platformDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language, standalone: true,
         ensureRecent: async () => {
           const token = await user.getIdTokenResult();

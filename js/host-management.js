@@ -16,6 +16,7 @@ import {
   clearOrganizationSelector,
 } from "./host-org-selector.js";
 import { organizationRole, permissionsOf } from "./host-permissions.js";
+import { createOrganizationRoleCard } from "./role-guide.js";
 import {
   allowedWorkspaceViews,
   homeView,
@@ -325,6 +326,16 @@ async function loadWorkspace(user, identity, preferredId) {
     }
     if (org) {
       root.dataset.membershipRole = organizationRole(org);
+      document.body.dataset.organizationRole = organizationRole(org);
+      root.append(
+        createOrganizationRoleCard({
+          product: "host",
+          language: hostLanguage,
+          role: organizationRole(org),
+          plan: plan ? identity.role : null,
+          organizationName: org.name,
+        }),
+      );
       if (org.workspace?.service?.available === false)
         root.append(
           node(
@@ -335,7 +346,10 @@ async function loadWorkspace(user, identity, preferredId) {
             { role: "status", "data-workspace-notice": "true" },
           ),
         );
-    } else delete root.dataset.membershipRole;
+    } else {
+      delete root.dataset.membershipRole;
+      delete document.body.dataset.organizationRole;
+    }
     const panels = new Map([["invitations", inbox]]);
     for (const view of allowedWorkspaceViews({ plan, pending, permissions })) {
       if (panels.has(view.id)) continue;

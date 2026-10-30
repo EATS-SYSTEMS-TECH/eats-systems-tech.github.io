@@ -1,0 +1,484 @@
+/* Roles & access: the shared explanation of platform plans and organization
+   roles (js/role-guide.js). Each product keeps its own accent. */
+.role-guide,
+.role-guide-card,
+.role-guide-management {
+  --rg-ink: #0f172a;
+  --rg-muted: #5b6475;
+  --rg-line: #e3e8f0;
+  --rg-surface: #ffffff;
+  --rg-subtle: #f6f8fb;
+  --rg-accent: #0b63ff;
+  --rg-soft: #eaf2ff;
+  --rg-paid: #b45309;
+  --rg-paid-soft: #fff4e5;
+  --rg-free: #15803d;
+  --rg-free-soft: #eafaf0;
+  --rg-exempt: #475569;
+  --rg-exempt-soft: #eef2f7;
+  color: var(--rg-ink);
+  font-family: "Manrope", system-ui, sans-serif;
+}
+[data-product="pay"].role-guide,
+[data-product="pay"].role-guide-card {
+  --rg-accent: #16a34a;
+  --rg-soft: #e9f9ef;
+}
+[data-product="manager"].role-guide,
+[data-product="manager"].role-guide-card {
+  --rg-accent: #ea6a0a;
+  --rg-soft: #fff1e6;
+}
+.role-guide svg,
+.role-guide-card svg,
+.role-guide-management svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Header trigger: shares the website link's shape. */
+button.role-guide-trigger {
+  cursor: pointer;
+  font: 600 12px/1.3 "Manrope", system-ui, sans-serif;
+  border: 1px solid var(--dashboard-line, #e3e8f0);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink, #0f172a);
+  min-height: 44px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+button.role-guide-trigger svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+button.role-guide-trigger:hover {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+button.role-guide-trigger:focus-visible {
+  outline: 2px solid var(--dashboard-accent, #0b63ff);
+  outline-offset: 3px;
+}
+@media (max-width: 1100px) {
+  button.role-guide-trigger { width: 44px; padding: 0; justify-content: center; }
+  button.role-guide-trigger span { display: none; }
+}
+
+/* Dialog */
+dialog.role-guide {
+  width: min(1040px, calc(100vw - 32px));
+  max-width: none;
+  max-height: min(880px, calc(100dvh - 32px));
+  padding: 0;
+  border: 0;
+  border-radius: 22px;
+  background: var(--rg-surface);
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.28), 0 2px 8px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.role-guide:not([open]) { display: none; }
+.role-guide::backdrop {
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+}
+.role-guide__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 28px 12px;
+  background:
+    radial-gradient(120% 140% at 0% 0%, var(--rg-soft) 0%, transparent 60%),
+    var(--rg-surface);
+}
+.role-guide__header h2 {
+  margin: 0;
+  font: 800 24px/1.2 "Space Grotesk", "Manrope", system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+.role-guide__subtitle {
+  margin: 6px 0 0;
+  max-width: 68ch;
+  color: var(--rg-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.role-guide__close {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--rg-line);
+  border-radius: 12px;
+  background: var(--rg-surface);
+  color: var(--rg-ink);
+  cursor: pointer;
+}
+.role-guide__close:hover { background: var(--rg-subtle); }
+.role-guide__close:focus-visible,
+.role-guide__tab:focus-visible,
+.role-guide-link:focus-visible {
+  outline: 2px solid var(--rg-accent);
+  outline-offset: 2px;
+}
+.role-guide__tabs {
+  display: flex;
+  gap: 4px;
+  margin: 4px 28px 0;
+  padding: 4px;
+  width: fit-content;
+  max-width: calc(100% - 56px);
+  overflow-x: auto;
+  border-radius: 14px;
+  background: var(--rg-subtle);
+  border: 1px solid var(--rg-line);
+}
+.role-guide__tab {
+  border: 0;
+  border-radius: 10px;
+  padding: 9px 16px;
+  background: transparent;
+  color: var(--rg-muted);
+  font: 700 13px/1.2 "Manrope", system-ui, sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.role-guide__tab[aria-selected="true"] {
+  background: var(--rg-surface);
+  color: var(--rg-accent);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
+}
+.role-guide__header,
+.role-guide__tabs { flex: none; }
+.role-guide__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-top: 12px;
+  border-top: 1px solid var(--rg-line);
+  overflow-y: auto;
+  padding: 20px 28px 28px;
+}
+
+/* Levels */
+.role-guide-levels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr);
+  gap: 20px;
+}
+.role-guide-level {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid var(--rg-line);
+  border-radius: 18px;
+  background: var(--rg-subtle);
+}
+.role-guide-level:last-child {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+}
+.role-guide-level:last-child > h3,
+.role-guide-level:last-child > .role-guide-level__note { grid-column: 1 / -1; }
+.role-guide-level h3 {
+  margin: 0;
+  font: 800 13px/1.2 "Manrope", system-ui, sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rg-accent);
+}
+.role-guide-level__note {
+  margin: 0;
+  color: var(--rg-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.role-guide-role {
+  position: relative;
+  padding: 14px 14px 12px;
+  border: 1px solid var(--rg-line);
+  border-radius: 14px;
+  background: var(--rg-surface);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+.role-guide-role::before {
+  content: "";
+  position: absolute;
+  inset-block: 14px;
+  inset-inline-start: 0;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--rg-accent);
+  opacity: 0.35;
+}
+.role-guide-role[data-current="true"] {
+  border-color: var(--rg-accent);
+  box-shadow: 0 0 0 3px var(--rg-soft);
+}
+.role-guide-role[data-current="true"]::before { opacity: 1; }
+.role-guide-role__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  margin-bottom: 6px;
+}
+.role-guide-role__name {
+  margin: 0;
+  flex: 1 1 100%;
+  font: 800 14px/1.3 "Manrope", system-ui, sans-serif;
+}
+.role-guide-role p {
+  margin: 4px 0 0;
+  color: #334155;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.role-guide-tag,
+.role-guide-you {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font: 700 11px/1 "Manrope", system-ui, sans-serif;
+}
+.role-guide-tag[data-kind="paid"] { color: var(--rg-paid); background: var(--rg-paid-soft); }
+.role-guide-tag[data-kind="free"] { color: var(--rg-free); background: var(--rg-free-soft); }
+.role-guide-tag[data-kind="exempt"] { color: var(--rg-exempt); background: var(--rg-exempt-soft); }
+.role-guide-you { color: #fff; background: var(--rg-accent); }
+
+/* Billing callout */
+.role-guide-billing {
+  display: flex;
+  gap: 14px;
+  margin-top: 20px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: var(--rg-paid-soft);
+  color: #7c2d12;
+  border: 1px solid #fde4c4;
+}
+.role-guide-billing > svg { margin-top: 2px; color: var(--rg-paid); }
+.role-guide-billing strong { display: block; font-size: 14px; }
+.role-guide-billing p { margin: 4px 0 0; font-size: 13px; line-height: 1.55; }
+
+/* Permission matrix */
+.role-guide-matrix {
+  margin-top: 20px;
+  border: 1px solid var(--rg-line);
+  border-radius: 16px;
+  overflow-x: auto;
+}
+.role-guide-matrix table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.role-guide-matrix caption {
+  padding: 14px 16px 10px;
+  text-align: start;
+  font: 800 15px/1.3 "Manrope", system-ui, sans-serif;
+}
+.role-guide-matrix th,
+.role-guide-matrix td {
+  padding: 11px 14px;
+  border-top: 1px solid var(--rg-line);
+  text-align: center;
+}
+.role-guide-matrix thead th {
+  background: var(--rg-subtle);
+  font: 800 12px/1.2 "Manrope", system-ui, sans-serif;
+  letter-spacing: 0.03em;
+  color: var(--rg-muted);
+}
+.role-guide-matrix thead th:first-child,
+.role-guide-matrix tbody th {
+  text-align: start;
+  font-weight: 600;
+  color: var(--rg-ink);
+  min-width: 220px;
+}
+.role-guide-matrix td { color: #94a3b8; width: 84px; }
+.role-guide-matrix td[data-allowed="true"] { color: var(--rg-accent); }
+.role-guide-matrix td svg {
+  width: 18px;
+  height: 18px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--rg-soft);
+  stroke-width: 2.4;
+  vertical-align: middle;
+}
+.role-guide-matrix [data-current="true"] { background: var(--rg-soft); }
+.role-guide-matrix thead th[data-current="true"] { color: var(--rg-accent); }
+
+/* "Your role in this organization" */
+.role-guide-card {
+  margin: 0 0 18px;
+  padding: 16px 18px;
+  border: 1px solid var(--rg-line);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, var(--rg-soft) 0%, rgba(255, 255, 255, 0) 55%),
+    var(--rg-surface);
+}
+.role-guide-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.role-guide-card__head > div { display: grid; gap: 2px; min-width: 0; }
+.role-guide-card__eyebrow {
+  color: var(--rg-muted);
+  font: 700 11px/1.2 "Manrope", system-ui, sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.role-guide-card__role { font: 800 17px/1.3 "Manrope", system-ui, sans-serif; color: var(--rg-accent); }
+.role-guide-card__org { color: var(--rg-muted); font-size: 13px; }
+.role-guide-card__summary { margin: 10px 0 0; font-size: 13px; line-height: 1.55; color: #334155; }
+.role-guide-card__details summary {
+  margin-top: 10px;
+  width: fit-content;
+  color: var(--rg-accent);
+  font: 700 13px/1.4 "Manrope", system-ui, sans-serif;
+  cursor: pointer;
+}
+.role-guide-card__lists {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.role-guide-card__list h3 {
+  margin: 0 0 6px;
+  font: 800 12px/1.2 "Manrope", system-ui, sans-serif;
+  color: var(--rg-muted);
+}
+.role-guide-card__list ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.role-guide-card__list li {
+  position: relative;
+  padding-inline-start: 20px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.role-guide-card__list li::before {
+  position: absolute;
+  inset-inline-start: 0;
+  font-weight: 800;
+}
+.role-guide-card__list[data-kind="can"] li::before { content: "✓"; color: var(--rg-accent); }
+.role-guide-card__list[data-kind="cannot"] li { color: var(--rg-muted); }
+.role-guide-card__list[data-kind="cannot"] li::before { content: "—"; color: #94a3b8; }
+
+.role-guide-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--rg-line);
+  border-radius: 999px;
+  background: var(--rg-surface);
+  color: var(--rg-accent);
+  font: 700 13px/1 "Manrope", system-ui, sans-serif;
+  cursor: pointer;
+}
+.role-guide-link:hover { background: var(--rg-soft); border-color: var(--rg-accent); }
+
+/* Platform management overview */
+.role-guide-management {
+  --rg-accent: #6d28d9;
+  --rg-soft: #f3edff;
+  margin: 0 0 20px;
+  padding: 22px 24px;
+  border: 1px solid var(--rg-line);
+  border-radius: 20px;
+  background:
+    radial-gradient(110% 160% at 100% 0%, var(--rg-soft) 0%, transparent 55%),
+    var(--rg-surface);
+}
+.role-guide-management__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.role-guide-management__head h2 {
+  margin: 0;
+  font: 800 20px/1.25 "Space Grotesk", "Manrope", system-ui, sans-serif;
+}
+.role-guide-management__head p { margin: 6px 0 0; max-width: 70ch; color: var(--rg-muted); font-size: 14px; line-height: 1.55; }
+.role-guide-management__items {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.role-guide-management__item {
+  padding: 14px 16px;
+  border: 1px solid var(--rg-line);
+  border-radius: 14px;
+  background: var(--rg-surface);
+}
+.role-guide-management__item svg {
+  width: 34px;
+  height: 34px;
+  padding: 7px;
+  border-radius: 10px;
+  color: var(--rg-accent);
+  background: var(--rg-soft);
+}
+.role-guide-management__item h3 { margin: 10px 0 4px; font: 800 14px/1.3 "Manrope", system-ui, sans-serif; }
+.role-guide-management__item p { margin: 0; font-size: 13px; line-height: 1.5; color: #334155; }
+.role-guide-management__boundary {
+  margin: 14px 0 0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--rg-subtle);
+  color: var(--rg-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+@media (max-width: 820px) {
+  .role-guide-levels,
+  .role-guide-management__items { grid-template-columns: 1fr; }
+  .role-guide-level:last-child { grid-template-columns: 1fr; }
+  .role-guide__header { padding: 18px 16px 10px; }
+  .role-guide__tabs { margin-inline: 16px; max-width: calc(100% - 32px); }
+  .role-guide__body { padding: 16px; }
+  .role-guide-card__head,
+  .role-guide-management__head { flex-direction: column; align-items: stretch; }
+  .role-guide-matrix thead th:first-child,
+  .role-guide-matrix tbody th { min-width: 160px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .role-guide[open] { animation: role-guide-in 180ms ease-out; }
+  @keyframes role-guide-in {
+    from { opacity: 0; transform: translateY(8px) scale(0.99); }
+    to { opacity: 1; transform: none; }
+  }
+}

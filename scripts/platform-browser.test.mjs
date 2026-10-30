@@ -1626,7 +1626,7 @@ test("shared login, product isolation, MFA, safe redirects and session cleanup",
           "account-security",
         );
         const chip = page.locator("#account-plan .manager-role-badge");
-        assert.equal(await chip.innerText(), "WIFIGATE Host user");
+        assert.equal(await chip.innerText(), "WIFIGATE Host User");
         assert.equal(
           await chip.locator("[role=tooltip], .host-role-explanation").count(),
           0,

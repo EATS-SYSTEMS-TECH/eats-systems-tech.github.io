@@ -2,6 +2,19 @@ import {
   createOrganizationLogo,
   hasOrganizationLogo,
 } from "./manager-organization-card.js";
+import {
+  createOrganizationRoleCard,
+  organizationRoleSummary,
+  sharedOrganizationRole,
+} from "./role-guide.js";
+
+// Invitations keep the legacy names the API accepted before the shared roles,
+// so admin and staff invitations work against either API version.
+const invitationRole = {
+  admin: "organization-admin",
+  staff: "organization-user",
+  viewer: "viewer",
+};
 
 const node = (tag, text, className) => {
   const el = document.createElement(tag);
@@ -63,7 +76,13 @@ export async function renderManagerOrganization({
   const t = (he, en) => (language === "he" ? he : en);
   const detail = await api(path);
   if (!isCurrent()) return null;
-  const { organization: org, permissions, owner, counts } = detail;
+  const { organization: org, permissions, owner } = detail;
+  // Older API responses count staff and viewers together as users.
+  const counts = {
+    ...detail.counts,
+    staff: detail.counts?.staff ?? detail.counts?.users,
+    viewers: detail.counts?.viewers ?? 0,
+  };
   const all = async (suffix) => {
     const items = [],
       seen = new Set();
@@ -88,7 +107,24 @@ export async function renderManagerOrganization({
     permissions.managePeople ? all("/invitations") : [],
   ]);
   if (!isCurrent()) return null;
+  const roleOf = (member) => sharedOrganizationRole(member.role);
+  const ownRole =
+    owner?.uid === user.uid
+      ? "owner"
+      : sharedOrganizationRole(detail.role) ??
+        roleOf(members.find((m) => m.uid === user.uid && m.status === "active") ?? {});
   const section = node("section", undefined, "manager-organization-workspace");
+  if (permissions.openWorkspace !== false) {
+    document.body.dataset.organizationRole = ownRole ?? "";
+    section.append(
+      createOrganizationRoleCard({
+        product: "manager",
+        language,
+        role: ownRole,
+        organizationName: org.name,
+      }),
+    );
+  }
   if (!disclosureStates.has(root)) disclosureStates.set(root, new Map());
   const states = disclosureStates.get(root);
   const stateKey = user.uid + ":" + path + ":" + org.id;
@@ -124,14 +160,15 @@ export async function renderManagerOrganization({
   );
   if (
     Number.isSafeInteger(counts.administrators) &&
-    Number.isSafeInteger(counts.users)
+    Number.isSafeInteger(counts.staff) &&
+    Number.isSafeInteger(counts.viewers)
   )
     peopleDisclosure
       .querySelector("summary")
       .append(
         node(
           "span",
-          String(counts.administrators + counts.users),
+          String(counts.administrators + counts.staff + counts.viewers),
           "manager-organization-people-count",
         ),
       );
@@ -309,7 +346,8 @@ export async function renderManagerOrganization({
   const metrics = node("div", undefined, "manager-organization-metrics");
   for (const [key, label] of [
     ["administrators", t("מנהלי ארגון", "Organization admins")],
-    ["users", t("משתמשי ארגון", "Organization users")],
+    ["staff", t("צוות הארגון", "Organization staff")],
+    ["viewers", t("צופים בארגון", "Organization viewers")],
     ["systems", t("מערכות", "Systems")],
   ]) {
     const tile = button(
@@ -319,7 +357,7 @@ export async function renderManagerOrganization({
           key === "systems"
             ? root.querySelector('[data-organization-section="systems"]')
             : section.querySelector(
-                `[data-organization-role="organization-${key === "users" ? "user" : "admin"}"]`,
+                `[data-organization-role="${{ administrators: "admin", staff: "staff", viewers: "viewer" }[key]}"]`,
               );
         if (target) {
           const fold = target.closest("details");
@@ -363,22 +401,22 @@ export async function renderManagerOrganization({
   searchStatus.setAttribute("aria-live", "polite");
   peopleBody.append(search, searchStatus);
   const people = node("div", undefined, "manager-organization-people");
+  const roleNames = {
+    admin: t("מנהל ארגון", "Organization admin"),
+    staff: t("צוות ארגון", "Organization staff"),
+    viewer: t("צופה בארגון", "Organization viewer"),
+  };
   const invite = async (role) => {
     const saved = await dialogs.form({
-      title:
-        role === "organization-admin"
-          ? t("הוספת מנהל ארגון", "Add organization admin")
-          : t("הוספת משתמש לארגון", "Add organization user"),
+      title: t("הוספה בתור ", "Add as ") + roleNames[role],
       message:
-        role === "organization-admin"
-          ? t(
-              "מנהל יוכל לנהל חברים, לוגו ומערכות בארגון הזה בלבד. ההזמנה תמתין לאישור בחשבון שלו.",
-              "An admin can manage people, branding and systems in this organization only. The invitation waits for acceptance in their account.",
-            )
-          : t(
-              "המשתמש יוכל לפתוח את סביבת הניהול של מערכות הארגון. הוספה והסרה של מנהלים ומשתמשים זמינות למנהלי הארגון בלבד.",
-              "The user can open workspaces for the organization’s systems. Adding and removing organization admins and users remains restricted to organization administrators.",
-            ),
+        `WIFIGATE Manager Organization ${role[0].toUpperCase() + role.slice(1)}: ` +
+        organizationRoleSummary("manager", role, language) +
+        " " +
+        t(
+          "ההזמנה תמתין לאישור בחשבון שלו. תפקיד בארגון אינו דורש מנוי.",
+          "The invitation waits for acceptance in their account. An organization role needs no subscription.",
+        ),
       fields: [["email", t("כתובת אימייל", "Email address"), "email"]],
       submitLabel: t("יצירת הזמנה", "Create invitation"),
       errorText,
@@ -386,15 +424,16 @@ export async function renderManagerOrganization({
         await ensureRecent();
         await api(path + "/invitations", "POST", {
           email: values.email.trim().toLowerCase(),
-          role,
+          role: invitationRole[role],
         });
       },
     });
     if (saved && isCurrent()) await onRefresh();
   };
-  for (const [role, label] of [
-    ["organization-admin", t("מנהלי הארגון", "Organization admins")],
-    ["organization-user", t("משתמשי הארגון", "Organization users")],
+  for (const [role, label, count] of [
+    ["admin", t("מנהלי הארגון", "Organization admins"), counts.administrators],
+    ["staff", t("צוות הארגון", "Organization staff"), counts.staff],
+    ["viewer", t("צופים בארגון", "Organization viewers"), counts.viewers],
   ]) {
     const column = node(
         "section",
@@ -406,30 +445,22 @@ export async function renderManagerOrganization({
     const title = node("div", undefined, "manager-organization-people-title");
     title.append(
       node("h3", label),
-      node(
-        "span",
-        String(
-          counts[role === "organization-admin" ? "administrators" : "users"],
-        ),
-        "manager-organization-people-count",
-      ),
+      node("span", String(count ?? 0), "manager-organization-people-count"),
     );
     heading.append(title);
     if (permissions.managePeople)
       heading.append(
         button(
-          role === "organization-admin"
-            ? t("הוספת מנהל", "Add admin")
-            : t("הוספת משתמש", "Add user"),
+          { admin: t("הוספת מנהל", "Add admin"), staff: t("הוספת צוות", "Add staff"), viewer: t("הוספת צופה", "Add viewer") }[role],
           () => invite(role),
           "primary",
         ),
       );
     column.append(heading);
     const rows = members.filter(
-      (m) => m.status === "active" && m.role === role && m.uid !== owner.uid,
+      (m) => m.status === "active" && roleOf(m) === role && m.uid !== owner.uid,
     );
-    if (role === "organization-admin")
+    if (role === "admin")
       rows.unshift({ ...owner, isOwner: true });
     if (!rows.length)
       column.append(
@@ -456,10 +487,8 @@ export async function renderManagerOrganization({
         node(
           "small",
           person.isOwner
-            ? t("בעל הארגון", "Organization owner")
-            : role === "organization-admin"
-              ? t("מנהל ארגון", "Organization admin")
-              : t("משתמש ארגון", "Organization user"),
+            ? t("בעל הארגון · Manager User משלם", "Organization owner · paying Manager User")
+            : roleNames[role],
         ),
       );
       row.append(avatar, text);
@@ -562,9 +591,7 @@ export async function renderManagerOrganization({
         email,
         node(
           "span",
-          inv.role === "organization-user"
-            ? t("משתמש", "User")
-            : t("מנהל ארגון", "Organization admin"),
+          roleNames[sharedOrganizationRole(inv.role) ?? "admin"],
         ),
         button(t("ביטול הזמנה", "Cancel invitation"), async () => {
           if (

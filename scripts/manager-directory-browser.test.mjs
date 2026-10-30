@@ -257,8 +257,8 @@ test("Manager identity, platform overview and organization columns support scope
           .locator("#manager-profile-email")
           .getByText("operator@example.test", { exact: true })
           .waitFor();
-        assert.equal(await profilePanel.getByText("WIFIGATE Manager admin", {exact:true}).count(),0);
-        await page.locator('.manager-platform-header > .manager-role-badge').getByText('WIFIGATE Manager admin',{exact:true}).waitFor();
+        assert.equal(await profilePanel.getByText("WIFIGATE Manager Admin", {exact:true}).count(),0);
+        await page.locator('.manager-platform-header > .manager-role-badge').getByText('WIFIGATE Manager Admin',{exact:true}).waitFor();
         const panelBox = await profilePanel.boundingBox();
         assert(panelBox.x >= 16 && panelBox.x + panelBox.width <= width - 15);
         await page.keyboard.press("Escape");
@@ -351,8 +351,8 @@ test("Manager identity, platform overview and organization columns support scope
         await page
           .getByLabel(
             he
-              ? "אימייל בעל הארגון · Manager user"
-              : "Organization owner email · Manager user",
+              ? "אימייל בעל הארגון · Manager User"
+              : "Organization owner email · Manager User",
             { exact: true },
           )
           .fill("owner@example.test");
@@ -391,7 +391,7 @@ test("Manager identity, platform overview and organization columns support scope
         await page.evaluate(() => window.mount("organization-admin"));
         await profileButton.click();
         assert.equal(await profilePanel.locator('.manager-role-badge').count(),0);
-        await nav.locator('.manager-sidebar-roles').getByText('WIFIGATE Manager organization admin',{exact:true}).waitFor();
+        await nav.locator('.manager-sidebar-roles').getByText('WIFIGATE Manager Organization Admin',{exact:true}).waitFor();
         await page.keyboard.press("Escape");
         assert.equal(
           await nav
