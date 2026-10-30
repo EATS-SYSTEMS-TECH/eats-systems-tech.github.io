@@ -70,6 +70,33 @@ test('newline normalization preserves existing final newline', () => {
   const newline = actual('ensureTrailingNewline');
   assert.equal(newline('x'), 'x\n'); assert.equal(newline('x\n'), 'x\n');
 });
+test('partials strip only the BOM/first authoring comment, cache success and reject unknown/empty names', async () => {
+  const partialCache = new Map(), reads = [];
+  const deps = { partialCache, partialPaths: { footer: 'footer.html', empty: 'empty.html' }, fs: {
+    async readFile(name) { reads.push(name); return name === 'empty.html' ? '<!-- Only comment -->' : '\uFEFF <!-- Authoring -->\n <footer>Text</footer>\n<!-- Retained --> '; },
+  } };
+  const read = actual('readPartial', deps);
+  assert.equal(await read('footer'), '<footer>Text</footer>\n<!-- Retained -->');
+  assert.equal(await read('footer'), '<footer>Text</footer>\n<!-- Retained -->');
+  assert.deepEqual(reads, ['footer.html']);
+  await assert.rejects(read('unknown'), /Unknown template partial/);
+  await assert.rejects(read('empty'), /empty/);
+  assert.equal(partialCache.has('empty'), false);
+});
+test('partial injection preserves nonmatching markup and indents each actual nonblank line', async () => {
+  const reads = [];
+  const inject = actual('injectPartials', { readPartial: async name => { reads.push(name); return '<footer>\n\n  Text\n</footer>'; } });
+  const original = '  <div data-partial="site-footer"></div>\n<div data-partial=\'site-footer\'></div>\n  <div data-partial="site-footer"></div>\n';
+  const result = await inject(original, 'page.html');
+  assert.equal(result, '  <footer>\n\n    Text\n  </footer>\n<div data-partial=\'site-footer\'></div>\n  <footer>\n\n    Text\n  </footer>\n');
+  assert.deepEqual(reads, ['site-footer']);
+});
+test('partial read failures stop expansion before later names are inspected', async () => {
+  const seen = [], failure = new Error('Retained partial read failure');
+  const inject = actual('injectPartials', { readPartial: async name => { seen.push(name); throw failure; } });
+  await assert.rejects(inject('<div data-partial="first"></div>\n<div data-partial="second"></div>', 'page.html'), error => error === failure);
+  assert.deepEqual(seen, ['first']);
+});
 function writer({ previous = '', failures = [] } = {}) {
   const calls = [], changedFiles = new Set();
   const fs = { mkdir: async (...args) => calls.push(['mkdir', ...args]), readFile: async () => { if (previous instanceof Error) throw previous; return previous; }, writeFile: async (...args) => { calls.push(['write', ...args]); const error = failures.shift(); if (error) throw error; } };
