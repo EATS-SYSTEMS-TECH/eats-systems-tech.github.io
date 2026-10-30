@@ -35,7 +35,7 @@
     }
   },
   "method": "git blame --no-textconv --line-porcelain -w -M -C; exact blob states from matching author commits in all available refs and requested ref ancestry; external diff disabled",
-  "status": "COMPLETE_FROZEN_CENSUS_PLUS_VERIFIED_HOMEPAGE_AND_LEGAL_CTA_FOLLOWUPS",
+  "status": "HISTORICAL_566_CENSUS_WITH_CURRENT_COMPLETE_570_FILE_FOLLOWUP",
   "remaining": [
     {
       "path": "css/styles.css",
@@ -144,5 +144,113 @@
       }
     ],
     "method": "Frozen complete 566-file census plus verified scoped reports and unchanged other tracked blobs/modes; fresh complete follow-up scan recorded separately"
+  },
+  "completeFollowups": [
+    {
+      "schemaVersion": 1,
+      "sourceCommit": "3b28cfe96fffd69d5101eb3012e1a4761746f02e",
+      "at": "2026-10-30T09:09:37.720Z",
+      "status": "COMPLETE_570_FILES_ONE_PRIMARY_STYLESHEET_REMAINS",
+      "scope": [
+        "css",
+        "js",
+        "scripts",
+        "templates"
+      ],
+      "scannedFiles": 570,
+      "complete": true,
+      "errors": 0,
+      "zero": false,
+      "summary": {
+        "eiloncohen": {
+          "rawLines": 347,
+          "lines": 347,
+          "rawFiles": 1,
+          "files": 1,
+          "exceptedFiles": 0,
+          "rawBlobs": 1,
+          "blobs": 1,
+          "binaryBlobs": 0
+        },
+        "OdeliaTorjman": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        }
+      },
+      "remaining": [
+        {
+          "path": "css/styles.css",
+          "eilonLines": 347,
+          "odeliaLines": 0
+        }
+      ],
+      "method": "git blame --no-textconv --line-porcelain -w -M -C; exact blob states from matching author commits in all available refs and requested ref ancestry; external diff disabled",
+      "limits": [
+        "This is an actual complete frozen 570-file frontend scan, not a scoped derived count.",
+        "Only the selected frontend directories are included; other website areas, assets and physical/legal/final acceptance remain separate.",
+        "New uncommitted primary stylesheet contract work is outside this frozen 3b28cfe96 tree.",
+        "Git provenance is not a legal ownership determination; history is preserved."
+      ],
+      "productionDelivery": false
+    }
+  ],
+  "currentCompleteInventory": {
+    "schemaVersion": 1,
+    "sourceCommit": "3b28cfe96fffd69d5101eb3012e1a4761746f02e",
+    "at": "2026-10-30T09:09:37.720Z",
+    "status": "COMPLETE_570_FILES_ONE_PRIMARY_STYLESHEET_REMAINS",
+    "scope": [
+      "css",
+      "js",
+      "scripts",
+      "templates"
+    ],
+    "scannedFiles": 570,
+    "complete": true,
+    "errors": 0,
+    "zero": false,
+    "summary": {
+      "eiloncohen": {
+        "rawLines": 347,
+        "lines": 347,
+        "rawFiles": 1,
+        "files": 1,
+        "exceptedFiles": 0,
+        "rawBlobs": 1,
+        "blobs": 1,
+        "binaryBlobs": 0
+      },
+      "OdeliaTorjman": {
+        "rawLines": 0,
+        "lines": 0,
+        "rawFiles": 0,
+        "files": 0,
+        "exceptedFiles": 0,
+        "rawBlobs": 0,
+        "blobs": 0,
+        "binaryBlobs": 0
+      }
+    },
+    "remaining": [
+      {
+        "path": "css/styles.css",
+        "eilonLines": 347,
+        "odeliaLines": 0
+      }
+    ],
+    "method": "git blame --no-textconv --line-porcelain -w -M -C; exact blob states from matching author commits in all available refs and requested ref ancestry; external diff disabled",
+    "limits": [
+      "This is an actual complete frozen 570-file frontend scan, not a scoped derived count.",
+      "Only the selected frontend directories are included; other website areas, assets and physical/legal/final acceptance remain separate.",
+      "New uncommitted primary stylesheet contract work is outside this frozen 3b28cfe96 tree.",
+      "Git provenance is not a legal ownership determination; history is preserved."
+    ],
+    "productionDelivery": false
   }
 }
