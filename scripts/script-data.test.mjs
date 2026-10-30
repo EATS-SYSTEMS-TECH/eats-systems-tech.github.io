@@ -17,14 +17,22 @@ test("script data preserves ordinary JSON bytes and unsupported-value failures",
 });
 
 test("both actual builder boundaries use the same safe serializer without altering mutation order", async () => {
-  const source = await readFile(new URL("./build-localized-site.mjs", import.meta.url), "utf8");
+  // Document responsibilities may move into the planned module. Inspect the
+  // actual boundaries, retaining the same serialization and mutation checks.
+  const sources = await Promise.all(["build-localized-site.mjs", "localized-builder-document.mjs"].map(name =>
+    readFile(new URL(name, import.meta.url), "utf8").catch(error => {
+      if (error.code === "ENOENT" && name !== "build-localized-site.mjs") return "";
+      throw error;
+    })));
+  const source = sources.join("\n");
   assert.match(source, /import \{ serializeScriptData \} from "\.\/script-data\.mjs"/);
   const inline = source.match(/function inlineJson\(value\)\s*\{([\s\S]*?)\n\}/);
   assert.ok(inline);
   const serializeActualInline = new Function("value", "serializeScriptData", inline[1]);
   const input = { text: "</ScRiPt>" };
   assert.equal(JSON.parse(serializeActualInline(input, serializeScriptData)).text, input.text);
-  const insertion = source.slice(source.indexOf("function insertPageDataScript("), source.indexOf("// The footer comes"));
+  const insertion = source.match(/function insertPageDataScript\([^\n]*\)\s*\{[\s\S]*?^\}/m)?.[0];
+  assert.ok(insertion, "the actual JSON insertion boundary exists");
   assert.match(insertion, /\.remove\(\);[\s\S]*?\$\(anchorSelector\)\.before\([\s\S]*?\$\{serializeScriptData\(data\)\}/);
   assert.doesNotMatch(insertion, /JSON\.stringify/);
 });
