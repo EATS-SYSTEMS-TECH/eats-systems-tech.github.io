@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "area": "W3_SHARED_USE_CASE_TEMPLATE",
+  "base": "ba1e9c8d8988ef9598714bf0ebb7c17dcae2b630",
+  "specificationCommit": "c46d3c2fc",
+  "deletionCommit": "d6f87b2e4",
+  "sourceCommit": "d2ba1db12e7f2e65f745c544d8bc6d54da40ef16",
+  "scope": ["templates/niche.template.html"],
+  "validation": {
+    "baselineAndReconstruction": "Complete actual HTML parser tree SHA256-identical;every element,attribute/value,child order,script/style version,visible fallback string and partial placeholder preserved",
+    "actualFullGenerator": "Both real full CLI builds PASS in an isolated scratch project;all1485generated outputs present;all1483HTML parser models plus sitemap/llms identical;507serialized files differ only within the unchanged models;no missing/unexpected output",
+    "independentBaseline": "All1485original output files independently copied and hash-verified before regeneration;61,241,184bytes;compressed reference evidence retained privately;contact-us is a separately copied input and excluded from generated counts",
+    "actualChrome": "6real generated-route/media cases,2controlled browser preference cases,4legacy redirects PASS;20captures;actual decoded accepted clips,autoplay/end/replay,responsive layout and pricing checks;no substituted media response",
+    "attribution": "Complete1path;raw lines/blobs0 both authors;no exceptions",
+    "carryover": "0unallowed;1exact generic fallback title permitted with path/text/reason;no implementation body allowance",
+    "retainedFinding": "First conservative carry run found the unchanged WIFIGATE Use Case fallback title. Raw finding retained;its exact mandatory UI text documented before the successful second gate."
+  },
+  "limits": "Declarative compatibility layout preserved;no new design/legal ownership claimed. Remaining W3 stylesheet/generator and final W5 generated delivery stay OPEN. Browser cases are not physical phone or production acceptance.",
+  "status": "IMPLEMENTED_FULL_TEMPLATE_GENERATOR_AND_BROWSER_CONTRACTS_PASS"
+}

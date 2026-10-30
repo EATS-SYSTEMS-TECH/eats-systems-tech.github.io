@@ -1,0 +1,7 @@
+[
+  {
+    "path": "templates/niche.template.html",
+    "line": "<title>WIFIGATE Use Case</title>",
+    "reason": "Frozen generic fallback document title consumed by the shared localized builder and complete parser contract;three public product/UI words only,no custom layout or implementation body."
+  }
+]

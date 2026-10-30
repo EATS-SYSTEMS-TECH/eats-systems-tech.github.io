@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "base": "ba1e9c8d8988ef9598714bf0ebb7c17dcae2b630",
+  "head": "d2ba1db12e7f2e65f745c544d8bc6d54da40ef16",
+  "authors": [
+    "eiloncohen",
+    "OdeliaTorjman"
+  ],
+  "carried": 0,
+  "allowed": 1,
+  "zero": true,
+  "files": [
+    {
+      "path": "templates/niche.template.html",
+      "ownedBefore": 36,
+      "rewritten": true,
+      "carried": [],
+      "allowed": [
+        {
+          "line": 6,
+          "reason": "Frozen generic fallback document title consumed by the shared localized builder and complete parser contract;three public product/UI words only,no custom layout or implementation body."
+        }
+      ]
+    }
+  ],
+  "limitation": "Detects verbatim carry-over only; independent rewriting still requires review of structure and expression."
+}
