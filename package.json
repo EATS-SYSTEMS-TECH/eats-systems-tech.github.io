@@ -1,0 +1,46 @@
+{
+  "name": "wifigate-static-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build:api && node scripts/serve.mjs",
+    "build:api": "node scripts/build-api.mjs && node scripts/build-dashboard.mjs",
+    "typecheck": "tsc --noEmit",
+    "test:workspace-navigation": "npm run build:api && npm run typecheck && node --test --test-concurrency=3 --test-timeout=120000 scripts/workspace-organization-navigation-browser.test.mjs scripts/host-navigation-browser.test.mjs scripts/host-workspace-browser.test.mjs scripts/manager-organization-picker-browser.test.mjs scripts/manager-organization-browser.test.mjs scripts/pay-workspace-browser.test.mjs scripts/bundles-current.test.mjs",
+    "test:dashboard": "node --test --test-concurrency=3 --test-timeout=180000 scripts/bundles-current.test.mjs scripts/host-calendar-browser.test.mjs scripts/host-booking-browser.test.mjs scripts/host-workspace-browser.test.mjs scripts/host-navigation-browser.test.mjs scripts/host-locale-browser.test.mjs scripts/host-billing-browser.test.mjs scripts/host-recent-identity-browser.test.mjs scripts/host-systems-browser.test.mjs scripts/host-portal-fixtures.test.mjs scripts/host-dashboard-visual-browser.test.mjs scripts/host-manager-parity-browser.test.mjs",
+    "test:api": "npm run build:api && npm run typecheck && node --test scripts/host-portal.test.mjs scripts/host-demo-link.test.mjs scripts/platform.test.mjs scripts/login-gate-game.test.mjs scripts/login-pages.test.mjs scripts/navigation-language.test.mjs",
+    "test:platform": "npm run build:api && node --test scripts/platform-browser.test.mjs scripts/account-deletion-browser.test.mjs scripts/client-app-check-browser.test.mjs scripts/dashboard-profile-browser.test.mjs scripts/platform-language-browser.test.mjs scripts/reservations-browser.test.mjs scripts/platform-admin-directory-browser.test.mjs scripts/platform-admin-access-browser.test.mjs scripts/platform-admin-delete-browser.test.mjs scripts/platform-unified-browser.test.mjs",
+    "build:locales": "node scripts/build-localized-site.mjs",
+    "build:images": "node scripts/build-niche-images.mjs",
+    "staging": "npm run build:api && node scripts/start-staging.mjs",
+    "test:staging": "npm run build:api && node scripts/run-staging-tests.mjs",
+    "test:health": "node --test scripts/host-service-health.test.mjs",
+    "test:login": "node scripts/build-api.mjs && node --test scripts/login-attempts.test.mjs scripts/login-attempts-browser.test.mjs scripts/login-pages.test.mjs scripts/site-auth-mfa-browser.test.mjs",
+    "test:manager": "node --test --test-concurrency=3 --test-timeout=180000 scripts/manager-icons.test.mjs scripts/manager-deployment.test.mjs scripts/manager-setup-guide-browser.test.mjs scripts/manager-dialog-browser.test.mjs scripts/manager-connection-dialog-browser.test.mjs scripts/manager-crypto.test.mjs scripts/manager-connection.test.mjs scripts/manager-connection-timing.test.mjs scripts/manager-demand-browser.test.mjs scripts/manager-background-browser.test.mjs scripts/manager-connection-return-browser.test.mjs scripts/manager-session-renewal-browser.test.mjs scripts/manager-csv.test.mjs scripts/manager-dashboard-browser.test.mjs scripts/manager-control-workspace-browser.test.mjs scripts/manager-people-workspace-browser.test.mjs scripts/manager-history-workspace.test.mjs scripts/manager-history-workspace-browser.test.mjs scripts/manager-auto-workspace-browser.test.mjs scripts/manager-directory-browser.test.mjs scripts/manager-auth-browser.test.mjs scripts/manager-disconnect-browser.test.mjs scripts/manager-example-data.test.mjs scripts/manager-example-connection.test.mjs scripts/manager-example-parity-browser.test.mjs scripts/manager-examples-browser.test.mjs scripts/manager-experience-browser.test.mjs scripts/manager-access-note-browser.test.mjs scripts/manager-organization-browser.test.mjs scripts/manager-organization-picker-browser.test.mjs scripts/manager-owned-organizations-browser.test.mjs scripts/manager-example-organization.test.mjs scripts/manager-organization-parity-browser.test.mjs scripts/manager-csv-dialog-browser.test.mjs scripts/manager-device-details.test.mjs scripts/manager-events-model.test.mjs scripts/manager-events-browser.test.mjs scripts/manager-settings.test.mjs scripts/manager-settings-browser.test.mjs scripts/manager-system-details-browser.test.mjs",
+    "test:shop": "node --test --test-timeout=180000 scripts/shop-pages.test.mjs scripts/shop-catalog-browser.test.mjs",
+    "test:pay": "npm run build:api && npm run typecheck && node --test --test-timeout=180000 scripts/pay-workspace-browser.test.mjs scripts/pay-manager-parity-browser.test.mjs scripts/bundles-current.test.mjs",
+    "test:presentation": "node --test scripts/accessibility-controller-browser.test.mjs scripts/script-data.test.mjs scripts/accessibility-style-contract.test.mjs scripts/hero-media-contract.test.mjs scripts/accessibility-presentation.test.mjs scripts/niche-text-list.test.mjs scripts/niche-links.test.mjs scripts/redirect-page.test.mjs scripts/sitemap.test.mjs scripts/niche-navigation.test.mjs scripts/niche-publication.test.mjs scripts/host-marketing-page.test.mjs scripts/homepage-feature-grid.test.mjs"
+  },
+  "devDependencies": {
+    "cheerio": "^1.2.0",
+    "esbuild": "^0.28.2",
+    "firebase": "^12.19.0",
+    "firebase-admin": "^13.10.0",
+    "firebase-tools": "15.33.0",
+    "playwright-core": "^1.63.0",
+    "sharp": "^0.35.5",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "axios": "^1.20.0"
+  },
+  "overrides": {
+    "@grpc/grpc-js": "^1.13.6",
+    "uuid@<11.1.1": "^11.1.1",
+    "basic-ftp": "^6.2.2",
+    "firebase-tools": {
+      "chokidar": "4.0.3",
+      "@google-cloud/pubsub": "6.2.0"
+    }
+  }
+}
