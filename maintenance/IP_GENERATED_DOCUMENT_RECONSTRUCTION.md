@@ -16,8 +16,10 @@ assembly so unchanged-file date accounting retains the CLI's normal behavior.
 The original files and both content hashes are retained outside this repository.
 No separate checkout, worktree or topic branch is created.
 
-The captured run completed with 1,484 fresh files: 1,482 HTML documents plus
-sitemap.xml and llms.txt. Preserve each output path. Separately commit deletion
+The first captured run completed with 1,484 fresh files: 1,483 HTML documents
+plus sitemap.xml; the unchanged llms.txt was skipped by the ordinary output
+comparison. A subsequent capture forces that plain-text output to be freshly
+serialized as well. Preserve each output path. Separately commit deletion
 of the old generated document bodies, then add the actual freshly generated
 files in the next commit. Push only the complete pair. This is generation from
 the independently reconstructed source, not an in-place rename of authors.
