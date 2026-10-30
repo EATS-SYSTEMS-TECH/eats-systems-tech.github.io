@@ -422,7 +422,7 @@ export function createManagerDashboard({
     for (const role of new Set(
       profile.roles?.length ? profile.roles : [profile.role],
     )) {
-      if (!["admin", "user", "organization-admin"].includes(role)) continue;
+      if (!["admin", "user", "organization-admin", "organization-user"].includes(role)) continue;
       const label = node("span", roleName(role));
       label.dir = "ltr";
       roleList.append(label);
@@ -658,6 +658,7 @@ export function createManagerDashboard({
         admin: "WIFIGATE Manager admin",
         user: "WIFIGATE Manager user",
         "organization-admin": "WIFIGATE Manager organization admin",
+        "organization-user": "WIFIGATE Manager organization user",
       }[role] ?? t("ממתין להרשאה", "Access pending")
     );
   }

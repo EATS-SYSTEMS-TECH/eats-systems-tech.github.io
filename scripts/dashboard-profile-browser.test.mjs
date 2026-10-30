@@ -4,16 +4,16 @@ import { startSite, scenario } from "./platform-test-fixtures.mjs";
 
 const estimate = (amounts, quantities) => ({kind: "monthly-estimate", currency: "USD", monthlyCents: amounts.reduce((a,b) => a+b,0), lines: Object.fromEntries(["gates", "dualControls", "groups", "organizations"].map((key,i) => [key,{amountCents: amounts[i], quantity: quantities[i]}]))});
 
-test("active subscriptions summary reflects product access rather than pending or blocked plans", async t => {
+test("active product access summary excludes pending and blocked access", async t => {
   const {origin,browser}=await startSite(t);
   for(const language of ['he','en']) for(const item of [
     {host:'active',pay:'active',manager:'active',expected:'Host, Pay, Manager'},
     {host:'mfa-required',pay:'blocked',manager:'pending',expected:'Host'},
-    {host:'blocked',pay:'no-plan',manager:'pending',expected:language==='he'?'אין מנויים פעילים':'No active subscriptions'},
+    {host:'blocked',pay:'no-plan',manager:'pending',expected:language==='he'?'אין גישה פעילה למוצרים':'No active product access'},
   ]) {
     const f=await scenario(browser,{...item,enrolled:true,verified:true,viewport:{width:390,height:1000}});t.after(()=>f.context.close());
     await f.page.goto(origin+'/dashboard/?lang='+language);
-    const row=f.page.locator('#profile-details > div').filter({has:f.page.getByText(language==='he'?'מנויים פעילים':'Active subscriptions',{exact:true})});
+    const row=f.page.locator('#profile-details > div').filter({has:f.page.getByText(language==='he'?'גישה פעילה למוצרים':'Active product access',{exact:true})});
     await row.waitFor();
     assert.equal(await row.locator('dd').innerText(),item.expected);
     assert.equal(await f.page.locator('#profile-details > div').count(),8);
@@ -22,14 +22,15 @@ test("active subscriptions summary reflects product access rather than pending o
   }
 });
 
-test("For Business access displays WIFIGATE User without granting global administrator status", async (t) => {
+test("Independent subscription owners display WIFIGATE User; product-only access never grants global admin", async (t) => {
   const { origin, browser } = await startSite(t);
   for (const language of ["he", "en"]) for (const product of ["host", "pay", "manager"]) {
     await t.test(`${language} ${product}`, async (t) => {
       const fixture = await scenario(browser, {
         platformRole: null,
         // A product administrator is still a regular WIFIGATE platform user.
-        admin: product === "host",
+        admin: false,
+        managerRole: "user",
         host: "no-plan", pay: "no-plan", manager: "no-plan",
         [product]: "active", enrolled: true, verified: true,
         viewport: { width: language === "he" ? 390 : 1440, height: 1000 },
@@ -38,11 +39,12 @@ test("For Business access displays WIFIGATE User without granting global adminis
       const page = fixture.page;
       await page.goto(origin + "/dashboard/" + (language === "he" ? "?lang=he" : ""));
       const details = page.locator("#profile-details");
-      await details.getByText("WIFIGATE User", { exact: true }).waitFor();
+      const accountRole = product === "pay" ? (language === "he" ? "חשבון ללא מנוי פעיל" : "Account without an active subscription") : "WIFIGATE User";
+      await details.getByText(accountRole, { exact: true }).waitFor();
       assert.equal(await details.getByText("WIFIGATE Admin", { exact: true }).count(), 0);
       assert.equal(await details.locator("dt").first().textContent(), language === "he" ? "תפקיד בחשבון WIFIGATE" : "WIFIGATE account role");
-      assert.equal(await details.getByText("WIFIGATE User", { exact: true }).getAttribute("dir"), "auto");
-      const subscriptions = details.locator('div').filter({has:page.getByText(language === "he" ? "מנויים פעילים" : "Active subscriptions",{exact:true})});
+      assert.equal(await details.getByText(accountRole, { exact: true }).getAttribute("dir"), "auto");
+      const subscriptions = details.locator('div').filter({has:page.getByText(language === "he" ? "גישה פעילה למוצרים" : "Active product access",{exact:true})});
       assert.equal(await subscriptions.locator('dd').innerText(), {host:'Host',pay:'Pay',manager:'Manager'}[product]);
       assert.equal(await page.locator(".platform-management-entry:visible").count(), 0);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);

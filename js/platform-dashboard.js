@@ -668,7 +668,10 @@ function renderProfileDetails() {
   for (const [label, value] of [
     [
       language === "he" ? "תפקיד בחשבון WIFIGATE" : "WIFIGATE account role",
-      identity.platformRole === "admin" ? "WIFIGATE Admin" : "WIFIGATE User",
+      identity.platformRole === "admin" ? "WIFIGATE Admin" :
+        ["host", "manager"].some(id => identity.products[id].state === "active" && identity.products[id].role === "user") ? "WIFIGATE User" :
+        productIds.some(id => identity.products[id].organizations > 0 || ["organization-user", "organization-admin"].includes(identity.products[id].role)) ? (language === "he" ? "משתמש ארגון" : "Organization user") :
+        (language === "he" ? "חשבון ללא מנוי פעיל" : "Account without an active subscription"),
     ],
     [
       language === "he" ? "כתובת אימייל" : "Email address",
@@ -715,12 +718,12 @@ function renderProfileDetails() {
           : "Not verified with authenticator",
     ],
     [
-      language === "he" ? "מנויים פעילים" : "Active subscriptions",
+      language === "he" ? "גישה פעילה למוצרים" : "Active product access",
       activeSubscriptions.length
         ? activeSubscriptions.join(", ")
         : productIds.some((id) => identity.products[id].state === "unavailable")
           ? unavailableLabel(language)
-          : language === "he" ? "אין מנויים פעילים" : "No active subscriptions",
+          : language === "he" ? "אין גישה פעילה למוצרים" : "No active product access",
     ],
   ]) {
     const row = document.createElement("div");

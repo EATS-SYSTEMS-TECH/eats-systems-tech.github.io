@@ -82,7 +82,7 @@ export function fixtureProfile(state) {
               : "user",
       },
       pay: { state: state.pay, ...(state.platformRole === "admin" ? { role: "admin" } : {}), summary: state.personalSummaries?.pay, financials: state.productFinancials?.pay },
-      manager: { state: state.manager, ...(state.platformRole === "admin" ? { role: "admin" } : {}), summary: state.personalSummaries?.manager, financials: state.productFinancials?.manager },
+      manager: { state: state.manager, ...(state.platformRole === "admin" ? { role: "admin" } : state.managerRole ? { role: state.managerRole } : {}), summary: state.personalSummaries?.manager, financials: state.productFinancials?.manager },
     },
   };
 }

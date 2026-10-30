@@ -42,7 +42,7 @@ export function createPlatformOrganization(user: FirebaseUser, input: {product: 
 }
 
 export type PlatformDirectoryFinancials = {
-  billingPolicy?: "platform-admin-exempt-v1";
+  billingPolicy?: "subscription-owners-v2";
   kind: "monthly-estimate";
   totals: { currency: string; amountCents: number }[];
   accounts: number;
@@ -93,8 +93,8 @@ export function changePlatformProductAccess(
   });
 }
 
-export function getPlatformOrganizationOverview(user: FirebaseUser, product = "all"): Promise<{items:{id:string;name:string;status:string;version?:number;products:Partial<Record<ProductId,string>>}[];complete:true;basis:"provisioned-organizations"}> {
- return authenticatedRequest(profileApi,user,{method:"GET",url:`/api/v1/platform/directory/organization-overview?${new URLSearchParams({product})}`});
+export function getPlatformOrganizationOverview(user: FirebaseUser, product = "all", includeMembers = false): Promise<{items:{id:string;name:string;status:string;version?:number;products:Partial<Record<ProductId,string>>;owner?:{email:string;subscriptionStatus:string;billingExempt:boolean;products:Partial<Record<ProductId,ProductAccess>>}|null;members?:{email:string;subscriptionRequired:false;products:Partial<Record<ProductId,{role:string;status:string}>>}[]}[];complete:true;basis:"provisioned-organizations"}> {
+ return authenticatedRequest(profileApi,user,{method:"GET",url:`/api/v1/platform/directory/organization-overview?${new URLSearchParams({product,...(includeMembers ? {includeMembers:"true"} : {})})}`});
 }
 
 export function deletePlatformOrganization(user:FirebaseUser,id:string,input:{confirmName:string;expectedVersion:number},key:string):Promise<{id:string;archived:true}>{return authenticatedRequest(profileApi,user,{method:"POST",url:`/api/v1/platform/directory/organizations/${encodeURIComponent(id)}/delete`,data:input,headers:{"Idempotency-Key":key}});}
