@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-10-30T10:47:33.157807+00:00",
+  "area": "W3",
+  "sourceCommit": "834ff528e14260d4f4fc9c55aa87adcbc8dbfed5",
+  "baseCommit": "91e55aac6911d531f3dec82edca04607446bd02c",
+  "status": "PASS_WHOLE_SHARED_STYLESHEET_RECONSTRUCTION_FROZEN_BROWSER_AND_COMPLETE_FRONTEND_SOURCE",
+  "method": {
+    "specification": "maintenance/IP_SHARED_SITE_STYLE_BEHAVIOR.md",
+    "originalContractCommit": "5a92a0ba0",
+    "wholeDeletionCommit": "e3fdb70c3",
+    "independentAdditionCommit": "834ff528e14260d4f4fc9c55aa87adcbc8dbfed5",
+    "originalLines": 2111,
+    "replacementLines": 657,
+    "originalSha256": "f84929bd815e53daedc3c35cc12104b964a7cd6df354a8a3a04f8c972e4f20f2",
+    "replacementSha256": "d37edd5273bba59f3389957f85728f607a81cfc6da4fc7afa4a2ec6ad7e7a05d",
+    "independentImplementation": "Responsibility-based prose reconstruction with private repeated-geometry parameters;not automatic reformatting or blame-only metadata editing",
+    "preserved": "Public selectors/specificity/cascade,29 public custom properties,design tokens,responsive boundaries,RTL,hover/focus/media/motion states"
+  },
+  "validation": {
+    "originalRepeatability": "Eight original cases repeated independently with exact style and box facts before freezing",
+    "immutableOriginalChromeCases": 376,
+    "originalContractPass": true,
+    "replacementImmutableContractPass": true,
+    "completePresentationTests": 101,
+    "failedTests": 0,
+    "skippedTests": 0,
+    "additionalGeneratedLegalChromeCases": 208,
+    "nativeKeyboardRoutes": 6,
+    "generatedFiles": 1485,
+    "generatedRawByteDifferences": 0,
+    "fullParsedModelMismatches": 0,
+    "siteLocales": 39,
+    "sitePagesPerLocale": 14,
+    "interactivePages": 663,
+    "sitemapUrls": 703,
+    "localizedHomepageChecks": 39,
+    "changedPathAuditComplete": true,
+    "changedPaths": 6,
+    "changedPathAttributionZero": true,
+    "otherTrackedBlobsModesExact": 2356,
+    "dependenciesAndProductConfigurationExact": true,
+    "completeFrontendSource": {
+      "schemaVersion": 1,
+      "sourceCommit": "834ff528e14260d4f4fc9c55aa87adcbc8dbfed5",
+      "at": "2026-10-30T10:38:56.186Z",
+      "status": "COMPLETE_573_FILE_FRONTEND_ZERO_WITHOUT_EXCEPTIONS",
+      "scope": [
+        "css",
+        "js",
+        "scripts",
+        "templates"
+      ],
+      "scannedFiles": 573,
+      "complete": true,
+      "errors": 0,
+      "zero": true,
+      "summary": {
+        "eiloncohen": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        },
+        "OdeliaTorjman": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        }
+      },
+      "remaining": [],
+      "method": "git blame --no-textconv --line-porcelain -w -M -C; exact blob states from matching author commits in all available refs and requested ref ancestry; external diff disabled",
+      "reviewBranch": "codex/ip-site-shared-styles-reconstruction-20261030",
+      "mainIntegration": false,
+      "limits": [
+        "Actual complete frozen573-file selected frontend scan;zero raw and unexcepted attribution for both identities,without exceptions.",
+        "This is the isolated review source;main/deployed website,other repository areas,assets,physical/legal/final integration are separate.",
+        "Git provenance is not a legal ownership determination;history is retained."
+      ],
+      "productionDelivery": false
+    }
+  },
+  "measurement": {
+    "implementationSha256": "12778a41f066758f6131c434abad8563241250f61c0fbd21a18fba7d83053778",
+    "elementsPerCase": 616,
+    "allStandardComputedProperties": true,
+    "bothPseudoElements": true,
+    "exactBorderBoxSizes": true,
+    "originalMotionAndScrollPolicyRetained": true,
+    "localeAndSkin": "English/LTR and Hebrew/RTL;base and composed homepage sheets",
+    "mediaAndFonts": "Not loaded in the component fingerprint;generated-page Chrome validation loads actual local assets separately",
+    "controllers": "Not executed by component paint fixtures;existing controller contracts and generated-page routes remain separate"
+  },
+  "retainedPreflightFailures": [
+    "Unchanged original stylesheet probes exposed native hover-scroll viewport-position differences,hidden-box offset handling and transient cached DOM scroll metrics. All failed probes and diagnostic values remain private.",
+    "Before the immutable fixture was frozen,the contract explicitly bounded viewport positions/DOM internal scroll metrics out of its fingerprint while retaining every computed property,both pseudos,exact box sizes,all public parameters and original motion/scroll policy. No frozen expectation was refreshed to pass the replacement.",
+    "The duplicated identical tab-dot family is consolidated at its last original cascade position;proven unconditionally overwritten declarations alone are removed."
+  ],
+  "limits": [
+    "This accepted source and browser scope does not approve final integration,physical phone behavior or production publication.",
+    "Both original source specifications and Git history remain intact;no legal ownership certificate.",
+    "Complete573 source scope is css/js/scripts/templates only;other website areas/assets/main are separate.",
+    "Original task hardware/account/camera/remoteCI/legal acceptance remains independently open."
+  ],
+  "reviewUrl": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/20",
+  "productionDelivery": false
+}

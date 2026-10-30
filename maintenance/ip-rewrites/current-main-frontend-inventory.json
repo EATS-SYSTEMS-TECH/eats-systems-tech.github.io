@@ -35,7 +35,7 @@
     }
   },
   "method": "git blame --no-textconv --line-porcelain -w -M -C; exact blob states from matching author commits in all available refs and requested ref ancestry; external diff disabled",
-  "status": "HISTORICAL_566_CENSUS_WITH_CURRENT_COMPLETE_570_FILE_FOLLOWUP",
+  "status": "HISTORICAL_566_CENSUS_WITH_CURRENT_COMPLETE_573_FILE_ZERO_FOLLOWUP",
   "remaining": [
     {
       "path": "css/styles.css",
@@ -198,32 +198,80 @@
         "Git provenance is not a legal ownership determination; history is preserved."
       ],
       "productionDelivery": false
+    },
+    {
+      "schemaVersion": 1,
+      "sourceCommit": "834ff528e14260d4f4fc9c55aa87adcbc8dbfed5",
+      "at": "2026-10-30T10:38:56.186Z",
+      "status": "COMPLETE_573_FILE_FRONTEND_ZERO_WITHOUT_EXCEPTIONS",
+      "scope": [
+        "css",
+        "js",
+        "scripts",
+        "templates"
+      ],
+      "scannedFiles": 573,
+      "complete": true,
+      "errors": 0,
+      "zero": true,
+      "summary": {
+        "eiloncohen": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        },
+        "OdeliaTorjman": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        }
+      },
+      "remaining": [],
+      "method": "git blame --no-textconv --line-porcelain -w -M -C; exact blob states from matching author commits in all available refs and requested ref ancestry; external diff disabled",
+      "reviewBranch": "codex/ip-site-shared-styles-reconstruction-20261030",
+      "mainIntegration": false,
+      "limits": [
+        "Actual complete frozen573-file selected frontend scan;zero raw and unexcepted attribution for both identities,without exceptions.",
+        "This is the isolated review source;main/deployed website,other repository areas,assets,physical/legal/final integration are separate.",
+        "Git provenance is not a legal ownership determination;history is retained."
+      ],
+      "productionDelivery": false
     }
   ],
   "currentCompleteInventory": {
     "schemaVersion": 1,
-    "sourceCommit": "3b28cfe96fffd69d5101eb3012e1a4761746f02e",
-    "at": "2026-10-30T09:09:37.720Z",
-    "status": "COMPLETE_570_FILES_ONE_PRIMARY_STYLESHEET_REMAINS",
+    "sourceCommit": "834ff528e14260d4f4fc9c55aa87adcbc8dbfed5",
+    "at": "2026-10-30T10:38:56.186Z",
+    "status": "COMPLETE_573_FILE_FRONTEND_ZERO_WITHOUT_EXCEPTIONS",
     "scope": [
       "css",
       "js",
       "scripts",
       "templates"
     ],
-    "scannedFiles": 570,
+    "scannedFiles": 573,
     "complete": true,
     "errors": 0,
-    "zero": false,
+    "zero": true,
     "summary": {
       "eiloncohen": {
-        "rawLines": 347,
-        "lines": 347,
-        "rawFiles": 1,
-        "files": 1,
+        "rawLines": 0,
+        "lines": 0,
+        "rawFiles": 0,
+        "files": 0,
         "exceptedFiles": 0,
-        "rawBlobs": 1,
-        "blobs": 1,
+        "rawBlobs": 0,
+        "blobs": 0,
         "binaryBlobs": 0
       },
       "OdeliaTorjman": {
@@ -237,19 +285,14 @@
         "binaryBlobs": 0
       }
     },
-    "remaining": [
-      {
-        "path": "css/styles.css",
-        "eilonLines": 347,
-        "odeliaLines": 0
-      }
-    ],
+    "remaining": [],
     "method": "git blame --no-textconv --line-porcelain -w -M -C; exact blob states from matching author commits in all available refs and requested ref ancestry; external diff disabled",
+    "reviewBranch": "codex/ip-site-shared-styles-reconstruction-20261030",
+    "mainIntegration": false,
     "limits": [
-      "This is an actual complete frozen 570-file frontend scan, not a scoped derived count.",
-      "Only the selected frontend directories are included; other website areas, assets and physical/legal/final acceptance remain separate.",
-      "New uncommitted primary stylesheet contract work is outside this frozen 3b28cfe96 tree.",
-      "Git provenance is not a legal ownership determination; history is preserved."
+      "Actual complete frozen573-file selected frontend scan;zero raw and unexcepted attribution for both identities,without exceptions.",
+      "This is the isolated review source;main/deployed website,other repository areas,assets,physical/legal/final integration are separate.",
+      "Git provenance is not a legal ownership determination;history is retained."
     ],
     "productionDelivery": false
   }
