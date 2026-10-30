@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-30T02:25:10.174Z",
-  "ref": "d04c78c2354afb3a5b5ef0c77e22e2c614768daf",
+  "createdAt": "2026-10-30T04:15:29.063Z",
+  "ref": "57f211e497cb0d1163c358c882c511ba73c3fb55",
   "scope": "selected paths",
   "paths": [
     "css",
@@ -9,18 +9,18 @@
     "scripts",
     "templates"
   ],
-  "trackedFiles": 2314,
-  "scannedFiles": 554,
+  "trackedFiles": 2320,
+  "scannedFiles": 555,
   "complete": true,
   "summary": {
     "eiloncohen": {
-      "rawLines": 738,
-      "lines": 738,
-      "rawFiles": 12,
-      "files": 12,
+      "rawLines": 734,
+      "lines": 734,
+      "rawFiles": 10,
+      "files": 10,
       "exceptedFiles": 0,
-      "rawBlobs": 12,
-      "blobs": 12,
+      "rawBlobs": 10,
+      "blobs": 10,
       "binaryBlobs": 0
     },
     "OdeliaTorjman": {
@@ -53,19 +53,11 @@
       "eilonLines": 14
     },
     {
-      "path": "js/accessibility.js",
-      "eilonLines": 2
-    },
-    {
       "path": "scripts/build-localized-site.mjs",
       "eilonLines": 74
     },
     {
       "path": "scripts/hero-video-browser.test.mjs",
-      "eilonLines": 2
-    },
-    {
-      "path": "scripts/host-marketing-page.mjs",
       "eilonLines": 2
     },
     {
@@ -87,9 +79,10 @@
   ],
   "status": "COMPLETE_SELECTED_FRONTEND_INVENTORY_REMAINING_IP_OPEN",
   "limits": [
-    "554files under css/js/scripts/templates only;not entire website/generated outputs/assets/backend",
-    "738Eilon lines remain in12files;0Odelia lines in this scope",
-    "No independent rewrite or ownership closure is inferred from this inventory",
-    "Primary checkout/main and hosting untouched"
+    "Frozen57f211e49 scope555files under css/js/scripts/templates only;not entire website/generated/assets/backend",
+    "734Eilon lines remain in10files;0Odelia in this scope",
+    "Later script-data helper/test/spec have separate complete zero3path report;entire builder rewrite remains open",
+    "No legal ownership or final acceptance inferred",
+    "Primary/main/hosting untouched"
   ]
 }
