@@ -7,6 +7,11 @@ comments, indentation and attribute serialization to differ. Preserve product
 copy, translation keys, static paths, media, accessible labels and DOM order.
 Do not regenerate or publish the primary website here.
 
+The existing `verify-site` footer locator additionally requires the literal
+opening prefix `<footer class="site-footer"`. Preserve that serialization
+boundary;the initial replacement's reversed class/dir order exposed this
+existing constraint and its failed verification/regression attempts are retained.
+
 The Host fragment has four sections in order: audience (`wa-audience`), security
 (`section wa-secure`), pricing (`section wa-pricing`, id`wa-pricing`), and the
 final contact action (`section wa-cta`). The audience has its existing English

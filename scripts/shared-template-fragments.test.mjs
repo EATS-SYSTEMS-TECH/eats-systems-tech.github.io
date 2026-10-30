@@ -7,6 +7,10 @@ import { load } from 'cheerio';
 const frozen = JSON.parse(await readFile(new URL('../maintenance/ip-contracts/shared-template-fragments.json', import.meta.url), 'utf8'));
 const fragments = new Map();
 for (const row of frozen.files) fragments.set(row.path, load(await readFile(new URL('../' + row.path, import.meta.url), 'utf8')));
+test('footer keeps the serialized opening boundary consumed by existing verify-site', async () => {
+  const source = await readFile(new URL('../templates/partials/site-footer.template.html', import.meta.url), 'utf8');
+  assert.ok(source.includes('<footer class="site-footer"'), 'existing verify-site locates the shared footer by this literal prefix');
+});
 // HTML source indentation/comments are authoring details; every actual node,
 // attribute, word, URL and decorative SVG fact remains part of this contract.
 function model(node) {
