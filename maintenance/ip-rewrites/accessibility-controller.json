@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "area": "W3",
+  "sourceCommit": "821a674db5cba5da7f55f4365ac3a707340d076d",
+  "review": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/9",
+  "specification": "maintenance/IP_ACCESSIBILITY_CONTROLLER_BEHAVIOR.md",
+  "deletionCommit": "2e9792820",
+  "implementationCommit": "821a674db5cba5da7f55f4365ac3a707340d076d",
+  "change": "Independent preference/dialog/launcher controllers from frozen behavior;two main/media globals retained;original copy/CSS/DOM/storage contracts retained. Nonfinite stored placement fractions are ignored.",
+  "validation": {
+    "actualChromeMenu": "PASS39locale copy shapes;actual EN/HE/EL/AR UI;keyboard/focus,9settings,scale,persistence/reset",
+    "actualChromeFab": "PASS actual delayed media startup during long press,drag stability,RTL mirror,dismiss/reload,touch",
+    "presentation": "57/57PASS",
+    "recoveryBrowser": "PASS corrupt/denied storage,late DOM/copy,locale fallback,idempotent listeners",
+    "fullCli": "PASS separate frozen567input tree with180verified read-only assets",
+    "generatedOutput": {
+      "files": 1485,
+      "rawByteDifferences": 0,
+      "missing": [],
+      "unexpected": [],
+      "modelMismatches": []
+    },
+    "attribution": {
+      "ref": "821a674db5cba5da7f55f4365ac3a707340d076d",
+      "files": 3,
+      "complete": true,
+      "zero": true,
+      "summary": {
+        "eiloncohen": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        },
+        "OdeliaTorjman": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        }
+      }
+    }
+  },
+  "limits": [
+    "One source delivery only;no whole website zero claim",
+    "Other frontend source,generated/final-main/legal gates remain open",
+    "Primary/main and hosting untouched",
+    "Browser contracts do not establish physical phone or BLE acceptance"
+  ],
+  "productionDelivery": false
+}
