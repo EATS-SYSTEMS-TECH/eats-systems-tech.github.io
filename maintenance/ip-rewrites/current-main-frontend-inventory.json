@@ -35,7 +35,7 @@
     }
   },
   "method": "git blame --no-textconv --line-porcelain -w -M -C; exact blob states from matching author commits in all available refs and requested ref ancestry; external diff disabled",
-  "status": "COMPLETE_FROZEN_CENSUS_PLUS_VERIFIED_THREE_TEMPLATE_AND_DICTIONARY_FOLLOWUPS",
+  "status": "COMPLETE_FROZEN_CENSUS_PLUS_VERIFIED_HOMEPAGE_AND_LEGAL_CTA_FOLLOWUPS",
   "remaining": [
     {
       "path": "css/styles.css",
@@ -116,24 +116,33 @@
       "review": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/18",
       "evidence": "maintenance/ip-rewrites/homepage-template-document.json",
       "unchangedOtherTrackedFiles": 2347
+    },
+    {
+      "source": "3b28cfe96fffd69d5101eb3012e1a4761746f02e",
+      "paths": [
+        "scripts/legal/locale-cta.json",
+        "css/legal.css"
+      ],
+      "sourceReportFiles": 6,
+      "complete": true,
+      "zero": true,
+      "review": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/19",
+      "evidence": "maintenance/ip-rewrites/legal-cta-copy-and-action-fit.json",
+      "unchangedOtherTrackedFiles": 2350
     }
   ],
   "derivedRemainingAfterScopedFollowups": {
     "basisRef": "11abefff2d343d310cd8a26ba0625116d2a2676a",
-    "currentSource": "56fa9363dea9daaaa9b8818977d27d1e49d9d85b",
-    "eilonLines": 533,
-    "eilonFiles": 2,
+    "currentSource": "3b28cfe96fffd69d5101eb3012e1a4761746f02e",
+    "eilonLines": 347,
+    "eilonFiles": 1,
     "odeliaLines": 0,
     "remaining": [
       {
         "path": "css/styles.css",
         "eilonLines": 347
-      },
-      {
-        "path": "scripts/legal/locale-cta.json",
-        "eilonLines": 186
       }
     ],
-    "method": "Frozen complete 566-file census plus complete scoped zero reports and unchanged other tracked blobs/modes; not a new whole census"
+    "method": "Frozen complete 566-file census plus verified scoped reports and unchanged other tracked blobs/modes; fresh complete follow-up scan recorded separately"
   }
 }
