@@ -314,6 +314,13 @@ test("Manager identity, platform overview and organization columns support scope
         await page.locator('[data-organization-disclosure="people"] > summary').click();
         await page.getByRole('button',{name:he?'הוספת מנהל':'Add admin',exact:true}).click();
         await page.getByRole('dialog').getByLabel(he?'כתובת אימייל':'Email address',{exact:true}).fill('new@example.test');
+        // All four organization roles are offered; the Manager owner is the
+        // account holder, so Owner is explained but cannot be chosen.
+        const roleChoice = (name) => page.getByRole('dialog').getByRole('radio',{name:new RegExp(`Organization ${name}`)});
+        assert.equal(await page.getByRole('dialog').getByRole('radio').count(), 4);
+        assert.equal(await roleChoice('Owner').isDisabled(), true);
+        assert.equal(await roleChoice('Admin').isChecked(), true);
+        await roleChoice('Staff').check();
         await page.getByRole('dialog').getByRole('button',{name:he?'יצירת הזמנה':'Create invitation',exact:true}).click();
         await page.getByRole('dialog').waitFor({state:'hidden'});
         await page.getByRole('button',{name:he?'הסרת delegate@example.test':'Remove delegate@example.test',exact:true}).click();
@@ -383,7 +390,8 @@ test("Manager identity, platform overview and organization columns support scope
           calls.some(
             (c) =>
               c.path === "/admin/organizations/org-a/invitations" &&
-              c.body.email === "new@example.test",
+              c.body.email === "new@example.test" &&
+              c.body.role === "organization-user",
           ),
         );
         assert(calls.some((c) => c.path.endsWith("/members/delegate/remove")));

@@ -35,8 +35,41 @@ const icons = {
   check: "m5 12.5 4.5 4.5L19 7",
   close: "M6 6l12 12M18 6 6 18",
   shield: "M12 3 20 6v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Zm-3 9 2 2 4-4",
-  card: "M3 7h18v10H3zM3 11h18M7 15h3",
+  card: "M5 5h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm-2 5h18M7 15h4",
   people: "M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-6 9a6 6 0 0 1 12 0m1.5-9a3 3 0 1 0 0-6m2.5 15a5 5 0 0 0-3-4.6",
+  crown: "M3 8l4.5 4.5L12 5l4.5 7.5L21 8l-1.8 10.5H4.8L3 8Zm2 13h14",
+  sliders: "M4 6h9m4 0h3M4 12h3m4 0h9M4 18h11m4 0h1M15 4v4M9 10v4M17 16v4",
+  staff: "M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-6 10a6 6 0 0 1 12 0m1-9 2 2 4-4",
+  eye: "M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Zm10 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
+  house: "M3 11 12 4l9 7M5 9.5V20h5v-6h4v6h5V9.5",
+  wallet:
+    "M19 7V5a1 1 0 0 0-1-1H6a2 2 0 0 0 0 4h13a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2V6m16 6h-4a2 2 0 0 0 0 4h4v-4Z",
+  gate: "M3 20V4m18 16V4M3 8h18M3 17h18M7.5 8v9m4.5-9v9m4.5-9v9",
+  layers: "m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5m-18 4 9 5 9-5",
+  building: "M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16m0-12h2a2 2 0 0 1 2 2v10M2 21h20M8 7h4M8 11h4M8 15h4",
+  calendar: "M7 3v4m10-4v4M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm-2 5h16",
+  link: "M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1",
+  activity: "M3 12h4l3-8 4 16 3-8h4",
+  wifi: "M2 9a14 14 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 19.5h.01",
+  plug: "M9 3v5m6-5v5M7 8h10v3a5 5 0 0 1-10 0V8Zm5 8v5",
+  key: "M7.5 21a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm3.2-7.7L21 3m-3 3 2.5 2.5m-5 0 2 2",
+  cog: "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm0-12v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6 2.1-2.1",
+  userPlus: "M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-6 10a6 6 0 0 1 12 0m4-13v6m-3-3h6",
+  trash: "M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3",
+  receipt: "M6 3h12v18l-3-2-3 2-3-2-3 2V3Zm3 5h6m-6 4h6m-6 4h3",
+  lock: "M7 11V7a5 5 0 0 1 10 0v4M5 11h14v10H5Z",
+};
+
+const productIcons = { host: "house", pay: "wallet", manager: "gate" };
+const planIcons = { admin: "shield", user: "card" };
+const organizationIcons = { owner: "crown", admin: "sliders", staff: "staff", viewer: "eye" };
+
+// A round badge that identifies a role at a glance; `tone` picks its colour.
+const roleBadge = (level, role, className = "role-guide-avatar") => {
+  const badge = element("span", className);
+  badge.dataset.tone = level === "plan" ? `plan-${role}` : role;
+  badge.append(svg(icons[(level === "plan" ? planIcons : organizationIcons)[role]]));
+  return badge;
 };
 
 // Text for both levels. `{product}` is replaced by Host, Pay or Manager.
@@ -172,7 +205,7 @@ const plans = {
 };
 
 // Organization roles per product: a summary and the rows of the matrix.
-// Each row lists the roles that hold it, in owner → viewer order.
+// Each row lists how many roles hold it, in owner → viewer order, and its icon.
 const products = {
   host: {
     en: {
@@ -187,15 +220,15 @@ const products = {
           "View only: the calendar, bookings and organization systems, without any change.",
       },
       rows: [
-        ["View systems, calendar, bookings and settings", 4],
-        ["Bookings", 3],
-        ["Guest links", 3],
-        ["Activity", 3],
-        ["Organization systems: add from the app, icon, remove", 2],
-        ["Connections: booking system, automatic links, API key list", 2],
-        ["API keys: create, rotate, revoke, reveal", 1],
-        ["Organization settings, time zone, support access, delete guest details", 1],
-        ["Members and roles", 1],
+        ["View systems, calendar, bookings and settings", 4, "eye"],
+        ["Bookings", 3, "calendar"],
+        ["Guest links", 3, "link"],
+        ["Activity", 3, "activity"],
+        ["Organization systems: add from the app, icon, remove", 2, "wifi"],
+        ["Connections: booking system, automatic links, API key list", 2, "plug"],
+        ["API keys: create, rotate, revoke, reveal", 1, "key"],
+        ["Organization settings, time zone, support access, delete guest details", 1, "cog"],
+        ["Members and roles", 1, "people"],
       ],
     },
     he: {
@@ -210,15 +243,15 @@ const products = {
           "צפייה בלבד: רואה את לוח השנה, ההזמנות ומערכות הארגון, בלי שום שינוי.",
       },
       rows: [
-        ["צפייה: מערכות הארגון, לוח שנה, הזמנות, הגדרות", 4],
-        ["הזמנות", 3],
-        ["קישורי אורח", 3],
-        ["פעילות", 3],
-        ["מערכות הארגון: הוספה מהאפליקציה, סמל, הסרה", 2],
-        ["חיבורים: מערכת ההזמנות, קישורים אוטומטיים, רשימת מפתחות API", 2],
-        ["מפתחות API: יצירה, סיבוב, ביטול וחשיפה", 1],
-        ["הגדרות הארגון ואזור הזמן, גישת תמיכה, מחיקת פרטי אורח", 1],
-        ["חברים ותפקידים", 1],
+        ["צפייה: מערכות הארגון, לוח שנה, הזמנות, הגדרות", 4, "eye"],
+        ["הזמנות", 3, "calendar"],
+        ["קישורי אורח", 3, "link"],
+        ["פעילות", 3, "activity"],
+        ["מערכות הארגון: הוספה מהאפליקציה, סמל, הסרה", 2, "wifi"],
+        ["חיבורים: מערכת ההזמנות, קישורים אוטומטיים, רשימת מפתחות API", 2, "plug"],
+        ["מפתחות API: יצירה, סיבוב, ביטול וחשיפה", 1, "key"],
+        ["הגדרות הארגון ואזור הזמן, גישת תמיכה, מחיקת פרטי אורח", 1, "cog"],
+        ["חברים ותפקידים", 1, "people"],
       ],
     },
   },
@@ -234,11 +267,11 @@ const products = {
         viewer: "View only: payment points, tariffs and systems, without any change.",
       },
       rows: [
-        ["View payment points, tariffs and systems", 4],
-        ["Daily work at payment points", 3],
-        ["Configure payment points and tariffs, assign systems", 2],
-        ["Organization settings", 1],
-        ["Members and roles", 1],
+        ["View payment points, tariffs and systems", 4, "eye"],
+        ["Daily work at payment points", 3, "receipt"],
+        ["Configure payment points and tariffs, assign systems", 2, "sliders"],
+        ["Organization settings", 1, "cog"],
+        ["Members and roles", 1, "people"],
       ],
     },
     he: {
@@ -251,11 +284,11 @@ const products = {
         viewer: "צפייה בלבד: נקודות תשלום, תעריפים ומערכות, בלי שום שינוי.",
       },
       rows: [
-        ["צפייה: נקודות תשלום, תעריפים ומערכות", 4],
-        ["עבודה יומיומית בנקודות התשלום", 3],
-        ["הגדרת נקודות תשלום ותעריפים, שיוך מערכות", 2],
-        ["הגדרות הארגון", 1],
-        ["חברים ותפקידים", 1],
+        ["צפייה: נקודות תשלום, תעריפים ומערכות", 4, "eye"],
+        ["עבודה יומיומית בנקודות התשלום", 3, "receipt"],
+        ["הגדרת נקודות תשלום ותעריפים, שיוך מערכות", 2, "sliders"],
+        ["הגדרות הארגון", 1, "cog"],
+        ["חברים ותפקידים", 1, "people"],
       ],
     },
   },
@@ -272,11 +305,11 @@ const products = {
           "View only: the organization, its people and its gates. Cannot open or configure a gate.",
       },
       rows: [
-        ["View the organization, people and gates", 4],
-        ["Open and operate gates remotely, Wi-Fi setup", 3],
-        ["Invite and remove people, name and logo", 2],
-        ["Add, assign and remove systems", 1],
-        ["Delete the organization", 1],
+        ["View the organization, people and gates", 4, "eye"],
+        ["Open and operate gates remotely, Wi-Fi setup", 3, "gate"],
+        ["Invite and remove people, name and logo", 2, "userPlus"],
+        ["Add, assign and remove systems", 1, "wifi"],
+        ["Delete the organization", 1, "trash"],
       ],
     },
     he: {
@@ -291,11 +324,11 @@ const products = {
           "צפייה בלבד: הארגון, האנשים והשערים שלו. אינו פותח ואינו מגדיר שער.",
       },
       rows: [
-        ["צפייה: הארגון, האנשים והשערים", 4],
-        ["פתיחה והפעלה של שערים מרחוק, הגדרת Wi-Fi", 3],
-        ["הזמנה והסרה של אנשים, שם ולוגו", 2],
-        ["הוספה, שיוך והסרה של מערכות", 1],
-        ["מחיקת הארגון", 1],
+        ["צפייה: הארגון, האנשים והשערים", 4, "eye"],
+        ["פתיחה והפעלה של שערים מרחוק, הגדרת Wi-Fi", 3, "gate"],
+        ["הזמנה והסרה של אנשים, שם ולוגו", 2, "userPlus"],
+        ["הוספה, שיוך והסרה של מערכות", 1, "wifi"],
+        ["מחיקת הארגון", 1, "trash"],
       ],
     },
   },
@@ -335,9 +368,10 @@ function roleCard(product, level, role, text, lang, current) {
   card.dataset.level = level;
   card.dataset.role = role;
   const head = element("header", "role-guide-role__head");
+  const titles = element("div", "role-guide-role__titles");
   const name = element("h4", "role-guide-role__name", roleTitle(product, level, role));
   name.dir = "ltr";
-  head.append(name);
+  const tags = element("div", "role-guide-role__tags");
   const t = copy[lang];
   const price =
     level === "plan"
@@ -347,12 +381,14 @@ function roleCard(product, level, role, text, lang, current) {
       : [t.free, "free"];
   const tag = element("span", "role-guide-tag", price[0]);
   tag.dataset.kind = price[1];
-  head.append(tag);
+  tags.append(tag);
   if (current) {
     const you = element("span", "role-guide-you", t.you);
-    head.append(you);
+    tags.append(you);
     card.dataset.current = "true";
   }
+  titles.append(name, tags);
+  head.append(roleBadge(level, role), titles);
   card.append(head);
   for (const line of [text].flat()) card.append(element("p", "", fill(line, product)));
   return card;
@@ -368,19 +404,25 @@ function matrix(product, lang, currentRole) {
   const head = element("tr");
   head.append(element("th", "", t.permission));
   for (const role of organizationRoles) {
-    const cell = element("th", "", role);
+    const cell = element("th");
     cell.scope = "col";
     cell.dir = "ltr";
+    const label = element("span", "role-guide-matrix__role");
+    label.append(roleBadge("organization", role, "role-guide-avatar role-guide-avatar--small"), element("span", "", role));
+    cell.append(label);
     if (role === currentRole) cell.dataset.current = "true";
     head.append(cell);
   }
   const thead = element("thead");
   thead.append(head);
   const tbody = element("tbody");
-  for (const [label, holders] of data.rows) {
+  for (const [label, holders, icon] of data.rows) {
     const row = element("tr");
-    const name = element("th", "", label);
+    const name = element("th");
     name.scope = "row";
+    const text = element("span", "role-guide-matrix__permission");
+    text.append(svg(icons[icon]), element("span", "", label));
+    name.append(text);
     row.append(name);
     organizationRoles.forEach((role, index) => {
       const cell = element("td");
@@ -409,17 +451,25 @@ function productPanel(product, lang, current = {}) {
   const own = current.product === product ? current : {};
   const levels = element("div", "role-guide-levels");
 
+  const levelHeading = (icon, text) => {
+    const heading = element("h3");
+    heading.append(svg(icons[icon]), element("span", "", text));
+    return heading;
+  };
+
   const planLevel = element("section", "role-guide-level");
+  planLevel.dataset.level = "plan";
   planLevel.append(
-    element("h3", "", t.planLevel),
+    levelHeading("layers", t.planLevel),
     element("p", "role-guide-level__note", t.planLevelNote),
   );
   for (const role of ["admin", "user"])
     planLevel.append(roleCard(product, "plan", role, plans[lang][role], lang, own.plan === role));
 
   const orgLevel = element("section", "role-guide-level");
+  orgLevel.dataset.level = "organization";
   orgLevel.append(
-    element("h3", "", t.orgLevel),
+    levelHeading("building", t.orgLevel),
     element("p", "role-guide-level__note", t.orgLevelNote),
   );
   const orgRole = sharedOrganizationRole(own.organizationRole);
@@ -427,7 +477,15 @@ function productPanel(product, lang, current = {}) {
     orgLevel.append(
       roleCard(product, "organization", role, products[product][lang].roles[role], lang, orgRole === role),
     );
-  orgLevel.append(element("p", "role-guide-level__note", t.accessNote));
+  const access = element("div", "role-guide-access");
+  const states = element("div", "role-guide-access__states");
+  for (const state of ["active", "pending", "blocked"]) {
+    const chip = element("span", "role-guide-access__state", t.access[state]);
+    chip.dataset.state = state;
+    states.append(chip);
+  }
+  access.append(element("p", "role-guide-level__note", t.accessNote), states);
+  orgLevel.append(access);
 
   levels.append(planLevel, orgLevel);
 
@@ -435,6 +493,21 @@ function productPanel(product, lang, current = {}) {
   billing.append(svg(icons.card));
   const billingText = element("div");
   billingText.append(element("strong", "", t.billingTitle), element("p", "", fill(t.billing, product)));
+  const payers = element("div", "role-guide-billing__payers");
+  for (const [icon, name, price, kind] of [
+    ["card", roleTitle(product, "plan", "user"), t.subscription, "paid"],
+    ["shield", roleTitle(product, "plan", "admin"), t.noSubscription, "exempt"],
+    ["building", organizationRoles.join(" · "), t.free, "free"],
+  ]) {
+    const payer = element("div", "role-guide-billing__payer");
+    payer.dataset.kind = kind;
+    const label = element("span", "role-guide-billing__name", name);
+    label.dir = "ltr";
+    payer.append(svg(icons[icon]), label, element("span", "role-guide-tag", price));
+    payer.lastChild.dataset.kind = kind;
+    payers.append(payer);
+  }
+  billingText.append(payers);
   billing.append(billingText);
 
   panel.append(levels, billing, matrix(product, lang, orgRole));
@@ -509,7 +582,8 @@ export function openRoleGuide({ product = "host", language, current = {} } = {})
     body.scrollTop = 0;
   };
   for (const id of roleGuideProducts) {
-    const tab = element("button", "role-guide__tab", `WIFIGATE ${productNames[id]}`);
+    const tab = element("button", "role-guide__tab");
+    tab.append(svg(icons[productIcons[id]]), element("span", "", `WIFIGATE ${productNames[id]}`));
     tab.type = "button";
     tab.dir = "ltr";
     tab.dataset.product = id;
@@ -567,6 +641,44 @@ export function mountRoleGuideButton(options) {
   return button;
 }
 
+// Radio cards for choosing an organization role when adding someone: the
+// role's badge, its WIFIGATE name and what it allows. `unavailable` maps a
+// role to the reason it cannot be chosen here; that card stays visible but
+// disabled, so all four roles are always explained.
+export function createRolePicker({
+  product,
+  language,
+  name = "role",
+  value = "admin",
+  unavailable = {},
+} = {}) {
+  const lang = languageOf(language);
+  const picker = element("fieldset", "role-guide-picker");
+  picker.dataset.product = product;
+  picker.append(element("legend", "", copy[lang].orgLevel));
+  const selected = unavailable[value] ? organizationRoles.find((role) => !unavailable[role]) : value;
+  for (const role of organizationRoles) {
+    const choice = element("label", "role-guide-choice");
+    choice.dataset.role = role;
+    const input = element("input");
+    input.type = "radio";
+    input.name = name;
+    input.value = role;
+    input.checked = role === selected;
+    input.disabled = Boolean(unavailable[role]);
+    const texts = element("span", "role-guide-choice__texts");
+    const title = element("strong", "", `Organization ${role[0].toUpperCase()}${role.slice(1)}`);
+    title.dir = "ltr";
+    texts.append(title, element("small", "", products[product][lang].roles[role]));
+    if (unavailable[role]) texts.append(element("small", "role-guide-choice__note", unavailable[role]));
+    const mark = element("span", "role-guide-choice__mark");
+    mark.append(svg(icons.check));
+    choice.append(input, roleBadge("organization", role), texts, mark);
+    picker.append(choice);
+  }
+  return picker;
+}
+
 // "Your role in this organization": who you are here, what you can do, and
 // what only higher roles can. The full guide is one click away.
 export function createOrganizationRoleCard({ product, language, role, plan, organizationName }) {
@@ -580,14 +692,23 @@ export function createOrganizationRoleCard({ product, language, role, plan, orga
   const label = element("span", "role-guide-card__eyebrow", t.yourRole);
   const name = element("strong", "role-guide-card__role", shared ? roleTitle(product, "organization", shared) : t.noRole);
   name.dir = "ltr";
-  const texts = element("div");
+  const texts = element("div", "role-guide-card__texts");
   texts.append(label, name);
   if (organizationName) {
     const org = element("span", "role-guide-card__org", organizationName);
     org.dir = "auto";
     texts.append(org);
   }
-  head.append(texts);
+  const who = element("div", "role-guide-card__who");
+  if (shared) who.append(roleBadge("organization", shared, "role-guide-avatar role-guide-avatar--large"));
+  else {
+    const none = element("span", "role-guide-avatar role-guide-avatar--large");
+    none.dataset.tone = "none";
+    none.append(svg(icons.lock));
+    who.append(none);
+  }
+  who.append(texts);
+  head.append(who);
   const more = element("button", "role-guide-link");
   more.type = "button";
   more.append(svg(icons.guide), element("span", "", t.allRoles));
@@ -614,7 +735,11 @@ export function createOrganizationRoleCard({ product, language, role, plan, orga
       block.dataset.kind = kind;
       block.append(element("h3", "", heading));
       const list = element("ul");
-      for (const item of items) list.append(element("li", "", item));
+      for (const item of items) {
+        const entry = element("li");
+        entry.append(svg(icons[kind === "can" ? "check" : "lock"]), element("span", "", item));
+        list.append(entry);
+      }
       block.append(list);
       lists.append(block);
     }

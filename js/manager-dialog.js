@@ -65,6 +65,8 @@ export function createManagerDialog({
           label.append(input);
           form.append(label);
         }
+        // Extra controls that submit with the form, such as a role picker.
+        if (options.formContent) form.append(options.formContent);
         const error = document.createElement("p");
         error.setAttribute("role", "alert");
         error.className = "manager-dialog-error";
@@ -92,8 +94,12 @@ export function createManagerDialog({
           error.hidden = true;
           form.setAttribute("aria-busy", "true");
           const values = Object.fromEntries(new FormData(form));
-          for (const input of form.querySelectorAll("input"))
-            input.disabled = true;
+          // Only controls enabled now are locked and later released, so a
+          // choice that was unavailable from the start stays unavailable.
+          const locked = [...form.querySelectorAll("input")].filter(
+            (input) => !input.disabled,
+          );
+          for (const input of locked) input.disabled = true;
           try {
             await options.onSubmit(values);
             finish(true);
@@ -109,8 +115,7 @@ export function createManagerDialog({
             submit.classList.remove("is-loading");
             submit.removeAttribute("aria-busy");
             progress.hidden = true;
-            for (const input of form.querySelectorAll("input"))
-              input.disabled = false;
+            for (const input of locked) input.disabled = false;
             form.removeAttribute("aria-busy");
           }
         });

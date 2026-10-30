@@ -4,7 +4,7 @@ import {
 } from "./manager-organization-card.js";
 import {
   createOrganizationRoleCard,
-  organizationRoleSummary,
+  createRolePicker,
   sharedOrganizationRole,
 } from "./role-guide.js";
 
@@ -407,24 +407,34 @@ export async function renderManagerOrganization({
     viewer: t("צופה בארגון", "Organization viewer"),
   };
   const invite = async (role) => {
+    // All four roles are shown. A Manager organization has exactly one owner:
+    // the Manager User whose account holds it, its systems and its billing.
+    const ownerNote =
+      t(
+        "בעל הארגון ב־Manager הוא ה־Manager User שהחשבון שלו מחזיק את הארגון, את המערכות ואת החיוב, ולכן אי אפשר להזמין owner נוסף.",
+        "A Manager organization's owner is the Manager User whose account holds the organization, its systems and its billing, so another owner can't be invited.",
+      ) + (owner.email ? ` ${t("הבעלים:", "Owner:")} ${owner.email}` : "");
     const saved = await dialogs.form({
-      title: t("הוספה בתור ", "Add as ") + roleNames[role],
-      message:
-        `WIFIGATE Manager Organization ${role[0].toUpperCase() + role.slice(1)}: ` +
-        organizationRoleSummary("manager", role, language) +
-        " " +
-        t(
-          "ההזמנה תמתין לאישור בחשבון שלו. תפקיד בארגון אינו דורש מנוי.",
-          "The invitation waits for acceptance in their account. An organization role needs no subscription.",
-        ),
+      title: t("הוספה לארגון", "Add to the organization"),
+      message: t(
+        "בחרו תפקיד בארגון והזינו את האימייל. ההזמנה תמתין לאישור בחשבון שלו. תפקיד בארגון אינו דורש מנוי.",
+        "Choose an organization role and enter the email. The invitation waits for acceptance in their account. An organization role needs no subscription.",
+      ),
       fields: [["email", t("כתובת אימייל", "Email address"), "email"]],
+      formContent: createRolePicker({
+        product: "manager",
+        language,
+        value: role,
+        unavailable: { owner: ownerNote },
+      }),
       submitLabel: t("יצירת הזמנה", "Create invitation"),
       errorText,
       onSubmit: async (values) => {
+        if (!invitationRole[values.role]) throw new Error("INVALID_ROLE");
         await ensureRecent();
         await api(path + "/invitations", "POST", {
           email: values.email.trim().toLowerCase(),
-          role: invitationRole[role],
+          role: invitationRole[values.role],
         });
       },
     });
