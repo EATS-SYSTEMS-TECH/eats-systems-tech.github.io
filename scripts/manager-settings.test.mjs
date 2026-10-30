@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { managerOpeningMethods, managerTimingFields, managerSettingsPayload } from "../js/manager-settings.js";
+import { managerDefaultTimings, managerOpeningMethods, managerTimingFields, managerSettingsPayload } from "../js/manager-settings.js";
 
 const saved = Object.freeze({
   command: "PULSE_AFTER_PULSE_AFTER_PULSE",
@@ -48,3 +48,5 @@ test("Manager settings validate every pulse and gap boundary against the firmwar
   for (const command of ["UNKNOWN", "", 3, null, undefined])
     assert.throws(() => managerSettingsPayload(saved, { ...saved, command }, 1), /INVALID_CONFIG/);
 });
+
+test("default pulse durations are five seconds in protocol milliseconds",()=>{assert.equal(managerDefaultTimings.pulseWidth1Millis,5000);assert.equal(managerDefaultTimings.pulseWidth2Millis,5000);assert.equal(managerDefaultTimings.pulseWidth3Millis,5000);assert.equal(Object.isFrozen(managerDefaultTimings),true);});

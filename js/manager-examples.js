@@ -24,6 +24,7 @@ export function createManagerExamples({
   dialogs = createManagerDialog({ language }),
   onOpen,
   onOpenOrganization,
+  renderSystemActions,
 }) {
   const he = language === "he",
     t = (h, e) => (he ? h : e);
@@ -175,8 +176,8 @@ export function createManagerExamples({
     const grid = el("div", undefined, "manager-grid manager-example-grid");
     for (const system of systems) {
       if (removed.has(system.id)) continue;
-      const actions = el("div", undefined, "manager-system-actions");
-      actions.append(
+      const actions = renderSystemActions ? renderSystemActions(system) : el("div", undefined, "manager-system-actions");
+      if(!renderSystemActions) actions.append(
         button(
           t("פתיחת סביבת ניהול", "Open workspace"),
           () => onOpen(system),

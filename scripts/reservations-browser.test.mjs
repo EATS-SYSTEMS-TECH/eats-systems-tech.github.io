@@ -6,6 +6,8 @@ import assert from "node:assert/strict";
 import sharp from "sharp";
 import { startSite, scenario } from "./platform-test-fixtures.mjs";
 
+const photoJpeg = await sharp({create:{width:96,height:96,channels:3,background:"#eaf1ff"}}).jpeg().toBuffer();
+
 const noPlans = { host: "no-plan", pay: "no-plan", manager: "no-plan" };
 
 function reservation(overrides = {}) {
@@ -77,7 +79,7 @@ test("an account without any plan signs in, reserves with a photo, follows and c
     return route.fulfill({ status: 201, json: { reservation: stored[0] } });
   });
   await context.route("**/api/v1/product-reservations/*/photos/*", (route) =>
-    route.fulfill({ contentType: "image/jpeg", body: Buffer.from([0xff, 0xd8, 0xff, 0xd9]) }),
+    route.fulfill({ contentType: "image/jpeg", body: photoJpeg }),
   );
 
   await page.goto(origin + "/reservations/?lang=he");
@@ -256,7 +258,7 @@ test("WIFIGATE Admin opens Reservations from the separate admin tools and moves 
         },
       });
     if (url.pathname.includes("/photos/"))
-      return route.fulfill({ contentType: "image/jpeg", body: Buffer.from([0xff, 0xd8, 0xff, 0xd9]) });
+      return route.fulfill({ contentType: "image/jpeg", body: photoJpeg });
     if (request.method() === "POST") {
       const body = request.postDataJSON();
       posted.push(body);
@@ -314,6 +316,9 @@ test("WIFIGATE Admin opens Reservations from the separate admin tools and moves 
   ]);
   await row.locator("summary .reservation-pill", { hasText: "Contacted" }).waitFor();
   await row.getByText("fixture@example.test").first().waitFor();
+  assert.equal(await page.locator("[data-stage=new] b").textContent(),"1");
+  assert.equal(await page.locator("[data-stage=contacted] b").textContent(),"2");
+  if(process.env.WIFIGATE_RESERVATIONS_UX_SCREENSHOTS)await page.locator(".reservations-admin").screenshot({path:process.env.WIFIGATE_RESERVATIONS_UX_SCREENSHOTS+"/detail-en-desktop.png"});
 });
 
 test("a signed-in account that is not a WIFIGATE Admin never loads reservations in the dashboard", async (t) => {

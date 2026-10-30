@@ -39,13 +39,13 @@ test("Manager settings shows 1/3/5/0/0 timing fields in English/Hebrew on mobile
   for (const language of ["en", "he"]) for (const width of [320, 390, 1440]) {
     const page = await setup(browser, origin, { language, width });
     try {
-      const choose = method => page.locator(`input[name="command"][value="${method}"]`).check();
+      const choose = method => page.locator('select[name="command"]').selectOption(method);
       for (const [index, method] of methods.entries()) {
         await choose(method);
         assert.equal(await page.getByRole("spinbutton").count(), [1, 3, 5, 0, 0][index], `${language} ${width} ${method}`);
         const visibleNames = await page.getByRole("spinbutton").evaluateAll((items) => items.map((item) => item.name));
         assert.deepEqual(visibleNames, timing.slice(0, [1, 3, 5, 0, 0][index]));
-        assert.equal(await page.getByRole("radio", {checked:true}).count(), 1);
+        assert.equal(await page.locator('select[name="command"]').inputValue(), method);
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
         if (process.env.MANAGER_SETTINGS_EVIDENCE && [1,3].includes(index)) {
           await mkdir(process.env.MANAGER_SETTINGS_EVIDENCE, {recursive:true});
@@ -67,7 +67,7 @@ test("Manager settings merges active timings with saved inactive values and only
   const { origin, browser } = await startSite(t);
   const page = await setup(browser, origin);
   t.after(() => page.close());
-  const choose = method => page.locator(`input[name="command"][value="${method}"]`).check();
+  const choose = method => page.locator('select[name="command"]').selectOption(method);
   const save = page.getByRole("button", { name: "Save settings" });
   await choose("PULSE_AFTER_PULSE_AFTER_PULSE");
   await page.locator("[name=pulseWidth1Millis]").fill("1500");
@@ -137,7 +137,7 @@ test("Manager Dual Control locks opening method and rejects programmatic method 
   const { origin, browser } = await startSite(t);
   const page = await setup(browser, origin, { locked: true, language: "he", command: "PULSE_AFTER_PULSE" });
   t.after(() => page.close());
-  const select = page.locator('input[name="command"][value="TOGGLE"]');
+  const select = page.locator('select[name="command"]');
   assert.equal(await select.isDisabled(), true);
   assert.equal(await page.getByRole("spinbutton").count(), 3);
   await page.locator("[name=pulseWidth1Millis]").fill("500");
@@ -150,7 +150,7 @@ test("Manager Dual Control locks opening method and rejects programmatic method 
   await page.evaluate(() => window.confirmAnswer(false));
   await page.waitForFunction(() => !document.querySelector("button[type=submit]").disabled);
   assert.equal(await select.isDisabled(), true);
-  await select.evaluate((input) => { input.checked = true; input.dispatchEvent(new Event("change", { bubbles: true })); });
+  await select.evaluate((input) => { input.value = "TOGGLE"; input.dispatchEvent(new Event("change", { bubbles: true })); });
   await page.locator("form").evaluate((form) => form.requestSubmit());
   await page.getByRole("alert").filter({ hasText: "INVALID_CONFIG" }).waitFor();
   assert.equal(await page.evaluate(() => window.confirmations), 1);
@@ -163,15 +163,15 @@ test("settings reset stays local, keyboard selection remains native, failed save
   t.after(()=>page.close());
   const reset=page.getByRole('button',{name:'Reset changes',exact:true});
   assert.equal(await reset.isDisabled(),true);
-  const first=page.getByRole('radio',{name:'Single pulse',exact:true});
-  await first.focus();await page.keyboard.press('ArrowRight');
-  assert.equal(await page.getByRole('radio',{checked:true}).count(),1);
+  const first=page.getByRole('combobox',{name:'Choose an opening method',exact:true});
+  await first.focus();await page.keyboard.press('ArrowDown');
+  assert.equal(await first.inputValue(),'PULSE_AFTER_PULSE');
   assert.equal(await page.evaluate(()=>document.activeElement.matches(':focus-visible')),true);
-  await page.locator('input[name="command"][value="PULSE_AFTER_PULSE"]').check();
+  await page.locator('select[name="command"]').selectOption("PULSE_AFTER_PULSE");
   await page.locator('[name="pulseWidth1Millis"]').fill('1500');
   assert.equal(await reset.isEnabled(),true);
   await reset.click();
-  assert.equal(await first.isChecked(),true);
+  assert.equal(await first.inputValue(),"PULSE");
   assert.equal(await page.locator('[name="pulseWidth1Millis"]').inputValue(),'1000');
   assert.equal(await page.evaluate(()=>window.writes.length),0);
   await page.locator('[name="pulseWidth1Millis"]').fill('1750');
@@ -188,4 +188,11 @@ test("settings reset stays local, keyboard selection remains native, failed save
   await page.getByRole('alert').filter({hasText:'CONFLICT'}).waitFor();
   assert.equal(await page.locator('[name="pulseWidth1Millis"]').inputValue(),'1750');
   assert.equal(await reset.isEnabled(),true);
+});
+
+test('new settings default to five seconds without overwriting saved system values or sending commands',async t=>{
+ const {origin,browser}=await startSite(t),page=await setup(browser,origin);t.after(()=>page.close());assert.equal(await page.locator('[name=pulseWidth1Millis]').inputValue(),'1000');
+ await page.evaluate(async()=>{window.editor.dispose();document.getElementById('root').replaceChildren();const{renderManagerSettings}=await import('/js/manager-settings.js');window.editor=renderManagerSettings({root:document.getElementById('root'),config:{},revision:1,onSave:async payload=>window.writes.push(payload),confirm:async()=>true,errorText:e=>e.message});});
+ assert.equal(await page.locator('[name=pulseWidth1Millis]').inputValue(),'5000');assert.equal(await page.locator('select[name=command]').inputValue(),'PULSE');assert.equal(await page.evaluate(()=>window.writes.length),0);
+ await page.getByRole('button',{name:'Save settings',exact:true}).click();await page.waitForFunction(()=>window.writes.length===1);assert.equal((await page.evaluate(()=>window.writes[0])).pulseWidth3Millis,5000);
 });

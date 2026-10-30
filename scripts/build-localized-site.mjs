@@ -9,7 +9,8 @@ import { benefitIconSvg } from "./benefit-icons.mjs";
 import { NICHE_DEFINITIONS, NICHE_PAGE_LOCALES, validateNichePageLocales } from "./niche-pages/index.mjs";
 import { LANDING_PAGES, LANDING_PAGE_LOCALES, validateLandingPageLocales } from "./landing-pages/index.mjs";
 import { AUTO_OPEN_PAGE_KEY, getAutoOpenPageContent, validateAutoOpenPageLocales } from "./auto-open-page.mjs";
-import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails } from "./host-marketing-page.mjs";
+import { installHomeFeatureCards } from "./homepage-feature-grid.mjs";
+import { HOST_PAGE_KEY, getHostPageContent, appendHostMarketingDetails, installHomeHostPointShells, installHostDetailShells } from "./host-marketing-page.mjs";
 import { SITE_LOGIN_LABELS, SITE_NAVIGATION } from "./site-navigation.mjs";
 import { RTL_LANGUAGES, SITE_LANGUAGES } from "./site-languages.mjs";
 import { accessibilityLinkLabels } from "./legal/footer-labels.mjs";
@@ -22,6 +23,13 @@ import { BRAND_ID, ORGANIZATION_ID, SHARE_IMAGE, SITE_ORIGIN, breadcrumbNode, fa
 import { readSceneManifest, applyNicheSceneMedia, applyHomeSceneMedia } from "./scene-media.mjs";
 import { applyMediaWatermarks } from "./media-watermark.mjs";
 import { SHOP_PAGE_KEYS, getShopPageContent } from "./shop-pages.mjs";
+// Keep optional proof-list rendering independent from the page build pipeline.
+import { setNicheList } from "./niche-text-list.mjs";
+import { rewriteNicheHomeAnchors } from "./niche-links.mjs";
+import { buildRedirectPage } from "./redirect-page.mjs";
+import { previousSitemapDates, sitemapDocument } from "./sitemap.mjs";
+import { circularNiches, setNichePager, installUseCasePagerShells } from "./niche-navigation.mjs";
+import { publishNicheVariant } from "./niche-publication.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = SITE_ORIGIN;
@@ -811,19 +819,18 @@ function rewriteHomeInternalLinks($, locale) {
 function rewriteLegalInternalLinks($, locale, pageKey) {
   const home = buildPagePath(locale, "home");
 
+  // Keep the exact-home pass first, then apply the shared literal-fragment
+  // policy before footer and body links. No URL/query normalization is added.
   $("a[href='../index.html']").attr("href", home);
-  $("a[href^='../index.html']").each((_, element) => {
-    const href = $(element).attr("href") || "";
-    const hashIndex = href.indexOf("#");
-    const hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
-    $(element).attr("href", `${home}${hash}`);
-  });
+  rewriteNicheHomeAnchors($, home);
   rewriteFooterLegalLinks($, locale);
-  // Legal pages also cross-link each other from inside the body copy.
-  $("a[href='../terms-and-conditions/']").attr("href", buildPagePath(locale, "terms-and-conditions"));
-  $("a[href='../privacy-policy/']").attr("href", buildPagePath(locale, "privacy-policy"));
-  $("a[href='../cookies/']").attr("href", buildPagePath(locale, "cookies"));
+  // Body cross-links follow source order. Resolve each destination immediately
+  // before its write, so a path failure retains only earlier completed changes.
+  for (const destination of ["terms-and-conditions", "privacy-policy", "cookies"]) {
+    $(`a[href='../${destination}/']`).attr("href", buildPagePath(locale, destination));
+  }
 
+  // Retain the final ghost-button pass after all legal destinations.
   $(".btn.btn--ghost").each((_, element) => {
     const href = $(element).attr("href");
     if (href === "../index.html") {
@@ -1027,57 +1034,16 @@ async function writeOutputFile(filePath, content) {
   }
 }
 
-function buildRedirectPage(targetPath, canonicalUrl) {
-  return ensureTrailingNewline(`<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Redirecting...</title>
-  <link rel="canonical" href="${canonicalUrl}" />
-  <meta http-equiv="refresh" content="0; url=${targetPath}" />
-  <script>window.location.replace(${JSON.stringify(targetPath)});</script>
-</head>
-<body>
-  <p>Redirecting to <a href="${targetPath}">${targetPath}</a>...</p>
-</body>
-</html>
-`);
-}
-
 // lastmod is the day a page's content last changed: today for a page this
 // build rewrote, otherwise the date the previous sitemap gave it.
 async function readPreviousLastmods() {
   const previous = await fs.readFile(path.join(repoRoot, "sitemap.xml"), "utf8").catch(() => "");
-  return new Map([...previous.matchAll(/<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
-}
-
-function pageFileForUrl(url) {
-  return path.resolve(repoRoot, `.${new URL(url).pathname}`, "index.html");
+  return previousSitemapDates(previous);
 }
 
 function buildSitemap(urlEntries, previousLastmods) {
-  for (const entry of urlEntries) {
-    const changed = changedFiles.has(pageFileForUrl(entry.loc));
-    entry.lastmod = entry.lastmod || (!changed && previousLastmods.get(entry.loc)) || nowDate;
-  }
-  const lines = [
-    '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-    ...urlEntries.map(
-      (entry) => [
-        "  <url>",
-        `    <loc>${entry.loc}</loc>`,
-        `    <lastmod>${entry.lastmod}</lastmod>`,
-        `    <changefreq>${entry.changefreq}</changefreq>`,
-        `    <priority>${entry.priority}</priority>`,
-        "  </url>",
-      ].join("\n")
-    ),
-    "</urlset>",
-    "",
-  ];
-
-  return lines.join("\n");
+  // Bind the existing build snapshot without changing its write/date policy.
+  return sitemapDocument(urlEntries, previousLastmods, { repoRoot, changedFiles, nowDate });
 }
 
 async function buildHomePages(homeData) {
@@ -1090,6 +1056,10 @@ async function buildHomePages(homeData) {
     const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale);
     const $ = cheerio.load(template, { decodeEntities: false });
 
+    // Feature positions feed existing locale copy and Auto Open navigation.
+    installHomeFeatureCards($);
+    // Install Host card shells before the existing translation and icon-override pipeline.
+    installHomeHostPointShells($);
     setBodyDirection($, locale);
     rewriteStaticAssets($, locale, "home");
     removeScripts($, homeRuntimeScriptsToRemove);
@@ -1244,18 +1214,6 @@ function buildNicheContext(homeData, niche, locale) {
     chrome: getNicheChrome(locale),
     content: getNichePageContent(locale).niches[niche.key],
   };
-}
-
-function setNicheList($, selector, items, className) {
-  const list = $(selector);
-  if (!list.length) {
-    return;
-  }
-
-  list.empty();
-  (items || []).forEach((item) => {
-    list.append($("<li>").addClass(className).text(item));
-  });
 }
 
 // Renders the optional three-message block above the overview. The section
@@ -1448,18 +1406,8 @@ function setNicheBenefits($, benefits, locale) {
 }
 
 function getCircularAdjacentNiches(currentKey) {
-  const index = NICHE_DEFINITIONS.findIndex((entry) => entry.key === currentKey);
-  if (index === -1) {
-    return null;
-  }
-
-  const prevIndex = (index - 1 + NICHE_DEFINITIONS.length) % NICHE_DEFINITIONS.length;
-  const nextIndex = (index + 1) % NICHE_DEFINITIONS.length;
-
-  return {
-    previous: NICHE_DEFINITIONS[prevIndex],
-    next: NICHE_DEFINITIONS[nextIndex],
-  };
+  // Read the current canonical order without caching or changing its records.
+  return circularNiches(NICHE_DEFINITIONS, currentKey);
 }
 
 // The hero, highlights, benefits and FAQ of the use-case design, shared by the
@@ -1534,36 +1482,17 @@ function updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle) {
   fillUseCaseBody($, { chrome, content, image: niche.image, locale, pageKey: niche.key, accessibilityBundle });
   setUseCaseNavigation($, { chrome, content });
 
+  // Body/breadcrumb installation retains its original position before pager
+  // writes;both locale sources were already read before any body mutation.
   const adjacentNiches = getCircularAdjacentNiches(niche.key);
-  if (adjacentNiches) {
-    const previousLabel = localeNicheContent?.niches?.[adjacentNiches.previous.key]?.label
-      || defaultNicheContent?.niches?.[adjacentNiches.previous.key]?.label
-      || adjacentNiches.previous.key;
-    const nextLabel = localeNicheContent?.niches?.[adjacentNiches.next.key]?.label
-      || defaultNicheContent?.niches?.[adjacentNiches.next.key]?.label
-      || adjacentNiches.next.key;
-
-    $("#niche-prev-link")
-      .attr("href", buildPagePath(locale, adjacentNiches.previous.key))
-      .attr("aria-label", previousLabel)
-      .attr("title", previousLabel);
-
-    $("#niche-next-link")
-      .attr("href", buildPagePath(locale, adjacentNiches.next.key))
-      .attr("aria-label", nextLabel)
-      .attr("title", nextLabel);
-  }
+  setNichePager($, adjacentNiches, { localeNicheContent, defaultNicheContent, locale, buildPagePath });
 }
 
 function rewriteNicheInternalLinks($, locale) {
   const home = buildPagePath(locale, "home");
 
-  $("a[href^='../index.html']").each((_, element) => {
-    const href = $(element).attr("href") || "";
-    const hashIndex = href.indexOf("#");
-    const hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
-    $(element).attr("href", `${home}${hash}`);
-  });
+  // Localize home fragments before footer and legacy Host link adjustments.
+  rewriteNicheHomeAnchors($, home);
   rewriteFooterLegalLinks($, locale);
   // Existing localized hospitality copy may retain its former public URL.
   $("a[href]").each((_, element) => {
@@ -1604,7 +1533,20 @@ function setUseCaseMeta($, { pageKey, content, chrome, image: pageImage, locale,
   });
 }
 
+// Every use-case-derived document follows this initialization sequence. An
+// optional page skin is applied after direction and before assets/scripts;
+// each failure leaves the same earlier mutations and prevents publication.
+function prepareUseCaseShell($, locale, pageKey, bodyClass = "") {
+  setBodyDirection($, locale);
+  if (bodyClass) $("body").addClass(bodyClass);
+  rewriteStaticAssets($, locale, pageKey);
+  appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, pageKey);
+  // Retain direction/assets/scripts order before composing localized pager slots.
+  installUseCasePagerShells($);
+}
+
 async function buildNichePages(homeData) {
+  // Load the shared template once;each definition/locale gets a fresh DOM.
   const template = await readHtmlTemplate(nicheTemplatePath);
   const sitemapEntries = [];
 
@@ -1615,9 +1557,8 @@ async function buildNichePages(homeData) {
       const accessibilityBundle = getBundle(homeData.accessibilityCopy, locale);
       const $ = cheerio.load(template, { decodeEntities: false });
 
-      setBodyDirection($, locale);
-      rewriteStaticAssets($, locale, niche.key);
-      appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, niche.key);
+      // Initialize the shared document before localized body/media/metadata.
+      prepareUseCaseShell($, locale, niche.key);
       updateNicheStaticUi($, ctx, niche, locale, accessibilityBundle);
       applyNicheSceneMedia($, { scene: homeData.sceneMedia.get(niche.key === "electric-gates" ? "electric-gates-barrier" : niche.key),
         assetPrefix: buildAssetPrefix(locale, niche.key), copy: homeData.homepageCopies[locale].hero.media });
@@ -1625,17 +1566,15 @@ async function buildNichePages(homeData) {
       rewriteNicheInternalLinks($, locale);
       setUseCaseMeta($, { pageKey: niche.key, content: ctx.content, chrome: ctx.chrome, image: niche.image, locale, localeOptions: homeData.localeOptions });
 
-      const outputFile = buildOutputFilePath(locale, niche.key);
-      await writeOutputFile(outputFile, serialize($, homeData, locale, niche.key));
+      // Finish this canonical and its ordered redirects before the next
+      // locale. Discover aliases only after the canonical write completes.
+      await publishNicheVariant({
+        locale, pageKey: niche.key,
+        render: () => serialize($, homeData, locale, niche.key),
+        legacyKeys: () => niche.legacyKeys || [],
+      }, { buildOutputFilePath, writeOutputFile, buildPagePath, buildPageUrl, buildRedirectPage });
 
-      for (const legacyKey of niche.legacyKeys || []) {
-        const redirectFile = buildOutputFilePath(locale, legacyKey);
-        await writeOutputFile(
-          redirectFile,
-          buildRedirectPage(buildPagePath(locale, niche.key), buildPageUrl(locale, niche.key))
-        );
-      }
-
+      // Redirects never appear in the sitemap;failed writes stop publication.
       sitemapEntries.push({
         loc: buildPageUrl(locale, niche.key),
         changefreq: "monthly",
@@ -1735,9 +1674,8 @@ async function buildLandingPages(homeData) {
       const $ = cheerio.load(template, { decodeEntities: false });
       const prefix = buildAssetPrefix(locale, key);
 
-      setBodyDirection($, locale);
-      rewriteStaticAssets($, locale, key);
-      appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, key);
+      // Landing content keeps its existing stylesheet/body additions after shell setup.
+      prepareUseCaseShell($, locale, key);
       $("link[href*='css/niche.css']").after(`
   <link rel="stylesheet" href="${prefix}css/landing.css?v=20261016a" />`);
       fillUseCaseBody($, { chrome, content, image, locale, pageKey: key, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
@@ -1771,10 +1709,8 @@ async function buildAutoOpenPages(homeData) {
     const content = getAutoOpenPageContent(locale, homeData.homepageCopies[locale]);
     const chrome = getNicheChrome(locale);
     const $ = cheerio.load(template, { decodeEntities: false });
-    setBodyDirection($, locale);
-    $("body").addClass("auto-open-page");
-    rewriteStaticAssets($, locale, AUTO_OPEN_PAGE_KEY);
-    appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, AUTO_OPEN_PAGE_KEY);
+    // This is the public marketing page shell, not app or native Auto Open logic.
+    prepareUseCaseShell($, locale, AUTO_OPEN_PAGE_KEY, "auto-open-page");
     fillUseCaseBody($, { chrome, content, image, locale, pageKey: AUTO_OPEN_PAGE_KEY, accessibilityBundle: getBundle(homeData.accessibilityCopy, locale) });
     $("#niche-faq, #niche-prev-link, #niche-next-link").remove();
     $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
@@ -1814,13 +1750,13 @@ async function buildGuestInvitesPages(homeData) {
     const hostCopy = await loadHostPageCopy(locale);
     const $ = cheerio.load(template, { decodeEntities: false });
     const legacy = cheerio.load(legacyTemplate, { decodeEntities: false });
+    // Compose repeated detail lists before existing translation and link handling.
+    installHostDetailShells(legacy);
     const content = getHostPageContent(hostCopy, homeData.homepageCopies[locale]);
     const chrome = getNicheChrome(locale);
 
-    setBodyDirection($, locale);
-    $("body").addClass("wifigate-host-page");
-    rewriteStaticAssets($, locale, guestInvitesPageKey);
-    appendScripts($, nicheRuntimeScriptsToAdd, "script[src*='js/accessibility.js']", locale, guestInvitesPageKey);
+    // Host details and legacy fragment translation follow the same shell boundary.
+    prepareUseCaseShell($, locale, guestInvitesPageKey, "wifigate-host-page");
     fillUseCaseBody($, { chrome, content, image, locale, pageKey: guestInvitesPageKey, accessibilityBundle });
     $("#niche-faq, #niche-prev-link, #niche-next-link").remove();
     $("script[src*='js/faq.js'], link[href*='css/faq.css']").remove();
@@ -1835,14 +1771,15 @@ async function buildGuestInvitesPages(homeData) {
     setUseCaseMeta($, { pageKey: guestInvitesPageKey, content, chrome, image, locale, localeOptions: homeData.localeOptions,
       service: { "@type": "Service", "@id": `${siteOrigin}/${HOST_PAGE_KEY}/#service`, name: "WIFIGATE Host", serviceType: "Automated guest access for hospitality", provider: { "@id": ORGANIZATION_ID }, brand: { "@id": BRAND_ID }, url: buildPageUrl(defaultLocale, guestInvitesPageKey), description: hostCopy.metaDescription } });
 
-    const outputFile = buildOutputFilePath(locale, guestInvitesPageKey);
-    await writeOutputFile(outputFile, serialize($, homeData, locale, guestInvitesPageKey));
+    // Both historical marketing URLs go directly to the localized canonical,
+    // after its completed write and before this locale's sitemap registration.
+    await publishNicheVariant({
+      locale, pageKey: guestInvitesPageKey,
+      render: () => serialize($, homeData, locale, guestInvitesPageKey),
+      legacyKeys: () => ["automation", "Automated-Guest-Invites-API"],
+    }, { buildOutputFilePath, writeOutputFile, buildPagePath, buildPageUrl, buildRedirectPage });
 
-    // Both historical marketing URLs go directly to the localized canonical.
-    for (const alias of ["automation", "Automated-Guest-Invites-API"]) {
-      await writeOutputFile(buildOutputFilePath(locale, alias), buildRedirectPage(buildPagePath(locale, guestInvitesPageKey), buildPageUrl(locale, guestInvitesPageKey)));
-    }
-
+    // Include the canonical Host URL with its existing monthly/0.9 policy.
     sitemapEntries.push({
       loc: buildPageUrl(locale, guestInvitesPageKey),
       changefreq: "monthly",

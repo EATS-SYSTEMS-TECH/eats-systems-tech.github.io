@@ -122,37 +122,55 @@ html[dir="rtl"] .niche-hero__overlay {
 }
 
 /* ---------- Hero top row: breadcrumb + use-case pager ---------- */
+/* Shared navigation alignment retains each class's original specificity;
+   breadcrumb wrapping and pager sizing remain independent responsibilities. */
+.niche-hero__topbar,
+.niche-breadcrumb__list,
+.niche-breadcrumb__item,
+.niche-hero__nav-button {
+  align-items: center;
+}
+
+.niche-breadcrumb__list,
+.niche-breadcrumb__item,
+.niche-hero__pager {
+  gap: 0.5rem;
+}
+
+/* Keep list/link weight explicit and reset both breadcrumb padding boxes. */
+.niche-breadcrumb__list,
+.niche-breadcrumb__link {
+  font-weight: 600;
+}
+
+.niche-breadcrumb,
+.niche-breadcrumb__list {
+  padding: 0;
+}
+
 .niche-hero__topbar {
   display: flex;
   gap: 1rem;
-  align-items: center;
   justify-content: space-between;
 }
 
 .niche-breadcrumb {
   min-width: 0;
-  padding: 0;
 }
 
 .niche-breadcrumb__list {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
   margin: 0;
-  padding: 0;
   list-style: none;
   color: rgba(255, 255, 255, 0.7);
   font-family: "DM Sans", "Manrope", sans-serif;
   font-size: 0.76rem;
-  font-weight: 600;
   text-transform: uppercase;
 }
 
 .niche-breadcrumb__item {
   display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
 .niche-breadcrumb__item+.niche-breadcrumb__item::before {
@@ -162,7 +180,6 @@ html[dir="rtl"] .niche-hero__overlay {
 
 .niche-breadcrumb__link {
   color: rgba(255, 255, 255, 0.9);
-  font-weight: 600;
   text-decoration: none;
 }
 
@@ -173,6 +190,48 @@ html[dir="rtl"] .niche-hero__overlay {
 }
 
 /* ---------- Hero copy ---------- */
+/* The three hero copy roles share their typeface; title/lead also share a
+   white foreground and weight 500. Eyebrow contrast and spacing stay separate. */
+.niche-hero__eyebrow,
+.niche-hero__title,
+.niche-hero__lead {
+  font-family: "DM Sans", "Manrope", sans-serif;
+}
+
+.niche-hero__title,
+.niche-hero__lead {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* Keep balanced headings and body-section emphasis consistent without raising
+   selector specificity or changing the later mobile/benefit overrides. */
+.niche-hero__title,
+.niche-highlight__title,
+.niche-section__title {
+  text-wrap: balance;
+}
+
+.niche-highlight__title,
+.niche-section__title {
+  color: var(--home-black);
+  font-weight: 600;
+}
+
+/* Action/proof rows wrap separately;their own gaps and margins follow below. */
+.niche-hero__actions,
+.niche-hero__proof {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.niche-hero__eyebrow,
+.niche-hero__proof-item {
+  display: flex;
+  align-items: center;
+}
+
+/* The copy wrapper fills its column and uses logical start alignment in RTL. */
 .niche-hero__text {
   width: 100%;
   margin: 0;
@@ -183,17 +242,15 @@ html[dir="rtl"] .niche-hero__overlay {
 }
 
 .niche-hero__eyebrow {
-  display: flex;
-  align-items: center;
   gap: 0.7rem;
   margin: 0 0 1.35rem;
   color: rgba(255, 255, 255, 0.82);
-  font-family: "DM Sans", "Manrope", sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   text-transform: uppercase;
 }
 
+/* A fixed blue rule precedes the eyebrow without consuming flexible width. */
 .niche-hero__eyebrow::before {
   flex-shrink: 0;
   width: 1.8rem;
@@ -202,35 +259,30 @@ html[dir="rtl"] .niche-hero__overlay {
   background: var(--home-blue);
 }
 
+/* Desktop title line length and tight rhythm;mobile width/type overrides live
+   in the existing 768px query. Lead copy keeps its intentional line breaks. */
 .niche-hero__title {
   max-width: 22ch;
   margin: 0;
-  color: #ffffff;
-  font-family: "DM Sans", "Manrope", sans-serif;
   font-size: clamp(2.4rem, 4.8vw, 4.5rem);
-  font-weight: 500;
   line-height: 0.98;
-  text-wrap: balance;
 }
 
 .niche-hero__lead {
   max-width: 44rem;
   margin: clamp(1.1rem, 2.4vh, 1.6rem) 0 0;
-  color: #ffffff;
-  font-family: "DM Sans", "Manrope", sans-serif;
   font-size: clamp(1.02rem, 1.35vw, 1.25rem);
-  font-weight: 500;
   line-height: 1.55;
   white-space: pre-line;
 }
 
 .niche-hero__actions {
-  display: flex;
-  flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: clamp(1.4rem, 3vh, 2rem);
 }
 
+/* Hero actions retain separate solid/glass treatments and identical pointer
+   and keyboard feedback;neither action shifts its hit target on interaction. */
 .niche-page .niche-hero .btn--primary {
   color: var(--home-black);
   border: 1px solid #ffffff;
@@ -261,8 +313,6 @@ html[dir="rtl"] .niche-hero__overlay {
 }
 
 .niche-hero__proof {
-  display: flex;
-  flex-wrap: wrap;
   gap: 0.65rem clamp(1rem, 2.4vw, 2.25rem);
   margin: clamp(1.6rem, 4vh, 3rem) 0 0;
   padding: 1.15rem 0 0;
@@ -271,36 +321,35 @@ html[dir="rtl"] .niche-hero__overlay {
 }
 
 .niche-hero__proof-item {
-  display: flex;
-  align-items: center;
   gap: 0.5rem;
   color: rgba(255, 255, 255, 0.84);
   font-size: 0.77rem;
   font-weight: 600;
 }
 
+/* One local dimension keeps proof bullets square without altering flex shrink. */
 .niche-hero__proof-item::before {
+  --niche-proof-dot-size: 0.36rem;
   flex-shrink: 0;
-  width: 0.36rem;
-  height: 0.36rem;
+  width: var(--niche-proof-dot-size);
+  height: var(--niche-proof-dot-size);
   border-radius: 50%;
   content: "";
   background: var(--home-blue);
 }
 
-/* ---------- Hero pager (previous / next use case) ---------- */
+/* Hero pager:one local size controls both axes,including shared scene controls. */
 .niche-hero__pager {
   display: flex;
   flex-shrink: 0;
-  gap: 0.5rem;
 }
 
 .niche-hero__nav-button {
   display: inline-flex;
-  align-items: center;
   justify-content: center;
-  width: 2.9rem;
-  height: 2.9rem;
+  --niche-pager-control-size: 2.9rem;
+  width: var(--niche-pager-control-size);
+  height: var(--niche-pager-control-size);
   border-radius: 4px;
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.46);
@@ -310,6 +359,7 @@ html[dir="rtl"] .niche-hero__overlay {
   transition: background-color 180ms ease, border-color 180ms ease;
 }
 
+/* Pointer and keyboard share the same final contrast and stationary target. */
 .niche-hero__nav-button:hover,
 .niche-hero__nav-button:focus-visible {
   border-color: #ffffff;
@@ -317,6 +367,7 @@ html[dir="rtl"] .niche-hero__overlay {
   transform: none;
 }
 
+/* Vector dimensions/stroke stay fixed independently of the outer hit target. */
 .niche-hero__nav-icon {
   width: 1.25rem;
   height: 1.25rem;
@@ -327,34 +378,44 @@ html[dir="rtl"] .niche-hero__overlay {
   stroke-linejoin: round;
 }
 
+/* Mirror navigation vectors using the existing document-direction guard. */
 html[dir="rtl"] .niche-hero__nav-icon {
   transform: scaleX(-1);
 }
 
 /* ---------- Three core messages ---------- */
+/* White highlight band;its grid owns column count,gap and equal edge spacing.
+   Responsive queries below retain the existing 1024/960px decisions. */
 .niche-highlights {
   padding: clamp(4rem, 9vw, 7rem) 0;
   background: #ffffff;
 }
 
 .niche-highlights__grid {
+  --niche-highlight-columns: repeat(3, minmax(0, 1fr));
+  --niche-highlight-gap: clamp(2rem, 4vw, 3.5rem);
+  --niche-highlight-edge-space: clamp(1.75rem, 3.5vw, 2.75rem);
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(2rem, 4vw, 3.5rem);
-  padding-top: clamp(1.75rem, 3.5vw, 2.75rem);
-  padding-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
+  grid-template-columns: var(--niche-highlight-columns);
+  gap: var(--niche-highlight-gap);
+  padding-top: var(--niche-highlight-edge-space);
+  padding-bottom: var(--niche-highlight-edge-space);
   border-top: 1px solid var(--home-line);
   border-bottom: 1px solid var(--home-line);
 }
 
+/* Allow long localized copy to shrink inside its assigned grid track. */
 .niche-highlight {
   min-width: 0;
 }
 
+/* The icon frame and inner vector each own one square size;stroke/color and
+   surrounding text spacing remain the original independent values. */
 .niche-highlight__icon {
+  --niche-highlight-icon-size: 3.25rem;
   display: grid;
-  width: 3.25rem;
-  height: 3.25rem;
+  width: var(--niche-highlight-icon-size);
+  height: var(--niche-highlight-icon-size);
   margin-bottom: 1.35rem;
   place-items: center;
   color: var(--home-blue);
@@ -364,8 +425,9 @@ html[dir="rtl"] .niche-hero__nav-icon {
 }
 
 .niche-highlight__icon svg {
-  width: 1.55rem;
-  height: 1.55rem;
+  --niche-highlight-vector-size: 1.55rem;
+  width: var(--niche-highlight-vector-size);
+  height: var(--niche-highlight-vector-size);
   fill: none;
   stroke: currentColor;
   stroke-width: 1.6;
@@ -373,13 +435,12 @@ html[dir="rtl"] .niche-hero__nav-icon {
   stroke-linejoin: round;
 }
 
+/* Highlight titles keep their compact rhythm;paragraphs retain normal body
+   wrapping and optional actions remain separated from the copy above. */
 .niche-highlight__title {
   margin: 0 0 0.85rem;
-  color: var(--home-black);
   font-size: clamp(1.3rem, 2vw, 1.75rem);
-  font-weight: 600;
   line-height: 1.15;
-  text-wrap: balance;
 }
 
 .niche-highlight__text {
@@ -395,6 +456,8 @@ html[dir="rtl"] .niche-hero__nav-icon {
 }
 
 /* ---------- Benefits ---------- */
+/* Shared section shell and heading geometry;the benefit band's existing ID
+   selectors continue to supply its specific color and heavier title weight. */
 .niche-section {
   padding: clamp(4rem, 9vw, 8rem) 0;
   background: var(--home-soft);
@@ -408,11 +471,8 @@ html[dir="rtl"] .niche-hero__nav-icon {
 .niche-section__title {
   max-width: 16ch;
   margin: 0;
-  color: var(--home-black);
   font-size: clamp(2.1rem, 4.4vw, 4rem);
-  font-weight: 600;
   line-height: 1.02;
-  text-wrap: balance;
 }
 
 /* Key benefits: bento. A white band with a faint blue wash. White cards with
@@ -1016,14 +1076,16 @@ html.a11y-high-contrast .bento-visual__span {
 
 @media (max-width: 1024px) {
   .niche-highlights__grid {
-    gap: 2rem;
+    /* Retain three tracks down to 961px with the original tablet gutter. */
+    --niche-highlight-gap: 2rem;
   }
 }
 
 @media (max-width: 960px) {
   .niche-highlights__grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2.25rem;
+    /* The inclusive 960px boundary changes both the column count and gutter. */
+    --niche-highlight-columns: minmax(0, 1fr);
+    --niche-highlight-gap: 2.25rem;
   }
 
 }
@@ -1054,8 +1116,8 @@ html.a11y-high-contrast .bento-visual__span {
   }
 
   .niche-hero__nav-button {
-    width: 2.6rem;
-    height: 2.6rem;
+    /* Retain the inclusive768px mobile target size on both axes. */
+    --niche-pager-control-size: 2.6rem;
   }
 }
 

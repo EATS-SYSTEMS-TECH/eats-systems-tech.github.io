@@ -23,6 +23,7 @@ test("History/guest views localize codes, paginate without duplicate tables, exp
         async command(command,payload){
           window.historyCalls.push({command,payload});
           if(command!=='ADMIN_LIST_HISTORY')return super.command(command,payload);
+          if(window.historyFailure)throw Object.assign(new Error(window.historyFailure),{code:window.historyFailure});
           if(!payload.dayKey)return {data:payload.page.cursor?{days:[['20261027',25],['20261026',0]],page:{nextCursor:null}}:{days:[['20261027',25]],page:{nextCursor:'days-2'}}};
           const rows=Array.from({length:25},(_,i)=>[i,1793098720+i,180,0,0,1,3,i%2?2:3,i===2?1:0,0,0,0,0,(i%2?'System member ':'Guest visitor ')+i,'']);
           const start=Number(payload.page.cursor||0);
@@ -34,7 +35,7 @@ test("History/guest views localize codes, paginate without duplicate tables, exp
       await window.dashboard.ready;
     },language);
     const he=language==='he',copy=(h,e)=>he?h:e;
-    await page.locator('.manager-view > .manager-grid .manager-system button').click();
+    await page.locator('.manager-view > .manager-grid .manager-system').getByRole('button',{name:language==='he'?'פתיחת סביבת ניהול':'Open workspace',exact:true}).click();
     await page.locator('[data-tab="history"]').click();
     const content=page.locator('#manager-content');
     await content.locator('[data-history-day="20261027"]').waitFor();
@@ -67,6 +68,15 @@ test("History/guest views localize codes, paginate without duplicate tables, exp
     await content.getByRole('button',{name:copy('ימים נוספים','More days'),exact:true}).click();
     await content.locator('[data-history-day="20261026"]').click();
     assert.equal(await content.getByRole('button',{name:copy('ייצוא הנתונים המוצגים','Export displayed data'),exact:true}).isDisabled(),true);
+    for(const code of ['STORAGE_IO','STORAGE_RECOVERY_REQUIRED']){
+      await page.evaluate(code=>{window.historyFailure=code;},code);
+      await page.locator('[data-tab="history"]').click();
+      await page.getByRole('alert').filter({hasText:code==='STORAGE_IO'?copy('כרטיס ה־SD','SD card'):copy('התאוששות','recovery')}).waitFor();
+      assert.equal(await content.locator('.manager-history-empty').count(),0,'failure never appears as empty history');
+    }
+    await page.evaluate(()=>{window.historyFailure=null;});
+    await page.locator('[data-tab="history"]').click();
+    await content.locator('[data-history-day="20261027"]').waitFor();
     const commands=await page.evaluate(()=>window.historyCalls.map(call=>call.command));
     assert.equal(commands.some(cmd=>/DELETE|UPSERT|IMPORT|REMOTE_OPEN/.test(cmd)),false);
     assert.deepEqual(errors,[]);

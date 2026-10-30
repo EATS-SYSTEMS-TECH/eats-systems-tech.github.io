@@ -251,7 +251,7 @@ export class ManagerConnection {
       this.renewing = false;
     }
   }
-  async command(cmd, payload = {}, timeout = 15000) {
+  async command(cmd, payload = {}, timeout = cmd === "ADMIN_LIST_HISTORY" ? 35000 : 15000) {
     if (this.closed || !this.session) throw new Error("DISCONNECTED");
     if (this.busy) throw new Error("BUSY");
     this.busy = true;

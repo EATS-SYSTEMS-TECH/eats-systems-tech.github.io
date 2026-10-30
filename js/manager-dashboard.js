@@ -99,7 +99,7 @@ export function createManagerDashboard({
     nav = node("nav", undefined, "manager-nav"),
     main = node("div", undefined, "manager-main");
   nav.setAttribute("aria-label", t("ניווט Manager", "Manager navigation"));
-  const title = node("p", t("סביבת עבודה", "Workspace"), "manager-nav-title"),
+  const title = node("p", t("סביבת עבודה אישית", "Personal workspace"), "manager-nav-title"),
     status = node("p", "", "manager-status");
   status.setAttribute("role", "status");
   status.setAttribute("aria-live", "polite");
@@ -213,6 +213,7 @@ export function createManagerDashboard({
     dialogs,
     onOpen: (system) => task(() => openExample(system)),
     onOpenOrganization: openExampleOrganization,
+    renderSystemActions: system => systemActions(system,null,false,openExample),
   });
   const say = (text, error = false, state = "info") => {
     status.textContent = text;
@@ -225,6 +226,8 @@ export function createManagerDashboard({
     const explanation = managerConnectionError(error, language);
     if (explanation) return [explanation.message, ...explanation.steps].join(" ");
     return ({
+      STORAGE_IO: t("לא ניתן לקרוא כעת את ההיסטוריה מכרטיס ה־SD. ודאו שהוא מחובר כראוי ופתחו שוב את ההיסטוריה.", "History storage is unavailable. Check that the gate's SD card is connected, then reopen History to retry."),
+      STORAGE_RECOVERY_REQUIRED: t("ההיסטוריה מושהית כדי לשמור על נתוני התאוששות קיימים. נדרש שחזור מאומת לפני המשך הקריאה.", "History is paused to preserve existing recovery data. Verified recovery is required before reading can resume."),
       ORGANIZATION_HAS_SYSTEMS: t(
         "יש להסיר את שיוך המערכות לפני הסרת הארגון.",
         "Unassign linked systems before removing the organization.",
@@ -410,17 +413,21 @@ export function createManagerDashboard({
     shell.dataset.mode = managementMode ? "management" : "workspace";
     nav.hidden = managementMode;
     platformEntry.hidden = true;
-    nav.replaceChildren(title);
+    nav.replaceChildren();
+    const personalNavigation = node("section", undefined, "manager-personal-navigation");
+    personalNavigation.setAttribute("aria-label", t("סביבת עבודה אישית", "Personal workspace"));
+    personalNavigation.append(title);
+    nav.append(personalNavigation);
     const roleList = node("div", undefined, "manager-sidebar-roles");
     for (const role of new Set(
       profile.roles?.length ? profile.roles : [profile.role],
     )) {
-      if (!["admin", "user", "organization-admin"].includes(role)) continue;
+      if (!["admin", "user", "organization-admin", "organization-user"].includes(role)) continue;
       const label = node("span", roleName(role));
       label.dir = "ltr";
       roleList.append(label);
     }
-    if (roleList.childElementCount) nav.append(roleList);
+    if (roleList.childElementCount) personalNavigation.append(roleList);
 
     platformHeader.replaceChildren();
     platformHeader.hidden = true;
@@ -428,25 +435,34 @@ export function createManagerDashboard({
       const b = button(t("המערכות שלי", "My systems"), () => showSystems(null));
       if (!scope && ["systems", "example-system"].includes(currentView))
         b.setAttribute("aria-current", "page");
-      nav.append(b);
+      personalNavigation.append(b);
     }
     const myOrganizations = button(t("הארגונים שלי", "My organizations"), () =>
       showOrganizations(true),
     );
     if (
-      ["my-organizations", "example-organization"].includes(currentView) ||
-      (currentView === "systems" && scope)
+      ["my-organizations", "example-organization"].includes(currentView)
     )
       myOrganizations.setAttribute("aria-current", "page");
-    nav.append(myOrganizations);
+    personalNavigation.append(myOrganizations);
     if (profile.organizations?.length) {
+      const organizationArea = node("section", undefined, "manager-organization-area");
+      organizationArea.setAttribute("aria-label", t("סביבת הארגון", "Organization workspace"));
+      organizationArea.append(node("p", t("סביבת הארגון", "Organization workspace"), "manager-nav-title"));
+      nav.append(organizationArea);
       organizationPicker = createManagerOrganizationPicker({
         organizations: profile.organizations.map(org => ({ ...org, ...organizationIdentities.get(org.id), role: org.role })),
         selectedId: scope,
         language,
         onSelect: id => task(() => showSystems(id)),
       });
-      nav.append(organizationPicker.root);
+      organizationArea.append(organizationPicker.root);
+      if (scope && profile.organizations.some(org => org.id === scope)) {
+        const organizationSystems = button(t("מערכות הארגון", "Organization systems"), () => task(() => showSystems(scope)));
+        organizationSystems.dataset.organizationView = "systems";
+        if (currentView === "systems") organizationSystems.setAttribute("aria-current", "page");
+        organizationArea.append(organizationSystems);
+      }
     }
     if (profile.role !== "admin")
       nav.append(button(t("הזמנות", "Invitations"), showInvitations));
@@ -642,6 +658,7 @@ export function createManagerDashboard({
         admin: "WIFIGATE Manager admin",
         user: "WIFIGATE Manager user",
         "organization-admin": "WIFIGATE Manager organization admin",
+        "organization-user": "WIFIGATE Manager organization user",
       }[role] ?? t("ממתין להרשאה", "Access pending")
     );
   }
@@ -1019,7 +1036,7 @@ export function createManagerDashboard({
     }
     say("");
   }
-  function systemActions(s, operatorAccount = null, workspace = false) {
+  function systemActions(s, operatorAccount = null, workspace = false, onOpen = openSystem) {
     const actions = node("div", undefined, "manager-system-actions");
     const secondary = node("div", undefined, "manager-system-options");
     if (
@@ -1057,7 +1074,7 @@ export function createManagerDashboard({
       actions.append(
         button(
           t("פתיחת סביבת ניהול", "Open workspace"),
-          () => openSystem(s),
+          () => onOpen(s),
           true,
         ),
       );
@@ -1066,14 +1083,12 @@ export function createManagerDashboard({
         button(t("שיוך לארגון", "Assign organization"), () => assignSystem(s)),
       );
     if (profile.account || operatorAccount || examples.isSystem(s)) {
-      secondary.append(
-        Object.assign(
-          button(t("ניתוק מ־Manager", "Disconnect from Manager"), async () => {
+      const removeButton = button(workspace || operatorAccount ? t("ניתוק מ־Manager", "Disconnect from Manager") : t("הסרת מערכת", "Remove system"), async () => {
             if (
               !(await confirmAction(
                 t(
-                  `לנתק את ${s.name} מ־Manager? הניהול המקומי ב־Bluetooth יישאר פעיל. שערים שמשויכים גם למערכות נוספות יישארו מחוברים דרכן.`,
-                  `Disconnect ${s.name} from Manager? Local Bluetooth management stays available. Gates also used by other systems remain connected through them.`,
+                  `להסיר את ${s.name} מ־Manager ולבטל את החיוב עבורה? אם זו המערכת האחרונה, חיוב המערכות יתאפס. רכיבים שמופיעים גם במערכות אחרות ותוספות ארגון ימשיכו להיות מחושבים בנפרד. הניהול המקומי ב־Bluetooth יישאר פעיל.`,
+                  `Remove ${s.name} from Manager and stop its system subscription charge? Removing the last system leaves no system subscription charge. Components still represented in other systems and organization extras remain billed separately. Local Bluetooth management stays available.`,
                 ),
               ))
             )
@@ -1113,10 +1128,10 @@ export function createManagerDashboard({
                 ),
               );
             say(messages.join(" "));
-          }),
-          { className: "manager-button manager-button-danger" },
-        ),
-      );
+});
+      removeButton.classList.add("manager-button-danger");
+      if(workspace || operatorAccount)secondary.append(removeButton);
+      else if(!scope) {removeButton.classList.add("manager-system-remove");removeButton.setAttribute("aria-label",t("הסרת מערכת: ","Remove system: ")+s.name);actions.append(removeButton);}
     }
     if ((workspace || operatorAccount) && secondary.childElementCount) {
       const menu = node("details", undefined, "manager-system-menu");
@@ -2351,11 +2366,26 @@ export function createManagerDashboard({
   }
   function renderRemoteDetails(content, data) {
     const remote = managerRfDetails(data);
-    content.append(detailCard(t("השלט השמור במערכת", "Saved remote"),
-      t("לימוד שלט מתבצע באפליקציה ליד המערכת.", "Learn a remote in the app near the system."), [
-        [t("מצב השלט", "Remote status"), remote.present === true ? t("קיים שלט שמור", "Remote saved") : remote.present === false ? t("לא נשמר שלט", "No remote saved") : t("המצב אינו זמין", "Status unavailable")],
-        ...(remote.present === true ? [[t("הקוד שנלמד", "Learned code"), remote.code]] : []),
-      ]));
+    const card = node("section", undefined, "manager-device-card manager-remote-card");
+    card.dataset.remoteState = remote.present === true ? "saved" : remote.present === false ? "empty" : "unknown";
+    const illustration = node("div", undefined, "manager-remote-illustration");
+    const icon = node("img"); icon.src = "/assets/wifigate_features/digital_rf_remote_learning.svg";
+    icon.alt = ""; icon.width = 128; icon.height = 128;
+    illustration.setAttribute("aria-hidden", "true"); illustration.append(icon);
+    const body = node("div", undefined, "manager-remote-body");
+    body.append(node("h3", t("השלט השמור במערכת", "Saved remote")));
+    const facts = node("dl", undefined, "manager-remote-facts");
+    facts.append(node("dt", t("מצב השלט", "Remote status")), node("dd",
+      remote.present === true ? t("קיים שלט שמור", "Remote saved") : remote.present === false ? t("לא נשמר שלט", "No remote saved") : t("המצב אינו זמין", "Status unavailable"), "manager-remote-status"));
+    if (remote.present === true) {
+      const code = node("dd", undefined, "manager-remote-code");
+      if (remote.code) {
+        const value = node("code", remote.code); value.dir = "ltr"; code.append(value);
+      } else code.append(node("span", t("לא דווח על ידי המערכת", "Not reported by the system")));
+      facts.append(node("dt", t("הקוד שנלמד", "Learned code")), code);
+    }
+    body.append(facts, node("p", t("לימוד שלט מתבצע באפליקציה ליד המערכת.", "Learn a remote in the app near the system."), "manager-remote-hint"));
+    card.append(illustration, body); content.append(card);
     content.dataset.remoteReadOnly = "true";
   }
   function renderStorageDetails(content, data) {

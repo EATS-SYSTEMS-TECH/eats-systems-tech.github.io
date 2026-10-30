@@ -104,11 +104,11 @@ function gate(id, index) {
     revision: 9,
     config: {
       command: "PULSE_AFTER_PULSE",
-      pulseWidth1Millis: 800,
+      pulseWidth1Millis: 5000,
       timeBetweenPulses1Seconds: 2,
-      pulseWidth2Millis: 800,
+      pulseWidth2Millis: 5000,
       timeBetweenPulses2Seconds: 1,
-      pulseWidth3Millis: 800,
+      pulseWidth3Millis: 5000,
     },
     auto: {
       enabled: true,

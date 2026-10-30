@@ -102,7 +102,7 @@ test("real and simulated Manager systems render identical cards and all ten work
           await real.evaluate(style),
           await example.evaluate(style),
         );
-        await real.getByRole("button").click();
+        await real.getByRole("button",{name:language==="he"?"פתיחת סביבת ניהול":"Open workspace",exact:true}).click();
         const tabs = [
           "overview",
           "users",
@@ -140,7 +140,7 @@ test("real and simulated Manager systems render identical cards and all ten work
           })
           .click();
         await page.locator(".manager-examples > summary").click();
-        await example.getByRole("button").click();
+        await example.getByRole("button",{name:language==="he"?"פתיחת סביבת ניהול":"Open workspace",exact:true}).click();
         await page.locator(".manager-simulation-note").waitFor();
         await page.locator("#manager-content .manager-facts").waitFor();
         const simulated = await snapshot();
@@ -165,7 +165,7 @@ test("real and simulated Manager systems render identical cards and all ten work
             exact: true,
           })
           .click();
-        await real.getByRole("button").click();
+        await real.getByRole("button",{name:language==="he"?"פתיחת סביבת ניהול":"Open workspace",exact:true}).click();
         await page.locator("#manager-content .manager-facts").waitFor();
         assert.equal(await page.locator(".manager-simulation-note").count(), 0);
         assert.equal(

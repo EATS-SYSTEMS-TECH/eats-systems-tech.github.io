@@ -1,3 +1,4 @@
+import { reservationAdminIcon as icon } from "./reservations-admin-icons.js";
 // WIFIGATE Reservations in WIFIGATE Admin: the dedicated reservations
 // page (/dashboard/reservations/), apart
 // from the For Business products. The backend requires the global WIFIGATE
@@ -54,6 +55,8 @@ const itemsText = (t, items) =>
 // The reservations page itself.
 export function createReservationsAdmin({ root, user, language }) {
   const t = reservationsText(language);
+  const text=(he,en)=>language==="he"?he:en;
+  let lastCounts;
   let closed = false;
   let generation = 0;
   let selected = "all";
@@ -78,25 +81,41 @@ export function createReservationsAdmin({ root, user, language }) {
     onclick: () => void load(),
   });
 
+  const overview=element("div",{className:"reservations-overview"});
+  const empty=element("div",{className:"reservations-admin-empty",hidden:true},icon("new"),element("h3",{text:text("ההזמנות הבאות שלכם מתחילות כאן","Your next reservations start here")}),element("p",{text:text("כשתישלח הזמנה מחשבון WIFIGATE, היא תופיע כאן ותוכלו ללוות אותה עד המסירה.","Reservations submitted from WIFIGATE accounts will appear here, ready to follow through to delivery.")}));
+  const flowHelp=element("p",{className:"reservations-flow-help",text:text("בחרו שלב כדי להתמקד בהזמנות שדורשות טיפול.","Select a stage to focus on the reservations that need attention.")});
   root.hidden = false;
   root.className = "portal-panel reservations-admin";
   root.replaceChildren(
     element(
       "div",
       { className: "reservations-admin__heading" },
-      element("div", {}, element("h2", { text: t("adminTitle") }), element("p", { text: t("adminNote") })),
+      element("div", {}, element("span",{className:"reservations-workspace-label",text:text("מרכז טיפול בהזמנות","RESERVATION WORKSPACE")}), element("h2", { text: t("adminTitle") }), element("p", { text: t("adminNote") })),
       refresh,
     ),
+    overview,
+    flowHelp,
     filters,
     status,
+    empty,
     list,
     truncated,
     more,
   );
 
-  function renderFilters(counts = {}) {
+  refresh.prepend(icon("refresh"));
+
+  function renderFilters(counts) {
+    lastCounts=counts;
+    const known=Boolean(counts);
+    counts ??= {};
     const total = statuses.reduce((sum, value) => sum + (counts[value] ?? 0), 0);
 
+    overview.replaceChildren(...[
+      ["contacted",text("ממתינות לטיפול","Awaiting follow-up"),(counts.new??0)+(counts.contacted??0)],
+      ["shipped",text("בהכנה ובמשלוח","Preparing & shipping"),(counts.confirmed??0)+(counts.shipped??0)],
+      ["delivered",text("נמסרו בהצלחה","Delivered"),counts.delivered??0]
+    ].map(([key,label,value])=>element("div",{className:"reservations-overview-card"},icon(key),element("div",{},element("span",{text:label}),element("strong",{text:known?String(value):"…"})))));
     filters.replaceChildren(
       ...["all", ...statuses].map((value) =>
         element(
@@ -104,13 +123,16 @@ export function createReservationsAdmin({ root, user, language }) {
           {
             type: "button",
             "aria-pressed": String(value === selected),
+            "data-stage":value,
             onclick: () => {
               selected = value;
+              renderFilters(lastCounts);
               void load();
             },
           },
-          value === "all" ? t("all") : t(statusKey(value)),
-          element("b", { text: String(value === "all" ? total : (counts[value] ?? 0)) }),
+          icon(value),
+          element("span",{text:value === "all" ? t("all") : t(statusKey(value))}),
+          element("b", { text: known?String(value === "all" ? total : (counts[value] ?? 0)):"…" }),
         ),
       ),
     );
@@ -171,6 +193,7 @@ export function createReservationsAdmin({ root, user, language }) {
     const formStatus = element("p", { className: "reservation-status", role: "status", "aria-live": "polite" });
 
     form.append(
+      element("h4",{className:"reservations-form-title"},icon("edit"),text("השלב הבא ועדכון הלקוח","Next step & customer update")),
       element("label", {}, t("newStatus"), statusSelect),
       element("label", {}, t("customerNote"), customerNote, element("small", { text: t("customerNoteHint") })),
       element("label", {}, t("adminNoteLabel"), adminNote, element("small", { text: t("adminNoteHint") })),
@@ -195,6 +218,7 @@ export function createReservationsAdmin({ root, user, language }) {
           trackingNumber: tracking.value.trim() || null,
         });
         if (closed) return;
+        if(lastCounts && updated.status!==reservation.status){const counts={...lastCounts};counts[reservation.status]=Math.max(0,(counts[reservation.status]??0)-1);counts[updated.status]=(counts[updated.status]??0)+1;renderFilters(counts);}
         renderDetail(row, updated);
         row.querySelector(".reservation-pill").dataset.status = updated.status;
         row.querySelector(".reservation-pill").textContent = t(statusKey(updated.status));
@@ -219,7 +243,7 @@ export function createReservationsAdmin({ root, user, language }) {
       element(
         "div",
         {},
-        element("h4", { text: t("customer") }),
+        element("h4", {},icon("customer"),t("customer")),
         definition([
           [t("fullName"), reservation.contact.fullName],
           [t("email"), reservation.email, "ltr"],
@@ -234,7 +258,7 @@ export function createReservationsAdmin({ root, user, language }) {
       element(
         "div",
         {},
-        element("h4", { text: t("items") }),
+        element("h4", {},icon("confirmed"),t("items")),
         definition(reservation.items.map(({ productLine, quantity }) => [productName(productLine), t("unitSuffix", { n: quantity }), "ltr"])),
         reservation.notes ? element("h4", { text: bare(t("notes")) }) : null,
         reservation.notes ? element("p", { dir: "auto", text: reservation.notes }) : null,
@@ -243,7 +267,7 @@ export function createReservationsAdmin({ root, user, language }) {
       element(
         "div",
         {},
-        element("h4", { text: t("history") }),
+        element("h4", {},icon("history"),t("history")),
         element(
           "ol",
           {},
@@ -295,7 +319,7 @@ export function createReservationsAdmin({ root, user, language }) {
         element(
           "span",
           {},
-          element("bdi", { dir: "auto", text: item.fullName ?? "—" }),
+          element("bdi", { dir: "auto", text: item.fullName ?? text("פרטים לא זמינים","Details unavailable") }),
           element("small", { dir: "ltr", text: item.email ?? "" }),
         ),
         element(
@@ -319,6 +343,8 @@ export function createReservationsAdmin({ root, user, language }) {
     const request = ++generation;
     more.hidden = true;
     refresh.disabled = true;
+    root.setAttribute("aria-busy","true");
+    empty.hidden=true;
     status.textContent = append ? "" : t("loading");
     delete status.dataset.tone;
 
@@ -339,7 +365,10 @@ export function createReservationsAdmin({ root, user, language }) {
       const rows = page.items.map(rowFor);
       if (append) list.append(...rows);
       else list.replaceChildren(...rows);
-      status.textContent = list.childElementCount ? "" : t("adminEmpty");
+      status.textContent = "";
+      empty.hidden=Boolean(list.childElementCount);
+      empty.querySelector("h3").textContent=selected==="all"?text("ההזמנות הבאות שלכם מתחילות כאן","Your next reservations start here"):t("adminEmpty");
+      empty.querySelector("p").textContent=selected==="all"?text("כשתישלח הזמנה מחשבון WIFIGATE, היא תופיע כאן ותוכלו ללוות אותה עד המסירה.","Reservations submitted from WIFIGATE accounts will appear here, ready to follow through to delivery."):text("אפשר לבחור שלב אחר או לרענן כדי לבדוק הזמנות חדשות.","Choose another stage or refresh to check for new reservations.");
       truncated.hidden = !page.truncated;
       more.hidden = !next;
     } catch (error) {
@@ -347,7 +376,7 @@ export function createReservationsAdmin({ root, user, language }) {
       status.textContent = errorText(t, error);
       status.dataset.tone = "error";
     } finally {
-      if (request === generation) refresh.disabled = false;
+      if (request === generation) {refresh.disabled = false;root.setAttribute("aria-busy","false");}
     }
   }
 
