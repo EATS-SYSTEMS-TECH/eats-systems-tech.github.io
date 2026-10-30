@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "originalSource": "42ebc994c356a40b806f4a35e16b252f9d603bae",
+  "rawSha256": "9e03c3929fb67f87c10cef1efcba4805f15155a5611c2976d24d401e0b7e34ff",
+  "domSha256": "e9bd67e01eff46730422fbc2960936b63a40626389bf6a25fbf2fc14df2fc320",
+  "sectionOrder": [
+    "home",
+    "advantages",
+    "private-access",
+    "where",
+    "guest-invites-api",
+    "tutorials",
+    "one-tap-invite",
+    "wifi-gate-faq",
+    "why-wifigate",
+    "system-overview",
+    "contact"
+  ],
+  "headScripts": [
+    "js/utils.js?v=20260402a",
+    "js/navigation.js?v=20260910a",
+    "js/hero.js?v=20261019d",
+    "js/accessibility-copy.js?v=20261007a",
+    "js/accessibility.js?v=20261027d",
+    "js/language-selector.js?v=20261006a",
+    "js/faq.js?v=20261017b",
+    "js/main.js?v=20261007b"
+  ],
+  "imageFacts": [
+    {
+      "src": "assets/img/wifigate_homepage.webp",
+      "alt": "",
+      "class": "hero__bg hero__bg--image",
+      "fetchpriority": "high"
+    },
+    {
+      "class": "security-statement__media-image",
+      "src": "assets/img/private-access-arrival.webp",
+      "alt": "A courier follows a dotted blue route to an apartment entrance while a resident holds the WIFIGATE app showing time-limited guest access.",
+      "width": "1536",
+      "height": "1024",
+      "loading": "lazy",
+      "decoding": "async"
+    },
+    {
+      "src": "assets/img/wifigate-product-v3.webp",
+      "alt": "The WIFIGATE device beside a phone running the app, listing a home gate, a workplace, and a time-limited guest pass",
+      "class": "where-media__image",
+      "id": "where-product-image",
+      "loading": "lazy",
+      "decoding": "async",
+      "width": "1545",
+      "height": "905"
+    },
+    {
+      "src": "assets/wifigate_niche_pages/hotels-airbnb-v2-app-hero.webp",
+      "alt": "Guests using a phone to enter their hotel room",
+      "width": "1280",
+      "height": "720",
+      "loading": "lazy"
+    },
+    {
+      "class": "security-statement__media-image",
+      "src": "assets/img/one-tap-invite-map.webp",
+      "alt": "A dotted blue route leads from the street to a location pin at an apartment building entrance.",
+      "width": "1536",
+      "height": "1024",
+      "loading": "lazy",
+      "decoding": "async"
+    },
+    {
+      "class": "product-overview__image",
+      "src": "assets/img/wifigate-system-overview.webp",
+      "alt": "WIFIGATE system overview: the IP67 device, the mobile app, and the control board with its terminal blocks, USB Type-C and 12-24V input, Wi-Fi 6, Bluetooth LE and a 433.92MHz receiver, alongside the platform features - up to 5000 users and 20 admins, unlimited guest invites, an automated guest invites API, no SIM or router, stability, quick guest invite, 90-day history, auto open, up to 50 events, digital RF remote learning, security and privacy, and no subscription fees.",
+      "width": "1448",
+      "height": "1086",
+      "loading": "lazy",
+      "decoding": "async"
+    }
+  ],
+  "partialNames": [
+    "site-header",
+    "site-footer",
+    "accessibility-widget"
+  ],
+  "limits": "Complete normalized DOM fingerprint plus explicit boundaries;words,URLs,JSON and vectors are fixed product inputs,not a legal ownership finding"
+}
