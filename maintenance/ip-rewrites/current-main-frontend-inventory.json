@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-30T04:15:29.063Z",
-  "ref": "57f211e497cb0d1163c358c882c511ba73c3fb55",
+  "createdAt": "2026-10-30T05:26:07.683Z",
+  "ref": "b343652c35c890ff7dafcac778d120be9653956f",
   "scope": "selected paths",
   "paths": [
     "css",
@@ -9,18 +9,18 @@
     "scripts",
     "templates"
   ],
-  "trackedFiles": 2320,
-  "scannedFiles": 555,
+  "trackedFiles": 2333,
+  "scannedFiles": 563,
   "complete": true,
   "summary": {
     "eiloncohen": {
-      "rawLines": 734,
-      "lines": 734,
-      "rawFiles": 10,
-      "files": 10,
+      "rawLines": 578,
+      "lines": 578,
+      "rawFiles": 7,
+      "files": 7,
       "exceptedFiles": 0,
-      "rawBlobs": 10,
-      "blobs": 10,
+      "rawBlobs": 7,
+      "blobs": 7,
       "binaryBlobs": 0
     },
     "OdeliaTorjman": {
@@ -37,24 +37,12 @@
   "method": "git blame --no-textconv --line-porcelain -w -M -C; exact blob states from matching author commits in all available refs and requested ref ancestry; external diff disabled",
   "remaining": [
     {
-      "path": "css/accessibility.css",
-      "eilonLines": 19
-    },
-    {
-      "path": "css/niche.css",
-      "eilonLines": 63
-    },
-    {
       "path": "css/styles.css",
       "eilonLines": 347
     },
     {
       "path": "js/accessibility-copy.js",
       "eilonLines": 14
-    },
-    {
-      "path": "scripts/build-localized-site.mjs",
-      "eilonLines": 74
     },
     {
       "path": "scripts/hero-video-browser.test.mjs",
@@ -77,11 +65,18 @@
       "eilonLines": 1
     }
   ],
-  "status": "COMPLETE_SELECTED_FRONTEND_INVENTORY_REMAINING_IP_OPEN",
+  "status": "COMPLETE_SELECTED_FRONTEND_INVENTORY_INDEPENDENT_REWRITE_AND_FINAL_GATES_OPEN",
+  "nonAttributionRemaining": [
+    {
+      "path": "scripts/build-localized-site.mjs",
+      "status": "OPEN_INDEPENDENT_WHOLE_BUILDER_REWRITE",
+      "reason": "The narrowly bounded script-data bug fix used separate deletion/addition while deliberately preserving unrelated builder bytes. The new Git attribution is zero for this file;that metadata change does not establish an independent whole-file rewrite."
+    }
+  ],
   "limits": [
-    "Frozen57f211e49 scope555files under css/js/scripts/templates only;not entire website/generated/assets/backend",
-    "734Eilon lines remain in10files;0Odelia in this scope",
-    "Later script-data helper/test/spec have separate complete zero3path report;entire builder rewrite remains open",
+    "Frozenb343652c35 scope563files under css/js/scripts/templates;not entire website/generated/assets/backend",
+    "578Eilon lines remain in7files;0Odelia in this selected scope",
+    "Whole builder independent rewrite remains OPEN despite zero Git attribution after the narrow fix;do not count its74line metric disappearance as an independent delivery",
     "No legal ownership or final acceptance inferred",
     "Primary/main/hosting untouched"
   ]

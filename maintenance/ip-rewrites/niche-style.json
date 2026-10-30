@@ -56,11 +56,19 @@
         }
       }
     },
-    "retainedAttempts": "Initial slow pair-transport original run completed;full280facts match the optimized transport exactly. A guarded stop attempt found the process already exited and performed no termination. All records retained privately."
+    "retainedAttempts": "Initial slow pair-transport original run completed;full280facts match the optimized transport exactly. A guarded stop attempt found the process already exited and performed no termination. All records retained privately.",
+    "latestCompleteFrontendInventory": {
+      "ref": "b343652c35c890ff7dafcac778d120be9653956f",
+      "files": 563,
+      "eilonLines": 578,
+      "eilonFiles": 7,
+      "odeliaLines": 0,
+      "wholeBuilderIndependentRewrite": "OPEN despite0attribution after narrowJSONfix"
+    }
   },
   "limits": [
     "Six changed paths only;no whole-website zero claim",
-    "Earlier complete555file frontend inventory734Eilon lines/10files remains separately frozen;later full census running",
+    "Latest complete frozenb343 frontend563files:578Eilon lines/7files,0Odelia;whole builder independent rewrite separately OPEN despite0attribution",
     "Remaining styles/templates/copy/builder/final-main/legal acceptance OPEN",
     "Primary/main and hosting untouched;no phone acceptance inferred"
   ],
