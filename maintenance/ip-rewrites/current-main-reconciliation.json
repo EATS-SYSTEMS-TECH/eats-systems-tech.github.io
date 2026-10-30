@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "incomingMain": "b2977565a1f7a2b7f6ffd78f182bde7a7406b9ea",
+  "previousIsolatedSource": "ae3c7303b564c28747012f535b80df3097c76cc3",
+  "mergeCommit": "a2cb0df868ac9749ec4ba8d952ad4e19e2a9fdaa",
+  "purpose": "Preserve current Manager/Host/Pay/account navigation changes while retaining the isolated consumer marketing rewrites;primary website checkout/main are not changed or published.",
+  "sourcePreservation": {
+    "incomingFilesOutsidePriorIsolatedScope": 166,
+    "productFiles": "Exact incoming main bytes after workstation newline normalization;the sole intentional deviation is four lines in a test DOM port",
+    "testPort": "HTMLElement.title now reflects the title attribute,as an actual browser does. Every original assertion and every other fixture byte retained. First55/57 attempt preserved;fresh57/57 PASS.",
+    "resolvedConflicts": [
+      "guest-invites.css retains the independent existing stylesheet",
+      "hero.js retains the independent existing media controller",
+      "niche.template.html retains its independent complete tree;the incoming generator replaces pager shells before locale/scene processing"
+    ]
+  },
+  "validation": {
+    "currentPresentation": "57/57PASS",
+    "previousLocaleLabelAndTemplateContracts": "2/2PASS",
+    "opaqueInvitationMapping": "18/18PASS",
+    "realGenerator": "Both frozen current-main and merged-candidate full CLI runs PASS in independent scratch roots",
+    "completeGeneratedInventory": {
+      "reference": 1485,
+      "candidate": 1485,
+      "missing": 0,
+      "unexpected": 0,
+      "fullParsedModelsIdentical": 1407,
+      "reviewedIntentionalControllerTextChanges": 78,
+      "controllerReview": "Every mismatch is exactly one inline W4 controller matching its exact frozen source template. All remaining DOM/text/styles/locale data identical in every file. This is not a claim that all1485complete models are identical."
+    },
+    "actualChrome": "6route/media+2preference+4redirect casesPASS;20captures;responsive media/copy/watermark geometry and native video playback checked"
+  },
+  "retainedAttempts": [
+    "First incoming-source proof rejected the intentional title-port correction before completing;distinct full proof now verifies all166files with that exact4line exception",
+    "Initial scratch prep rejected CRLF font-license bytes;partial scratch retained;new scratch roots copy exact frozen blobs when asset bytes differ and hard-link only byte-identical read-only assets",
+    "Complete generated model comparison initially reports78differences and remains retained;complete review traces all78to the exact independent W4 source controllers",
+    "First difference-review helper guessed a separate API template;the real generator uses the shared wifigate-link template for both routes. Corrected distinct review verifies all78files."
+  ],
+  "status": "PASS_RECORDED_CURRENT_MAIN_INTEGRATION_PARITY_SCOPE_REMAINING_IP_AND_FINAL_ACCEPTANCE_OPEN",
+  "limits": [
+    "No final website attribution/ownership closure",
+    "Remaining W1/W2/W3source and W5final generated delivery remain open",
+    "No website publication or production acceptance",
+    "Physical native invitation/account acceptance remains separate"
+  ]
+}
