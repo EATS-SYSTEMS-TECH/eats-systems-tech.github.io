@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "area": "W3_NICHE_LABELS",
+  "base": "6df2c2468a85901dbcef7e0915cf266bcb87598e",
+  "specificationCommit": "4e27b770c",
+  "deletionCommit": "29f8e6258",
+  "sourceCommit": "f7a11d5b7e81270526c3eb1fb8830a732f8cb03f",
+  "scope": ["scripts/niche-content.mjs"],
+  "validation": {
+    "baselineAndReconstruction": "Actual complete module export SHA256,39locale keys/order,156strings,four-field order,ordinary record prototypes and mutability unchanged",
+    "contentValidation": "All39published locales pass the existing niche content validator",
+    "attribution": "Complete1path;raw lines/blobs0 both authors;no exceptions",
+    "carryover": "0unallowed;0allowed;raw report retained",
+    "limits": "No new translations claimed;existing short UI labels retained as compatibility facts. Full generated pages,templates,styles and builder acceptance remain OPEN."
+  },
+  "status": "IMPLEMENTED_COMPLETE_LABEL_MODEL_CONTRACT_PASS"
+}
