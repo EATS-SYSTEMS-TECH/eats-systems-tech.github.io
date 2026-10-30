@@ -1,0 +1,340 @@
+{
+  "en": {
+    "eyebrow": "Legal",
+    "pricing": {
+      "title": "Talk to us about price and installation",
+      "text": "Message our team on WhatsApp for help choosing a suitable product, planning installation, and deciding what to do next.",
+      "button": "Open WhatsApp"
+    },
+    "back": {
+      "title": "Explore WIFIGATE",
+      "text": "Visit the homepage for product features, use cases, guides, and ways to reach our team.",
+      "button": "Go to homepage"
+    }
+  },
+  "sv": {
+    "eyebrow": "Juridiskt",
+    "pricing": {
+      "title": "Prata med oss om pris och installation",
+      "text": "Kontakta vårt team på WhatsApp för hjälp att välja en lämplig produkt, planera installationen och komma vidare.",
+      "button": "Öppna WhatsApp"
+    },
+    "back": {
+      "title": "Upptäck WIFIGATE",
+      "text": "På startsidan hittar du produktfunktioner, användningsområden, guider och sätt att kontakta vårt team.",
+      "button": "Gå till startsidan"
+    }
+  },
+  "he": {
+    "eyebrow": "משפטי",
+    "pricing": {
+      "title": "נדבר על המחיר ועל ההתקנה",
+      "text": "פנו לצוות שלנו ב־WhatsApp לקבלת עזרה בבחירת מוצר מתאים, בתכנון ההתקנה ובהחלטה על הצעד הבא.",
+      "button": "פתחו WhatsApp"
+    },
+    "back": {
+      "title": "גלו את WIFIGATE",
+      "text": "בעמוד הבית תמצאו את תכונות המוצר, אפשרויות השימוש, המדריכים והדרכים ליצור קשר עם הצוות שלנו.",
+      "button": "לעמוד הבית"
+    }
+  },
+  "es": {
+    "eyebrow": "Legal",
+    "pricing": {
+      "title": "Hablemos de precios e instalación",
+      "text": "Contacta con nuestro equipo por WhatsApp para elegir un producto adecuado, planificar la instalación y definir el siguiente paso.",
+      "button": "Abrir WhatsApp"
+    },
+    "back": {
+      "title": "Descubre WIFIGATE",
+      "text": "En la página de inicio encontrarás las funciones del producto, sus usos, las guías y las formas de contactar con nuestro equipo.",
+      "button": "Ir a la página de inicio"
+    }
+  },
+  "pt": {
+    "eyebrow": "Legal",
+    "pricing": {
+      "title": "Vamos falar sobre preço e instalação",
+      "text": "Contacte a nossa equipa pelo WhatsApp para escolher um produto adequado, planear a instalação e definir o próximo passo.",
+      "button": "Abrir WhatsApp"
+    },
+    "back": {
+      "title": "Descubra o WIFIGATE",
+      "text": "Na página inicial encontra as funcionalidades do produto, exemplos de utilização, guias e formas de contactar a nossa equipa.",
+      "button": "Ir para a página inicial"
+    }
+  },
+  "pl": {
+    "eyebrow": "Informacje prawne",
+    "pricing": {
+      "title": "Porozmawiajmy o cenie i instalacji",
+      "text": "Skontaktuj się z naszym zespołem przez WhatsApp, aby dobrać odpowiedni produkt, zaplanować instalację i ustalić kolejny krok.",
+      "button": "Otwórz WhatsApp"
+    },
+    "back": {
+      "title": "Poznaj WIFIGATE",
+      "text": "Na stronie głównej znajdziesz funkcje produktu, przykłady zastosowań, poradniki oraz sposoby kontaktu z naszym zespołem.",
+      "button": "Przejdź do strony głównej"
+    }
+  },
+  "ru": {
+    "eyebrow": "Правовая информация",
+    "pricing": {
+      "title": "Обсудим стоимость и установку",
+      "text": "Свяжитесь с нашей командой в WhatsApp, чтобы выбрать подходящий продукт, спланировать установку и определить дальнейшие действия.",
+      "button": "Открыть WhatsApp"
+    },
+    "back": {
+      "title": "Знакомство с WIFIGATE",
+      "text": "На главной странице вы найдёте возможности продукта, примеры использования, руководства и способы связи с нашей командой.",
+      "button": "Перейти на главную"
+    }
+  },
+  "cs": {
+    "eyebrow": "Právní informace",
+    "pricing": {
+      "title": "Promluvme si o ceně a instalaci",
+      "text": "Kontaktujte náš tým přes WhatsApp. Pomůžeme vám vybrat vhodný produkt, naplánovat instalaci a určit další postup.",
+      "button": "Otevřít WhatsApp"
+    },
+    "back": {
+      "title": "Objevte WIFIGATE",
+      "text": "Na úvodní stránce najdete funkce produktu, příklady využití, průvodce a možnosti kontaktování našeho týmu.",
+      "button": "Přejít na domovskou stránku"
+    }
+  },
+  "ar": {
+    "eyebrow": "قانوني",
+    "pricing": {
+      "title": "لنتحدث عن السعر والتركيب",
+      "text": "تواصل مع فريقنا عبر WhatsApp لمساعدتك في اختيار المنتج المناسب والتخطيط للتركيب وتحديد خطوتك التالية.",
+      "button": "فتح WhatsApp"
+    },
+    "back": {
+      "title": "اكتشف WIFIGATE",
+      "text": "تعرّف من الصفحة الرئيسية على ميزات المنتج واستخداماته وأدلته وطرق التواصل مع فريقنا.",
+      "button": "الانتقال إلى الصفحة الرئيسية"
+    }
+  },
+  "fr": {
+    "eyebrow": "Juridique",
+    "pricing": {
+      "title": "Parlons du prix et de l’installation",
+      "text": "Contactez notre équipe sur WhatsApp pour choisir un produit adapté, préparer l’installation et définir la prochaine étape.",
+      "button": "Ouvrez WhatsApp"
+    },
+    "back": {
+      "title": "Découvrir WIFIGATE",
+      "text": "La page d’accueil présente les fonctions du produit, ses usages, les guides et les moyens de joindre notre équipe.",
+      "button": "Aller à la page d'accueil"
+    }
+  },
+  "de": {
+    "eyebrow": "Legal",
+    "pricing": {
+      "title": "Preise und Installation mit uns besprechen",
+      "text": "Kontaktieren Sie unser Team über WhatsApp. Wir helfen Ihnen bei der Produktauswahl, der Installationsplanung und den nächsten Schritten.",
+      "button": "Öffnen Sie WhatsApp"
+    },
+    "back": {
+      "title": "WIFIGATE entdecken",
+      "text": "Auf der Startseite finden Sie Produktfunktionen, Einsatzmöglichkeiten, Anleitungen und Kontaktwege zu unserem Team.",
+      "button": "Gehen Sie zur Startseite"
+    }
+  },
+  "nl": {
+    "eyebrow": "Legaal",
+    "pricing": {
+      "title": "Laten we prijs en installatie bespreken",
+      "text": "Neem via WhatsApp contact op met ons team voor hulp bij de keuze van een passend product, de installatieplanning en de volgende stap.",
+      "button": "WhatsApp openen"
+    },
+    "back": {
+      "title": "Ontdek WIFIGATE",
+      "text": "Op de startpagina vindt u productfuncties, toepassingen, handleidingen en manieren om ons team te bereiken.",
+      "button": "Ga naar de startpagina"
+    }
+  },
+  "it": {
+    "eyebrow": "Legale",
+    "pricing": {
+      "title": "Parliamo di prezzo e installazione",
+      "text": "Contatta il nostro team su WhatsApp per scegliere un prodotto adatto, pianificare l’installazione e definire il passo successivo.",
+      "button": "Apri WhatsApp"
+    },
+    "back": {
+      "title": "Scopri WIFIGATE",
+      "text": "Nella pagina iniziale trovi le funzionalità del prodotto, gli esempi d’uso, le guide e i modi per contattare il nostro team.",
+      "button": "Vai alla home page"
+    }
+  },
+  "no": {
+    "eyebrow": "Lovlig",
+    "pricing": {
+      "title": "La oss snakke om pris og installasjon",
+      "text": "Kontakt teamet vårt på WhatsApp for hjelp med å velge et egnet produkt, planlegge installasjonen og finne neste steg.",
+      "button": "Åpne WhatsApp"
+    },
+    "back": {
+      "title": "Oppdag WIFIGATE",
+      "text": "På startsiden finner du produktfunksjoner, bruksområder, veiledninger og måter å kontakte teamet vårt på.",
+      "button": "Gå til hjemmesiden"
+    }
+  },
+  "uk": {
+    "eyebrow": "юридичний",
+    "pricing": {
+      "title": "Обговорімо вартість і встановлення",
+      "text": "Зв’яжіться з нашою командою у WhatsApp, щоб вибрати відповідний продукт, спланувати встановлення й визначити подальші дії.",
+      "button": "Відкрийте WhatsApp"
+    },
+    "back": {
+      "title": "Знайомство з WIFIGATE",
+      "text": "На головній сторінці ви знайдете можливості продукту, приклади використання, посібники та способи зв’язку з нашою командою.",
+      "button": "Перейти на головну сторінку"
+    }
+  },
+  "tr": {
+    "eyebrow": "Yasal",
+    "pricing": {
+      "title": "Fiyatı ve kurulumu birlikte konuşalım",
+      "text": "Uygun ürünü seçmek, kurulumu planlamak ve sonraki adımı belirlemek için WhatsApp üzerinden ekibimizle iletişime geçin.",
+      "button": "WhatsApp'ı açın"
+    },
+    "back": {
+      "title": "WIFIGATE’i keşfedin",
+      "text": "Ana sayfada ürün özelliklerini, kullanım alanlarını, kılavuzları ve ekibimize ulaşma yollarını bulabilirsiniz.",
+      "button": "Ana sayfaya git"
+    }
+  },
+  "hi": {
+    "eyebrow": "कानूनी",
+    "pricing": {
+      "title": "कीमत और स्थापना पर हमसे बात करें",
+      "text": "सही उत्पाद चुनने, स्थापना की योजना बनाने और अगला कदम तय करने में मदद के लिए WhatsApp पर हमारी टीम से संपर्क करें।",
+      "button": "व्हाट्सएप खोलें"
+    },
+    "back": {
+      "title": "WIFIGATE के बारे में जानें",
+      "text": "होमपेज पर उत्पाद की विशेषताएँ, उपयोग के उदाहरण, मार्गदर्शिकाएँ और हमारी टीम से संपर्क करने के तरीके देखें।",
+      "button": "मुखपृष्ठ पर जाएँ"
+    }
+  },
+  "bn": {
+    "eyebrow": "আইনি",
+    "pricing": {
+      "title": "দাম ও ইনস্টলেশন নিয়ে আমাদের সঙ্গে কথা বলুন",
+      "text": "উপযুক্ত পণ্য বেছে নিতে, ইনস্টলেশনের পরিকল্পনা করতে এবং পরবর্তী পদক্ষেপ ঠিক করতে WhatsApp-এ আমাদের দলের সঙ্গে যোগাযোগ করুন।",
+      "button": "হোয়াটসঅ্যাপ খুলুন"
+    },
+    "back": {
+      "title": "WIFIGATE সম্পর্কে জানুন",
+      "text": "হোমপেজে পণ্যের বৈশিষ্ট্য, ব্যবহারের উদাহরণ, নির্দেশিকা এবং আমাদের দলের সঙ্গে যোগাযোগের উপায় পাবেন।",
+      "button": "হোমপেজে যান"
+    }
+  },
+  "mr": {
+    "eyebrow": "कायदेशीर",
+    "pricing": {
+      "title": "किंमत आणि स्थापनेबद्दल आमच्याशी बोला",
+      "text": "योग्य उत्पादन निवडण्यासाठी, स्थापनेचे नियोजन करण्यासाठी आणि पुढची पायरी ठरवण्यासाठी WhatsApp वर आमच्या टीमशी संपर्क साधा.",
+      "button": "WhatsApp उघडा"
+    },
+    "back": {
+      "title": "WIFIGATE बद्दल जाणून घ्या",
+      "text": "मुख्यपृष्ठावर उत्पादनाची वैशिष्ट्ये, वापराची उदाहरणे, मार्गदर्शक आणि आमच्या टीमशी संपर्क साधण्याचे मार्ग पाहा.",
+      "button": "मुख्यपृष्ठावर जा"
+    }
+  },
+  "te": {
+    "eyebrow": "చట్టపరమైన",
+    "pricing": {
+      "title": "ధర, ఇన్‌స్టాలేషన్ గురించి మాతో మాట్లాడండి",
+      "text": "తగిన ఉత్పత్తిని ఎంచుకోవడానికి, ఇన్‌స్టాలేషన్‌ను ప్లాన్ చేయడానికి, తదుపరి చర్యను నిర్ణయించడానికి WhatsApp ద్వారా మా బృందాన్ని సంప్రదించండి.",
+      "button": "WhatsApp తెరవండి"
+    },
+    "back": {
+      "title": "WIFIGATE గురించి తెలుసుకోండి",
+      "text": "ఉత్పత్తి ఫీచర్లు, వినియోగ ఉదాహరణలు, మార్గదర్శకాలు, మా బృందాన్ని సంప్రదించే మార్గాల కోసం హోమ్‌పేజీని చూడండి.",
+      "button": "హోమ్‌పేజీకి వెళ్లండి"
+    }
+  },
+  "zh-Hans": {
+    "eyebrow": "法律",
+    "pricing": {
+      "title": "与我们讨论价格和安装",
+      "text": "通过 WhatsApp 联系我们的团队，获取产品选择、安装规划和后续安排方面的帮助。",
+      "button": "打开 WhatsApp"
+    },
+    "back": {
+      "title": "了解 WIFIGATE",
+      "text": "请访问主页，查看产品功能、使用场景、操作指南以及联系我们团队的方式。",
+      "button": "前往主页"
+    }
+  },
+  "zh-Hant": {
+    "eyebrow": "法律",
+    "pricing": {
+      "title": "與我們討論價格和安裝",
+      "text": "透過 WhatsApp 聯絡我們的團隊，取得產品選擇、安裝規劃及後續安排方面的協助。",
+      "button": "打開 WhatsApp"
+    },
+    "back": {
+      "title": "認識 WIFIGATE",
+      "text": "請瀏覽首頁，查看產品功能、使用情境、操作指南，以及聯絡我們團隊的方式。",
+      "button": "前往首頁"
+    }
+  },
+  "ja": {
+    "eyebrow": "法的",
+    "pricing": {
+      "title": "価格や設置についてご相談ください",
+      "text": "製品選び、設置計画、次の手順については、WhatsAppで私たちのチームにご相談ください。",
+      "button": "WhatsAppを開く"
+    },
+    "back": {
+      "title": "WIFIGATEを知る",
+      "text": "ホームページでは、製品の機能、活用例、ガイド、チームへのお問い合わせ方法をご案内しています。",
+      "button": "ホームページへ行く"
+    }
+  },
+  "ko": {
+    "eyebrow": "법적",
+    "pricing": {
+      "title": "가격과 설치에 대해 상담하세요",
+      "text": "적합한 제품 선택, 설치 계획, 다음 단계에 도움이 필요하면 WhatsApp으로 저희 팀에 문의하세요.",
+      "button": "WhatsApp 열기"
+    },
+    "back": {
+      "title": "WIFIGATE 알아보기",
+      "text": "홈페이지에서 제품 기능, 활용 사례, 안내 자료와 저희 팀에 연락하는 방법을 확인하세요.",
+      "button": "홈페이지로 이동"
+    }
+  },
+  "da": {
+    "eyebrow": "Juridisk",
+    "pricing": {
+      "title": "Lad os tale om pris og installation",
+      "text": "Kontakt vores team på WhatsApp for at få hjælp til at vælge et passende produkt, planlægge installationen og finde næste skridt.",
+      "button": "Åbn WhatsApp"
+    },
+    "back": {
+      "title": "Oplev WIFIGATE",
+      "text": "På forsiden finder du produktfunktioner, anvendelsesmuligheder, vejledninger og måder at kontakte vores team på.",
+      "button": "Gå til hjemmesiden"
+    }
+  },
+  "hu": {
+    "eyebrow": "Jogi",
+    "pricing": {
+      "title": "Beszéljünk az árról és a telepítésről",
+      "text": "Keresse csapatunkat WhatsAppon, ha segítséget szeretne a megfelelő termék kiválasztásához, a telepítés megtervezéséhez és a következő lépéshez.",
+      "button": "Nyissa meg a WhatsApp-ot"
+    },
+    "back": {
+      "title": "Ismerje meg a WIFIGATE-et",
+      "text": "A kezdőlapon megtalálja a termék funkcióit, felhasználási példáit, az útmutatókat és csapatunk elérhetőségeit.",
+      "button": "Ugrás a kezdőlapra"
+    }
+  }
+}
