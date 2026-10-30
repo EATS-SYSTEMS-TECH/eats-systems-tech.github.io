@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-30T05:26:07.683Z",
-  "ref": "b343652c35c890ff7dafcac778d120be9653956f",
+  "createdAt": "2026-10-30T06:46:28.906Z",
+  "ref": "7c7349f90de4b5147ad149471714d21256f8ce59",
   "scope": "selected paths",
   "paths": [
     "css",
@@ -9,18 +9,18 @@
     "scripts",
     "templates"
   ],
-  "trackedFiles": 2333,
+  "trackedFiles": 2335,
   "scannedFiles": 563,
   "complete": true,
   "summary": {
     "eiloncohen": {
-      "rawLines": 578,
-      "lines": 578,
-      "rawFiles": 7,
-      "files": 7,
+      "rawLines": 576,
+      "lines": 576,
+      "rawFiles": 6,
+      "files": 6,
       "exceptedFiles": 0,
-      "rawBlobs": 7,
-      "blobs": 7,
+      "rawBlobs": 6,
+      "blobs": 6,
       "binaryBlobs": 0
     },
     "OdeliaTorjman": {
@@ -43,10 +43,6 @@
     {
       "path": "js/accessibility-copy.js",
       "eilonLines": 14
-    },
-    {
-      "path": "scripts/hero-video-browser.test.mjs",
-      "eilonLines": 2
     },
     {
       "path": "scripts/legal/locale-cta.json",
@@ -74,9 +70,9 @@
     }
   ],
   "limits": [
-    "Frozenb343652c35 scope563files under css/js/scripts/templates;not entire website/generated/assets/backend",
-    "578Eilon lines remain in7files;0Odelia in this selected scope",
-    "Whole builder independent rewrite remains OPEN despite zero Git attribution after the narrow fix;do not count its74line metric disappearance as an independent delivery",
+    "Frozen7c7349f90 selected563files under css/js/scripts/templates;not whole website/assets/backend",
+    "576Eilon lines remain in6files;0Odelia in selected scope",
+    "Whole builder independent rewrite remains OPEN despite0Git attribution after the narrow script-data fix",
     "No legal ownership or final acceptance inferred",
     "Primary/main/hosting untouched"
   ]
