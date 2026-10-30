@@ -45,3 +45,14 @@ Run verify-site, preserve all other tracked blobs/modes/config/assets and audit
 every changed source/test/spec/fact/manifest path. Keep primary/main/hosting
 untouched. Source attribution does not establish legal ownership or release
 approval; unchanged short action labels remain fixed product facts.
+
+The actual 375px Ukrainian baseline exposes an existing 298px scroll width in
+a 293px next-step section: the unchanged 255.55px homepage button is nowrap and
+overruns its card. The new 320px regression also exposes Spanish overflow.
+Retain the failing original/candidate browser evidence and red regression. Fix
+only the legal CTA button fit in css/legal.css: bound width to its card, allow
+normal line wrapping and emergency word breaks, and center multiline labels.
+Preserve every native label, link, color, font and keyboard route. A real Chrome
+contract covers all 26 locale actions at 320px, 375px and 1440px (78 cases).
+The complete generated HTML boundary remains the four approved text nodes only;
+the additional stylesheet change has its own explicit source guard and audit.

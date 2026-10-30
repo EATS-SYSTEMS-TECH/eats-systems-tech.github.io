@@ -161,6 +161,15 @@
   line-height: 1.7;
 }
 
+/* Keep long translated actions inside their card while preserving every word
+   and the existing link destination, button colors and keyboard behavior. */
+.legal-cta .btn {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .legal-main {
     padding: 2.5rem 0 4rem;
