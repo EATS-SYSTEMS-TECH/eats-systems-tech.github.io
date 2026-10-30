@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "at": "2026-10-30T10:47:33.157807+00:00",
-  "area": "W3",
+  "area": "W1",
   "sourceCommit": "834ff528e14260d4f4fc9c55aa87adcbc8dbfed5",
   "baseCommit": "91e55aac6911d531f3dec82edca04607446bd02c",
   "status": "PASS_WHOLE_SHARED_STYLESHEET_RECONSTRUCTION_FROZEN_BROWSER_AND_COMPLETE_FRONTEND_SOURCE",
@@ -87,7 +87,9 @@
         "Git provenance is not a legal ownership determination;history is retained."
       ],
       "productionDelivery": false
-    }
+    },
+    "actualBeforeAfterScreenshotCases": 8,
+    "actualBeforeAfterScreenshots": 16
   },
   "measurement": {
     "implementationSha256": "12778a41f066758f6131c434abad8563241250f61c0fbd21a18fba7d83053778",
@@ -112,5 +114,151 @@
     "Original task hardware/account/camera/remoteCI/legal acceptance remains independently open."
   ],
   "reviewUrl": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/20",
-  "productionDelivery": false
+  "productionDelivery": false,
+  "screenshots": {
+    "referenceSource": "3b28cfe96fffd69d5101eb3012e1a4761746f02e",
+    "candidateSource": "834ff528e14260d4f4fc9c55aa87adcbc8dbfed5",
+    "widths": [
+      375,
+      1440
+    ],
+    "locales": [
+      "en",
+      "he"
+    ],
+    "actualLocalFooterImagesDecoded": true,
+    "layoutFactsExact": true,
+    "visualReview": "Actual375px English top and1440px Hebrew footer reference/candidate observed;remaining cases retained for review",
+    "files": [
+      {
+        "label": "reference",
+        "locale": "en",
+        "width": 375,
+        "role": "top",
+        "file": "site-shared-style-reference-en-375-attempt2-top.png",
+        "sha256": "960a47f2341f519a70eddd1fe89b4fcae829c758ba3e768a06703df25dd8c288"
+      },
+      {
+        "label": "reference",
+        "locale": "en",
+        "width": 375,
+        "role": "footer",
+        "file": "site-shared-style-reference-en-375-attempt2-footer.png",
+        "sha256": "feea93b13796997e5df0c3a9d7bad1b6895440dee9577c6f90ec9954a2d95c3f"
+      },
+      {
+        "label": "reference",
+        "locale": "en",
+        "width": 1440,
+        "role": "top",
+        "file": "site-shared-style-reference-en-1440-attempt2-top.png",
+        "sha256": "0ce8dbfea7987128b5fb3e5a0527e1ac962f61ece9a158aa6f974c54554ee033"
+      },
+      {
+        "label": "reference",
+        "locale": "en",
+        "width": 1440,
+        "role": "footer",
+        "file": "site-shared-style-reference-en-1440-attempt2-footer.png",
+        "sha256": "96929cc89715edd9dc46aea4e006c4d5445cb8f0d28c97b5790a686c30d7811c"
+      },
+      {
+        "label": "reference",
+        "locale": "he",
+        "width": 375,
+        "role": "top",
+        "file": "site-shared-style-reference-he-375-attempt2-top.png",
+        "sha256": "09931db78538eb8559ae338e52e45ce73a97a07eceaf78cf5e4d88e7a4a5cee0"
+      },
+      {
+        "label": "reference",
+        "locale": "he",
+        "width": 375,
+        "role": "footer",
+        "file": "site-shared-style-reference-he-375-attempt2-footer.png",
+        "sha256": "ace877c46d514f012d4952464d56251785184a8dad28be3e4f909a8dd6c2bd89"
+      },
+      {
+        "label": "reference",
+        "locale": "he",
+        "width": 1440,
+        "role": "top",
+        "file": "site-shared-style-reference-he-1440-attempt2-top.png",
+        "sha256": "7d77292b4ecaafd51231b0aa76c1015fd1a8a5a7ece84bf7c16859638c369009"
+      },
+      {
+        "label": "reference",
+        "locale": "he",
+        "width": 1440,
+        "role": "footer",
+        "file": "site-shared-style-reference-he-1440-attempt2-footer.png",
+        "sha256": "401ef4124698840138f1d91f8da90f990aac37d8d9fb554e97709e8ba33f1c99"
+      },
+      {
+        "label": "candidate",
+        "locale": "en",
+        "width": 375,
+        "role": "top",
+        "file": "site-shared-style-candidate-en-375-attempt2-top.png",
+        "sha256": "d35e64e77325f755d5d706445ea94aef11683f785222280aa3e327044139ee2c"
+      },
+      {
+        "label": "candidate",
+        "locale": "en",
+        "width": 375,
+        "role": "footer",
+        "file": "site-shared-style-candidate-en-375-attempt2-footer.png",
+        "sha256": "3f0b33a0825f0b6da0223a7e3b79597f900791d230c550cfcfcd9de7b128d16b"
+      },
+      {
+        "label": "candidate",
+        "locale": "en",
+        "width": 1440,
+        "role": "top",
+        "file": "site-shared-style-candidate-en-1440-attempt2-top.png",
+        "sha256": "0ce8dbfea7987128b5fb3e5a0527e1ac962f61ece9a158aa6f974c54554ee033"
+      },
+      {
+        "label": "candidate",
+        "locale": "en",
+        "width": 1440,
+        "role": "footer",
+        "file": "site-shared-style-candidate-en-1440-attempt2-footer.png",
+        "sha256": "96929cc89715edd9dc46aea4e006c4d5445cb8f0d28c97b5790a686c30d7811c"
+      },
+      {
+        "label": "candidate",
+        "locale": "he",
+        "width": 375,
+        "role": "top",
+        "file": "site-shared-style-candidate-he-375-attempt2-top.png",
+        "sha256": "09931db78538eb8559ae338e52e45ce73a97a07eceaf78cf5e4d88e7a4a5cee0"
+      },
+      {
+        "label": "candidate",
+        "locale": "he",
+        "width": 375,
+        "role": "footer",
+        "file": "site-shared-style-candidate-he-375-attempt2-footer.png",
+        "sha256": "ace877c46d514f012d4952464d56251785184a8dad28be3e4f909a8dd6c2bd89"
+      },
+      {
+        "label": "candidate",
+        "locale": "he",
+        "width": 1440,
+        "role": "top",
+        "file": "site-shared-style-candidate-he-1440-attempt2-top.png",
+        "sha256": "7d77292b4ecaafd51231b0aa76c1015fd1a8a5a7ece84bf7c16859638c369009"
+      },
+      {
+        "label": "candidate",
+        "locale": "he",
+        "width": 1440,
+        "role": "footer",
+        "file": "site-shared-style-candidate-he-1440-attempt2-footer.png",
+        "sha256": "401ef4124698840138f1d91f8da90f990aac37d8d9fb554e97709e8ba33f1c99"
+      }
+    ],
+    "retainedAttempt": "Initial16 screenshots and layout facts passed;follow-up explicitly waits for visible lazy footer image decoding before the final16screenshots. Both attempts retained. No pixel equality is claimed for media/async painting."
+  }
 }
