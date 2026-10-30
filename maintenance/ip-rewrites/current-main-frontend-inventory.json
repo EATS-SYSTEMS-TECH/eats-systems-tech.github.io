@@ -35,7 +35,7 @@
     }
   },
   "method": "git blame --no-textconv --line-porcelain -w -M -C; exact blob states from matching author commits in all available refs and requested ref ancestry; external diff disabled",
-  "status": "COMPLETE566_SELECTED_FRONTEND_INDEPENDENT_BUILDER_PASS_REMAINING6FILES_OPEN",
+  "status": "COMPLETE566_FROZEN_CENSUS_PLUS_VERIFIED_TWO_FRAGMENT_FOLLOWUP",
   "remaining": [
     {
       "path": "css/styles.css",
@@ -78,5 +78,46 @@
     "576Eilonlines remain in6files,0Odelia in selectedscope;complete0errors",
     "Entirebuilder independentreconstructionPASS;77contracts/1485fullmodels/verify-site/39homepages/7sourcepaths0",
     "No legal ownership/final acceptance inferred;primary/main/hosting untouched"
-  ]
+  ],
+  "scopedFollowups": [
+    {
+      "source": "106d5fc6a026e8d9d2eea32b395a101c7bcb5486",
+      "paths": [
+        "templates/guest-invites-api.template.html",
+        "templates/partials/site-footer.template.html"
+      ],
+      "sourceReportFiles": 6,
+      "complete": true,
+      "zero": true,
+      "review": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/16",
+      "evidence": "maintenance/ip-rewrites/shared-template-fragments.json",
+      "unchangedOtherTrackedFiles": 2338
+    }
+  ],
+  "derivedRemainingAfterScopedFollowups": {
+    "basisRef": "11abefff2d343d310cd8a26ba0625116d2a2676a",
+    "currentSource": "106d5fc6a026e8d9d2eea32b395a101c7bcb5486",
+    "eilonLines": 564,
+    "eilonFiles": 4,
+    "odeliaLines": 0,
+    "remaining": [
+      {
+        "path": "css/styles.css",
+        "eilonLines": 347
+      },
+      {
+        "path": "js/accessibility-copy.js",
+        "eilonLines": 14
+      },
+      {
+        "path": "scripts/legal/locale-cta.json",
+        "eilonLines": 186
+      },
+      {
+        "path": "templates/index.template.html",
+        "eilonLines": 17
+      }
+    ],
+    "method": "Frozen complete566file census plus6path completezero report and2338unchangedtrackedblobs/modes;no new whole-census claim"
+  }
 }
