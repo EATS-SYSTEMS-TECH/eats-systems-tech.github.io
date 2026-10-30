@@ -1,0 +1,594 @@
+<!DOCTYPE html><html lang="pt" dir="ltr"><head>
+    <meta charset="utf-8">
+    <title>Convite do WiFiGate</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+        :root {
+            --bg: #edf2f8;
+            --panel: #ffffff;
+            --text: #152238;
+            --muted: #526176;
+            --accent: #0b63ff;
+            --accent-strong: #2563eb;
+            --border: #d9e2ee;
+            --shadow: 0 18px 48px rgba(25, 50, 90, 0.10);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            min-height: 100dvh;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            display: grid;
+            place-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            width: min(100%, 400px);
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            padding: 32px 28px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 84px;
+            height: 84px;
+            border-radius: 24px;
+            display: block;
+            margin: 0 auto 24px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(24px, 6vw, 30px);
+            line-height: 1.18;
+        }
+
+        p {
+            margin: 12px 0 0;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.55;
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            margin: 28px auto 0;
+            border: 3px solid #dce7f8;
+            border-top-color: var(--accent-strong);
+            border-radius: 50%;
+            animation: spin 850ms linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .spinner { animation: none; }
+        }
+
+        [hidden] { display: none !important; }
+
+        .demo-banner {
+            margin: 20px 0 0;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .demo-phone {
+            max-width: 300px;
+            margin: 20px auto 0;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            background: #f8fafc;
+        }
+
+        .demo-tile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 6px 16px rgba(25, 50, 90, 0.08);
+            text-align: start;
+        }
+
+        .demo-icon {
+            display: grid;
+            flex: none;
+            place-items: center;
+            width: 52px;
+            height: 52px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #f8fafc;
+        }
+
+        .demo-icon img {
+            width: 36px;
+            height: 36px;
+        }
+
+        .demo-tile div {
+            min-width: 0;
+        }
+
+        .demo-name {
+            margin: 0;
+            color: var(--text);
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.35;
+            overflow-wrap: anywhere;
+        }
+
+        .demo-guest {
+            display: inline-block;
+            margin-top: 4px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+        }
+
+        .demo-window {
+            margin: 12px 0 0;
+            color: #2563eb;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .demo-when {
+            white-space: nowrap;
+        }
+
+        .actions {
+            display: grid;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .button,
+        .secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 52px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+        }
+
+        .button {
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            color: #ffffff;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.20);
+        }
+
+        .secondary {
+            border: 1px solid var(--border);
+            color: var(--text);
+            background: #ffffff;
+        }
+
+        .button:hover,
+        .secondary:hover {
+            transform: translateY(-1px);
+        }
+
+        .button:focus-visible,
+        .secondary:focus-visible {
+            outline: 3px solid #173d91;
+            outline-offset: 3px;
+        }
+
+        .feedback {
+            min-height: 24px;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        .feedback:empty { display: none; }
+
+        .feedback.error { color: #a32626; }
+
+        @media (max-width: 360px) {
+            body { padding: 14px; }
+            .card { padding: 28px 20px; }
+        }
+    </style>
+    <script id="wifigate-link-copy" type="application/json">{"headingFallback":"Abrir no WiFiGate","headingMissing":"Abrir no WiFiGate","statusMissing":"Este link de convite não inclui os dados de acesso. Peça ao remetente para o partilhar novamente.","statusFallback":"Se o WiFiGate não abriu automaticamente, use o botão abaixo.","copyButton":"Copiar link da aplicação","copiedButton":"Link da aplicação copiado","copyError":"Couldn't copy link. Please try again."}</script>
+    <script>
+        // Copy follows the generated locale dictionary; damaged metadata still has a complete English fallback.
+        const WIFIGATE_LINK_DEFAULT_COPY = {
+            headingFallback: "Continue in WiFiGate",
+            headingMissing: "Unable to open WiFiGate",
+            statusMissing: "This invitation link is missing the access details. Ask the sender to share it again.",
+            statusFallback: "Didn't open automatically? Tap below to try again.",
+            copyButton: "Copy link",
+            copiedButton: "Link copied!",
+            copyError: "Couldn't copy link. Please try again."
+        };
+
+        function getUtilityPageCopy() {
+            try {
+                const dictionary = document.getElementById("wifigate-link-copy");
+                return Object.assign({}, WIFIGATE_LINK_DEFAULT_COPY, JSON.parse(dictionary?.textContent || "{}"));
+            } catch {
+                return { ...WIFIGATE_LINK_DEFAULT_COPY };
+            }
+        }
+
+        // Alias precedence ignores empty values without altering the original query entries.
+        function firstNonEmpty(...candidates) {
+            const chosen = candidates.find(candidate => typeof candidate === "string" && candidate.trim().length > 0);
+            return chosen === undefined ? "" : chosen.trim();
+        }
+
+        // Keep opaque invitation entries intact; only missing routing aliases are added to a private query copy.
+        function buildDeepLink() {
+            const incoming = new URL(window.location.href);
+            const query = new URLSearchParams(incoming.search);
+            if (isDemoLink(query)) return "";
+            const explicit = firstNonEmpty(query.get("link"));
+            if (explicit) return explicit;
+
+            // An undecodable path component cannot strand the page or invalidate a valid query-selected identity.
+            const segments = incoming.pathname.split("/").filter(Boolean).map(component => {
+                try { return decodeURIComponent(component); } catch { return ""; }
+            });
+            const gateIdentity = firstNonEmpty(query.get("i"), query.get("id"), query.get("chip"));
+            const routes = [
+                { kind: "dual-control", alias: "dcid", identity: firstNonEmpty(query.get("dcid"), query.get("dualControlId"), segments[0] === "dual-control" ? segments[1] : "") },
+                { kind: "group", alias: "gid", identity: firstNonEmpty(query.get("gid"), query.get("groupId"), segments[0] === "group" ? segments[1] : "") },
+                { kind: "gate", alias: null, identity: gateIdentity || (query.get("ep") ? "invite" : "") }
+            ];
+            for (const route of routes) {
+                if (!route.identity) continue;
+                query.delete("link");
+                if (route.alias && !query.has(route.alias)) query.append(route.alias, route.identity);
+                if (!query.has("id")) query.append("id", route.identity);
+                const suffix = query.toString();
+                return "wifigate://" + route.kind + "/" + encodeURIComponent(route.identity) + (suffix ? "?" + suffix : "");
+            }
+            return "";
+        }
+
+        // The fallback exposes exactly the same URI to opening and clipboard actions, with localized live feedback.
+        function revealFallback(deepLink) {
+            const copy = getUtilityPageCopy();
+            const node = id => document.getElementById(id);
+            node("page-title").textContent = deepLink ? copy.headingFallback : copy.headingMissing;
+            node("status").textContent = deepLink ? copy.statusFallback : copy.statusMissing;
+            node("spinner").hidden = true;
+            const opening = node("open-app"), copying = node("copy-link"), feedback = node("feedback");
+            opening.hidden = copying.hidden = !deepLink;
+            opening.href = deepLink || "#";
+            copying.textContent = copy.copyButton;
+            copying.onclick = async () => {
+                if (!deepLink) return;
+                feedback.textContent = "";
+                feedback.classList.remove("error");
+                try {
+                    await navigator.clipboard.writeText(deepLink);
+                    feedback.textContent = copy.copiedButton;
+                } catch {
+                    feedback.textContent = copy.copyError;
+                    feedback.classList.add("error");
+                }
+            };
+        }
+
+        // Opening is attempted once; returning from the app reveals fallback without another navigation attempt.
+        function openImmediately(deepLink) {
+            if (!deepLink) { revealFallback(""); return; }
+            window.setTimeout(() => {
+                const revealWhenVisible = () => {
+                    if (document.visibilityState !== "visible") return;
+                    document.removeEventListener("visibilitychange", revealWhenVisible);
+                    revealFallback(deepLink);
+                };
+                if (document.visibilityState === "visible") revealWhenVisible();
+                else document.addEventListener("visibilitychange", revealWhenVisible);
+            }, 900);
+            window.setTimeout(() => window.location.replace(deepLink), 40);
+        }
+
+
+        // A demo guest link from the WIFIGATE Host examples (ep=v1.demo_…)
+        // carries only which example and the stay window. It shows what a
+        // guest would see and never opens the app.
+        const WIFIGATE_DEMO_PREFIX = "v1.demo_";
+        const WIFIGATE_DEMO_SYSTEMS = {
+            room: { name: "Example WIFIGATE Room 212 🥂🍾", icon: "gate-bed-outline" },
+            dual: { name: "Example WIFIGATE Dual Control 212 🥂🍾", icon: "dual-control-barrier-gate-small" },
+            group: { name: "Example WIFIGATE Group 212 🥂🍾", icon: "group-hosting" }
+        };
+        const WIFIGATE_DEMO_COPY = {
+            en: {
+                title: "Example guest link",
+                banner: "Example: this link doesn't open a gate.",
+                guest: "GUEST",
+                incomplete: "This example link is incomplete.",
+                more: "About WIFIGATE"
+            },
+            he: {
+                title: "קישור לדוגמה לאורח",
+                banner: "דוגמה: הקישור הזה לא פותח שער.",
+                guest: "אורח",
+                incomplete: "קישור הדוגמה הזה לא שלם.",
+                more: "על WIFIGATE"
+            }
+        };
+
+        function isDemoLink(params) {
+            return params.getAll("ep").some(function (value) {
+                return value.indexOf(WIFIGATE_DEMO_PREFIX) === 0;
+            }) || params.getAll("link").some(function (value) {
+                return value.indexOf(WIFIGATE_DEMO_PREFIX) !== -1;
+            });
+        }
+
+        function readDemoToken(ep) {
+            try {
+                const encoded = ep.slice(WIFIGATE_DEMO_PREFIX.length).replace(/-/g, "+").replace(/_/g, "/");
+                const value = JSON.parse(atob(encoded + "===".slice((encoded.length + 3) % 4)));
+                const keys = Object.keys(value || {}).sort().join(",");
+                if (keys !== "k,se,ss" || !Object.prototype.hasOwnProperty.call(WIFIGATE_DEMO_SYSTEMS, value.k) ||
+                    !Number.isSafeInteger(value.ss) || !Number.isSafeInteger(value.se) || value.se <= value.ss) {
+                    return null;
+                }
+                return value;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function demoElement(tag, className, text) {
+            const element = document.createElement(tag);
+            if (className) {
+                element.className = className;
+            }
+            if (text !== undefined) {
+                element.textContent = text;
+            }
+            return element;
+        }
+
+        function showDemoPreview() {
+            const params = new URL(window.location.href).searchParams;
+            if (!isDemoLink(params)) {
+                return false;
+            }
+            const pageLanguage = (document.documentElement.lang || "en").slice(0, 2);
+            const language = pageLanguage === "he" ||
+                (pageLanguage === "en" && (navigator.language || "").slice(0, 2) === "he") ? "he" : "en";
+            const copy = WIFIGATE_DEMO_COPY[language];
+            const locale = language === "he" ? "he-IL" : "en-US";
+            const ep = params.getAll("ep").filter(function (value) {
+                return value.indexOf(WIFIGATE_DEMO_PREFIX) === 0;
+            })[0] || "";
+            const demo = readDemoToken(ep);
+            const main = document.getElementById("main-content");
+            const logo = main.querySelector(".logo");
+            const title = demoElement("h1", "", copy.title);
+            title.id = "page-title";
+            const banner = demoElement("p", "demo-banner", copy.banner);
+            banner.id = "demo-banner";
+            const parts = [title, banner];
+            if (demo) {
+                const system = WIFIGATE_DEMO_SYSTEMS[demo.k];
+                const format = new Intl.DateTimeFormat(locale, {
+                    weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"
+                });
+                const phone = demoElement("div", "demo-phone");
+                const tile = demoElement("div", "demo-tile");
+                const icon = demoElement("span", "demo-icon");
+                const image = document.createElement("img");
+                image.alt = "";
+                image.src = (logo ? logo.getAttribute("src") : "/logo-1024.png")
+                    .replace("logo-1024.png", "assets/host-icons/" + system.icon + ".svg");
+                icon.append(image);
+                const text = demoElement("div");
+                const name = demoElement("p", "demo-name");
+                name.append(demoElement("bdi", "", system.name));
+                text.append(name, demoElement("span", "demo-guest", copy.guest));
+                tile.append(icon, text);
+                // Each end of the stay stays on one line; a narrow screen breaks at the arrow.
+                const stay = demoElement("p", "demo-window");
+                stay.append(
+                    demoElement("span", "demo-when", format.format(new Date(demo.ss))),
+                    language === "he" ? " ← " : " → ",
+                    demoElement("span", "demo-when", format.format(new Date(demo.se))));
+                stay.id = "demo-window";
+                phone.append(tile, stay);
+                parts.push(phone);
+            } else {
+                const status = demoElement("p", "", copy.incomplete);
+                status.id = "status";
+                parts.push(status);
+            }
+            const more = demoElement("a", "secondary", copy.more);
+            more.href = language === "he" ? "/he/" : "/";
+            const actions = demoElement("div", "actions");
+            actions.append(more);
+            parts.push(actions);
+            document.title = copy.title;
+            document.documentElement.lang = language;
+            document.documentElement.dir = language === "he" ? "rtl" : "ltr";
+            main.dataset.demo = "true";
+            main.replaceChildren.apply(main, (logo ? [logo] : []).concat(parts));
+            return true;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            if (showDemoPreview()) {
+                return;
+            }
+            openImmediately(buildDeepLink());
+        });
+    </script>
+
+  <meta name="description" content="Abra o seu convite do WiFiGate em segurança na aplicação.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="googlebot" content="noindex, follow">
+  <link rel="canonical" href="https://wifigate.io/pt/wifigate-link/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="WIFIGATE">
+  <meta property="og:locale" content="pt_PT">
+  <meta property="og:url" content="https://wifigate.io/pt/wifigate-link/">
+  <meta property="og:title" content="Convite do WiFiGate">
+  <meta property="og:description" content="Abra o seu convite do WiFiGate em segurança na aplicação.">
+  <meta property="og:image" content="https://wifigate.io/assets/img/wifigate-logo-share.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="WIFIGATE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Convite do WiFiGate">
+  <meta name="twitter:description" content="Abra o seu convite do WiFiGate em segurança na aplicação.">
+  <meta name="twitter:image" content="https://wifigate.io/assets/img/wifigate-logo-share.png">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://wifigate.io/#organization",
+      "name": "EATS SYSTEMS TECH",
+      "url": "https://wifigate.io",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://wifigate.io/logo-1024.png",
+        "width": 1024,
+        "height": 1024
+      },
+      "email": "support@wifigate.io",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IL"
+      },
+      "sameAs": [
+        "https://www.facebook.com/WIFIGATE.io",
+        "https://www.youtube.com/@WIFIGATE",
+        "https://www.linkedin.com/company/wifigate/",
+        "https://www.instagram.com/wifigate.io/"
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "support@wifigate.io",
+          "url": "https://wa.me/message/NZWNMX6V2XVHJ1",
+          "availableLanguage": [
+            "English",
+            "Hebrew"
+          ]
+        }
+      ],
+      "brand": {
+        "@id": "https://wifigate.io/#brand"
+      }
+    },
+    {
+      "@type": "Brand",
+      "@id": "https://wifigate.io/#brand",
+      "name": "WIFIGATE",
+      "alternateName": [
+        "WiFi Gate",
+        "Wi-Fi Gate",
+        "Wifigate",
+        "WiFiGate"
+      ],
+      "url": "https://wifigate.io",
+      "logo": "https://wifigate.io/logo-1024.png"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://wifigate.io/#website",
+      "name": "WIFIGATE",
+      "alternateName": [
+        "WiFi Gate",
+        "Wi-Fi Gate",
+        "Wifigate",
+        "WiFiGate"
+      ],
+      "url": "https://wifigate.io/",
+      "inLanguage": "pt",
+      "publisher": {
+        "@id": "https://wifigate.io/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://wifigate.io/pt/wifigate-link/#webpage",
+      "url": "https://wifigate.io/pt/wifigate-link/",
+      "name": "Convite do WiFiGate",
+      "description": "Abra o seu convite do WiFiGate em segurança na aplicação.",
+      "inLanguage": "pt",
+      "isPartOf": {
+        "@id": "https://wifigate.io/#website"
+      },
+      "publisher": {
+        "@id": "https://wifigate.io/#organization"
+      },
+      "about": {
+        "@id": "https://wifigate.io/#brand"
+      }
+    }
+  ]
+}
+  </script><link rel="stylesheet" href="../../css/cookie-consent.css?v=20261016a"></head>
+
+<body>
+    <main class="card" id="main-content">
+        <img class="logo" src="../../logo-1024.png" alt="WiFiGate">
+        <h1 id="page-title">A abrir o WiFiGate</h1>
+        <p id="status">Estamos a tentar abrir o seu convite na aplicação.</p>
+        <div id="spinner" class="spinner" aria-hidden="true"></div>
+        <div class="actions">
+            <a id="open-app" class="button" href="#" hidden="">Abrir no WiFiGate</a>
+            <button id="copy-link" class="secondary" type="button" hidden="">Copiar link da aplicação</button>
+        </div>
+        <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+    </main>
+
+
+
+<script>window.WIFIGATE_COOKIE_COPY = {"pt":{"title":"Preferências de privacidade e cookies","description":"Utilizamos cookies necessários para o funcionamento do site. Com o seu consentimento, utilizamos também o Google Analytics para compreender a utilização do site e melhorá-lo. Pode alterar a sua escolha a qualquer momento.","privacy":"Política de privacidade","cookies":"Política de cookies","settings":"Definições","accept":"Aceitar tudo","reject":"Rejeitar tudo","save":"Guardar seleção","necessary":"Cookies necessários","necessaryHelp":"Necessários para o funcionamento do site e para guardar as suas preferências. Sempre ativos.","alwaysOn":"Sempre ativo","analytics":"Cookies analíticos","analyticsHelp":"O Google Analytics só mede a utilização do site se o permitir.","reopen":"Definições de cookies","close":"Fechar definições","banner":"Utilizamos cookies para analisar o tráfego do site com o Google Analytics. A análise só é ativada com o seu consentimento. Mais informações:"}};</script><script src="../../js/cookie-consent.js?v=20261016a" defer=""></script></body></html>
