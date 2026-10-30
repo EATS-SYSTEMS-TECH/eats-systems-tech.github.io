@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-30T02:25:10.174Z",
+  "ref": "d04c78c2354afb3a5b5ef0c77e22e2c614768daf",
+  "scope": "selected paths",
+  "paths": [
+    "css",
+    "js",
+    "scripts",
+    "templates"
+  ],
+  "trackedFiles": 2314,
+  "scannedFiles": 554,
+  "complete": true,
+  "summary": {
+    "eiloncohen": {
+      "rawLines": 738,
+      "lines": 738,
+      "rawFiles": 12,
+      "files": 12,
+      "exceptedFiles": 0,
+      "rawBlobs": 12,
+      "blobs": 12,
+      "binaryBlobs": 0
+    },
+    "OdeliaTorjman": {
+      "rawLines": 0,
+      "lines": 0,
+      "rawFiles": 0,
+      "files": 0,
+      "exceptedFiles": 0,
+      "rawBlobs": 0,
+      "blobs": 0,
+      "binaryBlobs": 0
+    }
+  },
+  "method": "git blame --no-textconv --line-porcelain -w -M -C; exact blob states from matching author commits in all available refs and requested ref ancestry; external diff disabled",
+  "remaining": [
+    {
+      "path": "css/accessibility.css",
+      "eilonLines": 19
+    },
+    {
+      "path": "css/niche.css",
+      "eilonLines": 63
+    },
+    {
+      "path": "css/styles.css",
+      "eilonLines": 347
+    },
+    {
+      "path": "js/accessibility-copy.js",
+      "eilonLines": 14
+    },
+    {
+      "path": "js/accessibility.js",
+      "eilonLines": 2
+    },
+    {
+      "path": "scripts/build-localized-site.mjs",
+      "eilonLines": 74
+    },
+    {
+      "path": "scripts/hero-video-browser.test.mjs",
+      "eilonLines": 2
+    },
+    {
+      "path": "scripts/host-marketing-page.mjs",
+      "eilonLines": 2
+    },
+    {
+      "path": "scripts/legal/locale-cta.json",
+      "eilonLines": 186
+    },
+    {
+      "path": "templates/guest-invites-api.template.html",
+      "eilonLines": 11
+    },
+    {
+      "path": "templates/index.template.html",
+      "eilonLines": 17
+    },
+    {
+      "path": "templates/partials/site-footer.template.html",
+      "eilonLines": 1
+    }
+  ],
+  "status": "COMPLETE_SELECTED_FRONTEND_INVENTORY_REMAINING_IP_OPEN",
+  "limits": [
+    "554files under css/js/scripts/templates only;not entire website/generated outputs/assets/backend",
+    "738Eilon lines remain in12files;0Odelia lines in this scope",
+    "No independent rewrite or ownership closure is inferred from this inventory",
+    "Primary checkout/main and hosting untouched"
+  ]
+}
