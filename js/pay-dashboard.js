@@ -4,6 +4,7 @@ import { createManagerSystemCard } from "./manager-system-card.js";
 import { createManagerOrganizationCard, createOrganizationLogo } from "./manager-organization-card.js";
 import { createManagerOrganizationPicker } from "./manager-organization-picker.js";
 import { createManagerActivity } from "./manager-activity.js";
+import { createOrganizationRoleCard } from "./role-guide.js";
 
 const BASE = "/api/v1/pay";
 const el = (tag, text, cls) => {
@@ -134,7 +135,7 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
     banner.append(text);
     return banner;
   }
-  const organizationRole = role => role === "owner" ? t("בעל הארגון", "Organization owner") : role === "admin" ? t("מנהל ארגון", "Organization administrator") : t("צפייה בנקודות ובתעריפים", "View payment points and tariffs");
+  const organizationRole = role => ({ owner: t("בעל הארגון", "Organization owner"), admin: t("מנהל ארגון", "Organization admin"), staff: t("צוות ארגון", "Organization staff") })[role] ?? t("צפייה בנקודות ובתעריפים", "View payment points and tariffs");
   function renderNavigation() {
     organizationPicker?.destroy();
     organizationPicker = undefined;
@@ -145,7 +146,7 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
     navigation.append(personalNavigation);
     if (!profile) return;
     const roles = el("div", undefined, "manager-sidebar-roles");
-    const role = el("span", profile.role === "admin" ? "WIFIGATE Pay admin" : "WIFIGATE Pay user");
+    const role = el("span", profile.role === "admin" ? "WIFIGATE Pay Admin" : "WIFIGATE Pay User");
     role.dir = "ltr";
     roles.append(role);
     personalNavigation.append(roles);
@@ -159,7 +160,7 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
       organizationArea.append(el("p", t("סביבת הארגון", "Organization workspace"), "manager-nav-title"));
       navigation.append(organizationArea);
       organizationPicker = createManagerOrganizationPicker({
-        organizations: profile.organizations.map(org => ({ ...org, name: org.name || t("ארגון", "Organization"), role: org.role === "admin" ? "organization-admin" : org.role === "viewer" ? "organization-user" : org.role })),
+        organizations: profile.organizations.map(org => ({ ...org, name: org.name || t("ארגון", "Organization"), role: org.role })),
         selectedId: organizationId,
         language,
         onSelect: id => { organizationId = id; listView = "systems"; void load(); },
@@ -242,7 +243,11 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
     renderNavigation();
     if (listView === "organizations") { renderOrganizations(); return; }
     const organization = profile?.organizations?.find(item => item.id === organizationId);
-    if (organization) organizationHeader(organization);
+    if (organization) {
+      organizationHeader(organization);
+      document.body.dataset.organizationRole = organization.role;
+      content.append(createOrganizationRoleCard({ product: "pay", language, role: organization.role, plan: profile.role === "admin" ? "admin" : null, organizationName: organization.name }));
+    } else delete document.body.dataset.organizationRole;
     if (!organizationId) {
       const examplesGrid = el("div", undefined, "manager-grid manager-example-grid pay-system-grid");
       for (const system of examples) examplesGrid.append(card(system, true));

@@ -43,7 +43,7 @@ test("Manager and Pay separate personal access from explicitly selected organiza
         const mySystems = language === "he" ? "המערכות שלי" : "My systems";
         const myOrganizations = language === "he" ? "הארגונים שלי" : "My organizations";
         await personal.getByRole("button", { name: mySystems, exact: true }).waitFor();
-        assert.match(await personal.innerText(), new RegExp(`WIFIGATE ${product === "manager" ? "Manager" : "Pay"} ${role}`));
+        assert.match(await personal.innerText(), new RegExp(`WIFIGATE ${product === "manager" ? "Manager" : "Pay"} ${role[0].toUpperCase() + role.slice(1)}`));
         assert.equal(await personal.getByRole("button", { name: myOrganizations, exact: true }).count(), 1);
         assert.equal(await nav.locator("[data-organization-view]").count(), 0);
         const choose = () => nav.getByRole("button", { name: language === "he" ? "בחירת ארגון" : "Choose organization", exact: true });

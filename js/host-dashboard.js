@@ -31,6 +31,7 @@ import { authErrorMessage } from "./host-auth-errors.js";
 import { isLocalStaging } from "./firebase-config.js";
 import { attachPopover, firstFocusable } from "./popover.js";
 import { loadHostManagement, clearHostManagement } from "./host-management.js";
+import { mountRoleGuideButton } from "./role-guide.js";
 
 // The Host dashboard shell. Access comes from GET /api/v1/platform/me alone:
 //   active + plan role (admin/user): the workspace with My systems;
@@ -118,10 +119,19 @@ function renderAccount(user) {
     if (identity?.hasPlan) {
       const role = document.createElement("span");
       role.dir = "ltr";
-      role.textContent = identity.role === Roles.ADMIN ? "WIFIGATE Host admin" : "WIFIGATE Host user";
+      role.textContent = identity.role === Roles.ADMIN ? "WIFIGATE Host Admin" : "WIFIGATE Host User";
       workspaceRoles.append(role);
     }
   }
+  mountRoleGuideButton({
+    product: "host",
+    language: hostLocale,
+    context: () => ({
+      product: "host",
+      plan: identity?.platformRole === "admin" ? "admin" : identity?.hasPlan ? identity.role : null,
+      organizationRole: document.body.dataset.organizationRole,
+    }),
+  });
   $("#account-button").setAttribute(
     "aria-label",
     hostText("Account: {p0}", { p0: name || hostText("Signed-in account") }),
