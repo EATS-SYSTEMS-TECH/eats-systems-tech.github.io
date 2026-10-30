@@ -69,7 +69,16 @@
       "dependenciesAndProductConfigurationExact": true,
       "packageOnlyDifference": "Registered14frozen builder edge contracts in existing test:presentation command"
     },
-    "completeSelectedFrontendCensus": "RUNNING exact11abefff2;previous completed563scope576Eilonlines/6files,0Odelia remains the latest completed count"
+    "completeSelectedFrontendCensus": {
+      "ref": "11abefff2d343d310cd8a26ba0625116d2a2676a",
+      "files": 566,
+      "complete": true,
+      "errors": 0,
+      "eilonLines": 576,
+      "eilonFiles": 6,
+      "odeliaLines": 0,
+      "wholeBuilderIndependentReconstruction": "PASS"
+    }
   },
   "retainedAttempts": [
     "Initial36/41focused checks:five sitemap isolation failures due to quote-sensitive import discovery;recognized import spelling restores43/43without weakening assertions",
@@ -77,7 +86,7 @@
     "First environment-repair guard required literal /dashboard/ and stopped on Hebrew ?lang=he;no copy before corrected exact problem-multiset/URL-path check;diagnostic label correction retained"
   ],
   "limits": [
-    "Remaining576Eilonlines in6other frontend files stillOPEN;new complete selected census pending",
+    "Remaining576Eilonlines in6otherfrontendfilesOPEN;complete566filecensus0errors",
     "Full parsed models and actual Chrome are source/browser evidence;no physical phone/BLE acceptance inferred",
     "All primary/current generated outputs,main andhosting untouched",
     "No production approval/publication or legal ownership determination"

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-30T06:46:28.906Z",
-  "ref": "7c7349f90de4b5147ad149471714d21256f8ce59",
+  "createdAt": "2026-10-30T07:38:29.390Z",
+  "ref": "11abefff2d343d310cd8a26ba0625116d2a2676a",
   "scope": "selected paths",
   "paths": [
     "css",
@@ -9,8 +9,8 @@
     "scripts",
     "templates"
   ],
-  "trackedFiles": 2335,
-  "scannedFiles": 563,
+  "trackedFiles": 2340,
+  "scannedFiles": 566,
   "complete": true,
   "summary": {
     "eiloncohen": {
@@ -35,6 +35,7 @@
     }
   },
   "method": "git blame --no-textconv --line-porcelain -w -M -C; exact blob states from matching author commits in all available refs and requested ref ancestry; external diff disabled",
+  "status": "COMPLETE566_SELECTED_FRONTEND_INDEPENDENT_BUILDER_PASS_REMAINING6FILES_OPEN",
   "remaining": [
     {
       "path": "css/styles.css",
@@ -61,14 +62,7 @@
       "eilonLines": 1
     }
   ],
-  "status": "COMPLETE_SELECTED_FRONTEND_INVENTORY_INDEPENDENT_REWRITE_AND_FINAL_GATES_OPEN",
   "nonAttributionRemaining": [],
-  "limits": [
-    "Frozen7c7349f90 selected563files;576Eilonlines/6files and0Odelia is the latest completed census",
-    "Whole builder independently reconstructed at11abefff2;7sourcepaths0,77contractsPASS,all1485models exact;new selected census running",
-    "Remaining source/final-main/legal acceptance OPEN",
-    "Primary/main/hosting untouched"
-  ],
   "independentReconstructions": [
     {
       "path": "scripts/build-localized-site.mjs",
@@ -79,11 +73,10 @@
       "evidence": "maintenance/ip-rewrites/whole-localized-builder.json"
     }
   ],
-  "latestIndependentWork": {
-    "source": "11abefff2d343d310cd8a26ba0625116d2a2676a",
-    "wholeBuilder": "PASS",
-    "paths": 7,
-    "attributionZero": true,
-    "fullSelectedCensus": "RUNNING;previous complete counts retained"
-  }
+  "limits": [
+    "Frozen11abefff2 selected566files undercss/js/scripts/templates;notwholewebsite/assets/backend",
+    "576Eilonlines remain in6files,0Odelia in selectedscope;complete0errors",
+    "Entirebuilder independentreconstructionPASS;77contracts/1485fullmodels/verify-site/39homepages/7sourcepaths0",
+    "No legal ownership/final acceptance inferred;primary/main/hosting untouched"
+  ]
 }
