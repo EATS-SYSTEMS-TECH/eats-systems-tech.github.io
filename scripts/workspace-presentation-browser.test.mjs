@@ -262,3 +262,118 @@ test("operating workspaces remain readable and keyboard accessible in both direc
     }
   }
 });
+
+test("workspace hover states keep text readable", async (t) => {
+  const site = await startHostSite(t);
+  for (const product of ["host", "pay", "manager"]) {
+    for (const language of ["en", "he"])
+      for (const width of [390, 1440])
+        await t.test(`${product} ${language} ${width}`, async (t) => {
+          const { page, errors } = await openProduct(
+            t,
+            site,
+            product,
+            language,
+            width,
+          );
+          await page.addStyleTag({
+            content:
+              "*, *::before, *::after { transition: none !important; animation: none !important; }",
+          });
+          const failures = [];
+          const controls = page.locator(
+            ".manager-shell button:visible:not(:disabled), #host-management button:visible:not(:disabled), .manager-shell summary:visible",
+          );
+          for (let index = 0; index < (await controls.count()); index++) {
+            const control = controls.nth(index);
+            if (!(await control.textContent()).trim()) continue;
+            await control.hover();
+            const texts = [control, ...(await control.locator("*").all())];
+            for (const target of texts) {
+              const directText = await target.evaluate((node) =>
+                [...node.childNodes]
+                  .filter((child) => child.nodeType === Node.TEXT_NODE)
+                  .map((child) => child.textContent)
+                  .join("")
+                  .trim(),
+              );
+              if (!directText || !(await target.isVisible())) continue;
+              const ratio = await contrast(target);
+              if (ratio < 4.5)
+                failures.push({
+                  text: directText,
+                  ratio,
+                  control: await control.getAttribute("class"),
+                  colors: await target.evaluate((node) => ({
+                    color: getComputedStyle(node).color,
+                    background: getComputedStyle(node).backgroundColor,
+                  })),
+                });
+            }
+          }
+          assert.deepEqual(failures, []);
+          assert.deepEqual(errors, []);
+          if (evidence) {
+            await mkdir(evidence, { recursive: true });
+            await page.screenshot({
+              path: path.join(
+                evidence,
+                `hover-${product}-${language}-${width}.png`,
+              ),
+              fullPage: true,
+            });
+          }
+        });
+  }
+});
+
+test("calendar booking status colors survive hover", async (t) => {
+  const site = await startHostSite(t);
+  const states = ["confirmed", "draft", "changed", "completed", "cancelled"];
+  const { page, errors } = await openWorkspace(
+    t,
+    site,
+    {
+      plan: "user",
+      organizations: [organization("org", "Hotel", "owner")],
+      systems: { org: [system("room", "Room 101")] },
+      reservations: {
+        org: states.map((status) =>
+          booking(status, "room", "Room 101", day(1), day(3), { status }),
+        ),
+      },
+    },
+    {
+      real: true,
+      query: "?org=org&view=calendar&lang=en",
+      viewport: { width: 1440, height: 1000 },
+    },
+  );
+  await loaded(page, "calendar");
+  const palette = (node) => {
+    const style = getComputedStyle(node);
+    return {
+      background: style.backgroundColor,
+      image: style.backgroundImage,
+      color: style.color,
+    };
+  };
+  for (const status of states) {
+    await page
+      .locator('.calendar-filters select[name="status"]')
+      .selectOption(status);
+    const chip = page.locator(
+      '.reservation-chip[data-booking-id="' + status + '"]',
+    );
+    await chip.waitFor();
+    await page.mouse.move(0, 0);
+    const before = await chip.evaluate(palette);
+    await chip.hover();
+    assert.deepEqual(
+      await chip.evaluate(palette),
+      before,
+      status + " retains its readable status palette",
+    );
+  }
+  assert.deepEqual(errors, []);
+});
