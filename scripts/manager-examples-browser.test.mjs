@@ -323,6 +323,8 @@ test("Manager example gate, Dual Control and group use real workspace controls w
           .getByRole("button")
           .click();
         await page.locator(".manager-organization-header h2").waitFor();
+        // Like real organization cards, sample organization cards offer no card-level removal.
+        assert.equal(await page.locator('[data-example-system="example-manager-gate"] .manager-system-remove').count(), 0);
         await page
           .locator('[data-example-system="example-manager-gate"]')
           .locator("button.primary")

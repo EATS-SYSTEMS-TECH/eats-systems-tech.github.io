@@ -1134,7 +1134,7 @@ export function createManagerDashboard({
 });
       removeButton.classList.add("manager-button-danger");
       if(workspace || operatorAccount)secondary.append(removeButton);
-      else if(!scope) {removeButton.classList.add("manager-system-remove");removeButton.setAttribute("aria-label",t("הסרת מערכת: ","Remove system: ")+s.name);actions.append(removeButton);}
+      else if(!scope && currentView !== "example-organization") {removeButton.classList.add("manager-system-remove");removeButton.setAttribute("aria-label",t("הסרת מערכת: ","Remove system: ")+s.name);actions.append(removeButton);}
     }
     if ((workspace || operatorAccount) && secondary.childElementCount) {
       const menu = node("details", undefined, "manager-system-menu");
