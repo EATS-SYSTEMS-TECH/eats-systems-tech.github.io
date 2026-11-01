@@ -5,6 +5,7 @@ import {
   settingsTabFor,
 } from "./host-workspace-model.js";
 import { hostText } from "./host-locale.js";
+import { confirmHostWorkspaceLeave } from "./host-workspace-drafts.js";
 
 // Sidebar navigation, the phone tab bar, the join-organization bell and the
 // Platform item. A view's item is shown only while the workspace has built
@@ -171,7 +172,7 @@ for (const view of workspaceViews) {
   }
   const button = viewButton(view);
   buttons.set(view.id, button);
-  if (view.placement !== "platform") {
+  if (!["platform", "home"].includes(view.placement)) {
     (["my-systems", "my-organizations"].includes(view.id) ? personalNavigation : organizationNavigation).append(button);
     const organizationLabel = { calendar: "Organization calendar", connect: "Guest invitation automation API" }[view.id];
     if (organizationLabel) {
@@ -228,11 +229,12 @@ function choose(
   const authorizedDuringReload =
     root.dataset.loading === "true" && !buttons.get(view.id).disabled;
   if (!targets(view.id).length && !authorizedDuringReload) return;
+  if ((push || focus) && root.dataset.organizationId && ["my-systems", "my-organizations", "choose-organization"].includes(view.id) && !confirmHostWorkspaceLeave(root)) return;
   const previous = selected;
   selected = view.id;
   for (const dialog of root.querySelectorAll("dialog[open]")) dialog.close();
   const url = new URL(location.href);
-  const returnToPersonal = (push || focus) && ["my-systems", "my-organizations"].includes(selected) && Boolean(root.dataset.organizationId);
+  const returnToPersonal = (push || focus) && ["my-systems", "my-organizations", "choose-organization"].includes(selected) && Boolean(root.dataset.organizationId);
   if (returnToPersonal) url.searchParams.delete("org");
   url.pathname =
     selected === "overview" ? "/dashboard/host/overview/" : "/dashboard/host/";
@@ -332,6 +334,7 @@ function refresh() {
     else button.removeAttribute("aria-current");
   }
   organizationNavigation.hidden = !root.dataset.organizationId;
+  personalNavigation.hidden = !["my-systems", "my-organizations"].some(id => available(id));
   organizationArea.hidden = Boolean(organizationPicker?.hidden) && !root.dataset.organizationId;
   if (tabbar) {
     // Phone tab bar: home, Calendar and Bookings when they exist, then More.

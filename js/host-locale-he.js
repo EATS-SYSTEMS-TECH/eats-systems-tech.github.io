@@ -1,6 +1,27 @@
 // Interface copy only. Record names, identifiers and user content are never
 // passed through this dictionary.
 export const hostHebrew = {
+  "Ask an organization owner or admin to choose calendar systems.":
+    "פנו לבעלים או למנהל הארגון כדי לבחור מערכות ליומן.",
+  "Some bookings in this range belong to systems excluded from the calendar.":
+    "יש בטווח זה הזמנות למערכות שאינן מוצגות ביומן.",
+  "Show unselected systems temporarily": "הצגה זמנית של מערכות שלא נבחרו",
+  "Leave this workspace and discard unsaved changes?":
+    "לצאת מסביבת העבודה ולוותר על השינויים שלא נשמרו?",
+  "Choose an organization": "בחירת ארגון",
+  "Select an organization to open its workspace.":
+    "בחרו ארגון כדי לפתוח את סביבת העבודה שלו.",
+  "Shown in organization calendar": "מוצג ביומן הארגון",
+  "Hidden from organization calendar": "מוסתר מיומן הארגון",
+  "Calendar visibility": "תצוגה ביומן",
+  "Calendar visibility for {p0}": "תצוגת {p0} ביומן",
+  "This only changes the organization calendar. Existing bookings and guest links stay active. All bookings remain available in Bookings.":
+    "השינוי חל רק על יומן הארגון. הזמנות וקישורי אורחים קיימים נשארים פעילים. כל ההזמנות זמינות במסך ההזמנות.",
+  "Save calendar setting": "שמירת הגדרת היומן",
+  "Show in organization calendar": "הצגה ביומן הארגון",
+  "Choose calendar systems": "בחירת מערכות ליומן",
+  "No systems are selected for this calendar. Existing bookings are available in Bookings.":
+    "לא נבחרו מערכות ליומן זה. ההזמנות הקיימות זמינות במסך ההזמנות.",
   "My organizations": "הארגונים שלי",
   "Personal workspace": "סביבת עבודה אישית",
   "Organization workspace": "סביבת הארגון",
@@ -488,7 +509,6 @@ export const hostHebrew = {
   Team: "צוות",
   Account: "חשבון",
   Organizations: "ארגונים",
-  "Organization: {p0}. Switch organization": "ארגון: {p0}. החלפת ארגון",
   "All products": "כל המוצרים",
   "Account: {p0}": "חשבון: {p0}",
   "Opening WIFIGATE Host": "פותחים את WIFIGATE Host",
@@ -501,7 +521,6 @@ export const hostHebrew = {
   // My systems and Organization systems.
   "Systems you add from the WIFIGATE app. Link one to an organization to use it there.":
     "מערכות שהוספתם מאפליקציית WIFIGATE. משייכים מערכת לארגון כדי להשתמש בה שם.",
-  "You're not part of an organization yet.": "עדיין לא הצטרפתם לארגון.",
   // Join an organization (the bell).
   "Organizations waiting for you": "ארגונים שמחכים לכם",
   "Organizations that asked your verified email to join appear here. Owner and admin roles ask for your authenticator.":
@@ -539,7 +558,6 @@ export const hostHebrew = {
   "{p0} systems": "{p0} מערכות",
   "In the WIFIGATE app, open your profile.":
     "באפליקציית WIFIGATE, פותחים את הפרופיל.",
-  "Tap WIFIGATE Host.": "לוחצים על WIFIGATE Host.",
   "Tap “Add to My systems” next to the system.":
     "לוחצים על „הוספה למערכות שלי” ליד המערכת.",
   "Choose {p0} and tap “Add to {p0}” next to the system.":
@@ -552,8 +570,6 @@ export const hostHebrew = {
   "Unlink {p0} from {p1}?": "לנתק את {p0} מ־{p1}?",
   "Remove {p0} from My systems?": "להסיר את {p0} מהמערכות שלי?",
   "Remove {p0} from {p1}?": "להסיר את {p0} מ־{p1}?",
-  "Add your first system from the app.":
-    "הוסיפו את המערכת הראשונה שלכם מהאפליקציה.",
   "Add your first system from the WIFIGATE app.":
     "הוסיפו את המערכת הראשונה מאפליקציית WIFIGATE.",
   "Ask an owner to add systems.": "בקשו מהבעלים להוסיף מערכות.",
@@ -742,8 +758,8 @@ export const hostHebrew = {
   "Arrives {p0}": "הגעה {p0}",
   "Leaves {p0}": "עזיבה {p0}",
   Staying: "שוהים",
-  "Showing the first 1,000 bookings. Choose fewer days or one system.":
-    "מוצגות 1,000 ההזמנות הראשונות. בחרו פחות ימים או מערכת אחת.",
+  "More bookings may exist. Choose fewer days or one system to see the full range.":
+    "ייתכן שיש הזמנות נוספות. בחרו פחות ימים או מערכת אחת כדי לראות את הטווח המלא.",
   "This saved filter's system is no longer here.":
     "המערכת של הסינון השמור כבר לא כאן.",
   "Search bookings": "חיפוש הזמנות",

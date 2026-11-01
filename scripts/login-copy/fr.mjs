@@ -1,5 +1,6 @@
 // Sign-in page copy (/fr/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "La vérification du navigateur a échoué. Actualisez la page et réessayez. Si le problème persiste, contactez l’assistance.",
   pageTitle: "Connexion",
   heading: "Connexion à WIFIGATE",
   home: "Page d'accueil de WIFIGATE",

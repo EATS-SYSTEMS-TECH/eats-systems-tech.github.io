@@ -1,5 +1,6 @@
 // Sign-in page copy (/da/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Browseren kunne ikke bekræftes. Genindlæs siden, og prøv igen. Kontakt support, hvis problemet fortsætter.",
   pageTitle: "Log ind",
   heading: "Log ind på WIFIGATE",
   home: "WIFIGATE-forside",

@@ -1,5 +1,6 @@
 // Sign-in page copy (/ja/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "ブラウザを確認できませんでした。ページを再読み込みして、もう一度お試しください。問題が続く場合は、サポートにお問い合わせください。",
   pageTitle: "ログイン",
   heading: "WIFIGATE にログイン",
   home: "WIFIGATE ホーム",

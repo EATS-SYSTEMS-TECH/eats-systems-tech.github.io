@@ -1,5 +1,6 @@
 // Sign-in page copy (/tr/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Tarayıcı doğrulaması başarısız oldu. Sayfayı yenileyip tekrar deneyin. Sorun devam ederse destek ekibiyle iletişime geçin.",
   pageTitle: "Giriş",
   heading: "WIFIGATE'e giriş yapın",
   home: "WIFIGATE ana sayfası",

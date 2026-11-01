@@ -57,8 +57,8 @@ export function createPlatformAdminDirectory({
   const note = element(
     "p",
     t(
-      "מנהלי WIFIGATE ובעלי מנויים פעילים נספרים פעם אחת. עובדי ארגון מוצגים בנפרד ואינם משלמים מנוי על ההזמנה לארגון. הסכומים הם אומדן לפני מס, ולא אישור גבייה.",
-      "WIFIGATE administrators and active subscription owners are counted once. Organization employees appear separately and pay no subscription for their organization invitation. Amounts are estimates before tax, not collected payments.",
+      "מנהלי WIFIGATE ובעלי גישה אישית למוצרים נספרים פעם אחת. עובדי ארגון מוצגים בנפרד ואינם משלמים מנוי על ההזמנה לארגון. גישת Pay User אינה יוצרת מנוי. הסכומים הם אומדן לפני מס, ולא אישור גבייה.",
+      "WIFIGATE administrators and people with personal product access are counted once. Organization employees appear separately and pay no subscription for their invitation. Pay User access does not create a subscription. Amounts are estimates before tax, not collected payments.",
     ),
   );
   const counts = element("div", null, "platform-admin-counts");
@@ -475,12 +475,19 @@ export function createPlatformAdminDirectory({
       name.dir = "ltr";
       row.append(name);
       const member =
-        plan?.state === "active" && id === "host" && !plan.role
+        plan?.state === "active" && ((id === "host" && !plan.role)
+          || (id === "pay" && plan.personalRole === null))
           ? t("גישה דרך ארגון", "Organization access")
           : null;
+      const personalAccess = id === "pay"
+        ? plan?.personalRole === "user" ? "Pay User"
+          : plan?.personalRole === "admin" ? "Pay Admin"
+          : plan?.personalAccessState === "blocked" ? t("גישה אישית חסומה", "Personal access blocked") : null
+        : null;
       const access = [
         labels[plan?.state] || labels.unavailable,
         plan?.plan,
+        personalAccess,
         member,
       ]
         .filter(Boolean)

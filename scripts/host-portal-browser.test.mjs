@@ -335,12 +335,9 @@ async function openPortal(t) {
   await t.page.goto(origin + "/dashboard/host/");
 }
 async function openSettings(page) {
-  const settings = page.locator(
-    '#host-section-navigation [data-view-id="settings"]',
-  );
-  if (!(await settings.isVisible()))
-    await page.getByRole("button", { name: "Menu", exact: true }).click();
-  await settings.click();
+  // Personal security stays available without selecting an organization.
+  await page.locator("#account-button").click();
+  await page.locator("#account-security").click();
 }
 async function enroll(t) {
   const page = t.page;
@@ -429,173 +426,40 @@ try {
     .locator('[data-product="host"][data-state="active"]')
     .getByRole("link", { name: "Open", exact: true })
     .click();
-  await admin.page.locator('#host-sidebar [data-view-id="overview"]').click();
-  await admin.page.locator("#admin-overview").waitFor({ state: "visible" });
-  const modal = admin.page.locator("dialog.admin-dialog[open]");
-  const confirm = async () => {
-    await admin.page.locator("#mfa-challenge").waitFor({ state: "visible" });
-    await admin.page
-      .locator('#mfa-challenge input[name="code"]')
-      .fill("123456");
-    await admin.page.locator('#mfa-challenge button[type="submit"]').click();
-  };
-  const addPerson = async (role, email) => {
-    await admin.page
-      .locator("#admin-tab-" + (role === "admin" ? "admins" : "users"))
-      .click();
-    await admin.page
-      .getByRole("button", { name: "Add " + role, exact: true })
-      .click();
-    await modal.locator('input[name="email"]').fill(email);
-    await modal.locator('button[type="submit"]').click();
-    await confirm();
-  };
-  if (process.env.WIFIGATE_SCREENSHOT_DIR)
-    await admin.page.screenshot({
-      path: join(process.env.WIFIGATE_SCREENSHOT_DIR, "admin-portal.png"),
-      fullPage: true,
-    });
-  await addPerson("user", "new@example.test");
-  await modal.waitFor({ state: "hidden" });
-  await admin.page
-    .locator("#admin-directory")
-    .getByText("new@example.test", { exact: true })
-    .first()
-    .waitFor();
-  const approval = admin.calls.find((call) => call.method === "POST");
-  assert.equal(approval.path, "/api/v1/admin/people");
-  assert.deepEqual(JSON.parse(approval.body), {
-    email: "new@example.test",
-    role: "user",
-  });
-  assert.equal(approval.headers.authorization, "Bearer fixture-id-token-mfa");
-  assert.ok(approval.headers["idempotency-key"]);
-  await addPerson("admin", "admin@example.test");
-  await modal.waitFor({ state: "hidden" });
-  assert.equal(
-    JSON.parse(admin.calls.filter((call) => call.method === "POST").at(-1).body)
-      .role,
-    "admin",
-  );
-  const own = admin.page.locator(".admin-row").filter({
-    has: admin.page.getByText("approved@example.test", { exact: true }),
-  });
-  assert.match(await own.innerText(), /Oct 10, 2026/);
-  // The last sign-in reads in the viewer's own time, with no zone label.
-  assert.doesNotMatch(await own.innerText(), /UTC/);
-  await own.locator("summary").click();
-  assert.equal(
-    await own.getByRole("button", { name: "Block", exact: true }).isDisabled(),
-    true,
-  );
-  assert.equal(
-    await own.getByRole("button", { name: "Remove", exact: true }).isDisabled(),
-    true,
-  );
-  await admin.page.locator("#admin-tab-users").click();
-  for (const action of ["block", "unblock", "delete"]) {
-    const label =
-      action === "delete" ? "Remove" : action === "block" ? "Block" : "Unblock";
-    const target = admin.page.locator(".admin-row").filter({
-      has: admin.page.getByText("target@example.test", { exact: true }),
-    });
-    await target.locator("summary").click();
-    await target.getByRole("button", { name: label, exact: true }).click();
-    await modal.locator('button[type="submit"]').click();
-    await confirm();
-    await modal.waitFor({ state: "hidden" });
-    const mutation = admin.calls
-      .filter((call) => ["POST", "DELETE"].includes(call.method))
-      .at(-1);
-    assert.equal(mutation.method, action === "delete" ? "DELETE" : "POST");
-    assert.deepEqual(
-      JSON.parse(mutation.body),
-      action === "delete"
-        ? { email: "target@example.test" }
-        : {
-            email: "target@example.test",
-            status: action === "block" ? "blocked" : "active",
-          },
-    );
-  }
-  admin.state.failMutationOnce = true;
-  await addPerson("user", "retry@example.test");
-  await modal
-    .getByText("The request could not be completed. Please retry.", {
-      exact: true,
-    })
-    .waitFor();
-  await modal.locator('button[type="submit"]').click();
-  await confirm();
-  await modal.waitFor({ state: "hidden" });
-  const retryCalls = admin.calls.filter(
-    (call) =>
-      call.method === "POST" &&
-      JSON.parse(call.body).email === "retry@example.test",
-  );
-  assert.equal(retryCalls.length, 2);
-  assert.equal(
-    retryCalls[0].headers["idempotency-key"],
-    retryCalls[1].headers["idempotency-key"],
-  );
-  await admin.page.locator("#admin-tab-organizations").click();
-  await admin.page
-    .getByRole("button", { name: "Create organization", exact: true })
-    .click();
-  await modal.locator('input[name="name"]').fill("New test organization");
-  await modal.locator('input[name="timezone"]').fill("Asia/Jerusalem");
-  await modal.locator('input[name="ownerEmail"]').fill("approved@example.test");
-  await modal.locator('button[type="submit"]').click();
-  await confirm();
-  await modal.waitFor({ state: "hidden" });
-  await admin.page
-    .locator('#host-management [data-invitation-id="created-owner-invitation"]')
-    .waitFor({ state: "attached" });
-  await admin.page.locator("#join-organization").click();
-  await admin.page
-    .getByRole("button", { name: "Join New test organization", exact: true })
-    .waitFor({ state: "visible" });
-  const visibleInvitation = await admin.page
-    .locator('[data-invitation-id="created-owner-invitation"]')
-    .innerText();
-  assert.match(visibleInvitation, /2099/);
-  assert.doesNotMatch(visibleInvitation, /2099-01-01T00:00:00/);
-  assert.equal(admin.state.organizations.length, 1);
-  assert.equal(admin.state.invitations.length, 1);
+  // Host product administration retains its supported overview deep link.
+  // Shared platform management has a separate global role and is not an
+  // organization sidebar item; this fixture grants only the Host admin role.
+  assert.equal(await admin.page.locator('#host-sidebar [data-view-id="overview"]').count(), 0);
+  await admin.page.goto(origin + "/dashboard/host/overview/");
+  await admin.page.waitForURL(origin + "/dashboard/platform/?product=host");
+  await admin.page.getByText("This page is available to WIFIGATE administrators only.", { exact: true }).waitFor();
+  assert.equal(await admin.page.locator("#admin-overview").count(), 0);
+  assert.equal(admin.calls.some((call) => call.path?.startsWith("/api/v1/platform/directory")), false,
+    "a Host product admin does not acquire global platform authority");
+
+  // The retired admin-tab forms are covered by the current shared management
+  // flows in platform-admin-access-browser.test.mjs: TOTP, confirmation,
+  // protected administrator roles, mutation scope and idempotent retries.
+  await admin.page.goto(origin + "/dashboard/host/");
+  await admin.page.locator("#dashboard-content").waitFor({ state: "visible" });
   admin.state.access.state = "denied";
   await admin.page.evaluate(() => window.dispatchEvent(new Event("focus")));
   await admin.page.waitForURL(origin + "/login/?reason=no-account");
   assert.equal(await admin.page.locator("#admin-overview").count(), 0);
   await admin.context.close();
+
   const hebrewAdmin = await scenario({
     role: "admin",
     browserLocale: "en-US",
     mfa: { required: true, enrolled: true, verified: true },
   });
   await hebrewAdmin.page.goto(origin + "/dashboard/host/overview/?lang=he");
-  await hebrewAdmin.page.locator("#admin-tab-users").click();
-  const hebrewTarget = hebrewAdmin.page.locator(".admin-row").filter({
-    has: hebrewAdmin.page.getByText("target@example.test", { exact: true }),
-  });
-  await hebrewTarget.locator("summary").click();
-  for (const [label, confirmation] of [
-    ["חסימה", "חסימת גישה"],
-    ["הסרה", "הסרת גישה"],
-  ]) {
-    await hebrewTarget.getByRole("button", { name: label, exact: true }).click();
-    await hebrewAdmin.page
-      .locator("dialog.admin-dialog[open]")
-      .getByRole("button", { name: confirmation, exact: true })
-      .waitFor();
-    await hebrewAdmin.page
-      .locator("dialog.admin-dialog[open]")
-      .getByRole("button", { name: "ביטול", exact: true })
-      .click();
-  }
+  await hebrewAdmin.page.waitForURL(origin + "/dashboard/platform/?product=host&lang=he");
+  await hebrewAdmin.page.getByText("המסך זמין למנהלי WIFIGATE בלבד.", { exact: true }).waitFor();
   assert.equal(
-    hebrewAdmin.calls.some((call) => ["POST", "DELETE"].includes(call.method)),
+    hebrewAdmin.calls.some((call) => ["/api/v1/platform/directory/access", "/api/v1/admin/people"].includes(call.path)),
     false,
-    "reviewing and canceling access changes does not mutate accounts",
+    "following a legacy management link neither mutates access nor grants platform authority",
   );
   await hebrewAdmin.context.close();
   const owner = await scenario({
@@ -700,7 +564,7 @@ try {
         fullPage: true,
       });
     // Optional authenticator setup lives on the products page, reached from
-    // Settings → Account.
+    // the account menu even when no organization is selected.
     await openSettings(regular.page);
     await regular.page
       .locator('[role="tab"][data-settings-tab="account"]')
@@ -746,7 +610,7 @@ try {
     await t.context.close();
   }
   console.log(
-    "Portal browser fixtures passed: denial/errors, admin MFA enrollment/challenge/approval, revoked access, owner team invitations, optional MFA, responsive My systems workspace, login and logout.",
+    "Portal browser fixtures passed: denial/errors, admin MFA enrollment/challenge, legacy management redirects and global authority, revoked access, owner team invitations, optional MFA, responsive My systems workspace, login and logout.",
   );
 } finally {
   await browser.close();

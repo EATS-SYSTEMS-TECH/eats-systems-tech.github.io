@@ -1,5 +1,6 @@
 // Sign-in page copy (/th/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "ไม่สามารถยืนยันเบราว์เซอร์ได้ โปรดโหลดหน้าเว็บใหม่แล้วลองอีกครั้ง หากยังมีปัญหา โปรดติดต่อฝ่ายสนับสนุน",
   pageTitle: "ลงชื่อเข้าใช้",
   heading: "ลงชื่อเข้าใช้ WIFIGATE",
   home: "หน้าแรกของ WIFIGATE",

@@ -20,8 +20,16 @@ export const workspaceViews = Object.freeze([
     id: "my-organizations",
     label: "My organizations",
     icon: "building",
-    scope: "account",
+    scope: "plan",
     selector: '[data-workspace-view="my-organizations"]',
+  },
+  {
+    id: "choose-organization",
+    label: "Choose an organization",
+    icon: "building",
+    scope: "member",
+    placement: "home",
+    selector: '[data-workspace-view="choose-organization"]',
   },
   {
     id: "systems",
@@ -174,7 +182,7 @@ export function workspaceLocation(url, home) {
 
 export function homeView({ plan = false, pending = false } = {}) {
   if (pending) return "invitations";
-  return plan ? "my-systems" : "my-organizations";
+  return plan ? "my-systems" : "choose-organization";
 }
 
 // Views the workspace builds for this person. `organization` is the selected
@@ -190,6 +198,7 @@ export function allowedWorkspaceViews({
   return workspaceViews.filter((view) => {
     if (view.scope === "platform") return false;
     if (view.scope === "plan") return plan;
+    if (view.scope === "member") return !plan;
     if (view.scope === "account") return true;
     return granted.has(view.permission);
   });

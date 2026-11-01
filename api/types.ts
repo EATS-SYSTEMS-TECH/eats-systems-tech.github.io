@@ -39,7 +39,7 @@ export type MonthlyEstimate = {
   monthlyCents: number;
 };
 export type ProductFinancials = MonthlyEstimate | { kind: "revenue"; revenue: { currency: string; amountCents: number } | null };
-export type ProductAccess = { state: ProductState; organizations?: number; summary?: PersonalSummary | null; financials?: ProductFinancials | null };
+export type ProductAccess = { state: ProductState; organizations?: number; summary?: PersonalSummary | null; financials?: ProductFinancials | null; personalRole?: "admin" | "user" | null; personalAccessState?: "active" | "blocked" | "no-plan" };
 // The Host plan role: admin (WIFIGATE operator) or user (paying customer).
 // null (or absent) means no plan: an organization member without My systems.
 export type HostPlanRole = Role;

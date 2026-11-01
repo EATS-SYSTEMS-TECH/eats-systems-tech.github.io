@@ -542,7 +542,7 @@ async function refresh() {
           platformDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language, product: "pay" });
         } else {
           payDashboard = createPayDashboard({ root: $("#pay-root"), user, language,
-            onProfile: profile => managerProfile?.update({ ...profile, platformRole: identity.platformRole }, user),
+            onProfile: profile => managerProfile?.update({ ...profile, role: profile.personalRole ?? null, roles: [], platformRole: identity.platformRole }, user),
           });
 
         }
@@ -644,7 +644,7 @@ function initial(text) {
 function showIdentity() {
   const product = identity.products[selectedProduct];
   managerProfile?.update(
-    { role: product?.role, roles: product?.roles, platformRole: identity.platformRole },
+    { role: selectedProduct === "pay" ? null : product?.role, roles: selectedProduct === "pay" ? [] : product?.roles, platformRole: identity.platformRole },
     { ...identity.user, photoURL: currentUser?.photoURL },
   );
   const name = identity.user.displayName || identity.user.email || "WIFIGATE";

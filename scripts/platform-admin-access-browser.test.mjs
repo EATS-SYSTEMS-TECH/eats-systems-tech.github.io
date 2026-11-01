@@ -106,7 +106,7 @@ test("a delayed revenue response cannot overwrite the newest product filter", as
             { currency: "USD", amountCents: product === "host" ? 9000 : 190 },
           ],
           complete: true,
-          billingPolicy: "platform-admin-exempt-v1", unknownAccounts: 0,
+          billingPolicy: "subscription-owners-v2", unknownAccounts: 0,
         },
       });
     },
@@ -170,7 +170,7 @@ test("the closed user card shows Manager 1.90 and revenue covers all matching pa
           },
         ],
         accounts: 12,
-        billingPolicy: "platform-admin-exempt-v1", unknownAccounts: 0,
+        billingPolicy: "subscription-owners-v2", unknownAccounts: 0,
         complete: true,
         payRevenueAvailable: false,
       },
@@ -295,6 +295,7 @@ test("invitation chooses a Pay organization, never grants admin and offers a lin
   const modal = page.locator(".platform-access-dialog");
   await modal.locator("input[name=email]").fill("new@example.test");
   await modal.locator("select[name=product]").selectOption("pay");
+  await modal.locator("select[name=scope]").selectOption("organization");
   await modal
     .locator("select[name=organizationId] option")
     .waitFor({ state: "attached" });
@@ -334,7 +335,7 @@ test("incomplete revenue is never shown as a full total and retry keeps the same
     route.fulfill({
       json: {
         totals: [{ currency: "USD", amountCents: 190 }],
-        billingPolicy: "platform-admin-exempt-v1", unknownAccounts: 1,
+        billingPolicy: "subscription-owners-v2", unknownAccounts: 1,
         complete: false,
       },
     }),

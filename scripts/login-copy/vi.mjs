@@ -1,5 +1,6 @@
 // Sign-in page copy (/vi/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Không thể xác minh trình duyệt. Hãy tải lại trang và thử lại. Nếu sự cố vẫn tiếp diễn, hãy liên hệ bộ phận hỗ trợ.",
   pageTitle: "Đăng nhập",
   heading: "Đăng nhập vào WIFIGATE",
   home: "Trang chủ WIFIGATE",

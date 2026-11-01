@@ -1,5 +1,6 @@
 // Sign-in page copy (/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Browser verification failed. Reload the page and try again. If it continues, contact support.",
   pageTitle: "Sign in",
   heading: "Sign in to WIFIGATE",
   home: "WIFIGATE home",

@@ -1,5 +1,6 @@
 // Sign-in page copy (/ro/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Verificarea browserului a eșuat. Reîncărcați pagina și încercați din nou. Dacă problema persistă, contactați asistența.",
   pageTitle: "Conectare",
   heading: "Conectați-vă la WIFIGATE",
   home: "Pagina principală WIFIGATE",

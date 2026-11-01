@@ -1,5 +1,6 @@
 // Sign-in page copy (/fi/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Selaimen vahvistaminen epäonnistui. Lataa sivu uudelleen ja yritä uudestaan. Jos ongelma jatkuu, ota yhteyttä tukeen.",
   pageTitle: "Kirjaudu sisään",
   heading: "Kirjaudu WIFIGATE-palveluun",
   home: "WIFIGATE-etusivu",

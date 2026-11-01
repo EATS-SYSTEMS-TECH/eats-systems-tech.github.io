@@ -224,7 +224,12 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       return route.continue();
     });
     await installAppCheckFixture(page);
-  await page.goto(origin + "/dashboard/host/" + query);
+    // Inventory fixtures choose their organization explicitly. The employee
+    // landing page now intentionally waits for a choice instead.
+    const params = new URLSearchParams(query);
+    if (state.organizations?.length && !params.has("org")) params.set("org", state.organizations[0].id);
+    if (state.plan === null && !params.has("view")) params.set("view", "systems");
+    await page.goto(origin + "/dashboard/host/" + (params.size ? "?" + params : ""));
     await page.evaluate(() => window.workspaceReady);
     return { page, errors };
   }
@@ -425,8 +430,8 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         (await requests(page)).filter((entry) =>
           entry.call.startsWith("GET /api/v1/me/systems"),
         ).length,
-        1,
-        "the view and the sidebar share one read",
+        2,
+        "one read per workspace load; returning to personal clears the organization and refreshes access",
       );
       assert.deepEqual(errors, []);
     },
@@ -617,7 +622,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         organizations: [organization("grand", "Grand Hotel", "owner", false)],
       });
       await loaded(page, "systems");
-      for (const name of ["guest-link", "icon"])
+      for (const name of ["guest-link", "calendar", "icon"])
         assert.equal(
           await (await cardAction(page, "side", name))
             .isDisabled(),
@@ -628,7 +633,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         await card(page, "side")
           .locator(".system-action-blocked .info-tip__bubble")
           .allTextContents(),
-        Array(2).fill(
+        Array(3).fill(
           "Service is unavailable for this organization right now.",
         ),
       );
@@ -1137,17 +1142,17 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       );
       await cardAction(page, "parking", "guest-link");
       assert.equal(
-        await card(page, "parking").locator(".system-badge").innerText(),
+        await card(page, "parking").locator(".system-badge--source").innerText(),
         "Linked from your My systems",
       );
       await cardAction(page, "front", "guest-link");
       assert.equal(
-        await card(page, "front").locator(".system-badge").innerText(),
+        await card(page, "front").locator(".system-badge--source").innerText(),
         "Linked by manager@example.test",
       );
       await cardAction(page, "side", "guest-link");
       assert.equal(
-        await card(page, "side").locator(".system-badge").innerText(),
+        await card(page, "side").locator(".system-badge--source").innerText(),
         "Added in the app",
       );
       assert.equal(
@@ -1752,7 +1757,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         // Someone else's linked system names who linked it, in one short
         // badge that fits a phone card.
         assert.equal(
-          await (async () => { await cardAction(page, "front", "guest-link"); return card(page, "front").locator(".system-badge").textContent(); })(),
+          await (async () => { await cardAction(page, "front", "guest-link"); return card(page, "front").locator(".system-badge--source").textContent(); })(),
           "שויכה על ידי manager@example.test",
         );
         assert.deepEqual(

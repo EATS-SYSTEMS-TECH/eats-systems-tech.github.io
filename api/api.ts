@@ -27,6 +27,7 @@ type RequestScope = { organizationId: string; generation?: string };
 // who cannot own the service targets; the admin keeps the organization.
 const localRejectionCodes = new Set([
   "HOST_PLAN_REQUIRED",
+  "PAY_PERSONAL_ACCESS_REQUIRED",
   "SUBSCRIPTION_UNAVAILABLE",
   "INVITER_ACCESS_DENIED",
   "OWNER_REQUIRED",

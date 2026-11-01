@@ -44,6 +44,7 @@ export function readSystem(value) {
         : hostText("WIFIGATE system"),
     gates: Array.isArray(value.systemIds) ? value.systemIds.length : 1,
     status: value.status === "disabled" ? "disabled" : "active",
+    calendarEnabled: value.calendarEnabled !== false,
     version: value.version,
     linkedOrganization:
       linked && typeof linked.id === "string"
@@ -149,7 +150,9 @@ export function systemCard(
 }
 
 function openSystemWorkspace(card, system, { trigger, actions, badges }) {
-  for (const current of document.querySelectorAll("dialog.system-workspace-dialog[open]"))
+  for (const current of document.querySelectorAll(
+    "dialog.system-workspace-dialog[open]",
+  ))
     current.close();
   const dialog = node("dialog", undefined, {
     class: "manager-confirm-dialog system-workspace-dialog",
@@ -172,9 +175,14 @@ function openSystemWorkspace(card, system, { trigger, actions, badges }) {
   controls.append(...actions);
   for (const button of controls.querySelectorAll("button"))
     button.workspaceTrigger = trigger;
-  controls.addEventListener("click", (event) => {
-    if (event.target.closest("button[data-action]:not(:disabled)")) dialog.close();
-  }, true);
+  controls.addEventListener(
+    "click",
+    (event) => {
+      if (event.target.closest("button[data-action]:not(:disabled)"))
+        dialog.close();
+    },
+    true,
+  );
   const close = node("button", workspaceText("סיום וחזרה", "End and return"), {
     type: "button",
     class: "manager-button",
@@ -221,7 +229,9 @@ export function systemGrid(cards) {
 // The way to add a system: three steps in the WIFIGATE app. `organization`
 // names the organization to add to; without it the steps add to My systems.
 export function appSteps(organization) {
-  const list = node("ol", undefined, { class: "manager-setup-steps app-steps" });
+  const list = node("ol", undefined, {
+    class: "manager-setup-steps app-steps",
+  });
   for (const text of [
     hostText("In the WIFIGATE app, open your profile."),
     workspaceText(
@@ -246,8 +256,16 @@ export function systemSetupGuide(organization) {
     class: "manager-setup-guide dashboard-examples",
   });
   guide.append(
-    node("summary", workspaceText("איך מוסיפים מערכת?", "How do I add a system?")),
-    node("p", hostText("Systems you add from the WIFIGATE app. Link one to an organization to use it there.")),
+    node(
+      "summary",
+      workspaceText("איך מוסיפים מערכת?", "How do I add a system?"),
+    ),
+    node(
+      "p",
+      hostText(
+        "Systems you add from the WIFIGATE app. Link one to an organization to use it there.",
+      ),
+    ),
     appSteps(organization),
   );
   return guide;
@@ -270,7 +288,9 @@ export function emptyState(text, { tip, steps, action: button } = {}) {
 
 // The line above a list: how many systems, and an ⓘ.
 export function systemsToolbar(text, tip) {
-  const bar = node("div", undefined, { class: "manager-toolbar systems-toolbar" });
+  const bar = node("div", undefined, {
+    class: "manager-toolbar systems-toolbar",
+  });
   const line = node("p", undefined, { class: "systems-toolbar__text" });
   line.append(node("span", text));
   if (tip) line.append(infoTip(tip));
@@ -456,7 +476,9 @@ export function openSystemDialog({
     "aria-labelledby": `${id}-title`,
     ...(text ? { "aria-describedby": `${id}-text` } : {}),
   });
-  const form = node("form", undefined, { class: "manager-form system-dialog__form" });
+  const form = node("form", undefined, {
+    class: "manager-form system-dialog__form",
+  });
   const heading = node("h3", title, { id: `${id}-title`, dir: "auto" });
   const description = text
     ? node("p", text, {
@@ -474,10 +496,14 @@ export function openSystemDialog({
     "aria-live": "polite",
   });
   const extra = node("div", undefined, { class: "system-dialog__extra" });
-  const actions = node("div", undefined, { class: "manager-confirm-actions system-dialog__actions" });
+  const actions = node("div", undefined, {
+    class: "manager-confirm-actions system-dialog__actions",
+  });
   const confirm = node("button", submitLabel, {
     type: "submit",
-    class: danger ? "manager-button manager-button-danger button-danger-solid" : "manager-button primary",
+    class: danger
+      ? "manager-button manager-button-danger button-danger-solid"
+      : "manager-button primary",
   });
   const cancel = node("button", hostText("Cancel"), {
     type: "button",

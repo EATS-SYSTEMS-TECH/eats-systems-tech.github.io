@@ -65,6 +65,55 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
   let closed = false, generation = 0, profile, items = [], nextCursor = null, selected, demo = false, tab = "overview", busy = false, organizationId = null, listView = "systems";
   let activeDialog, organizationPicker;
   let lastFocus;
+  let draft;
+  const historyToken = history.state?.payWorkspace?.token ?? crypto.randomUUID();
+  let historyIndex = history.state?.payWorkspace?.index ?? 0, restoringHistory = false;
+  let currentUrl = location.href, currentHistory = history.state;
+  const hasPersonalWorkspace = () => ["admin", "user"].includes(profile?.personalRole);
+  const formValues = form => JSON.stringify([...form.elements].filter(input => input.name).map(input => [input.name, input.value]));
+  const hasDraft = () => draft?.form.isConnected && draft.values !== formValues(draft.form);
+  const canLeave = () => !hasDraft() || window.confirm(t("לעזוב את סביבת העבודה ולמחוק שינויים שלא נשמרו?", "Leave this workspace and discard unsaved changes?"));
+  function readLocation() {
+    const url = new URL(location.href);
+    organizationId = url.searchParams.get("org") || null;
+    listView = !organizationId && ["my-organizations", "choose-organization", "organizations"].includes(url.searchParams.get("view")) ? "organizations" : "systems";
+  }
+  function rememberLocation(push = false) {
+    const url = new URL(location.href);
+    if (organizationId) url.searchParams.set("org", organizationId);
+    else url.searchParams.delete("org");
+    url.searchParams.set("view", organizationId ? "systems" : listView === "organizations" ? hasPersonalWorkspace() ? "my-organizations" : "choose-organization" : "my-systems");
+    if (push && url.href !== currentUrl) historyIndex++;
+    const state = { ...history.state, payWorkspace: { token: historyToken, index: historyIndex } };
+    history[push && url.href !== currentUrl ? "pushState" : "replaceState"](state, "", url);
+    currentUrl = url.href; currentHistory = state;
+  }
+  function navigateTo(id, view = "systems") {
+    if (!canLeave()) return;
+    organizationId = id; listView = view;
+    rememberLocation(true);
+    return load();
+  }
+  function onHistory(event) {
+    if (closed) return;
+    if (restoringHistory) { restoringHistory = false; return; }
+    if (!canLeave()) {
+      const target = event.state?.payWorkspace;
+      if (target?.token === historyToken && target.index !== historyIndex) {
+        restoringHistory = true;
+        history.go(historyIndex - target.index);
+      } else history.replaceState(currentHistory, "", currentUrl);
+      return;
+    }
+    const target = event.state?.payWorkspace;
+    if (target?.token === historyToken) historyIndex = target.index;
+    readLocation();
+    void load();
+  }
+  const beforeUnload = event => {
+    if (!hasDraft()) return;
+    event.preventDefault(); event.returnValue = "";
+  };
   const examples = [
     { id: "example-gate", name: t("שער החניון", "Car park gate"), type: "gate", targetId: "DEMO-GATE", systemIds: ["DEMO-GATE"], version: 1 },
     { id: "example-dual", name: t("כניסה ויציאה", "Entry and exit"), type: "dual-control", targetId: "DEMO-DUAL", systemIds: ["DEMO-DUAL"], version: 1 },
@@ -93,7 +142,7 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
   }
   function errorText(error) {
     if (error?.status === 409 || error?.code === "VERSION_CONFLICT") return t("הפרטים עודכנו במקביל. טענו את הפרטים העדכניים לפני שמירה נוספת.", "These details changed in another session. Load the latest details before saving again.");
-    if (error?.status === 403) return t("אין לחשבון הרשאה לפעולה הזו. אפשר לחזור למערכות שלי ולרענן את הגישה.", "Your account does not have permission for this action. Return to My systems and refresh your access.");
+    if (error?.status === 403) return t("הגישה לפעולה הזו אינה זמינה. רעננו את סביבת העבודה ובחרו ארגון מורשה.", "Access to this action is unavailable. Refresh the workspace and choose an authorized organization.");
     if (error?.status === 404) return t("המערכת אינה זמינה לחשבון הזה. ייתכן שהקישור אליה הוסר.", "This system is not available to this account. Its link may have been removed.");
     if (error?.status === 429) return t("בוצעו בקשות רבות בזמן קצר. המתינו מעט ונסו שוב.", "Too many requests. Wait a moment and try again.");
     if (error?.code === "PAY_MODE_UNSUPPORTED") return t("התעריף שנבחר אינו זמין למערכת הזו. טענו את פרטי המערכת העדכניים ובחרו מתוך האפשרויות הזמינות.", "The selected tariff is not available for this system. Load the latest system details and choose an available option.");
@@ -140,20 +189,22 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
     organizationPicker?.destroy();
     organizationPicker = undefined;
     navigation.replaceChildren();
-    const personalNavigation = el("section", undefined, "manager-personal-navigation");
-    personalNavigation.setAttribute("aria-label", t("סביבת עבודה אישית", "Personal workspace"));
-    personalNavigation.append(el("p", t("סביבת עבודה אישית", "Personal workspace"), "manager-nav-title"));
-    navigation.append(personalNavigation);
     if (!profile) return;
-    const roles = el("div", undefined, "manager-sidebar-roles");
-    const role = el("span", profile.role === "admin" ? "WIFIGATE Pay Admin" : "WIFIGATE Pay User");
-    role.dir = "ltr";
-    roles.append(role);
-    personalNavigation.append(roles);
-    const personal = button(t("המערכות שלי", "My systems"), () => { organizationId = null; listView = "systems"; void load(); });
-    const organizations = button(t("הארגונים שלי", "My organizations"), () => { organizationId = null; listView = "organizations"; closeView(); renderList(); announce(""); });
-    if (!organizationId) (listView === "organizations" ? organizations : personal).setAttribute("aria-current", "page");
-    personalNavigation.append(personal, organizations);
+    if (hasPersonalWorkspace()) {
+      const personalNavigation = el("section", undefined, "manager-personal-navigation");
+      personalNavigation.setAttribute("aria-label", t("סביבת עבודה אישית", "Personal workspace"));
+      personalNavigation.append(el("p", t("סביבת עבודה אישית", "Personal workspace"), "manager-nav-title"));
+      navigation.append(personalNavigation);
+      const roles = el("div", undefined, "manager-sidebar-roles");
+      const role = el("span", profile.personalRole === "admin" ? "WIFIGATE Pay Admin" : "WIFIGATE Pay User");
+      role.dir = "ltr";
+      roles.append(role);
+      personalNavigation.append(roles);
+      const personal = button(t("המערכות שלי", "My systems"), () => void navigateTo(null));
+      const organizations = button(t("הארגונים שלי", "My organizations"), () => void navigateTo(null, "organizations"));
+      if (!organizationId) (listView === "organizations" ? organizations : personal).setAttribute("aria-current", "page");
+      personalNavigation.append(personal, organizations);
+    }
     if (profile.organizations?.length) {
       const organizationArea = el("section", undefined, "manager-organization-area");
       organizationArea.setAttribute("aria-label", t("סביבת הארגון", "Organization workspace"));
@@ -163,11 +214,11 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
         organizations: profile.organizations.map(org => ({ ...org, name: org.name || t("ארגון", "Organization"), role: org.role })),
         selectedId: organizationId,
         language,
-        onSelect: id => { organizationId = id; listView = "systems"; void load(); },
+        onSelect: id => navigateTo(id),
       });
       organizationArea.append(organizationPicker.root);
       if (organizationId && profile.organizations.some(org => org.id === organizationId)) {
-        const organizationSystems = button(t("מערכות הארגון", "Organization systems"), () => { listView = "systems"; void load(); });
+        const organizationSystems = button(t("מערכות הארגון", "Organization systems"), () => void navigateTo(organizationId));
         organizationSystems.dataset.organizationView = "systems";
         organizationSystems.setAttribute("aria-current", "page");
         organizationArea.append(organizationSystems);
@@ -175,11 +226,14 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
     }
   }
   function renderOrganizations() {
-    content.append(el("h3", t("הארגונים שלי", "My organizations")));
+    const heading = el("div", undefined, "manager-toolbar pay-list-toolbar");
+    heading.append(el("h3", hasPersonalWorkspace() ? t("הארגונים שלי", "My organizations") : t("בחירת ארגון", "Choose organization")), button(t("רענון", "Refresh"), () => void load()));
+    content.append(heading);
+    if (!hasPersonalWorkspace()) content.append(el("p", t("בחרו ארגון כדי לצפות במערכות ובתעריפים בהתאם לתפקיד שלכם.", "Choose an organization to view its systems and tariffs with your assigned role."), "manager-muted"));
     const grid = el("div", undefined, "manager-org-columns pay-organization-list");
     for (const organization of profile?.organizations || []) {
       const actions = el("div", undefined, "manager-org-actions");
-      actions.append(button(t("כניסה לארגון", "Open organization"), () => { organizationId = organization.id; listView = "systems"; void load(); }, "primary"));
+      actions.append(button(t("כניסה לארגון", "Open organization"), () => void navigateTo(organization.id), "primary"));
       const knownCount = Number.isSafeInteger(organization.linkedSystemCount) && organization.linkedSystemCount >= 0;
       const card = createManagerOrganizationCard({ organization: { ...organization, name: organization.name || t("ארגון", "Organization"), linkedSystemCount: knownCount ? organization.linkedSystemCount : 0 }, language, actions });
       card.classList.add("pay-organization-card");
@@ -229,7 +283,7 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
     const name = organization.name || t("ארגון", "Organization");
     const text = el("div", undefined, "manager-organization-identity");
     text.append(el("p", t("סביבת הארגון", "Organization workspace"), "manager-eyebrow"), el("h2", name), el("p", t("גישה לנקודות ולתעריפים של הארגון", "Access to your organization's points and tariffs"), "manager-muted"));
-    header.append(createOrganizationLogo({ ...organization, name }, language, "manager-organization-logo"), text, button(t("כל הארגונים", "All organizations"), () => { organizationId = null; listView = "organizations"; closeView(); renderList(); announce(""); }));
+    header.append(createOrganizationLogo({ ...organization, name }, language, "manager-organization-logo"), text, button(t("כל הארגונים", "All organizations"), () => void navigateTo(null, "organizations")));
     content.append(header);
     const details = el("div");
     details.append(el("p", organizationRole(organization.role), "manager-note"));
@@ -241,12 +295,13 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
     content.setAttribute("aria-busy", "false");
     content.replaceChildren();
     renderNavigation();
-    if (listView === "organizations") { renderOrganizations(); return; }
+    delete document.body.dataset.organizationRole;
+    if (listView === "organizations" || (!organizationId && !hasPersonalWorkspace())) { renderOrganizations(); return; }
     const organization = profile?.organizations?.find(item => item.id === organizationId);
     if (organization) {
       organizationHeader(organization);
       document.body.dataset.organizationRole = organization.role;
-      content.append(createOrganizationRoleCard({ product: "pay", language, role: organization.role, plan: profile.role === "admin" ? "admin" : null, organizationName: organization.name }));
+      content.append(createOrganizationRoleCard({ product: "pay", language, role: organization.role, plan: hasPersonalWorkspace() ? profile.personalRole : null, organizationName: organization.name }));
     } else delete document.body.dataset.organizationRole;
     if (!organizationId) {
       const examplesGrid = el("div", undefined, "manager-grid manager-example-grid pay-system-grid");
@@ -291,16 +346,35 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
       content.append(more);
     }
   }
-  async function load() {
+  async function load(successMessage = "") {
     closeView(); const guard = generation;
+    items = []; nextCursor = null;
     loading();
     try {
-      const [me, systems] = await Promise.all([request(`${BASE}/me`), request(`${BASE}/systems?limit=50${organizationId ? `&organizationId=${encodeURIComponent(organizationId)}` : ""}`)]);
+      const me = await request(`${BASE}/me`);
       if (closed || guard !== generation) return;
-      if (!["admin", "user"].includes(me?.role) || me.user?.uid !== user.uid || me.paymentsEnabled !== false || systems.paymentsEnabled !== false || !Array.isArray(systems.items)) throw new Error("invalid-response");
-      profile = me; items = systems.items; nextCursor = systems.nextCursor || null;
-      onProfile(me); renderList(); announce("");
-    } catch (error) { if (!closed && guard === generation) failure(error, () => void load()); }
+      if (!["admin", "user"].includes(me?.role) || me.user?.uid !== user.uid || me.paymentsEnabled !== false || !Array.isArray(me.organizations) || me.organizations.some(org => !org || typeof org.id !== "string" || !org.id || !["owner", "admin", "staff", "viewer"].includes(org.role))) throw new Error("invalid-response");
+      profile = me;
+      if (organizationId && !me.organizations.some(org => org.id === organizationId)) {
+        organizationId = null; listView = "organizations";
+      }
+      if (!organizationId && !hasPersonalWorkspace()) listView = "organizations";
+      rememberLocation();
+      onProfile(me);
+      renderNavigation();
+      if (listView === "organizations") { renderList(); announce(successMessage); return; }
+      const systems = await request(`${BASE}/systems?limit=50${organizationId ? `&organizationId=${encodeURIComponent(organizationId)}` : ""}`);
+      if (closed || guard !== generation) return;
+      if (systems.paymentsEnabled !== false || !Array.isArray(systems.items)) throw new Error("invalid-response");
+      items = systems.items; nextCursor = systems.nextCursor || null;
+      renderList(); announce(successMessage);
+    } catch (error) {
+      if (!closed && guard === generation) {
+        profile = undefined; renderNavigation();
+        delete document.body.dataset.organizationRole;
+        failure(error, () => void load());
+      }
+    }
   }
   async function openSystem(system, isDemo = false) {
     cancelDialog(); activity.reset(); const guard = ++generation;
@@ -314,7 +388,7 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
       selected = result.system; renderSystem(); announce("");
     } catch (error) { if (!closed && guard === generation) failure(error, () => void openSystem(system)); }
   }
-  function back() { closeView(); renderList(); announce(""); }
+  function back() { if (canLeave()) void load(); }
   function renderSystem() {
     content.setAttribute("aria-busy", "false"); content.replaceChildren();
     renderNavigation();
@@ -338,7 +412,7 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
     navigation.setAttribute("aria-label", t("סביבת ניהול Pay", "Pay management workspace"));
     navigation.setAttribute("role", "tablist");
     for (const [id, label, glyph] of [["overview", t("סקירה", "Overview"), "systems"], ["settings", t("נקודה ותעריף", "Point and tariff"), "tune"], ["preview", t("תצוגת לקוח", "Customer preview"), "qr"]]) {
-      const b = button(label, () => { if (!busy) { tab = id; renderSystem(); } }); b.dataset.payTab = id; b.setAttribute("role", "tab"); b.setAttribute("aria-selected", String(tab === id));
+      const b = button(label, () => { if (!busy && id !== tab && canLeave()) { tab = id; renderSystem(); } }); b.dataset.payTab = id; b.setAttribute("role", "tab"); b.setAttribute("aria-selected", String(tab === id));
       if (tab === id) b.setAttribute("aria-current", "page"); navigation.append(b);
     }
     content.append(navigation);
@@ -455,6 +529,7 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
     });
     fields.get("displayName").addEventListener("input", () => fields.get("displayName").setCustomValidity(""));
     panel.append(form); content.append(panel);
+    draft = { form, values: formValues(form) };
   }
   function renderPreview() {
     const panel = el("section", undefined, "manager-card pay-panel pay-preview-layout");
@@ -545,7 +620,7 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
         const result = await request(`${BASE}/systems/${encodeURIComponent(id)}/remove`, "POST", { version: selected.version }, removalKey);
         if (closed || guard !== generation) return;
         if (result.system?.id !== id || result.system.status !== "removed") throw new Error("invalid-response");
-        items = items.filter(system => system.id !== id); cancelDialog(); back(); announce(t("המערכת נותקה מ־Pay.", "System unlinked from Pay."));
+        items = items.filter(system => system.id !== id); cancelDialog(); await load(t("המערכת נותקה מ־Pay.", "System unlinked from Pay."));
       } catch (error) { if (!closed && guard === generation && dialog.isConnected) alert.textContent = errorText(error); }
       finally { if (!closed && guard === generation) { busy = false; confirm.disabled = false; cancel.disabled = false; confirm.textContent = t("ניתוק המערכת", "Unlink system"); dialog.removeAttribute("aria-busy"); } }
     }, "danger");
@@ -554,6 +629,9 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
     activeDialog = dialog; root.append(dialog); activity.pause(true); dialog.showModal(); cancel.focus();
   }
   renderNavigation();
-  void load();
-  return { refresh: load, close() { closed = true; ++generation; cancelDialog(); organizationPicker?.destroy(); activity.close(); root.replaceChildren(); } };
+  readLocation();
+  window.addEventListener("popstate", onHistory);
+  window.addEventListener("beforeunload", beforeUnload);
+  const ready = load();
+  return { ready, refresh: load, close() { closed = true; ++generation; window.removeEventListener("popstate", onHistory); window.removeEventListener("beforeunload", beforeUnload); cancelDialog(); organizationPicker?.destroy(); activity.close(); delete document.body.dataset.organizationRole; root.replaceChildren(); } };
 }

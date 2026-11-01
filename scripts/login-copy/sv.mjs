@@ -1,5 +1,6 @@
 // Sign-in page copy (/sv/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Webbläsaren kunde inte verifieras. Ladda om sidan och försök igen. Kontakta support om problemet kvarstår.",
   pageTitle: "Logga in",
   heading: "Logga in på WIFIGATE",
   home: "WIFIGATE startsida",

@@ -21,6 +21,7 @@ import {
 const copy = {
   he: {
     calendar: "לוח שנה",
+    organizationCalendar: "יומן הארגון",
     sheet: ["מערכת", "שם האורח", "טלפון", "הגעה", "עזיבה"],
     more: "פרטים נוספים",
     create: "יצירת קישור לאורח",
@@ -36,6 +37,7 @@ const copy = {
   },
   en: {
     calendar: "Calendar",
+    organizationCalendar: "Organization calendar",
     sheet: ["System", "Guest name", "Phone", "Arrives", "Leaves"],
     more: "More details",
     create: "Create guest link",
@@ -99,7 +101,7 @@ test("the URL's language sets direction, labels and layout while names stay as p
       await page
         .locator('#host-section-navigation [data-view-id="calendar"]')
         .innerText(),
-      words.calendar,
+      words.organizationCalendar,
     );
     assert.equal(
       await page.locator("#workspace-current-view").innerText(),
@@ -278,6 +280,13 @@ test("the URL's language sets direction, labels and layout while names stay as p
       ["settings", "account"],
     ]) {
       await page.setViewportSize({ width: 1440, height: 900 });
+      // Personal inventory clears the organization selection. Re-enter the
+      // hotel explicitly before checking the next organization screen.
+      if (view !== "my-systems" && !new URL(page.url()).searchParams.has("org")) {
+        await page.locator("#workspace-org-switcher button.manager-organization-picker-trigger").click();
+        await page.locator('.manager-organization-option[data-organization-id="fixture-org"]').click();
+        await loaded(page, "systems");
+      }
       await page
         .locator(`#host-section-navigation [data-view-id="${view}"]`)
         .click();
@@ -363,14 +372,17 @@ test("the URL's language sets direction, labels and layout while names stay as p
     foreign.searchParams.set("org", "foreign-organization");
     await page.goto(foreign.href);
     await page.waitForFunction(() => window.workspaceStarted);
-    await loaded(page, "bookings");
-    assert.equal(new URL(page.url()).searchParams.get("org"), "fixture-org");
+    await loaded(page, "my-systems");
+    assert.equal(new URL(page.url()).searchParams.has("org"), false);
+    assert.equal(await page.locator('#host-section-navigation [data-view-id="calendar"]').isVisible(), false);
     assert.equal(
       (await requests(page)).some((entry) =>
         entry.call.includes("foreign-organization"),
       ),
       false,
     );
+    assert.equal((await requests(page)).some(entry => /\/organizations\/[^/]+\//.test(entry.call)), false,
+      "an invalid organization never silently selects another organization");
     assert.deepEqual(errors, []);
   }
 });

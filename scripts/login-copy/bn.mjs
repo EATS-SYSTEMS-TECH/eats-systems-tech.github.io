@@ -1,5 +1,6 @@
 // Sign-in page copy (/bn/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "ব্রাউজার যাচাই করা যায়নি। পৃষ্ঠাটি রিলোড করে আবার চেষ্টা করুন। সমস্যা চলতে থাকলে সহায়তার সঙ্গে যোগাযোগ করুন।",
   pageTitle: "সাইন ইন",
   heading: "WIFIGATE-এ সাইন ইন করুন",
   home: "WIFIGATE হোম পেজ",

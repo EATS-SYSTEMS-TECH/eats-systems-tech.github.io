@@ -1,5 +1,6 @@
 // Sign-in page copy (/id/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Verifikasi browser gagal. Muat ulang halaman dan coba lagi. Jika masalah berlanjut, hubungi dukungan.",
   pageTitle: "Masuk",
   heading: "Masuk ke WIFIGATE",
   home: "Beranda WIFIGATE",

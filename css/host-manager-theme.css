@@ -16,18 +16,7 @@ body.host-app.host-manager-workspace[data-product="host"] {
   --host-tint-line: #cfe0ff;
   --dashboard-accent: var(--host, #0b63ff);
   --dashboard-soft: var(--host-soft, #eaf2ff);
-  background-color: #fff;
-  background-image: linear-gradient(90deg,
-    transparent calc(50% - var(--platform-content-half) - 40px),
-    rgba(255, 255, 255, .9) calc(50% - var(--platform-content-half)),
-    rgba(255, 255, 255, .96) 50%,
-    rgba(255, 255, 255, .9) calc(50% + var(--platform-content-half)),
-    transparent calc(50% + var(--platform-content-half) + 40px)),
-    url("../assets/img/dashboard-backdrop.svg");
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+  background: var(--workspace-canvas, #f3f6fa);
 }
 .host-manager-workspace::before { display: none; }
 .host-manager-workspace .host-manager-shell { --manager-accent: var(--host); }
@@ -40,7 +29,7 @@ body.host-app.host-manager-workspace .host-manager-page:has(> #host-workspace-sh
   z-index: 20;
   width: 100%;
   max-width: none;
-  margin: 0 auto clamp(1.75rem, 5vw, 3rem);
+  margin: 0 auto 24px;
   grid-template-areas: none;
 }
 body.host-app.host-manager-workspace[data-product="host"] .host-topbar::before {

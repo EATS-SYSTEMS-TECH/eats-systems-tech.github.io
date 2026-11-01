@@ -74,7 +74,8 @@ export function getPayAccessOrganizations(
 export type PlatformAccessChange =
   | { action: "remove"; email: string; product: ProductId }
   | { action: "invite"; email: string; product: "host" | "manager" }
-  | { action: "invite"; email: string; product: "pay"; organizationId: string };
+  | { action: "invite"; email: string; product: "pay"; organizationId: string; scope?: "organization" }
+  | { action: "invite" | "remove"; email: string; product: "pay"; scope: "personal" };
 
 export function changePlatformProductAccess(
   user: FirebaseUser,
@@ -83,6 +84,8 @@ export function changePlatformProductAccess(
 ): Promise<{
   product: ProductId;
   state: "active" | "blocked";
+  scope?: "personal";
+  changed?: boolean;
   emailDelivery: false;
 }> {
   return authenticatedRequest(profileApi, user, {

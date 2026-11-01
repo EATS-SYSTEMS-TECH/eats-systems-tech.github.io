@@ -1,3 +1,5 @@
+@import url("./workspace-operations.css?v=20261101workspace1");
+
 /* Shared dashboard chrome: logo, workspace, language and personal profile. */
 body[data-product] .dashboard-examples,
 .host-app #host-management details.dashboard-examples {

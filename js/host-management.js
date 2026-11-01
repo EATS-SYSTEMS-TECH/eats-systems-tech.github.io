@@ -10,6 +10,7 @@ import {
 } from "./host-my-systems.js";
 import { readSystem } from "./host-system-cards.js";
 import { clearHostCalendar } from "./host-calendar.js";
+import { watchHostDrafts, confirmHostWorkspaceLeave } from "./host-workspace-drafts.js";
 import { workspaceLoaders } from "./host-workspace-views.js";
 import {
   renderOrganizationSelector,
@@ -29,6 +30,7 @@ import {
 // Host plan holders, and the join-organization inbox. Each view is built
 // once it is first opened; what is built follows workspace.permissions.
 const root = document.querySelector("#host-management");
+watchHostDrafts(root);
 const attempts = new Map();
 let generation = 0;
 let currentUser;
@@ -309,6 +311,7 @@ async function loadWorkspace(user, identity, preferredId) {
     const permissions = org ? [...permissionsOf(org)] : undefined;
     const chooseOrganization = (id) => {
       if (!organizations.some(entry => entry.id === id)) return;
+      if (id !== selectedId && !confirmHostWorkspaceLeave(root)) return;
       window.dispatchEvent(new CustomEvent("host:menu-close"));
       const url = new URL(location.href);
       url.pathname = "/dashboard/host/";
@@ -488,13 +491,14 @@ async function loadWorkspace(user, identity, preferredId) {
     // and the screen that made the change reloads now.
     const systemsChanged = async (view, systemId) => {
       if (!current()) return;
+      const activeView = workspaceLocation(new URL(location.href), root.dataset.homeView);
       mySystems = undefined;
       orgSystems = undefined;
       for (const [id, panel] of panels)
         if (id !== "invitations" && id !== "settings") resetPanel(id, panel);
       showSidebarSystems();
-      pendingFocus = { view, id: systemId };
-      await navigateWorkspace?.(view);
+      pendingFocus = activeView === view ? { view, id: systemId } : undefined;
+      await navigateWorkspace?.(panels.has(activeView) ? activeView : root.dataset.homeView);
     };
     // My systems could not be read: Try again reads them afresh (the view
     // and the sidebar list).

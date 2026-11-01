@@ -55,6 +55,14 @@ export function createPlatformAccountActions({
         "החשבון לא נמצא. רעננו את הרשימה.",
         "The account was not found. Refresh the list.",
       ),
+      VERSION_CONFLICT: t(
+        "הגישה השתנתה. רעננו את הרשימה ובדקו את המצב לפני ניסיון נוסף.",
+        "Access has changed. Refresh the list and review it before trying again.",
+      ),
+      IDEMPOTENCY_CONFLICT: t(
+        "הבקשה משויכת לשינוי אחר. סגרו את החלון ובדקו את הגישה לפני ניסיון נוסף.",
+        "This request belongs to another change. Close this dialog and review access before retrying.",
+      ),
     })[error?.code] ||
     (error?.status === 403
       ? t(
@@ -119,6 +127,20 @@ export function createPlatformAccountActions({
     product.value = products.includes(selectedProduct) ? selectedProduct : "";
     const productLabel = node("label", t("מסלול", "Product"));
     productLabel.append(product);
+    const payScope = node("select");
+    payScope.name = "scope";
+    for (const [value, label] of [
+      ["personal", t("Pay User — גישה אישית", "Pay User — personal access")],
+      [action === "invite" ? "organization" : "all", action === "invite"
+        ? t("חבר בארגון Pay", "Pay organization member")
+        : t("כל הגישה ל־Pay, כולל ארגונים", "All Pay access, including organizations")],
+    ]) {
+      const option = node("option", label);
+      option.value = value;
+      payScope.append(option);
+    }
+    const payScopeLabel = node("label", t("סוג הגישה ל־Pay", "Pay access type"));
+    payScopeLabel.append(payScope);
     const organization = node("select");
     organization.name = "organizationId";
     const organizationLabel = node("label", t("ארגון Pay", "Pay organization"));
@@ -147,6 +169,7 @@ export function createPlatformAccountActions({
       intro,
       emailLabel,
       productLabel,
+      payScopeLabel,
       organizationLabel,
       scope,
       feedback,
@@ -177,9 +200,12 @@ export function createPlatformAccountActions({
     cancel.addEventListener("click", close);
     async function updateProduct() {
       const epoch = ++orgGeneration;
-      const pay = action === "invite" && product.value === "pay";
-      organizationLabel.hidden = !pay;
-      organization.required = pay;
+      const pay = product.value === "pay";
+      const personalPay = pay && payScope.value === "personal";
+      const payOrganization = pay && action === "invite" && !personalPay;
+      payScopeLabel.hidden = !pay;
+      organizationLabel.hidden = !payOrganization;
+      organization.required = payOrganization;
       scope.textContent = product.value
         ? action === "remove"
           ? t(
@@ -196,7 +222,19 @@ export function createPlatformAccountActions({
                 `User access to ${nameFor(product.value)}.`,
               )
         : "";
-      if (action === "remove" && product.value) {
+      if (personalPay) {
+        intro.textContent = action === "remove"
+          ? t("הגישה האישית ל־Pay תוסר. החברות והתפקידים בארגונים יישארו כפי שהם. אין שינוי בחיוב.", "Personal Pay access will be removed. Organization memberships and roles stay unchanged. Billing does not change.")
+          : t("הגדירו גישה אישית כ־Pay User. הפעולה אינה מצרפת את המשתמש לארגון ואינה משנה חיוב. נדרש חשבון שכבר נכנס פעם אחת.", "Assign personal Pay User access. This does not join an organization or change billing. The account must have signed in once.");
+        scope.textContent = action === "remove"
+          ? t("המערכות שלי והארגונים שלי יוסתרו. גישה לארגונים תמשיך לפי התפקיד של המשתמש בכל ארגון.", "My systems and My organizations will be hidden. Organization access continues according to each membership role.")
+          : t("Pay User מקבל את המערכות שלי והארגונים שלי. גישה לנתוני ארגון מחייבת תפקיד נפרד באותו ארגון.", "Pay User gets My systems and My organizations. Access to an organization's data requires a separate role in that organization.");
+      } else {
+        intro.textContent = action === "remove"
+          ? t("הגישה למסלול שנבחר תיחסם. החשבון והנתונים יישמרו, והגישה למסלולים האחרים תישאר כפי שהיא.", "Access to the selected product will be blocked. The account and data will be kept, and other products will keep their current access.")
+          : t("הגדירו גישת משתמש ושתפו איתו קישור כניסה. הפעולה אינה שולחת דוא״ל. ל־Manager ול־Pay נדרש חשבון שכבר נכנס פעם אחת.", "Set up user access and share a sign-in link. This action does not send email. Manager and Pay require an account that has signed in once.");
+      }
+      if (action === "remove" && product.value && !personalPay) {
         const address = node("bdi", email.value),
           plan = node("bdi", nameFor(product.value));
         address.dir = "ltr";
@@ -209,7 +247,7 @@ export function createPlatformAccountActions({
           document.createTextNode(t(" בלבד.", " only.")),
         );
       }
-      if (!pay) {
+      if (!payOrganization) {
         submit.disabled = false;
         feedback.textContent = "";
         return;
@@ -244,6 +282,7 @@ export function createPlatformAccountActions({
       }
     }
     product.addEventListener("change", () => void updateProduct());
+    payScope.addEventListener("change", () => void updateProduct());
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (busy || finished || !form.reportValidity()) return;
@@ -251,7 +290,9 @@ export function createPlatformAccountActions({
         action,
         email: email.value.trim().toLowerCase(),
         product: product.value,
-        ...(action === "invite" && product.value === "pay"
+        ...(product.value === "pay" && payScope.value === "personal"
+          ? { scope: "personal" }
+          : action === "invite" && product.value === "pay"
           ? { organizationId: organization.value }
           : {}),
       };
@@ -271,8 +312,12 @@ export function createPlatformAccountActions({
       try {
         await ensureRecent();
         if (!live()) return;
-        await changePlatformProductAccess(user, input, key);
+        const result = await changePlatformProductAccess(user, input, key);
         if (!live()) return;
+        if (input.scope === "personal" && (result.scope !== "personal"
+          || result.product !== "pay" || result.state !== (action === "invite" ? "active" : "blocked"))) {
+          throw new Error("incomplete-access-response");
+        }
         finished = true;
         busy = false;
         onChanged(

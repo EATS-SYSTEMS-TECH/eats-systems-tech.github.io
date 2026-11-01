@@ -1,5 +1,6 @@
 // Sign-in page copy (/cs/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Ověření prohlížeče se nezdařilo. Obnovte stránku a zkuste to znovu. Pokud problém přetrvává, kontaktujte podporu.",
   pageTitle: "Přihlášení",
   heading: "Přihlášení do WIFIGATE",
   home: "Domovská stránka WIFIGATE",

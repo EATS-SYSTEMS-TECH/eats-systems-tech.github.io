@@ -68,7 +68,7 @@ async function fixture(browser, origin, product, language, width) {
         api: async (route, method = "GET") => {
           window.fixtureCalls.push({ route, method });
           if (method !== "GET") throw new Error("Visual fixtures never perform mutations");
-          if (route === "/api/v1/pay/me") return { user: { uid: "fixture-user" }, role: "user", canManageSystems: true, uploadEnabled: true, paymentsEnabled: false, organizations };
+          if (route === "/api/v1/pay/me") return { user: { uid: "fixture-user" }, role: "user", personalRole: "user", canManageSystems: true, uploadEnabled: true, paymentsEnabled: false, organizations };
           if (route.startsWith("/api/v1/pay/systems?")) return { items: systems, nextCursor: null, paymentsEnabled: false };
           const selected = systems.find(system => route === `/api/v1/pay/systems/${system.id}`);
           if (selected) return { system: selected, paymentsEnabled: false };
@@ -136,13 +136,23 @@ test("Pay shares production Manager component geometry in both languages at phon
         assert.equal(await pay.page.locator(realCards).count(), 3, "Gate, Dual Control and Group retain the same inventory layout");
         for (let index = 0; index < 3; index++) {
           const reference = manager.page.locator(realCards).nth(index), actual = pay.page.locator(realCards).nth(index);
-          assert.deepEqual(await measure(actual), await measure(reference), `type ${index}: same card geometry`);
-          for (const inner of [".manager-icon", "h4", ".manager-muted", ".manager-system-actions", "button"]) {
+          // Pay's secondary actions live inside its workspace; Manager also
+          // exposes removal on the inventory card. Preserve both action sets.
+          const { height: payHeight, ...payCard } = await measure(actual);
+          const { height: managerHeight, ...managerCard } = await measure(reference);
+          assert.deepEqual(payCard, managerCard, `type ${index}: same card surface and width`);
+          assert.ok(managerHeight >= payHeight, "Manager accommodates its additional action without clipping");
+          for (const inner of [".manager-icon", "h4", ".manager-muted", "button.primary"]) {
             assert.deepEqual(await measure(actual.locator(inner)), await measure(reference.locator(inner)), `type ${index} ${inner}: same inner geometry`);
           }
+          const { height: payActionsHeight, ...payActions } = await measure(actual.locator(".manager-system-actions"));
+          const { height: managerActionsHeight, ...managerActions } = await measure(reference.locator(".manager-system-actions"));
+          assert.deepEqual(payActions, managerActions, "action rows share spacing and width");
+          assert.ok(managerActionsHeight >= payActionsHeight);
+          assert.equal(await reference.locator(".manager-system-remove").count(), 1, "Manager retains its authorized remove action");
           assert.equal(await actual.getByRole("button").count(), 1, "one primary workspace action per inventory card");
         }
-        const primary = page => page.locator(realCards).first().getByRole("button");
+        const primary = page => page.locator(realCards).first().locator("button.primary");
         const managerColor = await contrast(primary(manager.page)), payColor = await contrast(primary(pay.page));
         assert.notEqual(payColor.background, managerColor.background, "Pay keeps its own product accent");
         assert.equal(payColor.color, "rgb(255, 255, 255)");

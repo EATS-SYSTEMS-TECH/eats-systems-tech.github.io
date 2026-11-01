@@ -20,7 +20,7 @@ test("Manager and Pay separate personal access from explicitly selected organiza
         page.setDefaultTimeout(7000);
         const errors = [];
         page.on("pageerror", error => errors.push(error.message));
-        await page.route(origin + "/workspace-fixture", route => route.fulfill({ contentType: "text/html; charset=utf-8", body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"><link rel="stylesheet" href="/css/pay-dashboard.css"><body class="platform-page" data-product="${product}"><main class="platform-shell"><section class="portal-panel"><div id="root"></div></section></main>` }));
+        await page.route(origin + "/workspace-fixture", route => route.fulfill({ contentType: "text/html; charset=utf-8", body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"><link rel="stylesheet" href="/css/pay-dashboard.css"><link rel="stylesheet" href="/css/dashboard-header.css"><body class="platform-page" data-product="${product}"><main class="platform-shell"><section class="portal-panel"><div id="root"></div></section></main>` }));
         await page.goto(origin + "/workspace-fixture");
         await page.evaluate(async ({ product, role, language }) => {
           const organizations = [{ id: "org-a", name: "WIFIGATE TEST", role: "owner" }, { id: "org-b", name: "Second organization", role: "viewer" }];
@@ -29,7 +29,7 @@ test("Manager and Pay separate personal access from explicitly selected organiza
             if (method !== "GET") throw new Error("Navigation must never mutate data");
             const path = rawPath.replace(/^\/api\/v1\/pay/, "");
             window.calls.push(path);
-            if (path === "/me") return { user: { uid: "fixture" }, paymentsEnabled: false, role, roles: role === "admin" ? ["admin", "user"] : ["user"], account: { id: "me" }, organizations };
+            if (path === "/me") return { user: { uid: "fixture" }, paymentsEnabled: false, role, personalRole: role, roles: role === "admin" ? ["admin", "user"] : ["user"], account: { id: "me" }, organizations };
             if (path === "/organizations/org-a" || path === "/organizations/org-b") return { organization: organizations.find(org => path.endsWith(org.id)), permissions: { managePeople: false, manageLogo: false }, owner: { email: "fixture@example.test" }, counts: { systems: 0, admins: 0, users: 0 } };
             if (path.startsWith("/organizations?")) return { items: organizations, nextCursor: null };
             return { items: [], nextCursor: null, paymentsEnabled: false };
@@ -57,7 +57,10 @@ test("Manager and Pay separate personal access from explicitly selected organiza
         await page.waitForFunction(product => window.calls.some(path => product === "manager" ? path.startsWith("/organizations/org-b/systems?") : path.includes("organizationId=org-b")), product);
         assert.match(await choose().innerText(), /Second organization/);
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true);
-        if (width === 1440) assert.ok((await nav.boundingBox()).width >= 300);
+        if (width === 1440) {
+          const navWidth = (await nav.boundingBox()).width;
+          assert.ok(navWidth >= 240 && navWidth <= 320, "sidebar leaves room for readable navigation and the working view");
+        }
         await screenshot(page, `${product}-${role}-${language}-${width}`);
         await personal.getByRole("button", { name: mySystems, exact: true }).click();
         await page.waitForFunction(() => !document.querySelector('[data-organization-view="systems"]'));
@@ -107,10 +110,11 @@ test("Host requires organization selection and keeps systems, calendar and API s
   }
   await t.test("An unknown organization cannot select another organization or expose its screens", async () => {
     const { page, errors } = await openWorkspace(t, site, { plan: null, organizations: [organization("org-a", "WIFIGATE TEST", "viewer")] }, { real: true, selectOrganization: false, query: "?org=not-a-member&view=calendar" });
-    await loaded(page, "my-organizations");
+    await loaded(page, "choose-organization");
     assert.equal(new URL(page.url()).searchParams.has("org"), false);
     assert.equal(await page.locator('#host-section-navigation [data-view-id="systems"]').isVisible(), false);
     assert.equal(await page.locator('#host-section-navigation [data-view-id="my-systems"]').isVisible(), false);
+    assert.equal(await page.locator('#host-section-navigation [data-view-id="my-organizations"]').isVisible(), false);
     assert.equal((await requests(page)).some(row => /\/organizations\/[^/]+\//.test(row.call)), false);
     assert.deepEqual(errors, []);
   });

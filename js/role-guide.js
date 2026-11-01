@@ -117,6 +117,9 @@ const copy = {
     orgLevelNote:
       "A separate role in every organization and in every product, so a person can be an admin in Pay and a viewer in Host.",
     subscription: "Monthly subscription",
+    personalAccess: "Personal access",
+    billingUnchanged: "No billing change",
+    payBilling: "Pay User access is assigned by a platform administrator. It opens My systems and My organizations without creating a subscription or changing billing. Organization roles are assigned separately.",
     noSubscription: "No subscription",
     free: "Free",
     you: "You",
@@ -142,7 +145,7 @@ const copy = {
       [
         "card",
         "Subscriptions",
-        "An estimate of what Users pay each month. Admins are exempt; organization employees never pay.",
+        "Monthly estimates for billable subscriptions. Admins are exempt; organization employees never pay for their membership. Pay User access does not create a subscription.",
       ],
     ],
     managementBoundary:
@@ -169,6 +172,9 @@ const copy = {
     orgLevelNote:
       "תפקיד נפרד בכל ארגון ובכל מוצר, כך שאדם יכול להיות admin ב־Pay ו־viewer ב־Host.",
     subscription: "מנוי חודשי",
+    personalAccess: "גישה אישית",
+    billingUnchanged: "ללא שינוי בחיוב",
+    payBilling: "מנהל פלטפורמה מעניק גישת Pay User. היא פותחת את המערכות שלי והארגונים שלי, בלי ליצור מנוי או לשנות חיוב. תפקידים בארגון ניתנים בנפרד.",
     noSubscription: "ללא מנוי",
     free: "ללא עלות",
     you: "את/ה",
@@ -194,7 +200,7 @@ const copy = {
       [
         "card",
         "מנויים",
-        "אומדן של מה ש־Users משלמים בכל חודש. Admins פטורים; עובדי ארגון לעולם אינם משלמים.",
+        "אומדן חודשי למנויים בתשלום. Admins פטורים; עובדי ארגון אינם משלמים על החברות. גישת Pay User אינה יוצרת מנוי.",
       ],
     ],
     managementBoundary:
@@ -233,6 +239,17 @@ const plans = {
       "משלם את המנוי החודשי על המערכות שבתוכנית.",
     ],
   },
+};
+
+const payUserPlan = {
+  en: [
+    "Personal Pay access assigned by a platform administrator: My systems and My organizations.",
+    "This access does not create a subscription or change billing. Organization membership is separate and does not grant Pay User access.",
+  ],
+  he: [
+    "גישה אישית ל־Pay שמעניק מנהל פלטפורמה: המערכות שלי והארגונים שלי.",
+    "הגישה אינה יוצרת מנוי ואינה משנה חיוב. חברות בארגון נפרדת ממנה ואינה מעניקה גישת Pay User.",
+  ],
 };
 
 // Organization roles per product: a summary and the rows of the matrix.
@@ -407,7 +424,7 @@ function roleCard(product, level, role, text, lang, current) {
   const price =
     level === "plan"
       ? role === "user"
-        ? [t.subscription, "paid"]
+        ? product === "pay" ? [t.personalAccess, "access"] : [t.subscription, "paid"]
         : [t.noSubscription, "exempt"]
       : [t.free, "free"];
   const tag = element("span", "role-guide-tag", price[0]);
@@ -491,11 +508,11 @@ function productPanel(product, lang, current = {}) {
   const planLevel = element("section", "role-guide-level");
   planLevel.dataset.level = "plan";
   planLevel.append(
-    levelHeading("layers", t.planLevel),
+    levelHeading("layers", product === "pay" ? t.personalAccess : t.planLevel),
     element("p", "role-guide-level__note", t.planLevelNote),
   );
   for (const role of ["admin", "user"])
-    planLevel.append(roleCard(product, "plan", role, plans[lang][role], lang, own.plan === role));
+    planLevel.append(roleCard(product, "plan", role, product === "pay" && role === "user" ? payUserPlan[lang] : plans[lang][role], lang, own.plan === role));
 
   const orgLevel = element("section", "role-guide-level");
   orgLevel.dataset.level = "organization";
@@ -523,10 +540,10 @@ function productPanel(product, lang, current = {}) {
   const billing = element("aside", "role-guide-billing");
   billing.append(svg(icons.card));
   const billingText = element("div");
-  billingText.append(element("strong", "", t.billingTitle), element("p", "", fill(t.billing, product)));
+  billingText.append(element("strong", "", t.billingTitle), element("p", "", product === "pay" ? t.payBilling : fill(t.billing, product)));
   const payers = element("div", "role-guide-billing__payers");
   for (const [icon, name, price, kind] of [
-    ["card", roleTitle(product, "plan", "user"), t.subscription, "paid"],
+    ["card", roleTitle(product, "plan", "user"), product === "pay" ? t.billingUnchanged : t.subscription, product === "pay" ? "access" : "paid"],
     ["shield", roleTitle(product, "plan", "admin"), t.noSubscription, "exempt"],
     ["building", organizationRoles.join(" · "), t.free, "free"],
   ]) {

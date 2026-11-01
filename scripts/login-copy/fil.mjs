@@ -1,5 +1,6 @@
 // Sign-in page copy (/fil/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Hindi ma-verify ang browser. I-reload ang pahina at subukang muli. Kung magpatuloy ang problema, makipag-ugnayan sa suporta.",
   pageTitle: "Pumasok",
   heading: "Pumasok sa WIFIGATE",
   home: "Pangunahing pahina ng WIFIGATE",

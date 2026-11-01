@@ -96,12 +96,23 @@ test("Host uses production Manager layout and shared components with Host colors
         assert.equal(await hostCards.count(), 3);
         for (let index = 0; index < 3; index++) {
           const reference = managerCards.nth(index), actual = hostCards.nth(index);
-          assert.deepEqual(await measure(actual), await measure(reference), `Gate/Dual Control/Group ${index} use identical card geometry`);
-          for (const inner of [".manager-icon", "h4", ".manager-muted", ".manager-system-actions", "button"]) assert.deepEqual(await measure(actual.locator(inner).first()), await measure(reference.locator(inner).first()), `${index} ${inner}: same card component`);
+          // Manager keeps removal on inventory cards; Host's secondary actions
+          // are inside its workspace. Surface geometry stays shared while the
+          // extra Manager action may make its card taller.
+          const { height: hostHeight, ...hostCard } = await measure(actual);
+          const { height: managerHeight, ...managerCard } = await measure(reference);
+          assert.deepEqual(hostCard, managerCard, `Gate/Dual Control/Group ${index} use the same card surface and width`);
+          assert.ok(managerHeight >= hostHeight, "Manager accommodates its additional action without clipping");
+          for (const inner of [".manager-icon", "h4", ".manager-muted", "button.primary"]) assert.deepEqual(await measure(actual.locator(inner).first()), await measure(reference.locator(inner).first()), `${index} ${inner}: same card component`);
+          const { height: hostActionsHeight, ...hostActions } = await measure(actual.locator(".manager-system-actions"));
+          const { height: managerActionsHeight, ...managerActions } = await measure(reference.locator(".manager-system-actions"));
+          assert.deepEqual(hostActions, managerActions, "action rows share spacing and width");
+          assert.ok(managerActionsHeight >= hostActionsHeight);
+          assert.equal(await reference.locator(".manager-system-remove").count(), 1, "Manager retains its authorized remove action");
           assert.equal(await actual.locator(":scope > .manager-system-actions button").count(), 1, "one primary workspace action per card");
         }
         const primary = hostCards.first().locator(":scope > .manager-system-actions button");
-        const hostColor = await contrast(primary), managerColor = await contrast(managerCards.first().locator("button"));
+        const hostColor = await contrast(primary), managerColor = await contrast(managerCards.first().locator("button.primary"));
         assert.notEqual(hostColor.background, managerColor.background, "Host keeps its own product color");
         assert.equal(hostColor.color, "rgb(255, 255, 255)");
         assert.ok(hostColor.ratio >= 4.5, "primary text contrast");

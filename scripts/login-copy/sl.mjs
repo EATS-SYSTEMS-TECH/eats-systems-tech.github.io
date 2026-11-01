@@ -1,5 +1,6 @@
 // Sign-in page copy (/sl/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Preverjanje brskalnika ni uspelo. Znova naložite stran in poskusite znova. Če težava ostaja, se obrnite na podporo.",
   pageTitle: "Prijava",
   heading: "Prijava v WIFIGATE",
   home: "Domača stran WIFIGATE",

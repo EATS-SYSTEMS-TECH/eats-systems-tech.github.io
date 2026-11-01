@@ -1,5 +1,6 @@
 // Sign-in page copy (/ms/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Pengesahan pelayar gagal. Muat semula halaman dan cuba lagi. Jika masalah berterusan, hubungi sokongan.",
   pageTitle: "Log masuk",
   heading: "Log masuk ke WIFIGATE",
   home: "Laman utama WIFIGATE",

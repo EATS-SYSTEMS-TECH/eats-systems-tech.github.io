@@ -114,7 +114,17 @@ export async function renderOrganizationSystems(panel, context) {
       systemGrid(
         systems.map((system) =>
           systemCard(system, {
-            badges: [sourceBadge(system, context.identity)],
+            badges: [
+              sourceBadge(system, context.identity),
+              badge(
+                hostText(
+                  system.calendarEnabled
+                    ? "Shown in organization calendar"
+                    : "Hidden from organization calendar",
+                ),
+                "calendar",
+              ),
+            ],
             actions: [
               ...(booker
                 ? [
@@ -127,6 +137,11 @@ export async function renderOrganizationSystems(panel, context) {
                 : []),
               ...(manager
                 ? [
+                    action(
+                      "Calendar visibility",
+                      (button) => changeCalendar(system, button, shared),
+                      { variant: "secondary", name: "calendar", blocked },
+                    ),
                     action(
                       "Change icon",
                       (button) => changeIcon(system, button, shared),
@@ -258,6 +273,45 @@ function changeIcon(system, trigger, context) {
       if (iconId === system.iconId) return true;
       const path = `${context.base}/systems/${encodeURIComponent(system.id)}`;
       const body = { version: system.version, iconId };
+      return tracker.run({
+        path,
+        body,
+        status,
+        send: (key) => portalRequest(context.user, path, "PUT", body, key),
+      });
+    },
+  });
+}
+
+function changeCalendar(system, trigger, context) {
+  const tracker = changeTracker(context);
+  openSystemDialog({
+    container: context.section,
+    trigger,
+    title: hostText("Calendar visibility for {p0}", { p0: system.name }),
+    text: hostText(
+      "This only changes the organization calendar. Existing bookings and guest links stay active. All bookings remain available in Bookings.",
+    ),
+    submitLabel: hostText("Save calendar setting"),
+    build(form) {
+      const label = node("label", undefined, { class: "choice" });
+      const input = node("input", undefined, {
+        type: "checkbox",
+        name: "calendarEnabled",
+      });
+      input.checked = system.calendarEnabled;
+      label.append(
+        input,
+        node("span", hostText("Show in organization calendar")),
+      );
+      form.append(label);
+    },
+    onClosed: () => tracker.closed(system.id),
+    submit({ data, status }) {
+      const calendarEnabled = data.has("calendarEnabled");
+      if (calendarEnabled === system.calendarEnabled) return true;
+      const path = `${context.base}/systems/${encodeURIComponent(system.id)}`;
+      const body = { version: system.version, calendarEnabled };
       return tracker.run({
         path,
         body,

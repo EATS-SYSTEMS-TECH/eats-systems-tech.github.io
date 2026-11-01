@@ -1,5 +1,6 @@
 // Sign-in page copy (/zh-hant/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "瀏覽器驗證失敗。請重新載入頁面後再試。如果問題持續，請聯絡支援團隊。",
   pageTitle: "登入",
   heading: "登入 WIFIGATE",
   home: "WIFIGATE 首頁",

@@ -1,5 +1,6 @@
 // Sign-in page copy (/ar/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "تعذّر التحقق من المتصفح. أعد تحميل الصفحة وحاول مرة أخرى. إذا استمرت المشكلة، تواصل مع الدعم.",
   pageTitle: "تسجيل الدخول",
   heading: "تسجيل الدخول إلى WIFIGATE",
   home: "الصفحة الرئيسية لـ WIFIGATE",

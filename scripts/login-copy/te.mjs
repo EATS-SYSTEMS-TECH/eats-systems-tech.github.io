@@ -1,5 +1,6 @@
 // Sign-in page copy (/te/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "బ్రౌజర్ ధృవీకరణ విఫలమైంది. పేజీని మళ్లీ లోడ్ చేసి ప్రయత్నించండి. సమస్య కొనసాగితే సహాయ బృందాన్ని సంప్రదించండి.",
   pageTitle: "సైన్ ఇన్",
   heading: "WIFIGATEకు సైన్ ఇన్ చేయండి",
   home: "WIFIGATE హోమ్ పేజీ",

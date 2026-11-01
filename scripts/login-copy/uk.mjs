@@ -1,5 +1,6 @@
 // Sign-in page copy (/uk/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Не вдалося перевірити браузер. Оновіть сторінку та спробуйте ще раз. Якщо проблема не зникне, зверніться до служби підтримки.",
   pageTitle: "Вхід",
   heading: "Вхід у WIFIGATE",
   home: "Головна сторінка WIFIGATE",
