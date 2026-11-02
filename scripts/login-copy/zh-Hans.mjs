@@ -1,5 +1,6 @@
 // Sign-in page copy (/zh-hans/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "浏览器验证失败。请刷新页面后重试。如果问题持续，请联系支持团队。",
   pageTitle: "登录",
   heading: "登录 WIFIGATE",
   home: "WIFIGATE 首页",

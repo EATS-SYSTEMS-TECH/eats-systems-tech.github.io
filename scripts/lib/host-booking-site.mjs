@@ -109,7 +109,7 @@ export async function openWorkspace(
   t,
   { origin, browser },
   state,
-  { query = "", viewport = { width: 1440, height: 1000 }, real = false } = {},
+  { query = "", viewport = { width: 1440, height: 1000 }, real = false, selectOrganization = true } = {},
 ) {
   const context = await browser.newContext({
     viewport,
@@ -156,7 +156,12 @@ export async function openWorkspace(
     return route.continue();
   });
   await installAppCheckFixture(page);
-  await page.goto(origin + "/dashboard/host/" + query);
+  // Organization-feature fixtures explicitly name their initial organization.
+  // Selection-flow tests opt out to exercise the unselected production state.
+  const params = new URLSearchParams(query);
+  if (selectOrganization && !params.has("org") && state.organizations?.length)
+    params.set("org", state.organizations[0].id);
+  await page.goto(origin + "/dashboard/host/" + (params.size ? "?" + params : ""));
   await page.waitForFunction(() => window.workspaceStarted);
   await page.evaluate(() => window.workspaceStarted);
   return { page, errors, context };

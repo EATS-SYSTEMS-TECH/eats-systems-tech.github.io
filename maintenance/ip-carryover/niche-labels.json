@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "base": "6df2c2468a85901dbcef7e0915cf266bcb87598e",
+  "head": "f7a11d5b7e81270526c3eb1fb8830a732f8cb03f",
+  "authors": [
+    "eiloncohen",
+    "OdeliaTorjman"
+  ],
+  "carried": 0,
+  "allowed": 0,
+  "zero": true,
+  "files": [
+    {
+      "path": "scripts/niche-content.mjs",
+      "ownedBefore": 7,
+      "rewritten": true,
+      "carried": [],
+      "allowed": []
+    }
+  ],
+  "limitation": "Detects verbatim carry-over only; independent rewriting still requires review of structure and expression."
+}

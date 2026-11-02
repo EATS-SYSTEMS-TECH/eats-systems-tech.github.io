@@ -102,7 +102,15 @@ const select = (label, name, options) => {
 // trigger})}. Returns {reload}.
 export async function renderHostCalendar(context) {
   clearHostCalendar();
-  const { container, user, organization, systems } = context;
+  const { container, user, organization } = context;
+  const allSystems = context.systems;
+  let showUnselected = false;
+  let systems = allSystems.filter((system) => system.calendarEnabled !== false);
+  const hiddenSystems = new Set(
+    allSystems
+      .filter((system) => system.calendarEnabled === false)
+      .map((system) => system.id),
+  );
   const epoch = sessionGeneration;
   listeners = new AbortController();
   const signal = listeners.signal;
@@ -113,17 +121,81 @@ export async function renderHostCalendar(context) {
   container.append(section);
   const current = () =>
     epoch === sessionGeneration && context.isCurrent() && section.isConnected;
+  let selectionEmpty;
   // No active systems: the one sentence and its action. Bookings of removed
   // systems still show below it when the dates hold any.
   if (!systems.length) {
     section.classList.add("host-calendar--empty");
-    section.append(noSystemsState(organization));
+    if (allSystems.length) {
+      const action = can(organization, "systems:write")
+        ? node("button", hostText("Choose calendar systems"), {
+            type: "button",
+            class: "button-secondary",
+          })
+        : undefined;
+      action?.addEventListener("click", () =>
+        window.dispatchEvent(
+          new CustomEvent("host:workspace-view", { detail: "systems" }),
+        ),
+      );
+      selectionEmpty = emptyState(
+        hostText(
+          "No systems are selected for this calendar. Existing bookings are available in Bookings.",
+        ),
+        { action },
+      );
+      if (!action)
+        selectionEmpty.append(
+          node(
+            "p",
+            hostText(
+              "Ask an organization owner or admin to choose calendar systems.",
+            ),
+          ),
+        );
+      section.append(selectionEmpty);
+    } else section.append(noSystemsState(organization));
   }
   const zone = zoneOf(organization);
   const base = `/api/v1/organizations/${encodeURIComponent(organization.id)}`;
   const canBook =
     can(organization, "reservations:write") && !servicePaused(organization);
-  const systemsById = new Map(systems.map((item) => [item.id, item]));
+  const systemsById = new Map(allSystems.map((item) => [item.id, item]));
+  const visibility = node("div", undefined, { class: "calendar-visibility" });
+  const hiddenNotice = node("p", undefined, { role: "status" });
+  hiddenNotice.hidden = true;
+  const openBookings = node("button", hostText("Open bookings"), {
+    type: "button",
+    class: "button-secondary",
+  });
+  openBookings.addEventListener("click", () =>
+    window.dispatchEvent(
+      new CustomEvent("host:workspace-view", { detail: "bookings" }),
+    ),
+  );
+  hiddenNotice.append(
+    node(
+      "span",
+      hostText(
+        "Some bookings in this range belong to systems excluded from the calendar.",
+      ),
+    ),
+    " ",
+    openBookings,
+  );
+  const temporary = node("input", undefined, {
+    type: "checkbox",
+    name: "showUnselectedSystems",
+  });
+  if (hiddenSystems.size) {
+    const label = node("label");
+    label.append(
+      temporary,
+      node("span", hostText("Show unselected systems temporarily")),
+    );
+    visibility.append(label, hiddenNotice);
+    container.insertBefore(visibility, section);
+  }
 
   const heading = node("div", undefined, { class: "calendar-heading" });
   const title = node("h2", "", { class: "calendar-heading__title" });
@@ -137,19 +209,24 @@ export async function renderHostCalendar(context) {
   });
   headingText.append(title, status);
   heading.append(headingText);
-  if (can(organization, "reservations:write") && systems.length)
-    heading.append(
-      newBookingButton(organization, (button) => {
-        // Today, or the first day shown when the dates shown are later
-        // (a new booking never starts on a day already gone).
-        const day = todayIn(zone);
-        context.newBooking({
-          systemId: systemFilter.value || undefined,
-          date: start > day ? start : day,
-          trigger: button,
-        });
-      }),
-    );
+  const createBooking =
+    can(organization, "reservations:write") && allSystems.length
+      ? newBookingButton(organization, (button) => {
+          // Today, or the first day shown when the dates shown are later
+          // (a new booking never starts on a day already gone).
+          const day = todayIn(zone);
+          context.newBooking({
+            systemId: systemFilter.value || undefined,
+            date: start > day ? start : day,
+            trigger: button,
+            availableSystems: systems,
+          });
+        })
+      : undefined;
+  if (createBooking) {
+    createBooking.hidden = !systems.length;
+    heading.append(createBooking);
+  }
 
   const toolbar = node("div", undefined, { class: "calendar-toolbar" });
   const moves = node("div", undefined, { class: "calendar-navigation" });
@@ -218,6 +295,26 @@ export async function renderHostCalendar(context) {
 
   let start = todayIn(zone);
   let data = [];
+  let allBookings = [];
+  temporary.addEventListener("change", () => {
+    showUnselected = temporary.checked;
+    systems = allSystems.filter(
+      (system) => showUnselected || system.calendarEnabled !== false,
+    );
+    const previousFilter = systemFilter.value;
+    systemFilter.replaceChildren(
+      node("option", hostText("All systems"), { value: "" }),
+      ...systems.map((item) => node("option", item.name, { value: item.id })),
+    );
+    systemFilter.value = systems.some((item) => item.id === previousFilter)
+      ? previousFilter
+      : "";
+    if (createBooking) createBooking.hidden = !systems.length;
+    if (selectionEmpty) selectionEmpty.hidden = Boolean(systems.length);
+    // The API may have been filtered to a now-hidden system. Reload the range
+    // with the new selection; never persist the temporary view preference.
+    void load();
+  });
   let truncated = false;
   let loading = 0;
   let loaded = 0;
@@ -358,7 +455,12 @@ export async function renderHostCalendar(context) {
           add.style.gridColumn = String(index + 1);
           add.style.gridRow = "1 / -1";
           add.addEventListener("click", () =>
-            context.newBooking({ systemId: row.id, date: day, trigger: add }),
+            context.newBooking({
+              systemId: row.id,
+              date: day,
+              trigger: add,
+              availableSystems: systems,
+            }),
           );
           timeline.append(add);
         }
@@ -464,7 +566,7 @@ export async function renderHostCalendar(context) {
     // Without systems, the calendar shows only when it holds bookings.
     section.classList.toggle(
       "host-calendar--empty",
-      !systems.length && !data.length,
+      !systems.length && !data.length && !truncated,
     );
     width = space();
     agendaShown = agenda();
@@ -492,7 +594,7 @@ export async function renderHostCalendar(context) {
         node(
           "p",
           hostText(
-            "Showing the first 1,000 bookings. Choose fewer days or one system.",
+            "More bookings may exist. Choose fewer days or one system to see the full range.",
           ),
           { class: "calendar-truncated" },
         ),
@@ -528,12 +630,20 @@ export async function renderHostCalendar(context) {
         if (!current() || request !== loading) return;
         for (const raw of Array.isArray(result?.items) ? result.items : []) {
           const record = readReservation(raw);
+          // Keep historical bookings from removed/unknown systems readable,
+          // but never recreate a row for an explicitly hidden active system.
           if (record) items.set(record.id, record);
         }
         cursor = result?.nextCursor;
         pages++;
       } while (cursor && pages < maxPages);
-      data = [...items.values()];
+      allBookings = [...items.values()];
+      const excluded = (record) =>
+        hiddenSystems.has(record.systemId ?? record.changeSystemId);
+      data = allBookings.filter(
+        (record) => showUnselected || !excluded(record),
+      );
+      hiddenNotice.hidden = showUnselected || !allBookings.some(excluded);
       truncated = Boolean(cursor);
       status.textContent = "";
       loaded = request;
@@ -600,7 +710,8 @@ export async function renderHostCalendar(context) {
       )
         return;
       if (
-        (saved.systemId && !systemsById.has(saved.systemId)) ||
+        (saved.systemId &&
+          !systems.some((system) => system.id === saved.systemId)) ||
         (saved.status && !statuses.includes(saved.status))
       ) {
         status.textContent = hostText(

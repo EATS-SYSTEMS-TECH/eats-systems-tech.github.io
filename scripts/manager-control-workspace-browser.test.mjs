@@ -204,7 +204,7 @@ test("Manager Gate, Dual Control and group controls are responsive, deliberate a
       assert.deepEqual(operation[0].payload, { mode: "METHOD", expectedGateCommand: "PULSE_AFTER_PULSE" }, "the existing secure command contract is preserved");
       await finish.click();
       await page.locator(".manager-examples > summary").click();
-      await page.locator(`[data-example-system="example-manager-${type}"]`).getByRole("button").click();
+      await page.locator(`[data-example-system="example-manager-${type}"]`).locator("button.primary").click();
       await ready(page);
       await page.locator(".manager-simulation-note").waitFor();
       assert.deepEqual(await snapshotStyles(page), reference, "sample controls use the exact real workspace layout and styling");

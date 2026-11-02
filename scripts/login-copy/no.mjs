@@ -1,5 +1,6 @@
 // Sign-in page copy (/no/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Nettleseren kunne ikke bekreftes. Last inn siden på nytt og prøv igjen. Kontakt kundestøtte hvis problemet vedvarer.",
   pageTitle: "Logg inn",
   heading: "Logg inn på WIFIGATE",
   home: "WIFIGATE-forsiden",

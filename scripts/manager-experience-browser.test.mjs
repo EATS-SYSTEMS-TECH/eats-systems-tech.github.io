@@ -27,74 +27,101 @@ const screenshot = async (page, name) => {
     });
 };
 
-test("Manager has a directional orange shortcut and a dedicated three-count admin view with history navigation", async (t) => {
+const directoryResponse = {
+  counts: { admins: 2, users: 12, total: 14 },
+  productCounts: { host: 0, pay: 0, manager: 14 },
+  items: [],
+  nextCursor: null,
+};
+
+async function waitForDirectory(page) {
+  // Counts exist as unavailable placeholders before the request completes.
+  await page.waitForFunction(
+    () =>
+      Array.from(
+        document.querySelectorAll(".platform-admin-counts strong"),
+        (node) => node.textContent,
+      ).join("|") === "2|12|14",
+  );
+}
+
+test("Manager keeps its workspace separate from the directional shared administration entry and history", async (t) => {
   const { origin, browser } = await startSite(t);
   for (const language of ["he", "en"])
     for (const width of [390, 1440]) {
       const { page, context, errors } = await scenario(browser, {
         ...auth,
+        platformRole: "admin",
         viewport: { width, height: 900 },
       });
       t.after(() => context.close());
-      const calls = [];
+      const managerCalls = [],
+        directoryCalls = [];
       await context.route("**/api/v1/manager/**", (route) => {
         const path = new URL(route.request().url()).pathname;
-        calls.push(path);
+        managerCalls.push(path);
         return route.fulfill({
           json: path.endsWith("/me")
             ? profile
-            : path.endsWith("/admin/overview")
-              ? {
-                  admins: 2,
-                  users: 12,
-                  organizations: 4,
-                  organizationAdmins: 99,
-                }
-              : { items: [], nextCursor: null },
+            : { items: [], nextCursor: null },
         });
+      });
+      await context.route("**/api/v1/platform/directory?*", (route) => {
+        directoryCalls.push(new URL(route.request().url()).searchParams);
+        return route.fulfill({ json: directoryResponse });
       });
       const suffix = language === "he" ? "?lang=he" : "";
       await page.goto(origin + "/dashboard/manager/" + suffix);
-      const entry = page.locator(".manager-platform-entry");
-      await entry.waitFor();
-      assert.equal(
-        calls.some((path) => path.endsWith("/admin/overview")),
-        false,
-      );
+      await page.locator(".manager-sidebar-roles").waitFor();
+      assert.equal(await page.locator(".manager-platform-entry").count(), 0);
       assert.equal(
         await page.locator(".manager-platform-header").isHidden(),
         true,
       );
+      assert.equal(
+        managerCalls.some((path) => path.includes("/admin/")),
+        false,
+      );
+      assert.equal(directoryCalls.length, 0);
+      await screenshot(page, "manager-workspace-" + language + "-" + width);
+
+      await page.goto(origin + "/dashboard/" + suffix);
+      const entry = page.locator("#platform-management-entry");
+      await entry.waitFor();
       const box = await entry.boundingBox();
       assert.ok(box.y + box.height <= 900 && box.y >= 750);
-      assert.ok(language === "he" ? box.x > width / 2 : box.x < width / 2);
-      assert.equal(
-        await entry.evaluate((el) => getComputedStyle(el).backgroundColor),
-        "rgb(165, 61, 17)",
+      assert.ok(
+        language === "he" ? box.x + box.width > width - 48 : box.x < 48,
       );
-      await screenshot(page, `manager-workspace-${language}-${width}`);
+      assert.equal(
+        directoryCalls.length,
+        0,
+        "the personal dashboard does not read the directory",
+      );
       await entry.click();
-      await page.waitForURL(origin + "/dashboard/manager/platform/" + suffix);
-      await page.locator(".manager-overview-card").last().waitFor();
-      assert.equal(await page.locator(".manager-nav").isHidden(), true);
-      assert.equal(await entry.isHidden(), true);
-      assert.equal(
-        await page.locator(".manager-platform-tabs button").count(),
-        3,
+      await page.waitForURL(origin + "/dashboard/platform/" + suffix);
+      await waitForDirectory(page);
+      await page.goto(origin + "/dashboard/manager/platform/" + suffix);
+      await page.waitForURL(
+        (url) =>
+          url.pathname === "/dashboard/platform/" &&
+          url.searchParams.get("product") === "manager",
       );
-      assert.equal(await page.locator('.manager-platform-tabs [aria-current="page"]').count(), 0);
-      assert.equal(await page.locator('.manager-platform-home').getAttribute('aria-current'), 'page');
-      assert.equal(await page.getByText(language === 'he' ? 'תוכניות ועלויות משתמשי Manager' : 'Manager user plans and costs', {exact:true}).count(), 0);
+      await page.waitForFunction(
+        () =>
+          document
+            .querySelector('.platform-admin-business [data-product="manager"]')
+            ?.getAttribute("aria-pressed") === "true",
+      );
+      await waitForDirectory(page);
+      assert.equal(directoryCalls.at(-1).get("product"), "manager");
       assert.deepEqual(
-        await page.locator(".manager-overview-card strong").allTextContents(),
-        ["2", "12", "4"],
+        await page.locator(".platform-admin-counts strong").allTextContents(),
+        ["2", "12", "14"],
       );
       assert.equal(
         await page
-          .getByText(
-            language === "he" ? "מנהלי ארגונים" : "Organization admins",
-            { exact: true },
-          )
+          .locator(".manager-platform-entry, .manager-platform-tabs")
           .count(),
         0,
       );
@@ -104,63 +131,121 @@ test("Manager has a directional orange shortcut and a dedicated three-count admi
         ),
         true,
       );
-      await screenshot(page, `manager-administration-${language}-${width}`);
-      await page.locator(".manager-workspace-back").click();
-      await page.waitForURL(origin + "/dashboard/manager/" + suffix);
+      await screenshot(
+        page,
+        "manager-administration-" + language + "-" + width,
+      );
+      await page.locator(".platform-management-back").click();
+      await page.waitForURL(origin + "/dashboard/" + suffix);
       await entry.waitFor();
       await page.goBack();
-      await page.locator(".manager-overview-card").last().waitFor();
+      await waitForDirectory(page);
+      assert.equal(new URL(page.url()).searchParams.get("product"), "manager");
       assert.equal(
-        new URL(page.url()).pathname,
-        "/dashboard/manager/platform/",
+        new URL(page.url()).searchParams.get("lang"),
+        language === "he" ? "he" : null,
       );
+      assert.equal(directoryCalls.at(-1).get("product"), "manager");
       assert.deepEqual(errors, []);
     }
 });
 
-test("direct Manager administration deep links require its live admin role and preserve the language through sign-in", async (t) => {
+test("legacy Manager administration links preserve language and require verified global authority without product-role escalation", async (t) => {
   const { origin, browser } = await startSite(t);
-  for (const role of ["admin", "user"]) {
-    const { page, context } = await scenario(browser, auth);
+  for (const options of [
+    { managerRole: "admin", platformRole: "admin" },
+    { managerRole: "admin" },
+    { managerRole: "user" },
+    { managerRole: "admin", platformRole: "admin", verified: false },
+  ]) {
+    const { page, context, calls, errors } = await scenario(browser, {
+      ...auth,
+      ...options,
+    });
     t.after(() => context.close());
-    const calls = [];
-    await context.route("**/api/v1/manager/**", (route) => {
-      const path = new URL(route.request().url()).pathname;
-      calls.push(path);
-      return route.fulfill({
-        json: path.endsWith("/me")
-          ? {
-              ...profile,
-              role,
-              roles: [role],
-              account: role === "user" ? { id: "customer" } : null,
-            }
-          : path.endsWith("/overview")
-            ? { admins: 1, users: 2, organizations: 3 }
-            : { items: [], nextCursor: null },
-      });
+    const directoryCalls = [];
+    await context.route("**/api/v1/platform/directory?*", (route) => {
+      directoryCalls.push(new URL(route.request().url()).searchParams);
+      return route.fulfill({ json: directoryResponse });
     });
     await page.goto(origin + "/dashboard/manager/platform/?lang=he");
-    if (role === "admin")
-      await page.locator(".manager-overview-card").last().waitFor();
-    else {
-      await page
-        .getByRole("heading", {
-          name: "המסך זמין למנהלי Manager בלבד",
-          exact: true,
-        })
-        .waitFor();
+    await page.waitForURL(
+      (url) =>
+        url.pathname === "/dashboard/platform/" &&
+        url.searchParams.get("product") === "manager",
+    );
+    await page.locator("#product-switcher-button").waitFor();
+    assert.equal(new URL(page.url()).searchParams.get("lang"), "he");
+    if (options.platformRole === "admin" && options.verified !== false) {
+      await waitForDirectory(page);
+      assert.equal(directoryCalls.at(-1).get("product"), "manager");
+    } else {
+      if (options.platformRole === "admin")
+        await page.locator("#platform-security").waitFor();
+      else
+        assert.match(
+          await page.locator("#platform-status").textContent(),
+          /WIFIGATE/,
+        );
       assert.equal(
-        calls.some((path) => path.includes("/admin/")),
-        false,
-      );
-      assert.equal(
-        await page.locator(".manager-platform-entry").isHidden(),
+        await page.locator("#platform-admin-management").isHidden(),
         true,
       );
+      assert.equal(directoryCalls.length, 0);
     }
+    assert.equal(
+      calls.some((call) => call.path?.startsWith("/api/v1/manager/")),
+      false,
+      "the retired route does not mount a Manager administration workspace",
+    );
+    assert.equal(await page.locator(".manager-platform-entry").count(), 0);
+    assert.deepEqual(errors, []);
   }
+
+  const signedOut = await scenario(browser, {
+    ...auth,
+    platformRole: "admin",
+    signedIn: false,
+  });
+  t.after(() => signedOut.context.close());
+  await signedOut.page.goto(origin + "/dashboard/manager/platform/?lang=he");
+  await signedOut.page.waitForURL((url) => url.pathname === "/he/login/");
+  const next = new URL(
+    new URL(signedOut.page.url()).searchParams.get("next"),
+    origin,
+  );
+  assert.equal(next.pathname, "/dashboard/platform/");
+  assert.equal(next.searchParams.get("product"), "manager");
+  assert.equal(next.searchParams.get("lang"), "he");
+  assert.equal(
+    signedOut.calls.some((call) =>
+      call.path?.startsWith("/api/v1/platform/directory"),
+    ),
+    false,
+  );
+  assert.deepEqual(signedOut.errors, []);
 });
+
+// Exercise the retained Manager administration component directly; public legacy
+// URLs intentionally redirect to the shared global console before it can mount.
+async function mountManagement(page, origin) {
+  await page.route(origin + "/manager-progress-fixture", (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: '<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"><link rel="stylesheet" href="/css/dashboard-header.css"></head><body class="platform-page" data-product="manager"><main class="platform-shell"><div id="root"></div></main></body></html>',
+    }),
+  );
+  await page.goto(origin + "/manager-progress-fixture");
+  await page.evaluate(async () => {
+    const { createManagerDashboard } = await import("/js/manager-dashboard.js");
+    window.dashboard = createManagerDashboard({
+      root: document.querySelector("#root"),
+      user: { uid: "fixture-user", getIdToken: async () => "isolated-token" },
+      management: true,
+      language: "he",
+    });
+  });
+}
 
 test("slow API reads show progress and skeletons and failures offer a safe reload", async (t) => {
   const { origin, browser } = await startSite(t);
@@ -186,7 +271,7 @@ test("slow API reads show progress and skeletons and failures offer a safe reloa
     }
     return route.fulfill({ json: { items: [], nextCursor: null } });
   });
-  await page.goto(origin + "/dashboard/manager/platform/?lang=he");
+  await mountManagement(page, origin);
   await page
     .locator(".manager-progress")
     .getByText("טוען את תמונת המצב…", { exact: true })
@@ -228,7 +313,7 @@ test("a late failure cannot clear a new view's loading state or replace its cont
       });
     return route.fulfill({ json: { items: [], nextCursor: null } });
   });
-  await page.goto(origin + "/dashboard/manager/platform/?lang=he");
+  await mountManagement(page, origin);
   await page
     .locator(".manager-progress")
     .getByText("טוען את תמונת המצב…", { exact: true })
@@ -350,7 +435,12 @@ async function gateFixture(t, browser, origin, language = "he", width = 390) {
             this.onState("active");
             resolve();
           };
-          this.fail = (code = "NO_COMMUNICATION") => reject(typeof code === "object" ? Object.assign(new Error("Connection failed"), code) : new Error(code));
+          this.fail = (code = "NO_COMMUNICATION") =>
+            reject(
+              typeof code === "object"
+                ? Object.assign(new Error("Connection failed"), code)
+                : new Error(code),
+            );
           this.cancel = () => reject(new Error("CANCELLED"));
         });
       }
@@ -403,20 +493,63 @@ async function gateFixture(t, browser, origin, language = "he", width = 390) {
   return page;
 }
 
-async function assertCleanConnectionPage(page, { returnedToSystems = false } = {}) {
+async function assertCleanConnectionPage(
+  page,
+  { returnedToSystems = false } = {},
+) {
   if (returnedToSystems) {
-    await page.getByRole("heading", { name: /^(?:המערכות שלי|My systems)$/ }).waitFor();
-    await page.waitForFunction(() => document.querySelector(".manager-view")?.getAttribute("aria-busy") === "false");
+    await page
+      .getByRole("heading", { name: /^(?:המערכות שלי|My systems)$/ })
+      .waitFor();
+    await page.waitForFunction(
+      () =>
+        document.querySelector(".manager-view")?.getAttribute("aria-busy") ===
+        "false",
+    );
   }
-  assert.equal(await page.locator(".manager-status").innerText(), "", "the page does not repeat a connection error or stale connected status");
-  assert.notEqual(await page.locator(".manager-status").getAttribute("data-state"), "error");
-  assert.equal(await page.locator(".manager-connection-recovery h3, .manager-connection-recovery p").count(), 0, "recovery keeps controls without a second explanation");
+  assert.equal(
+    await page.locator(".manager-status").innerText(),
+    "",
+    "the page does not repeat a connection error or stale connected status",
+  );
+  assert.notEqual(
+    await page.locator(".manager-status").getAttribute("data-state"),
+    "error",
+  );
+  assert.equal(
+    await page
+      .locator(
+        ".manager-connection-recovery h3, .manager-connection-recovery p",
+      )
+      .count(),
+    0,
+    "recovery keeps controls without a second explanation",
+  );
   if (returnedToSystems) {
-    assert.equal(await page.locator(".manager-workspace-head, #manager-content, #manager-tabs, .manager-connection-recovery").count(), 0, "dismissal returns directly to system cards without a system-details intermediary");
-    assert.equal(await page.getByRole("button", { name: /^(?:פתיחת סביבת ניהול|Open workspace)$/, exact: true }).count() > 0, true);
+    assert.equal(
+      await page
+        .locator(
+          ".manager-workspace-head, #manager-content, #manager-tabs, .manager-connection-recovery",
+        )
+        .count(),
+      0,
+      "dismissal returns directly to system cards without a system-details intermediary",
+    );
+    assert.equal(
+      (await page
+        .getByRole("button", {
+          name: /^(?:פתיחת סביבת ניהול|Open workspace)$/,
+          exact: true,
+        })
+        .count()) > 0,
+      true,
+    );
     assert.equal(await page.locator(".manager-progress").isHidden(), true);
     assert.equal(await page.locator(".manager-loading-panel").count(), 0);
-    assert.equal(await page.locator(".manager-view").getAttribute("aria-busy"), "false");
+    assert.equal(
+      await page.locator(".manager-view").getAttribute("aria-busy"),
+      "false",
+    );
   }
 }
 
@@ -578,17 +711,30 @@ test("a revoked local Manager authorization explains the failure and dismissal r
   await failure.waitFor();
   assert.match(await failure.innerText(), /השער דחה את הרשאת Manager/);
   assert.match(await failure.innerText(), /ייתכן שאישור זמני פג/);
-  assert.match((await failure.locator(".manager-connection-dialog__recovery li").allTextContents())[0], /נסו תחילה חיבור נוסף/);
+  assert.match(
+    (
+      await failure
+        .locator(".manager-connection-dialog__recovery li")
+        .allTextContents()
+    )[0],
+    /נסו תחילה חיבור נוסף/,
+  );
   assert.match(await failure.innerText(), /כמנהל מקומי שהרשאתו עדיין תקפה/);
   assert.match(await failure.innerText(), /תפריט החשבון דרך תמונת הפרופיל/);
-  assert.match(await failure.innerText(), /WIFIGATE Manager ולחצו ״סנכרון״ בכרטיס המערכת/);
+  assert.match(
+    await failure.innerText(),
+    /WIFIGATE Manager ולחצו ״סנכרון״ בכרטיס המערכת/,
+  );
   assert.match(await failure.innerText(), /האתר אינו יכול לחדש אותה מרחוק/);
   await assertCleanConnectionPage(page);
   await failure
     .getByRole("button", { name: "סגירה וחזרה", exact: true })
     .click();
   await assertCleanConnectionPage(page, { returnedToSystems: true });
-  assert.doesNotMatch(await page.locator(".manager-shell").innerText(), /השער דחה את הרשאת Manager|כמנהל מקומי שהרשאתו עדיין תקפה|CREDENTIAL_REVOKED/);
+  assert.doesNotMatch(
+    await page.locator(".manager-shell").innerText(),
+    /השער דחה את הרשאת Manager|כמנהל מקומי שהרשאתו עדיין תקפה|CREDENTIAL_REVOKED/,
+  );
   assert.equal(await page.locator(".manager-workspace-head").count(), 0);
   assert.deepEqual(await page.evaluate(() => window.commands), []);
 });
@@ -596,48 +742,158 @@ test("a revoked local Manager authorization explains the failure and dismissal r
 test("connection errors give localized recovery steps and safe optional diagnostics without exposing backend details", async (t) => {
   const { origin, browser } = await startSite(t);
   for (const language of ["en", "he"]) {
-    const page = await gateFixture(t, browser, origin, language, language === "he" ? 390 : 1440);
-    await page.getByRole("button", { name: language === "he" ? "פתיחת סביבת ניהול" : "Open workspace", exact: true }).click();
-    const failure = page.locator('.manager-connection-dialog[data-state="error"]');
+    const page = await gateFixture(
+      t,
+      browser,
+      origin,
+      language,
+      language === "he" ? 390 : 1440,
+    );
+    await page
+      .getByRole("button", {
+        name: language === "he" ? "פתיחת סביבת ניהול" : "Open workspace",
+        exact: true,
+      })
+      .click();
+    const failure = page.locator(
+      '.manager-connection-dialog[data-state="error"]',
+    );
     const cases = [
-      ["CREDENTIAL_REVOKED", language === "he" ? /ליד המערכת/ : /near the system/],
-      ["CREDENTIAL_UNKNOWN", language === "he" ? /שהרשאתו עדיין תקפה/ : /whose access is still valid/],
-      ["NO_COMMUNICATION", language === "he" ? /מופעלת ומחוברת לאינטרנט/ : /powered on and online/],
-      ["BUSY", language === "he" ? /חיבור ניהול אחר/ : /Another management session/],
+      [
+        "CREDENTIAL_REVOKED",
+        language === "he" ? /ליד המערכת/ : /near the system/,
+      ],
+      [
+        "CREDENTIAL_UNKNOWN",
+        language === "he"
+          ? /שהרשאתו עדיין תקפה/
+          : /whose access is still valid/,
+      ],
+      [
+        "NO_COMMUNICATION",
+        language === "he" ? /מופעלת ומחוברת לאינטרנט/ : /powered on and online/,
+      ],
+      [
+        "BUSY",
+        language === "he" ? /חיבור ניהול אחר/ : /Another management session/,
+      ],
       ["STORAGE_BUSY", language === "he" ? /המתינו מעט/ : /Wait a moment/],
-      ["MANAGER_ACCESS_DENIED", language === "he" ? /מנהל הארגון/ : /organization administrator/],
-      ["RESPONSE_TIMEOUT", language === "he" ? /בדקו את המצב העדכני ואת ההיסטוריה/ : /check the current state and history/],
-      ["VERSION_UNSUPPORTED", language === "he" ? /לעדכן את קושחת המערכת/ : /update the system firmware/],
-      ["PRIVATE_UNKNOWN_FAILURE", language === "he" ? /מזהה המערכת והזמן/ : /system ID and the time/],
+      [
+        "MANAGER_ACCESS_DENIED",
+        language === "he" ? /מנהל הארגון/ : /organization administrator/,
+      ],
+      [
+        "RESPONSE_TIMEOUT",
+        language === "he"
+          ? /בדקו את המצב העדכני ואת ההיסטוריה/
+          : /check the current state and history/,
+      ],
+      [
+        "VERSION_UNSUPPORTED",
+        language === "he"
+          ? /לעדכן את קושחת המערכת/
+          : /update the system firmware/,
+      ],
+      [
+        "PRIVATE_UNKNOWN_FAILURE",
+        language === "he" ? /מזהה המערכת והזמן/ : /system ID and the time/,
+      ],
     ];
     for (const [index, [code, expected]] of cases.entries()) {
-      await page.waitForFunction((index) => typeof window.connections[index]?.fail === "function", index);
-      await page.evaluate(({ index, code }) => window.connections[index].fail({ code, message: "PRIVATE_BACKEND_MESSAGE token=SECRET_SAMPLE", reason: "PRIVATE_SERVER_REASON" }), { index, code });
+      await page.waitForFunction(
+        (index) => typeof window.connections[index]?.fail === "function",
+        index,
+      );
+      await page.evaluate(
+        ({ index, code }) =>
+          window.connections[index].fail({
+            code,
+            message: "PRIVATE_BACKEND_MESSAGE token=SECRET_SAMPLE",
+            reason: "PRIVATE_SERVER_REASON",
+          }),
+        { index, code },
+      );
       await failure.waitFor();
       await assertCleanConnectionPage(page);
       const text = await failure.innerText();
       assert.match(text, expected);
-      assert.doesNotMatch(text, /PRIVATE_BACKEND_MESSAGE|SECRET_SAMPLE|PRIVATE_SERVER_REASON|PRIVATE_UNKNOWN_FAILURE/);
-      assert.equal(await failure.locator(".manager-connection-dialog__recovery ol li").count() > 0, true);
-      const diagnostics = failure.locator(".manager-connection-dialog__diagnostics");
-      if (code === "PRIVATE_UNKNOWN_FAILURE") assert.equal(await diagnostics.count(), 0);
+      assert.doesNotMatch(
+        text,
+        /PRIVATE_BACKEND_MESSAGE|SECRET_SAMPLE|PRIVATE_SERVER_REASON|PRIVATE_UNKNOWN_FAILURE/,
+      );
+      assert.equal(
+        (await failure
+          .locator(".manager-connection-dialog__recovery ol li")
+          .count()) > 0,
+        true,
+      );
+      const diagnostics = failure.locator(
+        ".manager-connection-dialog__diagnostics",
+      );
+      if (code === "PRIVATE_UNKNOWN_FAILURE")
+        assert.equal(await diagnostics.count(), 0);
       else {
-        assert.doesNotMatch(text, new RegExp(code), "technical code is collapsed by default");
+        assert.doesNotMatch(
+          text,
+          new RegExp(code),
+          "technical code is collapsed by default",
+        );
         await diagnostics.locator("summary").click();
         assert.equal(await diagnostics.locator("code").innerText(), code);
       }
-      assert.equal(await failure.evaluate((dialog) => dialog.scrollWidth <= dialog.clientWidth), true);
-      const dismiss = await failure.getByRole("button", { name: language === "he" ? "סגירה וחזרה" : "Close and return", exact: true }).boundingBox();
-      assert.ok(dismiss && dismiss.y >= 0 && dismiss.y + dismiss.height <= 900 && dismiss.height >= 44, "recovery actions stay visible and touch sized");
-      await failure.getByRole("button", { name: language === "he" ? "סגירה וחזרה" : "Close and return", exact: true }).click();
+      assert.equal(
+        await failure.evaluate(
+          (dialog) => dialog.scrollWidth <= dialog.clientWidth,
+        ),
+        true,
+      );
+      const dismiss = await failure
+        .getByRole("button", {
+          name: language === "he" ? "סגירה וחזרה" : "Close and return",
+          exact: true,
+        })
+        .boundingBox();
+      assert.ok(
+        dismiss &&
+          dismiss.y >= 0 &&
+          dismiss.y + dismiss.height <= 900 &&
+          dismiss.height >= 44,
+        "recovery actions stay visible and touch sized",
+      );
+      await failure
+        .getByRole("button", {
+          name: language === "he" ? "סגירה וחזרה" : "Close and return",
+          exact: true,
+        })
+        .click();
       await assertCleanConnectionPage(page, { returnedToSystems: true });
       assert.equal(await failure.count(), 0);
-      assert.doesNotMatch(await page.locator(".manager-shell").innerText(), expected, "dismissed recovery guidance does not remain on the page");
-      assert.doesNotMatch(await page.locator(".manager-shell").innerText(), new RegExp(code));
-      await page.evaluate(({ index, code }) => window.connections[index].onState(code), { index, code });
-      assert.equal(await failure.count(), 0, "a repeated failure notification cannot reopen a dismissed error");
+      assert.doesNotMatch(
+        await page.locator(".manager-shell").innerText(),
+        expected,
+        "dismissed recovery guidance does not remain on the page",
+      );
+      assert.doesNotMatch(
+        await page.locator(".manager-shell").innerText(),
+        new RegExp(code),
+      );
+      await page.evaluate(
+        ({ index, code }) => window.connections[index].onState(code),
+        { index, code },
+      );
+      assert.equal(
+        await failure.count(),
+        0,
+        "a repeated failure notification cannot reopen a dismissed error",
+      );
       await assertCleanConnectionPage(page, { returnedToSystems: true });
-      if (index < cases.length - 1) await page.getByRole("button", { name: language === "he" ? "פתיחת סביבת ניהול" : "Open workspace", exact: true }).click();
+      if (index < cases.length - 1)
+        await page
+          .getByRole("button", {
+            name: language === "he" ? "פתיחת סביבת ניהול" : "Open workspace",
+            exact: true,
+          })
+          .click();
     }
     assert.deepEqual(await page.evaluate(() => window.commands), []);
     await page.evaluate(() => window.dashboard.close());
@@ -649,27 +905,51 @@ test("disconnects during completion or after a ready workspace show one popup an
   for (const completionFinished of [false, true]) {
     const page = await gateFixture(t, browser, origin, "en");
     await page.clock.install();
-    await page.getByRole("button", { name: "Open workspace", exact: true }).click();
+    await page
+      .getByRole("button", { name: "Open workspace", exact: true })
+      .click();
     await page.evaluate(() => window.connections[0].finish());
-    await page.waitForFunction(() => typeof window.connections[0].finishRead === "function");
+    await page.waitForFunction(
+      () => typeof window.connections[0].finishRead === "function",
+    );
     await page.evaluate(() => window.connections[0].finishRead());
-    await page.locator('.manager-connection-dialog[data-state="complete"]').waitFor();
+    await page
+      .locator('.manager-connection-dialog[data-state="complete"]')
+      .waitFor();
     if (completionFinished) {
       await page.clock.fastForward(500);
-      await page.locator(".manager-connection-dialog").waitFor({ state: "detached" });
+      await page
+        .locator(".manager-connection-dialog")
+        .waitFor({ state: "detached" });
     }
-    await page.evaluate(() => { window.connections[0].onState("DISCONNECTED"); window.connections[0].close(); });
-    const failure = page.locator('.manager-connection-dialog[data-state="error"]');
+    await page.evaluate(() => {
+      window.connections[0].onState("DISCONNECTED");
+      window.connections[0].close();
+    });
+    const failure = page.locator(
+      '.manager-connection-dialog[data-state="error"]',
+    );
     await failure.waitFor();
-    assert.match(await failure.innerText(), /active connection ended|system disconnected/i);
+    assert.match(
+      await failure.innerText(),
+      /active connection ended|system disconnected/i,
+    );
     await assertCleanConnectionPage(page);
     await page.clock.fastForward(1000);
-    assert.equal(await failure.count(), 1, "the old completion timer cannot remove the failure popup");
-    await failure.getByRole("button", { name: "Close and return", exact: true }).click();
+    assert.equal(
+      await failure.count(),
+      1,
+      "the old completion timer cannot remove the failure popup",
+    );
+    await failure
+      .getByRole("button", { name: "Close and return", exact: true })
+      .click();
     await assertCleanConnectionPage(page, { returnedToSystems: true });
     await page.evaluate(() => window.connections[0].onState("DISCONNECTED"));
     assert.equal(await failure.count(), 0);
-    assert.deepEqual(await page.evaluate(() => window.commands), ["ADMIN_GET_OVERVIEW"]);
+    assert.deepEqual(await page.evaluate(() => window.commands), [
+      "ADMIN_GET_OVERVIEW",
+    ]);
     await page.evaluate(() => window.dashboard.close());
   }
 });
@@ -677,18 +957,37 @@ test("disconnects during completion or after a ready workspace show one popup an
 test("a late open rejection after error dismissal cannot repeat the popup or page explanation", async (t) => {
   const { origin, browser } = await startSite(t);
   const page = await gateFixture(t, browser, origin, "en");
-  await page.getByRole("button", { name: "Open workspace", exact: true }).click();
-  await page.waitForFunction(() => typeof window.connections[0]?.fail === "function");
-  await page.evaluate(() => { window.connections[0].deferCancellation = true; window.connections[0].onState("NO_COMMUNICATION"); });
-  const failure = page.locator('.manager-connection-dialog[data-state="error"]');
+  await page
+    .getByRole("button", { name: "Open workspace", exact: true })
+    .click();
+  await page.waitForFunction(
+    () => typeof window.connections[0]?.fail === "function",
+  );
+  await page.evaluate(() => {
+    window.connections[0].deferCancellation = true;
+    window.connections[0].onState("NO_COMMUNICATION");
+  });
+  const failure = page.locator(
+    '.manager-connection-dialog[data-state="error"]',
+  );
   await failure.waitFor();
   assert.match(await failure.innerText(), /system did not respond/i);
   await assertCleanConnectionPage(page);
-  await failure.getByRole("button", { name: "Close and return", exact: true }).click();
+  await failure
+    .getByRole("button", { name: "Close and return", exact: true })
+    .click();
   await page.evaluate(() => window.connections[0].fail("NO_COMMUNICATION"));
-  await page.waitForFunction(() => document.querySelector(".manager-view").getAttribute("aria-busy") === "false");
+  await page.waitForFunction(
+    () =>
+      document.querySelector(".manager-view").getAttribute("aria-busy") ===
+      "false",
+  );
   await assertCleanConnectionPage(page, { returnedToSystems: true });
-  assert.equal(await failure.count(), 0, "the still-pending open catch is fenced by the first failure");
+  assert.equal(
+    await failure.count(),
+    0,
+    "the still-pending open catch is fenced by the first failure",
+  );
   await page.evaluate(() => window.connections[0].onState("NO_COMMUNICATION"));
   assert.equal(await failure.count(), 0);
   assert.deepEqual(await page.evaluate(() => window.commands), []);

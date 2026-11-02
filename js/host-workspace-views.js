@@ -1,5 +1,8 @@
 import { organizationsEmptyCopy } from "./systems-empty-copy.js";
-import { hostText } from "./host-locale.js";
+import { hostText, hostLanguage } from "./host-locale.js";
+import { createOrganizationLogo } from "./manager-organization-card.js";
+import { organizationRole } from "./host-permissions.js";
+import { roleLabel } from "./host-role-badge.js";
 import { node } from "./host-ui.js";
 import { renderHostApiKeys } from "./host-api-keys.js";
 import { renderHostIntegrations } from "./host-integrations.js";
@@ -94,9 +97,14 @@ export function workspaceLoaders(context) {
         record,
         trigger,
       }),
-    newBooking: ({ systemId, date, trigger } = {}) =>
+    newBooking: ({
+      systemId,
+      date,
+      trigger,
+      availableSystems = systems,
+    } = {}) =>
       openBookingSheet({
-        ...bookingContext(panel, systems),
+        ...bookingContext(panel, availableSystems),
         systemId,
         date,
         trigger,
@@ -152,7 +160,58 @@ export function workspaceLoaders(context) {
     );
   };
 
+  const renderOrganizations = (panel) => {
+    panel.append(
+      node(
+        "h2",
+        hostText(plan ? "My organizations" : "Choose an organization"),
+      ),
+    );
+    if (!plan)
+      panel.append(
+        node("p", hostText("Select an organization to open its workspace.")),
+      );
+    const list = node("div", undefined, { class: "manager-org-columns" });
+    for (const organization of context.organizations) {
+      const card = node("article", undefined, {
+        class: "manager-card manager-org-column",
+        "data-organization": organization.id,
+      });
+      const identity = node("div", undefined, {
+        class: "manager-org-identity",
+      });
+      const name = node("div", undefined, { class: "manager-org-name" });
+      name.append(
+        node("h4", organization.name),
+        node("p", roleLabel(organizationRole(organization))),
+      );
+      identity.append(
+        createOrganizationLogo(
+          organization,
+          hostLanguage,
+          "manager-org-avatar",
+        ),
+        name,
+      );
+      const open = node("button", hostText("Open organization"), {
+        type: "button",
+        class: "manager-button primary",
+      });
+      open.addEventListener("click", () =>
+        context.chooseOrganization(organization.id),
+      );
+      card.append(identity, open);
+      list.append(card);
+    }
+    panel.append(list);
+    if (!context.organizations.length) {
+      const copy = organizationsEmptyCopy(document.documentElement.lang);
+      panel.append(node("h3", copy.title), node("p", copy.description));
+    }
+  };
   return {
+    "my-organizations": renderOrganizations,
+    "choose-organization": renderOrganizations,
     "my-systems": (panel, viewCurrent) =>
       renderMySystems(panel, {
         user,
@@ -232,7 +291,9 @@ async function renderNoOrganization(panel, { user, plan, isCurrent }) {
     ),
   );
   const copy = organizationsEmptyCopy(document.documentElement.lang);
-  const empty = node("section", undefined, { class: "empty-state systems-empty" });
+  const empty = node("section", undefined, {
+    class: "empty-state systems-empty",
+  });
   empty.append(node("h4", copy.title), node("p", copy.description), join);
   section.append(empty);
   panel.append(section);

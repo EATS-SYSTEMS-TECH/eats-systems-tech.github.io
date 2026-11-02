@@ -17,6 +17,21 @@ export const workspaceViews = Object.freeze([
     selector: '[data-workspace-view="my-systems"]',
   },
   {
+    id: "my-organizations",
+    label: "My organizations",
+    icon: "building",
+    scope: "plan",
+    selector: '[data-workspace-view="my-organizations"]',
+  },
+  {
+    id: "choose-organization",
+    label: "Choose an organization",
+    icon: "building",
+    scope: "member",
+    placement: "home",
+    selector: '[data-workspace-view="choose-organization"]',
+  },
+  {
     id: "systems",
     label: "Organization systems",
     short: "Systems",
@@ -167,7 +182,7 @@ export function workspaceLocation(url, home) {
 
 export function homeView({ plan = false, pending = false } = {}) {
   if (pending) return "invitations";
-  return plan ? "my-systems" : "systems";
+  return plan ? "my-systems" : "choose-organization";
 }
 
 // Views the workspace builds for this person. `organization` is the selected
@@ -183,10 +198,8 @@ export function allowedWorkspaceViews({
   return workspaceViews.filter((view) => {
     if (view.scope === "platform") return false;
     if (view.scope === "plan") return plan;
+    if (view.scope === "member") return !plan;
     if (view.scope === "account") return true;
-    // An organization member without a plan always gets Organization systems,
-    // even before any organization loads, so the home screen exists.
-    if (view.id === "systems" && !plan && !permissions) return true;
     return granted.has(view.permission);
   });
 }

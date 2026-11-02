@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "area": "W3",
+  "sourceCommit": "56fa9363dea9daaaa9b8818977d27d1e49d9d85b",
+  "review": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/18",
+  "at": "2026-10-30T08:44:29.411871+00:00",
+  "status": "PASS_INDEPENDENT_WHOLE_HOMEPAGE_DOCUMENT_RECONSTRUCTION",
+  "specification": "maintenance/IP_HOMEPAGE_TEMPLATE_BEHAVIOR.md",
+  "specificationCommit": "dbad65273",
+  "deletionCommit": "3ad37a36b",
+  "additionCommit": "56fa9363d",
+  "change": "Entire 605-line original removed in a separate commit; independent document hierarchy authored from frozen prose and fixed product copy, metadata, images and vector facts. English responsibility comments cover the head, sections, controls and shared mounts.",
+  "fixedProductFacts": "Existing words, asset identifiers, URLs, SVG geometry and structured data remain contractual product inputs; no legal ownership determination.",
+  "validation": {
+    "originalFocused": "8/8 passed before deletion",
+    "replacementFocused": "8/8 passed; no skips",
+    "presentation": "94/94 passed; no skips; includes 280 actual Chrome presentation cases",
+    "completeOriginalDomFingerprint": "e9bd67e01eff46730422fbc2960936b63a40626389bf6a25fbf2fc14df2fc320",
+    "fullCli": "Actual isolated frozen 56fa9363d run; 582 input files and 180 verified read-only asset links",
+    "generatedFiles": 1485,
+    "fullModels": "All generated paths and complete DOM/text/attribute/JSON/llms models equivalent; no missing, unexpected or mismatched output",
+    "rawByteDifferences": 39,
+    "rawDifferenceScope": "Serialization of 39 generated homepages; full meaningful models remain identical",
+    "verifySite": "39 locales \u00d7 14 pages; 663 interactive pages; 703 sitemap URLs and redirects passed",
+    "verifyHomepages": "All 39 localized homepages passed",
+    "sourceAttribution": {
+      "ref": "56fa9363dea9daaaa9b8818977d27d1e49d9d85b",
+      "files": 5,
+      "complete": true,
+      "zero": true,
+      "summary": {
+        "eiloncohen": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        },
+        "OdeliaTorjman": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        }
+      }
+    },
+    "allOtherTrackedFiles": {
+      "base": "42ebc994c356a40b806f4a35e16b252f9d603bae",
+      "files": 2347,
+      "blobsAndModesExact": true,
+      "dependenciesAndProductConfigurationExact": true,
+      "packageOnlyDifference": "Registers six frozen complete homepage contracts in existing presentation suite"
+    }
+  },
+  "limits": [
+    "Five changed source/test/spec/fact/manifest paths only; the final whole frontend census is still open.",
+    "The frozen 566-file census and verified scoped follow-ups yield a derived residual of 533 Eilon lines in two files, not a newly executed whole census.",
+    "Source/static/browser checks do not establish physical phone acceptance, legal ownership or production approval.",
+    "Primary website checkout, main and hosting remain untouched."
+  ],
+  "productionDelivery": false
+}

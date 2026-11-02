@@ -44,6 +44,7 @@ const RUNTIME_KEYS = [
   "errorMfaUnsupported",
   "errorUnverifiedEmail",
   "errorUnconfigured",
+  "errorAppCheck",
   "errorServer",
   "errorSessionExpired",
   "errorForbidden",

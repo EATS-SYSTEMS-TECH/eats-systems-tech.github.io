@@ -162,11 +162,11 @@ test("organization example shares the real card and organization workspace with 
             await page
               .locator(".manager-organization-metrics strong")
               .allTextContents(),
-            ["3", "1", "3"],
+            ["3", "1", "0", "3"],
           );
           assert.equal(
             await page.locator(".manager-organization-person-column").count(),
-            2,
+            3,
           );
           assert.equal(
             await page
@@ -189,7 +189,7 @@ test("organization example shares the real card and organization workspace with 
             await page
               .locator(".manager-organization-search-empty:visible")
               .count(),
-            2,
+            3,
           );
           await search.fill("");
           if (process.env.MANAGER_ORG_UX_SCREENSHOTS)
@@ -199,7 +199,7 @@ test("organization example shares the real card and organization workspace with 
             });
           await page
             .getByRole("button", {
-              name: copy("הוספת משתמש", "Add user"),
+              name: copy("הוספת צוות", "Add staff"),
               exact: true,
             })
             .click();
@@ -266,7 +266,7 @@ test("organization example shares the real card and organization workspace with 
             await page
               .locator(".manager-organization-metrics strong")
               .allTextContents(),
-            ["3", "0", "3"],
+            ["3", "0", "0", "3"],
           );
           assert.equal(
             await page.evaluate(
@@ -300,7 +300,7 @@ test("organization example shares the real card and organization workspace with 
             await page
               .locator(".manager-organization-metrics strong")
               .allTextContents(),
-            ["3", "1", "0"],
+            ["3", "1", "0", "0"],
           );
           assert.equal(
             await page

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "base": "44f223883fcec8789bbfea1460f5e60362e796b9",
+  "head": "working tree",
+  "authors": [
+    "eiloncohen",
+    "OdeliaTorjman"
+  ],
+  "carried": 0,
+  "allowed": 3,
+  "zero": true,
+  "files": [
+    {
+      "path": "js/hero.js",
+      "ownedBefore": 29,
+      "rewritten": true,
+      "carried": [],
+      "allowed": [
+        {
+          "line": 164,
+          "reason": "Exact platform feature-detection fact frozen in IP_HERO_MEDIA_BEHAVIOR.md: use IntersectionObserver when present and initial in-view fallback otherwise; no observer callback implementation is exempt."
+        },
+        {
+          "line": 179,
+          "reason": "Frozen classic-script entry point invoked by existing js/main.js, explicitly required by IP_HERO_MEDIA_BEHAVIOR.md."
+        },
+        {
+          "line": 180,
+          "reason": "Required DOM binding of the fixed .hero section; standard querySelector wiring frozen by IP_HERO_MEDIA_BEHAVIOR.md. No media lifecycle implementation is exempt."
+        }
+      ]
+    }
+  ],
+  "limitation": "Detects verbatim carry-over only; independent rewriting still requires review of structure and expression."
+}

@@ -28,7 +28,7 @@ async function setup(t, browser, options = {}) {
     state.calls.push({ path: url.pathname, query: url.search, method, body, headers: request.headers() });
     const fail = (status, code) => route.fulfill({ status, json: { error: { code } } });
     if (state.denied) return fail(403, "PAY_ACCESS_DENIED");
-    if (url.pathname === "/api/v1/pay/me") return route.fulfill({ json: { user: { uid: "fixture-user", email: "fixture@example.test", name: "Fixture User" }, role: "user", canManageSystems: true, uploadEnabled: true, paymentsEnabled: false, organizations: [{ id: "fixture-org", name: "Harbour organization", role: state.organizationRole }, { id: "viewer-org", name: "Read-only organization", role: "viewer" }] } });
+    if (url.pathname === "/api/v1/pay/me") return route.fulfill({ json: { user: { uid: "fixture-user", email: "fixture@example.test", name: "Fixture User" }, role: "user", personalRole: "user", canManageSystems: true, uploadEnabled: true, paymentsEnabled: false, organizations: [{ id: "fixture-org", name: "Harbour organization", role: state.organizationRole }, { id: "viewer-org", name: "Read-only organization", role: "viewer" }] } });
     if (url.pathname === "/api/v1/pay/systems") {
       if (state.listError) return fail(state.listError, "UNAVAILABLE");
       if (url.searchParams.has("organizationId")) return route.fulfill({ json: { items: state.organizationItems ?? [], nextCursor: null, paymentsEnabled: false } });
@@ -286,7 +286,7 @@ test("Pay request errors keep account signed in, support retry and give an hones
   assert.equal(await page.locator(".pay-system-grid:not(details *) .pay-system-card").count(), 0);
   state.denied = true;
   await page.getByRole("button", { name: "Refresh", exact: true }).click();
-  await page.getByText("Your account does not have permission for this action.", { exact: false }).waitFor();
+  await page.getByText("Access to this action is unavailable.", { exact: false }).waitFor();
   assert.equal(calls.includes("signout"), false);
   assert.deepEqual(errors, []);
 });

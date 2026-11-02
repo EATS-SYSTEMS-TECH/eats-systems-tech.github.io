@@ -1,5 +1,6 @@
 // Sign-in page copy (/it/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "La verifica del browser non è riuscita. Ricarica la pagina e riprova. Se il problema persiste, contatta l’assistenza.",
   pageTitle: "Accedi",
   heading: "Accedi a WIFIGATE",
   home: "Pagina iniziale di WIFIGATE",

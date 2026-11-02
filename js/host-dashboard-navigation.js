@@ -5,6 +5,7 @@ import {
   settingsTabFor,
 } from "./host-workspace-model.js";
 import { hostText } from "./host-locale.js";
+import { confirmHostWorkspaceLeave } from "./host-workspace-drafts.js";
 
 // Sidebar navigation, the phone tab bar, the join-organization bell and the
 // Platform item. A view's item is shown only while the workspace has built
@@ -40,6 +41,25 @@ const homeOf = () => root.dataset.homeView || undefined;
 let selected = workspaceLocation(new URL(location.href), homeOf());
 const buttons = new Map();
 const tabs = new Map();
+const personalNavigation = document.createElement("section");
+personalNavigation.className = "manager-personal-navigation";
+personalNavigation.setAttribute("aria-label", hostText("Personal workspace"));
+for (const element of sidebar?.querySelectorAll(".manager-nav-title, #host-workspace-roles") ?? []) personalNavigation.append(element);
+const organizationNavigation = document.createElement("div");
+organizationNavigation.className = "manager-organization-navigation";
+nav.append(personalNavigation);
+const organizationArea = document.createElement("section");
+organizationArea.className = "manager-organization-area";
+organizationArea.hidden = true;
+organizationArea.setAttribute("aria-label", hostText("Organization workspace"));
+const organizationTitle = document.createElement("p");
+organizationTitle.className = "manager-nav-title";
+organizationTitle.textContent = hostText("Organization workspace");
+organizationArea.append(organizationTitle);
+nav.append(organizationArea);
+const organizationPicker = document.getElementById("workspace-org-switcher");
+if (organizationPicker) organizationArea.append(organizationPicker);
+organizationArea.append(organizationNavigation);
 
 let toggle = document.querySelector(".workspace-menu-toggle");
 if (!toggle) {
@@ -152,7 +172,14 @@ for (const view of workspaceViews) {
   }
   const button = viewButton(view);
   buttons.set(view.id, button);
-  if (view.placement !== "platform") nav.append(button);
+  if (!["platform", "home"].includes(view.placement)) {
+    (["my-systems", "my-organizations"].includes(view.id) ? personalNavigation : organizationNavigation).append(button);
+    const organizationLabel = { calendar: "Organization calendar", connect: "Guest invitation automation API" }[view.id];
+    if (organizationLabel) {
+      button.querySelector("span").textContent = hostText(organizationLabel);
+      button.setAttribute("aria-label", hostText(organizationLabel));
+    }
+  }
 }
 
 if (tabbar) {
@@ -202,10 +229,13 @@ function choose(
   const authorizedDuringReload =
     root.dataset.loading === "true" && !buttons.get(view.id).disabled;
   if (!targets(view.id).length && !authorizedDuringReload) return;
+  if ((push || focus) && root.dataset.organizationId && ["my-systems", "my-organizations", "choose-organization"].includes(view.id) && !confirmHostWorkspaceLeave(root)) return;
   const previous = selected;
   selected = view.id;
   for (const dialog of root.querySelectorAll("dialog[open]")) dialog.close();
   const url = new URL(location.href);
+  const returnToPersonal = (push || focus) && ["my-systems", "my-organizations", "choose-organization"].includes(selected) && Boolean(root.dataset.organizationId);
+  if (returnToPersonal) url.searchParams.delete("org");
   url.pathname =
     selected === "overview" ? "/dashboard/host/overview/" : "/dashboard/host/";
   if (selected === "overview" || selected === homeOf())
@@ -223,6 +253,7 @@ function choose(
     history[push ? "pushState" : "replaceState"](null, "", url);
   if (closeMenu) setMenu(false);
   refresh();
+  if (returnToPersonal) window.dispatchEvent(new CustomEvent("host:workspace-personal"));
   window.dispatchEvent(
     new CustomEvent("host:workspace-navigate", { detail: selected }),
   );
@@ -296,12 +327,15 @@ function refresh() {
         : hostText("Join an organization"),
     );
   for (const [id, button] of buttons) {
-    const open = available(id);
+    const open = available(id) && (id !== "settings" || Boolean(root.dataset.organizationId));
     button.hidden = !open;
     button.disabled = !open;
     if (id === selected) button.setAttribute("aria-current", "page");
     else button.removeAttribute("aria-current");
   }
+  organizationNavigation.hidden = !root.dataset.organizationId;
+  personalNavigation.hidden = !["my-systems", "my-organizations"].some(id => available(id));
+  organizationArea.hidden = Boolean(organizationPicker?.hidden) && !root.dataset.organizationId;
   if (tabbar) {
     // Phone tab bar: home, Calendar and Bookings when they exist, then More.
     const order = [home, "calendar", "bookings", "systems", "my-systems"];

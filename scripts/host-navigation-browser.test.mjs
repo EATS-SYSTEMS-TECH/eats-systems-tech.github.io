@@ -84,7 +84,7 @@ test("Host navigation keeps deep links, aliases, history, the bell and inline ph
   assert.equal(await page.getByText("Calendar content").isVisible(), false);
   assert.equal(
     await navigation.locator('button[data-view-id="calendar"]').innerText(),
-    "לוח שנה",
+    "יומן הארגון",
   );
   assert.equal(
     await navigation.locator('button[data-view-id="bookings"]').innerText(),

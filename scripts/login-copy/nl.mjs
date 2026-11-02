@@ -1,5 +1,6 @@
 // Sign-in page copy (/nl/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "De browser kon niet worden geverifieerd. Vernieuw de pagina en probeer het opnieuw. Neem contact op met ondersteuning als het probleem aanhoudt.",
   pageTitle: "Inloggen",
   heading: "Inloggen bij WIFIGATE",
   home: "Startpagina van WIFIGATE",

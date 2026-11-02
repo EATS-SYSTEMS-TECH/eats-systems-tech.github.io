@@ -1,8 +1,20 @@
 import { AuthErrors, HttpStatus } from "./host-constants.js";
+
+export function isAppCheckError(error) {
+  const code = error?.code;
+  return code === "APP_CHECK_REQUIRED" || code === "APP_CHECK_UNCONFIGURED"
+    || (typeof code === "string" && code.startsWith("appCheck/"));
+}
+
 export function authErrorMessage(
   error,
   language = globalThis.document?.documentElement.lang,
 ) {
+  if (isAppCheckError(error)) {
+    return language === "he"
+      ? "אימות הדפדפן נכשל. יש לרענן את הדף ולנסות שוב. אם הבעיה נמשכת, פנו לתמיכה."
+      : "Browser verification failed. Reload the page and try again. If it continues, contact support.";
+  }
   if (language === "he") {
     const messages = {
       "auth/popup-closed-by-user": "ההתחברות בוטלה.",

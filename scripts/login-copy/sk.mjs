@@ -1,5 +1,6 @@
 // Sign-in page copy (/sk/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Overenie prehliadača zlyhalo. Obnovte stránku a skúste to znova. Ak problém pretrváva, kontaktujte podporu.",
   pageTitle: "Prihlásenie",
   heading: "Prihlásenie do WIFIGATE",
   home: "Domovská stránka WIFIGATE",

@@ -1,5 +1,6 @@
 // Sign-in page copy (/sr/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Провера прегледача није успела. Поново учитајте страницу и покушајте опет. Ако проблем потраје, обратите се подршци.",
   pageTitle: "Пријава",
   heading: "Пријава на WIFIGATE",
   home: "Почетна страница WIFIGATE",

@@ -1,242 +1,50 @@
-// scripts/niche-content.mjs
-// Small per-locale UI labels (chrome) for the use-case pages: the eyebrow
-// line, the benefits section title, the breadcrumb home label and the FAQ
-// heading. Every published locale has every label; the build fails on a
-// missing one.
+// Fixed UI wording in locale, eyebrow, benefits, home and FAQ column order.
+// Keep these compatibility facts identical to the complete frozen label model.
+const labelRows = [
+  ["en", "WIFIGATE use case", "Key benefits", "Home", "Frequently asked questions"],
+  ["he", "תרחיש שימוש של WIFIGATE", "יתרונות עיקריים", "דף הבית", "שאלות נפוצות"],
+  ["es", "Caso de uso de WIFIGATE", "Beneficios clave", "Inicio", "Preguntas frecuentes"],
+  ["fr", "Cas d'usage WIFIGATE", "Avantages clés", "Accueil", "Questions fréquentes"],
+  ["de", "WIFIGATE-Anwendungsfall", "Wichtigste Vorteile", "Startseite", "Häufige Fragen"],
+  ["nl", "WIFIGATE-toepassing", "Belangrijkste voordelen", "Home", "Veelgestelde vragen"],
+  ["it", "Caso d'uso WIFIGATE", "Vantaggi principali", "Home", "Domande frequenti"],
+  ["pt", "Caso de utilização da WIFIGATE", "Principais benefícios", "Início", "Perguntas frequentes"],
+  ["pl", "Zastosowanie WIFIGATE", "Najważniejsze korzyści", "Strona główna", "Najczęściej zadawane pytania"],
+  ["no", "WIFIGATE-bruksområde", "Viktigste fordeler", "Forside", "Ofte stilte spørsmål"],
+  ["cs", "Využití WIFIGATE", "Hlavní výhody", "Domů", "Časté dotazy"],
+  ["ru", "Сценарий применения WIFIGATE", "Ключевые преимущества", "Главная", "Частые вопросы"],
+  ["uk", "Сценарій застосування WIFIGATE", "Ключові переваги", "Головна", "Поширені запитання"],
+  ["tr", "WIFIGATE kullanım senaryosu", "Temel avantajlar", "Ana sayfa", "Sık sorulan sorular"],
+  ["ar", "حالة استخدام WIFIGATE", "أهم المزايا", "الرئيسية", "الأسئلة الشائعة"],
+  ["hi", "WIFIGATE के इस्तेमाल का उदाहरण", "मुख्य लाभ", "होम", "अक्सर पूछे जाने वाले प्रश्न"],
+  ["bn", "WIFIGATE ব্যবহারের ক্ষেত্র", "মূল সুবিধা", "হোম", "সচরাচর জিজ্ঞাসা"],
+  ["mr", "WIFIGATE चा वापर", "मुख्य फायदे", "मुख्यपृष्ठ", "वारंवार विचारले जाणारे प्रश्न"],
+  ["te", "WIFIGATE వినియోగ సందర్భం", "ముఖ్య ప్రయోజనాలు", "హోమ్", "తరచుగా అడిగే ప్రశ్నలు"],
+  ["zh-Hans", "WIFIGATE 应用场景", "核心优势", "首页", "常见问题"],
+  ["zh-Hant", "WIFIGATE 應用情境", "核心優勢", "首頁", "常見問題"],
+  ["ja", "WIFIGATE の活用シーン", "主なメリット", "ホーム", "よくある質問"],
+  ["ko", "WIFIGATE 활용 사례", "주요 장점", "홈", "자주 묻는 질문"],
+  ["da", "WIFIGATE-anvendelse", "Vigtigste fordele", "Forside", "Ofte stillede spørgsmål"],
+  ["sv", "WIFIGATE-användningsområde", "Viktigaste fördelarna", "Startsida", "Vanliga frågor"],
+  ["hu", "WIFIGATE felhasználási terület", "Fő előnyök", "Kezdőlap", "Gyakori kérdések"],
+  ["el", "Περίπτωση χρήσης WIFIGATE", "Βασικά πλεονεκτήματα", "Αρχική", "Συχνές ερωτήσεις"],
+  ["ro", "Caz de utilizare WIFIGATE", "Avantaje principale", "Acasă", "Întrebări frecvente"],
+  ["hr", "Primjena sustava WIFIGATE", "Ključne prednosti", "Početna", "Česta pitanja"],
+  ["fi", "WIFIGATE-käyttökohde", "Tärkeimmät edut", "Etusivu", "Usein kysytyt kysymykset"],
+  ["bg", "Сценарий за употреба на WIFIGATE", "Основни предимства", "Начало", "Често задавани въпроси"],
+  ["sr", "Примена система WIFIGATE", "Кључне предности", "Почетна", "Честа питања"],
+  ["sk", "Využitie WIFIGATE", "Hlavné výhody", "Domov", "Často kladené otázky"],
+  ["sl", "Primer uporabe WIFIGATE", "Ključne prednosti", "Domov", "Pogosta vprašanja"],
+  ["id", "Contoh penggunaan WIFIGATE", "Manfaat utama", "Beranda", "Pertanyaan umum"],
+  ["th", "ตัวอย่างการใช้งาน WIFIGATE", "ประโยชน์หลัก", "หน้าแรก", "คำถามที่พบบ่อย"],
+  ["vi", "Tình huống sử dụng WIFIGATE", "Lợi ích chính", "Trang chủ", "Câu hỏi thường gặp"],
+  ["ms", "Kegunaan WIFIGATE", "Manfaat utama", "Laman utama", "Soalan lazim"],
+  ["fil", "Gamit ng WIFIGATE", "Pangunahing benepisyo", "Home", "Mga madalas itanong"],
+];
 
-export const NICHE_CHROME = {
-  "en": {
-    "eyebrow": "WIFIGATE use case",
-    "benefitsTitle": "Key benefits",
-    "homeLabel": "Home",
-    "faqTitle": "Frequently asked questions"
-  },
-  "he": {
-    "eyebrow": "תרחיש שימוש של WIFIGATE",
-    "benefitsTitle": "יתרונות עיקריים",
-    "homeLabel": "דף הבית",
-    "faqTitle": "שאלות נפוצות"
-  },
-  "es": {
-    "eyebrow": "Caso de uso de WIFIGATE",
-    "benefitsTitle": "Beneficios clave",
-    "homeLabel": "Inicio",
-    "faqTitle": "Preguntas frecuentes"
-  },
-  "fr": {
-    "eyebrow": "Cas d'usage WIFIGATE",
-    "benefitsTitle": "Avantages clés",
-    "homeLabel": "Accueil",
-    "faqTitle": "Questions fréquentes"
-  },
-  "de": {
-    "eyebrow": "WIFIGATE-Anwendungsfall",
-    "benefitsTitle": "Wichtigste Vorteile",
-    "homeLabel": "Startseite",
-    "faqTitle": "Häufige Fragen"
-  },
-  "nl": {
-    "eyebrow": "WIFIGATE-toepassing",
-    "benefitsTitle": "Belangrijkste voordelen",
-    "homeLabel": "Home",
-    "faqTitle": "Veelgestelde vragen"
-  },
-  "it": {
-    "eyebrow": "Caso d'uso WIFIGATE",
-    "benefitsTitle": "Vantaggi principali",
-    "homeLabel": "Home",
-    "faqTitle": "Domande frequenti"
-  },
-  "pt": {
-    "eyebrow": "Caso de utilização da WIFIGATE",
-    "benefitsTitle": "Principais benefícios",
-    "homeLabel": "Início",
-    "faqTitle": "Perguntas frequentes"
-  },
-  "pl": {
-    "eyebrow": "Zastosowanie WIFIGATE",
-    "benefitsTitle": "Najważniejsze korzyści",
-    "homeLabel": "Strona główna",
-    "faqTitle": "Najczęściej zadawane pytania"
-  },
-  "no": {
-    "eyebrow": "WIFIGATE-bruksområde",
-    "benefitsTitle": "Viktigste fordeler",
-    "homeLabel": "Forside",
-    "faqTitle": "Ofte stilte spørsmål"
-  },
-  "cs": {
-    "eyebrow": "Využití WIFIGATE",
-    "benefitsTitle": "Hlavní výhody",
-    "homeLabel": "Domů",
-    "faqTitle": "Časté dotazy"
-  },
-  "ru": {
-    "eyebrow": "Сценарий применения WIFIGATE",
-    "benefitsTitle": "Ключевые преимущества",
-    "homeLabel": "Главная",
-    "faqTitle": "Частые вопросы"
-  },
-  "uk": {
-    "eyebrow": "Сценарій застосування WIFIGATE",
-    "benefitsTitle": "Ключові переваги",
-    "homeLabel": "Головна",
-    "faqTitle": "Поширені запитання"
-  },
-  "tr": {
-    "eyebrow": "WIFIGATE kullanım senaryosu",
-    "benefitsTitle": "Temel avantajlar",
-    "homeLabel": "Ana sayfa",
-    "faqTitle": "Sık sorulan sorular"
-  },
-  "ar": {
-    "eyebrow": "حالة استخدام WIFIGATE",
-    "benefitsTitle": "أهم المزايا",
-    "homeLabel": "الرئيسية",
-    "faqTitle": "الأسئلة الشائعة"
-  },
-  "hi": {
-    "eyebrow": "WIFIGATE के इस्तेमाल का उदाहरण",
-    "benefitsTitle": "मुख्य लाभ",
-    "homeLabel": "होम",
-    "faqTitle": "अक्सर पूछे जाने वाले प्रश्न"
-  },
-  "bn": {
-    "eyebrow": "WIFIGATE ব্যবহারের ক্ষেত্র",
-    "benefitsTitle": "মূল সুবিধা",
-    "homeLabel": "হোম",
-    "faqTitle": "সচরাচর জিজ্ঞাসা"
-  },
-  "mr": {
-    "eyebrow": "WIFIGATE चा वापर",
-    "benefitsTitle": "मुख्य फायदे",
-    "homeLabel": "मुख्यपृष्ठ",
-    "faqTitle": "वारंवार विचारले जाणारे प्रश्न"
-  },
-  "te": {
-    "eyebrow": "WIFIGATE వినియోగ సందర్భం",
-    "benefitsTitle": "ముఖ్య ప్రయోజనాలు",
-    "homeLabel": "హోమ్",
-    "faqTitle": "తరచుగా అడిగే ప్రశ్నలు"
-  },
-  "zh-Hans": {
-    "eyebrow": "WIFIGATE 应用场景",
-    "benefitsTitle": "核心优势",
-    "homeLabel": "首页",
-    "faqTitle": "常见问题"
-  },
-  "zh-Hant": {
-    "eyebrow": "WIFIGATE 應用情境",
-    "benefitsTitle": "核心優勢",
-    "homeLabel": "首頁",
-    "faqTitle": "常見問題"
-  },
-  "ja": {
-    "eyebrow": "WIFIGATE の活用シーン",
-    "benefitsTitle": "主なメリット",
-    "homeLabel": "ホーム",
-    "faqTitle": "よくある質問"
-  },
-  "ko": {
-    "eyebrow": "WIFIGATE 활용 사례",
-    "benefitsTitle": "주요 장점",
-    "homeLabel": "홈",
-    "faqTitle": "자주 묻는 질문"
-  },
-  "da": {
-    "eyebrow": "WIFIGATE-anvendelse",
-    "benefitsTitle": "Vigtigste fordele",
-    "homeLabel": "Forside",
-    "faqTitle": "Ofte stillede spørgsmål"
-  },
-  "sv": {
-    "eyebrow": "WIFIGATE-användningsområde",
-    "benefitsTitle": "Viktigaste fördelarna",
-    "homeLabel": "Startsida",
-    "faqTitle": "Vanliga frågor"
-  },
-  "hu": {
-    "eyebrow": "WIFIGATE felhasználási terület",
-    "benefitsTitle": "Fő előnyök",
-    "homeLabel": "Kezdőlap",
-    "faqTitle": "Gyakori kérdések"
-  },
-  "el": {
-    "eyebrow": "Περίπτωση χρήσης WIFIGATE",
-    "benefitsTitle": "Βασικά πλεονεκτήματα",
-    "homeLabel": "Αρχική",
-    "faqTitle": "Συχνές ερωτήσεις"
-  },
-  "ro": {
-    "eyebrow": "Caz de utilizare WIFIGATE",
-    "benefitsTitle": "Avantaje principale",
-    "homeLabel": "Acasă",
-    "faqTitle": "Întrebări frecvente"
-  },
-  "hr": {
-    "eyebrow": "Primjena sustava WIFIGATE",
-    "benefitsTitle": "Ključne prednosti",
-    "homeLabel": "Početna",
-    "faqTitle": "Česta pitanja"
-  },
-  "fi": {
-    "eyebrow": "WIFIGATE-käyttökohde",
-    "benefitsTitle": "Tärkeimmät edut",
-    "homeLabel": "Etusivu",
-    "faqTitle": "Usein kysytyt kysymykset"
-  },
-  "bg": {
-    "eyebrow": "Сценарий за употреба на WIFIGATE",
-    "benefitsTitle": "Основни предимства",
-    "homeLabel": "Начало",
-    "faqTitle": "Често задавани въпроси"
-  },
-  "sr": {
-    "eyebrow": "Примена система WIFIGATE",
-    "benefitsTitle": "Кључне предности",
-    "homeLabel": "Почетна",
-    "faqTitle": "Честа питања"
-  },
-  "sk": {
-    "eyebrow": "Využitie WIFIGATE",
-    "benefitsTitle": "Hlavné výhody",
-    "homeLabel": "Domov",
-    "faqTitle": "Často kladené otázky"
-  },
-  "sl": {
-    "eyebrow": "Primer uporabe WIFIGATE",
-    "benefitsTitle": "Ključne prednosti",
-    "homeLabel": "Domov",
-    "faqTitle": "Pogosta vprašanja"
-  },
-  "id": {
-    "eyebrow": "Contoh penggunaan WIFIGATE",
-    "benefitsTitle": "Manfaat utama",
-    "homeLabel": "Beranda",
-    "faqTitle": "Pertanyaan umum"
-  },
-  "th": {
-    "eyebrow": "ตัวอย่างการใช้งาน WIFIGATE",
-    "benefitsTitle": "ประโยชน์หลัก",
-    "homeLabel": "หน้าแรก",
-    "faqTitle": "คำถามที่พบบ่อย"
-  },
-  "vi": {
-    "eyebrow": "Tình huống sử dụng WIFIGATE",
-    "benefitsTitle": "Lợi ích chính",
-    "homeLabel": "Trang chủ",
-    "faqTitle": "Câu hỏi thường gặp"
-  },
-  "ms": {
-    "eyebrow": "Kegunaan WIFIGATE",
-    "benefitsTitle": "Manfaat utama",
-    "homeLabel": "Laman utama",
-    "faqTitle": "Soalan lazim"
-  },
-  "fil": {
-    "eyebrow": "Gamit ng WIFIGATE",
-    "benefitsTitle": "Pangunahing benepisyo",
-    "homeLabel": "Home",
-    "faqTitle": "Mga madalas itanong"
-  }
-};
+// Assemble the public ordinary records without fallback, mutation or I/O.
+// Explicit fields preserve the existing exported shape and insertion order.
+export const NICHE_CHROME = Object.fromEntries(labelRows.map(
+  ([locale, eyebrow, benefitsTitle, homeLabel, faqTitle]) =>
+    [locale, { eyebrow, benefitsTitle, homeLabel, faqTitle }]
+));

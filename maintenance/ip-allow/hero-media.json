@@ -1,0 +1,17 @@
+[
+  {
+    "path": "js/hero.js",
+    "line": "if (\"IntersectionObserver\" in window) {",
+    "reason": "Exact platform feature-detection fact frozen in IP_HERO_MEDIA_BEHAVIOR.md: use IntersectionObserver when present and initial in-view fallback otherwise; no observer callback implementation is exempt."
+  },
+  {
+    "path": "js/hero.js",
+    "line": "function setupHeroMedia() {",
+    "reason": "Frozen classic-script entry point invoked by existing js/main.js, explicitly required by IP_HERO_MEDIA_BEHAVIOR.md."
+  },
+  {
+    "path": "js/hero.js",
+    "line": "const hero = document.querySelector(\".hero\");",
+    "reason": "Required DOM binding of the fixed .hero section; standard querySelector wiring frozen by IP_HERO_MEDIA_BEHAVIOR.md. No media lifecycle implementation is exempt."
+  }
+]

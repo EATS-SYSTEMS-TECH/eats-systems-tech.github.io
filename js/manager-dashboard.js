@@ -99,7 +99,7 @@ export function createManagerDashboard({
     nav = node("nav", undefined, "manager-nav"),
     main = node("div", undefined, "manager-main");
   nav.setAttribute("aria-label", t("ניווט Manager", "Manager navigation"));
-  const title = node("p", t("סביבת עבודה", "Workspace"), "manager-nav-title"),
+  const title = node("p", t("סביבת עבודה אישית", "Personal workspace"), "manager-nav-title"),
     status = node("p", "", "manager-status");
   status.setAttribute("role", "status");
   status.setAttribute("aria-live", "polite");
@@ -413,17 +413,21 @@ export function createManagerDashboard({
     shell.dataset.mode = managementMode ? "management" : "workspace";
     nav.hidden = managementMode;
     platformEntry.hidden = true;
-    nav.replaceChildren(title);
+    nav.replaceChildren();
+    const personalNavigation = node("section", undefined, "manager-personal-navigation");
+    personalNavigation.setAttribute("aria-label", t("סביבת עבודה אישית", "Personal workspace"));
+    personalNavigation.append(title);
+    nav.append(personalNavigation);
     const roleList = node("div", undefined, "manager-sidebar-roles");
     for (const role of new Set(
       profile.roles?.length ? profile.roles : [profile.role],
     )) {
-      if (!["admin", "user", "organization-admin"].includes(role)) continue;
+      if (!["admin", "user", "organization-admin", "organization-user", "organization-staff", "organization-viewer"].includes(role)) continue;
       const label = node("span", roleName(role));
       label.dir = "ltr";
       roleList.append(label);
     }
-    if (roleList.childElementCount) nav.append(roleList);
+    if (roleList.childElementCount) personalNavigation.append(roleList);
 
     platformHeader.replaceChildren();
     platformHeader.hidden = true;
@@ -431,25 +435,34 @@ export function createManagerDashboard({
       const b = button(t("המערכות שלי", "My systems"), () => showSystems(null));
       if (!scope && ["systems", "example-system"].includes(currentView))
         b.setAttribute("aria-current", "page");
-      nav.append(b);
+      personalNavigation.append(b);
     }
     const myOrganizations = button(t("הארגונים שלי", "My organizations"), () =>
       showOrganizations(true),
     );
     if (
-      ["my-organizations", "example-organization"].includes(currentView) ||
-      (currentView === "systems" && scope)
+      ["my-organizations", "example-organization"].includes(currentView)
     )
       myOrganizations.setAttribute("aria-current", "page");
-    nav.append(myOrganizations);
+    personalNavigation.append(myOrganizations);
     if (profile.organizations?.length) {
+      const organizationArea = node("section", undefined, "manager-organization-area");
+      organizationArea.setAttribute("aria-label", t("סביבת הארגון", "Organization workspace"));
+      organizationArea.append(node("p", t("סביבת הארגון", "Organization workspace"), "manager-nav-title"));
+      nav.append(organizationArea);
       organizationPicker = createManagerOrganizationPicker({
         organizations: profile.organizations.map(org => ({ ...org, ...organizationIdentities.get(org.id), role: org.role })),
         selectedId: scope,
         language,
         onSelect: id => task(() => showSystems(id)),
       });
-      nav.append(organizationPicker.root);
+      organizationArea.append(organizationPicker.root);
+      if (scope && profile.organizations.some(org => org.id === scope)) {
+        const organizationSystems = button(t("מערכות הארגון", "Organization systems"), () => task(() => showSystems(scope)));
+        organizationSystems.dataset.organizationView = "systems";
+        if (currentView === "systems") organizationSystems.setAttribute("aria-current", "page");
+        organizationArea.append(organizationSystems);
+      }
     }
     if (profile.role !== "admin")
       nav.append(button(t("הזמנות", "Invitations"), showInvitations));
@@ -501,7 +514,7 @@ export function createManagerDashboard({
         });
         platformHeader.append(
           back,
-          node("span", "WIFIGATE Manager admin", "manager-role-badge"),
+          node("span", "WIFIGATE Manager Admin", "manager-role-badge"),
           home,
           node(
             "p",
@@ -642,15 +655,19 @@ export function createManagerDashboard({
   function roleName(role) {
     return (
       {
-        admin: "WIFIGATE Manager admin",
-        user: "WIFIGATE Manager user",
-        "organization-admin": "WIFIGATE Manager organization admin",
+        admin: "WIFIGATE Manager Admin",
+        user: "WIFIGATE Manager User",
+        "organization-admin": "WIFIGATE Manager Organization Admin",
+        "organization-user": "WIFIGATE Manager Organization Staff",
+        "organization-staff": "WIFIGATE Manager Organization Staff",
+        "organization-viewer": "WIFIGATE Manager Organization Viewer",
       }[role] ?? t("ממתין להרשאה", "Access pending")
     );
   }
   function beginView(key) {
     stop();
     scope = null;
+    delete document.body.dataset.organizationRole;
     currentView = key;
     renderNav();
     say("");
@@ -1117,7 +1134,7 @@ export function createManagerDashboard({
 });
       removeButton.classList.add("manager-button-danger");
       if(workspace || operatorAccount)secondary.append(removeButton);
-      else if(!scope) {removeButton.classList.add("manager-system-remove");removeButton.setAttribute("aria-label",t("הסרת מערכת: ","Remove system: ")+s.name);actions.append(removeButton);}
+      else if(!scope && currentView !== "example-organization") {removeButton.classList.add("manager-system-remove");removeButton.setAttribute("aria-label",t("הסרת מערכת: ","Remove system: ")+s.name);actions.append(removeButton);}
     }
     if ((workspace || operatorAccount) && secondary.childElementCount) {
       const menu = node("details", undefined, "manager-system-menu");
@@ -1306,8 +1323,8 @@ export function createManagerDashboard({
                     [
                       "email",
                       t(
-                        "אימייל בעל הארגון · Manager user",
-                        "Organization owner email · Manager user",
+                        "אימייל בעל הארגון · Manager User",
+                        "Organization owner email · Manager User",
                       ),
                       "email",
                     ],
@@ -1413,7 +1430,7 @@ export function createManagerDashboard({
         ),
       );
       card.append(
-        node("span", "WIFIGATE Manager user", "manager-role-badge"),
+        node("span", "WIFIGATE Manager User", "manager-role-badge"),
         button(
           status === "active"
             ? t("ביטול גישה", "Revoke access")
@@ -1456,8 +1473,8 @@ export function createManagerDashboard({
         const created = await dialogs.form({
           title: t("הוספת לקוח", "Add customer"),
           message: t(
-            "הזינו כתובת אימייל מאומתת להפעלת חשבון WIFIGATE Manager user. אין דרישת תשלום או כרטיס בשלב זה.",
-            "Enter a verified email address to enable a WIFIGATE Manager user account. No payment or card is required in this phase.",
+            "הזינו כתובת אימייל מאומתת להפעלת חשבון WIFIGATE Manager User. אין דרישת תשלום או כרטיס בשלב זה.",
+            "Enter a verified email address to enable a WIFIGATE Manager User account. No payment or card is required in this phase.",
           ),
           fields: [
             [

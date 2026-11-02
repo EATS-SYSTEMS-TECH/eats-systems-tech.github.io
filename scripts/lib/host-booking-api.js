@@ -113,6 +113,15 @@ export function installHostApi(state) {
     }
     if (rest === "/systems")
       return reply(config, { items: systems, nextCursor: null });
+    const systemUpdate = /^\/systems\/([^/]+)$/.exec(rest);
+    if (systemUpdate && method === "PUT") {
+      const system = systems.find(item => item.id === systemUpdate[1]);
+      if (!system) return refuse(config, { status: 404, code: "NOT_FOUND" });
+      if (!organization.workspace.permissions.includes("systems:write")) return refuse(config, { status: 403, code: "TENANT_ACCESS_DENIED" });
+      if (body.version !== system.version) return refuse(config, { status: 409, code: "VERSION_CONFLICT" });
+      Object.assign(system, body, { version: system.version + 1 });
+      return reply(config, { system });
+    }
     if (rest === "/reservations/time-zone/resolve") {
       if (
         state.ambiguous === body.localTime &&

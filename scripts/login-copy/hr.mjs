@@ -1,5 +1,6 @@
 // Sign-in page copy (/hr/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Provjera preglednika nije uspjela. Ponovno učitajte stranicu i pokušajte opet. Ako se problem nastavi, obratite se podršci.",
   pageTitle: "Prijava",
   heading: "Prijava na WIFIGATE",
   home: "Početna stranica WIFIGATE",

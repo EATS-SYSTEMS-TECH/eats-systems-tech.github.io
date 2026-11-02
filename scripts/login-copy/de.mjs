@@ -1,5 +1,6 @@
 // Sign-in page copy (/de/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Die Browserprüfung ist fehlgeschlagen. Laden Sie die Seite neu und versuchen Sie es erneut. Wenn das Problem weiterhin besteht, wenden Sie sich an den Support.",
   pageTitle: "Anmelden",
   heading: "Bei WIFIGATE anmelden",
   home: "WIFIGATE-Startseite",

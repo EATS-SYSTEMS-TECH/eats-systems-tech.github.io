@@ -1,5 +1,6 @@
 // Sign-in page copy (/mr/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "ब्राउझरची पडताळणी अयशस्वी झाली. पृष्ठ पुन्हा लोड करून प्रयत्न करा. समस्या कायम राहिल्यास सहाय्याशी संपर्क साधा.",
   pageTitle: "साइन इन",
   heading: "WIFIGATE मध्ये साइन इन करा",
   home: "WIFIGATE मुख्यपृष्ठ",

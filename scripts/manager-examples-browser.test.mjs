@@ -58,7 +58,8 @@ test("Manager example gate, Dual Control and group use real workspace controls w
             await card.getAttribute("class"),
             "manager-card manager-system",
           );
-          assert.equal(await card.locator("button").count(), 1);
+          assert.equal(await card.locator("button.primary").count(), 1, "one primary workspace action");
+          assert.equal(await card.locator(".manager-system-remove").count(), 1, "the sample retains its independent remove action");
           await card
             .getByRole("button", {
               name: copy("פתיחת סביבת ניהול", "Open workspace"),
@@ -322,9 +323,11 @@ test("Manager example gate, Dual Control and group use real workspace controls w
           .getByRole("button")
           .click();
         await page.locator(".manager-organization-header h2").waitFor();
+        // Like real organization cards, sample organization cards offer no card-level removal.
+        assert.equal(await page.locator('[data-example-system="example-manager-gate"] .manager-system-remove').count(), 0);
         await page
           .locator('[data-example-system="example-manager-gate"]')
-          .getByRole("button")
+          .locator("button.primary")
           .click();
         await workspace.locator("#manager-content .manager-facts").waitFor();
         await workspace
@@ -359,7 +362,7 @@ test("Manager example gate, Dual Control and group use real workspace controls w
           .waitFor();
         await page
           .locator('[data-example-system="example-manager-group"]')
-          .getByRole("button")
+          .locator("button.primary")
           .click();
         await workspace.locator("#manager-content .manager-facts").waitFor();
         await workspace

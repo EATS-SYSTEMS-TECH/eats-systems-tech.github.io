@@ -1,6 +1,7 @@
 // Sign-in page copy (/he/login/). Hebrew is the source: every other locale
 // file has the same keys. {placeholders} stay as they are.
 export default {
+  errorAppCheck: "אימות הדפדפן נכשל. יש לרענן את הדף ולנסות שוב. אם הבעיה נמשכת, פנו לתמיכה.",
   pageTitle: "כניסה",
   heading: "כניסה ל־WIFIGATE",
   home: "דף הבית של WIFIGATE",

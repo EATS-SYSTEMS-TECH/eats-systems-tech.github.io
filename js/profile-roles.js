@@ -17,7 +17,7 @@ export function renderProfileRoles(container, { platformRole, product, role, rol
   const card = append("div", "", "dashboard-profile-product-card");
   append("strong", name, "dashboard-profile-product", card);
   for (const value of roles?.length ? roles : [role].filter(Boolean)) {
-    const suffix = { admin: "admin", user: "user", "organization-admin": "organization admin" }[value];
+    const suffix = { admin: "Admin", user: "User", "organization-admin": "Organization Admin", "organization-user": "Organization Staff", "organization-staff": "Organization Staff", "organization-viewer": "Organization Viewer" }[value];
     if (suffix) append("span", `${name} ${suffix}`, "manager-role-badge", card);
   }
 }

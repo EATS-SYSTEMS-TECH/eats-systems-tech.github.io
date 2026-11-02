@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "area": "W3",
+  "sourceCommit": "858e45875be2ea283f3ff6120b1a89ea4c3bb880",
+  "review": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/10",
+  "specification": "maintenance/IP_HOST_PRESENTATION_BEHAVIOR.md",
+  "deletionCommit": "9735bf8d8",
+  "implementationCommit": "858e45875be2ea283f3ff6120b1a89ea4c3bb880",
+  "change": "Independent DOM-node/text construction instead of inherited markup templates;public exports,locale projection,offer facts,icon geometry,translation paths and validate-before-mutation behavior retained",
+  "validation": {
+    "hostAndActualChrome": "14/14PASS",
+    "fullCli": "PASS isolated frozen567inputs/180verified read-only assets",
+    "generatedOutput": {
+      "files": 1485,
+      "allModelsIdentical": true,
+      "rawByteDifferences": 78,
+      "missing": [],
+      "unexpected": [],
+      "modelMismatches": [],
+      "difference": "Whitespace/serialization after DOM construction;full nonwhitespace text/DOM/attributes checked"
+    },
+    "sourceAttribution": {
+      "ref": "858e45875be2ea283f3ff6120b1a89ea4c3bb880",
+      "files": 2,
+      "complete": true,
+      "zero": true,
+      "summary": {
+        "eiloncohen": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        },
+        "OdeliaTorjman": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        }
+      }
+    }
+  },
+  "limits": [
+    "Public marketing only;no Host backend/account/billing operations",
+    "No whole-website zero claim",
+    "Other frontend/generated/final-main/legal acceptance remains open",
+    "Primary/main and hosting unchanged"
+  ],
+  "productionDelivery": false
+}

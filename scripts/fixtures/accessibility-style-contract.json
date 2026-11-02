@@ -1,0 +1,1350 @@
+{
+  "referenceSourceSha256": "a34ff56c2e4af41f392cf9153231daa218ff1b98bfe2953391f0f36b56d29cca",
+  "scope": "Actual Chromium shared partial/page roles;192responsive preference/direction cases;not phone acceptance",
+  "cases": [
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "default",
+      "elements": 113,
+      "sha256": "ab75531bcc8346b8cfc1091cad8e1dff23c280e0c985075242c02ae616b4c9e0"
+    },
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "high-contrast",
+      "elements": 114,
+      "sha256": "4058a6c442a80dc3efbd86db094e53b2cff45dd1ffe87ba4af3bfbaa17459909"
+    },
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "grayscale",
+      "elements": 114,
+      "sha256": "db53d61836970445983ba672ce0fcb1fb6e39689e1edeb62d1c948e8067ccf2f"
+    },
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "underlined-links",
+      "elements": 114,
+      "sha256": "cf8544951fbbd94114374ce11fb5477fa1ca98a3170324c140979dddff7e2b05"
+    },
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "readable-font",
+      "elements": 114,
+      "sha256": "7af55cc5b9baaf78b8b20d42e3df6dacb86c562b222d33de948641010b8f2c3c"
+    },
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "text-spacing",
+      "elements": 114,
+      "sha256": "c7968b5ff69d2a5f1bdb64b63c9f82479cf5b4880cbc53609d52461771aff3e0"
+    },
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "highlight-headings",
+      "elements": 114,
+      "sha256": "c5f9f4ed6ceeb6e5b5ebd8fad4e472d7d9c0627cf63d52dece796bc502a13dac"
+    },
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "big-cursor",
+      "elements": 114,
+      "sha256": "f7c4a5431215aa61d0997b68a9f2472b223a53b6aab79dbea9a17c61f43a2ad5"
+    },
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "focus-highlight",
+      "elements": 114,
+      "sha256": "f41e7ab639860a28d87b6c0079c3137768f906dcfe9eda589ac1d92c6b913072"
+    },
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "reduced-motion",
+      "elements": 114,
+      "sha256": "8223a097411fa180072492bbe1eb8d21c3950918e7b731808a35aae80f1d0638"
+    },
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "scaled",
+      "elements": 114,
+      "sha256": "cf941559e22350f084576298caba8df278550040d519b85a06fdb8ffef6348e8"
+    },
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "all",
+      "elements": 114,
+      "sha256": "a45d3057200f23855c1bb63ee9c6ca5c60e832271c2ca38611b32e945a4d25f2"
+    },
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "closed",
+      "elements": 112,
+      "sha256": "1047b58217f3135b1730a8b6df3812460e2d69487598949059007b648ace6dae"
+    },
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "hidden",
+      "elements": 113,
+      "sha256": "9aa20d7b6a931753ae0368152c982624d31c6f78e8b4109d25702942b9bd4590"
+    },
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "arranging",
+      "elements": 113,
+      "sha256": "4ebe32a2bb558acb7cb4d4a29694f8dd9e5c5e4be73d4ae59b55596753a3ae76"
+    },
+    {
+      "width": 375,
+      "direction": "ltr",
+      "state": "arabic-spacing",
+      "elements": 114,
+      "sha256": "256abc8a5f41c21b47f3c837311012f0db04d6e9a69b18ad348d7d00edfad26e"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "default",
+      "elements": 113,
+      "sha256": "d23972c931f832f2a178f2b08e88b52ef58013854237b08ba90a401f07945787"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "high-contrast",
+      "elements": 114,
+      "sha256": "f537f2a53ddd6d0a877583ba10fdc355e1a3e906e8e58c92e1b4a6855b833edc"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "grayscale",
+      "elements": 114,
+      "sha256": "4c3606d84e78c6c350a874f1096c4c85a3fdd53d5fe5ff710e61b11bffd98372"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "underlined-links",
+      "elements": 114,
+      "sha256": "5ce4b483424d1fbb6a5f5124aa60451374cefbca923b5d4356f09d546b397603"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "readable-font",
+      "elements": 114,
+      "sha256": "ee321f8746c5c799d1a64b00018d53679d38cc44983629e25ec8f0d5301a382a"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "text-spacing",
+      "elements": 114,
+      "sha256": "64021d1e45d32c933a0db9f3e81ee11d843b8fa3d940b43ec32a08f418d59b5b"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "highlight-headings",
+      "elements": 114,
+      "sha256": "ba096a227ce970fcad6565a7ea4772e7e75d7a7b8f39c15db664dc5a0db5663a"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "big-cursor",
+      "elements": 114,
+      "sha256": "74418f3b6de288b3b63cb167d38ccf6324f7ea58940b9a0d9c5cc170821f3ce7"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "focus-highlight",
+      "elements": 114,
+      "sha256": "ca51410691adf85253812f1da8ebae20eec8e70c692447e0b68d78c95501e956"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "reduced-motion",
+      "elements": 114,
+      "sha256": "bab0152a01bbf85e375373feb2ccb422c878c11f6efdcf6f10e59286dd319336"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "scaled",
+      "elements": 114,
+      "sha256": "babf00b615736abdcaf5684d68151d4615abeddd7dc2e54f2dd48cd262cabc63"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "all",
+      "elements": 114,
+      "sha256": "a4d5f1eb991180712fc25b1f2880a74caaed9d1b390e1ea3d5ff21bf73b43692"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "closed",
+      "elements": 112,
+      "sha256": "87d825c5a1b164af417cf689892a85aa981e938037542cb44a1eb98954a25848"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "hidden",
+      "elements": 113,
+      "sha256": "b2c3eb5bac1e6bd2c2a7cbe4cd3b24255733a800d766fad47a4bb5456dada483"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "arranging",
+      "elements": 113,
+      "sha256": "7ca2f1c8b923290aad03b8066c8dca56a36c5d62268bd1cf242981fe7435b4ca"
+    },
+    {
+      "width": 375,
+      "direction": "rtl",
+      "state": "arabic-spacing",
+      "elements": 114,
+      "sha256": "34a1dc041d6f8b9c7718d4d310e7255b6d40ee977c82a53dc55068f4d13248aa"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "default",
+      "elements": 113,
+      "sha256": "c9ead4871f829897f3673230714ae5150f9559e4afa34951f37d6b89e033dc4c"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "high-contrast",
+      "elements": 114,
+      "sha256": "d4dd9dad83e99f5f343c7db42adb586fdc38c44153a2e9f55f25017eec8e4650"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "grayscale",
+      "elements": 114,
+      "sha256": "42b487727d029c65372e6dc3ef8c4c7f3209b00d01ef23215371a86542e2f9fd"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "underlined-links",
+      "elements": 114,
+      "sha256": "2e5725d50ea178d56e6b9d19dff612cd088054fb00ca1b0464461c1818d1b25f"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "readable-font",
+      "elements": 114,
+      "sha256": "1b3017a5a904aeb6d4efa09ae0f4631cc64cd611de66c7b519e9711e68db3321"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "text-spacing",
+      "elements": 114,
+      "sha256": "852039a8b5be3ec9341291a934a80ddd8c0a2ba0b5bdd1a3d2273cd8bbddf0e9"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "highlight-headings",
+      "elements": 114,
+      "sha256": "952505943f25b8a4d788cc9cf9c4566578b476760b4ba0ce39a3f70254138ff4"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "big-cursor",
+      "elements": 114,
+      "sha256": "37e72f3a2ddf6ecb55e59861f3cb15b455d50d03256d7cc7817273a994d9cb8d"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "focus-highlight",
+      "elements": 114,
+      "sha256": "c575a166ae6a8afe970fa9d445bd626922354bf358f2d43c8c78982f9e4afcfb"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "reduced-motion",
+      "elements": 114,
+      "sha256": "18c4bd468bab07f0ef7da556abe467d6477f5db7949eebc5ed8b89052de5cc93"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "scaled",
+      "elements": 114,
+      "sha256": "a165049bd7f4d67ccbc7901317742bbff24694ae96eb5d7740ec3fb690a85374"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "all",
+      "elements": 114,
+      "sha256": "7d30f6485519bd82c6ceceffc98717bba8ab77383e33396e23fb4f97b922959a"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "closed",
+      "elements": 112,
+      "sha256": "17fe97edee7dec66ff63b76473a11b18336ca55f2da65040f118feb8aa12bfb9"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "hidden",
+      "elements": 113,
+      "sha256": "ae6765d0fbb86fa0f2de4932f362d814b2b586f6859c59a33ffccec88c83f179"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "arranging",
+      "elements": 113,
+      "sha256": "903d15e464014dd3762e127fa16d4b8688c85609037b15123c394fb2311847ae"
+    },
+    {
+      "width": 520,
+      "direction": "ltr",
+      "state": "arabic-spacing",
+      "elements": 114,
+      "sha256": "509e8e70ba7d3cf7c607346a2fab1db023e44770cbb822223e6e4cbd71d97884"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "default",
+      "elements": 113,
+      "sha256": "b20dedcfdbf93ef416574787a4cc2e9b8e8a653cb8fc0f840df6e9fa6d6cc010"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "high-contrast",
+      "elements": 114,
+      "sha256": "c9a0038854ef6ccb118d78f7e69860b9fb3a35d4493b0578d2ee7c86c35b3d2d"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "grayscale",
+      "elements": 114,
+      "sha256": "2922f32cf20a4084ede75fd9b68658619fa42d5ee615c3b019062ec06cfee0a3"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "underlined-links",
+      "elements": 114,
+      "sha256": "290de3794e1b03cfbf3ec2739067607e114af470719a56d401cbddf8ae8ce039"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "readable-font",
+      "elements": 114,
+      "sha256": "4aa83eec1e7adb796aa1e3e8012e7f5047362e34bf876855552be8641d9e7f31"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "text-spacing",
+      "elements": 114,
+      "sha256": "df2fe66d7299b7899d92dd73ead923278e5c0a1f4b6a7a96fbc07822c10c0bdd"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "highlight-headings",
+      "elements": 114,
+      "sha256": "72644bca7dfdb019d0e8545abe0711f4c8f662ba8b63918edf05a12410092e71"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "big-cursor",
+      "elements": 114,
+      "sha256": "7622be1fd940e68a427edbd205ba1387e4c32eebb0b251308b3131a0fef6dd3c"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "focus-highlight",
+      "elements": 114,
+      "sha256": "1868b72b216cbe0f6c12195677f2308517c1c3988c34ec407c5bff3ac55bee69"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "reduced-motion",
+      "elements": 114,
+      "sha256": "0843ada235481422610ba0fd71ad07a0a0f7a88803ed8c2fa0bcec7806799c75"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "scaled",
+      "elements": 114,
+      "sha256": "477e122f5feae2e50ae04fe982a600fcd7eb0faedd10deb4a29d031200a1c7dc"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "all",
+      "elements": 114,
+      "sha256": "8e1cfbfada84d51bf399cec24ca51b3d9f644832b0ba185d2ed6a04a5b754b67"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "closed",
+      "elements": 112,
+      "sha256": "1c96a2576f349cea78a1f3fabd426d9553c05ed217c9401df8a6cd8d6fa08e58"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "hidden",
+      "elements": 113,
+      "sha256": "5031cf9474df1a0fceb1713fd28314f8125a3bcc3211ef0f96cdb91697339787"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "arranging",
+      "elements": 113,
+      "sha256": "90f1776efa477cff82bcd05909134e7e58363f5d8f2be6b1bc21dea8a729d386"
+    },
+    {
+      "width": 520,
+      "direction": "rtl",
+      "state": "arabic-spacing",
+      "elements": 114,
+      "sha256": "bc33c9ece690f0ab7d0df95873049925c8749a945ac27ea10f61b584046ea0bd"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "default",
+      "elements": 113,
+      "sha256": "2970f14f6ed91cd6dc768d38f258085ca8e97b30f68b9c5b18b56f0b25cc4008"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "high-contrast",
+      "elements": 114,
+      "sha256": "2e11e71ca5c9664a703bdca8bde4eec237ceb00146d16025dae2f129e03ec0b3"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "grayscale",
+      "elements": 114,
+      "sha256": "5893b11e3a46ca80a2e472b04c5d2ff943f74e49cf35f0170be1fbb024fd04cb"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "underlined-links",
+      "elements": 114,
+      "sha256": "f49d3bf171a0b7c5b9db564bf5b91d1808f34f0787a8676bd2b10b68c8a52790"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "readable-font",
+      "elements": 114,
+      "sha256": "7f90b47347a34fd6f9765ffe9028312fd2747577ad2d340c5fa11ccb4595d4db"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "text-spacing",
+      "elements": 114,
+      "sha256": "8339df07e45e6a4281d09d0c5686d3ceefbe65d4767466f538c8a5c213be95ca"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "highlight-headings",
+      "elements": 114,
+      "sha256": "13eb0d8e22729a6b54d3d42026cc1306eaf7ae3443554f6e045945df48fd5288"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "big-cursor",
+      "elements": 114,
+      "sha256": "9200b598af8228e5b526edebe04e0ad06cbbd5660c1cc0ad9a2bf117187de888"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "focus-highlight",
+      "elements": 114,
+      "sha256": "61e80fc871cd761d01307dbf84c26c0e1654fae689a199cbb15e800a9a886278"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "reduced-motion",
+      "elements": 114,
+      "sha256": "10e519ef3dd0a6dc5a080ca1a9accb24ab2aa661fd5facb3ab315d99a5af62aa"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "scaled",
+      "elements": 114,
+      "sha256": "4b6583558075c202da8eab60deadff7d245b6854e9fb3a8b1cc3b0ab5fc1f26e"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "all",
+      "elements": 114,
+      "sha256": "c6bed5dc0ddddf0624612178bca4e38eb770ae6e5f24c2833992c793422cece6"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "closed",
+      "elements": 112,
+      "sha256": "59ad1028cde77dfdaf9fa866d5029cc99698c2e825bc929807e846e408940e98"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "hidden",
+      "elements": 113,
+      "sha256": "3f25a8a3f1fbb85b09dbfee0ce022d730671769b5adf8ad23f9bb3664099fb28"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "arranging",
+      "elements": 113,
+      "sha256": "7baf42f1d8908c312f3a760f31c7deeac6a48dea2e3963b2deadb38a94cce932"
+    },
+    {
+      "width": 521,
+      "direction": "ltr",
+      "state": "arabic-spacing",
+      "elements": 114,
+      "sha256": "75630809d00dc96ee4c722d53df6fa5c80bc4591d4992287c75b335656527c22"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "default",
+      "elements": 113,
+      "sha256": "4d135646426f8a688c5e6435bf5c89b8df7afa9ae895d01fe28b6f2ba1d128e0"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "high-contrast",
+      "elements": 114,
+      "sha256": "e6ceb61c5f344341cf32856937f83c6098c42a8a0bd3fbc70c75d70f06270901"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "grayscale",
+      "elements": 114,
+      "sha256": "feaa0e8441075dd81b9b1a78c82bc17c73157584506099acfcebb06a9428f81b"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "underlined-links",
+      "elements": 114,
+      "sha256": "8687a190aefe036803e65a55d29656f4f55e601c2b54ddea22f4c8b374544497"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "readable-font",
+      "elements": 114,
+      "sha256": "050f366cae2dac59b872e40d78dd2c0fa8aa82b3c914739fc1a1beca3a21d601"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "text-spacing",
+      "elements": 114,
+      "sha256": "00ce55937b0f19f3de295260832ba55e60631d3fd441267a36b9ef320cd8efeb"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "highlight-headings",
+      "elements": 114,
+      "sha256": "0f3025f59e35433d63122017790ae8e015c89b522171951c32d83f4cab4b2ad5"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "big-cursor",
+      "elements": 114,
+      "sha256": "e688bb1e9a023ee1bb58e6aafa7f96ede8e17426066d8712aa3da9d1f031bd93"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "focus-highlight",
+      "elements": 114,
+      "sha256": "e2a467d076707dfe911d84d55f207774c9d79c935dcf7fbfe89509af6482fa40"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "reduced-motion",
+      "elements": 114,
+      "sha256": "834c6e92fc11ba19dbb1ec5fa91d8e282b4d71af539c1fcdb5f772296eaced2f"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "scaled",
+      "elements": 114,
+      "sha256": "508b31ba44a67f865f9fa882183b6d7d27383f814b096addd595c864e643facd"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "all",
+      "elements": 114,
+      "sha256": "c2a5b9055d14489c57a040352596dc20a6b024f53cf2270af87b364b8d629a13"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "closed",
+      "elements": 112,
+      "sha256": "a4d17422ff4593992d4a29e7ef10b8e880078b4d712f51ac0643223944cb7744"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "hidden",
+      "elements": 113,
+      "sha256": "0bb8b280e12fd51b928abf8fd5c10252de4088001340f28ade4eb81aace05008"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "arranging",
+      "elements": 113,
+      "sha256": "fc34828ead3fcaa946a741e7448781306c50dc658530f236e1bd3e509d3a3d40"
+    },
+    {
+      "width": 521,
+      "direction": "rtl",
+      "state": "arabic-spacing",
+      "elements": 114,
+      "sha256": "f8d063a88026bb53a6ea887d8b92bf9f27b5f9d4da8b5e20b87656243d7c4273"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "default",
+      "elements": 113,
+      "sha256": "6a2a680e637dcc5a6a5145fd5e74b6038ff79b007ecd917fb7176843bdb7f5a3"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "high-contrast",
+      "elements": 114,
+      "sha256": "7ea3c49bdd35f21717fa547f10f64136dc1aad4f76ed0ec8fb7c25a9a5cbe762"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "grayscale",
+      "elements": 114,
+      "sha256": "ecbcf499a3c5fe0d7cee8d82cb92669c97994f7865b5674b8c7b44d74693c1d2"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "underlined-links",
+      "elements": 114,
+      "sha256": "405abf51e696173e8b980fd4205d717b15e676bf24c9ecb19990a0b101205431"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "readable-font",
+      "elements": 114,
+      "sha256": "6adaae5454652707908472755fd044cd3abaf5b4ee101d31b8d519f339808525"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "text-spacing",
+      "elements": 114,
+      "sha256": "d05958480f4cb0b7428cd92d7cc6511f39659a8806bee5524c8da5f59c369b16"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "highlight-headings",
+      "elements": 114,
+      "sha256": "450bc34d6b88c631f576bc605f93a4b597fa5129d82c76ce87c5cafd791c63ed"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "big-cursor",
+      "elements": 114,
+      "sha256": "1daeda6e9348a38fa177cb586291d89be21b394a14fa58d443aabb33daa4d818"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "focus-highlight",
+      "elements": 114,
+      "sha256": "4963e6918194db7209c8d41dcda9f2f41c52ed97d07b854ea996e17f2db96d8c"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "reduced-motion",
+      "elements": 114,
+      "sha256": "b35fa617b93d84f5e93873debb55e6edce23499deb3eeb0f1f1dbbc414847731"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "scaled",
+      "elements": 114,
+      "sha256": "92e643e80d9aa228d157f5ccc40779ae28523a3173e8384e16d17cfa36caea98"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "all",
+      "elements": 114,
+      "sha256": "246d2d2030ac05a08d02ebff5aa78ae1fcc6b275cc9c53b5460ac39ce781d9cb"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "closed",
+      "elements": 112,
+      "sha256": "7f4b26e3297c25d9d84e2d2d1d997840a8ebec62b28d53e8691378afe35ea8f9"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "hidden",
+      "elements": 113,
+      "sha256": "308559c1ae07957a87fe842e41b451066809dd034e98955cd5f1b1a9da8014ec"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "arranging",
+      "elements": 113,
+      "sha256": "8ab0fece4a2eccae5db2190b1b51a8d76e856cbbbd869b99a6a345c1687cb259"
+    },
+    {
+      "width": 768,
+      "direction": "ltr",
+      "state": "arabic-spacing",
+      "elements": 114,
+      "sha256": "fad66610bd977e4cd88104096ef1cb528bfa296cd59c12fab156febb0a917481"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "default",
+      "elements": 113,
+      "sha256": "8f84420747a8f3a8a7607a72315e2fb45569040174e085ea7de9eeeff5aaff5d"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "high-contrast",
+      "elements": 114,
+      "sha256": "4665834cad422b31b813a356ff435fbc607973488443a556d0ce85cf4174b7ff"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "grayscale",
+      "elements": 114,
+      "sha256": "45a80174d2b6dde1abce5fd768ee90cf07cd3226789bbd8eea3b8cf4f47c1fea"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "underlined-links",
+      "elements": 114,
+      "sha256": "24d952f53acb90364251415dd7bf4e5bf86b9be0920d8af4d21a1c58bc3378ec"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "readable-font",
+      "elements": 114,
+      "sha256": "4459ee75a41438139f966a98720051ae6ef58de20d2a4cd02b6f37f6f9c6c1b9"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "text-spacing",
+      "elements": 114,
+      "sha256": "7ec57431ffc8dd3f34464b694ee3200030820a22f909a27a2bd19ea309a4d013"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "highlight-headings",
+      "elements": 114,
+      "sha256": "833da55f66ef77150864e8b952849f28843cfd68f5b389a7113dd5778252e732"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "big-cursor",
+      "elements": 114,
+      "sha256": "b78973ca77847bfe33bbc6fe52ce3c24ae2cbe76edc9556a80a7392b82185d9b"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "focus-highlight",
+      "elements": 114,
+      "sha256": "f3cd0e6356d3600a3e0bcf41299060b0f9a1022df2da05dee6460eea3ab17afe"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "reduced-motion",
+      "elements": 114,
+      "sha256": "8956b283c60186aa5af4111cd8d86f2df23114353064243ce678235b10683127"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "scaled",
+      "elements": 114,
+      "sha256": "d3181e6c1e8f2a29a9608ea6faaf06c16eadbad55decbcc93ca42d077c4fa26e"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "all",
+      "elements": 114,
+      "sha256": "39a059d7232c93abb7b6b88d6b3b216a3b50fa5987e723e5d1d2d4cc81858672"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "closed",
+      "elements": 112,
+      "sha256": "c1a86f6f321b9cb957f8e41935fbde74e912adfa337fd4aa88cc4c3306c4b2d9"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "hidden",
+      "elements": 113,
+      "sha256": "cb71ebe17a3f0bc3f737e3db8fb9e31fc3f2c574961525245fc26f836ffbd32b"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "arranging",
+      "elements": 113,
+      "sha256": "8e440955ab57d557714414ec6fcc937860394195748501589e1be3acd5c8dc11"
+    },
+    {
+      "width": 768,
+      "direction": "rtl",
+      "state": "arabic-spacing",
+      "elements": 114,
+      "sha256": "54948caaf07f3c7155fad486be459b0e7466ef461e915464065a77a7d6d3bea0"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "default",
+      "elements": 113,
+      "sha256": "26842d0be67103ee7f1263ad92d0dc8245acfb4a98dc94acc7e0338425fec8ee"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "high-contrast",
+      "elements": 114,
+      "sha256": "24b5db20e7ce05220569245080d3acf4b5896b7e5e2bfba1a5c47f71b059dc2b"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "grayscale",
+      "elements": 114,
+      "sha256": "96d195fb05f0fc2eef4465267fc899745a56f9e9e7c0b1a02247ee3de946f8b9"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "underlined-links",
+      "elements": 114,
+      "sha256": "dafd4d11c6d2cd35dbc6b7eb2802645fe2c06a54126e7a11769b4fb629722966"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "readable-font",
+      "elements": 114,
+      "sha256": "89e6ec77507c98fcaf1a0dc920c8f47d12005c6a2087e9357abf1b91eb870586"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "text-spacing",
+      "elements": 114,
+      "sha256": "a5843ddd7a0c2da7a6c6f726de568300b5b70536886fdeb18d1fb3df25d255ab"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "highlight-headings",
+      "elements": 114,
+      "sha256": "4539bd5eee3fa91d7b11aa8661a20dc3aaece03822904801170403b16fc5bbe1"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "big-cursor",
+      "elements": 114,
+      "sha256": "d345be74e4f39c4579d5b29e0e5d51859555e396ca2df35e1e8a6d3bbed568aa"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "focus-highlight",
+      "elements": 114,
+      "sha256": "56ce2bda496c7952d295313da92fe4f8119f55ba297c421edba501915f7aebcd"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "reduced-motion",
+      "elements": 114,
+      "sha256": "e3af80d1106bafd8cc63537ba9a73ba97dbf4242cac2c9a7ee08ef66ab8ac7c0"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "scaled",
+      "elements": 114,
+      "sha256": "3911845eff69de9fb6922c9e2e4a25918e81cec2e0efb7d044d198f019399f30"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "all",
+      "elements": 114,
+      "sha256": "aeb2643a5563361185261fc9d6d745e33389ffabce44015dfbdf22e5e1768324"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "closed",
+      "elements": 112,
+      "sha256": "d8774b9b535ca7c8130862bae7c09ef9dcc3cb4d7f5ba1bbc2c95aa5724af727"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "hidden",
+      "elements": 113,
+      "sha256": "7578923005824c1317a11e625ca61b7d7118a470bf7dca5597853fac4bef2c08"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "arranging",
+      "elements": 113,
+      "sha256": "de3dc450bdfedf47bf8e12960b223b23fe35845f18180512b3afb9a39bef8b21"
+    },
+    {
+      "width": 769,
+      "direction": "ltr",
+      "state": "arabic-spacing",
+      "elements": 114,
+      "sha256": "29c89ec4772e9645ff3c029f332f0161920fa2f29983e5e78144481831643746"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "default",
+      "elements": 113,
+      "sha256": "82b596246494018b53fc3a9d08b6ff170d6789194e4ed504517eece7778ab1a3"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "high-contrast",
+      "elements": 114,
+      "sha256": "9274a1847a7fb700dc5c59f85e324fe5c814c6665c103b096e9a4d9c0c841303"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "grayscale",
+      "elements": 114,
+      "sha256": "6ef3345ff1d8acd245aab054a2bcc3cb34acba74654639366c14d2e778c40993"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "underlined-links",
+      "elements": 114,
+      "sha256": "c7bd15be9d86dae1bbe3717fbba4422010a48cd3852052d6a869458b19a317fe"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "readable-font",
+      "elements": 114,
+      "sha256": "20a896eecb2df769c83287560487d6e489157d2f032b65ead5b10c0dd6b3feeb"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "text-spacing",
+      "elements": 114,
+      "sha256": "28bc5aae9a6b2036721ee560c043119d79bdc4624c45031e29fd5ea6464fe856"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "highlight-headings",
+      "elements": 114,
+      "sha256": "1d54b9c58e68f33eda03dd647f316fd2b1d101578c86d9a8854b7301d91a1ab2"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "big-cursor",
+      "elements": 114,
+      "sha256": "ee11b1dcf386721e8bc3fe423a6d977f1e2e36b9b069666fbb919f4e31fe65be"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "focus-highlight",
+      "elements": 114,
+      "sha256": "8dfb49bdbc61cbbb638b9351aee5773dbdb229f18decc8f5fed53c9cd5b572e6"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "reduced-motion",
+      "elements": 114,
+      "sha256": "bdb1466bf72b736887490ff424d0773fcec5949c7be2bfe181a51ad4ff69da2e"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "scaled",
+      "elements": 114,
+      "sha256": "fffcc34272db7b912f558624b0732d776428fafb5dea8278058b14d6c3abbdb6"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "all",
+      "elements": 114,
+      "sha256": "86cd55860bd3888ac4186834081088049c18b612d7c21f4a6da4b7923c02715d"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "closed",
+      "elements": 112,
+      "sha256": "89e9e1ee6ded8ad5c9db2f9ffb84f438511f2e80165403480cee8556ec001e85"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "hidden",
+      "elements": 113,
+      "sha256": "e1d77f81492561e79842259b9fe4d23c797c79e5e149aa885c7d3b5b5a570818"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "arranging",
+      "elements": 113,
+      "sha256": "289c70bfbde240f912948da38c233b3401b85c11c516c68e6d54a816a4ce7b67"
+    },
+    {
+      "width": 769,
+      "direction": "rtl",
+      "state": "arabic-spacing",
+      "elements": 114,
+      "sha256": "5bf487c47b9b1b854dfcc8ecb6801ad3ec46a0c6a0f83a95cfd0ebde73d4b822"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "default",
+      "elements": 113,
+      "sha256": "082ba06aeda128087a39de59cbe078d826ef40acf8a34b3237084f31f135176d"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "high-contrast",
+      "elements": 114,
+      "sha256": "5b8117e3523a811141820e32f9aeb3af2bb7ba4018688d0e385651ec95f7f91e"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "grayscale",
+      "elements": 114,
+      "sha256": "f64b3831681963f4266a83aa2f6075b49c506399260b1c5adc9b8c56c7927e46"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "underlined-links",
+      "elements": 114,
+      "sha256": "311d914cc8095df95b419f53351b0e713dcba2a859828ca211f2732db099dd27"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "readable-font",
+      "elements": 114,
+      "sha256": "576a8e0e70bae4410f61125d0e90e3f213fd2bf22687cc801a60b5ea093de1b0"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "text-spacing",
+      "elements": 114,
+      "sha256": "86cb0c419fb39a56689505d8b39ce281cc958314e53e3b2faaa356ad4270629a"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "highlight-headings",
+      "elements": 114,
+      "sha256": "0945be4a12622e7db20716b8ec48b48832bbde6a6d923151cc0188e34f253d57"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "big-cursor",
+      "elements": 114,
+      "sha256": "8adf396ab681e9610bd259a59c57a50e4ce79478cd6f4bfd0b213d57314cab65"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "focus-highlight",
+      "elements": 114,
+      "sha256": "9a79ca4f14f1e2300365253c84c811c2010e7230cf0724e78799e5f5e4ef0009"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "reduced-motion",
+      "elements": 114,
+      "sha256": "ac5828e4ad09ac6f9186282a6f7e557ef045a2f0788bc331a019c2f1c4825b29"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "scaled",
+      "elements": 114,
+      "sha256": "5a3da128be01ba1c1615f0d52ecc2053371f4023edb1bb5cb654ce59c4fc45cb"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "all",
+      "elements": 114,
+      "sha256": "dbdd98928436c5ee804e5ba2e8d9c91ceb6da256d71a30e952e719d7c325a60c"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "closed",
+      "elements": 112,
+      "sha256": "56405de872c4470aca59935823e5cfbbc6e3e36dd9e82cda7d0d0ffe64ed26d6"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "hidden",
+      "elements": 113,
+      "sha256": "854f65671862da8215c3c54dd4c354ddb9569a0250c408717cb312957f156a34"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "arranging",
+      "elements": 113,
+      "sha256": "a84ca9edcc6bd38061eebf01be49c4277dc8813b0d3d73c88548d78236dab858"
+    },
+    {
+      "width": 1440,
+      "direction": "ltr",
+      "state": "arabic-spacing",
+      "elements": 114,
+      "sha256": "be7ec39b5f6645b45d26152128f78023c06f3825143cc21df6f39ef2ceadca8a"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "default",
+      "elements": 113,
+      "sha256": "596dec7c9689532760285692f328fa4a7c33c78af00ccd5fa705ae88731372e1"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "high-contrast",
+      "elements": 114,
+      "sha256": "95c2c1b326e603c93d1c06b494e953a14e97762c82487668fa20ee851d179570"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "grayscale",
+      "elements": 114,
+      "sha256": "77c5e9d3d85f67f49108aab6d8da254c965ad5e61fe1dd35ed9d9152c80111b6"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "underlined-links",
+      "elements": 114,
+      "sha256": "40c0d5d76c1292d72a707ce3ffce7af36a246ddd25234db0af593dc2fe552b73"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "readable-font",
+      "elements": 114,
+      "sha256": "9dbb9147c173cd6503173da29b543cdcd90f33efb52b5461fb4dd424560a6538"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "text-spacing",
+      "elements": 114,
+      "sha256": "2b76919fd002b71cbd506da8920f867cb788ddcd71bd97ba2ee33544a499df55"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "highlight-headings",
+      "elements": 114,
+      "sha256": "2c1ffdca982e1cdcd0002208f1f8f5bad7e7bfdf5ec85e46c417f1601038d59f"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "big-cursor",
+      "elements": 114,
+      "sha256": "dd412910465f7bcde40125f33b1b46befe81e5af2f95518aa5d8799a177d2883"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "focus-highlight",
+      "elements": 114,
+      "sha256": "c00eaba0deb9a1f158e9ac40c4df3c639721c18e8b91e5dd4b545c5109ffa27a"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "reduced-motion",
+      "elements": 114,
+      "sha256": "7e0e4d1acead1293f9a7d8f7bb1bac42cac16a732dcb2b9f03e8589d82e40bc8"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "scaled",
+      "elements": 114,
+      "sha256": "9fd6f87003884b45a9081219031ec0213c29a492d1a586f253743c245bda943e"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "all",
+      "elements": 114,
+      "sha256": "b4e33f5395458f31d6c5ffd0941599679aec8348bd865a8b7bb5ebe8743b431b"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "closed",
+      "elements": 112,
+      "sha256": "4dbdc892349587b7f0db81ec58a35386c0807143cc3031988401accb87c0b874"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "hidden",
+      "elements": 113,
+      "sha256": "3d587670079600911c3cf1ce263552c4a1cc3074941ac673e69e258d140a7618"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "arranging",
+      "elements": 113,
+      "sha256": "bbdbe7f7e26467abd1144f72bb23a0fdf3fe50211045b3cbda1e75541b5a6a7d"
+    },
+    {
+      "width": 1440,
+      "direction": "rtl",
+      "state": "arabic-spacing",
+      "elements": 114,
+      "sha256": "1b5f894f37c92f4204ce2cf1c793010276e3b3b15af770f0cf92cb8ada5bd536"
+    }
+  ]
+}

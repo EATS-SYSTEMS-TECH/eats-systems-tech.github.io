@@ -1,0 +1,640 @@
+/* Shared operating workspace for Host, Pay and Manager.
+   The explicit Host roots bridge its older ID-based styles. Keep the product
+   tokens and component geometry here so the three workspaces stay aligned. */
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"]) {
+  --workspace-paper: #fff;
+  --workspace-canvas: #f3f6fa;
+  --workspace-ink: #17324d;
+  --workspace-muted: #526579;
+  --workspace-line: #d8e1eb;
+  --workspace-nav: #17324d;
+  --workspace-nav-hover: #25435f;
+  --ink: var(--workspace-ink);
+  --muted: var(--workspace-muted);
+  --manager-line: var(--workspace-line);
+  --card-shadow: none;
+  --card-shadow-hover: none;
+  --radius-control: 7px;
+  font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+}
+
+body.platform-page:is(
+    [data-product="host"],
+    [data-product="pay"],
+    [data-product="manager"]
+  ),
+body.host-app.host-manager-workspace[data-product="host"] {
+  background: var(--workspace-canvas);
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.platform-header, .host-topbar),
+body.host-app.host-manager-workspace
+  .host-manager-page:has(> #host-workspace-shell)
+  > header.host-topbar {
+  margin-block-end: 24px;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.platform-header, .host-topbar)::before {
+  background: var(--workspace-paper);
+  backdrop-filter: none;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  .manager-shell {
+  grid-template-columns: 272px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  .manager-shell[data-mode="management"] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell .manager-nav, #host-sidebar.manager-nav) {
+  padding: 14px;
+  border: 1px solid var(--workspace-nav);
+  border-radius: 12px;
+  background: var(--workspace-nav);
+  color: #fff;
+  box-shadow: none;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-nav, #host-sidebar)
+  :is(.manager-personal-navigation, .manager-organization-area) {
+  padding: 6px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  gap: 4px;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-nav, #host-sidebar)
+  .manager-personal-navigation {
+  margin-block-end: 14px;
+  padding-block-end: 16px;
+  border-block-end: 1px solid #ffffff29;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-nav, #host-sidebar)
+  .manager-nav-title,
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-nav, #host-sidebar)
+  .manager-organization-area
+  > .manager-nav-title {
+  padding-inline: 10px;
+  margin-block: 2px 8px;
+  color: #b5c7d8;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.7;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-nav, #host-sidebar)
+  .manager-sidebar-roles {
+  padding: 0 10px 8px;
+  margin: 0;
+  border: 0;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-nav, #host-sidebar)
+  .manager-sidebar-roles
+  > span {
+  border-color: #ffffff29;
+  background: transparent;
+  color: #d5e0eb;
+  padding: 2px 7px;
+  font-size: 11px;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell .manager-nav, #host-section-navigation)
+  button.manager-button {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  margin: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #dbe5ef;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  box-shadow: none;
+  white-space: normal;
+  text-align: start;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell .manager-nav, #host-section-navigation)
+  button.manager-button:hover:not(:disabled) {
+  color: #fff;
+  background: var(--workspace-nav-hover);
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell .manager-nav, #host-section-navigation)
+  button.manager-button[aria-current="page"],
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell .manager-nav, #host-section-navigation)
+  button.manager-button[aria-current="page"]:hover {
+  background: #fff;
+  color: var(--workspace-ink);
+  font-weight: 700;
+  box-shadow: none;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-nav, #host-sidebar)
+  button:focus-visible {
+  outline: 2px solid #c5deff;
+  outline-offset: 3px;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-nav, #host-sidebar)
+  .manager-organization-picker {
+  margin-block: 0 8px;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell .manager-nav, #host-sidebar)
+  .manager-organization-picker-trigger {
+  min-height: 70px;
+  padding: 10px;
+  gap: 10px;
+  border: 1px solid #567089;
+  border-radius: 8px;
+  background: #213e59;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell .manager-nav, #host-sidebar)
+  .manager-organization-picker-trigger:is(:hover, [aria-expanded="true"]) {
+  border-color: #93abc2;
+  background: #2b4964;
+  color: #fff;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-nav, #host-sidebar)
+  .manager-organization-picker-identity
+  small {
+  color: #c0d0df;
+  font-size: 11px;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-nav, #host-sidebar)
+  .manager-organization-picker-logo {
+  flex-basis: 36px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #cbd8e5;
+  border-radius: 7px;
+  background: #fff;
+  color: var(--workspace-ink);
+  font-size: 15px;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  :is(.manager-toolbar h3, .manager-view > h3) {
+  font-size: clamp(22px, 2.1vw, 28px);
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  .manager-toolbar {
+  margin-block: 2px 20px;
+  gap: 12px;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  :is(
+    .manager-card,
+    .manager-metric,
+    .manager-empty,
+    .manager-hero,
+    .manager-settings-card,
+    .manager-device-card,
+    .manager-action-panel,
+    .manager-platform-header,
+    .manager-organization-header,
+    .manager-organization-person-column,
+    .manager-organization-pending
+  ) {
+  border-color: var(--workspace-line);
+  border-radius: 10px;
+  background: var(--workspace-paper);
+  box-shadow: none;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  .manager-card.manager-system {
+  padding: 20px;
+  gap: 14px;
+  background: var(--workspace-paper);
+  transition: border-color 120ms ease;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  .manager-card:is(:hover, :focus-within) {
+  box-shadow: none;
+  border-color: #a9bacb;
+  transform: none;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  .manager-system
+  .manager-icon {
+  border: 0;
+  border-radius: 8px;
+  background: #f1f5f9;
+  box-shadow: none;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  .manager-system
+  h4,
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  #host-management
+  .manager-system
+  h4.system-card__name {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  .manager-system-actions {
+  padding-block-start: 14px;
+  border-color: var(--workspace-line);
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  :is(.manager-note, .manager-facts, .manager-table-wrap) {
+  border-color: var(--workspace-line);
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  .manager-note {
+  background: #f8fafc;
+  font-size: 13px;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  .manager-table {
+  background: #fff;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  .manager-table
+  th {
+  padding: 12px 14px;
+  background: #f3f6fa;
+  color: var(--workspace-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  .manager-table
+  td {
+  padding: 14px;
+  border-color: #e5ebf1;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  .manager-table
+  tbody
+  tr:hover {
+  background: #f8fafc;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  :is(.manager-form input, .manager-form select, .manager-form textarea) {
+  border-radius: 7px;
+  border-color: #bccbd9;
+  background: #fff;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management, .manager-confirm-dialog)
+  button.manager-button:not(.manager-nav button) {
+  border-radius: 7px;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  .manager-empty-systems {
+  padding: 40px 24px;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  :is(.manager-eyebrow, .manager-hero small) {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  details.dashboard-examples,
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  details.dashboard-examples[open] {
+  margin-block-end: 20px;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  .dashboard-examples
+  > summary {
+  min-height: 44px;
+  padding: 8px 14px;
+  border-radius: 7px;
+  background: #fff;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  .dashboard-examples
+  > summary::before {
+  width: 28px;
+  height: 28px;
+  flex-basis: 28px;
+  border-radius: 6px;
+  background-color: #f1f5f9;
+}
+
+body.host-manager-workspace[data-product="host"]
+  #host-management
+  .portal-panel {
+  border-color: var(--workspace-line);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: none;
+}
+
+body.host-manager-workspace[data-product="host"]
+  #host-management
+  .calendar-heading
+  h2 {
+  color: var(--workspace-ink);
+  font-size: clamp(19px, 2vw, 24px);
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+
+body.host-manager-workspace[data-product="host"]
+  #host-management
+  .calendar-toolbar {
+  padding: 12px;
+  border-radius: 8px 8px 0 0;
+  background: #f3f6fa;
+}
+
+body.host-manager-workspace[data-product="host"]
+  #host-management
+  .calendar-scroll {
+  border-radius: 0 0 8px 8px;
+}
+
+body.host-manager-workspace[data-product="host"]
+  #host-management
+  .calendar-grid
+  thead
+  th {
+  background: #f8fafc;
+}
+
+body.host-manager-workspace[data-product="host"]
+  #host-management
+  .calendar-grid
+  thead
+  th
+  small {
+  text-transform: none;
+  font-weight: 500;
+}
+
+body.host-manager-workspace[data-product="host"]
+  #host-management
+  .calendar-grid
+  tbody
+  th {
+  background: #f8fafc;
+}
+
+body.host-manager-workspace[data-product="host"]
+  #host-management
+  .host-calendar
+  .reservation-chip {
+  border-radius: 5px;
+  border-inline-start: 3px solid #3574c3;
+}
+
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  .manager-organization-picker-panel,
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  dialog.manager-confirm-dialog {
+  border-radius: 12px;
+  border-color: var(--workspace-line);
+  box-shadow: 0 16px 48px #17324d26;
+}
+
+body.host-manager-workspace[data-product="host"]
+  #host-management
+  .calendar-visibility {
+  margin-block-end: 16px;
+  color: var(--workspace-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+body.host-manager-workspace[data-product="host"]
+  #host-management
+  .calendar-visibility
+  > label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin: 0;
+  cursor: pointer;
+}
+
+body.host-manager-workspace[data-product="host"]
+  #host-management
+  .calendar-visibility
+  input[type="checkbox"] {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  min-height: 20px;
+  margin: 0;
+  accent-color: var(--host-strong);
+}
+
+body.host-manager-workspace[data-product="host"]
+  #host-management
+  .calendar-visibility
+  > p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 8px 0 0;
+  padding-block-start: 12px;
+  border-block-start: 1px solid var(--workspace-line);
+}
+
+body.host-manager-workspace[data-product="host"]
+  #host-management
+  .calendar-visibility
+  > p[hidden] {
+  display: none;
+}
+
+body.host-manager-workspace[data-product="host"]
+  #host-management
+  .calendar-visibility
+  > p
+  > span {
+  flex: 1 1 240px;
+  max-width: 75ch;
+}
+
+body.host-manager-workspace[data-product="host"]
+  #host-management
+  .calendar-visibility
+  > p
+  > button {
+  flex: 0 0 auto;
+  min-height: 44px;
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 7px;
+}
+
+@media (max-width: 850px) {
+  body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+    .manager-shell {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+    :is(.manager-shell .manager-nav, #host-sidebar.manager-nav) {
+    position: static;
+    padding: 12px;
+  }
+
+  body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+    :is(.manager-nav, #host-sidebar)
+    .manager-personal-navigation {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-block-end: 10px;
+    padding-block-end: 10px;
+  }
+
+  body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+    :is(.manager-nav, #host-sidebar)
+    .manager-personal-navigation
+    > :is(.manager-nav-title, .manager-sidebar-roles) {
+    grid-column: 1 / -1;
+  }
+
+  body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+    :is(.manager-nav, #host-sidebar)
+    .manager-organization-navigation {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    overflow-x: auto;
+    padding: 3px;
+    scrollbar-width: thin;
+    scrollbar-color: #8da8bf transparent;
+  }
+
+  body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+    :is(.manager-nav, #host-sidebar)
+    .manager-organization-navigation
+    button.manager-button {
+    flex: 0 0 auto;
+    width: auto;
+    white-space: nowrap;
+  }
+
+  body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+    :is(.manager-nav, #host-sidebar)
+    .manager-organization-navigation
+    button.manager-button:focus-visible {
+    outline-offset: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+    :is(.manager-shell, #host-management)
+    .manager-card.manager-system {
+    padding: 18px;
+  }
+
+  body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+    :is(.manager-shell, #host-management)
+    .manager-empty-systems {
+    padding: 28px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+    :is(.manager-shell, #host-management)
+    .manager-card.manager-system {
+    transition: none;
+  }
+}

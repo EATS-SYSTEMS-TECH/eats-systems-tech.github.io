@@ -13,6 +13,10 @@ function fixture(options = {}) {
     const listeners = new Map(), attributes = new Map();
     return {
       dataset: {}, hidden: false, textContent: "",
+      // HTMLElement.title reflects the title attribute in an actual browser.
+      // Preserve the same contract for property and setAttribute callers.
+      get title() { return attributes.get("title") ?? ""; },
+      set title(value) { attributes.set("title", String(value)); },
       addEventListener(name, listener) {
         if (!listeners.has(name)) listeners.set(name, []);
         listeners.get(name).push(listener);

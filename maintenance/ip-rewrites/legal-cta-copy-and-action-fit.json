@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "area": "W3",
+  "sourceCommit": "3b28cfe96fffd69d5101eb3012e1a4761746f02e",
+  "review": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/19",
+  "at": "2026-10-30T09:04:01.452835+00:00",
+  "status": "PASS_INDEPENDENT_WHOLE_LEGAL_CTA_COPY_AND_OBSERVED_ACTION_FIT_FIX",
+  "specification": "maintenance/IP_LEGAL_CTA_COPY_BEHAVIOR.md",
+  "specificationCommit": "8b05fe22e",
+  "deletionCommit": "332b8ffc6",
+  "additionCommit": "a179f986b",
+  "bugFixCommit": "3b28cfe96",
+  "change": "Independently word 104 commercial title/paragraph fields across 26 locales after whole-file deletion. Preserve fixed legal eyebrows, native action labels, schema/order, governing policies, real destinations and 13 uncovered-locale defaults. Scope the observed narrow-action overflow fix to legal CTA buttons.",
+  "validation": {
+    "originalFocused": "5/5 passed before deletion",
+    "replacementFocused": "6/6 passed, including 78 actual Chrome cases at 320/375/1440px",
+    "presentation": "100/100 passed without skips; includes the prior 280 actual Chrome presentation cases",
+    "additionalActualGeneratedPageChrome": {
+      "cases": 208,
+      "widths": [
+        375,
+        1440
+      ],
+      "keyboardRoutes": 6,
+      "browserVersion": "156.0.8078.76",
+      "failures": 0
+    },
+    "fullCli": "Actual isolated frozen 3b28cfe96 run; 583 input files and 180 verified read-only asset links",
+    "generatedFiles": 1485,
+    "approvedChangedLegalPages": 104,
+    "approvedTextNodesPerChangedPage": 4,
+    "allOtherRawFilesExact": 1381,
+    "allSurroundingModelsExact": true,
+    "missingUnexpectedMismatches": 0,
+    "rtlPolicy": "Exact unchanged terminal RLM requirement checked in both original and replacement text; arbitrary direction marks are not stripped",
+    "verifySite": "39 locales \u00d7 14 pages; 663 interactive pages; 703 sitemap URLs and redirects passed",
+    "sourceAttribution": {
+      "ref": "3b28cfe96fffd69d5101eb3012e1a4761746f02e",
+      "files": 6,
+      "complete": true,
+      "zero": true,
+      "summary": {
+        "eiloncohen": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        },
+        "OdeliaTorjman": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        }
+      }
+    },
+    "allOtherTrackedFiles": {
+      "base": "0f49615fe0b6c1c2f766aa09ae06456726451c5b",
+      "files": 2350,
+      "blobsAndModesExact": true,
+      "dependenciesAndProductConfigurationExact": true,
+      "packageOnlyDifference": "Registers six legal CTA contracts, including 78 actual Chrome cases, in existing presentation suite"
+    }
+  },
+  "retainedAttempts": [
+    "First output checker incorrectly expected unrendered RTL source text; its Arabic mismatch is retained. Second comparison requires the exact unchanged terminal RLM and passes; the final source repeats that strict check.",
+    "Initial 99-test suite passed, while an additional actual generated-page browser run failed on four Ukrainian narrow pages. The original frozen reference independently reproduces the 298px scroll width in a 293px section.",
+    "New real Chrome regression fails before the CSS change on Spanish 320px overflow. After the scoped wrapping fix, all 78 contract cases, 208 generated-page cases and 6 native keyboard routes pass."
+  ],
+  "limits": [
+    "Six changed source/test/spec/fact/manifest paths only; the whole frontend and final integration gates remain separate.",
+    "Frozen census plus verified scoped reports yields a derived residual of 347 Eilon lines in css/styles.css; a fresh full census runs separately.",
+    "Fixed short labels remain product facts; no legal ownership or physical-device acceptance is implied.",
+    "Primary website checkout, main and hosting remain untouched; no production approval or publication."
+  ],
+  "productionDelivery": false
+}

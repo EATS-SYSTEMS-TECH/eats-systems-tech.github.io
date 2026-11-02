@@ -1,5 +1,6 @@
 // Sign-in page copy (/el/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Η επαλήθευση του προγράμματος περιήγησης απέτυχε. Ανανεώστε τη σελίδα και δοκιμάστε ξανά. Αν το πρόβλημα παραμένει, επικοινωνήστε με την υποστήριξη.",
   pageTitle: "Σύνδεση",
   heading: "Σύνδεση στο WIFIGATE",
   home: "Αρχική σελίδα WIFIGATE",

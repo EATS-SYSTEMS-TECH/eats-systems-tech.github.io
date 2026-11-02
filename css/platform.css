@@ -1215,3 +1215,19 @@ html[dir="rtl"] .platform-admin-business > * { direction: rtl; }
 .platform-admin-organization-delete:focus-visible {outline:3px solid #b42318;outline-offset:3px}
 .platform-admin-organization:has(.platform-admin-organization-delete) .platform-admin-organization-products {grid-column:2;grid-row:2}
 @media(max-width:600px){.platform-admin-organization-delete{grid-column:2;grid-row:4}.platform-admin-organization:has(.platform-admin-organization-delete) .platform-admin-organization-products{grid-column:1/-1;grid-row:3}}
+
+/* Account roles and organization membership are separate navigation groups. */
+.platform-admin-management .platform-admin-filters .platform-button.platform-admin-org-separator{margin-inline-start:16px;border-inline-start:3px solid var(--platform-line,#768b84)}
+.platform-admin-organization-columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;align-items:start}
+.platform-admin-organization-column{min-width:0;border:1px solid var(--platform-line,#768b84);border-radius:16px;padding:18px;overflow-wrap:anywhere}
+.platform-admin-organization-owner{padding:14px;border-radius:10px;background:var(--platform-surface,#edf4f1);color:var(--platform-ink,#132a21)}
+.platform-admin-organization-members{padding:0;list-style:none;display:grid;gap:12px}
+.platform-admin-organization-members li{padding:12px;border-bottom:1px solid var(--platform-line,#768b84)}
+.platform-admin-organization-members small{display:block;margin-top:6px}
+@media(max-width:600px){
+  .platform-admin-management .platform-admin-filters{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));width:100%}
+  .platform-admin-management .platform-admin-filters .platform-button{grid-column:span 2;min-width:0}
+  .platform-admin-management .platform-admin-filters .platform-button[data-role="organizations"],
+  .platform-admin-management .platform-admin-filters .platform-button[data-role="organization-users"]{grid-column:span 3}
+  .platform-admin-management .platform-admin-filters .platform-button.platform-admin-org-separator{margin-inline-start:0}
+}

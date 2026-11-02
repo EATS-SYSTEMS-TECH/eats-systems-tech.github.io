@@ -155,7 +155,7 @@ test("sample failure and cancellation restore My systems or the second sample or
     const page = await fixture(t, browser, origin);
     let sockets = 0; page.on("websocket", () => sockets++);
     await page.locator(".manager-examples > summary").click();
-    await page.locator('[data-example-system="example-manager-group"]').getByRole("button").click();
+    await page.locator('[data-example-system="example-manager-group"]').locator("button.primary").click();
     await page.locator("#manager-content .manager-facts").waitFor();
     await page.locator(".manager-connection-dialog").waitFor({ state: "detached" });
     if (organization) {
@@ -173,7 +173,7 @@ test("sample failure and cancellation restore My systems or the second sample or
       await page.locator("[data-example-organization]").nth(1).getByRole("button").click();
     } else await page.locator(".manager-examples > summary").click();
     await page.evaluate(() => { window.pauseExamples = true; });
-    await page.locator('[data-example-system="example-manager-group"]').getByRole("button").click();
+    await page.locator('[data-example-system="example-manager-group"]').locator("button.primary").click();
     await page.waitForFunction(() => window.releaseExample);
     if (!organization) { await page.evaluate(() => window.rejectExample()); await page.locator('.manager-connection-dialog[data-state="error"]').waitFor(); }
     await dismiss(page, organization ? "escape" : "footer", "en", organization ? "pending" : "error");

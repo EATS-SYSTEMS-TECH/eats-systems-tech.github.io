@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { authErrorMessage } from "../js/host-auth-errors.js";
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createProfile, getProfile, approveEmail, changePortalAccess, deletePortalAccess, profileApi, portalRequest, portalExport, pendingMembershipInvitations, acceptMembershipInvitation } from "../js/api/index.js";
+import { createProfile, getProfile, approveEmail, changePortalAccess, deletePortalAccess, profileApi, portalRequest, portalExport, payRequest, pendingMembershipInvitations, acceptMembershipInvitation } from "../js/api/index.js";
 import { portalState, hostIdentity, sameHostAccess } from "../js/host-dashboard-model.js";
 import { allowedWorkspaceViews, allowedSettingsTabs, homeView, workspaceLocation, workspaceView, settingsTabFor } from "../js/host-workspace-model.js";
 import { readHostPages } from "../js/host-pages.js";
@@ -67,6 +67,9 @@ test("HOST_PLAN_REQUIRED refuses one action locally and never ends the session",
   try {
     profileApi.defaults.adapter = deny("HOST_PLAN_REQUIRED");
     await assert.rejects(portalRequest({ getIdToken: async () => "token" }, "/api/v1/me/systems"), error => error.status === 403 && error.code === "HOST_PLAN_REQUIRED");
+    assert.deepEqual(events, []);
+    profileApi.defaults.adapter = deny("PAY_PERSONAL_ACCESS_REQUIRED");
+    await assert.rejects(payRequest({ getIdToken: async () => "token" }, "/api/v1/pay/systems"), error => error.status === 403 && error.code === "PAY_PERSONAL_ACCESS_REQUIRED");
     assert.deepEqual(events, []);
     profileApi.defaults.adapter = deny("PORTAL_ACCESS_DENIED");
     await assert.rejects(portalRequest({ getIdToken: async () => "token" }, "/api/v1/me/systems"), error => error.code === "PORTAL_ACCESS_DENIED");
@@ -249,15 +252,15 @@ test("an organization member without a Host plan (role null) is approved, never 
 test("Host views follow the Host plan and workspace.permissions, never role names", () => {
   const ids = options => allowedWorkspaceViews(options).map(view => view.id);
   const owner = ["read", "organization:write", "members:write", "systems:write", "reservations:write", "invitations:write", "billing:write", "integrations:write", "operations:write"];
-  assert.deepEqual(ids({ plan: true, permissions: owner }), ["my-systems", "systems", "calendar", "bookings", "activity", "connect", "settings", "invitations"]);
-  assert.deepEqual(ids({ plan: false, permissions: ["read", "reservations:write", "invitations:write", "operations:write"] }), ["systems", "calendar", "bookings", "activity", "settings", "invitations"]);
-  assert.deepEqual(ids({ plan: false, permissions: ["read"] }), ["systems", "calendar", "bookings", "settings", "invitations"]);
-  assert.deepEqual(ids({ plan: true }), ["my-systems", "settings", "invitations"]);
-  assert.deepEqual(ids({ plan: false }), ["systems", "settings", "invitations"]);
+  assert.deepEqual(ids({ plan: true, permissions: owner }), ["my-systems", "my-organizations", "systems", "calendar", "bookings", "activity", "connect", "settings", "invitations"]);
+  assert.deepEqual(ids({ plan: false, permissions: ["read", "reservations:write", "invitations:write", "operations:write"] }), ["choose-organization", "systems", "calendar", "bookings", "activity", "settings", "invitations"]);
+  assert.deepEqual(ids({ plan: false, permissions: ["read"] }), ["choose-organization", "systems", "calendar", "bookings", "settings", "invitations"]);
+  assert.deepEqual(ids({ plan: true }), ["my-systems", "my-organizations", "settings", "invitations"]);
+  assert.deepEqual(ids({ plan: false }), ["choose-organization", "settings", "invitations"]);
   assert.deepEqual(ids({ pending: true, plan: true, permissions: owner }), ["invitations"]);
-  assert.deepEqual(ids({ plan: false, permissions: ["owner", "admin"] }), ["settings", "invitations"], "role names grant nothing");
+  assert.deepEqual(ids({ plan: false, permissions: ["owner", "admin"] }), ["choose-organization", "settings", "invitations"], "role names grant nothing");
   assert.equal(homeView({ plan: true }), "my-systems");
-  assert.equal(homeView({ plan: false }), "systems");
+  assert.equal(homeView({ plan: false }), "choose-organization");
   assert.equal(homeView({ pending: true }), "invitations");
   const tabs = options => allowedSettingsTabs(options).map(tab => tab.id);
   assert.deepEqual(tabs({ permissions: owner }), ["organization", "team", "billing", "support", "account"]);
@@ -556,10 +559,11 @@ test("a booking's guest carries only the details that hold something", () => {
 test("in Hebrew הזמנות are bookings only: team invitations and guest links never use the word", async () => {
   const { hostHebrew } = await import("../js/host-locale-he.js");
   for (const [key, value] of Object.entries(hostHebrew))
-    if (/invit|guest link/i.test(key) && !/booking/i.test(key))
+    if (/invit|guest link/i.test(key) && !/booking/i.test(key) && key !== "Guest invitation automation API")
       assert.doesNotMatch(value, /הזמנ/, key);
   assert.equal(hostHebrew["+ Booking"], "+ הזמנה");
   assert.equal(hostHebrew["Create guest link"], "יצירת קישור לאורח");
+  assert.equal(hostHebrew["Guest invitation automation API"], "אוטומציית הזמנת אורחים API");
   for (const key of ["Properties", "properties", "rooms", "Calendar property", "Add property", "Automation property", "Saved filter property"])
     assert.equal(hostHebrew[key], undefined, key);
 });

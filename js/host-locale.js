@@ -5,7 +5,6 @@ import { renderPlatformLanguage } from "./platform-language.js";
 export const hostLanguage = pageLanguage();
 export const hostLocale = hostLanguage === "he" ? "he-IL" : "en-US";
 const hebrew = {
-  Workspace: "סביבת עבודה",
   "Platform management": "ניהול פלטפורמה",
   "Open workspace": "פתיחת סביבת ניהול",
   "End and return": "סיום וחזרה",
@@ -15,7 +14,6 @@ const hebrew = {
   "My profile": "הפרופיל שלי",
   Calendar: "לוח שנה",
   Staff: "איש צוות",
-  Overview: "סקירה",
   "Jobs Calendar": "משימות",
   "Service health": "בריאות השירות",
   Support: "תמיכה",
@@ -36,8 +34,8 @@ const hebrew = {
   "Skip to workspace": "דילוג לסביבת העבודה",
   "Check again": "בדיקה חוזרת",
   Loading: "טוענים…",
-  "Host admin": "אדמין Host",
-  "Host user": "משתמש Host",
+  "WIFIGATE Host Admin": "WIFIGATE Host Admin",
+  "WIFIGATE Host User": "WIFIGATE Host User",
   owner: "בעלים",
   admin: "אדמין",
   staff: "איש צוות",
@@ -50,12 +48,13 @@ const hebrew = {
   Viewer: "צופה",
   "Runs the WIFIGATE platform. Authenticator required.":
     "מנהל את פלטפורמת WIFIGATE. נדרשת אפליקציית אימות.",
-  "Has a Host plan with My systems.": "יש לו מנוי Host עם המערכות שלי.",
+  "The paying customer: a Host plan with My systems and a monthly subscription.":
+    "הלקוח המשלם: תוכנית Host עם המערכות שלי ומנוי חודשי.",
   "You run the WIFIGATE platform. Authenticator required.":
     "אתם מנהלים את פלטפורמת WIFIGATE. נדרשת אפליקציית אימות.",
   "You have a Host plan with My systems.": "יש לכם מנוי Host עם המערכות שלי.",
-  "Manages the organization, team, billing and connections, and everything else.":
-    "מנהל את הארגון, הצוות, החיוב והחיבורים, ואת כל השאר.",
+  "Manages the organization, team, API keys and connections, and everything else. Billing belongs to the paying Host User.":
+    "מנהל את הארגון, הצוות, מפתחות ה־API והחיבורים, ואת כל השאר. החיוב שייך ל־Host User המשלם.",
   "Manages systems, bookings, guest links, connections and activity.":
     "מנהל מערכות, הזמנות, קישורים לאורחים, חיבורים ופעילות.",
   "Manages bookings, guest links and daily activity.":

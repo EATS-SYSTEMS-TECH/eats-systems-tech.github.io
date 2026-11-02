@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "area": "W3",
+  "sourceCommit": "7c7349f90de4b5147ad149471714d21256f8ce59",
+  "review": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/14",
+  "specification": "maintenance/IP_HERO_BROWSER_BEHAVIOR.md",
+  "specificationCommit": "ba58b3556",
+  "deletionCommit": "cb0623a5b",
+  "change": "Independently reconstruct actual Chrome homepage media scenarios;each named case closes its context even after failure;preserve all9original scenarios and genuine media completion",
+  "validation": {
+    "original": {
+      "status": "PASS_COMPLETE_ORIGINAL_REAL_CHROME_RUN",
+      "sourceSha256": "1f46e0e96a3108849aeb945c2669ea907dde1c49c47d0fe6bcd36a674d586f46",
+      "scenarios": 9
+    },
+    "replacement": "9/9 actual Chrome scenarios PASS;0skips",
+    "relatedMediaAndFeatureContracts": "13/13PASS;0skips",
+    "coverage": [
+      "Phone/desktop,including original3g/2g autoplay policy",
+      "Muted/defaultMuted/inline/nonlooping;unobstructed44px primary action",
+      "Click pause,keyboard resume,resize pause preservation,retained media position",
+      "Actual full clip completion and no replay on viewport reentry;no dispatched ended event",
+      "Delayed first promise/rejection recovery;newer manual action preserved",
+      "OS/site reduced motion and Save-Data actual1.5second zero-download windows;explicit replay and matching crop/scale"
+    ],
+    "sourceAttribution": {
+      "ref": "7c7349f90de4b5147ad149471714d21256f8ce59",
+      "files": 2,
+      "complete": true,
+      "zero": true,
+      "summary": {
+        "eiloncohen": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        },
+        "OdeliaTorjman": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        }
+      }
+    },
+    "allOtherTrackedFiles": {
+      "status": "PASS_ALL_OTHER_TRACKED_BLOBS_AND_MODES_EXACT",
+      "base": "d57125569b45d2b6f31bf37a40cfe0df51973064",
+      "files": 2333,
+      "blobsAndModesExact": true,
+      "productAndGeneratedAndConfigurationChanged": false,
+      "dependencyOrManifestChanged": false
+    },
+    "completeFrontendCensus": {
+      "ref": "7c7349f90de4b5147ad149471714d21256f8ce59",
+      "files": 563,
+      "eilonLines": 576,
+      "eilonFiles": 6,
+      "odeliaLines": 0,
+      "wholeBuilderIndependentRewrite": "OPEN"
+    }
+  },
+  "limits": [
+    "Two source paths only;whole website attribution remains nonzero",
+    "Browser preference/fault fixtures are regression inputs;no physical-phone/BLE acceptance inferred",
+    "All product/generated/config/asset/lock blobs remain exact;no full CLI rerun needed for this test-only change",
+    "Remaining source,whole builder,final-main/legal acceptance OPEN",
+    "Primary/main/hosting untouched;no production publication"
+  ],
+  "productionDelivery": false
+}

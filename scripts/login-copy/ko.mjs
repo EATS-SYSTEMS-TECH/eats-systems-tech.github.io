@@ -1,5 +1,6 @@
 // Sign-in page copy (/ko/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "브라우저를 확인하지 못했습니다. 페이지를 새로고침하고 다시 시도하세요. 문제가 계속되면 지원팀에 문의하세요.",
   pageTitle: "로그인",
   heading: "WIFIGATE에 로그인",
   home: "WIFIGATE 홈",

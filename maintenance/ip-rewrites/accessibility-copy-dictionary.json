@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "area": "W3",
+  "sourceCommit": "7148110b08ae2d76f9c03143c70c920c92accd20",
+  "review": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/17",
+  "at": "2026-10-30T08:25:04.956038+00:00",
+  "status": "PASS_INDEPENDENT_WHOLE_ACCESSIBILITY_DICTIONARY_PROGRAM_WITH_FIXED_LABEL_FACTS",
+  "specification": "maintenance/IP_ACCESSIBILITY_COPY_BEHAVIOR.md",
+  "specificationCommit": "1f714c27c",
+  "deletionCommit": "a24208d35",
+  "additionCommit": "7148110b0",
+  "change": "Entire prior2267line dictionary program removed,then independently constructed through ordered schema/value hydration with independent ordinary mutable records;English responsibility comments and broad function/var/loop syntax compatibility",
+  "fixedProductFacts": {
+    "locales": 39,
+    "stringLeavesPerLocale": 34,
+    "completeSerializationSha256": "4b64f010214504fe93888e116b877b921aee036d34c54ecf2092feae0583e595",
+    "propertyInsertionOrderExact": true,
+    "stringsAndPlaceholdersChanged": false,
+    "ownershipLimit": "Existing localized words are fixed behavioral inputs,not newly authored translations or a legal ownership determination"
+  },
+  "validation": {
+    "original": "6/6dictionary+actualChrome controller checksPASS",
+    "replacement": "6/6PASS;0skips",
+    "presentation": "88/88PASS;0skips;includes280actualChrome cases",
+    "globalLifecycle": "Exact values/locale+fieldorder,independentmutablegroups,freshreplacementonreload,noadditionalglobals,unrelatedwindowstatepreserved,missingwindowReferenceError",
+    "fullCli": "PASS actual frozen7148110b0 isolated run;581inputs/180verifiedreadonlyassets",
+    "generatedFiles": 1485,
+    "allFullModelsAndRawBytesExact": true,
+    "rawByteDifferences": 0,
+    "missingUnexpectedMismatches": 0,
+    "verifySite": "PASS39locales\u00d714pages,663interactive,703sitemapURLs,redirects",
+    "sourceAttribution": {
+      "ref": "7148110b08ae2d76f9c03143c70c920c92accd20",
+      "files": 5,
+      "complete": true,
+      "zero": true,
+      "summary": {
+        "eiloncohen": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        },
+        "OdeliaTorjman": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        }
+      }
+    },
+    "allOtherTrackedFiles": {
+      "base": "e257d0bddc0d22c05b7915d3d348b2016f83ab93",
+      "files": 2343,
+      "blobsAndModesExact": true,
+      "productAndDependencyConfigurationExact": true,
+      "packageOnlyDifference": "Registered5frozen dictionary contracts in existing test:presentation command"
+    }
+  },
+  "limits": [
+    "Five changed source/test/spec/fact/manifest paths only;otherremainingfrontendsource remainsOPEN",
+    "Fixed localized label words preserved;no legal ownership conclusion",
+    "Original566filecensus576Eilonlines/6files plusverifiedshared12anddictionary14removal yieldsderived550lines/3files;no newlyexecutedwholecensus",
+    "No physicalphone/BLE/productionapproval inferred;primary/main/hosting untouched"
+  ],
+  "productionDelivery": false
+}

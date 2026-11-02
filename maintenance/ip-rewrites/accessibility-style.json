@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "area": "W3",
+  "sourceCommit": "d2571613f331db40d2c2292e35a89ae91d0bab46",
+  "testWiringCommit": "6093cdfd88fd6c065a923d0f4e67d006de35fd97",
+  "review": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/12",
+  "specification": "maintenance/IP_ACCESSIBILITY_STYLE_BEHAVIOR.md",
+  "deletionCommit": "56e5c8147",
+  "implementationCommit": "d2571613f331db40d2c2292e35a89ae91d0bab46",
+  "change": "Independent surface/control tokens and semantic role groups from frozen browser facts;existing public palette,metrics,selector strength,RTL/focus/motion/drag behavior retained",
+  "validation": {
+    "frozenBrowserCases": 192,
+    "referenceStylesheetGitBlobSha256": "a34ff56c2e4af41f392cf9153231daa218ff1b98bfe2953391f0f36b56d29cca",
+    "baselineSelfCheck": "PASS192/192 before deletion",
+    "firstImplementation": "PASS192/192 no fingerprint refresh",
+    "actualChromeMenu": "PASS39locale schemas,actual EN/HE/EL/AR menu,keyboard/focus/nine preferences/scale/persistence/reset",
+    "actualChromeFab": "PASS actual delayed media/long-press/drag,RTL mirror,hide/reload,touch",
+    "combinedPresentationEntry": "62/62PASS;0skips,including192internal browser cases and new controller/script-data contracts",
+    "testWiring": {
+      "status": "PASS_ONLY_PRESENTATION_TEST_ENTRY_EXTENDED",
+      "additionalTests": [
+        "scripts/accessibility-controller-browser.test.mjs",
+        "scripts/script-data.test.mjs",
+        "scripts/accessibility-style-contract.test.mjs"
+      ],
+      "originalTestsRetained": true,
+      "allOtherFieldsExact": true
+    },
+    "fullCli": "PASS separate frozen572inputs/180verified read-only assets",
+    "generatedOutput": {
+      "files": 1485,
+      "rawByteDifferences": 0,
+      "missing": [],
+      "unexpected": [],
+      "modelMismatches": []
+    },
+    "attribution": {
+      "ref": "d2571613f331db40d2c2292e35a89ae91d0bab46",
+      "files": 5,
+      "complete": true,
+      "zero": true,
+      "summary": {
+        "eiloncohen": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        },
+        "OdeliaTorjman": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        }
+      }
+    },
+    "manifestAttribution": {
+      "ref": "6093cdfd88fd6c065a923d0f4e67d006de35fd97",
+      "files": 1,
+      "complete": true,
+      "zero": true,
+      "summary": {
+        "eiloncohen": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        },
+        "OdeliaTorjman": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        }
+      }
+    },
+    "retainedAttempt": "Initial original-sheet checksum guard compared Windows CRLF bytes to canonical Git LF hash and stopped before measurement;distinct second attempt normalizes line endings and records the exact canonical source hash"
+  },
+  "limits": [
+    "Five source paths and separate manifest scope only;no whole-website zero claim",
+    "Frozen earlier full555file frontend inventory remains734Eilon lines/10files;this later stylesheet scope is separately0,whole later census pending",
+    "Remaining styles/templates/copy/builder/final-main/legal acceptance open",
+    "Primary/main and hosting untouched"
+  ],
+  "productionDelivery": false
+}

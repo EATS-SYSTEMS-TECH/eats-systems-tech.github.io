@@ -1,551 +1,366 @@
-// /js/accessibility.js
-// The accessibility menu (IS 5568 / WCAG 2.x AA support tools). Copy for every
-// locale comes from js/accessibility-copy.js, loaded before this file.
+// The shared preference model applies before page readiness. Dialog and launcher
+// controllers mount independently of the rest of the product UI.
+const siteAccessibility = (() => {
+  const settingsKey = "wifigate-accessibility-settings-v2";
+  const positionKey = "wifigate-a11y-fab-position-v2";
+  const scales = [1, 1.15, 1.3, 1.5];
+  const classes = {
+    highContrast: "a11y-high-contrast", grayscale: "a11y-grayscale",
+    underlineLinks: "a11y-underlined-links", readableFont: "a11y-readable-font",
+    textSpacing: "a11y-text-spacing", highlightHeadings: "a11y-highlight-headings",
+    bigCursor: "a11y-big-cursor", focusHighlight: "a11y-focus-highlight",
+    reducedMotion: "a11y-reduced-motion",
+  };
+  const keys = Object.keys(classes);
+  const defaults = () => Object.fromEntries([["textScale", 0], ...keys.map(key => [key, false])]);
+  const safely = operation => { try { return operation(); } catch { return undefined; } };
+  const language = () => {
+    const bundles = window.accessibilityCopy || {};
+    const requested = document.documentElement.getAttribute("lang") || "en";
+    return bundles[requested] ? requested : bundles.en ? "en" : Object.keys(bundles)[0];
+  };
+  const copy = () => (window.accessibilityCopy || {})[language()];
+  const announce = value => document.dispatchEvent(new CustomEvent("site-accessibility-change", {
+    detail: { settings: { ...value } },
+  }));
 
-const ACCESSIBILITY_STORAGE_KEY = "wifigate-accessibility-settings-v2"
-const ACCESSIBILITY_TEXT_SCALES = [1, 1.15, 1.3, 1.5]
-const ACCESSIBILITY_TOGGLES = {
-  highContrast: "a11y-high-contrast",
-  grayscale: "a11y-grayscale",
-  underlineLinks: "a11y-underlined-links",
-  readableFont: "a11y-readable-font",
-  textSpacing: "a11y-text-spacing",
-  highlightHeadings: "a11y-highlight-headings",
-  bigCursor: "a11y-big-cursor",
-  focusHighlight: "a11y-focus-highlight",
-  reducedMotion: "a11y-reduced-motion",
-}
-const ACCESSIBILITY_DEFAULTS = {
-  textScale: 0,
-  ...Object.fromEntries(Object.keys(ACCESSIBILITY_TOGGLES).map((key) => [key, false])),
-}
-
-let accessibilityState = { ...ACCESSIBILITY_DEFAULTS }
-let accessibilityRefs = null
-let accessibilityPanelOpen = false
-
-function getAccessibilityCopies() {
-  return window.accessibilityCopy || {}
-}
-
-// A generated page embeds its own language only; the full file has them all.
-function getAccessibilityLanguage() {
-  const copies = getAccessibilityCopies()
-  const lang = document.documentElement.getAttribute("lang") || "en"
-  return copies[lang] ? lang : copies.en ? "en" : Object.keys(copies)[0]
-}
-
-function getAccessibilityBundle() {
-  const copies = getAccessibilityCopies()
-  return copies[getAccessibilityLanguage()] || copies.en
-}
-
-function loadAccessibilitySettings() {
-  const next = { ...ACCESSIBILITY_DEFAULTS }
-  try {
-    const saved = JSON.parse(localStorage.getItem(ACCESSIBILITY_STORAGE_KEY) || "null")
-    if (!saved || typeof saved !== "object") return next
-    const scale = Number(saved.textScale)
-    if (Number.isInteger(scale) && scale >= 0 && scale < ACCESSIBILITY_TEXT_SCALES.length) next.textScale = scale
-    Object.keys(ACCESSIBILITY_TOGGLES).forEach((key) => {
-      next[key] = saved[key] === true
-    })
-  } catch (error) {
-    // Storage can be unavailable; the defaults apply.
-  }
-  return next
-}
-
-function saveAccessibilitySettings() {
-  try {
-    if (countAccessibilityAdjustments()) {
-      localStorage.setItem(ACCESSIBILITY_STORAGE_KEY, JSON.stringify(accessibilityState))
-    } else {
-      localStorage.removeItem(ACCESSIBILITY_STORAGE_KEY)
+  class Preferences {
+    // Admit only canonical booleans and one bounded scale from existing storage.
+    constructor() {
+      this.value = defaults();
+      safely(() => {
+        const stored = JSON.parse(localStorage.getItem(settingsKey) || "null");
+        if (!stored || typeof stored !== "object") return;
+        const index = Number(stored.textScale);
+        if (Number.isInteger(index) && index >= 0 && index < scales.length) this.value.textScale = index;
+        for (const key of keys) this.value[key] = stored[key] === true;
+      });
     }
-  } catch (error) {
-    // The settings still apply to this page.
-  }
-}
-
-function countAccessibilityAdjustments() {
-  return (accessibilityState.textScale ? 1 : 0) +
-    Object.keys(ACCESSIBILITY_TOGGLES).filter((key) => accessibilityState[key]).length
-}
-
-function isReducedMotionRequested() {
-  if (document.documentElement.classList.contains(ACCESSIBILITY_TOGGLES.reducedMotion)) return true
-  try {
-    return Boolean(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches)
-  } catch (error) {
-    return false
-  }
-}
-
-function dispatchAccessibilityChange() {
-  document.dispatchEvent(
-    new CustomEvent("site-accessibility-change", {
-      detail: { settings: { ...accessibilityState } },
-    })
-  )
-}
-
-// Stop animations also stops every video and animated media on the page
-// (WCAG 2.2.2 Pause, Stop, Hide).
-function pauseAllMedia() {
-  document.querySelectorAll("video").forEach((video) => {
-    if (!video.paused) video.pause()
-    video.removeAttribute("autoplay")
-  })
-}
-
-function applyAccessibilitySettings() {
-  const root = document.documentElement
-  Object.entries(ACCESSIBILITY_TOGGLES).forEach(([key, className]) => {
-    root.classList.toggle(className, Boolean(accessibilityState[key]))
-  })
-  const scale = ACCESSIBILITY_TEXT_SCALES[accessibilityState.textScale] || 1
-  root.classList.toggle("a11y-text-scaled", scale !== 1)
-  if (scale !== 1) root.style.setProperty("--a11y-text-scale", String(scale))
-  else root.style.removeProperty("--a11y-text-scale")
-  if (accessibilityState.reducedMotion) pauseAllMedia()
-
-  updateAccessibilityControls()
-  dispatchAccessibilityChange()
-}
-
-function updateAccessibilityControls() {
-  if (!accessibilityRefs) return
-  const copy = getAccessibilityBundle()
-
-  accessibilityRefs.optionButtons.forEach((button) => {
-    const enabled = Boolean(accessibilityState[button.dataset.a11ySetting])
-    button.classList.toggle("is-active", enabled)
-    button.setAttribute("aria-pressed", String(enabled))
-  })
-
-  const percent = Math.round((ACCESSIBILITY_TEXT_SCALES[accessibilityState.textScale] || 1) * 100)
-  accessibilityRefs.textSizeValue.textContent = `${percent}%`
-  accessibilityRefs.textSizeValue.setAttribute("aria-label", copy.textSize.level.replace("{percent}", percent))
-  accessibilityRefs.textSmaller.disabled = accessibilityState.textScale === 0
-  accessibilityRefs.textLarger.disabled = accessibilityState.textScale === ACCESSIBILITY_TEXT_SCALES.length - 1
-
-  const count = countAccessibilityAdjustments()
-  accessibilityRefs.status.textContent = count ? copy.statusActive.replace("{count}", count) : copy.statusDefault
-  accessibilityRefs.resetButton.disabled = count === 0
-}
-
-function updateAccessibilityCopy() {
-  if (!accessibilityRefs) return
-  const copy = getAccessibilityBundle()
-  const refs = accessibilityRefs
-
-  if (refs.skipLink) refs.skipLink.textContent = copy.skipLink
-  refs.eyebrow.textContent = copy.eyebrow
-  refs.title.textContent = copy.title
-  refs.description.textContent = copy.description
-  refs.resetButton.textContent = copy.reset
-  refs.closeButton.setAttribute("aria-label", copy.closeButton)
-  refs.textSizeTitle.textContent = copy.textSize.label
-  refs.textSizeDescription.textContent = copy.textSize.description
-  refs.textSmaller.setAttribute("aria-label", copy.textSize.decrease)
-  refs.textSmaller.title = copy.textSize.decrease
-  refs.textLarger.setAttribute("aria-label", copy.textSize.increase)
-  refs.textLarger.title = copy.textSize.increase
-  refs.statement.textContent = copy.statementLink
-
-  refs.optionButtons.forEach((button) => {
-    const optionCopy = copy.options[button.dataset.a11ySetting]
-    if (!optionCopy) return
-    button.querySelector(".a11y-option__title").textContent = optionCopy.label
-    button.querySelector(".a11y-option__description").textContent = optionCopy.description
-  })
-
-  const label = accessibilityPanelOpen ? copy.closeButton : copy.openButton
-  refs.fab.setAttribute("aria-label", label)
-  refs.fab.title = label
-  updateAccessibilityControls()
-}
-
-function getPanelFocusables() {
-  return Array.from(
-    accessibilityRefs.panel.querySelectorAll("button:not([disabled]), a[href], [tabindex]:not([tabindex='-1'])")
-  ).filter((element) => element.offsetParent !== null)
-}
-
-function openAccessibilityPanel() {
-  if (!accessibilityRefs || accessibilityPanelOpen) return
-  const { fab, panel, backdrop, closeButton } = accessibilityRefs
-
-  accessibilityPanelOpen = true
-  fab.setAttribute("aria-expanded", "true")
-  panel.setAttribute("aria-hidden", "false")
-  panel.inert = false
-  backdrop.classList.add("is-visible")
-  panel.classList.add("is-open")
-  document.body.classList.add("a11y-panel-open")
-  updateAccessibilityCopy()
-  requestAnimationFrame(() => closeButton.focus())
-}
-
-function closeAccessibilityPanel(restoreFocus = true) {
-  if (!accessibilityRefs || !accessibilityPanelOpen) return
-  const { fab, panel, backdrop } = accessibilityRefs
-
-  accessibilityPanelOpen = false
-  fab.setAttribute("aria-expanded", "false")
-  panel.setAttribute("aria-hidden", "true")
-  // Closed: out of the tab order as well as hidden from screen readers.
-  panel.inert = true
-  backdrop.classList.remove("is-visible")
-  panel.classList.remove("is-open")
-  document.body.classList.remove("a11y-panel-open")
-  updateAccessibilityCopy()
-  if (restoreFocus && !fab.hidden) fab.focus()
-}
-
-function handleAccessibilityKeydown(event) {
-  if (!accessibilityPanelOpen) return
-  if (event.key === "Escape") {
-    event.preventDefault()
-    closeAccessibilityPanel()
-    return
-  }
-  // The menu is a modal dialog: Tab stays inside it.
-  if (event.key === "Tab") {
-    const focusables = getPanelFocusables()
-    if (!focusables.length) return
-    const first = focusables[0]
-    const last = focusables[focusables.length - 1]
-    if (event.shiftKey && (document.activeElement === first || !accessibilityRefs.panel.contains(document.activeElement))) {
-      event.preventDefault()
-      last.focus()
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault()
-      first.focus()
+    // The scale counts as one adjustment regardless of its selected percentage.
+    count() { return Number(this.value.textScale !== 0) + keys.filter(key => this.value[key]).length; }
+    // Media consumers honor either the visitor preference or the OS preference.
+    reduced() {
+      return document.documentElement.classList.contains(classes.reducedMotion) ||
+        Boolean(safely(() => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches));
     }
-  }
-}
-
-function toggleAccessibilitySetting(key) {
-  if (!(key in ACCESSIBILITY_TOGGLES)) return
-  accessibilityState[key] = !accessibilityState[key]
-  applyAccessibilitySettings()
-  saveAccessibilitySettings()
-}
-
-function stepAccessibilityTextScale(delta) {
-  const next = Math.min(ACCESSIBILITY_TEXT_SCALES.length - 1, Math.max(0, accessibilityState.textScale + delta))
-  if (next === accessibilityState.textScale) return
-  accessibilityState.textScale = next
-  applyAccessibilitySettings()
-  saveAccessibilitySettings()
-}
-
-function resetAccessibilitySettings() {
-  accessibilityState = { ...ACCESSIBILITY_DEFAULTS }
-  applyAccessibilitySettings()
-  saveAccessibilitySettings()
-}
-
-// Long press on the accessibility button lets the visitor drag it to another
-// place (remembered on this device) or hide it with the X; a hidden button is
-// back as soon as the page is loaded again.
-// The saved spot is measured from the reading-start edge, so it mirrors with the language.
-const A11Y_FAB_POSITION_KEY = "wifigate-a11y-fab-position-v2"
-const A11Y_FAB_OLD_POSITION_KEY = "wifigate-a11y-fab-position"
-
-function accessibilityFabRtl() {
-  return getComputedStyle(document.documentElement).direction === "rtl"
-}
-const A11Y_FAB_LONG_PRESS_MS = 550
-const A11Y_FAB_MARGIN = 8
-
-function placeAccessibilityFab(fab, left, top) {
-  const rect = fab.getBoundingClientRect()
-  const maxLeft = Math.max(A11Y_FAB_MARGIN, window.innerWidth - rect.width - A11Y_FAB_MARGIN)
-  const maxTop = Math.max(A11Y_FAB_MARGIN, window.innerHeight - rect.height - A11Y_FAB_MARGIN)
-  const x = Math.min(Math.max(A11Y_FAB_MARGIN, left), maxLeft)
-  const y = Math.min(Math.max(A11Y_FAB_MARGIN, top), maxTop)
-  // Logical insets first: in RTL inset-inline-start is the same property as right.
-  fab.style.removeProperty("--a11y-fab-lift")
-  fab.style.insetInlineStart = "auto"
-  fab.style.insetInlineEnd = "auto"
-  fab.style.insetBlockEnd = "auto"
-  fab.style.right = "auto"
-  fab.style.bottom = "auto"
-  fab.style.left = x + "px"
-  fab.style.top = y + "px"
-  return { x, y }
-}
-
-function setupAccessibilityFabArrange(fab) {
-  function applySavedPosition() {
-    try {
-      localStorage.removeItem(A11Y_FAB_OLD_POSITION_KEY)
-      const saved = JSON.parse(localStorage.getItem(A11Y_FAB_POSITION_KEY) || "null")
-      if (saved && typeof saved.start === "number" && typeof saved.y === "number") {
-        const width = document.documentElement.clientWidth
-        const start = saved.start * width
-        const left = accessibilityFabRtl() ? width - start - fab.getBoundingClientRect().width : start
-        placeAccessibilityFab(fab, left, saved.y * window.innerHeight)
+    // Root classes and events also work before the dialog DOM has been inserted.
+    apply() {
+      const root = document.documentElement;
+      for (const key of keys) root.classList.toggle(classes[key], this.value[key]);
+      const scale = scales[this.value.textScale];
+      root.classList.toggle("a11y-text-scaled", scale !== 1);
+      if (scale === 1) root.style.removeProperty("--a11y-text-scale");
+      else root.style.setProperty("--a11y-text-scale", String(scale));
+      if (this.value.reducedMotion) for (const video of document.querySelectorAll("video")) {
+        if (!video.paused) video.pause();
+        video.removeAttribute("autoplay");
       }
-    } catch (error) {
-      // Ignore a missing or malformed saved position.
+      dialog?.render();
+      announce(this.value);
     }
+    // A storage failure must leave the current page's adjustment functional.
+    commit(change) {
+      change(this.value);
+      this.apply();
+      safely(() => this.count() ? localStorage.setItem(settingsKey, JSON.stringify(this.value)) : localStorage.removeItem(settingsKey));
+    }
+    // Unknown DOM option keys cannot introduce persistent settings.
+    toggle(key) {
+      if (keys.includes(key)) this.commit(value => { value[key] = !value[key]; });
+    }
+    // At either scale boundary a further click produces no change event.
+    step(delta) {
+      const next = Math.max(0, Math.min(scales.length - 1, this.value.textScale + delta));
+      if (next !== this.value.textScale) this.commit(value => { value.textScale = next; });
+    }
+    // Reset replaces the model and removes its inactive storage record.
+    reset() { this.commit(() => { this.value = defaults(); }); }
   }
 
-  const dismiss = document.createElement("button")
-  dismiss.type = "button"
-  dismiss.className = "a11y-fab__dismiss"
-  dismiss.hidden = true
-  dismiss.textContent = "×"
-  document.body.appendChild(dismiss)
-
-  let pressTimer = null
-  let pressStart = null
-  let grabOffset = null
-  let arranging = false
-  let moved = false
-  let hideDismissTimer = null
-
-  function positionDismiss() {
-    const rect = fab.getBoundingClientRect()
-    dismiss.style.left = Math.max(4, rect.left - 6) + "px"
-    dismiss.style.top = Math.max(4, rect.top - 6) + "px"
-  }
-
-  function showDismiss() {
-    const label = getAccessibilityBundle().hideButton
-    dismiss.setAttribute("aria-label", label)
-    dismiss.title = label
-    positionDismiss()
-    dismiss.hidden = false
-    clearTimeout(hideDismissTimer)
-    hideDismissTimer = setTimeout(() => {
-      dismiss.hidden = true
-    }, 5000)
-  }
-
-  function cancelPress() {
-    clearTimeout(pressTimer)
-    pressTimer = null
-  }
-
-  fab.addEventListener("pointerdown", (event) => {
-    if (event.button !== 0) return
-    const rect = fab.getBoundingClientRect()
-    pressStart = { x: event.clientX, y: event.clientY }
-    grabOffset = { x: event.clientX - rect.left, y: event.clientY - rect.top }
-    moved = false
-    cancelPress()
-    pressTimer = setTimeout(() => {
-      arranging = true
-      fab.classList.add("is-arranging")
-      if (fab.setPointerCapture) {
-        try {
-          fab.setPointerCapture(event.pointerId)
-        } catch (error) {
-          // Capture is best-effort; dragging still follows the pointer.
+  // Dialog state owns keyboard focus and translated labels, but never changes
+  // page content or persists whether the dialog happens to be open.
+  class Dialog {
+    constructor(nodes, options) {
+      this.nodes = nodes;
+      this.options = options;
+      this.open = false;
+      const n = nodes;
+      n.panel.inert = true;
+      n.statement.href = language() === "en" ? "/accessibility/" : `/${language().toLowerCase()}/accessibility/`;
+      n.fab.addEventListener("click", () => {
+        if (n.fab.dataset.suppressClick === "true") { delete n.fab.dataset.suppressClick; return; }
+        this.setOpen(!this.open);
+      });
+      for (const control of [n.close, n.backdrop]) control.addEventListener("click", () => this.setOpen(false));
+      n.reset.addEventListener("click", () => preferences.reset());
+      n.smaller.addEventListener("click", () => preferences.step(-1));
+      n.larger.addEventListener("click", () => preferences.step(1));
+      for (const button of options) button.addEventListener("click", () => preferences.toggle(button.dataset.a11ySetting));
+      document.addEventListener("keydown", event => this.keydown(event));
+      document.addEventListener("site-language-change", () => this.render());
+    }
+    // Keep focus, inertness and all visibility/ARIA states in one transition.
+    setOpen(next, restore = true) {
+      if (next === this.open) return;
+      this.open = next;
+      const n = this.nodes;
+      n.fab.setAttribute("aria-expanded", String(next));
+      n.panel.setAttribute("aria-hidden", String(!next));
+      n.panel.inert = !next;
+      n.backdrop.classList.toggle("is-visible", next);
+      n.panel.classList.toggle("is-open", next);
+      document.body.classList.toggle("a11y-panel-open", next);
+      this.render();
+      if (next) requestAnimationFrame(() => n.close.focus());
+      else if (restore && !n.fab.hidden) n.fab.focus();
+    }
+    // Disabled or hidden controls never participate in the modal focus cycle.
+    keydown(event) {
+      if (!this.open) return;
+      if (event.key === "Escape") { event.preventDefault(); this.setOpen(false); return; }
+      if (event.key !== "Tab") return;
+      const panel = this.nodes.panel;
+      const items = [...panel.querySelectorAll("button:not([disabled]), a[href], [tabindex]:not([tabindex='-1'])")]
+        .filter(item => item.offsetParent !== null);
+      if (!items.length) return;
+      const backwards = event.shiftKey && (document.activeElement === items[0] || !panel.contains(document.activeElement));
+      const forwards = !event.shiftKey && document.activeElement === items.at(-1);
+      if (backwards || forwards) {
+        event.preventDefault();
+        (backwards ? items.at(-1) : items[0]).focus();
+      }
+    }
+    // Translate existing nodes in place without injecting locale text as HTML.
+    render() {
+      const bundle = copy();
+      const n = this.nodes;
+      const text = { eyebrow: bundle.eyebrow, title: bundle.title, description: bundle.description,
+        reset: bundle.reset, sizeTitle: bundle.textSize.label, sizeDescription: bundle.textSize.description,
+        statement: bundle.statementLink };
+      for (const [key, value] of Object.entries(text)) n[key].textContent = value;
+      const skip = document.querySelector(".skip-link");
+      if (skip) skip.textContent = bundle.skipLink;
+      n.close.setAttribute("aria-label", bundle.closeButton);
+      for (const [key, label] of [["smaller", bundle.textSize.decrease], ["larger", bundle.textSize.increase],
+        ["fab", this.open ? bundle.closeButton : bundle.openButton]]) {
+        n[key].setAttribute("aria-label", label);
+        n[key].title = label;
+      }
+      for (const button of this.options) {
+        const key = button.dataset.a11ySetting;
+        const translated = bundle.options[key];
+        if (translated) {
+          button.querySelector(".a11y-option__title").textContent = translated.label;
+          button.querySelector(".a11y-option__description").textContent = translated.description;
         }
+        button.classList.toggle("is-active", Boolean(preferences.value[key]));
+        button.setAttribute("aria-pressed", String(Boolean(preferences.value[key])));
       }
-      if (navigator.vibrate) navigator.vibrate(15)
-      showDismiss()
-    }, A11Y_FAB_LONG_PRESS_MS)
-  })
-
-  fab.addEventListener("pointermove", (event) => {
-    if (!arranging) {
-      if (pressStart && Math.hypot(event.clientX - pressStart.x, event.clientY - pressStart.y) > 8) cancelPress()
-      return
+      const percent = Math.round(scales[preferences.value.textScale] * 100);
+      n.sizeValue.textContent = `${percent}%`;
+      n.sizeValue.setAttribute("aria-label", bundle.textSize.level.replace("{percent}", percent));
+      n.smaller.disabled = preferences.value.textScale === 0;
+      n.larger.disabled = preferences.value.textScale === scales.length - 1;
+      const count = preferences.count();
+      n.status.textContent = count ? bundle.statusActive.replace("{count}", count) : bundle.statusDefault;
+      n.reset.disabled = count === 0;
     }
-    event.preventDefault()
-    moved = true
-    placeAccessibilityFab(fab, event.clientX - grabOffset.x, event.clientY - grabOffset.y)
-    positionDismiss()
-  })
+  }
 
-  function endPress() {
-    cancelPress()
-    pressStart = null
-    if (!arranging) return
-    arranging = false
-    fab.classList.remove("is-arranging")
-    fab.dataset.suppressClick = "true"
-    if (moved) {
-      // The placed spot, not the box: the drag scale may still be easing back.
-      const left = parseFloat(fab.style.left)
-      const top = parseFloat(fab.style.top)
-      try {
-        const width = document.documentElement.clientWidth
-        const start = accessibilityFabRtl() ? width - left - fab.offsetWidth : left
-        localStorage.setItem(A11Y_FAB_POSITION_KEY, JSON.stringify({ start: start / width, y: top / window.innerHeight }))
-      } catch (error) {
-        // The new position still applies for this page.
+  // Placement is stored relative to the reading-start edge. The local gesture
+  // state is deliberately separate from persisted accessibility preferences.
+  class Launcher {
+    constructor(fab) {
+      this.fab = fab;
+      this.drag = null;
+      this.timer = null;
+      this.dismissTimer = null;
+      const dismiss = document.createElement("button");
+      dismiss.type = "button";
+      dismiss.className = "a11y-fab__dismiss";
+      dismiss.textContent = "×";
+      dismiss.hidden = true;
+      document.body.append(dismiss);
+      this.dismiss = dismiss;
+      fab.addEventListener("pointerdown", event => this.begin(event));
+      fab.addEventListener("pointermove", event => this.move(event));
+      for (const name of ["pointerup", "pointercancel"]) fab.addEventListener(name, () => this.finish());
+      for (const name of ["contextmenu", "dragstart"]) fab.addEventListener(name, event => event.preventDefault());
+      dismiss.addEventListener("click", () => {
+        dialog.setOpen(false, false);
+        fab.hidden = true;
+        dismiss.hidden = true;
+      });
+      document.addEventListener("pointerdown", event => {
+        if (event.target !== dismiss && !fab.contains(event.target)) dismiss.hidden = true;
+      });
+      document.addEventListener("keydown", event => { if (event.key === "Escape") dismiss.hidden = true; });
+      window.addEventListener("resize", () => {
+        if (fab.style.left) this.place(parseFloat(fab.style.left), parseFloat(fab.style.top));
+        if (!dismiss.hidden) this.placeDismiss();
+      });
+      this.restore();
+      new MutationObserver(() => {
+        if (fab.style.left) this.restore();
+        if (!dismiss.hidden) this.placeDismiss();
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ["dir"] });
+      this.watchClearance();
+    }
+    // Resolve current direction so an in-place language change mirrors placement.
+    rtl() { return getComputedStyle(document.documentElement).direction === "rtl"; }
+    // Explicit placement takes ownership from the default logical corner/lift.
+    place(left, top) {
+      const fab = this.fab;
+      const box = fab.getBoundingClientRect();
+      const bounded = (value, extent, size) => Math.min(Math.max(8, value), Math.max(8, extent - size - 8));
+      const x = bounded(left, window.innerWidth, box.width);
+      const y = bounded(top, window.innerHeight, box.height);
+      fab.style.removeProperty("--a11y-fab-lift");
+      Object.assign(fab.style, { insetInlineStart: "auto", insetInlineEnd: "auto", insetBlockEnd: "auto",
+        right: "auto", bottom: "auto", left: `${x}px`, top: `${y}px` });
+    }
+    // Ignore malformed fractions and retire the former physical-position key.
+    restore() {
+      safely(() => {
+        localStorage.removeItem("wifigate-a11y-fab-position");
+        const saved = JSON.parse(localStorage.getItem(positionKey) || "null");
+        if (!saved || !Number.isFinite(saved.start) || !Number.isFinite(saved.y)) return;
+        const width = document.documentElement.clientWidth;
+        const distance = width * saved.start;
+        this.place(this.rtl() ? width - distance - this.fab.getBoundingClientRect().width : distance,
+          saved.y * window.innerHeight);
+      });
+    }
+    // Keep the temporary dismiss control attached to the actual rendered button.
+    placeDismiss() {
+      const box = this.fab.getBoundingClientRect();
+      this.dismiss.style.left = `${Math.max(4, box.left - 6)}px`;
+      this.dismiss.style.top = `${Math.max(4, box.top - 6)}px`;
+    }
+    // Repeated movement restarts the five-second localized dismiss affordance.
+    revealDismiss() {
+      const label = copy().hideButton;
+      this.dismiss.setAttribute("aria-label", label);
+      this.dismiss.title = label;
+      this.placeDismiss();
+      this.dismiss.hidden = false;
+      clearTimeout(this.dismissTimer);
+      this.dismissTimer = setTimeout(() => { this.dismiss.hidden = true; }, 5000);
+    }
+    // Capture the original grab point before playback or drag transforms change.
+    begin(event) {
+      if (event.button !== 0) return;
+      clearTimeout(this.timer);
+      const box = this.fab.getBoundingClientRect();
+      const drag = { x: event.clientX, y: event.clientY, dx: event.clientX - box.left,
+        dy: event.clientY - box.top, active: false, moved: false };
+      this.drag = drag;
+      this.timer = setTimeout(() => {
+        drag.active = true;
+        this.fab.classList.add("is-arranging");
+        safely(() => this.fab.setPointerCapture?.(event.pointerId));
+        if (navigator.vibrate) navigator.vibrate(15);
+        this.revealDismiss();
+      }, 550);
+    }
+    // Ordinary pointer travel cancels a pending hold; active dragging owns input.
+    move(event) {
+      const drag = this.drag;
+      if (!drag) return;
+      if (!drag.active) {
+        if (Math.hypot(event.clientX - drag.x, event.clientY - drag.y) > 8) clearTimeout(this.timer);
+        return;
       }
-      showDismiss()
+      event.preventDefault();
+      drag.moved = true;
+      this.place(event.clientX - drag.dx, event.clientY - drag.dy);
+      this.placeDismiss();
+    }
+    // A completed hold suppresses its synthetic click and saves only real moves.
+    finish() {
+      clearTimeout(this.timer);
+      const drag = this.drag;
+      this.drag = null;
+      if (!drag?.active) return;
+      this.fab.classList.remove("is-arranging");
+      this.fab.dataset.suppressClick = "true";
+      if (!drag.moved) return;
+      safely(() => {
+        const width = document.documentElement.clientWidth;
+        const left = parseFloat(this.fab.style.left);
+        const distance = this.rtl() ? width - left - this.fab.offsetWidth : left;
+        localStorage.setItem(positionKey, JSON.stringify({ start: distance / width,
+          y: parseFloat(this.fab.style.top) / window.innerHeight }));
+      });
+      this.revealDismiss();
+    }
+    // Default corner placement clears existing hero controls without moving a
+    // visitor-arranged button. Observer work shares a single animation frame.
+    watchClearance() {
+      const targets = [...document.querySelectorAll(".hero__actions, #hero-replay, [data-scene-replay]")];
+      if (!targets.length) return;
+      let scheduled = false;
+      const fab = this.fab;
+      const update = () => {
+        scheduled = false;
+        let lift = 0;
+        if (!fab.hidden && !fab.style.left && !document.body.classList.contains("a11y-panel-open")) {
+          const box = fab.getBoundingClientRect();
+          const resting = box.bottom + (parseFloat(fab.style.getPropertyValue("--a11y-fab-lift")) || 0);
+          let bottom = resting;
+          const obstacles = targets.map(target => target.getBoundingClientRect())
+            .filter(target => target.width > 0 && box.left < target.right + 4 && box.right > target.left - 4)
+            .sort((a, b) => b.bottom - a.bottom);
+          for (const target of obstacles) {
+            if (bottom > target.top - 8 && bottom - box.height < target.bottom + 8) bottom = target.top - 8;
+          }
+          lift = Math.min(resting - bottom, resting - box.height - 8);
+        }
+        if (lift > 0) fab.style.setProperty("--a11y-fab-lift", `${Math.round(lift)}px`);
+        else fab.style.removeProperty("--a11y-fab-lift");
+      };
+      const schedule = () => { if (!scheduled) { scheduled = true; requestAnimationFrame(update); } };
+      window.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", schedule);
+      document.addEventListener("site-accessibility-change", schedule);
+      if (window.ResizeObserver) {
+        const observer = new ResizeObserver(schedule);
+        for (const target of [...targets, document.documentElement]) observer.observe(target);
+      }
+      if (window.MutationObserver) new MutationObserver(schedule)
+        .observe(document.body, { attributes: true, attributeFilter: ["class"] });
+      update();
     }
   }
 
-  fab.addEventListener("pointerup", endPress)
-  fab.addEventListener("pointercancel", endPress)
-  fab.addEventListener("contextmenu", (event) => event.preventDefault())
-  // A native drag of anything inside the button would cancel the long press.
-  fab.addEventListener("dragstart", (event) => event.preventDefault())
-
-  dismiss.addEventListener("click", () => {
-    if (accessibilityPanelOpen) closeAccessibilityPanel(false)
-    fab.hidden = true
-    dismiss.hidden = true
-  })
-
-  document.addEventListener("pointerdown", (event) => {
-    if (event.target !== dismiss && !fab.contains(event.target)) dismiss.hidden = true
-  })
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") dismiss.hidden = true
-  })
-  window.addEventListener("resize", () => {
-    if (fab.style.left) placeAccessibilityFab(fab, parseFloat(fab.style.left), parseFloat(fab.style.top))
-    if (!dismiss.hidden) positionDismiss()
-  })
-
-  applySavedPosition()
-  // A language switch in place flips the direction; follow it at once.
-  new MutationObserver(() => {
-    if (fab.style.left) applySavedPosition()
-    if (!dismiss.hidden) positionDismiss()
-  }).observe(document.documentElement, { attributes: true, attributeFilter: ["dir"] })
-}
-
-// The button always sits in the reading-start corner, which it shares with
-// the homepage hero actions and the scene playback button. While it would
-// cover one of them it rises just above it, and settles back once they scroll
-// clear. A position the visitor arranged, or an open panel, is left alone.
-const A11Y_FAB_CLEAR_OF = ".hero__actions, #hero-replay, [data-scene-replay]"
-const A11Y_FAB_CLEAR_GAP = 8
-
-function setupAccessibilityFabClearance(fab) {
-  const targets = Array.from(document.querySelectorAll(A11Y_FAB_CLEAR_OF))
-  if (!targets.length) return
-  let frame = 0
-
-  function setLift(lift) {
-    if (lift > 0) fab.style.setProperty("--a11y-fab-lift", Math.round(lift) + "px")
-    else fab.style.removeProperty("--a11y-fab-lift")
+  let dialog = null;
+  const preferences = new Preferences();
+  // Missing partials or late copy can retry; a successful mount is idempotent.
+  function mount() {
+    if (dialog || !copy()) return;
+    const ids = { fab: "fab", panel: "panel", backdrop: "backdrop", close: "close", reset: "reset",
+      status: "status", title: "title", description: "description", eyebrow: "eyebrow",
+      sizeTitle: "text-size-title", sizeDescription: "text-size-description", sizeValue: "text-size-value",
+      smaller: "text-smaller", larger: "text-larger", statement: "statement" };
+    const nodes = Object.fromEntries(Object.entries(ids).map(([key, suffix]) => [key, document.getElementById(`a11y-${suffix}`)]));
+    if (Object.values(nodes).some(node => !node)) return;
+    dialog = new Dialog(nodes, [...document.querySelectorAll(".a11y-option[data-a11y-setting]")]);
+    new Launcher(nodes.fab);
+    safely(() => {
+      const query = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+      const changed = () => announce(preferences.value);
+      if (query?.addEventListener) query.addEventListener("change", changed);
+      else query?.addListener?.(changed);
+    });
+    preferences.apply();
   }
+  preferences.apply();
+  safely(() => localStorage.removeItem("wifigate-accessibility-settings-v1"));
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount, { once: true });
+  else mount();
+  return { mount, reduced: () => preferences.reduced() };
+})();
 
-  function update() {
-    frame = 0
-    if (fab.hidden || fab.style.left || document.body.classList.contains("a11y-panel-open")) {
-      setLift(0)
-      return
-    }
-    // The resting place, without any lift already applied.
-    const current = parseFloat(fab.style.getPropertyValue("--a11y-fab-lift")) || 0
-    const rect = fab.getBoundingClientRect()
-    const left = rect.left, right = rect.right, height = rect.height
-    const restingBottom = rect.bottom + current
-    let bottom = restingBottom
-    // Rise above each control the button would cover, nearest first.
-    const boxes = targets.map((element) => element.getBoundingClientRect()).filter((box) => box.width > 0 && left < box.right + 4 && right > box.left - 4)
-    boxes.sort((a, b) => b.bottom - a.bottom)
-    for (const box of boxes) {
-      if (bottom - height < box.bottom + A11Y_FAB_CLEAR_GAP && bottom > box.top - A11Y_FAB_CLEAR_GAP) bottom = box.top - A11Y_FAB_CLEAR_GAP
-    }
-    setLift(Math.min(restingBottom - bottom, restingBottom - height - A11Y_FAB_MARGIN))
-  }
-
-  function schedule() {
-    if (!frame) frame = requestAnimationFrame(update)
-  }
-
-  window.addEventListener("scroll", update, { passive: true })
-  window.addEventListener("resize", schedule)
-  if (window.ResizeObserver) {
-    const observer = new ResizeObserver(schedule)
-    targets.forEach((element) => observer.observe(element))
-    observer.observe(document.documentElement)
-  }
-  if (window.MutationObserver) new MutationObserver(schedule).observe(document.body, { attributes: true, attributeFilter: ["class"] })
-  document.addEventListener("site-accessibility-change", schedule)
-  update()
-}
-
-function setupAccessibilityWidget() {
-  if (accessibilityRefs) return
-  const byId = (id) => document.getElementById(id)
-  const refs = {
-    fab: byId("a11y-fab"),
-    panel: byId("a11y-panel"),
-    backdrop: byId("a11y-backdrop"),
-    closeButton: byId("a11y-close"),
-    resetButton: byId("a11y-reset"),
-    status: byId("a11y-status"),
-    title: byId("a11y-title"),
-    description: byId("a11y-description"),
-    eyebrow: byId("a11y-eyebrow"),
-    textSizeTitle: byId("a11y-text-size-title"),
-    textSizeDescription: byId("a11y-text-size-description"),
-    textSizeValue: byId("a11y-text-size-value"),
-    textSmaller: byId("a11y-text-smaller"),
-    textLarger: byId("a11y-text-larger"),
-    statement: byId("a11y-statement"),
-  }
-  if (Object.values(refs).some((element) => !element) || !getAccessibilityBundle()) return
-  refs.skipLink = document.querySelector(".skip-link")
-  refs.optionButtons = Array.from(document.querySelectorAll(".a11y-option[data-a11y-setting]"))
-  accessibilityRefs = refs
-
-  // The panel starts closed, so its controls must not take keyboard focus.
-  refs.panel.inert = true
-  // The statement in this page's language.
-  const lang = getAccessibilityLanguage()
-  refs.statement.href = lang === "en" ? "/accessibility/" : `/${lang.toLowerCase()}/accessibility/`
-
-  refs.fab.addEventListener("click", () => {
-    // The click that ends a long press only arranges the button.
-    if (refs.fab.dataset.suppressClick === "true") {
-      delete refs.fab.dataset.suppressClick
-      return
-    }
-    if (accessibilityPanelOpen) closeAccessibilityPanel()
-    else openAccessibilityPanel()
-  })
-  refs.closeButton.addEventListener("click", () => closeAccessibilityPanel())
-  refs.backdrop.addEventListener("click", () => closeAccessibilityPanel())
-  refs.resetButton.addEventListener("click", resetAccessibilitySettings)
-  refs.textSmaller.addEventListener("click", () => stepAccessibilityTextScale(-1))
-  refs.textLarger.addEventListener("click", () => stepAccessibilityTextScale(1))
-  refs.optionButtons.forEach((button) => {
-    button.addEventListener("click", () => toggleAccessibilitySetting(button.dataset.a11ySetting))
-  })
-  document.addEventListener("keydown", handleAccessibilityKeydown)
-  document.addEventListener("site-language-change", updateAccessibilityCopy)
-
-  if (window.matchMedia) {
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    if (motionQuery.addEventListener) motionQuery.addEventListener("change", dispatchAccessibilityChange)
-    else if (motionQuery.addListener) motionQuery.addListener(dispatchAccessibilityChange)
-  }
-
-  setupAccessibilityFabArrange(refs.fab)
-  setupAccessibilityFabClearance(refs.fab)
-  updateAccessibilityCopy()
-  applyAccessibilitySettings()
-}
-
-// Saved settings apply as soon as this script runs.
-accessibilityState = loadAccessibilitySettings()
-applyAccessibilitySettings()
-try {
-  localStorage.removeItem("wifigate-accessibility-settings-v1")
-} catch (error) {
-  // Nothing stored.
-}
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", setupAccessibilityWidget, { once: true })
-} else {
-  setupAccessibilityWidget()
-}
+// Keep the two entry points consumed by the existing main and media scripts.
+function setupAccessibilityWidget() { siteAccessibility.mount(); }
+function isReducedMotionRequested() { return siteAccessibility.reduced(); }

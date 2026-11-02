@@ -35,6 +35,7 @@ import { infoTip } from "./host-ui.js";
 import { renderPlatformLanguage } from "./platform-language.js";
 import { monthlyEstimate, monthlyTotal, revenueTotal, formatMoney, unavailableLabel } from "./profile-financials.js";
 import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
+import { createPlatformManagementGuide, mountRoleGuideButton, openRoleGuide } from "./role-guide.js";
 import {
   createReservationsAdmin,
 } from "./reservations-admin.js";
@@ -472,6 +473,11 @@ async function refresh() {
       return;
     }
     showIdentity();
+    mountRoleGuideButton({ product: selectedProduct || "host", language, context: () => {
+      const product = selectedProduct || new URLSearchParams(location.search).get("product") || "host";
+      const role = identity?.products?.[product]?.role;
+      return { product, plan: identity?.platformRole === "admin" ? "admin" : ["admin", "user"].includes(role) ? role : null, organizationRole: document.body.dataset.organizationRole };
+    } });
     $("#platform-status").textContent = identity.user.emailVerified
       ? ""
       : copy.unverified;
@@ -496,6 +502,8 @@ async function refresh() {
         reservationsAdmin = createReservationsAdmin({ root: directoryRoot, user, language });
         return;
       }
+      if (!document.querySelector(".role-guide-management"))
+        directoryRoot.before(createPlatformManagementGuide({ language, onOpenRoles: () => openRoleGuide({ product: new URLSearchParams(location.search).get("product") ?? "host", language, current: {} }) }));
       platformDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language, standalone: true,
         ensureRecent: async () => {
           const token = await user.getIdTokenResult();
@@ -534,7 +542,7 @@ async function refresh() {
           platformDirectory = createPlatformAdminDirectory({ root: directoryRoot, user, language, product: "pay" });
         } else {
           payDashboard = createPayDashboard({ root: $("#pay-root"), user, language,
-            onProfile: profile => managerProfile?.update({ ...profile, platformRole: identity.platformRole }, user),
+            onProfile: profile => managerProfile?.update({ ...profile, role: profile.personalRole ?? null, roles: [], platformRole: identity.platformRole }, user),
           });
 
         }
@@ -636,7 +644,7 @@ function initial(text) {
 function showIdentity() {
   const product = identity.products[selectedProduct];
   managerProfile?.update(
-    { role: product?.role, roles: product?.roles, platformRole: identity.platformRole },
+    { role: selectedProduct === "pay" ? null : product?.role, roles: selectedProduct === "pay" ? [] : product?.roles, platformRole: identity.platformRole },
     { ...identity.user, photoURL: currentUser?.photoURL },
   );
   const name = identity.user.displayName || identity.user.email || "WIFIGATE";
@@ -668,7 +676,10 @@ function renderProfileDetails() {
   for (const [label, value] of [
     [
       language === "he" ? "תפקיד בחשבון WIFIGATE" : "WIFIGATE account role",
-      identity.platformRole === "admin" ? "WIFIGATE Admin" : "WIFIGATE User",
+      identity.platformRole === "admin" ? "WIFIGATE Admin" :
+        ["host", "manager"].some(id => identity.products[id].state === "active" && identity.products[id].role === "user") ? "WIFIGATE User" :
+        productIds.some(id => identity.products[id].organizations > 0 || ["organization-user", "organization-admin"].includes(identity.products[id].role)) ? (language === "he" ? "משתמש ארגון" : "Organization user") :
+        (language === "he" ? "חשבון ללא מנוי פעיל" : "Account without an active subscription"),
     ],
     [
       language === "he" ? "כתובת אימייל" : "Email address",
@@ -715,12 +726,12 @@ function renderProfileDetails() {
           : "Not verified with authenticator",
     ],
     [
-      language === "he" ? "מנויים פעילים" : "Active subscriptions",
+      language === "he" ? "גישה פעילה למוצרים" : "Active product access",
       activeSubscriptions.length
         ? activeSubscriptions.join(", ")
         : productIds.some((id) => identity.products[id].state === "unavailable")
           ? unavailableLabel(language)
-          : language === "he" ? "אין מנויים פעילים" : "No active subscriptions",
+          : language === "he" ? "אין גישה פעילה למוצרים" : "No active product access",
     ],
   ]) {
     const row = document.createElement("div");

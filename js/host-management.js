@@ -10,12 +10,14 @@ import {
 } from "./host-my-systems.js";
 import { readSystem } from "./host-system-cards.js";
 import { clearHostCalendar } from "./host-calendar.js";
+import { watchHostDrafts, confirmHostWorkspaceLeave } from "./host-workspace-drafts.js";
 import { workspaceLoaders } from "./host-workspace-views.js";
 import {
   renderOrganizationSelector,
   clearOrganizationSelector,
 } from "./host-org-selector.js";
 import { organizationRole, permissionsOf } from "./host-permissions.js";
+import { createOrganizationRoleCard } from "./role-guide.js";
 import {
   allowedWorkspaceViews,
   homeView,
@@ -28,6 +30,7 @@ import {
 // Host plan holders, and the join-organization inbox. Each view is built
 // once it is first opened; what is built follows workspace.permissions.
 const root = document.querySelector("#host-management");
+watchHostDrafts(root);
 const attempts = new Map();
 let generation = 0;
 let currentUser;
@@ -174,6 +177,13 @@ window.addEventListener("host:workspace-navigate", (event) => {
     notice.remove();
   void navigateWorkspace?.(event.detail);
 });
+window.addEventListener("host:workspace-personal", () => {
+  if (selectedId && currentUser) {
+    preferredOrganizationId = undefined;
+    rememberOrganization(undefined);
+    void loadHostManagement(currentUser, currentIdentity, null);
+  }
+});
 // A saved filter from Activity opens the Calendar with it.
 window.addEventListener("host:operations-filter", async (event) => {
   const filter = event.detail;
@@ -282,31 +292,53 @@ async function loadWorkspace(user, identity, preferredId) {
     // A URL is only a preference: the current server-authorized memberships
     // decide which organization can load, including after a role is revoked.
     let org;
-    if (organizations.length) {
+    if (organizations.length && preferredId !== null) {
       const preferred =
         preferredId ?? requestedOrganization() ?? preferredOrganizationId;
       selectedId = organizations.some((entry) => entry.id === preferred)
         ? preferred
-        : organizations[0].id;
+        : undefined;
       preferredOrganizationId = selectedId;
-      root.dataset.organizationId = selectedId;
+      if (selectedId) root.dataset.organizationId = selectedId;
       org = organizations.find((entry) => entry.id === selectedId);
       rememberOrganization(selectedId);
     } else {
+      selectedId = undefined;
+      preferredOrganizationId = undefined;
       delete root.dataset.organizationId;
       rememberOrganization(undefined);
     }
     const permissions = org ? [...permissionsOf(org)] : undefined;
+    const chooseOrganization = (id) => {
+      if (!organizations.some(entry => entry.id === id)) return;
+      if (id !== selectedId && !confirmHostWorkspaceLeave(root)) return;
+      window.dispatchEvent(new CustomEvent("host:menu-close"));
+      const url = new URL(location.href);
+      url.pathname = "/dashboard/host/";
+      url.searchParams.set("org", id);
+      url.searchParams.set("view", "systems");
+      url.searchParams.delete("tab");
+      url.searchParams.delete("section");
+      history.pushState(null, "", url);
+      void loadHostManagement(user, identity, id);
+    };
+    if (organizations.length) {
+      renderOrganizationSelector(org, organizations, (id) => {
+        chooseOrganization(id);
+      });
+    }
     if (org) {
       root.dataset.membershipRole = organizationRole(org);
-      renderOrganizationSelector(org, organizations, (id) => {
-        window.dispatchEvent(new CustomEvent("host:menu-close"));
-        const url = new URL(location.href);
-        url.pathname = "/dashboard/host/";
-        url.searchParams.set("org", id);
-        history.pushState(null, "", url);
-        void loadHostManagement(user, identity, id);
-      });
+      document.body.dataset.organizationRole = organizationRole(org);
+      root.append(
+        createOrganizationRoleCard({
+          product: "host",
+          language: hostLanguage,
+          role: organizationRole(org),
+          plan: plan ? identity.role : null,
+          organizationName: org.name,
+        }),
+      );
       if (org.workspace?.service?.available === false)
         root.append(
           node(
@@ -317,7 +349,10 @@ async function loadWorkspace(user, identity, preferredId) {
             { role: "status", "data-workspace-notice": "true" },
           ),
         );
-    } else delete root.dataset.membershipRole;
+    } else {
+      delete root.dataset.membershipRole;
+      delete document.body.dataset.organizationRole;
+    }
     const panels = new Map([["invitations", inbox]]);
     for (const view of allowedWorkspaceViews({ plan, pending, permissions })) {
       if (panels.has(view.id)) continue;
@@ -456,13 +491,14 @@ async function loadWorkspace(user, identity, preferredId) {
     // and the screen that made the change reloads now.
     const systemsChanged = async (view, systemId) => {
       if (!current()) return;
+      const activeView = workspaceLocation(new URL(location.href), root.dataset.homeView);
       mySystems = undefined;
       orgSystems = undefined;
       for (const [id, panel] of panels)
         if (id !== "invitations" && id !== "settings") resetPanel(id, panel);
       showSidebarSystems();
-      pendingFocus = { view, id: systemId };
-      await navigateWorkspace?.(view);
+      pendingFocus = activeView === view ? { view, id: systemId } : undefined;
+      await navigateWorkspace?.(panels.has(activeView) ? activeView : root.dataset.homeView);
     };
     // My systems could not be read: Try again reads them afresh (the view
     // and the sidebar list).
@@ -480,6 +516,7 @@ async function loadWorkspace(user, identity, preferredId) {
       identity,
       organization: org,
       organizations,
+      chooseOrganization,
       plan,
       permissions,
       isCurrent: current,
@@ -608,6 +645,6 @@ async function loadWorkspace(user, identity, preferredId) {
 
 window.addEventListener("popstate", () => {
   const requested = requestedOrganization();
-  if (currentUser && currentIdentity && requested && requested !== selectedId)
-    void loadHostManagement(currentUser, currentIdentity);
+  if (currentUser && currentIdentity && (requested ?? undefined) !== selectedId)
+    void loadHostManagement(currentUser, currentIdentity, requested ?? null);
 });

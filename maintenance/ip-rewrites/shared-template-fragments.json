@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "area": "W3",
+  "sourceCommit": "106d5fc6a026e8d9d2eea32b395a101c7bcb5486",
+  "review": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/16",
+  "at": "2026-10-30T08:04:41.027571+00:00",
+  "status": "PASS_INDEPENDENT_WHOLE_SHARED_HTML_FRAGMENT_RECONSTRUCTION",
+  "specification": "maintenance/IP_SHARED_TEMPLATE_FRAGMENTS.md",
+  "specificationCommit": "9639b7f67",
+  "deletionCommit": "f6b1bd66c",
+  "additionCommit": "4e3edcd19",
+  "compatibilityFollowup": "106d5fc6a",
+  "paths": [
+    "templates/guest-invites-api.template.html",
+    "templates/partials/site-footer.template.html"
+  ],
+  "change": "Reconstruct both entire fragments from frozen DOM/behavior;English section/column comments;preserve every node,attribute,copy key,meaningful text,SVG geometry,order and destination plus existing literal footer locator boundary",
+  "validation": {
+    "original": "15/15Host+fragment contractsPASS before deletion",
+    "replacementFocused": "16/16PASS;0skips",
+    "presentation": "83/83PASS;0skips;includes280actualChrome presentation cases",
+    "frozenCompleteDomFingerprints": [
+      {
+        "path": "templates/guest-invites-api.template.html",
+        "originalSourceSha256": "0a0720acea7f70b1872bf83ad072431c838a1177b5948f85046be0878788bd8f",
+        "domSha256": "3e63b9cad8a20e497da5de9b9dd1b8bb2a7137580df96bbac12c6a76c3e35d9f"
+      },
+      {
+        "path": "templates/partials/site-footer.template.html",
+        "originalSourceSha256": "49e37f223a02908ee0dfeb43d8258cfcc329d12c58365714ae2801554cf2b323",
+        "domSha256": "5511f280804973eb51f3f02c6b53ffb17e1b312f4bc2fd833b898409461a2d91"
+      }
+    ],
+    "fullCli": "PASS actual isolated frozen106d5fc6a run;580inputs/180verifiedreadonlyassets",
+    "generatedFiles": 1485,
+    "fullMeaningfulModels": "All1485DOM/text/attribute/JSON/llms models exact;0missing/unexpected/mismatch",
+    "rawByteDifferences": 819,
+    "rawDifferenceScope": "Markup indentation/comments/attribute serialization only",
+    "verifySite": "PASS39locales\u00d714pages,663interactive,703sitemapURLs,redirects",
+    "sourceAttribution": {
+      "ref": "106d5fc6a026e8d9d2eea32b395a101c7bcb5486",
+      "files": 6,
+      "complete": true,
+      "zero": true,
+      "summary": {
+        "eiloncohen": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        },
+        "OdeliaTorjman": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        }
+      }
+    },
+    "allOtherTrackedFiles": {
+      "base": "2183c1fbe9914d0c945047fc7061b85c401c5adc",
+      "files": 2338,
+      "blobsAndModesExact": true,
+      "productAndDependencyConfigurationExact": true,
+      "packageOnlyDifference": "Registered6shared-fragment contracts in existing test:presentation command"
+    },
+    "readOnlyPortalSupport": "Exact checked-in dashboard/index.html copied into isolated generation/verification;excluded from generated-output count because CLI never creates it"
+  },
+  "retainedAttempts": [
+    "First frozen-fixture writer omitted its new parent directory;test module failed before source edits;actual directory/fingerprint initialization restored15/15before deletion",
+    "Initial newsource4e3edcd19 passed15focused/82presentation/all1485models but existing verifier rejected663pages because its locator requires literal class-first footer opening;failed verification and red regression retained",
+    "Final106d5fc6a preserves exact original literal footer opening;16focused/83presentation/verify-sitePASS without weakening assertions"
+  ],
+  "limits": [
+    "Complete prior566file selected frontend census576Eilonlines/6files;two rewritten paths contributed12lines and now havecomplete0;remaining4files564lines is a derived scoped delta,not a newly executed whole census",
+    "Static/browser/source evidence only;no physical phone/BLE/legal acceptance inferred",
+    "No primary/main/hosting mutation orproduction approval/publication"
+  ],
+  "productionDelivery": false
+}

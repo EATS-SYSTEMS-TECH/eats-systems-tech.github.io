@@ -1,5 +1,6 @@
 import { attachPopover, placeFloating } from "./popover.js";
 import { createOrganizationLogo } from "./manager-organization-card.js";
+import { sharedOrganizationRole } from "./role-guide.js";
 
 const node = (tag, text, className) => {
   const element = document.createElement(tag);
@@ -136,13 +137,12 @@ export function createManagerOrganizationPicker({
     const current = org.id === selectedId;
     if (current) option.setAttribute("aria-current", "true");
     const role =
-      org.role === "owner"
-        ? t("בעל הארגון", "Organization owner")
-        : org.role === "organization-admin"
-          ? t("מנהל ארגון", "Organization admin")
-          : org.role === "organization-user"
-            ? t("משתמש ארגון", "Organization user")
-            : "";
+      {
+        owner: t("בעל הארגון", "Organization owner"),
+        admin: t("מנהל ארגון", "Organization admin"),
+        staff: t("צוות ארגון", "Organization staff"),
+        viewer: t("צופה בארגון", "Organization viewer"),
+      }[org.role === "owner" ? "owner" : sharedOrganizationRole(org.role)] ?? "";
     const text = node(
       "span",
       undefined,

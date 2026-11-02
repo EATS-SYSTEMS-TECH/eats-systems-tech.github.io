@@ -1,13 +1,16 @@
 import { hostText } from "./host-locale.js";
 const descriptions = {
   "host-admin": [
-    "Host admin",
+    "WIFIGATE Host Admin",
     "Runs the WIFIGATE platform. Authenticator required.",
   ],
-  "host-user": ["Host user", "Has a Host plan with My systems."],
+  "host-user": [
+    "WIFIGATE Host User",
+    "The paying customer: a Host plan with My systems and a monthly subscription.",
+  ],
   owner: [
     "Owner",
-    "Manages the organization, team, billing and connections, and everything else.",
+    "Manages the organization, team, API keys and connections, and everything else. Billing belongs to the paying Host User.",
   ],
   admin: [
     "Admin",

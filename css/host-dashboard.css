@@ -1206,6 +1206,14 @@ div.org-card {
   background: var(--host-strong);
   color: #ffffff;
 }
+.host-app
+  .portal-panel
+  .calendar-toolbar
+  button[aria-pressed="true"]:hover:not(:disabled) {
+  background: var(--host-strong);
+  color: #ffffff;
+  filter: brightness(0.96);
+}
 .calendar-filters {
   display: flex;
   flex-wrap: wrap;
@@ -1342,6 +1350,7 @@ div.org-card {
   filter: none;
 }
 .host-app .portal-panel .host-calendar .reservation-chip {
+  --reservation-background: #d9eaff;
   position: relative;
   z-index: 1;
   display: block;
@@ -1352,7 +1361,7 @@ div.org-card {
   overflow: hidden;
   border: 0;
   border-radius: 10px;
-  background: #d9eaff;
+  background: var(--reservation-background);
   color: #15336e;
   font-size: 0.8rem;
   line-height: 1.25;
@@ -1371,18 +1380,19 @@ div.org-card {
   font-weight: 600;
 }
 .host-app .portal-panel .host-calendar .reservation-chip:hover:not(:disabled) {
+  background: var(--reservation-background);
   filter: brightness(0.96);
 }
 .host-app .portal-panel .host-calendar .reservation-chip.reservation-draft {
-  background: #e8edf5;
+  --reservation-background: #e8edf5;
   color: #263546;
 }
 .host-app .portal-panel .host-calendar .reservation-chip.reservation-changed {
-  background: #fff0c6;
+  --reservation-background: #fff0c6;
   color: #603c00;
 }
 .host-app .portal-panel .host-calendar .reservation-chip.reservation-cancelled {
-  background: repeating-linear-gradient(
+  --reservation-background: repeating-linear-gradient(
     135deg,
     #fce3e3 0,
     #fce3e3 6px,
@@ -1392,7 +1402,7 @@ div.org-card {
   color: #6b2222;
 }
 .host-app .portal-panel .host-calendar .reservation-chip.reservation-completed {
-  background: #e3f6ea;
+  --reservation-background: #e3f6ea;
   color: #2a5a3c;
 }
 .host-calendar--empty > :not(.empty-state) {

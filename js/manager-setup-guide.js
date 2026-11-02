@@ -31,7 +31,7 @@ export function createManagerSetupGuide(language = "en") {
       t("התחברו לאותו חשבון", "Sign in with the same account"),
       t(
         "היכנסו לאפליקציית WIFIGATE עם החשבון שבו אתם משתמשים באתר. לייצוא נדרש חשבון WIFIGATE Manager user פעיל.",
-        "Sign in to the WIFIGATE app with the account you use on this website. Export requires an active WIFIGATE Manager user account.",
+        "Sign in to the WIFIGATE app with the account you use on this website. Export requires an active WIFIGATE Manager User account.",
       ),
     ],
     [

@@ -1,5 +1,6 @@
 // Sign-in page copy (/hu/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "A böngésző ellenőrzése sikertelen. Töltse be újra az oldalt, és próbálja meg ismét. Ha a probléma továbbra is fennáll, forduljon az ügyfélszolgálathoz.",
   pageTitle: "Bejelentkezés",
   heading: "Bejelentkezés a WIFIGATE-be",
   home: "WIFIGATE kezdőlap",

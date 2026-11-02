@@ -1,4 +1,5 @@
 import { AuthErrors, HttpStatus } from "./host-constants.js";
+import { authErrorMessage, isAppCheckError } from "./host-auth-errors.js?v=20261101workspace1";
 import {
   initializeSiteAuth,
   signIn,
@@ -68,6 +69,7 @@ const ERROR_COPY = {
   HOST_API_UNAVAILABLE: "errorServer",
 };
 function errorMessage(error) {
+  if (isAppCheckError(error)) return copy.errorAppCheck ?? authErrorMessage(error, language);
   const key = ERROR_COPY[error?.code || error?.message];
   if (key) return copy[key];
   if (error?.status === HttpStatus.UNAUTHORIZED) return copy.errorSessionExpired;

@@ -289,7 +289,8 @@ test("Manager workspace supports English/Hebrew desktop/mobile, organizations an
         assert.equal(await icon.getAttribute("src"), "/assets/host-icons/gate-cantilever-gate-small.svg");
         await icon.evaluate(image => image.decode());
         assert.equal(await icon.getAttribute("alt"), "");
-        assert.equal(await realSystem.locator(".manager-system-actions button").count(), 1);
+        assert.equal(await realSystem.locator(".manager-system-actions button.primary").count(), 1, "one primary workspace action");
+        assert.equal(await realSystem.locator(".manager-system-remove").count(), 1, "removal remains a separate authorized action");
         await realSystem.getByRole("button", { name: he ? "פתיחת סביבת ניהול" : "Open workspace", exact: true }).click();
         await page.locator(".manager-system-menu summary").click();
         await page.getByRole("button", { name: he ? "פרטי גישה" : "Access Note", exact: true }).click();

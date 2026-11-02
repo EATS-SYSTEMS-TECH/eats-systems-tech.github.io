@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "area": "W3",
+  "sourceCommit": "a033daec557c1dd80de25bf21907e50da3b171a3",
+  "review": "https://github.com/EATS-SYSTEMS-TECH/eats-systems-tech.github.io/pull/11",
+  "specification": "maintenance/IP_INLINE_JSON_BEHAVIOR.md",
+  "change": "Escape literal less-than as JSON Unicode escape at both inline JavaScript/application-json boundaries;preserve JSON semantics and actual caller mutation order",
+  "validation": {
+    "redActualChrome": {
+      "status": "REPRODUCED_ACTUAL_ORIGINAL_SERIALIZER_HTML_SCRIPT_TERMINATION",
+      "result": {
+        "unexpected": true,
+        "originalDataExists": false,
+        "scriptCount": 2
+      },
+      "publishedExploitClaim": false
+    },
+    "focused": "3/3PASS;actual Chromium two script types/full data roundtrip/no extra script or node",
+    "presentation": "57/57PASS",
+    "unrelatedBuilderBytes": {
+      "status": "PASS_COMPLETE_UNRELATED_BUILDER_BYTES_EXACT",
+      "beforeSha256": "26785d7705cd3354590f692dd08bfd325d98eff9eea9f8b4d9b043a6e7024b6a",
+      "afterSha256": "b604f566dbece2d7cd32b38b4297dae35225a53130a71e5ed12db8538f93b0c3",
+      "integrationChanges": 3,
+      "wholeBuilderIndependentRewrite": false
+    },
+    "fullCli": "PASS independent569input frozen tree/180verified assets",
+    "generatedOutput": {
+      "files": 1485,
+      "rawByteDifferences": 0,
+      "missing": [],
+      "unexpected": [],
+      "modelMismatches": []
+    },
+    "newSourceAttribution": {
+      "ref": "a033daec557c1dd80de25bf21907e50da3b171a3",
+      "files": 3,
+      "complete": true,
+      "zero": true,
+      "summary": {
+        "eiloncohen": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        },
+        "OdeliaTorjman": {
+          "rawLines": 0,
+          "lines": 0,
+          "rawFiles": 0,
+          "files": 0,
+          "exceptedFiles": 0,
+          "rawBlobs": 0,
+          "blobs": 0,
+          "binaryBlobs": 0
+        }
+      }
+    }
+  },
+  "limits": [
+    "No published exploitation claim",
+    "Narrow builder bug fix only;entire builder independent rewrite and inherited lines remain open despite separate delete/add commits",
+    "No whole-site zero claim",
+    "Primary/main and hosting unchanged"
+  ],
+  "productionDelivery": false
+}

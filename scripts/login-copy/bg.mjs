@@ -1,5 +1,6 @@
 // Sign-in page copy (/bg/login/). Same keys as he.mjs, the source.
 export default {
+  errorAppCheck: "Проверката на браузъра е неуспешна. Презаредете страницата и опитайте отново. Ако проблемът продължи, свържете се с поддръжката.",
   pageTitle: "Вход",
   heading: "Вход в WIFIGATE",
   home: "Начална страница на WIFIGATE",

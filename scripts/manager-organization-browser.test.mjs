@@ -258,7 +258,7 @@ test("selected organization contains branding, people and systems; invitation/re
           await page
             .locator(".manager-organization-metrics strong")
             .allTextContents(),
-          ["3", "1", "1"],
+          ["3", "1", "0", "1"],
         );
         assert.equal(
           await page
@@ -268,7 +268,7 @@ test("selected organization contains branding, people and systems; invitation/re
         );
         assert.equal(
           await page.locator(".manager-organization-person-column").count(),
-          2,
+          3,
         );
         assert.equal(
           await page
@@ -411,7 +411,7 @@ test("selected organization contains branding, people and systems; invitation/re
         await enter();
         await page
           .getByRole("button", {
-            name: he ? "הוספת משתמש" : "Add user",
+            name: he ? "הוספת צוות" : "Add staff",
             exact: true,
           })
           .click();
@@ -481,10 +481,11 @@ test("selected organization contains branding, people and systems; invitation/re
           .getByRole("dialog")
           .getByRole("button", { name: he ? "אישור" : "Confirm", exact: true })
           .click();
-        await page.waitForFunction(() =>
-          document
-            .querySelector(".manager-organization-metrics")
-            .textContent.includes("0"),
+        // The staff tile (legacy organization users) drops to zero.
+        await page.waitForFunction(
+          () =>
+            document.querySelectorAll(".manager-organization-metrics strong")[1]
+              ?.textContent === "0",
         );
         assert.equal(await page.evaluate(() => window.connections), 0);
         assert.equal(

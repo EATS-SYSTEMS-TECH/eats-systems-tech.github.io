@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "source": "2183c1fbe",
+  "files": [
+    {
+      "path": "templates/guest-invites-api.template.html",
+      "originalSourceSha256": "0a0720acea7f70b1872bf83ad072431c838a1177b5948f85046be0878788bd8f",
+      "domSha256": "3e63b9cad8a20e497da5de9b9dd1b8bb2a7137580df96bbac12c6a76c3e35d9f"
+    },
+    {
+      "path": "templates/partials/site-footer.template.html",
+      "originalSourceSha256": "49e37f223a02908ee0dfeb43d8258cfcc329d12c58365714ae2801554cf2b323",
+      "domSha256": "5511f280804973eb51f3f02c6b53ffb17e1b312f4bc2fd833b898409461a2d91"
+    }
+  ]
+}
