@@ -263,9 +263,8 @@
         }
 
         // Choose the first meaningful alias while retaining the original query's order.
-        function firstRouteValue(values) {
-            return values.find((value) => typeof value === "string" && value.trim())?.trim() || "";
-        }
+        const firstRouteValue = (values) =>
+            values.find((value) => typeof value === "string" && value.trim())?.trim() || "";
 
         // Resolve an invitation target from the public parameter and path aliases.
         function invitationTarget(url) {
@@ -305,8 +304,8 @@
             const suffix = query.toString();
             return `wifigate://${target.route}/${encodeURIComponent(target.id)}${suffix ? "?" + suffix : ""}`;
         };
-
-        function revealFallback(deepLink) {
+        // Replace the waiting state with recovery actions, or explain that no route exists.
+        const revealFallback = (deepLink) => {
             const copy = getUtilityPageCopy();
             const title = document.getElementById("page-title");
             const status = document.getElementById("status");
@@ -337,8 +336,8 @@
                     feedback.classList.add("error");
                 }
             };
-        }
-
+        };
+        // Hand off to the app first; recovery actions appear once the page is visible again.
         const scheduleAppOpen = (deepLink) => {
             if (!deepLink) return revealFallback("");
 

@@ -66,7 +66,6 @@ function updateStatus(text, type, el) {
 function setYear() {
   const yearEl = $("#js-year");
   if (!yearEl) return;
-
   yearEl.textContent = new Date().getFullYear();
 }
 

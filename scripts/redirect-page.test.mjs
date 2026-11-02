@@ -18,8 +18,9 @@ test("redirect aliases agree across canonical, refresh, JavaScript and fallback 
     const canonical = `https://wifigate.io${target}`;
     const output = render(target, canonical), $ = cheerio.load(output);
     assert.equal($("html").attr("lang"), "en");
-    assert.equal($("meta[charset]").attr("charset"), "UTF-8");
-    assert.equal($("title").text(), "Redirecting...");
+    assert.equal($("html").attr("dir"), "ltr");
+    assert.equal($("meta[charset]").attr("charset"), "utf-8");
+    assert.equal($("title").text(), "Page moved | WIFIGATE");
     assert.equal($("link[rel=canonical]").attr("href"), canonical);
     assert.equal($("meta[http-equiv=refresh]").attr("content"), `0; url=${target}`);
     const visits = [];
@@ -28,8 +29,11 @@ test("redirect aliases agree across canonical, refresh, JavaScript and fallback 
     assert.equal($("body a").attr("href"), target);
     assert.equal($("body a").text(), target);
     assert.equal($("script[src]").length, 0);
-    assert.ok(output.startsWith("<!DOCTYPE html>\n"));
-    assert.ok(output.endsWith("</html>\n"));
+    // Metadata parses into the implied head and the fallback link into the implied body.
+    assert.equal($("head link[rel=canonical]").length, 1);
+    assert.equal($("body p a").length, 1);
+    assert.ok(output.startsWith("<!doctype html>\n"));
+    assert.ok(output.endsWith("</p>\n"));
     assert.equal(output.endsWith("\n\n"), false);
   }
 });
