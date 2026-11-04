@@ -30,11 +30,12 @@ const sleep = (ms, signal) =>
     signal.addEventListener("abort", aborted, { once: true });
   });
 export class ManagerConnection {
-  constructor({ api, user, onState = () => {}, onTiming = () => {}, timingVersion = 1, WebSocketImpl = WebSocket }) {
+  constructor({ api, user, onState = () => {}, onTiming = () => {}, onPresence = () => {}, timingVersion = 1, WebSocketImpl = WebSocket }) {
     this.api = api;
     this.user = user;
     this.onState = onState;
     this.onTiming = onTiming;
+    this.onPresence = onPresence;
     this.timingVersion = timingVersion === 2 ? 2 : 1;
     this.WebSocketImpl = WebSocketImpl;
     this.waiters = [];
@@ -70,6 +71,14 @@ export class ManagerConnection {
       `/gates/${encodeURIComponent(systemId)}/identity`,
     );
     this.requireOpen();
+    // Advisory only: a gate without recent polls is told apart from a slow
+    // one at once, while the demand below still waits for it.
+    void this.api(`/gates/${encodeURIComponent(systemId)}/presence`).then(
+      (presence) => {
+        if (!this.closed && presence?.communicating === false) this.onPresence(presence);
+      },
+      () => {},
+    );
     const clientPublicKey = bytesHex(
       await crypto.subtle.exportKey("raw", this.key.publicKey),
     );
@@ -361,6 +370,44 @@ export class ManagerConnection {
     return value;
   }
   async exportCollection(collection, onProgress = () => {}) {
+    try {
+      return await this.exportCollectionBulk(collection, onProgress);
+    } catch (error) {
+      // Collections created by invitations have no bulk index; the gate asks
+      // for its paged list instead, as the mobile app already does.
+      if (!["UNSUPPORTED_COMMAND", "UNSUPPORTED_MTU"].includes(error?.message)) throw error;
+      return this.listCollection(collection);
+    }
+  }
+  async listCollection(collection) {
+    const capacity = this.collectionCapacity(collection);
+    const cmd = collection === "USERS" ? "ADMIN_LIST_USERS" : "ADMIN_LIST_ADMINS";
+    const maximum = this.capabilities?.data?.limits?.maxPageItems;
+    let limit = Number.isInteger(maximum) && maximum > 0 ? maximum : 20;
+    for (let restarts = 0; ; restarts++) {
+      const rows = [];
+      const seen = new Set();
+      let cursor = null;
+      try {
+        for (;;) {
+          const page = (await this.command(cmd, { page: { limit, cursor }, query: "" })).data;
+          if (!Array.isArray(page?.items)) throw new Error("INVALID_EXPORT");
+          // Large profiles can exhaust the response byte budget before the item limit.
+          if (page.items.length) limit = Math.min(limit, page.items.length);
+          rows.push(...page.items);
+          if (rows.length > capacity) throw new Error("INVALID_EXPORT");
+          cursor = page.page?.hasMore ? page.page.nextCursor : null;
+          if (page.page?.hasMore && (!cursor || seen.has(cursor))) throw new Error("INVALID_EXPORT");
+          if (!cursor) return rows;
+          seen.add(cursor);
+        }
+      } catch (error) {
+        // The list changed under the cursor: read it again from page 1.
+        if (error?.message !== "STALE_CURSOR" || cursor === null || restarts >= 3) throw error;
+      }
+    }
+  }
+  async exportCollectionBulk(collection, onProgress) {
     if (this.transfer) throw new Error("BUSY");
     const capacity = this.collectionCapacity(collection);
     this.transfer = true;

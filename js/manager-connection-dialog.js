@@ -96,6 +96,11 @@ export function createManagerConnectionDialog({
           "סימולציה בלבד. אין חיבור למערכת פיזית.",
           "Simulation only. No physical system is being connected.",
         )
+      : options.offline && step === 0
+        ? t(
+            "המערכת לא יצרה קשר עם הענן בדקות האחרונות. ודאו באפליקציה, במסך רשת, שהשער מחובר ל־Wi‑Fi. ממשיכים להמתין.",
+            "The system has not contacted the cloud in the last few minutes. In the app, check under Network that the gate is connected to Wi‑Fi. Still waiting.",
+          )
       : extended
         ? t(
             "זה לוקח יותר זמן מהרגיל. ממשיכים להמתין למערכת; אפשר לבטל ולנסות שוב מאוחר יותר.",
@@ -361,6 +366,11 @@ export function createManagerConnectionDialog({
       options.softWaitMs = value?.timingVersion === 2 && value?.softWaitMs === 120000 ? 120000 : 60000;
       tick();
       scheduleSoftWait();
+    },
+    setOffline() {
+      if (!dialog || dialog.dataset.state !== "pending") return;
+      options.offline = true;
+      tick();
     },
     setStage,
     complete,

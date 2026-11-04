@@ -251,6 +251,38 @@ test("Manager verifies the complete encrypted export before returning any rows",
   assert.equal(c.transfer, false);
 });
 
+test("Manager export reads the paged list when the gate has no bulk index", async () => {
+  const c = new ManagerConnection({ api: async () => ({}), user: { uid: "fixture" } });
+  c.session = makeSession();
+  c.capabilities = { data: { limits: { maxUsers: 5000, maxAdmins: 20, maxPageItems: 2 } } };
+  const items = [{ name: "A" }, { name: "B" }, { name: "C" }];
+  const calls = [];
+  let stale = true;
+  c.command = async (cmd, payload) => {
+    calls.push([cmd, payload?.page?.cursor ?? null]);
+    if (cmd === "ADMIN_EXPORT_BEGIN") throw new Error("UNSUPPORTED_COMMAND");
+    assert.equal(cmd, "ADMIN_LIST_USERS");
+    assert.equal(c.transfer, false);
+    if (payload.page.cursor === "p2" && stale) {
+      stale = false;
+      throw new Error("STALE_CURSOR");
+    }
+    return payload.page.cursor === "p2"
+      ? { data: { items: items.slice(2), page: { hasMore: false, nextCursor: null } } }
+      : { data: { items: items.slice(0, 2), page: { hasMore: true, nextCursor: "p2" } } };
+  };
+  assert.deepEqual(await c.exportCollection("USERS"), items);
+  assert.deepEqual(calls.map(([cmd, cursor]) => `${cmd}:${cursor}`), [
+    "ADMIN_EXPORT_BEGIN:null",
+    "ADMIN_LIST_USERS:null",
+    "ADMIN_LIST_USERS:p2",
+    "ADMIN_LIST_USERS:null",
+    "ADMIN_LIST_USERS:p2",
+  ]);
+  c.command = async () => { throw new Error("STORAGE_IO"); };
+  await assert.rejects(c.exportCollection("USERS"), /STORAGE_IO/);
+});
+
 
 test("history allows a slow safe SD remount without changing other command waits", async () => {
   for (const [cmd, explicit, expected] of [["ADMIN_LIST_HISTORY", undefined, 35000], ["ADMIN_GET_STORAGE_HEALTH", undefined, 15000], ["ADMIN_GET_OVERVIEW", undefined, 15000], ["ADMIN_LIST_HISTORY", 2500, 2500]]) {

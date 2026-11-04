@@ -1652,6 +1652,10 @@ export function createManagerDashboard({
         if (closed || epoch !== generation || failureShown) return;
         connectionDialog.setTiming(timing);
       },
+      onPresence: () => {
+        if (closed || epoch !== generation || failureShown) return;
+        connectionDialog.setOffline();
+      },
       onState: (state) => {
         if (closed || epoch !== generation || failureShown) return;
         if (["waiting", "connecting", "active"].includes(state)) {
