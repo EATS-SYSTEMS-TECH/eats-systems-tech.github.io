@@ -23,6 +23,25 @@ const element = (tag, text, className) => {
   return node;
 };
 
+const directoryIcon = key => {
+  const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  icon.setAttribute("viewBox", "0 0 24 24");
+  icon.setAttribute("aria-hidden", "true");
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", {
+    overview: "M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z",
+    accounts: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8M17 4a4 4 0 0 1 0 8M22 21v-2a4 4 0 0 0-3-3.87",
+    organizations: "M4 21V3h12v18M16 9h4v12M2 21h20M8 7h4M8 11h4M8 15h4",
+    owner: "m2 5 5 4 5-6 5 6 5-4-3 12H5ZM5 21h14",
+    admin: "m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6ZM8 12l3 3 5-6",
+    staff: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8m7 8 2 2 4-4",
+    viewer: "M2 12s4-8 10-8 10 8 10 8-4 8-10 8S2 12 2 12Zm7 0a3 3 0 1 0 6 0 3 3 0 0 0-6 0",
+    add: "M12 5v14M5 12h14",
+  }[key] ?? "M4 6h16M4 12h16M4 18h16");
+  icon.append(path);
+  return icon;
+};
+
 export function createPlatformAdminDirectory({
   root,
   user,
@@ -72,16 +91,18 @@ export function createPlatformAdminDirectory({
   const counts = element("div", null, "platform-admin-counts");
   const filters = element("nav", null, "platform-admin-filters");
   filters.setAttribute("aria-label", t("סינון משתמשים", "Filter people"));
-  for (const [label, choices] of [
-    [t("סקירה כללית", "Overview"), [["all", t("כל החשבונות", "All accounts")]]],
-    [t("חשבונות פלטפורמה", "Platform accounts"), [["admin", t("מייסדים", "Founders")], ["user", t("משתמשים", "Users")]]],
-    [t("ארגונים וחברות בארגון", "Organizations and membership"), [["organizations", t("ארגונים", "Organizations")], ["organization-users", t("משתמשי ארגון", "Organization users")]]],
+  for (const [key, label, description, choices] of [
+    ["overview", t("סקירה כללית", "Overview"), t("כל החשבונות במקום אחד", "Every account, one view"), [["all", t("כל החשבונות", "All accounts")]]],
+    ["accounts", t("חשבונות פלטפורמה", "Platform accounts"), t("גישה אישית למוצרי WIFIGATE", "Personal access to WIFIGATE products"), [["admin", t("מייסדים", "Founders")], ["user", t("משתמשים", "Users")]]],
+    ["organizations", t("ארגונים וחברות בארגון", "Organizations and membership"), t("ארגונים, צוותים ותפקידים", "Workspaces, teams and roles"), [["organizations", t("ארגונים", "Organizations")], ["organization-users", t("משתמשי ארגון", "Organization users")]]],
   ]) {
     const group = element("div", null, "platform-admin-filter-group");
     group.setAttribute("role", "group");
     group.setAttribute("aria-label", label);
     const choicesRow = element("div", null, "platform-admin-filter-choices");
-    group.append(element("strong", label, "platform-admin-filter-label"), choicesRow);
+    const groupLabel = element("strong", null, "platform-admin-filter-label");
+    groupLabel.append(directoryIcon(key), element("span", label));
+    group.append(groupLabel, element("small", description, "platform-admin-filter-description"), choicesRow);
     for (const [role, text] of choices) {
       const button = element("button", text, "platform-button");
       button.type = "button";
@@ -98,8 +119,10 @@ export function createPlatformAdminDirectory({
   }
   const membershipFilters = element("nav", null, "platform-admin-membership-filters");
   membershipFilters.setAttribute("aria-label", t("סינון לפי תפקיד בארגון", "Filter by organization role"));
+  membershipFilters.append(element("span", t("תפקיד בארגון", "Organization role"), "platform-admin-membership-label"));
   for (const role of ["all", ...organizationRoles]) {
-    const button = element("button", role === "all" ? t("כל התפקידים", "All roles") : roleHeading(role), "platform-button");
+    const button = element("button", null, "platform-button");
+    button.append(directoryIcon(role === "all" ? "overview" : role), element("span", role === "all" ? t("כל התפקידים", "All roles") : roleHeading(role)));
     button.type = "button";
     button.dataset.organizationRole = role;
     button.addEventListener("click", () => { selectedOrganizationRole = role; renderOrganizations(); });
@@ -170,6 +193,7 @@ export function createPlatformAdminDirectory({
     actionStatus.textContent=t("הארגון נוצר בהצלחה.","Organization created successfully.");
   }}) : null;
   const createOrganization = element("button",t("יצירת ארגון חדש","Create organization"),"platform-button platform-admin-create-organization");
+  createOrganization.prepend(directoryIcon("add"));
   createOrganization.type="button";createOrganization.hidden=true;
   createOrganization.addEventListener("click",()=>organizationActions?.open(selectedProduct));
   if(organizationActions)listToolbar.append(createOrganization);
@@ -371,11 +395,15 @@ export function createPlatformAdminDirectory({
       section.dataset.organizationRole = role;
       const people = peopleForRole(organization, role);
       const heading = element("h5", roleHeading(role));
+      heading.prepend(directoryIcon(role));
       heading.append(element("span", String(people.length), "platform-admin-membership-count"));
       section.append(heading);
       const list = element("ul", null, "platform-admin-organization-members");
       for (const member of people) {
         const row = element("li");
+        const avatar = element("span", member.email.slice(0, 1).toUpperCase(), "platform-admin-member-avatar");
+        avatar.setAttribute("aria-hidden", "true");
+        row.append(avatar);
         const email = element("strong", member.email); email.dir = "ltr";
         row.append(email);
         for (const [product, access] of member.accesses) {
