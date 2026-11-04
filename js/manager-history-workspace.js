@@ -66,7 +66,7 @@ export function renderManagerHistoryDays(content, { days, language, guests, more
   if (!list.childElementCount) list.append(node("p", t("אין עדיין היסטוריה זמינה במערכת.", "No system history is available yet."), "manager-history-empty"));
   if (moreButton) { moreButton.classList.add("manager-history-more-days"); workspace.append(moreButton); }
 }
-export function renderManagerHistoryRecords(content, { rows, language, guests, day, backButton, moreButton, exportButton }) {
+export function renderManagerHistoryRecords(content, { rows, language, guests, day, backButton, moreButton, exportButton, undecryptable = 0 }) {
   const he = language === "he", t = (h,e) => he ? h : e;
   const workspace = node("section", undefined, "manager-history-workspace");
   const header = heading(language, guests, managerHistoryDay(day, language));
@@ -78,7 +78,13 @@ export function renderManagerHistoryRecords(content, { rows, language, guests, d
   const summary = node("div", undefined, "manager-history-summary");
   summary.append(node("span", rows.length === 1 ? t("רשומה אחת נטענה", "1 record loaded") : t(`${rows.length} רשומות שנטענו`, `${rows.length} records loaded`)), node("span", t("השעות מוצגות לפי שעון המערכת", "Times follow the system clock")));
   workspace.append(summary);
-  if (!rows.length) workspace.append(node("p", guests ? t("אין פעילות אורחים ברשומות שנטענו ליום זה.", "No guest activity in the records loaded for this day.") : t("אין רשומות שנטענו ליום זה.", "No records loaded for this day."), "manager-history-empty"));
+  // The rows exist on the card but were written under a different key of this
+  // system (for example before it was provisioned again); nothing was lost.
+  if (undecryptable > 0) workspace.append(node("p", undecryptable === 1
+    ? t("רשומה אחת ביום זה שמורה במערכת אך אינה ניתנת לפענוח במפתח הנוכחי של המערכת. היא נכתבה לפני שהמערכת קיבלה מפתח חדש, ולכן לא תוצג.", "1 record from this day is stored on the system but cannot be decrypted with its current key. It was written before the system received a new key, so it is not shown.")
+    : t(`${undecryptable} רשומות ביום זה שמורות במערכת אך אינן ניתנות לפענוח במפתח הנוכחי של המערכת. הן נכתבו לפני שהמערכת קיבלה מפתח חדש, ולכן לא יוצגו.`, `${undecryptable} records from this day are stored on the system but cannot be decrypted with its current key. They were written before the system received a new key, so they are not shown.`),
+    "manager-history-undecryptable"));
+  if (!rows.length && !undecryptable) workspace.append(node("p", guests ? t("אין פעילות אורחים ברשומות שנטענו ליום זה.", "No guest activity in the records loaded for this day.") : t("אין רשומות שנטענו ליום זה.", "No records loaded for this day."), "manager-history-empty"));
   else {
     const wrap = node("div", undefined, "manager-table-wrap");
     const table = node("table", undefined, "manager-table manager-history-table");

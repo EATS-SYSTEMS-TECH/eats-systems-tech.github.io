@@ -826,6 +826,7 @@
 .manager-control-workspace .manager-history-result[data-state="done"] { background:#edf8f2; color:#176344; }
 .manager-control-workspace .manager-history-result[data-state="refused"] { background:#fff0f0; color:#ac2938; }
 .manager-control-workspace .manager-history-empty { padding:28px; margin:0; background:#fafbfe; border:1px dashed #dce4ee; border-radius:14px; color:#61748a; line-height:1.8; text-align:center; font-size:14px; }
+.manager-control-workspace .manager-history-undecryptable { padding:14px 18px; margin:0 0 12px; background:#fff8eb; border:1px solid #f3d9a4; border-radius:14px; color:#6b4a12; line-height:1.7; font-size:14px; }
 .manager-control-workspace .manager-history-footer { display:flex; align-items:center; justify-content:space-between; gap:16px; color:#66788e; font-size:12px; }
 @media(max-width:700px) {
   .manager-control-workspace .manager-history-tools { width:100%; }

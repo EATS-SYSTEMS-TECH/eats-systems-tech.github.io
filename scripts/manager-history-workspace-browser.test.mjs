@@ -24,9 +24,10 @@ test("History/guest views localize codes, paginate without duplicate tables, exp
           window.historyCalls.push({command,payload});
           if(command!=='ADMIN_LIST_HISTORY')return super.command(command,payload);
           if(window.historyFailure)throw Object.assign(new Error(window.historyFailure),{code:window.historyFailure});
-          if(!payload.dayKey)return {data:payload.page.cursor?{days:[['20261027',25],['20261026',0]],page:{nextCursor:null}}:{days:[['20261027',25]],page:{nextCursor:'days-2'}}};
+          if(!payload.dayKey)return {data:payload.page.cursor?{days:[['20261027',25],['20261026',0],['20261025',17]],page:{nextCursor:null}}:{days:[['20261027',25]],page:{nextCursor:'days-2'}}};
           const rows=Array.from({length:25},(_,i)=>[i,1793098720+i,180,0,0,1,3,i%2?2:3,i===2?1:0,0,0,0,0,(i%2?'System member ':'Guest visitor ')+i,'']);
           const start=Number(payload.page.cursor||0);
+          if(payload.dayKey==='20261025')return {data:{items:[],page:{nextCursor:null,scanned:17,undecryptable:17}}};
           return {data:{items:payload.dayKey==='20261027'?rows.slice(start,start+20):[],page:{nextCursor:payload.dayKey==='20261027'&&start===0?'20':null}}};
         }
       }
@@ -40,7 +41,7 @@ test("History/guest views localize codes, paginate without duplicate tables, exp
     const content=page.locator('#manager-content');
     await content.locator('[data-history-day="20261027"]').waitFor();
     await content.getByRole('button',{name:copy('ימים נוספים','More days'),exact:true}).click();
-    assert.equal(await content.locator('[data-history-day]').count(),2,'duplicate days are not repeated');
+    assert.equal(await content.locator('[data-history-day]').count(),3,'duplicate days are not repeated');
     await content.locator('[data-history-day="20261027"]').click();
     assert.equal(await content.locator('tbody tr').count(),20);
     assert.deepEqual(await content.locator('thead th').allTextContents(),he?['מועד','פעולה','מקור הפעולה','פרטי משתמש','תוצאה']:['When','Action','Source','Person','Result']);
@@ -68,6 +69,14 @@ test("History/guest views localize codes, paginate without duplicate tables, exp
     await content.getByRole('button',{name:copy('ימים נוספים','More days'),exact:true}).click();
     await content.locator('[data-history-day="20261026"]').click();
     assert.equal(await content.getByRole('button',{name:copy('ייצוא הנתונים המוצגים','Export displayed data'),exact:true}).isDisabled(),true);
+    assert.equal(await content.locator('.manager-history-undecryptable').count(),0);
+    // A day whose rows this system's current key cannot read says so instead of looking empty.
+    await content.getByRole('button',{name:copy('חזרה לימים','Back to days'),exact:true}).click();
+    await content.getByRole('button',{name:copy('ימים נוספים','More days'),exact:true}).click();
+    await content.locator('[data-history-day="20261025"]').click();
+    assert.match(await content.locator('.manager-history-undecryptable').textContent(),he?/17 רשומות.*אינן ניתנות לפענוח/:/17 records.*cannot be decrypted/);
+    assert.equal(await content.locator('.manager-history-empty').count(),0,'unreadable records are not presented as an empty day');
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
     for(const code of ['STORAGE_IO','STORAGE_RECOVERY_REQUIRED']){
       await page.evaluate(code=>{window.historyFailure=code;},code);
       await page.locator('[data-tab="history"]').click();

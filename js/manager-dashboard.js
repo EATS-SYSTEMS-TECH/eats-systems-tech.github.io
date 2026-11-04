@@ -94,6 +94,7 @@ export function createManagerDashboard({
     currentGate,
     currentTab = "overview",
     currentRows = [],
+    currentUndecryptable = 0,
     currentData,
     cursor = null,
     currentView = "",
@@ -1988,9 +1989,13 @@ export function createManagerDashboard({
       currentRows = more ? [...currentRows, ...rows] : rows;
       cursor = r.data.page?.nextCursor ?? r.data.page?.cursor ?? null;
       if (cmd === "ADMIN_LIST_HISTORY") {
+        // Intact records the gate's current key cannot read (firmware 10.26.54+).
+        const refused = Number(r.data.page?.undecryptable) || 0;
+        currentUndecryptable = (more ? currentUndecryptable : 0) + refused;
         const visibleRows = currentRows.filter(row => tab !== "guests" || row[7] === 3);
         renderManagerHistoryRecords(content, {
           rows: visibleRows, language, guests: tab === "guests", day: payload.dayKey,
+          undecryptable: currentUndecryptable,
           backButton: button(t("חזרה לימים", "Back to days"), () => showTab(tab)),
           exportButton: button(t("ייצוא הנתונים המוצגים", "Export displayed data"), () => exportRows(visibleRows)),
           moreButton: cursor ? button(t("טען עוד", "Load more"), () =>
