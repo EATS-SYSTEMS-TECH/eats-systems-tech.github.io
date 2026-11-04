@@ -79,8 +79,8 @@ export function createPlatformOrganizationActions({
         email.disabled = !manager;
         ownership.textContent = manager
           ? t(
-              "הארגון ישויך לחשבון Manager הקיים של הבעלים שתבחרו. שלושת הארגונים הראשונים כלולים; כל ארגון נוסף מוסיף $1 לאומדן החודשי. מנהלי WIFIGATE פטורים.",
-              "The organization belongs to the selected owner’s existing Manager account. The first three organizations are included; each additional organization adds $1 to the monthly estimate. WIFIGATE administrators are exempt.",
+              "הארגון ישויך לחשבון Manager הקיים של הבעלים שתבחרו. שלושת הארגונים הראשונים כלולים; כל ארגון נוסף מוסיף $1 לאומדן החודשי. מייסדי WIFIGATE פטורים.",
+              "The organization belongs to the selected owner’s existing Manager account. The first three organizations are included; each additional organization adds $1 to the monthly estimate. Founders are exempt.",
             )
           : t(
               "הארגון ייווצר בבעלות החשבון שלכם. אפשר להוסיף אנשים לאחר היצירה.",

@@ -50,7 +50,7 @@ const english = {
   hostPendingDetail:
     "You're invited to join an organization. Open Host to accept.",
   reasonNoPlan: "Not in your account. Contact us to join.",
-  reasonPending: "A WIFIGATE administrator needs to approve your access first.",
+  reasonPending: "A Founder needs to approve your access first.",
   reasonBlocked: "Access is blocked. Contact your administrator.",
   reasonMfa: "Verify your authenticator on the products page first.",
   reasonUnavailable: "Can't be checked right now. Try again soon.",
@@ -102,7 +102,7 @@ const english = {
   deleting: "Deleting your account...",
   deleteGateNote:
     "Gate controllers keep their own user lists. To be removed from a gate, ask its administrator.",
-  deleteAdmin: "A WIFIGATE administrator account is removed by another administrator.",
+  deleteAdmin: "A Founder account is removed by another Founder.",
   deleteReview:
     "This account can't be closed automatically. Contact support@wifigate.io.",
   deleteIncomplete:
@@ -159,7 +159,7 @@ const hebrew = {
   managerPendingDetail: "ארגון ביקש לצרף אתכם. פתחו את Manager כדי לאשר.",
   hostPendingDetail: "ארגון ביקש לצרף אתכם. פתחו את Host כדי לאשר.",
   reasonNoPlan: "לא כלול בחשבון שלכם. צרו קשר כדי להצטרף.",
-  reasonPending: "מנהל WIFIGATE צריך לאשר קודם את הגישה שלכם.",
+  reasonPending: "מייסד WIFIGATE צריך לאשר קודם את הגישה שלכם.",
   reasonBlocked: "הגישה חסומה. פנו למנהל.",
   reasonMfa: "קודם מאמתים את אפליקציית האימות בעמוד המוצרים.",
   reasonUnavailable: "לא ניתן לבדוק כרגע. נסו שוב בעוד רגע.",
@@ -210,7 +210,7 @@ const hebrew = {
   deleting: "מוחקים את החשבון...",
   deleteGateNote:
     "לבקרי השערים יש רשימת משתמשים משלהם. להסרה משער, פנו למנהל השער.",
-  deleteAdmin: "חשבון של מנהל WIFIGATE נמחק על ידי מנהל אחר.",
+  deleteAdmin: "חשבון של מייסד WIFIGATE נמחק על ידי מייסד אחר.",
   deleteReview: "אי אפשר לסגור את החשבון הזה אוטומטית. פנו אל support@wifigate.io.",
   deleteIncomplete: "הנתונים שלכם נמחקו. יש לנסות שוב כדי לסיים את מחיקת ההתחברות.",
   deleteFailed: "לא הצלחנו למחוק את החשבון. שום דבר לא השתנה. נא לנסות שוב.",

@@ -16,7 +16,7 @@ export function createPlatformAccountDeletion({user, language, ensureRecent, onC
     ACCOUNT_DELETION_REVIEW_REQUIRED: t("לחשבון זה נדרשת בדיקת תמיכה לפני מחיקה. לא בוצעה מחיקה חלקית.", "This account needs a support review before deletion. No partial cleanup was performed."),
     ACCOUNT_DELETION_INCOMPLETE: t("הגישה והנתונים בענן הוסרו. נסו שוב כדי להשלים את הסרת ההתחברות.", "Cloud access and data were removed. Retry to finish removing the sign-in."),
   }[error?.code] || (error?.status === 403
-    ? t("נדרשת הרשאת WIFIGATE Admin והתחברות עדכנית עם אימות דו־שלבי.", "A WIFIGATE Admin with a recent two-factor sign-in is required.")
+    ? t("נדרשת הרשאת מייסד והתחברות עדכנית עם אימות דו־שלבי.", "A Founder with a recent two-factor sign-in is required.")
     : t("המחיקה לא הושלמה. אפשר לנסות שוב.", "Deletion did not complete. You can try again.")));
 
   return {

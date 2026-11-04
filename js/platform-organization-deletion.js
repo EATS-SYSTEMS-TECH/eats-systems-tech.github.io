@@ -134,8 +134,8 @@ export function createPlatformOrganizationDeletion({
                     )
                   : error?.status === 403
                     ? t(
-                        "נדרשת הרשאת WIFIGATE Admin והתחברות עדכנית עם אימות דו־שלבי.",
-                        "A WIFIGATE Admin with a recent two-factor sign-in is required.",
+                        "נדרשת הרשאת מייסד והתחברות עדכנית עם אימות דו־שלבי.",
+                        "A Founder with a recent two-factor sign-in is required.",
                       )
                     : t(
                         "לא ניתן להשלים את המחיקה. אפשר לנסות שוב.",

@@ -1,4 +1,5 @@
 import { renderManagerOrganization } from "./manager-organization.js";
+import { planRoleName, organizationRoleName } from "./role-names.js";
 import { createManagerOrganizationPicker } from "./manager-organization-picker.js";
 import { organizeManagerPeople } from "./manager-people-workspace.js";
 import { renderManagerHistoryDays, renderManagerHistoryRecords } from "./manager-history-workspace.js";
@@ -522,7 +523,7 @@ export function createManagerDashboard({
         });
         platformHeader.append(
           back,
-          node("span", "WIFIGATE Manager Admin", "manager-role-badge"),
+          node("span", planRoleName("admin", language), "manager-role-badge"),
           home,
           node(
             "p",
@@ -627,7 +628,7 @@ export function createManagerDashboard({
   }
   function directoryLabel(role) {
     return {
-      admin: t("מנהלי פלטפורמה", "Platform admins"),
+      admin: t("מייסדים", "Founders"),
       user: t("לקוחות", "Customers"),
       "organization-admin": t("מנהלי ארגונים", "Organization admins"),
     }[role];
@@ -661,16 +662,7 @@ export function createManagerDashboard({
     return svg;
   }
   function roleName(role) {
-    return (
-      {
-        admin: "WIFIGATE Manager Admin",
-        user: "WIFIGATE Manager User",
-        "organization-admin": "WIFIGATE Manager Organization Admin",
-        "organization-user": "WIFIGATE Manager Organization Staff",
-        "organization-staff": "WIFIGATE Manager Organization Staff",
-        "organization-viewer": "WIFIGATE Manager Organization Viewer",
-      }[role] ?? t("ממתין להרשאה", "Access pending")
-    );
+    return (["admin", "user"].includes(role) ? planRoleName(role, language) : organizationRoleName(role, language)) || t("ממתין להרשאה", "Access pending");
   }
   function beginView(key) {
     stop();
@@ -761,7 +753,7 @@ export function createManagerDashboard({
       [
         "admins",
         directoryLabel("admin"),
-        t("ניהול מנהלים", "Manage admins"),
+        t("ניהול מייסדים", "Manage founders"),
         () => showDirectory("admin"),
       ],
       [
@@ -1450,7 +1442,7 @@ export function createManagerDashboard({
         ),
       );
       card.append(
-        node("span", "WIFIGATE Manager User", "manager-role-badge"),
+        node("span", planRoleName("user", language), "manager-role-badge"),
         button(
           status === "active"
             ? t("ביטול גישה", "Revoke access")
@@ -1493,8 +1485,8 @@ export function createManagerDashboard({
         const created = await dialogs.form({
           title: t("הוספת לקוח", "Add customer"),
           message: t(
-            "הזינו כתובת אימייל מאומתת להפעלת חשבון WIFIGATE Manager User. אין דרישת תשלום או כרטיס בשלב זה.",
-            "Enter a verified email address to enable a WIFIGATE Manager User account. No payment or card is required in this phase.",
+            "הזינו כתובת אימייל מאומתת להפעלת חשבון User. אין דרישת תשלום או כרטיס בשלב זה.",
+            "Enter a verified email address to enable a User account. No payment or card is required in this phase.",
           ),
           fields: [
             [

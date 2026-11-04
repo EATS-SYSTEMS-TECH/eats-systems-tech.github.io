@@ -1,5 +1,5 @@
 import { reservationAdminIcon as icon } from "./reservations-admin-icons.js";
-// WIFIGATE Reservations in WIFIGATE Admin: the dedicated reservations
+// WIFIGATE Reservations in Founder: the dedicated reservations
 // page (/dashboard/reservations/), apart
 // from the For Business products. The backend requires the global WIFIGATE
 // Admin with TOTP on every request.

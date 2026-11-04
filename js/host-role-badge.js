@@ -1,24 +1,24 @@
 import { hostText } from "./host-locale.js";
 const descriptions = {
   "host-admin": [
-    "WIFIGATE Host Admin",
+    "Founder",
     "Runs the WIFIGATE platform. Authenticator required.",
   ],
   "host-user": [
-    "WIFIGATE Host User",
+    "User",
     "The paying customer: a Host plan with My systems and a monthly subscription.",
   ],
   owner: [
-    "Owner",
+    "Organization Owner",
     "Manages the organization, team, API keys and connections, and everything else. Billing belongs to the paying Host User.",
   ],
   admin: [
-    "Admin",
+    "Organization Admin",
     "Manages systems, bookings, guest links, connections and activity.",
   ],
-  staff: ["Staff", "Manages bookings, guest links and daily activity."],
+  staff: ["Organization Staff", "Manages bookings, guest links and daily activity."],
   viewer: [
-    "Viewer",
+    "Organization Viewer",
     "Views the calendar, bookings and systems without making changes.",
   ],
 };

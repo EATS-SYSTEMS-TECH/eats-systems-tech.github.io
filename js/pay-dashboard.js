@@ -5,6 +5,7 @@ import { createManagerOrganizationCard, createOrganizationLogo } from "./manager
 import { createManagerOrganizationPicker } from "./manager-organization-picker.js";
 import { createManagerActivity } from "./manager-activity.js";
 import { createOrganizationRoleCard } from "./role-guide.js";
+import { planRoleName, organizationRoleName } from "./role-names.js";
 
 const BASE = "/api/v1/pay";
 const el = (tag, text, cls) => {
@@ -184,7 +185,7 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
     banner.append(text);
     return banner;
   }
-  const organizationRole = role => ({ owner: t("בעל הארגון", "Organization owner"), admin: t("מנהל ארגון", "Organization admin"), staff: t("צוות ארגון", "Organization staff") })[role] ?? t("צפייה בנקודות ובתעריפים", "View payment points and tariffs");
+  const organizationRole = role => organizationRoleName(role, language);
   function renderNavigation() {
     organizationPicker?.destroy();
     organizationPicker = undefined;
@@ -196,7 +197,7 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
       personalNavigation.append(el("p", t("סביבת עבודה אישית", "Personal workspace"), "manager-nav-title"));
       navigation.append(personalNavigation);
       const roles = el("div", undefined, "manager-sidebar-roles");
-      const role = el("span", profile.personalRole === "admin" ? "WIFIGATE Pay Admin" : "WIFIGATE Pay User");
+      const role = el("span", planRoleName(profile.personalRole, language));
       role.dir = "ltr";
       roles.append(role);
       personalNavigation.append(roles);

@@ -1,5 +1,5 @@
 // WIFIGATE Reservations wording, Hebrew first, for the customer page
-// (/reservations/) and the WIFIGATE Admin page (/dashboard/reservations/).
+// (/reservations/) and the Founder page (/dashboard/reservations/).
 // Product names stay in English in both languages.
 
 export const productLines = Object.freeze([
@@ -120,7 +120,7 @@ const copy = {
     by_customer: "על ידכם",
     by_admin: "על ידי WIFIGATE",
     by_system: "אוטומטית",
-    // WIFIGATE Admin
+    // Founder
     adminTitle: "הזמנות",
     adminNote:
       "כל ההזמנות מחשבונות WIFIGATE. מעדכנים סטטוס, הודעה ללקוח, הערה פנימית ומספר משלוח.",
@@ -143,11 +143,11 @@ const copy = {
     customerNote: "הודעה ללקוח",
     customerNoteHint: "הלקוח רואה את ההודעה ב״ההזמנות שלי״.",
     adminNoteLabel: "הערה פנימית",
-    adminNoteHint: "רק מנהלי WIFIGATE רואים אותה.",
+    adminNoteHint: "רק מייסדי WIFIGATE רואים אותה.",
     save: "שמירה",
     saving: "שומרים…",
     saved: "נשמר.",
-    adminDenied: "המסך זמין למנהלי WIFIGATE עם אימות דו־שלבי בלבד.",
+    adminDenied: "המסך זמין למייסדי WIFIGATE עם אימות דו־שלבי בלבד.",
     openPhoto: "פתיחת תמונה {n}",
     unitSuffix: "×{n}",
   },
@@ -261,11 +261,11 @@ const copy = {
     customerNote: "Message to the customer",
     customerNoteHint: "The customer sees it under My reservations.",
     adminNoteLabel: "Internal note",
-    adminNoteHint: "Only WIFIGATE Admins see it.",
+    adminNoteHint: "Only Founders see it.",
     save: "Save",
     saving: "Saving…",
     saved: "Saved.",
-    adminDenied: "This page is for WIFIGATE Admins with two-step verification only.",
+    adminDenied: "This page is for Founders with two-step verification only.",
     openPhoto: "Open photo {n}",
     unitSuffix: "×{n}",
   },

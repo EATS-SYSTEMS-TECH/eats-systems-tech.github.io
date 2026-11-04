@@ -35,6 +35,7 @@ import { infoTip } from "./host-ui.js";
 import { renderPlatformLanguage } from "./platform-language.js";
 import { monthlyEstimate, monthlyTotal, revenueTotal, formatMoney, unavailableLabel } from "./profile-financials.js";
 import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
+import { planRoleName, organizationRoleName } from "./role-names.js";
 import { createPlatformManagementGuide, mountRoleGuideButton, openRoleGuide } from "./role-guide.js";
 import {
   createReservationsAdmin,
@@ -46,7 +47,7 @@ const copy = platformText(language);
 const selectedProduct = document.body.dataset.product;
 const managementPage = document.body.dataset.platformView === "management";
 const payManagementPage = selectedProduct === "pay" && document.body.dataset.payView === "management";
-// WIFIGATE Reservations: a WIFIGATE Admin page of its own, apart from the
+// WIFIGATE Reservations: a Founder page of its own, apart from the
 // Host | Pay | Manager products (For Business).
 const reservationsPage = document.body.dataset.platformView === "reservations";
 const adminPage = managementPage || reservationsPage;
@@ -94,7 +95,7 @@ adminTools.setAttribute("aria-labelledby", "platform-admin-tools-title");
 const adminToolsTitle = document.createElement("h2");
 adminToolsTitle.id = "platform-admin-tools-title";
 adminToolsTitle.dir = "ltr";
-adminToolsTitle.textContent = "WIFIGATE Admins only";
+adminToolsTitle.textContent = language === "he" ? "למייסדים בלבד" : "Founders only";
 const reservationsLink = document.createElement("a");
 reservationsLink.id = "platform-reservations-entry";
 reservationsLink.className = "platform-management-entry";
@@ -122,7 +123,7 @@ function setAdminToolsCollapsed(collapsed) {
   adminToolsToggle.setAttribute("aria-expanded", String(!collapsed));
   adminToolsToggle.setAttribute("aria-label", language === "he"
     ? collapsed ? "פתיחת כלי ניהול WIFIGATE" : "מזעור כלי ניהול WIFIGATE"
-    : collapsed ? "Expand WIFIGATE admin tools" : "Minimize WIFIGATE admin tools");
+    : collapsed ? "Expand Founder tools" : "Minimize Founder tools");
   adminToolsToggle.title = adminToolsToggle.getAttribute("aria-label");
   adminToolsToggle.innerHTML = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${collapsed ? "m6 15 6-6 6 6" : "M6 12h12"}"/></svg>`;
 }
@@ -423,8 +424,8 @@ function renderProducts() {
     role.className = "profile-product-role";
     const accessRole = identity.products[id].role;
     if (accessRole) {
-      role.textContent = `${productName(id)} ${accessRole === "organization-admin" ? "organization admin" : accessRole}`;
-      role.dir = "ltr";
+      role.textContent = ["admin", "user"].includes(accessRole) ? planRoleName(accessRole, language) : organizationRoleName(accessRole, language);
+      role.dir = "auto";
     }
     if (profileCard) {
       const header = document.createElement("header");
@@ -491,7 +492,7 @@ async function refresh() {
     );
     if (adminPage) {
       if (identity.platformRole !== "admin") {
-        $("#platform-status").textContent = language === "he" ? "המסך זמין למנהלי WIFIGATE בלבד." : "This page is available to WIFIGATE administrators only.";
+        $("#platform-status").textContent = language === "he" ? "המסך זמין למייסדי WIFIGATE בלבד." : "This page is available to Founders only.";
         return;
       }
       if (!identity.mfa.verified) {
@@ -531,7 +532,7 @@ async function refresh() {
         if (payManagementPage) {
           $("#product-workspace").hidden = true;
           if (identity.platformRole !== "admin" || !identity.mfa.verified) {
-            $("#platform-status").textContent = language === "he" ? "המסך זמין למנהלי WIFIGATE לאחר אימות אבטחה." : "This page requires a verified WIFIGATE administrator.";
+            $("#platform-status").textContent = language === "he" ? "המסך זמין למייסדי WIFIGATE לאחר אימות אבטחה." : "This page requires a verified Founder.";
             if (identity.platformRole === "admin") showSecurity();
             return;
           }
@@ -676,8 +677,8 @@ function renderProfileDetails() {
   for (const [label, value] of [
     [
       language === "he" ? "תפקיד בחשבון WIFIGATE" : "WIFIGATE account role",
-      identity.platformRole === "admin" ? "WIFIGATE Admin" :
-        ["host", "manager"].some(id => identity.products[id].state === "active" && identity.products[id].role === "user") ? "WIFIGATE User" :
+      identity.platformRole === "admin" ? planRoleName("admin", language) :
+        productIds.some(id => identity.products[id].state === "active" && identity.products[id].role === "user") ? planRoleName("user", language) :
         productIds.some(id => identity.products[id].organizations > 0 || ["organization-user", "organization-admin"].includes(identity.products[id].role)) ? (language === "he" ? "משתמש ארגון" : "Organization user") :
         (language === "he" ? "חשבון ללא מנוי פעיל" : "Account without an active subscription"),
     ],
@@ -747,8 +748,8 @@ function renderProfileDetails() {
 
 function pricingExplanation(product, category) {
   if (identity.platformRole === "admin") return language === "he"
-    ? "חשבונות WIFIGATE Admin פטורים מדמי מנוי, כולל דמי מינימום ותוספות ארגונים."
-    : "WIFIGATE Admin accounts have no subscription fees, including minimums and organization surcharges.";
+    ? "חשבונות מייסד פטורים מדמי מנוי, כולל דמי מינימום ותוספות ארגונים."
+    : "Founder accounts have no subscription fees, including minimums and organization surcharges.";
   const text = {
     he: {
       host: {
@@ -864,15 +865,15 @@ function renderSubscriptionPreview() {
       const note = document.createElement("p");
       note.className = "profile-cost-basis";
       note.textContent = language === "he"
-        ? exempt ? "ניהול ללא עלות למנהלי WIFIGATE. הכמויות מוצגות לצורכי ניהול בלבד." : "רכיבים בבעלותך · אומדן לחודש מלא לפני מס."
-        : exempt ? "Free for WIFIGATE administrators. Quantities are shown for management only." : "Owned components · full-month estimate before tax.";
+        ? exempt ? "ניהול ללא עלות למייסדי WIFIGATE. הכמויות מוצגות לצורכי ניהול בלבד." : "רכיבים בבעלותך · אומדן לחודש מלא לפני מס."
+        : exempt ? "Free for Founders. Quantities are shown for management only." : "Owned components · full-month estimate before tax.";
       card.insertBefore(note, card.querySelector(".product-guidance"));
     }
     const list = document.createElement("dl");
     list.className = "profile-product-billing";
     for (const [label, value, key] of [
       [id === "pay" ? (language === "he" ? "סה״כ הכנסות" : "Total revenue") : (language === "he" ? "תשלום חודשי" : "Monthly payment"),
-       id === "pay" ? revenueTotal(identity.products[id], language) : exempt ? (language === "he" ? "ללא עלות · WIFIGATE Admin" : "Free · WIFIGATE Admin") : formatMoney(estimate?.monthlyCents, estimate?.currency, language),
+       id === "pay" ? revenueTotal(identity.products[id], language) : exempt ? (language === "he" ? "ללא עלות · מייסד" : "Free · Founder") : formatMoney(estimate?.monthlyCents, estimate?.currency, language),
        id === "pay" ? "revenue" : "monthly"],
     ]) {
       const row = document.createElement("div");
@@ -894,7 +895,7 @@ function renderSubscriptionPreview() {
     }
   }
   $("#profile-subscription-total").textContent = identity.platformRole === "admin"
-    ? (language === "he" ? "ללא עלות · WIFIGATE Admin" : "Free · WIFIGATE Admin")
+    ? (language === "he" ? "ללא עלות · מייסד" : "Free · Founder")
     : monthlyTotal(identity.products, language);
 }
 

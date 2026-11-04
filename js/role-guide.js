@@ -1,8 +1,10 @@
 // One explanation of WIFIGATE For Business roles, shared by platform
 // management and the Host, Pay and Manager dashboards. Two separate levels:
-// a platform plan per person and product (Admin, User) and an organization
+// a platform plan per person and product (Founder, User) and an organization
 // role per organization and product (owner, admin, staff, viewer). Only the
 // User plan pays a monthly subscription; organization roles never do.
+
+import { planRoleName, organizationRoleName } from "./role-names.js";
 
 export const roleGuideProducts = ["host", "pay", "manager"];
 const organizationRoles = ["owner", "admin", "staff", "viewer"];
@@ -119,23 +121,23 @@ const copy = {
     subscription: "Monthly subscription",
     personalAccess: "Personal access",
     billingUnchanged: "No billing change",
-    payBilling: "Pay User access is assigned by a platform administrator. It opens My systems and My organizations without creating a subscription or changing billing. Organization roles are assigned separately.",
+    payBilling: "Pay User access is assigned by a Founder. It opens My systems and My organizations without creating a subscription or changing billing. Organization roles are assigned separately.",
     noSubscription: "No subscription",
     free: "Free",
     you: "You",
     billingTitle: "Who pays?",
     billing:
-      "Only a WIFIGATE {product} User pays a monthly subscription, for the systems in their plan. WIFIGATE Admins are exempt, and organization roles — owner included — never pay and never see billing on their own. An owner sees the organization's billing only when they are also its subscribing User.",
+      "Only a User pays a monthly subscription, for the systems in their plan. Founders are exempt, and organization roles — owner included — never pay and never see billing on their own. An owner sees the organization's billing only when they are also its subscribing User.",
     matrix: "What each organization role can do",
     permission: "Permission",
     managementTitle: "What is platform management?",
     managementLead:
-      "Platform management is the WIFIGATE Admins' console for running WIFIGATE For Business. It is separate from every organization's workspace.",
+      "Platform management is the Founders' console for running WIFIGATE For Business. It is separate from every organization's workspace.",
     managementItems: [
       [
         "people",
         "People and plans",
-        "Add, block and remove WIFIGATE Admins and Users in Host, Pay and Manager. Each plan is per product.",
+        "Add, block and remove Founders and Users in Host, Pay and Manager. Each plan is per product.",
       ],
       [
         "shield",
@@ -145,11 +147,11 @@ const copy = {
       [
         "card",
         "Subscriptions",
-        "Monthly estimates for billable subscriptions. Admins are exempt; organization employees never pay for their membership. Pay User access does not create a subscription.",
+        "Monthly estimates for billable subscriptions. Founders are exempt; organization employees never pay for their membership. Pay User access does not create a subscription.",
       ],
     ],
     managementBoundary:
-      "Platform management never opens an organization's own data. Inside an organization, an Admin acts only by the organization role they hold there.",
+      "Platform management never opens an organization's own data. Inside an organization, a Founder acts only by the organization role they hold there.",
     yourRole: "Your role in this organization",
     noRole: "You have no role in this organization",
     canDo: "You can",
@@ -174,23 +176,23 @@ const copy = {
     subscription: "מנוי חודשי",
     personalAccess: "גישה אישית",
     billingUnchanged: "ללא שינוי בחיוב",
-    payBilling: "מנהל פלטפורמה מעניק גישת Pay User. היא פותחת את המערכות שלי והארגונים שלי, בלי ליצור מנוי או לשנות חיוב. תפקידים בארגון ניתנים בנפרד.",
+    payBilling: "מייסד מעניק גישת Pay User. היא פותחת את המערכות שלי והארגונים שלי, בלי ליצור מנוי או לשנות חיוב. תפקידים בארגון ניתנים בנפרד.",
     noSubscription: "ללא מנוי",
     free: "ללא עלות",
     you: "את/ה",
     billingTitle: "מי משלם?",
     billing:
-      "רק WIFIGATE {product} User משלם מנוי חודשי, על המערכות שבתוכנית שלו. WIFIGATE Admins פטורים, ותפקידי ארגון — כולל owner — לעולם אינם משלמים ואינם רואים חיוב בזכות התפקיד בלבד. owner רואה את החיוב של הארגון רק אם הוא גם ה־User המנוי שלו.",
+      "רק משתמש משלם מנוי חודשי, על המערכות שבתוכנית שלו. מייסדים פטורים, ותפקידי ארגון — כולל owner — לעולם אינם משלמים ואינם רואים חיוב בזכות התפקיד בלבד. owner רואה את החיוב של הארגון רק אם הוא גם ה־User המנוי שלו.",
     matrix: "מה כל תפקיד בארגון יכול לעשות",
     permission: "הרשאה",
     managementTitle: "מהו ניהול הפלטפורמה?",
     managementLead:
-      "ניהול הפלטפורמה הוא מסוף העבודה של WIFIGATE Admins להפעלת WIFIGATE For Business. הוא נפרד מסביבת העבודה של כל ארגון.",
+      "ניהול הפלטפורמה הוא מסוף העבודה של מייסדי WIFIGATE להפעלת WIFIGATE For Business. הוא נפרד מסביבת העבודה של כל ארגון.",
     managementItems: [
       [
         "people",
         "אנשים ותוכניות",
-        "הוספה, חסימה והסרה של WIFIGATE Admins ו־Users ב־Host, Pay ו־Manager. כל תוכנית היא לפי מוצר.",
+        "הוספה, חסימה והסרה של מייסדים ומשתמשים ב־Host, Pay ו־Manager. כל תוכנית היא לפי מוצר.",
       ],
       [
         "shield",
@@ -200,11 +202,11 @@ const copy = {
       [
         "card",
         "מנויים",
-        "אומדן חודשי למנויים בתשלום. Admins פטורים; עובדי ארגון אינם משלמים על החברות. גישת Pay User אינה יוצרת מנוי.",
+        "אומדן חודשי למנויים בתשלום. מייסדים פטורים; עובדי ארגון אינם משלמים על החברות. גישת Pay User אינה יוצרת מנוי.",
       ],
     ],
     managementBoundary:
-      "ניהול הפלטפורמה אינו פותח את הנתונים של ארגון. בתוך ארגון, Admin פועל רק לפי תפקיד הארגון שיש לו שם.",
+      "ניהול הפלטפורמה אינו פותח את הנתונים של ארגון. בתוך ארגון, מייסד פועל רק לפי תפקיד הארגון שיש לו שם.",
     yourRole: "התפקיד שלך בארגון הזה",
     noRole: "אין לך תפקיד בארגון הזה",
     canDo: "את/ה יכול/ה",
@@ -221,7 +223,7 @@ const copy = {
 const plans = {
   en: {
     admin: [
-      "WIFIGATE's own operator: platform management, adding, blocking and removing Admins and Users, creating and removing organizations, and product access. Also My systems.",
+      "WIFIGATE's Founder: platform management, adding, blocking and removing Founders and Users, creating and removing organizations, and product access. Also My systems.",
       "Authenticator (TOTP) required. No automatic access to an organization's data — inside an organization they act by their membership role.",
     ],
     user: [
@@ -231,7 +233,7 @@ const plans = {
   },
   he: {
     admin: [
-      "המפעיל של WIFIGATE: ניהול פלטפורמה, הוספה, חסימה והסרה של Admins ו־Users, יצירה והסרה של ארגונים, והרשאות מוצר. וגם המערכות שלי.",
+      "מייסד WIFIGATE: ניהול פלטפורמה, הוספה, חסימה והסרה של מייסדים ומשתמשים, יצירה והסרה של ארגונים, והרשאות מוצר. וגם המערכות שלי.",
       "אימות דו־שלבי (TOTP) חובה. אין לו גישה אוטומטית לנתוני ארגון — בתוך ארגון הוא פועל לפי תפקיד החברות שלו.",
     ],
     user: [
@@ -243,11 +245,11 @@ const plans = {
 
 const payUserPlan = {
   en: [
-    "Personal Pay access assigned by a platform administrator: My systems and My organizations.",
+    "Personal Pay access assigned by a Founder: My systems and My organizations.",
     "This access does not create a subscription or change billing. Organization membership is separate and does not grant Pay User access.",
   ],
   he: [
-    "גישה אישית ל־Pay שמעניק מנהל פלטפורמה: המערכות שלי והארגונים שלי.",
+    "גישה אישית ל־Pay שמעניק מייסד: המערכות שלי והארגונים שלי.",
     "הגישה אינה יוצרת מנוי ואינה משנה חיוב. חברות בארגון נפרדת ממנה ואינה מעניקה גישת Pay User.",
   ],
 };
@@ -344,9 +346,9 @@ const products = {
     en: {
       roles: {
         owner:
-          "The Manager User whose account holds the organization. Everything an admin can do, plus adding, assigning and removing the organization's systems and deleting the organization.",
+          "Owns the organization through their Manager User account. Everything an Organization Admin can do, plus adding, assigning and removing the organization's systems and deleting the organization.",
         admin:
-          "Invites and removes people, changes the organization's name and logo, and opens and operates its gates remotely, Wi-Fi setup included.",
+          "Manages people and daily operations: invites and removes people, changes the organization's name and logo, and opens and operates its gates remotely, Wi-Fi setup included.",
         staff:
           "Opens and operates the organization's gates remotely, Wi-Fi setup included. Does not manage people or branding.",
         viewer:
@@ -363,9 +365,9 @@ const products = {
     he: {
       roles: {
         owner:
-          "ה־Manager User שהחשבון שלו מחזיק את הארגון. כל מה שיש ל־admin, ובנוסף: הוספה, שיוך והסרה של מערכות הארגון ומחיקת הארגון.",
+          "בעל הארגון דרך חשבון המשתמש שלו ב־Manager. כל הרשאות מנהל הארגון, ובנוסף: הוספה, שיוך והסרה של מערכות הארגון ומחיקת הארגון.",
         admin:
-          "מזמין ומסיר אנשים, משנה את שם הארגון והלוגו, ופותח ומפעיל את השערים שלו מרחוק, כולל הגדרת Wi-Fi.",
+          "מנהל אנשים ותפעול שוטף: מזמין ומסיר אנשים, משנה את שם הארגון והלוגו, ופותח ומפעיל את השערים שלו מרחוק, כולל הגדרת Wi-Fi.",
         staff:
           "פותח ומפעיל את שערי הארגון מרחוק, כולל הגדרת Wi-Fi. אינו מנהל אנשים או מיתוג.",
         viewer:
@@ -396,14 +398,9 @@ export function sharedOrganizationRole(role) {
   );
 }
 
-// "WIFIGATE Host Organization Owner", "WIFIGATE Pay User", …
-export function roleTitle(product, level, role) {
-  const name = `WIFIGATE ${productNames[product]}`;
-  if (level === "plan") return `${name} ${role === "admin" ? "Admin" : "User"}`;
-  const shared = sharedOrganizationRole(role);
-  return shared
-    ? `${name} Organization ${shared[0].toUpperCase()}${shared.slice(1)}`
-    : name;
+// The product is identified by its surrounding heading, independently of role.
+export function roleTitle(product, level, role, language) {
+  return level === "plan" ? planRoleName(role, language) : organizationRoleName(role, language);
 }
 
 export function organizationRoleSummary(product, role, language) {
@@ -417,8 +414,8 @@ function roleCard(product, level, role, text, lang, current) {
   card.dataset.role = role;
   const head = element("header", "role-guide-role__head");
   const titles = element("div", "role-guide-role__titles");
-  const name = element("h4", "role-guide-role__name", roleTitle(product, level, role));
-  name.dir = "ltr";
+  const name = element("h4", "role-guide-role__name", roleTitle(product, level, role, lang));
+  name.dir = "auto";
   const tags = element("div", "role-guide-role__tags");
   const t = copy[lang];
   const price =
@@ -454,9 +451,9 @@ function matrix(product, lang, currentRole) {
   for (const role of organizationRoles) {
     const cell = element("th");
     cell.scope = "col";
-    cell.dir = "ltr";
+    cell.dir = "auto";
     const label = element("span", "role-guide-matrix__role");
-    label.append(roleBadge("organization", role, "role-guide-avatar role-guide-avatar--small"), element("span", "", role));
+    label.append(roleBadge("organization", role, "role-guide-avatar role-guide-avatar--small"), element("span", "", organizationRoleName(role, lang)));
     cell.append(label);
     if (role === currentRole) cell.dataset.current = "true";
     head.append(cell);
@@ -543,14 +540,14 @@ function productPanel(product, lang, current = {}) {
   billingText.append(element("strong", "", t.billingTitle), element("p", "", product === "pay" ? t.payBilling : fill(t.billing, product)));
   const payers = element("div", "role-guide-billing__payers");
   for (const [icon, name, price, kind] of [
-    ["card", roleTitle(product, "plan", "user"), product === "pay" ? t.billingUnchanged : t.subscription, product === "pay" ? "access" : "paid"],
-    ["shield", roleTitle(product, "plan", "admin"), t.noSubscription, "exempt"],
-    ["building", organizationRoles.join(" · "), t.free, "free"],
+    ["card", roleTitle(product, "plan", "user", lang), product === "pay" ? t.billingUnchanged : t.subscription, product === "pay" ? "access" : "paid"],
+    ["shield", roleTitle(product, "plan", "admin", lang), t.noSubscription, "exempt"],
+    ["building", organizationRoles.map(role => organizationRoleName(role, lang)).join(" · "), t.free, "free"],
   ]) {
     const payer = element("div", "role-guide-billing__payer");
     payer.dataset.kind = kind;
     const label = element("span", "role-guide-billing__name", name);
-    label.dir = "ltr";
+    label.dir = "auto";
     payer.append(svg(icons[icon]), label, element("span", "role-guide-tag", price));
     payer.lastChild.dataset.kind = kind;
     payers.append(payer);
@@ -715,8 +712,8 @@ export function createRolePicker({
     input.checked = role === selected;
     input.disabled = Boolean(unavailable[role]);
     const texts = element("span", "role-guide-choice__texts");
-    const title = element("strong", "", `Organization ${role[0].toUpperCase()}${role.slice(1)}`);
-    title.dir = "ltr";
+    const title = element("strong", "", organizationRoleName(role, lang));
+    title.dir = "auto";
     texts.append(title, element("small", "", products[product][lang].roles[role]));
     if (unavailable[role]) texts.append(element("small", "role-guide-choice__note", unavailable[role]));
     const mark = element("span", "role-guide-choice__mark");
@@ -738,8 +735,8 @@ export function createOrganizationRoleCard({ product, language, role, plan, orga
   card.dataset.role = shared ?? "none";
   const head = element("div", "role-guide-card__head");
   const label = element("span", "role-guide-card__eyebrow", t.yourRole);
-  const name = element("strong", "role-guide-card__role", shared ? roleTitle(product, "organization", shared) : t.noRole);
-  name.dir = "ltr";
+  const name = element("strong", "role-guide-card__role", shared ? roleTitle(product, "organization", shared, language) : t.noRole);
+  name.dir = "auto";
   const texts = element("div", "role-guide-card__texts");
   texts.append(label, name);
   if (organizationName) {

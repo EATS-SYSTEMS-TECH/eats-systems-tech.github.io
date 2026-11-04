@@ -14,6 +14,7 @@ import { createPlatformAccountActions } from "./platform-account-actions.js";
 import { createPlatformOrganizationDeletion } from "./platform-organization-deletion.js";
 import { createPlatformOrganizationActions } from "./platform-organization-actions.js";
 import { createDirectorySearchLoader } from "./platform-directory-search.js";
+import { planRoleName, organizationRoleName } from "./role-names.js";
 
 const element = (tag, text, className) => {
   const node = document.createElement(tag);
@@ -57,8 +58,8 @@ export function createPlatformAdminDirectory({
   const note = element(
     "p",
     t(
-      "מנהלי WIFIGATE ובעלי גישה אישית למוצרים נספרים פעם אחת. עובדי ארגון מוצגים בנפרד ואינם משלמים מנוי על ההזמנה לארגון. גישת Pay User אינה יוצרת מנוי. הסכומים הם אומדן לפני מס, ולא אישור גבייה.",
-      "WIFIGATE administrators and people with personal product access are counted once. Organization employees appear separately and pay no subscription for their invitation. Pay User access does not create a subscription. Amounts are estimates before tax, not collected payments.",
+      "מייסדי WIFIGATE ובעלי גישה אישית למוצרים נספרים פעם אחת. עובדי ארגון מוצגים בנפרד ואינם משלמים מנוי על ההזמנה לארגון. גישת Pay User אינה יוצרת מנוי. הסכומים הם אומדן לפני מס, ולא אישור גבייה.",
+      "Founders and people with personal product access are counted once. Organization employees appear separately and pay no subscription for their invitation. Pay User access does not create a subscription. Amounts are estimates before tax, not collected payments.",
     ),
   );
   const counts = element("div", null, "platform-admin-counts");
@@ -66,8 +67,8 @@ export function createPlatformAdminDirectory({
   filters.setAttribute("aria-label", t("סינון משתמשים", "Filter people"));
   for (const [role, label] of [
     ["all", t("כל החשבונות", "All accounts")],
-    ["admin", `${productName} Admins`],
-    ["user", `${productName} Users`],
+    ["admin", t("מייסדים", "Founders")],
+    ["user", t("משתמשים", "Users")],
     ["organizations", t("ארגונים", "Organizations")],
     ["organization-users", t("משתמשי ארגון", "Organization users")],
   ]) {
@@ -275,7 +276,7 @@ export function createPlatformAdminDirectory({
     }
     for (const button of filters.children) {
       if (!["all", "organizations", "organization-users"].includes(button.dataset.role))
-        button.textContent = `${nameFor(selectedProduct)} ${button.dataset.role === "admin" ? "Admins" : "Users"}`;
+        button.textContent = button.dataset.role === "admin" ? t("מייסדים", "Founders") : t("משתמשים", "Users");
     }
   }
 
@@ -314,8 +315,8 @@ export function createPlatformAdminDirectory({
     if (owner) {
       const email = element("p", owner.email); email.dir = "ltr";
       ownerCard.append(email);
-      ownerCard.append(element("span", owner.billingExempt ? "WIFIGATE Admin" : owner.subscriptionStatus === "active" ? "WIFIGATE User" : t("ללא מנוי פעיל מאומת", "No verified active subscription")));
-      ownerCard.append(element("p", owner.billingExempt ? t("ללא עלות · WIFIGATE Admin", "Free · WIFIGATE Admin") : owner.subscriptionStatus === "active" ? monthlyTotal({host:{state:"no-plan"},manager:{state:"no-plan"},...owner.products}, language) : t("לא זמין", "Unavailable")));
+      ownerCard.append(element("span", owner.billingExempt ? planRoleName("admin", language) : owner.subscriptionStatus === "active" ? planRoleName("user", language) : t("ללא מנוי פעיל מאומת", "No verified active subscription")));
+      ownerCard.append(element("p", owner.billingExempt ? t("ללא עלות · מייסד", "Free · Founder") : owner.subscriptionStatus === "active" ? monthlyTotal({host:{state:"no-plan"},manager:{state:"no-plan"},...owner.products}, language) : t("לא זמין", "Unavailable")));
       ownerCard.append(element("small", t("אומדן המנוי הכולל של הבעלים, לפני מס. אינו חיוב נוסף לכל ארגון או עובד.", "Owner's total subscription estimate before tax. No additional charge per organization or employee.")));
     } else ownerCard.append(element("p", t("פרטי הבעלים אינם זמינים", "Owner details unavailable")));
     card.append(ownerCard);
@@ -326,7 +327,7 @@ export function createPlatformAdminDirectory({
       const email = element("strong", member.email); email.dir = "ltr";
       row.append(email, element("small", t("משתמש ארגון · ללא דמי מנוי", "Organization user · No subscription fee")));
       for (const [product, access] of Object.entries(member.products)) {
-        const role = ["admin", "organization-admin"].includes(access.role) ? t("מנהל ארגון", "Organization administrator") : t("עובד", "Employee");
+        const role = organizationRoleName(access.role, language);
         row.append(element("small", `${nameFor(product)} · ${role} · ${labels[access.status] ?? t("לא זמין", "Unavailable")}`));
       }
       people.append(row);
@@ -356,12 +357,12 @@ export function createPlatformAdminDirectory({
     identity.append(email);
     const badge = element(
       "span",
-      person.role === "admin" ? t("מנהל", "Admin") : t("משתמש", "User"),
+      planRoleName(person.role, language),
       "platform-admin-role",
     );
     badge.dataset.role = person.role;
     const exempt = person.billingExempt === true || (person.products.host?.role === "admin" && person.products.host?.state === "active");
-    const total = exempt ? t("ללא עלות · WIFIGATE Admin", "Free · WIFIGATE Admin") :
+    const total = exempt ? t("ללא עלות · מייסד", "Free · Founder") :
       selectedProduct === "all"
         ? monthlyTotal(person.products, language)
         : formatMoney(
@@ -480,8 +481,8 @@ export function createPlatformAdminDirectory({
           ? t("גישה דרך ארגון", "Organization access")
           : null;
       const personalAccess = id === "pay"
-        ? plan?.personalRole === "user" ? "Pay User"
-          : plan?.personalRole === "admin" ? "Pay Admin"
+        ? plan?.personalRole === "user" ? planRoleName("user", language)
+          : plan?.personalRole === "admin" ? planRoleName("admin", language)
           : plan?.personalAccessState === "blocked" ? t("גישה אישית חסומה", "Personal access blocked") : null
         : null;
       const access = [

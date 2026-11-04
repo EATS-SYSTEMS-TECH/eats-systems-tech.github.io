@@ -32,6 +32,7 @@ import { isLocalStaging } from "./firebase-config.js";
 import { attachPopover, firstFocusable } from "./popover.js";
 import { loadHostManagement, clearHostManagement } from "./host-management.js";
 import { mountRoleGuideButton } from "./role-guide.js";
+import { planRoleName } from "./role-names.js";
 
 // The Host dashboard shell. Access comes from GET /api/v1/platform/me alone:
 //   active + plan role (admin/user): the workspace with My systems;
@@ -119,7 +120,7 @@ function renderAccount(user) {
     if (identity?.hasPlan) {
       const role = document.createElement("span");
       role.dir = "ltr";
-      role.textContent = identity.role === Roles.ADMIN ? "WIFIGATE Host Admin" : "WIFIGATE Host User";
+      role.textContent = planRoleName(identity.role);
       workspaceRoles.append(role);
     }
   }
