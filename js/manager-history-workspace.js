@@ -85,7 +85,7 @@ export function renderManagerHistoryRecords(content, { rows, language, guests, d
     : t(`${undecryptable} רשומות ביום זה שמורות במערכת אך אינן ניתנות לפענוח במפתח הנוכחי של המערכת. הן נכתבו לפני שהמערכת קיבלה מפתח חדש, ולכן לא יוצגו.`, `${undecryptable} records from this day are stored on the system but cannot be decrypted with its current key. They were written before the system received a new key, so they are not shown.`),
     "manager-history-undecryptable"));
   if (!rows.length && !undecryptable) workspace.append(node("p", guests ? t("אין פעילות אורחים ברשומות שנטענו ליום זה.", "No guest activity in the records loaded for this day.") : t("אין רשומות שנטענו ליום זה.", "No records loaded for this day."), "manager-history-empty"));
-  else {
+  else if (rows.length) {
     const wrap = node("div", undefined, "manager-table-wrap");
     const table = node("table", undefined, "manager-table manager-history-table");
     table.setAttribute("aria-label", guests ? t("פעילות אורחים", "Guest activity") : t("היסטוריית המערכת", "System history"));

@@ -76,6 +76,7 @@ test("History/guest views localize codes, paginate without duplicate tables, exp
     await content.locator('[data-history-day="20261025"]').click();
     assert.match(await content.locator('.manager-history-undecryptable').textContent(),he?/17 רשומות.*אינן ניתנות לפענוח/:/17 records.*cannot be decrypted/);
     assert.equal(await content.locator('.manager-history-empty').count(),0,'unreadable records are not presented as an empty day');
+    assert.equal(await content.locator('table').count(),0,'no empty table under the notice');
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
     for(const code of ['STORAGE_IO','STORAGE_RECOVERY_REQUIRED']){
       await page.evaluate(code=>{window.historyFailure=code;},code);
