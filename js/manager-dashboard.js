@@ -66,7 +66,8 @@ export function createManagerDashboard({
       managerRequest(user, BASE + path, method, body));
   const dialogs = createManagerDialog({ language });
   // One listener closes an open system-actions menu on any click outside it.
-  root.addEventListener("click", (event) => {
+  document.addEventListener("click", (event) => {
+    if (!root.isConnected) return;
     for (const menu of root.querySelectorAll("details.manager-system-menu[open]"))
       if (!menu.contains(event.target)) menu.open = false;
   });

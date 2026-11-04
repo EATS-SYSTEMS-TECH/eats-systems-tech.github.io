@@ -297,3 +297,31 @@ test("history allows a slow safe SD remount without changing other command waits
     assert.equal(connection.busy, false);
   }
 });
+
+test("a user command waits for the idle keep-alive ping instead of failing BUSY", async () => {
+  const connection = new ManagerConnection({user: {}, WebSocketImpl: class {}, api: async () => ({})});
+  connection.session = {...makeSession(), seq: 1, authKey: new Uint8Array(32), clientNoncePrefix: new Uint8Array(8)};
+  const order = [];
+  let releasePing;
+  connection.next = (match) => {
+    const cmd = connection.pendingCommand;
+    order.push(`send:${cmd}`);
+    if (cmd === "ADMIN_PING") return new Promise((_, reject) => { releasePing = () => reject(new Error("PING_DONE")); });
+    return Promise.reject(new Error(`DONE:${cmd}`));
+  };
+  connection.socket = {send() {}};
+  const ping = connection.command("ADMIN_PING", {}).catch((error) => error.message);
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  const read = connection.command("ADMIN_GET_AUTO_OPEN_CONFIG", {}).catch((error) => error.message);
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.deepEqual(order, ["send:ADMIN_PING"], "the read waits while the ping is in flight");
+  releasePing();
+  assert.equal(await ping, "PING_DONE");
+  assert.equal(await read, "DONE:ADMIN_GET_AUTO_OPEN_CONFIG");
+  assert.deepEqual(order, ["send:ADMIN_PING", "send:ADMIN_GET_AUTO_OPEN_CONFIG"]);
+  // A second user command while one is in flight is still refused.
+  connection.next = () => new Promise(() => {});
+  void connection.command("ADMIN_GET_OVERVIEW", {});
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  await assert.rejects(connection.command("ADMIN_GET_GATE_CONFIG", {}), /BUSY/);
+});

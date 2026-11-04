@@ -262,6 +262,12 @@ export class ManagerConnection {
   }
   async command(cmd, payload = {}, timeout = cmd === "ADMIN_LIST_HISTORY" ? 35000 : 15000) {
     if (this.closed || !this.session) throw new Error("DISCONNECTED");
+    // The idle keep-alive must not turn a user's request into BUSY: wait for
+    // the ping to finish. A user command in flight still refuses a second one.
+    while (this.busy && this.pendingCommand === "ADMIN_PING" && cmd !== "ADMIN_PING") {
+      await this.inflight;
+      if (this.closed || !this.session) throw new Error("DISCONNECTED");
+    }
     if (this.busy) throw new Error("BUSY");
     this.busy = true;
     if (this.transfer && !/^ADMIN_(IMPORT|EXPORT)_/.test(cmd)) {
@@ -269,6 +275,8 @@ export class ManagerConnection {
       throw new Error("BUSY");
     }
     this.pendingCommand = cmd;
+    let settle;
+    this.inflight = new Promise((resolve) => { settle = resolve; });
     try {
       const command = {
         cmd,
@@ -301,6 +309,7 @@ export class ManagerConnection {
     } finally {
       this.busy = false;
       this.pendingCommand = null;
+      settle();
     }
   }
   fail(error) {
