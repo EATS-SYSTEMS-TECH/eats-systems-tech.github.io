@@ -34,7 +34,14 @@ export function createPlatformAdminDirectory({
   const t = (he, en) => (language === "he" ? he : en);
   const organizationView = () => ["organizations", "organization-users"].includes(selected);
   const directorySearch = createDirectorySearchLoader(user);
-  let searchTimer, organizationId = "", organizationItems = [];
+  let searchTimer, organizationId = "", organizationItems = [], selectedOrganizationRole = "all";
+  const organizationRoles = ["owner", "admin", "staff", "viewer"];
+  const roleHeading = role => ({
+    owner: t("בעלי ארגונים", "Organization Owners"),
+    admin: t("מנהלי ארגונים", "Organization Admins"),
+    staff: t("צוותי ארגונים", "Organization Staff"),
+    viewer: t("צופים בארגונים", "Organization Viewers"),
+  })[role];
   let closed = false,
     generation = 0,
     selected = "all",
@@ -65,23 +72,38 @@ export function createPlatformAdminDirectory({
   const counts = element("div", null, "platform-admin-counts");
   const filters = element("nav", null, "platform-admin-filters");
   filters.setAttribute("aria-label", t("סינון משתמשים", "Filter people"));
-  for (const [role, label] of [
-    ["all", t("כל החשבונות", "All accounts")],
-    ["admin", t("מייסדים", "Founders")],
-    ["user", t("משתמשים", "Users")],
-    ["organizations", t("ארגונים", "Organizations")],
-    ["organization-users", t("משתמשי ארגון", "Organization users")],
+  for (const [label, choices] of [
+    [t("סקירה כללית", "Overview"), [["all", t("כל החשבונות", "All accounts")]]],
+    [t("חשבונות פלטפורמה", "Platform accounts"), [["admin", t("מייסדים", "Founders")], ["user", t("משתמשים", "Users")]]],
+    [t("ארגונים וחברות בארגון", "Organizations and membership"), [["organizations", t("ארגונים", "Organizations")], ["organization-users", t("משתמשי ארגון", "Organization users")]]],
   ]) {
-    const button = element("button", label, "platform-button");
+    const group = element("div", null, "platform-admin-filter-group");
+    group.setAttribute("role", "group");
+    group.setAttribute("aria-label", label);
+    const choicesRow = element("div", null, "platform-admin-filter-choices");
+    group.append(element("strong", label, "platform-admin-filter-label"), choicesRow);
+    for (const [role, text] of choices) {
+      const button = element("button", text, "platform-button");
+      button.type = "button";
+      button.dataset.role = role;
+      button.addEventListener("click", () => {
+        selected = role;
+        selectedOrganizationRole = "all";
+        clearTimeout(searchTimer);search.value="";organizationId="";
+        void load();
+      });
+      choicesRow.append(button);
+    }
+    filters.append(group);
+  }
+  const membershipFilters = element("nav", null, "platform-admin-membership-filters");
+  membershipFilters.setAttribute("aria-label", t("סינון לפי תפקיד בארגון", "Filter by organization role"));
+  for (const role of ["all", ...organizationRoles]) {
+    const button = element("button", role === "all" ? t("כל התפקידים", "All roles") : roleHeading(role), "platform-button");
     button.type = "button";
-    button.dataset.role = role;
-    if (role === "organizations") button.classList.add("platform-admin-org-separator");
-    button.addEventListener("click", () => {
-      selected = role;
-      clearTimeout(searchTimer);search.value="";organizationId="";
-      void load();
-    });
-    filters.append(button);
+    button.dataset.organizationRole = role;
+    button.addEventListener("click", () => { selectedOrganizationRole = role; renderOrganizations(); });
+    membershipFilters.append(button);
   }
   const businessTitle = element("h3", t("בחרו מסלול לניהול", "Choose a product to manage"));
   const resetProduct = element(
@@ -208,8 +230,8 @@ export function createPlatformAdminDirectory({
   const hint = element(
     "p",
     t(
-      "פתחו חשבון כדי לראות תוכניות ועלויות לפי מוצר.",
-      "Open an account to see plans and costs by product.",
+      "הרחיבו כרטיס חשבון כדי לראות תוכניות ועלויות לפי מוצר.",
+      "Expand an account to see plans and costs by product.",
     ),
     "platform-admin-list-hint",
   );
@@ -226,10 +248,11 @@ export function createPlatformAdminDirectory({
     header,
     counts,
     listToolbar,
+    filters,
+    membershipFilters,
+    searchTools,
     ...(product === "all" ? [revenue] : []),
     hint,
-    filters,
-    searchTools,
     status,
     actionStatus,
     rows,
@@ -274,10 +297,7 @@ export function createPlatformAdminDirectory({
         name,
       );
     }
-    for (const button of filters.children) {
-      if (!["all", "organizations", "organization-users"].includes(button.dataset.role))
-        button.textContent = button.dataset.role === "admin" ? t("מייסדים", "Founders") : t("משתמשים", "Users");
-    }
+    membershipFilters.hidden = selected !== "organization-users";
   }
 
   function organizationCard(organization) {
@@ -298,43 +318,89 @@ export function createPlatformAdminDirectory({
     }
     return card;
   }
+  const normalizedOrganizationRole = role => ({
+    "organization-admin": "admin", "organization-user": "staff",
+    "organization-staff": "staff", "organization-viewer": "viewer",
+  })[role] ?? role;
+  const searchText = value => String(value ?? "").normalize("NFKC").toLowerCase();
+  function peopleForRole(organization, role) {
+    const people = [];
+    if (role === "owner" && organization.owner) {
+      people.push({ ...organization.owner, owner: true, accesses: Object.keys(organization.products)
+        .filter(id => selectedProduct === "all" || selectedProduct === id)
+        .map(product => [product, { role: "owner" }]) });
+    }
+    for (const member of organization.members ?? []) {
+      if (role === "owner" && member.email === organization.owner?.email) continue;
+      const accesses = Object.entries(member.products ?? {}).filter(([product, access]) =>
+        (selectedProduct === "all" || selectedProduct === product) && normalizedOrganizationRole(access.role) === role);
+      if (accesses.length) people.push({ ...member, accesses });
+    }
+    const q = searchText(search.value.trim());
+    if (!q || searchText(`${organization.name} ${organization.id}`).includes(q)) return people;
+    return people.filter(member => searchText(member.email).includes(q));
+  }
   function renderOrganizations() {
-    const q=search.value.trim().normalize("NFKC").toLowerCase();
-    const matches=organizationItems.filter(org=>(!organizationId||org.id===organizationId)&&`${org.name} ${org.id} ${org.owner?.email ?? ""} ${(org.members ?? []).map(member => member.email).join(" ")}`.normalize("NFKC").toLowerCase().includes(q));
+    const q = searchText(search.value.trim());
+    const visibleRoles = selectedOrganizationRole === "all" ? organizationRoles : [selectedOrganizationRole];
+    for (const button of membershipFilters.querySelectorAll("button"))
+      button.setAttribute("aria-pressed", String(button.dataset.organizationRole === selectedOrganizationRole));
+    const matches = organizationItems.filter(org => {
+      if (organizationId && org.id !== organizationId) return false;
+      if (selected === "organization-users") {
+        if (selectedOrganizationRole === "all" && !q) return true;
+        return visibleRoles.some(role => peopleForRole(org, role).length)
+          || ((!org.members || (selectedOrganizationRole === "owner" && !org.owner)) && (!q || searchText(`${org.name} ${org.id}`).includes(q)));
+      }
+      return searchText(`${org.name} ${org.id}`).includes(q);
+    });
     rows.classList.toggle("platform-admin-organization-columns", selected === "organization-users");
     rows.replaceChildren(...matches.map(selected === "organization-users" ? organizationPeopleCard : organizationCard));
-    status.textContent=matches.length?t(`${matches.length} ארגונים מוצגים`,`${matches.length} organizations shown`):t("לא נמצאו ארגונים תואמים.","No matching organizations found.");
+    status.textContent = matches.length
+      ? t(`${matches.length} ארגונים מוצגים`, `${matches.length} organizations shown`)
+      : t("לא נמצאו תוצאות תואמות.", "No matching results found.");
   }
 
   function organizationPeopleCard(organization) {
     const card = element("section", null, "platform-admin-organization-column");
     card.append(element("h4", organization.name));
-    const owner = organization.owner;
-    const ownerCard = element("div", null, "platform-admin-organization-owner");
-    ownerCard.append(element("strong", t("בעל הארגון", "Organization owner")));
-    if (owner) {
-      const email = element("p", owner.email); email.dir = "ltr";
-      ownerCard.append(email);
-      ownerCard.append(element("span", owner.billingExempt ? planRoleName("admin", language) : owner.subscriptionStatus === "active" ? planRoleName("user", language) : t("ללא מנוי פעיל מאומת", "No verified active subscription")));
-      ownerCard.append(element("p", owner.billingExempt ? t("ללא עלות · מייסד", "Free · Founder") : owner.subscriptionStatus === "active" ? monthlyTotal({host:{state:"no-plan"},manager:{state:"no-plan"},...owner.products}, language) : t("לא זמין", "Unavailable")));
-      ownerCard.append(element("small", t("אומדן המנוי הכולל של הבעלים, לפני מס. אינו חיוב נוסף לכל ארגון או עובד.", "Owner's total subscription estimate before tax. No additional charge per organization or employee.")));
-    } else ownerCard.append(element("p", t("פרטי הבעלים אינם זמינים", "Owner details unavailable")));
-    card.append(ownerCard);
-    const people = element("ul", null, "platform-admin-organization-members");
     const labels = { active: t("פעיל", "Active"), pending: t("ממתין", "Pending"), blocked: t("חסום", "Blocked") };
-    for (const member of organization.members ?? []) {
-      const row = element("li");
-      const email = element("strong", member.email); email.dir = "ltr";
-      row.append(email, element("small", t("משתמש ארגון · ללא דמי מנוי", "Organization user · No subscription fee")));
-      for (const [product, access] of Object.entries(member.products)) {
-        const role = organizationRoleName(access.role, language);
-        row.append(element("small", `${nameFor(product)} · ${role} · ${labels[access.status] ?? t("לא זמין", "Unavailable")}`));
+    for (const role of organizationRoles) {
+      if (selectedOrganizationRole !== "all" && selectedOrganizationRole !== role) continue;
+      const section = element("section", null, "platform-admin-membership-section");
+      section.dataset.organizationRole = role;
+      const people = peopleForRole(organization, role);
+      const heading = element("h5", roleHeading(role));
+      heading.append(element("span", String(people.length), "platform-admin-membership-count"));
+      section.append(heading);
+      const list = element("ul", null, "platform-admin-organization-members");
+      for (const member of people) {
+        const row = element("li");
+        const email = element("strong", member.email); email.dir = "ltr";
+        row.append(email);
+        for (const [product, access] of member.accesses) {
+          const state = access.status ? ` · ${labels[access.status] ?? t("לא זמין", "Unavailable")}` : "";
+          row.append(element("small", member.owner ? nameFor(product) : `${nameFor(product)} · ${organizationRoleName(role, language)}${state}`));
+        }
+        if (member.owner) {
+          row.classList.add("platform-admin-organization-owner");
+          row.append(element("small", member.billingExempt ? t("מייסד · ללא עלות", "Founder · Free") : member.subscriptionStatus === "active"
+            ? monthlyTotal({host:{state:"no-plan"},manager:{state:"no-plan"},...member.products}, language)
+            : t("נתוני המנוי אינם זמינים", "Subscription data unavailable")));
+          row.append(element("small", t("אומדן המנוי הכולל של הבעלים; אינו חיוב עבור התפקיד בארגון.", "Owner's total subscription estimate; not a fee for this organization role.")));
+        } else row.append(element("small", t("חברות בארגון · ללא דמי מנוי", "Organization membership · No subscription fee")));
+        list.append(row);
       }
-      people.append(row);
+      section.append(list);
+      if (!people.length) {
+        const unavailable = role === "owner" ? !organization.owner : !organization.members;
+        if (unavailable) heading.lastChild.textContent = "—";
+        section.append(element("p", unavailable
+          ? t("נתוני התפקיד אינם זמינים.", "Role data unavailable.")
+          : t("אין משתמשים תואמים בתפקיד זה.", "No matching people in this role."), "platform-admin-membership-empty"));
+      }
+      card.append(section);
     }
-    card.append(people);
-    if (!organization.members) card.append(element("p", t("נתוני המשתמשים אינם זמינים; נדרש עדכון השרת.", "Member data unavailable; a server update is required.")));
-    else if (!organization.members.length) card.append(element("p", t("אין עובדים משויכים לארגון", "No employees assigned to this organization")));
     return card;
   }
 
@@ -518,8 +584,8 @@ export function createPlatformAdminDirectory({
   function renderCounts(values = {}) {
     counts.replaceChildren(
       ...[
-        [`${nameFor(selectedProduct)} Admins`, values.admins],
-        [`${nameFor(selectedProduct)} Users`, values.users],
+        [t("מייסדים", "Founders"), values.admins],
+        [t("משתמשים", "Users"), values.users],
         [t("סה״כ חשבונות", "Total accounts"), values.total],
       ].map(([label, count]) => {
         const tile = element("div");
@@ -592,12 +658,13 @@ export function createPlatformAdminDirectory({
     rows.classList.remove("platform-admin-organization-columns");
     organizationLabel.hidden=!organizationView();
     createOrganization.hidden=!organizationView();
-    searchLabel.firstChild.textContent=organizationView()?t("חיפוש ארגון","Search organizations"):t("חיפוש חשבון","Search accounts");
-    search.placeholder=organizationView()?t("שם ארגון","Organization name"):t("שם או כתובת אימייל","Name or email address");
-    hint.textContent=search.value.trim()?t("החיפוש מסנן את הרשימה בלבד; סיכום ההכנסות נשאר לפי המסלול והתפקיד שנבחרו.","Search filters the list only; revenue totals still follow the selected product and role."):t("פתחו חשבון כדי לראות תוכניות ועלויות לפי מוצר.","Open an account to see plans and costs by product.");
+    searchLabel.firstChild.textContent = selected === "organization-users" ? t("חיפוש חברי ארגון", "Search organization members") : organizationView() ? t("חיפוש ארגון", "Search organizations") : t("חיפוש חשבון", "Search accounts");
+    search.placeholder = selected === "organization-users" ? t("שם ארגון או כתובת אימייל", "Organization name or email address") : organizationView() ? t("שם ארגון", "Organization name") : t("שם או כתובת אימייל", "Name or email address");
+    hint.textContent=search.value.trim()?t("החיפוש מסנן את הרשימה בלבד; סיכום ההכנסות נשאר לפי המסלול והתפקיד שנבחרו.","Search filters the list only; revenue totals still follow the selected product and role."):t("הרחיבו כרטיס חשבון כדי לראות תוכניות ועלויות לפי מוצר.","Expand an account to see plans and costs by product.");
     refresh.disabled = true;
     if (!append) {
       rows.replaceChildren();
+      organizationItems = [];
       renderCounts();
       revenue.hidden = organizationView();
       hint.hidden = organizationView();
@@ -609,7 +676,7 @@ export function createPlatformAdminDirectory({
     }
     more.hidden = true;
     status.textContent = organizationView() ? t("טוען ארגונים…", "Loading organizations…") : t("טוען משתמשים ותוכניות…", "Loading people and plans…");
-    for (const button of filters.children)
+    for (const button of filters.querySelectorAll("button[data-role]"))
       button.setAttribute(
         "aria-pressed",
         String(button.dataset.role === selected),
