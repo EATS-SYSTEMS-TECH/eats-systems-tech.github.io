@@ -65,6 +65,11 @@ export function createManagerDashboard({
     ((path, method = "GET", body) =>
       managerRequest(user, BASE + path, method, body));
   const dialogs = createManagerDialog({ language });
+  // One listener closes an open system-actions menu on any click outside it.
+  root.addEventListener("click", (event) => {
+    for (const menu of root.querySelectorAll("details.manager-system-menu[open]"))
+      if (!menu.contains(event.target)) menu.open = false;
+  });
   const confirmAction = (message) =>
     dialogs.confirm(
       view.dataset.simulation === "true"
@@ -346,6 +351,7 @@ export function createManagerDashboard({
         input = node(type === "textarea" ? "textarea" : "input");
       if (type !== "textarea") input.type = type;
       input.name = key;
+      input.setAttribute("aria-label", title);
       input.required = true;
       input.maxLength =
         type === "textarea" ? 50000 : type === "email" ? 254 : 100;
@@ -1574,8 +1580,10 @@ export function createManagerDashboard({
     await ensureRecent();
     if (epoch === generation) await openGate(system.systemIds[0]);
   }
-  async function openGate(gate, preserveView = false) {
+  async function openGate(gate, preserveView = false, attempt = 0) {
     interruptedConnection = undefined;
+    // A renewal cancels an open confirmation; its change was never sent.
+    const unsentChange = preserveView && dialogs.open;
     dialogs.cancel();
     csvDialog.cancel();
     const previous = connection;
@@ -1764,11 +1772,21 @@ export function createManagerDashboard({
         workspaceReady = true;
         connectionDialog.complete();
         setManagerControlState(view, examples.isSystem(currentSystem) ? "simulation" : "connected", language);
-        say("");
+        say(unsentChange
+          ? t("החיבור המאובטח חודש לפני שאישרתם, ולכן השינוי לא נשמר. בדקו את הערכים ושמרו שוב.",
+            "The secure connection renewed before you confirmed, so the change was not saved. Check the values and save again.")
+          : "");
       }
     } catch (error) {
       if (epoch === generation) {
         connection?.close();
+        // A gate that dropped after its poll (for example while rebooting)
+        // leaves the relay without an answer before any secure session or
+        // command exists. One fresh demand recovers it; later failures show.
+        if (attempt === 0 && !closed && !candidate.session && error?.message === "RESPONSE_TIMEOUT") {
+          void task(() => openGate(gate, preserveView, 1));
+          return;
+        }
         failConnection(error);
       }
     } finally {
@@ -2042,7 +2060,27 @@ export function createManagerDashboard({
       revision: t("גרסה", "Revision"),
       ssid: t("רשת אלחוטית", "Wi-Fi network"),
       available: t("זמין", "Available"),
+      capacityBytes: t("נפח הכרטיס", "Card capacity"),
+      formatCompatible: t("פורמט תואם", "Compatible format"),
+      recoveryRequired: t("נדרש שחזור", "Recovery required"),
+      count: t("רשומות", "Records"),
+      days: t("ימים שמורים", "Days stored"),
+      bytes: t("נפח ההיסטוריה", "History size"),
+      retentionDays: t("ימי שמירה", "Retention days"),
+      dropped: t("רשומות שאבדו מאז האתחול", "Records lost since boot"),
+      autoOpenKeys: t("מפתחות Auto Open", "Auto Open keys"),
+      rebootCount: t("מספר אתחולים", "Reboot count"),
+      memory: t("זיכרון", "Memory"),
+      minFreeHeap: t("מינימום זיכרון פנוי מאז האתחול", "Minimum free memory since boot"),
+      largestFreeBlock: t("הבלוק הפנוי הגדול ביותר", "Largest free block"),
+      failedAllocations: t("כשלי הקצאה", "Allocation failures"),
+      resetReason: t("קוד סיבת אתחול", "Reset reason code"),
+      coreDumpPresent: t("צילום קריסה שמור", "Saved crash snapshot"),
+      taskSnapshotComplete: t("צילום משימות זמין", "Task snapshot available"),
+      taskCount: t("משימות פעילות", "Running tasks"),
+      taskStacks: t("משימות עם הכי מעט זיכרון מחסנית", "Tasks with the least free stack"),
     };
+    const byteKeys = new Set(["bytes", "freeHeap", "minFreeHeap", "largestFreeBlock"]);
     function add(o, prefix = "") {
       for (const [key, v] of Object.entries(o ?? {})) {
         if (/secret|credential|private|password|passphrase|flashVariantMb|boardMb/i.test(key))
@@ -2055,8 +2093,10 @@ export function createManagerDashboard({
           node("dt", prefix + (names[key] ?? key)),
           node(
             "dd",
-            /Bytes$/.test(key) && typeof v === "number"
+            (/Bytes$/.test(key) || byteKeys.has(key)) && typeof v === "number"
               ? formatManagerBytes(v, language)
+              : key === "taskStacks" && Array.isArray(v)
+              ? v.map((task) => `${task?.name ?? "?"}: ${formatManagerBytes(Number(task?.freeStackBytes) || 0, language)}`).join(", ") || t("אין", "None")
               : typeof v === "boolean"
               ? v
                 ? t("כן", "Yes")
@@ -2255,7 +2295,9 @@ export function createManagerDashboard({
           say(t(`התקבלו ${bytes} בתים…`, `Received ${bytes} bytes…`)),
         );
         downloadCsv(encodeManagerCsv(rows));
-        say(t("הייצוא אומת מול השער.", "Export verified against the gate."));
+        say(rows.paged
+          ? t(`יוצאו ${rows.length} רשומות מהרשימה בשער.`, `Exported ${rows.length} records from the gate's list.`)
+          : t("הייצוא אומת מול השער.", "Export verified against the gate."));
       }),
     );
     content.lastElementChild.dataset.peopleAction = "all";
@@ -2482,6 +2524,7 @@ export function createManagerDashboard({
     const area = node("section", undefined, "manager-auto-workspace");
     const enabled = data?.config?.enabled;
     const action = typeof enabled === "boolean" ? button(enabled ? t("כיבוי Auto Open", "Disable Auto Open") : t("הפעלת Auto Open", "Enable Auto Open"), async () => {
+      if (!(await confirmAction(enabled ? t("לכבות את Auto Open בשער?", "Turn off Auto Open on the gate?") : t("להפעיל את Auto Open בשער?", "Turn on Auto Open on the gate?")))) return;
       await connection.command("ADMIN_SET_AUTO_OPEN_CONFIG", { ...data.config, enabled: !enabled, expectedRevision: data.revision });
       await showTab("auto");
     }, !enabled) : undefined;

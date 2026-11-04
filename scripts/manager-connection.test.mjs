@@ -271,7 +271,9 @@ test("Manager export reads the paged list when the gate has no bulk index", asyn
       ? { data: { items: items.slice(2), page: { hasMore: false, nextCursor: null } } }
       : { data: { items: items.slice(0, 2), page: { hasMore: true, nextCursor: "p2" } } };
   };
-  assert.deepEqual(await c.exportCollection("USERS"), items);
+  const exported = await c.exportCollection("USERS");
+  assert.deepEqual([...exported], items);
+  assert.equal(exported.paged, true);
   assert.deepEqual(calls.map(([cmd, cursor]) => `${cmd}:${cursor}`), [
     "ADMIN_EXPORT_BEGIN:null",
     "ADMIN_LIST_USERS:null",

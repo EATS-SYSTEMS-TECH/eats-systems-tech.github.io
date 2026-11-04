@@ -398,7 +398,11 @@ export class ManagerConnection {
           if (rows.length > capacity) throw new Error("INVALID_EXPORT");
           cursor = page.page?.hasMore ? page.page.nextCursor : null;
           if (page.page?.hasMore && (!cursor || seen.has(cursor))) throw new Error("INVALID_EXPORT");
-          if (!cursor) return rows;
+          if (!cursor) {
+            // No digest covers a paged read; callers must not claim one.
+            rows.paged = true;
+            return rows;
+          }
           seen.add(cursor);
         }
       } catch (error) {

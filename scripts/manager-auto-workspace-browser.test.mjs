@@ -65,13 +65,14 @@ test("Auto Open shows confirmed state, one action, local search, paged enrollmen
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
     if(process.env.MANAGER_AUTO_EVIDENCE){await mkdir(process.env.MANAGER_AUTO_EVIDENCE,{recursive:true});await content.evaluate(el=>el.scrollIntoView({block:'start'}));await page.screenshot({path:`${process.env.MANAGER_AUTO_EVIDENCE}/auto-${language}-${width}.png`});}
     await page.evaluate(()=>window.autoFailSave=true);
-    await settings.getByRole('button',{name:copy('כיבוי Auto Open','Disable Auto Open'),exact:true}).click();
+    const confirmGateWrite=async()=>{const dialog=page.locator('.manager-confirm-dialog[open]');await dialog.waitFor();await dialog.getByRole('button',{name:copy('אישור','Confirm'),exact:true}).click();};
+    await settings.getByRole('button',{name:copy('כיבוי Auto Open','Disable Auto Open'),exact:true}).click();await confirmGateWrite();
     await page.locator('.manager-status[role="alert"]').waitFor();
     assert.equal(await settings.locator('.manager-auto-status').getAttribute('data-state'),'enabled','failed write cannot change confirmed state');
-    await settings.getByRole('button',{name:copy('כיבוי Auto Open','Disable Auto Open'),exact:true}).click();
+    await settings.getByRole('button',{name:copy('כיבוי Auto Open','Disable Auto Open'),exact:true}).click();await confirmGateWrite();
     await settings.getByRole('button',{name:copy('הפעלת Auto Open','Enable Auto Open'),exact:true}).waitFor();
     assert.equal(await settings.locator('.manager-auto-status').getAttribute('data-state'),'disabled');
-    await settings.getByRole('button',{name:copy('הפעלת Auto Open','Enable Auto Open'),exact:true}).click();
+    await settings.getByRole('button',{name:copy('הפעלת Auto Open','Enable Auto Open'),exact:true}).click();await confirmGateWrite();
     await settings.getByRole('button',{name:copy('כיבוי Auto Open','Disable Auto Open'),exact:true}).waitFor();
     const writes=await page.evaluate(()=>window.autoCalls.filter(x=>x.name==='ADMIN_SET_AUTO_OPEN_CONFIG'));
     assert.deepEqual(writes.map(x=>x.payload.enabled),[false,false,true]);

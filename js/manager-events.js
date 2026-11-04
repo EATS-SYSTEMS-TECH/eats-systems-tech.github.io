@@ -12,7 +12,7 @@ const COPY = {
     help: "לוח שבועי: בשעות האירוע השער פתוח בירוק או סגור באדום. אירוע חד־פעמי של השבוע הקרוב מסומן במסגרת מקווקוות. בחרו יום לעריכה.",
     editHelp: "בחרו צבע ולחצו על הציר כדי להוסיף אירוע. גררו את האירוע להזזה או את קצותיו לשינוי השעות. כפתורי מינוס ופלוס מדייקים ב־10 דקות.",
     weekly: "כל שבוע", once: "חד־פעמי", edit: "עריכת יום", empty: "אין אירועים", start: "התחלה", end: "סיום",
-    save: "שמירה", saving: "שומר אירועים בשער…", saved: "האירועים נשמרו בשער.", cancel: "ביטול", remove: "מחיקת האירוע",
+    save: "שמירה", saveConfirm: "לשמור את האירועים ביום הזה בשער?", saving: "שומר אירועים בשער…", saved: "האירועים נשמרו בשער.", cancel: "ביטול", remove: "מחיקת האירוע",
     overlap: "אין אפשרות לחפיפה בין אירועים. שום דבר לא נשמר.", invalid: "בחרו שעות תקינות בצעדים של 10 דקות. שעת הסיום חייבת להיות אחרי שעת ההתחלה.",
     full: "הגעתם למספר האירועים המרבי בשער.", dates: "אפשר לקבוע אירוע חד־פעמי עד 90 יום קדימה.",
     copy: "הוספה לימים נוספים", copyHelp: "בשמירה, האירועים השבועיים שהוספתם או שיניתם יתווספו לימים שבחרתם. האירועים הקיימים בהם נשארים.",
@@ -29,7 +29,7 @@ const COPY = {
     help: "A weekly plan: during an event the gate is open in green or closed in red. A one-time event in the coming week has a dashed outline. Choose a day to edit it.",
     editHelp: "Pick a color and tap the timeline to add an event. Drag the event to move it or an edge to change its hours. Minus and plus fine-tune by 10 minutes.",
     weekly: "Every week", once: "One-time", edit: "Edit", empty: "No events", start: "Start", end: "End",
-    save: "Save", saving: "Saving events on the gate…", saved: "Events saved on the gate.", cancel: "Cancel", remove: "Delete event",
+    save: "Save", saveConfirm: "Save this day's events on the gate?", saving: "Saving events on the gate…", saved: "Events saved on the gate.", cancel: "Cancel", remove: "Delete event",
     overlap: "Events cannot overlap. Nothing was saved.", invalid: "Choose valid times in 10-minute steps. The end must be after the start.",
     full: "The gate's event limit has been reached.", dates: "A one-time event can be up to 90 days ahead.",
     copy: "Add to other days", copyHelp: "On Save, weekly events added or changed here are also added to the days you choose. Their existing events stay.",
@@ -436,6 +436,7 @@ export function createManagerEvents({
     const save = action(busy ? copy.saving : copy.save, async () => {
       const check = replaceAll(candidateRows(), table.today, limit);
       if (check.result !== "Ok") { feedback(check.result === "Overlap" ? copy.overlap : check.result === "Full" ? copy.full : check.result === "DateOutOfRange" ? copy.dates : copy.invalid); return; }
+      if (!await confirm(copy.saveConfirm) || !alive()) return;
       await mutate("ADMIN_SET_EVENTS", { today: table.today, items: toWireRows(check.table, table.today) });
     }, "is-primary");
     save.dataset.eventSave = "true";

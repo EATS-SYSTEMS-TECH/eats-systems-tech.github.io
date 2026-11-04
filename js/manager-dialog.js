@@ -164,6 +164,9 @@ export function createManagerDialog({
   }
   return {
     cancel,
+    get open() {
+      return Boolean(active);
+    },
     info: (options) =>
       ask("", [], { ...options, dismissLabel: t("סגירה", "Close") }),
     form: (options) => ask(options.message, [], options),

@@ -231,6 +231,7 @@ test("Manager example gate, Dual Control and group use real workspace controls w
           })
           .click();
         await page.locator("[data-event-save]").click();
+        await confirm();
         await page.waitForFunction(
           () => !document.querySelector("dialog[open]"),
         );
@@ -245,6 +246,7 @@ test("Manager example gate, Dual Control and group use real workspace controls w
             exact: true,
           })
           .click();
+        await confirm();
         await tab("rf");
         assert.equal(
           await content
