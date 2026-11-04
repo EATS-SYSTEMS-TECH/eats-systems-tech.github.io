@@ -310,10 +310,13 @@ test("a user command waits for the idle keep-alive ping instead of failing BUSY"
     return Promise.reject(new Error(`DONE:${cmd}`));
   };
   connection.socket = {send() {}};
+  // Encryption is asynchronous: wait for the ping to reach the socket rather
+  // than for a fixed tick, which a loaded test runner can outlast.
+  const until = async (ready) => { for (let i = 0; i < 500 && !ready(); i++) await new Promise((resolve) => setTimeout(resolve, 2)); };
   const ping = connection.command("ADMIN_PING", {}).catch((error) => error.message);
-  await new Promise((resolve) => setTimeout(resolve, 0));
+  await until(() => order.length === 1);
   const read = connection.command("ADMIN_GET_AUTO_OPEN_CONFIG", {}).catch((error) => error.message);
-  await new Promise((resolve) => setTimeout(resolve, 0));
+  await new Promise((resolve) => setTimeout(resolve, 20));
   assert.deepEqual(order, ["send:ADMIN_PING"], "the read waits while the ping is in flight");
   releasePing();
   assert.equal(await ping, "PING_DONE");

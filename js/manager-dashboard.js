@@ -1098,8 +1098,8 @@ export function createManagerDashboard({
             if (
               !(await confirmAction(
                 t(
-                  `להסיר את ${s.name} מ־Manager ולבטל את החיוב עבורה? אם זו המערכת האחרונה, חיוב המערכות יתאפס. רכיבים שמופיעים גם במערכות אחרות ותוספות ארגון ימשיכו להיות מחושבים בנפרד. הניהול המקומי ב־Bluetooth יישאר פעיל.`,
-                  `Remove ${s.name} from Manager and stop its system subscription charge? Removing the last system leaves no system subscription charge. Components still represented in other systems and organization extras remain billed separately. Local Bluetooth management stays available.`,
+                  `להסיר את ${s.name} מ־Manager ולבטל את החיוב עבורה? אם זו המערכת האחרונה, חיוב המערכות יתאפס. רכיבים שמופיעים גם במערכות אחרות ותוספות ארגון ימשיכו להיות מחושבים בנפרד. בבדיקה הבאה השער ימחק את רשתות ה־Wi-Fi השמורות בו ויכבה את ה־Wi-Fi; כדי לחבר אותו שוב צריך לייצא אותו מהאפליקציה ולהגדיר Wi-Fi ליד השער. הניהול המקומי ב־Bluetooth יישאר פעיל.`,
+                  `Remove ${s.name} from Manager and stop its system subscription charge? Removing the last system leaves no system subscription charge. Components still represented in other systems and organization extras remain billed separately. On its next check the gate deletes its saved Wi-Fi networks and turns Wi-Fi off; reconnecting needs an export from the app and setting Wi-Fi again near the gate. Local Bluetooth management stays available.`,
                 ),
               ))
             )
@@ -1203,6 +1203,18 @@ export function createManagerDashboard({
           );
           return;
         }
+        // The gate's network permission is bound to its organization: a change
+        // makes it delete its saved Wi-Fi networks on its next check.
+        if (
+          (select.value || null) !== (system.orgId ?? null) &&
+          !(await confirmAction(
+            t(
+              `לשנות את הארגון של ${system.name}? בבדיקה הבאה השער ימחק את רשתות ה־Wi-Fi השמורות בו ויתנתק מ־Manager. כדי לחבר אותו שוב צריך להגדיר Wi-Fi מחדש באפליקציה, ליד השער.`,
+              `Change the organization of ${system.name}? On its next check the gate deletes its saved Wi-Fi networks and disconnects from Manager. To reconnect it, set Wi-Fi again in the app, near the gate.`,
+            ),
+          ))
+        )
+          return;
         await ensureRecent();
         await api(`/systems/${system.id}/assign`, "POST", {
           orgId: select.value || null,
