@@ -1683,3 +1683,44 @@ body[data-product] .manager-organization-systems-help > .dashboard-examples { ma
  .manager-organization-person { transition:border-color 140ms ease,box-shadow 140ms ease; }
  .manager-organization-person:hover { border-color:#d4dfec; box-shadow:0 3px 10px #182d4805; }
 }
+
+/* Four distinct organization roles and a dedicated settings workspace. */
+.manager-people-metrics { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.manager-organization-people { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.manager-people-metrics [data-people-role="owners"] > svg { color:#a27a34; background:#fff8e9; border-color:#efdfbc; }
+[data-organization-role="owner"] .manager-people-role-icon { color:#a27a34; background:#fff8e9; border-color:#efdfbc; }
+.manager-people-owner-locked { display:flex; align-items:center; justify-content:center; gap:7px; box-sizing:border-box; min-height:40px; width:100%; padding:9px 12px; border:1px solid #e6e9ee; border-radius:11px; background:#f8fafc; color:#788596; font-size:12px; }
+.manager-people-owner-locked svg { width:16px; height:16px; }
+.manager-settings-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:start; gap:20px; }
+.manager-settings-brand-card,.manager-settings-access-card { min-width:0; padding:24px; border:1px solid #e2e8f0; border-radius:20px; background:#fff; box-shadow:0 4px 18px #182d4804; }
+.manager-settings-card-heading { display:flex; align-items:center; gap:10px; margin-bottom:12px; color:#3b526e; }
+.manager-settings-card-heading > svg { width:20px; height:20px; flex:none; color:#a36a39; }
+.manager-settings-card-heading h4 { margin:0; font-size:15px; font-weight:700; color:#243a54; }
+.manager-settings-card-description { color:#748398; font-size:12px; line-height:1.8; margin:0 0 22px; }
+.manager-settings-brand-card .manager-organization-branding-body { display:flex; flex-direction:column; align-items:stretch; gap:20px; padding:0; }
+.manager-settings-brand-card .manager-organization-logo { width:112px; height:112px; box-sizing:border-box; align-self:center; margin-block:4px 8px; padding:4px; border:1px solid #e5e9ef; border-radius:24px; background:#fafbfd; color:#8f5a32; font-size:38px; box-shadow:0 5px 16px #182d4805; }
+.manager-settings-brand-card .manager-organization-logo img { padding:10px; }
+.manager-settings-brand-card .manager-organization-brand-actions { display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:10px; padding-top:18px; border-top:1px solid #edf1f5; }
+.manager-settings-brand-card .manager-organization-brand-actions small { flex-basis:100%; order:2; text-align:center; color:#8a96a6; font-size:11px; }
+.manager-shell .manager-settings-brand-card button { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; border-radius:12px; font-size:12px; }
+.manager-settings-access-card .role-guide-card { margin:0 0 22px; padding:0 0 22px; border:0; border-bottom:1px solid #edf1f5; border-radius:0; background:transparent; box-shadow:none; }
+.manager-settings-access-card .role-guide-card__summary { color:#738398; font-size:12px; line-height:1.9; }
+.manager-settings-access-card .role-guide-card__role { font-size:17px; }
+.manager-settings-access-card .role-guide-card__head { flex-wrap:wrap; gap:14px; }
+.manager-settings-access-card .manager-organization-owner-line { display:flex; flex-direction:column; align-items:stretch; margin:0; gap:8px; padding:14px; border:1px solid #e7ecf2; border-radius:12px; background:#f9fbfd; font-size:12px; }
+.manager-settings-access-card .manager-organization-owner-line > span:first-child { display:none; }
+.manager-settings-access-card .manager-organization-owner-line > span { color:#435d7c; overflow-wrap:anywhere; }
+.manager-organization-workspace .manager-settings-identity { grid-template-columns:minmax(0,1fr) auto; padding:24px; border-radius:18px; background:#fff; box-shadow:0 4px 18px #182d4804; }
+.manager-settings-identity .manager-organization-name-row { flex-wrap:wrap; gap:12px; }
+.manager-settings-identity .manager-organization-identity h2 { font-size:24px; line-height:1.5; }
+.manager-settings-identity .manager-organization-identity p { font-size:12px; color:#7b899a; line-height:1.8; }
+.manager-shell .manager-settings-identity .manager-organization-rename { display:inline-flex; gap:7px; width:auto; min-height:40px; padding:8px 12px; border-radius:10px; font-size:12px; }
+.manager-settings-readonly { display:block; margin-top:10px; color:#8a96a6; font-size:12px; line-height:1.8; }
+@media(max-width:760px) {
+ .manager-people-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .manager-settings-grid { grid-template-columns:1fr; }
+ .manager-organization-workspace .manager-settings-identity { grid-template-columns:1fr; gap:16px; padding:20px; }
+ .manager-settings-identity .manager-organization-header-actions { justify-content:flex-start; }
+ .manager-settings-brand-card,.manager-settings-access-card { padding:20px; }
+}
+@media(max-width:600px) { .manager-organization-people { grid-template-columns:1fr; } }

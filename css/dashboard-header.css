@@ -744,8 +744,8 @@ html[dir="ltr"] .dashboard-profile-identity .dashboard-global-role { text-align:
 /* The verified platform role stays beside the logo across workspaces. */
 :is(.platform-header,.host-topbar) .brand:has(.dashboard-founder-tag) { display:inline-flex; align-items:center; gap:10px; flex-wrap:wrap; text-decoration:none; }
 body[data-product] :is(.platform-header,.host-topbar) .brand:has(.dashboard-founder-tag) { flex-direction:row; flex-wrap:nowrap; width:max-content; max-width:none; }
-.dashboard-founder-tag { display:inline-flex; align-items:center; gap:5px; flex:none; padding:5px 9px; border:1px solid #dec5f2; border-radius:999px; background:#f5edff; color:#6b32a4; font:700 11px/1.3 system-ui,sans-serif; white-space:nowrap; box-shadow:0 1px 3px #5422760a; }
-.dashboard-founder-tag svg { width:14px; height:14px; }
+.dashboard-founder-tag { display:inline-flex; align-items:center; gap:6px; flex:none; padding:5px 9px; border:1px solid #d7dfe9; border-radius:5px; background:#f5f7fa; color:#38485c; font:650 11px/1.3 system-ui,sans-serif; letter-spacing:.015em; white-space:nowrap; box-shadow:none; }
+.dashboard-founder-tag svg { width:14px; height:14px; color:#927446; }
 @media(max-width:600px) {
  :is(.platform-header,.host-topbar) .brand:has(.dashboard-founder-tag) { gap:5px; }
  .dashboard-founder-tag { padding:4px 7px; font-size:10px; }

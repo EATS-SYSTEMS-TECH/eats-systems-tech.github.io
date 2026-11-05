@@ -111,6 +111,12 @@ export async function renderManagerOrganization({
   ]);
   if (!isCurrent()) return null;
   const roleOf = (member) => sharedOrganizationRole(member.role);
+  // The server's legacy administrator total includes the owner. The people
+  // directory uses four disjoint roles, counted from the loaded memberships.
+  counts.owners = owner ? 1 : 0;
+  for (const [key, role] of [["administrators", "admin"], ["staff", "staff"], ["viewers", "viewer"]]) {
+    counts[key] = members.filter(m => m.status === "active" && roleOf(m) === role && m.uid !== owner?.uid).length;
+  }
   const ownRole =
     owner?.uid === user.uid
       ? "owner"
@@ -148,10 +154,16 @@ export async function renderManagerOrganization({
     });
     return details;
   };
-  const branding = disclosure(
+  const branding = partitioned ? node("section", undefined, "manager-settings-brand-card") : disclosure(
     "branding",
     t("פרטי הארגון והלוגו", "Organization details and logo"),
   );
+  if (partitioned) {
+    branding.dataset.organizationSection = "settings";
+    const brandHeading = node("div", undefined, "manager-settings-card-heading");
+    brandHeading.append(managerUiIcon("organizations"), node("h4", t("לוגו הארגון", "Organization logo")));
+    branding.append(brandHeading, node("p", t("כך הארגון שלכם מזוהה באתר וברשימות הארגונים.", "How your organization appears in its workspace and organization lists."), "manager-settings-card-description"));
+  }
   const brandingBody = node(
     "div",
     undefined,
@@ -174,7 +186,7 @@ export async function renderManagerOrganization({
       .append(
         node(
           "span",
-          String(counts.administrators + counts.staff + counts.viewers),
+          String(counts.owners + counts.administrators + counts.staff + counts.viewers),
           "manager-organization-people-count",
         ),
       );
@@ -354,6 +366,16 @@ export async function renderManagerOrganization({
   }
   section.append(header);
   if (partitioned) {
+    header.classList.add("manager-settings-identity");
+    artwork.remove();
+    brandingBody.prepend(artwork);
+    identity.querySelector(".manager-eyebrow").textContent = t("שם הארגון", "Organization name");
+    identity.querySelector("p").textContent = t("השם מוצג לכל אנשי הארגון ובכל רשימות הארגונים.", "This name appears for everyone in the organization and in organization lists.");
+    const renameButton = nameRow.querySelector("button");
+    if (renameButton) renameButton.append(node("span", t("עריכת שם", "Edit name")));
+    else identity.append(node("small", t("לשינוי שם או לוגו, פנו לבעל הארגון או למנהל ארגון.", "Ask the owner or an organization admin to change the name or logo."), "manager-settings-readonly"));
+  }
+  if (partitioned) {
     const settingsHeader = node("div", undefined, "manager-toolbar manager-people-page-heading");
     settingsHeader.dataset.organizationSection = "settings";
     const settingsHeadingText = node("div");
@@ -376,6 +398,7 @@ export async function renderManagerOrganization({
   if (partitioned) metrics.classList.add("manager-people-metrics");
   if (partitioned) metrics.dataset.organizationSection = "people";
   for (const [key, label] of [
+    ["owners", t("בעל הארגון", "Organization owner")],
     ["administrators", t("מנהלי ארגון", "Organization admins")],
     ["staff", t("צוות הארגון", "Organization staff")],
     ["viewers", t("צופים בארגון", "Organization viewers")],
@@ -390,7 +413,7 @@ export async function renderManagerOrganization({
           key === "systems"
             ? root.querySelector('[data-organization-section="systems"]')
             : section.querySelector(
-                `[data-organization-role="${{ administrators: "admin", staff: "staff", viewers: "viewer" }[key]}"]`,
+                `[data-organization-role="${{ owners: "owner", administrators: "admin", staff: "staff", viewers: "viewer" }[key]}"]`,
               );
         if (target) {
           const fold = target.closest("details");
@@ -416,7 +439,7 @@ export async function renderManagerOrganization({
     );
     if (partitioned) {
       tile.dataset.peopleRole = key;
-      tile.prepend(managerUiIcon({ administrators: "admin", staff: "people", viewers: "viewer" }[key]));
+      tile.prepend(managerUiIcon({ owners: "founder", administrators: "admin", staff: "people", viewers: "viewer" }[key]));
     }
     metrics.append(tile);
   }
@@ -480,6 +503,7 @@ export async function renderManagerOrganization({
     if (saved && isCurrent()) await onRefresh();
   };
   for (const [role, label, count] of [
+    ["owner", t("בעל הארגון", "Organization owner"), counts.owners],
     ["admin", t("מנהלי הארגון", "Organization admins"), counts.administrators],
     ["staff", t("צוות הארגון", "Organization staff"), counts.staff],
     ["viewer", t("צופים בארגון", "Organization viewers"), counts.viewers],
@@ -493,14 +517,14 @@ export async function renderManagerOrganization({
     column.dataset.organizationRole = role;
     const title = node("div", undefined, "manager-organization-people-title");
     const roleIcon = node("span", undefined, "manager-people-role-icon");
-    roleIcon.append(managerUiIcon(role === "staff" ? "people" : role));
+    roleIcon.append(managerUiIcon(role === "owner" ? "founder" : role === "staff" ? "people" : role));
     title.append(roleIcon);
     title.append(
       node("h3", label),
       node("span", String(count ?? 0), "manager-organization-people-count"),
     );
     heading.append(title);
-    if (permissions.managePeople) {
+    if (permissions.managePeople && role !== "owner") {
         const addPerson = button(
           { admin: t("הוספת מנהל", "Add admin"), staff: t("הוספת צוות", "Add staff"), viewer: t("הוספת צופה", "Add viewer") }[role],
           () => invite(role),
@@ -509,11 +533,16 @@ export async function renderManagerOrganization({
         addPerson.prepend(managerUiIcon("add"));
         heading.append(addPerson);
       }
+    if (role === "owner") {
+      const protectedRole = node("span", t("בעלות הארגון", "Organization ownership"), "manager-people-owner-locked");
+      protectedRole.prepend(managerUiIcon("admin"));
+      heading.append(protectedRole);
+    }
     column.append(heading);
     const rows = members.filter(
       (m) => m.status === "active" && roleOf(m) === role && m.uid !== owner.uid,
     );
-    if (role === "admin")
+    if (role === "owner" && owner)
       rows.unshift({ ...owner, isOwner: true });
     if (!rows.length) {
       const empty = node("div", undefined, "manager-people-role-empty");
@@ -615,7 +644,18 @@ export async function renderManagerOrganization({
         )
       : "";
   });
-  section.append(branding, peopleDisclosure);
+  if (partitioned) {
+    const settingsGrid = node("div", undefined, "manager-settings-grid");
+    settingsGrid.dataset.organizationSection = "settings";
+    const accessCard = node("section", undefined, "manager-settings-access-card");
+    const roleCard = section.querySelector(":scope > .role-guide-card");
+    if (roleCard) accessCard.append(roleCard);
+    const ownerHeading = node("div", undefined, "manager-settings-card-heading");
+    ownerHeading.append(managerUiIcon("founder"), node("h4", t("בעלות הארגון", "Organization ownership")));
+    accessCard.append(ownerHeading, ownerLine);
+    settingsGrid.append(branding, accessCard);
+    section.append(settingsGrid, peopleDisclosure);
+  } else section.append(branding, peopleDisclosure);
   if (invitations.length) {
     const pending = disclosure(
       "pending",
