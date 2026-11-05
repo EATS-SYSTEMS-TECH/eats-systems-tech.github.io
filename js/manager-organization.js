@@ -3,9 +3,9 @@ import {
   hasOrganizationLogo,
 } from "./manager-organization-card.js";
 import { managerUiIcon } from "./manager-ui-icons.js";
+import { createManagerSectionHeading } from "./manager-section-heading.js";
 import {
   createOrganizationRoleCard,
-  createRolePicker,
   sharedOrganizationRole,
 } from "./role-guide.js";
 
@@ -376,22 +376,20 @@ export async function renderManagerOrganization({
     else identity.append(node("small", t("לשינוי שם או לוגו, פנו לבעל הארגון או למנהל ארגון.", "Ask the owner or an organization admin to change the name or logo."), "manager-settings-readonly"));
   }
   if (partitioned) {
-    const settingsHeader = node("div", undefined, "manager-toolbar manager-people-page-heading");
+    const settingsHeader = createManagerSectionHeading({title:t("הגדרות הארגון", "Organization settings"),description:t("פרטי הארגון, המיתוג והתפקיד שלכם.", "Organization details, branding and your role."),icon:"settings",className:"manager-toolbar manager-people-page-heading"});
     settingsHeader.dataset.organizationSection = "settings";
-    const settingsHeadingText = node("div");
-    settingsHeadingText.append(node("span", org.name, "manager-people-eyebrow"), node("h3", t("הגדרות הארגון", "Organization settings")), node("p", t("פרטי הארגון, המיתוג והתפקיד שלכם.", "Organization details, branding and your role.")));
+    settingsHeader.querySelector(".manager-section-identity > div").prepend(node("span", org.name, "manager-people-eyebrow"));
     const refreshSettings = button(t("רענון", "Refresh"), onRefresh);
     refreshSettings.prepend(managerUiIcon("refresh"));
-    settingsHeader.append(settingsHeadingText, refreshSettings);
+    settingsHeader.append(refreshSettings);
     section.prepend(settingsHeader);
-    const peopleHeader = node("div", undefined, "manager-toolbar");
+    const peopleHeader = createManagerSectionHeading({title:t("אנשי הארגון", "Organization people"),description:t("האנשים שאיתכם, כל אחד והתפקיד שלו.", "Your team, with a clear role for everyone."),icon:"people",className:"manager-toolbar manager-people-page-heading"});
     peopleHeader.dataset.organizationSection = "people";
     peopleHeader.classList.add("manager-people-page-heading");
-    const peopleHeadingText = node("div");
-    peopleHeadingText.append(node("span", org.name, "manager-people-eyebrow"), node("h3", t("אנשי הארגון", "Organization people")), node("p", t("האנשים שאיתכם, כל אחד והתפקיד שלו.", "Your team, with a clear role for everyone.")));
+    peopleHeader.querySelector(".manager-section-identity > div").prepend(node("span", org.name, "manager-people-eyebrow"));
     const refreshPeople = button(t("רענון", "Refresh"), onRefresh);
     refreshPeople.prepend(managerUiIcon("refresh"));
-    peopleHeader.append(peopleHeadingText, refreshPeople);
+    peopleHeader.append(refreshPeople);
     section.append(peopleHeader);
   }
   const metrics = node("div", undefined, "manager-organization-metrics");
@@ -469,34 +467,27 @@ export async function renderManagerOrganization({
     viewer: t("צופה בארגון", "Organization Viewer"),
   };
   const invite = async (role) => {
-    // All four roles are shown. A Manager organization has exactly one owner:
-    // the Manager User whose account holds it, its systems and its billing.
-    const ownerNote =
-      t(
-        "בעל הארגון ב־Manager הוא ה־Manager User שהחשבון שלו מחזיק את הארגון, את המערכות ואת החיוב, ולכן אי אפשר להזמין owner נוסף.",
-        "A Manager organization's owner is the Manager User whose account holds the organization, its systems and its billing, so another owner can't be invited.",
-      ) + (owner.email ? ` ${t("הבעלים:", "Owner:")} ${owner.email}` : "");
+    if (!Object.hasOwn(invitationRole, role) || !isCurrent()) return;
+    const invitationTitle = {admin:t("הוספת מנהל לארגון", "Add an organization admin"),staff:t("הוספת צוות לארגון", "Add organization staff"),viewer:t("הוספת צופה לארגון", "Add an organization viewer")}[role];
+    const roleSummary = createManagerSectionHeading({title:roleNames[role],description:org.name,icon:role === "staff" ? "people" : role,level:"h4",className:"manager-invitation-role"});
+    roleSummary.dataset.role = role;
     const saved = await dialogs.form({
-      title: t("הוספה לארגון", "Add to the organization"),
+      title: invitationTitle,
       message: t(
-        "בחרו תפקיד בארגון והזינו את האימייל. ההזמנה תמתין לאישור בחשבון שלו. תפקיד בארגון אינו דורש מנוי.",
-        "Choose an organization role and enter the email. The invitation waits for acceptance in their account. An organization role needs no subscription.",
+        "הזינו את כתובת האימייל של מי שתרצו להזמין. ההצטרפות תושלם לאחר אישור ההזמנה בחשבון שלו. תפקיד בארגון אינו דורש מנוי.",
+        "Enter the email address of the person you want to invite. They will join after accepting in their account. An organization role needs no subscription.",
       ),
       fields: [["email", t("כתובת אימייל", "Email address"), "email"]],
-      formContent: createRolePicker({
-        product: "manager",
-        language,
-        value: role,
-        unavailable: { owner: ownerNote },
-      }),
-      submitLabel: t("יצירת הזמנה", "Create invitation"),
+      content: roleSummary,
+      submitLabel: t("שליחת הזמנה", "Send invitation"),
       errorText,
       onSubmit: async (values) => {
-        if (!invitationRole[values.role]) throw new Error("INVALID_ROLE");
+        if (!isCurrent()) throw new Error("CANCELLED");
         await ensureRecent();
+        if (!isCurrent()) throw new Error("CANCELLED");
         await api(path + "/invitations", "POST", {
           email: values.email.trim().toLowerCase(),
-          role: invitationRole[values.role],
+          role: invitationRole[role],
         });
       },
     });
@@ -524,6 +515,12 @@ export async function renderManagerOrganization({
       node("span", String(count ?? 0), "manager-organization-people-count"),
     );
     heading.append(title);
+    heading.append(node("p", {
+      owner:t("כל הרשאות הארגון, כולל מערכות ובעלות.", "Full organization permissions, including systems and ownership."),
+      admin:t("ניהול אנשים, מיתוג ותפעול שוטף.", "People, branding and daily operations."),
+      staff:t("תפעול שערים והגדרת Wi-Fi.", "Gate operation and Wi-Fi setup."),
+      viewer:t("צפייה בארגון, באנשים ובשערים.", "View the organization, people and gates."),
+    }[role], "manager-people-role-description"));
     if (permissions.managePeople && role !== "owner") {
         const addPerson = button(
           { admin: t("הוספת מנהל", "Add admin"), staff: t("הוספת צוות", "Add staff"), viewer: t("הוספת צופה", "Add viewer") }[role],
@@ -649,7 +646,11 @@ export async function renderManagerOrganization({
     settingsGrid.dataset.organizationSection = "settings";
     const accessCard = node("section", undefined, "manager-settings-access-card");
     const roleCard = section.querySelector(":scope > .role-guide-card");
-    if (roleCard) accessCard.append(roleCard);
+    if (roleCard) {
+      const roleDetails = roleCard.querySelector(".role-guide-card__details");
+      if (roleDetails) roleDetails.open = true;
+      accessCard.append(roleCard);
+    }
     const ownerHeading = node("div", undefined, "manager-settings-card-heading");
     ownerHeading.append(managerUiIcon("founder"), node("h4", t("בעלות הארגון", "Organization ownership")));
     accessCard.append(ownerHeading, ownerLine);

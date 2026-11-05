@@ -1,4 +1,5 @@
 import { managerUiIcon } from "./manager-ui-icons.js";
+import { createManagerSectionHeading } from "./manager-section-heading.js";
 import { createManagerAssignmentGuide } from "./manager-assignment-guide.js";
 import { renderManagerOrganization } from "./manager-organization.js";
 import { planRoleName, organizationRoleName } from "./role-names.js";
@@ -105,7 +106,7 @@ export function createManagerDashboard({
     cursor = null,
     currentView = "",
     countsPopover;
-  let cancellationBarrier, interruptedConnection, workspaceReturn;
+  let cancellationBarrier, interruptedConnection, workspaceReturn, workspaceConnectionTimer;
   let workspacePanel, workspacePanelContext, tabGeneration = 0, systemOverview;
   let connectionFailureVersion = 0;
   const shell = node("div", undefined, "manager-shell"),
@@ -404,6 +405,7 @@ export function createManagerDashboard({
     return f;
   }
   function stop() {
+    clearTimeout(workspaceConnectionTimer);
     interruptedConnection = undefined;
     gateActionDialog.cancel();
     workspacePanel?.dispose();
@@ -1645,10 +1647,10 @@ export function createManagerDashboard({
       actions: systemActions(system, null, true),
     });
     head.querySelector(".manager-workspace-heading").append(status);
-    view.prepend(head);
-    const workspaceTitle = node("div", undefined, "manager-workspace-title");
-    workspaceTitle.append(node("h2", t("סביבת ניהול", "Management workspace")), node("p", t("השליטה, האנשים וההגדרות של המערכת — במקום אחד.", "Control, people and system settings, together in one place.")));
-    view.prepend(workspaceTitle);
+    const workspaceTitle = createManagerSectionHeading({ title: t("סביבת ניהול", "Management workspace"), description: t("השליטה, האנשים וההגדרות של המערכת — במקום אחד.", "Control, people and system settings, together in one place."), level: "h2", className: "manager-workspace-title" });
+    const hero = node("section", undefined, "manager-workspace-hero");
+    hero.append(workspaceTitle, head);
+    view.prepend(hero);
     focusView();
     if (system.systemIds.length > 1) {
       view.append(createManagerGatePicker({ system, language,
@@ -1665,7 +1667,8 @@ export function createManagerDashboard({
     await ensureRecent();
     if (epoch === generation) await openGate(system.systemIds[0]);
   }
-  async function openGate(gate, preserveView = false, attempt = 0) {
+  async function openGate(gate, preserveView = false, attempt = 0, deadline = Date.now() + 120000) {
+    clearTimeout(workspaceConnectionTimer);
     interruptedConnection = undefined;
     gateActionDialog.cancel();
     // A renewal cancels an open confirmation; its change was never sent.
@@ -1686,6 +1689,7 @@ export function createManagerDashboard({
       connectionDialog.open({
         systemName: currentSystem.name,
         gate,
+        startedAt: workspaceReady ? Date.now() : deadline - 120000,
         simulation: examples.isSystem(currentSystem),
         returnFocus,
         onCancel: returnFromConnection,
@@ -1696,9 +1700,10 @@ export function createManagerDashboard({
       });
       activity.pause(true);
     };
-    let failureShown = false, workspaceReady = false;
+    let failureShown = false, workspaceReady = false, candidate;
     const failConnection = (error) => {
       if (closed || epoch !== generation || failureShown) return;
+      clearTimeout(workspaceConnectionTimer);
       failureShown = true;
       connectionFailureVersion++;
       currentRows = [];
@@ -1722,6 +1727,14 @@ export function createManagerDashboard({
     };
     openConnectionDialog();
     showConnectionState("waiting");
+    // One budget covers demand discovery, authentication, initial data and
+    // the read-only recovery attempt. A manual retry starts a new budget.
+    const expireAttempt = () => {
+      if (closed || epoch !== generation || failureShown || workspaceReady) return;
+      failConnection(new Error("WORKSPACE_CONNECTION_TIMEOUT"));
+      candidate?.close();
+    };
+    workspaceConnectionTimer = setTimeout(expireAttempt, Math.max(0, deadline - Date.now()));
     const existingContent = view.querySelector("#manager-content");
     const existingTabs = view.querySelector("#manager-tabs");
     if (preserveView) {
@@ -1736,7 +1749,8 @@ export function createManagerDashboard({
       failConnection(error);
       return;
     }
-    if (closed || epoch !== generation) return;
+    if (closed || epoch !== generation || failureShown) return;
+    if (Date.now() >= deadline) { expireAttempt(); return; }
     currentGate = gate;
     updateManagerSelectedGate(view, gate, null, language);
     if (!preserveView) {
@@ -1781,7 +1795,7 @@ export function createManagerDashboard({
         }
       },
     };
-    const candidate = examples.isSystem(currentSystem)
+    candidate = examples.isSystem(currentSystem)
       ? examples.createConnection({
           system: currentSystem,
           onState: options.onState,
@@ -1840,6 +1854,7 @@ export function createManagerDashboard({
         ),
         () => candidate.open(gate),
       );
+      if (Date.now() >= deadline) expireAttempt();
       if (epoch !== generation || failureShown) {
         candidate.close();
         return;
@@ -1855,12 +1870,15 @@ export function createManagerDashboard({
       if (!preserveView) await showTab("overview");
       else if (!existingContent?.childElementCount) await showTab(currentTab);
       else if (currentTab === "auto") await showTab("auto");
+      if (Date.now() >= deadline) expireAttempt();
       if (
         epoch === generation &&
+        !failureShown &&
         connection === candidate &&
         candidate.session
       ) {
         workspaceReady = true;
+        clearTimeout(workspaceConnectionTimer);
         view.dataset.workspaceReady = "true";
         connectionDialog.complete();
         setManagerControlState(view, examples.isSystem(currentSystem) ? "simulation" : "connected", language);
@@ -1870,13 +1888,13 @@ export function createManagerDashboard({
           : "");
       }
     } catch (error) {
-      if (epoch === generation) {
+      if (epoch === generation && !failureShown) {
         connection?.close();
         // A gate that dropped after its poll (for example while rebooting)
         // leaves the relay without an answer before any secure session or
         // command exists. One fresh demand recovers it; later failures show.
         if (attempt === 0 && !closed && !candidate.session && error?.message === "RESPONSE_TIMEOUT") {
-          void task(() => openGate(gate, preserveView, 1));
+          void task(() => openGate(gate, preserveView, 1, deadline));
           return;
         }
         failConnection(error);
@@ -2575,6 +2593,7 @@ export function createManagerDashboard({
     card.append(list); return card;
   }
   function renderRemoteDetails(content, data) {
+    content.append(createManagerSectionHeading({title:t("שלטים", "RF remotes"),description:t("פרטי השלט שנלמד ונשמר במערכת.", "Details of the remote learned and saved on the system."),icon:"signal"}));
     const remote = managerRfDetails(data);
     const card = node("section", undefined, "manager-device-card manager-remote-card");
     card.dataset.remoteState = remote.present === true ? "saved" : remote.present === false ? "empty" : "unknown";
@@ -2599,6 +2618,7 @@ export function createManagerDashboard({
     content.dataset.remoteReadOnly = "true";
   }
   function renderStorageDetails(content, data) {
+    content.append(createManagerSectionHeading({title:t("המערכת והאחסון", "System & storage"),description:t("מצב האחסון ופרטי המערכת כפי שדווחו על ידה.", "Storage status and details reported by the system."),icon:"app"}));
     const sd = managerSdDetails(data, language);
     const state = sd.supported === false ? t("כרטיס SD אינו נתמך במערכת זו", "SD cards are not supported by this system")
       : sd.mounted === true ? t("כרטיס מחובר וזמין", "Card mounted and available")

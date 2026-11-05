@@ -16,8 +16,8 @@ export function createManagerConnectionDialog({
     [
       t("ממתינים למערכת", "Waiting for your system"),
       t(
-        "החיבור למערכת עשוי להימשך עד כשתי דקות. תודה על הסבלנות, נכין עבורכם את סביבת הניהול ברגע שהחיבור יושלם.",
-        "Connecting to your system may take up to about two minutes. Thank you for your patience. We’ll prepare your workspace as soon as the connection is complete.",
+        "החיבור והכנת סביבת הניהול עשויים להימשך עד שתי דקות. תודה על הסבלנות, נפתח עבורכם את סביבת הניהול ברגע שהיא תהיה מוכנה.",
+        "Connecting and preparing your workspace may take up to two minutes. Thank you for your patience. We’ll open your workspace as soon as it is ready.",
       ),
     ],
     [
@@ -144,7 +144,8 @@ export function createManagerConnectionDialog({
     close();
     options = value;
     previousFocus = document.activeElement;
-    startedAt = Date.now();
+    startedAt = Number.isFinite(value.startedAt) && value.startedAt > 0
+      ? Math.min(Date.now(), value.startedAt) : Date.now();
     step = 0;
     dialog = el("dialog", undefined, "manager-connection-dialog");
     dialog.dir = language === "he" ? "rtl" : "ltr";
@@ -314,6 +315,7 @@ export function createManagerConnectionDialog({
       close(true);
       return;
     }
+    tick();
     clearTimers();
     dialog.dataset.state = "error";
     dialog.querySelector("h2").textContent = t(

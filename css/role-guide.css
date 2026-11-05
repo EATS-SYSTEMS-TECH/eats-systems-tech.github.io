@@ -698,3 +698,49 @@ dialog.role-guide .role-guide__tabs .role-guide__tab[aria-selected="true"] {
     to { opacity: 1; transform: none; }
   }
 }
+
+/* A polished reference dialog: clear levels, readable cards and quiet chrome. */
+dialog.role-guide { width:min(1120px,calc(100vw - 32px)); border:1px solid #e0e7f0; border-radius:18px; box-shadow:0 24px 90px #10203538; }
+.role-guide::backdrop { background:#11274080; backdrop-filter:blur(6px); }
+.role-guide .role-guide__header { padding:26px 30px 22px; align-items:center; border-bottom:1px solid #e8edf4; background:linear-gradient(115deg,#f5f8fd,#fff); }
+.role-guide .role-guide__header h2 { font-size:26px; color:#1a3552; line-height:1.4; font-weight:700; }
+.role-guide .role-guide__subtitle { color:#71839a; font-size:13px; line-height:1.8; max-width:75ch; margin-top:8px; }
+dialog.role-guide .role-guide__header .role-guide__close { border-radius:9px; width:42px; height:42px; min-height:42px; flex-basis:42px; border-color:#dfe7f1; color:#6d829b; }
+.role-guide .role-guide__tabs { margin:20px auto 4px; padding:5px; gap:5px; border-radius:12px; background:#f1f5fa; border-color:#e0e7f0; }
+dialog.role-guide .role-guide__tabs .role-guide__tab { border:1px solid transparent; padding:12px 20px; border-radius:8px; font-size:12px; font-weight:600; }
+dialog.role-guide .role-guide__tabs .role-guide__tab[aria-selected="true"] { background:#fff; border-color:#dae4f0; box-shadow:0 2px 5px #1c3e6a08; }
+.role-guide .role-guide__body { padding:22px 30px 30px; background:#fbfcfe; scrollbar-width:thin; scrollbar-color:#c6d4e4 transparent; }
+.role-guide .role-guide-levels { grid-template-columns:minmax(0,1fr) minmax(0,1.65fr); gap:20px; align-items:start; }
+.role-guide .role-guide-level { border-radius:14px; padding:20px; gap:14px; background:#fff; border-color:#e0e7f0; }
+.role-guide .role-guide-level h3 { letter-spacing:0; font-size:14px; line-height:1.6; }
+.role-guide .role-guide-level h3 > svg { width:21px; height:21px; padding:9px; border-radius:10px; box-sizing:content-box; background:var(--rg-soft); }
+.role-guide .role-guide-level__note { font-size:12px; line-height:1.85; color:#7b8b9f; }
+.role-guide .role-guide-role { border-radius:11px; padding:18px; box-shadow:none; border-color:#e4eaf2; background:#fcfdff; }
+.role-guide .role-guide-role[data-current="true"] { border-color:color-mix(in srgb,var(--rg-accent) 35%,#dce4ef); background:linear-gradient(125deg,var(--rg-soft),#fff 65%); box-shadow:none; }
+.role-guide .role-guide-role__head { gap:11px; margin-bottom:14px; }
+.role-guide .role-guide-role__name { color:#29435e; font-size:14px; font-weight:700; line-height:1.6; }
+.role-guide .role-guide-role p { font-size:12px; line-height:1.9; color:#6d8197; }
+.role-guide .role-guide-tag { border-radius:5px; padding:4px 7px; font-size:10px; font-weight:600; }
+.role-guide .role-guide-avatar { border-radius:11px; width:38px; height:38px; }
+.role-guide .role-guide-billing { border-radius:14px; border-color:#e6e2d8; background:#fdfbf6; padding:22px; margin-block:22px; gap:14px; }
+.role-guide .role-guide-billing p { line-height:1.9; font-size:12px; color:#7c796e; }
+.role-guide .role-guide-billing__payer { border:1px solid #e9e7e0; border-radius:10px; background:#fff; padding:14px; }
+.role-guide .role-guide-matrix { border-radius:14px; border-color:#dfe7f1; background:#fff; }
+.role-guide .role-guide-matrix caption { padding:20px; color:#2b4864; font-size:15px; font-weight:700; text-align:start; }
+.role-guide .role-guide-matrix th,.role-guide .role-guide-matrix td { padding:15px 13px; font-size:12px; border-color:#e8edf4; }
+.role-guide .role-guide-matrix thead th { background:#f6f9fd; font-weight:600; }
+.role-guide .role-guide-access { padding-top:10px; border-top:1px solid #edf1f6; }
+.role-guide .role-guide-access__state { border-radius:6px; }
+@media(max-width:800px) { .role-guide .role-guide-levels { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:600px) {
+ dialog.role-guide { width:calc(100vw - 20px); max-height:calc(100dvh - 20px); border-radius:14px; }
+ .role-guide .role-guide__header { padding:20px 18px; align-items:flex-start; }
+ .role-guide .role-guide__header h2 { font-size:23px; }
+ .role-guide .role-guide__body { padding:18px 14px 24px; }
+ .role-guide .role-guide__tabs { margin-top:16px; max-width:calc(100% - 28px); gap:3px; }
+ dialog.role-guide .role-guide__tabs .role-guide__tab { padding:10px 8px; font-size:11px; gap:5px; }
+ .role-guide .role-guide-level { padding:16px; }
+ .role-guide .role-guide-level:last-child { grid-template-columns:minmax(0,1fr); }
+ .role-guide .role-guide-role { padding:16px; }
+ .role-guide .role-guide-billing { padding:18px; }
+}

@@ -1,4 +1,5 @@
 // Presentation only: existing row actions, CSV flows and gate writes are reused.
+import { createManagerSectionHeading } from "./manager-section-heading.js";
 export function organizeManagerPeople(content, { language, tab, rows, editor }) {
   const he = language === "he", t = (h, e) => he ? h : e;
   const el = (tag, text, cls) => {
@@ -16,10 +17,7 @@ export function organizeManagerPeople(content, { language, tab, rows, editor }) 
   const wrap = content.querySelector(".manager-table-wrap");
   const table = wrap?.querySelector("table");
   const workspace = el("section", undefined, "manager-people-workspace");
-  const header = el("header", undefined, "manager-people-header");
-  const identity = el("div");
-  identity.append(el("h4", tab === "users" ? t("משתמשי המערכת", "System users") : t("מנהלי המערכת", "System administrators")),
-    el("p", t("ניהול פרטי הקשר והגישה לשער הנבחר", "Manage contact details and access to the selected gate")));
+  const header = createManagerSectionHeading({title:tab === "users" ? t("משתמשי המערכת", "System users") : t("מנהלי המערכת", "System administrators"),description:t("ניהול פרטי הקשר והגישה לשער הנבחר", "Manage contact details and access to the selected gate"),icon:tab === "users" ? "people" : "admin",level:"h4",className:"manager-people-header"});
   const tools = el("div", undefined, "manager-people-tools");
   const add = el("button", tab === "users" ? t("הוספת משתמש", "Add user") : t("הוספת מנהל", "Add administrator"), "manager-button primary");
   add.type = "button";
@@ -63,7 +61,7 @@ export function organizeManagerPeople(content, { language, tab, rows, editor }) 
   tools.append(add);
   if (importButton) tools.append(importButton);
   tools.append(exports);
-  header.append(identity, tools);
+  header.append(tools);
   const filter = el("div", undefined, "manager-people-filter");
   const searchLabel = el("label", t("חיפוש ברשומות שנטענו", "Search loaded records"));
   const search = el("input");

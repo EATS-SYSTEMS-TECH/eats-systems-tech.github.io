@@ -1,5 +1,5 @@
 @import url("./manager-events.css?v=20261105now1");
-@import url("./manager-control-workspace.css?v=20261105autoicon1");
+@import url("./manager-control-workspace.css?v=20261105managerpolish2");
 
 .platform-page[data-product="manager"] {
   color: var(--ink, #0f172a);
@@ -1777,3 +1777,71 @@ body[data-product] .manager-organization-systems-help > .dashboard-examples { ma
 .platform-page[data-product="manager"] .manager-card.manager-system .manager-system-actions > .manager-system-remove:hover:not(:disabled) { background:#fff6f4; border-color:#f0d8d4; color:#a13e32; }
 .manager-system-remove svg { width:15px; height:15px; flex:none; }
 @media (prefers-reduced-motion:reduce) { .manager-card.manager-system { transition:none; } }
+
+/* Organization people and identity use the same calm visual hierarchy. */
+.manager-shell .manager-organization-workspace .manager-people-page-heading { padding:22px 24px; border:1px solid #dee7f1; border-radius:16px; background:linear-gradient(115deg,#f3f7fd,#fff); margin-bottom:22px; }
+.manager-shell .manager-organization-workspace .manager-people-page-heading .manager-section-identity { align-items:center; }
+.manager-shell .manager-people-eyebrow { color:#6d86a1; font-size:11px; letter-spacing:.03em; margin-bottom:5px; }
+.manager-shell .manager-people-metrics .manager-organization-metric { border-radius:13px; padding:18px; box-shadow:none; gap:6px 12px; }
+.manager-shell .manager-people-metrics .manager-organization-metric > svg { border:0; border-radius:11px; }
+.manager-shell .manager-people-metrics .manager-organization-metric strong { color:#284460; font-size:29px; line-height:1.2; }
+.manager-shell .manager-people-metrics .manager-organization-metric span { font-weight:500; color:#6c8097; }
+.manager-shell .manager-people-metrics .manager-organization-metric:hover:not(:disabled) { background:#f6f9fe; border-color:#b9cce3; color:#294c72; }
+.manager-shell .manager-organization-people-panel .manager-organization-search { border:1px solid #e0e8f2; border-radius:13px; background:#fff; padding:18px 20px; gap:9px; }
+.manager-shell .manager-organization-search .manager-people-search-field input { border-radius:9px; background:#f8fbff; border-color:#dce6f2; min-height:48px; }
+.manager-shell .manager-organization-search input:focus-visible { border-color:#6e95c1; outline:3px solid #8fb5e230; }
+.manager-shell .manager-people-search-field:focus-within svg { color:#4e7aaa; }
+.manager-shell .manager-organization-people { align-items:stretch; gap:20px; }
+.manager-shell .manager-organization-person-column { --people-tone:#537ba7; --people-soft:#eef4fc; padding:22px; border:1px solid #dfe7f1; border-radius:16px; box-shadow:0 3px 15px #17365303; background:#fff; }
+.manager-shell .manager-organization-person-column[data-organization-role="owner"] { --people-tone:#a3844c; --people-soft:#fbf6eb; }
+.manager-shell .manager-organization-person-column[data-organization-role="staff"] { --people-tone:#448979; --people-soft:#eff8f5; }
+.manager-shell .manager-organization-person-column[data-organization-role="viewer"] { --people-tone:#8574aa; --people-soft:#f5f2fa; }
+.manager-shell .manager-organization-person-column:focus-visible { outline:3px solid #8faed338; outline-offset:3px; border-color:#99b5d7; }
+.manager-shell .manager-organization-people-head { gap:12px; margin-bottom:18px; }
+.manager-shell .manager-organization-people-title { gap:10px; }
+.manager-shell .manager-organization-people-title h3 { color:#2b4662; font-size:16px; font-weight:650; }
+.manager-shell .manager-people-role-icon { width:38px; height:38px; border:0; border-radius:11px; background:var(--people-soft); color:var(--people-tone); }
+.manager-shell .manager-people-role-icon svg { width:21px; height:21px; }
+.manager-shell .manager-people-role-description { width:100%; margin:0; padding-block:0 4px; font-size:12px; line-height:1.8; color:#7a8b9f; }
+.platform-page .portal-panel .manager-shell .manager-organization-people-head button.manager-people-add { min-height:42px; border-radius:9px; border-color:#dce6f2; background:#f6f9fd; color:#49719a; font-weight:600; }
+.platform-page .portal-panel .manager-shell .manager-organization-people-head button.manager-people-add:hover:not(:disabled) { background:#24486d; color:#fff; border-color:#24486d; }
+.manager-shell .manager-people-owner-locked { border-radius:9px; background:#fafbfd; color:#8492a3; font-size:11px; min-height:42px; }
+.manager-shell .manager-organization-person-column .manager-organization-person { grid-template-columns:40px minmax(0,1fr) auto; gap:12px; padding:16px 12px; border:1px solid #e7edf4; border-radius:11px; background:#fbfcfe; }
+.manager-shell .manager-organization-person-column .manager-organization-person[data-owner="true"] { border-color:#eee6d6; background:#fdfbf7; }
+.manager-shell .manager-organization-person-avatar { width:40px; height:40px; border:0; border-radius:11px; color:var(--people-tone); background:var(--people-soft); }
+.manager-shell .manager-organization-person strong { display:block; font-size:13px; font-weight:600; color:#36516d; overflow-wrap:anywhere; }
+.manager-shell .manager-organization-person small { display:inline-block; margin-top:6px; font-size:10px; padding:3px 7px; border-radius:5px; color:var(--people-tone); background:var(--people-soft); }
+.manager-shell .manager-people-you { margin-inline-start:6px; }
+.manager-shell .manager-people-role-empty { min-height:140px; box-sizing:border-box; padding:24px 16px; gap:10px; border-radius:11px; border-color:#e2e9f1; background:#fcfdff; }
+.manager-shell .manager-people-role-empty p { font-size:11px; max-width:29ch; }
+.manager-shell .manager-settings-grid { grid-template-columns:minmax(0,.85fr) minmax(0,1.3fr); align-items:start; gap:22px; }
+.manager-shell .manager-settings-brand-card,.manager-shell .manager-settings-access-card { padding:26px; border-radius:16px; border:1px solid #dfe7f1; box-shadow:0 3px 15px #17365303; }
+.manager-shell .manager-settings-access-card .role-guide-card { margin:0 0 22px; padding:0 0 24px; border-bottom:1px solid #e5ebf3; }
+.manager-shell .manager-settings-access-card .role-guide-card__head { display:grid; gap:18px; }
+.manager-shell .manager-settings-access-card .role-guide-card__who { gap:14px; align-items:center; }
+.manager-shell .manager-settings-access-card .role-guide-avatar--large { border-radius:13px; width:52px; height:52px; }
+.manager-shell .manager-settings-access-card .role-guide-card__texts { gap:7px; }
+.manager-shell .manager-settings-access-card .role-guide-card__eyebrow { line-height:1.7; letter-spacing:0; color:#8191a4; font-size:11px; font-weight:500; }
+.manager-shell .manager-settings-access-card .role-guide-card__role { color:#294865; font-size:21px; line-height:1.4; }
+.manager-shell .manager-settings-access-card .role-guide-card__org { font-size:12px; color:#8191a4; }
+.manager-shell .manager-settings-access-card .role-guide-link { justify-self:start; padding:8px 11px; border:1px solid #dee7f2; border-radius:8px; background:#f7faff; color:#52779d; font-size:12px; }
+.manager-shell .manager-settings-access-card .role-guide-card__summary { margin-top:18px; padding:16px; border:1px solid #e6edf5; border-radius:11px; background:#f8fbff; font-size:12px; line-height:1.95; color:#698097; }
+.manager-shell .manager-settings-access-card .role-guide-card__details > summary { margin-top:18px; padding:12px 0; color:#426587; font-size:12px; }
+.manager-shell .manager-settings-access-card .role-guide-card__lists { grid-template-columns:minmax(0,1fr); margin-top:4px; gap:18px; }
+.manager-shell .manager-settings-access-card .role-guide-card__list h3 { margin:0 0 10px; font-size:11px; color:#7c8ea2; }
+.manager-shell .manager-settings-access-card .role-guide-card__list ul { display:grid; list-style:none; padding:0; gap:8px; }
+.manager-shell .manager-settings-access-card .role-guide-card__list li { align-items:center; gap:10px; padding:11px 12px; border:1px solid #e7edf4; border-radius:9px; background:#fff; font-size:12px; line-height:1.7; color:#516e89; }
+.manager-shell .manager-settings-access-card .role-guide-card__list li svg { color:#5e947e; width:17px; height:17px; flex:none; margin:0; }
+.manager-shell .manager-settings-access-card .role-guide-card__list[data-kind="cannot"] li { color:#8a98aa; background:#fafbfd; }
+.manager-shell .manager-settings-access-card .role-guide-card__list[data-kind="cannot"] li svg { color:#9aa7b7; }
+.manager-shell .manager-settings-card-heading { gap:10px; margin-bottom:14px; }
+.manager-shell .manager-settings-card-heading > svg { color:#6e8eaf; padding:8px; width:19px; height:19px; box-sizing:content-box; border-radius:9px; background:#eff5fc; }
+.manager-shell .manager-settings-access-card .manager-organization-owner-line { padding:16px; border:1px solid #e6e0d4; border-radius:11px; background:#fdfbf7; color:#76674c; }
+.manager-shell .manager-settings-access-card .manager-organization-owner-line > span:last-child { color:#6f624d; font-size:13px; }
+.manager-shell .manager-settings-identity { background:linear-gradient(115deg,#f5f8fd,#fff); }
+@media(max-width:760px) {
+ .manager-shell .manager-settings-grid { grid-template-columns:minmax(0,1fr); }
+ .manager-shell .manager-organization-workspace .manager-people-page-heading { padding:18px; gap:16px; }
+ .manager-shell .manager-organization-person-column { padding:18px; }
+ .manager-shell .manager-settings-brand-card,.manager-shell .manager-settings-access-card { padding:20px; }
+}

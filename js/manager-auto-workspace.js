@@ -9,6 +9,9 @@ export function createManagerAutoStatus({ config, language = "en", action }) {
   const enabled=config?.enabled;
   const card=node("section",undefined,"manager-auto-settings");
   const identity=node("div",undefined,"manager-auto-identity");
+  const icon=node("img",undefined,"manager-auto-artwork");
+  icon.src="/assets/wifigate_features/auto_open.svg";icon.alt="";icon.width=72;icon.height=56;icon.setAttribute("aria-hidden","true");
+  identity.append(icon);
   identity.append(node("span","AUTO OPEN","manager-auto-kicker"),node("h4",t("פתיחה אוטומטית","Automatic opening")),node("p",t("ניהול הפתיחה האוטומטית למשתמשים שנרשמו במערכת.","Manage automatic opening for users enrolled on this system.")));
   const badge=node("span",enabled===true?t("מופעל","Enabled"):enabled===false?t("כבוי","Disabled"):t("המצב לא זמין","Status unavailable"),"manager-auto-status");
   badge.dataset.state=enabled===true?"enabled":enabled===false?"disabled":"unknown";

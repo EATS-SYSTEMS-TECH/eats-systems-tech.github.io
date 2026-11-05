@@ -1,4 +1,6 @@
 // Display codes follow WG_HistoryManager.hpp; transport and CSV rows stay intact.
+import { createManagerSectionHeading } from "./manager-section-heading.js";
+import { managerUiIcon } from "./manager-ui-icons.js";
 const node = (tag, text, cls) => {
   const element = document.createElement(tag);
   if (text !== undefined) element.textContent = text;
@@ -38,11 +40,7 @@ export function managerHistoryDay(day, language = "en") {
 }
 function heading(language, guests, subtitle) {
   const he = language === "he";
-  const header = node("header", undefined, "manager-history-header");
-  const identity = node("div");
-  identity.append(node("h4", guests ? (he ? "פעילות אורחים" : "Guest activity") : (he ? "היסטוריית המערכת" : "System history")), node("p", subtitle));
-  header.append(identity);
-  return header;
+  return createManagerSectionHeading({title:guests ? (he ? "פעילות אורחים" : "Guest activity") : (he ? "היסטוריית המערכת" : "System history"),description:subtitle,icon:guests ? "account" : "history",level:"h4",className:"manager-history-header"});
 }
 export function renderManagerHistoryDays(content, { days, language, guests, more, createButton, onDay, moreButton }) {
   const he = language === "he", t = (h,e) => he ? h : e;
@@ -60,6 +58,9 @@ export function renderManagerHistoryDays(content, { days, language, guests, more
     const button = createButton("", () => onDay(day));
     button.classList.add("manager-history-day");
     button.dataset.historyDay = day;
+    const symbol = node("span", undefined, "manager-history-day-symbol");
+    symbol.append(managerUiIcon("calendar"));
+    button.append(symbol);
     button.append(node("span", t("יומן פעילות", "Activity log"), "manager-history-day-label"), node("strong", managerHistoryDay(day, language)), node("span", t(`${count} רשומות במערכת`, `${count} system records`), "manager-history-day-count"), node("span", t("צפייה בפעילות ←", "View activity →"), "manager-history-day-link"));
     list.append(button);
   }
@@ -78,6 +79,17 @@ export function renderManagerHistoryRecords(content, { rows, language, guests, d
   const summary = node("div", undefined, "manager-history-summary");
   summary.append(node("span", rows.length === 1 ? t("רשומה אחת נטענה", "1 record loaded") : t(`${rows.length} רשומות שנטענו`, `${rows.length} records loaded`)), node("span", t("השעות מוצגות לפי שעון המערכת", "Times follow the system clock")));
   workspace.append(summary);
+  if (rows.length) {
+    const stats = node("dl", undefined, "manager-history-stats");
+    stats.setAttribute("aria-label", t("סיכום הרשומות שנטענו", "Summary of loaded records"));
+    for (const [label, count, state, icon] of [[t("רשומות שנטענו", "Loaded records"),rows.length,"all","history"],[t("בוצעו", "Done"),rows.filter(row=>row[8]===0).length,"done","account"],[t("סורבו", "Refused"),rows.filter(row=>row[8]===1).length,"refused","admin"]]) {
+      const card = node("div"); card.dataset.state = state;
+      const term = node("dt"); term.append(managerUiIcon(icon),node("span",label));
+      card.append(term,node("dd",new Intl.NumberFormat(he?"he-IL":"en-US").format(count)));
+      stats.append(card);
+    }
+    workspace.append(stats);
+  }
   // The rows exist on the card but were written under a different key of this
   // system (for example before it was provisioned again); nothing was lost.
   if (undecryptable > 0) workspace.append(node("p", undecryptable === 1
@@ -102,7 +114,9 @@ export function renderManagerHistoryRecords(content, { rows, language, guests, d
       cells[0].append(time);
       if (data.time) cells[0].append(node("span", data.date));
       cells[1].append(node("span",data.action,"manager-history-action"));
-      cells[2].append(node("span",data.source,"manager-history-source"));
+      const source = node("span",undefined,"manager-history-source");
+      source.append(managerUiIcon(({1:"app",2:"gate",5:"signal",6:"calendar",9:"systems"})[raw[6]]||"history"),node("span",data.source));
+      cells[2].append(source);
       cells[3].className = "manager-history-person";
       cells[3].append(node("strong",data.name));
       if (data.phone) { const phone=node("bdi",data.phone); phone.dir="ltr"; cells[3].append(phone); }

@@ -1,3 +1,5 @@
+import { createManagerSectionHeading } from "./manager-section-heading.js";
+
 const node = (tag, text, className) => {
   const value = document.createElement(tag);
   if (text !== undefined) value.textContent = text;
@@ -27,9 +29,10 @@ export function managerSettingsPayload(saved, draft, revision) {
 export function renderManagerSettings({ root, language = "en", config, revision, onSave, confirm, errorText, isCurrent = () => true, commandLocked = false, rollerShutter = false }) {
   config = {command:"PULSE",...managerDefaultTimings,...config};
   const he = language === "he", t = (h, e) => he ? h : e;
+  root.append(createManagerSectionHeading({title:t("הגדרות המערכת", "System settings"),description:t("התאימו את אופן הפתיחה ואת תזמון הפעולה לשער שלכם.", "Adjust the opening method and action timing for your gate."),icon:"settings"}));
   const form = node("form", undefined, "manager-form manager-settings-form");
   const methodCard = node("section", undefined, "manager-settings-card");
-  const heading = node("h3", t("אופן פתיחה", "Opening method"));
+  const heading = createManagerSectionHeading({title:t("אופן פתיחה", "Opening method"),icon:"gate",level:"h4"});
   const picker = node("label", t("בחירת אופן פתיחה", "Choose an opening method"), "manager-method-dropdown");
   const choices = {
     PULSE: [t("פולס אחד", "Single pulse"), t("פולס יחיד להפעלת המערכת.", "A single pulse activates the system.")],
@@ -50,8 +53,11 @@ export function renderManagerSettings({ root, language = "en", config, revision,
   if (commandLocked) methodCard.append(node("p", rollerShutter
     ? t("בתריס חשמלי אופן הפתיחה נקבע לפי ההגדרה המשותפת.", "In a Roller Shutter, the opening method follows the shared configuration.")
     : t("במערכת Dual Control אופן הפתיחה נקבע לפי ההגדרה המשותפת.", "In Dual Control, the opening method follows the shared configuration."), "manager-supporting-copy"));
+  const preview = node("ol", undefined, "manager-method-preview");
+  preview.setAttribute("aria-label", t("סדר הפעולה", "Action sequence"));
+  methodCard.append(preview);
   const card = node("section", undefined, "manager-settings-card manager-timing-card");
-  card.append(node("h3", t("תזמון הפעולה", "Action timing")), node("p", t("מוצגים רק השלבים שמשמשים את אופן הפתיחה שבחרתם.", "Only the steps used by your chosen opening method are shown."), "manager-supporting-copy"));
+  card.append(createManagerSectionHeading({title:t("תזמון הפעולה", "Action timing"),description:t("מוצגים רק השלבים של אופן הפתיחה שבחרתם.", "Only the steps for your chosen opening method are shown."),icon:"history",level:"h4"}));
   const fields = node("div", undefined, "manager-timing-fields");
   const labels = {
     pulseWidth1Millis: t("משך פולס ראשון (מילישניות)", "First pulse (ms)"),
@@ -92,6 +98,12 @@ export function renderManagerSettings({ root, language = "en", config, revision,
   let busy = false, disposed = false;
   function sync() {
     const method = selectedMethod(), active = managerTimingFields(method);
+    preview.replaceChildren(...active.map((key, index) => {
+      const item = node("li");
+      item.append(node("span", String(index + 1)), node("strong", labels[key]), node("bdi", `${form.elements[key].value || "—"} ${key.startsWith("timeBetween") ? t("שניות", "sec") : "ms"}`));
+      return item;
+    }));
+    preview.hidden = !active.length;
     description.textContent = choices[method]?.[1] ?? t("אופן הפתיחה לא זמין.", "Opening method unavailable.");
     card.hidden = active.length === 0;
     select.disabled = busy || commandLocked;

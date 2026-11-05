@@ -4,6 +4,7 @@ import {
   formatEpochDay, formatMinutes, gateLocalDayMinute, insertBlock, moveBlock,
   replaceAll, resizeBlock, setBlockTimes, toWireRows, upcomingDates,
 } from "./manager-events-model.js";
+import { managerUiIcon } from "./manager-ui-icons.js";
 
 const COPY = {
   he: {
@@ -245,6 +246,7 @@ export function createManagerEvents({
     const head = el("div", undefined, "manager-event-header");
     const heading = el("div", undefined, "manager-event-heading");
     heading.append(el("span", lang === "he" ? "תכנון שבועי" : "Weekly planner", "manager-event-eyebrow"), el("h3", copy.title));
+    heading.prepend(managerUiIcon("calendar"));
     const capacity = el("div", undefined, "manager-event-capacity");
     const meter = el("meter"); meter.min = 0; meter.max = limit; meter.value = table.items.length;
     meter.setAttribute("aria-label", countLabel(table.items.length));

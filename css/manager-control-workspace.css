@@ -1044,3 +1044,115 @@
  .manager-control-workspace .manager-metric-icon { width:34px; height:34px; flex-basis:34px; border-radius:9px; }
  .manager-control-workspace .manager-event-card { padding:16px; }
 }
+
+/* Shared headings make every device panel feel like the same workspace. */
+.manager-shell .manager-section-heading { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:18px; margin:0 0 22px; padding:0; min-width:0; }
+.manager-shell .manager-section-identity { display:flex; align-items:center; gap:14px; min-width:0; flex:1 1 240px; }
+.manager-shell .manager-section-identity > div { min-width:0; }
+.manager-shell .manager-section-symbol { display:grid; place-items:center; flex:0 0 46px; width:46px; height:46px; border:1px solid #dce6f3; border-radius:13px; background:#eff5fc; color:#416b9b; }
+.manager-shell .manager-section-symbol svg { width:23px; height:23px; }
+.manager-shell .manager-section-heading :is(h2,h3,h4) { margin:0 0 5px; color:#1a3552; font-size:22px; font-weight:700; line-height:1.4; letter-spacing:-.02em; }
+.manager-shell .manager-section-heading p { margin:0; color:#6b7f95; font-size:13px; line-height:1.8; }
+.manager-control-workspace .manager-workspace-hero { border:1px solid #dce5f0; border-radius:18px; background:#fff; box-shadow:0 5px 22px #16365305; margin-block-end:22px; }
+.manager-control-workspace .manager-workspace-hero .manager-workspace-title { padding:20px 24px; margin:0; border-bottom:1px solid #e6ecf4; border-radius:18px 18px 0 0; background:linear-gradient(115deg,#f4f8fe,#fff); }
+.manager-control-workspace .manager-workspace-title .manager-section-symbol { width:38px; height:38px; flex-basis:38px; border-radius:10px; }
+.manager-control-workspace .manager-workspace-hero .manager-workspace-head { padding:22px 24px 8px; gap:14px 22px; margin:0; border:0; border-radius:0 0 18px 18px; background:#fff; box-shadow:none; }
+.manager-control-workspace .manager-workspace-hero .manager-workspace-identity { align-items:center; gap:16px; }
+.manager-control-workspace .manager-workspace-hero .manager-workspace-icon { width:64px; height:64px; flex-basis:64px; border-radius:16px; background:#f9fbfe; }
+.manager-control-workspace .manager-workspace-hero .manager-workspace-heading { gap:6px; }
+.manager-control-workspace .manager-workspace-hero h3 { font-size:26px; }
+.manager-control-workspace .manager-workspace-hero .manager-workspace-eyebrow { font-size:10px; letter-spacing:.1em; }
+.manager-control-workspace .manager-workspace-hero .manager-workspace-status { border-radius:7px; padding:5px 9px; font-size:11px; }
+.manager-control-workspace .manager-workspace-head > .manager-workspace-progress { flex:1 0 100%; width:100%; min-height:28px; }
+.manager-control-workspace .manager-workspace-progress .manager-progress.is-workspace { grid-template-columns:minmax(0,1fr) minmax(70px,25%); align-items:center; gap:14px; padding:2px 0; color:#58728f; line-height:1.5; }
+.manager-control-workspace .manager-workspace-progress .manager-activity-bar { accent-color:#5b86b7; }
+.manager-control-workspace .manager-workspace-progress progress::-webkit-progress-bar { background:#e8eff6; }
+.manager-control-workspace .manager-workspace-progress progress::-webkit-progress-value { background:#5b86b7; }
+.manager-control-workspace .manager-form.manager-settings-form { grid-template-columns:minmax(230px,.85fr) minmax(0,1.4fr); align-items:start; gap:20px; padding:0; margin:0; border:0; background:transparent; box-shadow:none; }
+.manager-control-workspace .manager-settings-form > .manager-settings-card { margin:0; padding:24px; background:#fff; border:1px solid #dfe7f1; border-radius:16px; }
+.manager-control-workspace .manager-settings-card .manager-section-heading { margin-bottom:20px; }
+.manager-control-workspace .manager-settings-card .manager-section-identity { align-items:flex-start; gap:12px; flex-basis:0; }
+.manager-control-workspace .manager-settings-card .manager-section-symbol { width:36px; height:36px; flex-basis:36px; border-radius:10px; }
+.manager-control-workspace .manager-settings-card .manager-section-heading h4 { font-size:17px; }
+.manager-control-workspace .manager-settings-card .manager-section-heading p { font-size:12px; }
+.manager-control-workspace .manager-method-dropdown { margin-block:20px 10px; }
+.manager-control-workspace .manager-method-dropdown select { max-width:none; background:#f7faff; min-height:48px; }
+.manager-control-workspace .manager-method-preview { display:grid; gap:10px; margin:22px 0 0; padding:18px 0 0; border-top:1px solid #e6ecf4; list-style:none; }
+.manager-control-workspace .manager-method-preview li { display:grid; grid-template-columns:24px minmax(0,1fr); gap:4px 9px; padding:10px; background:#f7faff; border-radius:10px; color:#68809a; }
+.manager-control-workspace .manager-method-preview li > span { display:grid; place-items:center; grid-row:1/3; align-self:center; width:24px; height:24px; border-radius:7px; background:#e6eef9; color:#4d709b; font-size:11px; }
+.manager-control-workspace .manager-method-preview strong { font-size:11px; font-weight:500; line-height:1.6; }
+.manager-control-workspace .manager-method-preview bdi { direction:ltr; justify-self:start; font-size:13px; font-weight:650; color:#294969; }
+.manager-control-workspace .manager-timing-fields { grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.manager-control-workspace .manager-timing-step { border:1px solid #e2e9f2; border-radius:12px; padding:16px; background:#fafcff; }
+.manager-control-workspace .manager-timing-step-number { display:inline-flex; width:fit-content; padding:3px 8px; margin-bottom:14px; border-radius:5px; background:#eaf1fa; color:#52769f; font-size:10px; font-weight:650; }
+.manager-control-workspace .manager-settings-form > :is(.manager-settings-footer,.manager-dialog-error,.manager-supporting-copy) { grid-column:1/-1; }
+.manager-control-workspace .manager-settings-footer { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; padding:20px 24px; border:1px solid #dfe7f1; border-radius:14px; background:#f8fbff; }
+.manager-control-workspace .manager-settings-draft-state { display:flex; align-items:center; gap:8px; margin:0; color:#687d93; font-size:12px; }
+.manager-control-workspace .manager-settings-draft-state::before { content:''; width:7px; height:7px; flex:none; border-radius:50%; background:#80a08b; }
+.manager-control-workspace .manager-settings-draft-state[data-dirty="true"]::before { background:#cb9948; }
+.manager-control-workspace .manager-settings-save-note { width:100%; margin:0; padding-top:12px; border-top:1px solid #e4ebf4; font-size:11px; color:#7c8ba0; }
+.manager-control-workspace .manager-history-workspace { padding-block-end:24px; }
+.manager-control-workspace .manager-history-header { border:0; padding:0; margin:0; }
+.manager-control-workspace .manager-history-day { position:relative; gap:10px; padding:22px!important; border:1px solid #e0e7f0; border-radius:15px!important; background:linear-gradient(130deg,#fff 55%,#f6f9fe); box-shadow:0 3px 12px #17304e04; }
+.manager-control-workspace .manager-history-day-symbol { display:grid; place-items:center; width:42px; height:42px; margin-bottom:6px; background:#eaf1fb; border-radius:11px; color:#5379a9; }
+.manager-control-workspace .manager-history-day-symbol svg { width:22px; height:22px; }
+.manager-control-workspace .manager-history-day .manager-history-day-link { color:#39658f; }
+.manager-control-workspace .manager-history-day:hover:not(:disabled) { color:#234d78; border-color:#a6bedb; background:#f6faff; }
+.manager-control-workspace .manager-history-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:0; }
+.manager-control-workspace .manager-history-stats > div { padding:18px 20px; border:1px solid #e0e8f2; border-radius:14px; background:#fff; }
+.manager-control-workspace .manager-history-stats dt { display:flex; align-items:center; gap:9px; color:#6a7e94; font-size:12px; }
+.manager-control-workspace .manager-history-stats dt svg { width:18px; height:18px; color:#6b8caf; flex:none; }
+.manager-control-workspace .manager-history-stats dd { margin:12px 0 0; color:#294764; font-size:28px; line-height:1.2; font-weight:700; font-variant-numeric:tabular-nums; }
+.manager-control-workspace .manager-history-stats [data-state="done"] dd { color:#2d7e60; }
+.manager-control-workspace .manager-history-stats [data-state="refused"] dd { color:#ad5c61; }
+.manager-control-workspace .manager-history-action { background:#edf3fb; color:#456d9c; border-radius:6px; }
+.manager-control-workspace .manager-history-result { border-radius:6px; }
+.manager-control-workspace .manager-history-source { display:inline-flex; align-items:center; gap:7px; }
+.manager-control-workspace .manager-history-source > svg { width:17px; height:17px; flex:none; color:#8296ad; }
+.manager-control-workspace .manager-auto-artwork { display:block; object-fit:contain; margin-bottom:20px; }
+.manager-control-workspace .manager-device-card { background:#fff; border:1px solid #dfe7f1; border-radius:16px; }
+.manager-control-workspace .manager-device-facts { gap:0 18px; }
+.manager-control-workspace .manager-people-filter { border-radius:14px; background:#f7faff; }
+.manager-control-workspace .manager-people-table tbody td { vertical-align:middle; }
+@media (max-width:1000px) { .manager-control-workspace .manager-form.manager-settings-form { grid-template-columns:minmax(0,1fr); } }
+@media (max-width:700px) {
+ .manager-shell .manager-section-heading { align-items:flex-start; }
+ .manager-shell .manager-section-heading :is(h2,h3,h4) { font-size:20px; }
+ .manager-shell .manager-section-symbol { width:40px; height:40px; flex-basis:40px; border-radius:11px; }
+ .manager-control-workspace .manager-workspace-hero .manager-workspace-title { padding:18px; }
+ .manager-control-workspace .manager-workspace-hero .manager-workspace-title .manager-section-identity { align-items:flex-start; gap:11px; }
+ .manager-control-workspace .manager-workspace-hero .manager-workspace-head { padding:20px 18px 6px; gap:16px; }
+ .manager-control-workspace .manager-workspace-hero .manager-workspace-tools { padding-top:14px; }
+ .manager-control-workspace .manager-workspace-hero h3 { font-size:23px; }
+ .manager-control-workspace .manager-settings-form > .manager-settings-card { padding:18px; }
+ .manager-control-workspace .manager-timing-fields { grid-template-columns:minmax(0,1fr); }
+ .manager-control-workspace .manager-settings-footer { padding:18px; }
+ .manager-control-workspace .manager-settings-save-actions { width:100%; display:flex; gap:8px; }
+ .manager-control-workspace .manager-settings-save-actions > button { flex:1; }
+ .manager-control-workspace .manager-history-stats { gap:8px; }
+ .manager-control-workspace .manager-history-stats > div { padding:14px 10px; }
+ .manager-control-workspace .manager-history-stats dt { flex-direction:column; align-items:flex-start; gap:8px; font-size:11px; }
+ .manager-control-workspace .manager-history-stats dd { font-size:24px; }
+}
+/* Role-specific invitations inherit their visual identity inside the modal. */
+.manager-confirm-dialog:has(.manager-invitation-role) { width:min(480px,calc(100vw - 32px)); padding:26px; border-radius:18px; }
+.manager-confirm-dialog:has(.manager-invitation-role) > h2 { font-size:24px; margin-bottom:10px; }
+.manager-confirm-dialog:has(.manager-invitation-role) > p { color:#708197; font-size:13px; line-height:1.9; }
+.manager-confirm-dialog .manager-invitation-role { display:flex; align-items:center; padding:16px; margin:4px 0 8px; border:1px solid #dfe8f4; border-radius:12px; background:#f5f9ff; }
+.manager-confirm-dialog .manager-section-identity { display:flex; gap:12px; align-items:center; }
+.manager-confirm-dialog .manager-section-symbol { display:grid; place-items:center; width:42px; height:42px; flex:none; border-radius:11px; background:#e8f0fc; color:#4b74a7; }
+.manager-confirm-dialog .manager-section-symbol svg { width:22px; height:22px; }
+.manager-confirm-dialog .manager-invitation-role h4 { margin:0 0 4px; font-size:16px; color:#2a4866; }
+.manager-confirm-dialog .manager-invitation-role p { margin:0; color:#788ca3; font-size:12px; }
+.manager-confirm-dialog [data-role="staff"] .manager-section-symbol { color:#35816e; background:#e3f3ed; }
+.manager-confirm-dialog [data-role="viewer"] .manager-section-symbol { color:#7e6caa; background:#f0ebf8; }
+.manager-confirm-dialog:has(.manager-invitation-role) .manager-form label { gap:9px; font-size:12px; color:#627b94; }
+.manager-confirm-dialog:has(.manager-invitation-role) input[type="email"] { min-height:48px; padding:12px 14px; border-radius:10px; background:#fbfcfe; border:1px solid #d8e3f0; font-size:14px; direction:ltr; text-align:start; box-sizing:border-box; width:100%; }
+.platform-page .manager-confirm-dialog:has(.manager-invitation-role) button.manager-button.primary { background:#23486e; border-color:#23486e; }
+.platform-page .manager-confirm-dialog:has(.manager-invitation-role) button.manager-button.primary:hover:not(:disabled) { background:#173655; border-color:#173655; }
+.manager-confirm-dialog:has(.manager-invitation-role) input:focus-visible { outline:3px solid #8fb5e23d; outline-offset:2px; border-color:#7197c2; }
+.manager-confirm-dialog > .manager-invitation-role { margin-block:20px 0; }
+.manager-control-workspace .manager-event-heading { display:grid; grid-template-columns:42px minmax(0,1fr); column-gap:12px; align-items:center; }
+.manager-control-workspace .manager-event-heading > svg { grid-row:1/3; width:22px; height:22px; padding:10px; box-sizing:content-box; border-radius:11px; background:#edf4fc; color:#5d80aa; }
+.manager-control-workspace .manager-event-heading h3 { margin:3px 0 0; font-size:21px; color:#294865; }
+.manager-control-workspace .manager-event-eyebrow { color:#7c8fa5; font-size:11px; }
