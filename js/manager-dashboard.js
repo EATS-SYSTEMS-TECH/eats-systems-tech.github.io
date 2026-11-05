@@ -409,6 +409,7 @@ export function createManagerDashboard({
     examples.closeView();
     view.classList.remove("manager-example-workspace", "manager-control-workspace");
     delete view.dataset.systemType;
+    delete view.dataset.workspaceReady;
     if (status.parentNode !== main) main.insertBefore(status, retry);
     delete view.dataset.simulation;
     generation++;
@@ -1599,6 +1600,7 @@ export function createManagerDashboard({
     const epoch = generation;
     view.replaceChildren();
     view.classList.add("manager-control-workspace");
+    view.dataset.workspaceReady = "false";
     view.dataset.systemType = system.type;
     if (simulated) appendSimulationNote();
     const head = createManagerControlHeader({ system, language,
@@ -1813,6 +1815,7 @@ export function createManagerDashboard({
         candidate.session
       ) {
         workspaceReady = true;
+        view.dataset.workspaceReady = "true";
         connectionDialog.complete();
         setManagerControlState(view, examples.isSystem(currentSystem) ? "simulation" : "connected", language);
         say(unsentChange
@@ -1845,6 +1848,13 @@ export function createManagerDashboard({
     else connectionDialog.setStage(state === "active" ? "loading" : state);
   }
   function showConnectionRecovery(gate) {
+    view.dataset.workspaceReady = "true";
+    const content = view.querySelector("#manager-content");
+    if (content) {
+      delete content.dataset.loading;
+      content.setAttribute("aria-busy", "false");
+      content.style.removeProperty("min-height");
+    }
     workspacePanel?.dispose();
     workspacePanel = undefined;
     workspacePanelContext = undefined;
@@ -1908,6 +1918,27 @@ export function createManagerDashboard({
     view.querySelector("#manager-content")?.setAttribute("aria-labelledby", `manager-tab-${currentTab}`);
   }
   async function showTab(tab, more = false) {
+    const content = view.querySelector("#manager-content");
+    if (!content) return renderTab(tab, more);
+    const source = connection, epoch = generation;
+    return activity.track(t("טוען נתונים מהמערכת…", "Loading system data…"), async () => {
+      content.style.minHeight = `${Math.max(content.getBoundingClientRect().height, 360)}px`;
+      content.dataset.loading = "true";
+      content.setAttribute("aria-busy", "true");
+      const pending = renderTab(tab, more);
+      const panelEpoch = tabGeneration;
+      try {
+        await pending;
+      } finally {
+        if (!closed && generation === epoch && connection === source && tabGeneration === panelEpoch && content.isConnected) {
+          delete content.dataset.loading;
+          content.setAttribute("aria-busy", "false");
+          content.style.removeProperty("min-height");
+        }
+      }
+    });
+  }
+  async function renderTab(tab, more = false) {
     if (!connection?.session) throw new Error("DISCONNECTED");
     workspacePanel?.dispose();
     workspacePanel = undefined;

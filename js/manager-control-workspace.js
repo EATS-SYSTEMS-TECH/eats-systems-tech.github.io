@@ -27,6 +27,8 @@ export function createManagerControlHeader({ system, language, returnButton, act
     node("p", `${type} · ${count} ${count === 1 ? t("שער", "gate") : t("שערים", "gates")}`, "manager-workspace-context"),
     node("span", "", "manager-workspace-status"),
   );
+  const loading = node("div", undefined, "manager-workspace-progress");
+  heading.append(loading);
   identity.append(icon, heading);
   const tools = node("div", undefined, "manager-workspace-tools");
   tools.append(returnButton, actions);

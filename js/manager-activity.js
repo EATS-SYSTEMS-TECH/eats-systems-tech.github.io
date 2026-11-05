@@ -10,7 +10,9 @@ export function createManagerActivity({ main, view, language }) {
   spinner.className = "manager-spinner";
   spinner.setAttribute("aria-hidden", "true");
   const label = document.createElement("span");
-  progress.append(spinner, label);
+  const bar = document.createElement("progress");
+  bar.className = "manager-activity-bar";
+  progress.append(spinner, label, bar);
   main.prepend(progress);
   const placeholder = document.createElement("div");
   placeholder.className = "manager-loading-panel";
@@ -21,12 +23,22 @@ export function createManagerActivity({ main, view, language }) {
   let revision = 0,
     paused = false;
   function render() {
+    const workspace = view.querySelector(".manager-workspace-progress");
+    const target = workspace ?? main;
+    if (progress.parentNode !== target) {
+      if (workspace) target.append(progress);
+      else target.prepend(progress);
+    }
+    progress.classList.toggle("is-workspace", Boolean(workspace));
     progress.hidden = paused || pending.size === 0;
     view.setAttribute("aria-busy", String(pending.size > 0));
     if (pending.size && !paused) {
       const text = [...pending.values()].at(-1);
       if (label.textContent !== text) label.textContent = text;
-      if (!view.contains(placeholder)) view.append(placeholder);
+      label.title = text;
+      bar.setAttribute("aria-label", text);
+      if (!workspace && !view.contains(placeholder)) view.append(placeholder);
+      if (workspace) placeholder.remove();
     } else placeholder.remove();
   }
   return {
