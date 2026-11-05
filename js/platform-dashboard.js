@@ -470,7 +470,7 @@ async function refresh() {
     const result = await getPlatformProfile(user);
     if (requestGeneration !== generation) return;
     identity = parsePlatformIdentity(result, user.uid);
-    renderFounderTag(identity.platformRole);
+    renderFounderTag(identity.platformRole, identity.user.emailVerified);
     const refusal = signInRefusal(identity);
     if (refusal) {
       void session?.endSession(refusal);

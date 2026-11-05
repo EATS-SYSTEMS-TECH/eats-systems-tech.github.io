@@ -112,7 +112,7 @@ function renderAccount(user) {
   renderProfileAvatar($("#account-avatar"), name, user?.photoURL, language);
   $("#account-name").textContent = name;
   $("#account-email").textContent = profile.email || "";
-  renderProfileRoles($("#account-plan"), { platformRole: identity?.platformRole, product: "host", role: identity?.hasPlan ? identity.role : null });
+  renderProfileRoles($("#account-plan"), { platformRole: identity?.platformRole, product: "host", role: identity?.hasPlan ? identity.role : null, verified: identity?.user?.emailVerified === true });
   const workspaceRoles = $("#host-workspace-roles");
   if (workspaceRoles) {
     workspaceRoles.replaceChildren();

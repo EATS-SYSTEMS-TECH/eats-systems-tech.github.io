@@ -42,7 +42,7 @@ export function createManagerProfile({
       find("#manager-profile-email").textContent =
         profile.user?.email || user.email || "";
       const roles = find("#manager-profile-roles");
-      renderProfileRoles(roles, { ...profile, product });
+      renderProfileRoles(roles, { ...profile, product, verified: profile.user?.emailVerified ?? user.emailVerified ?? false });
       button.disabled = false;
       if (product === "manager" && "role" in profile)
         document.body.classList.add("manager-ready");

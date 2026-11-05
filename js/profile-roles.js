@@ -3,21 +3,31 @@ import { managerUiIcon } from "./manager-ui-icons.js";
 let founderVisible = false;
 export const isPlatformFounder = () => founderVisible;
 
-export function renderFounderTag(platformRole) {
+export function renderFounderTag(platformRole, verified = false) {
   founderVisible = platformRole === "admin";
-  document.querySelectorAll(".dashboard-founder-tag").forEach(tag => tag.remove());
-  if (platformRole !== "admin") return;
+  document.querySelectorAll(".dashboard-identity-tag, .dashboard-identity-divider").forEach(tag => tag.remove());
   const brand = document.querySelector(".platform-header .brand, .host-topbar .brand");
   if (!brand) return;
+  brand.removeAttribute("aria-description");
+  if (verified !== true) return;
+  const he = document.documentElement.lang.startsWith("he");
+  const divider = document.createElement("span");
+  divider.className = "dashboard-identity-divider";
+  divider.setAttribute("aria-hidden", "true");
   const tag = document.createElement("span");
-  tag.className = "dashboard-founder-tag";
-  tag.append(managerUiIcon("founder"), document.createTextNode(planRoleName("admin")));
-  brand.append(tag);
+  tag.className = "dashboard-identity-tag" + (founderVisible ? " dashboard-founder-tag" : " dashboard-user-tag");
+  const label = founderVisible
+    ? he ? "מייסד מאומת" : "Verified Founder"
+    : he ? "משתמש מאומת" : "Verified User";
+  tag.title = label;
+  brand.setAttribute("aria-description", label);
+  tag.append(managerUiIcon("admin"), document.createTextNode(label));
+  brand.append(divider, tag);
 }
 
 // The same explicit hierarchy is rendered in every product's profile popover.
-export function renderProfileRoles(container, { platformRole, product, role, roles } = {}) {
-  renderFounderTag(platformRole);
+export function renderProfileRoles(container, { platformRole, product, role, roles, verified = false } = {}) {
+  renderFounderTag(platformRole, verified);
   const identity = container.closest(".dashboard-profile-panel")?.querySelector(".dashboard-profile-identity > div");
   identity?.querySelector(".dashboard-global-role")?.remove();
   container.replaceChildren();
