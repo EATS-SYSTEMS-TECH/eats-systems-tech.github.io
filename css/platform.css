@@ -1280,6 +1280,14 @@ html[dir="rtl"] .platform-admin-business > * { direction: rtl; }
 .platform-admin-management .platform-admin-search-tools label { color: #526078; font-size: .75rem; gap: 8px; }
 .platform-admin-management .platform-admin-search-tools :is(input,select) { min-height: 46px; border: 1px solid #dce4ee; border-radius: 10px; background: #f8fafc; font-size: .83rem; }
 .platform-admin-management .platform-admin-search-tools :is(input,select):focus-visible { outline: 3px solid #185adb26; border-color: #397cf3; background: #fff; }
+.platform-admin-search-field { position: relative; display: block; min-width: 0; }
+.platform-admin-search-field > svg {
+  position: absolute; inset-inline-start: 14px; top: 50%; transform: translateY(-50%);
+  width: 18px; height: 18px; fill: none; stroke: #708098; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round; pointer-events: none;
+}
+.platform-admin-management .platform-admin-search-field input { padding-inline-start: 42px; }
+.platform-admin-search-field:focus-within > svg { stroke: #185adb; }
 .platform-admin-organization-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 18px; align-items: start; }
 .platform-admin-organization-column { min-width: 0; border: 1px solid #e0e7ef; border-radius: 18px; padding: 22px; overflow-wrap: anywhere; background: #fff; box-shadow: 0 3px 12px #10244004; }
 .platform-admin-organization-column > h4 { margin: 0 0 22px; padding-bottom: 16px; border-bottom: 1px solid #edf0f5; font-size: 1rem; color: #203650; letter-spacing: -.015em; }

@@ -37,6 +37,7 @@ const directoryIcon = key => {
     staff: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8m7 8 2 2 4-4",
     viewer: "M2 12s4-8 10-8 10 8 10 8-4 8-10 8S2 12 2 12Zm7 0a3 3 0 1 0 6 0 3 3 0 0 0-6 0",
     add: "M12 5v14M5 12h14",
+    search: "M21 21l-5-5M10.5 3a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15",
   }[key] ?? "M4 6h16M4 12h16M4 18h16");
   icon.append(path);
   return icon;
@@ -199,7 +200,10 @@ export function createPlatformAdminDirectory({
   if(organizationActions)listToolbar.append(createOrganization);
   const searchTools=element("div",null,"platform-admin-search-tools");
   const searchLabel=element("label",t("חיפוש חשבון","Search accounts"));
-  const search=element("input");search.type="search";search.maxLength=254;search.autocomplete="off";search.placeholder=t("שם או כתובת אימייל","Name or email address");searchLabel.append(search);
+  const search=element("input");search.type="search";search.maxLength=254;search.autocomplete="off";search.placeholder=t("שם או כתובת אימייל","Name or email address");
+  const searchField = element("span", null, "platform-admin-search-field");
+  searchField.append(directoryIcon("search"), search);
+  searchLabel.append(searchField);
   const organizationLabel=element("label",t("בחירת ארגון","Choose organization"));
   const organizationSelect=element("select");organizationLabel.hidden=true;organizationLabel.append(organizationSelect);
   searchTools.append(searchLabel,organizationLabel);
@@ -274,11 +278,11 @@ export function createPlatformAdminDirectory({
     listToolbar,
     filters,
     membershipFilters,
-    searchTools,
     ...(product === "all" ? [revenue] : []),
     hint,
     status,
     actionStatus,
+    searchTools,
     rows,
     more,
     footnote,
