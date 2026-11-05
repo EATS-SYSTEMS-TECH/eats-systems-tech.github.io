@@ -1620,3 +1620,66 @@ body[data-product] .manager-organization-systems-help > .dashboard-examples { ma
 .manager-assignment-steps p { font-size:13px; line-height:1.8; color:#63758b; margin:8px 0 0; }
 .manager-assignment-guide .manager-assignment-note { padding:14px; border:1px solid #efd4b8; border-radius:12px; background:#fff6e9; color:#85471e; }
 @media(max-width:600px) { .manager-assignment-steps { grid-template-columns:1fr; } }
+
+/* Organization people: a focused team directory, rather than nested panels. */
+.manager-organization-people-panel { min-width:0; }
+.manager-people-page-heading { align-items:center; gap:18px; }
+.manager-people-eyebrow { display:block; margin-bottom:6px; color:#8a5b39; font-size:12px; font-weight:650; }
+.manager-people-page-heading h3 { margin:0; color:#1e344e; font-size:clamp(24px,3vw,32px); letter-spacing:-.025em; }
+.manager-people-page-heading p { margin:8px 0 0; color:#718096; font-size:13px; line-height:1.7; }
+.manager-shell .manager-people-page-heading button { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; border-radius:12px; }
+.manager-people-page-heading svg { width:17px; height:17px; }
+.manager-shell .manager-people-metrics .manager-organization-metric { display:grid; grid-template-columns:42px 1fr; grid-template-rows:auto auto; align-items:center; gap:4px 14px; padding:20px; border-color:#e3e9f0; background:#fff; }
+.manager-people-metrics .manager-organization-metric > svg { grid-row:1/3; width:22px; height:22px; padding:10px; box-sizing:content-box; border:1px solid #dbe5f6; border-radius:13px; color:#5675a9; background:#f1f6ff; }
+.manager-people-metrics [data-people-role="staff"] > svg { color:#34867c; background:#eef9f6; border-color:#d4eee7; }
+.manager-people-metrics [data-people-role="viewers"] > svg { color:#7d789d; background:#f5f3fa; border-color:#e9e4f3; }
+.manager-people-metrics .manager-organization-metric strong { font-size:28px; }
+.manager-people-metrics .manager-organization-metric span { color:#6b7d92; font-size:12px; }
+.manager-people-metrics .manager-organization-metric::after { top:18px; inset-inline-end:16px; font-size:12px; }
+.manager-organization-people-panel .manager-organization-search { display:grid; justify-content:stretch; padding:18px; border:1px solid #e2e9f1; border-radius:16px; background:#f9fbfd; gap:10px; font-size:12px; color:#64758a; }
+.manager-people-search-field { display:block; position:relative; width:100%; min-width:0; }
+.manager-people-search-field > svg { pointer-events:none; position:absolute; inset-inline-start:14px; top:50%; transform:translateY(-50%); width:19px; height:19px; color:#8b99ab; }
+.manager-organization-search .manager-people-search-field input { box-sizing:border-box; width:100%; max-width:none; min-height:46px; padding-inline-start:44px; border-radius:11px; border-color:#dbe4ef; background:#fff; font-size:13px; }
+.manager-organization-search input:focus-visible { border-color:#c9814b; outline:3px solid #edb68d33; }
+.manager-people-search-field:focus-within svg { color:#b76a30; }
+.manager-organization-people { grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); align-items:start; gap:16px; }
+.manager-organization-person-column { padding:18px; border-color:#e2e9f1; border-radius:18px; background:#fff; box-shadow:0 4px 18px #182d4804; }
+.manager-organization-people-head { align-items:flex-start; gap:14px; margin-bottom:18px; }
+.manager-organization-people-title { display:flex; flex-wrap:wrap; align-items:center; gap:8px; width:100%; }
+.manager-organization-people-title h3 { font-size:14px; line-height:1.5; font-weight:700; }
+.manager-organization-people-title .manager-organization-people-count { margin-inline-start:auto; color:#5b708a; background:#f0f4f9; font-variant-numeric:tabular-nums; }
+.manager-people-role-icon { display:grid; place-items:center; width:32px; height:32px; border:1px solid #dce7f7; border-radius:10px; color:#5675a9; background:#f2f6fd; }
+.manager-people-role-icon svg { width:18px; height:18px; }
+[data-organization-role="staff"] .manager-people-role-icon { background:#f0faf7; border-color:#d4eee7; color:#34867c; }
+[data-organization-role="viewer"] .manager-people-role-icon { background:#f6f4fb; border-color:#e7e2f3; color:#7d789d; }
+.platform-page .portal-panel .manager-shell .manager-organization-people-head button.manager-people-add { display:flex; align-items:center; justify-content:center; gap:7px; width:100%; min-height:40px; padding:9px 12px; border:1px solid #eed5bf; border-radius:11px; background:#fff7ee; color:#9a4b1e; font-size:12px; }
+.manager-people-add svg { width:16px; height:16px; }
+.platform-page .portal-panel .manager-shell .manager-organization-people-head button.manager-people-add:hover:not(:disabled) { background:#a94b1b; color:#fff; border-color:#a94b1b; }
+.manager-organization-person-column .manager-organization-person { position:relative; display:grid; grid-template-columns:36px minmax(0,1fr) auto; align-items:start; gap:10px; margin-top:10px; padding:14px 12px; border:1px solid #e6ecf3; border-radius:13px; background:#fbfcfe; }
+.manager-organization-person-column .manager-organization-person:last-child { padding-bottom:14px; border-bottom:1px solid #e6ecf3; }
+.manager-organization-person strong { font-size:12px; line-height:1.6; }
+.manager-organization-person small { line-height:1.6; }
+.manager-organization-person-avatar { width:36px; height:36px; flex-basis:36px; border:1px solid #dce6f2; border-radius:11px; color:#64809f; background:#edf3fa; font-weight:700; }
+.manager-organization-person-avatar svg { width:20px; height:20px; }
+.manager-organization-person-column [data-owner="true"] { background:#fffcf5; border-color:#eee1c8; }
+[data-owner="true"] .manager-organization-person-avatar { color:#a17833; background:#fff1d7; border-color:#efddb9; }
+[data-owner="true"] small { color:#987340; }
+.manager-people-you { width:fit-content; font-size:10px; font-weight:650; color:#527164; padding:2px 7px; border-radius:6px; background:#eaf5ef; }
+.manager-people-role-empty { display:grid; justify-items:center; text-align:center; gap:12px; padding:28px 12px; border:1px dashed #dfe6ee; border-radius:13px; background:#fafcfe; color:#8493a6; }
+.manager-people-role-empty > svg { width:28px; height:28px; padding:12px; box-sizing:content-box; border-radius:16px; background:#f0f4f9; }
+.manager-people-role-empty strong { font-size:12px; color:#61748b; }
+.manager-people-role-empty p { margin:0; color:#8493a6; font-size:12px; line-height:1.8; }
+.manager-people-role-empty[hidden] { display:none; }
+@media(max-width:600px) {
+ .manager-shell .manager-people-metrics .manager-organization-metric { grid-template-columns:1fr; justify-items:center; padding:14px 6px; gap:8px; text-align:center; }
+ .manager-people-metrics .manager-organization-metric > svg { grid-row:auto; width:19px; height:19px; padding:8px; }
+ .manager-people-metrics .manager-organization-metric strong { font-size:24px; }
+ .manager-people-metrics .manager-organization-metric span { font-size:11px; }
+ .manager-organization-people { grid-template-columns:1fr; }
+ .manager-organization-people-panel .manager-organization-search { padding:14px; }
+}
+@media(prefers-reduced-motion:no-preference) {
+ .manager-people-add,.manager-people-metrics .manager-organization-metric { transition:background-color 140ms ease,border-color 140ms ease; }
+ .manager-organization-person { transition:border-color 140ms ease,box-shadow 140ms ease; }
+ .manager-organization-person:hover { border-color:#d4dfec; box-shadow:0 3px 10px #182d4805; }
+}
