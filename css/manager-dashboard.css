@@ -1093,7 +1093,11 @@
 .manager-empty-systems p { margin: 0; max-width: 50ch; line-height: 1.8; font-size: 14px; }
 .manager-empty-symbol { display: grid; place-items: center; position: relative; width: 64px; height: 64px; border: 1px solid #ffe3cf; border-radius: 20px; background: #fff1e6; color: #c2410c; }
 .manager-card.manager-example-card { border: 1px solid #e2e8f0; border-radius: 18px; background: linear-gradient(155deg, #f7f5ff, #fff 40%); box-shadow: 0 5px 20px #182d4808; padding: 22px; }
-.manager-example-badge, .manager-role-badge { border-radius: 999px; padding: 5px 10px; }
+.manager-example-badge { border:1px solid #ddd6e8; border-radius:5px; padding:5px 9px; background:#f6f3fa; color:#665278; font-size:11px; font-weight:600; line-height:1.4; letter-spacing:.015em; }
+.manager-role-badge { border-radius:999px; padding:5px 10px; }
+.manager-system .manager-system-meta { display:flex; align-items:center; flex-wrap:wrap; gap:9px; margin:0; }
+.manager-system-kind-tag { display:inline-flex; align-items:center; width:fit-content; padding:5px 8px; border:1px solid #dce3ec; border-radius:5px; background:#f5f7fa; color:#45576e; font-size:11px; font-weight:600; line-height:1.4; white-space:nowrap; letter-spacing:.01em; }
+.manager-system-gate-count { color:#718096; font-size:12px; white-space:nowrap; }
 .manager-card.manager-overview-card, .manager-card.manager-org-column, .manager-card.manager-directory-row { border-radius: 18px; }
 .manager-platform-header { border-radius: 18px; background: linear-gradient(150deg, #f1f5fa, #fff 58%); box-shadow: 0 5px 20px #182d4808; }
 .manager-platform-tabs { row-gap: 10px; }

@@ -22,15 +22,23 @@ export function createManagerSystemCard({
   const heading = document.createElement("h4");
   heading.textContent = system.name;
   const description = document.createElement("span");
-  description.className = "manager-muted";
+  description.className = "manager-muted manager-system-meta";
   const count = new Set(system.systemIds).size;
   const type =
-    systemKindLabel(system, language, {
-      gate: t("שער", "Gate"),
-      "dual-control": t("שליטה כפולה", "Dual Control"),
-      group: t("קבוצה", "Group"),
-    }) ?? t("מערכת", "System");
-  description.textContent = `${type} · ${count} ${count === 1 ? t("שער", "gate") : t("שערים", "gates")}`;
+    systemKindLabel(system, "en", {
+      gate: "Gate",
+      "dual-control": "Dual Control",
+      group: "Group",
+    }) ?? "System";
+  const kind = document.createElement("span");
+  kind.className = "manager-system-kind-tag";
+  kind.lang = "en";
+  kind.dir = "ltr";
+  kind.textContent = type;
+  const gateCount = document.createElement("span");
+  gateCount.className = "manager-system-gate-count";
+  gateCount.textContent = `${count} ${count === 1 ? t("שער", "gate") : t("שערים", "gates")}`;
+  description.append(kind, gateCount);
   card.append(heading, description, actions);
   return card;
 }
