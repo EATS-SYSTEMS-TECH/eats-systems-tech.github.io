@@ -4,6 +4,13 @@ import { authErrorMessage } from "./host-auth-errors.js";
 import { roleLabel } from "./host-role-badge.js";
 import { requestWithRecentIdentity } from "./host-recent-identity.js";
 import { createManagerSystemCard } from "./manager-system-card.js";
+import { systemIconSrc } from "./wifigate-system-icons.js";
+import {
+  isRollerShutter,
+  rollerShutterIcon,
+  rollerShutterLabel,
+  ROLLER_SHUTTER_CATEGORY,
+} from "./wifigate-objects.js";
 
 // Shared pieces of My systems, Organization systems and the examples: the
 // system card (icon, name, kind line, badges, actions), the app steps for
@@ -28,14 +35,19 @@ export function readSystem(value) {
     return null;
   const type = types.has(value.type) ? value.type : "gate";
   const linked = value.linkedOrganization;
+  // A Roller Shutter is a Dual Control with its category; its icon never
+  // makes one.
+  const roller = isRollerShutter({ type, category: value.category });
   return {
     id: value.id,
     type,
+    ...(roller ? { category: ROLLER_SHUTTER_CATEGORY } : {}),
     // Never shown: with the type it names the same system in My systems
     // and in its organization, whose ids differ.
     targetId: typeof value.targetId === "string" ? value.targetId : "",
-    iconId:
-      typeof value.iconId === "string" && /^[a-z0-9-]{1,64}$/.test(value.iconId)
+    iconId: roller
+      ? rollerShutterIcon
+      : typeof value.iconId === "string" && /^[a-z0-9-]{1,64}$/.test(value.iconId)
         ? value.iconId
         : defaultIcons[type],
     name:
@@ -67,16 +79,20 @@ export function readSystem(value) {
 }
 
 export const iconSrc = (system) =>
-  `/assets/host-icons/${system.type}-${system.iconId}.svg`;
+  isRollerShutter(system)
+    ? systemIconSrc(system)
+    : `/assets/host-icons/${system.type}-${system.iconId}.svg`;
 
-// The line under a name: Gate, or Dual Control / Group with its number of
-// gates. The kind and the number are isolated, so "Dual Control · 2" stays in
-// reading order inside Hebrew copy.
+// The line under a name: Gate, or Dual Control / Roller Shutter / Group with
+// its number of gates. The kind and the number are isolated, so
+// "Dual Control · 2" stays in reading order inside Hebrew copy.
 export function kindLine(system) {
   const line = node("p", undefined, { class: "system-card__kind" });
   if (system.type === "gate") line.textContent = hostText("Gate");
   else {
-    const label = hostText(system.type === "group" ? "Group" : "Dual Control");
+    const label = isRollerShutter(system)
+      ? rollerShutterLabel(hostLanguage)
+      : hostText(system.type === "group" ? "Group" : "Dual Control");
     line.append(
       system.gates === 1
         ? isolatedText("{p0} · 1 gate", { p0: label })

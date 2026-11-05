@@ -1,4 +1,5 @@
 import { createSystemIcon } from "./wifigate-system-icons.js";
+import { systemKindLabel } from "./wifigate-objects.js";
 
 // Real systems and examples deliberately share this markup and stylesheet.
 export function createManagerSystemCard({
@@ -24,11 +25,11 @@ export function createManagerSystemCard({
   description.className = "manager-muted";
   const count = new Set(system.systemIds).size;
   const type =
-    {
+    systemKindLabel(system, language, {
       gate: t("שער", "Gate"),
       "dual-control": t("שליטה כפולה", "Dual Control"),
       group: t("קבוצה", "Group"),
-    }[system.type] ?? t("מערכת", "System");
+    }) ?? t("מערכת", "System");
   description.textContent = `${type} · ${count} ${count === 1 ? t("שער", "gate") : t("שערים", "gates")}`;
   card.append(heading, description, actions);
   return card;

@@ -124,7 +124,14 @@ test("Host uses production Manager layout and shared components with Host colors
         for (const page of [manager.page, host.page]) {
           const examples = page.locator(".manager-examples > summary");
           await examples.click();
-          assert.equal(await page.locator(".manager-examples .manager-system").count(), 3);
+          assert.equal(await page.locator(".manager-examples .manager-system").count(), 4);
+          // Host and Manager name the Roller Shutter example the same way.
+          assert.deepEqual(
+            await page.locator(".manager-examples .manager-system .manager-muted").evaluateAll(items => items.map(item => item.textContent)),
+            language === "he"
+              ? ["שער · 1 שער", "שליטה כפולה · 2 שערים", "תריס חשמלי · 2 שערים", "קבוצה · 4 שערים"]
+              : ["Gate · 1 gate", "Dual Control · 2 gates", "Roller Shutter · 2 gates", "Group · 4 gates"],
+          );
           await examples.click();
           const setup = page.locator(".manager-setup-guide > summary");
           await setup.click();

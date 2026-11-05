@@ -8,7 +8,7 @@ import {
 test("sample gates have independent per-dashboard data and deduplicate overlapping systems", () => {
   const a = createManagerExampleData(),
     b = createManagerExampleData();
-  assert.equal(a.uniqueGates(managerExampleSystems).length, 4);
+  assert.equal(a.uniqueGates(managerExampleSystems).length, 6);
   assert.equal(a.gate("DEMO-24980").users.length, 30);
   assert.equal(a.gate("DEMO-24980").admins.length, 1);
   assert.equal(a.gate("DEMO-24980").maxUsers, 5000);

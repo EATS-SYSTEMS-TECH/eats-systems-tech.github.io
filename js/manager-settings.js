@@ -24,7 +24,7 @@ export function managerSettingsPayload(saved, draft, revision) {
   }
   return payload;
 }
-export function renderManagerSettings({ root, language = "en", config, revision, onSave, confirm, errorText, isCurrent = () => true, commandLocked = false }) {
+export function renderManagerSettings({ root, language = "en", config, revision, onSave, confirm, errorText, isCurrent = () => true, commandLocked = false, rollerShutter = false }) {
   config = {command:"PULSE",...managerDefaultTimings,...config};
   const he = language === "he", t = (h, e) => he ? h : e;
   const form = node("form", undefined, "manager-form manager-settings-form");
@@ -47,7 +47,9 @@ export function renderManagerSettings({ root, language = "en", config, revision,
   select.setAttribute("aria-describedby",description.id);
   description.setAttribute("aria-live", "polite");
   methodCard.append(heading, node("p", t("בחרו כיצד המערכת מגיבה לפקודת פתיחה.", "Choose how the system responds to an opening command."), "manager-supporting-copy"), picker, description);
-  if (commandLocked) methodCard.append(node("p", t("במערכת Dual Control אופן הפתיחה נקבע לפי ההגדרה המשותפת.", "In Dual Control, the opening method follows the shared configuration."), "manager-supporting-copy"));
+  if (commandLocked) methodCard.append(node("p", rollerShutter
+    ? t("בתריס חשמלי אופן הפתיחה נקבע לפי ההגדרה המשותפת.", "In a Roller Shutter, the opening method follows the shared configuration.")
+    : t("במערכת Dual Control אופן הפתיחה נקבע לפי ההגדרה המשותפת.", "In Dual Control, the opening method follows the shared configuration."), "manager-supporting-copy"));
   const card = node("section", undefined, "manager-settings-card manager-timing-card");
   card.append(node("h3", t("תזמון הפעולה", "Action timing")), node("p", t("מוצגים רק השלבים שמשמשים את אופן הפתיחה שבחרתם.", "Only the steps used by your chosen opening method are shown."), "manager-supporting-copy"));
   const fields = node("div", undefined, "manager-timing-fields");

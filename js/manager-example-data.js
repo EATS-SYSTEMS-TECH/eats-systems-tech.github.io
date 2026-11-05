@@ -16,6 +16,17 @@ export const managerExampleSystems = Object.freeze([
     iconId: "garage-small",
     example: true,
   }),
+  // A Roller Shutter is a Dual Control with its category: two PUSH_BUTTON
+  // sides, operated only in the app.
+  Object.freeze({
+    id: "example-manager-roller-shutter",
+    type: "dual-control",
+    category: "ROLLER_SHUTTER",
+    systemIds: Object.freeze(["DEMO-24984", "DEMO-24985"]),
+    name: "Example WIFIGATE Roller Shutter",
+    iconId: "roller-shutter-small",
+    example: true,
+  }),
   Object.freeze({
     id: "example-manager-group",
     type: "group",
@@ -79,7 +90,7 @@ const people = (count, admin = false) =>
 function gate(id, index) {
   return {
     id,
-    name: ["Parking gate", "Entry gate", "Exit gate", "Service gate"][index],
+    name: ["Parking gate", "Entry gate", "Exit gate", "Service gate", "Shutter up", "Shutter down"][index],
     boardMb: index === 1 ? 8 : 16,
     maxUsers: index === 1 ? 1000 : 5000,
     maxAdmins: 20,
@@ -96,14 +107,14 @@ function gate(id, index) {
     clock: "2026-10-12T11:22:00Z",
     timezone: "Asia/Jerusalem",
     uptime: "3d 6h",
-    gateType: "Parking barrier",
+    gateType: index > 3 ? "Roller shutter" : "Parking barrier",
     relayOn: false,
     freeHeap: 164000,
     sensor: true,
     override: "NORMAL",
     revision: 9,
     config: {
-      command: "PULSE_AFTER_PULSE",
+      command: index > 3 ? "PUSH_BUTTON" : "PULSE_AFTER_PULSE",
       pulseWidth1Millis: 5000,
       timeBetweenPulses1Seconds: 2,
       pulseWidth2Millis: 5000,
@@ -176,7 +187,7 @@ function gate(id, index) {
 export function createManagerExampleData() {
   const assignments = new Set(managerExampleSystems.map((system) => system.id));
   const gates = new Map(
-    ["DEMO-24980", "DEMO-24981", "DEMO-24982", "DEMO-24983"].map((id, i) => [
+    ["DEMO-24980", "DEMO-24981", "DEMO-24982", "DEMO-24983", "DEMO-24984", "DEMO-24985"].map((id, i) => [
       id,
       gate(id, i),
     ]),

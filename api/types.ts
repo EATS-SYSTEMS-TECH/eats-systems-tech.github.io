@@ -23,7 +23,10 @@ export type PortalProfile = {
 export type ProductId = "host" | "pay" | "manager";
 export type ProductState =
   "active" | "pending" | "no-plan" | "blocked" | "mfa-required" | "unavailable";
-export type PersonalSummary = { gates: number | null; dualControls: number | null; groups: number | null; organizations: number };
+// dualControls excludes Roller Shutters, which have their own count (older
+// servers omit it). Billing has a separate optional rollerShutters line at the
+// Dual Control price; older servers bill it in dualControls.
+export type PersonalSummary = { gates: number | null; dualControls: number | null; rollerShutters?: number | null; groups: number | null; organizations: number };
 export type MonthlyEstimate = {
   billingExempt?: boolean;
   exemptionReason?: "platform-admin";
@@ -35,7 +38,7 @@ export type MonthlyEstimate = {
   physicalGates: number;
   unitCents: number;
   minimumAdjustmentCents: number;
-  lines: Record<"gates" | "dualControls" | "groups" | "organizations", { amountCents: number; physicalGates?: number; quantity?: number; included?: number | null }>;
+  lines: Record<"gates" | "dualControls" | "groups" | "organizations", { amountCents: number; physicalGates?: number; quantity?: number; included?: number | null }> & Partial<Record<"rollerShutters", { amountCents: number; physicalGates?: number; quantity?: number }>>;
   monthlyCents: number;
 };
 export type ProductFinancials = MonthlyEstimate | { kind: "revenue"; revenue: { currency: string; amountCents: number } | null };

@@ -42,3 +42,19 @@ test("a product without a plan adds no monthly fee, but an unavailable active es
 test("blocked Host access does not hide an active Manager monthly estimate", () => {
   assert.match(monthlyTotal({ host: { state: "blocked", financials: null }, manager: { ...product([190, 0, 0, 0]), state: "active" }, pay: { state: "no-plan" } }, "en"), /1\.90/);
 });
+
+test("a separate Roller Shutter line is part of the total; an estimate without it still adds up", () => {
+  const withRoller = product([190, 190, 0, 0]);
+  withRoller.financials.lines.rollerShutters = {amountCents: 190, quantity: 1};
+  withRoller.financials.monthlyCents += 190;
+  assert.equal(monthlyEstimate(withRoller).monthlyCents, 570);
+  const missing = product([190, 190, 0, 0]);
+  missing.financials.monthlyCents += 190;
+  assert.equal(monthlyEstimate(missing), null);
+  assert.equal(monthlyEstimate(product([190, 190, 0, 0])).monthlyCents, 380);
+  const negative = product([0, 0, 0, 0]);
+  negative.financials.lines.rollerShutters = {amountCents: -1};
+  assert.equal(monthlyEstimate(negative), null);
+  withRoller.billingExempt = true;
+  assert.equal(monthlyEstimate(withRoller).lines.rollerShutters.amountCents, 0);
+});

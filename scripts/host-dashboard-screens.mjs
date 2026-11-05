@@ -29,7 +29,7 @@ import { parseArgs } from "node:util";
 import { tmpdir } from "node:os";
 import { chromium } from "playwright-core";
 import { rolePermissions } from "./host-test-shell.mjs";
-import { demoGuestLink } from "../js/host-demo-link.js";
+import { demoGuestLink, exampleKinds } from "../js/host-demo-link.js";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const { values: options } = parseArgs({
@@ -1676,7 +1676,7 @@ async function main() {
         if (only.lang && !only.lang.includes(lang)) continue;
         for (const viewport of viewports) {
           if (only.width && !only.width.includes(viewport.width)) continue;
-          for (const kind of ["room", "dual", "group"]) {
+          for (const kind of exampleKinds) {
             if (only.shot && !kind.includes(only.shot)) continue;
             const start = new Date(`${day(1)}T12:00:00.000Z`);
             const link = demoGuestLink({

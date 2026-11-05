@@ -60,7 +60,7 @@ test("shared physical gates retain simulated changes across gate/group workspace
     /EXAMPLE_CONFLICT/,
   );
   connection.close();
-  const group = await fixture(managerExampleSystems[2], data);
+  const group = await fixture(managerExampleSystems.find((system) => system.type === "group"), data);
   assert.equal(
     (await group.connection.command("ADMIN_GET_GATE_CONFIG")).data.config
       .command,

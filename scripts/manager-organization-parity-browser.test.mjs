@@ -162,7 +162,7 @@ test("organization example shares the real card and organization workspace with 
             await page
               .locator(".manager-organization-metrics strong")
               .allTextContents(),
-            ["3", "1", "0", "3"],
+            ["3", "1", "0", "4"],
           );
           assert.equal(
             await page.locator(".manager-organization-person-column").count(),
@@ -266,7 +266,7 @@ test("organization example shares the real card and organization workspace with 
             await page
               .locator(".manager-organization-metrics strong")
               .allTextContents(),
-            ["3", "0", "0", "3"],
+            ["3", "0", "0", "4"],
           );
           assert.equal(
             await page.evaluate(

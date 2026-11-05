@@ -9,7 +9,7 @@ const types = ["gate", "dual", "group"];
 const tabs = ["overview", "users", "admins", "guests", "auto", "settings", "events", "history", "rf", "system"];
 const styleProperties = ["display", "padding", "gap", "borderRadius", "backgroundColor", "color", "fontSize", "lineHeight", "minHeight"];
 
-async function fixture(t, browser, origin, { language, width, type }) {
+async function fixture(t, browser, origin, { language, width, type, real }) {
   const page = await browser.newPage({ viewport: { width, height: 1000 } });
   page.setDefaultTimeout(8000);
   t.after(() => page.close());
@@ -20,11 +20,13 @@ async function fixture(t, browser, origin, { language, width, type }) {
     body: `<!doctype html><html lang="${language}" dir="${language === "he" ? "rtl" : "ltr"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/css/host-portal.css"><link rel="stylesheet" href="/css/platform.css"><link rel="stylesheet" href="/css/manager-dashboard.css"><link rel="stylesheet" href="/css/dashboard-header.css"></head><body data-product="manager" class="platform-page"><main class="platform-shell"><section class="portal-panel"><div id="root"></div></section></main></body></html>`,
   }));
   await page.goto(origin + "/manager-control-workspace-fixture");
-  await page.evaluate(async ({ language, type }) => {
+  await page.evaluate(async ({ language, type, real }) => {
     const { createManagerDashboard } = await import("/js/manager-dashboard.js");
     const { ManagerExampleConnection } = await import("/js/manager-example-connection.js");
     const { createManagerExampleData, managerExampleSystems } = await import("/js/manager-example-data.js");
-    const template = managerExampleSystems[["gate", "dual", "group"].indexOf(type)];
+    const template = managerExampleSystems.find(system => system.id === {
+      gate: "example-manager-gate", dual: "example-manager-dual", roller: "example-manager-roller-shutter", group: "example-manager-group",
+    }[type]);
     const data = createManagerExampleData();
     window.controlEvidence = { apiCalls: [], realConnections: 0, realOpenings: [], commands: [], authentications: 0, physicalConnections: 0 };
     window.WebSocket = class {
@@ -47,7 +49,7 @@ async function fixture(t, browser, origin, { language, width, type }) {
         return super.command(command, payload);
       }
     }
-    const system = { ...template, id: "fixture-real-" + type, status: "active", version: 1 };
+    const system = { ...template, ...real, id: "fixture-real-" + type, status: "active", version: 1 };
     window.dashboard = createManagerDashboard({
       root: document.querySelector("#root"), user: { uid: "control-fixture" }, language,
       Connection: FixtureConnection,
@@ -61,7 +63,7 @@ async function fixture(t, browser, origin, { language, width, type }) {
       },
     });
     await window.dashboard.ready;
-  }, { language, type });
+  }, { language, type, real });
   return { page, errors };
 }
 
@@ -223,4 +225,41 @@ test("Manager Gate, Dual Control and group controls are responsive, deliberate a
     });
   }
   if (evidence) await writeFile(path.join(evidence, "manager-controls-responsive-receipt.json"), JSON.stringify({ cases: receipts }, null, 2) + "\n");
+});
+
+test("a Roller Shutter, or a Gate that is one of its sides, has no remote Open but keeps the rest of the workspace", async t => {
+  const { origin, browser } = await startSite(t);
+  const side = { type: "gate", systemIds: ["DEMO-24984"], name: "Shutter up", iconId: "roller-shutter-small" };
+  for (const language of ["he", "en"]) for (const [variant, real] of [["roller", undefined], ["side", side]]) {
+    await t.test(`${variant} ${language}`, async t => {
+      const { page, errors } = await fixture(t, browser, origin, { language, width: 1440, type: "roller", real });
+      const copy = (h, e) => language === "he" ? h : e;
+      await page.locator(".manager-view > .manager-grid .manager-system").getByRole("button", { name: copy("פתיחת סביבת ניהול", "Open workspace"), exact: true }).click();
+      await ready(page);
+      const content = page.locator("#manager-content");
+      assert.equal(
+        await page.locator(".manager-workspace-context").innerText(),
+        variant === "roller" ? copy("תריס חשמלי · 2 שערים", "Roller Shutter · 2 gates") : copy("שער · 1 שער", "Gate · 1 gate"),
+      );
+      if (variant === "roller")
+        assert.equal(await page.locator(".manager-workspace-icon img").getAttribute("src"), "/assets/host-icons/dual-control-roller-shutter-small.svg");
+      assert.equal(await content.getByRole("button", { name: copy("פתיחת שער", "Open gate"), exact: true }).count(), 0, "no remote Open");
+      assert.equal(
+        await content.locator("[data-roller-shutter-app-only]").innerText(),
+        copy("תריס חשמלי מופעל רק באפליקציית WIFIGATE, עם Safety והחזקת אצבע.", "Roller Shutter is operated only in the WIFIGATE app, with Safety and a finger hold."),
+      );
+      // The rest of the remote workspace stays: every tab still loads.
+      assert.equal(await page.getByRole("tab").count(), 10);
+      for (const tab of tabs) {
+        await page.locator(`[data-tab="${tab}"]`).click();
+        await ready(page, tab);
+      }
+      await page.locator('[data-tab="settings"]').click();
+      await ready(page, "settings");
+      if (variant === "roller")
+        assert.match(await content.innerText(), copy(/בתריס חשמלי אופן הפתיחה נקבע לפי ההגדרה המשותפת\./, /In a Roller Shutter, the opening method follows the shared configuration\./));
+      assert.equal(await page.evaluate(() => window.controlEvidence.commands.filter(call => call.command === "ADMIN_REMOTE_OPEN").length), 0);
+      assert.deepEqual(errors, []);
+    });
+  }
 });

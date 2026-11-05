@@ -1,5 +1,5 @@
-// The three example systems. Everyone who reaches the Host dashboard sees the
-// same three, in every role. They exist only in this module: no API call ever
+// The four example systems. Everyone who reaches the Host dashboard sees the
+// same four, in every role. They exist only in this module: no API call ever
 // carries them, they are never counted or billed, and they never appear in a
 // calendar or a booking. Their names are the same in every language.
 const example = (value) =>
@@ -19,6 +19,15 @@ export const exampleSystems = Object.freeze([
     type: "dual-control",
     iconId: "barrier-gate-small",
     name: "Example WIFIGATE Dual Control 212 🥂🍾",
+    gates: 2,
+  }),
+  example({
+    id: "example-roller-shutter-212",
+    kind: "roller",
+    type: "dual-control",
+    category: "ROLLER_SHUTTER",
+    iconId: "roller-shutter-small",
+    name: "Example WIFIGATE Roller Shutter 212 🥂🍾",
     gates: 2,
   }),
   example({
