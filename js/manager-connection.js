@@ -299,7 +299,7 @@ export class ManagerConnection {
       if (data.status !== "OK")
         throw Object.assign(
           new Error(data.admin?.error?.code ?? data.status ?? "COMMAND_FAILED"),
-          { code: data.admin?.error?.code, reason: data.admin?.error?.message },
+          { code: data.admin?.error?.code, reason: data.admin?.error?.message, firmwareRefusal: true },
         );
       return data.admin;
     } catch (error) {

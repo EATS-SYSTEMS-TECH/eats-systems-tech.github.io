@@ -18,6 +18,7 @@ import { accessNoteContent } from "./manager-access-note.js";
 import { createSystemIcon } from "./wifigate-system-icons.js";
 import { isRollerShutter, rollerShutterAppOnlyText } from "./wifigate-objects.js";
 import { createManagerDialog } from "./manager-dialog.js";
+import { createManagerGateActionDialog } from "./manager-gate-action-dialog.js";
 import { placeManagerActions } from "./manager-action-layout.js";
 import { encodeManagerCsv } from "./manager-csv.js";
 import { createManagerCsvDialog } from "./manager-csv-dialog.js";
@@ -155,6 +156,7 @@ export function createManagerDashboard({
     language,
     onClose: () => activity.pause(false),
   });
+  const gateActionDialog = createManagerGateActionDialog({ language });
   const requestLabel = (path, method) =>
     method !== "GET"
       ? t("מעדכן את הנתונים…", "Updating data…")
@@ -403,6 +405,7 @@ export function createManagerDashboard({
   }
   function stop() {
     interruptedConnection = undefined;
+    gateActionDialog.cancel();
     workspacePanel?.dispose();
     workspacePanel = undefined;
     workspacePanelContext = undefined;
@@ -1643,6 +1646,9 @@ export function createManagerDashboard({
     });
     head.querySelector(".manager-workspace-heading").append(status);
     view.prepend(head);
+    const workspaceTitle = node("div", undefined, "manager-workspace-title");
+    workspaceTitle.append(node("h2", t("סביבת ניהול", "Management workspace")), node("p", t("השליטה, האנשים וההגדרות של המערכת — במקום אחד.", "Control, people and system settings, together in one place.")));
+    view.prepend(workspaceTitle);
     focusView();
     if (system.systemIds.length > 1) {
       view.append(createManagerGatePicker({ system, language,
@@ -1661,6 +1667,7 @@ export function createManagerDashboard({
   }
   async function openGate(gate, preserveView = false, attempt = 0) {
     interruptedConnection = undefined;
+    gateActionDialog.cancel();
     // A renewal cancels an open confirmation; its change was never sent.
     const unsentChange = preserveView && dialogs.open;
     dialogs.cancel();
@@ -1699,6 +1706,11 @@ export function createManagerDashboard({
       showConnectionRecovery(gate);
       view.querySelector("#manager-tabs")?.replaceChildren();
       say("");
+      if (gateActionDialog.active) {
+        connectionDialog.close();
+        setManagerControlState(view, "error", language);
+        return;
+      }
       // Established sessions can fail after the success dialog has closed.
       // Reopen the same connection UI, while reporting each attempt only once.
       if (!connectionDialog.active || connectionDialog.state === "complete") {
@@ -1931,6 +1943,7 @@ export function createManagerDashboard({
         }
       });
       b.id = `manager-tab-${id}`;
+      b.prepend(managerUiIcon({ overview: "systems", users: "people", admins: "admin", guests: "account", auto: "gate", settings: "settings", events: "calendar", history: "history", rf: "signal", system: "app" }[id]));
       b.setAttribute("role", "tab");
       b.setAttribute("aria-selected", String(id === currentTab));
       b.setAttribute("aria-controls", "manager-content");
@@ -2142,7 +2155,6 @@ export function createManagerDashboard({
       systemName: t("שם מערכת", "System name"),
       firmwareVersion: t("גרסת קושחה", "Firmware version"),
       maxUsers: t("מספר משתמשים מרבי", "Maximum users"),
-      targetChip: t("דגם מעבד", "Processor"),
       uptimeSec: t("זמן פעילות (שניות)", "Uptime (seconds)"),
       counts: t("כמויות", "Counts"),
       health: t("תקינות", "Health"),
@@ -2196,7 +2208,7 @@ export function createManagerDashboard({
     const byteKeys = new Set(["bytes", "freeHeap", "minFreeHeap", "largestFreeBlock"]);
     function add(o, prefix = "") {
       for (const [key, v] of Object.entries(o ?? {})) {
-        if (/secret|credential|private|password|passphrase|flashVariantMb|boardMb/i.test(key))
+        if (/secret|credential|private|password|passphrase|flashVariantMb|boardMb|targetChip|cpuModel|processorModel/i.test(key))
           continue;
         if (v && typeof v === "object" && !Array.isArray(v)) {
           add(v, prefix + (names[key] ?? key) + " · ");
@@ -2382,35 +2394,51 @@ export function createManagerDashboard({
       say(rollerShutterAppOnlyText(language));
       return;
     }
-    const config = (await connection.command("ADMIN_GET_GATE_CONFIG")).data;
-    let state;
-    const expected = config.config.command;
-    if (expected === "TOGGLE" || expected === 3) {
-      state = await dialogs.chooseState();
-      if (!["ON", "OFF"].includes(state)) return;
+    if (!connection?.session || gateActionDialog.active) return;
+    const source = connection, epoch = generation, system = currentSystem, gate = currentGate;
+    const current = () => !closed && connection === source && generation === epoch && currentSystem === system && currentGate === gate;
+    const simulation = examples.isSystem(system);
+    const operation = gateActionDialog.open({ systemName: system.name, gate, simulation });
+    let sent = false;
+    try {
+      const result = await source.command("ADMIN_GET_GATE_CONFIG");
+      if (!current() || !operation.active) return;
+      const expected = result?.data?.config?.command;
+      if (!(typeof expected === "string" && expected.length) && !Number.isInteger(expected)) throw new Error("RESPONSE_MISMATCH");
+      const choice = await operation.confirm({ toggle: expected === "TOGGLE" || expected === 3 });
+      if (!choice || !current() || !operation.active) return;
+      operation.wait();
+      sent = true;
+      // This resolves only after the authenticated, sequence-matched firmware
+      // response is decoded and its command and OK status are checked.
+      await source.command("ADMIN_REMOTE_OPEN", {
+        mode: "METHOD",
+        ...(choice.state ? { state: choice.state } : {}),
+        expectedGateCommand: expected,
+      });
+      if (!current() || !operation.active) return;
+      operation.success();
+      say(simulation
+        ? t("הפעולה בוצעה בסימולציה. לא הופעל שער פיזי.", "Action completed in the simulation. No physical gate was activated.")
+        : t("השער אישר את הפעולה.", "The gate confirmed the action."), false, "success");
+    } catch (error) {
+      if (!current() || !operation.active) return;
+      const refusals = {
+        OVERRIDE_FORCE_NC: t("המערכת במצב סגור קבוע ואינה מאפשרת פתיחה מרחוק.", "The system is held closed and does not allow remote opening."),
+        OVERRIDE_FORCE_NO: t("המערכת במצב פתוח קבוע ואינה מאפשרת את הפעולה.", "The system is held open and does not allow this action."),
+        EVENT_ACTIVE: t("אירוע מתוזמן פעיל כרגע ומונע את הפעולה.", "An active scheduled event prevents this action."),
+        SENSOR_INACTIVE: t("מצב החיישן אינו מאפשר את הפעולה כרגע.", "The sensor state does not allow this action right now."),
+        REMOTE_OPEN_RATE_LIMITED: t("נשלחו בקשות פתיחה בתדירות גבוהה מדי. המתינו לפני ניסיון נוסף.", "Opening requests were sent too frequently. Wait before trying again."),
+      };
+      const refusal = Object.hasOwn(refusals, error.reason) ? refusals[error.reason] : null;
+      operation.fail({
+        sent,
+        uncertain: sent && !simulation && !error.firmwareRefusal && error.message !== "BUSY",
+        message: refusal || errorText(error),
+      });
+    } finally {
+      if (!current()) operation.close();
     }
-    if (
-      !(await confirmAction(
-        t(
-          `לפתוח את ${currentSystem.name} (${currentGate}) עכשיו?`,
-          `Open ${currentSystem.name} (${currentGate}) now?`,
-        ),
-      ))
-    )
-      return;
-    await connection.command("ADMIN_REMOTE_OPEN", {
-      mode: "METHOD",
-      ...(state ? { state } : {}),
-      expectedGateCommand: expected,
-    });
-    say(
-      examples.isSystem(currentSystem)
-        ? t(
-            "הפעולה בוצעה בסימולציה. לא הופעל שער פיזי.",
-            "Action completed in the simulation. No physical gate was activated.",
-          )
-        : t("השער אישר את הפעולה.", "The gate confirmed the action."),
-    );
   }
   function renderPeopleActions(content, tab) {
     const collection = tab === "users" ? "USERS" : "ADMINS";

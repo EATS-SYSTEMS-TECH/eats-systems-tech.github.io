@@ -1,4 +1,5 @@
 import { createSystemIcon } from "./wifigate-system-icons.js";
+import { managerUiIcon } from "./manager-ui-icons.js";
 import { isRollerShutter, rollerShutterAppOnlyText, systemKindLabel } from "./wifigate-objects.js";
 
 const node = (tag, text, className) => {
@@ -124,7 +125,11 @@ export function renderManagerControlOverview({ content, system, overview, maximu
   ]) {
     const metric = node("div", undefined, "manager-overview-metric");
     metric.dataset.metric = key;
-    metric.append(node("dt", label), node("dd", format(value)));
+    const title = node("dt");
+    const illustration = node("span", undefined, "manager-metric-icon");
+    illustration.append(managerUiIcon({ users: "people", admins: "admin", events: "calendar", maxUsers: "capacity" }[key]));
+    title.append(illustration, node("span", label));
+    metric.append(title, node("dd", format(value)));
     if (key === "users" && number(maximum) && maximum > 0 && number(value)) {
       metric.append(node("small", t(`מתוך ${format(maximum)} מקומות`, `of ${format(maximum)} places`)));
       const progress = node("progress");

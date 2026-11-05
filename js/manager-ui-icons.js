@@ -9,6 +9,11 @@ export function managerUiIcon(kind) {
   const path = document.createElementNS(svg.namespaceURI,"path");
   path.setAttribute("d", {
     systems:"M3 4h7v7H3zM14 4h7v7h-7zM3 15h7v6H3zM14 15h7v6h-7z",
+    calendar:"M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2ZM7 2v5M17 2v5M3 10h18M7 14h3M14 14h3M7 17h3",
+    capacity:"M3 9V3h6M15 3h6v6M21 15v6h-6M9 21H3v-6M8 16v-1a4 4 0 0 1 8 0v1M12 6a2.5 2.5 0 1 0 0 5a2.5 2.5 0 1 0 0-5",
+    history:"M3 11a9 9 0 1 1 2 7M3 4v7h7M12 7v5l3 2",
+    signal:"M5 8a11 11 0 0 1 14 0M8 11a6 6 0 0 1 8 0M11 14a2 2 0 0 1 2 0M12 18h.01",
+    gate:"M4 21V5h4v16M8 6h13v4H8M12 6l-2 4M17 6l-2 4M21 6l-2 4M2 21h9",
     organizations:"M4 21V3h12v18M16 9h4v12M2 21h20M8 7h4M8 11h4M8 15h4",
     people:"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8M17 4a4 4 0 0 1 0 8M22 21v-2a4 4 0 0 0-3-3.87",
     settings:gearOutline,
