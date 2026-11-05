@@ -495,6 +495,28 @@ function productPanel(product, lang, current = {}) {
   const founder = isPlatformFounder();
   const panel = element("section", "role-guide-panel");
   panel.dataset.product = product;
+  const navigation = element("nav", "role-guide-sections");
+  navigation.setAttribute("aria-label", lang === "he" ? "ניווט בתפקידים והרשאות" : "Roles and permissions sections");
+  const sections = [
+    ["plan", product === "pay" ? t.personalAccess : t.planLevel, "layers"],
+    ["organization", t.orgLevel, "building"],
+    ["billing", t.billingTitle, "card"],
+    ["matrix", lang === "he" ? "טבלת הרשאות" : "Permissions table", "shield"],
+  ];
+  for (const [key, label, icon] of sections) {
+    const link = element("a", "role-guide-sections__link");
+    link.href = `#role-guide-${product}-${key}`;
+    link.append(svg(icons[icon]), element("span", "", label));
+    link.addEventListener("click", event => {
+      event.preventDefault();
+      const target = panel.querySelector(`#role-guide-${product}-${key}`);
+      if (!target) return;
+      target.tabIndex = -1;
+      target.focus({ preventScroll: true });
+      target.scrollIntoView({ block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    });
+    navigation.append(link);
+  }
   const own = current.product === product ? current : {};
   const levels = element("div", "role-guide-levels");
 
@@ -505,6 +527,7 @@ function productPanel(product, lang, current = {}) {
   };
 
   const planLevel = element("section", "role-guide-level");
+  planLevel.id = `role-guide-${product}-plan`;
   planLevel.dataset.level = "plan";
   planLevel.append(
     levelHeading("layers", product === "pay" ? t.personalAccess : t.planLevel),
@@ -520,6 +543,7 @@ function productPanel(product, lang, current = {}) {
   }
 
   const orgLevel = element("section", "role-guide-level");
+  orgLevel.id = `role-guide-${product}-organization`;
   orgLevel.dataset.level = "organization";
   orgLevel.append(
     levelHeading("building", t.orgLevel),
@@ -543,6 +567,7 @@ function productPanel(product, lang, current = {}) {
   levels.append(planLevel, orgLevel);
 
   const billing = element("aside", "role-guide-billing");
+  billing.id = `role-guide-${product}-billing`;
   billing.append(svg(icons.card));
   const billingText = element("div");
   const memberBilling = lang === "he"
@@ -569,7 +594,9 @@ function productPanel(product, lang, current = {}) {
   billingText.append(payers);
   billing.append(billingText);
 
-  panel.append(levels, billing, matrix(product, lang, orgRole));
+  const permissions = matrix(product, lang, orgRole);
+  permissions.id = `role-guide-${product}-matrix`;
+  panel.append(navigation, levels, billing, permissions);
   return panel;
 }
 
@@ -617,9 +644,14 @@ export function openRoleGuide({ product = "host", language, current = {} } = {})
   dialog.setAttribute("aria-labelledby", "role-guide-title");
   const header = element("header", "role-guide__header");
   const titles = element("div");
+  titles.className = "role-guide__identity";
+  const emblem = element("span", "role-guide__emblem");
+  emblem.append(svg(icons.shield));
+  const titleCopy = element("div");
   const title = element("h2", "", t.title);
   title.id = "role-guide-title";
-  titles.append(title, element("p", "role-guide__subtitle", t.subtitle));
+  titleCopy.append(element("span", "role-guide__brand", "WIFIGATE FOR BUSINESS"), title, element("p", "role-guide__subtitle", t.subtitle));
+  titles.append(emblem, titleCopy);
   const close = element("button", "role-guide__close");
   close.type = "button";
   close.setAttribute("aria-label", t.close);
