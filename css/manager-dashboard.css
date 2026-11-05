@@ -1773,7 +1773,7 @@ body[data-product] .manager-organization-systems-help > .dashboard-examples { ma
 .platform-page[data-product="manager"] .portal-panel .manager-shell .manager-system-actions > button.manager-system-open.primary:hover:not(:disabled) { background:#2c4c6c; border-color:#2c4c6c; }
 .manager-system-open svg { width:17px; height:17px; flex:none; opacity:.8; }
 [dir="rtl"] .manager-system-open svg { transform:scaleX(-1); }
-.platform-page[data-product="manager"] .manager-card.manager-system .manager-system-actions > .manager-system-remove { display:flex; align-items:center; justify-content:center; gap:7px; min-height:44px; border:1px solid transparent; border-radius:8px; background:transparent; color:#66778b; font-size:11px; font-weight:500; }
+.platform-page[data-product="manager"] .manager-card.manager-system .manager-system-actions > .manager-system-remove { display:flex; align-items:center; justify-content:center; gap:7px; min-height:44px; border:1px solid #d3deea; border-radius:8px; background:#fff; color:#66778b; font-size:11px; font-weight:500; }
 .platform-page[data-product="manager"] .manager-card.manager-system .manager-system-actions > .manager-system-remove:hover:not(:disabled) { background:#fff6f4; border-color:#f0d8d4; color:#a13e32; }
 .manager-system-remove svg { width:15px; height:15px; flex:none; }
 @media (prefers-reduced-motion:reduce) { .manager-card.manager-system { transition:none; } }
