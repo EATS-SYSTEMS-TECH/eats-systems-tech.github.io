@@ -1608,3 +1608,15 @@ body[data-product] .manager-organization-workspace>.manager-organization-pending
  .manager-setup-controls { gap:6px; }
  .manager-shell .manager-setup-controls button { padding:10px; font-size:12px; }
 }
+
+/* Organization tabs contain only their own content. */
+.manager-organization-workspace:not(:has(> :not([hidden]))) { display:none; }
+.manager-organization-systems-help { display:grid; gap:16px; margin-bottom:24px; }
+body[data-product] .manager-organization-systems-help > .dashboard-examples { margin-block:0; }
+.manager-assignment-steps { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; padding:0; list-style:none; }
+.manager-assignment-steps li { padding:20px; border:1px solid #e6eaf0; border-radius:14px; background:#fffcf9; }
+.manager-assignment-icon { display:grid; place-items:center; width:44px; height:44px; margin-bottom:14px; border:1px solid #eed6c2; border-radius:12px; background:#fff0e3; color:#a13c12; }
+.manager-assignment-steps strong { display:block; font-size:14px; color:#243a54; line-height:1.7; }
+.manager-assignment-steps p { font-size:13px; line-height:1.8; color:#63758b; margin:8px 0 0; }
+.manager-assignment-guide .manager-assignment-note { padding:14px; border:1px solid #efd4b8; border-radius:12px; background:#fff6e9; color:#85471e; }
+@media(max-width:600px) { .manager-assignment-steps { grid-template-columns:1fr; } }

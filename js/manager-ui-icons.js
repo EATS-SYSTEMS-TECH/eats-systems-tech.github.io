@@ -1,3 +1,8 @@
+const gearOutline = Array.from({ length: 32 }, (_, i) => {
+  const radius = [8, 10, 10, 8][i % 4];
+  const angle = (i * 360 / 32 - 90) * Math.PI / 180;
+  return `${i ? "L" : "M"}${(12 + radius * Math.cos(angle)).toFixed(2)} ${(12 + radius * Math.sin(angle)).toFixed(2)}`;
+}).join(" ") + "ZM9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0";
 export function managerUiIcon(kind) {
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   for (const [key, value] of Object.entries({viewBox:"0 0 24 24",width:"24",height:"24",fill:"none",stroke:"currentColor","stroke-width":"1.7","stroke-linecap":"round","stroke-linejoin":"round","aria-hidden":"true"})) svg.setAttribute(key,value);
@@ -6,7 +11,7 @@ export function managerUiIcon(kind) {
     systems:"M3 4h7v7H3zM14 4h7v7h-7zM3 15h7v6H3zM14 15h7v6h-7z",
     organizations:"M4 21V3h12v18M16 9h4v12M2 21h20M8 7h4M8 11h4M8 15h4",
     people:"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8M17 4a4 4 0 0 1 0 8M22 21v-2a4 4 0 0 0-3-3.87",
-    settings:"M4 6h16M4 12h16M4 18h16M8 3v6M16 9v6M10 15v6",
+    settings:gearOutline,
     account:"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8m7 8 2 2 4-4",
     app:"M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2ZM10 18h4M9 6h6M9 10h6",
     export:"M12 16V3m-5 5 5-5 5 5M4 15v5h16v-5",

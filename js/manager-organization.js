@@ -71,6 +71,7 @@ export async function renderManagerOrganization({
   onRefresh,
   onBack,
   onSectionChange = () => {},
+  partitioned = false,
   errorText,
   isCurrent,
 }) {
@@ -117,14 +118,14 @@ export async function renderManagerOrganization({
   const section = node("section", undefined, "manager-organization-workspace");
   if (permissions.openWorkspace !== false) {
     document.body.dataset.organizationRole = ownRole ?? "";
-    section.append(
-      createOrganizationRoleCard({
+    const roleCard = createOrganizationRoleCard({
         product: "manager",
         language,
         role: ownRole,
         organizationName: org.name,
-      }),
-    );
+      });
+    if (partitioned) roleCard.dataset.organizationSection = "settings";
+    section.append(roleCard);
   }
   if (!disclosureStates.has(root)) disclosureStates.set(root, new Map());
   const states = disclosureStates.get(root);
@@ -188,6 +189,7 @@ export async function renderManagerOrganization({
     "manager-organization-back",
   );
   const header = node("div", undefined, "manager-organization-header");
+  if (partitioned) header.dataset.organizationSection = "settings";
   const artwork = createOrganizationLogo(
     org,
     language,
@@ -198,13 +200,15 @@ export async function renderManagerOrganization({
   identity.append(
     node(
       "span",
-      t("סביבת הארגון", "Organization workspace"),
+      partitioned ? t("הגדרות הארגון", "Organization settings") : t("סביבת הארגון", "Organization workspace"),
       "manager-eyebrow",
     ),
     node("h2", org.name),
     node(
       "p",
-      permissions.managePeople
+      partitioned
+        ? t("שם הארגון, הלוגו והרשאות התפקיד שלכם", "Organization name, logo and your role permissions")
+        : permissions.managePeople
         ? t(
             "ניהול האנשים והמערכות של הארגון",
             "Manage your organization’s people and systems",
@@ -253,7 +257,7 @@ export async function renderManagerOrganization({
   brandingBody.append(ownerLine);
   const headerActions = node("div", undefined, "manager-organization-header-actions");
   headerActions.append(back);
-  if (permissions.managePeople === true) {
+  if (permissions.managePeople === true && !partitioned) {
     const manage = button(t("ניהול ארגון", "Manage organization"), () => {
       if (!isCurrent()) return;
       onSectionChange("people");
@@ -346,13 +350,21 @@ export async function renderManagerOrganization({
     brandingBody.append(tools);
   }
   section.append(header);
+  if (partitioned) {
+    const peopleHeader = node("div", undefined, "manager-toolbar");
+    peopleHeader.dataset.organizationSection = "people";
+    peopleHeader.append(node("h3", t("אנשי הארגון", "Organization people")), button(t("רענון", "Refresh"), onRefresh));
+    section.append(peopleHeader);
+  }
   const metrics = node("div", undefined, "manager-organization-metrics");
+  if (partitioned) metrics.dataset.organizationSection = "people";
   for (const [key, label] of [
     ["administrators", t("מנהלי ארגון", "Organization admins")],
     ["staff", t("צוות הארגון", "Organization staff")],
     ["viewers", t("צופים בארגון", "Organization viewers")],
     ["systems", t("מערכות", "Systems")],
   ]) {
+    if (partitioned && key === "systems") continue;
     const tile = button(
       "",
       () => {

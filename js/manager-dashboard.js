@@ -1,4 +1,5 @@
 import { managerUiIcon } from "./manager-ui-icons.js";
+import { createManagerAssignmentGuide } from "./manager-assignment-guide.js";
 import { renderManagerOrganization } from "./manager-organization.js";
 import { planRoleName, organizationRoleName } from "./role-names.js";
 import { createManagerOrganizationPicker } from "./manager-organization-picker.js";
@@ -1009,6 +1010,7 @@ export function createManagerDashboard({
         run: task,
         onRefresh: () => showSystems(orgId, operatorAccount, organizationSection),
         onSectionChange: selectOrganizationSection,
+        partitioned: !operatorAccount,
         onBack: () => showOrganizations(!operatorAccount),
         errorText,
         isCurrent: () => !closed && epoch === generation,
@@ -1058,7 +1060,14 @@ export function createManagerDashboard({
       );
     if (scope) grid.dataset.organizationSection = "systems";
     view.append(grid);
-    if (scope) selectOrganizationSection(organizationSection);
+    if (scope && !operatorAccount) {
+      const help = node("div", undefined, "manager-organization-systems-help");
+      help.dataset.organizationSection = "systems";
+      examples.renderCards(help);
+      help.append(createManagerAssignmentGuide(language));
+      view.prepend(help);
+      selectOrganizationSection(organizationSection);
+    }
     if (!scope && !operatorAccount) {
       view.prepend(createManagerSetupGuide(language));
       examples.renderCards(view);
