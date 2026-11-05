@@ -1,7 +1,10 @@
 import { planRoleName, organizationRoleName } from "./role-names.js";
 import { managerUiIcon } from "./manager-ui-icons.js";
+let founderVisible = false;
+export const isPlatformFounder = () => founderVisible;
 
 export function renderFounderTag(platformRole) {
+  founderVisible = platformRole === "admin";
   document.querySelectorAll(".dashboard-founder-tag").forEach(tag => tag.remove());
   if (platformRole !== "admin") return;
   const brand = document.querySelector(".platform-header .brand, .host-topbar .brand");

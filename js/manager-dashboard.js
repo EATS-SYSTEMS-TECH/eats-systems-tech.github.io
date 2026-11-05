@@ -446,7 +446,7 @@ export function createManagerDashboard({
     for (const role of new Set(
       profile.roles?.length ? profile.roles : [profile.role],
     )) {
-      if (!["user", "organization-admin", "organization-user", "organization-staff", "organization-viewer"].includes(role)) continue;
+      if (!["organization-admin", "organization-user", "organization-staff", "organization-viewer"].includes(role)) continue;
       const label = node("span", roleName(role));
       label.dir = "ltr";
       roleList.append(label);

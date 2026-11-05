@@ -375,6 +375,9 @@ dialog.role-guide .role-guide__tabs .role-guide__tab[aria-selected="true"] {
   gap: 8px;
   margin-top: 12px;
 }
+.role-guide-billing__payers:where(:not(:has([data-kind="exempt"]))) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 .role-guide-billing__payer {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);

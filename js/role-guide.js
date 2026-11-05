@@ -5,6 +5,7 @@
 // User plan pays a monthly subscription; organization roles never do.
 
 import { planRoleName, organizationRoleName } from "./role-names.js";
+import { isPlatformFounder } from "./profile-roles.js";
 
 export const roleGuideProducts = ["host", "pay", "manager"];
 const organizationRoles = ["owner", "admin", "staff", "viewer"];
@@ -491,6 +492,7 @@ function matrix(product, lang, currentRole) {
 
 function productPanel(product, lang, current = {}) {
   const t = copy[lang];
+  const founder = isPlatformFounder();
   const panel = element("section", "role-guide-panel");
   panel.dataset.product = product;
   const own = current.product === product ? current : {};
@@ -508,8 +510,14 @@ function productPanel(product, lang, current = {}) {
     levelHeading("layers", product === "pay" ? t.personalAccess : t.planLevel),
     element("p", "role-guide-level__note", t.planLevelNote),
   );
-  for (const role of ["admin", "user"])
-    planLevel.append(roleCard(product, "plan", role, product === "pay" && role === "user" ? payUserPlan[lang] : plans[lang][role], lang, own.plan === role));
+  const personalPayPlan = founder ? payUserPlan[lang] : [
+    lang === "he" ? "גישה אישית ל־Pay: המערכות שלי והארגונים שלי." : "Personal Pay access: My systems and My organizations.",
+    payUserPlan[lang][1],
+  ];
+  for (const role of founder ? ["admin", "user"] : ["user"]) {
+    const description = product === "pay" && role === "user" ? personalPayPlan : plans[lang][role];
+    planLevel.append(roleCard(product, "plan", role, description, lang, own.plan === role));
+  }
 
   const orgLevel = element("section", "role-guide-level");
   orgLevel.dataset.level = "organization";
@@ -537,11 +545,17 @@ function productPanel(product, lang, current = {}) {
   const billing = element("aside", "role-guide-billing");
   billing.append(svg(icons.card));
   const billingText = element("div");
-  billingText.append(element("strong", "", t.billingTitle), element("p", "", product === "pay" ? t.payBilling : fill(t.billing, product)));
+  const memberBilling = lang === "he"
+    ? "רק משתמש בעל מנוי משלם על המערכות שבתוכנית שלו. תפקידי ארגון, כולל בעל הארגון, אינם מוסיפים מנוי או גישה לחיוב. בעל הארגון רואה את החיוב רק אם הוא גם בעל המנוי שלו."
+    : "A subscribing User pays for the systems in their plan. Organization roles, including Organization Owner, do not add a subscription or grant billing access. An owner sees billing only when they also hold the subscription.";
+  const memberPayBilling = lang === "he"
+    ? "גישת משתמש ב־Pay פותחת את המערכות שלי והארגונים שלי, בלי ליצור מנוי או לשנות חיוב. תפקידים בארגון ניתנים בנפרד."
+    : "Pay User access opens My systems and My organizations without creating a subscription or changing billing. Organization roles are assigned separately.";
+  billingText.append(element("strong", "", t.billingTitle), element("p", "", founder ? (product === "pay" ? t.payBilling : fill(t.billing, product)) : product === "pay" ? memberPayBilling : memberBilling));
   const payers = element("div", "role-guide-billing__payers");
   for (const [icon, name, price, kind] of [
     ["card", roleTitle(product, "plan", "user", lang), product === "pay" ? t.billingUnchanged : t.subscription, product === "pay" ? "access" : "paid"],
-    ["shield", roleTitle(product, "plan", "admin", lang), t.noSubscription, "exempt"],
+    ...(founder ? [["shield", roleTitle(product, "plan", "admin", lang), t.noSubscription, "exempt"]] : []),
     ["building", organizationRoles.map(role => organizationRoleName(role, lang)).join(" · "), t.free, "free"],
   ]) {
     const payer = element("div", "role-guide-billing__payer");
