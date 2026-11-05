@@ -7,6 +7,9 @@ the original home screen after capture. No export, sync or gate command was sent
 Public assets were edited with the imagegen skill to remove flags, replace all
 visible real profile photos with the owner's supplied ginger-haired avatar,
 and replace identifying profile/system text with fictional example details.
+The profile uses "Your Name" and "your.name@example.com". Red arrows identify
+the profile entry point, For Business row, Manager card and Export button.
+The background avatar is clipped behind the My Profile sheet's rounded edge.
 The app-business screenshot preserves the product options of the captured app.
 app-export is a close-up of the captured Manager system card. Its grey button
 state is retained; it is not evidence of successful export or device acceptance.

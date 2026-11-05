@@ -97,7 +97,7 @@ export function createManagerSetupGuide(language = "en") {
         enlarge.setAttribute("aria-label", t("הגדלת צילום המסך: ", "Enlarge screenshot: ") + caption);
         enlarge.setAttribute("aria-haspopup", "dialog");
         const image = node("img");
-        image.src = `/assets/img/manager/setup/${asset}.webp`;
+        image.src = `/assets/img/manager/setup/${asset}.webp?v=20261105generic1`;
         image.alt = caption;
         image.loading = "lazy";
         image.decoding = "async";
