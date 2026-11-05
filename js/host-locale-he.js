@@ -31,6 +31,7 @@ export const hostHebrew = {
   Gate: "שער",
   // The product name stays in English, as in the WIFIGATE app and site.
   "Dual Control": "Dual Control",
+  "Dual Control (includes Roller Shutters)": "Dual Control (כולל תריסים חשמליים)",
   Group: "קבוצה",
   "Sign in again with your authenticator before changing billing settings.":
     "התחברו שוב עם המאמת לפני שינוי הגדרות החיוב.",

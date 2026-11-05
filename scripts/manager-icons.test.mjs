@@ -26,3 +26,22 @@ test("missing, foreign-type and unsafe icon metadata uses a local WIFIGATE defau
   for (const type of [undefined, "unknown", "__proto__", "constructor", "../../"])
     assert.equal(systemIconSrc({ type }), "/assets/host-icons/gate-door-small.svg");
 });
+
+test("a Roller Shutter is named and drawn by its category, never by its icon", async () => {
+  const { isRollerShutter, systemKindLabel, rollerShutterLabel } = await import("../js/wifigate-objects.js");
+  const roller = { type: "dual-control", category: "ROLLER_SHUTTER" };
+  for (const iconId of [undefined, "garage-small", "../../secret"])
+    assert.equal(systemIconSrc({ ...roller, iconId }), "/assets/host-icons/dual-control-roller-shutter-small.svg");
+  // The icon alone keeps an ordinary Dual Control; the category on another type is ignored.
+  assert.equal(systemIconSrc({ type: "dual-control", iconId: "garage-small" }), "/assets/host-icons/dual-control-garage-small.svg");
+  assert.equal(isRollerShutter({ type: "dual-control", iconId: "roller-shutter-small" }), false);
+  assert.equal(isRollerShutter({ type: "gate", category: "ROLLER_SHUTTER" }), false);
+  assert.equal(isRollerShutter({ type: "dual-control", category: "roller_shutter" }), false);
+  assert.equal(isRollerShutter(roller), true);
+  const labels = { gate: "Gate", "dual-control": "Dual Control", group: "Group" };
+  assert.equal(systemKindLabel(roller, "en", labels), "Roller Shutter");
+  assert.equal(systemKindLabel(roller, "he", labels), "תריס חשמלי");
+  assert.equal(rollerShutterLabel("he"), "תריס חשמלי");
+  assert.equal(systemKindLabel({ type: "dual-control" }, "en", labels), "Dual Control");
+  assert.equal(systemKindLabel({ type: "group", category: "ROLLER_SHUTTER" }, "en", labels), "Group");
+});

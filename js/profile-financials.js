@@ -1,4 +1,7 @@
 export const costCategories = ["gates", "dualControls", "groups", "organizations"];
+// Roller Shutters have their own line; an older estimate without it still adds up.
+const optionalCategories = ["rollerShutters"];
+const presentCategories = value => [...costCategories, ...optionalCategories.filter(key => value.lines?.[key] !== undefined)];
 const money = (value) => Number.isSafeInteger(value) && value >= 0;
 const currency = (value) => typeof value === "string" && /^[A-Z]{3}$/.test(value);
 export const unavailableLabel = language => language === "he" ? "לא זמין" : "Unavailable";
@@ -6,12 +9,13 @@ export const unavailableLabel = language => language === "he" ? "לא זמין" 
 export function monthlyEstimate(product) {
   const value = product?.financials;
   if (value?.kind !== "monthly-estimate" || !currency(value.currency)) return null;
-  if (!costCategories.every(key => money(value.lines?.[key]?.amountCents))) return null;
-  const total = costCategories.reduce((sum, key) => sum + value.lines[key].amountCents, 0);
+  const keys = presentCategories(value);
+  if (!keys.every(key => money(value.lines?.[key]?.amountCents))) return null;
+  const total = keys.reduce((sum, key) => sum + value.lines[key].amountCents, 0);
   if (!money(total) || total !== value.monthlyCents) return null;
   if (product.billingExempt === true || value.billingExempt === true) return {
     ...value, billingExempt: true, exemptionReason: "platform-admin", monthlyCents: 0,
-    lines: Object.fromEntries(costCategories.map(key=>[key,{...value.lines[key],amountCents:0}])),
+    lines: Object.fromEntries(keys.map(key=>[key,{...value.lines[key],amountCents:0}])),
   };
   return value;
 }

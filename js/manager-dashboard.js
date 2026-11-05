@@ -16,6 +16,7 @@ import {
 import { attachPopover } from "./popover.js";
 import { accessNoteContent } from "./manager-access-note.js";
 import { createSystemIcon } from "./wifigate-system-icons.js";
+import { isRollerShutter, rollerShutterAppOnlyText } from "./wifigate-objects.js";
 import { createManagerDialog } from "./manager-dialog.js";
 import { placeManagerActions } from "./manager-action-layout.js";
 import { encodeManagerCsv } from "./manager-csv.js";
@@ -26,6 +27,7 @@ import { formatManagerBytes, managerRfDetails, managerSdDetails, managerMaximumU
 import { managerRequest } from "./api/index.js";
 import { ManagerConnection } from "./manager-connection.js";
 import { createManagerExamples } from "./manager-examples.js";
+import { managerExampleSystems } from "./manager-example-data.js";
 import { createManagerSystemCard } from "./manager-system-card.js";
 import { createManagerActivity } from "./manager-activity.js";
 import { createManagerConnectionDialog } from "./manager-connection-dialog.js";
@@ -1934,6 +1936,7 @@ export function createManagerDashboard({
       const maximum = managerMaximumUsers(source.capabilities?.data, r.data);
       updateManagerSelectedGate(view, currentGate, r.data?.systemName, language);
       const details = renderManagerControlOverview({ content, system: currentSystem, overview: r.data, maximum, language,
+        appOnly: rollerShutterGate(currentGate),
         openButton: button(t("פתיחת שער", "Open gate"), openGateAction, true),
       });
       renderFacts(details, { ...r.data, ...(maximum !== null && maximum !== undefined ? { maxUsers: maximum } : {}) });
@@ -2301,7 +2304,19 @@ export function createManagerDashboard({
         ].join("\r\n"),
     );
   }
+  // A Roller Shutter, or one of its two sides inside a Gate or a Group, runs
+  // only in the app (Safety and a finger hold): no remote Open from here. The
+  // rest of the remote workspace (history, settings, network) stays.
+  function rollerShutterGate(gate) {
+    return isRollerShutter(currentSystem) ||
+      [...systems, ...managerExampleSystems].some((system) =>
+        isRollerShutter(system) && Array.isArray(system.systemIds) && system.systemIds.includes(gate));
+  }
   async function openGateAction() {
+    if (rollerShutterGate(currentGate)) {
+      say(rollerShutterAppOnlyText(language));
+      return;
+    }
     const config = (await connection.command("ADMIN_GET_GATE_CONFIG")).data;
     let state;
     const expected = config.config.command;
@@ -2420,7 +2435,7 @@ export function createManagerDashboard({
     const alive = () => context === workspacePanelContext && context.source === connection && context.epoch === generation && context.panel === tabGeneration && context.source.session && !closed;
     workspacePanel = renderManagerSettings({
       root: content, language, config: currentData.config, revision: currentData.revision,
-      commandLocked: currentSystem.type === "dual-control", confirm: confirmAction, errorText, isCurrent: alive,
+      commandLocked: currentSystem.type === "dual-control", rollerShutter: isRollerShutter(currentSystem), confirm: confirmAction, errorText, isCurrent: alive,
       onSave: async payload => {
         if (!alive()) throw new Error("CANCELLED");
         const source = context.source;

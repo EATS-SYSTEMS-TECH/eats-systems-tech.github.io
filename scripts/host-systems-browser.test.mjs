@@ -396,10 +396,11 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         [
           "Example WIFIGATE Room 212 🥂🍾",
           "Example WIFIGATE Dual Control 212 🥂🍾",
+          "Example WIFIGATE Roller Shutter 212 🥂🍾",
           "Example WIFIGATE Group 212 🥂🍾",
         ],
       );
-      for (const index of [0, 1, 2]) {
+      for (const index of [0, 1, 2, 3]) {
         const example = examples.nth(index);
         assert.equal(await example.getAttribute("data-example"), "true");
         assert.match(
@@ -1081,7 +1082,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       );
       assert.equal(
         await view.locator("[data-examples] .system-card").count(),
-        3,
+        4,
         "the examples and Try it stay",
       );
       assert.deepEqual(await page.evaluate(() => window.accessErrors), []);
@@ -1103,7 +1104,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         .waitFor();
       assert.equal(
         await view.locator("[data-examples] .system-card").count(),
-        3,
+        4,
       );
       await page.evaluate(() => {
         delete window.fixture.failures["GET /api/v1/me/systems"];
@@ -1202,6 +1203,75 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         ],
       ]);
       assert.deepEqual(errors, []);
+    },
+  );
+
+  await t.test(
+    "a Roller Shutter is named and drawn by its category, never by its icon",
+    async () => {
+      const roller = (system, systemIds) => ({
+        ...system,
+        type: "dual-control",
+        category: "ROLLER_SHUTTER",
+        systemIds,
+        iconId: "garage-small",
+      });
+      const overrides = {
+        mySystems: [
+          ...structuredClone(defaults.mySystems),
+          roller(personal("shutter", "dual-control", "Office shutter", []), ["g4", "g5"]),
+        ],
+        orgSystems: {
+          ...structuredClone(defaults.orgSystems),
+          grand: [
+            roller(orgSystem("shutter", "Office shutter", { kind: "organization" }), ["up", "down"]),
+            // The roller-shutter icon alone keeps an ordinary Dual Control.
+            {
+              ...orgSystem("pair", "Car park pair", { kind: "organization" }),
+              type: "dual-control",
+              systemIds: ["pair-a", "pair-b"],
+              iconId: "roller-shutter-small",
+            },
+          ],
+        },
+      };
+      const rollerIcon = "/assets/host-icons/dual-control-roller-shutter-small.svg";
+      for (const [lang, rollerKind, dualKind, workspaceKind] of [
+        ["", "Roller Shutter · 2 gates", "Dual Control · 2 gates", "Roller Shutter · 2 gates"],
+        ["he", "תריס חשמלי · 2 שערים", "שליטה כפולה · 2 שערים", "תריס חשמלי · 2 שערים"],
+      ]) {
+        const suffix = lang ? `&lang=${lang}` : "";
+        const { page, errors } = await scenario(overrides, lang ? `?lang=${lang}` : "");
+        await loaded(page, "my-systems");
+        const shutter = card(page, "shutter");
+        assert.equal(await shutter.locator(".system-card__kind").first().innerText(), rollerKind);
+        assert.equal(await shutter.locator(".manager-icon img").getAttribute("src"), rollerIcon);
+        await shutter.locator('[data-action="workspace"]').click();
+        const workspace = page.locator("dialog.system-workspace-dialog[open]");
+        assert.match(
+          (await workspace.locator(".manager-note .system-card__kind").innerText()).replace(/[⁦-⁩]/g, ""),
+          new RegExp(`^${workspaceKind.split(" · ")[0]}`),
+        );
+        await page.keyboard.press("Escape");
+
+        const organization = await scenario(overrides, `?view=systems${suffix}`);
+        await loaded(organization.page, "systems");
+        const orgShutter = card(organization.page, "shutter");
+        assert.equal(await orgShutter.locator(".system-card__kind").first().innerText(), rollerKind);
+        assert.equal(await orgShutter.locator(".manager-icon img").getAttribute("src"), rollerIcon);
+        const pair = card(organization.page, "pair");
+        assert.equal(await pair.locator(".system-card__kind").first().innerText(), dualKind);
+        assert.equal(await pair.locator(".manager-icon img").getAttribute("src"), rollerIcon);
+        // Its icon is fixed, as in the app: no Change icon for a Roller Shutter.
+        await orgShutter.locator('[data-action="workspace"]').click();
+        const actions = organization.page.locator("dialog.system-workspace-dialog[open] .system-workspace-actions [data-action]");
+        assert.deepEqual(await actions.evaluateAll((items) => items.map((item) => item.dataset.action)), ["guest-link", "calendar", "remove"]);
+        await organization.page.keyboard.press("Escape");
+        await pair.locator('[data-action="workspace"]').click();
+        assert.deepEqual(await actions.evaluateAll((items) => items.map((item) => item.dataset.action)), ["guest-link", "calendar", "icon", "remove"]);
+        assert.deepEqual(errors, []);
+        assert.deepEqual(organization.errors, []);
+      }
     },
   );
 
@@ -1311,7 +1381,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
         );
         assert.equal(
           await view.locator("[data-examples] .system-card").count(),
-          3,
+          4,
         );
         assert.equal(
           await view
@@ -1376,7 +1446,7 @@ test("My systems, Organization systems, examples and Try it", async (t) => {
       const { page, errors } = await scenario({ plan: null, organizations: [organization("grand", "Grand Hotel", role)] });
       await loaded(page, "systems");
       const examples = page.locator('[data-workspace-view="systems"] [data-examples] .system-card');
-      assert.equal(await examples.count(), 3);
+      assert.equal(await examples.count(), 4);
       for (const example of await examples.all()) {
         assert.deepEqual(await example.locator("[data-action]").evaluateAll(buttons => buttons.map(button => button.dataset.action)), ["workspace"]);
         assert.equal(await example.locator(".manager-system-example-badge").textContent(), "Example");

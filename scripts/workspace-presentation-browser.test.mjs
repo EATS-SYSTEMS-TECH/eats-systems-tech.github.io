@@ -80,13 +80,15 @@ async function openProduct(t, site, product, language, width) {
           throw new Error("No physical connections in presentation tests");
         }
       };
-      const items = ["gate", "dual-control", "group"].map((type, index) => ({
+      // The fourth object: a Roller Shutter is a Dual Control with its category.
+      const items = ["gate", "dual-control", "dual-control", "group"].map((type, index) => ({
         id: String(index + 1).repeat(64),
         type,
+        ...(index === 2 ? { category: "ROLLER_SHUTTER" } : {}),
         name:
           language === "he"
-            ? ["שער החניון", "כניסה ויציאה", "מתחם המלון"][index]
-            : ["Car park gate", "Entry and exit", "Hotel grounds"][index],
+            ? ["שער החניון", "כניסה ויציאה", "תריס הלובי", "מתחם המלון"][index]
+            : ["Car park gate", "Entry and exit", "Lobby shutter", "Hotel grounds"][index],
         targetId: "fixture-gate",
         systemIds: ["fixture-gate"],
         status: "active",
@@ -251,6 +253,16 @@ test("operating workspaces remain readable and keyboard accessible in both direc
             true,
             "picker returns keyboard focus",
           );
+          if (product !== "host")
+            assert.deepEqual(
+              await page
+                .locator(".manager-view > .manager-grid .manager-system .manager-muted")
+                .evaluateAll((items) => items.map((item) => item.textContent.split(" · ")[0])),
+              language === "he"
+                ? ["שער", "שליטה כפולה", "תריס חשמלי", "קבוצה"]
+                : ["Gate", "Dual Control", "Roller Shutter", "Group"],
+              "Pay and Manager label the four objects alike",
+            );
           assert.deepEqual(errors, []);
           if (evidence)
             await page.screenshot({

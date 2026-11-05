@@ -6,7 +6,7 @@
 // storage, no secrets (API and Host keys are placeholders).
 export const demoTokenPrefix = "v1.demo_";
 export const guestLinkBase = "https://wifigate.io/wifigate-api/?ep=";
-export const exampleKinds = Object.freeze(["room", "dual", "group"]);
+export const exampleKinds = Object.freeze(["room", "dual", "roller", "group"]);
 export const apiOrigin = "https://api.wifigate.io";
 export const apiKeyPlaceholder = "<YOUR_API_KEY>";
 export const hostKeyPlaceholder = "<HOST_KEY_FROM_THE_WIFIGATE_APP>";
@@ -177,6 +177,8 @@ export function guestInvitationResponse({ example, startsAt, endsAt }) {
     invitationId: `demo-invitation-${example.kind}-212`,
     status: "issued",
     targetType: example.type,
+    // A Roller Shutter keeps targetType "dual-control" and adds its category.
+    ...(example.category ? { category: example.category } : {}),
     targetId: example.id,
     startsAt: isoTime(startsAt),
     endsAt: isoTime(endsAt),

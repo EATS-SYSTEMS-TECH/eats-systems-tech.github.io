@@ -169,7 +169,12 @@ test("Pay shares production Manager component geometry in both languages at phon
           const summary = page.locator(".manager-examples > summary");
           await summary.click();
           assert.equal(await page.locator(".manager-examples").getAttribute("open"), "");
-          assert.equal(await page.locator(".manager-examples .manager-system").count(), 3);
+          assert.equal(await page.locator(".manager-examples .manager-system").count(), 4);
+          // Pay and Manager list and label the Roller Shutter example alike.
+          assert.equal(
+            (await page.locator(".manager-examples .manager-system .manager-muted").nth(2).textContent()).split(" · ")[0],
+            language === "he" ? "תריס חשמלי" : "Roller Shutter",
+          );
           await summary.click();
           assert.equal(await page.locator(".manager-examples").getAttribute("open"), null);
           const setup = page.locator(".manager-setup-guide > summary");

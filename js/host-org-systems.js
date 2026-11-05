@@ -18,9 +18,11 @@ import {
   changeTracker,
 } from "./host-system-cards.js";
 import { renderExampleGroup } from "./host-example-cards.js";
+import { isRollerShutter } from "./wifigate-objects.js";
 
 // Organization systems: the selected organization's active systems. Owners
-// and admins (systems:write) change a system's icon or remove it; staff and
+// and admins (systems:write) change a system's icon (a Roller Shutter keeps
+// its roller-shutter icon, as in the app) or remove it; staff and
 // viewers see the list only. Systems are added from the WIFIGATE app, and
 // names change there too. An organization member without a Host plan also
 // finds the examples here.
@@ -142,11 +144,15 @@ export async function renderOrganizationSystems(panel, context) {
                       (button) => changeCalendar(system, button, shared),
                       { variant: "secondary", name: "calendar", blocked },
                     ),
-                    action(
-                      "Change icon",
-                      (button) => changeIcon(system, button, shared),
-                      { variant: "secondary", name: "icon", blocked },
-                    ),
+                    ...(isRollerShutter(system)
+                      ? []
+                      : [
+                          action(
+                            "Change icon",
+                            (button) => changeIcon(system, button, shared),
+                            { variant: "secondary", name: "icon", blocked },
+                          ),
+                        ]),
                     action(
                       "Remove",
                       (button) => remove(system, button, shared),

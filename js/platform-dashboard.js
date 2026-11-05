@@ -758,12 +758,14 @@ function pricingExplanation(product, category) {
       host: {
         gates: "שערים פיזיים בבעלותך שאינם נכללים בזוג מזוהה, כולל רכיבי קבוצות. המחיר מדרגה על מדרגה: שערים 1–14 עולים $6 כל אחד לחודש, שערים 15–49 עולים $5, ומהשער ה־50 $4. המינימום לחשבון הוא $6 לחודש, גם בלי שערים.",
         dualControls: "Dual Control כולל שני שערים פיזיים, וכל אחד מהם מחושב במדרגה שלו אחרי השערים הבודדים: $6, $5 או $4 לשער. זוגות שבתוך קבוצות נכללים כאן; שער שמופיע בכמה מקומות מחושב פעם אחת.",
+        rollerShutters: "תריס חשמלי כולל שני שערים פיזיים ומחושב כמו Dual Control: כל שער במדרגה שלו אחרי השערים הבודדים, $6, $5 או $4 לשער. תריסים שבתוך קבוצות נכללים כאן; שער שמופיע בכמה מקומות מחושב פעם אחת.",
         organizations: "אין תוספת חודשית עבור ארגונים ב־WIFIGATE Host. העלות נקבעת לפי השערים הפיזיים הייחודיים בחשבון.",
       },
       manager: {
         gates: "$1.90 לחודש לכל Gate, כולל שערים בתוך קבוצות. אותו שער שמופיע בכמה קבוצות או גם בנפרד נספר פעם אחת. סנכרון חוזר אינו מוסיף עלות. כשאין רכיבים פעילים, חיוב המערכות הוא אפס.",
         dualControls: "$1.90 לחודש לכל Dual Control, כולל זוגות בתוך קבוצות. זוג הוא רכיב אחד גם כשיש בו שני שערים פיזיים; אותו זוג נספר פעם אחת.",
-        groups: "לקבוצה אין תעריף נפרד. הרכיבים שבתוכה מחושבים בשורות Gate ו־Dual Control.",
+        rollerShutters: "$1.90 לחודש לכל תריס חשמלי, כמו Dual Control, כולל תריסים בתוך קבוצות. תריס הוא רכיב אחד גם כשיש בו שני שערים פיזיים; אותו תריס נספר פעם אחת.",
+        groups: "לקבוצה אין תעריף נפרד. הרכיבים שבתוכה מחושבים לפי $1.90 לחודש לכל Gate, Dual Control או תריס חשמלי.",
         organizations: "שלושת הארגונים הפעילים הראשונים בבעלות החשבון כלולים. כל ארגון פעיל נוסף מוסיף $1 לחודש. מנהלי ארגון ללא חשבון לקוח אינם משלמים.",
       },
     },
@@ -771,12 +773,14 @@ function pricingExplanation(product, category) {
       host: {
         gates: "Owned physical gates outside recognized pairs, including group components. Priced band by band: gates 1–14 cost $6 each per month, gates 15–49 $5, and from gate 50 $4. The account minimum is $6/month, even with no gates.",
         dualControls: "A Dual Control contains two physical gates, each priced in its band after the standalone gates: $6, $5 or $4 per gate. Pairs inside groups are included here; overlapping physical gates are counted once.",
+        rollerShutters: "A Roller Shutter contains two physical gates and is priced like a Dual Control: each gate in its band after the standalone gates, $6, $5 or $4 per gate. Roller Shutters inside groups are included here; overlapping physical gates are counted once.",
         organizations: "WIFIGATE Host has no monthly organization surcharge. Cost depends on the account's unique physical gates.",
       },
       manager: {
         gates: "$1.90/month per Gate, including Gates inside groups. The same Gate is counted once across groups and standalone exports. Syncing adds no cost. With no active objects, system subscription charges are zero.",
         dualControls: "$1.90/month per Dual Control, including pairs inside groups. A pair is one object despite its two physical gates; the same pair is counted once.",
-        groups: "Groups have no separate fee. Their contents contribute to Gates and Dual Controls.",
+        rollerShutters: "$1.90/month per Roller Shutter, like a Dual Control, including Roller Shutters inside groups. It is one object despite its two physical gates; the same Roller Shutter is counted once.",
+        groups: "Groups have no separate fee. Their contents count at $1.90/month per Gate, Dual Control or Roller Shutter.",
         organizations: "The first three active account-owned organizations are included. Each additional organization adds $1/month. Organization administrators without a customer account do not pay.",
       },
     },
@@ -826,8 +830,11 @@ function renderSubscriptionPreview() {
       for (const [key, he, en] of [
         ["gates", "שערים", "Gates"],
         ["dualControls", "Dual Controls", "Dual Controls"],
+        ["rollerShutters", "תריסים חשמליים", "Roller Shutters"],
         ["organizations", "ארגונים", "Organizations"],
       ]) {
+        // An estimate from before Roller Shutters had their own line has no such row.
+        if (key === "rollerShutters" && estimate && !estimate.lines.rollerShutters) continue;
         const row = body.insertRow();
         const term = document.createElement("th");
         term.scope = "row";

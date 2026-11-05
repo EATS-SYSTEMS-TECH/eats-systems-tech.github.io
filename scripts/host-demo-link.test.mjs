@@ -145,6 +145,8 @@ test("the example answer mirrors POST /v1/guest-invitations 201", () => {
       "invitationId",
       "status",
       "targetType",
+      // A Roller Shutter stays a dual-control target and adds its category.
+      ...(example.category ? ["category"] : []),
       "targetId",
       "startsAt",
       "endsAt",
@@ -156,6 +158,7 @@ test("the example answer mirrors POST /v1/guest-invitations 201", () => {
     ]);
     assert.equal(answer.status, "issued");
     assert.equal(answer.targetType, example.type);
+    assert.equal(answer.category, example.category);
     assert.equal(answer.physicalGateCount, example.gates);
     assert.equal(
       readDemoToken(new URL(answer.inviteUrl).searchParams.get("ep")).k,
@@ -184,13 +187,14 @@ test("the example answer mirrors POST /v1/guest-invitations 201", () => {
   );
 });
 
-test("the three examples are frozen and named the same in every language", () => {
+test("the four examples are frozen and named the same in every language", () => {
   assert.deepEqual(
-    exampleSystems.map((system) => [system.name, system.type, system.gates]),
+    exampleSystems.map((system) => [system.name, system.type, system.category, system.gates]),
     [
-      ["Example WIFIGATE Room 212 🥂🍾", "gate", 1],
-      ["Example WIFIGATE Dual Control 212 🥂🍾", "dual-control", 2],
-      ["Example WIFIGATE Group 212 🥂🍾", "group", 4],
+      ["Example WIFIGATE Room 212 🥂🍾", "gate", undefined, 1],
+      ["Example WIFIGATE Dual Control 212 🥂🍾", "dual-control", undefined, 2],
+      ["Example WIFIGATE Roller Shutter 212 🥂🍾", "dual-control", "ROLLER_SHUTTER", 2],
+      ["Example WIFIGATE Group 212 🥂🍾", "group", undefined, 4],
     ],
   );
   assert.ok(Object.isFrozen(exampleSystems));
@@ -199,4 +203,23 @@ test("the three examples are frozen and named the same in every language", () =>
     "use strict";
     exampleSystems[0].name = "Changed";
   });
+});
+
+test("every example's demo link has a preview on the guest link page", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const { exampleKinds } = await import("../js/host-demo-link.js");
+  assert.deepEqual(exampleKinds, exampleSystems.map((system) => system.kind));
+  for (const page of ["templates/wifigate-link.template.html", "wifigate-api/index.html", "he/wifigate-api/index.html"]) {
+    const html = await readFile(new URL(`../${page}`, import.meta.url), "utf8");
+    const table = html.match(/const WIFIGATE_DEMO_SYSTEMS = \{([\s\S]*?)\n\s*\};/)[1];
+    for (const example of exampleSystems) {
+      const entry = table.match(new RegExp(`${example.kind}: \{ name: "([^"]+)", icon: "([^"]+)" \}`));
+      assert.ok(entry, `${page} previews ${example.kind}`);
+      assert.equal(entry[1], example.name);
+    }
+  }
+  assert.match(
+    await readFile(new URL("../templates/wifigate-link.template.html", import.meta.url), "utf8"),
+    /roller: \{ name: "Example WIFIGATE Roller Shutter 212 🥂🍾", icon: "dual-control-roller-shutter-small" \}/,
+  );
 });

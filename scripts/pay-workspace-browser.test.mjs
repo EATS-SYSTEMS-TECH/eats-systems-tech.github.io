@@ -406,3 +406,23 @@ test("Pay public preview rejects an invalid link and fails closed if the server 
   assert.equal(await page.locator("#pay-point button").count(), 1);
   assert.equal(await page.getByRole("button", { name: /pay|open|charge/i }).count(), 0);
 });
+
+test("Pay lists the Roller Shutter example, and its own eligibility names Roller Shutter as the reason", async t => {
+  const { origin, browser } = await startSite(t);
+  for (const [language, label, reason] of [
+    ["en", "Roller Shutter · 2 gates", "Payment point configuration is not supported for a Roller Shutter."],
+    ["he", "תריס חשמלי · 2 שערים", "תריס חשמלי אינו תומך בהגדרת נקודת תשלום."],
+  ]) {
+    const { page, state, errors } = await setup(t, browser);
+    await enter(page, origin, language === "he" ? "he" : undefined);
+    await page.getByText(language === "he" ? "דוגמאות" : "Examples", { exact: true }).click();
+    const card = page.locator('[data-system-id="example-roller-shutter"]');
+    assert.equal(await card.locator(".manager-muted").textContent(), label);
+    assert.equal(await card.locator(".manager-icon img").getAttribute("src"), "/assets/host-icons/dual-control-roller-shutter-small.svg");
+    await card.locator("button").click();
+    await page.locator('[data-pay-tab="settings"]').click();
+    assert.equal(await page.locator(".pay-read-only").textContent(), reason);
+    assert.equal(state.calls.some(call => call.method !== "GET"), false);
+    assert.deepEqual(errors, []);
+  }
+});

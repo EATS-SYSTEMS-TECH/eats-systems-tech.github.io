@@ -1,4 +1,5 @@
 import { createSystemIcon } from "./wifigate-system-icons.js";
+import { isRollerShutter, rollerShutterAppOnlyText, systemKindLabel } from "./wifigate-objects.js";
 
 const node = (tag, text, className) => {
   const element = document.createElement(tag);
@@ -17,8 +18,9 @@ export function createManagerControlHeader({ system, language, returnButton, act
   icon.classList.add("manager-workspace-icon");
   const heading = node("div", undefined, "manager-workspace-heading");
   const count = system.systemIds.length;
-  const type = system.type === "group" ? t("קבוצת שערים", "Gate group")
-    : system.type === "dual-control" ? "Dual Control" : t("שער", "Gate");
+  const type = systemKindLabel(system, language, {
+    group: t("קבוצת שערים", "Gate group"), "dual-control": "Dual Control",
+  }) ?? t("שער", "Gate");
   heading.append(
     node("span", "WIFIGATE MANAGER", "manager-workspace-eyebrow"),
     node("h3", system.name),
@@ -78,7 +80,7 @@ export function updateManagerSelectedGate(container, gate, name, language) {
 }
 
 // Presentation only: the caller owns the existing authenticated opening action.
-export function renderManagerControlOverview({ content, system, overview, maximum, language, openButton }) {
+export function renderManagerControlOverview({ content, system, overview, maximum, language, openButton, appOnly = isRollerShutter(system) }) {
   const t = copy(language);
   const format = value => number(value) ? new Intl.NumberFormat(language === "he" ? "he-IL" : "en-US").format(value) : t("לא זמין", "Unavailable");
   const layout = node("div", undefined, "manager-control-overview");
@@ -94,6 +96,14 @@ export function renderManagerControlOverview({ content, system, overview, maximu
     symbol,
     node("span", t("שליטה בשער", "Gate control"), "manager-control-eyebrow"),
     node("h4", overview?.systemName || system.name),
+  );
+  // A Roller Shutter (or one of its sides) has no remote Open: it runs only
+  // in the app.
+  if (appOnly) {
+    const note = node("p", rollerShutterAppOnlyText(language), "manager-note manager-roller-shutter-note");
+    note.dataset.rollerShutterAppOnly = "";
+    primary.append(note);
+  } else primary.append(
     node("p", t("פתיחה מרחוק, עם אישור לפני ביצוע.", "Open remotely, with confirmation before the action.")),
     openButton,
     node("small", t("הפעולה תתבצע אחרי האישור שלכם.", "The action runs after your confirmation."), "manager-control-confirmation"),

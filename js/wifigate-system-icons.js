@@ -1,3 +1,5 @@
+import { isRollerShutter, rollerShutterIcon } from "./wifigate-objects.js";
+
 // The WIFIGATE artwork is shared with Host and the mobile icon catalogue.
 // Keep filenames allowlisted: API metadata must never become an arbitrary URL.
 export const systemIconCatalog = Object.freeze({
@@ -21,8 +23,10 @@ const defaults = Object.freeze({
 });
 export function systemIconSrc(system = {}) {
   const type = Object.hasOwn(systemIconCatalog, system?.type) ? system.type : "gate";
-  const icon = systemIconCatalog[type].includes(system?.iconId)
-    ? system.iconId : defaults[type];
+  // A Roller Shutter always shows its roller-shutter artwork, as in the app.
+  const icon = isRollerShutter(system) ? rollerShutterIcon
+    : systemIconCatalog[type].includes(system?.iconId)
+      ? system.iconId : defaults[type];
   return `/assets/host-icons/${type}-${icon}.svg`;
 }
 export function createSystemIcon(system, className = "manager-icon") {
@@ -35,7 +39,7 @@ export function createSystemIcon(system, className = "manager-icon") {
   image.width = 40;
   image.height = 40;
   image.addEventListener("error", () => {
-    const fallback = systemIconSrc({ type: system?.type });
+    const fallback = systemIconSrc({ type: system?.type, category: system?.category });
     if (image.getAttribute("src") !== fallback) image.src = fallback;
   }, { once: true });
   holder.append(image);

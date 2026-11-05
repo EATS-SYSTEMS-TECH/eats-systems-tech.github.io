@@ -6,6 +6,7 @@ import { createManagerOrganizationPicker } from "./manager-organization-picker.j
 import { createManagerActivity } from "./manager-activity.js";
 import { createOrganizationRoleCard } from "./role-guide.js";
 import { planRoleName, organizationRoleName } from "./role-names.js";
+import { isRollerShutter, ROLLER_SHUTTER_CATEGORY } from "./wifigate-objects.js";
 
 const BASE = "/api/v1/pay";
 const el = (tag, text, cls) => {
@@ -118,8 +119,9 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
   const examples = [
     { id: "example-gate", name: t("שער החניון", "Car park gate"), type: "gate", targetId: "DEMO-GATE", systemIds: ["DEMO-GATE"], version: 1 },
     { id: "example-dual", name: t("כניסה ויציאה", "Entry and exit"), type: "dual-control", targetId: "DEMO-DUAL", systemIds: ["DEMO-DUAL"], version: 1 },
+    { id: "example-roller-shutter", name: t("תריס המשרד", "Office shutter"), type: "dual-control", category: ROLLER_SHUTTER_CATEGORY, targetId: "DEMO-ROLLER", systemIds: ["DEMO-ROLLER-UP", "DEMO-ROLLER-DOWN"], version: 1 },
     { id: "example-group", name: t("מתחם העסקים", "Business campus"), type: "group", targetId: "DEMO-GROUP", systemIds: ["DEMO-1", "DEMO-2", "DEMO-3"], version: 1 },
-  ].map((system, index) => ({ ...system, capabilities: { paymentModes: ["single-entry", "metered", "timed"], paymentsEnabled: false, physicalOpening: false }, config: { displayName: system.name, description: t("נקודת תשלום לדוגמה בחניון.", "An example car park payment point."), currency: "ILS", priceMinor: 1200 + index * 300, graceMinutes: 10, maxSessionMinutes: 1440, accessMode: "single-entry", validityMin: 15, windowMin: 60, hourlyRateMinor: 0, dailyCap: null, enabled: false }, publicPoint: { status: "preview_only" } }));
+  ].map((system, index) => ({ ...system, capabilities: { paymentModes: isRollerShutter(system) ? [] : ["single-entry", "metered", "timed"], paymentsEnabled: false, physicalOpening: false }, config: { displayName: system.name, description: t("נקודת תשלום לדוגמה בחניון.", "An example car park payment point."), currency: "ILS", priceMinor: 1200 + Math.min(index, 2) * 300, graceMinutes: 10, maxSessionMinutes: 1440, accessMode: "single-entry", validityMin: 15, windowMin: 60, hourlyRateMinor: 0, dailyCap: null, enabled: false }, publicPoint: { status: "preview_only" } }));
   root.className = "pay-dashboard";
   root.replaceChildren();
   const shell = el("div", undefined, "manager-shell pay-shell");
@@ -436,6 +438,13 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
     panel.append(el("h2", readOnly ? t("פרטי הנקודה של הארגון", "Organization point details") : t("השלב הבא שלכם", "Your next step")), el("p", readOnly ? t("אפשר לצפות בפרטי הנקודה, בתעריף המתוכנן ובתצוגת הלקוח. עדכון ההגדרות זמין למנהלי הארגון.", "View point details, the planned tariff and the customer preview. Organization administrators can update the settings.") : t("הגדירו שם, הסבר ותעריף מתוכנן. לאחר השמירה אפשר לבדוק כיצד הנקודה תיראה למבקר, ולפתוח את קישור התצוגה המקדימה.", "Set a name, description and planned tariff. After saving, review how the point will look to a visitor and open its preview link.")), button(readOnly ? t("פרטי נקודה ותעריף", "Point and tariff details") : t("הגדרת נקודה ותעריף", "Configure point and tariff"), () => { tab = "settings"; renderSystem(); }, "primary"));
     content.append(panel);
   }
+  // Pay's own eligibility decides; a Roller Shutter (PUSH_BUTTON sides) is
+  // named in the reason.
+  function unsupportedReason() {
+    return isRollerShutter(selected)
+      ? t("תריס חשמלי אינו תומך בהגדרת נקודת תשלום.", "Payment point configuration is not supported for a Roller Shutter.")
+      : t("מערכת זו אינה תומכת כרגע בהגדרת נקודת תשלום.", "Payment point configuration is not currently supported for this system.");
+  }
   function renderSettings() {
     const config = selected.config || {};
     const panel = el("section", undefined, "manager-settings-card pay-panel"); panel.append(el("h3", t("נקודת התשלום שלכם", "Your payment point")), el("p", t("ההגדרות נשמרות כהכנה לסליקה. הן אינן מפעילות חיוב או פותחות מערכת.", "These settings prepare the payment point. They do not enable charging or open a system."), "pay-muted"));
@@ -490,7 +499,7 @@ export function createPayDashboard({ root, user, language = "en", api, onProfile
     const actions = el("div", undefined, "manager-confirm-actions pay-form-actions");
     const save = el("button", demo ? t("שמירה בסימולציה", "Save in simulation") : t("שמירת ההגדרות", "Save settings"), "manager-button pay-button primary"); save.type = "submit";
     const reload = button(t("טעינת הפרטים העדכניים", "Load latest details"), () => void openSystem(selected, demo)); reload.hidden = true;
-    if (readOnly) { save.hidden = true; notice.textContent = unsupported ? t("מערכת זו אינה תומכת כרגע בהגדרת נקודת תשלום.", "Payment point configuration is not currently supported for this system.") : t("לחשבון שלכם יש הרשאת צפייה. מנהל הארגון יכול לעדכן את ההגדרות.", "Your account has view access. An organization administrator can update these settings."); notice.classList.add("pay-read-only"); }
+    if (readOnly) { save.hidden = true; notice.textContent = unsupported ? unsupportedReason() : t("לחשבון שלכם יש הרשאת צפייה. מנהל הארגון יכול לעדכן את ההגדרות.", "Your account has view access. An organization administrator can update these settings."); notice.classList.add("pay-read-only"); }
     actions.append(save, reload); form.append(notice, actions);
     form.addEventListener("submit", async event => {
       event.preventDefault(); if (busy || readOnly) return;

@@ -62,9 +62,10 @@ export async function renderHostApiKeys({
     wrapper.prepend(checkbox);
     scopes.append(wrapper);
   }
+  // A Roller Shutter is a Dual Control in the API: the same target type.
   const targetLabels = {
     gate: "Gate",
-    "dual-control": "Dual Control",
+    "dual-control": "Dual Control (includes Roller Shutters)",
     group: "Group",
   };
   for (const [value, label] of Object.entries(targetLabels)) {
