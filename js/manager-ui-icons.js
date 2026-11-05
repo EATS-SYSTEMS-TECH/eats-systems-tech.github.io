@@ -20,6 +20,7 @@ export function managerUiIcon(kind) {
     admin:"m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6ZM8 12l3 3 5-6",
     viewer:"M2 12s4-8 10-8 10 8 10 8-4 8-10 8S2 12 2 12Zm7 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0",
     add:"M12 5v14M5 12h14",
+    remove:"M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7",
     search:"M21 21l-5-5M10.5 3a7.5 7.5 0 1 0 0 15a7.5 7.5 0 1 0 0-15",
     next:"m9 5 7 7-7 7",
     previous:"m15 5-7 7 7 7",

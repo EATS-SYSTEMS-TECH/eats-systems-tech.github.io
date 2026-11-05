@@ -9,11 +9,19 @@ export const managerExampleSystems = Object.freeze([
     example: true,
   }),
   Object.freeze({
+    id: "example-manager-room",
+    type: "gate",
+    systemIds: Object.freeze(["DEMO-24986"]),
+    name: "WIFIGATE Room 212",
+    iconId: "door-small",
+    example: true,
+  }),
+  Object.freeze({
     id: "example-manager-dual",
     type: "dual-control",
     systemIds: Object.freeze(["DEMO-24981", "DEMO-24982"]),
     name: "WIFIGATE Dual Control",
-    iconId: "garage-small",
+    iconId: "light-small",
     example: true,
   }),
   // A Roller Shutter is a Dual Control with its category: two PUSH_BUTTON
@@ -37,6 +45,7 @@ export const managerExampleSystems = Object.freeze([
       "DEMO-24983",
     ]),
     name: "WIFIGATE Group",
+    iconId: "folder",
     example: true,
   }),
 ]);
@@ -88,9 +97,11 @@ const people = (count, admin = false) =>
     guestGeneration: 1,
   }));
 function gate(id, index) {
+  const shutter = index === 4 || index === 5;
+  const room = index === 6;
   return {
     id,
-    name: ["Parking gate", "Entry gate", "Exit gate", "Service gate", "Shutter up", "Shutter down"][index],
+    name: ["Parking gate", "Entry gate", "Exit gate", "Service gate", "Shutter up", "Shutter down", "Room 212"][index],
     boardMb: index === 1 ? 8 : 16,
     maxUsers: index === 1 ? 1000 : 5000,
     maxAdmins: 20,
@@ -107,14 +118,14 @@ function gate(id, index) {
     clock: "2026-10-12T11:22:00Z",
     timezone: "Asia/Jerusalem",
     uptime: "3d 6h",
-    gateType: index > 3 ? "Roller shutter" : "Parking barrier",
+    gateType: shutter ? "Roller shutter" : room ? "Door" : "Parking barrier",
     relayOn: false,
     freeHeap: 164000,
     sensor: true,
     override: "NORMAL",
     revision: 9,
     config: {
-      command: index > 3 ? "PUSH_BUTTON" : "PULSE_AFTER_PULSE",
+      command: shutter ? "PUSH_BUTTON" : room ? "PULSE" : "PULSE_AFTER_PULSE",
       pulseWidth1Millis: 5000,
       timeBetweenPulses1Seconds: 2,
       pulseWidth2Millis: 5000,
@@ -187,7 +198,7 @@ function gate(id, index) {
 export function createManagerExampleData() {
   const assignments = new Set(managerExampleSystems.map((system) => system.id));
   const gates = new Map(
-    ["DEMO-24980", "DEMO-24981", "DEMO-24982", "DEMO-24983", "DEMO-24984", "DEMO-24985"].map((id, i) => [
+    ["DEMO-24980", "DEMO-24981", "DEMO-24982", "DEMO-24983", "DEMO-24984", "DEMO-24985", "DEMO-24986"].map((id, i) => [
       id,
       gate(id, i),
     ]),

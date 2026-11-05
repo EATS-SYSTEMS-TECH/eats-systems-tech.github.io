@@ -1119,14 +1119,12 @@ export function createManagerDashboard({
         ),
       );
 
-    if (!operatorAccount && !workspace)
-      actions.append(
-        button(
-          t("פתיחת סביבת ניהול", "Open workspace"),
-          () => onOpen(s),
-          true,
-        ),
-      );
+    if (!operatorAccount && !workspace) {
+      const open = button(t("פתיחת סביבת ניהול", "Open workspace"), () => onOpen(s), true);
+      open.classList.add("manager-system-open");
+      open.append(managerUiIcon("next"));
+      actions.append(open);
+    }
     const exampleOrganizationId = examples.isSystem(s) && currentView === "example-organization"
       ? examples.assignment(s)
       : null;
@@ -1144,7 +1142,8 @@ export function createManagerDashboard({
       secondary.append(
         button(t("שיוך לארגון", "Assign organization"), () => assignSystem(s)),
       );
-    if (profile.account || operatorAccount || examples.isSystem(s)) {
+    // The example catalogue stays available; removal belongs to real systems.
+    if ((profile.account || operatorAccount) && !examples.isSystem(s)) {
       const removeButton = button(workspace || operatorAccount ? t("ניתוק מ־Manager", "Disconnect from Manager") : t("הסרת מערכת", "Remove system"), async () => {
             if (
               !(await confirmAction(
@@ -1155,17 +1154,6 @@ export function createManagerDashboard({
               ))
             )
               return;
-            if (examples.isSystem(s)) {
-              examples.disconnect(s);
-              await showSystems(null);
-              say(
-                t(
-                  "המערכת הוסרה מהסימולציה בלבד.",
-                  "System removed from the simulation only.",
-                ),
-              );
-              return;
-            }
             await ensureRecent();
             const result = await api(`/systems/${s.id}/remove`, "POST", {
               expectedVersion: s.version,
@@ -1193,7 +1181,7 @@ export function createManagerDashboard({
 });
       removeButton.classList.add("manager-button-danger");
       if(workspace || operatorAccount)secondary.append(removeButton);
-      else if(!scope && currentView !== "example-organization") {removeButton.classList.add("manager-system-remove");removeButton.setAttribute("aria-label",t("הסרת מערכת: ","Remove system: ")+s.name);actions.append(removeButton);}
+      else if(!scope && currentView !== "example-organization") {removeButton.classList.add("manager-system-remove");removeButton.prepend(managerUiIcon("remove"));removeButton.setAttribute("aria-label",t("הסרת מערכת: ","Remove system: ")+s.name);actions.append(removeButton);}
     }
     if ((workspace || operatorAccount) && secondary.childElementCount) {
       const menu = node("details", undefined, "manager-system-menu");

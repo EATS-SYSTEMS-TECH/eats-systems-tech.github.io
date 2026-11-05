@@ -39,7 +39,6 @@ export function createManagerExamples({
   });
   let activeOrganizationId = managerExampleOrganization.id;
   let viewGeneration = 0;
-  const removed = new Set();
   let activeRoot,
     message,
     disposed = false;
@@ -175,7 +174,6 @@ export function createManagerExamples({
       );
     const grid = el("div", undefined, "manager-grid manager-example-grid");
     for (const system of systems) {
-      if (removed.has(system.id)) continue;
       const actions = renderSystemActions ? renderSystemActions(system) : el("div", undefined, "manager-system-actions");
       if(!renderSystemActions) actions.append(
         button(
@@ -281,7 +279,7 @@ export function createManagerExamples({
     if (!isCurrent()) return;
     const assigned = managerExampleSystems.filter(
       (system) =>
-        selected.assignments.has(system.id) && !removed.has(system.id),
+        selected.assignments.has(system.id),
     );
     const toolbar = el("div", undefined, "manager-toolbar");
     toolbar.dataset.organizationSection = "systems";
@@ -309,7 +307,7 @@ export function createManagerExamples({
     renderOrganization,
     isSystem: (system) => managerExampleSystems.includes(system),
     createConnection: (options) => {
-      if (disposed || removed.has(options.system.id))
+      if (disposed)
         throw new Error("EXAMPLE_SYSTEM_NOT_FOUND");
       return new ManagerExampleConnection({ ...options, data });
     },
@@ -329,12 +327,6 @@ export function createManagerExamples({
         organizations
           .find((org) => org.definition.id === orgId)
           .assignments.add(system.id);
-    },
-    disconnect: (system) => {
-      if (!managerExampleSystems.includes(system))
-        throw new Error("EXAMPLE_SYSTEM_NOT_FOUND");
-      removed.add(system.id);
-      for (const org of organizations) org.assignments.delete(system.id);
     },
     closeView() {
       viewGeneration++;
