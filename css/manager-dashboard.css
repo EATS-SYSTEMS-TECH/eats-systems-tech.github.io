@@ -1081,6 +1081,8 @@
 .manager-system h4 { font-size: 19px; color: #172b46; }
 .manager-system-actions { margin-top: auto; padding-top: 16px; border-top: 1px solid #edf1f6; }
 .manager-system-actions .manager-button { flex: 1 1 180px; }
+.manager-system-actions .manager-button.manager-system-unlink { flex: 1 0 100%; min-height:44px; border:1px solid #efd5d2; background:#fffaf9; color:#a73b32; }
+.manager-system-actions .manager-button.manager-system-unlink:hover:not(:disabled) { background:#fff0ed; border-color:#dba49d; }
 .manager-shell button.manager-button { border-radius: 10px; }
 .manager-shell .manager-form :is(input, select, textarea) { border-radius: 10px; border-color: #dce4ee; background: #fbfcfe; }
 .manager-form label { color: #53677f; line-height: 1.5; }

@@ -244,6 +244,14 @@ export function createManagerDashboard({
         "יש להסיר את שיוך המערכות לפני הסרת הארגון.",
         "Unassign linked systems before removing the organization.",
       ),
+      SYSTEM_REFERENCED: t(
+        "השער מופיע גם במערכות אחרות. יש להסיר את הייצוגים הנוספים לפני שינוי השיוך שלו.",
+        "This gate is also included in other systems. Remove those additional representations before changing its assignment.",
+      ),
+      SHARED_CLAIM_IN_USE: t(
+        "למערכת יש שיוך משותף לארגון שמונע את הניתוק. יש לשחרר את השיוך המשותף לפני ניסיון נוסף.",
+        "This system has a shared organization claim that prevents unlinking. Release the shared claim before trying again.",
+      ),
       ORGANIZATION_HAS_MEMBERS: t(
         "יש לבטל את מינויי מנהלי הארגון לפני הסרתו.",
         "Revoke organization administrator appointments before removing the organization.",
@@ -1119,6 +1127,19 @@ export function createManagerDashboard({
           true,
         ),
       );
+    const exampleOrganizationId = examples.isSystem(s) && currentView === "example-organization"
+      ? examples.assignment(s)
+      : null;
+    if (!operatorAccount && !workspace && (
+      exampleOrganizationId || (scope && organizationDetail?.role === "owner" && s.orgId === scope)
+    )) {
+      const unlinkButton = button(t("ניתוק מהארגון", "Unlink from organization"), () =>
+        unlinkSystem(s, exampleOrganizationId),
+      );
+      unlinkButton.classList.add("manager-system-unlink");
+      unlinkButton.setAttribute("aria-label", t("ניתוק מהארגון: ", "Unlink from organization: ") + s.name);
+      actions.append(unlinkButton);
+    }
     if ((profile.account || examples.isSystem(s)) && !operatorAccount)
       secondary.append(
         button(t("שיוך לארגון", "Assign organization"), () => assignSystem(s)),
@@ -1198,6 +1219,31 @@ export function createManagerDashboard({
       actions.append(menu);
     }
     return actions;
+  }
+  async function unlinkSystem(system, exampleOrganizationId = null) {
+    const epoch = generation, orgId = exampleOrganizationId || scope;
+    if (!orgId || (!exampleOrganizationId && organizationDetail?.role !== "owner")) return;
+    if (!(await confirmAction(exampleOrganizationId
+      ? t(`לנתק את ${system.name} מהארגון לדוגמה? השינוי יישמר בסימולציה בלבד.`,
+          `Unlink ${system.name} from the example organization? This only changes the simulation.`)
+      : t(`לנתק את ${system.name} מהארגון? המערכת תישאר ב״המערכות שלי״ והמנוי שלה יישאר פעיל. בבדיקה הבאה השער ימחק את רשתות ה־Wi-Fi השמורות בו ויתנתק מ־Manager. לחיבור מחדש יש להגדיר Wi-Fi באפליקציה ליד השער.`,
+          `Unlink ${system.name} from the organization? It will remain in My systems and its subscription will stay active. On its next check the gate deletes its saved Wi-Fi networks and disconnects from Manager. To reconnect, set Wi-Fi again in the app near the gate.`)
+    ))) return;
+    if (closed || epoch !== generation) return;
+    if (exampleOrganizationId) {
+      examples.assign(system, null);
+      await openExampleOrganization(orgId);
+      say(t("המערכת נותקה מהארגון לדוגמה בלבד.", "System unlinked from the example organization only."));
+      return;
+    }
+    await ensureRecent();
+    await api(`/systems/${encodeURIComponent(system.id)}/assign`, "POST", {
+      orgId: null,
+      expectedVersion: system.version,
+    });
+    await showSystems(orgId);
+    say(t("המערכת נותקה מהארגון ונשארה ב״המערכות שלי״. לחיבור מרחוק מחדש, הגדירו Wi-Fi באפליקציה ליד השער.",
+      "System unlinked from the organization and kept in My systems. To reconnect remotely, set Wi-Fi again in the app near the gate."), false, "success");
   }
   async function assignSystem(system) {
     stop();
