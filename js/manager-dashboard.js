@@ -1943,7 +1943,15 @@ export function createManagerDashboard({
         }
       });
       b.id = `manager-tab-${id}`;
-      b.prepend(managerUiIcon({ overview: "systems", users: "people", admins: "admin", guests: "account", auto: "gate", settings: "settings", events: "calendar", history: "history", rf: "signal", system: "app" }[id]));
+      if (id === "auto") {
+        const icon = node("img", undefined, "manager-auto-open-icon");
+        icon.src = "/assets/wifigate_features/auto_open.svg";
+        icon.alt = "";
+        icon.setAttribute("aria-hidden", "true");
+        icon.width = 24;
+        icon.height = 20;
+        b.prepend(icon);
+      } else b.prepend(managerUiIcon({ overview: "systems", users: "people", admins: "admin", guests: "account", settings: "settings", events: "calendar", history: "history", rf: "signal", system: "app" }[id]));
       b.setAttribute("role", "tab");
       b.setAttribute("aria-selected", String(id === currentTab));
       b.setAttribute("aria-controls", "manager-content");

@@ -257,6 +257,12 @@
   height: 17px;
   flex: 0 0 17px;
 }
+.manager-control-workspace .manager-tabs .manager-auto-open-icon {
+  width: 24px;
+  height: 20px;
+  flex: 0 0 24px;
+  object-fit: contain;
+}
 .manager-control-workspace .manager-tabs .manager-button:focus-visible {
   outline-offset: -3px;
 }
