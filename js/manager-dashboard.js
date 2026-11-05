@@ -1,3 +1,4 @@
+import { managerUiIcon } from "./manager-ui-icons.js";
 import { renderManagerOrganization } from "./manager-organization.js";
 import { planRoleName, organizationRoleName } from "./role-names.js";
 import { createManagerOrganizationPicker } from "./manager-organization-picker.js";
@@ -415,6 +416,17 @@ export function createManagerDashboard({
     currentData = undefined;
     cursor = null;
   }
+  let organizationSection = "systems";
+  function selectOrganizationSection(key) {
+    const restoreNavigationFocus = nav.contains(document.activeElement);
+    organizationSection = key;
+    for (const panel of view.querySelectorAll("[data-organization-section]")) {
+      panel.hidden = panel.dataset.organizationSection !== key;
+      if (panel.tagName === "DETAILS" && !panel.hidden) panel.open = true;
+    }
+    renderNav();
+    if (restoreNavigationFocus) nav.querySelector(`[data-organization-view="${key}"]`)?.focus();
+  }
   function renderNav() {
     organizationPicker?.destroy();
     organizationPicker = undefined;
@@ -431,7 +443,7 @@ export function createManagerDashboard({
     for (const role of new Set(
       profile.roles?.length ? profile.roles : [profile.role],
     )) {
-      if (!["admin", "user", "organization-admin", "organization-user", "organization-staff", "organization-viewer"].includes(role)) continue;
+      if (!["user", "organization-admin", "organization-user", "organization-staff", "organization-viewer"].includes(role)) continue;
       const label = node("span", roleName(role));
       label.dir = "ltr";
       roleList.append(label);
@@ -444,6 +456,7 @@ export function createManagerDashboard({
       const b = button(t("המערכות שלי", "My systems"), () => showSystems(null));
       if (!scope && ["systems", "example-system"].includes(currentView))
         b.setAttribute("aria-current", "page");
+      b.prepend(managerUiIcon("systems"));
       personalNavigation.append(b);
     }
     const myOrganizations = button(t("הארגונים שלי", "My organizations"), () =>
@@ -453,6 +466,7 @@ export function createManagerDashboard({
       ["my-organizations", "example-organization"].includes(currentView)
     )
       myOrganizations.setAttribute("aria-current", "page");
+    myOrganizations.prepend(managerUiIcon("organizations"));
     personalNavigation.append(myOrganizations);
     if (profile.organizations?.length) {
       const organizationArea = node("section", undefined, "manager-organization-area");
@@ -467,10 +481,17 @@ export function createManagerDashboard({
       });
       organizationArea.append(organizationPicker.root);
       if (scope && profile.organizations.some(org => org.id === scope)) {
-        const organizationSystems = button(t("מערכות הארגון", "Organization systems"), () => task(() => showSystems(scope)));
-        organizationSystems.dataset.organizationView = "systems";
-        if (currentView === "systems") organizationSystems.setAttribute("aria-current", "page");
-        organizationArea.append(organizationSystems);
+        for (const [key, label] of [
+          ["systems", t("מערכות הארגון", "Organization systems")],
+          ["people", t("אנשי הארגון", "Organization people")],
+          ["settings", t("הגדרות הארגון", "Organization settings")],
+        ]) {
+          const item = button(label, () => currentView === "systems" ? selectOrganizationSection(key) : task(() => showSystems(scope, null, key)));
+          item.prepend(managerUiIcon(key === "people" ? "people" : key));
+          item.dataset.organizationView = key;
+          if (currentView === "systems" && organizationSection === key) item.setAttribute("aria-current", "page");
+          organizationArea.append(item);
+        }
       }
     }
     if (profile.role !== "admin")
@@ -947,7 +968,8 @@ export function createManagerDashboard({
     } while (next);
     return rows;
   }
-  async function showSystems(orgId, operatorAccount = null) {
+  async function showSystems(orgId, operatorAccount = null, sectionName = "systems") {
+    organizationSection = sectionName;
     stop();
     currentView = operatorAccount ? "platform-systems" : "systems";
     scope = orgId;
@@ -985,7 +1007,8 @@ export function createManagerDashboard({
         dialogs,
         ensureRecent,
         run: task,
-        onRefresh: () => showSystems(orgId, operatorAccount),
+        onRefresh: () => showSystems(orgId, operatorAccount, organizationSection),
+        onSectionChange: selectOrganizationSection,
         onBack: () => showOrganizations(!operatorAccount),
         errorText,
         isCurrent: () => !closed && epoch === generation,
@@ -1021,6 +1044,7 @@ export function createManagerDashboard({
       const copy = systemsEmptyCopy(he ? "he" : "en");
       empty.append(node("h4", copy.title));
       if (!scope && !operatorAccount) empty.append(node("p", copy.description));
+      if (scope) empty.dataset.organizationSection = "systems";
       view.append(empty);
     }
     const grid = node("div", undefined, "manager-grid");
@@ -1032,7 +1056,9 @@ export function createManagerDashboard({
           actions: systemActions(s, operatorAccount),
         }),
       );
+    if (scope) grid.dataset.organizationSection = "systems";
     view.append(grid);
+    if (scope) selectOrganizationSection(organizationSection);
     if (!scope && !operatorAccount) {
       view.prepend(createManagerSetupGuide(language));
       examples.renderCards(view);

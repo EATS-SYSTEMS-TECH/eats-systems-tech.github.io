@@ -35,6 +35,7 @@ import { infoTip } from "./host-ui.js";
 import { renderPlatformLanguage } from "./platform-language.js";
 import { monthlyEstimate, monthlyTotal, revenueTotal, formatMoney, unavailableLabel } from "./profile-financials.js";
 import { createPlatformAdminDirectory } from "./platform-admin-directory.js";
+import { renderFounderTag } from "./profile-roles.js";
 import { planRoleName, organizationRoleName } from "./role-names.js";
 import { createPlatformManagementGuide, mountRoleGuideButton, openRoleGuide } from "./role-guide.js";
 import {
@@ -249,6 +250,7 @@ function clearPrivate() {
   document.querySelectorAll(".pay-management-back").forEach(node => node.remove());
   ++generation;
   identity = undefined;
+  renderFounderTag();
   clearSecret();
   setActionBusy(false);
   $("#enrollment-status").textContent = "";
@@ -468,6 +470,7 @@ async function refresh() {
     const result = await getPlatformProfile(user);
     if (requestGeneration !== generation) return;
     identity = parsePlatformIdentity(result, user.uid);
+    renderFounderTag(identity.platformRole);
     const refusal = signInRefusal(identity);
     if (refusal) {
       void session?.endSession(refusal);

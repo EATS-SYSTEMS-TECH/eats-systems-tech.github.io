@@ -1578,3 +1578,33 @@ body[data-product] .manager-organization-workspace>.manager-organization-pending
   .manager-organization-navigation { display: flex; flex-wrap: wrap; gap: 6px; }
   .manager-nav > .manager-organization-picker, .manager-nav > .org-switcher { width: 100%; flex-basis: 100%; }
 }
+
+/* Guided app export, shared organization cards and explicit workspace navigation. */
+.manager-setup-guide:not(.manager-organization-guide) .manager-setup-steps { margin-block: 22px 16px; counter-reset: manager-setup; }
+.manager-setup-guide .manager-setup-steps > li { position:relative; display:flex; flex-direction:column; align-items:flex-start; min-height:260px; padding:28px; border:1px solid #ecdccd; border-radius:18px; background:linear-gradient(145deg,#fff8f0,#fff 65%); box-sizing:border-box; }
+.manager-setup-guide .manager-setup-steps > li[hidden] { display:none; }
+.manager-setup-guide .manager-setup-steps > li::before { content:attr(data-step); position:absolute; inset-inline-end:22px; top:22px; width:30px; height:30px; font-size:12px; background:#fff; border:1px solid #f0ded0; }
+.manager-setup-step-icon { display:grid; place-items:center; width:60px; height:60px; border:1px solid #f0d3bb; border-radius:18px; background:#ffeddb; color:#a13c12; margin-bottom:20px; }
+.manager-setup-step-icon svg { width:30px; height:30px; }
+.manager-setup-guide .manager-setup-steps strong { font-size:18px; }
+.manager-setup-guide .manager-setup-steps p { margin:10px 0 0; max-width:70ch; font-size:14px; line-height:1.9; }
+.manager-setup-controls { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.manager-shell .manager-setup-controls button { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; padding:10px 16px; border:1px solid #ead7c7; border-radius:12px; background:#fff8f0; color:#8f3d16; }
+.manager-setup-controls svg { width:18px; height:18px; }
+[dir="rtl"] .manager-setup-controls svg { transform:scaleX(-1); }
+.manager-setup-progress { color:#65748a; font-size:12px; text-align:center; }
+.manager-setup-controls button:disabled { opacity:.4; cursor:default; }
+.manager-org-columns { grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr)); grid-auto-rows:1fr; align-items:stretch; }
+.manager-card.manager-org-column { box-sizing:border-box; height:100%; min-height:340px; display:grid; grid-template-rows:minmax(100px,1fr) auto auto auto; }
+.manager-org-column > :last-child { align-self:end; margin:0; }
+.manager-org-column .manager-org-identity { min-height:100px; }
+.manager-org-column .manager-org-name h4 { min-height:3em; }
+.manager-shell .manager-nav :is(.manager-personal-navigation,.manager-organization-area) > button { display:flex; align-items:center; gap:10px; text-align:start; }
+.manager-nav :is(.manager-personal-navigation,.manager-organization-area) > button > svg { width:20px; height:20px; flex:none; opacity:.85; }
+.manager-view [data-organization-section][hidden] { display:none!important; }
+@media(max-width:600px) {
+ .manager-setup-guide .manager-setup-steps > li { padding:20px; min-height:300px; }
+ .manager-setup-guide .manager-setup-steps strong { font-size:16px; }
+ .manager-setup-controls { gap:6px; }
+ .manager-shell .manager-setup-controls button { padding:10px; font-size:12px; }
+}

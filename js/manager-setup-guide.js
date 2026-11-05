@@ -1,3 +1,4 @@
+import { managerUiIcon } from "./manager-ui-icons.js";
 const node = (tag, text, className) => {
   const element = document.createElement(tag);
   if (text) element.textContent = text;
@@ -30,7 +31,7 @@ export function createManagerSetupGuide(language = "en") {
     [
       t("התחברו לאותו חשבון", "Sign in with the same account"),
       t(
-        "היכנסו לאפליקציית WIFIGATE עם החשבון שבו אתם משתמשים באתר. לייצוא נדרש חשבון WIFIGATE Manager user פעיל.",
+        "היכנסו לאפליקציית WIFIGATE עם החשבון שבו אתם משתמשים באתר. לייצוא נדרשת גישת משתמש פעילה ל־WIFIGATE Manager.",
         "Sign in to the WIFIGATE app with the account you use on this website. Export requires an active User account.",
       ),
     ],
@@ -67,10 +68,34 @@ export function createManagerSetupGuide(language = "en") {
     ],
   ]) {
     const step = node("li");
-    step.append(node("strong", title), node("p", description));
+    step.dataset.step = String(steps.children.length + 1);
+    const icon = node("span", undefined, "manager-setup-step-icon");
+    icon.append(managerUiIcon(["account", "app", "systems", "export", "refresh"][steps.children.length]));
+    step.append(icon, node("strong", title), node("p", description));
     steps.append(step);
   }
   guide.append(steps);
+  const controls = node("div", undefined, "manager-setup-controls");
+  const previous = node("button", undefined, "manager-setup-previous");
+  const next = node("button", undefined, "manager-setup-next");
+  previous.type = next.type = "button";
+  previous.append(managerUiIcon("previous"), node("span", t("הקודם", "Previous")));
+  next.append(node("span", t("הבא", "Next")), managerUiIcon("next"));
+  const progress = node("span", undefined, "manager-setup-progress");
+  progress.setAttribute("aria-live", "polite");
+  let selected = 0;
+  const select = index => {
+    selected = index;
+    [...steps.children].forEach((step, i) => { step.hidden = i !== index; });
+    previous.disabled = index === 0;
+    next.disabled = index === steps.children.length - 1;
+    progress.textContent = t(`שלב ${index + 1} מתוך ${steps.children.length}`, `Step ${index + 1} of ${steps.children.length}`);
+  };
+  previous.addEventListener("click", () => select(selected - 1));
+  next.addEventListener("click", () => select(selected + 1));
+  controls.append(previous, progress, next);
+  guide.append(controls);
+  select(0);
   const update = node("p", undefined, "manager-setup-update");
   update.append(
     node("strong", t("כבר ייצאתם את המערכת?", "Already exported your system?")),

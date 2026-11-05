@@ -70,6 +70,7 @@ export async function renderManagerOrganization({
   run,
   onRefresh,
   onBack,
+  onSectionChange = () => {},
   errorText,
   isCurrent,
 }) {
@@ -137,6 +138,7 @@ export async function renderManagerOrganization({
       "dashboard-examples manager-organization-disclosure",
     );
     details.dataset.organizationDisclosure = key;
+    details.dataset.organizationSection = key === "branding" ? "settings" : "people";
     details.open = state[key] ?? open;
     details.append(node("summary", title));
     details.addEventListener("toggle", () => {
@@ -254,6 +256,7 @@ export async function renderManagerOrganization({
   if (permissions.managePeople === true) {
     const manage = button(t("ניהול ארגון", "Manage organization"), () => {
       if (!isCurrent()) return;
+      onSectionChange("people");
       for (const fold of [branding, peopleDisclosure]) {
         fold.open = true;
         state[fold.dataset.organizationDisclosure] = true;
@@ -353,6 +356,7 @@ export async function renderManagerOrganization({
     const tile = button(
       "",
       () => {
+        onSectionChange(key === "systems" ? "systems" : "people");
         const target =
           key === "systems"
             ? root.querySelector('[data-organization-section="systems"]')
@@ -624,6 +628,7 @@ export async function renderManagerOrganization({
       );
       pendingBody.append(row);
     }
+    pending.dataset.organizationSection = "people";
     section.append(pending);
   }
   root.append(section);
