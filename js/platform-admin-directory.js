@@ -15,6 +15,7 @@ import { createPlatformOrganizationDeletion } from "./platform-organization-dele
 import { createPlatformOrganizationActions } from "./platform-organization-actions.js";
 import { createDirectorySearchLoader } from "./platform-directory-search.js";
 import { planRoleName, organizationRoleName } from "./role-names.js";
+import { validOrganizationLogo } from "./manager-organization-card.js";
 
 const element = (tag, text, className) => {
   const node = document.createElement(tag);
@@ -328,11 +329,28 @@ export function createPlatformAdminDirectory({
     membershipFilters.hidden = selected !== "organization-users";
   }
 
+  // The organization's logo, or a generic picture with a question mark when
+  // it has none (Host and Pay organizations have no logo).
+  function organizationArtwork(organization) {
+    const artwork = element("span", "", "platform-admin-organization-icon");
+    if (validOrganizationLogo(organization.logoDataUrl)) {
+      artwork.classList.add("has-logo");
+      const image = element("img");
+      image.src = organization.logoDataUrl;
+      image.alt = t("לוגו של ", "Logo of ") + organization.name;
+      image.decoding = "async";
+      artwork.append(image);
+    } else {
+      artwork.classList.add("no-logo");
+      artwork.title = t("אין תמונת ארגון", "No organization image");
+      artwork.innerHTML = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.2 9.2a2.9 2.9 0 1 1 4.1 2.6c-.8.4-1.3 1.1-1.3 2v.5"/><circle cx="12" cy="17.6" r=".5" fill="currentColor"/></svg>';
+    }
+    return artwork;
+  }
+
   function organizationCard(organization) {
     const card = element("article", null, "platform-admin-organization");
-    const artwork = element("span", "", "platform-admin-organization-icon");
-    artwork.setAttribute("aria-hidden", "true");
-    artwork.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21V4h10v17M14 10h6v11M2 21h20M7 8h4M7 12h4M7 16h4M17 14h1M17 18h1"/></svg>';
+    const artwork = organizationArtwork(organization);
     const identity=element("div");identity.append(element("h4",organization.name),element("small",t("ארגון", "Organization")));
     const products=element("div",null,"platform-admin-organization-products");
     const state = value => ({active:t("פעיל","Active"),pending:t("ממתין","Pending"),blocked:t("חסום","Blocked"),expired:t("פג תוקף","Expired")})[value] || t("לא זמין","Unavailable");
@@ -391,7 +409,9 @@ export function createPlatformAdminDirectory({
 
   function organizationPeopleCard(organization) {
     const card = element("section", null, "platform-admin-organization-column");
-    card.append(element("h4", organization.name));
+    const heading = element("header", null, "platform-admin-organization-heading");
+    heading.append(organizationArtwork(organization), element("h4", organization.name));
+    card.append(heading);
     const labels = { active: t("פעיל", "Active"), pending: t("ממתין", "Pending"), blocked: t("חסום", "Blocked") };
     for (const role of organizationRoles) {
       if (selectedOrganizationRole !== "all" && selectedOrganizationRole !== role) continue;

@@ -1206,6 +1206,10 @@ html[dir="rtl"] .platform-admin-business > * { direction: rtl; }
 .platform-admin-organization h4 { margin:0 0 5px;font-size:17px;overflow-wrap:anywhere }
 .platform-admin-organization small { color:#657991 }
 .platform-admin-organization-icon { display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:#eff4fb;color:#365d89 }
+.platform-admin-organization-icon { flex:none;overflow:hidden }
+.platform-admin-organization-icon.has-logo { background:#fff;border:1px solid #dfe6f0 }
+.platform-admin-organization-icon.has-logo img { width:100%;height:100%;object-fit:contain }
+.platform-admin-organization-icon.no-logo { background:#f5f7fa;border:1.5px dashed #b9c5d4;color:#5f7290 }
 .platform-admin-organization-products { display:flex;flex-wrap:wrap;gap:8px;grid-column:2/-1 }
 .platform-admin-organization-products span,.platform-admin-organization-status { font-size:12px;padding:6px 10px;border-radius:99px;background:#f0f4fa;color:#3d5876 }
 @media(max-width:600px) { .platform-admin-products { padding:16px } .platform-admin-business { grid-template-columns:1fr } .platform-page .platform-admin-management .platform-admin-product-filter { grid-template-columns:minmax(0,1fr) auto;padding:16px;gap:8px } .platform-admin-product-filter .platform-admin-product-name { padding-inline-end:25px } .platform-admin-product-filter strong { grid-row:1/3;grid-column:2;font-size:25px } .platform-admin-product-filter small,.platform-admin-product-select { grid-column:1/-1 } .platform-admin-product-filter::after { display:none } .platform-admin-organization { padding:16px;grid-template-columns:44px minmax(0,1fr) } .platform-admin-organization-status { grid-column:2 } .platform-admin-organization-products { grid-column:1/-1 } }
@@ -1290,7 +1294,9 @@ html[dir="rtl"] .platform-admin-business > * { direction: rtl; }
 .platform-admin-search-field:focus-within > svg { stroke: #185adb; }
 .platform-admin-organization-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 18px; align-items: start; }
 .platform-admin-organization-column { min-width: 0; border: 1px solid #e0e7ef; border-radius: 18px; padding: 22px; overflow-wrap: anywhere; background: #fff; box-shadow: 0 3px 12px #10244004; }
-.platform-admin-organization-column > h4 { margin: 0 0 22px; padding-bottom: 16px; border-bottom: 1px solid #edf0f5; font-size: 1rem; color: #203650; letter-spacing: -.015em; }
+.platform-admin-organization-heading { display: flex; align-items: center; gap: 12px; margin: 0 0 22px; padding-bottom: 16px; border-bottom: 1px solid #edf0f5; }
+.platform-admin-organization-heading .platform-admin-organization-icon { width: 40px; height: 40px; border-radius: 12px; }
+.platform-admin-organization-heading h4 { margin: 0; min-width: 0; font-size: 1rem; color: #203650; letter-spacing: -.015em; }
 .platform-admin-membership-section + .platform-admin-membership-section { border-top: 1px solid #edf0f5; padding-top: 18px; margin-top: 18px; }
 .platform-admin-membership-section h5 { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; color: #3a4d67; font-size: .78rem; font-weight: 650; }
 .platform-admin-membership-section h5 svg { color: #6c83a2; }

@@ -13,6 +13,10 @@ const person = (email, name) => ({
   },
 });
 
+// A 1x1 PNG, the shape Manager stores organization logos in.
+const logo =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
+
 test("account search covers older server pagination; organization selector and creation stay product scoped", async (t) => {
   const site = await startSite(t);
   for (const language of ["he", "en"])
@@ -36,6 +40,7 @@ test("account search covers older server pagination; organization selector and c
             name: "Manager building",
             status: "active",
             products: { manager: "active" },
+            logoDataUrl: logo,
           },
           {
             id: "org-host",
@@ -107,6 +112,17 @@ test("account search covers older server pagination; organization selector and c
         );
         assert.ok(calls.some((q) => q.includes("after=")));
         await f.page.locator('[data-role="organizations"]').click();
+        // Each organization shows its logo, or a question-mark placeholder.
+        const managerCard = f.page.locator(".platform-admin-organization", { hasText: "Manager building" });
+        const hostCard = f.page.locator(".platform-admin-organization", { hasText: "Host building" });
+        await managerCard.locator(".platform-admin-organization-icon.has-logo img").waitFor();
+        assert.equal(
+          await managerCard.locator("img").getAttribute("alt"),
+          (he ? "לוגו של " : "Logo of ") + "Manager building",
+        );
+        assert.equal(await managerCard.locator("img").evaluate((img) => img.naturalWidth), 1);
+        assert.equal(await hostCard.locator(".platform-admin-organization-icon.no-logo svg").count(), 1);
+        assert.equal(await hostCard.locator("img").count(), 0);
         const picker = f.page.getByRole("combobox", {
           name: he ? "בחירת ארגון" : "Choose organization",
         });

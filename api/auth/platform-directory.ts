@@ -96,7 +96,7 @@ export function changePlatformProductAccess(
   });
 }
 
-export function getPlatformOrganizationOverview(user: FirebaseUser, product = "all", includeMembers = false): Promise<{items:{id:string;name:string;status:string;version?:number;products:Partial<Record<ProductId,string>>;owner?:{email:string;subscriptionStatus:string;billingExempt:boolean;products:Partial<Record<ProductId,ProductAccess>>}|null;members?:{email:string;subscriptionRequired:false;products:Partial<Record<ProductId,{role:string;status:string}>>}[]}[];complete:true;basis:"provisioned-organizations"}> {
+export function getPlatformOrganizationOverview(user: FirebaseUser, product = "all", includeMembers = false): Promise<{items:{id:string;name:string;status:string;version?:number;products:Partial<Record<ProductId,string>>;logoDataUrl?:string|null;owner?:{email:string;subscriptionStatus:string;billingExempt:boolean;products:Partial<Record<ProductId,ProductAccess>>}|null;members?:{email:string;subscriptionRequired:false;products:Partial<Record<ProductId,{role:string;status:string}>>}[]}[];complete:true;basis:"provisioned-organizations"}> {
  return authenticatedRequest(profileApi,user,{method:"GET",url:`/api/v1/platform/directory/organization-overview?${new URLSearchParams({product,...(includeMembers ? {includeMembers:"true"} : {})})}`});
 }
 
