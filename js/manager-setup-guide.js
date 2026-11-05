@@ -1,4 +1,5 @@
 import { managerUiIcon } from "./manager-ui-icons.js";
+import { createManagerDialog } from "./manager-dialog.js";
 const node = (tag, text, className) => {
   const element = document.createElement(tag);
   if (text) element.textContent = text;
@@ -9,6 +10,17 @@ const node = (tag, text, className) => {
 /** Static help for the app's existing first-export flow; performs no actions. */
 export function createManagerSetupGuide(language = "en") {
   const t = (he, en) => (language === "he" ? he : en);
+  const imageDialog = createManagerDialog({ language });
+  const screenshots = [
+    [
+      ["app-home", t("פתחו את תמונת הפרופיל באפליקציה", "Open your profile picture in the app")],
+      ["app-profile", t("בדקו שזה אותו חשבון שבו אתם משתמשים באתר", "Check that this is the account you use on the website")],
+    ],
+    [["app-business", t("ב־WIFIGATE For Business בחרו Manager", "In WIFIGATE For Business, choose Manager")]],
+    [["app-export", t("זהו את כרטיס המערכת ואת גישת ה־Admin המקומית", "Find your system card and its local Admin access")]],
+    [["app-export", t("כפתור Export נמצא בתחתית כרטיס המערכת", "Export is at the bottom of the system card")]],
+    [],
+  ];
   const guide = node(
     "details",
     undefined,
@@ -31,8 +43,8 @@ export function createManagerSetupGuide(language = "en") {
     [
       t("התחברו לאותו חשבון", "Sign in with the same account"),
       t(
-        "היכנסו לאפליקציית WIFIGATE עם החשבון שבו אתם משתמשים באתר. לייצוא נדרשת גישת משתמש פעילה ל־WIFIGATE Manager.",
-        "Sign in to the WIFIGATE app with the account you use on this website. Export requires an active User account.",
+        "פתחו את תמונת הפרופיל באפליקציית WIFIGATE ובדקו שהתחברתם לחשבון שבו אתם משתמשים באתר. לייצוא נדרשת גישת משתמש פעילה ל־WIFIGATE Manager.",
+        "Open your profile picture in the WIFIGATE app and check that you are signed in with the account you use on this website. Export requires an active User account.",
       ),
     ],
     [
@@ -68,10 +80,50 @@ export function createManagerSetupGuide(language = "en") {
     ],
   ]) {
     const step = node("li");
-    step.dataset.step = String(steps.children.length + 1);
+    const stepIndex = steps.children.length;
+    step.dataset.step = String(stepIndex + 1);
+    const copy = node("div", undefined, "manager-setup-step-copy");
     const icon = node("span", undefined, "manager-setup-step-icon");
-    icon.append(managerUiIcon(["account", "app", "systems", "export", "refresh"][steps.children.length]));
-    step.append(icon, node("strong", title), node("p", description));
+    icon.append(managerUiIcon(["account", "app", "systems", "export", "refresh"][stepIndex]));
+    copy.append(icon, node("strong", title), node("p", description));
+    step.append(copy);
+    if (screenshots[stepIndex].length) {
+      step.classList.add("manager-setup-step-illustrated");
+      const gallery = node("div", undefined, "manager-setup-screenshots");
+      for (const [asset, caption] of screenshots[stepIndex]) {
+        const figure = node("figure", undefined, "manager-setup-screenshot");
+        const enlarge = node("button", undefined, "manager-setup-screenshot-button");
+        enlarge.type = "button";
+        enlarge.setAttribute("aria-label", t("הגדלת צילום המסך: ", "Enlarge screenshot: ") + caption);
+        enlarge.setAttribute("aria-haspopup", "dialog");
+        const image = node("img");
+        image.src = `/assets/img/manager/setup/${asset}.webp`;
+        image.alt = caption;
+        image.loading = "lazy";
+        image.decoding = "async";
+        image.width = asset === "app-export" ? 1312 : 852;
+        image.height = asset === "app-export" ? 1199 : 1846;
+        if (asset === "app-export") figure.classList.add("manager-setup-screenshot-card");
+        const zoom = node("span", t("לחצו להגדלה", "Select to enlarge"), "manager-setup-screenshot-zoom");
+        zoom.prepend(managerUiIcon("search"));
+        enlarge.append(image, zoom);
+        enlarge.addEventListener("click", () => {
+          const frame = node("div", undefined, "manager-setup-image-frame");
+          const preview = node("img", undefined, "manager-setup-image-preview");
+          preview.src = image.src;
+          preview.alt = caption;
+          frame.append(preview);
+          void imageDialog.info({ title: caption, content: frame });
+        });
+        figure.append(enlarge, node("figcaption", caption));
+        gallery.append(figure);
+      }
+      step.append(gallery);
+      if (stepIndex === 3) copy.append(node("p", t(
+        "Export מופעל לאחר טעינת החשבון ואימות הגישה. אם הוא אפור, בדקו את החיבור ואת תוכנית Manager לפני הייצוא.",
+        "Export becomes available after your account and access are checked. If it is grey, check your connection and Manager plan before exporting.",
+      ), "manager-setup-export-note"));
+    }
     steps.append(step);
   }
   guide.append(steps);
@@ -84,17 +136,25 @@ export function createManagerSetupGuide(language = "en") {
   const progress = node("span", undefined, "manager-setup-progress");
   progress.setAttribute("aria-live", "polite");
   let selected = 0;
-  const select = index => {
+  const select = (index, scroll = false) => {
     selected = index;
     [...steps.children].forEach((step, i) => { step.hidden = i !== index; });
     previous.disabled = index === 0;
     next.disabled = index === steps.children.length - 1;
     progress.textContent = t(`שלב ${index + 1} מתוך ${steps.children.length}`, `Step ${index + 1} of ${steps.children.length}`);
+    if (scroll) steps.children[index].scrollIntoView({
+      block: "start",
+      behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
   };
-  previous.addEventListener("click", () => select(selected - 1));
-  next.addEventListener("click", () => select(selected + 1));
+  previous.addEventListener("click", () => select(selected - 1, true));
+  next.addEventListener("click", () => select(selected + 1, true));
   controls.append(previous, progress, next);
   guide.append(controls);
+  guide.append(node("p", t(
+    "צילומי המסך מהאפליקציה הותאמו להמחשה: פרטי הפרופיל והמערכת הם פרטי דוגמה, ללא דגלים. לחצו על תמונה כדי להגדיל אותה.",
+    "App screenshots have been adapted for illustration, using example profile and system details without flags. Select an image to enlarge it.",
+  ), "manager-setup-screenshot-note"));
   select(0);
   const update = node("p", undefined, "manager-setup-update");
   update.append(
