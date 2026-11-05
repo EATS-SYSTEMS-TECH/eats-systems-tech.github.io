@@ -307,11 +307,21 @@ export function installHostApi(state) {
           version: 1,
           scopes: body.scopes,
           targetTypes: body.targetTypes,
+          ownerUid: state.uid ?? "fixture-user", canManage: true, canRevoke: true,
         };
         keys.push(key);
         return reply(config, { apiKey: key }, 201);
       }
-      return reply(config, { items: keys, nextCursor: null });
+      const activeKeys = keys.filter((row) => row.status === "active").length;
+      return reply(config, { items: keys.filter((row) =>
+        (url.searchParams.get("owner") !== "mine" || row.ownerUid === (state.uid ?? "fixture-user")) &&
+        (url.searchParams.get("status") !== "active" || row.status === "active")), nextCursor: null,
+        summary: { activeKeys, freeKeys: 5, monthlyEstimateCents: Math.max(0, activeKeys - 5) * 100 } });
+    }
+    match = /^\/api-keys\/([^/]+)\/usage$/.exec(rest);
+    if (match) {
+      const items = Array.from({ length: 30 }, (_, index) => ({ date: new Date(Date.now() - (29 - index) * 86400000).toISOString().slice(0, 10), invitations: index % 5, requests: index % 5 + 1, errors: index === 10 ? 1 : 0 }));
+      return reply(config, { apiKeyId: match[1], timezone: "UTC", from: items[0].date, to: items.at(-1).date, items, totals: { invitations: 60, requests: 90, errors: 1 }, errorsByCode: { SCOPE_DENIED: 1 }, measured: { invitations: 145, since: "2026-11-01T10:00:00Z", lifetimeComplete: false } });
     }
     match = /^\/api-keys\/([^/]+)\/reveal$/.exec(rest);
     if (match) return reply(config, { value: "wfg_test_private_value" });

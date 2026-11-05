@@ -1,0 +1,349 @@
+.host-api-keys {
+  min-width: 0;
+  color: #172b46;
+}
+.host-api-keys > p {
+  max-width: 72ch;
+  color: #526378;
+}
+.host-api-keys .view-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.host-api-pricing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px 28px;
+  padding: 16px 0;
+  margin-bottom: 8px;
+  border-block: 1px solid #d6e1ed;
+}
+.host-api-pricing strong {
+  font-size: 17px;
+  font-weight: 600;
+}
+.host-api-pricing span {
+  color: #526378;
+  font-size: 14px;
+}
+.host-api-keys details > summary {
+  cursor: pointer;
+  color: #174678;
+  font-weight: 600;
+  padding-block: 9px;
+}
+.host-api-keys details > summary:hover {
+  color: #0a3971;
+}
+.host-api-examples,
+.host-api-create {
+  border-bottom: 1px solid #d6e1ed;
+  padding: 8px 0 16px;
+}
+.host-api-examples > summary,
+.host-api-create > summary {
+  width: fit-content;
+}
+.host-api-examples > p,
+.host-api-example-guide p {
+  max-width: 76ch;
+  color: #526378;
+}
+.host-api-examples pre {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  background: #f4f7fb;
+  color: #152e4d;
+  border: 1px solid #d6e1ed;
+  border-radius: 10px;
+  padding: 20px;
+  font:
+    13px/1.7 Consolas,
+    monospace;
+  text-align: left;
+  white-space: pre;
+}
+.host-api-examples code {
+  font-family: Consolas, monospace;
+}
+.host-api-example-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-block: 18px;
+}
+.host-api-example-controls label {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  font-size: 14px;
+}
+.host-api-example-controls select {
+  width: 100%;
+  min-width: 0;
+}
+.host-api-system-id {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.host-api-system-id code {
+  overflow-wrap: anywhere;
+}
+.host-api-example-guide > code {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  text-align: left;
+}
+.host-api-create > form {
+  max-width: 780px;
+  padding-top: 8px;
+}
+.host-api-permissions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 16px 0;
+}
+.host-api-permissions fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.host-api-permissions legend {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.host-api-permissions label,
+.host-api-consent {
+  display: flex;
+  align-items: start;
+  gap: 9px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.host-api-keys input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+  margin: 3px 0 0;
+  accent-color: #0b63ff;
+}
+.host-api-consent {
+  margin-block: 16px;
+  padding: 14px;
+  background: #f1f6fd;
+  border-radius: 8px;
+}
+.host-api-consent[hidden],
+.host-api-usage[hidden] {
+  display: none;
+}
+.host-api-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding-top: 22px;
+}
+.host-api-toolbar label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+.host-api-toolbar select {
+  max-width: 250px;
+}
+.host-api-toolbar > button {
+  margin-inline-start: auto;
+}
+.host-api-table-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+  margin-bottom: 12px;
+}
+.host-api-table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.host-api-table th {
+  text-align: start;
+  background: #f2f6fb;
+  color: #526378;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.host-api-table th,
+.host-api-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #d6e1ed;
+  vertical-align: top;
+}
+.host-api-table tbody tr:hover {
+  background: #f8faff;
+  color: #172b46;
+}
+.host-api-table td:first-child {
+  width: 28%;
+  min-width: 210px;
+}
+.host-api-table td > strong,
+.host-api-table td > code,
+.host-api-table td > small {
+  display: block;
+}
+.host-api-table td > strong {
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+.host-api-table td > code {
+  font:
+    11px/1.7 Consolas,
+    monospace;
+  overflow-wrap: anywhere;
+}
+.host-api-table td > small {
+  color: #526378;
+  font-size: 12px;
+  margin-top: 3px;
+}
+.host-manager-workspace .host-api-table details > summary {
+  min-height: 0;
+  padding: 5px 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 12px;
+}
+.host-api-count {
+  font-variant-numeric: tabular-nums;
+  font-size: 17px;
+}
+.host-api-state {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 3px 7px;
+  background: #edf1f5;
+  color: #45566d;
+  white-space: nowrap;
+}
+.host-api-state--active {
+  background: #e8f5ee;
+  color: #1b6746;
+}
+.host-api-keys .host-api-table button {
+  font-size: 12px;
+  padding: 7px 10px;
+  min-height: 34px;
+}
+.host-api-actions {
+  min-width: 140px;
+}
+.host-api-actions > form {
+  margin-block: 12px;
+}
+.host-api-actions input {
+  max-width: 100px;
+}
+.host-api-actions p {
+  max-width: 28ch;
+  font-size: 12px;
+}
+.host-api-private:not(:empty) {
+  background: #edf4ff;
+  padding: 18px;
+  border-radius: 10px;
+  margin-top: 16px;
+}
+.host-api-private textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: Consolas, monospace;
+  text-align: left;
+}
+.host-api-usage {
+  margin-top: 28px;
+  border-top: 2px solid #0b63ff;
+  padding-top: 20px;
+}
+.host-api-usage p {
+  color: #526378;
+}
+.host-api-chart {
+  display: flex;
+  align-items: end;
+  gap: 4px;
+  height: 160px;
+  padding-top: 10px;
+  border-bottom: 1px solid #bdcddd;
+  direction: ltr;
+}
+.host-api-bar {
+  flex: 1;
+  min-width: 0;
+  height: var(--bar-height);
+  background: #2767b8;
+  border-radius: 3px 3px 0 0;
+}
+.host-api-bar:hover {
+  background: #164c91;
+}
+.host-api-chart-range {
+  display: flex;
+  justify-content: space-between;
+  color: #526378;
+  font-size: 12px;
+  margin-top: 6px;
+}
+.host-api-usage table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.host-api-usage td,
+.host-api-usage th {
+  text-align: start;
+  padding: 7px;
+  border-bottom: 1px solid #d6e1ed;
+}
+.host-api-keys
+  :is(button, summary, select, input, textarea, [tabindex]):focus-visible {
+  outline: 2px solid #0b63ff;
+  outline-offset: 3px;
+}
+@media (max-width: 700px) {
+  .host-api-example-controls,
+  .host-api-permissions {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .host-api-toolbar {
+    align-items: stretch;
+  }
+  .host-api-toolbar > label:first-child {
+    flex-direction: column;
+    align-items: start;
+  }
+  .host-api-toolbar > button {
+    margin-inline-start: 0;
+  }
+  .host-api-examples pre {
+    padding: 12px;
+    font-size: 12px;
+  }
+  .host-api-pricing {
+    gap: 8px;
+  }
+}

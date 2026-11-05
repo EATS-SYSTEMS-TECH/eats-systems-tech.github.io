@@ -94,7 +94,8 @@ test("workspace isolates failures, follows permissions and keeps history", async
         ),
         false,
       );
-      await nav(page, "activity").click();
+      await nav(page, "settings").click();
+      await tab(page, "activity").click();
       await page
         .getByRole("button", { name: "Alerts and activity", exact: true })
         .click();
@@ -103,7 +104,7 @@ test("workspace isolates failures, follows permissions and keeps history", async
         .waitFor();
       assert.deepEqual(
         await page
-          .locator(".workspace-tabs button")
+          .locator('[data-settings-panel="activity"] .workspace-tabs button')
           .evaluateAll((buttons) =>
             buttons.map((button) => button.textContent),
           ),
@@ -289,11 +290,11 @@ test("workspace isolates failures, follows permissions and keeps history", async
             assert.equal(await visible(id), true, `${role} ${id}`);
           assert.equal(
             await visible("activity"),
-            role !== "viewer",
+            false,
             `${role} activity`,
           );
           assert.equal(
-            await visible("connect"),
+            await visible("api-keys"),
             ["owner", "admin"].includes(role),
             `${role} connect`,
           );
@@ -310,11 +311,11 @@ test("workspace isolates failures, follows permissions and keeps history", async
                 tabs.map((item) => item.dataset.settingsTab),
               ),
             role === "owner"
-              ? ["organization", "team", "billing", "support", "account"]
-              : ["organization", "account"],
+              ? ["organization", "team", "billing", "connections", "activity", "support", "account"]
+              : role === "admin" ? ["organization", "connections", "activity", "account"] : role === "staff" ? ["organization", "activity", "account"] : ["organization", "account"],
           );
           await page.locator("#workspace-org-switcher .manager-organization-picker-trigger").click();
-          assert.equal(await page.locator('.manager-organization-option[data-organization-id="org"] .manager-organization-picker-identity small').innerText(), { owner: "Owner", admin: "Admin", staff: "Staff", viewer: "Viewer" }[role], "shared picker preserves each original Host role");
+          assert.equal(await page.locator('.manager-organization-option[data-organization-id="org"] .manager-organization-picker-identity small').innerText(), { owner: "Organization Owner", admin: "Organization Admin", staff: "Organization Staff", viewer: "Organization Viewer" }[role], "shared picker preserves each original Host role");
           await page.keyboard.press("Escape");
           assert.deepEqual(errors, []);
         }
@@ -625,7 +626,8 @@ test("workspace isolates failures, follows permissions and keeps history", async
       const { page, errors } = await openWorkspace(t, site, fixture("owner"), {
         query: "?view=connect",
       });
-      await loaded(page, "connect");
+      await loaded(page, "settings");
+      await page.locator('[data-settings-panel="connections"][data-loaded="true"]').waitFor();
       const policy = page.getByRole("region", {
         name: "Automatic guest links",
       });
@@ -678,121 +680,34 @@ test("workspace isolates failures, follows permissions and keeps history", async
         ),
         false,
       );
-      const keys = page.getByRole("region", { name: "Your own software" });
-      // Keys are for a developer: closed until "For your developer" opens.
-      assert.equal(
-        await keys
-          .getByRole("button", { name: "Create API key", exact: true })
-          .isVisible(),
-        false,
-      );
-      await keys.getByText("For your developer", { exact: true }).click();
-      await keys
-        .getByRole("button", { name: "Create API key", exact: true })
-        .waitFor();
+      await nav(page, "api-keys").click();
+      await loaded(page, "api-keys");
+      const keys = page.getByRole("region", { name: "API keys", exact: true });
+      await keys.locator(".host-api-create > summary").click();
+      await keys.getByRole("button", { name: "Create API key", exact: true }).waitFor();
       assert.ok(await fits(page));
       assert.deepEqual(errors, []);
     },
   );
 
-  await t.test(
-    "an owner reveals a key on Connect; an admin sees the keys but cannot change them",
-    async () => {
-      const keyList = {
-        org: [
-          {
-            id: "key-1",
-            name: "Booking engine",
-            prefix: "wfg_test",
-            status: "active",
-            version: 1,
-            scopes: ["guest-invitations:create"],
-            targetTypes: ["gate"],
-          },
-        ],
-      };
-      const owner = await openWorkspace(
-        t,
-        site,
-        fixture("owner", { apiKeys: keyList }),
-        { query: "?view=connect" },
-      );
-      await loaded(owner.page, "connect");
-      const ownerKeys = owner.page.getByRole("region", {
-        name: "Your own software",
-      });
-      await ownerKeys.getByText("For your developer", { exact: true }).click();
-      await ownerKeys
-        .getByRole("button", { name: "Reveal private API key", exact: true })
-        .click();
-      await ownerKeys.locator("textarea").waitFor();
-      assert.equal(
-        await ownerKeys.locator("textarea").inputValue(),
-        "wfg_test_private_value",
-      );
-      // The key on screen is the confirmation: no "revealed", "created" or
-      // "revoked" line; what matters sits in an ⓘ by the button.
-      const keyStatus = ownerKeys.locator('p[role="status"]');
-      assert.equal(await keyStatus.textContent(), "");
-      for (const [name, call] of [
-        ["Rotate API key", "rotate"],
-        ["Revoke API key", "revoke"],
-      ]) {
-        await ownerKeys.getByRole("button", { name, exact: true }).click();
-        await owner.page.waitForFunction(
-          (call) =>
-            window.fixture.requests.some(
-              (entry) =>
-                entry.call ===
-                `POST /api/v1/organizations/org/api-keys/key-1/${call}`,
-            ),
-          call,
-        );
-        await owner.page.waitForTimeout(100);
-        assert.equal(await keyStatus.textContent(), "", name);
+  await t.test("keys are independent of connections and respect creator-level controls", async () => {
+    for (const role of ["owner", "admin"]) {
+      const { page, errors } = await openWorkspace(t, site, fixture(role, { apiKeys: { org: [{ id: "key-1", name: "Booking engine", prefix: "wfg_test", status: "active", version: 1, scopes: ["guest-invitations:create"], targetTypes: ["gate"], ownerUid: "someone-else", canManage: false, canRevoke: role === "owner" }] } }), { query: "?view=api-keys" });
+      await loaded(page, "api-keys");
+      const keys = page.getByRole("region", { name: "API keys", exact: true });
+      assert.equal(await keys.getByRole("button", { name: "Reveal private API key", exact: true }).count(), 0);
+      assert.equal(await keys.getByRole("button", { name: "Rotate API key", exact: true }).count(), 0);
+      if (role === "owner") {
+        await keys.locator(".host-api-actions > summary").click();
+        await keys.locator(".host-api-revoke > summary").click();
       }
-      assert.ok(
-        (
-          await ownerKeys.locator(".info-tip__bubble").allTextContents()
-        ).includes("Requests that use a revoked key are refused."),
-      );
-      assert.deepEqual(owner.errors, []);
-      const admin = await openWorkspace(
-        t,
-        site,
-        fixture("admin", { apiKeys: keyList }),
-        { query: "?view=connect" },
-      );
-      await loaded(admin.page, "connect");
-      const adminKeys = admin.page.getByRole("region", {
-        name: "Your own software",
-      });
-      await adminKeys.getByText("For your developer", { exact: true }).click();
-      await adminKeys.getByText("Booking engine", { exact: true }).waitFor();
-      for (const name of [
-        "Create API key",
-        "Reveal private API key",
-        "Rotate API key",
-        "Revoke API key",
-      ])
-        assert.equal(
-          await adminKeys.getByRole("button", { name, exact: true }).count(),
-          0,
-          name,
-        );
-      assert.equal(
-        await adminKeys.locator(".info-tip__bubble").textContent(),
-        "Your developer connects your website or software to WIFIGATE with a key. Only the owner can create, change or show keys.",
-      );
-      assert.equal(
-        await admin.page
-          .getByRole("region", { name: "Automatic guest links" })
-          .count(),
-        1,
-      );
-      assert.deepEqual(admin.errors, []);
-    },
-  );
+      assert.equal(await keys.getByRole("button", { name: "Confirm revocation", exact: true }).count(), role === "owner" ? 1 : 0);
+      await keys.locator(".host-api-create > summary").click();
+      assert.equal(await keys.getByRole("button", { name: "Create API key", exact: true }).isVisible(), true);
+      assert.equal(await page.getByRole("region", { name: "Automatic guest links" }).count(), 0);
+      assert.deepEqual(errors, []);
+    }
+  });
 
   await t.test(
     "phone navigation stays inline and unknown view values return home",
@@ -836,7 +751,8 @@ test("workspace isolates failures, follows permissions and keeps history", async
         }),
         { query: "?view=connect" },
       );
-      await loaded(page, "connect");
+      await loaded(page, "settings");
+      await page.locator('[data-settings-panel="connections"][data-loaded="true"]').waitFor();
       const card = page.getByRole("region", { name: "Your booking system" });
       const more = card.getByRole("button", { name: "Show more", exact: true });
       assert.equal(await more.count(), 1);

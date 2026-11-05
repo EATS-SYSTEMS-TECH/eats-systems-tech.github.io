@@ -246,7 +246,7 @@ function choose(
     if (tab) url.searchParams.set("tab", tab);
     else if (previous !== "settings") url.searchParams.delete("tab");
   } else if (selected !== "overview") url.searchParams.delete("tab");
-  if (selected !== "activity") url.searchParams.delete("section");
+  if (selected !== "settings" || url.searchParams.get("tab") !== "activity") url.searchParams.delete("section");
   if (value === "Jobs Calendar") url.searchParams.set("section", "jobs");
   if (value === "Service health") url.searchParams.set("section", "health");
   if (url.href !== location.href)

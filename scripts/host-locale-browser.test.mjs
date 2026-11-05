@@ -161,7 +161,7 @@ test("the URL's language sets direction, labels and layout while names stay as p
       0,
     );
     assert.equal(
-      await sheet.locator(".booking-form__more summary").innerText(),
+      await sheet.locator(".booking-form__more > summary").innerText(),
       words.more,
     );
     assert.deepEqual(
@@ -254,14 +254,15 @@ test("the URL's language sets direction, labels and layout while names stay as p
     );
     // Activity: three screens.
     await page
-      .locator('#host-section-navigation [data-view-id="activity"]')
+      .locator('#host-section-navigation [data-view-id="settings"]')
       .click();
+    await page.locator('[data-settings-tab="activity"]').click();
     await page
       .locator('[data-operations-screen="jobs"][data-loaded="true"]')
       .waitFor();
     assert.deepEqual(
       await page
-        .locator('[data-workspace-view="activity"] .workspace-tabs button')
+        .locator('[data-settings-panel="activity"] .workspace-tabs button')
         .allInnerTexts(),
       words.activity,
     );
@@ -271,8 +272,9 @@ test("the URL's language sets direction, labels and layout while names stay as p
       ["my-systems"],
       ["calendar"],
       ["bookings"],
-      ["activity"],
-      ["connect"],
+      ["settings", "activity"],
+      ["settings", "connections"],
+      ["api-keys"],
       ["settings", "organization"],
       ["settings", "team"],
       ["settings", "billing"],

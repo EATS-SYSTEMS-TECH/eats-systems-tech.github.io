@@ -1,4 +1,5 @@
 import { hostText, hostLocale } from "./host-locale.js";
+import { readAccessNote } from "./host-access-note.js";
 import { portalRequest } from "./api/index.js";
 import { authErrorMessage } from "./host-auth-errors.js";
 import { node } from "./host-ui.js";
@@ -200,6 +201,12 @@ export function readReservation(raw) {
     redacted: Boolean(raw.guestRedactedAt),
     externalReference: text(raw.externalReference),
     note: text(raw.note),
+    ...(readAccessNote(raw.accessNote) !== undefined
+      ? { accessNote: readAccessNote(raw.accessNote) }
+      : {}),
+    ...(raw.integration?.mode === "direct"
+      ? { integrationMode: "direct" }
+      : {}),
   };
 }
 

@@ -54,20 +54,12 @@ export const workspaceViews = Object.freeze([
     selector: 'section[aria-label="Bookings"]',
   },
   {
-    id: "activity",
-    label: "Activity",
-    icon: "bolt",
-    permission: "operations:write",
-    selector:
-      'section[aria-label="Host operations"], section[aria-label="Service health"]',
-  },
-  {
-    id: "connect",
-    label: "Connect",
+    id: "api-keys",
+    label: "API keys",
     icon: "plug",
     permission: "integrations:write",
     selector:
-      'section[aria-label="Automatic guest links"], section[aria-label="Your booking system"], section[aria-label="API keys"]',
+      'section[aria-label="API keys"]',
   },
   {
     id: "settings",
@@ -100,6 +92,8 @@ export const settingsTabs = Object.freeze([
   { id: "organization", label: "Organization", permission: "read" },
   { id: "team", label: "Team", permission: "members:write" },
   { id: "billing", label: "Plan & statements", permission: "billing:write" },
+  { id: "connections", label: "Connections & automation", permission: "integrations:write" },
+  { id: "activity", label: "Activity", permission: "operations:write" },
   { id: "support", label: "Support access", permission: "organization:write" },
   { id: "account", label: "Account & security", scope: "account" },
 ]);
@@ -120,9 +114,8 @@ const aliases = {
   Integrations: "connect",
   automation: "connect",
   Automation: "connect",
-  "api-keys": "connect",
-  "api-integrations": "connect",
-  "API integrations": "connect",
+  "api-integrations": "api-keys",
+  "API integrations": "api-keys",
   properties: "systems",
   Properties: "systems",
   "access-keys": "systems",
@@ -137,6 +130,10 @@ const aliases = {
   Overview: "overview",
 };
 const tabAliases = {
+  connect: "connections", Connect: "connections", connections: "connections",
+  integrations: "connections", Integrations: "connections", automation: "connections", Automation: "connections",
+  activity: "activity", Activity: "activity", operations: "activity", Operations: "activity",
+  "jobs-calendar": "activity", "Jobs Calendar": "activity", "service-health": "activity", "Service health": "activity",
   organization: "organization",
   organizations: "organization",
   Organizations: "organization",
@@ -171,7 +168,7 @@ export function settingsTabFor(value) {
 }
 
 export function settingsTab(url) {
-  return tabAliases[url.searchParams.get("tab")] ?? undefined;
+  return tabAliases[url.searchParams.get("tab")] ?? tabAliases[url.searchParams.get("view")];
 }
 
 // The view a URL asks for, or `home` when it names none (or an unknown one).

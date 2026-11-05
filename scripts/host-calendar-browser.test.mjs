@@ -564,7 +564,7 @@ test("Calendar and Bookings: systems as rows, the booking sheet and guest links"
       );
       assert.equal(
         await page
-          .locator('#host-section-navigation [data-view-id="activity"]')
+          .locator('#host-section-navigation [data-view-id="settings"]')
           .isVisible(),
         true,
       );

@@ -4,6 +4,7 @@ import { portalRequest } from "./api/index.js";
 import { phoneField } from "./host-phone.js";
 import { guestLinkCard } from "./host-link-card.js";
 import { can } from "./host-permissions.js";
+import { accessNoteFields } from "./host-access-note.js";
 import {
   zoneOf,
   todayIn,
@@ -44,6 +45,7 @@ const problems = {
   window:
     "A guest link can cover up to 31 days, with early entry and late exit. Shorten the stay.",
   ended: "This stay has already ended. Choose a later time to leave.",
+  coordinates: "Enter both latitude and longitude within their valid ranges.",
 };
 
 export const organizationPath = (organization) =>
@@ -164,6 +166,9 @@ export function changeBody(record, changes = {}) {
     endsAt: record.endsAt,
     status: record.status,
     note: record.note,
+    ...(record.accessNote !== undefined
+      ? { accessNote: record.accessNote }
+      : {}),
     ...(record.externalReference
       ? { externalReference: record.externalReference }
       : {}),
@@ -324,6 +329,34 @@ export function openBookingSheet(context) {
       max: 1000,
     },
   );
+  const overrides = node("details", undefined, {
+    class: "booking-access-note",
+  });
+  overrides.append(
+    node("summary", hostText("Access note overrides")),
+    node(
+      "p",
+      hostText(
+        "Only filled fields override the saved system details for this guest link.",
+      ),
+    ),
+  );
+  const accessNote = {};
+  for (const [field, label, max] of accessNoteFields) {
+    accessNote[field] = textInput(
+      overrides,
+      label,
+      `accessNote.${field}`,
+      record?.accessNote?.[field] ?? "",
+      { max: max ?? undefined, type: max === null ? "number" : "text" },
+    );
+    if (max === null) {
+      accessNote[field].step = "any";
+      accessNote[field].min = field === "latitude" ? "-90" : "-180";
+      accessNote[field].max = field === "latitude" ? "90" : "180";
+    }
+  }
+  more.append(overrides);
   form.append(more);
   sheet.body.append(form);
 
@@ -356,6 +389,7 @@ export function openBookingSheet(context) {
     leave,
     ...form.querySelectorAll('input[name="disambiguation"]'),
     ...Object.values(extra),
+    ...Object.values(accessNote),
     reference,
     note,
   ];
@@ -363,6 +397,16 @@ export function openBookingSheet(context) {
     for (const element of fields()) element.disabled = locked;
   };
   function problem(withLink) {
+    const lat = accessNote.latitude.value,
+      lon = accessNote.longitude.value;
+    if (
+      Boolean(lat) !== Boolean(lon) ||
+      accessNote.latitude.validity.badInput ||
+      accessNote.longitude.validity.badInput ||
+      (lat && (!Number.isFinite(Number(lat)) || Math.abs(Number(lat)) > 90)) ||
+      (lon && (!Number.isFinite(Number(lon)) || Math.abs(Number(lon)) > 180))
+    )
+      return ["coordinates", accessNote.latitude];
     if (!system.value) return ["system", system];
     if (!name.value.trim()) return ["name", name];
     if (!phone.value()) return ["phone", phone.input];
@@ -381,13 +425,16 @@ export function openBookingSheet(context) {
   // first link is asked for; without it the server still decides.
   let policy;
   const linkPolicy = () =>
-    (policy ??= portalRequest(user, `${base}/automation/policy`).then(
-      (result) => ({
-        early: Number(result?.policy?.earlyAccessMinutes) || 0,
-        late: Number(result?.policy?.lateExpiryMinutes) || 0,
-      }),
-      () => ({ early: 0, late: 0 }),
-    ));
+    (policy ??=
+      record?.integrationMode === "direct"
+        ? Promise.resolve({ early: 0, late: 0 })
+        : portalRequest(user, `${base}/automation/policy`).then(
+            (result) => ({
+              early: Number(result?.policy?.earlyAccessMinutes) || 0,
+              late: Number(result?.policy?.lateExpiryMinutes) || 0,
+            }),
+            () => ({ early: 0, late: 0 }),
+          ));
   async function windowProblem(startsAt, endsAt) {
     const { early, late } = await linkPolicy();
     const from = Date.parse(startsAt) - early * 60000;
@@ -425,6 +472,25 @@ export function openBookingSheet(context) {
     endsAt,
     status,
     note: note.value.trim(),
+    ...(record?.accessNote !== undefined ||
+    Object.values(accessNote).some((field) => field.value.trim())
+      ? {
+          accessNote: Object.fromEntries(
+            accessNoteFields.flatMap(([field, , max]) =>
+              accessNote[field].value.trim()
+                ? [
+                    [
+                      field,
+                      max === null
+                        ? Number(accessNote[field].value)
+                        : accessNote[field].value.trim(),
+                    ],
+                  ]
+                : [],
+            ),
+          ),
+        }
+      : {}),
     ...(reference.value.trim()
       ? { externalReference: reference.value.trim() }
       : {}),
@@ -465,7 +531,12 @@ export function openBookingSheet(context) {
       const found = problem(withLink);
       if (found) {
         sheet.status.textContent = hostText(problems[found[0]]);
-        if (found[1].closest("details")) more.open = true;
+        for (
+          let details = found[1].closest("details");
+          details;
+          details = details.parentElement?.closest("details")
+        )
+          details.open = true;
         found[1].focus();
         return;
       }

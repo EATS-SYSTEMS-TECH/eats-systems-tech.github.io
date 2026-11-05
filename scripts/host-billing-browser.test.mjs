@@ -155,8 +155,8 @@ test("billing, support and key dates follow the selected language; failed reload
         ...options,
         container: document.getElementById("keys"),
       });
-      // The keys live in the card's "For your developer" part.
-      document.querySelector("#keys details.connect-keys").open = true;
+      // Expiry belongs to the key's expandable permissions/details cell.
+      document.querySelector("#keys [data-api-key] td details").open = true;
     });
     const expected = new Intl.DateTimeFormat(
       language === "he" ? "he-IL" : "en-US",

@@ -128,6 +128,17 @@ export function workspaceLoaders(context) {
         },
       }),
     billing: (panel) => renderHostBilling(options(panel)),
+    connections: async (panel) => {
+      const systems = await context.readOrgSystems();
+      if (!current()) return;
+      await renderAutomationPolicy(options(panel));
+      if (!current()) return;
+      await renderHostIntegrations({ ...options(panel), systems });
+    },
+    activity: async (panel) => {
+      const systems = await context.readOrgSystems();
+      if (current()) await renderHostOperations({ ...options(panel), systems });
+    },
     support: async (panel) => {
       if (org && granted.has("organization:write"))
         await renderSupportOwner(options(panel));
@@ -247,19 +258,9 @@ export function workspaceLoaders(context) {
         : renderNoOrganization(panel, { user, plan, isCurrent: viewCurrent }),
     calendar: bookingView(renderHostCalendar, "calendar"),
     bookings: bookingView(renderHostBookings, "bookings"),
-    activity: async (panel) => {
+    "api-keys": async (panel, viewCurrent) => {
       const systems = await context.readOrgSystems();
-      if (!current()) return;
-      await renderHostOperations({ ...options(panel), systems });
-    },
-    connect: async (panel) => {
-      const systems = await context.readOrgSystems();
-      if (!current()) return;
-      await renderAutomationPolicy(options(panel));
-      if (!current()) return;
-      await renderHostIntegrations({ ...options(panel), systems });
-      if (!current()) return;
-      await renderHostApiKeys(options(panel));
+      if (viewCurrent()) await renderHostApiKeys({ ...options(panel), systems, isCurrent: viewCurrent });
     },
     settings: (panel, viewCurrent) =>
       renderSettings(panel, viewCurrent, {

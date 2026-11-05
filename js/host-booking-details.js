@@ -5,6 +5,7 @@ import { requestWithRecentIdentity } from "./host-recent-identity.js";
 import { can, ownerOnly, servicePaused } from "./host-permissions.js";
 import { openSystemDialog } from "./host-system-cards.js";
 import { guestLinkCard } from "./host-link-card.js";
+import { accessNoteFields } from "./host-access-note.js";
 import { phoneDisplay, defaultCountry } from "./host-phone.js";
 import {
   openSheet,
@@ -95,6 +96,9 @@ export function openBookingDetails(context) {
       ]),
       ["Booking reference", record.externalReference],
       ["Note for your team", record.note],
+      ...accessNoteFields
+        .filter(([field]) => record.accessNote?.[field] !== undefined)
+        .map(([field, label]) => [label, String(record.accessNote[field])]),
     ];
     for (const [label, value, field] of rows) {
       if (!value) continue;

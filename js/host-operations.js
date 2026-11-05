@@ -4,6 +4,7 @@ import { can } from "./host-permissions.js";
 import { statuses, statusLabel } from "./host-booking-model.js";
 import { hostText, hostLocale } from "./host-locale.js";
 import { portalRequest, portalExport } from "./api/index.js";
+import { workspaceLocation, settingsTab } from "./host-workspace-model.js";
 import {
   field,
   node,
@@ -1168,13 +1169,12 @@ export async function renderHostOperations(options) {
     button.addEventListener("click", () => void select(id, true));
   }
   const onHistory = () => {
+    const url = new URL(location.href);
     if (
       current() &&
-      ["activity", "operations"].includes(
-        new URL(location.href).searchParams.get("view"),
-      )
+      workspaceLocation(url) === "settings" && settingsTab(url) === "activity"
     ) {
-      void select(new URL(location.href).searchParams.get("section"));
+      void select(url.searchParams.get("section"));
     }
   };
   const listeners = new AbortController();

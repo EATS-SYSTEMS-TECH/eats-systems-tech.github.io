@@ -127,7 +127,7 @@ test("the Host dashboard keeps the fixes from its visual review", async (t) => {
       const { page, errors } = await openWorkspace(t, site, fixture(), {
         query: "?view=connect",
       });
-      await loaded(page, "connect");
+      await loaded(page, "settings");
       const ring = (selector) =>
         page
           .locator(selector)
@@ -137,10 +137,10 @@ test("the Host dashboard keeps the fixes from its visual review", async (t) => {
             return getComputedStyle(element).outlineStyle;
           });
       await page.evaluate(() => {
-        const panel = document.querySelector('[data-workspace-view="connect"]');
+        const panel = document.querySelector('[data-workspace-view="settings"]');
         panel.tabIndex = -1;
       });
-      assert.equal(await ring('[data-workspace-view="connect"]'), "none");
+      assert.equal(await ring('[data-workspace-view="settings"]'), "none");
       // The keyboard moves on to the first button of the screen.
       for (let step = 0; step < 40; step++) {
         await page.keyboard.press("Tab");
@@ -164,14 +164,14 @@ test("the Host dashboard keeps the fixes from its visual review", async (t) => {
   );
 
   await t.test(
-    "Connect: collapsed parts read as such, the booking system's ⓘ sits beside its label, keys fold under For your developer",
+    "Connections keep accessible disclosures; API keys have a separate workspace",
     async () => {
       const { page, errors } = await openWorkspace(t, site, fixture(), {
         query: "?view=connect",
       });
-      await loaded(page, "connect");
+      await loaded(page, "settings");
       const summaries = await page
-        .locator('[data-workspace-view="connect"] details > summary')
+        .locator('[data-settings-panel="connections"] details > summary')
         .evaluateAll((items) =>
           items.map((item) => ({
             height: item.getBoundingClientRect().height,
@@ -213,15 +213,17 @@ test("the Host dashboard keeps the fixes from its visual review", async (t) => {
           .isVisible(),
         true,
       );
-      const keys = page.getByRole("region", { name: "Your own software" });
+      await page.locator('#host-section-navigation [data-view-id="api-keys"]').click();
+      await loaded(page, "api-keys");
+      const keys = page.getByRole("region", { name: "API keys", exact: true });
       assert.equal(
         await keys.locator("h2").innerText(),
-        "Your own software",
-        "the card is named for what it connects, not as API keys",
+        "API keys",
+        "keys have a dedicated organization workspace",
       );
       assert.equal(
-        await keys.locator("details.connect-keys > summary").innerText(),
-        "For your developer",
+        await keys.locator("details.host-api-create > summary").innerText(),
+        "Create API key",
       );
       assert.equal(await keys.getByLabel("API key name").isVisible(), false);
       assert.deepEqual(errors, []);
@@ -288,7 +290,7 @@ test("the Host dashboard keeps the fixes from its visual review", async (t) => {
       );
       assert.deepEqual(
         await form.locator('select[name="role"] option').allTextContents(),
-        ["Staff", "Viewer", "Admin", "Owner"],
+        ["Organization Staff", "Organization Viewer", "Organization Admin", "Organization Owner"],
         "role names, never their ids",
       );
       assert.equal(
@@ -361,8 +363,12 @@ test("the Host dashboard keeps the fixes from its visual review", async (t) => {
       });
       const review = page.locator('[data-operations-screen="review"]');
       await review.locator("details").first().waitFor();
+      assert.equal(new URL(page.url()).searchParams.get("section"), "review");
+      await page.getByRole("button", { name: "Automatic links", exact: true }).click();
+      await page.goBack();
+      await review.locator("details").first().waitFor();
       assert.equal(
-        await page.locator('[aria-label="Operations workspace"] h2').count(),
+        await page.locator('[aria-label="Operations workspace"] h2:visible').count(),
         0,
       );
       await review.locator("summary", { hasText: "Your preferences" }).click();

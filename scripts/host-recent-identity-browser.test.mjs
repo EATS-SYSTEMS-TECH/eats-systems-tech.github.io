@@ -140,7 +140,8 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
             await import("/js/host-api-keys.js")
           ).renderHostApiKeys(options);
           // The keys live in the card's "For your developer" part.
-          document.querySelector("details.connect-keys").open = true;
+          document.querySelector("details.host-api-create").open = true;
+          for (const menu of document.querySelectorAll("details.host-api-actions")) menu.open = true;
         }
         if (module === "support")
           await (
@@ -296,6 +297,7 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
         /isolated-token|wfg_live_k_/,
       );
       if (module === "keys") {
+        await page.locator(".host-api-table td:first-child details > summary").click();
         assert.deepEqual(JSON.parse(result.requests[0].body).targetTypes, [
           "gate",
         ]);
@@ -313,11 +315,8 @@ test("sensitive Host forms retain one reviewed intent through real-auth retries 
         assert.equal(JSON.parse(result.requests[1].body).overlapHours, 0);
         // The refreshed list is the confirmation (the old key, revoked at
         // once); no "New key created" line is added.
-        assert.ok(
-          (await page.locator("#main").innerText()).includes(
-            he ? "public-prefix · בוטל" : "public-prefix · revoked",
-          ),
-        );
+        assert.equal(await page.locator(".host-api-table td > code").innerText(), "public-prefix");
+        assert.equal(await page.locator(".host-api-state").innerText(), he ? "בוטל" : "revoked");
         assert.doesNotMatch(
           await page.locator("#main").innerText(),
           he ? /נוצר מפתח חדש/ : /New key created/,
