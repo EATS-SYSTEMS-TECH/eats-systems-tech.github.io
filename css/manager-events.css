@@ -39,6 +39,7 @@
 .manager-event-track.is-editor .manager-event-block:before { left:4px }
 .manager-event-track.is-editor .manager-event-block:after { right:4px }
 .manager-event-now { position:absolute;top:-5px;bottom:-5px;left:0;width:2px;border-radius:2px;background:#2563eb;pointer-events:none;z-index:3 }
+.manager-event-now::before { content:"";position:absolute;top:-4px;left:50%;width:12px;height:9px;transform:translateX(-50%);clip-path:polygon(0 0,100% 0,50% 100%);background:#2563eb }
 .manager-event-options { display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px;background:#f8fafc;border:1px solid #e8edf4;border-radius:16px;cursor:pointer;min-height:76px;box-sizing:border-box }
 .manager-event-options span { display:grid;gap:5px }
 .manager-event-options small { color:#64748b;line-height:1.5 }
@@ -88,6 +89,9 @@
 .manager-event-legend { gap:10px 18px }
 .manager-event-legend span { padding:6px 10px;border-radius:9px;background:#f8fafc;font-size:.78rem;color:#475569 }
 .manager-event-legend .is-once:before { border:2px dashed #64748b;background:transparent;box-sizing:border-box }
+.manager-event-legend .is-now { position:relative;background:#eff6ff;color:#1d4ed8;font-weight:650 }
+.manager-event-legend .is-now::before { width:2px;height:16px;margin-inline:5px;border-radius:1px;background:#2563eb }
+.manager-event-legend .is-now::after { content:"";position:absolute;top:6px;inset-inline-start:11px;width:10px;height:7px;clip-path:polygon(0 0,100% 0,50% 100%);background:#2563eb;pointer-events:none }
 .manager-event-day:has(.manager-event-day-track):hover { background:#f5f7fb;border-radius:12px }
 .manager-event-day-track:hover .manager-event-track { border-color:#94a3b8 }
 .manager-event-global-actions { display:grid;gap:16px;padding:22px;border:1px solid #e2e8f0;border-radius:22px;background:#fff }

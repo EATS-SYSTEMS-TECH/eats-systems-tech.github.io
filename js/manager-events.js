@@ -9,7 +9,7 @@ const COPY = {
   he: {
     title: "אירועים מתוזמנים", days: ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"],
     short: ["א׳", "ב׳", "ג׳", "ד׳", "ה׳", "ו׳", "ש׳"], open: "שער פתוח", close: "שער סגור",
-    help: "לוח שבועי: בשעות האירוע השער פתוח בירוק או סגור באדום. אירוע חד־פעמי של השבוע הקרוב מסומן במסגרת מקווקוות. בחרו יום לעריכה.",
+    help: "לוח שבועי: בשעות האירוע השער פתוח בירוק או סגור באדום. אירוע חד־פעמי של השבוע הקרוב מסומן במסגרת מקווקוות. הקו הכחול עם המשולש מציין את הזמן הנוכחי באזור הזמן של השער. בחרו יום לעריכה.",
     editHelp: "בחרו צבע ולחצו על הציר כדי להוסיף אירוע. גררו את האירוע להזזה או את קצותיו לשינוי השעות. כפתורי מינוס ופלוס מדייקים ב־10 דקות.",
     weekly: "כל שבוע", once: "חד־פעמי", edit: "עריכת יום", empty: "אין אירועים", start: "התחלה", end: "סיום",
     save: "שמירה", saveConfirm: "לשמור את האירועים ביום הזה בשער?", saving: "שומר אירועים בשער…", saved: "האירועים נשמרו בשער.", cancel: "ביטול", remove: "מחיקת האירוע",
@@ -21,12 +21,12 @@ const COPY = {
     swap: "החלפת מגעי NO/NC", swapHelp: "לכל האירועים, לפי החיווט של השער.", loading: "טוען אירועים מהשער…", retry: "ניסיון נוסף",
     failed: "לא ניתן לטעון או לשמור את האירועים.", changed: "האירועים בשער השתנו בינתיים. הלוח רוענן. בדקו את המצב העדכני לפני עריכה נוספת.",
     clock: "תאריכים חד־פעמיים יהיו זמינים לאחר כיוון השעון בשער.", choose: "בחרו אירוע בציר כדי לערוך את השעות שלו.",
-    earlier: "10 דקות מוקדם יותר", later: "10 דקות מאוחר יותר", now: "עכשיו", count: "אירועים",
+    earlier: "10 דקות מוקדם יותר", later: "10 דקות מאוחר יותר", now: "עכשיו", currentTime: "הזמן הנוכחי", count: "אירועים",
   },
   en: {
     title: "Scheduled events", days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
     short: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], open: "Gate open", close: "Gate closed",
-    help: "A weekly plan: during an event the gate is open in green or closed in red. A one-time event in the coming week has a dashed outline. Choose a day to edit it.",
+    help: "A weekly plan: during an event the gate is open in green or closed in red. A one-time event in the coming week has a dashed outline. The blue line and triangle mark the current time in the gate's time zone. Choose a day to edit it.",
     editHelp: "Pick a color and tap the timeline to add an event. Drag the event to move it or an edge to change its hours. Minus and plus fine-tune by 10 minutes.",
     weekly: "Every week", once: "One-time", edit: "Edit", empty: "No events", start: "Start", end: "End",
     save: "Save", saveConfirm: "Save this day's events on the gate?", saving: "Saving events on the gate…", saved: "Events saved on the gate.", cancel: "Cancel", remove: "Delete event",
@@ -38,7 +38,7 @@ const COPY = {
     swap: "Swap NO/NC contacts", swapHelp: "For every event, to match the gate's wiring.", loading: "Loading events from the gate…", retry: "Try again",
     failed: "Events could not be loaded or saved.", changed: "The gate's events changed meanwhile. The plan was refreshed. Review it before editing again.",
     clock: "One-time dates become available after the gate's clock is set.", choose: "Select an event on the timeline to edit its hours.",
-    earlier: "10 minutes earlier", later: "10 minutes later", now: "Now", count: "events",
+    earlier: "10 minutes earlier", later: "10 minutes later", now: "Now", currentTime: "Current time", count: "events",
   },
 };
 
@@ -165,7 +165,11 @@ export function createManagerEvents({
       const current = now();
       if (current?.day === day && (!editor?.mode || editor.mode === table.today)) {
         const mark = el("span", undefined, "manager-event-now");
-        mark.style.left = pct(current.minute); mark.title = copy.now; track.append(mark);
+        mark.style.left = pct(current.minute);
+        mark.title = `${copy.currentTime} · ${formatMinutes(current.minute)}`;
+        mark.setAttribute("role", "img");
+        mark.setAttribute("aria-label", mark.title);
+        track.append(mark);
       }
     };
     paint();
@@ -249,7 +253,7 @@ export function createManagerEvents({
     card.append(head, el("p", copy.help, "manager-event-help"));
     const legend = el("div", undefined, "manager-event-legend");
     for (const [type, label] of [["open", copy.open], ["close", copy.close]]) legend.append(el("span", label, `is-${type}`));
-    const once = el("span", copy.once, "is-once"); legend.append(once);
+    const once = el("span", copy.once, "is-once"); legend.append(once, el("span", copy.currentTime, "is-now"));
     card.append(legend);
     const week = decodeEventWeek(rows().filter((row) => row.length < 5 || row[4] < table.today + 7));
     const chart = el("div", undefined, "manager-event-week");
