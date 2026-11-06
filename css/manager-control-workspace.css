@@ -100,6 +100,14 @@
 .manager-control-workspace .manager-workspace-tools .manager-system-menu {
   margin: 0;
 }
+body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
+  :is(.manager-shell, #host-management)
+  .manager-workspace-tools > .manager-system-actions {
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
 .manager-control-workspace .manager-workspace-status {
   display: inline-flex;
   align-items: center;
