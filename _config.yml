@@ -3,12 +3,15 @@
 # Internal documentation belongs outside this public repository.
 exclude:
   - docs/
+  - maintenance/
   - scripts/
   - templates/
   - api/
   - backend/
   - node_modules/
   - README.md
+  - AGENTS.md
+  - SERVICE_ACCOUNT_SETUP.md
   - DEPENDENCY_AUDIT.md
   - package.json
   - package-lock.json
