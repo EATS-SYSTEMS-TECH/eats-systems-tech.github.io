@@ -169,7 +169,7 @@ if (!selectedProduct) {
     : language === "he" ? "הפרופיל שלי" : "My profile";
   $("#platform-title").textContent = title;
   document.title = `${title} | WIFIGATE`;
-  $(".platform-eyebrow").textContent = adminPage ? "WIFIGATE ADMIN" : "MY WIFIGATE";
+  $(".platform-eyebrow").textContent = managementPage ? "WIFIGATE FOR BUSINESS" : adminPage ? "WIFIGATE ADMIN" : "MY WIFIGATE";
   $("[data-copy=intro]").textContent =
     reservationsPage
       ? language === "he" ? "הזמנות שנשלחו מחשבונות WIFIGATE, מהקבלה ועד המסירה." : "Reservations sent from WIFIGATE accounts, from receipt to delivery."

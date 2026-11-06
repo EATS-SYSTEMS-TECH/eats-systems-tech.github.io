@@ -490,9 +490,9 @@ function matrix(product, lang, currentRole) {
   return wrap;
 }
 
-function productPanel(product, lang, current = {}) {
+function productPanel(product, lang, current = {}, previewAsUser = false) {
   const t = copy[lang];
-  const founder = isPlatformFounder();
+  const founder = isPlatformFounder() && !previewAsUser;
   const panel = element("section", "role-guide-panel");
   panel.dataset.product = product;
   const navigation = element("nav", "role-guide-sections");
@@ -662,14 +662,16 @@ export function openRoleGuide({ product = "host", language, current = {} } = {})
   const tabs = element("div", "role-guide__tabs");
   tabs.setAttribute("role", "tablist");
   const body = element("div", "role-guide__body");
+  let previewAsUser = false, activeProduct;
   const select = (id) => {
+    activeProduct = id;
     for (const tab of tabs.children) {
       const on = tab.dataset.product === id;
       tab.setAttribute("aria-selected", String(on));
       tab.tabIndex = on ? 0 : -1;
     }
     dialog.dataset.product = id;
-    body.replaceChildren(productPanel(id, lang, current));
+    body.replaceChildren(productPanel(id, lang, current, previewAsUser));
     body.scrollTop = 0;
   };
   for (const id of roleGuideProducts) {
@@ -690,7 +692,34 @@ export function openRoleGuide({ product = "host", language, current = {} } = {})
     });
     tabs.append(tab);
   }
-  dialog.append(header, tabs, body);
+  const toolbar = element("div", "role-guide__toolbar");
+  toolbar.append(tabs);
+  if (isPlatformFounder()) {
+    const preview = element("div", "role-guide__preview");
+    const toggle = element("button", "role-guide__preview-toggle");
+    toggle.type = "button";
+    const label = element("span");
+    toggle.append(svg(icons.eye),label);
+    const state = element("span", "role-guide__preview-state");
+    state.setAttribute("role","status");
+    const update = () => {
+      label.textContent = previewAsUser
+        ? lang === "he" ? "חזרה לתצוגת מייסד" : "Back to Founder view"
+        : lang === "he" ? "תצוגה כמשתמש מאומת" : "View as verified user";
+      toggle.setAttribute("aria-pressed",String(previewAsUser));
+      state.textContent = previewAsUser ? lang === "he" ? "תצוגה מקדימה כמשתמש מאומת" : "Previewing a verified user's view" : "";
+      state.hidden = !previewAsUser;
+      dialog.dataset.preview = previewAsUser ? "user" : "founder";
+    };
+    toggle.addEventListener("click", () => {
+      if (!isPlatformFounder()) return;
+      previewAsUser = !previewAsUser;
+      update(); select(activeProduct);
+    });
+    update();
+    preview.append(toggle,state); toolbar.append(preview);
+  }
+  dialog.append(header, toolbar, body);
   dialog.addEventListener("click", (event) => {
     if (event.target === dialog) dialog.close();
   });

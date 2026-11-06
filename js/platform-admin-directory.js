@@ -8,7 +8,7 @@ import {
   monthlyTotal,
   formatMoney,
 } from "./profile-financials.js";
-import { productLink } from "./product-switcher.js";
+import { productLink, productIconPaths } from "./product-switcher.js";
 import { createPlatformAccountDeletion } from "./platform-account-deletion.js";
 import { createPlatformAccountActions } from "./platform-account-actions.js";
 import { createPlatformOrganizationDeletion } from "./platform-organization-deletion.js";
@@ -30,6 +30,7 @@ const directoryIcon = key => {
   icon.setAttribute("aria-hidden", "true");
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
   path.setAttribute("d", {
+    ...productIconPaths,
     overview: "M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z",
     accounts: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8M17 4a4 4 0 0 1 0 8M22 21v-2a4 4 0 0 0-3-3.87",
     organizations: "M4 21V3h12v18M16 9h4v12M2 21h20M8 7h4M8 11h4M8 15h4",
@@ -39,6 +40,7 @@ const directoryIcon = key => {
     viewer: "M2 12s4-8 10-8 10 8 10 8-4 8-10 8S2 12 2 12Zm7 0a3 3 0 1 0 6 0 3 3 0 0 0-6 0",
     add: "M12 5v14M5 12h14",
     search: "M21 21l-5-5M10.5 3a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15",
+    refresh: "M20 7V3l-4 4M4 17v4l4-4M20 7a9 9 0 0 0-15-2M4 17a9 9 0 0 0 15 2",
   }[key] ?? "M4 6h16M4 12h16M4 18h16");
   icon.append(path);
   return icon;
@@ -79,7 +81,7 @@ export function createPlatformAdminDirectory({
   const title = element(
     "h2",
     (standalone
-      ? t("חשבונות והרשאות", "People and access")
+      ? t("מבט על הפלטפורמה", "Platform overview")
       : t("ניהול פלטפורמה", "Platform management")) +
       (product === "all" ? "" : ` · ${productName}`),
   );
@@ -148,8 +150,12 @@ export function createPlatformAdminDirectory({
       const label = element("span", nameFor(id), "platform-admin-product-name");
       label.dir = "ltr";
       const count = element("strong", t("לא זמין", "Unavailable"), "platform-admin-product-count");
+      const identity = element("span", null, "platform-admin-product-identity");
+      const symbol = element("span", null, "platform-admin-product-symbol");
+      symbol.append(directoryIcon(id));
+      identity.append(symbol,label);
       button.append(
-        label,
+        identity,
         count,
         element("small", t("חשבונות עם גישה", "Provisioned accounts")),
         element("span", t("בחירת מסלול ←", "Select product →"), "platform-admin-product-select"),
@@ -173,11 +179,15 @@ export function createPlatformAdminDirectory({
   more.addEventListener("click", () => void load(true));
   const refresh = element("button", t("רענון", "Refresh"), "platform-button");
   refresh.type = "button";
+  refresh.prepend(directoryIcon("refresh"));
   refresh.addEventListener("click", () => {directorySearch.clear();void load();});
   const header = element("div", null, "platform-admin-directory-heading");
   const heading = element("div");
-  heading.append(title, note);
-  header.append(heading, refresh);
+  heading.className = "platform-admin-heading-copy";
+  heading.append(element("span", "WIFIGATE FOR BUSINESS", "platform-admin-heading-eyebrow"),title,element("p",t("חשבונות, גישה למוצרים וארגונים — תמונת מצב אחת ברורה.", "Accounts, product access and organizations — one clear overview.")));
+  const emblem = element("span",null,"platform-admin-heading-symbol");
+  emblem.append(directoryIcon("admin"));
+  header.append(emblem,heading, refresh);
   const products = element("section", null, "platform-admin-products");
   const productHeading = element(
     "div",
@@ -189,7 +199,11 @@ export function createPlatformAdminDirectory({
   products.append(element("span", "For Business", "platform-admin-products-eyebrow"), productHeading, element("p", t("בחרו מסלול כדי להציג את החשבונות והארגונים שלו. אפשר להחליף מסלול בכל רגע.", "Select a product to view its accounts and organizations. You can switch at any time."), "platform-admin-products-help"), business);
   const listHeading = element("h3", t("משתמשי הפלטפורמה", "Platform accounts"));
   const listToolbar = element("div", null, "platform-admin-list-toolbar");
-  listToolbar.append(listHeading);
+  const listTitle = element("div",null,"platform-admin-list-title");
+  const listSymbol = element("span",null,"platform-admin-list-symbol");
+  listSymbol.append(directoryIcon("accounts"));
+  listTitle.append(listSymbol,listHeading);
+  listToolbar.append(listTitle);
   const organizationActions = standalone && product === "all" && ensureRecent ? createPlatformOrganizationActions({user,language,ensureRecent,onChanged:async created=>{
     selected="organizations";selectedProduct=created.product;organizationId=created.id??"";search.value="";directorySearch.clear();productCounts={};await load();
     actionStatus.textContent=t("הארגון נוצר בהצלחה.","Organization created successfully.");
@@ -241,6 +255,7 @@ export function createPlatformAdminDirectory({
       "platform-button platform-admin-invite",
     );
     invite.type = "button";
+    invite.prepend(directoryIcon("add"));
     invite.addEventListener("click", () => actions.invite(selectedProduct));
     listToolbar.append(invite);
   }
@@ -272,22 +287,13 @@ export function createPlatformAdminDirectory({
     ),
     "platform-admin-footnote",
   );
-  root.replaceChildren(
-    products,
-    header,
-    counts,
-    listToolbar,
-    filters,
-    membershipFilters,
-    ...(product === "all" ? [revenue] : []),
-    hint,
-    status,
-    actionStatus,
-    searchTools,
-    rows,
-    more,
-    footnote,
-  );
+  const overview = element("div",null,"platform-admin-overview");
+  overview.append(counts,...(product === "all" ? [revenue] : []));
+  const workbench = element("section",null,"platform-admin-workbench");
+  workbench.append(listToolbar,filters,membershipFilters,hint,searchTools,status,actionStatus,rows,more);
+  const explanation = element("details",null,"platform-admin-explanation");
+  explanation.append(element("summary",t("על הספירה והחיוב", "About account counts and billing")),note,footnote);
+  root.replaceChildren(header,overview,products,workbench,explanation);
 
   function selectProduct(id) {
     if (selectedProduct === id) return;
@@ -297,6 +303,7 @@ export function createPlatformAdminDirectory({
   }
 
   function renderProductFilters() {
+    listSymbol.replaceChildren(directoryIcon(organizationView() ? "organizations" : "accounts"));
     resetProduct.setAttribute(
       "aria-pressed",
       String(selectedProduct === "all"),
@@ -636,13 +643,16 @@ export function createPlatformAdminDirectory({
   function renderCounts(values = {}) {
     counts.replaceChildren(
       ...[
-        [t("מייסדים", "Founders"), values.admins],
-        [t("משתמשים", "Users"), values.users],
-        [t("סה״כ חשבונות", "Total accounts"), values.total],
-      ].map(([label, count]) => {
+        [t("מייסדים", "Founders"), values.admins,"owner"],
+        [t("משתמשים", "Users"), values.users,"accounts"],
+        [t("סה״כ חשבונות", "Total accounts"), values.total,"overview"],
+      ].map(([label, count,icon]) => {
         const tile = element("div");
+        tile.dataset.metric = icon;
+        const title = element("span",null,"platform-admin-metric-label");
+        title.append(directoryIcon(icon),element("span",label));
         tile.append(
-          element("span", label),
+          title,
           element("strong", String(count ?? t("לא זמין", "Unavailable")), count == null ? "platform-admin-unavailable" : null),
         );
         return tile;

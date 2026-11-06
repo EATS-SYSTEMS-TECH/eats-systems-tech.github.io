@@ -1328,3 +1328,134 @@ html[dir="rtl"] .platform-admin-business > * { direction: rtl; }
 @media (prefers-reduced-motion: no-preference) {
   .platform-admin-filter-group,.platform-admin-filters .platform-button,.platform-admin-membership-filters .platform-button { transition: background-color 140ms ease, border-color 140ms ease, box-shadow 140ms ease; }
 }
+
+/* Platform console: overview, product context, and a focused directory. */
+body[data-platform-view="management"] .platform-heading { margin-block:22px 26px; }
+body[data-platform-view="management"] .platform-heading h1 { color:#18334f; font-size:clamp(27px,3.5vw,36px); line-height:1.35; }
+body[data-platform-view="management"] .platform-heading > p:last-child { color:#74869b; max-width:68ch; line-height:1.8; font-size:14px; }
+body[data-platform-view="management"] .platform-eyebrow { color:#7890aa; font-size:10px; letter-spacing:.14em; }
+.platform-page .platform-admin-management { padding:clamp(18px,3vw,28px); border:1px solid #e0e8f2; border-radius:20px; background:#fff; box-shadow:0 4px 22px #193a6004; }
+.platform-admin-management .platform-admin-directory-heading { display:flex; align-items:center; gap:16px; margin:0 0 22px; padding:0 0 22px; border-bottom:1px solid #e9eef5; }
+.platform-admin-heading-copy { flex:1; min-width:0; }
+.platform-admin-heading-eyebrow { display:block; margin-bottom:6px; color:#8195ac; font-size:10px; font-weight:600; line-height:1.5; letter-spacing:.1em; }
+.platform-admin-management .platform-admin-directory-heading h2 { margin:0 0 6px; color:#203d5b; font-size:23px; line-height:1.4; letter-spacing:-.02em; }
+.platform-admin-management .platform-admin-directory-heading p { margin:0; color:#75899f; font-size:13px; line-height:1.8; }
+.platform-admin-heading-symbol { display:grid; place-items:center; width:52px; height:52px; flex:0 0 52px; border:1px solid #dce7f5; border-radius:14px; background:#f0f6fe; color:#5b80ae; }
+.platform-admin-management svg { fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.platform-admin-heading-symbol svg { width:26px; height:26px; }
+.platform-admin-management .platform-admin-directory-heading > .platform-button { display:inline-flex; align-items:center; gap:8px; min-height:42px; padding:9px 14px; border:1px solid #dce5f0; border-radius:9px; color:#557493; background:#fff; font-size:12px; }
+.platform-admin-directory-heading > button svg { width:16px; height:16px; }
+.platform-admin-overview { display:grid; grid-template-columns:minmax(0,1.8fr) minmax(240px,1fr); gap:16px; margin-bottom:28px; }
+.platform-admin-overview:not(:has(>.platform-admin-revenue:not([hidden]))) { grid-template-columns:minmax(0,1fr); }
+.platform-admin-management .platform-admin-counts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:0; align-items:stretch; }
+.platform-admin-management .platform-admin-counts > div { display:flex; flex-direction:column; justify-content:space-between; gap:14px; min-width:0; min-height:140px; box-sizing:border-box; padding:20px; border:1px solid #e0e8f2; border-radius:14px; background:linear-gradient(135deg,#fafcff,#fff); }
+.platform-admin-management .platform-admin-metric-label { display:flex; align-items:center; flex-wrap:wrap; gap:9px; color:#71859c; font-size:12px; }
+.platform-admin-management .platform-admin-metric-label svg { width:20px; height:20px; padding:7px; flex:none; box-sizing:content-box; border-radius:9px; background:#edf3fc; color:#6587af; }
+.platform-admin-management [data-metric="owner"] .platform-admin-metric-label svg { color:#a38950; background:#fbf5e9; }
+.platform-admin-management [data-metric="overview"] .platform-admin-metric-label svg { color:#4c8c7c; background:#edf7f4; }
+.platform-admin-management .platform-admin-counts strong { font-size:32px; color:#294967; line-height:1.2; font-weight:700; }
+.platform-admin-management .platform-admin-counts strong.platform-admin-unavailable { font-size:16px; }
+.platform-admin-management .platform-admin-overview .platform-admin-revenue { display:flex; flex-direction:column; justify-content:center; min-width:0; margin:0; padding:20px; border:1px solid #dce9e4; border-radius:14px; background:linear-gradient(125deg,#f1f9f5,#fbfdfc); }
+.platform-admin-management .platform-admin-revenue[hidden] { display:none; }
+.platform-admin-management .platform-admin-revenue h3 { font-size:12px; line-height:1.7; font-weight:600; color:#617f70; margin:0 0 10px; }
+.platform-admin-management .platform-admin-revenue > strong { font-size:28px; line-height:1.3; color:#38705a; }
+.platform-admin-management .platform-admin-revenue > strong.platform-admin-unavailable { font-size:17px; }
+.platform-admin-management .platform-admin-revenue p { margin:8px 0 0; font-size:11px; line-height:1.8; color:#749084; }
+.platform-admin-management .platform-admin-products { margin:0 0 28px; padding:0; border:0; }
+.platform-admin-management .platform-admin-products-eyebrow { display:none; }
+.platform-admin-management .platform-admin-products-heading { margin-bottom:6px; gap:12px; }
+.platform-admin-management .platform-admin-products-heading h3 { margin:0; color:#294967; font-size:16px; font-weight:650; }
+.platform-admin-management .platform-admin-products-help { margin:0 0 16px; color:#7c8fa4; font-size:12px; line-height:1.8; }
+.platform-page .platform-admin-management .platform-admin-product-reset { border-radius:7px; padding:7px 11px; font-size:11px; min-height:36px; }
+.platform-admin-management .platform-admin-business { gap:14px; }
+.platform-page .platform-admin-management .platform-admin-product-filter { position:relative; display:grid; gap:10px; padding:20px; border:1px solid #dfe7f1; border-radius:14px; background:#fff; box-shadow:0 3px 12px #1c3e6a03; }
+.platform-page .platform-admin-management .platform-admin-product-filter[aria-pressed="true"] { border-color:#8eafd3; background:#f7faff; box-shadow:inset 0 3px 0 #6e92be; }
+.platform-admin-product-identity { display:flex; align-items:center; gap:11px; width:100%; }
+.platform-admin-product-symbol { display:grid; place-items:center; width:36px; height:36px; flex:0 0 36px; border-radius:10px; color:#537fb5; background:#edf4ff; }
+.platform-admin-product-symbol svg { width:21px; height:21px; }
+.platform-admin-management [data-product="pay"] .platform-admin-product-symbol { color:#438669; background:#eef8f2; }
+.platform-admin-management [data-product="manager"] .platform-admin-product-symbol { color:#b57a42; background:#fcf4eb; }
+.platform-admin-management .platform-admin-product-name { color:#33506c; font-size:14px; font-weight:650; }
+.platform-admin-management .platform-admin-product-count { color:#365472; font-size:28px; line-height:1.3; }
+.platform-admin-management .platform-admin-product-filter small { font-size:11px; color:#8090a2; }
+.platform-admin-management .platform-admin-product-select { width:100%; margin-top:3px; padding-top:12px; border-top:1px solid #edf1f6; color:#587b9f; font-size:11px; }
+.platform-admin-workbench { border:1px solid #dfe7f1; border-radius:16px; padding:22px; background:#fff; min-width:0; }
+.platform-admin-management .platform-admin-list-toolbar { gap:12px; margin:0 0 20px; align-items:center; }
+.platform-admin-list-title { display:flex; align-items:center; gap:11px; flex:1 1 220px; min-width:0; }
+.platform-admin-list-symbol { width:38px; height:38px; flex:0 0 38px; display:grid; place-items:center; border-radius:10px; background:#f0f5fc; color:#6587ac; }
+.platform-admin-list-symbol svg { width:21px; height:21px; }
+.platform-admin-management .platform-admin-list-toolbar h3 { font-size:20px; color:#264562; margin:0; line-height:1.5; }
+.platform-admin-management .platform-admin-list-toolbar > .platform-button { display:inline-flex; align-items:center; justify-content:center; gap:7px; min-height:42px; padding:9px 13px; border-radius:9px; font-size:12px; }
+.platform-admin-list-toolbar > button svg { width:17px; height:17px; }
+.platform-admin-management .platform-admin-list-toolbar > .platform-admin-invite { background:#24496e; border-color:#24496e; color:#fff; }
+.platform-admin-management .platform-admin-filters { gap:10px; margin-bottom:18px; padding:0; border:0; border-radius:0; background:transparent; }
+.platform-admin-management .platform-admin-filter-group { padding:16px; border:1px solid #e2e9f2; border-radius:12px; background:#fafcfe; box-shadow:none; }
+.platform-admin-management .platform-admin-filter-group:has([aria-pressed="true"]) { background:#f4f8fe; border-color:#d4e2f3; }
+.platform-admin-management .platform-admin-filter-label { color:#48627d; font-size:12px; }
+.platform-admin-management .platform-admin-filter-description { font-size:11px; color:#8b9aad; line-height:1.8; margin:6px 0 12px; }
+.platform-admin-management .platform-admin-filters .platform-button { border:1px solid #e0e7f0; border-radius:8px; background:#fff; min-height:40px; font-size:12px; padding:8px 12px; }
+.platform-admin-management .platform-admin-filters .platform-button[aria-pressed="true"] { color:#315f90; background:#edf4ff; border-color:#a9c2e0; box-shadow:none; }
+.platform-admin-management .platform-admin-membership-filters { padding:14px; margin-bottom:16px; border-radius:11px; background:#f8fafd; border-color:#e3eaf2; }
+.platform-admin-management .platform-admin-membership-filters[hidden] { display:none; }
+.platform-admin-management .platform-admin-membership-filters .platform-button { min-height:38px; border-radius:7px; font-size:11px; }
+.platform-admin-management .platform-admin-list-hint { margin:0 0 14px; font-size:12px; line-height:1.8; color:#8090a3; }
+.platform-admin-management .platform-admin-search-tools { margin:0 0 18px; padding:18px; border:1px solid #e2e9f2; border-radius:12px; background:#f7faff; }
+.platform-admin-management .platform-admin-search-tools input { background:#fff; font-size:14px; border-color:#d9e4f1; }
+.platform-admin-workbench > p[role="status"] { margin:10px 0; color:#70869e; font-size:12px; line-height:1.8; }
+.platform-admin-workbench > p:empty { display:none; }
+.platform-admin-management .platform-admin-person { border-color:#dfe7f0; border-radius:13px; box-shadow:0 2px 10px #183c6303; }
+.platform-admin-management .platform-admin-person[open] { border-color:#9fbad9; box-shadow:0 3px 15px #254f7b08; }
+.platform-admin-management .platform-admin-person-summary { padding:18px; gap:14px; background:#fff; }
+.platform-admin-management .platform-admin-person-summary:is(:hover,:focus-visible,:focus-within) { background:#f5f9ff; color:#294c70; }
+.platform-admin-management .platform-admin-person-summary:is(:hover,:focus-visible,:focus-within) :is(strong,.platform-admin-person-identity > span,.platform-admin-person-price small,.platform-admin-chevron) { color:#426384; }
+.platform-admin-management .platform-admin-person-summary:is(:hover,:focus-visible,:focus-within) :is(.platform-admin-role,.platform-admin-avatar) { color:#52779f; background:#eaf1fa; }
+.platform-admin-management .platform-admin-person-summary .platform-admin-avatar { width:44px; height:44px; border-radius:12px; background:#eff5fd; color:#6284aa; }
+.platform-admin-management .platform-admin-person-identity strong { color:#2b4967; font-size:14px; }
+.platform-admin-management .platform-admin-person-identity > span { color:#8191a6; font-size:12px; line-height:1.8; overflow-wrap:anywhere; }
+.platform-admin-management .platform-admin-role { border-radius:6px; padding:5px 8px; font-size:10px; font-weight:600; }
+.platform-admin-management .platform-admin-person-price small { font-size:10px; color:#8292a5; }
+.platform-admin-management .platform-admin-person-price strong { color:#4b6d8e; font-size:14px; }
+.platform-admin-management .platform-admin-person-content { padding:20px; border-top:1px solid #e6edf5; background:#fcfdff; }
+.platform-admin-management .platform-admin-person-content table { font-size:12px; }
+.platform-admin-management .platform-admin-person-content th { background:#f2f6fc; color:#70849b; }
+.platform-admin-management .platform-admin-organization { border:1px solid #dfe7f1; border-radius:13px; padding:20px; background:#fff; box-shadow:0 2px 12px #183c6303; }
+.platform-admin-management .platform-admin-organization-column { border-radius:14px; box-shadow:none; }
+.platform-admin-management .platform-admin-organization-heading { border-color:#e8edf4; }
+.platform-admin-management .platform-admin-organization-members li { border-radius:10px; background:#fbfcff; }
+.platform-admin-explanation { margin-top:22px; padding:14px 18px; border:1px solid #e6ecf3; border-radius:11px; color:#7a8ca1; background:#fbfcfe; }
+.platform-admin-explanation summary { cursor:pointer; font-size:12px; font-weight:600; line-height:1.8; }
+.platform-admin-explanation p { font-size:12px; color:#8293a7; line-height:1.9; }
+@media(max-width:1000px) { .platform-admin-overview { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:700px) {
+ .platform-admin-management .platform-admin-directory-heading { flex-wrap:wrap; gap:12px; }
+ .platform-admin-heading-symbol { width:42px; height:42px; flex-basis:42px; border-radius:11px; }
+ .platform-admin-management .platform-admin-directory-heading h2 { font-size:21px; }
+ .platform-admin-management .platform-admin-heading-copy { flex:1 1 calc(100% - 60px); }
+ .platform-admin-management .platform-admin-directory-heading > button { margin-inline-start:auto; }
+ .platform-admin-management .platform-admin-counts > div { padding:14px 10px; min-height:126px; }
+ .platform-admin-management .platform-admin-metric-label { gap:8px; align-items:flex-start; flex-direction:column; }
+ .platform-admin-management .platform-admin-counts strong { font-size:27px; }
+ .platform-admin-management .platform-admin-business { grid-template-columns:minmax(0,1fr); gap:10px; }
+ .platform-page .platform-admin-management .platform-admin-product-filter { grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:6px 12px; padding:16px; }
+ .platform-admin-product-identity { grid-row:1/3; }
+ .platform-admin-management .platform-admin-product-count { grid-column:2; grid-row:1; font-size:24px; }
+ .platform-admin-management .platform-admin-product-filter small { grid-column:2; grid-row:2; font-size:10px; }
+ .platform-admin-management .platform-admin-product-select { grid-column:1/-1; padding-top:9px; }
+ .platform-admin-workbench { padding:16px; }
+ .platform-admin-management .platform-admin-list-toolbar { gap:10px; }
+ .platform-admin-list-title { flex-basis:100%; }
+ .platform-admin-management .platform-admin-list-toolbar h3 { font-size:19px; }
+ .platform-admin-management .platform-admin-list-toolbar > button { flex:1; }
+ .platform-admin-management .platform-admin-filter-group { padding:14px; }
+ .platform-admin-management .platform-admin-person-summary { gap:10px; padding:14px; }
+ .platform-admin-management .platform-admin-person-content { padding:12px; }
+}
+.platform-page .platform-admin-management .platform-admin-filters .platform-button:hover:not(:disabled),
+.platform-page .platform-admin-management .platform-admin-membership-filters .platform-button:hover:not(:disabled),
+.platform-page .platform-admin-management .platform-admin-product-filter:hover:not(:disabled),
+.platform-page .platform-admin-management .platform-admin-product-reset:hover:not(:disabled) { background:#edf4fd; color:#355f8d; border-color:#b1c7e2; }
+.platform-page .platform-admin-management .platform-admin-filters .platform-button:focus-visible { outline:3px solid #91b2da66; outline-offset:2px; }
+.platform-admin-management .platform-admin-person-summary > .platform-admin-person-identity { text-align:left; }
+html[dir="rtl"] .platform-admin-management .platform-admin-person-summary > .platform-admin-person-identity { text-align:right; }
+.platform-admin-management .platform-admin-person-identity > span { text-align:inherit; }
+body[data-platform-view="management"] .platform-admin-heading-eyebrow { display:none; }
