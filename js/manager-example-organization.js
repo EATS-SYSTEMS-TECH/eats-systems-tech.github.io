@@ -102,7 +102,7 @@ export function createExampleOrganization(
         if (
           !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
           email.length > 254 ||
-          !["organization-admin", "organization-user"].includes(body.role)
+          !["organization-admin", "organization-user", "viewer"].includes(body.role)
         )
           fail("INVALID_REQUEST");
         if (

@@ -1,3 +1,5 @@
+import { createSystemIcon } from "./wifigate-system-icons.js";
+
 const node = (tag, text, className) => {
   const element = document.createElement(tag);
   if (text !== undefined) element.textContent = text;
@@ -11,7 +13,7 @@ export function createManagerGateActionDialog({ language = "en", host = document
   const t = (he, en) => language === "he" ? he : en;
   let active;
   function cancel() { active?.close(); }
-  function open({ systemName, gate, simulation = false }) {
+  function open({ systemName, system, gate, simulation = false }) {
     cancel();
     const previous = document.activeElement;
     const dialog = node("dialog", undefined, "manager-gate-action-dialog");
@@ -116,13 +118,17 @@ export function createManagerGateActionDialog({ language = "en", host = document
       dialog.dataset.state = state;
       title.textContent = heading;
       detail.textContent = description;
+      if (state === "confirm") {
+        art.replaceChildren(createSystemIcon(system, "manager-gate-action-object"));
+        return;
+      }
       const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       for (const [key, value] of Object.entries({ viewBox: "0 0 64 64", fill: "none", stroke: "currentColor", "stroke-width": "3", "stroke-linecap": "round", "stroke-linejoin": "round" })) svg.setAttribute(key, value);
       const ring = document.createElementNS(svg.namespaceURI, "circle");
       for (const [key, value] of Object.entries({ cx: "32", cy: "32", r: "27", class: "manager-gate-action-ring" })) ring.setAttribute(key, value);
       const mark = document.createElementNS(svg.namespaceURI, "path");
       mark.setAttribute("class", "manager-gate-action-mark");
-      mark.setAttribute("d", state === "success" ? "m20 33 8 8 17-19" : state === "failure" ? "m23 23 18 18m0-18-18 18" : state === "uncertain" ? "M32 18v19m0 8h.01" : state === "confirm" ? "M16 47V22h7v25M23 23l26-7v9l-26 7" : "");
+      mark.setAttribute("d", state === "success" ? "m20 33 8 8 17-19" : state === "failure" ? "m23 23 18 18m0-18-18 18" : state === "uncertain" ? "M32 18v19m0 8h.01" : "");
       svg.append(ring, mark);
       art.replaceChildren(svg);
     }

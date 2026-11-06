@@ -19,13 +19,16 @@ export function createManagerControlHeader({ system, language, returnButton, act
   icon.classList.add("manager-workspace-icon");
   const heading = node("div", undefined, "manager-workspace-heading");
   const count = system.systemIds.length;
-  const type = systemKindLabel(system, language, {
-    group: t("קבוצת שערים", "Gate group"), "dual-control": "Dual Control",
-  }) ?? t("שער", "Gate");
+  const type = systemKindLabel(system, "en", { gate:"Gate", "dual-control":"Dual Control", group:"Group" }) ?? "System";
+  const context = node("p", undefined, "manager-workspace-context");
+  const kind = node("span", type, "manager-system-kind-tag");
+  kind.lang = "en";
+  kind.dir = "ltr";
+  context.append(kind, node("span", `${count} ${count === 1 ? t("שער", "gate") : t("שערים", "gates")}`, "manager-system-gate-count"));
   heading.append(
     node("span", "WIFIGATE MANAGER", "manager-workspace-eyebrow"),
     node("h3", system.name),
-    node("p", `${type} · ${count} ${count === 1 ? t("שער", "gate") : t("שערים", "gates")}`, "manager-workspace-context"),
+    context,
     node("span", "", "manager-workspace-status"),
   );
   const loading = node("div", undefined, "manager-workspace-progress");

@@ -50,6 +50,7 @@ export function createManagerOrganizationPicker({
     caption,
     node("strong", selected?.name ?? t("בחרו ארגון", "Choose organization")),
   );
+  if (selected?.simulation) identity.append(node("span", t("סימולציה · ארגון לדוגמה", "Simulation · example organization"), "manager-organization-simulation-tag"));
   trigger.append(
     logo,
     identity,
@@ -150,6 +151,7 @@ export function createManagerOrganizationPicker({
     );
     text.append(node("strong", org.name));
     if (role) text.append(node("small", role));
+    if (org.simulation) text.append(node("span", t("סימולציה", "Simulation"), "manager-organization-simulation-tag"));
     const artwork = createOrganizationLogo(
       org,
       language,

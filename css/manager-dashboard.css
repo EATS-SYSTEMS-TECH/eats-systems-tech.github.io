@@ -1,5 +1,5 @@
 @import url("./manager-events.css?v=20261105now1");
-@import url("./manager-control-workspace.css?v=20261106alignment1");
+@import url("./manager-control-workspace.css?v=20261106simulation1");
 
 .platform-page[data-product="manager"] {
   color: var(--ink, #0f172a);
@@ -1939,6 +1939,16 @@ dialog.manager-guide-image-dialog:not([open]) { display:none; }
 .manager-guide-image-content .manager-setup-image-preview { display:block; width:100%; height:100%; max-width:100%; max-height:100%; object-fit:contain; margin:0; }
 .manager-guide-image-content .is-zoomed .manager-setup-image-preview { width:auto; height:auto; max-width:none; max-height:none; }
 .manager-guide-image-dialog > .manager-confirm-actions { flex:none; margin-top:16px; }
+.manager-organization-simulation-tag { display:inline-flex; align-items:center; width:fit-content; max-width:100%; padding:4px 7px; border:1px solid #d8c9ed; border-radius:6px; background:#f3edfc; color:#75539e; font-size:10px; line-height:1.5; font-weight:600; }
+.manager-organization-picker-identity .manager-organization-simulation-tag { margin-top:5px; white-space:normal; }
+.manager-example-organization-banner { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:9px 18px; margin:0 0 24px; padding:20px; border:1px solid #ded3ef; border-radius:13px; background:linear-gradient(115deg,#f7f3fd,#fdfbff); color:#77618c; }
+.manager-example-organization-banner > strong { color:#705094; font-size:14px; line-height:1.7; }
+.manager-example-organization-banner > span { grid-column:1; font-size:12px; line-height:1.9; }
+.manager-shell .manager-example-organization-banner > .manager-button { grid-column:2; grid-row:1/3; align-self:center; min-height:40px; border:1px solid #dacdec; border-radius:8px; background:#fff; color:#765994; font-size:11px; }
+@media(max-width:700px) {
+ .manager-example-organization-banner { grid-template-columns:minmax(0,1fr); padding:16px; }
+ .manager-shell .manager-example-organization-banner > .manager-button { grid-column:1; grid-row:auto; justify-self:start; }
+}
 @media(max-width:600px) {
  dialog.manager-confirm-dialog.manager-guide-image-dialog { width:calc(100vw - 12px); height:calc(100dvh - 12px); max-height:calc(100dvh - 12px); padding:16px; border-radius:12px; }
  .manager-guide-image-dialog > h2 { font-size:15px; }

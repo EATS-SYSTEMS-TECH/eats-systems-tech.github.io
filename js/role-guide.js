@@ -581,7 +581,7 @@ function productPanel(product, lang, current = {}, previewAsUser = false) {
   for (const [icon, name, price, kind] of [
     ["card", roleTitle(product, "plan", "user", lang), product === "pay" ? t.billingUnchanged : t.subscription, product === "pay" ? "access" : "paid"],
     ...(founder ? [["shield", roleTitle(product, "plan", "admin", lang), t.noSubscription, "exempt"]] : []),
-    ["building", organizationRoles.map(role => organizationRoleName(role, lang)).join(" · "), t.free, "free"],
+    ["building", lang === "he" ? "תפקידים בארגון" : "Organization roles", t.free, "free"],
   ]) {
     const payer = element("div", "role-guide-billing__payer");
     payer.dataset.kind = kind;

@@ -9,6 +9,7 @@ import {
 import { createManagerOrganizationCard } from "./manager-organization-card.js";
 import { renderManagerOrganization } from "./manager-organization.js";
 import { createManagerOrganizationGuide } from "./manager-organization-guide.js";
+import { createManagerAssignmentGuide } from "./manager-assignment-guide.js";
 import { createManagerDialog } from "./manager-dialog.js";
 import { createExampleOrganization } from "./manager-example-organization.js";
 
@@ -188,7 +189,8 @@ export function createManagerExamples({
     }
     section.append(grid);
     if (collapsible) container.prepend(section);
-    else container.append(section);
+    else { section.dataset.organizationSection = "systems"; container.append(section); }
+    return section;
   }
   function renderOrganizationCard(container) {
     const section = el(
@@ -231,7 +233,7 @@ export function createManagerExamples({
   }
   async function renderOrganization(
     container,
-    { onBack, organizationId = activeOrganizationId },
+    { onBack, onRefresh, onSectionChange, organizationId = activeOrganizationId },
   ) {
     const selected = organizations.find(
       (org) => org.definition.id === organizationId,
@@ -240,6 +242,14 @@ export function createManagerExamples({
     activeOrganizationId = organizationId;
     const organization = selected.adapter;
     mount(container);
+    const notice = container.querySelector(":scope > .manager-note");
+    const description = notice.textContent;
+    notice.classList.add("manager-example-organization-banner");
+    notice.replaceChildren(
+      el("strong", t("סימולציה · ", "Simulation · ") + organization.summary().name),
+      el("span", description),
+      button(t("יציאה מהסימולציה", "Exit simulation"), onBack),
+    );
     const epoch = viewGeneration;
     const isCurrent = () =>
       !disposed && activeRoot === container && epoch === viewGeneration;
@@ -247,6 +257,7 @@ export function createManagerExamples({
       "סימולציה בלבד · ארגון לדוגמה. השינויים נשמרים בדוגמה בלבד.",
       "Simulation only · example organization. Changes stay in the example only.",
     );
+    const refresh = onRefresh ?? (() => renderOrganization(container, { onBack, onSectionChange, organizationId }));
     await renderManagerOrganization({
       root: container,
       path: organization.path,
@@ -267,7 +278,9 @@ export function createManagerExamples({
       ensureRecent: async () => {},
       run,
       onBack,
-      onRefresh: () => renderOrganization(container, { onBack }),
+      onRefresh: refresh,
+      onSectionChange,
+      partitioned: true,
       errorText: (error) =>
         errors[error.code ?? error.message] ||
         t(
@@ -277,6 +290,11 @@ export function createManagerExamples({
       isCurrent,
     });
     if (!isCurrent()) return;
+    const help = el("div", undefined, "manager-organization-systems-help");
+    help.dataset.organizationSection = "systems";
+    renderCards(help);
+    help.append(createManagerAssignmentGuide(language));
+    container.insertBefore(help, container.querySelector(".manager-organization-workspace"));
     const assigned = managerExampleSystems.filter(
       (system) =>
         selected.assignments.has(system.id),
@@ -286,18 +304,19 @@ export function createManagerExamples({
     toolbar.append(
       el("h3", t("מערכות הארגון", "Organization systems")),
       button(t("רענון", "Refresh"), () =>
-        renderOrganization(container, { onBack }),
+        refresh(),
       ),
     );
     container.append(toolbar);
-    if (!assigned.length)
-      container.append(
-        el(
+    if (!assigned.length) {
+      const empty = el(
           "p",
           t("אין מערכות להצגה כרגע.", "No systems to display yet."),
           "manager-empty manager-empty-systems",
-        ),
-      );
+        );
+      empty.dataset.organizationSection = "systems";
+      container.append(empty);
+    }
     renderCards(container, assigned, { collapsible: false });
   }
 
@@ -311,7 +330,8 @@ export function createManagerExamples({
         throw new Error("EXAMPLE_SYSTEM_NOT_FOUND");
       return new ManagerExampleConnection({ ...options, data });
     },
-    organizations: () => managerExampleOrganizations,
+    organizations: () => organizations.map(org => org.adapter.summary()),
+    organization: id => organizations.find(org => org.definition.id === id)?.adapter.summary() ?? null,
     assignment: (system) =>
       organizations.find((org) => org.assignments.has(system.id))?.definition
         .id ?? null,

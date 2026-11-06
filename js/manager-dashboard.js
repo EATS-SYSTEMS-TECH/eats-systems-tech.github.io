@@ -85,6 +85,7 @@ export function createManagerDashboard({
         : message,
     );
   let organizationPicker;
+  let exampleOrganizationId = null;
   const organizationIdentities = new Map();
   let managementMode = management;
   let initializing = true;
@@ -452,6 +453,11 @@ export function createManagerDashboard({
     nav.hidden = managementMode;
     platformEntry.hidden = true;
     nav.replaceChildren();
+    const exampleOrganization = ["example-organization", "example-system"].includes(currentView)
+      ? examples.organization(exampleOrganizationId)
+      : null;
+    const navigationOrganizations = (profile.organizations ?? []).map(org => ({ ...org, ...organizationIdentities.get(org.id), role: org.role }));
+    if (exampleOrganization) navigationOrganizations.push({ ...exampleOrganization, role: "owner", simulation: true });
     const personalNavigation = node("section", undefined, "manager-personal-navigation");
     personalNavigation.setAttribute("aria-label", t("סביבת עבודה אישית", "Personal workspace"));
     personalNavigation.append(title);
@@ -471,7 +477,7 @@ export function createManagerDashboard({
     platformHeader.hidden = true;
     if (profile.account || profile.role === "admin") {
       const b = button(t("המערכות שלי", "My systems"), () => showSystems(null));
-      if (!scope && ["systems", "example-system"].includes(currentView))
+      if (!scope && !exampleOrganization && ["systems", "example-system"].includes(currentView))
         b.setAttribute("aria-current", "page");
       b.prepend(managerUiIcon("systems"));
       personalNavigation.append(b);
@@ -480,33 +486,41 @@ export function createManagerDashboard({
       showOrganizations(true),
     );
     if (
-      ["my-organizations", "example-organization"].includes(currentView)
+      currentView === "my-organizations"
     )
       myOrganizations.setAttribute("aria-current", "page");
     myOrganizations.prepend(managerUiIcon("organizations"));
     personalNavigation.append(myOrganizations);
-    if (profile.organizations?.length) {
+    if (navigationOrganizations.length) {
       const organizationArea = node("section", undefined, "manager-organization-area");
       organizationArea.setAttribute("aria-label", t("סביבת הארגון", "Organization workspace"));
       organizationArea.append(node("p", t("סביבת הארגון", "Organization workspace"), "manager-nav-title"));
       nav.append(organizationArea);
       organizationPicker = createManagerOrganizationPicker({
-        organizations: profile.organizations.map(org => ({ ...org, ...organizationIdentities.get(org.id), role: org.role })),
-        selectedId: scope,
+        organizations: navigationOrganizations,
+        selectedId: exampleOrganization?.id ?? scope,
         language,
-        onSelect: id => task(() => showSystems(id)),
+        onSelect: id => task(() => exampleOrganization?.id === id ? openExampleOrganization(id) : showSystems(id)),
       });
       organizationArea.append(organizationPicker.root);
-      if (scope && profile.organizations.some(org => org.id === scope)) {
+      if (exampleOrganization || (scope && profile.organizations.some(org => org.id === scope))) {
         for (const [key, label] of [
           ["systems", t("מערכות הארגון", "Organization systems")],
           ["people", t("אנשי הארגון", "Organization people")],
           ["settings", t("הגדרות הארגון", "Organization settings")],
         ]) {
-          const item = button(label, () => currentView === "systems" ? selectOrganizationSection(key) : task(() => showSystems(scope, null, key)));
+          const item = button(label, () => {
+            if (exampleOrganization) {
+              if (currentView !== "example-organization") return openExampleOrganization(exampleOrganization.id, key);
+              selectOrganizationSection(key);
+              view.scrollIntoView({ block: "start" });
+              return;
+            }
+            return currentView === "systems" ? selectOrganizationSection(key) : showSystems(scope, null, key);
+          });
           item.prepend(managerUiIcon(key === "people" ? "people" : key));
           item.dataset.organizationView = key;
-          if (currentView === "systems" && organizationSection === key) item.setAttribute("aria-current", "page");
+          if ((currentView === "systems" || exampleOrganization) && organizationSection === key) item.setAttribute("aria-current", "page");
           organizationArea.append(item);
         }
       }
@@ -645,24 +659,37 @@ export function createManagerDashboard({
   async function openExample(system) {
     if (!examples.isSystem(system)) throw new Error("EXAMPLE_SYSTEM_NOT_FOUND");
     const fromOrganization = currentView === "example-organization";
+    const originOrganization = fromOrganization ? exampleOrganizationId : null;
+    const originSection = organizationSection;
     exampleBack = fromOrganization
-      ? openExampleOrganization
+      ? () => openExampleOrganization(originOrganization, originSection)
       : () => showSystems(null);
+    if (!fromOrganization) exampleOrganizationId = null;
     scope = null;
     currentView = "example-system";
     renderNav();
     await openSystem(system);
   }
-  async function openExampleOrganization(organizationId) {
+  async function openExampleOrganization(organizationId = exampleOrganizationId, sectionName = "systems") {
+    const selected = examples.organization(organizationId ?? examples.organizations()[0].id);
+    if (!selected) throw new Error("EXAMPLE_SYSTEM_NOT_FOUND");
     stop();
     scope = null;
+    exampleOrganizationId = selected.id;
+    organizationSection = sectionName;
     currentView = "example-organization";
     renderNav();
     say("");
     await examples.renderOrganization(view, {
-      organizationId,
+      organizationId: selected.id,
       onBack: () => void task(() => showOrganizations(true)),
+      onRefresh: () => openExampleOrganization(selected.id, organizationSection),
+      onSectionChange: selectOrganizationSection,
     });
+    if (!closed && currentView === "example-organization" && exampleOrganizationId === selected.id) {
+      selectOrganizationSection(organizationSection);
+      view.scrollIntoView({ block: "start" });
+    }
   }
   function directoryLabel(role) {
     return {
@@ -2423,7 +2450,7 @@ export function createManagerDashboard({
     const source = connection, epoch = generation, system = currentSystem, gate = currentGate;
     const current = () => !closed && connection === source && generation === epoch && currentSystem === system && currentGate === gate;
     const simulation = examples.isSystem(system);
-    const operation = gateActionDialog.open({ systemName: system.name, gate, simulation });
+    const operation = gateActionDialog.open({ systemName: system.name, system, gate, simulation });
     let sent = false;
     try {
       const result = await source.command("ADMIN_GET_GATE_CONFIG");
