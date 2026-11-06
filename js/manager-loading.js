@@ -54,8 +54,20 @@
     }
   }, true);
   document.addEventListener("DOMContentLoaded", paint, { once: true });
+  async function whenStyled(surface) {
+    if (fatal) throw new Error("MANAGER_PRESENTATION_FAILED");
+    await Promise.all([...document.querySelectorAll('link[rel="stylesheet"]')].map(link =>
+      (link.hasAttribute("data-manager-style") ? link.dataset.managerStyleReady === "true" : link.sheet) ? Promise.resolve() : new Promise((resolve, reject) => {
+        link.addEventListener("load", resolve, { once: true });
+        link.addEventListener("error", reject, { once: true });
+      })));
+    surface?.getBoundingClientRect();
+    await document.fonts?.ready;
+    if (fatal) throw new Error("MANAGER_PRESENTATION_FAILED");
+  }
   window.wifigateManagerLoading = {
     begin,
+    whenStyled,
     advance(ticket, value) {
       if (ticket !== revision || fatal) return;
       step = Math.max(step, Math.min(3, value));
@@ -65,18 +77,11 @@
       if (ticket !== revision || fatal) return;
       // Stylesheets (including @imports) must load before the shell is shown.
       try {
-        await Promise.all([...document.querySelectorAll('link[rel="stylesheet"]')].map(link =>
-          (link.hasAttribute("data-manager-style") ? link.dataset.managerStyleReady === "true" : link.sheet) ? Promise.resolve() : new Promise((resolve, reject) => {
-            link.addEventListener("load", resolve, { once: true });
-            link.addEventListener("error", reject, { once: true });
-          })));
-        // Reflow the concealed shell so its actual fonts are requested before
-        // observing FontFaceSet.ready (display:none would defer those requests).
-        document.querySelector(".platform-shell")?.getBoundingClientRect();
-        await document.fonts?.ready;
+        await whenStyled(document.querySelector(".platform-shell"));
         if (ticket !== revision || fatal) return;
         if (!failed) { step = 4; paint(); }
-        await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        await new Promise(resolve => document.hidden ? setTimeout(resolve, 0)
+          : requestAnimationFrame(() => requestAnimationFrame(resolve)));
         if (ticket !== revision || fatal) return;
         clearTimeout(timer);
         const shell = document.querySelector(".platform-shell");

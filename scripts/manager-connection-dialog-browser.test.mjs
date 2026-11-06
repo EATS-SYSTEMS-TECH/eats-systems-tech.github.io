@@ -16,7 +16,8 @@ test("connection popup has real stage progress, honest timing, keyboard cancella
           }),
         );
         await page.goto(origin + "/connection-popup-test");
-        await page.clock.install();
+        await page.clock.install({ time: new Date("2026-11-07T00:00:00Z") });
+        await page.clock.pauseAt(new Date("2026-11-07T00:00:01Z"));
         await page.evaluate(async (language) => {
           const { createManagerConnectionDialog } =
             await import("/js/manager-connection-dialog.js");
@@ -46,7 +47,7 @@ test("connection popup has real stage progress, honest timing, keyboard cancella
         );
         assert.equal(await bar.getAttribute("aria-valuenow"), "0");
         assert.doesNotMatch(await dialog.innerText(), /פעם בדקה|once a minute|90/);
-        assert.match(await dialog.innerText(), language === "he" ? /עד כשתי דקות/ : /up to about two minutes/);
+        assert.match(await dialog.innerText(), language === "he" ? /עד שתי דקות/ : /up to two minutes/);
         assert.equal(
           await dialog.locator(".manager-connection-dialog__timing").isVisible(),
           false,
@@ -92,6 +93,11 @@ test("connection popup has real stage progress, honest timing, keyboard cancella
             path: `${process.env.MANAGER_POPUP_SCREENSHOTS}/popup-waiting-${language}-${width}.png`,
           });
         await page.clock.fastForward(61000);
+        assert.equal(await dialog.getAttribute("data-extended"), "false");
+        assert.equal(await dialog.locator(".manager-connection-dialog__timing").isVisible(), false);
+        await page.clock.fastForward(58999);
+        assert.equal(await dialog.getAttribute("data-extended"), "false");
+        await page.clock.runFor(1);
         assert.equal(
           await bar.getAttribute("aria-valuenow"),
           "0",

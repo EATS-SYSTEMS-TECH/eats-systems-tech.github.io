@@ -56,7 +56,7 @@ async function selectOrigin(page, scope) {
   if (!scope) return;
   await page.locator(".manager-organization-picker-trigger").click();
   await page.locator('[data-organization-id="org-b"]').click();
-  await page.getByRole("heading", { name: "Harbor Residence", exact: true }).waitFor();
+  await page.locator('.manager-organization-picker-trigger[title="Harbor Residence"]').waitFor();
 }
 
 test("system entry shows connection progress while the entire management GUI waits for initial data", async t => {
@@ -87,7 +87,7 @@ async function dismiss(page, method, language, state) {
 }
 async function assertOrigin(page, scope, language) {
   if (scope) {
-    await page.getByRole("heading", { name: "Harbor Residence", exact: true }).waitFor();
+    await page.locator('.manager-organization-picker-trigger[title="Harbor Residence"]').waitFor();
     assert.equal(await page.locator(".manager-organization-picker-trigger").getAttribute("title"), "Harbor Residence");
   } else await page.getByRole("heading", { name: language === "he" ? "המערכות שלי" : "My systems", exact: true }).waitFor();
   await page.waitForFunction(() => document.querySelector(".manager-view")?.getAttribute("aria-busy") === "false");
@@ -141,16 +141,53 @@ test("explicit retry preserves the organization origin and a background error re
   await page.waitForFunction(() => window.connections.length === 2);
   assert.equal(await page.locator(".manager-workspace-head").count(), 1, "retry stays in the connection workflow");
   await page.evaluate(() => window.setBackground(true));
-  assert.equal(await page.locator(".manager-connection-dialog").count(), 0);
+  assert.equal(await page.locator('.manager-connection-dialog[data-state="pending"]').count(), 1);
+  await page.evaluate(() => window.connections[1].fail());
   await page.evaluate(() => window.setBackground(false));
   await page.locator('.manager-connection-dialog[data-state="error"]').waitFor();
   await dismiss(page, "footer", "en", "error");
   await assertOrigin(page, "org-b", "en");
-  await page.evaluate(() => window.connections[1].finish());
-  await page.waitForFunction(() => window.connections[1].session === null);
+  await page.evaluate(() => window.connections[1].onState("active"));
+  assert.equal(await page.evaluate(() => window.connections[1].session), null);
   await assertOrigin(page, "org-b", "en");
   assert.equal(await page.evaluate(() => window.connections.length), 2);
   assert.deepEqual(await page.evaluate(() => window.commands), []);
+});
+
+test("legacy discovery refresh keeps one 150-second budget and warns only at 120 seconds", async t => {
+  const { origin, browser } = await startSite(t);
+  const page = await fixture(t, browser, origin);
+  await page.clock.install({ time: new Date("2026-11-07T00:00:00Z") });
+  await page.clock.pauseAt(new Date("2026-11-07T00:00:01Z"));
+  await page.getByRole("button", { name: "Open workspace", exact: true }).click();
+  await page.waitForFunction(() => typeof window.connections[0]?.fail === "function");
+  const popup = page.locator(".manager-connection-dialog");
+  await page.clock.fastForward(90000);
+  await page.evaluate(() => {
+    window.connections[0].demandTiming = { timingVersion: 1 };
+    window.connections[0].onState("NO_COMMUNICATION");
+    window.connections[0].fail();
+  });
+  await page.waitForFunction(() => window.connections.length === 2);
+  assert.equal(await popup.getAttribute("data-state"), "pending");
+  assert.equal(await popup.getAttribute("data-extended"), "false");
+  assert.match(await popup.innerText(), /90s elapsed/);
+  assert.equal(await page.evaluate(() => window.connections[0].closed), true);
+  await page.clock.fastForward(29999);
+  assert.equal(await popup.getAttribute("data-extended"), "false");
+  await page.clock.runFor(1);
+  assert.equal(await popup.getAttribute("data-extended"), "true");
+  assert.match(await popup.innerText(), /longer than usual/);
+  await page.clock.fastForward(29999);
+  assert.equal(await popup.getAttribute("data-state"), "pending");
+  await page.clock.runFor(1);
+  assert.equal(await popup.getAttribute("data-state"), "error");
+  assert.match(await popup.innerText(), /two and a half minutes/);
+  assert.equal(await page.evaluate(() => window.connections[1].closed), true);
+  await page.evaluate(() => window.connections[1].finish());
+  assert.equal(await popup.getAttribute("data-state"), "error", "late success cannot reopen the workspace");
+  assert.equal(await page.evaluate(() => window.connections.length), 2);
+  assert.deepEqual(await page.evaluate(() => window.commands), [], "discovery retries never send gate commands");
 });
 
 test("successful completion timer and footer, X or Escape keep the active workspace", async t => {
@@ -181,7 +218,7 @@ test("sample failure and cancellation restore My systems or the second sample or
     const page = await fixture(t, browser, origin);
     let sockets = 0; page.on("websocket", () => sockets++);
     await page.locator(".manager-examples > summary").click();
-    await page.locator('[data-example-system="example-manager-group"]').locator("button.primary").click();
+    await page.locator('[data-example-system="example-manager-group"]:visible').locator("button.primary").click();
     await page.locator("#manager-content .manager-facts").waitFor();
     await page.locator(".manager-connection-dialog").waitFor({ state: "detached" });
     if (organization) {
@@ -199,11 +236,11 @@ test("sample failure and cancellation restore My systems or the second sample or
       await page.locator("[data-example-organization]").nth(1).getByRole("button").click();
     } else await page.locator(".manager-examples > summary").click();
     await page.evaluate(() => { window.pauseExamples = true; });
-    await page.locator('[data-example-system="example-manager-group"]').locator("button.primary").click();
+    await page.locator('[data-example-system="example-manager-group"]:visible').locator("button.primary").click();
     await page.waitForFunction(() => window.releaseExample);
     if (!organization) { await page.evaluate(() => window.rejectExample()); await page.locator('.manager-connection-dialog[data-state="error"]').waitFor(); }
     await dismiss(page, organization ? "escape" : "footer", "en", organization ? "pending" : "error");
-    if (organization) await page.getByRole("heading", { name: "Example WIFIGATE Office", exact: true }).waitFor();
+    if (organization) await page.locator('.manager-organization-picker-trigger[title="Example WIFIGATE Office"]').waitFor();
     else await page.getByRole("heading", { name: "My systems", exact: true }).waitFor();
     assert.equal(await page.locator(".manager-workspace-head,#manager-content,.manager-connection-dialog,.manager-connection-recovery").count(), 0);
     if (organization) { await page.evaluate(() => window.releaseExample()); await page.waitForTimeout(10); }

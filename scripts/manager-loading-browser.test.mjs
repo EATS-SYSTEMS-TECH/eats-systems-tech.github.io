@@ -6,6 +6,33 @@ import { startSite, scenario } from "./platform-test-fixtures.mjs";
 const hold = () => { let release; const promise = new Promise(resolve => { release = resolve; }); return { promise, release }; };
 const profile = { role: "user", personalRole: "user", account: { id: "fixture-account" }, organizations: [] };
 
+test("the first connection popup waits for cold styles instead of opening unstyled above the page loader", async t => {
+  const { origin, browser } = await startSite(t);
+  const { page, context } = await scenario(browser, { manager: "active" });
+  const css = hold(), requested = hold(), bundle = hold();
+  t.after(() => { css.release(); bundle.release(); return context.close(); });
+  await context.route("**/js/platform-dashboard.bundle.js?*", async route => { await bundle.promise; await route.continue(); });
+  await context.route("**/css/manager-dashboard.css?*", async route => { requested.release(); await css.promise; await route.continue(); });
+  await page.goto(origin + "/dashboard/manager/?lang=he", { waitUntil: "commit" });
+  await requested.promise;
+  await page.locator("#manager-loading").waitFor({ state: "visible" });
+  await page.evaluate(async () => {
+    const { createManagerConnectionDialog } = await import("/js/manager-connection-dialog.js");
+    window.earlyPopup = createManagerConnectionDialog({ language: "he" });
+    window.earlyPopup.open({ systemName: "Fixture gate", gate: "synthetic" });
+  });
+  const popup = page.locator(".manager-connection-dialog");
+  assert.equal(await popup.isVisible(), false, "no first-use unstyled modal above the progress bar");
+  assert.equal(await popup.evaluate(node => node.matches(":modal")), false);
+  assert.equal(await page.locator("#manager-loading").isVisible(), true);
+  css.release();
+  await popup.waitFor({ state: "visible" });
+  assert.equal(await popup.evaluate(node => node.matches(":modal")), true);
+  assert.equal(await page.evaluate(() => document.fonts.status), "loaded");
+  assert.notEqual(await popup.evaluate(node => getComputedStyle(node).borderRadius), "0px");
+  await page.evaluate(() => window.earlyPopup.close());
+});
+
 test("Manager stays behind a first-paint progress bar until its bundle, identity and initial data are ready", async t => {
   const { origin, browser } = await startSite(t);
   for (const language of ["he", "en"]) for (const width of [390, 1440]) await t.test(`${language} ${width}px`, async t => {

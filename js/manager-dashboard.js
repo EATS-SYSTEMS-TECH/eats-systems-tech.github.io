@@ -33,6 +33,7 @@ import { managerExampleSystems } from "./manager-example-data.js";
 import { createManagerSystemCard } from "./manager-system-card.js";
 import { createManagerActivity } from "./manager-activity.js";
 import { createManagerConnectionDialog } from "./manager-connection-dialog.js";
+import { createManagerConnectionNotifications } from "./manager-connection-notifications.js";
 import { managerConnectionError } from "./manager-connection-errors.js";
 import { managerRequestedTiming } from "./manager-connection-timing.js";
 import { createManagerControlHeader, createManagerGatePicker, setManagerControlState, updateManagerSelectedGate, renderManagerControlOverview } from "./manager-control-workspace.js";
@@ -154,8 +155,10 @@ export function createManagerDashboard({
   shell.append(nav, main);
   root.replaceChildren(shell);
   const activity = createManagerActivity({ main, view, language });
+  const connectionNotifications = createManagerConnectionNotifications({ language });
   const connectionDialog = createManagerConnectionDialog({
     language,
+    notifications: connectionNotifications,
     onClose: () => activity.pause(false),
   });
   const gateActionDialog = createManagerGateActionDialog({ language });
@@ -406,6 +409,7 @@ export function createManagerDashboard({
     return f;
   }
   function stop() {
+    connectionNotifications.cancel();
     clearTimeout(workspaceConnectionTimer);
     interruptedConnection = undefined;
     gateActionDialog.cancel();
@@ -1693,7 +1697,7 @@ export function createManagerDashboard({
     await ensureRecent();
     if (epoch === generation) await openGate(system.systemIds[0]);
   }
-  async function openGate(gate, preserveView = false, attempt = 0, deadline = Date.now() + 120000) {
+  async function openGate(gate, preserveView = false, attempt = 0, deadline = Date.now() + 150000) {
     clearTimeout(workspaceConnectionTimer);
     interruptedConnection = undefined;
     gateActionDialog.cancel();
@@ -1715,7 +1719,7 @@ export function createManagerDashboard({
       connectionDialog.open({
         systemName: currentSystem.name,
         gate,
-        startedAt: workspaceReady ? Date.now() : deadline - 120000,
+        startedAt: workspaceReady ? Date.now() : deadline - 150000,
         simulation: examples.isSystem(currentSystem),
         returnFocus,
         onCancel: returnFromConnection,
@@ -1727,10 +1731,15 @@ export function createManagerDashboard({
       activity.pause(true);
     };
     let failureShown = false, workspaceReady = false, candidate;
+    if (examples.isSystem(currentSystem)) connectionNotifications.cancel();
+    else connectionNotifications.start(currentSystem.name);
+    const canRefreshDiscovery = () => attempt === 0 && !workspaceReady &&
+      !candidate?.session && candidate?.demandTiming?.timingVersion === 1 && Date.now() < deadline;
     const failConnection = (error) => {
       if (closed || epoch !== generation || failureShown) return;
       clearTimeout(workspaceConnectionTimer);
       failureShown = true;
+      connectionNotifications.finish(false);
       connectionFailureVersion++;
       currentRows = [];
       currentData = undefined;
@@ -1799,6 +1808,10 @@ export function createManagerDashboard({
         if (closed || epoch !== generation || failureShown) return;
         if (["waiting", "connecting", "active"].includes(state)) {
           showConnectionState(state);
+        } else if (state === "NO_COMMUNICATION" && canRefreshDiscovery()) {
+          // open() rejects after disposing the expired legacy demand; its
+          // catch below starts the replacement within the original budget.
+          return;
         } else if (state === "SECURE_SESSION_EXPIRED") {
           const readOnly =
             /^(ADMIN_(GET_|LIST_).+|ADMIN_PING|ADMIN_RF_GET)$/.test(
@@ -1896,6 +1909,7 @@ export function createManagerDashboard({
       if (!preserveView) await showTab("overview");
       else if (!existingContent?.childElementCount) await showTab(currentTab);
       else if (currentTab === "auto") await showTab("auto");
+      await window.wifigateManagerLoading?.whenStyled(view);
       if (Date.now() >= deadline) expireAttempt();
       if (
         epoch === generation &&
@@ -1904,6 +1918,7 @@ export function createManagerDashboard({
         candidate.session
       ) {
         workspaceReady = true;
+        connectionNotifications.finish(true);
         clearTimeout(workspaceConnectionTimer);
         view.dataset.workspaceReady = "true";
         connectionDialog.complete();
@@ -1919,7 +1934,8 @@ export function createManagerDashboard({
         // A gate that dropped after its poll (for example while rebooting)
         // leaves the relay without an answer before any secure session or
         // command exists. One fresh demand recovers it; later failures show.
-        if (attempt === 0 && !closed && !candidate.session && error?.message === "RESPONSE_TIMEOUT") {
+        if (!closed && ((attempt === 0 && !candidate.session && error?.message === "RESPONSE_TIMEOUT") ||
+            (error?.message === "NO_COMMUNICATION" && canRefreshDiscovery()))) {
           void task(() => openGate(gate, preserveView, 1, deadline));
           return;
         }
@@ -2767,7 +2783,7 @@ export function createManagerDashboard({
     activity.pause(true);
     connectionDialog.fail(managerConnectionError("CONNECTION_PAUSED", language, true));
   }
-  const visibilityChanged = () => document.hidden ? pauseForBackground() : resumeFromBackground();
+  const visibilityChanged = () => { if (!document.hidden) resumeFromBackground(); };
   document.addEventListener("visibilitychange", visibilityChanged);
   window.addEventListener("pagehide", pauseForBackground);
   window.addEventListener("pageshow", resumeFromBackground);
@@ -2791,6 +2807,7 @@ export function createManagerDashboard({
     },
     close() {
       closed = true;
+      connectionNotifications.destroy();
       document.removeEventListener("visibilitychange", visibilityChanged);
       window.removeEventListener("pagehide", pauseForBackground);
       window.removeEventListener("pageshow", resumeFromBackground);

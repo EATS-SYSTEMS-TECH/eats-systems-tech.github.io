@@ -1,3 +1,5 @@
+const CONNECTION_SOFT_WAIT_MS = 120000;
+
 const el = (tag, text, className) => {
   const node = document.createElement(tag);
   if (text !== undefined) node.textContent = text;
@@ -10,6 +12,7 @@ export function createManagerConnectionDialog({
   language = "en",
   host = document.body,
   onClose = () => {},
+  notifications,
 } = {}) {
   const t = (he, en) => (language === "he" ? he : en);
   const stages = [
@@ -89,8 +92,7 @@ export function createManagerConnectionDialog({
     if (!dialog) return;
     const seconds = Math.max(0, Math.floor((Date.now() - startedAt) / 1000));
     elapsed.textContent = t(`חלפו ${seconds} שניות`, `${seconds}s elapsed`);
-    const softWaitMs = options.softWaitMs === 120000 ? 120000 : 60000;
-    const extended = Date.now() - startedAt >= softWaitMs;
+    const extended = Date.now() - startedAt >= CONNECTION_SOFT_WAIT_MS;
     const message = options.simulation
       ? t(
           "סימולציה בלבד. אין חיבור למערכת פיזית.",
@@ -114,8 +116,7 @@ export function createManagerConnectionDialog({
   function scheduleSoftWait() {
     clearTimeout(softWaitTimer);
     if (!dialog || dialog.dataset.state !== "pending") return;
-    const softWaitMs = options.softWaitMs === 120000 ? 120000 : 60000;
-    softWaitTimer = setTimeout(tick, Math.max(0, startedAt + softWaitMs - Date.now()));
+    softWaitTimer = setTimeout(tick, Math.max(0, startedAt + CONNECTION_SOFT_WAIT_MS - Date.now()));
   }
   function setStage(stage) {
     if (!dialog || dialog.dataset.state !== "pending") return;
@@ -148,6 +149,14 @@ export function createManagerConnectionDialog({
       ? Math.min(Date.now(), value.startedAt) : Date.now();
     step = 0;
     dialog = el("dialog", undefined, "manager-connection-dialog");
+    const prepare = window.wifigateManagerLoading?.whenStyled;
+    if (prepare) {
+      // Native modals sit above the page loader. Lay this one out concealed
+      // and non-modal until cold styles and its actual fonts have loaded.
+      dialog.style.setProperty("visibility", "hidden", "important");
+      dialog.inert = true;
+      dialog.open = true;
+    }
     dialog.dir = language === "he" ? "rtl" : "ltr";
     dialog.dataset.state = "pending";
     dialog.setAttribute("aria-labelledby", "manager-connection-dialog-title");
@@ -249,6 +258,28 @@ export function createManagerConnectionDialog({
     });
     actions.append(retry, dismiss);
     body.append(live, meta, progress, steps, timing);
+    if (!value.simulation && notifications) {
+      const hint = el("p", t(
+        "אפשר לעבור לטאב אחר. נעדכן בכותרת הטאב כשהחיבור יסתיים.",
+        "You can use another tab. This tab’s title will show when the connection finishes.",
+      ), "manager-supporting-copy");
+      body.append(hint);
+      if (notifications.canEnable) {
+        const notify = el("button", t("קבלו התראת מערכת", "Notify me"), "manager-button");
+        notify.type = "button";
+        notify.addEventListener("click", async () => {
+          notify.disabled = true;
+          const enabled = await notifications.enable();
+          if (!notify.isConnected) return;
+          notify.hidden = true;
+          if (enabled) hint.textContent = t(
+            "כשאתם בטאב אחר, נציג גם התראת מערכת בסיום החיבור.",
+            "When you are in another tab, we will also send a system notification when the connection finishes.",
+          );
+        });
+        actions.prepend(notify);
+      }
+    }
     dialog.append(top, body, actions);
     dialog.addEventListener("cancel", (event) => {
       event.preventDefault();
@@ -274,8 +305,17 @@ export function createManagerConnectionDialog({
     tick();
     timer = setInterval(tick, 1000);
     scheduleSoftWait();
-    dialog.showModal();
-    dismiss.focus();
+    const surface = dialog;
+    const reveal = () => {
+      if (dialog !== surface || !surface.isConnected) return;
+      surface.removeAttribute("open");
+      surface.inert = false;
+      surface.style.removeProperty("visibility");
+      surface.showModal();
+      (surface.dataset.state === "error" ? retry : dismiss).focus();
+    };
+    if (prepare) void prepare(surface).then(reveal).catch(() => window.wifigateManagerLoading.fail());
+    else reveal();
   }
   function complete() {
     if (!dialog || dialog.dataset.state !== "pending") return;
@@ -363,9 +403,8 @@ export function createManagerConnectionDialog({
   }
   return {
     open,
-    setTiming(value) {
+    setTiming() {
       if (!dialog || dialog.dataset.state !== "pending") return;
-      options.softWaitMs = value?.timingVersion === 2 && value?.softWaitMs === 120000 ? 120000 : 60000;
       tick();
       scheduleSoftWait();
     },
