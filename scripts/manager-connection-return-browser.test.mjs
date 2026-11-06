@@ -39,7 +39,12 @@ async function fixture(t, browser, origin, { language = "en", width = 1440 } = {
         this.fail = () => reject(new Error("NO_COMMUNICATION"));
       }); }
       close() { this.closed = true; this.session = null; return Promise.resolve(); }
-      async command(command) { window.commands.push(command); return { data: { systemId: "synthetic-gate", users: 1, admins: 1, state: "OK" } }; }
+      async command(command) {
+        window.commands.push(command);
+        if (window.pauseOverview && command === "ADMIN_GET_OVERVIEW")
+          await new Promise(resolve => { window.releaseOverview = resolve; });
+        return { data: { systemId: "synthetic-gate", users: 1, admins: 1, state: "OK" } };
+      }
     }
     window.dashboard = createManagerDashboard({ root: document.querySelector("#root"), user: { uid: "owner" }, language, api, Connection });
     await window.dashboard.ready;
@@ -53,6 +58,27 @@ async function selectOrigin(page, scope) {
   await page.locator('[data-organization-id="org-b"]').click();
   await page.getByRole("heading", { name: "Harbor Residence", exact: true }).waitFor();
 }
+
+test("system entry shows connection progress while the entire management GUI waits for initial data", async t => {
+  const { origin, browser } = await startSite(t);
+  for (const width of [390, 1440]) await t.test(`${width}px`, async t => {
+    const page = await fixture(t, browser, origin, { language: "he", width });
+    await page.evaluate(() => { window.pauseOverview = true; });
+    await page.getByRole("button", { name: "פתיחת סביבת ניהול", exact: true }).click();
+    await page.waitForFunction(() => typeof window.connections[0]?.finish === "function");
+    assert.equal(await page.locator(".manager-connection-dialog").isVisible(), true);
+    assert.equal(await page.locator(".manager-control-workspace").isVisible(), false, "no partial system header while connecting");
+    await page.evaluate(() => window.connections[0].finish());
+    await page.waitForFunction(() => typeof window.releaseOverview === "function");
+    assert.equal(await page.locator(".manager-connection-dialog").isVisible(), true);
+    assert.equal(await page.locator(".manager-workspace-hero").isVisible(), false, "no management GUI until the initial overview is ready");
+    await page.evaluate(() => window.releaseOverview());
+    await page.locator(".manager-connection-dialog").waitFor({ state: "detached" });
+    assert.equal(await page.locator(".manager-workspace-hero").isVisible(), true);
+    assert.equal(await page.locator(".manager-control-workspace").getAttribute("data-workspace-ready"), "true");
+    assert.ok((await page.evaluate(() => window.commands)).every(command => /^ADMIN_(GET_|LIST_)/.test(command)));
+  });
+});
 async function dismiss(page, method, language, state) {
   const popup = page.locator(".manager-connection-dialog");
   if (method === "escape") await page.keyboard.press("Escape");

@@ -6,7 +6,10 @@ import { startSite } from "./platform-test-fixtures.mjs";
 test("Manager authenticator keeps site styling, RTL, keyboard focus and formatted-code paste", async (t) => {
   const { origin, browser } = await startSite(t);
   const source = (await readFile(new URL("../dashboard/manager/index.html", import.meta.url), "utf8"))
-    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "");
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "")
+    // This isolated MFA fixture removes the startup script, so apply its
+    // production styles directly instead of waiting for that script's loader.
+    .replace(/ media="print" data-manager-style/g, "");
   for (const language of ["en", "he"]) for (const width of [390, 1440]) {
     await t.test(`${language} ${width}px`, async () => {
       const page = await browser.newPage({ viewport: { width, height: 740 } });

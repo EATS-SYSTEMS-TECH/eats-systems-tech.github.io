@@ -959,6 +959,7 @@ body:is([data-product="host"], [data-product="pay"], [data-product="manager"])
 .manager-control-workspace #manager-content { min-height:360px; }
 .manager-control-workspace #manager-content[data-loading="true"] { visibility:hidden; }
 .manager-control-workspace[data-workspace-ready="false"] > :is(#manager-tabs,#manager-content,.manager-gate-picker) { visibility:hidden; }
+body[data-product="manager"] .manager-control-workspace[data-workspace-ready="false"] { visibility:hidden; }
 .manager-control-workspace #manager-tabs { min-height:44px; }
 .manager-control-workspace #manager-tabs .is-loading::before { display:none; }
 

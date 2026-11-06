@@ -46,6 +46,7 @@ const $ = (selector) => document.querySelector(selector);
 const language = pageLanguage();
 const copy = platformText(language);
 const selectedProduct = document.body.dataset.product;
+const managerLoading = selectedProduct === "manager" ? window.wifigateManagerLoading : undefined;
 const managementPage = document.body.dataset.platformView === "management";
 const payManagementPage = selectedProduct === "pay" && document.body.dataset.payView === "management";
 // WIFIGATE Reservations: a Founder page of its own, apart from the
@@ -463,6 +464,8 @@ async function refresh() {
   clearPrivate();
   const requestGeneration = generation;
   const user = currentUser;
+  const loadingTicket = managerLoading?.begin();
+  let revealWorkspace = true, loadingFailed = false;
   $("#platform-status").textContent = copy.checking;
   $("#platform-status").dataset.state = "loading";
   $("#platform-retry").hidden = true;
@@ -470,9 +473,11 @@ async function refresh() {
     const result = await getPlatformProfile(user);
     if (requestGeneration !== generation) return;
     identity = parsePlatformIdentity(result, user.uid);
+    managerLoading?.advance(loadingTicket, 2);
     renderFounderTag(identity.platformRole, identity.user.emailVerified);
     const refusal = signInRefusal(identity);
     if (refusal) {
+      revealWorkspace = false;
       void session?.endSession(refusal);
       return;
     }
@@ -521,6 +526,7 @@ async function refresh() {
       });
     } else if (selectedProduct) {
       if (!canOpenProduct(identity, selectedProduct)) {
+        revealWorkspace = false;
         location.replace(
           language === "he" ? "/dashboard/?lang=he" : "/dashboard/",
         );
@@ -572,6 +578,9 @@ async function refresh() {
             }
           },
         });
+        await managerDashboard.ready;
+        if (requestGeneration !== generation) return;
+        managerLoading?.advance(loadingTicket, 3);
       }
     } else {
       renderProducts();
@@ -582,6 +591,7 @@ async function refresh() {
     }
   } catch (error) {
     if (requestGeneration !== generation) return;
+    loadingFailed = true;
     $("#platform-status").dataset.state = "error";
     $("#platform-status").textContent =
       error.status === 401
@@ -589,6 +599,9 @@ async function refresh() {
         : copy.accessUnavailable;
     $("#platform-retry").hidden = false;
     $("#platform-retry").textContent = copy.retry;
+  } finally {
+    if (revealWorkspace && requestGeneration === generation)
+      await managerLoading?.finish(loadingTicket, loadingFailed);
   }
 }
 
@@ -1182,4 +1195,5 @@ initializeSiteAuth((user) => {
   void refresh();
 }).catch((error) => {
   $("#platform-status").textContent = authErrorMessage(error, language);
+  managerLoading?.fail();
 });

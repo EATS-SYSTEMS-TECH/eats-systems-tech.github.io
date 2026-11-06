@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" data-manager-loading>
   <head>
     <meta charset="utf-8" />
     <script src="/js/legacy-platform-redirect.js?v=20261029orgmanage1" data-product="manager" data-manager-view="management"></script>
@@ -7,16 +7,40 @@
     <meta name="robots" content="noindex,nofollow" />
     <meta name="referrer" content="no-referrer" />
     <title>Manager | WIFIGATE</title>
+    <style>
+      html[data-manager-loading] { overflow: hidden; }
+      html[data-manager-loading] .platform-shell { visibility: hidden !important; }
+      #manager-loading { box-sizing: border-box; position: fixed; inset: 0; z-index: 10000; display: grid; place-content: center; justify-items: center; gap: 22px; padding: 28px; background: #f5f7fa; color: #172b45; font: 16px/1.7 system-ui, sans-serif; text-align: center; }
+      #manager-loading[hidden] { display: none !important; }
+      #manager-loading strong { font-size: clamp(23px, 5vw, 32px); letter-spacing: .03em; }
+      #manager-loading p { max-width: 38ch; margin: 0; }
+      #manager-loading progress { display: block; width: min(280px, 75vw); height: 8px; overflow: hidden; border: 0; border-radius: 8px; background: #e2e8f0; accent-color: #ec731c; }
+      #manager-loading progress::-webkit-progress-bar { background: #e2e8f0; border-radius: 8px; }
+      #manager-loading progress::-webkit-progress-value { background: #ec731c; border-radius: 8px; }
+      #manager-loading progress::-moz-progress-bar { background: #ec731c; border-radius: 8px; }
+      #manager-loading a { color: #785139; font-size: 13px; text-underline-offset: 4px; }
+      #manager-loading [lang="he"] { display: none; }
+      html[lang="he"] #manager-loading [lang="en"] { display: none; }
+      html[lang="he"] #manager-loading [lang="he"] { display: inline; }
+    </style>
+    <script src="/js/manager-loading.js?v=20261106ready1"></script>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" />
-    <link rel="stylesheet" href="/css/platform.css?v=20261106platformux1" />
-    <link rel="stylesheet" href="/css/manager-dashboard.css?v=20261106simulation1" />
-    <link rel="stylesheet" href="/css/dashboard-header.css?v=20261105verified1" />
-    <link rel="stylesheet" href="/css/role-guide.css?v=20261106platformux1" />
-    <script type="module" src="/js/platform-dashboard.bundle.js?v=20261106simulation1"></script>
+    <link rel="stylesheet" href="/css/host-portal.css?v=20261014w3" media="print" data-manager-style />
+    <link rel="stylesheet" href="/css/platform.css?v=20261106platformux1" media="print" data-manager-style />
+    <link rel="stylesheet" href="/css/manager-dashboard.css?v=20261106ready1" media="print" data-manager-style />
+    <link rel="stylesheet" href="/css/dashboard-header.css?v=20261105verified1" media="print" data-manager-style />
+    <link rel="stylesheet" href="/css/role-guide.css?v=20261106platformux1" media="print" data-manager-style />
+    <script type="module" src="/js/platform-dashboard.bundle.js?v=20261106ready1"></script>
   </head>
   <body data-product="manager" class="platform-page">
-    <main class="platform-shell">
+    <section id="manager-loading" role="status" aria-live="polite" aria-atomic="true">
+      <strong dir="ltr">WIFIGATE Manager</strong>
+      <p id="manager-loading-label"><span lang="en">Loading your workspace…</span><span lang="he">טוענים את סביבת הניהול…</span></p>
+      <progress id="manager-loading-progress" max="4" value="0" aria-label="Workspace loading progress"></progress>
+      <a href=""><span lang="en">Reload page</span><span lang="he">טעינה מחדש</span></a>
+    </section>
+    <noscript><style>#manager-loading { display: none; }</style><p lang="he" dir="rtl">יש להפעיל JavaScript כדי להיכנס ל־WIFIGATE Manager.</p><p lang="en">Enable JavaScript to open WIFIGATE Manager.</p></noscript>
+    <main class="platform-shell" inert aria-busy="true">
       <header class="platform-header">
         <a class="brand" href="/dashboard/manager/" aria-label="WIFIGATE home" data-copy-label="home"
           ><img
