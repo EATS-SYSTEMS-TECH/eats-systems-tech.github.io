@@ -993,7 +993,6 @@ export function createManagerDashboard({
     organizationDetail = null;
     renderNav();
     view.replaceChildren();
-    say(t("טוען מערכות…", "Loading systems…"));
     const epoch = generation;
     const rows =
       !operatorAccount && !scope && !profile.account

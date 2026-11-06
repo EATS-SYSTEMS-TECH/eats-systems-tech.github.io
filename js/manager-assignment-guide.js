@@ -1,5 +1,7 @@
 import { managerUiIcon } from "./manager-ui-icons.js";
 import { createManagerDialog } from "./manager-dialog.js";
+import { attachManagerGuideNavigation } from "./manager-guide-navigation.js";
+import { managerGuideImageContent } from "./manager-guide-image.js";
 
 let guideId = 0;
 
@@ -51,43 +53,18 @@ export function createManagerAssignmentGuide(language = "en") {
     hint.prepend(managerUiIcon("search"));
     zoom.append(image, hint);
     zoom.addEventListener("click", () => {
-      const frame = node("div", null, "manager-setup-image-frame");
-      const preview = node("img", null, "manager-setup-image-preview");
-      preview.src = image.src; preview.alt = title;
-      frame.append(preview);
-      void images.info({ title, content: frame });
+      void images.info({ title, className: "manager-guide-image-dialog", content: managerGuideImageContent(image, language) });
     });
     figure.append(zoom, node("figcaption", title)); gallery.append(figure);
     step.append(copy, gallery); steps.append(step);
   }
-  const controls = node("div", null, "manager-setup-controls");
-  const previous = node("button", null, "manager-setup-previous");
-  const next = node("button", null, "manager-setup-next");
-  previous.type = next.type = "button";
-  previous.setAttribute("aria-controls", id); next.setAttribute("aria-controls", id);
-  previous.append(managerUiIcon("previous"), node("span", t("הקודם", "Previous")));
-  const nextText = node("span", t("הבא", "Next"));
-  next.append(nextText, managerUiIcon("next"));
-  const progress = node("span", null, "manager-setup-progress");
-  progress.setAttribute("role", "status"); progress.setAttribute("aria-live", "polite");
-  let selected = 0;
-  function select(index, scroll = false) {
-    selected = Math.max(0, Math.min(items.length - 1, index));
-    [...steps.children].forEach((step, i) => { step.hidden = i !== selected; });
-    steps.children[selected].querySelector("img").loading = "eager";
-    previous.disabled = selected === 0;
-    if (previous.disabled && document.activeElement === previous) next.focus({ preventScroll: true });
-    nextText.textContent = selected === items.length - 1 ? t("סיום", "Finish") : t("הבא", "Next");
-    progress.textContent = t(`שלב ${selected + 1} מתוך ${items.length}`, `Step ${selected + 1} of ${items.length}`);
-    if (scroll) steps.children[selected].scrollIntoView({ block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-  }
-  previous.addEventListener("click", () => select(selected - 1, true));
-  next.addEventListener("click", () => {
-    if (selected === items.length - 1) { guide.open = false; select(0); summary.focus(); }
-    else select(selected + 1, true);
+  attachManagerGuideNavigation({ guide, steps, language,
+    labels: [t("המערכת", "System"), t("התפריט", "Menu"), t("הארגון", "Organization"), t("אישור", "Confirm"), t("סיום", "Finish")],
+    completionText: t(
+      "עברתם את כל חמשת שלבי ההדרכה. לאחר ביצוע השיוך, בדקו שהמערכת מופיעה במערכות הארגון והגדירו Wi-Fi מחדש ליד השער.",
+      "You've reached the end of all five guide steps. After assigning the system, check Organization systems and set Wi-Fi again near the gate.",
+    ),
   });
-  controls.append(previous, progress, next);
-  guide.append(steps, controls, node("p", t("צילומי מסך מתוך מסכי האתר, עם מערכת וארגון לדוגמה. מעבר בין השלבים אינו מבצע שיוך. לחצו על תמונה כדי להגדיל אותה.", "Screenshots of the website using an example system and organization. Moving between steps does not assign a system. Select an image to enlarge it."), "manager-setup-screenshot-note"), node("p", t("שימו לב: חברות בארגון בלבד אינה מעניקה בעלות על מערכת. השיוך כפוף להרשאות ולאישור הקיים באתר.", "Organization membership alone does not grant system ownership. Assignment remains subject to the existing permissions and confirmation."), "manager-assignment-note"));
-  select(0);
+  guide.append( node("p", t("צילומי מסך מתוך מסכי האתר, עם מערכת וארגון לדוגמה. מעבר בין השלבים אינו מבצע שיוך. לחצו על תמונה כדי להגדיל אותה.", "Screenshots of the website using an example system and organization. Moving between steps does not assign a system. Select an image to enlarge it."), "manager-setup-screenshot-note"), node("p", t("שימו לב: חברות בארגון בלבד אינה מעניקה בעלות על מערכת. השיוך כפוף להרשאות ולאישור הקיים באתר.", "Organization membership alone does not grant system ownership. Assignment remains subject to the existing permissions and confirmation."), "manager-assignment-note"));
   return guide;
 }

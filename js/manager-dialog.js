@@ -15,6 +15,7 @@ export function createManagerDialog({
       const previous = document.activeElement;
       const dialog = document.createElement("dialog");
       dialog.className = "manager-confirm-dialog";
+      if (options.className) dialog.classList.add(options.className);
       dialog.dir = he ? "rtl" : "ltr";
       dialog.setAttribute("aria-labelledby", "manager-confirm-title");
       dialog.setAttribute("aria-describedby", "manager-confirm-message");

@@ -1,3 +1,5 @@
+import { managerUiIcon } from "./manager-ui-icons.js";
+
 // Visible, request-scoped feedback. Resetting a view fences late completions.
 export function createManagerActivity({ main, view, language }) {
   const he = language === "he";
@@ -10,15 +12,25 @@ export function createManagerActivity({ main, view, language }) {
   spinner.className = "manager-spinner";
   spinner.setAttribute("aria-hidden", "true");
   const label = document.createElement("span");
+  label.className = "manager-activity-label";
   const bar = document.createElement("progress");
   bar.className = "manager-activity-bar";
-  progress.append(spinner, label, bar);
+  const emblem = document.createElement("span");
+  emblem.className = "manager-page-loading-emblem";
+  emblem.setAttribute("aria-hidden", "true");
+  emblem.append(managerUiIcon("systems"));
+  const title = document.createElement("strong");
+  title.className = "manager-page-loading-title";
+  title.textContent = he ? "מכינים את התצוגה שלכם" : "Getting your workspace ready";
+  const hint = document.createElement("span");
+  hint.className = "manager-page-loading-hint";
+  hint.textContent = he ? "רק רגע, הנתונים יופיעו מיד בסיום הטעינה." : "Just a moment. Your data will appear as soon as it's ready.";
+  const track = document.createElement("span");
+  track.className = "manager-page-loading-track";
+  track.setAttribute("aria-hidden", "true");
+  track.append(document.createElement("i"));
+  progress.append(emblem, title, spinner, label, track, bar, hint);
   main.prepend(progress);
-  const placeholder = document.createElement("div");
-  placeholder.className = "manager-loading-panel";
-  placeholder.setAttribute("aria-hidden", "true");
-  for (let i = 0; i < 3; i++)
-    placeholder.append(document.createElement("span"));
   const pending = new Map();
   let revision = 0,
     paused = false;
@@ -30,16 +42,18 @@ export function createManagerActivity({ main, view, language }) {
       else target.prepend(progress);
     }
     progress.classList.toggle("is-workspace", Boolean(workspace));
+    progress.classList.toggle("is-page", !workspace);
     progress.hidden = paused || pending.size === 0;
+    const pageLoading = !workspace && !progress.hidden;
+    main.classList.toggle("is-page-loading", pageLoading);
+    view.inert = pageLoading;
     view.setAttribute("aria-busy", String(pending.size > 0));
     if (pending.size && !paused) {
       const text = [...pending.values()].at(-1);
       if (label.textContent !== text) label.textContent = text;
       label.title = text;
       bar.setAttribute("aria-label", text);
-      if (!workspace && !view.contains(placeholder)) view.append(placeholder);
-      if (workspace) placeholder.remove();
-    } else placeholder.remove();
+    }
   }
   return {
     pause(value) {

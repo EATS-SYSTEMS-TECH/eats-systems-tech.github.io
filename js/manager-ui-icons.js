@@ -21,6 +21,7 @@ export function managerUiIcon(kind) {
     app:"M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2ZM10 18h4M9 6h6M9 10h6",
     export:"M12 16V3m-5 5 5-5 5 5M4 15v5h16v-5",
     refresh:"M20 7V3l-4 4M4 17v4l4-4M20 7a9 9 0 0 0-15-2M4 17a9 9 0 0 0 15 2",
+    check:"m5 12 4 4L19 6",
     founder:"m2 5 5 4 5-6 5 6 5-4-3 12H5ZM5 21h14",
     admin:"m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6ZM8 12l3 3 5-6",
     viewer:"M2 12s4-8 10-8 10 8 10 8-4 8-10 8S2 12 2 12Zm7 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0",

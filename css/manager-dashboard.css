@@ -1857,3 +1857,90 @@ body[data-product] .manager-organization-systems-help > .dashboard-examples { ma
 .manager-assignment-step-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px; }
 .manager-assignment-step-heading .manager-setup-step-icon { margin-bottom:0; }
 .manager-assignment-step-number { display:inline-flex; padding:5px 9px; border:1px solid #dbe5f1; border-radius:6px; background:#fff; color:#69839f; font-size:11px; line-height:1.6; }
+
+/* A five-step journey; completion describes the guide, not a device export. */
+.manager-setup-journey { margin-block:24px 18px; padding:20px 22px; border:1px solid #dce6f2; border-radius:14px; background:#f8fbff; scroll-margin-top:24px; }
+.manager-setup-journey-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; }
+.manager-setup-journey-heading strong { color:#365574; font-size:13px; }
+.manager-setup-journey-heading > span { color:#70869f; font-size:11px; }
+.manager-setup-meter { display:block; width:100%; height:7px; overflow:hidden; border:0; border-radius:9px; background:#e4edf6; accent-color:#427caf; }
+.manager-setup-meter::-webkit-progress-bar { background:#e4edf6; border-radius:9px; }
+.manager-setup-meter::-webkit-progress-value { background:linear-gradient(90deg,#749dc4,#3b75a8); border-radius:9px; transition:width .3s ease; }
+.manager-setup-meter::-moz-progress-bar { background:#427caf; border-radius:9px; }
+.manager-setup-markers { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; margin-top:17px; }
+.manager-shell .manager-setup-markers button { display:grid; justify-items:center; gap:7px; min-width:0; min-height:62px; margin:0; padding:3px; border:0; border-radius:8px; background:transparent; color:#8697aa; font:inherit; cursor:pointer; }
+.manager-setup-marker-number { position:relative; display:grid; place-items:center; width:29px; height:29px; border:1px solid #d9e4f0; border-radius:50%; color:#8197af; background:#fff; font-size:12px; font-weight:600; }
+.manager-setup-marker-label { font-size:11px; line-height:1.5; }
+.manager-shell .manager-setup-markers button[aria-current="step"] { color:#2a5d8c; font-weight:700; }
+.manager-setup-markers button[aria-current="step"] .manager-setup-marker-number { color:#fff; background:#356c9c; border-color:#356c9c; box-shadow:0 0 0 4px #dceaf8; }
+.manager-setup-markers button.is-complete .manager-setup-marker-number { color:transparent; background:#e8f5ee; border-color:#c4e2d2; }
+.manager-setup-markers button.is-complete .manager-setup-marker-number::after { position:absolute; content:"✓"; color:#348464; font-size:15px; }
+.manager-shell .manager-setup-markers button:hover { background:#eaf2fc; color:#345e87; }
+.manager-setup-markers button:focus-visible { outline:3px solid #84aed877; outline-offset:2px; }
+.manager-setup-wizard[data-guide-complete="true"] .manager-setup-meter { accent-color:#348464; }
+.manager-setup-wizard[data-guide-complete="true"] .manager-setup-meter::-webkit-progress-value { background:#348464; }
+.manager-setup-wizard[data-guide-complete="true"] .manager-setup-meter::-moz-progress-bar { background:#348464; }
+.manager-setup-guide .manager-setup-steps > .manager-setup-step-desktop { grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr); }
+.manager-setup-screenshot-desktop { flex:1 1 680px; }
+.manager-setup-wizard .manager-setup-steps > li::before { display:none; }
+.manager-setup-completion { grid-column:1/-1; display:flex; align-items:center; gap:18px; width:100%; box-sizing:border-box; padding:20px; border:1px solid #cce7d8; border-radius:13px; background:linear-gradient(110deg,#eefaf3,#fafffc); }
+.manager-setup-guide .manager-setup-completion strong { display:block; color:#28694f; font-size:18px; line-height:1.6; }
+.manager-setup-guide .manager-setup-completion p { margin:5px 0 0; color:#618574; font-size:12px; line-height:1.8; }
+.manager-setup-celebration { position:relative; display:grid; place-items:center; flex:0 0 52px; width:52px; height:52px; border:1px solid #b9dfcc; border-radius:50%; background:#daf2e5; color:#2d8760; }
+.manager-setup-celebration > svg { width:29px; height:29px; stroke-width:2.3; }
+.manager-setup-celebration > i { display:none; position:absolute; inset:50% auto auto 50%; width:4px; height:7px; border-radius:2px; background:#75b89a; opacity:0; }
+.manager-shell .manager-setup-wizard .manager-setup-next { background:#284f75; border-color:#284f75; border-radius:9px; color:#fff; }
+.manager-shell .manager-setup-wizard[data-guide-complete="true"] .manager-setup-next { background:#2c7758; border-color:#2c7758; }
+.manager-setup-wizard[data-guide-complete="true"] .manager-setup-next svg { transform:none; }
+@media(max-width:850px) {
+ .manager-setup-guide .manager-setup-steps > .manager-setup-step-desktop { grid-template-columns:minmax(0,1fr); }
+ .manager-setup-journey { padding:16px; }
+ .manager-setup-journey-heading { flex-wrap:wrap; gap:6px; }
+ .manager-setup-completion { padding:16px; gap:13px; }
+ .manager-setup-guide .manager-setup-completion strong { font-size:16px; }
+}
+@media(max-width:600px) { .manager-setup-completion { flex-direction:column; text-align:center; align-items:center; gap:12px; } }
+@media(prefers-reduced-motion:no-preference) {
+ .manager-setup-wizard[data-guide-complete="true"] .manager-setup-celebration > svg { animation:manager-guide-check .55s cubic-bezier(.2,.8,.3,1) both; }
+ .manager-setup-wizard[data-guide-complete="true"] .manager-setup-celebration > i { display:block; animation:manager-guide-spark .8s .1s ease-out both; }
+ @keyframes manager-guide-check { from { transform:scale(.25); opacity:0; } to { transform:scale(1); opacity:1; } }
+ @keyframes manager-guide-spark { 0% { opacity:0; transform:rotate(calc(var(--spark)*45deg)) translateY(-18px) scale(.5); } 25% { opacity:1; } 100% { opacity:0; transform:rotate(calc(var(--spark)*45deg)) translateY(-48px) scale(.8); } }
+}
+
+/* Page loads use one stable surface; device activity stays in its header. */
+.manager-main { position:relative; min-height:440px; }
+.manager-main.is-page-loading > .manager-view { visibility:hidden; min-height:440px; }
+.manager-main.is-page-loading > :is(.manager-status,.manager-retry,.manager-platform-header) { visibility:hidden; }
+.manager-shell .manager-progress.is-page { position:absolute; inset:0; z-index:5; display:flex; flex-direction:column; justify-content:flex-start; align-items:center; gap:16px; box-sizing:border-box; min-height:440px; margin:0; padding:clamp(54px,8vw,90px) 24px 40px; border:1px solid #e0e8f2; border-radius:16px; background:linear-gradient(150deg,#f7faff,#fff 75%); color:#365675; text-align:center; }
+.manager-page-loading-emblem { display:grid; place-items:center; width:64px; height:64px; margin-bottom:7px; border:1px solid #dce8f5; border-radius:18px; background:#edf4fe; color:#658db8; box-shadow:0 7px 24px #355c8510; }
+.manager-page-loading-emblem svg { width:29px; height:29px; }
+.manager-page-loading-title { font-size:20px; line-height:1.5; font-weight:650; }
+.manager-page-loading-hint { max-width:36ch; color:#8394a9; font-size:12px; line-height:1.9; }
+.manager-progress.is-page > .manager-activity-label { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.manager-progress.is-page .manager-spinner { display:none; }
+.manager-progress.is-page .manager-activity-bar { position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip-path:inset(50%); }
+.manager-page-loading-track { position:relative; display:block; flex:none; width:min(260px,80%); height:6px; margin:5px 0 1px; overflow:hidden; border-radius:8px; background:#e3ecf5; }
+.manager-page-loading-track i { position:absolute; top:0; bottom:0; left:-40%; width:40%; border-radius:8px; background:linear-gradient(90deg,#8bb3d9,#457eb1); animation:manager-page-loading-slide 1.6s ease-in-out infinite; }
+@keyframes manager-page-loading-slide { to { transform:translateX(350%); } }
+.manager-progress.is-workspace > :is(.manager-page-loading-emblem,.manager-page-loading-title,.manager-page-loading-hint,.manager-page-loading-track) { display:none; }
+@media(max-width:600px) { .manager-page-loading-title { font-size:18px; } .manager-shell .manager-progress.is-page { padding-inline:20px; } }
+@media(prefers-reduced-motion:reduce) { .manager-progress .manager-spinner { animation:none; } .manager-page-loading-track i { animation:none; left:30%; } .manager-setup-meter::-webkit-progress-value { transition:none; } }
+
+/* Screenshot previews use the viewport instead of the small confirmation size. */
+dialog.manager-confirm-dialog.manager-guide-image-dialog { display:flex; flex-direction:column; width:min(1440px,calc(100vw - 28px)); max-width:none; height:min(960px,calc(100dvh - 28px)); max-height:calc(100dvh - 28px); padding:22px; overflow:hidden; border-radius:15px; }
+dialog.manager-guide-image-dialog:not([open]) { display:none; }
+.manager-guide-image-dialog > h2 { flex:none; margin:0 0 16px; padding-inline-end:8px; font-size:17px; line-height:1.6; }
+.manager-guide-image-dialog > p:empty { display:none; }
+.manager-guide-image-content { display:flex; flex:1; flex-direction:column; gap:14px; min-height:0; }
+.manager-guide-image-tools { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; flex:none; }
+.manager-guide-image-tools > span { color:#7b8da2; font-size:12px; line-height:1.7; }
+.manager-guide-image-tools .manager-button { min-height:40px; font-size:12px; }
+.manager-guide-image-content .manager-setup-image-frame { flex:1; min-height:0; max-height:none; overflow:auto; border:1px solid #dce5ef; border-radius:10px; background:#eef2f7; }
+.manager-guide-image-content .manager-setup-image-preview { display:block; width:100%; height:100%; max-width:100%; max-height:100%; object-fit:contain; margin:0; }
+.manager-guide-image-content .is-zoomed .manager-setup-image-preview { width:auto; height:auto; max-width:none; max-height:none; }
+.manager-guide-image-dialog > .manager-confirm-actions { flex:none; margin-top:16px; }
+@media(max-width:600px) {
+ dialog.manager-confirm-dialog.manager-guide-image-dialog { width:calc(100vw - 12px); height:calc(100dvh - 12px); max-height:calc(100dvh - 12px); padding:16px; border-radius:12px; }
+ .manager-guide-image-dialog > h2 { font-size:15px; }
+ .manager-guide-image-tools > span { font-size:11px; }
+}

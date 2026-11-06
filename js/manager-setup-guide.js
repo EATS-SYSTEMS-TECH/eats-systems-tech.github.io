@@ -1,5 +1,7 @@
 import { managerUiIcon } from "./manager-ui-icons.js";
 import { createManagerDialog } from "./manager-dialog.js";
+import { attachManagerGuideNavigation } from "./manager-guide-navigation.js";
+import { managerGuideImageContent } from "./manager-guide-image.js";
 const node = (tag, text, className) => {
   const element = document.createElement(tag);
   if (text) element.textContent = text;
@@ -19,7 +21,7 @@ export function createManagerSetupGuide(language = "en") {
     [["app-business", t("ב־WIFIGATE For Business בחרו Manager", "In WIFIGATE For Business, choose Manager")]],
     [["app-export", t("זהו את כרטיס המערכת ואת גישת ה־Admin המקומית", "Find your system card and its local Admin access")]],
     [["app-export", t("כפתור Export נמצא בתחתית כרטיס המערכת", "Export is at the bottom of the system card")]],
-    [],
+    [["desktop-my-systems", t("המערכת שלכם מופיעה ב״המערכות שלי״ — צילום מסך מהמחשב עם נתוני דוגמה", "Your system appears in My systems — a desktop screenshot with example data")]],
   ];
   const guide = node(
     "details",
@@ -97,23 +99,22 @@ export function createManagerSetupGuide(language = "en") {
         enlarge.setAttribute("aria-label", t("הגדלת צילום המסך: ", "Enlarge screenshot: ") + caption);
         enlarge.setAttribute("aria-haspopup", "dialog");
         const image = node("img");
-        image.src = `/assets/img/manager/setup/${asset}.webp?v=20261105generic1`;
+        const desktop = asset === "desktop-my-systems";
+        image.src = desktop
+          ? `/assets/img/manager/setup/${asset}-${language === "he" ? "he" : "en"}.jpg?v=20261106setup1`
+          : `/assets/img/manager/setup/${asset}.webp?v=20261105generic1`;
         image.alt = caption;
         image.loading = "lazy";
         image.decoding = "async";
-        image.width = asset === "app-export" ? 1312 : 852;
-        image.height = asset === "app-export" ? 1199 : 1846;
+        image.width = desktop ? 1280 : asset === "app-export" ? 1312 : 852;
+        image.height = desktop ? 720 : asset === "app-export" ? 1199 : 1846;
         if (asset === "app-export") figure.classList.add("manager-setup-screenshot-card");
+        if (desktop) { figure.classList.add("manager-setup-screenshot-desktop"); step.classList.add("manager-setup-step-desktop"); }
         const zoom = node("span", t("לחצו להגדלה", "Select to enlarge"), "manager-setup-screenshot-zoom");
         zoom.prepend(managerUiIcon("search"));
         enlarge.append(image, zoom);
         enlarge.addEventListener("click", () => {
-          const frame = node("div", undefined, "manager-setup-image-frame");
-          const preview = node("img", undefined, "manager-setup-image-preview");
-          preview.src = image.src;
-          preview.alt = caption;
-          frame.append(preview);
-          void imageDialog.info({ title: caption, content: frame });
+          void imageDialog.info({ title: caption, className: "manager-guide-image-dialog", content: managerGuideImageContent(image, language) });
         });
         figure.append(enlarge, node("figcaption", caption));
         gallery.append(figure);
@@ -126,36 +127,17 @@ export function createManagerSetupGuide(language = "en") {
     }
     steps.append(step);
   }
-  guide.append(steps);
-  const controls = node("div", undefined, "manager-setup-controls");
-  const previous = node("button", undefined, "manager-setup-previous");
-  const next = node("button", undefined, "manager-setup-next");
-  previous.type = next.type = "button";
-  previous.append(managerUiIcon("previous"), node("span", t("הקודם", "Previous")));
-  next.append(node("span", t("הבא", "Next")), managerUiIcon("next"));
-  const progress = node("span", undefined, "manager-setup-progress");
-  progress.setAttribute("aria-live", "polite");
-  let selected = 0;
-  const select = (index, scroll = false) => {
-    selected = index;
-    [...steps.children].forEach((step, i) => { step.hidden = i !== index; });
-    previous.disabled = index === 0;
-    next.disabled = index === steps.children.length - 1;
-    progress.textContent = t(`שלב ${index + 1} מתוך ${steps.children.length}`, `Step ${index + 1} of ${steps.children.length}`);
-    if (scroll) steps.children[index].scrollIntoView({
-      block: "start",
-      behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-    });
-  };
-  previous.addEventListener("click", () => select(selected - 1, true));
-  next.addEventListener("click", () => select(selected + 1, true));
-  controls.append(previous, progress, next);
-  guide.append(controls);
+  attachManagerGuideNavigation({ guide, steps, language,
+    labels: [t("החשבון", "Account"), "Manager", t("המערכת", "System"), "Export", t("האתר", "Website")],
+    completionText: t(
+      "עברתם את חמשת שלבי ההדרכה. כעת רעננו את ״המערכות שלי״ ובדקו שהמערכת שייצאתם מופיעה ברשימה.",
+      "You've reached the end of the five-step guide. Now refresh My systems and check that your exported system appears in the list.",
+    ),
+  });
   guide.append(node("p", t(
-    "צילומי המסך מהאפליקציה הותאמו להמחשה: פרטי הפרופיל והמערכת הם פרטי דוגמה, ללא דגלים. לחצו על תמונה כדי להגדיל אותה.",
-    "App screenshots have been adapted for illustration, using example profile and system details without flags. Select an image to enlarge it.",
+    "צילומי המסך מהאפליקציה ומהאתר מציגים פרטי דוגמה להמחשה. צילומי האפליקציה הותאמו ללא דגלים. לחצו על תמונה כדי להגדיל אותה. השלמת המדריך אינה מבצעת ייצוא של מערכת.",
+    "App and website screenshots use example details for illustration. App screenshots were adapted without flags. Select an image to enlarge it. Completing the guide does not export a system.",
   ), "manager-setup-screenshot-note"));
-  select(0);
   const update = node("p", undefined, "manager-setup-update");
   update.append(
     node("strong", t("כבר ייצאתם את המערכת?", "Already exported your system?")),

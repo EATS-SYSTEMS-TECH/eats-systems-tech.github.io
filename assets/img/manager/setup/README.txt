@@ -23,3 +23,12 @@ app-home.webp      Home screen and profile entry point.
 app-profile.webp   Account check and WIFIGATE For Business entry point.
 app-business.webp  Host/Manager chooser, as shown by the captured app.
 app-export.webp    Local Admin system card with Export and Sync controls.
+
+Desktop final step — 2026-11-06
+
+desktop-my-systems-he.jpg and desktop-my-systems-en.jpg (1280 x 720)
+were captured from the actual website Manager components with the production
+styles, in an isolated local browser fixture. My systems contains WIFIGATE
+Gate using in-memory example data. No production account, export, assignment,
+physical device command or subscription change was used. These screenshots
+illustrate where an exported system appears; they do not prove an export.
