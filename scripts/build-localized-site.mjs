@@ -278,7 +278,9 @@ async function buildGuestInvitesPages(homeData) {
   return entries;
 }
 
-// Shop preview remains noindex and never contributes a sitemap entry.
+// The catalog is public even while checkout is unavailable. Only English and
+// Hebrew have translated catalog content; other UI locales use its English
+// canonical instead of competing with identical product descriptions.
 async function buildShopPages(homeData) {
   const source = await readHtmlTemplate(template('shop'));
   for (const { code: locale } of homeData.localeOptions) for (const key of SHOP_PAGE_KEYS) {
@@ -288,13 +290,15 @@ async function buildShopPages(homeData) {
     $('.shop-main, .shop-product-detail').attr({ lang: content.contentLang, dir: direction });
     setBodyDirection($, locale); rewriteStaticAssets($, locale, key);
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); updateAccessibilityMarkup($, getBundle(homeData.accessibilityCopy, locale), locale); rewriteFooterLegalLinks($, locale);
-    const url = buildPageUrl(locale, key), crumbs = [{ name: locale === 'he' ? 'בית' : 'Home', url: buildPageUrl(locale) }, { name: locale === 'he' ? 'חנות' : 'Shop', url: buildPageUrl(locale, 'shop') }];
+    const contentLocale = content.contentLang, url = buildPageUrl(contentLocale, key);
+    const crumbs = [{ name: contentLocale === 'he' ? 'בית' : 'Home', url: buildPageUrl(contentLocale) }, { name: contentLocale === 'he' ? 'חנות' : 'Shop', url: buildPageUrl(contentLocale, 'shop') }];
     if (content.product) crumbs.push({ name: content.product.name, url });
     const image = content.product?.image ? { url: siteOrigin + content.product.image, width: 1254, height: 1254, alt: content.product.name } : undefined;
-    setPageMeta($, { url, title: content.title, description: content.description, locale, robots: 'noindex, follow', alternates: alternatesFor(homeData.localeOptions, key), image,
+    setPageMeta($, { url, title: content.title, description: content.description, locale: contentLocale, robots: 'index, follow', alternates: alternatesFor(homeData.localeOptions.filter(item => ['en', 'he'].includes(item.code)), key), image,
       graph: [webPageNode({ url, title: content.title, description: content.description, locale: content.contentLang, image, breadcrumbId: url + '#breadcrumb' }), breadcrumbNode(url, crumbs)] });
     await writeOutputFile(buildOutputFilePath(locale, key), serialize($, homeData, locale, key));
   }
+  return ['en', 'he'].flatMap(locale => SHOP_PAGE_KEYS.map(key => ({ loc: buildPageUrl(locale, key), changefreq: 'monthly', priority: '0.6' })));
 }
 
 // Validate the entire input collection before the first generated document write.
@@ -307,7 +311,7 @@ async function main() {
   if (problems.length) throw Error(`Niche page content validation failed (${problems.length} problems):\n  ${problems.join('\n  ')}`);
   const entries = await buildHomePages(homeData);
   if (process.argv.includes('--scene-media-only')) { await buildNichePages(homeData); return; }
-  await buildShopPages(homeData);
+  entries.push(...await buildShopPages(homeData));
   entries.push(...await buildLegalPages(homeData, legalCollections), ...await buildNichePages(homeData), ...await buildLandingPages(homeData), ...await buildAutoOpenPages(homeData));
   const englishNiches = () => NICHE_DEFINITIONS.map(niche => ({ key: niche.key, content: getNichePageContent(defaultLocale).niches[niche.key] }));
   const notFound = () => buildNotFoundPage({ niches: englishNiches(), pageUrl: buildPageUrl, cookieConsentVersion: COOKIE_CONSENT_VERSION });

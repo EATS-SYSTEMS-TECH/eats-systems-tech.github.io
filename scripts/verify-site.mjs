@@ -19,6 +19,7 @@ import { NICHE_DEFINITIONS } from "./niche-pages/index.mjs";
 import { LANDING_PAGES } from "./landing-pages/index.mjs";
 import { AUTO_OPEN_PAGE_KEY } from "./auto-open-page.mjs";
 import { HOST_PAGE_KEY } from "./host-marketing-page.mjs";
+import { SHOP_PAGE_KEYS } from "./shop-pages.mjs";
 
 const repoRoot = process.cwd();
 const siteOrigin = "https://wifigate.io";
@@ -533,6 +534,9 @@ async function main() {
     for (const locale of localeOptions) expectedUrls.add(`${siteOrigin}${pagePath(locale, pageKey)}`);
   }
   expectedUrls.add(`${siteOrigin}/contact-us/`);
+  for (const locale of ['en', 'he']) {
+    for (const pageKey of SHOP_PAGE_KEYS) expectedUrls.add(`${siteOrigin}${pagePath(locale, pageKey)}`);
+  }
   for (const url of sitemapUrls) {
     if (!expectedUrls.has(url)) problems.push(`sitemap.xml: unexpected URL ${url}`);
   }

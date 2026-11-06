@@ -94,17 +94,19 @@ for (const { code: locale } of SITE_LANGUAGES) {
       assert.ok($("title").text().trim());
       assert.ok($("meta[name='description']").attr("content")?.trim());
       assert.equal($("link[rel='canonical']").length, 1);
-      assert.equal($("link[rel='canonical']").attr("href"), url);
+      assert.equal($("link[rel='canonical']").attr("href"), origin + routePath(contentLang, product),
+        "Untranslated catalog variants consolidate into the actual English content");
       for (const name of ["robots", "googlebot"]) {
         const tokens = $("meta[name='" + name + "']").attr("content")?.split(/\s*,\s*/).sort();
-        assert.deepEqual(tokens, ["follow", "noindex"], "Catalog preview has explicit noindex, follow metadata");
+        assert.deepEqual(tokens, ["follow", "index"], "The public catalog is eligible for search while checkout stays disabled");
       }
       const alternates = $("link[rel='alternate'][hreflang]");
-      assert.equal(alternates.length, SITE_LANGUAGES.length + 1);
+      assert.equal(alternates.length, 3, "Only translated English and Hebrew content participates in hreflang");
       assert.equal(new Set(alternates.map((_, element) => $(element).attr("hreflang")).get()).size, alternates.length);
       assert.equal($("link[hreflang='x-default']").attr("href"), origin + routePath("en", product));
+      for (const code of ['en', 'he']) assert.equal($("link[hreflang='" + code + "']").attr("href"), origin + routePath(code, product));
       for (const { code } of SITE_LANGUAGES) {
-        assert.equal($("link[hreflang='" + hrefLang(code) + "']").attr("href"), origin + routePath(code, product));
+        if (!['en', 'he'].includes(code)) assert.equal($("link[hreflang='" + hrefLang(code) + "']").length, 0);
         const languageLink = $(".language-selector__option[data-lang='" + code + "']");
         assert.equal(languageLink.length, 1);
         assert.equal(languageLink.attr("href"), routePath(code, product), "Changing language preserves the selected product");
@@ -157,3 +159,11 @@ for (const { code: locale } of SITE_LANGUAGES) {
     });
   }
 }
+
+test('sitemap includes all six translated catalog pages and no English fallback duplicates', async () => {
+  const xml = await readFile(path.join(root, 'sitemap.xml'), 'utf8');
+  const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+  for (const {code} of SITE_LANGUAGES) for (const product of routes) {
+    assert.equal(urls.includes(origin + routePath(code, product)), ['en', 'he'].includes(code));
+  }
+});

@@ -76,6 +76,7 @@ The My profile product cards show personal totals instead of subscription on/off
 - Rebuild all localized pages with `npm run build:locales`.
 - Regenerate optimized niche images (hero/card webp + og jpg) with `npm run build:images` after replacing a source PNG in `assets/wifigate_niche_pages/`.
 - Verify the generated site (SEO metadata, links, redirects, sitemap) with `node scripts/verify-site.mjs`.
+- The public shop and product pages are indexable in English and Hebrew even while products are out of stock. Catalog pages in other UI languages use the English canonical and advertise only the two translated content versions in hreflang. The sitemap includes those six canonical catalog URLs; sign-in, dashboards and app invitation utilities remain outside search.
 - Run local hero playback, accessibility presentation and niche rendering/link contracts with `npm run test:presentation`. These use deterministic fixtures and headless Chrome; they do not deploy or validate physical mobile devices.
 
 ## WiFiGate Invitation Redirect Contract
