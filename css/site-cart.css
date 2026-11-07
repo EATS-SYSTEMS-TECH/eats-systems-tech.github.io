@@ -28,14 +28,16 @@ body.site-cart-open { overflow: hidden; }
 .site-cart__body { flex: 1; min-height: 0; overflow-y: auto; padding: 1.5rem; }
 .site-cart__empty { margin: 2.5rem 0; color: #637080; text-align: center; }
 .site-cart__items { display: grid; gap: 1.25rem; }
-.site-cart__item { display: grid; grid-template-columns: 5rem minmax(0,1fr); gap: 1rem; padding-bottom: 1.25rem; border-bottom: 1px solid #e4e6e9; }
+.site-cart__item { display: grid; grid-template-columns: 5rem minmax(0,1fr) auto; align-items: start; gap: 1rem; padding-bottom: 1.25rem; border-bottom: 1px solid #e4e6e9; }
 .site-cart__image { width: 5rem; height: 5rem; border-radius: 7px; object-fit: cover; background: #f2f4f6; }
 .site-cart__image-placeholder { display: grid; place-items: center; width: 5rem; height: 5rem; border-radius: 7px; background: #f2f4f6; color: #69809e; font-weight: 800; }
 .site-cart__item-name { margin: 0 0 .3rem; font-size: .95rem; font-weight: 600; overflow-wrap: anywhere; }
 .site-cart__quantity { display: inline-flex; align-items: center; border: 1px solid #dfe3e8; border-radius: 5px; }
 .site-cart__quantity button { width: 2rem; height: 2rem; border: 0; background: transparent; color: #344054; cursor: pointer; }
 .site-cart__quantity output { min-width: 1.6rem; text-align: center; font-size: .9rem; }
-.site-cart__remove { margin-inline-start: .65rem; border: 0; background: transparent; color: #475467; text-decoration: underline; cursor: pointer; }
+.site-cart__remove { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: 0; border-radius: 50%; background: transparent; color: #667085; cursor: pointer; }
+.site-cart__remove:hover { background: #fef3f2; color: #b42318; }
+.site-cart__remove:focus-visible { outline: 2px solid #1265e8; outline-offset: 2px; }
 .site-cart__footer { padding: 1.25rem 1.5rem 1.5rem; border-top: 1px solid #e4e6e9; }
 .site-cart__subtotal { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; font-size: .9rem; }
 .site-cart__checkout { display: block; width: 100%; min-height: 3rem; border: 0; border-radius: 5px; background: #151515; color: #fff; font-weight: 700; }
@@ -50,3 +52,10 @@ html[dir="rtl"] .site-cart__drawer:not([lang="en"]) .site-cart__item-name { text
 .site-cart__checkout:not(:disabled) { cursor: pointer; }
 .site-cart__checkout:not(:disabled):hover { background: #2a2f33; }
 .site-cart__subtotal strong { color: #344054; font-weight: 600; }
+.site-cart__tile { display: flex; flex-direction: column; justify-content: center; gap: .1rem; width: 5rem; height: 5rem; padding: .55rem .6rem; border-radius: 7px; background: #1f2937; color: #fff; line-height: 1.1; text-align: left; }
+.site-cart__tile small { font-size: .55rem; font-weight: 700; letter-spacing: .14em; opacity: .8; }
+.site-cart__tile b { font-size: .95rem; font-weight: 800; letter-spacing: -.01em; }
+.site-cart__tile--wifigate-host { background: #ea580c; }
+.site-cart__tile--wifigate-manager { background: #0b63ff; }
+.site-cart__tile--wifigate-roller-shutter { background: #eef0f2; color: #1f2937; }
+.site-cart__tile--wifigate-roller-shutter b { font-size: .78rem; }

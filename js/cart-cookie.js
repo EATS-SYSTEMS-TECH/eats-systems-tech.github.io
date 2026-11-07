@@ -9,9 +9,9 @@ const MAX_AGE_SECONDS = 30 * 24 * 60 * 60;
 // to the team with the reservation.
 export const CART_CATALOG = Object.freeze([
   { id: "wifigate", name: "WIFIGATE", kind: "controller", max: 50, image: "/assets/img/shop/wifigate-enclosure.webp" },
-  { id: "wifigate-roller-shutter", name: "WIFIGATE Roller shutter", kind: "controller", max: 50, image: null },
-  { id: "wifigate-host", name: "WIFIGATE Host", kind: "subscription", max: 1, image: "/assets/wifigate_niche_pages/hotels-airbnb-v2-app-card.webp" },
-  { id: "wifigate-manager", name: "WIFIGATE Manager", kind: "subscription", max: 1, image: "/assets/wifigate_niche_pages/residential-buildings-app-card.webp" },
+  { id: "wifigate-roller-shutter", name: "WIFIGATE Roller shutter", kind: "controller", max: 50, image: null, tile: "Roller shutter" },
+  { id: "wifigate-host", name: "WIFIGATE Host", kind: "subscription", max: 1, image: null, tile: "Host" },
+  { id: "wifigate-manager", name: "WIFIGATE Manager", kind: "subscription", max: 1, image: null, tile: "Manager" },
 ]);
 
 export const cartProduct = (id) => CART_CATALOG.find((product) => product.id === id);

@@ -46,17 +46,25 @@ try {
     await context.addCookies([{ name: "wifigate_cart", value: encodeURIComponent("wifigate:999,unknown:3,wifigate-manager:4"), url: origin }]);
     await page.reload({ waitUntil: "networkidle" });
     assert.deepEqual(await page.evaluate(() => window.WIFIGATE_CART.getItems()), [{ productId: "wifigate", quantity: 50 }, { productId: "wifigate-manager", quantity: 1 }]);
+    await page.evaluate(() => { window.__opened = []; window.open = (url, target, features) => { window.__opened.push({ url, target, features }); return null; }; });
     await page.locator(".site-cart__trigger").click();
+    assert.equal(await page.locator(".site-cart__checkout").textContent(), locale === "he" ? "שליחה ב־WhatsApp להרשמה לרשימת ההמתנה" : "Send on WhatsApp to join the waitlist");
+    assert.equal(await page.locator(".site-cart__item[data-product='wifigate-manager'] .site-cart__tile").textContent(), "WIFIGATEManager", "Subscriptions show a wordmark tile");
     await page.locator(".site-cart__checkout").click();
-    await page.waitForURL(origin + (locale === "he" ? "/he/#get-in-touch" : "/#get-in-touch"), { waitUntil: "commit" });
-    assert.equal(await page.locator(".site-cart__checkout").textContent(), locale === "he" ? "צרו קשר כדי להירשם לרשימת ההמתנה" : "Contact us to join the waitlist");
-    await page.goto(origin + path, { waitUntil: "networkidle" });
+    const [opened] = await page.evaluate(() => window.__opened);
+    const whatsapp = new URL(opened.url);
+    assert.equal(whatsapp.origin + whatsapp.pathname, "https://wa.me/972553092029", "The cart goes to the WIFIGATE WhatsApp Business number");
+    assert.equal(opened.target, "_blank");
+    assert.deepEqual(whatsapp.searchParams.get("text").split("\n"), locale === "he"
+      ? ["שלום WIFIGATE, אשמח להירשם לרשימת ההמתנה עבור:", "• WIFIGATE × 50 יח׳", "• WIFIGATE Manager (מנוי)"]
+      : ["Hi WIFIGATE, I'd like to join the waitlist for:", "• WIFIGATE × 50 units", "• WIFIGATE Manager (Subscription)"]);
+    await page.keyboard.press("Escape");
     await page.evaluate(() => window.WIFIGATE_CART.clear());
     assert.equal(await page.locator(".site-cart__count").isHidden(), true);
     assert.equal((await context.cookies()).some(({ name }) => name === "wifigate_cart"), false, "Emptying the cart removes its cookie");
     await context.close();
   }
-  console.log("Shop cart: English/Hebrew drawer, shop buttons, cookie persistence and limits, quantity, removal, empty state and waitlist contact verified.");
+  console.log("Shop cart: English/Hebrew drawer, shop buttons, cookie persistence and limits, quantity, removal, empty state and WhatsApp waitlist message verified.");
 } finally {
   await browser.close();
 }
