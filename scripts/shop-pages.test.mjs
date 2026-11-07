@@ -42,6 +42,14 @@ function assertUnavailable($, main, locale, product) {
     assert.equal($(element).attr("onclick"), undefined);
   });
   assert.equal(main.find(".shop-business-card").length, product ? 0 : 2, "Only the catalog presents the business subscriptions");
+  const carts = main.find("[data-shop-cart]");
+  assert.equal(carts.length, product ? 0 : 4, "Each catalog product and subscription offers details and add to cart");
+  carts.each((_, element) => {
+    assert.equal(element.tagName, "button");
+    assert.equal($(element).attr("type"), "button", "Add to cart cannot submit a form");
+    assert.equal($(element).closest(".shop-actions").find(".shop-actions__details[href]").length, 1, "Add to cart sits beside a details link");
+  });
+  assert.equal(main.find("img[src*='assets/img/manager/']").length, 0, "Manager is illustrated without a dashboard screenshot");
   assert.equal(main.find(".shop-related, .shop-contact").length, 0, "The removed related and contact sections stay removed");
   assert.equal(main.find("form, [data-add-to-cart], [data-buy-now]").length, 0,
     "The unavailable catalog exposes no order submission or purchase handler");
@@ -142,7 +150,7 @@ for (const { code: locale } of SITE_LANGUAGES) {
       const roller = main.find("[data-product='wifigate-roller-shutter']");
       if (roller.length) {
         assert.equal(roller.find(".shop-no-image").length, 1);
-        assert.equal(roller.find("img, picture, svg, canvas, video, object, embed").length, 0,
+        assert.equal(roller.find(".shop-product-card__media, .shop-product-gallery").find("img, picture, svg, canvas, video, object, embed").length, 0,
           "Roller shutter has no product image or illustrative substitute");
       }
       if (product !== "wifigate-roller-shutter") {
