@@ -1,7 +1,7 @@
 // The public shop is a static catalog. Availability is explicit and checkout is
 // disabled; the separately authenticated reservations workflow has its own rules.
 export const SHOP_PRODUCTS = [
-  { id: "wifigate", name: "WIFIGATE", image: "/assets/img/shop/wifigate-enclosure.webp" },
+  { id: "wifigate", name: "WIFIGATE", image: "/assets/img/wifigate-product-v3.webp", width: 1545, height: 905, secondary: "/assets/img/shop/wifigate-enclosure.webp" },
   { id: "wifigate-roller-shutter", name: "WIFIGATE Roller shutter", image: null },
 ];
 
@@ -11,13 +11,11 @@ const COPY = {
   en: {
     shop: "Shop", home: "Home", eyebrow: "WIFIGATE COLLECTION", heading: "Smart access. Simply WIFIGATE.",
     intro: "Controllers that bring everyday access to your phone.", products: "2 products", view: "Explore product",
-    stock: "Out of stock", stockNote: "This product is currently unavailable for purchase.",
+    stock: "Contact us to join the waitlist", waitlist: "Join the waitlist", stockNote: "We'll let you know as soon as it is available to order.",
     imageSoon: "Product image coming soon", category: "Smart access controller", shutterCategory: "Electric shutter controller",
     description: "A smart controller for electric gates, garage doors and barriers. Open them from the WIFIGATE app, with no remote needed.",
     shutterDescription: "A smart controller for electric roller shutters. Open and close them from the WIFIGATE app.",
     imageAlt: "WIFIGATE controller enclosure", overviewAlt: "The WIFIGATE controller beside the WIFIGATE mobile app",
-    appCaption: "Your access, in the WIFIGATE app.", purchase: "Out of stock", contact: "Talk to our team", contactPrompt: "Find the right controller for your space.",
-    contactText: "Tell us about your gate, door or electric shutter. We can help you choose the right WIFIGATE solution.",
     overview: "Product overview", features: "Everyday use", compatibility: "Installation & compatibility", availability: "Availability",
     overviewText: "Bring your electric gate, garage door or parking barrier into the WIFIGATE app. A dedicated controller connects everyday access to your phone.",
     shutterOverview: "Bring your electric roller shutters into the WIFIGATE app. A dedicated controller lets you open and close your shutter from your phone.",
@@ -27,22 +25,26 @@ const COPY = {
     featureShutter2: "Manage your shutter from the same app as your other WIFIGATE systems.",
     compatibilityText: "The controller is installed alongside a compatible existing control system. Contact our team to check suitability for your installation.",
     shutterCompatibility: "Designed for electric roller shutters. Contact our team to check compatibility with your shutter and installation.",
-    unavailableText: "This product is out of stock. Ordering and online payment are currently unavailable.",
+    unavailableText: "Online ordering is not open yet. Contact our team to join the waitlist and we will update you when the product is available.",
     factUse: "Made for", factUseValue: "Gates, garage doors & parking barriers", shutterUseValue: "Electric roller shutters",
-    factControl: "Control", factControlValue: "WIFIGATE app", related: "Explore the collection", relatedIntro: "More from WIFIGATE.", allProducts: "All products",
+    factControl: "Control", factControlValue: "WIFIGATE app", allProducts: "All products",
+    business: "For Business", subscription: "Subscription", businessHeading: "Subscription plans for your business.",
+    businessIntro: "Automate guest access and manage every system in your organization. Choose the WIFIGATE plan that fits your operation.",
+    hostTag: "Guest access automation", hostDescription: "Secure, time-limited access created automatically for every booking. For hotels, vacation rentals and rental parking.",
+    hostFeatures: ["Automatic access for every booking", "Access ends on its own at checkout", "Plans from a single property to large portfolios"], hostCta: "View plans",
+    managerTag: "Organization management", managerDescription: "One dashboard for the systems, people and access history across your organization.",
+    managerFeatures: ["All your systems in one place", "People and permissions management", "Complete access history"], managerCta: "Talk to us",
     catalogTitle: "WIFIGATE Shop | Smart access controllers",
-    catalogDescription: "Explore WIFIGATE controllers for gates, garage doors, barriers and electric roller shutters. All products are currently out of stock.",
+    catalogDescription: "Explore WIFIGATE controllers for gates, garage doors, barriers and electric roller shutters. Contact us to join the waitlist.",
   },
   he: {
     shop: "חנות", home: "בית", eyebrow: "הקולקציה של WIFIGATE", heading: "גישה חכמה. פשוט WIFIGATE.",
     intro: "בקרים שמביאים את הפתיחה היומיומית לטלפון שלכם.", products: "2 מוצרים", view: "לפרטי המוצר",
-    stock: "אזל מהמלאי", stockNote: "המוצר אינו זמין כרגע לרכישה.",
+    stock: "צרו קשר כדי להירשם לרשימת ההמתנה", waitlist: "להרשמה לרשימת ההמתנה", stockNote: "נעדכן אתכם ברגע שהמוצר יהיה זמין להזמנה.",
     imageSoon: "תמונת המוצר תתווסף בהמשך", category: "בקר גישה חכם", shutterCategory: "בקר לתריס חשמלי",
     description: "בקר חכם לשערים חשמליים, לדלתות חניה ולמחסומים. פותחים באפליקציית WIFIGATE, בלי לחפש שלט.",
     shutterDescription: "בקר חכם לתריסים חשמליים. פותחים וסוגרים באפליקציית WIFIGATE.",
     imageAlt: "מארז בקר WIFIGATE", overviewAlt: "בקר WIFIGATE לצד אפליקציית WIFIGATE בטלפון",
-    appCaption: "הגישה שלכם, באפליקציית WIFIGATE.", purchase: "אזל מהמלאי", contact: "דברו עם הצוות שלנו", contactPrompt: "הבקר המתאים למקום שלכם.",
-    contactText: "ספרו לנו על השער, הדלת או התריס החשמלי שלכם. נעזור לכם לבחור את פתרון WIFIGATE המתאים.",
     overview: "על המוצר", features: "בשימוש היומיומי", compatibility: "התקנה והתאמה", availability: "זמינות",
     overviewText: "מחברים את השער החשמלי, דלת החניה או המחסום לאפליקציית WIFIGATE. בקר ייעודי מביא את הפתיחה היומיומית לטלפון שלכם.",
     shutterOverview: "מחברים את התריסים החשמליים לאפליקציית WIFIGATE. בקר ייעודי מאפשר לפתוח ולסגור את התריס מהטלפון.",
@@ -52,11 +54,17 @@ const COPY = {
     featureShutter2: "מנהלים את התריס באותה אפליקציה עם שאר מערכות WIFIGATE שלכם.",
     compatibilityText: "הבקר מותקן לצד מערכת בקרה קיימת ותואמת. צרו קשר עם הצוות כדי לבדוק התאמה להתקנה שלכם.",
     shutterCompatibility: "מיועד לתריסים חשמליים. צרו קשר עם הצוות כדי לבדוק התאמה לתריס ולהתקנה שלכם.",
-    unavailableText: "המוצר אזל מהמלאי. הזמנה ותשלום מקוון אינם זמינים כרגע.",
+    unavailableText: "ההזמנה המקוונת עדיין לא נפתחה. צרו קשר עם הצוות כדי להירשם לרשימת ההמתנה, ונעדכן אתכם כשהמוצר יהיה זמין.",
     factUse: "מתאים ל", factUseValue: "שערים, דלתות חניה ומחסומים", shutterUseValue: "תריסים חשמליים",
-    factControl: "שליטה", factControlValue: "אפליקציית WIFIGATE", related: "עוד בקולקציה", relatedIntro: "מגלים עוד מוצרים של WIFIGATE.", allProducts: "כל המוצרים",
+    factControl: "שליטה", factControlValue: "אפליקציית WIFIGATE", allProducts: "כל המוצרים",
+    business: "לעסקים", subscription: "מנוי", businessHeading: "מסלולי מנוי לעסק שלכם.",
+    businessIntro: "אוטומציה לגישת אורחים וניהול של כל המערכות בארגון. בחרו את מסלול WIFIGATE שמתאים לפעילות שלכם.",
+    hostTag: "אוטומציה לגישת אורחים", hostDescription: "גישה מאובטחת ומוגבלת בזמן, שנוצרת אוטומטית לכל הזמנה. למלונות, לדירות נופש ולחניות להשכרה.",
+    hostFeatures: ["גישה אוטומטית לכל הזמנה", "הגישה מסתיימת לבד בצ'ק-אאוט", "מסלולים מנכס יחיד ועד תיקי נכסים גדולים"], hostCta: "לצפייה במסלולים",
+    managerTag: "ניהול ארגוני", managerDescription: "לוח בקרה אחד למערכות, לאנשים ולהיסטוריית הגישה בכל הארגון.",
+    managerFeatures: ["כל המערכות במקום אחד", "ניהול אנשים והרשאות", "היסטוריית גישה מלאה"], managerCta: "דברו איתנו",
     catalogTitle: "החנות של WIFIGATE | בקרי גישה חכמים",
-    catalogDescription: "מגלים את בקרי WIFIGATE לשערים, לדלתות חניה, למחסומים ולתריסים חשמליים. כל המוצרים אזלו כרגע מהמלאי.",
+    catalogDescription: "מגלים את בקרי WIFIGATE לשערים, לדלתות חניה, למחסומים ולתריסים חשמליים. צרו קשר כדי להירשם לרשימת ההמתנה.",
   },
 };
 
@@ -68,7 +76,7 @@ function renderMedia(product, copy, { detail = false } = {}) {
   if (!product.image) {
     return `<div class="shop-no-image"><span class="shop-no-image__brand" dir="ltr">WIFIGATE</span><span class="shop-no-image__name" dir="ltr">Roller shutter</span><span class="shop-no-image__note">${copy.imageSoon}</span></div>`;
   }
-  return `<img src="${product.image}" alt="${copy.imageAlt}" width="1254" height="1254" loading="${detail ? "eager" : "lazy"}" decoding="async"${detail ? ' fetchpriority="high"' : ""} />`;
+  return `<img src="${product.image}" alt="${copy.overviewAlt}" width="${product.width}" height="${product.height}" loading="${detail ? "eager" : "lazy"}" decoding="async"${detail ? ' fetchpriority="high"' : ""} />`;
 }
 
 function renderCard(product, locale, copy, headingTag = "h2") {
@@ -86,8 +94,30 @@ function renderCard(product, locale, copy, headingTag = "h2") {
   </article>`;
 }
 
-function renderContact(locale, copy) {
-  return `<section class="shop-contact" aria-labelledby="shop-contact-title"><div><p class="shop-eyebrow">WIFIGATE</p><h2 id="shop-contact-title">${copy.contactPrompt}</h2><p>${copy.contactText}</p></div><a class="shop-contact-link" href="${localePath(locale)}#get-in-touch">${copy.contact}</a></section>`;
+const BUSINESS_ICONS = {
+  host: '<path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/><circle cx="12" cy="10" r="1.5"/>',
+  manager: '<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 13l3-3 2 2 5-5"/>',
+};
+
+function renderBusinessCard(copy, { id, name, href }) {
+  const features = copy[`${id}Features`].map((feature) => `<li>${feature}</li>`).join("");
+  return `<article class="shop-business-card shop-business-card--${id}" data-business="${id}">
+    <div class="shop-business-card__top"><span class="shop-business-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${BUSINESS_ICONS[id]}</svg></span><span class="shop-business-card__chip">${copy.subscription}</span></div>
+    <p class="shop-business-card__tag">${copy[`${id}Tag`]}</p>
+    <h3 class="shop-business-card__name" dir="ltr">${name}</h3>
+    <p class="shop-business-card__description">${copy[`${id}Description`]}</p>
+    <ul class="shop-business-card__features">${features}</ul>
+    <a class="shop-business-card__cta" href="${href}">${copy[`${id}Cta`]}<span aria-hidden="true">→</span></a>
+  </article>`;
+}
+
+function renderBusiness(locale, copy) {
+  const cards = [
+    { id: "host", name: "WIFIGATE Host", href: `${localePath(locale, "wifigate-host")}#wa-pricing` },
+    { id: "manager", name: "WIFIGATE Manager", href: `${localePath(locale)}#get-in-touch` },
+  ];
+  return `<div class="shop-divider" aria-hidden="true"><span>${copy.business}</span></div>
+    <section class="shop-business" aria-labelledby="shop-business-title"><header class="shop-business__heading"><h2 id="shop-business-title">${copy.businessHeading}</h2><p>${copy.businessIntro}</p></header><div class="shop-business__grid">${cards.map((card) => renderBusinessCard(copy, card)).join("\n")}</div></section>`;
 }
 
 function renderBreadcrumb(locale, copy, product) {
@@ -108,7 +138,7 @@ export function getShopPageContent(locale, productId = null) {
       title: copy.catalogTitle,
       description: copy.catalogDescription,
       contentLang,
-      main: `${renderBreadcrumb(locale, copy)}<header class="shop-heading"><p class="shop-eyebrow">${copy.eyebrow}</p><h1 class="shop-heading__title">${copy.heading}</h1><p class="shop-heading__description">${copy.intro}</p></header><div class="shop-catalog-meta"><span>${copy.allProducts}</span><span>${copy.products}</span></div><div class="shop-grid">${SHOP_PRODUCTS.map((item) => renderCard(item, locale, copy)).join("\n")}</div>${renderContact(locale, copy)}`,
+      main: `${renderBreadcrumb(locale, copy)}<header class="shop-heading"><p class="shop-eyebrow">${copy.eyebrow}</p><h1 class="shop-heading__title">${copy.heading}</h1><p class="shop-heading__description">${copy.intro}</p></header><div class="shop-catalog-meta"><span>${copy.allProducts}</span><span>${copy.products}</span></div><div class="shop-grid">${SHOP_PRODUCTS.map((item) => renderCard(item, locale, copy)).join("\n")}</div>${renderBusiness(locale, copy)}`,
     };
   }
   const shutter = product.id === "wifigate-roller-shutter";
@@ -119,14 +149,13 @@ export function getShopPageContent(locale, productId = null) {
     product,
     main: `${renderBreadcrumb(locale, copy, product)}
       <article class="shop-product-detail" data-product="${product.id}">
-        <div class="shop-product-gallery"><div class="shop-product-gallery__main">${renderMedia(product, copy, { detail: true })}</div>${product.image ? `<figure class="shop-product-gallery__secondary"><img src="/assets/img/wifigate-product-v3.webp" alt="${copy.overviewAlt}" width="1545" height="905" loading="lazy" decoding="async" /><figcaption>${copy.appCaption}</figcaption></figure>` : ""}</div>
+        <div class="shop-product-gallery"><div class="shop-product-gallery__main">${renderMedia(product, copy, { detail: true })}</div>${product.secondary ? `<figure class="shop-product-gallery__secondary"><img src="${product.secondary}" alt="${copy.imageAlt}" width="1254" height="1254" loading="lazy" decoding="async" /></figure>` : ""}</div>
         <div class="shop-product-info"><p class="shop-product-info__category">${shutter ? copy.shutterCategory : copy.category}</p><h1 dir="ltr">${product.name}</h1><p class="shop-product-info__description">${shutter ? copy.shutterDescription : copy.description}</p>
           <div class="shop-availability"><span class="shop-stock">${copy.stock}</span><p>${copy.stockNote}</p></div>
           <dl class="shop-product-facts"><div><dt>${copy.factUse}</dt><dd>${shutter ? copy.shutterUseValue : copy.factUseValue}</dd></div><div><dt>${copy.factControl}</dt><dd>${copy.factControlValue}</dd></div></dl>
-          <button class="shop-purchase" type="button" disabled>${copy.purchase}</button><a class="shop-contact-link shop-contact-link--text" href="${localePath(locale)}#get-in-touch">${copy.contact}</a>
+          <a class="shop-purchase" href="${localePath(locale)}#get-in-touch">${copy.waitlist}</a>
           <div class="shop-product-accordions">${renderAccordion(copy.overview, `<p>${shutter ? copy.shutterOverview : copy.overviewText}</p>`, { open: true })}${renderAccordion(copy.features, `<ul><li>${shutter ? copy.featureShutter1 : copy.featureGate1}</li><li>${shutter ? copy.featureShutter2 : copy.featureGate2}</li></ul>`)}${renderAccordion(copy.compatibility, `<p>${shutter ? copy.shutterCompatibility : copy.compatibilityText}</p>`)}${renderAccordion(copy.availability, `<p>${copy.unavailableText}</p>`)}</div>
         </div>
-      </article>
-      <section class="shop-related" aria-labelledby="shop-related-title"><div class="shop-section-heading"><div><p class="shop-eyebrow">${copy.relatedIntro}</p><h2 id="shop-related-title">${copy.related}</h2></div><a href="${localePath(locale, "shop")}">${copy.allProducts}</a></div><div class="shop-grid shop-grid--related">${SHOP_PRODUCTS.filter(({ id }) => id !== product.id).map((item) => renderCard(item, locale, copy, "h3")).join("\n")}</div></section>${renderContact(locale, copy)}`,
+      </article>`,
   };
 }

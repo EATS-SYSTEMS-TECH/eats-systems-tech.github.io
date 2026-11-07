@@ -49,15 +49,17 @@ async function assertSharedCatalog(page, locale, width, product) {
   assert.equal(await page.locator(".shop-main h1").count(), 1);
   const mainText = await page.locator(".shop-main").innerText();
   assert.doesNotMatch(mainText, /[$€₪£]\s*\d|\d\s*[$€₪£]/, "No unverified price is published");
+  const home = locale === "he" ? "/he/" : locale === "en" ? "/" : `/${locale.toLowerCase()}/`;
   const purchases = page.locator(".shop-purchase");
   assert.equal(await purchases.count(), product ? 1 : 0,
-    "Catalog cards navigate to details; only the detail has a disabled purchase control");
+    "Catalog cards navigate to details; only the detail has a waitlist contact control");
   for (const purchase of await purchases.all()) {
-    assert.equal(await purchase.isDisabled(), true, "Out of stock prevents purchasing");
-    assert.match(await purchase.innerText(), locale === "he" ? /אזל מהמלאי/ : /Out of stock/i);
+    assert.equal(await purchase.getAttribute("href"), `${home}#get-in-touch`, "The waitlist control leads to contact, not checkout");
+    assert.match(await purchase.innerText(), locale === "he" ? /רשימת ההמתנה/ : /waitlist/i);
   }
   for (const stock of await page.locator(".shop-stock").all())
-    assert.match(await stock.innerText(), locale === "he" ? /אזל מהמלאי/ : /Out of stock/i);
+    assert.match(await stock.innerText(), locale === "he" ? /צרו קשר כדי להירשם לרשימת ההמתנה/ : /Contact us to join the waitlist/i);
+  assert.equal(await page.locator(".shop-business-card").count(), product ? 0 : 2, "The catalog presents the Host and Manager subscriptions");
   assert.ok(await page.locator(".shop-main a[href$='#get-in-touch']").count(), "Contact remains available");
   assert.equal(await page.locator(".shop-main a[href*='reservations']").count(), 0,
     "Unavailable products do not lead to a reservation or purchase flow");
@@ -66,7 +68,7 @@ async function assertSharedCatalog(page, locale, width, product) {
     return {
       viewport: innerWidth,
       scrollWidth: document.documentElement.scrollWidth,
-      clipped: [...main.querySelectorAll("h1, .shop-product-card, .shop-purchase")].filter((element) => {
+      clipped: [...main.querySelectorAll("h1, .shop-product-card, .shop-purchase, .shop-business-card")].filter((element) => {
         const box = element.getBoundingClientRect();
         return box.width > 0 && (box.left < -1 || box.right > innerWidth + 1);
       }).map((element) => element.className),
@@ -159,6 +161,7 @@ test("product keyboard navigation, native accordions and deep-route header cart 
       await page.keyboard.press("Space");
       assert.equal(await summary.evaluate((element) => element.parentElement.open), before);
       const storageBefore = await page.evaluate(() => localStorage.getItem("wifigate-cart-v1"));
+      await page.locator(".shop-purchase").evaluate((element) => element.addEventListener("click", (event) => event.preventDefault(), { once: true }));
       await page.locator(".shop-purchase").evaluate((element) => element.click());
       assert.deepEqual(await page.evaluate(() => window.WIFIGATE_CART.getItems()), []);
       assert.equal(await page.evaluate(() => localStorage.getItem("wifigate-cart-v1")), storageBefore);
