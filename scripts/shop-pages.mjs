@@ -31,6 +31,8 @@ const COPY = {
     business: "For Business", subscription: "Subscription", businessHeading: "Subscription plans for your business.",
     businessIntro: "Automate guest access and manage every system in your organization. Choose the WIFIGATE plan that fits your operation.",
     hostTag: "Guest access automation", hostDescription: "Secure, time-limited access created automatically for every booking. For hotels, vacation rentals and rental parking.",
+    hostImageAlt: "Guests using a phone to enter their hotel room", hostStepsLabel: "Every stay, taken care of", hostSteps: ["Booking received", "Access at check-in", "Expires at checkout"],
+    managerImageAlt: "An employee opening an office door with her phone", managerScreenAlt: "Organization systems in the WIFIGATE Manager dashboard",
     hostFeatures: ["Automatic access for every booking", "Access ends on its own at checkout", "Plans from a single property to large portfolios"], hostCta: "View plans",
     managerTag: "Organization management", managerDescription: "One dashboard for the systems, people and access history across your organization.",
     managerFeatures: ["All your systems in one place", "People and permissions management", "Complete access history"], managerCta: "Talk to us",
@@ -60,6 +62,8 @@ const COPY = {
     business: "לעסקים", subscription: "מנוי", businessHeading: "מסלולי מנוי לעסק שלכם.",
     businessIntro: "אוטומציה לגישת אורחים וניהול של כל המערכות בארגון. בחרו את מסלול WIFIGATE שמתאים לפעילות שלכם.",
     hostTag: "אוטומציה לגישת אורחים", hostDescription: "גישה מאובטחת ומוגבלת בזמן, שנוצרת אוטומטית לכל הזמנה. למלונות, לדירות נופש ולחניות להשכרה.",
+    hostImageAlt: "אורחים משתמשים בטלפון כדי להיכנס למקום האירוח", hostStepsLabel: "מההזמנה ועד העזיבה", hostSteps: ["ההזמנה התקבלה", "גישה בצ׳ק-אין", "התוקף פג בצ׳ק-אאוט"],
+    managerImageAlt: "עובדת פותחת את דלת המשרד בטלפון", managerScreenAlt: "מערכות הארגון בלוח הבקרה של WIFIGATE Manager",
     hostFeatures: ["גישה אוטומטית לכל הזמנה", "הגישה מסתיימת לבד בצ'ק-אאוט", "מסלולים מנכס יחיד ועד תיקי נכסים גדולים"], hostCta: "לצפייה במסלולים",
     managerTag: "ניהול ארגוני", managerDescription: "לוח בקרה אחד למערכות, לאנשים ולהיסטוריית הגישה בכל הארגון.",
     managerFeatures: ["כל המערכות במקום אחד", "ניהול אנשים והרשאות", "היסטוריית גישה מלאה"], managerCta: "דברו איתנו",
@@ -99,15 +103,29 @@ const BUSINESS_ICONS = {
   manager: '<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 13l3-3 2 2 5-5"/>',
 };
 
-function renderBusinessCard(copy, { id, name, href }) {
+const BUSINESS_PHOTOS = {
+  host: "/assets/wifigate_niche_pages/hotels-airbnb-v2-app-hero.webp",
+  manager: "/assets/wifigate_niche_pages/office-buildings-app-hero.webp",
+};
+
+function renderBusinessInset(copy, id, contentLang) {
+  if (id === "host") {
+    return `<div class="shop-business-card__inset shop-business-card__steps"><span>${copy.hostStepsLabel}</span><ol>${copy.hostSteps.map((step) => `<li>${step}</li>`).join("")}</ol></div>`;
+  }
+  return `<div class="shop-business-card__inset shop-business-card__screen"><span class="shop-business-card__screen-bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="/assets/img/manager/assignment/organization-systems-${contentLang}.jpg" alt="${copy.managerScreenAlt}" width="1265" height="712" loading="lazy" decoding="async" /></div>`;
+}
+
+function renderBusinessCard(copy, contentLang, { id, name, href }) {
   const features = copy[`${id}Features`].map((feature) => `<li>${feature}</li>`).join("");
   return `<article class="shop-business-card shop-business-card--${id}" data-business="${id}">
-    <div class="shop-business-card__top"><span class="shop-business-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${BUSINESS_ICONS[id]}</svg></span><span class="shop-business-card__chip">${copy.subscription}</span></div>
-    <p class="shop-business-card__tag">${copy[`${id}Tag`]}</p>
-    <h3 class="shop-business-card__name" dir="ltr">${name}</h3>
-    <p class="shop-business-card__description">${copy[`${id}Description`]}</p>
-    <ul class="shop-business-card__features">${features}</ul>
-    <a class="shop-business-card__cta" href="${href}">${copy[`${id}Cta`]}<span aria-hidden="true">→</span></a>
+    <div class="shop-business-card__media"><img class="shop-business-card__photo" src="${BUSINESS_PHOTOS[id]}" alt="${copy[`${id}ImageAlt`]}" width="1280" height="720" loading="lazy" decoding="async" /><span class="shop-business-card__chip">${copy.subscription}</span>${renderBusinessInset(copy, id, contentLang)}</div>
+    <div class="shop-business-card__body">
+      <p class="shop-business-card__tag"><span class="shop-business-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${BUSINESS_ICONS[id]}</svg></span>${copy[`${id}Tag`]}</p>
+      <h3 class="shop-business-card__name" dir="ltr">${name}</h3>
+      <p class="shop-business-card__description">${copy[`${id}Description`]}</p>
+      <ul class="shop-business-card__features">${features}</ul>
+      <a class="shop-business-card__cta" href="${href}">${copy[`${id}Cta`]}<span aria-hidden="true">→</span></a>
+    </div>
   </article>`;
 }
 
@@ -117,7 +135,7 @@ function renderBusiness(locale, copy) {
     { id: "manager", name: "WIFIGATE Manager", href: `${localePath(locale)}#get-in-touch` },
   ];
   return `<div class="shop-divider" aria-hidden="true"><span>${copy.business}</span></div>
-    <section class="shop-business" aria-labelledby="shop-business-title"><header class="shop-business__heading"><h2 id="shop-business-title">${copy.businessHeading}</h2><p>${copy.businessIntro}</p></header><div class="shop-business__grid">${cards.map((card) => renderBusinessCard(copy, card)).join("\n")}</div></section>`;
+    <section class="shop-business" aria-labelledby="shop-business-title"><header class="shop-business__heading"><h2 id="shop-business-title">${copy.businessHeading}</h2><p>${copy.businessIntro}</p></header><div class="shop-business__grid">${cards.map((card) => renderBusinessCard(copy, locale === "he" ? "he" : "en", card)).join("\n")}</div></section>`;
 }
 
 function renderBreadcrumb(locale, copy, product) {

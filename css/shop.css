@@ -414,108 +414,215 @@
   gap: 24px;
 }
 .shop-business-card {
-  --accent: #c2410c;
+  --accent: #ea580c;
+  --accent-deep: #9a3412;
+  --accent-soft: #fff4ec;
+  --accent-line: #fed7aa;
   position: relative;
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding: 32px 30px 28px;
   overflow: hidden;
-  border-radius: 20px;
-  color: #fff;
-  isolation: isolate;
-  box-shadow: 0 24px 48px -28px rgb(15 23 42 / 55%);
-  transition: transform 250ms ease, box-shadow 250ms ease;
-}
-.shop-business-card::before {
-  content: "";
-  position: absolute;
-  inset-block-start: -40%;
-  inset-inline-end: -25%;
-  z-index: -1;
-  width: 70%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgb(255 255 255 / 28%), transparent 65%);
+  border: 1px solid var(--accent-line);
+  border-radius: 24px;
+  background: linear-gradient(180deg, var(--accent-soft) 0%, #fff 58%);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 6%), 0 28px 60px -36px rgb(15 23 42 / 45%);
+  transition: transform 300ms ease, box-shadow 300ms ease;
 }
 .shop-business-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 32px 56px -28px rgb(15 23 42 / 65%);
-}
-.shop-business-card--host {
-  background: linear-gradient(140deg, #ff8a3d 0%, #ea580c 45%, #9a3412 100%);
+  transform: translateY(-6px);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 6%), 0 40px 70px -36px rgb(15 23 42 / 55%);
 }
 .shop-business-card--manager {
   --accent: #0b63ff;
-  background: linear-gradient(140deg, #3b82f6 0%, #0b63ff 40%, #182d48 100%);
+  --accent-deep: #182d48;
+  --accent-soft: #eef4ff;
+  --accent-line: #c7dafe;
 }
-.shop-business-card__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-block-end: 28px;
+.shop-business-card__media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--accent-deep);
+  isolation: isolate;
 }
-.shop-business-card__icon {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  border: 1px solid rgb(255 255 255 / 35%);
-  border-radius: 14px;
-  background: rgb(255 255 255 / 16%);
-  backdrop-filter: blur(6px);
+.shop-business-card__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.shop-business-card__icon svg {
-  width: 26px;
-  height: 26px;
+.shop-business-card:hover .shop-business-card__photo {
+  transform: scale(1.05);
+}
+.shop-business-card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgb(0 0 0 / 0%) 35%, color-mix(in srgb, var(--accent-deep) 78%, transparent) 100%),
+    linear-gradient(120deg, color-mix(in srgb, var(--accent) 30%, transparent), transparent 55%);
+  pointer-events: none;
 }
 .shop-business-card__chip {
-  padding: 5px 12px;
+  position: absolute;
+  inset-block-start: 18px;
+  inset-inline-start: 18px;
+  z-index: 1;
+  padding: 6px 13px;
+  border: 1px solid rgb(255 255 255 / 55%);
   border-radius: 999px;
-  background: rgb(255 255 255 / 92%);
-  color: var(--accent);
+  background: rgb(255 255 255 / 88%);
+  color: var(--accent-deep);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  backdrop-filter: blur(8px);
 }
-.shop-business-card__tag {
-  margin: 0 0 6px;
-  color: rgb(255 255 255 / 82%);
+.shop-business-card__inset {
+  position: absolute;
+  z-index: 1;
+  inset-block-end: 18px;
+  inset-inline-end: 18px;
+  border: 1px solid rgb(255 255 255 / 45%);
+  border-radius: 16px;
+  box-shadow: 0 18px 40px -16px rgb(0 0 0 / 55%);
+  backdrop-filter: blur(12px);
+}
+.shop-business-card__steps {
+  max-width: min(250px, 62%);
+  padding: 14px 16px;
+  background: rgb(255 255 255 / 86%);
+  color: #1f2937;
+}
+.shop-business-card__steps > span {
+  display: block;
+  margin-block-end: 9px;
+  color: var(--accent-deep);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.shop-business-card__steps ol {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+.shop-business-card__steps li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  line-height: 1.4;
+  counter-increment: step;
+}
+.shop-business-card__steps li::before {
+  content: counter(step);
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fb923c, var(--accent));
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+.shop-business-card__screen {
+  width: min(280px, 50%);
+  overflow: hidden;
+  background: #fff;
+}
+.shop-business-card__screen-bar {
+  display: flex;
+  gap: 5px;
+  padding: 7px 10px;
+  border-block-end: 1px solid #e6ebf2;
+  background: #f5f7fb;
+}
+.shop-business-card__screen-bar i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #cfd6e0;
+}
+.shop-business-card__screen-bar i:first-child {
+  background: var(--accent);
+}
+.shop-business-card__screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.shop-business-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 28px 30px 30px;
+}
+.shop-business-card__tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 10px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.shop-business-card__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+  color: #fff;
+  box-shadow: 0 8px 18px -8px var(--accent);
+}
+.shop-business-card__icon svg {
+  width: 19px;
+  height: 19px;
 }
 .shop-business-card__name {
   margin: 0;
-  font-size: clamp(24px, 2.4vw, 30px);
+  color: #0f172a;
+  font-size: clamp(26px, 2.6vw, 32px);
   font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
 }
 .shop-main[dir="rtl"] .shop-business-card__name {
   text-align: right;
 }
 .shop-business-card__description {
-  margin: 12px 0 20px;
-  color: rgb(255 255 255 / 88%);
-  font-size: 14px;
+  margin: 12px 0 22px;
+  color: #556070;
+  font-size: 14.5px;
   line-height: 1.75;
 }
 .shop-business-card__features {
   display: grid;
-  gap: 10px;
+  gap: 11px;
   margin: 0 0 28px;
-  padding: 18px 0 0;
-  border-block-start: 1px solid rgb(255 255 255 / 22%);
+  padding: 20px 0 0;
+  border-block-start: 1px solid var(--accent-line);
   list-style: none;
 }
 .shop-business-card__features li {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 13px;
+  gap: 11px;
+  color: #1e293b;
+  font-size: 13.5px;
+  font-weight: 500;
   line-height: 1.6;
 }
 .shop-business-card__features li::before {
@@ -523,26 +630,34 @@
   display: grid;
   flex: none;
   place-items: center;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: rgb(255 255 255 / 22%);
-  font-size: 11px;
-  font-weight: 700;
+  background: color-mix(in srgb, var(--accent) 14%, #fff);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
 }
 .shop-business-card__cta {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   align-self: flex-start;
-  min-height: 46px;
+  min-height: 48px;
   margin-block-start: auto;
-  padding: 11px 22px;
+  padding: 12px 26px;
   border-radius: 999px;
-  background: #fff;
-  color: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+  color: #fff;
   font-size: 14px;
   font-weight: 700;
+  box-shadow: 0 14px 28px -14px var(--accent);
+  transition: box-shadow 200ms ease, filter 200ms ease;
+}
+.shop-business-card__cta:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 18px 32px -14px var(--accent);
 }
 .shop-business-card__cta span {
   transition: transform 200ms ease;
@@ -555,9 +670,6 @@
 }
 .shop-main[dir="rtl"] .shop-business-card__cta:hover span {
   transform: scaleX(-1) translateX(4px);
-}
-.shop-main .shop-business-card__cta:focus-visible {
-  outline-color: #fff;
 }
 .shop-main a:focus-visible,
 .shop-main summary:focus-visible {
@@ -715,8 +827,25 @@
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;
   }
-  .shop-business-card {
-    padding: 26px 22px 24px;
+  .shop-business-card__body {
+    padding: 22px 20px 24px;
+  }
+  .shop-business-card__media {
+    aspect-ratio: 4 / 3;
+  }
+  .shop-business-card__inset {
+    inset-block-end: 12px;
+    inset-inline-end: 12px;
+  }
+  .shop-business-card__steps {
+    max-width: 70%;
+    padding: 11px 13px;
+  }
+  .shop-business-card__screen {
+    width: 64%;
+  }
+  .shop-business-card__cta {
+    align-self: stretch;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -728,10 +857,12 @@
     transform: none;
   }
   .shop-business-card,
+  .shop-business-card__photo,
   .shop-business-card__cta span {
     transition: none;
   }
-  .shop-business-card:hover {
+  .shop-business-card:hover,
+  .shop-business-card:hover .shop-business-card__photo {
     transform: none;
   }
 }
