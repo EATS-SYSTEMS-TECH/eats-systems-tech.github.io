@@ -225,16 +225,20 @@ html.a11y-text-scaled .site-header .nav {
     display: inline-flex;
   }
 
-  /* Override desktop RTL margins while the menu is collapsed on tablets. */
+  /* Override desktop RTL margins while the menu is collapsed on tablets.
+     Below 1440px the nav spans the header. Left without a grid placement, the
+     menu is positioned against the nav's padding box, so it meets the page
+     edges; 100vw would also count a classic scrollbar and push the hidden menu
+     past both sides of the page. */
   .site-header .nav .nav__links-wrapper {
     position: absolute;
-    left: 50%;
-    right: auto;
+    left: 0;
+    right: 0;
     top: var(--nav-height);
     height: auto;
     max-height: calc(100vh - var(--nav-height));
     max-height: calc(100dvh - var(--nav-height));
-    width: 100vw;
+    width: auto;
     box-sizing: border-box;
     display: grid;
     grid-template-columns: 1fr;
@@ -242,7 +246,7 @@ html.a11y-text-scaled .site-header .nav {
     margin: 0;
     justify-content: stretch;
     background: #ffffff;
-    transform: translateX(-50%);
+    transform: none;
     opacity: 0;
     pointer-events: none;
     transition: opacity 200ms ease, visibility 0s linear 200ms;
@@ -455,6 +459,11 @@ html.a11y-text-scaled .site-header .nav {
     border-bottom: 1px solid rgba(10, 10, 10, .12);
     color: #242424;
   }
+  /* Links keep direction: ltr from styles.css for brand names, so "start" would
+     still mean left on right-to-left pages. */
+  html[dir="rtl"] .site-header .topbar-nav .nav__link:not(.nav__contact-link) {
+    text-align: right;
+  }
   .site-header .topbar-nav .nav__link:not(.nav__contact-link):hover,
   .site-header .topbar-nav .nav__link:not(.nav__contact-link):focus-visible {
     color: #0b63ff;
@@ -533,7 +542,6 @@ html.a11y-text-scaled .site-header .nav {
   .site-header .site-cart__trigger { grid-column: 4; grid-row: 1; }
   .site-header .language-selector { grid-column: 5; grid-row: 1; }
   .site-header .nav__toggle { grid-column: 6; grid-row: 1; }
-  .site-header .nav__links-wrapper { grid-column: 1 / -1; }
 }
 @media (max-width: 600px) {
   .site-header .nav { gap: .25rem; padding-inline: .65rem; }

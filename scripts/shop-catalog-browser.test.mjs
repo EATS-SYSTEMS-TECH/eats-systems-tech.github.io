@@ -43,7 +43,8 @@ async function assertSharedCatalog(page, locale, width, product) {
   const content = page.locator(product ? ".shop-product-detail" : ".shop-main");
   assert.equal(await page.locator("html").getAttribute("lang"), locale);
   assert.equal(await page.locator("link[rel='canonical']").getAttribute("href"),
-    "https://wifigate.io" + shopPath(locale, product));
+    "https://wifigate.io" + shopPath(locale === "he" ? "he" : "en", product),
+    "Untranslated catalog variants consolidate into the actual English content");
   assert.equal(await content.getAttribute("lang"), locale === "he" ? "he" : "en");
   assert.equal(await content.getAttribute("dir"), locale === "he" ? "rtl" : "ltr");
   assert.equal(await page.locator(".shop-main h1").count(), 1);
@@ -60,6 +61,14 @@ async function assertSharedCatalog(page, locale, width, product) {
   for (const stock of await page.locator(".shop-stock").all())
     assert.match(await stock.innerText(), locale === "he" ? /צרו קשר כדי להירשם לרשימת ההמתנה/ : /Contact us to join the waitlist/i);
   assert.equal(await page.locator(".shop-business-card").count(), product ? 0 : 2, "The catalog presents the Host and Manager subscriptions");
+  if (!product) {
+    const storageBefore = await page.evaluate(() => localStorage.getItem("wifigate-cart-v1"));
+    await page.locator("[data-business='manager'] [data-shop-cart]").evaluate((element) => element.click());
+    assert.equal(await page.locator(".site-cart__drawer").isVisible(), true, "Add to cart opens the cart");
+    assert.deepEqual(await page.evaluate(() => window.WIFIGATE_CART.getItems()), [], "No product or unverified price is stored");
+    assert.equal(await page.evaluate(() => localStorage.getItem("wifigate-cart-v1")), storageBefore);
+    await page.keyboard.press("Escape");
+  }
   assert.ok(await page.locator(".shop-main a[href$='#get-in-touch']").count(), "Contact remains available");
   assert.equal(await page.locator(".shop-main a[href*='reservations']").count(), 0,
     "Unavailable products do not lead to a reservation or purchase flow");
