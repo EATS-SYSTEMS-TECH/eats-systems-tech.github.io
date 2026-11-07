@@ -48,14 +48,15 @@ try {
     assert.deepEqual(await page.evaluate(() => window.WIFIGATE_CART.getItems()), [{ productId: "wifigate", quantity: 50 }, { productId: "wifigate-manager", quantity: 1 }]);
     await page.locator(".site-cart__trigger").click();
     await page.locator(".site-cart__checkout").click();
-    await page.waitForURL(origin + (locale === "he" ? "/reservations/?lang=he" : "/reservations/"));
+    await page.waitForURL(origin + (locale === "he" ? "/he/#get-in-touch" : "/#get-in-touch"), { waitUntil: "commit" });
+    assert.equal(await page.locator(".site-cart__checkout").textContent(), locale === "he" ? "צרו קשר כדי להירשם לרשימת ההמתנה" : "Contact us to join the waitlist");
     await page.goto(origin + path, { waitUntil: "networkidle" });
     await page.evaluate(() => window.WIFIGATE_CART.clear());
     assert.equal(await page.locator(".site-cart__count").isHidden(), true);
     assert.equal((await context.cookies()).some(({ name }) => name === "wifigate_cart"), false, "Emptying the cart removes its cookie");
     await context.close();
   }
-  console.log("Shop cart: English/Hebrew drawer, shop buttons, cookie persistence and limits, quantity, removal, empty state and reservation checkout verified.");
+  console.log("Shop cart: English/Hebrew drawer, shop buttons, cookie persistence and limits, quantity, removal, empty state and waitlist contact verified.");
 } finally {
   await browser.close();
 }

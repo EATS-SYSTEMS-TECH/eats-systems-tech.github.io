@@ -11,7 +11,7 @@ const COPY = {
   en: {
     shop: "Shop", home: "Home", eyebrow: "WIFIGATE COLLECTION", heading: "Smart access. Simply WIFIGATE.",
     intro: "Controllers that bring everyday access to your phone.", products: "2 products", view: "Product details", moreDetails: "More details", addToCart: "Add to cart",
-    stock: "Contact us to join the waitlist", waitlist: "Join the waitlist", stockNote: "Add it to your cart and send a reservation, or join the waitlist. There is no payment at this stage.",
+    stock: "Contact us to join the waitlist", waitlist: "Join the waitlist", stockNote: "Add it to your cart and contact us to join the waitlist. There is no payment at this stage.",
     imageSoon: "Product image coming soon", category: "Smart access controller", shutterCategory: "Electric shutter controller",
     description: "A smart controller for electric gates, garage doors and barriers. Open them from the WIFIGATE app, with no remote needed.",
     shutterDescription: "A smart controller for electric roller shutters. Open and close them from the WIFIGATE app.",
@@ -25,7 +25,7 @@ const COPY = {
     featureShutter2: "Manage your shutter from the same app as your other WIFIGATE systems.",
     compatibilityText: "The controller is installed alongside a compatible existing control system. Contact our team to check suitability for your installation.",
     shutterCompatibility: "Designed for electric roller shutters. Contact our team to check compatibility with your shutter and installation.",
-    unavailableText: "Add the product to your cart and continue to a reservation. Our team will contact you to confirm price, installation and delivery; there is no online payment. You can also contact us to join the waitlist.",
+    unavailableText: "The product is not on sale yet. Add it to your cart and contact us to join the waitlist; when it is available, our team will get back to you about price, installation and delivery. There is no online payment.",
     factUse: "Made for", factUseValue: "Gates, garage doors & parking barriers", shutterUseValue: "Electric roller shutters",
     factControl: "Control", factControlValue: "WIFIGATE app", allProducts: "All products",
     business: "For Business", subscription: "Subscription", businessHeading: "Subscription plans for your business.",
@@ -42,7 +42,7 @@ const COPY = {
   he: {
     shop: "חנות", home: "בית", eyebrow: "הקולקציה של WIFIGATE", heading: "גישה חכמה. פשוט WIFIGATE.",
     intro: "בקרים שמביאים את הפתיחה היומיומית לטלפון שלכם.", products: "2 מוצרים", view: "לפרטי המוצר", moreDetails: "פרטים נוספים", addToCart: "הוספה לסל",
-    stock: "צרו קשר כדי להירשם לרשימת ההמתנה", waitlist: "להרשמה לרשימת ההמתנה", stockNote: "אפשר להוסיף לסל ולשלוח הזמנה, או להירשם לרשימת ההמתנה. אין תשלום בשלב הזה.",
+    stock: "צרו קשר כדי להירשם לרשימת ההמתנה", waitlist: "להרשמה לרשימת ההמתנה", stockNote: "אפשר להוסיף לסל וליצור קשר כדי להירשם לרשימת ההמתנה. אין תשלום בשלב הזה.",
     imageSoon: "תמונת המוצר תתווסף בהמשך", category: "בקר גישה חכם", shutterCategory: "בקר לתריס חשמלי",
     description: "בקר חכם לשערים חשמליים, לדלתות חניה ולמחסומים. פותחים באפליקציית WIFIGATE, בלי לחפש שלט.",
     shutterDescription: "בקר חכם לתריסים חשמליים. פותחים וסוגרים באפליקציית WIFIGATE.",
@@ -56,7 +56,7 @@ const COPY = {
     featureShutter2: "מנהלים את התריס באותה אפליקציה עם שאר מערכות WIFIGATE שלכם.",
     compatibilityText: "הבקר מותקן לצד מערכת בקרה קיימת ותואמת. צרו קשר עם הצוות כדי לבדוק התאמה להתקנה שלכם.",
     shutterCompatibility: "מיועד לתריסים חשמליים. צרו קשר עם הצוות כדי לבדוק התאמה לתריס ולהתקנה שלכם.",
-    unavailableText: "מוסיפים את המוצר לסל וממשיכים להזמנה. הצוות יחזור אליכם לתאם מחיר, התקנה ומשלוח, בלי תשלום מקוון. אפשר גם ליצור קשר כדי להירשם לרשימת ההמתנה.",
+    unavailableText: "המוצר עדיין לא במכירה. מוסיפים אותו לסל ויוצרים קשר כדי להירשם לרשימת ההמתנה, וכשהוא יהיה זמין הצוות יחזור אליכם לתאם מחיר, התקנה ומשלוח. אין תשלום מקוון.",
     factUse: "מתאים ל", factUseValue: "שערים, דלתות חניה ומחסומים", shutterUseValue: "תריסים חשמליים",
     factControl: "שליטה", factControlValue: "אפליקציית WIFIGATE", allProducts: "כל המוצרים",
     business: "לעסקים", subscription: "מנוי", businessHeading: "מסלולי מנוי לעסק שלכם.",
@@ -86,7 +86,7 @@ function renderMedia(product, copy, { detail = false } = {}) {
 const CART_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>';
 
 // Add to cart puts the product in the wifigate_cart cookie (js/site-cart.js);
-// the cart is checked out as a WIFIGATE Reservation, with no online payment.
+// the cart then leads to the contact section to join the waitlist.
 function renderCartButton(copy, productId, name, className = "shop-actions__cart") {
   return `<button class="${className}" type="button" data-shop-cart="${productId}" aria-label="${escapeHtml(`${copy.addToCart}: ${name}`)}">${CART_ICON}<span>${copy.addToCart}</span></button>`;
 }

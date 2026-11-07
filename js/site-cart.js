@@ -1,6 +1,6 @@
-// The site cart drawer. Items live in the wifigate_cart cookie (cart-cookie.js)
-// and are checked out through WIFIGATE Reservations: there is no online payment,
-// the team confirms price, installation and delivery with the customer.
+// The site cart drawer. Items live in the wifigate_cart cookie (cart-cookie.js).
+// Products are not on sale yet, so the cart leads to the contact section to join
+// the waitlist; there is no online payment.
 import { CART_CATALOG, cartProduct, normalizeCart, readCart, writeCart } from "./cart-cookie.js?v=20261108a";
 
 const trigger = document.querySelector(".site-cart__trigger");
@@ -153,7 +153,12 @@ if (trigger && drawer && backdrop) {
   closeButton.addEventListener("click", closeCart);
   backdrop.addEventListener("click", closeCart);
   checkout.addEventListener("click", () => {
-    if (items.length) location.assign(isHebrew ? "/reservations/?lang=he" : "/reservations/");
+    if (!items.length) return;
+    // The header's contact link already points at this locale's home page.
+    const contact = new URL(document.querySelector(".nav__contact-link")?.getAttribute("href") || "/#get-in-touch", location.href);
+    closeCart();
+    if (contact.pathname === location.pathname) document.getElementById(contact.hash.slice(1))?.scrollIntoView({ behavior: "smooth" });
+    location.assign(contact.href);
   });
   document.addEventListener("keydown", (event) => {
     if (drawer.hidden) return;

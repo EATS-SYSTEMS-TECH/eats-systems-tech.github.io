@@ -172,7 +172,7 @@ test("product keyboard navigation, native accordions and deep-route header cart 
       await page.locator(".shop-purchase").evaluate((element) => element.click());
       assert.deepEqual(await page.evaluate(() => window.WIFIGATE_CART.getItems()), [{ productId: "wifigate-roller-shutter", quantity: 1 }]);
       assert.equal(await page.locator(".site-cart__count").textContent(), "1");
-      assert.equal(await page.locator(".site-cart__checkout").isDisabled(), false, "A filled cart continues to a reservation");
+      assert.equal(await page.locator(".site-cart__checkout").isDisabled(), false, "A filled cart leads to the waitlist contact");
       await page.keyboard.press("Escape");
       await page.evaluate(() => window.WIFIGATE_CART.clear());
       const cart = page.locator(".site-cart__trigger");
