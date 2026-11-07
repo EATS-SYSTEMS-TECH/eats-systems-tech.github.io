@@ -10,14 +10,14 @@ export const cookies = {
     title: "Cookie Policy",
     subtitle:
       "This Cookie Policy explains which cookies and similar technologies are used on wifigate.io and in the WIFIGATE web portal, why, and how you can control them.",
-    updated: "Effective date: October 18, 2026",
+    updated: "Effective date: November 8, 2026",
     owner: "Operator: EATS SYSTEMS TECH",
     sections: [
       {
         id: "summary",
         title: "1. Summary",
         blocks: [
-          "The website uses essential browser storage for your accessibility and cookie choices. The language comes from the page address and is not stored. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it.",
+          "The website uses essential browser storage for your accessibility and cookie choices, and an essential cookie for your shopping cart. The language comes from the page address and is not stored. With your permission, it also uses Google Analytics to understand site usage and improve the website. Analytics does not load until you allow it. We do not use advertising cookies or tracking pixels. The web portal also stores a sign-in session while you use it.",
         ],
       },
       {
@@ -38,6 +38,7 @@ export const cookies = {
                 ["wifigate-accessibility-settings-v2", "Local storage (first party)", "Remembers the accessibility adjustments you turned on, such as text size or high contrast.", "Until you clear it"],
                 ["wifigate-a11y-fab-position", "Local storage (first party)", "Remembers where you moved the accessibility button.", "Until you clear it"],
                 ["wifigate-cookie-consent-v1", "Local storage (first party)", "Remembers your analytics choice.", "Up to 180 days"],
+                ["wifigate_cart", "Essential cookie (first party)", "Keeps the products and subscriptions in your shopping cart, and their quantities, so the cart and the reservation form can use them. It contains no prices or personal details and is emptied when you send the reservation.", "30 days from your last cart change"],
                 ["Public media cache", "CacheStorage (first party)", "Reuses public videos and matching images already requested for your screen size. Stores media files, without account data or tracking identifiers, up to 96 MB and 48 files.", "Reused for up to 30 days; expired files are removed on later cache activity or when site data is cleared."],
                 ["_ga and _ga_*", "Analytics cookies (Google, only with consent)", "Measure visits and site usage.", "Up to 180 days"],
                 ["Firebase Authentication session", "Session storage (first party, web portal only)", "Keeps you signed in to the web portal while the browser tab is open.", "Until you sign out or close the tab"],
@@ -101,14 +102,14 @@ export const cookies = {
     title: "מדיניות עוגיות",
     subtitle:
       "מדיניות עוגיות זו מסבירה באילו עוגיות וטכנולוגיות דומות נעשה שימוש באתר wifigate.io ובפורטל האינטרנט של WIFIGATE, לשם מה, וכיצד תוכלו לשלוט בהן.",
-    updated: "תאריך תחילה: 18 באוקטובר 2026",
+    updated: "תאריך תחילה: 8 בנובמבר 2026",
     owner: "המפעילה: EATS SYSTEMS TECH",
     sections: [
       {
         id: "summary",
         title: "1. בקצרה",
         blocks: [
-          "האתר משתמש באחסון הכרחי לשמירת בחירות הנגישות והעוגיות שלכם. השפה נקבעת לפי כתובת הדף ואינה נשמרת. אם תאשרו, נשתמש גם ב־Google Analytics כדי להבין את השימוש באתר ולשפר אותו. המדידה אינה נטענת לפני אישור. איננו משתמשים בעוגיות פרסום או בפיקסלי מעקב. הפורטל שומר גם סשן כניסה בזמן השימוש בו.",
+          "האתר משתמש באחסון הכרחי לשמירת בחירות הנגישות והעוגיות שלכם, ובעוגייה הכרחית לסל הקניות. השפה נקבעת לפי כתובת הדף ואינה נשמרת. אם תאשרו, נשתמש גם ב־Google Analytics כדי להבין את השימוש באתר ולשפר אותו. המדידה אינה נטענת לפני אישור. איננו משתמשים בעוגיות פרסום או בפיקסלי מעקב. הפורטל שומר גם סשן כניסה בזמן השימוש בו.",
         ],
       },
       {
@@ -129,6 +130,7 @@ export const cookies = {
                 ["wifigate-accessibility-settings-v2", "אחסון מקומי (צד ראשון)", "זוכר את התאמות הנגישות שהפעלתם, כגון גודל טקסט או ניגודיות גבוהה.", "עד שתמחקו אותו"],
                 ["wifigate-a11y-fab-position", "אחסון מקומי (צד ראשון)", "זוכר לאן הזזתם את כפתור הנגישות.", "עד שתמחקו אותו"],
                 ["wifigate-cookie-consent-v1", "אחסון מקומי (צד ראשון)", "זוכר את בחירתכם לגבי מדידה.", "עד 180 ימים"],
+                ["wifigate_cart", "עוגייה הכרחית (צד ראשון)", "שומרת את המוצרים והמנויים בסל הקניות ואת הכמויות שלהם, כדי שהסל וטופס ההזמנה יוכלו להשתמש בהם. אינה כוללת מחירים או פרטים אישיים, ומתרוקנת כששולחים את ההזמנה.", "30 ימים מהשינוי האחרון בסל"],
                 ["מטמון מדיה ציבורית", "CacheStorage (צד ראשון)", "משתמש שוב בסרטונים ציבוריים ובתמונות תואמות שכבר התבקשו בהתאם לרוחב המסך. שומר קובצי מדיה ללא פרטי חשבון או מזהי מעקב, עד 96 מגה־בייט ו־48 קבצים.", "שימוש חוזר עד 30 ימים; קבצים שפג תוקפם נמחקים בפעילות מטמון מאוחרת יותר או במחיקת נתוני האתר."],
                 ["_ga ו־_ga_*", "עוגיות מדידה (Google, רק בהסכמה)", "מדידת ביקורים ושימוש באתר.", "עד 180 ימים"],
                 ["סשן Firebase Authentication", "אחסון סשן (צד ראשון, בפורטל בלבד)", "שומר על החיבור שלכם לפורטל כל עוד לשונית הדפדפן פתוחה.", "עד ההתנתקות או סגירת הלשונית"],

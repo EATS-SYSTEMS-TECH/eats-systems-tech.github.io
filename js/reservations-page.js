@@ -30,6 +30,7 @@ import {
   formatDate,
 } from "./reservations-copy.js";
 import { countryCodes } from "./reservations-countries.js";
+import { CART_CATALOG, readCart, writeCart } from "./cart-cookie.js";
 
 const $ = (selector) => document.querySelector(selector);
 const language = pageLanguage();
@@ -442,6 +443,8 @@ async function submit() {
     if (requestGeneration !== generation) return;
 
     draftKey = undefined;
+    // The reservation now carries the cart, so the cart starts again empty.
+    writeCart([]);
     showSent(reservation);
     void loadMine();
   } catch (error) {
@@ -488,6 +491,33 @@ function prefill() {
   form.elements.namedItem("email").value = currentUser?.email ?? "";
   if (!form.elements.namedItem("fullName").value)
     form.elements.namedItem("fullName").value = currentUser?.displayName ?? "";
+}
+
+// The shop cart (wifigate_cart cookie) fills a fresh form once per page: its
+// controllers become quantities and its subscriptions a line in the notes,
+// which the team reads with the reservation.
+let cartApplied = false;
+
+function applyCart() {
+  if (cartApplied || productLines.some(({ id }) => quantities[id] > 0)) return;
+  const cart = readCart();
+  if (!cart.length) return;
+  cartApplied = true;
+
+  for (const { productId, quantity } of cart)
+    if (productId in quantities) quantities[productId] = Math.min(maxQuantity, quantity);
+
+  const subscriptions = cart
+    .filter(({ productId }) => CART_CATALOG.find(({ id }) => id === productId)?.kind === "subscription")
+    .map(({ productId }) => CART_CATALOG.find(({ id }) => id === productId).name);
+  const notes = $("#reservation-form").elements.namedItem("notes");
+  if (subscriptions.length && !notes.value.trim())
+    notes.value = t("cartSubscriptions", { names: subscriptions.join(", ") });
+
+  renderProducts(true);
+  renderSummary();
+  const controllers = productLines.some(({ id }) => quantities[id] > 0);
+  setStatus($("#reservation-status"), t(controllers ? "cartAdded" : "cartSubscriptionsOnly"));
 }
 
 // ---------- My reservations ----------
@@ -696,6 +726,7 @@ function showSignedIn(user) {
   renderProducts(true);
   renderSummary();
   prefill();
+  applyCart();
   void loadMine();
 }
 

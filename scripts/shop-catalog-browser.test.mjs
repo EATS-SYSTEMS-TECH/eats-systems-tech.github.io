@@ -51,22 +51,21 @@ async function assertSharedCatalog(page, locale, width, product) {
   const mainText = await page.locator(".shop-main").innerText();
   assert.doesNotMatch(mainText, /[$€₪£]\s*\d|\d\s*[$€₪£]/, "No unverified price is published");
   const home = locale === "he" ? "/he/" : locale === "en" ? "/" : `/${locale.toLowerCase()}/`;
-  const purchases = page.locator(".shop-purchase");
-  assert.equal(await purchases.count(), product ? 1 : 0,
-    "Catalog cards navigate to details; only the detail has a waitlist contact control");
-  for (const purchase of await purchases.all()) {
-    assert.equal(await purchase.getAttribute("href"), `${home}#get-in-touch`, "The waitlist control leads to contact, not checkout");
-    assert.match(await purchase.innerText(), locale === "he" ? /רשימת ההמתנה/ : /waitlist/i);
+  assert.equal(await page.locator(".shop-purchase").count(), product ? 1 : 0,
+    "Catalog cards navigate to details; only the detail has a single add-to-cart control");
+  for (const waitlist of await page.locator(".shop-waitlist").all()) {
+    assert.equal(await waitlist.getAttribute("href"), `${home}#get-in-touch`, "The waitlist link leads to contact");
+    assert.match(await waitlist.innerText(), locale === "he" ? /רשימת ההמתנה/ : /waitlist/i);
   }
   for (const stock of await page.locator(".shop-stock").all())
     assert.match(await stock.innerText(), locale === "he" ? /צרו קשר כדי להירשם לרשימת ההמתנה/ : /Contact us to join the waitlist/i);
   assert.equal(await page.locator(".shop-business-card").count(), product ? 0 : 2, "The catalog presents the Host and Manager subscriptions");
   if (!product) {
-    const storageBefore = await page.evaluate(() => localStorage.getItem("wifigate-cart-v1"));
     await page.locator("[data-business='manager'] [data-shop-cart]").evaluate((element) => element.click());
     assert.equal(await page.locator(".site-cart__drawer").isVisible(), true, "Add to cart opens the cart");
-    assert.deepEqual(await page.evaluate(() => window.WIFIGATE_CART.getItems()), [], "No product or unverified price is stored");
-    assert.equal(await page.evaluate(() => localStorage.getItem("wifigate-cart-v1")), storageBefore);
+    assert.deepEqual(await page.evaluate(() => window.WIFIGATE_CART.getItems()), [{ productId: "wifigate-manager", quantity: 1 }]);
+    assert.match(await page.evaluate(() => document.cookie), /wifigate_cart=wifigate-manager%3A1/, "The cart is kept in its cookie");
+    await page.evaluate(() => window.WIFIGATE_CART.clear());
     await page.keyboard.press("Escape");
   }
   assert.ok(await page.locator(".shop-main a[href$='#get-in-touch']").count(), "Contact remains available");
@@ -169,17 +168,18 @@ test("product keyboard navigation, native accordions and deep-route header cart 
       assert.equal(await summary.evaluate((element) => element.parentElement.open), !before);
       await page.keyboard.press("Space");
       assert.equal(await summary.evaluate((element) => element.parentElement.open), before);
-      const storageBefore = await page.evaluate(() => localStorage.getItem("wifigate-cart-v1"));
-      await page.locator(".shop-purchase").evaluate((element) => element.addEventListener("click", (event) => event.preventDefault(), { once: true }));
-      await page.locator(".shop-purchase").evaluate((element) => element.click());
-      assert.deepEqual(await page.evaluate(() => window.WIFIGATE_CART.getItems()), []);
-      assert.equal(await page.evaluate(() => localStorage.getItem("wifigate-cart-v1")), storageBefore);
       assert.equal(await page.locator(".site-cart__count").isHidden(), true);
+      await page.locator(".shop-purchase").evaluate((element) => element.click());
+      assert.deepEqual(await page.evaluate(() => window.WIFIGATE_CART.getItems()), [{ productId: "wifigate-roller-shutter", quantity: 1 }]);
+      assert.equal(await page.locator(".site-cart__count").textContent(), "1");
+      assert.equal(await page.locator(".site-cart__checkout").isDisabled(), false, "A filled cart continues to a reservation");
+      await page.keyboard.press("Escape");
+      await page.evaluate(() => window.WIFIGATE_CART.clear());
       const cart = page.locator(".site-cart__trigger");
       await cart.focus();
       await page.keyboard.press("Enter");
       assert.equal(await page.locator(".site-cart__drawer").isVisible(), true);
-      assert.equal(await page.locator(".site-cart__checkout").isDisabled(), true);
+      assert.equal(await page.locator(".site-cart__checkout").isDisabled(), true, "An empty cart cannot continue");
       await page.keyboard.press("Escape");
       assert.equal(await page.locator(".site-cart__drawer").isHidden(), true);
       assert.equal(await cart.evaluate((element) => element === document.activeElement), true);

@@ -256,23 +256,41 @@
   font-size: 13px;
   line-height: 1.75;
 }
-.shop-purchase {
+.shop-purchase,
+.shop-waitlist {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 9px;
   width: 100%;
   min-height: 52px;
-  margin-block-end: 24px;
   padding: 13px 20px;
   border-radius: 999px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 200ms ease, border-color 200ms ease;
+}
+.shop-purchase {
+  border: 0;
   background: #101315;
   color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  transition: background 200ms ease;
+  cursor: pointer;
 }
 .shop-purchase:hover {
   background: #2a2f33;
+}
+.shop-purchase svg {
+  width: 19px;
+  height: 19px;
+}
+.shop-waitlist {
+  margin-block: 10px 24px;
+  border: 1.5px solid #d4d8dc;
+  color: #151719;
+}
+.shop-waitlist:hover {
+  border-color: #151719;
 }
 .shop-product-facts {
   display: grid;

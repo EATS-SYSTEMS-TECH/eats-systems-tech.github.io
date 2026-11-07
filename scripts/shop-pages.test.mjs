@@ -35,26 +35,29 @@ function assertUnavailable($, main, locale, product) {
   main.find(".shop-stock").each((_, element) => assert.equal($(element).text().trim(), stock));
   main.find(".shop-product-card__link").each((_, element) => assert.ok($(element).attr("aria-label").includes(stock), "Screen readers hear product availability before opening details"));
   assert.equal(main.find(".shop-purchase").length, product ? 1 : 0,
-    "Catalog cards browse details; the detail has one waitlist contact control");
+    "Catalog cards browse details; the detail has one add-to-cart control");
   main.find(".shop-purchase").each((_, element) => {
-    assert.equal(element.tagName, "a");
-    assert.equal($(element).attr("href"), contact, "The waitlist control leads to contact, not checkout");
+    assert.equal(element.tagName, "button");
+    assert.equal($(element).attr("data-shop-cart"), product, "The detail adds its own product to the cart");
     assert.equal($(element).attr("onclick"), undefined);
   });
+  assert.equal(main.find(".shop-waitlist").length, product ? 1 : 0);
+  main.find(".shop-waitlist").each((_, element) => assert.equal($(element).attr("href"), contact, "The waitlist link leads to contact"));
   assert.equal(main.find(".shop-business-card").length, product ? 0 : 2, "Only the catalog presents the business subscriptions");
   const carts = main.find("[data-shop-cart]");
-  assert.equal(carts.length, product ? 0 : 4, "Each catalog product and subscription offers details and add to cart");
+  assert.deepEqual(carts.map((_, element) => $(element).attr("data-shop-cart")).get(),
+    product ? [product] : ["wifigate", "wifigate-roller-shutter", "wifigate-host", "wifigate-manager"],
+    "Each product and subscription adds its own cart id");
   carts.each((_, element) => {
     assert.equal(element.tagName, "button");
     assert.equal($(element).attr("type"), "button", "Add to cart cannot submit a form");
-    assert.equal($(element).closest(".shop-actions").find(".shop-actions__details[href]").length, 1, "Add to cart sits beside a details link");
+    if (!product) assert.equal($(element).closest(".shop-actions").find(".shop-actions__details[href]").length, 1, "Add to cart sits beside a details link");
   });
   assert.equal(main.find("img[src*='assets/img/manager/']").length, 0, "Manager is illustrated without a dashboard screenshot");
   assert.equal(main.find(".shop-related, .shop-contact").length, 0, "The removed related and contact sections stay removed");
   assert.equal(main.find("form, [data-add-to-cart], [data-buy-now]").length, 0,
     "The unavailable catalog exposes no order submission or purchase handler");
-  assert.equal(main.find('a[href*="reservations"], a[href*="checkout"]').length, 0,
-    "Unavailable products do not lead into a reservation or checkout flow");
+  assert.equal(main.find('a[href*="checkout"]').length, 0, "There is no online payment checkout");
   assert.doesNotMatch(main.text(), /[$€₪£¥]\s*\d|\d[\d.,]*\s*[$€₪£¥]|\b(?:USD|ILS|EUR|GBP)\b/,
     "No unverified price or currency is shown");
   assert.doesNotMatch(main.text(), /\u2014/, "The shop copy does not use em dash placeholders");

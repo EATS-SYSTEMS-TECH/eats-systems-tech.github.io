@@ -219,16 +219,16 @@ export function updateSharedHeader($, data, locale, key) {
   for (const [selector, value] of [['.site-account__label', account.signedInAs], ['[data-account-dashboard]', account.dashboard], ['[data-account-sign-out]', account.signOut]]) setLocalizedText($, $(selector), value, locale);
   $('[data-account-dashboard]').attr('href', locale === 'he' ? '/dashboard/?lang=he' : '/dashboard/');
   const hebrew = locale === 'he';
-  const cart = hebrew ? ['סל קניות', 'סל הקניות', 'סגירת סל הקניות', 'סל הקניות ריק כרגע.', 'סכום ביניים משוער', 'התשלום יהיה זמין בקרוב', 'הקנייה באתר תהיה זמינה בקרוב.'] : ['Shopping cart', 'Your cart', 'Close cart', 'Your cart is empty.', 'Estimated subtotal', 'Checkout coming soon', 'Online shopping will be available soon.'];
+  const cart = hebrew ? ['סל קניות', 'סל הקניות', 'סגירת סל הקניות', 'סל הקניות ריק כרגע.', 'מחיר', 'המשך להזמנה', 'אין תשלום בשלב הזה. נחזור אליכם לתאם מחיר, התקנה ומשלוח.', 'יתואם מול הצוות'] : ['Shopping cart', 'Your cart', 'Close cart', 'Your cart is empty.', 'Price', 'Continue to reservation', "No payment now. We'll contact you to confirm price, installation and delivery.", 'Confirmed with our team'];
   $('.site-cart__trigger').attr('aria-label', cart[0]);
   $('#site-cart-title').text(cart[1]); $('.site-cart__close').attr('aria-label', cart[2]);
-  ['.site-cart__empty', '.site-cart__subtotal span', '.site-cart__checkout', '.site-cart__note'].forEach((selector, index) => $(selector).text(cart[index + 3]));
+  ['.site-cart__empty', '.site-cart__subtotal span', '.site-cart__checkout', '.site-cart__note'].forEach((selector, index) => $(selector).text(cart[index + 3])); $('.site-cart__subtotal strong').text(cart[7]);
   $('.site-cart__drawer').attr('data-cart-copy', JSON.stringify({ trigger: cart[0], remove: hebrew ? 'הסרת פריט' : 'Remove item', decrease: hebrew ? 'הפחתת כמות' : 'Decrease quantity', increase: hebrew ? 'הגדלת כמות' : 'Increase quantity' }));
   if (!hebrew) $('.site-cart__drawer').attr('lang', 'en');
-  $('head').append(`<link rel="stylesheet" href="${prefix}css/site-header.css?v=20261022a"><link rel="stylesheet" href="${prefix}css/site-cart.css?v=20261020b">`);
+  $('head').append(`<link rel="stylesheet" href="${prefix}css/site-header.css?v=20261022a"><link rel="stylesheet" href="${prefix}css/site-cart.css?v=20261108a">`);
   $("script[src*='js/site-account.js']").remove();
   $("script[src*='js/navigation.js']").attr('src', prefix + 'js/navigation.js?v=20261022outside1').after(`\n  <script src="${prefix}js/site-account.js?v=20261022day1" defer></script>`);
-  $('body').append(`<script src="${prefix}js/site-cart.js?v=20261016a" defer></script>`);
+  $('body').append(`<script type="module" src="${prefix}js/site-cart.js?v=20261108a"></script>`);
 }
 
 // Both executable and JSON-only data scripts use the identical safe boundary.

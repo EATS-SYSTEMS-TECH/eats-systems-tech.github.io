@@ -203,6 +203,35 @@ test("the open-reservations limit and a lost response keep the same Idempotency-
   assert.equal(keys.length, 2);
 });
 
+test("the shop cart cookie fills the reservation and is emptied once it is sent", async (t) => {
+  const { origin, browser } = await startSite(t);
+  const { page, context } = await scenario(browser, noPlans);
+  t.after(() => context.close());
+  let created;
+  await context.route("**/api/v1/product-reservations**", (route) => {
+    const request = route.request();
+    if (request.method() === "GET") return route.fulfill({ json: { items: [] } });
+    created = request.postDataJSON();
+    return route.fulfill({ status: 201, json: { reservation: reservation({ items: created.items, notes: created.notes, language: "en" }) } });
+  });
+  await context.addCookies([{ name: "wifigate_cart", value: encodeURIComponent("wifigate:3,wifigate-roller-shutter:1,wifigate-manager:1"), url: origin }]);
+
+  await page.goto(origin + "/reservations/");
+  await page.locator("#reservations-workspace").waitFor();
+  await page.getByText("The items in your cart were added to this reservation.").waitFor();
+  assert.deepEqual(await page.locator("#reservation-summary-items li").evaluateAll((rows) => rows.map((row) => row.textContent)), ["WIFIGATE×3", "WIFIGATE Roller shutter×1"]);
+  assert.equal(await page.locator("textarea[name=notes]").inputValue(), "Subscriptions from the shop cart: WIFIGATE Manager. Please arrange the plan with me.");
+  await page.locator("input[name=fullName]").fill("Dana Cohen");
+  await page.locator("input[name=phone]").fill("+44 20 7946 0958");
+  await page.locator("input[name=city]").fill("London");
+  await page.locator("input[name=street]").fill("1 High Street");
+  await page.getByRole("button", { name: "Send reservation" }).click();
+  await page.locator("#reservation-sent").waitFor();
+  assert.deepEqual(created.items, [{ productLine: "wifigate", quantity: 3 }, { productLine: "wifigate-roller-shutter", quantity: 1 }]);
+  assert.match(created.notes, /WIFIGATE Manager/);
+  assert.equal((await context.cookies()).some(({ name }) => name === "wifigate_cart"), false, "The sent cart is emptied");
+});
+
 test("WIFIGATE Admin opens Reservations from the separate admin tools and moves one", async (t) => {
   const { origin, browser } = await startSite(t);
   const { page, context } = await scenario(browser, {

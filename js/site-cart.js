@@ -1,92 +1,61 @@
-// Preview cart UI. Checkout is deliberately unavailable until a server-side
-// catalog, order API and payment provider are connected.
-(() => {
-  const trigger = document.querySelector(".site-cart__trigger");
-  const drawer = document.querySelector(".site-cart__drawer");
-  const backdrop = document.querySelector(".site-cart__backdrop");
-  if (!trigger || !drawer || !backdrop) return;
+// The site cart drawer. Items live in the wifigate_cart cookie (cart-cookie.js)
+// and are checked out through WIFIGATE Reservations: there is no online payment,
+// the team confirms price, installation and delivery with the customer.
+import { CART_CATALOG, cartProduct, normalizeCart, readCart, writeCart } from "./cart-cookie.js?v=20261108a";
 
-  const STORAGE_KEY = "wifigate-cart-v1";
-  const MAX_QUANTITY = 99;
+const trigger = document.querySelector(".site-cart__trigger");
+const drawer = document.querySelector(".site-cart__drawer");
+const backdrop = document.querySelector(".site-cart__backdrop");
+
+if (trigger && drawer && backdrop) {
   const badge = trigger.querySelector(".site-cart__count");
   const closeButton = drawer.querySelector(".site-cart__close");
   const list = drawer.querySelector(".site-cart__items");
   const empty = drawer.querySelector(".site-cart__empty");
-  const subtotal = drawer.querySelector(".site-cart__subtotal strong");
+  const checkout = drawer.querySelector(".site-cart__checkout");
   const copy = JSON.parse(drawer.dataset.cartCopy || "{}");
   const isHebrew = document.documentElement.lang === "he";
-  let items = readItems();
+  const text = isHebrew
+    ? { items: "פריטים", remove: "הסרה", controller: "בקר", subscription: "מנוי", subscriptionNote: "הצוות יתאם איתכם את המסלול" }
+    : { items: "items", remove: "Remove", controller: "Controller", subscription: "Subscription", subscriptionNote: "Our team will arrange the plan with you" };
+  // Earlier preview builds kept a priced test cart in local storage.
+  try { localStorage.removeItem("wifigate-cart-v1"); } catch { /* Storage may be disabled. */ }
+  // The cookie is the source of truth; memory keeps the cart usable when cookies are blocked.
+  let items = readCart();
   let focusBeforeOpen = null;
 
-  function validItem(item) {
-    return item && typeof item.productId === "string" && item.productId.length > 0 && item.productId.length <= 120 &&
-      typeof item.variantId === "string" && item.variantId.length <= 120 &&
-      typeof item.name === "string" && item.name.trim() && item.name.length <= 200 &&
-      Number.isSafeInteger(item.unitPriceMinor) && item.unitPriceMinor >= 0 &&
-      typeof item.currency === "string" && /^[A-Z]{3}$/.test(item.currency) &&
-      Number.isInteger(item.quantity) && item.quantity >= 1 && item.quantity <= MAX_QUANTITY &&
-      (item.imageUrl === "" || (typeof item.imageUrl === "string" && /^\/(?!\/)/.test(item.imageUrl)));
-  }
-
-  function readItems() {
-    try {
-      const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-      return Array.isArray(parsed) ? parsed.filter(validItem).slice(0, 100) : [];
-    } catch {
-      return [];
-    }
-  }
-
-  function save() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(items)); } catch { /* Storage may be disabled. */ }
+  function save(next) {
+    const wanted = normalizeCart(next);
+    const stored = writeCart(wanted);
+    items = stored.length === wanted.length ? stored : wanted;
     render();
     window.dispatchEvent(new CustomEvent("wifigate:cart-change", { detail: { items: getItems() } }));
+    return getItems();
   }
 
   function getItems() { return items.map((item) => ({ ...item })); }
-  function keyOf(item) { return `${item.productId}\u0000${item.variantId}`; }
 
-  function addItem(input) {
-    const candidate = {
-      productId: input?.productId,
-      variantId: input?.variantId || "",
-      name: input?.name,
-      imageUrl: input?.imageUrl || "",
-      unitPriceMinor: input?.unitPriceMinor,
-      currency: input?.currency,
-      quantity: input?.quantity ?? 1,
-    };
-    if (!validItem(candidate)) throw new TypeError("Invalid cart item");
-    if (items.length && items[0].currency !== candidate.currency) throw new Error("Cart currency mismatch");
-    const existing = items.find((item) => keyOf(item) === keyOf(candidate));
-    if (existing) existing.quantity = Math.min(MAX_QUANTITY, existing.quantity + candidate.quantity);
-    else items.push(candidate);
-    save();
-    return getItems();
+  function addItem({ productId, quantity = 1 } = {}) {
+    const product = cartProduct(productId);
+    if (!product || !Number.isInteger(quantity) || quantity < 1) throw new TypeError("Invalid cart item");
+    const current = items.find((item) => item.productId === productId)?.quantity ?? 0;
+    return save([...items.filter((item) => item.productId !== productId), { productId, quantity: Math.min(product.max, current + quantity) }]);
   }
 
-  function setQuantity(productId, variantId = "", quantity) {
-    if (!Number.isInteger(quantity) || quantity < 0 || quantity > MAX_QUANTITY) throw new TypeError("Invalid quantity");
-    const index = items.findIndex((item) => item.productId === productId && item.variantId === variantId);
-    if (index < 0) return getItems();
-    if (quantity === 0) items.splice(index, 1);
-    else items[index].quantity = quantity;
-    save();
-    return getItems();
+  function setQuantity(productId, quantity) {
+    const product = cartProduct(productId);
+    if (!product || !Number.isInteger(quantity) || quantity < 0) throw new TypeError("Invalid quantity");
+    const rest = items.filter((item) => item.productId !== productId);
+    return save(quantity === 0 ? rest : [...rest, { productId, quantity: Math.min(product.max, quantity) }]);
   }
 
-  function money(minor, currency) {
-    try {
-      const formatter = new Intl.NumberFormat(isHebrew ? "he-IL" : "en", { style: "currency", currency });
-      return formatter.format(minor / 10 ** formatter.resolvedOptions().maximumFractionDigits);
-    } catch { return `${(minor / 100).toFixed(2)} ${currency}`; }
-  }
+  function clear() { return save([]); }
 
-  function makeButton(text, label, action, item) {
+  function makeButton(label, action, product, content) {
     const button = document.createElement("button");
     button.type = "button";
-    button.textContent = text;
-    button.setAttribute("aria-label", `${label}: ${item.name}`);
+    button.textContent = content;
+    button.setAttribute("aria-label", `${label}: ${product.name}`);
     button.addEventListener("click", action);
     return button;
   }
@@ -95,17 +64,20 @@
     const count = items.reduce((sum, item) => sum + item.quantity, 0);
     badge.hidden = count === 0;
     badge.textContent = count > 99 ? "99+" : String(count);
-    trigger.setAttribute("aria-label", count ? `${copy.trigger}, ${count} ${isHebrew ? "פריטים" : "items"}` : copy.trigger);
+    trigger.setAttribute("aria-label", count ? `${copy.trigger}, ${count} ${text.items}` : copy.trigger);
     empty.hidden = items.length > 0;
     list.hidden = items.length === 0;
+    checkout.disabled = items.length === 0;
     list.replaceChildren();
-    for (const item of items) {
+    for (const { productId, quantity } of items) {
+      const product = cartProduct(productId);
       const row = document.createElement("li");
       row.className = "site-cart__item";
-      if (item.imageUrl) {
+      row.dataset.product = productId;
+      if (product.image) {
         const image = document.createElement("img");
         image.className = "site-cart__image";
-        image.src = item.imageUrl;
+        image.src = product.image;
         image.alt = "";
         image.width = 80;
         image.height = 80;
@@ -118,27 +90,34 @@
         row.append(placeholder);
       }
       const details = document.createElement("div");
+      const kind = document.createElement("span");
+      kind.className = `site-cart__kind site-cart__kind--${product.kind}`;
+      kind.textContent = text[product.kind];
       const name = document.createElement("p");
       name.className = "site-cart__item-name";
-      name.textContent = item.name;
-      const price = document.createElement("span");
-      price.className = "site-cart__item-price";
-      price.textContent = money(item.unitPriceMinor, item.currency);
-      const quantity = document.createElement("div");
-      quantity.className = "site-cart__quantity";
-      quantity.append(
-        makeButton("−", copy.decrease, () => setQuantity(item.productId, item.variantId, item.quantity - 1), item),
-        Object.assign(document.createElement("output"), { textContent: String(item.quantity) }),
-        makeButton("+", copy.increase, () => setQuantity(item.productId, item.variantId, Math.min(MAX_QUANTITY, item.quantity + 1)), item)
-      );
-      const remove = makeButton(isHebrew ? "הסרה" : "Remove", copy.remove, () => setQuantity(item.productId, item.variantId, 0), item);
+      name.dir = "ltr";
+      name.textContent = product.name;
+      details.append(kind, name);
+      if (product.max > 1) {
+        const control = document.createElement("div");
+        control.className = "site-cart__quantity";
+        const less = makeButton(copy.decrease, () => setQuantity(productId, quantity - 1), product, "−");
+        const more = makeButton(copy.increase, () => setQuantity(productId, quantity + 1), product, "+");
+        more.disabled = quantity >= product.max;
+        control.append(less, Object.assign(document.createElement("output"), { textContent: String(quantity) }), more);
+        details.append(control);
+      } else {
+        const note = document.createElement("span");
+        note.className = "site-cart__item-note";
+        note.textContent = text.subscriptionNote;
+        details.append(note);
+      }
+      const remove = makeButton(copy.remove, () => setQuantity(productId, 0), product, text.remove);
       remove.className = "site-cart__remove";
-      details.append(name, price, quantity, remove);
+      details.append(remove);
       row.append(details);
       list.append(row);
     }
-    if (!items.length) subtotal.textContent = "—";
-    else subtotal.textContent = money(items.reduce((sum, item) => sum + item.unitPriceMinor * item.quantity, 0), items[0].currency);
   }
 
   function closeCart() {
@@ -173,6 +152,9 @@
   trigger.addEventListener("click", () => drawer.hidden ? openCart() : closeCart());
   closeButton.addEventListener("click", closeCart);
   backdrop.addEventListener("click", closeCart);
+  checkout.addEventListener("click", () => {
+    if (items.length) location.assign(isHebrew ? "/reservations/?lang=he" : "/reservations/");
+  });
   document.addEventListener("keydown", (event) => {
     if (drawer.hidden) return;
     if (event.key === "Escape") { event.preventDefault(); closeCart(); return; }
@@ -186,9 +168,10 @@
   document.addEventListener("click", (event) => {
     if (!drawer.hidden && event.target.closest(".nav__toggle, .site-account__button, .language-selector__button")) closeCart();
   }, true);
-  window.addEventListener("storage", (event) => {
-    if (event.key === STORAGE_KEY) { items = readItems(); render(); }
-  });
-  window.WIFIGATE_CART = Object.freeze({ addItem, setQuantity, getItems, open: openCart, close: closeCart });
+  // Cookies raise no storage event: pick up changes from other tabs on return.
+  const refresh = () => { if (navigator.cookieEnabled && document.visibilityState === "visible") { items = readCart(); render(); } };
+  document.addEventListener("visibilitychange", refresh);
+  window.addEventListener("pageshow", refresh);
+  window.WIFIGATE_CART = Object.freeze({ addItem, setQuantity, clear, getItems, products: CART_CATALOG, open: openCart, close: closeCart });
   render();
-})();
+}

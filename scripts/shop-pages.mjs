@@ -11,7 +11,7 @@ const COPY = {
   en: {
     shop: "Shop", home: "Home", eyebrow: "WIFIGATE COLLECTION", heading: "Smart access. Simply WIFIGATE.",
     intro: "Controllers that bring everyday access to your phone.", products: "2 products", view: "Product details", moreDetails: "More details", addToCart: "Add to cart",
-    stock: "Contact us to join the waitlist", waitlist: "Join the waitlist", stockNote: "We'll let you know as soon as it is available to order.",
+    stock: "Contact us to join the waitlist", waitlist: "Join the waitlist", stockNote: "Add it to your cart and send a reservation, or join the waitlist. There is no payment at this stage.",
     imageSoon: "Product image coming soon", category: "Smart access controller", shutterCategory: "Electric shutter controller",
     description: "A smart controller for electric gates, garage doors and barriers. Open them from the WIFIGATE app, with no remote needed.",
     shutterDescription: "A smart controller for electric roller shutters. Open and close them from the WIFIGATE app.",
@@ -25,7 +25,7 @@ const COPY = {
     featureShutter2: "Manage your shutter from the same app as your other WIFIGATE systems.",
     compatibilityText: "The controller is installed alongside a compatible existing control system. Contact our team to check suitability for your installation.",
     shutterCompatibility: "Designed for electric roller shutters. Contact our team to check compatibility with your shutter and installation.",
-    unavailableText: "Online ordering is not open yet. Contact our team to join the waitlist and we will update you when the product is available.",
+    unavailableText: "Add the product to your cart and continue to a reservation. Our team will contact you to confirm price, installation and delivery; there is no online payment. You can also contact us to join the waitlist.",
     factUse: "Made for", factUseValue: "Gates, garage doors & parking barriers", shutterUseValue: "Electric roller shutters",
     factControl: "Control", factControlValue: "WIFIGATE app", allProducts: "All products",
     business: "For Business", subscription: "Subscription", businessHeading: "Subscription plans for your business.",
@@ -42,7 +42,7 @@ const COPY = {
   he: {
     shop: "חנות", home: "בית", eyebrow: "הקולקציה של WIFIGATE", heading: "גישה חכמה. פשוט WIFIGATE.",
     intro: "בקרים שמביאים את הפתיחה היומיומית לטלפון שלכם.", products: "2 מוצרים", view: "לפרטי המוצר", moreDetails: "פרטים נוספים", addToCart: "הוספה לסל",
-    stock: "צרו קשר כדי להירשם לרשימת ההמתנה", waitlist: "להרשמה לרשימת ההמתנה", stockNote: "נעדכן אתכם ברגע שהמוצר יהיה זמין להזמנה.",
+    stock: "צרו קשר כדי להירשם לרשימת ההמתנה", waitlist: "להרשמה לרשימת ההמתנה", stockNote: "אפשר להוסיף לסל ולשלוח הזמנה, או להירשם לרשימת ההמתנה. אין תשלום בשלב הזה.",
     imageSoon: "תמונת המוצר תתווסף בהמשך", category: "בקר גישה חכם", shutterCategory: "בקר לתריס חשמלי",
     description: "בקר חכם לשערים חשמליים, לדלתות חניה ולמחסומים. פותחים באפליקציית WIFIGATE, בלי לחפש שלט.",
     shutterDescription: "בקר חכם לתריסים חשמליים. פותחים וסוגרים באפליקציית WIFIGATE.",
@@ -56,7 +56,7 @@ const COPY = {
     featureShutter2: "מנהלים את התריס באותה אפליקציה עם שאר מערכות WIFIGATE שלכם.",
     compatibilityText: "הבקר מותקן לצד מערכת בקרה קיימת ותואמת. צרו קשר עם הצוות כדי לבדוק התאמה להתקנה שלכם.",
     shutterCompatibility: "מיועד לתריסים חשמליים. צרו קשר עם הצוות כדי לבדוק התאמה לתריס ולהתקנה שלכם.",
-    unavailableText: "ההזמנה המקוונת עדיין לא נפתחה. צרו קשר עם הצוות כדי להירשם לרשימת ההמתנה, ונעדכן אתכם כשהמוצר יהיה זמין.",
+    unavailableText: "מוסיפים את המוצר לסל וממשיכים להזמנה. הצוות יחזור אליכם לתאם מחיר, התקנה ומשלוח, בלי תשלום מקוון. אפשר גם ליצור קשר כדי להירשם לרשימת ההמתנה.",
     factUse: "מתאים ל", factUseValue: "שערים, דלתות חניה ומחסומים", shutterUseValue: "תריסים חשמליים",
     factControl: "שליטה", factControlValue: "אפליקציית WIFIGATE", allProducts: "כל המוצרים",
     business: "לעסקים", subscription: "מנוי", businessHeading: "מסלולי מנוי לעסק שלכם.",
@@ -85,10 +85,14 @@ function renderMedia(product, copy, { detail = false } = {}) {
 
 const CART_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>';
 
-// Add to cart opens the cart drawer, which explains that online shopping is not
-// open yet; no product, price or quantity is stored.
-function renderActions(copy, { href, label, details, name, detailsClass = "" }) {
-  return `<div class="shop-actions"><a class="shop-actions__details${detailsClass}" href="${href}"${label ? ` aria-label="${escapeHtml(label)}"` : ""}>${details}</a><button class="shop-actions__cart" type="button" data-shop-cart aria-label="${escapeHtml(`${copy.addToCart}: ${name}`)}">${CART_ICON}<span>${copy.addToCart}</span></button></div>`;
+// Add to cart puts the product in the wifigate_cart cookie (js/site-cart.js);
+// the cart is checked out as a WIFIGATE Reservation, with no online payment.
+function renderCartButton(copy, productId, name, className = "shop-actions__cart") {
+  return `<button class="${className}" type="button" data-shop-cart="${productId}" aria-label="${escapeHtml(`${copy.addToCart}: ${name}`)}">${CART_ICON}<span>${copy.addToCart}</span></button>`;
+}
+
+function renderActions(copy, { href, label, details, name, productId, detailsClass = "" }) {
+  return `<div class="shop-actions"><a class="shop-actions__details${detailsClass}" href="${href}"${label ? ` aria-label="${escapeHtml(label)}"` : ""}>${details}</a>${renderCartButton(copy, productId, name)}</div>`;
 }
 
 function renderCard(product, locale, copy, headingTag = "h2") {
@@ -100,7 +104,7 @@ function renderCard(product, locale, copy, headingTag = "h2") {
       <p class="shop-product-card__category">${shutter ? copy.shutterCategory : copy.category}</p>
       <${headingTag} class="shop-product-card__name" dir="ltr">${product.name}</${headingTag}>
       <p class="shop-product-card__description">${shutter ? copy.shutterDescription : copy.description}</p>
-      ${renderActions(copy, { href, label: `${copy.view}: ${product.name}. ${copy.stock}`, details: copy.view, name: product.name, detailsClass: " shop-product-card__link" })}
+      ${renderActions(copy, { href, label: `${copy.view}: ${product.name}. ${copy.stock}`, details: copy.view, name: product.name, productId: product.id, detailsClass: " shop-product-card__link" })}
     </div>
   </article>`;
 }
@@ -128,7 +132,7 @@ function renderBusinessCard(copy, { id, name, href }) {
       <h3 class="shop-business-card__name" dir="ltr">${name}</h3>
       <p class="shop-business-card__description">${copy[`${id}Description`]}</p>
       <ul class="shop-business-card__features">${features}</ul>
-      ${renderActions(copy, { href, label: `${copy.moreDetails}: ${name}`, details: copy.moreDetails, name })}
+      ${renderActions(copy, { href, label: `${copy.moreDetails}: ${name}`, details: copy.moreDetails, name, productId: `wifigate-${id}` })}
     </div>
   </article>`;
 }
@@ -175,7 +179,7 @@ export function getShopPageContent(locale, productId = null) {
         <div class="shop-product-info"><p class="shop-product-info__category">${shutter ? copy.shutterCategory : copy.category}</p><h1 dir="ltr">${product.name}</h1><p class="shop-product-info__description">${shutter ? copy.shutterDescription : copy.description}</p>
           <div class="shop-availability"><span class="shop-stock">${copy.stock}</span><p>${copy.stockNote}</p></div>
           <dl class="shop-product-facts"><div><dt>${copy.factUse}</dt><dd>${shutter ? copy.shutterUseValue : copy.factUseValue}</dd></div><div><dt>${copy.factControl}</dt><dd>${copy.factControlValue}</dd></div></dl>
-          <a class="shop-purchase" href="${localePath(locale)}#get-in-touch">${copy.waitlist}</a>
+          ${renderCartButton(copy, product.id, product.name, "shop-purchase")}<a class="shop-waitlist" href="${localePath(locale)}#get-in-touch">${copy.waitlist}</a>
           <div class="shop-product-accordions">${renderAccordion(copy.overview, `<p>${shutter ? copy.shutterOverview : copy.overviewText}</p>`, { open: true })}${renderAccordion(copy.features, `<ul><li>${shutter ? copy.featureShutter1 : copy.featureGate1}</li><li>${shutter ? copy.featureShutter2 : copy.featureGate2}</li></ul>`)}${renderAccordion(copy.compatibility, `<p>${shutter ? copy.shutterCompatibility : copy.compatibilityText}</p>`)}${renderAccordion(copy.availability, `<p>${copy.unavailableText}</p>`)}</div>
         </div>
       </article>`,
