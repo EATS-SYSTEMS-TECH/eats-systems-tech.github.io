@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { createStaticCache, eligibleStatic, STATIC_CACHE_LIMITS } from "../js/static-cache-policy.mjs";
+import { createStaticCache, eligibleStatic, isPrivatePage, STATIC_CACHE_LIMITS } from "../js/static-cache-policy.mjs";
 
 const base = "https://wifigate.io/";
 const get = (path, init) => new Request(base + path, init);
@@ -44,52 +44,104 @@ test("only public static files qualify; code needs a version", () => {
   assert.equal(eligibleStatic(new Request("https://cdn.example.com/css/a.css?v=1"), base), null, "other origins");
 });
 
-test("a stored file answers at once and is refreshed in the background", async () => {
+const tick = () => new Promise((resolve) => setTimeout(resolve, 10));
+const MIN = 60 * 1000;
+
+test("a stored file answers at once and is re-checked with its ETag only after ten minutes", async () => {
   const caches = fakeCaches();
-  let calls = 0, body = "v1";
-  const fetcher = async (request) => { calls += 1; assert.equal(request.credentials, "omit"); return basic(body, "text/css"); };
+  const clock = { now: 1_000_000 }, seen = [];
+  let body = "v1", etag = '"a"';
+  const fetcher = async (request) => {
+    seen.push(request.headers.get("if-none-match"));
+    assert.equal(request.credentials, "omit");
+    if (request.headers.get("if-none-match") === etag) { const r = new Response(null, { status: 304 }); Object.defineProperty(r, "type", { value: "basic" }); return r; }
+    return basic(body, "text/css", { etag });
+  };
   const background = [];
-  const files = createStaticCache({ baseUrl: base, cacheStorage: caches, fetcher, now: () => 1000 });
-  const first = await files.respond(get("css/styles.css?v=1"), (promise) => background.push(promise));
-  assert.equal(await first.text(), "v1");
-  assert.equal(background.length, 0, "a miss waits for the network itself");
-  await new Promise((resolve) => setTimeout(resolve, 10));
-  body = "v1-fixed";
-  const second = await files.respond(get("css/styles.css?v=1"), (promise) => background.push(promise));
-  assert.equal(second.headers.get("x-wifigate-static-cache"), "hit");
-  assert.equal(await second.text(), "v1", "the stored copy answers without waiting");
+  const files = createStaticCache({ baseUrl: base, cacheStorage: caches, fetcher, now: () => clock.now });
+  const keep = (promise) => background.push(promise);
+  assert.equal(await (await files.respond(get("css/styles.css?v=1"), keep)).text(), "v1");
   await Promise.all(background);
-  assert.equal(calls, 2);
-  const third = await files.respond(get("css/styles.css?v=1"), (promise) => background.push(promise));
-  assert.equal(await third.text(), "v1-fixed", "an unbumped version heals on the next visit");
+  clock.now += 5 * MIN;
+  const early = await files.respond(get("css/styles.css?v=1"), keep);
+  assert.equal(early.headers.get("x-wifigate-static-cache"), "hit");
+  assert.equal(seen.length, 1, "no network request within ten minutes");
+  clock.now += 6 * MIN;
+  assert.equal(await (await files.respond(get("css/styles.css?v=1"), keep)).text(), "v1");
+  await Promise.all(background);
+  assert.deepEqual(seen, [null, '"a"'], "the re-check is conditional and an unchanged file is not rewritten");
+  body = "v1-fixed"; etag = '"b"';
+  clock.now += 11 * MIN;
+  assert.equal(await (await files.respond(get("css/styles.css?v=1"), keep)).text(), "v1", "the stored copy still answers at once");
+  await Promise.all(background);
+  assert.equal(await (await files.respond(get("css/styles.css?v=1"), keep)).text(), "v1-fixed", "an unbumped version heals on the next visit");
 });
 
-test("a new version replaces the old one and errors or wrong types are never stored", async () => {
+test("scripts and styles are reused for at most a day, images and fonts for a month", async () => {
+  const caches = fakeCaches();
+  const clock = { now: 0 };
+  let calls = 0;
+  const fetcher = async (request) => { calls += 1; return basic(`${request.url}#${calls}`, request.url.endsWith(".js?v=1") ? "text/javascript" : "image/webp"); };
+  const files = createStaticCache({ baseUrl: base, cacheStorage: caches, fetcher, now: () => clock.now });
+  for (const path of ["js/a.js?v=1", "assets/img/a.webp"]) await (await files.respond(get(path))).text();
+  await tick();
+  clock.now += 25 * 60 * MIN;
+  const code = await files.respond(get("js/a.js?v=1"));
+  assert.equal(code.headers.get("x-wifigate-static-cache"), null, "day-old code comes from the network");
+  const image = await files.respond(get("assets/img/a.webp"));
+  assert.equal(image.headers.get("x-wifigate-static-cache"), "hit");
+});
+
+test("a miss never waits for the cache write", async () => {
+  const caches = fakeCaches();
+  const original = caches.open.bind(caches);
+  let release;
+  const blocked = new Promise((resolve) => { release = resolve; });
+  caches.open = async (name) => { const cache = await original(name); return { ...cache, async put(...args) { await blocked; return cache.put(...args); } }; };
+  const files = createStaticCache({ baseUrl: base, cacheStorage: caches, fetcher: async () => basic("x", "image/webp") });
+  const saving = [];
+  const first = await Promise.race([files.respond(get("assets/img/a.webp"), (promise) => saving.push(promise)), new Promise((resolve) => setTimeout(() => resolve("stuck"), 500))]);
+  assert.notEqual(first, "stuck");
+  const second = await Promise.race([files.respond(get("assets/img/b.webp"), (promise) => saving.push(promise)), new Promise((resolve) => setTimeout(() => resolve("stuck"), 500))]);
+  assert.notEqual(second, "stuck", "a second miss is not queued behind the first write");
+  release();
+  await Promise.all(saving);
+});
+
+test("versions live side by side; errors, wrong types and private files are never stored", async () => {
   const caches = fakeCaches();
   const responses = { "css/a.css?v=1": () => basic("one", "text/css"), "css/a.css?v=2": () => basic("two", "text/css"),
     "js/x.js?v=1": () => basic("<html>", "text/html"), "assets/img/missing.webp": () => { const r = new Response("no", { status: 404, headers: { "content-type": "image/webp" } }); Object.defineProperty(r, "type", { value: "basic" }); return r; },
     "assets/img/private.webp": () => basic("p", "image/webp", { "cache-control": "private" }) };
   const fetcher = async (request) => responses[request.url.slice(base.length)]();
   const files = createStaticCache({ baseUrl: base, cacheStorage: caches, fetcher, now: () => 5 });
-  for (const path of Object.keys(responses)) await (await files.respond(get(path))).text();
-  await new Promise((resolve) => setTimeout(resolve, 10));
-  assert.deepEqual([...caches.stores.get(files.cacheName).keys()], [base + "css/a.css?v=2"]);
+  const saving = [];
+  for (const path of Object.keys(responses)) await (await files.respond(get(path), (promise) => saving.push(promise))).text();
+  await Promise.all(saving);
+  assert.deepEqual([...caches.stores.get(files.cacheName).keys()].sort(), [base + "css/a.css?v=1", base + "css/a.css?v=2"]);
 });
 
 test("a failed network answer passes through and the entry limit evicts the oldest", async () => {
   const caches = fakeCaches();
   let clock = 0;
   const fetcher = async (request) => { if (request.url.includes("down")) throw new TypeError("offline"); return basic(request.url, "image/webp"); };
-  const files = createStaticCache({ baseUrl: base, cacheStorage: caches, fetcher: async (request) => fetcher(request), now: () => clock, limits: { ...STATIC_CACHE_LIMITS, entries: 2 } });
+  const files = createStaticCache({ baseUrl: base, cacheStorage: caches, fetcher, now: () => clock, limits: { ...STATIC_CACHE_LIMITS, entries: 2, pruneEvery: 1 } });
   await assert.rejects(files.respond(get("assets/img/down.webp")), TypeError, "the browser sees the same network failure");
-  for (const name of ["a", "b", "c"]) { clock += 1; await (await files.respond(get(`assets/img/${name}.webp`))).text(); await new Promise((resolve) => setTimeout(resolve, 5)); }
+  for (const name of ["a", "b", "c"]) { clock += 1; const saving = []; await (await files.respond(get(`assets/img/${name}.webp`), (promise) => saving.push(promise))).text(); await Promise.all(saving); }
   assert.deepEqual([...caches.stores.get(files.cacheName).keys()].sort(), [base + "assets/img/b.webp", base + "assets/img/c.webp"]);
+});
+
+test("sign-in and private app pages are recognised in every locale folder", () => {
+  for (const page of ["login/", "he/login/", "zh-hans/login/", "dashboard/", "manager/", "pay/", "reservations/", "work/", "he/dashboard/?x=1"]) assert.equal(isPrivatePage(base + page, base), true, page);
+  for (const page of ["", "he/", "wifigate-manager/", "he/wifigate-host/", "shop/", "he/shop/wifigate/", "payments-info/", "https://example.com/login/", ""]) assert.equal(isPrivatePage(page.startsWith("http") ? page : base + page, base), false, page);
+  assert.equal(isPrivatePage("", base), false);
 });
 
 test("every public page registers the same worker that caches scene media", async () => {
   const worker = await readFile(new URL("../media-cache-sw.js", import.meta.url), "utf8");
   assert.match(worker, /createStaticCache/);
   assert.match(worker, /createMediaCache/);
+  assert.match(worker, /isPrivatePage/, "files for sign-in and private apps stay on the network");
   const register = await readFile(new URL("../js/site-cache.js", import.meta.url), "utf8");
   assert.match(register, /media-cache-sw\.js/);
   for (const page of ["index.html", "he/index.html", "he/shop/index.html", "he/login/index.html", "he/electric-gates/index.html", "he/privacy-policy/index.html", "404.html"]) {

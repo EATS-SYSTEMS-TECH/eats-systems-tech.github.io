@@ -75,12 +75,12 @@ test("clearing one store does not lift the lockout and misses survive a reload",
   assert.deepEqual(createGateCheckStore(options).read(), { failures: 0, lockedUntil: 0 });
 });
 
-test("a forged or malformed stored lockout is ignored or capped", () => {
+test("a forged, clock-skewed or malformed stored lockout is capped or ignored", () => {
   const clock = { now: 9_000_000 };
   const browser = fakeBrowser(clock);
   const options = { storage: browser.storage, cookies: browser.cookies, setCookie: browser.setCookie, clock: () => clock.now };
   browser.storage.setItem("wifigate-gate-check-v1", JSON.stringify({ failures: 5, lockedUntil: clock.now + 86_400_000, expires: clock.now + 86_400_000 }));
-  assert.equal(createGateCheckStore(options).read().lockedUntil, 0, "a lockout longer than 60 seconds is not trusted");
+  assert.equal(createGateCheckStore(options).read().lockedUntil, clock.now + 60_000, "a lockout longer than 60 seconds is capped at 60 seconds, not dropped");
   browser.storage.setItem("wifigate-gate-check-v1", "{not json");
   assert.deepEqual(createGateCheckStore(options).read(), { failures: 0, lockedUntil: 0 });
   assert.deepEqual(createGateCheckStore({ clock: () => clock.now }).read(), { failures: 0, lockedUntil: 0 }, "no storage at all");

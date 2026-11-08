@@ -30,6 +30,13 @@ try {
     });
     await page.reload({ waitUntil: "load" });
     await page.waitForTimeout(500);
+    if (path.includes("/login/")) {
+      // Sign-in always runs the files the network serves now.
+      assert.deepEqual(hits, [], `${path}: sign-in files never come from the device cache`);
+      assert.deepEqual(errors, []);
+      await context.close();
+      continue;
+    }
     assert.ok(hits.some((hit) => hit.endsWith(".css")), `${path}: styles come from the device (${hits.join(", ")})`);
     assert.ok(hits.some((hit) => hit.endsWith(".js")), `${path}: scripts come from the device`);
     assert.ok(hits.some((hit) => /\.(?:webp|png|svg|woff2?)$/.test(hit)), `${path}: images or fonts come from the device`);
@@ -37,7 +44,7 @@ try {
     assert.deepEqual(errors, []);
     await context.close();
   }
-  console.log("Static cache: worker installs on public pages; repeat visits take styles, scripts, fonts and images from the device; pages stay network-fresh.");
+  console.log("Static cache: repeat visits take styles, scripts, fonts and images from the device; pages stay network-fresh; sign-in stays network-only.");
 } finally {
   await browser.close();
 }

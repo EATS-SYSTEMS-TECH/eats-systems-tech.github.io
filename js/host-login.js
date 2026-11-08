@@ -19,7 +19,7 @@ import {
 } from "./platform-model.js?v=20261027managerux1";
 import { watchSession } from "./platform-session.js?v=20261022day1";
 import { requestMfaChallenge } from "./host-mfa-challenge.js?v=20261024mfa1";
-import { requestHumanCheck } from "./login-gate-game.js?v=20261109gate1";
+import { requestHumanCheck } from "./login-gate-game.js?v=20261109gate2";
 const status = document.querySelector("#login-status");
 const progress = document.querySelector("#login-progress");
 const buttons = [...document.querySelectorAll("[data-provider]")];

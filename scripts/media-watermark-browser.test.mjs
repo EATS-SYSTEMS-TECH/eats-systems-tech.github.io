@@ -82,7 +82,7 @@ async function staticPhotosHaveNoLayer(page, route) {
   const checks = await page.evaluate(() => {
     const extra = [...document.querySelectorAll("main [data-media-watermark-frame]")].filter(frame => !frame.querySelector("video"));
     const grid = [...document.querySelectorAll(".security-statement__media-image")];
-    const host = document.querySelector(".home-en .automation-stay__media");
+    const host = document.querySelector(".home-en .business-plan__media");
     return { photoOnlyFrames: extra.length, gridImagesRetained: grid.every(item => item.tagName === "IMG"), staticHostMarks: host?.querySelectorAll("[data-media-watermark]").length || 0 };
   });
   assert.equal(checks.photoOnlyFrames, 0);

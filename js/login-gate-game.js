@@ -28,8 +28,9 @@ function readStored(storage, cookies, now) {
     if (!value || typeof value !== "object") continue;
     const until = Number(value.lockedUntil) || 0;
     const missesValid = Number.isInteger(value.failures) && value.failures > 0 && value.failures <= MAX_FAILURES && Number(value.expires) > now;
-    // A lockout can never claim to last longer than one lockout period.
-    if (until > now && until <= now + LOCKOUT_MS) lockedUntil = Math.max(lockedUntil, until);
+    // A lockout never lasts longer than one period from now: a forged value or
+    // a clock set back is capped, never thrown away.
+    if (until > now) lockedUntil = Math.max(lockedUntil, Math.min(until, now + LOCKOUT_MS));
     if (missesValid) failures = Math.max(failures, value.failures);
   }
   if (lockedUntil) failures = MAX_FAILURES;
@@ -70,12 +71,28 @@ function browserStore() {
 let failures = 0;
 let lockedUntil = 0;
 let store;
+// The stored state is the source of truth shared by every tab: reading merges
+// it in, so a dialog opened earlier in another tab still sees a new lockout,
+// and a write never lowers a stored lockout or miss count.
 function load() {
   store ??= browserStore();
-  ({ failures, lockedUntil } = store.read());
+  // A lockout this tab saw has ended: its misses end with it.
+  if (lockedUntil && Date.now() >= lockedUntil) { failures = 0; lockedUntil = 0; }
+  const stored = store.read();
+  failures = Math.max(failures, stored.failures);
+  lockedUntil = Math.max(Date.now() < lockedUntil ? lockedUntil : 0, stored.lockedUntil);
+  if (lockedUntil) failures = MAX_FAILURES;
 }
 function save() {
-  store?.write({ failures, lockedUntil });
+  load();
+  store.write({ failures, lockedUntil });
+}
+// Only a passed check or an expired lockout (in every tab) clears the state.
+function clear() {
+  store ??= browserStore();
+  failures = 0;
+  lockedUntil = 0;
+  store.write({ failures, lockedUntil });
 }
 const GATE_ZONE = 0.72;
 
@@ -250,14 +267,15 @@ export function requestHumanCheck(loginCopy) {
     if (finished) return;
     finished = true;
     clearInterval(countdown);
+    window.removeEventListener("storage", onStorage);
     dialog.close();
     dialog.remove();
     resolveResult(result);
   }
 
   function succeed() {
-    failures = 0;
-    save();
+    if (locked()) return;
+    clear();
     board.classList.add("gate-game__board--done");
     dialog.classList.add("gate-game--verified");
     message.textContent = copy.done;
@@ -271,16 +289,19 @@ export function requestHumanCheck(loginCopy) {
     showLock();
   }
 
+  let showingLock = false;
   function showLock() {
+    clearInterval(countdown);
+    showingLock = true;
     board.classList.add("gate-game__board--locked");
     car.setAttribute("aria-disabled", "true");
     const tick = () => {
+      load();
       const left = Math.ceil((lockedUntil - Date.now()) / 1000);
       if (left <= 0) {
         clearInterval(countdown);
-        failures = 0;
-        lockedUntil = 0;
-        save();
+        showingLock = false;
+        clear();
         board.classList.remove("gate-game__board--locked");
         car.removeAttribute("aria-disabled");
         message.textContent = "";
@@ -294,6 +315,7 @@ export function requestHumanCheck(loginCopy) {
   }
 
   function fail() {
+    if (locked()) return;
     failures += 1;
     board.classList.remove("gate-game__board--shake");
     void board.offsetWidth;
@@ -308,7 +330,18 @@ export function requestHumanCheck(loginCopy) {
     setTimeout(newRound, reducedMotion() ? 0 : 350);
   }
 
-  const locked = () => Date.now() < lockedUntil || finished;
+  // Every input first re-reads the shared state; a lockout set in another tab
+  // takes over this dialog at once.
+  const locked = () => {
+    if (finished) return true;
+    load();
+    if (Date.now() >= lockedUntil) return false;
+    if (!showingLock) showLock();
+    return true;
+  };
+  function onStorage(event) {
+    if (event.key === null || event.key === STORE_KEY) locked();
+  }
 
   function judge(centerX, centerY, human) {
     const inGate = centerX >= board.clientWidth * GATE_ZONE;
@@ -401,13 +434,8 @@ export function requestHumanCheck(loginCopy) {
   });
   dialog.showModal();
   newRound(false);
-  load();
-  if (Date.now() < lockedUntil) showLock();
-  else if (lockedUntil) {
-    failures = 0;
-    lockedUntil = 0;
-    save();
-  }
+  window.addEventListener("storage", onStorage);
+  locked();
   car.focus({ preventScroll: true });
   return result;
 }

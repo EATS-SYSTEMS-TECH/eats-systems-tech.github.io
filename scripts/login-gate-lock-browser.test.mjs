@@ -46,7 +46,31 @@ try {
   await openCheck();
   assert.match(await page.locator(".gate-game__message").innerText(), /יותר מדי ניסיונות/, "the cookie alone keeps the lock");
   await context.close();
-  console.log("Login check lockout: kept across reloads and a cleared localStorage, countdown continues, car stays disabled.");
+
+  // A check already open in a second tab is taken over by a lockout set in the first.
+  {
+    const shared = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+    const [first, second] = [await shared.newPage(), await shared.newPage()];
+    const open = async (tab) => { await tab.locator("[data-provider]").first().click(); await tab.locator(".gate-game__car").waitFor({ state: "visible" }); };
+    await second.goto(origin + "/he/login/", { waitUntil: "load" });
+    await open(second);
+    await first.goto(origin + "/he/login/", { waitUntil: "load" });
+    await open(first);
+    for (let miss = 0; miss < 5; miss += 1) { await first.locator(".gate-game__car").focus(); await first.keyboard.press("Enter"); await first.waitForTimeout(450); }
+    await first.waitForFunction(() => /\d/.test(document.querySelector(".gate-game__message").textContent));
+    await second.bringToFront();
+    await second.waitForFunction(() => /\d/.test(document.querySelector(".gate-game__message").textContent), null, { timeout: 5000 });
+    assert.match(await second.locator(".gate-game__message").innerText(), /יותר מדי ניסיונות/, "the other tab is locked too");
+    await second.locator(".gate-game__car").focus();
+    await second.keyboard.press("ArrowUp");
+    await second.keyboard.press("Enter");
+    assert.match(await second.locator(".gate-game__message").innerText(), /יותר מדי ניסיונות/, "the other tab cannot pass during the lockout");
+    await first.reload({ waitUntil: "load" });
+    await open(first);
+    assert.match(await first.locator(".gate-game__message").innerText(), /יותר מדי ניסיונות/, "the second tab did not wipe the stored lockout");
+    await shared.close();
+  }
+  console.log("Login check lockout: kept across reloads, a cleared localStorage and a second open tab; countdown continues, car stays disabled.");
 } finally {
   await browser.close();
 }
