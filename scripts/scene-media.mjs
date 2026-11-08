@@ -64,12 +64,12 @@ function attachSceneAssets($, assetPrefix) {
   $("script[src*='js/media-runtime.js']").attr("src", `${assetPrefix}js/media-runtime.js?v=20261019d`);
   $("script[src*='js/hero.js']").attr("src", `${assetPrefix}js/hero.js?v=20261019d`);
   if (!$("link[href*='scene-video.css']").length) {
-    $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261108a`));
+    $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261109a`));
   }
   if (!$("script[src*='js/scene-video.js']").length) {
     $("head").append($("<script>").attr("src", `${assetPrefix}js/scene-video.js?v=20261019d`).attr("defer", ""));
   }
-  $("link[href*='scene-video.css']").attr("href", `${assetPrefix}css/scene-video.css?v=20261108a`);
+  $("link[href*='scene-video.css']").attr("href", `${assetPrefix}css/scene-video.css?v=20261109a`);
   $("script[src*='js/scene-video.js']").attr("src", `${assetPrefix}js/scene-video.js?v=20261019d`);
 }
 
@@ -124,7 +124,7 @@ export function applyNicheSceneMedia($, { scene, assetPrefix, copy }) {
   if (pager.length === 1) pager.prepend($(".niche-hero__media > .scene-video-controls"));
 }
 
-export function applyHomeSceneMedia($, { scene, hotelScene, assetPrefix, copy }) {
+export function applyHomeSceneMedia($, { scene, assetPrefix, copy }) {
   if (scene) {
     const hero = $("#home.hero");
     const image = hero.find("img.hero__bg--image");
@@ -140,22 +140,5 @@ export function applyHomeSceneMedia($, { scene, hotelScene, assetPrefix, copy })
     hero.find("#hero-pause-toggle").attr("hidden", "");
     hero.find("#hero-replay").removeAttr("hidden");
     attachSceneAssets($, assetPrefix);
-  }
-  if (hotelScene) {
-    const figure = $("#guest-invites-api .automation-stay");
-    const image = figure.children("img");
-    if (figure.length !== 1 || image.length !== 1) throw new Error("Hospitality scene image is missing");
-    const media = $("<div>").addClass("automation-stay__media");
-    image.before(media);
-    media.append(image.attr("src", sceneAssetUrl(assetPrefix, hotelScene.poster)).attr("width", String(hotelScene.width || 1280)).attr("height", String(hotelScene.height || 720)));
-    // The homepage Host card is a photo. Responsive poster selection needs no
-    // video element, playback data, controls or media-runtime registration.
-    if (Object.values(hotelScene.variants || {}).some(variant => variant?.accepted)) {
-      image.wrap($("<picture>"));
-      for (const [name, query] of [["desktop", "(min-width: 769px)"], ["mobile", "(max-width: 768px)"]]) {
-        const artifact = hotelScene.variants?.[name]?.accepted ? hotelScene.variants[name] : hotelScene;
-        image.before($("<source>").attr("media", query).attr("srcset", sceneAssetUrl(assetPrefix, artifact.poster)));
-      }
-    }
   }
 }

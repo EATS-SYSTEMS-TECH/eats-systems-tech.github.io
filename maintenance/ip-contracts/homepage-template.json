@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "originalSource": "42ebc994c356a40b806f4a35e16b252f9d603bae",
-  "rawSha256": "f47d165a27b19a8cab8b22ea4dd9300b439a0d12f6d946a6a42bc088f2a680d6",
-  "domSha256": "7a37d6b19cec00610cf527cd658d309a047fc9829e088fa5f7a6e27f9cbd9918",
+  "rawSha256": "4c79c0c806488d1340189559858f829b6875cd7f717b2ecd9fa270dc3798201b",
+  "domSha256": "1c240b854df2a81d1c784a4f20db76ac8ad6752a56e208e8454a1bf712bd18ad",
   "sectionOrder": [
     "home",
     "advantages",
@@ -22,7 +22,7 @@
     "js/hero.js?v=20261019d",
     "js/accessibility-copy.js?v=20261007a",
     "js/accessibility.js?v=20261027d",
-    "js/language-selector.js?v=20261006a",
+    "js/language-selector.js?v=20261109flags1",
     "js/faq.js?v=20261017b",
     "js/main.js?v=20261007b"
   ],
@@ -51,21 +51,6 @@
       "decoding": "async",
       "width": "1545",
       "height": "905"
-    },
-    {
-      "src": "assets/wifigate_niche_pages/hotels-airbnb-v2-app-hero.webp",
-      "alt": "Guests using a phone to enter their hotel room",
-      "width": "1280",
-      "height": "720",
-      "loading": "lazy"
-    },
-    {
-      "src": "assets/img/wifigate-manager-building.webp",
-      "alt": "The entrance of a residential building whose access is managed with WIFIGATE Manager",
-      "width": "960",
-      "height": "540",
-      "loading": "lazy",
-      "decoding": "async"
     },
     {
       "class": "security-statement__media-image",

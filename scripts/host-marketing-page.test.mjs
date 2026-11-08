@@ -120,7 +120,9 @@ test("homepage For Business section numbers each plan and keeps the Host destina
   assert.deepEqual(plans.map((_, node) => $(node).find(".business-plan__number").text()).get(), ["01", "02"]);
   assert.equal(plans.first().find(".guest-invites__cta").attr("href"), "/wifigate-host/");
   assert.equal(plans.last().find(".business-plan__cta").attr("href"), "/wifigate-manager/");
-  assert.equal($("#wifigate-for-business .automation-stay > img").length, 1, "the Host photo keeps its scene-media slot");
+  // Each plan shows its shop card artwork: the WIFIGATE label and the plan letter, no photo.
+  assert.deepEqual(plans.map((_, node) => $(node).find(".business-plan__art[aria-hidden='true'] .business-plan__art-letter").text()).get(), ["H", "M"]);
+  assert.equal($("#wifigate-for-business img, #wifigate-for-business .automation-stay").length, 0);
   assert.equal($(".guest-invites__points, .automation-stay__steps").length, 0);
 });
 

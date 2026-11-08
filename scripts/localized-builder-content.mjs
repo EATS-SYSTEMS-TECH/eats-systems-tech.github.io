@@ -76,7 +76,7 @@ export function applyHomepageCopy($, copy, locale) {
     if (!$(selector).length) continue;
     if (value) { $(selector).removeAttr('hidden'); text(selector, value); } else $(selector).remove();
   }
-  for (const [selector, value] of [['#where-product-image', copy.solutions.imageAlt], ["img[src*='private-access-arrival']", copy.privateAccess.imageAlt], ["img[src*='one-tap-invite-map']", copy.oneTapInvite.imageAlt], ['img.product-overview__image', copy.productGuide.imageAlt], ['#wifigate-for-business .automation-stay img', copy.automation.imageAlt], ['.business-plan--manager .business-plan__media img', copy.automation.manager.imageAlt]]) $(selector).attr('alt', value);
+  for (const [selector, value] of [['#where-product-image', copy.solutions.imageAlt], ["img[src*='private-access-arrival']", copy.privateAccess.imageAlt], ["img[src*='one-tap-invite-map']", copy.oneTapInvite.imageAlt], ['img.product-overview__image', copy.productGuide.imageAlt]]) $(selector).attr('alt', value);
   $('#how-it-works .feature-card').each((index, node) => { text($(node).find('.feature-card__title'), copy.platform.features[index].title); text($(node).find('.feature-card__text'), copy.platform.features[index].text); });
   for (const [list, items] of [['.automation-audiences', copy.automation.audiences], ['.business-plan__audiences', copy.automation.manager.audiences]]) {
     $(`#wifigate-for-business ${list}`).attr('aria-label', copy.automation.audienceLabel).attr('dir', direction);

@@ -33,7 +33,9 @@ function fixture({ definitions = [{ key: "one", legacyKeys: ["old", "older"] }],
     updateNicheStaticUi($, ctx, niche) { $.__key = niche.key; },
     fillUseCaseBody($, values) { $.__key = values.pageKey; }, setUseCaseNavigation() {},
     buildAssetPrefix: () => "../", getNicheChrome: () => ({}),
-    async loadHostPageCopy() { return { marketing: {}, metaDescription: "Host" }; },
+    async loadSubscriptionCopy() { return { marketing: {}, metaDescription: "Host" }; },
+    // The Host entry of the shared subscription page builder.
+    SUBSCRIPTION_PAGES: [{ product: "host", pageKey: HOST_PAGE_KEY, copyDir: "host-page-copy", scene: "hotels-airbnb", bodyClass: "wifigate-host-page", serviceType: "Host", legacyKeys: ["automation", "Automated-Guest-Invites-API"] }],
     // Observe composition before translation within the publication fixture's
     // controlled DOM boundary; component checks cover the actual plan renderer.
     installHostDetailShells() { trace.push(["detail-shells"]); },
@@ -50,9 +52,9 @@ function fixture({ definitions = [{ key: "one", legacyKeys: ["old", "older"] }],
     },
   };
   const sharedShell = source.match(/^function prepareUseCaseShell\([^\n]*\) \{[\s\S]*?^\}/m)?.[0] || "";
-  const api = runInNewContext(sharedShell + "\n" + ["buildNichePages", "buildGuestInvitesPages"].map(declaration).join("\n") + "\n({buildNichePages,buildGuestInvitesPages});", boundary);
+  const api = runInNewContext(sharedShell + "\n" + ["buildNichePages", "buildSubscriptionPages", "buildSubscriptionPage"].map(declaration).join("\n") + "\n({buildNichePages,buildSubscriptionPages});", boundary);
   const homeData = { localeOptions: locales.map(code => ({ code })), accessibilityCopy: {}, sceneMedia: new Map(scene ? [["hotels-airbnb", { poster: { path: "poster.webp" }, width: 1200, height: 630 }]] : []), homepageCopies: Object.fromEntries(locales.map(code => [code, { hero: { media: {} }, footer: {} }])) };
-  return { trace, writes, shell, niches: () => api.buildNichePages(homeData), host: () => api.buildGuestInvitesPages(homeData) };
+  return { trace, writes, shell, niches: () => api.buildNichePages(homeData), host: () => api.buildSubscriptionPages(homeData) };
 }
 
 // Observe the real callers before and after consolidating their shared shell.
@@ -129,5 +131,5 @@ test("Host emits the two historical aliases directly to each localized canonical
   }
   assert.deepEqual(f.writes, expected);
   assert.deepEqual(JSON.parse(JSON.stringify(entries)), ["en", "he"].map(locale => ({ loc: `https://example.test/${locale}/${HOST_PAGE_KEY}/`, changefreq: "monthly", priority: "0.9" })));
-  const absent = fixture({ scene: false }); await assert.rejects(absent.host(), /Accepted hospitality media/); assert.deepEqual(absent.writes, []);
+  const absent = fixture({ scene: false }); await assert.rejects(absent.host(), /Accepted hotels-airbnb media/); assert.deepEqual(absent.writes, []);
 });

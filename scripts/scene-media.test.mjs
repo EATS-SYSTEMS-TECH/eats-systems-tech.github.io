@@ -39,7 +39,7 @@ test("existing scene styles and controllers receive the current asset version wi
     const $ = cheerio.load(`<html><head><link rel="stylesheet" href="../css/scene-video.css?v=20261018b"><script src="../js/hero.js?v=20261018b" defer></script><script src="../js/media-runtime.js?v=old" defer></script>${existingController ? '<script src="../js/scene-video.js?v=20261018b" defer></script>' : ""}</head><body><section class="niche-hero"><div class="niche-hero__media"><img id="niche-image"></div></section></body></html>`);
     applyNicheSceneMedia($, { scene: { poster: { path: "assets/img/scene.webp" }, video: { path: "assets/vid/use-cases/roller-shutters-720p.mp4" } }, assetPrefix: "../../", copy: { play: "Play", pause: "Pause", replay: "Replay" } });
     assert.equal($("link[href*='scene-video.css']").length, 1);
-    assert.equal($("link[href*='scene-video.css']").attr("href"), "../../css/scene-video.css?v=20261108a");
+    assert.equal($("link[href*='scene-video.css']").attr("href"), "../../css/scene-video.css?v=20261109a");
     for (const name of ["hero", "scene-video", "media-runtime"]) {
       assert.equal($(`script[src*='js/${name}.js']`).length, 1);
       assert.equal($(`script[src*='js/${name}.js']`).attr("src"), `../../js/${name}.js?v=20261019d`);
@@ -47,21 +47,19 @@ test("existing scene styles and controllers receive the current asset version wi
   }
 });
 
-test("media cache versions follow delivered artifact hashes across home, hotel and niche renderers", () => {
+test("media cache versions follow delivered artifact hashes across home and niche renderers", () => {
   const scene = { key: "homepage-montage",
     video: { path: "assets/vid/home/homepage-montage-720p.mp4", sha256: hash("new video") },
     poster: { path: "assets/img/homepage-montage-scene.webp", sha256: hash("new first frame") } };
-  const $ = cheerio.load('<html><head></head><body><section id="home" class="hero"><img class="hero__bg--image"><video id="hero-video"></video></section><section id="guest-invites-api"><figure class="automation-stay"><img alt="Guests"></figure></section><section class="niche-hero"><div class="niche-hero__media"><img id="niche-image"></div></section></body></html>');
+  const $ = cheerio.load('<html><head></head><body><section id="home" class="hero"><img class="hero__bg--image"><video id="hero-video"></video></section><section class="niche-hero"><div class="niche-hero__media"><img id="niche-image"></div></section></body></html>');
   const copy = { play: "Play", pause: "Pause", replay: "Replay" };
-  applyHomeSceneMedia($, { scene, hotelScene: scene, assetPrefix: "../", copy });
+  applyHomeSceneMedia($, { scene, assetPrefix: "../", copy });
   applyNicheSceneMedia($, { scene, assetPrefix: "../../", copy });
   const imageUrl = "../" + scene.poster.path + "?v=" + scene.poster.sha256.slice(0, 12);
   const videoUrl = "../" + scene.video.path + "?v=" + scene.video.sha256.slice(0, 12);
   assert.equal($("#home img").attr("src"), imageUrl);
   assert.equal($("#hero-video").attr("data-video-src"), videoUrl);
   assert.equal($("#hero-video").attr("poster"), imageUrl);
-  assert.equal($("#guest-invites-api video, #guest-invites-api [data-scene-video], #guest-invites-api button").length, 0, "homepage Host stays static");
-  assert.equal($("#guest-invites-api .automation-stay__media img").attr("src"), imageUrl);
   assert.equal($(".niche-hero video").attr("data-video-src"), "../" + videoUrl);
   assert.equal($(".niche-hero video").attr("poster"), $("#niche-image").attr("src"));
   assert.notEqual(sceneAssetUrl("../", { ...scene.video, sha256: hash("replacement video") }), videoUrl, "replacing bytes invalidates old video cache");
@@ -181,13 +179,12 @@ test("only accepted, unchanged scene artifacts enter pages", async () => {
   }
 });
 
-test("homepage montage keeps the Host poster and courier static and retains localized content", () => {
+test("homepage montage leaves the For Business artwork and courier untouched and retains localized content", () => {
   const $ = cheerio.load(`<html><head></head><body><section id="home" class="hero"><div class="hero__media"><img class="hero__bg--image"><video id="hero-video" loop><source src="old.mp4"></video><button id="hero-mute-toggle"></button><button id="hero-pause-toggle"></button><button id="hero-replay" hidden></button></div><h1>One app.</h1></section>
     <section id="private-access"><img class="security-statement__media-image" src="courier.webp" alt="Arrival"></section>
-    <section id="guest-invites-api"><h2>WIFIGATE Host</h2><figure class="automation-stay"><img alt="Guests enter"><figcaption>Booking received</figcaption></figure></section></body></html>`);
-  const courier = $("#private-access").toString();
+    <section id="guest-invites-api"><h2>WIFIGATE Host</h2><div class="business-plan__media business-plan__art" aria-hidden="true"><span>WIFIGATE</span><span>H</span></div></section></body></html>`);
+  const courier = $("#private-access").toString(), plans = $("#guest-invites-api").toString();
   applyHomeSceneMedia($, { scene: { key: "homepage-montage", poster: { path: "assets/img/homepage-montage-scene.webp" }, video: { path: "assets/vid/home/homepage-montage-720p.mp4" } },
-    hotelScene: { poster: { path: "assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp" }, video: { path: "assets/vid/use-cases/hotels-airbnb-720p.mp4" } },
     assetPrefix: "../", copy: { play: "Play", pause: "Pause", replay: "Replay" } });
   assert.equal($("#private-access").toString(), courier);
   assert.equal($("#home h1").text(), "One app.");
@@ -198,11 +195,7 @@ test("homepage montage keeps the Host poster and courier static and retains loca
   assert.equal($("#hero-video").attr("data-silent"), "true");
   assert.equal($("#hero-video").attr("poster"), $("#home img").attr("src"));
   assert.ok($("#hero-mute-toggle").is("[hidden]"));
-  assert.equal($("#guest-invites-api [data-scene-video], #guest-invites-api video, #guest-invites-api .scene-video-controls, #guest-invites-api [data-scene-copy]").length, 0);
-  assert.equal($("#guest-invites-api h2").text(), "WIFIGATE Host");
-  assert.equal($("#guest-invites-api figcaption").text(), "Booking received");
-  assert.equal($("#guest-invites-api .automation-stay__media img").attr("src"), "../assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp");
-  assert.equal($("#guest-invites-api img").attr("alt"), "Guests enter");
+  assert.equal($("#guest-invites-api").toString(), plans);
 });
 
 test("localized niche media preserves the image, has no automatic source, and stays out of absent scenes", () => {

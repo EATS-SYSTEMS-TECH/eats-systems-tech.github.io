@@ -30,7 +30,7 @@ const template = name => path.join(repoRoot, 'templates', `${name}.template.html
 const nicheTemplatePath = template('niche');
 const guestInvitesTemplatePath = template('guest-invites-api');
 const guestInvitesPageKey = HOST_PAGE_KEY;
-const nicheRuntimeScriptsToAdd = ['/js/language-selector.js?v=20261006a'];
+const nicheRuntimeScriptsToAdd = ['/js/language-selector.js?v=20261109flags1'];
 const hostPageCopyCache = new Map();
 
 // Metadata remains delegated to the existing canonical graph implementation.
@@ -129,7 +129,7 @@ async function buildHomePages(homeData) {
     const card = $('.feature-card--auto-open'), title = card.find('.feature-card__title');
     card.find('.feature-card__media').wrap($('<a>').attr({ href: buildPagePath(locale, AUTO_OPEN_PAGE_KEY), 'aria-label': title.text() }));
     title.wrapInner($('<a>').attr('href', buildPagePath(locale, AUTO_OPEN_PAGE_KEY)));
-    applyHomeSceneMedia($, { scene: homeData.sceneMedia.get('homepage-montage'), hotelScene: homeData.sceneMedia.get('hotels-airbnb'), assetPrefix: buildAssetPrefix(locale, 'home'), copy: copy.hero.media });
+    applyHomeSceneMedia($, { scene: homeData.sceneMedia.get('homepage-montage'), assetPrefix: buildAssetPrefix(locale, 'home'), copy: copy.hero.media });
     $('.guest-invites__cta').attr('href', buildPagePath(locale, guestInvitesPageKey));
     $('.business-plan__cta').attr('href', buildPagePath(locale, MANAGER_PAGE_KEY));
     const main = $('#main-content');
