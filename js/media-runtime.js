@@ -7,19 +7,30 @@
   const delay = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
   let registrationPromise;
 
+  // The poster file the browser already chose from <picture> (a portrait crop
+  // or an AVIF copy of the selected variant), so it is never fetched twice.
+  function shownPoster(image, fallback) {
+    if (!image) return fallback;
+    if (image.currentSrc) return image.currentSrc;
+    const sources = image.closest("picture[data-scene-picture]")?.querySelectorAll("source:not([type])") || [];
+    const source = [...sources].find(candidate => window.matchMedia(candidate.media).matches);
+    return source ? new URL(source.getAttribute("srcset"), document.baseURI).href : fallback;
+  }
+
   function select(video, image) {
     if (selections.has(video)) return selections.get(video);
     let variants;
     try { variants = JSON.parse(video.dataset.mediaVariants || "null"); } catch { /* Legacy single-source fallback. */ }
     const selected = variants?.[entryVariant];
     if (selected && typeof selected.src === "string" && typeof selected.poster === "string") {
-      // Assign the selected fallback before removing native picture sources, so
+      // Pin the shown poster before removing native picture sources, so
       // changing viewport later cannot fetch a second poster or change the pair.
+      const poster = shownPoster(image, selected.poster);
       if (image) {
-        image.src = selected.poster;
+        image.src = poster;
         image.closest("picture[data-scene-picture]")?.querySelectorAll("source").forEach(source => source.remove());
       }
-      video.poster = selected.poster;
+      video.poster = poster;
       video.dataset.videoSrc = selected.src;
       video.dataset.mediaVariant = entryVariant;
       video.width = selected.width;

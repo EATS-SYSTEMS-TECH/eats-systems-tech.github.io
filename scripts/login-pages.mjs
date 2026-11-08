@@ -9,10 +9,14 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { RTL_LANGUAGES, SITE_LANGUAGES } from "./site-languages.mjs";
+import { COOKIE_CONSENT_VERSION, readWindowGlobal } from "./localized-builder-document.mjs";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const templatePath = path.join(repoRoot, "templates", "login.template.html");
 const SOURCE_LOCALE = "he";
+// Only the page's own language of the cookie banner copy is embedded, as on
+// the public pages, which also share the cookie-consent file version.
+const COOKIE_COPY = await readWindowGlobal("cookie-consent-copy.js", "WIFIGATE_COOKIE_COPY");
 
 // Read by js/host-login.js, js/login-gate-game.js and the MFA dialog at run
 // time; every other key is written into the page by the build.
@@ -135,6 +139,8 @@ export function renderLoginPage(template, locale, copy) {
     languageOptions: languageOptions(locale),
     legal,
     runtimeCopy,
+    cookieConsentVersion: COOKIE_CONSENT_VERSION,
+    cookieCopy: JSON.stringify({ [locale]: COOKIE_COPY[locale] }).replace(/</g, "\\u003c"),
   };
   return template.replace(/\{\{(\w+)\}\}/g, (match, key) => {
     if (key in values) return values[key];

@@ -78,9 +78,12 @@ const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({ "&"
 const localePath = (locale, suffix = "") => `${locale === "en" ? "" : `/${locale.toLowerCase()}`}/${suffix ? `${suffix}/` : ""}`;
 const productPath = (locale, id) => localePath(locale, `shop/${id}`);
 
-function renderMedia(product, copy, { detail = false } = {}) {
+// The product page image and the first listing card are the largest thing in
+// the first screen, so they load at once with high priority.
+function renderMedia(product, copy, { detail = false, first = false } = {}) {
   const alt = product.id === "wifigate-roller-shutter" ? copy.shutterAlt : copy.overviewAlt;
-  return `<img src="${product.image}" alt="${alt}" width="${product.width}" height="${product.height}" loading="${detail ? "eager" : "lazy"}" decoding="async"${detail ? ' fetchpriority="high"' : ""} />`;
+  const eager = detail || first;
+  return `<img src="${product.image}" alt="${alt}" width="${product.width}" height="${product.height}" loading="${eager ? "eager" : "lazy"}" decoding="async"${eager ? ' fetchpriority="high"' : ""} />`;
 }
 
 const CART_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>';
@@ -103,11 +106,11 @@ const renderUseCases = (locale, copy) => `<p class="shop-product-card__uses-labe
 
 const renderList = (className, items) => `<p class="${className}">${items.map((item) => `<span>${item}</span>`).join("")}</p>`;
 
-function renderCard(product, locale, copy, headingTag = "h2") {
+function renderCard(product, locale, copy, headingTag = "h2", first = false) {
   const shutter = product.id === "wifigate-roller-shutter";
   const href = productPath(locale, product.id);
   return `<article class="shop-product-card" data-product="${product.id}">
-    <a class="shop-product-card__media" href="${href}" tabindex="-1" aria-hidden="true">${renderMedia(product, copy)}</a>
+    <a class="shop-product-card__media" href="${href}" tabindex="-1" aria-hidden="true">${renderMedia(product, copy, { first })}</a>
     <div class="shop-product-card__body">
       <p class="shop-product-card__category">${shutter ? copy.shutterCategory : copy.category}</p>
       <${headingTag} class="shop-product-card__name" dir="ltr">${product.name}</${headingTag}>
@@ -211,7 +214,7 @@ export function getShopPageContent(locale, productId = null) {
       title: copy.catalogTitle,
       description: copy.catalogDescription,
       contentLang,
-      main: `${renderBreadcrumb(locale, copy)}<header class="shop-heading"><p class="shop-eyebrow">${copy.eyebrow}</p><h1 class="shop-heading__title">${copy.heading.map((line) => `<span>${line}</span>`).join(" ")}</h1></header><div class="shop-catalog-meta"><span>${copy.allProducts}</span><span>${copy.products}</span></div><div class="shop-grid">${SHOP_PRODUCTS.map((item) => renderCard(item, locale, copy)).join("\n")}</div>${renderBusiness(locale, copy)}`,
+      main: `${renderBreadcrumb(locale, copy)}<header class="shop-heading"><p class="shop-eyebrow">${copy.eyebrow}</p><h1 class="shop-heading__title">${copy.heading.map((line) => `<span>${line}</span>`).join(" ")}</h1></header><div class="shop-catalog-meta"><span>${copy.allProducts}</span><span>${copy.products}</span></div><div class="shop-grid">${SHOP_PRODUCTS.map((item, index) => renderCard(item, locale, copy, "h2", index === 0)).join("\n")}</div>${renderBusiness(locale, copy)}`,
     };
   }
   const shutter = product.id === "wifigate-roller-shutter";

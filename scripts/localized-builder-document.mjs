@@ -7,8 +7,6 @@ import { RTL_LANGUAGES } from './site-languages.mjs';
 import { SITE_NAVIGATION, SITE_LOGIN_LABELS } from './site-navigation.mjs';
 import { accessibilityLinkLabels } from './legal/footer-labels.mjs';
 import { applyMediaWatermarks } from './media-watermark.mjs';
-import { HOST_PAGE_KEY } from './host-marketing-page.mjs';
-import { AUTO_OPEN_PAGE_KEY } from './auto-open-page.mjs';
 import { serializeScriptData } from "./script-data.mjs";
 
 // One invocation owns its input root, caches and unchanged product constants.
@@ -16,7 +14,17 @@ export const repoRoot = process.cwd();
 export const defaultLocale = 'en';
 export const siteOrigin = SITE_ORIGIN;
 export const nowDate = new Date().toISOString().slice(0, 10);
-export const COOKIE_CONSENT_VERSION = '20261108a';
+export const COOKIE_CONSENT_VERSION = '20261109ga1';
+// Browsers that support it fetch a public page when the visitor hovers or
+// presses its link, so the click opens it without waiting. Fetch only: no
+// script runs and no analytics fire until the page is opened. Sign-in and the
+// private apps are never fetched ahead.
+export const PREFETCH_RULES = Object.freeze({ prefetch: [{ where: { and: [
+  { href_matches: '/*' },
+  { not: { href_matches: '/*login/*' } },
+  { not: { href_matches: '/(dashboard|manager|pay|reservations|work|api)/*' } },
+  { not: { selector_matches: '[download], [rel~="nofollow"]' } },
+] }, eagerness: 'moderate' }] });
 export const SITE_CACHE_VERSION = '20261109cache1';
 export const changedFiles = new Set();
 export const isRtl = locale => RTL_LANGUAGES.has(locale);
@@ -251,8 +259,8 @@ export function serialize($, data, locale, key = 'home') {
   $('head').append(`<link rel="stylesheet" href="${prefix}css/cookie-consent.css?v=${COOKIE_CONSENT_VERSION}">`);
   $('body').append(`<script>window.WIFIGATE_COOKIE_COPY = ${inlineJson({ [locale]: data.cookieCopy[locale] })};</script>`);
   $("script[src*='js/accessibility-copy.js']").replaceWith(`<script>window.accessibilityCopy = ${inlineJson({ [locale]: data.accessibilityCopy[locale] })};</script>`);
-  const version = key === HOST_PAGE_KEY ? '20261108host1' : key === AUTO_OPEN_PAGE_KEY ? '20261108ao1' : COOKIE_CONSENT_VERSION;
-  $('body').append(`<script src="${prefix}js/cookie-consent.js?v=${version}" defer></script>`);
+  $('body').append(`<script src="${prefix}js/cookie-consent.js?v=${COOKIE_CONSENT_VERSION}" defer></script>`);
   $('body').append(`<script src="${prefix}js/site-cache.js?v=${SITE_CACHE_VERSION}" defer></script>`);
+  $('head').append(`<script type="speculationrules">${JSON.stringify(PREFETCH_RULES)}</script>`);
   return ensureTrailingNewline($.html({ decodeEntities: false }).replace(/[ \t]+(?=\r?\n|$)/g, ''));
 }

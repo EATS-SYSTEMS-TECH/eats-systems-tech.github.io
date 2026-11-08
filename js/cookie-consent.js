@@ -179,7 +179,24 @@ const CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
       window[`ga-disable-${GA_MEASUREMENT_ID}`] = true;
       window.gtag("consent", "update", { analytics_storage: "denied" });
     };
-    document.head.append(script);
+    // A choice stored from an earlier visit loads analytics only once the page
+    // has finished loading and is idle, so it never delays the page. A click on
+    // Accept loads it at once. Consent is checked again just before insertion.
+    if (explicitChoice || document.readyState === "complete") {
+      document.head.append(script);
+      return;
+    }
+    const insert = () => {
+      if (analyticsScript !== script) return;
+      if (currentConsent?.analytics === true && validConsent(currentConsent)) {
+        document.head.append(script);
+        return;
+      }
+      analyticsScript = undefined;
+      analyticsLoadState = "idle";
+    };
+    const idle = () => (window.requestIdleCallback ? window.requestIdleCallback(insert, { timeout: 2000 }) : setTimeout(insert, 1));
+    window.addEventListener("load", idle, { once: true });
   }
 
   function sharedConsentChanged(event) {

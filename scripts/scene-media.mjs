@@ -44,7 +44,32 @@ export async function readSceneManifest(repoRoot) {
     }
     scenes.set(scene.key, scene);
   }
+  await attachDerivedPosters(repoRoot, scenes);
   return scenes;
+}
+
+// Lighter copies made by scripts/derive-scene-posters.mjs from an accepted
+// poster. A copy is used only while its source poster and its own bytes are
+// exactly the ones recorded; otherwise the page keeps the accepted poster.
+async function attachDerivedPosters(repoRoot, scenes) {
+  let index;
+  try { index = JSON.parse(await fs.readFile(path.join(repoRoot, "assets", "img", "derived-posters", "index.json"), "utf8")); }
+  catch (error) { if (error.code === "ENOENT") return; throw error; }
+  const verified = async (copy) => {
+    if (!/^assets\/img\/derived-posters\/[a-z0-9-]+\.(webp|avif)$/.test(copy?.path || "")) return null;
+    const bytes = await fs.readFile(path.join(repoRoot, ...copy.path.split("/"))).catch(() => null);
+    return bytes && createHash("sha256").update(bytes).digest("hex") === copy.sha256 ? copy : null;
+  };
+  for (const scene of scenes.values()) {
+    for (const [name, artifact] of Object.entries(scene.variants || {})) {
+      const entry = index.posters?.[artifact?.poster?.path];
+      if (!artifact?.accepted || !entry || entry.source?.sha256 !== artifact.poster.sha256) continue;
+      const derived = {};
+      if (name === "mobile" && entry.portrait) derived.portrait = await verified(entry.portrait);
+      if (name === "desktop" && entry.avif) derived.avif = await verified(entry.avif);
+      if (derived.portrait || derived.avif) artifact.derived = derived;
+    }
+  }
 }
 
 // Validated production artifacts carry a SHA; small direct renderer fixtures may omit it.
@@ -56,12 +81,12 @@ export function sceneAssetUrl(assetPrefix, asset) {
 
 function attachSceneAssets($, assetPrefix) {
   if (!$("script[src*='js/media-runtime.js']").length) {
-    const runtime = $("<script>").attr("src", `${assetPrefix}js/media-runtime.js?v=20261019d`).attr("defer", "");
+    const runtime = $("<script>").attr("src", `${assetPrefix}js/media-runtime.js?v=20261109p1`).attr("defer", "");
     const heroScript = $("script[src*='js/hero.js']");
     if (heroScript.length) heroScript.before(runtime);
     else $("head").append(runtime);
   }
-  $("script[src*='js/media-runtime.js']").attr("src", `${assetPrefix}js/media-runtime.js?v=20261019d`);
+  $("script[src*='js/media-runtime.js']").attr("src", `${assetPrefix}js/media-runtime.js?v=20261109p1`);
   $("script[src*='js/hero.js']").attr("src", `${assetPrefix}js/hero.js?v=20261019d`);
   if (!$("link[href*='scene-video.css']").length) {
     $("head").append($("<link>").attr("rel", "stylesheet").attr("href", `${assetPrefix}css/scene-video.css?v=20261109a`));
@@ -83,7 +108,12 @@ function attachResponsiveMedia($, { scene, assetPrefix, image, video }) {
   // Picture performs initial poster selection before JavaScript. The runtime
   // pins that same pair for this page; no other video URL is attached or fetched.
   image.wrap($("<picture>").attr("data-scene-picture", ""));
+  // Desktop browsers with AVIF take the lighter copy; portrait phones, which
+  // show only the middle of the poster, take the centre crop.
+  const derived = name => (scene.variants?.[name]?.accepted ? scene.variants[name].derived : null) || {};
+  if (derived("desktop").avif) image.before($("<source>").attr("type", "image/avif").attr("media", "(min-width: 769px)").attr("srcset", sceneAssetUrl(assetPrefix, derived("desktop").avif)));
   image.before($("<source>").attr("media", "(min-width: 769px)").attr("srcset", variants.desktop.poster));
+  if (derived("mobile").portrait) image.before($("<source>").attr("media", "(max-width: 480px) and (max-aspect-ratio: 2/3)").attr("srcset", sceneAssetUrl(assetPrefix, derived("mobile").portrait)));
   image.before($("<source>").attr("media", "(max-width: 768px)").attr("srcset", variants.mobile.poster));
   image.attr("src", variants.mobile.poster);
   video.removeAttr("poster").attr("data-media-variants", JSON.stringify(variants));

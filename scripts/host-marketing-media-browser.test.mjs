@@ -10,6 +10,9 @@ const manifest=JSON.parse(await fs.readFile(new URL('../assets/vid/scene-manifes
 const scene=manifest.scenes.find(item=>item.key==='hotels-airbnb'&&item.accepted);
 assert.ok(scene?.variants?.mobile?.accepted&&scene?.variants?.desktop?.accepted,'Both accepted hospitality variants exist');
 const artifact=width=>scene.variants[width<=768?'mobile':'desktop'];
+// Portrait phones show the centre crop and AVIF desktops the AVIF copy of the same accepted poster.
+const derived=JSON.parse(await fs.readFile(new URL('../assets/img/derived-posters/index.json',import.meta.url),'utf8')).posters;
+const shownPoster=(width,height)=>{const accepted=artifact(width),copy=derived[accepted.poster.path];return(width<=480&&width/height<=2/3&&copy?.portrait)||(width>768&&copy?.avif)||accepted.poster;};
 const report={schema:'wifigate.host-marketing-page.browser-route-qa.v1',kind:'host_browser',status:'RUNNING',sceneId:scene.key,cases:[],policyCases:[],redirectCases:[],captures:[]};
 const browser=await chromium.launch({channel:process.env.BROWSER_CHANNEL||'chrome',headless:true});
 const rejectAnalytics=()=>localStorage.setItem('wifigate-cookie-consent-v1',JSON.stringify({version:1,analytics:false,savedAt:Date.now()}));
@@ -21,9 +24,9 @@ async function capture(page,name){
 }
 async function playing(page){await page.waitForFunction(()=>{const v=document.querySelector('.niche-hero video');if(v?.error)throw Error('Accepted Host decoder failed');return v&&!v.paused&&v.readyState>=2&&v.currentTime>.2;},{},{timeout:20000});}
 async function selection(page,width){
- const accepted=artifact(width),value=await page.locator('.niche-hero video').evaluate(v=>({src:v.currentSrc,poster:v.poster,image:document.querySelector('#niche-image').currentSrc,variant:v.dataset.mediaVariant,width:v.videoWidth,height:v.videoHeight,duration:v.duration,muted:v.muted,loop:v.loop}));
+ const accepted=artifact(width),shown=shownPoster(width,page.viewportSize().height),value=await page.locator('.niche-hero video').evaluate(v=>({src:v.currentSrc,poster:v.poster,image:document.querySelector('#niche-image').currentSrc,variant:v.dataset.mediaVariant,width:v.videoWidth,height:v.videoHeight,duration:v.duration,muted:v.muted,loop:v.loop}));
  const src=new URL(value.src),poster=new URL(value.poster);
- assert.equal(src.pathname,'/'+accepted.video.path);assert.equal(src.searchParams.get('v'),accepted.video.sha256.slice(0,12));assert.equal(poster.pathname,'/'+accepted.poster.path);assert.equal(poster.searchParams.get('v'),accepted.poster.sha256.slice(0,12));assert.equal(value.poster,value.image);
+ assert.equal(src.pathname,'/'+accepted.video.path);assert.equal(src.searchParams.get('v'),accepted.video.sha256.slice(0,12));assert.equal(poster.pathname,'/'+shown.path);assert.equal(poster.searchParams.get('v'),shown.sha256.slice(0,12));assert.equal(value.poster,value.image);
  assert.equal(value.variant,width<=768?'mobile':'desktop');assert.equal(value.width,accepted.width);assert.equal(value.height,accepted.height);assert.ok(Math.abs(value.duration-accepted.durationSeconds)<.1);assert.equal(value.muted,true);assert.equal(value.loop,false);
  return{selectedVariant:value.variant,videoPath:src.pathname,posterPath:poster.pathname,decodedWidth:value.width,decodedHeight:value.height,duration:value.duration};
 }

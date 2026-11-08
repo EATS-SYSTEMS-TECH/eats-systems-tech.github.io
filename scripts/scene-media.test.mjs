@@ -42,7 +42,7 @@ test("existing scene styles and controllers receive the current asset version wi
     assert.equal($("link[href*='scene-video.css']").attr("href"), "../../css/scene-video.css?v=20261109a");
     for (const name of ["hero", "scene-video", "media-runtime"]) {
       assert.equal($(`script[src*='js/${name}.js']`).length, 1);
-      assert.equal($(`script[src*='js/${name}.js']`).attr("src"), `../../js/${name}.js?v=20261019d`);
+      assert.equal($(`script[src*='js/${name}.js']`).attr("src"), `../../js/${name}.js?v=${name === "media-runtime" ? "20261109p1" : "20261019d"}`);
     }
   }
 });

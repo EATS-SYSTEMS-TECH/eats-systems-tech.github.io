@@ -1,0 +1,305 @@
+{
+  "schemaVersion": 1,
+  "posters": {
+    "assets/wifigate_niche_pages/residential-buildings-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/residential-buildings-scene-hero.webp",
+        "sha256": "1fb43cae1212e3bb7937933924fc3c411fefae96a9706f8158cf63f42839a363"
+      },
+      "portrait": {
+        "path": "assets/img/derived-posters/residential-buildings-portrait.webp",
+        "sha256": "d755b263a1a2159ec1b949bb2b89c5d3ad418d03804d8570e3a3a21e2d18a3cc",
+        "width": 640,
+        "height": 720
+      }
+    },
+    "assets/wifigate_niche_pages/desktop/residential-buildings-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/desktop/residential-buildings-scene-hero.webp",
+        "sha256": "2be4763b05cad4e4ce06388103026d61691149841e5f0b2d349d49be2e9c56b1"
+      },
+      "avif": {
+        "path": "assets/img/derived-posters/residential-buildings-desktop.avif",
+        "sha256": "3b49edc689975dbcba166ac376d86b7908831164308431e1aeb56678a1f92155",
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "assets/wifigate_niche_pages/roller-shutters-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/roller-shutters-scene-hero.webp",
+        "sha256": "5175bf8cd9d98c8d38d6906685b236941e7769d0137916438f75336c40e7dcf7"
+      },
+      "portrait": {
+        "path": "assets/img/derived-posters/roller-shutters-portrait.webp",
+        "sha256": "d369136f7825eeeb9fd5441929c591c381fd84a01e01edb3ab45c7fe4dc6d447",
+        "width": 640,
+        "height": 720
+      }
+    },
+    "assets/wifigate_niche_pages/desktop/roller-shutters-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/desktop/roller-shutters-scene-hero.webp",
+        "sha256": "fae51697bca889c0c82b05eddc0510b3d4010a9c4e3d4aeb75ba226ef6282dd8"
+      },
+      "avif": {
+        "path": "assets/img/derived-posters/roller-shutters-desktop.avif",
+        "sha256": "a2d58de57fb3bca659dfb362126678adaac7b0bb1002636b35cbb4755276fcff",
+        "width": 1918,
+        "height": 1080
+      }
+    },
+    "assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp",
+        "sha256": "b7aa47380dc1607e8fcc6abf15dff64ef96c8c6cb767300d9378fec4dbce0e7d"
+      },
+      "portrait": {
+        "path": "assets/img/derived-posters/hotels-airbnb-portrait.webp",
+        "sha256": "d2744aefa75fe002758f5a58fa4c19a927368b8123284dfb32ede8477443a9aa",
+        "width": 640,
+        "height": 720
+      }
+    },
+    "assets/wifigate_niche_pages/desktop/hotels-airbnb-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/desktop/hotels-airbnb-scene-hero.webp",
+        "sha256": "253b04f28d0432cac1130e857d5dbb05ae3fdbdc9fcec3a97956e8d0d08bee50"
+      },
+      "avif": {
+        "path": "assets/img/derived-posters/hotels-airbnb-desktop.avif",
+        "sha256": "319d0a8c00c6c9589f69159da10f65f9a5e79222d552526eecdf75e4110e095c",
+        "width": 1918,
+        "height": 1080
+      }
+    },
+    "assets/wifigate_niche_pages/private-homes-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/private-homes-scene-hero.webp",
+        "sha256": "323a1b03725723da32de8dda57e92c60660ce916cb8a75d158ea2cea175f6c7b"
+      },
+      "portrait": {
+        "path": "assets/img/derived-posters/private-homes-portrait.webp",
+        "sha256": "480e0357bd7602ad630917fa0655516ba325afdebc999b9eee127d3080cd7589",
+        "width": 640,
+        "height": 720
+      }
+    },
+    "assets/wifigate_niche_pages/desktop/private-homes-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/desktop/private-homes-scene-hero.webp",
+        "sha256": "d9bce355b97cbac01763fe0e2df8a834d07adb0c36cb6dbb7519a6c178553c5b"
+      },
+      "avif": {
+        "path": "assets/img/derived-posters/private-homes-desktop.avif",
+        "sha256": "aadf42a52a915b0eddb38dc1485a21715e29e944c677e93e788fce63814f3a74",
+        "width": 1918,
+        "height": 1080
+      }
+    },
+    "assets/wifigate_niche_pages/electric-gates-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/electric-gates-scene-hero.webp",
+        "sha256": "296c0be6c2584dd1ae2a62e5e5bfe5b1e08a12f4deba02f6a27902ee9eaad9f7"
+      },
+      "portrait": {
+        "path": "assets/img/derived-posters/electric-gates-portrait.webp",
+        "sha256": "de7d8c8b6cae7e1bf9474008173af6d59d6862cdce982f0a40950f2785cc87f7",
+        "width": 640,
+        "height": 720
+      }
+    },
+    "assets/wifigate_niche_pages/desktop/electric-gates-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/desktop/electric-gates-scene-hero.webp",
+        "sha256": "56576e051bb3529ae15fc8e819fa062fe07bcab1e4e5677ab1d41461ad4a6238"
+      },
+      "avif": {
+        "path": "assets/img/derived-posters/electric-gates-desktop.avif",
+        "sha256": "9dff529dbd60a072ca5b9db754a815d1d0522172ea3dbe2c1c848cbaf8cd5879",
+        "width": 1918,
+        "height": 1080
+      }
+    },
+    "assets/wifigate_niche_pages/entry-doors-magnetic-locks-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/entry-doors-magnetic-locks-scene-hero.webp",
+        "sha256": "b84483a28a8c058bc573a2bb0e20b076c9a28f4e601a7bc89f1eb2856ff4469e"
+      },
+      "portrait": {
+        "path": "assets/img/derived-posters/entry-doors-magnetic-locks-portrait.webp",
+        "sha256": "5420e45e751006c8d3337c998672a058803cc4e7d871235b9739e4b7d9078c9c",
+        "width": 640,
+        "height": 720
+      }
+    },
+    "assets/wifigate_niche_pages/desktop/entry-doors-magnetic-locks-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/desktop/entry-doors-magnetic-locks-scene-hero.webp",
+        "sha256": "f1625be35bee53a1a3dfb90290c39bb4a2e6955dc7ba67f6be4ba148e1b45999"
+      },
+      "avif": {
+        "path": "assets/img/derived-posters/entry-doors-magnetic-locks-desktop.avif",
+        "sha256": "4c7ef1d08a9fe8eaf3675372958636649f154b7cbf73382da965aec99eeef68e",
+        "width": 1916,
+        "height": 1080
+      }
+    },
+    "assets/wifigate_niche_pages/garage-doors-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/garage-doors-scene-hero.webp",
+        "sha256": "876594abdb8de0ef67761193441ab3d3ac944db8264c2c8d62a7f12db17bcb15"
+      },
+      "portrait": {
+        "path": "assets/img/derived-posters/garage-doors-portrait.webp",
+        "sha256": "208a1d21b13ca1f206aeda712e6915b183d4f484f4f9cfd2fec44441dbd60bf7",
+        "width": 640,
+        "height": 720
+      }
+    },
+    "assets/wifigate_niche_pages/desktop/garage-doors-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/desktop/garage-doors-scene-hero.webp",
+        "sha256": "a90be5e8e38c5b1a246e5d9582985e5775a2eb67355360fdc9ae8455fe43efc5"
+      },
+      "avif": {
+        "path": "assets/img/derived-posters/garage-doors-desktop.avif",
+        "sha256": "197e5fc96b21e88a9b4dd71be6b9feef39c44bab78bba3c121c318693b68dfcb",
+        "width": 1918,
+        "height": 1080
+      }
+    },
+    "assets/wifigate_niche_pages/office-buildings-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/office-buildings-scene-hero.webp",
+        "sha256": "2d303ddc81c99e2bf500ba383c02aefb16fd2ba695ef3bee88a39d9a523a5233"
+      },
+      "portrait": {
+        "path": "assets/img/derived-posters/office-buildings-portrait.webp",
+        "sha256": "86e133f7787eefcf2cd31fb755fefb922bae02d28164aef118fb99b59b09afd7",
+        "width": 640,
+        "height": 720
+      }
+    },
+    "assets/wifigate_niche_pages/desktop/office-buildings-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/desktop/office-buildings-scene-hero.webp",
+        "sha256": "4000a8b69f87cbdaa61e28b4e0d9704d0cc58e6b106da928fa148726013a88da"
+      },
+      "avif": {
+        "path": "assets/img/derived-posters/office-buildings-desktop.avif",
+        "sha256": "70eca3104235cde1a7225dbe48127dcc0ab6c5ab44b3cd979fc41429675dc48a",
+        "width": 1918,
+        "height": 1080
+      }
+    },
+    "assets/wifigate_niche_pages/mobile/sports-facilities-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/mobile/sports-facilities-scene-hero.webp",
+        "sha256": "18988da90010690f5335d5d00194d202ebc8770646ef5abf629694e1d8732d90"
+      },
+      "portrait": {
+        "path": "assets/img/derived-posters/sports-facilities-portrait.webp",
+        "sha256": "a35c71fd53401b8ceda4441e41b95d05a12aac86cdeddc52141c24f5b08fd472",
+        "width": 640,
+        "height": 720
+      }
+    },
+    "assets/wifigate_niche_pages/desktop/sports-facilities-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/desktop/sports-facilities-scene-hero.webp",
+        "sha256": "d97036a4309058446f8400a914d1f086e76aa52fc4fa970e854b5ce6cab25349"
+      },
+      "avif": {
+        "path": "assets/img/derived-posters/sports-facilities-desktop.avif",
+        "sha256": "416d1327ea87de8b58e1af26932129c4b0e84ecaa7674e00bfbcb8f251e99bd2",
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "assets/wifigate_niche_pages/storage-lockers-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/storage-lockers-scene-hero.webp",
+        "sha256": "9598e04f2026576b1c2cf0a516b62d589508f81857c4ec411ab2076d98da0dd4"
+      },
+      "portrait": {
+        "path": "assets/img/derived-posters/storage-lockers-portrait.webp",
+        "sha256": "e54ad82bd5c17054c568d4c3b87bb7179843577aa511e87d2bea0bdeb284ba74",
+        "width": 640,
+        "height": 720
+      }
+    },
+    "assets/wifigate_niche_pages/desktop/storage-lockers-scene-hero.webp": {
+      "source": {
+        "path": "assets/wifigate_niche_pages/desktop/storage-lockers-scene-hero.webp",
+        "sha256": "36054a662438df5573ebcc01f21c2c05fb9962cec12a548e86dafe4c08715666"
+      },
+      "avif": {
+        "path": "assets/img/derived-posters/storage-lockers-desktop.avif",
+        "sha256": "211eafaf033d023687051297d463041104c564fb40fb0e1c0bbf12a724b92d95",
+        "width": 1918,
+        "height": 1080
+      }
+    },
+    "assets/img/electric-gates-barrier-scene.webp": {
+      "source": {
+        "path": "assets/img/electric-gates-barrier-scene.webp",
+        "sha256": "7b158fa6500c008f942c6ceb4d7efb75b1b08c2701507225aa16b4dec7e6f97f"
+      },
+      "portrait": {
+        "path": "assets/img/derived-posters/electric-gates-barrier-portrait.webp",
+        "sha256": "ee9092fa5fdca931179d472b5a68bb265ad066e6c311f6a15748df7f5fa1a3ad",
+        "width": 640,
+        "height": 720
+      }
+    },
+    "assets/img/desktop/electric-gates-barrier-scene.webp": {
+      "source": {
+        "path": "assets/img/desktop/electric-gates-barrier-scene.webp",
+        "sha256": "c34f5797250f97d0cd8b3913e77ceb60e77b0d25b81d421c475e12f5ea62e8f1"
+      },
+      "avif": {
+        "path": "assets/img/derived-posters/electric-gates-barrier-desktop.avif",
+        "sha256": "161155163cad79adec3a6338af883bae987e8cacba7d793559c64cde13a80ad7",
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "assets/img/homepage-montage-scene.webp": {
+      "source": {
+        "path": "assets/img/homepage-montage-scene.webp",
+        "sha256": "cdb3c948e9f1d7695e88ac5c371aa18a3a2aa5a82bf1a4abd5a328b85ec5dc33"
+      },
+      "portrait": {
+        "path": "assets/img/derived-posters/homepage-montage-portrait.webp",
+        "sha256": "a3393bf0ba40e1c2b2a5a6b730b32d975be9ec46e05e0384022a9bc056c54dfb",
+        "width": 640,
+        "height": 720
+      }
+    },
+    "assets/img/desktop/homepage-montage-scene.webp": {
+      "source": {
+        "path": "assets/img/desktop/homepage-montage-scene.webp",
+        "sha256": "a0837d3398d6c19365d69471dc1db603c150026a0f628e40024e53e9fcd15ebe"
+      },
+      "avif": {
+        "path": "assets/img/derived-posters/homepage-montage-desktop.avif",
+        "sha256": "6bb8d58d44f5f4ed5874f0ea7b056977f69ce10048c01352cc7e3551a3325c1d",
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "assets/img/desktop/auto-open-futuristic-scene.webp": {
+      "source": {
+        "path": "assets/img/desktop/auto-open-futuristic-scene.webp",
+        "sha256": "ca1b3efc1dbc58f82d5c04073915fbf31cf73695f12002e6e4b61f0519e3afe7"
+      },
+      "avif": {
+        "path": "assets/img/derived-posters/auto-open-futuristic-desktop.avif",
+        "sha256": "0657b485803efb8cc430ce886b59406079dcbc0fadbfba7e9bbcec5737879441",
+        "width": 1918,
+        "height": 1080
+      }
+    }
+  }
+}

@@ -101,7 +101,7 @@ try {
     const html = await readFile(file, "utf8");
     const name = path.relative(process.cwd(), file);
     // Business product pages have their own UI and are outside consumer QA.
-    if (/^(?:dashboard|pay|manager)[\\/]/.test(name)) continue;
+    if (/^(?:dashboard|pay|manager|reservations|work)[\\/]/.test(name)) continue;
     assert.doesNotMatch(html, /locale-redirect\.js/, `${name}: no remembered-language redirect`);
     if (/http-equiv="refresh"/i.test(html)) continue;
     assert.equal(html.match(/cookie-consent\.js/g)?.length, 1, `${name}: cookie consent script`);
