@@ -17,6 +17,7 @@ export const defaultLocale = 'en';
 export const siteOrigin = SITE_ORIGIN;
 export const nowDate = new Date().toISOString().slice(0, 10);
 export const COOKIE_CONSENT_VERSION = '20261108a';
+export const SITE_CACHE_VERSION = '20261109cache1';
 export const changedFiles = new Set();
 export const isRtl = locale => RTL_LANGUAGES.has(locale);
 export const normalizeLocalePath = locale => locale.toLowerCase();
@@ -189,7 +190,7 @@ function setLanguageSelector($, options, locale, key) {
   $('#language-button').attr({ 'aria-controls': 'language-dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' });
   $('#selected-flag').html(`<img src="${toStaticAssetPath(`assets/img/flags/${current.flagSrc}`, prefix)}" alt="${current.flagAlt}" width="50" height="33" />`);
   $('.language-selector__selected').text(current.label);
-  $('#language-dropdown').html(options.map(option => `<a class="language-selector__option${option.code === locale ? ' is-selected' : ''}" href="${buildPagePath(option.code, key)}" data-lang="${option.code}"${option.code === locale ? ' aria-current="true"' : ''}><span class="language-selector__flag"><img src="${toStaticAssetPath(`assets/img/flags/${option.flagSrc}`, prefix)}" alt="${option.flagAlt}" width="50" height="33" loading="lazy" decoding="async"></span><span class="language-selector__label" dir="${isRtl(option.code) ? 'rtl' : 'auto'}">${option.label}</span></a>`).join(''));
+  $('#language-dropdown').html(options.map(option => `<a class="language-selector__option${option.code === locale ? ' is-selected' : ''}" href="${buildPagePath(option.code, key)}" data-lang="${option.code}"${option.code === locale ? ' aria-current="true"' : ''}><span class="language-selector__flag"><img data-src="${toStaticAssetPath(`assets/img/flags/${option.flagSrc}`, prefix)}" alt="${option.flagAlt}" width="50" height="33" decoding="async"></span><span class="language-selector__label" dir="${isRtl(option.code) ? 'rtl' : 'auto'}">${option.label}</span></a>`).join(''));
 }
 export function updateSharedHeader($, data, locale, key) {
   if (!$('.site-header').length) return;
@@ -252,5 +253,6 @@ export function serialize($, data, locale, key = 'home') {
   $("script[src*='js/accessibility-copy.js']").replaceWith(`<script>window.accessibilityCopy = ${inlineJson({ [locale]: data.accessibilityCopy[locale] })};</script>`);
   const version = key === HOST_PAGE_KEY ? '20261108host1' : key === AUTO_OPEN_PAGE_KEY ? '20261108ao1' : COOKIE_CONSENT_VERSION;
   $('body').append(`<script src="${prefix}js/cookie-consent.js?v=${version}" defer></script>`);
+  $('body').append(`<script src="${prefix}js/site-cache.js?v=${SITE_CACHE_VERSION}" defer></script>`);
   return ensureTrailingNewline($.html({ decodeEntities: false }).replace(/[ \t]+(?=\r?\n|$)/g, ''));
 }

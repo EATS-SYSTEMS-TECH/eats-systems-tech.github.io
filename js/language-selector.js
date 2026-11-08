@@ -22,7 +22,19 @@ function setupLanguageSelector() {
   button.setAttribute("aria-haspopup", "true");
   button.setAttribute("aria-expanded", "false");
 
+  // The menu flags load only when a visitor reaches for the menu, so a page
+  // load never downloads forty flag images nobody sees.
+  const loadFlags = () => {
+    dropdown.querySelectorAll("img[data-src]").forEach((image) => {
+      image.src = image.dataset.src;
+      image.removeAttribute("data-src");
+    });
+  };
+  button.addEventListener("pointerenter", loadFlags, { once: true });
+  button.addEventListener("focus", loadFlags, { once: true });
+
   const setSelectorOpen = (isOpen) => {
+    if (isOpen) loadFlags();
     selector.classList.toggle("is-open", isOpen);
     button.setAttribute("aria-expanded", String(isOpen));
   };

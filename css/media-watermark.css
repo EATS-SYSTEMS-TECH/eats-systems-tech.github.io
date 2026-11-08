@@ -1,5 +1,6 @@
-/* The exact supplied PNG is visually cropped to its alpha bounds. No media or
-   watermark bitmap is resampled, repainted or recompressed by this layer. */
+/* The mark is the supplied PNG pre-cropped to its visible window and sized for
+   its largest display (96 CSS px at 4x), stored as lossless WebP. No video or
+   poster is repainted by this layer. */
 .media-watermark {
   position: absolute;
   right: 12px;
@@ -8,10 +9,9 @@
   display: none;
   width: clamp(40px, 12%, 96px);
   aspect-ratio: 1032 / 641;
-  background-image: url("../assets/img/wifigate-watermark.png?v=d4e6db34dc50");
+  background-image: url("../assets/img/wifigate-watermark.webp?v=5e918aed6fa3");
   background-repeat: no-repeat;
-  background-size: 121.5116% auto;
-  background-position: 50% 56.4437%;
+  background-size: 100% 100%;
   opacity: .3;
   pointer-events: none;
   user-select: none;

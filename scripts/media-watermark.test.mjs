@@ -12,7 +12,7 @@ import { AUTO_OPEN_PAGE_KEY } from "./auto-open-page.mjs";
 
 const root = new URL("../", import.meta.url);
 
-test("unchanged supplied PNG has a faint physical bottom-right layer shown only in a video state", async () => {
+test("the cropped watermark has a faint physical bottom-right layer shown only in a video state", async () => {
   const bytes = await fs.readFile(new URL(WATERMARK_ASSET, root));
   assert.equal(createHash("sha256").update(bytes).digest("hex"), WATERMARK_SHA256);
   const css = await fs.readFile(new URL("css/media-watermark.css", root), "utf8");

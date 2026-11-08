@@ -456,8 +456,8 @@
                 const icon = demoElement("span", "demo-icon");
                 const image = document.createElement("img");
                 image.alt = "";
-                image.src = (logo ? logo.getAttribute("src") : "/logo-1024.png")
-                    .replace("logo-1024.png", "assets/host-icons/" + system.icon + ".svg");
+                image.src = (logo ? logo.getAttribute("src") : "/assets/img/wifigate-link-logo.webp")
+                    .replace("assets/img/wifigate-link-logo.webp", "assets/host-icons/" + system.icon + ".svg");
                 icon.append(image);
                 const text = demoElement("div");
                 const name = demoElement("p", "demo-name");
@@ -502,7 +502,7 @@
 
 <body>
     <main class="card" id="main-content">
-        <img class="logo" src="logo-1024.png" alt="WiFiGate" />
+        <img class="logo" src="assets/img/wifigate-link-logo.webp" alt="WiFiGate" width="84" height="84" />
         <h1 id="page-title">Opening WiFiGate…</h1>
         <p id="status">This should only take a moment.</p>
         <div id="spinner" class="spinner" aria-hidden="true"></div>

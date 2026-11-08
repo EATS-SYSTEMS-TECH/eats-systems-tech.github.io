@@ -8,6 +8,8 @@ const root = path.resolve(fileURLToPath(new URL("../", import.meta.url)));
 const port = Number.parseInt(process.env.PORT ?? "8000", 10);
 const host = process.env.HOST ?? "127.0.0.1";
 const appCheckDebug = process.env.WIFIGATE_APP_CHECK_DEBUG === "1";
+// GitHub Pages answers "max-age=600"; set CACHE_CONTROL to test caching like production.
+const cacheControl = process.env.CACHE_CONTROL ?? "no-store";
 const loopbackHosts = new Set(["127.0.0.1", "localhost", "::1", "[::1]"]);
 
 if (appCheckDebug && !loopbackHosts.has(host)) {
@@ -94,7 +96,7 @@ const server = createServer(async (request, response) => {
             : null;
 
         response.writeHead(200, {
-            "Cache-Control": "no-store",
+            "Cache-Control": cacheControl,
             "Content-Length": debugHtml?.length ?? fileStats.size,
             "Content-Type": contentTypes.get(path.extname(filePath).toLowerCase()) ?? "application/octet-stream",
         });

@@ -48,6 +48,7 @@ ${links}
   </main>
   <script src="/js/cookie-consent-copy.js?v=${cookieConsentVersion}" defer></script>
   <script src="/js/cookie-consent.js?v=${cookieConsentVersion}" defer></script>
+  <script src="/js/site-cache.js?v=20261109cache1" defer></script>
 </body>
 </html>
 `;

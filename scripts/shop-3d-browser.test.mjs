@@ -69,7 +69,8 @@ try {
     await page.close();
   }
 
-  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  // The site's worker would fetch the textures itself, outside page.route.
+  const page = await browser.newPage({ viewport: { width: 1280, height: 900 }, serviceWorkers: "block" });
   await page.addInitScript(() => {
     const getContext = HTMLCanvasElement.prototype.getContext;
     window.__webglContexts = 0;

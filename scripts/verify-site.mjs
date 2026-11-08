@@ -211,6 +211,7 @@ async function main() {
 
       await checkResolvable($, filePath, "a[href]", "href", "link");
       await checkResolvable($, filePath, "img[src]", "src", "image");
+      await checkResolvable($, filePath, "img[data-src]", "data-src", "image");
       await checkResolvable($, filePath, "link[rel='stylesheet']", "href", "stylesheet");
       await checkResolvable($, filePath, "script[src]", "src", "script");
 

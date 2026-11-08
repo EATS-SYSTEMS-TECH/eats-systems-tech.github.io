@@ -28,7 +28,7 @@ const files=new Map([
  ['/'+mobile.video.path,{bytes:mobileVideo,type:'video/mp4'}],['/'+desktop.video.path,{bytes:desktopVideo,type:'video/mp4'}],
  ['/'+mobile.poster.path,{bytes:mobilePoster,type:'image/webp'}],['/'+desktop.poster.path,{bytes:desktopPoster,type:'image/webp'}],
 ]);
-for(const file of ['js/media-runtime.js','js/scene-video.js','js/hero.js','js/media-cache-policy.mjs','media-cache-sw.js'])files.set('/'+file,{bytes:await fs.readFile(path.join(root,file)),type:'text/javascript'});
+for(const file of ['js/media-runtime.js','js/scene-video.js','js/hero.js','js/media-cache-policy.mjs','js/static-cache-policy.mjs','media-cache-sw.js'])files.set('/'+file,{bytes:await fs.readFile(path.join(root,file)),type:'text/javascript'});
 let mediaUnavailable=false;const requests=[];
 const server=createServer((req,res)=>{
  const url=new URL(req.url,'http://localhost');requests.push({pathname:url.pathname,query:url.search,range:req.headers.range,method:req.method});

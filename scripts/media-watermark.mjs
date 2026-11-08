@@ -1,8 +1,10 @@
 // One decorative layer per accepted video frame. CSS keeps it hidden while
 // the frame shows a poster; standalone photos are never wrapped or branded.
-export const WATERMARK_ASSET = "assets/img/wifigate-watermark.png";
-export const WATERMARK_SHA256 = "d4e6db34dc50bf420d3629308f6f22143fe2e20c85901b19d5153a3bf9129705";
-export const WATERMARK_VERSION = "20261020w1";
+// The supplied PNG (assets/img/wifigate-watermark.png) cropped to the window the
+// layer always showed and sized for its largest display, as lossless WebP.
+export const WATERMARK_ASSET = "assets/img/wifigate-watermark.webp";
+export const WATERMARK_SHA256 = "5e918aed6fa3108370ff2222b61dbcc0739ed4f9eb821bd6df7227c61f95ccfe";
+export const WATERMARK_VERSION = "20261109w1";
 
 const existingFrames = [
   ".home-en #home > .hero__media",

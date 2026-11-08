@@ -66,7 +66,7 @@ async function inspectVideoLayer(page, route) {
   assert.equal(result.pointer, "none");
   assert.equal(result.ariaHidden, "true");
   assert.equal(result.markHit, false);
-  assert.match(result.background, /wifigate-watermark\.png\?v=d4e6db34dc50/);
+  assert.match(result.background, /wifigate-watermark\.webp\?v=5e918aed6fa3/);
   assert.ok(Math.abs(result.frame.right - result.mark.right - 12) < 1.1, "Physical right inset is 12px in both LTR and RTL");
   assert.ok(Math.abs(result.frame.bottom - result.mark.bottom - (route ? 8 : 12)) < 1.1, "Mark stays at the physical bottom edge");
   assert.ok(result.mark.x >= result.frame.x && result.mark.y >= result.frame.y);

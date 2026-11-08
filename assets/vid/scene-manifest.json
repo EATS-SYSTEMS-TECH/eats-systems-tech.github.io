@@ -10,11 +10,11 @@
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/residential-buildings-scene-hero.webp",
-        "sha256": "e50f77166a866e34ac465e481531d8fa616b582728a7bbdf48dcd76a9e981ed7"
+        "sha256": "1fb43cae1212e3bb7937933924fc3c411fefae96a9706f8158cf63f42839a363"
       },
       "width": 1280,
       "height": 720,
-      "durationSeconds": 8.0,
+      "durationSeconds": 8,
       "codec": "h264",
       "audioTracks": 0,
       "fastStart": true,
@@ -29,11 +29,11 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/residential-buildings-scene-hero.webp",
-            "sha256": "e50f77166a866e34ac465e481531d8fa616b582728a7bbdf48dcd76a9e981ed7"
+            "sha256": "1fb43cae1212e3bb7937933924fc3c411fefae96a9706f8158cf63f42839a363"
           },
           "width": 1280,
           "height": 720,
-          "durationSeconds": 8.0,
+          "durationSeconds": 8,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
@@ -48,11 +48,11 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/desktop/residential-buildings-scene-hero.webp",
-            "sha256": "c4e253b2e43f7f815c758893bb64158b3a53bef02c9730234cee026c9c358106"
+            "sha256": "2be4763b05cad4e4ce06388103026d61691149841e5f0b2d349d49be2e9c56b1"
           },
           "width": 1920,
           "height": 1080,
-          "durationSeconds": 8.0,
+          "durationSeconds": 8,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
@@ -70,7 +70,7 @@
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/roller-shutters-scene-hero.webp",
-        "sha256": "d5a8a6b851b69ba50fd64bc8085a84d0c35d80163e5fca21344ad614cecd5e06"
+        "sha256": "5175bf8cd9d98c8d38d6906685b236941e7769d0137916438f75336c40e7dcf7"
       },
       "width": 1280,
       "height": 720,
@@ -89,7 +89,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/roller-shutters-scene-hero.webp",
-            "sha256": "d5a8a6b851b69ba50fd64bc8085a84d0c35d80163e5fca21344ad614cecd5e06"
+            "sha256": "5175bf8cd9d98c8d38d6906685b236941e7769d0137916438f75336c40e7dcf7"
           },
           "width": 1280,
           "height": 720,
@@ -108,7 +108,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/desktop/roller-shutters-scene-hero.webp",
-            "sha256": "e73e2729d86cb7d68654985b3a3aff5d926cc151615f3d5774332460b239fb10"
+            "sha256": "fae51697bca889c0c82b05eddc0510b3d4010a9c4e3d4aeb75ba226ef6282dd8"
           },
           "width": 1918,
           "height": 1080,
@@ -130,7 +130,7 @@
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp",
-        "sha256": "54fbaadf0281af471544d9b34f57933a810f185294151a5908432df538bfeade"
+        "sha256": "b7aa47380dc1607e8fcc6abf15dff64ef96c8c6cb767300d9378fec4dbce0e7d"
       },
       "width": 1280,
       "height": 720,
@@ -149,7 +149,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/hotels-airbnb-scene-hero.webp",
-            "sha256": "54fbaadf0281af471544d9b34f57933a810f185294151a5908432df538bfeade"
+            "sha256": "b7aa47380dc1607e8fcc6abf15dff64ef96c8c6cb767300d9378fec4dbce0e7d"
           },
           "width": 1280,
           "height": 720,
@@ -168,7 +168,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/desktop/hotels-airbnb-scene-hero.webp",
-            "sha256": "05868184f8162c647dfe1f510c34539a3ca95f9debac77e8ef55c7aef1e936de"
+            "sha256": "253b04f28d0432cac1130e857d5dbb05ae3fdbdc9fcec3a97956e8d0d08bee50"
           },
           "width": 1918,
           "height": 1080,
@@ -190,7 +190,7 @@
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/private-homes-scene-hero.webp",
-        "sha256": "0ebfcec6f6054a49110b25c80774eab3637f57be4002049daa061da9acf70631"
+        "sha256": "323a1b03725723da32de8dda57e92c60660ce916cb8a75d158ea2cea175f6c7b"
       },
       "width": 1280,
       "height": 720,
@@ -209,7 +209,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/private-homes-scene-hero.webp",
-            "sha256": "0ebfcec6f6054a49110b25c80774eab3637f57be4002049daa061da9acf70631"
+            "sha256": "323a1b03725723da32de8dda57e92c60660ce916cb8a75d158ea2cea175f6c7b"
           },
           "width": 1280,
           "height": 720,
@@ -228,7 +228,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/desktop/private-homes-scene-hero.webp",
-            "sha256": "10df3838ab19c0ec08576468807a976cb8159ecdce2ec5da71f1b4e7634f4131"
+            "sha256": "d9bce355b97cbac01763fe0e2df8a834d07adb0c36cb6dbb7519a6c178553c5b"
           },
           "width": 1918,
           "height": 1080,
@@ -250,7 +250,7 @@
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/electric-gates-scene-hero.webp",
-        "sha256": "0960a037df68c26970cd694affb1b304c99d57f56879ddb730aa8ff0671dbfbd"
+        "sha256": "296c0be6c2584dd1ae2a62e5e5bfe5b1e08a12f4deba02f6a27902ee9eaad9f7"
       },
       "width": 1280,
       "height": 720,
@@ -269,7 +269,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/electric-gates-scene-hero.webp",
-            "sha256": "0960a037df68c26970cd694affb1b304c99d57f56879ddb730aa8ff0671dbfbd"
+            "sha256": "296c0be6c2584dd1ae2a62e5e5bfe5b1e08a12f4deba02f6a27902ee9eaad9f7"
           },
           "width": 1280,
           "height": 720,
@@ -288,7 +288,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/desktop/electric-gates-scene-hero.webp",
-            "sha256": "ab1eec39585ade3219ddad81268e72839a67cde986391485d27b19ce73d00a7b"
+            "sha256": "56576e051bb3529ae15fc8e819fa062fe07bcab1e4e5677ab1d41461ad4a6238"
           },
           "width": 1918,
           "height": 1080,
@@ -310,7 +310,7 @@
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/entry-doors-magnetic-locks-scene-hero.webp",
-        "sha256": "cdd97976045cd04a2af4268dcb0f26fdd22cfd9c68f921bf1e859656ac924cdf"
+        "sha256": "b84483a28a8c058bc573a2bb0e20b076c9a28f4e601a7bc89f1eb2856ff4469e"
       },
       "width": 1280,
       "height": 720,
@@ -329,7 +329,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/entry-doors-magnetic-locks-scene-hero.webp",
-            "sha256": "cdd97976045cd04a2af4268dcb0f26fdd22cfd9c68f921bf1e859656ac924cdf"
+            "sha256": "b84483a28a8c058bc573a2bb0e20b076c9a28f4e601a7bc89f1eb2856ff4469e"
           },
           "width": 1280,
           "height": 720,
@@ -348,7 +348,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/desktop/entry-doors-magnetic-locks-scene-hero.webp",
-            "sha256": "9ea4a86b93bf6c06cc8d58f7d1e52f65c1da68cb191bd4c12faa6ed81f81c460"
+            "sha256": "f1625be35bee53a1a3dfb90290c39bb4a2e6955dc7ba67f6be4ba148e1b45999"
           },
           "width": 1916,
           "height": 1080,
@@ -370,7 +370,7 @@
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/garage-doors-scene-hero.webp",
-        "sha256": "a7313ac06e82a239b6cfb9e2fe6bc89cfbc94ff792b91907421bc07dda897540"
+        "sha256": "876594abdb8de0ef67761193441ab3d3ac944db8264c2c8d62a7f12db17bcb15"
       },
       "width": 1280,
       "height": 720,
@@ -389,7 +389,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/garage-doors-scene-hero.webp",
-            "sha256": "a7313ac06e82a239b6cfb9e2fe6bc89cfbc94ff792b91907421bc07dda897540"
+            "sha256": "876594abdb8de0ef67761193441ab3d3ac944db8264c2c8d62a7f12db17bcb15"
           },
           "width": 1280,
           "height": 720,
@@ -408,7 +408,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/desktop/garage-doors-scene-hero.webp",
-            "sha256": "13258f7cbfe8e5f9e0795ffa91c764c90bd9667d026249a860834919150199c6"
+            "sha256": "a90be5e8e38c5b1a246e5d9582985e5775a2eb67355360fdc9ae8455fe43efc5"
           },
           "width": 1918,
           "height": 1080,
@@ -430,7 +430,7 @@
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/office-buildings-scene-hero.webp",
-        "sha256": "6fe57b0226173f943c2747eb7eda73d029c802375b9510cd8f8e224643e2b494"
+        "sha256": "2d303ddc81c99e2bf500ba383c02aefb16fd2ba695ef3bee88a39d9a523a5233"
       },
       "width": 1280,
       "height": 720,
@@ -449,7 +449,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/office-buildings-scene-hero.webp",
-            "sha256": "6fe57b0226173f943c2747eb7eda73d029c802375b9510cd8f8e224643e2b494"
+            "sha256": "2d303ddc81c99e2bf500ba383c02aefb16fd2ba695ef3bee88a39d9a523a5233"
           },
           "width": 1280,
           "height": 720,
@@ -468,7 +468,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/desktop/office-buildings-scene-hero.webp",
-            "sha256": "8d823cad66fabf92a1cf78103e53db4d202e04a582e44a1fbc27f0c0687dec24"
+            "sha256": "4000a8b69f87cbdaa61e28b4e0d9704d0cc58e6b106da928fa148726013a88da"
           },
           "width": 1918,
           "height": 1080,
@@ -490,7 +490,7 @@
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/mobile/sports-facilities-scene-hero.webp",
-        "sha256": "29ceef6bfe3103f982f4a916b7baec35e0c92715fa482576c7db49bb49d9cb1b"
+        "sha256": "18988da90010690f5335d5d00194d202ebc8770646ef5abf629694e1d8732d90"
       },
       "width": 1280,
       "height": 720,
@@ -509,7 +509,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/mobile/sports-facilities-scene-hero.webp",
-            "sha256": "29ceef6bfe3103f982f4a916b7baec35e0c92715fa482576c7db49bb49d9cb1b"
+            "sha256": "18988da90010690f5335d5d00194d202ebc8770646ef5abf629694e1d8732d90"
           },
           "width": 1280,
           "height": 720,
@@ -528,7 +528,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/desktop/sports-facilities-scene-hero.webp",
-            "sha256": "7f53419d849adf8813fbf18e1c88cdc6f1100889b5add88f5bcfcf5051435276"
+            "sha256": "d97036a4309058446f8400a914d1f086e76aa52fc4fa970e854b5ce6cab25349"
           },
           "width": 1920,
           "height": 1080,
@@ -550,7 +550,7 @@
       },
       "poster": {
         "path": "assets/wifigate_niche_pages/storage-lockers-scene-hero.webp",
-        "sha256": "e1d43c05329acedcde824fcc44d317d8b392cb2950654811c3eb050d6fc7a568"
+        "sha256": "9598e04f2026576b1c2cf0a516b62d589508f81857c4ec411ab2076d98da0dd4"
       },
       "width": 1280,
       "height": 720,
@@ -569,7 +569,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/storage-lockers-scene-hero.webp",
-            "sha256": "e1d43c05329acedcde824fcc44d317d8b392cb2950654811c3eb050d6fc7a568"
+            "sha256": "9598e04f2026576b1c2cf0a516b62d589508f81857c4ec411ab2076d98da0dd4"
           },
           "width": 1280,
           "height": 720,
@@ -588,7 +588,7 @@
           },
           "poster": {
             "path": "assets/wifigate_niche_pages/desktop/storage-lockers-scene-hero.webp",
-            "sha256": "d324b5b67f21ab45662780b2832b0aaa00ca8314266012c698e90a6c8b2ae590"
+            "sha256": "36054a662438df5573ebcc01f21c2c05fb9962cec12a548e86dafe4c08715666"
           },
           "width": 1918,
           "height": 1080,
@@ -610,7 +610,7 @@
       },
       "poster": {
         "path": "assets/img/electric-gates-barrier-scene.webp",
-        "sha256": "f597725eb06303abbbf3c7ac81c2a0c5176cbda3dcd39ee2587e35d22bdac27c"
+        "sha256": "7b158fa6500c008f942c6ceb4d7efb75b1b08c2701507225aa16b4dec7e6f97f"
       },
       "width": 1280,
       "height": 720,
@@ -629,7 +629,7 @@
           },
           "poster": {
             "path": "assets/img/electric-gates-barrier-scene.webp",
-            "sha256": "f597725eb06303abbbf3c7ac81c2a0c5176cbda3dcd39ee2587e35d22bdac27c"
+            "sha256": "7b158fa6500c008f942c6ceb4d7efb75b1b08c2701507225aa16b4dec7e6f97f"
           },
           "width": 1280,
           "height": 720,
@@ -648,11 +648,11 @@
           },
           "poster": {
             "path": "assets/img/desktop/electric-gates-barrier-scene.webp",
-            "sha256": "a76f2e8c6ae24616381a23124eb11d84bf7538922ab2986f4140b7cb5c28a2ec"
+            "sha256": "c34f5797250f97d0cd8b3913e77ceb60e77b0d25b81d421c475e12f5ea62e8f1"
           },
           "width": 1920,
           "height": 1080,
-          "durationSeconds": 5.0,
+          "durationSeconds": 5,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
@@ -670,11 +670,11 @@
       },
       "poster": {
         "path": "assets/img/homepage-montage-scene.webp",
-        "sha256": "f4a51419f6bd3662897222a5bca22dd018a874dc70102dae8aa3a6a6d5a51895"
+        "sha256": "cdb3c948e9f1d7695e88ac5c371aa18a3a2aa5a82bf1a4abd5a328b85ec5dc33"
       },
       "width": 1280,
       "height": 720,
-      "durationSeconds": 15.0,
+      "durationSeconds": 15,
       "codec": "h264",
       "audioTracks": 0,
       "fastStart": true,
@@ -689,11 +689,11 @@
           },
           "poster": {
             "path": "assets/img/homepage-montage-scene.webp",
-            "sha256": "f4a51419f6bd3662897222a5bca22dd018a874dc70102dae8aa3a6a6d5a51895"
+            "sha256": "cdb3c948e9f1d7695e88ac5c371aa18a3a2aa5a82bf1a4abd5a328b85ec5dc33"
           },
           "width": 1280,
           "height": 720,
-          "durationSeconds": 15.0,
+          "durationSeconds": 15,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
@@ -708,11 +708,11 @@
           },
           "poster": {
             "path": "assets/img/desktop/homepage-montage-scene.webp",
-            "sha256": "bfce80f670df0407b25f07768411e8d5efe77489baf284a59b82619869e15fd0"
+            "sha256": "a0837d3398d6c19365d69471dc1db603c150026a0f628e40024e53e9fcd15ebe"
           },
           "width": 1920,
           "height": 1080,
-          "durationSeconds": 15.0,
+          "durationSeconds": 15,
           "codec": "h264",
           "audioTracks": 0,
           "fastStart": true,
@@ -730,7 +730,7 @@
       },
       "poster": {
         "path": "assets/img/desktop/auto-open-futuristic-scene.webp",
-        "sha256": "e3ecd82648aeb9bd47da565b36bd4eda59193c4f01729be1b43e5d53315cf4f5"
+        "sha256": "ca1b3efc1dbc58f82d5c04073915fbf31cf73695f12002e6e4b61f0519e3afe7"
       },
       "width": 1918,
       "height": 1080,
@@ -749,7 +749,7 @@
           },
           "poster": {
             "path": "assets/img/desktop/auto-open-futuristic-scene.webp",
-            "sha256": "e3ecd82648aeb9bd47da565b36bd4eda59193c4f01729be1b43e5d53315cf4f5"
+            "sha256": "ca1b3efc1dbc58f82d5c04073915fbf31cf73695f12002e6e4b61f0519e3afe7"
           },
           "width": 1918,
           "height": 1080,
