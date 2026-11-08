@@ -218,7 +218,7 @@ export function updateSharedHeader($, data, locale, key) {
   for (const [selector, value] of [['.site-account__label', account.signedInAs], ['[data-account-dashboard]', account.dashboard], ['[data-account-sign-out]', account.signOut]]) setLocalizedText($, $(selector), value, locale);
   $('[data-account-dashboard]').attr('href', locale === 'he' ? '/dashboard/?lang=he' : '/dashboard/');
   const hebrew = locale === 'he';
-  const cart = hebrew ? ['סל קניות', 'סל הקניות', 'סגירת סל הקניות', 'סל הקניות ריק כרגע.', 'מחיר', 'אשמח לשמוע פרטים ב־WhatsApp', 'פרטי העגלה יישלחו כהודעה ל־WhatsApp Business שלנו. אין תשלום בשלב הזה.', 'יתואם מול הצוות'] : ['Shopping cart', 'Your cart', 'Close cart', 'Your cart is empty.', 'Price', "I'd like to hear more on WhatsApp", 'Your cart is sent as a message to our WhatsApp Business. No payment now.', 'Confirmed with our team'];
+  const cart = hebrew ? ['סל קניות', 'סל הקניות', 'סגירת סל הקניות', 'סל הקניות ריק כרגע.', 'מחיר', 'אשמח לשמוע פרטים ב־WhatsApp', 'פרטי העגלה יישלחו כהודעה ל־WhatsApp Business שלנו, והצוות ימשיך איתכם את ההזמנה.', 'יתואם מול הצוות'] : ['Shopping cart', 'Your cart', 'Close cart', 'Your cart is empty.', 'Price', "I'd like to hear more on WhatsApp", 'Your cart is sent as a message to our WhatsApp Business, and our team continues your order there.', 'Confirmed with our team'];
   $('.site-cart__trigger').attr('aria-label', cart[0]);
   $('#site-cart-title').text(cart[1]); $('.site-cart__close').attr('aria-label', cart[2]);
   ['.site-cart__empty', '.site-cart__subtotal span', '.site-cart__checkout', '.site-cart__note'].forEach((selector, index) => $(selector).text(cart[index + 3])); $('.site-cart__subtotal strong').text(cart[7]);

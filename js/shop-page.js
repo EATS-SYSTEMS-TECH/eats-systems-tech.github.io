@@ -2,12 +2,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof setupNav === "function") setupNav();
 });
 
-// "Add to cart" stores the product in the cart cookie and shows the cart.
+// "Add to cart" stores the product in the cart cookie and shows the cart. On a
+// product page the chosen plan (Manager or Host) joins it as a subscription.
 document.addEventListener("click", (event) => {
   const button = event.target.closest("[data-shop-cart]");
   if (!button || !window.WIFIGATE_CART) return;
   event.preventDefault();
   window.WIFIGATE_CART.addItem({ productId: button.dataset.shopCart });
+  const plan = button.closest(".shop-product-detail")?.querySelector("[data-shop-plan] input:checked")?.value;
+  if (plan) window.WIFIGATE_CART.addItem({ productId: plan });
   window.WIFIGATE_CART.open();
 });
 

@@ -11,11 +11,11 @@ const COPY = {
   en: {
     shop: "Shop", home: "Home", eyebrow: "WIFIGATE COLLECTION", heading: ["One app.", "All your entrances."],
     products: "2 products", view: "Product details", moreDetails: "More details", addToCart: "Add to cart",
-    stockNote: "Add it to your cart and send your order to our WhatsApp Business. Our team takes it from there. There is no payment on the site.",
+    stockNote: "Add it to your cart and send your order to our WhatsApp Business. Our team takes it from there.",
     facts: ["One-time purchase", "No subscription", "Up to 5,000 users"], useCasesLabel: "Use cases", useCases: ["Electric gates and parking barriers", "Garage doors and private parking", "Entry doors and magnetic locks", "Private homes", "Residential buildings", "Office buildings", "Sports facilities", "Storage units and lockers"], shutterFacts: ["For business and industry", "One-time purchase", "No subscription"], category: "Smart access controller", shutterCategory: "Business roller shutter controller",
     description: "A smart controller for electric gates, garage doors and barriers. Open them from the WIFIGATE app, with no remote needed.",
     shutterDescription: "A smart controller for electric roller shutters in shops, businesses and industrial buildings. Open and close them from the WIFIGATE app.",
-    imageAlt: "WIFIGATE controller enclosure", overviewAlt: "The WIFIGATE controller beside the WIFIGATE mobile app", shutterAlt: "The WIFIGATE Roller shutter wall panel", shutterMore: "Everything about WIFIGATE for electric roller shutters", zoom: "Enlarge image", zoomClose: "Close", zoomPrevious: "Previous image", zoomNext: "Next image", zoomHint: "Click the image to zoom in",
+    imageAlt: "WIFIGATE controller enclosure", overviewAlt: "The WIFIGATE controller beside the WIFIGATE mobile app", shutterAlt: "The WIFIGATE Roller shutter wall panel", shutterMore: "Everything about WIFIGATE for electric roller shutters", planTitle: "Choose a plan", planNone: "No subscription fee", planNoneText: "One-time purchase of the controller. Full control from the WIFIGATE app on your phone.", planManager: "With WIFIGATE Manager", planManagerText: "Web control of all your systems, from anywhere in the world.", planHost: "With WIFIGATE Host", planHostText: "Automated guest access management for every booking.", planDetails: "Plan details and prices", zoom: "Enlarge image", zoomClose: "Close", zoomPrevious: "Previous image", zoomNext: "Next image", zoomHint: "Click the image to zoom in",
     overview: "Product overview", features: "Everyday use", compatibility: "Installation & compatibility", availability: "How to order", specs: "Technical specifications",
     gateSpecs: [["Enclosure", "Sealed ABS box, IP67"], ["Dimensions", "83 × 81 × 56 mm", true], ["Power input", "12–24V", true], ["Connectivity", "Wi‑Fi 6 · Bluetooth LE", true], ["Remote receiver", "433.92MHz, digital RF remote pairing"], ["Connections", "Screw terminals · USB Type‑C"], ["Users", "Up to 5,000 users and 20 admins"], ["Guest invites", "Unlimited"], ["History", "90 days"], ["Scheduled events", "Up to 50"], ["Subscription", "Not required · one-time purchase"]],
     shutterSpecs: [["Controllers", "2 WIFIGATE controllers, one to open and one to close"], ["Operation", "Push button, held with your fingerprint"], ["Safety", "Open and close cannot run together; releasing stops the shutter"], ["Enclosure", "Surface-mounted 18-module panel, white polycarbonate"], ["Dimensions", "370 × 155 × 70 mm", true], ["Connectivity", "Wi‑Fi 6 · Bluetooth LE", true], ["Installation", "Indoor installation, inside the business"], ["Subscription", "Not required · one-time purchase"]],
@@ -27,13 +27,12 @@ const COPY = {
     featureShutter2: "Manage the shutters from the same app as your business's other WIFIGATE systems.",
     compatibilityText: "The controller is installed alongside a compatible existing control system. Contact our team to check suitability for your installation.",
     shutterCompatibility: "Designed for electric roller shutters in businesses and industry, installed inside the business. Contact our team to check compatibility with your shutter and installation.",
-    unavailableText: "Add the product to your cart and send the order to our WhatsApp Business. Our team gets back to you there about price, installation and delivery. There is no online payment.",
-    factUse: "Made for", factUseValue: "Gates, garage doors & parking barriers", shutterUseValue: "Business and industrial roller shutters",
+    unavailableText: "Add the product to your cart and send the order to our WhatsApp Business. Our team gets back to you there about price, installation and delivery.",
+    factUse: "Made for", shutterUseValue: "Business and industrial roller shutters",
     factControl: "Control", factControlValue: "WIFIGATE app", allProducts: "All products",
     businessEyebrow: "WIFIGATE for Business", subscription: "Subscription", businessHeading: "Subscription plans.",
     businessIntro: "WIFIGATE works locally, straight from the app, with no cloud services. Subscription plans add cloud extensions: WIFIGATE Host for automated guest access management, and WIFIGATE Manager to control all your systems from anywhere in the world. The choice is yours, depending on your needs.",
-    buyOptionsTitle: "Two ways to use it", buyOneTitle: "Controller only · one-time purchase", buyOneText: "No subscription and no monthly payment. Full, easy control from the WIFIGATE app on your phone: open, invite guests, manage permissions and see history.", buyTwoTitle: "Controller + subscription · only if you need it", buyTwoText: "Add WIFIGATE Host to automate guest access, or WIFIGATE Manager for web control of your systems from anywhere. A subscription is never required.", buyTwoLink: "Subscription plans", shutterBuyText: "One-time purchase with no subscription and no monthly payment. Open and close your business's shutter from the WIFIGATE app on your phone.",
-    hostTag: "Guest access automation", hostDescription: "Automated guest access management for every booking: access starts at check-in and expires at checkout, with no keys or codes.",
+        hostTag: "Guest access automation", hostDescription: "Automated guest access management for every booking: access starts at check-in and expires at checkout, with no keys or codes.",
     hostImageAlt: "Guests using a phone to enter their hotel room", hostStepsLabel: "Every stay, taken care of", hostSteps: ["Booking received", "Access at check-in", "Expires at checkout"],
     managerImageAlt: "A resident walking up to the entrance of a residential building", managerStepsLabel: "Every building, one dashboard", managerSteps: ["Main entrance", "Parking garage", "Lobby doors"],
     hostFeatures: ["Automatic access for every booking", "Access ends on its own at checkout", "Plans from a single property to large portfolios"],
@@ -46,11 +45,11 @@ const COPY = {
   he: {
     shop: "חנות", home: "בית", eyebrow: "הקולקציה של WIFIGATE", heading: ["אפליקציה אחת.", "כל הכניסות שלכם."],
     products: "2 מוצרים", view: "לפרטי המוצר", moreDetails: "פרטים נוספים", addToCart: "הוספה לסל",
-    stockNote: "מוסיפים לסל ושולחים את ההזמנה ל־WhatsApp Business שלנו. הצוות ממשיך איתכם משם. אין תשלום באתר.",
+    stockNote: "מוסיפים לסל ושולחים את ההזמנה ל־WhatsApp Business שלנו. הצוות ממשיך איתכם משם.",
     facts: ["תשלום חד־פעמי", "בלי מנוי", "עד 5,000 משתמשים"], useCasesLabel: "שימושים", useCases: ["שערים חשמליים ומחסומי חניה", "דלתות גראז׳ וחניות פרטיות", "דלתות כניסה ומנעולים מגנטיים", "בתים פרטיים", "בנייני מגורים", "בנייני משרדים", "מתקני ספורט", "מקומות אחסון ולוקרים"], shutterFacts: ["לעסקים ולתעשייה", "תשלום חד־פעמי", "בלי מנוי"], category: "בקר גישה חכם", shutterCategory: "בקר לתריסי גלילה לעסקים",
     description: "בקר חכם לשערים חשמליים, לדלתות חניה ולמחסומים. פותחים באפליקציית WIFIGATE, בלי לחפש שלט.",
     shutterDescription: "בקר חכם לתריסי גלילה חשמליים בחנויות, בעסקים ובמבני תעשייה. פותחים וסוגרים באפליקציית WIFIGATE.",
-    imageAlt: "מארז בקר WIFIGATE", overviewAlt: "בקר WIFIGATE לצד אפליקציית WIFIGATE בטלפון", shutterAlt: "לוח עה״ט של WIFIGATE Roller shutter", shutterMore: "כל המידע על WIFIGATE לתריסים חשמליים", zoom: "הגדלת התמונה", zoomClose: "סגירה", zoomPrevious: "התמונה הקודמת", zoomNext: "התמונה הבאה", zoomHint: "לחצו על התמונה כדי להתקרב",
+    imageAlt: "מארז בקר WIFIGATE", overviewAlt: "בקר WIFIGATE לצד אפליקציית WIFIGATE בטלפון", shutterAlt: "לוח עה״ט של WIFIGATE Roller shutter", shutterMore: "כל המידע על WIFIGATE לתריסים חשמליים", planTitle: "בחרו מסלול", planNone: "ללא דמי מנוי", planNoneText: "תשלום חד־פעמי על הבקר. שליטה מלאה מאפליקציית WIFIGATE בטלפון.", planManager: "כולל WIFIGATE Manager", planManagerText: "שליטה וובית בכל המערכות שלכם, מכל מקום בעולם.", planHost: "כולל WIFIGATE Host", planHostText: "ניהול כניסת אורחים אוטומטית לכל הזמנה.", planDetails: "פרטים ומחירים על המסלול", zoom: "הגדלת התמונה", zoomClose: "סגירה", zoomPrevious: "התמונה הקודמת", zoomNext: "התמונה הבאה", zoomHint: "לחצו על התמונה כדי להתקרב",
     overview: "על המוצר", features: "בשימוש היומיומי", compatibility: "התקנה והתאמה", availability: "איך מזמינים", specs: "מפרט טכני",
     gateSpecs: [["מארז", "קופסת ABS אטומה, IP67"], ["מידות", "83 × 81 × 56 מ״מ"], ["מתח הזנה", "12–24V", true], ["תקשורת", "Wi‑Fi 6 · Bluetooth LE", true], ["מקלט שלטים", "433.92MHz, למידת שלטי RF דיגיטליים"], ["חיבורים", "מחברי הברגה · USB Type‑C"], ["משתמשים", "עד 5,000 משתמשים ו־20 מנהלים"], ["הזמנות אורח", "ללא הגבלה"], ["היסטוריה", "90 יום"], ["אירועים מתוזמנים", "עד 50"], ["מנוי", "לא נדרש · תשלום חד־פעמי"]],
     shutterSpecs: [["בקרים", "2 בקרי WIFIGATE, אחד לפתיחה ואחד לסגירה"], ["הפעלה", "לחצן בהחזקה עם טביעת אצבע"], ["בטיחות", "אי אפשר להפעיל פתיחה וסגירה יחד; שחרור האצבע עוצר את התריס"], ["מארז", "לוח עה״ט 18 מודולים, פוליקרבונט לבן"], ["מידות", "370 × 155 × 70 מ״מ"], ["תקשורת", "Wi‑Fi 6 · Bluetooth LE", true], ["התקנה", "התקנה פנימית, בתוך העסק"], ["מנוי", "לא נדרש · תשלום חד־פעמי"]],
@@ -62,13 +61,12 @@ const COPY = {
     featureShutter2: "מנהלים את התריסים באותה אפליקציה עם שאר מערכות WIFIGATE של העסק.",
     compatibilityText: "הבקר מותקן לצד מערכת בקרה קיימת ותואמת. צרו קשר עם הצוות כדי לבדוק התאמה להתקנה שלכם.",
     shutterCompatibility: "מיועד לתריסי גלילה חשמליים בעסקים ובתעשייה, בהתקנה בתוך העסק. צרו קשר עם הצוות כדי לבדוק התאמה לתריס ולהתקנה שלכם.",
-    unavailableText: "מוסיפים את המוצר לסל ושולחים את ההזמנה ל־WhatsApp Business שלנו. הצוות חוזר אליכם שם לתאם מחיר, התקנה ומשלוח. אין תשלום באתר.",
-    factUse: "מתאים ל", factUseValue: "שערים, דלתות חניה ומחסומים", shutterUseValue: "תריסי גלילה בעסקים ובתעשייה",
+    unavailableText: "מוסיפים את המוצר לסל ושולחים את ההזמנה ל־WhatsApp Business שלנו. הצוות חוזר אליכם שם לתאם מחיר, התקנה ומשלוח.",
+    factUse: "מתאים ל", shutterUseValue: "תריסי גלילה בעסקים ובתעשייה",
     factControl: "שליטה", factControlValue: "אפליקציית WIFIGATE", allProducts: "כל המוצרים",
     businessEyebrow: "WIFIGATE לעסקים", subscription: "מנוי", businessHeading: "מסלולי מנויים.",
     businessIntro: "WIFIGATE עובד מקומית, ישירות מהאפליקציה ובלי שירותי ענן. מסלולי המנוי מוסיפים הרחבות בענן: WIFIGATE Host לניהול כניסת אורחים אוטומטית, ו־WIFIGATE Manager לשליטה בכל המערכות מכל מקום בעולם. הבחירה בידיכם, לפי הצורך.",
-    buyOptionsTitle: "שתי דרכים לעבוד", buyOneTitle: "בקר בלבד · תשלום חד־פעמי", buyOneText: "בלי מנוי ובלי תשלום חודשי. שליטה מלאה ונוחה מאפליקציית WIFIGATE בטלפון: פתיחה, הזמנות אורח, הרשאות והיסטוריה.", buyTwoTitle: "בקר + מנוי · רק אם צריך", buyTwoText: "אפשר להוסיף WIFIGATE Host לאוטומציה של גישת אורחים, או WIFIGATE Manager לשליטה וובית במערכות מכל מקום. המנוי לא חובה.", buyTwoLink: "למסלולי המנוי", shutterBuyText: "תשלום חד־פעמי, בלי מנוי ובלי תשלום חודשי. פותחים וסוגרים את תריס העסק מאפליקציית WIFIGATE בטלפון.",
-    hostTag: "אוטומציה לגישת אורחים", hostDescription: "ניהול כניסת אורחים אוטומטית לכל הזמנה: ההרשאה נכנסת לתוקף בצ׳ק־אין ופגה בצ׳ק־אאוט, בלי מפתחות ובלי קודים.",
+        hostTag: "אוטומציה לגישת אורחים", hostDescription: "ניהול כניסת אורחים אוטומטית לכל הזמנה: ההרשאה נכנסת לתוקף בצ׳ק־אין ופגה בצ׳ק־אאוט, בלי מפתחות ובלי קודים.",
     hostImageAlt: "אורחים משתמשים בטלפון כדי להיכנס למקום האירוח", hostStepsLabel: "מההזמנה ועד העזיבה", hostSteps: ["ההזמנה התקבלה", "גישה בצ׳ק-אין", "התוקף פג בצ׳ק-אאוט"],
     managerImageAlt: "דיירת ניגשת לכניסה של בניין מגורים", managerStepsLabel: "כל הבניינים בלוח אחד", managerSteps: ["כניסה ראשית", "חניון", "דלתות הלובי"],
     hostFeatures: ["גישה אוטומטית לכל הזמנה", "הגישה מסתיימת לבד בצ'ק-אאוט", "מסלולים מנכס יחיד ועד תיקי נכסים גדולים"],
@@ -156,13 +154,16 @@ function renderBusiness(locale, copy) {
     <section class="shop-business" id="for-business" aria-labelledby="shop-business-title"><header class="shop-business__heading"><h2 id="shop-business-title">${copy.businessHeading}</h2><p>${copy.businessIntro}</p></header><div class="shop-business__grid">${cards.map((card) => renderBusinessCard(copy, card)).join("\n")}</div></section>`;
 }
 
-// The controller never needs a subscription; Host and Manager are optional add-ons.
-function renderBuyOptions(locale, copy, shutter) {
-  if (shutter) return `<p class="shop-buy-note">${copy.shutterBuyText}</p>`;
-  return `<section class="shop-buy-options" aria-labelledby="shop-buy-title"><h2 id="shop-buy-title">${copy.buyOptionsTitle}</h2>
-    <div class="shop-buy-option shop-buy-option--one"><h3>${copy.buyOneTitle}</h3><p>${copy.buyOneText}</p></div>
-    <div class="shop-buy-option"><h3>${copy.buyTwoTitle}</h3><p>${copy.buyTwoText}</p><a href="${localePath(locale, "shop")}#for-business">${copy.buyTwoLink}</a></div>
-  </section>`;
+// The controller never needs a subscription; Host and Manager are optional
+// add-ons. The chosen plan joins the controller in the cart (js/shop-page.js).
+function renderPlanPicker(locale, copy) {
+  const plans = [
+    { value: "", title: copy.planNone, text: copy.planNoneText },
+    { value: "wifigate-manager", title: copy.planManager, text: copy.planManagerText, page: "wifigate-manager" },
+    { value: "wifigate-host", title: copy.planHost, text: copy.planHostText, page: "wifigate-host" },
+  ];
+  return `<fieldset class="shop-plan-picker" data-shop-plan><legend>${copy.planTitle}</legend>${plans.map(({ value, title, text, page }, index) =>
+    `<label class="shop-plan"><input type="radio" name="shop-plan" value="${value}"${index ? "" : " checked"} /><span class="shop-plan__body"><span class="shop-plan__title">${title}</span><span class="shop-plan__text">${text}</span>${page ? `<a class="shop-plan__details" href="${localePath(locale, page)}">${copy.planDetails}</a>` : ""}</span></label>`).join("")}</fieldset>`;
 }
 
 const ZOOM_ICON = '<span class="shop-zoom__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2M11 8v6M8 11h6"/></svg></span>';
@@ -216,10 +217,11 @@ export function getShopPageContent(locale, productId = null) {
       <article class="shop-product-detail" data-product="${product.id}">
         <div class="shop-product-gallery"><div class="shop-product-gallery__main">${renderZoom(renderMedia(product, copy, { detail: true }), 0, copy)}</div>${product.secondary ? `<figure class="shop-product-gallery__secondary">${renderZoom(`<img src="${product.secondary}" alt="${copy.imageAlt}" width="1254" height="1254" loading="lazy" decoding="async" />`, 1, copy)}</figure>` : ""}</div>
         ${renderViewer(product, copy, product.secondary ? 2 : 1)}
-        <div class="shop-product-info"><p class="shop-product-info__category">${shutter ? copy.shutterCategory : copy.category}</p><h1 dir="ltr">${product.name}</h1><p class="shop-product-info__description">${shutter ? copy.shutterDescription : copy.description}</p>${shutter ? `<a class="shop-product-info__more" href="${localePath(locale, "roller-shutters")}">${copy.shutterMore}</a>` : ""}
+        <div class="shop-product-info"><p class="shop-product-info__category">${shutter ? copy.shutterCategory : copy.category}</p><h1 dir="ltr">${product.name}</h1>${shutter ? `<p class="shop-product-info__description">${copy.shutterDescription}</p>` : ""}${shutter ? `<a class="shop-product-info__more" href="${localePath(locale, "roller-shutters")}">${copy.shutterMore}</a>` : ""}
           <div class="shop-availability"><p>${copy.stockNote}</p></div>
-          <dl class="shop-product-facts"><div><dt>${copy.factUse}</dt><dd>${shutter ? copy.shutterUseValue : copy.factUseValue}</dd></div><div><dt>${copy.factControl}</dt><dd>${copy.factControlValue}</dd></div></dl>
-          ${renderBuyOptions(locale, copy, shutter)}
+          ${shutter ? "" : renderUseCases(locale, copy)}
+          <dl class="shop-product-facts">${shutter ? `<div><dt>${copy.factUse}</dt><dd>${copy.shutterUseValue}</dd></div>` : ""}<div><dt>${copy.factControl}</dt><dd>${copy.factControlValue}</dd></div></dl>
+          ${renderPlanPicker(locale, copy)}
           ${renderCartButton(copy, product.id, product.name, "shop-purchase")}
           <div class="shop-product-accordions">${renderAccordion(copy.overview, `<p>${shutter ? copy.shutterOverview : copy.overviewText}</p>`, { open: true })}${renderAccordion(copy.specs, renderSpecs(shutter ? copy.shutterSpecs : copy.gateSpecs), { open: true })}${renderAccordion(copy.features, `<ul><li>${shutter ? copy.featureShutter1 : copy.featureGate1}</li><li>${shutter ? copy.featureShutter2 : copy.featureGate2}</li></ul>`)}${renderAccordion(copy.compatibility, `<p>${shutter ? copy.shutterCompatibility : copy.compatibilityText}</p>`)}${renderAccordion(copy.availability, `<p>${copy.unavailableText}</p>`)}</div>
         </div>

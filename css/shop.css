@@ -285,26 +285,30 @@
   inset-block-end: 12px;
   inset-inline-end: 12px;
 }
+/* The viewer is a centred popup over a dimmed page. */
 .shop-viewer {
-  width: 100vw;
+  width: min(1040px, calc(100vw - 48px));
   max-width: none;
-  height: 100dvh;
+  height: min(760px, calc(100dvh - 48px));
   max-height: none;
-  margin: 0;
+  margin: auto;
   padding: 0;
+  overflow: hidden;
   border: 0;
+  border-radius: 16px;
   background: #fff;
+  box-shadow: 0 30px 80px -24px rgb(0 0 0 / 45%);
 }
 .shop-viewer::backdrop {
-  background: rgb(10 10 10 / 50%);
+  background: rgb(10 10 10 / 62%);
 }
 .shop-viewer__stage {
-  position: fixed;
+  position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
   overflow: hidden;
-  padding: 72px 84px 64px;
+  padding: 64px 76px 52px;
 }
 .shop-viewer__image {
   max-width: 100%;
@@ -322,7 +326,7 @@
 }
 .shop-viewer__close,
 .shop-viewer__nav {
-  position: fixed;
+  position: absolute;
   display: grid;
   place-items: center;
   width: 46px;
@@ -363,7 +367,7 @@
   transform: none;
 }
 .shop-viewer__hint {
-  position: fixed;
+  position: absolute;
   inset-inline: 0;
   inset-block-end: 20px;
   margin: 0;
@@ -374,6 +378,25 @@
 }
 .shop-viewer.is-zoomed .shop-viewer__hint {
   visibility: hidden;
+}
+@media (max-width: 600px) {
+  .shop-viewer {
+    width: calc(100vw - 24px);
+    height: min(560px, calc(100dvh - 120px));
+  }
+  .shop-viewer__stage {
+    padding: 58px 14px 44px;
+  }
+  .shop-viewer__nav {
+    inset-block-start: auto;
+    inset-block-end: 10px;
+    width: 40px;
+    height: 40px;
+  }
+  .shop-viewer__hint {
+    inset-block-end: 22px;
+    font-size: 12px;
+  }
 }
 body.shop-viewer-open {
   overflow: hidden;
@@ -458,51 +481,75 @@ body.shop-viewer-open {
 .shop-product-info .shop-purchase {
   margin-block-end: 24px;
 }
-.shop-buy-options {
+/* Plan picker: no subscription, or with WIFIGATE Manager or WIFIGATE Host. */
+.shop-plan-picker {
   display: grid;
   gap: 10px;
   margin: 26px 0 22px;
+  padding: 0;
+  border: 0;
 }
-.shop-buy-options h2 {
-  margin: 0 0 2px;
+.shop-plan-picker legend {
+  margin: 0 0 10px;
+  padding: 0;
   font-size: 15px;
   font-weight: 600;
 }
-.shop-buy-option {
+.shop-plan {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
   padding: 14px 16px;
   border: 1px solid #e3e6e8;
   border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 160ms ease-out, background 160ms ease-out;
 }
-.shop-buy-option--one {
+.shop-plan:hover {
+  border-color: #9aa1a6;
+}
+.shop-plan:has(input:checked) {
   border-color: #151719;
+  background: #fafafa;
+  box-shadow: inset 0 0 0 1px #151719;
 }
-.shop-buy-option h3 {
-  margin: 0 0 4px;
+.shop-plan input {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: #151719;
+}
+.shop-plan input:focus-visible {
+  outline: 2px solid #1265e8;
+  outline-offset: 3px;
+}
+.shop-plan__body {
+  display: grid;
+  gap: 3px;
+}
+.shop-plan__title {
+  color: #151719;
   font-size: 14px;
   font-weight: 700;
 }
-.shop-buy-option p,
-.shop-buy-note {
-  margin: 0;
+.shop-plan__text {
   color: #5d656c;
   font-size: 13px;
-  line-height: 1.7;
+  line-height: 1.65;
 }
-.shop-buy-option a {
-  display: inline-block;
-  margin-block-start: 6px;
+.shop-plan__details {
+  justify-self: start;
+  margin-block-start: 2px;
   color: #151719;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   text-decoration: underline;
-  text-underline-offset: 4px;
+  text-underline-offset: 3px;
 }
-.shop-buy-note {
-  margin: 22px 0;
-  padding: 12px 14px;
-  border: 1px solid #151719;
-  border-radius: 12px;
-  color: #22272b;
+.shop-plan__details:hover {
+  color: #146bff;
 }
 .shop-product-facts {
   display: grid;
