@@ -54,7 +54,7 @@ function assertUnavailable($, main, locale, product) {
   if (!product) {
     assert.equal(main.find(".shop-product-card__facts").length, 2, "Each controller card lists its short facts");
     main.find(".shop-business-card").each((_, element) => {
-      assert.equal($(element).find(".shop-business-card__media .shop-business-card__name").length, 1, "The subscription name sits on its photo");
+      assert.equal($(element).find(".shop-business-card__media .shop-business-card__name").length, 1, "The subscription name sits on its letter mark");
       assert.ok($(element).find(".shop-business-card__segments span").length >= 4, "Each subscription says who it is for");
     });
     assert.match(main.find("[data-business='manager'] .shop-business-card__segments span").last().text(), locale === "he" ? /ועוד/ : /And more/);

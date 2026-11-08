@@ -33,9 +33,7 @@ const COPY = {
     businessEyebrow: "WIFIGATE for Business", subscription: "Subscription", businessHeading: "Subscription plans.",
     businessIntro: "WIFIGATE works locally, straight from the app, with no cloud services. Subscription plans add cloud extensions: WIFIGATE Host for automated guest access management, and WIFIGATE Manager to control all your systems from anywhere in the world. The choice is yours, depending on your needs.",
         hostTag: "Guest access automation", hostDescription: "Automated guest access management for every booking: access starts at check-in and expires at checkout, with no keys or codes.",
-    hostImageAlt: "Guests using a phone to enter their hotel room", hostStepsLabel: "Every stay, taken care of", hostSteps: ["Booking received", "Access at check-in", "Expires at checkout"],
-    managerImageAlt: "A resident walking up to the entrance of a residential building", managerStepsLabel: "Every building, one dashboard", managerSteps: ["Main entrance", "Parking garage", "Lobby doors"],
-    hostFeatures: ["Automatic access for every booking", "Access ends on its own at checkout", "Plans from a single property to large portfolios"],
+            hostFeatures: ["Automatic access for every booking", "Access ends on its own at checkout", "Plans from a single property to large portfolios"],
     managerTag: "Organization management", managerDescription: "All your systems, from anywhere in the world: your organization's controllers, users and permissions in one browser dashboard.",
     hostSegments: ["Hotels", "Vacation rentals", "Guesthouses", "Rental parking", "Storage services", "And more…"], managerSegments: ["Residential buildings", "Offices", "Sports facilities", "Parking facilities", "And more…"],
     managerFeatures: ["All your systems in one place", "People and permissions management", "Complete access history"],
@@ -67,9 +65,7 @@ const COPY = {
     businessEyebrow: "WIFIGATE לעסקים", subscription: "מנוי", businessHeading: "מסלולי מנויים.",
     businessIntro: "WIFIGATE עובד מקומית, ישירות מהאפליקציה ובלי שירותי ענן. מסלולי המנוי מוסיפים הרחבות בענן: WIFIGATE Host לניהול כניסת אורחים אוטומטית, ו־WIFIGATE Manager לשליטה בכל המערכות מכל מקום בעולם. הבחירה בידיכם, לפי הצורך.",
         hostTag: "אוטומציה לגישת אורחים", hostDescription: "ניהול כניסת אורחים אוטומטית לכל הזמנה: ההרשאה נכנסת לתוקף בצ׳ק־אין ופגה בצ׳ק־אאוט, בלי מפתחות ובלי קודים.",
-    hostImageAlt: "אורחים משתמשים בטלפון כדי להיכנס למקום האירוח", hostStepsLabel: "מההזמנה ועד העזיבה", hostSteps: ["ההזמנה התקבלה", "גישה בצ׳ק-אין", "התוקף פג בצ׳ק-אאוט"],
-    managerImageAlt: "דיירת ניגשת לכניסה של בניין מגורים", managerStepsLabel: "כל הבניינים בלוח אחד", managerSteps: ["כניסה ראשית", "חניון", "דלתות הלובי"],
-    hostFeatures: ["גישה אוטומטית לכל הזמנה", "הגישה מסתיימת לבד בצ'ק-אאוט", "מסלולים מנכס יחיד ועד תיקי נכסים גדולים"],
+            hostFeatures: ["גישה אוטומטית לכל הזמנה", "הגישה מסתיימת לבד בצ'ק-אאוט", "מסלולים מנכס יחיד ועד תיקי נכסים גדולים"],
     managerTag: "ניהול ארגוני", managerDescription: "כל המערכות שלכם, מכל מקום בעולם: הבקרים, המשתמשים וההרשאות של הארגון בלוח בקרה אחד בדפדפן.",
     hostSegments: ["מלונות", "דירות נופש", "בתי הארחה", "חניות להשכרה", "שירותי אחסנה", "ועוד…"], managerSegments: ["בנייני מגורים", "משרדים", "מתקני ספורט", "חניונים", "ועוד…"],
     managerFeatures: ["כל המערכות במקום אחד", "ניהול אנשים והרשאות", "היסטוריית גישה מלאה"],
@@ -122,19 +118,14 @@ function renderCard(product, locale, copy, headingTag = "h2") {
   </article>`;
 }
 
-const BUSINESS_PHOTOS = {
-  host: "/assets/wifigate_niche_pages/hotels-airbnb-v2-app-hero.webp",
-  manager: "/assets/wifigate_niche_pages/residential-buildings-scene-hero.webp",
-};
-
-function renderBusinessInset(copy, id) {
-  return `<div class="shop-business-card__inset shop-business-card__steps shop-business-card__steps--${id}"><span>${copy[`${id}StepsLabel`]}</span><ol>${copy[`${id}Steps`].map((step) => `<li>${step}</li>`).join("")}</ol></div>`;
-}
+// Each subscription is marked by its initial: a large outline letter, cropped
+// at the corner, with the WIFIGATE label and the plan name.
+const BUSINESS_LETTERS = { host: "H", manager: "M" };
 
 function renderBusinessCard(copy, { id, name, href }) {
   const features = copy[`${id}Features`].map((feature) => `<li>${feature}</li>`).join("");
   return `<article class="shop-business-card shop-business-card--${id}" data-business="${id}">
-    <div class="shop-business-card__media"><img class="shop-business-card__photo" src="${BUSINESS_PHOTOS[id]}" alt="${copy[`${id}ImageAlt`]}" width="1280" height="720" loading="lazy" decoding="async" /><span class="shop-business-card__chip">${copy.subscription}</span>${renderBusinessInset(copy, id)}
+    <div class="shop-business-card__media"><span class="shop-business-card__label" dir="ltr">WIFIGATE</span><span class="shop-business-card__letter" dir="ltr" aria-hidden="true">${BUSINESS_LETTERS[id]}</span>
       <div class="shop-business-card__title"><p class="shop-business-card__tag">${copy[`${id}Tag`]}</p><h3 class="shop-business-card__name" dir="ltr">${name}</h3></div></div>
     <div class="shop-business-card__body">
       <p class="shop-business-card__description">${copy[`${id}Description`]}</p>
