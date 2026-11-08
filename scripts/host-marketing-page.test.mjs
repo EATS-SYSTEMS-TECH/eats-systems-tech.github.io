@@ -94,12 +94,12 @@ test("missing detail sections fail before changing the shared page", () => {
 
 test("homepage For Business section numbers each plan and keeps the Host destination", async () => {
   const $ = cheerio.load(await fs.readFile(new URL("../templates/index.template.html", import.meta.url), "utf8"));
-  const plans = $("#wifigate-automation .business-plan");
+  const plans = $("#wifigate-for-business .business-plan");
   assert.deepEqual(plans.map((_, node) => $(node).find(".business-plan__name").text()).get(), ["WIFIGATE Host", "WIFIGATE Manager"]);
   assert.deepEqual(plans.map((_, node) => $(node).find(".business-plan__number").text()).get(), ["01", "02"]);
   assert.equal(plans.first().find(".guest-invites__cta").attr("href"), "/wifigate-host/");
   assert.equal(plans.last().find(".business-plan__cta").attr("href"), "#get-in-touch");
-  assert.equal($("#wifigate-automation .automation-stay > img").length, 1, "the Host photo keeps its scene-media slot");
+  assert.equal($("#wifigate-for-business .automation-stay > img").length, 1, "the Host photo keeps its scene-media slot");
   assert.equal($(".guest-invites__points, .automation-stay__steps").length, 0);
 });
 

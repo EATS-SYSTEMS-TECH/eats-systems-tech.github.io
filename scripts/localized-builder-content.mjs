@@ -58,8 +58,8 @@ export function applyHomepageCopy($, copy, locale) {
     ['#how-it-works .section__eyebrow', copy.platform.eyebrow], ['#features-title', copy.platform.title], ['#how-it-works .section__subtitle', copy.platform.subtitle],
     ['#private-access .security-statement__eyebrow', copy.privateAccess.eyebrow], ['#private-access-title', copy.privateAccess.title], ['#private-access .security-statement__copy p', copy.privateAccess.description],
     ['#use-cases .section__eyebrow', copy.solutions.eyebrow], ['#where-subtitle', copy.solutions.subtitle],
-    ['#wifigate-automation .guest-invites__eyebrow', copy.automation.eyebrow], ['#wifigate-automation .guest-invites__subtitle', copy.automation.subtitle],
-    ['#wifigate-automation .automation-promise', copy.automation.promise], ['.business-plan--host .business-plan__text', copy.automation.text], ['#wifigate-automation .guest-invites__cta span', copy.automation.cta],
+    ['#wifigate-for-business .guest-invites__eyebrow', copy.automation.eyebrow], ['#wifigate-for-business .guest-invites__subtitle', copy.automation.subtitle],
+    ['#wifigate-for-business .automation-promise', copy.automation.promise], ['.business-plan--host .business-plan__text', copy.automation.text], ['#wifigate-for-business .guest-invites__cta span', copy.automation.cta],
     ['.business-plan--manager .business-plan__tagline', copy.automation.manager.tagline], ['.business-plan--manager .business-plan__text', copy.automation.manager.text], ['.business-plan--manager .business-plan__cta span', copy.automation.manager.cta],
     ['#tutorial-videos .section__eyebrow', copy.productGuide.eyebrow], ['#tutorials-title', copy.productGuide.title], ['#tutorial-videos .section__subtitle', copy.productGuide.subtitle],
     ['#one-tap-invite .security-statement__eyebrow', copy.oneTapInvite.eyebrow], ['#one-tap-invite-title', copy.oneTapInvite.title], ['#one-tap-invite .security-statement__copy p', copy.oneTapInvite.description],
@@ -76,11 +76,11 @@ export function applyHomepageCopy($, copy, locale) {
     if (!$(selector).length) continue;
     if (value) { $(selector).removeAttr('hidden'); text(selector, value); } else $(selector).remove();
   }
-  for (const [selector, value] of [['#where-product-image', copy.solutions.imageAlt], ["img[src*='private-access-arrival']", copy.privateAccess.imageAlt], ["img[src*='one-tap-invite-map']", copy.oneTapInvite.imageAlt], ['img.product-overview__image', copy.productGuide.imageAlt], ['#wifigate-automation .automation-stay img', copy.automation.imageAlt], ['.business-plan--manager .business-plan__media img', copy.automation.manager.imageAlt]]) $(selector).attr('alt', value);
+  for (const [selector, value] of [['#where-product-image', copy.solutions.imageAlt], ["img[src*='private-access-arrival']", copy.privateAccess.imageAlt], ["img[src*='one-tap-invite-map']", copy.oneTapInvite.imageAlt], ['img.product-overview__image', copy.productGuide.imageAlt], ['#wifigate-for-business .automation-stay img', copy.automation.imageAlt], ['.business-plan--manager .business-plan__media img', copy.automation.manager.imageAlt]]) $(selector).attr('alt', value);
   $('#how-it-works .feature-card').each((index, node) => { text($(node).find('.feature-card__title'), copy.platform.features[index].title); text($(node).find('.feature-card__text'), copy.platform.features[index].text); });
   for (const [list, items] of [['.automation-audiences', copy.automation.audiences], ['.business-plan__audiences', copy.automation.manager.audiences]]) {
-    $(`#wifigate-automation ${list}`).attr('aria-label', copy.automation.audienceLabel).attr('dir', direction);
-    $(`#wifigate-automation ${list} li`).each((index, node) => $(node).text(items[index]));
+    $(`#wifigate-for-business ${list}`).attr('aria-label', copy.automation.audienceLabel).attr('dir', direction);
+    $(`#wifigate-for-business ${list} li`).each((index, node) => $(node).text(items[index]));
   }
   $('#tutorial-videos .tutorial-card').each((index, node) => { text($(node).find('.tutorial-card__title'), copy.productGuide.items[index]); text($(node).find('.tutorial-card__status'), copy.productGuide.status); });
   $('#wifi-gate-faq .seo-faq__item').each((index, node) => { text($(node).find('summary'), copy.faq.items[index].question); text($(node).find('.seo-faq__answer p'), copy.faq.items[index].answer); });

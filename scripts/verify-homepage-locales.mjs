@@ -20,7 +20,7 @@ const expectedSections = [
 const expectedTargets = [
   "how-it-works",
   "use-cases",
-  "wifigate-automation",
+  "wifigate-for-business",
   "tutorial-videos",
   "get-in-touch",
 ];

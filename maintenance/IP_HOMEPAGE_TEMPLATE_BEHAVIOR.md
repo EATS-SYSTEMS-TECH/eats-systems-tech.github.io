@@ -38,10 +38,12 @@ Main has these eleven sections in order:
 4. where: navigation target use-cases, labelled/described header and showcase;
    preserve image-before-list hierarchy, the ten ordered niche links and their
    data-niche-key values, image identity and headings/line breaks.
-5. guest-invites-api: navigation target wifigate-automation; reveal grid contains
-   copy (eyebrow, two-line Host title, four audiences, promise, subtitle and Host
-   anchor/span/arrow), stay figure (image, label, ordered three steps) and an empty
-   points list. Preserve Host destination, all audience/copy/geometry facts.
+5. guest-invites-api: WIFIGATE For Business, navigation target
+   wifigate-for-business (the former wifigate-automation anchor stays as an empty
+   span for shared links). A header (eyebrow, two-line title, description) and one
+   numbered column per subscription plan: Host (photo figure, tagline, text,
+   audiences, Host page action) and Manager (photo, tagline, text, audiences,
+   contact action). Preserve the Host destination and the Host photo scene slot.
 6. tutorials: navigation target tutorial-videos, layout with header followed by
    six ordered article cards. Each keeps its decorative number, translated title
    key and translated Coming soon state. Do not invent playable tutorials.

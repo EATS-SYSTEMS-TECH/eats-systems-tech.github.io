@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "originalSource": "42ebc994c356a40b806f4a35e16b252f9d603bae",
-  "rawSha256": "c80555578f2d7d42c485997cb74df321153cbe4fc8f6eed497f1d39033c2faa1",
-  "domSha256": "f054f1133a28a6df322358eabe200af11cedd2d40018a45e112fb62db1eedf68",
+  "rawSha256": "f61dfd43d2c8a3cf9faf9e27f3cf5161d5717927d3f487eb42940119241becf5",
+  "domSha256": "de4c24da2ce35eae4012bf3ad003e51cb1ee882c530c5423c22e1d26cc9f69fd",
   "sectionOrder": [
     "home",
     "advantages",

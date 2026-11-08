@@ -33,7 +33,8 @@ body.home-en {
   padding-inline: clamp(1.25rem, 4vw, 4rem);
 }
 
-.home-en :is(#how-it-works, #use-cases, #wifigate-automation, #tutorial-videos, #get-in-touch) {
+/* #wifigate-automation is the former For Business anchor, kept for shared links. */
+.home-en :is(#how-it-works, #use-cases, #wifigate-for-business, #wifigate-automation, #tutorial-videos, #get-in-touch) {
   scroll-margin-top: calc(var(--nav-height) + 1rem);
 }
 

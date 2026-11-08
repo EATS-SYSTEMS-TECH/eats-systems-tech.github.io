@@ -2,7 +2,7 @@
 export const SITE_NAVIGATION = [
   { key: "platform", hash: "how-it-works" },
   { key: "solutions", hash: "use-cases" },
-  { key: "automation", hash: "wifigate-automation" },
+  { key: "automation", hash: "wifigate-for-business" },
   { key: "productGuide", hash: "tutorial-videos" },
   { key: "shop", pageKey: "shop" },
   { key: "contact", hash: "get-in-touch" },
