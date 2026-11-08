@@ -18,7 +18,7 @@ const COPY = {
     imageAlt: "WIFIGATE controller enclosure", overviewAlt: "The WIFIGATE controller beside the WIFIGATE mobile app",
     overview: "Product overview", features: "Everyday use", compatibility: "Installation & compatibility", availability: "Availability", specs: "Technical specifications",
     gateSpecs: [["Enclosure", "Sealed ABS box, IP67"], ["Dimensions", "83 × 81 × 56 mm", true], ["Power input", "12–24V", true], ["Connectivity", "Wi‑Fi 6 · Bluetooth LE", true], ["Remote receiver", "433.92MHz, digital RF remote pairing"], ["Connections", "Screw terminals · USB Type‑C"], ["Users", "Up to 5,000 users and 20 admins"], ["Guest invites", "Unlimited"], ["History", "90 days"], ["Scheduled events", "Up to 50"], ["Subscription", "Not required · one-time purchase"]],
-    shutterSpecs: [["Controllers", "2 WIFIGATE controllers, one to open and one to close"], ["Operation", "Push button, held with your fingerprint"], ["Safety", "Open and close cannot run together; releasing stops the shutter"], ["Enclosure", "Nisko O-BOX 18M surface panel, white polycarbonate"], ["Dimensions", "370 × 155 × 70 mm", true], ["Connectivity", "Wi‑Fi 6 · Bluetooth LE", true], ["Installation", "Alongside your existing shutter controller"], ["Subscription", "Not required · one-time purchase"]],
+    shutterSpecs: [["Controllers", "2 WIFIGATE controllers, one to open and one to close"], ["Operation", "Push button, held with your fingerprint"], ["Safety", "Open and close cannot run together; releasing stops the shutter"], ["Enclosure", "Surface-mounted 18-module panel, white polycarbonate"], ["Dimensions", "370 × 155 × 70 mm", true], ["Connectivity", "Wi‑Fi 6 · Bluetooth LE", true], ["Installation", "Alongside your existing shutter controller"], ["Subscription", "Not required · one-time purchase"]],
     overviewText: "Bring your electric gate, garage door or parking barrier into the WIFIGATE app. A dedicated controller connects everyday access to your phone.",
     shutterOverview: "Bring your electric roller shutters into the WIFIGATE app. A dedicated controller lets you open and close your shutter from your phone.",
     featureGate1: "Open compatible gates, garage doors and parking barriers from the WIFIGATE app.",
@@ -30,8 +30,8 @@ const COPY = {
     unavailableText: "The product is not on sale yet. Add it to your cart and contact us to join the waitlist; when it is available, our team will get back to you about price, installation and delivery. There is no online payment.",
     factUse: "Made for", factUseValue: "Gates, garage doors & parking barriers", shutterUseValue: "Electric roller shutters",
     factControl: "Control", factControlValue: "WIFIGATE app", allProducts: "All products",
-    businessEyebrow: "WIFIGATE for Business", subscription: "Subscription", businessHeading: "Subscription plans for your business.",
-    businessIntro: "Optional, never required: the controllers work fully without a subscription, straight from the phone app. A subscription adds guest-access automation or web control of every system in your organization.",
+    businessEyebrow: "WIFIGATE for Business", subscription: "Subscription", businessHeading: "Subscription plans.",
+    businessIntro: "A subscription is optional. Every controller works fully without one, straight from the phone app. WIFIGATE Host adds guest-access automation, and WIFIGATE Manager adds web control of every system in your organization.",
     buyOptionsTitle: "Two ways to use it", buyOneTitle: "Controller only · one-time purchase", buyOneText: "No subscription and no monthly payment. Full, easy control from the WIFIGATE app on your phone: open, invite guests, manage permissions and see history.", buyTwoTitle: "Controller + subscription · only if you need it", buyTwoText: "Add WIFIGATE Host to automate guest access, or WIFIGATE Manager for web control of your systems from anywhere. A subscription is never required.", buyTwoLink: "Subscription plans", shutterBuyText: "One-time purchase with no subscription and no monthly payment. Open and close your shutter from the WIFIGATE app on your phone.",
     hostTag: "Guest access automation", hostDescription: "Secure, time-limited access created automatically for every booking. For hotels, vacation rentals and rental parking.",
     hostImageAlt: "Guests using a phone to enter their hotel room", hostStepsLabel: "Every stay, taken care of", hostSteps: ["Booking received", "Access at check-in", "Expires at checkout"],
@@ -53,7 +53,7 @@ const COPY = {
     imageAlt: "מארז בקר WIFIGATE", overviewAlt: "בקר WIFIGATE לצד אפליקציית WIFIGATE בטלפון",
     overview: "על המוצר", features: "בשימוש היומיומי", compatibility: "התקנה והתאמה", availability: "זמינות", specs: "מפרט טכני",
     gateSpecs: [["מארז", "קופסת ABS אטומה, IP67"], ["מידות", "83 × 81 × 56 מ״מ"], ["מתח הזנה", "12–24V", true], ["תקשורת", "Wi‑Fi 6 · Bluetooth LE", true], ["מקלט שלטים", "433.92MHz, למידת שלטי RF דיגיטליים"], ["חיבורים", "מחברי הברגה · USB Type‑C"], ["משתמשים", "עד 5,000 משתמשים ו־20 מנהלים"], ["הזמנות אורח", "ללא הגבלה"], ["היסטוריה", "90 יום"], ["אירועים מתוזמנים", "עד 50"], ["מנוי", "לא נדרש · תשלום חד־פעמי"]],
-    shutterSpecs: [["בקרים", "2 בקרי WIFIGATE, אחד לפתיחה ואחד לסגירה"], ["הפעלה", "לחצן בהחזקה עם טביעת אצבע"], ["בטיחות", "אי אפשר להפעיל פתיחה וסגירה יחד; שחרור האצבע עוצר את התריס"], ["מארז", "לוח עה״ט Nisko O-BOX 18M, פוליקרבונט לבן"], ["מידות", "370 × 155 × 70 מ״מ"], ["תקשורת", "Wi‑Fi 6 · Bluetooth LE", true], ["התקנה", "לצד בקר התריס הקיים"], ["מנוי", "לא נדרש · תשלום חד־פעמי"]],
+    shutterSpecs: [["בקרים", "2 בקרי WIFIGATE, אחד לפתיחה ואחד לסגירה"], ["הפעלה", "לחצן בהחזקה עם טביעת אצבע"], ["בטיחות", "אי אפשר להפעיל פתיחה וסגירה יחד; שחרור האצבע עוצר את התריס"], ["מארז", "לוח עה״ט 18 מודולים, פוליקרבונט לבן"], ["מידות", "370 × 155 × 70 מ״מ"], ["תקשורת", "Wi‑Fi 6 · Bluetooth LE", true], ["התקנה", "לצד בקר התריס הקיים"], ["מנוי", "לא נדרש · תשלום חד־פעמי"]],
     overviewText: "מחברים את השער החשמלי, דלת החניה או המחסום לאפליקציית WIFIGATE. בקר ייעודי מביא את הפתיחה היומיומית לטלפון שלכם.",
     shutterOverview: "מחברים את התריסים החשמליים לאפליקציית WIFIGATE. בקר ייעודי מאפשר לפתוח ולסגור את התריס מהטלפון.",
     featureGate1: "פותחים שערים, דלתות חניה ומחסומים תואמים דרך אפליקציית WIFIGATE.",
@@ -65,8 +65,8 @@ const COPY = {
     unavailableText: "המוצר עדיין לא במכירה. מוסיפים אותו לסל ויוצרים קשר כדי להירשם לרשימת ההמתנה, וכשהוא יהיה זמין הצוות יחזור אליכם לתאם מחיר, התקנה ומשלוח. אין תשלום מקוון.",
     factUse: "מתאים ל", factUseValue: "שערים, דלתות חניה ומחסומים", shutterUseValue: "תריסים חשמליים",
     factControl: "שליטה", factControlValue: "אפליקציית WIFIGATE", allProducts: "כל המוצרים",
-    businessEyebrow: "WIFIGATE לעסקים", subscription: "מנוי", businessHeading: "מסלולי מנוי לעסק שלכם.",
-    businessIntro: "תוספת לפי בחירה, לא חובה: הבקרים עובדים מלא גם בלי מנוי, ישירות מהאפליקציה בטלפון. מנוי מוסיף אוטומציה לגישת אורחים או שליטה וובית בכל מערכות הארגון.",
+    businessEyebrow: "WIFIGATE לעסקים", subscription: "מנוי", businessHeading: "מסלולי מנויים.",
+    businessIntro: "המנוי הוא תוספת לפי בחירה. כל בקר עובד באופן מלא גם בלי מנוי, ישירות מהאפליקציה בטלפון. WIFIGATE Host מוסיף אוטומציה לגישת אורחים, ו־WIFIGATE Manager מוסיף שליטה וובית בכל מערכות הארגון.",
     buyOptionsTitle: "שתי דרכים לעבוד", buyOneTitle: "בקר בלבד · תשלום חד־פעמי", buyOneText: "בלי מנוי ובלי תשלום חודשי. שליטה מלאה ונוחה מאפליקציית WIFIGATE בטלפון: פתיחה, הזמנות אורח, הרשאות והיסטוריה.", buyTwoTitle: "בקר + מנוי · רק אם צריך", buyTwoText: "אפשר להוסיף WIFIGATE Host לאוטומציה של גישת אורחים, או WIFIGATE Manager לשליטה וובית במערכות מכל מקום. המנוי לא חובה.", buyTwoLink: "למסלולי המנוי", shutterBuyText: "תשלום חד־פעמי, בלי מנוי ובלי תשלום חודשי. פותחים וסוגרים את התריס מאפליקציית WIFIGATE בטלפון.",
     hostTag: "אוטומציה לגישת אורחים", hostDescription: "גישה מאובטחת ומוגבלת בזמן, שנוצרת אוטומטית לכל הזמנה. למלונות, לדירות נופש ולחניות להשכרה.",
     hostImageAlt: "אורחים משתמשים בטלפון כדי להיכנס למקום האירוח", hostStepsLabel: "מההזמנה ועד העזיבה", hostSteps: ["ההזמנה התקבלה", "גישה בצ׳ק-אין", "התוקף פג בצ׳ק-אאוט"],
@@ -154,8 +154,8 @@ function renderBusiness(locale, copy) {
     { id: "host", name: "WIFIGATE Host", href: localePath(locale, "wifigate-host") },
     { id: "manager", name: "WIFIGATE Manager", href: `${localePath(locale)}#get-in-touch` },
   ];
-  return `<div class="shop-divider" aria-hidden="true"></div>
-    <section class="shop-business" id="for-business" aria-labelledby="shop-business-title"><header class="shop-business__heading"><p class="shop-business__eyebrow">${copy.businessEyebrow}</p><h2 id="shop-business-title">${copy.businessHeading}</h2><p>${copy.businessIntro}</p></header><div class="shop-business__grid">${cards.map((card) => renderBusinessCard(copy, card)).join("\n")}</div></section>`;
+  return `<div class="shop-divider" aria-hidden="true"><span>${copy.businessEyebrow}</span></div>
+    <section class="shop-business" id="for-business" aria-labelledby="shop-business-title"><header class="shop-business__heading"><h2 id="shop-business-title">${copy.businessHeading}</h2><p>${copy.businessIntro}</p></header><div class="shop-business__grid">${cards.map((card) => renderBusinessCard(copy, card)).join("\n")}</div></section>`;
 }
 
 // The controller never needs a subscription; Host and Manager are optional add-ons.
