@@ -49,7 +49,7 @@ try {
     await page.evaluate(() => { window.__opened = []; window.open = (url, target, features) => { window.__opened.push({ url, target, features }); return null; }; });
     await page.locator(".site-cart__trigger").click();
     assert.equal(await page.locator(".site-cart__checkout").textContent(), locale === "he" ? "אשמח לשמוע פרטים ב־WhatsApp" : "I'd like to hear more on WhatsApp");
-    assert.equal(await page.locator(".site-cart__item[data-product='wifigate-manager'] .site-cart__tile").textContent(), "Manager", "Subscriptions show their name under the logo");
+    assert.equal(await page.locator(".site-cart__item[data-product='wifigate-manager'] .site-cart__tile").textContent(), "", "Subscriptions show only the WIFIGATE logo");
     assert.match(await page.locator(".site-cart__item[data-product='wifigate-manager'] .site-cart__tile img").getAttribute("src"), /wifigate-stacked-logo\.webp$/);
     await page.locator(".site-cart__checkout").click();
     const [opened] = await page.evaluate(() => window.__opened);

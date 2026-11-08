@@ -227,7 +227,7 @@ export function updateSharedHeader($, data, locale, key) {
   $('head').append(`<link rel="stylesheet" href="${prefix}css/site-header.css?v=20261022a"><link rel="stylesheet" href="${prefix}css/site-cart.css?v=20261108d">`);
   $("script[src*='js/site-account.js']").remove();
   $("script[src*='js/navigation.js']").attr('src', prefix + 'js/navigation.js?v=20261022outside1').after(`\n  <script src="${prefix}js/site-account.js?v=20261022day1" defer></script>`);
-  $('body').append(`<script type="module" src="${prefix}js/site-cart.js?v=20261108d"></script>`);
+  $('body').append(`<script type="module" src="${prefix}js/site-cart.js?v=20261108e"></script>`);
 }
 
 // Both executable and JSON-only data scripts use the identical safe boundary.

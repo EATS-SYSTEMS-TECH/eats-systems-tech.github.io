@@ -89,16 +89,14 @@ if (trigger && drawer && backdrop) {
         image.height = 80;
         row.append(image);
       } else if (product.tile) {
-        // Products without a photo get a tile: subscriptions show the WIFIGATE
-        // logo over their name, the controller a wordmark.
+        // Products without a photo get a tile: subscriptions show only the
+        // WIFIGATE logo (their name is beside it), the controller a wordmark.
         const tile = document.createElement("span");
         tile.className = `site-cart__tile site-cart__tile--${productId}`;
         tile.dir = "ltr";
         tile.setAttribute("aria-hidden", "true");
-        const top = product.kind === "subscription"
-          ? Object.assign(document.createElement("img"), { src: SUBSCRIPTION_LOGO, alt: "", width: 60, height: 42 })
-          : Object.assign(document.createElement("small"), { textContent: "WIFIGATE" });
-        tile.append(top, Object.assign(document.createElement("b"), { textContent: product.tile }));
+        if (product.kind === "subscription") tile.append(Object.assign(document.createElement("img"), { src: SUBSCRIPTION_LOGO, alt: "", width: 60, height: 42 }));
+        else tile.append(Object.assign(document.createElement("small"), { textContent: "WIFIGATE" }), Object.assign(document.createElement("b"), { textContent: product.tile }));
         row.append(tile);
       } else {
         const placeholder = document.createElement("span");
