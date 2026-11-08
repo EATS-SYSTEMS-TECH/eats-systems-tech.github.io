@@ -61,15 +61,19 @@ test("Host details preserve translated sections, plan prices and actions inside 
   // The caller supplies the translated document; preserve those exact nodes.
   legacy(".wa-secure__text").first().text("פרטי האירוח המקומיים נשמרים בדיוק");
   legacy(".wa-pricing__note").text("Localized pricing note");
-  const selectors = "section.wa-audience, section.wa-secure, section.wa-pricing, section.wa-cta";
+  const selectors = "section.wa-audience, section.wa-secure, section.wa-cta";
   const expected = legacy(selectors).toArray().map(node => legacy(node).toString());
+  const expectedPricing = legacy("section.wa-pricing").toString();
   const original = legacy.html();
   const $ = cheerio.load('<html><body class="niche-page"><header id="shared-header"></header><main class="niche-main"><section class="niche-hero"><h1>Shared video hero</h1></section><section id="niche-highlights"></section><section id="niche-benefits"></section></main><footer></footer></body></html>');
   appendHostMarketingDetails($, { legacyTemplate: legacy });
   const wrapper = $("#niche-benefits + .wa-page.host-marketing-details");
+  const pricing = $(".niche-hero + .wa-page.host-marketing-pricing");
   assert.equal(wrapper.length, 1);
+  assert.equal(pricing.length, 1, "the plans come first, right under the hero");
   assert.deepEqual(wrapper.children("section").toArray().map(node => $(node).toString()), expected);
-  assert.deepEqual(wrapper.find(".wa-plan__amount").map((_, node) => $(node).text()).get(), legacy(".wa-plan__amount").map((_, node) => legacy(node).text()).get());
+  assert.deepEqual(pricing.children("section").toArray().map(node => $(node).toString()), [expectedPricing]);
+  assert.deepEqual(pricing.find(".wa-plan__amount").map((_, node) => $(node).text()).get(), ["$6", "$5", "$4"]);
   assert.deepEqual(wrapper.find("a").map((_, node) => $(node).attr("href")).get(), legacy(selectors).find("a").map((_, node) => legacy(node).attr("href")).get());
   assert.equal($(".wa-page header, .wa-page .niche-hero, .wa-page .wa-how, .wa-page .wa-benefits, .wa-page footer").length, 0);
   assert.equal($("body").hasClass("wa-page"), false);
@@ -81,7 +85,7 @@ test("Host details preserve translated sections, plan prices and actions inside 
 });
 
 test("missing detail sections fail before changing the shared page", () => {
-  const $ = cheerio.load('<main><section id="niche-benefits"></section></main>');
+  const $ = cheerio.load('<main><section class="niche-hero"></section><section id="niche-benefits"></section></main>');
   const legacy = cheerio.load('<main><section class="wa-audience"></section><section class="wa-pricing"></section><section class="wa-cta"></section></main>');
   const original = $.html();
   assert.throws(() => appendHostMarketingDetails($, { legacyTemplate: legacy }), /\.wa-secure section/);
@@ -105,19 +109,19 @@ test("Host pricing preserves ordered offers, localization slots, feature icons a
   const heading = $(".wa-pricing .wa-head").toString(), note = $(".wa-pricing__note").toString();
   installHostPricingShells($);
   const plans = $(".wa-pricing__grid > .wa-plan");
-  assert.deepEqual(plans.find(".wa-plan__name").map((_, node) => $(node).text()).get(), ["Starter", "Pro", "Hotel", "Enterprise"]);
-  assert.deepEqual(plans.find(".wa-plan__amount").map((_, node) => $(node).text()).get(), ["₪29", "₪99", "₪299", "Custom"]);
+  assert.deepEqual(plans.find(".wa-plan__name").map((_, node) => $(node).text()).get(), ["START", "GROWTH", "SCALE"]);
+  assert.deepEqual(plans.find(".wa-plan__amount").map((_, node) => $(node).text()).get(), ["$6", "$5", "$4"], "documented USD prices");
+  assert.equal(plans.find(".wa-plan__amount[dir='ltr']").length, 3);
   assert.equal(plans.filter(".wa-plan--featured").length, 1);
-  assert.equal(plans.eq(2).hasClass("wa-plan--featured"), true);
-  assert.equal(plans.find(".wa-plan__badge").attr("data-i18n"), "guestInvites.marketing.pricing.hotelBadge");
+  assert.equal(plans.eq(1).hasClass("wa-plan--featured"), true);
+  assert.equal(plans.find(".wa-plan__badge").attr("data-i18n"), "guestInvites.marketing.pricing.badge");
   assert.equal(plans.find(".wa-plan__per").length, 3);
-  assert.equal(plans.eq(3).find(".wa-plan__per").length, 0);
-  assert.equal(plans.eq(3).find(".wa-plan__amount").attr("data-i18n"), "guestInvites.marketing.pricing.enterpriseAmount");
-  for (const [index, key] of ["starter", "pro", "hotel", "enterprise"].entries()) {
+  for (const [index, key] of ["start", "growth", "scale"].entries()) {
     const plan = plans.eq(index);
     assert.equal(plan.find(".wa-plan__desc").attr("data-i18n"), `guestInvites.marketing.pricing.${key}Desc`);
+    assert.equal(plan.find(".wa-plan__range").attr("data-i18n"), `guestInvites.marketing.pricing.${key}Range`);
     assert.deepEqual(plan.find(".wa-plan__feature span").map((_, node) => $(node).attr("data-i18n")).get(),
-      [1, 2, 3].map(number => `guestInvites.marketing.pricing.${key}F${number}`));
+      [1, 2, 3, 4].map(number => `guestInvites.marketing.pricing.${key}F${number}`));
     plan.find(".wa-plan__feature svg").each((_, node) => {
       assert.deepEqual({ ...$(node).attr() }, { width: "16", height: "16", viewBox: "0 0 24 24", fill: "none",
         stroke: "currentColor", "stroke-width": "2.5", "stroke-linecap": "round", "stroke-linejoin": "round", "aria-hidden": "true" });
@@ -125,7 +129,7 @@ test("Host pricing preserves ordered offers, localization slots, feature icons a
     });
     const action = plan.find(".wa-plan__cta > a");
     assert.equal(action.attr("href"), "../index.html#contact");
-    assert.equal(action.attr("class"), `btn btn--${index === 2 ? "primary" : "ghost"}`);
+    assert.equal(action.attr("class"), `btn btn--${index === 1 ? "primary" : "ghost"}`);
     assert.equal(action.attr("data-i18n"), "guestInvites.marketing.pricing.planCta");
   }
   assert.equal($("section:not(.wa-pricing)").toString(), otherSections);
@@ -155,7 +159,7 @@ test("Host detail composition retains ordered audience/security slots and the fi
     assert.equal($(node).find("h3").attr("data-i18n"), `guestInvites.marketing.secure.i${index + 1}t`);
     assert.equal($(node).find("p").attr("data-i18n"), `guestInvites.marketing.secure.i${index + 1}x`);
   });
-  assert.equal($(".wa-plan").length, 4);
+  assert.equal($(".wa-plan").length, 3);
   assert.equal($(".wa-cta").toString(), contact);
   assert.equal($(".wa-head").toString(), headings);
 });

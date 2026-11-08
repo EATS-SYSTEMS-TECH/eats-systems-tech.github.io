@@ -3,17 +3,17 @@
 export const HOST_PAGE_KEY = "wifigate-host";
 const marketingKey = "guestInvites.marketing";
 const sectionNames = ["wa-audience", "wa-secure", "wa-pricing", "wa-cta"];
+const detailNames = sectionNames.filter(name => name !== "wa-pricing");
 
-// Frozen plan facts describe the existing public offer, never a billing action.
+// The documented WIFIGATE Host plans (WIFIGATE_HOST.html, Pricing), always in
+// USD per active system per month. They describe the offer, never a billing action.
 const offers = [
-  ["starter", "Starter", "₪29", "For a single property or entrance.",
-    ["1 system", "Up to 1,000 guest invitations / month", "Automatic time-limited access"]],
-  ["pro", "Pro", "₪99", "For a small management company.",
-    ["Up to 5 systems", "1,000 invitations per system", "Priority email support"]],
-  ["hotel", "Hotel", "₪299", "For a hotel or a whole complex.",
-    ["Up to 20 systems", "Centralized reporting", "Preferred support"]],
-  ["enterprise", "Enterprise", "Custom", "For PMS, channel managers and large portfolios.",
-    ["Volume pricing", "SLA & onboarding", "Custom integration"]],
+  ["start", "START", "$6", "For small businesses starting to automate guest access.", "For 1–14 active systems",
+    ["Complete CRM/PMS reservation automation", "Up to 14 active systems", "A booking calendar per system", "Google/Apple Sign-In and admin MFA"]],
+  ["growth", "GROWTH", "$5", "For hotels and management companies running many systems from one place.", "For 15–49 active systems",
+    ["Everything in START", "Up to 49 active systems", "Multiple CRM/PMS connections and routing rules", "Team roles and priority support"]],
+  ["scale", "SCALE", "$4", "For hotel groups, large portfolios and enterprise rollouts.", "For 50+ active systems",
+    ["Everything in GROWTH", "50+ active systems", "Sandbox, custom roles and extended audit", "Enterprise rollout support"]],
 ];
 const audienceFacts = [["hotels", "Hotels"], ["rentals", "Airbnb & short-term rentals"],
   ["guesthouses", "Guesthouses"], ["parking", "Rental parking & garages"]];
@@ -37,20 +37,17 @@ function outline($, shapes, extra = {}) {
   shapes.map(([tag, attributes]) => node($, tag, attributes)));
 }
 
-// Construct one plan with the fixed translation schema; Hotel and Enterprise
-// are the only variants, independently controlling emphasis and price suffix.
-function offerCard($, [key, name, amount, description, features]) {
+// Construct one plan with the fixed translation schema; GROWTH is the featured plan.
+function offerCard($, [key, name, amount, description, range, features]) {
   const prefix = `${marketingKey}.pricing`;
-  const featured = key === "hotel";
-  const custom = key === "enterprise";
-  const priceAttributes = { class: "wa-plan__amount" };
-  if (custom) priceAttributes["data-i18n"] = `${prefix}.enterpriseAmount`;
+  const featured = key === "growth";
   const parts = [];
-  if (featured) parts.push(translated($, "span", "wa-plan__badge", `${prefix}.hotelBadge`, "Most popular"));
+  if (featured) parts.push(translated($, "span", "wa-plan__badge", `${prefix}.badge`, "Most popular"));
   parts.push(node($, "h3", { class: "wa-plan__name" }, name));
-  const price = node($, "div", { class: "wa-plan__price" }, [node($, "span", priceAttributes, amount)]);
-  if (!custom) price.append(translated($, "span", "wa-plan__per", `${prefix}.per`, "/ month"));
-  parts.push(price, translated($, "p", "wa-plan__desc", `${prefix}.${key}Desc`, description));
+  const price = node($, "div", { class: "wa-plan__price" }, [node($, "span", { class: "wa-plan__amount", dir: "ltr" }, amount),
+    translated($, "span", "wa-plan__per", `${prefix}.per`, "/ system / month")]);
+  parts.push(price, translated($, "p", "wa-plan__range", `${prefix}.${key}Range`, range),
+    translated($, "p", "wa-plan__desc", `${prefix}.${key}Desc`, description));
   parts.push(node($, "ul", { class: "wa-plan__features" }, features.map((text, index) =>
     node($, "li", { class: "wa-plan__feature" }, [
       outline($, [["path", { d: "m5 12 5 5L20 7" }]], { width: "16", height: "16", "stroke-width": "2.5", "aria-hidden": "true" }),
@@ -109,19 +106,23 @@ export function getHostPageContent(hostCopy, homepageCopy) {
     faq: [], seoTitle: read("metaTitle"), seoDescription: read("metaDescription") };
 }
 
-// Clone the already localized detail nodes in their original document order;
-// create and attach a scoped wrapper only after every guard succeeds.
+// Clone the already localized detail nodes in their original document order.
+// The plans come first, right under the hero; the other details follow the
+// shared benefits. Both wrappers attach only after every guard succeeds.
 export function appendHostMarketingDetails($, { legacyTemplate }) {
   if (typeof legacyTemplate !== "function") throw new Error("A localized Host detail document is required");
-  if ($(".host-marketing-details").length) throw new Error("Host marketing details are already present");
-  const target = $("#niche-benefits");
+  if ($(".host-marketing-details, .host-marketing-pricing").length) throw new Error("Host marketing details are already present");
+  const hero = $(".niche-hero"), target = $("#niche-benefits");
+  if (hero.length !== 1) throw new Error("Host details require one shared hero section");
   if (target.length !== 1) throw new Error("Host details require one shared benefits section");
   for (const name of sectionNames) {
     if (legacyTemplate(`section.${name}`).length !== 1) throw new Error(`Host details require one localized .${name} section`);
   }
-  const sections = legacyTemplate(sectionNames.map(name => `section.${name}`).join(", ")).toArray()
+  const clone = names => legacyTemplate(names.map(name => `section.${name}`).join(", ")).toArray()
     .map(section => legacyTemplate(section).clone());
-  const wrapper = node($, "div", { class: "wa-page host-marketing-details" }, sections);
+  const pricing = node($, "div", { class: "wa-page host-marketing-pricing" }, clone(["wa-pricing"]));
+  const wrapper = node($, "div", { class: "wa-page host-marketing-details" }, clone(detailNames));
+  hero.after(pricing);
   target.after(wrapper);
   return wrapper;
 }

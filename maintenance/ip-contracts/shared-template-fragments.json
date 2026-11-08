@@ -5,7 +5,7 @@
     {
       "path": "templates/guest-invites-api.template.html",
       "originalSourceSha256": "0a0720acea7f70b1872bf83ad072431c838a1177b5948f85046be0878788bd8f",
-      "domSha256": "3e63b9cad8a20e497da5de9b9dd1b8bb2a7137580df96bbac12c6a76c3e35d9f"
+      "domSha256": "2760a874ce05a33b9b823b177dcf8b3066b26ab0a6495176076e0c8250e554c5"
     },
     {
       "path": "templates/partials/site-footer.template.html",

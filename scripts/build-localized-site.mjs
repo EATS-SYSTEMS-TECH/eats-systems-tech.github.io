@@ -268,7 +268,7 @@ async function buildGuestInvitesPages(homeData) {
     rewriteStaticAssets(legacy, locale, guestInvitesPageKey);
     applyDataI18nTranslations(legacy, { nav: { home: chrome.homeLabel }, guestInvites: { marketing: hostCopy.marketing } }, locale);
     appendHostMarketingDetails($, { legacyTemplate: legacy });
-    $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, guestInvitesPageKey)}css/automation.css?v=20261007c" />`);
+    $("link[href*='css/niche.css']").after(`<link rel="stylesheet" href="${buildAssetPrefix(locale, guestInvitesPageKey)}css/automation.css?v=20261108a" />`);
     updateFooterStaticUi($, locale, homeData.homepageCopies[locale].footer); rewriteNicheInternalLinks($, locale);
     setUseCaseMeta($, { pageKey: guestInvitesPageKey, content, chrome, image, locale, localeOptions: homeData.localeOptions,
       service: { '@type': 'Service', '@id': `${siteOrigin}/${HOST_PAGE_KEY}/#service`, name: 'WIFIGATE Host', serviceType: 'Automated guest access for hospitality', provider: { '@id': ORGANIZATION_ID }, brand: { '@id': BRAND_ID }, url: buildPageUrl(defaultLocale, guestInvitesPageKey), description: hostCopy.metaDescription } });
