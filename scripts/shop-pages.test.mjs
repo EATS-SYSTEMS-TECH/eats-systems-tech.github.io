@@ -29,11 +29,9 @@ async function assertLocalTarget(reference, pageUrl, label) {
 }
 
 function assertUnavailable($, main, locale, product) {
-  const stock = locale === "he" ? "צרו קשר כדי להירשם לרשימת ההמתנה" : "Contact us to join the waitlist";
-  const contact = `${locale === "en" ? "/" : `/${locale.toLowerCase()}/`}#get-in-touch`;
-  assert.equal(main.find(".shop-stock").length, product ? 1 : 2, "Every displayed product has a visible availability label");
-  main.find(".shop-stock").each((_, element) => assert.equal($(element).text().trim(), stock));
-  main.find(".shop-product-card__link").each((_, element) => assert.ok($(element).attr("aria-label").includes(stock), "Screen readers hear product availability before opening details"));
+  assert.equal(main.find(".shop-stock").length, 0, "No waitlist label: orders go to WhatsApp");
+  assert.doesNotMatch(main.text(), /waitlist|רשימת ההמתנה/i);
+  main.find(".shop-product-card__link").each((_, element) => assert.match($(element).attr("aria-label"), /WIFIGATE/, "Details links name their product"));
   assert.equal(main.find(".shop-purchase").length, product ? 1 : 0,
     "Catalog cards browse details; the detail has one add-to-cart control");
   main.find(".shop-purchase").each((_, element) => {
@@ -41,8 +39,7 @@ function assertUnavailable($, main, locale, product) {
     assert.equal($(element).attr("data-shop-cart"), product, "The detail adds its own product to the cart");
     assert.equal($(element).attr("onclick"), undefined);
   });
-  assert.equal(main.find(".shop-waitlist").length, product ? 1 : 0);
-  main.find(".shop-waitlist").each((_, element) => assert.equal($(element).attr("href"), contact, "The waitlist link leads to contact"));
+  assert.equal(main.find(".shop-waitlist").length, 0);
   assert.equal(main.find(".shop-business-card").length, product ? 0 : 2, "Only the catalog presents the business subscriptions");
   const carts = main.find("[data-shop-cart]");
   assert.deepEqual(carts.map((_, element) => $(element).attr("data-shop-cart")).get(),
@@ -84,7 +81,7 @@ test("shop renderer provides usable catalog and product content before any JavaS
       assert.equal(main.find("h1").length, 1);
       assert.equal(main.find("script").length, 0, "Product information and links are server-rendered HTML");
       assert.equal(main.find(".shop-product-card").length, product ? 0 : 2);
-      assert.ok(main.find(`a[href='${locale === "en" ? "/" : `/${locale.toLowerCase()}/`}#get-in-touch']`).length);
+      if (!product) assert.ok(main.find(`a[href='${locale === "en" ? "/" : `/${locale.toLowerCase()}/`}#get-in-touch']`).length);
       assertUnavailable($, main, locale, product);
     }
   }
@@ -169,7 +166,7 @@ for (const { code: locale } of SITE_LANGUAGES) {
         assert.ok(controller.find("img[src$='assets/img/wifigate-product-v3.webp']").length, "WIFIGATE leads with the controller and app photo");
       }
       const contactLinks = main.find("a[href$='#get-in-touch']");
-      assert.ok(contactLinks.length);
+      if (!product) assert.ok(contactLinks.length, "The catalog keeps a contact route for the subscriptions");
       contactLinks.each((_, element) => assert.equal($(element).attr("href"), `${locale === "en" ? "/" : `/${locale.toLowerCase()}/`}#get-in-touch`));
       for (const [selector, attribute] of [["script[src]", "src"], ["img[src], source[src], video[src]", "src"], ["video[poster]", "poster"], ["link[rel='stylesheet'], link[rel='icon']", "href"], [".shop-main a[href], .language-selector__option[href]", "href"]]) {
         for (const element of $(selector).toArray()) {

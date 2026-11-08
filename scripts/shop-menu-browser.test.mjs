@@ -24,14 +24,13 @@ try {
           headingText: main.querySelector("h1").textContent.trim(),
           cards: main.querySelectorAll(".shop-product-card").length,
           unavailable: [...main.querySelectorAll(".shop-purchase")].every((button) => button.disabled),
-          stock: [...main.querySelectorAll(".shop-stock")].map((element) => element.textContent.trim()),
+          stock: main.querySelectorAll(".shop-stock, .shop-waitlist").length,
         };
       });
       assert.ok(shop.headingText, "Shop has a clear catalog heading");
       assert.equal(shop.cards, 2, "Shop presents the two WIFIGATE products");
       assert.equal(shop.unavailable, true, "Unavailable products cannot be purchased");
-      assert.ok(shop.stock.length >= 2);
-      shop.stock.forEach((status) => assert.match(status, path.startsWith("/he/") ? /אזל מהמלאי/ : /Out of stock/i));
+      assert.equal(shop.stock, 0, "No waitlist labels: orders go to WhatsApp");
     }
     const header = await page.evaluate(() => {
       const nav = document.querySelector(".site-header");
