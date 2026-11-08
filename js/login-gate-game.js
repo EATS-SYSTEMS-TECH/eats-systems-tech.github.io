@@ -1,5 +1,6 @@
 // "I'm not a robot" check for /login/: drag the car into the one open gate.
-// Runs in the browser only, with no network call and nothing stored.
+// Runs in the browser only, with no network call. Only the miss count and the
+// lockout end are stored, so a reload cannot reopen a locked check.
 
 const LANES = 3;
 const MIN_DRAG_MS = 600;
@@ -8,10 +9,74 @@ const MIN_SAMPLES = 10;
 const MAX_FAILURES = 5;
 const LOCKOUT_MS = 60_000;
 
-// Misses and the lockout belong to the page, not to one dialog: closing the
-// game and opening it again keeps both until the lockout ends.
+// Misses and the lockout belong to the browser, not to one dialog or page
+// load: closing the game, reloading or opening another tab keeps both until
+// the lockout ends. They live in a first-party cookie and in localStorage;
+// the later lockout of the two wins, so clearing one store is not enough.
+const STORE_KEY = "wifigate-gate-check-v1";
+const MISS_TTL_MS = 15 * 60_000;
+
+function readStored(storage, cookies, now) {
+  const found = [];
+  try { found.push(JSON.parse(storage?.getItem(STORE_KEY) || "null")); } catch { /* Unavailable storage holds nothing. */ }
+  try {
+    const cookie = String(cookies?.() || "").split(/;\s*/).find((entry) => entry.startsWith(`${STORE_KEY}=`));
+    if (cookie) found.push(JSON.parse(decodeURIComponent(cookie.slice(STORE_KEY.length + 1))));
+  } catch { /* A malformed cookie holds nothing. */ }
+  let failures = 0, lockedUntil = 0;
+  for (const value of found) {
+    if (!value || typeof value !== "object") continue;
+    const until = Number(value.lockedUntil) || 0;
+    const missesValid = Number.isInteger(value.failures) && value.failures > 0 && value.failures <= MAX_FAILURES && Number(value.expires) > now;
+    // A lockout can never claim to last longer than one lockout period.
+    if (until > now && until <= now + LOCKOUT_MS) lockedUntil = Math.max(lockedUntil, until);
+    if (missesValid) failures = Math.max(failures, value.failures);
+  }
+  if (lockedUntil) failures = MAX_FAILURES;
+  return { failures, lockedUntil };
+}
+
+// Reads and writes the gate check state. storage is localStorage-like and
+// cookies reads/writes document.cookie; both are optional.
+export function createGateCheckStore({ storage, cookies, setCookie, clock = Date.now, secure = true } = {}) {
+  return {
+    read: () => readStored(storage, cookies, clock()),
+    write({ failures, lockedUntil }) {
+      const now = clock();
+      if (!failures && !(lockedUntil > now)) {
+        try { storage?.removeItem(STORE_KEY); } catch { /* Nothing to clear. */ }
+        try { setCookie?.(`${STORE_KEY}=; Max-Age=0; Path=/; SameSite=Strict${secure ? "; Secure" : ""}`); } catch { /* Nothing to clear. */ }
+        return;
+      }
+      const expires = lockedUntil > now ? lockedUntil : now + MISS_TTL_MS;
+      const value = JSON.stringify({ failures, lockedUntil: lockedUntil > now ? lockedUntil : 0, expires });
+      try { storage?.setItem(STORE_KEY, value); } catch { /* The cookie still holds it. */ }
+      try { setCookie?.(`${STORE_KEY}=${encodeURIComponent(value)}; Max-Age=${Math.ceil((expires - now) / 1000)}; Path=/; SameSite=Strict${secure ? "; Secure" : ""}`); } catch { /* localStorage still holds it. */ }
+    },
+  };
+}
+
+function browserStore() {
+  let storage;
+  try { storage = window.localStorage; } catch { /* Cookies only. */ }
+  return createGateCheckStore({
+    storage,
+    cookies: () => document.cookie,
+    setCookie: (value) => { document.cookie = value; },
+    secure: location.protocol === "https:",
+  });
+}
+
 let failures = 0;
 let lockedUntil = 0;
+let store;
+function load() {
+  store ??= browserStore();
+  ({ failures, lockedUntil } = store.read());
+}
+function save() {
+  store?.write({ failures, lockedUntil });
+}
 const GATE_ZONE = 0.72;
 
 const CAR_SVG = `<svg viewBox="0 0 72 40" aria-hidden="true" focusable="false">
@@ -191,6 +256,8 @@ export function requestHumanCheck(loginCopy) {
   }
 
   function succeed() {
+    failures = 0;
+    save();
     board.classList.add("gate-game__board--done");
     dialog.classList.add("gate-game--verified");
     message.textContent = copy.done;
@@ -200,6 +267,7 @@ export function requestHumanCheck(loginCopy) {
 
   function lock() {
     lockedUntil = Date.now() + LOCKOUT_MS;
+    save();
     showLock();
   }
 
@@ -212,6 +280,7 @@ export function requestHumanCheck(loginCopy) {
         clearInterval(countdown);
         failures = 0;
         lockedUntil = 0;
+        save();
         board.classList.remove("gate-game__board--locked");
         car.removeAttribute("aria-disabled");
         message.textContent = "";
@@ -234,6 +303,7 @@ export function requestHumanCheck(loginCopy) {
       lock();
       return;
     }
+    save();
     message.textContent = copy.retry;
     setTimeout(newRound, reducedMotion() ? 0 : 350);
   }
@@ -331,10 +401,12 @@ export function requestHumanCheck(loginCopy) {
   });
   dialog.showModal();
   newRound(false);
+  load();
   if (Date.now() < lockedUntil) showLock();
   else if (lockedUntil) {
     failures = 0;
     lockedUntil = 0;
+    save();
   }
   car.focus({ preventScroll: true });
   return result;
